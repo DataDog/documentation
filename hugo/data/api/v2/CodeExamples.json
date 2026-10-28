@@ -818,6 +818,13 @@
       "description": "Create experiment metric group returns \"Created\" response"
     }
   ],
+  "CreateExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment protocol returns \"Created\" response"
+    }
+  ],
   "CreateExperiment": [
     {
       "group": "experiments",
@@ -860,6 +867,13 @@
       "description": "Patch subject type returns \"OK\" response"
     }
   ],
+  "ReplaceExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
   "UpdateExperimentAnalysisPlanAttributes": [
     {
       "group": "experiments",
@@ -872,6 +886,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "PatchExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment protocol returns \"OK\" response"
     }
   ],
   "UpdateMetricCollection": [
@@ -1309,6 +1330,11 @@
       "group": "logs",
       "suffix": "_3138392594",
       "description": "Search logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2789021011",
+      "description": "Search logs with a page limit above 1000 returns \"OK\" response"
     }
   ],
   "SubmitLog": [
@@ -2002,6 +2028,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3666485614",
+      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3654691150",
+      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -2148,12 +2184,17 @@
     {
       "group": "rum",
       "suffix": "",
-      "description": "Create a new RUM application returns \"OK\" response"
+      "description": "Create a new RUM application returns \"Created\" response"
     },
     {
       "group": "rum",
-      "suffix": "_1946294560",
-      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
+      "suffix": "_4210432830",
+      "description": "Create a new RUM application with Product Scales returns \"Created\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_3241419056",
+      "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
   "SearchRUMEvents": [

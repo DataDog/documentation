@@ -855,8 +855,8 @@
   "CreateCaseNotebook": {
     "description": "Create a new investigation notebook and link it to a work item",
     "summary": "Create investigation notebook for work item",
-    "request_description": "Notebook creation request",
-    "request_schema_description": "Notebook creation request"
+    "request_description": "Case investigation notebook creation request.",
+    "request_schema_description": "Case investigation notebook creation request."
   },
   "MoveCaseToProject": {
     "description": "Update the project associated with a work item",
@@ -2128,9 +2128,39 @@
     "description": "List draft, published, and archived experiment protocols. Omit filter[status] to return all statuses. Only published protocols can be used to create experiments.",
     "summary": "List experiment protocols"
   },
+  "CreateExperimentProtocol": {
+    "description": "Create a draft protocol with a name and optional description and migration metadata. The organization's default subject type is selected. Use PATCH to configure the draft, then publish it before creating experiments from it.",
+    "summary": "Create experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Create a draft protocol with the organization default subject type."
+  },
+  "DeleteExperimentProtocol": {
+    "description": "Delete a protocol with no linked experiments. Draft, published, and archived protocols can be deleted. Returns 204 with no response body.",
+    "summary": "Delete experiment protocol"
+  },
   "GetExperimentProtocol": {
     "description": "Get a draft, published, or archived experiment protocol by ID.",
     "summary": "Get experiment protocol"
+  },
+  "PatchExperimentProtocol": {
+    "description": "Update the supplied fields of a draft protocol. Published protocols accept only name, description, and migration_metadata changes through PATCH. Use PUT to replace their settings. Archived protocols cannot be edited.\n\nOmitted fields keep their current values, including fields inside analysis_plan, exposure_schedule, and enforcement. Arrays replace the stored arrays. Supported null values clear fields; see the request schema. Use primary_metric_id to select the primary metric and default_duration_days to set the experiment analysis duration. Nested metric is_primary and analysis_plan.target_duration_days fields are rejected.",
+    "summary": "Update experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Partial protocol update. Omitted attributes remain unchanged. Published protocols accept only name, description, and migration_metadata; archived protocols reject updates."
+  },
+  "ReplaceExperimentProtocol": {
+    "description": "Replace the template of a published protocol. Draft and archived protocols return 409. Send subject_type_id, all four required boolean settings, and metric_groups. Omitted optional template fields are cleared. Omitted enforcement keeps the existing locks.\n\nUse primary_metric_id to select the primary metric. Use default_duration_days to set target_duration_days on experiments created from the protocol. The nested metric is_primary and analysis_plan.target_duration_days fields are rejected. An unchanged GET response can be sent as the request body. Response-only fields are ignored.\n\nIndependent configuration errors are returned together in the JSON:API errors array. Each error identifies the field in source.pointer. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged. Changes apply to future experiments; existing experiments keep their settings.",
+    "summary": "Replace experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Replace a published protocol template. Omitted optional template fields are cleared. Omitted enforcement and migration_metadata are preserved. Enabled limits require their values; allocation settings require environment_id."
+  },
+  "ArchiveExperimentProtocol": {
+    "description": "Archive a draft or published protocol. Archived protocols cannot be edited or used to create new experiments. Existing experiments keep their settings. Archiving an already archived protocol returns 409.",
+    "summary": "Archive experiment protocol"
+  },
+  "PublishExperimentProtocol": {
+    "description": "Publish a valid draft protocol. The protocol must have a name and subject type. Supplied references and settings must be valid. An exposure schedule or targeting rules require an environment. Enabled limits require their values. Configurable template fields must have a value before they can be locked.\n\nIndependent configuration errors are returned together in the JSON:API errors array with source.pointer values that identify the fields. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged.",
+    "summary": "Publish experiment protocol"
   },
   "RefreshExperimentResultsForOrg": {
     "description": "Trigger a results refresh across the organization's active experiments. Returns the count of experiments whose refresh was triggered (meta.experiments_updated) plus a per-experiment breakdown of what happened to each (meta.results).",
@@ -4163,6 +4193,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "ListArchiveSearches": {
+    "description": "List the organization's Archive Searches that haven't expired, up to 5,000. When more\nexist, `meta.truncated` is `true`.",
+    "summary": "List Archive Searches"
+  },
   "CreateArchiveSearch": {
     "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
     "summary": "Create an Archive Search",
@@ -4172,6 +4206,16 @@
   "GetArchiveSearch": {
     "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
     "summary": "Get an Archive Search"
+  },
+  "RehydrateArchiveSearch": {
+    "description": "Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a\nretained historical view. Rehydration is the only thing this endpoint can change, and it only\napplies to a search that has already finished scanning.",
+    "summary": "Rehydrate an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to rehydrate an Archive Search."
+  },
+  "CancelArchiveSearch": {
+    "description": "Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a\nno-op: it returns the resource unchanged instead of returning an error.",
+    "summary": "Cancel an Archive Search"
   },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
@@ -4405,6 +4449,10 @@
     "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
     "summary": "Get a historical metrics configuration"
   },
+  "ListTagIndexingRuleExemptions": {
+    "description": "Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.\nYou can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching\ntag indexing rule. You can sort results by metric name or by estimated change in indexed volume.",
+    "summary": "List tag indexing rule exemptions"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -4468,6 +4516,12 @@
     "summary": "Create a tag indexing rule exemption",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule exemption."
+  },
+  "UpdateTagIndexingRuleExemption": {
+    "description": "Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and\n`created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has\nonly a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag indexing rule exemption",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a tag indexing rule exemption."
   },
   "ListTagIndexingRulesForMetric": {
     "description": "List the tag indexing rules that apply to a given metric, sorted by `rule_order`.\nMatching is performed server-side using each rule's `metric_name_matches` glob patterns.",
@@ -5148,7 +5202,7 @@
     "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
   },
   "ListProcesses": {
-    "description": "Get all processes for your organization.",
+    "description": "Get processes collected by Live Processes for your organization. One request covers a window of\nat most 1 hour that starts within the past 36 hours. To cover a longer period, make one request\nper hour. Older data is not available from this endpoint.\n\nWhen a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source\nquery to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that\none process. If absent, don't substitute an empty filter, which would query all processes.",
     "summary": "Get all processes"
   },
   "SubmitProductAnalyticsEvent": {
@@ -5288,7 +5342,7 @@
     "summary": "List SKUs"
   },
   "GetPrunedTraceByID": {
-    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a pruned trace by ID"
   },
   "QueryScalarData": {
@@ -5594,7 +5648,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.\n\nOmitting the `permissions` relationship from the request leaves the role's existing permissions\nunchanged. Sending `\"permissions\": {\"data\": []}` removes all permissions except restricted default\npermissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions\ncan only be excluded after Minimal Access Roles is enabled for the organization.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -7191,22 +7245,8 @@
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
   },
-  "GetSPARecommendationsV2": {
-    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA recommendations v2",
-    "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
-  },
-  "GetSPARecommendations": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
-    "summary": "Get SPA Recommendations"
-  },
-  "GetSPARecommendationsWithShard": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA Recommendations with a shard parameter"
-  },
   "AggregateSpans": {
-    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
+    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
     "summary": "Aggregate spans",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of aggregated spans from your organization."
@@ -7907,6 +7947,10 @@
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
+  "ListTeamHierarchyMembers": {
+    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
+    "summary": "Get team hierarchy members"
+  },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
     "summary": "Get team memberships"
@@ -7975,7 +8019,7 @@
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
   },
   "GetTraceByID": {
-    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
   },
   "GetUsageApplicationSecurityMonitoring": {

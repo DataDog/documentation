@@ -1,0 +1,19 @@
+entries:
+  - change_type: added
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40662
+    operations:
+      - ArchiveExperimentProtocol
+      - CreateExperimentProtocol
+      - DeleteExperimentProtocol
+      - PatchExperimentProtocol
+      - PublishExperimentProtocol
+      - ReplaceExperimentProtocol
+    title: Add experiment protocol lifecycle operations
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40662
+    operations:
+      - GetExperimentProtocol
+      - ListExperimentProtocols
+    title: Add experiment protocol lifecycle operations

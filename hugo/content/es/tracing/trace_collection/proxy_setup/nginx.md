@@ -16,25 +16,25 @@ further_reading:
   tag: Sitio externo
   text: OpenTelemetry para el controlador Ingress-NGINX
 title: Instrumentación de NGINX
-type: lenguaje de código múltiple
+type: multi-code-lang
 ---
+Datadog APM es compatible con NGINX en las siguientes configuraciones:
+- NGINX operado como proxy con rastreo proporcionado por el módulo de Datadog.
+- NGINX como controlador de Ingress para Kubernetes.
+- [OpenResty](#openresty-with-datadog-module), que está construido sobre NGINX, con rastreo proporcionado por una compilación específica de OpenResty del módulo de Datadog.
 
-Datadog APM es compatible con NGINX en dos configuraciones:
-- NGINX funcionaba como proxy con el rastreo proporcionado por el módulo de Datadog.
-- NGINX como controlador Ingress para Kubernetes.
+## NGINX con el módulo de Datadog {#nginx-with-datadog-module}
+Datadog proporciona un módulo de NGINX para rastreo distribuido.
 
-## NGINX con el módulo de Datadog
-Datadog proporciona un módulo NGINX para el rastreo distribuido.
+### Instalación del módulo {#module-installation}
+Para instalar el módulo de Datadog para NGINX, siga estas instrucciones:
+1. Descargue la versión adecuada desde el [último lanzamiento de nginx-datadog en GitHub][1]
+2. Elija el archivo tar correspondiente a la versión específica de NGINX y a la arquitectura de CPU.
 
-### Instalación del módulo
-Para instalar el módulo NGINX de Datadog, sigue las siguientes instrucciones:
-1. Descarga la versión adecuada del [último lanzamiento de Nginx-Datadog en GitHub][1]
-2. Elige el archivo .tar correspondiente a la versión de NGINX y a la arquitectura de CPU específicas.
+Cada lanzamiento incluye dos archivos tar por combinación de versión de NGINX y arquitectura de CPU.
+El archivo tar principal contiene un solo archivo, `ngx_http_datadog_module.so`, que es el módulo de Datadog para NGINX. El segundo contiene símbolos de depuración; es opcional.
 
-Cada versión incluye dos archivos .tar por cada combinación de la versión de NGINX y la arquitectura de CPU.
-El archivo .tar principal contiene un único archivo, `ngx_http_datadog_module.so`, que es el módulo NGINX de Datadog. El segundo contiene símbolos de depuración y es opcional.
-
-Para simplificar el proceso, el siguiente script sólo descarga el módulo de la última versión:
+Para mayor simplicidad, el siguiente script descarga solo el módulo para el último lanzamiento:
 
 ```bash
 get_latest_release() {
@@ -62,28 +62,28 @@ if [ -z "$ARCH" ]; then
     exit 1
 fi
 
-NGINX_VERSION="1.26.0"
+NGINX_VERSION="1.29.0"
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
 TARBALL="ngx_http_datadog_module-${ARCH}-${NGINX_VERSION}.so.tgz"
 
 curl -Lo ${TARBALL} "https://github.com/DataDog/nginx-datadog/releases/download/${RELEASE_TAG}/${TARBALL}"
 ```
 
-Extrae el archivo `ngx_http_datadog_module.so` del tarball descargado mediante `tar` y colócalo en el directorio de módulos de NGINX, situado normalmente en `/usr/lib/nginx/modules`.
+Extraiga el archivo `ngx_http_datadog_module.so` del archivo tar descargado usando `tar` y colóquelo en el directorio de módulos de NGINX, ubicado normalmente en `/usr/lib/nginx/modules`.
 
-### Configuración de NGINX con el módulo de Datadog 
-En la sección superior de configuración de NGINX, carga el módulo de Datadog.
+### Configuración de NGINX con el módulo de Datadog {#nginx-configuration-with-datadog-module}
+En la sección superior de la configuración de NGINX, cargue el módulo de Datadog.
 
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
 ```
 
-La configuración por defecto se conecta a un Datadog Agent local y produce trazas
-para todas las localizaciones de NGINX. Especifica una configuración personalizada utilizando las directivas exclusivas
+La configuración predeterminada se conecta a un Datadog Agent local y genera trazas
+para todas las ubicaciones de NGINX. Especifique la configuración personalizada usando las directivas dedicadas
 `datadog_*` descritas en la [documentación de la API][4] del módulo de Datadog.
 
-Por ejemplo, la siguiente configuración de NGINX define el nombre del servicio como
-`usage-internal-nginx` y la frecuencia de muestreo en 10%.
+Por ejemplo, la siguiente configuración de NGINX establece el nombre del servicio en
+`usage-internal-nginx` y la tasa de muestreo en 10 %.
 
 ```nginx
 load_module modules/ngx_http_datadog_module.so;
@@ -92,38 +92,41 @@ http {
   datadog_service_name usage-internal-nginx;
   datadog_sample_rate 0.1;
 
-  # servidores, localizaciones...
+  # servers, locations...
 }
 ```
 
-## Controlador Ingress-NGINX para Kubernetes
+## Controlador Ingress-NGINX para Kubernetes {#ingress-nginx-controller-for-kubernetes}
 
-Datadog ofrece soporte para monitorizar el controlador Ingress-NGINX en Kubernetes.
-Elige entre los siguientes métodos de instrumentación en función de la versión y los requisitos de tu controlador:
+Datadog ofrece soporte para monitorear el controlador Ingress-NGINX en Kubernetes.
+Elija entre los siguientes métodos de instrumentación según su versión de controlador y sus requisitos:
 
-- [v1.10.0+ con las características de Datadog](#controller-v1100-using-datadogs-features).
-- [v1.10.0+ con OpenTelemetry](#controller-v1100-using-opentelemetry).
-- [v1.9.0 y anteriores](#controller-v190-and-older).
+- [v1.10.0+ usando las funciones de Datadog](#controller-v1100-using-datadogs-features).
+- [v1.10.0+ usando OpenTelemetry](#controller-v1100-using-opentelemetry).
+- [v1.9.0 y versiones anteriores](#controller-v190-and-older).
 
-### Controlador v1.10.0+ con las características de Datadog
+### Controlador v1.10.0+ usando las funciones de Datadog {#controller-v1100-using-datadogs-features}
 
-Este método de instrumentación utiliza [nginx-datadog][6] y aprovecha el mecanismo [init-container][7] de Kubernetes
-para instalar el módulo dentro de la instancia del controlador Ingress-NGINX.
+Este método de instrumentación utiliza [nginx-datadog][6] y aprovecha el mecanismo de [contenedor de inicialización][7] de Kubernetes
+para instalar el módulo dentro de la instancia del Ingress-NGINX Controller.
 
-Para instrumentar Ingress-NGINX **v1.10.0+** mediante el módulo de Datadog, sigue estos pasos:
+Para instrumentar Ingress-NGINX **v1.10.0+** usando el módulo de Datadog, siga estos pasos:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-**1. Verificar la versión de Ingress-NGINX**<br>
-Comprueba la versión de tu controlador Ingress-NGINX y asegúrate de que dispones de la versión init-container de Datadog correspondiente.
-La versión init-container ([datadog/ingress-nginx-injection][1]) debe coincidir exactamente con la versión de tu controlador para evitar problemas de inicio.
-Por ejemplo, si estás ejecutando Ingress-NGINX v1.11.3, necesitas [datadog/ingress-nginx-injection:v1.11.3][2].
+**1. Verifique su versión de Ingress-NGINX**<br>
+Verifique su versión de Ingress-NGINX Controller y asegúrese de tener disponible el contenedor de inicialización de Datadog correspondiente.
+La versión del contenedor de inicialización ([datadog/ingress-nginx-injection][1]) debe coincidir exactamente con la versión de su controlador para evitar problemas de inicio.
+Por ejemplo, si está ejecutando Ingress-NGINX v1.11.3, necesita [datadog/ingress-nginx-injection:v1.11.3][2].
 
-**2. Modificar la especificación del pod del controlador**<br>
-Actualiza la especificación del pod del controlador para incluir la variable init-container y configurar la variable de entorno del host del Datadog Agent:
+<div class="alert alert-info">Las etiquetas de versión como <code>v1.11.3</code> son etiquetas dinámicas. El módulo subyacente de Datadog NGINX puede actualizarse mientras la etiqueta permanece igual. Para fijar una versión exacta, haga referencia a la imagen mediante su digest (por ejemplo, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
 
-{{< highlight yaml "hl_lines=4-10 13 16-19" >}}
+**2. Modifique la especificación del pod de su controlador**<br>
+Actualice la especificación del pod del controlador para incluir el contenedor de inicialización y configure la variable de entorno del servidor del Datadog Agent:
+
+
+{{< highlight yaml "hl_lines=4-10 13-16 19-22 25-26" >}}
     spec:
       template:
         spec:
@@ -137,18 +140,25 @@ Actualiza la especificación del pod del controlador para incluir la variable in
           containers:
             - name: controller
               image: registry.k8s.io/ingress-nginx/controller:<MY_INGRESS_NGINX_VERSION>
+              volumeMounts:
+                - name: nginx-module
+                  mountPath: /opt/datadog-modules
               env:
                 - ...
                 - name: DD_AGENT_HOST
                   valueFrom:
                     fieldRef:
                       fieldPath: status.hostIP
+          volumes:
+            - ...
+            - name: nginx-module
+              emptyDir: {}
 {{< /highlight >}}
 
-**Nota**: Para ver una forma alternativa de acceder al Datadog Agent, consulta la [guía de instalación de Kubernetes][1].
+**Nota**: Para obtener una forma alternativa de acceder al Datadog Agent, consulte la [guía de instalación de Kubernetes][1].
 
-**3. Configurar Ingress-NGINX** <br>
-Crea o modifica `ConfigMap` para cargar el módulo de Datadog:
+**3. Configure Ingress-NGINX** <br>
+Cree o modifique el `ConfigMap` para cargar el módulo de Datadog:
 
 {{< highlight yaml "hl_lines=5 7-8" >}}
     kind: ConfigMap
@@ -161,23 +171,25 @@ Crea o modifica `ConfigMap` para cargar el módulo de Datadog:
         load_module /opt/datadog-modules/ngx_http_datadog_module.so;
 {{< /highlight >}}
 
-**4. Aplicar el ConfigMap** <br>
-Aplica el `ConfigMap` actualizado para asegurarte de que el módulo de Datadog se cargue correctamente.
+**4. Aplique el ConfigMap** <br>
+Aplique el `ConfigMap` actualizado para asegurarse de que el módulo de Datadog se cargue correctamente.
 
-Esta configuración asegura que el módulo de Datadog esté cargado y listo para rastrear las solicitudes entrantes.
+Esta configuración garantiza que el módulo de Datadog esté cargado y listo para rastrear las solicitudes entrantes.
 
 [1]: https://hub.docker.com/r/datadog/ingress-nginx-injection
 [2]: https://hub.docker.com/layers/datadog/ingress-nginx-injection/v1.11.3/images/sha256-19ea2874d8a4ebbe4de0bf08faeb84c755cd71f1e8740ce2d145c5cf954a33a1
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-**1. Verificar la versión de Ingress-NGINX**<br>
-Comprueba la versión de tu controlador Ingress-NGINX y asegúrate de que dispones de la versión init-container de Datadog correspondiente.
-La versión init-container ([datadog/ingress-nginx-injection][1]) debe coincidir exactamente con la versión de tu controlador para evitar problemas de inicio.
-Por ejemplo, si estás ejecutando Ingress-NGINX v1.11.3, necesitas [datadog/ingress-nginx-injection:v1.11.3][2].
+**1. Verifique su versión de Ingress-NGINX**<br>
+Verifique su versión de Ingress-NGINX Controller y asegúrese de tener disponible el contenedor de inicialización de Datadog correspondiente.
+La versión del contenedor de inicialización ([datadog/ingress-nginx-injection][1]) debe coincidir exactamente con la versión de su controlador para evitar problemas de inicio.
+Por ejemplo, si está ejecutando Ingress-NGINX v1.11.3, necesita [datadog/ingress-nginx-injection:v1.11.3][2].
 
-**2. Anular los valores de la tabla de Helm**<br>
-Para personalizar la tabla de Helm de Ingress-NGINX y cargar el módulo de Datadog necesario, crea un archivo YAML o modifica uno existente con la siguiente configuración:
+<div class="alert alert-info">Las etiquetas de versión como <code>v1.11.3</code> son etiquetas dinámicas. El módulo subyacente de Datadog NGINX puede actualizarse mientras la etiqueta permanece igual. Para fijar una versión exacta, haga referencia a la imagen mediante su digest (por ejemplo, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
+
+**2. Anulación de los valores del chart de Helm**<br>
+Para personalizar el chart de Helm de Ingress-NGINX y cargar el módulo de Datadog requerido, cree un archivo YAML o modifique uno existente con la siguiente configuración:
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
 controller:
@@ -190,10 +202,10 @@ controller:
       image:
         registry: docker.io
         image: datadog/ingress-nginx-injection
-        # La etiqueta debe coincidir con la versión del controlador ingress-nginx
-        # Por ejemplo, esto inyectará el módulo de Datadog para ingress v1.10.0
-        # Comprueba <https://hub.docker.com/repository/docker/datadog/ingress-nginx-injection/tags>
-        # para obtener la lista de todas las versiones admitidas.
+        # The tag should match the version of the ingress-nginx controller
+        # For example, this will inject the Datadog module for ingress v1.10.0
+        # Check <https://hub.docker.com/repository/docker/datadog/ingress-nginx-injection/tags>
+        # for the list of all versions supported.
         tag: "v1.10.0"
         distroless: false
   extraEnvs:
@@ -204,7 +216,8 @@ controller:
 {{< /code-block >}}
 
 **3. Desplegar**<br>
-Instala o actualiza la versión de Helm mediante el marcador `-f` para aplicar los valores personalizados creados en el paso anterior.
+Instale o actualice el release de Helm usando la opción `-f` para aplicar los valores personalizados creados en el paso anterior.
+
 ```shell
 helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 ```
@@ -215,16 +228,16 @@ helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-### Controlador v1.10.0+ con OpenTelemetry
+### Controlador v1.10.0+ usando OpenTelemetry {#controller-v1100-using-opentelemetry}
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-**1. Preparar el Datadog Agent** <br>
-Asegúrate de que tu Datadog Agent tenga [habilitada la ingesta de OTLP gRPC][1] para actuar como un recopilador de OpenTelemetry.
+**1. Prepare el Datadog Agent** <br>
+Asegúrese de que su Datadog Agent tenga [habilitada la ingesta de OTLP por gRPC][1] para actuar como un OpenTelemetry Collector.
 
-**2. Configurar el controlador Ingress** <br>
-Para empezar, verifica que la especificación del pod de tu controlador Ingress tenga la variable de entorno `HOST_IP` configurada. Si no es así, añade la siguiente entrada al bloque `env` dentro de la especificación del pod:
+**2. Configure el controlador de Ingress** <br>
+Para comenzar, verifique que la especificación del pod de su controlador de Ingress tenga establecida la variable de entorno `HOST_IP`. Si no es así, agregue la siguiente entrada al bloque `env` dentro de la especificación del pod:
 
 ```yaml
 - name: HOST_IP
@@ -235,7 +248,7 @@ Para empezar, verifica que la especificación del pod de tu controlador Ingress 
   value: "http://$(HOST_IP):4317"
 ```
 
-A continuación, habilita la instrumentación de OpenTelemetry para el controlador. Crea o edita un ConfigMap con los siguientes detalles:
+A continuación, habilite la instrumentación de OpenTelemetry para el controlador. Cree o edite un ConfigMap con los siguientes detalles:
 
 {{< highlight yaml "hl_lines=7-11" >}}
 apiVersion: v1
@@ -246,7 +259,7 @@ metadata:
 data:
   enable-opentelemetry: "true"
   otel-sampler: AlwaysOn
-  # Por defecto
+  # Defaults
   # otel-service-name: "nginx"
   # otel-sampler-ratio: 0.01
 {{< /highlight >}}
@@ -256,11 +269,11 @@ data:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-**1. Preparar el Datadog Agent** <br>
-Asegúrate de que tu Datadog Agent tenga [habilitada la ingesta de OTLP gRPC][1] para actuar como un recopilador de OpenTelemetry.
+**1. Prepare el Datadog Agent** <br>
+Asegúrese de que su Datadog Agent tenga [habilitada la ingesta de OTLP por gRPC][1] para actuar como un OpenTelemetry Collector.
 
-**2. Anular los valores de la tabla de Helm**<br>
-Para personalizar la tabla de Helm de Ingress-NGINX y cargar el módulo de Datadog necesario, crea un archivo YAML o modifica uno existente con la siguiente configuración:
+**2. Anulación de los valores del chart de Helm**<br>
+Para personalizar el chart de Helm de Ingress-NGINX y cargar el módulo de Datadog requerido, cree un archivo YAML o modifique uno existente con la siguiente configuración:
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
 controller:
@@ -280,7 +293,8 @@ controller:
 {{< /code-block >}}
 
 **3. Desplegar**
-Instala o actualiza la versión de Helm mediante el marcador `-f` para aplicar los valores personalizados creados en el paso anterior.
+Instale o actualice el release de Helm usando la opción `-f` para aplicar los valores personalizados creados en el paso anterior.
+
 ```shell
 helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 ```
@@ -289,12 +303,12 @@ helm install my-release ingress-nginx/ingress-nginx -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-### Controlador v1.9.0 y anteriores
-Para habilitar el rastreo en Datadog, crea o edita un ConfigMap para configurar`enable-opentracing: "true"` y el `datadog-collector-host` al que se deben enviar trazas.
-El nombre del ConfigMap lo cita explícitamente el argumento de línea de comandos del contenedor del controlador Ingress-NGINX. Por defecto es `--configmap=<POD_NAMESPACE>/nginx-configuration`.
-Si `ingress-nginx` se ha instalado utilizando el chart Helm, el nombre del ConfigMap seguirá el patrón `<RELEASE_NAME>-nginx-ingress-controller`.
+### Controlador v1.9.0 y versiones anteriores {#controller-v190-and-older}
+Para habilitar el rastreo de Datadog, cree o edite un ConfigMap para establecer `enable-opentracing: "true"` y el `datadog-collector-host` al cual se deben enviar las trazas.
+El argumento de la línea de comandos del contenedor de Ingress-NGINX Controller especifica explícitamente el nombre del ConfigMap, que de forma predeterminada es `--configmap=<POD_NAMESPACE>/nginx-configuration`.
+Si `ingress-nginx` se instaló mediante el chart de Helm, el nombre del ConfigMap seguirá el patrón `<RELEASE_NAME>-nginx-ingress-controller`.
 
-El controlador Ingress gestiona los archivos `nginx.conf` y `/etc/nginx/opentracing.json`. El rastreo está habilitado para todos los bloques de `location`.
+El Ingress controller gestiona tanto los archivos `nginx.conf` como `/etc/nginx/opentracing.json`. El rastreo está habilitado para todos los bloques `location`.
 
 {{< highlight yaml "hl_lines=6-7 9-15" >}}
 kind: ConfigMap
@@ -308,14 +322,14 @@ metadata:
 data:
   enable-opentracing: "true"
   datadog-collector-host: $HOST_IP
-  # Por defecto
+  # Defaults
   # datadog-service-name: "nginx"
   # datadog-collector-port: "8126"
   # datadog-operation-name-override: "nginx.handle"
   # datadog-sample-rate: "1.0"
 {{< /highlight >}}
 
-Además, asegúrate de que la especificación del pod de tu controlador tiene definida la variable de entorno `HOST_IP`. Añade esta entrada al bloque `env:` que contiene las variables de entorno `POD_NAME` y `POD_NAMESPACE`.
+Además, asegúrese de que la especificación del pod de su controlador tenga establecida la variable de entorno `HOST_IP`. Agregue esta entrada al bloque `env:` que contiene las variables de entorno `POD_NAME` y `POD_NAMESPACE`.
 
 ```yaml
 - name: HOST_IP
@@ -324,15 +338,123 @@ Además, asegúrate de que la especificación del pod de tu controlador tiene de
       fieldPath: status.hostIP
 ```
 
-Para definir un nombre de servicio diferente por cada Ingress, utilizando anotaciones:
+Para establecer un nombre de servicio diferente por Ingress mediante anotaciones:
 
 ```yaml
   nginx.ingress.kubernetes.io/configuration-snippet: |
       opentracing_tag "service.name" "custom-service-name";
 ```
-Lo anterior anula el nombre de servicio `nginx-ingress-controller.ingress-nginx` por defecto.
+Lo anterior sustituye el nombre de servicio `nginx-ingress-controller.ingress-nginx` predeterminado.
 
-## Referencias adicionales
+## OpenResty con el módulo de Datadog {#openresty-with-datadog-module}
+
+OpenResty está construido sobre NGINX, y cada versión `nginx-datadog` incluye una compilación independiente del módulo para OpenResty.
+
+Para instalar el módulo de NGINX de Datadog para OpenResty:
+1. Descargue la versión adecuada con el prefijo `openresty-` desde el [último `nginx-datadog` lanzamiento de GitHub][1].
+2. Elija el archivo tarball que coincida con su versión de OpenResty y la arquitectura de su CPU. Utilice la versión de OpenResty de cuatro partes de `openresty -v` (por ejemplo, `1.31.1.1`), no la versión del núcleo de NGINX sobre la que está construida.
+3. Extraiga `ngx_http_datadog_module.so` del archivo tarball y colóquelo en `/usr/local/openresty/nginx/modules`. Cree el directorio si no existe.
+4. En la parte superior de `/usr/local/openresty/nginx/conf/nginx.conf`, cargue el módulo:
+
+    ```nginx
+    load_module modules/ngx_http_datadog_module.so;
+    ```
+
+Las directivas `datadog_*` descritas en la [documentación de la API][4] del módulo y las variables de entorno `DD_*` funcionan de la misma manera en OpenResty que en NGINX.
+
+## Correlación de trazas con registros {#correlating-traces-to-logs}
+
+Después de habilitar el rastreo de APM, puede conectar sus trazas con los registros de NGINX correspondientes. Esta correlación vincula cada traza y tramo con los eventos de registro específicos generados durante esa solicitud, lo que le permite alternar entre ellos para solucionar problemas.
+
+### Requisitos previos {#prerequisites}
+
+Antes de comenzar, asegúrese de tener:
+- Habilitado el rastreo de APM para NGINX siguiendo los pasos anteriores en esta guía.
+- Configurado la recopilación de registros de Datadog para NGINX.
+
+### Paso 1: Inyectar el ID de traza y el ID de tramo en los registros de NGINX {#step-1-inject-trace-and-span-ids-into-nginx-logs}
+
+Modifique su directiva `log_format` para incluir el ID de traza y el ID de tramo. Las variables que utilice dependen de su método de instrumentación. Seleccione la pestaña correspondiente a continuación para ver las instrucciones que coinciden con su configuración.
+
+{{< tabs >}}
+{{% tab "Datadog NGINX Module" %}}
+
+Si instaló el [módulo de NGINX de Datadog][100], utilice las variables `$datadog_trace_id` y `$datadog_span_id`. Este valor es `-` para las solicitudes que no están rastreadas.
+
+Actualice su archivo de configuración de NGINX (por ejemplo, `/etc/nginx/nginx.conf`):
+
+```nginx
+http {
+  log_format main_datadog '$remote_addr - $remote_user [$time_local] "$request" '
+                         '$status $body_bytes_sent "$http_referer" '
+                         '"$http_user_agent" "$http_x_forwarded_for" '
+                         'dd.trace_id="$datadog_trace_id"' 'dd.span_id="$datadog_span_id"';
+
+  access_log /var/log/nginx/access.log main_datadog;
+}
+```
+[100]: https://github.com/DataDog/nginx-datadog/releases/latest
+
+{{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+Si está utilizando el [módulo de OpenTelemetry de NGINX][100], utilice las variables `$otel_trace_id` y `$otel_span_id`. Este valor es una cadena vacía para las solicitudes que no están rastreadas.
+
+Actualice su archivo de configuración de NGINX (por ejemplo, `/etc/nginx/nginx.conf`):
+
+```nginx
+http {
+  log_format main_opentelemetry '$remote_addr - $remote_user [$time_local] "$request" '
+                               '$status $body_bytes_sent "$http_referer" '
+                               '"$http_user_agent" "$http_x_forwarded_for" '
+                               'dd.trace_id="$otel_trace_id"' 'dd.span_id="$otel_span_id"' ;
+
+  access_log /var/log/nginx/access.log main_opentelemetry;
+}
+```
+[100]: https://nginx.org/en/docs/ngx_otel_module.html
+{{% /tab %}}
+{{< /tabs >}}
+
+Después de guardar sus cambios, recargue la configuración de NGINX. Por ejemplo:
+
+```sh
+sudo nginx -s reload
+```
+
+### Paso 2: Configurar la canalización de registros para parsear el ID de traza y el ID de tramo {#step-2-configure-the-log-pipeline-to-parse-the-trace-and-span-ids}
+
+De forma predeterminada, los registros capturan `dd.trace_id` y `dd.span_id` en formato hexadecimal:
+
+```
+10.244.0.1 - - [12/Sep/2025:22:41:03 +0000] "GET /health HTTP/1.1" 200 87 0.002 "-" "kube-probe/1.32" "-" dd.trace_id="68c4a17f000000009aed12af2ccb1ead" dd.span_id="9aed12af2ccb1ead"
+```
+
+Para habilitar la correlación de registros y trazas en Datadog, configure una canalización de procesamiento de registros para convertir estos ID de hexadecimal a decimal. Siga los mismos pasos independientemente del método de instrumentación que utilice.
+
+1. En Datadog, navegue a la página [{{< ui >}}Log Configuration{{< /ui >}}][9].
+2. Pase el cursor sobre su canalización de NGINX activa y haga clic en el icono {{< ui >}}Clone{{< /ui >}} para crear una versión editable.
+3. Haga clic en la canalización clonada.
+4. Haga clic en {{< ui >}}Add Processor{{< /ui >}}.
+5. Seleccione [Grok Parser][11] como el tipo de procesador.
+6. Defina la siguiente regla de parseo para extraer el atributo de ID de traza de un evento de registro. Esta regla funciona tanto para el módulo de Datadog como para las salidas de OpenTelemetry:
+   ```text
+   extract_correlation_ids %{data} dd.trace_id="%{notSpace:dd.trace_id:nullIf("-")}" dd.span_id="%{notSpace:dd.span_id:nullIf("-")}"
+   ```
+7. Haga clic en {{< ui >}}Create{{< /ui >}}.
+8. Haga clic en {{< ui >}}Add Processor{{< /ui >}} nuevamente.
+9. Seleccione [remapeador de ID de traza][10] como el tipo de procesador. Este procesador asocia el ID analizado con su traza de APM correspondiente.
+10. En el campo {{< ui >}}Set trace id attribute(s){{< /ui >}}, ingrese `dd.trace_id`.
+11. Haga clic en {{< ui >}}Create{{< /ui >}}.
+12. Haga clic en {{< ui >}}Add Processor{{< /ui >}} nuevamente.
+13. Seleccione [Remapeador de ID de tramo][12] como el tipo de procesador. Este procesador asocia el ID analizado con su tramo de APM correspondiente.
+14. En el campo {{< ui >}}Set span id attribute(s){{< /ui >}}, ingrese `dd.span_id`.
+15. Haga clic en {{< ui >}}Create{{< /ui >}}.
+16. Guarde y habilite su nueva canalización.
+
+Una vez que la canalización esté activa, los nuevos registros de NGINX se correlacionarán automáticamente con sus trazas y tramos.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -342,3 +464,8 @@ Lo anterior anula el nombre de servicio `nginx-ingress-controller.ingress-nginx`
 [4]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [6]: https://github.com/DataDog/nginx-datadog/
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+[8]: /es/logs/guide/ease-troubleshooting-with-cross-product-correlation
+[9]: https://app.datadoghq.com/logs/pipelines
+[10]: /es/logs/log_configuration/processors/trace_remapper/
+[11]: /es/logs/log_configuration/processors/grok_parser/
+[12]: /es/logs/log_configuration/processors/span_remapper/
