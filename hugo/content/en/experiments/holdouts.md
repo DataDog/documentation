@@ -28,6 +28,12 @@ The `all shipped` group, or `winners-only` group, receives changes as they roll 
 
 Measuring the entire period as one result would mix time spent with some changes and time spent with the full combination. Holdouts separate these periods so you can monitor early results, then measure the complete treatment.
 
+A team includes 10 experiments in a holdout from July through September. Five experiments produce changes that ship. The first ships on July 15, and the last ships on September 30.
+
+The goal is to measure the combined effect of all five changes. The holdout treatment is still changing during the inclusion phase and is complete only when the last change ships. The team sets an analysis phase from October 1 through October 15 to measure the full combination.
+
+During inclusion, preliminary results give the team an early directional read without waiting until October. These results include time when only some changes had shipped, so they do not measure the full combination.
+
 ### Experiment inclusion phase
 
 During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts. Both holdout groups receive an experiment's control experience while it runs. After a non-control variant rolls out, the `all shipped` group receives that change.
@@ -41,8 +47,6 @@ A preliminary analysis runs during inclusion. It gives an early directional read
 The analysis phase starts at or after inclusion ends. During this phase, the All shipped group should be able to receive all shipped changes. The Status quo group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
 
 The primary analysis measures metric data from this period. It answers the main question: what is the impact of the shipped changes together? If a rollout is still in progress when analysis starts, the treatment is not yet complete. The result then includes time when only some changes were available.
-
-For example, a team can run experiments from July through September, then measure the combined result in October. With rollouts complete before October, the analysis measures the full combination.
 
 ## Subject assignment
 
