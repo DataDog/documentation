@@ -103192,7 +103192,9 @@ components:
           type: number
       type: object
     RUMAggregateRequest:
-      description: The object sent with the request to retrieve aggregation buckets of RUM events from your organization.
+      description: |-
+        The object sent with the request to retrieve aggregation buckets of RUM events from your organization.
+        `filter.indexes` is not supported and ignored.
       properties:
         compute:
           description: The list of metrics or timeseries to compute for the retrieved buckets.
@@ -103219,7 +103221,7 @@ components:
           $ref: "#/components/schemas/RUMAggregationFunction"
         metric:
           description: The metric to sort by (only used for `type=measure`).
-          example: "@duration"
+          example: "@view.loading_time"
           type: string
         order:
           $ref: "#/components/schemas/RUMSortOrder"
@@ -103228,7 +103230,7 @@ components:
       type: object
     RUMAggregateSortType:
       default: "alphabetical"
-      description: The type of sorting algorithm.
+      description: The type of sorting algorithm. `alphabetical` sorts buckets by the facet value, `measure` sorts them by a computed aggregation.
       enum: ["alphabetical", "measure"]
       type: string
       x-enum-varnames: ["ALPHABETICAL", "MEASURE"]
@@ -103242,7 +103244,8 @@ components:
           type: array
       type: object
     RUMAggregationFunction:
-      description: An aggregation function.
+      description: |-
+        An aggregation function. `count` counts events and needs no metric. `cardinality` counts the distinct values of the metric. `sum`, `min`, `max`, `avg`, `median` and the percentiles (`pc75` to `pc99`) apply to a numeric metric such as `@view.loading_time`.
       enum: ["count", "cardinality", "pc75", "pc90", "pc95", "pc98", "pc99", "sum", "min", "max", "avg", "median"]
       example: "pc90"
       type: string
@@ -103379,7 +103382,7 @@ components:
             type: string
           type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
+          description: "Type of the RUM application. Possible values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `rum-cpp`, `unreal`."
           example: browser
           type: string
         updated_at:
@@ -103414,8 +103417,19 @@ components:
         - type
       type: object
     RUMApplicationCreateAttributes:
-      description: RUM application creation attributes.
+      description: |-
+        RUM application creation attributes.
+        When `rum_event_processing_state` is omitted, it defaults to `ALL`. When `product_analytics_retention_state` is omitted, Product Analytics is not enabled. Setting it to `MAX` requires the `product_analytics_apps_write` permission.
       properties:
+        apm_rum_flat_sampling_replay_enabled:
+          description: Indicates if flat sampling of Session Replay for APM-correlated RUM sessions is enabled. Defaults to `true`.
+          example: true
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled. Defaults to `1`.
+          example: 1
+          format: double
+          type: number
         create_default_retention_filters:
           default: true
           description: |-
@@ -103424,16 +103438,35 @@ components:
             This setting doesn't affect permanent retention filters (sessions with forced replays, Synthetics sessions and RUM-APM flat sampling).
           example: false
           type: boolean
+        error_tracking_exclusion_filter_enabled:
+          description: Indicates if Error Tracking exclusion filters are enabled for the application. Defaults to `false`.
+          example: false
+          type: boolean
         name:
-          description: Name of the RUM application.
+          description: Name of the RUM application. Between 1 and 255 characters.
           example: my_new_rum_application
+          maxLength: 255
           type: string
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions. Defaults to `100`.
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
         product_analytics_retention_state:
           $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
         rum_event_processing_state:
           $ref: "#/components/schemas/RUMEventProcessingState"
+        tags:
+          description: List of tags to associate with the RUM application, in `key:value` format.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
+          description: "Type of the RUM application. Defaults to `browser`. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `rum-cpp`, `unreal`."
           example: browser
           type: string
       required:
@@ -103573,7 +103606,7 @@ components:
             type: string
           type: array
         type:
-          description: Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`.
+          description: Type of the RUM application. Possible values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `rum-cpp`, `unreal`.
           example: browser
           type: string
         updated_at:
@@ -103635,18 +103668,55 @@ components:
         - type
       type: object
     RUMApplicationUpdateAttributes:
-      description: RUM application update attributes.
+      description: |-
+        RUM application update attributes. Only the attributes you provide are changed, omitted attributes keep their current value.
+        Changing `product_analytics_retention_state` or `product_analytics_replay_sample_rate` requires the `product_analytics_apps_write` permission.
       properties:
+        apm_rum_flat_sampling_replay_enabled:
+          description: Indicates if flat sampling of Session Replay for APM-correlated RUM sessions is enabled.
+          example: true
+          type: boolean
+        apm_rum_flat_sampling_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for APM-correlated RUM sessions when flat sampling is enabled.
+          example: 1
+          format: double
+          type: number
+        error_tracking_exclusion_filter_enabled:
+          description: Indicates if Error Tracking exclusion filters are enabled for the application.
+          example: false
+          type: boolean
+        instrumentation_type:
+          description: Instrumentation type of the RUM application.
+          example: manual
+          type: string
         name:
-          description: Name of the RUM application.
+          description: New name of the RUM application.
           example: updated_name_for_my_existing_rum_application
           type: string
+        product_analytics_replay_sample_rate:
+          description: Sample rate (0-100) of Session Replay for Product Analytics sessions.
+          example: 100
+          format: int32
+          maximum: 2147483647
+          type: integer
         product_analytics_retention_state:
           $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
+        remote_config_id:
+          description: ID of the RUM SDK remote configuration to associate with the application.
+          example: abc12345-1234-5678-abcd-ef1234567890
+          type: string
         rum_event_processing_state:
           $ref: "#/components/schemas/RUMEventProcessingState"
+        tags:
+          description: New list of tags of the RUM application, in `key:value` format. Replaces the existing tags.
+          example:
+            - "team:rum"
+          items:
+            description: Tag associated with the RUM application.
+            type: string
+          type: array
         type:
-          description: "Type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`."
+          description: "New type of the RUM application. Supported values are `browser`, `ios`, `android`, `react-native`, `flutter`, `roku`, `electron`, `unity`, `kotlin-multiplatform`, `react`, `nextjs`, `angular`, `vuejs`, `nuxt`, `tanstack`, `maui`, `salesforce-lwc`, `shopify`, `cpp`, `rum-cpp`, `unreal`."
           example: browser
           type: string
       type: object
@@ -103698,19 +103768,19 @@ components:
           type: object
       type: object
     RUMCompute:
-      description: A compute rule to compute metrics or timeseries.
+      description: A compute rule to compute metrics or timeseries. In the response, the result of each rule is keyed `c0`, `c1`... following the order of the `compute` list.
       properties:
         aggregation:
           $ref: "#/components/schemas/RUMAggregationFunction"
         interval:
           description: |-
-            The time buckets' size (only used for type=timeseries)
-            Defaults to a resolution of 150 points.
+            The time buckets' size, for example `5m`, `1h` or `1d` (only used for `type=timeseries`).
+            Defaults to a resolution of 150 points over the queried time range.
           example: "5m"
           type: string
         metric:
-          description: The metric to use.
-          example: "@duration"
+          description: The attribute to aggregate, for example `@view.loading_time`. Not needed for `count`, required for the other aggregations.
+          example: "@view.loading_time"
           type: string
         type:
           $ref: "#/components/schemas/RUMComputeType"
@@ -103719,7 +103789,7 @@ components:
       type: object
     RUMComputeType:
       default: "total"
-      description: The type of compute.
+      description: The type of compute. `total` returns one value per bucket, `timeseries` returns a list of time points per bucket.
       enum: ["timeseries", "total"]
       type: string
       x-enum-varnames: ["TIMESERIES", "TOTAL"]
@@ -103740,8 +103810,10 @@ components:
       properties:
         attributes:
           additionalProperties: {}
-          description: JSON object of attributes from RUM events.
-          example: {"customAttribute": 123, "duration": 2345}
+          description: |-
+            JSON object of attributes from RUM events. Attributes are nested by path: the facet `@view.name` used in queries is returned as `attributes.view.name`.
+            Common attributes include `type` (the event type: `session`, `view`, `action`, `resource`, `error`, `long_task` or `vital`), `application.id`, `session.id`, `view.id`, `view.name` and `usr.id`. Durations such as `view.time_spent`, `view.loading_time` and `resource.duration` are in nanoseconds.
+          example: {"application": {"id": "abcd1234-0000-0000-abcd-1234abcd5678"}, "type": "view", "view": {"loading_time": 1200000000, "name": "/checkout"}}
           type: object
         service:
           description: |-
@@ -103751,14 +103823,14 @@ components:
           example: "web-app"
           type: string
         tags:
-          description: Array of tags associated with your event.
+          description: Array of tags associated with your event, in `key:value` format.
           example: ["team:A"]
           items:
             description: Tag associated with your event.
             type: string
           type: array
         timestamp:
-          description: Timestamp of your event.
+          description: Timestamp of your event, in ISO 8601 format.
           example: "2019-01-02T09:42:36.320Z"
           format: date-time
           type: string
@@ -103775,7 +103847,7 @@ components:
           $ref: "#/components/schemas/RUMEventProcessingState"
       type: object
     RUMEventProcessingState:
-      description: Configures which RUM events are processed and stored for the application.
+      description: Configures which RUM events are processed and stored for the application. Defaults to `ALL` when creating an application.
       enum:
         - ALL
         - ERROR_FOCUSED_MODE
@@ -103816,8 +103888,8 @@ components:
       description: A group-by rule.
       properties:
         facet:
-          description: The name of the facet to use (required).
-          example: "@view.time_spent"
+          description: The attribute to group by, for example `@view.name` or `@session.type` (required).
+          example: "@view.name"
           type: string
         histogram:
           $ref: "#/components/schemas/RUMGroupByHistogram"
@@ -103865,7 +103937,7 @@ components:
         - max
       type: object
     RUMGroupByMissing:
-      description: The value to use for logs that don't have the facet used to group by.
+      description: The value to use for events that don't have the facet used to group by.
       oneOf:
         - $ref: "#/components/schemas/RUMGroupByMissingString"
         - $ref: "#/components/schemas/RUMGroupByMissingNumber"
@@ -104478,7 +104550,9 @@ components:
           $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
       type: object
     RUMProductAnalyticsRetentionState:
-      description: Controls the retention policy for Product Analytics data derived from RUM events.
+      description: |-
+        Controls the retention policy for Product Analytics data derived from RUM events.
+        Requests also accept `PREVIEW` (the initial state of a new application, reported as `NONE` in responses). Setting `MAX` requires the `product_analytics_apps_write` permission.
       enum:
         - MAX
         - NONE
@@ -104503,17 +104577,20 @@ components:
       properties:
         from:
           default: "now-15m"
-          description: The minimum time for the requested events; supports date (in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds are optional), math, and regular timestamps (in milliseconds).
+          description: |-
+            The minimum time for the requested events, inclusive. Accepts date math relative to now (for example `now-15m`, `now-1h`, `now-7d`), an absolute date in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator (seconds and fractional seconds are optional), or a timestamp in milliseconds since the Unix epoch.
           example: "now-15m"
           type: string
         query:
           default: "*"
-          description: The search query following the RUM search syntax.
+          description: |-
+            The search query following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). Filter on attributes with `@attribute:value`, for example `@type:view @application.id:<application_id> @view.name:"/checkout"`, and combine terms with `AND`, `OR` and `-` (negation). Event types are `session`, `view`, `action`, `resource`, `error`, `long_task` and `vital`.
           example: "@type:session AND @session.type:user"
           type: string
         to:
           default: "now"
-          description: The maximum time for the requested events; supports date (in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with full date, hours, minutes, and the `Z` UTC indicator - seconds and fractional seconds are optional), math, and regular timestamps (in milliseconds).
+          description: |-
+            The maximum time for the requested events. Accepts the same formats as `from`.
           example: "now"
           type: string
       type: object
@@ -104538,12 +104615,12 @@ components:
       properties:
         cursor:
           description: |-
-            List following results with a cursor provided in the previous query.
+            Cursor to get the next page of results, taken from `meta.page.after` of the previous response. Send it with the same `filter` and `sort` as the request that returned it.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
         limit:
           default: 10
-          description: Maximum number of events in the response.
+          description: Maximum number of events in the response. Between 1 and 1000.
           example: 25
           format: int32
           maximum: 1000
@@ -104554,9 +104631,9 @@ components:
       properties:
         next:
           description: |-
-            Link for the next set of results. Note that the request can also be made using the
-            POST endpoint.
-          example: "https://app.datadoghq.com/api/v2/rum/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
+            Link for the next set of results, only present when there are more results. It always points to the `GET /api/v2/rum/events` endpoint, and keeps `filter[query]`, `filter[from]`, `filter[to]`, `sort` and `page[limit]` of the request. Note that the request can also be made using the
+            POST endpoint with `page.cursor` set to `meta.page.after`.
+          example: "https://api.datadoghq.com/api/v2/rum/events?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
       type: object
     RUMResponseMetadata:
@@ -104588,18 +104665,19 @@ components:
       properties:
         after:
           description: |-
-            The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]`.
+            The cursor to use to get the next results, if any. To make the next request, use the same parameters with the addition of `page[cursor]` (`page.cursor` for the POST endpoint). Absent on the last page.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           type: string
       type: object
     RUMResponseStatus:
-      description: The status of the response.
+      description: The status of the response. `timeout` means the query did not complete in time and the results are partial.
       enum: ["done", "timeout"]
       example: "done"
       type: string
       x-enum-varnames: ["DONE", "TIMEOUT"]
     RUMSearchEventsRequest:
-      description: The request for a RUM events list.
+      description: |-
+        The request for a RUM events list. All attributes are optional: without any, the request returns the first 10 events of the last 15 minutes.
       properties:
         filter:
           $ref: "#/components/schemas/RUMQueryFilter"
@@ -104616,6 +104694,9 @@ components:
         - timestamp
         - -timestamp
       type: string
+      x-enum-descriptions:
+        - Oldest events first
+        - Newest events first
       x-enum-varnames:
         - TIMESTAMP_ASCENDING
         - TIMESTAMP_DESCENDING
@@ -222623,7 +222704,11 @@ paths:
   /api/v2/rum/analytics/aggregate:
     post:
       description: |-
-        The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.
+        Aggregate RUM events into buckets of computed metrics and timeseries. Use this endpoint for counts, percentiles, top-N breakdowns and timeseries. To read individual events, use `SearchRUMEvents` or `ListRUMEvents`.
+
+        `filter` selects the events with the [RUM search syntax][1] and a time range (`from` and `to` accept date math such as `now-15m`, ISO 8601 dates and timestamps in milliseconds). Each `compute` rule produces one value (`type: total`) or one list of time points (`type: timeseries`) per bucket, keyed `c0`, `c1`... in the response. Each `group_by` rule splits the events into buckets by a facet, returned in `by`. Use `histogram` on a numeric facet to bucket it by ranges.
+
+        [1]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: AggregateRUMEvents
       requestBody:
         content:
@@ -222654,6 +222739,22 @@ paths:
                   page:
                     cursor: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
                     limit: 25
+              top_views_by_count:
+                summary: Top 10 views by number of view events
+                value:
+                  compute:
+                    - aggregation: count
+                  filter:
+                    from: now-1d
+                    query: "@type:view @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
+                    to: now
+                  group_by:
+                    - facet: "@view.name"
+                      limit: 10
+                      sort:
+                        aggregation: count
+                        order: desc
+                        type: measure
             schema:
               $ref: "#/components/schemas/RUMAggregateRequest"
         required: true
@@ -222694,8 +222795,48 @@ paths:
           - rum_apps_read
   /api/v2/rum/applications:
     get:
-      description: List all the RUM applications in your organization.
+      description: |-
+        List the enabled RUM applications of your organization. Applications deleted with `DeleteRUMApplication` are not returned.
+        The response is not paginated and does not include the `client_token`, use `GetRUMApplication` to retrieve it.
+        Use the `application_id` of an item as the `id` path parameter of the other application operations, and as `@application.id` in RUM event queries.
       operationId: GetRUMApplications
+      parameters:
+        - description: Only return applications for which RUM event processing is enabled (`true`) or not (`false`).
+          in: query
+          name: filter[rum_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications for which Product Analytics is enabled (`true`) or not (`false`).
+          in: query
+          name: filter[product_analytics_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications that run in error focused mode (`true`) or not (`false`).
+          in: query
+          name: filter[error_focused_mode_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications that have an SDK remote configuration (`true`) or not (`false`).
+          in: query
+          name: filter[remote_config_enabled]
+          required: false
+          schema:
+            type: boolean
+        - description: Only return applications with this RUM event processing state.
+          in: query
+          name: filter[rum_event_processing_state]
+          required: false
+          schema:
+            $ref: "#/components/schemas/RUMEventProcessingState"
+        - description: Only return applications with this Product Analytics retention state.
+          in: query
+          name: filter[product_analytics_retention_state]
+          required: false
+          schema:
+            $ref: "#/components/schemas/RUMProductAnalyticsRetentionState"
       responses:
         "200":
           content:
@@ -222718,6 +222859,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/RUMApplicationsResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "404":
           $ref: "#/components/responses/NotFoundResponse"
         "429":
@@ -222730,7 +222877,10 @@ paths:
         permissions:
           - rum_apps_read
     post:
-      description: Create a new RUM application in your organization.
+      description: |-
+        Create a new RUM application in your organization.
+        The application ID is generated by Datadog and returned in `data.attributes.application_id`. A client token is created with the application and returned in `data.attributes.client_token`, use both to initialize the RUM SDK.
+        The application is created with the default retention filters unless `create_default_retention_filters` is `false`.
       operationId: CreateRUMApplication
       requestBody:
         content:
@@ -222772,7 +222922,23 @@ paths:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: Created
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a new RUM application
@@ -223459,18 +223625,36 @@ paths:
       x-menu-order: 4
   /api/v2/rum/applications/{id}:
     delete:
-      description: Delete an existing RUM application in your organization.
+      description: |-
+        Delete an existing RUM application in your organization.
+        The application is disabled and its client token is revoked, so the RUM SDK stops sending events for it. The application ID cannot be reused or re-enabled through the API.
+        Deleting an application with Product Analytics enabled requires the `product_analytics_apps_write` permission.
       operationId: DeleteRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       responses:
         "204":
           description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -223487,14 +223671,19 @@ paths:
         permissions:
           - rum_apps_write
     get:
-      description: Get the RUM application with given ID in your organization.
+      description: |-
+        Get the RUM application with given ID in your organization.
+        Unlike `GetRUMApplications`, the response includes the `client_token` used to initialize the RUM SDK.
       operationId: GetRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       responses:
         "200":
@@ -223519,6 +223708,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -223535,14 +223736,19 @@ paths:
         permissions:
           - rum_apps_read
     patch:
-      description: Update the RUM application with given ID in your organization.
+      description: |-
+        Update the RUM application with given ID in your organization.
+        This is a partial update: only the attributes present in the request are changed. `data.id` must match the `id` path parameter.
       operationId: UpdateRUMApplication
       parameters:
-        - description: RUM application ID.
+        - description: |-
+            ID of the RUM application, returned as `application_id` by `GetRUMApplications` and `CreateRUMApplication`.
+          example: abcd1234-0000-0000-abcd-1234abcd5678
           in: path
           name: id
           required: true
           schema:
+            pattern: "^[a-zA-Z0-9:-]+$"
             type: string
       requestBody:
         content:
@@ -223585,7 +223791,17 @@ paths:
                 $ref: "#/components/schemas/RUMApplicationResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
         "404":
           content:
             application/json:
@@ -223596,8 +223812,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Unprocessable Entity.
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity. The `data.id` of the request body does not match the `id` path parameter.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM application
@@ -224525,52 +224741,52 @@ paths:
   /api/v2/rum/events:
     get:
       description: |-
-        List endpoint returns events that match a RUM search query.
-        [Results are paginated][1].
+        Returns the RUM events that match a RUM search query within a time range. Use this endpoint to see your latest RUM events with a simple query. For long filters, use `SearchRUMEvents`. To compute counts, percentiles or timeseries, use `AggregateRUMEvents`.
 
-        Use this endpoint to see your latest RUM events.
+        The query follows the [RUM search syntax][2]. Without `filter[from]` and `filter[to]`, the last 15 minutes are searched.
+
+        [Results are paginated][1]: `page[limit]` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after` and `links.next`. Request `links.next`, or send `meta.page.after` as `page[cursor]` with the same other parameters, and repeat until they are absent.
 
         [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+        [2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: ListRUMEvents
       parameters:
-        - description: Search query following RUM syntax.
-          example: "@type:session @application_id:xxxx"
+        - description: Search query following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). Defaults to `*`.
+          example: "@type:session @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
           in: query
           name: filter[query]
           required: false
           schema:
             type: string
-        - description: Minimum timestamp for requested events.
-          example: "2019-01-02T09:42:36.320Z"
+        - description: Minimum time for requested events, inclusive. Accepts date math (for example `now-15m`), an ISO 8601 date, or a timestamp in milliseconds. Defaults to `now-15m`.
+          example: "now-1h"
           in: query
           name: filter[from]
           required: false
           schema:
-            format: date-time
             type: string
-        - description: Maximum timestamp for requested events.
-          example: "2019-01-03T09:42:36.320Z"
+        - description: Maximum time for requested events. Accepts the same formats as `filter[from]`. Defaults to `now`.
+          example: "now"
           in: query
           name: filter[to]
           required: false
           schema:
-            format: date-time
             type: string
-        - description: Order of events in results.
+        - description: Order of events in results, by event timestamp.
           in: query
           name: sort
           required: false
           schema:
             $ref: "#/components/schemas/RUMSort"
         - description: |-
-            List following results with a cursor provided in the previous query.
+            Cursor to get the next page of results, taken from `meta.page.after` or `links.next` of the previous response. Use it with the same other parameters.
           example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
           in: query
           name: page[cursor]
           required: false
           schema:
             type: string
-        - description: Maximum number of events in the response.
+        - description: Maximum number of events in the response. Between 1 and 1000.
           example: 25
           in: query
           name: page[limit]
@@ -224617,12 +224833,14 @@ paths:
   /api/v2/rum/events/search:
     post:
       description: |-
-        List endpoint returns RUM events that match a RUM search query.
-        [Results are paginated][1].
+        Returns the RUM events that match a RUM search query within a time range, as a list of individual events. Use this endpoint when the filter is too long for a query string, or to set `options`. To compute counts, percentiles or timeseries instead of reading events, use `AggregateRUMEvents`.
 
-        Use this endpoint to build complex RUM events filtering and search.
+        The query follows the [RUM search syntax][2]. `filter.from` and `filter.to` accept date math (`now-15m`), ISO 8601 dates and timestamps in milliseconds.
+
+        [Results are paginated][1]: `page.limit` is at most 1000 (default 10). When more results are available, the response contains `meta.page.after`. Send it as `page.cursor`, with the same `filter` and `sort`, to get the next page, and repeat until `meta.page.after` is absent.
 
         [1]: https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination
+        [2]: https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/
       operationId: SearchRUMEvents
       requestBody:
         content:
@@ -224640,6 +224858,16 @@ paths:
                     cursor: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
                     limit: 25
                   sort: timestamp
+              latest_errors:
+                summary: Newest errors of an application in the last hour
+                value:
+                  filter:
+                    from: now-1h
+                    query: "@type:error @application.id:abcd1234-0000-0000-abcd-1234abcd5678"
+                    to: now
+                  page:
+                    limit: 50
+                  sort: -timestamp
             schema:
               $ref: "#/components/schemas/RUMSearchEventsRequest"
         required: true
