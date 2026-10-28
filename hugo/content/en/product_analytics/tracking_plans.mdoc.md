@@ -28,8 +28,8 @@ Agentic Tracking Plans helps you plan, instrument, and measure tracking for a fe
 
 Each event and property in the plan includes a description, so your team knows what it measures.
 
-{% alert %}
-Agentic Tracking Plans consumes [AI Credits][4].
+{% alert level="info" %}
+For the most accurate tracking plan, connect the repository that contains your feature's code. Bits AI reads the code to learn how the feature is implemented, so its suggestions match the data your application can capture. Without the repository, Bits AI relies on your product brief and existing events, and may suggest events or properties that can't be effectively tracked in your code.
 {% /alert %}
 
 ## Use cases
@@ -55,9 +55,9 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 ## Prerequisites
 
 - Product Analytics enabled, with the RUM SDK instrumented in your application
-- AI products enabled for your organization in [{% ui %}Plan & Usage > AI Credits{% /ui %}][1]
+- AI products enabled for your organization in [{% ui %}Plan & Usage > AI Credits{% /ui %}][1]. Agentic Tracking Plans consumes [AI Credits][4].
 - The **Bits Chat Access** permission
-- (Optional) A [source code integration][2] for the repository that contains your RUM instrumentation, which Bits AI uses to understand how the feature works and suggest relevant events and properties
+- (Recommended) A [source code integration][2] for the repository that contains your feature's code and RUM instrumentation. Without it, Bits AI can't see how the feature is implemented, and may suggest events or properties that can't be effectively tracked in your code.
 - (Optional) The **Bits Code Write** permission, required only to instrument with Bits Code
 
 ## Create a tracking plan
@@ -80,7 +80,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 3. (Optional) Link the feature flag that controls the feature. The flag helps Bits AI find the relevant code faster and suggest more accurate tracking events. Click {% ui %}Add a flag{% /ui %}, then select a [Datadog feature flag][5] or a warehouse feature flag. If your flag is not listed, enter the flag name and select {% ui %}Manually Add Key{% /ui %}.
 
-4. (Optional, recommended) Link the repository that contains your RUM instrumentation. Bits AI can identify existing events without this step, but reading your code lets it understand how the feature works and tailor the suggested events and properties to your feature's logic. Linking the repository significantly improves the quality of your tracking plan.
+4. (Recommended) Link the repository that contains your feature's code and RUM instrumentation. Bits AI reads the code to understand how the feature works, then suggests events and properties that match your implementation. Without the repository, Bits AI can still identify existing events, but it may suggest events or properties that can't be effectively tracked in your code, which means more review and rework before you instrument. Link the repository at this step so that Bits AI has the full context from the first suggestion. Linking it later doesn't improve the plan unless you ask Bits AI to regenerate it.
 
 5. Click {% ui %}Continue{% /ui %}.
 {% /step %}
@@ -95,7 +95,7 @@ Bits AI proposes a list of questions based on your context. Treat this list as a
    - `Which invite method do people use most often, email or link?`
    - `Which plan types complete setup most often?`
 
-   Generating the first list of questions can take a few minutes, because Bits AI reads your codebase to understand the feature and check which data is already tracked. To find questions you may have missed, ask Bits AI in chat.
+   Generating the first list of questions can take a few minutes, because Bits AI reads your linked repository to understand the feature and check which data is already tracked. To find questions you may have missed, ask Bits AI in chat.
 
 2. Click {% ui %}Continue to Tracking Plan{% /ui %}.
 {% /step %}
@@ -107,23 +107,23 @@ Review the plan before you instrument anything:
 
 - Check that each event and property is needed to answer a question. Remove any you do not need.
 - Check that no proposed property collects personal data or other data you should not collect.
+- If you did not link a repository, confirm that each proposed event and property matches how the feature is implemented. If you link a repository later and ask Bits AI to regenerate the plan after you instrument, the new plan may not be compatible with the instrumentation you already added.
 - Edit names, descriptions, and properties directly in the table, or ask Bits AI in chat to make changes. You can keep using chat after the plan is generated to ask questions and fix problems.
 {% /step %}
 {% step title="Save, instrument, and verify" %}
-Click {% ui %}Save{% /ui %} to store your latest edits. Then choose how to add the missing events and properties.
+1. Click {% ui %}Save{% /ui %} to store your latest edits.
+2. Choose how to add the missing events and properties:
 
-**Note**: If your team has policies about AI-authored code changes, agree with your engineers on how Bits Code pull requests are reviewed before you choose {% ui %}Instrument with Bits Code{% /ui %}.
+    | Option | What happens | Best when |
+    |---|---|---|
+    | Instrument with Bits Code | Bits Code writes the instrumentation in your repository and opens a pull request for your team to review. It does not merge anything. | You have Bits Code enabled and your team is comfortable reviewing AI-authored pull requests. |
+    | Share with engineering | Share the link to the tracking plan, or create a Jira ticket that carries all of the context, so an engineer can pick it up. | You want engineers to own the implementation, or you do not have Bits Code. |
+    | Copy the instrumentation prompt | Copy a ready-made prompt into your own coding agent or IDE assistant. | Your team already uses a coding agent, or you cannot grant Datadog write access to your repository. |
 
-| Option | What happens | Best when |
-|---|---|---|
-| Instrument with Bits Code | Bits Code writes the instrumentation in your repository and opens a pull request for your team to review. It does not merge anything. | You have Bits Code enabled and your team is comfortable reviewing AI-authored pull requests. |
-| Share with engineering | Share the link to the tracking plan, or create a Jira ticket that carries all of the context, so an engineer can pick it up. | You want engineers to own the implementation, or you do not have Bits Code. |
-| Copy the instrumentation prompt | Copy a ready-made prompt into your own coding agent or IDE assistant. | Your team already uses a coding agent, or you cannot grant Datadog write access to your repository. |
+    **Note**: If your team has policies about AI-authored code changes, agree with your engineers on how Bits Code pull requests are reviewed before you choose {% ui %}Instrument with Bits Code{% /ui %}.
 
-After the instrumentation code is ready, deploy it and confirm that Product Analytics receives the new events:
-
-1. Your engineers review the pull request, request changes if needed, and merge and deploy it.
-2. After the code is live and users trigger the events, Product Analytics detects them. Check the latest status in the tracking plan to verify that Product Analytics receives the events.
+3. After the instrumentation code is ready, your engineers review it, request changes if needed, and merge and deploy it.
+4. After the code is live and users trigger the events, Product Analytics detects them. Check the latest status in the tracking plan to verify that Product Analytics receives the events.
 {% /step %}
 {% step title="Create a dashboard" %}
 Generate a dashboard that tracks the answers to the questions in your plan:
