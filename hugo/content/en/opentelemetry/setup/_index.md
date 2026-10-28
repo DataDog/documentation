@@ -62,7 +62,7 @@ To get started, see [Send OpenTelemetry data through the Datadog Agent][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/getting_started/
+[1]: /opentelemetry/getting_started/kubernetes/
 [2]: /opentelemetry/setup/ddot_collector/kubernetes/
 [3]: /opentelemetry/setup/collector_exporter/
 [4]: /opentelemetry/setup/otlp_ingest/

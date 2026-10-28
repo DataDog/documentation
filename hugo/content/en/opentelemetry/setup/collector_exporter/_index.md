@@ -37,7 +37,7 @@ further_reading:
 Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.154.0 and use an OTLP-based telemetry pipeline with the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Catalog and Service Page.
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
@@ -926,7 +926,7 @@ After your application sends telemetry to the Collector, verify that data appear
 
 ### Span metrics connector
 
-The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 

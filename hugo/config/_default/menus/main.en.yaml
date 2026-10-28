@@ -168,7 +168,7 @@ menu:
       weight: 16
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
-      url: opentelemetry/getting_started/
+      url: opentelemetry/getting_started/kubernetes/
       parent: getting_started
       weight: 17
     - name: Profiler
@@ -693,7 +693,7 @@ menu:
       parent: essentials_heading
       weight: 70000
     - name: Getting Started
-      url: /opentelemetry/getting_started/
+      url: /opentelemetry/getting_started/kubernetes/
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
@@ -777,11 +777,6 @@ menu:
       identifier: otel_otlp_receiver
       parent: otel-setup-collector-exporter
       weight: 40215
-    - name: Datadog Exporter
-      url: /opentelemetry/setup/collector_exporter/datadog_exporter/
-      identifier: otel-setup-datadog-exporter
-      parent: otel-setup-collector-exporter
-      weight: 40216
     - name: Direct OTLP Ingest
       url: /opentelemetry/setup/otlp_ingest
       identifier: otel-setup-intake-endpoint
@@ -827,7 +822,7 @@ menu:
       identifier: otel-setup-ddot-install
       parent: otel-setup-agent
       weight: 4042
-    - name: Use Custom OTel Components
+    - name: Custom Components in the Agent
       url: /opentelemetry/setup/ddot_collector/custom_components
       identifier: otel-setup-ddot-custom
       parent: otel-setup-agent

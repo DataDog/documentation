@@ -205081,7 +205081,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
     post:
       deprecated: true
       description: |-
@@ -205166,7 +205166,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
