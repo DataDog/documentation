@@ -139,6 +139,13 @@ Datadog can also ignore a selection and return the full flag configuration. In t
 | `malformed_selection` | The selection could not be parsed. |
 | `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
 
+The SDK logs these errors to the browser console:
+
+| Message | Cause |
+| --- | --- |
+| `Datadog Browser SDK: flagSelection was not sent (<REASON>: <LIMIT>). Loading the full flag configuration.` | The selection is malformed or exceeds a limit. |
+| `Datadog Browser SDK: flagSelection was ignored by the server (<REASON>). Loaded the full flag configuration.` | Datadog ignored the selection. See the reasons above. |
+
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][7] for the header your proxy must pass through.
 
 #### Evaluate flags outside the selection
