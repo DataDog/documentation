@@ -43,8 +43,9 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Connect to these data lake catalogs:" >}}
+{{< whatsnext desc="Connect to these data lake sources:" >}}
    {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}AWS Glue{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/amazon_athena" >}}Amazon Athena{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Connect to these transactional databases:" >}}
