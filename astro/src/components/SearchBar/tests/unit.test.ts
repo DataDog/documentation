@@ -36,6 +36,7 @@ import {
   type MultiSearchResponse,
 } from "@lib/search/typesense";
 import { HUGO_ORIGIN } from "@config/origins";
+import { getTypesenseConfig } from "@config/typesense";
 
 afterEach(() => {
   cleanup();
@@ -103,6 +104,27 @@ describe("SearchBar — hydration signal", () => {
       document.querySelector(".search-bar")!.getAttribute("data-hydrated"),
     ).toBe("true");
   });
+});
+
+describe("SearchBar — Typesense cluster", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  // `import.meta.env.PROD` is true for preview builds too, so it can't tell
+  // preview from live. The cluster follows the deploy environment instead.
+  it.each(["development", "preview", "live"] as const)(
+    "queries the %s cluster in a %s build",
+    async (siteEnv) => {
+      vi.stubEnv("PUBLIC_CI_ENV", siteEnv === "development" ? "" : siteEnv);
+      const user = userEvent.setup();
+      const search = makeSearch(basicFixture);
+      render(h(SearchBar as any, { search, labels }));
+      await typeAndWait(user, "dashboard");
+
+      expect(search.mock.calls[0][1]).toEqual(getTypesenseConfig(siteEnv));
+    },
+  );
 });
 
 describe("SearchBar — query renders results", () => {

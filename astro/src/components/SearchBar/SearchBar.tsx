@@ -11,6 +11,7 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { multiSearch } from "@lib/search/typesense";
 import { getTypesenseConfig, type TypesenseEnv } from "@config/typesense";
 import { HUGO_ORIGIN } from "@config/origins";
+import { resolveSiteEnv } from "@lib/site/siteEnv";
 import {
   CATEGORY_ORDER,
   groupHits,
@@ -39,7 +40,7 @@ export interface SearchBarLabels {
 interface Props {
   /**
    * Override Typesense config in tests. Production usage reads from the
-   * baked-in config via `getTypesenseConfig()`.
+   * baked-in config for the deploy environment via `getTypesenseConfig()`.
    */
   env?: TypesenseEnv;
   /**
@@ -67,7 +68,11 @@ export default function SearchBar({
   labels,
   variant = "default",
 }: Props) {
-  const config = useMemo(() => env ?? getTypesenseConfig(), [env]);
+  const config = useMemo(
+    () =>
+      env ?? getTypesenseConfig(resolveSiteEnv(import.meta.env.PUBLIC_CI_ENV)),
+    [env],
+  );
   const searchFn = search ?? multiSearch;
 
   const [query, setQuery] = useState("");

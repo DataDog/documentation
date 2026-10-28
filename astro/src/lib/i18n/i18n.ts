@@ -52,14 +52,9 @@ function mergeBundle(
   }
 }
 
-// TODO: websites-modules/i18n/es.yaml has duplicate top-level keys (cloud_security, ai) — remove uniqueKeys:false once fixed upstream.
-mergeBundle(
-  yamlModules,
-  (raw) => parseYaml(raw, { uniqueKeys: false }) as I18nTable,
-  {
-    override: false,
-  },
-);
+mergeBundle(yamlModules, (raw) => parseYaml(raw) as I18nTable, {
+  override: false,
+});
 mergeBundle(sharedModules, (raw) => JSON.parse(raw) as I18nTable, {
   override: true,
 });

@@ -9,8 +9,6 @@
 
 import { getCodeExampleMetas } from "./codeExampleLoader";
 
-// TODO(WEB-10413): these files live in the Hugo site. Move them when Hugo is
-// deprecated.
 const requestFiles: Record<string, string> = import.meta.glob(
   "@hugo-site/content/en/api/v*/*/request.*.json",
   { query: "?raw", import: "default", eager: true },

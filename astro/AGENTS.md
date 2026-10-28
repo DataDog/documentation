@@ -33,6 +33,12 @@ Site code should only import `hugo` files through the `@hugo-site` alias, so the
 
 A few build scripts and the [`websites-modules` lookup](src/lib/site/websitesModulesPath.ts) read from `hugo/` directly, since the alias cannot be used in those contexts.
 
+## Code duplicated from Hugo
+
+Some Astro code is a copy of code or config that Hugo still uses, such as telemetry credentials and helpers. Mark each copy with a `HUGO_DUPLICATE` comment that names the Hugo copy and says what must stay in sync. This makes the copies easy to find and remove when Hugo is deleted.
+
+When you change code marked `HUGO_DUPLICATE`, tell the user whether the Hugo copy needs the same change. Don't edit the Hugo copy without permission (see [Stay inside `astro/`](#stay-inside-astro-aside-from-the-listed-exceptions)).
+
 ## Future site scope
 
 This site will eventually have tens of thousands of pages, with most of them rendered using SSR (the API docs are an unusual exception since they're rendered statically). When designing solutions, keep this in mind, since many solutions are not performant at the scale of 30K+ pages being rendered.

@@ -6,9 +6,8 @@
  * `ensureRumDeviceId` reads before it generates: another site on the domain may
  * already have minted an ID for this device.
  *
- * TODO: `hugo/assets/scripts/components/dd-browser-logs-rum.js` holds an
- * equivalent copy of this logic; a change here probably belongs there too,
- * until that copy is deleted.
+ * HUGO_DUPLICATE: `hugo/assets/scripts/components/dd-browser-logs-rum.js` holds
+ * an equivalent copy of this logic; a change here probably belongs there too.
  */
 
 /** One year. */

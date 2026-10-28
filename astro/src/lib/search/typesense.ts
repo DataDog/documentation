@@ -47,16 +47,121 @@ export function flattenSearchResult(raw: any): TypesenseSearchResult {
 
 const HITS_PER_PAGE = 5;
 
-export async function multiSearch(
-  query: string,
-  env: TypesenseEnv,
-  signal?: AbortSignal,
-): Promise<MultiSearchResponse> {
-  // TODO: Verify this URL once we're closer to shipping,
-  // I'm not sure what `env.host` is in different envs
-  const url = `https://${env.host}.a1.typesense.net/multi_search?x-typesense-api-key=${encodeURIComponent(env.publicKey)}`;
+/**
+ * Failover policy, matching the `typesense` client defaults that Hugo's
+ * instantsearch adapter runs with: a node gets 5 seconds to respond, and a node
+ * that failed is skipped for a minute before it is tried again.
+ */
+const NODE_TIMEOUT_MS = 5_000;
+const UNHEALTHY_NODE_COOLDOWN_MS = 60_000;
 
-  const body = {
+/** Raised for a response that another node would also return, such as a 4xx. */
+class NonRetryableSearchError extends Error {}
+
+/**
+ * A Typesense Cloud cluster serves from a load-balanced primary host, with
+ * each underlying node reachable at a numbered host. Hugo lists the same four.
+ */
+function nodeHostsFor(clusterHost: string): string[] {
+  return [
+    `${clusterHost}.a1.typesense.net`,
+    `${clusterHost}-1.a1.typesense.net`,
+    `${clusterHost}-2.a1.typesense.net`,
+    `${clusterHost}-3.a1.typesense.net`,
+  ];
+}
+
+/**
+ * Returns a `multiSearch` with its own record of which nodes failed recently.
+ * The app shares one (`multiSearch`, below), so a node that is down costs one
+ * timeout per minute rather than one per keystroke. Tests create a fresh one
+ * per case.
+ */
+export function createMultiSearch() {
+  const failedAtByHost = new Map<string, number>();
+
+  /** Healthy nodes in order, or every node if none is healthy. */
+  function nodesToTry(env: TypesenseEnv): string[] {
+    const allHosts = nodeHostsFor(env.host);
+    const healthyHosts = allHosts.filter((host) => {
+      const failedAt = failedAtByHost.get(host);
+      return (
+        failedAt === undefined ||
+        Date.now() - failedAt >= UNHEALTHY_NODE_COOLDOWN_MS
+      );
+    });
+    return healthyHosts.length > 0 ? healthyHosts : allHosts;
+  }
+
+  return async function multiSearch(
+    query: string,
+    env: TypesenseEnv,
+    signal?: AbortSignal,
+  ): Promise<MultiSearchResponse> {
+    const body = JSON.stringify(buildMultiSearchBody(query, env));
+    let lastError: unknown;
+
+    for (const host of nodesToTry(env)) {
+      try {
+        const json = await postToNode(host, env.publicKey, body, signal);
+        failedAtByHost.delete(host);
+        return {
+          docs: flattenSearchResult(json.results[0]),
+          partners: flattenSearchResult(json.results[1]),
+        };
+      } catch (error) {
+        if (signal?.aborted || error instanceof NonRetryableSearchError) {
+          throw error;
+        }
+        failedAtByHost.set(host, Date.now());
+        lastError = error;
+      }
+    }
+
+    throw lastError;
+  };
+}
+
+export const multiSearch = createMultiSearch();
+
+/**
+ * One request to one node. Rejects on a network error, a 5xx, or no response
+ * within `NODE_TIMEOUT_MS`, all of which the next node might not repeat.
+ */
+async function postToNode(
+  host: string,
+  publicKey: string,
+  body: string,
+  callerSignal?: AbortSignal,
+): Promise<{ results: any[] }> {
+  const controller = new AbortController();
+  const abortFromCaller = () => controller.abort(callerSignal?.reason);
+  callerSignal?.addEventListener("abort", abortFromCaller);
+  const timer = setTimeout(() => controller.abort(), NODE_TIMEOUT_MS);
+
+  try {
+    const url = `https://${host}/multi_search?x-typesense-api-key=${encodeURIComponent(publicKey)}`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const message = `Typesense multi_search failed: ${res.status}`;
+      throw res.status >= 500
+        ? new Error(message)
+        : new NonRetryableSearchError(message);
+    }
+    return (await res.json()) as { results: any[] };
+  } finally {
+    clearTimeout(timer);
+    callerSignal?.removeEventListener("abort", abortFromCaller);
+  }
+}
+
+function buildMultiSearchBody(query: string, env: TypesenseEnv) {
+  return {
     searches: [
       {
         collection: env.docsIndex,
@@ -77,22 +182,5 @@ export async function multiSearch(
         per_page: HITS_PER_PAGE,
       },
     ],
-  };
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    signal,
-  });
-
-  if (!res.ok) {
-    throw new Error(`Typesense multi_search failed: ${res.status}`);
-  }
-
-  const json = (await res.json()) as { results: any[] };
-  return {
-    docs: flattenSearchResult(json.results[0]),
-    partners: flattenSearchResult(json.results[1]),
   };
 }
