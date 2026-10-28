@@ -5544,6 +5544,11 @@ menu:
       identifier: redshift
       parent: data_warehouses
       weight: 4000000
+    - name: ClickHouse Cloud
+      url: data_observability/quality_monitoring/data_warehouses/clickhouse
+      identifier: clickhouse_cloud_data_obs
+      parent: data_warehouses
+      weight: 5000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
