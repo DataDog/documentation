@@ -195,7 +195,9 @@ spec:
 
 Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
 
-2. Add an OTLP receiver and the Datadog exporter for all desired signals. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node:
+2. Add an OTLP receiver, the Datadog Connector, and the cluster-name processor, and define a pipeline for each signal. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node.
+
+The Datadog Connector computes APM trace metrics from your traces. Datadog needs these metrics to show your service's requests, errors, and latency. The `resource/add-cluster-name` processor adds `k8s.cluster.name` to all telemetry, which Datadog maps to the `kube_cluster_name` tag.
 
 {{< code-block lang="yaml" filename="node-collector.yaml" collapsible="true" >}}
 # [...]
@@ -219,22 +221,39 @@ spec:
             endpoint: 0.0.0.0:4317
           http:
             endpoint: 0.0.0.0:4318
+    processors:
+      infraattributes:
+        cardinality: 2
+      resource/add-cluster-name:
+        attributes:
+          - key: k8s.cluster.name
+            value: ${env:K8S_CLUSTER_NAME}
+            action: upsert
+    connectors:
+      datadog/connector:
+        traces:
+          compute_top_level_by_span_kind: true
+          peer_tags_aggregation: true
+          compute_stats_by_span_kind: true
     # [...]
     service:
       # [...]
       pipelines:
         logs:
           receivers: ['otlp']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog']
         metrics:
-          receivers: ['otlp']
+          receivers: ['otlp', 'datadog/connector']
+          processors: ['resource/add-cluster-name', 'infraattributes']
           exporters: ['datadog']
         traces:
           receivers: ['otlp']
-          exporters: ['datadog']
+          processors: ['resource/add-cluster-name', 'infraattributes']
+          exporters: ['datadog', 'datadog/connector']
 {{< /code-block >}}
 
-3. (Optional) Enable additional features:
+3. (Optional) Collect host and kubelet metrics, and add a health check:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -259,20 +278,6 @@ spec:
           - pod
           - container
           - volume
-    processors:
-      infraattributes:
-        cardinality: 2
-      resource/add-cluster-name:
-        attributes:
-          - key: k8s.cluster.name
-            value: ${env:K8S_CLUSTER_NAME}
-            action: upsert
-    connectors:
-      datadog/connector:
-        traces:
-          compute_top_level_by_span_kind: true
-          peer_tags_aggregation: true
-          compute_stats_by_span_kind: true
     extensions:
       health_check:
         endpoint: "${env:K8S_POD_IP}:13133"
@@ -281,17 +286,9 @@ spec:
       # [...]
       extensions: ['health_check']
       pipelines:
-        logs:
-          # [...]
-          processors: ['resource/add-cluster-name', 'infraattributes']
         metrics:
           receivers: ['host_metrics', 'otlp', 'kubelet_stats', 'datadog/connector']
-          processors: ['resource/add-cluster-name', 'infraattributes']
           # [...]
-        traces:
-          # [...]
-          processors: ['resource/add-cluster-name', 'infraattributes']
-          exporters: ['datadog', 'datadog/connector']
   env:
     # [...]
     - name: K8S_POD_IP
@@ -615,9 +612,9 @@ config:
         k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
 {{< /code-block >}}
 
-6. (Optional) Enable additional Datadog features:
+6. Add the Datadog Connector and the cluster-name processor to the pipelines.
 
-<div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
+The Datadog Connector computes APM trace metrics from your traces. Datadog needs these metrics to show your service's requests, errors, and latency. The `resource/add-cluster-name` processor adds `k8s.cluster.name` to all telemetry, which Datadog maps to the `kube_cluster_name` tag.
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
 config:
@@ -813,7 +810,7 @@ Complete these steps:
 
 ### Instrument the application
 
-Instrument your application [using the OpenTelemetry API][12].
+Instrument your application with an [OpenTelemetry SDK][12]. The SDK exports your application's telemetry over OTLP. [Configure the application](#configure-the-application) points that export at the Collector.
 
 {{% collapse-content title="Example application instrumented with the OpenTelemetry API" level="p" %}}
 As an example, you can use the [Calendar sample application][9] that's already instrumented for you. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
@@ -887,8 +884,8 @@ After your application sends telemetry, check for it in Datadog. Data can take u
 | Services | [Catalog][58]: set the environment to `<ENV>` and search for `<SERVICE>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][59]: search for `service:<SERVICE> env:<ENV>`. | Your service's traces. |
 | Hosts | [Host List][60] | Each node, as `<NODE_NAME>-<CLUSTER_NAME>`. With `DD_HOSTNAME` set as in the example configuration and no Datadog Agent on the node, each node appears one time. |
-| Metrics | [Metrics Explorer][61]: if your configuration collects kubelet metrics, as the example configuration does, graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}`. | Pod CPU usage for your cluster. |
-| Logs | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | Your service's logs. |
+| Metrics | [Metrics Explorer][61]: graph `avg:k8s.pod.cpu.usage{kube_cluster_name:<CLUSTER_NAME>}`. | If you turned on kubelet metrics (the `kubelet_stats` receiver or the `kubeletMetrics` preset): pod CPU usage for your cluster. |
+| Logs | [Log Explorer][62]: search for `service:<SERVICE> env:<ENV>`. | If your application sends logs over OTLP, or you turned on container log collection (the `filelog` receiver or the `logsCollection` preset): your service's logs. |
 
 ## Troubleshooting
 
@@ -992,7 +989,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [5]: https://kubernetes.io/docs/tasks/tools/#kubectl
 [9]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [10]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
-[12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[12]: /opentelemetry/instrument/otel_sdks/
 [14]: /getting_started/tagging/unified_service_tagging
 [52]: /getting_started/site/
 [54]: https://helm.sh
