@@ -70,6 +70,8 @@ export DD_AGENT_ENABLED=false
 export K8S_CLUSTER_TYPE=other
 export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
+export DD_HOST_PROFILER_ENABLED=false
+export DD_HOST_PROFILER_NETWORK_POLICY=none
 ```
 
 **Optional: install the Datadog Agent.** Some features need the Agent: **[Placeholder: features that need the Agent]**. To install it, set `DD_AGENT_ENABLED` to `true` before you run the installer:
@@ -90,6 +92,8 @@ export DD_INSTALL_FLOW=upstream
 export K8S_CLUSTER_TYPE=other
 export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
+export DD_HOST_PROFILER_ENABLED=false
+export DD_HOST_PROFILER_NETWORK_POLICY=none
 ```
 
 {{% /tab %}}
@@ -104,6 +108,10 @@ Replace the placeholders, and set `K8S_CLUSTER_TYPE` for your cluster:
 | `K8S_CLUSTER_TYPE` | `eks`, `gcp`, `aks`, or `other`. For `eks`, `gcp`, and `aks`, the Collectors detect the cluster name, so you can leave out `K8S_CLUSTER_NAME`. |
 | `K8S_CLUSTER_NAME` | Set it when `K8S_CLUSTER_TYPE` is `other`. A name for your cluster, in lowercase letters, numbers, and hyphens. Datadog shows it in Kubernetes Explorer and, with `other`, in each node's hostname. |
 | `DEPLOYMENT_ENVIRONMENT_NAME` | The `env` tag for all your data, such as `staging`, in lowercase letters, numbers, and hyphens. If you leave it out, the installer uses `production`. |
+| `DD_HOST_PROFILER_ENABLED` | `true` turns on the optional host profiler, described after this table. |
+| `DD_HOST_PROFILER_NETWORK_POLICY` | The host profiler's egress policy: `none`, `standard`, or `cilium`. Used only when the host profiler is on. |
+
+**Optional: turn on the host profiler.** **[Placeholder: host profiler name, release stage, and image]** The host profiler runs on every node and profiles every process on it. It works with both paths. It needs Linux nodes with kernel 5.10 or later and Kubernetes 1.30 or later, and its pods need more privileges than the Collectors. To turn it on, set `DD_HOST_PROFILER_ENABLED` to `true`. If your cluster blocks outgoing traffic by default with network policies, also set `DD_HOST_PROFILER_NETWORK_POLICY` to `standard`, or to `cilium` if your cluster uses Cilium, so the profiler can reach Datadog.
 
 ## 3. Run the installer
 
@@ -156,10 +164,11 @@ Data appears within a few minutes. In the following table:
 | Services | [Software Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. Traces can take about five minutes to appear. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
-| Hosts | [Host List][11] | Find your nodes and check their hostnames. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. If you installed the Datadog Agent, the list also shows each node by its node name, with `<NODE_NAME>-<CLUSTER_NAME>` as an alias. |
+| Hosts | [Host List][11] | Find your nodes and check their hostnames. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. With `eks`, `gcp`, or `aks`, hostnames come from your cloud provider. If you installed the Datadog Agent, the list also shows each node by its node name, with `<NODE_NAME>-<CLUSTER_NAME>` as an alias. |
 | Kubernetes | [Kubernetes Explorer][13]: filter by your cluster name. | Your pods, Deployments, and nodes. |
 | Metrics, DDOT path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `kube_cluster_name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
 | Metrics, Upstream path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `k8s.cluster.name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
+| Profiles, if you turned on the host profiler | **[Placeholder: where to find host profiles]** | Profiles from the processes on your nodes. |
 
 ## Troubleshooting
 
@@ -203,7 +212,7 @@ kubectl delete secret datadog-secret -n datadog
 
 ## Uninstall
 
-<div class="alert alert-warning">The uninstall script is for test clusters. It deletes cert-manager, the OpenTelemetry Operator's custom resource definitions and every resource that uses them, and the <code>cert-manager</code>, <code>opentelemetry-operator-system</code>, and <code>datadog</code> namespaces. That includes any Datadog Agent installed in the <code>datadog</code> namespace.</div>
+<div class="alert alert-warning">The uninstall script is for test clusters. It deletes cert-manager, the OpenTelemetry Operator's custom resource definitions and every resource that uses them, and the <code>cert-manager</code>, <code>opentelemetry-operator-system</code>, and <code>datadog</code> namespaces. That includes any Datadog Agent installed in the <code>datadog</code> namespace. If you installed the Datadog Agent, it also removes the Datadog Operator and its custom resource definitions, which deletes every Datadog Operator resource in the cluster, such as <code>DatadogAgent</code> resources.</div>
 
 1. Remove the annotation from your Deployment. Its pods restart without instrumentation:
 
@@ -235,7 +244,7 @@ kubectl delete secret datadog-secret -n datadog
 
 {{% collapse-content title="What the installer set up" level="h4" expanded=false %}}
 
-The installer uses Helm to install the [OpenTelemetry Kube Stack][7] chart. The Collectors' configuration comes from the values files in the installer's folder, such as `values-otlp-http.yaml` for the Upstream path.
+The installer uses Helm to install the [OpenTelemetry Kube Stack][7] chart. The Collectors' configuration comes from the values files in the installer's folder, such as `values-otlp-http.yaml` for the Upstream path. To change it, pass your own values file to the installer, such as `./install my-values.yaml`. The installer applies it on top of its own values files.
 
 | Component | Where | What it does |
 |---|---|---|
@@ -245,6 +254,7 @@ The installer uses Helm to install the [OpenTelemetry Kube Stack][7] chart. The 
 | `cluster` Collector | Deployment | Collects cluster-level metrics and Kubernetes objects. |
 | `daemon` Collector | DaemonSet | Runs on every node. Collects node metrics and container logs, and receives your application's telemetry. |
 | `opentelemetry-kube-stack` instrumentation settings | `Instrumentation` resource | Tells the Operator how to instrument annotated pods and where they send data. |
+| `host-profiler` Collector | DaemonSet | Installed only if you set `DD_HOST_PROFILER_ENABLED=true`. Profiles every process on its node. |
 | Datadog Operator and Datadog Agent (DDOT path only) | `datadog` namespace | Installed when `DD_AGENT_ENABLED` is `true`, the installer's default. |
 
 {{% /collapse-content %}}
