@@ -200,7 +200,7 @@ aws lakeformation grant-permissions \
 1. Select the AWS regions where your Glue Iceberg tables are located.
 2. Enable the {{< ui >}}Quality Monitoring{{< /ui >}} toggle.
 3. (Optional) Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle if you also want to monitor Glue job health and performance.
-4. Choose a sync frequency.
+4. Choose a {{< ui >}}Sync frequency{{< /ui >}}.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
