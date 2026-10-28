@@ -32,11 +32,11 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 Datadog GPU Monitoring provides observability for both on-premises and cloud devices within a single, unified view.
 
-This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
+This visualization provides a real-time breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
-The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
+The funnel also highlights any performance issues or provisioning inefficiencies such as idle or ineffective GPU devices and how they're trending monthly.
 
-{{< img src="gpu_monitoring/funnel-5.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices, Kubernetes allocation, and device allocation over time with a one-week forecast." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-6.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays fleet size by clusters, hosts, and devices; device counts for each funnel stage with month-over-month trends; and Kubernetes allocation." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
@@ -45,7 +45,7 @@ The steps of the funnel are defined as follows:
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-### Device allocation over time
+### Capacity forecasting
 
 AI workloads can experience unpredictable spikes in resource usage. As a result, it's important to align available GPUs with incoming workloads. This section helps you to identify if you're overallocating GPUs that end up sitting idle, or underprovisioning resources that stall critical jobs.
 
