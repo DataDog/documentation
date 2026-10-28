@@ -375,13 +375,13 @@ done | awk -F'\t' -v since="$SINCE" '
 
 To reduce clone time and disk usage, use `git clone --bare --filter=tree:0 <REPOSITORY_URL>`. This downloads commit history without file contents.
 
-This is an estimate. Your billed committer count can differ because:
+The command's result is an estimate. Your billed committer count can differ because:
 
 - Billing uses calendar months, not a rolling 30-day window.
-- **GitHub only**: if the Datadog GitHub App is installed on your repositories, multiple emails that belong to the same developer are counted once. The command cannot detect this, so your billed count can be lower than the estimate.
+- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once. The command can't detect this mapping, so your billed count can be lower than the estimate.
 - Each Code Security product counts committers separately, for the repositories where it is enabled.
 
-After you enable Code Security, you can track your actual committer count with the [estimated usage metrics][33].
+After you enable Code Security, you can track your month-to-date committer count for each product with the [estimated usage metrics][33].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
