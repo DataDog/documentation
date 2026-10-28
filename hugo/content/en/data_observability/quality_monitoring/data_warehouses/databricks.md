@@ -126,6 +126,8 @@ WHERE executed_by = '<application_id>'
 ORDER BY start_time DESC
 ```
 
+To see query text in `statement_text`, you must be an account admin or a member of the `databricks_pii_access` group. Otherwise, the column returns `<Redacted>`. For details, see [Step 3](#step-3---grant-access-to-query-text).
+
 ## Next steps
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.

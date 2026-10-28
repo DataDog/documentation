@@ -83,7 +83,7 @@ Quality Monitoring runs aggregate queries in your data warehouse, such as `COUNT
 
 [Custom SQL monitors][2] are the exception, because you control what the query returns:
 
-- The query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that don't match this format, such as `SELECT *`, fail validation and are not stored.
+- The query must return a value aliased as `dd_value`, and Datadog stores that value. Queries that return full rows, such as `SELECT *`, fail validation and are not stored.
 - If the query includes a `GROUP BY` clause, Datadog also stores the value of each grouped column. Each group is evaluated as a separate series.
 
 For example, the following query stores each distinct `region` value alongside its count:
@@ -95,7 +95,16 @@ WHERE status = 'FAILED'
 GROUP BY region
 ```
 
-<div class="alert alert-warning">If you group by a column that contains sensitive data, such as <code>email</code> or <code>user_id</code>, those values are sent to Datadog. Group only by non-sensitive columns, or mask sensitive columns in your warehouse so that Datadog reads masked values.</div>
+<div class="alert alert-warning">If you group by a column that contains sensitive data, such as <code>email</code> or <code>user_id</code>, those values are sent to Datadog. Group only by non-sensitive columns. If your warehouse supports column masking, you can also mask sensitive columns so that Datadog reads masked values.</div>
+
+Column masking support varies by warehouse:
+
+| Warehouse | Column masking |
+|---|---|
+| Databricks | [Unity Catalog column masks][3] |
+| Snowflake | [Masking policies][4] (requires Enterprise Edition or higher) |
+| BigQuery | [Data masking][5]. Grant the Datadog service account the Masked Reader role. |
+| Redshift | [Dynamic data masking][6] |
 
 ## Further reading
 
@@ -103,3 +112,7 @@ GROUP BY region
 
 [1]: /data_observability/lineage/
 [2]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
+[3]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
+[4]: https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
+[5]: https://cloud.google.com/bigquery/docs/column-data-masking-intro
+[6]: https://docs.aws.amazon.com/redshift/latest/dg/t_ddm.html
