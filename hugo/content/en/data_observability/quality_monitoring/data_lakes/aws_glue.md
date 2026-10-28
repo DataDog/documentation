@@ -34,7 +34,7 @@ Before you begin, make sure you have:
 
    {{< img src="data_observability/aws_glue/settings-configure-button.png" alt="AWS Glue configuration option in the Data Observability Settings page" style="width:100%;" >}}
 
-3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1].
+3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1]. Then, click {{< ui >}}Next{{< /ui >}}.
 
    {{< img src="data_observability/aws_glue/account-selection.png" alt="AWS account selection dropdown in the configuration flow" style="width:100%;" >}}
 
@@ -205,7 +205,7 @@ aws lakeformation grant-permissions \
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
 5. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#query-tables-with-amazon-athena).
-6. Click {{< ui >}}Save{{< /ui >}}.
+6. Click {{< ui >}}Add Account{{< /ui >}}.
 
 ## Query tables with Amazon Athena
 
@@ -272,7 +272,7 @@ If you use Lake Formation, the `SELECT` permission described in [Configure Lake 
 1. In the AWS Glue configuration, under {{< ui >}}Quality Monitoring{{< /ui >}}, enable the {{< ui >}}Enable Athena queries{{< /ui >}} toggle.
 2. Enter the {{< ui >}}Athena workgroup{{< /ui >}} that Datadog uses to run queries.
 3. (Optional) Enter an {{< ui >}}Athena result location{{< /ui >}}, such as `s3://example-bucket/athena-results/`. Use an S3 path when the workgroup does not manage query results.
-4. Click {{< ui >}}Save{{< /ui >}}.
+4. Click {{< ui >}}Add Account{{< /ui >}}, or {{< ui >}}Save{{< /ui >}} if you are editing an account that is already configured.
 
 This setting controls only the queries that Datadog runs to calculate metrics. To monitor the queries that your own users and pipelines run in Athena, see [Amazon Athena Query History][9].
 

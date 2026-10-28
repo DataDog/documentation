@@ -64,7 +64,7 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
 
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3].
 2. Click {{< ui >}}Configure{{< /ui >}} next to Amazon Athena.
-3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1].
+3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1]. Then, click {{< ui >}}Next{{< /ui >}}.
 4. Enable the {{< ui >}}Athena query history{{< /ui >}} toggle.
 5. Click {{< ui >}}Add AWS Region{{< /ui >}} and select a region.
 6. (Optional) Enter workgroup names to monitor in that region:
@@ -76,7 +76,7 @@ Attach the following policy to the Datadog IAM role configured for your AWS inte
 
    {{< img src="data_observability/amazon_athena/query-history-configuration.png" alt="Amazon Athena configuration with query history enabled, a region selected, and the required IAM permissions" style="width:100%;" >}}
 
-8. Click {{< ui >}}Save{{< /ui >}}.
+8. Click {{< ui >}}Add Account{{< /ui >}}.
 
 To stop monitoring a region, remove it from the configuration. To stop monitoring all regions, disable the {{< ui >}}Athena query history{{< /ui >}} toggle.
 
