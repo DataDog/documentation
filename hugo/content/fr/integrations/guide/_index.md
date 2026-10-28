@@ -1,4 +1,6 @@
 ---
+aliases:
+- /fr/integrations/guide/servicenow-service-graph-connector-setup/
 cascade:
   algolia:
     category: Guide

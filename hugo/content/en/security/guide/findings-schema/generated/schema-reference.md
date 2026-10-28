@@ -50,7 +50,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>finding_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>, <code>sensitive_data</code>, <code>code_quality</code>.</td>
+      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>, <code>sensitive_data</code>, <code>code_quality</code>, <code>security_testing</code>.</td>
     </tr>
     <tr>
       <td><code>first_seen_at</code></td>
