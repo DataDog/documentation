@@ -1017,3 +1017,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
 [86]: /getting_started/site/
+[87]: /containers/amazon_ecs/
