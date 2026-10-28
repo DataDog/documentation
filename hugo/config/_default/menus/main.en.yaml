@@ -6890,11 +6890,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_error_tracking
       weight: 102
-    - name: Logs
-      url: ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 103
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6910,16 +6905,11 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: Logs
-      url: ide_plugins/vscode/logs/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_logs
-      weight: 103
     - name: Exception Replay
       url: ide_plugins/vscode/exception_replay/
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_exception_replay
-      weight: 104
+      weight: 103
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
