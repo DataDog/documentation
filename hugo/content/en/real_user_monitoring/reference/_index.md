@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-This section contains reference documentation for Real User Monitoring, including SDK API references, performance impact, third-party library integrations, and troubleshooting.
+This section contains reference documentation for Real User Monitoring, including SDK API references, performance impact, external resources, and troubleshooting.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/reference/external_resources/" >}}

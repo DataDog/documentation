@@ -12,7 +12,7 @@ further_reading:
   - link: "/real_user_monitoring/application_monitoring/browser/optimizing_performance/"
     tag: "Documentation"
     text: "Optimizing performance"
-  - link: "/real_user_monitoring/operations_monitoring/"
+  - link: "/real_user_monitoring/track_critical_operations/"
     tag: "Documentation"
     text: "Operations Monitoring"
   - link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
@@ -99,7 +99,7 @@ Investigations started from RUM are standard Bits Investigations. You can:
 [2]: https://app.datadoghq.com/rum/optimization
 [3]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [4]: /source_code/
-[5]: /real_user_monitoring/operations_monitoring/
+[5]: /real_user_monitoring/track_critical_operations/
 [6]: https://app.datadoghq.com/bits-ai/investigations
 [7]: /bits_ai/bits_investigation/improve_accuracy/
 [8]: /bits_ai/bits_code/

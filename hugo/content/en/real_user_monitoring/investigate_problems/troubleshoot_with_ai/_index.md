@@ -11,7 +11,7 @@ further_reading:
   - link: "/bits_ai/bits_chat/"
     tag: "Documentation"
     text: "Bits Chat"
-  - link: "/real_user_monitoring/operations_monitoring/"
+  - link: "/real_user_monitoring/track_critical_operations/"
     tag: "Documentation"
     text: "Operations Monitoring"
 ---

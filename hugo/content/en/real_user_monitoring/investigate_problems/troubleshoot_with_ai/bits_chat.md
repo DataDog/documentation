@@ -11,7 +11,7 @@ further_reading:
   - link: "/bits_ai/bits_chat/"
     tag: "Documentation"
     text: "Bits Chat"
-  - link: "/real_user_monitoring/explorer/events/"
+  - link: "/real_user_monitoring/investigate_problems/explore_retained_data/events/"
     tag: "Documentation"
     text: "View event side panel"
 ---
@@ -63,7 +63,7 @@ You can ask Bits Chat about your frontend in plain language from any RUM page, a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /bits_ai/bits_chat/
-[2]: /real_user_monitoring/explorer/
+[2]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [3]: /session_replay/
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
 [5]: /real_user_monitoring/application_monitoring/browser/data_collected/#long-task-timing-attributes
