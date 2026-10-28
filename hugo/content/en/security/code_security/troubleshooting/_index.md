@@ -329,16 +329,18 @@ After the initial Git history scan, scans analyze only the latest commit and do 
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
-A committer is counted toward billing if they make **at least three commits in a calendar month**, counted across all repositories where Code Security is enabled. For example, two commits in one repository and one commit in another repository count as three commits. Each Code Security product counts committers separately, for the repositories where that product is enabled.
+A committer is counted toward billing if they make **at least three commits in a calendar month** across all repositories where Code Security is enabled. For example, two commits in one repository and one commit in another repository count as three commits.
+
+Each Code Security product (SAST, SCA, Secret Scanning, IaC Security) counts committers separately, using only commits in repositories where that product is enabled. For example, a developer makes two commits in a repository with SAST and SCA enabled and one commit in a repository with only SAST enabled. The developer counts as a SAST committer, but not as an SCA committer.
 
 Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
 ### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
 
-Commits finalized by known GitHub system accounts such as `noreply@github.com` and `actions@github.com` are not counted.
+Commits whose author email ends in `@users.noreply.github.com` are not counted when they are finalized by the GitHub system accounts `noreply@github.com` or `actions@github.com`. For example, a commit made in the GitHub web UI by a developer who hides their email is not counted.
 
-Commits using `@users.noreply.github.com` are not automatically excluded. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit can be attributed to an individual developer, it is counted.
+Other commits using `@users.noreply.github.com` are counted. These addresses are commonly used by developers who choose to hide their public email in GitHub.
 
 Commits whose author email uses a noreply address from a Git provider other than GitHub, such as `@users.noreply.gitlab.com`, are not counted.
 
@@ -355,31 +357,42 @@ If your committer count looks higher than expected for GitHub repositories, chec
 
 ### Estimating committers before enabling Code Security
 
-To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command reads your local clones, so it works for repositories hosted on any Git provider, including GitHub, GitLab, Azure DevOps, and Bitbucket. Some of the email exclusions it applies are specific to GitHub, as noted in the comments in the command. It counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
+Estimate your committer count before you enable Code Security to plan for committer-based billing. The estimation command counts Git author emails with at least three commits in the last 30 days, across all branches and repositories.
 
-Run this command in a Bash-compatible shell, such as Terminal on macOS or a Linux shell. On Windows, use Git Bash (included with Git for Windows) or Windows Subsystem for Linux (WSL). The command does not run in PowerShell or Command Prompt.
+The command applies the email exclusions described in [How email addresses are counted as committers](#how-email-addresses-are-counted-as-committers). Some exclusions apply only to GitHub, as noted in the command's comments. Because the estimate comes from local clones, the command works with any Git provider, including GitHub, GitLab, Azure DevOps, and Bitbucket.
 
-```bash
-SINCE=$(( $(date +%s) - 30*86400 ))
-for repo in */; do
-  git -C "$repo" log --all --format='%ct%x09%ae%x09%ce'
-done | awk -F'\t' -v since="$SINCE" '
-  $1 < since { next }
-  { a = tolower($2); c = tolower($3) }
-  # GitHub only: skip web UI commits by developers who hide their email
-  a ~ /@users\.noreply\.github\.com$/ && (c == "noreply@github.com" || c == "actions@github.com") { next }
-  # Other Git providers: skip noreply addresses, such as @users.noreply.gitlab.com
-  a ~ /@users\.noreply\./ && a !~ /@users\.noreply\.github\.com$/ { next }
-  { print a }' | sort | uniq -c | awk '$1 >= 3' | wc -l
-```
+The command requires a Bash-compatible shell, such as the default shell on macOS or Linux. On Windows, use Windows Subsystem for Linux or Git Bash, which is included with Git for Windows. The command does not run in PowerShell or Command Prompt.
 
-To reduce clone time and disk usage, use `git clone --bare --filter=tree:0 <REPOSITORY_URL>`. This downloads commit history without file contents.
+1. Clone each repository you plan to scan into the same parent directory. To reduce clone time and disk usage, use `git clone --bare --filter=tree:0 <REPOSITORY_URL>`. A bare, filtered clone downloads commit history without file contents.
+2. If you use existing clones, update them so the command reads recent commits on all branches:
+   - For a standard clone, run `git fetch --all`.
+   - For a bare clone, run `git fetch origin '+refs/heads/*:refs/heads/*'`. Running `git fetch --all` does not update the branches in a bare clone.
+3. From the parent directory, run the following command:
+
+    ```bash
+    SINCE=$(( $(date +%s) - 30*86400 ))
+    for repo in */; do
+      git -C "$repo" log --all --format='%ct%x09%ae%x09%ce'
+    done | awk -F'\t' -v since="$SINCE" '
+      $1 < since { next }
+      { a = tolower($2); c = tolower($3) }
+      # GitHub only: skip web UI commits by developers who hide their email
+      a ~ /@users\.noreply\.github\.com$/ && (c == "noreply@github.com" || c == "actions@github.com") { next }
+      # Other Git providers: skip noreply addresses, such as @users.noreply.gitlab.com
+      a ~ /@users\.noreply\./ && a !~ /@users\.noreply\.github\.com$/ { next }
+      { print a }' | sort | uniq -c | awk '$1 >= 3' | wc -l
+    ```
+
+    The command prints the estimated number of committers.
 
 The command's result is an estimate. Your billed committer count can differ because:
 
 - Billing uses calendar months, not a rolling 30-day window.
-- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once. The command can't detect this mapping, so your billed count can be lower than the estimate.
-- Each Code Security product counts committers separately, for the repositories where it is enabled.
+- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once. The command cannot detect this mapping, so your billed count can be lower than the estimate.
+- The command counts commits across all repositories in the directory. Billing applies the three-commit threshold separately for each Code Security product (SAST, SCA, Secret Scanning, IaC Security), using only the repositories where that product is enabled.
+- Billing counts a commit in the month that Datadog scans it. The command uses the commit date, so commits made near the start or end of a month can fall in a different period.
+
+To estimate committers for one product, run the command in a directory that contains only the repositories where you plan to enable that product.
 
 After you enable Code Security, you can track your month-to-date committer count for each product with the [estimated usage metrics][33].
 
