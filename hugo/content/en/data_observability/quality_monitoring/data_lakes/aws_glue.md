@@ -200,12 +200,13 @@ aws lakeformation grant-permissions \
 1. Select the AWS regions where your Glue Iceberg tables are located.
 2. Enable the {{< ui >}}Quality Monitoring{{< /ui >}} toggle.
 3. (Optional) Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle if you also want to monitor Glue job health and performance.
-4. Choose a {{< ui >}}Sync frequency{{< /ui >}}.
+4. (Optional) In {{< ui >}}Excluded namespaces{{< /ui >}}, enter the Glue databases that Datadog should not crawl.
+5. Choose a {{< ui >}}Sync frequency{{< /ui >}}.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-5. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#enable-athena-queries).
-6. Click {{< ui >}}Add Account{{< /ui >}}.
+6. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#enable-athena-queries).
+7. Click {{< ui >}}Add Account{{< /ui >}}.
 
 ## Query tables with Amazon Athena
 
