@@ -4,7 +4,7 @@ Path: `synthetics.attributes.result.steps`
 
 Access step data by index, name, or ID to reference specific steps in your notification messages. Use these reference methods when working with step-related variables throughout this documentation.
 
-Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
+Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.code`, `.failure.message`, `.request.method`, `.request.url`, `.response.cacheHeaders`, `.response.headers`, `.response.httpVersion`, `.response.bodySize`, `.response.body`, `.response.cdn`, `.response.statusCode`, `.code`, and `.url`.
 
 You can reference steps in three ways:
 

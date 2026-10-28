@@ -48,6 +48,8 @@ Use these versions or later with agentless delivery:
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
+| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
+| Ruby `datadog` | 2.46.0 |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
@@ -59,7 +61,7 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], or [Python][5] setup instructions.
+Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], [.NET][7], or [Ruby][8] setup instructions.
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
@@ -72,7 +74,7 @@ Set `DD_SITE` to your organization's Datadog site. For the site selected on this
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java does not limit attempts, while Node.js and Python cap values at 3600 seconds. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java and Ruby do not impose an upper limit on this interval. Node.js, Python, and .NET cap values at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:
@@ -132,6 +134,15 @@ For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 
+### Agent availability
+
+With Agent Remote Configuration, the SDK receives flag configuration from the Datadog Agent. The SDK also sends experiment exposure events through the Agent. Agent availability has these effects:
+
+- **Start the Agent before the application.** If the application starts before the Agent is available, restart the application after the Agent is available. Some SDKs can fail to load flag configuration, or to send experiment exposure events, after the Agent becomes available.
+- **Before the first configuration arrives, flag evaluations return the default values.**
+- **If the Agent stops after the SDK receives configuration, the SDK keeps the last configuration.** Flag evaluations continue to use this configuration.
+- **The SDK can lose exposure events while the Agent is not available.** Do not assume that the SDK sends these events after the Agent becomes available.
+
 ## Advanced configuration
 
 ### Enable or disable feature flags
@@ -172,3 +183,5 @@ Server Feature Flags billing is based on configuration requests made through Rem
 [4]: /feature_flags/server/java/
 [5]: /feature_flags/server/python/
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[7]: /feature_flags/server/dotnet/
+[8]: /feature_flags/server/ruby/

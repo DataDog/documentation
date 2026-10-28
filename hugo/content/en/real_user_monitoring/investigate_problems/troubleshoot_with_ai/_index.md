@@ -1,53 +1,54 @@
 ---
-title: Troubleshoot with AI
-description: "Datadog's agentic investigations bring structured, first-pass root-cause analysis directly into your RUM workflows."
+title: Bits in RUM
+description: "Use Bits Investigation and Bits Chat from RUM to optimize your application's performance, find the root cause of regressions, and ask questions about your frontend."
 aliases:
   - /real_user_monitoring/ai_investigations/
+  - /real_user_monitoring/bits_ai/
 further_reading:
-  - link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
+  - link: "/bits_ai/bits_investigation/"
     tag: "Documentation"
-    text: "Learn about the RUM Explorer"
+    text: "Bits Investigation"
+  - link: "/bits_ai/bits_chat/"
+    tag: "Documentation"
+    text: "Bits Chat"
+  - link: "/real_user_monitoring/operations_monitoring/"
+    tag: "Documentation"
+    text: "Operations Monitoring"
 ---
 
 ## Overview
 
-Investigating poor user experience in RUM typically means switching between session replays, error panels, traces, and performance timelines to piece together what went wrong. AI Investigations automate that first-pass triage. Datadog's RUM agent inspects the data attached to your views and surfaces ranked, categorized root-cause findings directly in your RUM workflow.
+Real User Monitoring (RUM) is integrated with [Bits AI][1]. You can start [Bits Investigations][2] from RUM, and use [Bits Chat][3] on any RUM page. RUM provides Bits with frontend-specific context, such as Core Web Vitals, view load timelines, operation health, and session-level signals. Bits correlates that context with the rest of your telemetry, including APM traces, logs, profiles, and source code, to identify root causes.
 
-This page lists the available investigation types.
+Because these investigations run on Bits Investigation, every investigation you start from RUM is saved in the [Bits Investigations list][4], can be shared with your team, takes your past feedback into account, and can be sent to [Bits Code][5] to generate a fix.
 
-## Single-view AI investigation
+You can use Bits in RUM in three ways:
 
-Run an agentic investigation on a single RUM view to investigate performance issues or identify optimization opportunities on that specific page or screen. Datadog's RUM agent inspects the view event and its sub-events to identify root causes from sources spanning the application, the backend, third-party libraries, and the user's network environment.
+| Use case | Description | Bits capability |
+|---|---|---|
+| [Optimize performance][6] | Get recommendations on potential issues affecting your application's performance, and start an investigation on any of them. | Bits Investigation |
+| [Investigate regressions and alerts][7] | Investigate anomalies on your performance metrics, or enable automatic investigations on alerting monitors. | Bits Investigation |
+| [Ask questions and get tasks done][8] | Ask questions on any RUM page, such as `Why is this view slow?` or `Which pages have the worst INP?`, and let Bits take action on your behalf. | Bits Chat |
 
-{{< img src="real_user_monitoring/ai_investigations/single-view-ai-investigation-overview.png" alt="A Single-View AI Investigation surfacing root cause findings for a RUM view." style="width:100%;" >}}
+## Prerequisites
 
-For more information, see [Single-View AI Investigation][1].
-
-## Multi-view AI investigation
-
-Run an agentic investigation across a sample of views that share a slow performance vital. Multi-View AI Investigation extends the same agentic analysis to a population of views, helping you identify what to fix when an entire (view × vital) pair is consistently slow across users. Available from the {{< ui >}}Optimization{{< /ui >}} page for {{< ui >}}Loading Time{{< /ui >}}, {{< ui >}}Largest Contentful Paint{{< /ui >}}, {{< ui >}}First Contentful Paint{{< /ui >}}, and {{< ui >}}Interaction to Next Paint{{< /ui >}}.
-
-{{< img src="real_user_monitoring/ai_investigations/multi-view-ai-investigation-recommendations.png" alt="The Optimization page for a performance vital, showing ranked recommendation cards with an Investigate button on each." style="width:100%;" >}}
-
-For more information, see [Multi-View AI Investigation][2].
-
-## Operation AI investigation
-
-Run an agentic investigation on a single operation in [Operations Monitoring][3]. The agent analyzes both the success rate and the latency of the operation, surfacing focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions.
-
-{{< img src="real_user_monitoring/ai_investigations/operation-ai-investigation-recommendations.png" alt="The Operations page for an operation, showing a plain-language health summary and ranked recommendation cards tagged with priority badges." style="width:100%;" >}}
-
-For more information, see [Operation AI Investigation][4].
-
-## Next step
-
-Continue to [Single-View AI Investigation](/real_user_monitoring/investigate_problems/troubleshoot_with_ai/single_view_ai_investigation/).
+- Bits AI must be enabled for your organization.
+- To start a Bits Investigation, you need the **Bits Investigations Write** permission. For more information, see [Configure Bits Investigation][9].
+- To get code-level findings, set up the [Source Code Integration][10] with GitHub.
+- To let Bits attribute frontend issues to backend services, [correlate RUM with APM traces][11].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/single_view_ai_investigation/
-[2]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/multi_view_ai_investigation/
-[3]: /real_user_monitoring/track_critical_operations/
-[4]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/operation_ai_investigation/
+[1]: /bits_ai/
+[2]: /bits_ai/bits_investigation/
+[3]: /bits_ai/bits_chat/
+[4]: https://app.datadoghq.com/bits-ai/investigations
+[5]: /bits_ai/bits_code/
+[6]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/optimize_performance/
+[7]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/investigate_regressions/
+[8]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/bits_chat/
+[9]: /bits_ai/bits_investigation/configure/
+[10]: /source_code/
+[11]: /real_user_monitoring/correlate_with_other_telemetry/apm/

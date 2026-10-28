@@ -6,14 +6,14 @@ code_lang: topology
 code_lang_weight: 0
 further_reading:
 - link: https://www.datadoghq.com/blog/visualize-network-device-topology/
-  tag: Blog
-  text: 장치 토폴로지 맵을 사용하여 온프레미스 네트워크 전반의 관계 시각화
+  tag: 블로그
+  text: Device Topology Map으로 온프레미스 네트워크 전반의 관계 시각화하기
 - link: /network_monitoring/devices/data
-  tag: Documentation
-  text: Network Device Monitoring으로 수집된 데이터
+  tag: 설명서
+  text: Network Device Monitoring과 함께 수집된 데이터
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-  tag: Blog
-  text: Datadog으로 SNMP 모니터링
+  tag: 블로그
+  text: Datadog으로 SNMP 모니터링하기
 title: 장치 토폴로지 맵
 type: multi-code-lang
 ---
@@ -29,88 +29,108 @@ Datadog Agent 버전 7.52 이상은 토폴로지 데이터를 자동으로 수�
 
 ### 전제 조건 {#prerequisites}
 
-1. 장치에 SNMP를 통해 LLDP(링크 레이어 검색 프로토콜) 및/또는 CDP(Cisco 검색 프로토콜)가 활성화되어 있습니다. 연결된 장치에서 동일한 프로토콜을 사용하여 서로를 검색할 수 있습니다. LLDP가 더 일반적인 옵션이므로 대개 선호됩니다.
+1. 장치에 SNMP를 통해 LLDP(Link Layer Discovery Protocol) 및/또는 CDP(Cisco Discovery Protocol)가 활성화되어 있습니다. 연결된 장치에서 동일한 프로토콜을 사용하여 서로를 검색할 수 있습니다. LLDP가 더 일반적인 옵션이므로 대개 선호됩니다.
 2. Datadog Agent 버전 7.52 이상이 설치되어 있습니다.
 
 ## 탐색 옵션 {#navigation-options}
 
 네트워크 토폴로지 맵에서는 다음과 같은 탐색 옵션을 사용할 수 있습니다.
 
-### 그룹 기준 {#group-by}
+### Group by {#group-by}
 
-그룹 기준에서 `location` 및 `vendor`와 같은 **태그**를 사용하여 다음과 같이 장치를 시각화하는 방법을 선택합니다.
+{{< ui >}}Group By{{< /ui >}} 아래에서 `location` 및 `vendor`와 같은 태그를 사용하여 장치를 시각화할 방법을 선택합니다.
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="그룹 기준은 위치 및 공급업체에 대한 태그 표시를 제어합니다." style="width:90%;" >}}
 
 ### 장치 필터링 {#filter-devices}
 
-**+ Filter** 드롭다운을 선택하여 장치 토폴로지 맵에 표시할 장치를 세분화합니다.
+{{< ui >}}\+ Filter{{< /ui >}} 드롭다운을 선택하여 장치 토폴로지 맵에 표시할 장치를 필터링합니다.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_3.png" alt="필터 드롭다운이 열려 있는 장치 토폴로지 맵입니다." style="width:90%;" >}}
 
-**참고:** **Filter Devices** 설정은 검색창에서 장치 패싯으로 필터링하는 쿼리를 포함하여 장치 토폴로지 맵에 표시되는 장치를 결정합니다.
+**참고:** {{< ui >}}Filter Devices{{< /ui >}} 설정은 검색창에서 장치 패싯으로 필터링하는 쿼리를 포함하여 장치 토폴로지 맵에 표시되는 장치를 결정합니다.
 
 ### 리소스 {#resources}
 
-방화벽, 액세스 포인트 및 라우터와 같은 특정 장치 유형으로 다이어그램을 필터링하려면 **Resource** 드롭다운을 사용하세요.
+{{< ui >}}Resource{{< /ui >}} 드롭다운을 사용하여 방화벽, 액세스 포인트 및 라우터와 같은 특정 장치 유형으로 다이어그램을 필터링합니다.
 
 {{< img src="/network_device_monitoring/network_topology_map/resources_dropdown.png" alt="Resources 드롭다운이 열려 있고 Unmonitored Device가 선택 해제된 장치 토폴로지 맵입니다." style="width:30%;" >}}
 
-기본적으로 **Unmonitored Device** 옵션은 선택 해제되어 있으며, Network Device Monitoring에 의해 직접 모니터링되지 않지만 인접한 모니터링된 장치에서 LLDP/CDP를 통해 발견된 장치를 숨깁니다. 이러한 모니터링되지 않는 장치를 다이어그램에 표시하려면 이 옵션을 선택하세요.
+기본적으로 {{< ui >}}Unmonitored Device{{< /ui >}} 옵션은 선택 해제되어 있으며, Network Device Monitoring에서 직접 모니터링되지는 않지만 인접한 모니터링 장치에서 LLDP/CDP를 통해 발견된 장치를 숨깁니다. 이 옵션을 선택하여 다이어그램에 모니터링되지 않은 장치를 표시합니다.
 
 ## 장치 조사 {#investigating-devices}
 
 장치 토폴로지 맵은 네트워크의 물리적 연결 개요를 보여주는 것 외에도 개별 장치를 조사하여 장치의 연결, 흐름 및 전반적인 상태를 이해할 수 있게 합니다. 장치 위로 마우스를 가져가면 장치의 상태와 주요 메트릭을 확인할 수 있으며, 장치를 클릭하면 IP 주소, 태그, 처리량, CPU 및 메모리와 같은 세부 정보가 포함된 NDM 장치 뷰가 열립니다.
 
-장치를 조사하는 동안 장치 뷰의 오른쪽 상단에 있는 **Open Device Page** 드롭다운을 클릭하여 [NetFlow Monitoring][1] 또는 더 상세한 조사를 위한 다른 관련 페이지로 이동합니다.
+장치를 조사하는 동안 장치 보기의 오른쪽 상단에 있는 {{< ui >}}Open Device Page{{< /ui >}} 드롭다운을 클릭하여 [NetFlow Monitoring][1] 또는 추가 조사를 위한 다른 관련 페이지로 이동합니다.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="장치가 선택된 네트워크 장치 토폴로지 맵으로, NDM 장치 뷰에 정보가 표시됩니다." style="width:100%;" >}}
 
 ### 종속성 {#dependencies}
 
-NDM 장치 뷰의 **Dependencies** 섹션에서는 물리적으로 연결된 장치와 VPN 터널의 수를 한눈에 확인할 수 있으며, 이웃 장치의 시각적 그래프도 포함됩니다.
+NDM 장치 보기의 {{< ui >}}Dependencies{{< /ui >}} 섹션에서는 물리적으로 연결된 네트워크 장치, 엔드포인트 및 VPN 터널의 수를 한눈에 확인할 수 있으며, 이웃 장치의 시각적 그래프도 포함됩니다.
 
-{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies.png" alt="연결된 장치의 그래프와 함께 Dependencies 섹션을 보여주는 NDM 장치 뷰입니다." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies_2.png" alt="연결된 장치의 그래프와 함께 종속성 섹션을 보여주는 NDM 장치 뷰" style="width:100%;" >}}
 
-전체 장치 페이지를 열려면 **View dependencies**를 클릭하세요. **Dependencies** 탭에서 **Physical** 또는 **VPN** 필터를 사용하여 물리적 연결과 VPN 터널 간에 전환합니다(VPN 종속성을 사용하려면 [VPN 모니터링][12]이 구성되어 있어야 함). 물리적 뷰에는 연결된 장치의 상태, 장치 이름, IP 주소, 모니터, 로컬 인터페이스 및 원격 인터페이스를 보여주는 표와 함께 토폴로지 그래프가 표시됩니다.
+{{< ui >}}View dependencies{{< /ui >}}를 클릭하여 전체 장치 페이지를 여세요. {{< ui >}}Dependencies{{< /ui >}} 탭에서 {{< ui >}}VPN tunnels{{< /ui >}}, {{< ui >}}Network devices{{< /ui >}} 또는 {{< ui >}}Endpoints{{< /ui >}} 옵션을 선택하여 종속성 보기 간에 전환하세요.
 
-{{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="상태, IP 주소 및 인터페이스 세부 정보가 포함된 연결된 장치의 표와 함께 토폴로지 그래프를 보여주는 물리적 필터가 선택된 NDM 장치 페이지의 Dependencies 탭입니다." style="width:100%;" >}}
+<div class="alert alert-info">
+VPN 종속성을 사용하려면 <a href="/network_monitoring/devices/vpn_monitoring/">VPN Monitoring</a>이 구성되어 있어야 합니다. 엔드포인트 종속성을 사용하려면 <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring(EUDM)</a>이 구성되어 있어야 합니다.
+</div>
+
+#### VPN 터널 {#vpn-tunnels}
+
+{{< ui >}}VPN tunnels{{< /ui >}} 보기에서는 피어 IP, 프로토콜, 인터페이스 및 목적지 서브넷을 보여주는 연결된 VPN 테이블과 함께 토폴로지 그래프를 표시합니다.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_VPN_tunnels.png" alt="VPN 터널 탭이 선택된 NDM 장치 페이지의 종속성 탭으로, 토폴로지 그래프와 연결된 VPN 테이블을 보여줍니다." style="width:100%;" >}}
+
+#### 네트워크 장치 {#network-devices}
+
+{{< ui >}}Network devices{{< /ui >}} 보기에서는 연결된 장치의 상태, 장치 이름, IP 주소, 모니터, 로컬 인터페이스 및 원격 인터페이스를 보여주는 표와 함께 토폴로지 그래프를 표시합니다.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_network_devices.png" alt="네트워크 장치 탭이 선택된 NDM 장치 페이지의 종속성 탭으로, 상태별로 색상이 지정된 11개의 연결된 장치가 있는 토폴로지 그래프와 연결된 장치에 대한 자세한 정보가 포함된 표를 보여줍니다." style="width:100%;" >}}
+
+#### 엔드포인트 {#endpoints}
+
+{{< ui >}}Endpoints{{< /ui >}} 보기에서는 최종 사용자 장치 및 상태 표와 함께 토폴로지 그래프를 표시합니다. 그래프에서 엔드포인트를 선택하여 자세한 내용을 확인하고 [EUDM][12]에서 해당 엔드포인트에 액세스하세요.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_endpoints.png" alt="엔드포인트 탭이 선택된 NDM 장치 페이지의 종속성 탭으로, 한 장치의 세부 정보 보기가 열려 있는 5개의 연결된 최종 사용자 장치가 있는 토폴로지 그래프와 연결된 장치에 대한 자세한 정보가 포함된 표를 보여줍니다." style="width:100%;" >}}
 
 ### 메트릭 {#metrics}
 
-CPU 사용량, 메모리 사용량 및 처리량을 포함한 장치의 주요 메트릭을 확인하려면 NDM 장치 뷰에서 **Metrics** 탭을 클릭하세요. 요약 통계는 상단에 표시되며, 각 메트릭은 시간에 따른 그래프로 표시됩니다. **View all metrics**를 클릭하여 수집된 메트릭의 전체 목록을 살펴볼 수 있습니다.
+NDM 장치 보기에서 {{< ui >}}Metrics{{< /ui >}} 탭을 클릭하여 CPU 사용량, 메모리 사용량 및 처리량을 포함한 장치의 주요 메트릭을 확인합니다. 요약 통계는 상단에 표시되며, 각 메트릭은 시간에 따른 그래프로 표시됩니다. 수집된 메트릭의 전체 목록을 살펴보려면 {{< ui >}}View all metrics{{< /ui >}}를 클릭하세요.
 
-{{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="CPU, 메모리 및 처리량 그래프가 표시된 Metrics 탭이 열려 있는 NDM 장치 뷰입니다." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="CPU, 메모리 및 처리량 그래프가 표시된 메트릭 탭이 열려 있는 NDM 장치 뷰" style="width:100%;" >}}
 
-### 트래픽 {#traffic}
+### Traffic {#traffic}
 
-장치의 전체, 인바운드 및 아웃바운드 처리량을 확인하려면 **Traffic** 탭을 클릭하세요. 트래픽 그래프는 시간에 따른 활동을 보여주며, **Top Conversations** 표는 비트 전송률, 패킷 전송률 및 총 바이트와 함께 가장 볼륨이 큰 소스에서 대상까지의 흐름을 나열합니다. 장치 요약 페이지와 [NetFlow Monitoring][1]에서 더 자세히 조사하려면 **View traffic**을 클릭하세요.
+{{< ui >}}Traffic{{< /ui >}} 탭을 클릭하여 장치의 총 처리량, 인바운드 처리량 및 아웃바운드 처리량을 확인하세요. 트래픽 그래프는 시간에 따른 활동을 보여주며, {{< ui >}}Top Conversations{{< /ui >}} 표는 비트 전송률, 패킷 전송률 및 총 바이트와 함께 볼륨이 가장 큰 소스-목적지 흐름을 나열합니다. {{< ui >}}View traffic{{< /ui >}}을 클릭하여 장치 요약 페이지 및 [NetFlow Monitoring][1]에서 추가로 조사하세요.
 
-{{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="처리량 통계, 트래픽 그래프 및 Top Conversations 표가 나와 있는 Traffic 탭이 열려 있는 NDM 장치 뷰입니다." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="처리량 통계, 트래픽 그래프 및 상위 대화 테이블이 표시된 트래픽 탭이 열려 있는 NDM 장치 뷰입니다." style="width:100%;" >}}
 
 ### 이벤트 {#events}
 
-Syslog 메시지와 SNMP 트랩을 단일 통합 뷰로 확인하려면 **Events** 탭을 클릭하세요. 필터를 사용하여 이벤트 유형별로 결과를 좁힐 수 있습니다. 이벤트 볼륨이 급증하면 시각적으로 강조 표시되어 오류를 식별하고 조사하는 데 도움이 됩니다.
+{{< ui >}}Events{{< /ui >}} 탭을 클릭하여 Syslog 메시지와 SNMP 트랩을 하나의 통합된 보기에서 확인하세요. 필터를 사용하여 이벤트 유형별로 결과를 좁힐 수 있습니다. 이벤트 볼륨이 급증하면 시각적으로 강조 표시되어 오류를 식별하고 조사하는 데 도움이 됩니다.
 
-{{< img src="/network_device_monitoring/network_topology_map/events.png" alt="Syslog 메시지와 SNMP 트랩이 표시된 Events 탭이 열려 있는 NDM 장치 뷰입니다." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/events.png" alt="Syslog 메시지와 SNMP 트랩이 표시된 이벤트 탭이 열려 있는 NDM 장치 뷰" style="width:100%;" >}}
 
 ### 흐름 세부 정보 보기 {#view-flow-details}
 
-장치의 트래픽 소스, 대상 및 볼륨을 살펴보려면 **Open Device Page** 드롭다운을 클릭하고 **NetFlow Monitoring**을 선택하세요. 데이터는 장치의 `@device.ip`에 따라 자동으로 필터링됩니다. 자세한 내용은 [NetFlow Monitoring][1]을 참조하세요.
+장치의 트래픽 소스, 목적지 및 볼륨을 살펴보려면 {{< ui >}}Open Device Page{{< /ui >}} 드롭다운을 클릭하고 {{< ui >}}NetFlow Monitoring{{< /ui >}}을 선택하세요. 데이터는 장치의 `@device.ip`에 따라 자동으로 필터링됩니다. 자세한 내용은 [NetFlow Monitoring][1]을 참조하세요.
 
-{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="NetFlow Monitoring 옵션이 표시된 Open Device Page 드롭다운이 있는 NDM 장치 뷰입니다." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="NetFlow Monitoring 옵션이 표시된 장치 페이지 열기 드롭다운이 있는 NDM 장치 뷰" style="width:100%;" >}}
 
 ### 장치 설정 {#device-settings}
 
-NDM 장치 뷰에서 **Device Settings** 아이콘을 클릭하여 Device Settings 패널을 엽니다. **Information** 탭에는 일반 세부 정보(이름, 네임스페이스 및 설명), 네트워크 세부 정보(IP 주소, 서브넷 및 지리적 위치), 하드웨어 세부 정보(모델, 공급업체, OS 및 버전)가 표시됩니다. **Tags** 탭에서는 장치와 관련된 태그를 보고 관리할 수 있습니다.
+NDM 장치 보기에서 {{< ui >}}Device Settings{{< /ui >}} 아이콘을 클릭하여 장치 설정 패널을 여세요. {{< ui >}}Information{{< /ui >}} 탭은 일반 세부 정보(이름, 네임스페이스 및 설명), 네트워크 세부 정보(IP 주소, 서브넷 및 지리적 위치), 하드웨어 세부 정보(모델, 공급업체, OS 및 버전)를 표시합니다. {{< ui >}}Tags{{< /ui >}} 탭에서는 장치와 관련된 태그를 조회하고 관리할 수 있습니다.
 
-{{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="NDM 장치의 Device Settings 패널로, 일반, 네트워크 및 하드웨어 세부 정보가 포함된 Information 탭을 보여줍니다." style="width:90%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="NDM 장치의 장치 설정 패널로, 일반, 네트워크 및 하드웨어 세부 정보가 포함된 정보 탭을 보여줍니다." style="width:90%;" >}}
 
 ### 링크 세부 정보 {#link-details}
 
-장치 간의 링크를 클릭하여 트래픽 볼륨, 대역폭 사용량, 오류 및 폐기와 같은 연결 세부 정보를 살펴보세요. [장치 개요][10] 또는 [NetFlow Monitoring][11]에서 데이터를 확인할 수 있는 옵션이 있습니다.
+장치 간의 링크를 클릭하여 트래픽 볼륨, 대역폭 사용량, 오류 및 폐기와 같은 연결 세부 정보를 살펴보고 [장치 개요][10] 또는 [NetFlow Monitoring][11]에서 데이터를 확인할 수 있는 옵션이 있습니다.
 
-{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="사용자가 추가 링크 세부 정보를 보기 위해 장치 간의 링크를 클릭합니다." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="추가 링크 세부 정보를 보기 위해 장치 간의 링크를 클릭하는 사용자" video="true" >}}
 
 ### 아이콘 범례 {#icon-legend}
 
@@ -153,7 +173,7 @@ SNMP 장치는 [장치 프로필][4]에 정의된 대로 각 장치 노드에서
 
 ## 문제 해결 {#troubleshooting}
 
-네트워크 토폴로지 맵 사용에 문제가 발생하는 경우 다음 문제 해결 지침을 따르세요. 추가 도움이 필요하면 [Datadog 지원팀][5]에 문의하세요.
+네트워크 토폴리지 맵 사용에 문제가 발생하는 경우 다음 문제 해결 지침을 따르세요. 추가 도움이 필요하면 [Datadog 지원팀][5]에 문의하세요.
 
 ### 빈 맵 메시지 {#empty-map-message}
 
@@ -165,8 +185,8 @@ NDM이 구성되지 않았기 때문에 장치가 없습니다.
 
 {{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="NDM이 구성되지 않았거나 필터링으로 인해 표시되는 장치를 찾을 수 없음 메시지입니다." style="width:80%;" >}}
 
-- 모니터링되지 않는 장치를 표시하려면 **Unmonitored Device** 선택 항목을 설정합니다.
-- 범주화 태그를 사용하면 정보 계층으로 구성된 맵 뷰를 파악하는 데 도움이 됩니다.
+- 모니터링되지 않는 장치를 표시하려면 {{< ui >}}Unmonitored Device{{< /ui >}} 선택 항목을 켜세요.
+- 범주화 태그를 사용하면 정보 계층 구조를 통해 맵 보기를 더 쉽게 이해할 수 있습니다.
 
 ### 누락된 장치/연결 {#missing-devicesconnections}
 
@@ -175,35 +195,35 @@ NDM이 구성되지 않았기 때문에 장치가 없습니다.
 - Datadog Agent 버전 7.52 이상이 설치되어 있습니다.
 - 장치에 SNMP를 통해 LLDP 및/또는 CDP가 활성화되어 있습니다.
 
-다음 명령을 사용하여 장치가 LLDP 및 CDP 데이터를 노출하는지 확인하세요.
+다음 명령을 사용하여 디바이스가 LLDP 및 CDP 데이터를 노출하는지 확인하세요.
 
-LLDP 데이터의 경우:
+LLDP 데이터의 경우 다음 명령을 사용하세요.
 
 ```yaml
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.0.8802
 ```
-CDP 데이터의 경우:
+CDP 데이터의 경우 다음 명령을 사용하세요.
 ```yaml:
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 ```
 
 ### 누락된 연결 또는 링크 {#missing-connections-or-links}
 
-장치가 LLDP 또는 CDP로 토폴로지 데이터를 노출하고 있지만 일부 연결이 누락된 경우 **Unmonitored Device** 선택 항목이 해제되어 있는지 확인하세요.
+장치가 LLDP 또는 CDP로 토폴로지 데이터를 노출하고 있지만 일부 연결이 누락된 경우 {{< ui >}}Unmonitored Device{{< /ui >}} 선택 항목이 해제되어 있는지 확인하세요.
 
 ### 맵에 표시되는 모니터링되지 않는 장치 {#unmonitored-devices-showing-on-map}
 
-장치 토폴로지 맵에는 LLDP 또는 CDP로 검색된 모든 장치가 표시됩니다. 여기에는 아직 SNMP로 모니터링되지 않는 새 장치나, 동등하게 모니터링되는 장치에 대해 아직 [확인](#device-resolution)되지 않은 기존 장치가 포함될 수 있습니다.
-**Unmonitored Device** 선택 항목으로 해당 노드를 숨길 수 있습니다.
+장치 토폴로지 맵에는 LLDP 또는 CDP로 검색된 모든 장치가 표시됩니다. 여기에는 아직 SNMP로 모니터링되지 않는 새 장치나 해당하는 모니터링 장치로 [확인](#device-resolution)되지 않은 기존 장치가 포함될 수 있습니다.
+{{< ui >}}Unmonitored Device{{< /ui >}} 선택 항목으로 해당 노드를 숨길 수 있습니다.
 
-### 맵의 중복 장치 {#device-duplicated-on-map}
+### 맵에 중복 표시되는 장치 {#device-duplicated-on-map}
 
-장치 토폴로지 맵에는 LLDP 및/또는 CDP로 검색된 모든 장치가 표시됩니다. 이러한 장치가 이미 SNMP로 모니터링되고 있으나 동등하게 모니터링되는 장치로 [확인](#device-resolution)할 수 없는 경우도 있습니다. 이 경우 장치는 모니터링되는 장치를 나타내는 노드 1개와 LLDP/CDP로 검색된 장치를 나타내는 노드 1개로 두 번 표시됩니다.
-모니터링되지 않는 노드를 숨기려면 **Unmonitored Device** 선택 항목을 사용합니다.
+LLDP 및/또는 CDP로 검색된 모든 장치가 표시된 디바이스 토폴로지 맵 이러한 장치가 이미 SNMP로 모니터링되고 있지만 해당하는 모니터링 장치로 [확인](#device-resolution)할 수 없는 경우도 있습니다. 이 경우 장치는 모니터링되는 장치를 나타내는 노드 1개와 LLDP/CDP로 검색된 장치를 나타내는 노드 1개로 두 번 표시됩니다.
+{{< ui >}}Unmonitored Device{{< /ui >}} 선택 항목을 사용하여 모니터링되지 않는 노드를 숨기세요.
 
-### 맵의 보더리스 또는 블랙 노드 {#borderless-or-black-nodes-on-the-map}
+### 맵의 테두리가 없거나 검은색인 노드 {#borderless-or-black-nodes-on-the-map}
 
-장치 토폴로지 맵의 보더리스 또는 블랙 노드는 NDM으로 모니터링하도록 구성되지 않은 LLDP 또는 CDP로 검색된 장치나 동등하게 [모니터링되는 장치](#device-resolution)로 확인할 수 없는 LLDP 또는 CDP로 검색된 장치를 나타낼 수 있습니다.
+장치 토폴로지 맵의 테두리가 없거나 검은색인 노드는 NDM으로 모니터링하도록 구성되지 않은, LLDP 또는 CDP로 검색된 장치나 해당하는 [모니터링 장치](#device-resolution)로 확인할 수 없는, LLDP 또는 CDP로 검색된 장치를 나타낼 수 있습니다.
 
 ## 장치 확인 {#device-resolution}
 
@@ -218,11 +238,11 @@ LLDP 또는 CDP로 검색된 연결은 이미 SNMP로 모니터링되는 장치�
 
 NDM은 인프라를 모니터링하기 위한 여러 시각화 도구를 제공합니다.
 
-- **[Device Geomap][9]**: 지역 문제 및 커버리지 격차를 파악하기 위해 위치별 장치의 지리적 분포를 확인합니다.
-- **[Device Overview][10]**: 개별 장치에 대한 상세한 메트릭 및 성능 데이터를 확인합니다.
+- **[장치 지오맵][9]**: 위치별 장치의 지리적 분포를 확인하여 지역 문제 및 커버리지 격차를 파악합니다.
+- **[장치 개요][10]**: 개별 장치의 상세한 메트릭 및 성능 데이터를 확인합니다.
 - **[NetFlow Monitoring][1]**: 네트워크 전반의 트래픽 흐름 및 대역폭 활용도를 분석합니다.
 
-## 참고 자료 {#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -237,4 +257,4 @@ NDM은 인프라를 모니터링하기 위한 여러 시각화 도구를 제공�
 [9]: /ko/network_monitoring/devices/geomap
 [10]: https://app.datadoghq.com/devices
 [11]: https://app.datadoghq.com/devices/netflow
-[12]: /ko/network_monitoring/devices/vpn_monitoring/
+[12]: /ko/infrastructure/end_user_device_monitoring/

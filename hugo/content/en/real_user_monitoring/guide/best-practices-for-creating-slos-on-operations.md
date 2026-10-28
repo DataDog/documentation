@@ -14,6 +14,12 @@ further_reading:
 - link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Journey Monitoring'
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up RUM operations'
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

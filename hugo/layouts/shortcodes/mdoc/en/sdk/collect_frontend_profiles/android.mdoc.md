@@ -14,7 +14,7 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 
 - Application launch profiling requires Android SDK version 3.6.0+.
 - Continuous profiling requires Android SDK version 3.12.0+.
-- [RUM without Limits][2] must be enabled in your organization.
+- ANR profiling with system traces requires Android SDK version 3.15.0+ and devices running Android 16 (API level 36) or higher.
 
 ### Setup
 
@@ -67,7 +67,31 @@ If no value is specified, the default for both `setApplicationLaunchSampleRate` 
 The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate` or `continuousSampleRate`. This variation results from [rate limitations][6] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
 {% /alert %}
 
-The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
+The [ProfilingManager API][7] also supports disabling rate limiting during debug builds.
+
+#### Step 3 - (Optional) Disable ANR profiling with system traces
+
+On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][2]. When the system detects an ANR in your application, it captures a [system trace][10] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
+
+ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][5].
+
+System traces help diagnose ANRs, which are usually caused by thread contention, blocking I/O, or interprocess communication (IPC) delays rather than CPU-heavy computation. A system trace shows thread states and system-level events over time, which surfaces these causes.
+
+To disable ANR profiling with system traces, add `enableAnrTrigger(false)` to the `ProfilingConfiguration.Builder()` call from Step 2:
+
+```kotlin
+  Profiling.enable(
+      ProfilingConfiguration.Builder()
+          .setApplicationLaunchSampleRate(15f)
+          .setContinuousSampleRate(15f)
+          .enableAnrTrigger(false)
+          .build()
+  )
+```
+
+{% alert level="info" %}
+The system applies its own [rate limits][6] to trigger-based profiling, so not every ANR has a system trace attached.
+{% /alert %}
 
 ### Explore profiling data
 
@@ -87,7 +111,9 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 Android profiling data is attached to [application not responding (ANR)][9] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
-{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
+{% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
+
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces).
 
 #### During long tasks
 
@@ -102,7 +128,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 {% img src="real_user_monitoring/android/android-profiling-operation.png" alt="Android profiling data for an operation." style="width:90%;" /%}
 
 [1]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/
+[2]: https://developer.android.com/topic/performance/tracing/profiling-manager/trigger-based-capture
 [3]: /real_user_monitoring/application_monitoring/android
 [4]: /real_user_monitoring/track_critical_operations/?tab=browser
 [5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android
@@ -110,3 +136,4 @@ Android profiling data is attached to operations events in a RUM session. You ca
 [7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
 [8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
 [9]: /real_user_monitoring/setup/data_collected/?platform=android#error-attributes
+[10]: https://developer.android.com/topic/performance/tracing

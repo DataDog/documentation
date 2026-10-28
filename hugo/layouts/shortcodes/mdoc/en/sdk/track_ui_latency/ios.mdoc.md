@@ -108,3 +108,22 @@ The following telemetry provides insight into your application's performance, in
 | Hang rate | As defined by Apple, the hang rate of an application corresponds to "the number of seconds per hour that the app is unresponsive, while only counting periods of unresponsiveness of more than 250 ms." To compute the hang rate of your application on Datadog, enable [app hang reporting](/error_tracking/frontend/mobile/ios/?tab=cocoapods#add-app-hang-reporting) and follow the [dedicated section](/error_tracking/frontend/mobile/ios/?tab=cocoapods#compute-the-hang-rate-of-your-application). |
 | CPU ticks per second | High CPU usage impacts the [battery life](https://developer.apple.com/documentation/xcode/analyzing-your-app-s-battery-use/) on your users' devices. RUM tracks CPU ticks per second for each view and the CPU utilization over the course of a session. The recommended range is <40 for good and <60 for moderate. |
 | Memory utilization | High memory usage can lead to [watchdog terminations](/error_tracking/frontend/mobile/ios/?tab=cocoapods#add-watchdog-terminations-reporting), which causes a poor user experience. RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. |
+
+## Performance timeseries
+
+{% callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" header="Join the Preview!" btn_hidden=false %}
+Performance timeseries is in Preview, and collection is off by default. To enable it, join the Preview. Datadog sends setup instructions to participating customers.
+{% /callout %}
+
+Performance timeseries is available on the iOS and Android SDKs.
+
+Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels](/real_user_monitoring/investigate_problems/explore_retained_data/events/#performance-timeseries).
+
+{% img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" /%}
+
+After collection is enabled, timeseries are captured for all sessions.
+
+Two series are collected:
+
+- **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection](/real_user_monitoring/setup/data_collected/?platform=ios#view-memory-collection).

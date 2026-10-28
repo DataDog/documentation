@@ -274,6 +274,28 @@ spec:
      shareProcessNamespace: true
 ```
 
+Replace the following placeholders in the manifest with your own values:
+
+- `<APPLICATION_NAME>`
+- `<POD_NAME>`
+- `<YOUR_APP_NAME>`
+- `<YOUR_APP_IMAGE>`
+- `<ENTRYPOINT>`
+- `<DD_API_KEY>`
+- `<CLUSTER_NAME>`
+
+To find the entry point of your workload, run the following command:
+
+```shell
+docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Entrypoint}}'
+```
+
+To find the default command of your workload, run the following command:
+
+```shell
+docker inspect <YOUR_APP_IMAGE> -f '{{json .Config.Cmd}}'
+```
+
 [6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 
 {{% /tab %}}

@@ -143,3 +143,4 @@
 /*/real_user_monitoring/setup/enable_rum/track_background_events.md
 /*/real_user_monitoring/enrich_rum_data/enable_geoip_enrichment.md
 /*/real_user_monitoring/enrich_rum_data/track_feature_flags.md
+/*/serverless/azure_container_apps/otel_managed_agent/_index.md

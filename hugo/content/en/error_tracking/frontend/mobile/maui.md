@@ -44,11 +44,9 @@ To enable native crash reporting, set `NativeCrashReportEnabled = true` on the S
 })
 ```
 
-{% alert level="info" %}
-When `NativeCrashReportEnabled = true`, an unhandled C# exception that crashes the application is reported **twice**: once as a C# error captured by `AppDomain.UnhandledException`, and once as a native iOS or Android crash captured by the platform's crash reporter. Both events share the same RUM session and view, so you can correlate them in the Explorer.
-
-If you want to keep only one of the two, use [`ErrorEventMapper`][5] to drop whichever copy doesn't fit your workflow (for example, filter by `Source` or `Stacktrace` content).
-{% /alert %}
+<div class="alert alert-info">
+When <code>NativeCrashReportEnabled = true</code>, an unhandled C# exception that crashes the application is reported <strong>twice</strong>. One report is a C# error captured by <code>AppDomain.UnhandledException</code>. The other is a native iOS or Android crash captured by the platform's crash reporter. Both events share the same RUM session and view, so you can correlate them in the Explorer.<br><br>To keep only one of the two, use <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> to drop the copy that doesn't fit your workflow. For example, filter by <code>Source</code> or <code>Stacktrace</code> content.
+</div>
 
 ## Setup
 
@@ -201,4 +199,3 @@ Symbols take up to 5 minutes to process. Check [{{< ui >}}Error Tracking{{< /ui 
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/setup/install/?platform=maui
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=maui#modify-rum-events

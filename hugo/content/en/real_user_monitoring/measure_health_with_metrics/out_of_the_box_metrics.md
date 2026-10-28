@@ -25,7 +25,7 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 
 **Notes**:
 - The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
-- All queries for the below metrics include `@session.type:user`.
+- All queries for the below metrics include `@session.type:user`, except the `rum.measure.lighthouse.*` metrics, which come from browser Synthetic test audits rather than real-user sessions. See [Lighthouse audits][5].
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
 | Metric Name | Description | Dimensions | Platform |
@@ -36,6 +36,11 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
 | `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
+| `rum.measure.lighthouse.performance` | Lighthouse Performance category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.accessibility` | Lighthouse Accessibility category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.best_practices` | Lighthouse Best Practices category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.seo` | Lighthouse SEO category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.lighthouse.agentic` | Lighthouse Agentic category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
 | `rum.measure.session.action` | Count of actions | Default | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
@@ -87,3 +92,4 @@ If you need performance metrics beyond the ones listed above, [create custom met
 [1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
 [3]: /real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/
+[5]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/#lighthouse-audits

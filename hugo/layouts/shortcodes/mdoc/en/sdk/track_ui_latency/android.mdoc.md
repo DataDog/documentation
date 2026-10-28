@@ -157,3 +157,22 @@ The following telemetry provides insight into your application's performance, in
 | Crash-free sessions by version | An [application crash](https://developer.android.com/topic/performance/vitals/crash) is reported due to an unexpected exit in the application, typically caused by an unhandled exception or signal. RUM tracks complete crash reports and presents trends over time with [Error Tracking](/real_user_monitoring/setup/enable_rum/track_errors/?platform=android). |
 | CPU ticks per second | High CPU usage impacts the [battery life](https://developer.android.com/topic/performance/power) on your users' devices. RUM tracks CPU ticks per second for each view and the CPU utilization over the course of a session. The recommended range is <40 for good and <60 for moderate. |
 | Memory utilization | High memory usage can lead to [OutOfMemoryError](https://developer.android.com/reference/java/lang/OutOfMemoryError), which causes the application to crash. RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. |
+
+## Performance timeseries
+
+{% callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" header="Join the Preview!" btn_hidden=false %}
+Performance timeseries is in Preview, and collection is off by default. To enable it, join the Preview. Datadog sends setup instructions to participating customers.
+{% /callout %}
+
+Performance timeseries is available on the iOS and Android SDKs.
+
+Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels](/real_user_monitoring/investigate_problems/explore_retained_data/events/#performance-timeseries).
+
+{% img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" /%}
+
+After collection is enabled, timeseries are captured for all sessions.
+
+Two series are collected:
+
+- **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection](/real_user_monitoring/setup/data_collected/?platform=android#view-memory-collection).

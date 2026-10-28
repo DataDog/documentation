@@ -25,7 +25,7 @@ After Datadog retains your RUM sessions, explore them in the RUM Explorer, triag
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/troubleshoot_with_ai/" >}}
     <h3>Troubleshoot with AI</h3>
-    Use agentic AI investigations for structured, first-pass root-cause analysis in your RUM workflows.
+    Use Bits AI to optimize performance, investigate regressions, and ask questions about your RUM data.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
