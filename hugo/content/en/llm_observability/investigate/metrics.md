@@ -30,7 +30,7 @@ They are distinct from two other things in Agent Observability:
 </ul>
 </div>
 
-<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics. The exception is LLM token and cost metrics: you can promote selected span tags to these metrics with the Agent Observability SDK. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a>.</div>
+<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics, except LLM token and cost metric tags. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
 ### Span metrics
 
