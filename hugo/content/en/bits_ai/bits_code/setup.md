@@ -88,6 +88,13 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
 [105]: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions
 {{% /tab %}}
 
+{{% tab "Bitbucket" %}}
+1. Install the [Bitbucket Cloud Source Code integration][101]. For full installation and configuration steps, see the [Bitbucket Cloud Source Code integration guide][102].
+
+[101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+[102]: /integrations/bitbucket-source-code/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 2. (Optional) If you're planning to use [Slack code channels][13]:

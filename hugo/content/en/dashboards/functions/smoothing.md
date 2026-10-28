@@ -134,7 +134,7 @@ Note: The span value is the number of data points. So `median_7()` uses the last
 Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
 ## Weighted 
-<div class="alert alert-info">Weighted() is only available when querying `SUM BY` on gauge type metrics.</div> 
+<div class="alert alert-info">Weighted() is only available when querying <code>SUM BY</code> on gauge type metrics.</div> 
 
 | Function       | Description                                                           | Example                        |
 | :----          | :-------                                                              | :---------                     |

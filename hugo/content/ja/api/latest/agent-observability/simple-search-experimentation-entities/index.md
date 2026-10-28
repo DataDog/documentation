@@ -1,3 +1,3 @@
 ---
-title: シンプル検索の実験用エンティティ
+title: Experimentation エンティティの簡易検索
 ---

@@ -550,6 +550,11 @@ menu:
       url: agent/configuration/secrets-management/
       parent: agent_configuration
       weight: 609
+    - name: Infrastructure Modes
+      identifier: agent_configuration_infrastructure_modes
+      url: agent/configuration/infrastructure-modes/
+      parent: agent_configuration
+      weight: 610
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation
@@ -2612,6 +2617,11 @@ menu:
       identifier: string_builder_processor
       parent: overview
       weight: 210
+    - name: VRL Processor
+      url: events/pipelines_and_processors/vrl_processor
+      identifier: vrl_processor
+      parent: overview
+      weight: 211
     - name: Explorer
       url: events/explorer/
       identifier: events_explorer
@@ -2909,6 +2919,11 @@ menu:
       parent: oncall
       identifier: oncall_integrations
       weight: 8
+    - name: ServiceNow
+      url: incident_response/on-call/integrations/servicenow/
+      parent: oncall_integrations
+      identifier: oncall_integrations_servicenow
+      weight: 801
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
@@ -3908,6 +3923,11 @@ menu:
       parent: serverless_container_apps
       identifier: serverless_container_apps_manual
       weight: 1
+    - name: Managed OpenTelemetry Agent
+      url: serverless/azure_container_apps/otel_managed_agent
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_otel_managed_agent
+      weight: 2
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -4837,21 +4857,26 @@ menu:
       parent: tracing_services
       identifier: tracing_env_remapping_rules
       weight: 909
+    - name: Resource Renaming Rules
+      url: tracing/services/resource_renaming_rules
+      parent: tracing_services
+      identifier: tracing_resource_renaming_rules
+      weight: 910
     - name: Tag Enrichment
       url: tracing/services/tag_enrichment
       parent: tracing_services
       identifier: tracing_tag_enrichment
-      weight: 910
+      weight: 911
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 911
+      weight: 912
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 912
+      weight: 913
     - name: Endpoint Observability
       url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
@@ -5868,10 +5893,10 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_experiments
       weight: 503
-    - name: Data Access Control
-      url: llm_observability/improve/access_control
+    - name: Online Experiments
+      url: llm_observability/improve/online_experiments
       parent: llm_obs_improve
-      identifier: llm_obs_improve_access_control
+      identifier: llm_obs_online_experiments
       weight: 504
     - name: Configure
       url: llm_observability/configure/
@@ -5898,6 +5923,11 @@ menu:
       parent: llm_obs
       identifier: llm_obs_data_security_and_rbac
       weight: 7
+    - name: Data Access Control
+      url: llm_observability/data_governance/access_control
+      parent: llm_obs_data_security_and_rbac
+      identifier: llm_obs_data_governance_access_control
+      weight: 701
     - name: Lapdog
       url: llm_observability/lapdog
       parent: llm_obs
@@ -6824,11 +6854,16 @@ menu:
       parent: sci_service_mapping
       identifier: sci_service_mapping_ruby
       weight: 7
+    - name: OpenTelemetry
+      url: source_code/service-mapping/opentelemetry/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_opentelemetry
+      weight: 8
     - name: Other Languages
       url: source_code/service-mapping/other/
       parent: sci_service_mapping
       identifier: sci_service_mapping_other
-      weight: 8
+      weight: 9
     - name: Resource Mapping
       url: source_code/resource-mapping/
       parent: source_code_integration
@@ -6855,16 +6890,6 @@ menu:
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
       weight: 101
-    - name: Error Tracking
-      url: ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 102
-    - name: Logs
-      url: ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 103
     - name: VS Code & Cursor
       url: ide_plugins/vscode/
       parent: ide_plugins
@@ -6880,16 +6905,6 @@ menu:
       parent: ide_plugins_vscode
       identifier: ide_plugins_vscode_code_insights
       weight: 102
-    - name: Logs
-      url: ide_plugins/vscode/logs/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_logs
-      weight: 103
-    - name: Exception Replay
-      url: ide_plugins/vscode/exception_replay/
-      parent: ide_plugins_vscode
-      identifier: ide_plugins_vscode_exception_replay
-      weight: 104
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
@@ -7587,6 +7602,11 @@ menu:
       parent: log_configuration
       identifier: log_optimizer
       weight: 213
+    - name: External Sources
+      url: logs/log_configuration/external_sources/
+      parent: log_configuration
+      identifier: log_configuration_external_sources
+      weight: 214
     - name: Log Explorer
       url: logs/explorer/
       parent: log_management
@@ -7682,6 +7702,11 @@ menu:
       url: logs/explorer/findings/
       parent: log_explorer
       weight: 516
+    - name: Federated Logs
+      identifier: log_explorer_federated_logs
+      url: logs/explorer/federated_logs/
+      parent: log_explorer
+      weight: 517
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -7742,26 +7767,36 @@ menu:
       parent: log_management
       identifier: log_reports
       weight: 8
+    - name: Migration
+      url: logs/migration/
+      parent: log_management
+      identifier: log_migration
+      weight: 9
+    - name: Query Translation
+      url: logs/migration/query_translation/
+      parent: log_migration
+      identifier: log_migration_query_translation
+      weight: 901
     - name: Guides
       url: logs/guide/
       parent: log_management
       identifier: log_guides
-      weight: 9
+      weight: 10
     - name: Data Security
       url: data_security/logs/
       parent: log_management
       identifier: log_security
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: logs/troubleshooting
       parent: log_management
       identifier: log_troubleshooting
-      weight: 11
+      weight: 12
     - name: Live Tail
       url: logs/troubleshooting/live_tail
       parent: log_troubleshooting
       identifier: log_troubleshooting_live_tail
-      weight: 1101
+      weight: 1201
     - name: BYOC Logs
       pre: upload-wui
       url: byoc-logs/
