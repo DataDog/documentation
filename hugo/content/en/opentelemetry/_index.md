@@ -105,7 +105,7 @@ To compare every option, see [Send OpenTelemetry Data to Datadog][11]. To choose
 [3]: /opentelemetry/correlate/
 [4]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [5]: /opentelemetry/setup/ddot_collector/
-[6]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[6]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [7]: /opentelemetry/instrument/otel_sdks/
 [8]: /opentelemetry/setup/collector_exporter/
 [9]: /opentelemetry/setup/otlp_ingest/

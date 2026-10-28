@@ -167,6 +167,6 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [44]: /opentelemetry/guide/instrument_unsupported_runtimes
 [45]: https://opentelemetry.io/community/
 [46]: /containers/
-[47]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[47]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [48]: /opentelemetry/setup/agent/#collector-in-the-agent
 [49]: /opentelemetry/setup/ddot_collector/

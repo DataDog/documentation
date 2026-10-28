@@ -222,8 +222,8 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 [62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
 [63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md
 [64]: /opentelemetry/setup/agent/
-[65]: /opentelemetry/setup/ddot_collector/kubernetes/
-[66]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[65]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[66]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [67]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [68]: /opentelemetry/setup/collector_exporter/
 [69]: /opentelemetry/setup/agent/#collector-in-the-agent
