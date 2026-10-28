@@ -2341,7 +2341,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
@@ -4516,6 +4516,12 @@
     "summary": "Create a tag indexing rule exemption",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule exemption."
+  },
+  "UpdateTagIndexingRuleExemption": {
+    "description": "Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and\n`created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has\nonly a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag indexing rule exemption",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a tag indexing rule exemption."
   },
   "ListTagIndexingRulesForMetric": {
     "description": "List the tag indexing rules that apply to a given metric, sorted by `rule_order`.\nMatching is performed server-side using each rule's `metric_name_matches` glob patterns.",
