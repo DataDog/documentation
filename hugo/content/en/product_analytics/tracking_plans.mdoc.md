@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about Bits Code"
 - link: "/account_management/billing/ai_credits/"
   tag: "Documentation"
-  text: "AI Credits"
+  text: "Learn about AI Credits"
 ---
 
 {% callout url="https://www.datadoghq.com/product-preview/agentic-tracking-plans/" header="Join the Preview!" %}
@@ -39,7 +39,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 - **Plan tracking before a launch (recommended)**: Set up tracking before a feature ships so you have complete data from the first day instead of finding gaps after launch.
 - **Fill tracking gaps for an existing feature**: When existing data can't answer your questions, or the feature was never tracked, start from your questions. Bits AI identifies the events and properties that are missing.
 - **Request tracking without waiting on a ticket**: Product managers can see which events already exist and define new ones without filing a ticket and waiting for engineering time.
-- **Give engineers a clear, reviewable request**: Engineers get a specific pull request or ticket that explains which properties matter and why. This cuts down the back-and-forth.
+- **Give engineers a clear, reviewable request**: Engineers get a specific pull request or ticket that explains which properties matter and why.
 
 ## Key concepts
 
@@ -52,11 +52,10 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 ## Prerequisites
 
-- Access to the Agentic Tracking Plans Preview
 - Product Analytics enabled, with the RUM SDK instrumented in your application
 - AI products enabled for your organization in [**Plan & Usage > AI Credits**][1]
 - The **Bits Chat Access** permission
-- (Optional) A [source code integration][2] for the repository that contains your RUM instrumentation. Bits AI uses it to find existing events.
+- (Optional) A [source code integration][2] for the repository that contains your RUM instrumentation, which Bits AI uses to understand how to understand how the feature works and suggest relevant events and properties
 - (Optional) The **Bits Code Write** permission, required only to instrument with Bits Code
 
 ## Create a tracking plan
@@ -67,7 +66,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 2. Click {% ui %}Create Tracking Plan{% /ui %} and enter a name.
 {% /step %}
 {% step title="Provide context about your feature" %}
-1. Paste in your product brief or product requirements document. If you do not have one, write a short description of the feature. Bits AI uses this context to understand what you are building and to suggest what to track. A one-line description produces generic suggestions, so include as much of the following as you can:
+1. Paste your product brief or product requirements document. If you do not have one, write a short description of the feature. Bits AI uses this context to understand what you are building and to suggest what to track. A one-line description produces generic suggestions, so include as much of the following as you can:
 
     - Product goals and success criteria
     - Product requirements
@@ -81,10 +80,10 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 4. (Optional) Link the repository that contains your RUM instrumentation. With access to your source code, Bits AI can find the relevant code, see which events already exist, and reuse them instead of proposing duplicates.
 
-5. Click {% ui %}Continue{% /ui %} to move on to the next step.
+5. Click {% ui %}Continue{% /ui %}.
 {% /step %}
 {% step title="Add your questions" %}
-Bits AI proposes a starting list of questions based on your context. Treat this list as a starting point.
+Bits AI proposes a list of questions based on your context. Treat this list as a starting point.
 
 1. Add, edit, or remove questions until the list covers everything you want to learn.
 
@@ -96,7 +95,7 @@ Bits AI proposes a starting list of questions based on your context. Treat this 
 
    Generating the first list of questions can take a few minutes, because Bits AI reads your codebase to understand the feature and check which data is already tracked. To find questions you may have missed, ask Bits AI in chat.
 
-2. Click {% ui %}Continue to Tracking Plan{% /ui %} to move on to the next step.
+2. Click {% ui %}Continue to Tracking Plan{% /ui %}.
 {% /step %}
 {% step title="Generate and review the tracking plan" %}
 
@@ -124,7 +123,6 @@ After the instrumentation code is ready, deploy it and confirm that Product Anal
 
 1. Your engineers review the pull request, request changes if needed, and merge and deploy it.
 2. After the code is live and users trigger the events, Product Analytics detects them. Check the latest status in the tracking plan to verify that Product Analytics receives the events.
-3. If the status does not update after you expect data, see [Troubleshooting Product Analytics][3].
 {% /step %}
 {% step title="Create a dashboard" %}
 Generate a dashboard that tracks the answers to the questions in your plan:
