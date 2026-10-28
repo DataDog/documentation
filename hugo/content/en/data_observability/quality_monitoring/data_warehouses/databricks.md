@@ -147,4 +147,4 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [7]: https://docs.databricks.com/aws/en/compute/serverless/
 [8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
 [9]: /data_observability/quality_monitoring/#data-sent-to-datadog
-[10]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
+[10]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks

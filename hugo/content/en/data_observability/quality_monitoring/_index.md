@@ -103,7 +103,7 @@ Column masking support varies by warehouse:
 |---|---|
 | Databricks | [Unity Catalog column masks][3] |
 | Snowflake | [Masking policies][4] (requires Enterprise Edition or higher) |
-| BigQuery | [Data masking][5]. Grant the Datadog service account the Masked Reader role. |
+| BigQuery | [Data masking][5]. Grant the Datadog service account the BigQuery Masked Reader role. |
 | Redshift | [Dynamic data masking][6] |
 
 ## Further reading
@@ -112,7 +112,7 @@ Column masking support varies by warehouse:
 
 [1]: /data_observability/lineage/
 [2]: /monitors/types/data_observability/?tab=customsql#select-your-metric-type
-[3]: https://docs.databricks.com/aws/en/tables/row-and-column-filters
+[3]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks
 [4]: https://docs.snowflake.com/en/user-guide/security-column-ddm-intro
-[5]: https://cloud.google.com/bigquery/docs/column-data-masking-intro
+[5]: https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro
 [6]: https://docs.aws.amazon.com/redshift/latest/dg/t_ddm.html
