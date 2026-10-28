@@ -25,7 +25,7 @@ A Datadog OpenTelemetry (DDOT) SDK is the Datadog SDK for your language, set up 
 
 The DDOT SDK sends your application's traces as OTLP. It also sends the metrics and logs that your application records with the OpenTelemetry API. Which runtime metrics and logs it sends by default depends on your language.
 
-You turn on the DDOT SDK with an annotation and environment variables. If your code uses the OpenTelemetry API, you keep those calls. If your code sets up the OpenTelemetry SDK itself, see [Known limits][2].
+You turn on the DDOT SDK with an annotation and environment variables. If your code uses the OpenTelemetry API, you keep those calls. Node.js applications need one more step, and code that sets up the OpenTelemetry SDK itself needs changes. See [Known limits][2].
 
 Already use a Datadog SDK that sends data to the Datadog Agent? To keep that setup and add the OpenTelemetry API, see [OpenTelemetry API Support][3].
 
@@ -179,6 +179,7 @@ The DDOT SDK keeps sending your telemetry as OTLP to your Collector. Keep the `a
 ## Known limits
 
 - **Go**: Go has no image for the Operator to inject. Instrument your Go application at build time with [Orchestrion][12], then set the OpenTelemetry mode variables. Use the annotation `instrumentation.opentelemetry.io/inject-sdk` instead of `inject-<LANGUAGE>`. It sets the variables from `ddot-sdks.yaml` and doesn't inject an SDK. Also add `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` to the `env` list, with the `/v1/traces` path, for example `http://$(OTEL_NODE_IP):4318/v1/traces`.
+- **Node.js and the OpenTelemetry API**: In Node.js, spans that your code creates with the OpenTelemetry API reach Datadog only after your application registers Datadog's tracer provider. Without it, those spans are dropped. For the registration code, see [OpenTelemetry API Support for Node.js][17]. **[Placeholder: how to register the provider when the Operator injects the DDOT SDK]**
 - **Code that sets up the OpenTelemetry SDK**: The DDOT SDK supports the OpenTelemetry API, not OpenTelemetry SDK components such as span processors and exporters. If your application configures the OpenTelemetry SDK in code, **[Placeholder: what to change, for each language]**.
 - **Direct OTLP ingest**: **[Placeholder: whether the DDOT SDK can send to the Datadog OTLP intake without a Collector]**
 - **Hosts**: **[Placeholder: whether DDOT SDKs run on hosts, and the minimum version for each language]**
@@ -250,3 +251,4 @@ kubectl delete -n <NAMESPACE> -f ddot-sdks.yaml
 [14]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [15]: /opentelemetry/config/environment_variable_support/
 [16]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+[17]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
