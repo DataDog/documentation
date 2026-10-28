@@ -59,3 +59,10 @@ entries:
     operations:
       - DeleteTagIndexingRuleExemption
     title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41146
+    operations:
+      - CreateBulkTagsMetricsConfiguration
+      - DeleteBulkTagsMetricsConfiguration
+    title: Move metric bulk-tags endpoints sunset date to 2026-11-01
