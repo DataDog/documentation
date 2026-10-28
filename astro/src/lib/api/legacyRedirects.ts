@@ -1,6 +1,6 @@
 /**
- * Hugo-owned `/api` paths that Astro's route tree doesn't cover: the bare
- * `/api/` root and the alias redirects, originally copied from
+ * Hugo-owned `/api` paths that Astro's route tree doesn't cover: the alias
+ * redirects, originally copied from
  * `hugo/content/en/api/_index.md`'s cascade. Astro must emit these itself —
  * once its upload deletes stale keys under `api/latest/**`, these paths would
  * otherwise 404.
@@ -24,7 +24,8 @@ export interface LegacyRedirect {
 }
 
 export const LEGACY_REDIRECTS: LegacyRedirect[] = [
-  { from: "/api/", to: "/api/latest/" },
+  // The bare `/api/` root isn't here: it's a real page
+  // (`src/pages/[...lang]/api/index.astro`) so view transitions survive.
   { from: "/api/screenboards/", to: "/api/latest/dashboards/" },
   { from: "/api/latest/downtimes/s", to: "/api/latest/downtimes/" },
   {
@@ -47,7 +48,7 @@ export interface LegacyRedirectStaticPath {
   params: {
     /** Empty `[...lang]` segment for English, the code for every other locale. */
     lang: string | undefined;
-    /** Everything after `/api`, or `undefined` for the bare `/api/` root. */
+    /** Everything after `/api`. */
     legacyPath: string | undefined;
   };
   props: { to: string };
@@ -76,8 +77,8 @@ export function legacyRedirectStaticPaths(): LegacyRedirectStaticPath[] {
 
 /**
  * `/api/screenboards/` → `screenboards`, `/api/latest/downtimes/s` →
- * `latest/downtimes/s`, and the bare `/api/` root → `undefined` (an empty rest
- * param, which renders the route as `/api/` itself).
+ * `latest/downtimes/s`. A bare `/api/` would map to `undefined` (an empty rest
+ * param), but that path belongs to `[...lang]/api/index.astro`.
  */
 function toLegacyPathParam(from: string): string | undefined {
   const rest = from.replace(/^\/api\b/, "").replace(/^\/+|\/+$/g, "");

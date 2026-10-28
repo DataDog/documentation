@@ -31,6 +31,8 @@ if (!lang) {
 }
 
 // `localizedHref` applies the preview branch prefix itself, so it stands in for
-// the bare `prefixed()` call the English-only stubs used.
-return Astro.redirect(localizedHref(lang, Astro.props.to));
+// the bare `prefixed()` call the English-only stubs used. 301, not the default
+// 302: Astro's static stub waits 2 seconds before following a 302 (showing its
+// "Redirecting from..." message) and follows anything else immediately.
+return Astro.redirect(localizedHref(lang, Astro.props.to), 301);
 ---
