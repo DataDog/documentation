@@ -204,6 +204,8 @@ For more help, see [OpenTelemetry Troubleshooting][16].
 
 With `K8S_CLUSTER_TYPE=other`, set `K8S_CLUSTER_NAME` and run `./install` again.
 
+When you run the installer again, it prints `Error: INSTALLATION FAILED: release name check failed: cannot reuse a name that is still in use` for cert-manager, because cert-manager is already installed, and continues. Ignore that error.
+
 If you installed the Datadog Agent, delete the Agent's secret before you run `./install` again. Otherwise, the installer stops because the secret already exists, after it updates the Collectors but before it updates the Agent:
 
 ```shell
