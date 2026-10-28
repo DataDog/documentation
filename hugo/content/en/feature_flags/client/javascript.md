@@ -163,7 +163,7 @@ console.log(details.errorCode); // 'FLAG_NOT_FOUND'
 
 #### Initial configuration is not filtered
 
-`flagSelection` applies only to configuration that the SDK fetches. The SDK does not filter configuration you supply with `initialFlagsConfiguration` (see [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data)), so flags in that configuration remain available even if they are outside the selection.
+`flagSelection` does not filter configuration you supply with [`initialFlagsConfiguration`](#supply-initial-precomputed-fallback-data); the SDK uses it as provided.
 
 #### Rules-based configuration
 
