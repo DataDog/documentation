@@ -19,9 +19,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-ide-plugins/'
       tag: 'Blog'
       text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
-    - link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
-      tag: 'Blog'
-      text: 'Simplify production debugging with Datadog Exception Replay'
     - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
@@ -45,8 +42,6 @@ The extension includes these features:
 
 - [**Fix in Chat**](?tab=cursor#fix-in-chat): Fix code errors, vulnerabilities, and flaky tests with AI-powered suggestions and explanations.
 
-- [**Exception Replay**](#exception-replay): Debug your production code.
-
 <div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
 ## Requirements
@@ -55,7 +50,7 @@ The extension includes these features:
     - New to Datadog? [Learn more][3] about Datadog's monitoring and security tools and sign up for a free trial.
     - If your organization uses a [custom sub-domain][18] such as `myorg.datadoghq.com`, you must indicate it using the `datadog.connection.oauth.setup.domain` setting in the IDE.
 
-- **Git**: The extension works better when Git is enabled in the IDE. Ensure this is enabled by checking the `git.enabled` setting.
+- **Git**: The extension works better when Git is enabled in the IDE. Confirm that the `git.enabled` setting is turned on.
 
 ## Installation
 
@@ -136,21 +131,9 @@ The **Fix in Chat** button appears in several contexts when the extension identi
 
 The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link used in Code Security. When you click {{< ui >}}Fix with Cursor{{< /ui >}} in the Datadog UI or in a pull request comment, the extension opens the workspace in Cursor. It then checks out the relevant repository, branch, and commit, and loads a tailored remediation prompt for the finding.
 
-## Other features
-
-### Exception Replay
-
-<div class="alert alert-info">This feature is in limited support.</div>
-
-**Exception Replay** allows you to inspect the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
-
-{{< img src="/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
-
-Find out more in the [Exception Replay][22] sub-section.
-
 ## Data and telemetry
 
-Datadog collects certain information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. This data is used to help improve the extension's performance and features, including transitions to and from the extension and the applicable Datadog login page for accessing the Services.
+Datadog collects information about your use of this IDE. This includes how you interact with it, whether errors occurred, what caused those errors, and user identifiers. Collection follows the [Datadog Privacy Policy][13] and Datadog's [VS Code extension EULA][12]. Datadog uses this data to improve the extension's performance and features. It also covers moves between the extension and the Datadog login page.
 
 If you don't wish to send this data to [Datadog][3], you can disable this at any time in the extension's settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
@@ -185,4 +168,3 @@ Read the [End-User License Agreement][12] carefully before downloading or using 
 [18]: /account_management/multi_organization/#custom-sub-domains
 [19]: /ide_plugins/vscode/code_security/
 [21]: /ide_plugins/vscode/code_insights/
-[22]: /ide_plugins/vscode/exception_replay/
