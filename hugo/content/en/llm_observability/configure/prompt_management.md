@@ -14,9 +14,6 @@ further_reading:
   - link: "/llm_observability/instrument/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
-  - link: "/llm_observability/data_governance/access_control/"
-    tag: "Documentation"
-    text: "Data Access Control in Agent Observability"
 
 ---
 
@@ -393,8 +390,6 @@ Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, 
 
 To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the {{< ui >}}Prompts{{< /ui >}} page, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
-A promoted prompt retains its association with the application that produced the tracked span. You can use [Data Access Control][20] to restrict access to managed prompts associated with an application.
-
 #### In the UI from scratch
 
 Navigate to the {{< ui >}}Prompts{{< /ui >}} page and click {{< ui >}}\+ New Prompt{{< /ui >}}.
@@ -420,8 +415,6 @@ In the save dialog:
 | {{< ui >}}Deployment{{< /ui >}} | The environment to which this version is deployed. |
 
 Click {{< ui >}}Create Prompt{{< /ui >}} to save the prompt to the registry.
-
-Prompts created directly in the UI, API, or SDK are not associated with an application and cannot be restricted with Data Access Control. To create an application-associated prompt, first track the prompt in an instrumented application, then promote it to the managed prompt registry.
 
 ### Update, list, and delete prompts
 
@@ -928,5 +921,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
 [11]: /remote_configuration/
-[20]: /llm_observability/data_governance/access_control/#managed-prompts
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/
