@@ -28,6 +28,7 @@ Before you begin, make sure you have:
 
 - A ClickHouse Cloud service with an HTTPS endpoint. Example: `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443`
 - Administrator access to your ClickHouse Cloud service, to create a role and a user.
+- Preview access enabled for your organization by a Datadog representative.
 
 ## Allow Datadog IP addresses
 
@@ -132,6 +133,8 @@ If {{< ui >}}Test connection{{< /ui >}} fails, use the error to find the fix:
 | Server error | ClickHouse returned an error. Try again, and contact [Datadog support][6] if the problem persists. |
 
 After a successful connection, your ClickHouse tables appear in the [Data Observability Catalog][7] after the first hourly metadata read.
+
+If the integration tile isn't available in your organization, confirm that a Datadog representative has enabled Preview access for your organization.
 
 ## Further reading
 
