@@ -29,7 +29,7 @@ $$s\_C^2 = {∑\_{i=1}^{n\_C} y\_{Ci}^2}/{n\_C} - m\_C^2$$
 
 $$s\_T^2 = {∑\_{j=1}^{n\_T} y\_{Tj}^2}/{n\_T} - m\_T^2$$
 
-These variances describe variation between subjects within each group. Datadog uses the moment variance with divisor $n\_C$ or $n\_T$, without the corresponding $n/(n-1)$ correction.
+These variances describe variation between subjects within each group.
 
 Dividing each subject-level variance by its group sample size gives the estimated sampling variance of the mean:
 
