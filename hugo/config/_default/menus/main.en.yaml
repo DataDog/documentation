@@ -168,7 +168,7 @@ menu:
       weight: 16
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
-      url: opentelemetry/getting_started/kubernetes/
+      url: opentelemetry/getting_started/
       parent: getting_started
       weight: 17
     - name: Profiler
