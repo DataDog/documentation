@@ -47,15 +47,21 @@ See the [list of permissions][2] for Security products.
 
 Use [Data Access Control][4] to restrict which security data a user can view, based on the tags and attributes in the data. Define a Restricted Dataset with a query, then grant access to specific teams or roles. Three security options are available when you create a Restricted Dataset:
 
-- **Security Signals**: Cloud SIEM and Workload Protection signals.
-- **Workload Protection Agent Events**.
-- **Security Findings** (in Preview, available upon request): Cloud Security, Code Security, Workload Protection, and App and API Protection findings.
+- **Security Signals**: Cloud SIEM and Workload Protection signals
+- **Workload Protection Agent Events**
+- **Security Findings** (in Preview, available upon request): Cloud Security, Code Security, Workload Protection, and App and API Protection findings
 
-Security data outside every Restricted Dataset stays visible to all users with the appropriate permissions, unless you switch it to [Restricted][5].
+Security data that isn't included in any Restricted Dataset remains visible to all users with the appropriate permissions unless you mark it as [Restricted][5].
 
 ### Restrict findings by team ownership
 
-For security findings, ownership-based access control (in Preview, available upon request) is an alternative to Restricted Datasets that requires less configuration. Rather than defining a dataset for each group of findings, each user sees the findings owned by the [teams][6] they belong to. It covers the same finding types: Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Because it relies on the `team` tag, findings without that tag are visible only to the teams and roles that have [unrestricted access][7].
+{{< callout btn_hidden="true" >}}
+Ownership-based access control is in Preview and available upon request.
+{{< /callout >}}
+
+Ownership-based access control restricts access to security findings based on team membership and requires less configuration than Restricted Datasets. Each user sees findings owned by the [teams][6] they belong to, without requiring a separate dataset for each group of findings.
+
+This option supports Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Ownership is determined by the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
 
 [1]: /account_management/rbac/#role-based-access-control
 [2]: /account_management/rbac/permissions/#cloud-security-platform
