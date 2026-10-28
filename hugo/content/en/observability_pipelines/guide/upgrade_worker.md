@@ -41,7 +41,7 @@ Worker version 2.25.0 gives you access to the following:
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
 - The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
 - The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group. The variable applies to every Reduce processor on the Worker and accepts values from 1 to 300 seconds. The default is 10 seconds. A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
-- The Sample processor now limits the memory it uses to track sampling groups to 128 MiB. When it reaches the limit, the processor evicts the least recently used groups.
+- The Sample processor now limits memory for tracking sampling groups to 128 MiB, evicting the least recently used groups when the limit is reached.
 - The Worker has improved log ingestion performance.
 
 #### Fixes
@@ -50,7 +50,7 @@ Worker version 2.25.0 gives you access to the following:
 - The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull.
 - The Google Pub/Sub source now trusts every certificate in the configured CA file, not only the last one.
 - The OpenTelemetry source now responds to gRPC requests for unsupported services with the gRPC status `UNIMPLEMENTED` instead of HTTP 404. These requests no longer log an error or increment the `component_errors_total` metric.
-- The Worker no longer silently drops internal logs under high load. Dropped logs are now counted in the `component_discarded_events_total` metric with the `intentional:false` tag. This change affects only internal components with a `component_id` that starts with an underscore (`component_id:_*`), not your pipeline data.
+- The Worker now tracks internal logs dropped under high load in `component_discarded_events_total` with `intentional:false`. This affects only internal components (`component_id:_*`), not pipeline data.
 
 ## Worker version 2.24.1
 
