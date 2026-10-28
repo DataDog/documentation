@@ -224,6 +224,6 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 [64]: /opentelemetry/setup/agent/
 [65]: /opentelemetry/setup/ddot_collector/kubernetes/
 [66]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
-[67]: /opentelemetry/instrument/dd_sdks/
+[67]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [68]: /opentelemetry/setup/collector_exporter/
 [69]: /opentelemetry/setup/agent/#collector-in-the-agent

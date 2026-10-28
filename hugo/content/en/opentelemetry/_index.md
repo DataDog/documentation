@@ -103,7 +103,7 @@ To compare every option, see [Send OpenTelemetry Data to Datadog][11]. To choose
 [1]: https://opentelemetry.io/
 [2]: /getting_started/tagging/unified_service_tagging/
 [3]: /opentelemetry/correlate/
-[4]: /opentelemetry/instrument/dd_sdks/
+[4]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [5]: /opentelemetry/setup/ddot_collector/
 [6]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
 [7]: /opentelemetry/instrument/otel_sdks/
