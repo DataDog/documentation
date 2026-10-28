@@ -16,8 +16,6 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
 
 **Symptom**: When deploying in Kubernetes, the hostname reported by Datadog does not match the expected node name.
 
-**Note**: When telemetry has both `k8s.node.name` and `k8s.cluster.name`, and no cloud-provider attributes, Datadog names the host `<NODE_NAME>-<CLUSTER_NAME>`. That name is expected, not an error. For the full order of hostname rules, see [Hostname Mapping][18].
-
 **Cause**: This is typically the result of missing `k8s.node.name` (and optionally `k8s.cluster.name`) tags.
 
 **Resolution**:
@@ -373,6 +371,5 @@ features:
 [13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [14]: /opentelemetry/setup/ddot_collector/install/
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
-[16]: /opentelemetry/setup/ddot_collector/kubernetes/
+[16]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
-[18]: /opentelemetry/mapping/hostname/
