@@ -60,7 +60,7 @@ To review traces and identify a pattern:
 
 ## Step 2: Ask the agent to propose a fix
 
-After you identify a pattern, ask the agent to examine its own traces and propose a fix. The agent searches its execution history, inspects the affected traces, and identifies the repeated behavior that caused the issue. It then proposes an update to its instructions.
+After you identify a pattern, ask the agent to examine its own traces and propose a fix. The agent searches its execution history, inspects the affected traces, and identifies the repeated behavior that caused the issue. It then proposes an update to its configuration.
 
 This section provides sample prompts for addressing common issues. Use the prompt that matches the pattern you identified.
 
