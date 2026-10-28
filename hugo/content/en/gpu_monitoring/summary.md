@@ -20,6 +20,7 @@ The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highligh
 
 Click on the section titles below to access the corresponding section:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Fleet Health](#fleet-health)
 - [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
@@ -50,6 +51,18 @@ If you use Kubernetes and have enabled the Kubernetes integration, you'll see ad
 AI workloads can experience unpredictable spikes in resource usage. As a result, it's important to align available GPUs with incoming workloads. This section helps you to identify if you're overallocating GPUs that end up sitting idle, or underprovisioning resources that stall critical jobs.
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
+
+Procuring hardware can be a time-consuming process. Use this widget to help you understand historical demand over your selected time frame and forecast future capacity needs.
+
+{{< img src="gpu_monitoring/forecasting.png" alt="Device Allocation Over Time widget showing total, allocated, active, and effective device counts over the past week, with a dotted one-week forecast extending past the current time." style="width:90%;" >}}
+
+You can also use {{< ui >}}Group by{{< /ui >}} to group by tags such as cluster, provider, GPU device, device type, or cloud provider. This breaks down your fleet's total, allocated, active, and effective device counts by that tag.
+
+{{< img src="gpu_monitoring/allocation-grouped.png" alt="Device Allocation Over Time widget grouped by cluster with the Active view selected, showing a stacked bar chart of active devices per cluster over the past week and a list of top clusters by active device count." style="width:90%;" >}}
+
+## Fleet Health
+
+{{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health: green for no XID errors, orange for non-critical XIDs, and red for critical XIDs. Each tile lists its host and GPU counts." style="width:90%;" >}}
 
 ## Cost & Utilization
 
