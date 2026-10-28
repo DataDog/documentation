@@ -52,6 +52,8 @@ To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
    - Configure the required HTTP headers.
 1. (Optional) [Set the `dd-otel-metric-config` HTTP header](#optional-configure-the-metric-translator) to configure the metric translator behavior.
 
+<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively, keeping their original buckets. Datadog computes percentiles from those buckets. Metrics Summary and Metrics Explorer show each histogram's type: Explicit Histogram or Exponential Histogram. Distribution queries on your histogram metrics work without changes. The endpoint ignores the <code>histograms</code> and <code>summaries</code> fields in the <a href="#optional-configure-the-metric-translator"><code>dd-otel-metric-config</code> header</a>.</div>
+
 ### Configure the exporter
 
 To send OTLP data to the Datadog OTLP metrics intake endpoint, use the OTLP HTTP exporter. For metrics, the exporter supports both HTTP Protobuf and HTTP JSON. HTTP Protobuf is recommended for better performance.
@@ -186,17 +188,20 @@ If set to `true`, adds the name and version of the instrumentation scope that cr
 
 `histograms.mode`
 : **Type**: String <br>
+**Deprecated**: Ignored as of September 1, 2026. Datadog stores histograms natively regardless of this setting. <br>
 Mode for exporting histograms. Valid values are:
-  - `distributions`: sends histograms as Datadog distributions (recommended).
+  - `distributions`: sends histograms as Datadog distributions.
   - `counters`: sends histograms as Datadog counts, one metric per bucket.
   - `nobuckets`: sends no bucket histogram metrics.
 
 `histograms.send_aggregation_metrics`
 : **Type**: Boolean <br>
+**Deprecated**: Ignored as of September 1, 2026. Datadog doesn't write separate `.sum`, `.count`, `.min`, and `.max` metrics. Query the histogram metric with the matching aggregation instead, such as `count:<METRIC_NAME>{*}.as_count()`. <br>
 If set to `true`, writes additional `.sum`, `.count`, `.min`, and `.max` metrics for histograms.
 
 `summaries.mode`
 : **Type**: String <br>
+**Deprecated**: Ignored as of September 1, 2026. <br>
 Mode for exporting OTLP summaries. Valid values are:
   - `noquantiles`: sends no `.quantile` metrics. `.sum` and `.count` metrics are still sent.
   - `gauges`: sends `.quantile` metrics as gauges tagged by the quantile.
@@ -206,14 +211,7 @@ For example:
 ```json
 {
   "resource_attributes_as_tags": true,
-  "instrumentation_scope_metadata_as_tags": true,
-  "histograms": {
-    "mode": "distributions",
-    "send_aggregation_metrics": true
-  },
-  "summaries": {
-    "mode": "gauges"
-  }
+  "instrumentation_scope_metadata_as_tags": true
 }
 ```
 

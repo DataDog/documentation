@@ -315,5 +315,17 @@
   },
   "alert_tip": {
     "other": "TIP"
+  },
+  "site_support_banner": {
+    "other": "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+  },
+  "site_support_banner_plaintext": {
+    "other": "This product or feature is not supported for the following sites:"
+  },
+  "home_enablement_banner_title": {
+    "other": "Learn Datadog fundamentals in a live 60-minute session."
+  },
+  "home_enablement_banner_cta": {
+    "other": "View Sessions >"
   }
 }

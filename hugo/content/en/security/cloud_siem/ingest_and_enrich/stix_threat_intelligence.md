@@ -17,6 +17,9 @@ further_reading:
 - link: "/reference_tables/"
   tag: "Documentation"
   text: "Create and manage reference tables"
+- link: "/security/cloud_siem/ingest_and_enrich/muted_indicators/"
+  tag: "Documentation"
+  text: "Mute benign indicators in Cloud SIEM"
 ---
 
 ## Overview

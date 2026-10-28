@@ -1,3 +1,3 @@
 ---
-title: Entidades para la experimentación de búsquedas simples
+title: Entidades de experimentación de búsqueda simple
 ---

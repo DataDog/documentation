@@ -1,0 +1,66 @@
+---
+export const prerender = true;
+/**
+ * One static changelog page per filter and page number, for example
+ * `/api/changelog/`, `/api/changelog/2/` and `/api/changelog/added/2/`.
+ */
+import ApiLayout from "@layouts/ApiLayout.astro";
+import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
+import ApiChangelog from "@components/ApiChangelog/ApiChangelog.astro";
+import {
+  CHANGELOG_INTRO,
+  CHANGELOG_TITLE,
+  buildChangelogPages,
+  changelogMarkdownHref,
+  changelogPageTitle,
+  getChangelogView,
+} from "@lib/api/changelog";
+import { getCategoryStubsView } from "@lib/api/viewsBuilder";
+import { apiBreadcrumbs } from "@lib/api/pageMeta";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: ReturnType<GetStaticPaths> = [];
+  for (const lang of LOCALES) {
+    const pages = buildChangelogPages(await getChangelogView(lang));
+    for (const page of pages) {
+      paths.push({
+        params: {
+          lang: lang === "en" ? undefined : lang,
+          path: page.pathParam,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+// Found from the params rather than passed as props, so dev mode and the
+// test container 404 on any path `getStaticPaths` doesn't emit.
+const page = buildChangelogPages(await getChangelogView(lang)).find(
+  (changelogPage) => changelogPage.pathParam === Astro.params.path,
+);
+if (!page) {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoryStubsView(lang);
+---
+
+<ApiLayout
+  title={changelogPageTitle(page.filter, page.pageNumber)}
+  description={CHANGELOG_INTRO}
+  categories={categories}
+  breadcrumbs={apiBreadcrumbs(lang, CHANGELOG_TITLE)}
+  contentPath="api/changelog/_index.md"
+  markdownHref={changelogMarkdownHref(lang)}
+>
+  <ApiPageHeader title={CHANGELOG_TITLE} />
+  <ApiChangelog lang={lang} page={page} />
+</ApiLayout>
