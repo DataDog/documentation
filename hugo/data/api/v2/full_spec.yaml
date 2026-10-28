@@ -86332,6 +86332,8 @@ components:
             Defaults to `DESTINATION_AZURE_DATA_EXPLORER_INGESTION_ENDPOINT` (prefixed with `DD_OP_` at runtime).
           example: AZURE_DATA_EXPLORER_INGESTION_ENDPOINT
           type: string
+        ingestion_mode:
+          $ref: "#/components/schemas/ObservabilityPipelineAzureDataExplorerDestinationIngestionMode"
         inputs:
           description: A list of component IDs whose output is used as the `input` for this component.
           example: ["filter-processor"]
@@ -86523,22 +86525,35 @@ components:
           description: Maximum batch size in bytes.
           example: 2000000
           format: int64
-          maximum: 4000000
-          minimum: 1
           type: integer
         max_events:
           description: Maximum number of events per batch before it is flushed.
           example: 1000
           format: int64
-          minimum: 1
           type: integer
         timeout_secs:
           description: Maximum number of seconds to wait before flushing a partial batch.
           example: 1
           format: int64
-          minimum: 1
           type: integer
       type: object
+    ObservabilityPipelineAzureDataExplorerDestinationIngestionMode:
+      default: streaming
+      description: |-
+        The ingestion method used to send data to Azure Data Explorer.
+
+        - `streaming`: Sends events directly to the table using streaming ingestion.
+        - `queue`: Sends events through queued (batched) ingestion.
+
+        Defaults to `streaming`.
+      enum:
+        - streaming
+        - queue
+      example: queue
+      type: string
+      x-enum-varnames:
+        - STREAMING
+        - QUEUE
     ObservabilityPipelineAzureDataExplorerDestinationManagedIdentityIdType:
       description: The type of the user-assigned managed identity ID.
       enum:
@@ -133588,6 +133603,35 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionUpdateAttributes:
+      description: Attributes for updating a tag indexing rule exemption.
+      properties:
+        reason:
+          description: The updated reason the metric is exempt from tag indexing rules.
+          example: This metric must remain exempt because of its query requirements.
+          type: string
+      required:
+        - reason
+      type: object
+    TagIndexingRuleExemptionUpdateData:
+      description: Data object for updating a tag indexing rule exemption.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleExemptionUpdateRequest:
+      description: Request body for updating a tag indexing rule exemption.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateData"
+      required:
+        - data
+      type: object
     TagIndexingRuleExemptionVolumeStatus:
       description: |-
         Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
@@ -206309,7 +206353,7 @@ paths:
       summary: Delete a tag indexing rule exemption
       tags:
         - Metrics
-      x-menu-order: 26
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -206457,6 +206501,89 @@ paths:
         - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and
+        `created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has
+        only a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      reason: This metric must remain exempt because of its query requirements.
+                    type: tag_indexing_rule_exemptions
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
+                        kind: exemption
+                        missing_indexed_tags: []
+                        reason: This metric must remain exempt because of its query requirements.
+                        volume_status: unavailable
+                      id: dd.test.metric
+                      type: tag_indexing_rule_exemptions
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -207955,6 +208082,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/notification_rule/{rule_id}:
     delete:
       description: Deletes a monitor notification rule by `rule_id`.
@@ -207991,6 +208119,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
     get:
       description: Returns a monitor notification rule by `rule_id`.
       operationId: GetMonitorNotificationRule
@@ -208139,6 +208268,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/policy:
     get:
       description: Get all monitor configuration policies.
@@ -220655,6 +220785,10 @@ paths:
       tags:
         - Rum Replay Heatmaps
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a heatmap snapshot.
       operationId: CreateReplayHeatmapSnapshot
@@ -222860,6 +222994,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create a RUM retention filter for a RUM application.
@@ -222965,6 +223103,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     post:
       description: |-
         Create an exclusion filter for a RUM application.
@@ -223085,6 +223227,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update an exclusion filter for a RUM application.
@@ -223208,6 +223354,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
   /api/v2/rum/applications/{app_id}/retention_filters/permanent/{permanent_rf_id}:
     get:
       description: Get a permanent RUM retention filter for a RUM application by its identifier.
@@ -223246,6 +223396,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update the cross-product sampling configuration of a permanent RUM retention filter for a RUM application.
@@ -223364,6 +223518,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_read
     patch:
       description: |-
         Update a RUM retention filter for a RUM application.
@@ -223615,6 +223773,10 @@ paths:
       tags:
         - RUM Config
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -223768,6 +223930,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a metric based on your organization's RUM data.
@@ -223898,6 +224064,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
@@ -224204,6 +224374,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224421,6 +224595,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224467,6 +224645,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -224792,6 +224974,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/search:
     get:
       description: |-
@@ -224917,6 +225103,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
   /api/v2/rum/operations/strong_links:
     get:
       description: |-
@@ -224994,6 +225184,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     post:
       description: |-
         Create a link between a RUM operation and a journey, confirming that the journey
@@ -225255,6 +225449,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_read
     put:
       description: |-
         Update an existing RUM operation. Fields omitted from the request body keep their existing value,
@@ -225615,6 +225813,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     post:
       description: Create a playlist.
       operationId: CreateRumReplayPlaylist
@@ -225723,6 +225925,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
     put:
       description: Update a playlist.
       operationId: UpdateRumReplayPlaylist
@@ -225866,6 +226072,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/playlists/{playlist_id}/sessions/{session_id}:
     delete:
       description: Remove a session from a playlist.
@@ -226029,6 +226239,10 @@ paths:
       tags:
         - Rum Replay Sessions
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watchers:
     get:
       description: List session watchers.
@@ -226082,6 +226296,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/rum/replay/sessions/{session_id}/watches:
     delete:
       description: Delete session watch history.
@@ -226236,6 +226454,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_session_replay_read
   /api/v2/saml_configurations:
     get:
       description: Get the list of SAML configurations for the current organization. An organization has at most one SAML configuration.
