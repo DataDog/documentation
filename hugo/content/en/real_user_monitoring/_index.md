@@ -78,7 +78,7 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-overview.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 
-<div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
+<div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. If you have a committed RUM plan, reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
 
 RUM without Limits gives you flexibility over your RUM session volumes by decoupling session data ingestion from retention. This enables you to:
 
@@ -169,9 +169,9 @@ The [RUM Performance Monitoring summary][1] page provides relevant and actionabl
 - **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS, to assess app reliability
 - **Dive into investigations directly** from interactive widgets without leaving the page
 
-For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][16] page.
+For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization][16] page to improve Core Web Vitals.
 
-For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting.
+For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting. Use the [RUM Optimization][16] page to improve app launch vitals, such as time to initial display (TTID) and time to full display (TTFD).
 
 ### Out-of-the-box dashboards
 

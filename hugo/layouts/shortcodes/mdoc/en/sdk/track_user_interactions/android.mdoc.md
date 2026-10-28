@@ -1,5 +1,9 @@
 ## Automatically track user interactions
 
+{% alert level="info" %}
+If your application uses Jetpack Compose, tracking actions in Compose UI needs the dedicated Compose library and `enableComposeActionTracking()`. See [Jetpack Compose](/real_user_monitoring/setup/additional_plugins/?platform=android#jetpack-compose).
+{% /alert %}
+
 To automatically track user interactions (such as taps, scrolls, and swipes) as RUM actions, call `trackUserInteractions()` when you build your RUM configuration:
 
 {% tabs %}

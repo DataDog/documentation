@@ -24,7 +24,7 @@ further_reading:
 Datadog provides the below out-of-the-box metrics for a comprehensive overview of your application's health over time. To help ensure accuracy, these metrics are computed prior to retaining or discarding any sessions. This means that even if you keep 0.01% of your sessions, these metrics are computed based on 100% of the ingested sessions. These metrics are powering the [performance summary][1] to give you an accurate overview of the performance of your apps.
 
 **Notes**:
-- The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
+- The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app short name, app ID, app version, service, team, OS name, OS version, browser name, and country. Each dimension has a cardinality cap.
 - All queries for the below metrics include `@session.type:user`, except the `rum.measure.lighthouse.*` metrics, which come from browser Synthetic test audits rather than real-user sessions. See [Lighthouse audits][5].
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
@@ -33,14 +33,17 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.app.startup_to_full_display` | Time to full display during application launch | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.app.startup_to_initial_display` | Time to initial display during application launch | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.error` | Count of errors | Default, Is Crash, View Name | Mobile & Browser |
-| `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
+| `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Error Source | Mobile only |
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
-| `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
+| `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default | Mobile only |
+| `rum.measure.app.startup_time` | Application startup time | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.lighthouse.performance` | Lighthouse Performance category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.lighthouse.accessibility` | Lighthouse Accessibility category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.lighthouse.best_practices` | Lighthouse Best Practices category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.lighthouse.seo` | Lighthouse SEO category score (0 to 100) | App ID, View Name | Browser only |
 | `rum.measure.lighthouse.agentic` | Lighthouse Agentic category score (0 to 100) | App ID, View Name | Browser only |
+| `rum.measure.operation` | Count of operations | Default | Mobile & Browser |
+| `rum.measure.operation.duration` | Duration of operations | Default, Percentiles breakdown | Mobile & Browser |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
 | `rum.measure.session.action` | Count of actions | Default | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
@@ -51,20 +54,21 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.usage.quota_blocked_sessions` | Count of sessions blocked after a [retention quota][3] is reached | Default | Mobile & Browser |
 | `rum.measure.view` | Count of views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.cpu_ticks_per_second` | CPU ticks per second | Default, View Name | Mobile only |
-| `rum.measure.view.crash_free` | Count of crash-free sessions | Default, View Name | Mobile only |
+| `rum.measure.view.crash_free` | Count of crash-free views | Default, View Name | Mobile only |
 | `rum.measure.view.cumulative_layout_shift` | Cumulative Layout Shift | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.loading_time` | Time until the page is ready and no network request or DOM mutation is occurring. | Default, Percentiles breakdown, View Name | Mobile & Browser |
 | `rum.measure.view.error_free` | Count of error-free views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.first_contentful_paint` | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.frozen_frame` | Count of frozen frames | Default, View Name | Mobile only |
-| `rum.measure.view.frozen_frame_free` | Count of views without frozen frames | Default | Mobile only |
-| `rum.measure.view.inactive` | Count of inactive views | Default, Percentiles breakdown | Mobile & Browser |
+| `rum.measure.view.frozen_frames_free` | Count of views without frozen frames | Default | Mobile only |
+| `rum.measure.view.inactive` | Count of inactive views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.interaction_to_next_paint` | Longest duration between a user's interaction with the page and the next paint.  | Default, Percentiles breakdown | Browser only |
 | `rum.measure.view.interaction_to_next_view` | Time between the last user interaction in the previous view and the start of the current view | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.largest_contentful_paint` | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.memory` | Amount of system memory used | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.network_settled` | Network settled | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.refresh_rate` | Average of user's refresh rate (FPS) | Default, Percentiles breakdown | Mobile only |
+| `rum.measure.view.slow_frames_rate` | Rate of slow frames | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
 | `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
 

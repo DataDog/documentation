@@ -35,7 +35,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.1+
 
-<div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
+<div class="alert alert-danger">If your network or proxy uses an allowlist, add the <code>sdk-configuration.</code> host for your Datadog site, listed in <a href="/real_user_monitoring/setup/#additional-endpoints-for-remote-configuration">Additional endpoints for Remote Configuration</a>, in addition to the RUM intake host. For Browser applications, also add this host to your Content Security Policy.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
 
 ## How it works

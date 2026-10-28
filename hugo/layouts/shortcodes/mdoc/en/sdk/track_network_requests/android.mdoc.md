@@ -334,9 +334,9 @@ fun loadResource() {
     GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
     try {
         // do load the resource
-        GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
+        GlobalRumMonitor.get().stopResource(resourceKey, statusCode, size, resourceKind, additionalAttributes)
     } catch (e: Exception) {
-        GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
+        GlobalRumMonitor.get().stopResourceWithError(resourceKey, statusCode, message, origin, e)
     }
 }
 ```
@@ -349,9 +349,9 @@ public void loadResource() {
     GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
     try {
         // do load the resource
-        GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
+        GlobalRumMonitor.get().stopResource(resourceKey, statusCode, size, resourceKind, additionalAttributes);
     } catch (Exception e) {
-        GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
+        GlobalRumMonitor.get().stopResourceWithError(resourceKey, statusCode, message, origin, e, additionalAttributes);
     }
 }
 ```

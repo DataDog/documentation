@@ -1,5 +1,9 @@
 ## Automatically track views
 
+{% alert level="info" %}
+If your application uses Jetpack Compose, views built with Compose need the dedicated Compose library. See [Jetpack Compose](/real_user_monitoring/setup/additional_plugins/?platform=android#jetpack-compose).
+{% /alert %}
+
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
 
 `ActivityViewTrackingStrategy`
@@ -84,7 +88,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
 {% /tab %}
 {% /tabs %}
 
-**Note**: By default, the library uses `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
+**Note**: By default, the library uses `ActivityViewTrackingStrategy`. To track views only manually, disable automatic tracking with `.useViewTrackingStrategy(null)`, then send views by calling the `startView` and `stopView` methods yourself. If you omit `.useViewTrackingStrategy(null)`, the default activity tracking stays enabled.
 
 ## Manually track views
 

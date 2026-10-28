@@ -37,9 +37,9 @@ Each mapper receives the event and returns it with your changes applied. For the
 
 ## Drop RUM events
 
-To drop an event entirely, handle it in the matching `EventMapper<T>` implementation.
+To drop an action, error, resource, or long task event, return `null` from the matching `EventMapper<T>` implementation. The event isn't sent to Datadog.
 
-**Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
+**Note**: View events can't be dropped. The view event mapper must return a non-null event.
 
 ## Modifiable attributes
 

@@ -26,7 +26,7 @@ To enable the Android SDK to start sending data:
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
     .useViewTrackingStrategy(strategy)
     .build()
@@ -38,7 +38,7 @@ Rum.enable(rumConfig)
 
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
     .useViewTrackingStrategy(strategy)
     .build();

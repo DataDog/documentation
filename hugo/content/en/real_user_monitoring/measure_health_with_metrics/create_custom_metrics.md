@@ -40,13 +40,13 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="Generate a RUM-based custom metric" width="80%" >}}
 
-1. Give your [custom metric][3] a name that does not start with `datadog.estimated_usage`, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
-2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include {{< ui >}}Sessions{{< /ui >}}, {{< ui >}}Views{{< /ui >}}, {{< ui >}}Actions{{< /ui >}}, {{< ui >}}Errors{{< /ui >}}, {{< ui >}}Resources{{< /ui >}}, and {{< ui >}}Long Tasks{{< /ui >}}. For more information, see [Search RUM Events][7].
+1. Give your [custom metric][3] a name that does not start with `datadog.estimated_usage`, `rum.measure`, or `rum.investigate`, which are reserved for out-of-the-box metrics, such as `rum.sessions.count_by_geography`. For more information, see the [naming convention][6].
+2. Select an event type you want to create a custom metric for, such as `Sessions`. Your options include {{< ui >}}Sessions{{< /ui >}}, {{< ui >}}Views{{< /ui >}}, {{< ui >}}Actions{{< /ui >}}, {{< ui >}}Errors{{< /ui >}}, {{< ui >}}Resources{{< /ui >}}, {{< ui >}}Long Tasks{{< /ui >}}, and {{< ui >}}Vitals{{< /ui >}}. For more information, see [Search RUM Events][7].
 3. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][8] such as `@session.type:user`. 
 4. Choose a field to track from the dropdown menu next to {{< ui >}}Count{{< /ui >}}. 
 
    - Select `*` to generate a count metric of all RUM events that match your search query. 
-   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or [`distribution`][11] metric of a numeric value contained in RUM events, such as the request duration. 
+   - Optionally, enter an event attribute such as `@session.time_spent` to aggregate a numeric value and create a corresponding `count` or [`distribution`][11] metric of a numeric value contained in RUM events, such as the session duration. 
 
    If the RUM attribute facet is a measure, the metric value is the RUM attribute value.
 

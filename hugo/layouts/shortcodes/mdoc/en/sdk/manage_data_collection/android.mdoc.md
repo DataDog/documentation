@@ -4,25 +4,18 @@ The Android SDK first stores events and only uploads events when the [intake spe
 
 ### Clear all data
 
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+To delete all unsent data stored by the SDK, call `Datadog.clearAllData()`:
 
 ```kotlin
-fun clearAllData(sdkCore: SdkCore = getInstance()) {
-    sdkCore.clearAllData()
-}
+Datadog.clearAllData()
 ```
 
 ### Stop data collection
 
-You can use the `StopInstance` API to stop the SDK instance assigned to the given name (or the default instance if the name is null) from collecting and uploading data further.
+To stop an SDK instance from collecting and uploading any more data, call `Datadog.stopInstance()`. Pass an instance name to stop a named instance, or omit it to stop the default instance:
 
 ```kotlin
-fun stopInstance(instanceName: String? = null) {
-    synchronized(registry) {
-        val instance = registry.unregister(instanceName)
-        (instance as? DatadogCore)?.stop()
-    }
-}
+Datadog.stopInstance()
 ```
 
 ### Control event buildup

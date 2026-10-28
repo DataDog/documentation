@@ -98,6 +98,24 @@ All Datadog SDK traffic is transmitted over SSL (default 443) to the following d
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
 | UK1  | `https://browser-intake-uk1-datadoghq.com`    |
 
+### Additional endpoints for Remote Configuration
+
+When [Remote Configuration][4] is enabled, the Browser and mobile SDKs fetch their configuration from an `sdk-configuration.` subdomain of the standard intake origin:
+
+| Site | Remote Configuration URL |
+|------|--------------------------|
+| US1  | `https://sdk-configuration.browser-intake-datadoghq.com` |
+| US3  | `https://sdk-configuration.browser-intake-us3-datadoghq.com` |
+| US5  | `https://sdk-configuration.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://sdk-configuration.browser-intake-datadoghq.eu` |
+| US1-FED | `https://sdk-configuration.browser-intake-ddog-gov.com` |
+| US2-FED | `https://sdk-configuration.browser-intake-us2-ddog-gov.com` |
+| AP1  | `https://sdk-configuration.browser-intake-ap1-datadoghq.com` |
+| AP2  | `https://sdk-configuration.browser-intake-ap2-datadoghq.com` |
+| UK1  | `https://sdk-configuration.browser-intake-uk1-datadoghq.com` |
+
+If you use a [proxy][2] or have a [Content Security Policy (CSP)][3], allow these `sdk-configuration.` domains as well. On iOS and Android, the SDK proxy configuration also applies to Remote Configuration requests.
+
 ### Additional endpoints for Browser Profiling
 
 When [Browser Profiling][1] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
@@ -127,3 +145,4 @@ Continue to [Create a RUM Application](/real_user_monitoring/setup/create_applic
 [1]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/?platform=browser
 [2]: /real_user_monitoring/guide/proxy-rum-data
 [3]: /integrations/content_security_policy_logs
+[4]: /real_user_monitoring/remote_configuration/

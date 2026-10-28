@@ -1,5 +1,5 @@
-<p>After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the <span class="ui">User Data Collection</span> tab:</p>
+<p>Datadog servers determine the client IP address from incoming requests. The SDKs don't collect or send it. When you create a RUM application, or later from the application's <span class="ui">User Data Collection</span> tab, you can choose whether to include IP or geolocation data:</p>
 
 {{ partial "img.html" (dict "root" . "src" "data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" "alt" "You can include or exclude geolocation and client IP data from the RUM application management page" "style" "width:100%;") }}
 
-<p>After you disable the collection of IP data, the change is applied immediately. Disabling it doesn't remove IP data from events collected before the change. It is performed on the backend, which means the SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.</p>
+<p>After you disable IP data collection, the change takes effect within a few minutes. Events that Datadog already stored aren't rewritten, so they keep their IP data.</p>

@@ -48,7 +48,7 @@ For more information about searching for RUM events and using time frames, see [
 
 All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
 
-While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to be able to access them in your search and [visualizations][8].
+Most automatically collected attributes have facets. You can search on custom event attributes even if they don't have a facet. Create a facet or measure for a custom attribute to get autocompletion, value suggestions, facet descriptions, and validation in your search and [visualizations][8].
 
 ### Facets
 

@@ -130,10 +130,11 @@ To learn more, see [Enrich RUM Data][12].
 | Maximum event size                         | 1 MB                     |
 | Maximum intake payload size                | 5 MB                     |
 | Maximum source maps and mapping files size | 500 MB per file          |
-| Maximum dSYM files size                    | 2 GB per file            |
+| Maximum dSYM files size                    | 2 GB per file, uncompressed |
+| Maximum Android mapping files size         | 2 GB per file, uncompressed |
 | Maximum delay at ingestion                 | 24 hours                 |
 
-If an event exceeds any of these limits, the Datadog intake rejects it.
+Datadog rejects intake requests larger than 5 MB with an HTTP 413 error. Events that exceed the other event limits are truncated or dropped during processing. For example, events larger than 1 MB are truncated. The SDK applies the session limits and starts a new session when a limit is reached.
 
 ## Next step
 
