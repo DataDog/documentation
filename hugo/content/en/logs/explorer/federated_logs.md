@@ -50,7 +50,7 @@ Federated Logs uses the [Log Explorer search syntax][2]. Each term in your query
 | `@http_status_code:500` | The top-level column with that name. The column does not need to be mapped. |
 | `env:prod` | The `env:prod` value in the column mapped to Tags. |
 
-To search a column of your table, prefix its name with `@`. Without `@`, a `key:value` term searches the column mapped to Tags, as tags do in Log Explorer. If no column is mapped to Tags, Datadog searches a column named `tags`. If the table has no `tags` column, the query returns an error.
+To search a column of your table, prefix its name with `@`. A `key:value` term without `@` is a tag, as in the rest of Log Explorer, and searches the column mapped to Tags. If no column is mapped to Tags, Datadog searches a column named `tags`. If the table has no `tags` column, the query returns an error.
 
 ## Limitations
 
