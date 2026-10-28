@@ -75,10 +75,10 @@ Add actions from the **Datadog Feature Flags** integration to read or update fla
 
 | Action category | Available actions |
 | --- | --- |
-| Read configuration | List feature flags, Get feature flag, List environments |
-| Create and edit flags | Create feature flag, Update feature flag metadata |
-| Control flags | Enable feature flag, Disable feature flag, Archive feature flag |
-| Configure evaluation | Update default variant, Set feature flag targeting rules |
+| Read configuration | {{< ui >}}List feature flags{{< /ui >}}<br>{{< ui >}}Get feature flag{{< /ui >}}<br>{{< ui >}}List environments{{< /ui >}} |
+| Create and edit flags | {{< ui >}}Create feature flag{{< /ui >}}<br>{{< ui >}}Update feature flag metadata{{< /ui >}} |
+| Control flags | {{< ui >}}Enable feature flag{{< /ui >}}<br>{{< ui >}}Disable feature flag{{< /ui >}}<br>{{< ui >}}Archive feature flag{{< /ui >}} |
+| Configure evaluation | {{< ui >}}Update default variant{{< /ui >}}<br>{{< ui >}}Set feature flag targeting rules{{< /ui >}} |
 
 In the workflow builder, add a step, search for the action, and configure its inputs. When using variables for flag or environment inputs, supply their IDs rather than their keys or names.
 
