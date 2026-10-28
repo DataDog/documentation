@@ -158,7 +158,7 @@ console.log(details.errorCode); // 'FLAG_NOT_FOUND'
 
 #### Rules-based configuration
 
-`fetchRulesConfiguration()` from `@datadog/openfeature-browser/rules-based` accepts the same `flagSelection` option, with the same matching rules and limits. If the selection would make the request URL too long, the SDK does not send it and loads the full configuration. See [Browser Rules-Based Evaluation][4].
+`fetchRulesConfiguration()` from `@datadog/openfeature-browser/rules-based` accepts the same `flagSelection` option, with the same matching rules and limits. The request URL, including the encoded selection, must be at most 8,192 bytes. If it would be longer, the SDK does not send the selection, logs a `too_many_values` error to the browser console, and loads the full configuration. See [Browser Rules-Based Evaluation][4].
 
 ## Set the evaluation context
 
