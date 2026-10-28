@@ -39,6 +39,42 @@ Choose Apps when you need:
 - **Custom cloud providers and APIs**: Integrate with services beyond the [Action Catalog][4] using your own backend code.
 - **Complex UI and logic**: Full React and TypeScript control over components, state, and rendering.
 
+To build an app in Datadog without a local development environment, see [Build an app with Bits AI](#build-an-app-with-bits-ai).
+
+## Build an app with Bits AI
+
+<div class="alert alert-info">Building apps with Bits AI is in Preview and might not be available for your organization.</div>
+
+You can build an app in App Builder by prompting [Bits Code][26]. Bits Code writes the app code in a sandbox and opens a pull request in your GitHub repository. When you merge the pull request, a GitHub Action deploys and publishes the app.
+
+### Set up your repository
+
+Complete these steps before you build your first app. To view the steps in Datadog, click **Start Guide** in the app editor.
+
+1. Connect Datadog to GitHub. In the [GitHub integration tile][27], install the GitHub App and grant it access to the repositories you want to use. For details, see [Bits Code setup][28].
+1. Create an [API key][6] and an [application key][7] with [Actions API Access][5] enabled.
+1. In your terminal, run the following command to create a monorepo for your apps. The command requires Node.js 20.12.0 or later.
+   ```shell
+   npm create @datadog/apps@latest -- --monorepo
+   ```
+   When prompted, enter your API key and application key. The monorepo's deployment workflow uses these keys to publish your apps.
+
+<!-- TODO(SME): Confirm whether the monorepo command creates and pushes the GitHub repository and stores the keys as GitHub secrets, or whether the user does those steps. -->
+
+### Build and publish an app
+
+1. In the [App list][12], click **New App** > **Build with Bits AI**.
+1. Select your monorepo from the repository dropdown.
+1. In the prompt field, describe the app you want to build. Bits Code uses the **Auto** model by default.
+1. Review Bits Code's changes in the **Changed Files** tab.
+1. Open a pull request with the changes, then review and merge it in GitHub. Merging the pull request triggers a GitHub Action that uploads and publishes the app.
+
+<!-- TODO(SME): Confirm how the PR gets opened (Bits Code opens it automatically, or the user asks or clicks a button). Add the Preview tab after live preview ships. -->
+
+After the GitHub Action finishes, your app appears as **Published** in the [App list][12]. To change the app, open it, prompt Bits Code again, and merge the new pull request.
+
+**Note**: To edit an app you built locally with Bits Code, push its source code to a GitHub repository that Bits Code can access.
+
 ## Prerequisites
 
 - **Node.js version 20.12.0 or later**. Check your version:
@@ -378,3 +414,6 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend
 [25]: https://www.npmjs.com/package/@datadog/apps-frontend
+[26]: /bits_ai/bits_code/
+[27]: https://app.datadoghq.com/integrations/github
+[28]: /bits_ai/bits_code/setup/
