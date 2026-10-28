@@ -24,11 +24,11 @@ Choose a path. Steps that differ by path have an **Upstream** tab and a **DDOT**
 | Path | What runs in your cluster | How data reaches Datadog |
 |---|---|---|
 | **Upstream** | The upstream OpenTelemetry Collector and OpenTelemetry SDKs. No Datadog Agent or Datadog exporter. | OTLP over HTTP to the Datadog OTLP intake. |
-| **DDOT** | **[Placeholder: DDOT components]** | **[Placeholder]** |
+| **DDOT** | The DDOT Collector and DDOT SDKs. The Datadog Agent is optional. | The DDOT Collector's Datadog exporter. |
 
 ## Prerequisites
 
-- A test Kubernetes cluster.
+- A dedicated test Kubernetes cluster. Don't use a shared cluster, because the uninstall removes cluster-wide OpenTelemetry Operator and cert-manager resources, including ones it didn't create.
 - `kubectl` access with cluster-admin permissions.
 - [Helm][4] 3 or later, and `git`.
 - A [Datadog API key][5].
@@ -64,18 +64,25 @@ export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 
 **[Placeholder: release-stage banner]**
 
-**[Placeholder: DDOT settings]**
-
-On the DDOT path, the installer also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace. To install without the Agent, also set `DD_AGENT_ENABLED=false`.
+With `DD_INSTALL_FLOW=ddot`, the installer sets up the DDOT Collector and DDOT SDKs. The Datadog Agent is optional, and `DD_AGENT_ENABLED=false` leaves it out.
 
 ```shell
 export DD_API_KEY="<DATADOG_API_KEY>"
 export DD_SITE="{{< region-param key="dd_site" >}}"
 export DD_INSTALL_FLOW=ddot
+export DD_AGENT_ENABLED=false
 export K8S_CLUSTER_TYPE=other
 export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 ```
+
+**Optional: install the Datadog Agent.** Some features need the Agent: **[Placeholder: features that need the Agent]**. To install it, set `DD_AGENT_ENABLED` to `true` before you run the installer:
+
+```shell
+export DD_AGENT_ENABLED=true
+```
+
+The installer then also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -180,6 +187,12 @@ For more help, see [OpenTelemetry Troubleshooting][16].
 
 With `K8S_CLUSTER_TYPE=other`, set `K8S_CLUSTER_NAME` and run `./install` again.
 
+If you installed the Datadog Agent, delete the Agent's secret before you run `./install` again. Otherwise, the installer stops because the secret already exists, after it updates the Collectors but before it updates the Agent:
+
+```shell
+kubectl delete secret datadog-secret -n datadog
+```
+
 ## Uninstall
 
 <div class="alert alert-warning">The uninstall script is for test clusters. It deletes cert-manager, the OpenTelemetry Operator's custom resource definitions and every resource that uses them, and the <code>cert-manager</code>, <code>opentelemetry-operator-system</code>, and <code>datadog</code> namespaces. That includes any Datadog Agent installed in the <code>datadog</code> namespace.</div>
@@ -196,7 +209,7 @@ With `K8S_CLUSTER_TYPE=other`, set `K8S_CLUSTER_NAME` and run `./install` again.
    ./uninstall
    ```
 
-   On the Upstream path, the script also tries to remove Datadog Agent components that it didn't install. Ignore the errors it prints about them.
+   If you didn't install the Datadog Agent, the script also tries to remove Agent components. Ignore the errors it prints about them.
 
 3. The script leaves the Prometheus Operator custom resource definitions that the Helm chart adds. If nothing else in your cluster uses them, delete them:
 
@@ -224,7 +237,7 @@ The installer uses Helm to install the [OpenTelemetry Kube Stack][7] chart. The 
 | `cluster` Collector | Deployment | Collects cluster-level metrics and Kubernetes objects. |
 | `daemon` Collector | DaemonSet | Runs on every node. Collects node metrics and container logs, and receives your application's telemetry. |
 | `opentelemetry-kube-stack` instrumentation settings | `Instrumentation` resource | Tells the Operator how to instrument annotated pods and where they send data. |
-| Datadog Operator and Datadog Agent (DDOT path only) | `datadog` namespace | Installed unless you set `DD_AGENT_ENABLED=false`. |
+| Datadog Operator and Datadog Agent (DDOT path only) | `datadog` namespace | Installed only if you set `DD_AGENT_ENABLED=true`. |
 
 {{% /collapse-content %}}
 

@@ -28,7 +28,8 @@ Find where you're starting from in the following table, then follow the page for
 
 | You... | Start here |
 |---|---|
-| Are new to OpenTelemetry and have a Kubernetes cluster | [Quickstart: OpenTelemetry on Kubernetes][1]: install OpenTelemetry with a script, instrument your application, and see your data in Datadog. |
+| Are new to OpenTelemetry and have a Kubernetes cluster | [Quickstart: OpenTelemetry on Kubernetes][1]: install with a script, instrument your application, and see your data in Datadog. Choose a path:<br>[DDOT path][8]: the Datadog OpenTelemetry (DDOT) Collector and DDOT SDKs.<br>[Upstream path][9]: the upstream OpenTelemetry Collector and SDKs. |
+| Are new to OpenTelemetry and run on a host or in Docker | [Set Up the OpenTelemetry Collector][2]: follow the [Host][10] or [Docker][11] instructions. |
 | Already use OpenTelemetry SDKs or an OpenTelemetry Collector | [Set Up the OpenTelemetry Collector][2]: send your Collector's data to Datadog over OTLP. |
 | Can't run a Collector, such as on serverless or managed platforms | [Datadog OTLP Intake Endpoint][3]: send data from your applications straight to Datadog. |
 | Already use the Datadog Agent or Datadog SDKs | [OTLP Ingest in the Agent][4]: send OpenTelemetry data through your Agent.<br>[Using Datadog SDKs with OpenTelemetry][5]: instrument with a Datadog SDK. |
@@ -60,3 +61,7 @@ Find where you're starting from in the following table, then follow the page for
 [5]: /opentelemetry/instrument/dd_sdks/
 [6]: /opentelemetry/setup/
 [7]: /opentelemetry/instrument/
+[8]: /opentelemetry/getting_started/kubernetes/?tab=ddot
+[9]: /opentelemetry/getting_started/kubernetes/?tab=upstream
+[10]: /opentelemetry/setup/collector_exporter/?tab=host
+[11]: /opentelemetry/setup/collector_exporter/?tab=docker
