@@ -23,24 +23,24 @@ DDOT SDKs are in Preview.
 
 A Datadog OpenTelemetry (DDOT) SDK is the Datadog SDK for your language, set up to send OpenTelemetry data. It implements the OpenTelemetry API and exports OTLP to your Collector, in place of the upstream OpenTelemetry SDK. It's the same Datadog SDK you use for APM, packaged as an image that the [OpenTelemetry Operator][1] injects into your pods.
 
-The DDOT SDK sends your application's traces as OTLP. It also sends the metrics and logs that your application records with the OpenTelemetry API. Which runtime metrics and logs it sends by default depends on your language.
+The DDOT SDK sends your application's traces as OTLP. It also sends the metrics and logs that your application records with the OpenTelemetry API.
 
-You turn on the DDOT SDK with an annotation and environment variables. If your code uses the OpenTelemetry API, you keep those calls. Node.js applications need one more step, and code that sets up the OpenTelemetry SDK itself needs changes. See [Known limits][2].
+You turn on the DDOT SDK with an annotation and environment variables. If your code uses the OpenTelemetry API, you keep those calls. Some applications need changes. See [Known limits][2].
 
 Already use a Datadog SDK that sends data to the Datadog Agent? To keep that setup and add the OpenTelemetry API, see [OpenTelemetry API Support][3].
 
-If you followed the DDOT path of the [Kubernetes quickstart][4], your annotated pods already use DDOT SDKs. The installer's instrumentation settings include more options than this page shows. To check your pods, see [Verify][5].
+If you followed the DDOT path of the [Kubernetes quickstart][4], your annotated pods already use DDOT SDKs. To check your pods, see [Verify][5].
 
 ## Prerequisites
 
 - An application written in Java, Python, Node.js, or .NET, running in Kubernetes as a Deployment. For Go, see [Known limits][2].
 - The [OpenTelemetry Operator][1]. The Operator tab of [Install the DDOT Collector on Kubernetes][6] installs it.
-- A Collector that receives OTLP over HTTP on port `4318`, such as the [DDOT Collector][6] or the [upstream OpenTelemetry Collector][7]. The steps on this page send to a Collector on each node that publishes port `4318` on the node, as the DDOT Collector from [Install the DDOT Collector on Kubernetes][6] does.
+- A Collector on each node that receives OTLP over HTTP on port `4318`, such as the [DDOT Collector][6] or the [upstream OpenTelemetry Collector][7].
 - `kubectl` access to the application's namespace.
 
 ## Turn on the DDOT SDK
 
-The OpenTelemetry Operator injects the DDOT SDK into pods that have an annotation for their language. An `Instrumentation` resource tells the Operator which SDK image to use, how to configure it, and where to send data.
+An `Instrumentation` resource tells the Operator which SDK image to inject, how to configure it, and where to send data.
 
 1. Save the following `Instrumentation` resource as `ddot-sdks.yaml`:
 
@@ -123,10 +123,9 @@ In this file:
    | `<LANGUAGE>` | `java`, `python`, `nodejs`, or `dotnet`. |
    | `<ENVIRONMENT>` | The environment name, such as `staging`. It becomes the `env` tag on your data. |
 
-   The patch does three things:
+   In the patch:
 
    - The `inject-<LANGUAGE>` annotation tells the Operator to inject the DDOT SDK from the `ddot-sdks` resource in the pod's namespace. To use a resource in another namespace, set the value to `<RESOURCE_NAMESPACE>/ddot-sdks`.
-   - The `deployment.environment.name` annotation sets your environment.
    - The `admission.datadoghq.com/enabled: "false"` label stops the Datadog Agent's admission controller from also instrumenting the pod, if you run the Agent in the cluster.
 
    By default, the service name in Datadog is the Deployment's name, and the version is the container image's tag. To set a different service name, also add the annotation `resource.opentelemetry.io/service.name`.
@@ -153,17 +152,11 @@ Your application's pods list a `datadog/dd-otel-autoinstrumentation-*` image, fo
 my-app-7d9c8b5f6d-x2kqp: datadog/dd-otel-autoinstrumentation-java:1.68.0-preview
 ```
 
-Check that OpenTelemetry mode is on. Each variable is followed by its value:
-
-```shell
-kubectl get pods -n <NAMESPACE> -o yaml | grep -A1 -E 'name: (OTEL_TRACES_EXPORTER|DD_TRACE_OTEL_ENABLED|DD_LOGS_OTEL_ENABLED|DD_METRICS_OTEL_ENABLED)$'
-```
-
-Then check for your data in Datadog. It can take up to five minutes to appear. Replace `<SERVICE_NAME>` with your service name, which is the Deployment's name by default, and `<ENVIRONMENT>` with your environment name.
+Then check for your data in Datadog. Data appears within a few minutes. Replace `<SERVICE_NAME>` with your service name, which is the Deployment's name by default, and `<ENVIRONMENT>` with your environment name.
 
 - **Services**: In the [Software Catalog][8], set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. Its service page shows requests, errors, and latency.
 - **Traces**: In the [Trace Explorer][9], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>` and open a trace to see its spans.
-- **Logs**: In the [Log Explorer][10], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. This search finds the logs that the DDOT SDK sends as OTLP. **[Placeholder: the logging libraries the DDOT SDK sends logs from, for each language]** Container logs that your Collector reads from files have the `service` and `env` tags only if your Collector adds them. To find those logs, search for `kube_namespace:<NAMESPACE>`.
+- **Logs**: In the [Log Explorer][10], search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. This search finds the logs that the DDOT SDK sends as OTLP. **[Placeholder: the logging libraries the DDOT SDK sends logs from, for each language]**
 
 ## Add the Datadog Agent (optional)
 
@@ -174,7 +167,7 @@ To use those features:
 1. Install the Agent. See [Add the Datadog Agent (optional)][11] on the DDOT Collector page.
 2. Point the DDOT SDK at the Agent: **[Placeholder: the `DD_AGENT_HOST` value and the Agent settings the DDOT SDK needs]**. Add the variables to the `env` list in `ddot-sdks.yaml`, apply the file, and restart your Deployment.
 
-The DDOT SDK keeps sending your telemetry as OTLP to your Collector. Keep the `admission.datadoghq.com/enabled: "false"` label on your pods, so the Agent doesn't also instrument them.
+The DDOT SDK keeps sending your telemetry as OTLP to your Collector.
 
 ## Known limits
 
@@ -203,7 +196,13 @@ No traces from a .NET application
 : Check that the `dotnet` section of `ddot-sdks.yaml` sets the three variables, and that `CORECLR_PROFILER_PATH` uses `linux-musl` on musl-based images.
 
 The SDK sends to the Datadog Agent instead of your Collector
-: Check that `OTEL_TRACES_EXPORTER` is `otlp`. In Java, also check that `DD_TRACE_OTEL_ENABLED` is `true`. Without it, the Java SDK ignores the `OTEL_*` variables. In .NET, check that `OTEL_EXPORTER_OTLP_PROTOCOL` is `http/protobuf` or `http/json`. With any other value, the .NET SDK sends traces to the Agent. The .NET setting `DD_OPENTELEMETRY_ENABLED` doesn't turn on OpenTelemetry mode.
+: List the OpenTelemetry mode variables on your pods. Each variable is followed by its value:
+
+  ```shell
+  kubectl get pods -n <NAMESPACE> -o yaml | grep -A1 -E 'name: (OTEL_TRACES_EXPORTER|DD_TRACE_OTEL_ENABLED|DD_LOGS_OTEL_ENABLED|DD_METRICS_OTEL_ENABLED)$'
+  ```
+
+  Check that `OTEL_TRACES_EXPORTER` is `otlp`. In Java, also check that `DD_TRACE_OTEL_ENABLED` is `true`. Without it, the Java SDK ignores the `OTEL_*` variables. In .NET, check that `OTEL_EXPORTER_OTLP_PROTOCOL` is `http/protobuf` or `http/json`. With any other value, the .NET SDK sends traces to the Agent. The .NET setting `DD_OPENTELEMETRY_ENABLED` doesn't turn on OpenTelemetry mode.
 
 No data in Datadog
 : Check that your Collector is running and exporting without errors. See the Troubleshooting section of [Install the DDOT Collector on Kubernetes][6].
