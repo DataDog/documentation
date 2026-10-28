@@ -22,7 +22,7 @@ further_reading:
     text: 'Interactive Lab: RUM Retention Filters'
 ---
 
-<div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
+<div class="alert alert-info">RUM without Limits&trade; is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
 
 {{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-overview.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 

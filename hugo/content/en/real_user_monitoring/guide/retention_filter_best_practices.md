@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-RUM without Limits allows you to capture all session data while only retaining the sessions that are valuable to your organization. This tool enhances your data management by separating session data ingestion from indexing.
+RUM without Limits&trade; allows you to capture all session data while only retaining the sessions that are valuable to your organization. This tool enhances your data management by separating session data ingestion from indexing.
 
 ## Key features
 

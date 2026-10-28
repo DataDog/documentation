@@ -1810,7 +1810,7 @@ After setup, the `service` and `version` on RUM events identify which micro fron
 -   {% ui %}RUM Summary dashboard{% /ui %}: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
 -   {% ui %}Custom dashboards{% /ui %}: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
-The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
+The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits™][24] metrics:
 
 - `rum.measure.error`
 - `rum.measure.operation`

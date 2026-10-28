@@ -51,7 +51,7 @@ The table lists additional example journeys and their associated operations by i
 
 ## Prerequisites
 
-- [RUM without Limits][11] must be enabled in your organization.
+- [RUM without Limits&trade;][11] must be enabled in your organization.
 - To create operations with SDK APIs, download a supported Datadog RUM SDK version with client-side APIs to define operations:
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]

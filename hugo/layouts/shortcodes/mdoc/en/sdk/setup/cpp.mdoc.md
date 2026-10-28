@@ -371,7 +371,7 @@ dd_rum_config_set_session_sample_rate(&rum_config, 75.0f);
 {% /tab %}
 {% /tabs %}
 
-Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessions are ingested for full visibility and accurate metrics. To control which sessions are indexed and retained, configure retention filters. For more information, see [RUM Without Limits][3].
+Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessions are ingested for full visibility and accurate metrics. To control which sessions are indexed and retained, configure retention filters. For more information, see [RUM Without Limits™][3].
 
 {% /step %}
 

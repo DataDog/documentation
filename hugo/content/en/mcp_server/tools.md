@@ -2585,7 +2585,7 @@ Permanently deletes a custom RUM metric by ID. This operation is idempotent.
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
-Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against custom retention filters; permanent retention filters still apply, and the session is still retained if another of its events is. Read-only; available for [RUM without Limits][59] customers.
+Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against custom retention filters; permanent retention filters still apply, and the session is still retained if another of its events is. Read-only; available for [RUM without Limits&trade;][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?

@@ -34,7 +34,7 @@ Create separate availability and latency SLOs to measure these distinct aspects 
 
 ## Prerequisites
 
-- [RUM without Limits][4] is enabled for your organization.
+- [RUM without Limits&trade;][4] is enabled for your organization.
 - You have [configured at least one RUM operation][5].
 
 ## Understand operation outcomes
