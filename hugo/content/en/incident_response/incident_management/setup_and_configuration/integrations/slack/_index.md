@@ -70,7 +70,7 @@ The **channel name template** you define determines how Datadog names the incide
 
 ### Message syncing (Slack mirroring)
 
-First, enable automatic channel creation. Then you can configure Incident Management to sync every message posted in an incident Slack channel to the incident's timeline in Datadog.
+After enabling automatic channel creation, you can sync every message posted in an incident Slack channel to the incident's timeline.
 
 To enable syncing, enable **Mirror all Slack channel messages to the incident timeline** in Incident Management settings. A message's author does not need to be connected to the Datadog organization for Datadog to sync the message.
 
