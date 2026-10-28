@@ -20,12 +20,12 @@ Automatic integrations work only with specific packages and versions. Check the 
 | Python | LangChain | 0.1.20 or later | `dd-trace-py` 3.19.0 or later |
 | Python | OpenAI | 1.102.0 or later | `dd-trace-py` 4.10.0 or later |
 | Python | Anthropic | 0.28.0 or later | `dd-trace-py` 4.11.0 or later |
-| Node.js | AI SDK | v6 | `dd-trace-js` 5.96.0 or later |
+| Node.js | AI SDK | v6 or later | `dd-trace-js` 5.96.0 or later |
 | Node.js | OpenAI | 4.87.0 or later | `dd-trace-js` 5.105.0 or later |
 | Node.js | Anthropic | 0.14.0 or later | `dd-trace-js` 5.122.0 or later, or 6.11.0 or later |
 | Ruby | RubyLLM | 2.0.0 or later | `dd-trace-rb` 2.44.0 or later |
 
-<!-- TODO: Does AI Guard support AI SDK v7 starting with `dd-trace-js` 5.112.0 and 6.1.0, the releases that added v7 support for LLM Observability? When integration tests confirm it, change the AI SDK row to "v6 or later" with that version. -->
+<!-- TODO: Confirm the minimum `dd-trace-js` version for AI SDK v7. LLM Observability added AI SDK v7 support in `dd-trace-js` 5.112.0 and 6.1.0. Until confirmed, the version column shows the v6 minimum. -->
 
 Automatic integrations don't support Java. For Java agents, use the [SDK][1]. For Amazon Strands and LiteLLM Proxy, use [manual integrations][2].
 
