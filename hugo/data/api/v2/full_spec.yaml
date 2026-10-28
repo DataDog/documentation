@@ -103997,9 +103997,12 @@ components:
       description: The definition of a RUM operation's journey, used to detect it from RUM events.
       properties:
         rum_steps:
-          description: The ordered list of steps composing the RUM journey.
+          description: |-
+            The ordered list of steps composing the RUM journey.
+            `null` in responses for operations that have no journey defined.
           items:
             $ref: "#/components/schemas/RUMOperationJourneyStep"
+          nullable: true
           type: array
       required:
         - rum_steps
@@ -104119,6 +104122,7 @@ components:
           description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
+          nullable: true
           type: array
         journey_rum:
           $ref: "#/components/schemas/RUMOperationJourneyRum"
@@ -104137,6 +104141,7 @@ components:
             - "team:checkout"
           items:
             type: string
+          nullable: true
           type: array
         updated_at:
           description: The timestamp when the RUM operation was last updated.
@@ -104406,7 +104411,8 @@ components:
         - attributes
       type: object
     RUMOperationUser:
-      description: A Datadog user referenced by a RUM operation.
+      description: A Datadog user referenced by a RUM operation. `null` when the user could not be resolved.
+      nullable: true
       properties:
         email:
           description: The email of the user.
@@ -104422,6 +104428,7 @@ components:
           type: string
         uuid:
           description: The UUID of the user.
+          example: "abc12345-1234-5678-abcd-ef1234567890"
           readOnly: true
           type: string
       type: object
@@ -104432,10 +104439,36 @@ components:
           items:
             $ref: "#/components/schemas/RUMOperationResponseData"
           type: array
+        links:
+          $ref: "#/components/schemas/RUMOperationsListResponseLinks"
         meta:
           $ref: "#/components/schemas/RUMOperationsListResponseMeta"
       required:
         - data
+      type: object
+    RUMOperationsListResponseLinks:
+      description: Pagination links for a list of RUM operations.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        last:
+          description: Link to the last page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=150"
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=100"
+          type: string
+        prev:
+          description: Link to the previous page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=50"
+          type: string
       type: object
     RUMOperationsListResponseMeta:
       description: Metadata for a list of RUM operations.
@@ -109099,6 +109132,17 @@ components:
     RumCrossProductSampling:
       description: The configuration for cross-product retention filters.
       properties:
+        session_replay_enabled:
+          description: Whether the cross-product retention filter for Session Replay is enabled.
+          example: true
+          type: boolean
+        session_replay_sample_rate:
+          description: The sample rate for the Session Replay cross-product retention filter, between 0 and 100.
+          example: 50.0
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
         trace_enabled:
           description: Whether the cross-product retention filter for APM traces is enabled.
           example: true
@@ -109680,6 +109724,8 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterQuery"
         sample_rate:
           $ref: "#/components/schemas/RumRetentionFilterSampleRate"
+        track:
+          $ref: "#/components/schemas/RumRetentionFilterTrack"
       type: object
     RumRetentionFilterCreateAttributes:
       description: The object describing attributes of a RUM retention filter to create.
@@ -109727,6 +109773,8 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterAttributes"
         id:
           $ref: "#/components/schemas/RumRetentionFilterID"
+        meta:
+          $ref: "#/components/schemas/RumRetentionFilterMeta"
         type:
           $ref: "#/components/schemas/RumRetentionFilterType"
       type: object
@@ -109736,14 +109784,50 @@ components:
       type: boolean
     RumRetentionFilterEventType:
       description: The type of RUM events to filter on.
-      enum: ["session", "view", "action", "error", "resource", "long_task", "vital"]
+      enum: ["session", "view", "action", "error", "resource", "long_task", "vital", "operation", "execution_context"]
       example: "session"
       type: string
-      x-enum-varnames: ["SESSION", "VIEW", "ACTION", "ERROR", "RESOURCE", "LONG_TASK", "VITAL"]
+      x-enum-varnames: ["SESSION", "VIEW", "ACTION", "ERROR", "RESOURCE", "LONG_TASK", "VITAL", "OPERATION", "EXECUTION_CONTEXT"]
     RumRetentionFilterID:
       description: ID of retention filter in UUID.
       example: "051601eb-54a0-abc0-03f9-cc02efa18892"
       type: string
+    RumRetentionFilterMeta:
+      description: Metadata about a RUM retention filter.
+      properties:
+        edition_mode:
+          $ref: "#/components/schemas/RumRetentionFilterMetaEditionMode"
+        source:
+          $ref: "#/components/schemas/RumRetentionFilterMetaSource"
+        updated_at:
+          description: The timestamp of the last update to the retention filter, in milliseconds since the Unix epoch.
+          example: 1715000000000
+          format: int64
+          type: integer
+        updated_by_handle:
+          description: The handle of the user who last updated the retention filter.
+          example: "user@example.com"
+          type: string
+      type: object
+    RumRetentionFilterMetaEditionMode:
+      description: "Which attributes of the retention filter can be edited. `complete`: all attributes can be edited. `limited`: only the sample rates can be edited; the name, event type, and query are fixed and the filter cannot be reordered (for example, default filters). `unknown`: the edition mode is not set."
+      enum:
+        - unknown
+        - complete
+        - limited
+      example: complete
+      type: string
+      x-enum-varnames: ["UNKNOWN", "COMPLETE", "LIMITED"]
+    RumRetentionFilterMetaSource:
+      description: The source of the last change to a RUM retention filter.
+      enum:
+        - default
+        - ui
+        - terraform
+        - unknown
+      example: ui
+      type: string
+      x-enum-varnames: ["DEFAULT", "UI", "TERRAFORM", "UNKNOWN"]
     RumRetentionFilterQuery:
       description: The query string for a RUM retention filter.
       example: "@session.has_replay:true"
@@ -109761,6 +109845,14 @@ components:
       maximum: 100
       minimum: 0.1
       type: number
+    RumRetentionFilterTrack:
+      description: The product track a RUM retention filter applies to.
+      enum:
+        - rum
+        - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames: ["RUM", "PRODUCT_ANALYTICS"]
     RumRetentionFilterType:
       default: retention_filters
       description: The type of the resource. The value should always be retention_filters.
@@ -223386,7 +223478,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a permanent RUM retention filter
@@ -223449,7 +223545,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a permanent RUM retention filter
@@ -223470,7 +223570,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a RUM retention filter
@@ -223508,7 +223612,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a RUM retention filter
@@ -223576,7 +223684,11 @@ paths:
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a RUM retention filter
