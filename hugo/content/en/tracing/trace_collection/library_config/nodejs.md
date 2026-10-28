@@ -47,12 +47,9 @@ If `DD_AGENTLESS_ENABLED` is `true` and `DD_API_KEY` is not set, the SDK logs an
 In agentless mode, the SDK sends the following data directly to Datadog:
 
 - Traces
-- Instrumentation telemetry
 - [Remote Configuration][9]
 - [Dynamic Instrumentation][10]
-- Crash reports
 - Logs from Bunyan, Pino, and Winston
-- OpenTelemetry metrics and logs (v5.127.0 and v6.16.0 and later)
 - [Test Optimization][11]
 - [LLM Observability][12]
 - [Feature Flags][16] configuration
@@ -66,10 +63,8 @@ The following features require an Agent and are disabled in agentless mode:
 
 Agentless mode also changes the following behavior:
 
-- Traces are always sent to the Datadog intake, and `OTEL_TRACES_EXPORTER` is ignored.
 - `DD_TRACE_SAMPLING_RULES` and `DD_TRACE_RATE_LIMIT` are ignored. `DD_TRACE_SAMPLE_RATE` still applies.
-- To stop sending logs directly, set `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` to `false`. To use the OpenTelemetry log exporter instead, set `DD_LOGS_OTEL_ENABLED` to `true`.
-- To send OpenTelemetry data to your own collector, set `OTEL_EXPORTER_OTLP_ENDPOINT` or a signal-specific endpoint variable.
+- To stop sending logs directly, set `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` to `false`.
 
 ## Configuration keys
 
