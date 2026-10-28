@@ -23,11 +23,11 @@ $$m\_C = {∑\_{i=1}^{n\_C} y\_{Ci}}/{n\_C}$$
 
 $$m\_T = {∑\_{j=1}^{n\_T} y\_{Tj}}/{n\_T}$$
 
-For a non-ratio mean metric, Datadog estimates the subject-level variance in each group from the first and second moments:
+For a non-ratio mean metric, Datadog estimates the subject-level variance in each group from the squared deviations around its mean:
 
-$$s\_C^2 = {∑\_{i=1}^{n\_C} y\_{Ci}^2}/{n\_C} - m\_C^2$$
+$$s\_C^2 = {∑\_{i=1}^{n\_C} (y\_{Ci}-m\_C)^2}/{n\_C}$$
 
-$$s\_T^2 = {∑\_{j=1}^{n\_T} y\_{Tj}^2}/{n\_T} - m\_T^2$$
+$$s\_T^2 = {∑\_{j=1}^{n\_T} (y\_{Tj}-m\_T)^2}/{n\_T}$$
 
 These variances describe variation between subjects within each group.
 
@@ -55,7 +55,7 @@ Within one group, let $Y\_i$ and $Z\_i$ be the numerator and denominator random 
 
 $$r = {m\_Y}/{m\_Z}$$
 
-Let $v\_y$ and $v\_z$ be the estimated sampling variances of those means, and let $q\_{yz}$ be their estimated covariance. The delta method gives:
+Let $v\_y$ and $v\_z$ be the estimated sampling variances of those means, and let $q\_{yz}$ be their estimated covariance. The [delta method][1] gives:
 
 $$v ≈ v\_y/{m\_Z^2} + {m\_Y^2 v\_z}/{m\_Z^4} - {2m\_Y q\_{yz}}/{m\_Z^3}$$
 
@@ -63,9 +63,21 @@ The covariance matters because a subject can contribute to both quantities. It i
 
 The resulting metric estimate $r$ and sampling variance $v$ replace the non-ratio mean and its sampling variance in the lift calculations below. Do not divide this variance by sample size again.
 
+### Percentile metrics
+
+A percentile metric describes a point in the metric distribution, such as p95 latency, rather than its mean. Let $ξ\_{g,p}$ denote the population percentile at probability $p$ in group $g$, and $ξ↖{\\^}\_{g,p}$ its estimate. For p95, $p=0.95$.
+
+Datadog estimates uncertainty in a percentile using the fraction of observations at or below the estimated percentile and the estimated density at that point. Let $v\_{g,\text\"fraction\"}$ be the sampling variance of that fraction and $f↖{\\^}\_g$ the estimated density. The [delta method][1] gives:
+
+$$v\_{g,\text\"percentile\"} ≈ v\_{g,\text\"fraction\"}/{f↖{\\^}\_g(ξ↖{\\^}\_{g,p})^2}$$
+
+For a per-subject percentile, the fraction is the average of indicators for whether each subject's value is at or below the threshold. For a per-event percentile, it is a ratio of event counts, with contributions aggregated by subject to account for dependence between a subject's events.
+
+A lower density at the percentile means greater uncertainty in its estimated value for the same fraction variance. The density estimate must be positive. The resulting percentile estimate and sampling variance enter the lift and interval calculations below in place of the group mean and its sampling variance.
+
 ## Estimate the lift
 
-Write the observed group means as $m\_C$ and $m\_T$, their estimated sampling variances as $v\_C$ and $v\_T$, and their estimated covariance as $q$. For independent groups without variance reduction, $q=0$. For ratio metrics, substitute the group ratio estimates $r\_C$ and $r\_T$ for $m\_C$ and $m\_T$ in the formulas below, with the corresponding ratio sampling variances and covariance. The population quantities $μ\_C$ and $μ\_T$ then represent the population ratios.
+Write the observed group means as $m\_C$ and $m\_T$, their estimated sampling variances as $v\_C$ and $v\_T$, and their estimated covariance as $q$. For independent groups without variance reduction, $q=0$. For ratio metrics, substitute the group ratio estimates $r\_C$ and $r\_T$ for $m\_C$ and $m\_T$ in the formulas below, with the corresponding ratio sampling variances and covariance. The population quantities $μ\_C$ and $μ\_T$ then represent the population ratios. For percentile metrics, make the corresponding substitution with the group percentile estimates and variances; absolute lift is then a difference in percentiles.
 
 ### Absolute lift: difference in means
 
@@ -87,7 +99,7 @@ $$λ↖{\\^} = {m\_T-m\_C}/{m\_C}$$
 
 Equivalently, $λ↖{\\^}=m\_T/m\_C-1$.
 
-The delta-method sampling variance is:
+Applying the [delta method][1] to relative lift gives the sampling variance:
 
 $$v\_λ ≈ v\_T/m\_C^2 + {m\_T^2 v\_C}/m\_C^4 - {2m\_T q}/m\_C^3$$
 
@@ -143,7 +155,7 @@ A fixed-sample interval supports inference at the planned analysis point. Repeat
 
 Sequential analysis accounts for repeated examination of results. It retains the observed effect as its point estimate and replaces the fixed normal critical value with a sample-size-dependent bound.
 
-For the control-treatment comparison, let $t=n\_C+n\_T$. Datadog calculates:
+The boundary follows the normal-mixture construction of [Howard et al. (2021)][2]. For the control-treatment comparison, let $t=n\_C+n\_T$. Datadog calculates:
 
 $$a=-2\ln(α)$$
 
@@ -163,7 +175,7 @@ Let $L\_t$ and $U\_t$ denote the random interval endpoints, with observed values
 
 $$P(L\_t≤θ≤U\_t \text\" for all analysis times \")≥1-α$$
 
-Datadog uses the normal-mixture boundary with estimated sampling variances and, for relative lift, a delta-method approximation. Its use therefore depends on those approximations being appropriate; it does not establish exact finite-sample coverage for arbitrary metric distributions.
+Datadog uses the normal-mixture boundary with estimated sampling variances and, for relative lift, a delta-method approximation. See [Waudby-Smith et al. (2024)][3] for the theory of asymptotic confidence sequences. Its use therefore depends on those approximations being appropriate; it does not establish exact finite-sample coverage for arbitrary metric distributions.
 
 Sequential intervals are wider than fixed-sample intervals at the same nominal level to account for repeated looks. The sequential p-value is obtained by inverting the sequential boundary: finding the significance level at which the interval reaches zero. It is not the fixed-sample normal-tail p-value calculated from $z\_{\text\"obs\"}$.
 
@@ -183,7 +195,7 @@ In Bayesian analysis, the uncertain effect is represented by the random variable
 
 $$Θ∼N(m\_0,τ^2)$$
 
-The posterior is normal, with mean $m\_p$ and variance $v\_p$:
+The [normal conjugate update][4] gives a normal posterior, with mean $m\_p$ and variance $v\_p$:
 
 $$v\_p={1}/{1/τ^2+1/v}$$
 
@@ -197,7 +209,7 @@ This moves the observed effect toward zero. The adjustment is stronger when the 
 
 #### Prior scale for relative and absolute lift
 
-For relative lift, the configured prior standard deviation is already on the relative-lift scale. For example, a standard deviation of 0.05 represents five percentage points on that scale.
+The default Bayesian prior is normal, centered at zero, with a configured standard deviation of 0.05. For relative lift, this standard deviation is on the relative-lift scale: five percentage points of relative lift. Organization or experiment settings can override the default.
 
 For absolute lift, Datadog multiplies the configured prior standard deviation $k$ by a pooled scale:
 
@@ -210,6 +222,16 @@ For ordinary, unadjusted mean metrics, this equals the sample-size-weighted pool
 This scaling expresses the prior in standardized-effect units and converts it to the metric's units. Its interpretation as inference on a standardized mean difference uses a small-effect, equal-variance approximation.
 
 Relative and absolute lift have separate likelihood variances and prior scales. Their Bayesian estimates and intervals are therefore computed separately; one should not be converted into the other by multiplying or dividing by the observed control mean.
+
+#### Interpreting the absolute-lift prior as a sample size
+
+The scaling above lets you interpret the normal prior's strength in terms of sample size. For an unadjusted mean metric, suppose both groups have equal variances and contain $n$ subjects each. With configured prior standard deviation $k$, prior and likelihood precision are equal when:
+
+$$n=2/k^2$$
+
+At the default $k=0.05$, this is **800 subjects per group**, or **1,600 subjects total**. At that point, the posterior mean is halfway between zero and the observed absolute lift. Larger samples give the likelihood more weight; smaller samples give the prior more weight. This is a measure of prior strength, not a minimum sample size or a power calculation.
+
+This interpretation assumes a normal prior, equal group sizes, and equal variances. It does not directly describe the effect-dependent shrinkage of a Student-t prior.
 
 #### Credible interval and probability of an effect
 
@@ -237,16 +259,22 @@ Unlike the normal prior, the Student-t prior does not yield elementary closed-fo
 
 ## Multiple comparisons
 
-When multiple-testing correction is enabled, Datadog adjusts the significance level before calculating intervals. Preferential Bonferroni correction allocates part of the significance budget to the primary metric and divides the remaining budget among the other metrics, accounting for treatment comparisons within each allocation. With one metric, it reduces to Bonferroni correction across treatments.
-
-Use the resulting comparison-specific $α$ in the interval formulas above. For hybrid analysis, the split between sequential and fixed-sample branches follows this correction. For Bayesian analysis, the adjusted level changes the credible interval's tail probabilities; it does not change the posterior or turn the credible interval into a frequentist coverage guarantee.
+For frequentist analysis, use the comparison-specific significance level after [multiple testing correction][5] in the interval formulas above. For hybrid analysis, the split between sequential and fixed-sample branches follows this correction. The linked guide explains the allocation across metrics and treatment variants. This setting is not offered for Bayesian analysis.
 
 ## When the approximations become unreliable
 
-Ratio calculations require a denominator sufficiently far from zero. Datadog flags a denominator as unreliable when its standard error divided by the magnitude of its estimated mean exceeds 0.1. For relative lift, this check also applies to the control metric estimate:
+Ratio calculations require a denominator sufficiently far from zero. Datadog flags a denominator as unreliable when its standard error divided by the magnitude of its estimated mean exceeds 0.1. This is a practical reliability criterion associated with [Kuethe et al. (2000)][6] and discussed by [Díaz-Francés and Rubio][7], rather than a universal guarantee of a normal approximation. For relative lift, this check also applies to the control metric estimate:
 
 $$\text\"SE\"(m\_C)/|m\_C|>0.1$$
 
 For ratio metrics, checks also apply to the within-group denominators. A zero denominator prevents the corresponding ratio calculation. Zero numerator variance can also prevent estimation.
 
 A narrow interval is only informative when the experiment design, data, and statistical approximations are appropriate. Neither a different interval method nor a prior resolves a denominator that is too close to zero for a reliable relative-lift approximation.
+
+[1]: https://alexdeng.github.io/public/files/kdd2018-dm.pdf
+[2]: https://arxiv.org/abs/1810.08240
+[3]: https://arxiv.org/abs/2103.06476
+[4]: https://www.cs.ubc.ca/~murphyk/Papers/bayesGauss.pdf
+[5]: /experiments/statistics/multiple_testing_correction/
+[6]: https://doi.org/10.1152/jappl.2000.88.6.2279
+[7]: https://www.researchgate.net/profile/F-Rubio/publication/257406150_On_the_existence_of_a_normal_approximation_to_the_distribution_of_the_ratio_of_two_independent_normal_random_variables/links/53d7a18a0cf2e38c632ddabc/On-the-existence-of-a-normal-approximation-to-the-distribution-of-the-ratio-of-two-independent-normal-random-variables.pdf
