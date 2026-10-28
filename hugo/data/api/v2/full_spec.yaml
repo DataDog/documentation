@@ -208082,6 +208082,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/notification_rule/{rule_id}:
     delete:
       description: Deletes a monitor notification rule by `rule_id`.
@@ -208118,6 +208119,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
     get:
       description: Returns a monitor notification rule by `rule_id`.
       operationId: GetMonitorNotificationRule
@@ -208266,6 +208268,7 @@ paths:
         operator: OR
         permissions:
           - monitor_config_policy_write
+          - monitor_notification_rules_write
   /api/v2/monitor/policy:
     get:
       description: Get all monitor configuration policies.
