@@ -25,8 +25,6 @@ OTLP Ingest in the Agent allows you to use observability features in the Datadog
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel to Datadog Agent (OTLP)</b>.</div>
-
 ## Initial setup
 
 To get started, you first [instrument your application][3] with OpenTelemetry SDKs. Then, export the telemetry data in OTLP format to the Datadog Agent. Configuring this varies depending on the kind of infrastructure your service is deployed on, as described on the page below. Although the aim is to be compatible with the latest OTLP version, the OTLP Ingest in the Agent is not compatible with all OTLP versions. The versions of OTLP that are compatible with the Datadog Agent are those that are also supported by the OTLP receiver in the OpenTelemetry Collector. To verify the exact versions supported, check the `go.opentelemetry.io/collector` version in the Agent `go.mod` file.
