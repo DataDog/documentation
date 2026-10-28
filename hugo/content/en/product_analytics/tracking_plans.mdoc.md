@@ -78,7 +78,7 @@ Setting up tracking is often slow for both product managers and engineers. Produ
 
 3. (Optional) Link the feature flag that controls the feature. The flag helps Bits AI find the relevant code faster and suggest more accurate tracking events. Click **Add a flag**, then select a [Datadog feature flag][5] or a warehouse feature flag. If your flag is not listed, enter the flag name and select **Manually Add Key**.
 
-4. (Optional) Link the repository that contains your RUM instrumentation. With access to your source code, Bits AI can find the relevant code, see which events already exist, and reuse them instead of proposing duplicates.
+4. (Optional) Link the repository that contains your RUM instrumentation. Bits AI reads your code to understand how the feature works, which improves the quality of the suggested events and properties. Bits AI can identify existing events without this step, but linking the repository produces a more accurate tracking plan.
 
 5. Click {% ui %}Continue{% /ui %}.
 {% /step %}
