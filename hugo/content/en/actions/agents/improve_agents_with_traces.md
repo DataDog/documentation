@@ -22,7 +22,7 @@ This guide shows how to use traces, along with the agent's own improvement capab
 
 ## Before you begin
 
-Enable tracing on the agent. Agent Observability records traces only for runs that happen after tracing is enabled. To enable tracing, open the agent in [Bits Agent Builder][3] and select **Enable Tracing**.
+Enable tracing on the agent. Agent Observability records traces only for runs that happen after tracing is enabled. To enable tracing, open the agent in [Bits Agent Builder][3] and select **Enable Tracing**. Tracing is included with Bits Agent Builder at no additional cost.
 
 Your agent must also have:
 
@@ -107,7 +107,7 @@ Pin those as default parameters.
 
 The agent reviews recent tool calls, identifies parameters with consistent values, checks the corresponding tool schemas, and proposes updated tool configurations.
 
-Pinning a parameter is the same mechanism as hardcoding a parameter from the [tool configuration panel][4].
+You can also pin parameters yourself by hardcoding them in the [tool configuration panel][4].
 
 ### Move conditional instructions into skills
 
