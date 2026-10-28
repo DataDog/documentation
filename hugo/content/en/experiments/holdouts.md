@@ -24,7 +24,7 @@ The following sections describe holdouts with Datadog Feature Flags. Use a consi
 
 ## Holdout phases
 
-The All shipped group, or winners-only group, receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
+The `all shipped` group, or `winners-only` group, receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
 
 Measuring the entire period as one result would mix time spent with some changes and time spent with the full combination. Holdouts separate these periods so you can monitor early results, then measure the complete treatment.
 
