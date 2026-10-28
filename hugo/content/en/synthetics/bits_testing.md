@@ -47,6 +47,8 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 
 ## Trigger a Bits Testing job
 
+To trigger a Bits Testing job, your role must include the `synthetics_write` [permission][13].
+
 1. On the Bits Testing page, describe the coverage you want in plain language, or select a suggested prompt. For example, ask Bits Testing to increase coverage generally, or to focus on specific features.
 1. Confirm the starting URL. Leave {{< ui >}}Restrict Discovery to the start URL domain{{< /ui >}} enabled to keep Bits Testing from following links to a different domain. Turn it off if your application's sign-in flow redirects off-site and back.
 1. Select a location to run the Bits Testing job from:
@@ -181,3 +183,4 @@ Run Bits Testing from a [private location](#run-bits-testing-from-a-private-loca
 [10]: /synthetics/guide/rum-to-synthetics/#generate-a-test-from-a-session-replay
 [11]: /synthetics/platform/private_locations/#create-your-private-location
 [12]: /synthetics/platform/private_locations/configuration/
+[13]: /account_management/rbac/permissions/#synthetic-monitoring
