@@ -1,6 +1,6 @@
 To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=browser#configure-tracking-consent-gdpr-compliance).
 
-## Access the internal context
+### Access the internal context
 
 After the RUM Browser SDK is initialized, you can access the internal context of the SDK. This provides core identifiers and metadata that the SDK uses internally, such as session IDs and application details.
 

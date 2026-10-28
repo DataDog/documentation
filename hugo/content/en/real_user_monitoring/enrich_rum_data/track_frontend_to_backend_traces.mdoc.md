@@ -216,9 +216,6 @@ Configuring cross-product retention filters may also increase the APM-indexed vo
 
 Continue to [Collect Frontend Profiles](/real_user_monitoring/enrich_rum_data/collect_frontend_profiles/).
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
 [2]: https://app.datadoghq.com/rum/explorer

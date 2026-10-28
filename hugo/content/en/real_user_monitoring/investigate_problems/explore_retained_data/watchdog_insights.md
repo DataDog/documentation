@@ -73,7 +73,7 @@ You can begin your investigation for the root cause of a performance issue in th
 
 Continue to [Error Tracking for Web and Mobile Applications](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

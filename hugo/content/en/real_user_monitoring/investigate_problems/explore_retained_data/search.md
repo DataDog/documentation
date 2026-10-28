@@ -94,7 +94,7 @@ For example, if your facet name is **url** and you want to filter on the **url**
 
 Continue to [Search Syntax](/real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

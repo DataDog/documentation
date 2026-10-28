@@ -36,7 +36,7 @@ See [Monitor hybrid React Native applications][5].
 For the attributes collected for views, see [Data Collected][6].
 
 [1]: https://github.com/wix/react-native-navigation
-[2]: /real_user_monitoring/reference/integrated_libraries/?platform=react_native
+[2]: /real_user_monitoring/setup/additional_plugins/?platform=react_native
 [3]: https://github.com/react-navigation/react-navigation
 [4]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [5]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

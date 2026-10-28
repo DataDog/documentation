@@ -444,7 +444,7 @@ You can unlink an operation from a journey at any time. The operation keeps its 
 
 When you open an operation, RUM displays recommendation cards ranked by severity, one for each type of problem affecting the operation: errors, abandonment, timeouts, crashes, or slowness. Click **Investigate** on a card to start a Bits Investigation that analyzes the problem down to the code. For more information, see [Optimize Performance with Bits AI][8].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -467,7 +467,7 @@ When you open an operation, RUM displays recommendation cards ranked by severity
 [17]: #create-operations-with-the-datadog-mcp
 [18]: #create-operations-with-the-datadog-api
 [19]: #monitor-rum-operations-with-included-metrics
-[20]: /real_user_monitoring/explorer/
+[20]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [21]: #use-rum-operation-events-for-investigation-and-retention
 [22]: /monitors/types/metric/
 [23]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/

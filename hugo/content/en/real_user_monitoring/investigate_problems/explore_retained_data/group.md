@@ -41,7 +41,7 @@ The {{< ui >}}Group into fields{{< /ui >}} aggregation supports one dimension fo
 
 Continue to [Visualize](/real_user_monitoring/investigate_problems/explore_retained_data/visualize/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

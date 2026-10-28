@@ -478,6 +478,18 @@ module.exports = {
 This example uses webpack. The configuration object is identical across all supported bundlers. See [Installation](#installation) for installation instructions for your bundler.
 {% /alert %}
 
+## Framework and platform integrations
+
+Datadog also provides integrations for frontend frameworks and platforms. Each integration page explains how to set it up with the RUM Browser SDK:
+
+- [React](/integrations/rum-react/)
+- [Next.js](/integrations/rum-next-plugin/)
+- [Angular](/integrations/rum-angular/)
+- [Vue](/integrations/rum-vue/)
+- [Nuxt](/integrations/rum-nuxt-plugin/)
+- [Salesforce Lightning Web Components](/integrations/rum-salesforce-lwc/)
+- [Shopify](/real_user_monitoring/guide/enable-rum-shopify-store/)
+
 [1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [3]: /real_user_monitoring/

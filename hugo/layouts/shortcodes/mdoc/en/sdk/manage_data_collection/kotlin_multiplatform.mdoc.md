@@ -17,13 +17,3 @@ You can use the `stopInstance` API to stop the SDK instance from collecting and 
 ```kotlin
 Datadog.stopInstance()
 ```
-
-### Set remote log threshold
-
-You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is to allow all.
-
-```kotlin
-val logger = Logger.Builder()
-  .setRemoteLogThreshold(LogLevel.INFO)
-  .build()
-```

@@ -108,6 +108,6 @@ For the attributes collected for resources, see [Data Collected][8].
 [3]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [4]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=flutter
 [5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter#tracking-from-background-isolates
-[6]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
+[6]: /real_user_monitoring/setup/additional_plugins/?platform=flutter
 [7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [8]: /real_user_monitoring/setup/data_collected/?platform=flutter

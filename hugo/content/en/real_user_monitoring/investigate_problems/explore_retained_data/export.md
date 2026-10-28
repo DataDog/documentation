@@ -42,7 +42,7 @@ Options available for some visualization types are not supported in others. For 
 
 Continue to [Watchdog Insights for RUM](/real_user_monitoring/investigate_problems/explore_retained_data/watchdog_insights/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

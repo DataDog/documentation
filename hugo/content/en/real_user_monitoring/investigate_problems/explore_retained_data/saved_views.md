@@ -61,7 +61,7 @@ In the default view entry in the {{< ui >}}Views{{< /ui >}} panel, you can:
 
 Continue to [Export RUM Events and Graphs](/real_user_monitoring/investigate_problems/explore_retained_data/export/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

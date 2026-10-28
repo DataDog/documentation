@@ -77,7 +77,7 @@ DatadogSdk.instance.rum?.stopView('<view-key>');
 
 For the attributes collected for views, see [Data Collected][6].
 
-[1]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
+[1]: /real_user_monitoring/setup/additional_plugins/?platform=flutter
 [2]: https://pub.dev/packages?q=go_router
 [3]: https://pub.dev/packages/auto_route
 [4]: https://pub.dev/packages/beamer

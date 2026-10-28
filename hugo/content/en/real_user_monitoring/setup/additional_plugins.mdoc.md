@@ -132,6 +132,3 @@ Select your SDK for platform-specific instructions.
 
 Continue to [Data Collected](/real_user_monitoring/setup/data_collected/).
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

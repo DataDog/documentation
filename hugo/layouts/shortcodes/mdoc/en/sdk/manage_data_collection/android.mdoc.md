@@ -32,14 +32,3 @@ fun setBackpressureStrategy(backpressureStrategy: BackPressureStrategy): Builder
 ```
 
 See an [example of this API](https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279) being used.
-
-### Set remote log threshold
-
-You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is -1 (allow all).
-
-```kotlin
-fun setRemoteLogThreshold(minLogThreshold: Int): Builder {
-    minDatadogLogsPriority = minLogThreshold
-    return this
-}
-```

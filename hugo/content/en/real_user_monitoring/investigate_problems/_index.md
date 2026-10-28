@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-After Datadog retains your RUM sessions, explore them in the RUM Explorer, triage errors and crashes with Error Tracking, and run AI investigations to find root causes.
+After Datadog retains your RUM sessions, explore them in the RUM Explorer, triage errors and crashes with Error Tracking, and use Bits AI to optimize performance and find the root cause of regressions.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/explore_retained_data/" >}}

@@ -7,6 +7,8 @@ This page describes how to instrument your web applications with the Datadog Bro
 
 The Browser SDK supports all modern desktop and mobile browsers.
 
+If your application uses React, Next.js, Angular, Vue, Nuxt, Salesforce Lightning Web Components, or Shopify, see [Framework and platform integrations](/real_user_monitoring/setup/additional_plugins/?platform=browser#framework-and-platform-integrations) for integration-specific setup.
+
 ## Setup
 
 {% collapse-content title="Option 1: Manual client-side setup" level="h3" %}

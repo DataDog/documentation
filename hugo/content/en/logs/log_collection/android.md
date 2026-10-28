@@ -527,6 +527,7 @@ The following methods in `Logger.Builder` can be used when initializing the logg
 | `setBundleWithRumEnabled(true)`| Set to `true` (default) to bundle the logs with the current RUM context in your application. This parameter lets you display all the logs sent while a specific View is active by using the Datadog RUM Explorer.                                                        |
 | `setName(<LOGGER_NAME>)`   | Set `<LOGGER_NAME>` as the value for the `logger.name` attribute attached to all logs sent to Datadog.                                                                                                                                                                  |
 | `setRemoteSampleRate(<SAMPLE_RATE>)`   | Set the sampling rate for this logger. All the logs produced by the logger instance are randomly sampled according to the provided sample rate (default 100f = all logs). **Note**: The Logcat logs are not sampled.            |
+| `setRemoteLogThreshold(<LOG_PRIORITY>)` | Set the minimum log priority sent to Datadog. Logs with a lower priority aren't sent. The default value is -1 (allow all). |
 | `build()`                        | Build a new logger instance with all options set.                                                                                                                                                                                                                       |
 
 ### Global configuration

@@ -148,7 +148,7 @@ For the remaining visualization options, click on the graph and click {{< ui >}}
 
 Continue to [Events Side Panel](/real_user_monitoring/investigate_problems/explore_retained_data/events/).
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

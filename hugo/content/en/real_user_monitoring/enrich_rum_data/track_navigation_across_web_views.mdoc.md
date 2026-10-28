@@ -154,6 +154,3 @@ See [RUM & Session Replay Billing](/account_management/billing/rum/#how-do-webvi
 
 Continue to [Track Frontend-to-Backend Traces](/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/).
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

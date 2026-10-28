@@ -221,6 +221,6 @@ Source errors include code-level information about the error. For more informati
 [11]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors#error-sources
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [13]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-telemetry
-[14]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser#manually-track-actions-and-send-custom-events
 [15]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/#track-graphql-requests
 [16]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
