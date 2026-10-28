@@ -45,7 +45,7 @@ See the [list of permissions][2] for Security products.
 
 ## Restrict access to security data
 
-Use [Data Access Control][4] to restrict which security data a user can view, based on the tags and attributes in the data. Define a Restricted Dataset with a query, then grant access to specific teams or roles. Three security options are available when you create a Restricted Dataset:
+Use [Data Access Control][4] to restrict which security data a user can view, based on the tags and attributes in the data. Define a [Restricted Dataset][8] with a query, then grant access to specific teams or roles. Three security options are available when you create a Restricted Dataset:
 
 - **Security Signals**: Cloud SIEM and Workload Protection signals
 - **Workload Protection Agent Events**
@@ -61,7 +61,7 @@ Ownership-based access control is in Preview and available upon request.
 
 Ownership-based access control restricts access to security findings based on team membership and requires less configuration than Restricted Datasets. Each user sees findings owned by the [teams][6] they belong to, without requiring a separate dataset for each group of findings.
 
-This option supports Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Ownership is determined by the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
+It is available for **Security Findings**, which covers Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Ownership is determined by the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
 
 [1]: /account_management/rbac/#role-based-access-control
 [2]: /account_management/rbac/permissions/#cloud-security-platform
@@ -70,3 +70,4 @@ This option supports Cloud Security, Code Security, Workload Protection, and App
 [5]: /account_management/rbac/data_access/#strict-mode
 [6]: /account_management/teams/
 [7]: /account_management/rbac/data_access/#unrestricted-user-groups
+[8]: /account_management/rbac/data_access/#configure-data-access
