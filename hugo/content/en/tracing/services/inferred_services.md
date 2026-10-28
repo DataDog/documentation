@@ -66,7 +66,7 @@ For Datadog Agent versions [7.50.3][1] through [7.54.1][2], add the following to
 apm_config:
   compute_stats_by_span_kind: true
   peer_tags_aggregation: true
-  peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+  peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -76,7 +76,7 @@ Alternatively, set these environment variables in your Datadog Agent configurati
 
 DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
 DD_APM_PEER_TAGS_AGGREGATION=true
-DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+DD_APM_PEER_TAGS='["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]'
 
 {{< /code-block >}}
 
@@ -99,7 +99,7 @@ connectors:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+      peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -112,7 +112,7 @@ exporters:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+      peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]   
 
 {{< /code-block >}}
 
@@ -130,7 +130,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. Datadog can derive a peer tag only if your setup collects its source attributes from spans. Datadog Agent v7.60.0 and later collect all listed source attributes by default. The `peer_tags` lists for Agent v7.50.3 through v7.54.1 and the OpenTelemetry Collector on this page don't include `active_record.db.vendor`, `db.type`, `dns.hostname`, `network.destination.ip`, `out.host`, or `sequel.db.vendor`.
+The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. Datadog can derive a peer tag only if your setup collects its source attributes from spans. Datadog Agent v7.60.0 and later collect all listed source attributes by default.
 
 Peer Tag | Source Attributes
 --------------------|-------------------
