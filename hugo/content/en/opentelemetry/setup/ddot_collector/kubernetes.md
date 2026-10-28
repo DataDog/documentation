@@ -965,6 +965,6 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
-[66]: /opentelemetry/instrument/dd_sdks/
+[66]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
