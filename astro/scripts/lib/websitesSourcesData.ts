@@ -22,7 +22,10 @@ import { z } from "zod";
 
 /**
  * The six repos whose `examples/` trees supply the API docs' SDK code
- * examples. Mirrors `EXAMPLES_REPOS` in `hugo/Makefile:27`.
+ * examples.
+ *
+ * HUGO_DUPLICATE: mirrors `EXAMPLES_REPOS` in `hugo/Makefile`. Keep the two
+ * lists in sync.
  */
 export const SDK_REPOS = [
   "datadog-api-client-go",

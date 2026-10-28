@@ -15,7 +15,6 @@ import { getCategoriesView } from "./viewsBuilder";
 import { ChangelogFileSchema } from "./schemas/changelog";
 import type { ApiCategory, ApiOperationStub } from "./schemas/views";
 
-// TODO: this data lives in the Hugo site. Move it when Hugo is deprecated.
 const rawChangelogByPath = import.meta.glob<string>(
   "@hugo-site/data/changelog/*.yml",
   { query: "?raw", import: "default", eager: true },

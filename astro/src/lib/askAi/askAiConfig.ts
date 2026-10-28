@@ -10,8 +10,6 @@ import { fetchDatadogUserStatus } from "@lib/telemetry/datadogUserStatus";
  * first mounts the widget, and hydration order is not fixed — so both must pass
  * the same capabilities, or the loser's config is silently discarded.
  *
- * `isEnabled` is deliberately absent; see the TODO at the mount site.
- *
  * The Datadog-user lookup is supplied on Datadog's own domain only. It is a
  * credentialed cross-origin request that CORS blocks from anywhere else —
  * `yarn dev` and `yarn preview` included — so off-domain it is a console error

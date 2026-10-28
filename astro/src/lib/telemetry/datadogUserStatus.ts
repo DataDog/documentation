@@ -7,9 +7,9 @@
  * `getIsDatadogUser?: () => Promise<boolean>` callback, and omits the
  * `is_datadog_user` tag when no callback is supplied.
  *
- * TODO: `hugo/assets/scripts/helpers/feature-flags.js` holds an equivalent copy
- * (despite the filename, this has nothing to do with feature flags). Keep the
- * two in sync until that copy is deleted.
+ * HUGO_DUPLICATE: `hugo/assets/scripts/helpers/feature-flags.js` holds an
+ * equivalent copy (despite the filename, this has nothing to do with feature
+ * flags). Keep the two in sync.
  */
 
 export const DATADOG_LOCATE_URL = "https://www.datadoghq.com/locate";
