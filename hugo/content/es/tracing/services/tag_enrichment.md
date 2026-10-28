@@ -16,7 +16,7 @@ El enriquecimiento de etiquetas está en versión preliminar. Para solicitar acc
 
 ## Descripción general {#overview}
 
-Utilice reglas de enriquecimiento de etiquetas para agregar etiquetas a sus registros, spans de APM y métricas de traza sin cambios de código ni nuevas implementaciones. Puede utilizar valores de los metadatos de servicio que ya haya definido en el Catálogo, el valor de otra etiqueta o un valor fijo.
+Utilice reglas de enriquecimiento de etiquetas para agregar etiquetas a su telemetría sin cambios de código ni una nueva implementación. Puede utilizar valores de los metadatos de servicio que ya haya definido en el Catálogo, el valor de otra etiqueta o un valor fijo.
 
 ## Requisitos previos {#prerequisites}
 
@@ -45,8 +45,7 @@ Las reglas personalizadas le permiten dirigirse a un conjunto específico de ser
    - Seleccione la etiqueta `team`, la etiqueta `system`, la etiqueta `custom` o varias.
    - Para cada etiqueta, seleccione si el valor de la etiqueta proviene de Metadatos de entidad, el valor de una etiqueta diferente o un valor fijo.
    - Elija si el valor se aplica solo cuando aún no existe, o si se agrega a la lista actual de valores para esa etiqueta.
-1. De forma predeterminada, las etiquetas se agregan solo cuando falta el valor para un elemento de telemetría determinado.
-1. Opcionalmente, ingrese un nombre descriptivo para la regla.
+1. Seleccione los tipos de telemetría que desea enriquecer.
 1. Revise y guarde su regla. Después de guardar la regla, puede tomar hasta una hora para que el enriquecimiento se aplique completamente a la telemetría entrante.
 
 ### Agregar una regla de enriquecimiento de etiquetas desde una página de servicio {#add-a-tag-enrichment-rule-from-a-service-page}
@@ -61,7 +60,7 @@ Haga clic en {{< ui >}}Add Tags{{< /ui >}} para abrir el modal de regla de enriq
 
 ## Comportamiento de enriquecimiento de etiquetas {#tag-enrichment-behavior}
 
-- **Telemetría afectada**: El enriquecimiento de etiquetas se aplica solo a registros, spans de APM y métricas de traza. Debido a que [Data Observability: Jobs Monitoring][3] envía telemetría de trabajos como spans de APM, esa telemetría también se enriquece, pero las métricas de Jobs Monitoring no. El enriquecimiento de etiquetas no es compatible con otros tipos de telemetría, incluyendo métricas personalizadas y de infraestructura, Database Monitoring, perfiles, Kubernetes, Universal Service Monitoring y eventos.
+- **Telemetría afectada**: El enriquecimiento de etiquetas se aplica a toda la telemetría excepto a DSM, Events y Orchestration.
 - **Datos históricos**: Las reglas de enriquecimiento de etiquetas se aplican únicamente a la telemetría ingerida mientras una regla está activa. Los datos anteriores no se actualizan de forma retroactiva. Eliminar o modificar una regla impide que se aplique a telemetría nueva, pero no actualiza los datos ingeridos previamente.
 - **Actualizaciones de metadatos**: Actualizar o agregar metadatos de entidad a los servicios mientras las reglas de enriquecimiento están habilitadas, incluyendo las reglas predeterminadas, actualiza automáticamente esas etiquetas.
 - **Orden de procesamiento de reglas**: Las reglas de enriquecimiento de etiquetas se aplican en el orden en que fueron creadas. Las reglas en la parte superior de la lista tienen prioridad sobre las reglas que se encuentran debajo de ellas.

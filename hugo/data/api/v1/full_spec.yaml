@@ -8003,7 +8003,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         sort:
           $ref: "#/components/schemas/LogsSort"
@@ -29821,6 +29821,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_notification_rules_write: Create, edit, and delete monitor notification rules.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
@@ -35928,7 +35929,7 @@ paths:
                 value:
                   index: "retention-3,retention-15"
                   limit: 25
-                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  query: "service:web-api AND @http.status_code:[200 TO 299]"
                   sort: desc
                   time:
                     from: "2020-02-02T02:02:02.202Z"
