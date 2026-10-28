@@ -93,6 +93,7 @@ For all workloads, confirm the following:
 
 - **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
 - **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
+- **AWS partition**: The instance must be in the commercial `aws` partition. Instances in AWS GovCloud or the AWS China partitions are not supported.
 - **Access to AWS Secrets Manager**: Each instance fetches its Datadog API key from Secrets Manager in its own region, using the instance's own IAM role. The instance must be able to reach the Secrets Manager endpoint, and no policy in your account can deny the request. See [Secrets Manager access from EC2 instances](#secrets-manager-access-from-ec2-instances).
 
 #### Secrets Manager access from EC2 instances
