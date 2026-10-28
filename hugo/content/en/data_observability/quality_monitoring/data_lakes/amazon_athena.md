@@ -26,7 +26,7 @@ The Amazon Athena integration collects the history of queries that run in your A
 - Estimate Athena query compute cost.
 - Build lineage between the AWS Glue tables that your queries read and write.
 
-{{< img src="data_observability/amazon_athena/query-history-explorer.png" alt="Athena queries in Data Observability, showing normalized queries with workgroup, count, duration, bytes scanned, and estimated cost" style="width:100%;" >}}
+{{< img src="data_observability/amazon_athena/query-history-explorer.png" alt="Athena queries in Data Observability, showing normalized queries with workgroup, count, duration, bytes scanned, and estimated cost." style="width:100%;" >}}
 
 Datadog collects query metadata from the Athena API. It does not read query results or access your query result location in Amazon S3.
 
