@@ -164,7 +164,7 @@ Data appears within a few minutes. In the following table:
 | Services | [Software Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. Traces can take about five minutes to appear. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
-| Hosts | [Host List][11] | Find your nodes and check their hostnames. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. With `eks`, `gcp`, or `aks`, hostnames come from your cloud provider. If you installed the Datadog Agent, the list also shows each node by its node name, with `<NODE_NAME>-<CLUSTER_NAME>` as an alias. |
+| Hosts | [Host List][11] | Find your nodes and check their hostnames. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. With the Datadog Agent installed, each node also appears by its node name, with `<NODE_NAME>-<CLUSTER_NAME>` as an alias. For `eks`, `gcp`, and `aks`, see [Hostnames and Tagging][23]. |
 | Kubernetes | [Kubernetes Explorer][13]: filter by your cluster name. | Your pods, Deployments, and nodes. |
 | Metrics, DDOT path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `kube_cluster_name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
 | Metrics, Upstream path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `k8s.cluster.name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
@@ -285,3 +285,4 @@ The installer uses Helm to install the [OpenTelemetry Kube Stack][7] chart. The 
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
 [21]: /opentelemetry/setup/otlp_ingest/
 [22]: /opentelemetry/setup/agent/
+[23]: /opentelemetry/config/hostname_tagging/
