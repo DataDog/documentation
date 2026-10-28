@@ -19,12 +19,12 @@ Install OpenTelemetry on a Kubernetes cluster with an installer script. In about
 
 Try this on a test cluster. For production, install with Helm and your own configuration: see [Install the DDOT Collector on Kubernetes][19] or [Set up the OpenTelemetry Collector][17]. Not using Kubernetes? See [Send OpenTelemetry Data to Datadog][3].
 
-Choose a path. Steps that differ by path have an **Upstream** tab and a **DDOT** tab.
+Choose a path. Steps that differ by path have a **DDOT** tab and an **Upstream** tab.
 
 | Path | What runs in your cluster | How data reaches Datadog |
 |---|---|---|
-| **Upstream** | The upstream OpenTelemetry Collector and OpenTelemetry SDKs. No Datadog Agent or Datadog exporter. | OTLP over HTTP to the Datadog OTLP intake. |
 | **DDOT** | The DDOT Collector and DDOT SDKs. The Datadog Agent is optional. | The DDOT Collector's Datadog exporter. |
+| **Upstream** | The upstream OpenTelemetry Collector and OpenTelemetry SDKs. No Datadog Agent or Datadog exporter. | OTLP over HTTP to the Datadog OTLP intake. |
 
 ## Prerequisites
 
@@ -48,18 +48,6 @@ cd opentelemetry-examples/guides/kubernetes/configuration/opentelemetry-kube-sta
 Set these environment variables in the terminal you use for the rest of this quickstart:
 
 {{< tabs >}}
-{{% tab "Upstream" %}}
-
-```shell
-export DD_API_KEY="<DATADOG_API_KEY>"
-export DD_SITE="{{< region-param key="dd_site" >}}"
-export DD_INSTALL_FLOW=upstream
-export K8S_CLUSTER_TYPE=other
-export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
-export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
-```
-
-{{% /tab %}}
 {{% tab "DDOT" %}}
 
 **[Placeholder: release-stage banner]**
@@ -83,6 +71,18 @@ export DD_AGENT_ENABLED=true
 ```
 
 The installer then also installs the Datadog Operator and the Datadog Agent in the `datadog` namespace.
+
+{{% /tab %}}
+{{% tab "Upstream" %}}
+
+```shell
+export DD_API_KEY="<DATADOG_API_KEY>"
+export DD_SITE="{{< region-param key="dd_site" >}}"
+export DD_INSTALL_FLOW=upstream
+export K8S_CLUSTER_TYPE=other
+export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
+export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -148,10 +148,10 @@ Data appears within a few minutes. In the following table:
 | Services | [Software Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. Traces can take about five minutes to appear. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
-| Hosts | [Host List][11] | Each node, listed one time. With `K8S_CLUSTER_TYPE=other`, the name is `<NODE_NAME>-<CLUSTER_NAME>`. |
+| Hosts | [Host List][11] | Find your nodes and check their hostnames. With `K8S_CLUSTER_TYPE=other`, each hostname is `<NODE_NAME>-<CLUSTER_NAME>`. |
 | Kubernetes | [Kubernetes Explorer][13]: filter by your cluster name. | Your pods, Deployments, and nodes. |
-| Metrics, Upstream path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `k8s.cluster.name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
 | Metrics, DDOT path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `kube_cluster_name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
+| Metrics, Upstream path | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `k8s.cluster.name:<CLUSTER_NAME>`. | Node CPU usage for your cluster. |
 
 ## Troubleshooting
 
@@ -221,8 +221,8 @@ kubectl delete secret datadog-secret -n datadog
 
 - Instrument more services, or add custom spans and metrics: [Instrument Your Applications][8].
 - Install for production without the script:
-  - Upstream: [Set up the OpenTelemetry Collector][17].
   - DDOT: [Install the DDOT Collector on Kubernetes][19].
+  - Upstream: [Set up the OpenTelemetry Collector][17].
 - Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version`: [Unified service tagging][18].
 
 {{% collapse-content title="What the installer set up" level="h4" expanded=false %}}
