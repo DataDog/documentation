@@ -133,6 +133,8 @@ describe("GET /pages-index.json (metadata sidecar)", () => {
   });
 });
 
+// Both tests serve every page in the index, which can exceed the default
+// timeout on CI's shared runners.
 describe("pages.json assembly (hash from emitted plaintext)", () => {
   it("lists only pages the .md routes actually serve", async () => {
     const index = await readIndex();
@@ -142,7 +144,7 @@ describe("pages.json assembly (hash from emitted plaintext)", () => {
         0,
       );
     }
-  });
+  }, 60_000);
 
   it("hashes the exact plaintext the .md route serves", async () => {
     // The build hashes each emitted .md straight off disk. Here the route stands
@@ -157,5 +159,5 @@ describe("pages.json assembly (hash from emitted plaintext)", () => {
       createHash("md5").update(servedBody, "utf8").digest("hex"),
     );
     expect(listing[landing.key].source).toBe("astro");
-  });
+  }, 60_000);
 });
