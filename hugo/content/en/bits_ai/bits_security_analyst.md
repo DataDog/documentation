@@ -249,3 +249,4 @@ You can create security notification rules to get a notification when Bits Secur
 [6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
 [7]: /security/notifications/rules/#create-notification-rules
 [8]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst/knowledge-sources
+
