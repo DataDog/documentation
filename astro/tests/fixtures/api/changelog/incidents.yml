@@ -1,0 +1,13 @@
+# NOTE: Frozen test fixture, invented in the shape of hugo/data/changelog/*.yml. Not live data.
+entries:
+  - change_type: addition
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/1
+    operations:
+      - ListIncidents
+    title: Add incident listing endpoint
+  - change_type: deprecated
+    date: '2026-10-07'
+    operations:
+      - CreateIncident
+    title: Deprecate legacy incident creation

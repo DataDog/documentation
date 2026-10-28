@@ -1,0 +1,75 @@
+.logo-download {
+  display: none;
+  position: absolute;
+  top: 123px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  padding: 14px;
+  background: var(--color-bg);
+  border-radius: 4px;
+  box-shadow: var(--hugo-nav-dropdown-shadow);
+  font-size: 22px;
+  white-space: normal;
+  z-index: 9999;
+  text-align: start;
+  transition-duration: 200ms;
+}
+
+.logo-download--open {
+  display: block;
+}
+
+[data-scrolled] .logo-download {
+  top: 78px;
+}
+
+.logo-download__arrow {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  filter: drop-shadow(0 -2px 2px rgba(0, 0, 0, 0.1));
+  color: var(--color-bg);
+}
+
+.logo-download__arrow svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.logo-download__eyebrow {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.logo-download__body {
+  font-size: 18px;
+  color: var(--color-text);
+  margin: 0 0 8px;
+}
+
+.logo-download__btn {
+  display: block;
+  border: 1px solid var(--hugo-nav-brand-primary);
+  color: var(--hugo-nav-brand-primary);
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.logo-download__btn:hover {
+  background: var(--hugo-nav-brand-primary);
+  color: #ffffff;
+}
