@@ -18886,6 +18886,18 @@ menu:
           - ResolveOnCallPage
         unstable: []
         order: 4
+    - name: Reroute On-Call Page
+      url: /api/latest/on-call-paging/reroute-on-call-page/
+      identifier: on-call-paging-reroute-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RerouteOnCallPage
+        unstable: []
+        order: 5
     - name: Escalate On-Call Page
       url: /api/latest/on-call-paging/escalate-on-call-page/
       identifier: on-call-paging-escalate-on-call-page

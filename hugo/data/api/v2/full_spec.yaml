@@ -106695,6 +106695,54 @@ components:
         - $ref: "#/components/schemas/ELFSymbolFileFormData"
         - $ref: "#/components/schemas/PESymbolFileFormData"
         - $ref: "#/components/schemas/RepositoryFormData"
+    RerouteOnCallPageRequest:
+      description: Full request to reroute an On-Call Page to a different team or user.
+      example:
+        data:
+          attributes:
+            comment: Rerouting to the database team.
+            target:
+              identifier: my-team
+              type: team_handle
+          type: reroute
+      properties:
+        data:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestData"
+      required:
+        - data
+      type: object
+    RerouteOnCallPageRequestData:
+      description: The data for rerouting an On-Call Page, including attributes and resource type.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestDataType"
+      required:
+        - attributes
+        - type
+      type: object
+    RerouteOnCallPageRequestDataAttributes:
+      description: Details about where to reroute the On-Call Page.
+      properties:
+        comment:
+          description: An optional comment explaining why the page is being rerouted.
+          example: Rerouting to the database team.
+          type: string
+        target:
+          $ref: "#/components/schemas/CreatePageRequestDataAttributesTarget"
+      required:
+        - target
+      type: object
+    RerouteOnCallPageRequestDataType:
+      default: reroute
+      description: The type of resource used when rerouting an On-Call Page.
+      enum:
+        - reroute
+      example: reroute
+      type: string
+      x-enum-varnames:
+        - REROUTE
     ResolveVulnerableSymbolsRequest:
       description: The top-level request object for resolving vulnerable symbols in a set of packages.
       properties:
@@ -211119,6 +211167,143 @@ paths:
       tags:
         - On-Call Paging
       x-menu-order: 3
+  /api/v2/on-call/pages/{page_id}/reroute:
+    post:
+      description: |-
+        Reroutes an On-Call Page.
+      operationId: RerouteOnCallPage
+      parameters:
+        - description: The page ID.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      comment: Rerouting to the database team.
+                      target:
+                        identifier: my-team
+                        type: team_handle
+                    type: reroute
+            schema:
+              $ref: "#/components/schemas/RerouteOnCallPageRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      servers:
+        - url: https://{site}
+          variables:
+            site:
+              default: navy.oncall.datadoghq.com
+              description: The globally available endpoint for On-Call.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+        - url: "{protocol}://{name}"
+          variables:
+            name:
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
+            subdomain:
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+      summary: Reroute On-Call Page
+      tags:
+        - On-Call Paging
+      x-menu-order: 5
   /api/v2/on-call/pages/{page_id}/resolve:
     post:
       description: |-
