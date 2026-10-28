@@ -36,8 +36,7 @@ Retrieve the commit SHA by running `git rev-parse HEAD` at build time, then embe
 | Your setup | Option |
 |---|---|
 | You configure your SDK with an OpenTelemetry configuration file | [Add the Git information to your configuration file](#add-the-git-information-to-your-configuration-file-recommended) (recommended) |
-| You don't use a configuration file yet, and your SDK supports one | [Migrate to a configuration file](#migrate-to-a-configuration-file), then add the Git information to it |
-| Your SDK doesn't support configuration files, or you can't migrate | [Use an alternative option](#if-you-cant-use-a-configuration-file) |
+| You configure your SDK with environment variables | [Use environment variables](#use-environment-variables) |
 
 ### Add the Git information to your configuration file (recommended)
 
@@ -72,22 +71,16 @@ Use this option if you configure your SDK with an OpenTelemetry [declarative con
      --build-arg VCS_REF_HEAD_REVISION=$(git rev-parse HEAD)
    ```
 
-### Migrate to a configuration file
+### Use environment variables
 
-If your SDK supports declarative configuration but you configure it with environment variables, migrate to a configuration file first:
-
-1. Check that your SDK supports declarative configuration in the [OpenTelemetry compliance matrix][7]. Support is experimental in some SDKs.
-1. Follow the OpenTelemetry [migration instructions][8]. The migration configuration file maps the environment variables you already use to the configuration file format.
-1. Add the Git information to your [configuration file](#add-the-git-information-to-your-configuration-file-recommended).
-
-### If you can't use a configuration file
-
-Use one of the following options if your SDK doesn't support configuration files yet, or if you can't migrate your SDK configuration to a file.
+Use one of the following options if you configure your SDK with environment variables. To use a configuration file instead, see [Migrate to a configuration file](#migrate-to-a-configuration-file).
 
 Both options require your SDK to read the `OTEL_RESOURCE_ATTRIBUTES` environment variable. Auto-instrumentation and default SDK setups read it. If you configure the SDK resource manually, include the environment resource detector.
 
 {{% collapse-content title="Add resource attributes at startup" level="h4" %}}
-Use this option to embed the Git information in your image at build time. A startup script adds it to `OTEL_RESOURCE_ATTRIBUTES` when the container starts, so it is kept when `OTEL_RESOURCE_ATTRIBUTES` is also set at runtime, for example in your pod spec or by the [OpenTelemetry Operator][3].
+Use this option to embed the Git information in your image at build time.
+
+If `OTEL_RESOURCE_ATTRIBUTES` is set at runtime, for example in your pod spec or by the [OpenTelemetry Operator][3], it replaces any `OTEL_RESOURCE_ATTRIBUTES` value set in your image. The following startup script merges the Git information defined at build time with the `OTEL_RESOURCE_ATTRIBUTES` value provided at runtime.
 
 This option requires a shell in your image. Images without a shell, such as distroless or `scratch` images, can't run the script. If you use the OpenTelemetry Operator with these images, use annotations instead.
 
@@ -156,6 +149,14 @@ Replace `<git-provider.example/me/my-repo>` with your repository URL, and have y
 
 **Note**: The Operator ignores these annotations for attributes that are already set in the container's `OTEL_RESOURCE_ATTRIBUTES` environment variable.
 {{% /collapse-content %}}
+
+### Migrate to a configuration file
+
+If your SDK supports declarative configuration, you can migrate from environment variables to a configuration file:
+
+1. Check that your SDK supports declarative configuration in the [OpenTelemetry compliance matrix][7]. Support is experimental in some SDKs.
+1. Follow the OpenTelemetry [migration instructions][8]. The migration configuration file maps the environment variables you already use to the configuration file format.
+1. Add the Git information to your [configuration file](#add-the-git-information-to-your-configuration-file-recommended).
 
 ## Further reading
 
