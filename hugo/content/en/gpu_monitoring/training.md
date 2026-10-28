@@ -46,7 +46,7 @@ To begin monitoring your training workloads, you must first meet the following c
 
 ### 0. Enable GPU Monitoring
 
-If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before moving to the next step.
 
 ### 1. Connect training runs to GPU hardware
 
@@ -152,7 +152,7 @@ To begin monitoring your Slurm training jobs, you must first meet the following 
 
 ### 0. Enable GPU Monitoring
 
-If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before moving to the next step.
 
 ### 1. Install the Agent with Single Step Instrumentation
 
