@@ -39,6 +39,48 @@ When an incident is changed to resolved, Incident AI posts a final summary. This
 
 {{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
+## Meeting summaries
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+Incident AI can automatically summarize incident meetings in Zoom, Google Meet, and Microsoft Teams. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
+
+AI features must be enabled for your organization before the Datadog Transcriber can join meetings. To turn on meeting summaries, enable **Generate AI meeting summaries** in the integration settings for your meeting platform:
+
+- [Zoom][4]
+- [Google Meet][5]
+- [Microsoft Teams][6]
+
+By default, meetings for private incidents are not summarized. You can add conditions in the integration settings to prevent summarization for other incidents.
+
+### How meeting summaries work
+
+When a meeting attached to an incident starts, a Datadog Transcriber attempts to join the meeting. This may take 10 to 30 seconds. If the meeting has a lobby or waiting room, a participant must admit the Datadog Transcriber before transcription can begin. After the Datadog Transcriber joins, live summaries are periodically posted to the following locations during the meeting:
+
+- The **incident timeline**, under a **Meeting Summary** entry.
+- The **incident chat channel**, both in the meeting card thread and as a message to the channel.
+
+When the meeting ends, a final post-meeting summary is posted to the same locations.
+
+### Re-inviting the transcriber
+
+If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
+
+1. Open the incident in Datadog.
+2. In the incident header, open the menu for the linked meeting.
+3. Click **Add Transcriber** (the robot icon) beside the meeting.
+4. If required, admit the Datadog Transcriber from the meeting lobby or waiting room so transcription can begin.
+
+The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
+
+A re-invite prompt can also appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. This can happen after a timeout while waiting for admission or participants, after everyone leaves the meeting, or when someone removes the transcriber. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. Connect your chat account to Datadog before using this action.
+
+Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
+
 ## Related incident detection
 
 Incident AI automatically flags related incidents if they are declared within 20 minutes of each other, helping you identify broader systemic issues.
@@ -87,7 +129,7 @@ When triggered, the agent automatically pulls in the incident's timeline, linked
 
 When triggered, the investigation is embedded in the incident web UI, and Bits Investigation appears as a responder in the Responder Roles section of the page.
 
-For a full walkthrough of the investigation workflow, see [Bits Investigation][4].
+For a full walkthrough of the investigation workflow, see [Bits Investigation][8].
 
 ## Further reading
 
@@ -96,4 +138,8 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][4
 [1]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /incident_response/incident_management/setup_and_configuration/templates
 [3]: /incident_response/incident_management/post_incident/postmortems
-[4]: /bits_ai/bits_investigation
+[4]: /integrations/zoom-incident-management/#meeting-summaries
+[5]: /integrations/google-meet-incident-management/#meeting-summaries
+[6]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
+[7]: /account_management/billing/incident_response/#allocate-seats
+[8]: /bits_ai/bits_investigation
