@@ -33,7 +33,7 @@ After the recommendation has been addressed, you can mark it as resolved. Recomm
 
 ## Recommendation Types
 
-The table below outlines the available RUM recommendation types. Only applications that have the Browser SDK installed and use [RUM Without Limits&trade;][1] are supported. 
+The table below outlines the available RUM recommendation types. Only applications that have the Browser SDK installed and use [RUM without Limits&trade;][1] are supported. 
 
 | Recommendation Type | Description |
 |---------------------|-------------|
