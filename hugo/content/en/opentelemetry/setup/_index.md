@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-Choose how to send your OpenTelemetry traces, metrics, and logs to Datadog over OTLP: through a Collector, straight from your applications, or through the Datadog Agent. Each option works with any OpenTelemetry SDK. Only the Datadog Agent option needs the Agent.
+Choose how to send your OpenTelemetry traces, metrics, and logs to Datadog: through a Collector, through the Datadog Agent, or directly to Datadog. Each option works with any OpenTelemetry SDK. Only the Datadog Agent option needs the Agent.
 
 To try OpenTelemetry on a test cluster first, see [Getting Started][1].
 

@@ -62,7 +62,7 @@ Send your [OpenTelemetry][1] (OTel) traces, metrics, and logs to Datadog with on
 
 ### What Datadog does with OpenTelemetry data
 
-- Service pages, distributed tracing, and metric correlation work with standard OpenTelemetry data. You don't need to re-instrument.
+- Service pages, distributed tracing, and metric correlation work with standard OpenTelemetry data. You can keep your existing OpenTelemetry instrumentation. Set where it exports, and follow the [setup guide][11] for metadata and trace metrics.
 - The `service.name`, `service.version`, and `deployment.environment.name` attributes map to Datadog's [unified service tags][2].
 - Datadog [correlates your traces, metrics, and logs][3] with your infrastructure data.
 - The DDOT SDK and DDOT Collector each replace one upstream OpenTelemetry component, and the Full-Host Profiler adds profiling. You can use any of them on its own, with the same OpenTelemetry tooling.
