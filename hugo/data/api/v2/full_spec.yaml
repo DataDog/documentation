@@ -21541,13 +21541,6 @@ components:
         - description: "If this is a string, it must be a valid JavaScript expression that evaluates to a boolean."
           example: "${true}"
           type: string
-    ComponentRecommendation:
-      description: Resource recommendation for a single Spark component (driver or executor). Contains estimation data used to patch Spark job specs.
-      properties:
-        estimation:
-          $ref: "#/components/schemas/Estimation"
-      required: [estimation]
-      type: object
     ComponentType:
       description: The UI component type.
       enum:
@@ -24302,23 +24295,6 @@ components:
       type: string
       x-enum-varnames:
         - CI_APP_COVERAGE_SUMMARY
-    Cpu:
-      description: CPU usage statistics derived from historical Spark job metrics. Provides multiple estimates so users can choose between conservative and cost-saving risk profiles.
-      properties:
-        max:
-          description: Maximum CPU usage observed for the job, expressed in millicores. This represents the upper bound of usage.
-          format: int64
-          type: integer
-        p75:
-          description: 75th percentile of CPU usage (millicores). Represents a cost-saving configuration while covering most workloads.
-          format: int64
-          type: integer
-        p95:
-          description: 95th percentile of CPU usage (millicores). Balances performance and cost, providing a safer margin than p75.
-          format: int64
-          type: integer
-      type: object
-      x-model-simple-name: SpaCpu
     CreateActionConnectionRequest:
       description: Request used to create an action connection.
       properties:
@@ -41139,28 +41115,6 @@ components:
       type: string
       x-enum-varnames:
         - ESCALATION_POLICY_STEPS
-    Estimation:
-      description: Recommended resource values for a Spark driver or executor, derived from recent real usage metrics. Used by SPA to propose more efficient pod sizing.
-      properties:
-        cpu:
-          $ref: "#/components/schemas/Cpu"
-        ephemeral_storage:
-          description: Recommended ephemeral storage allocation (in MiB). Derived from job temporary storage patterns.
-          format: int64
-          type: integer
-        heap:
-          description: Recommended JVM heap size (in MiB).
-          format: int64
-          type: integer
-        memory:
-          description: Recommended total memory allocation (in MiB). Includes both heap and overhead.
-          format: int64
-          type: integer
-        overhead:
-          description: Recommended JVM overhead (in MiB). Computed as total memory - heap.
-          format: int64
-          type: integer
-      type: object
     Event:
       additionalProperties: {}
       description: The metadata associated with a request.
@@ -59698,6 +59652,33 @@ components:
       type: string
       x-enum-varnames:
         - HISTORICALDETECTIONSJOB
+    HistoricalJobFailure:
+      description: |-
+        Details about why the job failed. Only present when the job has failed and won't be retried.
+      properties:
+        hint:
+          description: A suggestion to fix the failure.
+          example: Narrow the time range or reduce the data scanned.
+          type: string
+        reason:
+          $ref: "#/components/schemas/HistoricalJobFailureReason"
+      type: object
+    HistoricalJobFailureReason:
+      description: The reason why the job failed.
+      enum:
+        - rule_configuration
+        - query_too_expensive
+        - internal_error
+      example: query_too_expensive
+      type: string
+      x-enum-descriptions:
+        - The rule, or the dataset it references, can't run as written.
+        - The query scans too much data.
+        - An internal error occurred. These are usually temporary.
+      x-enum-varnames:
+        - RULE_CONFIGURATION
+        - QUERY_TOO_EXPENSIVE
+        - INTERNAL_ERROR
     HistoricalJobListMeta:
       description: Metadata about the list of jobs.
       properties:
@@ -59824,6 +59805,8 @@ components:
         createdFromRuleId:
           description: ID of the rule used to create the job (if it is created from a rule).
           type: string
+        failure:
+          $ref: "#/components/schemas/HistoricalJobFailure"
         jobDefinition:
           $ref: "#/components/schemas/JobDefinition"
         jobName:
@@ -87052,6 +87035,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineReduceProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameFieldsProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineSplitArrayProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineCustomProcessor"
@@ -91544,6 +91528,169 @@ components:
         - type
         - attributes
       type: object
+    ObservabilityPipelineSpikeProtectionProcessor:
+      description: |-
+        The `spike_protection` processor learns the normal ingestion volume for the logs that match a specified filter and takes action when the volume spikes unexpectedly.
+
+        **Supported pipeline types:** logs
+      properties:
+        action_when_missing_partitions:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions"
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: "spike-protection-processor"
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor targets.
+          example: "service:my-service"
+          type: string
+        minimal_threshold:
+          description: The minimum volume, in bytes, that must be observed within 24 hours before spike protection can activate. Defaults to 100 GiB.
+          example: 107374182400
+          format: int64
+          type: integer
+        minimal_threshold_overrides:
+          description: A list of per-partition overrides for the minimal threshold, identified by matching field values. Requires `partition_fields` to be set.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorThresholdOverride"
+          type: array
+        name:
+          description: Name of the spike protection rule.
+          example: MySpikeProtection
+          type: string
+        partition_fields:
+          description: A list of fields used to segment log traffic. Volume is learned and evaluated independently for each unique combination of these field values. A maximum of five fields is supported.
+          items:
+            description: The name of a log field used to partition spike detection.
+            maxLength: 128
+            type: string
+          maxItems: 5
+          type: array
+          uniqueItems: true
+        spike_action:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorSpikeAction"
+        spike_threshold:
+          description: The number of standard deviations above the learned mean volume that must be exceeded before a spike is detected. Defaults to `5`.
+          example: 5
+          format: double
+          type: number
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - name
+        - spike_action
+        - enabled
+      type: object
+      x-pipeline-types: [logs]
+    ObservabilityPipelineSpikeProtectionProcessorActionWhenMissingPartitions:
+      default: ignore
+      description: |-
+        How to handle logs that are missing one of the `partition_fields`. Options:
+        - `ignore`: Forward the event without applying spike protection.
+        - `default_bucket`: Assign the event to a default partition.
+      enum:
+        - ignore
+        - default_bucket
+      example: ignore
+      type: string
+      x-enum-varnames:
+        - IGNORE
+        - DEFAULT_BUCKET
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold:
+      description: The minimal threshold to apply to the matching partition.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes"
+        - $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep"
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeep:
+      description: Never activates spike protection for the matching partition, regardless of volume.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdAlwaysKeepType:
+      default: always_keep
+      description: The minimal threshold type. The value should always be `always_keep`.
+      enum:
+        - always_keep
+      example: always_keep
+      type: string
+      x-enum-varnames:
+        - ALWAYS_KEEP
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytes:
+      description: Sets a specific byte threshold for the matching partition.
+      properties:
+        bytes:
+          description: The minimal threshold, in bytes, for the matching partition.
+          example: 107374182400
+          format: int64
+          type: integer
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType"
+      required:
+        - type
+        - bytes
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorMinimalThresholdBytesType:
+      default: threshold
+      description: The minimal threshold type. The value should always be `threshold`.
+      enum:
+        - threshold
+      example: threshold
+      type: string
+      x-enum-varnames:
+        - THRESHOLD
+    ObservabilityPipelineSpikeProtectionProcessorSpikeAction:
+      description: |-
+        The action to take with matching logs while spike protection is active. Options:
+        - `drop`: Drop the event.
+        - `no_action`: Let the event pass through.
+        - `overflow_routing`: Route to an overflow destination.
+
+        When `overflow_routing` is used, there must be a destination whose `inputs` reference this processor with the `<processor-id>.overflow_events` suffix to route the overflowing events.
+      enum:
+        - drop
+        - no_action
+        - overflow_routing
+      example: drop
+      type: string
+      x-enum-varnames:
+        - DROP
+        - NO_ACTION
+        - OVERFLOW_ROUTING
+    ObservabilityPipelineSpikeProtectionProcessorThresholdOverride:
+      description: Defines a minimal threshold that applies to a specific partition instead of the processor-wide `minimal_threshold`.
+      properties:
+        fields:
+          description: The set of field matchers that identifies the partition this override applies to. Every field name listed must also appear in `partition_fields`.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelineFieldValue"
+          type: array
+        minimal_threshold:
+          $ref: "#/components/schemas/ObservabilityPipelineSpikeProtectionProcessorMinimalThreshold"
+      required:
+        - fields
+        - minimal_threshold
+      type: object
+    ObservabilityPipelineSpikeProtectionProcessorType:
+      default: spike_protection
+      description: The processor type. The value should always be `spike_protection`.
+      enum:
+        - spike_protection
+      example: spike_protection
+      type: string
+      x-enum-varnames:
+        - SPIKE_PROTECTION
     ObservabilityPipelineSplitArrayProcessor:
       description: |-
         The `split_array` processor splits array fields into separate events based on configured rules.
@@ -103152,6 +103299,14 @@ components:
     RUMApplicationCreateAttributes:
       description: RUM application creation attributes.
       properties:
+        create_default_retention_filters:
+          default: true
+          description: |-
+            Whether to create the default retention filters when the application is created: `Sessions with errors` and `Sessions`, each with a 100% retention rate.
+            Set to `false` to create the application without them, for example when you add your own retention filters right after creating it. Until you add retention filters, the application only retains sessions matched by its [permanent retention filters](https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters).
+            This setting doesn't affect permanent retention filters (sessions with forced replays, Synthetics sessions and RUM-APM flat sampling).
+          example: false
+          type: boolean
         name:
           description: Name of the RUM application.
           example: my_new_rum_application
@@ -104503,96 +104658,6 @@ components:
       required:
         - data
       type: object
-    RecommendationAttributes:
-      description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
-      properties:
-        confidence_level:
-          description: The confidence level of the recommendation, expressed as a value between 0.0 (low confidence) and 1.0 (high confidence).
-          format: double
-          type: number
-        driver:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        executor:
-          $ref: "#/components/schemas/ComponentRecommendation"
-        matched_params:
-          description: |-
-            Only returned by the v2 endpoint. The job parameters whose values the recommendation was matched on, as `parameter=value` pairs joined by `|`.
-            An empty string means the service-wide (coarse) recommendation was used.
-          example: "detailed_metrics=false|Region=US1"
-          type: string
-      required: [driver, executor]
-      type: object
-    RecommendationData:
-      description: JSON:API resource object for SPA Recommendation. Includes type, optional ID, and resource attributes with structured recommendations.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationAttributes"
-        id:
-          description: Resource identifier for the recommendation. Optional in responses.
-          type: string
-        type:
-          $ref: "#/components/schemas/RecommendationType"
-      required: [type, attributes]
-      type: object
-    RecommendationDocument:
-      description: JSON:API document containing a single Recommendation resource. Returned by SPA when the Spark Gateway requests recommendations.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationData"
-      required: [data]
-      type: object
-    RecommendationType:
-      default: recommendation
-      description: JSON:API resource type for Spark Pod Autosizing recommendations. Identifies the Recommendation resource returned by SPA.
-      enum:
-        - recommendation
-      example: recommendation
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION
-    RecommendationV2RequestAttributes:
-      description: |-
-        Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        arguments:
-          description: |-
-            Raw, unfiltered Spark job arguments as submitted (for example, `--org_id=2`).
-            SPA determines which arguments are relevant for the given service.
-          example:
-            - ""
-          items:
-            type: string
-          type: array
-      required: [arguments]
-      type: object
-    RecommendationV2RequestBody:
-      description: |-
-        Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
-        instead of a pre-computed shard.
-      properties:
-        data:
-          $ref: "#/components/schemas/RecommendationV2RequestData"
-      required: [data]
-      type: object
-    RecommendationV2RequestData:
-      description: JSON:API resource object for the SPA v2 recommendation request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RecommendationV2RequestAttributes"
-        type:
-          $ref: "#/components/schemas/RecommendationV2RequestType"
-      required: [type, attributes]
-      type: object
-    RecommendationV2RequestType:
-      default: recommendation_v2_request
-      description: JSON:API resource type for the SPA v2 recommendation request.
-      enum:
-        - recommendation_v2_request
-      example: recommendation_v2_request
-      type: string
-      x-enum-varnames:
-        - RECOMMENDATION_V2_REQUEST
     RecommendationsFilterRequest:
       description: JSON:API request body for filtering cost recommendations.
       example:
@@ -222273,7 +222338,7 @@ paths:
               $ref: "#/components/schemas/RUMApplicationCreateRequest"
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/json:
               examples:
@@ -222294,7 +222359,7 @@ paths:
                       type: rum_application
               schema:
                 $ref: "#/components/schemas/RUMApplicationResponse"
-          description: OK
+          description: Created
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "429":
@@ -243844,188 +243909,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/spa/recommendations-v2/{service}:
-    post:
-      description: |-
-        This endpoint is experimental and restricted to Datadog internal use only.
-        Retrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides
-        a service name and the job's raw arguments. SPA determines which arguments are relevant
-        for the service and returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsV2
-      parameters:
-        - description: The service name for a Spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RecommendationV2RequestBody"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                    matched_params: "detailed_metrics=false"
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA recommendations v2
-      tags:
-        - Spa
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.
-      operationId: GetSPARecommendations
-      parameters:
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-        - description: The service name for a spark job.
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations
-      tags:
-        - Spa
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
-  /api/v2/spa/recommendations/{service}/{shard}:
-    get:
-      description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.
-      operationId: GetSPARecommendationsWithShard
-      parameters:
-        - description: The shard tag for a spark job, which differentiates jobs within the same service that have different resource needs
-          in: path
-          name: shard
-          required: true
-          schema:
-            type: string
-        - description: The service name for a spark job
-          in: path
-          name: service
-          required: true
-          schema:
-            type: string
-        - description: The recommendation service should not use its metrics cache.
-          in: query
-          name: bypass_cache
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                data:
-                  attributes:
-                    driver:
-                      estimation:
-                        cpu: {max: 1500, p75: 1000, p95: 1200}
-                        ephemeral_storage: 896
-                        heap: 6144
-                        memory: 7168
-                        overhead: 1024
-                    executor:
-                      estimation:
-                        cpu: {max: 2000, p75: 1200, p95: 1500}
-                        ephemeral_storage: 512
-                        heap: 3072
-                        memory: 4096
-                        overhead: 1024
-                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
-                  type: recommendation
-              schema:
-                $ref: "#/components/schemas/RecommendationDocument"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      security:
-        - AuthZ: []
-      summary: Get SPA Recommendations with a shard parameter
-      tags:
-        - Spa
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
   /api/v2/spans/analytics/aggregate:
     post:
       description: |-
@@ -254848,7 +254731,7 @@ paths:
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
             - service
-            - resource_name
+            - resource
           in: query
           name: include_fields
           required: false
@@ -259051,8 +258934,6 @@ tags:
     externalDocs:
       url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
     name: Software Catalog
-  - description: SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations.
-    name: Spa
   - description: |-
       Search and aggregate your spans from your Datadog platform over HTTP.
     name: Spans
