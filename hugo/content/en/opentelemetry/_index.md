@@ -75,7 +75,7 @@ Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog b
 
 For example, you can run the Full-Host Profiler with an upstream OpenTelemetry pipeline.
 
-Deploy them with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. The Datadog Agent is optional. Add it only for the [features that need it][6].
+Deploy them with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. The Datadog Agent is optional. You can [add it][6] later for features that need it.
 
 **Choose DDOT if** you want Datadog to build and support your OpenTelemetry components.
 
