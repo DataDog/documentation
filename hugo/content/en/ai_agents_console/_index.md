@@ -38,7 +38,7 @@ The [Agent Console][1] provides centralized monitoring for AI tools across your 
 
 | Tool | Type | Data source |
 |------|------|-------------|
-| Claude Code | Coding agent | [Anthropic Usage and Costs][2] integration or OpenTelemetry |
+| Claude Code | Coding agent | [Anthropic Usage and Costs][2] integration, or OpenTelemetry for Claude Team plans |
 | Cursor | Coding agent | [Cursor][3] integration |
 | GitHub Copilot | Coding agent | [GitHub Copilot][4] integration |
 | Codex | Coding agent | [OpenAI Codex][5] integration |
@@ -91,6 +91,8 @@ The {{< ui >}}My Usage{{< /ui >}} tab shows your own AI usage. It includes your 
 
 Use the side navigation to switch between {{< ui >}}Overview{{< /ui >}}, {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Productivity{{< /ui >}}, {{< ui >}}Models{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}}. The Tasks, Skills, Tools, and Sessions views use session data from [Trajectory][6]. The Models view uses data from your connected integrations.
 
+My Usage and Usage share the same views. For a description of each view, see [Usage](#usage).
+
 ## Usage
 
 The {{< ui >}}Usage{{< /ui >}} tab provides the same views as My Usage, aggregated across your organization. Use it to understand what teams use AI agents for, identify power users and outliers, and compare adoption across teams.
@@ -105,7 +107,7 @@ Select a task category to open a detail panel with its subcategories, cost per t
 
 {{< img src="/ai_agents_console/agent_console_tasks_view.png" alt="Task category detail panel for Engineering Operations showing tasks by subcategory, cost per task, total task cost, number of tasks, and average turns" style="width:100%;" >}}
 
-### Productivity and user analytics
+### User and team productivity
 
 The {{< ui >}}Productivity{{< /ui >}} view gives you visibility into how individual engineers and teams use AI tooling. Use it to:
 - Identify your highest spenders and most productive contributors

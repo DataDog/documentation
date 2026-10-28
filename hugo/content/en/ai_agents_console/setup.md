@@ -49,11 +49,11 @@ Select the AI tools to connect from the {{< ui >}}Set up your AI tools{{< /ui >}
 
 To monitor Claude Code, Claude Chat, Claude Cowork, and Claude Design, set up the [Anthropic Usage and Costs][3] integration. The integration collects daily spend and user analytics for each Claude product.
 
-If your organization uses a Claude Team plan, send Claude Code telemetry to Datadog with [OpenTelemetry](#claude-code-with-opentelemetry) instead.
+The Anthropic Usage and Costs integration doesn't support Claude Team plans. If your organization uses a Team plan, send Claude Code telemetry to Datadog with [OpenTelemetry](#claude-code-with-opentelemetry) instead.
 
 ### Claude Code with OpenTelemetry
 
-Use OpenTelemetry (OTLP) to send Claude Code telemetry to Datadog if your organization uses a Claude Team plan. Data collected this way appears on the {{< ui >}}Claude Code (OTel){{< /ui >}} card in Agent Console.
+Use OpenTelemetry (OTLP) to send Claude Code telemetry directly to Datadog. Data collected this way appears on the {{< ui >}}Claude Code (OTel){{< /ui >}} card in Agent Console.
 
 To set up Agent Console for Claude Code across your organization, your IT team can use a Mobile Device Management (MDM) system or [server-managed settings][4] to distribute the Claude Code settings file across all managed devices.
 
@@ -205,12 +205,14 @@ Each AI tool identifies users differently, for example by email address, GitHub 
    | Column | Requirement |
    |--------|-------------|
    | `email` | Required |
-   | `github_login` | Required |
+   | `github_login` | Required if you use GitHub |
    | `microsoft_upn` | Optional |
    | `jira_account_id` | Optional |
    | `datadog_handle` | Optional |
 
-   Separate multiple email aliases, GitHub logins, or Jira account IDs with semicolons. The first email is the canonical email. You can choose any unique column, such as an employee ID, as the primary identifier.
+   Separate multiple email aliases, GitHub logins, or Jira account IDs with semicolons. The first email is the canonical email.
+
+   Choose any column with unique values, such as `email`, as the primary identifier. You can also add your own column for this purpose, such as an employee ID.
 3. Upload the CSV file (maximum 10 MiB), preview the mapping, and save it.
 
 {{< img src="/ai_agents_console/agent_console_identity_mapping.png" alt="Set up identity mappings dialog showing the required and optional CSV columns and a CSV upload area" style="width:100%;" >}}
