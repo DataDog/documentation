@@ -30,7 +30,11 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 
 ## Agentless mode
 
-Starting with `ddtrace` v4.15.0, you can send data directly to Datadog without a Datadog Agent. To enable agentless mode, set `DD_AGENTLESS_ENABLED` to `true`, set `DD_API_KEY` to a Datadog [API key][3], and set `DD_SITE` to your [Datadog site][4]:
+Starting with `ddtrace` v4.15.0, you can send data directly to Datadog without a Datadog Agent. To enable agentless mode, set the following environment variables:
+
+- `DD_AGENTLESS_ENABLED`: `true`
+- `DD_API_KEY`: Your Datadog [API key][3]
+- `DD_SITE`: Your [Datadog site][4]
 
 ```shell
 export DD_AGENTLESS_ENABLED=true

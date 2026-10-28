@@ -34,7 +34,11 @@ For more examples of how to work with the library see [API documentation][2].
 
 ## Agentless mode
 
-Starting with `dd-trace` v5.125.0 and v6.14.0, you can send data directly to Datadog without a Datadog Agent. To enable agentless mode, set `DD_AGENTLESS_ENABLED` to `true`, set `DD_API_KEY` to a Datadog [API key][7], and set `DD_SITE` to your [Datadog site][8]:
+Starting with `dd-trace` v5.125.0 and v6.14.0, you can send data directly to Datadog without a Datadog Agent. To enable agentless mode, set the following environment variables:
+
+- `DD_AGENTLESS_ENABLED`: `true`
+- `DD_API_KEY`: Your Datadog [API key][7]
+- `DD_SITE`: Your [Datadog site][8]
 
 ```shell
 export DD_AGENTLESS_ENABLED=true
