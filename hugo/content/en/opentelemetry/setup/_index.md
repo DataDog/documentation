@@ -23,7 +23,7 @@ Choose how to send your OpenTelemetry traces, metrics, and logs to Datadog: thro
 
 To try OpenTelemetry on a test cluster first, see [Getting Started][1].
 
-{{< img src="/opentelemetry/setup/otel-send-data-options.png" alt="Your app, instrumented with OpenTelemetry, sends OTLP to Datadog in one of four ways: through the DDOT Collector, with an optional Datadog Agent; through the upstream OpenTelemetry Collector; directly to the Datadog OTLP intake; or through the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-send-data-options.png" alt="Four alternative ways to send OpenTelemetry data from your application to Datadog, one per row: through the DDOT Collector, which uses the Datadog Exporter and can run with an optional Datadog Agent; through the upstream OpenTelemetry Collector, over OTLP/HTTP; directly to the Datadog OTLP intake; or through the Datadog Agent, with OTLP ingest or the Collector in the Agent." caption="Each row is a separate setup. Choose one." style="width:100%;" >}}
 
 ## Compare the options
 
