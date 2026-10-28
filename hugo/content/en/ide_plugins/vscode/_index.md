@@ -93,7 +93,7 @@ Install the Datadog Plugin to enable the [Datadog MCP Server][3]. You can instal
 
 ## Core features
 
-### Code security
+### Code Security
 
 The [**Code Security**][19] features analyze your code locally against predefined rules to detect and fix security issues and vulnerabilities before you commit changes.
 
@@ -123,7 +123,7 @@ You can also use this feature to open your source files from an insight (such as
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
-### Fix in chat
+### Fix in Chat
 
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
 

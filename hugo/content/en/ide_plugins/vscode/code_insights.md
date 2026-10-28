@@ -28,11 +28,7 @@ For specific insights about the file open in the active editor, check the **File
 
 {{< img src="/ide_plugins/vscode/file_insights_view.mp4" alt="File Insights view" style="width:100%" video=true >}}
 
-### Other insight types
-
-The following insight type is in limited support:
-
-- Flaky tests detected by [Test Optimization][3]
+Code Insights also shows flaky tests detected by [Test Optimization][3]. This insight type is in limited support.
 
 ## Further reading
 

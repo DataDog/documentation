@@ -61,7 +61,7 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 ## Core features
 
-### Code security
+### Code Security
 The [**Code Security**][24] integration promotes better security by flagging library vulnerabilities and runtime code vulnerabilities. The local code analyzer checks your code changes as you edit to detect quality and security issues prior to commit.
 
 {{< img src="/ide_plugins/idea/code_security/library-vulnerability.png" alt="A library vulnerability highlighted in the source editor." style="width:80%;" >}}
