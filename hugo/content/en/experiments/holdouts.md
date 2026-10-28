@@ -40,7 +40,7 @@ During the experiment inclusion phase, covered experiments run, winners are sele
 
 The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created. These rules do not require every rollout to finish by the inclusion end date. The interval before analysis starts allows time for the remaining rollouts to complete.
 
-A preliminary analysis runs during inclusion. It gives an early directional read of performance and helps identify data problems before the primary analysis starts. Its results include data from a period when the holdout treatment is still changing and not all changes have shipped. They do not measure the full combined treatment.
+A preliminary analysis runs during the inclusion phase. It gives an early directional read of performance and helps identify data problems before the primary analysis starts. Its results include data from a period when the holdout treatment is still changing and not all changes have shipped. They do not measure the full combined treatment.
 
 ### Analysis phase
 
