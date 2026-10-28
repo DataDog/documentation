@@ -1,5 +1,5 @@
 ---
-title: Bits in RUM
+title: Troubleshoot with AI
 description: "Use Bits Investigation and Bits Chat from RUM to optimize your application's performance, find the root cause of regressions, and ask questions about your frontend."
 aliases:
   - /real_user_monitoring/ai_investigations/
