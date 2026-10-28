@@ -51,8 +51,8 @@ describe('reduceActivity', () => {
         expect(state.reads).toBe(3);
         expect(state.pages).toHaveLength(3);
         expect(state.researchEndedAt).toBe(15000);
-        expect(describeHeadline(state)).toBe('Researched for 15s');
-        expect(summarizeActivity(state)).toBe('2 searches · 3 pages read');
+        expect(describeHeadline(state)).toBe('Reviewed the documentation \u00b7 15s');
+        expect(summarizeActivity(state)).toBe('2 searches · 3 pages checked');
     });
 
     it('supports the single-pass retrieval stream', () => {
@@ -65,30 +65,37 @@ describe('reduceActivity', () => {
         ]);
 
         expect(state.steps.map((s) => s.kind)).toEqual(['search', 'write']);
-        expect(describeStep(state.steps[0])).toBe('Found 2 pages');
+        expect(describeStep(state.steps[0])).toBe('Found 2 relevant pages');
         expect(summarizeActivity(state)).toBe('1 search · 2 pages found');
-        expect(describeHeadline(state)).toBe('Researched for 5s');
+        expect(describeHeadline(state)).toBe('Reviewed the documentation \u00b7 5s');
     });
 
-    it('describes the active step while researching', () => {
+    it('keeps the headline steady while the steps describe the research', () => {
         let state = createActivityState(0);
-        expect(describeHeadline(state, 0)).toBe('Thinking');
+        expect(describeHeadline(state, 0)).toBe('Thinking...');
 
         state = reduceActivity(state, thinking(SEARCHING), 100);
-        expect(describeHeadline(state)).toBe('Searching the docs');
+        expect(describeHeadline(state)).toBe('Reviewing the documentation');
+        expect(describeStep(state.steps[0])).toBe('Finding relevant pages');
 
         state = reduceActivity(state, thinking(REVIEWING, { retrieved_pages: [page('a')] }), 200);
-        expect(describeHeadline(state)).toBe('Thinking');
-        expect(describeStep(state.steps[0])).toBe('Found 1 page');
+        expect(describeHeadline(state)).toBe('Reviewing the documentation');
+        expect(describeStep(state.steps[0])).toBe('Found 1 relevant page');
 
         state = reduceActivity(state, thinking(REVIEWING), 300);
-        expect(describeHeadline(state)).toBe('Reading a page');
+        expect(describeStep(state.steps[1])).toBe('Checking a page');
         state = reduceActivity(state, thinking(REVIEWING), 400);
-        expect(describeHeadline(state)).toBe('Reading 2 pages');
+        expect(describeStep(state.steps[1])).toBe('Checking 2 pages');
 
         state = reduceActivity(state, thinking(GENERATING), 500);
-        expect(describeStep(state.steps[1])).toBe('Read 2 pages');
+        expect(describeStep(state.steps[1])).toBe('Checked 2 pages');
         expect(describeStep(state.steps[2])).toBe('Writing the answer');
+        expect(describeHeadline(state, 900)).toBe('Reviewed the documentation \u00b7 1s');
+    });
+
+    it('does not claim a documentation review when the assistant answered without one', () => {
+        const state = run([[thinking(GENERATING), 800], [{ type: 'answer' }, 900], [{ type: 'done' }, 1200]]);
+        expect(describeHeadline(state)).toBe('Answered in 1s');
     });
 
     it('shows parallel searches as one step, without their queries', () => {
@@ -98,14 +105,14 @@ describe('reduceActivity', () => {
             [thinking(REVIEWING, { query: 'log indexes', retrieved_pages: [page('indexes'), page('shared')] }), 900]
         ]);
         expect(state.steps).toHaveLength(1);
-        expect(describeStep(state.steps[0])).toBe('Searching the docs');
+        expect(describeStep(state.steps[0])).toBe('Finding relevant pages');
 
         state = reduceActivity(
             state,
             thinking(REVIEWING, { query: 'log pipelines', retrieved_pages: [page('pipelines'), page('shared')] }),
             950
         );
-        expect(describeStep(state.steps[0])).toBe('Found 3 pages');
+        expect(describeStep(state.steps[0])).toBe('Found 3 relevant pages');
         expect(state.steps[0].pages.map((p) => p.title)).toEqual(['Page indexes', 'Page shared', 'Page pipelines']);
         expect(state.searches).toBe(2);
         expect(summarizeActivity(state)).toBe('1 search · 3 pages found');
@@ -121,7 +128,7 @@ describe('reduceActivity', () => {
         ]);
 
         expect(state.steps.map((s) => s.kind)).toEqual(['search', 'read']);
-        expect(describeStep(state.steps[0])).toBe('Found 2 pages');
+        expect(describeStep(state.steps[0])).toBe('Found 2 relevant pages');
     });
 
     it('labels a later search by the pages it adds', () => {
@@ -131,7 +138,7 @@ describe('reduceActivity', () => {
             [thinking(REVIEWING, { page: page('a') }), 300],
             [thinking(SEARCHING), 400]
         ]);
-        expect(describeStep(later.steps[2])).toBe('Searching for more details');
+        expect(describeStep(later.steps[2])).toBe('Finding more pages');
 
         const found = reduceActivity(later, thinking(REVIEWING, { retrieved_pages: [page('b'), page('c')] }), 500);
         expect(describeStep(found.steps[2])).toBe('Found 1 more page');
@@ -151,9 +158,9 @@ describe('reduceActivity', () => {
             [opened('b'), 500]
         ]);
 
-        expect(describeStep(state.steps[0])).toBe('Found 2 pages');
+        expect(describeStep(state.steps[0])).toBe('Found 2 relevant pages');
         expect(state.steps[1].pages.map((p) => p.title)).toEqual(['Page a', 'Page b']);
-        expect(describeStep(state.steps[1])).toBe('Reading 2 pages');
+        expect(describeStep(state.steps[1])).toBe('Checking 2 pages');
         expect(state.reads).toBe(2);
     });
 
@@ -163,7 +170,7 @@ describe('reduceActivity', () => {
         expect(state.steps[0]).toMatchObject({ kind: 'search', status: 'done', resolved: true });
 
         state = run([[thinking(SEARCHING), 100], [thinking(REVIEWING, { retrieved_pages: [] }), 200]]);
-        expect(describeStep(state.steps[0])).toBe('No matching pages');
+        expect(describeStep(state.steps[0])).toBe('No relevant pages');
     });
 
     it('surfaces unknown stages and ignores empty ones', () => {
@@ -192,15 +199,15 @@ describe('reduceActivity', () => {
         ];
         const labels = (actions) => run(actions).steps.map(describeStep);
 
-        expect(labels([...research, [{ type: 'error' }, 400]])).toEqual(['Found 1 page', "Reading didn't finish"]);
-        expect(labels([...research, [{ type: 'stopped' }, 400]])).toEqual(['Found 1 page', 'Reading stopped']);
+        expect(labels([...research, [{ type: 'error' }, 400]])).toEqual(['Found 1 relevant page', "Checking didn't finish"]);
+        expect(labels([...research, [{ type: 'stopped' }, 400]])).toEqual(['Found 1 relevant page', 'Stopped checking pages']);
 
         // The read finished when the next search started; only the search was cut short.
         const searching = [...research, [thinking(SEARCHING, { query: 'log indexes' }), 400]];
         expect(labels([...searching, [{ type: 'error' }, 500]]))
-            .toEqual(['Found 1 page', 'Read 1 page', "Search didn't finish"]);
+            .toEqual(['Found 1 relevant page', 'Checked 1 page', "Finding pages didn't finish"]);
         expect(labels([...searching, [{ type: 'stopped' }, 500]]))
-            .toEqual(['Found 1 page', 'Read 1 page', 'Search stopped']);
+            .toEqual(['Found 1 relevant page', 'Checked 1 page', 'Stopped finding pages']);
 
         const writing = run([[thinking(GENERATING), 100], [{ type: 'error' }, 200]]);
         expect(describeStep(writing.steps[0])).toBe('Answer interrupted');
@@ -228,25 +235,24 @@ describe('ActivityTimeline', () => {
         document.body.innerHTML = '';
     });
 
-    it('renders steps and page chips as text, then collapses when the answer starts', () => {
+    it('lists checked pages as text links, then collapses when the answer starts', () => {
         const timeline = new ActivityTimeline();
         document.body.appendChild(timeline.root);
 
+        const opened = (title, slug) => thinking(REVIEWING, { page: { title, distinct_base_url: `/${slug}/` } });
         timeline.dispatch(thinking(SEARCHING));
-        timeline.dispatch(thinking(REVIEWING, {
-            retrieved_pages: [
-                { title: '<img src=x onerror=alert(1)>', distinct_base_url: '/a/' },
-                page('b'), page('c'), page('d'), page('e'), page('f')
-            ]
-        }));
+        timeline.dispatch(thinking(REVIEWING, { retrieved_pages: [page('a'), page('b')] }));
+        [['<img src=x onerror=alert(1)>', 'a'], ['Page b', 'b'], ['Page c', 'c'], ['Page d', 'd'], ['Page e', 'e'], ['Page f', 'f']]
+            .forEach(([title, slug]) => timeline.dispatch(opened(title, slug)));
 
         const steps = timeline.root.querySelectorAll('.conv-search-activity-step');
-        expect(steps).toHaveLength(1);
+        expect(steps).toHaveLength(2);
         expect(steps[0].dataset.status).toBe('done');
+        expect(steps[0].querySelector('.conv-search-activity-page')).toBeNull();
         expect(timeline.root.querySelector('img')).toBeNull();
-        expect(timeline.root.querySelector('.conv-search-activity-page-title').textContent)
+        expect(steps[1].querySelector('.conv-search-activity-page-title').textContent)
             .toBe('<img src=x onerror=alert(1)>');
-        expect(timeline.root.querySelectorAll('.conv-search-activity-page.is-overflow')).toHaveLength(2);
+        expect(steps[1].querySelectorAll('.conv-search-activity-page.is-overflow')).toHaveLength(2);
 
         const more = timeline.root.querySelector('.conv-search-activity-more');
         expect(more.textContent).toBe('+2 more');
@@ -260,8 +266,8 @@ describe('ActivityTimeline', () => {
 
         timeline.dispatch({ type: 'done' });
         expect(timeline.root.dataset.phase).toBe('done');
-        expect(timeline.headline.textContent).toMatch(/^Researched for \d+s$/);
-        expect(timeline.meta.textContent).toBe('1 search · 6 pages found');
+        expect(timeline.headline.textContent).toMatch(/^Reviewed the documentation \u00b7 \d+s$/);
+        expect(timeline.meta.textContent).toBe('1 search \u00b7 6 pages checked');
         timeline.destroy();
     });
 
@@ -302,7 +308,7 @@ describe('ActivityTimeline', () => {
         });
 
         expect(heard).toEqual([
-            'Thinking', 'Searching the docs', 'Reading a page', 'Searching for more details', 'Writing the answer',
+            'Thinking...', 'Finding relevant pages', 'Checking a page', 'Finding more pages', 'Writing the answer',
             'Answer ready'
         ]);
         timeline.destroy();
@@ -321,7 +327,7 @@ describe('ActivityTimeline', () => {
             timeline.dispatch(action);
             expect(timeline.root.textContent).not.toContain('8126');
         });
-        expect(timeline.list.textContent).toContain("Search didn't finish");
+        expect(timeline.list.textContent).toContain("Finding pages didn't finish");
         timeline.destroy();
     });
 

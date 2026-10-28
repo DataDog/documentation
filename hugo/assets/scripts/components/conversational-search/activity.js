@@ -16,6 +16,7 @@
 
 const DOCS_ORIGIN = 'https://docs.datadoghq.com';
 const MAX_VISIBLE_PAGES = 4;
+const STARTING = 'Thinking...';
 
 export const SERVER_STAGES = {
     'Rewriting query...': 'understand',
@@ -213,9 +214,9 @@ function describeInterruptedStep(step) {
     const failed = step.status === 'failed';
     switch (step.kind) {
         case 'search':
-            return failed ? "Search didn't finish" : 'Search stopped';
+            return failed ? "Finding pages didn't finish" : 'Stopped finding pages';
         case 'read':
-            return failed ? "Reading didn't finish" : 'Reading stopped';
+            return failed ? "Checking didn't finish" : 'Stopped checking pages';
         case 'write':
             return failed ? 'Answer interrupted' : 'Writing stopped';
         case 'understand':
@@ -236,24 +237,26 @@ export function describeStep(step) {
         case 'search': {
             const found = step.pages.length;
             if (step.followUp) {
-                if (active) return 'Searching for more details';
-                if (!step.resolved) return 'Searched for more details';
+                if (active) return 'Finding more pages';
+                if (!step.resolved) return 'Looked for more pages';
                 return found ? `Found ${plural(found, 'more page', 'more pages')}` : 'No new pages';
             }
-            if (active) return 'Searching the docs';
-            if (!step.resolved) return 'Searched the docs';
-            return found ? `Found ${plural(found, 'page', 'pages')}` : 'No matching pages';
+            if (active) return 'Finding relevant pages';
+            if (!step.resolved) return 'Looked for relevant pages';
+            return found ? `Found ${plural(found, 'relevant page', 'relevant pages')}` : 'No relevant pages';
         }
         case 'read':
             return active
-                ? `Reading ${step.count === 1 ? 'a page' : plural(step.count, 'page', 'pages')}`
-                : `Read ${plural(step.count, 'page', 'pages')}`;
+                ? `Checking ${step.count === 1 ? 'a page' : plural(step.count, 'page', 'pages')}`
+                : `Checked ${plural(step.count, 'page', 'pages')}`;
         case 'write':
             return active ? 'Writing the answer' : 'Wrote the answer';
         default:
             return step.label || '';
     }
 }
+
+const activeStep = (state) => [...state.steps].reverse().find((step) => step.status === 'active');
 
 export function researchSeconds(state, now = Date.now()) {
     const end = state.researchEndedAt || now;
@@ -265,7 +268,7 @@ export function summarizeActivity(state) {
     // Count search steps, not backend calls: parallel searches show as one step.
     const searches = state.steps.filter((step) => step.kind === 'search').length;
     if (searches) parts.push(plural(searches, 'search', 'searches'));
-    if (state.reads) parts.push(`${plural(state.reads, 'page', 'pages')} read`);
+    if (state.reads) parts.push(`${plural(state.reads, 'page', 'pages')} checked`);
     else if (state.pages.length) parts.push(`${plural(state.pages.length, 'page', 'pages')} found`);
     return parts.join(' · ');
 }
@@ -277,11 +280,18 @@ export function describeHeadline(state, now = Date.now()) {
         case 'stopped':
             return 'Stopped';
         case 'writing':
-        case 'done':
-            return `Researched for ${researchSeconds(state, now)}s`;
+        case 'done': {
+            const seconds = researchSeconds(state, now);
+            const researched = state.steps.some((step) => step.kind === 'search' || step.kind === 'read');
+            return researched ? `Reviewed the documentation \u00b7 ${seconds}s` : `Answered in ${seconds}s`;
+        }
         default: {
-            const active = [...state.steps].reverse().find((step) => step.status === 'active');
-            return active ? describeStep(active) : 'Thinking';
+            // The steps below say what is happening; the header stays steady while research runs.
+            if (state.steps.some((step) => step.kind === 'search' || step.kind === 'read')) {
+                return 'Reviewing the documentation';
+            }
+            const active = activeStep(state);
+            return active ? describeStep(active) : STARTING;
         }
     }
 }
@@ -330,15 +340,15 @@ export class ActivityTimeline {
         this.header.setAttribute('aria-expanded', 'true');
         this.header.setAttribute('aria-controls', bodyId);
 
-        this.orb = el('span', 'conv-search-activity-orb');
-        this.orb.setAttribute('aria-hidden', 'true');
-        this.headline = el('span', 'conv-search-activity-headline', 'Thinking');
+        this.status = el('span', 'conv-search-activity-status');
+        this.status.setAttribute('aria-hidden', 'true');
+        this.headline = el('span', 'conv-search-activity-headline', STARTING);
         this.meta = el('span', 'conv-search-activity-meta');
         this.timer = el('span', 'conv-search-activity-timer');
         this.timer.setAttribute('aria-hidden', 'true');
         const chevron = el('span', 'conv-search-activity-chevron');
         chevron.innerHTML = CHEVRON;
-        this.header.append(this.orb, this.headline, this.meta, this.timer, chevron);
+        this.header.append(this.status, this.headline, this.meta, this.timer, chevron);
 
         this.body = el('div', 'conv-search-activity-body');
         this.body.id = bodyId;
@@ -436,11 +446,13 @@ export class ActivityTimeline {
                 return 'Stopped';
             case 'error':
                 return '';
-            default:
-                if (headline !== 'Thinking') return headline;
+            default: {
+                const active = activeStep(this.state);
+                if (active) return describeStep(active);
                 if (this.announcedThinking) return '';
                 this.announcedThinking = true;
                 return headline;
+            }
         }
     }
 
@@ -463,6 +475,8 @@ export class ActivityTimeline {
         const text = describeStep(step);
         if (label.textContent !== text) label.textContent = text;
 
+        // Only the pages the assistant checked are listed; search steps just count what they found.
+        if (step.kind !== 'read') return;
         const body = node.querySelector('.conv-search-activity-step-body');
         const rendered = node.dataset.pages ? Number(node.dataset.pages) : 0;
         if (step.pages.length !== rendered) {
@@ -482,7 +496,6 @@ export class ActivityTimeline {
                 chip.rel = 'noopener noreferrer';
             }
             chip.title = page.title;
-            chip.style.setProperty('--conv-chip-index', String(Math.min(i, MAX_VISIBLE_PAGES)));
             chip.appendChild(el('span', 'conv-search-activity-page-title', page.title));
             if (i >= MAX_VISIBLE_PAGES) chip.classList.add('is-overflow');
             wrap.appendChild(chip);
