@@ -8,6 +8,9 @@ further_reading:
   - link: "/data_observability/quality_monitoring/"
     tag: "Documentation"
     text: "Quality Monitoring"
+  - link: "/data_observability/quality_monitoring/guides/aastra_query_syntax/"
+    tag: "Guide"
+    text: "Aastra Query Syntax"
   - link: "/monitors/notify/"
     tag: "Documentation"
     text: "Configure your monitor notifications"
@@ -68,9 +71,9 @@ First, select whether to monitor the {{< ui >}}Table{{< /ui >}} or {{< ui >}}Col
 
 {{< img src="monitors/monitor_types/data_observability/entity_type_selection_and_aastra.png" alt="Choose data to monitor: entity type selector, query input, and lineage relationship filter" style="width:60%;" >}}
 
-Then, use the {{< ui >}}Edit{{< /ui >}} tab to search for tables, views, or columns by typing `key:value` filters into the search field.
+Then, use the {{< ui >}}Edit{{< /ui >}} tab to search for tables, views, or columns by typing `key:value` filters into the search field. The {{< ui >}}Edit{{< /ui >}} tab builds an Aastra query, which is the same query that appears in the `filter` field of the monitor's API definition. For the full syntax, see [Aastra Query Syntax][14].
 
-**Filter by name or location:**
+**Filter by name, location, or type:**
 
 | Filter | Example | Description |
 |---|---|---|
@@ -78,6 +81,9 @@ Then, use the {{< ui >}}Edit{{< /ui >}} tab to search for tables, views, or colu
 | Schema | `schema:PROD` | Match by schema. |
 | Database | `database:ANALYTICS_DB` | Match by database. |
 | Account | `account:my_account` | Match by account. |
+| Table | `table:ORDERS` | For columns, match by the table that contains the column. |
+| Platform | `platform:snowflake` | Match by data platform, such as `snowflake`, `bigquery`, or `databricks`. |
+| Table type | `table_type:view` | For tables, match by table type, such as `"base table"`, `view`, `materialized_view`, or `external`. The available types depend on your data platform. |
 
 **Filter by tag:**
 
@@ -101,6 +107,34 @@ In addition to your own tags, Datadog computes attributes for your data assets t
 
 `lineage_score` is bucketed into the discrete tiers listed above rather than taking a continuous value, so filter on one of those exact values. Match a single tier, or combine tiers with `OR`. For example, `lineage_score:1.00` returns your most depended-on assets, and `lineage_score:(0.90 OR 1.00)` returns the top two tiers.
 
+**Filter by freshness or row count:**
+
+<div class="alert alert-info">Filtering on freshness and row count is in Preview. Contact your Datadog representative to request access.</div>
+
+When you monitor tables, you can filter on each table's latest freshness and row count without adding tags. For example, monitor only the tables in a schema that were updated in the last two weeks, or only tables with more than a million rows.
+
+| Filter | Example | Description |
+|---|---|---|
+| `freshness_days` | `freshness_days:<14` | Days since the table was last modified. |
+| `freshness_hours` | `freshness_hours:<=6` | Hours since the table was last modified. |
+| `freshness_minutes` | `freshness_minutes:<90` | Minutes since the table was last modified. |
+| `row_count` | `row_count:>1000000` | The table's most recently reported row count. |
+
+These filters work as follows:
+
+- They apply to tables only. They are not available when you monitor columns, and they cannot be used inside a lineage or hierarchy relationship filter.
+- Use whole numbers with `<`, `<=`, `>`, or `>=`, or an inclusive range such as `row_count:[100 TO 1000]`. Exclusive ranges with braces, such as `{100 TO 1000}`, are not supported. For a fraction of a unit, use the next smaller unit, for example `freshness_hours:<36` instead of a day and a half.
+- `row_count` also accepts an exact value, such as `row_count:0`. The freshness filters do not, because the time since a table was modified is never exactly a whole number.
+- To set two bounds on the same filter, use a range or join the bounds with `AND`, for example `freshness_days:[1 TO 7]` or `freshness_days:>=1 AND freshness_days:<7`.
+- Values are read as of each table's latest crawl. A table with no value reported in the last 48 hours matches only `-freshness_days:*` or `-row_count:*`, not a comparison or range, even a negated one. To keep those tables in scope, write `(freshness_days:<14 OR -freshness_days:*)`.
+- For Snowflake and BigQuery, Datadog reads these values for every table it crawls. Views do not report a row count. On other platforms, a table has a value only when a Freshness or Row Count monitor collects it.
+- These filters choose which tables a monitor covers. They are separate from the Freshness and Row Count metric types, which set what the monitor measures.
+- If the rest of the scope matches too many tables, the monitor cannot evaluate it. Narrow the scope with filters such as `schema` or `database`.
+
+Because these values change, the tables a monitor covers change with them, about an hour behind the data. When a table leaves the scope, it behaves like any group that stops reporting: the monitor sends a no-data alert if those are enabled, and otherwise the group stops alerting and later drops off the monitor. Graphs of past time windows show the tables in the current scope.
+
+Avoid filtering on the metric the monitor measures. For example, a Freshness monitor scoped with `freshness_days:<7` stops covering a table as soon as the table is seven days stale, which is when you want the alert. On platforms other than Snowflake and BigQuery, the table's value may then stop being collected, so the table does not come back into scope. To leave out tables that have stopped updating, add a freshness filter to a monitor that measures something else, such as a Row Count monitor.
+
 Combine any of these filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
 **Examples:**
@@ -112,6 +146,9 @@ Combine any of these filters with `AND` or `OR`, use parentheses to group condit
 | Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
 | Tables owned by a specific team | `owner:data-platform-team` |
 | The most depended-on tables in a database | `database:ANALYTICS_DB AND lineage_score:1.00` |
+| Tables in the PROD schema, excluding views | `schema:PROD AND -table_type:(view OR materialized_view)` |
+| Tables in the PROD schema updated in the last two weeks | `schema:PROD AND freshness_days:<14` |
+| Snowflake tables that contain rows | `platform:snowflake AND row_count:>0` |
 
 **Filter by lineage relationship:**
 
@@ -419,3 +456,4 @@ On a monitor's status page, click {{< ui >}}Annotate Bounds{{< /ui >}}, select a
 [11]: https://app.datadoghq.com/monitors/create/schema-change
 [12]: https://app.datadoghq.com/data-obs/schema-changes
 [13]: https://app.datadoghq.com/monitors/create/data-quality
+[14]: /data_observability/quality_monitoring/guides/aastra_query_syntax/
