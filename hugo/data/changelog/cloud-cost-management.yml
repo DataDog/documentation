@@ -11,3 +11,10 @@ entries:
     operations:
       - ListCostOCIConfigs
     title: Publish Cloud Cost Management cloud account listing
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41053
+    operations:
+      - SearchCostRecommendations
+    title: Allow an empty scope and add valid request examples to cost 
+      recommendations search

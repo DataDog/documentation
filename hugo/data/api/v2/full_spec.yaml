@@ -104875,6 +104875,7 @@ components:
             Filter expression applied to the recommendations when `attributes.filter` is omitted.
             When supplied, `attributes.filter` overrides this value, including when empty. If the
             resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -104900,6 +104901,7 @@ components:
           type: array
         view:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          example: active
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -104912,24 +104914,31 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+        An empty value is treated as `ccm`.
       enum:
         - ccm
         - experiment
         - "*"
+        - ""
+      example: ccm
       type: string
       x-enum-varnames:
         - CCM
         - EXPERIMENT
         - ALL
+        - EMPTY
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
           description: Field to sort by (for example, `@potential_daily_savings`).
+          example: "@potential_daily_savings"
           type: string
         order:
           description: Sort direction, either `ASC` or `DESC`.
+          example: DESC
           type: string
       type: object
     RecommendationsPageMeta:
@@ -133588,6 +133597,35 @@ components:
       type: string
       x-enum-varnames:
         - TAG_INDEXING_RULE_EXEMPTIONS
+    TagIndexingRuleExemptionUpdateAttributes:
+      description: Attributes for updating a tag indexing rule exemption.
+      properties:
+        reason:
+          description: The updated reason the metric is exempt from tag indexing rules.
+          example: This metric must remain exempt because of its query requirements.
+          type: string
+      required:
+        - reason
+      type: object
+    TagIndexingRuleExemptionUpdateData:
+      description: Data object for updating a tag indexing rule exemption.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionType"
+      required:
+        - type
+        - attributes
+      type: object
+    TagIndexingRuleExemptionUpdateRequest:
+      description: Request body for updating a tag indexing rule exemption.
+      properties:
+        data:
+          $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateData"
+      required:
+        - data
+      type: object
     TagIndexingRuleExemptionVolumeStatus:
       description: |-
         Indicates whether `estimated_change_in_volume` is available and, if not, why. `ok` indicates a fresh estimate.
@@ -206309,7 +206347,7 @@ paths:
       summary: Delete a tag indexing rule exemption
       tags:
         - Metrics
-      x-menu-order: 26
+      x-menu-order: 35
       "x-permission":
         operator: OR
         permissions:
@@ -206457,6 +206495,89 @@ paths:
         - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      "x-permission":
+        operator: OR
+        permissions:
+          - metric_tags_write
+      x-unstable: |-
+        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and
+        `created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has
+        only a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.
+      operationId: UpdateTagIndexingRuleExemption
+      parameters:
+        - $ref: "#/components/parameters/MetricName"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      reason: This metric must remain exempt because of its query requirements.
+                    type: tag_indexing_rule_exemptions
+            schema:
+              $ref: "#/components/schemas/TagIndexingRuleExemptionUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2024-01-15T12:00:00.000Z"
+                        created_by_handle: user@datadoghq.com
+                        estimated_change_in_volume:
+                        kind: exemption
+                        missing_indexed_tags: []
+                        reason: This metric must remain exempt because of its query requirements.
+                        volume_status: unavailable
+                      id: dd.test.metric
+                      type: tag_indexing_rule_exemptions
+              schema:
+                $ref: "#/components/schemas/TagIndexingRuleExemptionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - metric_tags_write
+      summary: Update a tag indexing rule exemption
+      tags:
+        - Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
