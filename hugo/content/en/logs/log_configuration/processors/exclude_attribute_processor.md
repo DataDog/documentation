@@ -25,7 +25,7 @@ Use the Exclude Attribute Processor to remove a specified attribute from your lo
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Removing a parsed attribute with the Exclude Attribute Processor" level="h4" %}}
+{{% collapse-content title="Example: Removing a parsed attribute with the Exclude Attribute Processor" level="h3" %}}
 
 **Before:**
 

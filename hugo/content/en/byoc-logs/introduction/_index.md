@@ -13,13 +13,13 @@ BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution that runs 
 
 Here is a high-level overview of how BYOC Logs works:
 
-{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="BYOC Logs architecture overview showing how logs flow from sources through BYOC Logs to the Datadog platform" style="width:100%;" >}}
+{{< img src="/cloudprem/overview_diagram_byoc.png" alt="BYOC Logs architecture overview showing how logs flow from sources through BYOC Logs to the Datadog platform" style="width:100%;" >}}
 
 The diagram illustrates the BYOC Logs hybrid architecture, highlighting how data is processed and stored within your infrastructure:
 
 *   **Ingestion**: Logs are collected from Datadog Agents and other sources using standard protocols.
 *   **Your Infrastructure**: The BYOC Logs platform runs entirely inside your infrastructure. It processes and stores logs in your own object storage (Amazon S3, Google Cloud Storage, or Azure Blob Storage).
-*   **Datadog SaaS**: The Datadog platform is BYOC Logs' Control Plane. It hosts the Datadog UI and communicates with BYOC Logs through a secure connection to send log queries and receive results.
+*   **Datadog SaaS**: The Datadog platform hosts the Datadog UI and communicates with BYOC Logs through a secure connection to send log queries and receive results.
 
 {{< whatsnext desc="Explore BYOC Logs' architecture and capabilities:">}}
   {{< nextlink href="/byoc-logs/introduction/architecture/" >}}Architecture - Understand how BYOC Logs components work together{{< /nextlink >}}

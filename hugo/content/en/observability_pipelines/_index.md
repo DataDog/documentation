@@ -1,11 +1,12 @@
 ---
 title: Observability Pipelines
+description: Learn how Observability Pipelines lets you collect, process, and route logs and metrics within your own infrastructure to destinations such as Datadog, Amazon S3, Splunk, and Microsoft Sentinel.
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/configuration/explore_templates/"
+- link: "/observability_pipelines/configuration/set_up_pipelines/"
   tag: "documentation"
   text: "Set up pipelines"
-- link: "/observability_pipelines/configuration/set_up_pipelines/"
+- link: "/observability_pipelines/configuration/explore_templates/"
   tag: "documentation"
   text: "Explore use cases and templates"
 - link: "/observability_pipelines/configuration/install_the_worker/"
@@ -71,9 +72,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
+- link: "https://www.datadoghq.com/blog/tines-observability-pipelines-security-automation/"
+  tag: "Blog"
+  text: "Respond to security threats faster with Tines and Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-microsoft-sentinel-packs/"
+  tag: "Blog"
+  text: "Transform and route security logs to Microsoft Sentinel tables using Observability Pipelines"
 
 ---
-
 ## Overview
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
@@ -105,7 +111,7 @@ The Observability Pipelines UI provides a centralized control plane where you ca
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template](#common-use-cases-and-templates) based on your use case.
 1. Set up your pipeline:
-    1. Choose a log [source][2].
+    1. Choose your log [sources][2].
     1. Configure [processors][3].
     1. Add one or more [destinations][4].
 1. [Install the Worker][5] in your environment

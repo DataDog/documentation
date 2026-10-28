@@ -22,7 +22,7 @@ For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#
 
 ## Overview
 
-For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables.
+For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables. See the [example configuration files][15] in the Datadog Agent GitHub repo for a fully commented reference of all available `datadog.yaml` settings.
 
 ## Recommendations
 
@@ -137,3 +137,4 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/multi_region_failover.yaml
 [13]: https://github.com/DataDog/datadog-agent/tree/7.83.x/pkg/config/setup
 [14]: https://github.com/DataDog/datadog-agent/tree/7.50.x/pkg/config
+[15]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example

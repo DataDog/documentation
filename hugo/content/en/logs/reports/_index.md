@@ -4,7 +4,7 @@ title: Scheduled CSV Reports
 
 ## Overview
 
-Scheduled CSV Reports let you automatically receive recurring, structured data exports through email, Slack, or Microsoft Teams. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics, without needing to log into the Datadog platform.
+Scheduled CSV Reports let you automatically receive recurring, structured data exports through email, Slack, or Microsoft Teams. This feature supports operational, compliance, and executive stakeholders by delivering periodic snapshots of key metrics without needing to log in to Datadog.
 
 ## Define a query
 
@@ -18,11 +18,15 @@ To schedule a CSV Report, the query must meet the following conditions:
 
 ## Schedule a CSV report
 
-1. Click {{< ui >}}More…{{< /ui >}}.  
-2. Select {{< ui >}}Schedule CSV Report{{< /ui >}}.
+1. In the [Log Explorer][1], run the query you want to export.
+2. Above the query results, click the down arrow next to {{< ui >}}Download as CSV{{< /ui >}}, then select {{< ui >}}Schedule CSV Report{{< /ui >}}.
+
+   <!-- TODO: recapture screenshot once the NEW badge is removed from Schedule CSV Report -->
+   {{< img src="logs/reports/schedule_csv_report_menu.png" alt="The Log Explorer results toolbar with the dropdown next to Download as CSV expanded, showing Copy, Copy as cURL, Share event, and Schedule CSV Report options" style="width:80%;" >}}
+
 3. In the configuration modal that opens, set a schedule for the report to determine when and how often the report is sent.  
-4. Configure report: Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed on the dashboard.  
-5. Add recipients  
+4. Configure the report: Define the report title and set a time frame to determine the range of time displayed in the resulting report. The report time frame can be different from the time frame displayed in the Log Explorer.  
+5. Add recipients:
    1. {{< ui >}}Email recipients{{< /ui >}}: To add email recipients to your report, enter their email addresses. The email associated with your Datadog account is automatically added as a recipient. You can remove yourself as a recipient by hovering over your email and clicking the trash icon that appears next to it.  
    2. {{< ui >}}Slack recipients{{< /ui >}}: To add Slack recipients, select the Slack workspace and channel from the available dropdowns. If you do not see any Slack workspaces available, ensure you have the Datadog [Slack Integration][5] installed. All public channels within the Slack workspace should be listed automatically. To select a private Slack channel, make sure to invite the Datadog Slack bot to the channel in Slack. To send a test message to Slack, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
    3. {{< ui >}}Microsoft Teams recipients{{< /ui >}}: Select the {{< ui >}}Microsoft Teams{{< /ui >}} tab, then choose a {{< ui >}}Tenant{{< /ui >}}, {{< ui >}}Team{{< /ui >}}, and {{< ui >}}Channel{{< /ui >}} from the available dropdowns. Ensure the [Microsoft Teams integration][7] is installed in your Datadog organization and the Datadog app is added to the target Team in Microsoft Teams. To send a test message, add a channel recipient and click {{< ui >}}Send Test Message{{< /ui >}}.
@@ -40,11 +44,11 @@ After a report is created, you can subscribe, unsubscribe, edit a schedule, and 
 
 ## Reports views
 
-| Report View | Description | Required Permission |
-| ----- | ----- | ----- |
-| {{< ui >}}Created by you{{< /ui >}} | Shows all Scheduled CSV Reports you have created from Log Explorer | `CSV Report Schedules Write` |
-| {{< ui >}}All Reports{{< /ui >}} | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | `CSV Report Schedules Manage` |
-| {{< ui >}}Subscribed{{< /ui >}} | Shows all Scheduled CSV Reports that you are Subscribed to | `CSV Report Schedules Write` |
+| Report View                         | Description                                                                     | Required Permission           |
+| ----------------------------------- | ------------------------------------------------------------------------------- | ----------------------------- |
+| {{< ui >}}Created by you{{< /ui >}} | Shows all Scheduled CSV Reports you have created from Log Explorer              | `CSV Report Schedules Write`  |
+| {{< ui >}}All Reports{{< /ui >}}    | Shows all Scheduled CSV Reports in Log Explorer for the organization you are in | `CSV Report Schedules Manage` |
+| {{< ui >}}Subscribed{{< /ui >}}     | Shows all Scheduled CSV Reports that you are Subscribed to                      | `CSV Report Schedules Write`  |
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/explorer/advanced_search/#filter-logs-with-subqueries

@@ -6,15 +6,16 @@ further_reading:
   text: "ServiceNow integration"
 ---
 
-ServiceNow's ITOM/ITSM integration allows you to send alerts, cases, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
+ServiceNow's ITOM/ITSM integration allows you to send alerts, work items, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
 
 To use the integration, follow the instructions to install it, and then configure it for each product:
 1. [Configure the ServiceNow tile](#tile)
 1. [Install the ITOM/ITSM integration](#install)
 1. Configure the integration
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
-   1. [Configure Datadog Case Management](#case-management)
+   1. [Configure Datadog Work Management](#case-management)
    1. [Configure Datadog Incident Management](#incident-management)
+   1. [Configure Datadog On-Call](#on-call)
 1. [Customize data with transform maps](#transform-maps)
 
 ## Configure the ServiceNow tile {#tile}
@@ -25,7 +26,7 @@ Before installing the integration, ensure you have the [ServiceNow tile configur
 
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.9.xml][2]) and upload it to your ServiceNow instance manually.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.9.3.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -229,23 +230,25 @@ sys_id from the templated handle passed in for user.
 
 {{% /collapse-content %}}
 
-### Configure Datadog Case Management {#case-management}
+### Configure Datadog Work Management {#case-management}
 
 {{% site-region region="gov2" %}}
 <div class="alert alert-warning">
-Case Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+Work Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
 
-Send cases from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
+Send work items from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
 
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
-1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
-1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Case Management.
-1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
+1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Work Management** tab.
+1. Under **Sync ServiceNow with Work Management**, open the settings for your ServiceNow instance.
+1. Beside **Case Table**, choose to send work items to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Work Management.
+1. Navigate to the [**Work Management > Settings**][5] page and expand your project. Then set up the ServiceNow integration for that project.
+
+For step-by-step setup instructions, see [Work Management notifications and integrations][6].
 
 ### Configure Datadog Incident Management {#incident-management}
 
@@ -253,11 +256,24 @@ The Datadog ServiceNow integration allows you to create incidents in ServiceNow 
 
 After installing the integration, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
 
-For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
+For step-by-step setup instructions, see [Integrate ServiceNow with Datadog Incident Management][12].
 
-## Sync data bidirectionally between ServiceNow and Case/Incident Management {#sync-bidirectionally}
+### Configure Datadog On-Call {#on-call}
 
-In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
+Use this integration to create a ServiceNow incident when a Datadog On-Call Page triggers, and to create a Datadog On-Call Page from a ServiceNow record.
+
+<div class="alert alert-info">The integration with Datadog On-Call requires ITOM/ITSM integration version 2.9.3 or newer.</div>
+
+1. In Datadog, go to **Incident Response** > **On-Call** > **Settings** and select **Integrations**.
+1. Click **ServiceNow**, then click **Add Connection** and configure the connection to your ServiceNow instance.
+1. Open a team's [routing rules][13] and add a rule that creates a ServiceNow incident when an On-Call Page triggers.
+1. (Optional) To create a Datadog On-Call Page from ServiceNow, see [Create a Datadog On-Call Page from ServiceNow](#create-on-call-page).
+
+For step-by-step setup instructions, see [Integrate ServiceNow with Datadog On-Call][14].
+
+## Sync data bidirectionally between ServiceNow and Datadog {#sync-bidirectionally}
+
+In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Work Management and Incident Management.
 
 **Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
 
@@ -273,19 +289,17 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
 1. Click **Save**.
 1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br /> Instructions on how to do so can be found below under **Transform correlated alert data**.
 
-
-
 ## Customize data with transform maps {#transform-maps}
 
 The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, [custom field mappings](#custom-field-mappings)), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
 
 ## Additional configuration options
 
-{{% collapse-content title="Datadog import host auto-flush rule" level="h4" expanded=false id="import-host-auto-flush" %}}
+{{% collapse-content title="Datadog import host auto-flush rule" level="h3" expanded=false id="import-host-auto-flush" %}}
 To prevent the import set table `x_datad_datadog_import_host` from accumulating too many rows, an auto-flush rule has been added to the Table Cleaner tool to keep only the last 24 hours of data. This configuration setting can be changed as needed by navigating to `sys_auto_flush_list.do` in the filter navigator and going into the rule for the `x_datad_datadog_import_host` table. The `Age in seconds` field can be updated accordingly.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Create custom field mappings in ServiceNow" level="h4" expanded=false id="custom-field-mappings" %}}
+{{% collapse-content title="Create custom field mappings in ServiceNow" level="h3" expanded=false id="custom-field-mappings" %}}
 To create a custom field mapping in ServiceNow:
 
 1. Click one of the tables (for example, **Datadog Monitors ITSM Tables**), and scroll to the bottom of the record to see the link for the associated transform map.
@@ -315,7 +329,7 @@ answer = (function transformEntry(source)
 - The field mappings are at the bottom of the record. Some basic mappings are included. This is where you select the fields to include, define the format, and select the target fields in your ServiceNow instance.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
+{{% collapse-content title="Transform correlated alert data" level="h3" expanded=false id="transform-correlated-alert-data" %}}
 To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map.
 
 To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
@@ -367,16 +381,44 @@ To populate data into the ServiceNow incident, you have to modify your script to
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Create a Datadog On-Call Page from ServiceNow" level="h3" expanded=false id="create-on-call-page" %}}
+To create a Datadog On-Call Page from a ServiceNow record, add a business rule in ServiceNow that calls the `PublishOnCallPage` script include.
+
+Before you start, complete [Sync data bidirectionally](#sync-bidirectionally). The script include uses the credentials from the **Configuration** record you create in that section.
+
+**Note**: If the Datadog application key in that **Configuration** record is a scoped application key, it must include the `on_call_page` and `built_in_features` authorization scopes.
+
+`PublishOnCallPage` takes three arguments, in order:
+
+| Argument | Required | Description |
+| -------- | -------- | ----------- |
+| Target type | Yes | The type of target to page: `team_handle`, `team_id`, or `user_id`. |
+| Target identifier | Yes | The identifier of the target, matching the target type: the team's handle, the team's ID, or the user's ID. |
+| Urgency | No | The urgency of the page: `high` or `low`. Defaults to `high`. |
+
+In the following example, the business rule pages the Datadog user with the ID `<USER_ID>` at high urgency:
+
+```javascript
+(function executeRule(current, previous /* null when async */) {
+    new PublishOnCallPage(
+        "user_id",
+        "<USER_ID>",
+        "high"
+    ).execute(current);
+})(current, previous);
+```
+{{% /collapse-content %}}
+
 ## Troubleshooting
 
-{{% collapse-content title="Error message in your Datadog integration" level="h4" expanded=false id="troubleshooting-error-messages" %}}
+{{% collapse-content title="Error message in your Datadog integration" level="h3" expanded=false id="troubleshooting-error-messages" %}}
 If you get an error message in your Datadog integration tile, or an `Error while trying to post to your ServiceNow instance` notification:
 - Verify only the subdomain was used when entering your instance name.
 - Verify the user you created has the required permissions.
 - Verify the username and password are correct.
 {{% /collapse-content %}}
 
-{{% collapse-content title="No ticket created" level="h4" expanded=false id="troubleshooting-no-ticket" %}}
+{{% collapse-content title="No ticket created" level="h3" expanded=false id="troubleshooting-no-ticket" %}}
 If the integration is configured and an alert triggered, but no ticket is created:
 - Confirm that the interim table is populated. If so, the issue is with mappings and transformations. You can debug your mappings and scripts further by navigating to **Transform Errors** in ServiceNow.
 - Confirm that you're working with the interim table you specified in the tile.
@@ -384,11 +426,11 @@ If the integration is configured and an alert triggered, but no ticket is create
 The ServiceNow user needs `rest_service` and `x_datad_datadog.user` roles so that it can access the import tables. If you're using the legacy way of sending notifications directly to either the Incident table or Event table, you need the permissions `itil` and `evt_mgmt_integration`.
 {{% /collapse-content %}}
 
-{{% collapse-content title="No updates from ServiceNow to Datadog" level="h4" expanded=false id="troubleshooting-no-updates" %}}
-If you're seeing updates from Datadog Case Management to ServiceNow, but not seeing updates from ServiceNow to Datadog, this is expected behavior for ServiceNow ITOM. Bidirectional syncing with Case Management is only supported for ServiceNow ITSM.
+{{% collapse-content title="No updates from ServiceNow to Datadog" level="h3" expanded=false id="troubleshooting-no-updates" %}}
+If you're seeing updates from Datadog Work Management to ServiceNow, but not seeing updates from ServiceNow to Datadog, this is expected behavior for ServiceNow ITOM. Bidirectional syncing with Work Management is only supported for ServiceNow ITSM.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Monitors duplicating incidents" level="h4" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
+{{% collapse-content title="Monitors duplicating incidents" level="h3" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
 If a monitor is reopening the same incident instead of creating a new one for each warning, ensure it is not set as a simple alert. Convert the monitor to a [multi-alert][11] by grouping it using a tag in the metric. This way, each alert will trigger a separate incident.
 {{% /collapse-content %}}
 
@@ -399,14 +441,16 @@ Need additional help? Contact [Datadog support][10].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.9.3.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
-[5]: https://app.datadoghq.com/cases/settings
-[6]: /incident_response/case_management/notifications_integrations/#servicenow
+[5]: https://app.datadoghq.com/work/settings
+[6]: /incident_response/work_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
 [12]: /incident_response/incident_management/integrations/servicenow
+[13]: /incident_response/on-call/routing_rules/
+[14]: /incident_response/on-call/integrations/servicenow/

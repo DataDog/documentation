@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+    <rect width="128" height="128" rx="32" fill="#050F34"/>
+    <text x="64" y="64" text-anchor="middle" dominant-baseline="central"
+          fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="54" font-weight="700">PR</text>
+</svg>

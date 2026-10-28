@@ -1,5 +1,9 @@
 ---
 title: Schema Tracking
+further_reading:
+- link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+  tag: "Blog"
+  text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 ---
 
 Data Streams Monitoring provides visibility into schemas used by producers and consumers, and how schema issues impact downstream services. You can track new schemas added, schemas with errors, and schema evolutions to manage schema migrations and identify issues.
@@ -66,3 +70,7 @@ On the schemas tab, you can:
 [2]: https://github.com/DataDog/dd-trace-java
 [3]: https://app.datadoghq.com/data-streams/schemas
 [4]: https://app.datadoghq.com/data-streams/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

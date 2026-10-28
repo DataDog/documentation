@@ -1,0 +1,1 @@
+Toggle **Group signals** if you want to reduce the number of signals generated. Then, select one or more groups for which you want to generate one security signal each.

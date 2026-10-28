@@ -5,6 +5,9 @@ aliases:
 - /dora_metrics/ai-impact/
 - /dora_metrics/ai_impact/
 further_reading:
+- link: '/delivery_performance/ai_impact/setup'
+  tag: 'Documentation'
+  text: 'Set up AI Impact' 
 - link: '/delivery_performance/dora_metrics/'
   tag: 'Documentation'
   text: 'Learn about DORA Metrics'
@@ -14,6 +17,15 @@ further_reading:
 - link: '/delivery_performance/dora_metrics/calculation/'
   tag: 'Documentation'
   text: 'Learn how DORA metrics are calculated'
+- link: "https://www.datadoghq.com/blog/devex-measurement-pitfalls-ai-era/"
+  tag: "Blog"
+  text: "5 pitfalls to avoid when measuring developer experience in the AI era"
+- link: "https://www.datadoghq.com/blog/ai-impact/"
+  tag: "Blog"
+  text: "Measure the real impact of AI coding tools on software delivery with Datadog AI Impact"
+- link: "https://www.datadoghq.com/blog/how-to-measure-developer-experience-in-the-ai-era/"
+  tag: "Blog"
+  text: "How to measure developer experience in the AI era"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
@@ -22,39 +34,11 @@ AI Impact is available to all Datadog customers in Preview.
 
 ## Overview
 
-AI Impact measures how AI coding assistants affect your software delivery performance. Measuring their impact requires configuring an integration with a supported provider.
+AI Impact measures how AI coding tools—including coding assistants, review agents, and autonomous agents—affect your software delivery performance. Datadog detects AI contribution from several types of sources. Sources include co-author patterns in commit metadata, provider integrations, pull request labels, and data you send yourself.
 
-## Setup
+## Getting started
 
-### Prerequisites
-
-- [DORA Metrics][1] set up with deployment and commit data.
-- An integration configured with a [supported AI coding tool provider](#supported-tools).
-
-### Supported tools
-
-| Tool | Per-Commit Granularity | User Activity Granularity |
-|------|-----------|---------------|
-| [Cursor][2] | &#x2714; | &#x2714; |
-| [Claude Code API][3] |  | &#x2714; |
-| [GitHub Copilot][4] |  | &#x2714; |
-
-### Granularity modes
-
-AI Impact metrics can be analyzed at two levels of granularity. The granularity mode being used determines how commits are classified as "AI-assisted" or "non-AI" for all metrics.
-
-By default, Datadog selects the most precise granularity mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics are classified per-commit because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are classified based on user activity because per-commit is not available for Claude Code.
-
-Per-Commit
-: A commit is classified as AI-assisted when there is evidence that AI directly contributed code to that specific commit (for example, Cursor reports AI-generated lines). Each commit is independently tagged. This is the most precise method, available for tools that provide commit-level data.
-
-User Activity
-: Compares delivery metrics between active and non-active users of the selected tool. A user is considered active on a given day if they performed any interaction with the tool (for example, accepted a suggestion, used chat, or triggered an agent). Commits are attributed to the active or non-active group based on their author's activity on the day the commit was created.
-
-[1]: /delivery_performance/dora_metrics/setup/
-[2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
-[3]: /integrations/anthropic-usage-and-costs/
-[4]: /integrations/github-copilot/
+Datadog detects some AI activity automatically after [DORA Metrics][1] is set up with deployment, commit, and pull request data. AI tools may be identified through co-author signatures, review comments, and other author information in commits that commonly indicate AI involvement. To more completely capture AI activity in your organization, see [Set Up AI Impact][2] to configure sources and mapping rules that identify your specific AI tools and their contributions.
 
 ## Impact metrics
 
@@ -73,3 +57,6 @@ User Activity
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /delivery_performance/dora_metrics/setup/
+[2]: /delivery_performance/ai_impact/setup/

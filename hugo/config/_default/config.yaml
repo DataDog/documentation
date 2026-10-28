@@ -75,6 +75,10 @@ module:
        target: layouts/partials/footer_link.html
      - source: layouts/partials/language-selector-docs.html
        target: layouts/partials/language-selector-docs.html
+     - source: layouts/partials/footer/products-index.html
+       target: layouts/partials/footer/products-index.html
+     - source: layouts/partials/footer/category.html
+       target: layouts/partials/footer/category.html
      - source: layouts/partials/modals/modal-header-demo-signup.html
        target: layouts/partials/modals/modal-header-demo-signup.html
      - source: assets/styles/components/_demo-request-modal.scss
@@ -146,7 +150,7 @@ module:
       target: assets
     - source: assets
       target: assets
-    - source: i18n
+    - source: ../shared/i18n
       target: i18n
     - source: archetypes
       target: archetypes
@@ -155,6 +159,10 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    # v7 bundle lazy-loads Session Replay/Profiler via dynamic import() relative
+    # to its own URL (./chunks/<file>); those chunk files must ship alongside it
+    - source: "./node_modules/@datadog/browser-rum/bundle/chunks"
+      target: "assets/node_modules/chunks"
     - source: _vendor/content/en
       target: content
       lang: en

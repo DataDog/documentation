@@ -1,0 +1,4 @@
+- HTTP/S client URI endpoint, such as `http://localhost:4319/v1/traces`:
+	- The default environment variable is `DD_OP_DESTINATION_OTEL_HTTP_CLIENT_URI`.
+- OpenTelemetry Traces TLS passphrase (when enabled):
+	- The default environment variable is `DD_OP_DESTINATION_OTEL_KEY_PASS`.

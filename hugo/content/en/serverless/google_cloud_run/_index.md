@@ -11,6 +11,9 @@ further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"
     text: "Disable Serverless Monitoring"
+  - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=gcp#cloud-run-and-cloud-run-functions"
+    tag: "Documentation"
+    text: "Send Cloud Run traces to Datadog with OTLP"
   - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
     tag: 'Blog'
     text: 'Collect traces, logs, and custom metrics from Cloud Run services'

@@ -2,9 +2,6 @@
 title: Best Practices for Creating SLOs for RUM Operations
 description: Learn how to create availability and latency SLOs from RUM operation metrics.
 further_reading:
-- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
-  tag: 'Guide'
-  text: 'Best practices for setting up RUM operations'
 - link: '/real_user_monitoring/operations_monitoring/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
@@ -14,6 +11,12 @@ further_reading:
 - link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Journey Monitoring'
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up RUM operations'
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview
@@ -65,7 +68,7 @@ Starting from the operation report is more convenient because Datadog uses the s
 ### Navigate from the SLO page
 
 1. In the left navigation, select **Monitoring > SLOs**.
-2. Click {{< ui >}}+ New SLO{{< /ui >}}, then select {{< ui >}}By Count{{< /ui >}}.
+2. Click {{< ui >}}\+ New SLO{{< /ui >}}, then select {{< ui >}}By Count{{< /ui >}}.
 
 After you open the SLO creation workflow, [configure the SLO query](#configure-the-slo-query) for an availability or latency SLO.
 

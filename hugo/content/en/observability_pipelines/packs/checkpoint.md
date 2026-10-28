@@ -7,7 +7,7 @@ description: Learn more about the Check Point pack.
 
 {{< img src="observability_pipelines/packs/checkpoint.png" alt="The Check Point pack" style="width:25%;" >}}
 
-Processes Check Point logs in CEF format, with or without syslog prefix.
+This pack processes Check Point logs in CEF format, with or without syslog prefix.
 
 What this pack does:
 

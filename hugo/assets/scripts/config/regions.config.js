@@ -845,6 +845,28 @@ export default {
     uk1: 'https://mcp.uk1.datadoghq.com/v1/mcp',
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
+  mcp_xaa_resource_url: {
+    us: 'https://mcp.datadoghq.com/v1/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/v1/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/v1/mcp',
+    eu: 'https://mcp.datadoghq.eu/v1/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
+    uk1: 'https://mcp.uk1.datadoghq.com/v1/mcp',
+    gov2: 'Cross-App Access is not supported for US2-FED.',
+    gov: 'Cross-App Access is not supported for US1-FED.'
+  },
+  mcp_xaa_issuer_url: {
+    us: 'https://mcp.datadoghq.com/v1/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/v1/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/v1/mcp',
+    eu: 'https://mcp.datadoghq.eu/v1/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
+    uk1: 'https://mcp.uk1.datadoghq.com/v1/mcp',
+    gov2: 'Cross-App Access is not supported for US2-FED.',
+    gov: 'Cross-App Access is not supported for US1-FED.'
+  },
   cursor_mcp_install_deeplink: {
     us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
     us3: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',

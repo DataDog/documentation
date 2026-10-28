@@ -1,5 +1,6 @@
 ---
 title: Elasticsearch Destination
+description: Learn how to send logs or metrics to Elasticsearch using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

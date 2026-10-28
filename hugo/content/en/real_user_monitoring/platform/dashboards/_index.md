@@ -42,7 +42,7 @@ To explore individual events, click on a graph and click {{< ui >}}View RUM even
 
 ### Customize dashboards
 
-To clone your RUM dashboards, click the {{< ui >}}Settings{{< /ui >}} icon and select {{< ui >}}Clone dashboard{{< /ui >}}. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the {{< ui >}}+{{< /ui >}} icon. 
+To clone your RUM dashboards, click the {{< ui >}}Settings{{< /ui >}} icon and select {{< ui >}}Clone dashboard{{< /ui >}}. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the {{< ui >}}\+{{< /ui >}} icon. 
 
 You can also modify the template variables and create a [saved view][6].
 

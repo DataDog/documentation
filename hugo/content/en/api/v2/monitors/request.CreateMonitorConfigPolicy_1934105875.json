@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "policy_type": "downtime",
+      "policy": {
+        "max_duration_ms": 3600000
+      }
+    },
+    "type": "monitor-config-policy"
+  }
+}

@@ -24,9 +24,9 @@ logs_config:
 
 For containerized environments you can set the `DD_LOGS_CONFIG_OPEN_FILES_LIMIT` environment variable.
 
-The default value varies depending on the Agent version and operating system. To check the default value for your Agent version, see the [config_template.yaml file][1] in the Datadog Agent repository. Be sure to select the tag corresponding to your Agent version to see the correct defaults.
+The default value varies depending on the Agent version and operating system. To check the default value for your Agent version, see the [example Agent configuration files][1] in the Datadog Agent repository. Open the file for your operating system. Be sure to select the tag corresponding to your Agent version to see the correct defaults.
 
 **Note**: Increasing the tailed logs files limit might increase the resource consumption of the Agent.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/369a8dbb39dc6e8601d82c8f43caaaf88d6a0a55/pkg/config/config_template.yaml#L987-L993
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 

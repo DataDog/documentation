@@ -1,5 +1,6 @@
 ---
 title: Microsoft Sentinel Destination
+description: Learn how to send logs to Microsoft Sentinel using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
@@ -206,7 +207,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
-| None           | 10                | 1                   |
+| None           | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

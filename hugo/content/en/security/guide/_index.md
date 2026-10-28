@@ -22,6 +22,7 @@ disable_toc: true
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Azure Configuration Guide for Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Monitor Authentication Logs for Security Threats{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Customize which logs Cloud SIEM analyzes{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/" >}}Ingest STIX Threat Intelligence{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security Guides:" >}}
@@ -47,10 +48,8 @@ disable_toc: true
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Workload Protection Guides:" >}}
-    {{< nextlink href="/security/workload_protection/guide/active-protection" >}}Proactively block crypto mining threats with Active Protection{{< /nextlink >}}
-    {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Fine-Tuning Workload Protection Security Signals{{< /nextlink >}}
-    {{< nextlink href="/security/workload_protection/secl_auth_guide" >}}Writing custom rule expressions{{< /nextlink >}}
-    {{< nextlink href="/security/workload_protection/guide/ebpf-free-agent" >}}Threat Detection for Linux Without eBPF Support{{< /nextlink >}}
+    {{< nextlink href="/security/workload_protection/guide/dual-shipping-sub-orgs-and-infra" >}}Safely Dual Ship Workload Protection to Multiple Organizations{{< /nextlink >}}
+    {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Tuning Workload Protection Security Signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Sensitive Data Scanner Guides:" >}}

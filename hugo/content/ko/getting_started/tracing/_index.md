@@ -31,6 +31,13 @@ Datadog Application Performance Monitoring(APM)을 이용하면 애플리케이�
 1. 애플리케이션을 실행해 데이터를 생성합니다.
 1. Datadog에서 수집한 데이터를 탐색합니다.
 
+{{< skill-callout
+    title="에이전트를 사용해 APM 설정하기"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
+
 ## 전제 조건 {#prerequisites}
 
 이 가이드를 완료하려면 다음이 필요합니다.
@@ -139,12 +146,12 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 
 ## Datadog에서 트레이스 탐색 {#explore-traces-in-datadog}
 
-1. Datadog에서 [**APM** > **서비스**][3]로 이동합니다. 이름이 `hello`인 Python 서비스가 표시되어야 합니다.
+1. Datadog에서 [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]로 이동하세요. 이름이 `hello`인 Python 서비스가 표시되어야 합니다.
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog에 새 Python 서비스가 표시됩니다." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Catalog에 새 Python 서비스가 표시됩니다." style="width:100%;" >}}
 
 1. 서비스를 선택하면 해당 서비스의 지연 시간, 처리량 및 오류율과 같은 성능 메트릭을 조회할 수 있습니다.
-1. [**APM** > **트레이스**][4]로 이동합니다. `hello` 서비스의 트레이스가 표시되어야 합니다.
+1. [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]로 이동합니다. `hello` 서비스의 트레이스가 표시되어야 합니다.
 
    {{< img src="/getting_started/apm/trace-explorer.png" alt="트레이스 탐색기에 hello 서비스의 트레이스가 표시됩니다." style="width:100%;" >}}
 
@@ -200,21 +207,21 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
    ```shell
    curl http://0.0.0.0:5050/
    ```
-1. Datadog에서 [**APM** > **트레이스**][4]로 이동합니다.
-1. **hello** 트레이스를 선택합니다.
+1. Datadog에서 [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]로 이동하세요.
+1.  `hello`트레이스를 선택합니다.
 1. 플레임(Flame) 그래프에서 새 사용자 지정 `get_quote` 스팬을 찾아 마우스 커서를 올립니다.
 
    {{< img src="/getting_started/apm/custom-instrumentation.png" alt="플레임(Flame) 그래프에 get_quote 사용자 지정 스팬이 표시됩니다. 마우스 커서를 올리면 quote 스팬 태그가 표시됩니다. " style="width:100%;" >}}
 
-1. 사용자 지정 `quote` 스팬 태그가 **Info** 탭에 표시되는지 확인하세요.
+1. 사용자 지정 `quote` 스팬 태그가 {{< ui >}}Info{{< /ui >}} 탭에 표시되는지 확인하세요.
 
 ## 다음 단계는? {#whats-next}
 
 추적을 설정했고 애플리케이션이 Datadog으로 데이터를 전송하면, 추가적인 APM 기능 탐색:
 
-### Software Catalog {#software-catalog}
+### Catalog {#catalog}
 
-[Software Catalog][9]에는 소유권 메타데이터, 성능 인사이트, 보안 분석 및 비용 할당을 한곳에 모아 서비스에 대한 통합 조회를 제공합니다. 소유권 정보, 런북 및 설명서 링크 등으로 서비스를 보강하려면 태그, 어노테이션 또는 `service.datadog.yaml` 파일을 사용하여 [서비스 메타데이터][10]를 구성하세요.
+[Catalog][9]는 소유권 메타데이터, 성능 인사이트, 보안 분석 및 비용 할당을 한곳에 모아 서비스에 대한 통합 조회를 제공합니다. 소유권 정보, 런북 및 설명서 링크 등으로 서비스를 보강하려면 태그, 어노테이션 또는 `service.datadog.yaml` 파일을 사용하여 [서비스 메타데이터][10]를 구성하세요.
 
 ### 트레이스 수집 및 보존 {#trace-ingestion-and-retention}
 
@@ -232,7 +239,7 @@ Datadog에서 관찰할 애플리케이션을 생성하는 방법:
 [6]: /ko/tracing/trace_collection/custom_instrumentation/
 [7]: /ko/getting_started/site/
 [8]: /ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /ko/internal_developer_portal/software_catalog/
-[10]: /ko/internal_developer_portal/software_catalog/entity_model/
+[9]: /ko/internal_developer_portal/catalog/
+[10]: /ko/internal_developer_portal/catalog/entity_model/
 [11]: /ko/tracing/trace_pipeline/ingestion_controls/
 [12]: /ko/tracing/trace_pipeline/trace_retention/

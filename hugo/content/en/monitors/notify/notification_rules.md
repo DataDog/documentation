@@ -21,7 +21,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Setup
 
-<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> or <code>monitor_notification_rules_write</code> permission</a> to create a rule. The <code>monitor_notification_rules_write</code> permission is in Preview.</div>
 
 To create a Monitor Notification Rule in Datadog, do the following:
 
@@ -128,7 +128,7 @@ In your monitor configuration, the {{< ui >}}Recipient Summary{{< /ui >}} shows 
 
 {{< img src="/monitors/notifications/notification_rules/diagram_notification-rules.png" alt="Flowchart showing how Monitor notification rules match tags, combine recipients from monitors and rules, and remove duplicates before sending alerts" style="width:100%;" >}}
 
-{{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
+{{% collapse-content title="Example: Notification Rule Matching" level="h3" expanded=false %}}
 
 The following table demonstrates how monitors with different tag combinations match notification rules and their resulting notifications. This table shows how:
 1. Multiple notification rules can match a single monitor notification based on its tags.

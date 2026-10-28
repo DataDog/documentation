@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "type": "execution_policy",
+    "attributes": {
+      "name": "Cassette Execution Policy Updated",
+      "effect": "allow",
+      "action_pattern": {
+        "integration": "INTEGRATION_SCRIPT",
+        "action_fqns": [
+          "com.datadoghq.script.*"
+        ]
+      }
+    }
+  }
+}

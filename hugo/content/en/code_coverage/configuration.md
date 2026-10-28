@@ -45,6 +45,9 @@ gates:
       threshold: 95
 comments:
   enabled: true
+  file_breakdown: true
+annotations:
+  enabled: true
 ```
 
 ## Services configuration
@@ -295,15 +298,65 @@ gates:
 
 ## PR Comments
 
-By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
+By default, Datadog posts a code coverage summary comment on every pull request. The summary reports the total and patch coverage for the pull request and links to the Code Coverage page in Datadog.
 
-PR Gate checks are not affected by this setting.
+The `comments` block accepts the following fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `enabled` | Boolean | `true` | Whether Datadog posts a code coverage comment on pull requests. |
+| `file_breakdown` | Boolean | `false` | Whether the comment includes a per-file table of total and patch coverage. |
+
+PR Gate checks are not affected by these settings.
+
+### Disabling PR comments
+
+You can suppress the comment on a per-repository basis with the `comments.enabled` field:
 
 {{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
 schema-version: v1
 comments:
   enabled: false
 {{< /code-block >}}
+
+### Per-file breakdown
+
+Set `comments.file_breakdown` to `true` to add a table to the comment listing the files changed in the pull request, along with their total coverage and patch coverage:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+comments:
+  enabled: true
+  file_breakdown: true
+{{< /code-block >}}
+
+The breakdown has no effect when `comments.enabled` is `false`.
+
+## Inline annotations
+
+Set `annotations.enabled` to `true` to have Datadog comment on lines added in the pull request that aren't covered by tests:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+annotations:
+  enabled: true
+{{< /code-block >}}
+
+The `annotations` block accepts the following fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `enabled` | Boolean | `false` | Whether Datadog annotates uncovered lines on the pull request diff. |
+
+When annotations are enabled, Datadog:
+
+- Annotates only executable lines that the pull request adds, and counts [partially covered][5] lines as uncovered.
+- Groups consecutive uncovered lines into a single annotation, so each uncovered range gets one comment.
+- Posts up to 30 annotations per pull request. If there are more uncovered ranges, the summary comment reports the total and links to the full report in Datadog.
+- Resolves an annotation after its lines are covered.
+- Posts annotations independently of the summary comment. Setting `comments.enabled` to `false` does not disable annotations. If comments are disabled and the 30-annotation limit is exceeded, Datadog still posts a summary comment that reports only the total number of uncovered ranges.
+
+**Note**: Inline annotations are not supported on Bitbucket.
 
 ## Carryforward
 
@@ -386,3 +439,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/flags
 [4]: /code_coverage/carryforward
+[5]: /code_coverage/coverage_calculation#partial-coverage

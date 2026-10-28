@@ -3,6 +3,8 @@ title: Connect to Datadog over Azure Private Link
 description: Configure Azure Private Link to send telemetry to Datadog securely without using the public internet, including endpoint setup and DNS configuration.
 ---
 
+{{% site-region region="us3" %}}
+
 [Azure Private Link][1] allows you to send telemetry to Datadog without using the public internet.
 
 Datadog exposes some of its data intake services as [Azure Private Link services][2].
@@ -49,9 +51,9 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    Select {{< ui >}}Review create{{< /ui >}}.
 4. Review your configuration settings. Then, select {{< ui >}}Create{{< /ui >}}.
 5. After the Private DNS zone is created, select it from the list.
-6. In the panel that opens, select {{< ui >}}+ Record set{{< /ui >}}.
+6. In the panel that opens, select {{< ui >}}\+ Record set{{< /ui >}}.
 7. In the {{< ui >}}Add record set{{< /ui >}} panel, configure the following:
-   - For {{< ui >}}Name{{< /ui >}}, enter `*`.
+   - For {{< ui >}}Name{{< /ui >}}, enter `@`.
    - For {{< ui >}}Type{{< /ui >}}, select {{< ui >}}A - Address record{{< /ui >}}.
    - For {{< ui >}}IP address{{< /ui >}}, enter the IP address you noted at the end of the previous section.
 
@@ -85,6 +87,8 @@ Create a Private DNS Zone for `agent.`{{< region-param key="dd_site" code="true"
 | Traces | `trace-edge-pl-1.d668729c-d53a-419c-b208-9d09a21b0d54.westus2.azure.privatelinkservice` | `agent.us3.datadoghq.com` |
 | Remote Configuration | `fleet-pl-1.37765ebe-d056-432f-8d43-fa91393eaa07.westus2.azure.privatelinkservice` | `config.us3.datadoghq.com` |
 | Database Monitoring | `dbm-metrics-pl-1.e391d059-0e8f-4bd3-9f21-708e97a708a9.westus2.azure.privatelinkservice` | `dbm-metrics-intake.us3.datadoghq.com` |
+
+{{% /site-region %}}
 
 [1]: https://azure.microsoft.com/en-us/products/private-link
 [2]: https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview

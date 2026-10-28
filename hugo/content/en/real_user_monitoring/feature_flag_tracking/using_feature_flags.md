@@ -71,7 +71,7 @@ You can compare important metrics to you and your teams by grouping your query b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/feature-flags
-[2]: /session_replay/browser/
+[2]: /session_replay/
 [3]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/

@@ -4,171 +4,158 @@ aliases:
 - /es/account_management/mult_account
 - /es/account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
 - /es/account_management/multi_organisations
-description: Gestiona varias organizaciones secundarias desde una cuenta principal
-  con facturación independiente, rastreo del uso y control de acceso para proveedores
-  de servicios gestionados.
+description: Administre múltiples organizaciones secundarias desde una cuenta principal
+  con facturación, seguimiento de uso, y control de acceso independientes para proveedores
+  de servicios administrados.
 further_reading:
-- link: https://docs.datadoghq.com/account_management/multi_organization/
+- link: https://www.datadoghq.com/blog/volkswagen-organizations/
   tag: Blog
-  text: Prácticas recomendadas para gestionar organizaciones de Datadog a escala
+  text: Prácticas recomendadas para administrar organizaciones Datadog a escala
 - link: /account_management/saml/
   tag: Documentación
-  text: Configurar SAML para tu cuenta de Datadog
+  text: Configure SAML para su cuenta de Datadog
 - link: /account_management/billing/usage_details
   tag: Documentación
-  text: Consultar los detalles de uso
+  text: Obtenga más información sobre los detalles de uso
 - link: /account_management/billing/usage_attribution
   tag: Documentación
-  text: Configurar la asignación de uso
+  text: Configurar la Atribución de uso
 - link: /account_management/org_settings/cross_org_visibility
   tag: Documentación
   text: Visibilidad entre organizaciones
-title: Gestión de cuentas de varias organizaciones
+title: Administración de cuentas de múltiples organizaciones
 ---
+## Descripción general {#overview}
 
-## Información general
+Es posible administrar múltiples organizaciones secundarias desde una cuenta de organización principal. Esto lo utilizan normalmente los proveedores de servicios administrados que tienen clientes que no deben tener acceso a los datos de los demás. 
 
-Es posible gestionar varias organizaciones secundarias desde la cuenta de una organización principal. Esta opción la suelen utilizar los proveedores de servicios que tienen clientes que no deben tener acceso a los datos de los demás. 
+La función de cuenta de múltiples organizaciones no está habilitada de forma predeterminada. Comuníquese con el [soporte de Datadog][1] para habilitarla.
 
-La función de cuentas de varias organizaciones no está activada de forma predeterminada. Ponte en contacto con el [servicio de asistencia de Datadog][1] para activarla.
+## Capacidades {#capabilities}
 
-## Funcionalidades
+Se pueden agregar usuarios a la organización principal y a múltiples organizaciones secundarias. Los usuarios cambian entre organizaciones desde el [menú de configuración de la cuenta de usuario][2]. 
 
-Se pueden añadir usuarios a la organización principal y a varias organizaciones secundarias. Los usuarios pueden cambiar de organización desde el [menú de configuración de la cuenta de usuario][2]. 
+Las organizaciones dentro de una organización principal no tienen acceso a los datos de las demás. Para habilitar consultas de métricas entre organizaciones, consulte la [visibilidad entre organizaciones][3].
 
-Las organizaciones que están dentro de una organización principal no tienen acceso a los datos de las demás. Para habilitar las consultas de métricas entre organizaciones, consulta la [visibilidad entre organizaciones][3].
+La organización principal puede visualizar el uso de las organizaciones secundarias individuales, lo que permite a la principal realizar un seguimiento de las tendencias de uso.
 
-La organización principal puede visualizar el uso de cada una de las organizaciones secundarias, lo que le permite realizar un seguimiento de las tendencias de uso.
+La configuración de la cuenta, como las direcciones IP permitidas, no es heredada por las organizaciones secundarias de su organización principal.
 
-La configuración de cuentas, como las direcciones IP incluidas en la lista de permitidas, no se heredan de la organización principal a las secundarias.
+## Organizaciones secundarias {#child-organizations}
 
-## Organizaciones secundarias
+### Cree {#create}
 
-### Crear
+1. Una vez habilitada la función, consulte la [Página de nueva organización][4].
+2. Ingrese el nombre de la organización secundaria que desea crear. **El nombre de la organización secundaria no puede exceder los 32 caracteres.**
+3. Opcionalmente, invite a usuarios administradores a su organización secundaria:
+    - Ingrese una o más direcciones de correo electrónico.
+    - A los usuarios invitados se les asigna el [rol de Datadog Admin][5]. Puede invitar a más usuarios en
+Configuración de la organización después de crear su organización.
+    - Si el usuario no tiene una contraseña, Datadog envía una invitación por correo electrónico con un enlace para establecer una contraseña y unirse a la nueva organización secundaria.
+4. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
-1. Una vez activada la función, consulta la [página de la nueva organización][4].
-2. Introduce el nombre de la organización secundaria que quieres crear. **Este nombre no puede tener más de 32 caracteres.**
-3. También tienes la opción de invitar a usuarios administradores a tu organización secundaria:
-    - Introduce una o varias direcciones de correo electrónico.
-    - A los usuarios invitados se les asigna el [rol de administrador de Datadog][5]. Puedes invitar a más usuarios en
-Parámetros de organización una vez creada la organización.
-    - Si el usuario no tiene contraseña, Datadog envía una invitación por correo electrónico con un enlace para establecer una contraseña y unirse a la nueva organización secundaria.
-4. Haz clic en **Create** (Crear).
+La nueva organización secundaria hereda el plan de la organización principal y se agrega a la cuenta de facturación de la organización principal. Si desea actualizar la facturación de la organización secundaria, [comuníquese con su representante de ventas][6].
 
-La nueva organización secundaria hereda el plan de la organización principal y se añade a la cuenta de facturación de esta. Si quieres actualizar la cuenta de facturación de la organización secundaria, [ponte en contacto con tu representante de ventas][6].
+### Contenido {#content}
 
-### Contenido
+La incorporación de una nueva suborganización con un conjunto de tableros y monitores de referencia se puede realizar mediante programación con la [Datadog API][7] y herramientas como Terraform; consulte [Administración de Datadog con Terraform][8]. Además, se pueden usar scripts para realizar copias de seguridad de los tableros y [monitores][9] existentes como código.
 
-La incorporación de una nueva suborganización con un conjunto de dashboards y monitores de referencia puede realizarse mediante programación con la [API de Datadog][7] y herramientas como Terraform. Para ello, consulta [Gestión de Datadog con Terraform][8]. Además, se pueden utilizar scripts para realizar copias de seguridad de dashboards y [monitores][9] existentes en forma de código.
+### Subdominios personalizados {#custom-sub-domains}
 
-### Subdominios personalizados
+La función de subdominio personalizado no está habilitada de forma predeterminada. Comuníquese con el [soporte de Datadog][1] para habilitarla.
 
-La función de subdominios personalizados no está activada de forma predeterminada. Ponte en contacto con [el servicio de asistencia de Datadog][1] para activarla.
+Si usted es miembro de varias organizaciones, los subdominios personalizados le ayudan a identificar la fuente de una alerta o notificación. Además, pueden cambiarlo inmediatamente a la organización asociada con el subdominio.
 
-Si eres miembro de varias organizaciones, los subdominios personalizados te permiten identificar la fuente de una alerta o notificación. Además, pueden cambiarte inmediatamente a la organización asociada al subdominio.
-{{% site-region region="us,us3,us5,ap1,ap2" %}}
-Por ejemplo, la URL `https://app.datadoghq.com/event/event?id=1` está asociada a un evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog en el contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.com/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+Por ejemplo, la URL **https:{{< region-param key=dd_full_site >}}/event/event?id=1**está asociada con un evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está visualizando Datadog dentro del contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A usando el [menú de configuración de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a**https://org-a.**{{< region-param key=dd_site >}}/event/event?id=1**lo cual cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.**Nota**: Si tiene un subdominio de Datadog personalizado, edite manualmente los enlaces de la documentación de Datadog con el nombre de su subdominio. Por ejemplo, un enlace que redirige a**https:{{< region-param key=dd_full_site >}}/account/settings**se convierte en**https://<custom_sub-domain_name>.{{< region-param key=dd_site >}}/account/settings**.
 
-**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.datadoghq.com/account/settings` se convierte en `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`. {{% /site-region %}}
+## Configure SAML {#set-up-saml}
 
-{{% site-region region="eu" %}}
-Por ejemplo, la URL `https://app.datadoghq.eu/event/event?id=1` está asociada a una evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog dentro del contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.datadoghq.eu/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+La configuración de SAML _no_ es heredada por las organizaciones secundarias de la organización principal. SAML debe configurarse para cada organización secundaria de forma individual.
 
-**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.datadoghq.eu/account/settings` se convierte en `https://**<custom_sub-domain_name>**.datadoghq.eu/account/settings`. {{% /site-region %}}
+Para configurar SAML para organizaciones múltiples:
 
-{{% site-region region="gov" %}}
-Por ejemplo, la URL `https://app.ddog-gov.com/event/event?id=1` está asociada a una evento en la Organización A. Si un usuario es miembro tanto de la Organización A como de la Organización B, pero está viendo Datadog dentro del contexto de la Organización B, entonces esa URL devuelve un `404 Not Found error`. El usuario debe cambiar a la Organización A utilizando el [menú de configuración de la cuenta de usuario][2] y luego volver a visitar la URL. Sin embargo, con subdominios personalizados, el usuario podría navegar a `https://org-a.ddog-gov.com/event/event?id=1`, que cambiaría automáticamente el contexto del usuario a la Organización A y mostraría la página correcta.
+1. Cree una nueva organización.
+2. Invite a usuarios de SAML.
+3. Inicie sesión como usuario de SAML y [configure SAML][10].
 
-**Nota**: Si tienes un subdominio de Datadog personalizado, edita manualmente los enlaces de la documentación de Datadog con el nombre de tu subdominio. Por ejemplo, un enlace que redirige a `https://**app**.ddog-gov.com/account/settings` se convierte en `https://**<custom_sub-domain_name>**.ddog-gov.com/account/settings`. {{% /site-region %}}
+### Organizaciones principales con SAML estricto {#saml-strict-parent-organizations}
 
-## Configurar SAML
+En algunas circunstancias, es posible que no pueda acceder a una organización secundaria recién creada. Cuando una organización requiere que los usuarios inicien sesión mediante SAML, es posible que sus cuentas de usuario no tengan contraseñas. Dado que las organizaciones secundarias no heredan la configuración de SAML de sus principales, iniciar sesión en la organización secundaria requiere una contraseña que no existe.
 
-La configuración de SAML setup _no_ se hereda de la organización principal a las organizaciones secundarias. Por tanto, es necesario configurar SAML para cada organización secundaria individualmente.
+Para asegurarse de que puede iniciar sesión en una organización secundaria creada a partir de una organización principal con SAML estricto, siga estos pasos en la organización principal:
+1. Haga clic en {{< ui >}}Organization Settings{{< /ui >}} desde el menú de cuenta en la parte inferior de la navegación del lado izquierdo, o seleccione {{< ui >}}Organization Settings{{< /ui >}} desde el menú desplegable del encabezado en la parte superior de la página de Configuración personal.
+2. En el menú de la página izquierda, seleccione {{< ui >}}Users{{< /ui >}}.
+3. Seleccione su perfil de usuario.
+4. Coloque el interruptor {{< ui >}}Override Default Login Methods{{< /ui >}} en la posición de encendido.
+5. En {{< ui >}}Select user's login methods{{< /ui >}}, marque la casilla de verificación {{< ui >}}Password{{< /ui >}}.
+6. Asegúrese de que su cuenta tenga una contraseña. Si necesita ayuda para establecer una contraseña, comuníquese con el [soporte de Datadog][1].
 
-Para configurar SALM para varias organizaciones:
+Seguir los pasos anteriores garantiza que pueda iniciar sesión en la cuenta principal utilizando una combinación de correo electrónico y contraseña. Después de crear su organización secundaria, también puede iniciar sesión en ella utilizando su correo electrónico y contraseña.
 
-1. Crea una nueva organización.
-2. Invita a usuarios de SAML.
-3. Inicia sesión como usuario SAML y [configura SAML][10].
+Si ya creó la organización secundaria y no puede acceder, seguir el procedimiento le permite iniciar sesión.
 
-### Organizaciones principales estrictas de SAML
+## Uso multi-org {#multi-org-usage}
 
-En algunas circunstancias, podría ser que no puedas acceder a una organización secundaria recién creada. Cuando una organización requiere que los usuarios inicien sesión utilizando SAML, es posible que sus cuentas de usuario no tengan contraseña. Como las organizaciones secundarias no heredan la configuración de SAML de su organización principal, al iniciar sesión en la organización secundaria se requiere una contraseña que no existe.
+La organización principal puede visualizar el uso total y facturable de todas sus organizaciones (organizaciones secundarias y principales) colocando el cursor sobre su nombre de usuario en la esquina inferior izquierda y navegando a [**Plan & Usage** > **Usage & Cost**][11].
 
-Para asegurarte de poder iniciar sesión en una organización secundaria creada a partir de una organización principal estricta de SAML, sigue estos pasos en la organización principal:
-1. Haz clic en **Organization Settings** (Parámetros de organización) en el menú de cuentas que encontrarás en la parte inferior del área de navegación, o selecciona  **Organization Settings** (Parámetros de organización) en el menú desplegable del encabezado que hay en la parte superior de la página Personal Settings (Parámetros personales).
-2. En el menú de página izquierdo, selecciona **Users** (Usuarios).
-3. Selecciona tu perfil de usuario.
-4. Activa la opción **Override Default Login Methods** (Anular métodos de inicio de sesión predeterminados).
-5. En **Select user's login methods** (Seleccionar métodos de inicio de sesión de usuario), marca la casilla **Password** (Contraseña).
-6. Asegúrate de que tu cuenta tiene una contraseña. Si necesitas ayuda para establecer una contraseña, ponte en contacto con [el servicio de asistencia de Datadog][1].
+La página de Uso muestra el uso agregado de la organización principal y todas sus organizaciones secundarias. Hay dos pestañas en la página de Uso:
 
-Al seguir los pasos arriba indicados, podrás iniciar sesión en la cuenta principal utilizando una combinación de correo electrónico y contraseña. Una vez creada tu organización secundaria, también puedes iniciar sesión en ella con tu correo electrónico y tu contraseña.
+* {{< ui >}}Overall{{< /ui >}}
+* {{< ui >}}Individual Organizations{{< /ui >}}
 
-Si ya has creado la organización secundaria y no puedes continuar, podrás iniciar sesión si sigues el procedimiento.
+### Uso general {#overall-usage}
 
-## Uso con varias organizaciones
+Esta pestaña contiene una sección de Uso total del mes a la fecha y una sección de Uso general.
 
-La organización matriz puede ver el uso total y facturable de todas tus organizaciones (secundarias y principales) pasando el ratón por encima de su nombre de usuario en la esquina inferior izquierda y accediendo a [**Plan & Usage** > **Usage & Cost**][11] (Plan y uso > Uso y coste).
+La sección de Uso total del mes a la fecha resume su uso mensual de servidores, contenedores, métricas personalizadas y cualquier otra parte de la plataforma que haya utilizado durante el mes, en su organización principal y todas sus organizaciones secundarias.
 
-La página Usage (Uso) muestra el uso agregado de la organización principal y todas sus organizaciones secundarias. Tiene dos pestañas:
+{{< img src="account_management/multi-org-v2.png" alt="Uso del mes a la fecha" >}}
 
-* Overall (General)
-* Individual Organizations (Organizaciones individuales)
+La mayoría de las cuentas pueden visualizar de forma predeterminada el uso "Facturable", que muestra el uso que contribuye a su factura final. Esta vista también desglosa el uso bajo demanda por encima de sus compromisos y asignaciones. La vista "Todo" le muestra todo el uso, incluido el uso no facturable, como las pruebas de productos.
 
-### Uso general
+La sección de Uso general muestra el uso mensual agregado en todas las organizaciones durante los últimos 6 meses. El uso que se muestra aquí es el uso "Todo", no el uso "Facturable", lo que significa que no se ajusta por períodos de prueba u otros cambios de facturación utilizados para calcular su factura final. Esta información se puede descargar como un archivo CSV.
 
-Esta pestaña contiene la sección Month-to-Date Total Usage (Uso total del último mes) y la sección Overall Usage (Uso general).
+{{< img src="account_management/multi-org-v2-trends.png" alt="Tendencias a largo plazo del uso general" >}}
 
-En la sección Month-to-Date Total Usage (Uso total del último mes) se resume tu uso del último mes de hosts, contenedores, métricas personalizadas y cualquier otra parte de la plataforma que hayas usado durante ese mes, tanto en tu organización principal como en todas sus organizaciones secundarias.
+Tanto la sección de Uso total del mes hasta la fecha como la sección de Uso general se pueden filtrar haciendo clic en las subpestañas específicas del producto. En la subpestaña "Log Management", puede visualizar la tabla de Uso de logs indexados, que muestra el uso de logs indexados del mes hasta la fecha y del mes anterior por:
 
-{{< img src="account_management/multi-org-v2.png" alt="Uso del último mes" >}}
-
-De forma predeterminada, la mayoría de las cuentas pueden ver el uso "Billable" (Facturable), que muestra el uso que computa para tu factura final. En esta vista también se desglosa el uso bajo demanda por encima de tus confirmaciones y asignaciones. La vista "All" (Todo) muestra todo el uso, incluido el uso no facturable, como las pruebas de productos.
-
-La sección Overall Usage (Uso general) muestra el uso agregado mensual de todas las organizaciones en los últimos 6 meses. El uso que aquí se muestra es el uso "All" (Todo), no el uso "Billable" (Facturable), lo que significa que no aplica ajustes para periodos de prueba u otros cambios de facturación utilizados para calcular tu factura final. Esta información se puede descargar como un archivo CSV.
-
-{{< img src="account_management/multi-org-v2-trends.png" alt="Tendencias a largo plazo de uso general" >}}
-
-Es posible filtrar las secciones Month-to-Date Total Usage (Uso total del último mes) y Overall Usage (Uso general) haciendo clic en subpestañas específicas de productos. En la subpestaña "Log Management" (Gestión de logs), puedes ver el uso de logs por tabla de índice, que muestra tu uso del último mes y tu uso de logs indexados del último mes por:
-
-* Nombre de índice
+* Nombre del índice
 * Organización
-* Periodo de retención en días
-* Número de logs indexados desglosado en logs activos y rehidratados
-* El porcentaje de contribución del índice al uso total de logs indexados
+* Período de retención en días
+* Recuento de logs indexados desglosado entre logs activos y rehidratados
+* El porcentaje de contribución del índice al uso general de logs indexados
 
-Estos datos se pueden guardar como un archivo CSV.
+Estos datos se pueden descargar como un archivo CSV.
 
-{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Uso de logs de varias organizaciones por índice" >}}
+{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Uso de logs indexados por índice de múltiples organizaciones" >}}
 
-### Uso de organización individual
+### Uso de organización individual {#individual-organization-usage}
 
-En la pestaña de uso **Individual Organizations** (Organizaciones individuales), puedes ver el uso de tus organizaciones secundarias en unidades absolutas o como un porcentaje de uso total.
+En la pestaña de uso {{< ui >}}Individual Organizations{{< /ui >}}, puede ver el uso de sus organizaciones secundarias en unidades absolutas o como un porcentaje del uso total.
 
-La vista predeterminada es "Billable" (Facturables), que muestra el uso que computa para la factura final. En esta vista no se incluyen las organizaciones secundarias no sujetas a facturación, como las organizaciones de prueba, así como otros ajustes que ofrecen un resumen más preciso de qué se incluye en tu factura. Cambia a la vista "All" (Todo) para ver el uso sin procesar y sin ajustes de tu organización principal y todas las organizaciones secundarias. Ambas vistas se pueden descargar como un archivo CSV.
+El modo de visualizar predeterminado es el modo "Facturable", que muestra el uso que contribuye a su factura final. Este modo de visualizar elimina las organizaciones secundarias que no son facturables, como las organizaciones de prueba, y otros ajustes que proporcionan un resumen más preciso de lo que determina su factura. Cambie a la opción de visualizar "Todo" para ver el uso bruto y sin ajustar de su organización principal y de todas las organizaciones secundarias. Ambas opciones de visualizar se pueden descargar como un archivo CSV.
 
-Para ver los [Detalles de uso][12] de una organización secundaria, puedes hacer clic en el nombre de la organización secundaria.
+Para visualizar los [Detalles de uso][12] de una organización secundaria, puede hacer clic en el nombre de la organización secundaria.
 
-## Atribución de uso
+## Atribución de uso {#usage-attribution}
 
-La organización principal puede ver el uso de las organizaciones secundarias mediante las claves de etiqueta existentes en la página [Atribución de uso][13]. Los administradores pueden pasar el ratón por encima de su nombre de usuario en la parte inferior izquierda y, a continuación, ir a: [**Plan & Usage > Usage Attribution**][14] (Plan y uso > Atribución del uso).
+La organización principal puede visualizar el uso de las organizaciones secundarias mediante claves de etiqueta existentes en la página [Atribución de uso][13]. Los administradores pueden pasar el cursor sobre su nombre de usuario en la parte inferior izquierda y luego navegar a: [**Plan y uso > Atribución de uso**][14].
 
-Cuando se encuentra activada en el nivel de la organización principal, la atribución de uso muestra el uso agregado de todas las organizaciones. Esto puede resultar útil si quieres atribuir el uso de tus organizaciones secundarias a ciertos proyectos, equipos u otras agrupaciones.
+Cuando se habilita a nivel de organización principal, la atribución de uso muestra el uso agregado en todas las organizaciones. Esto puede ser útil si desea atribuir el uso de sus organizaciones secundarias a ciertos proyectos, equipos u otras agrupaciones.
 
-Entre las funciones se incluyen:
+Las funcionalidades incluyen:
 
-* Cambiar y añadir nuevas claves de etiquetas (hasta tres)
-* Acceder al uso mensual en la IU y como descarga en formato .tsv (valores separados por tabulaciones)
+* Cambiar y agregar nuevas claves de etiqueta (hasta tres).
+* Acceder al uso mensual tanto en la interfaz de usuario como en una descarga .tsv (valores separados por tabulaciones)
 * Acceder al uso diario en un archivo .tsv para la mayoría de los tipos de uso.
 
-{{< img src="account_management/Facturación/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Informe sobre la asignación de uso mensual" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Informe de atribución de uso mensual" style="width:100%;" >}}
 
-La atribución de uso también se puede activar en el nivel de la organización secundaria. Cuando se encuentra activada en este nivel, las etiquetas solo se aplican a esa organización secundaria en concreto, y solo se pueden ver en esta. Las etiquetas aplicadas en el nivel de una organización secundaria no tienen rollup y no se pueden ver en la organización principal.
+La atribución de uso también se puede habilitar a nivel de organización secundaria. Cuando se habilita a este nivel, las etiquetas solo se aplican a esa organización secundaria específica y solo se pueden visualizar en esa organización secundaria. Las etiquetas aplicadas a nivel de organización secundaria no se propagan y no se pueden visualizar en la organización principal.
 
-Usage Attribution (Atribución de uso) es una función avanzada incluida en el plan Enterprise. Para cualquier otro plan, ponte en contacto con tu representante de cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
+Atribución de uso es una función avanzada incluida en el plan Enterprise. Para todos los demás planes, comuníquese con su representante de cuenta o [success@datadoghq.com][6].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

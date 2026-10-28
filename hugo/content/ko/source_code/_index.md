@@ -3,6 +3,10 @@ aliases:
 - /ko/integrations/guide/source-code-integration/
 description: APM과 연동되는 소스 코드 통합을 설정하여 텔레메트리를 리포지토리와 연결하고, CI 파이프라인의 아티팩트에 Git 정보를
   임베딩하고, Datadog 전반에서 인라인 코드 스니펫을 생성할 수 있도록 소스 코드 관리 통합 기능을 사용하세요.
+further_reading:
+- link: https://www.datadoghq.com/blog/bitbucket-cloud-source-code-integration/
+  tag: 블로그
+  text: Datadog의 Bitbucket Cloud 소스 코드 통합으로 코드 문제를 더 빠르게 해결하고 보안을 강화하세요.
 title: 소스 코드 통합
 ---
 ## 개요 {#overview}
@@ -20,3 +24,7 @@ Datadog의 소스 코드 통합 기능을 사용하면 Git 리포지토리를 Da
     {{< nextlink href="source_code/resource-mapping" >}}Kubernetes 리소스 매핑{{< /nextlink >}}
     {{< nextlink href="source_code/features" >}}소스 코드 통합의 기능{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## 추가 자료 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

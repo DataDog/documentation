@@ -108,9 +108,9 @@ You can create tag rules to correct missing or incorrect tags, and add inferred 
 
 ## Create a cost monitor
 
-Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose {{< ui >}}Cost Changes{{< /ui >}} or {{< ui >}}Cost Threshold{{< /ui >}} to monitor your cloud expenses.
+Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. Choose from {{< ui >}}Cost Changes{{< /ui >}}, {{< ui >}}Cost Anomalies{{< /ui >}}, {{< ui >}}Cost Threshold{{< /ui >}}, {{< ui >}}Cost Forecast{{< /ui >}}, or {{< ui >}}Budget{{< /ui >}} monitor types. See [Cloud Cost Monitors][3] for details on each type.
 
-{{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
+{{< img src="cloud_cost/monitor-2.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
 ## Allocate costs
 
@@ -130,12 +130,14 @@ For a detailed breakdown of requirements by page, see [Permissions][9].
 
 Monitor the freshness and processing status of your cloud cost data on the {{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Data History{{< /ui >}} page.
 
-- {{< ui >}}Last Bill Received{{< /ui >}}: When your cloud or SaaS provider generated the billing data visible in CCM.
+- {{< ui >}}Last Bill Received{{< /ui >}}: When Datadog last received billing data from your cloud or SaaS provider. This timestamp does not indicate the latest usage or cost date in that data.
 - {{< ui >}}Last Processed{{< /ui >}}: When Datadog last processed billing data from your cloud provider, including:
   - Tag pipeline rules (retroactively processes up to 3 months of historical data by default)
   - Cost allocation rules (retroactively processes up to 1 month of historical data by default)
 
 Use this page to troubleshoot data delays or confirm that recent tag pipelines and cost allocation changes have taken effect.
+
+Cloud cost data can only be as recent as the data supplied by your provider. If costs are missing for an expected date, compare your provider's bill or export with CCM. Contact your provider if the source does not contain costs for the expected date. Contact [Datadog Support][11] if the source contains those costs but CCM does not.
 
 ## Use AI for cost analysis
 
@@ -157,3 +159,4 @@ Use the [Cloud Cost Skill in Bits Chat][10] to investigate cost changes, identif
 [8]: /cloud_cost_management/datadog_costs
 [9]: /cloud_cost_management/setup/permissions
 [10]: /cloud_cost_management/cloud_cost_skill/
+[11]: /help/

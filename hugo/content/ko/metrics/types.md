@@ -12,6 +12,8 @@ aliases:
 - /ko/developers/metrics_type/
 - /ko/developers/metrics/metrics_type/
 - /ko/developers/metrics/types/
+description: Datadog 메트릭 제출 유형(count, rate, gauge, histogram, distribution)과 이들이 인앱
+  유형으로 매핑되는 방식을 알아보세요.
 further_reading:
 - link: extend/dogstatsd
   tag: 설명서
@@ -26,7 +28,7 @@ title: 메트릭 유형
 ---
 ## 개요 {#overview}
 
-Datadog에 제출되는 각각의 메트릭에는 유형이 있어야 합니다. 메트릭의 유형은 쿼리되었을 때 메트릭 값이 표시되는 방식에 영향을 미치고, 추가적인 [한정자][1] 및 [f함수][2]를 사용하여 Datadog 안에서 관련 그래픽을 작성할 가능성에도 영향을 미칩니다. 메트릭의 유형은 [Metrics Summary 페이지][3]에 주어진 메트릭에 대한 세부 정보 사이드 패널에 표시됩니다.
+Datadog에 제출되는 각각의 메트릭에는 유형이 있어야 합니다. 메트릭의 유형은 쿼리되었을 때 메트릭 값이 표시되는 방식에 영향을 미치고, 추가적인 [한정자][1] 및 [함수][2]를 사용하여 Datadog 안에서 관련 그래픽을 작성할 가능성에도 영향을 미칩니다. 메트릭의 유형은 [Metrics Summary 페이지][3]에 주어진 메트릭에 대한 세부 정보 사이드 패널에 표시됩니다.
 
 **참고**: 이 세부 정보 사이드 패널에서 메트릭 유형을 변경하면 기존의 모든 시각화 및 모니터에서 메트릭 동작이 변경될 수 있고, 나아가 이전 데이터가 유의미하지 않게 될 수 있습니다.
 
@@ -39,22 +41,24 @@ Datadog에 제출되는 각각의 메트릭에는 유형이 있어야 합니다.
 - [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
-이러한 각기 다른 메트릭 제출 유형은 Datadog 웹 애플리케이션 내에서 찾을 수 있는 4개의 인앱 메트릭 유형으로 매핑됩니다.
+이러한 각기 다른 메트릭 제출 유형은 Datadog 웹 애플리케이션 내에서 찾을 수 있는 5개의 인앱 메트릭 유형으로 매핑됩니다.
 
 - COUNT
 - RATE
 - GAUGE
 - DISTRIBUTION
+- HISTOGRAM (Explicit, Exponential)
 
-**참고**: 유형 없이 메트릭을 Datadog에 제출하면 해당 메트릭 유형은 Datadog 안에서 `Not Assigned`로 표시됩니다. `Not Assigned` 메트릭 유형은 첫 번째 메트릭 유형이 제출될 때까지 다른 인앱 유형으로 추가 변경할 수 없습니다.
+**참고**: 유형 없이 메트릭을 Datadog에 제출하면 해당 메트릭 유형이 Datadog 내에서 {{< ui >}}Not Assigned{{< /ui >}}로 표시됩니다. {{< ui >}}Not Assigned{{< /ui >}} 메트릭 유형은 첫 번째 메트릭 유형이 제출될 때까지 다른 인앱 유형으로 추가 변경할 수 없습니다.
 
 ## 제출 vs. 인앱 유형 {#submission-vs-in-app-type}
 
-메트릭이 Datadog에 제출되는 방식은 크게 다음과 같이 세 가지입니다.
+메트릭이 Datadog에 제출되는 방식은 크게 다음과 같이 네 가지입니다.
 
 - [Agent check][5]
 - [DogStatsD][6]
 - [Datadog's HTTP API][7]
+- [OTLP Metrics API][20]
 
 Datadog이 수신하는 데이터의 대부분은 Agent가 제출한 것으로, Agent 검사 또는 DogStatsD를 통합니다. 이러한 제출 방법의 경우, 메트릭의 유형에 따라 Agent에서 [플러시 시간 간격][8] 동안 수집된 여러 값이 집계되는 방식이 결정됩니다. Agent가 이러한 값을 해당 간격을 대표하는 단일 메트릭 값으로 결합합니다. 이렇게 결합된 값이 Datadog에 하나의 타임스탬프와 함께 저장됩니다.
 
@@ -114,12 +118,11 @@ HISTOGRAM 메트릭 제출 유형은 하나의 시간 간격 동안 Agent 측에
 
 **참고**:
 
-- Datadog에 어느 집계를 전송하고자 하는지 [`datadog.yaml` 구성 파일][1]의 `histogram_aggregates` 파라미터를 사용해 구성하세요.. 기본적으로 `max`, `median`, `avg`, `count` 집계만 Datadog에 전송됩니다. `sum` 및 `min`도 사용할 수 있습니다.
-- Datadog에 어느 백분위수 집계를 전송하고자 하는지 [`datadog.yaml` 구성 파일][2]의 `histogram_percentiles` 파라미터를 사용해 구성하세요. 기본적으로 `95percentile`만 Datadog에 전송됩니다.
+- Datadog에 어느 집계를 전송하고자 하는지 [`datadog.yaml` 구성 파일][1]의 `histogram_aggregates` 파라미터를 사용해 구성하세요. 기본적으로 `max`, `median`, `avg`, `count` 집계만 Datadog에 전송됩니다. `sum` 및 `min`도 사용할 수 있습니다.
+- Datadog에 전송할 백분위수 집계를 [`datadog.yaml` 구성 파일][1]의 `histogram_percentiles` 파라미터를 사용하여 구성하세요. 기본적으로 `95percentile`만 Datadog에 전송됩니다.
 
 
-[1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
-[2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
@@ -242,7 +245,7 @@ GAUGE 또는 HISTOGRAM과 같은 여타 메트릭 유형과 마찬가지로 DIST
 
 COUNT 유형 메트릭은 다음 중 한 가지 소스에서 제출:
 
-| 제출 소스| 제출 방법(python)           | 제출 유형 | Datadog 인앱 유형 |
+| 제출 소스 | 제출 방법(python)           | 제출 유형 | Datadog 인앱 유형 |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
 | [Agent 검사][1]  | `self.count(...)`                    | COUNT           | COUNT               |
 | [Agent 검사][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
@@ -368,3 +371,4 @@ DISTRIBUTION 유형 메트릭은 다음 중 한 가지 소스에서 제출:
 [17]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/#set
 [18]: /ko/metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [19]: /ko/metrics/types/?tab=distribution#definition
+[20]: /ko/opentelemetry/setup/otlp_ingest/metrics/

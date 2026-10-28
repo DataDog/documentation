@@ -18,7 +18,7 @@ further_reading:
     text: "IaC Security Rules"
 ---
 
-Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and categories. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
+Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and rule types. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
 For information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
@@ -26,19 +26,19 @@ For information on configuration locations, precedence, and merging, see [Code S
 
 You can configure IaC Security using:
 
-- Datadog or a `code-security.datadog.yaml` file for repository-wide rule, severity, category, and path settings. Use this method when you want the same configuration to apply across a repository or organization.
+- Datadog or a `code-security.datadog.yaml` file for repository-wide rule, severity, rule type, and path settings. Use this method when you want the same configuration to apply across a repository or organization.
 - Inline comments for local, file-specific exclusions that should stay with the IaC file. Use this method when an exception applies to a specific line, block, or file.
 
 ## Configuration format
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with `schema-version: v1.4`, followed by an `iac` key containing the analysis configuration.
+The configuration file must begin with a `schema-version` key, followed by an `iac` key containing the analysis configuration.
 
 The full structure is as follows:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   # Do not run these rules.
   ignore-rules:
@@ -64,10 +64,10 @@ iac:
     only-severities:
       - high
       - critical
-    # Do not report findings in these categories.
+    # Do not report findings with these rule types.
     ignore-categories:
       - "Best Practices"
-    # Report only findings in these categories.
+    # Report only findings with these rule types.
     only-categories:
       - "Encryption"
     # Do not run rules from these platforms.
@@ -93,14 +93,14 @@ iac:
           - libbpf/ci/run-qemu
 {{< /code-block >}}
 
-The `iac` key supports the following fields:
+The `iac` key was introduced in `schema-version: v1.2` and supports the following fields. Each field has its own minimum `schema-version`, so use the highest version required by the fields you configure:
 
-| **Property** | **Type** | **Description** |
-| --- | --- | --- |
-| `ignore-rules` | Array | A list of rule IDs to ignore. |
-| `use-rules` | Array | A list of rule IDs to run. If specified, _only_ these rules run. `ignore-rules` takes precedence over `use-rules`: a rule in both arrays is ignored. |
-| `global-config` | Object | Global settings for the IaC scanner. |
-| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. |
+| **Property** | **Type** | **Description** | **Minimum `schema-version`** |
+| --- | --- | --- | --- |
+| `ignore-rules` | Array | A list of rule IDs to ignore. | `v1.2` |
+| `use-rules` | Array | A list of rule IDs to run. If specified, _only_ these rules run. `ignore-rules` takes precedence over `use-rules`: a rule in both arrays is ignored. | `v1.2` |
+| `global-config` | Object | Global settings for the IaC scanner. | `v1.2` |
+| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. | `v1.3` |
 
 ## Rule configuration
 
@@ -110,7 +110,7 @@ To modify which rules run:
 - **Disable specific rules**: List them under `ignore-rules`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   ignore-rules:
     - A
@@ -118,7 +118,7 @@ iac:
 {{< /code-block >}}
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   use-rules:
     - A
@@ -130,16 +130,16 @@ Replace placeholders such as `A` and `B` with Code Security rule IDs. Legacy rul
 
 The `global-config` object controls repository-wide settings:
 
-| **Property** | **Type** | **Description** |
-| --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. |
-| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. |
-| `only-severities` | Array | Severity levels to report. Findings with other severities are not reported. |
-| `ignore-severities` | Array | Severity levels to ignore. |
-| `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
-| `ignore-categories` | Array | Categories to ignore. |
-| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. |
-| `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. |
+| **Property** | **Type** | **Description** | **Minimum `schema-version`** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. | `v1.2` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. | `v1.2` |
+| `only-severities` | Array | Severity levels to report. Findings with other severities are not reported. | `v1.2` |
+| `ignore-severities` | Array | Severity levels to ignore. | `v1.2` |
+| `only-categories` | Array | Rule types to report. Findings with other rule types are not reported. | `v1.2` |
+| `ignore-categories` | Array | Rule types to ignore. | `v1.2` |
+| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. | `v1.3` |
+| `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. | `v1.3` |
 
 ### Severities
 
@@ -154,7 +154,7 @@ Use `ignore-severities` to ignore findings based on severity level. Use `only-se
 - `info`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   global-config:
     ignore-severities:
@@ -167,7 +167,7 @@ iac:
 Use `ignore-paths` to exclude specific files or directories from scanning. Use `only-paths` to scan only specific files or directories. These options support glob patterns.
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   global-config:
     ignore-paths:
@@ -175,9 +175,9 @@ iac:
       - "**/config.file"
 {{< /code-block >}}
 
-### Categories
+### Rule types
 
-Use `ignore-categories` to ignore findings in specific categories. Use `only-categories` to report only specific categories.
+Use `ignore-categories` to ignore findings with specific rule types. Use `only-categories` to report only specific rule types.
 
 **Possible values:**
 
@@ -190,6 +190,7 @@ Use `ignore-categories` to ignore findings in specific categories. Use `only-cat
 - `Encryption`
 - `Insecure Configurations`
 - `Insecure Defaults`
+- `Least Privilege`
 - `Networking and Firewall`
 - `Observability`
 - `Resource Management`
@@ -198,7 +199,7 @@ Use `ignore-categories` to ignore findings in specific categories. Use `only-cat
 - `Supply-Chain`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   global-config:
     ignore-categories:
@@ -220,7 +221,7 @@ Use `ignore-platforms` to skip specific platforms. Use `only-platforms` to restr
 - `Terraform`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   global-config:
     only-platforms:
@@ -234,19 +235,19 @@ Use `rule-configs` to configure individual rules.
 
 Each key under `rule-configs` is a rule ID. The following properties are supported per rule:
 
-| **Property** | **Type** | **Description** |
-| --- | --- | --- |
-| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. |
-| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. |
-| `arguments` | Object | Rule-specific parameters that tune the rule's behavior. Supported argument names and value types depend on the rule. |
-| `severity` | String | Overrides the severity of findings generated by this rule. Accepted values: `critical`, `high`, `medium`, `low`, `info`. |
+| **Property** | **Type** | **Description** | **Minimum `schema-version`** |
+| --- | --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. | `v1.3` |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. | `v1.3` |
+| `arguments` | Object | Rule-specific parameters that tune the rule's behavior. Supported argument names and value types depend on the rule. | `v1.4` |
+| `severity` | String | Overrides the severity of findings generated by this rule. Accepted values: `critical`, `high`, `medium`, `low`, `info`. | `v1.3` |
 
 ### Per-rule path scoping
 
 Exclude a rule from certain paths, or restrict it to specific paths:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   rule-configs:
     terraform-aws-s3-bucket-without-encryption:
@@ -267,7 +268,7 @@ Path patterns support glob syntax (`*`, `**`, `?`). Paths are relative to the re
 Change the severity of findings generated by a specific rule:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   rule-configs:
     terraform-aws-s3-bucket-without-encryption:
@@ -283,7 +284,7 @@ Use `arguments` to set parameters for a specific rule. Supported argument names 
 The following example configures the `cicd-github-unpinned-actions-full-length-commit-sha` rule and allows the `libbpf/ci/run-qemu` action:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.4
+schema-version: {{< version key="code_security_schema_version" >}}
 iac:
   rule-configs:
     cicd-github-unpinned-actions-full-length-commit-sha:

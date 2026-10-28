@@ -11,13 +11,22 @@ further_reading:
   text: Bits AI 개요
 - link: /incident_response/incident_management/investigate/incident_ai
   tag: 설명서
-  text: Incident AI를 활용한 인시던트 조정
+  text: 인시던트 AI를 활용한 인시던트 조정
 - link: /cloud_cost_management/cloud_cost_skill/
   tag: 설명서
-  text: Bits Chat의 Cloud Cost Skill
+  text: Bits Chat의 Cloud Cost 스킬
 - link: /account_management/billing/ai_credits/
   tag: 설명서
   text: AI 크레딧
+- link: https://www.datadoghq.com/blog/datadog-mcp-apps/
+  tag: 블로그
+  text: 'Datadog MCP 앱: AI 워크플로 내에서의 대화형 경험'
+- link: https://www.datadoghq.com/blog/introducing-bits-chat/
+  tag: 블로그
+  text: Bits Chat을 사용하여 Datadog 전반에서 검색하고 조치를 취하여 문제를 더 빠르게 해결하세요.
+- link: https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/
+  tag: 블로그
+  text: Bits Chat의 Cloud Cost 스킬을 사용하여 비용 관련 질문에 더 빠르게 답변하세요.
 title: Bits Chat
 ---
 ## 개요 {#overview}
@@ -57,7 +66,7 @@ Bits Chat에 다음과 같은 카테고리의 질문을 할 수 있습니다.
 
 #### Bits Chat 액세스 {#access-to-bits-chat}
 
-Bits Chat을 사용하려면 역할에 **Bits Chat 액세스** 권한이 있어야 합니다. 이 권한은 Datadog의 세 가지 표준 역할인 Datadog Admin, Datadog Standard, Datadog Read Only에 기본적으로 활성화되어 있습니다.
+Bits Chat을 사용하려면 역할에 **Bits Chat 액세스** 권한이 있어야 합니다. 이 권한은 Datadog의 세 가지 표준 역할인 Datadog Admin, Datadog 표준, Datadog Read Only에 기본적으로 활성화되어 있습니다.
 
 사용자 지정 역할에 대한 권한을 관리하려면 **Organization Settings** > **Roles**로 이동하여 역할을 선택하고 **General Permissions** 아래의 **Bits Chat Access** 토글을 전환합니다.
 
@@ -76,7 +85,7 @@ Bits Chat은 Datadog 전반의 작업을 수행하기 위한 다양한 전문 �
 - `Add a widget about CPU usage in the payments service`
 
 #### Notebooks {#notebooks}
-조사 [노트북][6]을 만들고 요약 및 분석으로 기존 노트북을 보완합니다.
+조사 [Notebooks][6]을 만들고 요약 및 분석으로 기존 notebook을 보완합니다.
 
 프롬프트 예시:
 - `Create an investigation for the recent spike of errors in the checkout service`
@@ -99,7 +108,7 @@ Bits Chat은 Datadog 전반의 작업을 수행하기 위한 다양한 전문 �
 - `What's the latency bottleneck for this service?`
 
 #### Cloud Cost Management {#cloud-cost-management}
-[클라우드 비용][4] 변화를 조사하고 이를 유발한 팀이나 리소스를 식별합니다. [Bits Chat의 Cloud Cost Skill][9]을 참조하세요.
+[클라우드 비용][4] 변화를 조사하고 이를 유발한 팀이나 리소스를 식별합니다. [Bits Chat의 Cloud Cost 스킬][9]을 참조하세요.
 
 프롬프트 예시:
 - `Investigate why EC2 costs changed between January and February`
@@ -125,10 +134,11 @@ Bits Chat 보고서 페이지에서 조직이 Bits Chat을 어떻게 사용하�
 
 ### 웹 애플리케이션 {#web-application}
 Datadog 웹 애플리케이션에서 Bits Chat을 여는 방법은 여러 가지가 있습니다.
-- 탐색 바 오른쪽 상단에서 {{< ui >}}Ask Bits{{< /ui >}}를 클릭합니다.
-- Bits Chat이 통합된 Datadog 제품에서 {{< ui >}}Ask Bits{{< /ui >}}를 클릭하거나 {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (반짝이는 별 아이콘)
--  <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>를 누릅니다.
-- 왼쪽 탐색 패널에서 {{< ui >}}Bits AI{{< /ui >}}를 클릭합니다.
+- [Bits Chat][11]으로 이동하세요.
+- 탐색 바 오른쪽 상단에서 {{< ui >}}Ask Bits{{< /ui >}}를 클릭하세요.
+- Bits Chat이 통합된 Datadog 제품에서 {{< ui >}}Ask Bits{{< /ui >}}를 클릭하거나 {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (반짝이는 별 아이콘).
+-  <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>를 누르세요.
+- 왼쪽 탐색 패널에서 {{< ui >}}Bits AI{{< /ui >}}를 클릭하세요.
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="대시보드 목록 옆에 열려 있는 Bits Chat 패널" style="width:40%;">}}
 
@@ -137,9 +147,9 @@ Datadog 웹 애플리케이션에서 Bits Chat을 여는 방법은 여러 가지
 Bits에 시스템이나 활성 인시던트에 대해 질문할 수 있습니다. Bits는 Datadog 공개 설명서, 텔레메트리, 소유권에 대한 컨텍스트를 가지고 있습니다.
 
 1. [모바일 앱을 다운로드하고 로그인합니다][2].
-2. 홈 화면에서 {{< ui >}}Bits Assistant{{< /ui >}}를 탭합니다.
+2. 홈 화면에서 {{< ui >}}Bits Chat{{< /ui >}}를 탭하세요.
 3. 음성 또는 텍스트로 Bits Chat과 대화를 시작합니다.
-{{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="Bits AI가 있는 모바일 앱 홈 대시보드 화면" style="width:40%;" >}}
+{{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="Bits AI가 있는 모바일 앱 홈 대시보드 화면 조회" style="width:40%;" >}}
 
 ### Slack {#slack}
 1. [Datadog 계정을 Slack 워크스페이스에 연결합니다][1].
@@ -164,3 +174,4 @@ Bits에 시스템이나 활성 인시던트에 대해 질문할 수 있습니다
 [8]: /ko/ddsql_reference/data_directory/
 [9]: /ko/cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/ask/usage
+[11]: https://app.datadoghq.com/ask

@@ -11,6 +11,9 @@ further_reading:
 - link: "/feature_flags/guide/server_flag_evaluation_metrics/"
   tag: "Guide"
   text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/guide/apm_trace_enrichment/"
+  tag: "Guide"
+  text: "Set Up APM Trace Enrichment for Feature Flags"
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
@@ -66,6 +69,8 @@ go get github.com/open-feature/go-sdk/openfeature
 
 Start the Datadog Go tracer and register the Datadog OpenFeature provider. The tracer must be started first because it enables Remote Configuration, which delivers flag configurations to your application.
 
+Start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
+
 ### Blocking initialization
 
 Use `SetProviderAndWait` to block evaluation until the initial flag configuration is received. This ensures flags are ready before your application starts handling requests.
@@ -91,7 +96,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer provider.Shutdown()
+    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     // Register the provider and wait for initialization (default 30s timeout)
     if err := openfeature.SetProviderAndWait(provider); err != nil {
@@ -141,7 +148,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer provider.Shutdown()
+    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     // Register the provider without waiting
     openfeature.SetProvider(provider)
@@ -356,6 +365,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 

@@ -3,205 +3,250 @@ aliases:
 - /es/code_analysis/software_composition_analysis/generic_ci_providers/
 - /es/code_analysis/software_composition_analysis/github_actions/
 - /es/code_analysis/software_composition_analysis/setup/
-description: Obtén información sobre Datadog Software Composition Analysis para escanear
-  tus bibliotecas de código abierto importadas en busca de vulnerabilidades de seguridad
-  conocidas antes de enviarlas a producción.
+description: Obtenga información sobre Datadog Software Composition Analysis para
+  analizar sus bibliotecas de código abierto importadas en busca de vulnerabilidades
+  de seguridad conocidas antes de realizar el despliegue a producción.
 disable_toc: false
-title: Configurar SCA en tus repositorios
+title: Configure SCA en sus repositorios
 ---
-## Información general
-SCA puede analizar archivos de gestión de dependencias en tus repositorios para detectar de forma estática bibliotecas de código abierto utilizadas en tu código base. SCA admite el análisis de librerías en los siguientes lenguajes y archivos de bloqueo:
+## Descripción general {#overview}
 
-| Gestor de paquetes | Archivo de bloqueo                                 |
-|-----------------|------------------------------------------|
-| C# (.NET)       | `packages.lock.json`                     |
-| Go (mod)        | `go.mod`                                 |
-| JVM (Gradle)    | `gradle.lockfile`                        |
-| JVM (Maven)     | `pom.xml`                                |
-| Node.js (npm)   | `package-lock.json`                      |
-| Node.js (pnpm)  | `pnpm-lock.yaml`                         |
-| Node.js (hilo)  | `yarn.lock`                              |
-| PHP (compositor)  | `composer.lock`                          |
-| Python (pip)    | `requirements.txt`, `Pipfile.lock`       |
-| Python (poetry) | `poetry.lock`                            |
-| Ruby (bundler)  | `Gemfile.lock`                           |
+Datadog Software Composition Analysis (SCA) analiza sus repositorios en busca de bibliotecas de código abierto y detecta vulnerabilidades de seguridad conocidas antes de realizar el despliegue a producción.
 
-Para configurar Datadog Static Code Analysis en la aplicación, ve a [**Seguridad** > **Code Security**][1].
+Para comenzar:
+1. Abra [Code Security settings][2].
+2. En {{< ui >}}Activate scanning for your repositories{{< /ui >}}, haga clic en {{< ui >}}Manage Repositories{{< /ui >}}.
+3. Elija [dónde ejecutar los análisis de SCA](#select-where-to-run-static-sca-scans) (alojado en Datadog o pipelines de CI).
+4. Siga las instrucciones de configuración para su proveedor de código fuente.
 
-## Seleccionar dónde realizar análisis estáticos de SCA
+## Lenguajes y manifiestos de dependencias compatibles {#supported-languages-and-dependency-manifests}
+Datadog SCA analiza bibliotecas en los siguientes lenguajes utilizando manifiestos de dependencias (como archivos de bloqueo y otros archivos de manifiesto compatibles) para identificar dependencias vulnerables.
 
-### Analizar utilizando el análisis alojado en Datadog
-Para los repositorios de GitHub, puedes ejecutar análisis de SCA en Datadog directamente en la infraestructura de Datadog'. Para empezar, ve a la página [**Code Security**][1].
+| Lenguaje   | Gestor de paquetes    | Archivo                                |
+|------------|-------------------|------------------------------------------|
+| C#         | .NET              | `packages.lock.json`, `.csproj` archivos    |
+| C++        | Conan             | `conan.lock`                             |
+| Dart       | pub               | `pubspec.lock`                           |
+| Go         | mod               | `go.mod`                                 |
+| JVM        | Gradle            | `gradle.lockfile`                        |
+| JVM        | Maven             | `pom.xml`                                |
+| Node.js    | Bun               | `bun.lock`                               |
+| Node.js    | npm               | `package-lock.json`                      |
+| Node.js    | pnpm              | `pnpm-lock.yaml`                         |
+| Node.js    | yarn              | `yarn.lock`                              |
+| PHP        | composer          | `composer.lock`                          |
+| Python     | PDM               | `pdm.lock`                               |
+| Python     | pip               | `requirements.txt`, `Pipfile.lock`       |
+| Python     | poetry            | `poetry.lock`                            |
+| Python     | UV                | `uv.lock`                                |
+| Ruby       | bundler           | `Gemfile.lock`                           |
+| Rust       | Cargo             | `cargo.lock`                             |
+| Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
-### Analizar en pipelines CI
-En primer lugar, configura tus claves de API y aplicación Datadog añadiendo `DD_APP_KEY` y `DD_API_KEY` como secretos. Asegúrate de que tu clave de aplicación Datadog tiene el contexto `code_analysis_read`.
+**Nota:** Si ambos archivos, un `packages.lock.json` y un `.csproj`, están presentes, el `packages.lock.json` tiene prioridad y proporciona una resolución de versión más precisa.
 
-A continuación, ejecuta SCA siguiendo las instrucciones del proveedor de CI que hayas elegido.
+## Escaneo sin archivo de bloqueo {#lockfile-less-scanning}
 
-## GitHub Actions
-SCA puede ejecutarse como una tarea en tus flujos de trabajo de GitHub Actions. La acción que se proporciona a continuación invoca [Datadog osv-scanner][10], nuestro generador de SBOM recomendado, en tu código base, y carga los resultados en Datadog.
+Datadog SCA analiza los archivos de manifiesto **solo cuando no se detecta ningún archivo de bloqueo compatible**. Cuando hay un archivo de bloqueo presente, este tiene prioridad y el manifiesto no se analiza.
 
-Añade el siguiente fragmento de código en `.github/workflows/datadog-sca.yml`. Asegúrate de sustituir
-el atributo `dd_site` por el [sitio Datadog][12] que estés utilizando.
+| Lenguaje   | Gestor de paquetes        | Archivo             |
+|----------|------------------------|------------------|
+| Node.js  | npm, yarn, pnpm, Bun   | `package.json`   |
+| Python   | Poetry, PDM, UV, pip   | `pyproject.toml` |
 
-```yaml
-on: [push]
+**Secciones admitidas:**
+- `package.json`: `dependencies`, `devDependencies` y `optionalDependencies`
+- `pyproject.toml`: PEP 621 `dependencies` y `optional-dependencies`, PEP 735 `dependency-groups`, y secciones de dependencias de Poetry
 
-name: Datadog Software Composition Analysis
+<div class="alert alert-info">
+Debido a que los manifiestos pueden declarar rangos de versiones (como <code>^2.3.4</code> o <code>&gt;=1.0,&lt;2</code>) en lugar de versiones fijas, Datadog resuelve cada rango seleccionando la versión publicada más reciente que satisfaga el rango. Las versiones de pre-lanzamiento están excluidas.
+</div>
 
-jobs:
-  software-composition-analysis:
-    runs-on: ubuntu-latest
-    name: Datadog SBOM Generation and Upload
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Check imported libraries are secure and compliant
-      id: datadog-software-composition-analysis
-      uses: DataDog/datadog-sca-github-action@main
-      with:
-        dd_api_key: ${{ secrets.DD_API_KEY }}
-        dd_app_key: ${{ secrets.DD_APP_KEY }}
-        dd_site: "datadoghq.com"
-```
+## Seleccione dónde ejecutar los escaneos de SCA estáticos {#select-where-to-run-static-sca-scans}
+De forma predeterminada, los escaneos se ejecutan cuando usted confirma cambios que actualizan manifiestos de dependencias o archivos de bloqueo compatibles en un repositorio habilitado. También puede ejecutar SCA en sus pipelines de CI; los trabajos de CI son compatibles para eventos de `push`.
 
-<!-- ### Generación de inventarios de librería
+### Analizar con escaneo alojado por Datadog {#scan-with-datadog-hosted-scanning}
 
-La acción de GitHub genera un inventario de librerías automáticamente, basándose en las bibliotecas declaradas en tu repositorio.
+Puede ejecutar escaneos de Datadog Static SCA directamente en la infraestructura de Datadog. Los tipos de repositorio admitidos incluyen:
+- [GitHub](/security/code_security/software_composition_analysis/setup_static/?tab=github#select-your-source-code-management-provider) (excluyendo repositorios que utilizan [Git Large File Storage][21])
+- [GitLab.com y GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
+- [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
+- [Bitbucket Cloud](/security/code_security/software_composition_analysis/setup_static/?tab=bitbucketcloud#select-your-source-code-management-provider)
 
-La acción de GitHub funciona para los siguientes lenguajes y archivos:
+Para comenzar, navegue a la [{{< ui >}}Code Security{{< /ui >}} página][2].
 
- - JavaScript/TypeScript: `package-lock.json` y `yarn.lock`
- - Python: `requirements.txt` (con versión definida) y `poetry.lock`
- - Java: `pom.xml`
- - C#
- - Ruby
- - ... y más lenguajes -->
+<div class="alert alert-info">
+El escaneo de SCA alojado en Datadog no es compatible con repositorios que contengan nombres de archivo de más de 255 caracteres. <br>
+Para estos casos, realice el escaneo utilizando pipelines de CI.
+</div>
 
-### Acciones de GitHub relacionadas
-[Datadog Static Code Analysis (SAST)][5] analiza tu código de origen. Static Code Analysis puede configurarse mediante la acción [`datadog-static-analyzer-github-action`][13] de GitHub.
+### Analizar en pipelines de CI {#scan-in-ci-pipelines}
 
+Datadog Software Composition Analysis se ejecuta en sus pipelines de CI utilizando la [`datadog-ci` CLI][8].
 
-## Proveedores de CI genéricos
-Si no utilizas GitHub Actions, puedes ejecutar la CLI [datadog-ci][14] directamente en tu plataforma de pipelines CI  y cargar tu SBOM en Datadog.
+<div class="alert alert-info">
+Debe escanear su rama predeterminada al menos una vez antes de que los resultados aparezcan en {{< ui >}}Code Security{{< /ui >}}.
+</div>
 
-Requisitos previos:
+{{< whatsnext desc="Consulte las instrucciones según su proveedor de CI:">}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/gitlab_ci" >}}GitLab CI/CD{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/azure_devops" >}}Azure DevOps{{< /nextlink >}}
+    {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Proveedores de CI genéricos{{< /nextlink >}}
+{{< /whatsnext >}}
 
-- descomprimir
-- Node.js v14 o posterior
+Si su proyecto de Java incluye archivos JAR de terceros directamente en el repositorio en lugar de utilizar un manifiesto de Maven o Gradle, consulte [Scan Java JAR directories][27].
 
-Configura las siguientes variables de entorno:
+## Seleccione su proveedor de gestión de código fuente {#select-your-source-code-management-provider}
 
-| Nombre         | Descripción                                                                                                                | Obligatorio | Valor predeterminado         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `DD_API_KEY` | Tu clave de API Datadog. Esta clave la crea tu [organización Datadog][6] y debe guardarse como secreto.            | Sí      |                 |
-| `DD_APP_KEY` | Tu clave de aplicación Datadog. Esta clave, creada por tu [organización Datadog][6], debe incluir el contexto `code_analysis_read` y almacenarse como secreto.    | Sí      |                 |
-| `DD_SITE`    | El [sitio Datadog][12] al que enviar la información. Tu sitio Datadog es {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
+Independientemente del modo de escaneo que utilice, conecte su proveedor de gestión de código fuente para habilitar funciones nativas como fragmentos de código en línea y comentarios en solicitudes de extracción. Datadog SCA admite todos los proveedores y ofrece soporte nativo para GitHub, GitLab, Azure DevOps y Bitbucket Cloud Premium.
 
-Proporciona las siguientes entradas:
+{{< tabs >}}
+{{% tab "GitHub" %}}
 
-| Nombre           | Descripción                                                                                                                | Obligatorio | Valor predeterminado         |
-|----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`      | El nombre del servicio utilizado para etiquetar los resultados.                                                                           | Sí      |                 |
-| `env`          | El entorno utilizado para etiquetar los resultados. `ci` es un valor útil para esta entrada.                                           | No       | `none`          |
-| `subdirectory` | La ruta del subdirectorio al que debe limitarse el análisis. La ruta es relativa al directorio raíz del repositorio.                  | No       |                 |
+Configure una aplicación de GitHub con el [mosaico de integración de GitHub][1] y configure la [integración del código fuente][2] para habilitar fragmentos de código en línea y [comentarios en solicitudes de extracción][3].
+
+Al instalar una aplicación de GitHub, se requieren los siguientes permisos para habilitar ciertas funciones:
+
+- `Content: Read`, que le permite ver fragmentos de código mostrados en Datadog
+- `Pull Request: Read & Write`, lo que permite a Datadog añadir comentarios sobre infracciones directamente en sus solicitudes de extracción utilizando [comentarios de solicitud de extracción][3].
+- `Checks: Read & Write`, que le permite crear comprobaciones en infracciones de SAST para bloquear solicitudes de extracción
+
+[1]: /es/integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[2]: /es/integrations/guide/source-code-integration
+[3]: /es/security/code_security/dev_tool_int/github_pull_requests
+
+{{% /tab %}}
+{{% tab "GitLab" %}}
+
+Consulte las [instrucciones de configuración del código fuente de GitLab][1] para conectar GitLab a Datadog. Se admiten tanto GitLab.com como las instancias autogestionadas.
+
+[1]: /es/integrations/gitlab-source-code/#setup
+
+{{% /tab %}}
+{{% tab "Azure DevOps" %}}
+
+**Nota:** Sus integraciones de Azure DevOps deben estar conectadas a un inquilino de Microsoft Entra. Azure DevOps Server **no** es compatible.
+
+Consulte las [instrucciones de configuración del código fuente de Azure][4] para conectar los repositorios de Azure DevOps a Datadog.
+
+[1]: https://app.datadoghq.com/security/configuration/code-security/setup
+[2]: https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /es/integrations/azure-devops-source-code/#setup
+[5]: /es/getting_started/site/
+
+{{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+Consulte las [instrucciones de configuración del código fuente de Bitbucket][1] para conectar los espacios de trabajo de Bitbucket Cloud a Datadog.
+
+[1]: /es/integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
+{{% tab "Otro" %}}
+
+Si utiliza otro proveedor de gestión de código fuente, configure SCA para que se ejecute en sus pipelines de CI utilizando la herramienta CLI `datadog-ci` y [cargue los resultados](#upload-third-party-sbom-to-datadog) a Datadog.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Vincule los hallazgos a los servicios y equipos de Datadog {#link-findings-to-datadog-services-and-teams}
+
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
+
+## Cargue el SBOM de terceros a Datadog {#upload-third-party-sbom-to-datadog}
+
+Datadog recomienda utilizar el [Datadog SBOM Generator][10], pero también es posible ingerir un SBOM de terceros.
+
+Puede cargar SBOM generados por otras herramientas si cumplen con estos requisitos:
+- Esquema JSON de CycloneDX [1.4][18], [1.5][19] o [1.6][20] válido
+- Todos los componentes tienen el tipo `library`
+- Todos los componentes tienen un atributo `purl` válido
+
+Los archivos SBOM de terceros se cargan a Datadog utilizando el comando [`datadog-ci`](https://github.com/DataDog/datadog-ci/?tab=readme-ov-file#how-to-install-the-cli).
+
+Puede encontrar argumentos opcionales y otra información en `datadog-ci` [README][22].
+
+Puede utilizar el siguiente comando para cargar su SBOM de terceros. Asegúrese de que las variables de entorno `DD_API_KEY`, `DD_APP_KEY` y `DD_SITE`
+se establezcan en su clave de API, clave de APP y [sitio de Datadog][12], respectivamente.
 
 ```bash
-# Set the Datadog site to send information to
-export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
-
-# Install dependencies
-npm install -g @datadog/datadog-ci
-
-# Download the latest Datadog OSV Scanner:
-# https://github.com/DataDog/osv-scanner/releases
-DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/download/osv-scanner_linux_amd64.zip
-
-# Install OSV Scanner
-mkdir /osv-scanner
-curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
-unzip /osv-scanner/osv-scanner.zip -d /osv-scanner
-chmod 755 /osv-scanner/osv-scanner
-
-# Run OSV Scanner and scan your dependencies
-/osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
-
-# Upload results to Datadog
-datadog-ci sbom upload /tmp/sbom.json
+datadog-ci sbom upload /path/to/third-party-sbom.json
 ```
 
-## Seleccionar tu proveedor de gestión de código fuente
-Datadog SCA admite todos los proveedores de gestión de código fuente, con compatibilidad nativa con GitHub.
-### Configurar la integración de GitHub
-Si GitHub es tu proveedor de gestión de código fuente, debes configurar la aplicación GitHub utilizando el [cuadro de la integración GitHub][7] y debes configurar la [integración del código fuente][8] para ver fragmentos de código en línea y habilitar [comentarios en las solicitudes de extracción][9].
-
-Al instalar una aplicación GitHub, se requieren los siguientes permisos para habilitar determinadas funciones:
-
-- `Content: Read`que permite ver fragmentos de código en Datadog.
-- `Pull Request: Read & Write`que permite a Datadog añadir comentarios sobre infracciones directamente en tus solicitudes de extracción mediante [comentarios en las solicitudes de extracción][9].
-
-### Otros proveedores de gestión de código fuente
-Si estás utilizando otro proveedor de gestión de código fuente, configura SCA para que se ejecute en tus pipelines CI utilizando la herramienta CLI `datadog-ci` y [carga los resultados][8] en Datadog.
-**Debes** ejecutar un análisis de tu repositorio en la rama por defecto antes de que los resultados puedan empezar a aparecer en la página **Code Security**.
-
-## Vincular resultados a servicios y equipos de Datadog
-### Vincular resultados a servicios
-Datadog asocia el código estático y los resultados del análisis de la librería con los de servicios mediante los siguientes mecanismos:
-
-1. [Identificación de la localización del código asociado a un servicio mediante el Catálogo de software](#identifying-the-code-location-in-the-software-catalog)
-2. [Detección de patrones de uso de archivos en productos adicionales de Datadog.](#detecting-file-usage-patterns)
-3. [Búsqueda del nombre del servicio en la ruta del archivo o el repositorio](#detecting-service-name-in-paths-and-repository-names)
-
-Si un método tiene éxito, no se realizan más intentos de asignación. A continuación se detalla cada método de asignación.
-
-#### Identificación de la localización del código en el Catálogo de software
-
-La [versión del esquema `v3`][15] y posteriores del Catálogo de software te permiten añadir la asignación del código de localización de tu servicio. La sección `codeLocations` especifica la localización del repositorio que contiene el código y sus rutas asociadas.
-
-El atributo `paths` es una lista de globs que deben coincidir con las rutas del repositorio.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
+<div class="alert alert-info">
+Si ya tiene habilitado el escaneo automático para un repositorio, una carga manual reemplazará cualquier resultado existente para esa confirmación.
+</div>
 
 
-#### Detección de patrones de uso de archivos
+## Filtrar por vulnerabilidades alcanzables {#filter-by-reachable-vulnerabilities}
 
-Datadog detecta el uso de archivos en productos adicionales como Error Tracking y asocia
-archivos al servicio de tiempo de ejecución. Por ejemplo, si un servicio llamado `foo` tiene
-una entrada de log o una traza (trace) de stack tecnológico que contiene un archivo con una ruta `/modules/foo/bar.py`,
-se asocian los archivos `/modules/foo/bar.py` al servicio `foo`.
+Datadog ofrece análisis de alcanzabilidad estática para ayudar a los equipos a evaluar si las rutas de código vulnerables en las dependencias se hacen referencia dentro del código de su aplicación. Esta capacidad admite una priorización más efectiva al identificar vulnerabilidades que son estáticamente inalcanzables y, por lo tanto, presentan un riesgo inmediato mínimo.
 
-#### Detección de nombres de servicios en rutas y nombres de repositorios
+Esta funcionalidad solo es compatible cuando se utiliza el [Datadog SBOM Generator][1] con la marca `--reachability` habilitada o al ejecutar escaneos a través de la infraestructura de Datadog.
 
-Datadog detecta nombres de servicios en rutas y nombres de repositorios y asocia el archivo al servicio, si se encuentra una coincidencia.
+El análisis de alcanzabilidad está disponible exclusivamente para proyectos de Java y se aplica solo a un conjunto definido de avisos de seguridad verificados. Las vulnerabilidades que no están incluidas en este conjunto se excluyen de la evaluación de alcanzabilidad.
 
-Para una coincidencia de repositorios, si existe un servicio llamado `myservice` y
-la URL del repositorio es `https://github.com/myorganization/myservice.git`,
-se asocia `myservice` a todos los archivos del repositorio.
+{{% collapse-content title="Avisos admitidos" level="h3" expanded=true id="supported-advisories" %}}
+El análisis de alcanzabilidad estática está disponible para los siguientes avisos:
+- [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
+- [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
+- [GHSA-7rjr-3q55-vv33](https://osv.dev/vulnerability/GHSA-7rjr-3q55-vv33)
+- [GHSA-2p3x-qw9c-25hh](https://osv.dev/vulnerability/GHSA-2p3x-qw9c-25hh)
+- [GHSA-cm59-pr5q-cw85](https://osv.dev/vulnerability/GHSA-cm59-pr5q-cw85)
+- [GHSA-qrx8-8545-4wg2](https://osv.dev/vulnerability/GHSA-qrx8-8545-4wg2)
+- [GHSA-p8pq-r894-fm8f](https://osv.dev/vulnerability/GHSA-p8pq-r894-fm8f)
+- [GHSA-64xx-cq4q-mf44](https://osv.dev/vulnerability/GHSA-64xx-cq4q-mf44)
+- [GHSA-g5w6-mrj7-75h2](https://osv.dev/vulnerability/GHSA-g5w6-mrj7-75h2)
+- [GHSA-xw4p-crpj-vjx2](https://osv.dev/vulnerability/GHSA-xw4p-crpj-vjx2)
+- [GHSA-cxfm-5m4g-x7xp](https://osv.dev/vulnerability/GHSA-cxfm-5m4g-x7xp)
+- [GHSA-3ccq-5vw3-2p6x](https://osv.dev/vulnerability/GHSA-3ccq-5vw3-2p6x)
+- [GHSA-mjmj-j48q-9wg2](https://osv.dev/vulnerability/GHSA-mjmj-j48q-9wg2)
+- [GHSA-36p3-wjmg-h94x](https://osv.dev/vulnerability/GHSA-36p3-wjmg-h94x)
+- [GHSA-ww97-9w65-2crx](https://osv.dev/vulnerability/GHSA-ww97-9w65-2crx)
+- [GHSA-8jrj-525p-826v](https://osv.dev/vulnerability/GHSA-8jrj-525p-826v)
+- [GHSA-4wrc-f8pq-fpqp](https://osv.dev/vulnerability/GHSA-4wrc-f8pq-fpqp)
+- [GHSA-4cch-wxpw-8p28](https://osv.dev/vulnerability/GHSA-4cch-wxpw-8p28)
+- [GHSA-6w62-hx7r-mw68](https://osv.dev/vulnerability/GHSA-6w62-hx7r-mw68)
+- [GHSA-2q8x-2p7f-574v](https://osv.dev/vulnerability/GHSA-2q8x-2p7f-574v)
+- [GHSA-rmr5-cpv2-vgjf](https://osv.dev/vulnerability/GHSA-rmr5-cpv2-vgjf)
+- [GHSA-4jrv-ppp4-jm57](https://osv.dev/vulnerability/GHSA-4jrv-ppp4-jm57)
+- [GHSA-mw36-7c6c-q4q2](https://osv.dev/vulnerability/GHSA-mw36-7c6c-q4q2)
+- [GHSA-hph2-m3g5-xxv4](https://osv.dev/vulnerability/GHSA-hph2-m3g5-xxv4)
+- [GHSA-j9h8-phrw-h4fh](https://osv.dev/vulnerability/GHSA-j9h8-phrw-h4fh)
+- [GHSA-3gm7-v7vw-866c](https://osv.dev/vulnerability/GHSA-3gm7-v7vw-866c)
+- [GHSA-645p-88qh-w398](https://osv.dev/vulnerability/GHSA-645p-88qh-w398)
+- [GHSA-g5h3-w546-pj7f](https://osv.dev/vulnerability/GHSA-g5h3-w546-pj7f)
+- [GHSA-c27h-mcmw-48hv](https://osv.dev/vulnerability/GHSA-c27h-mcmw-48hv)
+- [GHSA-r4x2-3cq5-hqvp](https://osv.dev/vulnerability/GHSA-r4x2-3cq5-hqvp)
+- [GHSA-24rp-q3w6-vc56](https://osv.dev/vulnerability/GHSA-24rp-q3w6-vc56)
+- [GHSA-c9hw-wf7x-jp9j](https://osv.dev/vulnerability/GHSA-c9hw-wf7x-jp9j)
+- [GHSA-4gq5-ch57-c2mg](https://osv.dev/vulnerability/GHSA-4gq5-ch57-c2mg)
+- [GHSA-vmfg-rjjm-rjrj](https://osv.dev/vulnerability/GHSA-vmfg-rjjm-rjrj)
+- [GHSA-crg9-44h2-xw35](https://osv.dev/vulnerability/GHSA-crg9-44h2-xw35)
+- [GHSA-qmqc-x3r4-6v39](https://osv.dev/vulnerability/GHSA-qmqc-x3r4-6v39)
+- [GHSA-4w82-r329-3q67](https://osv.dev/vulnerability/GHSA-4w82-r329-3q67)
+- [GHSA-qr7j-h6gg-jmgc](https://osv.dev/vulnerability/GHSA-qr7j-h6gg-jmgc)
+- [GHSA-9mxf-g3x6-wv74](https://osv.dev/vulnerability/GHSA-9mxf-g3x6-wv74)
+- [GHSA-f3j5-rmmp-3fc5](https://osv.dev/vulnerability/GHSA-f3j5-rmmp-3fc5)
+{{% /collapse-content %}}
 
-Si no se encuentra ninguna coincidencia en el repositorio, Datadog intenta encontrar una coincidencia en la
-`path` del archivo. Si hay un servicio llamado `myservice` y la ruta es `/path/to/myservice/foo.py`, el archivo se asocia a `myservice` porque el nombre servicio forma parte de la ruta. Si hay dos servicios
-en la ruta, se selecciona el nombre de servicio más cercano al nombre del archivo.
+## Retención de datos {#data-retention}
 
+Datadog almacena los hallazgos de acuerdo con nuestros [Periodos de retención de datos](https://docs.datadoghq.com/es/data_security/data_retention_periods/). Datadog no almacena ni conserva el código fuente del cliente.
 
-### Vincular resultados a equipos
+## Lecturas adicionales {#further-reading}
 
-Datadog asocia automáticamente el equipo adjunto a un servicio cuando se detecta una infracción o vulnerabilidad. Por ejemplo, si el archivo `domains/ecommerce/apps/myservice/foo.py`
-está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción
-detectada en este archivo.
+{{< whatsnext desc="Más sobre SCA:">}}
+    {{< nextlink href="/security/code_security/software_composition_analysis/setup_runtime/" >}}Configure la detección en tiempo de ejecución de vulnerabilidades en las bibliotecas{{< /nextlink >}}
+{{< /whatsnext >}}
 
-Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.
-
-**Nota**: Para que esta característica funcione correctamente, debes asignar con precisión tus equipos de proveedores Git a tus [equipos de Datadog][16].
+{{< whatsnext desc="Otro análisis de Code Security para sus repositorios:">}}
+    {{< nextlink href="/security/code_security/static_analysis/" >}}Análisis estático de código (SAST){{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/iac_scanning/" >}}Infraestructura como código (IaC){{< /nextlink >}}
+    {{< nextlink href="/security/code_security/secret_scanning/" >}}Escaneo de secretos{{< /nextlink >}}
+{{< /whatsnext >}}
 
 [1]: /es/security/code_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
@@ -210,12 +255,25 @@ Si no se encuentran servicios o equipos, Datadog utiliza el archivo `CODEOWNERS`
 [5]: /es/getting_started/code_security/?tab=datadoghosted#linking-services-to-code-violations-and-libraries
 [6]: /es/account_management/api-app-keys/
 [7]: /es/integrations/github
-[8]: /es/integrations/guide/source-code-integration
+[8]: https://github.com/DataDog/datadog-ci
 [9]: /es/security/code_security/dev_tool_int/github_pull_requests/
-[10]: https://github.com/DataDog/osv-scanner
-[11]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
+[10]: https://github.com/DataDog/datadog-sbom-generator
 [12]: /es/getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/es/software_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/es/internal_developer_portal/catalog/entity_model/
 [16]: https://docs.datadoghq.com/es/account_management/teams/
+[17]: https://app.datadoghq.com/source-code/repositories
+[18]: https://cyclonedx.org/docs/1.4/json/
+[19]: https://cyclonedx.org/docs/1.5/json/
+[20]: https://cyclonedx.org/docs/1.6/json/
+[21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
+[23]: https://docs.datadoghq.com/es/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/es/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
+[25]: https://docs.datadoghq.com/es/data_security/data_retention_periods/
+[26]: https://docs.datadoghq.com/es/account_management/teams/
+[101]: https://docs.datadoghq.com/es/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/es/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/es/data_security/data_retention_periods/
+[27]: /es/security/code_security/troubleshooting/#scan-java-jar-directories

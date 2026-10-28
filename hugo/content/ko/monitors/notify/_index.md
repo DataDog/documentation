@@ -25,7 +25,7 @@ title: Notifications
 Notifications는 모니터의 핵심 구성 요소로, 팀이 문제에 대한 정보를 계속 접할 수 있게 해 주고 문제 해결을 지원합니다. [모니터를 생성][1]할 때 응답이 다음과 같이 기능하도록 구성하세요.
 - 실행 가능한 메시지를 작성합니다.
 - 워크플로를 트리거하거나 모니터를 기반으로 워크플로를 생성합니다.
-- [자동으로 케이스를 생성합니다][2].
+- [자동으로 작업 항목을 생성합니다][2].
 - 자동으로 인시던트를 생성합니다.
 
 ## 효과적인 제목과 메시지 작성 {#constructing-effective-titles-and-messages}
@@ -36,12 +36,12 @@ Notifications는 모니터의 핵심 구성 요소로, 팀이 문제에 대한 �
 
 <div class="alert alert-info"> Markdown 형식 지정 지원은 알림 방법에 따라 다릅니다. 채널에 따라 Markdown 구문의 일부만 지원하는 경우도 있습니다.
 <ul> 
-  <li/>Slack 알림: 기본 형식 지정을 지원합니다(굵게, 기울임꼴, 인라인 코드, 링크). Markdown 헤더(에: <code>#</code>, <code>##</code>) 및 표는 렌더링되지 않고, 일반 텍스트로 표시됩니다.
+  <li/>Slack 알림: 기본 형식 지정을 지원합니다(굵게, 기울임꼴, 인라인 코드, 링크). Markdown 헤더(예: <code>#</code>, <code>##</code>) 및 표는 렌더링되지 않고, 일반 텍스트로 표시됩니다.
   <li/>이메일 알림: 기본 형식 지정을 지원합니다(굵게, 기울임꼴, 인라인 코드, 링크). 표는 Markdown 표로 렌더링되지 않고 메시지 본문에 일반 텍스트로 표시됩니다.
 </ul>
 </div>
 
-{{% collapse-content title="모니터 메시지 예시" level="h4" expanded=false %}}
+{{% collapse-content title="모니터 메시지 예시" level="h3" expanded=false %}}
 모니터 메시지의 일반적인 사용 사례는 문제를 해결할 단계별 방법을 포함하는 것입니다. 예를 들어 다음과 같습니다.
 
 ```text
@@ -66,7 +66,7 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 ## 알림 수신자 {#notification-recipients}
 Datadog에서는 모니터 알림을 관리하는 데 [모니터 알림 규칙][22] 사용을 권장합니다. 알림 규칙을 사용하면 미리 정의된 조건 세트를 기반으로 모니터에 어느 알림 수신자를 추가할지 자동화할 수 있습니다. 모니터 알림의 태그에 따라 모니터 경보를 라우팅하도록 다양한 규칙을 생성하면 각각의 개별 모니터에 수신자나 알림 라우팅 로직을 수동으로 설정할 필요가 없습니다.
 
-알림 규칙과 개별 모니터 양쪽 모두에서 `@notification`을 사용하여 알림에 팀 구성원, 통합, 워크플로 또는 케이스를 추가할 수 있습니다. 입력을 시작하면 Datadog이 드롭다운 메뉴에 기존 옵션을 추천해 드립니다. 옵션을 클릭하여 알림에 해당 옵션을 추가하세요. 또는 **@ 멘션 추가**, **워크플로 추가**나 **케이스 추가**를 클릭해도 됩니다.
+알림 규칙과 개별 모니터 양쪽 모두에서 `@notification`을 사용하여 알림에 팀 구성원, 통합, 워크플로 또는 작업 항목을 추가할 수 있습니다. 입력을 시작하면 Datadog이 드롭다운 메뉴에 기존 옵션을 추천해 드립니다. 옵션을 클릭하여 알림에 해당 옵션을 추가하세요. 또는 {{< ui >}}@ Add Mention{{< /ui >}}, {{< ui >}}Add Workflow{{< /ui >}} 또는 {{< ui >}}Add Case{{< /ui >}}를 클릭하세요.
 
 @notification에는 해당 항목과 마지막 라인 문자 사이에 공백이 한 칸 있어야 합니다.
 
@@ -74,19 +74,19 @@ Datadog에서는 모니터 알림을 관리하는 데 [모니터 알림 규칙][
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% collapse-content title="Integrations" level="h3" expanded=false %}}
 {{% notifications-integrations %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Teams" level="h4" expanded=false %}}
+{{% collapse-content title="Teams" level="h3" expanded=false %}}
 {{% notifications-teams %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="케이스" level="h4" expanded=false %}}
+{{% collapse-content title="케이스" level="h3" expanded=false %}}
 {{% notifications-cases %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="이메일" level="h4" expanded=false %}}
+{{% collapse-content title="이메일" level="h3" expanded=false %}}
 {{% notifications-email %}}
 {{% /collapse-content %}}
 
@@ -104,14 +104,14 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 
 모니터 트리거를 추가하고 나서, [모니터에 기존 워크플로를 추가][10]하거나 새 워크플로를 생성합니다. 모니터 페이지에서 새 워크플로를 생성하는 방법:
 
-1. **워크플로 추가**를 클릭합니다.
-1. **+** 아이콘을 클릭하고 Blueprint를 선택하거나 **처음부터 시작**을 선택합니다.
+1. {{< ui >}}Add Workflow{{< /ui >}}를 클릭합니다.
+1. {{< ui >}}+{{< /ui >}} 아이콘을 클릭하고 Blueprint를 선택하거나 {{< ui >}}Start From Scratch{{< /ui >}}을 선택합니다.
    {{< img src="/monitors/notifications/create-workflow.png" alt="새 워크플로를 추가하려면 + 버튼 클릭" style="width:90%;">}}
 
 워크플로 빌드에 관한 자세한 내용은 [워크플로 빌드][11]를 참조하세요.
 
 ## 인시던트 {#incidents}
-모니터가 `alert`, `warn` 또는 `no data` 상태로 전환될 때 모니터에서 자동으로 인시던트가 생성될 수 있습니다. **인시던트 추가**를 클릭하고 `@incident-` 옵션을 선택합니다. 관리자는 [인시던트 설정][12]에서 `@incident-` 옵션을 생성할 수 있습니다.
+모니터가 `alert`, `warn` 또는 `no data` 상태로 전환될 때 모니터에서 자동으로 인시던트가 생성될 수 있습니다. {{< ui >}}Add Incident{{< /ui >}}를 클릭하고 `@incident-` 옵션을 선택합니다. 관리자는 [인시던트 설정][12]에서 `@incident-` 옵션을 생성할 수 있습니다.
 
 모니터에서 인시던트가 생성되면 해당 모니터의 태그에 따라 자동으로 인시던트의 [필드 값][13]이 채워집니다. 예를 들어 모니터에 태그 `service:payments`가 있는 경우, 인시던트의 서비스 필드가 "payments"로 설정됩니다. 이러한 인시던트에 대한 알림을 받으려면 모니터의 태그가 인시던트 알림 규칙과 일치해야 합니다. **참고**: 인시던트 알림 규칙은 모니터 알림 규칙과 별도로 구성되며 따로 설정해야 합니다. 자세한 내용은 [인시던트 알림][14]을 참조하세요.
 
@@ -125,10 +125,10 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 
 가능한 옵션:
 
-- **기본**: 콘텐츠를 숨기지 않습니다.
-- **쿼리 숨기기**: 알림 메시지에서 모니터의 쿼리를 제거합니다.
-- **핸들 숨기기**: 알림 메시지에 사용된 @-mentions를 제거합니다.
-- **모두 숨기기**: 알림 메시지에 쿼리, 핸들, 각종 스냅샷(메트릭 모니터의 경우) 또는 바닥글의 추가 링크를 포함하지 않습니다.
+- {{< ui >}}Default{{< /ui >}}: 콘텐츠를 숨기지 않습니다.
+- {{< ui >}}Hide Query{{< /ui >}}: 알림 메시지에서 모니터의 쿼리를 제거합니다.
+- {{< ui >}}Hide Handles{{< /ui >}}: 알림 메시지에 사용된 @-mentions를 제거합니다.
+- {{< ui >}}Hide All{{< /ui >}}: 알림 메시지에 쿼리, 핸들, 각종 스냅샷(메트릭 모니터의 경우) 또는 바닥글의 추가 링크를 포함하지 않습니다.
 
 **참고**: 통합의 종류에 따라 일부 콘텐츠가 기본적으로 표시되지 않을 수도 있습니다.
 
@@ -148,7 +148,7 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 에스컬레이션 메시지는 다음과 같은 방식으로 추가할 수 있습니다.
 
 * 원본 알림 메시지의 `{{#is_renotify}}` 블록에(권장).
-* `Configure notifications and automations` 섹션의 *다시 알리기 메시지* 필드에.
+* {{< ui >}}Configure notifications and automations{{< /ui >}} 섹션의 {{< ui >}}Renotification message{{< /ui >}} 필드에서.
 * API의 `escalation_message` 속성으로.
 
 `{{#is_renotify}}` 블록을 사용하는 경우, 다시 알리기에 원본 알림 메시지도 포함됩니다.
@@ -164,10 +164,10 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 
 {{< img src="monitors/notifications/notifications_metadata.png" alt="정책 태그 구성을 조회합니다. '정책 태그' 아래의 '값 선택' 드롭다운 옆에 cost_center, product_id, env의 세 가지 태그 예시가 있습니다." style="width:100%;" >}}
 
-{{% collapse-content title="우선순위" level="h4" expanded=false %}}
+{{% collapse-content title="우선순위" level="h3" expanded=false %}}
 
 모니터와 연결된 우선순위(선택 사항)를 추가하세요. 값은 P1부터 P5까지이며, P1의 우선순위가 가장 높고 P5가 가장 낮습니다.
-알림 메시지에서 모니터 우선순위를 재정의하려면 `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
+알림 메시지에서 모니터 우선순위를 재정의하려면 `{{override_priority 'Pi'}}` where `Pi`는 P1과 P5 사이여야 합니다.
 
 예를 들어 `alert`와 `warning` 알림에 각기 다른 우선순위를 설정할 수 있습니다.
 
@@ -194,7 +194,7 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 
 ## 알림 테스트{#test-notifications}
 
-모니터를 정의한 다음, 모니터 페이지 오른쪽 하단에 있는 **알림 테스트** 버튼을 사용해 알림을 테스트하세요.
+모니터를 정의한 다음, 모니터 페이지 오른쪽 하단에 있는 {{< ui >}}Test Notifications{{< /ui >}} 버튼을 사용해 알림을 테스트하세요.
 
 테스트 알림은 다음 [모니터 유형][19]에 대해 지원됩니다(호스트, 메트릭, 이상, 이상치, 예측, 로그, rum, apm, 통합(검사만), 프로세스(검사만), 네트워크(검사만), 사용자 지정 검사, 이벤트 및 복합 조건).
 
@@ -202,7 +202,7 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 
     {{< img src="/monitors/notifications/test_notification_modal.png" alt="이 모니터의 알림 테스트" style="width:70%;" >}}
 
-1. **테스트 실행**을 클릭하여 모니터에 나열된 사용자와 서비스에 알림을 보냅니다.
+1. {{< ui >}}Run Test{{< /ui >}}을 클릭하여 모니터에 나열된 사용자와 서비스에 알림을 보냅니다.
 
 ### 이벤트 {#events}
 
@@ -225,15 +225,15 @@ Datadog은 여러 모니터에서 한꺼번에 경보 메시지 수신자를 편
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/monitors/configuration
-[2]: /ko/incident_response/case_management/create_case/#automatic-case-creation
+[2]: /ko/incident_response/work_management/create_work_item/#automatic-work-item-creation
 [3]: /ko/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /ko/monitors/notify/variables/
 [6]: /ko/monitors/notify/variables/#conditional-variables
-[8]: /ko/service_management/workflows/
-[9]: /ko/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
-[10]: /ko/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
-[11]: /ko/service_management/workflows/build/
+[8]: /ko/actions/workflows/
+[9]: /ko/actions/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[10]: /ko/actions/workflows/trigger/#add-the-workflow-to-your-monitor
+[11]: /ko/actions/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [13]: /ko/incident_response/incident_management/setup_and_configuration/property_fields
 [14]: /ko/incident_response/incident_management/notification

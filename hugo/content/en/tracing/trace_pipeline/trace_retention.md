@@ -5,9 +5,6 @@ aliases:
 - /tracing/trace_retention/
 - /tracing/trace_queries/one_percent_flat_sampling/
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-  tag: "Blog"
-  text: "Unify and correlate frontend and backend data with retention filters"
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
@@ -20,6 +17,15 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
   tag: "Learning Center"
   text: "APM Rate Limiting and Retention"
+- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+  tag: "Blog"
+  text: "Unify and correlate frontend and backend data with retention filters"
+- link: "https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/"
+  tag: "Blog"
+  text: "Trace AWS Lambda durable functions with Datadog"
+- link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
+  tag: "Architecture Center"
+  text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"
 
 ---
 
@@ -114,7 +120,7 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 
 #### One percent flat sampling
 
-The flat 1% sampling captures:
+The flat 1% sampling retains for 30 days and captures:
 1. All **traces correlated with 1% of ingested RUM sessions which had traces ingested**, ensuring you can always find some indexed sessions have associated trace data. This improves [correlation between APM and RUM][20], allowing you to debug user issues by viewing both frontend sessions and backend traces together. The sample is applied based on the `session_id`, meaning all traces linked to the same RUM session share a consistent indexing decision.
 2. A **uniform 1% sample** of [ingested spans][12], applied based on the `trace_id` so all spans in the same trace share the same sampling decision. Use this sample for general system health monitoring and trend analysis.
 

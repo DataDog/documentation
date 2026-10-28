@@ -49,7 +49,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][4] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -85,7 +85,7 @@ If you've configured the profiler and don't see profiles in the profile search p
    - The application ran for more than 30 seconds
 If it is set to another value or not set at all, the profiler is disabled.
 
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+[4]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -124,7 +124,7 @@ If it is set to another value or not set at all, the profiler is disabled.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file in the `/var/log/datadog` folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: this message means it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][4] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -147,7 +147,7 @@ If it is set to another value or not set at all, the profiler is disabled.
 
    Note that the following message could appear, but it does not impact Datadog profiling: `Profiler signal handler has been replaced. Restoring it.` This indicates only that the Datadog signal handler is reinstalled when it was overwritten.
 
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+[4]: /profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -189,7 +189,7 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
 
    2. Open the `DD-DotNet-Profiler-Native-<Application Name>-<pid>` log file from the default log folder.
 
-   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][1] for more information.
+   3. Look for `libddprof error: Failed to send profile.` entries: This message means that it can't contact the agent. Ensure the `DD_TRACE_AGENT_URL` is set to the correct Agent URL. See [Enabling the .NET Profiler-Configuration][5] for more information.
 
    4. If the `Failed to send profile` message is not present, look for `The profile was sent. Success?` entries.
 
@@ -200,7 +200,7 @@ The default profiler log directory is `%ProgramData%\Datadog .NET Tracer\logs\`.
 
    5. Check the other HTTP codes for possible errors such as 403 for invalid API key.
 
-[1]: /profiler/enabling/dotnet/?tab=linux#configuration
+[5]: /profiler/enabling/dotnet/#configuration
 
 {{% /tab %}}
 
@@ -214,20 +214,45 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## Reduce overhead when using the profiler
 
-The [different profile types][3] have a fixed CPU and memory overhead, so *the more profiled applications, the higher the overhead.*
-
 ### Avoid enabling the profiler machine-wide
 
-Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools. To reduce the amount of resources used by the profiler, you can:
-- Increase the allocated resources, such as increasing CPU cores.
-- Profile only specific applications by setting environment in batch files instead of directly running the application.
+The [different profile types][3] have a fixed CPU and memory overhead per application. Profiling every process on a host increases total resource use. To reduce overhead on all platforms, increase allocated resources (such as CPU cores) or set `DD_PROFILING_WALLTIME_ENABLED=0`.
+
+{{< tabs >}}
+
+{{% tab "Linux with Single Step APM Instrumentation" %}}
+
+To reduce overhead when profiling multiple processes:
+
+- Use `DD_PROFILING_ENABLED=auto` instead of `true` when enabling profiling host-wide. With `auto`, profiling starts only when the application has run for more than 30 seconds **and** at least one trace was created.
+- Use [instrumentation rules][6] to limit which processes receive SSI.
+- Set `DD_PROFILING_ENABLED=false` in a specific process environment to opt that process out of profiling. Tracing is not affected.
+
+[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+To reduce overhead when profiling multiple processes:
+
+- Set profiler environment variables only in the startup script or systemd unit for the application you want to profile. Do not set them in shared host configuration such as `/etc/environment` or with `systemctl set-environment`.
+- In Docker, set profiler variables in the container definition for the specific application (Dockerfile or compose file). Avoid company-wide base images or shell profiles that export profiler variables to unrelated services.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+To reduce overhead when profiling multiple processes:
+
+- Profile only specific applications by setting environment variables in batch files instead of at machine level.
 - Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
-- Disable wall time profiling with the setting `DD_PROFILING_WALLTIME_ENABLED=0`.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Linux Containers
 
-The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
-However, in that case, there will be a CPU consumption increase, even for idle services, because the profiler threads always scan the application's threads. The less available core, the more the CPU consumption increases. 
+The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores. However, in that case, there will be a CPU consumption increase, even for idle services, because the profiler threads always scan the application's threads. The less available core, the more the CPU consumption increases.
 
 Disabling the wall time profiler with the setting `DD_PROFILING_WALLTIME_ENABLED=0` decreases the CPU consumption by the profiler. If this is not enough, increase the CPU cores available for your containers.
 

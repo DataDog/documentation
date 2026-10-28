@@ -86,6 +86,7 @@ For the best experience, download the Datadog <a href="https://docs.datadoghq.co
 | Monaco | +377 |
 | Montenegro | +382 |
 | Morocco | +212 |
+| Nepal | +977 |
 | Netherlands | +31 |
 | New Zealand | +64 |
 | Nigeria*, ** | +234 |
@@ -123,6 +124,7 @@ For the best experience, download the Datadog <a href="https://docs.datadoghq.co
 | United Kingdom | +44 |
 | United States | +1 |
 | Uruguay* | +598 |
+| Vietnam | +84 |
 
 \* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local carrier restrictions or government regulations can limit delivery.
 

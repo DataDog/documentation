@@ -25,7 +25,7 @@ For example, the geoIP parser extracts location from the `network.client.ip` att
 The most common use case is detecting the location of a specific user. For example, the GeoIP Parser is used for iOS logs to provide the location of the user identified in the logs.
 
 ## Before and after state of logs
-{{% collapse-content title="Example: Enriching logs with GeoIP information" level="h4" %}}
+{{% collapse-content title="Example: Enriching logs with GeoIP information" level="h3" %}}
 
 **Before:**
 

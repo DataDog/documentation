@@ -286,7 +286,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Delete Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_description: RDS instance with no client connections and no replica lag.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -298,7 +298,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance Provisioned IOPS
-      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks.
+      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks. Not applicable to Amazon Aurora instances, which do not have a configurable provisioned IOPS setting.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
@@ -420,6 +420,12 @@ multifiltersearch:
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
       resource_type: Managed Disk Snapshot
@@ -444,6 +450,12 @@ multifiltersearch:
       recommendation_type: Delete Container Registry
       recommendation_description: A Container Registry that has never received successful pulls.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: Foundry Account
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Azure Foundry accounts already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Data Explorer Cluster
@@ -455,6 +467,12 @@ multifiltersearch:
       resource_type: Load Balancer
       recommendation_type: Delete Load Balancer
       recommendation_description: Load Balancer with 0 bytes transferred.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no billed data volume, ingested data, or user queries that still incur retention charges, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -516,6 +534,12 @@ multifiltersearch:
       recommendation_type: Downsize SQL Server Database Storage
       recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
       recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Downsize SQL Managed Instance
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay below the configured threshold on a smaller vCore size. Recommends downsizing them by up to two sizes at a time to reduce compute and SQL license costs.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Storage Account
@@ -558,6 +582,12 @@ multifiltersearch:
       recommendation_type: Shutdown Azure VM Scale Set
       recommendation_description: VM instances with low usage that can be shutdown.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Cursor
+      resource_type: Cursor Seat
+      recommendation_type: Enable Cursor Auto Mode
+      recommendation_description: Identifies Cursor seats with significant non-auto model spend and recommends using Auto Mode as the model choice.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Databricks Cluster
@@ -593,6 +623,12 @@ multifiltersearch:
       resource_type: Databricks Cluster
       recommendation_type: Downsize Databricks Job
       recommendation_description: Identifies overprovisioned Databricks jobs and suggests rightsizing to smaller instance types to reduce costs.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: BigQuery Dataset
+      recommendation_type: Delete Idle BigQuery Dataset
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
@@ -666,6 +702,12 @@ multifiltersearch:
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: GCP
+      resource_type: Vertex AI Project
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Google Cloud projects already using Vertex AI prompt caching below the target hit rate and estimates the input cost savings from reaching the target.
+      recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
       resource_type: Kubernetes Cluster
@@ -708,6 +750,12 @@ multifiltersearch:
       recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
       recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: OpenAI
+      resource_type: API Key
+      recommendation_type: Reduce OpenAI Priority Processing
+      recommendation_description: Identifies OpenAI API keys with significant priority-processing spend and recommends moving latency-tolerant traffic to standard to drop the priority premium.
+      recommendation_prerequisites: ""
 ---
 
 
@@ -726,7 +774,7 @@ You can see the detailed logic for each recommendation type, along with observab
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].
 
-You can also query your recommendations from an AI agent with the [`cost_recommendations`][16] tool in the Datadog MCP Server.
+You can also query your recommendations from an AI agent with the [`cost_recommendations`][17] tool in the Datadog MCP Server.
 
 ## Recommendation categories
 
@@ -748,8 +796,8 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
 - [GCP integration and resource collection][10] (for GCP recommendations)
-- [OpenAI integration][17] (for OpenAI recommendations)
-- [Anthropic integration][18] (for Anthropic recommendations)
+- [OpenAI integration][18] (for OpenAI recommendations)
+- [Anthropic integration][19] (for Anthropic recommendations)
 - [Datadog Agent integration][5] (for Downsize recommendations)
 
 ## Setup
@@ -818,7 +866,7 @@ You can change a recommendation status in three ways:
 - **From the side panel**: Click a recommendation to open the side panel, then use the status dropdown to select a new status.
 
 ## Recommendation action-taking
-You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Case Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
+You can act on recommendations to save money and optimize costs. Cloud Cost Recommendations support Jira, 1-click Workflow Automation, and Datadog Work Management. Unused EBS and GP2 EBS volume recommendations also support 1-click Workflow Automation. See the following details for each action-taking option:
 
 - **Jira**: Create Jira issues directly from the recommendation side panel or by selecting multiple recommendations in the {{< ui >}}Active Recommendations{{< /ui >}} list and clicking {{< ui >}}Create Jira issue{{< /ui >}}. Created issues are tagged and link back to the recommendation in Datadog.
 
@@ -828,8 +876,10 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
   - `jira_issues.issue_key:ABC*` - Filter by specific Jira project prefix
 
 - **[Bits Code][14] code fixes**: Code fixes are available for applicable S3 and DynamoDB recommendations, as well as the Downsize Kubernetes Deployment recommendation. In these situations, Bits Code creates production-ready pull requests to implement cloud resource changes and cost optimizations in Terraform or Helm charts, respectively. [Set up Bits Code][13] to use this feature.
+- **Copy Fix Prompt**: For recommendations where a prompt fix is available, click {{< ui >}}Copy Fix Prompt{{< /ui >}} in the recommendation side panel. This copies a ready-to-use prompt to your clipboard, describing the recommendation, the affected resource, and the suggested change. Paste the prompt into the AI coding agent you already use, such as Cursor, GitHub Copilot, or Claude Code. The agent can then implement the change in your repository. This differs from [Bits Code][14], which automatically opens a pull request for a narrower set of recommendation types. No additional setup is required.
 - **1-click Workflow Automation actions**: Actions are available for a limited set of recommendations, allowing users to execute suggested actions, such as clicking {{< ui >}}Delete EBS Volume{{< /ui >}}, directly within Cloud Cost Management.
-- **[Cost Optimization Automation][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
+- **[Cost Optimization Automations][15]**: Set up automations that act on recommendations continuously on a recurring schedule. Automations are scoped to specific accounts, regions, and tags and include safeguards such as pre-action snapshots and optional human approval through Slack or Microsoft Teams.
+- **[Notifications][16]**: Set up notification rules that send a recurring Slack or Microsoft Teams summary of matching recommendations, without taking any action.
 - **Datadog Case Management**: Users can go to the recommendation side panel and click {{< ui >}}Create Case{{< /ui >}} to generate a case to manage and take action on recommendations.
 - **Dismiss**: Use {{< ui >}}Dismiss{{< /ui >}} in the recommendation side panel to hide a recommendation for a chosen time frame and provide a reason. Dismissed recommendations move to the {{< ui >}}Dismissed{{< /ui >}} tab.
 
@@ -856,6 +906,7 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [13]: /bits_ai/bits_code/setup
 [14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
-[16]: /mcp_server/tools/#cost_recommendations
-[17]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
-[18]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+[16]: /cloud_cost_management/recommendations/notifications/
+[17]: /mcp_server/tools/#cost_recommendations
+[18]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[19]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts

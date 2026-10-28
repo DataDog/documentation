@@ -1,5 +1,6 @@
 ---
 title: Run Multiple Pipelines on a Host
+description: Learn which Worker files to add and modify to run multiple Observability Pipelines Workers for different pipelines on a single host.
 disable_toc: false
 aliases:
     - /observability_pipelines/set_up_pipelines/run_multiple_pipelines_on_a_host/

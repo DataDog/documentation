@@ -188,7 +188,7 @@ status:error / status:info
 
 When a widget has multiple queries and a formula, you can hide individual queries so only the formula result appears on the graph. Click the query's letter label to toggle its visibility on the graph. A blue label indicates the query is displayed; a grey label indicates it is hidden. The hidden query is still used in the formula calculation.
 
-{{% collapse-content title="Minimum or Maximum between two queries" level="h4" %}}
+{{% collapse-content title="Minimum or Maximum between two queries" level="h5" %}}
 
 Use `minimum()` and `maximum()` to compare two queries point by point and return the lower or higher value at each timestamp.
 
@@ -197,10 +197,10 @@ Use `minimum()` and `maximum()` to compare two queries point by point and return
 Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
+maximum(system.cpu.user{availability-zone:us-east-1a}, system.cpu.user{availability-zone:us-east-2a})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example-2.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
 
 Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
@@ -211,7 +211,7 @@ minimum(status:error, status:warn)
 {{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="time() function" level="h4" %}}
+{{% collapse-content title="time() function" level="h5" %}}
 
 The `time()` function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
 

@@ -26,6 +26,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
       tag: "Blog"
       text: "The product signal latency gap slowing your growth"
+    - link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
+      tag: "Blog"
+      text: "Coordinate product launches with Datadog"
 site_support_id: getting_started_feature_flags
 ---
 
@@ -95,12 +98,14 @@ Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeatur
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 
-Then, add the following to your project to initialize the SDK:
+Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][2]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][1]. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
+
+Add the following to your project to initialize the SDK:
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="javascript" >}}
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
@@ -111,7 +116,11 @@ const provider = new DatadogProvider({
     site: '{{< region-param key="dd_site" code="true" >}}',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
-    version: '1.0.0'
+    version: '1.0.0',
+    // The provider does not add a request timeout by default.
+    // Limit each configuration request to five seconds (requires version 1.4.0+).
+    // See /feature_flags/client/javascript/#set-a-timeout-and-retries-for-flag-configuration-requests.
+    flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000)
 });
 
 // Set the provider
@@ -119,6 +128,9 @@ await OpenFeature.setProviderAndWait(provider);
 {{< /code-block >}}
 
 <div class="alert alert-info">The browser SDK emits three independent telemetry streams, all enabled by default. <code>enableExposureLogging</code> sends per-evaluation exposure events to the exposures intake. <code>enableFlagEvaluationTracking</code> sends aggregated evaluation telemetry to the flag-evaluation intake. <code>enableRumFeatureFlagTracking</code> attaches flag evaluations to RUM events and is the setting that can affect RUM usage. Disable only the stream you do not need.</div>
+
+[1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[2]: /feature_flags/concepts/monthly_flag_configuration_requests/
 
 {{% /tab %}}
 {{% tab "Node.js server" %}}
@@ -380,7 +392,7 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics-2.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
-For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9].
+For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9]. To attach feature flag data to APM traces and filter traces by flag variant, see [Set Up APM Trace Enrichment for Feature Flags][10].
 
 ## Further reading
 
@@ -395,3 +407,4 @@ For server-side applications, you can also enable flag evaluation metrics to tra
 [7]: /feature_flags/concepts/targeting_rules/
 [8]: /feature_flags/concepts/traffic_splitting/
 [9]: /feature_flags/guide/server_flag_evaluation_metrics/
+[10]: /feature_flags/guide/apm_trace_enrichment/

@@ -46,7 +46,7 @@ Datadog offers unit-aware number formatting for [over 150 units][1], enabling yo
 
 Next, wherever you set a `format` key, use `formatType: hoverFormatter` and define your units as an array.  For example:
 
-{{% collapse-content title="Example Vega-Lite Spec with custom units" level="h4" %}}
+{{% collapse-content title="Example Vega-Lite Spec with custom units" level="h3" %}}
 {{< highlight json "hl_lines=11 19-20" >}}
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -108,7 +108,7 @@ Widgets typically use responsive sizing by default, adjusting automatically to f
 
 For example, you can use the following configuration to specify a height increment for each element:
 
-{{% collapse-content title="Example Vega-Lite Spec with custom height" level="h4" %}}
+{{% collapse-content title="Example Vega-Lite Spec with custom height" level="h3" %}}
 {{< highlight json "hl_lines=3" >}}
 {
     "width": 120,

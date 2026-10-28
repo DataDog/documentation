@@ -1,188 +1,176 @@
 ---
+description: Aprenda a publicar registros en el sistema de mensajería de Google Pub/Sub
+  mediante el Observability Pipelines Worker.
 disable_toc: false
 products:
 - icon: logs
-  name: Logs
+  name: Registros
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
-title: Destino Google Pub/Sub
+title: Destino de Google Pub/Sub
 ---
-
 {{< product-availability >}}
 
-## Información general
+## Descripción general {#overview}
 
-Utiliza el destino Google Pub/Sub de Observability Pipelines para publicar logs en el sistema de mensajería de Google Pub/Sub, de modo que los puedan enviarse a servicios aguas abajo, lagos de datos o aplicaciones personalizadas.
+Utilice el destino de Google Pub/Sub de Observability Pipelines para publicar registros en el sistema de mensajería de Google Pub/Sub, de modo que los registros puedan enviarse a servicios descendentes, lagos de datos o aplicaciones personalizadas.
 
-### Cuándo utilizar este destino
+### Cuándo utilizar este destino {#when-to-use-this-destination}
 
-Escenarios habituales en los que podrías utilizar este destino:
-- Para pipelines de análisis: Dirige los logs hacia Google BigQuery, Data Lake o flujos de trabajo de machine learning personalizados.
-- Para el procesamiento basado en eventos: Publica logs en un tema Pub/Sub para que Google Cloud Functions, Cloud Run Functions y los trabajos de Dataflow puedan llevar a cabo acciones en tiempo real basadas en datos de logs.
+Escenarios comunes en los que podría utilizar este destino:
+- Para analytics pipelines: Envíe registros a Google BigQuery, Data Lake o flujos de trabajo de aprendizaje automático personalizados.
+- Para procesamiento basado en eventos: Publique registros en un tema de Pub/Sub para que Google Cloud Functions, Cloud Run functions y los trabajos de Dataflow puedan realizar acciones en tiempo real basadas en los datos de registro.
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-Antes de configurar el destino, necesitas lo siguiente:
+Antes de configurar el destino, necesita lo siguiente:
 
-- Suscripción Pub/Sub: Crea un tema Pub/Sub y al menos una suscripción para consumir los mensajes.
-- Autenticación: Configura un [método de autenticación estándar de Google Cloud][2]. Estas opciones incluyen:
-    - Una clave de cuenta de servicio (archivo JSON)
-    - Una identidad de carga de trabajo (Google Kubernetes Engine (GKE))
-- Roles IAM:
-    - `roles/pubsub.publisher` para publicar eventos.
-    - `roles/pubsub.viewer` se recomienda para controles de estado.
-        - Si falta el rol, se registra el error `Healthcheck endpoint forbidden` y el worker procede como de costumbre.
-    - Para obtener más información, consulta [Roles de Pub/Sub disponibles][3].
+- Suscripción de Pub/Sub: Cree un tema de Pub/Sub y al menos una suscripción para consumir los mensajes.
+- Autenticación: Configure un [método de autenticación estándar de Google Cloud][2]. Estas opciones incluyen:
+	- Una clave de cuenta de servicio (archivo JSON)
+	- Una identidad de carga de trabajo (Google Kubernetes Engine (GKE))
+- Roles de IAM:
+	- `roles/pubsub.publisher` es necesario para publicar eventos.
+	- `roles/pubsub.viewer` se recomienda para las comprobaciones de estado.
+		- Si falta el rol, se registra el error `Healthcheck endpoint forbidden` y el Worker continúa como de costumbre.
+	- Consulte [Roles de Pub/Sub disponibles][3] para obtener más información.
 
-### Crear una cuenta de servicio para el worker
+### Configure una cuenta de servicio para el Worker {#set-up-a-service-account-for-the-worker}
 
-Una cuenta de servicio en Google Cloud es un tipo de cuenta utilizada únicamente por aplicaciones o servicios.
-- Tiene su propia identidad y credenciales (un archivo de claves JSON).
-- Necesitas asignarle roles IAM para que pueda acceder a recursos específicos.
-- En este caso, el worker de Observability Pipelines utiliza una cuenta de servicio para autenticar y enviar logs a Pub/Sub en tu nombre.
+Una cuenta de servicio en Google Cloud es un tipo de cuenta utilizada solo por aplicaciones o servicios.
+- Tiene su propia identidad y credenciales (un archivo de clave JSON).
+- Usted le asigna roles de IAM para que pueda acceder a recursos específicos.
+- En este caso, Observability Pipelines Worker utiliza una cuenta de servicio para autenticarse y enviar registros a Pub/Sub en su nombre.
 
-Para autenticarse utilizando una cuenta de servicio:
+Para autenticarse mediante una cuenta de servicio:
 
-1. En la consola de Google Cloud, ve a **IAM y Admin** > **[Service Accounts (Cuentas de servicio)][4]**.
-1. Haz clic en **Create a service account** (Crear una cuenta de servicio).
-1. Introduce un nombre y haz clic en **Create and Continue** (Crear y continuar).
-1. Asignar roles:
-    - **Editor Pub/Sub**
-    - **Visor Pub/Sub**
-1. Haz clic en **Done** (Listo).
+1. En la consola de Google Cloud, navegue a **IAM & Admin** > **[Cuentas de servicio][4]**.
+1. Haga clic en **+ Create service account**.
+1. Ingrese un nombre y haga clic en **Create and continue**.
+1. Asigne roles:
+	- **Pub/Sub Publisher**.
+	- **Pub/Sub Viewer**.
+1. Haga clic en **Done**.
 
-#### Métodos de autenticación
+#### Métodos de autenticación {#authentication-methods}
 
-Una vez creada la cuenta de servicio con los roles adecuados, configura uno de los siguientes métodos de autenticación:
+Después de haber creado la cuenta de servicio con los roles correctos, configure uno de los siguientes métodos de autenticación:
 
-##### Opción A: Método de identidad de cargas de trabajo (para GKE, recomendado)
+##### Option A: Workload Identity method (for GKE, recommended) {#option-a-workload-identity-method-for-gke-recommended}
 
-1. Vincula la cuenta de servicio a una cuenta de servicio de Kubernetes (KSA).
-1. Permite que la cuenta de servicio sea suplantada por esa KSA.
-1. Anota la KSA para que GKE sepa qué cuenta de servicio debe utilizar.
-1. La autenticación procede entonces del servidor de metadatos de GCP.
+1. Vincule la cuenta de servicio a una cuenta de servicio de Kubernetes (KSA).
+1. Permita que esa KSA suplante la cuenta de servicio.
+1. Anote la KSA para que GKE sepa qué cuenta de servicio utilizar.
+1. La autenticación proviene entonces del servidor de metadatos de GCP.
 
-##### Opción B: Adjuntar el GSA directamente a una máquina virtual (para Google Compute Engine)
+##### Option B: Attach the GSA directly to a VM (for Google Compute Engine) {#option-b-attach-the-gsa-directly-to-a-vm-for-google-compute-engine}
 
-Utiliza este método de autenticación si ejecutas el worker de Observability Pipelines en una máquina virtual de Google Compute Engine (GCE).
-- Cuando crees o edites la máquina virtual, especifica la cuenta de servicio de Google en **Identity and API access** > **Service account** (Identidad y acceso API > Cuenta de servicio).
+Utilice este método de autenticación si está ejecutando el Observability Pipelines Worker en una VM de Google Compute Engine (GCE).
+- Cuando cree o edite la VM, especifique la cuenta de servicio de Google en **Identity and API access** > **Service account**.
 
-##### Opción C: Ejecutar el servicio como GSA (para Cloud Run o Cloud Functions)
+##### Option C: Run the service as the GSA (for Cloud Run or Cloud Functions) {#option-c-run-the-service-as-the-gsa-for-cloud-run-or-cloud-functions}
 
-Utiliza este método de autenticación si vas a desplegar el worker como un servicio Cloud Run o Cloud Function.
-- En la configuración de despliegue de Cloud Run o Cloud Functions, configura la **cuenta de servicio de ejecución** en la cuenta de servicio de Google que hayas creado.
+Utilice este método de autenticación si está implementando el Worker como un servicio de Cloud Run o una Cloud Function.
+- En la configuración de implementación de Cloud Run o Cloud Functions, establezca la **Execution service account** en la cuenta de servicio de Google que creó.
 
-##### Opción D: Método de clave JSON (cualquier entorno sin vínculos de identidad)
+##### Option D: JSON key method (any environment without identity bindings) {#option-d-json-key-method-any-environment-without-identity-bindings}
 
-1. Abre la nueva cuenta de servicio y ve a **Keys** > **Add key** > **Create new key** (Claves > Añadir clave > Crear nueva clave).
-1. Elige el formato JSON.
-1. Guarda el archivo JSON descargado en una ubicación segura.
-1. Después de instalar el worker, copia o monta el archivo JSON en `DD_OP_DATA_DIR/config/`.
-Puedes hacer referencia a este archivo en el campo **Credentials path** (Ruta de las credenciales) del destino Google Pub/Sub cuando [configures el destino](#set-up-the-destination) en la interfaz de usuario del pipeline.
+1. Abra la nueva cuenta de servicio y navegue a **Keys** > **Add key** > **Create new key**.
+1. Elija el formato JSON.
+1. Guarde el archivo JSON descargado en una ubicación segura.
+1. Después de instalar el Worker, copie o monte el archivo JSON en `DD_OP_DATA_DIR/config/`.
+Usted hace referencia a este archivo en el campo {{< ui >}}Credentials path{{< /ui >}} del destino de Google Pub/Sub cuando [configura el destino](#set-up-the-destination) en la Pipelines UI.
 
-## Instalación
+## Configuración {#setup}
 
-Configura el destino Google Pub/Sub y sus variables de entorno cuando [configures un pipeline][1]. La siguiente información se configura en la interfaz de usuario del pipeline.
+Configure el destino de Google Pub/Sub cuando [configure un pipeline][9]. Usted puede configurar un pipeline en la [interfaz de usuario][1], usando la [API][10], o con [Terraform][11]. Los pasos en esta sección se configuran en la interfaz de usuario.
 
-### Configurar el destino
+Después de seleccionar el destino de Google Pub/Sub en la pipeline UI:
 
-1. Introduce el nombre del proyecto de destino.
-    - Este es el proyecto GCP donde reside tu tema Pub/Sub.
-1. Introduce el tema.
-    - Este es el tema Pub/Sub en el que se publicarán los logs.
-1. En el menú desplegable **Encoding** (Codificación), selecciona si quieres codificar el resultado de tu pipeline en **JSON** o **Mensaje sin procesar**.
-    - **JSON**: Los logs están estructurados como JSON (recomendado si las herramientas aguas abajo necesitan datos estructurados).
-    - **Sin procesar**: Los logs se envían como cadenas sin procesar (se conserva el formato original).
-1. Si tienes un archivo JSON de credenciales, introduce la ruta a tu archivo JSON de credenciales.
-    - Si utilizas una cuenta de servicio JSON: introduce la ruta `DD_OP_DATA_DIR/config/<your-service-account>.json`.
-    - O configura la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS`.
-    - Las credenciales se gestionan automáticamente si se utilizas la [identidad de cargas de trabajo][7] en GKE.
+1. Ingrese el nombre del proyecto de destino.
+	- Este es el proyecto de GCP donde reside su tema de Pub/Sub.
+1. Ingrese el tema.
+	- Este es el tema de Pub/Sub al cual publicar los registros.
+1. En el menú desplegable {{< ui >}}Encoding{{< /ui >}}, seleccione si desea codificar la salida de su canalización en {{< ui >}}JSON{{< /ui >}} o {{< ui >}}Raw message{{< /ui >}}.
+	- {{< ui >}}JSON{{< /ui >}}: Los registros se estructuran como JSON (recomendado si las herramientas posteriores necesitan datos estructurados).
+	- {{< ui >}}Raw{{< /ui >}}: Los registros se envían como cadenas sin formato (conserva el formato original).
+1. Si tiene un archivo JSON de credenciales, ingrese la ruta a su archivo JSON de credenciales.
+	- Si utiliza un JSON de cuenta de servicio: ingrese la ruta `DD_OP_DATA_DIR/config/<your-service-account>.json`.
+	- O establezca la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS`.
+	- Las credenciales se administran automáticamente si utiliza [Workload Identity][7] en GKE.
 
-#### Parámetros opcionales
+### Configuración opcional {#optional-settings}
 
-##### Activar TLS
+#### Habilitar TLS {#enable-tls}
 
-Cambia el interruptor a **Enable TLS** (Activar TLS) si tu organización requiere conexiones seguras con certificados personalizados.
-- `Server Certificate Path`: la ruta al archivo del certificado que fue firmado por el archivo raíz de tu autoridad de certificación (CA) en formato DER o PEM (X.509).
-- `CA Certificate Path`: la ruta al archivo de certificado que es el archivo raíz de tu autoridad de certificación (CA) en DER o PEM (X.509).
-- `Private Key Path`: la ruta al archivo de clave privada `.key` que pertenece a la ruta de tu certificado de servidor en formato DER o PEM (PKCS#8).
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese el identificador de la frase de contraseña de la clave TLS. <b>No</b> ingrese el valor real.</div>
 
-##### Opciones de almacenamiento en buffer
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+#### Almacenamiento en búfer {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}
 
-{{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="Destino Google Pub/Sub con valores de ejemplos" style="width:30%;" >}}
+{{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="El destino de Google Pub/Sub con valores de ejemplo" style="width:30%;" >}}
 
-### Configurar secretos
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Gestión de secretos" %}}
 
-- (Opcional) Identificador de URL de endpoints de Google Pub/Sub:
-    - Por defecto, el worker envía datos al endpoint global: `https://pubsub.googleapis.com`.
-    - Si tu tema Pub/Sub es específico de una región, configura la URL del endpoint alternativo de Google Pub/Sub con el endpoint regional. Para obtener más información, consulta [Acerca de los endpoints Pub/Sub][1]. Introduce la URL del punto final configurado en tu gestor de secretos.
-    - El identificador por defecto es `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
-- Identificador de frases de contraseña TLS de Google Pub/Sub (cuando TLS está activado):
-    - El identificador por defecto es `DESTINATION_GCP_PUBSUB_KEY_PASS`.
+- (Opcional) Identificador de URL del punto de conexión de Google Pub/Sub:
+	- De forma predeterminada, el Worker envía datos al punto de conexión global: `https://pubsub.googleapis.com`.
+	- Si su tema de Pub/Sub es específico de una región, configure la URL del punto de conexión alternativo de Google Pub/Sub con el punto de conexión regional. Consulte [Acerca de los puntos de conexión de Pub/Sub][1] para obtener más información. Ingrese la URL del punto de conexión configurada en su administrador de secretos.
+	- El identificador predeterminado es `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+- Identificador de frase de contraseña TLS de Google Pub/Sub (cuando TLS está habilitado):
+	- El identificador predeterminado es `DESTINATION_GCP_PUBSUB_KEY_PASS`.
 
 [1]: https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 
 {{% /tab %}}
 
-{{% tab "Environment Variables" %}}
+{{% tab "Variables de entorno" %}}
 
-#### Endpoints Pub/Sub alternativos opcionales
+#### Endpoints alternativos opcionales de Pub/Sub {#optional-alternative-pubsub-endpoints}
 
-{{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="Página de instalación que muestra el campo de la variable de entorno de Google Pub/Sub" style="width:70%;" >}}
+{{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="La página de instalación que muestra el campo de variable de entorno de Google Pub/Sub" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Problemas habituales y soluciones:
-- Control de estado prohibido
-    - Comprueba el rol IAM `roles/pubsub.viewer`.
+Problemas comunes y soluciones:
+- Verificación prohibida
+	- Verifique el rol de IAM `roles/pubsub.viewer`.
 - Permiso denegado
-    - Asegúrate de que la cuenta de servicio tiene `roles/pubsub.publisher`.
+	- Asegúrese de que la cuenta de servicio tenga `roles/pubsub.publisher`.
 - Errores de autenticación
-    - Comprueba la ruta JSON de las credenciales o la configuración de cargas de trabajo de GKE.
+	- Verifique la ruta JSON de las credenciales o la configuración de GKE Workload Identity.
 - Eventos descartados
-    - Comprueba las métricas `pipelines.component_discarded_events_total` y `pipelines.buffer_discarded_events_total`.
-    - Aumenta el tamaño del buffer o corrige los filtros mal configurados según sea necesario para resolver el problema.
-- Latencia elevada
-    - Reduce el tamaño del buffer y el tiempo de espera o escala tus workers.
-- No llegan logs
-    - En la configuración del destino de Google Pub/Sub, comprueba el nombre del tema, el proyecto y el endpoint de Pub/Sub (global o regional).
+	- Verifique las `pipelines.component_discarded_events_total` y `pipelines.buffer_discarded_events_total` métricas.
+	- Aumente el tamaño del búfer o corrija los filtros mal configurados según sea necesario para resolver el problema.
+- Latencia alta
+	- Reduzca el tamaño del búfer y el tiempo de espera, o escale sus Workers.
+- No llegan registros
+	- En la configuración de su destino de Google Pub/Sub, verifique cuidadosamente el nombre del tema, el proyecto y el punto de conexión de Pub/Sub (global frente a regional).
 
-## Métricas
+## Métricas de salud {#health-metrics}
 
-### Métricas de estado de los workers
+Para las [métricas de componente][8] y las [métricas de búfer de destino][12] emitidas por todos los destinos, consulte la documentación de [Pipelines Usage Metrics][13]. Para filtrar o agrupar por métricas de destino de Google Pub/Sub, utilice la etiqueta `component_type:gcp_pubsub`.
 
-Consulta las [métricas de Observability Pipelines][8] para ver una lista completa de métricas de estado disponibles.
+### Procesamiento por lotes de eventos {#event-batching}
 
-### Métricas de componente
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Procesamiento por lotes de eventos de destinos][6] para obtener más información.
 
-{{% observability_pipelines/metrics/component %}}
-
-### Métricas de buffer (cuando está activado)
-
-{{% observability_pipelines/metrics/buffer/destinations %}}
-
-#### Métricas de buffer obsoletas
-
-{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
-
-### Procesamiento de eventos por lotes
-
-Un lote de eventos se descarga cuando se cumple uno de estos parámetros. Consulta el [procesamiento de eventos en lotes][6] para obtener más información.
-
-| Eventos máximos     | Bytes máximos       | Tiempo de espera (segundos)   |
-|----------------|-----------------|---------------------|
-| 1,000          | 10,000,000      | 1                   |
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
@@ -190,4 +178,9 @@ Un lote de eventos se descarga cuando se cumple uno de estos parámetros. Consul
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [6]: /es/observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[8]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[8]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[9]: /es/observability_pipelines/configuration/set_up_pipelines/
+[10]: /es/api/latest/observability-pipelines/
+[11]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[12]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[13]: /es/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

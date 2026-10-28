@@ -9,6 +9,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
   tag: "Learning Center"
   text: "APM Rate Limiting and Retention"
+- link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
+  tag: "Architecture Center"
+  text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"
+- link: "https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/"
+  tag: "Architecture Center"
+  text: "Optimizing Distributed Tracing: Best practices for remaining within budget and capturing critical traces"
 
 ---
 
@@ -29,7 +35,7 @@ Set up tracing to gain end-to-end visibility into your applications with fine-gr
 
 The [Ingestion Control page][3] overviews ingestion volumes and configuration settings across your services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page_redesigned.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
 ## Processing pipelines
 

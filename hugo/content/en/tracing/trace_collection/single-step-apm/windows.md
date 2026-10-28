@@ -15,7 +15,12 @@ further_reading:
 
 With Single Step Instrumentation (SSI), you can enable APM for your Java and .NET applications on Windows VMs using a single Datadog Agent installation command.
 
-{{% dd-apm-skill %}}
+{{< skill-callout
+    title="Set up APM with an agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Enable APM on Windows
 
@@ -157,6 +162,8 @@ To enable products, [set environment variables][3] in your application configura
 {{< /site-region >}}
 
 Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
 
 To configure instrumentation rules:
 

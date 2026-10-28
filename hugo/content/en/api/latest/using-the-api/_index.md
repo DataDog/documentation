@@ -28,6 +28,7 @@ Available integrations endpoints:
 - [PagerDuty Integration][6]
 - [Slack Integration][5]
 - [Webhooks Integration][7]
+- [Oracle Cloud Integration][43]
 
 **Platform endpoints**
 
@@ -37,7 +38,7 @@ Use these endpoints to post and fetch data to and from other parts of the Datado
 - The [events][10] endpoints allow you to post and fetch events to and from the [Datadog event explorer][11].
 - Use the [Synthetic Monitoring][12] endpoints to create, start, stop, and see [Synthetic tests][13] results.
 - Use the [Tracing Agent API][14] to send traces to your Datadog Agent, which then forwards them to Datadog.
-- Use the [LLM Observability Export API][36] to access your LLM Observability data for running external evaluations and exporting spans for offline storage.
+- Use the [Agent Observability Export API][36] to access your Agent Observability data for running external evaluations and exporting spans for offline storage.
 
 {{< h2 >}}Visualize your data{{< /h2 >}}
 
@@ -104,10 +105,11 @@ You can also use the Datadog API to manage your account programmatically:
 [33]: /api/v1/key-management/
 [34]: /api/v1/usage-metering/
 [35]: /api/v1/ip-ranges/
-[36]: /llm_observability/evaluations/export_api
+[36]: /llm_observability/investigate/export_api
 [37]: /api/latest/cloudflare-integration/
 [38]: /api/latest/fastly-integration/
 [39]: /api/latest/jira-integration/
 [40]: /api/latest/microsoft-teams-integration/
 [41]: /api/latest/okta-integration/
 [42]: /api/latest/opsgenie-integration/
+[43]: /api/latest/oci-integration/

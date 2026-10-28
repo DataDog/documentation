@@ -2,6 +2,9 @@
 title: Getting Started with AWS
 description: Integrate your Amazon Web Services account with Datadog using CloudFormation. Set up IAM roles, enable service integrations, and configure log forwarding.
 further_reading:
+    - link: 'https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/'
+      tag: 'Architecture Center'
+      text: 'A Guide to Integrating 100+ AWS Accounts with Datadog'
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
       text: 'Key metrics for AWS monitoring'
@@ -42,7 +45,7 @@ This guide walks you through integrating an Amazon Web Services (AWS) account wi
 
 Before you begin, ensure that you have an [AWS][7] account. The CloudFormation template creates an IAM role and associated policy, allowing Datadog's AWS account to make API calls to your AWS account to collect and push data. Your AWS user must have the following IAM permissions to run the template:
 
-{{% collapse-content title="Required IAM permissions" level="h4" expanded=false id="iam-permissions" %}}
+{{% collapse-content title="Required IAM permissions" level="h3" expanded=false id="iam-permissions" %}}
 - cloudformation:CreateStack
 - cloudformation:CreateUploadBucket
 - cloudformation:DeleteStack

@@ -32,7 +32,7 @@ origin.datadoghq.com/location:
 If you deployed resources using `helm`, the annotation format you need to use depends on how `helm install` was invoked.
 These are the possible ways to do it:
 
-{{% collapse-content title="Chart reference" level="h4" expanded=false id="chart-reference" %}}
+{{% collapse-content title="Chart reference" level="h3" expanded=false id="chart-reference" %}}
 
 Use this option when the chart is stored in the git repo in unpacked form.
 
@@ -53,7 +53,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
-{{% collapse-content title="Path to a packaged chart" level="h4" expanded=false id="path-to-chart" %}}
+{{% collapse-content title="Path to a packaged chart" level="h3" expanded=false id="path-to-chart" %}}
 
 Use this option when the chart is stored in the git repo in the form of an archive.
 
@@ -74,7 +74,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
-{{% collapse-content title="Path to an unpacked chart directory" level="h4" expanded=false id="path-to-unpacked-chart" %}}
+{{% collapse-content title="Path to an unpacked chart directory" level="h3" expanded=false id="path-to-unpacked-chart" %}}
 
 Use this option when the chart is stored somewhere in the current git repo and unpacked during the installation.
 
@@ -96,7 +96,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
-{{% collapse-content title="Absolute URL" level="h4" expanded=false id="absolute-url" %}}
+{{% collapse-content title="Absolute URL" level="h3" expanded=false id="absolute-url" %}}
 
 Use the installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`.
 
@@ -115,7 +115,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
-{{% collapse-content title="Chart reference and repo URL" level="h4" expanded=false id="chart-reference-and-repo" %}}
+{{% collapse-content title="Chart reference and repo URL" level="h3" expanded=false id="chart-reference-and-repo" %}}
 
 Use the installation command `helm install --repo https://example.com/charts/ mynginx nginx`.
 
@@ -134,7 +134,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /collapse-content %}}
-{{% collapse-content title="OCI registries" level="h4" expanded=false id="oci-registries" %}}
+{{% collapse-content title="OCI registries" level="h3" expanded=false id="oci-registries" %}}
 
 Use the installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`.
 

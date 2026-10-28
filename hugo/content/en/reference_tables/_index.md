@@ -72,10 +72,12 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
+After creating a table, [edit its rows in the UI](#edit-rows-in-the-ui) without uploading another CSV file.
+
 {{% /tab %}}
 {{% tab "Cloud storage" %}}
 
-{{% collapse-content title="Amazon S3" level="h4" id="amazon-s3" %}}
+{{% collapse-content title="Amazon S3" level="h3" id="amazon-s3" %}}
 
 Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured. **Note**: Reference Tables are not replaced if the content of the CSV file is unchanged.
 
@@ -116,13 +118,13 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then add a name, select {{< ui
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 
 {{% /collapse-content %}}
-{{% collapse-content title="Azure storage" level="h4" id="azure-storage" %}}
+{{% collapse-content title="Azure storage" level="h3" id="azure-storage" %}}
 
 1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
 3. Within your storage account, navigate to {{< ui >}}Access Control (IAM){{< /ui >}} and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 4. Input and select the {{< ui >}}Storage Blob Data Reader{{< /ui >}} role. The [{{< ui >}}Storage Blob Data Reader{{< /ui >}} role][3] allows Datadog to read and list storage containers and blobs.
-5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
+5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}\+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
 
    {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
@@ -140,7 +142,7 @@ For more information, see the [Azure integration documentation][4].
 [4]: /integrations/azure/
 
 {{% /collapse-content %}}
-{{% collapse-content title="Google Cloud storage" level="h4" id="google-cloud-storage" %}}
+{{% collapse-content title="Google Cloud storage" level="h3" id="google-cloud-storage" %}}
 
 ### Google Cloud storage
 
@@ -170,7 +172,7 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
 
 {{% /collapse-content %}}
-{{% collapse-content title="Terraform" level="h4" id="terraform" %}}
+{{% collapse-content title="Terraform" level="h3" id="terraform" %}}
 
 Use the [`datadog_reference_table`][9] resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
 
@@ -222,6 +224,27 @@ Reference Table names and column headers are validated using the following namin
 
 ## Modify a Reference Table
 
+### Edit rows in the UI
+
+Edit individual rows in the UI instead of uploading another CSV file. UI editing is available only for Reference Tables with a **Local File** source. It is not available for cloud storage or integration-backed tables. Editing requires the `reference_tables_write` permission and edit access to the table. See the [Permissions][13] section.
+
+1. Open the Reference Table's detail page.
+2. In **Table Preview**, click {{< ui >}}Edit Table{{< /ui >}}.
+3. Make changes to the rows:
+   - Click a cell to edit its value.
+   - Click {{< ui >}}Add Row{{< /ui >}} to add a row.
+   - Hover over a row and click the trash icon ({{< ui >}}Remove row{{< /ui >}}) to remove it.
+4. Resolve highlighted validation errors, including missing or duplicate primary keys and values that do not match column types.
+5. Click {{< ui >}}Save Version{{< /ui >}} to apply the changes.
+
+Your changes would remain in a draft until you click {{< ui >}}Save Version{{< /ui >}}. The draft includes edits you make on different pages of the table and on rows you find with the search field. Rows you have not edited or removed remain unchanged. Click {{< ui >}}Cancel{{< /ui >}} and confirm to discard unsaved changes.
+
+For tables with fewer than 10,000 rows, use the numbered pages to browse and edit all rows. For tables with 10,000 or more rows, the preview displays the first 100 rows.
+
+For either table size, use the search field to look up and edit a row by its primary key. The field is labeled {{< ui >}}Search by{{< /ui >}} followed by the primary-key column name, for example, {{< ui >}}Search by id{{< /ui >}}.
+
+### Replace data with a CSV file
+
 To modify an existing Reference Table with new data, select a table and click {{< ui >}}Update Config{{< /ui >}} on the top right corner.
 The selected CSV is upserted into the table, meaning that:
 
@@ -267,7 +290,7 @@ To be alerted on errors encountered during imports, use [Event Monitors][4] for 
 You can create monitors from the {{< ui >}}Monitors{{< /ui >}} tab, or click on the Settings icon next to {{< ui >}}New Reference Table +{{< /ui >}} to generate a pre-filled monitor.
 
 ## Reference Table limits
-- A reference table can have up to 50 columns
+- A reference table can have up to 200 columns
 - A single row cannot be larger than 500KiB
 - The size of a reference table file uploaded through the UI can be up to 200 MB
 - The size of a reference table file uploaded through a cloud bucket file can be up to 200 MB
@@ -316,3 +339,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
+[13]: /reference_tables/#permissions

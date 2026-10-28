@@ -1451,6 +1451,8 @@ components:
           description: Description of the dashboard.
           nullable: true
           type: string
+        experience_type:
+          $ref: "#/components/schemas/DashboardExperienceType"
         id:
           description: ID of the dashboard.
           example: "123-abc-456"
@@ -1573,6 +1575,17 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardExperienceType:
+      description: The experience type of the dashboard.
+      enum:
+        - default
+        - product_analytics
+      example: default
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - PRODUCT_ANALYTICS
     DashboardFixedTimeframe:
       description: A fixed dashboard timeframe.
       properties:
@@ -2722,6 +2735,71 @@ components:
             $ref: "#/components/schemas/EmbeddableGraph"
           type: array
       type: object
+    EmbeddedAppWidgetDefinition:
+      additionalProperties: false
+      description: The embedded app widget displays an App Builder app on a dashboard. Exactly one of `app_id` or `template_id` must be provided; they cannot be provided together.
+      properties:
+        app_id:
+          description: UUID of the App Builder app to embed.
+          example: "7e7745f9-4343-4927-b038-80934a355915"
+          type: string
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          maxLength: 5000
+          type: string
+        inputs:
+          description: Inputs passed to the embedded app.
+          items:
+            $ref: "#/components/schemas/EmbeddedAppWidgetInput"
+          type: array
+        template_id:
+          description: ID of the built-in app template to embed.
+          example: ec2_manager
+          type: string
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/EmbeddedAppWidgetDefinitionType"
+      required:
+        - type
+      type: object
+    EmbeddedAppWidgetDefinitionType:
+      default: embedded_app
+      description: Type of the embedded app widget.
+      enum:
+        - embedded_app
+      example: embedded_app
+      type: string
+      x-enum-varnames:
+        - EMBEDDED_APP
+    EmbeddedAppWidgetInput:
+      additionalProperties: false
+      description: An input passed to the embedded app.
+      properties:
+        name:
+          description: Name of the app input.
+          example: environment
+          type: string
+        value:
+          description: Value of the app input. The API accepts a string, number, boolean, object, or a non-empty homogeneous array of those types.
+          example: production
+      required:
+        - name
+        - value
+      type: object
     EnableEmbeddableGraphResponseSchema:
       description: A JSON object containing the success message
       properties:
@@ -3525,6 +3603,7 @@ components:
         - logs
         - spans
         - network
+        - network_device_flows
         - rum
         - security_signals
         - profiles
@@ -3543,6 +3622,7 @@ components:
         - LOGS
         - SPANS
         - NETWORK
+        - NETWORK_DEVICE_FLOWS
         - RUM
         - SECURITY_SIGNALS
         - PROFILES
@@ -4631,6 +4711,402 @@ components:
           format: int64
           type: integer
       type: object
+    HeatgridColor:
+      description: A color string, or two color strings for the light and dark themes, in that order.
+      example: "#FF0000"
+      oneOf:
+        - type: string
+        - $ref: "#/components/schemas/HeatgridThemeColors"
+    HeatgridColorBin:
+      additionalProperties: false
+      description: A color and optional lower threshold for a discrete bin.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        lower_bound:
+          description: Inclusive lower bound. Omit for the first bin.
+          format: double
+          type: number
+      required:
+        - color
+      type: object
+    HeatgridColorConfig:
+      description: Color configuration for continuous gradients or discrete thresholds.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridGradientCustomColor"
+        - $ref: "#/components/schemas/HeatgridGradientPresetColor"
+        - $ref: "#/components/schemas/HeatgridDiscreteCustomColor"
+        - $ref: "#/components/schemas/HeatgridDiscretePresetColor"
+    HeatgridColorStop:
+      additionalProperties: false
+      description: A position and color in a continuous gradient.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        position:
+          description: Position in the gradient, from 0 to 100.
+          example: 100
+          format: int64
+          maximum: 100
+          minimum: 0
+          type: integer
+      required:
+        - position
+        - color
+      type: object
+    HeatgridCustomColorSource:
+      description: Use custom colors.
+      enum:
+        - custom
+      example: custom
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+    HeatgridDiscreteCustomColor:
+      additionalProperties: false
+      description: Discrete thresholds with custom colors.
+      properties:
+        bins:
+          description: |-
+            Two to six bins. Omit `lower_bound` on the first bin. Subsequent lower bounds must be in
+            ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorBin"
+          maxItems: 6
+          minItems: 2
+          type: array
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+      required:
+        - mode
+        - source
+        - bins
+      type: object
+    HeatgridDiscreteMode:
+      description: Use discrete color thresholds.
+      enum:
+        - discrete
+      example: discrete
+      type: string
+      x-enum-varnames:
+        - DISCRETE
+    HeatgridDiscretePresetColor:
+      additionalProperties: false
+      description: A preset discrete color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridGradientCustomColor:
+      additionalProperties: false
+      description: A continuous gradient with custom color stops.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+        stops:
+          description: Two to six stops with positions in ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorStop"
+          maxItems: 6
+          minItems: 2
+          type: array
+      required:
+        - mode
+        - source
+        - stops
+      type: object
+    HeatgridGradientMode:
+      description: Use a continuous color gradient.
+      enum:
+        - gradient
+      example: gradient
+      type: string
+      x-enum-varnames:
+        - GRADIENT
+    HeatgridGradientPresetColor:
+      additionalProperties: false
+      description: A preset gradient color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridLabelColumn:
+      additionalProperties: false
+      description: Configuration of the group label column.
+      properties:
+        width:
+          $ref: "#/components/schemas/HeatgridLabelColumnWidth"
+      required:
+        - width
+      type: object
+    HeatgridLabelColumnWidth:
+      description: Width of the label column.
+      enum:
+        - xs
+        - s
+        - m
+        - l
+        - xl
+      example: xs
+      type: string
+      x-enum-varnames:
+        - XS
+        - S
+        - M
+        - L
+        - XL
+    HeatgridLegend:
+      additionalProperties: false
+      description: Legend configuration for the heatgrid widget.
+      properties:
+        show_caption:
+          description: Whether to display the legend caption.
+          type: boolean
+      type: object
+    HeatgridNestingDisplay:
+      description: Display groups as flat rows.
+      enum:
+        - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+        - FLAT
+    HeatgridPresetColorSource:
+      description: Use a preset color palette.
+      enum:
+        - preset
+      example: preset
+      type: string
+      x-enum-varnames:
+        - PRESET
+    HeatgridSort:
+      additionalProperties: false
+      description: Ordering of the heatgrid rows.
+      properties:
+        nesting_display:
+          $ref: "#/components/schemas/HeatgridNestingDisplay"
+        sort_by:
+          $ref: "#/components/schemas/HeatgridSortBy"
+      required:
+        - nesting_display
+        - sort_by
+      type: object
+    HeatgridSortAggregation:
+      description: Aggregation used to order rows over the displayed time range.
+      enum:
+        - avg
+        - min
+        - max
+        - sum
+      example: avg
+      type: string
+      x-enum-varnames:
+        - AVG
+        - MIN
+        - MAX
+        - SUM
+    HeatgridSortBy:
+      description: Sort rows by aggregated value or group label.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridSortByValue"
+        - $ref: "#/components/schemas/HeatgridSortByLabel"
+    HeatgridSortByLabel:
+      additionalProperties: false
+      description: Sort rows by their group labels.
+      properties:
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByLabelProperty"
+      required:
+        - property
+        - order
+      type: object
+    HeatgridSortByLabelProperty:
+      description: Sort by label.
+      enum:
+        - label
+      example: label
+      type: string
+      x-enum-varnames:
+        - LABEL
+    HeatgridSortByValue:
+      additionalProperties: false
+      description: Sort rows by their aggregated values.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/HeatgridSortAggregation"
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByValueProperty"
+      required:
+        - property
+        - order
+        - aggregation
+      type: object
+    HeatgridSortByValueProperty:
+      description: Sort by value.
+      enum:
+        - value
+      example: value
+      type: string
+      x-enum-varnames:
+        - VALUE
+    HeatgridSortOrder:
+      description: Sort direction.
+      enum:
+        - asc
+        - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+        - ASC
+        - DESC
+    HeatgridThemeColors:
+      description: Two color strings for the light and dark themes, in that order.
+      example: ["#FFFFFF", "#000000"]
+      items:
+        description: Color for the light or dark theme.
+        type: string
+      maxItems: 2
+      minItems: 2
+      type: array
+    HeatgridWidgetDefinition:
+      additionalProperties: false
+      description: The heatgrid visualization displays values for each group over time using color.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColorConfig"
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: Description of the widget.
+          type: string
+        label_column:
+          $ref: "#/components/schemas/HeatgridLabelColumn"
+        legend:
+          $ref: "#/components/schemas/HeatgridLegend"
+        requests:
+          description: Widget requests. The widget displays one formula, which can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetRequest"
+          minItems: 1
+          type: array
+        sort:
+          $ref: "#/components/schemas/HeatgridSort"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/HeatgridWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - sort
+      type: object
+    HeatgridWidgetDefinitionType:
+      default: heatgrid
+      description: Type of the heatgrid widget.
+      enum:
+        - heatgrid
+      example: heatgrid
+      type: string
+      x-enum-varnames:
+        - HEATGRID
+    HeatgridWidgetFormula:
+      additionalProperties: false
+      description: A formula for a heatgrid widget request.
+      properties:
+        alias:
+          description: Expression alias.
+          type: string
+        conditional_formats:
+          description: |-
+            Conditional formatting rules. These rules do not affect heatgrid rendering.
+            Use the widget-level `color` configuration to control cell colors.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: "query1"
+          type: string
+        limit:
+          $ref: "#/components/schemas/WidgetFormulaLimit"
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+        style:
+          $ref: "#/components/schemas/WidgetFormulaStyle"
+      required:
+        - formula
+      type: object
+    HeatgridWidgetRequest:
+      additionalProperties: false
+      description: A request for a heatgrid widget that uses formulas and functions.
+      properties:
+        formulas:
+          description: The single displayed formula can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetFormula"
+          type: array
+        queries:
+          description: Queries returned directly or combined in a formula.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/HeatgridWidgetResponseFormat"
+      required:
+        - response_format
+        - queries
+      type: object
+    HeatgridWidgetResponseFormat:
+      description: Response format for heatgrid queries.
+      enum:
+        - timeseries
+      example: timeseries
+      type: string
+      x-enum-varnames:
+        - TIMESERIES
     Host:
       description: Object representing a host.
       properties:
@@ -6185,6 +6661,7 @@ components:
         - security_runtime_stream
         - security_signals_stream
         - incidents_stream
+        - case_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6205,6 +6682,7 @@ components:
         - SECURITY_RUNTIME_STREAM
         - SECURITY_SIGNALS_STREAM
         - INCIDENTS_STREAM
+        - CASE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -7525,7 +8003,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         sort:
           $ref: "#/components/schemas/LogsSort"
@@ -7577,6 +8055,10 @@ components:
             Hash identifier of the next log to return in the list.
             This parameter is used for the pagination feature.
           nullable: true
+          type: string
+        requestId:
+          description: Unique identifier of the request.
+          example: example-request-id
           type: string
         status:
           description: Status of the response.
@@ -8544,6 +9026,11 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          additionalProperties: {}
+          description: Additional read-only attributes returned for the series.
+          readOnly: true
+          type: object
         display_name:
           description: Display name of the metric.
           example: system.cpu.idle
@@ -8649,6 +9136,12 @@ components:
           example: time_series
           readOnly: true
           type: string
+        resp_version:
+          description: Version of the response format.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
         series:
           description: List of timeseries queried.
           items:
@@ -8660,11 +9153,27 @@ components:
           example: ok
           readOnly: true
           type: string
+        times:
+          description: |-
+            Legacy field, always returned as an empty list. Timestamps are returned
+            in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy timestamp.
+          readOnly: true
+          type: array
         to_date:
           description: End of requested time window, milliseconds since Unix epoch.
           format: int64
           readOnly: true
           type: integer
+        values:
+          description: |-
+            Legacy field, always returned as an empty list. Timeseries values are
+            returned in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy value.
+          readOnly: true
+          type: array
       type: object
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and short name.
@@ -8672,28 +9181,34 @@ components:
       properties:
         family:
           description: Unit family, allows for conversion between units of the same family, for scaling.
-          example: time
+          example: percentage
           readOnly: true
           type: string
+        id:
+          description: Unit identifier.
+          example: 17
+          format: int64
+          readOnly: true
+          type: integer
         name:
           description: Unit name
-          example: minute
+          example: percent
           readOnly: true
           type: string
         plural:
           description: Plural form of the unit name.
-          example: minutes
+          example: percent
           readOnly: true
           type: string
         scale_factor:
           description: Factor for scaling between units of the same family.
-          example: 60.0
+          example: 1.0
           format: double
           readOnly: true
           type: number
         short_name:
           description: Abbreviation of the unit.
-          example: min
+          example: "%"
           readOnly: true
           type: string
       type: object
@@ -9104,6 +9619,61 @@ components:
       type: string
       x-enum-varnames:
         - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityDiffFunction:
+      description: |-
+        Function applied to the measure before it is compared against the predicted bounds.
+      enum:
+        - DIFF
+        - DIFF_PERCENT
+      example: "DIFF"
+      type: string
+      x-enum-varnames:
+        - DIFF
+        - DIFF_PERCENT
+    MonitorFormulaAndFunctionDataQualityDiffType:
+      description: |-
+        How the difference between the source and target measures is computed.
+        `absolute` subtracts the two values, `diff_percent` expresses the difference
+        as a percentage of the source value.
+      enum:
+        - absolute
+        - diff_percent
+      example: "absolute"
+      type: string
+      x-enum-varnames:
+        - ABSOLUTE
+        - DIFF_PERCENT
+    MonitorFormulaAndFunctionDataQualityEntityMetricConfig:
+      description: |-
+        Measure configuration for one side of a source to target comparison.
+      properties:
+        custom_sql:
+          description: Custom SQL query used to compute the measure for this entity.
+          example: "SELECT COUNT(*) FROM users AS dd_value"
+          type: string
+        custom_where:
+          description: Custom WHERE clause applied when computing the measure for this entity.
+          example: "USER_ID = 123"
+          type: string
+        entity_id:
+          description: Identifier of the data entity to measure.
+          example: "01234567-89ab-cdef-0123-456789abcdef"
+          type: string
+        entity_type:
+          description: Type of the data entity to measure.
+          example: "table"
+          type: string
+        group_by_columns:
+          description: Columns to group results by when computing the measure for this entity.
+          example: ["col1", "col2"]
+          items:
+            description: A column name to group results by.
+            type: string
+          type: array
+      required:
+        - entity_id
+        - entity_type
+      type: object
     MonitorFormulaAndFunctionDataQualityMeasure:
       description: |-
         The data quality measure to query. Common values include:
@@ -9112,6 +9682,59 @@ components:
         `sum`, `uniqueness`. Additional values may be supported.
       example: "row_count"
       type: string
+    MonitorFormulaAndFunctionDataQualityModelBoundsOverride:
+      description: |-
+        Restricts which predicted bound the monitor alerts on. `UPPER_ONLY` alerts only when
+        the measure rises above the upper bound, `LOWER_ONLY` only when it falls below the
+        lower bound. When unset, the monitor alerts on both.
+      enum:
+        - UPPER_ONLY
+        - LOWER_ONLY
+      example: "UPPER_ONLY"
+      type: string
+      x-enum-varnames:
+        - UPPER_ONLY
+        - LOWER_ONLY
+    MonitorFormulaAndFunctionDataQualityModelConfiguration:
+      description: |-
+        Tuning options for the anomaly detection model used by the monitor.
+      properties:
+        auto_resolve_days:
+          description: |-
+            Number of days after which an open alert is automatically resolved.
+            When unset, alerts stay open until the measure returns within bounds.
+          example: 7
+          format: int32
+          maximum: 365
+          minimum: 1
+          type: integer
+        enable_flatline_detection:
+          description: |-
+            Whether to alert when the measure stops changing entirely.
+            Defaults to `true`.
+          example: true
+          type: boolean
+        function:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDiffFunction"
+        min_lower_bound_size:
+          description: |-
+            Minimum distance between the predicted value and the lower bound. Widening the
+            lower bound to at least this size suppresses alerts on small downward deviations.
+            When unset, no minimum is enforced.
+          example: 10.0
+          format: double
+          type: number
+        min_upper_bound_size:
+          description: |-
+            Minimum distance between the predicted value and the upper bound. Widening the
+            upper bound to at least this size suppresses alerts on small upward deviations.
+            When unset, no minimum is enforced.
+          example: 10.0
+          format: double
+          type: number
+        model_bounds_override:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelBoundsOverride"
+      type: object
     MonitorFormulaAndFunctionDataQualityModelTypeOverride:
       description: Override for the model type used in anomaly detection.
       enum:
@@ -9145,6 +9768,8 @@ components:
             description: A column name to group results by.
             type: string
           type: array
+        model_configuration:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelConfiguration"
         model_type_override:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride"
         sensitivity:
@@ -9155,6 +9780,8 @@ components:
           example: 3.0
           format: double
           type: number
+        source_to_target_config:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySourceToTargetConfig"
       type: object
     MonitorFormulaAndFunctionDataQualityQueryDefinition:
       description: A formula and functions data quality query.
@@ -9196,6 +9823,27 @@ components:
         - data_source
         - measure
         - filter
+      type: object
+    MonitorFormulaAndFunctionDataQualitySourceToTargetConfig:
+      description: |-
+        Configuration for a source to target monitor, which compares the same measure
+        across two data entities and alerts on the difference between them.
+      properties:
+        diff_type:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDiffType"
+        entity_type:
+          description: Type of the data entities being compared.
+          example: "table"
+          type: string
+        source:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityEntityMetricConfig"
+        target:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityEntityMetricConfig"
+      required:
+        - source
+        - target
+        - diff_type
+        - entity_type
       type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
@@ -11002,19 +11650,23 @@ components:
           format: double
           type: number
         estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         fargate_percentage:
@@ -11114,11 +11766,11 @@ components:
           format: double
           type: number
         llm_observability_percentage:
-          description: The percentage of LLM Observability usage by tag(s).
+          description: The percentage of Agent Observability usage by tag(s).
           format: double
           type: number
         llm_observability_usage:
-          description: The LLM Observability usage by tag(s).
+          description: The Agent Observability usage by tag(s).
           format: double
           type: number
         llm_spans_percentage:
@@ -19859,6 +20511,9 @@ components:
           items:
             $ref: "#/components/schemas/SyntheticsTestRestrictionPolicyBinding"
           type: array
+        bits_ai_auto_investigate:
+          description: Whether Bits AI automatically investigates alerts from the test monitor.
+          type: boolean
         ci:
           $ref: "#/components/schemas/SyntheticsTestCiOptions"
         defaultStepTimeout:
@@ -20638,6 +21293,9 @@ components:
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request in an API test.
+          type: boolean
+        bits_ai_auto_investigate:
+          description: Whether Bits AI automatically investigates alerts from the test monitor.
           type: boolean
         blockedRequestPatterns:
           description: Array of URL patterns to block.
@@ -24505,27 +25163,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for all organizations.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_min_spend_sum:
-          description: Sum of all LLM observability minimum spend over all hours in the current date for all organizations.
+          description: Sum of all Agent observability minimum spend over all hours in the current date for all organizations.
           format: int64
           type: integer
         llm_observability_sum:
-          description: Sum of all LLM observability sessions over all hours in the current date for all organizations.
+          description: Sum of all Agent observability sessions over all hours in the current date for all organizations.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_sum:
@@ -25750,27 +26408,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_min_spend_sum:
-          description: Shows the sum of all LLM Observability minimum spend over all hours in the current date for the given org.
+          description: Shows the sum of all Agent Observability minimum spend over all hours in the current date for the given org.
           format: int64
           type: integer
         llm_observability_sum:
-          description: Shows the sum of all LLM observability sessions over all hours in the current date for the given org.
+          description: Shows the sum of all Agent observability sessions over all hours in the current date for the given org.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_sum:
@@ -27012,27 +27670,27 @@ components:
           format: int64
           type: integer
         llm_observability_15day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 15-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 15-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_30day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 30-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 30-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_60day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 60-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 60-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_90day_retention_spans_agg_sum:
-          description: Shows the sum of all LLM Observability 90-day retention spans over all hours in the current month for all organizations.
+          description: Shows the sum of all Agent Observability 90-day retention spans over all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_agg_sum:
-          description: Sum of all LLM observability sessions for all hours in the current month for all organizations.
+          description: Sum of all Agent observability sessions for all hours in the current month for all organizations.
           format: int64
           type: integer
         llm_observability_min_spend_agg_sum:
-          description: Minimum spend for LLM observability sessions for all hours in the current month for all organizations.
+          description: Minimum spend for Agent observability sessions for all hours in the current month for all organizations.
           format: int64
           type: integer
         logs_archive_search_gb_scanned_agg_sum:
@@ -28242,6 +28900,7 @@ components:
         - $ref: "#/components/schemas/CheckStatusWidgetDefinition"
         - $ref: "#/components/schemas/CohortWidgetDefinition"
         - $ref: "#/components/schemas/DistributionWidgetDefinition"
+        - $ref: "#/components/schemas/EmbeddedAppWidgetDefinition"
         - $ref: "#/components/schemas/EventStreamWidgetDefinition"
         - $ref: "#/components/schemas/EventTimelineWidgetDefinition"
         - $ref: "#/components/schemas/FreeTextWidgetDefinition"
@@ -28249,6 +28908,7 @@ components:
         - $ref: "#/components/schemas/ProductAnalyticsFunnelWidgetDefinition"
         - $ref: "#/components/schemas/GeomapWidgetDefinition"
         - $ref: "#/components/schemas/GroupWidgetDefinition"
+        - $ref: "#/components/schemas/HeatgridWidgetDefinition"
         - $ref: "#/components/schemas/HeatMapWidgetDefinition"
         - $ref: "#/components/schemas/HostMapWidgetDefinition"
         - $ref: "#/components/schemas/IFrameWidgetDefinition"
@@ -29161,7 +29821,9 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_notification_rules_write: Create, edit, and delete monitor notification rules.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
+            monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
@@ -29198,6 +29860,7 @@ components:
             workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
+      x-env-name: DD_BEARER_TOKEN
     apiKeyAuth:
       description: Your Datadog API Key.
       in: header
@@ -31956,7 +32619,10 @@ paths:
         permissions:
           - events_read
     post:
+      deprecated: true
       description: |-
+        This endpoint is deprecated and is available only to organizations that have previously used it. Use the V2 endpoint instead.
+
         This endpoint allows you to post events to the stream.
         Tag them, set priority and event aggregate them with other events.
       operationId: CreateEvent
@@ -33355,8 +34021,9 @@ paths:
           - aws_configuration_edit
   /api/v1/integration/aws/logs:
     delete:
+      deprecated: true
       description: >-
-        Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.
+        **This endpoint is deprecated.** Delete a Datadog-AWS logs configuration by removing the specific Lambda ARN associated with a given AWS account.
       operationId: DeleteAWSLambdaARN
       requestBody:
         content:
@@ -33403,6 +34070,7 @@ paths:
         operator: OR
         permissions:
           - aws_configuration_edit
+      x-sunset: "2027-02-20"
     get:
       deprecated: true
       description: >-
@@ -33453,8 +34121,9 @@ paths:
         permissions:
           - aws_configuration_read
     post:
+      deprecated: true
       description: >-
-        Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.
+        **This endpoint is deprecated.** Attach the Lambda ARN of the Lambda created for the Datadog-AWS log collection to your AWS account ID to enable log collection.
       operationId: CreateAWSLambdaARN
       requestBody:
         content:
@@ -33501,10 +34170,12 @@ paths:
         operator: OR
         permissions:
           - aws_configuration_edit
+      x-sunset: "2027-02-20"
   /api/v1/integration/aws/logs/check_async:
     post:
+      deprecated: true
       description: |-
-        Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input
+        **This endpoint is deprecated.** Test if permissions are present to add a log-forwarding triggers for the given services and AWS account. The input
         is the same as for Enable an AWS service log collection. Subsequent requests will always repeat the above, so this
         endpoint can be polled intermittently instead of blocking.
 
@@ -33560,6 +34231,7 @@ paths:
         operator: OR
         permissions:
           - aws_configuration_read
+      x-sunset: "2027-02-20"
   /api/v1/integration/aws/logs/services:
     get:
       deprecated: true
@@ -33657,8 +34329,9 @@ paths:
           - aws_configuration_edit
   /api/v1/integration/aws/logs/services_async:
     post:
+      deprecated: true
       description: |-
-        Test if permissions are present to add log-forwarding triggers for the
+        **This endpoint is deprecated.** Test if permissions are present to add log-forwarding triggers for the
         given services and AWS account. Input is the same as for `EnableAWSLogServices`.
         Done async, so can be repeatedly polled in a non-blocking fashion until
         the async request completes.
@@ -33722,6 +34395,7 @@ paths:
         operator: OR
         permissions:
           - aws_configuration_read
+      x-sunset: "2027-02-20"
   /api/v1/integration/azure:
     delete:
       description: |-
@@ -35255,7 +35929,7 @@ paths:
                 value:
                   index: "retention-3,retention-15"
                   limit: 25
-                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  query: "service:web-api AND @http.status_code:[200 TO 299]"
                   sort: desc
                   time:
                     from: "2020-02-02T02:02:02.202Z"
@@ -35281,6 +35955,7 @@ paths:
                             - team:A
                           timestamp: "2020-05-26T13:36:14Z"
                         id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                    requestId: example-request-id
                     status: done
               schema:
                 $ref: "#/components/schemas/LogsListResponse"
@@ -36645,6 +37320,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Create a monitor
       tags:
         - Monitors
@@ -36654,6 +37331,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
   /api/v1/monitor/can_delete:
     get:
       description: Check if the given monitors can be deleted.
@@ -37050,6 +37728,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Delete a monitor
       tags:
         - Monitors
@@ -37058,6 +37738,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
     get:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
@@ -37219,6 +37900,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Edit a monitor
       tags:
         - Monitors
@@ -37228,6 +37911,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
       deprecated: true
@@ -38461,7 +39145,10 @@ paths:
       x-menu-order: 5
   /api/v1/query:
     get:
-      description: Query timeseries points.
+      description: |-
+        Query timeseries points. Datadog recommends using the v2
+        `/api/v2/query/timeseries` endpoint over this endpoint for
+        querying timeseries data.
       operationId: QueryMetrics
       parameters:
         - description: Start of the queried time period, seconds since the Unix epoch.
@@ -43779,6 +44466,8 @@ paths:
       description: |-
         Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
 
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
+
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
         Pseudo code example:
@@ -44390,6 +45079,8 @@ paths:
     get:
       description: |-
         Get monthly usage attribution. Multi-region data is available starting March 1, 2023.
+
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
 
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
@@ -46099,6 +46790,7 @@ paths:
 security:
   - apiKeyAuth: []
     appKeyAuth: []
+  - AuthZ: []
 servers:
   - url: https://{subdomain}.{site}
     variables:

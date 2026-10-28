@@ -12,12 +12,6 @@ further_reading:
   text: "Components"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
 {{< img src="actions/app_builder/app-builder-variable.png" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" style="width:70%;" >}}
@@ -43,7 +37,7 @@ You can view the available properties and values for a component in the followin
 - {{< ui >}}Inspect Data{{< /ui >}}: Provides properties and values for a specific component or query in your app.
 - The {{< ui >}}Admin Console{{< /ui >}}: The {{< ui >}}Data{{< /ui >}} tab of the {{< ui >}}Admin Console{{< /ui >}} provides properties and values for all components and queries in your app.
 
-{{% collapse-content title="App State" level="h4" %}}
+{{% collapse-content title="App State" level="h3" %}}
 To access {{< ui >}}App State{{< /ui >}}:
 1. Click {{< ui >}}App Properties{{< /ui >}} in the left side-panel.
 1. Scroll down to the {{< ui >}}App State{{< /ui >}} section.
@@ -51,7 +45,7 @@ To access {{< ui >}}App State{{< /ui >}}:
 {{< img src="actions/app_builder/app-state-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inspect Data" level="h4" %}}
+{{% collapse-content title="Inspect Data" level="h3" %}}
 To access {{< ui >}}Inspect Data{{< /ui >}}:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the {{< ui >}}Inspect Data{{< /ui >}} section.
@@ -59,7 +53,7 @@ To access {{< ui >}}Inspect Data{{< /ui >}}:
 {{< img src="actions/app_builder/inspect-data-2.png" alt="The App State section in App Properties" style="width:80%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Admin Console" level="h4" %}}
+{{% collapse-content title="Admin Console" level="h3" %}}
 To access the {{< ui >}}Admin Console{{< /ui >}}:
 1. Click on the cog ({{< ui >}}Settings{{< /ui >}}) icon and select {{< ui >}}Admin Console{{< /ui >}}.
 1. Click {{< ui >}}Data{{< /ui >}}.

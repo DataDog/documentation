@@ -1,5 +1,6 @@
 ---
 title: Syslog Source
+description: Learn how to collect logs sent to rsyslog or syslog-ng using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs
@@ -14,6 +15,8 @@ products:
 Use Observability Pipelines' rsyslog or syslog-ng to receive logs sent to rsyslog or syslog-ng.
 
 You can also [forward third-party log to syslog](#forward-third-party-logs-to-syslog) and then send them to the Observability Pipelines Worker.
+
+If your logs use a format that the Syslog source doesn't support, see [Parsing](#parsing).
 
 ## Prerequisites
 
@@ -37,6 +40,26 @@ After you select the Syslog source in the pipeline UI:
 {{% observability_pipelines/tls_settings %}}
 
 {{% observability_pipelines/tls_settings_mtls %}}
+
+## Parsing
+
+The Observability Pipelines Worker makes a best effort to parse the following syslog formats:
+
+- [RFC 6587][10]
+- [RFC 5424][11]
+- [RFC 3164][12]
+- Other common variations, such as the NGINX syslog style
+
+If the Worker can't parse a log, an error is logged.
+
+### Parse unsupported syslog formats
+
+If your logs use a format that the Syslog source doesn't support, or parsing fails often:
+
+1. Use the [Socket source][13] instead of the Syslog source to receive the logs.
+1. Add a [Custom Processor][14] to the pipeline to parse the logs with VRL. For example:
+    - Use `parse_regex` to write your own parsing rules.
+    - Use `parse_syslog` and handle parsing errors yourself.
 
 ## Secret defaults
 
@@ -84,3 +107,8 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: https://datatracker.ietf.org/doc/html/rfc6587
+[11]: https://datatracker.ietf.org/doc/html/rfc5424
+[12]: https://datatracker.ietf.org/doc/html/rfc3164
+[13]: /observability_pipelines/sources/socket/
+[14]: /observability_pipelines/processors/custom_processor/

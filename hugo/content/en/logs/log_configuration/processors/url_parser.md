@@ -20,7 +20,7 @@ The URL Parser is used to extract useful information from a URL, for example, lo
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Parsing a URL in custom application logs" level="h4" %}}
+{{% collapse-content title="Example: Parsing a URL in custom application logs" level="h3" %}}
 
 **Before:**
 

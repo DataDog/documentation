@@ -45,7 +45,7 @@ Two initialization parameters are available to control how the session is tracke
 
 To track 100% of your sessions as Browser RUM:
 
-{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+{{% collapse-content title="Latest version" level="h3" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -57,7 +57,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.30.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -69,7 +69,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.20.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -81,7 +81,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.10.2" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -95,7 +95,7 @@ datadogRum.init({
 
 To track 100% of your sessions as Browser RUM & Session Replay:
 
-{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+{{% collapse-content title="Latest version" level="h3" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -107,7 +107,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.30.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -119,7 +119,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.20.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -131,7 +131,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.10.2" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -149,7 +149,7 @@ Use the slider to set the percentage of Browser RUM & Session Replay sessions co
 
 If you set `sessionSampleRate` to 60 and `sessionReplaySampleRate` to 50, 40% of sessions are dropped, 30% of sessions are collected as Browser RUM, and 30% of sessions are collected as Browser RUM & Session Replay.
 
-{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+{{% collapse-content title="Latest version" level="h3" expanded=true %}}
 
 ```
 datadogRum.init({
@@ -161,7 +161,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.30.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.30.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -173,7 +173,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.20.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.20.0" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({
@@ -185,7 +185,7 @@ datadogRum.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v4.10.2" level="h4" expanded=false %}}
+{{% collapse-content title="Before v4.10.2" level="h3" expanded=false %}}
 
 ```
 datadogRum.init({

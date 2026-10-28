@@ -65,25 +65,25 @@ Widgets can visualize data from multiple Datadog sources including:
 
 ## Common use cases
 
-{{% collapse-content title="Infrastructure Monitoring" level="h4" expanded=false %}}
+{{% collapse-content title="Infrastructure Monitoring" level="h3" expanded=false %}}
 - Use **Timeseries** widgets for CPU, memory, and network metrics over time
 - Use **Hostmap** widgets to visualize resource usage across your infrastructure
 - Use **Top List** widgets to identify the most resource-intensive hosts or services
 {{% /collapse-content %}}
 
-{{% collapse-content title="Application Performance" level="h4" expanded=false %}}
+{{% collapse-content title="Application Performance" level="h3" expanded=false %}}
 - Use **Timeseries** widgets to track response times, error rates, and throughput
 - Use **Service Summary** widgets for high-level service health overviews
 - Use **Topology Map** widgets to visualize service dependencies and data flow
 {{% /collapse-content %}}
 
-{{% collapse-content title="Business Intelligence" level="h4" expanded=false %}}
+{{% collapse-content title="Business Intelligence" level="h3" expanded=false %}}
 - Use **Query Value** widgets for key performance indicators and business metrics
 - Use **Funnel** widgets to track user conversion through your application
 - Use **Retention** widgets to analyze user engagement and churn
 {{% /collapse-content %}}
 
-{{% collapse-content title="Incident Response" level="h4" expanded=false %}}
+{{% collapse-content title="Incident Response" level="h3" expanded=false %}}
 - Use **Alert Graph** widgets to show alert history and trends
 - Use **Monitor Summary** widgets for current alert status across your infrastructure
 - Use **Event Stream** widgets for real-time event monitoring

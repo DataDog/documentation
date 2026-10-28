@@ -44,7 +44,7 @@ Require a full window of data
 
 Use the following sections to identify why your monitor is showing `No Data` when you expect it to have data.
 
-{{% collapse-content title="No data appears when you graph metrics" level="h4" %}}
+{{% collapse-content title="No data appears when you graph metrics" level="h3" %}}
 
 #### Root cause
 The monitor shows `No Data` when you graph the metric. No data appears because there is no data.
@@ -65,7 +65,7 @@ While they look similar, `(no groups found)` is specific to multi alert monitors
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Data is sparse or delayed" level="h4" %}}
+{{% collapse-content title="Data is sparse or delayed" level="h3" %}}
 
 #### Root cause
 Data exists but doesn't appear consistently or arrives late.
@@ -85,7 +85,7 @@ To learn how to apply these changes, see [Adjusting No Data alerts for metric mo
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Query with a rollup shows No Data" level="h4" %}}
+{{% collapse-content title="Query with a rollup shows No Data" level="h3" %}}
 
 #### Root cause
 The monitor shows `No Data` even though data exists. If your query contains a [`rollup`][7] function, this could be causing `No Data`.
@@ -102,7 +102,7 @@ If you use rollups in your monitor query, add an evaluation delay at least equal
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Tags contain N/A values" level="h4" %}}
+{{% collapse-content title="Tags contain N/A values" level="h3" %}}
 
 #### Root cause
 The monitor shows `No Data`, but data exists in dashboards. The metric is missing one or more tags that the monitor groups by.
@@ -120,7 +120,7 @@ Ensure that all tags specified in your monitor query are present on your metric 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Insufficient historical data (Anomaly and Forecast monitors)" level="h4" %}}
+{{% collapse-content title="Insufficient historical data (Anomaly and Forecast monitors)" level="h3" %}}
 
 #### Root cause
 Unlike standard monitors, Anomaly and Forecast monitors depend on historical data to evaluate. Without enough history, they cannot produce a result and report `No Data`.
@@ -136,7 +136,7 @@ Allow time for the metric to accumulate more data.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Arithmetic with NaN values" level="h4" %}}
+{{% collapse-content title="Arithmetic with NaN values" level="h3" %}}
 
 #### Root cause
 A monitor reports `No Data` when any query in its arithmetic expression returns NaN.

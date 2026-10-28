@@ -1,5 +1,6 @@
 ---
 title: Google SecOps Destination
+description: Learn how to send logs to Google SecOps using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

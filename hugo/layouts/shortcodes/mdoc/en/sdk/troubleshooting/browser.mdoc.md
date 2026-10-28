@@ -59,15 +59,15 @@ The RUM Browser SDK relies on cookies to store session information and follow a 
 
 | Cookie name        | Details                                                                                                                                                                                                                                                                                                  |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `_dd_s`             | Cookie used to group all events generated from a unique user session across multiple pages. It contains the current session ID, whether the session is excluded due to sampling, and the expiration date of the session. The cookie is extended for an extra 15 minutes every time the user interacts with the website, up to the maximum user session duration (4 hours).|
+| `_dd_s_v2`          | Cookie used to group all events generated from a unique user session across multiple pages. It contains the current session ID, whether the session is excluded due to sampling, and the expiration date of the session. The cookie is extended for an extra 15 minutes every time the user interacts with the website, up to the maximum user session duration (4 hours).|
 | `dd_site_test_*`   | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 | `dd_cookie_test_*` | Temporary cookie used to test for cookie support. Expires instantly.                                                                                                                                                                                                                                     |
 
-**Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in recent versions of the RUM Browser SDK.
+**Note**: The `_dd_l`, `_dd_r`, and `_dd` cookies have been replaced with `_dd_s` in earlier versions of the RUM Browser SDK. Starting with v7, the RUM Browser SDK uses `_dd_s_v2` instead of `_dd_s` so that v7 sessions don't conflict with v6 sessions running on the same domain. On first load, the SDK migrates an existing `_dd_s` session into `_dd_s_v2` automatically.
 
 ## Session IDs, cookies, and RUM applications
 
-There is a one-to-one relation between a RUM session and the RUM application it belongs to. Therefore, the domain set for the `_dd_s` cookie is fully dedicated to the RUM application it is monitoring and cannot monitor any additional applications.
+There is a one-to-one relation between a RUM session and the RUM application it belongs to. The session cookie is `_dd_s_v2` (or `_dd_s` for RUM Browser SDK versions earlier than v7). The domain set for this cookie is fully dedicated to the RUM application it is monitoring. It cannot monitor any additional applications.
 
 ## "No cookie support detected" error with EUA authentication
 

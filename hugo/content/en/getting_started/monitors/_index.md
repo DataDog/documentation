@@ -126,7 +126,7 @@ Send notifications to your team through email, Slack, PagerDuty, and more. You c
 
 {{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
+To add a workflow from [Workflow Automation][14] or a work item from [Work Management][15] to the alert notification, click {{< ui >}}Add Workflow{{< /ui >}} or {{< ui >}}Add Work Item{{< /ui >}}. You can also tag [Datadog Team][16] members using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
@@ -162,6 +162,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /actions/workflows/
-[15]: /incident_response/case_management/
+[15]: /incident_response/work_management/
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

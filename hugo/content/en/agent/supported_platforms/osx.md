@@ -65,7 +65,7 @@ The [Datadog Agent configuration file][7] is located in `/opt/datadog-agent`. Th
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][9])
 - Default tags, log levels, and Datadog configurations.
 
-A fully commented reference file, located in `/opt/datadog-agent/etc/datadog.yaml.example`, lists every available option for comparison or copy-paste.
+A fully commented reference file, located in `/opt/datadog-agent/etc/datadog.yaml.example`, lists every available option for comparison or copy-paste. Alternatively, see the [example Agent configuration file for macOS][10] on GitHub.
 
 ### Integration files
 Configuration files for integrations are found in `/opt/datadog-agent/etc/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, which contains:
@@ -105,4 +105,5 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 [7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: https://app.datadoghq.com/organization-settings/api-keys
 [9]: /agent/configuration/proxy/
+[10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
 [11]: https://install.datadoghq.com/scripts/uninstall_mac_os.sh

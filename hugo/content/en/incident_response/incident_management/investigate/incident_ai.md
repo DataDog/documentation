@@ -16,6 +16,9 @@ further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Configure AI variables in notification and postmortem templates"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response"
 ---
 
 ## Overview
@@ -61,7 +64,13 @@ Start a Bits Investigation directly from your incident Slack channel or the Data
 
 Bits Investigation must be enabled for your organization and you can only trigger an investigation from a **properly configured Datadog Incident Management Slack channel**. The Incident Investigation flow only activates when the system detects a valid incident channel.
 
-**From Slack,** type `@Datadog investigate` in the incident channel to kick off an investigation during an active incident. You can include additional context inline to help the agent narrow its scope from the start:
+From Slack, start an investigation during an active incident in any of these ways:
+
+- Click **Investigate with Bits AI** in the incident actions.
+- Run the `/dd incident investigate` slash command.
+- Type `@Datadog investigate` in the incident channel.
+
+When you use `@Datadog investigate`, you can include additional context inline to help the agent narrow its scope from the start:
 
 | Prompt                      | Behavior                                    |
 |-----------------------------|---------------------------------------------|
@@ -70,11 +79,11 @@ Bits Investigation must be enabled for your organization and you can only trigge
 
 When triggered, the agent automatically pulls in the incident's timeline, linked telemetry signals (traces, metrics, and logs), and any context you provide in the prompt. It then posts updates back to the channel as a thread reply, with a final root cause summary and recommended next steps surfaced to the broader channel when the investigation completes.
 
-{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits Investigation with root cause findings and a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_slack.png" alt="A Datadog incident Slack channel showing a completed Bits Investigation with root cause findings and a View Full Investigation button." >}}
 
 **From the web UI**, you can trigger an investigation directly from the "Investigation" section on the incident overview page.
 
-{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Full Investigation button" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/Triggering_investigations_web.png" alt="The Incident Management overview page showing a completed Bits Investigation in the Investigation section with a View Investigation button." >}}
 
 When triggered, the investigation is embedded in the incident web UI, and Bits Investigation appears as a responder in the Responder Roles section of the page.
 

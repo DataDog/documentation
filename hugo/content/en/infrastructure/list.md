@@ -29,7 +29,7 @@ This page describes the **New** view of the Host List. To switch to the **Legacy
 
 Use the filter panel on the left to narrow the list of hosts:
 
-- **My Teams**: Toggle on to show only hosts associated with your teams.
+- **Teams**: Use the [team filter][19] to show only hosts associated with the teams you select.
 - **Quick filters**: Use the checkboxes at the top of the panel to filter by cloud provider (AWS, Azure, Google Cloud, Oracle, or Alibaba Cloud), telemetry source (Datadog Agent or OpenTelemetry), operating system (Windows, Linux, or Darwin), or hardware (GPU).
 - **Filter Metrics**: Select a metric and define a value range to filter hosts by metric value.
 - **Search facets**: Filter by any host property or tag, such as Cloud Provider, Env, Region, Resource Type, Instance Type, OS, OS Version, Agent, or Docker Version.
@@ -150,3 +150,4 @@ for host in infra['rows']:
 [16]: /getting_started/search/
 [17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
 [18]: /ddsql_editor/#save-and-share-queries
+[19]: /account_management/teams/#team-filter

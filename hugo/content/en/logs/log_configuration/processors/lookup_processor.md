@@ -45,7 +45,7 @@ The lookup processor performs the following actions:
 
 
 ## Before and after state of logs
-{{% collapse-content title="Example: Using the Lookup Processor to enrich logs with human-readable values" level="h4" %}}
+{{% collapse-content title="Example: Using the Lookup Processor to enrich logs with human-readable values" level="h3" %}}
 
 **Before:**
 

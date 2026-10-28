@@ -1,138 +1,162 @@
 ---
+description: Apprenez à contrôler le volume d'ingestion des spans avec les mécanismes
+  de tracing APM pour gérer les coûts tout en maintenant l'observabilité.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentation
-  text: Page de contrôle de l'ingestion
-
+  text: Page Ingestion Control
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: Architecture Center
+  text: 'Maîtriser le traçage distribué : défis liés au volume de données et approche
+    de Datadog pour un échantillonnage efficace'
 title: Contrôle du volume d'ingestion avec le tracing distribué d'APM
 ---
+## Présentation {#overview}
 
-## Présentation
+La [page Ingestion Control ][1] offre une visibilité granulaire sur la configuration de l'ingestion pour tous les services, dans l'agent et dans les SDK. Tous les [mécanismes d'ingestion][2] sont documentés publiquement et configurables.
 
-La [page de contrôle de l'ingestion][1] fournit des informations détaillées sur la configuration de l'ingestion pour tous les services, que ce soit au niveau de l'Agent ou des bibliothèques de tracing. Tous les [mécanismes d'ingestion][2] sont détaillés dans la documentation publique et peuvent être configurés.
+Avec la page Ingestion Control , vous disposez d'une visibilité totale et d'un contrôle complet sur votre volume de spans. Par conséquent, vous pouvez :
+- Ingérer les données les plus pertinentes pour votre activité et vos objectifs d'observabilité.
+- Réduire les coûts réseau en évitant d'envoyer des données de trace inutilisées vers la plateforme Datadog.
+- Contrôler et gérer vos coûts globaux.
 
-La page de contrôle de l'ingestion vous offre une visibilité complète sur votre volume de spans ainsi qu'un ensemble de contrôles pratiques. Grâce à cette page, vous pouvez :
-- ingérer les données les plus pertinentes, en fonction de votre entreprise et de vos objectifs d'observabilité ;
-- réduire les coûts liés au réseau en envoyant uniquement les données de tracing utilisées sur la plateforme Datadog ;
-- contrôler et gérer vos coûts globaux.
+## Effets de la réduction du volume d'ingestion de traces {#effects-of-reducing-trace-ingestion-volume}
 
-## Répercussions de la diminution du volume d'ingestion de traces
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="Échantillonnage de l'ingestion APM affichant 25 pour cent des traces complètes ingérées" style="width:70%;" >}}
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="Échantillonnage de l'ingestion APM indiquant que 25 % des traces ont été ingérées" style="width:70%;" >}}
+Si vous décidez de réduire le volume d'ingestion pour certains services, les **métriques de [requêtes, erreurs et latence][3]** (appelées métriques RED, pour Requests, Errors, and Duration) restent précises à 100 %, car elles sont calculées sur la base de 100 % du trafic de l'application, indépendamment de toute configuration d'échantillonnage. Ces métriques sont incluses lors de l'achat de Datadog APM. Afin de vous assurer d'avoir une visibilité totale sur le trafic de votre application, vous pouvez utiliser ces métriques pour repérer des erreurs potentielles sur un service ou une ressource, en créant des dashboards, des monitors et des SLO.
 
-Si vous choisissez de réduire le volume d'ingestion de certains services, les **[métriques][3] liées aux requêtes, aux erreurs et à la latence** (à savoir les métriques RED, pour Requête, Erreurs et Durée) restent justes, car elles sont calculées à partir de l'ensemble du trafic de l'application, sans tenir compte de la configuration de l'échantillonnage. Ces métriques sont fournies lorsque vous adoptez la solution APM Datadog. Afin de garantir une visibilité complète sur le trafic de votre application, vous pouvez vous servir de ces métriques pour créer des dashboards, monitors et SLO. Vous pourrez ainsi identifier les erreurs potentielles concernant un service ou une ressource.
+**Remarque** : Si vos applications et services sont instrumentés avec des bibliothèques OpenTelemetry et que vous configurez l'échantillonnage au niveau du SDK et/ou au niveau du collecteur, les métriques APM sont basées par défaut sur l'ensemble de données **échantillonné**. Consultez [Ingestion Sampling with OpenTelemetry][4] pour plus d'informations.
 
-Les données des traces sont très répétitives. Pour cette raison, lorsque vous échantillonnez l'ingestion, vous pouvez tout de même étudier des échantillons de traces afin d'analyser la source d'une erreur. Pour les services à haut débit, vous n'avez généralement pas besoin de recueillir chaque requête : les problèmes suffisamment graves sont systématiquement détectables dans plusieurs traces. Les contrôles d'ingestion vous permettent de visualiser les données dont vous avez besoin pour diagnostiquer des problèmes tout en respectant votre marge d'erreur.
+<div class="alert alert-info">Pour calculer les métriques APM à partir de données OpenTelemetry non échantillonnées, placez le <a href="/opentelemetry/setup/collector_exporter/#span-metrics-connector"><code>span_metrics</code> connector</a> avant tout processeur d'échantillonnage. Le connecteur Datadog permet d'obtenir le même résultat dans les configurations existantes. Pour plus d'informations, consultez <a href="/opentelemetry/ingestion_sampling/">Ingestion Sampling with OpenTelemetry</a>.</div>
 
-#### Métriques générées à partir de spans
+Les données de trace sont très répétitives, ce qui signifie que des échantillons de traces pour enquêter sur d'éventuels problèmes restent disponibles avec l'échantillonnage de l'ingestion. Pour les services à haut débit, il n'est généralement pas nécessaire de collecter chaque requête ; un problème suffisamment important doit toujours présenter des symptômes dans plusieurs traces. Les contrôles d'ingestion vous aident à obtenir la visibilité dont vous avez besoin pour résoudre les problèmes tout en restant dans votre budget.
 
-Les [métriques générées à partir de spans][4] reposent sur les spans ingérées.
+#### Métriques issues des spans {#metrics-from-spans}
 
-Toute diminution des taux d'échantillonnage de l'ingestion a une incidence sur les métriques de type **count**. Les métriques de type **distribution**, par exemple les mesures `duration`, ne sont pas concernées par la réduction. En effet, l'échantillonnage est relativement uniforme, ce qui fait que la distribution de la latence continue à fournir une image précise du trafic.
+[Les métriques issues des spans][5] sont basées sur les spans ingérés.
 
-#### Monitors
+La réduction des taux d'échantillonnage d'ingestion impactera toute métrique de type **count**. Les métriques de type **Distribution**, par exemple les mesures `duration`, ne sont pas impactées car l'échantillonnage est principalement uniforme, la distribution des latences reste représentative du trafic.
 
-La diminution du volume d'ingestion a une incidence sur les monitors de **métrique** basés sur des [métriques générées à partir de spans](#metriques-generees-a-partir-de-spans). Les monitors basés sur des métriques **trace.__** demeurent fidèles, car ces métriques sont calculées à partir de l'ensemble du trafic.
+#### monitors {#monitors}
 
-Les monitors [**d'analyse de traces**][5] basés sur des counts sont également affectés par une diminution. Vérifiez si vous avez créé ce type de monitor en recherchant des monitors `type:trace-analytics` depuis la page de gestion des monitors.
+Tout monitor de **métrique** utilisant des [métriques issues des spans](#metrics-from-spans) est impacté par la réduction du volume d'ingestion. Les monitors de métriques basés sur les métriques **trace.__** resteront précis, car ces métriques sont calculées sur la base de 100 % du trafic.
 
-## Évaluer la configuration d'ingestion de vos services
+Les monitors [{{< ui >}}Trace analytics{{< /ui >}}][6] basés sur le nombre sont également impactés. Vérifiez si vous avez créé des monitors d'analyse de traces en recherchant les monitors `type:trace-analytics` sur la page de gestion des monitors.
 
-Pour évaluer le statut actuel de l'instrumentation de vos applications, rendez-vous sur la [page de contrôle de l'ingestion des traces][1]. Cette dernière fournit des informations détaillées sur la configuration de l'Agent et des bibliothèques de tracing.
+## Évaluez la configuration d'ingestion de vos services {#assess-your-services-ingestion-configuration}
 
-### Vérifier si l'allocation d'ingestion mensuelle a été ou non dépassée
+Pour évaluer l'état actuel de l'instrumentation des applications, utilisez la [page Ingestion control des traces][1] qui fournit des informations détaillées sur la configuration de l'agent et du SDK.
+
+### Comprendre si vous respectez votre allocation d'ingestion mensuelle {#understanding-if-you-are-within-your-monthly-ingestion-allocation}
 
 Utilisez le KPI d'utilisation mensuelle de l'ingestion pour estimer votre utilisation par rapport à l'allocation mensuelle de 150 Go de spans ingérées par host APM (cette allocation est cumulée pour tous les hosts APM).
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="KPI d'ingestion excédentaire indiquant une estimation de 170 % de l'utilisation mensuelle (23,3 To tous les mois pour l'ensemble de l'infrastructure)" style="width:40%;" >}}
+{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="KPI de dépassement d'ingestion affichant 170 pour cent de l'utilisation mensuelle estimée de 23,3 To mensuels disponibles sur l'ensemble de l'infrastructure" style="width:40%;" >}}
 
-### Analyse avancée de l'utilisation d'APM
+### Enquête avancée sur l'utilisation de l'APM {#advanced-apm-usage-investigation}
 
-La configuration d'ingestion peut être analysée pour chaque service. Cliquez sur la ligne d'un service pour afficher une synthèse de l'ingestion pour ce service comportant les informations suivantes :
-- **Répartition des motifs d'ingestion** : découvrez le volume d'ingestion généré par chaque [mécanisme d'ingestion][2].
-- **Principaux responsables de l'échantillonnage** : consultez les services en amont qui prennent des décisions d'échantillonnage pour les spans ingérées dans le cadre du [mécanisme d'ingestion par défaut][6].
+La configuration de l'ingestion peut être examinée pour chaque service. Cliquez sur une ligne de service pour voir le résumé de l'ingestion du service, qui affiche :
+- {{< ui >}}Ingestion reason breakdown{{< /ui >}} : quel [mécanisme d'ingestion][2] est responsable du volume d'ingestion
+- {{< ui >}}Top sampling decision makers{{< /ui >}} : quels services en amont prennent les décisions d'échantillonnage pour les spans ingérés concernant le [mécanisme d'ingestion par défaut][7]
 
-Vous pouvez également consulter un [dashboard prêt à l'emploi][7] afin d'obtenir davantage d'insights sur les tendances historiques relatives à votre utilisation de l'ingestion et au volume associé. Dupliquez ce dashboard pour pouvoir modifier les widgets et approfondir vos analyses.
+Un [dashboard prêt à l'emploi][8] est également disponible pour obtenir davantage d'informations sur les tendances historiques liées à votre volume et à votre utilisation d'ingestion. Clonez ce dashboard pour pouvoir modifier les widgets et effectuer des analyses plus poussées.
 
-## Réduire votre volume d'ingestion
+## Réduisez votre volume d'ingestion {#reduce-your-ingestion-volume}
 
-### Identifier les services à l'origine de la majorité du volume d'ingestion
+### Identifiez les services responsables de la majeure partie du volume d'ingestion {#identify-services-responsible-for-most-of-the-ingestion-volume}
 
-Pour identifier les services à l'origine de la majorité du volume d'ingestion, triez le tableau en fonction de la colonne **Downstream Bytes/s**. Cela vous permet de visualiser les services qui prennent le plus de décisions d'échantillonnage et affectent par la même occasion les services en aval.
+Pour identifier quels services sont responsables de la majeure partie du volume d'ingestion, triez le tableau par {{< ui >}}Downstream Bytes/s{{< /ui >}}. Cette colonne vous permet de repérer quels services prennent la plupart des décisions d'échantillonnage, ce qui impacte également les services en aval.
 
-Lorsqu'un service initie une trace, la colonne **Downstream Bytes/s** tient également compte du volume de spans provenant des services en aval pour lesquels le service a pris des décisions d'échantillonnage.
+Si le service initie la trace, **Octets/s en aval** englobe également le volume de spans provenant des services en aval pour lesquels le service a pris la décision d'échantillonnage.
 
-La colonne **Traffic Breakdown** offre une bonne indication de la configuration d'échantillonnage du service.
+La colonne {{< ui >}}Traffic Breakdown{{< /ui >}} donne une bonne indication de la configuration d'échantillonnage du service.
 
 Si le service possède une valeur Downstream Bytes/s élevée et un taux d'échantillonnage important (ce taux est indiqué dans la section bleue de la colonne Traffic Breakdown), la diminution du taux d'échantillonnage de ce service devrait avoir une incidence conséquente sur le volume d'ingestion.
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="Échantillonnage de l'ingestion APM, avec 99 % des traces ingérées et un échantillonnage nul" style="width:70%;" >}}
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="Échantillonnage d'ingestion APM affichant 99 pour cent des traces complètes ingérées, ce qui signifie aucun échantillonnage" style="width:70%;" >}}
 
-### Configurer de façon globale le taux d'échantillonnage de l'ingestion au niveau de l'Agent
+### Configurez globalement le taux d'échantillonnage d'ingestion au niveau de l'Agent {#globally-configure-the-ingestion-sampling-rate-at-the-agent-level}
 
-La colonne **Configuration** indique si des règles d'échantillonnage ont été configurées pour vos services. Si les principaux services possèdent une configuration `AUTOMATIC` dans le tableau, tout changement de la **configuration de l'Agent** entraînera une diminution globale du volume pour l'ensemble des services.
+La colonne {{< ui >}}Configuration{{< /ui >}} vous indique si vos services sont configurés avec des règles d'échantillonnage ou non. Si les principaux services sont étiquetés avec la configuration `AUTOMATIC`, la modification de la **configuration de l'Agent** réduira le volume globalement pour tous les services.
 
-Pour diminuer le volume d'ingestion au niveau de l'Agent, configurez `DD_APM_MAX_TPS` (valeur par défaut : `10`) afin de réduire la part du volume d'échantillonnage en amont. Pour en savoir plus, consultez la documentation relative au [mécanisme d'échantillonnage par défaut][6].
+Pour réduire le volume d'ingestion au niveau de l'Agent, configurez `DD_APM_TARGET_TPS` (défini sur `10` par défaut) afin de réduire la part du volume d'échantillonnage en tête (head-based sampling). En savoir plus sur le [mécanisme d'échantillonnage par défaut][7].
 
-En outre, pour réduire le volume de traces [error][8] et [rare][9], procédez comme suit : 
-- Configurez `DD_APM_ERROR_TPS` pour diminuer la part de l'échantillonnage d'erreurs.
-- Définissez `DD_APM_DISABLE_RARE_SAMPLER` sur true pour interrompre l'échantillonnage de traces rare.
+**Remarque** : cette option de configuration ne prend effet que lors de l'utilisation des **SDK Datadog**. Si l'ingestion OTLP dans l'Agent collecte des données provenant d'applications instrumentées avec OpenTelemetry, la modification de `DD_APM_TARGET_TPS` ne change pas les taux d'échantillonnage appliqués dans les SDK.
 
-### Configurer de façon autonome le taux d'échantillonnage de l'ingestion pour les services au niveau de la bibliothèque
+De plus, pour réduire le volume de traces [d'erreur][9] et [rares][10] :
+- Configurez `DD_APM_ERROR_TPS` pour réduire la part de l'échantillonnage des erreurs.
+- Définissez `DD_APM_DISABLE_RARE_SAMPLER` sur true pour arrêter l'échantillonnage des traces rares.
 
-Lorsque vous configurez des taux d'échantillonnage pour plusieurs services à haut débit, il est possible de réduire une grande partie du volume d'ingestion excédentaire.
+### Configurez indépendamment le taux d'échantillonnage d'ingestion pour les services au niveau de la bibliothèque {#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level}
 
-Cliquez sur un service pour afficher la **synthèse d'ingestion du service**. Consultez la **répartition des motifs d'ingestion** dans le volet latéral pour obtenir une vue d'ensemble de la part du volume d'ingestion attribuée à chaque mécanisme.
+En configurant les taux d'échantillonnage pour quelques services à haut débit, la majeure partie du volume d'ingestion « excédentaire » peut être réduite.
 
-Si l'échantillonnage en amont (`auto` ou `rule`) constitue le principal motif pour la majorité du volume d'ingestion, vous pouvez configurer le volume en définissant une règle d'échantillonnage au niveau de la bibliothèque de tracing.
+Cliquez sur un service pour afficher le {{< ui >}}Service Ingestion Summary{{< /ui >}}. Regardez le {{< ui >}}Ingestion reasons breakdown{{< /ui >}} dans le panneau latéral, qui donne un aperçu de la part du volume d'ingestion attribuée à chaque mécanisme.
 
-Cliquez sur le bouton **Manage Ingestion Rate** pour configurer un taux d'échantillonnage pour le service. Sélectionnez le langage du service ainsi que le taux d'échantillonnage de l'ingestion à appliquer.
+Si la raison principale de la majeure partie du volume d'ingestion est l'échantillonnage en tête (`auto` ou `rule`), le volume peut être configuré en définissant une règle d'échantillonnage au niveau du SDK.
 
-**Remarque** : vous devez redéployer l'application pour que les modifications apportées à la configuration s'appliquent. Datadog vous conseille de modifier la configuration à l'aide de [variables d'environnement][10].
+Cliquez sur le bouton {{< ui >}}Manage Ingestion Rate{{< /ui >}} pour configurer un taux d'échantillonnage pour le service. Sélectionnez la langue du service et le taux d'échantillonnage d'ingestion que vous souhaitez appliquer.
 
-## Définition des motifs d'ingestion
+**Remarque :** L'application doit être redéployée afin d'appliquer les modifications de configuration. Datadog recommande d'appliquer les modifications en définissant des [variables d'environnement][11].
 
-_Vérifiez quels mécanismes d'ingestion sont à l'origine de la majorité du volume d'ingestion._
+### Échantillonnage de traces avec OpenTelemetry {#trace-sampling-with-opentelemetry}
 
-Par défaut, le mécanisme d'échantillonnage de traces est basé sur un fonctionnement en amont. La décision d'échantillonnage d'une trace est prise au début de son cycle de vie, puis propagée en aval dans le contexte des requêtes, afin que vous puissiez toujours visualiser et analyser des traces complètes.
+Si vos applications et services sont instrumentés avec des bibliothèques OpenTelemetry et que vous utilisez le collecteur OpenTelemetry, vous pouvez utiliser les fonctionnalités d'échantillonnage OpenTelemetry suivantes :
 
-L'échantillonnage en amont est configurable dans les bibliothèques de tracing ou depuis l'Agent Datadog :
+- [TraceIdRatioBased][12] et [ParentBased][13] sont 2 échantillonneurs intégrés qui vous permettent de mettre en œuvre un échantillonnage déterministe en tête en fonction du trace_id au niveau du **SDK**.
+- Le [Tail Sampling Processor][14] et le [Probabilistic Sampling Processor][15] vous permettent d'échantillonner des traces en fonction d'un ensemble de règles au niveau du **collecteur**.
 
-| Motif d'ingestion   | Lieu             | Description du mécanisme d'ingestion | Valeur par défaut |
+L'utilisation de l'une ou l'autre de ces deux options génère des [métriques APM](#effects-of-reducing-trace-ingestion-volume) échantillonnées.
+
+## Glossaire des raisons d'ingestion {#ingestion-reasons-glossary}
+
+_Savoir quels mécanismes d'ingestion sont responsables de la majeure partie du volume d'ingestion_
+
+Le mécanisme par défaut pour échantillonner les traces est le head-based sampling. La décision d'échantillonner ou non une trace est prise au début de son cycle de vie et propagée en aval dans le contexte des requêtes afin de garantir que vous puissiez toujours visualiser et analyser des traces complètes.
+
+Le head-based sampling est configurable dans les SDK ou depuis Datadog Agent :
+
+| raison d'ingestion   | Où             | Description du mécanisme d'ingestion | Par défaut |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | [Agent](#configurer-de-facon-globale-le-taux-d-echantillonnage-de-l-ingestion-au-niveau-de-l-Agent)             | L'Agent Datadog applique des taux d'échantillonnage aux bibliothèques de tracing.    | 10 traces par seconde et par Agent |
-| `rule`             | [Bibliothèques de tracing](#configurer-de-facon-autonome-le-taux-d-echantillonnage-d-ingestion-pour-les-services-au-niveau-de-la-bibliothèque)  | Les bibliothèques définissent le pourcentage d'échantillonnage pour certains services.   | null                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Datadog Agent distribue les taux d'échantillonnage aux SDK.    | 10 traces par seconde par Agent |
+| `rule`             | [Bibliothèques de tracing](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | Le pourcentage d'échantillonnage défini par les bibliothèques pour des services spécifiques.   | null                 |
 
 
-Plusieurs autres motifs d'ingestion peuvent s'afficher dans la page de contrôle de l'ingestion et, sous la forme de tag, dans la métrique `datadog.estimated_usage.apm.ingested_bytes`. Ces motifs d'ingestion peuvent être à l'origine de votre volume d'ingestion :
+Plusieurs autres raisons d'ingestion sont affichées sur la page Ingestion Control et sous forme de tag sur la métrique `datadog.estimated_usage.apm.ingested_bytes`. Ces raisons d'ingestion peuvent être responsables de votre volume d'ingestion :
 
-| Motif d'ingestion   | Lieu             | Description du mécanisme d'ingestion | Valeur par défaut |
+| raison d'ingestion   | Où             | Description du mécanisme d'ingestion | Par défaut |
 |--------------------|-------------------|-----------------------|---------|
-| `error`            | [Agent](#configurer-de-facon-globale-le-taux-d-echantillonnage-de-l-ingestion-au-niveau-de-l-Agent)             | Échantillonnage des erreurs non interceptées par l'échantillonnage en amont.             | 10 traces par seconde et par Agent (null si des règles sont définies) |
-| `rare`            | [Agent](#configurer-de-facon-globale-le-taux-d-echantillonnage-de-l-ingestion-au-niveau-de-l-Agent)             |  Échantillonnage de traces rare (permettant de couvrir toutes les combinaisons d'un ensemble de tags de span).        | 5 traces par seconde et par Agent (null si des règles sont définies) |
-| `manual`             | Dans le code         | Remplacement d'une décision dans le code visant à conserver ou à ignorer une span et ses enfants.    | null |
-| `analytics`          | Agent et bibliothèques de tracing | [Mécanisme d'ingestion obsolète][11] permettant d'échantillonner des spans individuelles sans la trace complète.   | null                 |
+| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Échantillonnage des erreurs non interceptées par le head-based sampling.             | 10 traces par seconde par Agent (null, si des règles sont définies) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Échantillonnage des traces rares (capturant toutes les combinaisons d'un ensemble de span tags).        | 5 traces par seconde par Agent (null, si des règles sont définies) |
+| `manual`             | Dans le code | Remplacement de la décision dans le code pour conserver ou supprimer un span et ses enfants.    | null |
+| `analytics`          | Agent et bibliothèques de tracing | [Mécanisme d'ingestion obsolète][16] qui échantillonne des spans individuels sans la trace complète.   | null                 |
 
 D'autres solutions peuvent également être à l'origine d'un volume de spans échantillonnées :
 
-- `synthetics` et `synthetics-browser` : les tests Browser et API sont associés à la trace générée par le test.
-- `rum` : les requêtes provenant d'applications Web et mobiles sont liées aux traces correspondantes du backend.
-- `lambda` et `xray` : il s'agit des traces générées par les fonctions AWS Lambda et instrumentées avec des bibliothèques X-Ray ou Datadog.
+- `synthetics` et `synthetics-browser` : Les tests API et navigateur sont connectés à la trace générée par le test.
+- `rum` : Les requêtes provenant d'applications web et mobiles sont liées aux traces backend correspondantes.
+- `lambda` et `xray` : Traces générées à partir de fonctions AWS Lambda instrumentées avec des bibliothèques X-Ray ou Datadog.
 
 Consultez la [documentation relative aux mécanismes d'ingestion][2] pour en savoir plus sur les motifs d'ingestion.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/trace_pipeline/ingestion_controls
 [2]: /fr/tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /fr/tracing/metrics/metrics_namespace/
-[4]: /fr/tracing/trace_pipeline/generate_metrics/
-[5]: /fr/monitors/create/types/apm/?tab=analytics
-[6]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
-[7]: /fr/tracing/trace_pipeline/metrics/
-[8]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
-[9]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
-[10]: /fr/tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#in-tracing-libraries-user-defined-rules
-[11]: /fr/tracing/legacy_app_analytics
+[4]: /fr/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
+[5]: /fr/tracing/trace_pipeline/generate_metrics/
+[6]: /fr/monitors/types/apm/?tab=analytics
+[7]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[8]: /fr/tracing/trace_pipeline/metrics/
+[9]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#error-traces
+[10]: /fr/tracing/trace_pipeline/ingestion_mechanisms/#rare-traces
+[11]: /fr/tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#in-tracing-libraries-user-defined-rules
+[12]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
+[13]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
+[16]: /fr/tracing/legacy_app_analytics

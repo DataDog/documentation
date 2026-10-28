@@ -34,5 +34,4 @@ A short learning period is applied for new rules or newly observed values for a 
 - Scope the query narrowly. Filter by service, environment, team, or endpoint to reduce noise.
 - Start with managed default rules for broad coverage, then add custom anomaly rules for high-volume log sources.
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=anomaly
-[2]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/?tab=anomaly#rule-multi-triggering-rt-anomaly
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=anomaly

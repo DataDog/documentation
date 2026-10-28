@@ -13,18 +13,17 @@ further_reading:
   text: ログのパースに関する問題を調査する方法
 title: Agent によって追跡されるログファイルの数を増やす
 ---
-
-Agent の設定ファイル (`/etc/datadog-agent/datadog.yaml`) にある `logs_config.open_files_limit` パラメーターは、Agent が同時に監視できるログ ファイルの最大数を決定します。この上限は、大規模なディレクトリでワイルド カードを使用した場合のパフォーマンス上の問題を防ぐために設けられています。このパラメーターを調整することで、上限を引き上げることができます。
+Agent の設定ファイル (`logs_config.open_files_limit`) の `/etc/datadog-agent/datadog.yaml` パラメータは、Agent が同時にテールできるログファイルの最大数を決定します。この制限は、巨大なディレクトリでワイルドカードが設定されている場合に発生するパフォーマンスの問題を防ぐために設定されています。このパラメータを調整することで、制限を増やすことができます。
 
 ```yaml
 logs_config:
   open_files_limit: 500
 ```
 
-コンテナ環境では、`DD_LOGS_CONFIG_OPEN_FILES_LIMIT` 環境変数を設定することができます。
+コンテナ化された環境では、`DD_LOGS_CONFIG_OPEN_FILES_LIMIT` 環境変数を設定できます。
 
-デフォルト値は、Agent のバージョンとオペレーティングシステムによって異なります。ご利用の Agent バージョンのデフォルト値を確認するには、Datadog Agent リポジトリの [config_template.yaml ファイル][1]を参照してください。正しいデフォルト値を確認するために、必ずご利用の Agent バージョンに対応するタグを選択してください。
+デフォルト値は、Agent のバージョンとオペレーティングシステムによって異なります。お使いの Agent バージョンのデフォルト値をチェックするには、Datadog Agent リポジトリの [example Agent configuration files][1] を参照してください。お使いのオペレーティングシステムのファイルを開いてください。正しいデフォルト値を確認するために、必ずお使いの Agent バージョンに対応するタグを選択してください。
 
-**注**: 追跡されるログファイルの制限を増やすと、Agent のリソース消費量が増加する場合があります。
+**注**: テールできるログファイルの制限を増やすと、Agent のリソース消費量が増加する可能性があります。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/369a8dbb39dc6e8601d82c8f43caaaf88d6a0a55/pkg/config/config_template.yaml#L987-L993
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example

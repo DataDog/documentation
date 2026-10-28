@@ -19,6 +19,12 @@ further_reading:
   - link: "/mcp_server/tools/#serverless_onboarding"
     tag: "Documentation"
     text: "Datadog MCP Server: serverless_onboarding tool"
+  - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps"
+    tag: "Documentation"
+    text: "Send Azure Container Apps traces to Datadog with OTLP"
+  - link: "/serverless/azure_container_apps/otel_managed_agent/"
+    tag: "Documentation"
+    text: "Send Azure Container Apps traces with the managed OpenTelemetry agent"
 ---
 
 ## Overview
@@ -37,7 +43,15 @@ Then, choose one of two paths to instrument your application with the `serverles
 - **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the AI Setup CLI or the Datadog MCP Server.
 - **[Set up with manual instrumentation][3]**: Instrument your service yourself, with per-runtime steps for the in-container and sidecar approaches. 
 
+To send traces through Azure's managed OpenTelemetry agent instead of `serverless-init`, see [Send Azure Container Apps Traces with the Managed OpenTelemetry Agent][4].
+
 ## Set up with agentic onboarding
+
+{% site-region region="gov,gov2" %}
+{% alert level="danger" %}
+This feature is not supported for your selected [Datadog site](/getting_started/site) ({% region-param key="dd_site_name" /%}).
+{% /alert %}
+{% /site-region %}
 
 Two paths use the same [Datadog account][1]:
 
@@ -71,4 +85,5 @@ Help me monitor my Azure Container Apps services with Datadog
 {% /tabs %}
 
 [3]: /serverless/azure_container_apps/manual_instrumentation/
+[4]: /serverless/azure_container_apps/otel_managed_agent/
 

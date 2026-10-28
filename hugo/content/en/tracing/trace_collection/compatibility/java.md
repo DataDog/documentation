@@ -31,12 +31,12 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
     <th>Support level</th>
   </thead>
   <tr>
-    <td>from 27 and upward</td>
+    <td>from 28 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
-    <td>from 18 to 26</td>
+    <td>from 18 to 27</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -260,6 +260,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Datanucleus JDO     | 4.0+             | Fully Supported                                        | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+             | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+            | Fully Supported                                        | `graphql-java`                                 |
+| Guidewire (PolicyCenter, BillingCenter) | 10.0+ | Fully Supported                                        | `guidewire`, `guidewire-wsi`   |
 | Hazelcast (client)  | 3.6+             | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+             | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+             | Fully Supported                                        | `hystrix`                                      |
@@ -329,7 +330,7 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
 
 You can view traces using the [Trace Explorer][9].
 
-{{% collapse-content title="Troubleshooting" level="h4" %}}
+{{% collapse-content title="Troubleshooting" level="h5" %}}
 ##### Not attaching the Datadog Java SDK during the training run
 
 If you see this warning in production, it means the Datadog Java SDK wasn't attached during training:
@@ -428,7 +429,7 @@ After completing the setup, the service should send traces to Datadog.
 
 You can view traces using the [Trace Explorer][9].
 
-{{% collapse-content title="Troubleshooting" level="h4" %}}
+{{% collapse-content title="Troubleshooting" level="h5" %}}
 ##### Features are not enabled or configured correctly for native images
 
 There are known issues with accessing system properties at runtime from a binary built with Graal Native Image.
