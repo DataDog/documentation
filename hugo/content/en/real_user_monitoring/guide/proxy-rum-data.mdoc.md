@@ -30,7 +30,7 @@ The RUM Browser SDK can be configured to send requests through a proxy. When you
 To successfully forward a request to Datadog, your proxy must
 
 1. [Build the Datadog intake URL](#build-the-datadog-intake-url).
-2. Add an `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
+2. Add an `X-Forwarded-For` header containing the original client IP address. See [Client IP address and geolocation](#client-ip-address-and-geolocation).
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
@@ -97,6 +97,12 @@ Your Datadog intake URL should have the format `<INTAKE_ORIGIN>/<PATH><PARAMETER
     The request parameters (for example, `ddsource=browser&...`) can be accessed in the request's `ddforward` parameter (for example, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
 
 {% /table %}
+
+### Client IP address and geolocation
+
+For proxied Browser RUM requests, Datadog uses the first (leftmost) non-empty entry in the comma-separated `X-Forwarded-For` header as the client IP address. Datadog uses this address to populate `session.ip` and derive geolocation data, subject to the application's [IP address and geolocation collection settings][4].
+
+For example, if the header is `X-Forwarded-For: 203.0.113.42, 198.51.100.10`, Datadog selects `203.0.113.42`. Configure your proxy to preserve the original client IP address as the first non-empty entry in this header.
 
 ## SDK setup
 
@@ -234,3 +240,4 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 [1]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=rum#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 [3]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[4]: /data_security/real_user_monitoring/#ip-address

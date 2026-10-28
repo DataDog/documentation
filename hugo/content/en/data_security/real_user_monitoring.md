@@ -119,6 +119,9 @@ With respect to URLs, you have the option to track pageviews manually to remove 
 You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
 
 #### IP address
+
+For Browser RUM data sent through a proxy, Datadog uses the first (leftmost) non-empty entry in the comma-separated `X-Forwarded-For` header to populate `session.ip` and derive geolocation data. Configure the proxy to forward the original client IP address in that position. For setup details and an example, see [Proxy Your Browser RUM Data][22].
+
 After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the {{< ui >}}User Data Collection{{< /ui >}} tab:
 
 {{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
@@ -159,3 +162,4 @@ See [privacy options specific to Session Replay][19]. Masking in Session Replay 
 [19]: /session_replay/privacy_options?platform=browser
 [20]: https://www.datadoghq.com/private-beta/product-analytics/
 [21]: /security/sensitive_data_scanner/setup/telemetry_data/?tab=logs#mask-action
+[22]: /real_user_monitoring/guide/proxy-rum-data/#client-ip-address-and-geolocation
