@@ -8,9 +8,6 @@ further_reading:
 - link: "/gpu_monitoring/tracing"
   tag: "Documentation"
   text: "Continuous Tracing with GPU Monitoring"
-- link: "/integrations/slurm/"
-  tag: "Documentation"
-  text: "Slurm integration"
 - link: "/gpu_monitoring"
   tag: "Documentation"
   text: "Learn more about what GPU Monitoring offers"
@@ -42,6 +39,7 @@ Select the tab that matches your environment:
 
 To begin monitoring your training workloads, you must first meet the following criteria:
 - You have [GPU Monitoring enabled][1].
+- You are running the Datadog Cluster Agent version 7.80 or later.
 - You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
 
 ### 0. Enable GPU Monitoring
