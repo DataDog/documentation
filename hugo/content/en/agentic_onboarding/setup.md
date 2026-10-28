@@ -1,6 +1,6 @@
 ---
 title: Agentic Onboarding Setup
-description: Instrument your applications with Datadog using the AI Setup CLI or the Datadog MCP Server.
+description: Instrument your applications with Datadog using the Pup CLI `setup` command or the Datadog MCP Server.
 further_reading:
 - link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
   tag: "Blog"
@@ -11,16 +11,16 @@ further_reading:
 
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
-- [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
+- [Pup CLI setup](#pup-cli-setup): Set up Datadog from a terminal with `pup setup`, without a coding assistant.
 - [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
-## AI Setup CLI
+## Pup CLI setup
 
-The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
+`pup setup` is the setup command of the [Pup CLI][20], Datadog's command-line interface. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
 
-The CLI can:
+`pup setup` can:
 
 - Create a Datadog account end-to-end from the terminal
 - Link an existing Datadog account to your local environment
@@ -29,11 +29,11 @@ The CLI can:
 
 ### Prerequisites
 
-- Node.js 22 or later
+- Node.js 22 or later. `pup setup` runs Datadog's setup package with `npx`, so it needs Node.js even if you installed Pup with Homebrew or a prebuilt binary.
 
 ### Supported products
 
-The CLI can set up the following products:
+`pup setup` can set up the following products:
 
 | Product | Identifier |
 |---------|------------|
@@ -51,9 +51,13 @@ The CLI can set up the following products:
 | Studio | `studio` |
 | Test Optimization | `test-optimization` |
 
-### Install and run the CLI
+### Run the setup command
 
-Run the CLI with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You have two options, depending on whether you already have a Datadog account:
+Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). `npx` downloads Pup from npm, so you don't need to install it first. If you already [installed Pup][20], run `pup setup` with the same flags instead.
+
+If you're logged in to Pup (`pup auth login`), `pup setup` reuses that login. Otherwise, after an interactive setup finishes, Pup offers to log you in so later `pup` commands use the same account.
+
+You have two options, depending on whether you already have a Datadog account:
 
    {{< tabs >}}
    {{% tab "Interactive setup" %}}
@@ -102,7 +106,7 @@ After the CLI completes, see the [Next steps](#next-steps) section to confirm da
 
 Headless mode is designed for unattended setups. An AI coding agent, CI job, or script can run the CLI directly in your repository and complete Datadog instrumentation on its own. No person needs to be present to approve prompts or make interactive choices.
 
-Use `--headless` to skip the interactive UI. It requires both `--site` and `--product`:
+`pup setup` runs in headless mode automatically when a [supported AI coding agent][21] runs it, or when there is no interactive terminal, such as in a CI job. To use headless mode from a terminal, pass `--headless`:
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
@@ -112,11 +116,18 @@ DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
   --product rum
 ```
 
-Set the `DD_API_KEY` and `DD_APP_KEY` [environment variables][19] to authenticate without user interaction. Provide both variables together.
+In headless mode:
 
-Alternatively, omit the API and application keys to authenticate with browser OAuth. OAuth is the only part of a headless run that might require user interaction, and it requires a localhost callback. For remote or fully unattended environments, use the `DD_API_KEY` and `DD_APP_KEY` environment variables instead.
+- `--site` is optional. Without it, `pup setup` uses the site from the `DD_SITE` environment variable or your Pup configuration, and defaults to `datadoghq.com`.
+- `--product` is optional. Without it, `pup setup` analyzes the repository and sets up the top recommended product. To get the recommendations without changing the repository, add `--recommend-only`. It prints the recommended products as JSON and exits.
 
-By using `--headless`, you confirm that source-code upload and automatic command execution are authorized for the target project.
+Headless runs authenticate with the first available option:
+
+1. An existing Pup login or the `DD_ACCESS_TOKEN` environment variable. When either is available, `pup setup` uses it and ignores `DD_API_KEY` and `DD_APP_KEY`.
+1. The `DD_API_KEY` and `DD_APP_KEY` [environment variables][19]. Provide both variables together.
+1. Browser OAuth. If no credentials are available, `pup setup` opens a browser to log in before setup starts. OAuth is the only part of a headless run that might require user interaction, and it requires a localhost callback. For remote or fully unattended environments, use one of the other options instead.
+
+By running `pup setup` in headless mode, including when it switches to headless mode automatically, you confirm that source-code upload and automatic command execution are authorized for the target project.
 
 ## MCP Server
 
@@ -279,3 +290,5 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
 [19]: /account_management/api-app-keys/
+[20]: /cli/
+[21]: /cli/#agent-mode

@@ -40,7 +40,7 @@ First, [set up the Azure Integration](/integrations/azure/) to collect metrics a
 
 Then, choose one of two paths to instrument your application with the `serverless-init` Agent:
 
-- **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the AI Setup CLI or the Datadog MCP Server.
+- **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the Pup CLI or the Datadog MCP Server.
 - **[Set up with manual instrumentation][3]**: Instrument your service yourself, with per-runtime steps for the in-container and sidecar approaches. 
 
 To send traces through Azure's managed OpenTelemetry agent instead of `serverless-init`, see [Send Azure Container Apps Traces with the Managed OpenTelemetry Agent][4].
@@ -55,15 +55,15 @@ This feature is not supported for your selected [Datadog site](/getting_started/
 
 Two paths use the same [Datadog account][1]:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 [1]: /agentic_onboarding/setup
 
 {% tabs %}
-{% tab label="AI Setup CLI" %}
+{% tab label="Pup CLI" %}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Azure Container Apps service:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Azure Container Apps service:
 
 ```shell
 npx @datadog/pup setup --product serverless --serverless-compute-type=azure-container-apps

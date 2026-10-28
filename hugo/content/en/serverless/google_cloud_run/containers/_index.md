@@ -29,13 +29,13 @@ further_reading:
 
 Use agentic onboarding to set up monitoring for your Cloud Run containers with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Pup CLI" %}}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
 
 ```shell
 npx @datadog/pup setup --product serverless --serverless-compute-type=gcp-cloud-run

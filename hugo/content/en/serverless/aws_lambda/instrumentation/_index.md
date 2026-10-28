@@ -45,13 +45,13 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
-- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 {{< tabs >}}
-{{% tab "AI Setup CLI" %}}
+{{% tab "Pup CLI" %}}
 
-Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
+Run `pup setup` in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
 
 ```shell
 npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda
