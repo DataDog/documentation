@@ -138,8 +138,13 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and traces are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
+### 5. Explore your training jobs
+
+Go to the [Training page][3] in GPU Monitoring to explore your training jobs.
+
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/tag/?tab=datadogoperator#tag-extraction
+[3]: https://app.datadoghq.com/gpu-monitoring/training
 
 {{% /tab %}}
 {{% tab "Slurm" %}}
@@ -209,12 +214,17 @@ Submit the job with `sbatch`, then query [APM Trace Explorer][6] with the servic
 service:slurm-training env:dev
 ```
 
+### 5. Explore your training jobs
+
+Go to the [Training page][7] in GPU Monitoring to explore your training jobs.
+
 [1]: /gpu_monitoring/setup
 [2]: /tracing/trace_collection/single-step-apm/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
 [5]: /integrations/slurm/
 [6]: /tracing/trace_explorer/
+[7]: https://app.datadoghq.com/gpu-monitoring/training
 
 {{% /tab %}}
 {{< /tabs >}}
