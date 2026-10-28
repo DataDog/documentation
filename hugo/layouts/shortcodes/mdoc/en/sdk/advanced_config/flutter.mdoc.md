@@ -208,6 +208,45 @@ To enable Datadog [distributed tracing][13], you must set the `DatadogConfigurat
 
 - `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
+### Add custom attributes to automatically tracked resources
+
+For resources tracked by `datadog_tracking_http_client`, implement `DatadogTrackingHttpClientListener` to attach custom attributes to individual RUM resource events. Pass the listener to `enableHttpTracking(clientListener: ...)` before initializing the SDK.
+
+The `requestStarted` and `responseFinished` callbacks receive the same mutable `userAttributes` map for each resource. Add or update attributes in either callback. Only the attributes remaining after `responseFinished` are sent to Datadog for that resource.
+
+```dart
+import 'dart:io';
+
+import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
+import 'package:datadog_tracking_http_client/datadog_tracking_http_client.dart';
+
+class ResourceAttributesListener implements DatadogTrackingHttpClientListener {
+  @override
+  void requestStarted({
+    required Object resourceKey,
+    required HttpClientRequest request,
+    required Map<String, Object?> userAttributes,
+  }) {
+    userAttributes['request_host'] = request.uri.host;
+  }
+
+  @override
+  void responseFinished({
+    required Object resourceKey,
+    required HttpClientResponse response,
+    required Map<String, Object?> userAttributes,
+    Object? error,
+  }) {
+    userAttributes['response_status'] = response.statusCode;
+  }
+}
+
+// Add the listener to your configuration before initializing the SDK.
+configuration.enableHttpTracking(
+  clientListener: ResourceAttributesListener(),
+);
+```
+
 ### Capture resource headers
 
 When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
@@ -310,6 +349,8 @@ In addition to tracking resources automatically using the [Datadog Tracking HTTP
 - `DdRum.stopResourceWithError`
 - `DdRum.stopResourceWithErrorInfo`
 
+To attach custom attributes to an individual resource, pass an attributes map to `startResource` or `stopResource`. The attributes are optional positional arguments. For `stopResource`, pass the resource size, or `null` if it is unknown, before the attributes map.
+
 For example:
 
 ```dart
@@ -319,6 +360,7 @@ DatadogSdk.instance.rum?.startResource(
     "resource-key",
     RumHttpMethod.get,
     url,
+    {'image_source': 'catalog'},
 );
 
 // Later
@@ -326,7 +368,9 @@ DatadogSdk.instance.rum?.startResource(
 DatadogSdk.instance.rum?.stopResource(
     "resource-key",
     200,
-    RumResourceType.image
+    RumResourceType.image,
+    null,
+    {'cache_hit': false},
 );
 ```
 
@@ -352,6 +396,8 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 * To add or update an attribute, use `DdRum.addAttribute`.
 * To remove the key, use `DdRum.removeAttribute`.
+
+To attach attributes to an individual resource event, see [Add custom attributes to automatically tracked resources][23] or [Track custom resources][24].
 
 ### Track user sessions
 
@@ -580,3 +626,5 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[23]: #add-custom-attributes-to-automatically-tracked-resources
+[24]: #track-custom-resources
