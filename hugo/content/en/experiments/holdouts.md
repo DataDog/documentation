@@ -44,7 +44,7 @@ A preliminary analysis runs during the inclusion phase. It gives an early direct
 
 ### Analysis phase
 
-The analysis phase starts at or after inclusion ends. During this phase, the All shipped group should be able to receive all shipped changes. The Status quo group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
+The analysis phase starts at or after inclusion phase ends. During the analysis phase, the `all shipped` group should have received all shipped changes. The `status quo` group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
 
 The primary analysis measures metric data from this period. It answers the main question: what is the impact of the shipped changes together? If a rollout is still in progress when analysis starts, the treatment is not yet complete. The result then includes time when only some changes were available.
 
