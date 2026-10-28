@@ -40,7 +40,7 @@ Organization administrators can enable or disable OTR mode from [**Organization 
 
 To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 
-The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application.
+The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user. The exception is when Datadog releases a new permission to gate existing functionality. In that case, keys scoped to the permission that previously covered that functionality also receive the new permission and keep their existing access. This matches how [custom roles][25] receive new permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application.
 
 **Notes:**
 
@@ -224,3 +224,4 @@ Need help? Contact [Datadog support][19].
 [22]: /account_management/audit_trail/#setup
 [23]: /account_management/rbac/permissions/#compliance
 [24]: https://aws.amazon.com/about-aws/whats-new/2026/05/secrets-manager-managed-external-secrets-datadog-snowflake/
+[25]: /account_management/rbac/permissions/#custom-roles
