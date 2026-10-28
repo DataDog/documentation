@@ -168,7 +168,7 @@ menu:
       weight: 16
     - name: OpenTelemetry
       identifier: getting_started_opentelemetry
-      url: getting_started/opentelemetry/
+      url: opentelemetry/getting_started/
       parent: getting_started
       weight: 17
     - name: Profiler
@@ -692,21 +692,6 @@ menu:
       identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
-    - name: Quickstart on Kubernetes
-      url: /opentelemetry/getting_started/kubernetes/
-      parent: otel_guides_getting_started
-      weight: 100
-      identifier: otel_guides_getting_started_kubernetes
-    - name: Datadog Example Application
-      url: /opentelemetry/getting_started/datadog_example
-      parent: otel_guides_getting_started
-      weight: 101
-      identifier: otel_guides_getting_started_datadog_example
-    - name: OpenTelemetry Demo Application
-      url: /opentelemetry/getting_started/otel_demo_to_datadog
-      parent: otel_guides_getting_started
-      weight: 102
-      identifier: otel_guides_getting_started_otel_demo_to_datadog
     - name: Feature Compatibility
       url: opentelemetry/compatibility/
       identifier: otel_compatibility
@@ -992,6 +977,11 @@ menu:
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 10
+    - name: OpenTelemetry Demo Application
+      url: /opentelemetry/guide/otel_demo_to_datadog/
+      parent: otel_guides
+      weight: 1000
+      identifier: otel_guides_otel_demo_to_datadog
     - name: Produce Delta Temporality Metrics
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides

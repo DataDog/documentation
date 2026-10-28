@@ -6,7 +6,7 @@ private: true
 ## Guides
 
 {{< whatsnext desc=" " >}}
-{{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}Getting Started with OpenTelemetry at Datadog{{< /nextlink >}}
+{{< nextlink href="/getting_started/opentelemetry/" >}}Explore a Datadog Exporter example with a Java application{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/instrument_unsupported_runtimes/" >}}Instrument Unsupported Runtimes with OpenTelemetry{{< /nextlink >}}
