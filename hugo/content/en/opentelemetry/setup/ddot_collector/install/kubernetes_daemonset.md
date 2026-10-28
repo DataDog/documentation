@@ -14,6 +14,8 @@ further_reading:
 
 ## Overview
 
+This page was previously titled "Install the DDOT Collector as a Kubernetes DaemonSet."
+
 Deploy the Collector in the Agent as a Kubernetes DaemonSet with Helm or the Datadog Operator. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. To run the DDOT Collector without the Agent, see [Install the DDOT Collector on Kubernetes][59].
 
 <div class="alert alert-info">
@@ -39,7 +41,7 @@ Install and set up the following on your machine:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 

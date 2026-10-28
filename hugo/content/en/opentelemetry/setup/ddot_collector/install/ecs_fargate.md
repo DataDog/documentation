@@ -11,6 +11,8 @@ further_reading:
 
 ## Overview
 
+This page was previously titled "Install the DDOT Collector on ECS Fargate."
+
 Deploy the Collector in the Agent on Amazon ECS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
 
 <div class="alert alert-info">
@@ -33,7 +35,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
 
 ### Create an ECS task definition
 

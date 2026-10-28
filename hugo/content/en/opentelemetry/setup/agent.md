@@ -46,6 +46,8 @@ Your applications, instrumented with OpenTelemetry SDKs, send telemetry to the D
 
 The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Configure it with standard OpenTelemetry Collector configuration.
 
+The setup pages for the Collector in the Agent were previously titled "DDOT Collector."
+
 {{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
 Remote Configuration for the Collector in the Agent is <strong>in Preview</strong>. Use this form to request access.
 {{< /callout >}}

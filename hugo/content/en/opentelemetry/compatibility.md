@@ -15,10 +15,10 @@ Datadog offers multiple setup options to accommodate various use cases, from ful
 
 Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the Collector or Agent used to process and forward telemetry data.
 
-| Setup Type                                           | API                     | SDK         | Collector/Agent                               |
-|------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
-| [**Datadog SDK + DDOT (Recommended)**][29]           | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + DDOT**][29]                            | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
+| Setup Type                                           | API                     | SDK         | Collector/Agent                                        |
+|------------------------------------------------------|-------------------------|-------------|--------------------------------------------------------|
+| [**Datadog SDK + Collector in the Agent**][48]       | Datadog API or OTel API | Datadog SDK | Collector in the Agent (runs inside the Datadog Agent) |
+| [**OTel SDK + Collector in the Agent**][48]          | OTel API                | OTel SDK    | Collector in the Agent (runs inside the Datadog Agent) |
 | [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
@@ -26,7 +26,7 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 The following table shows feature compatibility across different setups:
 
-| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
+| Feature | Datadog SDK + Collector in the Agent | OTel SDK + Collector in the Agent | OTel SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -147,7 +147,6 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [26]: /tracing/metrics/metrics_namespace/
 [27]: /tracing/trace_collection/
 [28]: /opentelemetry/setup/agentless
-[29]: /opentelemetry/setup/ddot_collector
 [30]: /infrastructure/list/
 [31]: /opentelemetry/instrument/api_support/dotnet/
 [32]: /opentelemetry/instrument/api_support/python/
@@ -166,3 +165,4 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [45]: https://opentelemetry.io/community/
 [46]: /containers/
 [47]: /opentelemetry/setup/ddot_collector/kubernetes/#add-the-datadog-agent-optional
+[48]: /opentelemetry/setup/agent/#collector-in-the-agent
