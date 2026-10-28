@@ -40,11 +40,22 @@ With an external source, you can:
 3. Under {{< ui >}}External Sources{{< /ui >}}, select your source type, and then select an external source.
 4. Select a time range and enter a query, such as `service:web status:error`.
 
-Datadog replaces the mapped field names in your query with the corresponding column names. See [Schema mapping][6].
+## Search syntax
+
+Federated Logs uses the [Log Explorer search syntax][2]. Each term in your query searches a column of your table:
+
+| Query | Searches |
+|---|---|
+| `service:web` | The column mapped to the Datadog field. Applies to `host`, `service`, `source`, `status`, `message`, and `_id`. See [Schema mapping][6]. |
+| `@http_status_code:500` | The top-level column with that name. The column does not need to be mapped. |
+| `env:prod` | The `env:prod` value in the column mapped to Tags. |
+
+To search a column of your table, prefix its name with `@`. Without `@`, a `key:value` term searches the column mapped to Tags, as tags do in Log Explorer. If no column is mapped to Tags, the query returns an error.
 
 ## Limitations
 
-- Search and filters apply to mapped fields only. Full-text search and filters on nested JSON fields are not supported.
+- Full-text search, CIDR queries, and filters on nested JSON or STRUCT fields are not supported.
+- Wildcards and ranges on tags are not supported.
 - Columns that are not mapped to a Datadog field are not displayed as attributes in the side panel.
 - Analytics views, such as grouping and timeseries, are not available.
 
