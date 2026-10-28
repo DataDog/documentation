@@ -114,7 +114,7 @@ const provider = new DatadogProvider({
 });
 ```
 
-<div class="alert alert-info">Add tags to your flags specifically for selection, such as <code>app:checkout-web</code>, rather than selecting by team tags. A flag's team tags can change when ownership changes, which would change the flags your application loads.</div>
+<div class="alert alert-warning">Team tags can change when ownership changes, which could change the flags your application loads. Add tags to your flags specifically for selection, such as <code>app:checkout-web</code>, rather than selecting by team tags.</div>
 
 #### Limits and validation
 
