@@ -32587,6 +32587,80 @@ components:
         - bucket_name
         - bucket_region
       type: object
+    DataObservabilityMonitorGroupByValues:
+      additionalProperties:
+        type: string
+      description: The values of the monitor's group-by columns for this group. `N/A` means the column had no value.
+      example:
+        region: us
+      type: object
+    DataObservabilityMonitorGroupStatus:
+      description: The state of a monitor group, from the alerting engine.
+      enum:
+        - ok
+        - warn
+        - alert
+        - no_data
+        - unknown
+      example: alert
+      type: string
+      x-enum-varnames:
+        - OK
+        - WARN
+        - ALERT
+        - NO_DATA
+        - UNKNOWN
+    DataObservabilityMonitorRunGroup:
+      description: A monitor group that is not ok after a run.
+      properties:
+        account:
+          description: The account of the entity, when the platform has one.
+          example: acme
+          type: string
+        column:
+          description: The column of the entity, when it is a column.
+          example: AMOUNT
+          type: string
+        database:
+          description: The database of the entity.
+          example: ANALYTICS
+          type: string
+        entity_id:
+          description: The ID of the table or column the group checks.
+          example: "84a88e0d362ce9fc"
+          type: string
+        entity_type:
+          description: The type of the entity, such as table or column.
+          example: table
+          type: string
+        group:
+          description: The group's name in Datadog monitors, as the monitor API and UI show it. Pass it as `filter[group]` to list the group's evaluations.
+          example: "database:analytics,entity_id:84a88e0d362ce9fc,schema:public,table:orders"
+          type: string
+        group_by_values:
+          $ref: "#/components/schemas/DataObservabilityMonitorGroupByValues"
+        platform:
+          description: The data platform of the entity.
+          example: snowflake
+          type: string
+        schema:
+          description: The schema of the entity, when it has one.
+          example: PUBLIC
+          type: string
+        status:
+          $ref: "#/components/schemas/DataObservabilityMonitorGroupStatus"
+        table:
+          description: The table of the entity, when it is a table or column.
+          example: ORDERS
+          type: string
+      required:
+        - group
+        - entity_id
+        - entity_type
+        - platform
+        - database
+        - status
+      type: object
     DataObservabilityMonitorRunStatus:
       description: The status of a data observability monitor run.
       enum:
@@ -56307,6 +56381,21 @@ components:
           description: Error message describing why the monitor run failed. Only present when status is error.
           example: "run completed but produced no metric data"
           type: string
+        group_counts:
+          additionalProperties:
+            format: int64
+            type: integer
+          description: The number of the monitor's groups in each state, once the run has finished.
+          example:
+            alert: 1
+            ok: 12
+          type: object
+        groups:
+          description: The first 1,000 of the monitor's groups that are not ok, once the run has finished. List the monitor's groups for all of them.
+          items:
+            $ref: "#/components/schemas/DataObservabilityMonitorRunGroup"
+          maxItems: 1000
+          type: array
         status:
           $ref: "#/components/schemas/DataObservabilityMonitorRunStatus"
       required:
