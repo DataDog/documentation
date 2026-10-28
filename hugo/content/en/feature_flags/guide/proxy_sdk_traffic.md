@@ -203,7 +203,7 @@ DatadogBrowserFlagging.init({
 });
 {{< /code-block >}}
 
-If you use [`flagSelection`][3] to load a subset of flags, return the `DD-Flag-Selection-Ignored` response header to the browser unchanged, and include it in the `Access-Control-Expose-Headers` response header. Datadog sets this header when it ignores a selection and returns the full flag configuration. If the browser cannot read the header, the full configuration still loads, but the SDK cannot report that the selection was ignored.
+If you use [`flagSelection`][3] to load a subset of flags, return the `DD-Flag-Selection-Ignored` response header to the browser unchanged. If your proxy is on a different origin from your application, also list the header in the `Access-Control-Expose-Headers` response header. Datadog sets this header when it ignores a selection and returns the full flag configuration. If the browser cannot read the header, the full configuration still loads, but the SDK cannot report that the selection was ignored.
 
 ### Event upload proxy
 

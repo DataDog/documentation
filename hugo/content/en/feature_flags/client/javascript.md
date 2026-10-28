@@ -125,13 +125,15 @@ Before sending the selection, the SDK trims leading and trailing whitespace from
 - Each tag is at most 200 bytes (UTF-8).
 - Each key pattern is at most 200 bytes (UTF-8).
 
+If both lists are empty after this processing, the SDK sends no selection and loads the full flag configuration without logging an error.
+
 If the flag selection is malformed or exceeds a limit, the SDK does not send it in the flag configuration request, logs an error to the browser console, and loads the full flag configuration.
 
 Datadog can also ignore a selection and return the full flag configuration. In that case, the response includes a `DD-Flag-Selection-Ignored` header with one of the following reasons, and the SDK logs an error to the browser console:
 
 | Reason | Meaning |
 | --- | --- |
-| `too_many_values` | A list contains more than 31 values. |
+| `too_many_values` | A list contains more than 31 values, or the selection is too long to send in one request. |
 | `invalid_tag` | A tag is longer than 200 bytes. |
 | `invalid_key_pattern` | A key pattern is longer than 200 bytes. |
 | `malformed_selection` | The selection could not be parsed. |
