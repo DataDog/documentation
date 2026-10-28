@@ -577,7 +577,7 @@ datadog:
 
 Basic dynamic tests provide hop-by-hop [Network Path][7] visibility into your highest-traffic connections, without configuring individual destinations. Basic dynamic tests are included with CNM at no additional cost.
 
-Starting with Agent `v7.86`, basic dynamic tests are enabled by default on hosts with CNM, and no setup is required. On Agent `v7.84` and `v7.85`, enable them as described in [Setup](#setup-basic-dynamic-tests).
+Starting with Agent `v7.86`, basic dynamic tests are enabled by default on hosts with CNM. On Agent `v7.84` and `v7.85`, or with Helm chart versions earlier than `v3.263.0`, enable them as described in [Setup](#setup-basic-dynamic-tests).
 
 Every hour, each Agent selects up to five of its highest-traffic paths and runs one Network Path test on each.
 
@@ -585,7 +585,7 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 
 ##### Setup {#setup-basic-dynamic-tests}
 
-On Agent `v7.86+`, basic dynamic tests run by default when CNM is enabled. On Agent `v7.84` and `v7.85`, enable them as follows:
+On Agent `v7.86+`, basic dynamic tests run by default when CNM is enabled, except with Helm chart versions earlier than `v3.263.0` (see the **Helm** tab). On Agent `v7.84` and `v7.85`, enable them as follows:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
