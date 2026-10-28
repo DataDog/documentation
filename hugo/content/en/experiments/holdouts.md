@@ -87,7 +87,7 @@ Create the holdout before starting the experiments:
 1. Enter a name and select **Global** or **Selective**.
 1. Select the subject type used by the experiments.
 1. Set the traffic allocation. Include both groups when calculating how much traffic remains for individual experiments.
-1. Set the **experiment inclusion start** and **end** dates. A global holdout includes eligible experiments that start during this period. Add selective experiments before they start and before inclusion ends.
+1. Set the **experiment inclusion start** and **experiment inclusion end** dates. A global holdout includes eligible experiments that start during this period. Add selective experiments before they start and before inclusion ends.
 1. Set the **analysis start** and **end** dates. Analysis must start at or after inclusion ends. Its end date must be after its start date. Allow time for experiments and rollouts to finish before analysis starts.
 1. Select a primary metric, optional secondary metrics, and an [analysis method][2].
 1. For a selective holdout, add the draft experiments. Global holdouts add eligible experiments automatically when they start.
