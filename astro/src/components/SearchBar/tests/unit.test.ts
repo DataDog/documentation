@@ -7,12 +7,19 @@ import SearchBar, { type SearchBarLabels } from "../SearchBar";
 import SearchResultsPopup from "../SearchResultsPopup";
 import { mountAskAi } from "@dd/ask-ai";
 import { createAskAiConfig } from "@lib/askAi/askAiConfig";
+import { isDocsAiEnabled } from "@lib/featureFlags/featureFlags";
 
 // The package is mocked rather than loaded: what matters here is that the
 // searchbar calls `ask` with the shared config, not what the widget then does.
 const { askSpy } = vi.hoisted(() => ({ askSpy: vi.fn() }));
 vi.mock("@dd/ask-ai", () => ({
   mountAskAi: vi.fn(() => ({ ask: askSpy, teardown: vi.fn() })),
+}));
+
+// Mocked so no test reaches the flag SDKs. Enabled unless a test says
+// otherwise, which is also the real client's fallback.
+vi.mock("@lib/featureFlags/featureFlags", () => ({
+  isDocsAiEnabled: vi.fn(async () => true),
 }));
 
 const labels: SearchBarLabels = {
@@ -243,6 +250,51 @@ describe("SearchBar — keyboard navigation", () => {
   });
 });
 
+describe("SearchBar — docs-ai-enabled is off", () => {
+  beforeEach(() => {
+    vi.mocked(isDocsAiEnabled).mockResolvedValue(false);
+  });
+
+  afterEach(() => {
+    vi.mocked(isDocsAiEnabled).mockResolvedValue(true);
+  });
+
+  it("hides the Ask AI row", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    expect(document.querySelector(".search-bar__popup")).toBeTruthy();
+    expect(document.querySelector(".search-bar__ai-suggestion")).toBeFalsy();
+  });
+
+  it("ArrowDown selects the first hit, skipping the hidden row", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    await user.keyboard("{ArrowDown}");
+
+    const selected = document.querySelectorAll(".search-hit--selected");
+    expect(selected.length).toBe(1);
+    expect(document.querySelector(".search-hit")).toBe(selected[0]);
+  });
+
+  it("ArrowUp from the first hit returns focus to the input", async () => {
+    const user = userEvent.setup();
+    mount();
+    await typeAndWait(user, "dashboard");
+
+    const input =
+      document.querySelector<HTMLInputElement>(".search-bar__input")!;
+    await user.keyboard("{ArrowDown}"); // first hit selected
+    await user.keyboard("{ArrowUp}"); // back to input
+
+    expect(document.querySelector(".search-hit--selected")).toBeFalsy();
+    expect(document.activeElement).toBe(input);
+  });
+});
+
 describe("SearchBar — Enter routes to Hugo's search page when no hit is selected", () => {
   it("navigates to {HUGO_ORIGIN}/search/?s=<query> when Enter is pressed without a selection", async () => {
     const user = userEvent.setup();
@@ -307,6 +359,7 @@ describe("SearchBar — the Ask AI row", () => {
         variant: "default",
         grouped: null,
         selectedHit: null,
+        askAiEnabled: true,
         aiSelected: false,
         noResultsLabel: "No results.",
         totalHits: 0,

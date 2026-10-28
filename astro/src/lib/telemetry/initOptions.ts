@@ -62,7 +62,10 @@ export function buildRumInitOptions({
     service: TELEMETRY_SERVICE,
     ...optional("version", version),
     trackUserInteractions: true,
-    enableExperimentalFeatures: ["zero_lcp_telemetry", "feature_flags"],
+    // No `feature_flags` entry: flag tracking is GA in RUM v7, which drops
+    // experimental feature names it no longer recognizes. Evaluations reach RUM
+    // through the OpenFeature provider in `@lib/featureFlags/featureFlags`.
+    enableExperimentalFeatures: ["zero_lcp_telemetry"],
     sessionSampleRate: 100,
     sessionReplaySampleRate: 50,
     trackResources: true,

@@ -46,7 +46,7 @@ describe("buildRumInitOptions", () => {
       service: "docs",
       version: "abc1234",
       trackUserInteractions: true,
-      enableExperimentalFeatures: ["zero_lcp_telemetry", "feature_flags"],
+      enableExperimentalFeatures: ["zero_lcp_telemetry"],
       sessionSampleRate: 100,
       sessionReplaySampleRate: 50,
       trackResources: true,

@@ -619,6 +619,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bufbuild/protobuf@npm:^2.13.0":
+  version: 2.16.0
+  resolution: "@bufbuild/protobuf@npm:2.16.0"
+  checksum: 10/f4930c79d770ef8899f61cea6610857da7b66267c0f07c9364c5157dc37fede81d572524d8b88ec957f99e36eb754574e07f3e656518e90f59ca39622f8475c8
+  languageName: node
+  linkType: hard
+
 "@capsizecss/unpack@npm:^4.0.0":
   version: 4.0.1
   resolution: "@capsizecss/unpack@npm:4.0.1"
@@ -714,6 +721,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@datadog/browser-core@npm:7.1.0":
+  version: 7.1.0
+  resolution: "@datadog/browser-core@npm:7.1.0"
+  checksum: 10/13d4a527a2717aaf03c610658c009c4ef0661face1d4af977fa33183cae70e33d5bff715d690e1fda181cbc7db11017f3b65e08ff9de4c096e8d5bc0e690ac08
+  languageName: node
+  linkType: hard
+
 "@datadog/browser-core@npm:7.11.0":
   version: 7.11.0
   resolution: "@datadog/browser-core@npm:7.11.0"
@@ -773,10 +787,41 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@datadog/flagging-core@npm:3.3.0":
+  version: 3.3.0
+  resolution: "@datadog/flagging-core@npm:3.3.0"
+  dependencies:
+    "@bufbuild/protobuf": "npm:^2.13.0"
+    spark-md5: "npm:^3.0.2"
+  checksum: 10/8b94d671034f5ff4acdc0a58c03c0610964dc8ad7e1ddf5a0ddda0d15ce7b3cb22083ff5e3a2fb263daf1f0b6c5228c292824bc1e7cdf30bafe83331d5acfedc
+  languageName: node
+  linkType: hard
+
 "@datadog/js-core@npm:0.0.12":
   version: 0.0.12
   resolution: "@datadog/js-core@npm:0.0.12"
   checksum: 10/0993447bb43783c4417564b26cb4c5868156c0c092113d2f2a134ae4ba5b017310a1185e87d10c5fde00f3aa7463f4676adda6710bc888f83191337c9cb9dd9c
+  languageName: node
+  linkType: hard
+
+"@datadog/js-core@npm:0.0.3":
+  version: 0.0.3
+  resolution: "@datadog/js-core@npm:0.0.3"
+  checksum: 10/a873cca9ab368f58c8d997447c1d61d24e74721001f396032e3faf5dfff8ab36d45f4cca7ad44fc792822227fb5e35ea8b724220ba88f54864b480cbf5bc1640
+  languageName: node
+  linkType: hard
+
+"@datadog/openfeature-browser@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@datadog/openfeature-browser@npm:2.2.0"
+  dependencies:
+    "@datadog/browser-core": "npm:7.1.0"
+    "@datadog/flagging-core": "npm:3.3.0"
+    "@datadog/js-core": "npm:0.0.3"
+  peerDependencies:
+    "@openfeature/core": ^1.9.2
+    "@openfeature/web-sdk": ^1.5.0
+  checksum: 10/20880b3d0c15b3ba0534486970e06058a0fe89e9bd9a688fafa1985806cb48a46eec6c45d31c928f92e9bdd5443eaccfb0bdfdd740a6976fda00053cbf172da6
   languageName: node
   linkType: hard
 
@@ -1607,6 +1652,22 @@ __metadata:
     "@emnapi/core": ^2.0.0-alpha.3
     "@emnapi/runtime": ^2.0.0-alpha.3
   checksum: 10/e227c1d9405e0e0830f810bd5aebbcda79168842ce3ec124704cad94d326611b23e013e4602366c86f7c25449ab99c145aa71e3e1e3112a59a0ca906332b989a
+  languageName: node
+  linkType: hard
+
+"@openfeature/core@npm:^1.12.0":
+  version: 1.12.0
+  resolution: "@openfeature/core@npm:1.12.0"
+  checksum: 10/d95bd67bf86397e358738914268f50a1bd45b6fc8648c8f197bddc9d968c6eb03bf9bd5f98e89f0b39a8f89f8043ed17c1d3a73e239b41f87773ccbbee38f4c4
+  languageName: node
+  linkType: hard
+
+"@openfeature/web-sdk@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "@openfeature/web-sdk@npm:1.10.0"
+  peerDependencies:
+    "@openfeature/core": ^1.12.0
+  checksum: 10/a9dcfaa93c3093580526db4ee24ffbb3ff81a2c2bf52827d8e64a0e673e5faae5dda9ca31f58801739a7d0b92d5cc5d76111bbc2fc00621e4e002cd964a3dc09
   languageName: node
   linkType: hard
 
@@ -3309,7 +3370,10 @@ __metadata:
     "@datadog/browser-logs": "npm:^7.11.0"
     "@datadog/browser-rum": "npm:^7.11.0"
     "@datadog/datadog-ci": "npm:^5.23.0"
+    "@datadog/openfeature-browser": "npm:^2.2.0"
     "@dd/ask-ai": "link:../shared/packages/ask-ai"
+    "@openfeature/core": "npm:^1.12.0"
+    "@openfeature/web-sdk": "npm:^1.10.0"
     "@playwright/test": "npm:^1.62.0"
     "@testing-library/preact": "npm:^3.2.4"
     "@testing-library/user-event": "npm:^14.6.1"
@@ -6578,6 +6642,13 @@ __metadata:
   version: 2.0.2
   resolution: "space-separated-tokens@npm:2.0.2"
   checksum: 10/202e97d7ca1ba0758a0aa4fe226ff98142073bcceeff2da3aad037968878552c3bbce3b3231970025375bbba5aee00c5b8206eda408da837ab2dc9c0f26be990
+  languageName: node
+  linkType: hard
+
+"spark-md5@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "spark-md5@npm:3.0.2"
+  checksum: 10/60981e181a296b2d16064ef86607f78d7eb1e08a5f39366239bb9cdd6bc3838fb2f667f2506e81c8d5c71965cdd6f18a17fb1c9a8368eeb407b9dd8188e95473
   languageName: node
   linkType: hard
 
