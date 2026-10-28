@@ -18,7 +18,7 @@ further_reading:
       text: "Investigate with LLM Observability"
 ---
 
-After you instrument your application with Agent Observability, you can access Agent Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, latency measures, and evaluation results for your LLM applications. Span, token, cost, and trace metrics are calculated based on 100% of the application's traffic. [Evaluation metrics](#evaluation-metrics) are calculated from the evaluation results your application produces.
+After you instrument your application with Agent Observability, you can access Agent Observability metrics for use in dashboards and monitors. These metrics capture span counts, error counts, token usage, latency measures, and evaluation results for your LLM applications. All metrics except evaluation metrics are calculated based on 100% of the application's traffic. For details about evaluation metrics, see the [Evaluation metrics](#evaluation-metrics) section.
 
 <div class="alert alert-info">
 The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog Metrics</a>: numerical values that describe an aspect of your LLM application over time, derived from your LLM spans (counts, distributions of cost, tokens, latency, errors) and evaluation results. They follow standard <a href="/data_security/data_retention_periods/">Datadog metric retention</a> (15 months at full granularity), and are queryable from dashboards, monitors, and notebooks like any other Datadog metric.
