@@ -165,14 +165,15 @@ Scenario: Critical behavior
 **ScalaTest:** Declare native ScalaTest tags with the public constants:
 
 ```scala
-import datadog.trace.api.civisibility.TestAutomationExclusions
+import datadog.trace.api.civisibility.NoAutoRetry
+import datadog.trace.api.civisibility.PreventFailureSuppression
 import org.scalatest.Tag
 import org.scalatest.funsuite.AnyFunSuite
 
 class CriticalTest extends AnyFunSuite {
   test("critical behavior",
-    new Tag(TestAutomationExclusions.PREVENT_FAILURE_SUPPRESSION),
-    new Tag(TestAutomationExclusions.NO_AUTO_RETRY)) {
+    new Tag(PreventFailureSuppression.TAG),
+    new Tag(NoAutoRetry.TAG)) {
     assert(2 + 2 == 4)
   }
 }
@@ -181,19 +182,20 @@ class CriticalTest extends AnyFunSuite {
 **MUnit:** Attach native tags to the test name:
 
 ```scala
-import datadog.trace.api.civisibility.TestAutomationExclusions
+import datadog.trace.api.civisibility.NoAutoRetry
+import datadog.trace.api.civisibility.PreventFailureSuppression
 import munit.FunSuite
 
 class CriticalTest extends FunSuite {
   test("critical behavior"
-    .tag(new munit.Tag(TestAutomationExclusions.PREVENT_FAILURE_SUPPRESSION))
-    .tag(new munit.Tag(TestAutomationExclusions.NO_AUTO_RETRY))) {
+    .tag(new munit.Tag(PreventFailureSuppression.TAG))
+    .tag(new munit.Tag(NoAutoRetry.TAG))) {
     assertEquals(2 + 2, 4)
   }
 }
 ```
 
-MUnit does not support Datadog test disabling. Its `PREVENT_FAILURE_SUPPRESSION` tag protects against quarantine failure suppression.
+MUnit does not support Datadog test disabling. Its `PreventFailureSuppression.TAG` tag protects against quarantine failure suppression.
 
 **Weaver:** Add the public tag names to a native `TestName`:
 
@@ -201,14 +203,15 @@ MUnit does not support Datadog test disabling. Its `PREVENT_FAILURE_SUPPRESSION`
 
 ```scala
 import cats.effect.IO
-import datadog.trace.api.civisibility.TestAutomationExclusions
+import datadog.trace.api.civisibility.NoAutoRetry
+import datadog.trace.api.civisibility.PreventFailureSuppression
 import weaver._
 
 object CriticalTest extends SimpleIOSuite {
   private def excluded(name: String): TestName =
     TestName.fromString(name)
-      .tagged(TestAutomationExclusions.PREVENT_FAILURE_SUPPRESSION)
-      .tagged(TestAutomationExclusions.NO_AUTO_RETRY)
+      .tagged(PreventFailureSuppression.TAG)
+      .tagged(NoAutoRetry.TAG)
 
   test(excluded("critical behavior")) {
     IO.pure(expect(2 + 2 == 4))

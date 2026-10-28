@@ -36,7 +36,7 @@ describe('test automation annotation SDK requirements', () => {
 describe('Weaver annotation example compatibility', () => {
     test('scopes custom string tag syntax to supported framework versions', () => {
         const weaver = guide.split('**Weaver:**')[1].split(/^## /m)[0];
-        expect(weaver).toMatch(/\.tagged\(TestAutomationExclusions\.NO_AUTO_RETRY\)/);
+        expect(weaver).toMatch(/\.tagged\(NoAutoRetry\.TAG\)/);
         const compatibility = weaver.match(/\*\*Framework compatibility:\*\* ([^\n]+)/)?.[1];
         expect(compatibility).toBeDefined();
         expect(compatibility).toMatch(/Weaver 0\.8\.4 and 0\.9\.0 support these custom string tags/);
