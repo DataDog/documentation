@@ -18,9 +18,9 @@ The two paths are complementary and use the same Datadog account. You can instal
 
 ## Pup CLI setup
 
-`pup setup` is the setup command of the [Pup CLI][20], Datadog's command-line interface. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
+The [Pup CLI][20] sets up Datadog from your terminal. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
 
-`pup setup` can:
+The Pup CLI can:
 
 - Create a Datadog account end-to-end from the terminal
 - Link an existing Datadog account to your local environment
@@ -33,7 +33,7 @@ The two paths are complementary and use the same Datadog account. You can instal
 
 ### Supported products
 
-`pup setup` can set up the following products:
+The Pup CLI can set up the following products:
 
 | Product | Identifier |
 |---------|------------|
@@ -53,9 +53,7 @@ The two paths are complementary and use the same Datadog account. You can instal
 
 ### Run the setup command
 
-Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). `npx` downloads Pup from npm, so you don't need to install it first. If you already [installed Pup][20], run `pup setup` with the same flags instead.
-
-If you're logged in to Pup (`pup auth login`), `pup setup` reuses that login. Otherwise, after an interactive setup finishes, Pup offers to log you in so later `pup` commands use the same account.
+Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You don't need to install Pup first, because `npx` downloads it. If Pup is already [installed][20], run `pup setup` with the same flags. If you've logged in with `pup auth login`, setup uses that login.
 
 You have two options, depending on whether you already have a Datadog account:
 
@@ -106,7 +104,7 @@ After the CLI completes, see the [Next steps](#next-steps) section to confirm da
 
 Headless mode is designed for unattended setups. An AI coding agent, CI job, or script can run the CLI directly in your repository and complete Datadog instrumentation on its own. No person needs to be present to approve prompts or make interactive choices.
 
-`pup setup` runs in headless mode automatically when a [supported AI coding agent][21] runs it, or when there is no interactive terminal, such as in a CI job. To use headless mode from a terminal, pass `--headless`:
+Headless mode turns on automatically when a [supported AI coding agent][21] starts `pup setup`, or when there's no interactive terminal, such as in a CI job. To turn it on yourself, add `--headless`:
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
@@ -118,16 +116,16 @@ DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
 
 In headless mode:
 
-- `--site` is optional. Without it, `pup setup` uses the site from the `DD_SITE` environment variable or your Pup configuration, and defaults to `datadoghq.com`.
-- `--product` is optional. Without it, `pup setup` analyzes the repository and sets up the top recommended product. To get the recommendations without changing the repository, add `--recommend-only`. It prints the recommended products as JSON and exits.
+- `--site` is optional. If you leave it out, setup uses the `DD_SITE` environment variable or the site Pup is configured for, or `datadoghq.com` if neither is set.
+- `--product` is optional. If you leave it out, setup analyzes the repository and sets up the top recommended product. To see the recommendations without changing anything, add `--recommend-only`, which prints them as JSON and exits.
 
-Headless runs authenticate with the first available option:
+Headless mode signs in with the first of these that's available:
 
-1. An existing Pup login or the `DD_ACCESS_TOKEN` environment variable. When either is available, `pup setup` uses it and ignores `DD_API_KEY` and `DD_APP_KEY`.
+1. Your Pup login, or the `DD_ACCESS_TOKEN` environment variable. If either is present, setup ignores `DD_API_KEY` and `DD_APP_KEY`.
 1. The `DD_API_KEY` and `DD_APP_KEY` [environment variables][19]. Provide both variables together.
-1. Browser OAuth. If no credentials are available, `pup setup` opens a browser to log in before setup starts. OAuth is the only part of a headless run that might require user interaction, and it requires a localhost callback. For remote or fully unattended environments, use one of the other options instead.
+1. Browser OAuth. Setup opens a browser so you can log in. This is the only step in headless mode that might need you, and it requires a localhost callback. On remote machines or fully unattended runs, use one of the other options.
 
-By running `pup setup` in headless mode, including when it switches to headless mode automatically, you confirm that source-code upload and automatic command execution are authorized for the target project.
+By running `pup setup` in headless mode, whether you add `--headless` or it turns on automatically, you confirm that source-code upload and automatic command execution are authorized for the target project.
 
 ## MCP Server
 
