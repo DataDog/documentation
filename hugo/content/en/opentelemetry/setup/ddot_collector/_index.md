@@ -40,7 +40,7 @@ The Datadog OpenTelemetry (DDOT) Collector is an open source distribution of the
 - **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
 - **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
 
-You can run the Datadog Agent alongside the Collector for features that need the Agent. For the OpenTelemetry Collector that runs inside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
+You can run the Datadog Agent alongside the Collector for features that need the Agent. For the OpenTelemetry Collector that runs alongside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
 
