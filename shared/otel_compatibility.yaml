@@ -9,45 +9,34 @@ sdks:
   - id: ddot_sdk
     label: DDOT SDK
     description: The Datadog SDK for your language, set to send OTLP to your Collector.
-    apis: Datadog API or OpenTelemetry API
-    link: /opentelemetry/instrument/dd_sdks/ddot_setup/
   - id: datadog_sdk
     label: Datadog SDK
     description: The Datadog SDK for your language, sending data to the Datadog Agent.
-    apis: Datadog API or OpenTelemetry API
-    link: /tracing/trace_collection/
   - id: otel_sdk
     label: OpenTelemetry SDK
     description: The upstream OpenTelemetry SDK for your language.
-    apis: OpenTelemetry API
-    link: /opentelemetry/instrument/otel_sdks/
 
 receivers:
   - id: ddot_collector
     label: DDOT Collector
     description: An OpenTelemetry Collector that Datadog builds and supports.
     agent: optional
-    link: /opentelemetry/setup/ddot_collector/
   - id: upstream_collector
     label: Upstream OpenTelemetry Collector
     description: The OpenTelemetry Collector Contrib distribution, sending to Datadog over OTLP.
     agent: none
-    link: /opentelemetry/setup/collector_exporter/
   - id: agents_collector
     label: Agent's Collector
     description: An OpenTelemetry Collector that runs alongside the Datadog Agent.
     agent: included
-    link: /opentelemetry/setup/agent/#agents-collector
   - id: otlp_ingest_agent
     label: Agent's OTLP endpoint
     description: The Datadog Agent receives OTLP from your applications, with no Collector.
     agent: included
-    link: /opentelemetry/setup/otlp_ingest_in_the_agent/
   - id: otlp_intake
     label: Direct OTLP intake
     description: Your applications send OTLP straight to Datadog, with no Collector or Agent.
     agent: none
-    link: /opentelemetry/setup/otlp_ingest/
 
 # Sections of the feature table, in display order.
 groups:

@@ -13,9 +13,15 @@ Use this page to check which Datadog products and features each OpenTelemetry (O
 
 ## Setups
 
-Each OpenTelemetry setup pairs an SDK in your application with a place where the SDK sends data.
+Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the Collector or Agent used to process and forward telemetry data.
 
-{{< otel-compatibility part="setups" >}}
+| Setup Type                                           | API                     | SDK         | Collector/Agent                                        |
+|------------------------------------------------------|-------------------------|-------------|--------------------------------------------------------|
+| [**DDOT SDK + DDOT Collector**][49]                  | Datadog API or OTel API | DDOT SDK    | DDOT Collector (the Datadog Agent is optional)          |
+| [**Datadog SDK + Agent's Collector**][48]       | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
+| [**OTel SDK + Agent's Collector**][48]          | OTel API                | OTel SDK    | Agent's Collector (runs alongside the Datadog Agent) |
+| [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
+| [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 

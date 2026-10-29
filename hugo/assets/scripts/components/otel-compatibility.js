@@ -51,11 +51,19 @@ function initOtelCompat(root) {
     const columnRows = [headerRow, ...featureRows].map((row) => ({ row, cells: cellMap(row) }));
     const cellsByFeatureRow = new Map(columnRows.slice(1).map(({ row, cells }) => [row, cells]));
 
-    const slots = ['a', 'b'].map((key) => ({
-        key,
-        sdk: holder.querySelector(`[data-slot="${key}"][data-role="sdk"]`),
-        receiver: holder.querySelector(`[data-slot="${key}"][data-role="receiver"]`)
-    }));
+    // Each slot has an SDK menu and a receiver menu; a menu is a select plus an info tooltip
+    const slots = ['a', 'b'].map((key) => {
+        const menus = {
+            sdk: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="sdk"]`),
+            receiver: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="receiver"]`)
+        };
+        return {
+            key,
+            menus,
+            sdk: menus.sdk.querySelector('select'),
+            receiver: menus.receiver.querySelector('select')
+        };
+    });
     const viewInputs = [...controls.querySelectorAll('.otel-compat__view input')];
     const diffInput = controls.querySelector('[data-role="diff"]');
     const status = controls.querySelector('.otel-compat__status');
@@ -118,14 +126,26 @@ function initOtelCompat(root) {
             });
         });
         slots.forEach((slot) => {
-            holder.append(slot.sdk, slot.receiver);
+            holder.append(slot.menus.sdk, slot.menus.receiver);
         });
         pairIds.forEach((id, i) => {
             const th = headers.get(id);
             ['sdk', 'receiver'].forEach((role) => {
                 const dd = th.querySelector(`[data-field="${role}"] dd`);
                 dd.querySelector('.otel-compat__value').hidden = true;
-                dd.appendChild(slots[i][role]);
+                dd.appendChild(slots[i].menus[role]);
+            });
+        });
+    }
+
+    // Show the one-line description of the selected SDK or receiver in the menu's info tooltip.
+    // The site's tooltip script may have moved the tooltip element, so look it up by id.
+    function syncDescriptions() {
+        slots.forEach((slot) => {
+            ['sdk', 'receiver'].forEach((role) => {
+                const id = slot.menus[role].querySelector('.tooltip-trigger').getAttribute('aria-describedby');
+                const tip = document.getElementById(id);
+                if (tip) tip.textContent = slot[role].selectedOptions[0]?.dataset.description || '';
             });
         });
     }
@@ -145,6 +165,7 @@ function initOtelCompat(root) {
         const shown = view === 'all' ? pairs.filter((p) => p.confirmed).map((p) => p.id) : [a, b];
         showColumns(shown);
         placeMenus(view === 'compare' ? shown : []);
+        syncDescriptions();
         // Moving a menu drops its focus, so put focus back for keyboard users
         if (focused && focused !== document.activeElement && root.contains(focused)) focused.focus();
 

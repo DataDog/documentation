@@ -1,12 +1,9 @@
 {{- /*
-  Renders OpenTelemetry setup data from shared/otel_compatibility.yaml (mounted as
-  site.Data.otel_compatibility). Everything is in the HTML. The setup picker and compare
-  view come from assets/scripts/components/otel-compatibility.js.
-  Usage:
-    {{< otel-compatibility part="setups" >}}  One-line descriptions of each SDK and receiver
-    {{< otel-compatibility >}}                The feature compatibility table
+  Renders the OpenTelemetry feature compatibility table from shared/otel_compatibility.yaml
+  (mounted as site.Data.otel_compatibility). The full table is in the HTML. The setup picker
+  and compare view come from assets/scripts/components/otel-compatibility.js.
+  Usage: {{< otel-compatibility >}}
 */ -}}
-{{- $part := .Get "part" | default "table" -}}
 {{- $data := site.Data.otel_compatibility -}}
 {{- if not $data -}}
   {{- errorf "otel-compatibility: site.Data.otel_compatibility is missing. Check the shared/otel_compatibility.yaml mount in config/_default/config.yaml." -}}
@@ -35,31 +32,8 @@
 {{- end -}}
 
 {{- $agentText := dict "included" "Included" "optional" "Optional" "none" "Not used" -}}
+{{- $agentLine := dict "included" "Includes the Datadog Agent" "optional" "Datadog Agent optional" "none" "No Datadog Agent" -}}
 {{- $uid := printf "otel-compat-%d" .Ordinal -}}
-
-{{- if eq $part "setups" -}}
-
-<div class="otel-compat-key">
-  {{- range $section := slice (dict "label" "SDK in your application" "items" $data.sdks "kind" "sdk") (dict "label" "Where the SDK sends data" "items" $data.receivers "kind" "receiver") }}
-  <div class="otel-compat-key__group">
-    <p class="otel-compat__label">{{ $section.label }}</p>
-    <dl class="otel-compat-key__list">
-      {{- range $section.items }}
-      <div class="otel-compat-key__item">
-        <dt>{{ if .link }}<a href="{{ .link | relLangURL }}">{{ .label }}</a>{{ else }}{{ .label }}{{ end }}</dt>
-        <dd>
-          {{- .description -}}
-          {{- if eq $section.kind "sdk" }}{{ with .apis }}<span class="otel-compat-key__meta">APIs: {{ . }}</span>{{ end }}{{ end -}}
-          {{- if eq $section.kind "receiver" }}{{ with .agent }}<span class="otel-compat-key__meta">Datadog Agent: {{ index $agentText . | lower }}</span>{{ end }}{{ end -}}
-        </dd>
-      </div>
-      {{- end }}
-    </dl>
-  </div>
-  {{- end }}
-</div>
-
-{{- else -}}
 
 {{- /* Table sections: one per group, or a single unlabeled section when the file has no groups */ -}}
 {{- $sections := slice -}}
@@ -84,16 +58,17 @@
     <div class="otel-compat__holder" hidden>
       {{- range $slot := slice "a" "b" }}
       {{- $name := cond (eq $slot "a") "Setup 1" "Setup 2" }}
-      <select class="otel-compat__select" data-slot="{{ $slot }}" data-role="sdk" aria-label="{{ $name }}: SDK">
-        {{- range $data.sdks }}
-        <option value="{{ .id }}">{{ .label }}</option>
-        {{- end }}
-      </select>
-      <select class="otel-compat__select" data-slot="{{ $slot }}" data-role="receiver" aria-label="{{ $name }}: sends data to">
-        {{- range $data.receivers }}
-        <option value="{{ .id }}">{{ .label }}</option>
-        {{- end }}
-      </select>
+      {{- range $menu := slice (dict "role" "sdk" "items" $data.sdks "label" "SDK" "about" "About this SDK") (dict "role" "receiver" "items" $data.receivers "label" "sends data to" "about" "About this destination") }}
+      {{- $tipID := printf "%s-%s-%s-about" $uid $slot $menu.role }}
+      <span class="otel-compat__menu" data-slot="{{ $slot }}" data-role="{{ $menu.role }}">
+        <select class="otel-compat__select" aria-label="{{ $name }}: {{ $menu.label }}">
+          {{- range $menu.items }}
+          <option value="{{ .id }}" data-description="{{ .description }}">{{ .label }}</option>
+          {{- end }}
+        </select>
+        <span class="tooltip-container"><button type="button" class="tooltip-trigger otel-compat__info" aria-describedby="{{ $tipID }}"><i class="icon-info" aria-hidden="true"></i><span class="otel-compat__sr">{{ $menu.about }}</span></button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip"></span></span>
+      </span>
+      {{- end }}
       {{- end }}
     </div>
   </div>
@@ -113,12 +88,23 @@
               {{- if $p.recommended }}<span class="otel-compat__badge">Recommended</span>{{ end -}}
             </div>
             <dl class="otel-compat__fields">
-              <div data-field="sdk"><dt>SDK</dt><dd><span class="otel-compat__value">{{ $sdk.label }}</span></dd></div>
-              <div data-field="receiver"><dt>Sends to</dt><dd><span class="otel-compat__value">{{ $receiver.label }}</span></dd></div>
+              {{- range $field := slice (dict "role" "sdk" "label" "SDK" "item" $sdk) (dict "role" "receiver" "label" "Sends to" "item" $receiver) }}
+              {{- $tipID := printf "%s-%s-%s-%s" $uid $p.sdk $p.receiver $field.role }}
+              <div data-field="{{ $field.role }}"><dt>{{ $field.label }}</dt><dd><span class="otel-compat__value">
+                {{- with $field.item.description -}}
+                <span class="tooltip-container"><button type="button" class="tooltip-trigger" aria-describedby="{{ $tipID }}">{{ $field.item.label }}</button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ . }}</span></span>
+                {{- else -}}
+                {{ $field.item.label }}
+                {{- end -}}
+              </span></dd></div>
+              {{- end }}
               {{- with $receiver.agent }}
               <div data-field="agent"><dt>Agent</dt><dd>{{ index $agentText . }}</dd></div>
               {{- end }}
             </dl>
+            {{- with $receiver.agent }}
+            <span class="otel-compat__agent-line">{{ index $agentLine . }}</span>
+            {{- end }}
             {{- with $p.link }}
             <a class="otel-compat__setup-link" href="{{ . | relLangURL }}" aria-label="Setup guide: {{ $sdk.label }} + {{ $receiver.label }}">Setup guide</a>
             {{- end }}
@@ -175,4 +161,3 @@
   <p class="otel-compat__caption">A blank cell means not yet documented.</p>
 </div>
 
-{{- end -}}

@@ -113,9 +113,7 @@ Hugo reads its own copy of this data at `hugo/config/_default/params.yaml` under
 
 Which Datadog features each OpenTelemetry setup supports. A setup is one SDK
 plus one receiver (the component the SDK sends to). The `otel-compatibility`
-Hugo shortcode renders it on `/opentelemetry/compatibility/`:
-`{{< otel-compatibility part="setups" >}}` shows a one-line description of each
-SDK and receiver, and `{{< otel-compatibility >}}` shows the feature table. Hugo mounts this
+Hugo shortcode renders it on `/opentelemetry/compatibility/`. Hugo mounts this
 file as `site.Data.otel_compatibility`. Astro does not read it yet, and there is
 no Zod schema for it yet. The Hugo shortcode stops the build on an unknown ID or
 support value.
@@ -136,9 +134,7 @@ support value.
 | ------------- | -------- | ----------------------------------------------------------------------------- |
 | `id`          | yes      | Key used everywhere else in the file                                          |
 | `label`       | yes      | Display name                                                                  |
-| `description` | yes      | One sentence about what it is, shown in the setup list                        |
-| `link`        | no       | Docs page for it                                                              |
-| `apis`        | no       | SDKs only: the APIs it supports, shown under the description                  |
+| `description` | yes      | One sentence about what it is, shown on hover in the column headers           |
 | `agent`       | no       | Receivers only: `included`, `optional`, or `none`. Shown in the column header. |
 
 ### `groups`

@@ -150,6 +150,7 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       font-weight: 400;
       text-align: left;
       text-transform: none;
+      overflow-wrap: normal;
     }
 
     tbody td {
@@ -260,6 +261,68 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
   }
 
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  &__info {
+    flex: none;
+    color: $gray-darkish;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  &__value .tooltip-trigger {
+    font-weight: inherit;
+    text-align: left;
+  }
+
+  &__agent-line {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 12px;
+    color: $gray-darkish;
+  }
+
+  // Outside compare view (the full table, and the page without JavaScript), headers show
+  // just the two component names and an Agent line. Field labels stay for screen readers.
+  &:not([data-view="compare"]) &__fields {
+    display: block;
+
+    dt {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    dd {
+      margin: 0;
+    }
+
+    [data-field="receiver"] dd {
+      font-weight: 400;
+    }
+
+    [data-field="agent"] {
+      display: none;
+    }
+  }
+
+  &[data-view="compare"] &__agent-line {
+    display: none;
+  }
+
+  // Two setups side by side get equal columns
+  &[data-view="compare"] thead th[data-pair] {
+    width: 50%;
+  }
+
   &__setup-link {
     display: inline-block;
     margin-top: 0.5rem;
@@ -354,43 +417,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   color: $brand-primary;
 }
 
-// Setup key: a one-line description of each SDK and receiver
-.otel-compat-key {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem 2rem;
-  margin: 1rem 0 1.5rem;
-
-  &__list {
-    margin: 0;
-  }
-
-  &__item {
-    padding: 0.6rem 0;
-    border-top: 1px solid $gray-border;
-
-    dt {
-      font-weight: 600;
-    }
-
-    dd {
-      margin: 0.15rem 0 0;
-      font-size: 14px;
-      line-height: 1.45;
-    }
-  }
-
-  &__meta {
-    display: block;
-    margin-top: 0.15rem;
-    font-size: 12px;
-    color: $gray-darkish;
-  }
-}
-
-// Override the site's boxed definition-list styles for the header fields and the setup key
-.otel-compat .otel-compat__fields,
-.otel-compat-key .otel-compat-key__list {
+// Override the site's boxed definition-list styles for the header fields
+.otel-compat .otel-compat__fields {
   border: 0;
   font-size: inherit;
   line-height: inherit;
@@ -400,9 +428,4 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   dd:last-of-type {
     padding: 0;
   }
-}
-
-.otel-compat-key .otel-compat-key__list {
-  font-size: 16px;
-  line-height: 1.4;
 }
