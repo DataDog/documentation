@@ -28,7 +28,7 @@ Pour commencer à configurer le monitor, complétez les sections suivantes :
 * {{< ui >}}Define the search query{{< /ui >}} : Construisez une requête pour compter les événements, mesurer des métriques, grouper par une ou plusieurs dimensions, et plus encore.
 * {{< ui >}}Set alert conditions{{< /ui >}} : Définissez des seuils d'alerte et d'avertissement, des délais d'évaluation, et configurez des options d'alerte avancées.
 * {{< ui >}}Configure notifications and automations{{< /ui >}} : Rédigez un titre et un message de notification personnalisés avec des variables. Choisissez comment les notifications sont envoyées à vos équipes (e-mail, Slack ou PagerDuty). Incluez des automatisations de workflow ou des cas dans la notification d'alerte.
-* {{< ui >}}Define permissions and audit notifications{{< /ui >}} : Configurez des contrôles d'accès granulaires et désignez des rôles et des utilisateurs spécifiques pouvant modifier un monitor. Activez les notifications d'audit pour être alerté si un monitor est modifié.
+* {{< ui >}}Define permissions and audit notifications{{< /ui >}} : Configurez des contrôles d'accès granulaires et désignez des rôles et des utilisateurs spécifiques pouvant modifier un monitor. Activez les notifications d'audit pour générer une alerte si un monitor est modifié.
 
 ## Définissez la requête de recherche {#define-the-search-query}
 
@@ -337,24 +337,44 @@ Si vous configurez des tags ou des dimensions dans votre requête, ces valeurs s
 
 Tous les utilisateurs peuvent voir tous les monitors, quelle que soit l'équipe ou le rôle auquel ils sont associés. Par défaut, seuls les utilisateurs rattachés à des rôles disposant de l'[autorisation d'écriture sur les monitors][11] peuvent modifier les monitors. Les [rôles Datadog Admin et Datadog standard][12] disposent par défaut de l'autorisation d'écriture sur les monitors. Si votre organisation utilise des [rôles personnalisés][13], d'autres rôles personnalisés peuvent disposer de l'autorisation d'écriture sur les monitors. Pour plus d'informations sur la configuration du RBAC pour Monitors et la migration des Monitors du paramètre verrouillé vers l'utilisation de restrictions de rôle, consultez le guide sur [How to set up RBAC for Monitors][14].
 
-Vous pouvez restreindre davantage votre monitor en spécifiant une liste d'[équipes][17], de [rôles][15] ou d'utilisateurs autorisés à le modifier. Le créateur du monitor dispose par défaut des droits de modification sur celui-ci. Il est notamment possible de modifier la configuration du monitor, de supprimer le monitor et de désactiver ses notifications pendant la durée souhaitée.
+Vous pouvez restreindre davantage votre monitor en spécifiant une liste d'[équipes][17], de [rôles][15] ou d'utilisateurs autorisés à le modifier ou à le mettre en sourdine. Le créateur du monitor dispose par défaut des droits de modification sur celui-ci.
 
 **Remarque** : Les limitations s'appliquent à la fois dans l'interface utilisateur et dans l'API.
 
+### Niveaux d'accès {#access-levels}
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Le niveau d'accès Muter et les contrôles d'accès aux downtimes sont en Preview.
+{{< /callout >}}
+
+Chaque équipe, chaque rôle ou chaque utilisateur ayant accès à un monitor restreint dispose de l'un des niveaux d'accès suivants :
+
+| Niveau d'accès | Autorisations |
+|--------------|-------------|
+| Viewer       | Afficher le monitor. |
+| Muter        | Afficher et mettre en sourdine le monitor. Les utilisateurs ayant le niveau Muter ne peuvent pas modifier ou supprimer le monitor. |
+| Editor       | Afficher, mettre en sourdine, modifier et supprimer le monitor. |
+
+Utilisez le niveau d'accès Muter pour permettre aux ingénieurs d'astreinte ou aux autres intervenants de mettre un monitor en sourdine pendant un incident ou une fenêtre de maintenance, sans leur donner accès à la modification de sa configuration. Si votre organisation ne dispose pas du niveau d'accès Muter, seuls les utilisateurs ayant le niveau Editor peuvent mettre un monitor en sourdine.
+
+Pour mettre un monitor en sourdine, un utilisateur a également besoin de l'[autorisation Manage Downtimes][11]. Un downtime ne met en sourdine que les monitors auxquels son créateur a accès avec le niveau Muter ou Editor. Pour plus d'informations, consultez [Downtimes][18].
+
+**Remarque** : Restreindre l'accès à la modification d'un monitor supprime également l'accès à sa mise en sourdine pour les utilisateurs ayant le niveau Viewer, y compris par le biais des downtimes. Pour permettre à ces utilisateurs de mettre le monitor en sourdine, accordez-leur le niveau d'accès Muter.
+
 ### Contrôles d'accès granulaires {#granular-access-controls}
 
-Utilisez les [contrôles d'accès granulaires][16] pour limiter les équipes, rôles ou utilisateurs autorisés à modifier un monitor :
+Utilisez les [contrôles d'accès granulaires][16] pour limiter les équipes, les rôles ou les utilisateurs pouvant modifier ou mettre en sourdine un monitor :
 1. Lors de la modification ou de la configuration d'un monitor, recherchez la section {{< ui >}}Define permissions and audit notifications{{< /ui >}}.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Options de configuration du monitor pour définir les autorisations" style="width:70%;" >}}
 1. Cliquez sur {{< ui >}}Edit Access{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Restrict Access{{< /ui >}}.
 1. La boîte de dialogue se met à jour pour indiquer que les membres de votre organisation ont un accès {{< ui >}}Viewer{{< /ui >}} par défaut.
-1. Utilisez le menu déroulant pour sélectionner une ou plusieurs équipes, rôles ou utilisateurs pouvant modifier le monitor.
+1. Utilisez le menu déroulant pour sélectionner au moins une équipe, un rôle ou un utilisateur pouvant modifier ou mettre en sourdine le monitor.
 1. Cliquez sur {{< ui >}}Add{{< /ui >}}.
-1. La boîte de dialogue se met à jour pour indiquer que le rôle que vous avez sélectionné dispose de l'autorisation {{< ui >}}Editor{{< /ui >}}.
+1. La boîte de dialogue se met à jour pour indiquer que le rôle que vous avez sélectionné dispose de l'autorisation {{< ui >}}Editor{{< /ui >}}. Pour donner à la sélection un accès limité à la mise en sourdine, remplacez {{< ui >}}Editor{{< /ui >}} par {{< ui >}}Muter{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Done{{< /ui >}}.
 
-**Remarque :** Pour conserver votre accès en modification au monitor, le système exige que vous incluiez au moins un rôle ou une équipe dont vous êtes membre avant d'enregistrer.
+**Remarque :** Pour conserver votre accès à la modification du monitor, le système exige que vous incluiez au moins un rôle ou une équipe dont vous êtes membre et disposant d'un accès {{< ui >}}Editor{{< /ui >}} avant d'enregistrer.
 
 Pour rétablir les autorisations globales d'un monitor restreint, procédez comme suit :
 1. Lors de la consultation d'un monitor, cliquez sur le menu déroulant {{< ui >}}More{{< /ui >}}.
@@ -383,3 +403,4 @@ Pour rétablir les autorisations globales d'un monitor restreint, procédez comm
 [15]: /fr/account_management/rbac/
 [16]: /fr/account_management/rbac/granular_access
 [17]: /fr/account_management/teams/
+[18]: /fr/monitors/downtimes/#permissions

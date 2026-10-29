@@ -39,7 +39,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< programming-lang lang="python" >}}
 - **Minimum version**: v4.8.0
-- **Supported protocols**: `http/json`
+- **Supported protocols**: `http/protobuf` (v4.14.0+, default), `http/json` (default before v4.14.0)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
@@ -59,7 +59,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language. Python, Node.js, and .NET default to `http/json`, while Java and Go default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
+**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but Datadog SDK defaults vary by language. Node.js and .NET default to `http/json`, and Python defaults to `http/json` before v4.14.0. Java, Go, and Python v4.14.0+ default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` or `OTEL_EXPORTER_OTLP_TRACES_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP/HTTP (`http/protobuf` or `http/json`) uses port `4318`, and OTLP/gRPC (`grpc`) uses port `4317`.
 
 ## Enable OTLP trace export
 
@@ -72,7 +72,7 @@ DD_TRACE_OTEL_ENABLED=true
 
 By default, traces are sent to `http://localhost:4318/v1/traces`.
 
-To send traces to a different endpoint, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
+To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
 
 ## Verify
 

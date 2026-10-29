@@ -855,8 +855,8 @@
   "CreateCaseNotebook": {
     "description": "Create a new investigation notebook and link it to a work item",
     "summary": "Create investigation notebook for work item",
-    "request_description": "Notebook creation request",
-    "request_schema_description": "Notebook creation request"
+    "request_description": "Case investigation notebook creation request.",
+    "request_schema_description": "Case investigation notebook creation request."
   },
   "MoveCaseToProject": {
     "description": "Update the project associated with a work item",
@@ -1066,60 +1066,6 @@
     "summary": "Send CI job logs",
     "request_description": "CI job log line or batch in JSON format.",
     "request_schema_description": "A batch of up to 1,000 CI job log lines. Use a one-item array to send one log line."
-  },
-  "ListAWSCloudAuthPersonaMappings": {
-    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
-    "summary": "List AWS cloud authentication persona mappings"
-  },
-  "CreateAWSCloudAuthPersonaMapping": {
-    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
-    "summary": "Create an AWS cloud authentication persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
-  },
-  "DeleteAWSCloudAuthPersonaMapping": {
-    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
-    "summary": "Delete an AWS cloud authentication persona mapping"
-  },
-  "GetAWSCloudAuthPersonaMapping": {
-    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
-    "summary": "Get an AWS cloud authentication persona mapping"
-  },
-  "ListGitHubCloudAuthIntakeMappings": {
-    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
-    "summary": "List GitHub cloud authentication intake mappings"
-  },
-  "CreateGitHubCloudAuthIntakeMapping": {
-    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Create a GitHub cloud auth intake mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
-  },
-  "DeleteGitHubCloudAuthIntakeMapping": {
-    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
-    "summary": "Delete a GitHub cloud auth intake mapping"
-  },
-  "GetGitHubCloudAuthIntakeMapping": {
-    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Get a GitHub cloud authentication intake mapping"
-  },
-  "ListGitHubCloudAuthPersonaMappings": {
-    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
-    "summary": "List GitHub cloud authentication persona mappings"
-  },
-  "CreateGitHubCloudAuthPersonaMapping": {
-    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Create a GitHub cloud auth persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
-  },
-  "DeleteGitHubCloudAuthPersonaMapping": {
-    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
-    "summary": "Delete a GitHub cloud auth persona mapping"
-  },
-  "GetGitHubCloudAuthPersonaMapping": {
-    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Get a GitHub cloud authentication persona mapping"
   },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
@@ -1549,32 +1495,6 @@
   "GetOwnershipUntaggedFindings": {
     "description": "Count findings with no team tag, grouped by ownership confidence level.",
     "summary": "Count untagged findings by ownership confidence"
-  },
-  "ListOwnershipInferences": {
-    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
-    "summary": "List ownership inferences for a resource"
-  },
-  "ListOwnershipHistory": {
-    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership inference history for a resource"
-  },
-  "GetOwnershipInference": {
-    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
-    "summary": "Get an ownership inference by owner type"
-  },
-  "GetOwnershipEvidence": {
-    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
-    "summary": "Get the evidence for an ownership inference"
-  },
-  "CreateOwnershipFeedback": {
-    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
-    "summary": "Submit feedback on an ownership inference",
-    "request_description": "",
-    "request_schema_description": "The request body for submitting ownership feedback."
-  },
-  "ListOwnershipHistoryByOwnerType": {
-    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership history by owner type"
   },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
@@ -2341,7 +2261,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
@@ -4193,6 +4113,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "ListArchiveSearches": {
+    "description": "List the organization's Archive Searches that haven't expired, up to 5,000. When more\nexist, `meta.truncated` is `true`.",
+    "summary": "List Archive Searches"
+  },
   "CreateArchiveSearch": {
     "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
     "summary": "Create an Archive Search",
@@ -4202,6 +4126,16 @@
   "GetArchiveSearch": {
     "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
     "summary": "Get an Archive Search"
+  },
+  "RehydrateArchiveSearch": {
+    "description": "Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a\nretained historical view. Rehydration is the only thing this endpoint can change, and it only\napplies to a search that has already finished scanning.",
+    "summary": "Rehydrate an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to rehydrate an Archive Search."
+  },
+  "CancelArchiveSearch": {
+    "description": "Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a\nno-op: it returns the resource unchanged instead of returning an error.",
+    "summary": "Cancel an Archive Search"
   },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
@@ -4502,6 +4436,12 @@
     "summary": "Create a tag indexing rule exemption",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule exemption."
+  },
+  "UpdateTagIndexingRuleExemption": {
+    "description": "Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and\n`created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has\nonly a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag indexing rule exemption",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a tag indexing rule exemption."
   },
   "ListTagIndexingRulesForMetric": {
     "description": "List the tag indexing rules that apply to a given metric, sorted by `rule_order`.\nMatching is performed server-side using each rule's `metric_name_matches` glob patterns.",
@@ -4818,6 +4758,12 @@
   "EscalateOnCallPage": {
     "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
+  },
+  "RerouteOnCallPage": {
+    "description": "Reroutes an On-Call Page.",
+    "summary": "Reroute On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to reroute an On-Call Page to a different team or user."
   },
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
@@ -6429,6 +6375,32 @@
     "request_description": "",
     "request_schema_description": "Request to set or clear the manual severity override of security findings."
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -7224,20 +7196,6 @@
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
-  },
-  "GetSPARecommendationsV2": {
-    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA recommendations v2",
-    "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
-  },
-  "GetSPARecommendations": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
-    "summary": "Get SPA Recommendations"
-  },
-  "GetSPARecommendationsWithShard": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA Recommendations with a shard parameter"
   },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
@@ -8191,6 +8149,60 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAWSCloudAuthPersonaMappings": {
+    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
+    "summary": "List AWS cloud authentication persona mappings"
+  },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
+  "ListGitHubCloudAuthIntakeMappings": {
+    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
+    "summary": "List GitHub cloud authentication intake mappings"
+  },
+  "CreateGitHubCloudAuthIntakeMapping": {
+    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Create a GitHub cloud auth intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
+  },
+  "DeleteGitHubCloudAuthIntakeMapping": {
+    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
+    "summary": "Delete a GitHub cloud auth intake mapping"
+  },
+  "GetGitHubCloudAuthIntakeMapping": {
+    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Get a GitHub cloud authentication intake mapping"
+  },
+  "ListGitHubCloudAuthPersonaMappings": {
+    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
+    "summary": "List GitHub cloud authentication persona mappings"
+  },
+  "CreateGitHubCloudAuthPersonaMapping": {
+    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Create a GitHub cloud auth persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
+  },
+  "DeleteGitHubCloudAuthPersonaMapping": {
+    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
+    "summary": "Delete a GitHub cloud auth persona mapping"
+  },
+  "GetGitHubCloudAuthPersonaMapping": {
+    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Get a GitHub cloud authentication persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

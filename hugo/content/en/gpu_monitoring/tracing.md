@@ -12,8 +12,8 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Continuous tracing with GPU Monitoring is in Early Access Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
+Continuous tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -28,7 +28,6 @@ Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing 
 
 To begin continuously tracing your workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
-- Minimum required CUDA and CUPTI version: 13.
 
 ### 1. Configure GPU tracing
 

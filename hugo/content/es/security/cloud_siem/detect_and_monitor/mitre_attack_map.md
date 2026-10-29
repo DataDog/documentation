@@ -39,7 +39,7 @@ Haga clic en los botones de densidad de reglas para visualizar el mapa para un n
 Para ver más información sobre una técnica y las reglas que monitorean la técnica:
 
 1. En la página [MITRE ATT&CK Map][3], haga clic en un mosaico de técnica.
-1. Haga clic en {{< ui >}}Create Custom Rule{{< /ui >}} si desea crear una regla personalizada para esta técnica. Consulte [Detection Rules][4] para obtener más información sobre la creación de reglas personalizadas. **Nota**: Para que la regla personalizada se muestre dentro de las fuentes activas, se debe definir la etiqueta de fuente adecuada en la regla de detección.
+1. Haga clic en {{< ui >}}Create Custom Rule{{< /ui >}} si desea crear una regla personalizada para esta técnica. Consulte [Crear una regla personalizada][4] para obtener más información sobre cómo crear reglas personalizadas. **Nota**: Para que la regla personalizada se muestre dentro de las fuentes activas, se debe definir la etiqueta de fuente adecuada en la regla de detección.
 1. En la sección {{< ui >}}Rules monitoring this Technique{{< /ui >}}, puede:
 	1. Ingrese una consulta de búsqueda para filtrar reglas específicas.
   1. Ordene por fecha de creación, tipo de regla, nombre de regla, fuente o mayor gravedad.
@@ -72,5 +72,5 @@ Tenga en cuenta los siguientes detalles de formato:
 [1]: https://app.datadoghq.com/security/siem/rules
 [2]: /es/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/
 [3]: https://app.datadoghq.com/security/siem/rules?query=product=siem&sort=date&viz=attck-map
-[4]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold
+[4]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule
 [5]: /es/security/cloud_siem/guide/determine-cloud-siem-product/

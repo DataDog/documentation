@@ -1,0 +1,22 @@
+/// <reference types="vitest/config" />
+import { defineConfig } from "vitest/config";
+
+// Root vitest config — lists both projects so `yarn test` runs everything.
+// Each project file uses its own getViteConfig() call, giving it an isolated
+// Vite server and module graph:
+//
+//   fixture     headless + component tests, frozen 8-category fixture
+//   live        full-spec shape validation, live spec staged in api-spec/
+//
+// Run a single project:
+//   vitest run --config vitest.unit.config.ts
+//   vitest run --config vitest.integration.config.ts
+//
+// globalSetup syncs the content collections before either project runs. It
+// lives here, not in the project files, so it runs once rather than twice.
+export default defineConfig({
+  test: {
+    globalSetup: ["./tests/vitestGlobalSetup.ts"],
+    projects: ["./vitest.unit.config.ts", "./vitest.integration.config.ts"],
+  },
+});

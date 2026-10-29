@@ -66,3 +66,9 @@ entries:
       - UpdateStatus
       - WatchCase
     title: Rename Case Management API documentation to Work Management
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41030
+    operations:
+      - CreateCaseNotebook
+    title: Rename Case Management notebook models
