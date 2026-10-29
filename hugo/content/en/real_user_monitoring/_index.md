@@ -87,7 +87,9 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
 
-A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
+A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. These limits apply to Browser, iOS, and Android RUM. If the user interacts with the application after either limit, a new session starts automatically.
+
+On iOS and Android, time spent in the background counts toward the inactivity timeout, measured from the last user interaction. Backgrounding the app does not immediately end the session: returning before either limit is reached continues the same session. For view lifecycle behavior and opt-in background event tracking, see the [iOS][22] and [Android][23] data collection documentation.
 
 ### Technical limitations
 
@@ -304,3 +306,5 @@ You must have edit access to restore general access to a restricted application.
 [19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
 [20]: /real_user_monitoring/guide/proxy-rum-data
 [21]: /integrations/content_security_policy_logs
+[22]: /real_user_monitoring/application_monitoring/ios/data_collected/#views-instrumentation-versus-app-lifecycle
+[23]: /real_user_monitoring/application_monitoring/android/data_collected/#views-instrumentation-versus-app-lifecycle
