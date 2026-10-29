@@ -34,7 +34,7 @@ Before you begin, make sure you have:
 
 Add Datadog's IP addresses to your service's IP Access List in ClickHouse Cloud. Use the addresses in the `webhooks` section of the [IP Ranges][3] page. Without these addresses, Datadog cannot connect to your service.
 
-<div class="alert alert-warning">IP ranges are different for each Datadog site. On the <a href="/api/latest/ip-ranges/">IP Ranges</a> page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
+<div class="alert alert-warning">IP ranges are different for each Datadog site. On the {{< region-param key="ip_ranges_url" link="true" text="IP Ranges" >}} page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
 
 ## Create a Datadog user in ClickHouse Cloud
 
