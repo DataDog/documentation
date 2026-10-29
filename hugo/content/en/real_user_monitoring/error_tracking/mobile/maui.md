@@ -49,7 +49,7 @@ To enable native crash reporting, set `NativeCrashReportEnabled = true` on the S
 ```
 
 <div class="alert alert-info">
-When <code>NativeCrashReportEnabled = true</code>, an unhandled C# exception that crashes the application is reported <strong>twice</strong>. One report is a C# error captured by <code>AppDomain.UnhandledException</code>. The other is a native iOS or Android crash captured by the platform's crash reporter. Both events share the same RUM session and view, so you can correlate them in the Explorer.<br><br>To keep only one of the two, use <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> to drop the copy that doesn't fit your workflow. For example, filter by <code>Source</code> or <code>Stacktrace</code> content.
+When <code>NativeCrashReportEnabled = true</code>, an unhandled C# exception that crashes an iOS app on the main thread is reported <strong>twice</strong>. One report is a C# error captured by <code>AppDomain.UnhandledException</code>. The other is a native crash captured by the iOS crash reporter. Both events share the same RUM session and view, so you can correlate them in the Explorer. On Android, the C# crash is reported once, although a separate native crash can sometimes appear while the app shuts down.<br><br>To keep only one of the two, use <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> to drop the copy that doesn't fit your workflow. For example, filter by <code>Source</code> or <code>Stacktrace</code> content.
 </div>
 
 ## Setup
@@ -68,10 +68,10 @@ To resolve C# file names and line numbers, native iOS crash addresses, and obfus
 
 ### How C# symbolication works
 
-.NET MAUI Release builds compile C# ahead of time, so the runtime on the device cannot map a stack frame back to a source file and line. Instead, the SDK resolves C# frames server-side using your app's Portable PDB files:
+.NET MAUI Release builds don't include the files the runtime on the device needs to map a stack frame back to a source file and line. Instead, the SDK resolves C# frames server-side using your app's Portable PDB files:
 
 1. At build time, the `Datadog.Maui` package generates a debug ID manifest (`dd_debug_ids.json`) that records the debug ID of each assembly your app ships, and packages it into the app.
-2. At runtime, when the SDK reports a C# error, it attaches the assembly debug ID and IL offset of each managed stack frame.
+2. At runtime, when the SDK reports a C# error, it attaches the assembly debug ID, method token, and IL offset of each managed stack frame.
 3. At publish time, the SDK uploads the Portable PDB that matches each shipped assembly. On iOS device builds, the linker rewrites the app's assembly, so the SDK uploads the PDB produced by the linker instead of the pre-link copy in the build output directory.
 4. Datadog matches each frame to its Portable PDB by debug ID and resolves the file name and line number.
 
@@ -115,7 +115,12 @@ dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
   -p:DatadogUploadSymbols=true
 ```
 
-The `.dSYM` bundle generated next to the `.app` and the Portable PDBs of your app's assemblies are uploaded. dSYMs are only produced for device builds (`-r ios-arm64`). Simulator builds (`iossimulator-arm64`) skip the dSYM upload.
+The `.dSYM` bundle generated next to the `.app` and the Portable PDBs of your app's assemblies are uploaded. dSYMs are only produced for device builds (`-r ios-arm64`). `dotnet publish` does not support simulator builds (`iossimulator-arm64`), so nothing is uploaded for them, including Portable PDBs. To upload Portable PDBs from a simulator build, run:
+
+```bash
+dotnet build -c Release -f net10.0-ios -r iossimulator-arm64 \
+  -p:DatadogUploadSymbols=true "-t:Build;DatadogUploadPortablePdb"
+```
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -130,9 +135,11 @@ The R8 `mapping.txt` file and the Portable PDBs of your app's assemblies are upl
 {{% /tab %}}
 {{< /tabs >}}
 
-Portable PDBs are uploaded for your app's own assemblies and project references, meaning every assembly whose `.pdb` file is written to the build output directory. To include PDBs shipped inside NuGet packages, copy them to the build output directory (for example, with `<CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>`).
+Portable PDBs are uploaded for your app's own assemblies and project references, meaning every assembly whose `.pdb` file is written to the build output directory. To include PDBs shipped inside NuGet packages, copy them to the build output directory with `<CopyDebugSymbolFilesFromPackages>true</CopyDebugSymbolFilesFromPackages>`. The SDK uploads only the PDBs that match the assemblies your app ships. On Android, assemblies that the trimmer rewrites, such as `Microsoft.Maui`, have no matching PDB, so their frames show method names only.
 
 Portable PDB upload requires portable debug symbols, which is the .NET default. If your project overrides it, set `<DebugType>portable</DebugType>` for the configuration you publish.
+
+Upload the symbols from the same build that you ship. Builds can get new debug IDs even when the source code doesn't change, and iOS Release builds always do, so symbols from another build of the same code don't match.
 
 ### Enable R8 on Android
 
@@ -184,17 +191,47 @@ By default, a failed upload produces an MSBuild warning and the build still succ
 
 After upload, symbols take up to 5 minutes to process. You can confirm they were received under [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4].
 
+### Upload Portable PDBs manually
+
+Datadog recommends using the MSBuild targets above, because they pick the right PDB files for you. If you need to upload from a separate step, run:
+
+```bash
+datadog-ci ppdb-symbols upload <FOLDER_WITH_PDBS> \
+  --debug-id-manifest obj/<CONFIGURATION>/<TARGET_FRAMEWORK>/<RUNTIME_IDENTIFIER>/dd_debug_ids.json
+```
+
+On iOS device builds, upload the PDB files from `obj/.../linked/`, not from `bin/`. The linker rewrites your assemblies, and only the PDBs it writes match the app you ship. Uploading the wrong PDB produces wrong line numbers without any warning.
+
 ## Limitations
 
 ### C# assemblies without Portable PDBs
 
-C# frames resolve to file names and line numbers only for assemblies whose Portable PDB was uploaded. Frames from .NET framework assemblies, and from third-party assemblies whose PDB is not in the build output directory, resolve to method names only.
+C# frames resolve to file names and line numbers only for assemblies whose Portable PDB was uploaded. Frames from .NET framework assemblies, from assemblies that the Android trimmer rewrites (such as `Microsoft.Maui`), and from third-party assemblies whose PDB is not in the build output directory, resolve to method names only.
+
+### Manually reported errors
+
+C# file names and line numbers are resolved only for errors the SDK captures automatically: unhandled exceptions and unobserved task exceptions. Errors you report with `DdRum.AddError` pass the stack trace as text, so they are shown as reported, without file names or line numbers.
+
+### C# errors in Log Management
+
+C# symbolication applies to errors collected by RUM. C# stack traces sent to Log Management are not symbolicated.
 
 ### C# line numbers on iOS
 
-To resolve a C# frame to a line number, Datadog needs the frame's IL offset. On iOS, the Mono AOT runtime reports accurate IL offsets when the app is AOT-compiled with debug information (soft-debug), which is the default for the `Debug` configuration. In builds compiled without debug information, frames can be reported without an accurate IL offset. Those frames resolve to method names only.
+On iOS, Release builds report C# frames without an IL offset. For those frames, Datadog shows the file name and the first line of the method, not the exact line that threw the exception.
+
+To get exact line numbers, compile the app with debug information (soft-debug) by publishing with both of the following properties:
+
+```bash
+dotnet publish -c Release -f net10.0-ios -r ios-arm64 \
+  -p:DatadogUploadSymbols=true -p:MtouchDebug=true -p:MtouchUseLlvm=false
+```
+
+Both properties are needed: Release builds use LLVM by default, and LLVM turns soft-debug off. Soft-debug makes the app binary larger and can make the app slower. Debug builds use soft-debug by default.
 
 Soft-debug builds also bundle the Portable PDB inside the `.app`. When symbol upload is enabled, the SDK removes it from the bundle by default, because symbolication uses the uploaded PDB. To keep it, set `DatadogKeepPortablePdbs=true`.
+
+On Android, Release builds report IL offsets, so C# frames show the exact line.
 
 ### File sizing
 
@@ -208,11 +245,13 @@ The SDK handles crash reporting with the following behaviors:
 - RUM crashes must be attached to a RUM view. If a crash occurs before a view is visible (or after the app has been moved to the background by the user), the crash is muted and isn't reported. To mitigate this, set `TrackBackgroundEvents = true` on `DdRumConfiguration`.
 - Only crashes that occur in sampled sessions are kept.
 
-### Android NDK crash symbols
+### Android native crashes
 
-When `NativeCrashReportEnabled = true`, native (C/C++) crashes captured by `dd-sdk-android-ndk` require unstripped `.so` files for symbolication.
+When `NativeCrashReportEnabled = true`, the SDK also captures native (C/C++) crashes on Android. The SDK does not upload any `.so` files for these crashes.
 
-In a MAUI app, the native `.so` files typically come from the .NET runtime (`libmonosgen-2.0.so`, `libmonodroid.so`) and from Datadog's own NDK library — Datadog resolves these server-side; no manual upload is needed for either. If you ship custom native C/C++ libraries, upload their symbols manually with `datadog-ci dsyms upload <path-to-so-directory>`.
+In a MAUI app, most native code comes from the .NET runtime (`libmonosgen-2.0.so`, `libmonodroid.so`), from Datadog's own NDK library, and from C# code compiled ahead of time (`libaot-*.dll.so`). No debug information is available for the runtime and Datadog libraries, so their frames are not symbolicated. C# frames inside a native crash don't show file names or line numbers, even if you upload the `libaot-*.dll.so` files.
+
+If you ship your own native C/C++ libraries, upload their unstripped `.so` files with `datadog-ci elf-symbols upload <PATH_TO_SO_DIRECTORY>`.
 
 ## Test your implementation
 
@@ -240,7 +279,7 @@ Run `npm install -g @datadog/datadog-ci` and verify with `datadog-ci version`.
 Export the key in your shell: `export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>`. Verify with `echo $DATADOG_API_KEY`.
 
 **`Skipping dSYM upload — file not found`**
-dSYMs are only generated for device builds (`-r ios-arm64`). Simulator builds do not produce dSYMs.
+dSYMs are only generated for device builds (`-r ios-arm64`). Simulator builds do not produce dSYMs. To upload Portable PDBs from a simulator build, see the iOS tab in [Enable the upload](#3-enable-the-upload).
 
 **`Skipping mapping upload — mapping.txt not found`**
 R8 is not enabled for the build. Add `<AndroidLinkTool>r8</AndroidLinkTool>` and `<AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>` to your `.csproj`. See [Enable R8 on Android](#enable-r8-on-android).
@@ -255,7 +294,10 @@ No `.pdb` file was written to the build output directory. Confirm that debug sym
 For one or more assemblies, none of the PDB files found matches the assembly the app ships, so C# frames from those assemblies are not resolved to file names and line numbers. The publish output lists each affected assembly in a `not uploading a Portable PDB for <assembly>` line. This can happen when the PDB files are left over from an earlier build. Delete the `bin/` and `obj/` directories and publish again.
 
 **C# frames show method names but no file names or line numbers**
-Confirm that the publish summary reports the Portable PDB upload as `uploaded`, and that the frames belong to one of your app's assemblies. See [C# assemblies without Portable PDBs](#c-assemblies-without-portable-pdbs).
+Confirm that the publish summary reports the Portable PDB upload as `uploaded`, and that the frames belong to one of your app's assemblies. See [C# assemblies without Portable PDBs](#c-assemblies-without-portable-pdbs). If the error was reported with `DdRum.AddError`, see [Manually reported errors](#manually-reported-errors).
+
+**iOS C# frames show the first line of the method instead of the line that threw**
+iOS Release builds report C# frames without an IL offset. See [C# line numbers on iOS](#c-line-numbers-on-ios).
 
 **No Datadog output visible during publish**
 The terminal logger hides informational messages. Add `-v n -tl:off` to your `dotnet publish` command.
