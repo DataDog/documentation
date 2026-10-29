@@ -465,7 +465,7 @@
   },
   "rum-replay-sessions": {
     "name": "Rum Replay Sessions",
-    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+    "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
     "name": "Rum Replay Viewership",

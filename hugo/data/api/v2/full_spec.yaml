@@ -2060,6 +2060,15 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringRuleProposalID:
+      description: The ID of the rule proposal, returned by the start a rule proposal endpoint.
+      in: path
+      name: proposal_id
+      required: true
+      schema:
+        example: c968cf83-56c2-4d54-a993-6c86dfb83527
+        format: uuid
+        type: string
     SecurityMonitoringRuleVersion:
       description: The historical version number of the rule.
       in: path
@@ -2507,6 +2516,30 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: Not Found
     SecurityMonitoringBatchMigrationUnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Unauthorized
+    SecurityMonitoringRuleProposalBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Bad Request
+    SecurityMonitoringRuleProposalForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Forbidden
+    SecurityMonitoringRuleProposalNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/JSONAPIErrorResponse"
+      description: Not Found
+    SecurityMonitoringRuleProposalUnauthorizedResponse:
       content:
         application/json:
           schema:
@@ -32493,6 +32526,11 @@ components:
           description: Query for creating a data deletion request.
           example: "service:xyz host:abc"
           type: string
+        recoverable_until:
+          description: |-
+            Time when the recovery period for the deletion request ends. Before this time, you can cancel the request and recover the data. After this time, permanent deletion begins, and the status changes to `deleting` within a few minutes. This field is returned only for `in_progress` requests when listing deletion requests, and is omitted if the value cannot be determined.
+          example: "2024-01-11T02:00:00.000000Z"
+          type: string
         source:
           description: The source of the deletion request.
           example: "standard"
@@ -32537,6 +32575,12 @@ components:
     DataDeletionResponseMeta:
       description: The metadata of the data deletion response.
       properties:
+        available_slots:
+          description: |-
+            Number of additional deletion requests the current organization can create before reaching the concurrency limit. Requests with a `pending`, `in_progress`, or `deleting` status count toward the limit. This field is returned only when listing deletion requests, and is omitted if the value cannot be determined.
+          example: 3
+          format: int64
+          type: integer
         count_product:
           additionalProperties:
             format: int64
@@ -32551,6 +32595,12 @@ components:
           description: The total deletion requests created by status.
           example: {"completed": 10, "pending": 5}
           type: object
+        max_concurrent_requests:
+          description: |-
+            Maximum number of deletion requests with a `pending`, `in_progress`, or `deleting` status that the current organization can have at the same time. This field is returned only when listing deletion requests, and is omitted if the value cannot be determined.
+          example: 5
+          format: int64
+          type: integer
         next_page:
           description: The next page when searching deletion requests created in the current organization.
           example: "cGFnZTI="
@@ -106952,6 +107002,54 @@ components:
         - $ref: "#/components/schemas/ELFSymbolFileFormData"
         - $ref: "#/components/schemas/PESymbolFileFormData"
         - $ref: "#/components/schemas/RepositoryFormData"
+    RerouteOnCallPageRequest:
+      description: Full request to reroute an On-Call Page to a different team or user.
+      example:
+        data:
+          attributes:
+            comment: Rerouting to the database team.
+            target:
+              identifier: my-team
+              type: team_handle
+          type: reroute
+      properties:
+        data:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestData"
+      required:
+        - data
+      type: object
+    RerouteOnCallPageRequestData:
+      description: The data for rerouting an On-Call Page, including attributes and resource type.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/RerouteOnCallPageRequestDataType"
+      required:
+        - attributes
+        - type
+      type: object
+    RerouteOnCallPageRequestDataAttributes:
+      description: Details about where to reroute the On-Call Page.
+      properties:
+        comment:
+          description: An optional comment explaining why the page is being rerouted.
+          example: Rerouting to the database team.
+          type: string
+        target:
+          $ref: "#/components/schemas/CreatePageRequestDataAttributesTarget"
+      required:
+        - target
+      type: object
+    RerouteOnCallPageRequestDataType:
+      default: reroute
+      description: The type of resource used when rerouting an On-Call Page.
+      enum:
+        - reroute
+      example: reroute
+      type: string
+      x-enum-varnames:
+        - REROUTE
     ResolveVulnerableSymbolsRequest:
       description: The top-level request object for resolving vulnerable symbols in a set of packages.
       properties:
@@ -118919,6 +119017,177 @@ components:
         thirdPartyRuleOptions:
           $ref: "#/components/schemas/SecurityMonitoringRuleThirdPartyOptions"
       type: object
+    SecurityMonitoringRuleProposalError:
+      description: The reason no rule could be generated. Only present when the status is `failed`.
+      properties:
+        kind:
+          description: |-
+            The kind of failure.
+            - `translation_error`: no rule could be generated from the input. Reword the input
+              or add details, then start a new rule proposal.
+            - `internal_error`: the proposal failed because of an internal error. Start a new
+              rule proposal to try again.
+          example: translation_error
+          type: string
+        message:
+          description: A human-readable explanation of why no rule could be generated, when available.
+          example: No log source matches the described activity.
+          type: string
+        type:
+          description: The type of failure within its kind, such as `NoRuleProduced`.
+          example: NoRuleProduced
+          type: string
+      required:
+        - kind
+      type: object
+    SecurityMonitoringRuleProposalInputType:
+      description: |-
+        The type of input to generate the proposed rule from: `natural_language` for a
+        plain-English description of the behavior to detect, `spl` for a Splunk SPL search or
+        saved search definition, or `kql` for a Microsoft KQL query. SPL inputs must be
+        self-contained, with search macros expanded.
+      enum:
+        - natural_language
+        - spl
+        - kql
+      example: natural_language
+      type: string
+      x-enum-varnames:
+        - NATURAL_LANGUAGE
+        - SPL
+        - KQL
+    SecurityMonitoringRuleProposalResponse:
+      description: Response containing a rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponseData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalResponseAttributes:
+      description: Attributes of the rule proposal.
+      properties:
+        error:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalError"
+        rule:
+          additionalProperties: {}
+          description: |-
+            The proposed Cloud SIEM detection rule in the same format as the create a detection
+            rule endpoint. It is not saved in Cloud SIEM. Only present when the status is
+            `completed`. Review the rule, then create it with the [create a
+            detection rule](https://docs.datadoghq.com/api/latest/security-monitoring/#create-a-detection-rule)
+            endpoint.
+          type: object
+        status:
+          description: |-
+            The status of the rule proposal. `pending` and `in_progress` mean the proposed rule is
+            still being generated. Poll the endpoint again later. `completed` and `failed` are final:
+            `completed` proposals contain the proposed rule in `rule`, and `failed` proposals
+            contain the reason in `error`.
+          example: completed
+          type: string
+      required:
+        - status
+      type: object
+    SecurityMonitoringRuleProposalResponseData:
+      description: Data of the rule proposal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponseAttributes"
+        id:
+          description: The ID of the rule proposal.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalStartRequest:
+      description: Request to start a rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequestData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalStartRequestAttributes:
+      description: Attributes of the rule proposal to start.
+      properties:
+        input:
+          description: |-
+            The natural-language description or rule to generate the proposed rule from, in the
+            format given by `inputType`.
+          example: Detect repeated failed Okta logins followed by a successful login from the same IP.
+          maxLength: 65536
+          type: string
+        inputType:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalInputType"
+      required:
+        - inputType
+        - input
+      type: object
+    SecurityMonitoringRuleProposalStartRequestData:
+      description: Data of the rule proposal to start.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequestAttributes"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalStartResponse:
+      description: Response to a started rule proposal.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponseData"
+      required:
+        - data
+      type: object
+    SecurityMonitoringRuleProposalStartResponseAttributes:
+      description: Attributes of the started rule proposal.
+      properties:
+        status:
+          description: |-
+            The status of the rule proposal, one of `pending`, `in_progress`, `completed`, or
+            `failed`. For a newly started rule proposal, the status is `pending`.
+          example: pending
+          type: string
+      required:
+        - status
+      type: object
+    SecurityMonitoringRuleProposalStartResponseData:
+      description: Data of the started rule proposal.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponseAttributes"
+        id:
+          description: |-
+            The ID of the rule proposal. Use it as `proposal_id` to check the proposal status and get the proposed rule.
+          example: c968cf83-56c2-4d54-a993-6c86dfb83527
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleProposalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityMonitoringRuleProposalType:
+      default: rule_proposals
+      description: The rule proposal resource type. The value is always `rule_proposals`.
+      enum:
+        - rule_proposals
+      example: rule_proposals
+      type: string
+      x-enum-varnames:
+        - RULE_PROPOSALS
     SecurityMonitoringRuleQuery:
       description: Query for matching rule.
       oneOf:
@@ -123973,17 +124242,19 @@ components:
     ServiceRepositoryInfoRequestAttributes:
       description: Attributes for the service repository info request.
       properties:
+        debug_id:
+          description: The debug ID of a JavaScript source map, in UUID format. Alternative to `service` and `version`.
+          example: 00000000-0000-4000-8000-000000000001
+          format: uuid
+          type: string
         service:
-          description: The name of the service.
+          description: The name of the service. Required with `version` when `debug_id` is not set.
           example: my-web-service
           type: string
         version:
-          description: The version of the service.
+          description: The version of the service. Required with `service` when `debug_id` is not set.
           example: 1.0.0
           type: string
-      required:
-        - service
-        - version
       type: object
     ServiceRepositoryInfoRequestData:
       description: Data object for the service repository info request.
@@ -124026,7 +124297,7 @@ components:
         attributes:
           $ref: "#/components/schemas/ServiceRepositoryInfoResponseAttributes"
         id:
-          description: The identifier composed of the service name and version.
+          description: The identifier composed of the service name and version, or the debug ID when the lookup was made by debug ID.
           example: my-web-service:1.0.0
           type: string
         type:
@@ -126751,6 +127022,16 @@ components:
       type: string
       x-enum-varnames:
         - DEBUG_ID
+    SourcemapSymbolType:
+      description: The WASM symbol representation.
+      enum:
+        - dwarf
+        - sourcemap
+      example: dwarf
+      type: string
+      x-enum-varnames:
+        - DWARF
+        - SOURCEMAP
     SourcemapsData:
       description: List of source map data objects.
       items:
@@ -158506,562 +158787,6 @@ paths:
         - CI Visibility Logs
       x-codegen-request-body-name: body
       x-menu-order: 1
-  /api/v2/cloud_auth/aws/persona_mapping:
-    get:
-      description: List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.
-      operationId: ListAWSCloudAuthPersonaMappings
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          account_identifier: test@example.com
-                          account_uuid: 00000000-0000-0000-0000-000000000001
-                          arn_pattern: "arn:aws:iam::123456789012:user/testuser"
-                        id: abc-123
-                        type: aws_cloud_auth_config
-              schema:
-                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List AWS cloud authentication persona mappings
-      tags:
-        - Cloud Authentication
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    post:
-      description: Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.
-      operationId: CreateAWSCloudAuthPersonaMapping
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      account_identifier: test@test.com
-                      arn_pattern: arn:aws:iam::123456789012:user/testuser
-                    type: aws_cloud_auth_config
-            schema:
-              $ref: "#/components/schemas/AWSCloudAuthPersonaMappingCreateRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        account_identifier: test@example.com
-                        account_uuid: 00000000-0000-0000-0000-000000000001
-                        arn_pattern: "arn:aws:iam::123456789012:user/testuser"
-                      id: abc-123
-                      type: aws_cloud_auth_config
-              schema:
-                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create an AWS cloud authentication persona mapping
-      tags:
-        - Cloud Authentication
-      x-codegen-request-body-name: body
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/cloud_auth/aws/persona_mapping/{persona_mapping_id}:
-    delete:
-      description: Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.
-      operationId: DeleteAWSCloudAuthPersonaMapping
-      parameters:
-        - $ref: "#/components/parameters/PersonaMappingID"
-      responses:
-        "204":
-          description: No Content
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete an AWS cloud authentication persona mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    get:
-      description: Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.
-      operationId: GetAWSCloudAuthPersonaMapping
-      parameters:
-        - $ref: "#/components/parameters/PersonaMappingID"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        account_identifier: test@example.com
-                        account_uuid: 00000000-0000-0000-0000-000000000001
-                        arn_pattern: "arn:aws:iam::123456789012:user/testuser"
-                      id: abc-123
-                      type: aws_cloud_auth_config
-              schema:
-                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingResponse"
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get an AWS cloud authentication persona mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in public beta and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/cloud_auth/github/intake_mapping:
-    get:
-      description: List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.
-      operationId: ListGitHubCloudAuthIntakeMappings
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          claim_matchers:
-                            ref: "refs/heads/main"
-                            repository: "test_owner/test_repo"
-                            repository_owner: "test_owner"
-                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                        id: d6d869d7-29d3-5595-bf40-57c95235cf5b
-                        type: github_oidc_auth_intake_mapping
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingsResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List GitHub cloud authentication intake mappings
-      tags:
-        - Cloud Authentication
-      x-menu-order: 9
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    post:
-      description: Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
-      operationId: CreateGitHubCloudAuthIntakeMapping
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      claim_matchers:
-                        ref: "refs/heads/main"
-                        repository: "test_owner/test_repo"
-                        repository_owner: "test_owner"
-                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                    type: github_oidc_auth_intake_mapping
-            schema:
-              $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingCreateRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        claim_matchers:
-                          ref: "refs/heads/main"
-                          repository: "test_owner/test_repo"
-                          repository_owner: "test_owner"
-                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
-                      type: github_oidc_auth_intake_mapping
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a GitHub cloud auth intake mapping
-      tags:
-        - Cloud Authentication
-      x-codegen-request-body-name: body
-      x-menu-order: 11
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/cloud_auth/github/intake_mapping/{intake_mapping_id}:
-    delete:
-      description: Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.
-      operationId: DeleteGitHubCloudAuthIntakeMapping
-      parameters:
-        - $ref: "#/components/parameters/IntakeMappingID"
-      responses:
-        "204":
-          description: No Content
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a GitHub cloud auth intake mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 12
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    get:
-      description: Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
-      operationId: GetGitHubCloudAuthIntakeMapping
-      parameters:
-        - $ref: "#/components/parameters/IntakeMappingID"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        claim_matchers:
-                          ref: "refs/heads/main"
-                          repository: "test_owner/test_repo"
-                          repository_owner: "test_owner"
-                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
-                      type: github_oidc_auth_intake_mapping
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get a GitHub cloud authentication intake mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 10
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/cloud_auth/github/persona_mapping:
-    get:
-      description: List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.
-      operationId: ListGitHubCloudAuthPersonaMappings
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          account_identifier: "test@example.com"
-                          account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
-                          claim_matchers:
-                            ref: "refs/heads/main"
-                            repository: "test_owner/test_repo"
-                            repository_owner: "test_owner"
-                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                        id: c5c758c6-18c2-4484-ae3f-46b84128404a
-                        type: github_oidc_auth_config
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingsResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List GitHub cloud authentication persona mappings
-      tags:
-        - Cloud Authentication
-      x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    post:
-      description: Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
-      operationId: CreateGitHubCloudAuthPersonaMapping
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      account_identifier: "test@example.com"
-                      claim_matchers:
-                        ref: "refs/heads/main"
-                        repository: "test_owner/test_repo"
-                        repository_owner: "test_owner"
-                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                    type: github_oidc_auth_config
-            schema:
-              $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingCreateRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        account_identifier: "test@example.com"
-                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
-                        claim_matchers:
-                          ref: "refs/heads/main"
-                          repository: "test_owner/test_repo"
-                          repository_owner: "test_owner"
-                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
-                      type: github_oidc_auth_config
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a GitHub cloud auth persona mapping
-      tags:
-        - Cloud Authentication
-      x-codegen-request-body-name: body
-      x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/cloud_auth/github/persona_mapping/{persona_mapping_id}:
-    delete:
-      description: Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.
-      operationId: DeleteGitHubCloudAuthPersonaMapping
-      parameters:
-        - $ref: "#/components/parameters/PersonaMappingID"
-      responses:
-        "204":
-          description: No Content
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a GitHub cloud auth persona mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 8
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    get:
-      description: Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
-      operationId: GetGitHubCloudAuthPersonaMapping
-      parameters:
-        - $ref: "#/components/parameters/PersonaMappingID"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        account_identifier: "test@example.com"
-                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
-                        claim_matchers:
-                          ref: "refs/heads/main"
-                          repository: "test_owner/test_repo"
-                          repository_owner: "test_owner"
-                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
-                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
-                      type: github_oidc_auth_config
-              schema:
-                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
-          description: OK
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get a GitHub cloud authentication persona mapping
-      tags:
-        - Cloud Authentication
-      x-menu-order: 6
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cloud_security_management/custom_frameworks:
     post:
       description: Create a custom framework.
@@ -165122,498 +164847,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and may be subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}:
-    get:
-      description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
-      operationId: ListOwnershipInferences
-      parameters:
-        - description: The identifier of the resource to retrieve ownership inferences for.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: test-resource
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        items:
-                          - checksum: abc123
-                            confidence: "0.9500"
-                            created_at: "2026-01-15T10:00:00Z"
-                            evidence_versions:
-                              - pipeline_id: p1
-                            explanation: High confidence match
-                            id: test-resource:team
-                            owner_type: team
-                            primary_contact_ref: ref:handle/team-a
-                            sources: []
-                            status: suggested
-                            updated_at: "2026-01-15T10:00:00Z"
-                      id: test-resource
-                      type: ownership_inferences
-              schema:
-                $ref: "#/components/schemas/OwnershipInferenceListResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List ownership inferences for a resource
-      tags: ["CSM Ownership"]
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}/history:
-    get:
-      description: List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.
-      operationId: ListOwnershipHistory
-      parameters:
-        - description: The identifier of the resource to retrieve inference history for.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: res-1
-            type: string
-        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
-          in: query
-          name: cursor
-          required: false
-          schema:
-            example: eyJpZCI6OTh9
-            type: string
-        - description: The maximum number of history entries to return per page.
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 25
-            example: 25
-            format: int32
-            maximum: 100
-            minimum: 1
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        items:
-                          - checksum: ""
-                            confidence: "0.9000"
-                            created_at: "2026-01-15T10:00:00Z"
-                            evidence_versions:
-                            explanation: ""
-                            failed_at:
-                            failure_reason:
-                            id: 100
-                            owner_type: team
-                            primary_contact_ref: ref:handle/team-a
-                            resource_id: res-1
-                            retry_schedule:
-                            sources: []
-                            status: suggested
-                        pagination:
-                          has_more: false
-                          next_cursor:
-                      id: res-1
-                      type: ownership_history
-              schema:
-                $ref: "#/components/schemas/OwnershipHistoryResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List ownership inference history for a resource
-      tags: ["CSM Ownership"]
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}/{owner_type}:
-    get:
-      description: |-
-        Get the current ownership inference for a resource for a specific owner type.
-
-        This endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.
-      operationId: GetOwnershipInference
-      parameters:
-        - description: The identifier of the resource to retrieve the ownership inference for.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: test-resource
-            type: string
-        - description: The owner type of the inference to retrieve.
-          in: path
-          name: owner_type
-          required: true
-          schema:
-            $ref: "#/components/schemas/OwnershipOwnerType"
-        - description: A previously returned `ETag` value. When supplied and the resource has not changed, the endpoint returns `304 Not Modified`.
-          in: header
-          name: If-None-Match
-          required: false
-          schema:
-            example: '"abc123"'
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        checksum: abc123
-                        confidence: "0.9500"
-                        created_at: "2026-01-15T10:00:00Z"
-                        evidence_versions:
-                          - pipeline_id: p1
-                        explanation: High confidence match
-                        owner_type: team
-                        primary_contact_ref: ref:handle/team-a
-                        sources: []
-                        status: suggested
-                        updated_at: "2026-01-15T10:00:00Z"
-                      id: test-resource:team
-                      type: ownership_inference
-              schema:
-                $ref: "#/components/schemas/OwnershipInferenceResponse"
-          description: OK
-          headers:
-            Cache-Control:
-              description: The cache control directives applied to the response.
-              schema:
-                example: private, max-age=60
-                type: string
-            ETag:
-              description: A strong validator that identifies the current state of the inference.
-              schema:
-                example: '"abc123"'
-                type: string
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get an ownership inference by owner type
-      tags: ["CSM Ownership"]
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}/{owner_type}/evidence:
-    get:
-      description: |-
-        Get the evidence versions backing the current ownership inference for a resource and owner type.
-
-        This endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.
-      operationId: GetOwnershipEvidence
-      parameters:
-        - description: The identifier of the resource to retrieve evidence for.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: test-resource
-            type: string
-        - description: The owner type of the inference to retrieve evidence for.
-          in: path
-          name: owner_type
-          required: true
-          schema:
-            $ref: "#/components/schemas/OwnershipOwnerType"
-        - description: A previously returned weak `ETag` value. When supplied and the evidence has not changed, the endpoint returns `304 Not Modified`.
-          in: header
-          name: If-None-Match
-          required: false
-          schema:
-            example: W/"f2e126916327bda8"
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        evidence_versions:
-                          - pipeline_id: p1
-                            version: v3
-                      id: test-resource
-                      type: ownership_evidence
-              schema:
-                $ref: "#/components/schemas/OwnershipEvidenceResponse"
-          description: OK
-          headers:
-            ETag:
-              description: A weak validator that identifies the current state of the evidence.
-              schema:
-                example: W/"f2e126916327bda8"
-                type: string
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get the evidence for an ownership inference
-      tags: ["CSM Ownership"]
-      x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}/{owner_type}/feedback:
-    post:
-      description: |-
-        Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.
-
-        The request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.
-
-        When `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.
-      operationId: CreateOwnershipFeedback
-      parameters:
-        - description: The identifier of the resource that the feedback applies to.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: res-1
-            type: string
-        - description: The type of owner that the feedback applies to.
-          in: path
-          name: owner_type
-          required: true
-          schema:
-            $ref: "#/components/schemas/OwnershipOwnerType"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      action: confirm
-                      inference_checksum: abc123
-                    type: ownership_feedback
-            schema:
-              $ref: "#/components/schemas/OwnershipFeedbackRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        action: confirm
-                        checksum: abc123
-                        new_status: suggested
-                        owner_type: team
-                        previous_status: suggested
-                        primary_contact_ref: ref:handle/team-a
-                        updated_at: "2026-01-15T10:00:00Z"
-                      id: res-1
-                      type: ownership_feedback_result
-              schema:
-                $ref: "#/components/schemas/OwnershipFeedbackResponse"
-          description: Created
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Not Found
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OwnershipInferenceResponse"
-          description: Conflict
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Submit feedback on an ownership inference
-      tags: ["CSM Ownership"]
-      x-menu-order: 6
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/csm/ownership/{resource_id}/{owner_type}/history:
-    get:
-      description: List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.
-      operationId: ListOwnershipHistoryByOwnerType
-      parameters:
-        - description: The identifier of the resource to retrieve inference history for.
-          in: path
-          name: resource_id
-          required: true
-          schema:
-            example: res-1
-            type: string
-        - description: The owner type to filter history by.
-          in: path
-          name: owner_type
-          required: true
-          schema:
-            $ref: "#/components/schemas/OwnershipOwnerType"
-        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
-          in: query
-          name: cursor
-          required: false
-          schema:
-            example: eyJpZCI6OTh9
-            type: string
-        - description: The maximum number of history entries to return per page.
-          in: query
-          name: limit
-          required: false
-          schema:
-            default: 25
-            example: 25
-            format: int32
-            maximum: 100
-            minimum: 1
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        items:
-                          - checksum: ""
-                            confidence: "0.9000"
-                            created_at: "2026-01-15T10:00:00Z"
-                            evidence_versions:
-                            explanation: ""
-                            failed_at:
-                            failure_reason:
-                            id: 100
-                            owner_type: team
-                            primary_contact_ref: ref:handle/team-a
-                            resource_id: res-1
-                            retry_schedule:
-                            sources: []
-                            status: suggested
-                        pagination:
-                          has_more: false
-                          next_cursor:
-                      id: res-1
-                      type: ownership_history
-              schema:
-                $ref: "#/components/schemas/OwnershipHistoryResponse"
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List ownership history by owner type
-      tags: ["CSM Ownership"]
-      x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in Preview and may be subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/csm/settings/agentless_hosts:
     get:
       description: Get the list of agentless hosts for CSM, with optional pagination and filtering.
@@ -167963,7 +167196,27 @@ paths:
                           updated_at: "2024-01-01T00:00:00.000000Z"
                         id: "1"
                         type: deletion_request
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00.000000Z"
+                          created_by: test@example.com
+                          displayed_total: 50
+                          from_time: 1672527600000
+                          is_created: true
+                          org_id: 123
+                          product: logs
+                          query: "service:abc"
+                          recoverable_until: "2024-01-11T02:00:00.000000Z"
+                          source: standard
+                          starting_at: "2024-01-01T02:00:00.000000Z"
+                          status: in_progress
+                          to_time: 1704063600000
+                          total_unrestricted: 50
+                          updated_at: "2024-01-01T02:00:00.000000Z"
+                        id: "2"
+                        type: deletion_request
                     meta:
+                      available_slots: 3
+                      max_concurrent_requests: 5
                       next_page: "cGFnZTI="
                       product: logs
               schema:
@@ -211453,6 +210706,143 @@ paths:
       tags:
         - On-Call Paging
       x-menu-order: 3
+  /api/v2/on-call/pages/{page_id}/reroute:
+    post:
+      description: |-
+        Reroutes an On-Call Page.
+      operationId: RerouteOnCallPage
+      parameters:
+        - description: The page ID.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      comment: Rerouting to the database team.
+                      target:
+                        identifier: my-team
+                        type: team_handle
+                    type: reroute
+            schema:
+              $ref: "#/components/schemas/RerouteOnCallPageRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      servers:
+        - url: https://{site}
+          variables:
+            site:
+              default: navy.oncall.datadoghq.com
+              description: The globally available endpoint for On-Call.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+        - url: "{protocol}://{name}"
+          variables:
+            name:
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
+            subdomain:
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
+      summary: Reroute On-Call Page
+      tags:
+        - On-Call Paging
+      x-menu-order: 5
   /api/v2/on-call/pages/{page_id}/resolve:
     post:
       description: |-
@@ -226551,15 +225941,29 @@ paths:
             example: 1048576
             format: int64
             type: integer
-        - description: Paging token for pagination.
+        - description: |-
+            Token of the next page from the `X-Paging` header of the previous response.
+            Send it without changes, URL-encoded in the query string. Omit it to get the first page.
           in: query
           name: paging
           schema:
-            example: eyJuZXh0IjoiYWJjMTIzIn0
             type: string
       responses:
         "200":
           description: OK
+          headers:
+            X-Has-More-Segments-To-Fetch:
+              description: |-
+                `true` if the view has more segments to get.
+                To get them, send the request again with the `paging` query parameter until this header is `false`.
+              schema:
+                type: boolean
+            X-Paging:
+              description: |-
+                Token of the next page to send in the `paging` query parameter.
+                Present only when `X-Has-More-Segments-To-Fetch` is `true`.
+              schema:
+                type: string
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -233302,6 +232706,498 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}:
+    get:
+      description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
+      operationId: ListOwnershipInferences
+      parameters:
+        - description: The identifier of the resource to retrieve ownership inferences for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: abc123
+                            confidence: "0.9500"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                              - pipeline_id: p1
+                            explanation: High confidence match
+                            id: test-resource:team
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            sources: []
+                            status: suggested
+                            updated_at: "2026-01-15T10:00:00Z"
+                      id: test-resource
+                      type: ownership_inferences
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership inferences for a resource
+      tags: ["CSM Ownership"]
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}/history:
+    get:
+      description: List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.
+      operationId: ListOwnershipHistory
+      parameters:
+        - description: The identifier of the resource to retrieve inference history for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            example: eyJpZCI6OTh9
+            type: string
+        - description: The maximum number of history entries to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            example: 25
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: ""
+                            confidence: "0.9000"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                            explanation: ""
+                            failed_at:
+                            failure_reason:
+                            id: 100
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            resource_id: res-1
+                            retry_schedule:
+                            sources: []
+                            status: suggested
+                        pagination:
+                          has_more: false
+                          next_cursor:
+                      id: res-1
+                      type: ownership_history
+              schema:
+                $ref: "#/components/schemas/OwnershipHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership inference history for a resource
+      tags: ["CSM Ownership"]
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}/{owner_type}:
+    get:
+      description: |-
+        Get the current ownership inference for a resource for a specific owner type.
+
+        This endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.
+      operationId: GetOwnershipInference
+      parameters:
+        - description: The identifier of the resource to retrieve the ownership inference for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: A previously returned `ETag` value. When supplied and the resource has not changed, the endpoint returns `304 Not Modified`.
+          in: header
+          name: If-None-Match
+          required: false
+          schema:
+            example: '"abc123"'
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        checksum: abc123
+                        confidence: "0.9500"
+                        created_at: "2026-01-15T10:00:00Z"
+                        evidence_versions:
+                          - pipeline_id: p1
+                        explanation: High confidence match
+                        owner_type: team
+                        primary_contact_ref: ref:handle/team-a
+                        sources: []
+                        status: suggested
+                        updated_at: "2026-01-15T10:00:00Z"
+                      id: test-resource:team
+                      type: ownership_inference
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceResponse"
+          description: OK
+          headers:
+            Cache-Control:
+              description: The cache control directives applied to the response.
+              schema:
+                example: private, max-age=60
+                type: string
+            ETag:
+              description: A strong validator that identifies the current state of the inference.
+              schema:
+                example: '"abc123"'
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an ownership inference by owner type
+      tags: ["CSM Ownership"]
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}/{owner_type}/evidence:
+    get:
+      description: |-
+        Get the evidence versions backing the current ownership inference for a resource and owner type.
+
+        This endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.
+      operationId: GetOwnershipEvidence
+      parameters:
+        - description: The identifier of the resource to retrieve evidence for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: test-resource
+            type: string
+        - description: The owner type of the inference to retrieve evidence for.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: A previously returned weak `ETag` value. When supplied and the evidence has not changed, the endpoint returns `304 Not Modified`.
+          in: header
+          name: If-None-Match
+          required: false
+          schema:
+            example: W/"f2e126916327bda8"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        evidence_versions:
+                          - pipeline_id: p1
+                            version: v3
+                      id: test-resource
+                      type: ownership_evidence
+              schema:
+                $ref: "#/components/schemas/OwnershipEvidenceResponse"
+          description: OK
+          headers:
+            ETag:
+              description: A weak validator that identifies the current state of the evidence.
+              schema:
+                example: W/"f2e126916327bda8"
+                type: string
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get the evidence for an ownership inference
+      tags: ["CSM Ownership"]
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}/{owner_type}/feedback:
+    post:
+      description: |-
+        Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.
+
+        The request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.
+
+        When `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.
+      operationId: CreateOwnershipFeedback
+      parameters:
+        - description: The identifier of the resource that the feedback applies to.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: The type of owner that the feedback applies to.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      action: confirm
+                      inference_checksum: abc123
+                    type: ownership_feedback
+            schema:
+              $ref: "#/components/schemas/OwnershipFeedbackRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        action: confirm
+                        checksum: abc123
+                        new_status: suggested
+                        owner_type: team
+                        previous_status: suggested
+                        primary_contact_ref: ref:handle/team-a
+                        updated_at: "2026-01-15T10:00:00Z"
+                      id: res-1
+                      type: ownership_feedback_result
+              schema:
+                $ref: "#/components/schemas/OwnershipFeedbackResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OwnershipInferenceResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Submit feedback on an ownership inference
+      tags: ["CSM Ownership"]
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security/ownership/{resource_id}/{owner_type}/history:
+    get:
+      description: List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.
+      operationId: ListOwnershipHistoryByOwnerType
+      parameters:
+        - description: The identifier of the resource to retrieve inference history for.
+          in: path
+          name: resource_id
+          required: true
+          schema:
+            example: res-1
+            type: string
+        - description: The owner type to filter history by.
+          in: path
+          name: owner_type
+          required: true
+          schema:
+            $ref: "#/components/schemas/OwnershipOwnerType"
+        - description: An opaque, base64-encoded cursor token returned by a previous call in `pagination.next_cursor`. Omit to fetch the first page.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            example: eyJpZCI6OTh9
+            type: string
+        - description: The maximum number of history entries to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 25
+            example: 25
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        items:
+                          - checksum: ""
+                            confidence: "0.9000"
+                            created_at: "2026-01-15T10:00:00Z"
+                            evidence_versions:
+                            explanation: ""
+                            failed_at:
+                            failure_reason:
+                            id: 100
+                            owner_type: team
+                            primary_contact_ref: ref:handle/team-a
+                            resource_id: res-1
+                            retry_schedule:
+                            sources: []
+                            status: suggested
+                        pagination:
+                          has_more: false
+                          next_cursor:
+                      id: res-1
+                      type: ownership_history
+              schema:
+                $ref: "#/components/schemas/OwnershipHistoryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List ownership history by owner type
+      tags: ["CSM Ownership"]
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/sboms:
     get:
       description: |-
@@ -235434,6 +235330,7 @@ paths:
         rule. To load more rules, add them with the add resources endpoint before starting the
         batch migration. A batch migration can hold up to 1000 resources. The response does not
         include the created resources: list the resources of the batch migration to retrieve them.
+        Alternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.
       operationId: CreateSecurityMonitoringBatchMigration
       requestBody:
         content:
@@ -239623,6 +239520,161 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
+  /api/v2/security_monitoring/rules/proposals:
+    post:
+      description: |-
+        Start generating a proposed Cloud SIEM detection rule from a natural-language
+        description, or from an SPL or KQL rule. The proposal is based on your organization's
+        log sources, log fields, and existing detection rules. When logs from the matching
+        source are available, the proposed query is tested against your recent logs.
+
+        The proposed rule is generated asynchronously. This endpoint returns a proposal `id`
+        with the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal
+        endpoint and poll the endpoint until the status is `completed` or `failed`. A proposal
+        usually takes a few minutes, and up to 10 minutes.
+
+        This endpoint does not create or modify any detection rules in Cloud SIEM. To translate
+        many rules at once, use batch migrations instead.
+      operationId: StartSecurityMonitoringRuleProposal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartRequest"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        status: pending
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringRuleProposalStartResponse"
+          description: Accepted
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_write
+      summary: Start a rule proposal
+      tags:
+        - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 188
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/rules/proposals/{proposal_id}:
+    get:
+      description: |-
+        Get the status of a rule proposal started with the start-a-rule-proposal endpoint.
+        While the status is `pending` or `in_progress`, the proposed rule is still being
+        generated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains
+        the proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains
+        the reason a rule could not be generated.
+
+        This endpoint does not create or modify any detection rules in Cloud SIEM. To create the
+        proposed rule, use the create-a-detection-rule endpoint.
+      operationId: GetSecurityMonitoringRuleProposal
+      parameters:
+        - $ref: "#/components/parameters/SecurityMonitoringRuleProposalID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        rule:
+                          cases:
+                            - condition: failed_login > 5 && successful_login > 0
+                              name: Successful login after repeated failures
+                              status: medium
+                          isEnabled: false
+                          message: Repeated failed Okta logins were followed by a successful login from the same IP.
+                          name: Successful Okta login after repeated failures
+                          options:
+                            detectionMethod: threshold
+                            evaluationWindow: 900
+                            keepAlive: 3600
+                            maxSignalDuration: 86400
+                          queries:
+                            - aggregation: count
+                              groupByFields:
+                                - "@network.client.ip"
+                              name: failed_login
+                              query: source:okta @evt.name:user.session.start @evt.outcome:FAILURE
+                            - aggregation: count
+                              groupByFields:
+                                - "@network.client.ip"
+                              name: successful_login
+                              query: source:okta @evt.name:user.session.start @evt.outcome:SUCCESS
+                          tags:
+                            - source:okta
+                          type: log_detection
+                        status: completed
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+                failed:
+                  value:
+                    data:
+                      attributes:
+                        error:
+                          kind: translation_error
+                          message: No log source matches the described activity.
+                          type: NoRuleProduced
+                        status: failed
+                      id: c968cf83-56c2-4d54-a993-6c86dfb83527
+                      type: rule_proposals
+              schema:
+                $ref: "#/components/schemas/SecurityMonitoringRuleProposalResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalBadRequestResponse"
+        "401":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalUnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/SecurityMonitoringRuleProposalNotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_rules_read
+      summary: Get a rule proposal
+      tags:
+        - Security Monitoring
+      x-menu-order: 189
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/rules/test:
     post:
       description: |-
@@ -243893,6 +243945,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             When set to `true`, returns the source maps that would be deleted
             without performing the actual deletion. When set to `false`,
             performs the deletion.
@@ -243904,7 +243964,8 @@ paths:
             type: boolean
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `js`, `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[service]
@@ -243917,7 +243978,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed, maximum 10).
-            Required for `js`, `jvm`, `react`, and `flutter` map kinds.
+            Required for `js`, `jvm`, `react`, and `flutter` map kinds, and for
+            `wasm` with `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[version]
@@ -243946,7 +244008,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244334,6 +244399,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             Cursor for the next page of a JavaScript listing. Use the value from
             `meta.page.next_cursor` and keep the same search mode and filters.
             Omit on the first request. Not supported for other map kinds or for
@@ -244364,7 +244437,8 @@ paths:
             type: integer
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`. Also required for `js` unless
             searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
@@ -244378,7 +244452,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed). Required for
-            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`. Also required for `js` unless
             searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
@@ -244408,7 +244483,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244608,6 +244686,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             When set to `true`, returns the source maps that would be restored
             without performing the actual restoration. When set to `false`,
             performs the restoration.
@@ -244619,7 +244705,8 @@ paths:
             type: boolean
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `js`, `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[service]
@@ -244632,7 +244719,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed, maximum 10).
-            Required for `js`, `jvm`, `react`, and `flutter` map kinds.
+            Required for `js`, `jvm`, `react`, and `flutter` map kinds, and for
+            `wasm` with `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[version]
@@ -244661,7 +244749,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244822,7 +244913,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/service_repository_info:
     post:
-      description: Returns the repository URL and commit SHA associated with a given service and version.
+      description: |-
+        Returns the repository URL and commit SHA associated with a debug ID or a given service and version.
+        Provide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.
       operationId: GetServiceRepositoryInfo
       requestBody:
         content:
@@ -244855,6 +244948,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceRepositoryInfoResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
@@ -258576,6 +258675,562 @@ paths:
           - generate_log_reports
           - manage_log_reports
           - product_analytics_saved_widgets_write
+  /api/v2/wif/aws/persona_mapping:
+    get:
+      description: List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.
+      operationId: ListAWSCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_identifier: test@example.com
+                          account_uuid: 00000000-0000-0000-0000-000000000001
+                          arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+                        id: abc-123
+                        type: aws_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List AWS cloud authentication persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in public beta and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.
+      operationId: CreateAWSCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_identifier: test@test.com
+                      arn_pattern: arn:aws:iam::123456789012:user/testuser
+                    type: aws_cloud_auth_config
+            schema:
+              $ref: "#/components/schemas/AWSCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 00000000-0000-0000-0000-000000000001
+                        arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+                      id: abc-123
+                      type: aws_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an AWS cloud authentication persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in public beta and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/aws/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.
+      operationId: DeleteAWSCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an AWS cloud authentication persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 4
+      x-unstable: |-
+        **Note**: This endpoint is in public beta and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.
+      operationId: GetAWSCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: test@example.com
+                        account_uuid: 00000000-0000-0000-0000-000000000001
+                        arn_pattern: "arn:aws:iam::123456789012:user/testuser"
+                      id: abc-123
+                      type: aws_cloud_auth_config
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthPersonaMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an AWS cloud authentication persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in public beta and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/github/intake_mapping:
+    get:
+      description: List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.
+      operationId: ListGitHubCloudAuthIntakeMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          claim_matchers:
+                            ref: "refs/heads/main"
+                            repository: "test_owner/test_repo"
+                            repository_owner: "test_owner"
+                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                        id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                        type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub cloud authentication intake mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 9
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
+      operationId: CreateGitHubCloudAuthIntakeMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      claim_matchers:
+                        ref: "refs/heads/main"
+                        repository: "test_owner/test_repo"
+                        repository_owner: "test_owner"
+                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                    type: github_oidc_auth_intake_mapping
+            schema:
+              $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                      type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub cloud auth intake mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/github/intake_mapping/{intake_mapping_id}:
+    delete:
+      description: Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.
+      operationId: DeleteGitHubCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub cloud auth intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 12
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.
+      operationId: GetGitHubCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: d6d869d7-29d3-5595-bf40-57c95235cf5b
+                      type: github_oidc_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthIntakeMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub cloud authentication intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 10
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/github/persona_mapping:
+    get:
+      description: List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.
+      operationId: ListGitHubCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_identifier: "test@example.com"
+                          account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                          claim_matchers:
+                            ref: "refs/heads/main"
+                            repository: "test_owner/test_repo"
+                            repository_owner: "test_owner"
+                            sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                        id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                        type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub cloud authentication persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 5
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
+      operationId: CreateGitHubCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_identifier: "test@example.com"
+                      claim_matchers:
+                        ref: "refs/heads/main"
+                        repository: "test_owner/test_repo"
+                        repository_owner: "test_owner"
+                        sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                    type: github_oidc_auth_config
+            schema:
+              $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: "test@example.com"
+                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub cloud auth persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/github/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.
+      operationId: DeleteGitHubCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub cloud auth persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.
+      operationId: GetGitHubCloudAuthPersonaMapping
+      parameters:
+        - $ref: "#/components/parameters/PersonaMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_identifier: "test@example.com"
+                        account_uuid: "12bbdc5c-5966-47e0-8733-285f9e44bcf4"
+                        claim_matchers:
+                          ref: "refs/heads/main"
+                          repository: "test_owner/test_repo"
+                          repository_owner: "test_owner"
+                          sub: "repo:test_owner/test_repo:(ref:refs/heads/main|pull_request)"
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: github_oidc_auth_config
+              schema:
+                $ref: "#/components/schemas/GitHubCloudAuthPersonaMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub cloud authentication persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/workflows:
     get:
       description: List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -259835,7 +260490,9 @@ tags:
     name: Rum Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
-  - description: Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage.
+  - description: |-
+      Retrieve segments for RUM replay sessions.
+      Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
