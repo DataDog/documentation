@@ -66,7 +66,7 @@ Then copy and run the generated command.
 
 ### Existing Agent installation
 
-If you already have a Datadog Agent installed, enable SSI remotely from Datadog. You do not need to connect to each host.
+If you already have a Datadog Agent installed, enable SSI remotely from Datadog. You do not need to run commands on each host.
 
 1. In Datadog, go to [**APM > Instrument a Service**][21].
 1. Under {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, select {{< ui >}}Deploy on existing hosts{{< /ui >}} to instrument your services remotely through the Datadog Agent.
