@@ -49,7 +49,7 @@ The rest of the configuration depends on whether the DDOT Collector runs on a ho
 
 This applies to the DDOT Collector as a [Kubernetes DaemonSet][9] and on [Linux][14] and [Windows][15] hosts.
 
-Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent hostname. A single node then appears as two hosts. To use the Agent hostname instead, enable `allow_hostname_override`:
+Because the Agent's Collector runs as a separate process from the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent hostname. A single node then appears as two hosts. To use the Agent hostname instead, enable `allow_hostname_override`:
 
 ```yaml
 processors:
