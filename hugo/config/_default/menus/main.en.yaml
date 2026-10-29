@@ -1007,11 +1007,16 @@ menu:
       parent: otel_guides
       weight: 1003
       identifier: otel_guides_instrument_unsupported_runtimes
+    - name: Attributes for Managed Platforms
+      url: /opentelemetry/guide/managed_platform_attributes
+      parent: otel_guides
+      weight: 1004
+      identifier: otel_guides_managed_platform_attributes
     - name: Migration Guides
       url: /opentelemetry/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
-      weight: 1004
+      weight: 1005
     - name: Migrate to OTel Collector v0.120.0+
       url: /opentelemetry/migrate/collector_0_120_0
       parent: otel_guides_migration
