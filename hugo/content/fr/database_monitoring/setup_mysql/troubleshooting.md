@@ -2,20 +2,19 @@
 description: Dépannage de la solution Database Monitoring
 title: Dépannage de la solution Database Monitoring pour MySQL
 ---
+Cette page détaille les problèmes courants liés à la configuration et à l'utilisation de Database Monitoring avec MySQL, ainsi que la manière de les résoudre. Datadog recommande de conserver la dernière version stable de l'Agent et de respecter la [documentation de configuration][1] la plus récente, car celle-ci peut changer avec les versions de l'Agent.
 
-Cette page décrit les problèmes courants liés à la configuration et à l'utilisation de la solution Database Monitoring avec MySQL et explique comment les résoudre. Datadog recommande de rester sur la dernière version stable de l'Agent et de suivre les dernières [instructions de configuration][1], car elles peuvent changer en fonction des versions de l'Agent.
+## Diagnostic des problèmes courants {#diagnosing-common-problems}
 
-## Diagnostiquer les problèmes courants
+### Aucune donnée ne s'affiche après la configuration de Database Monitoring {#no-data-is-showing-after-configuring-database-monitoring}
 
-### Aucune donnée ne s'affiche après la configuration du Database Monitoring
+Si vous ne voyez aucune donnée après avoir suivi les [instructions de configuration][1] et configuré l'Agent, il s'agit très probablement d'un problème de configuration de l'Agent ou de clé d'API. Assurez-vous de recevoir des données de l'Agent en suivant le [guide de dépannage][2].
 
-Si vous ne voyez aucune donnée après avoir suivi les [instructions de configuration][1] et configuré l'Agent, le problème vient probablement de la configuration de l'Agent ou de la clé d'API. Assurez-vous que vous recevez des données de l'Agent en suivant le [guide de dépannage][2].
+Si vous recevez d'autres données, telles que des métriques système, mais pas les données de Database Monitoring (telles que les métriques de requête et les échantillons de requête), il y a probablement un problème avec la configuration de l'Agent ou de la base de données. Assurez-vous que votre configuration d'Agent ressemble à l'exemple dans les [instructions de configuration][1], en vérifiant deux fois l'emplacement des fichiers de configuration.
 
-Si vous recevez d'autres données (telles que les métriques système) mais pas les données Database Monitoring (telles que les métriques de requête et les échantillons de requête), le problème vient probablement de la configuration de l'Agent ou de la base de données. Assurez-vous que la configuration de votre Agent ressemble à l'exemple dans les [instructions de configuration][1] et vérifiez bien l'emplacement des fichiers de configuration.
+Pour procéder au débogage, commencez par exécuter la [commande status de l'Agent][3] pour recueillir les informations de débogage concernant les données recueillies et envoyées à Datadog.
 
-Pour procéder au debugging, commencez par exécuter la [commande status de l'Agent][3] pour recueillir les informations de debugging concernant les données recueillies et envoyées à Datadog.
-
-Vérifiez la section `Config Errors` pour vous assurer que le fichier de configuration est valide. Par exemple, le message d'erreur suivant indique une configuration d'instance manquante ou un fichier non valide :
+Vérifiez la section `Config Errors` pour vous assurer que le fichier de configuration est valide. Par exemple, ce qui suit indique une configuration d'instance manquante ou un fichier non valide :
 
 ```
   Config Errors
@@ -67,39 +66,41 @@ Database Monitoring Query Samples: Last Run: 1, Total: 74,451
 
 Si vous êtes certain que la configuration de l'Agent est correcte, [consultez les logs de l'Agent][4] pour vérifier la présence d'avertissements ou d'erreurs lors de la tentative d'exécution des intégrations de base de données.
 
-Vous pouvez également exécuter explicitement un check en exécutant la commande CLI `check` sur l'Agent Datadog et en vérifiant la présence d'erreurs dans la sortie :
+Vous pouvez également exécuter explicitement un check en lançant la commande CLI `check` sur le Datadog Agent et en inspectant la sortie pour détecter d'éventuelles erreurs :
 
 ```bash
-# Pour les installations de l'Agent auto-hébergées
+# For self-hosted installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# Pour les installations de l'Agent basées sur un conteneur
+# For container-based installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 ```
-### Les requêtes ne présentent pas de plans d'exécution
+### Les requêtes n'ont pas de plans d'exécution {#queries-are-missing-explain-plans}
 
-Une partie ou l'intégralité des requêtes ne présentent pas de plans. Ce problème peut être causé par des commandes de requête non prises en charge, des requêtes effectuées par des applications client non prises en charge, un Agent obsolète ou une configuration de base de données incomplète. Vous trouverez ci-dessous les causes possibles de l'absence de plans d'exécution.
+Certaines ou toutes les requêtes peuvent ne pas avoir de plans disponibles. Cela peut être dû à des commandes de requête non prises en charge, à des requêtes effectuées par des applications clientes non prises en charge, à un Agent obsolète ou à une configuration de base de données incomplète. Vous trouverez ci-dessous les causes possibles de l'absence de plans d'exécution.
 
-#### Consumer d'instructions d'événements manquant {#events-statements-consumer-missing}
-Pour capturer les plans d'exécution, vous devez activer un consumer d'instructions d'événements. Pour ce faire, ajoutez l'option suivante à vos fichiers de configuration (par exemple, `mysql.conf`) :
+#### Consommateur d'instructions d'événement manquant {#events-statements-consumer-missing}
+Pour capturer les plans d'exécution, vous devez activer un consommateur d'instructions d'événement. Vous pouvez le faire en ajoutant l'option suivante à vos fichiers de configuration (par exemple, `mysql.conf`) :
+
 ```
 performance-schema-consumer-events-statements-current=ON
 ```
 
 Datadog recommande également d'activer les éléments suivants :
+
 ```
 performance-schema-consumer-events-statements-history-long=ON
 ```
-Cette option active le suivi d'un plus grand nombre de requêtes récentes sur tous les threads. L'activer augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes.
+Cette option permet le suivi d'un plus grand nombre de requêtes récentes sur tous les threads. Son activation augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes.
 
-#### La procédure des plans d'exécution est manquante {#procedure-plans-execution-manquante}
-L'Agent nécessite que la procédure `datadog.explain_statement(...)` soit présente dans le schéma `datadog`. Lisez les [instructions de configuration][1] pour en savoir plus sur la création du schéma `datadog`.
+#### Procédure de plan d'exécution manquante {#explain-plan-procedure-missing}
+L'Agent nécessite que la procédure `datadog.explain_statement(...)` existe dans le schéma `datadog`. Lisez les [instructions de configuration][1] pour plus de détails sur la création du schéma `datadog`.
 
-Créez la procédure `explain_statement` afin d'activer la collecte de plans d'exécution par l'Agent :
+Créez la procédure `explain_statement` pour permettre à l'Agent de collecter les plans d'exécution :
 
 ```sql
 DELIMITER $$
@@ -113,14 +114,14 @@ BEGIN
 END $$
 DELIMITER ;
 ```
-#### La procédure complète des plans d'exécution est manquante {#procedure-complete-plans-execution-manquante}
-L'Agent nécessite que la procédure `explain_statement(...)` soit présente dans **tous les schémas** à partir desquels l'Agent peut collecter des échantillons.
+#### Procédure de plan d'exécution entièrement qualifiée manquante {#explain-plan-fq-procedure-missing}
+L'Agent nécessite que la procédure `explain_statement(...)` existe dans **tous les schémas** à partir desquels l'Agent peut collecter des échantillons.
 
-Créez la procédure suivante **dans chaque schéma** pour lesquels vous souhaitez recueillir des plans d'exécution. Remplacez `<VOTRE_SCHÉMA>` par le schéma de votre base de données :
+Créez cette procédure **dans chaque schéma** à partir duquel vous souhaitez collecter des plans d'exécution. Remplacez `<YOUR_SCHEMA>` par votre schéma de base de données :
 
 ```sql
 DELIMITER $$
-CREATE PROCEDURE <VOTRE_SCHÉMA>.explain_statement(IN query TEXT)
+CREATE PROCEDURE <YOUR_SCHEMA>.explain_statement(IN query TEXT)
     SQL SECURITY DEFINER
 BEGIN
     SET @explain := CONCAT('EXPLAIN FORMAT=json ', query);
@@ -129,32 +130,33 @@ BEGIN
     DEALLOCATE PREPARE stmt;
 END $$
 DELIMITER ;
-GRANT EXECUTE ON PROCEDURE <VOTRE_SCHÉMA>.explain_statement TO datadog@'%';
+GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-#### La version de l'Agent qui s'exécute n'est pas prise en charge
+#### L'Agent exécute une version non prise en charge {#agent-is-running-an-unsupported-version}
 
-Assurez-vous que la version de l'Agent qui s'exécute est la version 7.36.1 ou une version ultérieure. Datadog recommande de mettre régulièrement à jour l'Agent pour profiter des dernières fonctionnalités, améliorations des performances et mises à jour de sécurité.
+Assurez-vous que l'Agent exécute la version 7.36.1 ou une version ultérieure. Datadog recommande de mettre régulièrement à jour l'Agent pour bénéficier des nouvelles fonctionnalités, des améliorations de performances et des mises à jour de sécurité.
 
-#### Les requêtes sont tronquées
+#### Les requêtes sont tronquées {#queries-are-truncated}
 
-Consultez la section sur les [échantillons de requête tronqués](#les-echantillons-de-requete-sont-tronques) pour découvrir comment augmenter la taille du texte d'échantillon de requête.
+Consultez la section sur les [échantillons de requêtes tronqués](#query-samples-are-truncated) pour obtenir des instructions sur la façon d'augmenter la taille du texte des exemples de requêtes.
 
-#### La requête ne prend pas en charge les plans d'exécution
+#### La requête ne peut pas être expliquée {#query-cannot-be-explained}
 
-Certaines requêtes, telles que les requêtes BEGIN, COMMIT, SHOW, USE et ALTER, ne peuvent pas renvoyer un plan d'exécution valide à partir de la base de données. Seules les requêtes SELECT, UPDATE, INSERT, DELETE et REPLACE sont prises en charge pour les plans d'exécution.
+Certaines requêtes telles que BEGIN, COMMIT, SHOW, USE et ALTER ne peuvent pas produire un plan d'exécution valide à partir de la base de données. Seules les requêtes SELECT, UPDATE, INSERT, DELETE et REPLACE prennent en charge les plans d'exécution.
 
-#### La requête est relativement peu fréquente ou s'exécute rapidement
+#### La requête est relativement peu fréquente ou s'exécute rapidement {#query-is-relatively-infrequent-or-executes-quickly}
 
-La requête n'a peut-être pas été sélectionnée pour être ajoutée dans l'échantillon, car elle ne représente pas une proportion significative du temps d'exécution total de la base de données. Pour recueillir la requête, nous vous conseillons d'essayer d'[augmenter les taux d'échantillonnage][5].
+Il est possible que la requête n'ait pas été échantillonnée pour la sélection car elle ne représente pas une proportion significative du temps d'exécution total de la base de données. Essayez d'[augmenter les taux d'échantillonnage][5] pour capturer la requête.
 
-### Les métriques de requête sont manquantes
+### Les métriques de requête sont manquantes {#query-metrics-are-missing}
 
-Avant de suivre ces étapes pour diagnostiquer un problème de métriques de requête manquantes, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer une absence de données de l'Agent](#aucune-donnee-ne-s-affiche-apres-la-configuration-de-database-monitoring). Vous trouverez ci-dessous les causes possibles de l'absence de métriques de requête.
+Avant de suivre ces étapes pour diagnostiquer les données de métriques de requête manquantes, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer les données d'agent manquantes](#no-data-is-showing-after-configuring-database-monitoring). Voici les causes possibles de l'absence de métriques de requête.
 
-### Métriques d'index manquantes
+### Les métriques d'index sont manquantes {#index-metrics-are-missing}
 
 Si l'Agent affiche cette erreur :
+
 ```
 Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
 ```
@@ -164,28 +166,28 @@ Résolvez l'erreur en accordant à l'utilisateur `datadog` le privilège SELECT 
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 
-#### L'option `performance_schema` n'est pas activée {#performance-schema-non-active}
-L'Agent nécessite que l'option `performance_schema` soit activée. Elle est activée par défaut par MySQL, mais peut être désactivée dans la configuration ou par votre fournisseur de solutions cloud. Suivez les [instructions de configuration][1] pour activer cette option.
+#### `performance_schema` n'est pas activé {#performance-schema-not-enabled}
+L'Agent nécessite que l'option `performance_schema` soit activée. Elle est activée par défaut par MySQL, mais peut être désactivée dans la configuration ou par votre fournisseur cloud. Suivez les [instructions de configuration][1] pour l'activer.
 
-#### Limitation de Google Cloud SQL
-Le host est géré par Google Cloud SQL et ne prend pas en charge l'option `performance_schema`. En raison de limites liées à Google Cloud SQL, la solution Database Monitoring de Datadog [n'est pas prise en charge sur les instances avec moins de 16 Go de RAM][6].
+#### Limitation de Google Cloud SQL {#google-cloud-sql-limitation}
+Le host est géré par Google Cloud SQL et ne prend pas en charge `performance_schema`. En raison des limitations de Google Cloud SQL, Datadog Database Monitoring n'est [pas pris en charge sur les instances avec moins de 16 Go de RAM][6].
 
-### Certaines requêtes sont manquantes
+### Certaines requêtes sont manquantes {#certain-queries-are-missing}
 
 Si vous recevez des données pour certaines requêtes mais que d'autres sont manquantes dans la section Database Monitoring, suivez ce guide.
 
 
 | Cause possible                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| La requête n'est pas une « requête courante », ce qui signifie que son temps total d'exécution cumulé ne figure dans les 200 premières requêtes normalisées à aucun moment dans l'intervalle de temps sélectionné. | Elle a peut-être été comptabilisée dans la ligne « Other Queries ». Pour en savoir plus sur les requêtes qui font l'objet d'un suivi, consultez [Données collectées][7]. Pour augmenter le nombre de requêtes courantes qui font l'objet d'un suivi, contactez l'assistance Datadog. |
-| La table `events_statements_summary_by_digest` est peut-être pleine. | Le nombre de digests (requêtes normalisées) pouvant être stockés par la table MySQL `events_statements_summary_by_digest` dans `performance_schema` présente une limite maximale. Procédez régulièrement à la troncation de cette table dans le cadre des opérations de maintenance pour effectuer le suivi de toutes les requêtes au fil du temps. Consultez la section [Configuration avancée][5] pour en savoir plus. |
-| La requête n'a été exécutée qu'une fois depuis le dernier redémarrage de l'Agent. | Les métriques de requêtes ne sont émises qu'après avoir été exécutées au moins une fois au cours de deux intervalles distincts de dix secondes depuis le dernier redémarrage de l'Agent. |
+| La requête n'est pas une « requête principale », ce qui signifie que la somme de son temps d'exécution total ne figure pas parmi les 200 premières requêtes normalisées à aucun moment de la période sélectionnée. | Elle peut être regroupée dans la ligne « Autres requêtes ». Pour plus d'informations sur les requêtes suivies, consultez [Données collectées][7]. Le nombre de requêtes principales suivies peut être augmenté en contactant le support Datadog. |
+| Le `events_statements_summary_by_digest` est peut-être plein. | Le tableau MySQL `events_statements_summary_by_digest` dans `performance_schema` a une limite maximale sur le nombre de résumés (requêtes normalisées) qu'elle stocke. La troncature régulière de ce tableau en tant que tâche de maintenance garantit que toutes les requêtes sont suivies au fil du temps. Consultez [Configuration avancée][5] pour plus d'informations. |
+| La requête a été exécutée une seule fois depuis le dernier redémarrage de l'Agent. | Les métriques de requête ne sont émises qu'après avoir été exécutées au moins une fois sur deux intervalles distincts de dix secondes depuis le redémarrage de l'Agent. |
 
-### Les échantillons de requête sont tronqués
+### Les échantillons de requêtes sont tronqués {#query-samples-are-truncated}
 
-Il est possible que seule une partie du texte SQL ne s'affiche pour les requêtes longues en raison de la configuration de la base de données. Des ajustements sont nécessaires pour l'adapter à votre workload.
+Les requêtes plus longues peuvent ne pas afficher leur texte SQL complet en raison de la configuration de la base de données. Un réglage est nécessaire pour s'adapter à votre charge de travail.
 
-La longueur de texte SQL MySQL visible par l'Agent Datadog est déterminée par les [variables système][8] suivantes :
+La longueur de texte SQL MySQL visible par le Datadog Agent est déterminée par les [variables système][8] suivantes :
 
 ```
 max_digest_length=4096
@@ -193,14 +195,14 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-### Les activités de requête sont manquantes
+### L'activité des requêtes est manquante {#query-activity-is-missing}
 
-<div class="alert alert-danger">La collecte d'activité de requêtes et d'événements d'attente n'est pas prise en charge pour Flexible Server, car ces fonctionnalités nécessitent des paramètres MySQL qui ne sont pas disponibles sur un host Flexible Server.</div>
+<div class="alert alert-danger">La collecte de l'activité de requête et des événements d'attente n'est pas prise en charge pour Flexible Server, car ces fonctionnalités nécessitent des paramètres MySQL qui ne sont pas disponibles sur un host Flexible Server.</div>
 
-Avant de suivre ces étapes pour diagnostiquer un problème d'activités de requête manquantes, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer une absence de données de l'Agent](#aucune-donnee-ne-s-affiche-apres-la-configuration-de-database-monitoring). Vous trouverez ci-dessous les causes possibles de l'absence d'activités de requête.
+Avant de suivre ces étapes pour diagnostiquer une activité de requête manquante, assurez-vous que l'Agent s'exécute correctement et que vous avez suivi [les étapes pour diagnostiquer les données d'agent manquantes](#no-data-is-showing-after-configuring-database-monitoring). Voici les causes possibles de l'absence d'activité de requête.
 
-#### L'option `performance-schema-consumer-events-waits-current` n'est pas activée {#events-waits-current-non-active}
-L'Agent nécessite que l'option `performance-schema-consumer-events-waits-current` soit activée. Elle est désactivée par défaut par MySQL, mais peut être activée par votre fournisseur de solutions cloud. Suivez les [instructions de configuration][1] pour activer cette option. Si vous souhaitez éviter de redémarrer votre base de données, vous pouvez également ajouter un consommateur de configuration à l'exécution. Créez la procédure suivante pour permettre à l'Agent d'activer les consommateurs `performance_schema.events_*` à l'exécution.
+#### `performance-schema-consumer-events-waits-current` n'est pas activé {#events-waits-current-not-enabled}
+L'Agent nécessite que l'option `performance-schema-consumer-events-waits-current` soit activée. Elle est désactivée par défaut par MySQL, mais peut être activée par votre fournisseur cloud. Suivez les [instructions de configuration][1] pour l'activer. Alternativement, pour éviter de redémarrer votre base de données, envisagez de configurer un consommateur de configuration à l'exécution. Créez la procédure suivante pour donner à l'Agent la capacité d'activer les consommateurs `performance_schema.events_*` au moment de l'exécution.
 
 
 ```SQL
@@ -215,48 +217,35 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-**Remarque :** cette option nécessite que l'option `performance_schema` soit également activée.
+**Remarque :** Cette option nécessite également que `performance_schema` soit activé.
 
 
 <!-- TODO: add a custom query recipe for getting the max sql text length -->
 
-### Tag Schema ou Database manquant dans les métriques et échantillons de requêtes MySQL
+### Des tableaux sont manquants dans les schémas collectés {#tables-are-missing-from-collected-schemas}
 
-Le tag `schema` (également désigné « database ») est uniquement présent dans les métriques et échantillons de requêtes MySQL lorsqu'une base de données par défaut a été définie pour la connexion à l'origine de la requête. La base de données par défaut est configurée par l'application, en spécifiant le « schema » dans les paramètres de la connexion de la base de données ou en exécutant une [instruction USE][9] sur une connexion existante.
+Si l'Agent consigne un avertissement commençant par :
 
-Si aucune base de données par défaut n'est configurée pour une connexion, alors les requêtes effectuées par cette connexion ne présentent pas le tag `schema`.
+```
+No tables were found across any of the N databases.
+```
+MySQL n'expose un tableau dans `INFORMATION_SCHEMA` qu'aux utilisateurs qui détiennent un privilège sur cette table, donc l'utilisateur `datadog` ne voit aucun tableau sans privilège. Résolvez l'avertissement en accordant le privilège `REFERENCES`, ce qui rend les métadonnées de votre tableau visibles sans donner à l'Agent la capacité de lire vos données :
 
-## Limitations connues de MariaDB
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
 
-### Métriques InnoDB incompatibles
+Si seuls certains tableaux sont manquants, vérifiez que l'octroi les couvre. Un privilège limité à des colonnes individuelles n'expose que les colonnes accordées, et un privilège limité à une base de données ou un tableau ne couvre que cette base de données ou cette table. Consultez [Collecting schemas][10] pour les périmètres disponibles.
 
-Les métriques InnoDB suivantes ne sont pas disponibles pour certaines versions de MariaDB :
+### Schéma ou base de données manquant sur les métriques et échantillons de requêtes MySQL {#schema-or-database-missing-on-mysql-query-metrics-samples}
 
-| Nom de la métrique                             | Versions MariaDB        |
-| --------------------------------------- | ----------------------- |
-| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
-| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
-| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
-| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
-| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
-| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
-| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
-| `mysql.innodb.rows_read`                | 10.11, 11.1             |
-| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
-| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
-| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+Le tag `schema` (également appelée « database ») est présent sur les métriques et échantillons de requêtes MySQL uniquement lorsqu'une base de données par défaut est définie sur la connexion qui a effectué la requête. La base de données par défaut est configurée par l'application en spécifiant le « schema » dans les paramètres de connexion à la base de données, ou en exécutant l'[instruction USE][9] sur une connexion déjà existante.
 
-### Plans d'exécution MariaDB
+Si aucune base de données par défaut n'est configurée pour une connexion, alors aucune des requêtes effectuées par cette connexion ne porte le tag `schema`.
 
-MariaDB ne produit pas le même format JSON que MySQL pour les plans d'exécution. Certains champs des plans d'exécution peuvent être absents des plans d'exécution MariaDB, notamment `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join` et `used_columns`.
+## Limitations connues de MariaDB {#mariadb-known-limitations}
+
+Si vous utilisez MariaDB, consultez [Limitations connues de MariaDB][14] dans le guide de dépannage de MariaDB.
 
 [1]: /fr/database_monitoring/setup_mysql/
 [2]: /fr/agent/troubleshooting/
@@ -267,3 +256,5 @@ MariaDB ne produit pas le même format JSON que MySQL pour les plans d'exécutio
 [7]: /fr/database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
 [9]: https://dev.mysql.com/doc/refman/8.0/en/use.html
+[10]: /fr/database_monitoring/setup_mysql/selfhosted/?tab=mysql57#collecting-schemas
+[14]: /fr/database_monitoring/setup_mariadb/troubleshooting/#mariadb-known-limitations

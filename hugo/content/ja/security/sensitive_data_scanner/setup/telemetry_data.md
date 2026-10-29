@@ -17,7 +17,7 @@ further_reading:
   text: カスタムルールの作成について
 title: テレメトリデータ用に Sensitive Data Scanner をセットアップする
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 クラウド上の Sensitive Data Scanner は、アプリケーションログ、APM イベント、RUM イベント、Event Management のイベントなど、テレメトリデータをスキャンします。スキャンおよびマスキングの対象となるデータは次のとおりです。
 
@@ -53,7 +53,7 @@ title: テレメトリデータ用に Sensitive Data Scanner をセットアッ�
 - [機密データを含むログへのアクセスを制御する方法](#control-access-to-logs-with-sensitive-data)
 - [タグ内の機密データをマスキングする方法](#redact-sensitive-data-in-tags)
 
-## セットアップ{#setup}
+## セットアップ {#setup}
 
 ### 権限 {#permissions}
 
@@ -126,7 +126,7 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][6]のリ�
     - キーワードを追加するには、キーワードを入力し、プラスアイコンをクリックしてキーワードをリストに追加します。
     - キーワードを削除するには、削除したいキーワードの横にある **X** をクリックします。
     - これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
-    - 構造化イベントの場合、キーワードはイベントパス内の属性名にもマッチします。属性名に含まれる `-`、`_`、`.` などの区切り文字は単語の境界としてカウントされるため、キーワード `card` は `card_number` または `card-type` という名前の属性にマッチします。文字数制限は属性名のマッチングには適用されません。
+    - 構造化イベントの場合、キーワードはイベントパス内の属性名にもマッチします。大文字と小文字の区別、区切り文字、キャメルケースの処理については、「[Sensitive Data Scanner のキーワードマッチングの仕組み](#how-sensitive-data-scanner-keyword-matching-works)」セクションを参照してください。
     - **注**: 1 つのルールに 20 個以上のキーワードを設定することはできません。
 1. [{{< ui >}}Type or paste event data to test the rule{{< /ui >}}] (イベントデータを入力するか貼り付けてルールをテストする) セクションで、ルールを評価するためのイベントデータを追加し、一致条件を絞り込むためのキーワードを追加します。
 1. [{{< ui >}}Update{{< /ui >}}] (更新) をクリックします。
@@ -159,7 +159,7 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][6]のリ�
     - キーワードを追加するには、キーワードを入力し、プラスアイコンをクリックしてキーワードをリストに追加します。
     - キーワードを削除するには、削除したいキーワードの横にある **X** をクリックします。
     - これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
-    - 構造化イベントの場合、キーワードはイベントパス内の属性名にもマッチします。属性名に含まれる `-`、`_`、`.` などの区切り文字は単語の境界としてカウントされるため、キーワード `card` は `card_number` または `card-type` という名前の属性にマッチします。文字数制限は属性名のマッチングには適用されません。
+    - 構造化イベントの場合、キーワードはイベントパス内の属性名にもマッチします。大文字と小文字の区別、区切り文字、キャメルケースの処理については、「[Sensitive Data Scanner のキーワードマッチングの仕組み](#how-sensitive-data-scanner-keyword-matching-works)」セクションを参照してください。
       **注**: 1 つのルールに 20 個以上のキーワードを設定することはできません。
 {{% sds-suppressions %}}
 1. [{{< ui >}}Type or paste event data to test the rule{{< /ui >}}] セクションで、ルールを評価するためのイベントデータを追加し、一致条件を絞り込むためのキーワードを追加します。
@@ -167,6 +167,36 @@ Terraform については、[Datadog Sensitive Data Scanner ルール][6]のリ�
 1. [{{< ui >}}Add Rule{{< /ui >}}] (ルールの追加) をクリックします。
 
 {{% /collapse-content %}}
+
+#### Sensitive Data Scanner のキーワードマッチングの仕組み {#how-sensitive-data-scanner-keyword-matching-works}
+
+キーワードマッチングは、ライブラリルールとカスタムルールの両方に対して、以下のルールに従います。
+
+- **Case-insensitive matching**: キーワード `secret` は、`secret`、`Secret`、および `SECRET` にマッチします。
+- **Interchangeable separators (spaces, underscores, hyphens, periods, slashes)**: キーワード `secret access key` は、`secret access key`、`secret_access_key`、`secret-access-key`、`secret.access.key`、および `secret/access/key` にマッチします。キーワードは、`AWS_SECRET_ACCESS_KEY` という名前の属性にもマッチします。
+- **Camel case in attribute names**: 構造化イベントの場合、キーワードはイベントパス内の属性名にもマッチします。同じ区切り文字（スペース、`_`、`-`、`.`、および `/`）は単語の境界としてカウントされ、小文字から大文字への変化（キャメルケース）も同様に境界として扱われます。文字数制限は属性名のマッチングには適用されません。例えば、キーワードが `card` の場合、属性 `card_number`、`card-type`、および `creditCardNumber` がマッチします。以下のイベントは、パターンが `secret` でキーワードが `card` であるルールにマッチします。これは、`creditCardNumber` が `credit`、`card`、および `number` に分割されるためです。
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "secret"
+      }
+    }
+  }
+  ```
+
+- **Camel case in surrounding text**: 構造化イベント内の属性値を含む、マッチした値の前の文字に対してキーワードがマッチングされる際、キャメルケースの単語は分割されません。例えば、以下のイベントは、パターンが `secret` でキーワードが `bank` であるルールにはマッチしません。これは、値内の `anotherBank` が `another` と `bank` に分割されないためです。
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "anotherBank secret"
+      }
+    }
+  }
+  ```
 
 **注**:
 
