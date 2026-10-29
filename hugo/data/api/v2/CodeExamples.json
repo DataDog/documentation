@@ -2197,13 +2197,6 @@
       "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
-  "GetServiceRepositoryInfo": [
-    {
-      "group": "rum",
-      "suffix": "",
-      "description": "Get service repository information returns \"OK\" response"
-    }
-  ],
   "SearchRUMEvents": [
     {
       "group": "rum",
@@ -2735,13 +2728,6 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
-    }
-  ],
-  "StartSecurityMonitoringRuleProposal": [
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Start a rule proposal returns \"Accepted\" response"
     }
   ],
   "SendSecurityMonitoringNotificationPreview": [
