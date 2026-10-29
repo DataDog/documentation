@@ -117,7 +117,7 @@ After inclusion ends, you cannot change the included experiments. The holdout co
 
 As a general principle, count exposure when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
 
-For a holdout, this point is the subject's first interaction with a component tied to a concluded experiment that shipped a non-control variant. Record this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control. A subject does not need to encounter every covered change to enter the analysis.
+For a holdout, exposure occurs when a subject first interacts with a component where a covered experiment has shipped a non-control variant. Datadog records this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control.
 
 For example, a subject can open checkout while a covered checkout experiment is still running. Both holdout groups receive the old checkout, so that exposure does not qualify for the primary analysis. After the new checkout rolls out, the subject's next checkout exposure qualifies. The holdout groups can receive different experiences.
 
