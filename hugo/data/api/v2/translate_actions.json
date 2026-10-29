@@ -2272,6 +2272,14 @@
     "description": "Stops a progressive rollout and marks it as aborted.",
     "summary": "Stop a progressive rollout"
   },
+  "ListFeatureFlagHistory": {
+    "description": "Returns the organization's feature flag change events, newest first.\nEach event includes a readable description of the change.\nAll filters are optional, and events must match every filter you set. Without a date range, the whole history is listed.\nResults are paginated with `page[limit]` and `page[offset]`; follow `links.next` to read further back.",
+    "summary": "List feature flag change history"
+  },
+  "ExportFeatureFlagHistory": {
+    "description": "Exports the organization's feature flag change events as a CSV file, newest first, without pagination.\nIt accepts the same filters as the List feature flag change history endpoint, and its columns match the CSV export on the flag history page:\nFlag Version, Flag Name, Flag Key, Flag UUID, Action, User Name, User Email, User Type, Environment, and Timestamp.\n\nIf an export fails before the file starts, the response is a JSON:API error. Large exports stream as they are read.\nIf an export fails after streaming starts, the connection closes before the file ends, so the download fails instead of\nreturning a file with missing rows. An export must finish within the 60-second request timeout. If an export times out,\nnarrow the date range.",
+    "summary": "Export feature flag change history"
+  },
   "GetSavedFilter": {
     "description": "Returns a saved filter by ID, including its full targeting rules, conditions, and values.\nSupports both saved lists and saved rules. Targeting rules are combined with OR,\nand conditions within each rule are combined with AND.\nReturns the stored filter definition rather than evaluating it against users or organizations.\nArchived filters can be retrieved. Filters that are deleted or belong to another organization return a not found error.",
     "summary": "Get a saved filter"
