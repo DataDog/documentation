@@ -26,4 +26,5 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/flag_key_obfuscation" >}}Flag Key Obfuscation{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/permissions" >}}Permissions and Access Control{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/approvals" >}}Approvals{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/workflow_automation" >}}Workflow Automation{{< /nextlink >}}
 {{< /whatsnext >}}

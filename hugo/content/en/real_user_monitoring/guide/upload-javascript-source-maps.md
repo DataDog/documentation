@@ -188,6 +188,8 @@ To upload your source maps, choose one of the following matching methods: Debug 
 
 Debug IDs associate a JavaScript bundle with its source map without relying on the bundle URL, service, or release version.
 
+Debug ID matching requires [RUM Browser SDK version 7.6.0][11] or later, or [Browser Logs SDK version 7.10.0][12] or later. Earlier SDK versions do not send debug IDs, so their stack traces are not unminified.
+
 Inject debug IDs and upload source maps with a Datadog build plugin during your build, or with the `datadog-ci` CLI after your build. With a build plugin, you do not need to install or run `datadog-ci` separately. Choose one of the following methods:
 
 {{< tabs >}}
@@ -446,3 +448,5 @@ On the other hand, an unminified stack trace provides you with all the context y
 [8]: /real_user_monitoring/setup/additional_plugins/#source-maps
 [9]: /real_user_monitoring/setup/install/?platform=browser
 [10]: /logs/log_collection/javascript/#initialization-parameters
+[11]: https://github.com/DataDog/browser-sdk/releases/tag/v7.6.0
+[12]: https://github.com/DataDog/browser-sdk/releases/tag/v7.10.0

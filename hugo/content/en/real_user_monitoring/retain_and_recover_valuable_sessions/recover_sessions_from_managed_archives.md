@@ -15,10 +15,6 @@ further_reading:
   text: Configure retention filters
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-managed-archive/" btn_hidden="false" header="Join the Preview!">}}
-Managed Archive is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Datadog's [RUM without Limits][1] provides an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained by retention filters. But any session can be useful to solve an unexpected support ticket, perform a compliance audit, or conduct a retroactive investigation.
@@ -82,8 +78,6 @@ To enable session storage for an application:
 4. Toggle {{< ui >}}Enable Managed Archive{{< /ui >}} on and select the storage period.
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_setup.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
-
-<div class="alert alert-info">It takes 24 hours for a newly ingested session to appear in the Managed Archive.</div>
 
 Configuration is done at the application level, which means you can apply different storage strategies per application.
 

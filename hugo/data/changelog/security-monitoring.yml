@@ -75,3 +75,26 @@ entries:
       - GetHistoricalJob
       - ListHistoricalJobs
     title: Add failure reason to historical job responses
+  - change_type: added
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41112
+    operations:
+      - GetSecurityMonitoringRuleProposal
+      - StartSecurityMonitoringRuleProposal
+    title: Add Cloud SIEM rule proposal endpoints as unstable
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41112
+    operations:
+      - CreateSecurityMonitoringBatchMigration
+      - CreateSecurityMonitoringBatchMigrationResources
+      - ListSecurityMonitoringBatchMigrationResources
+      - UpdateSecurityMonitoringBatchMigrationResource
+    title: Add Cloud SIEM rule proposal endpoints as unstable
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41157
+    operations:
+      - GetRuleVersionHistory
+      - RestoreSecurityMonitoringRule
+    title: Make rule version history endpoints GA
