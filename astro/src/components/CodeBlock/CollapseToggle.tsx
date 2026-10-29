@@ -3,7 +3,7 @@ import styles from "./CodeBlock.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 
@@ -28,10 +28,10 @@ export function CollapseToggle({
   const targetRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) return;
-    targetRef.current = loaded.contentEl;
-    markSelfAsHydrated(ref);
+    return withExternalContext(externalContext, (loaded) => {
+      targetRef.current = loaded.contentEl;
+      markSelfAsHydrated(ref);
+    });
   }, []);
 
   // Collapse state lives in this island, but the hidden content lives in

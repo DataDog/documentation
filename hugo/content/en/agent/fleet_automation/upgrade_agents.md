@@ -11,7 +11,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API.
+Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through Terraform or the API.
 
 ## Prerequisites
 
@@ -72,6 +72,38 @@ Remote upgrading of Agents in containerized workloads is not supported.
 ## Upgrade Agents with the API
 
 Fleet Automation provides an API to trigger Agent upgrades programmatically or on a recurring schedule. Start upgrades for any set of hosts with filter queries, or create schedules that run during defined maintenance windows with a specified Agent version. For full details, see the [Fleet Automation API][3].
+
+## Schedule Agent upgrades with Terraform
+
+Use the Datadog Terraform provider to create and manage Agent upgrade schedules as code. The `datadog_fleet_schedule` resource defines the target hosts, Agent version, and recurring maintenance window. Fleet Automation performs the upgrades according to the schedule.
+
+Before you begin:
+
+- Verify that the Agents meet the [upgrade prerequisites](#prerequisites).
+- [Set up the Datadog Terraform provider][9] (version 4.22.0 or later).
+- Use an application key with the `agent_upgrade_write` and `hosts_read` permissions.
+
+The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version (`version_to_latest = 0`). It specifies a two-hour maintenance window (`maintenance_window_duration = 120`, in minutes), starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
+
+```hcl
+resource "datadog_fleet_schedule" "staging" {
+  name              = "Staging Agent upgrades"
+  query             = "env:staging service:example"
+  status            = "inactive"
+  version_to_latest = 0
+
+  rule = {
+    days_of_week                = ["Tue", "Thu"]
+    maintenance_window_duration = 120
+    start_maintenance_window    = "03:00"
+    timezone                    = "America/New_York"
+  }
+}
+```
+
+Replace the host query and maintenance window with values for your environment. Run `terraform plan` to review the changes, then `terraform apply` to create the schedule. When you are ready to enable scheduled upgrades, set `status` to `active` and apply the change.
+
+For all supported options and instructions for importing an existing schedule, see the [`datadog_fleet_schedule` resource documentation][10].
 
 ## Upgrade process
 
@@ -134,3 +166,5 @@ After updating, [enable remote Agent management][8] to use Fleet Automation for 
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /agent/guide/setup_remote_config
 [8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /getting_started/integrations/terraform/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/fleet_schedule

@@ -1140,7 +1140,7 @@
     "summary": "Get all Container Images"
   },
   "ListContainers": {
-    "description": "Get all containers for your organization.",
+    "description": "Get all containers for your organization. Use `group_by` to return container groups with counts.\nGrouped results are limited by `page[size]` and do not support pagination.\n\nTo get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`\nor `/api/v2/query/timeseries`.",
     "summary": "Get All Containers"
   },
   "GetCostAccountFilters": {
@@ -1495,32 +1495,6 @@
   "GetOwnershipUntaggedFindings": {
     "description": "Count findings with no team tag, grouped by ownership confidence level.",
     "summary": "Count untagged findings by ownership confidence"
-  },
-  "ListOwnershipInferences": {
-    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
-    "summary": "List ownership inferences for a resource"
-  },
-  "ListOwnershipHistory": {
-    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership inference history for a resource"
-  },
-  "GetOwnershipInference": {
-    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
-    "summary": "Get an ownership inference by owner type"
-  },
-  "GetOwnershipEvidence": {
-    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
-    "summary": "Get the evidence for an ownership inference"
-  },
-  "CreateOwnershipFeedback": {
-    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
-    "summary": "Submit feedback on an ownership inference",
-    "request_description": "",
-    "request_schema_description": "The request body for submitting ownership feedback."
-  },
-  "ListOwnershipHistoryByOwnerType": {
-    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership history by owner type"
   },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
@@ -4771,11 +4745,19 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "ListOnCallPages": {
+    "description": "Retrieve a paginated list of On-Call Pages, optionally filtered by a search query and sorted by a field.",
+    "summary": "List On-Call Pages"
+  },
   "CreateOnCallPage": {
     "description": "Trigger a new On-Call Page.",
     "summary": "Create On-Call Page",
     "request_description": "",
     "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "GetOnCallPage": {
+    "description": "Get the details of an On-Call Page.",
+    "summary": "Get On-Call Page"
   },
   "AcknowledgeOnCallPage": {
     "description": "Acknowledges an On-Call Page.",
@@ -4784,6 +4766,12 @@
   "EscalateOnCallPage": {
     "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
+  },
+  "RerouteOnCallPage": {
+    "description": "Reroutes an On-Call Page.",
+    "summary": "Reroute On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to reroute an On-Call Page to a different team or user."
   },
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
@@ -6395,6 +6383,32 @@
     "request_description": "",
     "request_schema_description": "Request to set or clear the manual severity override of security findings."
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -6494,7 +6508,7 @@
     "summary": "List batch migrations"
   },
   "CreateSecurityMonitoringBatchMigration": {
-    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.\nAlternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.",
     "summary": "Create a batch migration",
     "request_description": "",
     "request_schema_description": "Request to create a batch migration."
@@ -6822,6 +6836,16 @@
     "summary": "Bulk convert rules to Terraform",
     "request_description": "",
     "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
+  },
+  "StartSecurityMonitoringRuleProposal": {
+    "description": "Start generating a proposed Cloud SIEM detection rule from a natural-language\ndescription, or from an SPL or KQL rule. The proposal is based on your organization's\nlog sources, log fields, and existing detection rules. When logs from the matching\nsource are available, the proposed query is tested against your recent logs.\n\nThe proposed rule is generated asynchronously. This endpoint returns a proposal `id`\nwith the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal\nendpoint and poll the endpoint until the status is `completed` or `failed`. A proposal\nusually takes a few minutes, and up to 10 minutes.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To translate\nmany rules at once, use batch migrations instead.",
+    "summary": "Start a rule proposal",
+    "request_description": "",
+    "request_schema_description": "Request to start a rule proposal."
+  },
+  "GetSecurityMonitoringRuleProposal": {
+    "description": "Get the status of a rule proposal started with the start-a-rule-proposal endpoint.\nWhile the status is `pending` or `in_progress`, the proposed rule is still being\ngenerated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains\nthe proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains\nthe reason a rule could not be generated.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To create the\nproposed rule, use the create-a-detection-rule endpoint.",
+    "summary": "Get a rule proposal"
   },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
@@ -7186,7 +7210,7 @@
     "summary": "Restore source maps"
   },
   "GetServiceRepositoryInfo": {
-    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "description": "Returns the repository URL and commit SHA associated with a debug ID or a given service and version.\nProvide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.",
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
