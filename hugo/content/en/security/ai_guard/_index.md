@@ -167,8 +167,6 @@ When your organization exceeds a limit, AI Guard stops evaluating requests, and 
 
 To reduce how many evaluations your agent sends, use the [SDK][11] and call the evaluate method only where you want an evaluation. For example, evaluate only tool calls, or only some tool calls.
 
-<!-- TODO: Do tool calls set to Pass in a policy (Tools policies > Individual policies) count toward the usage limits and cost? The Pass option lets tool calls through without evaluating them, so it might reduce cost without code changes. Answers to draft questions on October 23 indicated that limiting evaluations to tool calls is only possible with the SDK today. If Pass reduces cost, the docs can recommend it alongside the SDK. -->
-
 ### Data residency, retention, and privacy
 
 AI Guard processes all evaluations in the US, regardless of your Datadog site.
@@ -183,7 +181,6 @@ External model providers that AI Guard uses for evaluation operate under zero da
 
 [1]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 [2]: /security/ai_guard/setup/
-<!-- Restore links when these pages are published: [3]: /security/ai_guard/discover/ [5]: /security/ai_guard/simulator/ -->
 [4]: /security/ai_guard/policies/
 [6]: /security/ai_guard/setup/sensitive_data_redaction/
 [7]: /security/ai_guard/signals/#investigate-signals

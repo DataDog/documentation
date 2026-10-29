@@ -30,7 +30,7 @@ The AI Guard SDK requires `dd-trace-py` 4.13.0 or later.
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-The AI Guard SDK requires `dd-trace-js` 5.69.0 or later.
+The AI Guard SDK requires `dd-trace-js` 5.122.0 or later, or 6.11.0 or later.
 {% /if %}
 
 <!-- Java -->
@@ -40,7 +40,7 @@ The AI Guard SDK requires `dd-trace-java` 1.54.0 or later.
 
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
-The AI Guard SDK requires `dd-trace-rb` 2.25.0 or later.
+The AI Guard SDK requires `dd-trace-rb` 2.44.0 or later.
 {% /if %}
 
 For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals.
@@ -243,8 +243,6 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    )
    ```
 
-   With `dd-trace-rb` versions earlier than 2.44.0, pass the tool call as keywords instead: `Datadog::AIGuard.assistant(tool_name: "shell", id: "call_1", arguments: '{"command": "shutdown"}')`.
-
    To evaluate images, build the message content with a block:
 
    ```ruby
@@ -273,7 +271,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 Knowing how SDK calls report AI Guard decisions tells your code where to look for decisions and what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
 
 - **The SDK returns an evaluation** when AI Guard allows the request, and when the policy for the service uses {% ui %}Monitor only{% /ui %} mode. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
-- **The SDK raises `AIGuardAbortError`** when AI Guard returns `DENY` and the policy for the service uses {% ui %}Block unsafe{% /ui %} mode. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the error stops the agent.
+- **The SDK raises `AIGuardAbortError`** when AI Guard returns `DENY` and the policy for the service uses {% ui %}Block unsafe{% /ui %} mode. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests with the SDK][11].
 
 ### Evaluation fields
 
@@ -290,32 +288,6 @@ An evaluation tells your code what AI Guard decided and why, so your agent can r
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
 In Ruby, the Sensitive Data Scanner findings field is `sds_findings`, not `sds`.
-{% /if %}
-
-### Blocked request errors
-
-`AIGuardAbortError` carries the details of a blocked request, so your code can return a meaningful response instead of a generic failure.
-
-<!-- Python -->
-{% if equals($prog_lang, "python") %}
-The error is `ddtrace.aiguard.AIGuardAbortError`, with the fields `action`, `reason`, `tags`, `tag_probs`, and `sds`.
-
-`AIGuardAbortError` derives from `BaseException`, not `Exception`. Catch `AIGuardAbortError` by name, because `except Exception:` doesn't catch the error.
-{% /if %}
-
-<!-- Node.js -->
-{% if equals($prog_lang, "node_js") %}
-The error is `AIGuardAbortError`, with the fields `reason`, `tags`, `tagProbabilities`, and `sds`.
-{% /if %}
-
-<!-- Java -->
-{% if equals($prog_lang, "java") %}
-The error is `datadog.trace.api.aiguard.AIGuard.AIGuardAbortError`, with the methods `getAction()`, `getReason()`, `getTags()`, `getTagProbabilities()`, and `getSds()`.
-{% /if %}
-
-<!-- Ruby -->
-{% if equals($prog_lang, "ruby") %}
-The error is `Datadog::AIGuard::AIGuardAbortError`, with the fields `action`, `reason`, and `tags`.
 {% /if %}
 
 ### Per-call blocking options
@@ -342,7 +314,7 @@ Pass `new AIGuard.Options().block(false)` to make a call return an evaluation an
 Pass `allow_raise: false` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
-To let calls to a specific tool through without an evaluation, open the service's AI Guard policy. Under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Unlike the per-call options, {% ui %}Pass{% /ui %} skips the evaluation, not only the block.
+To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools Policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
 
 ## Optional SDK settings
 
@@ -370,3 +342,5 @@ With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluatio
 [7]: /security/ai_guard/setup/#limit-access
 [8]: /security/ai_guard/setup/#verify
 [9]: /security/ai_guard/setup/sensitive_data_redaction/
+[10]: /security/ai_guard/policies/#tools-policies
+[11]: /security/ai_guard/policies/#handle-blocked-requests-with-the-sdk

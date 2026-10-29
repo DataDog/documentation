@@ -85,8 +85,6 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
 
 ## Request format
 
-<!-- TODO: After the API reference for this endpoint is published, replace these with a link to it: the headers table, the message fields table, and the `meta` field description in Request format, and the attributes table in Response format. Keep the task steps, the user prompt and tool result examples, the Limitations section, and the advice not to pass `reason` back to the model or the end user. -->
-
 The request body follows the JSON:API format, with the conversation in `data.attributes.messages`. Use this reference to build requests for prompts, tool calls, and tool results.
 
 The request needs these headers:

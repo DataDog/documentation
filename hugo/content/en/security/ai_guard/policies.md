@@ -31,14 +31,13 @@ AI Guard applies policies based on the service and environment of each request: 
 Policies range from least to most specific:
 
 1. Default policy
-2. Policy for all services in a specific environment, or for a specific service in all environments
-3. Policy for a specific service in a specific environment
+2. Policy for a specific service in all environments
+3. Policy for all services in a specific environment
+4. Policy for a specific service in a specific environment
 
 When more than one policy matches a request, AI Guard applies the most specific one.
 
-<!-- TODO: Confirm which policy wins when a policy for all services in an environment and a policy for a service in all environments both match. The UI shows a service and environment policy inheriting from the policy for the same service in all environments, but doesn't show the case with both. -->
-
-Custom policies inherit settings from their parent policy, which is the closest less specific policy that exists. Inherited settings remain in-sync with the parent policy unless you override them. Overridden settings use only the custom policy value. For example, overriding custom rules replaces the parent rules rather than adding to them. <!-- TODO: Confirm "replaces, not merges" for Individual policies. The source states it for custom rules only. In the UI, a tool in an overridden Individual policies table can also be set to Inherit. -->
+Custom policies inherit settings from their parent policy, which is the next broader policy that exists. Inherited settings remain in-sync with the parent policy unless you override them. Overridden settings use only the custom policy value. For example, overriding custom rules or individual tool behaviors replaces the parent settings rather than adding to them.
 
 ## Policy settings
 
@@ -89,8 +88,6 @@ Policies can use one sensitivity for every attack category, or a separate sensit
 
 Evaluation context describes what an application does and what data the application handles. With evaluation context, AI Guard can tell expected agent behavior from a genuine threat and flag fewer legitimate requests.
 
-<!-- TODO: The Learn more link beside Context in the policy editor needs to be updated to point to /security/ai_guard/policies/#evaluation-context. The link currently points to /security/ai_guard/setup/#evaluation-context. -->
-
 For example, a fintech application might describe account queries and transfers as expected operations:
 
 ```text
@@ -111,32 +108,28 @@ Sensitive data scanning is managed with these options:
 | --- | --- |
 | {{< ui >}}Disabled{{< /ui >}} | Don't scan requests for sensitive data. (Default) |
 | {{< ui >}}Scanning{{< /ui >}} | Scan requests for sensitive data, and return the messages unchanged. |
-| {{< ui >}}Scanning and redacting{{< /ui >}} | Scan requests for sensitive data and redact matches. Redaction requires direct SDK calls. |
+| {{< ui >}}Scanning and redacting{{< /ui >}} | Scan requests for sensitive data and redact matches. Redaction requires direct SDK calls or the HTTP API. |
 
-Automatic integrations and SDK calls report sensitive data findings. Redaction works only when your code calls the SDK directly. AI Guard returns the redacted conversation, and your code sends the redacted conversation to the model. Automatic integrations don't redact messages. With the HTTP API, the response includes the replacements, and your code applies them.
-
-<!-- TODO: Confirm whether Manual Integrations (Strands and LiteLLM Proxy) report sensitive data findings and support redaction. Confirm whether redaction through the HTTP API is supported. -->
+Automatic integrations, SDK calls, and the HTTP API report sensitive data findings. Redaction works with direct SDK calls and the HTTP API. AI Guard returns the content with sensitive values redacted, and your code sends the redacted content to the model. Automatic integrations report findings but don't redact messages. Manual integrations don't support sensitive data scanning.
 
 For setup steps and SDK examples, see [Redact Sensitive Data][6].
 
 ### Tools policies
 
-Tools policies control which tool calls AI Guard evaluates, so you can block certain tools or skip evaluation for tools you trust.
+Tools policies control how AI Guard handles tool calls, so you can block certain tools and never block tools you trust.
 
 Each policy sets a default behavior for every tool call in the policy scope, and individual tools can override the default behavior:
 
 | Behavior | Description |
 | --- | --- |
 | {{< ui >}}Evaluate{{< /ui >}} | Send every tool call to AI Guard for evaluation. (Default) |
-| {{< ui >}}Pass{{< /ui >}} | Let every tool call through without evaluating the call. |
+| {{< ui >}}Pass{{< /ui >}} | Let every tool call through without blocking the call. Tool calls set to {{< ui >}}Pass{{< /ui >}} still count toward usage. |
 | {{< ui >}}Block{{< /ui >}} | Reject every tool call in the scope. |
 | {{< ui >}}Inherit{{< /ui >}} | Apply the behavior from the parent policy. Available for individual tools in a custom policy. |
 
 Tools with their own behavior appear in the {{< ui >}}Individual policies{{< /ui >}} table. To add a tool, click {{< ui >}}Add{{< /ui >}} in the {{< ui >}}Individual policies{{< /ui >}} table. In {{< ui >}}Add tools{{< /ui >}}, type or select tool names. To add a tool that isn't in the list, type the tool name, then select {{< ui >}}Add option{{< /ui >}}.
 
-AI Guard adds the `tool-blocked` or `tool-allowed` tag to evaluations that tools policies decide.
-
-<!-- TODO: Confirm which behaviors add each tag, and whether Block rejects the tool call in Monitor only mode. In the Simulator, a tool set to Block shows Blocked with "Tool call blocked" even when the policy uses Monitor only. -->
+A tool set to {{< ui >}}Block{{< /ui >}} adds the `tool-blocked` tag to its evaluations, and a tool set to {{< ui >}}Pass{{< /ui >}} adds the `tool-allowed` tag.
 
 ### Custom rules
 
@@ -168,9 +161,7 @@ When a service or environment needs different settings, create a custom policy i
 1. (Optional) Test the change in the {{< ui >}}Simulator{{< /ui >}} panel.
 1. Save the policy.
 
-   The policy applies to evaluations after you save.
-
-<!-- TODO: Confirm how soon a saved change applies to new evaluations. -->
+   The policy applies to new evaluations within seconds after you save.
 
 ## Turn on blocking {#blocking-policy}
 

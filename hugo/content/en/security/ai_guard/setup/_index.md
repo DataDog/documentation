@@ -38,12 +38,14 @@ AI Guard requires these minimum Datadog SDK versions:
 
 | Language | Datadog SDK | Minimum version |
 | --- | --- | --- |
-| Python | `dd-trace-py` | 3.19.0 |
-| Node.js | `dd-trace-js` | 5.69.0 |
+| Python | `dd-trace-py` | 4.13.0 |
+| Node.js | `dd-trace-js` | 5.122.0 or 6.11.0 |
 | Java | `dd-trace-java` | 1.54.0 |
-| Ruby | `dd-trace-rb` | 2.25.0 |
+| Ruby | `dd-trace-rb` | 2.44.0 |
 
-Some integration methods require a later version, such as the Python SDK and manual integrations, which require `dd-trace-py` 4.13.0. Each integration page lists its own requirements.
+Some features require a later version, such as streamed response evaluation and sensitive data redaction. Each page lists its own requirements.
+
+<!-- TODO: Confirm that one minimum version per language applies to the SDK and manual integrations, not only to automatic integrations. These versions are aligned on the highest version previously listed for each language: `dd-trace-py` 4.13.0, `dd-trace-js` 5.122.0 or 6.11.0, `dd-trace-java` 1.54.0, and `dd-trace-rb` 2.44.0. -->
 
 To take advantage of all AI Guard features, use the latest version of the Datadog SDK for your language.
 

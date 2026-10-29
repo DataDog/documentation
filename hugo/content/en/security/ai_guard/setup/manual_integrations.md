@@ -53,7 +53,7 @@ The LiteLLM Proxy integration evaluates traffic in each mode that you set in the
 Some activity through manual integrations isn't evaluated or can't be blocked. Review these limits before you rely on a manual integration alone:
 
 - If AI Guard returns an error or doesn't respond, both integrations allow the request to proceed.
-- The Amazon Strands plugin doesn't evaluate images, documents, or video. With `dd-trace-py` 4.12.0 or later, the plugin sends a placeholder for non-text content. With earlier versions, non-text content can cause AI Guard to skip the evaluation.
+- The Amazon Strands plugin doesn't evaluate images, documents, or video. The plugin sends a placeholder for non-text content.
 - The LiteLLM Proxy guardrail can't block streamed responses. With `post_call`, AI Guard evaluates a streamed response only after the proxy delivers every chunk to the client.
 - If the LiteLLM Proxy guardrail runs only in `post_call` mode, AI Guard evaluates the response without the request messages. Combine `post_call` with `pre_call` or `during_call` so AI Guard has the full conversation.
 
