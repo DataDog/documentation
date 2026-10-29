@@ -40,7 +40,7 @@ The Datadog OpenTelemetry (DDOT) Collector is an open source distribution of the
 - **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
 - **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
 
-You can run the Datadog Agent alongside the Collector for features that need the Agent. For the OpenTelemetry Collector that runs inside the Agent, see [Collector in the Agent][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
+You can run the Datadog Agent alongside the Collector for features that need the Agent. For the OpenTelemetry Collector that runs inside the Agent, see [Agent's Collector][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
 
@@ -57,7 +57,7 @@ You can run the Datadog Agent alongside the Collector for features that need the
 
 ## Included components
 
-The DDOT Collector includes the OpenTelemetry Collector components listed in this section. **[Placeholder: Can you add components to the DDOT Collector image, and how?]** For the Collector in the Agent, see the [custom components guide][2].
+The DDOT Collector includes the OpenTelemetry Collector components listed in this section. **[Placeholder: Can you add components to the DDOT Collector image, and how?]** For the Agent's Collector, see the [custom components guide][2].
 
 ### Support levels
 
@@ -150,7 +150,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{% /collapse-content %}}
 
-The Collector in the Agent also includes the [DD Flare Extension][52], which adds the Collector's diagnostic information to an Agent flare.
+The Agent's Collector also includes the [DD Flare Extension][52], which adds the Collector's diagnostic information to an Agent flare.
 
 ## OpenTelemetry Collector versions
 
@@ -237,7 +237,7 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 [64]: /opentelemetry/setup/agent/
 [67]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [68]: /opentelemetry/setup/collector_exporter/
-[69]: /opentelemetry/setup/agent/#collector-in-the-agent
+[69]: /opentelemetry/setup/agent/#agents-collector
 [70]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/README.md
 [71]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/countconnector/README.md
 [72]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/k8sleaderelector/README.md

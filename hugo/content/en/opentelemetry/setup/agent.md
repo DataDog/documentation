@@ -7,13 +7,13 @@ further_reading:
   text: "OTLP Ingest in the Agent"
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
-  text: "Set Up the Collector in the Datadog Agent"
+  text: "Set Up the Agent's Collector"
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with the Collector in the Agent"
+  text: "Use Custom OpenTelemetry Components with the Agent's Collector"
 - link: "/opentelemetry/migrate/ddot_collector"
   tag: "Documentation"
-  text: "Migrate to the Collector in the Agent"
+  text: "Migrate to the Agent's Collector"
 ---
 
 ## Overview
@@ -23,7 +23,7 @@ If you run the Datadog Agent, you can send your OpenTelemetry data through it. T
 The Agent handles OpenTelemetry data in two ways:
 
 - **[OTLP Ingest in the Agent](#otlp-ingest-in-the-agent)**: The Agent receives OTLP data from your applications.
-- **[Collector in the Agent](#collector-in-the-agent)**: An OpenTelemetry Collector runs inside the Agent, so you can configure your own pipelines.
+- **[Agent's Collector](#agents-collector)**: An OpenTelemetry Collector runs inside the Agent, so you can configure your own pipelines.
 
 To send OpenTelemetry data without the Agent, see [Send OpenTelemetry Data to Datadog][9].
 
@@ -39,24 +39,24 @@ Your applications, instrumented with OpenTelemetry SDKs, send telemetry to the D
     {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Set up OTLP Ingest in the Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Collector in the Agent
+## Agent's Collector {#agents-collector}
 
-The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Configure it with standard OpenTelemetry Collector configuration.
+The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent. Configure it with standard OpenTelemetry Collector configuration.
 
-**Note**: The setup pages for the Collector in the Agent were previously titled "DDOT Collector." For the DDOT Collector that runs without the Agent, see [DDOT Collector][10].
+**Note**: The setup pages for the Agent's Collector were previously titled "DDOT Collector." For the DDOT Collector that runs without the Agent, see [DDOT Collector][10].
 
 {{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
-Remote Configuration for the Collector in the Agent is <strong>in Preview</strong>. Use this form to request access.
+Remote Configuration for the Agent's Collector is <strong>in Preview</strong>. Use this form to request access.
 {{< /callout >}}
 
-{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview of the Collector in the Agent, an OpenTelemetry Collector that runs inside the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector-2.png" alt="Architecture overview of the Agent's Collector, an OpenTelemetry Collector that runs inside the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Teams that want to control their OpenTelemetry pipelines, or send OTLP to other destinations as well as Datadog.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Set up the Collector in the Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Set up the Agent's Collector{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/ddot_collector/custom_components" >}}Use custom OpenTelemetry components{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Collector in the Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Agent's Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
