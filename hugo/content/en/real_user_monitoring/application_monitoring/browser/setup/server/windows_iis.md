@@ -65,6 +65,8 @@ Adjust the slider or enter a specific percentage in the input box for Session Sa
 
 ## Manual configuration
 
+`New-Datadog-RUMConfiguration` writes the `system.webServer/datadogRum` section at `MACHINE/WEBROOT/APPHOST/<site>`. IIS stores this configuration in `applicationHost.config`, not in the site's `web.config` file.
+
 ### Log Level
 
 You can configure the log level in the IIS `applicationHost.config` file:
@@ -106,7 +108,14 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the {{< ui >}}Windows Apps & Features{{< /ui >}} tool.
+To remove Browser RUM Auto-Instrumentation from the IIS instance, use the Datadog RUM MSI uninstaller. There is no public PowerShell cmdlet for removing the configuration.
+
+1. Plan for a short interruption while IIS restarts.
+2. Uninstall Datadog RUM using the {{< ui >}}Windows Apps & Features{{< /ui >}} tool. For a silent MSI uninstall, set `IISRESTART=true`. This property is required for silent uninstall and restarts IIS.
+
+The current installer removes `datadogRum` configuration from IIS sites, applications, and location blocks before unregistering `DDRumModule`. You do not need to remove the configuration created by `New-Datadog-RUMConfiguration` manually. The uninstaller retains the IIS schema and section declarations to prevent leftover configuration from causing IIS 500.19 errors.
+
+These cleanup details apply to the current installer. Downloading the MSI from the `latest` URL does not identify the installed version. For an older or unknown installed version, contact [Datadog Support][6] to confirm its cleanup behavior before uninstalling.
 
 ## Further reading
 
@@ -117,3 +126,4 @@ To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using the {
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
 [5]: https://rum-auto-instrumentation.s3.us-east-1.amazonaws.com/iis/latest/x64/injector_IIS.msi
+[6]: /help/
