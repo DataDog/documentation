@@ -15,27 +15,18 @@ further_reading:
 
 ## Overview
 
-Install OpenTelemetry on your Kubernetes cluster with Datadog's installer script, the same script the in-app setup runs. In about 10 minutes, your application's services, traces, and logs appear in Datadog, along with your cluster's hosts and metrics.
+Monitor your Kubernetes applications and infrastructure in Datadog with OpenTelemetry. This quickstart installs a Collector, adds instrumentation to your application, and shows you where to find your services, traces, and logs in Datadog.
 
-This quickstart uses Kubernetes. For other environments:
+Use DDOT or upstream OpenTelemetry components. The installation steps are the same; select your setup in the **DDOT** or **Upstream** tab in step 2. To compare the two, see [Choose a setup][25].
 
-- **A host, a VM, or Docker, or an OpenTelemetry Collector you already run**: [Set up the OpenTelemetry Collector][17].
-- **Serverless functions or managed platforms**: [Datadog OTLP intake endpoint][21].
-- **The Datadog Agent, already running**: [Send OpenTelemetry data through the Datadog Agent][22].
-
-Choose a path: Datadog OpenTelemetry (DDOT) or upstream OpenTelemetry. Steps that differ by path have a **DDOT** tab and an **Upstream** tab.
-
-| Path | What runs in your cluster | How data reaches Datadog |
-|---|---|---|
-| **DDOT** | The DDOT Collector and DDOT SDKs. The Datadog Agent is optional. | The DDOT Collector's Datadog Exporter. |
-| **Upstream** | The upstream OpenTelemetry Collector and OpenTelemetry SDKs. No Datadog Agent or Datadog Exporter. | OTLP over HTTP to the Datadog OTLP intake. |
+For other environments and installation options, see [Send OpenTelemetry Data to Datadog][17].
 
 ## Prerequisites
 
-- A Kubernetes cluster, and `kubectl` access with cluster-admin permissions.
+- A Kubernetes cluster with cluster-admin access through `kubectl`.
 - [Helm][4] 3 or later, and `git`.
 - A [Datadog API key][5].
-- An application that runs in the cluster as a Deployment, written in Java, Python, Node.js, or .NET. Other languages, such as Go, need extra setup. See [Instrument Your Applications][8].
+- An application that runs in the cluster as a Deployment, written in Java, Python, Node.js, or .NET.
 
 ## 1. Download the installer
 
@@ -53,11 +44,11 @@ Set these environment variables in the terminal you use for the rest of this qui
 {{< tabs >}}
 {{% tab "DDOT" %}}
 
-**[Placeholder: release-stage banner]**
+**Note**: The DDOT SDKs and the DDOT Collector are in Preview.
 
 ```shell
 export DD_API_KEY="<DATADOG_API_KEY>"
-export DD_SITE="{{< region-param key="dd_site" >}}"
+export DD_SITE="<DATADOG_SITE>"
 export DD_INSTALL_FLOW=ddot
 export DD_AGENT_ENABLED=false
 export K8S_CLUSTER_TYPE="<CLUSTER_TYPE>"
@@ -65,14 +56,14 @@ export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
 export DEPLOYMENT_ENVIRONMENT_NAME="<ENVIRONMENT>"
 ```
 
-**Optional:** Some features need the Datadog Agent: **[Placeholder: features that need the Agent]**. To install the Agent too, set `DD_AGENT_ENABLED=true`. The installer adds the Datadog Operator and the Agent in the `datadog` namespace.
+**Optional:** Some Datadog features need the Datadog Agent. For which ones, see [Feature Compatibility](/opentelemetry/compatibility/#feature-compatibility). To install the Agent too, set `DD_AGENT_ENABLED=true`. The installer adds the Datadog Operator and the Agent in the `datadog` namespace.
 
 {{% /tab %}}
 {{% tab "Upstream" %}}
 
 ```shell
 export DD_API_KEY="<DATADOG_API_KEY>"
-export DD_SITE="{{< region-param key="dd_site" >}}"
+export DD_SITE="<DATADOG_SITE>"
 export DD_INSTALL_FLOW=upstream
 export K8S_CLUSTER_TYPE="<CLUSTER_TYPE>"
 export K8S_CLUSTER_NAME="<CLUSTER_NAME>"
@@ -111,28 +102,30 @@ Replace the placeholders:
 
 ## 4. Instrument your application
 
+If your application's code already sets up an SDK, check [Before switching from an OpenTelemetry SDK][28] before you add the annotation.
+
 1. Add the language annotation to your Deployment's pod template. Replace `<DEPLOYMENT_NAME>` and `<NAMESPACE>` with your Deployment's name and namespace, and `<LANGUAGE>` with `java`, `python`, `nodejs`, or `dotnet`:
 
    ```shell
    kubectl patch deployment <DEPLOYMENT_NAME> -n <NAMESPACE> --type merge -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-<LANGUAGE>":"opentelemetry-operator-system/opentelemetry-kube-stack"}}}}}'
+   kubectl rollout status deployment/<DEPLOYMENT_NAME> -n <NAMESPACE> --timeout=5m
    ```
 
-   The patch restarts the pods with instrumentation: the DDOT SDK on the DDOT path, or the OpenTelemetry SDK on the Upstream path. It sends data to the `daemon` Collector, so you don't need to set an endpoint.
+   The patch restarts the pods with instrumentation: the DDOT SDK on the DDOT path, or the OpenTelemetry SDK on the Upstream path. The second command waits for the restart to finish. The SDK sends data to the `daemon` Collector, so you don't need to set an endpoint.
 
 2. Send a few requests to your application so it produces traces.
 
 ## 5. Verify your data in Datadog
 
-Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, unless you set a different service name. `<ENVIRONMENT>` and `<CLUSTER_NAME>` are the values you set in step 2.
+Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, unless you set a different service name. `<ENVIRONMENT>` is the value you set in step 2.
 
 | Check | Where to look | What you see |
 |---|---|---|
-| Services | [Software Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
+| Services | [Catalog][9]: set the environment to `<ENVIRONMENT>` and search for `<SERVICE_NAME>`. | The service page, with requests, errors, and latency. |
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
-| Hosts | [Host List][11] | Your nodes. For how Datadog names them, see [Hostnames and Tagging][23]. |
-| Kubernetes | [Kubernetes Explorer][13]: filter by your cluster name. | Your pods, Deployments, and nodes. |
-| Metrics | [Metrics Explorer][14]: graph `k8s.node.cpu.usage` filtered by `kube_cluster_name:<CLUSTER_NAME>` on the DDOT path, or `k8s.cluster.name:<CLUSTER_NAME>` on the Upstream path. | Node CPU usage for your cluster. |
+
+To see your cluster's pods, Deployments, and nodes, open [Kubernetes Explorer][13] and filter by your cluster name.
 
 ## Troubleshooting
 
@@ -168,14 +161,13 @@ The installer applies your file on top of its own values files. For what you can
 
 ## Next steps
 
-- Instrument more services: annotate their Deployments as in [step 4](#4-instrument-your-application). To add custom spans and metrics, see [Instrument Your Applications][8].
-- Turn on the host profiler: **[Placeholder: host profiler name, release stage, and setup link]**
-- Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version`: [Unified service tagging][18].
-- Set up the Collector with your own Helm configuration instead of the installer: [Install the DDOT Collector on Kubernetes][19] or [Set up the OpenTelemetry Collector][20].
+- **Instrument more services**: Annotate their Deployments as in [step 4](#4-instrument-your-application). To add custom spans and metrics, see [Instrument Your Applications][8].
+- **Tag your data**: Learn how Datadog uses `service.name`, `deployment.environment.name`, and `service.version` in [Unified service tagging][18].
+- **Manage the Collector yourself (optional)**: To install and manage the Collector with your own Helm or Operator configuration instead of the installer, see [Install the DDOT Collector on Kubernetes][19] or [Set up the upstream OpenTelemetry Collector][20].
 
 ## Uninstall
 
-<div class="alert alert-warning">The uninstall script deletes cert-manager, the OpenTelemetry Operator's custom resource definitions, and the <code>datadog</code> namespace, including resources that other tools created, such as a Datadog Agent you installed separately.</div>
+<div class="alert alert-warning">The uninstall script deletes the <code>opentelemetry-operator-system</code>, <code>cert-manager</code>, and <code>datadog</code> namespaces. It also deletes the custom resource definitions for cert-manager, the OpenTelemetry Operator, and the Datadog Operator. That removes every matching resource in the cluster, including resources that other tools created, such as a Datadog Agent you installed separately.</div>
 
 1. Remove the annotation from your Deployment. Its pods restart without instrumentation:
 
@@ -200,16 +192,14 @@ The installer applies your file on top of its own values files. For what you can
 [8]: /opentelemetry/instrument/
 [9]: https://app.datadoghq.com/software
 [10]: https://app.datadoghq.com/apm/traces
-[11]: https://app.datadoghq.com/infrastructure
 [13]: https://app.datadoghq.com/orchestration/overview
-[14]: https://app.datadoghq.com/metric/explorer
 [15]: https://app.datadoghq.com/logs
 [16]: /opentelemetry/troubleshooting/
-[17]: /opentelemetry/setup/collector_exporter/
+[17]: /opentelemetry/setup/
 [18]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
-[19]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[19]: /opentelemetry/setup/ddot_collector/kubernetes/
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
-[21]: /opentelemetry/setup/otlp_ingest/
-[22]: /opentelemetry/setup/agent/
-[23]: /opentelemetry/config/hostname_tagging/
 [24]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
+[25]: /opentelemetry/#choose-a-setup
+[28]: /opentelemetry/instrument/dd_sdks/ddot_setup/#before-switching-from-an-opentelemetry-sdk
+

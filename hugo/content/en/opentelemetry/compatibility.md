@@ -25,7 +25,7 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 ## Feature compatibility
 
-The following table shows feature compatibility across different setups.
+The following table shows which Datadog features each setup supports.
 
 **[Placeholder: feature support for DDOT SDK + DDOT Collector, with and without the Datadog Agent]**
 
@@ -75,7 +75,7 @@ OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.
 
 ### Runtime metrics
 
-- **Datadog SDK setups**: Emit [Runtime Metrics][23] using DogStatsD (UDP port 8125). Ensure DogStatsD is enabled in your Datadog Agent.
+- **Datadog SDK with the Agent**: Sends [runtime metrics][23] with DogStatsD (UDP port 8125). Turn on DogStatsD in the Agent.
 - **OpenTelemetry SDK setups**: Follow the [OpenTelemetry Runtime Metrics][1] specification and are typically sent using OTLP (port 4317/4318).
 
 ### Real User Monitoring (RUM)
@@ -167,6 +167,6 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [44]: /opentelemetry/guide/instrument_unsupported_runtimes
 [45]: https://opentelemetry.io/community/
 [46]: /containers/
-[47]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
+[47]: /opentelemetry/setup/ddot_collector/kubernetes/#install-the-core-datadog-agent-alongside-ddot
 [48]: /opentelemetry/setup/agent/#collector-in-the-agent
 [49]: /opentelemetry/setup/ddot_collector/

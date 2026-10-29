@@ -1,6 +1,6 @@
 ---
 title: Instrument Your Applications
-description: Instrument your applications with a Datadog SDK, in DDOT setup or with the Datadog Agent, or with an OpenTelemetry SDK.
+description: "Choose an SDK to instrument your applications with OpenTelemetry: a Datadog SDK, set up as a DDOT SDK or with the Datadog Agent, or an OpenTelemetry SDK."
 aliases:
     - /opentelemetry/guide/otel_api_tracing_interoperability
 further_reading:
@@ -11,35 +11,41 @@ further_reading:
 
 ## Overview
 
-Instrument your applications with a Datadog SDK or an OpenTelemetry SDK.
+Choose the SDK that instruments your application. Both options support the OpenTelemetry API. Support varies by language and signal. See [OpenTelemetry API Support][4].
 
-### Datadog SDKs
+| SDK | Sends data to | Best for |
+|---|---|---|
+| [Datadog SDKs](#datadog-sdks) | Your OpenTelemetry Collector, as a DDOT SDK (Preview), or the Datadog Agent | Teams that want Datadog to build and support their SDK |
+| [OpenTelemetry SDKs](#opentelemetry-sdks) | Your OpenTelemetry Collector, the Datadog Agent, or the Datadog OTLP intake | Teams that use only OpenTelemetry project components |
 
-Use the Datadog SDK for your language in one of two setups:
+To check which Datadog features each setup supports, see [Feature Compatibility][3].
 
-- **DDOT setup** (Preview): The Datadog SDK runs as a DDOT SDK and exports OTLP to your Collector, in place of the upstream OpenTelemetry SDK.
-- **With the Datadog Agent**: The Datadog SDK keeps sending data to the Agent. You add custom instrumentation with the OpenTelemetry API, and OpenTelemetry [instrumentation libraries][1] for frameworks that the Datadog SDK doesn't instrument.
+## Datadog SDKs
 
-In both setups, you can use the OpenTelemetry API to add custom spans, metrics, and logs. For how the two setups compare, see [Using Datadog SDKs with OpenTelemetry][2].
+A Datadog SDK sends data in one of two ways:
+
+- **As a DDOT SDK** (Preview): A Datadog OpenTelemetry (DDOT) SDK is the Datadog SDK for your language, set to send OpenTelemetry data to your Collector. On Kubernetes, the OpenTelemetry Operator injects it into your pods.
+- **With the Datadog Agent**: The Datadog SDK sends data to the Datadog Agent, and you add custom instrumentation with the OpenTelemetry API.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/ddot_setup/" >}}Set up DDOT SDKs{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support" >}}Use the Datadog SDK with the OpenTelemetry API{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}Use OpenTelemetry instrumentation libraries with the Datadog SDK{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure the Datadog SDK with OpenTelemetry SDK environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### OpenTelemetry SDK
+For all Datadog SDK pages, including instrumentation libraries and environment variables, see [Datadog SDKs][2].
+
+## OpenTelemetry SDKs
 
 {{% opentelemetry/otel-sdks %}}
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://opentelemetry.io/docs/languages/" >}}Use OpenTelemetry SDKs{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/otel_sdks/" >}}Use OpenTelemetry SDKs with Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/specs/otel/overview/#instrumentation-libraries
 [2]: /opentelemetry/instrument/dd_sdks/
+[3]: /opentelemetry/compatibility/
+[4]: /opentelemetry/instrument/dd_sdks/api_support/
