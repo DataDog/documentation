@@ -12,11 +12,11 @@ products:
 
 ## Overview
 
-The reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. Logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline.
+The Reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. Logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline.
 
 ## Setup
 
-To set up the reduce processor:
+To set up the Reduce processor:
 1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are processed. Reduced logs and logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 2. In the {{< ui >}}Group By{{< /ui >}} section, enter the field you want to group the logs by.
 3. Click {{< ui >}}Add Group by Field{{< /ui >}} to add additional fields.
