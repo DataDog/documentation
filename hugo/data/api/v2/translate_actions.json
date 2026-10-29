@@ -7186,7 +7186,7 @@
     "summary": "Restore source maps"
   },
   "GetServiceRepositoryInfo": {
-    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "description": "Returns the repository URL and commit SHA associated with a debug ID or a given service and version.\nProvide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.",
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
