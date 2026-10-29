@@ -10,29 +10,29 @@ further_reading:
   tag: 소스 코드
   text: 소스 코드
 - link: /integrations/amazon_ecs/#trace-collection
-  tag: 설명서
+  tag: 문서
   text: ECS 애플리케이션 추적
 - link: /agent/docker/log/
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션 로그 수집
 - link: /agent/docker/integrations/
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션 메트릭 및 로그 자동 수집
 - link: /agent/guide/autodiscovery-management/
-  tag: 설명서
-  text: 데이터 수집을 컨테이너의 하위 집합으로만 제한
+  tag: 문서
+  text: 데이터 수집을 컨테이너의 하위 세트로만 제한
 - link: /agent/docker/tag/
-  tag: 설명서
+  tag: 문서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
 title: Docker 애플리케이션 추적
 ---
-Agent 6.0.0부터 Trace Agent는 기본적으로 활성화되어 있습니다. 비활성화된 경우 `registry.datadoghq.com/agent` 컨테이너에서 환경 변수 `DD_APM_ENABLED=true`를 전달하여 다시 활성화할 수 있습니다.
+Agent 6.0.0부터 Trace Agent는 기본적으로 활성화되어 있습니다. 비활성화된 경우 `registry.datadoghq.com/agent` 컨테이너에서 환경 변수로 `DD_APM_ENABLED=true`를 전달하여 다시 활성화할 수 있습니다.
 
 이 페이지의 CLI 명령은 Docker 런타임 기준입니다. containerd 런타임을 사용하는 경우 `docker` 대신 `nerdctl`를 사용하고, Podman 런타임을 사용하는 경우 `podman`를 사용하세요.
 
 <div class="alert alert-info">컨테이너화된 애플리케이션에서 트레이스를 수집하는 경우(Agent와 애플리케이션이 별도 컨테이너에서 실행되는 경우), 아래 지침 대신 SDK를 애플리케이션에 자동 주입할 수도 있습니다. 방법은 <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">라이브러리 주입</a> 설명서를 참조하세요.</div>
 
-## 호스트에서 추적하기 {#tracing-from-the-host}
+## 호스트에서 추적 {#tracing-from-the-host}
 
 트레이싱은 `8126/tcp` 포트에서 사용할 수 있으며, _호스트에서만_ 접근 가능하도록 하려면 `docker run` 명령에 `-p 127.0.0.1:8126:8126/tcp` 옵션을 추가합니다.
 
@@ -74,7 +74,9 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 
 ## Docker APM Agent 환경 변수 {#docker-apm-agent-environment-variables}
 
-다음 환경 변수를 사용하여 Docker Agent의 트레이싱 기능을 구성할 수 있습니다. 자세한 내용은 [샘플 `config_template.yaml` 파일][8]을 참조하세요.
+다음 환경 변수를 사용하여 Docker Agent의 트레이싱 기능을 구성할 수 있습니다.
+
+사용 가능한 모든 옵션과 기본값은 [Agent 구성 파일 예시][8]의 `apm_config` 섹션을 참조하세요.
 
 `DD_API_KEY`                      
 : 필수 - _string_
@@ -135,8 +137,8 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 <br/>[잠재적으로 민감한 정보를 포함하는 태그를 대체하거나 제거][2]하기 위한 규칙 집합을 정의합니다.
 
 `DD_HOSTNAME`                      
-: 선택 사항 - _string_ - **기본값**: 자동으로 감지됨 
-<br/>자동 호스트 이름 감지에 실패한 경우 또는 Datadog Cluster Agent를 실행하는 경우 메트릭에 사용할 호스트 이름을 설정합니다.
+: 선택 사항 - _string_ - **기본값**: 자동으로 탐지됨 
+<br/>자동 호스트 이름 탐지에 실패한 경우 또는 Datadog Cluster Agent를 실행하는 경우 메트릭에 사용할 호스트 이름을 설정합니다.
 
 `DD_DOGSTATSD_PORT`                
 : 선택 사항 - _integer_ - **기본값**: `8125` 
@@ -160,7 +162,7 @@ DogStatsD와 마찬가지로, 다른 컨테이너에서도 [Docker 네트워크]
 
 ### Docker 네트워크 {#docker-network}
 
-첫 번째 단계로, 사용자 정의 브리지 네트워크를 생성합니다:
+첫 번째 단계로, 사용자 정의 브리지 네트워크를 생성합니다.
 
 ```bash
 docker network create <NETWORK_NAME>
@@ -224,7 +226,7 @@ docker run -d --name app \
 이렇게 하면 `app` 컨테이너 내에서 호스트 이름 `datadog-agent`가 노출됩니다.
 `docker-compose`를 사용하는 경우 `<NETWORK_NAME>` 파라미터는 `docker-compose.yml`의 `networks` 섹션에서 정의된 값입니다.
 
-애플리케이션 SDK는 이 주소로 트레이스를 전송하도록 구성되어야 합니다. 애플리케이션 컨테이너에서 `DD_AGENT_HOST`에는 Agent 컨테이너 이름을, `DD_TRACE_AGENT_PORT`에는 Agent Trace 포트를 설정하는 환경 변수를 지정하세요. 위 예시는 호스트 `datadog-agent`와 포트 `8126`(기본값이므로 별도 설정 불필요)을 사용합니다.
+애플리케이션 SDK는 이 주소로 트레이스를 전송하도록 구성되어야 합니다. 애플리케이션 컨테이너에서 `DD_AGENT_HOST`에는 Agent 컨테이너 이름을, `DD_TRACE_AGENT_PORT`에는 Agent 트레이스 포트를 설정하는 환경 변수를 지정하세요. 위 예시는 호스트 `datadog-agent`와 포트 `8126`(기본값이므로 별도 설정 불필요)을 사용합니다.
 
 또는 아래 예시와 같이 지원되는 각 언어에서 Agent 호스트를 수동으로 설정할 수 있습니다.
 
@@ -394,4 +396,4 @@ docker run -d --name app \
 [5]: /ko/tracing/guide/ignoring_apm_resources/
 [6]: /ko/tracing/troubleshooting/agent_rate_limits
 [7]: /ko/getting_started/site/
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
