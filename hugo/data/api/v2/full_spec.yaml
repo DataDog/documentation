@@ -122276,7 +122276,7 @@ components:
         data:
           $ref: "#/components/schemas/SensitiveDataScannerGroupResponse"
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerCreateRuleResponse:
       description: Create rule response.
@@ -122284,7 +122284,7 @@ components:
         data:
           $ref: "#/components/schemas/SensitiveDataScannerRuleResponse"
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerFilter:
       description: Filter for the Scanning Group.
@@ -122400,8 +122400,13 @@ components:
     SensitiveDataScannerGroupDeleteResponse:
       description: Delete group response.
       properties:
+        data:
+          additionalProperties: {}
+          description: Always `null`.
+          nullable: true
+          type: object
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerGroupIncludedItem:
       description: A Scanning Group included item.
@@ -122491,8 +122496,13 @@ components:
     SensitiveDataScannerGroupUpdateResponse:
       description: Update group response.
       properties:
+        data:
+          additionalProperties: {}
+          description: Always `null`.
+          nullable: true
+          type: object
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerIncludedKeywordConfiguration:
       description: |-
@@ -122530,34 +122540,7 @@ components:
       type: object
     SensitiveDataScannerMeta:
       additionalProperties: {}
-      description: Meta response containing information about the API.
-      properties:
-        count_limit:
-          description: Maximum number of scanning rules allowed for the org.
-          format: int64
-          type: integer
-        group_count_limit:
-          description: Maximum number of scanning groups allowed for the org.
-          format: int64
-          type: integer
-        has_highlight_enabled:
-          default: true
-          deprecated: true
-          description: (Deprecated) Whether or not scanned events are highlighted in Logs or RUM for the org.
-          type: boolean
-        has_multi_pass_enabled:
-          deprecated: true
-          description: (Deprecated) Whether or not scanned events have multi-pass enabled.
-          type: boolean
-        is_pci_compliant:
-          description: Whether or not the org is compliant to the payment card industry standard.
-          type: boolean
-        version:
-          description: Version of the API.
-          example: 0
-          format: int64
-          minimum: 0
-          type: integer
+      description: Meta response. Always an empty object.
       type: object
     SensitiveDataScannerMetaVersionOnly:
       description: Meta payload containing information about the API.
@@ -122704,8 +122687,13 @@ components:
     SensitiveDataScannerRuleDeleteResponse:
       description: Delete rule response.
       properties:
+        data:
+          additionalProperties: {}
+          description: Always `null`.
+          nullable: true
+          type: object
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerRuleIncludedItem:
       description: A Scanning Rule included item.
@@ -122777,8 +122765,13 @@ components:
     SensitiveDataScannerRuleUpdateResponse:
       description: Update rule response.
       properties:
+        data:
+          additionalProperties: {}
+          description: Always `null`.
+          nullable: true
+          type: object
         meta:
-          $ref: "#/components/schemas/SensitiveDataScannerMetaVersionOnly"
+          $ref: "#/components/schemas/SensitiveDataScannerMeta"
       type: object
     SensitiveDataScannerSamplings:
       description: Sampling configurations for the Scanning Group.
@@ -242203,11 +242196,7 @@ paths:
                               id: group-abc-123
                               type: sensitive_data_scanner_group
                         type: sensitive_data_scanner_rule
-                    meta:
-                      count_limit: 500
-                      group_count_limit: 20
-                      is_pci_compliant: false
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerGetConfigResponse"
           description: OK
@@ -242261,8 +242250,7 @@ paths:
               examples:
                 default:
                   value:
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerReorderGroupsResponse"
           description: OK
@@ -242352,8 +242340,7 @@ paths:
                         rules:
                           data: []
                       type: sensitive_data_scanner_group
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerCreateGroupResponse"
           description: OK
@@ -242404,8 +242391,8 @@ paths:
               examples:
                 default:
                   value:
-                    meta:
-                      version: 1
+                    data:
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerGroupDeleteResponse"
           description: OK
@@ -242476,8 +242463,7 @@ paths:
               examples:
                 default:
                   value:
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerGroupUpdateResponse"
           description: OK
@@ -242593,8 +242579,7 @@ paths:
                             id: group-abc-123
                             type: sensitive_data_scanner_group
                       type: sensitive_data_scanner_rule
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerCreateRuleResponse"
           description: OK
@@ -242645,8 +242630,7 @@ paths:
               examples:
                 default:
                   value:
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerRuleDeleteResponse"
           description: OK
@@ -242737,8 +242721,7 @@ paths:
               examples:
                 default:
                   value:
-                    meta:
-                      version: 1
+                    meta: {}
               schema:
                 $ref: "#/components/schemas/SensitiveDataScannerRuleUpdateResponse"
           description: OK
