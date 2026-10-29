@@ -2261,7 +2261,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
@@ -5732,28 +5732,28 @@
     "request_schema_description": "Request body for creating the RUM configuration."
   },
   "ListRumMetrics": {
-    "description": "Get the list of configured RUM-based metrics with their definitions.",
+    "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
     "summary": "Get all RUM-based metrics"
   },
   "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Create a metric based on your organization's RUM data.\nThe metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.\nThe `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.\n`uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.\nWhen `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.\nReturns the created RUM-based metric when the request is successful.\nThe request returns a `409 Conflict` error if a metric with the same name already exists.",
     "summary": "Create a RUM-based metric",
     "request_description": "The definition of the new RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
   },
   "DeleteRumMetric": {
-    "description": "Delete a specific RUM-based metric from your organization.",
+    "description": "Delete a specific RUM-based metric from your organization.\nMetric data that was already generated is not deleted. Deleting a metric cannot be undone.",
     "summary": "Delete a RUM-based metric"
   },
   "GetRumMetric": {
-    "description": "Get a specific RUM-based metric from your organization.",
+    "description": "Get a specific RUM-based metric from your organization.\nThe `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.",
     "summary": "Get a RUM-based metric"
   },
   "UpdateRumMetric": {
-    "description": "Update a specific RUM-based metric from your organization.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Update a specific RUM-based metric from your organization.\nOnly `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.\nOmitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.\n`data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.\nThe request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.\nReturns the updated RUM-based metric when the request is successful.",
     "summary": "Update a RUM-based metric",
     "request_description": "New definition of the RUM-based metric.",
-    "request_schema_description": "The new RUM-based metric body."
+    "request_schema_description": "The RUM-based metric update body."
   },
   "DeleteRumQuotaConfig": {
     "description": "Delete the RUM retention quota configuration for a given scope.",
