@@ -6753,6 +6753,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
+    - name: Workflow Automation
+      url: feature_flags/concepts/workflow_automation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_workflow_automation
+      weight: 322
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags
