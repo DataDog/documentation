@@ -22,6 +22,28 @@ Holdouts measure the value of the product you ship. Both groups stay on control 
 
 The following sections describe holdouts with Datadog Feature Flags. Use a consistent subject ID across covered experiments. See [Subject Types][1].
 
+## Holdout types
+
+The **inclusion period** sets the dates when experiments can join the holdout.
+
+| Type | Experiments included |
+| --- | --- |
+| Global | Automatically includes eligible experiments with the same subject type. They must start during the inclusion period and after the holdout is created. |
+| Selective | Includes experiments that you choose and add before they start. |
+
+Global holdouts do not include experiments already running when the holdout is created. Global holdouts with the same subject type cannot overlap from the inclusion start date to the analysis end date. An experiment can belong to only one active selective holdout.
+
+### Global and selective measurement
+
+Global and selective holdouts can measure different sets of changes at the same time:
+
+- A global holdout measures the combined effect of shipped changes from all eligible experiments with the same subject type.
+- A selective holdout measures a chosen set of changes, such as a product initiative, updates to checkout, or a team's work.
+
+Each holdout has its own randomized comparison. This measures the impact of each set of changes directly. The selective result is not inferred from the global result or the sum of individual experiment results.
+
+An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes and should not be added together.
+
 ## Holdout phases
 
 The all-shipped group receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
@@ -57,28 +79,6 @@ For example, a 10% holdout assigns about 5% of eligible subjects to each group. 
 A subject keeps the same group across included experiments. Each experiment's targeting and traffic rules still apply.
 
 Both groups receive control until the experiment's rollout completes. Selecting a winner alone does not change the experience. After a change's rollout completes, only the all-shipped group receives it. If control wins, both groups keep control.
-
-## Holdout types
-
-The **inclusion period** sets the dates when experiments can join the holdout.
-
-| Type | Experiments included |
-| --- | --- |
-| Global | Automatically includes eligible experiments with the same subject type. They must start during the inclusion period and after the holdout is created. |
-| Selective | Includes experiments that you choose and add before they start. |
-
-Global holdouts do not include experiments already running when the holdout is created. Global holdouts with the same subject type cannot overlap from the inclusion start date to the analysis end date. An experiment can belong to only one active selective holdout.
-
-### Global and selective measurement
-
-Global and selective holdouts can measure different sets of changes at the same time:
-
-- A global holdout measures the combined effect of shipped changes from all eligible experiments with the same subject type.
-- A selective holdout measures a chosen set of changes, such as a product initiative, updates to checkout, or a team's work.
-
-Each holdout has its own randomized comparison. This measures the impact of each set of changes directly. The selective result is not inferred from the global result or the sum of individual experiment results.
-
-An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes and should not be added together.
 
 ## Set up a holdout
 
