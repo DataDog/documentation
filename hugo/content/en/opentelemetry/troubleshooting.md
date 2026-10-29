@@ -286,7 +286,7 @@ To verify the configuration:
 
 **Resolution**:
 
-When using OTLP ingestion in the Datadog Agent, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
+When you use the Agent's OTLP endpoint, you need to set specific resource attributes to ensure proper container metadata association. For more information, see [Resource Attribute Mapping][4].
 
 To verify the configuration:
 
