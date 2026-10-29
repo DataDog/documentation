@@ -240137,8 +240137,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_write
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: |-
@@ -240267,8 +240265,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/sample_log_generation/subscriptions:
     get:
       description: |-

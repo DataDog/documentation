@@ -3416,8 +3416,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 86
     - name: Test an existing rule
       url: /api/latest/security-monitoring/test-an-existing-rule/
@@ -3441,8 +3440,7 @@ menu:
           - v2
         operationids:
           - RestoreSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
