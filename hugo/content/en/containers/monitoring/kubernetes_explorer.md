@@ -94,7 +94,9 @@ The following steps enable Explorer's resource views without collecting the metr
 
 The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
 
-**Note**: OpenTelemetry Collector Contrib v0.164.0 introduced the [`receiver.k8sobjects.useInformerObserver`][16] feature gate to mitigate this issue. The feature gate is in alpha and disabled by default. Upgrade the Collector image to v0.164.0 or later before enabling it. Enabling it increases the Collector's memory usage. If the current memory limits aren't sufficient, increase them based on your cluster size.
+**Note**: OpenTelemetry Collector Contrib v0.164.0 added the [`receiver.k8sobjects.useInformerObserver`][16] feature gate, which mitigates this issue. The gate is in alpha and disabled by default.
+
+Before enabling it, upgrade the Collector image to v0.164.0 or later. Enabling the gate increases the Collector's memory usage; if your current memory limits aren't sufficient, raise them based on your cluster size.
 
 Recommendations:
 
@@ -304,7 +306,9 @@ The [`opentelemetry-kube-stack`][1] Helm chart installs the OpenTelemetry Operat
 
 The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
 
-**Note**: OpenTelemetry Collector Contrib v0.164.0 introduced the [`receiver.k8sobjects.useInformerObserver`][11] feature gate to mitigate this issue. The feature gate is in alpha and disabled by default. Upgrade the Collector image to v0.164.0 or later before enabling it. Enabling it increases the `cluster` collector's memory usage. If the current memory limits aren't sufficient, increase them based on your cluster size.
+**Note**: OpenTelemetry Collector Contrib v0.164.0 added the [`receiver.k8sobjects.useInformerObserver`][11] feature gate, which mitigates this issue. The gate is in alpha and disabled by default.
+
+Before enabling it, upgrade the Collector image to v0.164.0 or later. Enabling the gate increases the `cluster` collector's memory usage; if your current memory limits aren't sufficient, raise them based on your cluster size.
 
 Recommendations:
 
