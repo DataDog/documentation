@@ -4759,6 +4759,12 @@
     "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
   },
+  "RerouteOnCallPage": {
+    "description": "Reroutes an On-Call Page.",
+    "summary": "Reroute On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to reroute an On-Call Page to a different team or user."
+  },
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
