@@ -31,7 +31,7 @@ Before you configure the Azure Data Explorer destination, you must have:
 - An ADX database and the tables you want to send logs to. See [Create a database][3] and [Create a table in Azure Data Explorer][4] for more information.
 - If you use the streaming ingestion mode, you must have:
     - Streaming ingestion enabled on your cluster. See [Configure streaming ingestion on your Azure Data Explorer cluster][5] for more information.
-    - A streaming ingestion policy enabled on the target tables or database. For example, run this command to enable streaming ingestion on a table:
+    - A streaming ingestion policy enabled on the target tables or database. For example, run the following command to enable streaming ingestion on a table:
         ```bash
         .alter table ['<TABLE_NAME>'] policy streamingingestion enable
         ```
@@ -291,6 +291,6 @@ A batch of logs is flushed when one of these parameters is met. Batching is also
 [20]: https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview
 [21]: https://learn.microsoft.com/en-us/azure/data-explorer/manage-cluster-horizontal-scaling
 [22]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=destinations#component-metrics
-[23]: https://learn.microsoft.com/en-us/kusto/api/netfx/kusto-ingest-client-status?view=microsoft-fabric
+[23]: https://learn.microsoft.com/en-us/kusto/api/netfx/kusto-ingest-client-status?view=azure-data-explorer
 [24]: https://learn.microsoft.com/en-us/azure/data-explorer/ingest-data-overview
 [25]: /observability_pipelines/destinations/#event-batching
