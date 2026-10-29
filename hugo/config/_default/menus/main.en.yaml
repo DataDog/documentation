@@ -4451,6 +4451,21 @@ menu:
       parent: cloud_cost_planning
       identifier: cloud_cost_planning_commitment_programs
       weight: 803
+    - name: AWS
+      url: cloud_cost_management/planning/aws_commitment_programs
+      parent: cloud_cost_planning_commitment_programs
+      identifier: cloud_cost_planning_aws_commitment_programs
+      weight: 80301
+    - name: Azure
+      url: cloud_cost_management/planning/azure_commitment_programs
+      parent: cloud_cost_planning_commitment_programs
+      identifier: cloud_cost_planning_azure_commitment_programs
+      weight: 80302
+    - name: Google Cloud
+      url: cloud_cost_management/planning/google_cloud_commitment_programs
+      parent: cloud_cost_planning_commitment_programs
+      identifier: cloud_cost_planning_google_cloud_commitment_programs
+      weight: 80303
     - name: Cost Changes
       url: cloud_cost_management/cost_changes
       parent: cloud_cost

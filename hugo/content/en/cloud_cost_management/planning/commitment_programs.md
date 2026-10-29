@@ -1,186 +1,115 @@
 ---
 title: Commitment Programs
-description: Learn how to manage the performance and status of your cloud discount programs.
+description: Choose a cloud provider to review commitment savings, coverage, utilization, and expiration dates.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
 ---
 
-<div class="alert alert-info">
-  CCM Commitment Programs supports the following cloud commitments:
-  <ul>
-    <li><strong>AWS:</strong> Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache.</li>
-    <li><strong>Azure:</strong> Reservations and savings plans for all eligible services, with pre-purchase plans available for Azure Databricks. Viewing utilization, unused costs, and pre-purchase plan balances requires <a href="/cloud_cost_management/setup/azure/#unused-commitment-costs">billing account scope exports</a>.</li>
-    <li><strong>Google Cloud:</strong> Compute flexible committed use discounts (CUDs).</li>
-  </ul>
-</div>
-
 ## Overview
 
-Cloud providers offer commitment-based discount programs, such as {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance configuration for a one- or three-year term." >}} and {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}, to help you save on predictable usage. Datadog's Commitment Programs feature helps you monitor, optimize, and maximize the value of these discounts across your cloud environments.
+Cloud providers offer commitment-based discounts to help you save on predictable usage. A {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance configuration for a one- or three-year term." >}} discounts a specific configuration. {{< tooltip text="Savings Plans" tooltip="Cloud discount programs that lower prices in exchange for a consistent spending commitment (measured in $/hour) over a term." >}} discount usage in exchange for a spending commitment.
 
-With Commitment Programs, you can:
-- Track and address unused or underused commitments
-- Target high {{< tooltip text="on-demand" tooltip="Cloud resources billed at standard rates, without any commitment or discount program." >}} spend with additional commitments
-- Monitor expirations and plan timely renewals
+Use Datadog's Commitment Programs to monitor savings, address unused commitments, and plan renewals across your cloud environments. Identify predictable {{< tooltip text="on-demand" tooltip="Cloud resources billed at standard rates, without any commitment or discount program." >}} usage that could benefit from additional commitments.
 
 ## Getting started
 
-Use Commitment Programs to understand and optimize your cloud commitments.
+1. Complete [Cloud Cost Management setup][5] for your provider.
+2. Open [**Commitment Programs**][1] in Cloud Cost Management.
+3. Select your cloud provider in the left navigation. Available views and supported commitment types vary by provider.
+4. Follow the provider guide to select billing accounts, a reporting period, and any additional filters.
 
-1. Go to [**Cloud Cost > Planning > Commitment Programs**][1] in Cloud Cost Management.
-2. Use the product selector to choose a commitment type and the time frame selector to set the reporting period.
-3. Gain insights into your KPIs, commitment costs, and renewal recommendations:
-   - Review KPIs in the [Commitments overview](#commitments-overview) section.
-   - Analyze areas of on-demand spend to understand how to improve your coverage in the [On-demand hot-spots](#on-demand-hot-spots) section.
-   - View active commitments by type in the [Commitments inventory](#commitments-inventory) table.
-   - Identify savings plans generating the most waste in [Least used savings plans](#least-used-savings-plans).
-4. Take action based on these insights:
-   - Adjust workloads to better use your commitments and avoid extra on-demand charges.
-   - Update commitments by buying or changing them based on your usage data.
-   - Plan renewals or retire commitments before they expire.
-   - Optimize spend using Datadog's recommendations to save more and reduce waste.
+| Provider guide | Supported commitments | Views |
+|---|---|---|
+| [AWS][2] | Reserved Instances and Savings Plans for EC2, RDS, and ElastiCache | Overview and Simulator |
+| [Azure][3] | Reservations and savings plans for all eligible services; Azure Databricks pre-purchase plans | Overview, Coverage, and Inventory |
+| [Google Cloud][4] | Compute flexible committed use discounts (CUDs) | Overview |
+
+Azure utilization, unused costs, and pre-purchase plan balances require [billing account scope exports][6]. Provider guides describe setup requirements and Preview features.
+
+{{< callout header="false" btn_hidden="true" respect-site-support="false" >}}
+Screenshot placeholder: Commitment Programs showing the provider navigation and the available pages for the selected provider. Use sanitized example data.
+{{< /callout >}}
+
+<span id="costs-overview"></span>
 
 ## Commitments overview
 
-Review these Key Performance Indicators (KPIs) for your cloud providers and services:
+Review savings for the selected scope and reporting period:
 
-{{< img src="cloud_cost/planning/commitments-inventory.png" alt="Commitments Overview dashboard showing key savings metrics and a bar chart comparing commitment costs to equivalent on-demand costs over time." style="width:100%;" >}}
+- **Effective Savings Rate (ESR)**: Percentage saved compared with on-demand prices, accounting for unused commitments. For example, a reservation discount of 62% can produce an ESR of only 45% if commitments are underused.
+- **Realized Savings**: The amount saved compared with on-demand rates. For example, spending $10,000 on usage that would cost $14,000 on demand produces $4000 in savings.
 
-- {{< ui >}}Effective Savings Rate (ESR){{< /ui >}}: Percentage of cost savings achieved by your discount programs compared to on-demand prices, factoring in both utilized and underutilized commitments.
-  - _Example: Your RIs may offer a 62% discount, but if your ESR is only 45%, underutilized commitments are reducing your actual savings._
-- {{< ui >}}Realized Savings{{< /ui >}}: Total dollar amount saved by using commitment programs versus on-demand rates.
-  - _Example: You spent $10,000 on cloud services last month, but would have spent $14,000 at on-demand rates, so your absolute savings is $4,000._
+Provider guides explain the applicable discounts and savings charts: [AWS][2], [Azure][3], and [Google Cloud][4].
 
 ## On-demand hot-spots
 
-On-demand hot-spots highlight areas with high on-demand costs, which may indicate opportunities to purchase additional commitments.
+Find commitment-eligible usage billed at on-demand rates. Coverage measures how much eligible usage or cost is covered by commitments. Investigate recurring uncovered usage before purchasing additional commitments.
 
-{{< img src="cloud_cost/planning/commitments-on-demand-2.png" alt="On-Demand Hot-Spots table for AWS RDS showing region, instance family, DB engine, coverage percentage, and on-demand cost." style="width:100%;" >}}
+For filters, tables, and charts, see [AWS on-demand hot-spots][7], [Azure Coverage][8], or [Google Cloud on-demand hot-spots][9].
 
-Use the {{< ui >}}Cost{{< /ui >}} and {{< ui >}}Hours{{< /ui >}} tabs to toggle between on-demand spend in dollars or usage in hours. Use the available filters to narrow results—filters vary based on the selected product.
-
-The table columns correspond to the filters for the selected product, showing the dimensions that characterize the on-demand usage (such as region, instance family, or database engine), along with {{< ui >}}Coverage{{< /ui >}} (percentage of usage covered by commitments) and {{< ui >}}On-Demand Cost{{< /ui >}} (sorted in descending order to surface the highest-spend hot-spots first).
+<span id="commitments-explorer"></span>
 
 ## Commitments inventory
 
-Commitments Inventory provides a detailed view of commitments active during the selected time frame, organized by commitment type. This includes commitments expiring soon (within 30 days) and commitments that have already expired at the time of viewing.
+Review commitments active during the selected period, including their utilization and expiration dates. Utilization measures how much of your purchased commitment you use; unused spend identifies commitment cost that did not cover usage.
 
-{{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Commitments Inventory section showing the Savings Plans tab with a utilization chart and a table of EC2 savings plan commitments." style="width:100%;" >}}
-
-Use the {{< ui >}}Savings Plans{{< /ui >}} and {{< ui >}}Reserved Instances{{< /ui >}} tabs to switch between commitment types. Each tab shows:
-
-- {{< ui >}}Utilization{{< /ui >}}: Percentage of the commitment type being used during the selected period.
-- {{< ui >}}Unused spend{{< /ui >}}: Total spend on unused commitments.
-- {{< ui >}}Daily chart{{< /ui >}}: Tracks used and unused commitment spend alongside the utilization rate over time.
-
-Use the {{< ui >}}Only show Expiring{{< /ui >}} checkbox to filter the table to commitments nearing their end date.
-
-The table lists your active commitments. Columns vary depending on the product and commitment type, but common columns include:
-
-| Column | Description |
-|---|---|
-| Savings Plan ARN, Reservation ARN, or Commitment ID | Unique identifier for the commitment (Commitment ID for Azure). |
-| Benefit Name | Name of the Azure savings plan or reservation benefit. |
-| Payment Model | Payment option (for example, No Upfront, Partial Upfront, All Upfront). |
-| Term | Duration of the commitment (for example, 1 Year, 3 Years). |
-| Type | The commitment type (for example, `ComputeSavingsPlans`). |
-| Committed Spend/HR | Hourly spend committed under the plan. |
-| End Date | Date the commitment expires. |
-| Utilization | Percentage of the commitment used during the selected period. |
-
-Use the {{< ui >}}Columns{{< /ui >}} button to show or hide additional columns.
+For inventory columns and expiration filters, see [AWS inventory][10], [Azure Inventory][11], or [Google Cloud inventory][12].
 
 ## Least used savings plans
 
-Least Used Savings Plans helps you identify which savings plans are generating the most waste. Use this section to determine when that waste occurs and take action to improve utilization.
+For daily waste patterns, savings plans ranked by waste, and hourly utilization patterns, see [AWS least used savings plans][13].
 
-{{< img src="cloud_cost/planning/commitment-programs-least-used-savings-plans-1.png" alt="Least Used Savings Plans section showing a bar chart of daily average unused savings plan spend by day of week, a table of the most wasteful savings plans with waste amount, utilization, and ARN, and a heat map of hourly unused committed spend percentage by day of week." style="width:100%;" >}}
+## Savings plan simulation
 
-{{< ui >}}Daily average unused Savings Plans{{< /ui >}}: A bar chart showing the average daily cost of unused savings plan spend for each day of the week. Use this to spot patterns, such as higher waste on weekends when workloads may be lower.
+Estimate the effect of an additional AWS Savings Plan using historical usage. For setup, permissions, recommendations, and how to interpret the estimates, see [AWS Savings Plan simulation][14].
 
-{{< ui >}}Savings Plans with most waste{{< /ui >}}: A table listing underutilized savings plans, sorted by total waste. Columns include:
+<span id="run-a-simulation"></span>
+See [Run a simulation][15] for the steps.
 
-- {{< ui >}}Waste{{< /ui >}}: Total dollar amount of unused committed spend during the selected period.
-- {{< ui >}}Utilization{{< /ui >}}: Percentage of the savings plan being used, shown as a percentage and progress bar.
-- {{< ui >}}Savings Plan ARN{{< /ui >}}: Unique identifier for the savings plan.
-
-{{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: A heat map showing the percentage of committed spend that went unused, broken down by hour (UTC) and day of week. Darker cells indicate higher unused percentages, making it possible to identify specific time windows where commitments are consistently underused.
-
-## Savings Plan simulation
-
-<div class="alert alert-info">Savings Plan simulation is in Preview. It supports AWS Savings Plans and runs at the <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">AWS management account</a> level.</div>
-
-Savings Plan simulation lets you estimate the impact of a new Savings Plan on your bill before you purchase it. Instead of stitching together Cost Explorer exports and spreadsheets, you can model a commitment against your historical usage. The results show the projected coverage, utilization, and savings.
-
-The simulation is retrospective. It re-prices your on-demand usage from the selected period as if the Savings Plan had been active. The results show what your cost and savings _would have been_, not a forecast of future usage.
-
-{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Savings Plan simulation showing the input parameters, an Estimated Impact summary with a before-and-after metrics table, and a Simulated Cost time series chart." style="width:100%;" >}}
-
-### Run a simulation
-
-1. Go to the [**Simulator**][2] tab in **Cloud Cost > Planning > Commitment Programs**.
-2. Choose the Savings Plan type, then set your commitment preferences: the owner account, term, and payment model.
-3. Enter an additional hourly commitment and choose the usage period to simulate against, up to the last 3 months. The period defaults to the past 30 days.
-4. Review the projected results in the {{< ui >}}Estimated Impact{{< /ui >}} and {{< ui >}}Estimated Service Breakdown{{< /ui >}} sections.
-
-If [AWS Cost Optimization Hub][3] has a Savings Plan recommendation for your organization, it appears in a callout. The callout shows the suggested hourly commitment, term, and payment option. Click it to apply those settings to the simulation. Cost Optimization Hub generates these recommendations for Compute Savings Plans only.
-
-To receive these recommendations, make sure your AWS integration IAM role includes the `cost-optimization-hub:GetRecommendation` and `cost-optimization-hub:ListRecommendations` permissions. For setup steps, see [Permissions for AWS Cost Optimization Hub recommendations][4].
-
-### Interpret the results
-
-All outputs are estimates based on your usage during the selected period, and actual savings depend on your future usage. Because Savings Plans are shared across a [Consolidated Billing Family][5], a commitment can apply to usage in multiple accounts. If Datadog is missing cost data for the period, the simulator flags the results as incomplete.
-
-Results appear in two sections:
-
-- {{< ui >}}Estimated Impact{{< /ui >}}: Compares your key metrics before and after the simulated commitment, alongside a {{< ui >}}Simulated Cost{{< /ui >}} chart over the selected period.
-- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Breaks down the estimated cost and coverage by AWS service.
+<span id="interpret-the-results"></span>
+See [Interpret the results][16] for assumptions and result breakdowns.
 
 ## Example use cases
 
 ### Identify underutilized commitments
 
-**Scenario**: Your Effective Savings Rate (ESR) is lower than expected, even though your coverage is high.
-
-**How to use commitment programs**:  
-1. Go to the {{< ui >}}Commitments Overview{{< /ui >}} and check the utilization KPI.
-2. In the {{< ui >}}Commitments inventory{{< /ui >}}, sort by utilization in ascending order to identify the least-used commitments. For savings plans, also check the {{< ui >}}Savings Plans with most waste{{< /ui >}} table in the [Least used savings plans](#least-used-savings-plans) section.
-3. Reallocate workloads to use these commitments more effectively, or consider modifying or selling unused commitments if your cloud provider allows it.
+If savings are lower than expected despite high coverage, review utilization and unused spend. Adjust workloads to use existing commitments; consider changing commitments where your provider supports it. See the [AWS walkthrough][17] or the inventory guidance for [Azure][11] and [Google Cloud][12].
 
 ### Plan for expiring commitments
 
-**Scenario**: Several Reserved Instances are expiring soon, and you want to avoid unexpected on-demand charges.
-
-**How to use commitment programs**: 
-1. In the {{< ui >}}Commitments Explorer{{< /ui >}}, review the list of commitments and their expiration dates.
-2. Use the filters to focus on soon-to-expire commitments.
-3. Plan renewals or replacements in advance to maintain coverage and maximize savings.
+Review expiration dates and filter for commitments nearing their end date. Plan renewals or replacements to maintain coverage. See the [AWS walkthrough][18] or the inventory guidance for [Azure][11] and [Google Cloud][12].
 
 ### Target high on-demand spend
 
-**Scenario**: Your cloud costs show consistently high on-demand usage for a particular service or region.
-
-**How to use commitment programs**:
-1. Use {{< ui >}}On-demand hot-spots{{< /ui >}} to identify which services, regions, or accounts have significant and steady on-demand costs.
-2. Analyze usage patterns to confirm they are predictable.
-3. Purchase new commitments to cover the consistent usage and reduce costs.
+Investigate services, regions, or accounts with significant on-demand costs. Confirm that usage is predictable before purchasing commitments. See the [AWS walkthrough][19], [Azure Coverage][8], or [Google Cloud on-demand hot-spots][9].
 
 ### Reduce waste by shifting workloads to cover unused savings plans
 
-**Scenario**: You have underutilized savings plans and high on-demand costs running in parallel.
-
-**How to use commitment programs**:
-1. Use the {{< ui >}}Least used savings plans{{< /ui >}} section to identify recurring patterns of low utilization—for example, consistently unused capacity on certain days or hours.
-2. Identify on-demand workloads that could be scheduled during those low-utilization windows to take advantage of unused savings plan coverage.
-3. Shift or reschedule those workloads to reduce on-demand spend and improve savings plan utilization.
+Identify recurring periods of unused commitment spend, then assess whether on-demand workloads can run during those periods. See the [AWS walkthrough][20] for using daily waste and hourly utilization patterns.
 
 ## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
-[2]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
-[3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
-[4]: /cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
-[5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html
+[2]: /cloud_cost_management/planning/aws_commitment_programs/
+[3]: /cloud_cost_management/planning/azure_commitment_programs/
+[4]: /cloud_cost_management/planning/google_cloud_commitment_programs/
+[5]: /cloud_cost_management/setup/
+[6]: /cloud_cost_management/setup/azure/#unused-commitment-costs
+[7]: /cloud_cost_management/planning/aws_commitment_programs/#on-demand-hot-spots
+[8]: /cloud_cost_management/planning/azure_commitment_programs/#investigate-on-demand-spend
+[9]: /cloud_cost_management/planning/google_cloud_commitment_programs/#on-demand-hot-spots
+[10]: /cloud_cost_management/planning/aws_commitment_programs/#commitments-inventory
+[11]: /cloud_cost_management/planning/azure_commitment_programs/#manage-your-commitments
+[12]: /cloud_cost_management/planning/google_cloud_commitment_programs/#commitments-inventory
+[13]: /cloud_cost_management/planning/aws_commitment_programs/#least-used-savings-plans
+[14]: /cloud_cost_management/planning/aws_commitment_programs/#savings-plan-simulation
+[15]: /cloud_cost_management/planning/aws_commitment_programs/#run-a-simulation
+[16]: /cloud_cost_management/planning/aws_commitment_programs/#interpret-the-results
+[17]: /cloud_cost_management/planning/aws_commitment_programs/#identify-underutilized-commitments
+[18]: /cloud_cost_management/planning/aws_commitment_programs/#plan-for-expiring-commitments
+[19]: /cloud_cost_management/planning/aws_commitment_programs/#target-high-on-demand-spend
+[20]: /cloud_cost_management/planning/aws_commitment_programs/#reduce-waste-by-shifting-workloads-to-cover-unused-savings-plans
