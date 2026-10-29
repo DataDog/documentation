@@ -39,27 +39,29 @@ The minimum tracer version to get all supported application security capabilitie
 
 ### Supported .NET versions
 
+All versions listed in this section are generally available (GA).
+
 Code Security supports the following .NET and .NET Core runtimes:
 
-| .NET Version  | Microsoft End of Life | Support level | Package version    |
-| ------------- | --------------------- | ------------- | ------------------ |
-| .NET 10       | _November 14, 2028_   | GA            | latest (>= 3.31.0) |
-| .NET 9        | _November 10, 2026_   | GA            | latest (>= 3.6.0)  |
-| .NET 8        | _November 10, 2026_   | GA            | latest (>= 2.42.0) |
-| .NET 7        | May 14, 2024          | GA            | latest (>= 2.42.0) |
-| .NET 6        | November 12, 2024     | GA            | latest (>= 2.42.0) |
-| .NET 5        | May 10, 2022          | GA            | latest (>= 2.42.0) |
-| .NET Core 3.1 | December 13, 2022     | GA            | latest (>= 2.42.0) |
+| .NET Version  | Microsoft End of Life | Package version    |
+| ------------- | --------------------- | ------------------ |
+| .NET 10       | _November 14, 2028_   | latest (>= 3.31.0) |
+| .NET 9        | _November 10, 2026_   | latest (>= 3.6.0)  |
+| .NET 8        | _November 10, 2026_   | latest (>= 2.42.0) |
+| .NET 7        | May 14, 2024          | latest (>= 2.42.0) |
+| .NET 6        | November 12, 2024     | latest (>= 2.42.0) |
+| .NET 5        | May 10, 2022          | latest (>= 2.42.0) |
+| .NET Core 3.1 | December 13, 2022     | latest (>= 2.42.0) |
 
 Code Security supports the following .NET Framework versions:
 
-| .NET Framework Version | Microsoft End of Life | Support level | Package version |
-| ---------------------- | --------------------- | ------------- | --------------- |
-| 4.8                    |                       | GA            | latest          |
-| 4.7.2                  |                       | GA            | latest          |
-| 4.7                    |                       | GA            | latest          |
-| 4.6.2                  |                       | GA            | latest          |
-| 4.6.1                  | April 26, 2022        | GA            | latest          |
+| .NET Framework Version | Microsoft End of Life | Package version |
+| ---------------------- | --------------------- | --------------- |
+| 4.8                    |                       | latest          |
+| 4.7.2                  |                       | latest          |
+| 4.7                    |                       | latest          |
+| 4.6.2                  |                       | latest          |
+| 4.6.1                  | April 26, 2022        | latest          |
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, ARM64
