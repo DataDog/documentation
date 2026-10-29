@@ -684,9 +684,32 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
 
-#### Estimated cost metrics
+#### Cost metrics
 
-For LLM and embedding spans, the following attributes map to estimated cost metrics. Emit non-negative numbers in **nanodollars** (1 USD = 1,000,000,000 nanodollars). Datadog copies these values without unit conversion. For example, send `10000000` for a $0.01 estimate.
+The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Datadog converts dollars to nanodollars for storage (`0.01` USD becomes `10000000` nanodollars). Supplied costs take precedence over automatic cost estimates.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.usage.cost.amount` | `metrics.estimated_total_cost` |
+| `gen_ai.usage.cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.total_cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.input_cost` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.output_cost` | `metrics.estimated_output_cost` |
+| `llm.cost.total` | `metrics.estimated_total_cost` |
+| `llm.cost.prompt` | `metrics.estimated_input_cost` |
+| `llm.cost.completion` | `metrics.estimated_output_cost` |
+| `llm.cost.prompt_details.input` | `metrics.estimated_non_cached_input_cost` |
+| `llm.cost.prompt_details.cache_read` | `metrics.estimated_cache_read_input_cost` |
+| `llm.cost.prompt_details.cache_write` | `metrics.estimated_cache_write_input_cost` |
+| `llm.cost.completion_details.reasoning` | `metrics.estimated_reasoning_output_cost` |
+
+Set `gen_ai.usage.cost.currency` to `USD` when using `gen_ai.usage.cost.amount`. This amount/currency format is an [OpenTelemetry proposal][57]. The other attributes use their producers' USD conventions. Datadog ignores these USD cost attributes if they declare a currency other than `USD`.
+
+If several attributes supply the same cost field, the first valid value takes precedence in this order: `gen_ai.usage.cost.amount`, `gen_ai.usage.cost`, `gen_ai.cost.*`, then `llm.cost.*`. Zero is a valid supplied cost.
+
+##### Legacy estimated cost attributes
+
+These Datadog-supported extensions accept **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
@@ -698,7 +721,7 @@ For LLM and embedding spans, the following attributes map to estimated cost metr
 | `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
 | `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
 
-Datadog replaces a supplied estimate if it can calculate a positive cost for that field from model pricing and available token counts. A partial calculation can also replace a supplied estimate. Otherwise, Datadog keeps the supplied value. To supply custom costs that take precedence over model pricing, use [manual cost tracking][56] with the Datadog SDK or API.
+Datadog replaces a legacy estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over legacy estimates. For SDK and API cost fields, see [manual cost tracking][56].
 
 #### Request parameters
 
@@ -1145,6 +1168,7 @@ A span can display warnings not listed in the following table if Datadog adds ch
 | Invalid token counts | `otel_warning_token_usage_invalid` | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
 | Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
 | Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Invalid cost currency | `otel_warning_cost_currency_invalid` | On USD cost attributes | Set `gen_ai.usage.cost.currency` to `USD`. This attribute is required for `gen_ai.usage.cost.amount`. |
 | Malformed invocation parameters | `otel_warning_params_malformed` | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
 | Malformed tool definitions | `otel_warning_tool_definitions_malformed` | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
 | Malformed tool definition | `otel_warning_tool_definition_entry_malformed` | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
@@ -1223,3 +1247,4 @@ with tracer.start_as_current_span("my-span") as span:
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
 [56]: /llm_observability/investigate/cost/#manual
+[57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
