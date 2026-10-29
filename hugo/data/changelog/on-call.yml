@@ -57,3 +57,10 @@ entries:
       - UpdateOnCallEscalationPolicy
       - UpdateUserNotificationRule
     title: Add list escalation policies endpoint
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41198
+    operations:
+      - GetOnCallTeamRoutingRules
+      - SetOnCallTeamRoutingRules
+    title: Add customizable_content to On-Call Slack routing rule action
