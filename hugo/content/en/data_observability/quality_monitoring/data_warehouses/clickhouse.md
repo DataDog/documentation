@@ -124,7 +124,7 @@ If {{< ui >}}Test connection{{< /ui >}} fails, use the error to find the fix:
 
 | Error | Cause and fix |
 |---|---|
-| Invalid host | The URL isn't the HTTPS endpoint of your service. Use `https://<host>.clickhouse.cloud:8443`. |
+| Invalid host | The URL isn't the HTTPS endpoint of your service. Use `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443`. |
 | Invalid credentials | The username or password is wrong. Check the credentials and try again. |
 | Invalid permissions or insufficient privileges | The user doesn't have the `DD_MONITOR` grants. Run the SQL in [Create a Datadog user in ClickHouse Cloud](#create-a-datadog-user-in-clickhouse-cloud) again. |
 | Empty result | No tables are visible to the user. Grant `SELECT` on the databases or tables you want to monitor. |
