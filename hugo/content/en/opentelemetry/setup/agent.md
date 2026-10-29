@@ -43,7 +43,7 @@ Your applications, instrumented with OpenTelemetry SDKs, send telemetry to the D
 
 The Agent's Collector is the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. Configure it with standard OpenTelemetry Collector configuration.
 
-**Note**: The setup pages for the Agent's Collector were previously titled "DDOT Collector." For the DDOT Collector that runs without the Agent, see [DDOT Collector][10].
+For the DDOT Collector that runs without the Agent, see [DDOT Collector][10].
 
 {{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
 Remote Configuration for the Agent's Collector is <strong>in Preview</strong>. Use this form to request access.

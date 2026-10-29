@@ -235,7 +235,7 @@ Each DDOT release includes these OpenTelemetry Collector versions:
 [62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
 [63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md
 [64]: /opentelemetry/setup/agent/
-[67]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[67]: /opentelemetry/instrument/dd_sdks/
 [68]: /opentelemetry/setup/collector_exporter/
 [69]: /opentelemetry/setup/agent/#agents-collector
 [70]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/README.md

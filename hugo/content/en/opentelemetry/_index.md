@@ -118,7 +118,7 @@ To compare every setup, see [Send OpenTelemetry Data to Datadog][13]. To check w
 [1]: https://opentelemetry.io/
 [2]: /getting_started/tagging/unified_service_tagging/
 [3]: /opentelemetry/correlate/
-[4]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[4]: /opentelemetry/instrument/dd_sdks/
 [5]: /opentelemetry/setup/ddot_collector/
 [6]: /profiler/enabling/full_host/
 [7]: /opentelemetry/setup/ddot_collector/kubernetes/#install-the-core-datadog-agent-alongside-ddot
