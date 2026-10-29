@@ -67,7 +67,7 @@ The Fleet Health section allows you to spot hardware health issues across your e
 The visualization is colored by XID error severity:
 - Red: Critical XID
 - Orange: Non-critical XID
-- Green: Healthy)
+- Green: Healthy
 
 With this color coding, you can spot whether hardware issues are isolated to a particular group. Hover over a host to see the exact XID error code.
 
