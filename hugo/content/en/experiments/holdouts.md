@@ -94,7 +94,7 @@ Create the holdout before starting the experiments:
 
 ### Eligible experiments
 
-Included experiments must:
+For holdouts that use Datadog Feature Flags, included experiments must:
 
 - Use Datadog Feature Flags to assign subjects at random.
 - Use the same subject type as the holdout.
