@@ -21,6 +21,10 @@ further_reading:
 
 Send OpenTelemetry traces, metrics, and logs to Datadog through a Collector, through the Datadog Agent, or directly from your applications. These options describe how you send telemetry. For application instrumentation, see [Instrument Your Applications][1].
 
+Your SDK and your Collector are separate choices. A DDOT SDK or an OpenTelemetry SDK can send OTLP to the DDOT Collector or to an upstream OpenTelemetry Collector.
+
+{{< img src="/opentelemetry/setup/otel-path-mix.png" alt="Your application uses a DDOT SDK or an OpenTelemetry SDK. Either one sends OTLP to a DDOT Collector or an upstream OpenTelemetry Collector, with an optional Datadog Agent for Datadog-specific features. The Collector sends your telemetry to Datadog." style="width:100%;" >}}
+
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/getting_started/kubernetes/" >}}Get started on Kubernetes with the quickstart{{< /nextlink >}}
 {{< /whatsnext >}}

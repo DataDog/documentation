@@ -4,7 +4,7 @@ description: Use the Datadog Agent to receive OTLP data from your applications, 
 further_reading:
 - link: "/opentelemetry/setup/otlp_ingest_in_the_agent"
   tag: "Documentation"
-  text: "Agent's OTLP Endpoint"
+  text: "Set Up the Agent's OTLP Endpoint"
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Set Up the Agent's Collector"
