@@ -31,7 +31,7 @@ A TAXII server hosts one or more collections, each of which is a feed of STIX 2.
 
 A collection with a large backlog can take several polling cycles to complete its first sync. Enrichment applies to logs that Cloud SIEM receives after the indicators are available.
 
-Each organization can have up to 20 collections with polling enabled at a time. You can still add more collections beyond that limit, but you must leave scheduled polling disabled for them; enabling polling on a collection once you're at the limit returns an error, and that collection's polling stays disabled until you disable polling on another one.
+Each organization can have up to 20 collections with polling enabled at a time. You can still add more collections beyond that limit, but you must leave scheduled polling disabled for them. Enabling polling on a collection after reaching the limit returns an error, and that collection's polling stays disabled until you disable polling on another one.
 
 ### Supported indicator types
 
