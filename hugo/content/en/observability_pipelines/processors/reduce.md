@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-The reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. Logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline.
+The reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. By default, logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline. See [Set the aggregation window](#set-the-aggregation-window) to change the interval.
 
 ## Setup
 
@@ -45,6 +45,12 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
+### Set the aggregation window
+
+Use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long the reduce processor aggregates events before it sends a reduced log. The variable applies to every reduce processor on the Worker and accepts values from `1` to `300` seconds. If the variable isn't set, the processor uses a 10-second window. See [Install the Worker][5] for information on setting Worker environment variables.
+
+A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
+
 ## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation.
@@ -62,3 +68,4 @@ For [component metrics][2] and [processor buffer metrics][3] emitted by all proc
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[5]: /observability_pipelines/configuration/install_the_worker/

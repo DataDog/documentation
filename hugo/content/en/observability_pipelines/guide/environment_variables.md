@@ -79,6 +79,12 @@ Some Observability Pipelines components require setting up environment variables
   - The allowlist is a comma-separated list of environment variables you want to pull values from and use with this processor.
   - Stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
 
+### Reduce
+
+- Aggregation window (optional)
+  - How long, in seconds, every reduce processor on the Worker aggregates events before it emits a group. Accepts values from `1` to `300`. Default: `10`.
+  - Stored in the environment variable `DD_OP_REDUCE_WINDOW_SECS`.
+
 {{% /tab %}}
 {{% tab "Destinations" %}}
 
