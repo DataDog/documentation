@@ -27049,6 +27049,9 @@ components:
         type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesType"
           example: public
+        visualization_layout:
+          $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationLayout"
+          example: list
         visualization_type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType"
           example: bars_and_uptime_percentage
@@ -27113,6 +27116,16 @@ components:
       x-enum-varnames:
         - PUBLIC
         - INTERNAL
+    CreateStatusPageRequestDataAttributesVisualizationLayout:
+      description: The layout of components on the status page. Defaults to `list`. `grid` requires `visualization_type` to be `component_name_only`; changing `visualization_type` to any other value resets the layout to `list`.
+      enum:
+        - list
+        - grid
+      example: list
+      type: string
+      x-enum-varnames:
+        - LIST
+        - GRID
     CreateStatusPageRequestDataAttributesVisualizationType:
       description: The visualization type of the status page.
       enum:
@@ -98491,6 +98504,9 @@ components:
         type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesType"
           example: public
+        visualization_layout:
+          $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationLayout"
+          example: list
         visualization_type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType"
           example: bars_and_uptime_percentage
@@ -105736,7 +105752,9 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          description: |-
+            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
+            or `completed`. Defaults to `all`, which returns recommendations in every status.
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105749,7 +105767,9 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
+        or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105785,9 +105805,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–10000).
+          description: Number of items returned in this page (1–5000).
           format: int32
-          maximum: 10000
+          maximum: 5000
           minimum: 1
           type: integer
         page_token:
@@ -128737,6 +128757,8 @@ components:
           type: boolean
         type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesType"
+        visualization_layout:
+          $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationLayout"
         visualization_type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType"
       type: object
@@ -128911,6 +128933,8 @@ components:
           type: boolean
         type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesType"
+        visualization_layout:
+          $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationLayout"
         visualization_type:
           $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType"
       type: object
@@ -163412,11 +163436,15 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page (1–10000).
+        - description: Number of results per page, from 1 to 5000. Defaults to 50.
           in: query
           name: page[size]
           schema:
-            type: string
+            default: 50
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -163463,11 +163491,16 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
-                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -163479,6 +163512,10 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
