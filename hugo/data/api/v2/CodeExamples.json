@@ -2197,6 +2197,13 @@
       "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
+  "GetServiceRepositoryInfo": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get service repository information returns \"OK\" response"
+    }
+  ],
   "SearchRUMEvents": [
     {
       "group": "rum",

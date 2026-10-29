@@ -124213,17 +124213,19 @@ components:
     ServiceRepositoryInfoRequestAttributes:
       description: Attributes for the service repository info request.
       properties:
+        debug_id:
+          description: The debug ID of a JavaScript source map, in UUID format. Alternative to `service` and `version`.
+          example: 00000000-0000-4000-8000-000000000001
+          format: uuid
+          type: string
         service:
-          description: The name of the service.
+          description: The name of the service. Required with `version` when `debug_id` is not set.
           example: my-web-service
           type: string
         version:
-          description: The version of the service.
+          description: The version of the service. Required with `service` when `debug_id` is not set.
           example: 1.0.0
           type: string
-      required:
-        - service
-        - version
       type: object
     ServiceRepositoryInfoRequestData:
       description: Data object for the service repository info request.
@@ -124266,7 +124268,7 @@ components:
         attributes:
           $ref: "#/components/schemas/ServiceRepositoryInfoResponseAttributes"
         id:
-          description: The identifier composed of the service name and version.
+          description: The identifier composed of the service name and version, or the debug ID when the lookup was made by debug ID.
           example: my-web-service:1.0.0
           type: string
         type:
@@ -126991,6 +126993,16 @@ components:
       type: string
       x-enum-varnames:
         - DEBUG_ID
+    SourcemapSymbolType:
+      description: The WASM symbol representation.
+      enum:
+        - dwarf
+        - sourcemap
+      example: dwarf
+      type: string
+      x-enum-varnames:
+        - DWARF
+        - SOURCEMAP
     SourcemapsData:
       description: List of source map data objects.
       items:
@@ -243799,6 +243811,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             When set to `true`, returns the source maps that would be deleted
             without performing the actual deletion. When set to `false`,
             performs the deletion.
@@ -243810,7 +243830,8 @@ paths:
             type: boolean
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `js`, `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[service]
@@ -243823,7 +243844,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed, maximum 10).
-            Required for `js`, `jvm`, `react`, and `flutter` map kinds.
+            Required for `js`, `jvm`, `react`, and `flutter` map kinds, and for
+            `wasm` with `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[version]
@@ -243852,7 +243874,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244240,6 +244265,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             Cursor for the next page of a JavaScript listing. Use the value from
             `meta.page.next_cursor` and keep the same search mode and filters.
             Omit on the first request. Not supported for other map kinds or for
@@ -244270,7 +244303,8 @@ paths:
             type: integer
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`. Also required for `js` unless
             searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
@@ -244284,7 +244318,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed). Required for
-            `jvm`, `react`, and `flutter` map kinds. Also required for `js` unless
+            `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`. Also required for `js` unless
             searching by `filter[debug_id]` or browsing with `search_by=debug_id`.
           explode: true
           in: query
@@ -244314,7 +244349,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244514,6 +244552,14 @@ paths:
           schema:
             $ref: "#/components/schemas/SourcemapMapKind"
         - description: |-
+            WASM symbol representation. Only supported for `mapkind=wasm`.
+            Defaults to `dwarf`, which requires `filter[build_id]`. `sourcemap`
+            requires `filter[service]` and `filter[version]`.
+          in: query
+          name: symbol_type
+          schema:
+            $ref: "#/components/schemas/SourcemapSymbolType"
+        - description: |-
             When set to `true`, returns the source maps that would be restored
             without performing the actual restoration. When set to `false`,
             performs the restoration.
@@ -244525,7 +244571,8 @@ paths:
             type: boolean
         - description: |-
             Filter by service names (multiple values allowed). Required for
-            `js`, `jvm`, `react`, and `flutter` map kinds.
+            `js`, `jvm`, `react`, and `flutter` map kinds, and for `wasm` with
+            `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[service]
@@ -244538,7 +244585,8 @@ paths:
           style: form
         - description: |-
             Filter by version values (multiple values allowed, maximum 10).
-            Required for `js`, `jvm`, `react`, and `flutter` map kinds.
+            Required for `js`, `jvm`, `react`, and `flutter` map kinds, and for
+            `wasm` with `symbol_type=sourcemap`.
           explode: true
           in: query
           name: filter[version]
@@ -244567,7 +244615,10 @@ paths:
               type: string
             type: array
           style: form
-        - description: Filter by build ID values (multiple values allowed). Supported for `jvm`, `ndk`, `il2cpp`, `wasm`, and `portable_pdb`.
+        - description: |-
+            Filter by build ID values (multiple values allowed). Supported for `jvm`,
+            `ndk`, `il2cpp`, `wasm`, and `portable_pdb`. Required for `wasm` with
+            `symbol_type=dwarf`.
           explode: true
           in: query
           name: filter[build_id]
@@ -244728,7 +244779,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/sourcemaps/service_repository_info:
     post:
-      description: Returns the repository URL and commit SHA associated with a given service and version.
+      description: |-
+        Returns the repository URL and commit SHA associated with a debug ID or a given service and version.
+        Provide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.
       operationId: GetServiceRepositoryInfo
       requestBody:
         content:
@@ -244761,6 +244814,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceRepositoryInfoResponse"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "401":
           content:
             application/json:
