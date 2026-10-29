@@ -102,7 +102,7 @@ Replace the placeholders:
 
 ## 4. Instrument your application
 
-On the DDOT path, if your application's code already sets up an SDK, check [Before switching from an OpenTelemetry SDK][28] before you add the annotation.
+On the DDOT path, if your application's code already sets up an SDK, check [DDOT SDK limitations][28] before you add the annotation.
 
 1. Add the language annotation to your Deployment's pod template. Replace `<DEPLOYMENT_NAME>` and `<NAMESPACE>` with your Deployment's name and namespace, and `<LANGUAGE>` with `java`, `python`, `nodejs`, or `dotnet`:
 
@@ -198,5 +198,5 @@ The installer applies your file on top of its own values files. For what you can
 [20]: /opentelemetry/setup/collector_exporter/?tab=kubernetes
 [24]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#readme
 [25]: /opentelemetry/#choose-a-setup
-[28]: /opentelemetry/instrument/dd_sdks/ddot_setup/#before-switching-from-an-opentelemetry-sdk
+[28]: /opentelemetry/instrument/dd_sdks/#limitations
 

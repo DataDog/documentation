@@ -103,7 +103,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 `OTEL_TRACES_EXPORTER`
 : **Datadog convention**: `DD_TRACE_ENABLED=false` <br>
 Trace exporter to be used<br>
-**Notes**: Accepted values: `otlp` and `none`. `otlp` exports traces in OTLP format; see [Export Traces from Datadog SDKs in OTLP Format][17]. `none` disables trace export.<br>
+**Notes**: Accepted values: `otlp` and `none`. `otlp` exports traces in OTLP format; see [DDOT SDKs][17]. `none` disables trace export.<br>
 
 `OTEL_METRICS_EXPORTER`
 : **Description**: Specifies the metrics exporter to be used. <br>
@@ -312,5 +312,5 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [14]: /opentelemetry/instrument/api_support/
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
 [16]: /opentelemetry/guide/otlp_delta_temporality/
-[17]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
-[18]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[17]: /opentelemetry/instrument/dd_sdks/
+[18]: /opentelemetry/instrument/dd_sdks/

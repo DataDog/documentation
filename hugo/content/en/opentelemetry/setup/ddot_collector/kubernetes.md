@@ -797,7 +797,7 @@ Instrument your application with the DDOT SDK or an OpenTelemetry SDK. Either on
 
 ### DDOT SDK
 
-Follow [Set Up DDOT SDKs][66]. The DDOT SDK setup guide uses the OpenTelemetry Operator to inject SDKs into your applications. If you installed the Collector with Helm, install the Operator too. Then continue to [Verify the setup](#verify-the-setup).
+Turn on the DDOT SDK as described in [DDOT SDKs][66]. To inject it with the OpenTelemetry Operator, follow the DDOT tab of the [Kubernetes quickstart][69]. If you installed the Collector with Helm, install the Operator too. Then continue to [Verify the setup](#verify-the-setup).
 
 ### OpenTelemetry SDK
 
@@ -936,7 +936,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 
 ## Next steps
 
-- **Instrument more applications**: [Set Up DDOT SDKs][66].
+- **Instrument more applications**: [DDOT SDKs][66].
 - **Check host names and tags**: [Hostnames and Tagging][67].
 - **Compare setups**: [Feature Compatibility][68].
 
@@ -960,7 +960,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
-[66]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[66]: /opentelemetry/instrument/dd_sdks/
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
 [69]: /opentelemetry/getting_started/kubernetes/?tab=ddot
