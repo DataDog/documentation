@@ -4745,11 +4745,19 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "ListOnCallPages": {
+    "description": "Retrieve a paginated list of On-Call Pages, optionally filtered by a search query and sorted by a field.",
+    "summary": "List On-Call Pages"
+  },
   "CreateOnCallPage": {
     "description": "Trigger a new On-Call Page.",
     "summary": "Create On-Call Page",
     "request_description": "",
     "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "GetOnCallPage": {
+    "description": "Get the details of an On-Call Page.",
+    "summary": "Get On-Call Page"
   },
   "AcknowledgeOnCallPage": {
     "description": "Acknowledges an On-Call Page.",
