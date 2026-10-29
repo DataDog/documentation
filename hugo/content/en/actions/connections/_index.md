@@ -89,7 +89,7 @@ To create a connection:
 1. From the [Workflow Automation page][2] or the [App Builder page][14], click the {{< ui >}}Connections{{< /ui >}} tab. The connections list opens.
 1. Click the {{< ui >}}New Connection{{< /ui >}} button in the upper right. The {{< ui >}}New Connection{{< /ui >}} dialog box appears.
 1. Click on an icon to choose an integration schema.
-1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more [Identifier Tags](#connection-identifier-tags).</div>
+1. Fill in the appropriate fields. <div class="alert alert-info">If you want to add the connection to a connection group in the future, add one or more <a href="#connection-identifier-tags">Identifier Tags</a>.</div>
 1. Click {{< ui >}}Create{{< /ui >}}.
 
 Alternatively, add a connection from a workflow or app page:

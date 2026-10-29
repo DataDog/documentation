@@ -1,0 +1,33 @@
+---
+/**
+ * Docs-only intro row that sits above the main footer columns. Hugo gates
+ * this on `repo_name == "documentation"`; since the Astro site IS the docs
+ * replacement, we always render it.
+ */
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import { HUGO_ORIGIN } from "@config/origins";
+import { localePrefix, resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
+
+const cl = classListFactory(styles);
+const translate = useTranslations(Astro.currentLocale);
+
+const heading = translate("footer_blurb_heading");
+const desc = translate("footer_blurb_desc");
+const ctaLabel = translate("contact_us");
+// The help page is a Hugo docs page, not a corp-site page.
+const ctaHref = `${HUGO_ORIGIN}${localePrefix(resolveLocale(Astro.currentLocale))}/help/`;
+---
+
+<div class={cl("footer__blurb-row")}>
+  <div class={cl("footer__blurb-copy")}>
+    <h2 class={cl("footer__blurb-heading")}>{heading}</h2>
+    <p class={cl("footer__blurb-desc")}>{desc}</p>
+  </div>
+  <div class={cl("footer__blurb-cta")}>
+    <a class={cl("footer__cta-primary")} href={ctaHref}>
+      <span>{ctaLabel}</span>
+    </a>
+  </div>
+</div>

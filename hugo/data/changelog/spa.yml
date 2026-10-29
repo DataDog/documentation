@@ -7,3 +7,11 @@ entries:
       - GetSPARecommendationsV2
       - GetSPARecommendationsWithShard
     title: Include the matched shard in the SPA v2 response
+  - change_type: removed
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40783
+    operations:
+      - GetSPARecommendations
+      - GetSPARecommendationsV2
+      - GetSPARecommendationsWithShard
+    title: Convert the legacy SPA endpoints to private operations

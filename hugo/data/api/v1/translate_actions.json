@@ -202,7 +202,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to post events to the stream.\nTag them, set priority and event aggregate them with other events.",
+    "description": "This endpoint is deprecated and is available only to organizations that have previously used it. Use the V2 endpoint instead.\n\nThis endpoint allows you to post events to the stream.\nTag them, set priority and event aggregate them with other events.",
     "summary": "Post an event",
     "request_description": "Event request object",
     "request_schema_description": "Object representing an event."

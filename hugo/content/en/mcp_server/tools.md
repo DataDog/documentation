@@ -1272,11 +1272,12 @@ Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregati
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
-Updates the state or assignee of an Error Tracking Issue in Datadog.
+Updates the state or assignee of an Error Tracking Issue in Datadog, or snoozes an issue until a condition is met. You can combine multiple snooze conditions, such as occurrences, elapsed time, or distinct values of any error attribute, like `@usr.id`.
 
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+- Snooze Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` until it affects 10 users or a week passes.
 
 ### `manage_datadog_error_tracking_issue_comments`
 *Toolset: **error-tracking***\
@@ -1554,8 +1555,6 @@ Copies an existing form, including its latest definition, into a new form with a
 
 Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
-<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
-
 The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
 
 ### `list_governance_insights`
@@ -1651,7 +1650,7 @@ Updates a governance detection. Use this tool to mark a detection as an exceptio
 ### `create_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create`*\
-Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are always enabled. To disable a rule, use `update_tag_rule`. The tool requires explicit confirmation before it creates the rule.
 
 - Create a tag rule that requires the `team` tag on all logs.
 - Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
@@ -1661,7 +1660,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
 Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
-- Enable tag rule `abc123`.
+- Disable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
 
 ### `delete_tag_rule`
@@ -2586,39 +2585,42 @@ Permanently deletes a custom RUM metric by ID. This operation is idempotent.
 ### `search_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read`*\
-Lists retention filters configured on a RUM application. Read-only; available for [RUM without Limits][59] customers.
+Lists retention filters and exclusion filters configured on a RUM application. Events matching an enabled exclusion filter are not evaluated against custom retention filters; permanent retention filters still apply, and the session is still retained if another of its events is. Read-only; available for [RUM without Limits][59] customers.
 
 - List the retention filters configured on the "checkout-web" application.
 - What retention filters do I have on my main RUM app?
+- List the exclusion filters on my main RUM app.
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
+Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Can also create an exclusion filter (`filter_type: exclusion`), which can target a single event type or all event types (`all`) and has no sample rate or [cross-product retention][98] settings. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
 - Add a filter to my main RUM app that keeps all sessions matching `@view.url_path:/checkout`.
+- Exclude bot traffic (`@device.type:Bot`) from retention on "checkout-web".
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Updates an existing RUM retention or exclusion filter's attributes in place, such as its name, event type, query, enabled state, or, for retention filters, sample rate. The built-in Error Tracking exclusion filter can only be enabled or disabled. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
 - Disable the "long tasks" retention filter on my main RUM app.
+- Disable the Error Tracking exclusion filter on my main RUM app.
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
 *Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
-Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
+Sets the full evaluation order of a RUM application's retention filters. Exclusion filters are not reordered. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
 - Reorder my retention filters so the specific filters are evaluated before the broad ones.
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write`*\
-Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
+Permanently deletes a RUM retention or exclusion filter by ID. The built-in Error Tracking exclusion filter cannot be deleted. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
 - Remove the retention filter with ID `abc-123-def` from my main RUM app.
@@ -3671,6 +3673,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [95]: /logs/log_configuration/archives/
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
+[98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 
 ## Further reading
 

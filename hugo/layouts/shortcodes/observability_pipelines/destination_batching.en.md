@@ -16,7 +16,7 @@
 | Google Pub/Sub                             | 1,000          | 10                | 1                   |
 | HTTP Client                                | 1000           | 1                 | 1                   |
 | Kafka                                      | 10,000         | 1                 | 1                   |
-| Microsoft Sentinel                         | None           | 10                | 1                   |
+| Microsoft Sentinel                         | None           | 1                 | 1                   |
 | New Relic                                  | 100            | 1                 | 1                   |
 | OpenSearch                                 | None           | 10                | 1                   |
 | SentinelOne                                | None           | 1                 | 1                   |
