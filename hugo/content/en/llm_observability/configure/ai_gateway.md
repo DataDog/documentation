@@ -15,7 +15,9 @@ further_reading:
 
 ---
 
-<div class="alert alert-info"><strong>Preview:</strong> AI Gateway is available in Preview. Request <a href="https://www.datadoghq.com/product-preview/ai-gateway/">preview access</a> or contact your Customer Success Manager.</div>
+{{< callout url="https://www.datadoghq.com/product-preview/ai-gateway/" btn_hidden="false" header="Join the Preview!" >}}
+AI Gateway is in Preview. Request access or contact your Customer Success Manager.
+{{< /callout >}}
 
 Datadog's AI Gateway lets you govern how your organization uses large language models (LLMs) by routing agent and application traffic through a single endpoint. Because every request passes through one control point, you can:
 
@@ -110,9 +112,9 @@ AI Gateway supports these model families on each provider. It also supports cust
 
 | Model family | OpenAI | Anthropic | GCP Vertex AI | Amazon Bedrock | Azure OpenAI |
 |---|:---:|:---:|:---:|:---:|:---:|
-| OpenAI GPT | ✅ | | | ✅ | ✅ |
-| Anthropic Claude | | ✅ | ✅ | ✅ | |
-| Gemini | | | ✅ | | |
+| OpenAI GPT | {{< X >}} | | | {{< X >}} | {{< X >}} |
+| Anthropic Claude | | {{< X >}} | {{< X >}} | {{< X >}} | |
+| Gemini | | | {{< X >}} | | |
 
 From a model's page, you can rename the provider, manage manually added models, review discovered models, and click {{< ui >}}View in Traces{{< /ui >}} to see the provider's requests in Agent Observability.
 
@@ -136,7 +138,7 @@ A routing rule gives callers a stable `router/<RULE_SLUG>` model value while the
 
 ### Model served by any provider
 
-A model served by any configured provider matches every enabled provider in your organization that serves that model and that [model access](#control-model-access) allows for the caller. AI Gateway tries those providers in slug order and sends each one its provider model ID.
+A model served by any configured provider matches all enabled providers in your organization that serve that model and are permitted by the caller's [model access](#control-model-access) settings. AI Gateway tries those providers in slug order and sends each one its provider model ID.
 
 ### Fallback behavior
 
@@ -154,9 +156,9 @@ A caller can use a model when they have **Runner** or **Editor** access on at le
 
 ### Default policy
 
-The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It applies to models and routing rules that are not in another policy, and it allows everyone until you restrict it. New models stay available through this policy until you add them to an access policy.
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It applies to models and routing rules that are not in another policy, and it allows everyone to access them until you restrict access. New models stay available through this policy until you add them to an access policy.
 
-After you add a model or routing rule to an access policy, the default policy no longer applies to it. Callers who reached it through the default policy need access on the new policy.
+After you add a model or routing rule to an access policy, the default policy no longer applies to it. Callers must have access through the new policy to continue using the model or routing rule.
 
 ### Access policies
 
@@ -165,7 +167,7 @@ After you add a model or routing rule to an access policy, the default policy no
 3. Choose the users, teams, and service accounts, and their access level:
    - **No access**: Cannot call the policy's models or routing rules.
    - **Runner**: Can call the policy's models and routing rules.
-   - **Editor**: Can call them and manage who else has access.
+   - **Editor**: Can call the policy's models and routing rules and manage who else has access.
 4. Optional: Configure {{< ui >}}Allow fast mode{{< /ui >}} and the maximum reasoning level. A provider may use a different name for fast mode.
 
 Access to a routing rule follows that rule's targets, so a change to the targets changes what its runners can reach. A routing rule that routes to another routing rule needs its own access. A request to `<PROVIDER_SLUG>/<MODEL_ID>` and a request to `router/<RULE_SLUG>` can be allowed or denied separately. Test both with the user or service account that sends them.
@@ -199,11 +201,13 @@ When a budget is scoped to a [Datadog team][13], requests match it only if they 
 
 Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
 
-The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that matches no budget. A budget counts spend only after you create it, so earlier spend stays untracked. Use the Team, User, Model, Provider, and Tag filters to review coverage.
+The budget list shows active budgets, tracked spend, budgets at risk, and **Untracked** spend that doesn't match a budget. A budget counts spend only after you create it, so earlier spend stays untracked. Use the Team, User, Model, Provider, and Tag filters to review coverage.
 
 ## Set rate limits
 
-<div class="alert alert-info">Rate limits are in Preview. To enable them for your organization, contact your Customer Success Manager.</div>
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Rate limits are in Preview. To enable them for your organization, contact your Customer Success Manager.
+{{< /callout >}}
 
 A rate limit caps how many requests, input tokens, or output tokens matching AI Gateway traffic can use per minute. Use rate limits to keep a runaway agent or script from using up your provider quota, to share provider capacity between teams, or to cap traffic to an expensive model. [Budgets](#set-budgets) cap spend over a day, week, or month; rate limits cap traffic within a minute.
 
@@ -217,7 +221,7 @@ A rate limit caps how many requests, input tokens, or output tokens matching AI 
 | Mode | Behavior |
 |---|---|
 | Alert | Requests over the limit continue. The rate limit shows the {{< ui >}}Would limit{{< /ui >}} status. This is the default mode. |
-| Enforce | New requests over the limit are rejected with HTTP `429`. Streaming responses that are already running finish. |
+| Enforce | New requests over the limit are rejected with HTTP `429`. Streaming responses that are already in progress finish. |
 
 Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a few days, then switch to Enforce mode.
 
@@ -225,7 +229,7 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 
 - Each limit applies to a rolling 60-second window, not to calendar minutes.
 - All matching traffic shares one limit. For example, a team rate limit of 600 requests per minute allows 600 requests per minute for the whole team, not for each member.
-- A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has room.
+- A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has available capacity.
 - Tokens count when a response completes, so requests already in progress can take token usage over a limit.
 - A rate limit scoped to a [Datadog team][13] applies only to requests that include the header `x-ai-gateway-team: <TEAM>`.
 - If a request falls back to another destination, it counts once against each rate limit.
@@ -337,30 +341,67 @@ Errors that AI Gateway generates include the `X-Ai-Gateway-Error-Code` response 
 
 A provider `4xx` or `5xx` response keeps its original status and body and does not include `X-Ai-Gateway-Error-Code`. Those responses are not listed below.
 
-When a row lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
+When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
 
-| `X-Ai-Gateway-Error-Code` | HTTP | What it means |
-|---|---|---|
-| `gateway_team_required` | `400` | The request matches a [Datadog team][13] budget but no matching personal budget. Resend with `x-ai-gateway-team: <TEAM>`. |
-| `invalid_gateway_team` | `400` | `x-ai-gateway-team` is empty, repeated, or not a valid Datadog team slug. |
-| `gateway_team_forbidden` | `403` | The caller is not a member of the selected Datadog team. |
-| `gateway_team_user_required` | `403` | Team selection requires a Datadog user identity. A service account token without user context cannot select a team. |
-| `gateway_team_unavailable` | `503` | Datadog team membership could not be verified. Retry the request. |
-| `gateway_rate_limit` | `429` | A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`. |
-| `budget_exceeded` | `402` | A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset. |
-| `model_not_found` | `400` | The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working. |
-| `bad_request` | `400` | A malformed request that AI Gateway rejected before dispatch, such as an invalid JSON body, an invalid category filter, or an unknown action. Use `message` to see which. |
-| `unsupported_operation` | `400` | No eligible target supports the requested operation, for example a Responses field that no translator can map. |
-| `requested_provider_unavailable` | `400` | The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active. |
-| `no_eligible_target` | `400` | Targets failed for mixed reasons: some on access, others on operation support or provider identity. This is not only a permission problem. |
-| `no_permitted_target` | `403` | Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry. |
-| `zdr_requirement_unavailable` | `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini) | The zero-data-retention requirement could not be read. This is transient. Retry the request. |
-| `config_error` | `500` | A routing rule is misconfigured: a resolution cycle, an expansion limit, or an invalid rule. Contact [Datadog support][14]. |
-| `upstream_timeout` | `504` (OpenAI, Anthropic, and Gemini) | Every eligible upstream target was tried and the last attempt did not answer in time. |
-| `upstream_unreachable` | `500` / `500` / `503` | The connection to the provider failed (refused, reset, DNS, or TLS) or broke mid-response. |
-| `provider_credentials_error` | `500` / `500` / `503` | AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service account token. Check the provider's integration account. |
-| `upstream_error` | `500` / `500` / `503` | Any other upstream failure before a provider response. Also used when all targets failed with no more specific code. |
-| `internal_error` | `500` | An unclassified internal error. Contact [Datadog support][14] and include the request headers and timestamp. |
+`gateway_team_required`
+: HTTP `400`. The request matches a [Datadog team][13] budget but no matching personal budget. Resend with `x-ai-gateway-team: <TEAM>`.
+
+`invalid_gateway_team`
+: HTTP `400`. `x-ai-gateway-team` is empty, repeated, or not a valid Datadog team slug.
+
+`gateway_team_forbidden`
+: HTTP `403`. The caller is not a member of the selected Datadog team.
+
+`gateway_team_user_required`
+: HTTP `403`. Team selection requires a Datadog user identity. A service account token without user context cannot select a team.
+
+`gateway_team_unavailable`
+: HTTP `503`. Datadog team membership could not be verified. Retry the request.
+
+`gateway_rate_limit`
+: HTTP `429`. A gateway [rate limit](#set-rate-limits) was exceeded. The response also sets `Retry-After`, `X-Ai-Gateway-Ratelimit-Id`, and `X-Ai-Gateway-Ratelimit-{Limit,Remaining,Reset}-<METRIC>`. A provider `429` has no `X-Ai-Gateway-Error-Code`.
+
+`budget_exceeded`
+: HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset.
+
+`model_not_found`
+: HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working.
+
+`bad_request`
+: HTTP `400`. A malformed request that AI Gateway rejected before dispatch, such as an invalid JSON body, an invalid category filter, or an unknown action. Use `message` to see which.
+
+`unsupported_operation`
+: HTTP `400`. No eligible target supports the requested operation, for example a Responses field that no translator can map.
+
+`requested_provider_unavailable`
+: HTTP `400`. The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active.
+
+`no_eligible_target`
+: HTTP `400`. Targets failed for mixed reasons: some on access, others on operation support or provider identity. This is not only a permission problem.
+
+`no_permitted_target`
+: HTTP `403`. Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry.
+
+`zdr_requirement_unavailable`
+: HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request.
+
+`config_error`
+: HTTP `500`. A routing rule is misconfigured: a resolution cycle, an expansion limit, or an invalid rule. Contact [Datadog support][14].
+
+`upstream_timeout`
+: HTTP `504` (OpenAI, Anthropic, and Gemini). Every eligible upstream target was tried and the last attempt did not answer in time.
+
+`upstream_unreachable`
+: HTTP `500` / `500` / `503`. The connection to the provider failed (refused, reset, DNS, or TLS) or broke mid-response.
+
+`provider_credentials_error`
+: HTTP `500` / `500` / `503`. AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service account token. Check the provider's integration account.
+
+`upstream_error`
+: HTTP `500` / `500` / `503`. Any other upstream failure before a provider response. Also used when all targets failed with no more specific code.
+
+`internal_error`
+: HTTP `500`. An unclassified internal error. Contact [Datadog support][14] and include the request headers and timestamp.
 
 ## Further reading
 
