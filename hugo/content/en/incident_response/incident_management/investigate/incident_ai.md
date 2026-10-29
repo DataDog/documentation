@@ -77,7 +77,7 @@ To review a summary from the incident timeline:
 
 Approving or editing a summary records who took the action. After a summary is edited, it can't be approved; the edited version takes precedence. Rejecting a summary removes it from the incident timeline for everyone and hides its content in connected chat channels. You're asked to confirm before rejecting, and this action can't be undone.
 
-If the summary was broadcast to the incident chat channel, you can take the same actions from the message using the **Approve**, **Edit**, or **Reject summary** buttons.
+If the summary was broadcast to the incident chat channel, use the **Approve**, **Edit**, or **Reject summary** buttons on the message.
 
 ### Re-inviting the transcriber
 
