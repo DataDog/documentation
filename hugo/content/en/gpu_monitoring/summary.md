@@ -52,7 +52,7 @@ AI workloads can experience unpredictable spikes in resource usage. As a result,
 
 For example, if you see a spike in the forecasted values for the number of allocated devices, your future workloads may require additional GPU devices.
 
-Procuring hardware can be a time-consuming process. Use this widget to help you understand historical demand over your selected time frame and forecast future capacity needs.
+Procuring hardware can be a time-consuming process. Use the **Device Allocation Over Time** widget to understand historical demand over your selected time frame and forecast future capacity needs.
 
 {{< img src="gpu_monitoring/forecasting.png" alt="Device Allocation Over Time widget showing total, allocated, active, and effective device counts over the past week, with a dotted one-week forecast extending past the current time." style="width:90%;" >}}
 
