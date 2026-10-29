@@ -66,7 +66,7 @@ The Fleet Health section allows you to spot hardware health issues across your e
 
 The visualization is colored by XID error severity (red: critical XID, orange: non-critical XID, green: healthy), so you can spot whether hardware issues are isolated to a particular group. Hover over a host to see the exact XID error code.
 
-{{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health: green for no XID errors, orange for non-critical XIDs, and red for critical XIDs. Each tile lists its host and GPU counts." style="width:90%;" >}}
+{{< img src="gpu_monitoring/fleet-health.png" alt="Fleet Health page grouped by cluster, showing a tile per cluster with a square for each host colored by GPU health. Each tile lists its host and GPU counts." style="width:90%;" >}}
 
 ## Cost & Utilization
 
