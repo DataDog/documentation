@@ -15,12 +15,12 @@ Choose the SDK that instruments your application. Both options support the OpenT
 
 | SDK | Sends data to | Best for |
 |---|---|---|
-| [Datadog SDKs](#datadog-sdks) | Your OpenTelemetry Collector, as a DDOT SDK (Preview), or the Datadog Agent | Teams that want Datadog to build and support their SDK |
+| [DDOT SDKs](#ddot-sdks) | Your OpenTelemetry Collector (Preview), or the Datadog Agent | Teams that want Datadog to build and support their SDK |
 | [OpenTelemetry SDKs](#opentelemetry-sdks) | Your OpenTelemetry Collector, the Datadog Agent, or the Datadog OTLP intake | Teams that use only OpenTelemetry project components |
 
 To check which Datadog features each setup supports, see [Feature Compatibility][3].
 
-## Datadog SDKs
+## DDOT SDKs
 
 A Datadog SDK sends data in one of two ways:
 
@@ -32,7 +32,7 @@ A Datadog SDK sends data in one of two ways:
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support" >}}Use the Datadog SDK with the OpenTelemetry API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-For all Datadog SDK pages, including instrumentation libraries and environment variables, see [Datadog SDKs][2].
+For all Datadog SDK pages, including instrumentation libraries and environment variables, see [DDOT SDKs][2].
 
 ## OpenTelemetry SDKs
 
