@@ -21,7 +21,7 @@ Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users yo
 
 A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from two issuers: Okta and Claude.
 
-Claude is the only agent that Cross-App Access supports, and it works with both issuers. Claude can play two separate roles: as the agent, Claude calls the Datadog API on behalf of the user. As an issuer, Claude mints the ID-JAG that the agent presents to Datadog. You can trust one issuer or both.
+Claude is the only agent that Cross-App Access supports, and it works with both issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. As an issuer, Claude mints the ID-JAG that the agent presents to Datadog. You can trust one issuer or both.
 
 ## Values you exchange
 
@@ -31,9 +31,8 @@ Setup moves values in both directions between Datadog and the issuer. Confirm th
 
 | Value                               | Direction         | Where you enter it |
 | ----------------------------------- | ----------------- | ------------------ |
-| Datadog organization UUID           | Datadog to Okta   | Datadog application, {{< ui >}}Machine assignments{{< /ui >}} tab > {{< ui >}}Audience/tenant ID{{< /ui >}} |
+| Datadog organization UUID           | Datadog to Okta   | Datadog application, {{< ui >}}Machine Assignments{{< /ui >}} tab > {{< ui >}}Audience/tenant ID{{< /ui >}} |
 | Agent client ID                     | Datadog to Okta   | AI Agent, {{< ui >}}Resource connections{{< /ui >}} > {{< ui >}}Client ID at resource{{< /ui >}} |
-| Datadog resource URL and issuer URL | Datadog to Okta   | Datadog application, {{< ui >}}Machine assignments{{< /ui >}} tab > {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
 | Okta issuer URL                     | Okta to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
 
 ### Claude issuer
@@ -90,7 +89,7 @@ Every issuer URL must use `https` and must not contain a port, query, or fragmen
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. After removal, Datadog stops accepting tokens from the issuer.
+To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer.
 
 ### Copy your organization UUID
 
@@ -111,7 +110,7 @@ If you use the Claude issuer, complete the following steps in Claude as an admin
 1. In Claude, navigate to [{{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Connectors{{< /ui >}}][4] and select **Datadog**.
 2. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
 3. In the {{< ui >}}Connect{{< /ui >}} step, under {{< ui >}}Identity source{{< /ui >}}, select {{< ui >}}Claude-issued{{< /ui >}}.
-4. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the Datadog organization UUID you [copied from Datadog](#copy-your-organization-uuid). Claude does not need the agent client ID or the Datadog resource and issuer URLs.
+4. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the Datadog organization UUID you [copied from Datadog](#copy-your-organization-uuid). Claude does not need the agent client ID.
 5. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Issuer URLs{{< /ui >}} list in Datadog. See [Add trusted issuers](#add-trusted-issuers).
 6. Click {{< ui >}}Run test{{< /ui >}} and confirm that every step passes.
 7. In the {{< ui >}}Roles{{< /ui >}} step, select who receives the Datadog connector. To pilot with one team, select only that team's custom role and leave the built-in roles cleared.
@@ -126,23 +125,7 @@ If you use the Okta issuer, complete the following steps in the Okta Admin Conso
 
 ### Configure the Datadog application as a resource server
 
-On your Datadog application, open the {{< ui >}}Machine assignments{{< /ui >}} tab and enable {{< ui >}}Cross-app access (XAA){{< /ui >}}. Set the following fields.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-<p>The values below match your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.</p>
-<table>
-<thead><tr><th>Okta field</th><th>Value</th></tr></thead>
-<tbody>
-<tr><td>{{< ui >}}Resource URL{{< /ui >}}</td><td>{{< region-param key="mcp_xaa_resource_url" code="true" >}}</td></tr>
-<tr><td>{{< ui >}}Issuer URL{{< /ui >}}</td><td>{{< region-param key="mcp_xaa_issuer_url" code="true" >}}</td></tr>
-<tr><td>{{< ui >}}Audience/tenant ID{{< /ui >}}</td><td>Your Datadog organization UUID</td></tr>
-</tbody>
-</table>
-{{< /site-region >}}
-
-The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches.
-
-**Note**: Changing the issuer URL later requires deleting and recreating the resource connection described in [Connect Claude to the Datadog application](#connect-claude-to-the-datadog-application).
+On your Datadog application, open the {{< ui >}}Machine Assignments{{< /ui >}} tab, select the {{< ui >}}Callers{{< /ui >}} tile, and click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Cross App Access (XAA){{< /ui >}}. Enable XAA, then set {{< ui >}}Audience/tenant ID{{< /ui >}} to your Datadog organization UUID.
 
 ### Register Claude as an AI Agent
 
