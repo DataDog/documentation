@@ -323,6 +323,7 @@ unsupported_sites:
   case_management: [gov2]
   change_tracking: [gov,gov2]
   ci_visibility: [gov,gov2]
+  cicd_optimization: [gov,gov2]
   cloudcraft_apm_overlay: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]
