@@ -28,6 +28,8 @@ further_reading:
 
 The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. When configured with the [Datadog Exporter][1] and [Datadog Connector][29], you can send your traces, logs, and metrics to Datadog without the Datadog Agent.
 
+For a step-by-step example with a sample Java application, see [Getting Started with OpenTelemetry at Datadog][39].
+
 <div class="alert alert-info">For new OpenTelemetry Collector configurations, Datadog recommends the <a href="/opentelemetry/setup/collector_exporter/">OTLP HTTP exporter and <code>span_metrics</code> connector setup</a>. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.</div>
 
 - **Datadog Exporter**: Forwards trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent)
@@ -327,3 +329,4 @@ Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Au
 [36]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/kafka.yaml
 [37]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/logs.yaml
 [38]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.154.0/exporter/datadogexporter/examples/batch-memory.yaml
+[39]: /getting_started/opentelemetry/
