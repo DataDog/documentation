@@ -16,10 +16,6 @@ further_reading:
   text: "Shared Roles"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/organization-groups/" header="Organization Groups is in Preview">}}
-  Organization Groups is in Preview. Request access to try it out.
-{{< /callout >}}
-
 ## Overview
 
 For organizations that remain multi-organization, Organization Groups introduces centralized governance across organizations, which reduces the operational overhead of running multiple organizations.
@@ -75,8 +71,6 @@ If your use case requires multi-organization, Organization Groups gives you cent
 ### For existing multi-organization customers considering consolidation
 
 Organization Groups provides a middle path. If full consolidation is impractical, Organization Groups brings many of the benefits of a single organization without requiring migration. These benefits include centralized policy management, reduced configuration drift, and simpler user management.
-
-Contact your account team to discuss early access to Organization Groups.
 
 ## Limitations
 

@@ -13,10 +13,6 @@ further_reading:
   text: "SAML Group Mapping"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/organization-groups/" header="Organization Groups is in Preview">}}
-  Organization Groups is in Preview. Request access to try it out.
-{{< /callout >}}
-
 ## Overview
 
 With shared roles, administrators in the owner organization of an [organization group][1] define a custom role once. Datadog provisions it into every member organization in the group. Use shared roles to keep role definitions consistent across organizations, instead of maintaining the same role in each one.
