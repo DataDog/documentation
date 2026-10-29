@@ -20,23 +20,18 @@ receivers:
   - id: ddot_collector
     label: DDOT Collector
     description: An OpenTelemetry Collector that Datadog builds and supports.
-    agent: optional
   - id: upstream_collector
     label: Upstream OpenTelemetry Collector
     description: The OpenTelemetry Collector Contrib distribution, sending to Datadog over OTLP.
-    agent: none
   - id: agents_collector
     label: Agent's Collector
     description: An OpenTelemetry Collector that runs alongside the Datadog Agent.
-    agent: included
   - id: otlp_ingest_agent
     label: Agent's OTLP endpoint
     description: The Datadog Agent receives OTLP from your applications, with no Collector.
-    agent: included
   - id: otlp_intake
     label: Direct OTLP intake
     description: Your applications send OTLP straight to Datadog, with no Collector or Agent.
-    agent: none
 
 # Valid SDK and receiver combinations, in display order. Any pair not listed
 # here is disabled in the setup picker.

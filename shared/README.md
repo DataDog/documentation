@@ -134,7 +134,6 @@ support value.
 | `id`          | yes      | Key used everywhere else in the file                                          |
 | `label`       | yes      | Display name                                                                  |
 | `description` | yes      | One sentence about what it is, shown on hover in the column headers           |
-| `agent`       | no       | Receivers only: `included`, `optional`, or `none`. Shown in the column header. |
 
 ### `pairs`
 

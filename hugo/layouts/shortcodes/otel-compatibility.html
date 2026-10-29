@@ -28,8 +28,6 @@
   {{- end -}}
 {{- end -}}
 
-{{- $agentText := dict "included" "Included" "optional" "Optional" "none" "Not used" -}}
-{{- $agentLine := dict "included" "Includes the Datadog Agent" "optional" "Datadog Agent optional" "none" "No Datadog Agent" -}}
 {{- $uid := printf "otel-compat-%d" .Ordinal -}}
 
 <div class="otel-compat" id="{{ $uid }}" data-otel-compat>
@@ -85,13 +83,7 @@
                 {{- end -}}
               </span></dd></div>
               {{- end }}
-              {{- with $receiver.agent }}
-              <div data-field="agent"><dt>Agent</dt><dd>{{ index $agentText . }}</dd></div>
-              {{- end }}
             </dl>
-            {{- with $receiver.agent }}
-            <span class="otel-compat__agent-line">{{ index $agentLine . }}</span>
-            {{- end }}
             {{- with $p.link }}
             <a class="otel-compat__setup-link" href="{{ . | relLangURL }}" aria-label="Setup guide: {{ $sdk.label }} + {{ $receiver.label }}">Setup guide</a>
             {{- end }}

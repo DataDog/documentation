@@ -263,15 +263,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     text-align: left;
   }
 
-  &__agent-line {
-    display: block;
-    margin-top: 0.15rem;
-    font-size: 12px;
-    color: $gray-darkish;
-  }
-
   // Outside compare view (the full table, and the page without JavaScript), headers show
-  // just the two component names and an Agent line. Field labels stay for screen readers.
+  // just the two component names. Field labels stay for screen readers.
   &:not([data-view="compare"]) &__fields {
     display: block;
 
@@ -291,13 +284,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     [data-field="receiver"] dd {
       font-weight: 400;
     }
-
-    [data-field="agent"] {
-      display: none;
-    }
   }
 
-  &[data-view="compare"] &__agent-line,
   &[data-view="compare"] &__plus {
     display: none;
   }
