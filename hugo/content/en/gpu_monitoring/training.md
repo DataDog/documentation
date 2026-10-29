@@ -99,6 +99,8 @@ spec:
                     fieldPath: metadata.annotations['company.name/group-id']
 ```
 
+The `ddTraceVersions.c` setting installs the Datadog C SDK, the native SDK that GPU tracing uses to capture CUDA and NCCL activity.
+
 To use pod labels instead of annotations, set `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete. With this configuration, traces from the workloads you label in the [Label the GPU workload](#3-label-the-gpu-workload) step are tagged with `training.run_id` and `training.group_id`.
@@ -158,7 +160,7 @@ If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before movi
 
 ### 1. Install the Agent with Single Step Instrumentation
 
-On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled for the host and the Datadog C SDK:
+On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled. The following command enables Single Step Instrumentation for the host and installs the Datadog C SDK (`c:0`), the native SDK that GPU tracing uses to capture CUDA and NCCL activity from your jobs:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> \

@@ -36,6 +36,8 @@ To begin continuously tracing your workloads, you must first meet the following 
 
 ### 1. Configure GPU tracing
 
+In both configurations, the `ddTraceVersions.c` setting installs the Datadog C SDK, the native SDK that GPU tracing uses to capture CUDA and NCCL activity.
+
 **Datadog Operator**: Merge the following configuration into the existing `DatadogAgent` resource:
 
 ```yaml
@@ -142,7 +144,7 @@ If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before movi
 
 ### 1. Install the Agent with Single Step Instrumentation
 
-On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled for the host and the Datadog C SDK:
+On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled. The following command enables Single Step Instrumentation for the host and installs the Datadog C SDK (`c:0`), the native SDK that GPU tracing uses to capture CUDA and NCCL activity from your jobs:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> \
