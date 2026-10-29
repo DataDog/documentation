@@ -30,7 +30,8 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
     {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
-    {{< nextlink href="/integrations/google-meet-incident-management" >}}Google Meet{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations/google_meet" >}}Google Meet{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration" >}}Zoom{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/google_chat" >}}Google Chat{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
@@ -44,7 +45,6 @@ Incident Management also integrates with:
 
 - [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
 - [Webhooks][6] to send incident notifications using webhooks (for example, [sending SMS to Twilio][7]).
-- [Zoom][8] to create Zoom meetings for an incident.
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
@@ -52,4 +52,3 @@ Incident Management also integrates with:
 [4]: /integrations/opsgenie/
 [6]: /integrations/webhooks/
 [7]: /integrations/webhooks/#sending-sms-through-twilio
-[8]: /integrations/zoom_incident_management/

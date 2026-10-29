@@ -2848,11 +2848,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Google Meet
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_meet
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_meet
+      weight: 508
     - name: Zoom
       url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
       parent: incidents_integrations
       identifier: incidents_integrations_zoom
-      weight: 508
+      weight: 509
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
