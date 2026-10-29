@@ -56,7 +56,7 @@ Procuring hardware can be a time-consuming process. Use the **Device Allocation 
 
 {{< img src="gpu_monitoring/forecasting.png" alt="Device Allocation Over Time widget showing total, allocated, active, and effective device counts over the past week, with a dotted one-week forecast extending past the current time." style="width:90%;" >}}
 
-You can also use {{< ui >}}Group by{{< /ui >}} to group by tags such as cluster, provider, GPU device, device type, or cloud provider. This breaks down your fleet's total, allocated, active, and effective device counts by that tag.
+You can also use {{< ui >}}Group by{{< /ui >}} to group device allocation by tags such as cluster, provider, GPU device, device type, or cloud provider. This breaks down your fleet's total, allocated, active, and effective device counts by that tag.
 
 {{< img src="gpu_monitoring/allocation-grouped.png" alt="Device Allocation Over Time widget grouped by cluster with the Active view selected, showing a stacked bar chart of active devices per cluster over the past week and a list of top clusters by active device count." style="width:90%;" >}}
 
