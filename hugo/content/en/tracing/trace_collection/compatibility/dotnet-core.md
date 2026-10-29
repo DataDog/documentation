@@ -153,7 +153,7 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 an
 | .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10 | Upgrade .NET 6.0.11 or above, or disable runtime metrics | [dotnet/runtime/pull/76431][18]                                                    |                                         |
 | JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Upgrade .NET to 9.0.0 or above                                                     | [dotnet/runtime/pull/95653][22]         |
 | JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x, 9.x, 10.x                  | Upgrade .NET to 10.0.14 or above                                                   | [dotnet/runtime/issues/127957][23]      |
-| .NET runtime bug causing crashes in exception filters (`catch ... when`)       | 29.x, 10.x                                               | Set `DOTNET_LegacyExceptionHandling=1`, or upgrade to .NET 11 or above             | [dotnet/runtime/issues/132462][24] |
+| .NET runtime bug causing crashes in exception filters (`catch ... when`)       | 9.x, 10.x                                               | Set `DD_PROFILING_EXCEPTION_ENABLED=0`, or upgrade to .NET 11 or above             | [dotnet/runtime/issues/132462][24] |
 ## Supported Datadog Agent versions
 
 | Datadog Agent version | Package version |
