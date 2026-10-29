@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-10-19'
+    link: https://github.com/DataDog/documentation/pull/40795
+    operations:
+      - CreateTemporalCloudOpenMetricsIntegrationAccount
+      - DeleteTemporalCloudOpenMetricsIntegrationAccount
+      - GetTemporalCloudOpenMetricsIntegrationAccount
+      - ListTemporalCloudOpenMetricsIntegrationAccounts
+      - UpdateTemporalCloudOpenMetricsIntegrationAccount
+    title: Add Integration Accounts v2 API for Temporal Cloud OpenMetrics

@@ -3146,6 +3146,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update a Snowflake integration account."
   },
+  "ListTemporalCloudOpenMetricsIntegrationAccounts": {
+    "description": "List Temporal Cloud OpenMetrics integration accounts.",
+    "summary": "List Temporal Cloud OpenMetrics accounts"
+  },
+  "CreateTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Create a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Create a Temporal Cloud OpenMetrics account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Temporal Cloud OpenMetrics integration account."
+  },
+  "DeleteTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Delete a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Delete a Temporal Cloud OpenMetrics account"
+  },
+  "GetTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Get a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Get a Temporal Cloud OpenMetrics account"
+  },
+  "UpdateTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Update a Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.",
+    "summary": "Update a Temporal Cloud OpenMetrics account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Temporal Cloud OpenMetrics integration account."
+  },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
     "summary": "List Twilio integration accounts"
