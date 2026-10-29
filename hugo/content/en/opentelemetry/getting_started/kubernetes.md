@@ -102,7 +102,7 @@ Replace the placeholders:
 
 ## 4. Instrument your application
 
-If your application's code already sets up an SDK, check [Before switching from an OpenTelemetry SDK][28] before you add the annotation.
+On the DDOT path, if your application's code already sets up an SDK, check [Before switching from an OpenTelemetry SDK][28] before you add the annotation.
 
 1. Add the language annotation to your Deployment's pod template. Replace `<DEPLOYMENT_NAME>` and `<NAMESPACE>` with your Deployment's name and namespace, and `<LANGUAGE>` with `java`, `python`, `nodejs`, or `dotnet`:
 
@@ -125,8 +125,6 @@ Data appears within a few minutes. `<SERVICE_NAME>` is your Deployment's name, u
 | Traces | [Trace Explorer][10]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Traces you can open to see their spans. |
 | Logs | [Log Explorer][15]: search for `service:<SERVICE_NAME> env:<ENVIRONMENT>`. | Your application's logs. |
 
-To see your cluster's pods, Deployments, and nodes, open [Kubernetes Explorer][13] and filter by your cluster name.
-
 ## Troubleshooting
 
 ### No data in Datadog
@@ -137,7 +135,7 @@ Check that `DD_SITE` matches your Datadog site and that your API key is valid. S
 kubectl logs -n opentelemetry-operator-system daemonset/opentelemetry-kube-stack-daemon-collector | grep -iE "403|401|forbidden|exporting failed"
 ```
 
-A `403` or `401` means the API key or the site is wrong.
+A `403` or `401` usually means the API key or the site is wrong.
 
 ### Your service doesn't appear
 
@@ -192,7 +190,6 @@ The installer applies your file on top of its own values files. For what you can
 [8]: /opentelemetry/instrument/
 [9]: https://app.datadoghq.com/software
 [10]: https://app.datadoghq.com/apm/traces
-[13]: https://app.datadoghq.com/orchestration/overview
 [15]: https://app.datadoghq.com/logs
 [16]: /opentelemetry/troubleshooting/
 [17]: /opentelemetry/setup/

@@ -79,7 +79,7 @@ Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog b
 | [DDOT Collector][5] (Preview) | Receives your telemetry, processes it, and sends it to Datadog. It's an OpenTelemetry Collector that Datadog builds. |
 | [Full-Host Profiler][6] (Preview) | Profiles every process on a host. |
 
-Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. You don't need the Datadog Agent. You can [add it][7] later for features that need it.
+Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. The DDOT SDKs and the DDOT Collector don't need the Datadog Agent. You can [add it][7] later for features that need it.
 
 **Best for**: Teams that want Datadog to build and support their OpenTelemetry components.
 

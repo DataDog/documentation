@@ -11,8 +11,6 @@ further_reading:
 
 ## Overview
 
-This page was previously titled "Install the DDOT Collector on Linux."
-
 Set up the Collector in the Agent on Linux-based bare-metal hosts and virtual machines. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Requirements
