@@ -20,7 +20,7 @@ further_reading:
 ---
 {{< callout url="#" header="false" btn_hidden="true" >}}
 Agent-side tag aggregation is in Preview.
-To request access, contact [Datadog Support][11] or your Customer Success Manager.
+To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.
 {{< /callout >}}
 
 ## Overview
@@ -200,4 +200,3 @@ The `sum` aggregation performed by the Agent preserves results for queries that 
 [8]: https://app.datadoghq.com/metric/summary
 [9]: https://app.datadoghq.com/metric/volume
 [10]: https://app.datadoghq.com/metric/settings
-[11]: https://www.datadoghq.com/support/
