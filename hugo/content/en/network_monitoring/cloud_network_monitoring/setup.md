@@ -629,7 +629,7 @@ Failed Connections allows collection and reporting of TCP failures including [re
 
 ### Basic dynamic tests
 
-Starting with Agent `v7.86`, hosts with CNM enabled run [Network Path basic dynamic tests][16] by default. Every hour, each Agent tests up to five of its highest-traffic paths, at no additional cost. To turn them off, see [Disable basic dynamic tests][17].
+Starting with Agent `v7.86`, hosts with CNM enabled run [Network Path basic dynamic tests][16] by default. Every hour, each Agent tests up to five of its highest-traffic paths, at no additional cost. To disable these tests, see [Disable basic dynamic tests][17].
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
