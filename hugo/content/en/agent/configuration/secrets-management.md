@@ -2468,15 +2468,15 @@ secret_refresh_on_api_key_failure_interval: 10
 
 This setting is compatible with `secret_refresh_interval`.
 
-### Enabling DDOT collector refresh
-If you are using the [Collector in the Agent][6], the OpenTelemetry Collector that runs inside the Datadog Agent, and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+### Enabling refresh for the Agent's Collector {#enabling-ddot-collector-refresh}
+If you are using the [Agent's Collector][6], the OpenTelemetry Collector that runs inside the Datadog Agent, and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051
   config_refresh_interval: 3600
 ```
 
-This ensures the DDOT collector remains in-sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the DDOT collector uses this setting to regularly check for updated values from the Agent.
+This keeps the Agent's Collector in sync with the Agent after secrets are refreshed. Similar to how the Agent periodically verifies its configuration state, the Agent's Collector uses this setting to regularly check for updated values from the Agent.
 
 ## Troubleshooting
 
@@ -2729,7 +2729,7 @@ instances:
 [1]: /agent/kubernetes/integrations/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [3]: https://docs.docker.com/engine/swarm/secrets/
-[6]: /opentelemetry/setup/agent/#collector-in-the-agent
+[6]: /opentelemetry/setup/agent/#agents-collector
 [7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: /agent/configuration/agent-configuration-files/
 <!-- Links in tabs are scoped inside shortcodes, collapse-content links are not scoped -->

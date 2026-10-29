@@ -6,18 +6,18 @@ code_lang_weight: 1
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
-  text: "Use Custom OpenTelemetry Components with DDOT Collector"
+  text: "Use Custom OpenTelemetry Components with the Agent's Collector"
 ---
 
-This guide explains how to build a Datadog Agent image with OpenTelemetry components that the Collector in the Agent doesn't include by default. To see the components it includes, see [Included components][1].
+This guide explains how to build a Datadog Agent image with OpenTelemetry components that the Agent's Collector doesn't include by default. To see the components it includes, see [Included components][1].
 
 ## Prerequisites
 
 To complete this guide, you need the following:
 
 - [Docker][2]
-- GitHub and access to the [Datadog Agent][3] source code that contains DDOT Collector.
-- The OpenTelemetry components you plan to include in the Agent source code must be compatible with DDOT Collector version.
+- GitHub and access to the [Datadog Agent][3] source code that contains the Agent's Collector.
+- The OpenTelemetry components you plan to include in the Agent source code must be compatible with the Agent's Collector version.
 
 **Recommended**:
 
@@ -50,9 +50,9 @@ The Dockerfile:
 
 - Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_version" %}}-full`.
 - Installs Go, Python, and necessary dependencies.
-- Downloads and unpacks the DDOT Collector source code.
+- Downloads and unpacks the Agent's Collector source code.
 - Creates a virtual environment and installs required Python packages.
-- Builds the DDOT Collector (also known as OTel Agent) and copies the resulting binary to the final image.
+- Builds the Agent's Collector (the `otel-agent` binary) and copies the resulting binary to the final image.
 
 ## Create an OpenTelemetry Collector Builder manifest
 
@@ -102,9 +102,9 @@ replaces:
 {{< /highlight >}}
 1. Save your changes to the manifest file.
 
-## Build and push the DDOT Collector (Agent) image
+## Build and push the Agent image {#build-and-push-the-ddot-collector-agent-image}
 
-The custom DDOT Collector (Agent) image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
+The custom Agent image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
 Build your custom Datadog Agent image and push it to a container registry.
 
@@ -141,7 +141,7 @@ To distinguish between builds of the same Agent version, append a [SemVer][10] p
 
 ## Test and validate
 
-Create a sample configuration file and run your custom DDOT Collector (Agent) to ensure everything is working correctly.
+Create a sample configuration file and run your custom Agent image to make sure everything is working correctly.
 
 1. Create a sample OpenTelemetry configuration file with the additional components.
   The following example configures an additional [metrics transform processor][7]:
@@ -192,7 +192,7 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
          processors: [infraattributes]
          exporters: [datadog]
    ```
-2. Run the DDOT Collector (Agent) using the following Docker command.
+2. Run the custom Agent image with the following Docker command.
    ```shell
    docker run -it \
      -e DD_API_KEY=XX \
@@ -204,15 +204,15 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
      --entrypoint otel-agent \
      agent-ddot --config /config.yaml
    ```
-3. If the DDOT Collector (Agent) starts, then the build process was successful.
+3. If the Agent's Collector starts, then the build process was successful.
 
-You can now use this new image to install the DDOT Collector. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
+You can now use this new image to install the Agent's Collector. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
 
-For detailed instructions on installing and configuring the Collector in the Agent with added OpenTelemetry components, see the [Set Up the Collector in the Datadog Agent][9] guide.
+For detailed instructions on installing and configuring the Agent's Collector with added OpenTelemetry components, see the [Set Up the Agent's Collector][9] guide.
 
 ## Troubleshooting
 
-This section discusses some common issues you might encounter while building and running your custom DDOT Collector, along with their solutions:
+This section discusses some common issues you might encounter while building and running your custom Collector, along with their solutions:
 
 ### Compatibility issues with `awscontainerinsightreceiver`
 

@@ -25,7 +25,7 @@ products:
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
-- If you are using the Collector in the Agent, the OpenTelemetry Collector that runs inside the Datadog Agent, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- If you are using the Agent's Collector, the OpenTelemetry Collector that runs inside the Datadog Agent, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
 - If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability Pipelines.
 
 ### When to use this source
@@ -164,13 +164,13 @@ Set the listener address environment variables to the following default values. 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send data from the Collector in the Agent to Observability Pipelines {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
+## Send data from the Agent's Collector to Observability Pipelines {#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines}
 
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-To send logs from the Collector in the Agent:
-1. Deploy the Collector in the Agent using Helm. See [Set Up the Collector in the Datadog Agent as a Kubernetes DaemonSet][5] for instructions.
+To send logs from the Agent's Collector:
+1. Deploy the Agent's Collector using Helm. See [Set Up the Agent's Collector as a Kubernetes DaemonSet][5] for instructions.
 1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true` in case the log doesn't have the `source` field.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
@@ -196,11 +196,11 @@ To send logs from the Collector in the Agent:
         ```
 
 **Notes**:
-- Because the Collector in the Agent is sending logs to Observability Pipelines, and not the Datadog Agent itself, the following settings do not work for sending logs from the Collector in the Agent to Observability Pipelines:
+- Because the Agent's Collector is sending logs to Observability Pipelines, and not the Datadog Agent itself, the following settings do not work for sending logs from the Agent's Collector to Observability Pipelines:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
-- Logs sent from the Collector in the Agent might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
-- If the Collector in the Agent and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
+- Logs sent from the Agent's Collector might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- If the Agent's Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
 
 [5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /observability_pipelines/configuration/set_up_pipelines/
@@ -212,8 +212,8 @@ To send logs from the Collector in the Agent:
 
 {{% tab "Metrics" %}}
 
-To send metrics from the Collector in the Agent:
-1. Deploy the Collector in the Agent using Helm. See [Set Up the Collector in the Datadog Agent as a Kubernetes DaemonSet][5] for instructions.
+To send metrics from the Agent's Collector:
+1. Deploy the Agent's Collector using Helm. See [Set Up the Agent's Collector as a Kubernetes DaemonSet][5] for instructions.
 1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
     1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
@@ -239,11 +239,11 @@ To send metrics from the Collector in the Agent:
         ```
 
 **Notes**:
-- Because the Collector in the Agent is sending metrics to Observability Pipelines, and not the Datadog Agent itself, the following settings do not work for sending metrics from the Collector in the Agent to Observability Pipelines:
+- Because the Agent's Collector is sending metrics to Observability Pipelines, and not the Datadog Agent itself, the following settings do not work for sending metrics from the Agent's Collector to Observability Pipelines:
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
-- Metrics sent from the Collector in the Agent might have nested objects that prevent Datadog from parsing the metrics correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
-- If the Collector in the Agent and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
+- Metrics sent from the Agent's Collector might have nested objects that prevent Datadog from parsing the metrics correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- If the Agent's Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
 
 [5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
 [6]: /observability_pipelines/configuration/set_up_pipelines/

@@ -1,5 +1,5 @@
 ---
-title: Set Up the Collector in the Datadog Agent on Windows
+title: Set Up the Agent's Collector on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 5
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Set up the Collector in the Agent on Windows-based bare-metal hosts and virtual machines. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
+Set up the Agent's Collector on Windows-based bare-metal hosts and virtual machines. The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Requirements
 
@@ -30,11 +30,11 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
 
 ### Installation
 
-To install the DDOT Collector on a Windows host, use the following MSI command:
+To install the Agent's Collector on a Windows host, use the following MSI command:
 
 ```powershell
 $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true'
@@ -43,9 +43,9 @@ if ($p.ExitCode -ne 0) {
 }
 ```
 
-This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
+This command installs both the core Datadog Agent package and the Agent's Collector that runs alongside it.
 
-**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately. Run from an **elevated PowerShell session**:
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the Agent's Collector separately. Run from an **elevated PowerShell session**:
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel install
 ```
@@ -101,8 +101,8 @@ OTel Agent
 
 ## Configure the Datadog Agent
 
-### Enable the DDOT Collector
-The configuration file for the Datadog Agent is automatically installed at `C:\ProgramData\Datadog\datadog.yaml`. The installer adds the following configuration settings to `C:\ProgramData\Datadog\datadog.yaml` to enable the DDOT Collector:
+### Enable the Agent's Collector {#enable-the-ddot-collector}
+The configuration file for the Datadog Agent is automatically installed at `C:\ProgramData\Datadog\datadog.yaml`. The installer adds the following configuration settings to `C:\ProgramData\Datadog\datadog.yaml` to enable the Agent's Collector:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 otelcollector:
@@ -112,7 +112,7 @@ agent_ipc:
   config_refresh_interval: 60
 {{< /code-block >}}
 
-DDOT automatically binds the OpenTelemetry Collector to ports 4317 (grpc) and 4318 (http) by default.
+The Agent's Collector binds to ports 4317 (grpc) and 4318 (http) by default.
 
 ### (Optional) Enable additional Datadog features
 
@@ -259,7 +259,7 @@ public String getDate() {
 
 ### Configure the application
 
-Your application must send data to the DDOT Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
+Your application must send data to the Agent's Collector on the same host. Ensure that the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is set on your application.
 
 If using the example application, [`run-otel-local.sh`][13] sets up the required environment variables and runs the application:
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -274,7 +274,7 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="grpc"
 
 [Unified service tagging][10] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In bare-metal environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from applications.
+In bare-metal environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables. The Agent's Collector detects this tagging configuration and applies it to the data it collects from applications.
 
 In the example application, this is done in `run-otel-local.sh`:
 {{< code-block lang="bash" filename="run-otel-local.sh" disable_copy="true" collapsible="true" >}}
@@ -291,7 +291,7 @@ Use Datadog to explore the observability data for your application.
 
 ### Fleet automation
 
-Explore your Datadog Agent, DDOT, and upstream OpenTelemetry Collector configurations.
+Explore your Datadog Agent, Agent's Collector, and upstream OpenTelemetry Collector configurations.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Agent and Collector configuration from the Fleet Automation page." style="width:100%;" >}}
 
@@ -321,7 +321,7 @@ Monitor your runtime (JVM) metrics for your applications.
 
 ### Collector health metrics
 
-View metrics from the DDOT Collector to monitor the Collector health.
+View metrics from the Agent's Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 

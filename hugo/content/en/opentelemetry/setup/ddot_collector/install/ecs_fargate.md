@@ -1,5 +1,5 @@
 ---
-title: Set Up the Collector in the Datadog Agent on ECS Fargate
+title: Set Up the Agent's Collector on ECS Fargate
 code_lang: ecs_fargate
 type: multi-code-lang
 code_lang_weight: 6
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Deploy the Collector in the Agent on Amazon ECS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
+Deploy the Agent's Collector on Amazon ECS Fargate. The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -33,14 +33,14 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
 
 ### Create an ECS task definition
 
 On ECS Fargate, the Datadog Agent and your application run as containers within the same ECS task. Create an ECS task definition that includes both containers.
 
 <div class="alert alert-info">
-  The Datadog Agent image must be <code>public.ecr.aws/datadog/agent:latest-full</code>. The <code>latest-full</code> image includes the DDOT Collector. The standard <code>latest</code> image does not.
+  The Datadog Agent image must be <code>public.ecr.aws/datadog/agent:latest-full</code>. The <code>latest-full</code> image includes the Agent's Collector. The standard <code>latest</code> image does not.
 </div>
 
 Use the following task definition as a starting point:
@@ -153,7 +153,7 @@ Replace the following placeholders:
 
 ### Configure ECS resource detection
 
-The DDOT Collector's `infraattributes` processor enriches your telemetry with ECS infrastructure tags when the `aws.ecs.task.arn` resource attribute is present. To provide this attribute, add the ECS resource detector to your OpenTelemetry SDK.
+The `infraattributes` processor in the Agent's Collector enriches your telemetry with ECS infrastructure tags when the `aws.ecs.task.arn` resource attribute is present. To provide this attribute, add the ECS resource detector to your OpenTelemetry SDK.
 
 The ECS resource detector automatically populates the following attributes:
 - `aws.ecs.task.arn`
@@ -166,9 +166,9 @@ Refer to your language's OpenTelemetry SDK documentation to add the ECS resource
 
 ### Use a custom Collector configuration
 
-The default DDOT Collector configuration supports standard OTLP ingestion. To customize the pipeline, for example to add a processor that drops specific metrics, provide your own `otel-config.yaml`.
+The default configuration of the Agent's Collector supports standard OTLP ingestion. To customize the pipeline, for example to add a processor that drops specific metrics, provide your own `otel-config.yaml`.
 
-The DDOT Collector always loads its configuration from a fixed path inside the container: `/etc/datadog-agent/otel-config.yaml`. Because ECS Fargate doesn't support host volumes, build a custom image that includes your configuration at this path:
+The Agent's Collector always loads its configuration from a fixed path inside the container: `/etc/datadog-agent/otel-config.yaml`. Because ECS Fargate doesn't support host volumes, build a custom image that includes your configuration at this path:
 
 1. Create your `otel-config.yaml` file with the pipeline you need.
 1. Create a `Dockerfile` that copies your configuration into the Datadog Agent image:
@@ -187,10 +187,10 @@ docker push <YOUR_REGISTRY>/datadog-agent-ddot:<TAG>
 
 1. In your task definition, set the `datadog-agent` container's `image` field to your custom image instead of `public.ecr.aws/datadog/agent:latest-full`.
 
-Repeat this process for each Agent version upgrade to keep the DDOT Collector version compatible with the rest of the image.
+Repeat this process for each Agent version upgrade to keep the Agent's Collector version compatible with the rest of the image.
 
 <div class="alert alert-info">
-  The Datadog Agent's entrypoint always starts the DDOT Collector with <code>--config /etc/datadog-agent/otel-config.yaml</code>. Passing a configuration through an environment variable, such as an OpenTelemetry Collector <code>env:</code> configuration provider, is not supported on ECS Fargate.
+  The Datadog Agent's entrypoint always starts the Agent's Collector with <code>--config /etc/datadog-agent/otel-config.yaml</code>. Passing a configuration through an environment variable, such as an OpenTelemetry Collector <code>env:</code> configuration provider, is not supported on ECS Fargate.
 </div>
 
 To add OpenTelemetry components not included by default, see [Use Custom OpenTelemetry Components][11].
@@ -222,7 +222,7 @@ public String getDate() {
 
 ### Configure the application
 
-Because the DDOT Collector runs as a sidecar container in the same ECS task, your application sends OTLP data to `localhost`. Add the following environment variables to your application container in the task definition:
+Because the Agent's Collector runs in a sidecar container in the same ECS task, your application sends OTLP data to `localhost`. Add the following environment variables to your application container in the task definition:
 
 {{< code-block lang="json" filename="task-definition.json" disable_copy="true" collapsible="true" >}}
 {
@@ -313,7 +313,7 @@ Monitor your runtime (JVM) metrics for your applications.
 
 ### Collector health metrics
 
-View metrics from the DDOT Collector to monitor the Collector health.
+View metrics from the Agent's Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 

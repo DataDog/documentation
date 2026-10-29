@@ -75,9 +75,9 @@ Your applications send OTLP directly to Datadog, without a Collector or Agent. T
 
 ## Datadog Agent
 
-{{< img src="/opentelemetry/setup/otel-route-datadog-agent.png" alt="Your application, instrumented with OpenTelemetry, sends OTLP to the Datadog Agent, which receives it with OTLP Ingest or the Collector in the Agent, and sends it to Datadog." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-route-datadog-agent.png" alt="Your application, instrumented with OpenTelemetry, sends OTLP to the Datadog Agent, which receives it with OTLP Ingest or the Agent's Collector, and sends it to Datadog." style="width:100%;" >}}
 
-The Datadog Agent receives OTLP from your applications ([OTLP Ingest in the Agent][5]), or runs an OpenTelemetry Collector inside the Agent ([Collector in the Agent][6]). You also get Agent-based features, such as integrations and Live Container Monitoring.
+The Datadog Agent receives OTLP from your applications ([OTLP Ingest in the Agent][5]), or runs an OpenTelemetry Collector inside the Agent ([Agent's Collector][6]). You also get Agent-based features, such as integrations and Live Container Monitoring.
 
 **Best for**: Teams that already run the Datadog Agent.
 

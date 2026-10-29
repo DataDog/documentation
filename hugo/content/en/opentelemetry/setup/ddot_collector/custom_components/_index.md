@@ -1,5 +1,5 @@
 ---
-title: Use Custom OpenTelemetry Components with the Collector in the Agent
+title: Use Custom OpenTelemetry Components with the Agent's Collector
 type: multi-code-lang
 external_redirect: /opentelemetry/setup/ddot_collector/custom_components/kubernetes
 aliases:

@@ -23,7 +23,7 @@ Datadog has introduced new logic for generating operation names for OpenTelemetr
 
 The `enable_operation_and_resource_name_logic_v2` feature flag controls this new logic. It is enabled by default starting in the following versions:
 
-- **Collector in the Agent**: Datadog Agent v7.65+
+- **Agent's Collector**: Datadog Agent v7.65+
 - **OpenTelemetry Collector**: OTel Collector v0.126.0+
 - **OTLP Ingest in the Agent**: Datadog Agent v7.66+
 
@@ -176,13 +176,13 @@ Disable the feature for OTLP ingest using one of these methods:
    ```
 
 {{% /tab %}}
-{{% tab "DDOT Collector" %}}
+{{% tab "Agent's Collector" %}}
 
-Since DDOT enables this logic by default, you may need to disable it:
+Since the Agent's Collector enables this logic by default, you may need to disable it:
 
 ### Helm
 
-Pass the feature gate flag to the embedded DDOT Collector using Helm values:
+Pass the feature gate flag to the Agent's Collector using Helm values:
 
 ```shell
 helm upgrade -i <RELEASE_NAME> datadog/datadog \
@@ -202,7 +202,7 @@ metadata:
   name: datadog
 spec:
   override:
-    nodeAgent: # Or clusterAgent depending on where DDOT runs
+    nodeAgent: # Or clusterAgent depending on where the Collector runs
       env:
         - name: DD_APM_FEATURES
           value: "disable_operation_and_resource_name_logic_v2" # Add comma-separated existing features if needed
