@@ -32485,6 +32485,11 @@ components:
           description: Query for creating a data deletion request.
           example: "service:xyz host:abc"
           type: string
+        recoverable_until:
+          description: |-
+            Time when the recovery period for the deletion request ends. Before this time, you can cancel the request and recover the data. After this time, permanent deletion begins, and the status changes to `deleting` within a few minutes. This field is returned only for `in_progress` requests when listing deletion requests, and is omitted if the value cannot be determined.
+          example: "2024-01-11T02:00:00.000000Z"
+          type: string
         source:
           description: The source of the deletion request.
           example: "standard"
@@ -32529,6 +32534,12 @@ components:
     DataDeletionResponseMeta:
       description: The metadata of the data deletion response.
       properties:
+        available_slots:
+          description: |-
+            Number of additional deletion requests the current organization can create before reaching the concurrency limit. Requests with a `pending`, `in_progress`, or `deleting` status count toward the limit. This field is returned only when listing deletion requests, and is omitted if the value cannot be determined.
+          example: 3
+          format: int64
+          type: integer
         count_product:
           additionalProperties:
             format: int64
@@ -32543,6 +32554,12 @@ components:
           description: The total deletion requests created by status.
           example: {"completed": 10, "pending": 5}
           type: object
+        max_concurrent_requests:
+          description: |-
+            Maximum number of deletion requests with a `pending`, `in_progress`, or `deleting` status that the current organization can have at the same time. This field is returned only when listing deletion requests, and is omitted if the value cannot be determined.
+          example: 5
+          format: int64
+          type: integer
         next_page:
           description: The next page when searching deletion requests created in the current organization.
           example: "cGFnZTI="
@@ -166899,7 +166916,27 @@ paths:
                           updated_at: "2024-01-01T00:00:00.000000Z"
                         id: "1"
                         type: deletion_request
+                      - attributes:
+                          created_at: "2024-01-01T00:00:00.000000Z"
+                          created_by: test@example.com
+                          displayed_total: 50
+                          from_time: 1672527600000
+                          is_created: true
+                          org_id: 123
+                          product: logs
+                          query: "service:abc"
+                          recoverable_until: "2024-01-11T02:00:00.000000Z"
+                          source: standard
+                          starting_at: "2024-01-01T02:00:00.000000Z"
+                          status: in_progress
+                          to_time: 1704063600000
+                          total_unrestricted: 50
+                          updated_at: "2024-01-01T02:00:00.000000Z"
+                        id: "2"
+                        type: deletion_request
                     meta:
+                      available_slots: 3
+                      max_concurrent_requests: 5
                       next_page: "cGFnZTI="
                       product: logs
               schema:
