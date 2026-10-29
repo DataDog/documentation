@@ -95,6 +95,78 @@ runPredefinedPowershellScript:
 
 In a workflow or app, reference a script by the name you defined (for example, `echo`). Use `runPredefinedScript` on Linux runners and `runPredefinedPowershellScript` on Windows runners.
 
+### Allowed script configuration directories
+
+<div class="alert alert-warning">Agent 7.86.0 and later only read script configuration files from allowed directories. Script actions whose <strong>Path to file</strong> is outside them fail with <code>could not load script credential file</code>. Before you upgrade, move the file into the default directory (recommended), or add its directory to <code>credential_file_allowed_roots</code>.</div>
+
+Starting with Agent 7.86.0, the runner reads script configuration files only from allowed directories.
+
+- By default, only the packaged configuration directory is allowed:
+  - Linux: `/etc/datadog-agent/private-action-runner`
+  - Windows: `C:\ProgramData\Datadog\private-action-runner`
+- To allow other directories, set `private_action_runner.script.credential_file_allowed_roots`.
+  - The list replaces the default. Include the default directory if you use [ownerless runners](#ownerless-runner-execution-policy-authorized) or the automatically created Script connection.
+  - An empty list (`[]`) disables script configuration files.
+  - Entries must be absolute paths to directories. The runner ignores invalid entries and logs a warning.
+- The runner rejects paths that leave an allowed directory, for example through `..` or a symbolic link.
+
+{{< tabs >}}
+{{% tab "Host" %}}
+
+In `datadog.yaml`:
+
+```yaml
+private_action_runner:
+  script:
+    credential_file_allowed_roots:
+      - /etc/datadog-agent/private-action-runner
+      - /opt/scripts/config
+```
+
+Alternatively, set the `DD_PRIVATE_ACTION_RUNNER_SCRIPT_CREDENTIAL_FILE_ALLOWED_ROOTS` environment variable to a comma-separated list:
+
+```bash
+DD_PRIVATE_ACTION_RUNNER_SCRIPT_CREDENTIAL_FILE_ALLOWED_ROOTS=/etc/datadog-agent/private-action-runner,/opt/scripts/config
+```
+
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+Add the setting to the `private-action-runner-configdata` annotation of each runner you configure (`agent.datadoghq.com/` for the node Agent, `cluster-agent.datadoghq.com/` for the Cluster Agent):
+
+```yaml
+metadata:
+  annotations:
+    agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        script:
+          credential_file_allowed_roots:
+            - /etc/datadog-agent/private-action-runner
+            - /opt/scripts/config
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Set the environment variable on the runner container, and on the Cluster Agent if it runs a runner:
+
+```yaml
+agents:
+  containers:
+    privateActionRunner:
+      env:
+        - name: DD_PRIVATE_ACTION_RUNNER_SCRIPT_CREDENTIAL_FILE_ALLOWED_ROOTS
+          value: "/etc/datadog-agent/private-action-runner,/opt/scripts/config"
+clusterAgent:
+  env:
+    - name: DD_PRIVATE_ACTION_RUNNER_SCRIPT_CREDENTIAL_FILE_ALLOWED_ROOTS
+      value: "/etc/datadog-agent/private-action-runner,/opt/scripts/config"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Grant permissions
 
 {{< tabs >}}
@@ -141,6 +213,8 @@ When a runner is enrolled as ownerless and authorized by [Execution Policies][3]
 
 {{% /tab %}}
 {{< /tabs >}}
+
+If you set `credential_file_allowed_roots`, include the directory of this fixed path. See [Allowed script configuration directories](#allowed-script-configuration-directories).
 
 #### Delivering the config on Kubernetes
 
@@ -210,6 +284,8 @@ kubectl apply -f datadog-agent.yaml
 
 If you selected `com.datadoghq.script.runPredefinedScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `/etc/datadog-agent/private-action-runner/script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][4].
 
+The path must be inside an [allowed directory](#allowed-script-configuration-directories).
+
 {{% /tab %}}
 {{% tab "Windows" %}}
 
@@ -217,8 +293,18 @@ If you selected `com.datadoghq.script.runPredefinedScript` in the runner's actio
 
 If you selected `com.datadoghq.script.runPredefinedPowershellScript` in the runner's actions allowlist, you should already have a **Script** connection linked to your runner. Otherwise, create a connection and specify `C:\ProgramData\Datadog\private-action-runner\powershell-script-config.yaml` as the **path to file**. For more information, see [Handling private action credentials][4].
 
+The path must be inside an [allowed directory](#allowed-script-configuration-directories).
+
 {{% /tab %}}
 {{< /tabs >}}
+
+### Troubleshooting
+
+If a script action fails with `could not load script credential file`, the runner could not read the script configuration file. Check that the file:
+
+- Is inside an [allowed directory](#allowed-script-configuration-directories)
+- Exists and is readable by the runner user (`dd-agent` on Linux, `ddagentuser` on Windows)
+- Is a regular file, not empty, and no larger than 1 MB
 
 ## Standalone
 
