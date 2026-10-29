@@ -871,7 +871,7 @@ Check that the Operator is ready with `kubectl rollout status deployment/opentel
 
 ### The Collector pod shows `CreateContainerConfigError`
 
-The Collector can't read its API key secret. Check that `datadog-secret` exists in the same namespace as the Collector, with the keys `api-key` and `site`:
+This error usually means the Collector can't read its API key secret. Check that `datadog-secret` exists in the same namespace as the Collector, with the keys `api-key` and `site`:
 
 ```shell
 kubectl describe secret datadog-secret
@@ -883,7 +883,7 @@ Check that `DD_HOSTNAME` is set, as described in [Configure the Collector](#conf
 
 ### No data in Datadog
 
-Search the Collector's logs for export errors. A `403` means the API key or the site is wrong. Replace `<DAEMONSET_NAME>` with `node-collector-collector` for the Operator, or `node-collector-opentelemetry-collector-agent` for Helm:
+Search the Collector's logs for export errors. A `403` usually means the API key or the site is wrong. Replace `<DAEMONSET_NAME>` with `node-collector-collector` for the Operator, or `node-collector-opentelemetry-collector-agent` for Helm:
 
 ```shell
 kubectl logs daemonset/<DAEMONSET_NAME> | grep -iE "403|forbidden|exporting failed"
