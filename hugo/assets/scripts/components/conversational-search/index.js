@@ -7,6 +7,7 @@ import { attachTooltips, buildSourceCards, showSourceTooltip, closeAllSourceTool
 import { addMessageActions, injectCodeCopyButtons } from './actions';
 import { streamDocsAiChat } from './docsai-client';
 import { pickQuestions } from './suggested-questions';
+import { ActivityTimeline } from './activity';
 
 const { env } = document.documentElement.dataset;
 const docsConfig = getConfig(env);
@@ -118,31 +119,21 @@ function forEachResizable(callback) {
     });
 }
 
-// Auto-rotated client-side messages shown while we wait for the first server `thinking` event.
-// Aligned with the mapped server messages below so the user sees consistent copy either way.
-const LOADING_MESSAGES = [
-    'Understanding your question…',
-    'Searching the docs…',
-    'Reading the most relevant pages…',
-    'Drafting your response…'
-];
+const DEFAULT_ERROR_MESSAGE = 'Something went wrong while answering. Try again in a moment.';
+const EMPTY_RESPONSE_MESSAGE = 'No response received. Try again.';
+// Retrying the same request can't help, so this copy must not invite a retry.
+const NON_RETRYABLE_MESSAGE = "Docs AI can't answer this request. Start a new question instead.";
+const REJECTED_REQUEST_MESSAGE = "Docs AI couldn't process this question. Try shortening or rephrasing it.";
+const RETRY_ICON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"></path></svg>';
 
-// Maps backend `thinking` event content to user-facing copy.
-// `null` hides the event entirely (used for internal optimization steps the user shouldn't see).
-// Unknown keys fall through to the original message so new backend stages still surface something.
-const THINKING_MESSAGES = {
-    'Rewriting query...': 'Understanding your question…',
-    'Searching documentation...': 'Searching the docs…',
-    'Reviewing relevant pages': 'Reading the most relevant pages…',
-    'Generating answer...': 'Drafting your response…',
-    'Something went wrong. Please try again.': 'Something went wrong. Try asking again.'
-};
-
-function mapThinkingMessage(serverMessage) {
-    if (Object.prototype.hasOwnProperty.call(THINKING_MESSAGES, serverMessage)) {
-        return THINKING_MESSAGES[serverMessage];
-    }
-    return serverMessage;
+// Places the streaming caret at the end of the last block of the partially rendered answer.
+function appendStreamCaret(container) {
+    const blocks = container.querySelectorAll('p, li, h1, h2, h3, h4, h5, h6, td, pre code');
+    const target = blocks[blocks.length - 1] || container;
+    const caret = document.createElement('span');
+    caret.className = 'conv-search-stream-caret';
+    caret.setAttribute('aria-hidden', 'true');
+    target.appendChild(caret);
 }
 
 let isDatadogUser = false;
@@ -169,7 +160,8 @@ class ConversationalSearch {
         this.isOpen = false;
         this.isLoading = false;
         this.abortController = null;
-        this.userCancelledRequest = false;
+        this.userStoppedRequest = false;
+        this.turnSeq = 0;
         this.hasLoggedFirstOpen = false;
         this.isSuggestionQuery = false;
 
@@ -283,7 +275,10 @@ class ConversationalSearch {
         this.closeBtn.addEventListener('click', () => this.close());
         this.newChatBtn.addEventListener('click', () => this.newChat());
         this.overlay.addEventListener('click', () => this.close());
-        this.sendBtn.addEventListener('click', () => this.sendMessage());
+        this.sendBtn.addEventListener('click', () => {
+            if (this.isLoading) this.stopGeneration();
+            else this.sendMessage();
+        });
 
         this.input.addEventListener('keydown', (e) => {
             // Safari can end composition before dispatching the IME-confirming Enter keydown.
@@ -652,7 +647,6 @@ class ConversationalSearch {
         this.logInteraction('new_chat');
 
         if (this.abortController) {
-            this.userCancelledRequest = true;
             this.abortController.abort();
             this.abortController = null;
         }
@@ -660,8 +654,8 @@ class ConversationalSearch {
         this.conversationId = null;
         this.chatHistory = [];
         this.isSuggestionQuery = false;
-        this.isLoading = false;
-        this.sendBtn.disabled = false;
+        this.turnSeq += 1;
+        this.setBusy(false);
 
         this.messagesContainer.innerHTML = '';
         this.injectEmptyState(this.messagesContainer);
@@ -691,61 +685,30 @@ class ConversationalSearch {
         return contentDiv;
     }
 
-    addResponseContainer() {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'conv-search-message conv-search-message-assistant';
-
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'conv-search-message-content';
-
-        messageDiv.appendChild(contentDiv);
-        this.messagesContainer.appendChild(messageDiv);
-        this.scrollToBottom(true);
-
-        return contentDiv;
-    }
-
     /**
-     * Shows a spinner + status text while waiting for the first content token.
-     * Returns { updateStatus, stop } — call updateStatus(text) when the server
-     * sends a thinking event (auto-rotation is killed on first call); call stop()
-     * to remove the indicator.
+     * Appends an assistant turn: the live activity timeline followed by the answer body,
+     * which stays hidden until the first answer token arrives.
      */
-    showLoadingIndicator() {
+    addAssistantTurn() {
         const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
         if (emptyState) emptyState.remove();
 
-        const wrapper = document.createElement('div');
-        wrapper.className = 'conv-search-message conv-search-message-assistant conv-search-loading-state';
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'conv-search-message conv-search-message-assistant conv-search-turn';
 
-        const indicator = document.createElement('div');
-        indicator.className = 'conv-search-loading-indicator';
-        indicator.innerHTML =
-            '<span class="conv-search-loading-spinner"></span>' +
-            `<span class="conv-search-status-text">${LOADING_MESSAGES[0]}</span>`;
+        const activity = new ActivityTimeline({
+            onToggle: (expanded) => this.logInteraction('activity_toggled', { expanded })
+        });
 
-        wrapper.appendChild(indicator);
-        this.messagesContainer.appendChild(wrapper);
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'conv-search-message-content';
+        contentDiv.hidden = true;
+
+        messageDiv.append(activity.root, contentDiv);
+        this.messagesContainer.appendChild(messageDiv);
         this.scrollToBottom(true);
 
-        let msgIndex = 0;
-        let interval = setInterval(() => {
-            if (msgIndex < LOADING_MESSAGES.length - 1) msgIndex++;
-            const el = wrapper.querySelector('.conv-search-status-text');
-            if (el) el.textContent = LOADING_MESSAGES[msgIndex];
-        }, 3000);
-
-        return {
-            updateStatus: (text) => {
-                if (interval) { clearInterval(interval); interval = null; }
-                const el = wrapper.querySelector('.conv-search-status-text');
-                if (el) el.textContent = text;
-            },
-            stop: () => {
-                if (interval) clearInterval(interval);
-                if (wrapper.parentNode) wrapper.remove();
-            }
-        };
+        return { messageDiv, contentDiv, activity };
     }
 
     isNearBottom() {
@@ -771,13 +734,14 @@ class ConversationalSearch {
         });
     }
 
-    logResponse({ query, answer, startTime }) {
+    logResponse({ answer, startTime, activitySummary = {} }) {
         this.log('Conversational Search Response', {
             conversational_search: {
                 action: 'response_received',
                 response_length: answer.length,
                 ...(this.conversationId && { conversation_id: this.conversationId }),
-                latency_ms: Date.now() - startTime
+                latency_ms: Date.now() - startTime,
+                ...activitySummary
             }
         });
     }
@@ -788,31 +752,47 @@ class ConversationalSearch {
         const query = this.input.value.trim();
         if (!query || this.isLoading) return;
 
-        this.isLoading = true;
-        this.userCancelledRequest = false;
         this.input.value = '';
         this.input.style.height = 'auto';
-        this.sendBtn.disabled = true;
-
         this.addMessage('user', query);
+        await this.runTurn(query);
+    }
+
+    async runTurn(query) {
+        const turnId = ++this.turnSeq;
+        this.userStoppedRequest = false;
+        this.setBusy(true);
 
         try {
             await this.runInternalStream(query);
         } catch (error) {
-            if (error.name === 'AbortError' && this.userCancelledRequest) {
-                this.addResponseContainer().textContent = 'Request cancelled.';
-            } else {
-                this.logErr('Conversational Search Response Error', error);
-                this.addResponseContainer().textContent = 'Sorry, something went wrong. Please try again.';
-            }
+            this.logErr('Conversational Search Response Error', error);
         } finally {
-            this.isLoading = false;
-            this.sendBtn.disabled = false;
-            this.abortController = null;
-            this.userCancelledRequest = false;
-            this.isSuggestionQuery = false;
-            this.input.focus();
+            // A newer turn (or a reset) owns the composer state from here on.
+            if (this.turnSeq === turnId) {
+                this.setBusy(false);
+                this.abortController = null;
+                this.userStoppedRequest = false;
+                this.isSuggestionQuery = false;
+                this.input.focus();
+            }
         }
+    }
+
+    // While a turn is running, the send button becomes a stop button.
+    setBusy(busy) {
+        this.isLoading = busy;
+        this.sendBtn.disabled = false;
+        this.sendBtn.classList.toggle('is-stop', busy);
+        const label = busy ? 'Stop generating' : 'Send';
+        this.sendBtn.setAttribute('aria-label', label);
+        this.sendBtn.title = busy ? label : '';
+    }
+
+    stopGeneration() {
+        if (!this.isLoading || !this.abortController) return;
+        this.userStoppedRequest = true;
+        this.abortController.abort();
     }
 
     // --- Docs AI streaming -------------------------------------------------------
@@ -820,16 +800,20 @@ class ConversationalSearch {
     async runInternalStream(query) {
         this.abortController = new AbortController();
         const startTime = Date.now();
-        const loadingIndicator = this.showLoadingIndicator();
 
         const isFirstMessage = this.chatHistory.length === 0;
         const isSuggestion = this.isSuggestionQuery;
         if (!this.conversationId) {
             this.conversationId = this.generateInternalConversationId();
         }
+        const history = isFirstMessage ? [] : [...this.chatHistory];
         this.chatHistory.push({ role: 'user', content: query });
 
-        let responseContainer = null;
+        const turn = this.addAssistantTurn();
+        const { contentDiv, activity } = turn;
+
+        let partial = '';
+        let serverError = null;
         let lastRenderTime = 0;
 
         let answer;
@@ -837,27 +821,38 @@ class ConversationalSearch {
             answer = await streamDocsAiChat({
                 config: docsAiConfig,
                 query,
-                history: isFirstMessage ? [] : this.chatHistory.slice(0, -1),
+                history,
                 conversationId: this.conversationId,
                 anchorUrl: window.location.href,
                 rewriteQuery: isFirstMessage && this.shouldRewriteQuery && !isSuggestion,
                 signal: this.abortController.signal,
-                onThinking: (message) => {
-                    const mapped = mapThinkingMessage(message);
-                    if (mapped) loadingIndicator.updateStatus(mapped);
+                onThinking: (content, event = {}) => {
+                    activity.dispatch({
+                        type: 'thinking',
+                        content,
+                        retrieved_pages: event.retrieved_pages,
+                        query: event.query,
+                        page: event.page
+                    });
+                    this.scrollToBottom();
+                },
+                onServerError: (event) => {
+                    serverError = event;
                 },
                 onToken: (_token, fullMessage) => {
-                    if (!responseContainer) {
-                        loadingIndicator.stop();
-                        responseContainer = this.addResponseContainer();
+                    partial = fullMessage;
+                    if (contentDiv.hidden) {
+                        activity.dispatch({ type: 'answer' });
+                        contentDiv.hidden = false;
                     }
 
                     const now = Date.now();
                     if (now - lastRenderTime > RENDER_THROTTLE) {
                         const { displayMarkdown, sources } = extractSources(fullMessage);
-                        responseContainer.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                        contentDiv.innerHTML = inlineRefChips(parseMarkdown(displayMarkdown));
+                        appendStreamCaret(contentDiv);
                         if (sources.length > 0) {
-                            responseContainer.appendChild(buildSourceCards(sources));
+                            contentDiv.appendChild(buildSourceCards(sources));
                         }
                         lastRenderTime = now;
                         this.scrollToBottom();
@@ -867,25 +862,103 @@ class ConversationalSearch {
                     this.logErr('Docs AI Streaming Error', error);
                 }
             });
-        } finally {
-            loadingIndicator.stop();
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                if (this.userStoppedRequest) this.handleStoppedTurn(turn, query, partial, startTime);
+                else activity.dispatch({ type: 'stopped' });
+                return;
+            }
+            this.logErr('Conversational Search Response Error', error);
+            // A rejected request (for example, a question that is too long) fails the same way on retry.
+            const rejected = error.status >= 400 && error.status < 500 && ![408, 429].includes(error.status);
+            this.failTurn(turn, query, rejected ? { message: REJECTED_REQUEST_MESSAGE, retryable: false } : {});
+            return;
         }
 
-        if (!responseContainer) {
-            responseContainer = this.addResponseContainer();
+        if (serverError) {
+            this.logErr('Docs AI Server Error', new Error(serverError.code || 'server_error'));
+            const retryable = serverError.retryable !== false;
+            this.failTurn(turn, query, {
+                // The server's copy invites a retry, so it is only shown when a retry can help.
+                message: retryable ? serverError.content : undefined,
+                retryable,
+                discardPartial: serverError.discard_partial !== false
+            });
+            return;
         }
 
-        if (answer) {
-            this.chatHistory.push({ role: 'assistant', content: answer });
-            this.finalizeResponse(responseContainer, query, answer, startTime);
+        if (!answer || !answer.trim()) {
+            this.failTurn(turn, query, { message: EMPTY_RESPONSE_MESSAGE, retryable: true });
+            return;
+        }
+
+        activity.dispatch({ type: 'done' });
+        contentDiv.hidden = false;
+        this.chatHistory.push({ role: 'assistant', content: answer });
+        this.finalizeResponse(contentDiv, query, answer, startTime, activity.summary());
+    }
+
+    handleStoppedTurn(turn, query, partial, startTime) {
+        const { contentDiv, activity } = turn;
+        activity.dispatch({ type: 'stopped' });
+        contentDiv.querySelector('.conv-search-stream-caret')?.remove();
+        this.logInteraction('response_stopped', { partial_length: partial.length, ...activity.summary() });
+
+        if (partial.trim()) {
+            this.chatHistory.push({ role: 'assistant', content: partial });
+            this.finalizeResponse(contentDiv, query, partial, startTime, activity.summary(), { log: false });
         } else {
-            responseContainer.textContent = 'No response received. Please try again.';
+            contentDiv.remove();
+            this.dropUnansweredQuery(query);
         }
+    }
+
+    failTurn(turn, query, { message, retryable = true, discardPartial = true } = {}) {
+        const { messageDiv, contentDiv, activity } = turn;
+        activity.dispatch({ type: 'error' });
+        contentDiv.querySelector('.conv-search-stream-caret')?.remove();
+        if (discardPartial) {
+            contentDiv.hidden = true;
+            contentDiv.innerHTML = '';
+        }
+        this.dropUnansweredQuery(query);
+
+        const box = document.createElement('div');
+        box.className = 'conv-search-turn-error';
+        box.setAttribute('role', 'alert');
+
+        const text = document.createElement('p');
+        const fallback = retryable ? DEFAULT_ERROR_MESSAGE : NON_RETRYABLE_MESSAGE;
+        text.textContent = typeof message === 'string' && message.trim() ? message : fallback;
+        box.appendChild(text);
+
+        if (retryable) {
+            const retry = document.createElement('button');
+            retry.type = 'button';
+            retry.className = 'conv-search-retry';
+            retry.innerHTML = `${RETRY_ICON}<span>Try again</span>`;
+            retry.addEventListener('click', () => {
+                if (this.isLoading) return;
+                this.logInteraction('retry_clicked');
+                messageDiv.remove();
+                this.runTurn(query);
+            });
+            box.appendChild(retry);
+        }
+
+        messageDiv.appendChild(box);
+        this.scrollToBottom();
+    }
+
+    // An unanswered question is not sent back as history, so a retry or follow-up starts clean.
+    dropUnansweredQuery(query) {
+        const last = this.chatHistory[this.chatHistory.length - 1];
+        if (last && last.role === 'user' && last.content === query) this.chatHistory.pop();
     }
 
     // --- Shared finalization -----------------------------------------------------
 
-    finalizeResponse(container, query, answer, startTime) {
+    finalizeResponse(container, query, answer, startTime, activitySummary = {}, { log = true } = {}) {
         container.innerHTML = renderMessageWithSources(answer, {
             attachTooltips,
             buildSourceCards
@@ -893,7 +966,7 @@ class ConversationalSearch {
         injectCodeCopyButtons(container, this.ctx);
         addMessageActions(container.parentElement, query, answer, this.ctx);
         this.scrollToBottom();
-        this.logResponse({ query, answer, startTime });
+        if (log) this.logResponse({ query, answer, startTime, activitySummary });
     }
 }
 
