@@ -19,7 +19,7 @@ OTLP trace export from Datadog SDKs is in Preview. To provide feedback or reques
 
 Datadog SDKs can export traces in [OTLP][1] format to an OTLP-compatible receiver, including [DDOT][2] or any OpenTelemetry Collector.
 
-This page covers trace export, on any platform. To send traces, metrics, and logs on Kubernetes with the OpenTelemetry Operator, see [DDOT Setup][8].
+This page covers trace export, on any platform. To send traces, metrics, and logs on Kubernetes with the OpenTelemetry Operator, see [Set Up DDOT SDKs][8].
 
 ## Prerequisites
 
