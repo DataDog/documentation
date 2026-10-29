@@ -1,9 +1,9 @@
 ---
-title: Using Datadog SDKs with OpenTelemetry
-description: Export telemetry in OTLP format from Datadog SDKs, or use the OpenTelemetry API with Datadog SDKs to keep vendor-neutral instrumentation.
+title: Datadog SDKs with OpenTelemetry
+description: Use a Datadog SDK with OpenTelemetry, as a DDOT SDK that sends OTLP to your Collector, or with the Datadog Agent.
 further_reading:
     - link: '/opentelemetry/setup/ddot_collector/'
-      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
+      text: 'DDOT Collector'
       tag: 'Documentation'
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -21,24 +21,30 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetry in [OpenTelemetry Protocol (OTLP)][1] format controls how telemetry is sent. The [OpenTelemetry API][2] controls how you instrument your services. These can be enabled separately, but using them together provides an OpenTelemetry-native experience.
+A Datadog SDK works with OpenTelemetry in two setups:
 
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
-    <h3>Export traces in OTLP format</h3>
-    Export traces from a Datadog SDK in OTLP format to DDOT or any OpenTelemetry Collector, instead of sending them to the Datadog Agent. In Preview.
-    {{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support/" >}}
-    <h3>Use the OpenTelemetry API</h3>
-    Instrument your services with vendor-neutral OpenTelemetry APIs while taking advantage of Datadog's native features and products.
-    {{< /nextlink >}}
-{{< /whatsnext >}}
+| Setup | Where the SDK sends data | Start here |
+|---|---|---|
+| **DDOT SDK** (Preview) | Your OpenTelemetry Collector, as [OTLP][1] | [Set Up DDOT SDKs][3] |
+| **Datadog SDK with the Agent** | The Datadog Agent | [OpenTelemetry API Support][4] |
 
-<div class="alert alert-info"><strong>Comparing setups?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
+A Datadog OpenTelemetry (DDOT) SDK is the Datadog SDK for your language, set to send OpenTelemetry data to your Collector. In both setups, you can use the [OpenTelemetry API][2]. Support varies by language and signal. See [OpenTelemetry API Support][4].
+
+To check which Datadog features each setup supports, see [Feature Compatibility][5].
 
 ## Configure and extend
 
+Check each page for the setup and languages it covers.
+
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support/" >}}
+    <h3>Use the OpenTelemetry API</h3>
+    Add custom spans, metrics, and logs with the OpenTelemetry API, for each language.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
+    <h3>Export traces in OTLP format</h3>
+    Export traces from a Datadog SDK as OTLP. Minimum versions and settings for each language. In Preview.
+    {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}
     <h3>Instrumentation Libraries</h3>
     Add OpenTelemetry instrumentation libraries to capture telemetry from third-party components alongside Datadog SDK instrumentation.
@@ -55,3 +61,6 @@ Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetr
 
 [1]: https://opentelemetry.io/docs/specs/otlp/
 [2]: https://opentelemetry.io/docs/specs/otel/trace/api/
+[3]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[4]: /opentelemetry/instrument/dd_sdks/api_support/
+[5]: /opentelemetry/compatibility/#feature-compatibility
