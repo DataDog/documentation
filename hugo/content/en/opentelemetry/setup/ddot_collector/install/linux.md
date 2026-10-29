@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Set up the Agent's Collector on Linux-based bare-metal hosts and virtual machines. The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent.
+Set up the Agent's Collector on Linux-based bare-metal hosts and virtual machines. The Agent's Collector is the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process.
 
 ## Requirements
 

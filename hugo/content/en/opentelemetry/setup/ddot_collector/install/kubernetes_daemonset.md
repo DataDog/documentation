@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Deploy the Agent's Collector as a Kubernetes DaemonSet with Helm or the Datadog Operator. The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent. To run the DDOT Collector without the Agent, see [Install the DDOT Collector on Kubernetes][59].
+Deploy the Agent's Collector as a Kubernetes DaemonSet with Helm or the Datadog Operator. The Agent's Collector is the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. To run the DDOT Collector without the Agent, see [Install the DDOT Collector on Kubernetes][59].
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -280,7 +280,7 @@ datadog:
 
 ### Configure the OpenTelemetry Collector
 
-Because the Agent's Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
+Because the Agent's Collector runs as a separate process from the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

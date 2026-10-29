@@ -25,7 +25,7 @@ products:
 Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
-- If you are using the Agent's Collector, the OpenTelemetry Collector that runs inside the Datadog Agent, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
+- If you are using the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
 - If you are using the Splunk HEC Distribution of the OpenTelemetry Collector, use the [Splunk HEC source][4] to send logs to Observability Pipelines.
 
 ### When to use this source
