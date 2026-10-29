@@ -212,13 +212,12 @@
       font-weight: 600;
     }
 
+    // Undocumented cells are blank. In the legend, show an empty cell outline.
     &--unknown {
       display: inline-block;
-      padding: 0 0.4rem;
-      border-radius: 10px;
-      background: $gray-lighter;
-      color: $gray-dark;
-      font-size: 0.75rem;
+      width: 1.5rem;
+      height: 0.9rem;
+      vertical-align: middle;
     }
   }
 
@@ -237,6 +236,10 @@
   // The legend's sample marks are plain spans, not cells
   &__legend .otel-compat__mark {
     margin-right: 0.2rem;
+  }
+
+  &__legend .otel-compat__mark--unknown {
+    border: 1px solid $gray-border;
   }
 }
 

@@ -69,8 +69,10 @@
     <li><span class="otel-compat__mark otel-compat__mark--supported"><i class="icon-check-bold" aria-hidden="true"></i></span> Supported</li>
     <li><span class="otel-compat__mark otel-compat__mark--partial">Partial</span> Supported with limits</li>
     <li><span class="otel-compat__mark otel-compat__mark--not_supported" aria-hidden="true">&mdash;</span> Not supported</li>
-    <li><span class="otel-compat__mark otel-compat__mark--unknown">Unknown</span> Not confirmed yet</li>
+    <li><span class="otel-compat__mark otel-compat__mark--unknown"></span> Blank: not yet documented</li>
+    {{- if where $data.features "requires_agent" true }}
     <li><span class="otel-compat__badge otel-compat__badge--agent">Agent required</span> Works only when the Datadog Agent runs</li>
+    {{- end }}
   </ul>
 
   <div class="otel-compat__scroll">
@@ -111,6 +113,8 @@
             {{- $mark := "" }}
             {{- if and (eq $c.support "supported") (not $c.label) }}
               {{- $mark = `<i class="icon-check-bold" aria-hidden="true"></i><span class="otel-compat__sr">Supported</span>` }}
+            {{- else if eq $c.support "unknown" }}
+              {{- $mark = `<span class="otel-compat__sr">Not yet documented</span>` }}
             {{- else if and (eq $c.support "not_supported") (not $c.label) }}
               {{- $mark = `<span aria-hidden="true">&mdash;</span><span class="otel-compat__sr">Not supported</span>` }}
             {{- else }}

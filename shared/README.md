@@ -156,14 +156,15 @@ A pair that isn't listed is disabled in the setup picker.
 | `label`          | yes      | Feature name                                                       |
 | `abbr`           | no       | Abbreviation shown after the name, such as `DBM`                   |
 | `link`           | no       | Feature docs                                                       |
-| `requires_agent` | no       | `true` shows an "Agent required" marker on the row                 |
+| `requires_agent` | no       | `true` shows an "Agent required" marker on the row. Set it only when the docs state it. |
 | `note`           | no       | Note about the feature as a whole, shown under its name            |
 | `sdk`            | no       | Map of SDK `id` to a support value                                 |
 | `receiver`       | no       | Map of receiver `id` to a support value                            |
 | `overrides`      | no       | List of exact-pair values that replace the computed value          |
 
 A **support value** is one of `supported`, `partial`, `not_supported`, or
-`unknown`. An SDK or receiver that a feature doesn't list is `unknown`. Don't
+`unknown`. An SDK or receiver that a feature doesn't list is `unknown`. An
+`unknown` cell renders blank, which means not yet documented. Don't
 write `yes` or `no`: YAML reads them as booleans, and the build fails.
 
 Notes accept Markdown, so a note can link to another page.
@@ -191,12 +192,15 @@ overrides:
 ### How a cell gets its value
 
 1. If an override matches the pair, use it.
-2. Otherwise, use the lower of the SDK value and the receiver value, in this
-   order: `not_supported` < `unknown` < `partial` < `supported`.
+2. Otherwise, if the SDK value or the receiver value is `unknown`, the cell is
+   blank.
+3. Otherwise, use the lower of the two, in this order:
+   `not_supported` < `partial` < `supported`.
 
-Rule 2 means one `not_supported` decides the cell, even when the other side is
-`unknown`. When a feature's support depends on the combination rather than on
-either part, add an override instead of changing an SDK or receiver value.
+Rule 2 keeps a cell blank until both sides are documented, so the file never
+claims more than the docs state. When a feature's support depends on the
+combination rather than on either part, add an override instead of changing
+an SDK or receiver value.
 
 The cell shows the `label` and `note` of the side that decided the value. When
 both sides have the same value, it shows both notes.
@@ -210,4 +214,4 @@ value for each SDK and receiver you know about. Leave out the ones you don't.
 
 If the SDK or receiver is new, add it to `sdks` or `receivers`. Then add a
 `pairs` entry, and give each feature a value for the new SDK or receiver.
-Features without a value show `unknown`.
+Features without a value show a blank cell.

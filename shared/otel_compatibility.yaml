@@ -3,7 +3,7 @@
 # Schema and editing guide: shared/README.md, section `otel_compatibility.yaml`.
 #
 # Seeded from the feature table on the compatibility page. Values the table did
-# not state are `unknown`. Every DDOT SDK value is `unknown` until confirmed.
+# not state are `unknown` and render as blank cells (not yet documented).
 
 sdks:
   - id: ddot_sdk
@@ -157,13 +157,10 @@ features:
         label: Sampled
         note: Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure.
 
-  # requires_agent on DBM, CNM, Live Containers, Live Processes, and USM: the
-  # table supports them only in setups that include the Datadog Agent. Confirm.
   - id: database_monitoring
     label: Database Monitoring
     abbr: DBM
     link: /opentelemetry/correlate/dbm_and_traces/
-    requires_agent: true
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -187,7 +184,6 @@ features:
     label: Cloud Network Monitoring
     abbr: CNM
     link: /network_monitoring/performance/
-    requires_agent: true
     note: Span-level or endpoint-level monitoring is not supported.
     sdk:
       datadog_sdk: supported
@@ -211,7 +207,6 @@ features:
   - id: live_container_monitoring
     label: Live Container Monitoring
     link: /containers/
-    requires_agent: true
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -223,7 +218,6 @@ features:
   - id: live_processes
     label: Live Processes
     link: /infrastructure/process/
-    requires_agent: true
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -236,7 +230,6 @@ features:
     label: Universal Service Monitoring
     abbr: USM
     link: /universal_service_monitoring/
-    requires_agent: true
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -254,6 +247,13 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported
 
   - id: continuous_profiler
     label: Continuous Profiler
@@ -263,6 +263,13 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported
 
   - id: data_jobs_monitoring
     label: "Data Observability: Jobs Monitoring"
@@ -273,6 +280,13 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported
 
   - id: data_streams_monitoring
     label: Data Streams Monitoring
@@ -302,6 +316,13 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported
 
   - id: source_code_integration
     label: Source code integration
@@ -311,3 +332,10 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported

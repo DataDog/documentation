@@ -3,7 +3,7 @@
   Context: dict "feature" <feature entry> "sdk" <SDK id> "receiver" <receiver id>
   Returns: dict "support" "label" "notes" (a slice of strings)
 */ -}}
-{{- $rank := dict "not_supported" 0 "unknown" 1 "partial" 2 "supported" 3 -}}
+{{- $rank := dict "not_supported" 0 "partial" 1 "supported" 2 -}}
 {{- $f := .feature -}}
 {{- $sdk := .sdk -}}
 {{- $receiver := .receiver -}}
@@ -22,7 +22,10 @@
   {{- $r := partial "otel-compatibility/value.html" (dict "v" (index ($f.receiver | default dict) $receiver) "where" (printf "feature %s, receiver %s" $f.id $receiver)) -}}
   {{- $sRank := index $rank $s.support -}}
   {{- $rRank := index $rank $r.support -}}
-  {{- if lt $sRank $rRank -}}
+  {{- /* An unknown side means the pair isn't documented, so the cell stays blank */ -}}
+  {{- if or (eq $s.support "unknown") (eq $r.support "unknown") -}}
+    {{- $out = dict "support" "unknown" "label" "" "notes" slice -}}
+  {{- else if lt $sRank $rRank -}}
     {{- $out = dict "support" $s.support "label" $s.label "notes" (cond (ne $s.note "") (slice $s.note) slice) -}}
   {{- else if lt $rRank $sRank -}}
     {{- $out = dict "support" $r.support "label" $r.label "notes" (cond (ne $r.note "") (slice $r.note) slice) -}}
