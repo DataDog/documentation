@@ -4317,8 +4317,16 @@ components:
           type: array
         namespace_filters:
           $ref: "#/components/schemas/AWSNamespaceFilters"
+        resource_type_tag_filters:
+          description: AWS Metrics collection resource type tag filters list. Defaults to `[]`.
+          items:
+            $ref: "#/components/schemas/AWSResourceTypeTagFilter"
+          type: array
         tag_filters:
-          description: AWS Metrics collection tag filters list. Defaults to `[]`.
+          deprecated: true
+          description: |-
+            AWS Metrics collection tag filters list. Defaults to `[]`.
+            Deprecated in favor of `resource_type_tag_filters`. The two fields are mutually exclusive on an account.
           items:
             $ref: "#/components/schemas/AWSNamespaceTagFilter"
           type: array
@@ -4511,6 +4519,38 @@ components:
           type: array
       required:
         - include_only
+      type: object
+    AWSResourceTypeTagFilter:
+      description: |-
+        AWS Metrics Collection resource type tag filter.
+        Each filter targets either a specific AWS service's resource types (`service` and
+        `resource_types`) or custom metrics (`custom`). These two modes are mutually exclusive.
+        The `expression` defines a tag filter that Datadog uses when collecting metrics from the
+        resource types of a specified service. Wildcards, such as `?` (match a single character)
+        and `*` (match multiple characters), and exclusion using `!` before the tag are supported.
+        For example, `env:production AND instance-type:c?.* AND !region:us-east-1`.
+      properties:
+        custom:
+          description: Whether the tag filter applies to custom metrics. When `true`, `service` and `resource_types` must be omitted.
+          example: false
+          type: boolean
+        expression:
+          description: The tag filter expression to apply when collecting metrics for the matching resource types.
+          example: "env:production"
+          type: string
+        resource_types:
+          description: The AWS resource types of the service to which the tag filter applies. Required when `service` is set. Use `*` as the only entry to match all resource types of the service; `*` cannot be combined with specific resource types.
+          items:
+            description: An AWS resource type of the service.
+            example: "instance"
+            type: string
+          type: array
+        service:
+          description: The AWS service for which the tag filter defined in `expression` will be applied. Required unless `custom` is `true`, and must be set together with `resource_types`.
+          example: "ec2"
+          type: string
+      required:
+        - expression
       type: object
     AWSResourcesConfig:
       description: AWS Resources Collection config.
@@ -105736,7 +105776,9 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          description: |-
+            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
+            or `completed`. Defaults to `all`, which returns recommendations in every status.
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105749,7 +105791,9 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
+        or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105785,9 +105829,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–10000).
+          description: Number of items returned in this page (1–5000).
           format: int32
-          maximum: 10000
+          maximum: 5000
           minimum: 1
           type: integer
         page_token:
@@ -163412,11 +163456,15 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page (1–10000).
+        - description: Number of results per page, from 1 to 5000. Defaults to 50.
           in: query
           name: page[size]
           schema:
-            type: string
+            default: 50
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -163463,11 +163511,16 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
-                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -163479,6 +163532,10 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -189949,8 +190006,11 @@ paths:
                           - include_only:
                               - aws.ec2.network_in
                             namespace: AWS/EC2
-                        tag_filters:
-                          - namespace: AWS/EC2
+                        resource_type_tag_filters:
+                          - expression: env:production
+                            resource_types:
+                              - instance
+                            service: ec2
                       resources_config:
                         cloud_security_posture_management_collection: false
                         extended_collection: true
@@ -190095,8 +190155,11 @@ paths:
                           - include_only:
                               - aws.ec2.network_in
                             namespace: AWS/EC2
-                        tag_filters:
-                          - namespace: AWS/EC2
+                        resource_type_tag_filters:
+                          - expression: env:production
+                            resource_types:
+                              - instance
+                            service: ec2
                       resources_config:
                         cloud_security_posture_management_collection: false
                         extended_collection: true
