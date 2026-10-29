@@ -6442,6 +6442,219 @@ components:
           example: ok
           type: string
       type: object
+    JourneyMapConversionType:
+      description: Whether to show the paths that convert to the end step or drop off before it.
+      enum:
+        - conversion
+        - drop-off
+      example: conversion
+      type: string
+      x-enum-varnames:
+        - CONVERSION
+        - DROP_OFF
+    JourneyMapCountingMethod:
+      description: Whether to count unique journeys or all journeys.
+      enum:
+        - uniques
+        - totals
+      example: uniques
+      type: string
+      x-enum-varnames:
+        - UNIQUES
+        - TOTALS
+    JourneyMapExpandedPrefix:
+      additionalProperties: false
+      description: A path expanded to show the events that follow it.
+      properties:
+        events:
+          description: Events of the expanded path, in order.
+          example:
+            - "@view.name:/cart"
+          items:
+            description: An event of the expanded path.
+            type: string
+          minItems: 1
+          type: array
+        path_limit:
+          description: Maximum number of paths shown after the expanded path.
+          example: 5
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
+      required:
+        - events
+      type: object
+    JourneyMapGroupBy:
+      additionalProperties: false
+      description: Group by configuration for the Journey Paths widget.
+      properties:
+        facet:
+          description: Facet to group by. Must be a valid tag name.
+          example: "@geo.country"
+          pattern: '^[@_a-zA-Z]?[a-zA-Z0-9_\-:.\/\\]*$'
+          type: string
+        source:
+          $ref: "#/components/schemas/JourneyMapGroupByAudience"
+        value_filters:
+          description: Facet values to keep.
+          example:
+            - France
+          items:
+            description: A facet value.
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - facet
+        - value_filters
+      type: object
+    JourneyMapGroupByAudience:
+      description: Audience the group by facet is read from.
+      enum:
+        - product_analytics_audience_filters.users
+        - product_analytics_audience_filters.accounts
+      example: product_analytics_audience_filters.users
+      type: string
+      x-enum-varnames:
+        - USERS
+        - ACCOUNTS
+    JourneyMapQuery:
+      description: Journey Paths query definition.
+      properties:
+        conversion_type:
+          $ref: "#/components/schemas/JourneyMapConversionType"
+        counting_method:
+          $ref: "#/components/schemas/JourneyMapCountingMethod"
+        data_source:
+          $ref: "#/components/schemas/ProductAnalyticsFunnelDataSource"
+        entries_per_step:
+          description: Maximum number of paths shown per step.
+          example: 5
+          format: int64
+          maximum: 10
+          minimum: 1
+          type: integer
+        event_filter:
+          description: Filter applied to the events shown along the paths.
+          example: "@type:view"
+          type: string
+        expanded_prefixes:
+          description: Paths expanded to show the events that follow them.
+          items:
+            $ref: "#/components/schemas/JourneyMapExpandedPrefix"
+            description: An expanded path.
+          type: array
+          uniqueItems: true
+        group_by:
+          description: Group by configuration.
+          items:
+            $ref: "#/components/schemas/JourneyMapGroupBy"
+            description: A Journey Paths group by configuration.
+          type: array
+        search:
+          $ref: "#/components/schemas/UserJourneySearch"
+        target:
+          $ref: "#/components/schemas/JourneyMapTarget"
+      required:
+        - data_source
+        - search
+        - target
+      type: object
+    JourneyMapRequestType:
+      description: Request type for the Journey Paths widget.
+      enum:
+        - journey_map
+      example: journey_map
+      type: string
+      x-enum-varnames:
+        - JOURNEY_MAP
+    JourneyMapTarget:
+      additionalProperties: false
+      description: The pair of journey steps the paths are visualized between.
+      properties:
+        end:
+          description: Key of the end step in `search.node_objects`.
+          example: node_1
+          type: string
+        start:
+          description: Key of the start step in `search.node_objects`.
+          example: node_0
+          type: string
+      required:
+        - start
+        - end
+      type: object
+    JourneyMapWidgetDefinition:
+      additionalProperties: false
+      description: The Journey Paths widget visualizes the paths users take between two steps of a Product Analytics journey.
+      properties:
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: List of Journey Paths widget requests. Exactly one request is supported.
+          example:
+            - query:
+                data_source: product_analytics_journey
+                search:
+                  expression: "node_0 -> node_1"
+                  node_objects:
+                    node_0:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/cart"
+                    node_1:
+                      data_source: product_analytics
+                      search:
+                        query: "@type:view @view.name:/checkout"
+                target:
+                  end: node_1
+                  start: node_0
+              request_type: journey_map
+          items:
+            $ref: "#/components/schemas/JourneyMapWidgetRequest"
+            description: A Journey Paths widget request.
+          maxItems: 1
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/JourneyMapWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    JourneyMapWidgetDefinitionType:
+      default: journey_map
+      description: Type of the Journey Paths widget.
+      enum:
+        - journey_map
+      example: journey_map
+      type: string
+      x-enum-varnames:
+        - JOURNEY_MAP
+    JourneyMapWidgetRequest:
+      additionalProperties: false
+      description: Journey Paths widget request.
+      properties:
+        query:
+          $ref: "#/components/schemas/JourneyMapQuery"
+        request_type:
+          $ref: "#/components/schemas/JourneyMapRequestType"
+      required:
+        - request_type
+        - query
+      type: object
     ListStreamColumn:
       description: Widget column.
       example: {"field": "timestamp", "width": "auto"}
@@ -28913,6 +29126,7 @@ components:
         - $ref: "#/components/schemas/HostMapWidgetDefinition"
         - $ref: "#/components/schemas/IFrameWidgetDefinition"
         - $ref: "#/components/schemas/ImageWidgetDefinition"
+        - $ref: "#/components/schemas/JourneyMapWidgetDefinition"
         - $ref: "#/components/schemas/ListStreamWidgetDefinition"
         - $ref: "#/components/schemas/LogStreamWidgetDefinition"
         - $ref: "#/components/schemas/MonitorSummaryWidgetDefinition"
