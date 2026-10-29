@@ -83,13 +83,13 @@ If you have a list of users from a survey, experiment, or CRM, upload it as a CS
 To create a segment from your own file:
 
 1. Click {{< ui >}}Import CSV{{< /ui >}} and upload your CSV file.
-1. Map a column in the file to a Product Analytics attribute. For example, match the `email` column in `leads.csv` to the user email attribute.
-1. Choose whether to include or exclude the users in the file.
+1. Next to {{< ui >}}column{{< /ui >}}, select the column in your file that holds user IDs or emails, such as `id`.
+1. Next to {{< ui >}}with{{< /ui >}}, select the Product Analytics attribute to match, such as {{< ui >}}User Id (@usr.id){{< /ui >}}.
+1. To exclude the users in the file instead, click {{< ui >}}matching{{< /ui >}} and flip the filter into an exclusion.
 
 The file needs a column with user IDs or user emails that match the `usr.id` or `usr.email` attribute in Product Analytics.
 
-<!-- TODO (DOCS-16074): Replace with new screenshot segment_link_csv_1.png: the Import CSV filter, mapping a CSV column to a Product Analytics user attribute. -->
-{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="The CSV import options for mapping a column in your file to a Product Analytics attribute." style="width:80%">}}
+{{< img src="product_analytics/segmentation/segment_link_csv_1.png" alt="A CSV import filter that reads: who are matching column id from segment-test-users.csv with User Id (@usr.id). The filter is highlighted." style="width:100%">}}
 
 {{% /collapse-content %}}
 
@@ -110,6 +110,8 @@ To create an account segment:
 
 ## Use segments across Product Analytics
 
+You can filter any Product Analytics view by a segment, including Pathways, Analytics Explorer, Funnels, and Retention. Click {{< ui >}}Add filter{{< /ui >}}, select the {{< ui >}}Segments{{< /ui >}} tab, and choose a segment. If the segment you need isn't listed, click {{< ui >}}Create new segment{{< /ui >}}.
+
 ### In Pathways
 Filter the Pathways visualization by a segment to see how those users move through your product.
 
@@ -119,20 +121,11 @@ Filter the Pathways visualization by a segment to see how those users move throu
 
 Filter the Analytics Explorer visualization by a segment to see how that group uses your product.
 
-{{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
-
-### In Funnels
-
-Filter a funnel to a specific segment, or compare multiple segments side by side to see how conversion rates differ between groups.
-
-- To filter a funnel by segment, select **Filter by** and choose your segment.
-- To compare segments, select **Compare**, then choose **By property or segment** and select the segments you want to compare.
-
-{{< img src="product_analytics/segmentation/filter_by_segment.png" alt="A funnel analysis filtered by a user segment." style="width:100%;">}}
+{{< img src="product_analytics/segmentation/segments_from_pana.png" alt="The Add filter menu open on a Product Analytics page, with the Segments tab highlighted and a list of saved segments to choose from." style="width:80%;">}}
 
 ### In Retention
 
-Apply a segment to a retention analysis to measure how well a specific group of users returns to your product over time. When building a retention graph, select a segment under **Define users** to scope the analysis to that group. You can also use the `group by` function to break down retention across event attributes, such as device type or country.
+Apply a segment to a retention analysis to measure how well a specific group of users returns to your product over time. To scope a retention graph to a segment, click {{< ui >}}Add filter{{< /ui >}}, select the {{< ui >}}Segments{{< /ui >}} tab, and choose the segment. You can also use the `group by` function to break down retention across event attributes, such as device type or country.
 
 {{< img src="product_analytics/segmentation/retention_analysis_segments.png" alt="A retention analysis scoped to a user segment." style="width:100%;">}}
 
