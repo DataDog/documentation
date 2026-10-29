@@ -1,5 +1,5 @@
 ---
-title: Set Up the Collector in the Datadog Agent on EKS Fargate
+title: Set Up the Agent's Collector on EKS Fargate
 code_lang: eks_fargate
 type: multi-code-lang
 code_lang_weight: 7
@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Deploy the Collector in the Agent on Amazon EKS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
+Deploy the Agent's Collector on Amazon EKS Fargate. The Agent's Collector is the OpenTelemetry Collector that runs inside the Datadog Agent. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -33,7 +33,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
 
 ### Set up Datadog API key
 
@@ -51,7 +51,7 @@ Replace `<DD_API_KEY>` with your actual Datadog API key.
 Add the Datadog Agent as a sidecar container in your application's pod spec. The agent and application containers share the same pod network namespace, so the application sends OTLP data to `localhost`.
 
 <div class="alert alert-info">
-  The Datadog Agent image must be <code>public.ecr.aws/datadog/agent:latest-full</code>. The <code>latest-full</code> image includes the DDOT Collector. The standard <code>latest</code> image does not.
+  The Datadog Agent image must be <code>public.ecr.aws/datadog/agent:latest-full</code>. The <code>latest-full</code> image includes the Agent's Collector. The standard <code>latest</code> image does not.
 </div>
 
 {{< code-block lang="yaml" filename="deployment.yaml" collapsible="true" >}}
@@ -111,7 +111,7 @@ Replace the following placeholders:
 
 ### Configure EKS resource detection
 
-The DDOT Collector's `infraattributes` processor enriches your telemetry with EKS infrastructure tags when Kubernetes resource attributes are present. Add the EKS resource detector to your OpenTelemetry SDK, or configure the `resourcedetection` processor in your collector configuration.
+The `infraattributes` processor in the Agent's Collector enriches your telemetry with EKS infrastructure tags when Kubernetes resource attributes are present. Add the EKS resource detector to your OpenTelemetry SDK, or configure the `resourcedetection` processor in your collector configuration.
 
 **Using the OpenTelemetry SDK (recommended)**: Add the AWS EKS resource detector to your application. This provides attributes such as `cloud.provider`, `cloud.platform`, `k8s.cluster.name`, and Fargate-specific metadata.
 
@@ -172,7 +172,7 @@ public String getDate() {
 
 [Unified service tagging][9] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
+In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The Agent's Collector detects this tagging configuration and applies it to the data it collects from containers.
 
 The `OTEL_SERVICE_NAME` and `OTEL_RESOURCE_ATTRIBUTES` environment variables in the deployment manifest above configure unified service tagging.
 
@@ -215,7 +215,7 @@ Monitor your runtime (JVM) metrics for your applications.
 
 ### Collector health metrics
 
-View metrics from the DDOT Collector to monitor the Collector health.
+View metrics from the Agent's Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 
