@@ -1491,13 +1491,6 @@
       "description": "Grant role to a restriction query returns \"OK\" response"
     }
   ],
-  "CreateBulkTagsMetricsConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
-    }
-  ],
   "CreateDerivedMetric": [
     {
       "group": "metrics",

@@ -81121,153 +81121,6 @@ components:
             $ref: "#/components/schemas/MetricAssetResponseIncluded"
           type: array
       type: object
-    MetricBulkConfigureTagsType:
-      default: metric_bulk_configure_tags
-      description: The metric bulk configure tags resource.
-      enum:
-        - metric_bulk_configure_tags
-      example: metric_bulk_configure_tags
-      type: string
-      x-enum-varnames:
-        - BULK_MANAGE_TAGS
-    MetricBulkTagConfigCreate:
-      description: Request object to bulk configure tags for metrics matching the given prefix.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/MetricBulkTagConfigCreateAttributes"
-        id:
-          $ref: "#/components/schemas/MetricBulkTagConfigNamePrefix"
-        type:
-          $ref: "#/components/schemas/MetricBulkConfigureTagsType"
-      required:
-        - id
-        - type
-      type: object
-    MetricBulkTagConfigCreateAttributes:
-      description: Optional parameters for bulk creating metric tag configurations.
-      properties:
-        emails:
-          $ref: "#/components/schemas/MetricBulkTagConfigEmailList"
-        exclude_tags_mode:
-          description: |-
-            When set to true, the configuration will exclude the configured tags and include any other submitted tags.
-            When set to false, the configuration will include the configured tags and exclude any other submitted tags.
-            Defaults to false.
-          type: boolean
-        include_actively_queried_tags_window:
-          description: |-
-            When provided, all tags that have been actively queried are
-            configured (and, therefore, remain queryable) for each metric that
-            matches the given prefix.  Minimum value is 1 second, and maximum
-            value is 7,776,000 seconds (90 days).
-          format: double
-          maximum: 7776000
-          minimum: 1
-          type: number
-        override_existing_configurations:
-          description: |-
-            When set to true, the configuration overrides any existing
-            configurations for the given metric with the new set of tags in this
-            configuration request. If false, old configurations are kept and
-            are merged with the set of tags in this configuration request.
-            Defaults to true.
-          type: boolean
-        tags:
-          $ref: "#/components/schemas/MetricBulkTagConfigTagNameList"
-      type: object
-    MetricBulkTagConfigCreateRequest:
-      description: Wrapper object for a single bulk tag configuration request.
-      properties:
-        data:
-          $ref: "#/components/schemas/MetricBulkTagConfigCreate"
-      required:
-        - data
-      type: object
-    MetricBulkTagConfigDelete:
-      description: Request object to bulk delete all tag configurations for metrics matching the given prefix.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/MetricBulkTagConfigDeleteAttributes"
-        id:
-          $ref: "#/components/schemas/MetricBulkTagConfigNamePrefix"
-        type:
-          $ref: "#/components/schemas/MetricBulkConfigureTagsType"
-      required:
-        - id
-        - type
-      type: object
-    MetricBulkTagConfigDeleteAttributes:
-      description: Optional parameters for bulk deleting metric tag configurations.
-      properties:
-        emails:
-          $ref: "#/components/schemas/MetricBulkTagConfigEmailList"
-      type: object
-    MetricBulkTagConfigDeleteRequest:
-      description: Wrapper object for a single bulk tag deletion request.
-      properties:
-        data:
-          $ref: "#/components/schemas/MetricBulkTagConfigDelete"
-      required:
-        - data
-      type: object
-    MetricBulkTagConfigEmailList:
-      description: A list of account emails to notify when the configuration is applied.
-      example: ["sue@example.com", "bob@example.com"]
-      items:
-        description: An email address.
-        type: string
-      type: array
-    MetricBulkTagConfigNamePrefix:
-      description: A text prefix to match against metric names.
-      example: "kafka.lag"
-      type: string
-    MetricBulkTagConfigResponse:
-      description: Wrapper for a single bulk tag configuration status response.
-      properties:
-        data:
-          $ref: "#/components/schemas/MetricBulkTagConfigStatus"
-      type: object
-    MetricBulkTagConfigStatus:
-      description: |-
-        The status of a request to bulk configure metric tags.
-        It contains the fields from the original request for reference.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/MetricBulkTagConfigStatusAttributes"
-        id:
-          $ref: "#/components/schemas/MetricBulkTagConfigNamePrefix"
-        type:
-          $ref: "#/components/schemas/MetricBulkConfigureTagsType"
-      required:
-        - id
-        - type
-      type: object
-    MetricBulkTagConfigStatusAttributes:
-      description: Optional attributes for the status of a bulk tag configuration request.
-      properties:
-        emails:
-          $ref: "#/components/schemas/MetricBulkTagConfigEmailList"
-        exclude_tags_mode:
-          description: |-
-            When set to true, the configuration will exclude the configured tags and include any other submitted tags.
-            When set to false, the configuration will include the configured tags and exclude any other submitted tags.
-          type: boolean
-        status:
-          description: The status of the request.
-          example: "Accepted"
-          type: string
-        tags:
-          $ref: "#/components/schemas/MetricBulkTagConfigTagNameList"
-      type: object
-    MetricBulkTagConfigTagNameList:
-      description: A list of tag names to apply to the configuration.
-      example: ["host", "pod_name", "is_shadow"]
-      items:
-        description: A metric tag name.
-        maxLength: 200
-        pattern: ^[A-Za-z][A-Za-z0-9\.\-\_:\/]*$
-        type: string
-      type: array
     MetricContentEncoding:
       default: deflate
       description: HTTP header used to compress the media-type.
@@ -105883,9 +105736,7 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: |-
-            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
-            or `completed`. Defaults to `all`, which returns recommendations in every status.
+          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105898,9 +105749,7 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: |-
-        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
-        or `*` for both.
+      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105936,9 +105785,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–5000).
+          description: Number of items returned in this page (1–10000).
           format: int32
-          maximum: 5000
+          maximum: 10000
           minimum: 1
           type: integer
         page_token:
@@ -163563,15 +163412,11 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page, from 1 to 5000. Defaults to 50.
+        - description: Number of results per page (1–10000).
           in: query
           name: page[size]
           schema:
-            default: 50
-            format: int32
-            maximum: 5000
-            minimum: 1
-            type: integer
+            type: string
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -163618,16 +163463,11 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
+                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -163639,10 +163479,6 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
-      x-permission:
-        operator: OR
-        permissions:
-          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -204987,169 +204823,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-  /api/v2/metrics/config/bulk-tags:
-    delete:
-      deprecated: true
-      description: |-
-        **Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.
-
-        Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.
-        Metrics are selected by passing a metric name prefix.
-        Results can be sent to a set of account email addresses, just like the same operation in the Datadog web app.
-        Can only be used with application keys of users with the `Manage Tags for Metrics` permission.
-      operationId: DeleteBulkTagsMetricsConfiguration
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      emails:
-                        - sue@example.com
-                        - bob@example.com
-                    id: kafka.lag
-                    type: metric_bulk_configure_tags
-            schema:
-              $ref: "#/components/schemas/MetricBulkTagConfigDeleteRequest"
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        emails:
-                          - test@example.com
-                        status: Accepted
-                      id: kafka.lag
-                      type: metric_bulk_configure_tags
-              schema:
-                $ref: "#/components/schemas/MetricBulkTagConfigResponse"
-          description: Accepted
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Too Many Requests
-      summary: Delete tags for multiple metrics
-      tags:
-        - Metrics
-      x-codegen-request-body-name: body
-      x-menu-order: 10
-      "x-permission":
-        operator: OR
-        permissions:
-          - metric_tags_write
-      x-sunset: "2026-11-01"
-    post:
-      deprecated: true
-      description: |-
-        **Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.
-
-        Create and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.
-        Metrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.
-        Results can be sent to a set of account email addresses, just like the same operation in the Datadog web app.
-        If multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not
-        expect deterministic ordering of concurrent calls. The `exclude_tags_mode` value will set all metrics that match the prefix to
-        the same exclusion state, metric tag configurations do not support mixed inclusion and exclusion for tags on the same metric.
-        Can only be used with application keys of users with the `Manage Tags for Metrics` permission.
-      operationId: CreateBulkTagsMetricsConfiguration
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      emails:
-                        - sue@example.com
-                        - bob@example.com
-                      tags:
-                        - host
-                        - pod_name
-                        - is_shadow
-                    id: kafka.lag
-                    type: metric_bulk_configure_tags
-            schema:
-              $ref: "#/components/schemas/MetricBulkTagConfigCreateRequest"
-        required: true
-      responses:
-        "202":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        emails:
-                          - test@example.com
-                        tags:
-                          - host
-                      id: kafka.lag
-                      type: metric_bulk_configure_tags
-              schema:
-                $ref: "#/components/schemas/MetricBulkTagConfigResponse"
-          description: Accepted
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Bad Request
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Forbidden
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/APIErrorResponse"
-          description: Too Many Requests
-      summary: Configure tags for multiple metrics
-      tags:
-        - Metrics
-      x-codegen-request-body-name: body
-      x-menu-order: 9
-      "x-permission":
-        operator: OR
-        permissions:
-          - metric_tags_write
-      x-sunset: "2026-11-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
@@ -205230,7 +204903,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 30
+      x-menu-order: 28
       "x-permission":
         operator: OR
         permissions:
@@ -205262,7 +204935,7 @@ paths:
       summary: Delete a derived metric
       tags:
         - Metrics
-      x-menu-order: 33
+      x-menu-order: 31
       "x-permission":
         operator: OR
         permissions:
@@ -205314,7 +204987,7 @@ paths:
       summary: Get a derived metric
       tags:
         - Metrics
-      x-menu-order: 31
+      x-menu-order: 29
       "x-permission":
         operator: OR
         permissions:
@@ -205388,7 +205061,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 32
+      x-menu-order: 30
       "x-permission":
         operator: OR
         permissions:
@@ -205471,7 +205144,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 27
+      x-menu-order: 25
       "x-permission":
         operator: OR
         permissions:
@@ -205507,7 +205180,7 @@ paths:
       summary: Delete a historical metrics configuration
       tags:
         - Metrics
-      x-menu-order: 29
+      x-menu-order: 27
       "x-permission":
         operator: OR
         permissions:
@@ -205560,7 +205233,7 @@ paths:
       summary: Get a historical metrics configuration
       tags:
         - Metrics
-      x-menu-order: 28
+      x-menu-order: 26
       "x-permission":
         operator: OR
         permissions:
@@ -205687,7 +205360,7 @@ paths:
       summary: List tag indexing rule exemptions
       tags:
         - Metrics
-      x-menu-order: 34
+      x-menu-order: 32
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.pagination.next_cursor
@@ -205772,7 +205445,7 @@ paths:
       summary: List tag indexing rules
       tags:
         - Metrics
-      x-menu-order: 17
+      x-menu-order: 15
       "x-permission":
         operator: OR
         permissions:
@@ -205854,7 +205527,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 18
+      x-menu-order: 16
       "x-permission":
         operator: OR
         permissions:
@@ -205921,7 +205594,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 19
+      x-menu-order: 17
       "x-permission":
         operator: OR
         permissions:
@@ -205967,7 +205640,7 @@ paths:
       summary: Delete a tag indexing rule
       tags:
         - Metrics
-      x-menu-order: 22
+      x-menu-order: 20
       "x-permission":
         operator: OR
         permissions:
@@ -206035,7 +205708,7 @@ paths:
       summary: Get a tag indexing rule
       tags:
         - Metrics
-      x-menu-order: 20
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:
@@ -206130,7 +205803,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 21
+      x-menu-order: 19
       "x-permission":
         operator: OR
         permissions:
@@ -206400,7 +206073,7 @@ paths:
       summary: Related Assets to a Metric
       tags:
         - Metrics
-      x-menu-order: 12
+      x-menu-order: 10
   /api/v2/metrics/{metric_name}/estimate:
     get:
       description: Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.
@@ -206502,7 +206175,7 @@ paths:
       summary: Tag Configuration Cardinality Estimator
       tags:
         - Metrics
-      x-menu-order: 11
+      x-menu-order: 9
       "x-permission":
         operator: OPEN
         permissions: []
@@ -206560,7 +206233,7 @@ paths:
       summary: Get tag key cardinality details
       tags:
         - Metrics
-      x-menu-order: 13
+      x-menu-order: 11
       "x-permission":
         operator: OR
         permissions:
@@ -206603,7 +206276,7 @@ paths:
       summary: Delete a tag indexing rule exemption
       tags:
         - Metrics
-      x-menu-order: 35
+      x-menu-order: 33
       "x-permission":
         operator: OR
         permissions:
@@ -206674,7 +206347,7 @@ paths:
       summary: Get a tag indexing rule exemption
       tags:
         - Metrics
-      x-menu-order: 24
+      x-menu-order: 22
       "x-permission":
         operator: OR
         permissions:
@@ -206750,7 +206423,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 25
+      x-menu-order: 23
       "x-permission":
         operator: OR
         permissions:
@@ -206833,7 +206506,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 24
       "x-permission":
         operator: OR
         permissions:
@@ -206888,7 +206561,7 @@ paths:
       summary: List tag indexing rules for a metric
       tags:
         - Metrics
-      x-menu-order: 23
+      x-menu-order: 21
       "x-permission":
         operator: OR
         permissions:
@@ -219185,7 +218858,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 14
       "x-permission":
         operator: OR
         permissions:
@@ -219253,7 +218926,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 15
+      x-menu-order: 13
       "x-permission":
         operator: OR
         permissions:
@@ -243169,7 +242842,7 @@ paths:
       tags:
         - Metrics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 12
   /api/v2/service_accounts:
     post:
       description: Create a service account for your organization.
