@@ -57,7 +57,13 @@ An indicator published with `"revoked": true` is deleted from the reference tabl
 
 ## Add a TAXII server
 
-Datadog validates the API root URL and credentials when the first enabled collection is polled, not when you save the server. After you save a server, you cannot change its name, API root URL, or authentication method, and stored credentials are not displayed.
+<div class="alert alert-info">
+<ul>
+<li>Check the server's name, API root URL, and authentication method before you save it. You can't change these after saving.</li>
+<li>Stored credentials aren't viewable, but you can replace them later. See <a href="#replace-credentials">Replace credentials</a>.</li>
+<li>Datadog validates the API root URL and credentials when the first enabled collection is polled, not when you save the server.</li>
+</ul>
+</div>
 
 1. In Datadog, go to {{< ui >}}Integrations{{< /ui >}} and open the {{< ui >}}TAXII{{< /ui >}} tile.
 1. Click {{< ui >}}Configure{{< /ui >}}, then click {{< ui >}}New{{< /ui >}}.
@@ -108,7 +114,7 @@ The new credentials apply from the next poll. If they are invalid, the server's 
 
 ## Delete a collection or server
 
-On the server's page ({{< ui >}}Integrations{{< /ui >}} > {{< ui >}}TAXII{{< /ui >}} > {{< ui >}}Configure{{< /ui >}}, then select the server):
+On the server's page ({{< ui >}}Integrations{{< /ui >}} > {{< ui >}}TAXII{{< /ui >}} > {{< ui >}}Configure{{< /ui >}}, then select the server), you can delete a collection or the entire server:
 
 - {{< ui >}}Delete Collection{{< /ui >}}, under the collection's row in the {{< ui >}}Collections{{< /ui >}} table, stops polling, removes the collection's indicators, and stops enrichment. The server's other collections are not affected.
 - {{< ui >}}Delete TAXII Server{{< /ui >}}, at the top of the page, deletes all of the server's collections and their indicators, then the server and its credentials.
