@@ -48,7 +48,7 @@ The following tags are automatically added to logs by the Datadog Agent:
 
 ## Filter tags before ingestion
 
-Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can filter selected tags before the Agent sends logs to Datadog, which can help reduce the size of log payloads. Log tag filtering is available in Agent 7.85.0 and later.
+Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can filter selected tags before the Agent sends logs to Datadog, which can help reduce the size of log payloads. Log tag filtering is available in Agent 7.86.0 and later.
 
 Choose the filter scope based on where you want the rule to apply:
 
@@ -59,7 +59,7 @@ Before filtering a tag, review whether it supports pipelines, indexes, archives,
 
 ### Global filters
 
-Configure global filters in `datadog.yaml` or with the `DD_LOGS_CONFIG_TAG_FILTERS` environment variable:
+Configure global filters in `datadog.yaml` or with the `DD_LOGS_CONFIG_TAG_FILTERS` environment variable. The following examples remove all `filename` and `dirname` tags except the `filename:audit.log` tag from every supported log source:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -116,11 +116,9 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-These examples remove all `filename` and `dirname` tags except the `filename:audit.log` tag from every supported log source.
-
 ### Per-source filters
 
-Add `tag_filters` to a log source in its integration configuration to limit the filter to that source:
+Add `tag_filters` to a log source in its integration configuration to limit the filter to that source. The following example removes the `dirname` tag only from logs collected from `/var/log/my-app/*.log`:
 
 ```yaml
 logs:
@@ -133,7 +131,7 @@ logs:
         - "dirname:*"
 ```
 
-This example removes the `dirname` tag only from logs collected from `/var/log/my-app/*.log`. Per-source rules are evaluated before global rules, so a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
+Per-source rules are evaluated before global rules, so a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
 
 Patterns use `key:value` syntax. Keys must match exactly, values can contain `*` wildcards, and matching is not case-sensitive. An `include` pattern preserves tags that match an `exclude` pattern; it does not remove other tags.
 
