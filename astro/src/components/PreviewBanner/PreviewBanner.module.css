@@ -1,0 +1,22 @@
+/* Hugo's exact values; see the HUGO_DUPLICATE note in PreviewBanner.astro. */
+.preview-banner {
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(255, 207, 0, 0.85);
+  z-index: 999;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 3px;
+  font-family: monospace;
+  width: 100%;
+  text-align: center;
+}
+
+/* Hugo's Bootstrap link color, with no underline. */
+.preview-banner__link {
+  color: #632ca6;
+  text-decoration: none;
+}
