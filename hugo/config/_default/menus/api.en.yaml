@@ -3516,6 +3516,32 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 79
+    - name: Get a rule proposal
+      url: /api/latest/security-monitoring/get-a-rule-proposal/
+      identifier: security-monitoring-get-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 189
+    - name: Start a rule proposal
+      url: /api/latest/security-monitoring/start-a-rule-proposal/
+      identifier: security-monitoring-start-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 188
     - name: Bulk convert rules to Terraform
       url: /api/latest/security-monitoring/bulk-convert-rules-to-terraform/
       identifier: security-monitoring-bulk-convert-rules-to-terraform
