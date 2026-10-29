@@ -35,8 +35,7 @@ function initOtelCompat(root) {
         sdk: th.dataset.sdk,
         receiver: th.dataset.receiver,
         confirmed: th.dataset.confirmed !== 'false',
-        recommended: th.dataset.recommended === 'true',
-        label: th.querySelector('.otel-compat__pair-label').textContent.trim()
+        recommended: th.dataset.recommended === 'true'
     }));
     const pairById = new Map(pairs.map((p) => [p.id, p]));
 
@@ -79,7 +78,6 @@ function initOtelCompat(root) {
         [...slot.receiver.options].forEach((option) => {
             const pair = pairById.get(`${slot.sdk.value}.${option.value}`);
             option.disabled = !pair;
-            option.textContent = option.dataset.label + (pair && !pair.confirmed ? ' (not confirmed)' : '');
             if (pair && (!firstValid || (pair.confirmed && !firstValid.confirmed))) {
                 firstValid = pair;
             }
@@ -138,11 +136,6 @@ function initOtelCompat(root) {
         }
         showColumns(shown);
 
-        shown.forEach((id) => {
-            const pair = pairById.get(id);
-            if (!pair.confirmed) messages.push(`${pair.label} is not confirmed to work.`);
-        });
-
         // In compare view, optionally hide rows where both setups have the same support value
         const filterDiff = view === 'compare' && shown.length === 2 && diffInput.checked;
         let hiddenRows = 0;
@@ -152,10 +145,10 @@ function initOtelCompat(root) {
             row.hidden = same;
             if (same) hiddenRows += 1;
         });
-        if (filterDiff) {
-            messages.push(hiddenRows === rows.length - 1
-                ? 'These setups support the same features.'
-                : `Hiding ${hiddenRows} features that both setups support the same way.`);
+        if (filterDiff && hiddenRows === rows.length - 1) {
+            messages.push('These setups support the same features.');
+        } else if (filterDiff && hiddenRows > 0) {
+            messages.push(`Hiding ${hiddenRows} features that both setups support the same way.`);
         }
 
         status.textContent = messages.join(' ');

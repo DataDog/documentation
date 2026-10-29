@@ -33,47 +33,37 @@
 {{- $uid := printf "otel-compat-%d" .Ordinal -}}
 
 <div class="otel-compat" id="{{ $uid }}" data-otel-compat>
-  <div class="otel-compat__controls" hidden>
-    <fieldset class="otel-compat__view">
-      <legend>View</legend>
-      <label><input type="radio" name="{{ $uid }}-view" value="compare" checked> Compare two setups</label>
-      <label><input type="radio" name="{{ $uid }}-view" value="single"> One setup</label>
-      <label><input type="radio" name="{{ $uid }}-view" value="all"> All setups</label>
+  <div class="otel-compat__controls exclude-from-md" hidden>
+    <fieldset class="otel-compat__group otel-compat__view">
+      <legend class="otel-compat__label">View</legend>
+      <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="compare" checked><span>Compare two setups</span></label>
+      <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="single"><span>One setup</span></label>
+      <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="all"><span>All setups</span></label>
     </fieldset>
     <div class="otel-compat__setups">
       {{- range $slot := slice "a" "b" }}
-      <fieldset class="otel-compat__setup" data-slot="{{ $slot }}">
-        <legend>{{ cond (eq $slot "a") "Setup 1" "Setup 2" }}</legend>
-        <label>SDK
-          <select data-role="sdk">
+      {{- $name := cond (eq $slot "a") "Setup 1" "Setup 2" }}
+      <fieldset class="otel-compat__group otel-compat__setup" data-slot="{{ $slot }}">
+        <legend class="otel-compat__label">{{ $name }}</legend>
+        <div class="otel-compat__selects">
+          <select class="otel-compat__select" data-role="sdk" aria-label="{{ $name }}: SDK">
             {{- range $data.sdks }}
             <option value="{{ .id }}">{{ .label }}</option>
             {{- end }}
           </select>
-        </label>
-        <label>Sends to
-          <select data-role="receiver">
+          <span class="otel-compat__arrow" aria-hidden="true">&rarr;</span>
+          <select class="otel-compat__select" data-role="receiver" aria-label="{{ $name }}: sends data to">
             {{- range $data.receivers }}
-            <option value="{{ .id }}" data-label="{{ .label }}">{{ .label }}</option>
+            <option value="{{ .id }}">{{ .label }}</option>
             {{- end }}
           </select>
-        </label>
+        </div>
       </fieldset>
       {{- end }}
     </div>
     <label class="otel-compat__diff"><input type="checkbox" data-role="diff"> Show only features that differ</label>
     <p class="otel-compat__status" aria-live="polite"></p>
   </div>
-
-  <ul class="otel-compat__legend">
-    <li><span class="otel-compat__mark otel-compat__mark--supported"><i class="icon-check-bold" aria-hidden="true"></i></span> Supported</li>
-    <li><span class="otel-compat__mark otel-compat__mark--partial">Partial</span> Supported with limits</li>
-    <li><span class="otel-compat__mark otel-compat__mark--not_supported" aria-hidden="true">&mdash;</span> Not supported</li>
-    <li><span class="otel-compat__mark otel-compat__mark--unknown"></span> Blank: not yet documented</li>
-    {{- if where $data.features "requires_agent" true }}
-    <li><span class="otel-compat__badge otel-compat__badge--agent">Agent required</span> Works only when the Datadog Agent runs</li>
-    {{- end }}
-  </ul>
 
   <div class="otel-compat__scroll">
     <table class="otel-compat__table">
@@ -87,7 +77,6 @@
           <th scope="col" data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-sdk="{{ $p.sdk }}" data-receiver="{{ $p.receiver }}" data-confirmed="{{ not $unconfirmed }}" data-recommended="{{ $p.recommended | default false }}"{{ if $unconfirmed }} hidden{{ end }}>
             {{- with $p.name }}<span class="otel-compat__pair-name">{{ . }}</span>{{ end }}
             {{- if $p.recommended }}<span class="otel-compat__badge otel-compat__badge--recommended">Recommended</span>{{ end }}
-            {{- if $unconfirmed }}<span class="otel-compat__badge otel-compat__badge--unconfirmed">Setup not confirmed</span>{{ end }}
             <span class="otel-compat__pair-label">
               {{- if $p.link }}<a href="{{ $p.link | relLangURL }}">{{ $sdk.label }} + {{ $receiver.label }}</a>{{ else }}{{ $sdk.label }} + {{ $receiver.label }}{{ end -}}
             </span>

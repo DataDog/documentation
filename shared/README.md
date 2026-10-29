@@ -144,7 +144,7 @@ support value.
 | `name`        | no       | Short name shown above the pair, such as `DDOT`                      |
 | `recommended` | no       | `true` marks a recommended setup. The first two are compared by default. |
 | `link`        | no       | Setup guide for this pair                                            |
-| `confirmed`   | no       | `false` means the pair may not work. It is left out of the full table and labeled in the picker. |
+| `confirmed`   | no       | `false` means the pair may not work. The picker offers it, but the full table leaves it out. |
 
 A pair that isn't listed is disabled in the setup picker.
 
