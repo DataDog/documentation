@@ -69,10 +69,15 @@ Then copy and run the generated command.
 If you already have a Datadog Agent installed, enable SSI remotely from Datadog. You do not need to run commands on each host.
 
 1. In Datadog, go to [**APM > Instrument a Service**][21].
+
 1. Under {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, select {{< ui >}}Deploy on existing hosts{{< /ui >}} to instrument your services remotely through the Datadog Agent.
+
 1. Under {{< ui >}}Which hosts should we instrument?{{< /ui >}}, use the scope filters ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) to narrow down your hosts. Then select the Agents you want to instrument on the {{< ui >}}Eligible for deployment{{< /ui >}} tab. Hosts that can't be instrumented appear on the {{< ui >}}Excluded from deployment{{< /ui >}} tab.
+
 1. In {{< ui >}}Configure SDKs installation{{< /ui >}}, click {{< ui >}}Yes{{< /ui >}} to have Datadog automatically install the tracing SDKs. To pin specific SDK versions instead of the latest, expand {{< ui >}}Customize library versions{{< /ui >}}.
+
 1. In {{< ui >}}Configure rollout strategy{{< /ui >}}, choose what percentage of Agents to deploy to at a time. Datadog shows the resulting stages and an estimated duration. Deployments automatically pause if three consecutive Agents fail or if failures reach 10% of the total. You can re-run the deployment later.
+
 1. In {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, check the {{< ui >}}Configuration Summary{{< /ui >}} (toggle between {{< ui >}}Summary{{< /ui >}} and {{< ui >}}YAML{{< /ui >}}), then click {{< ui >}}Apply Instrumentation{{< /ui >}}.
 
 ## Verify the installation
