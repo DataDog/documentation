@@ -461,4 +461,4 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 [16]: /opentelemetry/interoperability/environment_variable_support
 [24]: /getting_started/tracing/#set-up-datadog-apm
 [25]: /opentelemetry/compatibility/#api-support
-[31]: /opentelemetry/instrument/dd_sdks/ddot_setup/
+[31]: /opentelemetry/instrument/dd_sdks/

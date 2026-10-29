@@ -28,7 +28,7 @@ A Datadog SDK sends data in one of two ways:
 - **With the Datadog Agent**: The Datadog SDK sends data to the Datadog Agent, and you add custom instrumentation with the OpenTelemetry API.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/dd_sdks/ddot_setup/" >}}Set up DDOT SDKs{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/" >}}Set up DDOT SDKs{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support" >}}Use the Datadog SDK with the OpenTelemetry API{{< /nextlink >}}
 {{< /whatsnext >}}
 
