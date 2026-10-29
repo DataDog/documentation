@@ -34,8 +34,6 @@ Before you begin, make sure you have:
 
 ## Grant Datadog access in Fabric
 
-Azure role-based access control (RBAC) roles, such as Owner or Contributor on a subscription or Fabric capacity, don't grant access inside Fabric. Datadog's access comes only from the Fabric tenant setting and workspace roles described in the following sections.
-
 ### Step 1: Check the tenant setting
 
 1. In Fabric, open the [tenant settings][3].
@@ -66,7 +64,7 @@ The Contributor role supports all Data Observability features for Fabric Warehou
 {{% /tab %}}
 {{% tab "Viewer" %}}
 
-The Viewer role grants read-only access to every warehouse in the workspace. It supports metadata sync and data quality monitors, but not query history or lineage. Leave {{< ui >}}Collect query history{{< /ui >}} turned off when you [configure the integration](#configure-the-integration-in-datadog).
+The Viewer role grants read-only access to every warehouse in the workspace. It supports metadata sync and data quality monitors, but not query history or lineage. Leave {{< ui >}}Collect query history{{< /ui >}} turned off when you [configure the integration][6].
 
 SQL-level restrictions such as `DENY` statements, row-level security, column-level security, and dynamic data masking apply to the app registration. Tables and columns it can't read don't appear in Datadog, and monitors on them fail.
 
@@ -82,14 +80,22 @@ You can also assign the role to a Microsoft Entra security group that contains t
 1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][4].
 2. In the {{< ui >}}Microsoft Fabric Warehouse{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.
 
+   {{< img src="data_observability/fabric/data_obs_fabric_on_integrations_page.png" alt="Microsoft Fabric Warehouse on the Settings page of Data Observability integrations" style="width:100%;" >}}
+
    If the section shows {{< ui >}}Install Azure integration{{< /ui >}}, configure the [Datadog Azure integration][2] with an app registration first.
 
 3. Select the app registration that you added to your workspaces, and click {{< ui >}}Configure{{< /ui >}}.
+
+   {{< img src="data_observability/fabric/data_obs_fabric_select_app_registration.png" alt="Selecting an Azure app registration for the Microsoft Fabric Warehouse Data Observability integration" style="width:100%;" >}}
+
 4. Turn on {{< ui >}}Monitor Fabric Warehouses{{< /ui >}}.
 5. Optionally, add {{< ui >}}Warehouse filters{{< /ui >}}. Leave the field empty to monitor every warehouse the app registration can access, or enter one filter per warehouse:
    - `<WAREHOUSE_NAME>`: Matches a warehouse with this name in any workspace.
    - `<WORKSPACE_ID>/<WAREHOUSE_NAME>`: Matches a warehouse in one workspace. The workspace ID appears in the workspace URL after `/groups/`.
 6. If the app registration has the Contributor role, turn on {{< ui >}}Collect query history{{< /ui >}}.
+
+   {{< img src="data_observability/fabric/data_obs_fabric_configure.png" alt="Warehouse monitoring, warehouse filters, and query history settings for the Microsoft Fabric Warehouse Data Observability integration" style="width:100%;" >}}
+
 7. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Next steps
@@ -129,3 +135,4 @@ If query history fails with a permissions error, assign the app registration the
 [3]: https://learn.microsoft.com/fabric/admin/about-tenant-settings#how-to-get-to-the-tenant-settings
 [4]: https://app.datadoghq.com/data-obs/settings/integrations
 [5]: /monitors/types/data_observability/
+[6]: #configure-the-integration-in-datadog
