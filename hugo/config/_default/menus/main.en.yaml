@@ -5991,11 +5991,16 @@ menu:
       identifier: cicd
       parent: software_delivery_heading
       weight: 5000
+    - name: CI Visibility
+      url: continuous_integration/
+      parent: cicd
+      identifier: cicd_ci_visibility
+      weight: 1
     - name: CI Pipeline Setup
       url: continuous_integration/pipelines/
       parent: cicd
       identifier: cicd_pipeline_setup
-      weight: 1
+      weight: 2
     - name: AWS CodePipeline
       url: continuous_integration/pipelines/awscodepipeline/
       parent: cicd_pipeline_setup
@@ -6061,11 +6066,16 @@ menu:
       parent: cicd_pipeline_setup
       identifier: cicd_pipeline_custom_tags_and_measures
       weight: 113
+    - name: Test Optimization
+      url: tests/
+      parent: cicd
+      identifier: cicd_test_optimization
+      weight: 3
     - name: Test Suite Setup
       url: tests/setup/
       parent: cicd
       identifier: cicd_test_setup
-      weight: 2
+      weight: 4
     - name: .NET
       url: tests/setup/dotnet/
       parent: cicd_test_setup
@@ -6140,12 +6150,12 @@ menu:
       url: cicd/overview/
       parent: cicd
       identifier: cicd_overview
-      weight: 3
+      weight: 5
     - name: Explorer
       url: continuous_integration/explorer/
       parent: cicd
       identifier: cicd_explorer
-      weight: 4
+      weight: 6
     - name: Search Syntax
       url: continuous_integration/explorer/search_syntax/
       parent: cicd_explorer
@@ -6175,7 +6185,7 @@ menu:
       url: tests/flaky_management/
       parent: cicd
       identifier: cicd_flaky_management
-      weight: 5
+      weight: 7
     - name: Working with Flaky Tests
       url: tests/flaky_tests/
       parent: cicd_flaky_management
@@ -6185,7 +6195,7 @@ menu:
       url: cicd/features/
       parent: cicd
       identifier: cicd_features
-      weight: 6
+      weight: 8
     - name: Automatic Job Retries
       url: continuous_integration/pipelines/automatic_retries/
       parent: cicd_features
@@ -6290,17 +6300,17 @@ menu:
       url: monitors/types/ci/?tab=pipelines
       parent: cicd
       identifier: cicd_monitors
-      weight: 7
+      weight: 9
     - name: Guides
       url: cicd/guides/
       parent: cicd
       identifier: cicd_guides
-      weight: 8
+      weight: 10
     - name: Troubleshooting
       url: cicd/troubleshooting/
       parent: cicd
       identifier: cicd_troubleshooting
-      weight: 9
+      weight: 11
     - name: CI Pipelines
       url: cicd/troubleshooting/pipelines/
       parent: cicd_troubleshooting
