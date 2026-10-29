@@ -123,7 +123,7 @@ DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
 
 In headless mode:
 
-- `--site` is optional. If you leave it out, `pup setup` uses the `DD_SITE` environment variable, then the site Pup is configured to use, then `datadoghq.com`.
+- `--site` is optional. If you leave it out, `pup setup` uses the `DD_SITE` environment variable, then the site from your Pup login or config file, then `datadoghq.com`.
 - `--product` is optional. If you leave it out, `pup setup` analyzes the repository and sets up the top recommended product. To see the recommendations without changing anything, add `--recommend-only`, which prints them as JSON and exits.
 
 Headless mode signs in with the first of these that's available:
