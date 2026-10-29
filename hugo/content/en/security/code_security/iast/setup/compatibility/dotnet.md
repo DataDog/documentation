@@ -24,14 +24,14 @@ The minimum tracer version to get all supported application security capabilitie
 **Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-| Type              | Threat Detection support | Software Composition Analysis            |
-|-------------------|--------------------------|------------------------------------------|
-| Docker            | {{< X >}}                | {{< X >}}                                |
-| Kubernetes        | {{< X >}}                | {{< X >}}                                |
-| Amazon ECS        | {{< X >}}                | {{< X >}}                                |
-| AWS Fargate       | {{< X >}}                | {{< X >}}                                |
-| AWS Lambda        | {{< X >}}                |                                          |
-| Azure App Service | {{< X >}}                | {{< X >}}                                |
+| Type              | Threat Detection support | Software Composition Analysis | Code Security |
+|-------------------|--------------------------|-------------------------------|---------------|
+| Docker            | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| AWS Lambda        | {{< X >}}                |                               |               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 
 **Note**: Azure App Service is supported for **web applications only**. Application Security capabilities are not supported for Azure Functions.
 
@@ -39,24 +39,38 @@ The minimum tracer version to get all supported application security capabilitie
 
 ### Supported .NET versions
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
-| ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | latest                      |
-| 4.7.2                   |                       | GA | latest                      |
-| 4.7                     |                       | GA | latest                      |
-| 4.6.2                   |                       | GA | latest                      |
-| 4.6.1                   | 04/26/2022            | GA   | latest |
+Code Security supports the following .NET and .NET Core runtimes:
 
+| .NET Version  | Microsoft End of Life | Support level | Package version    |
+| ------------- | --------------------- | ------------- | ------------------ |
+| .NET 10       | _November 14, 2028_   | GA            | latest (>= 3.31.0) |
+| .NET 9        | _November 10, 2026_   | GA            | latest (>= 3.6.0)  |
+| .NET 8        | _November 10, 2026_   | GA            | latest (>= 2.42.0) |
+| .NET 7        | May 14, 2024          | GA            | latest (>= 2.42.0) |
+| .NET 6        | November 12, 2024     | GA            | latest (>= 2.42.0) |
+| .NET 5        | May 10, 2022          | GA            | latest (>= 2.42.0) |
+| .NET Core 3.1 | December 13, 2022     | GA            | latest (>= 2.42.0) |
+
+Code Security supports the following .NET Framework versions:
+
+| .NET Framework Version | Microsoft End of Life | Support level | Package version |
+| ---------------------- | --------------------- | ------------- | --------------- |
+| 4.8                    |                       | GA            | latest          |
+| 4.7.2                  |                       | GA            | latest          |
+| 4.7                    |                       | GA            | latest          |
+| 4.6.2                  |                       | GA            | latest          |
+| 4.6.1                  | April 26, 2022        | GA            | latest          |
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, ARM64
 - Alpine Linux (musl) x86-64, ARM64
-- macOS (Darwin) x86-64, ARM64
 - Windows (msvc) x86, x86-64
 
-
+For more information on the runtimes and operating systems that the .NET tracer supports, see [.NET and .NET Core Compatibility Requirements][1] and [.NET Framework Compatibility Requirements][2].
 
 ### Web framework compatibility
+
+**Web framework integrations provide:**
 
 - Attacker source HTTP request details
 - Tags for the HTTP request (status code, method, etc)
@@ -64,11 +78,12 @@ These are supported on the following architectures:
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks.
-- If your framework is not listed below, **Code Security** will still detect Insecure Cookie vulnerabilities.
+- If your framework is not listed below, **Code Security** still detects Insecure Cookie vulnerabilities.
 
 
 | Framework                  | Threat Detection supported? | Threat Protection supported? | Code Security? |
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ASP.NET Core (including minimal APIs) | {{< X >}} | {{< X >}} | {{< X >}} |
 | ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
 | ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
 
