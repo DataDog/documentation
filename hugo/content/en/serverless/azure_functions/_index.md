@@ -270,6 +270,7 @@ To enable durable function instrumentation, add the following settings to your `
 ```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
+<!-- vale on -->
 
 ## What's next?
 
