@@ -187,7 +187,6 @@ features:
     label: Cloud Network Monitoring
     abbr: CNM
     link: /network_monitoring/performance/
-    note: Span-level or endpoint-level monitoring is not supported.
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -313,7 +312,6 @@ features:
     label: Real User Monitoring
     abbr: RUM
     link: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
-    note: To turn on full RUM functionality, inject supported headers to correlate RUM and traces.
     sdk:
       datadog_sdk: supported
       otel_sdk: not_supported

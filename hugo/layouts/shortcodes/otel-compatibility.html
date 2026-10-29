@@ -98,7 +98,6 @@
             {{- if $f.link }}<a href="{{ $f.link | relLangURL }}">{{ $f.label }}</a>{{ else }}{{ $f.label }}{{ end }}
             {{- with $f.abbr }} ({{ . }}){{ end }}
             {{- if $f.requires_agent }} <span class="otel-compat__badge otel-compat__badge--agent">Agent required</span>{{ end }}
-            {{- with $f.note }}<span class="otel-compat__row-note">{{ . | markdownify }}</span>{{ end -}}
           </th>
           {{- range $p := $data.pairs }}
           {{- $c := partial "otel-compatibility/cell.html" (dict "feature" $f "sdk" $p.sdk "receiver" $p.receiver) }}

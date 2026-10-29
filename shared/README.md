@@ -157,7 +157,6 @@ A pair that isn't listed is disabled in the setup picker.
 | `abbr`           | no       | Abbreviation shown after the name, such as `DBM`                   |
 | `link`           | no       | Feature docs                                                       |
 | `requires_agent` | no       | `true` shows an "Agent required" marker on the row. Set it only when the docs state it. |
-| `note`           | no       | Note about the feature as a whole, shown under its name            |
 | `sdk`            | no       | Map of SDK `id` to a support value                                 |
 | `receiver`       | no       | Map of receiver `id` to a support value                            |
 | `overrides`      | no       | List of exact-pair values that replace the computed value          |
