@@ -121,7 +121,7 @@ To enable meeting summaries for incident Microsoft Teams meetings:
 
 When a Microsoft Teams meeting attached to an incident starts, a Datadog Transcriber attempts to join. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin.
 
-For details on where summaries are posted and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
+For details on where summaries are posted, reviewing summaries, and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
 
 ## Using the Datadog tab in Microsoft Teams
 
