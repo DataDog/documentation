@@ -1549,6 +1549,11 @@ menu:
       identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
+    - name: Improve agents using traces
+      url: actions/agents/improve_agents_with_traces/
+      identifier: bits_ai_agent_builder_improve_with_traces
+      parent: bits_ai_agent_builder
+      weight: 101
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
@@ -3004,6 +3009,11 @@ menu:
       identifier: agents
       parent: actions_heading
       weight: 20000
+    - name: Improve agents using traces
+      url: actions/agents/improve_agents_with_traces/
+      parent: agents
+      identifier: agents_improve_with_traces
+      weight: 1
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
@@ -5549,11 +5559,16 @@ menu:
       identifier: data_lakes
       parent: quality_monitoring
       weight: 250000
-    - name: Iceberg Tables (AWS Glue)
+    - name: AWS Glue
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Amazon Athena Query History
+      url: data_observability/quality_monitoring/data_lakes/amazon_athena
+      identifier: amazon_athena_query_history
+      parent: data_lakes
+      weight: 2000000
     - name: Transactional Databases
       url: data_observability/quality_monitoring/transactional_databases
       identifier: transactional_databases
@@ -6697,6 +6712,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
+    - name: Workflow Automation
+      url: feature_flags/concepts/workflow_automation
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_workflow_automation
+      weight: 322
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags

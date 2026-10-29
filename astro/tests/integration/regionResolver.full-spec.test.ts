@@ -63,18 +63,25 @@ function operations(raw: string) {
 
 const ALL_OPERATIONS = [...operations(V1_SPEC_RAW), ...operations(V2_SPEC_RAW)];
 
+function siteEnum({ spec, operation }: (typeof ALL_OPERATIONS)[number]) {
+  const servers = operation.servers ?? spec.servers;
+  return servers?.[0]?.variables?.site?.enum;
+}
+
 /**
- * The five operations whose `site` enum lists fully-qualified per-region hosts
- * instead of bare site domains. Before the `exact_domains` fallback existed,
- * every one of these resolved to zero regions and rendered no endpoint URL.
+ * Operations whose `site` enum lists fully-qualified per-region hosts instead
+ * of bare site domains. These resolve only through the `exact_domains`
+ * fallback. The list comes from the spec, so a new operation of this kind is
+ * covered without editing this file.
  */
-const FULLY_QUALIFIED_HOST_OPERATIONS = [
-  "POST /api/v2/on-call/pages",
-  "POST /api/v2/on-call/pages/{page_id}/acknowledge",
-  "POST /api/v2/on-call/pages/{page_id}/escalate",
-  "POST /api/v2/on-call/pages/{page_id}/resolve",
-  "POST /api/v2/prodlytics",
-];
+const SITE_DOMAINS = new Set(getDefaultRegions().map((r) => r.site));
+const FULLY_QUALIFIED_HOST_OPERATIONS = ALL_OPERATIONS.filter((entry) => {
+  const hosts = siteEnum(entry);
+  return Array.isArray(hosts) && !hosts.some((d) => SITE_DOMAINS.has(d));
+});
+const ON_CALL_PAGING_OPERATIONS = FULLY_QUALIFIED_HOST_OPERATIONS.filter(
+  ({ id }) => id.includes("/on-call/pages"),
+);
 
 describe("getRegions across the full spec", () => {
   it("finds every operation", () => {
@@ -100,15 +107,17 @@ describe("getRegions across the full spec", () => {
     expect([...unknown]).toEqual([]);
   });
 
+  it("finds the on-call paging operations", () => {
+    // Guards the two tests below: if the filter matches nothing, they pass
+    // without checking anything.
+    expect(ON_CALL_PAGING_OPERATIONS.length).toBeGreaterThan(0);
+  });
+
   it("resolves the on-call paging operations to all regions", () => {
     const allKeys = getDefaultRegions().map((r) => r.key);
-    for (const id of FULLY_QUALIFIED_HOST_OPERATIONS.filter((i) =>
-      i.includes("on-call"),
-    )) {
-      const found = ALL_OPERATIONS.find((o) => o.id === id);
-      expect(found, `${id} missing from the spec`).toBeTruthy();
+    for (const { id, spec, operation } of ON_CALL_PAGING_OPERATIONS) {
       expect(
-        getRegions(found!.spec, found!.operation).map((r) => r.key),
+        getRegions(spec, operation).map((r) => r.key),
         id,
       ).toEqual(allKeys);
     }
@@ -121,32 +130,12 @@ describe("getRegions across the full spec", () => {
     const claimedHosts = new Set(
       getAllowedRegions().flatMap((region) => region.exactDomains),
     );
-    for (const id of FULLY_QUALIFIED_HOST_OPERATIONS) {
-      const found = ALL_OPERATIONS.find((o) => o.id === id);
-      expect(found, `${id} missing from the spec`).toBeTruthy();
-      const servers = found!.operation.servers ?? found!.spec.servers;
-      const hosts: string[] = servers?.[0]?.variables?.site?.enum ?? [];
+    for (const entry of FULLY_QUALIFIED_HOST_OPERATIONS) {
+      const hosts: string[] = siteEnum(entry) ?? [];
       expect(
         hosts.filter((host) => !claimedHosts.has(host)),
-        id,
+        entry.id,
       ).toEqual([]);
     }
-  });
-
-  it("needs the fallback for exactly the operations listed above", () => {
-    // Every other operation must match on bare site domains. If the spec adds
-    // another fully-qualified-host operation this fails, so the list above
-    // stays honest rather than silently going stale.
-    const siteDomains = new Set(getDefaultRegions().map((r) => r.site));
-    const needsFallback = ALL_OPERATIONS.filter(({ spec, operation }) => {
-      const servers = operation.servers ?? spec.servers;
-      const en = servers?.[0]?.variables?.site?.enum;
-      if (!Array.isArray(en)) return false;
-      return !en.some((d) => siteDomains.has(d));
-    }).map(({ id }) => id);
-
-    expect(needsFallback.sort()).toEqual(
-      [...FULLY_QUALIFIED_HOST_OPERATIONS].sort(),
-    );
   });
 });
