@@ -684,6 +684,22 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
 
+#### Estimated cost metrics
+
+For LLM and embedding spans, the following attributes map to estimated cost metrics. Emit non-negative numbers in **nanodollars** (1 USD = 1,000,000,000 nanodollars). Datadog copies these values without unit conversion. For example, send `10000000` for a $0.01 estimate.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.cost.estimated_total` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.estimated_input` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.estimated_output` | `metrics.estimated_output_cost` |
+| `gen_ai.cost.estimated_cache_read_input` | `metrics.estimated_cache_read_input_cost` |
+| `gen_ai.cost.estimated_cache_write_input` | `metrics.estimated_cache_write_input_cost` |
+| `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
+| `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
+
+Datadog replaces a supplied estimate if it can calculate a positive cost for that field from model pricing and available token counts. A partial calculation can also replace a supplied estimate. Otherwise, Datadog keeps the supplied value. To supply custom costs that take precedence over model pricing, use [manual cost tracking][56] with the Datadog SDK or API.
+
 #### Request parameters
 
 All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
@@ -1206,3 +1222,4 @@ with tracer.start_as_current_span("my-span") as span:
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
+[56]: /llm_observability/investigate/cost/#manual
