@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-The reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. Logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline.
+The reduce processor groups multiple log events into a single log, based on the fields specified and the merge strategies selected. By default, logs are grouped at 10-second intervals. After the interval has elapsed for the group, the reduced log for that group is sent to the next step in the pipeline. See [Set the aggregation window](#set-the-aggregation-window) to change the interval.
 
 ## Setup
 
@@ -45,6 +45,19 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
+### Set the aggregation window
+
+Use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long a Reduce processor aggregates events before it sends a reduced log. The variable applies to every Reduce processor on the Worker and accepts values from `1` to `300` seconds. If the variable isn't set, the processor uses the default 10-second window.
+
+- Longer aggregate windows let events that arrive further apart merge, which can increase the reduction rate. Each reduce processor holds its groups in memory until the window closes. Memory usage grows with the window size, the number of unique groups, and the number of reduce processors. If most events are unique, memory can grow substantially and the Worker can run out of memory.
+- Shorter aggregate windows free memory sooner, which can help high-throughput pipelines, but fewer events are merged and more similar logs are sent downstream.
+
+Increase the aggregate window gradually and monitor the Worker's memory usage. See [Process metrics][5] for more information.
+
+**Notes**:
+- Aggregation is local to each Worker. Matching events processed by different Workers are not merged.
+- The`DD_OP_REDUCE_WINDOW_SECS` environment variable is available for Worker versions 2.25.0 or later.
+
 ## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation.
@@ -62,3 +75,4 @@ For [component metrics][2] and [processor buffer metrics][3] emitted by all proc
 [2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=sources#process-metrics
