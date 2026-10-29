@@ -1,0 +1,13 @@
+# Option groups (trimmed PoC subset): each group lists option ids, one marked
+# `default: true`. Referenced by a doc's content_filters via option_group_id.
+custom_instrumentation_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: cpp
+  - id: elixir
+
+custom_instrumentation_api_options:
+  - id: otel_api
+    default: true
+  - id: dd_api

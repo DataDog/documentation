@@ -788,6 +788,16 @@
   "CreateExecutionPolicy": [
     {
       "group": "execution_policy",
+      "suffix": "_1868371302",
+      "description": "Create a Slack execution policy returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_3240435177",
+      "description": "Create a Slack execution policy with scope and targets returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
       "suffix": "",
       "description": "Create an execution policy returns \"Created\" response"
     },
@@ -802,6 +812,11 @@
       "group": "execution_policy",
       "suffix": "",
       "description": "Update an execution policy returns \"OK\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_2851872075",
+      "description": "Update an execution policy to Slack with scope and targets returns \"OK\" response"
     }
   ],
   "CancelExperiment": [
@@ -816,6 +831,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Create experiment metric group returns \"Created\" response"
+    }
+  ],
+  "CreateExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment protocol returns \"Created\" response"
     }
   ],
   "CreateExperiment": [
@@ -860,6 +882,13 @@
       "description": "Patch subject type returns \"OK\" response"
     }
   ],
+  "ReplaceExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
   "UpdateExperimentAnalysisPlanAttributes": [
     {
       "group": "experiments",
@@ -872,6 +901,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "PatchExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment protocol returns \"OK\" response"
     }
   ],
   "UpdateMetricCollection": [
@@ -1309,6 +1345,11 @@
       "group": "logs",
       "suffix": "_3138392594",
       "description": "Search logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2789021011",
+      "description": "Search logs with a page limit above 1000 returns \"OK\" response"
     }
   ],
   "SubmitLog": [
@@ -1448,13 +1489,6 @@
       "group": "logs_restriction_queries",
       "suffix": "",
       "description": "Grant role to a restriction query returns \"OK\" response"
-    }
-  ],
-  "CreateBulkTagsMetricsConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
   "CreateDerivedMetric": [
@@ -2002,6 +2036,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3666485614",
+      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3654691150",
+      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -2148,12 +2192,24 @@
     {
       "group": "rum",
       "suffix": "",
-      "description": "Create a new RUM application returns \"OK\" response"
+      "description": "Create a new RUM application returns \"Created\" response"
     },
     {
       "group": "rum",
-      "suffix": "_1946294560",
-      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
+      "suffix": "_4210432830",
+      "description": "Create a new RUM application with Product Scales returns \"Created\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_3241419056",
+      "description": "Create a new RUM application without default retention filters returns \"Created\" response"
+    }
+  ],
+  "GetServiceRepositoryInfo": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get service repository information returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -2687,6 +2743,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "StartSecurityMonitoringRuleProposal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Start a rule proposal returns \"Accepted\" response"
     }
   ],
   "SendSecurityMonitoringNotificationPreview": [

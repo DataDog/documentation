@@ -641,6 +641,22 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /tab %}}
 {{< /tabs >}}
 
+## MCP Server endpoints
+
+Each [Datadog site][86] has its own MCP Server endpoint. To build the endpoint for your site, add `mcp.` before your site parameter and append `/v1/mcp`. Use the endpoint that matches the site where your Datadog organization is hosted:
+
+| Site    | Site parameter      | MCP Server endpoint                     |
+|---------|---------------------|-----------------------------------------|
+| US1     | `datadoghq.com`     | `https://mcp.datadoghq.com/v1/mcp`      |
+| US3     | `us3.datadoghq.com` | `https://mcp.us3.datadoghq.com/v1/mcp`  |
+| US5     | `us5.datadoghq.com` | `https://mcp.us5.datadoghq.com/v1/mcp`  |
+| EU1     | `datadoghq.eu`      | `https://mcp.datadoghq.eu/v1/mcp`       |
+| AP1     | `ap1.datadoghq.com` | `https://mcp.ap1.datadoghq.com/v1/mcp`  |
+| AP2     | `ap2.datadoghq.com` | `https://mcp.ap2.datadoghq.com/v1/mcp`  |
+| UK1     | `uk1.datadoghq.com` | `https://mcp.uk1.datadoghq.com/v1/mcp`  |
+| US1-FED | `ddog-gov.com`      | Not supported                           |
+| US2-FED | `us2.ddog-gov.com`  | Not supported                           |
+
 ## Toolsets
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
@@ -705,6 +721,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
+- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
 - `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
@@ -726,7 +743,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
-- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
@@ -999,3 +1015,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [83]: /logs/log_configuration/indexes/
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
+[86]: /getting_started/site/

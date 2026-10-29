@@ -13,7 +13,7 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
 Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
@@ -30,7 +30,11 @@ With the Inference page, you get:
 
 ## Setup
 
-Inference monitoring supports [vLLM][1] as the inference engine in the following deployments: standalone, with NVIDIA Dynamo as the inference router, or on Ray. Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
+Inference monitoring supports the following inference engines and deployments:
+- [vLLM][1]: standalone, with NVIDIA Dynamo as the inference router, or on Ray.
+- [SGLang][3]: standalone.
+
+Other inference engines and routers are not supported. To request support for them, contact your Datadog representative.
 
 Select the tab that matches your deployment:
 
@@ -152,7 +156,7 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -327,7 +331,7 @@ To graph percentiles on certain vLLM and Dynamo metrics, you must opt in to [adv
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -477,7 +481,7 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your Ray worker workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -485,6 +489,140 @@ To correlate inference requests with GPU activity, set up [Continuous Tracing wi
 [4]: /gpu_monitoring/tracing
 [5]: /integrations/ray/
 [6]: /integrations/vllm/
+
+{{% /tab %}}
+{{% tab "SGLang" %}}
+
+Setup uses the [SGLang integration][5], which collects engine metrics.
+
+### Prerequisites
+
+To begin monitoring your inference workloads, you must meet the following criteria:
+- You have [GPU Monitoring enabled][1].
+- You are running the inference Agent image (`7.85.0-rc.5`).
+- Your inference workloads run on Kubernetes.
+- You are serving models with standalone SGLang.
+
+### 0. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The SGLang check runs only when GPU Monitoring is enabled.
+
+### 1. Use the inference Agent image
+
+The inference Agent image includes the SGLang check, so you don't need to install the SGLang integration separately.
+
+Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
+
+```yaml
+spec:
+  features:
+    gpu:
+      enabled: true
+  override:
+    nodeAgent:
+      image:
+        tag: 7.85.0-rc.5
+```
+
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
+
+Apply the resource and wait for the Agent DaemonSet to roll out:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+kubectl get pods -n <DATADOG_NAMESPACE> -w
+```
+
+### 2. Enable SGLang metrics and confirm the port
+
+SGLang does not expose metrics by default. Add `--enable-metrics` to the SGLang server command in every SGLang pod template:
+
+```shell
+python3 -m sglang.launch_server --model-path <MODEL> --enable-metrics
+```
+
+The SGLang integration collects metrics from the following endpoint:
+
+| Target | Endpoint | Integration | Metrics |
+|--------|----------|-------------|---------|
+| SGLang server | `:30000/metrics` | SGLang | `sglang.*` |
+
+SGLang serves metrics on the same port as its HTTP server, which is `30000` by default. If you start SGLang with a different `--port`, substitute it in the annotation in Step 3.
+
+If you run disaggregated prefill and decode workers, each prefill and decode worker serves its own metrics endpoint. Configure the integration on every worker pod template. The integration collects KV transfer and disaggregation queue metrics as `sglang.disaggregation.*`.
+
+### 3. Configure the integration
+
+Add the following [Autodiscovery annotation][2] to every SGLang pod template. In the annotation key, replace `<SGLANG_CONTAINER_NAME>` with the value of the container's `name` field in `spec.template.spec.containers[]`, not the image name:
+
+```yaml
+metadata:
+  labels:
+    tags.datadoghq.com/service: "<SERVICE_NAME>"
+  annotations:
+    ad.datadoghq.com/<SGLANG_CONTAINER_NAME>.checks: |-
+      {
+        "sglang": {
+          "init_config": {},
+          "instances": [{
+            "openmetrics_endpoint": "http://%%host%%:30000/metrics"
+          }]
+        }
+      }
+```
+
+Replace `<SERVICE_NAME>` with a name for your model deployment, such as `inference-sglang-glm5.3`. The Inference page groups metrics by `service`. For disaggregated deployments, use the same `<SERVICE_NAME>` on the prefill and decode workers of a model deployment.
+
+The SGLang integration submits histogram buckets as distributions by default, so you don't need to set `histogram_buckets_as_distributions` or `collect_counters_with_distributions`.
+
+Apply the updated workload resources and recreate the pods so that Autodiscovery detects the new annotations.
+
+### 4. Verify setup
+
+Use two terminals to confirm that the SGLang endpoint responds and that the Agent runs the check. Run the port-forward in your workload's Kubernetes namespace, or add `-n <WORKLOAD_NAMESPACE>` if it differs from your current namespace.
+
+**Terminal 1**: Forward the SGLang metrics endpoint, and leave it running.
+
+```shell
+kubectl port-forward pod/<SGLANG_POD> 18080:30000
+```
+
+**Terminal 2**: Verify the endpoint and the Agent check.
+
+```shell
+# Show SGLang metrics from the endpoint
+curl -fsS http://localhost:18080/metrics | grep '^sglang:'
+
+# Look for "sglang" under Checks
+kubectl exec -n <DATADOG_NAMESPACE> <AGENT_POD> -c agent -- agent status
+```
+
+When you finish, press **Ctrl+C** in terminal 1 to stop forwarding.
+
+After you complete setup, Datadog collects `sglang.*` metrics from your SGLang pods.
+
+If no metrics appear, send inference traffic to your deployment. SGLang emits some metrics only after it serves the first request.
+
+### 5. Enable percentiles on your metrics
+
+To graph percentiles on certain SGLang metrics, you must opt in to [advanced query functionality][3] on the following distribution metrics:
+
+| Metric |
+|--------|
+| `sglang.time_to_first_token.seconds` |
+| `sglang.inter_token_latency.seconds` |
+| `sglang.request.prompt_tokens` |
+| `sglang.request.generation_tokens` |
+
+### 6. Enable GPU tracing (optional)
+
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
+
+[1]: /gpu_monitoring/setup
+[2]: /containers/kubernetes/integrations/?tab=annotations
+[3]: /metrics/distributions/#enabling-advanced-query-functionality
+[4]: /gpu_monitoring/tracing
+[5]: /integrations/sglang/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -532,3 +670,4 @@ Click {{< ui >}}Column Settings{{< /ui >}} to choose which columns to display.
 
 [1]: /integrations/vllm/
 [2]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=inference-monitoring
+[3]: /integrations/sglang/

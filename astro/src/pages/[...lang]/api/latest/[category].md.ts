@@ -1,0 +1,103 @@
+export const prerender = true;
+/**
+ * Plaintext rendering of each category summary page.
+ *
+ * Builds the page as Markdoc nodes — heading, optional deprecation alert,
+ * description paragraph, and one summary block per endpoint (heading linking
+ * to the endpoint page, plus its method + URL) — then emits markdown via
+ * `buildPlaintextPage`. Mirrors the HTML category page in `[category].astro`.
+ */
+
+import type { Node as MarkdocNode } from "@markdoc/markdoc";
+import type { APIRoute, GetStaticPaths } from "astro";
+import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
+import {
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+} from "@lib/api/viewsBuilder";
+import { apiBreadcrumbs, categoryMetaDescription } from "@lib/api/pageMeta";
+import type { Locale } from "@lib/i18n/locale";
+import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
+import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
+import {
+  buildPlaintextPage,
+  heading,
+  nodesFromMd,
+} from "@lib/plaintext/helpers";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
+
+function apiCategoryBody(
+  category: ApiCategory,
+  lang: Locale,
+  pathname: string,
+): MarkdocNode[] {
+  const categoryBaseHref = localizedHref(lang, `/api/latest/${category.slug}/`);
+
+  const contents: MarkdocNode[] = [
+    heading(1, category.name),
+    ...siteSupportNoteNodes(pathname, lang),
+  ];
+
+  if (category.description) {
+    contents.push(...nodesFromMd(category.description.trim()));
+  }
+
+  for (const operation of category.operations) {
+    contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
+  }
+
+  return contents;
+}
+
+function endpointSummaryNodes(
+  operation: ApiOperationStub,
+  baseHref: string,
+): MarkdocNode[] {
+  return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: ReturnType<GetStaticPaths> = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoryStubsView(lang)) {
+      paths.push({
+        params: {
+          lang: lang === "en" ? undefined : lang,
+          category: cat.slug,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+export const GET: APIRoute = async ({ params, url, site }) => {
+  const lang = parseLangParam(params.lang);
+  if (!lang) {
+    return new Response(null, { status: 404 });
+  }
+
+  const slug = params.category;
+  if (!slug) {
+    return new Response(null, { status: 404 });
+  }
+
+  const category = await getCategoryViewBySlug(slug, lang);
+  if (!category) {
+    return new Response(null, { status: 404 });
+  }
+
+  const body = buildPlaintextPage(
+    apiCategoryBody(category, lang, url.pathname),
+    {
+      title: category.name,
+      description: categoryMetaDescription(category),
+      breadcrumbs: apiBreadcrumbs(lang, category.name),
+    },
+    site,
+  );
+
+  return new Response(body, {
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
+  });
+};
