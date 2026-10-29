@@ -58,9 +58,9 @@ The Pup CLI can set up the following products:
 
 ### Run the setup command
 
-Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You don't need to install Pup first, because `npx` downloads it. If Pup is already [installed][20], run `pup setup` directly instead of `npx @datadog/pup setup`, with the same flags.
+Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You don't need to install Pup first, because `npx` downloads it. If Pup is already [installed][20], run `pup setup` directly instead of `npx @datadog/pup setup`, using the same flags.
 
-If you've logged in with `pup auth login`, `pup setup` uses that login.
+If you've logged in with [`pup auth login`][22], `pup setup` uses that login.
 
 You have two options, depending on whether you already have a Datadog account:
 
@@ -111,7 +111,7 @@ After the CLI completes, see the [Next steps](#next-steps) section to confirm da
 
 Headless mode is designed for unattended setups. An AI coding agent, CI job, or script can run the CLI directly in your repository and complete Datadog instrumentation on its own. No person needs to be present to approve prompts or make interactive choices.
 
-Headless mode turns on automatically when a [supported AI coding agent][21] starts `pup setup`, or when there's no interactive terminal, such as in a CI job. To turn it on yourself, add `--headless`:
+Headless mode turns on automatically when a [supported AI coding agent][21] starts `pup setup`, or when there's no interactive terminal, such as in a CI job. To enable it manually, add `--headless`:
 
 ```shell
 DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
@@ -123,7 +123,7 @@ DD_API_KEY=<API_KEY> DD_APP_KEY=<APP_KEY> \
 
 In headless mode:
 
-- `--site` is optional. If you leave it out, `pup setup` uses the `DD_SITE` environment variable, then the site Pup is configured for, then `datadoghq.com`.
+- `--site` is optional. If you leave it out, `pup setup` uses the `DD_SITE` environment variable, then the site Pup is configured to use, then `datadoghq.com`.
 - `--product` is optional. If you leave it out, `pup setup` analyzes the repository and sets up the top recommended product. To see the recommendations without changing anything, add `--recommend-only`, which prints them as JSON and exits.
 
 Headless mode signs in with the first of these that's available:
@@ -297,3 +297,4 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [19]: /account_management/api-app-keys/
 [20]: /cli/
 [21]: /cli/#agent-mode
+[22]: /cli/#authentication
