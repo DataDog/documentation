@@ -61,7 +61,7 @@ Ownership-based access control is in Preview and available upon request.
 
 Ownership-based access control restricts access to security findings based on team membership and requires less configuration than Restricted Datasets. Each user sees findings owned by the [teams][6] they belong to, without requiring a separate dataset for each group of findings.
 
-Ownership-based access control is available for Security Findings, which covers Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Datadog determines ownership from the team tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
+Ownership-based access control is available for Security Findings, which covers Cloud Security, Code Security, Workload Protection, and App and API Protection findings. Datadog determines ownership from the `team` tag. Findings without this tag are visible only to teams and roles with [unrestricted access][7].
 
 [1]: /account_management/rbac/#role-based-access-control
 [2]: /account_management/rbac/permissions/#cloud-security-platform
