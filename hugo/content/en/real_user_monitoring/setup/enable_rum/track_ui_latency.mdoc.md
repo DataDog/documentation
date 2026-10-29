@@ -1,5 +1,6 @@
 ---
 title: Track UI Latency
+description: "Measure how fast your UI responds, including Core Web Vitals, view loading time, mobile vitals, and performance timeseries."
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -23,6 +24,10 @@ aliases:
   - /real_user_monitoring/application_monitoring/react_native/mobile_vitals/
   - /real_user_monitoring/application_monitoring/unity/mobile_vitals/
   - /real_user_monitoring/application_monitoring/maui/mobile_vitals/
+further_reading:
+  - link: "/real_user_monitoring/investigate_problems/explore_retained_data/events/#performance-timeseries"
+    tag: "Documentation"
+    text: "Explore the performance timeseries panel"
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
