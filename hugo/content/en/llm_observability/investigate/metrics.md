@@ -106,6 +106,7 @@ The evaluation metric tags have the following values:
 | `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations you submit through the SDK or API |
 | `evaluation_version` | The version of a managed evaluation. Not set for evaluations you submit through the SDK or API. |
 | `value` | The evaluation result. Available only on `ml_obs.evaluation.count`. See the [`value` tag](#the-value-tag) section. |
+| `ml_app` | The ML application the evaluation belongs to |
 | `env`, `service`, `version` | Taken from the evaluated span |
 
 #### The value tag
@@ -123,6 +124,7 @@ String values in the `value` tag are lowercased.
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
 - Evaluation results from [experiments][2]
 - Evaluations that were skipped or that failed to run
+- Evaluations submitted through the SDK or API that can't be matched to a span, for example because the span ID is wrong or the span was never sent
 
 When a managed evaluation samples a portion of your traffic, `ml_obs.evaluation.count` reflects only the sampled results, so it does not match `ml_obs.span` one to one. Rates (such as pass rate) and score distributions are not affected by sampling.
 
