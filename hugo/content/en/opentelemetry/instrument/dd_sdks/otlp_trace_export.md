@@ -3,7 +3,7 @@ title: Export Traces from Datadog SDKs in OTLP Format
 description: Configure a Datadog SDK to export traces in OpenTelemetry Protocol (OTLP) format to a DDOT Collector or any OTLP-compatible receiver.
 further_reading:
     - link: '/opentelemetry/instrument/dd_sdks/'
-      text: 'Using Datadog SDKs with OpenTelemetry'
+      text: 'DDOT SDKs'
       tag: 'Documentation'
     - link: '/opentelemetry/setup/ddot_collector/'
       text: 'DDOT Collector'

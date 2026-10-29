@@ -1,5 +1,5 @@
 ---
-title: Datadog SDKs with OpenTelemetry
+title: DDOT SDKs
 description: Use a Datadog SDK with OpenTelemetry, as a DDOT SDK that sends OTLP to your Collector, or with the Datadog Agent.
 further_reading:
     - link: '/opentelemetry/setup/ddot_collector/'
