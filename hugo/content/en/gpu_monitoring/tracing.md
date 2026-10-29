@@ -136,7 +136,6 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 
 To begin continuously tracing your Slurm jobs, you must first meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- Minimum required CUDA and CUPTI version: 13.
 
 ### 0. Enable GPU Monitoring
 

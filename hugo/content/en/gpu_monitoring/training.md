@@ -152,7 +152,6 @@ Go to the [Training page][3] in GPU Monitoring to explore your training jobs.
 
 To begin monitoring your Slurm training jobs, you must first meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
 
 ### 0. Enable GPU Monitoring
 
