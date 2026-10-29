@@ -1067,60 +1067,6 @@
     "request_description": "CI job log line or batch in JSON format.",
     "request_schema_description": "A batch of up to 1,000 CI job log lines. Use a one-item array to send one log line."
   },
-  "ListAWSCloudAuthPersonaMappings": {
-    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
-    "summary": "List AWS cloud authentication persona mappings"
-  },
-  "CreateAWSCloudAuthPersonaMapping": {
-    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
-    "summary": "Create an AWS cloud authentication persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
-  },
-  "DeleteAWSCloudAuthPersonaMapping": {
-    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
-    "summary": "Delete an AWS cloud authentication persona mapping"
-  },
-  "GetAWSCloudAuthPersonaMapping": {
-    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
-    "summary": "Get an AWS cloud authentication persona mapping"
-  },
-  "ListGitHubCloudAuthIntakeMappings": {
-    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
-    "summary": "List GitHub cloud authentication intake mappings"
-  },
-  "CreateGitHubCloudAuthIntakeMapping": {
-    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Create a GitHub cloud auth intake mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
-  },
-  "DeleteGitHubCloudAuthIntakeMapping": {
-    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
-    "summary": "Delete a GitHub cloud auth intake mapping"
-  },
-  "GetGitHubCloudAuthIntakeMapping": {
-    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Get a GitHub cloud authentication intake mapping"
-  },
-  "ListGitHubCloudAuthPersonaMappings": {
-    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
-    "summary": "List GitHub cloud authentication persona mappings"
-  },
-  "CreateGitHubCloudAuthPersonaMapping": {
-    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Create a GitHub cloud auth persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
-  },
-  "DeleteGitHubCloudAuthPersonaMapping": {
-    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
-    "summary": "Delete a GitHub cloud auth persona mapping"
-  },
-  "GetGitHubCloudAuthPersonaMapping": {
-    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Get a GitHub cloud authentication persona mapping"
-  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -1549,32 +1495,6 @@
   "GetOwnershipUntaggedFindings": {
     "description": "Count findings with no team tag, grouped by ownership confidence level.",
     "summary": "Count untagged findings by ownership confidence"
-  },
-  "ListOwnershipInferences": {
-    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
-    "summary": "List ownership inferences for a resource"
-  },
-  "ListOwnershipHistory": {
-    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership inference history for a resource"
-  },
-  "GetOwnershipInference": {
-    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
-    "summary": "Get an ownership inference by owner type"
-  },
-  "GetOwnershipEvidence": {
-    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
-    "summary": "Get the evidence for an ownership inference"
-  },
-  "CreateOwnershipFeedback": {
-    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
-    "summary": "Submit feedback on an ownership inference",
-    "request_description": "",
-    "request_schema_description": "The request body for submitting ownership feedback."
-  },
-  "ListOwnershipHistoryByOwnerType": {
-    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership history by owner type"
   },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
@@ -4839,6 +4759,12 @@
     "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
   },
+  "RerouteOnCallPage": {
+    "description": "Reroutes an On-Call Page.",
+    "summary": "Reroute On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to reroute an On-Call Page to a different team or user."
+  },
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
@@ -6449,6 +6375,32 @@
     "request_description": "",
     "request_schema_description": "Request to set or clear the manual severity override of security findings."
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -6548,7 +6500,7 @@
     "summary": "List batch migrations"
   },
   "CreateSecurityMonitoringBatchMigration": {
-    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.\nAlternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.",
     "summary": "Create a batch migration",
     "request_description": "",
     "request_schema_description": "Request to create a batch migration."
@@ -6876,6 +6828,16 @@
     "summary": "Bulk convert rules to Terraform",
     "request_description": "",
     "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
+  },
+  "StartSecurityMonitoringRuleProposal": {
+    "description": "Start generating a proposed Cloud SIEM detection rule from a natural-language\ndescription, or from an SPL or KQL rule. The proposal is based on your organization's\nlog sources, log fields, and existing detection rules. When logs from the matching\nsource are available, the proposed query is tested against your recent logs.\n\nThe proposed rule is generated asynchronously. This endpoint returns a proposal `id`\nwith the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal\nendpoint and poll the endpoint until the status is `completed` or `failed`. A proposal\nusually takes a few minutes, and up to 10 minutes.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To translate\nmany rules at once, use batch migrations instead.",
+    "summary": "Start a rule proposal",
+    "request_description": "",
+    "request_schema_description": "Request to start a rule proposal."
+  },
+  "GetSecurityMonitoringRuleProposal": {
+    "description": "Get the status of a rule proposal started with the start-a-rule-proposal endpoint.\nWhile the status is `pending` or `in_progress`, the proposed rule is still being\ngenerated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains\nthe proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains\nthe reason a rule could not be generated.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To create the\nproposed rule, use the create-a-detection-rule endpoint.",
+    "summary": "Get a rule proposal"
   },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
@@ -7240,7 +7202,7 @@
     "summary": "Restore source maps"
   },
   "GetServiceRepositoryInfo": {
-    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "description": "Returns the repository URL and commit SHA associated with a debug ID or a given service and version.\nProvide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.",
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
@@ -8197,6 +8159,60 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAWSCloudAuthPersonaMappings": {
+    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
+    "summary": "List AWS cloud authentication persona mappings"
+  },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
+  "ListGitHubCloudAuthIntakeMappings": {
+    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
+    "summary": "List GitHub cloud authentication intake mappings"
+  },
+  "CreateGitHubCloudAuthIntakeMapping": {
+    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Create a GitHub cloud auth intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
+  },
+  "DeleteGitHubCloudAuthIntakeMapping": {
+    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
+    "summary": "Delete a GitHub cloud auth intake mapping"
+  },
+  "GetGitHubCloudAuthIntakeMapping": {
+    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Get a GitHub cloud authentication intake mapping"
+  },
+  "ListGitHubCloudAuthPersonaMappings": {
+    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
+    "summary": "List GitHub cloud authentication persona mappings"
+  },
+  "CreateGitHubCloudAuthPersonaMapping": {
+    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Create a GitHub cloud auth persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
+  },
+  "DeleteGitHubCloudAuthPersonaMapping": {
+    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
+    "summary": "Delete a GitHub cloud auth persona mapping"
+  },
+  "GetGitHubCloudAuthPersonaMapping": {
+    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Get a GitHub cloud authentication persona mapping"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
