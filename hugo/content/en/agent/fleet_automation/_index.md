@@ -43,8 +43,11 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 With Fleet Automation, you can:
 - **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
 - **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
-- **[Manage Datadog Agent tags][4]** _(Preview)_ to correct and standardize tagging across your fleet.
+- **[Configure Agent Integrations][9]** to deploy, update, and remove integration configuration files across your fleet.
+- **[Configure Custom Logs][10]** to manage custom log collection settings on your Agents at scale.
+- **[Manage Datadog Agent tags][12]** _(Preview)_ to correct and standardize tagging across your fleet.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
+- **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
 
@@ -85,3 +88,7 @@ For information on setting up roles and permissions, see [Access Control][2].
 [6]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [7]: /agent/fleet_automation/fleet_view/#kubernetes-view
 [8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /agent/fleet_automation/configure_integrations/
+[10]: /agent/fleet_automation/configure_logs/
+[11]: /agent/fleet_automation/upgrade_sdks/
+[12]: https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/

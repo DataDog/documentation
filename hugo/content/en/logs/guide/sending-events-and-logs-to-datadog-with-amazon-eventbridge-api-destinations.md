@@ -21,9 +21,40 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
 
 1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
     - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
-    - For your destination endpoint, use `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` for logs and `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
-    - If you are utilizing the events endpoint, you need to include a `title` and `text` as `body.field` parameters in the API Destination connection. These are required values to `POST` to the events endpoint. For more information, see the [Post an event documentation][9].
+    - For your destination endpoint, use `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs` for logs and `https://event-management-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/events` for events, and set `POST` as the HTTP method. For more information about the differences between logs and events, see [Reducing Data Related Risks][8].
 2. Once you have set up the destination, see the Amazon documentation to [create an EventBridge rule][10], where you set Datadog as your destination.
+
+    If you're using the events endpoint, configure an [input transformer][16] on the target so the rule sends events in the format the endpoint expects. Use the following input path to extract values from the original event:
+
+    ```json
+    {
+      "detailType": "$.detail-type",
+      "source": "$.source",
+      "time": "$.time"
+    }
+    ```
+
+    Then, use the following input template to build the request body:
+
+    ```json
+    {
+      "data": {
+        "type": "event",
+        "attributes": {
+          "title": <detailType>,
+          "message": "<detailType> from <source>",
+          "category": "alert",
+          "timestamp": <time>,
+          "tags": ["source:<source>"],
+          "attributes": {
+            "status": "ok"
+          }
+        }
+      }
+    }
+    ```
+
+    Set `status` to `warn` or `error` for events that represent a problem. For AWS events that represent a configuration change, you can instead send `"category": "change"` with a `changed_resource` object. For the full list of accepted fields, see [Post an event][9].
 3. Once you have set up the rule with Datadog as the destination, trigger an event by posting an event to EventBridge. For more information about pushing events to EventBridge from Datadog, see the [EventBridge integration documentation][1]. For example, to trigger a test event by [uploading the objects to an S3 bucket][11] in your account, use this AWS CloudShell command:
 
     ```bash
@@ -61,3 +92,4 @@ To see more details about the payloads sent to Datadog and to view the response 
 [13]: https://app.datadoghq.com/event/explorer
 [14]: https://console.aws.amazon.com/sqs/
 [15]: https://console.aws.amazon.com/events/
+[16]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-transform-target-input.html

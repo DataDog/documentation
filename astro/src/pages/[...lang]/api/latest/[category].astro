@@ -1,0 +1,80 @@
+---
+export const prerender = true;
+import ApiLayout from "@layouts/ApiLayout.astro";
+import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
+import ApiEndpointSummary from "@components/ApiEndpointSummary/ApiEndpointSummary.astro";
+import {
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+} from "@lib/api/viewsBuilder";
+import { renderMarkdown } from "@lib/api/markdownRenderer";
+import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
+import {
+  apiBreadcrumbs,
+  categoryMetaDescription,
+  hugoCategoryContentPath,
+} from "@lib/api/pageMeta";
+import type { GetStaticPaths, GetStaticPathsResult } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: GetStaticPathsResult = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoryStubsView(lang)) {
+      paths.push({
+        params: {
+          lang: lang === "en" ? undefined : lang,
+          category: cat.slug,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const slug = Astro.params.category;
+if (!slug || typeof slug !== "string") {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoryStubsView(lang);
+const current = await getCategoryViewBySlug(slug, lang);
+if (!current) {
+  return new Response(null, { status: 404 });
+}
+
+const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
+---
+
+<ApiLayout
+  title={`${current.name} - Datadog API`}
+  description={categoryMetaDescription(current)}
+  categories={categories}
+  activeCategory={current}
+  breadcrumbs={apiBreadcrumbs(lang, current.name)}
+  contentPath={hugoCategoryContentPath(slug)}
+>
+  <ApiPageHeader title={current.name} />
+  {
+    current.description && (
+      <div set:html={renderMarkdown(current.description)} />
+    )
+  }
+  {
+    current.operations.map((op) => (
+      <ApiEndpointSummary
+        summary={op.summary}
+        href={`${categoryBaseHref}${op.slug}/`}
+        anchorId={op.slug}
+        method={op.method}
+        regionUrls={op.regionUrls}
+        deprecated={op.deprecated}
+        unstable={op.unstable}
+      />
+    ))
+  }
+</ApiLayout>
