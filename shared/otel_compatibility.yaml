@@ -127,9 +127,7 @@ features:
       datadog_sdk:
         support: supported
         note: Sent with DogStatsD (UDP port 8125). Turn on DogStatsD in the Agent.
-      otel_sdk:
-        support: supported
-        note: Follows the OpenTelemetry runtime metrics specification. Sent with OTLP (port 4317 or 4318).
+      otel_sdk: supported
     receiver:
       agents_collector: supported
       upstream_collector: supported
@@ -340,3 +338,18 @@ features:
       - sdk: otel_sdk
         receiver: otlp_intake
         support: not_supported
+
+  # Remote Configuration applies to the Collector, not the SDK, so every SDK is
+  # supported and the receiver decides the cell.
+  - id: remote_configuration
+    label: Remote Configuration
+    link: /remote_configuration/
+    sdk:
+      ddot_sdk: supported
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector:
+        support: partial
+        label: Preview
+      ddot_collector: not_supported
