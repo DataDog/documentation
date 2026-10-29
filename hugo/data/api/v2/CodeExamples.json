@@ -341,6 +341,13 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
+    }
+  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -363,6 +370,13 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection policy returns \"Created\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
   "UpdateCSMThreatsAgentPolicy": [
