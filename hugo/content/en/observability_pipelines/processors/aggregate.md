@@ -26,9 +26,9 @@ To set up the Aggregate processor:
 
 ### Optional settings
 
-**Use event timestamp** is enabled by default and groups metrics into time windows based on each metric's timestamp. Toggle it off to group metrics by when the Worker processes them. See [Grouping by timestamp](#grouping-by-timestamp) for more information.
+**Use event timestamp** is enabled by default and groups metrics into time windows based on each metric's timestamp. Toggle it off to group metrics by when the Worker processes them. See the [Grouping by timestamp](#grouping-by-timestamp) section for more information.
 
-If **Use event timestamp** is enabled, in the **Allowed lateness** field, enter the number of seconds a time window accepts late metrics after its end time. Enter `0` to drop all late metrics. See [Late metrics](#late-metrics) for more information.
+**Allowed lateness** is available when **Use event timestamp** is enabled. In the **Allowed lateness** field, enter the number of seconds that a time window accepts late metrics after its end time. Enter `0` to drop all late metrics. See the [Late metrics](#late-metrics) section for more information.
 
 **Note**: A longer allowed lateness increases memory usage.
 
@@ -38,19 +38,19 @@ If **Use event timestamp** is enabled, in the **Allowed lateness** field, enter 
 
 When **Use event timestamp** is enabled, the processor groups metrics by each metric's timestamp, not by ingestion time (when the Worker processes the metric).
 
-Event time windows start at fixed times based on the interval. For example, with a 10-second interval, the windows are:
+Time windows start at fixed times based on the interval. For example, with a 10-second interval, the first three windows are:
 
 - 12:00:00 to 12:00:10
 - 12:00:10 to 12:00:20
-- 12:00:20 to 12:00:30, and so on.
+- 12:00:20 to 12:00:30
 
-A metric with a timestamp of 12:00:07 always goes into the first window, as long as the metric arrives within the grace period.
+A metric with a timestamp of 12:00:07 goes into the 12:00:00 to 12:00:10 window if the metric arrives within the allowed lateness.
 
-Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp. Grouping metrics by timestamps prevents distinct samples from overwriting one another.
+Grouping metrics by timestamp is useful for destinations that use the metric timestamp as a key. For example, Datadog Metrics overwrites earlier values that have the same timestamp. Grouping metrics by timestamp prevents distinct samples from overwriting one another.
 
 #### Late metrics
 
-The **Allowed lateness** grace period starts at a window's end time and is based on the Worker's system clock. After the grace period, the window stops accepting metrics, the aggregated metrics are sent, and the window is permanently closed. Any late metrics for that window are dropped and counted in the `pipelines.component_discarded_events_total` metric. See [Pipeline Usage Metrics][3] for more information.
+The **Allowed lateness** grace period starts at a window's end time and is based on the Worker's system clock. After the grace period ends, the processor closes the window permanently and sends its aggregated metrics. The processor drops any later metrics for that window and counts them in the `pipelines.component_discarded_events_total` metric. See [Pipelines Usage Metrics][3] for more information.
 
 For example, with a 10-second interval and an allowed lateness of 5 seconds, the 12:00:00 to 12:00:10 window accepts metrics until 12:00:15 on the Worker's system clock. For a metric with a timestamp of 12:00:07:
 
