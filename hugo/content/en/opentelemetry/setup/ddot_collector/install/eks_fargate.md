@@ -11,8 +11,6 @@ further_reading:
 
 ## Overview
 
-This page was previously titled "Install the DDOT Collector on EKS Fargate."
-
 Deploy the Collector in the Agent on Amazon EKS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because EKS Fargate does not support DaemonSets, the Datadog Agent runs as a sidecar container in each application pod.
 
 <div class="alert alert-info">

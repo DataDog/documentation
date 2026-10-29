@@ -11,8 +11,6 @@ further_reading:
 
 ## Overview
 
-This page was previously titled "Install the DDOT Collector on ECS Fargate."
-
 Deploy the Collector in the Agent on Amazon ECS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
 
 <div class="alert alert-info">
