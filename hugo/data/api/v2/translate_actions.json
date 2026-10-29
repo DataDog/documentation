@@ -7980,6 +7980,24 @@
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
   },
+  "ListTemporaryGrantRequests": {
+    "description": "List all request statuses within the authenticated organization. Filter by pending status for the review queue. Requires Billing Edit, including for reads. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "List organization temporary grant requests"
+  },
+  "GetTemporaryGrantRequest": {
+    "description": "Read an organization request, justification, decision, and linked grant state. Requires Billing Edit. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get an organization temporary grant request"
+  },
+  "UpdateTemporaryGrantRequest": {
+    "description": "Approve or deny the submitted terms, which are immutable. Approval atomically writes the grant, audit record, and request decision. An expired request can't be approved. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Decide a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Approve or deny a pending request."
+  },
+  "DeleteRequestedTemporaryGrant": {
+    "description": "Revoke only the grant that's still associated with this approved request. The request and audit history remain. A stale request can't revoke a replacement grant. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Revoke a requested temporary grant"
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
@@ -8043,6 +8061,24 @@
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
+  },
+  "ListMyTemporaryGrantRequests": {
+    "description": "List the authenticated user's own requests, including decided requests. Other users' requests are never included. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "List your temporary grant requests"
+  },
+  "CreateTemporaryGrantRequest": {
+    "description": "Request a temporary increase to your monthly AI credit limit. Set `total` to the new monthly limit you need, in whole credits, not the number of credits to add. Include a justification and, optionally, an expiry. If you omit the expiry, the grant ends at the next UTC month boundary. A user with the Billing Edit permission approves or denies the request. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Create a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Create a request for the authenticated human user."
+  },
+  "DeleteTemporaryGrantRequest": {
+    "description": "Cancel a pending request that you own. The request history is kept, and no grant is created or revoked. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Cancel your temporary grant request"
+  },
+  "GetMyTemporaryGrantRequest": {
+    "description": "Read an owned request, its decision, and its linked grant state. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get your temporary grant request"
   },
   "GetUsageAttributionTypes": {
     "description": "Get usage attribution types.",

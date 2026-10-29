@@ -22,3 +22,16 @@ entries:
       - GetMonthlyUsageAttribution
     title: Add deprecation notice for estimated usage types in Usage Metering 
       API endpoints
+  - change_type: added
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41201
+    operations:
+      - CreateTemporaryGrantRequest
+      - DeleteRequestedTemporaryGrant
+      - DeleteTemporaryGrantRequest
+      - GetMyTemporaryGrantRequest
+      - GetTemporaryGrantRequest
+      - ListMyTemporaryGrantRequests
+      - ListTemporaryGrantRequests
+      - UpdateTemporaryGrantRequest
+    title: Publish temporary AI-credit grant request APIs in preview
