@@ -112,22 +112,7 @@ To create an account segment:
 
 You can filter any Product Analytics view by a segment, including Pathways, Analytics Explorer, Funnels, and Retention. Click {{< ui >}}Add filter{{< /ui >}}, select the {{< ui >}}Segments{{< /ui >}} tab, and choose a segment. If the segment you need isn't listed, click {{< ui >}}Create new segment{{< /ui >}}.
 
-### In Pathways
-Filter the Pathways visualization by a segment to see how those users move through your product.
-
-{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
-
-### In Analytics Explorer
-
-Filter the Analytics Explorer visualization by a segment to see how that group uses your product.
-
 {{< img src="product_analytics/segmentation/segments_from_pana.png" alt="The Add filter menu open on a Product Analytics page, with the Segments tab highlighted and a list of saved segments to choose from." style="width:80%;">}}
-
-### In Retention
-
-Apply a segment to a retention analysis to measure how well a specific group of users returns to your product over time. To scope a retention graph to a segment, click {{< ui >}}Add filter{{< /ui >}}, select the {{< ui >}}Segments{{< /ui >}} tab, and choose the segment. You can also use the `group by` function to break down retention across event attributes, such as device type or country.
-
-{{< img src="product_analytics/segmentation/retention_analysis_segments.png" alt="A retention analysis scoped to a user segment." style="width:100%;">}}
 
 ## Further reading
 
