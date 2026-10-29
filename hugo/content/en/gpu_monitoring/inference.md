@@ -346,7 +346,8 @@ Setup uses two integrations. The [Ray integration][5] collects Ray cluster metri
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] with Datadog Agent version 7.85.0 or later.
+- You have [GPU Monitoring enabled][1].
+- You are running Datadog Agent version 7.85.0 or later.
 - Your inference workloads run on Kubernetes, with Ray clusters managed by KubeRay.
 - You are serving models with vLLM inside Ray, for example with Ray Serve.
 
