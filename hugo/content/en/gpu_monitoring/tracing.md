@@ -134,8 +134,7 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 
 ### Prerequisites
 
-To begin continuously tracing your Slurm jobs, you must first meet the following criteria:
-- You have [GPU Monitoring enabled][1].
+To begin continuously tracing your Slurm jobs, you must have [GPU Monitoring enabled][1].
 
 ### 0. Enable GPU Monitoring
 
