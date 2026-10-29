@@ -55,7 +55,7 @@ This feature is not supported for your selected [Datadog site](/getting_started/
 
 Two paths use the same [Datadog account][1]:
 
-- **Pup CLI**: Run `pup setup` from your terminal. Use it when you don't want to install an MCP server.
+- **Pup CLI**: Run `pup setup` from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
 
 [1]: /agentic_onboarding/setup

@@ -18,7 +18,12 @@ The two paths are complementary and use the same Datadog account. You can instal
 
 ## Pup CLI setup
 
-The [Pup CLI][20] sets up Datadog from your terminal. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
+The [Pup CLI][20] sets up Datadog from your terminal. It doesn't need your own coding assistant or AI model, so setup doesn't use your model tokens. Use the CLI when:
+
+- You don't have access to your own coding assistant or AI model.
+- You don't want to spend your model tokens on setup.
+- You don't want to install an MCP server.
+- You need to create a Datadog account, which the MCP setup doesn't support.
 
 The Pup CLI can:
 
