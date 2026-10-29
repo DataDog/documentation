@@ -82,8 +82,6 @@ Before you begin:
 - [Set up the Datadog Terraform provider][8] (version 4.22.0 or later).
 - Use an application key with the `agent_upgrade_write` and `hosts_read` permissions.
 
-**Note**: Endpoints for creating, updating, and deleting schedules through Terraform are in Preview.
-
 The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version (`version_to_latest = 0`). It specifies a two-hour maintenance window (`maintenance_window_duration = 120`, in minutes), starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
 
 ```hcl
