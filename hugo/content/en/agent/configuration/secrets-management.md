@@ -2469,7 +2469,7 @@ secret_refresh_on_api_key_failure_interval: 10
 This setting is compatible with `secret_refresh_interval`.
 
 ### Enabling refresh for the Agent's Collector {#enabling-ddot-collector-refresh}
-If you are using the [Agent's Collector][6], the OpenTelemetry Collector that runs inside the Datadog Agent, and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
+If you are using the [Agent's Collector][6], the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
 ```
 agent_ipc:
   port: 5051

@@ -12,7 +12,7 @@ further_reading:
   text: "Set Up the Agent's Collector"
 ---
 
-Move your pipeline from an upstream OpenTelemetry (OTel) Collector to the Agent's Collector, the OpenTelemetry Collector that runs inside the Datadog Agent. The Agent's Collector gives you Agent features, such as integrations and Live Containers, alongside your OpenTelemetry pipeline. To keep the Agent out of your pipeline, use the [DDOT Collector][12] instead.
+Move your pipeline from an upstream OpenTelemetry (OTel) Collector to the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. The Agent's Collector gives you Agent features, such as integrations and Live Containers, alongside your OpenTelemetry pipeline. To keep the Agent out of your pipeline, use the [DDOT Collector][12] instead.
 
 To migrate, set up the Agent's Collector and configure your applications to send their telemetry to it.
 

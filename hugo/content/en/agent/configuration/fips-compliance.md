@@ -47,7 +47,7 @@ Supported products (Agent 7.65.0 and above):
 - Orchestrator Explorer
 - Runtime Security
 - Serverless Monitoring
-- [Agent's Collector][4] (the OpenTelemetry Collector that runs inside the Agent)
+- [Agent's Collector][4] (the OpenTelemetry Collector that runs alongside the Agent as a separate process)
 
 The Datadog FIPS Agent does **not** support the following:
 - Communication between Cluster Agent and Node Agents

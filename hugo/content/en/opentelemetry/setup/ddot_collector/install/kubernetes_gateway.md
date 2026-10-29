@@ -25,7 +25,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This guide assumes you know how to deploy the Agent's Collector, the OpenTelemetry Collector that runs inside the Datadog Agent, as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Set Up the Agent's Collector as a Kubernetes DaemonSet</a>.
+This guide assumes you know how to deploy the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Set Up the Agent's Collector as a Kubernetes DaemonSet</a>.
 </div>
 
 ## Overview
