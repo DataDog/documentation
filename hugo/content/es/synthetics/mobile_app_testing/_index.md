@@ -2,163 +2,267 @@
 aliases:
 - /es/mobile_testing
 - /es/mobile_app_testing
+- /es/mobile_app_testing/mobile_app_tests/
 cascade:
   algolia:
     tags:
-    - tests_móviles
-description: Cree tests móviles inteligentes y automantenibles para garantizar que
-  las partes más críticas de tus aplicaciones móviles se ejecutan en dispositivos
-  reales.
+    - mobile_testing
+description: Cree pruebas móviles inteligentes y de mantenimiento automático para
+  garantizar que las partes más críticas de sus aplicaciones móviles estén en funcionamiento
+  desde dispositivos reales.
 further_reading:
-- link: https://www.datadoghq.com/blog/test-creation-best-practices/
-  tag: Blog
-  text: Prácticas recomendadas para crear tests de extremo a extremo
 - link: /synthetics/mobile_app_testing/
   tag: Documentación
-  text: Aprenda a crear tests de aplicaciones móviles Synthetic
+  text: Aprenda a crear pruebas de aplicaciones móviles sintéticas
 - link: /synthetics/mobile_app_testing/settings
   tag: Documentación
-  text: Aprender a cargar tus aplicaciones móviles iOS o Android
+  text: Aprenda a cargar sus aplicaciones móviles iOS o Android
 - link: /continuous_testing/
   tag: Documentación
-  text: Más información sobre tests continuos y CI/CD
-title: Tests y monitorización de aplicaciones móviles
+  text: Obtenga información sobre Continuous Testing y CI/CD
+- link: /synthetics/guide/version_history/
+  tag: Guía
+  text: Historial de versiones de Synthetic Monitoring
+- link: /synthetics/guide/mobile-test-auth-tokens/
+  tag: Guía
+  text: Inyecte y actualice automáticamente tokens de autenticación en pruebas de
+    aplicaciones móviles
+- link: https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring
+  tag: Blog
+  text: Simplificación de la resolución de problemas a lo largo del recorrido del
+    usuario con Datadog Synthetic Monitoring.
+- link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  tag: Blog
+  text: Mejores prácticas para crear pruebas de extremo a extremo
+- link: https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/
+  tag: Blog
+  text: Cómo crear pruebas Synthetic confiables y precisas para sus aplicaciones móviles.
+- link: /api/latest/synthetics/#create-or-clone-a-test
+  tag: API
+  text: Synthetics API
+title: Pruebas de aplicaciones móviles y hacer un seguimiento
 ---
+## Descripción general {#overview}
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Mobile Application Testing no es compatible en este <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+Las pruebas de aplicaciones móviles le permiten probar y hacer un seguimiento de flujos de negocio clave para aplicaciones Android e iOS utilizando dispositivos reales.
+Datadog ejecuta estas pruebas en dispositivos reales para proporcionar una representación realista y paso a paso de los flujos de trabajo clave de la aplicación, capturas de pantalla de cada paso y resultados detallados de aprobación o falla para que su equipo pueda visualizar rápidamente qué salió mal.
+Las pruebas de aplicaciones móviles pueden ejecutarse según un horario, bajo demanda o directamente dentro de sus [CI/CD pipelines][1].
 
-## Información general
+Opcionalmente, vincule los datos de pruebas móviles de Synthetics con los datos móviles de RUM si se utiliza el [RUM SDK][15] dentro de la aplicación probada. 
 
-Los tests de aplicaciones móviles te permiten probar y monitorizar flujos (flows) de negocios clave para aplicaciones Android e iOS utilizando dispositivos reales. 
-Datadog ejecuta estos tests en dispositivos reales para proporcionar una representación realista, paso a paso, de los flujos de trabajo clave de la aplicación, capturas de pantalla de cada paso y resultados detallados de tests superados o fallidos, para que tu equipo pueda visualizar rápidamente qué ha salido mal.
-Los tests de aplicaciones móviles pueden ejecutarse de forma programada, bajo demanda o directamente en tus [pipelines CI/CD][1].
+Puede crear pruebas de aplicaciones móviles en Datadog navegando a [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][12] y seleccionando {{< ui >}}Mobile Application Test{{< /ui >}}.
 
-Opcionalmente, vinculs los datos de test móviles de Synthetic con los datos móviles de RUM si se utiliza el [SDK de RUM][15] dentro de la aplicación probada. 
+{{< img src="mobile_app_testing/new_test_2.png" alt="Crear una prueba móvil Synthetics" style="width:50%;">}}
 
-Puedes crear tests de aplicaciones móviles en Datadog accediendo a [**Experiencia digital** > **Nuevo test**][12] y seleccionando **Mobile Application Test** (Test de aplicaciones móviles).
+## Configuración {#configuration}
 
-{{< img src="mobile_app_testing/new_test_2.png" alt="Crear un test móvil en Synthetic" style="width:50%;">}}
+Puede crear una prueba utilizando una de las siguientes opciones:
 
-## Configuración
+### Crear una prueba a partir de una plantilla {#create-a-test-from-a-template}
 
-Puedes crear un test utilizando una de las siguientes opciones:
+  1. Pase el cursor sobre una de las plantillas precargadas y haga clic en {{< ui >}}View Template{{< /ui >}}. Esto abre un panel lateral que muestra información de configuración precargada, incluyendo: Detalles de la prueba, Detalles de la solicitud, Condiciones de alerta y pasos.
+  2. Haga clic en {{< ui >}}\+ Create Test{{< /ui >}} para abrir la página de configuración, donde puede revisar y editar las opciones de configuración prellenadas. Los campos presentados son idénticos a los disponibles al crear una prueba desde cero.
+  3. Haga clic en {{< ui >}}Save & Quit{{< /ui >}} en la esquina superior derecha para enviar su prueba de aplicación móvil.<br /><br>
+       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video de la página de inicio de pruebas de aplicaciones móviles con plantillas" video="true" >}}
 
-### Crear un test a partir de una plantilla
+### Cree una prueba desde cero {#build-a-test-from-scratch}
 
-  1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, condiciones de alerta y pasos.
-  2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
-  3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de aplicación móvil.<br /><br>
-       {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Vídeo de página de inicio de test de la aplicación móvil con plantillas" video="true" >}}
+  1. Haga clic en la plantilla {{< ui >}}\+{{< /ui >}}, luego seleccione una aplicación móvil del menú desplegable. Si aún no ha creado una, cree una aplicación móvil en la [{{< ui >}}Applications List{{< /ui >}} sección][2] en la [{{< ui >}}Synthetic Monitoring & Continuous Testing Settings{{< /ui >}} página][3]. 
+  1. Seleccione una {{< ui >}}version{{< /ui >}} o haga clic en {{< ui >}}Always run the latest version{{< /ui >}} para usar la versión más reciente de su aplicación móvil cada vez que se ejecute su prueba.
+  1. Agregue un {{< ui >}}name{{< /ui >}} para su prueba.
+  1. Seleccione {{< ui >}}environment and additional tags{{< /ui >}} que se relacionen con su prueba. Utilice el formato `<KEY>:<VALUE>` para filtrar por una `<VALUE>` para una `<KEY>` determinada.
+  1. Seleccione [{{< ui >}}devices{{< /ui >}}](#devices) en los que ejecutar su prueba.
+  1. Establezca [condiciones de reintento](#test-retries) para su prueba.
+  1. Establezca el [{{< ui >}}test frequency{{< /ui >}}](#scheduling-and-alerts) haciendo clic en intervalos de tiempo básicos o personalizando la frecuencia de su prueba y {{< ui >}}alert conditions{{< /ui >}} para su hacer un seguimiento de prueba. 
+  1. Ingrese un nombre para el hacer un seguimiento de prueba, seleccione un servicio o miembro del equipo al cual notificar y agregue una notificación de mensaje.
+  1. Haga clic en {{< ui >}}Save & Edit Recording{{< /ui >}} para enviar su prueba de aplicación móvil.
 
-### Crear un test desde cero
+### Fragmentos {#snippets}
 
-  1. Haz clic en la plantilla **+** y, luego, selecciona una aplicación móvil en el menú desplegable. Si aún no has creado ninguna, crea una aplicación móvil en la [sección Lista de aplicaciones][2] de la [página de parámetros de Monitorización de Synthetic y tests continuos][3]. 
-  1. Selecciona una **versión** o haz clic en **Always run the latest version** (Ejecutar siempre la última versión) para utilizar la última versión de tu aplicación móvil cada vez que se ejecute el test.
-  1. Añade un **nombre** para tu test.
-  1. Seleccione **entorno y etiquetas (tags)** adicionales, relacionados con tu test. Utiliza el formato `<KEY>:<VALUE>` para filtrar por un `<VALUE>` para una `<KEY>` concreta.
-  1. Selecciona los [**dispositivos**](#devices) en los que quieres realizar el test.
-  1. Establece [condiciones de reintento](#test-retries) para tu test.
-  1. Define la [**frecuencia de test**](#scheduling-and-alerts) haciendo clic en los intervalos de tiempo básicos o personalizando la frecuencia de test y las **condiciones de alerta** para tu monitor de tests.
-  1. Introduce un nombre para el monitor de tests, selecciona un servicio o miembro del equipo al que notificar y añade un mensaje de notificación.
-  1. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de aplicación móvil.
+Al configurar una nueva prueba de aplicación móvil, utilice fragmentos para completar automáticamente sus versiones de SO, tamaños de dispositivo, fabricantes y tiempo de actividad, en lugar de seleccionar estas opciones manualmente. Los siguientes fragmentos están disponibles:
 
-### Fragmentos
+* {{< ui >}}Device Size{{< /ui >}}: Realice automáticamente sus pruebas de aplicación móvil en una pantalla de tamaño específico en todos los dispositivos:
 
-Al configurar un nuevo test de aplicación móvil, utiliza fragmentos para rellenar automáticamente las versiones de sistema operativo, los tamaños de dispositivo, los fabricantes y el tiempo de actividad, en lugar de seleccionar manualmente estas opciones. Están disponibles los siguientes fragmentos:
+  - {{< ui >}}Multi-screen size{{< /ui >}}
+  - {{< ui >}}Tablet{{< /ui >}}
+  - {{< ui >}}Large Screen (iOS only){{< /ui >}}
+  - {{< ui >}}Standard Screen (iOS only){{< /ui >}}
+  - {{< ui >}}Small Screen (iOS only){{< /ui >}}
 
-* **Device Size** (Tamaño del dispositivo): realiza automáticamente los tests de tu aplicación móvil en una pantalla de tamaño específico en todos los dispositivos:
+* {{< ui >}}OS Version{{< /ui >}}: Pruebe automáticamente sus aplicaciones iOS o Android en varias versiones. Esta selección cambia a iOS o Android según la elección de su aplicación móvil.
 
-  - **Multi-screen size** (Tamaño multipantalla)
-  - **Tablet** (Tableta)
-  - **Large Screen (iOS only)** (Pantalla grande (solo iOS))
-  - **Standard Screen (iOS only)** (Pantalla estándar (solo iOS))
-  - **Small Screen (iOS only)** (Pantalla pequeña (solo iOS))
+* {{< ui >}}Device Manufacturer (Android only){{< /ui >}}: Pruebe automáticamente sus aplicaciones Android en varios fabricantes de dispositivos.
 
-* **OS Version** (Versión de iOS): prueba automáticamente tus aplicaciones iOS o Android en varias versiones. Esta selección alterna entre iOS o Android en función de la elección de tu aplicación móvil.
-
-* **Device Manufacturer (Android only)** (Fabricante del dispositivo (sólo Android)): prueba automáticamente tus aplicaciones Android en varios fabricantes de dispositivos.
-
-* **Uptime** (Tiempo de actividad): configura automáticamente un test con la frecuencia más corta disponible (cada 15 minutos).
+* {{< ui >}}Uptime{{< /ui >}}: Configure automáticamente una prueba con la frecuencia más corta disponible (cada 15 minutos).
 
 <br/>
-  {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Captura de pantalla del lado izquierdo de la creación de un test de aplicación móvil, que muestra ejemplos de fragmentos" width="70%" >}}
+  {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Captura de pantalla del lado izquierdo de la creación de una prueba de aplicación móvil, que muestra los ejemplos de fragmentos" width="70%" >}}
 
-## Dispositivos
+### Opciones avanzadas {#advanced-options}
 
-En la pantalla de selección de dispositivos, puedes elegir probar dispositivos móviles ubicados en Europa (UE) o en Estados Unidos (EE. UU.). 
-Para configurar un test móvil para utilizar dispositivos alojados en UE o en EE. UU.:
+Puede configurar opciones avanzadas al crear una prueba móvil para ajustar dinámicamente el comportamiento de la aplicación sin modificar su código. Por ejemplo, puede aceptar alertas automáticamente, permitir fallos de la aplicación y capturar recursos de red. Estas configuraciones se pueden acceder en la {{< ui >}}Advanced Options{{< /ui >}} sección de su prueba móvil.
 
-1. Abre la página de edición de un test móvil existente o cree uno nuevo.
-2. Amplía la sección Dispositivos y elige las localizaciones del dispositivo para tu test:
-   - **Todas las localizaciones**: realiza tests tanto en UE como en EE. UU.
-   - **UE**: realiza tests sólo en UE.
-   - **EE. UU**: realiza tests sólo en EE. UU.
-3. Utiliza el menú desplegable Seleccionar dispositivos para seleccionar los dispositivos en los que deseas realizar el test.
-4. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para guardar tu configuración de test.
+#### Opciones de comportamiento de la prueba: {#test-behavior-options}
+
+{{< ui >}}Auto-accept alerts{{< /ui >}}
+: Cuando está habilitado, acepta automáticamente todas las alertas del sistema operativo durante la ejecución de la prueba.
+
+{{< ui >}}Allow application crash{{< /ui >}}
+: Cuando está habilitado, evita que la prueba falle si se detecta un bloqueo de la aplicación. Debe incluir un paso para reiniciar la aplicación después del bloqueo esperado para continuar la prueba.
+
+{{< ui >}}Capture network resources{{< /ui >}}
+: Cuando está habilitado, recopila las solicitudes y respuestas de red para cada paso de la prueba y las muestra en los resultados. </br>
+**Nota**: Esta configuración puede afectar el rendimiento de la aplicación y podría evitar que la aplicación se inicie.
+
+#### Argumentos de la aplicación: {#application-arguments}
+
+Puede pasar pares `key:value` a su aplicación cuando se inicia la prueba, permitiéndole modificar el comportamiento de la aplicación de forma programática. El código de su aplicación debe estar configurado para leer y procesar explícitamente estos pares clave-valor. 
+
+Por ejemplo, [inyecte un token de autenticación de actualización automática][17] para omitir el flujo de inicio de sesión de su aplicación.
+
+**Ejemplos:**
+
+{{< tabs >}}
+{{% tab "Android (Extras de intent iniciales)" %}}
+
+Para pruebas de Android, agregue los pares `key:value` apropiados en la sección Opciones avanzadas de su prueba:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_android.png" alt="Página de creación de pruebas de aplicaciones móviles, que muestra un ejemplo de una opción avanzada para un dispositivo Android." style="width:100%;" >}}
+{{% /tab %}}
+
+{{% tab "iOS (Argumentos de proceso)" %}}
+
+Para pruebas de iOS, agregue los pares `key:value` apropiados en la sección Opciones avanzadas:
+
+```json
+{
+  "username": "example_user",
+  "password": "{{ EXAMPLE_VARIABLE }}",
+  "enable_feature_x": "true"
+}
+```
+
+{{< img src="mobile_app_testing/advanced/mobile_app_advanced_iOS.png" alt="Página de creación de pruebas de aplicaciones móviles, que muestra un ejemplo de una opción avanzada para un dispositivo iOS." style="width:100%;" >}}
+    
+{{% /tab %}}
+{{< /tabs >}}
+
+## Dispositivos {#devices}
+
+En la pantalla de selección de dispositivo, puede elegir probar dispositivos móviles que se encuentran en Europa (EU) o en los Estados Unidos (US). 
+Para configurar una prueba móvil para usar dispositivos alojados en EU o US:
+
+1. Abra la página de edición de pruebas para una prueba móvil existente o cree una nueva.
+2. Expanda la {{< ui >}}Devices{{< /ui >}} sección y elija la(s) ubicación(es) del dispositivo para su prueba:
+   - {{< ui >}}All locations{{< /ui >}}: Ejecuta pruebas tanto en la UE como en EE. UU.
+   - {{< ui >}}EU{{< /ui >}}: Ejecuta pruebas solo en la UE.
+   - {{< ui >}}US{{< /ui >}}: Ejecuta pruebas solo en EE. UU.
+3. Utilice el menú desplegable {{< ui >}}Select Device(s){{< /ui >}} para seleccionar los dispositivos en los que desea probar.
+4. Haga clic en {{< ui >}}Save & Edit Recording{{< /ui >}} para guardar la configuración de su prueba.
 
 **Notas**: 
-- Los tests realizados en dispositivos alojados en EE. UU. se ejecutan desde AWS US West (Oregón). Del mismo modo, los tests realizados en dispositivos alojados en UE se ejecutan desde AWS Germany (Frankfurt).
-- No todos los dispositivos están disponibles tanto en UE como en EE.UU. Para más información, consulta la lista de [dispositivos compatibles][16].
+- Las pruebas ejecutadas en dispositivos alojados en EE. UU. se ejecutan desde AWS US West (Oregón). De manera similar, las pruebas en dispositivos alojados en la UE se ejecutan desde AWS Alemania (Fráncfort).
+- No todos los dispositivos están disponibles tanto en la UE como en EE. UU. Para obtener más detalles, consulte la lista de [dispositivos compatibles][16].
 
-{{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selección de uno o más dispositivos móviles en EE. UU. y UE" video=true >}}
+{{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selección de uno o más dispositivos móviles en las regiones de EE. UU. y la UE" video=true >}}
 
-## Reintentos de tests
+### Familias de dispositivos móviles {#mobile-device-families}
 
-Puedes especificar durante cuánto tiempo debe fallar un test antes de que se active una alerta de notificación.
+Una familia de dispositivos móviles representa un conjunto de dispositivos que comparten características comunes, como una línea de modelo o una versión de sistema operativo. En lugar de elegir un dispositivo único y específico, puede elegir una familia. Cuando se ejecuta una prueba, Datadog la ejecuta en uno de los dispositivos disponibles en la familia en ese momento. Elegir una familia aumenta la disponibilidad de los resultados de sus pruebas, ya que la prueba puede ejecutarse en cualquier dispositivo disponible en la familia en lugar de depender de uno solo y específico.
+
+Datadog proporciona familias integradas que aparecen junto a los dispositivos individuales en el menú desplegable **Seleccionar dispositivo(s)**. Por ejemplo:
+
+- **Familia iPhone más reciente en la versión de iOS más reciente** (iOS)
+- **Cualquier iPhone Pro** (iOS)
+- **Última familia Pixel en la versión más reciente de Android** (Android)
+- **Cualquier dispositivo Samsung** (Android)
+
+Seleccione una familia de la misma manera que selecciona un dispositivo individual. Una sola prueba puede dirigirse a dispositivos individuales, familias o ambos.
+
+## Reintentos de prueba {#test-retries}
+
+Puede especificar cuánto tiempo necesita fallar una prueba antes de activar una alerta de notificación.
 
 * Reintentar `X` veces después de `Y` ms en caso de fallo.
 
-{{< img src="mobile_app_testing/retry_condition.png" alt="Paso de reintento de condición, que muestra el reintento del test 0 veces después de 300ms en caso de error" width="90%" >}}
+{{< img src="mobile_app_testing/retry_condition.png" alt="Paso de condición de reintento, que muestra el reintento de la prueba 0 veces después de 300 ms en caso de fallo" width="90%" >}}
 
-## Programación y alertas
+## Programación y alertas {#scheduling-and-alerts}
 
-Por defecto, los tests de aplicaciones móviles están configurados para tests bajo demanda, lo que significa que estos tests pueden ejecutarse [directamente en un pipeline CI](#run-tests-in-ci).
+De forma predeterminada, las pruebas de aplicaciones móviles están configuradas para pruebas bajo demanda, lo que significa que estas pruebas pueden ejecutarse [directamente en una canalización de CI](#run-tests-in-ci).
 
-{{< img src="mobile_app_testing/alerting_rules.png" alt="Programación y condiciones de alerta de un test móvil" style="width:90%" >}}
+{{< img src="mobile_app_testing/alerting_rules.png" alt="Condiciones de programación y de alerta para una prueba móvil" style="width:90%" >}}
 
-Puedes personalizar las condiciones de alerta para definir la frecuencia con la que quieres enviar una alerta y las circunstancias en las que quieres que un test envíe una alerta de notificación.
+Puede personalizar las condiciones de alerta para definir con qué frecuencia desea enviar una alerta y las circunstancias bajo las cuales desea que una prueba envíe una alerta de notificación.
 
-* Se activa una alerta si falla alguna aserción durante `X` minutos.
+* Se activa una alerta si alguna aserción falla durante `X` minutos.
 
-### Configurar el monitor de tests
+<div class="alert alert-info">
+Para obtener más información sobre cómo las notificaciones de Synthetic Monitoring evalúan los resultados de las pruebas y activan alertas, consulte <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
 
-Se envía una notificación según el conjunto de condiciones de alerta. Utiliza esta sección para definir qué mensajes enviar a tus equipos y cómo hacerlo.
+{{% synthetics-downtimes %}}
 
-1. Introduce un **mensaje** para el test de aplicaciones móviles. Este campo permite el [formato Markdown][5] estándar y admite las siguientes [variables condicionales][6]:
+### Configure el seguimiento de prueba {#configure-the-test-monitor}
+
+Se envía una notificación de acuerdo con el conjunto de condiciones de alerta. Use esta sección para definir cómo y qué comunicar a sus equipos.
+
+1. Ingrese un {{< ui >}}message{{< /ui >}} o utilice mensajes de seguimiento prellenados para la prueba de la aplicación móvil. Este campo permite el [formato Markdown][5] estándar y admite las siguientes [variables condicionales][6]:
 
     | Variable condicional       | Descripción                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`             | Mostrar cuando el monitor envía alertas.                                       |
-    | `{{^is_alert}}`            | Mostrar a menos que el monitor envía alertas.                                     |
-    | `{{#is_recovery}}`         | Mostrar cuando el monitor se recupera de una `alert`.                          |
-    | `{{^is_recovery}}`         | Mostrar a menos que el monitor se recupere de una `alert`.                        |
-    | `{{#is_renotify}}`         | Mostrar cuando el monitor vuelva a enviar una notificación.                                  |
-    | `{{^is_renotify}}`         | Mostrar a menos que el monitor vuelva a enviar una notificación.                                 |
-    | `{{#is_priority}}`         | Mostrar cuando el monitor coincide con la prioridad (de P1 a P5).                  |
-    | `{{^is_priority}}`         | Mostrar a menos que el monitor coincida con la prioridad (de P1 a P5).                |
+    | `{{#is_alert}}`            | Show when the monitor alerts.                                       |
+    | `{{^is_alert}}`            | Show unless the monitor alerts.                                     |
+    | `{{#is_recovery}}`         | Show when the monitor recovers from `alerta`.                          |
+    | `{{^is_recovery}}`         | Show unless the monitor recovers from `alerta`.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |Prioridad
+    | `{{^is_priority}}`         | Mostrar a menos que el seguimiento coincida con la prioridad (P1 a P5).                |
 
-   Los mensajes de notificación incluyen el **mensaje** definido en esta sección e información sobre las localizaciones que fallan.
+    Notification messages include the {{< ui >}}message{{< /ui >}} defined in this section and information about the failing locations. Pre-filled monitor messages are included in the message body section:
 
-2. Selecciona los miembros del equipo y los servicios a los que notificar.
-3. Especifica una frecuencia de reenvío de notificaciones. Para evitar el reenvío de notificaciones en caso de tests fallidos, deja la opción como `Never renotify if the monitor has not been resolved`.
-4. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para guardar tu configuración de test y grabar los pasos de test de tu aplicación móvil.
+    {{< img src="/mobile_app_testing/mobile_app_synthetic_monitor.png" alt="Sección de seguimiento de pruebas de aplicaciones móviles, que destaca los mensajes de seguimiento prellenados" style="width:100%;" >}}
 
-Para obtener más información, consulta [Uso de monitores de tests Synthetic][7].
+    For example, to create a monitor that iterates over steps extracting variables for mobile tests, add the following to the monitor message:
 
-## Inestabilidad
+      ```text
+      {{! Liste las variables extraídas en todos los pasos exitosos }}
+      # Variables extraídas
+      {{#each synthetics.attributes.result.steps}}
+      {{#if extractedValue}}
+      * **Nombre**: `{{extractedValue.name}}`
+      **Valor:** {{#if extractedValue.secure}}*Ofuscado (valor oculto)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+      {{/if}}
+      {{/each}}
+      ```
 
-La inestabilidad es un punto sensible en los tests de extremo a extremo, ya que los tests a menudo fallan cuando el frontend genera cambios de código válidos que afectan a un identificador, en lugar de que los genere un problema real de una aplicación.
+2. Elija los miembros del equipo y los servicios a notificar.
+3. Especifique una frecuencia de renotificación. Para evitar la renotificación en pruebas fallidas, marque la opción {{< ui >}}Stop re-notifying on X occurrences{{< /ui >}}.
+4. Haga clic en {{< ui >}}Save & Edit Recording{{< /ui >}} para guardar la configuración de su prueba y registrar los pasos de prueba de su aplicación móvil.
 
-Para evitar tests defectuosos, Datadog utiliza un algoritmo que aprovecha un conjunto de localizadores que se dirigen a ciertos elementos de los tests de aplicaciones móviles. Un pequeño cambio en la interfaz de usuario puede modificar un elemento (por ejemplo, desplazándolo a otra localización). El test de aplicaciones móviles vuelve a localizar automáticamente el elemento basándose en puntos de referencia que no se han visto afectados por el cambio. 
+Para obtener más información, consulte [Notificaciones de Synthetic Monitoring][7].
 
-Cuando el test se ejecuta correctamente, el test de aplicaciones móviles vuelve a calcular (o "autocura") cualquier localizador por medio de valores actualizados, lo que asegura que tus tests no se rompan tras simples actualizaciones de la interfaz de usuario y que se adapten automáticamente a la interfaz de usuario de tu aplicación móvil.
+## Inestabilidad {#flakiness}
 
-## Ejecución de tests en CI
+La inestabilidad es un punto crítico en las pruebas de extremo a extremo. Las fallas en las pruebas a veces son causadas por cambios válidos en el código del frontend que afectan un identificador, no por un problema real de la aplicación.
 
-Puede ejecutar tests de aplicaciones móviles en un pipeline CI definiendo la opción `mobileApplicationVersionFilePath` en un [archivo de test `synthetics.json`][13] y un [archivo de configuración global `synthetics-ci.config`][14], según sea necesario. Las opciones del archivo de configuración global tienen prioridad sobre las opciones del archivo de configuración de tests.
+Para evitar pruebas inestables, Datadog utiliza un algoritmo que aprovecha un conjunto de localizadores para apuntar a elementos en las pruebas de aplicaciones móviles. Un pequeño cambio en la interfaz de usuario puede modificar un elemento (por ejemplo, moverlo a otra ubicación). La prueba de la aplicación móvil localiza automáticamente el elemento de nuevo basándose en puntos de referencia que no se ven afectados por el cambio. 
 
-En este ejemplo, el test `aaa-aaa-aaa` se ejecuta con la versión de la aplicación anulada que se encuentra en `application/path`.
+Cuando la prueba se ejecuta correctamente, la prueba de la aplicación móvil vuelve a calcular (o "se autorrepara") cualquier localizador roto con valores actualizados. Esto garantiza que sus pruebas no se interrumpan por actualizaciones simples de la interfaz de usuario y que sus pruebas se adapten automáticamente a la interfaz de usuario de su aplicación móvil. 
+
+## Ejecutar pruebas en CI {#run-tests-in-ci}
+
+Puede ejecutar pruebas de aplicaciones móviles en una canalización de CI definiendo la opción `mobileApplicationVersionFilePath` en un [archivo de `synthetics.json` prueba][13] y un [archivo de `synthetics-ci.config` configuración global][14] según sea necesario. Las opciones del archivo de configuración global tienen prioridad sobre las opciones del archivo de configuración de prueba.
+
+En este ejemplo, la prueba `aaa-aaa-aaa` se ejecuta con la versión de la aplicación de anulación encontrada en `application/path`.
 
 ```json
 // myTest.synthetics.json
@@ -174,21 +278,21 @@ En este ejemplo, el test `aaa-aaa-aaa` se ejecuta con la versión de la aplicaci
 }
 ```
 
-A continuación, ejecuta `$ datadog-ci synthetics run-tests --config synthetics-ci.config`.
+Luego, ejecute `$ datadog-ci synthetics run-tests --config synthetics-ci.config`.
 
-Para obtener más información, consulta [Tests continuos y CI/CD][1].
+Para obtener más información, consulte [Continuous Testing and CI/CD][1].
 
-## Permisos
+## Permisos {#permissions}
 
-De manera predeterminada, sólo los usuarios con los roles de administrador de Datadog y estándar de Datadog pueden crear, editar y eliminar tests de aplicaciones móviles Synthetic. Para crear, editar y eliminar tests de aplicaciones móviles Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][8].
+De forma predeterminada, solo los usuarios con los roles Datadog Admin y Datadog Standard pueden crear, editar y eliminar pruebas de aplicaciones móviles sintéticas. Para obtener acceso para crear, editar y eliminar pruebas de aplicaciones móviles sintéticas, actualice su usuario a uno de esos dos [default roles][8].
 
-Si estás utilizando la función [rol personalizado][9], añade tu usuario a cualquier rol personalizado que incluya permisos de `synthetics_read` y `synthetics_write`.
+Si está utilizando la [custom role feature][9], agregue su usuario a cualquier custom role que incluya los permisos `synthetics_read` y `synthetics_write`.
 
-### Restringir el acceso
+### Restringir acceso {#restrict-access}
 
 {{% synthetics_grace_permissions %}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -198,12 +302,13 @@ Si estás utilizando la función [rol personalizado][9], añade tu usuario a cua
 [4]: /es/synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://daringfireball.net/projects/markdown/syntax
 [6]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
-[7]: /es/synthetics/guide/synthetic-test-monitors/
+[7]: /es/synthetics/notifications/
 [8]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /es/account_management/rbac/?tab=datadogapplication#custom-roles
 [11]: /es/mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /es/continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /es/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[15]: /es/real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /es/real_user_monitoring/application_monitoring/
 [16]: /es/synthetics/mobile_app_testing/devices
+[17]: /es/synthetics/guide/mobile-test-auth-tokens/

@@ -3,130 +3,146 @@ aliases:
 - /ja/logs/historical-views
 - /ja/logs/archives/rehydrating/
 description: ログイベントをアーカイブから取得し、Datadog に戻します。
+further_reading:
+- link: logs/archives
+  tag: ドキュメント
+  text: ログアーカイブのドキュメント
+- link: /logs/explorer/archive_search/
+  tag: ドキュメント
+  text: Archive Search
 title: アーカイブからのリハイドレート
 ---
+<div class="alert alert-info">
+<strong><a href="/logs/explorer/archive_search/">Archive Search</a> は、アーカイブされたログにアクセスするための推奨される方法です。</strong><br>
+インデックスを作成し直さずにアーカイブから直接リアルタイムで結果をストリーミングし、スキャンされたデータだけが課金されます。プラットフォームへのフルアクセスや長期保存が必要な場合は、Archive Search の <strong>検索およびリハイドレート</strong>モードを使用してください。
+</div>
 
-## 概要
+## 概要{#overview}
 
-Log Rehydration* を使用すると、顧客が所有している、ストレージに最適化されたアーカイブからログイベントを取得して、検索に最適化された Datadog の[ログエクスプローラー][1]に戻すことができます。これにより、古いログイベントや、インデックス化から除外されたログイベントを、Datadog を使用して分析または調査することが可能になります。
+Log Rehydration* を使用すると、顧客所有の、ストレージに最適化されたアーカイブからログイベントを取得して、Datadog の検索に最適化された[ログエクスプローラー][1]に戻すことができます。これにより、古いログイベントや、インデックスから除外されたログイベントを、Datadog を使用して分析または調査することが可能になります。
 
-## 履歴ビュー
+### 履歴ビュー{#historical-views}
 
-履歴ビューでは、アーカイブされたログイベントを時間枠やフィルターで正確にリハイドレートし、予期せぬ特定のユースケースを効率的に満たすことができます。
+履歴ビューを使用すると、チームはアーカイブされたログイベントを時間枠やクエリフィルターを指定してリハイドレートし、特定の予期せぬユースケースに効率的に対応できます。特定のクエリ (例: 1 つ以上のサービス、URL エンドポイント、または顧客 ID にわたる) を使用して履歴ビューを作成することで、ログのリハイドレートにかかる時間とコストを削減できます。これは、より広い時間範囲にわたってリハイドレートする場合に特に役立ちます。
 
-履歴ビューを作成するには
+**主な特徴:**
+- 履歴ビューごとに最大 10 億件のログイベントをリハイドレート可能
+- インデックス除外フィルターは履歴ビューには適用されないため、アーカイブからリハイドレートするときに除外フィルターを変更する必要はありません
+- 履歴ビューを CSV としてダウンロードする場合、データは過去 90 日間に限定されます
 
-1. [Rehydrate From Archives][3] ページに移動します。
-3. **New Historical View** をクリックします。
+## 前提条件{#prerequisites}
 
-インデックス除外フィルターは履歴ビューには適用されないため、アーカイブからリハイドレートするときに除外フィルターを変更する必要はありません。
+アーカイブからログをリハイドレートするには、事前に以下のセットアップ手順を完了する必要があります。
 
-履歴ビューを CSV でダウンロードする場合、データは過去 90 日間に限定されます。
+### アーカイブ構成{#archive-configuration}
 
-### 新しい履歴ビューの追加
+データをリハイドレートするには、外部アーカイブが構成されている必要があります。利用可能な宛先 (Amazon S3、Azure Storage、または Google Cloud Storage) にログをアーカイブするには、[ログアーカイブ][8]を参照してください。
 
-1. ログイベントをリハイドレートする **期間を選択** します。
+### 権限と認証{#permissions-and-authentication}
 
-2. ログイベントをリハイドレートする**アーカイブを選択**します。リハイドレートできるのは、[ロールの委任を使用するよう構成された](#アクセス許可)アーカイブだけです。
+Datadog がコンテンツをリハイドレートするには、アーカイブから読み取るための権限が必要です。アーカイブには適切な認証が構成されている必要があります。
 
-3. (オプション) **スキャンサイズを見積もり**、選択したタイムフレームのアーカイブに含まれる圧縮データの総量を取得します。
+- **S3**: ロール委任 (IAM ロール) を使用する必要があります
+- **Azure Storage**: Storage Blob Data Contributor ロールを持つ Microsoft Entra ID を使用する必要があります。
+- **Google Cloud Storage**: Storage Object Viewer ロールを持つサービスアカウントを使用する必要があります。
 
-4. **履歴ビューに名前を付けます**。名前の先頭は小文字にする必要があります。また、小文字、数字、`-` だけを含めることができます。
+適切な認証が設定されているアーカイブのみが、リハイドレートに使用可能です。詳細なセットアップ手順については、[クラウド固有の権限](#cloud-specific-permissions)を参照してください。
 
-5. **クエリを入力します**。クエリの構文は、[Log Explorer 検索][4]の構文と同じです。リハイドレートクエリでタグ (`env:prod` や `version:x.y.z` など) を使用する場合は、ログが[タグとともにアーカイブ][5]されていることを確認してください。
+## 履歴ビューを使ったログのリハイドレート{#rehydrating-logs-with-historical-views}
 
-6. この履歴ビューでリハイドレートされるべきログの最大数を定義します。リハイドレートの限界に達した場合、リハイドレートは停止されますが、リハイドレートされたログにアクセスすることは可能です。
+1. [[Rehydration][3]] (リハイドレート) ページに移動します。
+2. [{{< ui >}}New Historical View{{< /ui >}}] (新規履歴ビュー) をクリックします。
+3. リハイドレートの期間を選択します。
+4. ログイベントのリハイドレート元のアーカイブを選択します。[ロール委任を使用するように構成された](#permissions)アーカイブのみが、リハイドレートに使用可能です。
+5. (オプション) スキャンサイズを見積もり、選択した期間のアーカイブに含まれる圧縮データの総量を取得します。
+6. 履歴ビューに名前を付けます。名前の先頭は小文字にする必要があります。また、小文字、数字、および `-` 文字のみを含めることができます。
+7. [ログエクスプローラーの検索構文][4] を使用してインデックス作成クエリを設定します。リハイドレートクエリでタグ (`env:prod` や `version:x.y.z` など) を使用する場合は、ログが[タグ付きでアーカイブされている][5]ことを確認してください。
+8. ログの制限 (リハイドレートするログの最大数) を定義します。リハイドレートの制限に達するとログの再読み込みは停止しますが、リハイドレートされたログには引き続きアクセスできます。
+9. リハイドレートされたログの保持期間を設定します。これは、リハイドレートされたログが検索可能な状態を維持する期間を定義します。利用可能な保持期間は契約に基づきます。デフォルトは 15 日間です。
+10. (オプション) @handle 構文を使用して、[インテグレーション][6]からの[完了通知を構成](#rehydration-notifications)します。
 
-7. リハイドレートされたログの保存期間を定義します (利用可能な保存期間は契約次第ですが、デフォルトは 15 日です)。
+リハイドレートのスキャンサイズについて詳しくは、[リハイドレートのスキャンサイズについて](#understanding-rehydration-scan-sizes)を参照してください。
 
-8. (オプション) @handle 構文の[インテグレーション][6]を使用して、リハイドレート完了時にトリガー通知を**通知**します。
 
-{{< img src="logs/archives/log_rehydration_setup.png" alt="アーカイブからのリロード" style="width:75%;">}}
+## 履歴ビューの管理 {#historical-views-management}
 
-**注**: クエリは、期間に一致するファイルがアーカイブからダウンロードされた後に適用されます。クラウドデータ転送コストを削減するには、選択した日付範囲を減らします。
+### 履歴ビューのコンテンツの表示{#viewing-historical-view-content}
 
-#### クエリによるリハイドレート
+**履歴ビューページから**:
+[Rehydrate from Archive] (アーカイブからりハイドレート) を選択すると、コンテンツをクエリできる状態になるまで履歴ビューに「PENDING」(保留中) のマークが付きます。
 
-クエリを指定して（たとえば 1 つ以上のサービス、URL エンドポイント、カスタマー ID など）履歴ビューを作成すると、ログのリハイドレートに必要な時間と費用を節約できます。これは、リハイドレートする期間の幅が広い場合に特に便利です。作成する履歴ビューごとに最大で 10 億のログイベントをリハイドレートできます。
+コンテンツがリハイドレートされると、履歴ビューに「ACTIVE」(アクティブ) のマークが表示され、クエリ列のリンクによってログエクスプローラーの履歴ビューに移動できるようになります。
 
-#### 通知
+**ログエクスプローラーから**:
+ログエクスプローラーで、インデックスセレクターの {{< ui >}}Index{{< /ui >}} ファセットを開きます。検索に含める履歴インデックスを選択します。
 
-リハイドレートが開始および終了すると、イベントが自動的にトリガーされます。
-これらのイベントは、[イベントエクスプローラー][7]で利用できます。
+{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="ログエクスプローラー" width="90%">}}
 
-履歴ビューの作成中に、組み込みのテンプレート変数を使用して、リハイドレートの最後にトリガーされる通知をカスタマイズできます。
+### 進行中の履歴ビューをキャンセルする{#canceling-ongoing-historical-views}
+
+[[Rehydration][3]] (リハイドレート) ページで進行中のリハイドレートをキャンセルして、時間範囲が間違っていたり、インデックスクエリにタイプミスがあったりするジョブを停止できます。
+
+すでにインデックス作成済みのログは、履歴ビューで選択された保持期間が終了するまでクエリ可能です。スキャンおよびインデックス作成されたすべてのログは、引き続き課金されます。
+
+{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration_settings.png" alt="Datadog で履歴ビューの進行中のリハイドレートをキャンセルする" width="90%" >}}
+
+### 履歴ビューの削除{#deleting-historical-views}
+
+履歴ビューは、手動で削除を選択しない限り、選択した保持期間を超えるまで Datadog に残ります。履歴ビューを手動で削除するには、ビューの右端にある削除アイコンを選択し、操作を確定します。
+
+履歴ビューは、削除が開始されてから 1 日後に完全に削除されます。それまでの間、チームは削除をキャンセルできます。
+
+### 削除された履歴ビューを表示する{#viewing-deleted-historical-views}
+
+[{{< ui >}}View{{< /ui >}}] (表示) ドロップダウンメニューを使用して、削除された過去 1 年の履歴ビューを表示することができます。
+
+{{< img src="logs/archives/log_archives_deleted_rehydrations_settings.png" alt="削除された履歴ビューを Datadog で表示する" width="90%" >}}
+
+## 高度な構成{#advanced-configuration}
+
+### リハイドレート通知{#rehydration-notifications}
+
+リハイドレートが開始および終了する時には、イベントが自動的にトリガーされます。これらのイベントは、[イベントエクスプローラー][7]で確認できます。
+
+組み込みのテンプレート変数を使用して、リハイドレートの最後にトリガーされる通知をカスタマイズできます。
 
 | 変数                      | 説明                                                                  |
 |-------------------------------|------------------------------------------------------------------------------|
-| `{{archive}}`                 | リハイドレートに使用されたアーカイブの名前。                           |
-| `{{from}}`                    | リハイドレートに選択された時間範囲の始まり。                    |
-| `{{to}}`                      | リハイドレートに選択された時間範囲の終わり。                      |
-| `{{scan_size}}`               | リハイドレート中に処理されたファイルの合計サイズ。                |
-| `{{number_of_indexed_logs}}`  | リハイドレートされたログの総数。                                         |
-| `{{explorer_url}}`            | リハイドレートされたログへの直接リンク。                                      |
+| `{{archive}}`                 | Name of the archives used for the rehydration.                           |
+| `{{from}}`                    | Start of the time range selected for the rehydration.                    |
+| `{{to}}`                      | End of the time range selected for the rehydration.                      |
+| `{{scan_size}}`               | Total size of the files processed during the rehydration.                |
+| `{{number_of_indexed_logs}}`  | Total number of rehydrated logs.                                         |
+| `{{explorer_url}}`            | リハイドレートされたログへの直接リンク。                                     |
 
-### 履歴ビューのコンテンツの表示
+### 履歴ビューのデフォルト制限 {#default-limit-for-historical-views}
 
-#### 履歴ビューのページから
+`Logs Write Archives` 権限を持つ管理者は、チーム間での Log Rehydration* の効率的な使用を確保するためにデフォルトの制御を構成できます。[{{< ui >}}Settings{{< /ui >}}] (設定) をクリックして、以下に従って構成します。
 
-"Rehydrate from Archive" を選択すると、コンテンツをクエリできる状態になるまで履歴ビューに "pending" のマークが付けられます。
+- {{< ui >}}Default Rehydration volume limit{{< /ui >}} (デフォルトのリハイドレート量制限): 履歴ビューごとにリハイドレートできるログのデフォルト数 (百万単位) を定義します。制限に達した場合、リハイドレートは自動的に停止しますが、すでにリハイドレートされたログには引き続きアクセスできます。管理者は、ビューの作成中にこの制限をオーバーライドすることも許可できます。
 
-コンテンツがリハイドレートされると、履歴ビューに active のマークが表示され、クエリ列のリンクによって Log Explorer の履歴ビューに移動できるようになります。
+- {{< ui >}}Rehydration retention periods{{< /ui >}} (リハイドレートの保持期間): リハイドレートの作成時に利用可能な保持期間を選択します。選択された期間 (たとえば、3、7、15、30、45、60、90、または 180 日) のみが、Datadog でログを検索可能な期間を選択する際のドロップダウンメニューに表示されます。
 
-#### ログエクスプローラーから
+### クラウド特有の権限{#cloud-specific-permissions}
 
-また、ログエクスプローラーのインデックスセレクタから直接履歴ビューを探すこともできます。
-
-{{< img src="logs/archives/log_archives_historical_index_selector.png" alt="ログエクスプローラー" width="75%">}}
-
-### 進行中の履歴ビューをキャンセルする
-
-Rehydrate from Archives ページで進行中のリハイドレートを直接キャンセルすることで、間違った時間範囲でリハイドレートを開始したり、インデックス作成クエリで誤ってタイプミスをしたりすることを避けることができます。
-
-すでにインデックスが作成されたログは、その履歴表示で選択された保存期間の終了までクエリ可能であり、すでにスキャンされインデックスが作成されたすべてのログは、引き続き課金されます。
-
-{{< img src="logs/archives/log_archives_cancel_ongoing_rehydration.png" alt="進行中のリハイドレートのキャンセル" width="75%" >}}
-
-### 履歴ビューの削除
-
-履歴ビューは、選択した保持期間を超えるまで Datadog に残ります。または、ビューが不要になった場合は、これより早く削除することを選択できます。履歴ビューの右端にある削除アイコンを選択して確認することで、履歴ビューを削除対象としてマークできます。
-
-1 時間後に、履歴ビューが最終的に削除されます。それまでの間なら、削除をキャンセルすることができます。
-
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="履歴ビューの削除" video="true" width="75%" >}}
-
-### 削除された履歴ビューを表示する
-
-削除された過去 1 年分の履歴を、`View` ドロップダウンメニューで表示することができます。
-
-{{< img src="logs/archives/log_archives_deleted_rehydrations.png" alt="履歴ビューの削除" width="75%" >}}
-
-## アーカイブのリハイドレートの設定
-
-### Datadog のアーカイブの定義
-
-外部のアーカイブからデータをリハイドレートするには、外部のアーカイブを構成する必要があります。ログを外部の使用可能な場所にアーカイブするには、[こちらのガイド][8]を参照してください。
-
-### 権限
-
-Datadog は、アーカイブからコンテンツをリハイドレートするために、アーカイブに対して読み取りのアクセス許可を必要とします。このアクセス許可は、いつでも変更できます。
+アーカイブからコンテンツをリハイドレートするために、Datadog にはアーカイブを読み取る権限が必要です。この権限はいつでも変更できます。
 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
 
-ログイベントをアーカイブからリハイドレートするために、Datadog は [AWS インテグレーション][1]で構成する AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順に従って作成してください][2]。このロールに対してアーカイブからのログイベントのリハイドレートを許可するには、以下のアクセス許可ステートメントを IAM ポリシーに追加する必要があります。バケット名を編集し、必要であればログアーカイブへのパスを指定してください。
+ログイベントをアーカイブからリハイドレートするために、Datadog は [AWS インテグレーション][1]で構成する AWS アカウントの IAM ロールを使用します。このロールをまだ作成していない場合は、[こちらの手順に従って作成してください][2]。そのロールに [アーカイブ権限の設定][4] のポリシーが含まれている場合は、以下のステートメントをスキップしてください。そうでない場合は、以下の権限ステートメントをそのロールの IAM ポリシーに追加してください。バケット名を編集し、必要であればログアーカイブへのパスを指定してください。
 
 ```json
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
+      "Sid": "DatadogRehydrateLogArchives",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": "s3:GetObject",
       "Resource": [
-        "arn:aws:s3:::<バケット名_1_/_バケットへのパス_任意_1>/*",
-        "arn:aws:s3:::<バケット名_2_/_バケットへのパス_任意_2>/*"
+        "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
       ]
     },
     {
@@ -134,30 +150,31 @@ Datadog は、アーカイブからコンテンツをリハイドレートする
       "Effect": "Allow",
       "Action": "s3:ListBucket",
       "Resource": [
-        "arn:aws:s3:::<バケット名_1>",
-        "arn:aws:s3:::<バケット名_2>"
+        "arn:aws:s3:::<MY_BUCKET_NAME_1>",
+        "arn:aws:s3:::<MY_BUCKET_NAME_2>"
       ]
     }
   ]
 }
 ```
 
-#### ロールの委任を S3 アーカイブに追加する
+#### ロールの委任を S3 アーカイブに追加する{#adding-role-delegation-to-s3-archives}
 
-Datadog では、ロールの委任を使用してアクセスを許可するよう構成されたアーカイブだけをリハイドレートできます。Datadog IAM ロールに先ほどの IAM ポリシーを含めた後で、[アーカイブコンフィギュレーションのページ][3]にある各アーカイブが、AWS アカウントとロールの正しい組み合わせで構成されていることを確認してください。
+Datadog は、ロールの委任を使用してアクセス権を付与するアーカイブからのリハイドレートのみをサポートしています。Datadog IAM ロールに先ほどの IAM ポリシーを含めた後で、[アーカイブ構成ページ][3]にある各アーカイブが、AWS アカウントとロールの正しい組み合わせで構成されていることを確認してください。
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="ロールの委任を S3 アーカイブに追加" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="ロールの委任を S3 アーカイブに追加する" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /ja/integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+[4]: /ja/logs/log_configuration/archives/?tab=awss3#set-permissions
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-Datadog は、アーカイブのストレージアカウントのスコープを持つ Storage Blob Data Contributor ロールが割り当てられた Azure AD グループを使用して、ログイベントをリハイドレートします。このロールを Datadog のサービスアカウントに付与するには、ストレージアカウントの Access Control (IAM) ページで、[Storage Blob Data Contributor ロールを Datadog インテグレーションアプリに割り当てる][1]必要があります。
+Datadog は、アーカイブのストレージアカウントのスコープを持つ Storage Blob Data Contributor ロールが割り当てられた Microsoft Entra ID グループを使用して、ログイベントをリハイドレートします。このロールを Datadog のサービスアカウントに付与するには、ストレージアカウントの [Access Control (IAM)] (アクセス制御) ページで、[Storage Blob Data Contributor ロールを Datadog インテグレーションアプリに割り当て][1]ます。
 
-{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Azure Storage からのリハイドレートには Storage Blob Data Contributor ロールが必要" style="width:75%;">}}
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Azure Storage からのリハイドレートには、Storage Blob Data Contributor ロールが必要" style="width:75%;">}}
 
 
 [1]: /ja/logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
@@ -165,14 +182,31 @@ Datadog は、アーカイブのストレージアカウントのスコープを
 
 {{% tab "Google Cloud Storage" %}}
 
-アーカイブからログイベントをリハイドレートするために、Datadog は Storage Object Viewer ロールが割り当てられたサービスアカウントを使用します。このロールを Datadog のサービスアカウントに付与するには、[Google Cloud IAM 管理者ページ][1]でサービスアカウントのアクセス許可を編集し、ロールを 1 つ追加してから、Storage > Storage Object Viewer の順に選択します。
+アーカイブからログイベントをリハイドレートするため、Datadog は Storage Object Viewer ロールが割り当てられたサービスアカウントを使用します。このロールを Datadog のサービスアカウントに付与するには、[Google Cloud IAM 管理者ページ][1]でサービスアカウントの権限を編集し、ロールを 1 つ追加してから {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}} の順に選択します。
 
-{{< img src="logs/archives/log_archives_gcs_role.png" alt="GCS からのリハイドレートには Storage Object Viewer ロールが必要" style="width:75%;">}}
+{{< img src="logs/archives/log_archives_gcs_role.png" alt="GCS からのリハイドレートには、Storage Object Viewer ロールが必要" style="width:75%;">}}
+
+{{< ui >}}Storage Object Viewer{{< /ui >}} ロールは、Datadog が推奨する構成です。組織で最小権限のカスタムロールが必要な場合、リハイドレートには以下の個別権限が必要です。
+
+- `storage.objects.get`
+- `storage.objects.list`
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## リハイドレートのスキャンサイズについて{#understanding-rehydration-scan-sizes}
+
+クエリは、期間に一致するファイルがアーカイブからダウンロードされた_後で_適用されます。その結果、リハイドレートのスキャンサイズは、クエリに一致するログの数ではなく、**アーカイブから取得されるログの総容量**に基づきます。アーカイブストレージは時間ベースであるため、特定のフィルター (`service:A` など) にスコープされたクエリでも、選択した期間内のすべてのログが取得されます。これには、他のサービス (`service:A` と `service:B` など) からのログが含まれます。
+
+クエリフィルターはデータがダウンロードされた後に適用されるため、日付範囲を短縮することが、スキャンサイズを制限し、クラウドデータ転送コストを最小限に抑える最も効果的な方法です。
+
+## 参考資料{#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+<br>
 *Log Rehydration は Datadog, Inc. の商標です
 
 [1]: /ja/logs/explorer/
