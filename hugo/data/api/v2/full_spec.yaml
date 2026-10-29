@@ -22492,7 +22492,9 @@ components:
           $ref: "#/components/schemas/ContainerType"
       type: object
     ContainerAttributes:
-      description: Attributes for a container.
+      description: |-
+        Attributes for a container. For CPU or memory metrics, use its full `container_id` as
+        `container_id:<container_id>` in `tag_filters` with the `container` data source.
       properties:
         container_id:
           description: The ID of the container.
@@ -22559,7 +22561,8 @@ components:
       description: Attributes for a container group.
       properties:
         count:
-          description: Number of containers in the group.
+          description: >-
+            Number of containers in the group. A container with multiple values for a grouping tag can appear in multiple groups. Summing group counts can overcount distinct containers.
           format: int64
           type: integer
         tags:
@@ -22573,7 +22576,10 @@ components:
           $ref: "#/components/schemas/ContainerGroupRelationshipsLink"
       type: object
     ContainerGroupRelationshipsData:
-      description: Links data.
+      description: |-
+        This array is always empty, even when the group includes containers. To retrieve the containers
+        in this group, make a new request to this endpoint with the `filter[tags]` value from
+        `links.related`, using your site's API host.
       items:
         description: A link data.
         type: string
@@ -22925,20 +22931,22 @@ components:
           description: The cursor used to get the current results, if any.
           type: string
         limit:
-          description: Number of results returned
+          description: Maximum number of results requested.
           format: int32
           maximum: 10000
           minimum: 0
           type: integer
         next_cursor:
-          description: The cursor used to get the next results, if any.
+          description: |-
+            The cursor used to get the next results, if any. To make the next request, use the same
+            parameters with the addition of the `page[cursor]`. Empty for grouped results.
           type: string
         prev_cursor:
           description: The cursor used to get the previous results, if any.
           nullable: true
           type: string
         total:
-          description: Total number of records that match the query.
+          description: Total number of containers that match the query. Always `0` for grouped results.
           format: int64
           type: integer
         type:
@@ -23046,7 +23054,7 @@ components:
       description: List of containers.
       properties:
         data:
-          description: Array of Container objects.
+          description: Array of containers or container group objects.
           items:
             $ref: "#/components/schemas/ContainerItem"
           type: array
@@ -40807,7 +40815,7 @@ components:
           minLength: 1
           type: string
         resolve_page_on_policy_end:
-          description: "Indicates whether the page is automatically resolved when the policy ends."
+          description: "Indicates whether the Page is automatically resolved when the policy ends."
           type: boolean
         retries:
           description: "Specifies how many times the escalation sequence is retried if there is no response."
@@ -40888,7 +40896,7 @@ components:
           minLength: 1
           type: string
         resolve_page_on_policy_end:
-          description: "Indicates whether the page is automatically resolved when the policy ends."
+          description: "Indicates whether the Page is automatically resolved when the policy ends."
           type: boolean
         retries:
           description: "Specifies how many times the escalation sequence is retried if there is no response."
@@ -41124,7 +41132,7 @@ components:
           minLength: 1
           type: string
         resolve_page_on_policy_end:
-          description: "Indicates whether the page is automatically resolved when the policy ends."
+          description: "Indicates whether the Page is automatically resolved when the policy ends."
           type: boolean
         retries:
           description: "Specifies how many times the escalation sequence is retried if there is no response."
@@ -42159,12 +42167,14 @@ components:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
+        - INTEGRATION_SLACK
       example: INTEGRATION_SCRIPT
       type: string
       x-enum-varnames:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
+        - INTEGRATION_SLACK
     ExecutionPolicyKubernetesScope:
       description: Restricts the policy to specific Kubernetes namespaces.
       properties:
@@ -42287,9 +42297,9 @@ components:
       type: object
     ExecutionPolicyScope:
       description: |-
-        Restricts where the policy applies. At most one of `kubernetes`, `scripts`,
-        or `remote_action_rshell` can be set. An empty object means the policy has
-        no scope restriction.
+        Restricts where the policy applies. At most one scope type can be set,
+        and it must match the action pattern's integration. An empty object means
+        the policy has no scope restriction.
       properties:
         kubernetes:
           $ref: "#/components/schemas/ExecutionPolicyKubernetesScope"
@@ -42297,6 +42307,8 @@ components:
           $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScope"
         scripts:
           $ref: "#/components/schemas/ExecutionPolicyScriptScope"
+        slack:
+          $ref: "#/components/schemas/ExecutionPolicySlackScope"
       type: object
     ExecutionPolicyScriptScope:
       description: Restricts the policy to specific scripts.
@@ -42322,11 +42334,43 @@ components:
       required:
         - target_script_names
       type: object
+    ExecutionPolicySlackScope:
+      description: Restricts the policy to specific Slack private channel names.
+      properties:
+        rules:
+          description: The Slack scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicySlackScopeRule"
+          minItems: 1
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicySlackScopeRule:
+      description: A rule restricting a Slack scope to specific private channel names.
+      properties:
+        channel_name_selectors:
+          description: |-
+            The private channel name selectors this rule applies to. Selectors are lowercase private channel names
+            without the leading `#`, and can contain `*` wildcards. Use `*` alone to match any private channel name.
+          example:
+            - "incident-*"
+          items:
+            maxLength: 80
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - channel_name_selectors
+      type: object
     ExecutionPolicyTarget:
-      description: A target this policy is scoped to, expressed as a set of Agent tags.
+      description: A target this policy is scoped to, expressed as a set of tags.
       properties:
         agent_tags:
-          description: The Agent tags identifying the target.
+          description: The tags identifying the target.
           example:
             - "env:prod"
           items:
@@ -84995,7 +85039,7 @@ components:
         - PUSH
     NotificationChannelType:
       default: notification_channels
-      description: "Indicates that the resource is of type 'notification_channels'."
+      description: "Indicates that the resource is of type `notification_channels`."
       enum:
         - notification_channels
       example: notification_channels
@@ -93273,7 +93317,7 @@ components:
       type: object
     OnCallNotificationRuleType:
       default: notification_rules
-      description: "Indicates that the resource is of type 'notification_rules'."
+      description: "Indicates that the resource is of type `notification_rules`."
       enum:
         - notification_rules
       example: notification_rules
@@ -93284,6 +93328,557 @@ components:
       description: Represents additional included resources for a on-call notification rules
       oneOf:
         - $ref: "#/components/schemas/NotificationChannelData"
+    OnCallPageAuthorRelationship:
+      description: Reference to the entity that performed an action on the Page.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageAuthorRelationshipData"
+      type: object
+    OnCallPageAuthorRelationshipData:
+      description: Reference to the author of a Page action.
+      nullable: true
+      properties:
+        id:
+          description: The ID of the author.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          description: |-
+            The resource type of the author, for example `users`, `monitors`,
+            `incident_authors`, or `security_signal`.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageData:
+      description: An On-Call Page.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OnCallPageDataAttributes"
+        id:
+          description: The unique ID of the Page.
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OnCallPageDataRelationships"
+        type:
+          $ref: "#/components/schemas/OnCallPageDataType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageDataAttributes:
+      description: The attributes of an On-Call Page.
+      properties:
+        acknowledged_at:
+          description: The time when the Page was first acknowledged.
+          example: "2026-01-01T10:05:00Z"
+          format: date-time
+          type: string
+        closed_at:
+          description: The time when the Page was resolved.
+          example: "2026-01-01T10:30:00Z"
+          format: date-time
+          type: string
+        comment_count:
+          description: The number of comments on the Page.
+          example: 2
+          format: int64
+          type: integer
+        created_at:
+          description: The time when the Page was created.
+          example: "2026-01-01T10:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: A short summary of the issue or context.
+          example: Page details.
+          type: string
+        escalation_policy_uuid:
+          description: The ID of the escalation policy used to route the Page.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        key:
+          description: An alternative numeric identifier of the Page, as displayed in the Datadog UI.
+          example: "25137717"
+          type: string
+        live_call:
+          $ref: "#/components/schemas/OnCallPageLiveCall"
+        modified_at:
+          description: The time when the Page was last modified.
+          example: "2026-01-01T10:30:00Z"
+          format: date-time
+          type: string
+        release_at:
+          description: The time when the snooze ends. Only set while the Page is snoozed, together with `release_origin`.
+          example: "2026-01-01T11:00:00Z"
+          format: date-time
+          type: string
+        release_origin:
+          $ref: "#/components/schemas/OnCallPageReleaseOrigin"
+        responders_added_at:
+          description: The time when responders were first added to the Page.
+          example: "2026-01-01T10:01:00Z"
+          format: date-time
+          type: string
+        services:
+          description: The services associated with the Page.
+          example:
+            - service-a
+          items:
+            description: A service name.
+            type: string
+          type: array
+        status:
+          $ref: "#/components/schemas/OnCallPageStatus"
+        tags:
+          description: Tags associated with the Page.
+          example:
+            - service:test
+          items:
+            description: A tag.
+            type: string
+          type: array
+        title:
+          description: The title of the Page.
+          example: "Service: Test is down"
+          type: string
+        urgency:
+          $ref: "#/components/schemas/PageUrgency"
+      required:
+        - title
+        - key
+        - status
+        - description
+        - tags
+        - urgency
+        - created_at
+      type: object
+    OnCallPageDataRelationships:
+      description: The relationships of an On-Call Page.
+      properties:
+        author:
+          $ref: "#/components/schemas/OnCallPageAuthorRelationship"
+        closed_by:
+          $ref: "#/components/schemas/OnCallPageAuthorRelationship"
+        jira_issue:
+          $ref: "#/components/schemas/OnCallPageJiraIssueRelationship"
+        links:
+          $ref: "#/components/schemas/OnCallPageLinksRelationship"
+        responders:
+          $ref: "#/components/schemas/OnCallPageRespondersRelationship"
+        scheduled_action:
+          $ref: "#/components/schemas/OnCallPageScheduledActionRelationship"
+        service_now_incident:
+          $ref: "#/components/schemas/OnCallPageServiceNowIncidentRelationship"
+        target:
+          $ref: "#/components/schemas/OnCallPageTargetRelationship"
+        team_routing_rule:
+          $ref: "#/components/schemas/OnCallPageTeamRoutingRuleRelationship"
+      type: object
+    OnCallPageDataType:
+      default: pages
+      description: "Indicates that the resource is of type `pages`."
+      enum:
+        - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+        - PAGES
+    OnCallPageJiraIssueRelationship:
+      description: The Jira issue linked to the Page.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageJiraIssueRelationshipData"
+      type: object
+    OnCallPageJiraIssueRelationshipData:
+      description: Reference to a Jira issue.
+      properties:
+        id:
+          description: The ID of the Jira issue, in the form `<account_id>:<issue_id>`.
+          example: "123456:10001"
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageJiraIssueType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageJiraIssueType:
+      default: jira_issues
+      description: Jira issue resource type.
+      enum:
+        - jira_issues
+      example: jira_issues
+      type: string
+      x-enum-varnames:
+        - JIRA_ISSUES
+    OnCallPageLink:
+      description: A link between a Page and another Datadog resource, such as an incident.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OnCallPageLinkAttributes"
+        id:
+          description: The ID of the link.
+          example: 00000000-0000-0000-0000-000000000003
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageLinkType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageLinkAttributes:
+      description: |-
+        The attributes of a Page link. A Page can be the child of another Datadog resource
+        (for example, when an incident triggers it), or the parent of one (for example, when the
+        Page is escalated to an incident).
+      properties:
+        child_entity_id:
+          description: The ID of the child resource.
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          type: string
+        child_entity_type:
+          $ref: "#/components/schemas/OnCallPageLinkEntityType"
+        parent_entity_id:
+          description: The ID of the parent resource.
+          example: 00000000-0000-0000-0000-000000000002
+          type: string
+        parent_entity_type:
+          $ref: "#/components/schemas/OnCallPageLinkEntityType"
+        relationship:
+          $ref: "#/components/schemas/OnCallPageLinkRelationshipType"
+      required:
+        - child_entity_id
+        - child_entity_type
+        - parent_entity_id
+        - parent_entity_type
+        - relationship
+      type: object
+    OnCallPageLinkEntityType:
+      description: The type of a resource linked to a Page.
+      enum:
+        - case
+        - incident
+        - page
+        - agent_conversation
+      example: page
+      type: string
+      x-enum-varnames:
+        - CASE
+        - INCIDENT
+        - PAGE
+        - AGENT_CONVERSATION
+    OnCallPageLinkRelationshipData:
+      description: Reference to a Page link.
+      properties:
+        id:
+          description: The ID of the link.
+          example: 00000000-0000-0000-0000-000000000003
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageLinkType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageLinkRelationshipType:
+      description: How the parent resource relates to the child resource.
+      enum:
+        - relates_to
+        - causes
+        - blocks
+        - duplicates
+        - parent_of
+        - successor_of
+        - escalates_to
+        - pages
+      example: pages
+      type: string
+      x-enum-varnames:
+        - RELATES_TO
+        - CAUSES
+        - BLOCKS
+        - DUPLICATES
+        - PARENT_OF
+        - SUCCESSOR_OF
+        - ESCALATES_TO
+        - PAGES
+    OnCallPageLinkType:
+      default: links
+      description: Page link resource type.
+      enum:
+        - links
+      example: links
+      type: string
+      x-enum-varnames:
+        - LINKS
+    OnCallPageLinksRelationship:
+      description: Links between the Page and other Datadog resources, such as incidents. Always empty when listing Pages.
+      properties:
+        data:
+          description: The list of Page links.
+          items:
+            $ref: "#/components/schemas/OnCallPageLinkRelationshipData"
+          type: array
+      type: object
+    OnCallPageLiveCall:
+      description: Live call information for a Page triggered by a live call route.
+      properties:
+        call_over:
+          $ref: "#/components/schemas/OnCallPageLiveCallOver"
+      type: object
+    OnCallPageLiveCallOutcome:
+      description: The outcome of a live call that has ended.
+      enum:
+        - success_call_answered
+        - failure_no_responder
+        - failure_caller_abandoned
+        - failure_outside_support_hours
+        - failure_internal_error
+      example: success_call_answered
+      type: string
+      x-enum-varnames:
+        - SUCCESS_CALL_ANSWERED
+        - FAILURE_NO_RESPONDER
+        - FAILURE_CALLER_ABANDONED
+        - FAILURE_OUTSIDE_SUPPORT_HOURS
+        - FAILURE_INTERNAL_ERROR
+    OnCallPageLiveCallOver:
+      description: Information about a live call that has ended.
+      properties:
+        outcome:
+          $ref: "#/components/schemas/OnCallPageLiveCallOutcome"
+        support_hours_start_at:
+          description: When support hours start, if the call was placed outside support hours.
+          example: "2026-01-01T09:00:00Z"
+          format: date-time
+          type: string
+      type: object
+    OnCallPageReleaseOrigin:
+      description: |-
+        What snoozed the Page. Only set while the Page is snoozed, together with `release_at`.
+        `ack_timeout`: the acknowledgment timeout. `team_rules_active_hours`: the Page was
+        triggered outside of the active hours of the team's routing rules. `manual_snooze`:
+        a user snoozed the Page.
+      enum:
+        - ack_timeout
+        - team_rules_active_hours
+        - manual_snooze
+      example: manual_snooze
+      type: string
+      x-enum-varnames:
+        - ACK_TIMEOUT
+        - TEAM_RULES_ACTIVE_HOURS
+        - MANUAL_SNOOZE
+    OnCallPageRespondersRelationship:
+      description: The users responding to the Page.
+      properties:
+        data:
+          description: The list of responders.
+          items:
+            $ref: "#/components/schemas/OnCallPageUserRelationshipData"
+          type: array
+      type: object
+    OnCallPageResponse:
+      description: A single On-Call Page with its related included resources.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageData"
+        included:
+          description: Resources related to the Page, such as users, teams, scheduled actions, and links.
+          items:
+            $ref: "#/components/schemas/OnCallPagesIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    OnCallPageScheduledAction:
+      description: The next action scheduled on a Page, such as an escalation or an automatic resolution.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OnCallPageScheduledActionAttributes"
+        id:
+          description: The ID of the scheduled action. Equal to the Page ID.
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OnCallPageScheduledActionRelationships"
+        type:
+          $ref: "#/components/schemas/OnCallPageScheduledActionType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageScheduledActionAttributes:
+      description: The attributes of a scheduled action.
+      properties:
+        at:
+          description: The time when the action is scheduled to run.
+          example: "2026-01-01T10:15:00Z"
+          format: date-time
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageScheduledActionAttributesType"
+      type: object
+    OnCallPageScheduledActionAttributesType:
+      description: The kind of action that is scheduled.
+      enum:
+        - escalate
+        - resolve
+        - release
+        - retrigger
+      example: escalate
+      type: string
+      x-enum-varnames:
+        - ESCALATE
+        - RESOLVE
+        - RELEASE
+        - RETRIGGER
+    OnCallPageScheduledActionRelationship:
+      description: The next action scheduled on the Page, such as an escalation.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageScheduledActionRelationshipData"
+      type: object
+    OnCallPageScheduledActionRelationshipData:
+      description: Reference to the next scheduled action on the Page.
+      nullable: true
+      properties:
+        id:
+          description: The ID of the scheduled action. Equal to the Page ID.
+          example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageScheduledActionType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageScheduledActionRelationships:
+      description: The relationships of a scheduled action.
+      properties:
+        schedules:
+          $ref: "#/components/schemas/OnCallPageScheduledActionRelationshipsSchedules"
+        users:
+          $ref: "#/components/schemas/OnCallPageScheduledActionRelationshipsUsers"
+      type: object
+    OnCallPageScheduledActionRelationshipsSchedules:
+      description: The schedules the action escalates to.
+      properties:
+        data:
+          description: The list of schedules.
+          items:
+            $ref: "#/components/schemas/OnCallPageScheduledActionRelationshipsSchedulesData"
+          type: array
+      type: object
+    OnCallPageScheduledActionRelationshipsSchedulesData:
+      description: Reference to a schedule.
+      properties:
+        id:
+          description: The schedule ID.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleDataType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageScheduledActionRelationshipsUsers:
+      description: The users the action escalates to.
+      properties:
+        data:
+          description: The list of users.
+          items:
+            $ref: "#/components/schemas/OnCallPageUserRelationshipData"
+          type: array
+      type: object
+    OnCallPageScheduledActionType:
+      default: scheduled_actions
+      description: Scheduled action resource type.
+      enum:
+        - scheduled_actions
+      example: scheduled_actions
+      type: string
+      x-enum-varnames:
+        - SCHEDULED_ACTIONS
+    OnCallPageServiceNowIncidentRelationship:
+      description: The ServiceNow incident linked to the Page.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageServiceNowIncidentRelationshipData"
+      type: object
+    OnCallPageServiceNowIncidentRelationshipData:
+      description: Reference to a ServiceNow incident.
+      properties:
+        id:
+          description: The ID of the ServiceNow incident.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageServiceNowIncidentType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageServiceNowIncidentType:
+      default: service_now_incidents
+      description: ServiceNow incident resource type.
+      enum:
+        - service_now_incidents
+      example: service_now_incidents
+      type: string
+      x-enum-varnames:
+        - SERVICE_NOW_INCIDENTS
+    OnCallPageStatus:
+      description: The current status of the On-Call Page.
+      enum:
+        - triggered
+        - acknowledged
+        - resolved
+      example: triggered
+      type: string
+      x-enum-varnames:
+        - TRIGGERED
+        - ACKNOWLEDGED
+        - RESOLVED
+    OnCallPageTargetRelationship:
+      description: The team, user, or cross-organization handle that was paged.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageTargetRelationshipData"
+      type: object
+    OnCallPageTargetRelationshipData:
+      description: Reference to the target of the Page.
+      nullable: true
+      properties:
+        id:
+          description: The ID of the target.
+          example: 00000000-da3a-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/OnCallPageTargetRelationshipDataType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageTargetRelationshipDataType:
+      description: The resource type of the Page target.
+      enum:
+        - teams
+        - users
+        - cross_org_handles
+      example: teams
+      type: string
+      x-enum-varnames:
+        - TEAMS
+        - USERS
+        - CROSS_ORG_HANDLES
     OnCallPageTargetType:
       description: The kind of target, `team_id` | `team_handle` | `user_id`.
       enum:
@@ -93296,6 +93891,85 @@ components:
         - TEAM_ID
         - TEAM_HANDLE
         - USER_ID
+    OnCallPageTeamRoutingRuleRelationship:
+      description: The team routing rule that matched the Page.
+      properties:
+        data:
+          $ref: "#/components/schemas/OnCallPageTeamRoutingRuleRelationshipData"
+      type: object
+    OnCallPageTeamRoutingRuleRelationshipData:
+      description: Reference to a team routing rule.
+      properties:
+        id:
+          description: The ID of the team routing rule.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/TeamRoutingRulesDataRelationshipsRulesDataItemsType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPageUserRelationshipData:
+      description: Reference to a user.
+      properties:
+        id:
+          description: The user ID.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleUserType"
+      required:
+        - id
+        - type
+      type: object
+    OnCallPagesIncluded:
+      description: A resource related to a Page.
+      oneOf:
+        - $ref: "#/components/schemas/ScheduleUser"
+        - $ref: "#/components/schemas/TeamReference"
+        - $ref: "#/components/schemas/OnCallPageScheduledAction"
+        - $ref: "#/components/schemas/OnCallPageLink"
+    OnCallPagesResponse:
+      description: A list of On-Call Pages with pagination metadata and related included resources.
+      properties:
+        data:
+          description: A list of Pages.
+          items:
+            $ref: "#/components/schemas/OnCallPageData"
+          type: array
+        included:
+          description: Resources related to the Pages, such as users, teams, and scheduled actions.
+          items:
+            $ref: "#/components/schemas/OnCallPagesIncluded"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SchedulesResponseMeta"
+      required:
+        - data
+      type: object
+    OnCallPagesSort:
+      default: created_at
+      description: Sorting options for Pages. Prefix a field with `-` to sort in descending order.
+      enum:
+        - created_at
+        - -created_at
+        - modified_at
+        - -modified_at
+        - status
+        - -status
+        - priority
+        - -priority
+      type: string
+      x-enum-varnames:
+        - CREATED_AT_ASCENDING
+        - CREATED_AT_DESCENDING
+        - MODIFIED_AT_ASCENDING
+        - MODIFIED_AT_DESCENDING
+        - STATUS_ASCENDING
+        - STATUS_DESCENDING
+        - PRIORITY_ASCENDING
+        - PRIORITY_DESCENDING
     OnCallPhoneNotificationRuleMethod:
       description: "Specifies the method in which a phone is used in a notification rule"
       enum:
@@ -95940,7 +96614,7 @@ components:
       type: object
     OverrideDataType:
       default: overrides
-      description: "Indicates that the resource is of type 'overrides'."
+      description: "Indicates that the resource is of type `overrides`."
       enum:
         - overrides
       example: overrides
@@ -95984,7 +96658,7 @@ components:
       type: object
     OverrideRelationshipsScheduleDataType:
       default: schedules
-      description: "Indicates that the related resource is of type 'schedules'."
+      description: "Indicates that the related resource is of type `schedules`."
       enum:
         - schedules
       example: schedules
@@ -96015,7 +96689,7 @@ components:
       type: object
     OverrideRelationshipsUserDataType:
       default: users
-      description: "Indicates that the related resource is of type 'users'."
+      description: "Indicates that the related resource is of type `users`."
       enum:
         - users
       example: users
@@ -105209,7 +105883,9 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          description: |-
+            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
+            or `completed`. Defaults to `all`, which returns recommendations in every status.
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105222,7 +105898,9 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
+        or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105258,9 +105936,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–10000).
+          description: Number of items returned in this page (1–5000).
           format: int32
-          maximum: 10000
+          maximum: 5000
           minimum: 1
           type: integer
         page_token:
@@ -108285,7 +108963,7 @@ components:
       description: "Triggers an escalation policy."
       properties:
         ack_timeout_minutes:
-          description: "The number of minutes before an acknowledged page is re-triggered."
+          description: "The number of minutes before an acknowledged Page is re-triggered."
           example: 30
           format: int64
           type: integer
@@ -108355,7 +109033,7 @@ components:
       type: object
     RoutingRuleRelationshipsPolicyDataType:
       default: policies
-      description: "Indicates that the resource is of type 'policies'."
+      description: "Indicates that the resource is of type `policies`."
       enum:
         - policies
       example: policies
@@ -108363,10 +109041,10 @@ components:
       x-enum-varnames:
         - POLICIES
     RoutingRuleRerouteToTeamAction:
-      description: "Reroutes the page to another team, which then evaluates it against its own routing rules. Each routing rule can include this action only once. It can be combined only with `send_slack_message` and `send_teams_message` actions. It can't be used with `escalation_policy` or `workflow` actions, or when the routing rule sets `policy_id`."
+      description: "Reroutes the Page to another team, which then evaluates it against its own routing rules. Each routing rule can include this action only once. It can be combined only with `send_slack_message` and `send_teams_message` actions. It can't be used with `escalation_policy` or `workflow` actions, or when the routing rule sets `policy_id`."
       properties:
         destination_team_id:
-          description: "The ID of the team to reroute the page to."
+          description: "The ID of the team to reroute the Page to."
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -108378,7 +109056,7 @@ components:
       type: object
     RoutingRuleRerouteToTeamActionType:
       default: reroute_to_team
-      description: "Indicates that the action reroutes the page to another team's routing rules."
+      description: "Indicates that the action reroutes the Page to another team's routing rules."
       enum:
         - reroute_to_team
       example: reroute_to_team
@@ -114156,13 +114834,13 @@ components:
           $ref: "#/components/schemas/SchedulesResponseMeta"
       type: object
     SchedulesResponseMeta:
-      description: Metadata that is included in the response when listing schedules.
+      description: Metadata that is included in the response when listing On-Call resources.
       properties:
         page:
           $ref: "#/components/schemas/SchedulesResponseMetaPage"
       type: object
     SchedulesResponseMetaPage:
-      description: Metadata related to paging information that is included in the response when listing schedules.
+      description: Metadata related to pagination information that is included in the response when listing On-Call resources.
       properties:
         first_number:
           description: First page number.
@@ -125227,7 +125905,7 @@ components:
       type: object
     ShiftDataRelationshipsUserDataType:
       default: users
-      description: "Indicates that the related resource is of type 'users'."
+      description: "Indicates that the related resource is of type `users`."
       enum:
         - users
       example: users
@@ -125236,7 +125914,7 @@ components:
         - USERS
     ShiftDataType:
       default: shifts
-      description: "Indicates that the resource is of type 'shifts'."
+      description: "Indicates that the resource is of type `shifts`."
       enum:
         - shifts
       example: shifts
@@ -136338,7 +137016,7 @@ components:
       type: object
     TeamRoutingRulesDataRelationshipsRulesDataItemsType:
       default: team_routing_rules
-      description: "Indicates that the resource is of type 'team_routing_rules'."
+      description: "Indicates that the resource is of type `team_routing_rules`."
       enum:
         - team_routing_rules
       example: team_routing_rules
@@ -136410,7 +137088,7 @@ components:
       description: Represents the attributes of a request to update or create team routing rules.
       properties:
         rules:
-          description: A list of routing rule items that define how incoming pages should be handled.
+          description: A list of routing rule items that define how incoming Pages should be handled.
           items:
             $ref: "#/components/schemas/TeamRoutingRulesRequestRule"
           type: array
@@ -141254,6 +141932,19 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        tags:
+          description: |-
+            Tags associated with the feature flag. This field replaces the full set of
+            existing tags; omit it to leave tags unchanged, or pass an empty array to
+            clear all tags. The owning team is set by including a tag of the form
+            `team:<team-handle>` in this array.
+          example: ["team:feature-flagging"]
+          items:
+            description: A tag associated with the feature flag.
+            maxLength: 200
+            type: string
+          maxItems: 100
+          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -159642,31 +160333,49 @@ paths:
         permissions: []
   /api/v2/containers:
     get:
-      description: Get all containers for your organization.
+      description: |-
+        Get all containers for your organization. Use `group_by` to return container groups with counts.
+        Grouped results are limited by `page[size]` and do not support pagination.
+
+        To get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`
+        or `/api/v2/query/timeseries`.
       operationId: ListContainers
       parameters:
-        - description: Comma-separated list of tags to filter containers by.
+        - description: |-
+            Comma-separated `key:value` tags. A container must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
+            request per host.
           example: env:prod,short_image:cassandra
           in: query
           name: filter[tags]
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to group containers by.
+        - description: |-
+            Comma-separated list of up to three tag keys to group containers by. Returns `container_group`
+            objects with counts and tags. Grouped results ignore `sort` and do not support pagination.
+            Containers with multiple values for a grouping tag can appear in multiple groups.
+            Summing group counts can overcount distinct containers.
           example: datacenter,cluster
           in: query
           name: group_by
           required: false
           schema:
             type: string
-        - description: Attribute to sort containers by.
+        - description: |-
+            Attribute to sort individual containers by: `name`, `created_at`, `started_at`, `state`,
+            `container_id`, `host`, `image_name`, or `image_digest`. Defaults to `started_at` in ascending
+            order. Prefix the attribute with `-` for descending order, such as `-started_at`.
+            Ignored when `group_by` is specified.
           example: started_at
           in: query
           name: sort
           required: false
           schema:
             type: string
-        - description: Maximum number of results returned.
+        - description: |-
+            Maximum number of results returned. For grouped results, defaults to `100` with a maximum
+            of `1000` groups.
           in: query
           name: page[size]
           required: false
@@ -159704,6 +160413,27 @@ paths:
                       pagination:
                         limit: 1000
                         total: 1
+                        type: cursor_limit
+                grouped:
+                  summary: Containers grouped by short_image
+                  value:
+                    data:
+                      - attributes:
+                          count: 3
+                          tags:
+                            short_image: nginx
+                        id: short_image:nginx
+                        relationships:
+                          containers:
+                            data: []
+                            links:
+                              related: https://api.datadoghq.com/api/v2/containers?filter[tags]=short_image:nginx
+                        type: container_group
+                    meta:
+                      pagination:
+                        limit: 100
+                        next_cursor: ""
+                        total: 0
                         type: cursor_limit
               schema:
                 $ref: "#/components/schemas/ContainersResponse"
@@ -162833,11 +163563,15 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page (1–10000).
+        - description: Number of results per page, from 1 to 5000. Defaults to 50.
           in: query
           name: page[size]
           schema:
-            type: string
+            default: 50
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -162884,11 +163618,16 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
-                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -162900,6 +163639,10 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -177860,6 +178603,11 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
+
+        To change the owning team, update `tags` and include a tag of the form
+        `team:<team-handle>` in the array. `tags` is a full replacement of the
+        existing tag set (including any `team:` tag), so include every tag you
+        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -177874,6 +178622,7 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
+                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -204315,7 +205064,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
     post:
       deprecated: true
       description: |-
@@ -204400,7 +205149,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
@@ -210294,6 +211043,140 @@ paths:
         permissions:
           - on_call_write
   /api/v2/on-call/pages:
+    get:
+      description: Retrieve a paginated list of On-Call Pages, optionally filtered by a search query and sorted by a field.
+      operationId: ListOnCallPages
+      parameters:
+        - description: Number of On-Call Pages to return per page of results. The maximum allowed value is 1000.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 100
+            example: 100
+            format: int64
+            maximum: 1000
+            type: integer
+        - description: Page of results to return, starting at 0. `page[number]` multiplied by `page[size]` must be less than 50000.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            example: 0
+            format: int64
+            minimum: 0
+            type: integer
+        - description: "Search query to filter Pages. Supports filters such as `status`, `urgency`, `team`, `service`, and `tags`, for example `status:triggered`."
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            example: "status:triggered"
+            type: string
+        - description: Sort Pages by the given field. Only one field is allowed.
+          in: query
+          name: sort
+          required: false
+          schema:
+            $ref: "#/components/schemas/OnCallPagesSort"
+      responses:
+        "200":
+          content:
+            "application/json":
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T10:00:00Z"
+                          description: Page details.
+                          key: "25137717"
+                          status: triggered
+                          tags:
+                            - service:test
+                          title: "Service: Test is down"
+                          urgency: high
+                        id: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+                        relationships:
+                          author:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                          closed_by:
+                            data:
+                          responders:
+                            data:
+                              - id: 00000000-0000-0000-0000-000000000001
+                                type: users
+                          scheduled_action:
+                            data:
+                          target:
+                            data:
+                              id: 00000000-da3a-0000-0000-000000000000
+                              type: teams
+                        type: pages
+                    included:
+                      - attributes:
+                          email: jane.doe@example.com
+                          name: Jane Doe
+                          status: active
+                        id: 00000000-0000-0000-0000-000000000001
+                        type: users
+                      - attributes:
+                          avatar: ""
+                          description: ""
+                          handle: my-team
+                          name: My Team
+                        id: 00000000-da3a-0000-0000-000000000000
+                        type: teams
+                    meta:
+                      page:
+                        first_number: 0
+                        last_number: 0
+                        next_number:
+                        number: 0
+                        prev_number:
+                        size: 100
+                        total: 1
+                        type: number_size
+              schema:
+                $ref: "#/components/schemas/OnCallPagesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List On-Call Pages
+      tags:
+        - On-Call
+      x-menu-order: 28
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
     post:
       description: |-
         Trigger a new On-Call Page.
@@ -210417,6 +211300,107 @@ paths:
       tags:
         - On-Call Paging
       x-menu-order: 1
+  /api/v2/on-call/pages/{page_id}:
+    get:
+      description: Get the details of an On-Call Page.
+      operationId: GetOnCallPage
+      parameters:
+        - description: The ID of the Page, or its key.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+            type: string
+      responses:
+        "200":
+          content:
+            "application/json":
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T10:00:00Z"
+                        description: Page details.
+                        key: "25137717"
+                        status: triggered
+                        tags:
+                          - service:test
+                        title: "Service: Test is down"
+                        urgency: high
+                      id: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+                      relationships:
+                        author:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000001
+                            type: users
+                        closed_by:
+                          data:
+                        links:
+                          data:
+                            - id: 00000000-0000-0000-0000-000000000003
+                              type: links
+                        responders:
+                          data:
+                            - id: 00000000-0000-0000-0000-000000000001
+                              type: users
+                        scheduled_action:
+                          data:
+                        target:
+                          data:
+                            id: 00000000-da3a-0000-0000-000000000000
+                            type: teams
+                      type: pages
+                    included:
+                      - attributes:
+                          email: jane.doe@example.com
+                          name: Jane Doe
+                          status: active
+                        id: 00000000-0000-0000-0000-000000000001
+                        type: users
+                      - attributes:
+                          avatar: ""
+                          description: ""
+                          handle: my-team
+                          name: My Team
+                        id: 00000000-da3a-0000-0000-000000000000
+                        type: teams
+                      - attributes:
+                          child_entity_id: 15e74b8b-f865-48d0-bcc5-453323ed2c8f
+                          child_entity_type: page
+                          parent_entity_id: 00000000-0000-0000-0000-000000000002
+                          parent_entity_type: case
+                          relationship: pages
+                        id: 00000000-0000-0000-0000-000000000003
+                        type: links
+              schema:
+                $ref: "#/components/schemas/OnCallPageResponse"
+          description: OK
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get On-Call Page
+      tags:
+        - On-Call
+      x-menu-order: 29
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
   /api/v2/on-call/pages/{page_id}/acknowledge:
     post:
       description: |-
@@ -240035,8 +241019,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_write
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: |-
@@ -240165,8 +241147,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/sample_log_generation/subscriptions:
     get:
       description: |-
@@ -259958,7 +260938,8 @@ tags:
       The Container Images API allows you to query Container Image data for your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/) for more information.
     name: Container Images
   - description: |-
-      The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information.
+      The Containers API allows you to query container data for your organization.
+      See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information.
     name: Containers
   - description: |-
       Programmatic management of a customer's Datadog organization. Use this API to perform
@@ -260057,9 +261038,8 @@ tags:
     name: Events
   - description: |-
       Execution policies control which actions Datadog Action Platform is allowed to run
-      against your infrastructure, and where. Each policy pairs an effect (allow or deny)
-      with a pattern of actions, and can scope that decision to specific Kubernetes
-      namespaces, scripts, or remote shell paths.
+      and where. Each policy pairs an effect (allow or deny) with a pattern of actions,
+      and can scope that decision to specific resources.
     name: Execution Policy
   - description: Create and manage experiments, metrics, subject types, SQL models, and protocols.
     name: Experiments

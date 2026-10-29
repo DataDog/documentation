@@ -3416,8 +3416,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 86
     - name: Test an existing rule
       url: /api/latest/security-monitoring/test-an-existing-rule/
@@ -3441,8 +3440,7 @@ menu:
           - v2
         operationids:
           - RestoreSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
@@ -18836,6 +18834,42 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Get On-Call Page
+      url: /api/latest/on-call/get-on-call-page/
+      identifier: on-call-get-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallPage
+        unstable: []
+        order: 29
+    - name: Create On-Call Page
+      url: /api/latest/on-call/create-on-call-page/
+      identifier: on-call-create-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
+    - name: List On-Call Pages
+      url: /api/latest/on-call/list-on-call-pages/
+      identifier: on-call-list-on-call-pages
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallPages
+        unstable: []
+        order: 28
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18948,18 +18982,6 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
-    - name: Create On-Call Page
-      url: /api/latest/on-call-paging/create-on-call-page/
-      identifier: on-call-paging-create-on-call-page
-      parent: on-call-paging
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateOnCallPage
-        unstable: []
-        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
