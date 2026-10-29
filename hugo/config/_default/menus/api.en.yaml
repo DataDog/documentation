@@ -1833,6 +1833,19 @@ menu:
         unstable:
           - v2
         order: 23
+    - name: Update a tag indexing rule exemption
+      url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
+      identifier: metrics-update-a-tag-indexing-rule-exemption
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagIndexingRuleExemption
+        unstable:
+          - v2
+        order: 26
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
       identifier: metrics-create-a-tag-indexing-rule-exemption
@@ -1871,7 +1884,7 @@ menu:
           - DeleteTagIndexingRuleExemption
         unstable:
           - v2
-        order: 26
+        order: 35
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
@@ -3403,8 +3416,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 86
     - name: Test an existing rule
       url: /api/latest/security-monitoring/test-an-existing-rule/
@@ -3428,8 +3440,7 @@ menu:
           - v2
         operationids:
           - RestoreSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
@@ -3503,6 +3514,32 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 79
+    - name: Get a rule proposal
+      url: /api/latest/security-monitoring/get-a-rule-proposal/
+      identifier: security-monitoring-get-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 189
+    - name: Start a rule proposal
+      url: /api/latest/security-monitoring/start-a-rule-proposal/
+      identifier: security-monitoring-start-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 188
     - name: Bulk convert rules to Terraform
       url: /api/latest/security-monitoring/bulk-convert-rules-to-terraform/
       identifier: security-monitoring-bulk-convert-rules-to-terraform
@@ -18797,6 +18834,42 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Get On-Call Page
+      url: /api/latest/on-call/get-on-call-page/
+      identifier: on-call-get-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallPage
+        unstable: []
+        order: 29
+    - name: Create On-Call Page
+      url: /api/latest/on-call/create-on-call-page/
+      identifier: on-call-create-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
+    - name: List On-Call Pages
+      url: /api/latest/on-call/list-on-call-pages/
+      identifier: on-call-list-on-call-pages
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallPages
+        unstable: []
+        order: 28
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18873,6 +18946,18 @@ menu:
           - ResolveOnCallPage
         unstable: []
         order: 4
+    - name: Reroute On-Call Page
+      url: /api/latest/on-call-paging/reroute-on-call-page/
+      identifier: on-call-paging-reroute-on-call-page
+      parent: on-call-paging
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RerouteOnCallPage
+        unstable: []
+        order: 5
     - name: Escalate On-Call Page
       url: /api/latest/on-call-paging/escalate-on-call-page/
       identifier: on-call-paging-escalate-on-call-page
@@ -18897,18 +18982,6 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
-    - name: Create On-Call Page
-      url: /api/latest/on-call-paging/create-on-call-page/
-      identifier: on-call-paging-create-on-call-page
-      parent: on-call-paging
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateOnCallPage
-        unstable: []
-        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

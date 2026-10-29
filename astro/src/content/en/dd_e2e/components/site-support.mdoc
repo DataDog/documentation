@@ -1,0 +1,14 @@
+---
+title: Site support banner
+description: Test page for the site-support banner.
+---
+
+This page's path is covered by a test-only `url_paths` entry, so it carries a
+site-support banner for US1-FED and US2-FED. This page exists to cover the
+plaintext (`.md`) twin; for the interactive banner, with a site selector, see
+[the SiteSupportBanner page](/dd_e2e/components/site-support-banner/).
+
+The entry lives in `tests/fixtures/siteSupport/dd_e2e.yaml` and merges into the
+dataset outside the live build. This page deliberately sets no
+`site_support_id`: naming a real product key would break these tests whenever a
+writer removed that key.
