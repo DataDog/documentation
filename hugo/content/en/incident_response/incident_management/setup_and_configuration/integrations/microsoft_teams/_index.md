@@ -104,7 +104,11 @@ The author of a synced message does not need an Incident Management or Incident 
 <div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings. AI features must be enabled for your organization before the Datadog Transcriber can join meetings.
+Enable AI-generated meeting summaries to automatically summarize incident Microsoft Teams meetings.
+
+<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
+
+AI features must be enabled for your organization before the Datadog Transcriber can join meetings.
 
 To enable meeting summaries for incident Microsoft Teams meetings:
 
@@ -117,7 +121,7 @@ To enable meeting summaries for incident Microsoft Teams meetings:
 
 When a Microsoft Teams meeting attached to an incident starts, a Datadog Transcriber attempts to join. A meeting participant must admit the Datadog Transcriber from the meeting lobby before transcription can begin.
 
-For details on where summaries are posted, data retention, and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
+For details on where summaries are posted and re-inviting the transcriber, see [Meeting summaries in Incident AI][7].
 
 ## Using the Datadog tab in Microsoft Teams
 
