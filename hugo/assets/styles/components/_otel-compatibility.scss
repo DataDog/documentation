@@ -11,17 +11,16 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    gap: 1rem 2rem;
-    margin-bottom: 1.25rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid $gray-border;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-bottom: 1rem;
 
     &[hidden] {
       display: none;
     }
   }
 
-  &__group {
+  &__fieldset {
     margin: 0;
     padding: 0;
     border: 0;
@@ -37,10 +36,6 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     line-height: 18px;
     font-weight: 400;
     text-transform: uppercase;
-  }
-
-  &__view {
-    flex-basis: 100%;
   }
 
   // Radio inputs stay in the DOM for keyboard and screen reader use; the span is the visible pill
@@ -81,31 +76,19 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
   }
 
-  &__setups {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem 2rem;
-  }
-
-  &__selects {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
-
   &__select {
     appearance: none;
+    width: 100%;
     height: 31px;
-    max-width: 100%;
     padding: 0 2rem 0 0.6rem;
     border: 1px solid $otel-compat-border;
     border-radius: 4px;
     background: $gray-lightest url($otel-compat-chevron) no-repeat right 0.6rem center;
     color: $brand-primary;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     font-variant-numeric: lining-nums;
+    text-overflow: ellipsis;
     cursor: pointer;
 
     &:focus-visible {
@@ -114,16 +97,12 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
   }
 
-  &__arrow {
-    color: $gray;
-  }
-
   &__diff {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
     height: 31px;
-    margin: 0;
+    margin: 0 0 6px;
     font-size: 14px;
     cursor: pointer;
 
@@ -161,10 +140,15 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
 
     thead th {
-      min-width: 8rem;
+      min-width: 9rem;
+
+      @media (max-width: 576px) {
+        min-width: 7.5rem;
+      }
+
       background: $gray-lightest;
       font-weight: 400;
-      text-align: center;
+      text-align: left;
       text-transform: none;
     }
 
@@ -175,6 +159,15 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     tbody th {
       font-weight: 400;
       text-align: left;
+
+      // Feature links stay quiet until hover so the column scans as a list
+      a {
+        border-bottom-color: transparent;
+
+        &:hover {
+          border-bottom-color: currentColor;
+        }
+      }
     }
 
     // Keep feature names visible while the table scrolls sideways
@@ -196,23 +189,109 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
     thead .otel-compat__feature-col {
       background: $gray-lightest;
+      vertical-align: bottom;
+    }
+
+    // Section headings span the table; the label stays put while the table scrolls sideways
+    .otel-compat__section-row th {
+      position: static;
+      width: auto;
+      min-width: 0;
+      padding-top: 0.9rem;
+      border-left: 0;
+      border-right: 0;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: $gray-dark;
+
+      span {
+        position: sticky;
+        left: 0.6rem;
+      }
     }
   }
 
-  &__pair-name {
-    display: block;
-    font-weight: 700;
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.4rem;
+    min-height: 1.4rem;
+    margin-bottom: 0.4rem;
   }
 
-  &__pair-label {
-    display: block;
+  &__fields {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.3rem 0.6rem;
+    align-items: center;
+    margin: 0;
+
+    div {
+      display: contents;
+    }
+
+    dt {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: $gray-darkish;
+      white-space: nowrap;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      font-weight: 600;
+    }
+
+    // Narrow columns: put each label above its value so the menus get the full width
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 0;
+
+      dd {
+        margin-bottom: 0.35rem;
+      }
+    }
   }
 
-  &__agent {
-    display: block;
+  &__setup-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 12px;
+  }
+
+  // Notes show as text in compare view, where there is room, and as tooltips otherwise
+  &__note {
+    display: none;
     margin-top: 0.2rem;
-    font-size: 0.75rem;
+    font-size: 12px;
+    line-height: 1.35;
     color: $gray-darkish;
+  }
+
+  &[data-view="compare"] &__note {
+    display: block;
+  }
+
+  &[data-view="compare"] .tooltip-trigger {
+    text-decoration: none;
+    cursor: default !important;
+  }
+
+  &__caption {
+    margin: 0.5rem 0 0;
+    font-size: 12px;
+    color: $gray-darkish;
+  }
+
+  &__pair-name {
+    font-weight: 700;
   }
 
   &__row-note {
@@ -233,10 +312,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     white-space: nowrap;
     vertical-align: middle;
 
-    &--recommended {
-      color: $brand-primary;
-      border-color: $brand-primary;
-    }
+    color: $brand-primary;
+    border-color: $brand-primary;
 
     &--agent {
       color: $gray-dark;
@@ -275,4 +352,57 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 // Cells with a note render their mark inside a tooltip button, which resets color
 .otel-compat .tooltip-trigger.otel-compat__mark--supported {
   color: $brand-primary;
+}
+
+// Setup key: a one-line description of each SDK and receiver
+.otel-compat-key {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem 2rem;
+  margin: 1rem 0 1.5rem;
+
+  &__list {
+    margin: 0;
+  }
+
+  &__item {
+    padding: 0.6rem 0;
+    border-top: 1px solid $gray-border;
+
+    dt {
+      font-weight: 600;
+    }
+
+    dd {
+      margin: 0.15rem 0 0;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+  }
+
+  &__meta {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 12px;
+    color: $gray-darkish;
+  }
+}
+
+// Override the site's boxed definition-list styles for the header fields and the setup key
+.otel-compat .otel-compat__fields,
+.otel-compat-key .otel-compat-key__list {
+  border: 0;
+  font-size: inherit;
+  line-height: inherit;
+
+  dt,
+  dd,
+  dd:last-of-type {
+    padding: 0;
+  }
+}
+
+.otel-compat-key .otel-compat-key__list {
+  font-size: 16px;
+  line-height: 1.4;
 }

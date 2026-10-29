@@ -1,19 +1,24 @@
 {{- /*
-  Renders the OpenTelemetry feature compatibility table from shared/otel_compatibility.yaml
-  (mounted as site.Data.otel_compatibility). The full table is in the HTML. The setup picker
-  and compare view come from assets/scripts/components/otel-compatibility.js.
-  Usage: {{< otel-compatibility >}}
+  Renders OpenTelemetry setup data from shared/otel_compatibility.yaml (mounted as
+  site.Data.otel_compatibility). Everything is in the HTML. The setup picker and compare
+  view come from assets/scripts/components/otel-compatibility.js.
+  Usage:
+    {{< otel-compatibility part="setups" >}}  One-line descriptions of each SDK and receiver
+    {{< otel-compatibility >}}                The feature compatibility table
 */ -}}
+{{- $part := .Get "part" | default "table" -}}
 {{- $data := site.Data.otel_compatibility -}}
 {{- if not $data -}}
   {{- errorf "otel-compatibility: site.Data.otel_compatibility is missing. Check the shared/otel_compatibility.yaml mount in config/_default/config.yaml." -}}
 {{- end -}}
 
-{{- /* Index SDKs and receivers by id, and check that every id the file uses exists */ -}}
+{{- /* Index SDKs, receivers, and groups by id, and check that every id the file uses exists */ -}}
 {{- $sdks := dict -}}
 {{- range $data.sdks }}{{ $sdks = merge $sdks (dict .id .) }}{{ end -}}
 {{- $receivers := dict -}}
 {{- range $data.receivers }}{{ $receivers = merge $receivers (dict .id .) }}{{ end -}}
+{{- $groupIDs := slice -}}
+{{- range $data.groups }}{{ $groupIDs = $groupIDs | append .id }}{{ end -}}
 {{- $pairIDs := slice -}}
 {{- range $data.pairs -}}
   {{- if not (isset $sdks .sdk) }}{{ errorf "otel_compatibility.yaml: pair uses unknown sdk %q" .sdk }}{{ end -}}
@@ -26,43 +31,71 @@
   {{- range $f.overrides -}}
     {{- if not (in $pairIDs (printf "%s.%s" .sdk .receiver)) }}{{ errorf "otel_compatibility.yaml: feature %s overrides %s + %s, which is not in pairs" $f.id .sdk .receiver }}{{ end -}}
   {{- end -}}
+  {{- if and $groupIDs (not (in $groupIDs $f.group)) }}{{ errorf "otel_compatibility.yaml: feature %s has group %q, which is not in groups" $f.id $f.group }}{{ end -}}
 {{- end -}}
 
-{{- $agentText := dict "included" "Includes the Datadog Agent" "optional" "Datadog Agent optional" "none" "No Datadog Agent" -}}
-{{- $supportText := dict "supported" "Supported" "partial" "Partial" "not_supported" "Not supported" "unknown" "Unknown" -}}
+{{- $agentText := dict "included" "Included" "optional" "Optional" "none" "Not used" -}}
 {{- $uid := printf "otel-compat-%d" .Ordinal -}}
+
+{{- if eq $part "setups" -}}
+
+<div class="otel-compat-key">
+  {{- range $section := slice (dict "label" "SDK in your application" "items" $data.sdks "kind" "sdk") (dict "label" "Where the SDK sends data" "items" $data.receivers "kind" "receiver") }}
+  <div class="otel-compat-key__group">
+    <p class="otel-compat__label">{{ $section.label }}</p>
+    <dl class="otel-compat-key__list">
+      {{- range $section.items }}
+      <div class="otel-compat-key__item">
+        <dt>{{ if .link }}<a href="{{ .link | relLangURL }}">{{ .label }}</a>{{ else }}{{ .label }}{{ end }}</dt>
+        <dd>
+          {{- .description -}}
+          {{- if eq $section.kind "sdk" }}{{ with .apis }}<span class="otel-compat-key__meta">APIs: {{ . }}</span>{{ end }}{{ end -}}
+          {{- if eq $section.kind "receiver" }}{{ with .agent }}<span class="otel-compat-key__meta">Datadog Agent: {{ index $agentText . | lower }}</span>{{ end }}{{ end -}}
+        </dd>
+      </div>
+      {{- end }}
+    </dl>
+  </div>
+  {{- end }}
+</div>
+
+{{- else -}}
+
+{{- /* Table sections: one per group, or a single unlabeled section when the file has no groups */ -}}
+{{- $sections := slice -}}
+{{- if $data.groups -}}
+  {{- range $data.groups -}}
+    {{- $sections = $sections | append (dict "id" .id "label" .label "features" (where $data.features "group" .id)) -}}
+  {{- end -}}
+{{- else -}}
+  {{- $sections = slice (dict "id" "" "label" "" "features" $data.features) -}}
+{{- end -}}
 
 <div class="otel-compat" id="{{ $uid }}" data-otel-compat>
   <div class="otel-compat__controls exclude-from-md" hidden>
-    <fieldset class="otel-compat__group otel-compat__view">
+    <fieldset class="otel-compat__fieldset otel-compat__view">
       <legend class="otel-compat__label">View</legend>
       <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="compare" checked><span>Compare two setups</span></label>
-      <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="single"><span>One setup</span></label>
       <label class="otel-compat__pill"><input type="radio" name="{{ $uid }}-view" value="all"><span>All setups</span></label>
     </fieldset>
-    <div class="otel-compat__setups">
-      {{- range $slot := slice "a" "b" }}
-      {{- $name := cond (eq $slot "a") "Setup 1" "Setup 2" }}
-      <fieldset class="otel-compat__group otel-compat__setup" data-slot="{{ $slot }}">
-        <legend class="otel-compat__label">{{ $name }}</legend>
-        <div class="otel-compat__selects">
-          <select class="otel-compat__select" data-role="sdk" aria-label="{{ $name }}: SDK">
-            {{- range $data.sdks }}
-            <option value="{{ .id }}">{{ .label }}</option>
-            {{- end }}
-          </select>
-          <span class="otel-compat__arrow" aria-hidden="true">&rarr;</span>
-          <select class="otel-compat__select" data-role="receiver" aria-label="{{ $name }}: sends data to">
-            {{- range $data.receivers }}
-            <option value="{{ .id }}">{{ .label }}</option>
-            {{- end }}
-          </select>
-        </div>
-      </fieldset>
-      {{- end }}
-    </div>
     <label class="otel-compat__diff"><input type="checkbox" data-role="diff"> Show only features that differ</label>
     <p class="otel-compat__status" aria-live="polite"></p>
+    {{- /* The script moves these into the column headers in compare view */}}
+    <div class="otel-compat__holder" hidden>
+      {{- range $slot := slice "a" "b" }}
+      {{- $name := cond (eq $slot "a") "Setup 1" "Setup 2" }}
+      <select class="otel-compat__select" data-slot="{{ $slot }}" data-role="sdk" aria-label="{{ $name }}: SDK">
+        {{- range $data.sdks }}
+        <option value="{{ .id }}">{{ .label }}</option>
+        {{- end }}
+      </select>
+      <select class="otel-compat__select" data-slot="{{ $slot }}" data-role="receiver" aria-label="{{ $name }}: sends data to">
+        {{- range $data.receivers }}
+        <option value="{{ .id }}">{{ .label }}</option>
+        {{- end }}
+      </select>
+      {{- end }}
+    </div>
   </div>
 
   <div class="otel-compat__scroll">
@@ -75,18 +108,32 @@
           {{- $receiver := index $receivers $p.receiver }}
           {{- $unconfirmed := eq $p.confirmed false }}
           <th scope="col" data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-sdk="{{ $p.sdk }}" data-receiver="{{ $p.receiver }}" data-confirmed="{{ not $unconfirmed }}" data-recommended="{{ $p.recommended | default false }}"{{ if $unconfirmed }} hidden{{ end }}>
-            {{- with $p.name }}<span class="otel-compat__pair-name">{{ . }}</span>{{ end }}
-            {{- if $p.recommended }}<span class="otel-compat__badge otel-compat__badge--recommended">Recommended</span>{{ end }}
-            <span class="otel-compat__pair-label">
-              {{- if $p.link }}<a href="{{ $p.link | relLangURL }}">{{ $sdk.label }} + {{ $receiver.label }}</a>{{ else }}{{ $sdk.label }} + {{ $receiver.label }}{{ end -}}
-            </span>
-            {{- with $receiver.agent }}<span class="otel-compat__agent">{{ index $agentText . }}</span>{{ end -}}
+            <div class="otel-compat__head">
+              {{- with $p.name }}<span class="otel-compat__pair-name">{{ . }}</span>{{ end }}
+              {{- if $p.recommended }}<span class="otel-compat__badge">Recommended</span>{{ end -}}
+            </div>
+            <dl class="otel-compat__fields">
+              <div data-field="sdk"><dt>SDK</dt><dd><span class="otel-compat__value">{{ $sdk.label }}</span></dd></div>
+              <div data-field="receiver"><dt>Sends to</dt><dd><span class="otel-compat__value">{{ $receiver.label }}</span></dd></div>
+              {{- with $receiver.agent }}
+              <div data-field="agent"><dt>Agent</dt><dd>{{ index $agentText . }}</dd></div>
+              {{- end }}
+            </dl>
+            {{- with $p.link }}
+            <a class="otel-compat__setup-link" href="{{ . | relLangURL }}" aria-label="Setup guide: {{ $sdk.label }} + {{ $receiver.label }}">Setup guide</a>
+            {{- end }}
           </th>
           {{- end }}
         </tr>
       </thead>
       <tbody>
-        {{- range $f := $data.features }}
+        {{- range $section := $sections }}
+        {{- if and $section.label $section.features }}
+        <tr class="otel-compat__section-row" data-section="{{ $section.id }}">
+          <th scope="colgroup" colspan="{{ add (len $data.pairs) 1 }}"><span>{{ $section.label }}</span></th>
+        </tr>
+        {{- end }}
+        {{- range $f := $section.features }}
         <tr data-feature="{{ $f.id }}"{{ if $f.requires_agent }} data-requires-agent="true"{{ end }}>
           <th scope="row">
             {{- if $f.link }}<a href="{{ $f.link | relLangURL }}">{{ $f.label }}</a>{{ else }}{{ $f.label }}{{ end }}
@@ -96,21 +143,24 @@
           </th>
           {{- range $p := $data.pairs }}
           {{- $c := partial "otel-compatibility/cell.html" (dict "feature" $f "sdk" $p.sdk "receiver" $p.receiver) }}
-          {{- $text := $c.label | default (cond (eq $c.support "supported") "" (index $supportText $c.support)) }}
           {{- $tipID := printf "%s-%s-%s-%s" $uid $f.id $p.sdk $p.receiver }}
           <td data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-support="{{ $c.support }}"{{ if eq $p.confirmed false }} hidden{{ end }}>
             {{- $mark := "" }}
-            {{- if and (eq $c.support "supported") (not $c.label) }}
+            {{- if $c.label }}
+              {{- $mark = $c.label | htmlEscape }}
+            {{- else if eq $c.support "supported" }}
               {{- $mark = `<i class="icon-check-bold" aria-hidden="true"></i><span class="otel-compat__sr">Supported</span>` }}
-            {{- else if eq $c.support "unknown" }}
-              {{- $mark = `<span class="otel-compat__sr">Not yet documented</span>` }}
-            {{- else if and (eq $c.support "not_supported") (not $c.label) }}
+            {{- else if eq $c.support "partial" }}
+              {{- $mark = "Partial" }}
+            {{- else if eq $c.support "not_supported" }}
               {{- $mark = `<span aria-hidden="true">&mdash;</span><span class="otel-compat__sr">Not supported</span>` }}
             {{- else }}
-              {{- $mark = $text | htmlEscape }}
+              {{- $mark = `<span class="otel-compat__sr">Not yet documented</span>` }}
             {{- end }}
             {{- if $c.notes }}
-            <span class="tooltip-container"><button type="button" class="tooltip-trigger otel-compat__mark otel-compat__mark--{{ $c.support }}" aria-describedby="{{ $tipID }}">{{ $mark | safeHTML }}</button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ delimit $c.notes " " | markdownify }}</span></span>
+            {{- $note := delimit $c.notes " " | markdownify }}
+            <span class="tooltip-container"><button type="button" class="tooltip-trigger otel-compat__mark otel-compat__mark--{{ $c.support }}" aria-describedby="{{ $tipID }}">{{ $mark | safeHTML }}</button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ $note }}</span></span>
+            <span class="otel-compat__note exclude-from-md" aria-hidden="true">{{ $note | plainify }}</span>
             {{- else }}
             <span class="otel-compat__mark otel-compat__mark--{{ $c.support }}">{{ $mark | safeHTML }}</span>
             {{- end }}
@@ -118,7 +168,11 @@
           {{- end }}
         </tr>
         {{- end }}
+        {{- end }}
       </tbody>
     </table>
   </div>
+  <p class="otel-compat__caption">A blank cell means not yet documented.</p>
 </div>
+
+{{- end -}}

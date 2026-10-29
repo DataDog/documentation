@@ -113,7 +113,9 @@ Hugo reads its own copy of this data at `hugo/config/_default/params.yaml` under
 
 Which Datadog features each OpenTelemetry setup supports. A setup is one SDK
 plus one receiver (the component the SDK sends to). The `otel-compatibility`
-Hugo shortcode renders it on `/opentelemetry/compatibility/`. Hugo mounts this
+Hugo shortcode renders it on `/opentelemetry/compatibility/`:
+`{{< otel-compatibility part="setups" >}}` shows a one-line description of each
+SDK and receiver, and `{{< otel-compatibility >}}` shows the feature table. Hugo mounts this
 file as `site.Data.otel_compatibility`. Astro does not read it yet, and there is
 no Zod schema for it yet. The Hugo shortcode stops the build on an unknown ID or
 support value.
@@ -125,15 +127,28 @@ support value.
 | `sdks`      | SDKs, in display order                                   |
 | `receivers` | Receivers, in display order                              |
 | `pairs`     | Valid SDK and receiver combinations, in display order    |
+| `groups`    | Sections of the feature table, in display order          |
 | `features`  | One entry per Datadog feature, in table-row order        |
 
 ### `sdks` and `receivers`
 
-| Field   | Required | Meaning                                                                 |
-| ------- | -------- | ----------------------------------------------------------------------- |
-| `id`    | yes      | Key used everywhere else in the file                                    |
-| `label` | yes      | Display name                                                            |
-| `agent` | no       | Receivers only: `included`, `optional`, or `none`. Shown in the header. |
+| Field         | Required | Meaning                                                                       |
+| ------------- | -------- | ----------------------------------------------------------------------------- |
+| `id`          | yes      | Key used everywhere else in the file                                          |
+| `label`       | yes      | Display name                                                                  |
+| `description` | yes      | One sentence about what it is, shown in the setup list                        |
+| `link`        | no       | Docs page for it                                                              |
+| `apis`        | no       | SDKs only: the APIs it supports, shown under the description                  |
+| `agent`       | no       | Receivers only: `included`, `optional`, or `none`. Shown in the column header. |
+
+### `groups`
+
+| Field   | Required | Meaning                            |
+| ------- | -------- | ---------------------------------- |
+| `id`    | yes      | Key that features use in `group`   |
+| `label` | yes      | Section heading in the table       |
+
+If the file has `groups`, every feature needs a `group` from that list.
 
 ### `pairs`
 
@@ -154,6 +169,7 @@ A pair that isn't listed is disabled in the setup picker.
 | ---------------- | -------- | ------------------------------------------------------------------ |
 | `id`             | yes      | Unique key                                                         |
 | `label`          | yes      | Feature name                                                       |
+| `group`          | yes, if the file has `groups` | Section the feature appears in                 |
 | `abbr`           | no       | Abbreviation shown after the name, such as `DBM`                   |
 | `link`           | no       | Feature docs                                                       |
 | `requires_agent` | no       | `true` shows an "Agent required" marker on the row. Set it only when the docs state it. |
@@ -167,7 +183,8 @@ A **support value** is one of `supported`, `partial`, `not_supported`, or
 `unknown` cell renders blank, which means not yet documented. Don't
 write `yes` or `no`: YAML reads them as booleans, and the build fails.
 
-Notes accept Markdown, so a note can link to another page.
+Notes accept Markdown, so a note can link to another page. In compare view,
+notes show as text under the cell; in the full table they show on hover.
 
 To add a note or a short cell label, use a map instead of a single word:
 
@@ -207,11 +224,13 @@ both sides have the same value, it shows both notes.
 
 ### Add a feature
 
-Add an entry under `features` where you want the row to appear. Give it a
-value for each SDK and receiver you know about. Leave out the ones you don't.
+Add an entry under `features` where you want the row to appear, with the
+`group` it belongs to. Give it a value for each SDK and receiver you know
+about. Leave out the ones you don't.
 
 ### Add a setup
 
-If the SDK or receiver is new, add it to `sdks` or `receivers`. Then add a
+If the SDK or receiver is new, add it to `sdks` or `receivers` with a
+one-sentence `description`. Then add a
 `pairs` entry, and give each feature a value for the new SDK or receiver.
 Features without a value show a blank cell.

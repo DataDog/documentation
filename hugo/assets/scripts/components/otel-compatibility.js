@@ -1,8 +1,9 @@
 // Setup picker and compare view for the otel-compatibility shortcode.
 // The shortcode renders the full table; this script only shows, hides, and orders its columns.
+// In compare view, it moves the SDK and receiver menus into the two visible column headers.
 
 const PARAMS = { view: 'compat_view', a: 'compat_a', b: 'compat_b' };
-const VIEWS = ['compare', 'single', 'all'];
+const VIEWS = ['compare', 'all'];
 
 function readParams() {
     try {
@@ -15,10 +16,11 @@ function readParams() {
 function writeParams(state) {
     const url = new URL(window.location.href);
     url.searchParams.set(PARAMS.view, state.view);
-    url.searchParams.set(PARAMS.a, state.a);
     if (state.view === 'compare') {
+        url.searchParams.set(PARAMS.a, state.a);
         url.searchParams.set(PARAMS.b, state.b);
     } else {
+        url.searchParams.delete(PARAMS.a);
         url.searchParams.delete(PARAMS.b);
     }
     window.history.replaceState(window.history.state, '', url);
@@ -29,8 +31,13 @@ function initOtelCompat(root) {
     const controls = root.querySelector('.otel-compat__controls');
     if (!table || !controls) return;
 
-    const rows = [table.tHead.rows[0], ...table.tBodies[0].rows];
-    const pairs = [...rows[0].querySelectorAll('th[data-pair]')].map((th) => ({
+    const headerRow = table.tHead.rows[0];
+    const bodyRows = [...table.tBodies[0].rows];
+    const featureRows = bodyRows.filter((row) => row.dataset.feature);
+    const holder = controls.querySelector('.otel-compat__holder');
+
+    const headers = new Map([...headerRow.querySelectorAll('th[data-pair]')].map((th) => [th.dataset.pair, th]));
+    const pairs = [...headers.values()].map((th) => ({
         id: th.dataset.pair,
         sdk: th.dataset.sdk,
         receiver: th.dataset.receiver,
@@ -39,36 +46,26 @@ function initOtelCompat(root) {
     }));
     const pairById = new Map(pairs.map((p) => [p.id, p]));
 
-    // Cells keyed by pair id for each row, captured in the original column order
-    const cellsByRow = rows.map((row) => {
-        const map = new Map();
-        [...row.cells].forEach((cell) => {
-            if (cell.dataset.pair) map.set(cell.dataset.pair, cell);
-        });
-        return map;
-    });
+    // Cells keyed by pair id for the header row and each feature row
+    const cellMap = (row) => new Map([...row.cells].filter((cell) => cell.dataset.pair).map((cell) => [cell.dataset.pair, cell]));
+    const columnRows = [headerRow, ...featureRows].map((row) => ({ row, cells: cellMap(row) }));
+    const cellsByFeatureRow = new Map(columnRows.slice(1).map(({ row, cells }) => [row, cells]));
 
-    const slots = ['a', 'b'].map((key) => {
-        const fieldset = controls.querySelector(`.otel-compat__setup[data-slot="${key}"]`);
-        return {
-            key,
-            fieldset,
-            sdk: fieldset.querySelector('[data-role="sdk"]'),
-            receiver: fieldset.querySelector('[data-role="receiver"]')
-        };
-    });
+    const slots = ['a', 'b'].map((key) => ({
+        key,
+        sdk: holder.querySelector(`[data-slot="${key}"][data-role="sdk"]`),
+        receiver: holder.querySelector(`[data-slot="${key}"][data-role="receiver"]`)
+    }));
     const viewInputs = [...controls.querySelectorAll('.otel-compat__view input')];
     const diffInput = controls.querySelector('[data-role="diff"]');
     const status = controls.querySelector('.otel-compat__status');
 
     // Default compare: the first two recommended setups
     const recommended = pairs.filter((p) => p.recommended);
-    const defaults = {
-        a: (recommended[0] || pairs[0]).id,
-        b: (recommended[1] || pairs.find((p) => p.id !== (recommended[0] || pairs[0]).id) || pairs[0]).id
-    };
+    const fallbackA = (recommended[0] || pairs[0]).id;
+    const fallbackB = (recommended[1] || pairs.find((p) => p.id !== fallbackA) || pairs[0]).id;
 
-    function selectedPairId(slot) {
+    function pairIdOf(slot) {
         return `${slot.sdk.value}.${slot.receiver.value}`;
     }
 
@@ -101,8 +98,7 @@ function initOtelCompat(root) {
     }
 
     function showColumns(pairIds) {
-        rows.forEach((row, i) => {
-            const cells = cellsByRow[i];
+        columnRows.forEach(({ row, cells }) => {
             pairIds.forEach((id) => {
                 const cell = cells.get(id);
                 cell.hidden = false;
@@ -114,46 +110,87 @@ function initOtelCompat(root) {
         });
     }
 
-    // updateUrl is false on first render, so a plain page visit keeps a clean URL
+    // Put each slot's menus in its column header, in place of the SDK and receiver text
+    function placeMenus(pairIds) {
+        headers.forEach((th) => {
+            th.querySelectorAll('.otel-compat__value').forEach((value) => {
+                value.hidden = false;
+            });
+        });
+        slots.forEach((slot) => {
+            holder.append(slot.sdk, slot.receiver);
+        });
+        pairIds.forEach((id, i) => {
+            const th = headers.get(id);
+            ['sdk', 'receiver'].forEach((role) => {
+                const dd = th.querySelector(`[data-field="${role}"] dd`);
+                dd.querySelector('.otel-compat__value').hidden = true;
+                dd.appendChild(slots[i][role]);
+            });
+        });
+    }
+
+    // Each slot's last pair, so picking the other slot's pair swaps the two
+    const current = { a: null, b: null };
+
     function render(updateUrl = true) {
         const view = currentView();
-        const a = selectedPairId(slots[0]);
-        const b = selectedPairId(slots[1]);
-        const messages = [];
+        const focused = document.activeElement;
+        const a = pairIdOf(slots[0]);
+        const b = pairIdOf(slots[1]);
+        current.a = a;
+        current.b = b;
 
-        slots[0].fieldset.hidden = view === 'all';
-        slots[1].fieldset.hidden = view !== 'compare';
         diffInput.parentElement.hidden = view !== 'compare';
-
-        let shown;
-        if (view === 'all') {
-            shown = pairs.filter((p) => p.confirmed).map((p) => p.id);
-        } else if (view === 'single' || a === b) {
-            shown = [a];
-            if (view === 'compare') messages.push('Both setups are the same. Pick a different setup to compare.');
-        } else {
-            shown = [a, b];
-        }
+        const shown = view === 'all' ? pairs.filter((p) => p.confirmed).map((p) => p.id) : [a, b];
         showColumns(shown);
+        placeMenus(view === 'compare' ? shown : []);
+        // Moving a menu drops its focus, so put focus back for keyboard users
+        if (focused && focused !== document.activeElement && root.contains(focused)) focused.focus();
 
         // In compare view, optionally hide rows where both setups have the same support value
-        const filterDiff = view === 'compare' && shown.length === 2 && diffInput.checked;
+        const filterDiff = view === 'compare' && diffInput.checked;
         let hiddenRows = 0;
-        rows.slice(1).forEach((row, i) => {
-            const cells = cellsByRow[i + 1];
-            const same = filterDiff && cells.get(shown[0]).dataset.support === cells.get(shown[1]).dataset.support;
+        featureRows.forEach((row) => {
+            const cells = cellsByFeatureRow.get(row);
+            const same = filterDiff && cells.get(a).dataset.support === cells.get(b).dataset.support;
             row.hidden = same;
             if (same) hiddenRows += 1;
         });
-        if (filterDiff && hiddenRows === rows.length - 1) {
-            messages.push('These setups support the same features.');
+
+        // Hide a section heading when every feature under it is hidden
+        let sectionRow = null;
+        let sectionHasRows = false;
+        bodyRows.forEach((row) => {
+            if (!row.dataset.feature) {
+                if (sectionRow) sectionRow.hidden = !sectionHasRows;
+                sectionRow = row;
+                sectionHasRows = false;
+            } else if (!row.hidden) {
+                sectionHasRows = true;
+            }
+        });
+        if (sectionRow) sectionRow.hidden = !sectionHasRows;
+
+        if (filterDiff && hiddenRows === featureRows.length) {
+            status.textContent = 'These setups support the same features.';
         } else if (filterDiff && hiddenRows > 0) {
-            messages.push(`Hiding ${hiddenRows} features that both setups support the same way.`);
+            status.textContent = `Hiding ${hiddenRows} features that both setups support the same way.`;
+        } else {
+            status.textContent = '';
         }
 
-        status.textContent = messages.join(' ');
         root.dataset.view = view;
         if (updateUrl) writeParams({ view, a, b });
+    }
+
+    function onSlotChange(slot) {
+        const other = slots.find((s) => s !== slot);
+        const previous = current[slot.key];
+        if (pairIdOf(slot) === pairIdOf(other) && previous) {
+            setSlot(other, previous);
+        }
+        render();
     }
 
     // Initial state: URL parameters, then defaults
@@ -162,15 +199,20 @@ function initOtelCompat(root) {
     viewInputs.forEach((input) => {
         input.checked = input.value === initialView;
     });
-    setSlot(slots[0], pairById.has(params.get(PARAMS.a)) ? params.get(PARAMS.a) : defaults.a);
-    setSlot(slots[1], pairById.has(params.get(PARAMS.b)) ? params.get(PARAMS.b) : defaults.b);
+    const initialA = pairById.has(params.get(PARAMS.a)) ? params.get(PARAMS.a) : fallbackA;
+    let initialB = pairById.has(params.get(PARAMS.b)) ? params.get(PARAMS.b) : fallbackB;
+    if (initialA === initialB) {
+        initialB = initialA === fallbackA ? fallbackB : fallbackA;
+    }
+    setSlot(slots[0], initialA);
+    setSlot(slots[1], initialB);
 
     slots.forEach((slot) => {
         slot.sdk.addEventListener('change', () => {
             syncReceiverOptions(slot);
-            render();
+            onSlotChange(slot);
         });
-        slot.receiver.addEventListener('change', () => render());
+        slot.receiver.addEventListener('change', () => onSlotChange(slot));
     });
     viewInputs.forEach((input) => input.addEventListener('change', () => render()));
     diffInput.addEventListener('change', () => render());
