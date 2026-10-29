@@ -1,0 +1,16 @@
+{{- /*
+  Normalizes one support value from shared/otel_compatibility.yaml.
+  Context: dict "v" <a support word, a map with support/label/note, or nil> "where" <text for error messages>
+  Returns: dict "support" "label" "note"
+*/ -}}
+{{- $v := .v -}}
+{{- $out := dict "support" "unknown" "label" "" "note" "" -}}
+{{- if reflect.IsMap $v -}}
+  {{- $out = dict "support" ($v.support | default "unknown") "label" ($v.label | default "") "note" ($v.note | default "") -}}
+{{- else if $v -}}
+  {{- $out = dict "support" $v "label" "" "note" "" -}}
+{{- end -}}
+{{- if not (in (slice "supported" "partial" "not_supported" "unknown") $out.support) -}}
+  {{- errorf "otel_compatibility.yaml: %s has support value %v. Use supported, partial, not_supported, or unknown (not yes, no, true, or false)." .where $out.support -}}
+{{- end -}}
+{{- return $out -}}

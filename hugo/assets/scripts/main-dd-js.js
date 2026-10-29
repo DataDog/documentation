@@ -21,6 +21,7 @@ import './components/product-section-collapse';
 import './components/signup';
 import './components/conversational-search';
 import './components/stepper';
+import './components/otel-compatibility';
 
 // Add Bootstrap Tooltip across docs
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

@@ -1,0 +1,313 @@
+# Datadog feature support for each OpenTelemetry setup.
+# Rendered by the `otel-compatibility` Hugo shortcode on /opentelemetry/compatibility/.
+# Schema and editing guide: shared/README.md, section `otel_compatibility.yaml`.
+#
+# Seeded from the feature table on the compatibility page. Values the table did
+# not state are `unknown`. Every DDOT SDK value is `unknown` until confirmed.
+
+sdks:
+  - id: ddot_sdk
+    label: DDOT SDK
+  - id: datadog_sdk
+    label: Datadog SDK
+  - id: otel_sdk
+    label: OpenTelemetry SDK
+
+receivers:
+  - id: ddot_collector
+    label: DDOT Collector
+    agent: optional
+  - id: upstream_collector
+    label: Upstream OpenTelemetry Collector
+    agent: none
+  - id: agents_collector
+    label: Agent's Collector
+    agent: included
+  - id: otlp_ingest_agent
+    label: OTLP Ingest in the Agent
+    agent: included
+  - id: otlp_intake
+    label: Direct OTLP intake
+    agent: none
+
+# Valid SDK and receiver combinations, in display order. Any pair not listed
+# here is disabled in the setup picker.
+pairs:
+  - sdk: ddot_sdk
+    receiver: ddot_collector
+    name: DDOT
+    recommended: true
+    link: /opentelemetry/setup/ddot_collector/
+  - sdk: otel_sdk
+    receiver: upstream_collector
+    name: Upstream
+    recommended: true
+    link: /opentelemetry/collector_exporter/
+  - sdk: datadog_sdk
+    receiver: agents_collector
+    link: /opentelemetry/setup/agent/#agents-collector
+  - sdk: otel_sdk
+    receiver: agents_collector
+    link: /opentelemetry/setup/agent/#agents-collector
+  - sdk: otel_sdk
+    receiver: otlp_intake
+    link: /opentelemetry/setup/agentless
+  - sdk: otel_sdk
+    receiver: ddot_collector
+    link: /opentelemetry/setup/ddot_collector/
+  - sdk: otel_sdk
+    receiver: otlp_ingest_agent
+    link: /opentelemetry/interoperability/otlp_ingest_in_the_agent/
+  - sdk: ddot_sdk
+    receiver: upstream_collector
+    link: /opentelemetry/instrument/dd_sdks/ddot_setup/
+  # The DDOT SDK sends OTLP, so these receivers may work. Not confirmed.
+  - sdk: ddot_sdk
+    receiver: agents_collector
+    confirmed: false
+  - sdk: ddot_sdk
+    receiver: otlp_ingest_agent
+    confirmed: false
+  - sdk: ddot_sdk
+    receiver: otlp_intake
+    confirmed: false
+
+features:
+  - id: cloud_siem
+    label: Cloud SIEM
+    link: /security/cloud_siem/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: correlated_telemetry
+    label: Correlated Traces, Metrics, Logs
+    link: /opentelemetry/correlate/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: distributed_tracing
+    label: Distributed Tracing
+    link: /tracing/trace_collection/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: agent_observability
+    label: Agent Observability
+    link: /llm_observability/instrument/otel_instrumentation/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: runtime_metrics
+    label: Runtime Metrics
+    link: /tracing/metrics/runtime_metrics/
+    sdk:
+      datadog_sdk:
+        support: supported
+        note: Sent with DogStatsD (UDP port 8125). Turn on DogStatsD in the Agent.
+      otel_sdk:
+        support: supported
+        note: Follows the OpenTelemetry runtime metrics specification. Sent with OTLP (port 4317 or 4318).
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: span_links
+    label: Span Links
+    link: /tracing/trace_collection/span_links/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: trace_metrics
+    label: Trace Metrics
+    link: /tracing/metrics/metrics_namespace/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake:
+        support: partial
+        label: Sampled
+        note: Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure.
+
+  # requires_agent on DBM, CNM, Live Containers, Live Processes, and USM: the
+  # table supports them only in setups that include the Datadog Agent. Confirm.
+  - id: database_monitoring
+    label: Database Monitoring
+    abbr: DBM
+    link: /opentelemetry/correlate/dbm_and_traces/
+    requires_agent: true
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: infrastructure_host_list
+    label: Infrastructure Host List
+    link: /infrastructure/list/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: not_supported
+
+  - id: cloud_network_monitoring
+    label: Cloud Network Monitoring
+    abbr: CNM
+    link: /network_monitoring/performance/
+    requires_agent: true
+    note: Span-level or endpoint-level monitoring is not supported.
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: kubernetes_monitoring
+    label: Kubernetes Monitoring
+    link: /containers/monitoring/kubernetes_explorer/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: not_supported
+
+  - id: live_container_monitoring
+    label: Live Container Monitoring
+    link: /containers/
+    requires_agent: true
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: live_processes
+    label: Live Processes
+    link: /infrastructure/process/
+    requires_agent: true
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: universal_service_monitoring
+    label: Universal Service Monitoring
+    abbr: USM
+    link: /universal_service_monitoring/
+    requires_agent: true
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: app_and_api_protection
+    label: App and API Protection
+    abbr: AAP
+    link: /security/application_security/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+
+  - id: continuous_profiler
+    label: Continuous Profiler
+    link: /profiler/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+
+  - id: data_jobs_monitoring
+    label: "Data Observability: Jobs Monitoring"
+    abbr: DJM
+    link: /data_jobs/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+
+  - id: data_streams_monitoring
+    label: Data Streams Monitoring
+    abbr: DSM
+    link: /data_streams/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+      upstream_collector:
+        support: not_supported
+        label: N/A
+        note: OTel does not offer DSM functionality.
+      otlp_intake:
+        support: not_supported
+        label: N/A
+        note: OTel does not offer DSM functionality.
+
+  - id: real_user_monitoring
+    label: Real User Monitoring
+    abbr: RUM
+    link: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
+    note: To turn on full RUM functionality, inject supported headers to correlate RUM and traces.
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+
+  - id: source_code_integration
+    label: Source code integration
+    link: /integrations/guide/source-code-integration/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported

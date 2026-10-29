@@ -1,0 +1,256 @@
+// Styles for the otel-compatibility shortcode
+
+.otel-compat {
+  margin: 1.5rem 0 2rem;
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid $gray-border;
+    border-radius: 6px;
+    background: $gray-lightest;
+
+    fieldset {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      min-width: 0;
+    }
+
+    legend {
+      float: none;
+      width: auto;
+      margin: 0 0 0.35rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    label {
+      font-size: 0.875rem;
+      margin: 0;
+    }
+
+    select {
+      display: block;
+      max-width: 100%;
+      margin-top: 0.2rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid $gray-light;
+      border-radius: 4px;
+      background: #fff;
+      font-size: 0.875rem;
+    }
+  }
+
+  &__view {
+    label {
+      margin-right: 1rem;
+      cursor: pointer;
+    }
+
+    input {
+      margin-right: 0.3rem;
+    }
+  }
+
+  &__setups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+
+  &__setup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    align-items: flex-end;
+  }
+
+  &__diff input {
+    margin-right: 0.3rem;
+  }
+
+  &__status {
+    margin: 0;
+    font-size: 0.875rem;
+    color: $gray-dark;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.8125rem;
+    color: $gray-dark;
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    th,
+    td {
+      padding: 0.5rem 0.6rem;
+      border: 1px solid $gray-border;
+      vertical-align: top;
+    }
+
+    thead th {
+      min-width: 9rem;
+      background: $gray-lightest;
+      font-weight: 400;
+      text-align: center;
+      text-transform: none;
+    }
+
+    tbody td {
+      text-align: center;
+    }
+
+    tbody th {
+      font-weight: 400;
+      text-align: left;
+    }
+
+    // Keep feature names visible while the table scrolls sideways
+    .otel-compat__feature-col,
+    tbody th {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      min-width: 12rem;
+      background: #fff;
+      text-align: left;
+
+      @media (max-width: 576px) {
+        min-width: 8rem;
+      }
+    }
+  }
+
+  &__pair-name {
+    display: block;
+    font-weight: 700;
+  }
+
+  &__pair-label {
+    display: block;
+  }
+
+  &__agent {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: $gray-darkish;
+  }
+
+  &__row-note {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: $gray-darkish;
+  }
+
+  &__badge {
+    display: inline-block;
+    margin: 0.1rem 0.2rem;
+    padding: 0 0.4rem;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    &--recommended {
+      color: $brand-primary;
+      border-color: $brand-primary;
+    }
+
+    &--agent {
+      color: $gray-dark;
+      border-color: $gray-light;
+      background: $gray-lightest;
+    }
+
+    &--unconfirmed {
+      color: #8a5a00;
+      border-color: $brand-warning;
+    }
+  }
+
+  &__mark {
+    &--supported {
+      color: $brand-primary;
+    }
+
+    &--not_supported {
+      color: $gray;
+    }
+
+    &--partial {
+      font-weight: 600;
+    }
+
+    &--unknown {
+      display: inline-block;
+      padding: 0 0.4rem;
+      border-radius: 10px;
+      background: $gray-lighter;
+      color: $gray-dark;
+      font-size: 0.75rem;
+    }
+  }
+
+  &__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  // The legend's sample marks are plain spans, not cells
+  &__legend .otel-compat__mark {
+    margin-right: 0.2rem;
+  }
+}
+
+// Override the site's list padding and dash bullets
+.otel-compat ul.otel-compat__legend {
+  padding: 0;
+  -webkit-padding-start: 0;
+
+  li::before {
+    content: none;
+  }
+}
+
+// Cells with a note render their mark inside a tooltip button, which resets color
+.otel-compat .tooltip-trigger.otel-compat__mark--supported {
+  color: $brand-primary;
+}
