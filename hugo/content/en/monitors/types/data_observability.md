@@ -359,8 +359,8 @@ Job monitors support two checks:
 
 | Check | Alerts when |
 |---|---|
-| [Job failure](#job-failure) | Consecutive runs of a job fail. |
-| [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than is normal for that job. |
+| [Job failure](#job-failure) | A job run fails N times in a row. |
+| [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than is normal with anomalous duration. |
 
 You can add both checks in one monitor definition. Datadog then creates two monitors, one for failures and one for duration, that share the same jobs and notification settings.
 
@@ -369,12 +369,13 @@ You can add both checks in one monitor definition. Datadog then creates two moni
 1. Navigate to [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][15] and select {{< ui >}}Jobs{{< /ui >}}.
 2. Under {{< ui >}}Select jobs{{< /ui >}}, choose the jobs to monitor:
     - In {{< ui >}}Technology{{< /ui >}}, select the kind of job. You cannot change the technology after you create the monitor.
-    - In {{< ui >}}Filter by{{< /ui >}}, search for jobs by name, or filter with `key:value` attributes to match a set of jobs.
+    - In {{< ui >}}Filter to jobs{{< /ui >}}, search for jobs by name, or filter with `key:value` tags or attributes to match a set of jobs.
+    - In {{< ui >}}Filter runs{{< /ui >}} (only for some technologies), filter runs monitored by tags or attributes that change per run of the same job.
 3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both. Configure each check as described in [Job failure](#job-failure) and [Job duration](#job-duration).
 4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, the failure count, the error, and links to the job and the failed run. Use the message for routing, `@-mentions`, and team context.
 5. Under {{< ui >}}Permissions{{< /ui >}}, optionally restrict who can edit the monitor. Then review the monitor and create it.
 
-Each check is grouped by the attributes that identify a job in the selected technology, so each job alerts separately. You can add {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
+Each check is grouped by the attributes that identify a job in the selected technology, so each group alerts separately. Adding additional tags to group by is useful when you want different alerting behavior for different runs of the same job. You can add {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
 
 | Technology | Job types | Required group by |
 |---|---|---|
@@ -391,7 +392,7 @@ Each check is grouped by the attributes that identify a job in the selected tech
 
 The {{< ui >}}Job failure{{< /ui >}} check alerts when consecutive runs of a job fail.
 
-1. Set {{< ui >}}Trigger when{{< /ui >}} to how many consecutive failed runs trigger an alert. For example, enter `2` to alert after two failed runs in a row.
+1. Set {{< ui >}}Trigger when{{< /ui >}} to how many consecutive failed runs trigger an alert. For example, enter `1` to alert after any failure and `2` to alert only after two failed runs in a row.
 2. Optionally, set {{< ui >}}Warn when{{< /ui >}} to a lower count.
 
 The monitor recovers automatically when a later run succeeds.
@@ -405,10 +406,10 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 {{< tabs >}}
 {{% tab "Anomalies" %}}
 
-{{< ui >}}Anomalies{{< /ui >}} is the default. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
+{{< ui >}}Anomalies{{< /ui >}} is the default and our recommendation since it reduces false positives and configuration management of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
 
-- The baseline is learned from successful runs. To include failed runs in the baseline, add `status` to the group by.
-- A job needs a history of completed runs before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
+- The baseline is learned from successful runs.
+- A job needs 24 hours of history of completed runs before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
 {{% /tab %}}
