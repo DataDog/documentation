@@ -150,12 +150,7 @@ Go to the [Training page][3] in GPU Monitoring to explore your training jobs.
 
 ### Prerequisites
 
-To begin monitoring your Slurm training jobs, you must first meet the following criteria:
-- You have [GPU Monitoring enabled][1].
-
-### 0. Enable GPU Monitoring
-
-If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before moving to the next step.
+To begin monitoring your Slurm training jobs, you must have [GPU Monitoring enabled][1].
 
 ### 1. Install the Agent with Single Step Instrumentation
 
