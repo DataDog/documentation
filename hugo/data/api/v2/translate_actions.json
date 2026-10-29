@@ -1194,7 +1194,7 @@
     "summary": "Get all Container Images"
   },
   "ListContainers": {
-    "description": "Get all containers for your organization.",
+    "description": "Get all containers for your organization. Use `group_by` to return container groups with counts.\nGrouped results are limited by `page[size]` and do not support pagination.\n\nTo get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`\nor `/api/v2/query/timeseries`.",
     "summary": "Get All Containers"
   },
   "GetCostAccountFilters": {
