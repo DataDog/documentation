@@ -707,7 +707,7 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Datadog SDKs
+    - name: DDOT SDKs
       url: /opentelemetry/instrument/dd_sdks
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
