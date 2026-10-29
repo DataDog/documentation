@@ -47,9 +47,14 @@ These are the available merge strategies for combining log events.
 
 ### Set the aggregation window
 
-Use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long the reduce processor aggregates events before it sends a reduced log. The variable applies to every reduce processor on the Worker and accepts values from `1` to `300` seconds. If the variable isn't set, the processor uses a 10-second window. See [Install the Worker][5] for information on setting Worker environment variables.
+Use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long the reduce processor aggregates events before it sends a reduced log. The variable applies to every reduce processor on the Worker and accepts values from `1` to `300` seconds. If the variable isn't set, the processor uses a 10-second window. Requires Worker version 2.25.0 or later. See [Install the Worker][5] for information on setting Worker environment variables.
 
-A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
+- **Longer windows** let events that arrive further apart merge, which can increase the reduction rate. Each reduce processor holds its groups in memory until the window closes. Memory usage grows with the window size, the number of unique groups, and the number of reduce processors. If most events are unique, memory can grow substantially and the Worker can run out of memory.
+- **Shorter windows** free memory sooner, which can help high-throughput pipelines, but fewer events are merged and more similar logs are sent downstream.
+
+Increase the window gradually and monitor the Worker's memory usage.
+
+**Note**: Aggregation is local to each Worker. Matching events processed by different Workers are not merged.
 
 ## Health metrics
 

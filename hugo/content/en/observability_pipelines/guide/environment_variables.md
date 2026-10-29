@@ -82,7 +82,7 @@ Some Observability Pipelines components require setting up environment variables
 ### Reduce
 
 - Aggregation window (optional)
-  - How long, in seconds, every reduce processor on the Worker aggregates events before it emits a group. Accepts values from `1` to `300`. Default: `10`.
+  - How long, in seconds, every reduce processor on the Worker aggregates events before it emits a group. Accepts values from `1` to `300`. Default: `10`. Requires Worker version 2.25.0 or later.
   - Stored in the environment variable `DD_OP_REDUCE_WINDOW_SECS`.
 
 {{% /tab %}}
