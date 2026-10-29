@@ -65,13 +65,13 @@ Datadog maps the `service.name`, `deployment.environment.name`, and `service.ver
 
 ## Choose a setup
 
-Every setup has two parts: an SDK in your application, and a route that sends your data to Datadog. Datadog recommends one of two setups. To choose your SDK first, see [Instrument Your Applications][15].
-
-{{< img src="/opentelemetry/setup/otel-golden-paths.png" alt="Two recommended setups send OpenTelemetry data to Datadog. In DDOT, the DDOT SDK sends OTLP to the DDOT Collector, which sends it to Datadog. An optional Datadog Agent handles features that need the Agent. In upstream OpenTelemetry, the OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector, which sends OTLP over HTTP to Datadog." caption="You can also mix the two. For example, a DDOT SDK can send to an upstream Collector." style="width:100%;" >}}
+Every setup has two parts: an SDK in your application, and a route that sends your data to Datadog. Datadog recommends one of two setups. You can also mix their components: for example, a DDOT SDK can send to an upstream Collector. See [Send OpenTelemetry Data to Datadog][13]. To choose your SDK first, see [Instrument Your Applications][15].
 
 ### DDOT
 
 Datadog OpenTelemetry (DDOT) is a set of OpenTelemetry components that Datadog builds and supports. Each one takes the place of an upstream component, so you can adopt them one at a time.
+
+{{< img src="/opentelemetry/setup/otel-path-ddot.png" alt="DDOT setup. In your application, the DDOT SDK, the Datadog SDK sending OTLP, sends OTLP to the DDOT Collector in your infrastructure, which sends your telemetry to Datadog. An optional Datadog Agent runs alongside the Collector for Datadog-specific features." style="width:100%;" >}}
 
 | Component | What it does |
 |---|---|
@@ -91,6 +91,8 @@ Deploy DDOT components with standard OpenTelemetry tooling, such as the OpenTele
 ### Upstream OpenTelemetry
 
 Use the [OpenTelemetry SDK][8] and the [upstream OpenTelemetry Collector][9], and send OTLP to the Datadog OTLP intake. Every component comes from the OpenTelemetry project.
+
+{{< img src="/opentelemetry/setup/otel-path-upstream.png" alt="Upstream OpenTelemetry setup. In your application, the OpenTelemetry SDK sends OTLP to the upstream OpenTelemetry Collector in your infrastructure. Both come from the OpenTelemetry project. The Collector sends OTLP over HTTP to the Datadog OTLP intake." style="width:100%;" >}}
 
 **Best for**: Teams that already run an OpenTelemetry Collector, or that use only OpenTelemetry project components.
 
