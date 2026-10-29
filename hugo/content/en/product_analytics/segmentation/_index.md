@@ -26,6 +26,7 @@ After creating a segment, you can reuse it across charts and dashboards to compa
 To create a segment:
 
 1. Navigate to [{{< ui >}}Digital Experience Monitoring{{</ ui >}} > {{< ui >}}Product Analytics{{</ ui >}} > {{< ui >}}Users{{</ ui >}} > {{< ui >}}Segments{{</ ui >}}][1] and click {{< ui >}}Create Segment{{< /ui >}}.
+1. Replace {{< ui >}}New Segment{{< /ui >}} with a name for the segment. Optionally, click {{< ui >}}Add a description{{< /ui >}}.
 1. Next to {{< ui >}}Show{{< /ui >}}, use the toggle to choose the type of profiles to include in the segment:
    - {{< ui >}}Users{{< /ui >}}: Create a segment of individual users.
    - {{< ui >}}Accounts{{< /ui >}}: Create a segment of accounts (organizations). See [Account segments](#segment-accounts).
@@ -39,40 +40,43 @@ To create a segment:
 
    Filters combine with AND, and you can flip any filter into an exclusion.
 
-   <!-- TODO (DOCS-16074): Replace with new screenshot segment_editor.png: the new segment editor with Show set to Users, the Add Property, Add Event, and Import CSV buttons, and the Property, Event, and CSV import cards. -->
-   {{< img src="product_analytics/segmentation/segments_define_audience.png" alt="The segment editor with a Show selector set to Users, buttons to add a property, an event, or a CSV import, and cards describing each filter type." style="width:100%;">}}
+   {{< img src="product_analytics/segmentation/segment_editor.png" alt="The Create Segment page with a segment name field, a Show toggle set to Accounts, buttons to add a property, an event, or a CSV import, and cards describing each filter type." style="width:100%;">}}
 
 1. Click {{< ui >}}Save Segment{{< /ui >}}.
 
-{{% collapse-content title="Filter by properties and events" level="h3" expanded=false id="segment-pana" %}}
+{{% collapse-content title="Filter by properties and events" level="h4" expanded=false id="segment-pana" %}}
 
 Combine property and event filters to focus on the users you care about:
 
 - **Property filters** match users by attribute, such as country, plan, or signup date, including any custom attributes you've imported. For example, `have the property plan is premium`. To import custom attributes, see [User and Account Profiles][3].
-- **Event filters** match users by what they did over a time frame you pick. Match a single event, or a multi-step funnel that users converted through or dropped off from. For example, `did convert after Sign up → Start trial`.
+- **Event filters** match users by what they did over a time frame you pick. Match a single event, or click {{< ui >}}Add step{{< /ui >}} to build a multi-step funnel that users converted through or dropped off from. For example, `did convert after Sign up → Start trial`. To narrow an event by its attributes, such as country or device type, click {{< ui >}}Add filter{{< /ui >}}.
 
-For example, you can segment users from Brazil who viewed the `/cart` page and then clicked the checkout button in the past week. Add a property filter for the country and an event filter for the two steps.
+As you add filters, the {{< ui >}}Dynamic segment{{< /ui >}} preview lists the users who match.
 
-<!-- TODO (DOCS-16074): Replace with new screenshot pana_example_users_brazil_4.png: a property filter for country = Brazil and an event filter for viewing /cart, then clicking checkout, over the past week. -->
-{{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="A segment of users from Brazil who viewed the `/cart` page and then clicked the checkout button." style="width:100%;">}}
+For example, to segment users in Brazil who clicked the **In Stock** button in the past three months:
 
-#### Example: Find users who left before buying
+1. Click {{< ui >}}Add Event{{< /ui >}} and select the `"In Stock" Clicked` action.
+1. Set the time frame to {{< ui >}}Past 3 Months{{< /ui >}}.
+1. Click {{< ui >}}Add filter{{< /ui >}} and filter by `Country is Brazil`.
 
-To find users who almost bought an item but didn't check out, click {{< ui >}}Add Event{{< /ui >}} and build a funnel of users who:
+{{< img src="product_analytics/segmentation/pana_example_checkout_brazil.png" alt="A user segment of people who clicked In Stock in the past three months, filtered to users in Brazil. The event, the country filter, and the count of matching users are highlighted, and a Dynamic segment preview lists the users." style="width:100%;">}}
 
-1. Viewed the `/cart` page.
-1. Then dropped off before the action `click on CHECKOUT`.
+##### Example: Find users who left before buying
 
-<!-- TODO (DOCS-16074): Replace with new screenshot user_profile_example_2.png: an event filter for users who viewed /cart, then dropped off before clicking CHECKOUT. -->
-{{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="A segment of users who viewed the cart page but didn't click checkout." style="width:80%">}}
+To find mobile users who viewed their cart but didn't check out:
 
-To narrow the segment further, add a property filter, such as device type.
+1. Click {{< ui >}}Add Event{{< /ui >}} and select the `Cart` view.
+1. Click {{< ui >}}Add step{{< /ui >}}, choose {{< ui >}}then did not{{< /ui >}}, and select the `Checkout Button Clicked` action.
+1. Set the time frame, such as within **1 Day**, anytime in the {{< ui >}}Past 1 Day{{< /ui >}}.
+1. Click {{< ui >}}Add Property{{< /ui >}} and filter by `Last Device Type is Mobile`.
+
+{{< img src="product_analytics/segmentation/user_profile_example_3.png" alt="A user segment of people who viewed Cart and then did not click the checkout button within one day, filtered to users whose last device type is mobile. The two event steps and the device type property are highlighted." style="width:100%">}}
 
 You can also start from the [{{< ui >}}User Profiles{{< /ui >}}][2] page. Filter your users, then click {{< ui >}}Create Segment{{< /ui >}}. The segment editor opens with your filters already applied.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Import a CSV file" level="h3" expanded=false id="segment-csv" %}}
+{{% collapse-content title="Import a CSV file" level="h4" expanded=false id="segment-csv" %}}
 
 If you have a list of users from a survey, experiment, or CRM, upload it as a CSV file to turn it into a segment.
 
@@ -89,7 +93,7 @@ The file needs a column with user IDs or user emails that match the `usr.id` or 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Account segments" level="h3" expanded=false id="segment-accounts" %}}
+{{% collapse-content title="Account segments" level="h4" expanded=false id="segment-accounts" %}}
 
 Account segments group accounts, such as organizations or companies, based on their attributes or the events their users performed. Use them to analyze groups like accounts with ARR over a specific amount or accounts that adopted a specific feature.
 
