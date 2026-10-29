@@ -26,64 +26,66 @@ After creating a segment, you can reuse it across charts and dashboards to compa
 To create a segment:
 
 1. Navigate to [{{< ui >}}Digital Experience Monitoring{{</ ui >}} > {{< ui >}}Product Analytics{{</ ui >}} > {{< ui >}}Users{{</ ui >}} > {{< ui >}}Segments{{</ ui >}}][1] and click {{< ui >}}Create Segment{{< /ui >}}.
-1. Under {{< ui >}}Define your audience{{< /ui >}}, select the type of profiles to include in the segment:
+1. Next to {{< ui >}}Show{{< /ui >}}, use the toggle to choose the type of profiles to include in the segment:
    - {{< ui >}}Users{{< /ui >}}: Create a segment of individual users.
-   - {{< ui >}}Accounts{{< /ui >}}: Create a segment of accounts (organizations).
-
-   <!-- TODO (DOCS-16074): Replace with new screenshot segments_define_audience_1.png: the new segment editor showing Define your audience (Users, Accounts) and Define your segment (Filter Builder, Importing with CSV). -->
-   {{< img src="product_analytics/segmentation/segments_define_audience.png" alt="The Create A New Segment page showing the Define your audience section with Users and Accounts options, and the Define your segment section with Filter Builder and Importing with CSV tabs." style="width:55%;">}}
+   - {{< ui >}}Accounts{{< /ui >}}: Create a segment of accounts (organizations). See [Account segments](#segment-accounts).
 
    <div class="alert alert-info">A segment returns either user or account profiles, not both.</div>
 
-1. Under {{< ui >}}Define your segment{{< /ui >}}, select how to build the segment:
-   - {{< ui >}}Filter Builder{{< /ui >}}: Add conditions based on events and attributes. See [Using the Filter Builder](#segment-pana).
-   - {{< ui >}}Importing with CSV{{< /ui >}}: Upload a list of users or accounts. See [Importing CSV files](#segment-csv).
+1. Add one or more filters:
+   - {{< ui >}}Add Property{{< /ui >}}: Match on who they are, using any attribute such as email, last seen, or custom attributes you send. See [Filter by properties and events](#segment-pana).
+   - {{< ui >}}Add Event{{< /ui >}}: Match on what they did over a time frame you pick. Use a single event, or a multi-step funnel they converted through or dropped off from. See [Filter by properties and events](#segment-pana).
+   - {{< ui >}}Import CSV{{< /ui >}}: Match a list you already have by uploading a CSV file of IDs to include or exclude. See [Import a CSV file](#segment-csv).
 
-{{% collapse-content title="Using the Filter Builder" level="h3" expanded=false id="segment-pana" %}}
+   Filters combine with AND, and you can flip any filter into an exclusion.
 
-To create a segment from Product Analytics data:
+   <!-- TODO (DOCS-16074): Replace with new screenshot segment_editor.png: the new segment editor with Show set to Users, the Add Property, Add Event, and Import CSV buttons, and the Property, Event, and CSV import cards. -->
+   {{< img src="product_analytics/segmentation/segments_define_audience.png" alt="The segment editor with a Show selector set to Users, buttons to add a property, an event, or a CSV import, and cards describing each filter type." style="width:100%;">}}
 
-1. Under {{< ui >}}Define your segment{{< /ui >}}, select {{< ui >}}Filter Builder{{< /ui >}}.
-1. Add one or both conditions:
-   - {{< ui >}}Performed events{{< /ui >}}: Include users who performed specific events, such as viewing a page or clicking a button.
-   - {{< ui >}}Have attributes{{< /ui >}}: Include users with specific attributes, including any custom attributes you've imported. To import custom attributes, see [User and Account Profiles][3].
-1. Add filters to focus on specific users, like those in a particular country or who signed up in the last 30 days.
+1. Click {{< ui >}}Save Segment{{< /ui >}}.
 
-For example, you can segment users from Brazil who viewed the `/cart` page and clicked the checkout button in the same session last week.
+{{% collapse-content title="Filter by properties and events" level="h3" expanded=false id="segment-pana" %}}
 
-<!-- TODO (DOCS-16074): Replace with new screenshot pana_example_users_brazil_4.png: Filter Builder with a country = Brazil filter, a Performed events condition for viewing /cart then clicking checkout in the same session, and a past-week time range. -->
-{{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="Segment page filtered to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
+Combine property and event filters to focus on the users you care about:
+
+- **Property filters** match users by attribute, such as country, plan, or signup date, including any custom attributes you've imported. For example, `have the property plan is premium`. To import custom attributes, see [User and Account Profiles][3].
+- **Event filters** match users by what they did over a time frame you pick. Match a single event, or a multi-step funnel that users converted through or dropped off from. For example, `did convert after Sign up → Start trial`.
+
+For example, you can segment users from Brazil who viewed the `/cart` page and then clicked the checkout button in the past week. Add a property filter for the country and an event filter for the two steps.
+
+<!-- TODO (DOCS-16074): Replace with new screenshot pana_example_users_brazil_4.png: a property filter for country = Brazil and an event filter for viewing /cart, then clicking checkout, over the past week. -->
+{{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="A segment of users from Brazil who viewed the `/cart` page and then clicked the checkout button." style="width:100%;">}}
 
 #### Example: Find users who left before buying
 
-To find users who almost bought an item but didn't check out, use the {{< ui >}}Performed events{{< /ui >}} condition to include users who:
+To find users who almost bought an item but didn't check out, click {{< ui >}}Add Event{{< /ui >}} and build a funnel of users who:
 
 1. Viewed the `/cart` page.
-1. Then did not perform the action `click on CHECKOUT`.
+1. Then dropped off before the action `click on CHECKOUT`.
 
-<!-- TODO (DOCS-16074): Replace with new screenshot user_profile_example_2.png: Performed events condition for users who viewed /cart, then did not click CHECKOUT. -->
-{{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
+<!-- TODO (DOCS-16074): Replace with new screenshot user_profile_example_2.png: an event filter for users who viewed /cart, then dropped off before clicking CHECKOUT. -->
+{{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="A segment of users who viewed the cart page but didn't click checkout." style="width:80%">}}
 
-To narrow the segment further, add an attribute condition, such as device type.
+To narrow the segment further, add a property filter, such as device type.
 
-You can also start from the [{{< ui >}}User Profiles{{< /ui >}}][2] page. Filter your users, then click {{< ui >}}Create Segment{{< /ui >}} to add event conditions to that group.
+You can also start from the [{{< ui >}}User Profiles{{< /ui >}}][2] page. Filter your users, then click {{< ui >}}Create Segment{{< /ui >}}. The segment editor opens with your filters already applied.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Importing CSV files" level="h3" expanded=false id="segment-csv" %}}
+{{% collapse-content title="Import a CSV file" level="h3" expanded=false id="segment-csv" %}}
 
 If you have a list of users from a survey, experiment, or CRM, upload it as a CSV file to turn it into a segment.
 
 To create a segment from your own file:
 
-1. Under {{< ui >}}Define your segment{{< /ui >}}, select {{< ui >}}Importing with CSV{{< /ui >}}.
-1. Click {{< ui >}}Browse files{{< /ui >}} and upload your CSV file.
-1. Map a column in the file to a Product Analytics attribute.
+1. Click {{< ui >}}Import CSV{{< /ui >}} and upload your CSV file.
+1. Map a column in the file to a Product Analytics attribute. For example, match the `email` column in `leads.csv` to the user email attribute.
+1. Choose whether to include or exclude the users in the file.
 
-The file needs a column with user IDs or user emails. Map that column to the `usr.id` or `usr.email` attribute in Product Analytics. For example, map `@usr.id` to a column named `id`.
+The file needs a column with user IDs or user emails that match the `usr.id` or `usr.email` attribute in Product Analytics.
 
-<!-- TODO (DOCS-16074): Replace with new screenshot segment_link_csv_1.png: Importing with CSV, mapping the @usr.id attribute to a CSV column named id. -->
-{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
+<!-- TODO (DOCS-16074): Replace with new screenshot segment_link_csv_1.png: the Import CSV filter, mapping a CSV column to a Product Analytics user attribute. -->
+{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="The CSV import options for mapping a column in your file to a Product Analytics attribute." style="width:80%">}}
 
 {{% /collapse-content %}}
 
@@ -93,12 +95,12 @@ Account segments group accounts, such as organizations or companies, based on th
 
 To create an account segment:
 
-1. Under {{< ui >}}Define your audience{{< /ui >}}, select {{< ui >}}Accounts{{< /ui >}}.
-1. Under {{< ui >}}Define your segment{{< /ui >}}, select a method:
-   - {{< ui >}}Filter Builder{{< /ui >}}: Add one or both conditions:
-     - {{< ui >}}Performed events{{< /ui >}}: Include accounts where at least one user performed the specified event.
-     - {{< ui >}}Have attributes{{< /ui >}}: Filter by account properties such as ARR, start date, account IDs, or any imported account attributes. To import custom attributes, see [User and Account Profiles][3].
-   - {{< ui >}}Importing with CSV{{< /ui >}}: Upload a CSV file with a column of account IDs. The IDs map to the account ID attribute in Product Analytics.
+1. Next to {{< ui >}}Show{{< /ui >}}, switch the toggle from {{< ui >}}Users{{< /ui >}} to {{< ui >}}Accounts{{< /ui >}}.
+1. Add one or more filters:
+   - {{< ui >}}Add Property{{< /ui >}}: Filter by account properties such as ARR, start date, account IDs, or any imported account attributes. To import custom attributes, see [User and Account Profiles][3].
+   - {{< ui >}}Add Event{{< /ui >}}: Include accounts where at least one user performed the specified event.
+   - {{< ui >}}Import CSV{{< /ui >}}: Upload a CSV file with a column of account IDs. The IDs map to the account ID attribute in Product Analytics.
+1. Click {{< ui >}}Save Segment{{< /ui >}}.
 
 {{% /collapse-content %}}
 
