@@ -420,12 +420,6 @@ multifiltersearch:
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: Azure
-      resource_type: Azure Firewall
-      recommendation_type: Delete Idle Azure Firewall
-      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
-      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
       resource_type: Managed Disk Snapshot
@@ -512,6 +506,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: Database for PostgreSQL
       recommendation_type: Delete Database for PostgreSQL
       recommendation_description: Azure Database for PostgreSQL server with no connections, which can be terminated.
@@ -544,7 +544,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: SQL Managed Instance
       recommendation_type: Downsize SQL Managed Instance
-      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay below the configured threshold on a smaller vCore size. Recommends downsizing them by up to two sizes at a time to reduce compute and SQL license costs.
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay low on a smaller vCore size, and recommends downsizing them, at most two sizes at a time, to cut on-demand compute and SQL license charges.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
