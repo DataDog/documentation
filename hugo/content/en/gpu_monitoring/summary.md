@@ -35,7 +35,7 @@ Datadog GPU Monitoring provides observability for both on-premises and cloud dev
 
 This visualization provides a real-time breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
-The funnel also highlights any performance issues or provisioning inefficiencies such as idle or ineffective GPU devices and how they're trending monthly.
+The funnel also highlights any performance issues or provisioning inefficiencies, such as idle or ineffective GPU devices and how they're trending monthly.
 
 {{< img src="gpu_monitoring/funnel-6.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays fleet size by clusters, hosts, and devices; device counts for each funnel stage with month-over-month trends; and Kubernetes allocation." style="width:90%;" >}}
 
