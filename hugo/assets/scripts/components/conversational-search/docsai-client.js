@@ -89,6 +89,8 @@ export async function streamDocsAiChat({
     return fullMessage;
 }
 
+export const FEEDBACK_TIMEOUT_MS = 10000;
+
 /**
  * Sends a rating ('up' or 'down'), a comment, or both for the answer the token was issued with.
  * `keepalive` lets the request finish when the reader leaves the page right after clicking.
@@ -99,15 +101,24 @@ export async function sendDocsAiFeedback({ config, token, conversationId, rating
     if (comment) attributes.comment = comment;
     if (conversationId) attributes.conversation_id = conversationId;
 
-    const response = await fetch(`${config.apiUrl}/feedback`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Docs-Ai-Api-Key': config.apiKey
-        },
-        body: JSON.stringify({ data: { attributes } }),
-        keepalive: true
-    });
+    // The buttons wait for this request, so it must not hang.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), FEEDBACK_TIMEOUT_MS);
+    let response;
+    try {
+        response = await fetch(`${config.apiUrl}/feedback`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Docs-Ai-Api-Key': config.apiKey
+            },
+            body: JSON.stringify({ data: { attributes } }),
+            keepalive: true,
+            signal: controller.signal
+        });
+    } finally {
+        clearTimeout(timer);
+    }
     if (!response.ok) {
         const error = new Error(`Docs AI feedback failed: ${response.status}`);
         error.status = response.status;

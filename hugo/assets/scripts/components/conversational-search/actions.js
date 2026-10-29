@@ -69,29 +69,10 @@ function handleMessageAction(action, query, response, button, ctx) {
     switch (action) {
         case 'thumbs-up':
         case 'thumbs-down': {
-            const opposite = action === 'thumbs-up' ? 'thumbs-down' : 'thumbs-up';
-            const oppositeBtn = button.parentElement.querySelector(`[data-action="${opposite}"]`);
-            if (button.classList.contains('active')) return;
-
-            button.classList.add('active');
-            if (oppositeBtn) oppositeBtn.classList.remove('active');
-            showFeedbackTooltip(button, 'Thanks for your feedback!');
-
-            logAction('Conversational Search Feedback', {
-                conversational_search: {
-                    action: 'feedback',
-                    feedback: action === 'thumbs-up' ? 'positive' : 'negative',
-                    response_content: response,
-                    conversation_id: ctx.conversationId
-                }
-            }, ctx);
-
+            if (button.classList.contains('active') || button.disabled) return;
             // Only completed answers can be rated: the others have no feedback sender.
-            if (!ctx.sendFeedback) break;
-            const rating = action === 'thumbs-up' ? 'up' : 'down';
-            ctx.sendFeedback({ rating });
-            if (rating === 'down') showCommentForm(button.parentElement, ctx);
-            else removeCommentForm(button.parentElement);
+            if (ctx.sendFeedback) submitRating(button, action === 'thumbs-up', response, ctx);
+            else markRating(button, action === 'thumbs-up', response, ctx);
             break;
         }
 
@@ -123,6 +104,49 @@ function handleMessageAction(action, query, response, button, ctx) {
             break;
         }
     }
+}
+
+function markRating(button, positive, response, ctx) {
+    const opposite = positive ? 'thumbs-down' : 'thumbs-up';
+    button.parentElement.querySelector(`[data-action="${opposite}"]`)?.classList.remove('active');
+    button.classList.add('active');
+    showFeedbackTooltip(button, 'Thanks for your feedback!');
+
+    logAction('Conversational Search Feedback', {
+        conversational_search: {
+            action: 'feedback',
+            feedback: positive ? 'positive' : 'negative',
+            response_content: response,
+            conversation_id: ctx.conversationId
+        }
+    }, ctx);
+}
+
+// A rating counts only once the API has recorded it; until then both thumbs wait, and a failure leaves them as they were.
+async function submitRating(button, positive, response, ctx) {
+    const actionsDiv = button.parentElement;
+    const thumbs = actionsDiv.querySelectorAll('[data-action="thumbs-up"], [data-action="thumbs-down"]');
+    thumbs.forEach((thumb) => { thumb.disabled = true; });
+    clearFeedbackTooltip(button);
+    button.classList.add('is-pending');
+    actionsDiv.setAttribute('aria-busy', 'true');
+
+    let sent = false;
+    try {
+        await ctx.sendFeedback({ rating: positive ? 'up' : 'down' });
+        sent = true;
+    } catch (error) {
+        showFeedbackTooltip(button, "Couldn't send feedback. Try again.", true);
+    } finally {
+        thumbs.forEach((thumb) => { thumb.disabled = false; });
+        button.classList.remove('is-pending');
+        actionsDiv.removeAttribute('aria-busy');
+    }
+    if (!sent) return;
+
+    markRating(button, positive, response, ctx);
+    if (positive) removeCommentForm(actionsDiv);
+    else showCommentForm(actionsDiv, ctx);
 }
 
 function removeCommentForm(actionsDiv) {
@@ -157,17 +181,38 @@ function showCommentForm(actionsDiv, ctx) {
     send.textContent = 'Send';
     send.disabled = true;
     buttons.append(dismiss, send);
-    form.append(field, buttons);
+    const error = document.createElement('p');
+    error.className = 'conv-search-feedback-form-error';
+    error.setAttribute('role', 'alert');
+    error.hidden = true;
+    form.append(field, error, buttons);
+
+    const setSending = (sending) => {
+        field.disabled = sending;
+        dismiss.disabled = sending;
+        send.disabled = sending || !field.value.trim();
+        send.textContent = sending ? 'Sending\u2026' : 'Send';
+    };
 
     field.addEventListener('input', () => {
         send.disabled = !field.value.trim();
     });
     dismiss.addEventListener('click', () => form.remove());
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const comment = field.value.trim();
-        if (!comment) return;
-        ctx.sendFeedback({ comment });
+        if (!comment || field.disabled) return;
+        error.hidden = true;
+        setSending(true);
+        try {
+            await ctx.sendFeedback({ comment });
+        } catch (err) {
+            setSending(false);
+            error.textContent = "Couldn't send your comment. Try again.";
+            error.hidden = false;
+            form.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
+            return;
+        }
         logAction('Conversational Search Feedback Comment', {
             conversational_search: {
                 action: 'feedback_comment',
@@ -183,6 +228,15 @@ function showCommentForm(actionsDiv, ctx) {
 
     actionsDiv.after(form);
     form.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
+}
+
+function clearFeedbackTooltip(button) {
+    const feedbackEl = button.parentElement?.querySelector('.conv-search-feedback-inline');
+    if (!feedbackEl) return;
+    clearTimeout(feedbackHideTimers.get(feedbackEl));
+    feedbackHideTimers.delete(feedbackEl);
+    feedbackEl.classList.remove('feedback-success', 'feedback-error');
+    feedbackEl.textContent = '';
 }
 
 function showFeedbackTooltip(button, message, isError = false) {

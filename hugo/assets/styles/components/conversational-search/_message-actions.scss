@@ -37,6 +37,22 @@
         transform: scale(0.92);
     }
 
+    // While a rating is being recorded, both thumbs wait and the clicked one dims.
+    &:disabled {
+        cursor: default;
+        transform: none;
+
+        &:hover {
+            background: transparent;
+            border-color: $conv-neutral-400;
+        }
+    }
+
+    &.is-pending {
+        cursor: progress;
+        animation: conv-search-feedback-pending 1s ease-in-out infinite alternate;
+    }
+
     &.active {
         background: rgba($conv-search-purple, 0.08);
         border-color: $conv-primary-300;
@@ -115,6 +131,17 @@
         border-color: $conv-primary-300;
         box-shadow: 0 0 0 3px rgba($conv-search-purple, 0.12);
     }
+
+    &:disabled {
+        opacity: 0.7;
+    }
+}
+
+.conv-search-feedback-form-error {
+    margin: 0;
+    font-size: 13px;
+    line-height: 18px;
+    color: #9f1f17;
 }
 
 .conv-search-feedback-form-buttons {
@@ -158,6 +185,16 @@
     }
 }
 
+@keyframes conv-search-feedback-pending {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.45;
+    }
+}
+
 @keyframes conv-search-feedback-reveal {
     from {
         opacity: 0;
@@ -180,5 +217,10 @@
     .conv-search-feedback-inline.feedback-success,
     .conv-search-feedback-inline.feedback-error {
         animation: none;
+    }
+
+    .conv-search-action-btn.is-pending {
+        animation: none;
+        opacity: 0.55;
     }
 }

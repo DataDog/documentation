@@ -954,11 +954,14 @@ class ConversationalSearch {
         this.scrollToBottom();
     }
 
-    // Feedback is best-effort: a failed request is logged but never shown to the reader.
+    // Failures are logged, then rethrown so the buttons can show them and let the reader retry.
     feedbackSender(token) {
         const conversationId = this.conversationId;
         return (feedback) => sendDocsAiFeedback({ config: docsAiConfig, token, conversationId, ...feedback })
-            .catch((error) => this.logErr('Docs AI Feedback Error', error));
+            .catch((error) => {
+                this.logErr('Docs AI Feedback Error', error);
+                throw error;
+            });
     }
 
     // An unanswered question is not sent back as history, so a retry or follow-up starts clean.
