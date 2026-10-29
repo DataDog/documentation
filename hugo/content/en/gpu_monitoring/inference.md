@@ -57,7 +57,7 @@ If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The follow
 
 ### 1. Update the Datadog Agent
 
-Datadog Agent 7.85.0 and later include the vLLM check, so you don't need to install the vLLM integration separately.
+Datadog Agent 7.85.0 and later includes the vLLM check, so you don't need to install the vLLM integration separately.
 
 If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
@@ -182,7 +182,7 @@ If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The follow
 
 ### 1. Update the Datadog Agent
 
-Datadog Agent 7.85.0 and later include both the Dynamo and vLLM checks, so you don't need to install either integration separately.
+Datadog Agent 7.85.0 and later includes both the Dynamo and vLLM checks, so you don't need to install either integration separately.
 
 If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
@@ -352,7 +352,7 @@ To begin monitoring your inference workloads, you must meet the following criter
 
 ### 1. Update the Datadog Agent
 
-Datadog Agent 7.85.0 and later include both the Ray and vLLM checks, so you don't need to install either integration separately.
+Datadog Agent 7.85.0 and later includes both the Ray and vLLM checks, so you don't need to install either integration separately.
 
 If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
@@ -509,7 +509,7 @@ If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The SGLang
 
 ### 1. Update the Datadog Agent
 
-Datadog Agent 7.85.0 and later include the SGLang check, so you don't need to install the SGLang integration separately.
+Datadog Agent 7.85.0 and later includes the SGLang check, so you don't need to install the SGLang integration separately.
 
 If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
