@@ -58,8 +58,8 @@ Click {{< ui >}}View Synthetic Test Result{{< /ui >}} to return to the test run'
 
 [1]: /session_replay/
 [2]: /session_replay/dev_tools
-[3]: /real_user_monitoring/explorer/
-[4]: /real_user_monitoring/error_tracking/
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[4]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [5]: https://app.datadoghq.com/synthetics/settings/integrations
 [6]: /synthetics/settings
 [7]: https://app.datadoghq.com/synthetics/tests?query=type%3A%28browser%29

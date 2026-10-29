@@ -1,5 +1,5 @@
 ---
-title: Monitor Your Next.js App With RUM
+title: Monitor Your Next.js App with RUM
 
 description: Guide for monitoring Next.js applications with RUM.
 further_reading:
@@ -299,15 +299,15 @@ To connect RUM with your backend traces:
 
 [1]: https://nextjs.org/
 [2]: https://app.datadoghq.com/rum/performance-monitoring
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[4]: /real_user_monitoring/platform/dashboards/
-[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
-[6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
+[3]: /real_user_monitoring/setup/data_collected/?platform=browser
+[4]: /real_user_monitoring/administer_and_extend_rum/dashboards/
+[5]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#setup
+[6]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [7]: https://vercel.com
 [8]: https://nextjs.org/docs/app
 [9]: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 [10]: https://nextjs.org/docs/pages
 [11]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app
-[12]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[13]: /real_user_monitoring/platform/dashboards/
+[12]: /real_user_monitoring/setup/data_collected/?platform=browser
+[13]: /real_user_monitoring/administer_and_extend_rum/dashboards/
 [14]: https://app.datadoghq.com/rum/sessions

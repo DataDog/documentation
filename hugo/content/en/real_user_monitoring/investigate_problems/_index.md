@@ -1,0 +1,38 @@
+---
+title: Investigate Problems
+description: "Explore retained RUM data to investigate performance issues, navigate user sessions, and troubleshoot application errors."
+further_reading:
+- link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
+  tag: "Documentation"
+  text: "Retain and recover valuable sessions"
+- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+  tag: "Blog"
+  text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
+---
+
+## Overview
+
+After Datadog retains your RUM sessions, explore them in the RUM Explorer, triage errors and crashes with Error Tracking, and use Bits AI to optimize performance and find the root cause of regressions.
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/real_user_monitoring/investigate_problems/explore_retained_data/" >}}
+    <h3>Explore retained data</h3>
+    Examine RUM data collected from your applications.
+    {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/investigate_problems/triage_errors_and_crashes/" >}}
+    <h3>Triage errors and crashes</h3>
+    Search, manage, and resolve errors collected from your web and mobile applications with Error Tracking.
+    {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/investigate_problems/troubleshoot_with_ai/" >}}
+    <h3>Troubleshoot with AI</h3>
+    Use Bits AI to optimize performance, investigate regressions, and ask questions about your RUM data.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Next step
+
+Continue to [Explore Retained Data](/real_user_monitoring/investigate_problems/explore_retained_data/).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

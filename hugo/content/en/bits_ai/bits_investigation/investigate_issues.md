@@ -187,8 +187,8 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
 [18]: https://app.datadoghq.com/synthetics/tests
-[19]: /real_user_monitoring/bits_ai/optimize_performance/
-[20]: /real_user_monitoring/bits_ai/investigate_regressions/
+[19]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/optimize_performance/
+[20]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/investigate_regressions/
 [21]: /error_tracking/bits_investigation/
 
 ## Further reading

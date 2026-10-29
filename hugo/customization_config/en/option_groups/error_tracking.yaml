@@ -22,6 +22,8 @@ rum_error_grouping_context_options:
   - id: browser
     default: true
   - id: android
+    label: Android Ecosystem
   - id: flutter
   - id: ios
+    label: Apple Ecosystem
   - id: react_native

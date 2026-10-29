@@ -2,7 +2,10 @@
 title: Best Practices for Setting Up RUM Operations
 description: Learn how to define RUM operations that generate reliable availability and latency metrics for journeys.
 further_reading:
-- link: '/real_user_monitoring/operations_monitoring/?tab=browser'
+- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
+  tag: 'Guide'
+  text: 'Best practices for creating SLOs for RUM operations'
+- link: '/real_user_monitoring/track_critical_operations/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
 - link: '/journey_monitoring/'
@@ -85,10 +88,10 @@ Use the following tools to investigate unexpected operation outcomes or verify t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/operations_monitoring/?tab=browser
-[2]: /real_user_monitoring/operations_monitoring/?tab=browser#monitor-your-availability-on-datadog
-[3]: /real_user_monitoring/operations_monitoring/?tab=browser#start-an-operation
-[4]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
-[5]: /real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring
-[6]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/track_critical_operations/?tab=browser
+[2]: /real_user_monitoring/track_critical_operations/?tab=browser#monitor-your-availability-on-datadog
+[3]: /real_user_monitoring/track_critical_operations/?tab=browser#start-an-operation
+[4]: /real_user_monitoring/track_critical_operations/?tab=browser#parallelization
+[5]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/optimize_performance/#operations-monitoring
+[6]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [7]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/

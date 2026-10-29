@@ -44,7 +44,7 @@ attributes:
     type: string
     domain: Reserved
   - name: service
-    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser#manually-track-views).
     product_source: 
       - icon-log
       - icon-rum
@@ -977,7 +977,7 @@ attributes:
     domain: View (Browser)
     
   - name: view.loading_type
-    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa).
+    description: The type of page load, `initial_load` or `route_change`. For more information, see the [single page applications support docs](/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#view-loading-time).
     product_source:
       - icon-rum
       - browser

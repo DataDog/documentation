@@ -72,7 +72,7 @@ Click {{< ui >}}Export{{< /ui >}} to save your work to a Dashboard or Notebook. 
 [4]: /dashboards/querying/#advanced-graphing
 [5]: /logs/explorer/
 [6]: /tracing/trace_explorer/
-[7]: /real_user_monitoring/explorer/search/
+[7]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [8]: /security/
 [9]: /events/
 [10]: /continuous_integration/pipelines/

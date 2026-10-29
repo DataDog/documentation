@@ -1,15 +1,15 @@
 ---
-title: Compute Apdex And Custom Performance Indicators With RUM Data
+title: Compute Apdex and Custom Performance Indicators with RUM Data
 
 description: Guide for computing your Apdex score and custom performance indicators with RUM data
 further_reading:
     - link: '/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm'
       tag: 'Documentation'
       text: 'Configure Apdex score by service'
-    - link: '/real_user_monitoring/explorer'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
       tag: 'Documentation'
       text: 'RUM Dashboards'
-    - link: '/real_user_monitoring/application_monitoring/browser/data_collected'
+    - link: '/real_user_monitoring/setup/data_collected/?platform=browser'
       tag: 'Documentation'
       text: 'RUM Browser Data Collected'
     - link: '/real_user_monitoring/android/data_collected'

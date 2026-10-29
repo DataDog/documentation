@@ -5,7 +5,7 @@ description: Learn how to set up RUM to capture new releases, track your deploym
 aliases:
 - /real_user_monitoring/guide/getting-started-rum-deployment-tracking/
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
 - link: "/tracing/version_tracking"

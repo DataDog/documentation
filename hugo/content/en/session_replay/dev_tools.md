@@ -56,9 +56,9 @@ The {{< ui >}}Attributes{{< /ui >}} tab displays all attributes related to the s
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [2]: /logs/log_collection/javascript/
 [3]: /logs/explorer/
 [4]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
-[5]: /real_user_monitoring/error_tracking/
-[6]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
+[5]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
+[6]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes

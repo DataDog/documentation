@@ -2,7 +2,9 @@ client_sdk_platform_options:
   - id: browser
     default: true
   - id: android
+    label: Android Ecosystem
   - id: ios
+    label: Apple Ecosystem
   - id: flutter
   - id: react_native
   - id: kotlin_multiplatform

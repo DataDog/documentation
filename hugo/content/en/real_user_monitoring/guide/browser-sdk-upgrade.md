@@ -2,12 +2,12 @@
 title: Upgrade the RUM Browser SDK
 description: "Upgrade guide for migrating between major versions of RUM Browser SDK with breaking changes, new features, and compatibility updates."
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
 - link: "https://www.datadoghq.com/blog/session-replay-datadog/"
   tag: "Blog"
-  text: "Use Datadog Session Replay to view real-time user journeys"
+  text: "Use Datadog Session Replay to view real-time user sessions"
 ---
 
 ## Overview
@@ -552,13 +552,13 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [2]: /session_replay/
 [3]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
-[5]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[5]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=browser#modify-rum-events
 [6]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[7]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
-[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
-[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
-[10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
-[11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
+[7]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#clear-user-information
+[8]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
+[9]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
+[10]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
+[11]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
 [12]: /api/latest/rum/
 [13]: /api/latest/rum/
 [14]: /api/latest/rum/
@@ -570,13 +570,13 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [20]: /session_replay/privacy_options?platform=browser#configuration
 [21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
 [22]: /session_replay/
-[23]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[23]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=browser#modify-rum-events
 [24]: /help/
 [26]: /real_user_monitoring/application_monitoring/browser/
-[25]: /real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
+[25]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
 [28]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[29]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#:~:text=configure%20the%20traceContextInjection
+[29]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser#:~:text=configure%20the%20traceContextInjection
 [30]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import
 [31]: https://webpack.js.org/guides/code-splitting/#dynamic-imports
 [32]: https://esbuild.github.io/api/#splitting

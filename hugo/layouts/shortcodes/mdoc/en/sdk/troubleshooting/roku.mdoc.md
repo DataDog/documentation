@@ -25,4 +25,4 @@ datadogroku_initialize({
 The default value (`datadoghq.com`) routes data to the US1 datacenter. If your organization is on EU1, AP1, or another region, update this value accordingly. See the [Roku Channel Monitoring Setup][2] for the correct `site` value for your region.
 
 [1]: /help
-[2]: /real_user_monitoring/application_monitoring/roku/setup
+[2]: /real_user_monitoring/setup/install/?platform=roku

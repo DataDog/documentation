@@ -51,4 +51,4 @@ Add the URLs of your backend services that you want to connect to RUM:
 
 See [Connect RUM and Traces][1] for detailed information about RUM and APM integration.
 
-[1]: /real_user_monitoring/platform/connect_rum_and_traces/
+[1]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

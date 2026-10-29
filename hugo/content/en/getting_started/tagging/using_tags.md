@@ -399,8 +399,8 @@ See this list for links to respective sections:
 [12]: /logs/explorer/patterns/
 [13]: /logs/live_tail/
 [14]: /logs/log_configuration/pipelines
-[15]: /real_user_monitoring/explorer/
-[16]: /real_user_monitoring/explorer/search/
+[15]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[16]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [17]: /api/
 [18]: /api/v1/downtimes/#schedule-a-downtime
 [19]: /api/v1/events/#query-the-event-stream

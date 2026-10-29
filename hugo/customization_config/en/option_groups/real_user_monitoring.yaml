@@ -1,13 +1,17 @@
 rum_sdk_platform_options:
   - id: android
+    label: Android Ecosystem
     default: true
   - id: ios
+    label: Apple Ecosystem
   - id: react_native
 
 rum_sdk_platform_options_v2:
   - id: android
+    label: Android Ecosystem
     default: true
   - id: ios
+    label: Apple Ecosystem
   - id: react_native
   - id: flutter
 
@@ -15,13 +19,17 @@ rum_sdk_profiling_options:
   - id: browser
     default: true
   - id: android
+    label: Android Ecosystem
   - id: ios
+    label: Apple Ecosystem
 
 rum_session_replay_sdk_options:
   - id: browser
     default: true
   - id: android
+    label: Android Ecosystem
   - id: ios
+    label: Apple Ecosystem
   - id: kotlin_multiplatform
   - id: react_native
   - id: flutter

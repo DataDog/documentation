@@ -1393,6 +1393,6 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [7]: /logs/explorer/
 [8]: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error>
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
-[12]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[11]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=browser#modify-rum-events
+[12]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=browser#drop-rum-events
 [14]: /real_user_monitoring/guide/upload-webassembly-symbols/

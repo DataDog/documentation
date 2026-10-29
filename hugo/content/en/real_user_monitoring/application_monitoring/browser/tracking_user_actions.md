@@ -7,13 +7,13 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
       text: 'Introducing Datadog Real User Monitoring'
-    - link: '/real_user_monitoring/explorer/'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
       tag: 'Documentation'
       text: 'Explore your views within Datadog'
-    - link: '/real_user_monitoring/explorer/visualize/'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/visualize/'
       tag: 'Documentation'
       text: 'Apply visualizations on your events'
-    - link: '/real_user_monitoring/platform/dashboards/'
+    - link: '/real_user_monitoring/administer_and_extend_rum/dashboards/'
       tag: 'Documentation'
       text: 'Learn about RUM dashboards'
     - link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-Browser Monitoring automatically detects user interactions performed during a user journey and provides insights into your users' behavior without requiring you to manually instrument every single click in your application.
+Browser Monitoring automatically detects user interactions performed during a user session and provides insights into your users' behavior without requiring you to manually instrument every single click in your application.
 
 You can accomplish the following objectives:
 
@@ -36,6 +36,8 @@ You can accomplish the following objectives:
 While there is no explicit cap on the total number of actions that can be collected by the RUM Browser SDK during a session, there are technical limitations on individual event sizes and the payload sent. For further details about limitations on actions, see [RUM Browser Troubleshooting documentation][1].
 
 ## Track user interactions
+
+For setup steps, see [Track user interactions][9].
 
 To enable automatic click tracking, set `trackUserInteractions: true` in your SDK initialization:
 
@@ -68,7 +70,7 @@ window.DD_RUM.init({
 
 When enabled, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
 
-<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
+<div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/setup/additional_plugins/#action-name-deobfuscation">Action Name Deobfuscation build plugin</a> automatically restores readable action names in minified builds.</div>
 
 ## Action timing telemetry
 
@@ -141,7 +143,7 @@ The Datadog Browser SDK uses the following strategies to compute click action na
 
 ## Send custom actions
 
-To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user session.
 
 For more information, see [Send Custom Actions][8].
 
@@ -158,11 +160,12 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/troubleshooting/
+[1]: /real_user_monitoring/reference/troubleshooting/?platform=browser
 [2]: /data_security/real_user_monitoring/#mask-action-names
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[4]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
-[5]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
-[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[4]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
+[5]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes
+[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [8]: /real_user_monitoring/guide/send-rum-custom-actions
+[9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser

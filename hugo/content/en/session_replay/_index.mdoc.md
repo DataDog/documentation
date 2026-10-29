@@ -31,7 +31,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
 - link: '/product_analytics/analytics_explorer'
@@ -49,6 +49,14 @@ further_reading:
 ## Overview
 
 Session Replay expands your user experience monitoring by allowing you to capture and visually replay your users' web browsing or mobile app experiences. Session Replay is available in both [RUM][1] and [Product Analytics][2], helping you identify and reproduce errors, understand user journeys, and gain insights into your application's usage patterns and design pitfalls.
+
+## Get started
+
+Session Replay is part of the Datadog SDKs. To start collecting replays:
+
+1. [Set up RUM][14] for your application.
+2. Enable Session Replay in your SDK configuration. For instructions for each SDK, see [Session Replay Setup and Configuration][15].
+3. Optionally, configure [privacy options][16] to control which content is masked in replays.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
@@ -252,3 +260,6 @@ Learn more about [Dev Tools][11].
 [11]: /session_replay/dev_tools
 [12]: /session_replay/heatmaps
 [13]: /account_management/guide/secure-configuration/#synthetic-monitoring-and-rum
+[14]: /real_user_monitoring/setup/
+[15]: /session_replay/setup_and_configuration/
+[16]: /session_replay/privacy_options/

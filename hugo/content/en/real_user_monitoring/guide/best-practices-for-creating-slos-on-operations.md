@@ -2,7 +2,10 @@
 title: Best Practices for Creating SLOs for RUM Operations
 description: Learn how to create availability and latency SLOs from RUM operation metrics.
 further_reading:
-- link: '/real_user_monitoring/operations_monitoring/?tab=browser'
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up RUM operations'
+- link: '/real_user_monitoring/track_critical_operations/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
 - link: '/service_level_objectives/metric/'
@@ -153,9 +156,9 @@ Validate the SLOs after you create them:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/operations_monitoring/?tab=browser
+[1]: /real_user_monitoring/track_critical_operations/?tab=browser
 [2]: /journey_monitoring/
 [3]: /service_level_objectives/metric/
-[4]: /real_user_monitoring/rum_without_limits/
+[4]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [5]: /real_user_monitoring/guide/best-practices-for-operations-setup/
-[6]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
+[6]: /real_user_monitoring/track_critical_operations/?tab=browser#parallelization

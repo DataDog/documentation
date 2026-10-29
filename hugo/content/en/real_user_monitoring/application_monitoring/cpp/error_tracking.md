@@ -2,10 +2,10 @@
 title: C / C++ Crash Reporting and Error Tracking
 description: Set up Error Tracking for your C and C++ applications.
 further_reading:
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 ---
@@ -20,53 +20,7 @@ Crash reports appear in [Error Tracking][1] and are deduplicated and grouped int
 
 If you have not set up the RUM C++ SDK yet, follow the [in-app setup instructions][2] or see the [RUM C++ setup documentation][3].
 
-To enable crash reporting, register the `CrashReporting` feature as early as possible after creating your SDK core, before calling `Start()`.
-
-{{< tabs >}}
-{{% tab "C++" %}}
-
-```cpp
-#include "datadog.hpp"
-
-datadog::CoreConfig config("<client_token>", "<service_name>", "<environment>");
-auto core = datadog::Core::Create(config, datadog::TrackingConsent::Granted);
-
-// Register crash reporting
-auto crash_reporting = datadog::CrashReporting::Register(core);
-
-// Register RUM
-datadog::RumConfig rum_config("<rum_application_id>");
-auto rum = datadog::Rum::Register(core, rum_config);
-
-// Start the core
-core->Start();
-```
-
-{{% /tab %}}
-{{% tab "C (FFI)" %}}
-
-```c
-#include "datadog.h"
-
-dd_core_config_t config;
-dd_core_config_init(&config, "<client_token>", "<service_name>", "<environment>");
-dd_core_t* core = dd_core_create(&config, DD_TRACKING_CONSENT_GRANTED);
-
-/* Register crash reporting */
-dd_crash_reporting_t* crash_reporting = dd_crash_reporting_init(core, NULL);
-
-/* Register RUM */
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
-
-dd_core_start(core);
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-The SDK captures crashes automatically once registered.
+To enable crash reporting, see [Track errors and crashes][6].
 
 ### Crash reporting modes
 
@@ -162,8 +116,9 @@ RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/error_tracking/
+[1]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/cpp/setup
+[3]: /real_user_monitoring/setup/install/?platform=cpp
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
+[6]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=cpp

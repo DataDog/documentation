@@ -254,6 +254,6 @@ For example, enter `$region` in the event overlays search box. This searches for
 
 [1]: /getting_started/tagging/#define-tags
 [2]: /logs/explorer/facets/
-[3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=facets#setup-facets-measures
 [4]: /dashboards/faq/historical-data/
 [5]: /account_management/teams/#team-filter

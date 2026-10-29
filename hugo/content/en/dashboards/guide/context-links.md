@@ -266,13 +266,13 @@ The parenthesis translates the `(env:{{$env.value}})` to `(env:*)` which allows 
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/
-[7]: /real_user_monitoring/data_collected/
+[7]: /real_user_monitoring/setup/data_collected/
 [8]: /infrastructure/hostmap/#overview
 [9]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
 [10]: /infrastructure/livecontainers/
 [11]: /infrastructure/process/?tab=linuxwindows
 [12]: /tracing/trace_explorer/?tab=listview
-[13]: /real_user_monitoring/explorer/
+[13]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [14]: /profiler/profile_visualizations/
 [15]: /logs/explorer/
 [16]: /dashboards/widgets/

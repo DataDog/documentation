@@ -1,0 +1,1 @@
+Background event tracking applies to mobile applications, which can run code while they aren't in the foreground. It isn't relevant to Browser applications. To track background events in a mobile application, select your mobile SDK.
