@@ -58,7 +58,7 @@ The Pup CLI can set up the following products:
 
 ### Run the setup command
 
-Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You don't need to install Pup first, because `npx` downloads it. If Pup is already [installed][20], run `pup setup` with the same flags.
+Run `pup setup` with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You don't need to install Pup first, because `npx` downloads it. If Pup is already [installed][20], run `pup setup` directly instead of `npx @datadog/pup setup`, with the same flags.
 
 If you've logged in with `pup auth login`, `pup setup` uses that login.
 
@@ -130,7 +130,7 @@ Headless mode signs in with the first of these that's available:
 
 1. Your Pup login, or the `DD_ACCESS_TOKEN` environment variable. If either is present, `pup setup` ignores `DD_API_KEY` and `DD_APP_KEY`.
 1. The `DD_API_KEY` and `DD_APP_KEY` [environment variables][19]. Provide both variables together.
-1. Browser OAuth. The setup command opens a browser so you can log in. This is the only step in headless mode that might need you, and it requires a localhost callback. On remote machines or fully unattended runs, use one of the other options.
+1. Browser OAuth. The setup command opens a browser so you can log in. This is the only step in headless mode that requires user input, and it needs a localhost callback. On remote machines or fully unattended runs, use one of the other options.
 
 By running `pup setup` in headless mode, you confirm that source-code upload and automatic command execution are authorized for the target project. This applies whether you add `--headless` or headless mode turns on automatically.
 
