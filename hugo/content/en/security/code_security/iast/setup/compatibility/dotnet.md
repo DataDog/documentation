@@ -29,7 +29,7 @@ The minimum tracer version to get all supported application security capabilitie
 | Docker            | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 | Kubernetes        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 | Amazon ECS        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
-| AWS Fargate       | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     | Preview (2.42.0) |
 | AWS Lambda        | {{< X >}}                |                               |               |
 | Azure App Service | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 
