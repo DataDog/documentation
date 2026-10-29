@@ -25,9 +25,9 @@ To send [external evaluations directly to the API](/llm_observability/investigat
 
 For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/instrument/prompt_tracking#opentelemetry-instrumentation).
 
-### Experiments
+### Offline Experiments
 
-You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+You can use OpenTelemetry spans inside [Agent Observability Offline Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ### Multimodal support
 
@@ -139,7 +139,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 | [Langfuse][37] | Native | >= 4.0.0 |
-| [Claude Managed Agents][38] | Native ([OpenTelemetry export][39]) | Public beta |
+| [Claude Platform][38] | Native ([OpenTelemetry export][39]) | — |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -160,7 +160,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [35]: https://pypi.org/project/traceloop-sdk/
 [36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [37]: https://langfuse.com/integrations/native/opentelemetry
-[38]: https://platform.claude.com/docs/en/managed-agents
+[38]: https://platform.claude.com/docs
 [39]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -191,38 +191,40 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 
 ## Send traces from your framework or platform {#examples}
 
-{{% collapse-content title="Using Claude Managed Agents" level="h3" expanded=false id="using-claude-managed-agents" %}}
+{{% collapse-content title="Using Claude Platform" level="h3" expanded=false id="using-claude-managed-agents" %}}
 
-[Claude Managed Agents][18] and the Claude SDKs emit spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. Spans come from two independent sources:
+The [Claude Platform][18] natively emits spans that follow the GenAI semantic conventions through [OpenTelemetry export][19], so you don't need an instrumentation library. Native export covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
 
-- **API spans** for each Sessions API request, agent turn, model request, and tool call that Anthropic runs. Anthropic delivers these to a destination that you configure in the Claude Console.
+- **API spans** cover requests that Anthropic runs: Messages API requests and, for Managed Agents, each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these spans to a destination that you configure in the Claude Console.
 - **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
 
-If your application uses a Claude SDK, both sets of spans land in the same trace, because the SDK propagates W3C trace context on its API requests.
+If your application uses a Claude SDK, both sets of spans appear in the same trace, because the SDK propagates W3C trace context on its API requests.
 
 #### Export API spans
 
 Anthropic delivers API spans from its own infrastructure, so you add a Datadog destination in the Claude Console rather than setting `OTEL_EXPORTER_OTLP_*` environment variables.
 
-1. In the Claude Console, go to **Organization settings** > **OpenTelemetry** and click **Add destination**. Complete the fields:
+1. In the Claude Console, go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}OpenTelemetry{{< /ui >}} and click {{< ui >}}Add destination{{< /ui >}}. Complete the fields:
    | Field | Value |
    |-------|-------|
-   | Provider | **Datadog** |
+   | Provider | {{< ui >}}Datadog{{< /ui >}} |
    | Site | Your Datadog site, for example `US1` |
    | API key | Your [Datadog API key][2]. Application keys do not work. |
-   | Content mode | **Full content** so spans carry message and tool content, or **Metadata only** for identifiers, timing, status, and token counts |
+   | Content mode | {{< ui >}}Full content{{< /ui >}} so spans carry message and tool content, or {{< ui >}}Metadata only{{< /ui >}} for identifiers, timing, status, and token counts |
 
-   Selecting **Datadog** as the provider sets the OTLP endpoint for the site you choose, shown under **OTLP details**. There is no endpoint or header to enter by hand.
+   Selecting {{< ui >}}Datadog{{< /ui >}} as the provider sets the OTLP endpoint for the site you choose, shown under {{< ui >}}OTLP details{{< /ui >}}. You don't need to enter an endpoint or headers.
 
-   Choose **Full content** only if your Datadog organization may store model prompts and responses. To restrict who can read them once they arrive, see [Data Access Controls][8].
-2. Set **Workspaces** on the destination to choose which workspaces export to it: **All**, **Selected** for a specific list, or **All except** to exclude a few.
-3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service and form this tree:
+   Choose {{< ui >}}Full content{{< /ui >}} only if your Datadog organization is permitted to store model prompts and responses. To restrict who can read them after they arrive, see [Data Access Controls][8].
+2. Set {{< ui >}}Workspaces{{< /ui >}} on the destination to choose which workspaces export to it: {{< ui >}}All{{< /ui >}}, {{< ui >}}Selected{{< /ui >}} for a specific list, or {{< ui >}}All except{{< /ui >}} to exclude a few.
+3. Send a request or run a session, then check that the destination's {{< ui >}}Delivery{{< /ui >}} column reads {{< ui >}}Healthy{{< /ui >}}. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
    | Span | Agent Observability span kind |
    |------|-------------------------------|
    | `anthropic.sessions.events.send` | Workflow |
    | `anthropic.session.turn` | Agent, carrying the conversation input and output |
    | `anthropic.model_request` | LLM, carrying the model name and token usage |
    | Hosted tool calls, for example `bash` or `read` | Tool |
+
+   A destination receives spans for every surface the workspace uses, so Messages API requests arrive at the same destination without further configuration.
 
 #### Export SDK spans
 
@@ -259,7 +261,7 @@ client = Anthropic(
 )
 ```
 
-Unlike the Console destination, this exporter is an ordinary OTLP client, so its endpoint does include `/v1/traces`. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, and turn SDK spans off entirely with `ANTHROPIC_OPEN_TELEMETRY=false`.
+The endpoint for this exporter includes the `/v1/traces` path. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, or turn off SDK spans with `ANTHROPIC_OPEN_TELEMETRY=false`.
 
 To group several calls into one conversation, set a conversation ID on the client. The SDK sends it as `gen_ai.conversation.id`, which Agent Observability indexes as the session:
 
@@ -279,9 +281,9 @@ Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to
 
 #### Avoid double-counted tokens
 
-During the public beta, Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
+If you export both Claude SDK spans and Claude Platform API spans for the same workspace, Agent Observability counts tokens for the same model calls twice. The duplicate counts inflate token metrics and estimated cost. If the Claude SDK is your only source of spans, skip this step.
 
-Until the platform stops reporting them in both places, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
+To count each model call once, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
 
 ```python
 from opentelemetry.sdk.trace import ReadableSpan
@@ -343,8 +345,6 @@ provider.add_span_processor(
     BatchSpanProcessor(StripClaudeTokenUsage(OTLPSpanExporter(endpoint=..., headers=...)))
 )
 ```
-
-Apply this only when a Console destination is also exporting API spans for the same workspace. If the Claude SDK is your only source of spans, leave the token counts in place, because nothing else reports them.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
@@ -498,7 +498,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
    | Header | `dd-api-key`: `<YOUR_API_KEY>` |
    | Header | `dd-otlp-source`: `llmobs` |
-   
+
    The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
    ```typescript
@@ -1203,5 +1203,6 @@ with tracer.start_as_current_span("my-span") as span:
 [15]: https://developers.cloudflare.com/agents/
 [16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
 [17]: https://sdk.vercel.ai/
-[18]: https://platform.claude.com/docs/en/managed-agents
+[18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
+[55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments

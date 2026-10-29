@@ -1,51 +1,50 @@
 ---
-description: Configura el control de acceso basado en roles (RBAC) para monitores
-  con el fin de restringir los permisos de edición a roles específicos y evitar cambios
+description: Configure el control de acceso basado en roles (RBAC) para los seguimientos
+  a fin de restringir los permisos de edición a roles específicos y evitar cambios
   no autorizados.
 further_reading:
 - link: /account_management/rbac/permissions/#monitors
   tag: Documentación
-  text: Más información sobre los permisos RBAC para monitores
+  text: Obtenga más información sobre los permisos de RBAC para Monitors
 - link: /api/latest/monitors/#create-a-monitor
   tag: Documentación
-  text: Más información sobre la creación de monitores restringidos a través de la
-    API
+  text: Obtenga más información sobre cómo crear seguimientos restringidos mediante
+    la API
 - link: /monitors/configuration/#permissions
   tag: Documentación
-  text: Más información sobre la creación de monitores restringidos a través de la
-    interfaz de usuario
-title: Cómo configurar RBAC para monitores
+  text: Obtenga más información sobre cómo crear seguimientos restringidos mediante
+    la UI
+title: Cómo configurar RBAC para Monitors
 ---
+## Descripción general {#overview}
 
-## Información general
+Los seguimientos alertan a sus equipos sobre posibles problemas en sus sistemas. Asegurarse de que solo los usuarios autorizados puedan editar sus seguimientos evita cambios accidentales en las configuraciones de esos seguimientos.
 
-Los monitores alertan a tus equipos de posibles problemas con tus sistemas. Asegurarte de que solo los usuarios autorizados pueden editar tus monitores evita cambios accidentales en las configuraciones de los monitores.
+Administre sus seguimientos de forma segura restringiendo los permisos de edición de cada seguimiento a roles específicos.
 
-Gestiona de forma segura tus monitores al restringir los permisos de edición de cada monitor a roles específicos.
+## Configure roles {#set-up-roles}
 
-## Configurar roles
+Para obtener más información sobre los roles predeterminados y personalizados, cómo crear roles personalizados, asignar permisos a los roles y asignar roles a los usuarios, consulte [Access Control basado en roles][1].
 
-Para obtener más información sobre roles predeterminados y personalizados, cómo crear roles personalizados, asignar permisos a roles y asignar roles a usuarios, consulta [Control de acceso basado en roles][1].
-
-## Restringir el acceso a monitores
+## Restrinja el acceso a los seguimientos {#restrict-access-to-monitors}
 
 {{< tabs >}}
 
-{{% tab "UI" %}}
+{{% tab "IU" %}}
 
-1. Accede a la página de edición del monitor creando un nuevo monitor o editando uno ya existente.
-2. En la parte inferior del formulario, especifica qué roles, además del creador, pueden editar el monitor.
+1. Navegue a la página de edición de seguimientos creando un seguimiento nuevo o editando uno existente.
+2. En la parte inferior del formulario, especifique qué roles, además del creador, tienen permitido editar el seguimiento.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Monitor restringido por RBAC" >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="Seguimiento restringido por RBAC" >}}
 
-Para más información, consulta [Permisos de monitores][1].
+Para obtener más información, consulte [Permisos de seguimientos][1].
 
 [1]: /es/monitors/configuration/#permissions
 {{% /tab %}}
 
 {{% tab "API" %}}
 
-Utiliza el [endpoint de la API Lista de roles][1] para obtener el lista de roles y sus IDs.
+Utilice el [punto de conexión de la API List Roles][1] para obtener la lista de roles y sus identificadores.
 
 ```bash
 curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
@@ -88,9 +87,9 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-Utiliza el endpoint de la API [Crear][2] o [Editar un monitor][3] y el parámetro `restricted_roles` para restringir la edición de un monitor a un conjunto específico de roles y al creador de monitor.
+Utilice el punto de conexión de la API [Create][2] o [Edit a monitor][3] y el parámetro `restricted_roles` para restringir la edición del seguimiento a un conjunto específico de roles y al creador del seguimiento. 
 
-**Nota:** Puedes especificar uno o varios UUID de rol. Establecer `restricted_roles` en `null` permite la edición del monitor para todos los usuarios con [permisos de escritura del monitor][4].
+**Nota:** Puede especificar uno o varios UUID de rol. Configurar `restricted_roles` en `null` permite la edición de seguimientos a todos los usuarios con [permisos de Monitor Write][4].
 
 ```bash
 curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
@@ -114,7 +113,7 @@ curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
 }'
 ```
 
-Para obtener más información, consulta [Roles][5] y [Referencia de la API Monitores][6] .
+Para obtener más información, consulte [Roles][5] y [Referencia de la API de Monitors][6].
 
 
 [1]: /es/api/latest/roles/#list-roles
@@ -126,24 +125,26 @@ Para obtener más información, consulta [Roles][5] y [Referencia de la API Moni
 {{% /tab %}}
 {{< /tabs >}}
 
-## Roles restringidos
+## Roles restringidos {#restricted-roles}
 
-Datadog permite restringir la edición de monitores a roles específicos mediante la opción de restricción de roles. Esto te da flexibilidad para definir qué usuarios pueden editar monitores.
+Datadog permite restringir la edición de seguimientos a roles específicos a través de la opción de restricción de roles. Esto le brinda la flexibilidad de definir qué usuarios tienen permitido editar seguimientos.
 
-### API
+### API {#api}
 
-Puedes actualizar la definición de los monitores que se gestionan mediante API o Terraform utilizando el parámetro `restricted_roles`. También puedes utilizar el endpoint de [políticas de restricción][4] para definir las reglas de control del acceso para un monitor, asignando un conjunto de relaciones (como editor y visor) a un conjunto de elementos principales autorizados (como roles, equipos o usuarios). La política de restricción determina quién tiene autorización para realizar qué acciones en el monitor.
+Puede actualizar la definición de los seguimientos que se administran a través de la API o Terraform utilizando el parámetro `restricted_roles`. También puede utilizar el punto de conexión [Restriction Policies][4] para definir las reglas de control de acceso de un seguimiento, asignando un conjunto de relaciones (como editor y observador) a un conjunto de entidades autorizadas (como roles, equipos o usuarios). La política de restricción determina quién está autorizado para realizar qué acciones en el seguimiento.
 
-Para obtener más información, consulta [Editar un endpoint de API de monitor][3] y [API de políticas de restricción][4].
+Los seguimientos admiten las relaciones `viewer`, `muter` y `editor`. La relación `muter`, que otorga acceso solo para silenciar, está en Preview. Una política que vincula la relación `muter` también debe vincular la relación `editor`, y cada principal solo puede tener una relación por política. El parámetro `restricted_roles` solo controla el acceso de edición; para otorgar acceso solo para silenciar, utilice una política de restricción. Para obtener más información, consulte [Niveles de acceso][5].
 
-### Interfaz de usuario
+Para obtener más información, consulte [Edit a monitor API endpoint][3] y [Restriction Policies API][4].
 
-Todos los nuevos monitores creados desde la interfaz de usuario utilizan el parámetro `restricted_roles`. 
-Todos los monitores muestran también la opción de restricción de roles independientemente del mecanismo subyacente:
+### UI {#ui}
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Monitor no restringido por RBAC" >}}
+Todos los seguimientos nuevos creados desde la UI usan el parámetro `restricted_roles`. 
+Todos los seguimientos también muestran la opción de restricción de rol independientemente del mecanismo subyacente:
 
-## Referencias adicionales
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="Seguimiento sin restricciones de RBAC" >}}
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -151,3 +152,4 @@ Todos los monitores muestran también la opción de restricción de roles indepe
 [2]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [3]: /es/api/latest/monitors/#edit-a-monitor
 [4]: /es/api/latest/restriction-policies/
+[5]: /es/monitors/configuration/#access-levels

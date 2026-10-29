@@ -1,3 +1,3 @@
 ---
-title: Agent Observability 실험을 위한 푸시 이벤트를 전송합니다.
+title: Agent Observability 실험을 위한 이벤트 푸시
 ---

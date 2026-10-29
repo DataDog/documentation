@@ -49,7 +49,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 
 {{% tab "Claude" %}}
 
-Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
+Install the [Datadog Connector][1] from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
@@ -58,9 +58,9 @@ Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
 {{% collapse-content title="Manual setup with a custom connector" level="h4" expanded=false id="claude-custom-connector" %}}
-If the directory connector is not available to you, you can add Datadog as a [custom connector](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) using the remote MCP URL for your [Datadog site](/getting_started/site/) ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+If the directory connector is not available to you, you can add Datadog as a [custom connector][2] using the remote MCP URL for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
-1. Follow the Claude help center guide on [custom connectors](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) to add a new custom connector.
+1. Follow the Claude help center guide on [custom connectors][2] to add a new custom connector.
 
 1. When prompted for a URL, enter:
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -70,6 +70,10 @@ If the directory connector is not available to you, you can add Datadog as a [cu
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Complete the OAuth login flow when prompted.
+
+[2]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
+[3]: /getting_started/site/
+
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -77,11 +81,13 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+[1]: https://claude.ai/directory/connectors/datadog
+
 {{% /tab %}}
 
 {{% tab "Claude Code" %}}
 
-Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin).
+Install the Datadog plugin from the [official Anthropic Plugin Marketplace][1]. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository][2].
 
 **Note**: If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
@@ -89,7 +95,7 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace](http
 1. Install the Datadog plugin:
     <pre><code>/plugin install datadog@claude-plugins-official</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Claude Code.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
@@ -99,8 +105,10 @@ Install the Datadog plugin from the [official Anthropic Plugin Marketplace](http
 
 <div class="alert alert-info">See the <a href="https://github.com/datadog-labs/claude-code-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
 
+[3]: /getting_started/site/
+
 {{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="claudecode-manual" %}}
-If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+If the plugin is not available to you, point Claude Code at the MCP Server endpoint for your regional [Datadog site][4] directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Run in terminal:
     <pre><code>claude mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -119,6 +127,8 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
+[4]: /getting_started/site/
+
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -127,6 +137,9 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
+
+[1]: https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace
+[2]: https://github.com/datadog-labs/claude-code-plugin
 
 {{% /tab %}}
 
@@ -170,7 +183,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Copilot CLI" %}}
 
-Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository.
+Install the Datadog plugin from the [`awesome-copilot`][1] plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin][2] repository.
 
 **Note**: If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration before installing the plugin to avoid conflicts.
 
@@ -178,7 +191,7 @@ Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.
 1. Install the Datadog plugin:
     <pre><code>copilot plugin install datadog@awesome-copilot</code></pre>
 
-1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site](/getting_started/site/) and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Copilot.
+1. For first-time setup, either run `/ddsetup` or enter any Datadog-related prompt. During setup, select your [Datadog site][3] and complete OAuth login. Alternatively, set the MCP Server domain (and optionally Datadog API and application keys) as environment variables before starting Copilot.
 
 1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
 
@@ -188,8 +201,10 @@ Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.
 
 <div class="alert alert-info">See the <a href="https://github.com/datadog-labs/copilot-plugin">copilot-plugin</a> repository for all available slash commands and configuration options.</div>
 
+[3]: /getting_started/site/
+
 {{% collapse-content title="Manual MCP Server configuration" level="h4" expanded=false id="copilot-manual" %}}
-If the plugin is not available to you, point Copilot at the MCP Server endpoint for your regional [Datadog site](/getting_started/site/) directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
+If the plugin is not available to you, point Copilot at the MCP Server endpoint for your regional [Datadog site][4] directly. Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
 1. Run in terminal:
     <pre><code>copilot mcp add --transport http datadog-mcp {{< region-param key="mcp_server_endpoint" >}}</code></pre>
@@ -208,6 +223,8 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
+[4]: /getting_started/site/
+
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -216,6 +233,9 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 <div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
+
+[1]: https://awesome-copilot.github.com/
+[2]: https://github.com/datadog-labs/copilot-plugin
 
 {{% /tab %}}
 
@@ -621,6 +641,22 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /tab %}}
 {{< /tabs >}}
 
+## MCP Server endpoints
+
+Each [Datadog site][86] has its own MCP Server endpoint. To build the endpoint for your site, add `mcp.` before your site parameter and append `/v1/mcp`. Use the endpoint that matches the site where your Datadog organization is hosted:
+
+| Site    | Site parameter      | MCP Server endpoint                     |
+|---------|---------------------|-----------------------------------------|
+| US1     | `datadoghq.com`     | `https://mcp.datadoghq.com/v1/mcp`      |
+| US3     | `us3.datadoghq.com` | `https://mcp.us3.datadoghq.com/v1/mcp`  |
+| US5     | `us5.datadoghq.com` | `https://mcp.us5.datadoghq.com/v1/mcp`  |
+| EU1     | `datadoghq.eu`      | `https://mcp.datadoghq.eu/v1/mcp`       |
+| AP1     | `ap1.datadoghq.com` | `https://mcp.ap1.datadoghq.com/v1/mcp`  |
+| AP2     | `ap2.datadoghq.com` | `https://mcp.ap2.datadoghq.com/v1/mcp`  |
+| UK1     | `uk1.datadoghq.com` | `https://mcp.uk1.datadoghq.com/v1/mcp`  |
+| US1-FED | `ddog-gov.com`      | Not supported                           |
+| US2-FED | `us2.ddog-gov.com`  | Not supported                           |
+
 ## Toolsets
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
@@ -681,10 +717,14 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
 - `dbm`: Tools for interacting with [Database Monitoring][33].
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
+- `derived-metrics`: Tools for creating, updating, and deleting [derived metrics][85] from formulas and named metric queries.
+- `documentation`: Tools for searching and reading published Datadog documentation, with source URLs your agent can cite.
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
+- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
+- `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
@@ -703,7 +743,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
-- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 - `observability-pipelines`: Tools for [Observability Pipelines][81], including inspecting existing pipelines and building, validating, and creating new pipelines.
@@ -972,3 +1011,8 @@ After you change any of these settings, refresh the tool list in your AI client.
 [79]: https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
 [81]: /observability_pipelines/
+[82]: /logs/log_configuration/pipelines/
+[83]: /logs/log_configuration/indexes/
+[84]: /logs/log_configuration/archives/
+[85]: /metrics/derived-metrics/
+[86]: /getting_started/site/

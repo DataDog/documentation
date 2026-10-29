@@ -3603,6 +3603,7 @@ components:
         - logs
         - spans
         - network
+        - network_device_flows
         - rum
         - security_signals
         - profiles
@@ -3621,6 +3622,7 @@ components:
         - LOGS
         - SPANS
         - NETWORK
+        - NETWORK_DEVICE_FLOWS
         - RUM
         - SECURITY_SIGNALS
         - PROFILES
@@ -8001,7 +8003,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         sort:
           $ref: "#/components/schemas/LogsSort"
@@ -8053,6 +8055,10 @@ components:
             Hash identifier of the next log to return in the list.
             This parameter is used for the pagination feature.
           nullable: true
+          type: string
+        requestId:
+          description: Unique identifier of the request.
+          example: example-request-id
           type: string
         status:
           description: Status of the response.
@@ -9020,6 +9026,11 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          additionalProperties: {}
+          description: Additional read-only attributes returned for the series.
+          readOnly: true
+          type: object
         display_name:
           description: Display name of the metric.
           example: system.cpu.idle
@@ -9125,6 +9136,12 @@ components:
           example: time_series
           readOnly: true
           type: string
+        resp_version:
+          description: Version of the response format.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
         series:
           description: List of timeseries queried.
           items:
@@ -9136,11 +9153,27 @@ components:
           example: ok
           readOnly: true
           type: string
+        times:
+          description: |-
+            Legacy field, always returned as an empty list. Timestamps are returned
+            in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy timestamp.
+          readOnly: true
+          type: array
         to_date:
           description: End of requested time window, milliseconds since Unix epoch.
           format: int64
           readOnly: true
           type: integer
+        values:
+          description: |-
+            Legacy field, always returned as an empty list. Timeseries values are
+            returned in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy value.
+          readOnly: true
+          type: array
       type: object
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and short name.
@@ -9148,28 +9181,34 @@ components:
       properties:
         family:
           description: Unit family, allows for conversion between units of the same family, for scaling.
-          example: time
+          example: percentage
           readOnly: true
           type: string
+        id:
+          description: Unit identifier.
+          example: 17
+          format: int64
+          readOnly: true
+          type: integer
         name:
           description: Unit name
-          example: minute
+          example: percent
           readOnly: true
           type: string
         plural:
           description: Plural form of the unit name.
-          example: minutes
+          example: percent
           readOnly: true
           type: string
         scale_factor:
           description: Factor for scaling between units of the same family.
-          example: 60.0
+          example: 1.0
           format: double
           readOnly: true
           type: number
         short_name:
           description: Abbreviation of the unit.
-          example: min
+          example: "%"
           readOnly: true
           type: string
       type: object
@@ -11611,19 +11650,23 @@ components:
           format: double
           type: number
         estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         fargate_percentage:
@@ -29778,6 +29821,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_notification_rules_write: Create, edit, and delete monitor notification rules.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
@@ -32575,7 +32619,10 @@ paths:
         permissions:
           - events_read
     post:
+      deprecated: true
       description: |-
+        This endpoint is deprecated and is available only to organizations that have previously used it. Use the V2 endpoint instead.
+
         This endpoint allows you to post events to the stream.
         Tag them, set priority and event aggregate them with other events.
       operationId: CreateEvent
@@ -35882,7 +35929,7 @@ paths:
                 value:
                   index: "retention-3,retention-15"
                   limit: 25
-                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  query: "service:web-api AND @http.status_code:[200 TO 299]"
                   sort: desc
                   time:
                     from: "2020-02-02T02:02:02.202Z"
@@ -35908,6 +35955,7 @@ paths:
                             - team:A
                           timestamp: "2020-05-26T13:36:14Z"
                         id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                    requestId: example-request-id
                     status: done
               schema:
                 $ref: "#/components/schemas/LogsListResponse"
@@ -44418,6 +44466,8 @@ paths:
       description: |-
         Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
 
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
+
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
         Pseudo code example:
@@ -45029,6 +45079,8 @@ paths:
     get:
       description: |-
         Get monthly usage attribution. Multi-region data is available starting March 1, 2023.
+
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
 
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
