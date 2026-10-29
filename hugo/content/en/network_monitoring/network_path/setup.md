@@ -801,17 +801,17 @@ Network Path resolves the source host's public IP address to provide accurate pa
 
 This feature is **not required** for Network Path to function. If these services are unreachable, Network Path continues to operate normally, but the source public IP is not resolved and path visualizations do not display source IP metadata.
 
-If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist:
+If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist (Agent `v7.86+`):
 
 | URL | Provider |
 |-----|----------|
-| `https://icanhazip.com` | Cloudflare |
-| `https://ipinfo.io/ip` | IPinfo |
 | `https://checkip.amazonaws.com` | Amazon |
-| `https://api.ipify.org` | ipify |
 | `https://whatismyip.akamai.com` | Akamai |
+| `https://icanhazip.com` | Cloudflare |
 
 The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443).
+
+Agent versions `v7.75` to `v7.85` use a different list, in this order: `https://icanhazip.com`, `https://ipinfo.io/ip`, `https://checkip.amazonaws.com`, `https://api.ipify.org`, `https://whatismyip.akamai.com`.
 
 ## Troubleshooting
 
