@@ -57,9 +57,12 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 |--------------------------------------------|--------------------|---------------------------------------------|
 | [Amazon Bedrock](#amazon-bedrock)          | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
 | [Anthropic](#anthropic)                    | >= 0.14.0          | >= 5.71.0 (CJS), >=5.71.0 (ESM)             |
+| [Claude Agent SDK](#claude-agent-sdk)      | >= 0.2.113         | >= 5.112.0 (v5), >= 6.1.0 (v6)             |
 | [LangChain](#langchain)                    | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [LangGraph](#langgraph)                    | >= 1.1.2           | >= 5.91.0 (CJS), >= 5.91.0 (ESM)           |
 | [MCP](#mcp)                                | >= 1.27.1          | >= 5.99.0 (CJS), >=5.99.0 (ESM)             |
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
+| [OpenAI Agents](#openai-agents)            | >= 0.7.0           | >= 5.118.0 (v5), >= 6.7.0 (v6)             |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 | [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
@@ -172,10 +175,21 @@ The Amazon Bedrock integration instruments the following methods:
 - [Chat messages][3]:
   - `InvokeModel`
   - `InvokeModelWithResponseStream`
+- [Conversations][4] (requires `dd-trace>=5.106.0`):
+  - `Converse`
+  - `ConverseStream`
+- [Bidirectional audio streaming with Amazon Nova 2 Sonic][5]:
+  - `InvokeModelWithBidirectionalStream`
+
+Nova 2 Sonic tracing requires `@aws-sdk/client-bedrock-runtime>=3.785.0` and `dd-trace>=5.133.0` on v5 or `>=6.22.0` on v6.
+
+For Nova 2 Sonic, use model ID `amazon.nova-2-sonic-v1:0` or its foundation model ARN. The integration records each audio turn, including the LLM response and user and agent speech phases.
 
 [1]: /integrations/amazon-bedrock
 [2]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithBidirectionalStream.html
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -272,6 +286,21 @@ The Claude Agent SDK integration instruments the following methods:
 [1]: https://github.com/anthropics/claude-agent-sdk-python
 [2]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#basic-usage
 [3]: https://github.com/anthropics/claude-agent-sdk-python?tab=readme-ov-file#with-claudesdkclient-continuous-conversation
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The Claude Agent SDK integration automatically traces agent queries made through the [Claude Agent SDK for TypeScript][1].
+
+**Package name:** `@anthropic-ai/claude-agent-sdk`\
+**Integration name:** `claude-agent-sdk`
+
+### Traced methods
+
+The integration instruments `query()` and records agent runs, agent steps, LLM calls, tool calls, and subagent activity.
+
+The SDK is an ES module. Follow the [ESM setup instructions](#esm-support) to enable automatic instrumentation.
+
+[1]: https://code.claude.com/docs/en/agent-sdk/typescript
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -442,7 +471,7 @@ The LangChain integration instruments the following methods:
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, and OpenAI embeddings calls.
+The [LangChain integration][1] provides automatic tracing for the [LangChain Node.js SDK's][2] LLM, chat model, chain, embedding, tool, and vector store calls.
 
 **Package name:** `langchain`, `@langchain/openai`, `@langchain/anthropic`, and [other langchain partner packages][7]\
 **Integration name:** `langchain`
@@ -461,6 +490,11 @@ The LangChain integration instruments the following methods:
 - [Embeddings][6]
   - `embeddings.embedQuery()`
   - `embeddings.embedDocuments()`
+- Tools (requires `dd-trace>=5.59.0`):
+  - `tool.invoke()`
+- Vector stores (requires `dd-trace>=5.59.0`):
+  - `vectorStore.similaritySearch()`
+  - `vectorStore.similaritySearchWithScore()`
 
 [1]: /integrations/langchain/
 [2]: https://js.langchain.com/docs/introduction/
@@ -491,6 +525,24 @@ The LangGraph integration instruments synchronous and asynchronous versions of t
 [1]: https://langchain-ai.github.io/langgraph/concepts/sdk/
 [2]: https://blog.langchain.dev/langgraph/#compile
 [3]: https://blog.langchain.dev/langgraph/#nodes
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The LangGraph integration automatically traces graph execution through the [LangGraph JavaScript SDK][1].
+
+**Package name:** `@langchain/langgraph`\
+**Integration name:** `langgraph`
+
+### Traced methods
+
+The integration instruments `Pregel.stream()`, which also captures compiled graph calls:
+
+- `graph.invoke()`
+- `graph.stream()`
+
+The integration creates a workflow span for the graph. The [LangChain integration](#langchain) records child workflow spans for graph nodes.
+
+[1]: https://docs.langchain.com/oss/javascript/langgraph/overview
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -652,7 +704,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, and embeddings endpoints to OpenAI and [Azure OpenAI][3].
+The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, embeddings, and Responses endpoints to OpenAI and [Azure OpenAI][3]. It also traces OpenAI Realtime API conversations.
 
 **Package name:** `openai`\
 **Integration name:** `openai`
@@ -670,6 +722,14 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][7] (as of `dd-trace@5.42.0`)
 - [Responses][8]
   - `openai.responses.create()` (as of `dd-trace@5.76.0`)
+
+The integration also traces `openai.decisions.create()` calls. Decisions tracing requires `openai>=7.30.0` and `dd-trace>=5.133.0` on v5 or `>=6.22.0` on v6.
+
+### Realtime API
+
+The integration traces conversations through `OpenAIRealtimeWS` and `OpenAIRealtimeWebSocket`. It records each turn, its LLM response, and user and agent speech phases.
+
+Realtime tracing requires `dd-trace>=5.128.0` on v5 or `>=6.17.0` on v6. Use `openai>=5.17.0` for the `openai/realtime/*` imports. The integration also supports the older `openai/beta/realtime/*` imports.
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -750,6 +810,27 @@ The following operations are supported:
 [8]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
 [9]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
 [10]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+The OpenAI Agents integration adds a Datadog trace processor to the [OpenAI Agents SDK for JavaScript][1]. It converts the SDK's built-in traces and spans into Agent Observability traces.
+
+**Package name:** `@openai/agents`\
+**Integration name:** `openai-agents`
+
+The integration supports the following operations, including streamed agent runs:
+
+- Traces (workflows)
+- Agent runs
+- LLM generations and responses
+- Guardrails
+- Handoffs
+- Function tools
+- Custom spans
+
+Keep the SDK's [built-in tracing][1] enabled so the Datadog trace processor receives these operations.
+
+[1]: https://openai.github.io/openai-agents-js/guides/tracing/
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
