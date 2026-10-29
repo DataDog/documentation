@@ -237,7 +237,7 @@
   },
   "execution-policy": {
     "name": "Execution Policy",
-    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nand where. Each policy pairs an effect (allow or deny) with a pattern of actions,\nand can scope that decision to specific resources."
+    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
   },
   "experiments": {
     "name": "Experiments",

@@ -42167,14 +42167,12 @@ components:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
-        - INTEGRATION_SLACK
       example: INTEGRATION_SCRIPT
       type: string
       x-enum-varnames:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
-        - INTEGRATION_SLACK
     ExecutionPolicyKubernetesScope:
       description: Restricts the policy to specific Kubernetes namespaces.
       properties:
@@ -42297,9 +42295,9 @@ components:
       type: object
     ExecutionPolicyScope:
       description: |-
-        Restricts where the policy applies. At most one scope type can be set,
-        and it must match the action pattern's integration. An empty object means
-        the policy has no scope restriction.
+        Restricts where the policy applies. At most one of `kubernetes`, `scripts`,
+        or `remote_action_rshell` can be set. An empty object means the policy has
+        no scope restriction.
       properties:
         kubernetes:
           $ref: "#/components/schemas/ExecutionPolicyKubernetesScope"
@@ -42307,8 +42305,6 @@ components:
           $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScope"
         scripts:
           $ref: "#/components/schemas/ExecutionPolicyScriptScope"
-        slack:
-          $ref: "#/components/schemas/ExecutionPolicySlackScope"
       type: object
     ExecutionPolicyScriptScope:
       description: Restricts the policy to specific scripts.
@@ -42334,43 +42330,11 @@ components:
       required:
         - target_script_names
       type: object
-    ExecutionPolicySlackScope:
-      description: Restricts the policy to specific Slack private channel names.
-      properties:
-        rules:
-          description: The Slack scope rules.
-          items:
-            $ref: "#/components/schemas/ExecutionPolicySlackScopeRule"
-          minItems: 1
-          type: array
-      required:
-        - rules
-      type: object
-    ExecutionPolicySlackScopeRule:
-      description: A rule restricting a Slack scope to specific private channel names.
-      properties:
-        channel_name_selectors:
-          description: |-
-            The private channel name selectors this rule applies to. Selectors are lowercase private channel names
-            without the leading `#`, and can contain `*` wildcards. Use `*` alone to match any private channel name.
-          example:
-            - "incident-*"
-          items:
-            maxLength: 80
-            minLength: 1
-            type: string
-          maxItems: 100
-          minItems: 1
-          type: array
-          uniqueItems: true
-      required:
-        - channel_name_selectors
-      type: object
     ExecutionPolicyTarget:
-      description: A target this policy is scoped to, expressed as a set of tags.
+      description: A target this policy is scoped to, expressed as a set of Agent tags.
       properties:
         agent_tags:
-          description: The tags identifying the target.
+          description: The Agent tags identifying the target.
           example:
             - "env:prod"
           items:
@@ -55394,7 +55358,7 @@ components:
           type: array
         is_cspm_enabled:
           description: |-
-            When enabled, Datadog will activate the Cloud Security Monitoring product for this service account. Note: This requires resource_collection_enabled to be set to true.
+            When enabled, Datadog will activate the Cloud Security Monitoring product for this service account. Note: This requires resource_collection_enabled or is_org_folder_resource_collection_enabled to be set to true.
           type: boolean
         is_global_location_enabled:
           default: true
@@ -105253,7 +105217,9 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          description: |-
+            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
+            or `completed`. Defaults to `all`, which returns recommendations in every status.
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105266,7 +105232,9 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
+        or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105302,9 +105270,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–10000).
+          description: Number of items returned in this page (1–5000).
           format: int32
-          maximum: 10000
+          maximum: 5000
           minimum: 1
           type: integer
         page_token:
@@ -162929,11 +162897,15 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page (1–10000).
+        - description: Number of results per page, from 1 to 5000. Defaults to 50.
           in: query
           name: page[size]
           schema:
-            type: string
+            default: 50
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -162980,11 +162952,16 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
-                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -162996,6 +162973,10 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -240137,6 +240118,8 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_write
+      x-unstable: |-
+        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: |-
@@ -240265,6 +240248,8 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
+      x-unstable: |-
+        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/sample_log_generation/subscriptions:
     get:
       description: |-
@@ -260156,8 +260141,9 @@ tags:
     name: Events
   - description: |-
       Execution policies control which actions Datadog Action Platform is allowed to run
-      and where. Each policy pairs an effect (allow or deny) with a pattern of actions,
-      and can scope that decision to specific resources.
+      against your infrastructure, and where. Each policy pairs an effect (allow or deny)
+      with a pattern of actions, and can scope that decision to specific Kubernetes
+      namespaces, scripts, or remote shell paths.
     name: Execution Policy
   - description: Create and manage experiments, metrics, subject types, SQL models, and protocols.
     name: Experiments

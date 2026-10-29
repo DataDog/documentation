@@ -788,16 +788,6 @@
   "CreateExecutionPolicy": [
     {
       "group": "execution_policy",
-      "suffix": "_1868371302",
-      "description": "Create a Slack execution policy returns \"Created\" response"
-    },
-    {
-      "group": "execution_policy",
-      "suffix": "_3240435177",
-      "description": "Create a Slack execution policy with scope and targets returns \"Created\" response"
-    },
-    {
-      "group": "execution_policy",
       "suffix": "",
       "description": "Create an execution policy returns \"Created\" response"
     },
@@ -812,11 +802,6 @@
       "group": "execution_policy",
       "suffix": "",
       "description": "Update an execution policy returns \"OK\" response"
-    },
-    {
-      "group": "execution_policy",
-      "suffix": "_2851872075",
-      "description": "Update an execution policy to Slack with scope and targets returns \"OK\" response"
     }
   ],
   "CancelExperiment": [
