@@ -1890,11 +1890,12 @@ components:
       schema:
         type: string
     RumMetricIDParameter:
-      description: The name of the RUM-based metric.
+      description: The name of the RUM-based metric, as returned in `data.id` by `ListRumMetrics`.
       in: path
       name: metric_id
       required: true
       schema:
+        example: rum.sessions.web.count
         type: string
     RumPermanentRetentionFilterIDParameter:
       description: The identifier of the permanent RUM retention filter.
@@ -109649,7 +109650,7 @@ components:
           type: array
       type: object
     RumMetricCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule to compute the RUM-based metric. It is set at creation and only `include_percentiles` can be updated afterwards.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -109657,23 +109658,25 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
-            Only present when `aggregation_type` is `distribution`.
+            The path of the numeric RUM event attribute the metric aggregates on.
+            Only valid when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
       required:
         - aggregation_type
       type: object
     RumMetricComputeAggregationType:
-      description: The type of aggregation to use.
+      description: |-
+        The type of aggregation to use.
+        `count` counts the matching events. `distribution` aggregates the values found at `path`.
       enum: ["count", "distribution"]
       example: "distribution"
       type: string
       x-enum-varnames: ["COUNT", "DISTRIBUTION"]
     RumMetricComputeIncludePercentiles:
       description: |-
-        Toggle to include or exclude percentile aggregations for distribution metrics.
-        Only present when `aggregation_type` is `distribution`.
+        Toggle to include or exclude percentile aggregations (p50, p75, p90, p95, p99) for distribution metrics.
+        Required when `aggregation_type` is `distribution`, and must be omitted otherwise.
       example: true
       type: boolean
     RumMetricCreateAttributes:
@@ -109686,7 +109689,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. Each rule creates a tag on the generated metric. If omitted, the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
@@ -109719,18 +109722,22 @@ components:
         - data
       type: object
     RumMetricEventType:
-      description: The type of RUM events to filter on.
+      description: The type of RUM events the metric is generated from. It is set at creation and cannot be changed.
       enum: ["session", "view", "action", "error", "resource", "long_task", "vital"]
       example: "session"
       type: string
       x-enum-varnames: ["SESSION", "VIEW", "ACTION", "ERROR", "RESOURCE", "LONG_TASK", "VITAL"]
     RumMetricFilter:
-      description: The RUM-based metric filter. Events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. Events matching this filter will be aggregated in this metric. The `event_type` filter is added automatically.
       properties:
         query:
           default: "*"
-          description: The search query - following the RUM search syntax.
-          example: "@service:web-ui:"
+          description: |-
+            The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/).
+            Do not include a `@type` filter, it is derived from `event_type`.
+            It must not contain invisible or control characters such as non-breaking or zero-width spaces.
+            When updating a metric, an empty query leaves the filter unchanged.
+          example: "@service:web-ui"
           type: string
       required:
         - query
@@ -109739,19 +109746,26 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute to group the metric by.
           example: "@browser.name"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: |-
+            Name of the tag that gets created on the metric. By default, `path` is used as the tag name.
+            It must be at most 200 characters long, start with a letter, and contain only lowercase letters, digits, underscores, hyphens, colons, periods, and slashes.
           example: "browser_name"
+          maxLength: 200
           type: string
       required:
         - path
       type: object
     RumMetricID:
-      description: The name of the RUM-based metric.
+      description: |-
+        The name of the RUM-based metric.
+        On creation, it must be 1 to 200 characters long, contain only ASCII letters, digits, underscores, and periods, start with a letter, and not start with `rum.measure` or `rum.investigate`.
+        It cannot be changed after creation.
       example: "rum.sessions.webui.count"
+      maxLength: 200
       type: string
     RumMetricResponse:
       description: The RUM-based metric object.
@@ -109769,7 +109783,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricResponseFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules the metric is grouped by. Omitted if the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricResponseGroupBy"
           type: array
@@ -109777,7 +109791,7 @@ components:
           $ref: "#/components/schemas/RumMetricResponseUniqueness"
       type: object
     RumMetricResponseCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule of the RUM-based metric.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -109785,7 +109799,7 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
+            The path of the numeric RUM event attribute the metric aggregates on.
             Only present when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
@@ -109801,10 +109815,10 @@ components:
           $ref: "#/components/schemas/RumMetricType"
       type: object
     RumMetricResponseFilter:
-      description: The RUM-based metric filter. RUM events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. RUM events matching this filter are aggregated in this metric. Omitted if the metric only filters on the event type.
       properties:
         query:
-          description: The search query - following the RUM search syntax.
+          description: The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). It does not include the event type filter.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
       type: object
@@ -109812,30 +109826,32 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute the metric is grouped by.
           example: "@http.status_code"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: Name of the tag created on the metric. By default, `path` is used as the tag name.
           example: "status_code"
           type: string
       type: object
     RumMetricResponseUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `session` or `view`.
+      description: The rule to count updatable events. Only present if `event_type` is `session` or `view`, and absent on older metrics created before this setting existed.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
       type: object
     RumMetricType:
       default: rum_metrics
-      description: The type of the resource. The value should always be rum_metrics.
+      description: The type of the resource. The value must be `rum_metrics`.
       enum:
         - rum_metrics
       example: rum_metrics
       type: string
       x-enum-varnames: ["RUM_METRICS"]
     RumMetricUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `sessions` or `views`.
+      description: |-
+        The rule to count updatable events.
+        Required when `event_type` is `session` or `view`, and must be omitted for other event types. It cannot be changed after creation.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
@@ -109843,32 +109859,32 @@ components:
         - when
       type: object
     RumMetricUniquenessWhen:
-      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete.
+      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete. Sessions and views are updated over time, each one is counted once.
       enum: ["match", "end"]
       example: "match"
       type: string
       x-enum-varnames: ["WHEN_MATCH", "WHEN_END"]
     RumMetricUpdateAttributes:
-      description: The RUM-based metric properties that will be updated.
+      description: The RUM-based metric properties that will be updated. Omitted properties keep their current value.
       properties:
         compute:
           $ref: "#/components/schemas/RumMetricUpdateCompute"
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. When provided, replaces all the existing group by rules.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
       type: object
     RumMetricUpdateCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule properties that can be updated. Only valid for metrics whose `aggregation_type` is `distribution`.
       properties:
         include_percentiles:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
       type: object
     RumMetricUpdateData:
-      description: The new RUM-based metric properties.
+      description: The RUM-based metric properties to update. `id` is required by the API and must match the `metric_id` path parameter.
       properties:
         attributes:
           $ref: "#/components/schemas/RumMetricUpdateAttributes"
@@ -109881,7 +109897,7 @@ components:
         - attributes
       type: object
     RumMetricUpdateRequest:
-      description: The new RUM-based metric body.
+      description: The RUM-based metric update body.
       properties:
         data:
           $ref: "#/components/schemas/RumMetricUpdateData"
@@ -141237,6 +141253,19 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        tags:
+          description: |-
+            Tags associated with the feature flag. This field replaces the full set of
+            existing tags; omit it to leave tags unchanged, or pass an empty array to
+            clear all tags. The owning team is set by including a tag of the form
+            `team:<team-handle>` in this array.
+          example: ["team:feature-flagging"]
+          items:
+            description: A tag associated with the feature flag.
+            maxLength: 200
+            type: string
+          maxItems: 100
+          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -177823,6 +177852,11 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
+
+        To change the owning team, update `tags` and include a tag of the form
+        `team:<team-handle>` in the array. `tags` is a full replacement of the
+        existing tag set (including any `team:` tag), so include every tag you
+        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -177837,6 +177871,7 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
+                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -204278,7 +204313,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
     post:
       deprecated: true
       description: |-
@@ -204363,7 +204398,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
@@ -223495,7 +223530,11 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/config/metrics:
     get:
-      description: Get the list of configured RUM-based metrics with their definitions.
+      description: |-
+        Get the list of all RUM-based metrics configured for your organization, with their definitions.
+        The list is not paginated.
+        Metrics whose stored definition cannot be converted to the RUM format are omitted from the list.
+        To retrieve a single metric, use `GetRumMetric`.
       operationId: ListRumMetrics
       responses:
         "200":
@@ -223538,13 +223577,33 @@ paths:
     post:
       description: |-
         Create a metric based on your organization's RUM data.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        The metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.
+        The `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.
+        `uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.
+        When `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.
+        Returns the created RUM-based metric when the request is successful.
+        The request returns a `409 Conflict` error if a metric with the same name already exists.
       operationId: CreateRumMetric
       requestBody:
         content:
           application/json:
             examples:
+              count_metric:
+                summary: Count of error events
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        aggregation_type: count
+                      event_type: error
+                      filter:
+                        query: "@view.name:/checkout"
+                      group_by:
+                        - path: "@error.source"
+                    id: rum.errors.checkout.count
+                    type: rum_metrics
               default:
+                summary: Distribution of session durations
                 value:
                   data:
                     attributes:
@@ -223607,7 +223666,9 @@ paths:
       x-menu-order: 2
   /api/v2/rum/config/metrics/{metric_id}:
     delete:
-      description: Delete a specific RUM-based metric from your organization.
+      description: |-
+        Delete a specific RUM-based metric from your organization.
+        Metric data that was already generated is not deleted. Deleting a metric cannot be undone.
       operationId: DeleteRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -223625,7 +223686,9 @@ paths:
         - Rum Metrics
       x-menu-order: 5
     get:
-      description: Get a specific RUM-based metric from your organization.
+      description: |-
+        Get a specific RUM-based metric from your organization.
+        The `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.
       operationId: GetRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -223672,7 +223735,11 @@ paths:
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        Only `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.
+        Omitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.
+        `data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.
+        The request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.
+        Returns the updated RUM-based metric when the request is successful.
       operationId: UpdateRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -223691,6 +223758,15 @@ paths:
                       group_by:
                         - path: "@browser.name"
                           tag_name: browser_name
+                    id: rum.sessions.web.count
+                    type: rum_metrics
+              disable_percentiles:
+                summary: Stop generating percentile aggregations
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        include_percentiles: false
                     id: rum.sessions.web.count
                     type: rum_metrics
             schema:
