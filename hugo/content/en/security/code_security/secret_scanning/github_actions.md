@@ -6,6 +6,8 @@ title: Secret Scanning and GitHub Actions
 
 Run a [Datadog Secret Scanning][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8] (that scans for secrets), invokes it against your codebase, and uploads the results to Datadog.
 
+<div class="alert alert-info"><a href="/security/code_security/secret_scanning/#detect-secrets-in-git-history">Git history scanning</a> is available with hosted scanning only. CI-based scans analyze the checked-out commit.</div>
+
 ## Workflow
 
 Create a file in `.github/workflows` to run a Datadog Secret Scanning job.

@@ -1451,6 +1451,8 @@ components:
           description: Description of the dashboard.
           nullable: true
           type: string
+        experience_type:
+          $ref: "#/components/schemas/DashboardExperienceType"
         id:
           description: ID of the dashboard.
           example: "123-abc-456"
@@ -1573,6 +1575,17 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardExperienceType:
+      description: The experience type of the dashboard.
+      enum:
+        - default
+        - product_analytics
+      example: default
+      readOnly: true
+      type: string
+      x-enum-varnames:
+        - DEFAULT
+        - PRODUCT_ANALYTICS
     DashboardFixedTimeframe:
       description: A fixed dashboard timeframe.
       properties:
@@ -3590,6 +3603,7 @@ components:
         - logs
         - spans
         - network
+        - network_device_flows
         - rum
         - security_signals
         - profiles
@@ -3608,6 +3622,7 @@ components:
         - LOGS
         - SPANS
         - NETWORK
+        - NETWORK_DEVICE_FLOWS
         - RUM
         - SECURITY_SIGNALS
         - PROFILES
@@ -4696,6 +4711,402 @@ components:
           format: int64
           type: integer
       type: object
+    HeatgridColor:
+      description: A color string, or two color strings for the light and dark themes, in that order.
+      example: "#FF0000"
+      oneOf:
+        - type: string
+        - $ref: "#/components/schemas/HeatgridThemeColors"
+    HeatgridColorBin:
+      additionalProperties: false
+      description: A color and optional lower threshold for a discrete bin.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        lower_bound:
+          description: Inclusive lower bound. Omit for the first bin.
+          format: double
+          type: number
+      required:
+        - color
+      type: object
+    HeatgridColorConfig:
+      description: Color configuration for continuous gradients or discrete thresholds.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridGradientCustomColor"
+        - $ref: "#/components/schemas/HeatgridGradientPresetColor"
+        - $ref: "#/components/schemas/HeatgridDiscreteCustomColor"
+        - $ref: "#/components/schemas/HeatgridDiscretePresetColor"
+    HeatgridColorStop:
+      additionalProperties: false
+      description: A position and color in a continuous gradient.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColor"
+        position:
+          description: Position in the gradient, from 0 to 100.
+          example: 100
+          format: int64
+          maximum: 100
+          minimum: 0
+          type: integer
+      required:
+        - position
+        - color
+      type: object
+    HeatgridCustomColorSource:
+      description: Use custom colors.
+      enum:
+        - custom
+      example: custom
+      type: string
+      x-enum-varnames:
+        - CUSTOM
+    HeatgridDiscreteCustomColor:
+      additionalProperties: false
+      description: Discrete thresholds with custom colors.
+      properties:
+        bins:
+          description: |-
+            Two to six bins. Omit `lower_bound` on the first bin. Subsequent lower bounds must be in
+            ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorBin"
+          maxItems: 6
+          minItems: 2
+          type: array
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+      required:
+        - mode
+        - source
+        - bins
+      type: object
+    HeatgridDiscreteMode:
+      description: Use discrete color thresholds.
+      enum:
+        - discrete
+      example: discrete
+      type: string
+      x-enum-varnames:
+        - DISCRETE
+    HeatgridDiscretePresetColor:
+      additionalProperties: false
+      description: A preset discrete color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridDiscreteMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridGradientCustomColor:
+      additionalProperties: false
+      description: A continuous gradient with custom color stops.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        source:
+          $ref: "#/components/schemas/HeatgridCustomColorSource"
+        stops:
+          description: Two to six stops with positions in ascending order.
+          items:
+            $ref: "#/components/schemas/HeatgridColorStop"
+          maxItems: 6
+          minItems: 2
+          type: array
+      required:
+        - mode
+        - source
+        - stops
+      type: object
+    HeatgridGradientMode:
+      description: Use a continuous color gradient.
+      enum:
+        - gradient
+      example: gradient
+      type: string
+      x-enum-varnames:
+        - GRADIENT
+    HeatgridGradientPresetColor:
+      additionalProperties: false
+      description: A preset gradient color palette.
+      properties:
+        mode:
+          $ref: "#/components/schemas/HeatgridGradientMode"
+        preset_name:
+          description: Name of the preset color palette.
+          example: "classic"
+          type: string
+        source:
+          $ref: "#/components/schemas/HeatgridPresetColorSource"
+      required:
+        - mode
+        - source
+        - preset_name
+      type: object
+    HeatgridLabelColumn:
+      additionalProperties: false
+      description: Configuration of the group label column.
+      properties:
+        width:
+          $ref: "#/components/schemas/HeatgridLabelColumnWidth"
+      required:
+        - width
+      type: object
+    HeatgridLabelColumnWidth:
+      description: Width of the label column.
+      enum:
+        - xs
+        - s
+        - m
+        - l
+        - xl
+      example: xs
+      type: string
+      x-enum-varnames:
+        - XS
+        - S
+        - M
+        - L
+        - XL
+    HeatgridLegend:
+      additionalProperties: false
+      description: Legend configuration for the heatgrid widget.
+      properties:
+        show_caption:
+          description: Whether to display the legend caption.
+          type: boolean
+      type: object
+    HeatgridNestingDisplay:
+      description: Display groups as flat rows.
+      enum:
+        - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+        - FLAT
+    HeatgridPresetColorSource:
+      description: Use a preset color palette.
+      enum:
+        - preset
+      example: preset
+      type: string
+      x-enum-varnames:
+        - PRESET
+    HeatgridSort:
+      additionalProperties: false
+      description: Ordering of the heatgrid rows.
+      properties:
+        nesting_display:
+          $ref: "#/components/schemas/HeatgridNestingDisplay"
+        sort_by:
+          $ref: "#/components/schemas/HeatgridSortBy"
+      required:
+        - nesting_display
+        - sort_by
+      type: object
+    HeatgridSortAggregation:
+      description: Aggregation used to order rows over the displayed time range.
+      enum:
+        - avg
+        - min
+        - max
+        - sum
+      example: avg
+      type: string
+      x-enum-varnames:
+        - AVG
+        - MIN
+        - MAX
+        - SUM
+    HeatgridSortBy:
+      description: Sort rows by aggregated value or group label.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridSortByValue"
+        - $ref: "#/components/schemas/HeatgridSortByLabel"
+    HeatgridSortByLabel:
+      additionalProperties: false
+      description: Sort rows by their group labels.
+      properties:
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByLabelProperty"
+      required:
+        - property
+        - order
+      type: object
+    HeatgridSortByLabelProperty:
+      description: Sort by label.
+      enum:
+        - label
+      example: label
+      type: string
+      x-enum-varnames:
+        - LABEL
+    HeatgridSortByValue:
+      additionalProperties: false
+      description: Sort rows by their aggregated values.
+      properties:
+        aggregation:
+          $ref: "#/components/schemas/HeatgridSortAggregation"
+        order:
+          $ref: "#/components/schemas/HeatgridSortOrder"
+        property:
+          $ref: "#/components/schemas/HeatgridSortByValueProperty"
+      required:
+        - property
+        - order
+        - aggregation
+      type: object
+    HeatgridSortByValueProperty:
+      description: Sort by value.
+      enum:
+        - value
+      example: value
+      type: string
+      x-enum-varnames:
+        - VALUE
+    HeatgridSortOrder:
+      description: Sort direction.
+      enum:
+        - asc
+        - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+        - ASC
+        - DESC
+    HeatgridThemeColors:
+      description: Two color strings for the light and dark themes, in that order.
+      example: ["#FFFFFF", "#000000"]
+      items:
+        description: Color for the light or dark theme.
+        type: string
+      maxItems: 2
+      minItems: 2
+      type: array
+    HeatgridWidgetDefinition:
+      additionalProperties: false
+      description: The heatgrid visualization displays values for each group over time using color.
+      properties:
+        color:
+          $ref: "#/components/schemas/HeatgridColorConfig"
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: Description of the widget.
+          type: string
+        label_column:
+          $ref: "#/components/schemas/HeatgridLabelColumn"
+        legend:
+          $ref: "#/components/schemas/HeatgridLegend"
+        requests:
+          description: Widget requests. The widget displays one formula, which can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetRequest"
+          minItems: 1
+          type: array
+        sort:
+          $ref: "#/components/schemas/HeatgridSort"
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/HeatgridWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - sort
+      type: object
+    HeatgridWidgetDefinitionType:
+      default: heatgrid
+      description: Type of the heatgrid widget.
+      enum:
+        - heatgrid
+      example: heatgrid
+      type: string
+      x-enum-varnames:
+        - HEATGRID
+    HeatgridWidgetFormula:
+      additionalProperties: false
+      description: A formula for a heatgrid widget request.
+      properties:
+        alias:
+          description: Expression alias.
+          type: string
+        conditional_formats:
+          description: |-
+            Conditional formatting rules. These rules do not affect heatgrid rendering.
+            Use the widget-level `color` configuration to control cell colors.
+          items:
+            $ref: "#/components/schemas/WidgetConditionalFormat"
+          type: array
+        formula:
+          description: String expression built from queries, formulas, and functions.
+          example: "query1"
+          type: string
+        limit:
+          $ref: "#/components/schemas/WidgetFormulaLimit"
+        number_format:
+          $ref: "#/components/schemas/WidgetNumberFormat"
+        style:
+          $ref: "#/components/schemas/WidgetFormulaStyle"
+      required:
+        - formula
+      type: object
+    HeatgridWidgetRequest:
+      additionalProperties: false
+      description: A request for a heatgrid widget that uses formulas and functions.
+      properties:
+        formulas:
+          description: The single displayed formula can combine multiple queries.
+          items:
+            $ref: "#/components/schemas/HeatgridWidgetFormula"
+          type: array
+        queries:
+          description: Queries returned directly or combined in a formula.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/HeatgridWidgetResponseFormat"
+      required:
+        - response_format
+        - queries
+      type: object
+    HeatgridWidgetResponseFormat:
+      description: Response format for heatgrid queries.
+      enum:
+        - timeseries
+      example: timeseries
+      type: string
+      x-enum-varnames:
+        - TIMESERIES
     Host:
       description: Object representing a host.
       properties:
@@ -7592,7 +8003,7 @@ components:
           type: integer
         query:
           description: The search query - following the log search syntax.
-          example: "service:web* AND @http.status_code:[200 TO 299]"
+          example: "service:web-api AND @http.status_code:[200 TO 299]"
           type: string
         sort:
           $ref: "#/components/schemas/LogsSort"
@@ -7644,6 +8055,10 @@ components:
             Hash identifier of the next log to return in the list.
             This parameter is used for the pagination feature.
           nullable: true
+          type: string
+        requestId:
+          description: Unique identifier of the request.
+          example: example-request-id
           type: string
         status:
           description: Status of the response.
@@ -8611,6 +9026,11 @@ components:
           nullable: true
           readOnly: true
           type: string
+        attributes:
+          additionalProperties: {}
+          description: Additional read-only attributes returned for the series.
+          readOnly: true
+          type: object
         display_name:
           description: Display name of the metric.
           example: system.cpu.idle
@@ -8716,6 +9136,12 @@ components:
           example: time_series
           readOnly: true
           type: string
+        resp_version:
+          description: Version of the response format.
+          example: 1
+          format: int64
+          readOnly: true
+          type: integer
         series:
           description: List of timeseries queried.
           items:
@@ -8727,11 +9153,27 @@ components:
           example: ok
           readOnly: true
           type: string
+        times:
+          description: |-
+            Legacy field, always returned as an empty list. Timestamps are returned
+            in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy timestamp.
+          readOnly: true
+          type: array
         to_date:
           description: End of requested time window, milliseconds since Unix epoch.
           format: int64
           readOnly: true
           type: integer
+        values:
+          description: |-
+            Legacy field, always returned as an empty list. Timeseries values are
+            returned in the `pointlist` of each entry of `series`.
+          items:
+            description: An unused legacy value.
+          readOnly: true
+          type: array
       type: object
     MetricsQueryUnit:
       description: Object containing the metric unit family, scale factor, name, and short name.
@@ -8739,28 +9181,34 @@ components:
       properties:
         family:
           description: Unit family, allows for conversion between units of the same family, for scaling.
-          example: time
+          example: percentage
           readOnly: true
           type: string
+        id:
+          description: Unit identifier.
+          example: 17
+          format: int64
+          readOnly: true
+          type: integer
         name:
           description: Unit name
-          example: minute
+          example: percent
           readOnly: true
           type: string
         plural:
           description: Plural form of the unit name.
-          example: minutes
+          example: percent
           readOnly: true
           type: string
         scale_factor:
           description: Factor for scaling between units of the same family.
-          example: 60.0
+          example: 1.0
           format: double
           readOnly: true
           type: number
         short_name:
           description: Abbreviation of the unit.
-          example: min
+          example: "%"
           readOnly: true
           type: string
       type: object
@@ -11202,19 +11650,23 @@ components:
           format: double
           type: number
         estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
+          deprecated: true
+          description: The estimated indexed spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The percentage of estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
+          deprecated: true
+          description: The estimated ingested spans usage by tag(s) (To be deprecated on February 1st, 2027).
           format: double
           type: number
         fargate_percentage:
@@ -28456,6 +28908,7 @@ components:
         - $ref: "#/components/schemas/ProductAnalyticsFunnelWidgetDefinition"
         - $ref: "#/components/schemas/GeomapWidgetDefinition"
         - $ref: "#/components/schemas/GroupWidgetDefinition"
+        - $ref: "#/components/schemas/HeatgridWidgetDefinition"
         - $ref: "#/components/schemas/HeatMapWidgetDefinition"
         - $ref: "#/components/schemas/HostMapWidgetDefinition"
         - $ref: "#/components/schemas/IFrameWidgetDefinition"
@@ -29368,6 +29821,7 @@ components:
             incident_settings_write: Configure Incident Settings.
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
+            monitor_notification_rules_write: Create, edit, and delete monitor notification rules.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
@@ -32165,7 +32619,10 @@ paths:
         permissions:
           - events_read
     post:
+      deprecated: true
       description: |-
+        This endpoint is deprecated and is available only to organizations that have previously used it. Use the V2 endpoint instead.
+
         This endpoint allows you to post events to the stream.
         Tag them, set priority and event aggregate them with other events.
       operationId: CreateEvent
@@ -35472,7 +35929,7 @@ paths:
                 value:
                   index: "retention-3,retention-15"
                   limit: 25
-                  query: "service:web* AND @http.status_code:[200 TO 299]"
+                  query: "service:web-api AND @http.status_code:[200 TO 299]"
                   sort: desc
                   time:
                     from: "2020-02-02T02:02:02.202Z"
@@ -35498,6 +35955,7 @@ paths:
                             - team:A
                           timestamp: "2020-05-26T13:36:14Z"
                         id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                    requestId: example-request-id
                     status: done
               schema:
                 $ref: "#/components/schemas/LogsListResponse"
@@ -44008,6 +44466,8 @@ paths:
       description: |-
         Get hourly usage attribution. Multi-region data is available starting March 1, 2023.
 
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
+
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.
         Pseudo code example:
@@ -44619,6 +45079,8 @@ paths:
     get:
       description: |-
         Get monthly usage attribution. Multi-region data is available starting March 1, 2023.
+
+        **Note**: All `estimated_*` usage types will be deprecated on February 1, 2027.
 
         This API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is
         set in the response. If it is, make another request and pass `next_record_id` as a parameter.

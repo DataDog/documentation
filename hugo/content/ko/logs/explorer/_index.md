@@ -10,11 +10,14 @@ aliases:
 description: 전체 로그에서 검색 및 로그 분석 수행
 further_reading:
 - link: logs/explorer/live_tail
-  tag: 설명서
+  tag: 문서
   text: Live Tail에서 로그 미리보기
 - link: logs/explorer/saved_views/
-  tag: 설명서
+  tag: 문서
   text: Log Explorer 자동 구성
+- link: https://learn.datadoghq.com/courses/log-explorer
+  tag: 학습 센터
+  text: Log Explorer 시작
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: 블로그
   text: 클립보드에 Log Explorer URL 추가
@@ -24,9 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
   tag: 블로그
   text: AI 기반 로그 구문 분석으로 조사 가속화
-- link: https://learn.datadoghq.com/courses/log-explorer
-  tag: 학습 센터
-  text: Log Explorer 시작
 title: Log Explorer
 ---
 ## 개요 {#overview}

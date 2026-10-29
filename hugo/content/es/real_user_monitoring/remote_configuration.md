@@ -1,9 +1,16 @@
 ---
-description: Configure los ajustes del SDK de RUM de forma remota para aplicaciones
-  de navegador, iOS y Android.
 aliases:
 - /es/real_user_monitoring/guide/remote-config-launchdarkly/
 - /es/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /es/real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/
+- /es/fr/real_user_monitoring/guide/remote-config-launchdarkly/
+- /es/fr/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /es/ja/real_user_monitoring/guide/remote-config-launchdarkly/
+- /es/ja/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /es/ko/real_user_monitoring/guide/remote-config-launchdarkly/
+- /es/ko/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+description: Configure los ajustes del SDK de RUM de forma remota para aplicaciones
+  de navegador, iOS y Android.
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentación
@@ -98,6 +105,10 @@ La Remote Configuration no anula ninguna configuración del SDK de forma predete
 
 2. Configure el ajuste seleccionando un estado, cambiando su tasa de muestreo o agregando datos.
 3. Guarde sus cambios.
+
+## Visualizar cambios en Audit Trail {#view-changes-in-audit-trail}
+
+Los cambios en las configuraciones remotas de RUM aparecen en [Datadog Audit Trail][3], donde puede revisar quién realizó cada cambio y cuándo.
 
 ## Configuraciones configurables {#configurable-settings}
 
@@ -235,3 +246,4 @@ La Remote Configuration no anula ninguna configuración del SDK de forma predete
 
 [1]: /es/account_management/rbac/permissions/#real-user-monitoring
 [2]: /es/remote_configuration/
+[3]: /es/account_management/audit_trail/

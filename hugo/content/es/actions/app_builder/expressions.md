@@ -1,110 +1,115 @@
 ---
 aliases:
 - /es/service_management/app_builder/expressions
+description: Utilice expresiones de JavaScript en App Builder para crear interacciones
+  personalizadas entre componentes, consultas y el estado de la aplicación.
 further_reading:
-- link: /service_management/app_builder/build/
+- link: /actions/app_builder/build/
   tag: Documentación
   text: Crear aplicaciones
-- link: /service_management/app_builder/components/
+- link: /actions/app_builder/components/
   tag: Documentación
   text: Componentes
 title: Expresiones de JavaScript
 ---
+Puede usar expresiones de JavaScript (JS) en cualquier parte de App Builder para crear interacciones personalizadas entre las diferentes partes de su aplicación. A medida que comienza una expresión, App Builder ofrece sugerencias de autocompletado basadas en las consultas y componentes existentes en su aplicación. Haga clic en una sugerencia de autocompletado para usarla en su expresión, o use las teclas de flecha de su teclado y realice una selección con la tecla Enter.
 
-Puedes utilizar expresiones de JavaScript (JS) en cualquier parte de App Builder para crear interacciones personalizadas entre las diferentes partes de tu aplicación. Al iniciar una expresión, App Builder ofrece sugerencias de autocompletar basadas en las consultas y componentes existentes en tu aplicación. Haz clic en una sugerencia de autocompletar para utilizarla en tu expresión, o utiliza las teclas de flecha del teclado y haz una selección con la tecla Intro.
+{{< img src="actions/app_builder/app-builder-variable.png" alt="Si no está seguro de qué ingresar como expresión, escriba ${ para abrir un menú de sugerencias con todas las expresiones disponibles" style="width:70%;" >}}
 
-{{< img src="actions/app_builder/app-builder-variable.png" alt="Si no estás seguro sobre qué ingresar como una expresión, escribe $[ para abrir un menú de sugerencia con todas las expresiones disponibles" style="width:70%;" >}}
+Algunos campos, como [transformación posterior a la consulta][1], muestran un editor de código de forma predeterminada y aceptan JS simple. En todos los demás campos, encierre sus expresiones JS entre `${}`. Por ejemplo, para interpolar los valores de dos componentes de entrada de texto llamados `textInput0` y `textInput1` en la propiedad {{< ui >}}Content{{< /ui >}} de un componente de texto (y agregar un signo de exclamación), use la expresión `${textInput0.value} ${textInput1.value}!`.
 
-Algunos campos, como [la transformación después de la consulta][1], muestran un editor de código por defecto y aceptan JS sin formato. En todos los demás campos, encierra tus expresiones de JS en `${}`. Por ejemplo, para interpolar los valores de dos componentes de entrada de texto denominados `textInput0` y `textInput1` en la propiedad **Content** (Contenido) de un componente de texto (y añadir un signo de exclamación), utiliza la expresión `${textInput0.value} ${textInput1.value}!`.
+{{< img src="actions/app_builder/interpolation-2.png" alt="El componente de texto se completa con las palabras 'Hello' y 'World', cada una interpolada a partir del valor de un componente de entrada de texto" style="width:70%;" >}}
 
-{{< img src="actions/app_builder/interpolation-2.png" alt="El componente de texto se completa con las palabras 'Hello' y 'World', cada una interpolada de un valor de componente de entrada de texto" style="width:70%;" >}}
+App Builder acepta sintaxis de JavaScript estándar (vanilla), con las siguientes advertencias:
+- El resultado de la expresión debe coincidir con el resultado esperado por la propiedad del componente o de la consulta. Por ejemplo, la propiedad {{< ui >}}Is Visible{{< /ui >}} del componente de texto espera un valor booleano. Para averiguar qué tipo de datos espera una propiedad de componente, consulte [Visualizar propiedades del componente](#view-component-properties).
+- Su código tiene acceso de solo lectura al estado de la aplicación, pero App Builder ejecuta el código en un entorno aislado sin acceso al Modelo de Objetos del Documento (DOM) ni a las API del navegador.
 
-App Builder acepta la sintaxis estándar de Vanilla JavaScript, con las siguientes salvedades:
-- El resultado de la expresión debe coincidir con el resultado esperado por el componente o la propiedad de consulta. Por ejemplo, la propiedad **Is Visible** del componente de texto espera un booleano. Para saber qué tipo de datos espera una propiedad de componente, consulta [Ver propiedades de componente](#view-component-properties).
-- Tu código tiene acceso de sólo lectura al estado de la aplicación, pero App Builder ejecuta el código en un entorno de prueba sin acceso al Document Object Model (DOM) o a las APIs del navegador.
+También puede usar Bits AI para trabajar con expresiones JS:
+   1. Haga clic en el icono {{< ui >}}Build with AI{{< /ui >}} (**<i class="icon-bits-ai"></i>**).
+   1. Ingrese un prompt personalizado o pruebe el prompt `How can you help me with JavaScript expressions?`.
 
-## Ver las propiedades de los componentes
+## Visualizar propiedades del componente {#view-component-properties}
 
-Antes de crear una expresión, es útil conocer las propiedades disponibles y los valores predeterminados o actuales del componente con el que deseas interactuar.
+Antes de crear una expresión, es útil conocer las propiedades disponibles y los valores predeterminados o actuales del componente con el que desea interactuar.
 
-Puedes ver las propiedades y valores disponibles para un componente de las siguientes maneras:
-- **Estado de la aplicación**: proporciona propiedades y valores para todos los componentes y consultas de tu aplicación, así como variables globales, como variables de estado o variables de plantilla de dashboard.
-- **Inspeccionar datos**: proporciona propiedades y valores para un componente o consulta específica en tu aplicación.
-- La **Consola de Administración**: la pestaña **Data** (Datos) de la **Admin Console** (Consola de administración) proporciona propiedades y valores para todos los componentes y consultas de tu aplicación.
+Puede ver las propiedades y valores disponibles para un componente de las siguientes maneras:
+- {{< ui >}}App State{{< /ui >}}: Proporciona propiedades y valores para todos los componentes y consultas en su aplicación, así como variables globales como variables de estado o variables de plantilla de tablero.
+- {{< ui >}}Inspect Data{{< /ui >}}: Proporciona propiedades y valores para un componente o consulta específico en su aplicación.
+- El {{< ui >}}Admin Console{{< /ui >}}: La pestaña {{< ui >}}Data{{< /ui >}} del {{< ui >}}Admin Console{{< /ui >}} proporciona propiedades y valores para todos los componentes y consultas en su aplicación.
 
-{{% collapse-content title="Estado de la aplicación" level="h4" %}}
-Para acceder a **App State** (Estado de la aplicación):
-1. Haz clic en **App Properties** (Propiedades de la aplicación) en el panel lateral izquierdo.
-1. Desplázate hasta la sección **App State** (Estado de la aplicación).
+{{% collapse-content title="Estado de la aplicación" level="h3" %}}
+Para acceder a {{< ui >}}App State{{< /ui >}}:
+1. Haga clic en {{< ui >}}App Properties{{< /ui >}} en el panel lateral izquierdo.
+1. Desplácese hacia abajo hasta la sección {{< ui >}}App State{{< /ui >}}.
 
 {{< img src="actions/app_builder/app-state-2.png" alt="La sección Estado de la aplicación en Propiedades de la aplicación" style="width:50%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Inspeccionar datos" level="h4" %}}
-Para acceder a **Inspect Data** (Inspeccionar Datos):
-1. Haz clic en la consulta o el componente que deseas inspeccionar.
-1. Desplázate hasta la sección **Inspect Data** (Inspeccionar datos).
+{{% collapse-content title="Inspect Data" level="h3" %}}
+Para acceder a {{< ui >}}Inspect Data{{< /ui >}}:
+1. Haga clic en la consulta o el componente que desea inspeccionar.
+1. Desplácese hacia abajo hasta la sección {{< ui >}}Inspect Data{{< /ui >}}.
 
 {{< img src="actions/app_builder/inspect-data-2.png" alt="La sección Estado de la aplicación en Propiedades de la aplicación" style="width:80%;" >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Consola de administración" level="h4" %}}
-Para acceder a la **Admin Console** (Consola de administración):
-1. Haz clic en el icono de engranaje (**Settings** (Configuración)) y selecciona **Admin Console** (Consola de administración).
-1. Haz clic en **Data** (Datos).
+{{% collapse-content title="Admin Console" level="h3" %}}
+Para acceder a {{< ui >}}Admin Console{{< /ui >}}:
+1. Haga clic en el icono de engranaje ({{< ui >}}Settings{{< /ui >}}) y seleccione {{< ui >}}Admin Console{{< /ui >}}.
+1. Haga clic en {{< ui >}}Data{{< /ui >}}.
 
 {{< img src="actions/app_builder/admin-console-2.png" alt="La sección Estado de la aplicación en Propiedades de la aplicación" style="width:50%;" >}}
 {{% /collapse-content %}}
 
-## Interacciones de componentes personalizados
+## Interacciones de componentes personalizados {#custom-component-interactions}
 
-La mayoría de los componentes de interfaz de usuario proporcionan opciones integradas, como interruptores y alineación de texto, que cubren el uso básico de la aplicación. Para añadir una interacción personalizada a un componente, haz clic en el símbolo del editor de código (**</>**) e introduce una expresión JS.
+La mayoría de los componentes de la interfaz de usuario proporcionan opciones integradas, como interruptores y alineación de texto, que cubren el uso básico de la aplicación. Para agregar una interacción personalizada a un componente, haga clic en el símbolo del editor de código ({{< ui >}}</>{{< /ui >}}) e ingrese una expresión JS.
 
-### Visibilidad condicional
+### Visibilidad condicional {#conditional-visibility}
 
-Puedes hacer que la visibilidad de un componente dependa de otros componentes.
+Puede hacer que la visibilidad de un componente dependa de otros componentes.
 
-Por ejemplo, si deseas que un componente de texto sólo sea visible cuando dos componentes de entrada de texto denominados `textInput0` y `textInput1` tengan valores, utiliza la expresión `${textInput0.value && textInput1.value}` en la propiedad **Is Visible**.
+Por ejemplo, si desea que un componente de texto sea visible solo cuando dos componentes de entrada de texto llamados `textInput0` y `textInput1` tengan valores, use la expresión `${textInput0.value && textInput1.value}` en la propiedad {{< ui >}}Is Visible{{< /ui >}}.
 
-### Desactivar un componente condicionalmente
+### Deshabilitar un componente de forma condicional {#disable-a-component-conditionally}
 
-De forma similar a la visibilidad, puedes desactivar un componente a menos que se cumplan las condiciones de otros aspectos de tu aplicación, como otros componentes o el contexto de la aplicación.
+De forma similar a la visibilidad, puede deshabilitar un componente a menos que se cumplan las condiciones mediante otros aspectos de su aplicación, como otros componentes o el contexto de la aplicación.
 
-#### Desactivar un componente en función de su visibilidad
+#### Deshabilitar un componente según la visibilidad {#disable-a-component-based-on-visibility}
 
-Si tu aplicación tiene un botón que utiliza el contenido de un componente de texto para enviar un mensaje, puedes desactivar el botón a menos que el componente de texto esté visible:
-1. Haz clic en el componente de botón del lienzo.
-1. Haz clic en el símbolo del editor de código (**</>**) situado junto a la propiedad **Is Disabled**.
-1. Añade la expresión `${!text0.isVisible}`.
+Si su aplicación tiene un botón que usa el contenido de un componente de texto para enviar un mensaje, puede deshabilitar el botón a menos que el componente de texto sea visible:
+1. Haga clic en el componente de botón en su lienzo.
+1. Haga clic en el símbolo del editor de código ({{< ui >}}</>{{< /ui >}}) junto a la propiedad {{< ui >}}Is Disabled{{< /ui >}}.
+1. Agregue la expresión `${!text0.isVisible}`.
 
-El componente de texto es invisible y el botón está desactivado a menos que ambos campos de entrada de texto tengan contenido.
+El componente de texto es invisible y el botón está deshabilitado a menos que ambos campos de entrada de texto tengan contenido.
 
-{{< img src="actions/app_builder/is-disabled.png" alt="El componente de texto es invisible y el botón está desactivado a menos que ambos campos de entrada de texto tengan contenido." style="width:100%;" >}}
+{{< img src="actions/app_builder/is-disabled.png" alt="El componente de texto es invisible y el botón está deshabilitado a menos que ambos campos de entrada de texto tengan contenido." style="width:100%;" >}}
 
-#### Desactivar un componente en función del contexto de la aplicación
+#### Deshabilitar un componente según el contexto de la aplicación {#disable-a-component-based-on-the-app-context}
 
-También puedes desactivar un componente en función del contexto de la aplicación, como el equipo en el que se encuentra el usuario.
+También puede deshabilitar un componente según el contexto de la aplicación, como el equipo en el que está el usuario.
 
-Por ejemplo, puedes activar un componente sólo para los usuarios que pertenezcan al equipo de Gestión de productos:
-1. Haz clic en el componente de botón del lienzo.
-1. Haz clic en el símbolo del editor de código (**</>**) situado junto a la propiedad **Is Disabled**.
-1. Añade la expresión `${global.user.teams[0].name == 'Product Management'}`.
+Por ejemplo, puede habilitar un componente solo para los usuarios que están en el equipo de Gestión de Productos:
+1. Haga clic en el componente de botón en su lienzo.
+1. Haga clic en el símbolo del editor de código ({{< ui >}}</>{{< /ui >}}) junto a la propiedad {{< ui >}}Is Disabled{{< /ui >}}.
+1. Agregue la expresión `${global.user.teams[0].name == 'Product Management'}`.
 
-### Desactivar un componente durante la carga
+### Deshabilitar un componente mientras se carga {#disable-a-component-while-loading}
 
-Otro caso de uso común es desactivar un componente mientras una consulta está en estado de carga. En el [plano de EC2 Instance Manager][3], el componente de selección `instanceType` está deshabilitado mientras la consulta `listInstances` se está cargando. Para ello, la propiedad **Is Disabled** utiliza la expresión `${listInstances.isLoading}`.
+Otro caso de uso común es deshabilitar un componente mientras una consulta se encuentra en estado de carga. En el [plano de gestión de EC2][3], el componente de selección `instanceType` se deshabilita mientras la consulta `listInstances` se está cargando. Para lograr esto, la propiedad {{< ui >}}Is Disabled{{< /ui >}} usa la expresión `${listInstances.isLoading}`.
 
-{{< img src="actions/app_builder/isloading.png" alt="El componente de selección 'instanceType' está deshabilitado mientras la consulta 'listInstances' está cargando." style="width:100%;" >}}
+{{< img src="actions/app_builder/isloading.png" alt="El componente de selección 'instanceType' se deshabilita mientras la consulta 'listInstances' se está cargando." style="width:100%;" >}}
 
-## Interacciones de consulta personalizadas
+## Interacciones de consulta personalizadas {#custom-query-interactions}
 
-De forma similar a los componentes, puedes utilizar expresiones JS para modificar tus consultas en función de la interacción del usuario.
+Al igual que con los componentes, puede usar expresiones JS para modificar sus consultas según la interacción del usuario.
 
-### Filtrar los resultados de la consulta en función de las entradas del usuario
+### Filtrar resultados de consulta según la entrada del usuario {#filter-query-results-on-user-input}
 
-El [plano de PagerDuty On-call Manager][4] filtra el resultado de la consulta `listSchedules` basándose en las entradas del usuario. El usuario selecciona un equipo y un usuario de los componentes de selección `team` y `user`.
+El [plano de horarios de guardia de PagerDuty][4] filtra el resultado de la consulta `listSchedules` según la entrada del usuario. El usuario selecciona un equipo y un usuario de los componentes de selección `team` y `user`.
 
-Dentro de la consulta `listSchedules`, la siguiente transformación posterior a la consulta filtra los resultados basándose en los valores de `team` y `user`:
+Dentro de la consulta `listSchedules`, la siguiente transformación posterior a la consulta filtra los resultados según los valores de `team` y `user`:
 
 {{< code-block lang="js" disable_copy="true" >}}
 return outputs.body.schedules.map( s => {
@@ -123,12 +128,12 @@ return outputs.body.schedules.map( s => {
     }) || []
 {{< /code-block >}}
 
-Si **Run Settings** (Ajustes de ejecución) de la consulta es **Auto**, la consulta se ejecutará cada vez que un usuario cambie un valor en los componentes `team` o `user`.
+Configurar {{< ui >}}Run Settings{{< /ui >}} de la consulta en {{< ui >}}Auto{{< /ui >}} permite que la consulta se ejecute cada vez que un usuario cambia un valor en los componentes `team` o `user`.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/service_management/app_builder/build/#post-query-transformation
+[1]: /es/actions/app_builder/queries/#post-query-transformation
 [3]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ec2_instance_manager
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=pagerduty_oncall_manager

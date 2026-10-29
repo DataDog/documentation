@@ -201,11 +201,10 @@ aws lakeformation grant-permissions \
 2. Enable the {{< ui >}}Quality Monitoring for Apache Iceberg{{< /ui >}} toggle.
 3. (Optional) Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle if you also want to monitor Glue job health and performance.
 4. Choose a sync frequency.
-5. (Optional) Enter a catalog name if you use nested Glue catalog features. Leave this field empty for the default catalog.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-6. Click {{< ui >}}Save{{< /ui >}}.
+5. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Next steps
 
