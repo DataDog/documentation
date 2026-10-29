@@ -30,6 +30,7 @@ To create a segment:
    - {{< ui >}}Users{{< /ui >}}: Create a segment of individual users.
    - {{< ui >}}Accounts{{< /ui >}}: Create a segment of accounts (organizations).
 
+   <!-- TODO (DOCS-16074): Replace with new screenshot segments_define_audience_1.png: the new segment editor showing Define your audience (Users, Accounts) and Define your segment (Filter Builder, Importing with CSV). -->
    {{< img src="product_analytics/segmentation/segments_define_audience.png" alt="The Create A New Segment page showing the Define your audience section with Users and Accounts options, and the Define your segment section with Filter Builder and Importing with CSV tabs." style="width:55%;">}}
 
    <div class="alert alert-info">A segment returns either user or account profiles, not both.</div>
@@ -48,8 +49,9 @@ To create a segment from Product Analytics data:
    - {{< ui >}}Have attributes{{< /ui >}}: Include users with specific attributes, including any custom attributes you've imported. To import custom attributes, see [User and Account Profiles][3].
 1. Add filters to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
-The following image shows a segment filtered to users from Brazil. The segment captures users who were on the `/cart` page and clicked the checkout button within the same session in the past week:
+For example, you can segment users from Brazil who viewed the `/cart` page and clicked the checkout button in the same session last week.
 
+<!-- TODO (DOCS-16074): Replace with new screenshot pana_example_users_brazil_4.png: Filter Builder with a country = Brazil filter, a Performed events condition for viewing /cart then clicking checkout in the same session, and a past-week time range. -->
 {{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="Segment page filtered to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
 
 #### Example: Find users who left before buying
@@ -59,6 +61,7 @@ To find users who almost bought an item but didn't check out, use the {{< ui >}}
 1. Viewed the `/cart` page.
 1. Then did not perform the action `click on CHECKOUT`.
 
+<!-- TODO (DOCS-16074): Replace with new screenshot user_profile_example_2.png: Performed events condition for users who viewed /cart, then did not click CHECKOUT. -->
 {{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
 
 To narrow the segment further, add an attribute condition, such as device type.
@@ -77,8 +80,9 @@ To create a segment from your own file:
 1. Click {{< ui >}}Browse files{{< /ui >}} and upload your CSV file.
 1. Map a column in the file to a Product Analytics attribute.
 
-The file needs a column with user IDs or user emails to map to the `usr.id` or `usr.email` attributes in Product Analytics. The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file:
+The file needs a column with user IDs or user emails. Map that column to the `usr.id` or `usr.email` attribute in Product Analytics. For example, map `@usr.id` to a column named `id`.
 
+<!-- TODO (DOCS-16074): Replace with new screenshot segment_link_csv_1.png: Importing with CSV, mapping the @usr.id attribute to a CSV column named id. -->
 {{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
 
 {{% /collapse-content %}}
@@ -101,13 +105,13 @@ To create an account segment:
 ## Use segments across Product Analytics
 
 ### In Pathways
-Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows paths taken by the "Premium Shopist Customers" segment.
+Filter the Pathways visualization by a segment to see how those users move through your product.
 
 {{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
 
 ### In Analytics Explorer
 
-Filter the Analytics Explorer visualization to see how a segment uses your product. The following example shows users in the "Premium Shopist Customers" segment who were active in the last month, organized by total events.
+Filter the Analytics Explorer visualization by a segment to see how that group uses your product.
 
 {{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
