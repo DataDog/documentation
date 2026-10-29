@@ -21,8 +21,16 @@ export function createActivityState(now = Date.now()) {
         reads: 0,
         startedAt: now,
         researchEndedAt: null,
+        answering: false,
         nextId: 1
     };
+}
+
+// Pages the agent opened from a link, not a search, arrive with their path as the title.
+function titleFromPath(path) {
+    const slug = path.split(/[?#]/)[0].split('/').filter(Boolean).pop() || '';
+    const words = slug.replace(/\.(md|html)$/, '').replace(/[-_]+/g, ' ').trim();
+    return words && words[0].toUpperCase() + words.slice(1);
 }
 
 function normalizePage(page) {
@@ -34,7 +42,8 @@ function normalizePage(page) {
     } else if (/^https?:\/\//.test(path)) {
         url = path;
     }
-    const title = (page.title || '').toString().trim() || path;
+    const given = (page.title || '').toString().trim();
+    const title = (given && given !== path ? given : titleFromPath(path)) || path;
     if (!title) return null;
     return { title, url };
 }
@@ -88,6 +97,18 @@ function startWriting(state, now) {
     return { ...addStep(endResearch(settled, now), { kind: 'write' }), phase: 'writing' };
 }
 
+// "Generating answer..." can precede more research when the text was only narration; until answer
+// text arrives, a new search or read reopens the research.
+function resumeResearch(state) {
+    if (state.phase !== 'writing' || state.answering) return state;
+    return {
+        ...state,
+        phase: 'researching',
+        researchEndedAt: null,
+        steps: state.steps.filter((step) => step.kind !== 'write')
+    };
+}
+
 const pageKey = (page) => page.url || page.title;
 
 function startSearch(state) {
@@ -137,11 +158,18 @@ function applyResults(state, pages) {
 function applyRead(state, page) {
     const last = state.steps[state.steps.length - 1];
     const opened = normalizePages(page ? [page] : []);
-    // Continuing a long page, or reading it again, is not a new page.
-    const alreadyRead = opened.length > 0 && state.steps.some(
-        (step) => step.kind === 'read' && step.pages.some((p) => pageKey(p) === pageKey(opened[0]))
+    const key = opened.length ? pageKey(opened[0]) : null;
+    const alreadyRead = key !== null && state.steps.some(
+        (step) => step.kind === 'read' && step.pages.some((p) => pageKey(p) === key)
     );
-    if (alreadyRead) return { ...state, phase: 'researching' };
+    if (alreadyRead) {
+        // Reading further into a long page gets its own step, but it is still one page checked.
+        if (last && last.kind === 'more' && last.status === 'active' && pageKey(last.pages[0]) === key) {
+            return { ...state, phase: 'researching' };
+        }
+        const next = { ...state, steps: settleForNewStep(state.steps), phase: 'researching' };
+        return addStep(next, { kind: 'more', pages: opened });
+    }
     const next = { ...state, reads: state.reads + 1, phase: 'researching' };
     if (last && last.kind === 'read' && last.status === 'active') {
         const steps = [...next.steps];
@@ -156,11 +184,11 @@ export function reduceActivity(state, action, now = Date.now()) {
     switch (action.type) {
         case 'thinking': {
             const stage = SERVER_STAGES[action.content];
-            if (stage === 'search') return startSearch(state);
+            if (stage === 'search') return startSearch(resumeResearch(state));
             if (stage === 'review') {
                 return Array.isArray(action.retrieved_pages)
-                    ? applyResults(state, action.retrieved_pages)
-                    : applyRead(state, action.page);
+                    ? applyResults(resumeResearch(state), action.retrieved_pages)
+                    : applyRead(resumeResearch(state), action.page);
             }
             if (stage === 'write') return startWriting(state, now);
             if (stage === 'understand') {
@@ -174,8 +202,10 @@ export function reduceActivity(state, action, now = Date.now()) {
             }
             return state;
         }
-        case 'answer':
-            return state.phase === 'writing' ? state : startWriting(state, now);
+        case 'answer': {
+            const writing = state.phase === 'writing' ? state : startWriting(state, now);
+            return { ...writing, answering: true };
+        }
         case 'done':
             return { ...endResearch(state, now), phase: 'done', steps: settle(state.steps) };
         case 'error':
@@ -196,6 +226,7 @@ function describeInterruptedStep(step) {
         case 'search':
             return failed ? "Finding pages didn't finish" : 'Stopped finding pages';
         case 'read':
+        case 'more':
             return failed ? "Checking didn't finish" : 'Stopped checking pages';
         case 'write':
             return failed ? 'Answer interrupted' : 'Writing stopped';
@@ -206,7 +237,13 @@ function describeInterruptedStep(step) {
     }
 }
 
+// A running step ends with "...", which drops once it finishes.
 export function describeStep(step) {
+    const label = stepLabel(step);
+    return step.status === 'active' && label && !label.endsWith('...') ? `${label}...` : label;
+}
+
+function stepLabel(step) {
     if ((step.status === 'failed' || step.status === 'cancelled') && !step.resolved) {
         return describeInterruptedStep(step);
     }
@@ -229,6 +266,8 @@ export function describeStep(step) {
             return active
                 ? `Checking ${step.count === 1 ? 'a page' : plural(step.count, 'page', 'pages')}`
                 : `Checked ${plural(step.count, 'page', 'pages')}`;
+        case 'more':
+            return active ? 'Checking more of the page' : 'Checked more of the page';
         case 'write':
             return active ? 'Writing the answer' : 'Wrote the answer';
         default:
@@ -245,8 +284,8 @@ export function researchSeconds(state, now = Date.now()) {
 
 export function summarizeActivity(state) {
     const parts = [];
-    const searches = state.steps.filter((step) => step.kind === 'search').length;
-    if (searches) parts.push(plural(searches, 'search', 'searches'));
+    // Searches the backend ran, even when parallel ones share a step.
+    if (state.searches) parts.push(plural(state.searches, 'search', 'searches'));
     if (state.reads) parts.push(`${plural(state.reads, 'page', 'pages')} checked`);
     else if (state.pages.length) parts.push(`${plural(state.pages.length, 'page', 'pages')} found`);
     return parts.join(' · ');
@@ -266,7 +305,7 @@ export function describeHeadline(state, now = Date.now()) {
         }
         default: {
             if (state.steps.some((step) => step.kind === 'search' || step.kind === 'read')) {
-                return 'Reviewing the documentation';
+                return 'Reviewing the documentation...';
             }
             const active = activeStep(state);
             return active ? describeStep(active) : STARTING;
@@ -287,7 +326,8 @@ const ICONS = {
 const CHEVRON = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
 
 function icon(kind) {
-    return `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[kind] || ICONS.note}</svg>`;
+    const shape = ICONS[kind === 'more' ? 'read' : kind] || ICONS.note;
+    return `<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${shape}</svg>`;
 }
 
 function el(tag, className, text) {
@@ -452,7 +492,7 @@ export class ActivityTimeline {
         const text = describeStep(step);
         if (label.textContent !== text) label.textContent = text;
 
-        if (step.kind !== 'read') return;
+        if (step.kind !== 'read' && step.kind !== 'more') return;
         const body = node.querySelector('.conv-search-activity-step-body');
         const rendered = node.dataset.pages ? Number(node.dataset.pages) : 0;
         if (step.pages.length !== rendered) {

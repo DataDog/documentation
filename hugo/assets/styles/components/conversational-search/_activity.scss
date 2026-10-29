@@ -1,41 +1,34 @@
-// Ask AI research timeline: an outlined box that collapses into a pill once the answer starts.
+// Ask AI research timeline: a header line and a stepped list behind a chevron, marked by a thin accent bar.
 $conv-activity-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 $conv-error-text: #8a2a2a;
 $conv-error-border: #f3c4c4;
 $conv-error-bg: #fff6f6;
-// Text accent that keeps at least 4.5:1 contrast on the tinted dialog background.
-$conv-activity-accent-text: #632ca6;
-$conv-activity-rule: rgba($conv-neutral-700, 0.14);
+// Every text color keeps at least 4.5:1 contrast on the dialog background.
+$conv-activity-text: #55555f;
+$conv-activity-muted: #666671;
+$conv-activity-icon: #80808c;
+$conv-activity-accent-text: #6a3fbf;
+$conv-activity-sweep: mix($conv-search-purple, $conv-activity-text, 45%);
+$conv-activity-bar: #d9c7fb;
+$conv-activity-tile: #f1ecfa;
+$conv-activity-rule: rgba($conv-neutral-700, 0.12);
 
 .conv-search-turn {
-    gap: 10px;
+    gap: 12px;
 }
 
 .conv-search-activity {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: fit-content;
     max-width: 100%;
     min-width: 0;
-    padding: 5px 12px 5px 9px;
-    border: 1px solid $conv-primary-200;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.72);
+    padding: 2px 0 2px 14px;
+    border-left: 2px solid $conv-activity-bar;
     font-size: 14px;
+    font-weight: 500;
     line-height: 20px;
-    color: $conv-neutral-600;
-    transition: border-color 0.15s ease, background 0.15s ease;
-
-    &.is-collapsed,
-    &.is-empty {
-        border-radius: 999px;
-    }
-
-    &:has(.conv-search-activity-header:hover) {
-        border-color: $conv-primary-300;
-        background: #fff;
-    }
+    color: $conv-activity-text;
 }
 
 .conv-search-activity-header {
@@ -44,9 +37,8 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     gap: 8px;
     max-width: 100%;
     min-width: 0;
-    padding: 0;
+    padding: 2px 0;
     border: 0;
-    border-radius: 999px;
     background: none;
     color: inherit;
     font: inherit;
@@ -60,6 +52,7 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     &:focus-visible {
         outline: 2px solid rgba($conv-search-purple, 0.45);
         outline-offset: 3px;
+        border-radius: 4px;
     }
 
     .conv-search-activity.is-empty & {
@@ -126,7 +119,7 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
         height: 7px;
         border: 0;
         border-radius: 1.5px;
-        background: $conv-neutral-600;
+        background: $conv-activity-muted;
         transform: none;
     }
 }
@@ -135,8 +128,21 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     flex-shrink: 0;
     white-space: nowrap;
 
+    // A faint sweep across the text while research runs.
     .conv-search-activity.is-working & {
-        color: $conv-neutral-700;
+        background: linear-gradient(
+            90deg,
+            $conv-activity-text 0%,
+            $conv-activity-text 42%,
+            $conv-activity-sweep 50%,
+            $conv-activity-text 58%,
+            $conv-activity-text 100%
+        );
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: conv-search-shimmer 3s ease-in-out infinite;
     }
 }
 
@@ -144,6 +150,8 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
 .conv-search-activity-timer {
     flex-shrink: 0;
     font-size: 13px;
+    font-weight: 400;
+    color: $conv-activity-muted;
     white-space: nowrap;
 
     &:empty {
@@ -175,6 +183,7 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
 .conv-search-activity-chevron {
     display: inline-flex;
     flex-shrink: 0;
+    color: $conv-activity-icon;
     transition: transform 0.2s $conv-activity-ease;
 
     svg {
@@ -202,12 +211,6 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     .conv-search-activity.is-empty & {
         grid-template-rows: 0fr;
     }
-
-    // Hidden steps must not widen the collapsed pill.
-    .conv-search-activity.is-collapsed & {
-        width: 0;
-        min-width: 100%;
-    }
 }
 
 .conv-search-activity-body-inner {
@@ -217,17 +220,36 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
 
 .conv-search-activity-steps {
     list-style: none;
-    margin: 8px 4px 3px 6px;
-    padding: 0 0 0 12px;
-    border-left: 1px solid $conv-activity-rule;
+    margin: 10px 0 2px;
+    padding: 0;
 }
 
+// Each step: an icon tile, joined to the next one by a thin line.
 .conv-search-activity-step {
+    position: relative;
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
     margin: 0;
-    padding: 3px 0;
+    padding: 0 0 14px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 11.5px;
+        top: 28px;
+        bottom: 4px;
+        width: 1px;
+        background: $conv-activity-rule;
+    }
+
+    &:last-child {
+        padding-bottom: 2px;
+
+        &::before {
+            display: none;
+        }
+    }
 }
 
 .conv-search-activity-step-icon {
@@ -235,15 +257,24 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: 14px;
-    height: 20px;
-    color: $conv-neutral-600;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: $conv-activity-tile;
+    color: $conv-activity-icon;
+
+    svg {
+        width: 13px;
+        height: 13px;
+    }
 
     [data-status='active'] > & {
+        background: $conv-primary-100;
         color: $conv-search-purple-dark;
     }
 
     [data-status='failed'] > & {
+        background: $conv-error-bg;
         color: $conv-error-text;
     }
 }
@@ -251,29 +282,36 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
 .conv-search-activity-step-body {
     flex: 1;
     min-width: 0;
-    font-size: 13px;
-    line-height: 20px;
+    padding-top: 2px;
+    color: $conv-activity-muted;
     overflow-wrap: anywhere;
 }
 
 .conv-search-activity-step-label {
+    display: block;
+
     [data-status='active'] & {
-        color: $conv-neutral-700;
+        color: $conv-activity-text;
     }
 }
 
-// Checked pages follow their step label as plain links.
+// Checked pages sit on a second line under their step, as plain links.
 .conv-search-activity-pages {
-    display: inline;
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 .conv-search-activity-page,
 .conv-search-activity-more {
     display: inline;
-    &::before {
+
+    & + &::before,
+    & + .conv-search-activity-more::before {
         content: '\00b7';
         margin: 0 6px;
-        color: $conv-neutral-600;
+        color: $conv-activity-icon;
     }
 }
 
@@ -281,8 +319,9 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     color: $conv-activity-accent-text;
     text-decoration: none;
 
-    &:hover,
-    &:focus-visible {
+    // Only the title is underlined, never the separator dot before it.
+    &:hover .conv-search-activity-page-title,
+    &:focus-visible .conv-search-activity-page-title {
         text-decoration: underline;
     }
 
@@ -299,13 +338,12 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
     padding: 0;
     border: 0;
     background: none;
-    color: $conv-neutral-600;
+    color: $conv-activity-muted;
     font: inherit;
     cursor: pointer;
 
     &:hover {
         color: $conv-activity-accent-text;
-        text-decoration: underline;
     }
 }
 
@@ -423,4 +461,14 @@ $conv-activity-rule: rgba($conv-neutral-700, 0.14);
         animation: none !important;
         transition: none !important;
     }
+
+    .conv-search-activity.is-working .conv-search-activity-headline {
+        background: none;
+        color: $conv-activity-text;
+    }
+}
+
+@keyframes conv-search-shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: -150% 0; }
 }

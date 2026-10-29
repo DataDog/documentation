@@ -75,21 +75,21 @@ describe('reduceActivity', () => {
         expect(describeHeadline(state, 0)).toBe('Thinking...');
 
         state = reduceActivity(state, thinking(SEARCHING), 100);
-        expect(describeHeadline(state)).toBe('Reviewing the documentation');
-        expect(describeStep(state.steps[0])).toBe('Finding relevant pages');
+        expect(describeHeadline(state)).toBe('Reviewing the documentation...');
+        expect(describeStep(state.steps[0])).toBe('Finding relevant pages...');
 
         state = reduceActivity(state, thinking(REVIEWING, { retrieved_pages: [page('a')] }), 200);
-        expect(describeHeadline(state)).toBe('Reviewing the documentation');
+        expect(describeHeadline(state)).toBe('Reviewing the documentation...');
         expect(describeStep(state.steps[0])).toBe('Found 1 relevant page');
 
         state = reduceActivity(state, thinking(REVIEWING), 300);
-        expect(describeStep(state.steps[1])).toBe('Checking a page');
+        expect(describeStep(state.steps[1])).toBe('Checking a page...');
         state = reduceActivity(state, thinking(REVIEWING), 400);
-        expect(describeStep(state.steps[1])).toBe('Checking 2 pages');
+        expect(describeStep(state.steps[1])).toBe('Checking 2 pages...');
 
         state = reduceActivity(state, thinking(GENERATING), 500);
         expect(describeStep(state.steps[1])).toBe('Checked 2 pages');
-        expect(describeStep(state.steps[2])).toBe('Writing the answer');
+        expect(describeStep(state.steps[2])).toBe('Writing the answer...');
         expect(describeHeadline(state, 900)).toBe('Reviewed the documentation \u00b7 1s');
     });
 
@@ -105,7 +105,7 @@ describe('reduceActivity', () => {
             [thinking(REVIEWING, { query: 'log indexes', retrieved_pages: [page('indexes'), page('shared')] }), 900]
         ]);
         expect(state.steps).toHaveLength(1);
-        expect(describeStep(state.steps[0])).toBe('Finding relevant pages');
+        expect(describeStep(state.steps[0])).toBe('Finding relevant pages...');
 
         state = reduceActivity(
             state,
@@ -115,7 +115,7 @@ describe('reduceActivity', () => {
         expect(describeStep(state.steps[0])).toBe('Found 3 relevant pages');
         expect(state.steps[0].pages.map((p) => p.title)).toEqual(['Page indexes', 'Page shared', 'Page pipelines']);
         expect(state.searches).toBe(2);
-        expect(summarizeActivity(state)).toBe('1 search · 3 pages found');
+        expect(summarizeActivity(state)).toBe('2 searches · 3 pages found');
     });
 
     it('keeps a search that runs alongside a read in the same step', () => {
@@ -138,7 +138,7 @@ describe('reduceActivity', () => {
             [thinking(REVIEWING, { page: page('a') }), 300],
             [thinking(SEARCHING), 400]
         ]);
-        expect(describeStep(later.steps[2])).toBe('Finding more pages');
+        expect(describeStep(later.steps[2])).toBe('Finding more pages...');
 
         const found = reduceActivity(later, thinking(REVIEWING, { retrieved_pages: [page('b'), page('c')] }), 500);
         expect(describeStep(found.steps[2])).toBe('Found 1 more page');
@@ -148,20 +148,45 @@ describe('reduceActivity', () => {
         expect(describeStep(none.steps[2])).toBe('No new pages');
     });
 
-    it('names opened pages and counts each page once', () => {
+    it('counts each page once and shows reading further into a page', () => {
         const opened = (slug) => thinking(REVIEWING, { page: { title: `Page ${slug}`, distinct_base_url: `/${slug}/` } });
         const state = run([
-            [thinking(SEARCHING, { query: 'log pipelines' }), 100],
+            [thinking(SEARCHING), 100],
             [thinking(REVIEWING, { retrieved_pages: [page('a'), page('b')] }), 200],
             [opened('a'), 300],
-            [opened('a'), 400],
-            [opened('b'), 500]
+            [opened('b'), 350],
+            [thinking(SEARCHING), 400],
+            [thinking(REVIEWING, { retrieved_pages: [page('c')] }), 500],
+            [opened('a'), 600],
+            [opened('a'), 700]
         ]);
 
-        expect(describeStep(state.steps[0])).toBe('Found 2 relevant pages');
+        expect(state.steps.map(describeStep)).toEqual([
+            'Found 2 relevant pages', 'Checked 2 pages', 'Found 1 more page', 'Checking more of the page...'
+        ]);
         expect(state.steps[1].pages.map((p) => p.title)).toEqual(['Page a', 'Page b']);
-        expect(describeStep(state.steps[1])).toBe('Checking 2 pages');
+        expect(state.steps[3].pages.map((p) => p.title)).toEqual(['Page a']);
         expect(state.reads).toBe(2);
+        expect(summarizeActivity(state)).toBe('2 searches \u00b7 2 pages checked');
+    });
+
+    it('keeps researching when the answer announcement was only narration', () => {
+        const state = run([
+            [thinking(SEARCHING), 100],
+            [thinking(REVIEWING, { retrieved_pages: [page('a')] }), 200],
+            [thinking(GENERATING), 2000],
+            [thinking(REVIEWING, { page: page('a') }), 2500],
+            [thinking(SEARCHING), 3000],
+            [thinking(REVIEWING, { retrieved_pages: [page('b')] }), 3500],
+            [thinking(GENERATING), 9000],
+            [{ type: 'answer' }, 9100],
+            [{ type: 'done' }, 12000]
+        ]);
+
+        expect(state.steps.map(describeStep)).toEqual([
+            'Found 1 relevant page', 'Checked 1 page', 'Found 1 more page', 'Wrote the answer'
+        ]);
+        expect(describeHeadline(state)).toBe('Reviewed the documentation \u00b7 9s');
     });
 
     it('shows a search for results that arrive without one, and empty results', () => {
@@ -227,6 +252,16 @@ describe('reduceActivity', () => {
             { title: 'Script', url: '' },
             { title: 'Absolute', url: 'https://docs.datadoghq.com/logs/' }
         ]);
+    });
+
+    it('names a page that arrives without a title after its path', () => {
+        const opened = (title, path) => thinking(REVIEWING, { page: { title, distinct_base_url: path } });
+        const state = run([
+            [opened('/tracing/trace_collection/dd_libraries/java/', '/tracing/trace_collection/dd_libraries/java/'), 100],
+            [opened('', '/serverless/aws_lambda/'), 200],
+            [opened('/', '/'), 300]
+        ]);
+        expect(state.steps[0].pages.map((p) => p.title)).toEqual(['Java', 'Aws lambda', '/']);
     });
 });
 
@@ -308,7 +343,7 @@ describe('ActivityTimeline', () => {
         });
 
         expect(heard).toEqual([
-            'Thinking...', 'Finding relevant pages', 'Checking a page', 'Finding more pages', 'Writing the answer',
+            'Thinking...', 'Finding relevant pages...', 'Checking a page...', 'Finding more pages...', 'Writing the answer',
             'Answer ready'
         ]);
         timeline.destroy();
