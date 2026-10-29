@@ -45,26 +45,26 @@ When an incident is changed to resolved, Incident AI posts a final summary. This
 <div class="alert alert-danger">Meeting summaries are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Incident AI can automatically summarize incident meetings in Zoom, Google Meet, and Microsoft Teams. During a meeting, live summaries are periodically posted to the incident timeline and the incident chat channel. When the meeting ends, a final post-meeting summary is posted.
+Incident AI can automatically summarize incident meetings in Zoom, Google Meet, and Microsoft Teams. During a meeting, it periodically posts live summaries to the incident timeline and the incident chat channel. When the meeting ends, it posts a final post-meeting summary.
 
-<div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
+<div class="alert alert-info">When meeting summaries are enabled, a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a> records and transcribes meeting audio. After a seven-day retention period, the subprocessor automatically deletes all data.</div>
 
-AI features must be enabled for your organization before the Datadog Transcriber can join meetings. To turn on meeting summaries, enable **Generate AI meeting summaries** in the integration settings for your meeting platform:
+Your organization must have AI features enabled before the Datadog Transcriber can join meetings. To turn on meeting summaries, enable **Generate AI meeting summaries** in the integration settings for your meeting platform:
 
 - [Zoom][4]
 - [Google Meet][5]
 - [Microsoft Teams][6]
 
-By default, meetings for private incidents are not summarized. You can add conditions in the integration settings to prevent summarization for other incidents.
+By default, Incident AI does not summarize meetings for private incidents. You can add conditions in the integration settings to prevent summarization for other incidents as well.
 
 ### How meeting summaries work
 
-When a meeting attached to an incident starts, a Datadog Transcriber attempts to join the meeting. This may take 10 to 30 seconds. If the meeting has a lobby or waiting room, a participant must admit the Datadog Transcriber before transcription can begin. After the Datadog Transcriber joins, live summaries are periodically posted to the following locations during the meeting:
+When a meeting attached to an incident starts, a Datadog Transcriber attempts to join the meeting. This may take 10 to 30 seconds. If the meeting has a lobby or waiting room, a participant must admit the Datadog Transcriber before transcription can begin. After the Datadog Transcriber joins, it periodically posts live summaries to the following locations during the meeting:
 
 - The **incident timeline**, under a **Meeting Summary** entry.
 - The **incident chat channel**, both in the meeting card thread and as a message to the channel.
 
-When the meeting ends, a final post-meeting summary is posted to the same locations.
+When the meeting ends, it posts a final post-meeting summary to the same locations.
 
 ### Reviewing a summary
 
@@ -75,7 +75,7 @@ To review a summary from the incident timeline:
 1. Open the incident in Datadog and find the **Meeting Summary** entry on the timeline.
 2. Click the checkmark icon to approve the summary, the pencil icon to edit its text, or the reject icon to remove it from the timeline.
 
-Approving or editing a summary records who took the action. After a summary is edited, it can't be approved; the edited version takes precedence. Rejecting a summary removes it from the incident timeline for everyone and hides its content in connected chat channels. You're asked to confirm before rejecting, and this action can't be undone.
+When a user approves or edits a summary, Datadog records who did so. After a summary is edited, it can't be approved; the edited version takes precedence. Rejecting a summary removes it from the incident timeline for everyone and hides its content in connected chat channels. Datadog asks for confirmation before rejecting, because that action can't be undone.
 
 If the summary was broadcast to the incident chat channel, use the **Approve**, **Edit**, or **Reject summary** buttons on the message.
 
@@ -90,7 +90,7 @@ If the Datadog Transcriber leaves a meeting, re-invite it to the same linked mee
 
 The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
 
-A re-invite prompt can also appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. This can happen after a timeout while waiting for admission or participants, after everyone leaves the meeting, or when someone removes the transcriber. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. Connect your chat account to Datadog before using this action.
+A re-invite prompt can also appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. This can happen after a timeout while waiting for admission or participants, after everyone leaves the meeting, or when someone removes the transcriber. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt.
 
 Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
 
