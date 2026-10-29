@@ -22459,7 +22459,9 @@ components:
           $ref: "#/components/schemas/ContainerType"
       type: object
     ContainerAttributes:
-      description: Attributes for a container.
+      description: |-
+        Attributes for a container. For CPU or memory metrics, use its full `container_id` as
+        `container_id:<container_id>` in `tag_filters` with the `container` data source.
       properties:
         container_id:
           description: The ID of the container.
@@ -22526,7 +22528,8 @@ components:
       description: Attributes for a container group.
       properties:
         count:
-          description: Number of containers in the group.
+          description: >-
+            Number of containers in the group. A container with multiple values for a grouping tag can appear in multiple groups. Summing group counts can overcount distinct containers.
           format: int64
           type: integer
         tags:
@@ -22540,7 +22543,10 @@ components:
           $ref: "#/components/schemas/ContainerGroupRelationshipsLink"
       type: object
     ContainerGroupRelationshipsData:
-      description: Links data.
+      description: |-
+        This array is always empty, even when the group includes containers. To retrieve the containers
+        in this group, make a new request to this endpoint with the `filter[tags]` value from
+        `links.related`, using your site's API host.
       items:
         description: A link data.
         type: string
@@ -22892,20 +22898,22 @@ components:
           description: The cursor used to get the current results, if any.
           type: string
         limit:
-          description: Number of results returned
+          description: Maximum number of results requested.
           format: int32
           maximum: 10000
           minimum: 0
           type: integer
         next_cursor:
-          description: The cursor used to get the next results, if any.
+          description: |-
+            The cursor used to get the next results, if any. To make the next request, use the same
+            parameters with the addition of the `page[cursor]`. Empty for grouped results.
           type: string
         prev_cursor:
           description: The cursor used to get the previous results, if any.
           nullable: true
           type: string
         total:
-          description: Total number of records that match the query.
+          description: Total number of containers that match the query. Always `0` for grouped results.
           format: int64
           type: integer
         type:
@@ -23013,7 +23021,7 @@ components:
       description: List of containers.
       properties:
         data:
-          description: Array of Container objects.
+          description: Array of containers or container group objects.
           items:
             $ref: "#/components/schemas/ContainerItem"
           type: array
@@ -159930,31 +159938,49 @@ paths:
         permissions: []
   /api/v2/containers:
     get:
-      description: Get all containers for your organization.
+      description: |-
+        Get all containers for your organization. Use `group_by` to return container groups with counts.
+        Grouped results are limited by `page[size]` and do not support pagination.
+
+        To get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`
+        or `/api/v2/query/timeseries`.
       operationId: ListContainers
       parameters:
-        - description: Comma-separated list of tags to filter containers by.
+        - description: |-
+            Comma-separated `key:value` tags. A container must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. To cover several hosts, make one
+            request per host.
           example: env:prod,short_image:cassandra
           in: query
           name: filter[tags]
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to group containers by.
+        - description: |-
+            Comma-separated list of up to three tag keys to group containers by. Returns `container_group`
+            objects with counts and tags. Grouped results ignore `sort` and do not support pagination.
+            Containers with multiple values for a grouping tag can appear in multiple groups.
+            Summing group counts can overcount distinct containers.
           example: datacenter,cluster
           in: query
           name: group_by
           required: false
           schema:
             type: string
-        - description: Attribute to sort containers by.
+        - description: |-
+            Attribute to sort individual containers by: `name`, `created_at`, `started_at`, `state`,
+            `container_id`, `host`, `image_name`, or `image_digest`. Defaults to `started_at` in ascending
+            order. Prefix the attribute with `-` for descending order, such as `-started_at`.
+            Ignored when `group_by` is specified.
           example: started_at
           in: query
           name: sort
           required: false
           schema:
             type: string
-        - description: Maximum number of results returned.
+        - description: |-
+            Maximum number of results returned. For grouped results, defaults to `100` with a maximum
+            of `1000` groups.
           in: query
           name: page[size]
           required: false
@@ -159992,6 +160018,27 @@ paths:
                       pagination:
                         limit: 1000
                         total: 1
+                        type: cursor_limit
+                grouped:
+                  summary: Containers grouped by short_image
+                  value:
+                    data:
+                      - attributes:
+                          count: 3
+                          tags:
+                            short_image: nginx
+                        id: short_image:nginx
+                        relationships:
+                          containers:
+                            data: []
+                            links:
+                              related: https://api.datadoghq.com/api/v2/containers?filter[tags]=short_image:nginx
+                        type: container_group
+                    meta:
+                      pagination:
+                        limit: 100
+                        next_cursor: ""
+                        total: 0
                         type: cursor_limit
               schema:
                 $ref: "#/components/schemas/ContainersResponse"
@@ -205081,7 +205128,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2026-11-01"
+      x-sunset: "2027-01-01"
     post:
       deprecated: true
       description: |-
@@ -205166,7 +205213,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2026-11-01"
+      x-sunset: "2027-01-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
@@ -259336,7 +259383,8 @@ tags:
       The Container Images API allows you to query Container Image data for your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/) for more information.
     name: Container Images
   - description: |-
-      The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information.
+      The Containers API allows you to query container data for your organization.
+      See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information.
     name: Containers
   - description: |-
       Programmatic management of a customer's Datadog organization. Use this API to perform
