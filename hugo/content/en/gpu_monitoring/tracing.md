@@ -136,10 +136,6 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 
 To begin continuously tracing your Slurm jobs, you must have [GPU Monitoring enabled][1].
 
-### 0. Enable GPU Monitoring
-
-If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before moving to the next step.
-
 ### 1. Install the Agent with Single Step Instrumentation
 
 On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled. The following command enables Single Step Instrumentation for the host and installs the Datadog C SDK (`c:0`), the native SDK that GPU tracing uses to capture CUDA and NCCL activity from your jobs:
