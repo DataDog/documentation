@@ -1,6 +1,6 @@
 ---
 title: DDOT Collector
-description: The DDOT Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with OpenTelemetry tooling, and add the Datadog Agent only if you need it.
+description: The DDOT Collector is an OpenTelemetry Collector that Datadog builds and supports. Deploy it on Kubernetes with OpenTelemetry tooling, with or without the Datadog Agent.
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
@@ -25,53 +25,39 @@ further_reading:
 
 ---
 
+{{< callout header="false" btn_hidden="true" >}}
+The DDOT Collector is in Preview.
+{{< /callout >}}
+
 ## Overview
 
-Looking for the DDOT Collector that runs inside the Datadog Agent? See [Collector in the Agent][69].
-
-The Datadog OpenTelemetry (DDOT) Collector is an OpenTelemetry Collector that Datadog builds. Deploy it with standard OpenTelemetry tooling, such as the OpenTelemetry Operator and Helm charts. It sends your telemetry to Datadog without the Datadog Agent.
+The Datadog OpenTelemetry (DDOT) Collector is an open source distribution of the OpenTelemetry Collector, built and maintained by Datadog. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration. It doesn't require the Datadog Agent.
 
 {{< img src="/opentelemetry/setup/otel-ddot-collector.png" alt="Your application, instrumented with a DDOT SDK or an OpenTelemetry SDK, sends OTLP to the DDOT Collector, which sends your telemetry to Datadog with the Datadog Exporter. An optional Datadog Agent runs alongside it for features that need the Agent." style="width:100%;" >}}
 
-- **Components**: A [curated set of OpenTelemetry components](#included-components) and [custom Datadog components](#custom-datadog-components).
-- **Data it receives**: OTLP from applications instrumented with the OpenTelemetry SDK or the [DDOT SDK][67].
-- **Pipelines**: Standard OpenTelemetry Collector configuration. You can route telemetry to Datadog and to other destinations.
-- **Support**: Datadog Support troubleshoots the components that [Support levels][57] lists as Datadog-supported.
-- **Platforms**: These docs cover the DDOT Collector on Kubernetes. On other platforms, use the [upstream OpenTelemetry Collector][68] or the [Collector in the Agent][64], the OpenTelemetry Collector that runs inside the Datadog Agent.
+- **Use OpenTelemetry tooling**: Deploy the Collector on Kubernetes with the OpenTelemetry Operator or Helm charts.
+- **Configure your pipelines**: Receive telemetry from [DDOT SDKs][67], OpenTelemetry SDKs, and other sources. Process it, and route it to Datadog and to other destinations.
+- **Start with included components**: Use the curated set of [OpenTelemetry](#opentelemetry-collector-components) and [Datadog components](#datadog-components) on this page.
+- **Get troubleshooting support**: Datadog Support troubleshoots Datadog-supported components. For coverage of community and custom components, see [Support levels][57].
+
+You can run the Datadog Agent alongside the Collector for features that need the Agent. For the OpenTelemetry Collector that runs inside the Agent, see [Collector in the Agent][69]. On platforms other than Kubernetes, use the [upstream OpenTelemetry Collector][68] or the [Datadog Agent][64].
 
 ## Get started
 
-- [Install the DDOT Collector on Kubernetes][65]: Deploy the Collector with the OpenTelemetry Operator or Helm chart, and check that your data arrives.
-- [Add the Datadog Agent (optional)][66]: Add the Agent for Datadog features that need it.
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/getting_started/kubernetes/?tab=ddot" >}}
+    <h3>Kubernetes quickstart</h3>
+    Install the DDOT Collector and instrument an application with Datadog's installer script.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/kubernetes/" >}}
+    <h3>Install the DDOT Collector on Kubernetes</h3>
+    Deploy and configure the Collector yourself, with the OpenTelemetry Operator or the Collector Helm chart.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Included components
 
-<div class="alert alert-info">
-  <strong>Need additional OpenTelemetry components?</strong> <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> explains how to build a Datadog Agent image with more components for the Collector in the Agent. For the components included by default, see the following <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
-</div>
-
-### OpenTelemetry Collector versions
-
-The following table shows which OpenTelemetry Collector versions are included in each DDOT release:
-
-| DDOT version | Beta version | Stable version |
-|--------------|--------------|----------------|
-| 7.84.x       | v0.159.0     | v1.65.0        |
-| 7.83.x       | v0.158.0     | v1.64.0        |
-| 7.82.x       | v0.155.0     | v1.61.0        |
-| 7.81.x       | v0.154.0     | v1.60.0        |
-| 7.80.x       | v0.152.0     | v1.58.0        |
-| 7.79.x       | v0.150.0     | v1.56.0        |
-| 7.78.x       | v0.147.0     | v1.53.0        |
-| 7.77.x       | v0.145.0     | v1.51.0        |
-| 7.76.x       | v0.144.0     | v1.50.0        |
-| 7.75.x       | v0.142.0     | v1.48.0        |
-| 7.74.x       | v0.140.0     | v1.46.0        |
-| 7.73.x       | v0.138.0     | v1.44.0        |
-| 7.72.x       | v0.136.0     | v1.42.0        |
-| 7.71.x       | v0.133.0     | v1.39.0        |
-| 7.70.x       | v0.131.0     | v1.37.0        |
-| 7.69.x       | v0.129.0     | v1.35.0        |
+The DDOT Collector includes the OpenTelemetry Collector components listed in this section. **[Placeholder: Can you add components to the DDOT Collector image, and how?]** For the Collector in the Agent, see the [custom components guide][2].
 
 ### Support levels
 
@@ -79,7 +65,7 @@ For details on Datadog, community, and custom component support, see [Support le
 
 ### OpenTelemetry Collector components
 
-By default, the DDOT Collector ships with the following Collector components. You can also see the list in [YAML format][11].
+By default, the DDOT Collector includes these components. This list matches DDOT 7.84. The list is also available in [YAML format][11].
 
 {{% collapse-content title="Receivers" level="p" %}}
 
@@ -88,6 +74,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [jaegerreceiver][19]
+- [k8sclusterreceiver][70]
 - [k8sobjectsreceiver][59] (available since version 7.56.0)
 - [kubeletstatsreceiver][60] (available since version 7.56.0)
 - [otlpreceiver][20]
@@ -111,9 +98,10 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [probabilisticsamplerprocessor][32]
 - [resourcedetectionprocessor][33]
 - [resourceprocessor][34]
-- routingprocessor (deprecated and removed in v7.71.0; use the [routingconnector][56] instead)
 - [tailsamplingprocessor][36]
 - [transformprocessor][37]
+
+The `routingprocessor` was removed in version 7.71.0. Use the [routingconnector][56] instead.
 
 {{% /collapse-content %}}
 
@@ -124,13 +112,13 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 - [loadbalancingexporter][55]
 - [otlpexporter][40]
 - [otlphttpexporter][41]
-- [sapmexporter][42]
 - [nopexporter][43]
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Connectors" level="p" %}}
 
+- [countconnector][71]
 - [datadogconnector][44]
 - [routingconnector][56] (available since version 7.68.0)
 - [spanmetricsconnector][45]
@@ -141,6 +129,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 - [datadogextension][62] (available since version 7.72.0)
 - [healthcheckextension][46]
+- [k8sleaderelector][72]
 - [observer][47]
 - [pprofextension][48]
 - [storage/filestorage][63] (available since version 7.56.0)
@@ -148,7 +137,7 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 {{% /collapse-content %}}
 
-### Custom Datadog components
+### Datadog components
 
 In addition to standard OpenTelemetry components, Datadog provides and maintains the following custom components:
 
@@ -158,7 +147,38 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 - [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors.
 
-- [DD Flare Extension][52]: An OpenTelemetry extension component that adds the Collector's diagnostic information to an Agent flare, for troubleshooting. It works only with the Collector in the Agent.
+
+{{% /collapse-content %}}
+
+The Collector in the Agent also includes the [DD Flare Extension][52], which adds the Collector's diagnostic information to an Agent flare.
+
+## OpenTelemetry Collector versions
+
+Each DDOT release includes these OpenTelemetry Collector versions:
+
+| DDOT version | Beta version | Stable version |
+|--------------|--------------|----------------|
+| 7.84.x       | v0.159.0     | v1.65.0        |
+| 7.83.x       | v0.158.0     | v1.64.0        |
+| 7.82.x       | v0.155.0     | v1.61.0        |
+| 7.81.x       | v0.154.0     | v1.60.0        |
+| 7.80.x       | v0.152.0     | v1.58.0        |
+
+{{% collapse-content title="Earlier versions" level="p" %}}
+
+| DDOT version | Beta version | Stable version |
+|--------------|--------------|----------------|
+| 7.79.x       | v0.150.0     | v1.56.0        |
+| 7.78.x       | v0.147.0     | v1.53.0        |
+| 7.77.x       | v0.145.0     | v1.51.0        |
+| 7.76.x       | v0.144.0     | v1.50.0        |
+| 7.75.x       | v0.142.0     | v1.48.0        |
+| 7.74.x       | v0.140.0     | v1.46.0        |
+| 7.73.x       | v0.138.0     | v1.44.0        |
+| 7.72.x       | v0.136.0     | v1.42.0        |
+| 7.71.x       | v0.133.0     | v1.39.0        |
+| 7.70.x       | v0.131.0     | v1.37.0        |
+| 7.69.x       | v0.129.0     | v1.35.0        |
 
 {{% /collapse-content %}}
 
@@ -166,14 +186,8 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/unified_service_tagging/
 [2]: /opentelemetry/setup/ddot_collector/custom_components
-[3]: /containers/
-[4]: /security/sensitive_data_scanner/
-[5]: /universal_service_monitoring/
-[7]: /network_monitoring/cloud_network_monitoring/
-[9]: /agent/fleet_automation/
-[11]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/7.84.0/comp/otelcol/collector-contrib/impl/manifest.yaml
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/filelogreceiver/README.md
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/fluentforwardreceiver/README.md
 [18]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
@@ -199,7 +213,6 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 [39]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/debugexporter/README.md
 [40]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md
 [41]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlphttpexporter/README.md
-[42]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/sapmexporter/README.md
 [43]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/nopexporter/README.md
 [44]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/datadogconnector/README.md
 [45]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
@@ -222,8 +235,9 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 [62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
 [63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md
 [64]: /opentelemetry/setup/agent/
-[65]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
-[66]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/#install-the-core-datadog-agent-alongside-ddot
 [67]: /opentelemetry/instrument/dd_sdks/ddot_setup/
 [68]: /opentelemetry/setup/collector_exporter/
 [69]: /opentelemetry/setup/agent/#collector-in-the-agent
+[70]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sclusterreceiver/README.md
+[71]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/countconnector/README.md
+[72]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/k8sleaderelector/README.md
