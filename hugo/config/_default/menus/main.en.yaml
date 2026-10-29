@@ -712,16 +712,6 @@ menu:
       identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 301
-    - name: Set Up DDOT SDKs
-      url: /opentelemetry/instrument/dd_sdks/ddot_setup/
-      identifier: otel-ddot-setup-dd-sdk
-      parent: otel-dd-sdk-parent
-      weight: 3019
-    - name: OTLP Export
-      url: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
-      identifier: otel-otlp-export-dd-sdk
-      parent: otel-dd-sdk-parent
-      weight: 3020
     - name: APIs
       url: /opentelemetry/instrument/dd_sdks/api_support
       identifier: otel-api-dd-sdk
