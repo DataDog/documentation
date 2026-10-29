@@ -513,8 +513,8 @@ For more information, reference the [Datadog Helm Chart documentation][1] and th
 #     tag: "<AGENT_VERSION>"
 
 datadog:
-  ## Required with Agent versions earlier than v7.84, or with Helm chart versions earlier than v3.263.0,
-  ## which set this option to false by default and prevent the Agent from enabling the traceroute module automatically.
+  ## Required with Agent versions earlier than v7.84, which don't enable the traceroute module automatically,
+  ## and with Helm chart versions earlier than v3.263.0, which set this option to false by default.
   traceroute:
     enabled: true
 
