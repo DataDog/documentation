@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
@@ -49,33 +49,32 @@ export default function MobileNavToggle({ labels, externalContext }: Props) {
   }
 
   useEffect(() => {
-    // Signal hydration so tests (and any consumer) can wait for the click
-    // handler to be live before interacting with the toggle.
-    markSelfAsHydrated(buttonRef);
+    return withExternalContext(externalContext, (loaded) => {
+      overlayRef.current = loaded.overlay;
+      backdropRef.current = loaded.backdrop;
 
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) {
-      return;
-    }
-    overlayRef.current = loaded.overlay;
-    backdropRef.current = loaded.backdrop;
+      // Signal hydration so tests (and any consumer) can wait for the click
+      // handler to be live before interacting with the toggle. This waits for
+      // the overlay, since a click before then can't open it.
+      markSelfAsHydrated(buttonRef);
 
-    const close = () => setOpenState(false);
-    backdropRef.current.addEventListener("click", close);
+      const close = () => setOpenState(false);
+      backdropRef.current.addEventListener("click", close);
 
-    // At desktop width the panel is hidden, so an open nav would leave the
-    // backdrop graying out the page and the scroll lock in place.
-    const desktopQuery = window.matchMedia(desktopMediaQuery());
-    const closeOnDesktop = (event: MediaQueryListEvent) => {
-      if (event.matches) close();
-    };
-    desktopQuery.addEventListener("change", closeOnDesktop);
+      // At desktop width the panel is hidden, so an open nav would leave the
+      // backdrop graying out the page and the scroll lock in place.
+      const desktopQuery = window.matchMedia(desktopMediaQuery());
+      const closeOnDesktop = (event: MediaQueryListEvent) => {
+        if (event.matches) close();
+      };
+      desktopQuery.addEventListener("change", closeOnDesktop);
 
-    return () => {
-      backdropRef.current?.removeEventListener("click", close);
-      desktopQuery.removeEventListener("change", closeOnDesktop);
-      document.documentElement.style.overflow = "";
-    };
+      return () => {
+        backdropRef.current?.removeEventListener("click", close);
+        desktopQuery.removeEventListener("change", closeOnDesktop);
+        document.documentElement.style.overflow = "";
+      };
+    });
   }, []);
 
   return (

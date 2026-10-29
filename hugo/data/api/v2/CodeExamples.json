@@ -341,13 +341,6 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
-    }
-  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -370,13 +363,6 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection policy returns \"Created\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
   "UpdateCSMThreatsAgentPolicy": [
@@ -1476,13 +1462,6 @@
       "description": "Grant role to a restriction query returns \"OK\" response"
     }
   ],
-  "CreateBulkTagsMetricsConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
-    }
-  ],
   "CreateDerivedMetric": [
     {
       "group": "metrics",
@@ -2197,6 +2176,13 @@
       "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
+  "GetServiceRepositoryInfo": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get service repository information returns \"OK\" response"
+    }
+  ],
   "SearchRUMEvents": [
     {
       "group": "rum",
@@ -2728,6 +2714,13 @@
       "group": "security_monitoring",
       "suffix": "_3678541639",
       "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
+  "StartSecurityMonitoringRuleProposal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Start a rule proposal returns \"Accepted\" response"
     }
   ],
   "SendSecurityMonitoringNotificationPreview": [
