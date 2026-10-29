@@ -18,8 +18,8 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 | Setup Type                                           | API                     | SDK         | Collector/Agent                                        |
 |------------------------------------------------------|-------------------------|-------------|--------------------------------------------------------|
 | [**DDOT SDK + DDOT Collector**][49]                  | Datadog API or OTel API | DDOT SDK    | DDOT Collector (the Datadog Agent is optional)          |
-| [**Datadog SDK + Agent's Collector**][48]       | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs inside the Datadog Agent) |
-| [**OTel SDK + Agent's Collector**][48]          | OTel API                | OTel SDK    | Agent's Collector (runs inside the Datadog Agent) |
+| [**Datadog SDK + Agent's Collector**][48]       | Datadog API or OTel API | Datadog SDK | Agent's Collector (runs alongside the Datadog Agent) |
+| [**OTel SDK + Agent's Collector**][48]          | OTel API                | OTel SDK    | Agent's Collector (runs alongside the Datadog Agent) |
 | [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 

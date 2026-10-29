@@ -24,7 +24,7 @@ receivers:
     label: Agent's Collector
     agent: included
   - id: otlp_ingest_agent
-    label: OTLP Ingest in the Agent
+    label: Agent's OTLP endpoint
     agent: included
   - id: otlp_intake
     label: Direct OTLP intake
