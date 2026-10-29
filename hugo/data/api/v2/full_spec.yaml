@@ -105209,7 +105209,9 @@ components:
             $ref: "#/components/schemas/RecommendationsFilterRequestSortItems"
           type: array
         view:
-          description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
+          description: |-
+            Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
+            or `completed`. Defaults to `all`, which returns recommendations in every status.
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -105222,7 +105224,9 @@ components:
       x-enum-varnames:
         - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
-      description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
+      description: |-
+        Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
+        or `*` for both.
       enum:
         - ccm
         - experiment
@@ -105258,9 +105262,9 @@ components:
           description: Opaque token used to fetch the next page; absent on the last page.
           type: string
         page_size:
-          description: Number of items returned in this page (1–10000).
+          description: Number of items returned in this page (1–5000).
           format: int32
-          maximum: 10000
+          maximum: 5000
           minimum: 1
           type: integer
         page_token:
@@ -141254,6 +141258,19 @@ components:
           description: The name of the feature flag.
           example: "Updated Feature Flag XYZ789"
           type: string
+        tags:
+          description: |-
+            Tags associated with the feature flag. This field replaces the full set of
+            existing tags; omit it to leave tags unchanged, or pass an empty array to
+            clear all tags. The owning team is set by including a tag of the form
+            `team:<team-handle>` in this array.
+          example: ["team:feature-flagging"]
+          items:
+            description: A tag associated with the feature flag.
+            maxLength: 200
+            type: string
+          maxItems: 100
+          type: array
       type: object
     UpdateFeatureFlagData:
       description: Data for updating a feature flag.
@@ -162833,11 +162850,15 @@ paths:
       description: List cost recommendations matching a filter, with pagination and sorting.
       operationId: SearchCostRecommendations
       parameters:
-        - description: Number of results per page (1–10000).
+        - description: Number of results per page, from 1 to 5000. Defaults to 50.
           in: query
           name: page[size]
           schema:
-            type: string
+            default: 50
+            format: int32
+            maximum: 5000
+            minimum: 1
+            type: integer
         - description: Pagination token from a previous response.
           in: query
           name: page[token]
@@ -162884,11 +162905,16 @@ paths:
                     meta:
                       page:
                         filter: "@resource_table:aws_ec2_instance"
-                        next_page_token: ""
                         page_size: 100
               schema:
                 $ref: "#/components/schemas/CostRecommendationArray"
           description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -162900,6 +162926,10 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 61
+      x-permission:
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -177860,6 +177890,11 @@ paths:
       description: |-
         Updates an existing feature flag's metadata such as
          name and description. Does not modify targeting rules or allocations.
+
+        To change the owning team, update `tags` and include a tag of the form
+        `team:<team-handle>` in the array. `tags` is a full replacement of the
+        existing tag set (including any `team:` tag), so include every tag you
+        want to keep, not just the ones you're adding.
       operationId: UpdateFeatureFlag
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -177874,6 +177909,7 @@ paths:
                       description: Updated description for the feature flag
                       enabled: true
                       name: Updated Feature Flag XYZ789
+                      tags: ["team:feature-flagging"]
                     type: feature-flags
             schema:
               $ref: "#/components/schemas/UpdateFeatureFlagRequest"
@@ -204315,7 +204351,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
     post:
       deprecated: true
       description: |-
@@ -204400,7 +204436,7 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-sunset: "2027-01-01"
+      x-sunset: "2026-11-01"
   /api/v2/metrics/derived-metrics:
     post:
       description: |-
