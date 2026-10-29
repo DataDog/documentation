@@ -66,7 +66,7 @@ For Datadog Agent versions [7.50.3][1] through [7.54.1][2], add the following to
 apm_config:
   compute_stats_by_span_kind: true
   peer_tags_aggregation: true
-  peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+  peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -76,7 +76,7 @@ Alternatively, set these environment variables in your Datadog Agent configurati
 
 DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
 DD_APM_PEER_TAGS_AGGREGATION=true
-DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+DD_APM_PEER_TAGS='["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]'
 
 {{< /code-block >}}
 
@@ -99,7 +99,7 @@ connectors:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+      peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]
 
 {{< /code-block >}}
 
@@ -112,7 +112,7 @@ exporters:
     traces:
       compute_stats_by_span_kind: true
       peer_tags_aggregation: true
-      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+      peer_tags: ["_dd.base_service","active_record.db.vendor","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","aws.s3.bucket","bucketname","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.namespace","db.system","db.type","dns.hostname","grpc.host","hostname","http.host","http.server_name","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.ip","network.destination.name","out.host","peer.hostname","peer.service","queuename","rpc.service","rpc.system","sequel.db.vendor","server.address","streamname","tablename","topicname"]   
 
 {{< /code-block >}}
 
@@ -130,6 +130,8 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
+The following table lists the source attributes that Datadog uses to derive peer tags for inferred services. Datadog can derive a peer tag only if your setup collects its source attributes from spans. Datadog Agent v7.60.0 and later collect all listed source attributes by default.
+
 Peer Tag | Source Attributes
 --------------------|-------------------
 `peer.aws.dynamodb.table` | `tablename`
@@ -139,8 +141,8 @@ Peer Tag | Source Attributes
 `peer.cassandra.contact.points` | `db.cassandra.contact.points`
 `peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
 `peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
-`peer.db.system` | `db.system`
-`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.db.system` | `db.system`, `active_record.db.vendor`, `db.type`, `sequel.db.vendor`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`, `out.host`, `dns.hostname`, `network.destination.ip`
 `peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
 `peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
 `peer.messaging.system` | `messaging.system`
@@ -156,8 +158,8 @@ To assign the name to inferred entities, Datadog uses a specific order of preced
 
 Entity type | Order of precedence
 -----------|----------------
-Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
-Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Database | `peer.db.name` > `peer.aws.s3.bucket` (for Amazon S3) / `peer.aws.dynamodb.table` (for Amazon DynamoDB) / `peer.cassandra.contact.points` (for Cassandra) / `peer.couchbase.seed.nodes` (for Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for Amazon SQS) / `peer.aws.kinesis.stream` (for Amazon Kinesis) > `peer.messaging.system`
 Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
 If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
