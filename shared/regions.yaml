@@ -1,0 +1,840 @@
+# Datadog region (data center) definitions — single source of truth.
+#
+# Consumed by Astro via the `@shared` alias. Hugo will mount this as data
+# after the Astro API docs ship; until then Hugo keeps its own copy in
+# hugo/config/_default/params.yaml and hugo/assets/scripts/config/regions.config.js.
+#
+# To add a data center, add one block below. Nothing else in Astro should
+# need editing — see astro/src/config/regions.ts and the generated CSS in
+# astro/src/layouts/BaseLayout.astro.
+#
+# Fields:
+#   key           region key used in the `site` cookie and `?site=` query param
+#   label         display name shown in the region selector
+#   weight        sort order in the selector (lower first)
+#   domain        API site domain; matches the OpenAPI spec `site` enum
+#   exact_domains fully-qualified hosts that map to this region (oncall,
+#                 browser-intake). Used when a spec enum lists whole hostnames
+#                 instead of bare site domains.
+#   values        per-region substitution values (was regions.config.js)
+
+regions:
+  - key: us
+    label: US1
+    weight: 10
+    domain: datadoghq.com
+    exact_domains:
+      - navy.oncall.datadoghq.com
+      - browser-intake-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.datadoghq.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.datadoghq.com
+      api_endpoint_private_link: api.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "464622532012"
+      aws_private_link_api_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77
+      aws_private_link_containers_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99
+      aws_private_link_cross_region: "US East (N.Virginia) (us-east-1)"
+      aws_private_link_dbm_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501
+      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63
+      aws_private_link_logs_user_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d
+      aws_private_link_metrics_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8
+      aws_private_link_process_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1
+      aws_private_link_profiling_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029
+      aws_private_link_remote_config_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d
+      aws_private_link_traces_service_name: com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2
+      aws_region: us-east-1
+      browser_sdk_endpoint_domain: browser-intake-datadoghq.com
+      containers_endpoint: orchestrator.datadoghq.com
+      containers_endpoint_private_link: orchestrator.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0="
+      custom_costs_endpoint: api.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.datadoghq.com
+      dbm_endpoint_private_link: dbm-metrics-intake.datadoghq.com
+      dd_api: "https://api.datadoghq.com"
+      dd_datacenter: US1
+      dd_datacenter_lowercase: us1
+      dd_full_site: app.datadoghq.com
+      dd_site: datadoghq.com
+      dd_site_name: US1
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: us1/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: us1/v6/datadog-rum-slim.js
+      functions_endpoint: functions-intake.logs.datadoghq.com
+      functions_port: "443"
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: "tcp-encrypted-intake.logs.datadoghq.com<br>lambda-tcp-encrypted-intake.logs.datadoghq.com<br>gcp-encrypted-intake.logs.datadoghq.com<br>http-encrypted-intake.logs.datadoghq.com"
+      http_endpoint: http-intake.logs.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.datadoghq.com"
+      http_endpoint_private_link: http-intake.logs.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.datadoghq.com/webhooks.json"
+      jenkins_site_name: US1
+      kotlin_multiplatform_site_config: ""
+      lambda_endpoint: lambda-intake.logs.datadoghq.com
+      lambda_http_endpoint: lambda-http-intake.logs.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: "443"
+      maui_site_config: ""
+      mcp_server_endpoint: "https://mcp.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.datadoghq.com
+      metrics_endpoint_private_link: metrics.agent.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.datadoghq.com/v1/traces"
+      process_endpoint: process.datadoghq.com
+      process_endpoint_private_link: process.datadoghq.com
+      profiling_endpoint: intake.profile.datadoghq.com
+      profiling_endpoint_private_link: intake.profile.datadoghq.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.datadoghq.com
+      remote_config_endpoint_private_link: config.datadoghq.com
+      roku_site: us1
+      synthetics_intake_endpoint: intake.synthetics.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-us1.synthetics.datadoghq.com
+      tcp_endpoint: agent-intake.logs.datadoghq.com
+      tcp_endpoint_port: "10514"
+      tcp_endpoint_port_ssl: "10516"
+      traces_endpoint: trace.agent.datadoghq.com
+      traces_endpoint_private_link: trace.agent.datadoghq.com
+      vercel_setup: "https://app.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.datadoghq.com
+      web_integrations_port: "10516"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: us3
+    label: US3
+    weight: 13
+    domain: us3.datadoghq.com
+    exact_domains:
+      - teal.oncall.datadoghq.com
+      - browser-intake-us3-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.us3.datadoghq.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.us3.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.us3.datadoghq.com
+      api_endpoint_private_link: api.us3.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "464622532012"
+      aws_private_link_api_service_name: The private link service for US3 is not supported.
+      aws_private_link_containers_service_name: The private link service for US3 is not supported.
+      aws_private_link_cross_region: N/A
+      aws_private_link_dbm_service_name: The private link service for US3 is not supported.
+      aws_private_link_logs_agent_service_name: The private link service for US3 is not supported.
+      aws_private_link_logs_user_service_name: The private link service for US3 is not supported.
+      aws_private_link_metrics_service_name: The private link service for US3 is not supported.
+      aws_private_link_process_service_name: The private link service for US3 is not supported.
+      aws_private_link_profiling_service_name: The private link service for US3 is not supported.
+      aws_private_link_remote_config_service_name: The private link service for US3 is not supported.
+      aws_private_link_traces_service_name: The private link service for US3 is not supported.
+      aws_region: N/A
+      browser_sdk_endpoint_domain: browser-intake-us3-datadoghq.com
+      containers_endpoint: orchestrator.us3.datadoghq.com
+      containers_endpoint_private_link: orchestrator.us3.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
+      custom_costs_endpoint: api.us3.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.us3.datadoghq.com
+      dbm_endpoint_private_link: dbm-metrics-intake.us3.datadoghq.com
+      dd_api: "https://api.us3.datadoghq.com"
+      dd_datacenter: US3
+      dd_datacenter_lowercase: us3
+      dd_full_site: us3.datadoghq.com
+      dd_site: us3.datadoghq.com
+      dd_site_name: US3
+      dogwrap_site_flag: " -s us3"
+      flutter_web_logs_cdn_path: us3/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: us3/v6/datadog-rum-slim.js
+      functions_endpoint: The US3 functions endpoint is not supported.
+      functions_port: The US3 functions endpoint port is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.us3.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: "lambda-tcp-encrypted-intake.logs.us3.datadoghq.com<br>gcp-encrypted-intake.logs.us3.datadoghq.com<br>http-encrypted-intake.logs.us3.datadoghq.com"
+      http_endpoint: http-intake.logs.us3.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.us3.datadoghq.com"
+      http_endpoint_private_link: http-intake.logs.us3.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.us3.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.us3.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.us3.datadoghq.com/webhooks.json"
+      jenkins_site_name: US3
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.US3)\n        .trackCrashes(true)"
+      lambda_endpoint: The US3 lambda endpoint is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.us3.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: The US3 lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Us3,"
+      mcp_server_endpoint: "https://mcp.us3.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.us3.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.us3.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.us3.datadoghq.com
+      metrics_endpoint_private_link: metrics.agent.us3.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.us3.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.us3.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.us3.datadoghq.com/v1/traces"
+      process_endpoint: process.us3.datadoghq.com
+      process_endpoint_private_link: process.us3.datadoghq.com
+      profiling_endpoint: intake.profile.us3.datadoghq.com
+      profiling_endpoint_private_link: intake.profile.us3.datadoghq.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.us3.datadoghq.com
+      remote_config_endpoint_private_link: config.us3.datadoghq.com
+      roku_site: us3
+      synthetics_intake_endpoint: intake.synthetics.us3.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-us3.synthetics.datadoghq.com
+      tcp_endpoint: The US3 TCP endpoint is not supported.
+      # filled: absent from regions.config.js; see FILL note in the region plan
+      tcp_endpoint_port: The US3 TCP endpoint port is not supported.
+      # filled: absent from regions.config.js; see FILL note in the region plan
+      tcp_endpoint_port_ssl: The US3 TCP endpoint port is not supported.
+      traces_endpoint: trace.agent.us3.datadoghq.com
+      traces_endpoint_private_link: trace.agent.us3.datadoghq.com
+      vercel_setup: "https://us3.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.us3.datadoghq.com
+      web_integrations_port: "10516"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: us5
+    label: US5
+    weight: 15
+    domain: us5.datadoghq.com
+    exact_domains:
+      - coral.oncall.datadoghq.com
+      - browser-intake-us5-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.us5.datadoghq.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.us5.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.us5.datadoghq.com
+      api_endpoint_private_link: api.us5.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "464622532012"
+      aws_private_link_api_service_name: The private link service for US5 is not supported.
+      aws_private_link_containers_service_name: The private link service for US5 is not supported.
+      aws_private_link_cross_region: N/A
+      aws_private_link_dbm_service_name: The private link service for US5 is not supported.
+      aws_private_link_logs_agent_service_name: The private link service for US5 is not supported.
+      aws_private_link_logs_user_service_name: The private link service for US5 is not supported.
+      aws_private_link_metrics_service_name: The private link service for US5 is not supported.
+      aws_private_link_process_service_name: The private link service for US5 is not supported.
+      aws_private_link_profiling_service_name: The private link service for US5 is not supported.
+      aws_private_link_remote_config_service_name: The private link service for US5 is not supported.
+      aws_private_link_traces_service_name: The private link service for US5 is not supported.
+      aws_region: N/A
+      browser_sdk_endpoint_domain: browser-intake-us5-datadoghq.com
+      containers_endpoint: orchestrator.us5.datadoghq.com
+      containers_endpoint_private_link: orchestrator.us5.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us5&config=eyJ1cmwiOiJodHRwczovL21jcC51czUuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
+      custom_costs_endpoint: api.us5.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.us5.datadoghq.com
+      dbm_endpoint_private_link: dbm-metrics-intake.us5.datadoghq.com
+      dd_api: "https://api.us5.datadoghq.com"
+      dd_datacenter: US5
+      dd_datacenter_lowercase: us5
+      dd_full_site: us5.datadoghq.com
+      dd_site: us5.datadoghq.com
+      dd_site_name: US5
+      dogwrap_site_flag: " -s us5"
+      flutter_web_logs_cdn_path: us5/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: us5/v6/datadog-rum-slim.js
+      functions_endpoint: The US5 functions endpoint is not supported.
+      functions_port: The US5 functions endpoint port is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.us5.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: "lambda-tcp-encrypted-intake.logs.us5.datadoghq.com<br>gcp-encrypted-intake.logs.us5.datadoghq.com<br>http-encrypted-intake.logs.us5.datadoghq.com"
+      http_endpoint: http-intake.logs.us5.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.us5.datadoghq.com"
+      http_endpoint_private_link: http-intake.logs.us5.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.us5.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.us5.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.us5.datadoghq.com/webhooks.json"
+      jenkins_site_name: US5
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.US5)\n        .trackCrashes(true)"
+      lambda_endpoint: lambda endpoint not supported
+      lambda_http_endpoint: lambda-http-intake.logs.us5.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: The US5 lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Us5,"
+      mcp_server_endpoint: "https://mcp.us5.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.us5.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.us5.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.us5.datadoghq.com
+      metrics_endpoint_private_link: metrics.agent.us5.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.us5.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.us5.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.us5.datadoghq.com/v1/traces"
+      process_endpoint: process.us5.datadoghq.com
+      process_endpoint_private_link: process.us5.datadoghq.com
+      profiling_endpoint: intake.profile.us5.datadoghq.com
+      profiling_endpoint_private_link: intake.profile.us5.datadoghq.com
+      reactnative_sdk_init: "\n\nawait DdSdkReactNative.initialize(config);"
+      remote_config_endpoint: config.us5.datadoghq.com
+      remote_config_endpoint_private_link: config.us5.datadoghq.com
+      roku_site: us5
+      synthetics_intake_endpoint: intake.synthetics.us5.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-us5.synthetics.datadoghq.com
+      tcp_endpoint: The US5 TCP endpoint is not supported.
+      tcp_endpoint_port: The US5 TCP endpoint port is not supported.
+      tcp_endpoint_port_ssl: The US5 TCP endpoint port is not supported.
+      traces_endpoint: trace.agent.us5.datadoghq.com
+      traces_endpoint_private_link: trace.agent.us5.datadoghq.com
+      vercel_setup: "https://us5.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.datadoghq.com
+      web_integrations_port: "10516"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: eu
+    label: EU
+    weight: 20
+    domain: datadoghq.eu
+    exact_domains:
+      - beige.oncall.datadoghq.eu
+      - browser-intake-datadoghq.eu
+    values:
+      agent_http_endpoint: agent-http-intake.logs.datadoghq.eu
+      agent_http_endpoint_private_link: agent-http-intake.logs.datadoghq.eu
+      agent_http_port: "443"
+      api_endpoint: api.datadoghq.eu
+      api_endpoint_private_link: api.datadoghq.eu
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "464622532012"
+      aws_private_link_api_service_name: The private link service for EU is not supported.
+      aws_private_link_containers_service_name: The private link service for EU is not supported.
+      aws_private_link_cross_region: N/A
+      aws_private_link_dbm_service_name: The private link service for EU is not supported.
+      aws_private_link_logs_agent_service_name: The private link service for EU is not supported.
+      aws_private_link_logs_user_service_name: The private link service for EU is not supported.
+      aws_private_link_metrics_service_name: The private link service for EU is not supported.
+      aws_private_link_process_service_name: The private link service for EU is not supported.
+      aws_private_link_profiling_service_name: The private link service for EU is not supported.
+      aws_private_link_remote_config_service_name: The private link service for EU is not supported.
+      aws_private_link_traces_service_name: The private link service for EU is not supported.
+      aws_region: N/A
+      browser_sdk_endpoint_domain: browser-intake-datadoghq.eu
+      containers_endpoint: orchestrator.datadoghq.eu
+      containers_endpoint_private_link: orchestrator.datadoghq.eu
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-eu1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuZXUvYXBpL3Vuc3RhYmxlL21jcC1zZXJ2ZXIvbWNwP3Rvb2xzZXRzPW9uYm9hcmRpbmciLCJ0eXBlIjoib2F1dGgifQ=="
+      custom_costs_endpoint: api.datadoghq.eu/api/v2/cost/custom_costs.
+      dbm_endpoint: dbm-metrics-intake.datadoghq.eu
+      dbm_endpoint_private_link: dbm-metrics-intake.datadoghq.eu
+      dd_api: "https://api.datadoghq.eu"
+      dd_datacenter: EU
+      dd_datacenter_lowercase: eu1
+      dd_full_site: app.datadoghq.eu
+      dd_site: datadoghq.eu
+      dd_site_name: EU
+      dogwrap_site_flag: " -s eu"
+      flutter_web_logs_cdn_path: eu1/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: eu1/v6/datadog-rum-slim.js
+      functions_endpoint: The EU functions endpoint is not supported.
+      functions_port: The EU functions endpoint port is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.datadoghq.eu/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: "tcp-encrypted-intake.logs.datadoghq.eu<br>lambda-tcp-encrypted-intake.logs.datadoghq.eu<br>gcp-encrypted-intake.logs.datadoghq.eu<br>http-encrypted-intake.logs.datadoghq.eu"
+      http_endpoint: http-intake.logs.datadoghq.eu
+      http_endpoint_full: "https://http-intake.logs.datadoghq.eu"
+      http_endpoint_private_link: http-intake.logs.datadoghq.eu
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.datadoghq.eu"
+      ip_ranges_url_api: "https://ip-ranges.datadoghq.eu/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.datadoghq.eu/webhooks.json"
+      jenkins_site_name: EU1
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.EU1)\n        .trackCrashes(true)"
+      lambda_endpoint: lambda-intake.logs.datadoghq.eu
+      lambda_http_endpoint: lambda-http-intake.logs.datadoghq.eu
+      lambda_http_port: "443"
+      lambda_port: "443"
+      maui_site_config: "\n    Site = DatadogSite.Eu1,"
+      mcp_server_endpoint: "https://mcp.datadoghq.eu/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.datadoghq.eu/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.datadoghq.eu/v1/mcp"
+      metrics_endpoint: metrics.agent.datadoghq.eu
+      metrics_endpoint_private_link: metrics.agent.datadoghq.eu
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.datadoghq.eu/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.datadoghq.eu/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.datadoghq.eu/v1/traces"
+      process_endpoint: process.datadoghq.eu
+      process_endpoint_private_link: process.datadoghq.eu
+      profiling_endpoint: intake.profile.datadoghq.eu
+      profiling_endpoint_private_link: intake.profile.datadoghq.eu
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.datadoghq.eu
+      remote_config_endpoint_private_link: config.datadoghq.eu
+      roku_site: eu1
+      synthetics_intake_endpoint: intake.synthetics.datadoghq.eu
+      synthetics_tunnel_endpoint: tunnel-eu1.synthetics.datadoghq.com
+      tcp_endpoint: agent-intake.logs.datadoghq.eu
+      tcp_endpoint_port: "1883"
+      tcp_endpoint_port_ssl: "443"
+      traces_endpoint: trace.agent.datadoghq.eu
+      traces_endpoint_private_link: trace.agent.datadoghq.eu
+      vercel_setup: "https://app.datadoghq.eu/setup/vercel"
+      web_integrations_endpoint: tcp-intake.logs.datadoghq.eu
+      web_integrations_port: "443"
+      web_integrations_unencrypted_port: "1883"
+
+  - key: ap1
+    label: AP1
+    weight: 25
+    domain: ap1.datadoghq.com
+    exact_domains:
+      - saffron.oncall.datadoghq.com
+      - browser-intake-ap1-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.ap1.datadoghq.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.ap1.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.ap1.datadoghq.com
+      api_endpoint_private_link: api.ap1.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "417141415827"
+      aws_private_link_api_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e
+      aws_private_link_containers_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d
+      aws_private_link_cross_region: "Asia Pacific (Tokyo) (ap-northeast-1)"
+      aws_private_link_dbm_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977
+      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b
+      aws_private_link_logs_user_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3
+      aws_private_link_metrics_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad
+      aws_private_link_process_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26
+      aws_private_link_profiling_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596
+      aws_private_link_remote_config_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c
+      aws_private_link_traces_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc
+      aws_region: ap-northeast-1
+      browser_sdk_endpoint_domain: browser-intake-ap1-datadoghq.com
+      containers_endpoint: orchestrator.ap1.datadoghq.com
+      containers_endpoint_private_link: orchestrator.ap1.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
+      custom_costs_endpoint: api.ap1.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.ap1.datadoghq.com
+      dbm_endpoint_private_link: dbm-metrics-intake.ap1.datadoghq.com
+      dd_api: "https://api.ap1.datadoghq.com"
+      dd_datacenter: AP1
+      dd_datacenter_lowercase: ap1
+      dd_full_site: ap1.datadoghq.com
+      dd_site: ap1.datadoghq.com
+      dd_site_name: AP1
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: ap1/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: ap1/v6/datadog-rum-slim.js
+      functions_endpoint: The AP1 functions endpoint is not supported.
+      functions_port: The AP1 functions endpoint port is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.ap1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: N/A
+      http_endpoint: http-intake.logs.ap1.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.ap1.datadoghq.com"
+      http_endpoint_private_link: http-intake.logs.ap1.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.ap1.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.ap1.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.ap1.datadoghq.com/webhooks.json"
+      jenkins_site_name: AP1
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.AP1)\n        .trackCrashes(true)"
+      lambda_endpoint: The AP1 lambda endpoint is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.ap1.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: The AP1 lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Ap1,"
+      mcp_server_endpoint: "https://mcp.ap1.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.ap1.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.ap1.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.ap1.datadoghq.com
+      metrics_endpoint_private_link: metrics.agent.ap1.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.ap1.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.ap1.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.ap1.datadoghq.com/v1/traces"
+      process_endpoint: process.ap1.datadoghq.com
+      process_endpoint_private_link: process.ap1.datadoghq.com
+      profiling_endpoint: intake.profile.ap1.datadoghq.com
+      profiling_endpoint_private_link: intake.profile.ap1.datadoghq.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.ap1.datadoghq.com
+      remote_config_endpoint_private_link: config.ap1.datadoghq.com
+      roku_site: ap1
+      synthetics_intake_endpoint: intake.synthetics.ap1.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-ap1.synthetics.datadoghq.com
+      tcp_endpoint: The AP1 endpoint is not supported.
+      tcp_endpoint_port: The AP1 endpoint is not supported.
+      tcp_endpoint_port_ssl: The AP1 endpoint is not supported.
+      traces_endpoint: trace.agent.ap1.datadoghq.com
+      traces_endpoint_private_link: trace.agent.ap1.datadoghq.com
+      vercel_setup: "https://ap1.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.ap1.datadoghq.com
+      web_integrations_port: "443"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: ap2
+    label: AP2
+    weight: 30
+    domain: ap2.datadoghq.com
+    exact_domains:
+      - lava.oncall.datadoghq.com
+      - browser-intake-ap2-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.ap2.datadoghq.com
+      agent_http_endpoint_private_link: gold.intake.ap2.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.ap2.datadoghq.com
+      api_endpoint_private_link: orchid.intake.ap2.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "412381753143"
+      aws_private_link_api_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a
+      aws_private_link_containers_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902
+      aws_private_link_cross_region: "Asia Pacific (Sydney) (ap-southeast-2)"
+      aws_private_link_dbm_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448
+      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace
+      aws_private_link_logs_user_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace
+      aws_private_link_metrics_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff
+      aws_private_link_process_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5
+      aws_private_link_profiling_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd
+      aws_private_link_remote_config_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10
+      aws_private_link_traces_service_name: com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09
+      aws_region: ap-southeast-2
+      browser_sdk_endpoint_domain: browser-intake-ap2-datadoghq.com
+      containers_endpoint: orchestrator.ap2.datadoghq.com
+      containers_endpoint_private_link: linen.intake.ap2.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
+      custom_costs_endpoint: api.ap2.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.ap2.datadoghq.com
+      dbm_endpoint_private_link: white.intake.ap2.datadoghq.com
+      dd_api: "https://api.ap2.datadoghq.com"
+      dd_datacenter: AP2
+      dd_datacenter_lowercase: ap2
+      dd_full_site: ap2.datadoghq.com
+      dd_site: ap2.datadoghq.com
+      dd_site_name: AP2
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: ap2/v6/datadog-logs.js
+      flutter_web_rum_cdn_path: ap2/v6/datadog-rum-slim.js
+      functions_endpoint: The AP2 functions endpoint is not supported.
+      functions_port: The AP2 functions endpoint port is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.ap2.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: N/A
+      http_endpoint: http-intake.logs.ap2.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.ap2.datadoghq.com"
+      http_endpoint_private_link: gold.intake.ap2.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.ap2.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.ap2.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.ap2.datadoghq.com/webhooks.json"
+      jenkins_site_name: AP2
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)"
+      lambda_endpoint: The AP2 lambda endpoint is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.ap2.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: The AP2 lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Ap2,"
+      mcp_server_endpoint: "https://mcp.ap2.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.ap2.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.ap2.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.ap2.datadoghq.com
+      metrics_endpoint_private_link: beige.intake.ap2.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.ap2.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.ap2.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.ap2.datadoghq.com/v1/traces"
+      process_endpoint: process.ap2.datadoghq.com
+      process_endpoint_private_link: bisque.intake.ap2.datadoghq.com
+      profiling_endpoint: intake.profile.ap2.datadoghq.com
+      profiling_endpoint_private_link: cyan.intake.ap2.datadoghq.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.ap2.datadoghq.com
+      remote_config_endpoint_private_link: violet.intake.ap2.datadoghq.com
+      roku_site: ap2
+      synthetics_intake_endpoint: intake.synthetics.ap2.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-ap2.synthetics.datadoghq.com
+      tcp_endpoint: The AP2 endpoint is not supported.
+      tcp_endpoint_port: The AP2 endpoint is not supported.
+      tcp_endpoint_port_ssl: The AP2 endpoint is not supported.
+      traces_endpoint: trace.agent.ap2.datadoghq.com
+      traces_endpoint_private_link: lime.intake.ap2.datadoghq.com
+      vercel_setup: "https://ap2.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.ap2.datadoghq.com
+      web_integrations_port: "443"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: uk1
+    label: UK1
+    weight: 33
+    domain: uk1.datadoghq.com
+    exact_domains:
+      - scarlet.oncall.datadoghq.com
+      - browser-intake-uk1-datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.uk1.datadoghq.com
+      agent_http_endpoint_private_link: gold.intake.uk1.datadoghq.com
+      agent_http_port: "443"
+      api_endpoint: api.uk1.datadoghq.com
+      api_endpoint_private_link: orchid.intake.uk1.datadoghq.com
+      aws_customer_access_govcloud_id: N/A
+      aws_customer_access_id: "117348461845"
+      aws_private_link_api_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77
+      aws_private_link_containers_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-07f22a32140efaae5
+      aws_private_link_cross_region: "Europe (London) (eu-west-2)"
+      aws_private_link_dbm_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029
+      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336
+      aws_private_link_logs_user_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336
+      aws_private_link_metrics_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9
+      aws_private_link_process_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-0fe52c96bfb6c5d0e
+      aws_private_link_profiling_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c
+      aws_private_link_remote_config_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-0755097b02a34f9e7
+      aws_private_link_traces_service_name: com.amazonaws.vpce.eu-west-2.vpce-svc-08989912d1ef253f4
+      aws_region: eu-west-2
+      browser_sdk_endpoint_domain: browser-intake-uk1-datadoghq.com
+      containers_endpoint: orchestrator.uk1.datadoghq.com
+      containers_endpoint_private_link: linen.intake.uk1.datadoghq.com
+      cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-uk1&config=eyJ1cmwiOiJodHRwczovL21jcC51azEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
+      custom_costs_endpoint: api.uk1.datadoghq.com/api/v2/cost/custom_costs
+      dbm_endpoint: dbm-metrics-intake.uk1.datadoghq.com
+      dbm_endpoint_private_link: white.intake.uk1.datadoghq.com
+      dd_api: "https://api.uk1.datadoghq.com"
+      dd_datacenter: UK1
+      dd_datacenter_lowercase: uk1
+      dd_full_site: uk1.datadoghq.com
+      dd_site: uk1.datadoghq.com
+      dd_site_name: UK1
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: uk1/v5/datadog-logs.js
+      flutter_web_rum_cdn_path: uk1/v6/datadog-rum-slim.js
+      functions_endpoint: The functions endpoint for UK1 is not supported.
+      functions_port: The functions endpoint port for UK1 is not supported.
+      goose_mcp_install_deeplink: "goose://extension?url=https://mcp.uk1.datadoghq.com/v1/mcp&type=streamable_http&id=Datadog&name=Datadog&description=Datadog%20MCP%20Server"
+      hipaa_logs_legacy: N/A
+      http_endpoint: http-intake.logs.uk1.datadoghq.com
+      http_endpoint_full: "https://http-intake.logs.uk1.datadoghq.com"
+      http_endpoint_private_link: gold.intake.uk1.datadoghq.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.uk1.datadoghq.com"
+      ip_ranges_url_api: "https://ip-ranges.uk1.datadoghq.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.uk1.datadoghq.com/webhooks.json"
+      jenkins_site_name: UK1
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.UK1)\n        .trackCrashes(true)"
+      lambda_endpoint: The lambda endpoint for UK1 is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.uk1.datadoghq.com
+      lambda_http_port: "443"
+      lambda_port: The lambda endpoint port for UK1 is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Uk1,"
+      mcp_server_endpoint: "https://mcp.uk1.datadoghq.com/v1/mcp"
+      mcp_xaa_issuer_url: "https://mcp.uk1.datadoghq.com/v1/mcp"
+      mcp_xaa_resource_url: "https://mcp.uk1.datadoghq.com/v1/mcp"
+      metrics_endpoint: metrics.agent.uk1.datadoghq.com
+      metrics_endpoint_private_link: beige.intake.uk1.datadoghq.com
+      microsoft_teams_app_name: Datadog
+      org_management_max_session_duration: "720 hours (30 days)"
+      otlp_logs_endpoint: "https://otlp.uk1.datadoghq.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.uk1.datadoghq.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.uk1.datadoghq.com/v1/traces"
+      process_endpoint: process.uk1.datadoghq.com
+      process_endpoint_private_link: bisque.intake.uk1.datadoghq.com
+      profiling_endpoint: intake.profile.uk1.datadoghq.com
+      profiling_endpoint_private_link: cyan.intake.uk1.datadoghq.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.uk1.datadoghq.com
+      remote_config_endpoint_private_link: violet.intake.uk1.datadoghq.com
+      roku_site: uk1
+      synthetics_intake_endpoint: intake.synthetics.uk1.datadoghq.com
+      synthetics_tunnel_endpoint: tunnel-uk1.synthetics.datadoghq.com
+      tcp_endpoint: The TCP endpoint for UK1 is not supported.
+      tcp_endpoint_port: The TCP endpoint port for UK1 is not supported.
+      tcp_endpoint_port_ssl: The TCP endpoint port for UK1 is not supported.
+      traces_endpoint: trace.agent.uk1.datadoghq.com
+      traces_endpoint_private_link: lime.intake.uk1.datadoghq.com
+      vercel_setup: "https://uk1.datadoghq.com/setup/vercel"
+      web_integrations_endpoint: intake.logs.uk1.datadoghq.com
+      web_integrations_port: "443"
+      web_integrations_unencrypted_port: "10514"
+
+  - key: gov
+    label: US1-FED
+    weight: 35
+    domain: ddog-gov.com
+    exact_domains:
+      - navy.oncall.datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.ddog-gov.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.ddog-gov.com
+      agent_http_port: "443"
+      api_endpoint: api.ddog-gov.com
+      api_endpoint_private_link: api.ddog-gov.com
+      aws_customer_access_govcloud_id: "065115117704"
+      aws_customer_access_id: "392588925713"
+      aws_private_link_api_service_name: The private link service for GOV is not supported.
+      aws_private_link_containers_service_name: The private link service for GOV is not supported.
+      aws_private_link_cross_region: N/A
+      aws_private_link_dbm_service_name: The private link service for GOV is not supported.
+      aws_private_link_logs_agent_service_name: The private link service for GOV is not supported.
+      aws_private_link_logs_user_service_name: The private link service for GOV is not supported.
+      aws_private_link_metrics_service_name: The private link service for GOV is not supported.
+      aws_private_link_process_service_name: The private link service for GOV is not supported.
+      aws_private_link_profiling_service_name: The private link service for GOV is not supported.
+      aws_private_link_remote_config_service_name: The private link service for GOV is not supported.
+      aws_private_link_traces_service_name: The private link service for GOV is not supported.
+      aws_region: N/A
+      browser_sdk_endpoint_domain: browser-intake-ddog-gov.com
+      containers_endpoint: orchestrator.ddog-gov.com
+      containers_endpoint_private_link: orchestrator.ddog-gov.com
+      cursor_mcp_install_deeplink: N/A
+      custom_costs_endpoint: The custom costs endpoint for GOV is not supported.
+      dbm_endpoint: dbm-metrics-intake.ddog-gov.com
+      dbm_endpoint_private_link: dbm-metrics-intake.ddog-gov.com
+      dd_api: "https://api.ddog-gov.com"
+      dd_datacenter: US1-FED
+      dd_datacenter_lowercase: us1_fed
+      dd_full_site: app.ddog-gov.com
+      dd_site: ddog-gov.com
+      dd_site_name: US1-FED
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: datadog-logs-v6.js
+      flutter_web_rum_cdn_path: datadog-rum-slim-v6.js
+      functions_endpoint: The GOV functions endpoint is not supported.
+      functions_port: The GOV functions endpoint port is not supported.
+      goose_mcp_install_deeplink: N/A
+      hipaa_logs_legacy: "lambda-tcp-encrypted-intake.logs.ddog-gov.com<br>gcp-encrypted-intake.logs.ddog-gov.com<br>http-encrypted-intake.logs.ddog-gov.com"
+      http_endpoint: http-intake.logs.ddog-gov.com
+      http_endpoint_full: "https://http-intake.logs.ddog-gov.com"
+      http_endpoint_private_link: http-intake.logs.ddog-gov.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.ddog-gov.com"
+      ip_ranges_url_api: "https://ip-ranges.ddog-gov.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.ddog-gov.com/webhooks.json"
+      jenkins_site_name: US1_FED
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)"
+      lambda_endpoint: The GOV lambda endpoint is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.ddog-gov.com
+      lambda_http_port: "443"
+      lambda_port: The GOV lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Us1Fed,"
+      mcp_server_endpoint: The MCP Server endpoint for GOV is not supported.
+      mcp_xaa_issuer_url: Cross-App Access is not supported for US1-FED.
+      mcp_xaa_resource_url: Cross-App Access is not supported for US1-FED.
+      metrics_endpoint: metrics.agent.ddog-gov.com
+      metrics_endpoint_private_link: metrics.agent.ddog-gov.com
+      microsoft_teams_app_name: Datadog for Government
+      org_management_max_session_duration: "12 hours"
+      otlp_logs_endpoint: "https://otlp.ddog-gov.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.ddog-gov.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.ddog-gov.com/v1/traces"
+      process_endpoint: process.ddog-gov.com
+      process_endpoint_private_link: process.ddog-gov.com
+      profiling_endpoint: intake.profile.ddog-gov.com
+      profiling_endpoint_private_link: intake.profile.ddog-gov.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.ddog-gov.com
+      remote_config_endpoint_private_link: config.ddog-gov.com
+      roku_site: us1_fed
+      synthetics_intake_endpoint: intake.synthetics.ddog-gov.com
+      synthetics_tunnel_endpoint: N/A
+      tcp_endpoint: The GOV TCP endpoint is not supported.
+      tcp_endpoint_port: The GOV TCP endpoint port is not supported.
+      tcp_endpoint_port_ssl: The GOV TCP endpoint port is not supported.
+      traces_endpoint: trace.agent.ddog-gov.com
+      traces_endpoint_private_link: trace.agent.ddog-gov.com
+      vercel_setup: "https://app.ddog-gov.com/setup/vercel"
+      web_integrations_endpoint: The GOV web integrations endpoint port is not supported.
+      web_integrations_port: The GOV web integrations endpoint port is not supported.
+      web_integrations_unencrypted_port: The GOV web integrations endpoint port is not supported.
+
+  - key: gov2
+    label: US2-FED
+    weight: 40
+    domain: us2.ddog-gov.com
+    exact_domains:
+      - navy.oncall.datadoghq.com
+    values:
+      agent_http_endpoint: agent-http-intake.logs.us2.ddog-gov.com
+      agent_http_endpoint_private_link: agent-http-intake.logs.us2.ddog-gov.com
+      agent_http_port: "443"
+      api_endpoint: api.us2.ddog-gov.com
+      api_endpoint_private_link: api.us2.ddog-gov.com
+      aws_customer_access_govcloud_id: "486737091498"
+      aws_customer_access_id: "382742775718"
+      aws_private_link_api_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_containers_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_cross_region: N/A
+      aws_private_link_dbm_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_logs_agent_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_logs_user_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_metrics_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_process_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_profiling_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_remote_config_service_name: The private link service for US2-FED is not supported.
+      aws_private_link_traces_service_name: The private link service for US2-FED is not supported.
+      aws_region: us-gov-west-1
+      browser_sdk_endpoint_domain: browser-intake-us2-ddog-gov.com
+      containers_endpoint: orchestrator.us2.ddog-gov.com
+      containers_endpoint_private_link: orchestrator.us2.ddog-gov.com
+      cursor_mcp_install_deeplink: N/A
+      custom_costs_endpoint: The US2-FED custom costs endpoint is not supported.
+      dbm_endpoint: dbm-metrics-intake.us2.ddog-gov.com
+      dbm_endpoint_private_link: dbm-metrics-intake.us2.ddog-gov.com
+      dd_api: "https://api.us2.ddog-gov.com"
+      dd_datacenter: US2-FED
+      dd_datacenter_lowercase: us2_fed
+      dd_full_site: us2.ddog-gov.com
+      dd_site: us2.ddog-gov.com
+      dd_site_name: US2-FED
+      dogwrap_site_flag: ""
+      flutter_web_logs_cdn_path: datadog-logs-v6.js
+      flutter_web_rum_cdn_path: datadog-rum-slim-v6.js
+      functions_endpoint: The US2-FED functions endpoint is not supported.
+      functions_port: The US2-FED functions endpoint port is not supported.
+      # filled: absent from regions.config.js; see FILL note in the region plan
+      goose_mcp_install_deeplink: N/A
+      hipaa_logs_legacy: N/A
+      http_endpoint: http-intake.logs.us2.ddog-gov.com
+      http_endpoint_full: "https://http-intake.logs.us2.ddog-gov.com"
+      http_endpoint_private_link: http-intake.logs.us2.ddog-gov.com
+      http_port: "443"
+      ip_ranges_url: "https://ip-ranges.us2.ddog-gov.com"
+      ip_ranges_url_api: "https://ip-ranges.us2.ddog-gov.com/api.json"
+      ip_ranges_url_webhooks: "https://ip-ranges.us2.ddog-gov.com/webhooks.json"
+      jenkins_site_name: US2_FED
+      kotlin_multiplatform_site_config: "\n        .useSite(DatadogSite.US2_FED)\n        .trackCrashes(true)"
+      lambda_endpoint: The US2-FED lambda endpoint is not supported.
+      lambda_http_endpoint: lambda-http-intake.logs.us2.ddog-gov.com
+      lambda_http_port: "443"
+      lambda_port: The US2-FED lambda endpoint port is not supported.
+      maui_site_config: "\n    Site = DatadogSite.Us1Fed,"
+      mcp_server_endpoint: The MCP Server endpoint for US2-FED is not supported.
+      mcp_xaa_issuer_url: Cross-App Access is not supported for US2-FED.
+      mcp_xaa_resource_url: Cross-App Access is not supported for US2-FED.
+      metrics_endpoint: metrics.agent.us2.ddog-gov.com
+      metrics_endpoint_private_link: metrics.agent.us2.ddog-gov.com
+      microsoft_teams_app_name: Datadog for Government
+      org_management_max_session_duration: "12 hours"
+      otlp_logs_endpoint: "https://otlp.us2.ddog-gov.com/v1/logs"
+      otlp_metrics_endpoint: "https://otlp.us2.ddog-gov.com/v1/metrics"
+      otlp_trace_endpoint: "https://otlp.us2.ddog-gov.com/v1/traces"
+      process_endpoint: process.us2.ddog-gov.com
+      process_endpoint_private_link: process.us2.ddog-gov.com
+      profiling_endpoint: intake.profile.us2.ddog-gov.com
+      profiling_endpoint_private_link: intake.profile.us2.ddog-gov.com
+      reactnative_sdk_init: ""
+      remote_config_endpoint: config.us2.ddog-gov.com
+      remote_config_endpoint_private_link: config.us2.ddog-gov.com
+      roku_site: us2_fed
+      synthetics_intake_endpoint: intake.synthetics.us2.ddog-gov.com
+      synthetics_tunnel_endpoint: N/A
+      tcp_endpoint: The US2-FED TCP endpoint is not supported.
+      tcp_endpoint_port: The US2-FED TCP endpoint port is not supported.
+      tcp_endpoint_port_ssl: The US2-FED TCP endpoint port is not supported.
+      traces_endpoint: trace.agent.us2.ddog-gov.com
+      traces_endpoint_private_link: trace.agent.us2.ddog-gov.com
+      vercel_setup: "https://us2.ddog-gov.com/setup/vercel"
+      web_integrations_endpoint: The US2-FED web integrations endpoint port is not supported.
+      web_integrations_port: The US2-FED web integrations endpoint port is not supported.
+      web_integrations_unencrypted_port: The US2-FED web integrations endpoint port is not supported.

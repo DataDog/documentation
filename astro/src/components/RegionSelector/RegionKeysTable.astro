@@ -1,0 +1,27 @@
+---
+// Region keys and labels for the RegionSelector test page, built from the same
+// list the selector renders, so the table can't drift from the dropdown.
+// Plain table markup on purpose: it matches what a Markdoc table renders, so
+// the surrounding prose table styles apply unchanged.
+import { buildClientRegions } from "@config/regions";
+
+const regions = buildClientRegions();
+---
+
+<table>
+  <thead>
+    <tr><th>Key</th><th>Label</th></tr>
+  </thead>
+  <tbody>
+    {
+      regions.map((region) => (
+        <tr>
+          <td>
+            <code>{region.key}</code>
+          </td>
+          <td>{region.label}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

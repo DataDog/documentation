@@ -89,8 +89,6 @@ For installation and configuration instructions, see the [Buildkite integration 
 
 ### Collect job steps
 
-<div class="alert alert-info">Steps for Buildkite are in Preview. Contact your Datadog representative to sign up.</div>
-
 Datadog creates steps for each Buildkite job from the job's [log groups][26]. Each log group becomes a step under its job, with the group's name and duration.
 
 Steps require job logs. To collect steps:

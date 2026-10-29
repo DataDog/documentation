@@ -855,8 +855,8 @@
   "CreateCaseNotebook": {
     "description": "Create a new investigation notebook and link it to a work item",
     "summary": "Create investigation notebook for work item",
-    "request_description": "Notebook creation request",
-    "request_schema_description": "Notebook creation request"
+    "request_description": "Case investigation notebook creation request.",
+    "request_schema_description": "Case investigation notebook creation request."
   },
   "MoveCaseToProject": {
     "description": "Update the project associated with a work item",
@@ -1194,7 +1194,7 @@
     "summary": "Get all Container Images"
   },
   "ListContainers": {
-    "description": "Get all containers for your organization.",
+    "description": "Get all containers for your organization. Use `group_by` to return container groups with counts.\nGrouped results are limited by `page[size]` and do not support pagination.\n\nTo get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`\nor `/api/v2/query/timeseries`.",
     "summary": "Get All Containers"
   },
   "GetCostAccountFilters": {
@@ -2341,7 +2341,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
@@ -7244,20 +7244,6 @@
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
-  },
-  "GetSPARecommendationsV2": {
-    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA recommendations v2",
-    "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
-  },
-  "GetSPARecommendations": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
-    "summary": "Get SPA Recommendations"
-  },
-  "GetSPARecommendationsWithShard": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA Recommendations with a shard parameter"
   },
   "AggregateSpans": {
     "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
