@@ -9,13 +9,11 @@
   {{- errorf "otel-compatibility: site.Data.otel_compatibility is missing. Check the shared/otel_compatibility.yaml mount in config/_default/config.yaml." -}}
 {{- end -}}
 
-{{- /* Index SDKs, receivers, and groups by id, and check that every id the file uses exists */ -}}
+{{- /* Index SDKs and receivers by id, and check that every id the file uses exists */ -}}
 {{- $sdks := dict -}}
 {{- range $data.sdks }}{{ $sdks = merge $sdks (dict .id .) }}{{ end -}}
 {{- $receivers := dict -}}
 {{- range $data.receivers }}{{ $receivers = merge $receivers (dict .id .) }}{{ end -}}
-{{- $groupIDs := slice -}}
-{{- range $data.groups }}{{ $groupIDs = $groupIDs | append .id }}{{ end -}}
 {{- $pairIDs := slice -}}
 {{- range $data.pairs -}}
   {{- if not (isset $sdks .sdk) }}{{ errorf "otel_compatibility.yaml: pair uses unknown sdk %q" .sdk }}{{ end -}}
@@ -28,22 +26,11 @@
   {{- range $f.overrides -}}
     {{- if not (in $pairIDs (printf "%s.%s" .sdk .receiver)) }}{{ errorf "otel_compatibility.yaml: feature %s overrides %s + %s, which is not in pairs" $f.id .sdk .receiver }}{{ end -}}
   {{- end -}}
-  {{- if and $groupIDs (not (in $groupIDs $f.group)) }}{{ errorf "otel_compatibility.yaml: feature %s has group %q, which is not in groups" $f.id $f.group }}{{ end -}}
 {{- end -}}
 
 {{- $agentText := dict "included" "Included" "optional" "Optional" "none" "Not used" -}}
 {{- $agentLine := dict "included" "Includes the Datadog Agent" "optional" "Datadog Agent optional" "none" "No Datadog Agent" -}}
 {{- $uid := printf "otel-compat-%d" .Ordinal -}}
-
-{{- /* Table sections: one per group, or a single unlabeled section when the file has no groups */ -}}
-{{- $sections := slice -}}
-{{- if $data.groups -}}
-  {{- range $data.groups -}}
-    {{- $sections = $sections | append (dict "id" .id "label" .label "features" (where $data.features "group" .id)) -}}
-  {{- end -}}
-{{- else -}}
-  {{- $sections = slice (dict "id" "" "label" "" "features" $data.features) -}}
-{{- end -}}
 
 <div class="otel-compat" id="{{ $uid }}" data-otel-compat>
   <div class="otel-compat__controls exclude-from-md" hidden>
@@ -90,9 +77,9 @@
             <dl class="otel-compat__fields">
               {{- range $field := slice (dict "role" "sdk" "label" "SDK" "item" $sdk) (dict "role" "receiver" "label" "Sends to" "item" $receiver) }}
               {{- $tipID := printf "%s-%s-%s-%s" $uid $p.sdk $p.receiver $field.role }}
-              <div data-field="{{ $field.role }}"><dt>{{ $field.label }}</dt><dd><span class="otel-compat__value">
+              <div data-field="{{ $field.role }}"><dt>{{ $field.label }}</dt><dd>{{ if eq $field.role "receiver" }}<span class="otel-compat__plus">+ </span>{{ end }}<span class="otel-compat__value">
                 {{- with $field.item.description -}}
-                <span class="tooltip-container"><button type="button" class="tooltip-trigger" aria-describedby="{{ $tipID }}">{{ $field.item.label }}</button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ . }}</span></span>
+                <span class="tooltip-container"><span class="tooltip-trigger" tabindex="0" aria-describedby="{{ $tipID }}">{{ $field.item.label }}</span><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ . }}</span></span>
                 {{- else -}}
                 {{ $field.item.label }}
                 {{- end -}}
@@ -113,13 +100,7 @@
         </tr>
       </thead>
       <tbody>
-        {{- range $section := $sections }}
-        {{- if and $section.label $section.features }}
-        <tr class="otel-compat__section-row" data-section="{{ $section.id }}">
-          <th scope="colgroup" colspan="{{ add (len $data.pairs) 1 }}"><span>{{ $section.label }}</span></th>
-        </tr>
-        {{- end }}
-        {{- range $f := $section.features }}
+        {{- range $f := $data.features }}
         <tr data-feature="{{ $f.id }}"{{ if $f.requires_agent }} data-requires-agent="true"{{ end }}>
           <th scope="row">
             {{- if $f.link }}<a href="{{ $f.link | relLangURL }}">{{ $f.label }}</a>{{ else }}{{ $f.label }}{{ end }}
@@ -153,7 +134,6 @@
           </td>
           {{- end }}
         </tr>
-        {{- end }}
         {{- end }}
       </tbody>
     </table>

@@ -192,27 +192,6 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       background: $gray-lightest;
       vertical-align: bottom;
     }
-
-    // Section headings span the table; the label stays put while the table scrolls sideways
-    .otel-compat__section-row th {
-      position: static;
-      width: auto;
-      min-width: 0;
-      padding-top: 0.9rem;
-      border-left: 0;
-      border-right: 0;
-      background: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: $gray-dark;
-
-      span {
-        position: sticky;
-        left: 0.6rem;
-      }
-    }
   }
 
   &__head {
@@ -275,6 +254,10 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     text-decoration: none;
   }
 
+  &__plus {
+    color: $gray-darkish;
+  }
+
   &__value .tooltip-trigger {
     font-weight: inherit;
     text-align: left;
@@ -314,7 +297,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
   }
 
-  &[data-view="compare"] &__agent-line {
+  &[data-view="compare"] &__agent-line,
+  &[data-view="compare"] &__plus {
     display: none;
   }
 

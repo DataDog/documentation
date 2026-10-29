@@ -38,17 +38,6 @@ receivers:
     description: Your applications send OTLP straight to Datadog, with no Collector or Agent.
     agent: none
 
-# Sections of the feature table, in display order.
-groups:
-  - id: apm
-    label: APM
-  - id: infrastructure
-    label: Infrastructure
-  - id: security
-    label: Security
-  - id: other
-    label: Other products
-
 # Valid SDK and receiver combinations, in display order. Any pair not listed
 # here is disabled in the setup picker.
 pairs:
@@ -92,9 +81,30 @@ pairs:
     confirmed: false
 
 features:
+  - id: cloud_siem
+    label: Cloud SIEM
+    link: /security/cloud_siem/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
+  - id: correlated_telemetry
+    label: Correlated Traces, Metrics, Logs
+    link: /opentelemetry/correlate/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: supported
+
   - id: distributed_tracing
     label: Distributed Tracing
-    group: apm
     link: /tracing/trace_collection/
     sdk:
       datadog_sdk: supported
@@ -104,10 +114,9 @@ features:
       upstream_collector: supported
       otlp_intake: supported
 
-  - id: span_links
-    label: Span Links
-    group: apm
-    link: /tracing/trace_collection/span_links/
+  - id: agent_observability
+    label: Agent Observability
+    link: /llm_observability/instrument/otel_instrumentation/
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -116,24 +125,8 @@ features:
       upstream_collector: supported
       otlp_intake: supported
 
-  - id: trace_metrics
-    label: Trace Metrics
-    group: apm
-    link: /tracing/metrics/metrics_namespace/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: supported
-      otlp_intake:
-        support: partial
-        label: Sampled
-        note: Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure.
-
   - id: runtime_metrics
     label: Runtime Metrics
-    group: apm
     link: /tracing/metrics/runtime_metrics/
     sdk:
       datadog_sdk:
@@ -147,10 +140,9 @@ features:
       upstream_collector: supported
       otlp_intake: supported
 
-  - id: correlated_telemetry
-    label: Correlated Traces, Metrics, Logs
-    group: apm
-    link: /opentelemetry/correlate/
+  - id: span_links
+    label: Span Links
+    link: /tracing/trace_collection/span_links/
     sdk:
       datadog_sdk: supported
       otel_sdk: supported
@@ -159,9 +151,120 @@ features:
       upstream_collector: supported
       otlp_intake: supported
 
+  - id: trace_metrics
+    label: Trace Metrics
+    link: /tracing/metrics/metrics_namespace/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake:
+        support: partial
+        label: Sampled
+        note: Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure.
+
+  - id: database_monitoring
+    label: Database Monitoring
+    abbr: DBM
+    link: /opentelemetry/correlate/dbm_and_traces/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: infrastructure_host_list
+    label: Infrastructure Host List
+    link: /infrastructure/list/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: not_supported
+
+  - id: cloud_network_monitoring
+    label: Cloud Network Monitoring
+    abbr: CNM
+    link: /network_monitoring/performance/
+    note: Span-level or endpoint-level monitoring is not supported.
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: kubernetes_monitoring
+    label: Kubernetes Monitoring
+    link: /containers/monitoring/kubernetes_explorer/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: supported
+      otlp_intake: not_supported
+
+  - id: live_container_monitoring
+    label: Live Container Monitoring
+    link: /containers/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: live_processes
+    label: Live Processes
+    link: /infrastructure/process/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: universal_service_monitoring
+    label: Universal Service Monitoring
+    abbr: USM
+    link: /universal_service_monitoring/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: supported
+    receiver:
+      agents_collector: supported
+      upstream_collector: not_supported
+      otlp_intake: not_supported
+
+  - id: app_and_api_protection
+    label: App and API Protection
+    abbr: AAP
+    link: /security/application_security/
+    sdk:
+      datadog_sdk: supported
+      otel_sdk: not_supported
+    receiver:
+      agents_collector: supported
+    overrides:
+      - sdk: otel_sdk
+        receiver: upstream_collector
+        support: not_supported
+      - sdk: otel_sdk
+        receiver: otlp_intake
+        support: not_supported
+
   - id: continuous_profiler
     label: Continuous Profiler
-    group: apm
     link: /profiler/
     sdk:
       datadog_sdk: supported
@@ -176,10 +279,10 @@ features:
         receiver: otlp_intake
         support: not_supported
 
-  - id: source_code_integration
-    label: Source code integration
-    group: apm
-    link: /integrations/guide/source-code-integration/
+  - id: data_jobs_monitoring
+    label: "Data Observability: Jobs Monitoring"
+    abbr: DJM
+    link: /data_jobs/
     sdk:
       datadog_sdk: supported
       otel_sdk: not_supported
@@ -193,22 +296,8 @@ features:
         receiver: otlp_intake
         support: not_supported
 
-  - id: database_monitoring
-    label: Database Monitoring
-    group: apm
-    abbr: DBM
-    link: /opentelemetry/correlate/dbm_and_traces/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: not_supported
-      otlp_intake: not_supported
-
   - id: data_streams_monitoring
     label: Data Streams Monitoring
-    group: apm
     abbr: DSM
     link: /data_streams/
     sdk:
@@ -225,114 +314,8 @@ features:
         label: N/A
         note: OTel does not offer DSM functionality.
 
-  - id: infrastructure_host_list
-    label: Infrastructure Host List
-    group: infrastructure
-    link: /infrastructure/list/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: supported
-      otlp_intake: not_supported
-
-  - id: kubernetes_monitoring
-    label: Kubernetes Monitoring
-    group: infrastructure
-    link: /containers/monitoring/kubernetes_explorer/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: supported
-      otlp_intake: not_supported
-
-  - id: live_container_monitoring
-    label: Live Container Monitoring
-    group: infrastructure
-    link: /containers/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: not_supported
-      otlp_intake: not_supported
-
-  - id: live_processes
-    label: Live Processes
-    group: infrastructure
-    link: /infrastructure/process/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: not_supported
-      otlp_intake: not_supported
-
-  - id: cloud_network_monitoring
-    label: Cloud Network Monitoring
-    group: infrastructure
-    abbr: CNM
-    link: /network_monitoring/performance/
-    note: Span-level or endpoint-level monitoring is not supported.
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: not_supported
-      otlp_intake: not_supported
-
-  - id: universal_service_monitoring
-    label: Universal Service Monitoring
-    group: infrastructure
-    abbr: USM
-    link: /universal_service_monitoring/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: not_supported
-      otlp_intake: not_supported
-
-  - id: cloud_siem
-    label: Cloud SIEM
-    group: security
-    link: /security/cloud_siem/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: supported
-      otlp_intake: supported
-
-  - id: app_and_api_protection
-    label: App and API Protection
-    group: security
-    abbr: AAP
-    link: /security/application_security/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: not_supported
-    receiver:
-      agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
-
   - id: real_user_monitoring
     label: Real User Monitoring
-    group: other
     abbr: RUM
     link: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
     note: To turn on full RUM functionality, inject supported headers to correlate RUM and traces.
@@ -349,23 +332,9 @@ features:
         receiver: otlp_intake
         support: not_supported
 
-  - id: agent_observability
-    label: Agent Observability
-    group: other
-    link: /llm_observability/instrument/otel_instrumentation/
-    sdk:
-      datadog_sdk: supported
-      otel_sdk: supported
-    receiver:
-      agents_collector: supported
-      upstream_collector: supported
-      otlp_intake: supported
-
-  - id: data_jobs_monitoring
-    label: "Data Observability: Jobs Monitoring"
-    group: other
-    abbr: DJM
-    link: /data_jobs/
+  - id: source_code_integration
+    label: Source code integration
+    link: /integrations/guide/source-code-integration/
     sdk:
       datadog_sdk: supported
       otel_sdk: not_supported

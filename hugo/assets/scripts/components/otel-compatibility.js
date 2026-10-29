@@ -32,8 +32,7 @@ function initOtelCompat(root) {
     if (!table || !controls) return;
 
     const headerRow = table.tHead.rows[0];
-    const bodyRows = [...table.tBodies[0].rows];
-    const featureRows = bodyRows.filter((row) => row.dataset.feature);
+    const featureRows = [...table.tBodies[0].rows];
     const holder = controls.querySelector('.otel-compat__holder');
 
     const headers = new Map([...headerRow.querySelectorAll('th[data-pair]')].map((th) => [th.dataset.pair, th]));
@@ -178,20 +177,6 @@ function initOtelCompat(root) {
             row.hidden = same;
             if (same) hiddenRows += 1;
         });
-
-        // Hide a section heading when every feature under it is hidden
-        let sectionRow = null;
-        let sectionHasRows = false;
-        bodyRows.forEach((row) => {
-            if (!row.dataset.feature) {
-                if (sectionRow) sectionRow.hidden = !sectionHasRows;
-                sectionRow = row;
-                sectionHasRows = false;
-            } else if (!row.hidden) {
-                sectionHasRows = true;
-            }
-        });
-        if (sectionRow) sectionRow.hidden = !sectionHasRows;
 
         if (filterDiff && hiddenRows === featureRows.length) {
             status.textContent = 'These setups support the same features.';
