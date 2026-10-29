@@ -213,7 +213,6 @@ To enable durable function instrumentation, add the following settings to your `
 <!-- vale off -->
 {{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
 {{< programming-lang lang="nodejs" >}}
-<!-- vale on -->
 ```json
 {
   "extensions": {
