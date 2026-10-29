@@ -1,8 +1,8 @@
 ---
 title: Cross-App Access
-description: Configure Okta Cross-App Access so AI agents can call the Datadog API on behalf of users authorized in Okta.
+description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users authorized in your identity provider, such as Okta.
 algolia:
-  tags: ["cross-app access", "XAA", "Okta", "AI agent", "MCP", "ID-JAG"]
+  tags: ["cross-app access", "XAA", "Okta", "OIDC", "AI agent", "MCP", "ID-JAG"]
 further_reading:
     - link: '/mcp_server/setup/'
       tag: 'Documentation'
@@ -21,7 +21,7 @@ Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users yo
 
 Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
 
-In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent.
+In Preview, Cross-App Access supports Claude as the only agent. Okta is supported for every organization. Other OIDC-compliant identity providers are also in Preview and must be enabled for your organization; contact [Datadog support](/help/) to request access. This page walks through Okta. For another provider, see [Use another OIDC identity provider](#use-another-oidc-identity-provider).
 
 ## Values you exchange
 
@@ -53,14 +53,18 @@ Navigate to [{{< ui >}}Organization Settings > Cross-App Access{{< /ui >}}](http
 
 Click {{< ui >}}Enable{{< /ui >}}. This applies to your whole organization. Click {{< ui >}}Disable{{< /ui >}} to turn Cross-App Access off later.
 
-### Set your Okta issuer URL
+### Set your issuer URL
 
-In the {{< ui >}}Issuer URL{{< /ui >}} field, enter the issuer URL of your own Okta tenant, then click {{< ui >}}Save{{< /ui >}}. Datadog derives the location of the token signing keys from this value, so it must be exact.
+In the {{< ui >}}Issuer URL{{< /ui >}} field, enter the issuer URL of your identity provider, then click {{< ui >}}Save{{< /ui >}}. Datadog accepts a token only when its `iss` claim matches this value exactly, and derives the location of the token signing keys from it.
 
-The issuer URL must meet all of the following, or Datadog rejects it:
+Every issuer URL must meet all of the following, or Datadog rejects it:
 
 - Use `https`.
-- Use a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not work.
+- Use a fully qualified, lowercase domain name. IP addresses, ports, user names, query strings, and fragments are not allowed.
+
+An Okta issuer URL must also be a bare subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`, with no path or trailing slash. Datadog rejects the apex domain, so `https://example.okta.com` works and `https://okta.com` does not work.
+
+Any other issuer URL must match the `issuer` value in the provider's `/.well-known/openid-configuration` document character for character, including any path or trailing slash. Datadog rejects hostnames that belong to Datadog, internal-only names such as `.internal` or `.local`, and shared issuers that many unrelated tenants sign with, such as `https://accounts.google.com`.
 
 Click {{< ui >}}Remove{{< /ui >}} to unset the issuer. Datadog stops accepting tokens after you remove it.
 
@@ -96,7 +100,7 @@ curl -X PATCH "{{< region-param key="dd_api" >}}/api/v2/org_configs/mcp_cross_ap
   }'
 ```
 
-Set the Okta issuer URL. The same validation rules apply, and a value that breaks them returns `400`. Sending an empty string unsets the issuer.
+Set the issuer URL. The same validation rules apply, and a value that breaks them returns `400` with the reason. Sending an empty string unsets the issuer.
 
 ```shell
 curl -X PUT "{{< region-param key="dd_api" >}}/api/v2/login/org_configs/mcp_cross_app_access_issuer_url" \
@@ -165,6 +169,17 @@ On the Claude AI Agent, add the Claude SAML application as a delegated caller, t
    | {{< ui >}}Scope Condition{{< /ui >}}       | {{< ui >}}Allow all{{< /ui >}}, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 4. Activate the agent from the {{< ui >}}Actions{{< /ui >}} menu.
+
+## Use another OIDC identity provider
+
+If your organization is enabled for other identity providers, you can use any OIDC-compliant provider that issues ID-JAGs. Configure Datadog as described in [Configure Cross-App Access in Datadog](#configure-cross-app-access-in-datadog), entering your provider's issuer URL. Then configure your provider to issue ID-JAGs for Datadog that meet these requirements:
+
+- **Discovery**: The provider publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you saved in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet.
+- **Signature**: The token's `typ` header is `oauth-id-jag+jwt`, and it is signed with an asymmetric algorithm (RSA, ECDSA, or EdDSA) using a key published at the `jwks_uri`.
+- **Audience**: The `aud` claim contains the Datadog issuer URL shown in [Finish the setup in Okta](#finish-the-setup-in-okta) for your Datadog site, and `aud_tenant` is your Datadog organization UUID.
+- **Client**: The `client_id` claim is the agent client ID from the [{{< ui >}}Registered client IDs{{< /ui >}}](#copy-the-agent-client-id) table.
+- **User**: The `sub_id` claim identifies the user by their SAML assertion, with `format` set to `saml-nameid`, `nameid` set to the user's Datadog handle, `nameid_format` set, and `issuer` set to the entity ID of the SAML identity provider configured for your Datadog organization. Datadog rejects tokens without a matching SAML identity, so your organization must use SAML single sign-on, as with Okta.
+- **Lifetime**: The token carries `exp`, `iat`, and a unique `jti`. Datadog rejects a `jti` it has already seen.
 
 ## Control scopes in Datadog
 
