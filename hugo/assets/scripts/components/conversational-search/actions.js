@@ -2,6 +2,8 @@ import { logAction } from './logger';
 
 const feedbackHideTimers = new WeakMap();
 
+export const MAX_FEEDBACK_COMMENT_CHARS = 500;
+
 export function addMessageActions(messageDiv, query, response, ctx) {
     const template = document.getElementById('conv-search-actions-template');
     if (!template) return;
@@ -83,6 +85,13 @@ function handleMessageAction(action, query, response, button, ctx) {
                     conversation_id: ctx.conversationId
                 }
             }, ctx);
+
+            // Only completed answers can be rated: the others have no feedback sender.
+            if (!ctx.sendFeedback) break;
+            const rating = action === 'thumbs-up' ? 'up' : 'down';
+            ctx.sendFeedback({ rating });
+            if (rating === 'down') showCommentForm(button.parentElement, ctx);
+            else removeCommentForm(button.parentElement);
             break;
         }
 
@@ -114,6 +123,66 @@ function handleMessageAction(action, query, response, button, ctx) {
             break;
         }
     }
+}
+
+function removeCommentForm(actionsDiv) {
+    const next = actionsDiv.nextElementSibling;
+    if (next && next.classList.contains('conv-search-feedback-form')) next.remove();
+}
+
+// An optional note after a thumbs-down, sent once per answer.
+function showCommentForm(actionsDiv, ctx) {
+    const next = actionsDiv.nextElementSibling;
+    if (actionsDiv.dataset.commented || (next && next.classList.contains('conv-search-feedback-form'))) return;
+
+    const form = document.createElement('form');
+    form.className = 'conv-search-feedback-form';
+
+    const field = document.createElement('textarea');
+    field.className = 'conv-search-feedback-comment';
+    field.rows = 2;
+    field.maxLength = MAX_FEEDBACK_COMMENT_CHARS;
+    field.placeholder = 'What could be better? (optional)';
+    field.setAttribute('aria-label', 'What could be better?');
+
+    const buttons = document.createElement('div');
+    buttons.className = 'conv-search-feedback-form-buttons';
+    const dismiss = document.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'conv-search-feedback-dismiss';
+    dismiss.textContent = 'Not now';
+    const send = document.createElement('button');
+    send.type = 'submit';
+    send.className = 'conv-search-feedback-send';
+    send.textContent = 'Send';
+    send.disabled = true;
+    buttons.append(dismiss, send);
+    form.append(field, buttons);
+
+    field.addEventListener('input', () => {
+        send.disabled = !field.value.trim();
+    });
+    dismiss.addEventListener('click', () => form.remove());
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const comment = field.value.trim();
+        if (!comment) return;
+        ctx.sendFeedback({ comment });
+        logAction('Conversational Search Feedback Comment', {
+            conversational_search: {
+                action: 'feedback_comment',
+                comment_length: comment.length,
+                conversation_id: ctx.conversationId
+            }
+        }, ctx);
+        actionsDiv.dataset.commented = 'true';
+        form.remove();
+        const thumbsDown = actionsDiv.querySelector('[data-action="thumbs-down"]');
+        if (thumbsDown) showFeedbackTooltip(thumbsDown, 'Thanks, this helps us improve!');
+    });
+
+    actionsDiv.after(form);
+    form.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
 }
 
 function showFeedbackTooltip(button, message, isError = false) {
