@@ -178,18 +178,11 @@ The Amazon Bedrock integration instruments the following methods:
 - [Conversations][4] (requires `dd-trace>=5.106.0`):
   - `Converse`
   - `ConverseStream`
-- [Bidirectional audio streaming with Amazon Nova 2 Sonic][5]:
-  - `InvokeModelWithBidirectionalStream`
-
-Nova 2 Sonic tracing requires `@aws-sdk/client-bedrock-runtime>=3.785.0` and `dd-trace>=5.133.0` on v5 or `>=6.22.0` on v6.
-
-For Nova 2 Sonic, use model ID `amazon.nova-2-sonic-v1:0` or its foundation model ARN. The integration records each audio turn, including the LLM response and user and agent speech phases.
 
 [1]: /integrations/amazon-bedrock
 [2]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
 [4]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-[5]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithBidirectionalStream.html
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -704,7 +697,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, embeddings, and Responses endpoints to OpenAI and [Azure OpenAI][3]. It also traces OpenAI Realtime API conversations.
+The [OpenAI integration][1] provides automatic tracing for the [OpenAI Node.js SDK's][2] completion, chat completion, embeddings, and Responses endpoints to OpenAI and [Azure OpenAI][3].
 
 **Package name:** `openai`\
 **Integration name:** `openai`
@@ -724,12 +717,6 @@ The OpenAI integration instruments the following methods, including streamed cal
   - `openai.responses.create()` (as of `dd-trace@5.76.0`)
 
 The integration also traces `openai.decisions.create()` calls. Decisions tracing requires `openai>=7.30.0` and `dd-trace>=5.133.0` on v5 or `>=6.22.0` on v6.
-
-### Realtime API
-
-The integration traces conversations through `OpenAIRealtimeWS` and `OpenAIRealtimeWebSocket`. It records each turn, its LLM response, and user and agent speech phases.
-
-Realtime tracing requires `dd-trace>=5.128.0` on v5 or `>=6.17.0` on v6. Use `openai>=5.17.0` for the `openai/realtime/*` imports. The integration also supports the older `openai/beta/realtime/*` imports.
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
