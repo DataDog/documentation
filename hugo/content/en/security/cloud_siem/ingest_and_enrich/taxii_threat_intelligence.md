@@ -49,11 +49,11 @@ An indicator published with `"revoked": true` is deleted from the reference tabl
 
 ## Prerequisites
 
-- Cloud SIEM is enabled for your organization.
+- Cloud SIEM is enabled for your organization
 - One or both of the following [permissions][5]:
   - Integrations Read to view TAXII servers and collections
   - Integrations Manage to add, change, or delete them
-- From your TIP: the server's API root URL, credentials if the server requires them, and the UUID of each collection you want to ingest.
+- From your TIP: the server's API root URL, credentials if the server requires them, and the UUID of each collection you want to ingest
 
 ## Add a TAXII server
 
