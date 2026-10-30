@@ -48,9 +48,9 @@ This setting leaves local flag evaluation, experiment exposures, trace enrichmen
 
 ## Evaluation-event privacy
 
-The SDK reads the environment's full-evaluation-data setting from the flag configuration used for each evaluation. The [Feature Flags API][4] exposes this setting as `observe_full_evaluation_data`; the configuration delivered to the SDK uses `observeFullEvaluationData`. Adding an attribute with either name to an OpenFeature evaluation context does not enable full data collection.
+To include original targeting keys and evaluation context in EVP flag evaluation events, set `observe_full_evaluation_data` to `true` for the environment using the [Feature Flags API][8]. The SDK receives this setting through flag configuration updates. Setting it in your application's evaluation context has no effect.
 
-| Setting in the delivered configuration | Targeting key in evaluation events | Evaluation context in evaluation events |
+| `observe_full_evaluation_data` (Feature Flags API) | Targeting key in EVP flag evaluation events | Evaluation context in EVP flag evaluation events |
 |---|---|---|
 | `false`, absent, or not a Boolean `true` | Non-empty targeting keys are represented by an unsalted SHA-256 digest with a `sha256_` prefix. | Omitted. |
 | `true` | Events can include the original targeting key. | Events can include a bounded snapshot of evaluation attributes. |
@@ -105,3 +105,4 @@ For Node.js, keep `dd-trace` external to a single-file application bundle and ma
 [4]: /api/latest/feature-flags/#get-an-environment
 [5]: /feature_flags/concepts/configuration_sources/#use-agentless-delivery
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[8]: /api/latest/feature-flags/#update-an-environment
