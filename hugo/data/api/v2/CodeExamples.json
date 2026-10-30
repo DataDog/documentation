@@ -1,4 +1,21 @@
 {
+  "EvaluateAIGuardRequest": [
+    {
+      "group": "ai_guard",
+      "suffix": "",
+      "description": "Evaluate an AI Guard request returns \"OK\" response"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_3923646360",
+      "description": "Evaluate an AI Guard request with a numeric confidence threshold"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_1377048937",
+      "description": "Evaluate an AI Guard request with per-category confidence thresholds"
+    }
+  ],
   "CreateApmRetentionFilter": [
     {
       "group": "apm_retention_filters",
@@ -341,13 +358,6 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
-    }
-  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -370,13 +380,6 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection policy returns \"Created\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
   "UpdateCSMThreatsAgentPolicy": [
@@ -482,6 +485,13 @@
       "group": "case_management_type",
       "suffix": "",
       "description": "Create a case type returns \"CREATED\" response"
+    }
+  ],
+  "CreateAWSCloudAuthIntakeMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
   "CreateCostAWSCURConfig": [
@@ -788,6 +798,16 @@
   "CreateExecutionPolicy": [
     {
       "group": "execution_policy",
+      "suffix": "_1868371302",
+      "description": "Create a Slack execution policy returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_3240435177",
+      "description": "Create a Slack execution policy with scope and targets returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
       "suffix": "",
       "description": "Create an execution policy returns \"Created\" response"
     },
@@ -802,6 +822,11 @@
       "group": "execution_policy",
       "suffix": "",
       "description": "Update an execution policy returns \"OK\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_2851872075",
+      "description": "Update an execution policy to Slack with scope and targets returns \"OK\" response"
     }
   ],
   "CancelExperiment": [
@@ -816,6 +841,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Create experiment metric group returns \"Created\" response"
+    }
+  ],
+  "CreateExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment protocol returns \"Created\" response"
     }
   ],
   "CreateExperiment": [
@@ -860,6 +892,13 @@
       "description": "Patch subject type returns \"OK\" response"
     }
   ],
+  "ReplaceExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Replace experiment protocol returns \"OK\" response"
+    }
+  ],
   "UpdateExperimentAnalysisPlanAttributes": [
     {
       "group": "experiments",
@@ -872,6 +911,13 @@
       "group": "experiments",
       "suffix": "",
       "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "PatchExperimentProtocol": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment protocol returns \"OK\" response"
     }
   ],
   "UpdateMetricCollection": [
@@ -921,6 +967,53 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    }
+  ],
+  "UpdateSavedFilterAttributes": [
+    {
+      "group": "feature_flags",
+      "suffix": "_3817543566",
+      "description": "Patch a saved filter accepts the current timestamp for metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2658080376",
+      "description": "Patch a saved filter accepts the current timestamp for rules"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4162852827",
+      "description": "Patch a saved filter clears the description with an empty string"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3212710506",
+      "description": "Patch a saved filter preserves a null description"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1937053112",
+      "description": "Patch a saved filter replaces rules and preserves metadata"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_727520235",
+      "description": "Patch a saved filter replaces the rules of a saved list"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "",
+      "description": "Patch a saved filter returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_1194333410",
+      "description": "Patch a saved filter updates metadata and rules together"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_281483245",
+      "description": "Patch a saved filter updates only the description of a saved list"
     }
   ],
   "UpdateFeatureFlag": [
@@ -1262,6 +1355,11 @@
       "group": "logs",
       "suffix": "_3138392594",
       "description": "Search logs returns \"OK\" response with pagination"
+    },
+    {
+      "group": "logs",
+      "suffix": "_2789021011",
+      "description": "Search logs with a page limit above 1000 returns \"OK\" response"
     }
   ],
   "SubmitLog": [
@@ -1401,13 +1499,6 @@
       "group": "logs_restriction_queries",
       "suffix": "",
       "description": "Grant role to a restriction query returns \"OK\" response"
-    }
-  ],
-  "CreateBulkTagsMetricsConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
   "CreateDerivedMetric": [
@@ -1955,6 +2046,16 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3666485614",
+      "description": "Validate an observability pipeline with spike protection processor returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3654691150",
+      "description": "Validate an observability pipeline with spike protection processor threshold overrides returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_337125830",
       "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
@@ -1992,6 +2093,11 @@
       "group": "on-call",
       "suffix": "",
       "description": "Create On-Call schedule returns \"Created\" response"
+    },
+    {
+      "group": "on-call",
+      "suffix": "_2169247120",
+      "description": "Create additive On-Call schedule returns \"Created\" response"
     }
   ],
   "CreateUserNotificationChannel": [
@@ -2096,12 +2202,24 @@
     {
       "group": "rum",
       "suffix": "",
-      "description": "Create a new RUM application returns \"OK\" response"
+      "description": "Create a new RUM application returns \"Created\" response"
     },
     {
       "group": "rum",
-      "suffix": "_1946294560",
-      "description": "Create a new RUM application with Product Scales returns \"OK\" response"
+      "suffix": "_4210432830",
+      "description": "Create a new RUM application with Product Scales returns \"Created\" response"
+    },
+    {
+      "group": "rum",
+      "suffix": "_3241419056",
+      "description": "Create a new RUM application without default retention filters returns \"Created\" response"
+    }
+  ],
+  "GetServiceRepositoryInfo": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get service repository information returns \"OK\" response"
     }
   ],
   "SearchRUMEvents": [
@@ -2637,6 +2755,13 @@
       "description": "Search security findings returns \"OK\" response with pagination"
     }
   ],
+  "StartSecurityMonitoringRuleProposal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Start a rule proposal returns \"Accepted\" response"
+    }
+  ],
   "SendSecurityMonitoringNotificationPreview": [
     {
       "group": "security_monitoring",
@@ -3078,7 +3203,7 @@
     {
       "group": "teams",
       "suffix": "",
-      "description": "Link Teams with GitHub Teams returns \"No Content\" response"
+      "description": "Link teams with external teams returns \"No Content\" response"
     }
   ],
   "UpdateTeamLink": [
@@ -3126,6 +3251,13 @@
       "group": "threat_intelligence",
       "suffix": "",
       "description": "Ingest STIX threat intelligence returns \"OK\" response"
+    }
+  ],
+  "UpdateTemporaryGrantRequest": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Decide a temporary grant request returns \"OK\" response"
     }
   ],
   "CreateUser": [

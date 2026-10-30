@@ -75,7 +75,7 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | Field  | Description                |
 |------------|----------------------------|
 | `PR Cycle Time`       | Total duration from the first commit to merge. |
-| `Time to PR Ready`       | Duration from the first commit to when the PR is marked as ready for review. |
+| `Time to PR Ready`       | Duration from the first commit or the pull request creation, whichever comes first, to when the PR is marked as ready for review. |
 | `Review Time`       | Duration from PR being marked ready for review to approval. |
 | `Merge Time`       | Duration from PR approval to merging. |
 | `Time to Deploy`       | Duration from merging to the start of deployment. |

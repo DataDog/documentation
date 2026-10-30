@@ -1,0 +1,63 @@
+<!-- param-enum: /api/latest/rendering-shapes/delete-a-rum-retention-quota-configuration/ -->
+<div class="api-endpoint__section _api-endpoint__section_071384" data-api-section="arguments">
+  <h3>Arguments</h3>
+  <div id="schema-table-X2" class="schema-table">
+    <h4>Path Parameters</h4>
+    <div class="schema-table__table _schema-table__table_d7636a">
+      <div class="schema-table__columns _schema-table__columns_d7636a">
+        <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+        <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+        <div class="schema-table__columns-description _schema-table__columns-description_d7636a">Description</div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="scope_type" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">scope_type</code
+            ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>
+              The type of scope the retention quota configuration applies to. <code>application</code> is the only
+              supported scope type.
+            </p>
+          </div>
+          <span class="schema-table__default _schema-table__default_d7636a"> Default: <code>application</code></span>
+          <div class="schema-table__enum _schema-table__enum_d7636a">Allowed enum values: <code>application</code></div>
+        </div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="scope_id" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">scope_id</code
+            ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">string</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>
+              The identifier of the scope the retention quota configuration applies to. For the
+              <code>application</code> scope, this is the RUM application ID.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <astro-island
+      uid="X1"
+      ssr=""
+      client="idle"
+      before-hydration-url="astro:scripts/before-hydration.js"
+      opts='{"name":"ApiSchemaTableNav","value":true}'
+      await-children=""
+      ><span hidden="" aria-hidden="true"></span><!--astro:end--></astro-island
+    >
+  </div>
+</div>

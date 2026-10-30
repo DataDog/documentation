@@ -127,3 +127,5 @@
 /*/tracing/live_debugger/_index.md
 /*/session_replay/_index.md
 /*/dd_e2e/cdocs/components/skill_callout.md
+/*/serverless/azure_container_apps/otel_managed_agent/_index.md
+/*/product_analytics/tracking_plans.md
