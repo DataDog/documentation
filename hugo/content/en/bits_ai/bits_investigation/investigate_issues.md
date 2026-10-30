@@ -13,7 +13,7 @@ further_reading:
 
 ## Start a Bits investigation
 
-You can launch a Bits investigation from several entry points:
+You can launch a Bits investigation from several entry points in the Datadog UI:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
@@ -22,6 +22,8 @@ You can launch a Bits investigation from several entry points:
 - [Real User Monitoring](#real-user-monitoring)
 - [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
+
+You can also use Bits Investigation from AI assistants, applications, and the command line. For more information, see the [Use Bits Investigation from MCP, the API, or the CLI](#use-bits-investigation-from-mcp-the-api-or-the-cli) section.
 
 ### Monitor alerts {#manual-monitor-alerts}
 
@@ -105,7 +107,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
 1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
-<div class="alert alert-info"><ul><li>Enabling automatic investigations using the Datadog API or Terraform is not supported.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
+<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="#use-bits-investigation-from-mcp-the-api-or-the-cli">Use Bits Investigation from MCP, the API, or the CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
 
 ### Supported monitors
@@ -122,6 +124,43 @@ Bits is able to run investigations on the following monitor types:
   - SLOs
   - Synthetics API and Browser tests
   - RUM
+
+## Use Bits Investigation from MCP, the API, or the CLI
+
+### Requirements
+
+Triggering and steering investigations requires the `Bits Investigations Write` [permission][15]. Searching and retrieving investigations requires `Bits Investigations Read`.
+
+### Datadog MCP Server
+
+The Datadog Model Context Protocol (MCP) Server's `investigator` toolset lets AI assistants trigger investigations for monitor alerts, incidents, or a natural-language description. The tools also support searching investigations, retrieving findings, and steering a running investigation with additional context.
+
+For available tools, required permissions, and example prompts, see [Investigations in the MCP tools reference][22]. To connect an AI assistant and enable the toolset, see [Set Up the Datadog MCP Server][23].
+
+Paste the following prompt into your AI assistant to enable the `investigator` toolset:
+
+{{< code-block lang="text" wrap="true" >}}
+Enable the "investigator" toolset (Bits AI investigations) on my Datadog MCP server.
+
+1. Find my Datadog MCP server config. It's the server whose URL is on a Datadog "mcp." host and ends in /api/unstable/mcp-server/mcp. Look in, for example, ~/.cursor/mcp.json or .cursor/mcp.json for Cursor, `claude mcp list` or ~/.claude.json for Claude Code, and ~/.codex/config.toml for Codex.
+2. Add "investigator" to the toolsets, keeping every toolset that's already there:
+   - If the URL has a `toolsets` query parameter, append `,investigator` to it.
+   - If the URL has no `toolsets` parameter, add `?toolsets=core,investigator`. Setting toolsets replaces the defaults, so `core` has to stay.
+   - If it uses `toolsets=all`, change it to `toolsets=all,investigator`. "all" doesn't include investigator yet.
+   - If the config sets an `X-Datadog-MCP-Toolsets` header instead, add `investigator` there. The header overrides the URL.
+3. Don't change anything else: not the host, auth, or other servers.
+4. Show me the before and after, then tell me to restart or reload the MCP server. Once it reconnects, confirm that tools like trigger_bits_ai_investigation, trigger_general_investigation, search_investigations, and get_bits_ai_investigation show up.
+{{< /code-block >}}
+
+### Bits AI API
+
+Use the Bits AI API to trigger, list, and retrieve investigations from applications and automation scripts. For request parameters, authentication, and code examples, see the [Bits AI API reference][24].
+
+### Pup CLI
+
+Use [pup][25], the Datadog command-line tool, to list, retrieve, and trigger investigations: `pup investigations list`, `pup investigations get`, and `pup investigations trigger`. The trigger command accepts an investigation request from a JSON file with `--file`.
+
+Run `pup investigations --help` for command usage and options.
 
 ## How Bits investigates
 When Bits investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
@@ -190,6 +229,10 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [19]: /real_user_monitoring/bits_ai/optimize_performance/
 [20]: /real_user_monitoring/bits_ai/investigate_regressions/
 [21]: /error_tracking/bits_investigation/
+[22]: /mcp_server/tools/#investigations
+[23]: /mcp_server/setup/
+[24]: /api/latest/bits-ai/
+[25]: https://github.com/DataDog/pup
 
 ## Further reading
 
