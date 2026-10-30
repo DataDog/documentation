@@ -15,9 +15,93 @@ entries:
       - ListTagConfigurations
     title: Correct parameter limits and metric types for Get a list of metrics
   - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40694
+    operations:
+      - CreateTagIndexingRuleExemption
+      - GetTagIndexingRuleExemption
+    title: Add impact fields to tag indexing rule exemptions
+  - change_type: modified
     date: '2026-10-22'
     link: https://github.com/DataDog/documentation/pull/40849
     operations:
       - QueryMetrics
     title: Document missing response fields for the v1 Query timeseries points 
       endpoint
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40908
+    operations:
+      - QueryScalarData
+      - QueryTimeseriesData
+    title: Document Processes API time window, retention, and filter semantics
+  - change_type: added
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41029
+    operations:
+      - ListTagIndexingRuleExemptions
+    title: Add tag indexing rule exemptions list endpoint
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41029
+    operations:
+      - CreateTagIndexingRuleExemption
+    title: Add tag indexing rule exemptions list endpoint
+  - change_type: added
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - UpdateTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - DeleteTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41146
+    operations:
+      - CreateBulkTagsMetricsConfiguration
+      - DeleteBulkTagsMetricsConfiguration
+    title: Move metric bulk-tags endpoints sunset date to 2026-11-01
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41191
+    operations:
+      - CreateDerivedMetric
+      - CreateHistoricalMetricsConfiguration
+      - CreateTagIndexingRule
+      - CreateTagIndexingRuleExemption
+      - DeleteDerivedMetric
+      - DeleteHistoricalMetricsConfiguration
+      - DeleteTagIndexingRule
+      - DeleteTagIndexingRuleExemption
+      - EstimateMetricsOutputSeries
+      - GetDerivedMetric
+      - GetHistoricalMetricsConfiguration
+      - GetMetricTagCardinalityDetails
+      - GetTagIndexingRule
+      - GetTagIndexingRuleExemption
+      - ListMetricAssets
+      - ListTagIndexingRuleExemptions
+      - ListTagIndexingRules
+      - ListTagIndexingRulesForMetric
+      - QueryScalarData
+      - QueryTimeseriesData
+      - ReorderTagIndexingRules
+      - SubmitMetrics
+      - UpdateDerivedMetric
+      - UpdateTagIndexingRule
+      - UpdateTagIndexingRuleExemption
+    title: Remove deprecated metric bulk-tags endpoints from public docs and 
+      SDKs
+  - change_type: removed
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41191
+    operations:
+      - CreateBulkTagsMetricsConfiguration
+      - DeleteBulkTagsMetricsConfiguration
+    title: Remove deprecated metric bulk-tags endpoints from public docs and 
+      SDKs

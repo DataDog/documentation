@@ -30,16 +30,20 @@ With the Training page, you get:
 
 ## Setup
 
+Select the tab that matches your environment:
+
+{{< tabs >}}
+{{% tab "Kubernetes" %}}
+
 ### Prerequisites
 
 To begin monitoring your training workloads, you must first meet the following criteria:
 - You have [GPU Monitoring enabled][1].
 - You are running the Datadog Cluster Agent version 7.80 or later.
-- You are running CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
 
 ### 0. Enable GPU Monitoring
 
-If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts before moving to the next step.
 
 ### 1. Connect training runs to GPU hardware
 
@@ -95,6 +99,8 @@ spec:
                     fieldPath: metadata.annotations['company.name/group-id']
 ```
 
+The `ddTraceVersions.c` setting installs the Datadog C SDK, the native SDK that GPU tracing uses to capture CUDA and NCCL activity.
+
 To use pod labels instead of annotations, set `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete. With this configuration, traces from the workloads you label in the [Label the GPU workload](#3-label-the-gpu-workload) step are tagged with `training.run_id` and `training.group_id`.
@@ -131,9 +137,91 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and traces are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
-## Further reading
+### 5. Explore your training jobs
 
-{{< partial name="whats-next/whats-next.html" >}}
+Go to the [Training page][3] in GPU Monitoring to explore your training jobs.
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/tag/?tab=datadogoperator#tag-extraction
+[3]: https://app.datadoghq.com/gpu-monitoring/training
+
+{{% /tab %}}
+{{% tab "Slurm" %}}
+
+### Prerequisites
+
+To begin monitoring your Slurm training jobs, you must have [GPU Monitoring enabled][1].
+
+### 1. Install the Agent with Single Step Instrumentation
+
+On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled. The following command enables Single Step Instrumentation for the host and installs the Datadog C SDK (`c:0`), the native SDK that GPU tracing uses to capture CUDA and NCCL activity from your jobs:
+
+```shell
+DD_API_KEY=<DATADOG_API_KEY> \
+DD_SITE="<DATADOG_SITE>" \
+DD_APM_INSTRUMENTATION_ENABLED=host \
+DD_APM_INSTRUMENTATION_LIBRARIES=c:0 \
+bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+```
+
+Replace `<DATADOG_API_KEY>` with your [Datadog API key][3] and `<DATADOG_SITE>` with your [Datadog site][4].
+
+### 2. Enable the Slurm integration
+
+Set up the [Slurm integration][5] to collect metrics about your Slurm cluster, partitions, nodes, and jobs.
+
+### 3. Configure your batch script
+
+Add the following environment variables to your `sbatch` script:
+
+```shell
+export DD_SERVICE=${DD_SERVICE:-slurm-training}
+export DD_ENV=${DD_ENV:-dev}
+export DD_INJECT_NATIVE=always
+export DD_TRACE_HOOK_MODULES=gpu
+```
+
+`DD_SERVICE` and `DD_ENV` default to `slurm-training` and `dev`. To use different values, set these variables before you submit the job, or change the defaults in the script.
+
+For example:
+
+```shell
+#!/bin/bash
+#SBATCH --job-name=training
+#SBATCH --nodes=2
+#SBATCH --gpus-per-node=8
+
+export DD_SERVICE=${DD_SERVICE:-slurm-training}
+export DD_ENV=${DD_ENV:-dev}
+export DD_INJECT_NATIVE=always
+export DD_TRACE_HOOK_MODULES=gpu
+
+srun python train.py
+```
+
+### 4. Verify setup
+
+Submit the job with `sbatch`, then query [APM Trace Explorer][6] with the service and environment you configured:
+
+```
+service:slurm-training env:dev
+```
+
+### 5. Explore your training jobs
+
+Go to the [Training page][7] in GPU Monitoring to explore your training jobs.
+
+[1]: /gpu_monitoring/setup
+[2]: /tracing/trace_collection/single-step-apm/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /getting_started/site/
+[5]: /integrations/slurm/
+[6]: /tracing/trace_explorer/
+[7]: https://app.datadoghq.com/gpu-monitoring/training
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
