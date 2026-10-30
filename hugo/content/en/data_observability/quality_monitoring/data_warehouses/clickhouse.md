@@ -16,7 +16,7 @@ Data Observability for ClickHouse Cloud is in Preview. Contact your Datadog repr
 
 ## Overview
 
-The ClickHouse Cloud for Data Observability integration connects your [ClickHouse Cloud][1] service to Datadog Data Observability. You provide the service endpoint and credentials for a read-only user. Datadog reads metadata from your service's system tables to build a catalog of your databases, tables, and columns, and to track row count, size, and freshness for each table. You can then create data quality monitors on your ClickHouse tables.
+The ClickHouse Cloud for Data Observability integration connects your [ClickHouse Cloud][1] service to Datadog Data Observability. You provide the service endpoint and credentials for a read-only user. Datadog reads metadata from your service's system tables. It uses this metadata to build a catalog of your databases, tables, and columns, and to track row count, size, and freshness for each table. You can then create data quality monitors on your ClickHouse tables.
 
 This page covers ClickHouse Cloud services only.
 
