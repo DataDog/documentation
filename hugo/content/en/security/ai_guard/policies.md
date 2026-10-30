@@ -116,14 +116,14 @@ For setup steps and SDK examples, see [Redact Sensitive Data][6].
 
 ### Tools policies
 
-Tools policies control how AI Guard handles tool calls, so you can block certain tools and never block tools you trust.
+Tools policies control how AI Guard handles tool calls, so you can block certain tools and always allow tools you trust.
 
 Each policy sets a default behavior for every tool call in the policy scope, and individual tools can override the default behavior:
 
 | Behavior | Description |
 | --- | --- |
 | {{< ui >}}Evaluate{{< /ui >}} | Send every tool call to AI Guard for evaluation. (Default) |
-| {{< ui >}}Pass{{< /ui >}} | Let every tool call through without blocking the call. Tool calls set to {{< ui >}}Pass{{< /ui >}} still count toward usage. |
+| {{< ui >}}Pass{{< /ui >}} | Always allow every tool call. AI Guard still evaluates tool calls set to {{< ui >}}Pass{{< /ui >}} and reports the results, but never blocks them. Tool calls set to {{< ui >}}Pass{{< /ui >}} still count toward usage. |
 | {{< ui >}}Block{{< /ui >}} | Reject every tool call in the scope. |
 | {{< ui >}}Inherit{{< /ui >}} | Apply the behavior from the parent policy. Available for individual tools in a custom policy. |
 

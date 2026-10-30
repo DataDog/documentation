@@ -314,7 +314,7 @@ Pass `new AIGuard.Options().block(false)` to make a call return an evaluation an
 Pass `allow_raise: false` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
-To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools Policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
+To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools Policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. AI Guard still evaluates tool calls set to {% ui %}Pass{% /ui %} and reports the results, but never blocks them. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
 
 ## Optional SDK settings
 
