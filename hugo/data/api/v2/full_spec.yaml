@@ -4045,6 +4045,101 @@ components:
       type: string
       x-enum-varnames:
         - CCM_CONFIG_VALIDATION
+    AWSCloudAuthIntakeMappingAttributesResponse:
+      description: Attributes for AWS cloud authentication intake mapping response.
+      properties:
+        arn_pattern:
+          description: AWS caller ARN pattern allowed to authenticate for telemetry submission. ARN syntax and AWS integration membership are validated by the server. For an assumed role, use the STS assumed-role ARN with a trailing /* wildcard to match its sessions.
+          example: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+          type: string
+        par_enrollment_enabled:
+          description: Whether the mapping allows Private Action Runner enrollment. This attribute may be omitted when enrollment is disabled. Enrollment permission is managed separately from the ARN pattern.
+          example: true
+          readOnly: true
+          type: boolean
+      required:
+        - arn_pattern
+      type: object
+    AWSCloudAuthIntakeMappingCreateAttributes:
+      description: Attributes for creating an AWS cloud authentication intake mapping.
+      properties:
+        arn_pattern:
+          description: AWS caller ARN pattern allowed to authenticate for telemetry submission. ARN syntax and AWS integration membership are validated by the server. For an assumed role, use the STS assumed-role ARN with a trailing /* wildcard to match its sessions.
+          example: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+          minLength: 1
+          type: string
+      required:
+        - arn_pattern
+      type: object
+    AWSCloudAuthIntakeMappingCreateData:
+      description: Data for creating an AWS cloud authentication intake mapping.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    AWSCloudAuthIntakeMappingCreateRequest:
+      description: Request used to create an AWS cloud authentication intake mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingCreateData"
+      required:
+        - data
+      type: object
+    AWSCloudAuthIntakeMappingDataResponse:
+      description: Data for AWS cloud authentication intake mapping response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingAttributesResponse"
+        id:
+          description: Unique identifier for the intake mapping.
+          example: c5c758c6-18c2-4484-ae3f-46b84128404a
+          type: string
+        type:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AWSCloudAuthIntakeMappingResponse:
+      description: Response containing a single AWS cloud authentication intake mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingDataResponse"
+      required:
+        - data
+      type: object
+    AWSCloudAuthIntakeMappingType:
+      description: Type identifier for AWS cloud authentication intake mapping.
+      enum:
+        - aws_cloud_auth_intake_mapping
+      example: aws_cloud_auth_intake_mapping
+      type: string
+      x-enum-varnames:
+        - AWS_CLOUD_AUTH_INTAKE_MAPPING
+    AWSCloudAuthIntakeMappingsData:
+      description: List of AWS cloud authentication intake mappings.
+      items:
+        $ref: "#/components/schemas/AWSCloudAuthIntakeMappingDataResponse"
+      type: array
+    AWSCloudAuthIntakeMappingsResponse:
+      description: Response containing a list of AWS cloud authentication intake mappings.
+      properties:
+        data:
+          $ref: "#/components/schemas/AWSCloudAuthIntakeMappingsData"
+          example:
+            - attributes:
+                arn_pattern: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+              id: c5c758c6-18c2-4484-ae3f-46b84128404a
+              type: aws_cloud_auth_intake_mapping
+      required:
+        - data
+      type: object
     AWSCloudAuthPersonaMappingAttributesResponse:
       description: Attributes for AWS cloud authentication persona mapping response
       properties:
@@ -261041,6 +261136,168 @@ paths:
           - generate_log_reports
           - manage_log_reports
           - product_analytics_saved_widgets_write
+  /api/v2/wif/aws/intake_mapping:
+    get:
+      description: List AWS cloud authentication intake mappings configured for the organization.
+      operationId: ListAWSCloudAuthIntakeMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          arn_pattern: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+                        id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                        type: aws_cloud_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthIntakeMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List AWS cloud authentication intake mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 13
+      x-unstable: "**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    post:
+      description: Create an AWS cloud authentication intake mapping to authorize an AWS ARN pattern for Agent authentication. The AWS account must already be integrated with Datadog, and managed API key rotation must be enabled for the organization. Patterns that conflict with existing intake or persona mappings are rejected.
+      operationId: CreateAWSCloudAuthIntakeMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      arn_pattern: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+                    type: aws_cloud_auth_intake_mapping
+            schema:
+              $ref: "#/components/schemas/AWSCloudAuthIntakeMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        arn_pattern: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: aws_cloud_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthIntakeMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create an AWS cloud authentication intake mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-unstable: "**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+  /api/v2/wif/aws/intake_mapping/{intake_mapping_id}:
+    delete:
+      description: Delete an AWS cloud authentication intake mapping by ID.
+      operationId: DeleteAWSCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "204":
+          description: No Content
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete an AWS cloud authentication intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 16
+      x-unstable: "**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    get:
+      description: Get an AWS cloud authentication intake mapping by ID.
+      operationId: GetAWSCloudAuthIntakeMapping
+      parameters:
+        - $ref: "#/components/parameters/IntakeMappingID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        arn_pattern: arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*
+                      id: c5c758c6-18c2-4484-ae3f-46b84128404a
+                      type: aws_cloud_auth_intake_mapping
+              schema:
+                $ref: "#/components/schemas/AWSCloudAuthIntakeMappingResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get an AWS cloud authentication intake mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 14
+      x-unstable: "**Note**: This endpoint is in public beta and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   /api/v2/wif/aws/persona_mapping:
     get:
       description: List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.

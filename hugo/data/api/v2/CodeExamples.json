@@ -487,6 +487,13 @@
       "description": "Create a case type returns \"CREATED\" response"
     }
   ],
+  "CreateAWSCloudAuthIntakeMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
