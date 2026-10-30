@@ -56,24 +56,7 @@ Data Streams Monitoring identifies your service by `DD_SERVICE`. If it is not se
 
 {{% data_streams/monitoring-kafka-pipelines %}}
 
-#### Consumer lag
-
-Data Streams Monitoring computes Kafka consumer lag from the offsets your producers write and the offsets your consumer groups commit:
-
-- Produce offsets come from librdkafka's delivery reports. librdkafka only delivers them when your application calls `poll()` or `flush()` on the producer.
-- Committed offsets come from the offset commit callback, which the tracer adds to `RdKafka\KafkaConsumer`, so both automatic and manual commits are reported. For the low-level `RdKafka\Consumer`, committed offsets are only reported when your application sets an offset commit callback with `RdKafka\Conf::setOffsetCommitCb()` and polls the consumer.
-
-Delivery report and offset commit callbacks that your application sets keep running.
-
-#### Kafka cluster ID
-
-Checkpoints and offsets are tagged with the Kafka cluster ID, which librdkafka learns from the brokers' first metadata response. Until a new producer has that response, it uses the ID that other PHP processes on the same host learned for the same bootstrap servers. When no process has learned it yet, the producer's first message waits up to 100 milliseconds for it.
-
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
-
-### Limitations
-
-- The tracer only records Data Streams Monitoring data once it has confirmed that the Datadog Agent accepts it. A short-lived CLI script can exit before then, and send no data.
 
 ### Monitoring connectors
 
