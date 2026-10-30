@@ -6655,6 +6655,58 @@ menu:
           - GetUsageAttributionTypes
         unstable: []
         order: 10
+    - name: Get your temporary grant request
+      url: /api/latest/usage-metering/get-your-temporary-grant-request/
+      identifier: usage-metering-get-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMyTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 21
+    - name: Cancel your temporary grant request
+      url: /api/latest/usage-metering/cancel-your-temporary-grant-request/
+      identifier: usage-metering-cancel-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 22
+    - name: Create a temporary grant request
+      url: /api/latest/usage-metering/create-a-temporary-grant-request/
+      identifier: usage-metering-create-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 19
+    - name: List your temporary grant requests
+      url: /api/latest/usage-metering/list-your-temporary-grant-requests/
+      identifier: usage-metering-list-your-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMyTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 20
     - name: Get available fields for usage summary
       url: /api/latest/usage-metering/get-available-fields-for-usage-summary/
       identifier: usage-metering-get-available-fields-for-usage-summary
@@ -6840,6 +6892,58 @@ menu:
           - GetUsageApplicationSecurityMonitoring
         unstable: []
         order: 2
+    - name: Revoke a requested temporary grant
+      url: /api/latest/usage-metering/revoke-a-requested-temporary-grant/
+      identifier: usage-metering-revoke-a-requested-temporary-grant
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRequestedTemporaryGrant
+        unstable:
+          - v2
+        order: 26
+    - name: Decide a temporary grant request
+      url: /api/latest/usage-metering/decide-a-temporary-grant-request/
+      identifier: usage-metering-decide-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 25
+    - name: Get an organization temporary grant request
+      url: /api/latest/usage-metering/get-an-organization-temporary-grant-request/
+      identifier: usage-metering-get-an-organization-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 24
+    - name: List organization temporary grant requests
+      url: /api/latest/usage-metering/list-organization-temporary-grant-requests/
+      identifier: usage-metering-list-organization-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 23
     - name: Get Monthly Cost Attribution
       url: /api/latest/usage-metering/get-monthly-cost-attribution/
       identifier: usage-metering-get-monthly-cost-attribution

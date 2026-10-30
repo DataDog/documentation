@@ -3246,6 +3246,13 @@
       "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
+  "UpdateTemporaryGrantRequest": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Decide a temporary grant request returns \"OK\" response"
+    }
+  ],
   "CreateUser": [
     {
       "group": "users",
