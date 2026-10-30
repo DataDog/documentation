@@ -686,7 +686,7 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 #### Cost metrics
 
-The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Datadog converts dollars to nanodollars for storage (`0.01` USD becomes `10000000` nanodollars). Supplied costs take precedence over automatic cost estimates.
+The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Supplied costs take precedence over automatic cost estimates.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
