@@ -197,18 +197,12 @@ The **Optimization page** surfaces profiling data in several contexts:
 Android profiling helps you identify and optimize slow methods during important moments in user sessions. Android profiling is built on top of the [ProfilingManager Android API][4] and samples the device's CPU to collect method call stacks from the application's process.
 
 {% alert level="warning" %}
-Only devices running Android 15 (API level 35) or higher generate profiling data.
+Only devices running Android 15 (API level 35) or higher generate profiling data. Android 16 (API level 36) or higher is required to generate ANR system traces.
 {% /alert %}
 
 ## Prerequisites
 
-- Application launch profiling requires Android SDK version 3.6.0+.
-- Continuous profiling requires Android SDK version 3.12.0+.
-- ANR profiling with system traces requires Android SDK version 3.15.0+ and devices running Android 16 (API level 36) or higher.
-
-## Preview quota system
-
-During the preview, the Datadog Android SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
+- Android profiling requires Android SDK version 3.16.0+.
 
 ## Setup
 
@@ -335,10 +329,6 @@ iOS profiling helps you identify and optimize slow methods during important mome
 
 - Application launch profiling requires iOS SDK version 3.6.0+.
 - Continuous profiling requires iOS SDK version 3.14.0+.
-
-## Preview quota system
-
-During the preview, the Datadog iOS SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
 
 ## Setup
 
