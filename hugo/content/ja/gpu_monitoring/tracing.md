@@ -1,16 +1,17 @@
 ---
 description: 一部の Kubernetes ワークロードの GPU アクティビティトレースを有効にしします。
 further_reading:
-- link: /gpu_monitoring/setup
-  tag: ドキュメント
-  text: GPU モニタリングの設定
-- link: /gpu_monitoring
-  tag: GPU モニタリングとは
-  text: GPU モニタリングの機能の詳細
+    - link: /gpu_monitoring/setup
+      tag: ドキュメント
+      text: GPU モニタリングの設定
+    - link: /gpu_monitoring
+      tag: GPU モニタリングとは
+      text: GPU モニタリングの機能の詳細
 is_beta: true
 private: true
 title: GPU モニタリングによる継続的なトレース
 ---
+
 {{< beta-callout url="#" btn_hidden="true" >}}
 GPU モニタリングによる継続的なトレースは、アーリーアクセスプレビュー版です。
 {{< /beta-callout >}}
@@ -26,8 +27,9 @@ GPU モニタリングによる継続的なトレースを使用すると、一�
 ### 前提条件 {#prerequisites}
 
 ワークロードの継続的なトレースを開始するには、まず以下の条件を満たしている必要があります。
-- [GPU モニタリングを有効にして][1] Datadog Cluster Agent バージョン 7.80 以上を実行していること。
-- CUDA および CUPTI の最小必須バージョン: 13。
+
+-   [GPU モニタリングを有効にして][1] Datadog Cluster Agent バージョン 7.80 以上を実行していること。
+-   CUDA および CUPTI の最小必須バージョン: 13。
 
 ### 1. GPU トレースを構成する {#1-configure-gpu-tracing}
 
@@ -35,23 +37,23 @@ GPU モニタリングによる継続的なトレースを使用すると、一�
 
 ```yaml
 spec:
-  features:
-    apm:
-      enabled: true
-      instrumentation:
-        enabled: true
-        targets:
-          - name: gpu-monitoring
-            podSelector:
-              matchLabels:
-                admission.datadoghq.com/gpu.enabled: "true"
-            ddTraceVersions:
-              c: "0.20.0"
-            ddTraceConfigs:
-              - name: DD_INJECT_NATIVE
-                value: "always"
-              - name: DD_TRACE_HOOK_MODULES
-                value: "gpu"
+    features:
+        apm:
+            enabled: true
+            instrumentation:
+                enabled: true
+                targets:
+                    - name: gpu-monitoring
+                      podSelector:
+                          matchLabels:
+                              admission.datadoghq.com/gpu.enabled: 'true'
+                      ddTraceVersions:
+                          c: '0'
+                      ddTraceConfigs:
+                          - name: DD_INJECT_NATIVE
+                            value: 'always'
+                          - name: DD_TRACE_HOOK_MODULES
+                            value: 'gpu'
 ```
 
 構成を適用し、`DatadogAgent`のロールアウトが完了するまで待ちます。
@@ -62,10 +64,10 @@ spec:
 
 ```yaml
 spec:
-  template:
-    metadata:
-      labels:
-        admission.datadoghq.com/gpu.enabled: "true"
+    template:
+        metadata:
+            labels:
+                admission.datadoghq.com/gpu.enabled: 'true'
 ```
 
 リソースを適用し、ロールアウトが完了するまで待ちます。
