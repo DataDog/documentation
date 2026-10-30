@@ -45,7 +45,17 @@ The precedence rules on this page describe how *Datadog SDKs* resolve configurat
 
 {{% otel-network-requirements %}}
 
-**Note**: OpenTelemetry API metrics and Datadog runtime metrics have separate configuration. Runtime metrics export depends on the language and SDK version. SDKs that support OTLP runtime metrics export include Java v1.63.0+, .NET v3.44.0+ (.NET 6+), and Node.js v5.107.0+. Enable both runtime metrics and OpenTelemetry metrics. See [runtime metrics configuration][18] for language-specific settings.
+**Note**: OpenTelemetry API metrics and Datadog runtime metrics have separate configuration. Runtime metrics export depends on the language and SDK version. SDKs that support OTLP runtime metrics export include Java v1.63.0+, .NET v3.44.0+ (.NET 6+), and Node.js v5.107.0+.
+
+For these SDKs, enable runtime metrics and select OTLP export with:
+
+```shell
+DD_RUNTIME_METRICS_ENABLED=true
+DD_METRICS_OTEL_ENABLED=true
+OTEL_METRICS_EXPORTER=otlp
+```
+
+See [metrics-specific OTLP configuration][18] for endpoint settings.
 
 ## Datadog SDK configuration
 These environment variables control OpenTelemetry interoperability for traces, metrics, and logs. Support and setup requirements vary by language and SDK version. For guides on how to instrument your application, see the [language-specific instrumentation documentation][14].
@@ -314,4 +324,4 @@ A comma-separated list of paths to extension jar files, or folders containing ja
 [15]: https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/#additional-environment-variable-configuration
 [16]: /opentelemetry/guide/otlp_delta_temporality/
 [17]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
-[18]: /tracing/metrics/runtime_metrics/
+[18]: #metrics-specific-otlp-configuration
