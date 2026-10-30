@@ -2588,6 +2588,517 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: The server cannot process the request because it contains invalid data.
   schemas:
+    AIGuardAction:
+      description: The recommended action for the evaluated conversation.
+      enum:
+        - ALLOW
+        - DENY
+        - ABORT
+      example: ALLOW
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
+        - ABORT
+    AIGuardCodingAgent:
+      description: |-
+        The coding agent that produced the conversation. By default, a non-empty
+        value selects the coding-agent evaluator profile, while an omitted or empty
+        value selects the default profile. Known identifiers include `claude-code`,
+        `codex`, `cursor`, and `github-copilot`; other identifiers are accepted.
+        The coding-agent profile assumes the caller can ask the user to confirm
+        Supply Chain Firewall warnings; the default profile assumes it cannot.
+      example: claude-code
+      type: string
+    AIGuardConfidenceThreshold:
+      additionalProperties:
+        description: The confidence threshold override for the threat tag named by the property.
+        example: 0.9
+        format: double
+        type: number
+      description: |-
+        Request-level confidence threshold override. `flagging_global` is the global
+        threshold applied to every threat category. Any other property is a
+        per-category override keyed by an AI Guard threat tag; per-category values
+        take precedence over `flagging_global`, and categories without an entry fall
+        back to it. When this object omits flagging_global, the fallback is `0.5`.
+        Recognized category keys include policy-evasion, indirect-prompt-injection,
+        system-and-capability-discovery, credential-access, sensitive-data-collection,
+        privilege-escalation, malicious-execution, private-network-target,
+        destructive-or-resource-abuse, tool-abuse, poisoning-or-persistence, and
+        `data-exfiltration`. Unknown category keys are ignored.
+      example:
+        flagging_global: 0.6
+        policy-evasion: 0.9
+      properties:
+        flagging_global:
+          description: The global confidence threshold applied to categories without a specific override.
+          example: 0.6
+          format: double
+          type: number
+      type: object
+    AIGuardConfidenceThresholdOverride:
+      description: |-
+        Request-only confidence threshold override. A number sets the threshold
+        for every threat category; an object supplies a global threshold and
+        optional per-category overrides. Omit this field to use the stored
+        sensitivity policy. This field is not returned in evaluation responses.
+      oneOf:
+        - $ref: "#/components/schemas/AIGuardGlobalConfidenceThreshold"
+        - $ref: "#/components/schemas/AIGuardConfidenceThreshold"
+    AIGuardContentPart:
+      description: |-
+        One part of multipart message content, following the OpenAI content part
+        format. For user, system, developer, and tool messages, a text part must
+        include non-empty `text`, and an image part must include `image_url` with
+        a non-empty `url`. These content-part checks do not apply to assistant messages.
+      properties:
+        image_url:
+          $ref: "#/components/schemas/AIGuardImageURL"
+        text:
+          description: The text content, required and non-empty when `type` is `text` in a user, system, developer, or tool message.
+          example: What is the weather like today?
+          type: string
+        type:
+          $ref: "#/components/schemas/AIGuardContentPartType"
+      required:
+        - type
+      type: object
+    AIGuardContentPartType:
+      description: The type of the content part.
+      enum:
+        - text
+        - image_url
+      example: text
+      type: string
+      x-enum-varnames:
+        - TEXT
+        - IMAGE_URL
+    AIGuardEvaluateAttributesResponse:
+      description: The evaluation result with the recommended action and detected threat information.
+      properties:
+        action:
+          $ref: "#/components/schemas/AIGuardAction"
+        global_prob:
+          description: The global threat probability, between `0` and `1`. Included only when computed.
+          example: 0.005218505859375
+          format: double
+          type: number
+        is_blocking_enabled:
+          description: Whether blocking is enabled for the organization.
+          example: false
+          type: boolean
+        reason:
+          description: The explanation for the recommended action, for logging rather than user-facing display.
+          example: No rule match.
+          type: string
+        redaction_replacements:
+          description: The redacted replacements computed for the request. Included only when redaction applies.
+          items:
+            $ref: "#/components/schemas/AIGuardRedactionReplacement"
+          type: array
+        scfw_findings:
+          $ref: "#/components/schemas/AIGuardScfwFindings"
+        sds_findings:
+          description: The sensitive data findings from the Sensitive Data Scanner. Included only when findings exist.
+          items:
+            $ref: "#/components/schemas/AIGuardSdsFinding"
+          type: array
+        tag_probs:
+          additionalProperties:
+            description: The detection confidence for the threat tag named by the property.
+            example: 0.97
+            format: double
+            type: number
+          description: The detection confidence for each threat tag, between `0` and `1`. May be null when the evaluation does not produce per-category scores.
+          example:
+          nullable: true
+          type: object
+        tags:
+          description: The threat tags detected in the conversation.
+          example: []
+          items:
+            description: A detected threat tag.
+            example: destructive-or-resource-abuse
+            type: string
+          type: array
+      required:
+        - action
+        - reason
+        - tags
+        - tag_probs
+        - is_blocking_enabled
+      type: object
+    AIGuardEvaluateDataResponse:
+      description: The JSON:API evaluation resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AIGuardEvaluateAttributesResponse"
+        id:
+          description: The unique identifier of the evaluation.
+          example: a76a703c-324f-42ed-af33-9b17d65e28af
+          type: string
+        type:
+          $ref: "#/components/schemas/AIGuardEvaluationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AIGuardEvaluateRequest:
+      description: The request to evaluate a conversation for security threats.
+      example:
+        data:
+          attributes:
+            messages:
+              - content: Hello world!
+                role: user
+            meta:
+              confidence_threshold: 0.8
+          type: evaluations
+      properties:
+        data:
+          $ref: "#/components/schemas/AIGuardEvaluateRequestData"
+      required:
+        - data
+      type: object
+    AIGuardEvaluateRequestData:
+      description: The JSON:API request envelope for an AI Guard evaluation.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AIGuardEvaluateRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/AIGuardEvaluationType"
+      required:
+        - type
+        - attributes
+      type: object
+    AIGuardEvaluateRequestDataAttributes:
+      description: The conversation to evaluate and its metadata.
+      properties:
+        messages:
+          description: The messages of the conversation to evaluate, in order. Must contain at least one message.
+          items:
+            $ref: "#/components/schemas/AIGuardMessage"
+          minItems: 1
+          type: array
+        meta:
+          $ref: "#/components/schemas/AIGuardMeta"
+      required:
+        - messages
+      type: object
+    AIGuardEvaluateResponse:
+      description: The response containing the evaluation result.
+      properties:
+        data:
+          $ref: "#/components/schemas/AIGuardEvaluateDataResponse"
+      required:
+        - data
+      type: object
+    AIGuardEvaluationType:
+      description: |-
+        The JSON:API resource type for AI Guard evaluation requests and responses.
+        Its value is `evaluations` for the action endpoint `/api/v2/ai-guard/evaluate`.
+      enum:
+        - evaluations
+      example: evaluations
+      type: string
+      x-enum-varnames:
+        - EVALUATIONS
+    AIGuardGlobalConfidenceThreshold:
+      description: The global confidence threshold applied to every threat category.
+      example: 0.8
+      format: double
+      type: number
+    AIGuardImageURL:
+      description: An image referenced by URL in a message content part.
+      properties:
+        url:
+          description: The image URL or a data URI with an `image/png`, `image/jpeg`, `image/gif`, or `image/webp` MIME type.
+          example: https://example.com/image.png
+          type: string
+      required:
+        - url
+      type: object
+    AIGuardMessage:
+      description: |-
+        A message in the conversation. Content is required for user, system,
+        developer, and tool messages, but may be omitted for assistant messages.
+        For those non-assistant roles, a plain content string may be empty, but a
+        multipart content array must contain at least one valid content part.
+        Only assistant messages may contain tool calls, and tool call entries must
+        not be null. Tool messages must include a non-empty `tool_call_id`; other
+        message roles must not include a non-empty `tool_call_id`.
+      properties:
+        content:
+          $ref: "#/components/schemas/AIGuardMessageContent"
+        role:
+          $ref: "#/components/schemas/AIGuardMessageRole"
+        tool_call_id:
+          description: The identifier of the tool call this message responds to, present on tool result messages.
+          example: call_1
+          type: string
+        tool_calls:
+          description: The tool calls emitted by the assistant, present on assistant messages that call tools.
+          items:
+            $ref: "#/components/schemas/AIGuardToolCall"
+          type: array
+      required:
+        - role
+      type: object
+    AIGuardMessageContent:
+      description: The content of a message, either a plain string or a list of OpenAI-style content parts.
+      oneOf:
+        - $ref: "#/components/schemas/AIGuardMessageContentText"
+        - $ref: "#/components/schemas/AIGuardMessageContentParts"
+    AIGuardMessageContentParts:
+      description: The message content as a list of content parts. The list must be non-empty for user, system, developer, and tool messages.
+      items:
+        $ref: "#/components/schemas/AIGuardContentPart"
+      type: array
+    AIGuardMessageContentText:
+      description: The message content as a plain string.
+      example: What is the weather like today?
+      type: string
+    AIGuardMessageRole:
+      description: The role of the message author in the conversation.
+      enum:
+        - user
+        - assistant
+        - system
+        - developer
+        - tool
+      example: user
+      type: string
+      x-enum-varnames:
+        - USER
+        - ASSISTANT
+        - SYSTEM
+        - DEVELOPER
+        - TOOL
+    AIGuardMeta:
+      description: Metadata about the evaluated conversation, used to select the policy and evaluator behavior.
+      properties:
+        coding_agent:
+          $ref: "#/components/schemas/AIGuardCodingAgent"
+        confidence_threshold:
+          $ref: "#/components/schemas/AIGuardConfidenceThresholdOverride"
+        env:
+          description: The environment the conversation belongs to.
+          example: production
+          type: string
+        is_sds_enabled_override:
+          description: Whether to run the Sensitive Data Scanner for this request, overriding the stored policy.
+          example: true
+          type: boolean
+        service:
+          description: The name of the service the conversation belongs to.
+          example: my-web-app
+          type: string
+        tool_policies:
+          additionalProperties:
+            $ref: "#/components/schemas/AIGuardToolPolicyAction"
+          description: |-
+            A non-empty map replaces stored tool policies for this request only,
+            keyed by tool name. Any called tool not present resolves to EVALUATE.
+            Only takes effect when tool policies are enabled for the organization.
+          example:
+            shell: BLOCK
+          type: object
+      type: object
+    AIGuardRedactionReplacement:
+      description: The fully redacted content for one path in the request.
+      properties:
+        path:
+          description: The path of the redacted content relative to the request attributes.
+          example: messages[0].content
+          type: string
+        replacement:
+          description: The redacted replacement content.
+          example: "[REDACTED]"
+          type: string
+      required:
+        - path
+        - replacement
+      type: object
+    AIGuardScfwFindings:
+      description: |-
+        The Supply Chain Firewall verdict for the version-pinned install packages
+        found in the request. Evaluation requires Supply Chain Firewall to be enabled
+        for the organization and the caller to have the `appsec_vm_read` permission.
+        Without that permission, Supply Chain Firewall evaluation is skipped; the
+        AI Guard evaluation request itself is not rejected. Findings are omitted
+        when Supply Chain Firewall does not produce a result.
+        The recommended action combines the package outcomes.
+        Confirmation support is inferred from the evaluator profile, not from a
+        separate confirmation-capability flag. By default, a non-empty
+        `meta.coding_agent` selects the coding-agent profile, which assumes the caller
+        can ask for confirmation and retains WARN in `recommended_action`.
+        Omitting `meta.coding_agent` or setting it to an empty string selects the
+        default profile, which assumes the caller cannot ask for confirmation and
+        returns ALLOW instead of WARN in `recommended_action`. Package outcomes
+        still retain WARN, and BLOCK is never changed to ALLOW by this rule.
+      properties:
+        packages:
+          description: The packages the firewall evaluated, `ALLOW` ones included.
+          items:
+            $ref: "#/components/schemas/AIGuardScfwPackageFinding"
+          type: array
+        recommended_action:
+          $ref: "#/components/schemas/AIGuardScfwOutcome"
+      required:
+        - recommended_action
+      type: object
+    AIGuardScfwMatchedRule:
+      description: One rule the Supply Chain Firewall matched on a package, with the outcome the rule reached.
+      properties:
+        outcome:
+          $ref: "#/components/schemas/AIGuardScfwOutcome"
+        rule:
+          description: The rule text the firewall reported, or the policy type when no text was reported.
+          example: "Disallow install commands"
+          type: string
+      required:
+        - rule
+        - outcome
+      type: object
+    AIGuardScfwOutcome:
+      description: The Supply Chain Firewall outcome for a package, a matched rule, or the whole request.
+      enum:
+        - ALLOW
+        - WARN
+        - BLOCK
+      example: BLOCK
+      type: string
+      x-enum-descriptions:
+        - Proceed with the install.
+        - Confirm with the user before installing.
+        - Do not install.
+      x-enum-varnames:
+        - ALLOW
+        - WARN
+        - BLOCK
+    AIGuardScfwPackageFinding:
+      description: One package the Supply Chain Firewall evaluated, with the outcome and every matched rule.
+      properties:
+        ecosystem:
+          description: The package ecosystem the firewall evaluated, such as `PyPI`, `npm`, or `crates.io`.
+          example: npm
+          type: string
+        matched_rules:
+          description: Every rule the firewall matched on the package.
+          items:
+            $ref: "#/components/schemas/AIGuardScfwMatchedRule"
+          type: array
+        name:
+          description: The name of the package.
+          example: left-pad
+          type: string
+        outcome:
+          $ref: "#/components/schemas/AIGuardScfwOutcome"
+        version:
+          description: The version of the package.
+          example: 1.3.0
+          type: string
+      required:
+        - ecosystem
+        - name
+        - version
+        - outcome
+      type: object
+    AIGuardSdsFinding:
+      description: A sensitive data finding from the Sensitive Data Scanner.
+      properties:
+        category:
+          description: The category of the sensitive data found.
+          example: financial
+          type: string
+        location:
+          $ref: "#/components/schemas/AIGuardSdsFindingLocation"
+        rule_display_name:
+          description: The display name of the SDS rule that matched.
+          example: Credit Card Number
+          type: string
+        rule_tag:
+          description: The tag of the SDS rule that matched.
+          example: credit-card
+          type: string
+      required:
+        - rule_display_name
+        - rule_tag
+        - category
+        - location
+      type: object
+    AIGuardSdsFindingLocation:
+      description: The location of a sensitive data match within the request.
+      properties:
+        end_index_exclusive:
+          description: The exclusive end index of the match within the located content.
+          example: 42
+          format: int64
+          type: integer
+        path:
+          description: The path of the match relative to the request attributes.
+          example: messages[0].content
+          type: string
+        start_index:
+          description: The start index of the match within the located content.
+          example: 12
+          format: int64
+          type: integer
+      required:
+        - path
+        - start_index
+        - end_index_exclusive
+      type: object
+    AIGuardToolCall:
+      description: A tool call emitted by the assistant.
+      properties:
+        function:
+          $ref: "#/components/schemas/AIGuardToolCallFunction"
+        id:
+          description: The identifier of the tool call.
+          example: call_1
+          type: string
+      required:
+        - id
+        - function
+      type: object
+    AIGuardToolCallFunction:
+      description: The function invoked by a tool call.
+      properties:
+        arguments:
+          description: The arguments of the function call, serialized as a JSON string.
+          example: '{"command":"shutdown"}'
+          type: string
+        name:
+          description: The name of the function to call.
+          example: shell
+          type: string
+      required:
+        - name
+        - arguments
+      type: object
+    AIGuardToolPolicyAction:
+      description: |-
+        The policy action for a tool named by the property. Tool policies override
+        the recommendation after evaluation; they do not skip evaluation.
+        Any BLOCK takes precedence over PASS and EVALUATE. The Supply Chain Firewall
+        is applied afterward and can still return DENY.
+      enum:
+        - PASS
+        - BLOCK
+        - EVALUATE
+      example: EVALUATE
+      type: string
+      x-enum-descriptions:
+        - Recommend ALLOW when all called tools use PASS, overriding the evaluation result.
+        - Recommend DENY if any called tool uses BLOCK, overriding the evaluation result.
+        - Use the evaluation result unless another called tool uses BLOCK.
+      x-enum-varnames:
+        - PASS
+        - BLOCK
+        - EVALUATE
     AIImpactUserActivityAttributes:
       additionalProperties: false
       description: |-
@@ -42207,12 +42718,14 @@ components:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
+        - INTEGRATION_SLACK
       example: INTEGRATION_SCRIPT
       type: string
       x-enum-varnames:
         - INTEGRATION_KUBERNETES
         - INTEGRATION_SCRIPT
         - INTEGRATION_REMOTE_ACTION
+        - INTEGRATION_SLACK
     ExecutionPolicyKubernetesScope:
       description: Restricts the policy to specific Kubernetes namespaces.
       properties:
@@ -42335,9 +42848,9 @@ components:
       type: object
     ExecutionPolicyScope:
       description: |-
-        Restricts where the policy applies. At most one of `kubernetes`, `scripts`,
-        or `remote_action_rshell` can be set. An empty object means the policy has
-        no scope restriction.
+        Restricts where the policy applies. At most one scope type can be set,
+        and it must match the action pattern's integration. An empty object means
+        the policy has no scope restriction.
       properties:
         kubernetes:
           $ref: "#/components/schemas/ExecutionPolicyKubernetesScope"
@@ -42345,6 +42858,8 @@ components:
           $ref: "#/components/schemas/ExecutionPolicyRemoteActionRshellScope"
         scripts:
           $ref: "#/components/schemas/ExecutionPolicyScriptScope"
+        slack:
+          $ref: "#/components/schemas/ExecutionPolicySlackScope"
       type: object
     ExecutionPolicyScriptScope:
       description: Restricts the policy to specific scripts.
@@ -42370,11 +42885,43 @@ components:
       required:
         - target_script_names
       type: object
+    ExecutionPolicySlackScope:
+      description: Restricts the policy to specific Slack private channel names.
+      properties:
+        rules:
+          description: The Slack scope rules.
+          items:
+            $ref: "#/components/schemas/ExecutionPolicySlackScopeRule"
+          minItems: 1
+          type: array
+      required:
+        - rules
+      type: object
+    ExecutionPolicySlackScopeRule:
+      description: A rule restricting a Slack scope to specific private channel names.
+      properties:
+        channel_name_selectors:
+          description: |-
+            The private channel name selectors this rule applies to. Selectors are lowercase private channel names
+            without the leading `#`, and can contain `*` wildcards. Use `*` alone to match any private channel name.
+          example:
+            - "incident-*"
+          items:
+            maxLength: 80
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - channel_name_selectors
+      type: object
     ExecutionPolicyTarget:
-      description: A target this policy is scoped to, expressed as a set of Agent tags.
+      description: A target this policy is scoped to, expressed as a set of tags.
       properties:
         agent_tags:
-          description: The Agent tags identifying the target.
+          description: The tags identifying the target.
           example:
             - "env:prod"
           items:
@@ -146400,6 +146947,7 @@ components:
             ai_gateway_config_read: View AI Gateway configuration.
             ai_gateway_config_write: Create, update, and delete AI Gateway configuration.
             ai_gateway_usage: Use AI Gateway and view configuration applicable to the authenticated user.
+            ai_guard_evaluate: Evaluate conversations for security threats with AI Guard.
             apm_api_catalog_read: View API catalog and API definitions.
             apm_api_catalog_write: Add, modify, and delete API catalog definitions.
             apm_read: Read and query APM and Trace Analytics.
@@ -149599,6 +150147,126 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_findings_read
+  /api/v2/ai-guard/evaluate:
+    post:
+      description: |-
+        Analyzes a conversation for security threats such as prompt injection,
+        jailbreak attempts, and other AI-specific attacks. Returns an action
+        recommendation (`ALLOW`, `DENY`, or `ABORT`) along with the detected threat
+        tags and their confidence scores.
+        AI Guard must be activated for the organization, and the calling user or
+        application key requires the `ai_guard_evaluate` permission. The action is a
+        recommendation for the caller to enforce: ALLOW permits the interaction,
+        DENY blocks the interaction, and ABORT terminates the workflow.
+        This endpoint is rate limited to `700` requests per minute per organization.
+        Organization token limits can also result in a 429 response.
+        Malformed messages return a 400 response. Requests exceeding the raw-input
+        limit of 1,000,000 tokens return a 413 response; this limit applies to the
+        input context, not only the size of the HTTP request body.
+      operationId: EvaluateAIGuardRequest
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Evaluate a user message
+                value:
+                  data:
+                    attributes:
+                      messages:
+                        - content: Hello world!
+                          role: user
+                      meta:
+                        confidence_threshold: 0.8
+                    type: evaluations
+              per_category_threshold:
+                summary: Evaluate with per-category confidence thresholds
+                value:
+                  data:
+                    attributes:
+                      messages:
+                        - content: Hello world!
+                          role: user
+                      meta:
+                        confidence_threshold:
+                          flagging_global: 0.6
+                          indirect-prompt-injection: 0.4
+                          policy-evasion: 0.9
+                    type: evaluations
+            schema:
+              $ref: "#/components/schemas/AIGuardEvaluateRequest"
+        description: The conversation to evaluate for security threats.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Evaluation of a benign user message
+                  value:
+                    data:
+                      attributes:
+                        action: ALLOW
+                        global_prob: 0.005218505859375
+                        is_blocking_enabled: false
+                        reason: No rule match.
+                        tag_probs:
+                        tags: []
+                      id: a76a703c-324f-42ed-af33-9b17d65e28af
+                      type: evaluations
+              schema:
+                $ref: "#/components/schemas/AIGuardEvaluateResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Request Timeout
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Payload Too Large
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ai_guard_evaluate
+      summary: Evaluate an AI Guard request
+      tags:
+        - AI Guard
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+          - ai_guard_evaluate
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/ai_impact/user_activity:
     post:
       description: |-
@@ -240712,8 +241380,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_write
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/rules/{rule_id}/test:
     post:
       description: |-
@@ -240842,8 +241508,6 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_rules_read
-      x-unstable: |-
-        **Note**: This endpoint is in beta and may be subject to changes.
   /api/v2/security_monitoring/sample_log_generation/subscriptions:
     get:
       description: |-
@@ -260459,6 +261123,8 @@ servers:
         default: api
         description: The subdomain where the API is deployed.
 tags:
+  - description: Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts.
+    name: AI Guard
   - description: |-
       Configure your API endpoints through the Datadog API.
     name: API Management
@@ -260725,9 +261391,8 @@ tags:
     name: Events
   - description: |-
       Execution policies control which actions Datadog Action Platform is allowed to run
-      against your infrastructure, and where. Each policy pairs an effect (allow or deny)
-      with a pattern of actions, and can scope that decision to specific Kubernetes
-      namespaces, scripts, or remote shell paths.
+      and where. Each policy pairs an effect (allow or deny) with a pattern of actions,
+      and can scope that decision to specific resources.
     name: Execution Policy
   - description: Create and manage experiments, metrics, subject types, SQL models, and protocols.
     name: Experiments
