@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "tags": [
+          "test:example-monitor"
+        ]
+      },
+      "name": "test rule",
+      "recipients": [
+        "slack-test-channel"
+      ],
+      "rule_options": {
+        "is_threaded": true
+      }
+    },
+    "type": "monitor-notification-rule"
+  }
+}
