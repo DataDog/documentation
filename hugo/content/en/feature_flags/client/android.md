@@ -298,6 +298,73 @@ val stateJob = lifecycleScope.launch {
 
 Cancel the collection job when the observing component stops. For example, collect from `lifecycleScope` in an Android `Activity` or `Fragment`, or from `viewModelScope` in a `ViewModel`.
 
+## Control flag evaluation telemetry and experiment participation
+
+The following examples require version `3.17.0` or later of both `dd-sdk-android-flags` and `dd-sdk-android-flags-openfeature`. Flag evaluation opt-out and experimentation opt-out are independent and disabled by default. See [Flag Evaluation and Experimentation Opt-Out](/feature_flags/concepts/opt_out/) for shared concepts.
+
+### Configure the provider
+
+After initializing Datadog and enabling Flags, configure both controls before building the client. This example suppresses flag evaluation telemetry and immediately excludes the user from experiment allocations:
+
+{{< code-block lang="kotlin" >}}
+import com.datadog.android.flags.ExperimentationOptOutMode
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.openfeature.asOpenFeatureProvider
+import dev.openfeature.kotlin.sdk.ImmutableContext
+import dev.openfeature.kotlin.sdk.OpenFeatureAPI
+import dev.openfeature.kotlin.sdk.Value
+
+val provider = FlagsClient.Builder()
+    .enableEvaluationTelemetryOptOutParameter(true)
+    .experimentationOptOutMode(ExperimentationOptOutMode.IMMEDIATE)
+    .build()
+    .asOpenFeatureProvider()
+
+val preferenceTimestamp = "2026-10-30T12:00:00Z" // Use the user's stored preference.
+val attributes = mapOf(
+    "tier" to Value.String("premium"),
+    "dd_evaluation_telemetry_opt_out" to Value.Boolean(true),
+    "dd_experimentation_opt_out_at" to Value.String(preferenceTimestamp)
+)
+OpenFeatureAPI.setEvaluationContext(
+    ImmutableContext(targetingKey = "user-123", attributes = attributes)
+)
+OpenFeatureAPI.setProviderAndWait(provider)
+{{< /code-block >}}
+
+Run `setProviderAndWait` from a coroutine. Configure the client at its original creation site; do not create another client with the same name to change these options.
+
+When enabled, flag evaluation opt-out suppresses new evaluation events, aggregated counts, and automatic RUM flag annotations. Use `Value.Boolean(true)`, not the string `"true"`. It does not change flag values or suppress experiment exposures, and it does not delete previously recorded telemetry.
+
+### Choose an experimentation policy
+
+| Mode | Behavior with a valid opt-out timestamp |
+| --- | --- |
+| `ExperimentationOptOutMode.DISABLED` | Ignore the timestamp. This is the default. |
+| `ExperimentationOptOutMode.IMMEDIATE` | Exclude all experiment allocations, including holdouts. Ordinary feature allocations remain available. |
+| `ExperimentationOptOutMode.FUTURE_EXPERIMENTS_ONLY` | Exclude allocations activated at or after the timestamp, or without activation metadata. Earlier allocations remain eligible. |
+
+Future-experiments-only mode checks allocation activation time, not previous enrollment. An older allocation can assign a user for the first time. Both enabled modes take effect immediately; a future timestamp does not schedule a preference change.
+
+Store the timestamp when the user chooses to opt out. Reuse it across application restarts and clients that share the preference. Use a valid timestamp with a timezone, such as `2026-10-30T12:00:00Z`. Invalid timestamps in an enabled mode prevent assignment requests and cause evaluations to return the application default with an invalid-context error.
+
+Enabled experimentation modes require backend support for the selected policy. During context changes, evaluations return application defaults until matching assignments are available. This also applies when the context has no opt-out timestamp.
+
+### Update the preference
+
+Update the context on the existing client instead of creating another client. Preserve the targeting key and other application attributes. To resume flag evaluation telemetry, set `dd_evaluation_telemetry_opt_out` to Boolean `false`. To permit experimentation again, remove `dd_experimentation_opt_out_at`.
+
+{{< code-block lang="kotlin" >}}
+val updatedAttributes = attributes.toMutableMap()
+updatedAttributes["dd_evaluation_telemetry_opt_out"] = Value.Boolean(false)
+updatedAttributes.remove("dd_experimentation_opt_out_at")
+OpenFeatureAPI.setEvaluationContext(
+    ImmutableContext(targetingKey = "user-123", attributes = updatedAttributes)
+)
+{{< /code-block >}}
+
+These controls do not replace an application consent system. Assignment requests and permitted experiment exposures can still contain user data.
+
 ## Advanced configuration
 
 ### Global configuration

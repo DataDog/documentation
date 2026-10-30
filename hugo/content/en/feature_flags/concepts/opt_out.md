@@ -19,7 +19,7 @@ Client applications can have separate preferences for flag evaluation telemetry 
 
 These controls are independent. Suppressing flag evaluation telemetry does not exclude a subject from experiments. Excluding a subject from experiments does not suppress flag evaluation telemetry.
 
-This page describes the shared concepts for client SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the platform's [client SDK guide][1] before using a control. For browser configuration, see [JavaScript opt-out setup][2].
+This page describes the shared concepts for client SDK integrations. Support, configuration names, and context update behavior depend on the SDK and version. Check the platform's [client SDK guide][1] before using a control. For platform configuration and examples, see [JavaScript][2], [iOS and tvOS][4], or [Android and Android TV][5].
 
 ## Choose a control
 
@@ -105,3 +105,6 @@ Assignment requests and permitted exposures can still contain subject data. Neit
 [1]: /feature_flags/client/
 [2]: /feature_flags/client/javascript/#control-flag-evaluation-telemetry-and-experiment-participation
 [3]: /feature_flags/client/#telemetry-options-by-platform
+
+[4]: /feature_flags/client/ios/#control-flag-evaluation-telemetry-and-experiment-participation
+[5]: /feature_flags/client/android/#control-flag-evaluation-telemetry-and-experiment-participation
