@@ -247,6 +247,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "EvaluateAIGuardRequest": {
+    "description": "Analyzes a conversation for security threats such as prompt injection,\njailbreak attempts, and other AI-specific attacks. Returns an action\nrecommendation (`ALLOW`, `DENY`, or `ABORT`) along with the detected threat\ntags and their confidence scores.\nAI Guard must be activated for the organization, and the calling user or\napplication key requires the `ai_guard_evaluate` permission. The action is a\nrecommendation for the caller to enforce: ALLOW permits the interaction,\nDENY blocks the interaction, and ABORT terminates the workflow.\nThis endpoint is rate limited to `700` requests per minute per organization.\nOrganization token limits can also result in a 429 response.\nMalformed messages return a 400 response. Requests exceeding the raw-input\nlimit of 1,000,000 tokens return a 413 response; this limit applies to the\ninput context, not only the size of the HTTP request body.",
+    "summary": "Evaluate an AI Guard request",
+    "request_description": "The conversation to evaluate for security threats.",
+    "request_schema_description": "The request to evaluate a conversation for security threats."
+  },
   "CreateAIImpactUserActivity": {
     "description": "Send daily AI coding tool activity for one or more users. Each entry records whether a\nuser was active on a given day, along with the AI tools and models they used. An entry\nis stored once per tool, and sending the same user, day, and tool again overwrites the\nprevious value.",
     "summary": "Send AI tool user activity",
