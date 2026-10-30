@@ -1,6 +1,6 @@
 ---
 title: Set Up Deployment Gates
-description: "Compare Just-In-Time (JIT) and preconfigured Deployment Gates and follow the setup walkthrough for your chosen mode."
+description: "Compare Just-In-Time (JIT) and preconfigured Deployment Gates and follow the setup walkthrough for your chosen configuration source."
 further_reading:
 - link: "/deployment_gates/setup/jit"
   tag: "Documentation"
@@ -8,39 +8,20 @@ further_reading:
 - link: "/deployment_gates/setup/preconfigured"
   tag: "Documentation"
   text: "Set up preconfigured Deployment Gates"
-- link: "/deployment_gates/explore"
-  tag: "Documentation"
-  text: "Learn about the Deployment Gates explorer"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"
 ---
 
-Deployment Gates have two main components:
+Choose where your Deployment Gates are defined, then follow the setup instructions. For a comparison of the two configuration sources, see [Configuration sources][1].
 
-- A **Gate** is defined for a service and environment (and optionally an identifier), and evaluates one or more rules to decide whether a deployment should proceed.
-- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors or running APM Faulty Deployment Detection analysis on the deployed version.
-
-Gate evaluations are asynchronous — the API returns immediately with an evaluation ID, and the result resolves to `pass` or `fail` over time as the rules run.
-
-## Deployment Gate evaluation modes
-Deployment Gates support two evaluation modes: Just-In-Time (JIT) and preconfigured.
-
-
-| | **[JIT][1]** (default) | **[Preconfigured][2]** |
-|---|---|---|
-| **Where rules live** | Inline in your deployment configuration or CI step | Persisted in Datadog (UI, API, or Terraform) |
-| **Setup in Datadog** | None | Create a gate and rules ahead of time |
-| **Best for** | Rules-as-code, per-deployment flexibility, teams that own their own gate configuration | Shared rules across services, central management, non-CI editing |
-| **How to evaluate** | Send rules in the evaluation request | Reference the gate by service, environment, and optionally identifier |
-
-You can use different modes across different gates if needed.
-
-If you're unsure where to start, use JIT. It requires no setup in Datadog and lets you iterate on rules directly in your deployment configuration.
+{{< whatsnext desc="Set up Deployment Gates:" >}}
+    {{< nextlink href="/deployment_gates/setup/jit" >}}<u>Just-In-Time (JIT)</u>: Define gates and rules in your deployment configuration, with no setup in Datadog.{{< /nextlink >}}
+    {{< nextlink href="/deployment_gates/setup/preconfigured" >}}<u>Preconfigured</u>: Create gates and rules in Datadog with the UI, API, or Terraform.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /deployment_gates/setup/jit
-[2]: /deployment_gates/setup/preconfigured
+[1]: /deployment_gates/#configuration-sources
