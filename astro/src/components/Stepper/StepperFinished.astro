@@ -1,0 +1,23 @@
+---
+import styles from "./Stepper.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  stepperId: string;
+}
+
+const { stepperId } = Astro.props;
+---
+
+{/* Hidden until the controller detects the stepper has been finished. */}
+<div
+  class={cl("stepper__finished")}
+  id={`${stepperId}-finished`}
+  role="status"
+  aria-live="polite"
+  data-hidden="true"
+>
+  <slot />
+</div>

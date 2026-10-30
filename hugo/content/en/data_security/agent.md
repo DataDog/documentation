@@ -181,6 +181,8 @@ agent diagnose show-metadata agent-telemetry
 | logs_destination.destination_workers        | Maximum number of active HTTP connections per log destination                                                          |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
+| serializer.metadata_payload_dropped         | Number of metadata payloads dropped for exceeding the payload size limits, tagged by limit exceeded (compressed, uncompressed, or both) |
+| serializer.metadata_payload_dropped_bytes   | Size in bytes of the metadata payloads dropped for exceeding the payload size limits, tagged by compressed or uncompressed size |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
 | transactions.input_bytes                    | Incoming transaction payload size in bytes                                                                             |
 | transactions.success                        | Successful transaction count                                                                                           |
@@ -262,6 +264,7 @@ agent diagnose show-metadata agent-telemetry
 | instrumentation_controller.resources        | Number of `DatadogInstrumentation` resources tracked by the controller                                                 |
 | instrumentation_controller.reconciliations  | Number of `DatadogInstrumentation` section reconciliation attempts, tagged by section and status                       |
 | language_detection_patcher.patches          | Number of language detection patcher patches                                                                           |
+| metadata_streaming.history_resyncs          | Total number of resyncs the Cluster Agent has made because an Agent fell behind the retained version history |
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
