@@ -6,7 +6,7 @@ private: true
 ## Guides
 
 {{< whatsnext desc=" " >}}
-{{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}Getting Started with OpenTelemetry at Datadog{{< /nextlink >}}
+{{< nextlink href="/getting_started/opentelemetry/" >}}Explore a Datadog Exporter example with a Java application{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/guide/instrument_unsupported_runtimes/" >}}Instrument Unsupported Runtimes with OpenTelemetry{{< /nextlink >}}
@@ -18,8 +18,7 @@ private: true
 {{< nextlink href="/opentelemetry/migrate/collector_0_120_0" >}}Migrate to OpenTelemetry Collector version 0.120.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/collector_0_95_0" >}}Migrate to OpenTelemetry Collector Version 0.95.0+{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/migrate_operation_names" >}}Migrate to New Operation Name Mappings{{< /nextlink >}}
-{{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Datadog Distribution of OTel Collector
-{{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Agent's Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Read more on the blog
