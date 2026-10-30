@@ -31,7 +31,7 @@ Code evaluators run on the same scopes as [custom LLM-as-a-judge evaluators][2]:
 1. In Datadog, navigate to the Agent Observability [Evaluators page][3]. Select {{< ui >}}Create Evaluator{{< /ui >}}.
 1. Start the evaluator in one of these ways:
    - Under {{< ui >}}Templates{{< /ui >}}, select a template from the {{< ui >}}Code Evaluations{{< /ui >}} group. The editor opens in Code mode with the template's function.
-   - Under {{< ui >}}Scratch{{< /ui >}}, select the scope you want to evaluate. In the editor, set {{< ui >}}Type{{< /ui >}} to {{< ui >}}Code (deterministic){{< /ui >}}.
+   - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). In the editor, set {{< ui >}}Type{{< /ui >}} to {{< ui >}}Code (deterministic){{< /ui >}}, then select {{< ui >}}Create from scratch{{< /ui >}} in the {{< ui >}}Template{{< /ui >}} picker.
 1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `empty-tool-result`). The name must be unique within your application.
 1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria, for example `@meta.span.kind:tool` to evaluate only tool spans. See [Define the evaluation scope][4] for details.
 1. In the {{< ui >}}Template{{< /ui >}} picker, select a starting point:
