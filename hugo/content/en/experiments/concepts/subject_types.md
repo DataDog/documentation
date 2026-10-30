@@ -79,6 +79,10 @@ LEFT JOIN measures
     AND measures.timestamp BETWEEN assignments.timestamp AND {{experiment_end_timestamp}}
 ```
 
+### Identity resolution
+
+For warehouse experiments that use different identifiers for exposures and outcomes, configure a randomization subject and an additional subject. For example, connect anonymous exposures to purchases recorded under a signed-in user ID. See [Identity Resolution][5] for the data requirements and setup steps.
+
 ### Product Analytics and RUM metrics
 
 Each subject type has an associated **attribute**. Datadog uses this attribute to associate Product Analytics and Real User Monitoring (RUM) data with experiment exposures. The attribute value must match the identifier you pass as `targetingKey`.
@@ -110,3 +114,4 @@ When Datadog computes experiment results, it joins experiment exposures to Produ
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
 [3]: /experiments/statistics/analysis_methods/
 [4]: /experiments/guide/connecting_a_data_warehouse/
+[5]: /experiments/concepts/identity_resolution/
