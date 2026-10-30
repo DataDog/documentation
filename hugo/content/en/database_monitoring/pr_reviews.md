@@ -55,7 +55,7 @@ When you open or update a pull request, Datadog reads the diff and looks for dat
 
 ### Production query changes
 
-Datadog flags a pull request that changes or removes a query that runs in production. The comment shows the query before and after the change, and the query's production footprint:
+Datadog flags pull requests that change or remove a query that runs in production. The inline comment shows the query before and after the change, and the query's production footprint:
 
 | Field | Description |
 | ----- | ----------- |
