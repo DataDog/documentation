@@ -22717,11 +22717,274 @@ components:
         scaling:
           $ref: "#/components/schemas/ToplistWidgetScaling"
       type: object
+    TopologyMapInlineColumnKindScalar:
+      default: scalar
+      description: Column of numbers.
+      enum:
+        - scalar
+      example: scalar
+      type: string
+      x-enum-varnames:
+        - SCALAR
+    TopologyMapInlineColumnKindString:
+      default: string
+      description: Column of strings.
+      enum:
+        - string
+      example: string
+      type: string
+      x-enum-varnames:
+        - STRING
+    TopologyMapInlineData:
+      additionalProperties: false
+      description: >-
+        Static nodes and edges, stored in columns. Within a table, every column must have the same number of values and a unique `id`.
+      properties:
+        edges:
+          $ref: "#/components/schemas/TopologyMapInlineEdgesData"
+        nodes:
+          $ref: "#/components/schemas/TopologyMapInlineNodesData"
+      type: object
+    TopologyMapInlineEdgeColumn:
+      additionalProperties: false
+      description: Column of edge endpoint node IDs.
+      properties:
+        id:
+          $ref: "#/components/schemas/TopologyMapInlineEdgeColumnId"
+        kind:
+          $ref: "#/components/schemas/TopologyMapInlineColumnKindString"
+        values:
+          description: Node IDs.
+          example: ["service:web"]
+          items:
+            description: Node ID.
+            type: string
+          type: array
+      required:
+        - kind
+        - id
+        - values
+      type: object
+    TopologyMapInlineEdgeColumnId:
+      description: Edge endpoint the column holds.
+      enum:
+        - source
+        - target
+      example: source
+      type: string
+      x-enum-varnames:
+        - SOURCE
+        - TARGET
+    TopologyMapInlineEdgesData:
+      additionalProperties: false
+      description: Table of edges, one row per edge.
+      properties:
+        columns:
+          description: Columns of the edges table. Must include one `source` column and one `target` column.
+          items:
+            $ref: "#/components/schemas/TopologyMapInlineEdgeColumn"
+          type: array
+      required:
+        - columns
+      type: object
+    TopologyMapInlineNodeColumn:
+      description: Column of the nodes table.
+      oneOf:
+        - $ref: "#/components/schemas/TopologyMapInlineNodeIdColumn"
+        - $ref: "#/components/schemas/TopologyMapInlineNodeStringColumn"
+        - $ref: "#/components/schemas/TopologyMapInlineNodeValueColumn"
+    TopologyMapInlineNodeIdColumn:
+      additionalProperties: false
+      description: Column of node IDs.
+      properties:
+        id:
+          $ref: "#/components/schemas/TopologyMapInlineNodeIdColumnId"
+        kind:
+          $ref: "#/components/schemas/TopologyMapInlineColumnKindString"
+        values:
+          description: Node IDs.
+          example: ["service:web", "service:db"]
+          items:
+            description: Node ID.
+            type: string
+          type: array
+      required:
+        - kind
+        - id
+        - values
+      type: object
+    TopologyMapInlineNodeIdColumnId:
+      default: id
+      description: ID of the node ID column.
+      enum:
+        - id
+      example: id
+      type: string
+      x-enum-varnames:
+        - ID
+    TopologyMapInlineNodeStringColumn:
+      additionalProperties: false
+      description: Column of node text.
+      properties:
+        id:
+          $ref: "#/components/schemas/TopologyMapInlineNodeStringColumnId"
+        kind:
+          $ref: "#/components/schemas/TopologyMapInlineColumnKindString"
+        values:
+          description: >-
+            Text for each node. A null `title` shows the node's ID; a null `subtitle` shows no subtitle.
+          example: ["api-team", null]
+          items:
+            description: Text for one node.
+            nullable: true
+            type: string
+          type: array
+      required:
+        - kind
+        - id
+        - values
+      type: object
+    TopologyMapInlineNodeStringColumnId:
+      description: >-
+        Node field the column fills. `title` is bold text at the top of the node; `subtitle` is smaller text below it.
+      enum:
+        - title
+        - subtitle
+      example: title
+      type: string
+      x-enum-varnames:
+        - TITLE
+        - SUBTITLE
+    TopologyMapInlineNodeValueColumn:
+      additionalProperties: false
+      description: >-
+        Column of numeric node values. Nodes display non-null values in order of column `id`.
+      properties:
+        id:
+          description: Position of the value in the node, as `values[N]`. The smallest N appears first.
+          example: "values[0]"
+          pattern: '^values\[(0|[1-9][0-9]*)\]$'
+          type: string
+        kind:
+          $ref: "#/components/schemas/TopologyMapInlineColumnKindScalar"
+        meta:
+          $ref: "#/components/schemas/TopologyMapInlineNodeValueColumnMeta"
+        values:
+          description: Value for each node. Null values are not displayed.
+          example: [1.5, null]
+          items:
+            description: Value for one node.
+            format: double
+            nullable: true
+            type: number
+          type: array
+      required:
+        - kind
+        - id
+        - values
+      type: object
+    TopologyMapInlineNodeValueColumnMeta:
+      additionalProperties: false
+      description: Display options for a value column.
+      properties:
+        unit:
+          $ref: "#/components/schemas/NumberFormatUnit"
+      type: object
+    TopologyMapInlineNodesData:
+      additionalProperties: false
+      description: Table of nodes, one row per node.
+      properties:
+        columns:
+          description: >-
+            Columns of the nodes table. Must include an `id` column, unless the list is empty (no nodes).
+          items:
+            $ref: "#/components/schemas/TopologyMapInlineNodeColumn"
+          type: array
+      required:
+        - columns
+      type: object
+    TopologyMapLayout:
+      additionalProperties: false
+      description: >-
+        Algorithm that positions nodes and edges. The `hierarchical` layout places nodes in ranks so edges flow in one direction.
+      properties:
+        direction:
+          $ref: "#/components/schemas/TopologyMapLayoutDirection"
+        type:
+          $ref: "#/components/schemas/TopologyMapLayoutType"
+      required:
+        - type
+        - direction
+      type: object
+    TopologyMapLayoutDirection:
+      description: >-
+        Direction of ranks. For example, `top-to-bottom` places first-rank nodes at the top and last-rank nodes at the bottom.
+      enum:
+        - top-to-bottom
+        - bottom-to-top
+        - left-to-right
+        - right-to-left
+      example: top-to-bottom
+      type: string
+      x-enum-varnames:
+        - TOP_TO_BOTTOM
+        - BOTTOM_TO_TOP
+        - LEFT_TO_RIGHT
+        - RIGHT_TO_LEFT
+    TopologyMapLayoutType:
+      default: hierarchical
+      description: Type of layout algorithm.
+      enum:
+        - hierarchical
+      example: hierarchical
+      type: string
+      x-enum-varnames:
+        - HIERARCHICAL
     TopologyMapWidgetDefinition:
       description: This widget displays a topology of nodes and edges for different data sources. It replaces the service map widget.
       oneOf:
         - $ref: "#/components/schemas/TopologyMapWidgetDefinitionDataStreams"
         - $ref: "#/components/schemas/TopologyMapWidgetDefinitionServiceMap"
+        - $ref: "#/components/schemas/TopologyMapWidgetDefinitionCustom"
+    TopologyMapWidgetDefinitionCustom:
+      additionalProperties: false
+      description: >-
+        Custom topology map widget. Renders nodes and edges from inline `data` and from scalar `requests`. There is one node for each node ID found in `data.nodes`, `data.edges`, and `requests`. When `data` and several requests set the same field on the same node (such as `title` or `values[0]`), the last non-null value wins.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        data:
+          $ref: "#/components/schemas/TopologyMapInlineData"
+        description:
+          description: The description of the widget.
+          type: string
+        layout:
+          $ref: "#/components/schemas/TopologyMapLayout"
+        requests:
+          description: List of scalar requests that supply node data. Can be empty.
+          items:
+            $ref: "#/components/schemas/TopologyRequestCustom"
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/TopologyMapWidgetDefinitionType"
+      required:
+        - type
+        - requests
+        - layout
+      type: object
     TopologyMapWidgetDefinitionDataStreams:
       additionalProperties: false
       description: Topology map widget backed by the data streams data source.
@@ -22869,6 +23132,87 @@ components:
       type: string
       x-enum-varnames:
         - SERVICE_MAP
+    TopologyRequestCustom:
+      additionalProperties: false
+      description: Scalar request whose result rows become nodes.
+      properties:
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: "#/components/schemas/WidgetFormula"
+          type: array
+        projection:
+          $ref: "#/components/schemas/TopologyRequestCustomProjection"
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          example:
+            - data_source: "metrics"
+              name: "my_query"
+              query: "avg:system.cpu.user{*}"
+          items:
+            $ref: "#/components/schemas/FormulaAndFunctionQueryDefinition"
+          type: array
+        response_format:
+          $ref: "#/components/schemas/TopologyRequestCustomResponseFormat"
+        sort:
+          $ref: "#/components/schemas/WidgetSortBy"
+      required:
+        - response_format
+        - queries
+        - projection
+      type: object
+    TopologyRequestCustomProjection:
+      additionalProperties: false
+      description: >-
+        Mapping from result columns to node fields. Each result row feeds one node.
+      properties:
+        dimensions:
+          description: List of mappings from a result column to a node field. Each `dimension` must be unique.
+          items:
+            $ref: "#/components/schemas/TopologyRequestCustomProjectionDimension"
+          type: array
+        type:
+          $ref: "#/components/schemas/TopologyRequestCustomProjectionType"
+      required:
+        - type
+        - dimensions
+      type: object
+    TopologyRequestCustomProjectionDimension:
+      additionalProperties: false
+      description: Mapping from one result column to one node field.
+      properties:
+        column:
+          description: Column name from the result. Must be a group-by tag key or a formula.
+          example: service
+          type: string
+        dimension:
+          description: >-
+            Node field that receives the column's value: `id`, `title`, `subtitle`, or `values[N]` for the value at position N. When `id` is not set, each node's ID is derived from the group-by tags (for example, `env:prod,service:web`). When `title` is not set, the title is the node's ID. When several rows set the same non-`id` field on a node, the last non-null value wins.
+          example: "values[0]"
+          pattern: '^(id|title|subtitle|values\[(0|[1-9][0-9]*)\])$'
+          type: string
+      required:
+        - column
+        - dimension
+      type: object
+    TopologyRequestCustomProjectionType:
+      default: custom_topology_map_node
+      description: Projection type. Each result row is a node.
+      enum:
+        - custom_topology_map_node
+      example: custom_topology_map_node
+      type: string
+      x-enum-varnames:
+        - CUSTOM_TOPOLOGY_MAP_NODE
+    TopologyRequestCustomResponseFormat:
+      default: scalar
+      description: Response format of a custom topology map request.
+      enum:
+        - scalar
+      example: scalar
+      type: string
+      x-enum-varnames:
+        - SCALAR
     TopologyRequestDataStreams:
       description: Request that returns nodes and edges from the data streams data source.
       properties:
