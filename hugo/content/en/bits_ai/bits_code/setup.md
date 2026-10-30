@@ -173,8 +173,6 @@ The default allowlist includes the following domains. This list will evolve over
 | Rust | `index.crates.io`, `static.crates.io` |
 | Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
 
-With the {{< ui >}}Default Allowlist{{< /ui >}} or {{< ui >}}Custom + Default Allowlist{{< /ui >}} policy, Bits Code can read the public Datadog documentation at `docs.datadoghq.com` without additional configuration.
-
 ### Use Docker and Docker Compose
 
 Bits Code sessions support Docker and Docker Compose commands. You can build images and run containers as part of repository setup, testing, and validation.
