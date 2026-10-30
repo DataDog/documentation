@@ -99,11 +99,18 @@ For Node.js, keep `dd-trace` external to a single-file application bundle and ma
 ## Verify the setup
 
 1. Confirm the SDK version and selected configuration source.
-2. Initialize the provider and evaluate a non-production flag with a non-sensitive targeting key.
-3. Check application logs for event transport errors. A ready provider confirms configuration delivery, not event delivery.
-4. Confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not `false` when you need evaluation events.
-5. Check the environment's `observe_full_evaluation_data` value in the [environment API response][4] when troubleshooting missing targeting attributes. Allow the configuration polling interval for changes to reach the SDK.
-6. Validate experiment exposures and the OTLP metric separately if your application uses them.
+2. Initialize the provider and evaluate an enabled non-production flag with a non-sensitive targeting key.
+3. Open the flag's details page in Datadog and select the environment and time range used for your test. In the **Evaluations** graph, select **Total** and confirm that data appears for your server SDK source. Allow time for the SDK to send its batch and for Datadog to process it. Data from a browser or another SDK does not confirm delivery from the server application you are testing.
+4. Check application logs for event transport errors. A ready provider confirms configuration delivery, not event delivery.
+5. Confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not `false` when you need EVP flag evaluation events.
+6. Check the environment's `observe_full_evaluation_data` value in the [environment API response][4] when troubleshooting missing targeting attributes. Allow the configuration polling interval for changes to reach the SDK.
+7. Validate experiment exposures and the OTLP metric separately if your application uses them.
+
+Evaluation counts are available with either value of `observe_full_evaluation_data`. Setting it to `true` enables the additional targeting-key and evaluation-context data described above.
+
+{{< img src="feature_flags/guide/server_evaluation_events/evaluations_graph.png" alt="Evaluations graph in Unique mode showing browser SDK data grouped by variant and SDK source" style="width:100%;" >}}
+
+The example above shows browser SDK data in **Unique** mode. Use **Total** and check your server SDK source when verifying server-side delivery.
 
 ## Further reading
 
