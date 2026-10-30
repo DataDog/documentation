@@ -1,0 +1,105 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Pagination from "@components/Pagination/Pagination.astro";
+
+const title = "Pagination";
+
+const labels = { navLabel: "Pagination", previous: "Prev", next: "Next" };
+const hrefForPage = (pageNumber: number) =>
+  `/dd_e2e/components/pagination/?page=${pageNumber}`;
+
+const examples = [
+  { id: "first-page", heading: "First page", currentPage: 1, totalPages: 3 },
+  {
+    id: "middle-page",
+    heading: "Middle of a long range",
+    currentPage: 5,
+    totalPages: 10,
+  },
+  { id: "last-page", heading: "Last page", currentPage: 3, totalPages: 3 },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Pagination</h1>
+
+      <p>
+        Prev/next and numbered links for a statically paginated list. Gaps in a
+        long range collapse into an ellipsis. Renders nothing for a single page.
+      </p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr
+            ><th>Property</th><th>Type</th><th>Default</th><th>Description</th
+            ></tr
+          >
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>currentPage</code></td>
+            <td><code>number</code></td>
+            <td>&mdash;</td>
+            <td>The page being shown, starting at 1</td>
+          </tr>
+          <tr>
+            <td><code>totalPages</code></td>
+            <td><code>number</code></td>
+            <td>&mdash;</td>
+            <td>The number of pages</td>
+          </tr>
+          <tr>
+            <td><code>hrefForPage</code></td>
+            <td><code>(pageNumber: number) =&gt; string</code></td>
+            <td>&mdash;</td>
+            <td>Builds each page's URL</td>
+          </tr>
+          <tr>
+            <td><code>labels</code></td>
+            <td><code>{"{ navLabel, previous, next }"}</code></td>
+            <td>&mdash;</td>
+            <td>The nav landmark's label and the Prev/Next text</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+      {
+        examples.map((example) => (
+          <section id={example.id}>
+            <h3>{example.heading}</h3>
+            <Pagination
+              currentPage={example.currentPage}
+              totalPages={example.totalPages}
+              hrefForPage={hrefForPage}
+              labels={labels}
+            />
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

@@ -27,7 +27,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 #### Minimum version requirements
 
 - **Datadog Agent**: v7.80
-  - (Preferred version: the [most recent Agent version][2]). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics. 
+  - (Preferred version: the [most recent Agent version][2]). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics.
 - **Operating system**: Linux
 - **Linux kernel**: 5.8 and above
 - **NVIDIA driver**: version 450.51
@@ -37,7 +37,10 @@ If using Kubernetes, the following additional requirements must be met:
 - [**Datadog Operator**][5]: version 1.18, _or_ [**Datadog Helm chart**][6]: version 3.137.3
 - **Kubernetes**: 1.22 with PodResources API active
 
-If using Google Kubernetes Engine, Container-Optimized OS nodes are _not_ supported due to limitations in the kernel and permission system.
+If using Google Kubernetes Engine (GKE) with Container-Optimized OS (COS) nodes, the following additional requirements must be met:
+
+- [**Datadog Operator**][5]: version 1.29, _or_ [**Datadog Helm chart**][6]: version 3.231.4
+- The GKE COS [provider][14] is set, as shown in the GKE examples on this page. This setting mounts the NVIDIA driver libraries that GKE installs on COS nodes into the Agent containers.
 
 ## Setting up GPU Monitoring
 
@@ -61,11 +64,19 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    `gpu.enabled: true`
    : Enables GPU Monitoring.
 
+   `gpu.privilegedMode: true`
+   : _Required for GKE_. Enables the GPU Monitoring module in `system-probe`. Required by `gpu.patchCgroupPermissions`.
+
    `gpu.patchCgroupPermissions: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpu.requiredRuntimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS, Oracle Cloud, and GKE with GKE-managed GPU drivers, this value should be set to the empty string as the default runtime class already allows GPU device access.
+
+   If the GKE nodes use Container-Optimized OS, also add the following [provider][3] annotation to the `DatadogAgent` metadata:
+
+   `agent.datadoghq.com/cluster-provider: gke-cos`
+   : Mounts the NVIDIA driver libraries from the COS host into the Agent containers.
 
    Example `datadog-agent.yaml`, running on GKE:
 
@@ -74,18 +85,22 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    kind: DatadogAgent
    metadata:
      name: datadog
+     annotations:
+       agent.datadoghq.com/cluster-provider: gke-cos # Only for GKE with Container-Optimized OS nodes
    spec:
      features:
        gpu:
          enabled: true
+         privilegedMode: true # Required for GKE
          patchCgroupPermissions: true # Only for GKE
-         requiredRuntimeClassName: "" # Only for AWS EKS or Oracle Cloud
+         requiredRuntimeClassName: "" # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
    ```
 
 3. Apply your changes and restart the Datadog Agent.
 
 [1]: /containers/kubernetes/installation/?tab=datadogoperator
 [2]: https://github.com/DataDog/datadog-agent/releases
+[3]: /containers/datadog_operator/providers/#on-a-datadogagent
 
 {{% /tab %}}
 
@@ -97,11 +112,17 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _Required for GKE_. Enables the GPU Monitoring module in `system-probe`. Required by `gpuMonitoring.configureCgroupPerms`.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS, Oracle Cloud, and GKE with GKE-managed GPU drivers, this value should be set to the empty string as the default runtime class already allows GPU device access.
+
+   `providers.gke.cos: true`
+   : _Only for GKE with Container-Optimized OS nodes_. Mounts the NVIDIA driver libraries from the COS host into the Agent containers.
 
    Example `datadog-values.yaml`, running on GKE:
 
@@ -109,8 +130,13 @@ The following instructions are the basic steps to set up GPU Monitoring in the f
    datadog:
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
    ```
 
 3. Upgrade your Helm chart and restart the Datadog Agent.
@@ -242,6 +268,8 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 
 2. Modify your `DatadogAgent` resource by adding the `agent.datadoghq.com/update-metadata` annotation to the `DatadogAgent` resource.
 
+   If all nodes in the cluster use GKE Container-Optimized OS, also add the `agent.datadoghq.com/cluster-provider: gke-cos` [provider][5] annotation. If only some nodes use Container-Optimized OS, set the annotation on a [Datadog Agent Profile that targets those nodes][6] instead.
+
    The additions to the `datadog-agent.yaml` file should look like this:
 
    ```yaml
@@ -251,6 +279,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
      name: datadog
      annotations:
        agent.datadoghq.com/update-metadata: "true"  # Required for the Datadog Agent Internal mode to work.
+       agent.datadoghq.com/cluster-provider: gke-cos # Only when every node in the cluster uses Container-Optimized OS
    ```
 
 3. Apply your changes to the `DatadogAgent` resource. These changes are safe to apply to all Datadog Agents, regardless of whether they run on GPU nodes.
@@ -275,6 +304,7 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
        features:
          gpu:
            enabled: true
+           privilegedMode: true # Required for GKE
            patchCgroupPermissions: true # Only for GKE
    ```
 
@@ -284,6 +314,8 @@ To set up GPU Monitoring on a mixed cluster, use the Operator's [Agent Profiles]
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md
 [3]: http://nvidia.com/gpu.present
 [4]: https://github.com/DataDog/datadog-agent/releases
+[5]: /containers/datadog_operator/providers/#on-a-datadogagent
+[6]: /containers/datadog_operator/providers/#on-a-datadogagentprofile
 
 {{% /tab %}}
 {{% tab "Datadog Operator (1.18 or 1.19)" %}}
@@ -412,11 +444,17 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
    `gpuMonitoring.enabled: true`
    : Enables GPU Monitoring.
 
+   `gpuMonitoring.privilegedMode: true`
+   : _Required for GKE_. Enables the GPU Monitoring module in `system-probe`. Required by `gpuMonitoring.configureCgroupPerms`.
+
    `gpuMonitoring.configureCgroupPerms: true`
    : _Only for GKE_. Enables a code path in `system-probe` that helps the Agent access GPU devices.
 
    `gpuMonitoring.runtimeClassName:<runtime-name>`
-   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS and Oracle Cloud, this value should be set to the empty string as the default runtime class already allows GPU device access.
+   : _Optional_. Specifies the container runtime for pods that need access to GPU devices, for example: `nvidia`, `nvidia-cdi`, `nvidia-legacy`. The default value is `nvidia`, as that is the default runtime defined by the NVIDIA GPU Operator. In EKS, Oracle Cloud, and GKE with GKE-managed GPU drivers, this value should be set to the empty string as the default runtime class already allows GPU device access.
+
+   `providers.gke.cos: true`
+   : _Only for GKE with Container-Optimized OS nodes_. Mounts the NVIDIA driver libraries from the COS host into the Agent containers.
 
    Example `datadog-gpu-values.yaml`:
 
@@ -426,8 +464,13 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
      kubeStateMetricsEnabled: false # Disabled, as you're joining an existing Cluster Agent
      gpuMonitoring:
        enabled: true
+       privilegedMode: true        # Required for GKE
        configureCgroupPerms: true  # Only for GKE
-       runtimeClassName: ""        # Only for Oracle Cloud and AWS EKS
+       runtimeClassName: ""        # Only for AWS EKS, Oracle Cloud, or GKE-managed GPU drivers
+
+   providers:
+     gke:
+       cos: true                   # Only for GKE with Container-Optimized OS nodes
 
    agents:
      affinity:
@@ -485,3 +528,4 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
 [11]: /getting_started/integrations/azure/?tab=createanappregistration
 [12]: /getting_started/integrations/oci/
 [13]: /infrastructure/process?tab=linuxwindows#installation
+[14]: /containers/datadog_operator/providers/

@@ -1,0 +1,268 @@
+/* Structural dimensions are component-local: the numbered-circle size, the
+   left gutter that clears it, and the connecting line geometry derived from
+   them. Colors, spacing, and fonts use shared design tokens. */
+.stepper {
+  --stepper-circle-size: 24px;
+  --stepper-gutter: 48px;
+  --stepper-line-width: 1px;
+  --stepper-title-pad-top: 16px;
+  /* line centered under the circle: (circle / 2) - (line / 2) */
+  --stepper-line-left: 11.5px;
+  /* vertical center of the circle: title-pad-top + 1px + (circle / 2) */
+  --stepper-circle-center: 29px;
+
+  position: relative;
+  margin-bottom: var(--space-lg);
+  /* Collapsed steppers start hidden so readers never see every step expanded
+     for a frame before the controller collapses them. The controller adds
+     --initialized once the initial state is applied. Open steppers are already
+     in their final layout, so they stay visible. */
+  opacity: 0;
+}
+
+.stepper--open,
+.stepper--initialized {
+  opacity: 1;
+}
+
+/* Any element the controller marks hidden is removed from layout. Uses a data
+   attribute (not the `hidden` prop) so the responsive icon/label rules below
+   can still override visibility without a specificity fight. */
+.stepper [data-hidden="true"] {
+  display: none !important;
+}
+
+.stepper__steps {
+  padding: 0;
+}
+
+.stepper__step {
+  position: relative;
+  padding-left: var(--stepper-gutter);
+}
+
+/* Vertical connecting line running through the circles */
+.stepper__step::before {
+  content: "";
+  position: absolute;
+  left: var(--stepper-line-left);
+  top: 0;
+  bottom: 0;
+  width: var(--stepper-line-width);
+  background-color: var(--color-border);
+}
+
+/* Numbered circle. Uses data-step-number (set server-side) rather than a CSS
+   counter, which is unreliable when steps toggle display. */
+.stepper__step::after {
+  content: attr(data-step-number);
+  position: absolute;
+  left: 0;
+  top: calc(var(--stepper-title-pad-top) + 2px);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stepper-circle-size);
+  height: var(--stepper-circle-size);
+  border-radius: 50%;
+  background-color: var(--color-text-muted);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+  padding-bottom: 2px;
+  transition: background-color 0.15s;
+  /* White ring so the connecting line doesn't show through the circle */
+  box-shadow: 0 0 0 5px var(--color-bg);
+}
+
+/* First step: line starts below the first circle */
+.stepper__step--first::before {
+  top: var(--stepper-circle-center);
+}
+
+/* Last step: line ends at the last circle's center */
+.stepper__step--last::before {
+  bottom: auto;
+  height: var(--stepper-circle-center);
+}
+
+/* Single step: no line at all */
+.stepper__step--first.stepper__step--last::before {
+  display: none;
+}
+
+/* Active step: brand-colored circle */
+.stepper__step--active::after {
+  background-color: var(--color-brand);
+}
+
+/* Expanded mode: every circle brand-colored, still showing its number */
+.stepper--all-expanded .stepper__step::after {
+  content: attr(data-step-number);
+  background-color: var(--color-brand);
+  background-image: none;
+}
+
+/* Completed step: green circle with a checkmark */
+.stepper__step--completed::after {
+  content: "";
+  background-color: var(--color-forest);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath fill='%23fff' d='m22.567 4.73l-1.795-1.219a1.09 1.09 0 0 0-1.507.287l-8.787 12.959l-4.039-4.039a1.09 1.09 0 0 0-1.533 0l-1.533 1.536a1.084 1.084 0 0 0 0 1.534L9.582 22c.349.347.895.615 1.387.615s.988-.31 1.307-.774l10.58-15.606a1.085 1.085 0 0 0-.289-1.505'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px 14px;
+}
+
+.stepper__step-title {
+  display: block;
+  margin: 0;
+  padding: var(--stepper-title-pad-top) 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: var(--stepper-circle-size);
+  cursor: pointer;
+  user-select: none;
+}
+
+.stepper--all-expanded .stepper__step-title {
+  cursor: default;
+}
+
+.stepper__step-content {
+  display: none;
+  padding-bottom: var(--space-sm);
+}
+
+.stepper__step-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Content is visible for the active step, or for every step when expanded */
+.stepper__step--active .stepper__step-content,
+.stepper--all-expanded .stepper__step-content {
+  display: block;
+}
+
+.stepper__step-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.stepper__viz-controls {
+  display: flex;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+  margin-right: var(--space-xs);
+}
+
+.stepper__nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0 var(--space-md);
+}
+
+.stepper__btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 16px 11px;
+  border: var(--border-width) solid var(--color-brand);
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg);
+  color: var(--color-brand);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+
+.stepper__btn:hover {
+  background-color: var(--color-brand);
+  color: var(--color-text-inverse);
+}
+
+/* Primary (filled) buttons */
+.stepper__next-btn,
+.stepper__finish-btn,
+.stepper__reset-btn {
+  background-color: var(--color-brand);
+  color: var(--color-text-inverse);
+}
+
+.stepper__next-btn:hover,
+.stepper__finish-btn:hover,
+.stepper__reset-btn:hover {
+  background-color: var(--color-brand-active);
+  border-color: var(--color-brand-active);
+}
+
+/* Text-only viz controls (Expand all / Collapse all) */
+.stepper__show-all-btn,
+.stepper__collapse-btn {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--color-brand);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  line-height: var(--stepper-circle-size);
+  gap: var(--space-xs);
+}
+
+.stepper__show-all-btn:hover,
+.stepper__collapse-btn:hover {
+  background-color: transparent;
+  color: var(--color-brand-active);
+  text-decoration: underline;
+}
+
+/* Icons stand in for the text labels on narrow viewports. Scoped under
+   .stepper__btn to win over SvgIcon's global .svg-icon display rule. */
+.stepper__btn .stepper__btn-icon {
+  display: none;
+  position: relative;
+  top: 8px;
+}
+
+.stepper__btn-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 479px) {
+  .stepper__btn .stepper__btn-icon {
+    display: inline-block;
+    left: 9px;
+  }
+
+  .stepper__btn-label {
+    display: none;
+  }
+}
+
+.stepper__finished {
+  padding: var(--space-md) 0;
+  margin-left: var(--stepper-gutter);
+}
+
+.stepper__finished > *:last-child {
+  margin-bottom: 0;
+}
+
+.stepper__reset {
+  padding: var(--space-sm) 0;
+  margin-left: var(--stepper-gutter);
+}

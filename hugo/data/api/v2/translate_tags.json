@@ -1,4 +1,8 @@
 {
+  "ai-guard": {
+    "name": "AI Guard",
+    "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
@@ -153,7 +157,7 @@
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+    "description": "The Containers API allows you to query container data for your organization.\nSee the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
   "customer-org": {
     "name": "Customer Org",
@@ -237,7 +241,7 @@
   },
   "execution-policy": {
     "name": "Execution Policy",
-    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nand where. Each policy pairs an effect (allow or deny) with a pattern of actions,\nand can scope that decision to specific resources."
   },
   "experiments": {
     "name": "Experiments",
@@ -465,7 +469,7 @@
   },
   "rum-replay-sessions": {
     "name": "Rum Replay Sessions",
-    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+    "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
     "name": "Rum Replay Viewership",
@@ -530,10 +534,6 @@
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
-  },
-  "spa": {
-    "name": "Spa",
-    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",
