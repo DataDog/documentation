@@ -13,8 +13,6 @@ further_reading:
   text: "Learn about managed evaluators"
 ---
 
-<div class="alert alert-info"><strong>Preview:</strong> Code evaluators are available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
-
 ## Overview
 
 Code evaluators are custom evaluators that run a JavaScript function you write, instead of sending a prompt to an LLM judge. Use them for checks that have a definite answer, such as:
