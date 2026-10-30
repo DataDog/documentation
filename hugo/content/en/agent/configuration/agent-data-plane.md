@@ -93,16 +93,61 @@ DD_DATA_PLANE_ENABLED=true
 
 ## Disable the Agent Data Plane
 
-To return DogStatsD processing to the core Agent, set the same option to `false` and restart the Agent:
+Disabling ADP returns DogStatsD processing to the core Agent.
 
-| Configuration method   | Setting                                    |
-|------------------------|--------------------------------------------|
-| Datadog Operator       | `spec.features.dataPlane.enabled: false`   |
-| Helm                   | `datadog.dataPlane.enabled: false`         |
-| `datadog.yaml`         | `data_plane.enabled: false`                |
-| Environment variable   | `DD_DATA_PLANE_ENABLED=false`              |
+If you are disabling ADP because of an issue, [send a flare][1] to Datadog Support first. The flare includes ADP diagnostic data only while ADP is running.
 
-If you disable ADP because of an issue, [send a flare][1] to Datadog Support before disabling it. The flare includes ADP diagnostic data only while ADP is running.
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Set the following in your `DatadogAgent` resource:
+
+{{< code-block lang="yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    dataPlane:
+      enabled: false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Set the following in your `values.yaml`:
+
+{{< code-block lang="yaml" >}}
+datadog:
+  dataPlane:
+    enabled: false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Host" %}}
+
+Set the following in your [`datadog.yaml`][1] file, then [restart the Agent][2]:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+data_plane:
+  enabled: false
+{{< /code-block >}}
+
+[1]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Docker and ECS" %}}
+
+Set the following environment variable on the Agent container:
+
+{{< code-block lang="shell" >}}
+DD_DATA_PLANE_ENABLED=false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## What to expect
 
