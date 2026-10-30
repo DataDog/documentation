@@ -13,10 +13,6 @@ further_reading:
   text: "@datadog/apps-frontend package on npm"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
-Datadog Apps is in Preview. Use this form to request access.
-{{< /callout >}}
-
 Embed [Datadog Apps][1] in other Datadog products to place operational tools directly in the surfaces where users investigate issues and take action. An embedded app can display its existing experience or respond to live context supplied by its host, such as a dashboard's time range and template variables.
 
 ## Prerequisites
