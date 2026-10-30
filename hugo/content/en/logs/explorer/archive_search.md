@@ -139,9 +139,7 @@ To optimize performance and reduce costs:
 * **Use Lookup Attributes:** The most effective way to accelerate searches on high-cardinality data like `trace_id` or `user_id`. Up to 2 per archive.
 * **Use zstd compression:** Archives use zstd compression by default, which reduces scan volume and cloud egress costs compared to gzip. If your archive uses gzip, see [Log Archives][9] to switch to zstd.
 
-**Notes**:
-- Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
-- Partition and Lookup attributes are not supported on [Observability Pipelines archives][11].
+**Note**: Only logs archived after you configure Partition or Lookup attributes benefit from accelerated searches. Logs archived before this configuration are not affected.
 
 
 ### Accelerate searches with Partition Attributes

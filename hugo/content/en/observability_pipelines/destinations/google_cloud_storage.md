@@ -44,7 +44,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 ### Connect the storage bucket to Datadog Log Archives
 
-If you [enable Archive Search](#archive-search) on the destination, skip this section. You still need it if the prefix uses template syntax, or if you manage the pipeline with the [API][11] or [Terraform][12].
+If you [enable Archive Search](#archive-search) on the destination, skip this section.
 
 1. Navigate to Datadog [Log Forwarding][19].
 1. Click **New archive**.

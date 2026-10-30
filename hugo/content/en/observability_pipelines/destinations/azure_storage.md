@@ -44,7 +44,7 @@ Create an [Azure storage account][13] if you don't already have one.
 
 #### Connect the Azure container to Datadog Log Archives
 
-If you [enable Archive Search](#archive-search) on the destination, skip this section. You still need it if the prefix uses template syntax, or if you manage the pipeline with the [API][8] or [Terraform][9].
+If you [enable Archive Search](#archive-search) on the destination, skip this section.
 
 1. Navigate to Datadog [Log Forwarding][16].
 1. Click **New archive**.

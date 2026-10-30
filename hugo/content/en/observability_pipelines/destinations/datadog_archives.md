@@ -84,7 +84,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 ### Connect the S3 bucket to Datadog Log Archives
 
-If you [enable Archive Search](#archive-search) on the destination, skip this section. You still need it if the prefix uses template syntax, or if you manage the pipeline with the [API][14] or [Terraform][15].
+If you [enable Archive Search](#archive-search) on the destination, skip this section.
 
 1. Navigate to Datadog [Log Forwarding][17].
 1. Click **New archive**.
