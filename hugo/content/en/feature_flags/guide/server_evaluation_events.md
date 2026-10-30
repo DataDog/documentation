@@ -57,9 +57,19 @@ To include original targeting keys and evaluation context in EVP flag evaluation
 
 The SDK uses the setting captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. To keep SDK memory use bounded, the SDK can omit targeting keys and context when aggregation limits are reached while retaining aggregate counts, even when full data collection is enabled.
 
-Use non-empty targeting keys with valid Unicode text. Hashing uses the UTF-8 representation without trimming or changing case. Identical keys produce identical hashes, and predictable identifiers can be guessed and hashed. Hashing pseudonymizes identifiers; it does not make them anonymous.
+Hashed targeting keys let you correlate EVP flag evaluation events for the same subject. They do not make identifiers anonymous: predictable values can still be guessed and matched to their hashes.
 
 These controls apply to EVP flag evaluation events. They do not redact application logs, experiment exposure payloads, or other telemetry. Review the attributes you put in evaluation contexts before enabling full data collection. Do not include passwords, API keys, or other secrets.
+
+## Use full evaluation data for debugging and analysis
+
+We recommend enabling `observe_full_evaluation_data` when you need to investigate flag behavior for individual subjects or analyze evaluations using attributes from your evaluation context.
+
+With full evaluation data enabled, EVP flag evaluation events can include original targeting keys and evaluation attributes. Use this data in Datadog to:
+
+- Identify which subjects evaluated a flag and which variants they received.
+- Investigate unexpected evaluation results using the attributes supplied with the evaluation.
+- Compare evaluation patterns across groups defined by attributes such as subscription plan, region, or application version, when those attributes are included in your evaluation context.
 
 ## Event delivery and direct fallback
 
