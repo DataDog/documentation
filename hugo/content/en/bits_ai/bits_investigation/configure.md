@@ -105,7 +105,7 @@ Per monitor limit
 
 Organization limit
 : Defines the total number of automatic investigations Bits can run across your entire organization within 24 hours.
-: **Default:** No configurable limit. Bits runs at most 20 automatic investigations per 15 minutes for each organization, even when the organization limit is off.
+: **Default:** Bits runs at most 20 automatic investigations per 15 minutes for each organization, even when the organization limit is off.
 
 For multi alert monitors, each alerting group triggers its own investigation. Every group counts toward the per-monitor limit, the organization limit, and the 15-minute limit. For example, if a monitor alerts on 12 groups at once and the per-monitor limit is 5, Bits investigates 5 groups automatically. You can start [manual investigations][9] for the remaining groups.
 
