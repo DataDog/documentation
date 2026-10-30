@@ -1,6 +1,7 @@
 // Setup picker and compare view for the otel-compatibility shortcode.
 // The shortcode renders the full table; this script only shows, hides, and orders its columns.
 // In compare view, it moves the SDK and receiver menus into the two visible column headers.
+// layouts/partials/footer-scripts.html loads it only on pages that use the shortcode.
 
 const PARAMS = { view: 'compat_view', a: 'compat_a', b: 'compat_b' };
 const VIEWS = ['compare', 'all'];
@@ -56,11 +57,17 @@ function initOtelCompat(root) {
             sdk: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="sdk"]`),
             receiver: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="receiver"]`)
         };
+        // Keep the tooltip elements now: the site's tooltip script moves them to the end of the
+        // page while open and removes them from the page when closed
         return {
             key,
             menus,
             sdk: menus.sdk.querySelector('select'),
-            receiver: menus.receiver.querySelector('select')
+            receiver: menus.receiver.querySelector('select'),
+            tips: {
+                sdk: menus.sdk.querySelector('.tooltip-content'),
+                receiver: menus.receiver.querySelector('.tooltip-content')
+            }
         };
     });
     const viewInputs = [...controls.querySelectorAll('.otel-compat__view input')];
@@ -137,14 +144,12 @@ function initOtelCompat(root) {
         });
     }
 
-    // Show the one-line description of the selected SDK or receiver in the menu's info tooltip.
-    // The site's tooltip script may have moved the tooltip element, so look it up by id.
+    // Show the one-line description of the selected SDK or receiver in the menu's info tooltip
     function syncDescriptions() {
         slots.forEach((slot) => {
             ['sdk', 'receiver'].forEach((role) => {
-                const id = slot.menus[role].querySelector('.tooltip-trigger').getAttribute('aria-describedby');
-                const tip = document.getElementById(id);
-                if (tip) tip.textContent = slot[role].selectedOptions[0]?.dataset.description || '';
+                const option = slot[role].selectedOptions[0];
+                slot.tips[role].textContent = (option && option.dataset.description) || '';
             });
         });
     }
@@ -191,6 +196,8 @@ function initOtelCompat(root) {
     }
 
     function onSlotChange(slot) {
+        // A receiver with no pair for this SDK can't be shown, so move to a valid one
+        syncReceiverOptions(slot);
         const other = slots.find((s) => s !== slot);
         const previous = current[slot.key];
         if (pairIdOf(slot) === pairIdOf(other) && previous) {
@@ -214,14 +221,27 @@ function initOtelCompat(root) {
     setSlot(slots[1], initialB);
 
     slots.forEach((slot) => {
-        slot.sdk.addEventListener('change', () => {
-            syncReceiverOptions(slot);
-            onSlotChange(slot);
-        });
+        slot.sdk.addEventListener('change', () => onSlotChange(slot));
         slot.receiver.addEventListener('change', () => onSlotChange(slot));
     });
     viewInputs.forEach((input) => input.addEventListener('change', () => render()));
     diffInput.addEventListener('change', () => render());
+
+    // The site's tooltip script opens tooltips on hover and touch only. Open them on keyboard
+    // focus too, by sending the trigger the mouse events that script listens for.
+    const triggerOf = (event) => event.target.closest && event.target.closest('.tooltip-trigger');
+    root.addEventListener('focusin', (event) => {
+        const trigger = triggerOf(event);
+        if (trigger) trigger.dispatchEvent(new MouseEvent('mouseenter'));
+    });
+    root.addEventListener('focusout', (event) => {
+        const trigger = triggerOf(event);
+        if (trigger) trigger.dispatchEvent(new MouseEvent('mouseleave'));
+    });
+    root.addEventListener('keydown', (event) => {
+        const trigger = triggerOf(event);
+        if (trigger && event.key === 'Escape') trigger.dispatchEvent(new MouseEvent('mouseleave'));
+    });
 
     controls.hidden = false;
     root.classList.add('otel-compat--initialized');

@@ -75,13 +75,13 @@
             <dl class="otel-compat__fields">
               {{- range $field := slice (dict "role" "sdk" "label" "SDK" "item" $sdk) (dict "role" "receiver" "label" "Sends to" "item" $receiver) }}
               {{- $tipID := printf "%s-%s-%s-%s" $uid $p.sdk $p.receiver $field.role }}
-              <div data-field="{{ $field.role }}"><dt>{{ $field.label }}</dt><dd>{{ if eq $field.role "receiver" }}<span class="otel-compat__plus">+ </span>{{ end }}<span class="otel-compat__value">
+              <div data-field="{{ $field.role }}"><dt>{{ $field.label }}</dt><dd><span class="otel-compat__value">
                 {{- with $field.item.description -}}
                 <span class="tooltip-container"><span class="tooltip-trigger" tabindex="0" aria-describedby="{{ $tipID }}">{{ $field.item.label }}</span><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ . }}</span></span>
                 {{- else -}}
                 {{ $field.item.label }}
                 {{- end -}}
-              </span></dd></div>
+              </span>{{ if eq $field.role "sdk" }}<span class="otel-compat__plus">&nbsp;+</span>{{ end }}</dd></div>
               {{- end }}
             </dl>
             {{- with $p.link }}
