@@ -1,0 +1,474 @@
+// Ask AI research timeline: a header line and a stepped list behind a chevron, marked by a thin accent bar.
+$conv-activity-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+$conv-error-text: #8a2a2a;
+$conv-error-border: #f3c4c4;
+$conv-error-bg: #fff6f6;
+// Every text color keeps at least 4.5:1 contrast on the dialog background.
+$conv-activity-text: #55555f;
+$conv-activity-muted: #666671;
+$conv-activity-icon: #80808c;
+$conv-activity-accent-text: #6a3fbf;
+$conv-activity-sweep: mix($conv-search-purple, $conv-activity-text, 45%);
+$conv-activity-bar: #d9c7fb;
+$conv-activity-tile: #f1ecfa;
+$conv-activity-rule: rgba($conv-neutral-700, 0.12);
+
+.conv-search-turn {
+    gap: 12px;
+}
+
+.conv-search-activity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 100%;
+    min-width: 0;
+    padding: 2px 0 2px 14px;
+    border-left: 2px solid $conv-activity-bar;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: $conv-activity-text;
+}
+
+.conv-search-activity-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    min-width: 0;
+    padding: 2px 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+        color: $conv-neutral-700;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($conv-search-purple, 0.45);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+
+    .conv-search-activity.is-empty & {
+        cursor: default;
+    }
+}
+
+// A spinner while researching; a check, an alert mark or a stop square once it settles.
+.conv-search-activity-status {
+    position: relative;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+    }
+
+    &::before {
+        inset: 1px;
+        border: 1.5px solid $conv-primary-200;
+        border-top-color: $conv-search-purple-dark;
+        border-radius: 50%;
+        animation: conv-search-spin 0.9s linear infinite;
+    }
+
+    .conv-search-activity:not(.is-working) &::before {
+        inset: auto;
+        left: 4.5px;
+        top: 1px;
+        width: 4.5px;
+        height: 8.5px;
+        border: solid $conv-search-purple-dark;
+        border-width: 0 1.6px 1.6px 0;
+        border-radius: 0;
+        transform: rotate(45deg);
+        animation: none;
+    }
+
+    .conv-search-activity[data-phase='error'] &::before {
+        left: 6.25px;
+        top: 2px;
+        width: 1.5px;
+        height: 6px;
+        border: 0;
+        background: $conv-error-text;
+        transform: none;
+    }
+
+    .conv-search-activity[data-phase='error'] &::after {
+        left: 6.25px;
+        top: 10px;
+        width: 1.5px;
+        height: 1.5px;
+        background: $conv-error-text;
+    }
+
+    .conv-search-activity[data-phase='stopped'] &::before {
+        left: 3.5px;
+        top: 3.5px;
+        width: 7px;
+        height: 7px;
+        border: 0;
+        border-radius: 1.5px;
+        background: $conv-activity-muted;
+        transform: none;
+    }
+}
+
+.conv-search-activity-headline {
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    // A faint sweep across the text while research runs.
+    .conv-search-activity.is-working & {
+        background: linear-gradient(
+            90deg,
+            $conv-activity-text 0%,
+            $conv-activity-text 42%,
+            $conv-activity-sweep 50%,
+            $conv-activity-text 58%,
+            $conv-activity-text 100%
+        );
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: conv-search-shimmer 3s ease-in-out infinite;
+    }
+}
+
+.conv-search-activity-meta,
+.conv-search-activity-timer {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: $conv-activity-muted;
+    white-space: nowrap;
+
+    &:empty {
+        display: none;
+    }
+
+    &::before {
+        content: '\00b7';
+        margin-right: 6px;
+    }
+}
+
+.conv-search-activity-timer {
+    font-variant-numeric: tabular-nums;
+}
+
+// The summary truncates first on narrow panels and is hidden on phones.
+.conv-search-activity-meta {
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 640px) {
+        display: none;
+    }
+}
+
+.conv-search-activity-chevron {
+    display: inline-flex;
+    flex-shrink: 0;
+    color: $conv-activity-icon;
+    transition: transform 0.2s $conv-activity-ease;
+
+    svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .conv-search-activity.is-collapsed & {
+        transform: rotate(-90deg);
+    }
+
+    .conv-search-activity.is-empty & {
+        display: none;
+    }
+}
+
+// Height animation without measuring: grid rows go from 1fr to 0fr.
+.conv-search-activity-body {
+    display: grid;
+    grid-template-rows: 1fr;
+    width: 100%;
+    transition: grid-template-rows 0.2s $conv-activity-ease;
+
+    .conv-search-activity.is-collapsed &,
+    .conv-search-activity.is-empty & {
+        grid-template-rows: 0fr;
+    }
+}
+
+.conv-search-activity-body-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.conv-search-activity-steps {
+    list-style: none;
+    margin: 10px 0 2px;
+    padding: 0;
+}
+
+// Each step: an icon tile, joined to the next one by a thin line.
+.conv-search-activity-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+    padding: 0 0 14px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 11.5px;
+        top: 28px;
+        bottom: 4px;
+        width: 1px;
+        background: $conv-activity-rule;
+    }
+
+    &:last-child {
+        padding-bottom: 2px;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.conv-search-activity-step-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: $conv-activity-tile;
+    color: $conv-activity-icon;
+
+    svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    [data-status='active'] > & {
+        background: $conv-primary-100;
+        color: $conv-search-purple-dark;
+    }
+
+    [data-status='failed'] > & {
+        background: $conv-error-bg;
+        color: $conv-error-text;
+    }
+}
+
+.conv-search-activity-step-body {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+    color: $conv-activity-muted;
+    overflow-wrap: anywhere;
+}
+
+.conv-search-activity-step-label {
+    display: block;
+
+    [data-status='active'] & {
+        color: $conv-activity-text;
+    }
+}
+
+// Checked pages sit on a second line under their step, as plain links.
+.conv-search-activity-pages {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.conv-search-activity-page,
+.conv-search-activity-more {
+    display: inline;
+
+    & + &::before,
+    & + .conv-search-activity-more::before {
+        content: '\00b7';
+        margin: 0 6px;
+        color: $conv-activity-icon;
+    }
+}
+
+.conv-search-activity-page {
+    color: $conv-activity-accent-text;
+    text-decoration: none;
+
+    // Only the title is underlined, never the separator dot before it.
+    &:hover .conv-search-activity-page-title,
+    &:focus-visible .conv-search-activity-page-title {
+        text-decoration: underline;
+    }
+
+    &.is-overflow {
+        display: none;
+
+        .conv-search-activity-pages.is-expanded & {
+            display: inline;
+        }
+    }
+}
+
+.conv-search-activity-more {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: $conv-activity-muted;
+    font: inherit;
+    cursor: pointer;
+
+    &:hover {
+        color: $conv-activity-accent-text;
+    }
+}
+
+// Pulsing dot at the end of the answer while it streams.
+.conv-search-stream-caret {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    margin-left: 4px;
+    border-radius: 50%;
+    background: $conv-search-purple;
+    vertical-align: middle;
+    animation: conv-search-pulse 1s ease-in-out infinite;
+}
+
+.conv-search-turn-error {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid $conv-error-border;
+    border-radius: 14px;
+    background: $conv-error-bg;
+    color: $conv-error-text;
+    font-size: 15px;
+    line-height: 22px;
+    animation: conv-search-fade-in 0.3s ease;
+
+    p {
+        flex: 1;
+        min-width: 200px;
+        margin: 0;
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+    }
+}
+
+.conv-search-retry {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid $conv-primary-300;
+    border-radius: 999px;
+    background: #fff;
+    color: $conv-activity-accent-text;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+        background: $conv-primary-100;
+        border-color: $conv-primary-400;
+    }
+}
+
+// While a turn runs, the send button becomes a stop button.
+.conv-search-send .conv-search-stop-icon {
+    display: none;
+}
+
+.conv-search-send.is-stop {
+    background: $conv-search-purple-dark;
+    border-color: $conv-search-purple-dark;
+    color: #fff;
+
+    &:hover:not(:disabled) {
+        background: darken($conv-search-purple-dark, 6%);
+    }
+
+    .conv-search-send-icon {
+        display: none;
+    }
+
+    .conv-search-stop-icon {
+        display: block;
+    }
+}
+
+.conv-search-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.conv-search-sidebar.mode-floating,
+.conv-search-sidebar.mode-sidebar {
+    .conv-search-turn-error {
+        font-size: 14px;
+    }
+}
+
+@keyframes conv-search-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .conv-search-activity,
+    .conv-search-activity *,
+    .conv-search-activity *::before,
+    .conv-search-activity *::after,
+    .conv-search-stream-caret,
+    .conv-search-turn-error {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .conv-search-activity.is-working .conv-search-activity-headline {
+        background: none;
+        color: $conv-activity-text;
+    }
+}
+
+@keyframes conv-search-shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: -150% 0; }
+}

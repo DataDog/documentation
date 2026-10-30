@@ -1,4 +1,6 @@
 ---
+description: ワーカーの統計とログを確認する方法、および tap コマンドと top コマンドを使用してイベントを調査し、Observability Pipelines
+  のセットアップに関する問題を診断する方法について説明します。
 disable_toc: false
 title: トラブルシューティング
 ---
@@ -12,13 +14,13 @@ Datadog Observability Pipelines (OP) で想定外の動作が発生した場合�
 
 1. [Observability Pipelines][2] に移動します。
 1. パイプラインを選択します。
-1. **ワーカー**タブをクリックして、ワーカーのメモリと CPU の利用率、トラフィックの統計、およびエラーを確認します。
-1. ワーカーのステータスとバージョンを表示するには、**最新のデプロイメントとセットアップ**タブをクリックします。
-1. ワーカーのログを表示するには、ページの右上にある歯車アイコンをクリックし、**OPW ログを表示**を選択します。ログをフィルタリングする方法の詳細については、[ログ検索構文][3]を参照してください。特定のワーカーのログを表示するには、検索クエリに `@op_worker.id:<worker_id>` を追加します。<br>**注**: Observability Pipelines Worker のログが表示されない場合は、Log Management に[ワーカーログをインデックス化している][10]ことを確認します。
+1. タブ{{< ui >}}Workers{{< /ui >}}をクリックして、ワーカーのメモリと CPU の利用率、トラフィックの統計、およびエラーを確認します。
+1. ワーカーのステータスとバージョンを確認するには、{{< ui >}}Latest Deployment & Setup{{< /ui >}} タブをクリックします。
+1. ワーカーのログを確認するには、ページの右上にある歯車アイコンをクリックし、{{< ui >}}View OPW Logs{{< /ui >}} を選択します。ログをフィルタリングする方法の詳細については、[ログ検索構文][3]を参照してください。特定のワーカーのログを表示するには、検索クエリに `@op_worker.id:<worker_id>` を追加します。<br>**注**: Observability Pipelines Worker のログが表示されない場合は、Log Management に[ワーカーログをインデックス化している][10]ことを確認します。
 
 ## パイプラインを通じて送信されたイベントを確認してセットアップの問題を特定する {#inspect-events-sent-through-your-pipeline-to-identify-setup-issues}
 
- Observability Pipelines Workers にローカルアクセスできる場合は、`tap` コマンドを使用して、パイプラインのソースとプロセッサーを通じて送信された生データを表示します。
+Observability Pipelines Workers にローカルアクセスできる場合は、`tap` コマンドを使用して、パイプラインのソースとプロセッサーを通じて送信された生データを表示します。
 
 ### Observability Pipelines Worker API を有効にする {#enable-the-observability-pipelines-worker-api}
 
@@ -50,7 +52,7 @@ observability-pipelines-worker tap <component_ID>
 
 ## デバッグログを有効にする {#enable-debug-logs}
 
-デバッグログを表示するには、`VECTOR_LOG` 環境変数を `debug` に設定してワーカーを再起動します。例えば、Docker でワーカーを実行している場合は、`-e VECTOR_LOG=debug` を `docker run` コマンドに追加します。
+デバッグログを表示するには、`VECTOR_LOG` 環境変数を `debug` に設定してワーカーを再起動します。たとえば、Docker でワーカーを実行している場合は、`-e VECTOR_LOG=debug` を `docker run` コマンドに追加します。
 
 ```
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
@@ -67,7 +69,7 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
 
 ### ログエクスプローラーにワーカーログがない {#no-worker-logs-in-log-explorer}
 
-[ログエクスプローラー][12]にワーカーログが表示されない場合は、ログパイプラインで除外されていないことを確認します。ワーカーログは、最適な機能のために Log Management にインデックスされる必要があります。ログは、ワーカーのステータス、バージョン、エラーなどのデプロイ情報を提供し、Observability Pipelines UI に表示されます。ログは、ワーカーまたはパイプラインの問題をトラブルシューティングする上でも役立ちます。すべてのワーカーログには `source:op_worker` タグがあります。
+[ログエクスプローラー][12]にワーカーログが表示されない場合は、ログパイプラインで除外されていないことを確認します。ワーカーログは、最適な機能のために Log Management にインデックスされる必要があります。ログは、ワーカーのステータス、バージョン、エラーなどのデプロイ情報を提供し、Observability Pipelines UI に表示されます。ログは、ワーカーまたはパイプラインの問題をトラブルシューティングする上でも役立ちます。Worker のログが Log Management にインデックスされていない場合、[Latest Deploy and Setup] タブには現在の Worker のステータスではなく、読み込み中の状態が表示され続けます。すべてのワーカーログには `source:op_worker` タグがあります。
 
 ### Observability Pipelines ログの重複 {#duplicate-observability-pipelines-logs}
 
@@ -93,6 +95,12 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
     kubectl logs <pod-name>
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
+
+### Kubernetes で永続化を使用する場合のマルチアタッチエラー{#multi-attach-error-when-using-persistence-on-kubernetes}
+
+送信先で[ディスクバッファリング][24]を有効にしていて、Kubernetes が Worker Pod を新しいノードに再スケジュールした後、その Pod がボリュームのマルチアタッチエラーによって `Pending` の状態で停止している場合、これは想定される動作です。このエラーは、前のノードの永続ボリュームのデタッチが完了していないために発生します。Pod は自動的に復旧します。
+
+Datadog では、このエラーが発生した場合でも、Worker StatefulSet のデフォルトの `podManagementPolicy: Parallel` 設定を維持することを推奨しています。`OrderedReady` に切り替えるとエラーの発生頻度は低下しますが、終了中のレプリカが正常なシャットダウンを完了するまで、StatefulSet のスケールアップがブロックされます。これにより、イベントの急増に対するパイプラインの応答が遅くなります。
 
 ### 証明書の検証に失敗 {#certificate-verify-failed}
 
@@ -129,7 +137,7 @@ Failed to connect to ab52a1d16fxxxxxxxabd90c7526a1-1xxxx.us-west-2.elb.amazonaws
 - ソースとワーカーの間にファイアウォールがある場合、ソースとワーカーの間で選択されたポートを介してトラフィックが許可されていることを確認します。
 - ワーカーと送信先の間にファイアウォールがある場合、定義されたポートを介してワーカーから送信先へのトラフィックが許可されていることを確認します。
 
-ソースの場所から `curl` コマンドを使用して、Observability Pipelines Worker エンドポイントへの接続性をテストできます。ただし、ソースマシンへのシェルアクセスが必要です。例えば、Datadog Agent ソースがある場合、curl コマンドは次のようになります。
+ソースの場所から `curl` コマンドを使用して、Observability Pipelines Worker エンドポイントへの接続性をテストできます。ただし、ソースマシンへのシェルアクセスが必要です。たとえば、Datadog Agent ソースがある場合、curl コマンドは次のようになります。
 
 ```
 curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.com:80/api/v2/logs' -d '{"ddsource": "my_datadog","ddtags": "env:test","hostname": "i-02a4fxxxxx","message": "hello","service": "test"}' -v
@@ -142,6 +150,20 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 ### ファイルが多すぎるエラー {#too-many-files-error}
 
 `Too many files` エラーが表示され、ワーカープロセスが繰り返し再起動する場合、ホストのファイル記述子制限が低いためかもしれません。Linux 環境でこの問題を解決するには、systemd サービス構成で `LimitNOFILE` を `65,536` に設定してファイル記述子制限を増やします。
+
+### ソース送信が途中で中断された{#source-send-interrupted-mid-flight}
+
+`Source send interrupted mid-flight; pipeline may be overloaded or shutting down` エラーログが表示される場合、Worker がバッチ内のすべてのイベントをダウンストリームに送信する前に、何らかの問題によって送信操作が中断されています。Worker はそのバッチ内の残りのイベントを破棄し、`component_discarded_events_total` メトリクスをインクリメントします。中断の原因としては、バックプレッシャー、Worker のシャットダウン、または Worker の再起動などが考えられます。
+
+中断が Worker の再起動またはシャットダウンによるものかどうかを調査するには、エラーのタイムスタンプと、`Vector has stopped`、`Shutting down...` などの Worker のライフサイクルログ、または同時期の Pod やコンテナの再起動イベントを関連付けて確認します。
+
+エラーがバックプレッシャーによるものかどうかを調査するには、[Observability Pipelines Overview][29] ダッシュボードを使用してトラブルシューティングを行います。パイプライン ID、ホスト、Worker ID、およびコンポーネントでフィルタリングできます。次の項目を確認します。
+
+1. 送信先バッファの使用率
+    - 最大容量に近いバッファは、バックプレッシャーの兆候です。[ディスクバッファの選択][26]を検討するか、バッファサイズを増やしてトラフィックの急増を吸収し、バックプレッシャーを軽減します。バッファの使用率を監視するには、[バッファメトリクス][25]を参照します。
+2. Worker CPU 使用率
+    - トラフィックの急増時に Worker の CPU 使用率が高い状態が続く場合は、パイプラインの計算能力が不足していることを示します。Worker のサイジングとオートスケーリングに関するガイダンスについては、[Observability Pipelines のスケーリングに関するベストプラクティス][27]を参照します。
+    - Sensitive Data Scanner プロセッサーは CPU 負荷が高く、CPU 使用率が高くなる原因にもなります。詳細については、[パフォーマンス最適化のベストプラクティス][28]を参照します。
 
 ## 一般的なパイプラインの問題 {#general-pipeline-issues}
 
@@ -157,13 +179,13 @@ curl --location 'http://ab52a1d102c6f4a3c823axxx-xxxxx.us-west-2.elb.amazonaws.c
 
 ### 送信先での遅延ログの確認 {#seeing-delayed-logs-at-the-destination}
 
-Observability Pipelines の送信先は、下流のインテグレーションに送信する前にイベントをバッチ処理します。例えば、Amazon S3、Google Cloud Storage、Azure Storage の送信先には、900 秒のバッチタイムアウトがあります。他のバッチパラメーター (最大イベント数と最大バイト数) が 900 秒のタイムアウト内に満たされない場合、バッチは 900 秒でフラッシュされます。これは、送信先コンポーネントが下流のインテグレーションにイベントのバッチ送信に最大 15 分かかる可能性があることを意味します。
+Observability Pipelines の送信先は、下流のインテグレーションに送信する前にイベントをバッチ処理します。たとえば、Amazon S3、Google Cloud Storage、Azure Storage の送信先には、900 秒のバッチタイムアウトがあります。他のバッチパラメーター (最大イベント数と最大バイト数) が 900 秒のタイムアウト内に満たされない場合、バッチは 900 秒でフラッシュされます。これは、送信先コンポーネントが下流のインテグレーションにイベントのバッチ送信に最大 15 分かかる可能性があることを意味します。
 
 各送信先のバッチパラメーターは次のとおりです。
 
 {{% observability_pipelines/destination_batching %}}
 
-詳細については、[イベントバッチ処理][6]を参照してください。
+詳細については、[送信先のイベントのバッチ処理][6]を参照してください。
 
 ## コンポーネントの問題 {#component-issues}
 
@@ -173,6 +195,10 @@ Observability Pipelines の送信先は、下流のインテグレーション�
 - プロセッサーは実行を続けますが、他のワーカーと正しく同期しないため、クォータ制限を超えた後にログが送信されることがあります。
 - ワーカーは `Failed to sync quota state errors` を出力します。
 - 組織ごとのデフォルトのワーカー数を増やしたい場合は、[サポートにお問い合わせ][20]ください。
+
+### 生成されたメトリクスには、ログのタイムスタンプではなく処理時間がタイムスタンプとして付与されます {#generated-metrics-are-timestamped-with-the-processing-time-instead-of-the-log-timestamp}
+
+Generate Metrics プロセッサーによって生成されたメトリクスに、ログのタイムスタンプではなくログの処理時間が付与されている場合は、ログの `timestamp` が文字列形式になっているかどうかを確認します。Generate Metrics プロセッサーでは、`timestamp` フィールドが解析済みのタイムスタンプ型である必要があります。詳細については、[文字列タイムスタンプをタイムスタンプ形式に変換][23]を参照してください。
 
 ###  タイムスタンプフィールドの変換エラー {#error-converting-timestamp-field}
 
@@ -206,3 +232,10 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 [20]: /ja/help/
 [21]: /ja/observability_pipelines/configuration/install_the_worker/#add-domains-to-firewall-allowlist
 [22]: /ja/observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format
+[23]: /ja/observability_pipelines/processors/generate_metrics/#convert-string-timestamp-to-timestamp-format
+[24]: /ja/observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
+[25]: /ja/observability_pipelines/scaling_and_performance/buffering_and_backpressure/#buffer-metrics
+[26]: /ja/observability_pipelines/scaling_and_performance/buffering_and_backpressure/#choosing-buffer-types
+[27]: /ja/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+[28]: /ja/observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
+[29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview

@@ -13,6 +13,8 @@ disable_sidebar: true
 
 Learn how to enable App and API Protection on all the following supported platforms and environments.
 
+To set up your application with a coding assistant, see [Agentic Onboarding][1].
+
 <div class="alert alert-info">
   <p class="fs-bold m-0">Are you missing your environment?</p>
   <span>Send us a request for your missing environment <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">here</a>.</span>
@@ -83,3 +85,5 @@ Learn how to enable App and API Protection on all the following supported platfo
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
+
+[1]: /security/application_security/agentic_onboarding/

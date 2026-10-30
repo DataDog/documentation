@@ -6,94 +6,113 @@ description: Datadog によって収集されたイベントを監視する
 further_reading:
 - link: /events/
   tag: ドキュメント
-  text: Event Management Overview
+  text: Event Management の概要
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-- link: /monitors/manage/status/
+- link: /monitors/status/
   tag: ドキュメント
   text: モニターステータスを確認
 title: イベントモニター
 ---
+## 概要 {#overview}
 
-## 概要
+Datadog は、モニター、Watchdog、Error Tracking を含むさまざまな製品から自動的にイベントを作成します。また、Agent やインストール済みのインテグレーションから生成されたイベントを追跡することや、サードパーティからのアラートイベント、変更リクエスト、デプロイ、構成変更などのソースからイベントを取り込むこともできます。
 
-Datadog automatically creates events from various products including monitors, Watchdog, and Error Tracking. You can also track events generated from the Agent and installed integrations and ingest events from sources, including alert events from third parties, change requests, deployments, configuration changes.
+<div class="alert alert-info">イベントモニターは、<a href="/monitors/status/events/">モニターイベント</a>に対してはアラートを送信しません。これは無限ループを引き起こす可能性があるためです。</a></div>
 
-Event monitors alert on ingested events that match a search query, allowing you to focus attention on the events that matter most to your team.
+イベントモニターは、取り込まれたイベントのうち、検索クエリに一致するものに関するアラートを送信するため、チームにとって最も重要なイベントに注意を集中させることができます。
 
-## モニターの作成
+## モニターの作成 {#monitor-creation}
 
-Datadog で[イベントモニター][1]を作成するには、**Monitors** > **New Monitor** > **Event** に移動します。
+Datadog でイベントモニターを作成するには、[[{{< ui >}}Monitors{{< /ui >}}] (モニター) > [{{< ui >}}New Monitor{{< /ui >}}] (新規モニター) > [{{< ui >}}Event{{< /ui >}}] (イベント)][1] に移動します。
 
-<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 イベントモニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
+<div class="alert alert-info">アカウントごとに 1000 個のイベントモニターというデフォルトの制限があります。この制限に達した場合は、<a href="/monitors/configuration/#set-alert-aggregation">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
-### 検索クエリを定義する
+### 検索クエリを定義する {#define-the-search-query}
 
 検索クエリを定義すると、上部のグラフが更新されます。
 
-1. [イベントエクスプローラーの検索構文][2]を使って検索クエリを作成します。
-2. イベント数またはファセットのモニタリングを選択します。
-    * **Monitor over an event count**: 検索バーを使用し (任意)、ファセットを選択**しません**。選択されたタイムフレームで Datadog がイベント数を評価し、それをしきい値の条件と比較します。
-    * **Monitor over a facet**: ファセットが選択されていると、モニターはファセットのユニークな値のカウントに対してアラートを作成します。
-3. アラートのグループ化方法を構成します（任意）:
-    * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。これは、単一のホストから受け取るメトリクスまたは多くのホストからの合計メトリクスを監視する場合に最適です。通知件数を減らしたい場合にこの方法を選択します。
-    * **Multi Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します (最大 1000 件の一致するグループ)。アラートイベントは、設定された条件を満たすと各グループに生成されます。例えば、`host` でグループ化し、各ホストに対して別々のアラートを受信することができます。
+1. [Event Explorer の検索構文][2]を使用して、検索クエリを作成します。
+2. イベント数、ファセット、タグ、または属性のいずれをモニターするかを選択します。
+    * Datadog は選択された期間内のイベント数を評価し、それをしきい値条件と比較します。
+    * 一部の属性やタグについては、Datadog は集計値 (例: 平均、中央値、最小値、合計) を評価します。
+    * [{{< ui >}}Monitor over a facet{{< /ui >}}] (ファセットをモニター): ファセットが選択されていると、モニターはファセットのユニークな値のカウントに対してアラートを送信します。
+      
+3. 複数のディメンションでイベントをグループ化する (オプション):
 
-4. Group events by multiple dimensions (optional): 
-
-   All events matching the query are aggregated into groups based on the value of up to four event facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
-   * **ファセット 1 個**: 上位値 1000
+   クエリに一致するすべてのイベントは、最大 4 つのイベントファセットの値に基づいてグループに集約されます。複数のディメンションがある場合、上位の値は最初のディメンションに基づいて決定されます。続けて、最初のディメンション内の上位値内の 2 番目のディメンションに基づいて決定されます。同様の処理が最後のディメンションまで行われます。ディメンションの制限は、ディメンションの合計数によって異なります。
+   * **ファセット 1 個**: 上位 1000 の値
    * **ファセット 2 個**: ファセットごとに上位値 30 (最大 900 グループ)
    * **ファセット 3 個**: ファセットごとに上位値 10 (最大 1000 グループ)
    * **ファセット 4 個**: ファセットごとに上位値 5 (最大 625 グループ)
 
-### アラートの条件を設定する
+   イベントモニターで複数のクエリや式が定義されている場合、各ディメンションの上位または下位の値の数を選択できます。
 
-* カウントが `above`、`above or equal to`、`below`、または `below or equal to` の時
-* `<しきい値の数>`
-* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 5 分～48 時間の値を設定します。
+   上位値の合計数の上限は、ファセットの数に関係なく 1,000 です。上位値の数を 1,000 より多くした場合、Datadog によって、すべての上位値の合計数 1,000 未満になるように他のディメンションの上位値が調整されます。すべてのグループ化のデフォルトの上位値の数 10 ですが、4 番目のファセットのみ、上位 5 つの値がデフォルトです。
 
-**注**: 一部のプロバイダーでは、イベントが**ポスト**されてから実際に開始されるまでにかなりの遅延が生じます。このような場合、Datadog は発生時刻にまでさかのぼってイベントを記録しますが、これにより現在のモニター評価ウィンドウ外のイベントを認識することがあります。評価ウィンドウを広げると時間差が発生する原因を理解しやすくなります。適切なモニター設定の調整についてサポートが必要な場合は、[Datadog のサポートチーム][3]までお問い合わせください。
+   たとえば、検索クエリで 4 つのグループ化が行われるイベントモニターの場合は、次のようになります。
+   * **1 番目のファセット**: 上位 10 個の値
+   * **2 番目のファセット**: 上位 10 個の値
+   * **3 番目のファセット**: 上位 5 個の値
+   * **4 番目のファセット**: 上位 2 つの値
 
-#### 高度なアラート条件
+### アラート条件を設定する {#set-alert-conditions}
+
+クエリがしきい値と比較して次のいずれかの条件を満たしたときにトリガーします。
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
+
+**注**: 一部のプロバイダーでは、イベントが**投稿**されてからイベントが開始されるまでに大幅な遅延が発生します。その場合、Datadog はイベントを発生時刻まで遡って記録するため、受信したイベントの時刻が現在のモニター評価ウィンドウ外になることがあります。評価ウィンドウを広げることで、この時間差に対応できます。
+
+#### 高度なアラート条件 {#advanced-alert-conditions}
 
 高度なアラートオプション (自動解決、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][4]ページを参照してください。
 
-### 通知
+### Notifications {#notifications}
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+[{{< ui >}}Configure notifications & automations{{< /ui >}}] (通知および自動化の構成) セクションの詳しい説明は、「[Notifications][5]」ページをご覧ください。
 
-#### イベントテンプレート変数
+#### イベントテンプレート変数 {#event-template-variables}
 
-イベントモニターには、通知メッセージを入力できる特殊なテンプレート変数があります。
+イベントモニターには、通知メッセージを記載できる特殊なテンプレート変数があります。
 
 | テンプレート変数          | 定義                                                                     |
 |----------------------------|--------------------------------------------------------------------------------|
-| `{{event.id}}`             | イベントの ID。                                                           |
-| `{{event.title}}`          | イベントのタイトル。                                                        |
-| `{{event.text}}`           | イベントのテキスト。                                                         |
-| `{{event.host.name}}`      | イベントを生成したホストの名前。                                 |
-| `{{event.tags}}`           | イベントに関連したタグのリスト                                          |
-| `{{event.tags.<タグ_キー>}}` | イベントに関連した特定のタグキーの値。下記のサンプルを参照してください。 |
+| `{{event.id}}`             | The ID of the event.                                                           |
+| `{{event.title}}`          | The title of the event.                                                        |
+| `{{event.text}}`           | The text of the event.                                                         |
+| `{{event.host.name}}`      | The name of the host that generated the event.                                 |
+| `{{event.tags}}`           | A list of tags attached to the event.                                          |
+| `{{event.tags.<TAG_KEY>}}` | イベントに追加された特定のタグキーの値。以下の例を参照してください。|
 
-##### `key:value` 構文のタグ
+##### タグ `key:value` 構文 {#tags-keyvalue-syntax}
 
-次のタグ専用: `env:test`、`env:staging`、`env:prod`。
+タグ `env:test`、`env:staging`、および `env:prod` の場合:
 
 * `env` はタグキーです。
-* `test`、`staging`、`prod` はタグ値です。
+* `test`、`staging`、および `prod` はタグ値です。
 
-テンプレート変数は `{{event.tags.env}}` です。このテンプレート変数を使用した場合の結果は、`test`、`staging`、または `prod` です。
+テンプレート変数は `{{event.tags.env}} です。`. The result of using this template variable is `test`, `staging`, or `prod` です。
 
-## その他の参考資料
+### 通知の集計 {#notification-aggregation}
+
+アラートのグループ化方法を構成します。
+    * [{{< ui >}}Simple-Alert{{< /ui >}}] (シンプルアラート): シンプルアラートは、すべての報告ソースにわたって集計されます。集計値が設定条件を満たすと、アラートを 1 件受信します。これは、単一ホストのメトリクスや、多数のホストにわたるメトリクスの合計を監視する場合に最適です。通知のノイズを減らす場合は、この方法を選択してください。
+    * [{{< ui >}}Multi Alert{{< /ui >}}] (マルチアラート): マルチアラートは、グループ化パラメーターに従って各ソースにアラートを適用します (最大 1000 個の一致グループ)。設定条件を満たすグループごとに、アラートイベントが生成されます。たとえば、`host` でグループ化することで、ホストごとに個別のアラートを受け取ることができます。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/event
+[1]: https://app.datadoghq.com/monitors/create/event
 [2]: /ja/events/explorer/searching
 [3]: /ja/help/
 [4]: /ja/monitors/configuration/#advanced-alert-conditions

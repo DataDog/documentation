@@ -25,7 +25,7 @@ title: OpenTelemetry를 사용하여 지원되지 않는 런타임 계측
 
 ## 전제 조건 {#prerequisites}
 
-- Datadog으로 데이터를 보내도록 구성된 OpenTelemetry 호환 백엔드. DDOT Collector, Datadog Exporter가 포함된 OTel Collector 또는 직접 OTLP 수집을 포함한 설정 옵션은 [Datadog으로 OpenTelemetry 데이터 전송][4]을 참조하세요.
+- Datadog으로 데이터를 보내도록 구성된 OpenTelemetry 호환 백엔드. DDOT Collector, OpenTelemetry Collector 또는 직접 OTLP ingest를 포함한 설정 옵션은 [Send OpenTelemetry Data to Datadog][4]를 참조하십시오.
 - [Bun][2] 설치됨(v1.0 이상).
 - 계측하려는 Bun 애플리케이션.
 
@@ -114,7 +114,7 @@ export OTEL_SERVICE_NAME="<YOUR_SERVICE_NAME>"
 ```
 
 `OTEL_EXPORTER_OTLP_ENDPOINT` 값은 설정에 따라 달라집니다.
-- **로컬 수집기**(DDOT 또는 OTel Collector): `http://localhost:4318` (기본 HTTP) 또는 `http://localhost:4317`(gRPC)
+- **로컬 수집기** (DDOT 또는 OpenTelemetry Collector): `http://localhost:4318` (기본 HTTP) 또는 `http://localhost:4317` (gRPC)
 - **원격 수집기**: 수집기의 주소와 포트를 사용합니다.
 
 추가 구성 옵션은 [OpenTelemetry 환경 변수 사양][5]을 참조하세요.

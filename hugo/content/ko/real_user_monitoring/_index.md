@@ -15,12 +15,12 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/browser/data_collected/
   tag: 설명서
   text: 수집된 RUM 브라우저 데이터
-- link: https://dtdg.co/fe
-  tag: 기반 활성화
-  text: Real User Monitoring을 통해 인사이트를 얻는 대화형 세션 참여하기
 - link: https://learn.datadoghq.com/courses/intro-to-rum
   tag: 학습 센터
   text: Real User Monitoring(RUM) 소개
+- link: https://dtdg.co/fe
+  tag: 기반 활성화
+  text: Real User Monitoring을 통해 인사이트를 얻는 대화형 세션 참여하기
 - link: https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/
   tag: 블로그
   text: AI 요약 및 스마트 챕터로 세션 리플레이 더 빠르게 이해하기

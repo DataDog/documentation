@@ -17,12 +17,6 @@ further_reading:
   text: Surveiller les applications WAF AWS avec Datadog
 title: Activation de la protection des applications et des API pour AWS WAF
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection est en préversion sur le site Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
 La protection des applications et des API s'intègre à AWS Web Application Firewall (WAF) en :
 
 1. Convertissant les logs en traces pour obtenir une visibilité sur les requêtes surveillées et bloquées

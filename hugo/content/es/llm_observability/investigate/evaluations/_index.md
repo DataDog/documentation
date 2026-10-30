@@ -4,7 +4,7 @@ aliases:
 - /es/llm_observability/configuration/
 - /es/llm_observability/evaluations/
 - /es/llm_observability/configure/evaluations/
-description: Aprenda a configurar evaluaciones para su aplicación de LLM.
+description: Aprenda a configurar Evaluators para su aplicación de LLM.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
@@ -14,15 +14,15 @@ title: Evaluaciones
 ---
 ## Descripción general {#overview}
 
-Agent Observability ofrece varias formas de admitir evaluaciones. Se pueden configurar navegando a [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability ofrece varias formas de admitir evaluaciones. Los evaluadores se pueden configurar navegando a [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
 
-### Evaluaciones personalizadas de LLM-as-a-judge {#custom-llm-as-a-judge-evaluations}
+### Evaluadores personalizados de LLM-as-a-judge {#custom-llm-as-a-judge-evaluators}
 
-Las [evaluaciones personalizadas de LLM-as-a-judge][1] le permiten definir su propia lógica de evaluación utilizando prompts en lenguaje natural. Puede crear evaluaciones personalizadas para evaluar criterios subjetivos u objetivos (como el tono, la utilidad o la veracidad) y ejecutarlas a escala en sus traces y spans.
+Los [evaluadores personalizados de LLM-as-a-judge][1] le permiten definir su propia lógica de evaluación utilizando prompts en lenguaje natural. Puede crear evaluadores personalizados para evaluar criterios subjetivos u objetivos (como el tono, la utilidad o la veracidad) y ejecutarlos a escala en sus trazas y spans.
 
-### Evaluaciones gestionadas {#managed-evaluations}
+### Evaluadores gestionados {#managed-evaluators}
 
-Datadog crea y admite [evaluaciones gestionadas][2] para dar soporte a casos de uso comunes. Puede habilitarlas y configurarlas dentro de la aplicación Agent Observability.
+Datadog crea y admite [evaluadores gestionados][2] para dar soporte a casos de uso comunes. Puede habilitarlas y configurarlas dentro de la aplicación Agent Observability.
 
 ### Enviar comentarios de usuarios finales {#submit-end-user-feedback}
 
@@ -34,7 +34,7 @@ También puede enviar [evaluaciones externas][3] utilizando la API de Datadog. U
 
 ### Creación de evaluadores personalizados {#building-custom-evaluators}
 
-Para los desarrolladores que crean evaluadores personalizados, consulte la [Guía para desarrolladores de evaluaciones][10].
+Para los desarrolladores que crean evaluadores personalizados, consulte la [Guía para desarrolladores de evaluadores][10].
 
 ### Integraciones de evaluación {#evaluation-integrations}
 
@@ -51,12 +51,14 @@ Además de evaluar la entrada y salida de las solicitudes de LLM, los agentes, l
 ### Security {#security}
 
 {{< learning-center-callout header="Obtenga barreras de seguridad en tiempo real para sus aplicaciones y agentes de IA" btn_title="Únase a la vista previa" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
-  AI Guard ayuda a proteger sus AI apps y agentes en tiempo real contra prompt injection, jailbreaking, tool misuse y sensitive data exfiltration attacks. ¡Pruébelo hoy mismo!
+  AI Guard ayuda a proteger sus AI apps y agentes en tiempo real contra la inyección de prompts, el jailbreaking, el uso indebido de herramientas y los ataques de filtración de datos confidenciales. ¡Pruébelo hoy mismo!
 {{< /learning-center-callout >}}
 
 ### Permisos {#permissions}
 
-Se requieren [`Agent Observability Write` permisos][7] para configurar las evaluaciones.
+Se requieren [`Agent Observability Write` permisos][7] para configurar los evaluadores.
+
+Para restringir las configuraciones de evaluadores de una aplicación a equipos o roles específicos, consulte [Data Access Control en Agent Observability][14].
 
 ### Recuperando spans {#retrieving-spans}
 
@@ -78,3 +80,4 @@ Agent Observability ofrece una [Export API][9] que puede utilizar para recuperar
 [11]: /es/llm_observability/investigate/annotation_queues
 [12]: /es/security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /es/llm_observability/investigate/evaluations/end_user_feedback
+[14]: /es/llm_observability/improve/access_control/

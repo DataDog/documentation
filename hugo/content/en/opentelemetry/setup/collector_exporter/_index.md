@@ -37,7 +37,7 @@ further_reading:
 Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The configurations on this page are tested with the OpenTelemetry Collector Contrib distribution v0.154.0 and use an OTLP-based telemetry pipeline with the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
+- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Catalog and Service Page.
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
@@ -46,6 +46,8 @@ This is the recommended setup for a Collector you manage yourself. If you want a
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
 The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
+
+For cluster-wide Kubernetes metrics and Kubernetes Explorer, see [Kubernetes Metrics][13].
 
 <div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
@@ -471,6 +473,8 @@ docker run \
 {{% tab "Kubernetes" %}}
 
 Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
+
+To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Kubernetes Metrics][13].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -922,7 +926,7 @@ After your application sends telemetry to the Collector, verify that data appear
 
 ### Span metrics connector
 
-The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
 Each environment-specific configuration in [Configure and deploy the Collector](#2-configure-and-deploy-the-collector) includes the complete `span_metrics` connector block. Retain all of its dimensions when adapting the configuration so Datadog can derive the required host tags, peer services, operation names, and resource names.
 
@@ -1010,4 +1014,5 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [12]: /opentelemetry/setup/ddot_collector/install/
+[13]: /opentelemetry/integrations/kubernetes_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

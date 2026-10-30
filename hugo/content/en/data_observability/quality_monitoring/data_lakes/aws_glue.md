@@ -1,5 +1,5 @@
 ---
-title: Iceberg Tables (AWS Glue)
+title: AWS Glue
 description: "Connect AWS Glue to Datadog Data Observability to monitor Iceberg table metadata, freshness, and quality."
 further_reading:
   - link: '/data_observability/'
@@ -34,7 +34,7 @@ Before you begin, make sure you have:
 
    {{< img src="data_observability/aws_glue/settings-configure-button.png" alt="AWS Glue configuration option in the Data Observability Settings page" style="width:100%;" >}}
 
-3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1].
+3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1]. Then, click {{< ui >}}Next{{< /ui >}}.
 
    {{< img src="data_observability/aws_glue/account-selection.png" alt="AWS account selection dropdown in the configuration flow" style="width:100%;" >}}
 
@@ -198,14 +198,84 @@ aws lakeformation grant-permissions \
 ## Configure the crawler
 
 1. Select the AWS regions where your Glue Iceberg tables are located.
-2. Enable the {{< ui >}}Quality Monitoring for Apache Iceberg{{< /ui >}} toggle.
+2. Enable the {{< ui >}}Quality Monitoring{{< /ui >}} toggle.
 3. (Optional) Enable the {{< ui >}}Job Monitoring{{< /ui >}} toggle if you also want to monitor Glue job health and performance.
-4. Choose a sync frequency.
-5. (Optional) Enter a catalog name if you use nested Glue catalog features. Leave this field empty for the default catalog.
+4. (Optional) In {{< ui >}}Excluded namespaces{{< /ui >}}, enter the Glue databases that Datadog should not crawl.
+5. Choose a {{< ui >}}Sync frequency{{< /ui >}}.
 
    {{< img src="data_observability/aws_glue/crawler-configuration.png" alt="Crawler configuration showing region selection and sync frequency options" style="width:100%;" >}}
 
-6. Click {{< ui >}}Save{{< /ui >}}.
+6. (Optional) To calculate metrics that require querying table data, [enable Athena queries](#enable-athena-queries).
+7. Click {{< ui >}}Add Account{{< /ui >}}.
+
+## Query tables with Amazon Athena
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Querying AWS Glue tables with Amazon Athena is in Preview. Contact your Datadog representative to enable it for your organization.
+{{< /callout >}}
+
+By default, Datadog calculates Iceberg table metrics, such as freshness and row count, from Iceberg metadata files without reading table data. To monitor metrics that metadata can't answer, configure Datadog to run queries through an [Amazon Athena workgroup][8] in your AWS account.
+
+With Athena queries enabled, you can:
+
+- Group metrics by one or more columns.
+- Apply custom filters to metrics.
+- Monitor Glue tables that don't use the Iceberg table format.
+
+For each monitor, Datadog uses Iceberg metadata when it can calculate the complete requested metric from metadata, and uses Athena only for the remaining work. If Athena queries are not configured, Datadog skips monitors that require a query and continues to calculate metadata-based metrics.
+
+**Note**: Datadog runs Athena queries in your AWS account. Athena bills these queries to your account based on the workgroup's pricing model.
+
+### Add Athena IAM permissions
+
+Athena reads table data files, not only Iceberg metadata. Add the following statements to the Datadog IAM role, alongside the [required IAM permissions](#add-required-iam-permissions):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AthenaQueryExecution",
+      "Effect": "Allow",
+      "Action": [
+        "athena:GetQueryExecution",
+        "athena:GetQueryResults",
+        "athena:GetWorkGroup",
+        "athena:StartQueryExecution",
+        "athena:StopQueryExecution",
+        "glue:GetPartition",
+        "glue:GetPartitions"
+      ],
+      "Resource": ["*"]
+    },
+    {
+      "Sid": "AthenaTableDataAndResults",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "kms:GenerateDataKey"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
+```
+
+To restrict access, scope the Athena actions to your workgroup ARN (`arn:aws:athena:<REGION>:<ACCOUNT_ID>:workgroup/<WORKGROUP_NAME>`), `s3:GetObject` to the buckets that store your table data, and `s3:PutObject` to the Athena query result location.
+
+If you use Lake Formation, the `SELECT` permission described in [Configure Lake Formation access](#optional-configure-lake-formation-access) is required for Athena to read table data.
+
+### Enable Athena queries
+
+1. In the AWS Glue configuration, under {{< ui >}}Quality Monitoring{{< /ui >}}, enable the {{< ui >}}Enable Athena queries{{< /ui >}} toggle.
+2. Enter the {{< ui >}}Athena workgroup{{< /ui >}} that Datadog uses to run queries.
+3. (Optional) Enter an {{< ui >}}Athena result location{{< /ui >}}, such as `s3://example-bucket/athena-results/`. Use an S3 path when the workgroup does not manage query results.
+4. Click {{< ui >}}Add Account{{< /ui >}}, or {{< ui >}}Save{{< /ui >}} if you are editing an account that is already configured.
+
+This setting controls only the queries that Datadog runs to calculate metrics. To monitor the queries that your own users and pipelines run in Athena, see [Amazon Athena Query History][9].
 
 ## Next steps
 
@@ -224,3 +294,5 @@ After the sync completes, your tables appear in the [Data Catalog][3]. You can a
 [5]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html
 [6]: /integrations/amazon-glue/
 [7]: /monitors/types/data_observability/
+[8]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-manage-queries-control-costs.html
+[9]: /data_observability/quality_monitoring/data_lakes/amazon_athena/

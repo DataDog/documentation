@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": "evaluations",
+    "attributes": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello world!"
+        }
+      ],
+      "meta": {
+        "confidence_threshold": 0.8
+      }
+    }
+  }
+}

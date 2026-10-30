@@ -201,7 +201,7 @@ To use OpenTelemetry integrations with the Datadog Go SDK, perform the following
 
 ## Example
 
-The following is an example instrumenting the `net/http` library with the Datadog Tracer and OpenTelemetry's `net/http` integration:
+The following is an example instrumenting the `net/http` library with the Datadog SDK and OpenTelemetry's `net/http` integration:
 
 ```go
 import (

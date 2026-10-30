@@ -47,20 +47,21 @@ Puede crear flujos de trabajo o editar flujos de trabajo existentes desde la pá
 
 ## Cree o edite un flujo de trabajo con IA {#create-a-workflow-with-ai}
 
-Si no está seguro de por dónde empezar, puede generar automáticamente un flujo de trabajo o iterar sobre uno existente con IA.
+Utilice la asistencia de IA en [Bits Chat][15] para crear un flujo de trabajo a partir de una instrucción o actualizar un flujo de trabajo existente. Bits Chat puede hacer preguntas de seguimiento antes de crear o actualizar el flujo de trabajo.
 
-Para generar un flujo de trabajo:
-1. Desde la página [Workflow Automation][1], haga clic en {{< ui >}}New Workflow{{< /ui >}}.
-1. Haga clic en {{< ui >}}Create a workflow with AI{{< /ui >}}.
-1. Ingrese una instrucción detallada para su flujo de trabajo. Especifique las integraciones y acciones que desea utilizar.
-1. Haga clic en la flecha hacia arriba ({{< ui >}}↑{{< /ui >}}) para crear su flujo de trabajo.
+Para crear un flujo de trabajo:
+1. Desde la página [Workflow Automation][1], haga clic en {{< ui >}}New workflow{{< /ui >}}.
+1. En {{< ui >}}Build a workflow with AI{{< /ui >}}, ingrese una instrucción detallada o seleccione una instrucción sugerida.
+1. Haga clic en la flecha hacia arriba ({{< ui >}}↑{{< /ui >}}) para enviar la instrucción.
+1. Responda a cualquier pregunta de seguimiento, luego confirme el flujo de trabajo cuando se le solicite. Bits crea el flujo de trabajo y lo abre en el editor de flujo de trabajo.
 
-Para iterar sobre un flujo de trabajo existente:
-1. Desde un flujo de trabajo existente, haga clic en {{< ui >}}Edit with AI{{< /ui >}}.
-1. Ingrese una instrucción detallada para el comportamiento que desea agregar a su flujo de trabajo. Incluya las integraciones y acciones que desea utilizar.
-1. Haga clic en la flecha hacia arriba ({{< ui >}}↑{{< /ui >}}) para añadir la funcionalidad a su flujo de trabajo.
+También puede crear un flujo de trabajo desde cualquier lugar en Datadog con Bits Chat. Abra Bits Chat haciendo clic en {{< ui >}}Ask Bits{{< /ui >}} en la barra de navegación superior derecha o presionando <kbd>Cmd</kbd> o <kbd>Ctrl</kbd> + <kbd>I</kbd>, luego pídale a Bits que cree un flujo de trabajo.
 
-<div class="alert alert-info">La IA de Workflow Automation no responde preguntas sobre el producto. Si tiene preguntas o comentarios, considere unirse al canal <strong>#workflows</strong> en el <a href="https://chat.datadoghq.com/">Slack de la comunidad de Datadog</a></div>
+Para actualizar un flujo de trabajo existente:
+1. Abra el flujo de trabajo y haga clic en el icono de IA <i class="icon-bits-ai"></i> en la barra de herramientas izquierda. Bits Chat se abre con el flujo de trabajo adjunto como contexto.
+1. Ingrese una instrucción detallada que describa los cambios que desea.
+1. Haga clic en la flecha hacia arriba ({{< ui >}}↑{{< /ui >}}) para enviar la instrucción.
+1. Responda a cualquier pregunta de seguimiento, luego confirme los cambios cuando se le solicite. Bits actualiza el flujo de trabajo en el editor de flujo de trabajo.
 
 ## Cree un flujo de trabajo personalizado {#create-a-custom-workflow}
 
@@ -135,18 +136,26 @@ Puede configurar su flujo de trabajo para que le envíe una notificación en cas
 - PagerDuty
 - Correo electrónico
 
+Notifications se configuran desde el editor de flujo de trabajo, en cualquiera de los siguientes lugares:
+- Haga clic en el nombre del flujo de trabajo en la parte superior del editor para abrir el menú emergente del título del flujo de trabajo, luego desplácese hacia abajo hasta la sección {{< ui >}}Notifications{{< /ui >}}.
+- Haga clic en {{< ui >}}cog icon{{< /ui >}} en la esquina superior derecha del editor y seleccione {{< ui >}}Edit permissions{{< /ui >}}. La sección {{< ui >}}Notifications{{< /ui >}} se encuentra en la parte inferior del modal.
+
+Los cambios realizados desde el menú emergente del título del flujo de trabajo se guardan inmediatamente. Los cambios realizados desde el modal {{< ui >}}Edit permissions{{< /ui >}} se aplican cuando hace clic en {{< ui >}}Save{{< /ui >}}.
+
 Para agregar una notificación:
-1. En el panel de configuración del flujo de trabajo, desplácese hacia abajo hasta la sección {{< ui >}}Notifications{{< /ui >}}.
+1. Abra la sección {{< ui >}}Notifications{{< /ui >}} usando uno de los métodos descritos anteriormente.
 1. Para agregar una notificación si el flujo de trabajo tiene éxito:
-   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}Notify on success{{< /ui >}}.
+   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}On success{{< /ui >}}, o haga clic en {{< ui >}}Add success notification{{< /ui >}} si aún no hay Notifications de éxito configuradas.
    1. Seleccione la integración que desea usar para las notificaciones.
    1. Complete los campos obligatorios para la integración especificada.
-   1. Haga clic en {{< ui >}}Save{{< /ui >}} para guardar su flujo de trabajo.
+   1. Haga clic en {{< ui >}}Save{{< /ui >}} para agregar la Notifications.
 1. Para agregar una notificación si el flujo de trabajo falla:
-   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}Notify on failure{{< /ui >}}.
+   1. Haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}) junto a {{< ui >}}On failure{{< /ui >}}, o haga clic en {{< ui >}}Add failure notification{{< /ui >}} si aún no hay Notifications de error configuradas.
    1. Seleccione la integración que desea usar para las notificaciones.
    1. Complete los campos obligatorios para la integración especificada.
-   1. Haga clic en {{< ui >}}Save{{< /ui >}} para guardar su flujo de trabajo.
+   1. Haga clic en {{< ui >}}Save{{< /ui >}} para agregar la Notifications.
+
+Para editar o eliminar una Notifications existente, haga clic en ella en la sección {{< ui >}}Notifications{{< /ui >}} y actualice sus campos, o use su icono de eliminar para quitarla.
 
 ## Manejo de errores {#error-handling}
 
@@ -214,3 +223,4 @@ Para realizar tareas usando la API, consulte la [documentación de la Workflow A
 [12]: /es/actions/workflows/variables/
 [13]: /es/api/latest/workflow-automation/
 [14]: /es/actions/workflows/variables/#context-variables
+[15]: /es/bits_ai/bits_chat/

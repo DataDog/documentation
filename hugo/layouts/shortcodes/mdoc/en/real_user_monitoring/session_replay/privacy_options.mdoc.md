@@ -57,7 +57,7 @@ After updating your configuration, you can override elements of your HTML docume
 
 ### Mask mode
 
-Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][3]. Text on your application is replaced with `X`, rendering the page into a wireframe.
+Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, canvas contents, links, and [`data-*` attributes][3]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {% img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%;" /%}
 
@@ -1489,59 +1489,27 @@ Sensitive text can be detected in:
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
-Sensitive text can be detected in the following components:
+Sensitive text can be detected in:
 
-{% table %}
-- Component
-- Platform(s)
----
-- Text Field
-- iOS
----
-- Text View
-- iOS
----
-- Edit Text
-- Android
----
-- Address information
-- iOS, Android
----
-- Credit card numbers
-- iOS
----
-- One-time codes
-- iOS
-{% /table %}
+- Text Field (iOS)
+- Text View (iOS)
+- Edit Text (Android)
+- Address information (iOS, Android)
+- Credit card numbers (iOS)
+- One-time codes (iOS)
 {% /if %}
 <!-- end React Native -->
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
-Sensitive text can be detected in the following components:
+Sensitive text can be detected in:
 
-{% table %}
-- Component
-- Platform(s)
----
-- Text Field
-- iOS
----
-- Text View
-- iOS
----
-- Edit Text
-- Android
----
-- Address information
-- iOS, Android
----
-- Credit card numbers
-- iOS
----
-- One-time codes
-- iOS
-{% /table %}
+- Text Field (iOS)
+- Text View (iOS)
+- Edit Text (Android)
+- Address information (iOS, Android)
+- Credit card numbers (iOS)
+- One-time codes (iOS)
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -1762,72 +1730,28 @@ This includes:
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 **Shapes**
-
-{% table %}
-- Type
-- Platform(s)
----
-- Background of selected option in Segment
-- iOS
----
-- Circle surrounding the selected date in Date Picker
-- iOS
----
-- Selection mark in Checkbox
-- Android
----
-- Thumb of a Slider
-- iOS, Android
-{% /table %}
+- Background of selected option in Segment (iOS)
+- Circle surrounding the selected date in Date Picker (iOS)
+- Selection mark in Checkbox (Android)
+- Thumb of a Slider (iOS, Android)
 
 **Text attributes**
-
-{% table %}
-- Type
-- Platform(s)
----
-- The color of a label rendering the selected date in Date Picker
-- iOS
----
-- The position of the first and last option in Value Picker
-- iOS, Android
-{% /table %}
+- The color of a label rendering the selected date in Date Picker (iOS)
+- The position of the first and last option in Value Picker (iOS, Android)
 {% /if %}
 <!-- end React Native -->
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}
 ##### Shapes
-
-{% table %}
-- Type
-- Platform(s)
----
-- Background of selected option in Segment
-- iOS
----
-- Circle surrounding the selected date in Date Picker
-- iOS
----
-- Selection mark in Checkbox
-- Android
----
-- Thumb of a Slider
-- iOS, Android
-{% /table %}
+- Background of selected option in Segment (iOS)
+- Circle surrounding the selected date in Date Picker (iOS)
+- Selection mark in Checkbox (Android)
+- Thumb of a Slider (iOS, Android)
 
 ##### Text attributes
-
-{% table %}
-- Type
-- Platform(s)
----
-- The color of a label rendering the selected date in Date Picker
-- iOS
----
-- The position of the first and last option in Value Picker
-- iOS, Android
-{% /table %}
+- The color of a label rendering the selected date in Date Picker (iOS)
+- The position of the first and last option in Value Picker (iOS, Android)
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 

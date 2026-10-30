@@ -1,0 +1,32 @@
+entries:
+  - change_type: modified
+    date: '2026-10-06'
+    link: https://github.com/DataDog/documentation/pull/40451
+    operations:
+      - GetDashboardUsage
+      - ListDashboardsUsage
+    title: Document dashboard quality scores in usage APIs
+  - change_type: modified
+    date: '2026-10-08'
+    link: https://github.com/DataDog/documentation/pull/40562
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Heatgrid dashboard widget support
+  - change_type: modified
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40652
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Allow network device flows in dashboard formula queries
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41084
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Custom Topology Map Widget

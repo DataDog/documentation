@@ -4,7 +4,7 @@ aliases:
 - /fr/llm_observability/configuration/
 - /fr/llm_observability/evaluations/
 - /fr/llm_observability/configure/evaluations/
-description: Apprenez à configurer les évaluations pour votre application LLM.
+description: Apprenez à configurer Evaluators pour votre application LLM.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
@@ -13,15 +13,15 @@ title: Évaluations
 ---
 ## Présentation {#overview}
 
-Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Elles peuvent être configurées en accédant à [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability propose plusieurs moyens de prendre en charge les évaluations. Les évaluateurs peuvent être configurés en accédant à [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluators{{< /ui >}}][8].
 
-### Évaluations personnalisées LLM-as-a-judge {#custom-llm-as-a-judge-evaluations}
+### Évaluateurs LLM-as-a-judge personnalisés {#custom-llm-as-a-judge-evaluators}
 
-[Les évaluations personnalisées LLM-as-a-judge][1] vous permettent de définir votre propre logique d'évaluation à l'aide de prompts en langage naturel. Vous pouvez créer des évaluations personnalisées pour évaluer des critères subjectifs ou objectifs (comme le ton, l'utilité ou la véracité) et les exécuter à grande échelle sur vos traces et spans.
+[Les évaluateurs LLM-as-a-judge personnalisés][1] vous permettent de définir votre propre logique d'évaluation à l'aide de prompts en langage naturel. Vous pouvez créer des évaluateurs personnalisés pour évaluer des critères subjectifs ou objectifs (comme le ton, l'utilité ou l'exactitude factuelle) et les exécuter à grande échelle sur vos traces et vos spans.
 
-### Évaluations gérées {#managed-evaluations}
+### Évaluateurs gérés {#managed-evaluators}
 
-Datadog crée et prend en charge des [évaluations gérées][2] pour répondre aux cas d'utilisation courants. Vous pouvez les activer et les configurer au sein de l'application Agent Observability.
+Datadog crée et prend en charge des [évaluateurs gérés][2] pour répondre aux cas d'utilisation courants. Vous pouvez les activer et les configurer au sein de l'application Agent Observability.
 
 ### Soumettre les commentaires des utilisateurs finaux {#submit-end-user-feedback}
 
@@ -33,7 +33,7 @@ Vous pouvez également soumettre des [évaluations externes][3] en utilisant l'A
 
 ### Création d'évaluateurs personnalisés {#building-custom-evaluators}
 
-Pour les développeurs créant des évaluateurs personnalisés, consultez le [Guide du développeur d'évaluations][10].
+Pour les développeurs qui créent des évaluateurs personnalisés, consultez le [Guide de développement des évaluateurs][10].
 
 ### Intégrations d'évaluations {#evaluation-integrations}
 
@@ -47,7 +47,7 @@ Les [files d'attente d'annotation][11] fournissent un workflow structuré pour l
 
 En plus d'évaluer les entrées et les sorties des requêtes LLM, des agents, des workflows ou de l'application, Agent Observability s'intègre au [Sensitive Data Scanner][6], qui aide à prévenir les fuites de données en identifiant et en masquant toute information sensible. Pour obtenir une liste des règles prêtes à l'emploi incluses avec Sensitive Data Scanner, consultez les [Règles de la bibliothèque][12].
 
-### Sécurité {#security}
+### Security {#security}
 
 {{< learning-center-callout header="Obtenez des garde-fous de sécurité en temps réel pour vos applications et agents d'IA" btn_title="Rejoignez la préversion" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/ai-security/">}}
   AI Guard aide à sécuriser vos applications et agents d'IA en temps réel contre les attaques par injection de prompt, jailbreaking, utilisation abusive d'outils et exfiltration de données sensibles. Essayez-le dès aujourd'hui !
@@ -55,7 +55,9 @@ En plus d'évaluer les entrées et les sorties des requêtes LLM, des agents, de
 
 ### Autorisations {#permissions}
 
-Les [`Agent Observability Write` autorisations][7] sont nécessaires pour configurer les évaluations.
+Les [`Agent Observability Write` permissions][7] sont nécessaires pour configurer les évaluateurs.
+
+Pour restreindre les configurations d'évaluateur d'une application à des équipes ou des rôles spécifiques, consultez [Data Access Control in Agent Observability][14].
 
 ### Récupération des spans {#retrieving-spans}
 
@@ -77,3 +79,4 @@ Agent Observability propose une [API d'exportation][9] que vous pouvez utiliser 
 [11]: /fr/llm_observability/investigate/annotation_queues
 [12]: /fr/security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /fr/llm_observability/investigate/evaluations/end_user_feedback
+[14]: /fr/llm_observability/improve/access_control/

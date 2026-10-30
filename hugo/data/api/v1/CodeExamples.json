@@ -63,6 +63,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2030704107",
+      "description": "Create a dashboard with network device flows formula query"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1442588603",
       "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
     },
@@ -85,6 +90,21 @@
       "group": "dashboards",
       "suffix": "_9836563",
       "description": "Create a geomap widget with conditional formats and text formats"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2574782816",
+      "description": "Create a heatgrid widget with a preset gradient"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1322784076",
+      "description": "Create a heatgrid widget with custom discrete thresholds"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1681529203",
+      "description": "Create a heatgrid widget with custom gradient colors for both themes"
     },
     {
       "group": "dashboards",
@@ -205,6 +225,11 @@
       "group": "dashboards",
       "suffix": "_2617251399",
       "description": "Create a new dashboard with bar_chart widget sorted by group"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1996494326",
+      "description": "Create a new dashboard with case_stream list_stream widget"
     },
     {
       "group": "dashboards",
@@ -533,6 +558,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_620827773",
+      "description": "Create a new dashboard with topology_map custom widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2815497946",
       "description": "Create a new dashboard with topology_map data_streams widget"
     },
@@ -738,8 +768,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_2329487120",
+      "description": "Send deflate logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_1920474053",
       "description": "Send gzip logs returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_348923381",
+      "description": "Send gzip logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
     },
     {
       "group": "logs",

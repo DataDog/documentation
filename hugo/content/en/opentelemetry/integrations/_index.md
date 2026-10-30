@@ -26,7 +26,7 @@ For example, the [`dockerstatsreceiver`][15] `metadata.yaml` file lists metrics 
 
 ## Datadog-supported OpenTelemetry integrations
 
-Datadog supports the following OpenTelemetry integrations:
+Datadog supports the following OpenTelemetry integrations. Don't see the integration you need? [Request it][21].
 
 ### APM (Application Performance Monitoring)
 
@@ -48,7 +48,7 @@ Gain insights into your containerized environments and host systems:
 
 - [Docker Metrics][5] - Monitor Docker container performance
 - [Host Metrics][6] - Track system metrics such as CPU, disk, and memory usage
-- [Kubernetes Metrics][18] - Monitor Kubernetes cluster health and performance
+- [Kubernetes Metrics][18] - Collect Kubernetes infrastructure metrics and send resource data to Kubernetes Explorer
 - [Podman Metrics][16] - Monitor Podman container performance
 
 ### Web servers and proxies
@@ -75,6 +75,10 @@ Monitor big data processing frameworks:
 
 - [Apache Spark Metrics][13] - Track Apache Spark performance metrics
 
+## Request an integration or share feedback
+
+To request a new integration or share feedback about an existing one, fill out the [OpenTelemetry Integrations Product Preview form][21].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -99,4 +103,4 @@ Monitor big data processing frameworks:
 [18]: /opentelemetry/integrations/kubernetes_metrics/
 [19]: /opentelemetry/integrations/postgres_metrics/
 [20]: /opentelemetry/integrations/sqlserver_metrics/
-
+[21]: https://www.datadoghq.com/product-preview/otel-integrations/

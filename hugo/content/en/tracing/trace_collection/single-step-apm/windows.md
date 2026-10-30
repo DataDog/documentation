@@ -103,24 +103,14 @@ To instrument Java and .NET applications across your entire Windows host:
 
 ### Existing Agent installation
 
-If you already have a Datadog Agent installed, use Fleet Automation to enable SSI.
+If you already have a Datadog Agent installed, enable SSI remotely from Datadog. You do not need to run commands on each host.
 
-1. In Datadog, go to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][6].
-1. Click {{< ui >}}Configure Agents{{< /ui >}}.
-1. Apply filters to select the agents you want to configure, then click **Next**.
-
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="The agent filtering screen in Fleet Automation, with options to scope by environment, operating system, and hostname" style="width:100%;" >}}
-
-1. Click the {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} tile, then click {{< ui >}}Next{{< /ui >}}.
-
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="The product selection screen in Fleet Automation, showing the Application Performance Monitoring (APM) tile" style="width:80%;" >}}
-
-1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
-
-1. Click {{< ui >}}Next{{< /ui >}}.
-1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
+1. In Datadog, go to [**APM > Instrument a Service**][6].
+1. Under {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}, select {{< ui >}}Deploy on existing hosts{{< /ui >}} to instrument your services remotely through the Datadog Agent.
+1. Under {{< ui >}}Which hosts should we instrument?{{< /ui >}}, use the scope filters ({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}}) to narrow down your hosts. Then select the Agents you want to instrument on the {{< ui >}}Eligible for deployment{{< /ui >}} tab. Hosts that can't be instrumented appear on the {{< ui >}}Excluded from deployment{{< /ui >}} tab.
+1. In {{< ui >}}Configure SDKs installation{{< /ui >}}, click {{< ui >}}Yes{{< /ui >}} to have Datadog automatically install the tracing SDKs. To pin specific SDK versions instead of the latest, expand {{< ui >}}Customize library versions{{< /ui >}}.
+1. In {{< ui >}}Configure rollout strategy{{< /ui >}}, choose what percentage of Agents to deploy to at a time. Datadog shows the resulting stages and an estimated duration. Deployments automatically pause if three consecutive Agents fail or if failures reach 10% of the total. You can re-run the deployment later.
+1. In {{< ui >}}Review and apply APM instrumentation{{< /ui >}}, check the {{< ui >}}Configuration Summary{{< /ui >}} (toggle between {{< ui >}}Summary{{< /ui >}} and {{< ui >}}YAML{{< /ui >}}), then click {{< ui >}}Apply Instrumentation{{< /ui >}}.
 1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
@@ -162,6 +152,8 @@ To enable products, [set environment variables][3] in your application configura
 {{< /site-region >}}
 
 Instrumentation rules let you control which processes are automatically instrumented by SSI on Windows hosts. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
 
 To configure instrumentation rules:
 
@@ -244,5 +236,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [3]: /tracing/trace_collection/library_config/
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[6]: https://app.datadoghq.com/fleet/agent-management
+[6]: https://app.datadoghq.com/apm/instrumentation
 [7]: https://app.datadoghq.com/apm/services

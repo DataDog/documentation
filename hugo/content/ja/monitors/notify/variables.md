@@ -45,8 +45,8 @@ title: 変数
 | `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
-| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
-| `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`<br> **Note**: For `ALERT` to `WARNING` transitions, `{{#is_alert_recovery}}` recipients receive notifications without message bodies. Use `{{#is_alert_to_warning}}` to include messages  |
+| `{{^is_alert_recovery}}`   | The monitor does not recover from an `ALERT` to `OK`               |
 | `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
@@ -132,7 +132,7 @@ title: 変数
 {{/is_match}}
 ```
 
-または、最初の例にある `{{else}}` パラメータを使用します。
+または、最初の例にある `{{else}}` パラメーターを使用します。
 
 ```text
 {{#is_match "host.role.name" "db"}}
@@ -174,7 +174,7 @@ title: 変数
 {{/is_exact_match}}
 ```
 
-`is_exact_match`条件付き変数は、[`{{value}}` テンプレート変数](#template-variables)もサポートします。
+`is_exact_match`条件付き変数は、[`{{value}}` テンプレート変数](#template-variables) もサポートします。
 
 ```text
 {{#is_exact_match "value" "<VALUE>"}}
@@ -251,7 +251,7 @@ This is the escalation message @dev-team@company.com
 
 属性変数とタグ変数を使用して、カスタマイズされた、有益で、特定のアラートメッセージを表示して、アラートの性質を理解できるようにします。以下のセクションにある例と使用例を参照してください。
 - [マルチアラート変数 ](#multi-alert-variables)
-- [一致する属性/タグ変数 ](#matching-attributetag-variables)
+- [一致する属性/タグ変数](#matching-attributetag-variables)
 
 タグ
 : 自動的に添付される (ホスト名、コンテナ名、ログファイル名、サーバーレス関数名など) か、カスタムタグを通じて追加される (担当チーム、環境、アプリケーション、バージョンなど)。
@@ -259,14 +259,13 @@ This is the escalation message @dev-team@company.com
 属性
 : ログの内容に基づいており、リファレンステーブルから解析または追加されたもの (geoip など)。
 
-**注**: データがない状態 (例えば、クエリに一致するイベントがない状態) でモニターが回復するように構成されている場合、回復メッセージにはデータは含まれません。回復メッセージの情報を保持するには、{{tag.name}}` でアクセスできる追加のタグでグループ化します。
+**注**: データがない状態 (たとえば、クエリに一致するイベントがない状態) でモニターが回復するように構成されている場合、回復メッセージにはデータは含まれません。回復メッセージの情報を保持するには、{{tag.name}}` でアクセスできる追加のタグでグループ化します。
 
 ### マルチアラート変数 {#multi-alert-variables}
 
-マルチアラートグループボックスで選択した次元に基づいて、[マルチアラートモニター][1]でマルチアラート変数を設定します。各アラートにおいて、グループの基準となる次元に関連付けられた値を動的に含めることにより、通知を充実させます。
+マルチアラートグループボックスで選択した次元に基づいて、[マルチアラートモニター][1] でマルチアラート変数を設定します。各アラートにおいて、グループの基準となる次元に関連付けられた値を動的に含めることにより、通知を充実させます。
 
-**注**: 集約で `group_by` フィールドを使用する場合、モニターからの追加のタグやアラートが自動的に継承されることがあります。これは、監視対象のエンドポイントに設定されたアラートや構成が、集約結果の各グループに適用される可能性があることを意味します。
-
+**注**: 集計で `group_by` フィールドを使用すると、モニターからの追加のタグやアラートが自動的に継承されることがあるため、監視対象のエンドポイントに設定されたアラートや構成が、集計によって生成された各グループに適用される可能性があります。[予約済みタグキー][21] は例外です。これらのキーは、選択されたグループ化ディメンションに関係なく、すべてのアラートで使用できます。
 {{< tabs >}}
 {{% tab "タグでグループ化" %}}
 
@@ -278,7 +277,7 @@ This is the escalation message @dev-team@company.com
 
 この変数は、`key` に関連付けられた `value` を各アラート通知に挿入します。たとえば、モニターが各 `env` に対してアラートをトリガーする場合、変数 `{{env.name}}` が通知メッセージで使用可能です。
 
-グループが同じ `key` に関連付けられた複数の `values` でタグ付けされている場合、アラートメッセージは、辞書式順序ですべての値のコンマ区切りの文字列をレンダリングします。
+グループが同じ `key` に関連付けられた複数の `values` でタグ付けされている場合、アラートメッセージは、辞書式順序ですべての値のカンマ区切りの文字列をレンダリングします。
 
 #### ピリオドを含むタグキー {#tag-key-with-period}
 
@@ -304,7 +303,7 @@ This is the escalation message @dev-team@company.com
 This alert was triggered on {{ @machine_id.name }}
 ```
 
-ファセットにピリオドが含まれている場合、ファセットを角括弧で囲みます。例、
+ファセットにピリオドが含まれている場合、ファセットを角括弧で囲みます。例を以下に示します。
 
 ```text
 {{ [@network.client.ip].name }}
@@ -315,9 +314,9 @@ This alert was triggered on {{ @machine_id.name }}
 
 #### 通知をグループごとにカスタマイズする {#customize-the-notification-based-on-the-group}
 
-クエリが特定のディメンションでグループ化されている場合、そのグループに関連する動的メタデータを活用して通知を拡充できます。タグの選択に基づいてタグ変数のリストを表示するには、**通知と自動化の構成**セクションで **メッセージテンプレート変数を使用する**をクリックします。次の例をご覧ください。
+クエリが特定のディメンションでグループ化されている場合、そのグループに関連する動的メタデータを活用して通知を拡充できます。タグの選択に基づいてタグ変数のリストを表示するには、[{{< ui >}}Configure notifications & automations{{< /ui >}}] (通知と自動化の構成) セクションの [{{< ui >}}Use message template variables{{< /ui >}}] (メッセージテンプレート変数を使用する) をクリックします。次の例をご覧ください。
 
-{{% collapse-content title="ホストごとのクエリグループ" level="h5" %}}
+{{% collapse-content title="クエリを host でグループ化する" level="h5" %}}
 
 モニターが各 `host` に対してアラートをトリガーする場合、タグ変数 `{{host.name}}` and `{{host.ip}}`、およびこのホストで利用可能なホストタグを使用できます。
 
@@ -362,9 +361,9 @@ Pod のメタデータ変数:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="サービスでグループ化してクエリする" level="h5" %}}
+{{% collapse-content title="クエリを service でグループ化する" level="h5" %}}
 
-モニターが各 `service` に対してアラートをトリガーする場合、[Software Catalog][10] で定義されているサービスのいくつかの属性にアクセスできます。
+モニターが各 `service` に対してアラートをトリガーする場合、[Catalog][10] で定義されているサービスのいくつかの属性にアクセスできます。
 
 サービスのメタデータ変数:
 
@@ -373,22 +372,54 @@ Pod のメタデータ変数:
 - ドキュメント: `{{service.docs}}`
 - リンク: `{{service.links}}`
 
-ドキュメントとリンクについては、次の構文を使用して特定のアイテムにもアクセスできます `[<name>]`。たとえば、定義スキーマがこの[例][11]で定義されているサービスの場合、次の構文を使用して「Runbook」リンクにアクセスできます。
+ドキュメントとリンクについては、次の構文を使用して特定のアイテムにもアクセスできます `[<name>]`。たとえば、定義スキーマがこの [例][11] で定義されているサービスの場合、次の構文を使用して「Runbook」リンクにアクセスできます。
 
 ```text
 {{service.links[Runbook]}}
 ```
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="クエリを device_ip および device_namespace でグループ化する" level="h5" %}}
+
+モニターが各 `device_ip` と `device_namespace` に対してアラートをトリガーする場合、ネットワークデバイスの任意の属性にアクセスできます。
+
+ネットワークデバイスのメタデータ変数:
+- 正規 ID: `{{network_device.canonical_id}}`
+- 説明: `{{network_device.description}}`
+- デバイスタイプ: `{{network_device.device_type}}`
+- デバイス ID: `{{network_device.device_id}}`
+- ID タグ: `{{network_device.id_tags}}`
+- インテグレーション: `{{network_device.integrations}}`
+- IP アドレス: `{{network_device.ip_address}}`
+- 場所: `{{network_device.location}}`
+- モデル: `{{network_device.model}}`
+- 名前: `{{network_device.name}}`
+- ネームスペース: `{{network_device.namespace}}`
+- OS ホスト名: `{{network_device.os_hostname}}`
+- OS 名: `{{network_device.os_name}}`
+- OS バージョン: `{{network_device.os_version}}`
+- Ping ステータス: `{{network_device.ping_status}}`
+- 製品名: `{{network_device.product_name}}`
+- プロファイル: `{{network_device.profile}}`
+- シリアル番号: `{{network_device.serial_number}}`
+- ステータス: `{{network_device.status}}`
+- Subnet: `{{network_device.subnet}}`
+- Sys オブジェクト ID: `{{network_device.sys_object_id}}`
+- タグ: `{{network_device.tags}}`
+- ベンダー: `{{network_device.vendor}}`
+- バージョン: `{{network_device.version}}`
+{{% /collapse-content %}}
+
 ### 一致する属性/タグ変数 {#matching-attributetag-variables}
 
 モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから任意の属性またはタグを含めることができます。次の表は、さまざまなモニタータイプから追加できる属性と変数の例を示しています。
 
-<div class="alert alert-info">モニターで利用できる変数の完全なリストを表示するには、通知構成の下部で<strong>{{&nbsp;変数を追加</strong>をクリックし、拡張メニューオプションから選択してください。</div>
+<div class="alert alert-info">モニターで利用できる変数の完全なリストを表示するには、通知構成の下部で [{{< ui >}}{{ Add Variable{{< /ui >}}] (変数を追加) をクリックし、展開されたメニューオプションから選択します。</div>
 
 | モニタータイプ             | 変数構文                                         |
 |--------------------------|--------------------------------------------------------|
-| [監査証跡][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
+| [Audit Trail][16]        | `{{audit.attributes.key}}` or `{{audit.message}}`      |
 | [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
 | [CI Test][18]            | `{{citest.attributes.key}}`                            |
 | [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
@@ -441,7 +472,7 @@ Pod のメタデータ変数:
 
 #### エクスプローラーリンク {#explorer-link}
 
-`{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` を使用して、クエリに一致するイベントを対象としたログエクスプローラー、トレースエクスプローラー、RUM エクスプローラー、またはエラー追跡へのリンクで通知を充実させます。
+`{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` を使用して、クエリに一致するイベントを対象としたログエクスプローラー、Trace Explorer、RUM エクスプローラー、または Error Tracking へのリンクで通知を充実させます。
 
 ### チェックモニター変数 {#check-monitor-variables}
 
@@ -495,7 +526,7 @@ Pod のメタデータ変数:
 {{{check_message}}}
 ```
 
-これが特に重要になるのは、`{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` で URL をそのまま保持する場合です。
+これが特に重要になるのは、`{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` は、URL をそのまま保持する場合に使用します。
 
 ## テンプレート変数 {#template-variables}
 
@@ -535,19 +566,19 @@ Pod のメタデータ変数:
 
 ### 評価 {#evaluation}
 
-数値を返すテンプレート変数は、算術演算と関数をサポートしています。これにより、数値の算術演算や値のフォーマット変更を実行できます。詳細については、[テンプレート変数の評価][7]を参照してください。
+数値を返すテンプレート変数は、算術演算と関数をサポートしています。これにより、数値の算術演算や値のフォーマット変更を実行できます。詳細については、[テンプレート変数の評価][7] を参照してください。
 
 ### ローカルタイム {#local-time}
 
 `local_time`使うと、通知の中に好きなタイムゾーンで別の日付を追加することができます。この関数は、日付をローカルタイムに変換します: `{{local_time 'time_variable' 'timezone'}}`。
-例えば、東京のタイムゾーンで最後にトリガーされたモニターの時刻を通知に追加するには、通知メッセージに次のように記述します。
+たとえば、東京のタイムゾーンで最後にトリガーされたモニターの時刻を通知に追加するには、通知メッセージに次のように記述します。
 
 ```
 {{local_time 'last_triggered_at' 'Asia/Tokyo'}}
 ```
 
-結果は ISO 8601 形式で表示されます: `yyyy-MM-dd HH:mm:ss±HH:mm`、たとえば `2021-05-31 23:43:27+09:00` のようになります。
-利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][8]で、TZ データベース名の列をご参照ください。
+結果は ISO 8601 形式 (`yyyy-MM-dd HH:mm:ss±HH:mm`) で表示されます。たとえば `2021-05-31 23:43:27+09:00` のようになります。
+利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][8] で、TZ データベース名の列をご参照ください。
 
 ## 高度な {#advanced}
 
@@ -598,7 +629,7 @@ https://app.datadoghq.com/dash/integration/system_overview?tpl_var_scope=host:{{
 https://app.datadoghq.com/dash/integration/<INTEGRATION_NAME>?tpl_var_scope=host:{{host.name}}
 ```
 
-`{{last_triggered_at_epoch}}` [template variable](#template-variables) as well as a `<DASHBOARD_ID>` and `<DASHBOARD_NAME>` を使って、警告の瞬間から相対時間範囲を持つダッシュボードにリンクします。
+`{{last_triggered_at_epoch}}` [template variable](#template-variables) as well as a `<DASHBOARD_ID>` and `<DASHBOARD_NAME>` を使用して、警告の瞬間から相対時間範囲を持つダッシュボードにリンクします。
 
 ```text
 https://app.datadoghq.com/dashboard/<DASHBOARD_ID>/<DASHBOARD_NAME>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
@@ -636,7 +667,7 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 |-----------|----------------|---------------------------------------------------------------------------------|
 | `status`  | `status:Alert` | アラート状態のモニター (追加のステータス: `WARN`、`NO DATA`、および `OK`)   |
 | `muted`   | `muted: true`  | ミュートされたモニター (ミュートされていないモニターには `false` を使用)                             |
-| `type`    | `type:log`     | ログモニター (他の[モニタータイプ][1]を参照)                                     |
+| `type`    | `type:log`     | ログモニター (他の [モニタータイプ][1] を参照)                                     |
 
 
 
@@ -703,9 +734,9 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*100
 
 ### URL Encode {#url-encode}
 
-アラートメッセージに URL でエンコードする必要がある情報が含まれている場合 (たとえば、リダイレクトの場合)、`{{ urlencode "<variable>"}}` 構文を使います。
+アラートメッセージに URL でエンコードする必要がある情報が含まれている場合 (たとえば、リダイレクトの場合)、`{{ urlencode "<variable>"}}` 構文を使用します。
 
-**例**: モニターメッセージに特定のサービスにフィルタリングされた Software Catalog への URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使い、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
+**例**: モニターメッセージに、特定のサービスにフィルタリングされた Catalog への URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使用し、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
@@ -724,8 +755,8 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /ja/monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /ja/monitors/types/error_tracking/
-[10]: /ja/software_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/ja/software_catalog/service_definitions/v2-2/#example-yaml
+[10]: /ja/internal_developer_portal/catalog/entity_model/
+[11]: https://docs.datadoghq.com/ja/internal_developer_portal/catalog/entity_model/
 [12]: /ja/monitors/types/log/
 [13]: /ja/monitors/types/apm/?tab=analytics
 [14]: /ja/monitors/types/error_tracking/
@@ -735,3 +766,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [18]: /ja/monitors/types/ci/?tab=pipelines
 [19]: /ja/monitors/types/database_monitoring/
 [20]: /ja/synthetics/notifications/template_variables/
+[21]: /ja/getting_started/tagging/

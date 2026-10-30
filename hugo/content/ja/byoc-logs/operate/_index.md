@@ -10,8 +10,9 @@ title: BYOC Logs を操作する
 
 {{< whatsnext desc="BYOC Logs を操作する:">}}
   {{< nextlink href="/byoc-logs/operate/sizing/" >}}サイジングガイド{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/operate/object_storage_requests/" >}}オブジェクトストレージのリクエストの見積もり{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/autoscaling/" >}}インデクサーとコンパクターのオートスケーリング{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/operate/monitoring/" >}}BYOC Logs を監視する{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/operate/monitoring/" >}}BYOC Logsを監視する{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/search_logs/" >}}ログを検索する{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/best_practices/" >}}本番環境のベストプラクティス{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/disk_buffer_durability/" >}}ディスクバッファの耐久性を構成する{{< /nextlink >}}
