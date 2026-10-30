@@ -173,7 +173,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 6. Create a [Tag Indexing Rule][18] for these metrics. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 7. Scope the rule to the metric namespace prefix of the metrics you'd like to configure.
-8. Select {{< ui >}}Exclude tags{{< /ui >}} and use tag usage to unindex tags that haven't been queried in the last 30, 60, or 90 days and aren't used on any assets (dashboards, notebooks, monitors, and SLOs).
+8. Select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets, such as dashboards, notebooks, monitors, and SLOs).
 9. Save the rule.
 
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.

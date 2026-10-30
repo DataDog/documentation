@@ -90,11 +90,11 @@ After you identify unqueried metrics, you can eliminate the volume and cost of t
 To configure multiple unqueried metrics at once, create a [Tag Indexing Rule][7]:
 1. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 2. Scope the rule to the metric namespace prefix of the unqueried metrics.
-3. Select the tags to include or exclude. To unindex tags that aren't queried or used on any assets, select {{< ui >}}Exclude tags{{< /ui >}} and use tag usage.
+3. Select the tags to include or exclude. To unindex tags that aren't queried or used on any assets, select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets).
 
 You have full control over the cardinality of your metrics without the need to change your applications nor the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are rarely used can significantly reduce your custom metrics volumes and costs.
 
-In this example, the tag configuration modal shows a metric with a current volume of 7,139 indexed custom metrics. After you select Include tags… with an allowlist of the tags queried in the past 30 days, the modal shows an estimated new volume of 3. You can reduce the number of indexed custom metrics by 7,136.
+In this example, the tag configuration modal for a single metric ({{< ui >}}Manage Tags{{< /ui >}} in the metric's details side panel) shows a metric with a current volume of 7,139 indexed custom metrics. After you select Include tags… with an allowlist of the tags queried in the past 30 days, the modal shows an estimated new volume of 3. You can reduce the number of indexed custom metrics by 7,136.
 
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_05292025.png" alt="Tag configuration modal showing an example metric with a current volume of 7,139 index metrics and an estimated new volume of 3, with an allowlist of suggested tags" style="width:80%;" >}}
 
