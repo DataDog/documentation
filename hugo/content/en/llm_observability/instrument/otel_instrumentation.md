@@ -686,6 +686,8 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 #### Cost metrics
 
+For automatic cost calculation, send model, provider, and token usage attributes; you do not need to supply cost attributes.
+
 The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Supplied costs take precedence over automatic cost estimates.
 
 | OTel Attribute | Agent Observability Field |
@@ -709,7 +711,7 @@ If several attributes supply the same cost field, the first valid value takes pr
 
 ##### Estimated cost attributes (nanodollars)
 
-These Datadog-supported extensions accept **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
+These Datadog-supported extensions accept optional fallback estimates in **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
@@ -721,7 +723,7 @@ These Datadog-supported extensions accept **nanodollars**, without unit conversi
 | `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
 | `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
 
-Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates. For SDK and API cost fields, see [manual cost tracking][56].
+Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
 
 #### Request parameters
 
@@ -1246,5 +1248,4 @@ with tracer.start_as_current_span("my-span") as span:
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
-[56]: /llm_observability/investigate/cost/#manual
 [57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
