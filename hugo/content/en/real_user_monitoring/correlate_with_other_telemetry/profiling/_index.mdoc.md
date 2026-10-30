@@ -261,7 +261,7 @@ The [ProfilingManager API][7] also supports disabling rate limiting during debug
 
 On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22]. When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
 
-ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17] and count toward the quota described in the [Preview quota system](#preview-quota-system) section.
+ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17].
 
 System traces help diagnose ANRs, which are usually caused by thread contention, blocking I/O, or interprocess communication (IPC) delays rather than CPU-heavy computation. A system trace shows thread states and system-level events over time, which surfaces these causes.
 
@@ -318,7 +318,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 ### Within the Profiling page
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience.png" alt="Android profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found under **Investigate > Profiles**, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][24] or [time to full display][25]), a long task, or a critical [RUM Operation][27]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_2.png" alt="Step 2 of the Android profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
@@ -429,7 +429,7 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 ### Within the Profiling page
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience.png" alt="iOS profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found under **Investigate > Profiles**, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][12] or [time to full display][12]), a long task, or a critical [RUM Operation][26]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_2.png" alt="Step 2 of the iOS profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
