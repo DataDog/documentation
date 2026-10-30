@@ -58,8 +58,6 @@ To configure tags on multiple metrics at once, use [Tag Indexing Rules][41].
 
 Clicking {{< ui >}}Configure Metrics{{< /ui >}} gives you multiple options to configure more than one metric at a time: 
 
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
-
 * {{< ui >}}Enable or disable percentiles{{< /ui >}}: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
