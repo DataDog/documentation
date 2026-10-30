@@ -50,7 +50,7 @@ Enable [automatic instrumentation][3] to capture media from the following librar
 | OpenAI Agents | Inline base64-encoded images | >= 4.15.0 |
 | Anthropic | Inline base64-encoded images | >= 4.15.0 |
 
-Nova 2 Sonic and ElevenLabs support is available in the `ddtrace` 4.17.0rc1 prerelease. Nova 2 Sonic requires Python 3.12 or later and `aws-sdk-bedrock-runtime` 0.11.0 or later. ElevenLabs requires `elevenlabs` 2.70.0 or later and supports synchronous and asynchronous Agents conversations over WebSocket. Standalone ElevenLabs speech-to-text and text-to-speech APIs are not instrumented.
+Nova 2 Sonic and ElevenLabs require `ddtrace` 4.17 or later. Nova 2 Sonic also requires Python 3.12+ and `aws-sdk-bedrock-runtime` 0.11.0+; ElevenLabs requires `elevenlabs` 2.70.0+.
 
 Each turn of an OpenAI Realtime API conversation produces its own LLM span. Starting in `ddtrace` 4.15.0, each turn also includes workflow and speech-phase spans for conversation playback. Raw `pcm16` and G.711 audio is converted to WAV so that it plays in the browser. To turn off Realtime API instrumentation, set `DD_OPENAI_REALTIME_ENABLED=false`.
 
