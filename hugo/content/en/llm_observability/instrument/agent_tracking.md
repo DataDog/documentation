@@ -24,6 +24,8 @@ Agent Tracking enables you to:
 - Compare two versions side by side, including a diff of their instructions, tools, and model
 - Jump to the spans for an agent or a specific version
 
+<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent-tracking-hero.png</code>): The Agents section of an app's Overview: Agent Usage chart, Recent agents table, and the Most Expensive Agents and Highest Latency Agents tiles.</div>
+
 Agent Tracking is built on three pieces of data:
 
 | Data | What it does | How it is set |
@@ -45,7 +47,6 @@ Spans with no `agent` ancestor are not attributed.
 | Python | `dd-trace` v4.13.0 |
 | Node.js | `dd-trace` TBD |
 | Java | `dd-trace-java` v1.66.0 |
-| Go | `dd-trace-go` TBD |
 
 ### Agent version
 
@@ -94,8 +95,6 @@ LLMObsSpan agentSpan = LLMObs.startAgentSpan("travel_planner", null, null, "v2")
 The version propagates only when passed to `startAgentSpan`. Setting the `agent_version` tag afterward with `setTag` only tags that span.
 {{% /tab %}}
 {{< /tabs >}}
-
-The Go SDK does not support manual agent versioning.
 
 ### Agent manifest
 
@@ -174,6 +173,8 @@ All manifest fields are optional. Values that cannot be reported are dropped, an
 | `model_settings` | Inference parameters such as `temperature`, `max_tokens`, and `top_p`. Provider-specific keys are dropped. |
 | `tools` | The tools the agent can call. Each tool requires a `name` and accepts an optional `description` and `parameters`. |
 
+<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_version_manifest.png</code>): A single version selected in the agent side panel, showing its instructions, tools, model, and model settings.</div>
+
 ## Use Agent Tracking in Agent Observability
 
 View your app in Agent Observability and open the {{< ui >}}Overview{{< /ui >}}. The {{< ui >}}Agents{{< /ui >}} section features the following information:
@@ -185,7 +186,15 @@ View your app in Agent Observability and open the {{< ui >}}Overview{{< /ui >}}.
 
 Tokens and cost are summed from the LLM and embedding spans attributed to each agent.
 
-Click an agent to open a side panel with metrics broken down by version. Select a version to see its instructions and manifest, or click {{< ui >}}Compare{{< /ui >}} to diff two versions. Click {{< ui >}}View Spans{{< /ui >}} to open Trace Explorer filtered to that agent or version.
+Click an agent to open a side panel with metrics broken down by version. Select a version to see its instructions and manifest.
+
+<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_details.png</code>): The side panel for an agent with three versions: the per-version table and timeseries.</div>
+
+Click {{< ui >}}Compare{{< /ui >}} to diff two versions side by side, including their instructions, tools, and model.
+
+<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_version_compare.png</code>): Two versions compared, with an instructions diff, added tools, and a model change.</div>
+
+Click {{< ui >}}View Spans{{< /ui >}} to open Trace Explorer filtered to that agent or version.
 
 ## Limitations
 
