@@ -2304,7 +2304,7 @@
     "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
     "summary": "Add a variant to a feature flag",
     "request_description": "",
-    "request_schema_description": "Request to create a variant."
+    "request_schema_description": "Request to add a variant to a feature flag."
   },
   "DeleteVariantFromFeatureFlag": {
     "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
