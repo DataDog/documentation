@@ -151,7 +151,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 To search these logs with [Archive Search][16], turn on {{< ui >}}Enable for Archive Search{{< /ui >}} and select the AWS account Datadog uses to [read the bucket][19]. Datadog creates the Log Archive after you deploy the pipeline.
 
 **Notes**:
-- Archive Search does not support prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
+- {{< ui >}}Enable for Archive Search{{< /ui >}} isn't available for prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
 - If you turn off Archive Search or delete the destination, Datadog keeps the Log Archive, and the logs already in it stay searchable.
 
 ### Example destination and log archive setup
