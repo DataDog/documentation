@@ -11868,6 +11868,58 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 14
+    - name: Delete an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/delete-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 16
+    - name: Create an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/create-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 15
+    - name: List AWS cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-aws-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-aws-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 13
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
