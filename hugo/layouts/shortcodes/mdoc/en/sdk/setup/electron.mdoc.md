@@ -24,7 +24,12 @@ Before you begin, you need:
 2. Select **Electron** as the application type.
 3. Copy the client token and application ID. You need them to initialize the SDK.
 
+{% alert level="info" %}
+If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][setup-create-2] instead.
+{% /alert %}
+
 [setup-create-1]: https://app.datadoghq.com/rum/application/create
+[setup-create-2]: https://app.datadoghq.com/error-tracking/settings/setup/client
 
 ## Install the SDK
 
@@ -273,7 +278,7 @@ Renderer processes are monitored by the Browser SDK.
 2. In the main process `init` call, list the renderer hosts that report through the main process in `allowedRendererHosts`. Renderers whose host is not listed do not report through the main process.
 
 {% alert level="info" %}
-Sampling, Session Replay, and profiling options are set in the main process `init` call. The values set in the renderer are ignored.
+Sampling, Session Replay, and profiling options are set in the main process `init` call, and the main process manages sessions. The values set in the renderer for these options, including `sessionPersistence`, are ignored.
 {% /alert %}
 
 For details on `allowedRendererHosts`, see [Advanced Configuration][setup-renderer-2].
