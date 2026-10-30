@@ -30,7 +30,7 @@ Because these links are user-defined, you have control over what Bits reviews, e
 
 To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits to conduct more accurate and effective investigations.
 
-Bits follows the links in the monitor message that it has access to, such as Notebooks and Confluence pages.
+Bits follows the links in the monitor message that it has access to, such as Notebooks and [Confluence pages][3].
 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
@@ -131,3 +131,4 @@ To manage memories, including viewing and deleting them, go to the {{< ui >}}Mem
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: /bits_ai/bits_investigation/configure/#confluence
