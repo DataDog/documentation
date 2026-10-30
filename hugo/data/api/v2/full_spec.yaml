@@ -106393,6 +106393,7 @@ components:
             Filter expression applied to the recommendations when `attributes.filter` is omitted.
             When supplied, `attributes.filter` overrides this value, including when empty. If the
             resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -106420,6 +106421,7 @@ components:
           description: |-
             Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
             or `completed`. Defaults to `all`, which returns recommendations in every status.
+          example: active
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -106434,25 +106436,32 @@ components:
     RecommendationsFilterRequestScope:
       description: |-
         Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
-        or `*` for both.
+        or `*` for both. An empty value is treated as `ccm`.
       enum:
         - ccm
         - experiment
         - "*"
+        - ""
+      example: ccm
       type: string
       x-enum-varnames:
         - CCM
         - EXPERIMENT
         - ALL
+        - EMPTY
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
           description: Field to sort by (for example, `@potential_daily_savings`).
+          example: "@potential_daily_savings"
           type: string
         order:
-          description: Sort direction, either `ASC` or `DESC`.
+          description: Sort direction, either `ASC` or `DESC` (case-insensitive).
+          example: DESC
           type: string
+      required:
+        - order
       type: object
     RecommendationsPageMeta:
       description: Top-level JSON:API meta object for paginated cost recommendation responses.

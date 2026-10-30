@@ -17,3 +17,10 @@ entries:
     operations:
       - SearchCostRecommendations
     title: Document errors and page size limits for cost recommendations search
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41230
+    operations:
+      - SearchCostRecommendations
+    title: Fix request examples and document request validation for cost 
+      recommendations search
