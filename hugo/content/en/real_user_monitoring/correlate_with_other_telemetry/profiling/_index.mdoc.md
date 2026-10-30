@@ -186,6 +186,11 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
+### Analyze profiling data with AI
+
+- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a view, action, vital, or long task. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
+
 {% /if %}
 <!-- end Browser -->
 
@@ -301,7 +306,7 @@ Android profiling data is attached to [application not responding (ANR)][16] err
 
 {% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
 
-On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see  the [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces) section.
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see the [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces) section.
 
 ### During long tasks
 
@@ -329,6 +334,11 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 3. **Investigate slowest methods**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the Android profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the Android profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
+
+### Analyze profiling data with AI
+
+- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a time to initial display, time to full display, ANR error, long task, or operation. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
 
 {% /if %}
 <!-- end Android -->
@@ -441,6 +451,10 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the iOS profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the iOS profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
 
+### Analyze profiling data with AI
+
+- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a time to initial display, time to full display, application hang, long task, or operation. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
 
 {% /if %}
 <!-- end iOS -->
@@ -470,3 +484,5 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 [26]: /real_user_monitoring/operations_monitoring/?tab=ios
 [27]: /real_user_monitoring/operations_monitoring/?tab=android
 [28]: https://app.datadoghq.com/rum/profiling
+[29]: /bits_ai/
+[30]: /mcp_server/tools/#profiling
