@@ -23260,7 +23260,9 @@ components:
         attributes:
           $ref: "#/components/schemas/ContainerImageAttributes"
         id:
-          description: Container Image ID.
+          description: |-
+            Opaque Container Image ID. Often contains a registry, repository, and digest, but the format
+            varies by collection source. Preserve the returned value rather than constructing an ID.
           type: string
         type:
           $ref: "#/components/schemas/ContainerImageType"
@@ -23274,13 +23276,15 @@ components:
           type: integer
         image_flavors:
           description: |-
-            List of platform-specific images associated with the image record.
-            The list contains more than 1 entry for multi-architecture images.
+            Platform-specific image metadata, including size in bytes and available build and operating
+            system details. Use these objects to associate sizes with platforms when platform information is available.
           items:
             $ref: "#/components/schemas/ContainerImageFlavor"
           type: array
         image_tags:
-          description: List of image tags associated with the Container Image.
+          description: |-
+            Image version tags, such as `latest` or `v1.2.3`. Tags can change; use the returned `id` to
+            identify an image record. The corresponding filter and grouping key is `image_tag`.
           items:
             description: An image tag associated with the Container Image.
             type: string
@@ -23320,34 +23324,38 @@ components:
           description: Time the image was pushed to the container registry.
           type: string
         registry:
-          description: Registry the Container Image was pushed to.
+          description: Registry where the image is stored. Use the `image_registry` tag key for filtering and grouping.
           type: string
         repo_digest:
-          description: Digest of the compressed image manifest.
+          description: |-
+            Digest of the compressed image manifest. Use the `repo_digest` tag key to filter by this value.
           type: string
         repository:
-          description: Repository where the Container Image is stored in.
+          description: |-
+            Repository where the image is stored. Use the `image_repository` tag key for filtering and grouping.
           type: string
         short_image:
           description: Short version of the Container Image name.
           type: string
         sizes:
           description: |-
-            List of size for each platform-specific image associated with the image record.
-            The list contains more than 1 entry for multi-architecture images.
+            Reported sizes in bytes of platform-specific images, with multiple values possible for multi-architecture images.
+            Use `image_flavors` for available platform associations; use `size` as the sort key.
           items:
-            description: Size of the platform-specific Container Image.
+            description: Size of the platform-specific Container Image in bytes.
             format: int64
             type: integer
           type: array
         sources:
-          description: List of sources where the Container Image was collected from.
+          description: Collection sources, such as `live_containers`, `image_check`, `aws_ecr`, or `agentless_scanner`.
           items:
             description: Source where the Container Image was collected from.
             type: string
           type: array
         tags:
-          description: List of tags associated with the Container Image.
+          description: |-
+            Image tags in `key:value` form, such as `image_registry:docker.io` or `status:running`.
+            Use tag keys in `group_by`. Tags used in `filter[tags]` must satisfy its syntax restrictions.
           items:
             description: A tag associated with the Container Image.
             type: string
@@ -23371,7 +23379,7 @@ components:
           description: Operating System version supported by the Container Image.
           type: string
         size:
-          description: Size of the platform-specific Container Image.
+          description: Size of the platform-specific Container Image in bytes.
           format: int64
           type: integer
       type: object
@@ -23392,7 +23400,10 @@ components:
       description: Attributes for a Container Image Group.
       properties:
         count:
-          description: Number of Container Images in the group.
+          description: |-
+            Number of images in the group. An image with multiple values for a grouping tag can appear
+            in multiple groups. Images missing a grouping key are excluded. Summing group counts does
+            not give a reliable inventory total.
           format: int64
           type: integer
         name:
@@ -23417,7 +23428,10 @@ components:
           $ref: "#/components/schemas/ContainerImageGroupImagesRelationshipsLink"
       type: object
     ContainerImageGroupRelationshipsData:
-      description: Links data.
+      description: |-
+        This array is always empty, even when the group includes images. To retrieve the images in
+        this group, make a new request without `group_by`, using the `filter[tags]` value from
+        `links.related` and your site's API host. The tags must satisfy `filter[tags]` syntax restrictions.
       items:
         description: A link data.
         type: string
@@ -23426,7 +23440,10 @@ components:
       description: Links attributes.
       properties:
         related:
-          description: Link to related Container Images.
+          description: |-
+            Link containing the original filters combined with the group tags, without `group_by`.
+            Use its `filter[tags]` value in a new request to your site's API host. The tags must satisfy
+            `filter[tags]` syntax restrictions.
           type: string
       type: object
     ContainerImageGroupType:
@@ -23456,20 +23473,24 @@ components:
           description: The cursor used to get the current results, if any.
           type: string
         limit:
-          description: Number of results returned
+          description: Maximum number of results requested.
           format: int32
           maximum: 10000
           minimum: 0
           type: integer
         next_cursor:
-          description: The cursor used to get the next results, if any.
+          description: |-
+            The cursor used to get the next results, if any. To make the next request, use the same
+            parameters with the addition of `page[cursor]`. Always empty for grouped results, even
+            when additional groups exist.
           type: string
         prev_cursor:
           description: The cursor used to get the previous results, if any.
           nullable: true
           type: string
         total:
-          description: Total number of records that match the query.
+          description: |-
+            Total number of images that match the query. Always `0` for grouped results.
           format: int64
           type: integer
         type:
@@ -23494,7 +23515,9 @@ components:
       x-enum-varnames:
         - CONTAINER_IMAGE
     ContainerImageVulnerabilities:
-      description: Vulnerability counts associated with the Container Image.
+      description: |-
+        Vulnerability counts by severity, when available. An absent `vulnerability_count` does not mean
+        the image has no vulnerabilities.
       properties:
         asset_id:
           description: ID of the Container Image.
@@ -23525,10 +23548,11 @@ components:
           type: integer
       type: object
     ContainerImagesResponse:
-      description: List of Container Images.
+      description: List of Container Images or Container Image groups.
       properties:
         data:
-          description: Array of Container Image objects.
+          description: |-
+            Array of `container_image` objects, or `container_image_group` objects when `group_by` is specified.
           items:
             $ref: "#/components/schemas/ContainerImageItem"
           type: array
@@ -161218,32 +161242,53 @@ paths:
   /api/v2/container_images:
     get:
       description: |-
-        Get all Container Images for your organization.
+        Get all container images for your organization. This endpoint queries current
+        inventory and does not support time-range parameters.
+
+        Use `group_by` to return image groups with counts. Grouped results are limited
+        by `page[size]`, may be incomplete, and do not support pagination.
+
         **Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.
       operationId: ListContainerImages
       parameters:
-        - description: Comma-separated list of tags to filter Container Images by.
+        - description: |-
+            Comma-separated `key:value` tags. An image must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. Use keys such as `image_registry`
+            and `image_tag`. To match any of several values of the same key, make one request per value.
           example: short_image:redis,status:running
           in: query
           name: filter[tags]
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to group Container Images by.
-          example: registry,image_tags
+        - description: |-
+            Comma-separated list of up to three tag keys, such as `image_registry,image_tag`. Returns
+            `container_image_group` objects with counts and tags. Grouped results ignore `sort` and do
+            not support pagination. Images missing a grouping key are excluded. An image with multiple
+            values for a grouping tag can appear in multiple groups. Grouped results may be incomplete.
+            Compare counts only within the returned groups; they do not establish the most common tags
+            or proportions across the inventory. For inventory-wide comparisons, omit `group_by`, keep the
+            same filters, paginate all results, and deduplicate by returned image ID. For an inventory total,
+            use `meta.pagination.total` from a query without grouping.
+          example: image_registry,image_tag
           in: query
           name: group_by
           required: false
           schema:
             type: string
-        - description: Attribute to sort Container Images by.
-          example: container_count
+        - description: |-
+            Attribute to sort individual images by, such as `size` or `container_count`.
+            Defaults to `image_name` in ascending order. Prefix the attribute with `-` for
+            descending order, such as `-size`. Ignored when `group_by` is specified.
+          example: "-container_count"
           in: query
           name: sort
           required: false
           schema:
             type: string
-        - description: Maximum number of results returned.
+        - description: |-
+            Maximum number of results returned. Grouped queries default to `100`, with a maximum of `1000` groups.
+            Without grouping, queries default to `1000`, with a maximum of `10000` images. Minimum is `1`.
           in: query
           name: page[size]
           required: false
@@ -161254,8 +161299,8 @@ paths:
             minimum: 1
             type: integer
         - description: |-
-            String to query the next page of results.
-            This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
+            Opaque cursor from `meta.pagination.next_cursor` for individual images. Keep the same filters
+            and sort order. Stop when absent or empty. Grouped queries do not support pagination.
           in: query
           name: page[cursor]
           required: false
@@ -161271,18 +161316,57 @@ paths:
                     data:
                       - attributes:
                           container_count: 1
+                          image_flavors:
+                            - built_at: "2026-01-01T00:00:00Z"
+                              os_architecture: amd64
+                              os_name: linux
+                              os_version: ""
+                              size: 100000000
                           image_tags:
                             - latest
                           name: nginx
                           registry: docker.io
                           repository: library/nginx
                           short_image: nginx
+                          sizes:
+                            - 100000000
+                          tags:
+                            - image_registry:docker.io
+                            - image_repository:library/nginx
+                            - image_tag:latest
+                            - short_image:nginx
+                            - status:running
                         id: abc-123
                         type: container_image
                     meta:
                       pagination:
                         limit: 1000
                         total: 1
+                        type: cursor_limit
+                grouped:
+                  summary: Images grouped by registry.
+                  value:
+                    data:
+                      - attributes:
+                          count: 1
+                          name: image_registry:docker.io
+                          tags:
+                            image_registry: docker.io
+                        id: image_registry:docker.io
+                        relationships:
+                          container_images:
+                            data: []
+                            links:
+                              related: >-
+                                https://api.datadoghq.com/api/v2/container_images?filter[tags]=image_registry:docker.io
+                        type: container_image_group
+                    meta:
+                      pagination:
+                        cursor: ""
+                        limit: 100
+                        next_cursor: ""
+                        prev_cursor: ""
+                        total: 0
                         type: cursor_limit
               schema:
                 $ref: "#/components/schemas/ContainerImagesResponse"
