@@ -101,7 +101,7 @@ You can also assign the role to a Microsoft Entra security group that contains t
 
 ## Next steps
 
-After you save, Datadog syncs your warehouse metadata every hour. Allow up to an hour for the first sync. Queries can take up to 15 minutes to appear in Query Insights before Datadog collects them.
+After you configure the integration, Datadog syncs your warehouse metadata every hour. Allow up to an hour for the first sync. Queries can take up to 15 minutes to appear in Query Insights before Datadog collects them.
 
 After the initial sync completes, create a [Data Observability monitor][5] to start alerting on row count, column-level metrics, and custom SQL metrics. Fabric doesn't expose a table-level last-modified time, so to monitor freshness, create a freshness monitor on a timestamp column.
 
