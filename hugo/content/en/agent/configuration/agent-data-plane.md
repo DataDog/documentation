@@ -20,7 +20,7 @@ further_reading:
 
 The Agent Data Plane (ADP) is a high-performance data pipeline that runs alongside the core Datadog Agent. It is designed to process high-volume telemetry with lower and more predictable CPU and memory usage.
 
-ADP implements the DogStatsD pipeline only. When ADP is enabled, it receives, aggregates, and forwards all DogStatsD metrics, events, and service checks in place of the core Agent. Metrics from integrations and checks continue to be processed by the core Agent.
+ADP implements the DogStatsD pipeline only. When ADP is enabled, it receives, aggregates, and forwards all DogStatsD metrics, events, and service checks in place of the main Agent. Metrics from integrations and checks continue to be processed by the main Agent.
 
 ADP ships with the Datadog Agent and requires no separate installation. Your DogStatsD clients, ports, and sockets do not change, and the metrics sent to Datadog are the same with or without ADP.
 
@@ -93,7 +93,7 @@ DD_DATA_PLANE_ENABLED=true
 
 ## Disable the Agent Data Plane
 
-Disabling ADP returns DogStatsD processing to the core Agent.
+Disabling ADP returns DogStatsD processing to the main Agent.
 
 If you are disabling ADP because of an issue, [send a flare][1] to Datadog Support first. The flare includes ADP diagnostic data only while ADP is running.
 
@@ -159,7 +159,7 @@ When ADP is enabled:
   - On Linux hosts, a `datadog-agent-data-plane` systemd service runs.
   - On macOS hosts, an `agent-data-plane` launchd service runs.
   - On Windows hosts, an `agent-data-plane` process runs, managed by the Agent.
-- **Resource usage shifts to ADP**: The `agent-data-plane` container or process uses CPU and memory for DogStatsD that the core Agent used before. Compare resource usage across the whole Agent, not a single container or process. High-volume DogStatsD workloads typically see a net decrease.
+- **Resource usage shifts to ADP**: The `agent-data-plane` container or process uses CPU and memory for DogStatsD that the main Agent used before. Compare resource usage across the whole Agent, not a single container or process. High-volume DogStatsD workloads typically see a net decrease.
 - **ADP has its own status and logs**: The [Agent status][2] output includes an **Agent Data Plane** section. ADP writes logs to `agent-data-plane.log` in the [Agent log directory][3].
 - **Some DogStatsD tuning options have no effect**: Options such as `dogstatsd_pipeline_count`, `dogstatsd_queue_size`, `dogstatsd_mem_based_rate_limiter`, and `dogstatsd_stats_enable` are ignored. For the full list of supported options, see the [ADP configuration reference][4].
 
@@ -200,9 +200,9 @@ Run the following in PowerShell as an administrator:
 {{% /tab %}}
 {{< /tabs >}}
 
-The following table maps core Agent commands to their ADP equivalents:
+The following table maps main Agent commands to their ADP equivalents:
 
-| Core Agent command                | ADP command                                  |
+| Main Agent command                | ADP command                                  |
 |-----------------------------------|----------------------------------------------|
 | `agent dogstatsd-stats`           | `agent-data-plane dogstatsd stats`           |
 | `agent dogstatsd top`             | `agent-data-plane dogstatsd top`             |
@@ -214,7 +214,7 @@ The `agent-data-plane dogstatsd stats` command is always available. You do not n
 
 ### Agent telemetry
 
-If you monitor the Agent's DogStatsD internals with the [Go-Expvar integration][5], the core Agent's DogStatsD counters report `0` when ADP is enabled. This is expected, because ADP handles that traffic instead. ADP's internal metrics are exposed through the Agent's OpenMetrics telemetry endpoint (`localhost:5000/telemetry`) and are tagged with `emitter:agent-data-plane`. Some metric names and tags differ from those emitted by the core Agent.
+If you monitor the Agent's DogStatsD internals with the [Go-Expvar integration][5], the main Agent's DogStatsD counters report `0` when ADP is enabled. This is expected, because ADP handles that traffic instead. ADP's internal metrics are exposed through the Agent's OpenMetrics telemetry endpoint (`localhost:5000/telemetry`) and are tagged with `emitter:agent-data-plane`. Some metric names and tags differ from those emitted by the main Agent.
 
 ## Further reading
 
