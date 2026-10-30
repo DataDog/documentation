@@ -2,15 +2,15 @@
 title: Optimize Training Workloads with GPU Monitoring
 description: Troubleshoot stalled or failed training runs and maximize the throughput of your training workloads.
 further_reading:
-    - link: '/gpu_monitoring/setup'
-      tag: 'Documentation'
-      text: 'Set up GPU Monitoring'
-    - link: '/gpu_monitoring/tracing'
-      tag: 'Documentation'
-      text: 'Continuous Tracing with GPU Monitoring'
-    - link: '/gpu_monitoring'
-      tag: 'Documentation'
-      text: 'Learn more about what GPU Monitoring offers'
+- link: "/gpu_monitoring/setup"
+  tag: "Documentation"
+  text: "Set up GPU Monitoring"
+- link: "/gpu_monitoring/tracing"
+  tag: "Documentation"
+  text: "Continuous Tracing with GPU Monitoring"
+- link: "/gpu_monitoring"
+  tag: "Documentation"
+  text: "Learn more about what GPU Monitoring offers"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/" >}}
@@ -23,8 +23,8 @@ Training workloads often fail, and each failure wastes expensive GPU time. Debug
 
 With the Training page, you get:
 
--   **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the cause is unhealthy hardware, communication, memory bandwidth, or scheduling.
--   **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
+- **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the cause is unhealthy hardware, communication, memory bandwidth, or scheduling.
+- **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
 
 {{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
 
@@ -33,9 +33,8 @@ With the Training page, you get:
 ### Prerequisites
 
 To begin monitoring your training workloads, you must first meet the following criteria:
-
--   You have [GPU Monitoring enabled][1].
--   You are running the Datadog Cluster Agent version 7.80 or later.
+- You have [GPU Monitoring enabled][1].
+- You are running the Datadog Cluster Agent version 7.80 or later.
 
 ### 0. Enable GPU Monitoring
 
@@ -51,11 +50,11 @@ For metrics, use [tag extraction][2] to map the annotations to tags. Merge the f
 
 ```yaml
 spec:
-    global:
-        kubernetesResourcesAnnotationsAsTags:
-            pods:
-                company.name/run-id: training_run_id
-                company.name/group-id: training_group_id
+  global:
+    kubernetesResourcesAnnotationsAsTags:
+      pods:
+        company.name/run-id: training_run_id
+        company.name/group-id: training_group_id
 ```
 
 To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics.
@@ -68,31 +67,31 @@ To enable GPU tracing and add the training run and group identifiers to traces, 
 
 ```yaml
 spec:
-    features:
-        apm:
-            enabled: true
-            instrumentation:
-                enabled: true
-                targets:
-                    - name: gpu-monitoring
-                      podSelector:
-                          matchLabels:
-                              admission.datadoghq.com/gpu.enabled: 'true'
-                      ddTraceVersions:
-                          c: '0'
-                      ddTraceConfigs:
-                          - name: DD_INJECT_NATIVE
-                            value: 'always'
-                          - name: DD_TRACE_HOOK_MODULES
-                            value: 'gpu'
-                          - name: DD_TRAINING_RUN_ID
-                            valueFrom:
-                                fieldRef:
-                                    fieldPath: metadata.annotations['company.name/run-id']
-                          - name: DD_TRAINING_GROUP_ID
-                            valueFrom:
-                                fieldRef:
-                                    fieldPath: metadata.annotations['company.name/group-id']
+  features:
+    apm:
+      enabled: true
+      instrumentation:
+        enabled: true
+        targets:
+          - name: gpu-monitoring
+            podSelector:
+              matchLabels:
+                admission.datadoghq.com/gpu.enabled: "true"
+            ddTraceVersions:
+              c: "0"
+            ddTraceConfigs:
+              - name: DD_INJECT_NATIVE
+                value: "always"
+              - name: DD_TRACE_HOOK_MODULES
+                value: "gpu"
+              - name: DD_TRAINING_RUN_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/run-id']
+              - name: DD_TRAINING_GROUP_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/group-id']
 ```
 
 To use pod labels instead of annotations, set `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
@@ -105,10 +104,10 @@ Add the `admission.datadoghq.com/gpu.enabled: "true"` label to the pod template 
 
 ```yaml
 spec:
-    template:
-        metadata:
-            labels:
-                admission.datadoghq.com/gpu.enabled: 'true'
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/gpu.enabled: "true"
 ```
 
 Apply the resource and wait for the rollout to complete.

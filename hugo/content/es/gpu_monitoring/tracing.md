@@ -1,18 +1,17 @@
 ---
 description: Habilite la traza de la actividad de la GPU para cargas de trabajo de
-    Kubernetes seleccionadas.
+  Kubernetes seleccionadas.
 further_reading:
-    - link: /gpu_monitoring/setup
-      tag: Documentación
-      text: Configure el seguimiento de GPU
-    - link: /gpu_monitoring
-      tag: ¿Qué es el seguimiento de GPU?
-      text: Obtenga más información sobre lo que ofrece el seguimiento de GPU
+- link: /gpu_monitoring/setup
+  tag: Documentación
+  text: Configure el seguimiento de GPU
+- link: /gpu_monitoring
+  tag: ¿Qué es el seguimiento de GPU?
+  text: Obtenga más información sobre lo que ofrece el seguimiento de GPU
 is_beta: true
 private: true
 title: Traza continua con seguimiento de GPU
 ---
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 La traza continua con seguimiento de GPU se encuentra en vista previa de acceso anticipado.
 {{< /beta-callout >}}
@@ -28,9 +27,8 @@ La traza continua con seguimiento de GPU permite la traza ligera de la actividad
 ### Requisitos previos {#prerequisites}
 
 Para comenzar a utilizar la traza continua en sus cargas de trabajo, primero debe cumplir con los siguientes criterios:
-
--   Está ejecutando el Datadog Cluster Agent versión 7.80 o posterior con [GPU Monitoring habilitado][1].
--   Versión mínima requerida de CUDA y CUPTI: 13.
+- Está ejecutando el Datadog Cluster Agent versión 7.80 o posterior con [GPU Monitoring habilitado][1].
+- Versión mínima requerida de CUDA y CUPTI: 13.
 
 ### 1. Configure la traza de GPU {#1-configure-gpu-tracing}
 
@@ -38,23 +36,23 @@ Combine la siguiente configuración en el recurso `DatadogAgent` existente:
 
 ```yaml
 spec:
-    features:
-        apm:
-            enabled: true
-            instrumentation:
-                enabled: true
-                targets:
-                    - name: gpu-monitoring
-                      podSelector:
-                          matchLabels:
-                              admission.datadoghq.com/gpu.enabled: 'true'
-                      ddTraceVersions:
-                          c: '0'
-                      ddTraceConfigs:
-                          - name: DD_INJECT_NATIVE
-                            value: 'always'
-                          - name: DD_TRACE_HOOK_MODULES
-                            value: 'gpu'
+  features:
+    apm:
+      enabled: true
+      instrumentation:
+        enabled: true
+        targets:
+          - name: gpu-monitoring
+            podSelector:
+              matchLabels:
+                admission.datadoghq.com/gpu.enabled: "true"
+            ddTraceVersions:
+              c: "0"
+            ddTraceConfigs:
+              - name: DD_INJECT_NATIVE
+                value: "always"
+              - name: DD_TRACE_HOOK_MODULES
+                value: "gpu"
 ```
 
 Aplique la configuración y espere a que se complete el despliegue de `DatadogAgent`.
@@ -65,10 +63,10 @@ Agregue la etiqueta a la plantilla de pod del controlador. La carga de trabajo d
 
 ```yaml
 spec:
-    template:
-        metadata:
-            labels:
-                admission.datadoghq.com/gpu.enabled: 'true'
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/gpu.enabled: "true"
 ```
 
 Aplique el recurso y espere a que se complete el despliegue.

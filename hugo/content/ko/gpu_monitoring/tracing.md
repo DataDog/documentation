@@ -1,17 +1,16 @@
 ---
 description: 선택한 Kubernetes 워크로드에 대해 GPU 활동 추적을 활성화하세요.
 further_reading:
-    - link: /gpu_monitoring/setup
-      tag: 설명서
-      text: GPU Monitoring 설정
-    - link: /gpu_monitoring
-      tag: GPU Monitoring이란?
-      text: GPU Monitoring 기능에 대해 자세히 알아보기
+- link: /gpu_monitoring/setup
+  tag: 설명서
+  text: GPU Monitoring 설정
+- link: /gpu_monitoring
+  tag: GPU Monitoring이란?
+  text: GPU Monitoring 기능에 대해 자세히 알아보기
 is_beta: true
 private: true
 title: GPU Monitoring을 통한 지속적인 추적
 ---
-
 {{< beta-callout url="#" btn_hidden="true" >}}
 GPU Monitoring을 통한 지속적인 추적은 현재 사전 액세스 단계에 있습니다.
 {{< /beta-callout >}}
@@ -27,9 +26,8 @@ GPU Monitoring을 통한 지속적인 추적 기능은 선택한 Kubernetes 워�
 ### 전제 조건 {#prerequisites}
 
 워크로드를 지속적으로 추적하려면 우선 다음 기준을 충족해야 합니다.
-
--   [GPU Monitoring 활성화][1] Datadog Cluster Agent 버전 7.80 이상을 실행 중이어야 합니다.
--   최소 필수 CUDA 및 CUPTI 버전: 13.
+- [GPU Monitoring 활성화][1] Datadog Cluster Agent 버전 7.80 이상을 실행 중이어야 합니다.
+- 최소 필수 CUDA 및 CUPTI 버전: 13.
 
 ### 1. GPU 추적 구성 {#1-configure-gpu-tracing}
 
@@ -37,23 +35,23 @@ GPU Monitoring을 통한 지속적인 추적 기능은 선택한 Kubernetes 워�
 
 ```yaml
 spec:
-    features:
-        apm:
-            enabled: true
-            instrumentation:
-                enabled: true
-                targets:
-                    - name: gpu-monitoring
-                      podSelector:
-                          matchLabels:
-                              admission.datadoghq.com/gpu.enabled: 'true'
-                      ddTraceVersions:
-                          c: '0'
-                      ddTraceConfigs:
-                          - name: DD_INJECT_NATIVE
-                            value: 'always'
-                          - name: DD_TRACE_HOOK_MODULES
-                            value: 'gpu'
+  features:
+    apm:
+      enabled: true
+      instrumentation:
+        enabled: true
+        targets:
+          - name: gpu-monitoring
+            podSelector:
+              matchLabels:
+                admission.datadoghq.com/gpu.enabled: "true"
+            ddTraceVersions:
+              c: "0"
+            ddTraceConfigs:
+              - name: DD_INJECT_NATIVE
+                value: "always"
+              - name: DD_TRACE_HOOK_MODULES
+                value: "gpu"
 ```
 
 구성을 적용하고 `DatadogAgent` 롤아웃이 완료될 때까지 기다리세요.
@@ -64,10 +62,10 @@ spec:
 
 ```yaml
 spec:
-    template:
-        metadata:
-            labels:
-                admission.datadoghq.com/gpu.enabled: 'true'
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/gpu.enabled: "true"
 ```
 
 리소스를 적용하고 롤아웃이 완료될 때까지 기다리세요.

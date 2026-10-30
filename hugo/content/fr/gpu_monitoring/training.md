@@ -1,19 +1,18 @@
 ---
 description: Résolvez les problèmes d'exécutions d'entraînement bloquées ou ayant
-    échoué et maximisez le débit global de vos charges de travail d'entraînement.
+  échoué et maximisez le débit global de vos charges de travail d'entraînement.
 further_reading:
-    - link: /gpu_monitoring/setup
-      tag: Documentation
-      text: Configurez la surveillance GPU
-    - link: /gpu_monitoring/tracing
-      tag: Documentation
-      text: Suivi continu avec la surveillance GPU
-    - link: /gpu_monitoring
-      tag: Documentation
-      text: En savoir plus sur ce que propose la surveillance GPU
+- link: /gpu_monitoring/setup
+  tag: Documentation
+  text: Configurez la surveillance GPU
+- link: /gpu_monitoring/tracing
+  tag: Documentation
+  text: Suivi continu avec la surveillance GPU
+- link: /gpu_monitoring
+  tag: Documentation
+  text: En savoir plus sur ce que propose la surveillance GPU
 title: Optimisez les charges de travail d'entraînement avec la surveillance GPU.
 ---
-
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/" >}}
 L'optimisation des charges de travail d'entraînement avec la surveillance GPU est en Early Access Preview. Remplissez le formulaire pour demander l'accès.
 {{< /callout >}}
@@ -24,8 +23,8 @@ Les charges de travail d'entraînement échouent souvent, et chaque échec gaspi
 
 Avec la page Entraînement, vous obtenez :
 
--   **Analyse d'agent pour identifier la cause profonde des échecs ou ralentissements des charges de travail d'entraînement** : Identifiez précisément pourquoi les charges de travail d'entraînement échouent ou ralentissent, que ce soit en raison d'un matériel défaillant, d'une communication inadéquate, d'une bande passante mémoire insuffisante ou d'une planification défaillante.
--   **Optimisation des performances d'exécution d'entraînement** : Identifiez les opportunités à fort impact pour accroître le débit lors des exécutions d'entraînement réussies.
+- **Analyse d'agent pour identifier la cause profonde des échecs ou ralentissements des charges de travail d'entraînement** : Identifiez précisément pourquoi les charges de travail d'entraînement échouent ou ralentissent, que ce soit en raison d'un matériel défaillant, d'une communication inadéquate, d'une bande passante mémoire insuffisante ou d'une planification défaillante.
+- **Optimisation des performances d'exécution d'entraînement** : Identifiez les opportunités à fort impact pour accroître le débit lors des exécutions d'entraînement réussies.
 
 {{< img src="gpu_monitoring/training-page.png" alt="La page Entraînement de la surveillance GPU affiche des informations sur les exécutions d'entraînement, un graphique à barres illustrant l'évolution des exécutions dans le temps et une liste des exécutions d'entraînement." style="width:100%;" >}}
 
@@ -34,9 +33,8 @@ Avec la page Entraînement, vous obtenez :
 ### Prérequis {#prerequisites}
 
 Pour commencer à surveiller vos charges de travail d'entraînement, vous devez d'abord remplir les critères suivants :
-
--   Vous exécutez le Datadog Cluster Agent version 7.80 ou ultérieure avec [GPU Monitoring activé][1].
--   Vous exécutez CUDA et CUPTI version 13 ou ultérieure.
+- Vous exécutez le Datadog Cluster Agent version 7.80 ou ultérieure avec [GPU Monitoring activé][1].
+- Vous exécutez CUDA et CUPTI version 13 ou ultérieure.
 
 ### 1. Connectez les exécutions d'entraînement au matériel GPU {#1-connect-training-runs-to-gpu-hardware}
 
@@ -48,11 +46,11 @@ Pour les métriques, utilisez [tag extraction][2] pour mapper les annotations au
 
 ```yaml
 spec:
-    global:
-        kubernetesResourcesAnnotationsAsTags:
-            pods:
-                company.name/run-id: training_run_id
-                company.name/group-id: training_group_id
+  global:
+    kubernetesResourcesAnnotationsAsTags:
+      pods:
+        company.name/run-id: training_run_id
+        company.name/group-id: training_group_id
 ```
 
 Pour utiliser les labels de pod au lieu des annotations, utilisez `kubernetesResourcesLabelsAsTags` pour les métriques.
@@ -65,31 +63,31 @@ Pour activer le traçage GPU et ajouter les identifiants d'exécution d'entraîn
 
 ```yaml
 spec:
-    features:
-        apm:
-            enabled: true
-            instrumentation:
-                enabled: true
-                targets:
-                    - name: gpu-monitoring
-                      podSelector:
-                          matchLabels:
-                              admission.datadoghq.com/gpu.enabled: 'true'
-                      ddTraceVersions:
-                          c: '0'
-                      ddTraceConfigs:
-                          - name: DD_INJECT_NATIVE
-                            value: 'always'
-                          - name: DD_TRACE_HOOK_MODULES
-                            value: 'gpu'
-                          - name: DD_TRAINING_RUN_ID
-                            valueFrom:
-                                fieldRef:
-                                    fieldPath: metadata.annotations['company.name/run-id']
-                          - name: DD_TRAINING_GROUP_ID
-                            valueFrom:
-                                fieldRef:
-                                    fieldPath: metadata.annotations['company.name/group-id']
+  features:
+    apm:
+      enabled: true
+      instrumentation:
+        enabled: true
+        targets:
+          - name: gpu-monitoring
+            podSelector:
+              matchLabels:
+                admission.datadoghq.com/gpu.enabled: "true"
+            ddTraceVersions:
+              c: "0"
+            ddTraceConfigs:
+              - name: DD_INJECT_NATIVE
+                value: "always"
+              - name: DD_TRACE_HOOK_MODULES
+                value: "gpu"
+              - name: DD_TRAINING_RUN_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/run-id']
+              - name: DD_TRAINING_GROUP_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/group-id']
 ```
 
 Pour utiliser les étiquettes de pod au lieu des annotations, définissez `metadata.labels['<LABEL_KEY>']` comme `fieldPath` pour les traces.
@@ -102,10 +100,10 @@ Ajoutez l'étiquette `admission.datadoghq.com/gpu.enabled: "true"` au modèle de
 
 ```yaml
 spec:
-    template:
-        metadata:
-            labels:
-                admission.datadoghq.com/gpu.enabled: 'true'
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/gpu.enabled: "true"
 ```
 
 Appliquez la ressource et attendez que le déploiement soit terminé.
