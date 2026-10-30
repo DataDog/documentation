@@ -70,6 +70,8 @@ Audio in streamed chat completions is not captured.
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Voice conversation in Agent Observability with an audio playback timeline, user and agent speaking segments, response latency badges, and turn transcripts." caption="Voice conversation playback and turn transcripts captured with automatic instrumentation." style="width:100%;" >}}
+
 Integrations don't fetch images referenced by a remote URL or a file ID. They capture only images that the application sends inline as base64 data. When an integration cannot capture media, it records a text marker such as `[image]` or `[audio]` in the message.
 
 ## OpenTelemetry instrumentation
