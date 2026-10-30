@@ -101,9 +101,9 @@ Datadog catalogs your databases, tables, and columns, including column types. Cl
 
 Datadog reads the following metrics for each table from ClickHouse system tables every hour:
 
-- Row count
-- Size in bytes
-- Freshness: the last change to the table's data parts. Background merges and mutations also update this value, so it can change even when no new rows are inserted.
+- **Row count**: The number of rows in the table.
+- **Size**: The table size in bytes.
+- **Freshness**: The time of the last change to the table's data parts. Background merges and mutations also update this value, so it can change even when no new rows are inserted.
 
 Some tables report fewer metrics:
 
