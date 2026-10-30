@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Zoom integration for Datadog Incident Management lets your team start a Zoom meeting for an incident. You can create meetings with one click, or automatically based on criteria you define. You can also generate AI summaries of incident Zoom meetings.
+The Zoom integration for Datadog Incident Management lets your team start a Zoom meeting for an incident. You can create meetings with one click or automatically, based on criteria you define. You can also generate AI summaries of incident Zoom meetings.
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ To enable automatic, criteria-based Zoom meetings for incidents:
 1. Navigate to [**Settings > Integrations**][2] and select **Zoom**.
 2. Toggle on **Enable Zoom meeting creation**.
    1. Toggle on **Automatically create Zoom meetings**.
-   2. (Optional) Specify the incident criteria that creates a Zoom meeting. If left blank, any change to an incident without an existing Zoom meeting creates a Zoom meeting.
+   2. (Optional) Specify the incident criteria that create a Zoom meeting. If you leave the criteria blank, any change to an incident without an existing Zoom meeting creates a Zoom meeting.
 3. Save your settings.
 
 When an incident meets the criteria, Datadog creates a Zoom meeting using the Incident Commander's email as the host email. If there is no Incident Commander, or their email is not associated with an authorized Zoom account, Datadog uses the [fallback Zoom user](#fallback-zoom-user), if configured.
@@ -77,6 +77,8 @@ To add the incident's Zoom meeting to the incident Slack channel's bookmarks:
 1. Navigate to [**Settings > Integrations**][2] and select **Slack**.
 2. Toggle on **Add important links to the incident channel's bookmarks**.
 3. Save your settings.
+
+If the incident has a Slack channel, Datadog adds a bookmark for the Zoom meeting to that channel.
 
 For more Slack features, see [Integrate Slack with Datadog Incident Management][4].
 

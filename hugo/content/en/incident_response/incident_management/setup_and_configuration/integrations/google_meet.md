@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Google Meet integration for Datadog Incident Management lets your team start a Google Meet meeting for an incident. You can create meetings with one click, or automatically based on criteria you define. You can also generate AI summaries of incident Google Meet meetings.
+The Google Meet integration for Datadog Incident Management lets your team start a Google Meet meeting for an incident. You can create meetings with one click or automatically, based on criteria you define. You can also generate AI summaries of incident Google Meet meetings.
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ To enable automatic, criteria-based Google Meet meetings for incidents:
 1. Navigate to [**Settings > Integrations**][2] and select **Google Meet**.
 2. Toggle on **Enable Google Meet creation**.
    1. Toggle on **Automatically create Google Meet meetings**.
-   2. (Optional) Specify the incident criteria that creates a Google Meet meeting. If left blank, any change to an incident without an existing Google Meet meeting creates a Google Meet meeting.
+   2. (Optional) Specify the incident criteria that create a Google Meet meeting. If you leave the criteria blank, any change to an incident without an existing Google Meet meeting creates a Google Meet meeting.
 3. Save your settings.
 
 ### Slack bookmark
@@ -52,6 +52,8 @@ To add the incident's Google Meet meeting to the incident Slack channel's bookma
 1. Navigate to [**Settings > Integrations**][2] and select **Slack**.
 2. Toggle on **Add important links to the incident channel's bookmarks**.
 3. Save your settings.
+
+If the incident has a Slack channel, Datadog adds a bookmark for the Google Meet meeting to that channel.
 
 For more Slack features, see [Integrate Slack with Datadog Incident Management][3].
 

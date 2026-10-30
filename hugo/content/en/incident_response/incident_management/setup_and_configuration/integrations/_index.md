@@ -43,7 +43,7 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 Incident Management also integrates with:
 
-- [Datadog On-Call][3] to page On-Call teams from an incident. You can configure Incident Management to automatically resolve attached On-Call Pages when the related incident is resolved.
+- [Datadog On-Call][3] to page On-Call teams from an incident. You can configure Incident Management to automatically resolve attached On-Call pages when the related incident is resolved.
 - [PagerDuty][4] and [Opsgenie][5] to send incident notifications to your on-call engineers. With PagerDuty, you can also automatically resolve attached PagerDuty incidents when the related Datadog incident is resolved.
 - [Confluence][6] and [Google Drive][7] to save incident postmortems. To set this up, create a [postmortem template][8] with Confluence or Google Drive as the save location.
 - [Webhooks][9] to send incident notifications using webhooks (for example, [sending SMS to Twilio][10]).
