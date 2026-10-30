@@ -43,6 +43,8 @@ The precedence rules on this page describe how *Datadog SDKs* resolve configurat
 
 ## Network requirements
 
+The **Datadog Tracing** and **Runtime Metrics** rows below apply to native Datadog export. For OTLP trace or runtime metrics export, use the receiver's OTLP port instead (by default, `4317` for gRPC or `4318` for HTTP).
+
 {{% otel-network-requirements %}}
 
 **Note**: OpenTelemetry API metrics and Datadog runtime metrics have separate configuration. Runtime metrics export depends on the language and SDK version. SDKs that support OTLP runtime metrics export include Java v1.63.0+, .NET v3.44.0+ (.NET 6+), and Node.js v5.107.0+.
@@ -113,7 +115,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 
 `OTEL_TRACES_EXPORTER`
 : **Description**: Selects the trace exporter. <br>
-**Notes**: A value of `none` disables tracing when `DD_TRACE_ENABLED` is not set. In Java, this also requires `DD_TRACE_OTEL_ENABLED=true`. SDK versions that support OTLP trace export also accept `otlp` when `DD_TRACE_OTEL_ENABLED=true`. Earlier SDK versions may recognize only `none`. See [Export Traces from Datadog SDKs in OTLP Format][17] for supported languages, minimum versions, and protocols. <br>
+**Notes**: A value of `none` disables tracing when `DD_TRACE_ENABLED` is not set. SDK versions that support OTLP trace export also accept `otlp`. In Java, both values require `DD_TRACE_OTEL_ENABLED=true`. Earlier SDK versions may recognize only `none`. See [Export Traces from Datadog SDKs in OTLP Format][17] for supported languages, minimum versions, and protocols. <br>
 
 `OTEL_METRICS_EXPORTER`
 : **Description**: Specifies the metrics exporter to be used. <br>

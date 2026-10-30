@@ -70,7 +70,7 @@ OTEL_TRACES_EXPORTER=otlp
 DD_TRACE_OTEL_ENABLED=true
 ```
 
-Set both variables: `DD_TRACE_OTEL_ENABLED=true` enables OpenTelemetry support for traces, and `OTEL_TRACES_EXPORTER=otlp` selects OTLP trace export. Setting `DD_TRACE_OTEL_ENABLED=true` alone keeps Datadog trace export.
+Set `OTEL_TRACES_EXPORTER=otlp` to select OTLP trace export. `DD_TRACE_OTEL_ENABLED=true` enables OpenTelemetry trace interoperability in SDKs that support this setting. Setting `DD_TRACE_OTEL_ENABLED=true` alone keeps Datadog trace export.
 
 By default, traces are sent to `http://localhost:4318/v1/traces`.
 
