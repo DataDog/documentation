@@ -136,4 +136,3 @@ If query history fails with a permissions error, assign the app registration the
 [3]: https://learn.microsoft.com/fabric/admin/about-tenant-settings#how-to-get-to-the-tenant-settings
 [4]: https://app.datadoghq.com/data-obs/settings/integrations
 [5]: /monitors/types/data_observability/
-[6]: #configure-the-integration-in-datadog
