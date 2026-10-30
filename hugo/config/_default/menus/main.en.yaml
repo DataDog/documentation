@@ -8874,11 +8874,6 @@ menu:
       identifier: ai_guard
       parent: security_platform_heading
       weight: 60000
-    - name: Get Started with AI Guard
-      url: /security/ai_guard/onboarding/
-      identifier: ai_guard_onboarding
-      parent: ai_guard
-      weight: 1
     - name: Set Up AI Guard
       url: /security/ai_guard/setup/
       identifier: ai_guard_setup
@@ -8899,16 +8894,21 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
-    - name: HTTP API
-      url: /security/ai_guard/setup/http_api/
-      identifier: ai_guard_http_api
-      parent: ai_guard_setup
+    - name: Manage Policies
+      url: /security/ai_guard/policies/
+      identifier: ai_guard_policies
+      parent: ai_guard
+      weight: 3
+    - name: Redact Sensitive Data
+      url: /security/ai_guard/setup/sensitive_data_redaction/
+      identifier: ai_guard_sensitive_data_redaction
+      parent: ai_guard
       weight: 4
-    - name: Security Signals
+    - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 3
+      weight: 5
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security

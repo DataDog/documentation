@@ -1,12 +1,12 @@
 ---
-title: AI Guard Security Signals
+title: Triage and Investigate AI Guard Signals
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
   text: AI Guard
-- link: /security/ai_guard/onboarding/
+- link: /security/ai_guard/setup/
   tag: Documentation
-  text: Get Started with AI Guard
+  text: Set Up AI Guard
 - link: /security/detection_rules/
   tag: Documentation
   text: Detection Rules
@@ -67,6 +67,8 @@ To create AI Guard detection rules:
              <li><code>obfuscation</code></li>
              <li><code>system-prompt-extraction</code></li>
              <li><code>data-exfiltration</code></li>
+             <li><code>tool-blocked</code> and <code>tool-allowed</code>, added by tool policies</li>
+             <li><code>regexp-blocked</code>, added by custom rules</li>
            </ul>
          </td>
        </tr>
@@ -134,6 +136,24 @@ When you click on a span in the explorer, you can see:
 
 Additionally, you can click {{< ui >}}Explore in graph view{{< /ui >}} to see the requests in the conversation graphed out, or view the span in [APM][8] or [Agent Observability][9].
 
+## Alert on AI Guard activity with Datadog Monitors {#set-up-datadog-monitors}
+
+To create monitors for alerting at certain thresholds, you can use [Datadog Monitors][10]. You can monitor AI Guard evaluations with either APM traces or with metrics. For both types of monitor, you should set your alert conditions, name for the alert, and define notifications; Datadog recommends using Slack.
+
+### APM monitor
+
+Follow the instructions to create a new [APM monitor][11], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
+
+- To monitor evaluation traffic, use the query `@ai_guard.action:DENY`.
+- To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
+
+### Metric monitor
+
+Follow the instructions to create a new [metric monitor][12].
+
+- To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tag `action:deny`.
+- To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -144,6 +164,9 @@ Additionally, you can click {{< ui >}}Explore in graph view{{< /ui >}} to see th
 [4]: https://app.datadoghq.com/security/ai-guard/signals
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://app.datadoghq.com/security/ai-guard/investigate
-[7]: /security/ai_guard/setup/#blocking-policy
+[7]: /security/ai_guard/policies/#blocking-policy
 [8]: /tracing/
 [9]: /llm_observability/
+[10]: /monitors/
+[11]: /monitors/types/apm/?tab=traceanalytics
+[12]: /monitors/types/metric/
