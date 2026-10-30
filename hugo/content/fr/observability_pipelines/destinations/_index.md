@@ -109,7 +109,7 @@ Le tableau suivant répertorie les destinations et les champs qui prennent en ch
 | Datadog Archives  | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Azure Blob        | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Elasticsearch     | Index (mode Bulk)<br><br>Type, Dataset, Namespace (mode Data streams) | Le Worker écrit les logs dans l'index `datadog-op`.<br><br>Le Worker supprime les logs si l'un de ces champs ne peut pas être résolu. |
-| Google Chronicle  | Type de log                            | Utilise par défaut le type de log `DATADOG`.                                                                                            |
+| Google SecOps     | Type de log                            | Utilise par défaut le type de log `DATADOG`.                                                                                            |
 | Google Cloud      | Préfixe                              | Le Worker crée un dossier nommé `OP_UNRESOLVED_TEMPLATE_LOGS/` et y écrit les logs.                                |
 | Opensearch        | Index (mode Bulk)<br><br>Type, Dataset, Namespace (mode Data streams) | Le Worker écrit les logs dans l'index `datadog-op`.<br><br>Le Worker supprime les logs si l'un de ces champs ne peut pas être résolu. |
 | Prometheus*        | ID de locataire                           | Le Worker supprime la métrique.  |
@@ -127,7 +127,7 @@ Si vous souhaitez acheminer des logs en fonction du champ d'ID d'application du 
 
 #### Champs d'événement {#event-fields}
 
-Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événements de log. Exemple :
+Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événements de log. Par exemple :
 
 ```
 {{ application_id }}
@@ -135,7 +135,7 @@ Utilisez `{{ <field_name> }}` pour accéder aux champs individuels des événeme
 
 #### Spécificateurs Strftime {#strftime-specifiers}
 
-Utilisez les [spécificateurs strftime][3] pour la date et l'heure. Exemple :
+Utilisez les [spécificateurs strftime][3] pour la date et l'heure. Par exemple :
 
 ```
 year=%Y/month=%m/day=%d
