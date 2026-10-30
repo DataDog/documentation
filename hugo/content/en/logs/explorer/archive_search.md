@@ -51,7 +51,7 @@ Common use cases include:
 
 Before using Archive Search:
 
-1. Configure an external archive (Amazon S3, Azure Storage, or Google Cloud Storage). See [Log Archives][3].
+1. Configure an external archive (Amazon S3, Azure Storage, or Google Cloud Storage). See [Log Archives][3]. For Observability Pipelines, [enable Archive Search on the archive destination][11] instead.
 1. Ensure Datadog has permission to read from the archive, see [Cloud-specific permissions](#cloud-specific-permissions).
    * **Amazon S3:** IAM role delegation
    * **Azure Storage:** Azure AD with *Storage Blob Data Contributor* role
@@ -250,3 +250,4 @@ In order to search log events from your archives, Datadog uses a service account
 [8]: /logs/log_configuration/archives/?tab=awss3#archive-partition-attribute
 [9]: /logs/log_configuration/archives/?tab=awss3#compression
 [10]: /logs/log_configuration/flex_logs/
+[11]: /logs/log_configuration/archives/#observability-pipelines-archives
