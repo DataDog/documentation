@@ -427,19 +427,19 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 {% img src="real_user_monitoring/ios/ios-profiling-operation.png" alt="iOS profiling data in an operation event." style="width:90%;" /%}
 
 ### Within the Profiling page
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience.png" alt="iOS profiling aggregate experience." style="width:100%;" /%}
 
 The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][12] or [time to full display][12]), a long task, or a critical [RUM Operation][26]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_2.png" alt="Step 2 of the browser profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_2.png" alt="Step 2 of the iOS profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
 
 2. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_3.png" alt="Step 3 of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_3.png" alt="Step 3 of the iOS profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
 3. **Investigate slowest functions**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the iOS profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the iOS profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
 
 
 {% /if %}
