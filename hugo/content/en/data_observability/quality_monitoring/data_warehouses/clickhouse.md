@@ -82,7 +82,7 @@ Datadog reads only metadata from ClickHouse system tables. Datadog queries the d
     | Parameter | Description |
     |---|---|
     | Account name | A name to help you identify this ClickHouse Cloud service later. |
-    | ClickHouse Cloud HTTPS URL | The HTTPS URL of your ClickHouse Cloud service. Example: `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443` |
+    | ClickHouse Cloud HTTPS URL | The HTTPS URL of your ClickHouse Cloud service, for example, `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443`. |
     | Username | The ClickHouse user Datadog authenticates as, for example, `datadog`. |
     | Password | The password for that ClickHouse user. |
     | Tags | (Optional) Custom tags applied to datasets collected from this service. |
