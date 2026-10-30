@@ -12,9 +12,8 @@ To embed Git information in your .NET build artifacts, follow the instructions f
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
 - The .NET client library version 2.24.1 or later is required.
-- Ensure that your `.pdb` files are deployed alongside your .NET assemblies (`.dll` or `.exe`) in the same folder.
 
 ## Containers
 

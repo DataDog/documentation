@@ -12,7 +12,7 @@ To embed Git information in your PHP build artifacts, follow the instructions fo
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
 - The PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.
 
 ## Containers

@@ -12,19 +12,19 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
-- The Ruby client library version 1.6.0 or later is required.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
+- Use the Ruby client library version 1.21.0 or later for `DD_GIT_*` environment variables. For older versions, see [Legacy tag configuration](#legacy-tag-configuration).
 
 ## Containers
 
-If you are using Docker containers, you have the following options: using Docker or configuring your application with the `DD_TAGS` environment variable.
+If you are using Docker containers, you have the following options: using Docker or configuring your application with the `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Docker" level="h3" %}}
-{{% sci-docker-ddtags %}}
+{{% sci-docker %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 ## Serverless
@@ -35,16 +35,26 @@ If you are using Serverless, you have the following options depending on your se
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 ## Host
 
-If you are using a host, configure your application with the `DD_TAGS` environment variable.
+If you are using a host, configure your application with the `DD_GIT_*` environment variables.
 
-{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
-{{% sci-dd-tags-env-variable %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
+
+## Legacy tag configuration
+
+For Ruby client library versions 1.6.0 through 1.20.x, use `DD_TAGS` to attach Git metadata. This method also works with later versions.
+
+{{% sci-dd-tags-env-variable %}}
+
+For Docker builds with these older versions:
+
+{{% sci-docker-ddtags %}}
 
 [1]: /agent/
