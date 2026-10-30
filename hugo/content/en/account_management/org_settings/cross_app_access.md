@@ -21,7 +21,7 @@ Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users yo
 
 A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from two issuers: Okta and Claude.
 
-Claude is the only agent that Cross-App Access supports, and it works with both issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. As an issuer, Claude mints the ID-JAG that the agent presents to Datadog. You can trust one issuer or both.
+Claude is the only agent that Cross-App Access supports, and it works with both issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. With Claude Auto-Connect, Claude is also the issuer and mints the ID-JAG that it presents to Datadog. You can trust one issuer or both.
 
 ## Values you exchange
 
@@ -89,7 +89,7 @@ Every issuer URL must use `https` and must not contain a port, query, or fragmen
 
 ### Remove trusted issuers
 
-To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer.
+To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][6].
 
 ### Copy your organization UUID
 
