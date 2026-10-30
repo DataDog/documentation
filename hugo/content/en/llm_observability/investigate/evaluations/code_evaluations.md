@@ -34,7 +34,7 @@ Code evaluators run on the same scopes as [custom LLM-as-a-judge evaluators][2]:
    - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). In the editor, set {{< ui >}}Type{{< /ui >}} to {{< ui >}}Code (deterministic){{< /ui >}}, then select {{< ui >}}Create from scratch{{< /ui >}} in the {{< ui >}}Template{{< /ui >}} picker.
 1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `empty-tool-result`). The name must be unique within your application.
 1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria, for example `@meta.span.kind:tool` to evaluate only tool spans. See [Define the evaluation scope][4] for details.
-1. In the {{< ui >}}Template{{< /ui >}} picker, select a starting point:
+1. (Optional) To change your starting point, use the {{< ui >}}Template{{< /ui >}} picker:
    - {{< ui >}}Empty tool result{{< /ui >}}: Flags tool calls that return an empty result.
    - {{< ui >}}User input contains text{{< /ui >}}: Checks whether the user input contains a given string.
    - {{< ui >}}Create from scratch{{< /ui >}}: Starts from a minimal function.
@@ -98,7 +98,7 @@ To add an assessment, reasoning, or metadata, return an object with a `value` ke
 | `reasoning` | Optional. A string explaining the result. |
 | `metadata` | Optional. An object with extra details, such as the IDs of the spans that failed. |
 
-If the object has an `assessment` but no `value`, the result is a Boolean that is `true` when the assessment is `"pass"`.
+If the object has an `assessment` but no `value`, the result is a Boolean: `true` when the assessment is `"pass"`, and `false` when it is `"fail"`.
 
 Return `null` to skip spans, traces, or sessions that the evaluation doesn't apply to, for example a span that is not a tool call.
 
@@ -167,7 +167,7 @@ function __evalDeterministic(data) {
 
 ## Test and preview
 
-The pane on the right shows the spans, traces, or sessions that match the evaluation scope. Click {{< ui >}}Test Evaluator{{< /ui >}}, then:
+The pane on the right shows the spans, traces, or sessions that match the evaluation scope. Select {{< ui >}}Test Evaluator{{< /ui >}}, then:
 
 - Select {{< ui >}}Auto Test{{< /ui >}} to run your function on a sample of the matching spans, traces, or sessions.
 - Select {{< ui >}}Test Manually{{< /ui >}} to run your function on one you choose.
@@ -216,7 +216,7 @@ curl -X PUT "https://api.${DD_SITE}/api/unstable/llm-obs/config/evaluators/custo
       },
       "llm_judge_config": {
         "parsing_type": "json",
-        "user_specified_json_post_processing_function": "function __evalDeterministic(data) {\n  const out = String(data.meta?.output?.value ?? \"\").trim();\n  const empty = out === \"\" || out === \"[]\";\n  return { value: empty, assessment: empty ? \"fail\" : \"pass\" };\n}"
+        "user_specified_json_post_processing_function": "function __evalDeterministic(data) {\n  const out = String(data.meta?.output?.value ?? \"\").trim();\n  const empty = out === \"\" || out === \"[]\" || out === \"{}\";\n  return { value: empty, assessment: empty ? \"fail\" : \"pass\" };\n}"
       }
     }
   }
