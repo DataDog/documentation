@@ -3134,6 +3134,15 @@ Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog s
 - Get the data for tab "Pivot 1" in spreadsheet "ABC".
 - Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
 
+### `move_datadog_spreadsheet_tab`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Moves a tab to a new position in a Datadog spreadsheet. The tab is placed after a specified tab, or becomes the first tab if no tab is specified. To reorder multiple tabs, the tool moves one tab at a time, from the first position to the last. Use `get_datadog_spreadsheet` first to find tab IDs and types.
+
+- Move tab "Pivot 1" to the front of spreadsheet "ABC".
+- Move table "Table 2" after sheet "Sheet 1" in spreadsheet "ABC".
+- Reorder the tabs in spreadsheet "ABC" alphabetically.
+
 ### `delete_datadog_spreadsheet`
 *Toolset: **sheets***\
 *Permissions Required: `Sheets Write`*\
