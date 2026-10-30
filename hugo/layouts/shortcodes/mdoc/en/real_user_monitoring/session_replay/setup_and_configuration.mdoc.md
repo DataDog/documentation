@@ -464,11 +464,54 @@ See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Session Replay for Electron records the UI of renderer processes. The Browser SDK in the renderer streams the records to the main process, which uploads them.
+
+### Step 1 - Set up the Electron SDK
+
+Make sure you've [set up the Electron SDK][36], including the Browser SDK in your renderer processes.
+
+### Step 2 - Enable Session Replay in the main process
+
+In the main process `init` call, set `sessionReplaySampleRate` and, optionally, `defaultPrivacyLevel`:
+
+```typescript
+await init({
+  // ...
+  sessionReplaySampleRate: 100, // percentage of sampled sessions that record Session Replay
+  defaultPrivacyLevel: 'mask', // 'mask' | 'allow' | 'mask-user-input'
+});
+```
+
+The main process decides which sessions record Session Replay. `sessionReplaySampleRate` and `defaultPrivacyLevel` set in the renderer `datadogRum.init` call are ignored.
+
+### Step 3 - Initialize the Browser SDK in the renderer
+
+In each renderer page, initialize `@datadog/browser-rum` as described in [Set up renderer processes][37]. No Session Replay option is needed in the renderer:
+
+```typescript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+  clientToken: '<CLIENT_TOKEN>',
+  applicationId: '<APPLICATION_ID>',
+  site: '<DATADOG_SITE>',
+  service: '<SERVICE_NAME>',
+});
+```
+
+You don't need to call `startSessionReplayRecording()`. The Browser SDK streams the records to the main process automatically.
+{% /if %}
+<!-- end Electron -->
+
 ## Web view instrumentation
 
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 You can record the entire user journey across both [web and native views][1] on iOS or Android and watch it in a single Session Replay.
 
 The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
+{% /if %}
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -528,10 +571,16 @@ Datadog Session Replay for Flutter does not currently support Web view capture.
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Electron renderers are web pages, so the setup records them directly. No web view instrumentation is needed.
+{% /if %}
+<!-- end Electron -->
+
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %} If the sample rate is not specified in the configuration, the default value of 100 is applied.{% /if %}
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
@@ -610,6 +659,12 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#step-2-enable-session-replay-in-the-main-process).
+{% /if %}
+<!-- end Electron -->
+
 ### Disable Session Replay
 
 <!-- Browser -->
@@ -626,6 +681,13 @@ To stop session recordings, set the sample rate shown in the [Set the sample rat
 {% /if %}
 <!-- end Mobile -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0` in the main process `init` call, or remove it.
+{% /if %}
+<!-- end Electron -->
+
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ### Start or stop the recording manually
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
@@ -753,7 +815,9 @@ SessionReplay.stopRecording();
 ```
 {% /if %}
 <!-- end React Native -->
+{% /if %}
 
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.
@@ -828,6 +892,7 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 ```
 {% /if %}
 <!-- end Flutter -->
+{% /if %}
 
 ### Privacy options
 
@@ -878,3 +943,5 @@ See [Connect Session Replay to your third-party tools][30].
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /real_user_monitoring/application_monitoring/maui/setup
 [35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
+[36]: /real_user_monitoring/application_monitoring/electron/setup/
+[37]: /real_user_monitoring/application_monitoring/electron/setup/#set-up-renderer-processes

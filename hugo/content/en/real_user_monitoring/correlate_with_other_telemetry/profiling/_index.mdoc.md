@@ -28,7 +28,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
+Datadog RUM supports profiling for browser, Electron, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
@@ -52,91 +52,37 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 
 ### Step 2 - Configure the profiling sampling rate
 
-1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 ingested sessions).
-    ```javascript
-    import { datadogRum } from '@datadog/browser-rum'
+In the main process `init` call, set `profilingSampleRate`, which determines the percentage of sampled sessions that are profiled. It defaults to `0`, which disables profiling.
 
-    datadogRum.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      profilingSampleRate: 25,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
+```typescript
+await init({
+  // ...
+  profilingSampleRate: 100, // percentage of sampled sessions that are profiled
+});
+```
+
+The main process decides which sessions are profiled. `profilingSampleRate` set in the renderer `datadogRum.init` call has no effect.
+
+### Step 3 - Serve renderer pages with the Document-Policy header
+
+The JS Self-Profiling API is available only on pages served with the HTTP response header `Document-Policy: js-profiling`.
+
+Pages loaded from `file://` are not served with this header by default, so profiling is not available for them.
+
+1. Serve the renderer over a protocol where you control the response headers: a custom protocol registered with [`protocol.handle`][electron-3], or a local HTTP server.
+2. If you use a custom protocol, register it as privileged, with `standard` and `secure`, before the app is ready:
+
+    ```typescript
+    import { protocol } from 'electron';
+
+    protocol.registerSchemesAsPrivileged([
+      { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+    ]);
     ```
 
-2. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
-    ```javascript
-        app.get("/", (request, response) => {
-            …
-            response.set("Document-Policy", "js-profiling");
-            …
-        });
-    ```
+    If you skip this step, the JS Self-Profiling API stays unavailable even with the header, because Chromium does not treat the scheme as a secure context.
 
-3. **Quota check**: Before starting a profiled session, the SDK makes a request to a quota API to determine whether the current RUM session will receive profiling data.
-
-    If you use a [proxy][13] or [CSP][14], you must also allow the `quota.` subdomain of your site's standard intake origin (for example, `https://quota.browser-intake-datadoghq.com` for US1, serving the `/api/v2/profiling/quota` endpoint). See the full list of quota endpoints per site in the [Supported endpoints][15] section, and refer to the [proxy setup documentation][13] for details on routing subdomain-specific requests.
-
-4. Set up Cross-Origin Resource Sharing (CORS) if needed.
-
-      This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
-
-    To enable CORS:
-
-    - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
-    - Make sure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
-
-       ```javascript
-       app.get("/", (request, response) => {
-           …
-           response.header("Access-Control-Allow-Origin", "*");
-           response.header("Access-Control-Allow-Headers",
-           …
-       });
-       ```
-
-{% collapse-content title="Browser profiling and CORS" id="cors"%}
-
-#### Requirements for Cross-Origin Scripts (CORS)
-
-If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
-
-To summarize:
-
-- If a script is loaded from a same-origin source, then attribution is allowed, and you can see profiling data attributed to this script.
-- If a script is loaded cross-origin _without_ a permissive CORS policy (like `Access-Control-Allow-Origin` allowing the page origin), then attribution is blocked, and you do not see profiling data attributed to this script.
-
-This CORS policy restricts profiling to only scripts that are explicitly intended to be profiled by other origins.
-
-#### How does CORS relate to browser profiling?
-
-When you start Datadog's browser profiler (which uses the [JS Self-Profiling API][3]), the profiler can capture stack traces of JavaScript execution—but it only includes _attribution_ (function names, URLs, etc.) for the following scripts:
-
-- Scripts that have the same origin as the page initiating the profiling
-- Cross-origin scripts that explicitly opt-in using CORS
-
-This protects third-party content and users from leaking execution details across security boundaries.
-
-#### Why is the crossorigin="anonymous" attribute needed?
-
-Without the `crossorigin="anonymous"` attribute, the browser does not make a CORS-enabled request for the script. The browser fetches the script without CORS, meaning:
-
-- No CORS policy applies.
-- No credentials (cookies, HTTP auth, etc.) are sent.
-- The fetched script is not eligible for detailed attribution in performance entries or stack traces. These stack frames are displayed as "(anonymous)" or with no attribution.
-
-To protect cross-origin script privacy, _both_ sides must agree to share information:
-- The page must explicitly request a CORS-enabled fetch, with `crossorigin="anonymous"`.
-- The server must permit this, with an `Access-Control-Allow-Origin` header in the response.
-
-A script is eligible for attribution in the JS Self-Profiling API only when both of these conditions are met.
-
-{% /collapse-content %}
+3. Add the `Document-Policy: js-profiling` response header to the responses that serve your renderer pages.
 
 ## Explore profiling
 
@@ -188,6 +134,60 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 {% /if %}
 <!-- end Browser -->
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Electron profiling collects code-level performance data from renderer pages with the [JS Self-Profiling API][electron-1], and correlates it with your RUM data.
+
+{% alert level="info" %}
+Profiling is available only in renderer processes. It is not supported in the main process.
+{% /alert %}
+
+## Setup
+
+### Step 1 - Set up RUM
+
+To start collecting data, set up [RUM for Electron][electron-2], including the Browser SDK in your renderer processes.
+
+### Step 2 - Configure the profiling sampling rate
+
+1. In the main process `init` call, set `profilingSampleRate`, which determines the percentage of sampled sessions that are profiled. It defaults to `0`, which disables profiling.
+    ```typescript
+    await init({
+      // ...
+      profilingSampleRate: 100, // percentage of sampled sessions that are profiled
+    });
+    ```
+
+    The main process decides which sessions are profiled. `profilingSampleRate` set in the renderer `datadogRum.init` call has no effect.
+
+2. Serve the renderer pages with the HTTP response header `Document-Policy: js-profiling`. The JS Self-Profiling API is not available without it.
+
+{% alert level="warning" %}
+Pages loaded from `file://` are not served with this header by default. Serve the renderer over a protocol where you control the response headers: a custom protocol registered with [`protocol.handle`][electron-3] (as privileged, with `standard` and `secure`), or a local HTTP server.
+{% /alert %}
+
+Register the custom protocol as privileged before the app is ready. Otherwise the JS Self-Profiling API stays unavailable even with the header, because Chromium does not treat the scheme as a secure context.
+
+```typescript
+import { protocol } from 'electron';
+
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+]);
+```
+
+## Explore profiling
+
+Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the browser SDK.
+
+[electron-1]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
+[electron-2]: /real_user_monitoring/application_monitoring/electron/setup/
+[electron-3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
+[electron-4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser#explore-profiling
+
+{% /if %}
+<!-- end Electron -->
 
 <!-- Android -->
 {% if equals($platform, "android") %}
