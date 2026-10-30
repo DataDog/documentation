@@ -40,7 +40,7 @@ You can proactively guide how Bits investigates your environment by creating a `
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
 
-- **Where it applies**: Use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which Bits products use the file.
+- **Where it applies**: In the `bits.md` settings, use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which Bits products use the file.
 - **Links**: Bits can follow links in `bits.md` that it has access to.
 
 ### Sample bits.md
