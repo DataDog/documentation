@@ -13,8 +13,8 @@ further_reading:
   text: "Role-based access control"
 ---
 
-{{< callout url="TODO_PREVIEW_URL" btn_hidden="false" header="Open Preview" >}}
-Database Monitoring Role Observability is in open preview and available to all Database Monitoring customers on supported engines. Features and APIs may change before general availability.
+{{< callout url="https://app.datadoghq.com/forms/share/e5e882f61f3c52f41b235035f4a9af213cc0605812945c987859a9490d10c1b6" btn_hidden="false" header="Open Preview" >}}
+Database Monitoring Role Observability is in open preview. APIs may change before general availability.
 {{< /callout >}}
 
 ## Overview
@@ -29,10 +29,10 @@ This page explains how to:
 
 ## Requirements
 
-- A PostgreSQL database monitored by [Database Monitoring][3]. Role Observability supports Postgres 12 through 18.
-- Datadog Agent version `TODO_MIN_AGENT_VERSION` or later.
+- A PostgreSQL database monitored by [Database Monitoring][3]. Postgres version `XXX` or later.
+- Datadog Agent version 7.86 or later.
 - The **Database Monitoring Read** permission. See [Role-based access control][1] for how to manage permissions.
-- Role Observability enabled for your organization. The feature is in open preview and gated behind a feature flag. To opt in, contact your Datadog account manager or fill out the request form at the top of this page, and the Database Monitoring team enables the feature and shares the collection settings for your Agent configuration.
+- The feature is in open preview and gated behind a feature flag. To opt in, contact your Datadog account manager or fill out the request form at the top of this page.
 
 ## Access role data
 
