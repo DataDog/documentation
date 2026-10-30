@@ -87,6 +87,28 @@ Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
 
 To request support for an integration on AIX, open a feature request with [Datadog Support][13].
 
+## Migrate from the UNIX Agent
+
+To migrate from the Datadog UNIX Agent to Agent 7, uninstall the UNIX Agent and then install Agent 7:
+
+1. Back up the UNIX Agent configuration. Uninstalling the UNIX Agent removes the `/etc/datadog-agent` directory.
+   ```shell
+   cp -rp /etc/datadog-agent /etc/datadog-agent.unix-agent.bak
+   ```
+2. Uninstall the UNIX Agent:
+   ```shell
+   installp -u datadog-unix-agent
+   ```
+3. [Install Agent 7](#install-the-agent).
+4. Configure Agent 7 in `/etc/datadog-agent/datadog.yaml`. Use your backup as a reference, but do not copy the file as is:
+   - `api_key`, `site`, `hostname`, `tags`, `log_level`, and `proxy.*` keep the same names.
+   - Other options are renamed or removed. Check each option against the [AIX example configuration][10].
+   - Do not copy the `dd_url: https://unix.agent.datadoghq.com` setting.
+5. Check your integration configurations in `/etc/datadog-agent/conf.d/`. Some options are different in Agent 7.
+6. Run `datadog-agent status` to confirm that the Agent is running and sending data.
+
+If you have questions about migrating your configuration, contact [Datadog Support][13].
+
 ## Monitor Agent uptime
 
 You can use the metric `datadog.agent.running` to monitor the uptime of an Agent. The metric emits a value of `1` if the Agent is reporting to Datadog.
