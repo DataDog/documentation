@@ -149,8 +149,6 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
-| `vllm.time_per_output_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
@@ -476,7 +474,6 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
@@ -614,6 +611,9 @@ To graph percentiles on certain SGLang metrics, you must opt in to [advanced que
 | `sglang.inter_token_latency.seconds` |
 | `sglang.request.prompt_tokens` |
 | `sglang.request.generation_tokens` |
+| `sglang.e2e_request_latency.seconds` |
+| `sglang.request.stage_latency.seconds` |
+| `sglang.queue_time.seconds` |
 
 ### 6. Enable GPU tracing (optional)
 
