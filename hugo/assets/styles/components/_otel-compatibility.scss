@@ -319,12 +319,6 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     cursor: default !important;
   }
 
-  &__caption {
-    margin: 0.5rem 0 0;
-    font-size: 12px;
-    color: $gray-darkish;
-  }
-
   // Only for the .md version of the page, which is built from this HTML
   &__md-label {
     display: none;

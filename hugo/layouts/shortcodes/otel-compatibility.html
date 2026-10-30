@@ -123,7 +123,8 @@
               {{- $mark = `<span class="otel-compat__sr">Not yet documented</span>` }}
             {{- end }}
             {{- if $c.notes }}
-            {{- $note := delimit $c.notes " " | markdownify }}
+            {{- /* Escape HTML first: the site's Markdown settings allow raw HTML, and notes only need Markdown links */}}
+            {{- $note := delimit $c.notes " " | htmlEscape | markdownify }}
             <span class="tooltip-container"><button type="button" class="tooltip-trigger otel-compat__mark otel-compat__mark--{{ $c.support }}" aria-describedby="{{ $tipID }}">{{ $mark | safeHTML }}</button><span id="{{ $tipID }}" class="tooltip-content" role="tooltip">{{ $note }}</span></span>
             <span class="otel-compat__note exclude-from-md" aria-hidden="true">{{ $note | plainify }}</span>
             {{- else }}
@@ -136,6 +137,5 @@
       </tbody>
     </table>
   </div>
-  <p class="otel-compat__caption exclude-from-md">A blank cell means not yet documented.</p>
 </div>
 

@@ -166,7 +166,8 @@ A **support value** is one of `supported`, `partial`, `not_supported`, or
 `unknown` cell renders blank, which means not yet documented. Don't
 write `yes` or `no`: YAML reads them as booleans, and the build fails.
 
-Notes accept Markdown, so a note can link to another page. In compare view,
+Notes accept Markdown, so a note can link to another page. HTML in a note shows as
+plain text. In compare view,
 notes show as text under the cell; in the full table they show on hover.
 
 To add a note or a short cell label, use a map instead of a single word:
