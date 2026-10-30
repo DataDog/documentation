@@ -595,6 +595,11 @@ menu:
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
       weight: 807
+    - name: OpenTelemetry Collectors
+      identifier: fleet_otel_collectors
+      url: agent/fleet_automation/otel_collectors
+      parent: agent_fleet_automation
+      weight: 808
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -977,16 +982,21 @@ menu:
       identifier: otel_trace_metrics
       parent: otel_integrations
       weight: 817
+    - name: Fleet Automation
+      url: opentelemetry/fleet_automation/
+      identifier: otel_fleet_automation
+      parent: opentelemetry_top_level
+      weight: 9
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
-      weight: 9
+      weight: 10
     - name: Guides and Resources
       url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
-      weight: 10
+      weight: 11
     - name: OpenTelemetry Demo Application
       url: /opentelemetry/guide/otel_demo_to_datadog/
       parent: otel_guides
@@ -1031,7 +1041,7 @@ menu:
       url: /opentelemetry/reference
       identifier: otel_reference
       parent: opentelemetry_top_level
-      weight: 11
+      weight: 12
     - name: Terms and Concepts
       url: /opentelemetry/reference/concepts
       identifier: otel_concepts
@@ -5549,16 +5559,26 @@ menu:
       identifier: redshift
       parent: data_warehouses
       weight: 4000000
+    - name: ClickHouse Cloud
+      url: data_observability/quality_monitoring/data_warehouses/clickhouse
+      identifier: clickhouse_cloud_data_obs
+      parent: data_warehouses
+      weight: 5000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
       parent: quality_monitoring
       weight: 250000
-    - name: Iceberg Tables (AWS Glue)
+    - name: AWS Glue
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Amazon Athena Query History
+      url: data_observability/quality_monitoring/data_lakes/amazon_athena
+      identifier: amazon_athena_query_history
+      parent: data_lakes
+      weight: 2000000
     - name: Transactional Databases
       url: data_observability/quality_monitoring/transactional_databases
       identifier: transactional_databases
@@ -5923,6 +5943,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
+    - name: AI Gateway
+      url: llm_observability/configure/ai_gateway
+      parent: llm_obs_configure
+      identifier: llm_obs_ai_gateway
+      weight: 604
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -11049,6 +11074,11 @@ menu:
       url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
+    - name: Shared Roles
+      identifier: account_management_organization_groups_shared_roles
+      url: account_management/organization_groups/shared_roles/
+      parent: account_management_organization_groups
+      weight: 101
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
