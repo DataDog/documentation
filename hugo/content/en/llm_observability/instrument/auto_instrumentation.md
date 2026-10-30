@@ -716,7 +716,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Responses][8]
   - `openai.responses.create()` (as of `dd-trace@5.76.0`)
 
-The integration also traces `openai.decisions.create()` calls. Decisions tracing requires `openai>=7.30.0` and `dd-trace>=5.133.0` on v5 or `>=6.22.0` on v6.
+The integration also traces `openai.decisions.create()` calls. Decisions tracing requires `openai>=7.30.0`, as well as either `dd-trace>=5.133.0` on v5, or `>=6.22.0` on v6.
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
