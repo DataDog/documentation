@@ -5989,6 +5989,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_inference
       weight: 6
+    - name: Continuous Tracing
+      url: gpu_monitoring/tracing/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_tracing
+      weight: 7
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
