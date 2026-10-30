@@ -14,3 +14,12 @@ entries:
       - GetLLMObsAnnotatedInteractions
       - GetLLMObsAnnotatedInteractionsByTraceIDs
     title: Remove discriminator and anyOf usage
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41240
+    operations:
+      - GetLLMObsCustomEvalConfig
+      - ListLLMObsCustomEvalConfigs
+      - UpdateLLMObsCustomEvalConfig
+    title: Fix LLM Obs custom evaluator provider names and add deterministic 
+      provider
