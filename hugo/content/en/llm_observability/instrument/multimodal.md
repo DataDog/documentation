@@ -34,7 +34,7 @@ No minimum Datadog SDK version applies to the [Agent Observability HTTP API][1] 
 
 ## Automatic instrumentation
 
-Datadog's [LLM integrations][3] populate media parts for the following libraries, with no code change on your part.
+Enable [automatic instrumentation][3] to capture media from the following libraries.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -43,12 +43,14 @@ Datadog's [LLM integrations][3] populate media parts for the following libraries
 | ----------- | -------------- | ------------------- |
 | OpenAI chat completions | Input `input_audio` content and output audio, including the model's audio transcript | >= 4.12.0 |
 | OpenAI Realtime API | Per-turn input and output audio, transcripts, token usage, and tool calls | >= 4.13.0 |
+| Amazon Nova 2 Sonic (`aws-sdk-bedrock-runtime`) | Per-turn input and output audio, transcripts, token usage, and tool calls | >= 4.17.0 |
+| ElevenLabs Agents (WebSocket) | Conversation input and output audio, transcripts, and client tool calls | >= 4.17.0 |
 | LiteLLM | Input and output audio, through the OpenAI chat completions format | >= 4.12.0 |
 | OpenAI chat completions and Responses API | Inline base64-encoded images | >= 4.15.0 |
 | OpenAI Agents | Inline base64-encoded images | >= 4.15.0 |
 | Anthropic | Inline base64-encoded images | >= 4.15.0 |
 
-Each turn of an OpenAI Realtime API conversation produces its own LLM span. Raw `pcm16` and G.711 audio is converted to WAV so that it plays in the browser. To turn off Realtime API instrumentation, set `DD_OPENAI_REALTIME_ENABLED=false`.
+Nova 2 Sonic and ElevenLabs require `ddtrace` 4.17 or later. Nova 2 Sonic also requires Python 3.12+ and `aws-sdk-bedrock-runtime` 0.11.0+; ElevenLabs requires `elevenlabs` 2.70.0+.
 
 Audio in streamed chat completions (`stream=True`) is not captured.
 
@@ -59,11 +61,16 @@ Audio in streamed chat completions (`stream=True`) is not captured.
 | ----------- | -------------- | ------------------- |
 | OpenAI chat completions | Input `input_audio` content and output audio, including the model's audio transcript | v6: >= 6.7.0; v5: >= 5.118.0 |
 | OpenAI Agents | Input and output audio, through the OpenAI chat completions format | v6: >= 6.7.0; v5: >= 5.118.0 |
+| OpenAI Realtime API | Per-turn input and output audio, transcripts, token usage, and tool calls | v6: >= 6.17.0; v5: >= 5.128.0 |
+| Amazon Nova 2 Sonic (`@aws-sdk/client-bedrock-runtime`) | Per-turn input and output audio, transcripts, token usage, and tool calls | v6: >= 6.22.0; v5: >= 5.133.0 |
+| ElevenLabs Agents (WebSocket) | Conversation input and output audio, transcripts, and client tool calls | Coming Soon |
 
 Audio in streamed chat completions is not captured.
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< img src="llm_observability/instrumentation/voice_conversation_playback.png" alt="Voice conversation in Agent Observability with an audio playback timeline, user and agent speaking segments, response latency badges, and turn transcripts." caption="Voice conversation playback and turn transcripts captured with automatic instrumentation." style="width:100%;" >}}
 
 Integrations don't fetch images referenced by a remote URL or a file ID. They capture only images that the application sends inline as base64 data. When an integration cannot capture media, it records a text marker such as `[image]` or `[audio]` in the message.
 
@@ -249,7 +256,7 @@ Audio appears as a player, with the message text shown alongside it. For a voice
 
 Images render when the MIME type is one of `image/png`, `image/jpeg`, `image/webp`, or `image/gif`, and the declared MIME type matches the encoded bytes. SVG images do not render. The trace view makes no outbound requests, so an image referenced by a remote URL is shown as text rather than fetched.
 
-Audio plays through the browser's native audio player. Supported containers include `audio/wav`, `audio/mpeg`, `audio/ogg`, and `audio/webm`. Raw formats such as `pcm16`, `g711_ulaw`, and `g711_alaw` do not play. Convert raw audio to WAV before attaching it. The Python OpenAI Realtime API integration does this conversion for you.
+Audio plays through the browser's native audio player. Supported containers include `audio/wav`, `audio/mpeg`, `audio/ogg`, and `audio/webm`. Raw formats such as `pcm16`, `g711_ulaw`, and `g711_alaw` do not play. Convert raw audio to WAV before attaching it. The automatic OpenAI Realtime API, Nova 2 Sonic, and ElevenLabs integrations convert supported raw audio to WAV.
 
 ## Limits and behavior
 
