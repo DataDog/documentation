@@ -107,18 +107,23 @@ For applications using the 5.x release line, install `dd-trace@^5.128.0` instead
 
 For installation and application setup, see the [Node.js SDK guide][19].
 
+Follow [Integrate Prompt Management][1] for the full Node.js integration workflow.
+
+[1]: /llm_observability/instrument/prompt_management/
 [19]: /tracing/trace_collection/dd_libraries/nodejs/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Use a managed prompt
 
+For the full integration workflow, including promoting a local prompt and preserving a fallback, see [Integrate Prompt Management][12].
+
 ### Integrate Prompt Management with a coding agent
 
 Paste the following prompt into your coding agent:
 
 ```text
-Follow the instructions at https://docs.datadoghq.com/llm_observability/instrument/agentic.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
+Follow the instructions at https://docs.datadoghq.com/llm_observability/instrument.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
 
 Prompt variables: <PROMPT_VARIABLES>
 
@@ -921,4 +926,5 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
 [11]: /remote_configuration/
+[12]: /llm_observability/instrument/prompt_management/
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/
