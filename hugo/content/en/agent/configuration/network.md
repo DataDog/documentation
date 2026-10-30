@@ -68,7 +68,7 @@ This behavior can be disabled in version 7.72.0 and later by setting <code>conve
 
 [Network Path][10]
 : `netpath-intake.`{{< region-param key="dd_site" code="true" >}}<br>
-In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][11] for details.
+In Agent v7.75+, Network Path contacts external services over HTTPS to resolve the source host's public IP. This is optional and Network Path functions without it, but if your network restricts outbound traffic and you want source public IP resolution, add the following to your allowlist (Agent v7.86+): `checkip.amazonaws.com`, `whatismyip.akamai.com`, `icanhazip.com`. Agent versions v7.75 to v7.85 use a different list: `icanhazip.com`, `ipinfo.io`, `checkip.amazonaws.com`, `api.ipify.org`, `whatismyip.akamai.com`. See [Network Path Setup][11] for details.
 
 [Orchestrator][12]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
