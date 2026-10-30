@@ -82,7 +82,7 @@ By default, access to a status page is unrestricted within your organization. Us
 | **Responder** | View the status page and publish or update notices. |
 | **Manager** | View and respond to the status page, edit its settings, and manage its access. |
 
-Granular access control only restricts access and does not grant RBAC permissions. Users must also have the corresponding Status Pages permission described above.
+Granular access control only restricts access and does not grant RBAC permissions. Users must also have the corresponding Status Pages permissions described above.
 
 Configuring granular access requires the **Status Pages Settings Write** permission. If the status page is already restricted, you must also have **Manager** access to it.
 
