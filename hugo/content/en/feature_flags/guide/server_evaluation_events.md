@@ -61,11 +61,11 @@ Hashed targeting keys let you correlate EVP flag evaluation events for the same 
 
 These controls apply to EVP flag evaluation events. They do not redact application logs, experiment exposure payloads, or other telemetry. Review the attributes you put in evaluation contexts before enabling full data collection. Do not include passwords, API keys, or other secrets.
 
-## Use full evaluation data for debugging and analysis
+## Enable full evaluation data
 
-We recommend enabling `observe_full_evaluation_data` when you need to investigate flag behavior for individual subjects or analyze evaluations using attributes from your evaluation context.
+We recommend setting `observe_full_evaluation_data` to `true` for each environment. This allows EVP flag evaluation events to include original targeting keys and evaluation attributes, giving you more detail about how your application uses feature flags.
 
-With full evaluation data enabled, EVP flag evaluation events can include original targeting keys and evaluation attributes. Use this data in Datadog to:
+Use this data in Datadog to:
 
 - Identify which subjects evaluated a flag and which variants they received.
 - Investigate unexpected evaluation results using the attributes supplied with the evaluation.
