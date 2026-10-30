@@ -262,6 +262,9 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 - `meta.issue`
 - `x-datadog-trace-id`
 - `x-datadog-parent-id`
+- `span_links.span_id`
+- `span_links.trace_id`
+- `span_links.trace_id_high`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
