@@ -707,7 +707,7 @@ Set `gen_ai.usage.cost.currency` to `USD` when using `gen_ai.usage.cost.amount`.
 
 If several attributes supply the same cost field, the first valid value takes precedence in this order: `gen_ai.usage.cost.amount`, `gen_ai.usage.cost`, `gen_ai.cost.*`, then `llm.cost.*`. Zero is a valid supplied cost.
 
-##### Legacy estimated cost attributes
+##### Estimated cost attributes (nanodollars)
 
 These Datadog-supported extensions accept **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
 
@@ -721,7 +721,7 @@ These Datadog-supported extensions accept **nanodollars**, without unit conversi
 | `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
 | `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
 
-Datadog replaces a legacy estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over legacy estimates. For SDK and API cost fields, see [manual cost tracking][56].
+Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates. For SDK and API cost fields, see [manual cost tracking][56].
 
 #### Request parameters
 
