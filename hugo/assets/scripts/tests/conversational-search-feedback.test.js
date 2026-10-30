@@ -1,4 +1,4 @@
-import { addMessageActions, MAX_FEEDBACK_COMMENT_CHARS } from '../components/conversational-search/actions';
+import { addMessageActions, FEEDBACK_REASONS, MAX_FEEDBACK_COMMENT_CHARS } from '../components/conversational-search/actions';
 import { FEEDBACK_TIMEOUT_MS, sendDocsAiFeedback, streamDocsAiChat } from '../components/conversational-search/docsai-client';
 
 const config = { apiUrl: 'https://example.test', apiKey: 'key' };
@@ -41,14 +41,20 @@ describe('Docs AI feedback requests', () => {
     it('posts a rating or comment with the token and survives leaving the page', async () => {
         global.fetch = jest.fn().mockResolvedValue({ ok: true, status: 202 });
 
-        await sendDocsAiFeedback({ config, token: 't', conversationId: 'c1', rating: 'down', comment: 'Wrong page' });
+        await sendDocsAiFeedback({
+            config, token: 't', conversationId: 'c1', rating: 'down', reasons: ['incorrect'], comment: 'Wrong page'
+        });
 
         const [url, init] = global.fetch.mock.calls[0];
         expect(url).toBe('https://example.test/feedback');
         expect(init.keepalive).toBe(true);
         expect(init.headers['X-Docs-Ai-Api-Key']).toBe('key');
         expect(JSON.parse(init.body)).toEqual({
-            data: { attributes: { feedback_token: 't', rating: 'down', comment: 'Wrong page', conversation_id: 'c1' } }
+            data: {
+                attributes: {
+                    feedback_token: 't', rating: 'down', reasons: ['incorrect'], comment: 'Wrong page', conversation_id: 'c1'
+                }
+            }
         });
     });
 
@@ -196,6 +202,37 @@ describe('thumbs and comments', () => {
         click('thumbs-up');
         await answer();
         click('thumbs-down');
+        await answer();
+        expect(form()).toBeNull();
+    });
+
+    it('sends the reasons picked after a thumbs-down, alone or with a comment', async () => {
+        const { sendFeedback, answer } = controlledSender();
+        const { click, form } = renderActions(sendFeedback);
+        click('thumbs-down');
+        await answer();
+
+        const chip = (id) => form().querySelector(`[data-reason="${id}"]`);
+        expect([...form().querySelectorAll('.conv-search-feedback-reason')].map((c) => c.dataset.reason))
+            .toEqual(FEEDBACK_REASONS.map((r) => r.id));
+        const send = form().querySelector('.conv-search-feedback-send');
+        chip('incorrect').click();
+        expect(chip('incorrect').getAttribute('aria-pressed')).toBe('true');
+        expect(send.disabled).toBe(false);
+        chip('incorrect').click();
+        expect(send.disabled).toBe(true);
+
+        chip('sources').click();
+        chip('incomplete').click();
+        submit(form());
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete', 'sources'] });
+        expect(chip('sources').disabled).toBe(true);
+        await answer(false);
+        expect(chip('sources').getAttribute('aria-pressed')).toBe('true');
+
+        type(form(), 'The links 404.');
+        submit(form());
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete', 'sources'], comment: 'The links 404.' });
         await answer();
         expect(form()).toBeNull();
     });

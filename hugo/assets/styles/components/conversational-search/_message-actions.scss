@@ -37,7 +37,7 @@
         transform: scale(0.92);
     }
 
-    // While a rating is being recorded, both thumbs wait and the clicked one dims.
+    // While a rating is being recorded, both thumbs wait and the clicked one shows a small spinner.
     &:disabled {
         cursor: default;
         transform: none;
@@ -50,7 +50,25 @@
 
     &.is-pending {
         cursor: progress;
-        animation: conv-search-feedback-pending 1s ease-in-out infinite alternate;
+
+        img,
+        svg {
+            visibility: hidden;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            margin: -7px 0 0 -7px;
+            border: 1.5px solid rgba($conv-search-purple, 0.18);
+            border-top-color: rgba($conv-search-purple, 0.7);
+            border-radius: 50%;
+            animation: conv-search-feedback-spin 0.8s linear infinite;
+        }
     }
 
     &.active {
@@ -104,7 +122,58 @@
     }
 }
 
-// Optional comment after a thumbs-down.
+// Optional reasons and comment after a thumbs-down.
+.conv-search-feedback-form-title {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+    color: $conv-neutral-700;
+
+    span {
+        font-weight: 400;
+        color: $conv-neutral-600;
+    }
+}
+
+.conv-search-feedback-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.conv-search-feedback-reason {
+    padding: 3px 10px;
+    border: 1px solid $conv-neutral-400;
+    border-radius: 999px;
+    background: #fff;
+    color: $conv-neutral-700;
+    font-size: 13px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(:disabled) {
+        border-color: $conv-neutral-500;
+    }
+
+    &[aria-pressed='true'] {
+        border-color: $conv-primary-300;
+        background: rgba($conv-search-purple, 0.08);
+        color: #3d2a5a;
+    }
+
+    &:focus-visible {
+        outline: 2px solid rgba($conv-search-purple, 0.45);
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.7;
+    }
+}
+
 .conv-search-feedback-form {
     display: flex;
     flex-direction: column;
@@ -185,13 +254,9 @@
     }
 }
 
-@keyframes conv-search-feedback-pending {
-    from {
-        opacity: 1;
-    }
-
+@keyframes conv-search-feedback-spin {
     to {
-        opacity: 0.45;
+        transform: rotate(360deg);
     }
 }
 
@@ -219,8 +284,7 @@
         animation: none;
     }
 
-    .conv-search-action-btn.is-pending {
+    .conv-search-action-btn.is-pending::after {
         animation: none;
-        opacity: 0.55;
     }
 }

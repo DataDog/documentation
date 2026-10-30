@@ -92,12 +92,13 @@ export async function streamDocsAiChat({
 export const FEEDBACK_TIMEOUT_MS = 10000;
 
 /**
- * Sends a rating ('up' or 'down'), a comment, or both for the answer the token was issued with.
+ * Sends a rating ('up' or 'down'), thumbs-down reasons, a comment, or any mix for the answer the token was issued with.
  * `keepalive` lets the request finish when the reader leaves the page right after clicking.
  */
-export async function sendDocsAiFeedback({ config, token, conversationId, rating, comment }) {
+export async function sendDocsAiFeedback({ config, token, conversationId, rating, reasons, comment }) {
     const attributes = { feedback_token: token };
     if (rating) attributes.rating = rating;
+    if (reasons && reasons.length) attributes.reasons = reasons;
     if (comment) attributes.comment = comment;
     if (conversationId) attributes.conversation_id = conversationId;
 
