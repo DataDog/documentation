@@ -43,9 +43,9 @@ By default the Agent binds three [ports][3] on Linux and four ports on Windows a
 
 When the Agent Data Plane is enabled, it binds port 8125 in place of the main process, and binds the following additional ports:
 
-| Port | Description                                                                                         |
-|------|-----------------------------------------------------------------------------------------------------|
-| 5100 | Exposes runtime metrics about the Agent Data Plane.                                                 |
+| Port | Description                                                                                           |
+|------|-------------------------------------------------------------------------------------------------------|
+| 5100 | Exposes runtime metrics about the Agent Data Plane.                                                   |
 | 5101 | Used by the Agent Data Plane CLI and the main Agent process to send commands to the Agent Data Plane. |
 
 For information on configuring the ports, see [Network Traffic][4].
