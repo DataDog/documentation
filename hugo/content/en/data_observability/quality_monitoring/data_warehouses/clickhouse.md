@@ -27,7 +27,7 @@ This page covers ClickHouse Cloud services only.
 Before you begin, make sure you have:
 
 - A ClickHouse Cloud service with an HTTPS endpoint. Example: `https://<service>.<region>.<cloud_provider>.clickhouse.cloud:8443`
-- Administrator access to your ClickHouse Cloud service, to create a role and a user.
+- Administrator access to your ClickHouse Cloud service to create a role and a user.
 - Preview access enabled for your organization by a Datadog representative.
 
 ## Allow Datadog IP addresses
