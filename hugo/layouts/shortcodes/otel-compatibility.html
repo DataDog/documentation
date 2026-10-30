@@ -67,7 +67,13 @@
           {{- $sdk := index $sdks $p.sdk }}
           {{- $receiver := index $receivers $p.receiver }}
           {{- $unconfirmed := eq $p.confirmed false }}
-          <th scope="col" data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-sdk="{{ $p.sdk }}" data-receiver="{{ $p.receiver }}" data-confirmed="{{ not $unconfirmed }}" data-recommended="{{ $p.recommended | default false }}"{{ if $unconfirmed }} hidden{{ end }}>
+          <th scope="col" data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-sdk="{{ $p.sdk }}" data-receiver="{{ $p.receiver }}" data-confirmed="{{ not $unconfirmed }}" data-recommended="{{ $p.recommended | default false }}"{{ if $unconfirmed }} class="exclude-from-md" hidden{{ end }}>
+            {{- /* The .md version of the page gets one plain, linked label; the visual header stays out of it */}}
+            <span class="otel-compat__md-label">
+              {{- if $p.link }}<a href="{{ $p.link | relLangURL }}">{{ $sdk.label }} + {{ $receiver.label }}</a>{{ else }}{{ $sdk.label }} + {{ $receiver.label }}{{ end }}
+              {{- if $p.recommended }} (recommended){{ end -}}
+            </span>
+            <div class="otel-compat__visual exclude-from-md">
             <div class="otel-compat__head">
               {{- with $p.name }}<span class="otel-compat__pair-name">{{ . }}</span>{{ end }}
               {{- if $p.recommended }}<span class="otel-compat__badge">Recommended</span>{{ end -}}
@@ -87,6 +93,7 @@
             {{- with $p.link }}
             <a class="otel-compat__setup-link" href="{{ . | relLangURL }}" aria-label="Setup guide: {{ $sdk.label }} + {{ $receiver.label }}">Setup guide</a>
             {{- end }}
+            </div>
           </th>
           {{- end }}
         </tr>
@@ -102,16 +109,16 @@
           {{- range $p := $data.pairs }}
           {{- $c := partial "otel-compatibility/cell.html" (dict "feature" $f "sdk" $p.sdk "receiver" $p.receiver) }}
           {{- $tipID := printf "%s-%s-%s-%s" $uid $f.id $p.sdk $p.receiver }}
-          <td data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-support="{{ $c.support }}"{{ if eq $p.confirmed false }} hidden{{ end }}>
+          <td data-pair="{{ $p.sdk }}.{{ $p.receiver }}" data-support="{{ $c.support }}"{{ if eq $p.confirmed false }} class="exclude-from-md" hidden{{ end }}>
             {{- $mark := "" }}
             {{- if $c.label }}
               {{- $mark = $c.label | htmlEscape }}
             {{- else if eq $c.support "supported" }}
-              {{- $mark = `<i class="icon-check-bold" aria-hidden="true"></i><span class="otel-compat__sr">Supported</span>` }}
+              {{- $mark = `<i class="icon-check-bold exclude-from-md" aria-hidden="true"></i><span class="otel-compat__sr">Supported</span>` }}
             {{- else if eq $c.support "partial" }}
               {{- $mark = "Partial" }}
             {{- else if eq $c.support "not_supported" }}
-              {{- $mark = `<span aria-hidden="true">&mdash;</span><span class="otel-compat__sr">Not supported</span>` }}
+              {{- $mark = `<span class="exclude-from-md" aria-hidden="true">&mdash;</span><span class="otel-compat__sr">Not supported</span>` }}
             {{- else }}
               {{- $mark = `<span class="otel-compat__sr">Not yet documented</span>` }}
             {{- end }}
@@ -129,6 +136,6 @@
       </tbody>
     </table>
   </div>
-  <p class="otel-compat__caption">A blank cell means not yet documented.</p>
+  <p class="otel-compat__caption exclude-from-md">A blank cell means not yet documented.</p>
 </div>
 
