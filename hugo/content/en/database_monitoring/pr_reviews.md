@@ -46,7 +46,7 @@ When you open or update a pull request, Datadog reads the diff and looks for dat
 
 1. **Find queries.** Datadog finds SQL in `.sql` files, in string literals and heredocs, and in ORM and query-builder code. For ORM code, it uses AI to reconstruct the SQL that the code generates.
 2. **Match queries to production.** Datadog normalizes each query and matches it against the queries Database Monitoring observed in the last 24 hours. A query that matches carries production evidence, such as execution count and share of database load.
-3. **Find risky schema changes.** In SQL files and SQL strings, Datadog looks for statements that drop or rename a table or column, and finds the production queries that still reference that object.
+3. **Find risky schema changes.** In SQL files and SQL strings, Datadog looks for statements that drop or rename a table or column, and finds any production queries that still reference that object.
 4. **Report findings.** Datadog posts an inline comment for each finding that has production evidence or a medium or high severity. Low-severity findings without production evidence are not posted.
 
 <div class="alert alert-info">Datadog only analyzes the forward half of a migration. Rollback code, such as a <code>down</code> method or a <code>-- migrate:down</code> section, and files named like <code>*.down.sql</code> are skipped.</div>
