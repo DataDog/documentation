@@ -1142,7 +1142,7 @@
     "summary": "Get the rule-based view of compliance findings"
   },
   "ListContainerImages": {
-    "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
+    "description": "Get all container images for your organization. This endpoint queries current\ninventory and does not support time-range parameters.\n\nUse `group_by` to return image groups with counts. Grouped results are limited\nby `page[size]`, may be incomplete, and do not support pagination.\n\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
   },
   "ListContainers": {
