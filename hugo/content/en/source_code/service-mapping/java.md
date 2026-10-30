@@ -12,8 +12,8 @@ To embed Git information in your Java build artifacts, follow the instructions f
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
-- The Java client library version 1.48.0 or later is required for embedded Git properties. Version 1.12.0 or later is required for other options.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
+- Use the Java client library version 1.48.0 or later for the packaged Spring Boot Git properties examples. Runtime Git environment variables are supported in version 1.12.0 or later.
 
 ## Containers
 
