@@ -87,9 +87,11 @@ These permissions are added by default to Managed Roles. If your organization us
 
 ### Disable Bits Investigation
 
-To prevent your organization from using Bits Investigation, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
+To prevent users from viewing, running, or configuring investigations, an admin with the User Access Manage permission must remove the `bits_investigations_read` and `bits_investigations_write` permissions from all roles. For details, see [Access Control][8].
 
-Or, an admin can disable all AI products billable through AI Credits using the org-level toggle in [Plan & Usage > AI Credits][16]. For details, see [Admin controls for AI Credits][17].
+Removing these permissions doesn't stop automatic investigations on monitors where they are already enabled. To stop automatic investigations, do one of the following:
+- Turn off automatic investigations for each monitor in [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}}][19].
+- Disable all AI products billable through AI Credits using the org-level toggle in [Plan & Usage > AI Credits][16]. For details, see [Admin controls for AI Credits][17].
 
 ## Configure rate limits
 
@@ -104,6 +106,10 @@ Per monitor limit
 Organization limit
 : Defines the total number of automatic investigations Bits can run across your entire organization within 24 hours.
 : **Default:** No limit.
+
+In addition to these configurable limits, Bits runs at most 20 automatic investigations per 15 minutes for each organization. Turning off the configurable limits doesn't remove this limit.
+
+For multi alert monitors, each alerting group triggers its own investigation. Every group counts toward the per-monitor limit, the organization limit, and the 15-minute limit. For example, if a monitor alerts on 12 groups at once and the per-monitor limit is 5, Bits investigates 5 groups automatically. You can start [manual investigations][9] for the remaining groups.
 
 ### Set a rate limit
 
@@ -154,3 +160,4 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [16]: https://app.datadoghq.com/billing/bill-overview?detail_bd=ai_credits
 [17]: /account_management/billing/ai_credits/#admin-controls
 [18]: /api/latest/bits-ai/
+[19]: https://app.datadoghq.com/bits-ai/monitors/supported?auto_only=true

@@ -30,6 +30,8 @@ Because these links are user-defined, you have control over what Bits reviews, e
 
 To maximize the value of this integration, document the services, dependencies, and systems involved in detail, and provide clear, step-by-step instructions for resolving the issue. Well-structured, specific runbooks enable Bits to conduct more accurate and effective investigations.
 
+<div class="alert alert-info">Bits reads the Notebooks and Confluence pages linked directly in the monitor message. Links inside those pages aren't guaranteed to be followed, and you can't reference Notebooks by tag. Link each runbook directly in the monitor message.</div>
+
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ## Bits.md
@@ -37,6 +39,10 @@ To maximize the value of this integration, document the services, dependencies, 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
 `bits.md` is a Markdown file that provides structured context about your environment to Bits. It serves as lightweight guidance to improve investigation accuracy, query construction, and terminology alignment. Add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices.
+
+- **Size limit**: `bits.md` can be up to 50,000 characters.
+- **Where it applies**: Use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which Bits products use the file. To test changes to `bits.md` for investigations, run an investigation rather than asking Bits Chat.
+- **Links**: Bits reads `bits.md` as text. It may open links written in the file, but it isn't guaranteed to. To make sure Bits reads a runbook, link it in the monitor message instead. See [Runbooks](#runbooks).
 
 ### Sample bits.md
 
