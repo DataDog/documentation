@@ -102,6 +102,7 @@ To configure probabilistic sampling, do one of the following:
   ```yaml
   apm_config:
     # ...
+    # features: ["probabilistic_sampler_full_trace_id"] #Uncomment if you also sample with the OTel Collector.
     probabilistic_sampler:
         enabled: true
         sampling_percentage: 51 #In this example, 51% of traces are captured.
@@ -110,8 +111,12 @@ To configure probabilistic sampling, do one of the following:
 
 **If you use a mixed setup of Datadog SDKs and OTel SDKs**:
 
-- Probabilistic sampling will apply to spans originating from both Datadog and OTel SDKs.
-- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
+- Probabilistic sampling applies to spans from both Datadog and OTel SDKs.
+- If you send spans to both the Datadog Agent **and** OTel Collector instances, configure the Agent to make the same sampling decisions as the Collector:
+  1. Set the same seed in the Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and the Collector (`hash_seed`).
+  2. Add `probabilistic_sampler_full_trace_id` to the Agent's APM features. Set `DD_APM_FEATURES` to `probabilistic_sampler_full_trace_id`, or add `features: ["probabilistic_sampler_full_trace_id"]` under `apm_config`. If you already set APM features, add the flag to the existing list.
+
+  By default, the Agent hashes only the lower 64 bits of the trace ID, and the Collector hashes all 128 bits. Without the flag, the two make different decisions for the same trace, even with the same seed. The Agent matches the Collector only in the Collector's `hash_seed` mode, which is the default.
 
 <div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
@@ -119,7 +124,7 @@ To configure probabilistic sampling, do one of the following:
 
 - The probabilistic sampler will ignore the sampling priority of spans that are set at the SDK level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
 - Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
-- For consistent sampling all tracers must support [128-bit trace IDs][17].
+- If you enable `probabilistic_sampler_full_trace_id`, all SDKs must generate and propagate [128-bit trace IDs][17]. If an SDK drops the upper 64 bits of the trace ID, the Agent makes a different sampling decision for that SDK's spans, and traces are incomplete.
 
 ## Monitoring ingested volumes in Datadog
 
