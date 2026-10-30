@@ -49,11 +49,11 @@ Spans with no `agent` ancestor are not attributed.
 
 ### Agent version
 
-Set a version on your agent span. The version is set as an `agent_version` tag on the agent span and on the spans started under it in the same process.
+Set a version on your agent span. The version is set as an `agent_version` tag on the agent span and on the spans started under it in the same process. Agent Tracking uses the tag on the agent's LLM and embedding spans to break down tokens and cost by version.
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.14.0+.
+Requires `dd-trace` v4.14.0+. In versions before TBD, only the agent span is tagged. To break down tokens and cost by version on those versions, add the `agent_version` tag to the agent's child spans with `LLMObs.annotation_context(tags={"agent_version": "v2"})`.
 
 ```python
 from ddtrace.llmobs import LLMObs
