@@ -78,7 +78,7 @@ You can also assign the role to a Microsoft Entra security group that contains t
 
 ## Configure the integration in Datadog
 
-1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][4].
+1. In Datadog, go to {{< ui >}}Datadog Data Observability{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][4].
 2. In the {{< ui >}}Microsoft Fabric Warehouse{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.
 
    {{< img src="data_observability/fabric/data_obs_fabric_on_integrations_page.png" alt="Microsoft Fabric Warehouse on the Settings page of Data Observability integrations" style="width:100%;" >}}
