@@ -28,9 +28,9 @@ The Worker looks for these anomalies after logs have gone through all processors
 The Worker sends the following data to Datadog:
 
 - **Log signatures**: Tokenized representations of your logs that describe their structure, without including the actual log data.
-- **Sample logs**: A sample log for each pattern is sent every minute. Unlike signatures, sample logs include log content. See [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) for more information.
+- **Sample logs**: A sample log for each pattern, sent every minute. Unlike signatures, sample logs include log data.
 
-Datadog groups the logs into patterns to determine anomalous behavior.
+Datadog groups the logs into patterns to determine anomalous behavior. See [How logs are grouped by patterns](#how-logs-are-grouped-by-patterns) for more information.
 
 **Note**: When you send logs from a new service or to a new pipeline, the algorithm first establishes a baseline. The first anomaly can take up to 24 hours to trigger.
 
@@ -63,13 +63,13 @@ To enable log anomaly detection, set the Worker environment variable `DD_OP_ANOM
 
 For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you can see a visual breakdown of the log patterns found.
 
-After you open the anomaly side panel, review the list of patterns in the **Next steps** section. The aggregate values in the **Message** column are highlighted in yellow. Hover over an aggregate value to preview a visual distribution of its values.
+In the anomaly side panel, review the list of patterns in the **Next steps** section. The aggregate values in the **Message** column are highlighted in yellow. Hover over an aggregate value to preview a visual distribution of its values.
 
 {{< img src="observability_pipelines/log_anomaly_detection/pattern_distribution.png" alt="The Next steps section showing a list of log patterns and a distribution of values for a highlighted aggregate value." style="width:100%;" >}}
 
 ### Anomaly status
 
-Anomalies have one of the following statuses:
+All anomalies have one of the following statuses:
 
 - **Ongoing**: The Worker is still receiving logs with the anomalous patterns.
 - **Resolved**: The Worker has not received logs with the anomalous patterns for 48 hours.
