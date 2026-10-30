@@ -102,7 +102,7 @@ Datadog detects the following statements:
 
 Datadog detects these statements in SQL files and in SQL strings in your code.
 
-<div class="alert alert-info">ORM migration methods, such as <code>remove_column</code> or <code>rename_table</code>, are not reviewed.</div>
+<div class="alert alert-info">Datadog does not review ORM migration methods, such as <code>remove_column</code> or <code>rename_table</code>.</div>
 
 ### Query optimizations
 
