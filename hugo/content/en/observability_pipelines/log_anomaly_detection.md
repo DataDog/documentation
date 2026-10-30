@@ -48,6 +48,14 @@ Logs have the same pattern if they have the same values for the following:
 
 For example, if the same logs are sent to two destinations, they form two separate patterns.
 
+### Anomaly statuses
+
+Each anomaly has one of the following statuses:
+
+- **Ongoing**: The Worker is still receiving logs with the anomalous patterns.
+- **Resolved**: The Worker has not received logs with the anomalous patterns for 48 hours.
+- **Expired**: The anomaly was in **Ongoing** status for more than 48 hours with no action taken, such as adding a Sample processor. Logs with those patterns are no longer considered anomalous.
+
 ## Enable log anomaly detection
 
 To enable log anomaly detection, set the Worker environment variable `DD_OP_ANOMALY_DETECTION_ENABLED` to `true`.
@@ -56,24 +64,16 @@ To enable log anomaly detection, set the Worker environment variable `DD_OP_ANOM
 
 1. Navigate to [Observability Pipelines][2].
 1. Expand **Watchdog Insights**.
-1. Review the anomalies found in your pipelines.
-1. Click an anomaly to open the side panel and view details such as the number of error logs.
+1. Click an anomaly in the list to open the side panel and view details, such as the number of error logs.
 
-### View patterns for logs sent to the Datadog destination
+### View patterns for logs sent to the Datadog Logs destination
 
 For logs sent to the Datadog Logs destination and [indexed][3] in Datadog, you can see a visual breakdown of the log patterns found.
 
-In the anomaly side panel, review the list of patterns in the **Next steps** section. The aggregate values in the **Message** column are highlighted in yellow. Hover over an aggregate value to preview a visual distribution of its values.
+1. In the anomaly side panel, go to the **Next steps** section to see the list of patterns.
+1. In the **Message** column, hover over an aggregate value (highlighted in yellow) to preview a distribution of its values.
 
 {{< img src="observability_pipelines/log_anomaly_detection/pattern_distribution.png" alt="The Next steps section showing a list of log patterns and a distribution of values for a highlighted aggregate value." style="width:100%;" >}}
-
-### Anomaly status
-
-All anomalies have one of the following statuses:
-
-- **Ongoing**: The Worker is still receiving logs with the anomalous patterns.
-- **Resolved**: The Worker has not received logs with the anomalous patterns for 48 hours.
-- **Expired**: The anomaly was in **Ongoing** status for more than 48 hours with no action taken, such as adding a Sample processor. Logs with those patterns are no longer considered anomalous.
 
 [1]: /observability_pipelines/processors/sample/
 [2]: https://app.datadoghq.com/observability-pipelines
