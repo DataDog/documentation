@@ -146,6 +146,8 @@ module:
         - 'shortcodes/mdoc/*'
     - source: data
       target: data
+    - source: ../shared/otel_compatibility.yaml
+      target: data/otel_compatibility.yaml
     - source: static
       target: assets
     - source: assets

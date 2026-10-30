@@ -1,0 +1,395 @@
+// Styles for the otel-compatibility shortcode.
+// The picker follows the Cdocs filter menu: uppercase labels, pills, and dropdowns.
+
+$otel-compat-border: $gray-light;
+$otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23632ca6' stroke-width='2'/%3E%3C/svg%3E";
+
+.otel-compat {
+  margin: 1.5rem 0 2rem;
+
+  &__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-bottom: 1rem;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  &__label {
+    float: none;
+    width: auto;
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  // Radio inputs stay in the DOM for keyboard and screen reader use; the span is the visible pill
+  &__pill {
+    display: inline-block;
+    margin: 0 6px 6px 0;
+    cursor: pointer;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      height: 31px;
+      padding: 0 10px;
+      border: 1px solid $otel-compat-border;
+      border-radius: 4px;
+      background: #fff;
+      color: #000;
+      font-size: 16px;
+      font-variant-numeric: lining-nums;
+    }
+
+    input:checked + span {
+      background: $brand-primary;
+      border-color: $brand-primary;
+      color: #fff;
+    }
+
+    input:focus-visible + span {
+      outline: 2px solid $brand-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__select {
+    appearance: none;
+    width: 100%;
+    height: 31px;
+    padding: 0 2rem 0 0.6rem;
+    border: 1px solid $otel-compat-border;
+    border-radius: 4px;
+    background: $gray-lightest url($otel-compat-chevron) no-repeat right 0.6rem center;
+    color: $brand-primary;
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: lining-nums;
+    text-overflow: ellipsis;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid $brand-primary;
+      outline-offset: 2px;
+    }
+  }
+
+  &__diff {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 31px;
+    margin: 0 0 6px;
+    font-size: 14px;
+    cursor: pointer;
+
+    input {
+      accent-color: $brand-primary;
+      margin: 0;
+    }
+  }
+
+  &__status {
+    flex-basis: 100%;
+    margin: 0;
+    font-size: 14px;
+    color: $gray-dark;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+
+    th,
+    td {
+      padding: 0.5rem 0.6rem;
+      border: 1px solid $gray-border;
+      vertical-align: top;
+    }
+
+    thead th {
+      min-width: 9rem;
+
+      @media (max-width: 576px) {
+        min-width: 7.5rem;
+      }
+
+      background: $gray-lightest;
+      font-weight: 400;
+      text-align: left;
+      text-transform: none;
+      overflow-wrap: normal;
+    }
+
+    tbody td {
+      text-align: center;
+    }
+
+    tbody th {
+      font-weight: 400;
+      text-align: left;
+
+      // Feature links stay quiet until hover so the column scans as a list
+      a {
+        border-bottom-color: transparent;
+
+        &:hover {
+          border-bottom-color: currentColor;
+        }
+      }
+    }
+
+    // Keep feature names visible while the table scrolls sideways
+    .otel-compat__feature-col,
+    tbody th {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      width: 10rem;
+      min-width: 8rem;
+      background: #fff;
+      text-align: left;
+
+      @media (max-width: 576px) {
+        width: 7rem;
+        min-width: 7rem;
+      }
+    }
+
+    thead .otel-compat__feature-col {
+      background: $gray-lightest;
+      vertical-align: bottom;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.4rem;
+    min-height: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__fields {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.3rem 0.6rem;
+    align-items: center;
+    margin: 0;
+
+    div {
+      display: contents;
+    }
+
+    dt {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: $gray-darkish;
+      white-space: nowrap;
+    }
+
+    dd {
+      margin: 0;
+      min-width: 0;
+      font-weight: 600;
+    }
+
+    // Narrow columns: put each label above its value so the menus get the full width
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 0;
+
+      dd {
+        margin-bottom: 0.35rem;
+      }
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  &__info {
+    flex: none;
+    color: $gray-darkish;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  &__plus {
+    color: $gray-darkish;
+  }
+
+  &__value .tooltip-trigger {
+    font-weight: inherit;
+    text-align: left;
+  }
+
+  // Outside compare view (the full table, and the page without JavaScript), headers show
+  // just the two component names. Field labels stay for screen readers.
+  &:not([data-view="compare"]) &__fields {
+    display: block;
+
+    dt {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    dd {
+      margin: 0;
+    }
+
+    [data-field="receiver"] dd {
+      font-weight: 400;
+    }
+  }
+
+  &[data-view="compare"] &__plus {
+    display: none;
+  }
+
+  // Two setups side by side get equal columns
+  &[data-view="compare"] thead th[data-pair] {
+    width: 50%;
+  }
+
+  &__setup-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 12px;
+  }
+
+  // Notes show as text in compare view, where there is room, and as tooltips otherwise
+  &__note {
+    display: none;
+    margin-top: 0.2rem;
+    font-size: 12px;
+    line-height: 1.35;
+    color: $gray-darkish;
+  }
+
+  &[data-view="compare"] &__note {
+    display: block;
+  }
+
+  &[data-view="compare"] .tooltip-trigger {
+    text-decoration: none;
+    cursor: default !important;
+  }
+
+  // Only for the .md version of the page, which is built from this HTML
+  &__md-label {
+    display: none;
+  }
+
+  &__pair-name {
+    font-weight: 700;
+  }
+
+  &__badge {
+    display: inline-block;
+    margin: 0.1rem 0.2rem;
+    padding: 0 0.4rem;
+    border: 1px solid;
+    border-radius: 10px;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    vertical-align: middle;
+
+    color: $brand-primary;
+    border-color: $brand-primary;
+
+    &--agent {
+      color: $gray-dark;
+      border-color: $gray-light;
+      background: $gray-lightest;
+    }
+  }
+
+  &__mark {
+    &--supported {
+      color: $brand-primary;
+    }
+
+    &--not_supported {
+      color: $gray;
+    }
+
+    &--partial {
+      font-weight: 600;
+    }
+  }
+
+  &__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+// Cells with a note render their mark inside a tooltip button, which resets color
+.otel-compat .tooltip-trigger.otel-compat__mark--supported {
+  color: $brand-primary;
+}
+
+// Override the site's boxed definition-list styles for the header fields
+.otel-compat .otel-compat__fields {
+  border: 0;
+  font-size: inherit;
+  line-height: inherit;
+
+  dt,
+  dd,
+  dd:last-of-type {
+    padding: 0;
+  }
+}

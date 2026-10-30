@@ -108,3 +108,112 @@ that relies on it.
 Hugo reads its own copy of this data at `hugo/config/_default/params.yaml` under
 `unsupported_sites`. The two are kept in step by an equivalence test in
 `astro/src/config/`. Delete that test when Hugo reads this file directly.
+
+## `otel_compatibility.yaml`
+
+Which Datadog features each OpenTelemetry setup supports. A setup is one SDK
+plus one receiver (the component the SDK sends to). The `otel-compatibility`
+Hugo shortcode renders it on `/opentelemetry/compatibility/`. Hugo mounts this
+file as `site.Data.otel_compatibility`. Astro does not read it yet, and there is
+no Zod schema for it yet. The Hugo shortcode stops the build on an unknown ID or
+support value.
+
+### Top-level keys
+
+| Key         | Meaning                                                  |
+| ----------- | -------------------------------------------------------- |
+| `sdks`      | SDKs, in display order                                   |
+| `receivers` | Receivers, in display order                              |
+| `pairs`     | Valid SDK and receiver combinations, in display order    |
+| `features`  | One entry per Datadog feature, in table-row order        |
+
+### `sdks` and `receivers`
+
+| Field         | Required | Meaning                                                                       |
+| ------------- | -------- | ----------------------------------------------------------------------------- |
+| `id`          | yes      | Key used everywhere else in the file                                          |
+| `label`       | yes      | Display name                                                                  |
+| `description` | yes      | One sentence about what it is, shown on hover in the column headers           |
+
+### `pairs`
+
+| Field         | Required | Meaning                                                              |
+| ------------- | -------- | -------------------------------------------------------------------- |
+| `sdk`         | yes      | An SDK `id`                                                          |
+| `receiver`    | yes      | A receiver `id`                                                      |
+| `name`        | no       | Short name shown above the pair, such as `DDOT`                      |
+| `recommended` | no       | `true` marks a recommended setup. The first two are compared by default. |
+| `link`        | no       | Setup guide for this pair                                            |
+| `confirmed`   | no       | `false` means the pair may not work. The picker offers it, but the full table leaves it out. |
+
+A pair that isn't listed is disabled in the setup picker.
+
+### `features`
+
+| Field            | Required | Meaning                                                            |
+| ---------------- | -------- | ------------------------------------------------------------------ |
+| `id`             | yes      | Unique key                                                         |
+| `label`          | yes      | Feature name                                                       |
+| `abbr`           | no       | Abbreviation shown after the name, such as `DBM`                   |
+| `link`           | no       | Feature docs                                                       |
+| `requires_agent` | no       | `true` shows an "Agent required" marker on the row. Set it only when the docs state it. |
+| `sdk`            | no       | Map of SDK `id` to a support value                                 |
+| `receiver`       | no       | Map of receiver `id` to a support value                            |
+| `overrides`      | no       | List of exact-pair values that replace the computed value          |
+
+A **support value** is one of `supported`, `partial`, `not_supported`, or
+`unknown`. An SDK or receiver that a feature doesn't list is `unknown`. An
+`unknown` cell renders blank, which means not yet documented. Don't
+write `yes` or `no`: YAML reads them as booleans, and the build fails.
+
+Notes accept Markdown, so a note can link to another page. HTML in a note shows as
+plain text. In compare view,
+notes show as text under the cell; in the full table they show on hover.
+
+To add a note or a short cell label, use a map instead of a single word:
+
+```yaml
+receiver:
+  otlp_intake:
+    support: partial
+    label: Sampled          # shown in the cell instead of "Partial"
+    note: Calculated from spans that reach Datadog.   # shown on hover and focus
+```
+
+An override names one pair:
+
+```yaml
+overrides:
+  - sdk: ddot_sdk
+    receiver: upstream_collector
+    support: partial
+    note: Java and .NET only.
+```
+
+### How a cell gets its value
+
+1. If an override matches the pair, use it.
+2. Otherwise, if the SDK value or the receiver value is `unknown`, the cell is
+   blank.
+3. Otherwise, use the lower of the two, in this order:
+   `not_supported` < `partial` < `supported`.
+
+Rule 2 keeps a cell blank until both sides are documented, so the file never
+claims more than the docs state. When a feature's support depends on the
+combination rather than on either part, add an override instead of changing
+an SDK or receiver value.
+
+The cell shows the `label` and `note` of the side that decided the value. When
+both sides have the same value, it shows both notes.
+
+### Add a feature
+
+Add an entry under `features` where you want the row to appear. Give it a
+value for each SDK and receiver you know about. Leave out the ones you don't.
+
+### Add a setup
+
+If the SDK or receiver is new, add it to `sdks` or `receivers` with a
+one-sentence `description`. Then add a
+`pairs` entry, and give each feature a value for the new SDK or receiver.
+Features without a value show a blank cell.

@@ -1,0 +1,39 @@
+{{- /*
+  Resolves one feature for one SDK and receiver pair. See shared/README.md, "How a cell gets its value".
+  Context: dict "feature" <feature entry> "sdk" <SDK id> "receiver" <receiver id>
+  Returns: dict "support" "label" "notes" (a slice of strings)
+*/ -}}
+{{- $rank := dict "not_supported" 0 "partial" 1 "supported" 2 -}}
+{{- $f := .feature -}}
+{{- $sdk := .sdk -}}
+{{- $receiver := .receiver -}}
+{{- $override := false -}}
+{{- range $f.overrides -}}
+  {{- if and (eq .sdk $sdk) (eq .receiver $receiver) -}}
+    {{- $override = . -}}
+  {{- end -}}
+{{- end -}}
+{{- $out := dict -}}
+{{- if $override -}}
+  {{- $o := partial "otel-compatibility/value.html" (dict "v" $override "where" (printf "feature %s, override %s + %s" $f.id $sdk $receiver)) -}}
+  {{- $out = dict "support" $o.support "label" $o.label "notes" (cond (ne $o.note "") (slice $o.note) slice) -}}
+{{- else -}}
+  {{- $s := partial "otel-compatibility/value.html" (dict "v" (index ($f.sdk | default dict) $sdk) "where" (printf "feature %s, sdk %s" $f.id $sdk)) -}}
+  {{- $r := partial "otel-compatibility/value.html" (dict "v" (index ($f.receiver | default dict) $receiver) "where" (printf "feature %s, receiver %s" $f.id $receiver)) -}}
+  {{- $sRank := index $rank $s.support -}}
+  {{- $rRank := index $rank $r.support -}}
+  {{- /* An unknown side means the pair isn't documented, so the cell stays blank */ -}}
+  {{- if or (eq $s.support "unknown") (eq $r.support "unknown") -}}
+    {{- $out = dict "support" "unknown" "label" "" "notes" slice -}}
+  {{- else if lt $sRank $rRank -}}
+    {{- $out = dict "support" $s.support "label" $s.label "notes" (cond (ne $s.note "") (slice $s.note) slice) -}}
+  {{- else if lt $rRank $sRank -}}
+    {{- $out = dict "support" $r.support "label" $r.label "notes" (cond (ne $r.note "") (slice $r.note) slice) -}}
+  {{- else -}}
+    {{- $notes := slice -}}
+    {{- with $s.note }}{{ $notes = $notes | append . }}{{ end -}}
+    {{- with $r.note }}{{ $notes = $notes | append . }}{{ end -}}
+    {{- $out = dict "support" $s.support "label" ($r.label | default $s.label) "notes" $notes -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

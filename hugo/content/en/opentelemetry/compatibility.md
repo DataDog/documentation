@@ -25,32 +25,9 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 ## Feature compatibility
 
-The following table shows which Datadog features each setup supports.
+Compare two setups to see which Datadog features each one supports, or view all setups at once.
 
-**[Placeholder: feature support for DDOT SDK + DDOT Collector, with and without the Datadog Agent]**
-
-| Feature | DDOT SDK + DDOT Collector | Datadog SDK + Agent's Collector | OTel SDK + Agent's Collector | OTel SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
-|---|---|---|---|---|---|
-| [Cloud SIEM][18] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Correlated Traces, Metrics, Logs][19] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Distributed Tracing][27] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Agent Observability][38] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Runtime Metrics][23] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Span Links][25] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Trace Metrics][26] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) | **[Placeholder]** | {{< X >}} | {{< X >}} |  |  |
-| [Infrastructure Host List][30] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| [Cloud Network Monitoring][21] (CNM) | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
-| [Kubernetes Monitoring][20] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | |
-| [Live Container Monitoring][46] | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
-| [Live Processes][16] | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
-| [Universal Service Monitoring][17] (USM) | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
-| [App and API Protection][11] (AAP) | **[Placeholder]** | {{< X >}} | | | |
-| [Continuous Profiler][12] | **[Placeholder]** | {{< X >}} | | | |
-| [Data Observability: Jobs Monitoring][13] (DJM) | **[Placeholder]** | {{< X >}} | | | |
-| [Data Streams Monitoring][15] (DSM) | **[Placeholder]** | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
-| [Real User Monitoring][22] (RUM) | **[Placeholder]** | {{< X >}} | | | |
-| [Source code integration][24] | **[Placeholder]** | {{< X >}} | | | |
+{{< otel-compatibility >}}
 
 
 ## API support
