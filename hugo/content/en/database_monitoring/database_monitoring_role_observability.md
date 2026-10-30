@@ -24,19 +24,18 @@ Role Observability shows who can access your PostgreSQL data and how they got th
 This page explains how to:
 
 - Enable Role Observability for your monitored PostgreSQL databases
-- Explore roles, privileges, and membership relationships in the Datadog UI
+- Query roles, privileges, and membership relationships through the Datadog API or MCP server
 - Investigate who can access a given database, schema, or table
 
 ## Requirements
 
-- A PostgreSQL database monitored by [Database Monitoring][3]. Postgres version `XXX` or later.
+- A PostgreSQL database monitored by [Database Monitoring][3].
 - Datadog Agent version 7.86 or later.
-- The **Database Monitoring Read** permission. See [Role-based access control][1] for how to manage permissions.
 - The feature is in open preview and gated behind a feature flag. To opt in, contact your Datadog account manager or fill out the request form at the top of this page.
 
 ## Access role data
 
-Role Observability data is available through the Datadog API and the [Datadog MCP server][2]. There is no in-product UI during open preview.
+Role Observability data is available through the Datadog API and the [Datadog MCP server][2]. At this time, there is no UI available for this feature.
 
 ### Using the API
 
@@ -92,7 +91,6 @@ Role Observability answers questions about who can access your Postgres data. It
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/rbac/permissions/
 [2]: /mcp_server/
 [3]: /database_monitoring/
 [4]: /mcp_server/setup/
