@@ -179,6 +179,8 @@ The Amazon Bedrock integration instruments the following methods:
   - `Converse`
   - `ConverseStream`
 
+For bidirectional audio conversations with Nova 2 Sonic, see [Monitor Nova 2 Sonic applications with Node.js](/llm_observability/guide/amazon_nova_sonic/).
+
 [1]: /integrations/amazon-bedrock
 [2]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 [3]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
