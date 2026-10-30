@@ -215,6 +215,7 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 - `meta_struct._dd.`
 - `meta_struct.api.endpoint.`
 - `meta_struct.appsec.`
+- `meta_struct.ai_guard`
 - `meta_struct.threat_intel.results.`
 - `meta.otel.trace_id`
 - `meta.otel.library.`
@@ -246,6 +247,11 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 - `meta._dd.error_tracking`
 - `meta.error.fingerprint`
 - `meta.issue`
+- `x-datadog-trace-id`
+- `x-datadog-parent-id`
+- `span_links.span_id`
+- `span_links.trace_id`
+- `span_links.trace_id_high`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
