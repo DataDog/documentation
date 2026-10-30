@@ -1747,7 +1747,7 @@ menu:
         operationids:
           - QueryTimeseriesData
         unstable: []
-        order: 15
+        order: 13
     - name: Query scalar data across multiple products
       url: /api/latest/metrics/query-scalar-data-across-multiple-products/
       identifier: metrics-query-scalar-data-across-multiple-products
@@ -1759,7 +1759,7 @@ menu:
         operationids:
           - QueryScalarData
         unstable: []
-        order: 16
+        order: 14
     - name: List distinct metric volumes by metric name
       url: /api/latest/metrics/list-distinct-metric-volumes-by-metric-name/
       identifier: metrics-list-distinct-metric-volumes-by-metric-name
@@ -1832,7 +1832,7 @@ menu:
           - ListTagIndexingRulesForMetric
         unstable:
           - v2
-        order: 23
+        order: 21
     - name: Update a tag indexing rule exemption
       url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
       identifier: metrics-update-a-tag-indexing-rule-exemption
@@ -1845,7 +1845,7 @@ menu:
           - UpdateTagIndexingRuleExemption
         unstable:
           - v2
-        order: 26
+        order: 24
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
       identifier: metrics-create-a-tag-indexing-rule-exemption
@@ -1858,7 +1858,7 @@ menu:
           - CreateTagIndexingRuleExemption
         unstable:
           - v2
-        order: 25
+        order: 23
     - name: Get a tag indexing rule exemption
       url: /api/latest/metrics/get-a-tag-indexing-rule-exemption/
       identifier: metrics-get-a-tag-indexing-rule-exemption
@@ -1871,7 +1871,7 @@ menu:
           - GetTagIndexingRuleExemption
         unstable:
           - v2
-        order: 24
+        order: 22
     - name: Delete a tag indexing rule exemption
       url: /api/latest/metrics/delete-a-tag-indexing-rule-exemption/
       identifier: metrics-delete-a-tag-indexing-rule-exemption
@@ -1884,7 +1884,7 @@ menu:
           - DeleteTagIndexingRuleExemption
         unstable:
           - v2
-        order: 35
+        order: 33
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
       identifier: metrics-get-tag-key-cardinality-details
@@ -1896,7 +1896,7 @@ menu:
         operationids:
           - GetMetricTagCardinalityDetails
         unstable: []
-        order: 13
+        order: 11
     - name: Tag Configuration Cardinality Estimator
       url: /api/latest/metrics/tag-configuration-cardinality-estimator/
       identifier: metrics-tag-configuration-cardinality-estimator
@@ -1908,7 +1908,7 @@ menu:
         operationids:
           - EstimateMetricsOutputSeries
         unstable: []
-        order: 11
+        order: 9
     - name: Related Assets to a Metric
       url: /api/latest/metrics/related-assets-to-a-metric/
       identifier: metrics-related-assets-to-a-metric
@@ -1920,7 +1920,7 @@ menu:
         operationids:
           - ListMetricAssets
         unstable: []
-        order: 12
+        order: 10
     - name: List tags by metric name
       url: /api/latest/metrics/list-tags-by-metric-name/
       identifier: metrics-list-tags-by-metric-name
@@ -1957,7 +1957,7 @@ menu:
           - UpdateTagIndexingRule
         unstable:
           - v2
-        order: 21
+        order: 19
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
       identifier: metrics-get-a-tag-indexing-rule
@@ -1970,7 +1970,7 @@ menu:
           - GetTagIndexingRule
         unstable:
           - v2
-        order: 20
+        order: 18
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
       identifier: metrics-delete-a-tag-indexing-rule
@@ -1983,7 +1983,7 @@ menu:
           - DeleteTagIndexingRule
         unstable:
           - v2
-        order: 22
+        order: 20
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
       identifier: metrics-reorder-tag-indexing-rules
@@ -1996,7 +1996,7 @@ menu:
           - ReorderTagIndexingRules
         unstable:
           - v2
-        order: 19
+        order: 17
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
       identifier: metrics-create-a-tag-indexing-rule
@@ -2009,7 +2009,7 @@ menu:
           - CreateTagIndexingRule
         unstable:
           - v2
-        order: 18
+        order: 16
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
       identifier: metrics-list-tag-indexing-rules
@@ -2022,7 +2022,7 @@ menu:
           - ListTagIndexingRules
         unstable:
           - v2
-        order: 17
+        order: 15
     - name: List tag indexing rule exemptions
       url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
       identifier: metrics-list-tag-indexing-rule-exemptions
@@ -2035,7 +2035,7 @@ menu:
           - ListTagIndexingRuleExemptions
         unstable:
           - v2
-        order: 34
+        order: 32
     - name: Get a historical metrics configuration
       url: /api/latest/metrics/get-a-historical-metrics-configuration/
       identifier: metrics-get-a-historical-metrics-configuration
@@ -2048,7 +2048,7 @@ menu:
           - GetHistoricalMetricsConfiguration
         unstable:
           - v2
-        order: 28
+        order: 26
     - name: Delete a historical metrics configuration
       url: /api/latest/metrics/delete-a-historical-metrics-configuration/
       identifier: metrics-delete-a-historical-metrics-configuration
@@ -2061,7 +2061,7 @@ menu:
           - DeleteHistoricalMetricsConfiguration
         unstable:
           - v2
-        order: 29
+        order: 27
     - name: Enable historical metrics ingestion
       url: /api/latest/metrics/enable-historical-metrics-ingestion/
       identifier: metrics-enable-historical-metrics-ingestion
@@ -2074,7 +2074,7 @@ menu:
           - CreateHistoricalMetricsConfiguration
         unstable:
           - v2
-        order: 27
+        order: 25
     - name: Update a derived metric
       url: /api/latest/metrics/update-a-derived-metric/
       identifier: metrics-update-a-derived-metric
@@ -2086,7 +2086,7 @@ menu:
         operationids:
           - UpdateDerivedMetric
         unstable: []
-        order: 32
+        order: 30
     - name: Get a derived metric
       url: /api/latest/metrics/get-a-derived-metric/
       identifier: metrics-get-a-derived-metric
@@ -2098,7 +2098,7 @@ menu:
         operationids:
           - GetDerivedMetric
         unstable: []
-        order: 31
+        order: 29
     - name: Delete a derived metric
       url: /api/latest/metrics/delete-a-derived-metric/
       identifier: metrics-delete-a-derived-metric
@@ -2110,7 +2110,7 @@ menu:
         operationids:
           - DeleteDerivedMetric
         unstable: []
-        order: 33
+        order: 31
     - name: Create a derived metric
       url: /api/latest/metrics/create-a-derived-metric/
       identifier: metrics-create-a-derived-metric
@@ -2122,31 +2122,7 @@ menu:
         operationids:
           - CreateDerivedMetric
         unstable: []
-        order: 30
-    - name: Configure tags for multiple metrics
-      url: /api/latest/metrics/configure-tags-for-multiple-metrics/
-      identifier: metrics-configure-tags-for-multiple-metrics
-      parent: metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateBulkTagsMetricsConfiguration
-        unstable: []
-        order: 9
-    - name: Delete tags for multiple metrics
-      url: /api/latest/metrics/delete-tags-for-multiple-metrics/
-      identifier: metrics-delete-tags-for-multiple-metrics
-      parent: metrics
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteBulkTagsMetricsConfiguration
-        unstable: []
-        order: 10
+        order: 28
     - name: Get a list of metrics
       url: /api/latest/metrics/get-a-list-of-metrics/
       identifier: metrics-get-a-list-of-metrics
@@ -3416,8 +3392,7 @@ menu:
           - v2
         operationids:
           - GetRuleVersionHistory
-        unstable:
-          - v2
+        unstable: []
         order: 86
     - name: Test an existing rule
       url: /api/latest/security-monitoring/test-an-existing-rule/
@@ -3441,8 +3416,7 @@ menu:
           - v2
         operationids:
           - RestoreSecurityMonitoringRule
-        unstable:
-          - v2
+        unstable: []
         order: 133
     - name: Convert an existing rule from JSON to Terraform
       url: /api/latest/security-monitoring/convert-an-existing-rule-from-json-to-terraform/
@@ -3516,6 +3490,32 @@ menu:
           - TestSecurityMonitoringRule
         unstable: []
         order: 79
+    - name: Get a rule proposal
+      url: /api/latest/security-monitoring/get-a-rule-proposal/
+      identifier: security-monitoring-get-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 189
+    - name: Start a rule proposal
+      url: /api/latest/security-monitoring/start-a-rule-proposal/
+      identifier: security-monitoring-start-a-rule-proposal
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartSecurityMonitoringRuleProposal
+        unstable:
+          - v2
+        order: 188
     - name: Bulk convert rules to Terraform
       url: /api/latest/security-monitoring/bulk-convert-rules-to-terraform/
       identifier: security-monitoring-bulk-convert-rules-to-terraform
@@ -6655,6 +6655,58 @@ menu:
           - GetUsageAttributionTypes
         unstable: []
         order: 10
+    - name: Get your temporary grant request
+      url: /api/latest/usage-metering/get-your-temporary-grant-request/
+      identifier: usage-metering-get-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMyTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 21
+    - name: Cancel your temporary grant request
+      url: /api/latest/usage-metering/cancel-your-temporary-grant-request/
+      identifier: usage-metering-cancel-your-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 22
+    - name: Create a temporary grant request
+      url: /api/latest/usage-metering/create-a-temporary-grant-request/
+      identifier: usage-metering-create-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 19
+    - name: List your temporary grant requests
+      url: /api/latest/usage-metering/list-your-temporary-grant-requests/
+      identifier: usage-metering-list-your-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMyTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 20
     - name: Get available fields for usage summary
       url: /api/latest/usage-metering/get-available-fields-for-usage-summary/
       identifier: usage-metering-get-available-fields-for-usage-summary
@@ -6840,6 +6892,58 @@ menu:
           - GetUsageApplicationSecurityMonitoring
         unstable: []
         order: 2
+    - name: Revoke a requested temporary grant
+      url: /api/latest/usage-metering/revoke-a-requested-temporary-grant/
+      identifier: usage-metering-revoke-a-requested-temporary-grant
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRequestedTemporaryGrant
+        unstable:
+          - v2
+        order: 26
+    - name: Decide a temporary grant request
+      url: /api/latest/usage-metering/decide-a-temporary-grant-request/
+      identifier: usage-metering-decide-a-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 25
+    - name: Get an organization temporary grant request
+      url: /api/latest/usage-metering/get-an-organization-temporary-grant-request/
+      identifier: usage-metering-get-an-organization-temporary-grant-request
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporaryGrantRequest
+        unstable:
+          - v2
+        order: 24
+    - name: List organization temporary grant requests
+      url: /api/latest/usage-metering/list-organization-temporary-grant-requests/
+      identifier: usage-metering-list-organization-temporary-grant-requests
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporaryGrantRequests
+        unstable:
+          - v2
+        order: 23
     - name: Get Monthly Cost Attribution
       url: /api/latest/usage-metering/get-monthly-cost-attribution/
       identifier: usage-metering-get-monthly-cost-attribution
@@ -7658,6 +7762,23 @@ menu:
           - CreateWebhooksIntegrationCustomVariable
         unstable: []
         order: 5
+    - name: AI Guard
+      url: /api/latest/ai-guard/
+      identifier: ai-guard
+      generated: true
+    - name: Evaluate an AI Guard request
+      url: /api/latest/ai-guard/evaluate-an-ai-guard-request/
+      identifier: ai-guard-evaluate-an-ai-guard-request
+      parent: ai-guard
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EvaluateAIGuardRequest
+        unstable:
+          - v2
+        order: 1
     - name: API Management
       url: /api/latest/api-management/
       identifier: api-management
@@ -11747,6 +11868,58 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Get an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 14
+    - name: Delete an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/delete-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-delete-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 16
+    - name: Create an AWS cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/create-an-aws-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-create-an-aws-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 15
+    - name: List AWS cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-aws-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-aws-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAWSCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 13
     - name: Cloud Cost Management
       url: /api/latest/cloud-cost-management/
       identifier: cloud-cost-management
@@ -18810,6 +18983,42 @@ menu:
           - ListOnCallSchedules
         unstable: []
         order: 24
+    - name: Get On-Call Page
+      url: /api/latest/on-call/get-on-call-page/
+      identifier: on-call-get-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallPage
+        unstable: []
+        order: 29
+    - name: Create On-Call Page
+      url: /api/latest/on-call/create-on-call-page/
+      identifier: on-call-create-on-call-page
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPage
+        unstable: []
+        order: 1
+    - name: List On-Call Pages
+      url: /api/latest/on-call/list-on-call-pages/
+      identifier: on-call-list-on-call-pages
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallPages
+        unstable: []
+        order: 28
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -18922,18 +19131,6 @@ menu:
           - AcknowledgeOnCallPage
         unstable: []
         order: 2
-    - name: Create On-Call Page
-      url: /api/latest/on-call-paging/create-on-call-page/
-      identifier: on-call-paging-create-on-call-page
-      parent: on-call-paging
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateOnCallPage
-        unstable: []
-        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import styles from "./Footer.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { setLangPrefCookie } from "@lib/i18n/langPrefCookie";
 
 const cl = classListFactory(styles);
 
@@ -25,8 +26,8 @@ interface Props {
 
 /**
  * Footer language toggle. Opens a popup listing the current language and all
- * alternates. Each link sets `?lang_pref=<code>` so Hugo (or the Astro
- * equivalent later) can remember the choice across sites. With only one
+ * alternates. Clicking a link writes the `lang_pref` cookie so Hugo
+ * remembers the choice when the reader navigates back. With only one
  * language configured, the popup just shows the current language — no
  * functional change, just visible parity with Hugo.
  */
@@ -90,14 +91,22 @@ export default function LanguageSelector({
         role="listbox"
         hidden={!open}
       >
-        <a class={cl("footer__lang-item")} href={currentLang.href}>
+        <a
+          class={cl("footer__lang-item")}
+          href={currentLang.href}
+          onClick={() => setLangPrefCookie(currentLang.code)}
+        >
           <div class={cl("footer__lang-primary")}>{currentLang.primary}</div>
           <div class={cl("footer__lang-secondary")}>
             {currentLang.secondary}
           </div>
         </a>
         {alternates.map((opt) => (
-          <a class={cl("footer__lang-item")} href={opt.href}>
+          <a
+            class={cl("footer__lang-item")}
+            href={opt.href}
+            onClick={() => setLangPrefCookie(opt.code)}
+          >
             <div class={cl("footer__lang-primary")}>{opt.primary}</div>
             <div class={cl("footer__lang-secondary")}>{opt.secondary}</div>
           </a>

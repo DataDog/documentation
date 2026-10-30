@@ -247,6 +247,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "EvaluateAIGuardRequest": {
+    "description": "Analyzes a conversation for security threats such as prompt injection,\njailbreak attempts, and other AI-specific attacks. Returns an action\nrecommendation (`ALLOW`, `DENY`, or `ABORT`) along with the detected threat\ntags and their confidence scores.\nAI Guard must be activated for the organization, and the calling user or\napplication key requires the `ai_guard_evaluate` permission. The action is a\nrecommendation for the caller to enforce: ALLOW permits the interaction,\nDENY blocks the interaction, and ABORT terminates the workflow.\nThis endpoint is rate limited to `700` requests per minute per organization.\nOrganization token limits can also result in a 429 response.\nMalformed messages return a 400 response. Requests exceeding the raw-input\nlimit of 1,000,000 tokens return a 413 response; this limit applies to the\ninput context, not only the size of the HTTP request body.",
+    "summary": "Evaluate an AI Guard request",
+    "request_description": "The conversation to evaluate for security threats.",
+    "request_schema_description": "The request to evaluate a conversation for security threats."
+  },
   "CreateAIImpactUserActivity": {
     "description": "Send daily AI coding tool activity for one or more users. Each entry records whether a\nuser was active on a given day, along with the AI tools and models they used. An entry\nis stored once per tool, and sending the same user, day, and tool again overwrites the\nprevious value.",
     "summary": "Send AI tool user activity",
@@ -1140,7 +1146,7 @@
     "summary": "Get all Container Images"
   },
   "ListContainers": {
-    "description": "Get all containers for your organization.",
+    "description": "Get all containers for your organization. Use `group_by` to return container groups with counts.\nGrouped results are limited by `page[size]` and do not support pagination.\n\nTo get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`\nor `/api/v2/query/timeseries`.",
     "summary": "Get All Containers"
   },
   "GetCostAccountFilters": {
@@ -2298,7 +2304,7 @@
     "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
     "summary": "Add a variant to a feature flag",
     "request_description": "",
-    "request_schema_description": "Request to create a variant."
+    "request_schema_description": "Request to add a variant to a feature flag."
   },
   "DeleteVariantFromFeatureFlag": {
     "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
@@ -4323,18 +4329,6 @@
     "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
     "summary": "Get a list of metrics"
   },
-  "DeleteBulkTagsMetricsConfiguration": {
-    "description": "**Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.\n\nDelete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Delete tags for multiple metrics",
-    "request_description": "",
-    "request_schema_description": "Wrapper object for a single bulk tag deletion request."
-  },
-  "CreateBulkTagsMetricsConfiguration": {
-    "description": "**Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.\n\nCreate and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls. The `exclude_tags_mode` value will set all metrics that match the prefix to\nthe same exclusion state, metric tag configurations do not support mixed inclusion and exclusion for tags on the same metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Configure tags for multiple metrics",
-    "request_description": "",
-    "request_schema_description": "Wrapper object for a single bulk tag configuration request."
-  },
   "CreateDerivedMetric": {
     "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Create a derived metric",
@@ -4745,11 +4739,19 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "ListOnCallPages": {
+    "description": "Retrieve a paginated list of On-Call Pages, optionally filtered by a search query and sorted by a field.",
+    "summary": "List On-Call Pages"
+  },
   "CreateOnCallPage": {
     "description": "Trigger a new On-Call Page.",
     "summary": "Create On-Call Page",
     "request_description": "",
     "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "GetOnCallPage": {
+    "description": "Get the details of an On-Call Page.",
+    "summary": "Get On-Call Page"
   },
   "AcknowledgeOnCallPage": {
     "description": "Acknowledges an On-Call Page.",
@@ -6500,7 +6502,7 @@
     "summary": "List batch migrations"
   },
   "CreateSecurityMonitoringBatchMigration": {
-    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.\nAlternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.",
     "summary": "Create a batch migration",
     "request_description": "",
     "request_schema_description": "Request to create a batch migration."
@@ -6828,6 +6830,16 @@
     "summary": "Bulk convert rules to Terraform",
     "request_description": "",
     "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
+  },
+  "StartSecurityMonitoringRuleProposal": {
+    "description": "Start generating a proposed Cloud SIEM detection rule from a natural-language\ndescription, or from an SPL or KQL rule. The proposal is based on your organization's\nlog sources, log fields, and existing detection rules. When logs from the matching\nsource are available, the proposed query is tested against your recent logs.\n\nThe proposed rule is generated asynchronously. This endpoint returns a proposal `id`\nwith the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal\nendpoint and poll the endpoint until the status is `completed` or `failed`. A proposal\nusually takes a few minutes, and up to 10 minutes.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To translate\nmany rules at once, use batch migrations instead.",
+    "summary": "Start a rule proposal",
+    "request_description": "",
+    "request_schema_description": "Request to start a rule proposal."
+  },
+  "GetSecurityMonitoringRuleProposal": {
+    "description": "Get the status of a rule proposal started with the start-a-rule-proposal endpoint.\nWhile the status is `pending` or `in_progress`, the proposed rule is still being\ngenerated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains\nthe proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains\nthe reason a rule could not be generated.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To create the\nproposed rule, use the create-a-detection-rule endpoint.",
+    "summary": "Get a rule proposal"
   },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
@@ -7192,7 +7204,7 @@
     "summary": "Restore source maps"
   },
   "GetServiceRepositoryInfo": {
-    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "description": "Returns the repository URL and commit SHA associated with a debug ID or a given service and version.\nProvide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.",
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
@@ -7974,6 +7986,24 @@
     "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
   },
+  "ListTemporaryGrantRequests": {
+    "description": "List all request statuses within the authenticated organization. Filter by pending status for the review queue. Requires Billing Edit, including for reads. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "List organization temporary grant requests"
+  },
+  "GetTemporaryGrantRequest": {
+    "description": "Read an organization request, justification, decision, and linked grant state. Requires Billing Edit. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get an organization temporary grant request"
+  },
+  "UpdateTemporaryGrantRequest": {
+    "description": "Approve or deny the submitted terms, which are immutable. Approval atomically writes the grant, audit record, and request decision. An expired request can't be approved. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Decide a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Approve or deny a pending request."
+  },
+  "DeleteRequestedTemporaryGrant": {
+    "description": "Revoke only the grant that's still associated with this approved request. The request and audit history remain. A stale request can't revoke a replacement grant. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Revoke a requested temporary grant"
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"
@@ -8037,6 +8067,24 @@
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
+  },
+  "ListMyTemporaryGrantRequests": {
+    "description": "List the authenticated user's own requests, including decided requests. Other users' requests are never included. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "List your temporary grant requests"
+  },
+  "CreateTemporaryGrantRequest": {
+    "description": "Request a temporary increase to your monthly AI credit limit. Set `total` to the new monthly limit you need, in whole credits, not the number of credits to add. Include a justification and, optionally, an expiry. If you omit the expiry, the grant ends at the next UTC month boundary. A user with the Billing Edit permission approves or denies the request. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Create a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Create a request for the authenticated human user."
+  },
+  "DeleteTemporaryGrantRequest": {
+    "description": "Cancel a pending request that you own. The request history is kept, and no grant is created or revoked. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Cancel your temporary grant request"
+  },
+  "GetMyTemporaryGrantRequest": {
+    "description": "Read an owned request, its decision, and its linked grant state. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get your temporary grant request"
   },
   "GetUsageAttributionTypes": {
     "description": "Get usage attribution types.",
@@ -8149,6 +8197,24 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAWSCloudAuthIntakeMappings": {
+    "description": "List AWS cloud authentication intake mappings configured for the organization.",
+    "summary": "List AWS cloud authentication intake mappings"
+  },
+  "CreateAWSCloudAuthIntakeMapping": {
+    "description": "Create an AWS cloud authentication intake mapping to authorize an AWS ARN pattern for Agent authentication. The AWS account must already be integrated with Datadog, and managed API key rotation must be enabled for the organization. Patterns that conflict with existing intake or persona mappings are rejected.",
+    "summary": "Create an AWS cloud authentication intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication intake mapping."
+  },
+  "DeleteAWSCloudAuthIntakeMapping": {
+    "description": "Delete an AWS cloud authentication intake mapping by ID.",
+    "summary": "Delete an AWS cloud authentication intake mapping"
+  },
+  "GetAWSCloudAuthIntakeMapping": {
+    "description": "Get an AWS cloud authentication intake mapping by ID.",
+    "summary": "Get an AWS cloud authentication intake mapping"
   },
   "ListAWSCloudAuthPersonaMappings": {
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",

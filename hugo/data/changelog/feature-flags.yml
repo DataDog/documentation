@@ -29,3 +29,11 @@ entries:
     operations:
       - UpdateFeatureFlag
     title: Document tags field on update feature flag endpoint
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41165
+    operations:
+      - CreateFeatureFlag
+      - CreateVariantForFeatureFlag
+      - UpdateVariantForFeatureFlag
+    title: Fix Feature Flags variant request and response schemas
