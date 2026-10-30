@@ -151,8 +151,8 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][8
 [1]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [2]: /incident_response/incident_management/setup_and_configuration/templates
 [3]: /incident_response/incident_management/post_incident/postmortems
-[4]: /integrations/zoom-incident-management/#meeting-summaries
-[5]: /integrations/google-meet-incident-management/#meeting-summaries
+[4]: /incident_response/incident_management/setup_and_configuration/integrations/zoom_integration/#meeting-summaries
+[5]: /incident_response/incident_management/setup_and_configuration/integrations/google_meet/#meeting-summaries
 [6]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
 [7]: /account_management/billing/incident_response/#allocate-seats
 [8]: /bits_ai/bits_investigation
