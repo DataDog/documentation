@@ -166,6 +166,18 @@ To manage metric name filters programmatically, see [Configure AWS metric name f
 
 Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you can control the AWS regions where Datadog collects metrics, CloudWatch events, and resources.
 
+### Monitor service quotas
+
+[AWS service quotas][62] cap how much of a service an account can use in a region. Service quota monitoring reports how much of each quota an account is consuming in the metric `aws.servicequota.percentage_used`, so you can alert before a quota is reached instead of after a request is throttled or rejected.
+
+Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], select an account and enable {{< ui >}}Enable service quota tracking{{< /ui >}}. The toggle is unavailable until resource collection is enabled for that account.
+
+<div class="alert alert-info">
+Service quota monitoring calls the CloudWatch <code>GetMetricData</code> API every 30 minutes in each enabled region. AWS bills these calls to your account.
+</div>
+
+For the services covered, the tags available, and how to query the applied quota limits, see [Monitor AWS service quotas][63].
+
 ## Send logs
 
 There are two ways to send AWS service logs to Datadog:
@@ -318,3 +330,5 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
 [61]: /integrations/guide/aws-metric-name-filters/
+[62]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+[63]: /integrations/guide/aws-service-quotas/
