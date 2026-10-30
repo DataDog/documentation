@@ -12,6 +12,7 @@ further_reading:
 
 {{< whatsnext desc="Guides:" >}}
    {{< nextlink href="data_observability/quality_monitoring/guides/anomaly_detection" >}}Anomaly Detection for Data Observability Monitors{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/guides/aastra_query_syntax" >}}Aastra Query Syntax{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
