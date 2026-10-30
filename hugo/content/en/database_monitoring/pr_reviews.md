@@ -89,7 +89,7 @@ FROM orders
 WHERE customer_id = $1;
 {{< /code-block >}}
 
-After the migration runs, this query fails because `orders.legacy_status` no longer exists. Datadog comments on the `DROP COLUMN` line and lists the queries that still read `orders.legacy_status`, with execution counts, when each query was last seen, and links to Database Monitoring. If more than four queries are affected, the comment lists the three with the most impact and summarizes the rest.
+The query fails after the migration runs, because `orders.legacy_status` no longer exists. Datadog comments on the `DROP COLUMN` line and lists the queries that still read `orders.legacy_status`, with execution counts, when each query was last seen, and links to Database Monitoring. If more than four queries are affected, the comment lists the three with the most impact and summarizes the rest.
 
 {{< img src="database_monitoring/pr_reviews/schema-change-comment.png" alt="A Datadog comment on a migration that drops the order_item.quantity column, listing the affected queries with execution counts, when each was last seen, and Workbench results" style="width:100%;" >}}
 
