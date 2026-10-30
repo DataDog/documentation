@@ -385,14 +385,11 @@ The command requires a Bash-compatible shell, such as the default shell on macOS
 
     The command prints the estimated number of committers.
 
-The command's result is an estimate. Your billed committer count can differ because:
+The command's result is an estimate. It differs from billing in the following ways:
 
-- Billing uses calendar months, not a rolling 30-day window.
-- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once. The command cannot detect this mapping, so your billed count can be lower than the estimate.
-- The command counts commits across all repositories in the directory. Billing applies the three-commit threshold separately for each Code Security product (SAST, SCA, Secret Scanning, IaC Security), using only the repositories where that product is enabled.
-- Billing counts a commit in the month that Datadog scans it. The command uses the commit date, so commits made near the start or end of a month can fall in a different period.
-
-To estimate committers for one product, run the command in a directory that contains only the repositories where you plan to enable that product.
+- The command uses a rolling 30-day window and commit dates. Billing uses calendar months and counts each commit in the month that Datadog scans it.
+- The command counts each email address separately. For GitHub repositories with the Datadog GitHub App installed, billing counts multiple emails that belong to the same developer once, so your billed count can be lower than the estimate.
+- The command counts commits across all repositories in the directory. Billing counts committers separately for each Code Security product. To estimate committers for one product, run the command in a directory that contains only the repositories where you plan to enable that product.
 
 After you enable Code Security, you can track your month-to-date committer count for each product with the [estimated usage metrics][33].
 
