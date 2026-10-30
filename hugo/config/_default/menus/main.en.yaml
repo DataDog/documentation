@@ -8120,6 +8120,16 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
       weight: 102
+    - name: Ingest TAXII Threat Intelligence
+      url: security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_taxii_threat_intelligence
+      weight: 10201
+    - name: Ingest STIX Threat Intelligence
+      url: security/cloud_siem/ingest_and_enrich/stix_threat_intelligence
+      parent: cloud_siem_threat_intelligence
+      identifier: cloud_siem_stix_threat_intelligence
+      weight: 10202
     - name: Muted Indicators
       url: security/cloud_siem/ingest_and_enrich/muted_indicators
       parent: cloud_siem_ingest_and_enrich
