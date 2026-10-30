@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
+Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. To query these logs with [Archive Search][16], [enable Archive Search](#archive-search) on the destination. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
 **Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
 
@@ -84,6 +84,8 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 ### Connect the S3 bucket to Datadog Log Archives
 
+If you [enable Archive Search](#archive-search) on the destination, skip this section. You still need it if the prefix uses template syntax, or if you manage the pipeline with the [API][14] or [Terraform][15].
+
 1. Navigate to Datadog [Log Forwarding][17].
 1. Click **New archive**.
 1. Enter a descriptive archive name.
@@ -144,6 +146,14 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 {{% observability_pipelines/destination_buffer %}}
 
+#### Archive Search
+
+To search these logs with [Archive Search][16], turn on {{< ui >}}Enable for Archive Search{{< /ui >}} and select the AWS account Datadog uses to [read the bucket][19]. Datadog creates the Log Archive after you deploy the pipeline.
+
+**Notes**:
+- Archive Search does not support prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
+- If you turn off Archive Search or delete the destination, Datadog keeps the Log Archive, and the logs already in it stay searchable.
+
 ### Example destination and log archive setup
 
 If you enter the following values for your Datadog Archives destination:
@@ -167,7 +177,7 @@ When you set up the Datadog Archives destination (Amazon S3), you can use [templ
 
 {{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
-However, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
+Because you can't [enable Archive Search](#archive-search) with a templated prefix, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
 
@@ -238,3 +248,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [16]: /logs/explorer/archive_search/
 [17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
+[19]: /logs/explorer/archive_search/?tab=amazons3#cloud-specific-permissions

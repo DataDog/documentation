@@ -453,6 +453,12 @@ After that, if the archive is still in a pending state, check your inclusion fil
 
 Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][15]. You can create a monitor for these events to detect and remediate failures quickly.
 
+## Observability Pipelines archives
+
+When you enable Archive Search on an Observability Pipelines archive destination, Datadog creates the Log Archive for you. See [Amazon S3][20], [Google Cloud Storage][21], or [Azure Storage][22]. These archives are listed on a separate tab of the [Log Archiving & Forwarding page][3].
+
+Their bucket configuration is managed in Observability Pipelines. In Datadog, you can edit their permissions, tags, and [maximum scan size](#define-maximum-scan-size). Partition and lookup attributes are not supported.
+
 ## Multiple archives
 
 If multiple archives are defined, logs enter the first archive based on filter.
@@ -499,5 +505,8 @@ This directory structure simplifies the process of querying your historical log 
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 [19]: /logs/explorer/search_syntax/#reserved-attributes
+[20]: /observability_pipelines/destinations/datadog_archives/#archive-search
+[21]: /observability_pipelines/destinations/google_cloud_storage/#archive-search
+[22]: /observability_pipelines/destinations/azure_storage/#archive-search
 
 

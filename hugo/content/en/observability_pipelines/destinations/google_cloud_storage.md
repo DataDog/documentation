@@ -14,7 +14,7 @@ products:
 
 <div class="alert alert-info">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
-Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][21]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
+Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). To query these logs with [Archive Search][21], [enable Archive Search](#archive-search) on the destination. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][6] for more information about choosing the authentication method for your use case.
 
@@ -43,6 +43,8 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 1. Follow these [instructions][18] to create a service account key. Choose `json` for the key type.
 
 ### Connect the storage bucket to Datadog Log Archives
+
+If you [enable Archive Search](#archive-search) on the destination, skip this section. You still need it if the prefix uses template syntax, or if you manage the pipeline with the [API][11] or [Terraform][12].
 
 1. Navigate to Datadog [Log Forwarding][19].
 1. Click **New archive**.
@@ -97,13 +99,21 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
+#### Archive Search
+
+To search these logs with [Archive Search][21], turn on {{< ui >}}Enable for Archive Search{{< /ui >}} and select the service account Datadog uses to [read the bucket][22]. Datadog creates the Log Archive after you deploy the pipeline.
+
+**Notes**:
+- Archive Search does not support prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
+- If you turn off Archive Search or delete the destination, Datadog keeps the Log Archive, and the logs already in it stay searchable.
+
 ## Using template syntax for dynamic partitioning
 
 When you set up Google Cloud Storage destination, you can use [template syntax][7] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
-However, you must manually create a Datadog [Log Archive][19] for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
+Because you can't [enable Archive Search](#archive-search) with a templated prefix, you must manually create a Datadog [Log Archive][19] for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
 
@@ -162,3 +172,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [19]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [20]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [21]: /logs/explorer/archive_search/
+[22]: /logs/explorer/archive_search/?tab=googlecloudstorage#cloud-specific-permissions
