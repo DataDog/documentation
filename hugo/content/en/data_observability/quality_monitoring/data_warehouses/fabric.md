@@ -81,21 +81,21 @@ You can also assign the role to a Microsoft Entra security group that contains t
 1. In Datadog, go to {{< ui >}}Datadog Data Observability{{< /ui >}} > [{{< ui >}}Settings{{< /ui >}}][4].
 2. In the {{< ui >}}Microsoft Fabric Warehouse{{< /ui >}} section, click {{< ui >}}Configure{{< /ui >}}.
 
-   {{< img src="data_observability/fabric/data_obs_fabric_on_integrations_page.png" alt="Microsoft Fabric Warehouse on the Settings page of Data Observability integrations" style="width:100%;" >}}
+   {{< img src="data_observability/fabric/data_obs_fabric_on_integrations_page.png" alt="The Microsoft Fabric Warehouse row on the Data Observability Settings page, with a Configure button." style="width:100%;" >}}
 
    If the section shows {{< ui >}}Install Azure integration{{< /ui >}}, configure the [Datadog Azure integration][2] with an app registration first.
 
 3. Select the app registration that you added to your workspaces, and click {{< ui >}}Configure{{< /ui >}}.
 
-   {{< img src="data_observability/fabric/data_obs_fabric_select_app_registration.png" alt="Selecting an Azure app registration for the Microsoft Fabric Warehouse Data Observability integration" style="width:100%;" >}}
+   {{< img src="data_observability/fabric/data_obs_fabric_select_app_registration.png" alt="The list of Azure app registrations for Microsoft Fabric Warehouse, with a Configure button for each." style="width:100%;" >}}
 
 4. Turn on {{< ui >}}Monitor Fabric Warehouses{{< /ui >}}.
 5. Optionally, add {{< ui >}}Warehouse filters{{< /ui >}}. Leave the field empty to monitor every warehouse the app registration can access, or enter one filter per warehouse:
    - `<WAREHOUSE_NAME>`: Matches a warehouse with this name in any workspace.
    - `<WORKSPACE_ID>/<WAREHOUSE_NAME>`: Matches a warehouse in one workspace. The workspace ID appears in the workspace URL after `/groups/`.
-6. If the app registration has the Contributor role, turn on {{< ui >}}Collect query history{{< /ui >}}.
+6. Optionally, turn on {{< ui >}}Collect query history{{< /ui >}} to collect query history from Query Insights for lineage and query analysis. This option requires the Contributor role or higher.
 
-   {{< img src="data_observability/fabric/data_obs_fabric_configure.png" alt="Warehouse monitoring, warehouse filters, and query history settings for the Microsoft Fabric Warehouse Data Observability integration" style="width:100%;" >}}
+   {{< img src="data_observability/fabric/data_obs_fabric_configure.png" alt="The Monitor Fabric Warehouses and Collect query history toggles, with an optional warehouse filters field." style="width:100%;" >}}
 
 7. Click {{< ui >}}Save{{< /ui >}}.
 
