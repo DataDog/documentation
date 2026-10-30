@@ -93,7 +93,7 @@ The query fails after the migration runs, because `orders.legacy_status` no long
 
 {{< img src="database_monitoring/pr_reviews/schema-change-comment.png" alt="A Datadog comment on a migration that drops the order_item.quantity column, listing the affected queries with execution counts, when each was last seen, and Workbench results" style="width:100%;" >}}
 
-Datadog detects the following statements:
+Datadog detects the following statements in SQL files and SQL strings in your code:
 
 - `DROP TABLE`
 - `ALTER TABLE ... DROP COLUMN`
