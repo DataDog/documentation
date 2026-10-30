@@ -25,7 +25,7 @@ The plugin hooks into the build process, discovers all `.js` files with correspo
 
 - A Datadog API key, set with `auth.apiKey` or the `DATADOG_API_KEY` environment variable.
 - Source maps enabled in your bundler configuration. The plugin uploads source maps but does not generate them. See [Upload JavaScript Source Maps][3] for bundler-specific source map generation setup.
-- For debug ID uploads, enable debug ID injection in the build plugin.
+- For debug ID uploads, enable debug ID injection in the build plugin, and use [RUM Browser SDK version 7.6.0][6] or later, or [Browser Logs SDK version 7.10.0][7] or later. Earlier SDK versions do not send debug IDs.
 - For service and version uploads, initialize the RUM SDK with `service` and `version` parameters that match the plugin configuration.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][4] for installation instructions.
 
@@ -224,3 +224,5 @@ To also display inline source code in Error Tracking stack traces, pair service 
 [3]: /real_user_monitoring/guide/upload-javascript-source-maps#instrument-your-code
 [4]: /real_user_monitoring/application_monitoring/browser/build_plugins/
 [5]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context
+[6]: https://github.com/DataDog/browser-sdk/releases/tag/v7.6.0
+[7]: https://github.com/DataDog/browser-sdk/releases/tag/v7.10.0

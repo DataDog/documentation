@@ -2,52 +2,51 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog
   tag: Blog
-  text: Monitorizar tus localizaciones privadas Synthetic con Datadog
+  text: Haga un seguimiento de sus ubicaciones privadas de Synthetic Monitoring con
+    Datadog.
 - link: https://www.datadoghq.com/blog/kerberos-synthetics/
   tag: Blog
-  text: De forma proactiva monitoriza aplicaciones web y API autenticadas por Kerberos
-    con Datadog Synthetic Monitoring
+  text: Haga un seguimiento proactivo de las aplicaciones web y de las APIs autenticadas
+    mediante Kerberos con Datadog Synthetics.
 - link: /synthetics/guide/browser-tests-passkeys
   tag: Guía
-  text: Más información sobre las claves de acceso en los tests de navegador
+  text: Obtenga información sobre las Passkeys en pruebas de navegador.
 products:
 - icon: browser
-  name: Tests de navegador
+  name: Pruebas de navegador
   url: /synthetics/browser_tests/
 - icon: api
-  name: Tests de API
+  name: Pruebas de API
   url: /synthetics/api_tests/
-title: Autenticación de Kerberos para Synthetic Monitoring
+title: Autenticación Kerberos para Synthetic Monitoring
 ---
-
 {{< product-availability names="Browser Tests,API Tests" >}}
 
-## Información general
+## Descripción general {#overview}
 
-Datadog Synthetic Monitoring permite la monitorización proactiva de aplicaciones web y API mediante la autenticación SSO de Kerberos con Microsoft Active Directory. Esto permite realizar tests continuas de recorridos de usuario críticos y endpoints HTTP en tus sitios internos de Windows.
+Datadog Synthetic Monitoring permite hacer un seguimiento proactivo de las aplicaciones web y de las APIs mediante autenticación SSO de Kerberos con Microsoft Active Directory. Esto permite realizar pruebas continuas de recorridos críticos de usuario y endpoints HTTP en sus sitios internos de Windows.
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-- Un sitio de Windows con autenticación de Kerberos integrada con Active Directory (normalmente alojado en IIS (Internet Information Services)).
-- Un servidor de Windows unido por dominio a Active Directory.
+- Una ubicación privada de Windows (las ubicaciones administradas no admiten la autenticación Kerberos).
+- Un sitio de Windows con autenticación Kerberos integrado con Active Directory (generalmente alojado en IIS).
+- Un servidor Windows que está unido al dominio de Active Directory.
 - Una cuenta de usuario de dominio con acceso de autenticación de Active Directory al sitio de Windows.
-- Los tests de Synthetic Monitoring deben ejecutarse en una ubicación privada de Windows que esté configurada para autenticarse con Active Directory. Para obtener más información, consulta la documentación de requisitos previos de [ubicaciones privadas de Windows][1].
+- Las pruebas de Synthetic Monitoring deben ejecutarse en una ubicación privada de Windows que esté configurada para autenticarse con Active Directory. Para obtener más información, consulte la documentación de requisitos previos de [Windows private locations][1].
 
-## Instalación
+## Instalación {#installation}
 
-1. Crea tu [ubicación privada de Windows][2] en el servidor de Windows unido al dominio de Active Directory.
-2. Configura el [worker de ubicación privada de Synthetic Monitoring][3] para que se ejecute como un servicio de Windows.
-3. Configura el servicio de ubicación privada para utilizar las credenciales de tu cuenta de dominio de Active Directory:
-   - Abre `services.msc`, ve a **Datadog Synthetic Worker** > **Properties** > **log on** > **this account** (Worker de Datadog Synthetic Monitoring > Propiedades > Inicio de sesión > esta cuenta), e introduce las credenciales de tu cuenta de dominio.
-4. Configura tus tests para que se ejecuten desde la ubicación privada de Windows (las ubicaciones gestionadas no admiten la autenticación de Kerberos).
+1. Cree su [Windows private location][2] en el servidor Windows unido al dominio de Active Directory.
+2. Configure el [Synthetic Monitoring private location worker][3] para que se ejecute como un servicio de Windows.
+3. Configure el servicio de ubicación privada para usar las credenciales de su cuenta de dominio de Active Directory:
+   - Abra `services.msc`, navegue a {{< ui >}}Datadog Synthetics Worker{{< /ui >}} > {{< ui >}}Properties{{< /ui >}} > {{< ui >}}log on{{< /ui >}} > {{< ui >}}this account{{< /ui >}} e ingrese las credenciales de su cuenta de dominio.
+4. Configure sus pruebas:
+   - **Pruebas de navegador**: Grabe su prueba desde una sesión de navegador que se ejecute directamente en un servidor Windows unido al dominio. Por ejemplo, conéctese a su ubicación privada de Windows usando el Protocolo de escritorio remoto (RDP) y grabe desde allí. Grabar desde una máquina fuera del dominio de Active Directory envía solicitudes a través de internet pública sin ninguna credencial de Kerberos adjunta, lo que provoca un aviso de inicio de sesión.
+   - **Pruebas de API**: Establezca el campo {{< ui >}}Domain{{< /ui >}} en la pestaña {{< ui >}}Kerberos{{< /ui >}} con el Nombre principal de servicio (SPN) completo del servicio de destino. Por ejemplo, `HTTP/targetsite.yourdomain.com`, o `HTTP/targetsite.yourdomain.com:port` si el sitio está registrado con un puerto que no es el predeterminado.
 
-<p style="text-align: center;"><em>No es necesaria ninguna otra configuración para los tests de navegador.</em></p>
+{{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="Prueba de API con las opciones avanzadas expandidas, resaltando la pestaña Autenticación y el tipo de autenticación Kerberos" style="width:80%;" >}}
 
-5. Opcionalmente, para los tests de API, también debes establecer el campo Domain (Dominio) a tu nombre de dominio de Active Directory en la pestaña **Kerberos**. Ve a **Create/Edit API Test** > **Define Request** > **Advanced Options** > **Authentication** (Crear/Editar test de API > Definir solicitud > Opciones avanzadas > Autenticación).
-
-   {{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="Creación de test de API con las opciones avanzadas ampliadas, que resalta la pestaña de Autenticación y el tipo de autenticación de Kerberos" style="width:80%;" >}}
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

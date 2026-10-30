@@ -1,0 +1,35 @@
+<!-- op-desc-list: /api/latest/rendering-shapes/upload-source-maps/ -->
+<h3 class="api-endpoint__overview-heading _api-endpoint__overview-heading_071384">Overview</h3>
+<p>
+  Upload source maps, symbol files, and mapping files to Datadog for error deobfuscation. This endpoint enables you to
+  upload various types of debug symbols for RUM Error Tracking, allowing Datadog to display readable stack traces
+  instead of minified or obfuscated code.
+</p>
+<p><strong>Request format:</strong></p>
+<p>Each request is a <code>multipart/form-data</code> upload containing two parts:</p>
+<ol>
+  <li><code>event</code> — a JSON-encoded string with the upload metadata (type, service, version, etc.)</li>
+  <li>One or more binary file fields (for example, <code>source_map</code>, <code>symbols_archive</code>)</li>
+</ol>
+<p><strong>Supported upload types</strong> (set via <code>event.type</code>):</p>
+<ul>
+  <li><code>js_sourcemap</code>: JavaScript source maps for browser applications</li>
+  <li><code>react_native_sourcemap</code>: React Native source maps for mobile applications</li>
+  <li><code>jvm_mapping_file</code>: ProGuard/R8 mapping files for Android crash deobfuscation</li>
+  <li><code>ios_symbols</code>: dSYM files for iOS crash symbolication</li>
+  <li><code>flutter_symbol_file</code>: Flutter symbol files</li>
+  <li><code>ndk_symbol_file</code>: Android NDK symbol files for native crashes</li>
+  <li><code>il2cpp_mapping_file</code>: IL2CPP mapping files for Unity</li>
+  <li><code>elf_symbol_file</code>: ELF symbol files for Linux/Unix</li>
+  <li><code>pe_symbol_file</code>: PE/PDB symbol files for Windows</li>
+  <li><code>repository</code>: Repository metadata for source code linking</li>
+</ul>
+<p><strong>Limits:</strong></p>
+<ul>
+  <li>Maximum file size: 500 MB</li>
+</ul>
+<p>
+  <strong>Note:</strong> For most use cases, Datadog recommends using the
+  <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps">Datadog CLI (datadog-ci)</a>
+  which provides a simplified interface for uploading source maps.
+</p>

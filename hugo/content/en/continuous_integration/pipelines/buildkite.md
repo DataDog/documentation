@@ -44,6 +44,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and Build
 |----------------------------|---------------------------------|
 | Pipeline                   | Build (execution of a pipeline) |
 | Job                        | Job (execution of a step)       |
+| Step                       | Log group inside a job (requires job logs) |
 
 ## Configure the Datadog integration
 
@@ -85,6 +86,15 @@ For installation and configuration instructions, see the [Buildkite integration 
 <div class="alert alert-warning">This integration retrieves job logs through the Buildkite API. Collecting logs can consume a significant portion of your Buildkite API rate limit.</div>
 
 {{% /collapse-content %}}
+
+### Collect job steps
+
+Datadog creates steps for each Buildkite job from the job's [log groups][26]. Each log group becomes a step under its job, with the group's name and duration.
+
+Steps require job logs. To collect steps:
+
+1. Send your Buildkite job logs to Datadog, as described in [Manage job logs](#manage-job-logs).
+2. In [CI/CD Repository settings][23], enable Logs Analysis, Logs Storage, or both.
 
 ## Advanced configuration
 
@@ -192,3 +202,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [24]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
 [25]: /opentelemetry/setup/otlp_ingest/logs/
+[26]: https://buildkite.com/docs/pipelines/configure/managing-log-output

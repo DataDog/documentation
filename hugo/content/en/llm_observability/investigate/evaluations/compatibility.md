@@ -1,39 +1,39 @@
 ---
-title: Evaluation compatibility
+title: Evaluator compatibility
 aliases:
 - /llm_observability/evaluations/evaluation_compatibility/
 - /llm_observability/configure/evaluations/compatibility/
-description: Learn about the compatibility requirements for evaluations.
+description: Learn about the compatibility requirements for evaluators.
 ---
 
-## Evaluation compatibility
+## Evaluator compatibility
 
 The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, and Custom Provider.
 
-### Managed evaluations
+### Managed evaluators
 
-Managed evaluations are supported for the following configurations.
+Managed evaluators are supported for the following configurations.
 
-| Evaluation                      | DD-trace version  |  LLM Provider                 | Applicable span |
+| Evaluator                       | DD-trace version  |  LLM Provider                 | Applicable span |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
 | [Language Mismatch][10]         | Fully supported   | Self hosted                   | All span kinds  |
 
-### Custom LLM-as-a-judge evaluations
+### Custom LLM-as-a-judge evaluators
 
-Custom LLM-as-a-judge evaluations are supported for the following configurations.
+Custom LLM-as-a-judge evaluators are supported for the following configurations.
 
-| Evaluation       | DD-trace version | LLM Provider                  | Applicable span |
+| Evaluator        | DD-trace version | LLM Provider                  | Applicable span |
 | ---------------- | ---------------- | ----------------------------- | --------------- |
 | [Boolean][11]    | Fully supported  | All third party LLM providers | All span kinds  |
 | [Score][11]      | Fully supported  | All third party LLM providers | All span kinds  |
 | [Categorical][11]| Fully supported  | All third party LLM providers | All span kinds  |
 | [JSON][11]       | Fully supported  | All third party LLM providers | All span kinds  |
 
-#### Template LLM-as-a-judge evaluations
+#### LLM-as-a-judge evaluator templates
 
-Existing templates for custom LLM-as-a-judge evaluations are supported for the following configurations.
+Existing templates for custom LLM-as-a-judge evaluators are supported for the following configurations.
 
-| Evaluation              | DD-trace version | LLM Provider                  | Applicable span |
+| Evaluator               | DD-trace version | LLM Provider                  | Applicable span |
 | ----------------------- | ---------------- | ----------------------------- | --------------- |
 | [Failure to Answer][5]  | Fully supported  | All third party LLM providers | All span kinds  |
 | [Hallucination][4]      | Fully supported  | All third party LLM providers | LLM only        |

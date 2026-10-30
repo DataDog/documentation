@@ -1,3 +1,3 @@
 ---
-title: Experimentación de búsqueda en Agent Observability
+title: Experimentación de Agent Observability para Search
 ---

@@ -32,6 +32,44 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 
 For more examples of how to work with the library see [API documentation][2].
 
+## Agentless mode
+
+Starting with `dd-trace` v5.125.0 and v6.14.0, you can send data directly to Datadog without a Datadog Agent. To enable agentless mode, set the following environment variables:
+
+- `DD_AGENTLESS_ENABLED`: `true`
+- `DD_API_KEY`: Your Datadog [API key][7]
+- `DD_SITE`: Your [Datadog site][8]
+
+```shell
+export DD_AGENTLESS_ENABLED=true
+export DD_API_KEY=<YOUR_API_KEY>
+export DD_SITE={{< region-param key="dd_site" >}}
+```
+
+If `DD_AGENTLESS_ENABLED` is `true` and `DD_API_KEY` is not set, the SDK logs an error and does not send traces, Remote Configuration requests, or Dynamic Instrumentation data.
+
+In agentless mode, the SDK sends the following data directly to Datadog:
+
+- Traces
+- [Remote Configuration][9]
+- [Dynamic Instrumentation][10]
+- Logs from Bunyan, Pino, and Winston
+- [Test Optimization][11]
+- [LLM Observability][12]
+- [Feature Flags][16] configuration
+
+The following features require an Agent and are disabled in agentless mode:
+
+- [Runtime metrics][17]
+- [Data Streams Monitoring][18]
+- DogStatsD custom metrics
+- [Profiling][19], unless `DD_PROFILING_EXPORTERS` includes an exporter other than `agent`
+
+Agentless mode also changes the following behavior:
+
+- `DD_TRACE_SAMPLING_RULES` and `DD_TRACE_RATE_LIMIT` are ignored. `DD_TRACE_SAMPLE_RATE` still applies.
+- To stop sending logs directly, set `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` to `false`.
+
 ## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
@@ -46,6 +84,16 @@ For more examples of how to work with the library see [API documentation][2].
 [4]: /help/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
+[7]: /account_management/api-app-keys/#api-keys
+[8]: /getting_started/site/
+[9]: /remote_configuration/
+[10]: /tracing/trace_collection/dynamic_instrumentation/
+[11]: /tests/
+[12]: /llm_observability/
 [13]: /agent/configuration/network/#configure-ports
 [14]: /opentelemetry/interoperability/environment_variable_support
 [15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/
+[16]: /feature_flags/
+[17]: /tracing/metrics/runtime_metrics/
+[18]: /data_streams/
+[19]: /profiler/

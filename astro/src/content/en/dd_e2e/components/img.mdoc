@@ -1,0 +1,51 @@
+---
+title: "Image"
+description: "Places an image or video in the content, ported from Hugo's `{{< img >}}` shortcode."
+type: static
+---
+
+## Basic image
+
+{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" widthPercent=100 /%}
+
+## Image in a tab
+
+{% tabs %}
+{% tab label="Result" %}
+{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" widthPercent=100 /%}
+{% /tab %}
+{% tab label="Test" %}
+Test
+{% /tab %}
+{% /tabs %}
+
+## With a caption
+
+{% img
+  src="synthetics/guide/otp-from-email-body/simple_otp.png"
+  alt="Example of an OTP with a simple text field"
+  widthPercent=40
+  caption="Example of an OTP with a simple text field"
+/%}
+
+## Popup disabled
+
+{% img
+  src="account_management/audit_logs/reference_tables.png"
+  alt="The Datadog Audit Trail explorer with reference table search options highlighted"
+  popup=false
+  widthPercent=100
+/%}
+
+## Inline image
+
+Hover over an app and click the edit {% img src="icons/pencil.png" inline=true width="22" height="22" /%} icon.
+
+## Video
+
+{% img
+  src="ci/custom-tags-create-facet.mp4"
+  alt="Facet creation for custom tag"
+  widthPercent=100
+  video=true
+/%}

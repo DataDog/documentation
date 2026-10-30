@@ -1,6 +1,7 @@
 ---
 title: Setting up Remote Configuration for Tracing
 description: Learn how to set up and use Remote Configuration to dynamically manage SDK settings without restarting applications.
+site_support_id: tracing_remote_configuration
 further_reading:
 - link: "remote_configuration"
   tag: "Documentation"

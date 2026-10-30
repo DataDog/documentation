@@ -1,0 +1,603 @@
+[
+  {
+    "heading": "Dashboard Lists, Dashboards",
+    "anchors": [
+      "dashboard-lists",
+      "dashboards"
+    ],
+    "scopes": [
+      {
+        "name": "dashboards_read",
+        "description": "View dashboards.",
+        "endpoints": [
+          {
+            "summary": "Get all dashboards",
+            "href": "/api/latest/dashboards/#get-all-dashboards"
+          },
+          {
+            "summary": "Get all dashboard lists",
+            "href": "/api/latest/dashboard-lists/#get-all-dashboard-lists"
+          },
+          {
+            "summary": "Get a dashboard list",
+            "href": "/api/latest/dashboard-lists/#get-a-dashboard-list"
+          },
+          {
+            "summary": "Get a shared dashboard",
+            "href": "/api/latest/dashboards/#get-a-shared-dashboard"
+          },
+          {
+            "summary": "Get a dashboard",
+            "href": "/api/latest/dashboards/#get-a-dashboard"
+          }
+        ]
+      },
+      {
+        "name": "dashboards_write",
+        "description": "Create and change dashboards.",
+        "endpoints": [
+          {
+            "summary": "Delete dashboards",
+            "href": "/api/latest/dashboards/#delete-dashboards"
+          },
+          {
+            "summary": "Restore deleted dashboards",
+            "href": "/api/latest/dashboards/#restore-deleted-dashboards"
+          },
+          {
+            "summary": "Create a new dashboard",
+            "href": "/api/latest/dashboards/#create-a-new-dashboard"
+          },
+          {
+            "summary": "Create a dashboard list",
+            "href": "/api/latest/dashboard-lists/#create-a-dashboard-list"
+          },
+          {
+            "summary": "Delete a dashboard list",
+            "href": "/api/latest/dashboard-lists/#delete-a-dashboard-list"
+          },
+          {
+            "summary": "Update a dashboard list",
+            "href": "/api/latest/dashboard-lists/#update-a-dashboard-list"
+          },
+          {
+            "summary": "Delete a dashboard",
+            "href": "/api/latest/dashboards/#delete-a-dashboard"
+          },
+          {
+            "summary": "Update a dashboard",
+            "href": "/api/latest/dashboards/#update-a-dashboard"
+          }
+        ]
+      },
+      {
+        "name": "dashboards_embed_share",
+        "description": "Create, modify, and delete shared dashboards with share type 'embed'.",
+        "endpoints": [
+          {
+            "summary": "Create a shared dashboard",
+            "href": "/api/latest/dashboards/#create-a-shared-dashboard"
+          },
+          {
+            "summary": "Revoke a shared dashboard URL",
+            "href": "/api/latest/dashboards/#revoke-a-shared-dashboard-url"
+          },
+          {
+            "summary": "Update a shared dashboard",
+            "href": "/api/latest/dashboards/#update-a-shared-dashboard"
+          }
+        ]
+      },
+      {
+        "name": "dashboards_invite_share",
+        "description": "Create, modify, and delete shared dashboards with share type 'invite'.",
+        "endpoints": [
+          {
+            "summary": "Create a shared dashboard",
+            "href": "/api/latest/dashboards/#create-a-shared-dashboard"
+          },
+          {
+            "summary": "Revoke a shared dashboard URL",
+            "href": "/api/latest/dashboards/#revoke-a-shared-dashboard-url"
+          },
+          {
+            "summary": "Update a shared dashboard",
+            "href": "/api/latest/dashboards/#update-a-shared-dashboard"
+          },
+          {
+            "summary": "Revoke shared dashboard invitations",
+            "href": "/api/latest/dashboards/#revoke-shared-dashboard-invitations"
+          },
+          {
+            "summary": "Get all invitations for a shared dashboard",
+            "href": "/api/latest/dashboards/#get-all-invitations-for-a-shared-dashboard"
+          },
+          {
+            "summary": "Send shared dashboard invitation email",
+            "href": "/api/latest/dashboards/#send-shared-dashboard-invitation-email"
+          }
+        ]
+      },
+      {
+        "name": "dashboards_public_share",
+        "description": "Generate public and authenticated links to share dashboards or embeddable graphs externally.",
+        "endpoints": [
+          {
+            "summary": "Create a shared dashboard",
+            "href": "/api/latest/dashboards/#create-a-shared-dashboard"
+          },
+          {
+            "summary": "Revoke a shared dashboard URL",
+            "href": "/api/latest/dashboards/#revoke-a-shared-dashboard-url"
+          },
+          {
+            "summary": "Update a shared dashboard",
+            "href": "/api/latest/dashboards/#update-a-shared-dashboard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "heading": "Incidents",
+    "anchors": [
+      "incidents"
+    ],
+    "scopes": [
+      {
+        "name": "incident_notification_settings_read",
+        "description": "View Incident Notification Rule Settings.",
+        "endpoints": [
+          {
+            "summary": "Get an incident notification rule",
+            "href": "/api/latest/incidents/#get-an-incident-notification-rule"
+          }
+        ]
+      },
+      {
+        "name": "incident_notification_settings_write",
+        "description": "Configure Incidents Notification Rule settings.",
+        "endpoints": [
+          {
+            "summary": "Create an incident notification rule",
+            "href": "/api/latest/incidents/#create-an-incident-notification-rule"
+          },
+          {
+            "summary": "Delete an incident notification rule",
+            "href": "/api/latest/incidents/#delete-an-incident-notification-rule"
+          },
+          {
+            "summary": "Update an incident notification rule",
+            "href": "/api/latest/incidents/#update-an-incident-notification-rule"
+          },
+          {
+            "summary": "Create incident notification template",
+            "href": "/api/latest/incidents/#create-incident-notification-template"
+          },
+          {
+            "summary": "Delete a notification template",
+            "href": "/api/latest/incidents/#delete-a-notification-template"
+          },
+          {
+            "summary": "Update incident notification template",
+            "href": "/api/latest/incidents/#update-incident-notification-template"
+          }
+        ]
+      },
+      {
+        "name": "incident_read",
+        "description": "View incidents in Datadog.",
+        "endpoints": [
+          {
+            "summary": "Get a list of incidents",
+            "href": "/api/latest/incidents/#get-a-list-of-incidents"
+          },
+          {
+            "summary": "Get incident notification template",
+            "href": "/api/latest/incidents/#get-incident-notification-template"
+          },
+          {
+            "summary": "Get a list of incident types",
+            "href": "/api/latest/incidents/#get-a-list-of-incident-types"
+          },
+          {
+            "summary": "Get incident type details",
+            "href": "/api/latest/incidents/#get-incident-type-details"
+          },
+          {
+            "summary": "Get a list of incident user-defined fields",
+            "href": "/api/latest/incidents/#get-a-list-of-incident-user-defined-fields"
+          },
+          {
+            "summary": "Get an incident user-defined field",
+            "href": "/api/latest/incidents/#get-an-incident-user-defined-field"
+          },
+          {
+            "summary": "Search for incidents",
+            "href": "/api/latest/incidents/#search-for-incidents"
+          },
+          {
+            "summary": "Get the details of an incident",
+            "href": "/api/latest/incidents/#get-the-details-of-an-incident"
+          },
+          {
+            "summary": "List an incident's impacts",
+            "href": "/api/latest/incidents/#list-an-incidents-impacts"
+          },
+          {
+            "summary": "Get a list of an incident's integration metadata",
+            "href": "/api/latest/incidents/#get-a-list-of-an-incidents-integration-metadata"
+          },
+          {
+            "summary": "Get incident integration metadata details",
+            "href": "/api/latest/incidents/#get-incident-integration-metadata-details"
+          },
+          {
+            "summary": "Get a list of an incident's todos",
+            "href": "/api/latest/incidents/#get-a-list-of-an-incidents-todos"
+          },
+          {
+            "summary": "Get incident todo details",
+            "href": "/api/latest/incidents/#get-incident-todo-details"
+          }
+        ]
+      },
+      {
+        "name": "incident_settings_write",
+        "description": "Configure Incident Settings.",
+        "endpoints": [
+          {
+            "summary": "Create an incident type",
+            "href": "/api/latest/incidents/#create-an-incident-type"
+          },
+          {
+            "summary": "Delete an incident type",
+            "href": "/api/latest/incidents/#delete-an-incident-type"
+          },
+          {
+            "summary": "Update an incident type",
+            "href": "/api/latest/incidents/#update-an-incident-type"
+          },
+          {
+            "summary": "Create an incident user-defined field",
+            "href": "/api/latest/incidents/#create-an-incident-user-defined-field"
+          },
+          {
+            "summary": "Delete an incident user-defined field",
+            "href": "/api/latest/incidents/#delete-an-incident-user-defined-field"
+          },
+          {
+            "summary": "Update an incident user-defined field",
+            "href": "/api/latest/incidents/#update-an-incident-user-defined-field"
+          }
+        ]
+      },
+      {
+        "name": "incident_write",
+        "description": "Create, view, and manage incidents in Datadog.",
+        "endpoints": [
+          {
+            "summary": "Create an incident",
+            "href": "/api/latest/incidents/#create-an-incident"
+          },
+          {
+            "summary": "Get incident notification template",
+            "href": "/api/latest/incidents/#get-incident-notification-template"
+          },
+          {
+            "summary": "Import an incident",
+            "href": "/api/latest/incidents/#import-an-incident"
+          },
+          {
+            "summary": "Delete an existing incident",
+            "href": "/api/latest/incidents/#delete-an-existing-incident"
+          },
+          {
+            "summary": "Update an existing incident",
+            "href": "/api/latest/incidents/#update-an-existing-incident"
+          },
+          {
+            "summary": "Create incident attachment",
+            "href": "/api/latest/incidents/#create-incident-attachment"
+          },
+          {
+            "summary": "Delete incident attachment",
+            "href": "/api/latest/incidents/#delete-incident-attachment"
+          },
+          {
+            "summary": "Update incident attachment",
+            "href": "/api/latest/incidents/#update-incident-attachment"
+          },
+          {
+            "summary": "Create an incident impact",
+            "href": "/api/latest/incidents/#create-an-incident-impact"
+          },
+          {
+            "summary": "Delete an incident impact",
+            "href": "/api/latest/incidents/#delete-an-incident-impact"
+          },
+          {
+            "summary": "Create an incident integration metadata",
+            "href": "/api/latest/incidents/#create-an-incident-integration-metadata"
+          },
+          {
+            "summary": "Delete an incident integration metadata",
+            "href": "/api/latest/incidents/#delete-an-incident-integration-metadata"
+          },
+          {
+            "summary": "Update an existing incident integration metadata",
+            "href": "/api/latest/incidents/#update-an-existing-incident-integration-metadata"
+          },
+          {
+            "summary": "Create an incident todo",
+            "href": "/api/latest/incidents/#create-an-incident-todo"
+          },
+          {
+            "summary": "Delete an incident todo",
+            "href": "/api/latest/incidents/#delete-an-incident-todo"
+          },
+          {
+            "summary": "Update an incident todo",
+            "href": "/api/latest/incidents/#update-an-incident-todo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "heading": "Monitors",
+    "anchors": [
+      "monitors"
+    ],
+    "scopes": [
+      {
+        "name": "monitors_read",
+        "description": "View monitors.",
+        "endpoints": [
+          {
+            "summary": "Get all monitors",
+            "href": "/api/latest/monitors/#get-all-monitors"
+          },
+          {
+            "summary": "Check if a monitor can be deleted",
+            "href": "/api/latest/monitors/#check-if-a-monitor-can-be-deleted"
+          },
+          {
+            "summary": "Monitors group search",
+            "href": "/api/latest/monitors/#monitors-group-search"
+          },
+          {
+            "summary": "Monitors search",
+            "href": "/api/latest/monitors/#monitors-search"
+          },
+          {
+            "summary": "Validate a monitor",
+            "href": "/api/latest/monitors/#validate-a-monitor"
+          },
+          {
+            "summary": "Get a monitor's details",
+            "href": "/api/latest/monitors/#get-a-monitors-details"
+          },
+          {
+            "summary": "Validate an existing monitor",
+            "href": "/api/latest/monitors/#validate-an-existing-monitor"
+          },
+          {
+            "summary": "Get all monitor notification rules",
+            "href": "/api/latest/monitors/#get-all-monitor-notification-rules"
+          },
+          {
+            "summary": "Get a monitor notification rule",
+            "href": "/api/latest/monitors/#get-a-monitor-notification-rule"
+          },
+          {
+            "summary": "Get all monitor configuration policies",
+            "href": "/api/latest/monitors/#get-all-monitor-configuration-policies"
+          },
+          {
+            "summary": "Get a monitor configuration policy",
+            "href": "/api/latest/monitors/#get-a-monitor-configuration-policy"
+          },
+          {
+            "summary": "Get all monitor user templates",
+            "href": "/api/latest/monitors/#get-all-monitor-user-templates"
+          },
+          {
+            "summary": "Get a monitor user template",
+            "href": "/api/latest/monitors/#get-a-monitor-user-template"
+          }
+        ]
+      },
+      {
+        "name": "monitors_write",
+        "description": "Edit, delete, and resolve individual monitors.",
+        "endpoints": [
+          {
+            "summary": "Create a monitor",
+            "href": "/api/latest/monitors/#create-a-monitor"
+          },
+          {
+            "summary": "Delete a monitor",
+            "href": "/api/latest/monitors/#delete-a-monitor"
+          },
+          {
+            "summary": "Edit a monitor",
+            "href": "/api/latest/monitors/#edit-a-monitor"
+          },
+          {
+            "summary": "Mute a monitor",
+            "href": "/api/latest/monitors/#mute-a-monitor"
+          },
+          {
+            "summary": "Unmute a monitor",
+            "href": "/api/latest/monitors/#unmute-a-monitor"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "heading": "Rendering Shapes",
+    "anchors": [
+      "rendering-shapes"
+    ],
+    "scopes": [
+      {
+        "name": "status_pages_settings_write",
+        "description": "",
+        "endpoints": [
+          {
+            "summary": "Delete status page",
+            "href": "/api/latest/rendering-shapes/#delete-status-page"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "heading": "Usage Metering",
+    "anchors": [
+      "usage-metering"
+    ],
+    "scopes": [
+      {
+        "name": "usage_read",
+        "description": "View your organization's usage and usage attribution.",
+        "endpoints": [
+          {
+            "summary": "Get hourly usage for analyzed logs",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-analyzed-logs"
+          },
+          {
+            "summary": "Get hourly usage for audit logs",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-audit-logs"
+          },
+          {
+            "summary": "Get hourly usage for Lambda",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-lambda"
+          },
+          {
+            "summary": "Get billable usage across your account",
+            "href": "/api/latest/usage-metering/#get-billable-usage-across-your-account"
+          },
+          {
+            "summary": "Get hourly usage for CI visibility",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-ci-visibility"
+          },
+          {
+            "summary": "Get hourly usage for CSM Pro",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-csm-pro"
+          },
+          {
+            "summary": "Get hourly usage for cloud workload security",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-cloud-workload-security"
+          },
+          {
+            "summary": "Get hourly usage for database monitoring",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-database-monitoring"
+          },
+          {
+            "summary": "Get hourly usage for Fargate",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-fargate"
+          },
+          {
+            "summary": "Get hourly usage for hosts and containers",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers"
+          },
+          {
+            "summary": "Get hourly usage attribution",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-attribution"
+          },
+          {
+            "summary": "Get hourly usage for incident management",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-incident-management"
+          },
+          {
+            "summary": "Get hourly usage for indexed spans",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-indexed-spans"
+          },
+          {
+            "summary": "Get hourly usage for ingested spans",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-ingested-spans"
+          },
+          {
+            "summary": "Get hourly usage for IoT",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-iot"
+          },
+          {
+            "summary": "Get hourly usage for logs",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-logs"
+          },
+          {
+            "summary": "Get hourly logs usage by retention",
+            "href": "/api/latest/usage-metering/#get-hourly-logs-usage-by-retention"
+          },
+          {
+            "summary": "Get hourly usage for logs by index",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-logs-by-index"
+          },
+          {
+            "summary": "Get monthly usage attribution",
+            "href": "/api/latest/usage-metering/#get-monthly-usage-attribution"
+          },
+          {
+            "summary": "get hourly usage for network flows",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-network-flows"
+          },
+          {
+            "summary": "Get hourly usage for network hosts",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-network-hosts"
+          },
+          {
+            "summary": "Get hourly usage for online archive",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-online-archive"
+          },
+          {
+            "summary": "Get hourly usage for profiled hosts",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-profiled-hosts"
+          },
+          {
+            "summary": "Get hourly usage for RUM units",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-rum-units"
+          },
+          {
+            "summary": "Get hourly usage for RUM sessions",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-rum-sessions"
+          },
+          {
+            "summary": "Get hourly usage for sensitive data scanner",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-sensitive-data-scanner"
+          },
+          {
+            "summary": "Get hourly usage for SNMP devices",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-snmp-devices"
+          },
+          {
+            "summary": "Get usage across your account",
+            "href": "/api/latest/usage-metering/#get-usage-across-your-account"
+          },
+          {
+            "summary": "Get hourly usage for synthetics checks",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-synthetics-checks"
+          },
+          {
+            "summary": "Get hourly usage for synthetics API checks",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-synthetics-api-checks"
+          },
+          {
+            "summary": "Get hourly usage for synthetics browser checks",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-synthetics-browser-checks"
+          },
+          {
+            "summary": "Get hourly usage for custom metrics",
+            "href": "/api/latest/usage-metering/#get-hourly-usage-for-custom-metrics"
+          },
+          {
+            "summary": "Get all custom metrics by hourly average",
+            "href": "/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+entries:
+  - change_type: added
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40773
+    operations:
+      - DeletePendingQuota
+    title: Promote usage quota pending limits to public unstable
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40773
+    operations:
+      - CreateQuotas
+      - DeleteQuota
+      - ListQuotas
+      - UpdateQuota
+    title: Promote usage quota pending limits to public unstable
+  - change_type: modified
+    date: '2026-10-20'
+    link: https://github.com/DataDog/documentation/pull/40859
+    operations:
+      - GetHourlyUsageAttribution
+      - GetMonthlyUsageAttribution
+    title: Add deprecation notice for estimated usage types in Usage Metering 
+      API endpoints
+  - change_type: added
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41201
+    operations:
+      - CreateTemporaryGrantRequest
+      - DeleteRequestedTemporaryGrant
+      - DeleteTemporaryGrantRequest
+      - GetMyTemporaryGrantRequest
+      - GetTemporaryGrantRequest
+      - ListMyTemporaryGrantRequests
+      - ListTemporaryGrantRequests
+      - UpdateTemporaryGrantRequest
+    title: Publish temporary AI-credit grant request APIs in preview

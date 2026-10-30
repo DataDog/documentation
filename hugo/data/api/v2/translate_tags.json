@@ -1,7 +1,7 @@
 {
-  "ai-impact": {
-    "name": "AI Impact",
-    "description": "Send AI coding tool usage data to measure the impact of AI tools on software delivery."
+  "ai-guard": {
+    "name": "AI Guard",
+    "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
   },
   "api-management": {
     "name": "API Management",
@@ -34,6 +34,10 @@
   "actions-datastores": {
     "name": "Actions Datastores",
     "description": "Leverage the Actions Datastore API to create, modify, and delete\nitems in datastores owned by your organization."
+  },
+  "agent-health": {
+    "name": "Agent Health",
+    "description": "View Agent Health issues reported for node Agents and Cluster Agents."
   },
   "agent-observability": {
     "name": "Agent Observability",
@@ -104,16 +108,16 @@
     "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
-    "name": "Case Management",
-    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
+    "name": "Work Management",
+    "description": "View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
-    "name": "Case Management Attribute",
-    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Attribute",
+    "description": "View and configure custom attributes within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "case-management-type": {
-    "name": "Case Management Type",
-    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Type",
+    "description": "View and configure work item types within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "change-management": {
     "name": "Change Management",
@@ -153,7 +157,7 @@
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+    "description": "The Containers API allows you to query container data for your organization.\nSee the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
   "customer-org": {
     "name": "Customer Org",
@@ -166,10 +170,6 @@
   "dem": {
     "name": "DEM",
     "description": "Manage Digital Experience Monitoring journeys."
-  },
-  "dora-metrics": {
-    "name": "DORA Metrics",
-    "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -202,6 +202,10 @@
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+  },
+  "delivery-performance": {
+    "name": "Delivery Performance",
+    "description": "Search, send, or delete events for Delivery Performance (formerly DORA Metrics) to measure and improve your software delivery performance. See the [Delivery Performance page](https://docs.datadoghq.com/delivery_performance/) for more information.\n\n**Note**: Delivery Performance is not available in the US1-FED site."
   },
   "deployment-gates": {
     "name": "Deployment Gates",
@@ -237,7 +241,7 @@
   },
   "execution-policy": {
     "name": "Execution Policy",
-    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+    "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nand where. Each policy pairs an effect (allow or deny) with a pattern of actions,\nand can scope that decision to specific resources."
   },
   "experiments": {
     "name": "Experiments",
@@ -305,7 +309,7 @@
   },
   "logs-archive-searches": {
     "name": "Logs Archive Searches",
-    "description": "Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate\nthe matches into a retained historical view.\n\nSee the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)\npage for the searches currently running in Datadog."
+    "description": "Archive Search queries logs directly from long-term storage archives without prior\nrehydration and charges only for the data scanned.\n\nA search runs in one of two modes. By default, it scans the archive and retains up to\n100,000 matching logs for 24 hours on a dedicated results page. Include a `rehydration`\nobject to run a Search & Rehydration instead, which retains the matches for a longer\ncustom retention period and makes them available beyond Log Explorer, such as in Dashboards and Notebooks.\n\nA search requires the `logs_write_historical_view` or `logs_write_archive_search`\npermission. Rehydration requires `logs_write_historical_view`."
   },
   "logs-archives": {
     "name": "Logs Archives",
@@ -342,10 +346,6 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
-  },
-  "network-health-insights": {
-    "name": "Network Health Insights",
-    "description": "Analyze network health by surfacing actionable insights for services experiencing connectivity issues.\nInsights are derived from DNS failure data (timeouts, NXDOMAIN, SERVFAIL, general failures),\nTLS certificate health (expired, expiring soon), and security group denials."
   },
   "oauth2-client-public": {
     "name": "OAuth2 Client Public",
@@ -469,7 +469,7 @@
   },
   "rum-replay-sessions": {
     "name": "Rum Replay Sessions",
-    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+    "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
     "name": "Rum Replay Viewership",
@@ -534,10 +534,6 @@
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
-  },
-  "spa": {
-    "name": "Spa",
-    "description": "SPA (Spark Pod Autosizing) API. Provides resource recommendations and cost insights to help optimize Spark job configurations."
   },
   "spans": {
     "name": "Spans",

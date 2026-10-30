@@ -1,3 +1,3 @@
 ---
-title: Create ServiceNow ticket for case
+title: Create ServiceNow ticket for work item
 ---
