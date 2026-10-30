@@ -88,7 +88,7 @@ To find the metrics not actively queried, click the time frame of interest in th
 After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Use Metrics without Limits™ on your unqueried metric names to reduce custom metrics volume. 
 
 To configure multiple unqueried metrics at once, create a [Tag Indexing Rule][7]:
-1. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
+1. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}\+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 2. Scope the rule to the metric namespace prefix of the unqueried metrics.
 3. Select the tags to include or exclude. To unindex unused tags, select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets).
 

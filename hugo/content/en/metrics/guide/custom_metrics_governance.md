@@ -171,7 +171,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 
    After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics with Metrics without Limits™. 
 
-6. Create a [Tag Indexing Rule][18] for these metrics. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
+6. Create a [Tag Indexing Rule][18] for these metrics. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}\+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 7. Scope the rule to the metric namespace prefix of the metrics you'd like to configure.
 8. Select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets, such as dashboards, notebooks, monitors, and SLOs).
 9. Save the rule.
