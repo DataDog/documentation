@@ -145,7 +145,7 @@ If the integration tile isn't available in your organization, confirm that a Dat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://clickhouse.com/cloud
-[2]: /integrations/clickhouse_cloud/
+[2]: /integrations/clickhouse-cloud/
 [3]: /api/latest/ip-ranges/
 [4]: https://app.datadoghq.com/integrations/clickhouse-cloud-data-observability
 [5]: /monitors/types/data_observability/
