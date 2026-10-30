@@ -42,6 +42,10 @@ Each time the SDK evaluates a flag's experiment targeting rule for a subject, Da
 
 Datadog joins exposures and metrics by subject identifier. The `targetingKey` your SDK sets in the [evaluation context][5] must match the [subject type attribute][6] configured for the experiment, such as `@usr.id`, or Datadog can't associate metric events with the correct exposure.
 
+## Subject preferences
+
+Experimentation opt-out can exclude a subject from experiment allocations immediately or based on allocation activation time. Flag evaluation opt-out is separate and does not prevent experiment assignment. See [Flag Evaluation and Experimentation Opt-Out][8].
+
 ## Bring your own randomization
 
 If you randomize subjects with a system other than Datadog Feature Flags, this flag-to-experiment integration doesn't apply. Datadog can still analyze the experiment: define an [Exposure SQL Model][7] that reads exposure records from your data warehouse instead.
@@ -57,3 +61,4 @@ If you randomize subjects with a system other than Datadog Feature Flags, this f
 [5]: /feature_flags/concepts/evaluation_context/
 [6]: /experiments/concepts/subject_types/
 [7]: /experiments/concepts/exposure_sql/
+[8]: /feature_flags/concepts/opt_out/
