@@ -87,16 +87,14 @@ To find the metrics not actively queried, click the time frame of interest in th
 
 After you identify unqueried metrics, you can eliminate the volume and cost of these metric names by using [Metrics without Limits™][3] without a single line of code. By using Metrics without Limits, you ensure that you pay only for the metrics that you use by eliminating timeseries that are never or rarely leveraged. Use Metrics without Limits™ on your unqueried metric names to reduce custom metrics volume. 
 
-To configure multiple unqueried metrics at once
-1. Click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown and select {{< ui >}}Manage Tags{{< /ui >}} to open the [Metrics without Limits™ Tag configuration modal][4].
-2. Specify the metric namespace of the unqueried metrics you'd like to apply a bulk tag configuration to.
-3. Select {{< ui >}}Include tags…{{< /ui >}} and set an empty allowlist of tags.
-
-{{< img src="metrics/volume/configure_metrics.png" alt="Configure Metric dropdown at the top of the page highlighting the Manage tags option" style="width:100%;" >}}
+To configure multiple unqueried metrics at once, create a [Tag Indexing Rule][7]:
+1. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}\+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
+2. Scope the rule to the metric namespace prefix of the unqueried metrics.
+3. Select the tags to include or exclude. To unindex unused tags, select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets).
 
 You have full control over the cardinality of your metrics without the need to change your applications nor the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are rarely used can significantly reduce your custom metrics volumes and costs.
 
-In this example, the tag configuration modal shows a metric with a current volume of 7,139 indexed custom metrics. After you select Include tags… with an allowlist of the tags queried in the past 30 days, the modal shows an estimated new volume of 3. You can reduce the number of indexed custom metrics by 7,136.
+In this example, the tag configuration modal for a single metric ({{< ui >}}Manage Tags{{< /ui >}} in the metric's details side panel) shows a metric with a current volume of 7,139 indexed custom metrics. After you select Include tags… with an allowlist of the tags queried in the past 30 days, the modal shows an estimated new volume of 3. You can reduce the number of indexed custom metrics by 7,136.
 
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_05292025.png" alt="Tag configuration modal showing an example metric with a current volume of 7,139 index metrics and an estimated new volume of 3, with an allowlist of suggested tags" style="width:80%;" >}}
 
@@ -123,6 +121,6 @@ To determine why a particular metric name is emitting a large number of custom m
 [1]: https://app.datadoghq.com/metric/volume
 [2]: /monitors/types/change-alert/
 [3]: /metrics/metrics-without-limits
-[4]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [5]: #reduce-metric-volume-and-cost
 [6]: https://docs.datadoghq.com/account_management/billing/custom_metrics/?tab=countrategauge
+[7]: /metrics/guide/tag-indexing-rules/
