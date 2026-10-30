@@ -38,7 +38,7 @@ Add Datadog's IP addresses to your service's IP Access List in ClickHouse Cloud.
 
 ## Create a Datadog user in ClickHouse Cloud
 
-As an administrator, create a role with read access to the system tables that hold schema and freshness metadata, grant it access to the data you want to monitor, and create a user with that role:
+As an administrator, run the following SQL. It creates a role with read access to the system tables that hold schema and freshness metadata, grants the role access to the data you want to monitor, and creates a user with that role:
 
 ```sql
 CREATE ROLE OR REPLACE DD_MONITOR;
