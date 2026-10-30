@@ -64,10 +64,11 @@ The Contributor role supports all Data Observability features for Fabric Warehou
 {{% /tab %}}
 {{% tab "Viewer" %}}
 
-The Viewer role grants read-only access to every warehouse in the workspace. It supports metadata sync and data quality monitors, but not query history or lineage. Leave {{< ui >}}Collect query history{{< /ui >}} turned off when you [configure the integration][6].
+The Viewer role grants read-only access to every warehouse in the workspace. It supports metadata sync and data quality monitors, but not query history or lineage. Leave {{< ui >}}Collect query history{{< /ui >}} turned off when you [configure the integration][1].
 
-SQL-level restrictions such as `DENY` statements, row-level security, column-level security, and dynamic data masking apply to the app registration. Tables and columns it can't read don't appear in Datadog, and monitors on them fail.
+SQL-level restrictions such as `DENY` statements, row-level security, column-level security, and dynamic data masking apply to the app registration. Tables and columns the role can't read don't appear in Datadog, and monitors on them fail.
 
+[1]: #configure-the-integration-in-datadog
 {{% /tab %}}
 {{< /tabs >}}
 
