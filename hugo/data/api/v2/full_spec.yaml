@@ -206510,7 +206510,7 @@ paths:
         permissions:
           - metrics_read
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules:
     get:
@@ -206589,9 +206589,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
@@ -206671,9 +206668,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/order:
     post:
       description: |-
@@ -206738,9 +206732,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/{id}:
     delete:
       description: |-
@@ -206784,9 +206775,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a single tag indexing rule by its UUID.
       operationId: GetTagIndexingRule
@@ -206852,9 +206840,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
@@ -206947,9 +206932,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: |-
@@ -207421,7 +207403,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
@@ -207492,7 +207474,7 @@ paths:
         permissions:
           - metrics_read
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
@@ -207568,7 +207550,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
@@ -207651,7 +207633,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tag-indexing-rules:
     get:
@@ -207705,9 +207687,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: |-
