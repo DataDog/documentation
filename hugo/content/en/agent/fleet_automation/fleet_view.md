@@ -5,6 +5,9 @@ further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
+- link: "/agent/fleet_automation/otel_collectors/"
+  tag: "Documentation"
+  text: "Manage OpenTelemetry Collectors"
 - link: "/agent/troubleshooting/send_a_flare/"
   tag: "Documentation"
   text: "Send a flare"
@@ -36,6 +39,8 @@ For each OTel Collector, you can see:
 - The configuration YAML of the Collector
 - Pipeline and topology views of the Collector
 
+For what Fleet Automation supports for each kind of Collector, see [Manage OpenTelemetry Collectors][10].
+
 ## Prerequisites
 
 - Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
@@ -58,50 +63,31 @@ Use the search bar at the top of Fleet View to find specific Agents, OTel Collec
 - Perform free-text search by hostname or cluster name
 - Filter by host and Agent tags, such as operating system, environment (`env`), team, and enabled products (`products_enabled`)
 
+## Monitor Agent and OTel Collector health
+
+**[Placeholder: Confirm that Agent and OTel Collector health signals launch. Remove this section if they don't.]**
+
+With Agent and OTel Collector health signals, you can:
+
+- Understand the health status of your Agent and OTel Collector fleet.
+- Identify and fix telemetry issues with guided diagnosis and remediation steps.
+
 ## Visualize OTel pipelines
 
-The {{< ui >}}Configuration{{< /ui >}} tab for an OTel Collector includes {{< ui >}}Pipeline{{< /ui >}} and {{< ui >}}Topology{{< /ui >}} views. These views provide end-to-end visibility into how telemetry flows through your OTel pipelines.
+The {{< ui >}}Configuration{{< /ui >}} tab for an OTel Collector includes {{< ui >}}Pipeline{{< /ui >}} and {{< ui >}}Topology{{< /ui >}} views. For how to open and use them, see [Visualize OTel pipelines][11].
 
-To access these views:
+## View Audit Trail events
 
-1. Navigate to [**Fleet Automation**][1].
-1. Filter for OTel Collectors.
-1. Select a Collector to open the detail panel.
-1. Click the {{< ui >}}Configuration{{< /ui >}} tab.
-1. Select {{< ui >}}Pipeline{{< /ui >}} or {{< ui >}}Topology{{< /ui >}} from the {{< ui >}}View as{{< /ui >}} options.
-
-### Pipeline view
-
-The {{< ui >}}Pipeline{{< /ui >}} view displays the telemetry pipeline for a single OTel Collector. Use the pipeline view to:
-
-- Validate telemetry routing between configured receivers, processors, and exporters.
-- Identify data flow issues, such as data drops and bottlenecks, by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle.
-- Investigate pipeline alerts by examining active monitor alerts surfaced on component nodes.
-
-{{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="Pipeline view showing telemetry routing between OTel Collector components." style="width:100%;" >}}
-
-### Topology view
-
-The {{< ui >}}Topology{{< /ui >}} view displays the forwarding chain across OTel Collectors deployed as DaemonSets and gateways. Use the topology view to:
-
-- Validate telemetry routing across Collectors in a DaemonSet-to-gateway architecture.
-- Spot data drops and bottlenecks by enabling the {{< ui >}}Show traffic{{< /ui >}} toggle to overlay data flow rates on each edge.
-- Investigate pipeline issues by examining active monitor alerts surfaced on Collector nodes.
-
-{{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Topology view showing DaemonSet Collectors forwarding through gateway Collectors to Datadog." style="width:100%;" >}}
-
-## View Agent Audit Trail events
-
-The {{< ui >}}Audit Events{{< /ui >}} tab displays Audit Trail events associated with the selected Agent.
+The {{< ui >}}Audit Events{{< /ui >}} tab displays Audit Trail events associated with the selected Agent or OTel Collector.
 Use this tab to:
-- Identify configuration changes, API key updates, installs, upgrades, and support flares
+- Identify configuration changes, API key updates, installs, upgrades, and support flares for Agents and the Agent's Collector
 - Determine when and where changes were made
 
 Audit Trail event visibility depends on your plan. When Audit Trail is enabled in your organization, you can view Agent events for up to 90 days based on your Audit Trail retention settings. If Audit Trail is not enabled in your organization, you can view the past 24 hours of events.
 
 ## Send a remote flare
 
-You can send a flare from the Datadog Agent or DDOT Collector after enabling Remote Configuration on the Agent. For instructions, see [Send a flare from the Datadog site][2].
+You can send a flare from the Datadog Agent or the Agent's Collector after enabling Remote Configuration on the Agent. For instructions, see [Send a flare from the Datadog site][2].
 
 When you contact Datadog Support with Remote Configuration enabled, the Support team may initiate a flare from your environment to help resolve your issue faster.
 
@@ -185,3 +171,5 @@ Compared to the default view, the Kubernetes view has the following limitations:
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
 [9]: /agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes
+[10]: /agent/fleet_automation/otel_collectors/
+[11]: /agent/fleet_automation/otel_collectors/#visualize-otel-pipelines

@@ -14,6 +14,8 @@ To automatically instrument your application with Datadog libraries:
 1. [Install and configure the Agent](#install-and-configure-the-agent).
 2. [Add the Datadog SDK to your code](#instrument-your-application).
 
+To send traces over OTLP to an OpenTelemetry Collector instead of the Datadog Agent, see [DDOT SDKs][16].
+
 ## Install and configure the Agent
 
 Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is configured to receive traces in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`.
@@ -92,3 +94,4 @@ To instrument an application written in a language that does not have official l
 [13]: /infrastructure/serverless/azure_app_services/#overview
 [14]: /integrations/
 [15]: /help/
+[16]: /opentelemetry/instrument/dd_sdks/
