@@ -55,7 +55,7 @@ To include original targeting keys and evaluation context in EVP flag evaluation
 | `false`, absent, or not a Boolean `true` | Non-empty targeting keys are represented by an unsalted SHA-256 digest with a `sha256_` prefix. | Omitted. |
 | `true` | Events can include the original targeting key. | Events can include a bounded snapshot of evaluation attributes. |
 
-The SDK uses the setting captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. When aggregation limits are reached, the SDK can omit targeting keys and context while retaining aggregate counts, even when full data collection is enabled.
+The SDK uses the setting captured at evaluation time. A later configuration change does not rewrite events already queued for delivery. To keep SDK memory use bounded, the SDK can omit targeting keys and context when aggregation limits are reached while retaining aggregate counts, even when full data collection is enabled.
 
 Use non-empty targeting keys with valid Unicode text. Hashing uses the UTF-8 representation without trimming or changing case. Identical keys produce identical hashes, and predictable identifiers can be guessed and hashed. Hashing pseudonymizes identifiers; it does not make them anonymous.
 
