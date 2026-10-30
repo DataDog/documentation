@@ -29,7 +29,7 @@ further_reading:
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. In `dd-trace` 6.12.0 and later, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-Agentless Node.js evaluates flags locally and sends experiment exposure events. It prefers a compatible local Event Platform Proxy (EVP) relay. It sends exposure events directly when no compatible relay is available. Use version 6.21.0 or later for aggregated EVP flag evaluation events and their privacy controls.
+Agentless Node.js evaluates flags locally and sends experiment exposure events. It prefers a compatible local Event Platform Proxy (EVP) relay. It sends exposure events directly when no compatible relay is available. Use version 6.20.0 or later on 6.x, or 5.131.0 or later on 5.x, for aggregated EVP flag evaluation events and their privacy controls.
 
 ## Getting started
 
@@ -312,7 +312,7 @@ The `feature_flag.evaluations` metric uses the separate OTLP setup in the [Serve
 
 ## Evaluation events and privacy
 
-With `dd-trace` 6.21.0 or later, the provider sends aggregated flag evaluation events by default, using a local relay or direct fallback in agentless mode. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. See [Server-Side Evaluation Events and Privacy][13] for targeting-key hashing, context collection, and the Node.js bundling requirements.
+With `dd-trace` 6.20.0 or later on 6.x, or 5.131.0 or later on 5.x, the provider sends aggregated flag evaluation events by default, using a local relay or direct fallback in agentless mode. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only these events. See [Server-Side Evaluation Events and Privacy][13] for targeting-key hashing, context collection, and the Node.js bundling requirements.
 
 ## Testing
 

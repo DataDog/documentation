@@ -275,7 +275,7 @@ end
 
 ## Evaluation-event privacy
 
-Use `datadog` 2.47.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][12] for the data collected, opt-out scope, and delivery requirements.
+Use `datadog` 2.46.0 or later for targeting-key hashing and environment-controlled context collection in EVP flag evaluation events. These events are enabled by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable only this event path. See [Server-Side Evaluation Events and Privacy][12] for the data collected, opt-out scope, and delivery requirements.
 
 ## Testing
 

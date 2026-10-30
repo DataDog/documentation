@@ -21,13 +21,13 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management. It receives flag updates from the Datadog-managed CDN or Agent Remote Configuration. Use `dd-trace-go/v2` 2.11.2 or later for the agentless setup and telemetry behavior described here.
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management. It receives flag updates from the Datadog-managed CDN or Agent Remote Configuration. Use `dd-trace-go/v2` 2.11.0 or later for the agentless setup and telemetry behavior described here.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
 ## Prerequisites
 
-For agentless delivery, install **`dd-trace-go/v2` 2.11.2 or later** and configure a Datadog [API key][3] in the application. A Datadog Agent is not required to fetch flag configuration.
+For agentless delivery, install **`dd-trace-go/v2` 2.11.0 or later** and configure a Datadog [API key][3] in the application. A Datadog Agent is not required to fetch flag configuration.
 
 Set these environment variables before starting the application:
 

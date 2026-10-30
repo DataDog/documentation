@@ -42,7 +42,7 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 |
 | Node.js `dd-trace` | 6.12.0 |
 | Python `ddtrace` | 4.14.0 |
-| Go `dd-trace-go/v2` | 2.11.2 |
+| Go `dd-trace-go/v2` | 2.11.0 |
 | .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 |
 | Ruby `datadog` | 2.46.0 |
 
