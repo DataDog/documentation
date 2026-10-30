@@ -45,7 +45,7 @@ The precedence rules on this page describe how *Datadog SDKs* resolve configurat
 
 {{% otel-network-requirements %}}
 
-**Note**: OpenTelemetry API metrics and Datadog runtime metrics have separate configuration. Runtime metrics export depends on the language and SDK version. .NET SDK v3.44.0+ (.NET 6+) and Node.js SDK v5.107.0+ can export runtime metrics through OTLP. Enable both runtime metrics and OpenTelemetry metrics. See [runtime metrics configuration][18] for language-specific settings.
+**Note**: OpenTelemetry API metrics and Datadog runtime metrics have separate configuration. Runtime metrics export depends on the language and SDK version. SDKs that support OTLP runtime metrics export include Java v1.63.0+, .NET v3.44.0+ (.NET 6+), and Node.js v5.107.0+. Enable both runtime metrics and OpenTelemetry metrics. See [runtime metrics configuration][18] for language-specific settings.
 
 ## Datadog SDK configuration
 These environment variables control OpenTelemetry interoperability for traces, metrics, and logs. Support and setup requirements vary by language and SDK version. For guides on how to instrument your application, see the [language-specific instrumentation documentation][14].
