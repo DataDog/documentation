@@ -16,6 +16,9 @@ further_reading:
 - link: "/experiments/reading_results/"
   tag: "Documentation"
   text: "Reading Experiment Results"
+- link: "/llm_observability/improve/online_experiments/prompt_experimentation"
+  tag: "Documentation"
+  text: "Prompt Experimentation"
 ---
 
 ## Overview
@@ -23,6 +26,8 @@ further_reading:
 Online Experiments compare multiple versions of an LLM application or agent on live production traffic. Datadog Feature Flags assigns each [experiment subject][2], such as a user or an autonomous workflow run, to a control or treatment variant. An Agent Observability evaluation measures the outcome for each subject, and [Datadog Experiments][1] determines whether the difference between variants is statistically significant.
 
 Use Online Experiments to validate a change, such as a new model, prompt, or tool, against real users after you test it offline.
+
+If you serve prompts with [Prompt Management][15], you can A/B test prompt versions or roll out a new version with a Guarded Rollout from the prompt page, without writing feature flag code. See [Prompt Experimentation][16].
 
 Setting up an online experiment involves the following steps:
 
@@ -174,3 +179,5 @@ If the experiment reports missing metric data, confirm that:
 [12]: /experiments/reading_results/
 [13]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
 [14]: /feature_flags/
+[15]: /llm_observability/configure/prompt_management/
+[16]: /llm_observability/improve/online_experiments/prompt_experimentation/

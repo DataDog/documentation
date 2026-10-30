@@ -11,6 +11,9 @@ further_reading:
   - link: "/llm_observability/improve/playground"
     tag: "Documentation"
     text: "Playground"
+  - link: "/llm_observability/improve/online_experiments/prompt_experimentation/"
+    tag: "Documentation"
+    text: "Prompt Experimentation"
   - link: "/llm_observability/instrument/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
@@ -288,7 +291,7 @@ Combine prompts in application code or manage the final prompt sent to your mode
 
 By default, the SDK selects the prompt version as follows:
 
-- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or A/B test assignment
+- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or [A/B test][10] assignment
 - **Without `DD_ENV`**: The latest prompt version
 
 To select an exact numeric version, set the `version` option. This option takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see the [Prerequisites](#prerequisites) section.
@@ -913,6 +916,8 @@ Pass the attributes used by your targeting rule, as shown in the previous code e
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
+To measure which version performs better, or to roll out a version gradually with automatic regression checks, see [Prompt Experimentation][10].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -926,7 +931,7 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-[10]: /llm_observability/configure/prompt_experimentation/
+[10]: /llm_observability/improve/online_experiments/prompt_experimentation/
 [11]: /remote_configuration/
 [20]: /llm_observability/data_governance/access_control/#managed-prompts
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/
