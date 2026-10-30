@@ -56,7 +56,7 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Hostless Ingested Bytes   | `datadog.estimated_usage.apm.hostless_ingested_bytes` | Volume of hostless ingested spans in bytes. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Unique APM Fargate Tasks seen in last 5 minutes. |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
-| RUM Ingested Sessions         | `datadog.estimated_usage.rum.ingested_sessions` | Total number of ingested RUM sessions.<br /><br />**Note**: Applies to RUM without Limits. |
+| RUM Ingested Sessions         | `datadog.estimated_usage.rum.ingested_sessions` | Total number of ingested RUM sessions.<br /><br />**Note**: Applies to RUM without Limits&trade;. |
 | RUM Indexed Sessions          | `datadog.estimated_usage.rum.indexed_sessions` | Total number of RUM sessions indexed by retention filters.<br /><br />**Note**: Applies to RUM without Limits. |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions`, `datadog.estimated_usage.serverless.aws_lambda_functions.by_tag` | Unique serverless functions seen in the last hour. |
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`| Sum of serverless invocations in the last hour. |
