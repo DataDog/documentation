@@ -72,6 +72,30 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
   </tbody>
 </table>
 
+### Granular access control
+
+By default, access to a status page is unrestricted within your organization. Use [granular access controls][5] to restrict an individual status page by team, role, user, or service account.
+
+| Access level | Capabilities |
+|---|---|
+| **Viewer** | View the status page. |
+| **Responder** | View the status page and publish or update notices. |
+| **Manager** | View and respond to the status page, edit its settings, and manage its access. |
+
+Granular access control only restricts access and does not grant RBAC permissions. Users must also have the corresponding Status Pages permission described above.
+
+Configuring granular access requires the **Status Pages Settings Write** permission. If the status page is already restricted, you must also have **Manager** access to it.
+
+To restrict access:
+
+1. Navigate to [Status Pages][2] and select a status page.
+1. Click **Settings**, then select **Access**.
+1. Click **Edit Access**, then click **Restrict Access**.
+1. Add teams, roles, users, or service accounts and assign each an access level.
+1. Click **Save**.
+
+**Note**: Access restrictions apply to users in your Datadog organization. They do not change who can view a published public status page.
+
 ## Create a status page
 
 1. In Datadog, navigate to [**Status Pages**][2].
@@ -383,3 +407,4 @@ You can use Terraform to create or manage your status pages. For details on the 
 [2]: https://app.datadoghq.com/status-pages
 [3]: /account_management/org_settings/smtp_configuration
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page
+[5]: /account_management/rbac/granular_access/
