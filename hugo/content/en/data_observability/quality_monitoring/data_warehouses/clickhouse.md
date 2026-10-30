@@ -49,7 +49,6 @@ GRANT SELECT ON system.columns TO DD_MONITOR;
 GRANT SELECT ON system.parts TO DD_MONITOR;
 GRANT SELECT ON information_schema.key_column_usage TO DD_MONITOR;
 
-GRANT SELECT ON <database_name>.* TO DD_MONITOR;
 
 -- Option A: grant access to every table in a database
 GRANT SELECT ON <database_name>.* TO DD_MONITOR;
