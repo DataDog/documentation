@@ -158,7 +158,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 ### Within the Profiling page
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_1.png" alt="Step 1 of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
@@ -215,7 +215,7 @@ To start collecting data, set up [Mobile RUM for Android][6].
 Initialize the RUM SDK and configure the `setApplicationLaunchSampleRate` and `setContinuousSampleRate` parameters, which are independent of each other:
 
 - `setApplicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 15 means profiling runs on 15 out of 100 launches).
-- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][27] are profiled (for example, 15 means that 15 out of 100 sessions will have their time to full display, ANRs, long tasks, and operations profiled).
+- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][27] are profiled (for example, 15 means that 15 out of 100 sessions have their time to full display, ANRs, long tasks, and operations profiled).
 
 Both sample rates are applied on top of the [RUM session sampling rate][17].
 
@@ -301,7 +301,7 @@ Android profiling data is attached to [application not responding (ANR)][16] err
 
 {% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
 
-On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces).
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see  the [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces) section.
 
 ### During long tasks
 
@@ -318,7 +318,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 ### Within the Profiling page
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience.png" alt="Android profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found under **Investigate > Profiles**, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found under [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][24] or [time to full display][25]), a long task, or a critical [RUM Operation][27]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_2.png" alt="Step 2 of the Android profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
@@ -326,7 +326,7 @@ The Profiling page, found under **Investigate > Profiles**, lets you analyze and
 2. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_3.png" alt="Step 3 of the Android profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
-3. **Investigate slowest functions**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
+3. **Investigate slowest methods**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the Android profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the Android profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
 
@@ -355,7 +355,7 @@ To start collecting data, set up [Mobile RUM for iOS][11].
 Initialize the RUM SDK and configure the `applicationLaunchSampleRate` and `continuousSampleRate` parameters, which are independent of each other:
 
 - `applicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 5 means profiling runs on 5 out of 100 launches).
-- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations][26] are profiled (for example, 5 means that 5 out of 100 sessions will have their time to full display, application hangs, long tasks, and operations profiled).
+- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations][26] are profiled (for example, 5 means that 5 out of 100 sessions have their time to full display, application hangs, long tasks, and operations profiled).
 
 Both sample rates are applied on top of the [RUM session sampling rate][21].
 
@@ -429,7 +429,7 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 ### Within the Profiling page
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience.png" alt="iOS profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found under **Investigate > Profiles**, lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, found under [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][12] or [time to full display][12]), a long task, or a critical [RUM Operation][26]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_2.png" alt="Step 2 of the iOS profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
@@ -437,7 +437,7 @@ The Profiling page, found under **Investigate > Profiles**, lets you analyze and
 2. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_3.png" alt="Step 3 of the iOS profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
-3. **Investigate slowest functions**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
+3. **Investigate slowest methods**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the iOS profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the iOS profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
 
@@ -469,3 +469,4 @@ The Profiling page, found under **Investigate > Profiles**, lets you analyze and
 [25]: https://developer.android.com/topic/performance/issues/launch-time#time-full
 [26]: /real_user_monitoring/operations_monitoring/?tab=ios
 [27]: /real_user_monitoring/operations_monitoring/?tab=android
+[28]: https://app.datadoghq.com/rum/profiling
