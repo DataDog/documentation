@@ -10000,11 +10000,41 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_supported_versions
       weight: 107
+    - name: Electron
+      url: real_user_monitoring/application_monitoring/electron
+      parent: application_monitoring
+      identifier: rum_electron
+      weight: 206
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/electron/setup
+      parent: rum_electron
+      identifier: rum_electron_setup
+      weight: 101
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/electron/error_tracking
+      parent: rum_electron
+      identifier: rum_electron_error_tracking
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/electron/advanced_configuration
+      parent: rum_electron
+      identifier: rum_electron_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/electron/data_collected
+      parent: rum_electron
+      identifier: rum_electron_data_collected
+      weight: 104
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/electron/troubleshooting
+      parent: rum_electron
+      identifier: rum_electron_troubleshooting
+      weight: 105
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: Setup
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -10034,7 +10064,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: Setup
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -10069,7 +10099,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: Setup
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -10105,36 +10135,6 @@ menu:
       parent: rum_mobile_maui
       identifier: rum_mobile_maui_troubleshooting
       weight: 109
-    - name: Electron
-      url: real_user_monitoring/application_monitoring/electron
-      parent: application_monitoring
-      identifier: rum_electron
-      weight: 209
-    - name: Setup
-      url: real_user_monitoring/application_monitoring/electron/setup
-      parent: rum_electron
-      identifier: rum_electron_setup
-      weight: 101
-    - name: Error Tracking
-      url: real_user_monitoring/application_monitoring/electron/error_tracking
-      parent: rum_electron
-      identifier: rum_electron_error_tracking
-      weight: 102
-    - name: Advanced Configuration
-      url: real_user_monitoring/application_monitoring/electron/advanced_configuration
-      parent: rum_electron
-      identifier: rum_electron_advanced_configuration
-      weight: 103
-    - name: Data Collected
-      url: real_user_monitoring/application_monitoring/electron/data_collected
-      parent: rum_electron
-      identifier: rum_electron_data_collected
-      weight: 104
-    - name: Troubleshooting
-      url: real_user_monitoring/application_monitoring/electron/troubleshooting
-      parent: rum_electron
-      identifier: rum_electron_troubleshooting
-      weight: 105
     - name: Platform
       identifier: real_user_monitoring_platform
       url: real_user_monitoring/platform
