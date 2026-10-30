@@ -214,7 +214,7 @@ The `agent-data-plane dogstatsd stats` command is always available. You do not n
 
 ### Agent telemetry
 
-If you monitor the Agent's DogStatsD internals with the [Go-Expvar integration][5], the core Agent's DogStatsD counters report `0` when ADP is enabled. This is expected, because ADP handles that traffic instead. ADP's internal metrics are exposed through the Agent telemetry endpoint (`localhost:5000/telemetry`) and are tagged with `emitter:agent-data-plane`. Some metric names and tags differ from those emitted by the core Agent.
+If you monitor the Agent's DogStatsD internals with the [Go-Expvar integration][5], the core Agent's DogStatsD counters report `0` when ADP is enabled. This is expected, because ADP handles that traffic instead. ADP's internal metrics are exposed through the Agent's OpenMetrics telemetry endpoint (`localhost:5000/telemetry`) and are tagged with `emitter:agent-data-plane`. Some metric names and tags differ from those emitted by the core Agent.
 
 ## Further reading
 
