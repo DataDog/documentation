@@ -88,7 +88,7 @@ Datadog reads only metadata from ClickHouse system tables. Datadog queries the d
     | Tags | (Optional) Custom tags applied to datasets collected from this service. |
 
 3. Click {{< ui >}}Save{{< /ui >}}.
-4. Click {{< ui >}}Test connection{{< /ui >}}. If the test fails, see [Troubleshooting](#troubleshooting).
+4. Click {{< ui >}}Test connection{{< /ui >}}. If the test fails, see the [Troubleshooting](#troubleshooting) section.
 5. Confirm the account shows as connected on the tile.
 
 ## What Datadog collects
