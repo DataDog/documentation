@@ -171,13 +171,10 @@ Identify your organization's entire list of unqueried and unused metrics:
 
    After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics with Metrics without Limits™. 
 
-{{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
-
-6. At the top of the [Metrics Summary page][6], click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown menu.
-7. Select {{< ui >}}Manage tags{{< /ui >}} to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
-8. Specify the metric namespace prefix of the metrics you'd like to configure.
-9. Leave {{< ui >}}Include tags{{< /ui >}} selected. This includes all tags that have been actively queried on your assets (dashboards, notebooks, monitors, and SLOs), in the Metrics Explorer, or through the API.
-10. Click {{< ui >}}Save{{< /ui >}}.
+6. Create a [Tag Indexing Rule][18] for these metrics. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
+7. Scope the rule to the metric namespace prefix of the metrics you'd like to configure.
+8. Select {{< ui >}}Exclude tags{{< /ui >}} and use tag usage to unindex tags that haven't been queried in the last 30, 60, or 90 days and aren't used on any assets (dashboards, notebooks, monitors, and SLOs).
+9. Save the rule.
 
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
@@ -247,8 +244,8 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [10]: /glossary/#cardinality
 [11]: /account_management/audit_trail/
 [12]: https://app.datadoghq.com/event/explorer
-[13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /metrics/summary/#metrics-related-assets
 [16]: /metrics/summary/#facet-panel
 [17]: https://tour.datadoghq.com/psl/swa0y11
+[18]: /metrics/guide/tag-indexing-rules/
