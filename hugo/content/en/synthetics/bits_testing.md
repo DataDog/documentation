@@ -65,11 +65,12 @@ To trigger a Bits Testing job, your role must include the `synthetics_read` and 
 
 Select a private location to run Discovery against an internal application that only your private network can reach. Bits Testing reaches the application using remote execution. Your private location opens a short-lived tunnel to the application. The Bits Testing job itself runs on Datadog-managed infrastructure, not inside your environment.
 
-Remote execution requires private location worker `v1.74.0` or later. Pull the latest image from the [private location worker page on Docker Hub][9]. Workers on earlier versions keep running but can't be selected for Bits Testing.
-
-To enable remote execution, set `disableRemoteExecution` to `false` in the private location's [configuration file][12], then deploy the workers. For an existing private location, upgrade the worker image first, then redeploy.
-
 When you select a private location, the location picker shows its remote execution status. Job results list that private location as the job's location.
+
+#### Prerequisites
+
+- **Worker version**: Private location worker `v1.74.0` or later. Pull the latest image from the [private location worker page on Docker Hub][9]. Workers on earlier versions keep running but can't be selected for Bits Testing.
+- **Remote execution enabled**: Set `disableRemoteExecution` to `false` in the private location's [configuration file][12], then deploy the workers. For an existing private location, upgrade the worker image first, then redeploy.
 
 ## Profiles
 
