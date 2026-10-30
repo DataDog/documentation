@@ -12,7 +12,7 @@ To embed Git information in your Go build artifacts, follow the instructions for
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
 - The Go client library version 1.48.0 or later is required.
 
 ## Containers

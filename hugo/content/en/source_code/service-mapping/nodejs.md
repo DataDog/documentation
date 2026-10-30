@@ -14,7 +14,7 @@ To embed Git information in your Node.js build artifacts, follow the instruction
 
 ## Prerequisites
 
-- [Datadog Agent][1] v7.35.0 or later is required.
+- For container image label tagging, use [Datadog Agent][1] v7.35.0 or later. Other deployment models use their own Agent or serverless setup requirements.
 - The Node.js client library version 3.21.0 or later is required.
 
 ## Containers

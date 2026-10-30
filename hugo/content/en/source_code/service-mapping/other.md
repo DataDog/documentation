@@ -8,24 +8,22 @@ code_lang_weight: 70
 
 ## Overview
 
-If the language your service is written in is not [supported natively][2] section, use this page to manually tag your telemetry with Git information by setting environment variables.
+For a language without [native source code integration support][2], check the SDK's configuration before adding Git tags. `DD_GIT_COMMIT_SHA` and `DD_GIT_REPOSITORY_URL` are not supported by every SDK.
 
-## Prerequisites
+## C++: tag telemetry
 
-- [Datadog Agent][1] v7.35.0 or later is required.
-
-## Tag telemetry by setting environment variables
-
-Set the `DD_GIT_COMMIT_SHA` and `DD_GIT_REPOSITORY_URL` environment variables on your application's deployment:
+The Datadog C++ SDK supports global tags through `DD_TAGS`:
 
 ```shell
-export DD_GIT_COMMIT_SHA="<commitSha>"
-export DD_GIT_REPOSITORY_URL="<git-provider.example/me/my-repo>"
+export DD_TAGS="git.commit.sha:<commitSha>,git.repository_url:<repositoryUrl>"
 ```
 
-Replace `<commitSha>` with the commit SHA used to build your application. You can retrieve this by running `git rev-parse HEAD` at build time, and it needs to be passed into the runtime environment variables. Replace `<git-provider.example/me/my-repo>` with your repository URL.
+Append these entries to any existing `DD_TAGS` value. Replace `<commitSha>` with the commit SHA used to build the deployed application and `<repositoryUrl>` with its repository URL. Retrieve the SHA with `git rev-parse HEAD` during the build and pass it to the runtime environment.
 
-These environment variables add `git.commit.sha` and `git.repository_url` tags to your APM spans, linking your service to a specific commit in your source code repository.
+These settings attach tags to spans. They do not enable native source code integration support or guarantee that all source code features are available for C++.
 
-[1]: /agent/
+## Other languages
+
+Use the SDK's documented global-tag or span-tag API to attach `git.commit.sha` and `git.repository_url`. Use `DD_GIT_*` variables only if that library explicitly supports them.
+
 [2]: /source_code/service-mapping/#embed-git-information-in-your-build-artifacts
