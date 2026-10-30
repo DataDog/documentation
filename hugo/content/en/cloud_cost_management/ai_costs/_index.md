@@ -11,6 +11,9 @@ further_reading:
 - link: "/cloud_cost_management/allocation/custom_allocation_rules"
   tag: "Documentation"
   text: "Custom Allocation Rules"
+- link: "/cloud_cost_management/ai_costs/ai_gateway_allocation"
+  tag: "Documentation"
+  text: "AI Gateway Allocation"
 - link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Tag Pipelines"
@@ -49,7 +52,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -59,8 +62,8 @@ To use AI Costs, you must have at least one of the following supported providers
 |---|---|
 | Amazon Bedrock | [AWS integration][2] |
 | Amazon SageMaker | [AWS integration][2] |
-| Anthropic   | [SaaS integration][3] |
-| Azure Foundry   | [Azure integration][18] |
+| Anthropic (Enterprise and Platform) | [SaaS integration][3] |
+| Azure Foundry (Models and Tools) | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI (Platform only)     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
@@ -101,8 +104,151 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to sources
 
-[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
+AI Costs attributes spend to its sources in two ways: provider-specific tags that each provider reports on its bill, and [out-of-the-box (OOTB) allocation rules][12] that enrich provider costs with Datadog observability data.
 
+### Provider-specific tags
+
+In addition to the [normalized AI tags](#normalized-ai-tags), each provider reports its own set of tags. The AI cost summary page uses these tags to break down, filter, and group each provider's spend. The label column shows the name the tag uses on the AI cost summary page.
+
+{{< tabs >}}
+{{% tab "Amazon Bedrock" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The project that the cost belongs to. |
+| `aws_iam_principal_user` | IAM User | The IAM user that made the request. |
+| `aws_iam_principal_session_name` | IAM Session Name | The session name of the IAM role session that made the request. |
+| `aws_iam_principal_application_role` | IAM Application Role | The IAM role that the application assumed to make the request. |
+
+The IAM principal tags are available only when your AWS Cost and Usage Report (CUR 2.0) includes IAM principal data.
+
+{{% /tab %}}
+{{% tab "Amazon SageMaker" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `sagemaker_resource_type` | Resource Type | The type of SageMaker resource that generated the cost (for example, `app`). |
+| `sagemaker_resource_name` | Resource Name | The name of the SageMaker resource that generated the cost. |
+| `sagemaker_app_type` | App Type | The type of SageMaker app. Available only for resources where `sagemaker_resource_type` is `app`. |
+| `sagemaker_app_name` | App Name | The name of the SageMaker app. Available only for resources where `sagemaker_resource_type` is `app`. |
+| `sagemaker_component` | Component | The SageMaker component that generated the cost. |
+
+{{% /tab %}}
+{{% tab "Anthropic" %}}
+
+Anthropic reports a different set of tags for each plan.
+
+**Anthropic Enterprise**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `product` | Product | The Anthropic product that generated the cost (for example, `claude_code`). |
+| `context_window` | Context Window | The context window size range of the request (for example, `tier_0-200k` or `tier_200k-1m`). |
+| `speed` | Speed | The output speed mode of the request. |
+
+**Anthropic Platform**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `api_key_name` | API Key Name | The name of the API key that made the request. |
+| `workspace_name` | Workspace | The Anthropic workspace that the cost belongs to. |
+| `context_window` | Context Window | The context window size range of the request (for example, `tier_0-200k` or `tier_200k-1m`). |
+| `service_tier` | Service Tier | The service tier that processed the request (for example, `Standard`). |
+| `cost_type` | Cost Type | The type of charge (for example, `tokens`). |
+
+{{% /tab %}}
+{{% tab "Azure Foundry" %}}
+
+Azure Foundry spend is split into Foundry Models, which covers the `Foundry Models` meter category, and Foundry Tools, which covers all other AI meter categories.
+
+**Azure Foundry Models**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `resourcegroupname` | Resource Group | The Azure resource group that the cost belongs to. |
+| `metercategory` | Category | The Azure meter category of the charge (for example, `Foundry Models`). |
+| `metersubcategory` | Subcategory | The Azure meter subcategory of the charge. |
+
+**Azure Foundry Tools**
+
+| Tag | Label | Description |
+|---|---|---|
+| `resourcegroupname` | Resource Group | The Azure resource group that the cost belongs to. |
+| `metercategory` | Category | The Azure meter category of the charge (for example, `Foundry Tools` or `Cognitive Services`). |
+| `metersubcategory` | Subcategory | The Azure meter subcategory of the charge. |
+
+{{% /tab %}}
+{{% tab "Cursor" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `max_mode` | Max Mode | Whether the request used Cursor's Max Mode. |
+| `is_headless` | Headless Mode | Whether the request ran in headless mode, without the Cursor editor. |
+| `billing_group` | Billing Group | The Cursor billing group that the user belongs to. |
+
+{{% /tab %}}
+{{% tab "Databricks Mosaic AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `billing_origin_product` | Billing Origin Product | The Databricks product that generated the cost (for example, `MODEL_SERVING` or `VECTOR_SEARCH`). |
+| `model_name` | Model | The model that generated the cost. |
+| `workspace_name` | Workspace | The Databricks workspace that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "Gemini" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The Google Cloud project that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "GitHub Copilot" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `organization_name` | Organization | The GitHub organization that the cost belongs to. |
+| `repository_name` | Repository | The GitHub repository that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "OpenAI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `project` | Project | The OpenAI project that the cost belongs to. |
+| `api_key_name` | API Key Name | The name of the API key that made the request. |
+
+{{% /tab %}}
+{{% tab "Snowflake AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `account_name` | Account | The Snowflake account that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "Vertex AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The Google Cloud project that the cost belongs to. |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Out-of-the-box allocation tags
+
+OOTB allocation rules use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
 
 The following tags are available through OOTB allocation rules:
 
@@ -149,59 +295,9 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 
 {{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-## Allocating your AI gateway spend
+### Allocate shared AI gateway spend
 
-<div class="alert alert-info">Custom AI gateway allocation is in Preview.</div>
-
-If your teams send LLM requests through a shared AI gateway, the provider bill shows that traffic under a single API key or project. Connect your AI gateway to split that spend across the teams, users, or services that sent the requests, using token usage reported by your gateway.
-
-The **Connect your AI Gateway** flow generates [Custom Allocation Rules][12] that divide each provider bill in proportion to the token usage your gateway reports.
-
-### Requirements
-
-To connect your AI gateway, you need:
-
-- At least one of the following AI providers set up for Cloud Cost Management:
-  - [Anthropic][3]
-  - [OpenAI][5]
-- A source of gateway token usage:
-  - [Agent Observability][20], which reports `ml_obs.span.llm.*.tokens` metrics
-  - The [LiteLLM integration][21], which reports `litellm.*_tokens.metric.count` metrics
-- The `cloud_cost_management_write` permission
-
-A provider is available to allocate only if its bill is connected to Cloud Cost Management **and** your usage source reports requests to that provider.
-
-### Create gateway allocation rules
-
-1. Navigate to [**Cloud Cost** > **Summarize** > **AI**][6] and click **Connect your AI Gateway**.
-
-   {{< img src="cloud_cost/ai_costs/ccm-ai-gateway-connect-button.png" alt="The AI Costs page header in Cloud Cost Management, with the Connect Your AI Gateway button highlighted." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-2. **Select usage metric**: Choose where your usage telemetry comes from.
-   - Select **Agent Observability** or **LiteLLM**.
-   - Filter the usage metric to your gateway traffic (for example, `service:ai_gateway`). For LiteLLM, you can instead select **Allocate my costs based on the entire metric**.
-   - Choose up to three tags to break your AI spend down by, such as `team`, `user`, or `service`.
-3. **Match to bills**: Select the provider bills to split. For each provider, add a bill filter that identifies the gateway's spend on that bill (for example, `api_key_name:gateway_api_key` for Anthropic or `project_name:ai_gateway` for OpenAI). Bill filters support the `is` operator.
-4. **Confirm coverage**: Review the percentage of provider-reported tokens that your usage source accounts for, for each token type, over a seven-day window. If coverage exceeds 100% for a token type, check that your usage filter and bill filter cover the same API key or project. For more information, see [How gateway costs are allocated](#how-gateway-costs-are-allocated).
-
-   {{< img src="cloud_cost/ai_costs/ccm-ai-gateway-coverage.png" alt="The Confirm coverage step of the Connect your AI Gateway flow, showing Anthropic coverage percentages for output, input, cache read, and cache write tokens." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
-
-The flow creates one allocation rule for each provider and token type, such as input, output, cache read, and cache write tokens.
-
-After the rules are processed, the tags you selected are added to your provider costs. Use these tags across Cloud Cost Management, including [Cloud Cost Explorer][11], dashboards, [Cost Reports][14], [monitors][8], and [budgets][9].
-
-### How gateway costs are allocated
-
-Gateway allocation rules compare your gateway's token usage against the token usage reported by the provider for the same bill scope. For each model and day, **coverage** is the gateway's tokens divided by the provider-reported tokens. For example, 80,000 output tokens reported by your gateway out of 100,000 output tokens reported by the provider is 80% coverage.
-
-- The covered share of cost is split across the tags you selected in proportion to each tag value's token usage.
-- The remaining share of cost is attributed to `uninstrumented`. This represents spend on the bill scope that your gateway did not report, such as requests that bypass the gateway.
-- Coverage is capped at 100%. If your gateway reports more tokens than the provider, all of the cost is split across your selected tags.
-- If the provider reports no token usage for a model on a given day, those costs are not allocated.
-
-### Manage gateway allocation rules
-
-Rules created by the **Connect your AI Gateway** flow appear in the **AI Gateway Rules** section of the [Custom Allocation Rules][12] page, grouped by provider. You can view or delete gateway rules, but you cannot edit or disable them. To change a gateway configuration, delete its rules and run the **Connect your AI Gateway** flow again.
+If your teams send LLM requests through a shared AI gateway, you can split that spend across the teams, users, or services that sent the requests. For more information, see [AI Gateway Allocation][20].
 
 ## Further reading
 
@@ -226,6 +322,5 @@ Rules created by the **Connect your AI Gateway** flow appear in the **AI Gateway
 [17]: /cloud_cost_management/recommendations
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
 [19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
-[20]: /llm_observability/
-[21]: /integrations/litellm/
+[20]: /cloud_cost_management/ai_costs/ai_gateway_allocation
 [22]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts

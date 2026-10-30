@@ -4391,6 +4391,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_ai_costs
       weight: 5
+    - name: AI Gateway Allocation
+      url: cloud_cost_management/ai_costs/ai_gateway_allocation
+      parent: cloud_cost_ai_costs
+      identifier: cloud_cost_ai_gateway_allocation
+      weight: 501
     - name: Reporting
       url: cloud_cost_management/reporting
       parent: cloud_cost
