@@ -100,7 +100,6 @@ Datadog detects the following statements:
 - `ALTER TABLE ... RENAME TO`
 - `ALTER TABLE ... RENAME COLUMN`
 
-Datadog detects these statements in SQL files and in SQL strings in your code.
 
 <div class="alert alert-info">Datadog does not review ORM migration methods, such as <code>remove_column</code> or <code>rename_table</code>.</div>
 
