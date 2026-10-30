@@ -197,7 +197,7 @@ A budget tracks spend for matching AI Gateway traffic over a UTC calendar day, w
 | Block | Matching requests are rejected with HTTP `402` until the window resets. |
 | Alert-only | Requests continue. The monitor `AI Gateway budget: <BUDGET_NAME>` alerts at the warning threshold and at the limit. |
 
-When a budget is scoped to a [Datadog team][13], requests match it only if they include the header `x-ai-gateway-team: <TEAM>`. If a personal budget matches the same request, that personal budget applies instead.
+When a budget is scoped to a [Datadog team][13], it applies to requests from that team's members. A request with the header `x-ai-gateway-team: <TEAM>` matches only the selected team's budgets. A request without the header matches the budgets of every team the caller directly belongs to, and its full cost counts against each of them. A personal budget that matches the same request also applies.
 
 Datadog creates a [monitor][10] named `AI Gateway budget: <BUDGET_NAME>` for each budget and notifies the budget creator at the warning threshold and when the limit is reached. On the budget's details page, click the monitor icon next to {{< ui >}}Warning threshold{{< /ui >}} to change the recipients and message.
 
@@ -231,7 +231,7 @@ Start in Alert mode, review the {{< ui >}}Would limit{{< /ui >}} status for a fe
 - All matching traffic shares one limit. For example, a team rate limit of 600 requests per minute allows 600 requests per minute for the whole team, not for each member.
 - A request counts against every rate limit it matches, and AI Gateway accepts it only if every matching rate limit in Enforce mode has available capacity.
 - Tokens count when a response completes, so requests already in progress can take token usage over a limit.
-- A rate limit scoped to a [Datadog team][13] applies only to requests that include the header `x-ai-gateway-team: <TEAM>`.
+- A rate limit scoped to a [Datadog team][13] applies to requests that select that team with the header `x-ai-gateway-team: <TEAM>`. Without the header, it applies to requests from users who directly belong to the team.
 - If a request falls back to another destination, it counts once against each rate limit.
 - Your organization can have up to 100 active rate limits. Changes apply within a few seconds.
 - If AI Gateway cannot check a rate limit, it accepts the request.
@@ -341,10 +341,7 @@ Errors that AI Gateway generates include the `X-Ai-Gateway-Error-Code` response 
 
 A provider `4xx` or `5xx` response keeps its original status and body and does not include `X-Ai-Gateway-Error-Code`. Those responses are not listed below.
 
-When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
-
-`gateway_team_required`
-: HTTP `400`. The request matches a [Datadog team][13] budget but no matching personal budget. Resend with `x-ai-gateway-team: <TEAM>`.
+The following list shows the HTTP status that AI Gateway returns with each `X-Ai-Gateway-Error-Code` value and what the code means. When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Gemini, in that order.
 
 `invalid_gateway_team`
 : HTTP `400`. `x-ai-gateway-team` is empty, repeated, or not a valid Datadog team slug.
@@ -364,6 +361,9 @@ When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Ge
 `budget_exceeded`
 : HTTP `402`. A matching AI Gateway budget is exhausted for the current period. OpenAI, Anthropic, and Gemini all return HTTP `402`. On Gemini, the canonical status is `FAILED_PRECONDITION`. Do not retry automatically. Raise the budget or wait for the window to reset.
 
+`budget_pricing_unavailable`
+: HTTP `402`. A matching budget in Block mode applies, but AI Gateway has no price for the target model, so it cannot count the request's cost. Set a custom price for the model in [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Model Catalog{{< /ui >}}][11], or switch the budget to Alert-only.
+
 `model_not_found`
 : HTTP `400`. The request's model, router, or provider identifier does not resolve to a known target: unknown model, unknown provider slug, unknown routing rule, or an empty or malformed identifier. The response body's `message` distinguishes which one. The code is named after OpenAI's `model_not_found`, so clients that already handle that code keep working.
 
@@ -373,6 +373,9 @@ When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Ge
 `unsupported_operation`
 : HTTP `400`. No eligible target supports the requested operation, for example a Responses field that no translator can map.
 
+`websocket_not_supported`
+: HTTP `426`. A `GET /responses` request, such as a Codex WebSocket connection, was rejected. AI Gateway serves OpenAI Responses only over `POST /responses`, buffered or streamed with `stream: true`. In Codex, set `supports_websockets=false` for the AI Gateway provider.
+
 `requested_provider_unavailable`
 : HTTP `400`. The provider pinned with `x-ai-gateway-provider` or the model prefix is not configured or active.
 
@@ -381,6 +384,9 @@ When an entry lists three HTTP statuses, they apply to OpenAI, Anthropic, and Ge
 
 `no_permitted_target`
 : HTTP `403`. Every eligible target was denied by an access policy. The caller cannot reach any of them without a policy change. Do not retry.
+
+`zdr_no_eligible_target`
+: HTTP `400`. The request requires zero data retention, and none of its eligible targets qualifies for it. This is a configuration issue. Do not retry.
 
 `zdr_requirement_unavailable`
 : HTTP `503` (OpenAI) / `504` (Anthropic) / `503` (Gemini). The zero-data-retention requirement could not be read. This is transient. Retry the request.
