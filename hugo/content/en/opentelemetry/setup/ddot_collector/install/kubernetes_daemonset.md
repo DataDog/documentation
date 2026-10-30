@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector as a Kubernetes DaemonSet
+title: Set Up the Agent's Collector as a Kubernetes DaemonSet
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
 - "/opentelemetry/setup/ddot_collector/install/kubernetes"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector as a Kubernetes DaemonSet using Helm or the Datadog Operator.
+Deploy the Agent's Collector as a Kubernetes DaemonSet with Helm or the Datadog Operator. The Agent's Collector is the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process. To run the DDOT Collector without the Agent, see [Install the DDOT Collector on Kubernetes][59].
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -38,8 +38,6 @@ Install and set up the following on your machine:
 **Network**: {{% otel-network-requirements %}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
-
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 
@@ -150,7 +148,7 @@ The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4
 
 When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
-**Note**: As of operator `v1.22.0`, the DDOT container uses the `ddot-collector` image instead of the `-full` agent image.
+**Note**: As of operator `v1.22.0`, the Agent's Collector container uses the `ddot-collector` image instead of the `-full` agent image.
 - When overriding the node agent image tag, use a tag >= `7.67.0` so the OTel container is scheduled (the `ddot-collector` image is only supported in >= `7.67.0`).
 - The `ddot-collector` image has no `-full` variant. If you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (for example, `registry.datadoghq.com/agent:7.72.1-full`).
 
@@ -282,7 +280,7 @@ datadog:
 
 ### Configure the OpenTelemetry Collector
 
-Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
+Because the Agent's Collector runs as a separate process from the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -756,7 +754,7 @@ Deploy the Datadog Agent with the configuration file:
 kubectl apply -f datadog-agent.yaml
 ```
 
-This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [DDOT Kubernetes Gateway installation guide][3].
+This deploys the Datadog Agent as a DaemonSet with the Agent's Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [Kubernetes gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -782,7 +780,7 @@ Replace `<RELEASE_NAME>` with the Helm release name you are using.
 
 <div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
-This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [DDOT Kubernetes Gateway installation guide][3].
+This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [Kubernetes gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -821,7 +819,7 @@ public String getDate() {
 
 ### Configure the application
 
-Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
+Your application container must send data to the Agent's Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
 
 If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application's Deployment manifest file:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
@@ -843,7 +841,7 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
+In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The Agent's Collector detects this tagging configuration and applies it to the data it collects from containers.
 
 Add the following environment variables to your application's deployment manifest:
 
@@ -912,7 +910,7 @@ Monitor your runtime (JVM) metrics for your applications.
 
 ### Collector health metrics
 
-View metrics from the DDOT Collector to monitor the Collector health.
+View metrics from the Agent's Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 
@@ -977,3 +975,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
 [58]: /opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog
+[59]: /opentelemetry/setup/ddot_collector/kubernetes/
