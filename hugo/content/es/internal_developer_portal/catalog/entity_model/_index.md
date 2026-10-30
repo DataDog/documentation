@@ -44,6 +44,9 @@ further_reading:
 - link: /integrations/github
   tag: Documentación
   text: Obtenga información sobre la integración con GitHub
+- link: /integrations/gitlab-source-code/
+  tag: Documentación
+  text: Obtenga información sobre la integración con GitLab
 - link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
   tag: Blog
   text: Importe archivos YAML de Backstage a Datadog
@@ -59,6 +62,8 @@ title: Modelo de entidad
 ## Descripción general {#overview}
 
 Catalog utiliza esquemas de definición para almacenar y mostrar metadatos relevantes sobre sus entidades. Los esquemas tienen reglas de validación integradas para garantizar que solo se acepten valores válidos. Puede visualizar advertencias en la pestaña **Definición** en el panel lateral de Catalog para cualquier servicio seleccionado.
+
+Utilice el campo `links` para agregar enlaces de código fuente a repositorios de GitHub o GitLab.
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="Un diagrama de flujo que muestra cómo los componentes de Catalog se conectan entre sí y con su entorno en la nube " style="width:100%;" >}}
 
@@ -315,7 +320,7 @@ Los componentes (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) here
 - La cláusula `inheritFrom:<entity_kind>:<name>` no está presente en el archivo YAML.
 
 ### Migración a la v3.0 {#migrating-to-v30}
-La v3.0 admite los mismos métodos de creación de metadatos que las versiones anteriores, incluidos Github, API, Terraform, Backstage, ServiceNow y la interfaz de usuario. Sin embargo, existen nuevos [puntos finales de API][5] y un nuevo [recurso de Terraform][6] para la v3.0.
+La v3.0 admite los mismos métodos de creación de metadatos que las versiones anteriores, incluidos GitHub, GitLab, API, Terraform, Backstage, ServiceNow y UI. Sin embargo, existen nuevos [puntos finales de API][5] y un nuevo [recurso de Terraform][6] para la v3.0.
 
 Para migrar archivos YAML de servicio existentes de la v1, v2, v2.1 o v2.2 a la v3, consulte [Migrar sus definiciones de servicio a la v3][7].
 
