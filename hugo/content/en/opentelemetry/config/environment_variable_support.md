@@ -103,7 +103,7 @@ Mapped values between `OTEL_TRACES_SAMPLER` & `DD_TRACE_SAMPLE_RATE`:<br>
 
 `OTEL_TRACES_EXPORTER`
 : **Description**: Selects the trace exporter. <br>
-**Notes**: A value of `none` disables tracing when `DD_TRACE_ENABLED` is not set. SDK versions that support OTLP trace export also accept `otlp` when `DD_TRACE_OTEL_ENABLED=true`. Earlier SDK versions may recognize only `none`. See [Export Traces from Datadog SDKs in OTLP Format][17] for supported languages, minimum versions, and protocols. <br>
+**Notes**: A value of `none` disables tracing when `DD_TRACE_ENABLED` is not set. In Java, this also requires `DD_TRACE_OTEL_ENABLED=true`. SDK versions that support OTLP trace export also accept `otlp` when `DD_TRACE_OTEL_ENABLED=true`. Earlier SDK versions may recognize only `none`. See [Export Traces from Datadog SDKs in OTLP Format][17] for supported languages, minimum versions, and protocols. <br>
 
 `OTEL_METRICS_EXPORTER`
 : **Description**: Specifies the metrics exporter to be used. <br>
