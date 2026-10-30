@@ -226535,15 +226535,29 @@ paths:
             example: 1048576
             format: int64
             type: integer
-        - description: Paging token for pagination.
+        - description: |-
+            Token of the next page from the `X-Paging` header of the previous response.
+            Send it without changes, URL-encoded in the query string. Omit it to get the first page.
           in: query
           name: paging
           schema:
-            example: eyJuZXh0IjoiYWJjMTIzIn0
             type: string
       responses:
         "200":
           description: OK
+          headers:
+            X-Has-More-Segments-To-Fetch:
+              description: |-
+                `true` if the view has more segments to get.
+                To get them, send the request again with the `paging` query parameter until this header is `false`.
+              schema:
+                type: boolean
+            X-Paging:
+              description: |-
+                Token of the next page to send in the `paging` query parameter.
+                Present only when `X-Has-More-Segments-To-Fetch` is `true`.
+              schema:
+                type: string
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -261060,7 +261074,9 @@ tags:
     name: Rum Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
-  - description: Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage.
+  - description: |-
+      Retrieve segments for RUM replay sessions.
+      Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
