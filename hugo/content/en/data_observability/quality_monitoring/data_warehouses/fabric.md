@@ -48,7 +48,7 @@ For each workspace you want to monitor:
 1. In Fabric, open the workspace and click {{< ui >}}Manage access{{< /ui >}}.
 2. Click {{< ui >}}Add people or groups{{< /ui >}}.
 3. Enter the name of the app registration that the Datadog Azure integration uses.
-4. Select {{< ui >}}Contributor{{< /ui >}} or {{< ui >}}Viewer{{< /ui >}}, and then click {{< ui >}}Add{{< /ui >}}.
+4. Select {{< ui >}}Contributor{{< /ui >}} or {{< ui >}}Viewer{{< /ui >}}, then click {{< ui >}}Add{{< /ui >}}.
 
 Choose a role based on the features you need:
 
