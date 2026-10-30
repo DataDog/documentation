@@ -90,7 +90,7 @@ After you identify unqueried metrics, you can eliminate the volume and cost of t
 To configure multiple unqueried metrics at once, create a [Tag Indexing Rule][7]:
 1. Navigate to {{< ui >}}Metrics → Settings{{< /ui >}}, click {{< ui >}}+ Create Rule{{< /ui >}}, and select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 2. Scope the rule to the metric namespace prefix of the unqueried metrics.
-3. Select the tags to include or exclude. To unindex tags that aren't queried or used on any assets, select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets).
+3. Select the tags to include or exclude. To unindex unused tags, select {{< ui >}}Exclude tags{{< /ui >}} and choose to unindex tags based on tag usage (tags not queried in the last 30, 60, or 90 days and not used on any assets).
 
 You have full control over the cardinality of your metrics without the need to change your applications nor the requirement of a remote-write setup. Below is an example of how eliminating timeseries that are rarely used can significantly reduce your custom metrics volumes and costs.
 
