@@ -71611,16 +71611,18 @@ components:
         - attributes
       type: object
     LLMObsCustomEvalConfigEvalScope:
-      description: Scope at which to evaluate spans.
+      description: Scope at which to evaluate spans. `trace_fan_out` requires `llm_judge_config.target_query`.
       enum:
         - span
         - trace
+        - trace_fan_out
         - session
       example: "span"
       type: string
       x-enum-varnames:
         - SPAN
         - TRACE
+        - TRACE_FAN_OUT
         - SESSION
     LLMObsCustomEvalConfigInferenceParams:
       description: LLM inference parameters for a custom evaluator.
@@ -71657,14 +71659,20 @@ components:
           type: number
       type: object
     LLMObsCustomEvalConfigIntegrationProvider:
-      description: Name of the LLM integration provider.
+      description: >-
+        Name of the LLM integration provider. Use `deterministic` for a code evaluator, which runs `llm_judge_config.user_specified_json_post_processing_function` instead of calling an LLM. `insights_sponsored` is returned for evaluators that Datadog manages and cannot be set.
       enum:
         - openai
-        - amazon-bedrock
+        - amazon_bedrock
         - anthropic
-        - azure-openai
-        - vertex-ai
-        - llm-proxy
+        - azure_openai
+        - vertex_ai
+        - llmproxy
+        - deterministic
+        - typesafe
+        - datadog
+        - datadog_ai_gateway
+        - insights_sponsored
       example: "openai"
       type: string
       x-enum-varnames:
@@ -71674,6 +71682,11 @@ components:
         - AZURE_OPENAI
         - VERTEX_AI
         - LLM_PROXY
+        - DETERMINISTIC
+        - TYPESAFE
+        - DATADOG
+        - DATADOG_AI_GATEWAY
+        - INSIGHTS_SPONSORED
     LLMObsCustomEvalConfigLLMJudgeConfig:
       description: LLM judge configuration for a custom evaluator.
       properties:
@@ -71698,13 +71711,13 @@ components:
           type: boolean
         output_schema:
           additionalProperties: {}
-          description: JSON schema describing the expected output format of the LLM judge.
+          description: JSON schema describing the expected output format of the LLM judge. Omit for a `deterministic` evaluator.
           nullable: true
           type: object
         parsing_type:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigParsingType"
         prompt_template:
-          description: List of messages forming the LLM judge prompt template.
+          description: List of messages forming the LLM judge prompt template. Omit for a `deterministic` evaluator.
           items:
             $ref: "#/components/schemas/LLMObsCustomEvalConfigPromptMessage"
           type: array
@@ -71714,7 +71727,8 @@ components:
           nullable: true
           type: string
         user_specified_json_post_processing_function:
-          description: User-provided function applied to post-process the JSON output of the LLM judge.
+          description: >-
+            User-provided JavaScript function applied to post-process the JSON output of the LLM judge. For a `deterministic` evaluator it is the evaluator itself: it receives the evaluated span (span scope), `{spans}` (trace scope), or `{session_id, traces}` (session scope), and its return value sets the result. A boolean, number, string or object becomes a boolean, score, categorical or JSON metric; `null` skips the evaluation; and `{value, assessment, reasoning, metadata}` also sets pass or fail, reasoning, and metadata.
           nullable: true
           type: string
       required:
@@ -71732,7 +71746,7 @@ components:
         integration_provider:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigIntegrationProvider"
         model_name:
-          description: Name of the LLM model.
+          description: Name of the LLM model. Use `javascript` for a `deterministic` evaluator.
           example: "gpt-4o"
           type: string
         vertex_ai:
@@ -71755,12 +71769,14 @@ components:
         - structured_output
         - json
         - keyword_search
+        - typed_questions
       example: "structured_output"
       type: string
       x-enum-varnames:
         - STRUCTURED_OUTPUT
         - JSON
         - KEYWORD_SEARCH
+        - TYPED_QUESTIONS
     LLMObsCustomEvalConfigPromptContent:
       description: A content block within a prompt message.
       properties:
