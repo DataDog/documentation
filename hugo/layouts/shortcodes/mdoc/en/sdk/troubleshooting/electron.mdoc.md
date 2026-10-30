@@ -23,7 +23,7 @@ To fix this, check the configuration passed to `init`. Call `init` once per laun
 
 ### Renderer events are missing
 
-The main process only accepts events from renderers whose host is listed in `allowedRendererHosts`. Renderers whose host is not listed do not report through the main process. Their Browser SDK runs on its own, so their events are not part of the application's sessions.
+The main process accepts events only from renderers whose host is listed in `allowedRendererHosts`. Renderers whose host is not listed do not report through the main process. Their Browser SDK runs on its own, so their events are not part of the application's sessions.
 
 To fix this, add the host of your renderer pages to `allowedRendererHosts`. For custom protocols, use the hostname component of the URL. For example, use `myapp` for `app://myapp/index.html`. See [Allowed renderer hosts][3] for the supported patterns.
 
@@ -37,7 +37,7 @@ To fix this, serve the renderer over a protocol where you control the response h
 
 ### A custom duration vital never stops
 
-The SDK records a duration vital only when `startDurationVital` and `stopDurationVital` run in the same process. A vital started in the main process cannot be stopped in a renderer process, and the reverse.
+The SDK records a duration vital only when `startDurationVital` and `stopDurationVital` run in the same process. A vital started in the main process cannot be stopped in a renderer process, and vice versa.
 
 To fix this, start and stop the vital in the same process. In renderer processes, use the equivalent `@datadog/browser-rum` APIs directly. See [Custom duration vitals][6].
 

@@ -117,6 +117,8 @@ You can modify the following fields:
 
 All other fields, such as identifiers, session, and application, stay unchanged.
 
+When you write the `beforeSendRum` callback, consider the following:
+
 - The callback is synchronous. Keep it fast.
 - Editable string fields must remain strings. To clear a field, set it to an empty string. Deleting a field or setting it to `null` or `undefined` is ignored.
 - If the callback throws an error, the SDK logs the error and sends the event unchanged.
@@ -229,8 +231,12 @@ Set the consent in the main process. It applies to the renderers allowed by `all
 
 For renderers that report through the main process, the Browser SDK is not informed of the consent and keeps collecting. As a result:
 
-- Requests that the Browser SDK traces (`allowedTracingUrls`) carry trace headers whatever the consent.
-- When consent is granted after a refusal, an open page's view moves to the new session with its next update. As a result, the new session appears in Datadog. Unlike other data, the view is sent even if it started while consent was refused, or pending and then refused. It includes what it measured since it started. The previous session no longer lists it. In the new session, Session Replay plays back the page only from its next view.
+- **Trace headers**: Requests that the Browser SDK traces (`allowedTracingUrls`) carry trace headers regardless of consent.
+- **Open views when consent is granted after a refusal**: The view of an open page moves to the new session at its next update, and the new session appears in Datadog.
+  - Unlike other data, the view is sent even if it started while consent was refused, or pending and then refused.
+  - The view includes everything it measured since it started.
+  - The previous session no longer lists the view.
+  - In the new session, Session Replay plays back the page only from its next view.
 
 ## Custom duration vitals
 

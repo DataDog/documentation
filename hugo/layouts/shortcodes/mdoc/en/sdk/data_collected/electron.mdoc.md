@@ -10,7 +10,7 @@ The Electron SDK collects data from two sources:
 - **Renderer processes** are monitored by the Browser SDK. Views, actions, resources, errors, and other renderer events follow the [Browser data collected][1] reference.
 - **The main process** is monitored by the Electron SDK, which generates RUM events, and by dd-trace-js, which generates traces.
 
-Every event has [attributes](#shared-attributes). Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to slice telemetry in analytics (group by). You can further enrich your data by [adding global context][2].
+Every event has attributes. See [Shared attributes](#shared-attributes). Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to filter and group telemetry in analytics (group by). You can further enrich your data by [adding global context][2].
 
 ## Main process RUM events
 

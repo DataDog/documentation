@@ -55,7 +55,7 @@ yarn add @datadog/electron-sdk
 ## Initialize the SDK in the main process
 
 1. Import `@datadog/electron-sdk/instrument` before importing `electron`. This import instruments the Electron APIs the SDK needs.
-2. Call `init` with your configuration and await it before you create any browser window.
+2. Call `init` once per launch with your configuration, and await it before you create any browser window.
 
 The example assumes an ES module main process, which supports top-level `await`. Otherwise, wrap the code in an async function.
 
@@ -262,10 +262,10 @@ const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
 Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Advanced Configuration][setup-init-1].
 
 {% alert level="info" %}
-Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users only interact with such windows, the session expires after 15 minutes of inactivity and no new session starts. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Set tracking consent][setup-init-2].
+Windows opened before `init` completes are not tracked until you reload them. These windows send no data, including the interactions that keep the session alive. If end users interact only with such windows, the session expires after 15 minutes of inactivity and no new session starts.
 {% /alert %}
 
-Call `init` once per launch.
+To wait for the end user's consent, don't defer `init`. Call it at startup with `trackingConsent: 'pending'` instead. See [Set tracking consent][setup-init-2].
 
 [setup-init-1]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
 [setup-init-2]: /real_user_monitoring/application_monitoring/electron/setup/#set-tracking-consent
@@ -352,7 +352,7 @@ Use a package manager layout that Forge supports. For example, use pnpm with a h
 
 ### Other bundlers and packagers
 
-electron-builder and plain Electron Forge package production dependencies by default. Add the plugin for your bundler to the main-process bundler configuration:
+By default, electron-builder and plain Electron Forge package production dependencies. Add the plugin for your bundler to the main-process bundler configuration:
 
 {% tabs %}
 {% tab label="Vite" %}
@@ -424,9 +424,9 @@ The SDK does not restore the consent at the next launch, so pass it at each laun
 
 After you run your app, navigate to the [RUM Explorer][setup-next-1] to see sessions from your application.
 
-- [Advanced Configuration][setup-next-2]: configure sampling, event enrichment, and renderer options.
-- [Error Tracking][setup-next-3]: track main process errors and crashes.
-- [Data Collected][setup-next-4]: review the data collected by the SDK.
+- [Advanced Configuration][setup-next-2]: Configure sampling, event enrichment, and renderer options.
+- [Error Tracking][setup-next-3]: Track main process errors and crashes.
+- [Data Collected][setup-next-4]: Review the data collected by the SDK.
 
 [setup-next-1]: /real_user_monitoring/explorer/
 [setup-next-2]: /real_user_monitoring/application_monitoring/electron/advanced_configuration

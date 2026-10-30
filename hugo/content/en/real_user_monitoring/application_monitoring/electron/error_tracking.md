@@ -55,14 +55,14 @@ Electron symbols are resolved automatically. You do not need to upload debug sym
 
 ## Upload source maps
 
-Stack traces collected in an Electron app contain the app's install path, which differs on each machine. The SDK rewrites the app path, as returned by `app.getAppPath()`, to `/` before sending events. For example, `/Users/alice/Applications/MyApp.app/Contents/Resources/app.asar/dist/main/index.js` becomes `/dist/main/index.js`. Other local paths are sent unchanged. URLs of renderers loaded from a custom protocol or `http(s)://` contain no install path and are not modified.
-
 Upload source maps at build time so Error Tracking can display original source code in stack traces.
+
+Stack traces collected in an Electron app contain the app's install path, which differs on each machine. The SDK rewrites the app path, as returned by `app.getAppPath()`, to `/` before sending events. For example, `/Users/alice/Applications/MyApp.app/Contents/Resources/app.asar/dist/main/index.js` becomes `/dist/main/index.js`. Other local paths are sent unchanged. URLs of renderers loaded from a custom protocol or `http(s)://` contain no install path and are not modified.
 
 ### Prepare your source maps
 
 1. Configure your bundler to generate source maps that embed the original code (`sourcesContent`). See [Upload JavaScript source maps][3]. If you compile the main process with `tsc` and no bundler, set both `sourceMap: true` and `inlineSources: true`. Otherwise, stack traces resolve but show no code snippets.
-2. Use a different `service` for the main process and for renderers. Datadog looks up source maps by service, version, and path, and the main process and a renderer can report the same path (for example `/dist/index.js`). The main process reports the `service` passed to the Electron SDK `init()`. Renderers report the `service` passed to the Browser SDK `init()`.
+2. Use a different `service` for the main process and for renderers. Datadog looks up source maps by service, version, and path, and the main process and a renderer can report the same path (for example, `/dist/index.js`). The main process reports the `service` passed to the Electron SDK `init()`. Renderers report the `service` passed to the Browser SDK `init()`.
 3. Set a `version` in the `init()` of both SDKs. It is not set by default, and the `--release-version` of the upload must match it. See [Initialization parameters][4].
 
 ### Upload with `datadog-ci`
@@ -124,7 +124,7 @@ datadog-ci sourcemaps upload ./dist/renderer \
 
 ## Limitations
 
-- Symbols of native extensions (native Node.js modules and addons) are not yet supported. Frames from these modules are not symbolicated in native crash reports.
+Symbols of native extensions (native Node.js modules and addons) are not supported, so frames from these modules are not symbolicated in native crash reports.
 
 ## Further Reading
 

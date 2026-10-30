@@ -17,7 +17,7 @@ further_reading:
 
 Send logs to Datadog from the renderer processes of your Electron applications. The renderers use the Browser Logs SDK, and the [Electron SDK][1] in the main process uploads their logs.
 
-<div class="alert alert-info">Log collection is not yet available in the main process. It is available in renderer processes only.</div>
+<div class="alert alert-info">Log collection is available only in renderer processes. It is not supported in the main process.</div>
 
 ## Setup
 
@@ -25,22 +25,22 @@ Send logs to Datadog from the renderer processes of your Electron applications. 
 
 2. Install `@datadog/browser-logs` in your renderer bundle:
 
-{{< tabs >}}
-{{% tab "npm" %}}
+   {{< tabs >}}
+   {{% tab "npm" %}}
 
-```shell
-npm install @datadog/browser-logs
-```
+   ```shell
+   npm install @datadog/browser-logs
+   ```
 
-{{% /tab %}}
-{{% tab "Yarn" %}}
+   {{% /tab %}}
+   {{% tab "Yarn" %}}
 
-```shell
-yarn add @datadog/browser-logs
-```
+   ```shell
+   yarn add @datadog/browser-logs
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 3. Initialize the Browser Logs SDK in each renderer page that collects logs:
 

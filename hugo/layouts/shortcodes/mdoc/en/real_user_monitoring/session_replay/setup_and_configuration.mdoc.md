@@ -573,7 +573,7 @@ Datadog Session Replay for Flutter does not currently support Web view capture.
 
 <!-- Electron -->
 {% if equals($platform, "electron") %}
-Electron renderers are web pages, so the setup above records them directly. No web view instrumentation is needed.
+Electron renderers are web pages, so the setup records them directly. No web view instrumentation is needed.
 {% /if %}
 <!-- end Electron -->
 
@@ -661,7 +661,7 @@ final configuration = DatadogConfiguration(
 
 <!-- Electron -->
 {% if equals($platform, "electron") %}
-The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#step-2-enable-session-replay-in-the-main-process) above.
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#step-2-enable-session-replay-in-the-main-process).
 {% /if %}
 <!-- end Electron -->
 
