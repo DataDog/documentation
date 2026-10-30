@@ -22,7 +22,7 @@ Database Monitoring PR Reviews is in preview. To request access, contact your Da
 
 ## Overview
 
-A diff alone can't show the risk of a database change. A one-line query edit can shift load on your busiest table, and dropping a column can break a query that another service still runs. Database Monitoring PR Reviews brings production context into code review, so you can catch these problems before you merge instead of after you deploy.
+Database Monitoring PR Reviews brings production context into code review, so you can catch unexpected problems before you merge instead of after you deploy.
 
 When a GitHub pull request changes a database query or schema, Datadog checks the change against what [Database Monitoring][1] observes in production. Authors and reviewers see the impact where they already work, without switching tools or relying on guesswork.
 
