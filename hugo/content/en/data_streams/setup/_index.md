@@ -11,6 +11,7 @@ title: Setup Data Streams Monitoring
   {{< image-card href="/data_streams/nodejs/" src="integrations_logos/node.png" alt="Node" >}}
   {{< image-card href="/data_streams/go" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/data_streams/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/data_streams/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
 
