@@ -19,6 +19,25 @@ BYOC (Bring Your Own Cloud) Logs requires **Kubernetes** for production deployme
 If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog account team to activate BYOC Logs on your account.
 </div>
 
+### Cluster ID
+
+Set `config.cluster_id` in the BYOC Logs Helm values to a meaningful, stable identifier for the cluster. The cluster ID forms part of each BYOC Logs index name:
+
+```
+byoc--<cluster_id>--<index_name>
+```
+
+These index names appear under {{< ui >}}BYOC INDEXES{{< /ui >}} in Log Explorer and can be used in monitor and dashboard queries.
+
+Configure the cluster ID in the Helm values:
+
+```yaml
+config:
+  cluster_id: <CLUSTER_ID>
+```
+
+Changing the cluster ID after installation changes the BYOC Logs index names and can interrupt ingestion and search. To change it, follow [Rename a BYOC Logs cluster][3].
+
 ### Kubernetes cluster requirements
 
 | Requirement            | Details                                                                                  |
@@ -44,3 +63,4 @@ BYOC Logs supports the following object storage types:
 {{< /whatsnext >}}
 
 [2]: /byoc-logs/install/docker/
+[3]: /byoc-logs/operate/rename_cluster/
