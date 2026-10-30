@@ -5938,6 +5938,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
+    - name: AI Gateway
+      url: llm_observability/configure/ai_gateway
+      parent: llm_obs_configure
+      identifier: llm_obs_ai_gateway
+      weight: 604
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
