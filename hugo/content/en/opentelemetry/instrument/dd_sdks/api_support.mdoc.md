@@ -679,6 +679,73 @@ histogram.record(duration, Attributes.builder().put("method", "GET").put("status
 ```
 {% /if %}
 
+{% if includes($prog_lang, ["node_js", "python", "java"]) %}
+
+### Shut down metrics in short-lived processes
+
+With metrics enabled, request a final export before the process exits. Stop recording metrics before shutdown. These operations are provided by the SDK.
+
+{% if equals($prog_lang, "node_js") %}
+Requires `dd-trace` 5.127.0 or later on the 5.x release line, or 6.16.0 or later. Wait for the callback before exiting; it receives `null` on success or an error on failure.
+
+```javascript
+const { metrics } = require('@opentelemetry/api');
+
+metrics.getMeterProvider().shutdown((error) => {
+  if (error) console.error('Failed to shut down metrics', error);
+});
+```
+
+For TypeScript, cast the provider before calling `shutdown`:
+
+```typescript
+import { metrics } from '@opentelemetry/api';
+import type { opentelemetry as DatadogOpenTelemetry } from 'dd-trace';
+
+const meterProvider = metrics.getMeterProvider() as ReturnType<typeof metrics.getMeterProvider> &
+  DatadogOpenTelemetry.MeterProvider;
+
+meterProvider.shutdown((error) => {
+  if (error) console.error('Failed to shut down metrics', error);
+});
+```
+
+The Datadog provider has no separate force-flush method.
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+Call the OpenTelemetry SDK provider's `shutdown` method:
+
+```python
+from opentelemetry import metrics
+
+meter_provider = metrics.get_meter_provider()
+meter_provider.shutdown(timeout_millis=10_000)
+```
+
+To export without shutting down, call `meter_provider.force_flush(timeout_millis=10_000)` instead.
+{% /if %}
+
+{% if equals($prog_lang, "java") %}
+Requires `dd-trace-java` 1.68.0 or later. The Datadog provider implements `java.io.Closeable`:
+
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import java.io.Closeable;
+import java.io.IOException;
+
+try {
+    ((Closeable) GlobalOpenTelemetry.get().getMeterProvider()).close();
+} catch (IOException e) {
+    throw new IllegalStateException("Failed to close metrics", e);
+}
+```
+
+`close()` requests a final export and exporter shutdown, waiting up to 10 seconds. Shutdown continues if the wait times out or the thread is interrupted. The method does not report export success. There is no separate force-flush method.
+{% /if %}
+
+{% /if %}
+
 ## Supported configuration
 
 To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
