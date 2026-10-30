@@ -11,8 +11,8 @@ further_reading:
   text: "Learn how to query and visualize deployments"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility for CI provider deployments is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 ## Overview
@@ -28,7 +28,7 @@ If you are executing deployments using a CI provider, you can monitor your deplo
 ## Setup
 
 <div class="alert alert-info">
-The setup requires the <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> version `2.26.0` or later.
+The setup requires the <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> version <code>2.26.0</code> or later.
 </div>
 
 To set up CD Visibility, use the `datadog-ci deployment mark` command inside the CI job that is performing the deployment.

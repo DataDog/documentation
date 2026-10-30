@@ -286,7 +286,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Delete Unused RDS Instance
-      recommendation_description: RDS instance with 0 database connections and 0 replica lag.
+      recommendation_description: RDS instance with no client connections and no replica lag.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -464,6 +464,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Log Analytics Workspace
+      recommendation_type: Delete Idle Log Analytics Workspace
+      recommendation_description: Identifies Log Analytics workspaces with no billed data volume, ingested data, or user queries that still incur retention charges, and recommends deleting them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: Managed Disk
       recommendation_type: Delete Unattached Managed Disk
       recommendation_description: Managed disk is unattached and can be deleted.
@@ -486,11 +492,23 @@ multifiltersearch:
       recommendation_type: Downsize Managed Disk Throughput
       recommendation_description: Managed disk using less than the configured threshold of provisioned throughput.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk
+      recommendation_type: Migrate Managed Disk from Premium SSD to Premium SSD v2
+      recommendation_description: Identifies attached Premium SSD data disks that would cost less as Premium SSD v2 provisioned for their measured peak IOPS and throughput, and recommends converting them.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Delete Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -521,6 +539,12 @@ multifiltersearch:
       resource_type: SQL Server Database
       recommendation_type: Downsize SQL Server Database Storage
       recommendation_description: SQL Server Database using less than 20% of provisioned storage capacity.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: Azure
+      resource_type: SQL Managed Instance
+      recommendation_type: Downsize SQL Managed Instance
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay low on a smaller vCore size, and recommends downsizing them, at most two sizes at a time, to cut on-demand compute and SQL license charges.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -608,6 +632,12 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: GCP
+      resource_type: BigQuery Dataset
+      recommendation_type: Delete Idle BigQuery Dataset
+      recommendation_description: Identifies BigQuery datasets billed only for long-term storage, meaning no table was modified in the last 90 days, and recommends deleting them after confirming nothing still reads them.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: GCP
       resource_type: Compute Address
       recommendation_type: Delete Unused Compute IP Address
       recommendation_description: Unused compute IP addresses can be deleted.
@@ -677,6 +707,12 @@ multifiltersearch:
       resource_type: Storage Bucket
       recommendation_type: Transition Cloud Storage Bucket to Autoclass
       recommendation_description: Objects in the storage bucket can be automatically migrated to archival tiers for better rates.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: GCP
+      resource_type: Vertex AI Project
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Google Cloud projects already using Vertex AI prompt caching below the target hit rate and estimates the input cost savings from reaching the target.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS

@@ -1,0 +1,29 @@
+entries:
+  - change_type: added
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40438
+    operations:
+      - CreateOrgGroupMemberships
+      - DeleteOrgGroupMembership
+      - DeleteOrgGroupMemberships
+    title: Add Org Groups endpoints to add and remove org group memberships
+  - change_type: modified
+    date: '2026-10-15'
+    link: https://github.com/DataDog/documentation/pull/40438
+    operations:
+      - BulkUpdateOrgGroupMemberships
+      - CreateOrgGroupPolicy
+      - CreateOrgGroupPolicyOverride
+      - DeleteOrgGroupPolicy
+      - DeleteOrgGroupPolicyOverride
+      - GetOrgGroupMembership
+      - GetOrgGroupPolicy
+      - GetOrgGroupPolicyOverride
+      - ListOrgGroupPolicies
+      - ListOrgGroupPolicyConfigs
+      - ListOrgGroupPolicyOverrides
+      - ListOrgGroupPolicySuggestions
+      - UpdateOrgGroupMembership
+      - UpdateOrgGroupPolicy
+      - UpdateOrgGroupPolicyOverride
+    title: Add Org Groups endpoints to add and remove org group memberships

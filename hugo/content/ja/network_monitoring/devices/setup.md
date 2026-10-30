@@ -14,7 +14,7 @@ further_reading:
   text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
 title: セットアップ
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Network Device Monitoring は、オンプレミスのルーター、スイッチ、ファイアウォールの健全性とパフォーマンスに関する洞察を得るのに役立ちます。ネットワークにアクセスできるホストに Datadog Agent をインストールすると、自動的にネットワークデバイスが検出され、すぐにメトリクスの収集が始まります。
 
@@ -86,6 +86,9 @@ NDM でアクティブな Agent とスタンバイの Agent を HA ペアとし�
 [ServiceNow インテグレーション][7]
 : ServiceNow の CMDB (構成管理データベース) で定義されたデータを使用して、Datadog Network Device Monitoring で監視されるネットワークデバイスを動的に拡張します。
 
+デバイスページ
+: デバイスのページで、{{< ui >}}Device Settings{{< /ui >}} をクリックし、{{< ui >}}Tags{{< /ui >}} タブを開いて、{{< ui >}}Edit Tags{{< /ui >}} セクションの {{< ui >}}User{{< /ui >}} をクリックします。デバイスはデフォルトで最大20個のユーザータグをサポートしています。組織の制限を引き上げるには、[サポートにお問い合わせ][23]ください。
+
 [Network Device Monitoring API](#use-the-network-api)
 : Network Device Monitoring API を利用して、ネットワークデバイスにプログラムでタグを追加します。
 
@@ -151,3 +154,4 @@ NetFlow 対応デバイスからのフローレコードを視覚化して監視
 [20]: /ja/integrations/guide/high_availability
 [21]: /ja/network_monitoring/devices/vpn_monitoring
 [22]: /ja/network_monitoring/devices/syslog
+[23]: /ja/help/

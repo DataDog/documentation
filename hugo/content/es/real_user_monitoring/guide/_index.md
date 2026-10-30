@@ -1,65 +1,69 @@
 ---
 cascade:
   algolia:
-    category: Guía
+    category: Guide
     rank: 20
-    subcategory: Guías de RUM y Session Replay
-description: Guías completas para la implementación, optimización y mejores prácticas
+    subcategory: RUM & Session Replay Guides
+description: Guías integrales para la implementación, optimización y prácticas recomendadas
   de RUM y Session Replay para aplicaciones web y móviles.
 disable_toc: true
 private: true
 title: Guías de Real User Monitoring y Session Replay
 ---
-
-{{< whatsnext desc="Generalidades de RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Entender la jerarquía de eventos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Calcular puntuaciones Apdex e indicadores de rendimiento personalizados utilizando datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas utilizando datos de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitorizar tu uso de RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Realizar un seguimiento del uso de RUM con etiquetas (tags) de atribución de uso{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Configurar RUM de forma remota utilizando LaunchDarkly{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Empezando con el Seguimiento de despliegues en RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Empezando con el Seguimiento de indicadores de funciones{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones de quiosco utilizando RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas para el muestreo RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigar trazas (traces) de stack tecnológico ofuscadas con símbolos de depuración de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/retention_filter_best_practices" >}}Prácticas recomendadas para los filtros de retención{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/best-practices-tracing-native-ios-android-apps" >}}Prácticas recomendadas para el rastreo de aplicaciones iOS y Android nativas{{< /nextlink >}}
+{{< whatsnext desc="RUM general:" >}}
+    {{< nextlink href="real_user_monitoring/guide/understanding-the-rum-event-hierarchy" >}}Comprender la jerarquía de eventos de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/compute-apdex-with-rum-data" >}}Calcule Apdex e indicadores de rendimiento personalizados con datos de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Cree alertas con datos de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/create-charts-with-rum-custom-metrics" >}}Cree gráficos con métricas personalizadas de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Haga un seguimiento de su uso de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Realice un seguimiento del uso de RUM con etiquetas de atribución de uso{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Introducción al seguimiento de implementaciones de RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Haga un seguimiento de sesiones de quiosco mediante RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Prácticas recomendadas para el muestreo de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigue trazas de pila ofuscadas con símbolos de depuración de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/retention_filter_best_practices" >}}Prácticas recomendadas para filtros de retención{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-tracing-native-ios-android-apps" >}}Prácticas recomendadas para el rastreo de aplicaciones nativas de iOS y Android{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Browser RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Enviar acciones de usuario personalizadas{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identificar bots en el RUM Explorer{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Cargar mapas fuente de JavaScript {{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Controlar el volumen de la sesión utilizando la configuración de muestreo para RUM del navegador y RUM y Session Replay del navegador{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Mejorar y controlar los datos de RUM de navegador{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Actualizar el SDK de RUM del navegador{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Hacer proxy los datos RUM de tu navegador{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Consejos para utilizar las herramientas de desarrollo del navegador{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/define-servicios-and-track-ui-components-in-your-browser-application/" >}}Definir servicios y realizar un seguimiento de los componentes de la interfaz de usuario en tu aplicación de navegador {{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Habilitar RUM en tu tienda Shopify{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Activar RUM en tu tienda Squarespace{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Activar RUM en tu tienda WordPress + WooCommerce{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitorizar tu aplicación Next.js con RUM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitorizar aplicaciones Electron con el SDK del navegador{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}Monitorizar aplicaciones de Capacitor con el SDK del navegador{{< /nextlink >}}
+{{< whatsnext desc="Seguimiento de operaciones:" >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-operations-setup" >}}Prácticas recomendadas para configurar operaciones de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-creating-slos-on-operations" >}}Mejores prácticas para crear SLO para operaciones de RUM{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="RUM de navegador:" >}}
+    {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Envíe acciones de usuario personalizadas{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identifique bots en el Explorador de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Cargue los mapas del código fuente de JavaScript{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-webassembly-symbols" >}}Cargue los símbolos de WebAssembly{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Controle el volumen de sesiones mediante la configuración de muestreo para RUM de navegador y para RUM de navegador y Session Replay{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enriquezca y controle sus datos de RUM del navegador{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Actualice el SDK de RUM para navegador{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-rum-data" >}}Configure un proxy para sus datos de RUM del navegador {{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/devtools-tips" >}}Consejos al utilizar las herramientas para desarrolladores del navegador{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/define-services-and-track-ui-components-in-your-browser-application/" >}}Defina servicios y rastree componentes de la interfaz de usuario en su aplicación de navegador {{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Habilite RUM en su tienda Shopify{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Habilite RUM en su tienda Squarespace{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Habilite RUM en su tienda de WordPress + WooCommerce{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitoree su aplicación de Next.js con RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitoree aplicaciones de Electron utilizando el SDK del navegador{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}Monitoree aplicaciones de Capacitor utilizando el SDK del navegador{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="RUM móvil:" >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}Política de obsolescencia de los SDK móviles de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Actualizar los SDK móviles de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Utilizar varias instancias de SDK móviles de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Aplicar proxies a tus datos móviles de RUM{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}Inicializar tu SDK nativo antes de que se inicie React Native{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}Monitorizar aplicaciones React Native híbridas{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Actualice los SDK móviles de RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Utilice varias instancias del SDK móvil{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Configure un proxy para sus datos de RUM móvil{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}Inicialice su SDK nativo antes de que inicie React Native{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}Monitoree aplicaciones híbridas de React Native{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Permitir workers de servicios de terceros en Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Utilizar Session Replay en tus flujos de trabajo de asistencia{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enriquecer tus Session Replays con componentes de Shadow DOM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Conectar Session Replay con tus herramientas de terceros{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Uso de Session Replay como herramienta clave en los análisis retrospectivos{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generar tests de navegador Synthetic a partir de Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigar tickets de Zendesk con Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Permita service workers de terceros para Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Utilice Session Replay en sus flujos de trabajo de soporte{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enriquezca sus Session Replays con componentes de Shadow DOM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Conecte Session Replay a sus herramientas de terceros{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Uso de Session Replay como herramienta clave en post-mortems{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Genere pruebas Synthetic a partir de Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigue tickets de Zendesk con Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

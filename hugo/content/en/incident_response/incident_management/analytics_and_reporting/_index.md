@@ -79,6 +79,10 @@ The duration from incident's detection time to incident's declaration time.
 {{< img src="incident_response/incident_management/analytics_and_reporting/TimeToInternalResponse.png" alt="time to internal response graphic" style="width:80%;">}}
 {{< /collapse-content >}}
 
+{{< collapse-content title="Time from Detect to Resolve" level="h4" >}}
+The duration from the incident's detection time to the time it was resolved. Unlike Time to Resolve, which starts at declaration, this measure also includes the time between detection and declaration.
+{{< /collapse-content >}}
+
 In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7].
 
 ### Timestamp overrides
@@ -88,10 +92,12 @@ Incident responders may forget to declare a Datadog incident before starting the
 To address this, organizations can enable **timestamp overrides**, which allow incident responders to manually override an incident's recorded timestamps. When present, overrides affect the following analytic measures:
 
 - `Time to Detect`
+- `Time to Internal Response`
 - `Time to Repair`
 - `Time to Resolve`
+- `Time from Detect to Resolve`
 
-Overrides only influence search and analytics. They do not change the history automatically recorded to the incident timeline. They do not apply to the analytic measures `Status Active Duration` or `Status Stable Duration`, which are driven by the cumulative length of status segments on incident timelines.
+Overrides affect search, analytics, the durations displayed in the incident's **Timestamps** section, and duration variables when templates are rendered. They do not change the history automatically recorded to the incident timeline. They do not apply to the analytic measures `Status Active Duration` or `Status Stable Duration`, which are driven by the cumulative length of status segments on incident timelines.
 
 To enable timestamp overrides, go to [**Incidents** > **Settings** > **Information**][11].
 
@@ -149,3 +155,4 @@ Use the out-of-the-box Notebook template to create the Incident Report or build 
 [9]: https://app.datadoghq.com/notebook/template/11/incident-report
 [10]: /notebooks/#share-notebooks
 [11]: https://app.datadoghq.com/incidents/settings#information
+[12]: /incident_response/incident_management/setup_and_configuration/variables/#incident-variables

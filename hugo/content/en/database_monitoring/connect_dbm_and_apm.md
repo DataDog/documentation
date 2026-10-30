@@ -96,11 +96,17 @@ For `full` mode with Java and .NET:
 | Language | Min tracer version | Library/Framework | Mode |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
 
 For `full` mode with Java:
 - The instrumentation overwrites `V$SESSION.ACTION`.
 - Prerequisite: Java tracer 1.45 or greater
+
+For `dynamic_service` mode with Java, you can propagate service information without changing SQL statement text. Use this option if you rely on features that match exact SQL text, such as SQL Plan Management baselines.
+- Set `DD_DBM_PROPAGATION_MODE=dynamic_service` and `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`.
+- The instrumentation writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments. This overwrites any existing `V$SESSION.ACTION` value.
+- `V$SESSION.ACTION` is set once per connection and is updated only if the service hash changes.
+- Prerequisite: Java tracer 1.67.0 or greater
 
 {{% /tab %}}
 
@@ -238,6 +244,13 @@ public class Application {
     }
 }
 ```
+
+**Oracle without SQL comments (tracer versions 1.67.0 and above)**:
+To propagate service information to Oracle without modifying SQL statement text, set **both** of the following:
+- `DD_DBM_PROPAGATION_MODE=dynamic_service` (or the system property `dd.dbm.propagation.mode=dynamic_service`)
+- `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true` (or the system property `dd.dbm.propagation.oracle.action-only.enabled=true`)
+
+With this configuration, the tracer writes the service hash to `V$SESSION.ACTION` instead of injecting SQL comments into Oracle statements, including prepared statements. Connections to other databases continue to receive SQL comments.
 
 **Tracer versions 1.44 and above**:
 Enable the prepared statements tracing for Postgres using **one** of the following methods:

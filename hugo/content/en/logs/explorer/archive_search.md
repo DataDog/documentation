@@ -104,6 +104,8 @@ To retain more data or access logs in other Datadog products, choose one of the 
 - **Rehydrate after completion**:
   During the 24-hour window, you can rehydrate results to extend retention and make them available in Log Explorer, Dashboards, and Notebooks.
 
+When you rehydrate results, you can store them in Standard Indexing or, if your organization uses [Flex Logs][10], in Flex storage.
+
 ## Analyze results
 
 After launching a search, logs stream into the {{< ui >}}Archive Search Results{{< /ui >}} page. From this page, you can use filters to narrow down the results and open specific log details to investigate issues.
@@ -247,3 +249,4 @@ In order to search log events from your archives, Datadog uses a service account
 [7]: /logs/log_configuration/archives/?tab=awss3#archive-lookup-attribute
 [8]: /logs/log_configuration/archives/?tab=awss3#archive-partition-attribute
 [9]: /logs/log_configuration/archives/?tab=awss3#compression
+[10]: /logs/log_configuration/flex_logs/
