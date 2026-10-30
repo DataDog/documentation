@@ -31,7 +31,7 @@ An *evaluation* reads a flag value. An *exposure* records the experiment variant
 | Withdraw a subject from experiment allocations | Immediate experimentation opt-out | Skip experiment allocations and continue through ordinary feature allocations. | Skipped allocations do not produce exposures. |
 | Exclude experiment allocations activated at or after a subject's preference timestamp | Future-experiments-only opt-out | Earlier experiment allocations remain eligible; skip later allocations. | Eligible earlier allocations can still produce exposures. |
 
-Use both controls if the application requires both behaviors. Do not use exposure logging settings as a substitute for experimentation opt-out. Disabling exposure logging stops records, but does not prevent experiment assignment.
+Use both controls if the application requires both behaviors. Do not use exposure logging settings as a substitute for experimentation opt-out. Disabling exposure logging stops exposure records but does not prevent experiment assignment.
 
 ## Flag evaluation opt-out
 

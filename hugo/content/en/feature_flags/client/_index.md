@@ -36,9 +36,9 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscation][2] for precomputed assignments in version `2.1.0` or later. No additional provider configuration is required.
 
-## Subject-level opt-out
+## Opt out individual users or devices
 
-Flag evaluation opt-out and experimentation opt-out control different behaviors for a subject. See [Flag Evaluation and Experimentation Opt-Out][3] for the shared concepts and SDK support considerations.
+Flag evaluation opt-out and experimentation opt-out control different behaviors for a subject, such as a user or device. See [Flag Evaluation and Experimentation Opt-Out][3] for the shared concepts and SDK support considerations.
 
 ## Telemetry options by platform
 

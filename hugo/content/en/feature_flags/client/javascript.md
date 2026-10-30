@@ -239,8 +239,8 @@ The web provider also supports these optional settings:
 | `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated flag evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
-| `enableEvaluationTelemetryOptOutParameter` | `false` | Honor the Boolean `dd_evaluation_telemetry_opt_out` context attribute. See [Flag evaluation opt-out](#flag-evaluation-opt-out). |
-| `experimentationOptOutMode` | `ExperimentationOptOutMode.Disabled` | Select how to honor the `dd_experimentation_opt_out_at` context timestamp. See [Experimentation opt-out](#experimentation-opt-out). |
+| `enableEvaluationTelemetryOptOutParameter` | `false` | In version `2.2.0` or later, honor the Boolean `dd_evaluation_telemetry_opt_out` context attribute. See [Flag evaluation opt-out](#flag-evaluation-opt-out). |
+| `experimentationOptOutMode` | `ExperimentationOptOutMode.Disabled` | In version `2.2.0` or later, select how to honor the `dd_experimentation_opt_out_at` context timestamp. See [Experimentation opt-out](#experimentation-opt-out). |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for flag evaluation telemetry. |
 | `initialFlagsConfiguration` | unset | Supply context-matching precomputed data as a fallback if fetching fails. See [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data). |
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
@@ -308,7 +308,7 @@ In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has
 
 ## Control flag evaluation telemetry and experiment participation
 
-Use separate controls to manage flag evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Flag Evaluation and Experimentation Opt-Out][7].
+In `@datadog/openfeature-browser` version `2.2.0` or later, use separate controls to manage flag evaluation telemetry and experiment participation for each subject. Both controls are disabled by default. For shared behavior and policy selection across client SDKs, see [Flag Evaluation and Experimentation Opt-Out][7].
 
 ### Flag evaluation opt-out
 
@@ -332,7 +332,7 @@ await OpenFeature.setProviderAndWait(provider, {
 });
 ```
 
-This suppresses new flag evaluation events, aggregated evaluation counts, and automatic RUM flag annotations for the subject. Only Boolean `true` activates suppression. A missing attribute, `false`, or another type, such as the string `'true'`, does not activate suppression.
+Setting the attribute to `true` suppresses new flag evaluation events, aggregated evaluation counts, and automatic RUM flag annotations for the subject. Only Boolean `true` activates suppression. A missing attribute, `false`, or another type, such as the string `'true'`, does not activate suppression.
 
 The control does not change flag results or experiment participation. It does not suppress experiment exposures, customer hooks, or unrelated application telemetry. It does not remove queued events or existing RUM annotations.
 
@@ -347,7 +347,7 @@ await OpenFeature.setContext({
 });
 ```
 
-This control is not a general consent system. Assignment requests and exposures can still contain subject data.
+Flag evaluation opt-out is not a general consent system. Assignment requests and exposures can still contain subject data.
 
 ### Experimentation opt-out
 
@@ -380,9 +380,9 @@ await OpenFeature.setProviderAndWait(provider, {
 });
 ```
 
-Use `ExperimentationOptOutMode.FutureExperimentsOnly` to exclude experiments based on their activation time. This mode does not preserve only previous enrollments. An older allocation can assign the subject for the first time.
+Use `ExperimentationOptOutMode.FutureExperimentsOnly` to exclude experiments based on their activation time. This mode checks allocation activation time, not the subject's enrollment history. An older allocation can still assign the subject for the first time.
 
-Supply a valid timestamp in the format `YYYY-MM-DDTHH:mm:ss[.fraction]`, followed by `Z` or a numeric offset such as `-04:00`. For example, `2026-10-19T12:00:00Z` and `2026-10-19T08:00:00-04:00` represent the same instant. Comparisons retain nanosecond precision; additional fractional digits are truncated. Empty strings, Boolean values, `null`, invalid dates, and timestamps without a timezone are invalid.
+Supply a valid timestamp in the format `YYYY-MM-DDTHH:mm:ss[.fraction]`, followed by `Z` or a numeric offset such as `-04:00`. For example, `2026-10-19T12:00:00Z` and `2026-10-19T08:00:00-04:00` represent the same instant. Comparisons retain nanosecond precision; fractional digits beyond nanoseconds are truncated. Empty strings, Boolean values, `null`, invalid dates, and timestamps without a timezone are invalid.
 
 With an enabled mode, an invalid timestamp prevents assignment requests and causes initialization or context updates to fail. Flag evaluations return the application default with `INVALID_CONTEXT`.
 
@@ -400,7 +400,7 @@ With either enabled mode, context changes withhold previous assignments until ma
 
 Experimentation opt-out does not suppress flag evaluation telemetry. Enable flag evaluation opt-out separately if both controls are needed. Immediate withdrawal can change a subject's experience during an experiment; account for this when interpreting experiment results.
 
-### Application-managed configuration
+### Opt-out with application-managed configuration
 
 `DatadogCoreProvider` accepts both controls and applies experimentation exclusion locally to rules-based configuration. Datadog evaluation and RUM tracking hooks honor its flag evaluation telemetry policy; exposure hooks remain enabled.
 
