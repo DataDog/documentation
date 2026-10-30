@@ -63,9 +63,7 @@ To trigger a Bits Testing job, your role must include the `synthetics_read` and 
 
 ### Run Bits Testing from a private location
 
-Select a private location to run Discovery against an internal application that only your private network can reach. Bits Testing reaches the application using remote execution. Your private location opens a short-lived tunnel to the application. The Bits Testing job itself runs on Datadog-managed infrastructure, not inside your environment.
-
-When you select a private location, the location picker shows its remote execution status. Job results list that private location as the job's location.
+Select a private location to run Discovery against an internal application that only your private network can reach. Bits Testing reaches the application using remote execution. Your private location opens a short-lived tunnel to the application. The Bits Testing job itself runs on Datadog-managed infrastructure, not inside your environment. Job results list the private location you selected as the job's location.
 
 #### Prerequisites
 
