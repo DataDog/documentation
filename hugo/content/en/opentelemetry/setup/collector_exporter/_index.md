@@ -21,9 +21,9 @@ further_reading:
 - link: "/opentelemetry/config/otlp_receiver"
   tag: "Documentation"
   text: "Enable the OTLP Receiver"
-- link: "/opentelemetry/setup/ddot_collector/install/"
+- link: "/opentelemetry/setup/ddot_collector/"
   tag: "Documentation"
-  text: "Install the DDOT Collector (Recommended)"
+  text: "DDOT Collector"
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
@@ -41,7 +41,7 @@ Send traces, metrics, and logs to Datadog using the OpenTelemetry Collector. The
 - **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
 - **Datadog extension**: Reports the Collector's configuration to Datadog for Fleet Automation. It does not export telemetry data.
 
-This is the recommended setup for a Collector you manage yourself. If you want a Collector distribution that Datadog maintains and supports, use the [Datadog Distribution of OTel Collector (DDOT)][12] instead.
+This is the recommended setup for a Collector you manage yourself. If you want a Collector that Datadog builds, use the [DDOT Collector][12] instead.
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
@@ -873,7 +873,7 @@ For the complete configuration files for each environment, see the [`opentelemet
 
 ### 3. Configure your application
 
-Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+Configure your OpenTelemetry-instrumented application to send data to the Collector. If your application isn't instrumented yet, see [Instrument Your Applications][502]. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -1013,6 +1013,7 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [9]: https://app.datadoghq.com/fleet
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
-[12]: /opentelemetry/setup/ddot_collector/install/
+[12]: /opentelemetry/setup/ddot_collector/
 [13]: /opentelemetry/integrations/kubernetes_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
+[502]: /opentelemetry/instrument/

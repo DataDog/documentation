@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector on ECS Fargate
+title: Set Up the Collector in the Datadog Agent on ECS Fargate
 code_lang: ecs_fargate
 type: multi-code-lang
 code_lang_weight: 6
@@ -11,7 +11,9 @@ further_reading:
 
 ## Overview
 
-Follow this guide to deploy the Datadog Distribution of OpenTelemetry (DDOT) Collector alongside the Datadog Agent on Amazon ECS Fargate. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
+This page was previously titled "Install the DDOT Collector on ECS Fargate."
+
+Deploy the Collector in the Agent on Amazon ECS Fargate. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent. Because ECS Fargate does not support host-based deployments, the Datadog Agent runs as a sidecar container in the same ECS task as your application.
 
 <div class="alert alert-info">
   <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
@@ -33,7 +35,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
 
 ### Create an ECS task definition
 
