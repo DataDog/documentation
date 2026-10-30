@@ -60,11 +60,7 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 
 ## Get alerted before reaching a limit
 
-To get notified before users reach their limit, create a [metric monitor][9] on the AI Credits [usage metrics][10]. For example, to alert when any user approaches a 200 AI Credit monthly limit:
-
-1. Sum the AI Credits metrics for the products you use, such as `datadog.estimated_usage.bits_chat.ai_credits` and `datadog.estimated_usage.bits_investigation.ai_credits`, grouped by `user_handle`.
-1. Evaluate the `sum` of the query over the {{< ui >}}Current month{{< /ui >}} [cumulative time window][11].
-1. Set the alert threshold below the limit, for example at 180 AI Credits.
+To get notified before users reach their limit, use the AI Credits [usage metrics][10], grouped by `user_handle`, in a [metric monitor][9].
 
 ## Further reading
 
@@ -80,4 +76,3 @@ To get notified before users reach their limit, create a [metric monitor][9] on 
 [8]: /bits_ai/bits_investigation/configure/#configure-rate-limits
 [9]: /monitors/types/metric/
 [10]: /account_management/billing/ai_credits/#monitor-usage
-[11]: /monitors/configuration/#cumulative-time-windows
