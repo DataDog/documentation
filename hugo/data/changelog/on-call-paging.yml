@@ -5,3 +5,13 @@ entries:
     operations:
       - RerouteOnCallPage
     title: Add POST /api/v2/on-call/pages/page_id/reroute endpoint
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41222
+    operations:
+      - AcknowledgeOnCallPage
+      - CreateOnCallPage
+      - EscalateOnCallPage
+      - RerouteOnCallPage
+      - ResolveOnCallPage
+    title: Fix On-Call Paging success status codes
