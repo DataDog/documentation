@@ -350,3 +350,25 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+
+<!-- PHP -->
+{{- if eq (.Get "lang") "php" -}}
+<!-- Kafka (php-rdkafka) -->
+  {{- if eq (.Get "lib") "php-rdkafka" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.27.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.27.0 or later
+    {{- end -}}
+  {{- end -}}
+<!-- RabbitMQ (php-amqplib) -->
+  {{- if eq (.Get "lib") "php-amqplib" -}}
+    {{- if eq (.Get "type") "minimal" -}}
+      1.27.0
+    {{- end -}}
+    {{- if eq (.Get "type") "recommended" -}}
+      1.27.0 or later
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
