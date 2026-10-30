@@ -555,6 +555,11 @@ menu:
       url: agent/configuration/infrastructure-modes/
       parent: agent_configuration
       weight: 610
+    - name: Agent Data Plane
+      identifier: agent_configuration_agent_data_plane
+      url: agent/configuration/agent-data-plane/
+      parent: agent_configuration
+      weight: 611
     - name: Fleet Automation
       identifier: agent_fleet_automation
       url: agent/fleet_automation

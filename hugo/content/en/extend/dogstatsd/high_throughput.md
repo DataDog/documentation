@@ -23,7 +23,7 @@ When DogStatsD is used to send a large volume of metrics to a single Agent, if p
 Most of the time the symptoms can be alleviated by tweaking some configuration options described below.
 
 <div class="alert alert-info">
-Agent Data Plane is a Preview feature for processing high-volume custom metrics workloads with improved CPU and memory efficiency. You can <a href="https://forms.gle/TRMaUZmzg1F2V55v8">request access</a> to this Preview feature.
+For high-volume DogStatsD workloads, enable the <a href="/agent/configuration/agent-data-plane/">Agent Data Plane</a>, which processes DogStatsD traffic with lower CPU and memory usage. Some configuration options on this page do not apply when the Agent Data Plane is enabled.
 </div>
 
 ## General tips
@@ -401,6 +401,8 @@ To enable the stats mode, you can either:
 - Use the `datadog-agent config set dogstatsd_stats true` command to enable it at runtime. You can disable it at runtime using the command `datadog-agent config set dogstatsd_stats false`.
 
 When this mode is enabled, run the command `datadog-agent dogstatsd-stats`. A list of the processed metrics is returned in descending order by the metrics received.
+
+**Note**: If the [Agent Data Plane][7] is enabled, stats mode is always available and doesn't need to be enabled. Run `agent-data-plane dogstatsd stats` instead.
 
 While running in this mode, the DogStatsD server runs a burst detection mechanism. If a burst is detected, a warning log is emitted. For example:
 
@@ -793,3 +795,4 @@ See [DataDog/dogstatsd-csharp-client][1] for more information about the client c
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#sample-rates
 [5]: /extend/dogstatsd/high_throughput/#note-on-sysctl-in-kubernetes
 [6]: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
+[7]: /agent/configuration/agent-data-plane/#run-dogstatsd-debug-commands
