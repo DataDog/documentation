@@ -93,39 +93,31 @@ helm upgrade datadog-operator datadog/datadog-operator
 
 ```yaml
 spec:
+  global:
+    checksTagCardinality: orchestrator
+    #(...)
   features:
     autoscaling:
       workload:
         enabled: true
     eventCollection:
       unbundleEvents: true
-  override:
-    clusterAgent:
-      env:
-        - name: DD_AUTOSCALING_FAILOVER_ENABLED
-          value: "true"
-    nodeAgent:
-      env:
-        - name: DD_AUTOSCALING_FAILOVER_ENABLED
-          value: "true"
+    oomKill:
+      enabled: true
 ```
 
 3. [Admission Controller][1] is enabled by default with the Datadog Operator. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=4-5" >}}
-...
+#(...)
 spec:
   features:
     admissionController:
       enabled: true
-...
+#(...)
 {{< /highlight >}}
 
-4. Apply the updated `datadog-agent.yaml` configuration:
-
-```shell
-kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
-```
+4. {{% k8s-operator-redeploy %}}
 
 [1]: /containers/cluster_agent/admission_controller/
 
@@ -136,20 +128,24 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 ```yaml
 datadog:
+  #(...)
   autoscaling:
     workload:
       enabled: true
   kubernetesEvents:
     unbundleEvents: true
+  tagCardinality: orchestrator
+  systemProbe:
+    enableOOMKill: true
 ```
 
 2. [Admission Controller][1] is enabled by default in the Datadog Helm chart. If you disabled it, re-enable it by adding the following highlighted lines to `datadog-values.yaml`:
-{{< highlight yaml "hl_lines=5-6" >}}
-...
+{{< highlight yaml "hl_lines=3-4" >}}
+#(...)
 clusterAgent:
   admissionController:
     enabled: true
-...
+#(...)
 {{< /highlight >}}
 
 3. Update your Helm version:
@@ -158,18 +154,16 @@ clusterAgent:
 helm repo update
 ```
 
-4. Redeploy the Datadog Agent with your updated `datadog-values.yaml`:
-
-```shell
-helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
-```
+4. {{% k8s-helm-redeploy %}}
 
 [1]: /containers/cluster_agent/admission_controller/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Vertical scaling recommendations are applied to new pods through the [Admission Controller][19] mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
+**Note**: 
+- Vertical scaling recommendations are applied to new pods through the [Admission Controller][19] mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
+- See the [reference](#reference) section for details on the [OOM Kill and check cardinality](#oom-kill-handling) and [Kubernetes unbundled event handling](#unbundled-event-collection).
 
 ### Idle cost and savings estimates
 
@@ -682,7 +676,7 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 
 | | How it's computed |
 |---|---|
-| **Request and limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is added. If an **OOMKill** is detected, an additional **20% bump** is applied to help prevent future out-of-memory events. |
+| **Request and limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is added. If an **OOM Kill** is detected, an additional **20% bump** is applied to help prevent future out-of-memory events. |
 
 **Note:** Peak memory tracking captures the highest memory usage ever recorded by any container that has existed within the 8-day lookback window. This means that even if a container started before that window, its peak usage (for example, at startup) is still accounted for in the recommendation.
 
@@ -701,12 +695,27 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 |---|---|
 | **Request and limit recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
 
-#### Key design principles
+#### OOM Kill handling
+When an out of memory kill (OOM Kill) occurrs for a pod managed by Datadog vertical autoscaling, the recommended memory limit for the corresponding container is increased by 20%. This updates your pods with a new pod rollout or [in place vertical scaling](#in-place-vertical-scaling) depending on your settings. This is re-applied on each subsequent OOM Kill (on updated pods) until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures. Change the ratio with `spec.options.outOfMemory.bumpUpRatio`; see the [DatadogPodAutoscaler manifest reference][15].
+
+Datadog recommends enabling the [OOM Kill][20] check using the recommended configuration for the best OOM Kill detection. With this enabled the Agent can readily capture the OOM Kill events reported per pod. 
+
+Without this check enabled OOM Kill detection relies on the Agent capturing the container *activily* in the terminated state. Depending on the workload and the frequency of the OOM Kills, the container may not stay in this state too long before Kubernetes restarts it. Which can make the Agent miss this state.
+
+This OOM Kill check also requires the check to report with the Tag Cardinality set to `orchestrator`. This can be set globally in your config as seen in the [setup](#setup), or as the default with Datadog Agent `7.86.0` or greater.
+
+### Unbundled Event Collection
+
+Datadog recommends to enable the unbundled Kubernetes event collection. This reports the Kubernetes events for your Pods and the Datadog Pod Autoscaling at a higher granularity, rather than bundling multiple like events together.
+
+This is especially useful with the visualizations on the Datadog Pod Autoscaling page, linking your pod's usage with its scaling events.
+
+### Key design principles
 
 - **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
 - **Decaying weights**: For Burstable-class request recommendations (CPU or memory), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
 - **Safety margins**: Every recommendation includes a margin above observed usage (5 to 10%) to provide a buffer against unexpected spikes.
-- **OOMKill response**: When an OOMKill occurs, the memory limit is raised (by 20% by default) and re-applied on each subsequent OOMKill until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures. Change the ratio with `spec.options.outOfMemory.bumpUpRatio`; see the [DatadogPodAutoscaler manifest reference][15].
+- **OOM Kill response**: When an OOM Kill occurs, the memory limit is raised (by 20% by default) and re-applied on each subsequent OOM Kill until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures.
 - **Guaranteed-class preservation**: When a resource has request equal to limit, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
 
 ## Further reading
@@ -732,3 +741,4 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 [17]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
 [18]: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/#limitations
 [19]: /containers/cluster_agent/admission_controller/
+[20]: /integrations/oom_kill
