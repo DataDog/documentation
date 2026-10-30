@@ -147493,6 +147493,7 @@ components:
             product_analytics_settings_read: View Product Analytics Settings.
             product_analytics_settings_write: Edit Product Analytics Settings.
             product_analytics_warehouse_model_write: Create, edit, and delete Product Analytics Warehouse Models.
+            repo_info_read: View data from Git repositories.
             security_comments_read: Read comments of vulnerabilities.
             security_monitoring_critical_assets_read: Read Critical Assets.
             security_monitoring_critical_assets_write: Write Critical Assets.
