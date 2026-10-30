@@ -6,6 +6,9 @@ further_reading:
 - link: "/actions/agents/improve_agents_with_traces/"
   tag: "Documentation"
   text: "Improve agents using their execution traces"
+- link: "/bits_ai/skills_library/"
+  tag: "Documentation"
+  text: "Skills Library"
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Action Catalog"
@@ -92,6 +95,21 @@ Click on any added tool to hardcode its parameters. For example, lock a Slack to
 
 The [Datadog MCP Server][8] is enabled by default. You can connect to any API using [custom HTTP actions][12].
 
+### Skills
+
+Add skills from the [Skills Library][18] to give an agent task-specific knowledge and procedures without putting them in its main instructions.
+
+Agents load skills automatically through the Datadog MCP Server. If you disable the Datadog MCP Server on an agent, the agent cannot use its skills.
+
+To add a skill:
+* In the **Skills** section of the agent configuration, click **+** and select the skill.
+
+{{< img src="/actions/agents/agent-builder-add-skills.png" alt="The Bits Agent Builder editor with the Skills section highlighted, showing the plus button for adding a skill" style="width:80%;" >}}
+
+For information about how to create skills, see [Skills Library][18].
+
+For information about how to decide which instructions to move into skills, see [Improve Agents Using Their Execution Traces][19].
+
 ### Automations
 
 Set up your agent to run automatically with a [schedule][13], or trigger it from a Datadog [monitor][14], [incident][15], or [security signal][16]. These automations use [Workflow Automation][9].
@@ -153,3 +171,5 @@ The agent executes with its configured tools and instructions, then returns its 
 [15]: /actions/workflows/trigger/#incident-triggers
 [16]: /actions/workflows/trigger/#security-triggers
 [17]: /incident_response/work_management/ai/custom_agents/
+[18]: /bits_ai/skills_library/
+[19]: /actions/agents/improve_agents_with_traces/#move-conditional-instructions-into-skills
