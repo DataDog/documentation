@@ -75,7 +75,7 @@ Severity depends on the query's share of database workload:
 
 ### Schema changes that break live queries
 
-Datadog flags a migration that drops or renames a table or column that production queries referenced in the last 24 hours. For example, a pull request adds this migration:
+Datadog flags migrations that drop or rename a table or column that a production query referenced in the last 24 hours. For example, if a pull request adds this migration:
 
 {{< code-block lang="sql" >}}
 ALTER TABLE orders DROP COLUMN legacy_status;
