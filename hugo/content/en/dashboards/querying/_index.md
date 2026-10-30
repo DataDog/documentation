@@ -220,6 +220,25 @@ For example, to calculate the time elapsed in seconds since the last reported ba
 ```text
 time() - max:backup.last_completed_timestamp{*}
 ```
+**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in Unix milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
+
+To return the elapsed time in seconds, divide the millisecond field by 1000:
+
+```text
+time() - (max:@timestamp / 1000)
+```
+
+To return the result in milliseconds, multiply `time()` by 1000:
+
+```text
+1000 * time() - max:@timestamp
+```
+
+`time()` is available only within a formula, so include it in the formula expression rather than adding it as a separate query column.
+
+`time()` uses the queried time range rather than the current time. In scalar widgets, such as query value and table widgets, `time()` returns the end of the selected time range. In timeseries widgets, it returns the timestamp of each point. For an accurate "time since" calculation in a scalar widget, use a live time range. If the time range is paused or fixed, `time()` returns the end of that range.
+
+<!-- TODO(DOCS-15168): Add a screenshot of the scalar table widget example here, using an img shortcode with src "dashboards/querying/time_function_query_table.png" and alt text such as "A query table widget showing time elapsed since each item was last seen, calculated with the time() function". Shortcode delimiters are omitted here so Hugo does not try to resolve the image before it exists. -->
 
 {{% /collapse-content %}}
 
