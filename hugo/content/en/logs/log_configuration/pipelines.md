@@ -337,58 +337,56 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 ## Auto-Processing
 <!-- vale Datadog.headings = YES -->
 
-{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="Auto-Processing is in Preview" >}}
-Complete the form to request access.
-{{< /callout >}}
+Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring pipelines.
 
-Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring parsing.
+Auto-Processing only handles logs that do not match the filter of any integration or custom pipeline. If a log matches a pipeline's filter, Auto-Processing does not process it, even if that pipeline does not modify the log. Your existing pipeline configurations remain unchanged.
 
-Auto-Processing only handles logs that do not match the filter of any existing integration or custom pipeline. If a log matches an existing pipeline's filter, Auto-Processing does not process it, even if that pipeline does not modify the log. Your existing pipeline configurations remain unchanged.
+<div class="alert alert-warning">If a pipeline's filter matches every log (for example, <code>*</code>), Auto-Processing does not process any logs in your organization. To use Auto-Processing, narrow that pipeline's filter to the logs it needs to process.</div>
 
-### How it works
+Datadog groups supported logs by source and service and creates an Auto-Processing entry for each. As new log patterns appear, Datadog updates entries to support them without changing how previously supported patterns are parsed. Attributes already extracted keep their names, so facets, dashboards, and monitors that use them keep working.
 
-Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Datadog automatically updates entries to support new log patterns without changing how previously supported patterns are parsed.
+{{< img src="logs/processing/pipelines/auto_processing_list.png" alt="The Auto-Processing tab on the Processing page, listing entries by source and service with the number of parsed attributes, usage, and an enable toggle for each entry" style="width:100%;" >}}
 
-[Review transformations](#review-transformations) and [control which entries process your logs](#enable-or-disable-an-entry). [Switch an entry to a manual pipeline](#switch-to-a-manual-pipeline) to customize its configuration.
+### Turn Auto-Processing on or off
 
-<!-- vale Datadog.headings = NO -->
-### Configure Auto-Processing
-<!-- vale Datadog.headings = YES -->
-
-Go to the [{{< ui >}}Processing{{< /ui >}} page][8] and select the {{< ui >}}Auto-Processing{{< /ui >}} tab.
-
-#### Turn Auto-Processing on or off
-
-Use the feature toggle to turn Auto-Processing on or off for your organization.
-
-#### Choose how new entries are enabled
-
-When Auto-Processing is on, choose whether new entries are enabled automatically:
-
-- **Automatically enable new entries**: New entries are enabled on creation and begin processing matching incoming logs.
-- **Review new entries before enabling**: New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
-
-### Review transformations
-
-1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service you want to review.
-2. Select {{< ui >}}View Transformations{{< /ui >}}.
-3. Select a log pattern and inspect example logs to compare their original and processed attributes.
+On the [{{< ui >}}Processing{{< /ui >}} page][8], select the {{< ui >}}Auto-Processing{{< /ui >}} tab and use the feature toggle to turn Auto-Processing on or off for your organization.
 
 ### Enable or disable an entry
 
 In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service. Disabling an entry affects future logs only. Logs that are already processed don't change.
 
+### Review transformations
+
+1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service you want to review.
+2. Click {{< ui >}}View Transformations{{< /ui >}}.
+3. Click a log pattern and inspect example logs to compare their original and processed attributes.
+
+{{< img src="logs/processing/pipelines/auto_processing_transformations.png" alt="The View Transformations page for an Auto-Processing entry, showing detected log patterns on the left and a diff of an example log's original and processed attributes on the right" style="width:100%;" >}}
+
+### Choose how new entries are enabled
+
+In the {{< ui >}}Auto-Processing{{< /ui >}} tab, choose whether new entries are enabled automatically:
+
+- **Automatically enable new entries**: New entries are enabled on creation and begin processing matching incoming logs.
+- **Review new entries before enabling**: New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
+
 ### Switch to a manual pipeline
 
-To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page.
+To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page. Datadog creates a custom pipeline with the same filter and processors, and removes the Auto-Processing entry for that source and service.
 
-After switching, you manage the pipeline's configuration and any future updates.
+After switching:
+
+- The pipeline appears in your pipelines list and parses logs the same way, so attribute names stay the same and existing facets, dashboards, and monitors keep working.
+- Datadog no longer updates the pipeline when new log patterns appear. You manage its configuration from then on.
+- Because the pipeline's filter matches these logs, Auto-Processing no longer processes them.
+
+To return to Auto-Processing, delete the manual pipeline. Datadog then creates a new entry for that source and service after its logs meet the requirements in [Limitations](#limitations). The new entry is generated from scratch and doesn't restore your earlier entry or your edits.
 
 ### Limitations
 
-- Each organization can have up to 100 Auto-Processing entries.
-- Some new log patterns might remain unparsed, even for a source and service that Auto-Processing already covers.
-- You cannot customize parsing or rename attributes within an Auto-Processing entry. Switch to a manual pipeline to make these changes.
+- Auto-Processing supports up to 100 source and service combinations per organization. Datadog does not process additional sources and services beyond this limit.
+- Auto-Processing creates an entry for a new source and service about 15 minutes after receiving its first logs, if it has at least 1,000 indexed logs in the past 24 hours. If it doesn't, Datadog checks again about 12 hours later. If the volume is still too low, no entry is created until a new log pattern appears for that source and service.
+- Some log patterns can remain unparsed, even for a source and service that Auto-Processing already covers.
 
 ## Further Reading
 
