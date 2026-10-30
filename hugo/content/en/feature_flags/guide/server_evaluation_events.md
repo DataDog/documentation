@@ -108,9 +108,9 @@ For Node.js, keep `dd-trace` external to a single-file application bundle and ma
 
 Evaluation counts are available with either value of `observe_full_evaluation_data`. Setting it to `true` enables the additional targeting-key and evaluation-context data described above.
 
-{{< img src="feature_flags/guide/server_evaluation_events/evaluations_graph.png" alt="Evaluations graph in Unique mode showing browser SDK data grouped by variant and SDK source" style="width:100%;" >}}
+{{< img src="feature_flags/guide/server_evaluation_events/evaluations_graph.png" alt="Evaluations graph in Unique mode showing server SDK data grouped by variant and SDK source" style="width:100%;" >}}
 
-The example above shows browser SDK data in **Unique** mode. Use **Total** and check your server SDK source when verifying server-side delivery.
+The example above shows server SDK data in **Unique** mode. Use **Total** and check your server SDK source when verifying server-side delivery.
 
 ## Further reading
 
