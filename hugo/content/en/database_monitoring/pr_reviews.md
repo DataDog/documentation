@@ -106,7 +106,7 @@ Datadog detects these statements in SQL files and in SQL strings in your code.
 
 ### Query optimizations
 
-For new and changed Postgres queries, Datadog runs the query through Database Monitoring's query optimizers and flags issues with a suggested fix:
+Datadog runs new and changed Postgres queries through Database Monitoring query optimizers, and comments with a suggested fix for identified issues:
 
 | Suggestion | What Datadog flags |
 | ---------- | ------------------ |
