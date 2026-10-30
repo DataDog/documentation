@@ -579,6 +579,11 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_3323862424",
+      "description": "Upload Custom Costs file marked as an AI provider file returns \"Accepted\" response"
     }
   ],
   "ValidateQuery": [

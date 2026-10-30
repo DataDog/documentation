@@ -17,3 +17,11 @@ entries:
     operations:
       - SearchCostRecommendations
     title: Document errors and page size limits for cost recommendations search
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41266
+    operations:
+      - GetCustomCostsFile
+      - ListCustomCostsFiles
+      - UploadCustomCostsFile
+    title: Add ai_provider to Custom Costs files
