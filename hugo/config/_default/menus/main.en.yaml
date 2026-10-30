@@ -595,6 +595,11 @@ menu:
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
       weight: 807
+    - name: OpenTelemetry Collectors
+      identifier: fleet_otel_collectors
+      url: agent/fleet_automation/otel_collectors
+      parent: agent_fleet_automation
+      weight: 808
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -982,16 +987,21 @@ menu:
       identifier: otel_trace_metrics
       parent: otel_integrations
       weight: 817
+    - name: Fleet Automation
+      url: opentelemetry/fleet_automation/
+      identifier: otel_fleet_automation
+      parent: opentelemetry_top_level
+      weight: 9
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
-      weight: 9
+      weight: 10
     - name: Guides and Resources
       url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
-      weight: 10
+      weight: 11
     - name: Produce Delta Temporality Metrics
       url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
@@ -1036,7 +1046,7 @@ menu:
       url: /opentelemetry/reference
       identifier: otel_reference
       parent: opentelemetry_top_level
-      weight: 11
+      weight: 12
     - name: Terms and Concepts
       url: /opentelemetry/reference/concepts
       identifier: otel_concepts
