@@ -8,6 +8,10 @@ further_reading:
 site_support_id: datadog_disaster_recovery
 title: Datadog Disaster Recovery
 ---
+{{< callout header="Disponibilité limitée" url="#" btn_hidden="true" >}}
+Datadog Disaster Recovery est actuellement proposé sur une base limitée. Contactez votre équipe Datadog en charge de votre compte pour vérifier la disponibilité de votre organisation.
+{{< /callout >}}
+
 Datadog Disaster Recovery (DDR) maintient votre observabilité opérationnelle lorsqu'une région de fournisseur cloud ou les services Datadog qui s'y trouvent sont perturbés. Avec DDR, vous configurez une organisation Datadog secondaire dans une région différente à l'avance et y répliquez vos ressources. Lorsque vous effectuez un basculement, le site secondaire dispose déjà des dashboards, des monitors et des utilisateurs dont votre équipe a besoin.
 
 DDR utilise un modèle actif-passif : votre site secondaire reste synchronisé mais passif jusqu'à ce que vous décidiez d'y basculer. Le basculement n'est jamais automatique ; vous choisissez quand effectuer la transition.

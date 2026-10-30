@@ -18,6 +18,14 @@ title: Instrumentation d'Agent Observability
 ---
 Pour commencer avec Agent Observability, instrumentez votre application LLM ou vos agents en choisissant parmi plusieurs approches, en fonction de votre langage de programmation et de votre configuration. Datadog propose des options d'instrumentation complètes conçues pour capturer des traces, des métriques et des évaluations détaillées à partir de vos applications LLM et de vos agents avec un minimum de modifications de code.
 
+{{< skill-callout
+    title="Configurez Agent Observability avec un agent de programmation"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+À l'aide du skill disponible sur https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md, instrumentez mon projet avec Datadog Agent Observability.
+{{< /skill-callout >}}
+
 ## Options d'instrumentation {#instrumentation-options}
 Vous pouvez instrumenter votre application avec les SDK Python, Node.js ou Java, ou en utilisant l'Agent Observability API.
 
@@ -65,7 +73,7 @@ L'API vous permet de :
 - Inclure des hiérarchies de traces complètes pour les applications complexes
 - Annoter les spans avec des entrées, des sorties, des métadonnées et des métriques
 
-Points de terminaison de l'API :
+Endpoints de l'API :
 - [Spans API][4] : `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
 - [Evaluations API][5] : `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 

@@ -1,3 +1,3 @@
 ---
-title: Supprimez les Agent Observability experiments
+title: Supprimez les expériences Agent Observability
 ---

@@ -1,143 +1,146 @@
 ---
-description: Aprende a controlar el volumen de ingesta de tramo con los mecanismos
-  de rastreo de APM para gestionar los costes manteniendo la observabilidad.
+description: Aprenda a controlar el volumen de ingesta de tramos con mecanismos de
+  rastreo de APM para gestionar los costos mientras mantiene la observabilidad.
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: Documentación
-  text: Página de control de la ingesta
-title: Control del volumen de ingesta con el Rastreo distribuido de APM
+  text: Página de Ingestion Control
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: Centro de arquitectura
+  text: 'Dominio del rastreo distribuido: desafíos de volumen de datos y el enfoque
+    de Datadog para un muestreo eficiente'
+title: Control del volumen de ingesta con rastreo distribuido de APM
 ---
+## Descripción general {#overview}
 
-## Información general
+La [página de control de ingesta][1] proporciona visibilidad granular de la configuración de ingesta para todos los servicios, en el agente y en los SDKs. Todos los [Mecanismos de ingesta][2] están documentados públicamente y son configurables.
 
-La [Página de control de la ingesta][1] proporciona una visibilidad detallada de la configuración de la ingesta para todos los servicios, en el Agent y en las bibliotecas de rastreo. Todos los [Mecanismos de ingesta][2] están documentados públicamente y son configurables.
+Con la página de control de ingesta, usted tiene visibilidad total y control completo de su volumen de tramos. En consecuencia, usted puede:
+- Ingerir los datos que son más relevantes para su negocio y sus objetivos de observabilidad.
+- Reducir los costos de red evitando enviar datos de trazas no utilizados a la plataforma de Datadog.
+- Controlar y gestionar sus costos generales.
 
-Con la página de control de la ingesta, tendrás una visibilidad total y un control completo del volumen de tramos (spans). En consecuencia, puedes:
-- Ingerir los datos más relevantes para tu empresa y tus objetivos de observabilidad.
-- Reducir los costes de red evitando el envío de datos no utilizados de traza a la plataforma de Datadog.
-- Controlar y gestionar tus costes globales.
+## Efectos de reducir el volumen de ingesta de trazas {#effects-of-reducing-trace-ingestion-volume}
 
-## Efectos de reducir el volumen de ingesta de trazas
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="Muestreo de ingesta de APM que muestra el 25 por ciento de las trazas completas ingeridas" style="width:70%;" >}}
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_25_percent.png" alt="Muestra de ingesta de APM que exhibe un avance del 25 por ciento de trazas ingeridas" style="width:70%;" >}}
+Si decide reducir el volumen de ingesta para ciertos servicios, las **métricas de [solicitudes, errores y latencia][3]** (conocidas como métricas RED, por sus siglas en inglés de Requests, Errors, and Duration) permanecen 100% precisas, ya que se calculan basándose en el 100% del tráfico de la aplicación, independientemente de cualquier configuración de muestreo. Estas métricas se incluyen al adquirir Datadog APM. Para asegurarse de tener visibilidad total del tráfico de su aplicación, puede usar estas métricas para detectar posibles errores en un servicio o recurso, mediante la creación de paneles de control, monitores y SLOs.
 
-Si decides reducir el volumen de ingesta para determinados servicios, las **[métricas][3] de solicitudes, errores y latencia** (conocidas como métricas RED de solicitudes, errores y duración) siguen siendo 100% exactas, ya que se calculan basándose en el 100% del tráfico de la aplicación, independientemente de cualquier configuración de muestreo. Estas métricas se incluyen al comprar Datadog APM. Para asegurarte de que tiene una visibilidad completa del tráfico de tu aplicación, puedes utilizar estas métricas para detectar posibles errores en un servicio o un recurso, creando dashboards, monitores y SLOs.
+**Nota**: Si sus aplicaciones y servicios están instrumentados con bibliotecas de OpenTelemetry y configura el muestreo a nivel de SDK y/o a nivel de colector, las métricas de APM se basan en el conjunto de datos **muestreado** de forma predeterminada. Consulte [Muestreo de ingesta con OpenTelemetry][4] para obtener más información.
 
-**Nota**: Si tus aplicaciones y servicios están instrumentadas con bibliotecas de OpenTelemetry y configuras el muestreo en el nivel de SDK o en el nivel de Collector, las métricas de APM se basan en el conjunto **muestreado** de datos de forma predeterminada. Consulta [Muestreo de ingesta con OpenTelemetry][4] para obtener más información.
+<div class="alert alert-info">Para calcular las métricas de APM a partir de datos de OpenTelemetry no muestreados, coloque el <a href="/opentelemetry/setup/collector_exporter/#span-metrics-connector"><code>span_metrics</code> connector</a> antes de cualquier procesador de muestreo. El Datadog Connector logra el mismo resultado en configuraciones existentes. Para obtener más información, consulte <a href="/opentelemetry/ingestion_sampling/">Muestreo de ingesta con OpenTelemetry</a>.</div>
 
-<div class="alert alert-info">También, puedes usar el <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> para calcular las métricas de APM en datos sin muestrear. Lee <a href="/opentelemetry/guide/switch_from_processor_to_connector">Cambiar de Datadog Processor a Datadog Connector para métricas de APM de OpenTelemetry</a> para obtener más información.</div>
+Los datos de traza son muy repetitivos, lo que significa que las muestras de traza para investigar cualquier problema siguen estando disponibles con el muestreo de ingesta. Para servicios de alto rendimiento, generalmente no es necesario que recopile cada solicitud: un problema lo suficientemente importante siempre debería mostrar síntomas en múltiples trazas. Ingestion Control le ayuda a tener la visibilidad que necesita para solucionar problemas mientras se mantiene dentro del presupuesto.
 
-Los datos de traza son muy repetitivos, lo que significa que las muestras de traza para investigar cualquier problema siguen estando disponibles con el muestreo de ingesta. En el caso de servicios de alto rendimiento, no suele ser necesario recopilar todas y cada una de las solicitudes: un problema lo suficientemente importante siempre debería mostrar indicios en varias trazas. Los controles de ingesta te ayudan a tener la visibilidad que necesitas para solucionar problemas sin salirse del presupuesto.
+#### Métricas de tramos {#metrics-from-spans}
 
-#### Métricas de tramos
+[Las métricas de tramos][5] se basan en tramos ingeridos.
 
-Las [métricas de tramos][5] se basan en la ingesta de tramos.
+Reducir las tasas de muestreo de ingesta afectará a cualquier métrica de tipo **recuento**. Las métricas de tipo **Distribución**, por ejemplo las medidas `duration`, no se ven afectadas ya que el muestreo es mayormente uniforme, la distribución de las latencias sigue siendo representativa del tráfico.
 
-La reducción de las frecuencias de muestreo de la ingesta afectará a cualquier métrica de tipo **count** (recuento). Las métricas de tipo **distribution** (distribución), por ejemplo `duration`, no se ven afectadas ya que el muestreo es mayoritariamente uniforme, la distribución de latencias sigue siendo representativa del tráfico.
+#### Monitores {#monitors}
 
-#### Monitores
+Cualquier monitor de **métrica** que utilice [métricas de tramos](#metrics-from-spans) se ve afectado por la reducción del volumen de ingesta. Los monitores de métricas basados en métricas **trace.__** seguirán siendo precisos, porque estas métricas se calculan en función del 100% del tráfico.
 
-Cualquier monitor de **métrica** que utilice [métricas de tramos](#metrics-from-spans) se ve afectado por la reducción del volumen de ingesta. Los monitores de métrica basados en métricas **trace.__** seguirán siendo precisos, porque estas métricas se calculan basándose en el 100% del tráfico.
+Los monitores [{{< ui >}}Trace analytics{{< /ui >}}][6] basados en recuentos también se ven afectados. Verifique si tiene monitores de análisis de trazas creados buscando monitores `type:trace-analytics` en la página de administración de monitores.
 
-Los monitores de [**análisis de traza**][6] basados en el recuento también se ven afectados. Comprueba si tienes monitores de análisis de traza creados al buscar monitores `type:trace-analytics` en la página Gestionar monitores.
+## Evalúe la configuración de ingesta de sus servicios {#assess-your-services-ingestion-configuration}
 
-## Evalúa la configuración de ingesta de tu servicio
+Para evaluar el estado actual de la instrumentación de las aplicaciones, aproveche la [Trace Ingestion Control page][1] que proporciona información detallada sobre la configuración del agente y del SDK.
 
-Para evaluar el estado actual de la instrumentación de aplicaciones, aprovecha la [página de Control de ingesta de traza][1] que brinda información detallada sobre la configuración del Agent y la biblioteca de rastreo.
+### Comprender si se encuentra dentro de su asignación mensual de ingesta {#understanding-if-you-are-within-your-monthly-ingestion-allocation}
 
-### Comprende si estás dentro de la asignación de ingesta mensual
+Utilice el KPI de uso mensual de ingesta para obtener una estimación de su uso en comparación con la asignación mensual de 150 GB de tramos ingeridos por servidor APM (sumado en todos los servidores APM).
 
-Utiliza el KPI de uso mensual de la ingesta para obtener una estimación de tu uso en comparación con la asignación mensual de 150 GB de tramos ingeridos por host de APM (sumados todos los hosts de APM).
+{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="KPI de exceso de ingesta que muestra un 170 por ciento de uso mensual estimado de 23.3 TB mensuales disponibles en toda la infraestructura" style="width:40%;" >}}
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/ingestion_overage.png" alt="KPI de exceso de ingesta que muestra un 170 por ciento de uso mensual estimado de los 23.3 TB mensuales disponibles en toda la infraestructura" style="width:40%;" >}}
+### Investigación avanzada de uso de APM {#advanced-apm-usage-investigation}
 
-### Investigación avanzada del uso de APM
+La configuración de ingesta se puede investigar para cada servicio. Haga clic en una fila de servicio para ver el Resumen de Ingesta del Servicio, que muestra:
+- {{< ui >}}Ingestion reason breakdown{{< /ui >}}: ¿qué [mecanismo de ingesta][2] es responsable del volumen de ingesta?
+- {{< ui >}}Top sampling decision makers{{< /ui >}}: ¿qué servicios ascendentes están tomando decisiones de muestreo para los tramos ingeridos con respecto al [mecanismo de ingesta predeterminado][7]
 
-La configuración de la ingesta puede ser investigada para cada servicio. Haz clic en una fila de servicio para ver el resumen de ingesta del servicio, que muestra lo siguiente:
-- **Desglose del motivo de la ingesta**: qué [mecanismo de ingesta][2] es responsable del volumen de ingesta.
-- **Encargados de la toma de decisiones de muestreo**: qué servicios de carga están tomando decisiones de muestreo para los tramos ingeridos con respecto al [mecanismo de ingesta por defecto][7].
+También hay disponible un [panel de control listo para usar][8] para obtener más información sobre las tendencias históricas relacionadas con el uso y el volumen de su ingesta. Clone este panel de control para poder editar widgets y realizar análisis adicionales.
 
-También está disponible un [dashboard predeterminado][8] para obtener más información sobre las tendencias históricas relacionadas con el uso y el volumen de ingesta. Clona este dashboard para poder editar widgets y realizar más análisis.
+## Reduzca su volumen de ingesta {#reduce-your-ingestion-volume}
 
-## Reduce tu volumen de ingesta
+### Identifique los servicios responsables de la mayor parte del volumen de ingesta {#identify-services-responsible-for-most-of-the-ingestion-volume}
 
-### Identificar servicios responsables de la mayor parte del volumen de ingesta
+Para identificar qué servicios son responsables de la mayor parte del volumen de ingesta, ordene la tabla por {{< ui >}}Downstream Bytes/s{{< /ui >}}. Esta columna le permite detectar qué servicios toman la mayoría de las decisiones de muestreo, lo que también afecta a los servicios descendentes.
 
-Para identificar qué servicios son responsables de la mayor parte del volumen de ingesta, ordena la tabla por **Downstream Bytes/s** (Bytes/segundo de descarga). Esta columna permite detectar qué servicios toman la mayoría de las decisiones de muestreo, que también repercuten en servicios de descarga.
+Si el servicio está iniciando la traza, **Bytes/s descendentes** también abarca el volumen de tramos provenientes de servicios descendentes para los cuales el servicio tomó la decisión de muestreo.
 
-Si el servicio está iniciando la traza, **Downstream Bytes/s** (Bytes/segundo de descarga) también engloba el volumen de tramos procedentes de servicios de descarga para los que el servicio tomó la decisión de muestreo.
+La columna {{< ui >}}Traffic Breakdown{{< /ui >}} ofrece una buena indicación de la configuración de muestreo del servicio.
 
-La columna **Traffic Breakdown** (Desglose del tráfico) da una buena indicación de la configuración del muestreo del servicio.
+Si el servicio tiene una tasa alta de bytes/s descendentes y una tasa de muestreo alta (que se muestra como la sección rellena de azul de la columna de desglose de tráfico), se espera que reducir la tasa de muestreo para este servicio tenga un gran impacto en el volumen de ingesta.
 
-Si el servicio tiene una alta tasa de Bytes/segundo de descarga y una alta tasa de muestreo (mostrada como la sección rellena de azul de la columna de desglose de tráfico), se espera que reducir la frecuencia de muestreo de este servicio tenga un alto impacto en el volumen de ingesta.
+{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="Muestreo de ingesta de APM que muestra el 99 por ciento de las trazas completas ingeridas, lo que significa que no hay muestreo" style="width:70%;" >}}
 
-{{< img src="/tracing/guide/trace_ingestion_volume_control/sampling_99_percent.png" alt="Muestreo de ingesta de APM que muestra un avance del 99 por ciento de trazas ingeridas, lo que significa que no hay muestreo" style="width:70%;" >}}
+### Configure globalmente la tasa de muestreo de ingesta a nivel del Agent {#globally-configure-the-ingestion-sampling-rate-at-the-agent-level}
 
-### Configura globalmente la frecuencia de muestreo de la ingesta a nivel del Agent
+La columna {{< ui >}}Configuration{{< /ui >}} le indica si sus servicios están configurados con reglas de muestreo o no. Si los servicios principales están etiquetados con la configuración `AUTOMATIC`, cambiar la **configuración del Agent** reducirá el volumen globalmente en todos los servicios.
 
-La columna **Configuration** (Configuración) te indica si tus servicios están o no configurados con reglas de muestreo. Si los servicios principales están etiquetados con la configuración `AUTOMATIC`, al cambiar la **configuración del Agent** se reducirá el volumen globalmente en todos los servicios.
+Para reducir el volumen de ingesta a nivel del Agent, configure `DD_APM_TARGET_TPS` (establecido en `10` de forma predeterminada) para reducir la proporción del volumen de muestreo basado en el inicio. Lea más sobre el [mecanismo de muestreo predeterminado][7].
 
-Para reducir el volumen de ingesta en el nivel del Agent, configura `DD_APM_MAX_TPS` (establecido en `10` por defecto) para reducir la parte del volumen de muestreo basada en el título. Lee más información sobre el [mecanismo de muestreo por defecto][7].
+**Nota**: Esta opción de configuración solo entra en vigor cuando se utilizan **Datadog SDKs**. Si la ingesta de OTLP en el Agent recopila datos de aplicaciones instrumentadas con OpenTelemetry, modificar `DD_APM_TARGET_TPS` no cambia las tasas de muestreo que se aplican en los SDKs.
 
-**Nota**: Esta opción de configuración solo tiene efecto cuando se utilizan **bibliotecas de rastreo de Datadog**. Si la ingesta de OTLP en el Agent recopila datos de aplicaciones instrumentadas con OpenTelemetry, la modificación de `DD_APM_MAX_TPS` no cambia las frecuencias de muestreo que se aplican en las bibliotecas de rastreo.
+Además, para reducir el volumen de trazas de [error][9] y [poco frecuentes][10]:
+- Configure `DD_APM_ERROR_TPS` para reducir la proporción de muestreo de errores.
+- Establezca `DD_APM_DISABLE_RARE_SAMPLER` en true para detener el muestreo de trazas poco frecuentes.
 
-Además, para reducir el volumen de [error][9] y trazas [poco frecuentes][10]:
-- Configura `DD_APM_ERROR_TPS` para reducir la cuota de error de muestreo.
-- Establece `DD_APM_DISABLE_RARE_SAMPLER` en true para dejar de muestrear las trazas poco frecuentes.
+### Configure de forma independiente la tasa de muestreo de ingesta para los servicios a nivel de biblioteca {#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level}
 
-### Configura independientemente la frecuencia de muestreo de la ingesta para los servicios a nivel de biblioteca
+Al configurar las tasas de muestreo para algunos servicios de alto rendimiento, se puede reducir la mayor parte del volumen de ingesta "excedente".
 
-Al configurar las frecuencias de muestreo para unos pocos servicios de alto rendimiento, la mayor parte del volumen de ingesta "excedente" puede reducirse.
+Haga clic en un servicio para visualizar el {{< ui >}}Service Ingestion Summary{{< /ui >}}. Observe el {{< ui >}}Ingestion reasons breakdown{{< /ui >}} en el panel lateral, que ofrece una descripción general de la proporción del volumen de ingesta atribuida a cada mecanismo.
 
-Haz clic en un servicio para ver el **Service Ingestion Summary** (Resumen de ingesta del servicio). Observa el **Ingestion reasons breakdown** (Desglose de motivos de ingesta) en el panel lateral, que ofrece una descripción general de la parte de volumen de ingesta atribuida a cada mecanismo.
+Si la razón principal de la mayor parte del volumen de ingesta es el muestreo basado en el inicio (`auto` o `rule`), el volumen se puede configurar estableciendo una regla de muestreo a nivel de SDK.
 
-Si el motivo principal de la mayor parte del volumen de ingesta es el muestreo basado en títulos (`auto` o `rule`), el volumen puede configurarse estableciendo una regla de muestreo en el nivel de la biblioteca de rastreo.
+Haga clic en el botón {{< ui >}}Manage Ingestion Rate{{< /ui >}} para configurar una tasa de muestreo para el servicio. Seleccione el idioma del servicio y la tasa de muestreo de ingesta que desea aplicar.
 
-Haz clic en el botón **Manage Ingestion Rate** (Gestionar tasa de ingesta) para configurar una tasa de muestreo para el servicio. Selecciona el lenguaje de servicio y la frecuencia de muestreo de ingesta que deseas aplicar.
+**Nota:** Es necesario volver a implementar la aplicación para aplicar los cambios de configuración. Datadog recomienda aplicar los cambios configurando [variables de entorno][11].
 
-**Nota:** La aplicación debe volverse a desplegar para poder aplicar los cambios de configuración. Datadog recomienda aplicar los cambios configurando [variables de entorno][11].
+### Muestreo de trazas con OpenTelemetry {#trace-sampling-with-opentelemetry}
 
-### Muestreo de trazas con OpenTelemetry
+Si sus aplicaciones y servicios están instrumentados con bibliotecas de OpenTelemetry y está utilizando el colector de OpenTelemetry, puede utilizar las siguientes capacidades de muestreo de OpenTelemetry:
 
-Si tus aplicaciones y servicios están instrumentados con bibliotecas de OpenTelemetry y estás utilizando OpenTelemetry Collector, puedes utilizar las siguientes capacidades de muestreo de OpenTelemetry:
+- [TraceIdRatioBased][12] y [ParentBased][13] son 2 muestreadores integrados que le permiten implementar un muestreo basado en el encabezado determinista basado en el trace_id a nivel de **SDK**
+- El [procesador de muestreo de seguimiento de las últimas líneas][14] y el [procesador de muestreo probabilístico][15] le permiten muestrear trazas basadas en un conjunto de reglas a nivel de **colector**
 
-- [TraceIdRatioBased][12] y [ParentBased][13] son 2 muestreadores incorporados que te permiten implementar un muestreo determinista basado en el título y en el trace_id a nivel del **SDK**.
-- El [Procesador de muestreo de colas][14] y el [Procesador de muestreo probabilístico][15] permiten muestrear trazas basándose en un conjunto de reglas a nivel **Collector**.
+El uso de cualquiera de las dos opciones da como resultado [métricas de APM muestreadas](#effects-of-reducing-trace-ingestion-volume).
 
-Con cualquiera de las dos opciones se obtienen muestras de [métricas de APM](#effects-of-reducing-trace-ingestion-volume).
+## Glosario de motivos de ingesta {#ingestion-reasons-glossary}
 
-## Glosario de motivos de la ingesta
+_Sepa qué mecanismos de ingesta son responsables de la mayor parte del volumen de ingesta_
 
-_Saber qué mecanismos de ingesta son responsables de la mayor parte del volumen ingerido_
+El mecanismo predeterminado para muestrear trazas es el muestreo basado en el encabezado. La decisión de muestrear o no una traza se toma al principio de su ciclo de vida y se propaga hacia abajo en el contexto de las solicitudes para garantizar que siempre pueda visualizar y analizar trazas completas.
 
-El mecanismo por defecto para muestrear trazas es el muestreo basado en la fase inicial. La decisión de muestrear o no una traza se toma al principio de su ciclo de vida, y se propaga de forma descendente en el contexto de las solicitudes para asegurar que siempre puedas ver y analizar trazas completas.
+El muestreo basado en el encabezado se puede configurar en los SDK o desde el Datadog Agent:
 
-El muestreo basado en la fase inicial es configurable en las bibliotecas de rastreo o desde el Datadog Agent:
-
-| Motivo de la ingesta   | Dónde             | Descripción del mecanismo de ingesta | Valor predeterminado |
+| motivo de ingesta   | Dónde             | Descripción del mecanismo de ingesta | Predeterminado |
 |--------------------|-------------------|-----------------------|---------|
-| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | El Datadog Agent distribuye las frecuencias de muestreo a las bibliotecas de rastreo.    | 10 trazas por segundo por Agent |
-| `rule`             | [Bibliotecas de rastreo](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | El porcentaje de muestreo definido por las bibliotecas para servicios específicos.   | nulo                 |
+| `auto`             | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | El Datadog Agent distribuye las tasas de muestreo a los SDK.    | 10 trazas por segundo por Agent |
+| `rule`             | [Bibliotecas de rastreo](#independently-configure-the-ingestion-sampling-rate-for-services-at-the-library-level) | El porcentaje de muestreo definido por las bibliotecas para servicios específicos.   | null                 |
 
 
-Otros motivos de ingesta aparecen en la página Control de la ingesta y como una etiqueta en la métrica `datadog.estimated_usage.apm.ingested_bytes`. Estas razones de ingesta pueden ser responsables de tu volumen de ingesta:
+Otros motivos de ingesta aparecen en la página de Ingestion Control y como una etiqueta en la `datadog.estimated_usage.apm.ingested_bytes` métrica. Estos motivos de ingesta pueden ser responsables de su volumen de ingesta:
 
-| Motivo de la ingesta   | Dónde             | Descripción del mecanismo de ingesta | Valor predeterminado |
+| motivo de ingesta   | Dónde             | Descripción del mecanismo de ingesta | Predeterminado |
 |--------------------|-------------------|-----------------------|---------|
-| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Muestreo de errores no detectados por el muestreo basado en la fase inicial.             | 10 trazas por segundo por Agent (nulo, si se definen reglas) |
-| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Muestreo de trazas poco frecuentes (captura de todas las combinaciones de un conjunto de etiquetas de tramo).        | 5 trazas por segundo por Agent (nulo, si se definen reglas) |
-| `manual`             | En el código         | Anulación de decisión en código para mantener/descartar un tramo y sus secundarios.    | nulo |
-| `analytics`          | Agent y bibliotecas de rastreo | [Mecanismo de ingesta obsoleto][16] que muestrea tramos únicos sin la traza completa.   | nulo                 |
+| `error`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             | Muestreo de errores no detectados por el muestreo basado en el encabezado.             | 10 trazas por segundo por Agent (null, si se definen reglas) |
+| `rare`            | [Agent](#globally-configure-the-ingestion-sampling-rate-at-the-agent-level)             |  Muestreo de trazas poco frecuentes (captura todas las combinaciones de un conjunto de etiquetas de tramo).        | 5 trazas por segundo por Agent (null, si se definen reglas) |
+| `manual`             | En el código         | Anulación de la decisión en el código para conservar/descartar un tramo y sus subtramos.    | null |
+| `analytics`          | Agent y bibliotecas de rastreo | [Mecanismo de ingesta obsoleto][16] que muestrea tramos individuales sin la traza completa.   | null                 |
 
 Además, otros productos pueden ser responsables del volumen de tramos muestreados:
 
-- `synthetics` y `synthetics-browser`: las pruebas de API y de navegador están conectadas a la traza generada por la prueba.
-- `rum`: las solicitudes de las aplicaciones web y móviles se vinculan a las trazas backend correspondientes.
-- `lambda` y `xray`: trazas generadas a partir de funciones de AWS Lambda instrumentada con bibliotecas de X-Ray o Datadog.
+- `synthetics` y `synthetics-browser`: Las pruebas de API y de navegador están conectadas a la traza generada por la prueba.
+- `rum`: Las solicitudes de aplicaciones web y móviles están vinculadas a las trazas de backend correspondientes.
+- `lambda` y `xray`: Trazas generadas a partir de funciones AWS lambda instrumentadas con bibliotecas de X-Ray o Datadog.
 
-Más información sobre los motivos de ingesta en la [documentación sobre Mecanismos de ingesta][2].
+Lea más sobre los motivos de ingesta en la [documentación de Mecanismos de Ingesta][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

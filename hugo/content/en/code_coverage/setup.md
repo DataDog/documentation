@@ -75,6 +75,18 @@ using [Azure DevOps Source Code integration][2].
 [1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [2]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 {{% /tab %}}
+{{% tab "Bitbucket" %}}
+
+<div class="alert alert-info">
+The integration supports only Bitbucket Cloud repositories and requires a Bitbucket Cloud Premium workspace. Bitbucket Server and Data Center are <strong>not</strong> supported.
+</div>
+
+Install Datadog's [Bitbucket Source Code integration][1] to connect to your Bitbucket repositories. Use the [integration tile][2] or install the integration during onboarding for other Datadog products.
+
+[1]: /integrations/bitbucket-source-code/
+[2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
@@ -446,7 +458,7 @@ test:
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
 See the [`datadog-ci` documentation][14] for more details on the `datadog-ci coverage upload` command.
 
-Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values. To add a per-file breakdown of total and patch coverage to the comment, see [PR Comments][21].
+Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values. To add a per-file breakdown of total and patch coverage to the comment, see [PR Comments][21]. To annotate uncovered lines directly on the pull request diff, see [Inline annotations][22].
 You can also view your coverage data aggregated by pull request in the [Code Coverage page][15] in Datadog, with the ability to examine individual files and lines of code.
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
@@ -556,3 +568,4 @@ For a description of how reports are merged and how each line status is counted,
 [19]: https://app.datadoghq.com/organization-settings/data-access-controls
 [20]: /code_coverage/coverage_calculation
 [21]: /code_coverage/configuration#pr-comments
+[22]: /code_coverage/configuration#inline-annotations

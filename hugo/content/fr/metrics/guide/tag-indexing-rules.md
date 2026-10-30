@@ -14,7 +14,7 @@ further_reading:
   text: Bonne pratique pour la gouvernance des métriques custom
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: Blog
-  text: Contrôler de façon dynamique le volume de vos métriques custom grâce à Metrics
+  text: Contrôler de façon dynamique le volume de vos Custom Metrics grâce à Metrics
     without Limits™
 title: Règles d'indexation des tags
 ---
@@ -81,6 +81,8 @@ Ajoutez les clés de tags que vous souhaitez inclure ou exclure.
 Après avoir configuré le comportement des tags, l'aperçu affiche une liste des métriques affectées (jusqu'à 100 dans l'interface utilisateur).
 
 {{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="Le panneau Aperçu des métriques affectées affichant une liste de métriques correspondant au périmètre de la règle." style="width:80%;">}}
+
+> Par défaut, chaque nouvelle règle est ajoutée en bas de votre ensemble de règles actuel.
 
 ### Limitations {#limitations}
 
@@ -185,12 +187,68 @@ Les configurations par métrique [Metrics without Limits™][2] (MWL) existantes
 
 Vous pouvez examiner et supprimer ces exemptions depuis la page Règles d'indexation de tags. Datadog classe chaque exemption comme suit :
 
-- **Suppression sans risque** : D'après l'analyse de Datadog des règles d'indexation de tags de votre compte, la suppression de l'exemption devrait réduire votre utilisation de métriques personnalisées.
-- **Examen nécessaire** : La suppression de l'exemption peut affecter votre utilisation de métriques personnalisées, ou vos règles d'indexation de tags pourraient ne pas conserver tous les tags inclus dans la configuration MWL existante. Examinez ces exemptions avec soin pour éviter de rompre les dashboards, les monitors ou d'autres ressources qui dépendent de ces tags.
+- **Suppression sans risque** : D'après l'analyse de Datadog des règles d'indexation de tags de votre compte, la suppression de l'exemption devrait réduire votre utilisation de Custom Metrics.
+- **Examen nécessaire** : La suppression de l'exemption peut affecter votre utilisation de Custom Metrics, ou vos règles d'indexation de tags pourraient ne pas conserver tous les tags inclus dans la configuration MWL existante. Examinez ces exemptions avec soin pour éviter de rompre les dashboards, les monitors ou d'autres ressources qui dépendent de ces tags.
 
 Les exemptions s'appliquent à l'ensemble du compte, et non à des règles d'indexation de tags individuelles. La suppression de l'exemption d'une métrique pour une règle la supprime automatiquement de toutes les règles d'indexation de tags de votre compte. La métrique est ensuite évaluée par rapport à vos règles d'indexation de tags en fonction de leur ordre actuel.
 
-## Lectures complémentaires {#further-reading}
+## Bonnes pratiques {#best-practices}
+
+Utilisez les règles d'indexation de tags comme moyen par défaut de gérer les tags indexés dans des groupes Custom Metrics. Utilisez Metrics without Limits™ lorsqu'une métrique individuelle nécessite une exception délibérée à la politique plus large.
+
+### Créez d'abord la règle d'or {#create-the-golden-rule-first}
+
+La règle d'or doit être la première règle d'indexation de tags créée et doit rester en première position dans l'ordre des règles. Cela l'établit comme politique de base avant que vous n'ajoutiez des règles plus ciblées ou des exceptions au niveau des métriques.
+
+La règle d'or est :
+> Désindexez toutes les clés de tag qui n'ont pas été interrogées au cours des 30, 60 ou 90 derniers jours et qui ne sont utilisées dans aucune ressource Datadog, telles que des dashboards, des monitors, des SLO ou des notebooks.
+
+
+Pour configurer la règle d'or :
+
+1. Créez la règle avant de créer toute autre règle d'indexation de tags. Si des règles existent déjà, déplacez la règle d'or en première position.
+2. Sélectionnez {{< ui >}}Exclude tags{{< /ui >}} puis {{< ui >}}By tag usage{{< /ui >}}.
+3. Définissez la fenêtre de requête sur 30, 60 ou 90 jours.
+4. Exigez que les clés de tag ne soient pas utilisées dans les ressources Datadog.
+5. Appliquez la règle à toutes les Custom Metrics en utilisant `*`.
+
+Les clés de tag nouvellement soumises bénéficient d'une période de grâce de 15 jours avant que la règle n'évalue leur utilisation. Cela donne aux équipes le temps d'interroger un nouveau tag ou de l'utiliser dans une ressource Datadog avant qu'il ne puisse être désindexé.
+
+Après avoir établi la règle d'or, créez des règles plus spécifiques pour les métriques qui diffèrent de cette valeur par défaut.
+
+{{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="Une règle d'indexation de tags configurée comme règle d'or, excluant les clés de tag non interrogées sur toutes les Custom Metrics." style="width:100%;">}}
+
+### Choisissez entre les règles d'indexation de tags et Metrics without Limits™ {#choose-between-tag-indexing-rules-and-metrics-without-limits}
+
+Les règles d'indexation des tags sont des politiques dynamiques qui peuvent s'appliquer à une seule métrique, à un espace de nommage, à plusieurs préfixes ou à toutes les Custom Metrics. Les nouvelles Custom Metrics sont automatiquement évaluées par rapport aux règles existantes à mesure qu'elles arrivent. Toute métrique correspondant à une règle est gérée sans nécessiter de configuration individuelle.
+
+Les configurations Metrics without Limits sont statiques et appliquées métrique par métrique. Utilisez-les lorsqu'une métrique spécifique nécessite un ensemble différent de tags indexés.
+
+Les configurations Metrics without Limits™ existantes prévalent sur les règles d'indexation des tags. Tant qu'une configuration Metrics without Limits™ est active, la métrique est traitée comme une exception et n'est pas régie par les règles d'indexation des tags.
+
+| Cas d'utilisation | Contrôle recommandé |
+|---|---|
+| Établir la politique d'indexation par défaut pour toutes les Custom Metrics | Règles d'indexation des tags : Règle d'or |
+| Appliquer la même politique de tags à un espace de nommage ou à un ensemble de préfixes | Règles d'indexation des tags |
+| Gérer automatiquement les nouvelles métriques et les clés de tag qui correspondent à une politique existante | Règles d'indexation des tags |
+| Désindexer les tags qui ne sont pas interrogés et qui ne sont pas utilisés dans les ressources Datadog | Règles d'indexation des tags |
+| Supprimer les tags connus à cardinalité élevée sur plusieurs métriques | Règles d'indexation des tags |
+| Conserver uniquement un ensemble approuvé de tags sur plusieurs métriques | Règles d'indexation des tags |
+| Configurer un ensemble différent de tags indexés pour une métrique | Metrics without Limits™ |
+
+### Définissez intentionnellement la portée des règles supplémentaires {#scope-additional-rules-intentionally}
+
+Après avoir créé la règle d'or, ajoutez des règles plus spécifiques uniquement lorsque les exigences d'un groupe de métriques diffèrent de celles de la configuration par défaut :
+
+- Utilisez un espace de nommage ou un préfixe pour les métriques appartenant au même service, à la même application ou à la même équipe.
+- Utilisez plusieurs préfixes lorsque la même politique s'applique à des groupes de métriques associés.
+- Utilisez `*` uniquement lorsqu'une politique doit s'appliquer à toutes les Custom Metrics.
+
+Définissez des portées de règles claires et évitez les chevauchements inutiles. Cela permet de comprendre plus facilement quelle politique régit chaque métrique et qui est responsable de ses modifications.
+
+À mesure que de nouvelles règles sont ajoutées, vérifiez que la Règle d'or reste en première position.
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

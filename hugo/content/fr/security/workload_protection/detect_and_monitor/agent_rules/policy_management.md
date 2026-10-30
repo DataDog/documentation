@@ -177,8 +177,6 @@ Voici quelques [rôles et autorisations][11] importants à utiliser pour le RBAC
 [5]: /fr/security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /fr/security/workload_protection/detect_and_monitor/agent_rules/#ootb-rules
-[8]: /fr/security/workload_protection/
-[9]: /fr/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /fr/account_management/rbac/permissions/
 [12]: /fr/security/workload_protection/respond_and_report/#automated-response

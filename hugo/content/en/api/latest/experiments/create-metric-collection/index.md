@@ -1,0 +1,3 @@
+---
+title: Create metric collection
+---

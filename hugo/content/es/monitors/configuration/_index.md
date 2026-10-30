@@ -119,7 +119,7 @@ Una ventana de tiempo acumulativa tiene un punto de inicio fijo y se expande con
 
 {{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Captura de pantalla de cómo se configura una ventana acumulativa en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_messages_received. Las opciones están configuradas para evaluar la SUMA de la consulta durante el MES ACTUAL." style="width:100%;">}}
 
-Una ventana de tiempo acumulativa se restablece después de alcanzar su lapso de tiempo máximo. Por ejemplo, una ventana de tiempo acumulativa que observa el {{< ui >}}Current month{{< /ui >}} se restablece el primer día de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de {{< ui >}}Current hour{{< /ui >}}, que comienza en el minuto 30, se restablece cada hora. Por ejemplo, a las 6:30am, 7:30am, 8:30am.
+Una ventana de tiempo acumulativa se restablece después de alcanzar su tramo de tiempo máximo. Por ejemplo, una ventana de tiempo acumulativa que observa el {{< ui >}}Current month{{< /ui >}} se restablece el primer día de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de {{< ui >}}Current hour{{< /ui >}}, que comienza en el minuto 30, se restablece cada hora. Por ejemplo, a las 6:30am, 7:30am, 8:30am.
 
 ### Frecuencia de evaluación {#evaluation-frequency}
 
@@ -240,6 +240,8 @@ La retención de grupo controla cuánto tiempo se mantiene un grupo de seguimien
 
 De forma predeterminada, un grupo mantiene el estado durante 24 horas antes de ser eliminado. Los seguimientos de servidor y las comprobaciones de servicio que notifican sobre la falta de datos mantienen el estado durante 48 horas.
 
+Para los seguimientos con muchos grupos, la retención dinámica de grupos está habilitada de forma predeterminada. Datadog acorta automáticamente el período de retención para los grupos que dejan de reportar datos. Cuanto más frecuentemente aparecen y desaparecen los grupos, más corto se vuelve el período de retención, ayudando a mantener el seguimiento rápido y eficiente. Este comportamiento afecta solo a los grupos que han dejado de reportar datos; los grupos que están reportando activamente nunca se eliminan.
+
 Para los tipos de seguimiento de alertas múltiples que admiten retención personalizada, puede establecer un valor entre 1 hora y 72 horas. Seleccione {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Opción de tiempo de retención de grupo" style="width:70%;">}}
@@ -253,8 +255,6 @@ Algunos casos de uso para definir un tiempo de retención de grupo personalizado
 
 **Nota**: La opción de tiempo de retención de grupo personalizado requiere un seguimiento de alertas múltiples que admita la opción [`On missing data`][4]. Estos tipos de seguimiento son APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs y seguimientos RUM.
 
-<div class="alert alert-info"><strong>Vista previa: Retención de grupo dinámica</strong><p>La retención de grupo dinámica está en vista previa y se aplica a los seguimientos creados recientemente. Para seguimientos con una gran cantidad de grupos, Datadog acorta automáticamente el tiempo que se mantiene un grupo después de que deja de reportar datos. Cuanto más frecuentemente aparecen y desaparecen los grupos, más corto se vuelve este período, manteniendo el seguimiento rápido y eficiente. Esto solo afecta a los grupos que han quedado en silencio; los grupos que reportan datos activamente nunca se eliminan.</p></div>
-
 #### Retraso de grupo nuevo {#new-group-delay}
 
 Retrase el inicio de la evaluación por `N` segundos para grupos nuevos.
@@ -267,8 +267,8 @@ La opción está disponible con el modo de alerta múltiple.
 
 #### Retraso en la evaluación {#evaluation-delay}
 
-<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para las métricas de la nube, las cuales son rellenadas por los proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe valores completos. Consulte la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/">
-\">Página de Cloud Metric Delay</a> para tiempos de retardo estimados.</div>
+<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para las métricas de la nube, las cuales son rellenadas por los proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe valores completos. Consulte la página <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">Cloud Metric Delay</a> para ver los tiempos de retardo estimados.</div>
 
 Retrase la evaluación por `N` segundos.
 
@@ -337,24 +337,44 @@ Si configura etiquetas o dimensiones en su consulta, estos valores estarán disp
 
 Todos los usuarios pueden visualizar todos los seguimientos, independientemente del equipo o rol con el que estén asociados. De forma predeterminada, solo los usuarios vinculados a roles con el [permiso de escritura de seguimientos][11] pueden editar seguimientos. El [rol de Datadog Admin y el rol estándar de Datadog][12] tienen el permiso de escritura de seguimientos de forma predeterminada. Si su organización utiliza [roles personalizados][13], otros roles personalizados pueden tener el permiso de escritura de seguimientos. Para obtener más información sobre cómo configurar RBAC para seguimientos y migrar seguimientos de la configuración bloqueada al uso de restricciones de roles, consulte la guía sobre [Cómo configurar RBAC para seguimientos][14].
 
-Puede restringir aún más su seguimiento especificando una lista de [equipos][17], [roles][15] o usuarios autorizados para editarlo. El creador del seguimiento tiene derechos de edición sobre el seguimiento de forma predeterminada. La edición incluye cualquier actualización a la configuración del seguimiento, eliminar el seguimiento y silenciar el seguimiento por cualquier cantidad de tiempo.
+Puede restringir aún más su seguimiento especificando una lista de [equipos][17], [roles][15] o usuarios autorizados para editarlo o silenciarlo. El creador del seguimiento tiene derechos de edición sobre el seguimiento de forma predeterminada.
 
 **Nota**: Las limitaciones se aplican tanto en la interfaz de usuario como en la API.
 
+### Niveles de acceso {#access-levels}
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+El nivel de acceso Muter y los controles de acceso a tiempos de inactividad están en Preview.
+{{< /callout >}}
+
+Cada equipo, rol o usuario en un seguimiento restringido tiene uno de los siguientes niveles de acceso:
+
+| Nivel de acceso | Permisos |
+|--------------|-------------|
+| Viewer       | Visualizar el seguimiento. |
+| Muter        | Visualizar y silenciar el seguimiento. Los usuarios con nivel Muter no pueden editar ni eliminar el seguimiento. |
+| Editor       | Visualizar, silenciar, editar y eliminar el seguimiento. |
+
+Utilice el nivel de acceso Muter para permitir que los ingenieros de guardia u otros miembros del equipo de respuesta silencien un seguimiento durante un incidente o una ventana de mantenimiento sin darles acceso para cambiar su configuración. Si su organización no tiene el nivel de acceso Muter, solo los usuarios con nivel Editor pueden silenciar un seguimiento.
+
+Para silenciar un seguimiento, un usuario también necesita el [permiso Manage Downtimes][11]. Un tiempo de inactividad solo silencia los seguimientos a los que su creador tiene acceso de tipo Muter o Editor. Para obtener más información, consulte [Downtimes][18].
+
+**Nota**: Restringir el acceso de edición a un seguimiento también impide que los usuarios con acceso Viewer lo silencien, incluso mediante tiempos de inactividad. Para permitir que estos usuarios silencien el seguimiento, asígneles el nivel de acceso Muter.
+
 ### Controles de acceso granulares {#granular-access-controls}
 
-Utilice [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar un seguimiento:
+Utilice [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar o silenciar un seguimiento:
 1. Mientras edita o configura un seguimiento, busque la sección {{< ui >}}Define permissions and audit notifications{{< /ui >}}.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Opciones de configuración del seguimiento para definir permisos" style="width:70%;" >}}
 1. Haga clic en {{< ui >}}Edit Access{{< /ui >}}.
 1. Haga clic en {{< ui >}}Restrict Access{{< /ui >}}.
 1. El cuadro de diálogo se actualiza para mostrar que los miembros de su organización tienen acceso {{< ui >}}Viewer{{< /ui >}} de forma predeterminada.
-1. Use el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar el seguimiento.
+1. Use el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar o silenciar el seguimiento.
 1. Haga clic en {{< ui >}}Add{{< /ui >}}.
-1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}. Para otorgar a la selección acceso solo para silenciar, cambie {{< ui >}}Editor{{< /ui >}} a {{< ui >}}Muter{{< /ui >}}.
 1. Haga clic en {{< ui >}}Done{{< /ui >}}.
 
-**Nota:** Para mantener su acceso de edición al seguimiento, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro antes de guardar.
+**Nota:** Para mantener su acceso de edición al seguimiento, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro, con acceso de {{< ui >}}Editor{{< /ui >}}, antes de guardar.
 
 Para restaurar el acceso general a un seguimiento con acceso restringido, siga los pasos a continuación:
 1. Mientras visualiza un seguimiento, haga clic en el menú desplegable {{< ui >}}More{{< /ui >}}.
@@ -383,3 +403,4 @@ Para restaurar el acceso general a un seguimiento con acceso restringido, siga l
 [15]: /es/account_management/rbac/
 [16]: /es/account_management/rbac/granular_access
 [17]: /es/account_management/teams/
+[18]: /es/monitors/downtimes/#permissions

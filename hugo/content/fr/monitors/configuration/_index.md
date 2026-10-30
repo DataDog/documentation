@@ -28,7 +28,7 @@ Pour commencer à configurer le monitor, complétez les sections suivantes :
 * {{< ui >}}Define the search query{{< /ui >}} : Construisez une requête pour compter les événements, mesurer des métriques, grouper par une ou plusieurs dimensions, et plus encore.
 * {{< ui >}}Set alert conditions{{< /ui >}} : Définissez des seuils d'alerte et d'avertissement, des délais d'évaluation, et configurez des options d'alerte avancées.
 * {{< ui >}}Configure notifications and automations{{< /ui >}} : Rédigez un titre et un message de notification personnalisés avec des variables. Choisissez comment les notifications sont envoyées à vos équipes (e-mail, Slack ou PagerDuty). Incluez des automatisations de workflow ou des cas dans la notification d'alerte.
-* {{< ui >}}Define permissions and audit notifications{{< /ui >}} : Configurez des contrôles d'accès granulaires et désignez des rôles et des utilisateurs spécifiques pouvant modifier un monitor. Activez les notifications d'audit pour être alerté si un monitor est modifié.
+* {{< ui >}}Define permissions and audit notifications{{< /ui >}} : Configurez des contrôles d'accès granulaires et désignez des rôles et des utilisateurs spécifiques pouvant modifier un monitor. Activez les notifications d'audit pour générer une alerte si un monitor est modifié.
 
 ## Définissez la requête de recherche {#define-the-search-query}
 
@@ -70,7 +70,7 @@ Utilisez le graphique {{< ui >}}Source Data{{< /ui >}} pour vous assurer que vot
 
 ## Définissez les conditions d'alerte {#set-alert-conditions}
 
-Les conditions d'alerte varient en fonction du [type de monitor][1]. Configurez les monitors pour qu'ils se déclenchent si la valeur de la requête dépasse un seuil, ou si un certain nombre de vérifications consécutives ont échoué.
+Les conditions d'alerte varient en fonction du [type de monitor][1]. Configurez les monitors pour qu'ils se déclenchent si la valeur de la requête dépasse un seuil, ou si un certain nombre de checks consécutifs ont échoué.
 
 {{< tabs >}}
 {{% tab "Alerte de seuil" %}}
@@ -166,19 +166,19 @@ Lorsque vous modifiez un seuil, l'aperçu du graphique dans l'éditeur affiche u
 {{% /tab %}}
 {{% tab "Vérifier l'alerte" %}}
 
-Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Configurez l'alerte de vérification pour :
+Une alerte de check récupère les statuts consécutifs envoyés pour chaque groupe de checks et les compare à vos seuils. Configurez l'alerte de check pour :
 
 1. Déclenchez l'alerte après le nombre sélectionné d'échecs consécutifs : `<NUMBER>`
 
-    Chaque exécution de vérification soumet un statut unique de `OK`, `WARN` ou `CRITICAL`. Choisissez combien d'exécutions consécutives avec le statut `WARN` et `CRITICAL` déclenchent une notification. Par exemple, votre processus peut connaître une interruption momentanée lorsque la connexion échoue. Si vous définissez cette valeur sur `> 1`, l'interruption momentanée est ignorée, mais un problème avec plus d'un échec consécutif déclenche une notification.
+    Chaque exécution de check soumet un statut unique de `OK`, `WARN` ou `CRITICAL`. Choisissez combien d'exécutions consécutives avec le statut `WARN` et `CRITICAL` déclenchent une notification. Par exemple, votre processus peut connaître une interruption momentanée lorsque la connexion échoue. Si vous définissez cette valeur sur `> 1`, l'interruption momentanée est ignorée, mais un problème avec plus d'un échec consécutif déclenche une notification.
 
-    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Seuils de vérification Alerte/Avertissement" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Seuils de check Alerte/Avertissement" style="width:90%;">}}
 
 2. Résolvez l'alerte après le nombre sélectionné de succès consécutifs : `<NUMBER>`
 
     Choisissez combien d'exécutions consécutives avec le statut `OK` résout l'alerte.
 
-    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Seuils de vérification Rétablissement" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Seuils de check Rétablissement" style="width:90%;">}}
 
 Consultez la documentation sur les monitors de [check de processus][1], [check d'intégration][2] et [check personnalisé][3] pour en savoir plus sur la configuration des alertes des checks.
 
@@ -194,7 +194,7 @@ Consultez la documentation sur les monitors de [check de processus][1], [check d
 
 #### Aucune donnée {#no-data}
 
-Les notifications pour les données manquantes sont utiles si vous attendez d'une métrique qu'elle rapporte toujours des données dans des circonstances normales. Par exemple, si un hôte avec l'Agent doit être opérationnel en continu, vous pouvez vous attendre à ce que la métrique `system.cpu.idle` rapporte toujours des données.
+Les notifications pour les données manquantes sont utiles si vous attendez d'une métrique qu'elle rapporte toujours des données dans des circonstances normales. Par exemple, si un host avec l'Agent doit être opérationnel en continu, vous pouvez vous attendre à ce que la métrique `system.cpu.idle` rapporte toujours des données.
 
 Dans ce cas, vous devez activer les notifications pour les données manquantes. Les sections ci-dessous expliquent comment accomplir cela avec chaque option.
 
@@ -238,7 +238,9 @@ Dans la plupart des cas, ce paramètre n'est pas utile car vous souhaitez qu'une
 
 La rétention de groupe contrôle la durée pendant laquelle un groupe de monitors est conservé dans le statut du monitor après l'arrêt de la transmission des données. Une fois la période de rétention écoulée, le groupe expire et est supprimé du statut du monitor.
 
-Par défaut, un groupe conserve son statut pendant 24 heures avant d'être supprimé. Les monitors d'hôtes et les vérifications de service qui notifient en cas de données manquantes conservent le statut pendant 48 heures.
+Par défaut, un groupe conserve son statut pendant 24 heures avant d'être supprimé. Les monitors de hosts et les checks de service qui notifient en cas de données manquantes conservent le statut pendant 48 heures.
+
+Pour les monitors comportant de nombreux groupes, la rétention dynamique des groupes est activée par défaut. Datadog raccourcit automatiquement la période de rétention pour les groupes qui cessent de transmettre des données. Plus les groupes apparaissent et disparaissent fréquemment, plus la période de rétention devient courte, ce qui permet de maintenir la rapidité et l'efficacité du monitor. Ce comportement affecte uniquement les groupes qui ont cessé de transmettre des données ; les groupes qui transmettent activement des données ne sont jamais supprimés.
 
 Pour les types de monitors multi-alertes qui prennent en charge la rétention personnalisée, vous pouvez définir une valeur comprise entre 1 heure et 72 heures. Sélectionnez {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
@@ -253,8 +255,6 @@ Voici quelques cas d'utilisation pour définir une durée de rétention de group
 
 **Remarque** : L'option de durée de rétention de groupe personnalisée nécessite un monitor multi-alertes qui prend en charge l'option [`On missing data`][4]. Ces types de monitors sont les monitors APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs et RUM.
 
-<div class="alert alert-info"><strong>Aperçu : Rétention de groupe dynamique</strong><p>La rétention de groupe dynamique est en version préliminaire et s'applique aux monitors nouvellement créés. Pour les monitors comportant un grand nombre de groupes, Datadog raccourcit automatiquement la durée de conservation d'un groupe après qu'il a cessé de transmettre des données. Plus les groupes apparaissent et disparaissent fréquemment, plus cette période devient courte, ce qui permet de maintenir la rapidité et l'efficacité du monitor. Cela n'affecte que les groupes devenus silencieux ; les groupes transmettant activement des données ne sont jamais supprimés.</p></div>
-
 #### Délai de nouveau groupe {#new-group-delay}
 
 Retardez le début de l'évaluation de `N` secondes pour les nouveaux groupes.
@@ -267,8 +267,8 @@ Cette option est disponible pour les monitors à alertes multiples.
 
 #### Délai d'évaluation {#evaluation-delay}
 
-<div class="alert alert-info"> Datadog recommande un délai de 15 minutes pour les métriques cloud, qui sont complétées a posteriori par les fournisseurs de services. De plus, lors de l'utilisation d'une formule de division, un délai de 60 secondes est utile pour garantir que votre monitor évalue des valeurs complètes. Consultez la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/">
-">Cloud Metric Delay</a> page pour connaître les délais estimés.</div>
+<div class="alert alert-info"> Datadog recommande un délai de 15 minutes pour les métriques cloud, qui sont complétées a posteriori par les fournisseurs de services. De plus, lors de l'utilisation d'une formule de division, un délai de 60 secondes est utile pour garantir que votre monitor évalue des valeurs complètes. Consultez la page <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">Cloud Metric Delay</a> pour connaître les délais estimés.</div>
 
 Différer l'évaluation de `N` secondes.
 
@@ -318,7 +318,7 @@ Par exemple, lors de la configuration d'un monitor pour vous avertir si la laten
 
 ##### Regroupement des notifications {#notification-grouping}
 
-Lors de la surveillance d'un grand groupe d'entités, les alertes multiples peuvent entraîner des monitors bruyants. Pour atténuer cela, personnalisez les dimensions qui déclenchent les alertes. Cela réduit le bruit et vous permet de vous concentrer sur les alertes les plus importantes. Par exemple, vous surveillez l'utilisation moyenne du processeur de tous vos hôtes. Si vous regroupez votre requête par `service` et `host` mais que vous souhaitez uniquement que des alertes soient envoyées une fois pour chaque attribut `service` atteignant le seuil, supprimez l'attribut `host` de vos options d'alerte multiple et réduisez le nombre de notifications qui sont envoyées.
+Lors de la surveillance d'un grand groupe d'entités, les alertes multiples peuvent entraîner des monitors bruyants. Pour atténuer cela, personnalisez les dimensions qui déclenchent les alertes. Cela réduit le bruit et vous permet de vous concentrer sur les alertes les plus importantes. Par exemple, vous surveillez l'utilisation moyenne du processeur de tous vos hosts. Si vous regroupez votre requête par `service` et `host` mais que vous souhaitez uniquement que des alertes soient envoyées une fois pour chaque attribut `service` atteignant le seuil, supprimez l'attribut `host` de vos options d'alerte multiple et réduisez le nombre de notifications qui sont envoyées.
 
 {{< img src="/monitors/create/multi-alert-aggregated.png" alt="Schéma de la manière dont les notifications sont envoyées lorsqu'elles sont définies sur des dimensions spécifiques dans les alertes multiples" style="width:90%;">}}
 
@@ -337,24 +337,44 @@ Si vous configurez des tags ou des dimensions dans votre requête, ces valeurs s
 
 Tous les utilisateurs peuvent voir tous les monitors, quelle que soit l'équipe ou le rôle auquel ils sont associés. Par défaut, seuls les utilisateurs rattachés à des rôles disposant de l'[autorisation d'écriture sur les monitors][11] peuvent modifier les monitors. Les [rôles Datadog Admin et Datadog standard][12] disposent par défaut de l'autorisation d'écriture sur les monitors. Si votre organisation utilise des [rôles personnalisés][13], d'autres rôles personnalisés peuvent disposer de l'autorisation d'écriture sur les monitors. Pour plus d'informations sur la configuration du RBAC pour Monitors et la migration des Monitors du paramètre verrouillé vers l'utilisation de restrictions de rôle, consultez le guide sur [How to set up RBAC for Monitors][14].
 
-Vous pouvez restreindre davantage votre monitor en spécifiant une liste d'[équipes][17], de [rôles][15] ou d'utilisateurs autorisés à le modifier. Le créateur du monitor dispose par défaut des droits de modification sur celui-ci. Il est notamment possible de modifier la configuration du monitor, de supprimer le monitor et de désactiver ses notifications pendant la durée souhaitée.
+Vous pouvez restreindre davantage votre monitor en spécifiant une liste d'[équipes][17], de [rôles][15] ou d'utilisateurs autorisés à le modifier ou à le mettre en sourdine. Le créateur du monitor dispose par défaut des droits de modification sur celui-ci.
 
 **Remarque** : Les limitations s'appliquent à la fois dans l'interface utilisateur et dans l'API.
 
+### Niveaux d'accès {#access-levels}
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Le niveau d'accès Muter et les contrôles d'accès aux downtimes sont en Preview.
+{{< /callout >}}
+
+Chaque équipe, chaque rôle ou chaque utilisateur ayant accès à un monitor restreint dispose de l'un des niveaux d'accès suivants :
+
+| Niveau d'accès | Autorisations |
+|--------------|-------------|
+| Viewer       | Afficher le monitor. |
+| Muter        | Afficher et mettre en sourdine le monitor. Les utilisateurs ayant le niveau Muter ne peuvent pas modifier ou supprimer le monitor. |
+| Editor       | Afficher, mettre en sourdine, modifier et supprimer le monitor. |
+
+Utilisez le niveau d'accès Muter pour permettre aux ingénieurs d'astreinte ou aux autres intervenants de mettre un monitor en sourdine pendant un incident ou une fenêtre de maintenance, sans leur donner accès à la modification de sa configuration. Si votre organisation ne dispose pas du niveau d'accès Muter, seuls les utilisateurs ayant le niveau Editor peuvent mettre un monitor en sourdine.
+
+Pour mettre un monitor en sourdine, un utilisateur a également besoin de l'[autorisation Manage Downtimes][11]. Un downtime ne met en sourdine que les monitors auxquels son créateur a accès avec le niveau Muter ou Editor. Pour plus d'informations, consultez [Downtimes][18].
+
+**Remarque** : Restreindre l'accès à la modification d'un monitor supprime également l'accès à sa mise en sourdine pour les utilisateurs ayant le niveau Viewer, y compris par le biais des downtimes. Pour permettre à ces utilisateurs de mettre le monitor en sourdine, accordez-leur le niveau d'accès Muter.
+
 ### Contrôles d'accès granulaires {#granular-access-controls}
 
-Utilisez les [contrôles d'accès granulaires][16] pour limiter les équipes, rôles ou utilisateurs autorisés à modifier un monitor :
+Utilisez les [contrôles d'accès granulaires][16] pour limiter les équipes, les rôles ou les utilisateurs pouvant modifier ou mettre en sourdine un monitor :
 1. Lors de la modification ou de la configuration d'un monitor, recherchez la section {{< ui >}}Define permissions and audit notifications{{< /ui >}}.
   {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Options de configuration du monitor pour définir les autorisations" style="width:70%;" >}}
 1. Cliquez sur {{< ui >}}Edit Access{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Restrict Access{{< /ui >}}.
 1. La boîte de dialogue se met à jour pour indiquer que les membres de votre organisation ont un accès {{< ui >}}Viewer{{< /ui >}} par défaut.
-1. Utilisez le menu déroulant pour sélectionner une ou plusieurs équipes, rôles ou utilisateurs pouvant modifier le monitor.
+1. Utilisez le menu déroulant pour sélectionner au moins une équipe, un rôle ou un utilisateur pouvant modifier ou mettre en sourdine le monitor.
 1. Cliquez sur {{< ui >}}Add{{< /ui >}}.
-1. La boîte de dialogue se met à jour pour indiquer que le rôle que vous avez sélectionné dispose de l'autorisation {{< ui >}}Editor{{< /ui >}}.
+1. La boîte de dialogue se met à jour pour indiquer que le rôle que vous avez sélectionné dispose de l'autorisation {{< ui >}}Editor{{< /ui >}}. Pour donner à la sélection un accès limité à la mise en sourdine, remplacez {{< ui >}}Editor{{< /ui >}} par {{< ui >}}Muter{{< /ui >}}.
 1. Cliquez sur {{< ui >}}Done{{< /ui >}}.
 
-**Remarque :** Pour conserver votre accès en modification au monitor, le système exige que vous incluiez au moins un rôle ou une équipe dont vous êtes membre avant d'enregistrer.
+**Remarque :** Pour conserver votre accès à la modification du monitor, le système exige que vous incluiez au moins un rôle ou une équipe dont vous êtes membre et disposant d'un accès {{< ui >}}Editor{{< /ui >}} avant d'enregistrer.
 
 Pour rétablir les autorisations globales d'un monitor restreint, procédez comme suit :
 1. Lors de la consultation d'un monitor, cliquez sur le menu déroulant {{< ui >}}More{{< /ui >}}.
@@ -383,3 +403,4 @@ Pour rétablir les autorisations globales d'un monitor restreint, procédez comm
 [15]: /fr/account_management/rbac/
 [16]: /fr/account_management/rbac/granular_access
 [17]: /fr/account_management/teams/
+[18]: /fr/monitors/downtimes/#permissions
