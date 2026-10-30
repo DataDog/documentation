@@ -28,15 +28,6 @@ aliases:
 | Kafka      | [php-rdkafka][2] | 6.0.0                   | {{< dsm-tracer-version lang="php" lib="php-rdkafka" type="minimal" >}} | {{< dsm-tracer-version lang="php" lib="php-rdkafka" type="recommended" >}} |
 | RabbitMQ   | [php-amqplib][3] | 2.6.2                   | {{< dsm-tracer-version lang="php" lib="php-amqplib" type="minimal" >}} | {{< dsm-tracer-version lang="php" lib="php-amqplib" type="recommended" >}} |
 
-Data Streams Monitoring sets checkpoints on the following calls:
-
-| Library     | Produce                                                   | Consume                                                                                                      |
-| ----------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| php-rdkafka | `RdKafka\ProducerTopic::producev()` and `produce()`       | `RdKafka\KafkaConsumer::consume()` and `RdKafka\Queue::consume()`                                            |
-| php-amqplib | `AMQPChannel::basic_publish()`                            | Callbacks registered with `AMQPChannel::basic_consume()`, and messages returned by `AMQPChannel::basic_get()` |
-
-Other calls, such as php-amqplib's `batch_basic_publish()` and the `RdKafka\ConsumerTopic` consume methods, do not set checkpoints.
-
 ### Installation
 
 PHP uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
