@@ -7401,16 +7401,21 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_replay
       weight: 6
+    - name: Log Anomaly Detection
+      url: observability_pipelines/log_anomaly_detection/
+      parent: observability_pipelines
+      identifier: observability_pipelines_log_anomaly_detection
+      weight: 7
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
       identifier: observability_pipelines_logs_search_syntax
-      weight: 7
+      weight: 8
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 8
+      weight: 9
     - name: Buffering and Backpressure
       url: observability_pipelines/scaling_and_performance/buffering_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
@@ -7425,7 +7430,7 @@ menu:
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 9
+      weight: 10
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
@@ -7450,7 +7455,7 @@ menu:
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 10
+      weight: 11
     - name: Upgrade Worker Guide
       url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
