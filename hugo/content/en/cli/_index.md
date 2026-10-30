@@ -151,4 +151,4 @@ Pup supports OAuth2 and API key authentication methods. OAuth2 is preferred; run
 [8]: https://github.com/DataDog/pup/blob/main/README.md#authentication
 [9]: /api/latest/
 [10]: https://github.com/DataDog/pup#bearer-token-authentication-wasm--headless
-[11]: /agentic_onboarding/setup/#pup-cli-setup
+[11]: /agentic_onboarding/setup/#pup-cli
