@@ -28217,7 +28217,7 @@ components:
         - data
       type: object
     CreateVariant:
-      description: Request to create a variant.
+      description: Attributes for creating a variant.
       properties:
         key:
           description: The unique key of the variant.
@@ -28235,6 +28235,25 @@ components:
         - key
         - name
         - value
+      type: object
+    CreateVariantData:
+      description: Data for adding a variant to a feature flag.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateVariant"
+        type:
+          $ref: "#/components/schemas/VariantDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    CreateVariantRequest:
+      description: Request to add a variant to a feature flag.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateVariantData"
+      required:
+        - data
       type: object
     CreateWorkflowRequest:
       description: A request object for creating a new workflow.
@@ -143134,8 +143153,8 @@ components:
       required:
         - data
       type: object
-    UpdateVariantRequest:
-      description: Request to update an existing variant's name and value.
+    UpdateVariantAttributes:
+      description: Attributes for updating a variant.
       properties:
         name:
           description: The display name of the variant.
@@ -143145,6 +143164,30 @@ components:
           description: The value of the variant as a string.
           example: "new_value"
           type: string
+      type: object
+    UpdateVariantData:
+      description: Data for updating a variant.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/UpdateVariantAttributes"
+        id:
+          description: The ID of the variant. If you include it, use the same value as the `variant_id` path parameter.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/VariantDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    UpdateVariantRequest:
+      description: Request to update an existing variant's name and value.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdateVariantData"
+      required:
+        - data
       type: object
     UpdateWorkflowRequest:
       description: A request object for updating an existing workflow.
@@ -145093,6 +145136,69 @@ components:
         - key
         - name
         - value
+      type: object
+    VariantDataType:
+      description: The resource type for variants.
+      enum:
+        - "variants"
+      example: "variants"
+      type: string
+      x-enum-varnames:
+        - VARIANTS
+    VariantResponse:
+      description: Response containing a variant.
+      properties:
+        data:
+          $ref: "#/components/schemas/VariantResponseData"
+      required:
+        - data
+      type: object
+    VariantResponseAttributes:
+      description: Attributes of a variant.
+      properties:
+        created_at:
+          description: The timestamp when the variant was created.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        key:
+          description: The unique key of the variant.
+          example: "variant-abc123"
+          type: string
+        name:
+          description: The name of the variant.
+          example: "Variant ABC123"
+          type: string
+        updated_at:
+          description: The timestamp when the variant was last updated.
+          example: "2023-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        value:
+          description: The value of the variant as a string.
+          example: "true"
+          type: string
+      required:
+        - key
+        - name
+        - value
+      type: object
+    VariantResponseData:
+      description: A variant resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/VariantResponseAttributes"
+        id:
+          description: The unique identifier of the variant.
+          example: "550e8400-e29b-41d4-a716-446655440002"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/VariantDataType"
+      required:
+        - id
+        - type
+        - attributes
       type: object
     VariantWeight:
       description: Variant weight details.
@@ -179689,7 +179795,7 @@ paths:
                       value: dark
                     type: variants
             schema:
-              $ref: "#/components/schemas/CreateVariant"
+              $ref: "#/components/schemas/CreateVariantRequest"
         required: true
       responses:
         "201":
@@ -179708,7 +179814,7 @@ paths:
                       id: "550e8400-e29b-41d4-a716-446655440002"
                       type: variants
               schema:
-                $ref: "#/components/schemas/Variant"
+                $ref: "#/components/schemas/VariantResponse"
           description: Created
         "400":
           content:
@@ -179827,22 +179933,6 @@ paths:
         required: true
       responses:
         "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        created_at: "2024-01-01T00:00:00+00:00"
-                        key: dark
-                        name: Dark Theme Updated
-                        updated_at: "2024-06-01T00:00:00+00:00"
-                        value: dark_v2
-                      id: "550e8400-e29b-41d4-a716-446655440002"
-                      type: variants
-              schema:
-                $ref: "#/components/schemas/Variant"
           description: OK
         "400":
           content:
