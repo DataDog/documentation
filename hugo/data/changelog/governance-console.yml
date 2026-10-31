@@ -7,3 +7,11 @@ entries:
       - ListGovernanceControls
       - UpdateGovernanceControl
     title: Allow null default_value in governance control parameter definitions
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40910
+    operations:
+      - GetGovernanceDetection
+      - ListGovernanceControlDetections
+      - UpdateGovernanceDetection
+    title: Mark optional governance detection attributes as nullable
