@@ -18,10 +18,11 @@ Agent 6 and 7 are composed of a main process responsible for collecting infrastr
 * The Collector, which runs checks and collects metrics.
 * The Forwarder, which sends payloads to Datadog.
 
-Two optional processes are spawned by the Agent if enabled in the `datadog.yaml` configuration file:
+The following optional processes are spawned by the Agent if enabled in the `datadog.yaml` configuration file:
 
 * The APM Agent is a process that collects [traces][2]. It is enabled by default.
 * The Process Agent is a process that collects live process information. By default, the Process Agent only collects available containers, otherwise it is disabled.
+* The [Agent Data Plane][8] is a process that receives, aggregates, and forwards [DogStatsD metrics][1] in place of the main process. It is disabled by default.
 
 On Windows the services are listed as:
 
@@ -40,6 +41,13 @@ By default the Agent binds three [ports][3] on Linux and four ports on Windows a
 | 5002 | Serves the GUI server on Windows and macOS.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
+When the Agent Data Plane is enabled, it binds port 8125 in place of the main process, and binds the following additional ports:
+
+| Port | Description                                                                                           |
+|------|-------------------------------------------------------------------------------------------------------|
+| 5100 | Exposes runtime metrics about the Agent Data Plane.                                                   |
+| 5101 | Used by the Agent Data Plane CLI and the main Agent process to send commands to the Agent Data Plane. |
+
 For information on configuring the ports, see [Network Traffic][4].
 
 ### Collector
@@ -54,6 +62,8 @@ The Agent forwarder sends metrics over HTTPS to Datadog. Buffering prevents netw
 
 In Agent 6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggregation daemon. DogStatsD receives and rolls up arbitrary metrics over UDP or a UNIX socket, allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][7].
 
+When the [Agent Data Plane][8] is enabled, it runs the DogStatsD server in place of the main Agent process. Metrics from checks continue to be processed by the main Agent process.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -65,3 +75,4 @@ In Agent 6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric ag
 [5]: /extend/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
 [7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[8]: /agent/configuration/agent-data-plane/
