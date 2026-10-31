@@ -84,6 +84,14 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 - **Coverage**: The estimated proportion of your global metric total associated with the experiment's eligible population (excluding the effect of the experiment).
 - **Global lift**: The estimated change to your overall metric totals if the treatment were released to all eligible users. Datadog calculates global lift as the product of coverage and the experiment's local (relative) lift.
 
+## Holdout results
+
+Conceptually, a [holdout][10] is a controlled experiment. The treatment is a combination of shipped changes from covered experiments. The scorecard compares the all-shipped treatment group with the status-quo control group. The all-shipped group receives each selected change after its rollout completes. Before then, both groups receive control.
+
+The [inclusion phase][12] gives teams time to run experiments and roll out changes. Preliminary results provide an early directional read. They include data from a period when the holdout treatment is still changing and not all changes have shipped. The primary analysis measures metric data from the later analysis phase, when the full treatment should be available. Subjects should enter the primary analysis at their first [qualifying exposure][13] after a non-control variant ships.
+
+The result measures the combined impact of the shipped changes. CUPED can reduce random variation in the primary analysis when enabled. The preliminary analysis does not use it. See [Exposure criteria][13] and [Interpret results][11].
+
 ## Exploring results
 
 From the metric scorecard, hover over a metric name to view exploration options. The options available depend on your metric's data source.
@@ -123,3 +131,7 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [7]: /experiments/global_lift/
 [8]: /experiments/statistics/multiple_testing_correction
 [9]: /experiments/diagnostics/
+[10]: /experiments/holdouts/
+[11]: /experiments/holdouts/#interpret-results
+[12]: /experiments/holdouts/#holdout-phases
+[13]: /experiments/holdouts/#exposure-criteria
