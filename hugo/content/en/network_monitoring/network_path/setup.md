@@ -513,8 +513,8 @@ For more information, reference the [Datadog Helm Chart documentation][1] and th
 #     tag: "<AGENT_VERSION>"
 
 datadog:
-  ## Required on all Agent versions: the Helm chart sets this to false by default,
-  ## which prevents the Agent from enabling the traceroute module automatically.
+  ## Required with Agent versions earlier than v7.84, which don't enable the traceroute module automatically,
+  ## and with Helm chart versions earlier than v3.263.0, which set this option to false by default.
   traceroute:
     enabled: true
 
@@ -573,15 +573,19 @@ datadog:
 
 ##### Prerequisites
  - [CNM][1] is enabled.
- - Agent `v7.84+` is installed
+ - Agent `v7.84+` is installed.
 
 Basic dynamic tests provide hop-by-hop [Network Path][7] visibility into your highest-traffic connections, without configuring individual destinations. Basic dynamic tests are included with CNM at no additional cost.
 
-Every hour, each Agent selects up to five of its highest-traffic paths and runs one Network Path test on each. 
+Starting with Agent `v7.86`, basic dynamic tests are enabled by default on hosts with CNM. On Agent `v7.84` and `v7.85`, or with Helm chart versions earlier than `v3.263.0`, enable basic dynamic tests as described in [Setup](#setup-basic-dynamic-tests).
+
+Every hour, each Agent selects up to five of its highest-traffic paths and runs one Network Path test on each.
 
 Basic dynamic tests provide representative coverage of your busiest paths, but don't guarantee that a specific connection is tested. For broader coverage of the paths that CNM observes, use [dynamic tests](#dynamic-tests).
 
-##### Setup
+##### Setup {#setup-basic-dynamic-tests}
+
+On Agent `v7.86+`, basic dynamic tests run by default when CNM is enabled, except with Helm chart versions earlier than `v3.263.0` (see the **Helm** tab). On Agent `v7.84` and `v7.85`, enable them as follows:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -625,7 +629,7 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.84+` and Helm chart `v3.124.0+` are required.
+Agent `v7.84+` and Helm chart `v3.124.0+` are required. With Agent `v7.86+` and Helm chart `v3.263.0+`, you only need to enable CNM.
 
 Add the following to your `values.yaml` file, then upgrade your Helm release:
 
@@ -635,12 +639,12 @@ datadog:
   networkMonitoring:
     enabled: true
 
-  ## Required on all Agent versions: the Helm chart sets this to false by default,
-  ## which prevents the Agent from enabling the traceroute module automatically.
+  ## Required with Helm chart versions earlier than v3.263.0, which set this option to false
+  ## by default and prevent the Agent from enabling the traceroute module automatically.
   traceroute:
     enabled: true
 
-  ## Enable basic dynamic tests.
+  ## Required with Agent v7.84 and v7.85 only. Agent v7.86+ enables basic dynamic tests by default.
   env:
     - name: DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED
       value: "true"
@@ -649,7 +653,17 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-To disable basic dynamic tests, set `basic_tests_enabled` to `false` and restart the Agent.
+##### Disable basic dynamic tests
+
+Set `basic_tests_enabled` to `false` in `datadog.yaml`, then restart the Agent:
+
+```yaml
+network_path:
+  connections_monitoring:
+    basic_tests_enabled: false
+```
+
+For Helm or other containerized Agents, set the environment variable `DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED` to `"false"`.
 
 ##### View results
 
@@ -661,9 +675,10 @@ Basic dynamic tests only select destinations allowed by your [filters][8].
 
 If no paths with `test_run_type:dynamic` appear in [Network Path][4], verify the following:
 
- - The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
+ - The [prerequisites](#prerequisites) are met and at least five minutes have passed since the Agent restarted.
+ - `basic_tests_enabled` is set to `true`. It defaults to `true` on Agent `v7.86+`. On Agent `v7.84` and `v7.85`, set it explicitly.
  - CNM shows connections from the host on the [CNM Analytics][9] page.
- - `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
+ - `traceroute.enabled` is not set to `false` in `system-probe.yaml`. On Agent `v7.86+`, basic dynamic tests don't run when `traceroute.enabled` is set to `false`, and the Agent logs `Network Path basic dynamic tests are disabled because system-probe traceroute is explicitly disabled`. For Helm chart versions earlier than `v3.263.0`, set `datadog.traceroute.enabled` to `true`.
  - The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
  - Your [filters][8] don't exclude the destinations you expect to see.
 
