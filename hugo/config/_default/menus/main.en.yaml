@@ -6833,11 +6833,16 @@ menu:
       parent: feature_flags
       identifier: feature_flags_mcp_server
       weight: 7
+    - name: Automations
+      url: feature_flags/automations
+      parent: feature_flags
+      identifier: feature_flags_automations
+      weight: 8
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 8
+      weight: 9
     - name: Source Code Integration
       url: source_code/
       pre: dev-code
