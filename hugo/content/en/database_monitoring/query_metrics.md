@@ -30,6 +30,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/database-monitoring"
   tag: "Learning Center"
   text: "Monitoring a Postgres Database with Datadog DBM"
+- link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+  tag: "Blog"
+  text: "Monitor Oracle AI Database across clouds with Datadog"
 
 ---
 
