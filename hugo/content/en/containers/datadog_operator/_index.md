@@ -43,7 +43,7 @@ The Operator also offers capabilities the Helm chart does not. For example, [Dat
 
 In Datadog Operator v1.29.0 and later, the Operator reaches feature parity with the Helm chart on the major cloud providers, so you do not lose functionality by choosing it. It can also be installed and upgraded through native platform catalogs that the Helm chart is not published in: Red Hat OperatorHub, the [Amazon EKS add-on][12], and [Google Cloud Marketplace][13].
 
-Use the `datadog` Helm chart when the Operator does not fit your environment: on platforms the Operator does not support yet (such as Talos or Flatcar), on GKE on Google Distributed Cloud (GDC), or when you need a Helm feature the Operator does not expose. For the platforms and providers the Operator supports, see the [providers documentation][11].
+Use the `datadog` Helm chart when the Operator does not fit your environment: on platforms the Operator does not support yet (such as Flatcar), on GKE on Google Distributed Cloud (GDC), or when you need a Helm feature the Operator does not expose. For the platforms and providers the Operator supports, see the [providers documentation][11].
 
 Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonSet configuration leaves significant room for error and is not recommended.
 
