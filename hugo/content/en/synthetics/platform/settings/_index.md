@@ -210,7 +210,7 @@ Variable values are updated whenever the test they are extracted from runs.
 
 {{% tab "MFA Token" %}}
 
-To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider. **Note:** Currently, only the SHA1 hashing algorithm is supported for TOTP.
+To use multi-factor authentication (MFA) in your tests, create a global variable that generates a time-based one-time password (TOTP). Enter a secret key or upload a QR code from your authentication provider. **Note:** Only the SHA1 hashing algorithm is supported for TOTP.
 
 1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}MFA Token{{< /ui >}}.
 2. In {{< ui >}}Define Variable{{< /ui >}}, enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -242,6 +242,23 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 
 [1]: /synthetics/guide/browser-tests-passkeys
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
+{{% /tab %}}
+{{% tab "Email Address" %}}
+
+Create a persistent email variable to receive emails at the same Datadog-managed address across browser test runs. Register an application account with this address once, then reuse it for email workflows, such as password resets, order confirmations, or OTP login. Mobile app tests do not support temporary or persistent email variables.
+
+1. In {{< ui >}}Choose variable type{{< /ui >}}, select {{< ui >}}Email Address{{< /ui >}}.
+2. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `LOGIN_EMAIL`. Optionally, add a description and tags.
+3. Under {{< ui >}}Permission settings{{< /ui >}}, click {{< ui >}}Edit Access{{< /ui >}} to configure access, then save the variable.
+4. Copy the generated address from the saved variable to register the account in your application. The create form shows only an example address.
+
+{{< img src="synthetics/settings/persistent_email_variable.png" alt="Create a persistent email variable with Email Address selected and configure its name, tags, and access permissions." style="width:80%;" >}}
+
+Datadog generates the address when you create the variable. The saved address is read-only: You cannot supply a custom mailbox or change the address. Editing the name, description, or tags preserves the address.
+
+In the browser recorder, select {{< ui >}}Email Address{{< /ui >}} > {{< ui >}}Persistent{{< /ui >}} and choose the saved variable. A test can use one temporary or persistent email variable. For setup instructions and the differences from temporary email, see [Use persistent email variables in browser tests][1].
+
+[1]: /synthetics/guide/persistent-email-otp/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -276,6 +293,8 @@ Use [granular access control][22] to limit who has access to your test based on 
 | No access    |               |                  |                |                         |
 | Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
+
+For persistent email variables, Editors can update metadata, but the generated address remains read-only.
 
 **Note**: Restricting a variable prevents other users from adding it to a test and using it; it does not hide the name of the variable if it is already used in an existing test.
 
