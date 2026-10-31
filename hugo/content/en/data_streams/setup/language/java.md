@@ -106,8 +106,10 @@ Enable [Amazon SNS raw message delivery][1].
 
 {{% data_streams/monitoring-kinesis-pipelines %}}
 
+{{% data_streams/monitoring-aws-lambda %}}
+
 ### Manual instrumentation
-Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][5].
+Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, or a technology without headers (such as Kinesis), use [manual instrumentation to set up DSM][5].
 
 ### Monitoring connectors
 
