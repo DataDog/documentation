@@ -19,32 +19,67 @@ further_reading:
 ---
 
 ## Overview
-Datadog's [GPU Monitoring][1] provides a centralized view into your GPU fleet's health, cost, and performance. It enables teams to make better provisioning decisions, optimize and troubleshoot AI workload performance, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). GPU Monitoring supports fleets deployed across the major cloud providers (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or provisioned through GPU-as-a-Service platforms like Coreweave and Lambda Labs. 
+Datadog's [GPU Monitoring][1] helps you understand and optimize the performance, health, and cost of your GPU fleet and the AI workloads running on it, all in one place. With GPU Monitoring, you can:
+
+- Get unified, fleet-wide GPU visibility across cloud, on-premises, and neocloud providers.
+- Identify the key drivers of GPU inefficiencies and wasted spend by team, service, cluster, and more.
+- Improve the throughput and performance of the AI training and inference workloads running on your GPUs.
+- Pinpoint optimization opportunities, such as idle devices and zombie processes, to reclaim wasted spend.
+
+GPU Monitoring supports fleets deployed across the major cloud providers (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or provisioned through GPU-as-a-Service platforms like CoreWeave and Lambda Labs. You don't need to manually set up individual vendor tools (like NVIDIA's DCGM).
 
 You can access insights into your GPU fleet by deploying the Datadog Agent on your GPU-accelerated hosts. For setup instructions, see [Set up GPU Monitoring][2].
 
 ## Key capabilities
-### Make data-driven GPU allocation and provisioning decisions
-With a comprehensive view of your entire fleet and available capacity, Datadog's GPU Monitoring helps you assign and manage your infrastructure and capacity fairly across your organization. 
+
+### Capacity plan with confidence
+
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-capacity-planning/" >}}
+[Capacity Planning](/gpu_monitoring/capacity_planning) in GPU Monitoring is in Early Access Preview. Complete the form to request access.
+{{< /callout >}}
+
+Understand your entire fleet's size and spend across hyperscalers, on-premises, and neocloud providers in one unified view.
 
 {{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
-You can also understand your current device availability and forecast how many devices are needed for certain teams or workloads to avoid failed workloads from resource contention.
+- Attribute GPU usage and quotas by team, service, or any tag to allocate capacity more fairly across teams, and to distinguish real capacity shortages from inefficiencies.
+- Identify resource contention and forecast demand for each GPU type to shorten procurement cycles and make spend more predictable.
+- Diagnose why workloads are delayed or evicted.
 
 {{< img src="gpu_monitoring/device_allocation.png" alt="Charts to help visualize GPU allocation. A line graph titled 'Device Allocation Over Time', plotting counts of total/allocated/active devices, including a 4-week future forecast. A donut chart titled 'Cloud Provider Instance Breakdown', displaying prevalence of cloud provider instances across the fleet. A 'Device Type Breakdown' displaying allocated/total for various GPU devices." style="width:100%;" >}}
 
-### Maximize model and application performance
-With GPU Monitoring's resource telemetry, you can analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) by host, node, or pod over time, helping you understand devices' effects on your model and application performance. For example, you can identify hotspots or underutilization of expensive GPU infrastructure that could be bottlenecks for your workloads' execution
+### Maximize AI workload throughput
 
-{{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
+{{< callout btn_hidden="true" >}}
+[Training](/gpu_monitoring/training) and [Inference](/gpu_monitoring/inference) in GPU Monitoring are in Early Access Preview. To request access, complete the form on each page.
+{{< /callout >}}
 
-### Proactively detect hardware issues
-GPUs are an expensive and scarce resource that have higher failure rates than standard servers. Datadog's GPU Monitoring solution provides OOTB monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
+Analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) by host, node, or pod over time to understand how your devices affect model and application performance.
 
-### Identify and eliminate wasted, idle GPU costs
+- Troubleshoot stalled workloads with shared context for both platform and ML teams, instead of switching between siloed tools.
+- Pinpoint why workloads are slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
+- Detect bottlenecks in your training and inference workloads with lightweight, continuous tracing.
+- Discover recommendations on the optimizations that produce the largest throughput improvements.
+
+{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
+
+{{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
+
+### Safeguard device reliability
+GPUs are an expensive and scarce resource with higher failure rates than standard servers. GPU Monitoring provides out-of-the-box monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
+
+- Catch thermal throttling early with out-of-the-box alerts, before failures spread across the cluster.
+- Detect and remediate ECC and XID errors proactively, with prescriptive next steps that help teams act fast.
+- Isolate unhealthy GPUs before failures cascade.
+
+### Reduce wasted spend
 Identify total spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlate GPU usage to related pods or processes.
 
-{{< img src="gpu_monitoring/fleet_costs.png" alt="Detail view of a cluster, displaying funnel visualization of devices (total/allocated/active/effective), total cloud cost, idle cloud cost, and visualizations and details of various connected entitles (pods, processors, SLURM jobs)." style="width:100%;" >}}
+- Break down total and idle GPU spend by any tag over any time frame to see where spend is concentrated.
+- Identify the key drivers of wasted GPU spend and inefficiencies (for example, the most wasteful teams) to support internal chargebacks and data-driven quota management decisions.
+- Make cost optimization part of daily operations by giving teams clear reporting on GPU usage and spend.
+
+{{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:100%;" >}}
 
 ## Ready to start?
 
