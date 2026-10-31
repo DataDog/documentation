@@ -258,7 +258,9 @@ Use [Server SDK Configuration Sources][6] as the canonical reference for source 
 - [Use Agent Remote Configuration][9] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposures and EVP flag evaluation events. Python emits EVP flag evaluation events by default. Set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+For no-Agent serverless environments, use [`serverless-init`][11] to send experiment exposures and EVP flag evaluation events. Python emits EVP flag evaluation events by default. Set `DD_FEATURE_FLAGS_EVALUATION_COUNTS_ENABLED=false` before initializing the tracer to disable this event path. This setting does not disable the separate `feature_flag.evaluations` OTLP metric.
+
+`DD_FLAGGING_EVALUATION_COUNTS_ENABLED` remains a compatibility alias. If both environment variables are set, `DD_FEATURE_FLAGS_EVALUATION_COUNTS_ENABLED` takes precedence. For SDK versions that do not support the new name, use the legacy name.
 
 ## Cleanup
 
