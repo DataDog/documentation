@@ -692,6 +692,22 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 **Note**: `gen_ai.usage.cache_write.input_tokens` (dotted) is not read. Use `gen_ai.usage.cache_creation.input_tokens` (or `gen_ai.usage.cache_write_input_tokens`) for cache write tokens.
 
+#### Cost metrics
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.cost.estimated_total` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.estimated_input` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.estimated_output` | `metrics.estimated_output_cost` |
+| `gen_ai.cost.estimated_cache_read_input` | `metrics.estimated_cache_read_input_cost` |
+| `gen_ai.cost.estimated_cache_write_input` | `metrics.estimated_cache_write_input_cost` |
+| `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
+| `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
+
+These fields are estimates in nanodollars, not the dollar-unit manual cost fields. For more information, see [Cost][56].
+
+When Agent Observability can price the model, it recomputes each cost component from the span's token counts and the model's pricing, and replaces the value you supplied for that component. Agent Observability keeps your supplied value for models it cannot price and for any component whose recomputed cost is zero (for example, cache writes on a provider that does not bill them).
+
 #### Request parameters
 
 All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
@@ -1214,3 +1230,4 @@ with tracer.start_as_current_span("my-span") as span:
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
+[56]: /llm_observability/investigate/cost/
