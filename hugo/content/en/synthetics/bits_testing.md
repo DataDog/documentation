@@ -28,6 +28,10 @@ further_reading:
   text: "Synthetic Monitoring pricing"
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Bits Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Bits Testing is an AI agent that explores your application to map its most critical user journeys. It recommends ways to increase test coverage, and it can generate the Synthetic tests needed to close coverage gaps.
@@ -42,6 +46,8 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
 - {{< ui >}}Generate a Test With Bits Testing{{< /ui >}} in a session replay's details panel. See [Generate a test from a session replay][10].
 
 ## Trigger a Bits Testing job
+
+To trigger a Bits Testing job, your role must include the `synthetics_read` and `synthetics_write` [permissions][13].
 
 1. On the Bits Testing page, describe the coverage you want in plain language, or select a suggested prompt. For example, ask Bits Testing to increase coverage generally, or to focus on specific features.
 1. Confirm the starting URL. Leave {{< ui >}}Restrict Discovery to the start URL domain{{< /ui >}} enabled to keep Bits Testing from following links to a different domain. Turn it off if your application's sign-in flow redirects off-site and back.
@@ -145,7 +151,7 @@ Click a green journey card to open the AI-generated test suite for that journey.
 Each test in the suite includes a free sample test run. Review the suite and either:
 
 - Click {{< ui >}}Ignore{{< /ui >}} if the suite isn't relevant, and optionally share feedback about why.
-- Click {{< ui >}}Start Testing{{< /ui >}} to add the suite's tests to your account.
+- Click {{< ui >}}Start Testing{{< /ui >}} to add the suite's tests to your account. This requires the `synthetics_write` [permission][13].
 
 After you start testing a suite, each test becomes a regular Synthetic test that you can edit or delete. By default, generated tests run every 5 minutes from the location you selected for the Bits Testing job.
 
@@ -177,3 +183,4 @@ Run Bits Testing from a [private location](#run-bits-testing-from-a-private-loca
 [10]: /synthetics/guide/rum-to-synthetics/#generate-a-test-from-a-session-replay
 [11]: /synthetics/platform/private_locations/#create-your-private-location
 [12]: /synthetics/platform/private_locations/configuration/
+[13]: /account_management/rbac/permissions/#synthetic-monitoring

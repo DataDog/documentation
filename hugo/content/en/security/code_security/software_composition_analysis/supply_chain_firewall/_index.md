@@ -101,11 +101,11 @@ The configuration command performs several distinct steps:
 
 - Stores your API and application keys securely in your system's keychain.
 
-   <div class="alert alert-tip">You can provide your Datadog credentials and site with the `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` environment variables instead of passing them as flags. Environment variables take precedence over credentials stored in the system keychain.</div>
+   <div class="alert alert-tip">You can provide your Datadog credentials and site with the <code>DD_API_KEY</code>, <code>DD_APP_KEY</code>, and <code>DD_SITE</code> environment variables instead of passing them as flags. Environment variables take precedence over credentials stored in the system keychain.</div>
 
 - Adds SCFW's alias configuration to your shell's rc files (whichever of `.bashrc`, `.bash_profile`, `.zshrc`, and `.zprofile` already exist). Restart your shell, or source the relevant rc file, for the aliases to take effect.
 
-   <div class="alert alert-tip">Alias options are additive: aliases added by an earlier run remain in place unless you pass the corresponding `--remove-alias-*` option. The command manages a clearly delimited, SCFW-managed block in your shell rc files, and doesn't touch anything else in those files.</div>
+   <div class="alert alert-tip">Alias options are additive: aliases added by an earlier run remain in place unless you pass the corresponding <code>--remove-alias-*</code> option. The command manages a clearly delimited, SCFW-managed block in your shell rc files, and doesn't touch anything else in those files.</div>
 
 - Enables log forwarding to Datadog. See [Supply Chain Firewall integration][4] for details.
 

@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
   tag: "Blog"
   text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
+- link: "/security/cloud_siem/ingest_and_enrich/muted_indicators/"
+  tag: "Documentation"
+  text: "Mute benign indicators in Cloud SIEM"
 ---
 
 ## Overview
@@ -53,6 +56,8 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
 **Notes**:
 - Cloud SIEM evaluates logs in real time and uses both [Datadog-curated threat intelligence][10] and your own reference tables.
 - Reference tables are the mechanism for storing and joining your custom IoCs with logs and detections.
+
+Muting an indicator in Cloud SIEM does not change ratings from your own threat intelligence. To mark indicators from Datadog's built-in feeds as benign for your organization, see [Muted Indicators][12].
 
 ### Store indicators of compromise in reference tables
 
@@ -302,3 +307,4 @@ You can view your threat intelligence data in the [IOC Explorer][11].
 [9]: /security/threat_intelligence/#threat-intelligence-intents
 [10]: /security/threat_intelligence#threat-intelligence-sources
 [11]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[12]: /security/cloud_siem/ingest_and_enrich/muted_indicators/

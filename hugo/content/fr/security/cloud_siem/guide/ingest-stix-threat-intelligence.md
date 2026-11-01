@@ -18,6 +18,9 @@ further_reading:
 - link: /reference_tables/
   tag: Documentation
   text: Créer et gérer des tableaux de référence
+- link: /security/cloud_siem/ingest_and_enrich/muted_indicators/
+  tag: Documentation
+  text: Mettez en sourdine les indicateurs bénins dans Cloud SIEM
 title: Ingérez des renseignements sur les menaces STIX
 ---
 ## Présentation {#overview}

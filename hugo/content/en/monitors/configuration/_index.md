@@ -344,6 +344,10 @@ You can further restrict your monitor by specifying a list of [teams][17], [role
 
 ### Access levels
 
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+The Muter access level and downtime access controls are in Preview.
+{{< /callout >}}
+
 Each team, role, or user on a restricted monitor has one of the following access levels:
 
 | Access level | Permissions |
@@ -355,6 +359,8 @@ Each team, role, or user on a restricted monitor has one of the following access
 Use the Muter access level to let on-call engineers or other responders silence a monitor during an incident or maintenance window without giving them access to change its configuration. If your organization does not have the Muter access level, only Editors can mute a monitor.
 
 To mute a monitor, a user also needs the [Manage Downtimes permission][11]. A downtime only silences the monitors that its creator has Muter or Editor access to. For more information, see [Downtimes][18].
+
+**Note**: Restricting edit access to a monitor also removes mute access for users with Viewer access, including through downtimes. To let these users mute the monitor, grant them the Muter access level.
 
 ### Granular access controls
 

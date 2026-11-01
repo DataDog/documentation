@@ -46,6 +46,8 @@ gates:
 comments:
   enabled: true
   file_breakdown: true
+annotations:
+  enabled: true
 ```
 
 ## Services configuration
@@ -330,6 +332,32 @@ comments:
 
 The breakdown has no effect when `comments.enabled` is `false`.
 
+## Inline annotations
+
+Set `annotations.enabled` to `true` to have Datadog comment on lines added in the pull request that aren't covered by tests:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+annotations:
+  enabled: true
+{{< /code-block >}}
+
+The `annotations` block accepts the following fields:
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `enabled` | Boolean | `false` | Whether Datadog annotates uncovered lines on the pull request diff. |
+
+When annotations are enabled, Datadog:
+
+- Annotates only executable lines that the pull request adds, and counts [partially covered][5] lines as uncovered.
+- Groups consecutive uncovered lines into a single annotation, so each uncovered range gets one comment.
+- Posts up to 30 annotations per pull request. If there are more uncovered ranges, the summary comment reports the total and links to the full report in Datadog.
+- Resolves an annotation after its lines are covered.
+- Posts annotations independently of the summary comment. Setting `comments.enabled` to `false` does not disable annotations. If comments are disabled and the 30-annotation limit is exceeded, Datadog still posts a summary comment that reports only the total number of uncovered ranges.
+
+**Note**: Inline annotations are not supported on Bitbucket.
+
 ## Carryforward
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
@@ -411,3 +439,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/flags
 [4]: /code_coverage/carryforward
+[5]: /code_coverage/coverage_calculation#partial-coverage

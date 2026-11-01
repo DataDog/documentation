@@ -339,6 +339,7 @@ Verify the following:
 - The Agent has a valid API key for the target organization.
 - `DD_SERVICE` and `DD_ENV` are configured in the application process.
 - The SDK can communicate with the Agent.
+- The Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][12].
 
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
@@ -351,6 +352,7 @@ Verify the following:
 [9]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[12]: /feature_flags/concepts/configuration_sources/#agent-availability
 
 ## Further reading
 

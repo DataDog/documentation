@@ -2,15 +2,18 @@
 title: Best Practices for Setting Up RUM Operations
 description: Learn how to define RUM operations that generate reliable availability and latency metrics for journeys.
 further_reading:
-- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
-  tag: 'Guide'
-  text: 'Best practices for creating SLOs for RUM operations'
 - link: '/real_user_monitoring/operations_monitoring/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
 - link: '/journey_monitoring/'
   tag: 'Documentation'
   text: 'Learn about Journey Monitoring'
+- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
+  tag: 'Guide'
+  text: 'Best practices for creating SLOs for RUM operations'
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

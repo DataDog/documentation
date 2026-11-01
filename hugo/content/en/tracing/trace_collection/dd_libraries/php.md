@@ -83,7 +83,7 @@ Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of
 When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
 <div class="alert alert-info">
-It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
+It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the <code>ddtrace</code>. Failed diagnostic checks appear in this section to help identify any issues.
 </div>
 
 <div class="alert alert-danger">

@@ -75,6 +75,8 @@ A scanning group determines what data to scan. It consists of a query filter, a 
 
 For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
+**Note**: By default, Sensitive Data Scanner supports up to 20 scanning groups per organization for telemetry data (Logs, APM, RUM, and Events). If you reach this limit, consider consolidating scanning groups that use similar query filters and rules. To request a higher limit, contact [Datadog Support][18].
+
 To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
@@ -93,7 +95,7 @@ A scanning rule determines what sensitive information to match within the data d
 
 Whenever possible, use Datadog's out-of-the-box library rules. These rules are predefined rules that detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, network and device information, and more. Each rule has recommended keywords for the keyword dictionary to refine matching accuracy. You can also [add your own keywords](#add-custom-keywords).
 
-For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource. To keep your configuration stable when Datadog renames a library rule, [reference library rules by ID][17] instead of by name.
 
 
 **Note**: Sensitive Data Scanner supports up to 750 scanning rules per organization for telemetry data (Logs, APM, RUM, and Events). This limit applies across all scanning groups.
@@ -420,3 +422,5 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [14]: /observability_pipelines/configuration/set_up_pipelines/
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags
+[17]: /security/sensitive_data_scanner/scanning_rules/library_rules/#reference-library-rules-by-id
+[18]: /help/

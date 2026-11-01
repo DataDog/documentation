@@ -96,7 +96,7 @@ The products differ in the data they capture and how long the instrumentation re
 {% if equals($prog_lang, "dot_net") %}
 
 - [Datadog .NET SDK][32], version 3.46.0 or higher strongly recommended; versions below 3.46.0 may result in unexpected errors and a degraded experience
-  - Minimum for [in-app enablement](#enable-in-app): 3.29.0
+  - Minimum for [in-app enablement](#enable-in-app): 3.57.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 3.9.0
 - [Datadog Agent][2], version 7.49.0 or higher
 
@@ -109,7 +109,8 @@ The products differ in the data they capture and how long the instrumentation re
 - [Datadog Node.js SDK (`dd-trace-js`)][33], version 5.109.0 or higher strongly recommended; versions below 5.109.0 may result in unexpected errors and a degraded experience
   - Minimum for [in-app enablement](#enable-in-app): 5.84.0
   - Minimum for [manual enablement](#enable-with-environment-variables): 5.39.0
-  - Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack)
+- Source maps published with the deployed application if source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack). See [TypeScript import limitations](#limitations).
+- Node.js runtime (Bun and Deno are not supported)
 - [Datadog Agent][2], version 7.49.0 or higher
 
 {% /if %}
@@ -411,6 +412,16 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits**:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
+
+{% if equals($prog_lang, "node_js") %}
+
+- **TypeScript imports**:
+   - When TypeScript compiles named or default imports to CommonJS, expressions using imported names can fail with `ReferenceError`, even with source maps. This affects logpoint messages, conditions, and variable capture expressions.
+   - To reference the imported value without redeploying, inspect the JavaScript from the deployed build or captured variables to find the generated module name. For example, if `import { LIMIT } from './limits'` compiles to `const limits_1 = require('./limits')`, replace `count > LIMIT` with `count > limits_1.LIMIT`.
+   - The generated name must be in scope at the logpoint and can change between builds.
+   - This workaround does not apply to `instanceof`, which does not support qualified class names such as `foo_1.Foo`.
+
+{% /if %}
 
 ## Troubleshooting
 

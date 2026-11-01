@@ -20,11 +20,12 @@ When using any Datadog cloud integration (AWS, Azure, Google Cloud, etc.), metri
 
 | Provider   | Default crawler  |
 |------------|------------------|
-| Alibaba    | Every 10 minutes |
+| Alibaba    | Every 2 minutes  |
 | AWS        | Every 10 minutes (with the exception of [RDS metrics][3], which are collected every 3 minutes) |
 | Azure      | Every 2 minutes  |
 | Cloudflare | Every 5 minutes |
 | GCP        | Every 5 minutes  |
+| OCI        | Not applicable (metrics are forwarded through [Service Connector Hubs][6]) |
 
 ## Cloud providers
 
@@ -32,7 +33,7 @@ These are specifics related to particular cloud providers.
 
 ### Alibaba
 
-Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
+Alibaba emits metrics with one-minute granularity. Therefore, expect metric delays of up to ~10 minutes.
 
 ### AWS
 
@@ -50,6 +51,10 @@ Azure emits metrics with 1-minute granularity. Therefore, expect metric delays o
 ### GCP
 
 GCP emits metrics with 1-minute granularity. Therefore, expect metric delays of ~7-8 minutes.
+
+### OCI
+
+OCI metrics are forwarded to Datadog through [Service Connector Hubs][6] instead of a crawler. Expect metric delays of up to ~10 minutes.
 
 ## Monitors
 
@@ -72,3 +77,4 @@ On the Datadog side for the AWS, Azure, and GCP integrations, Datadog may be abl
 [3]: /integrations/amazon-rds/#metrics
 [4]: /getting_started/site/
 [5]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[6]: /integrations/oracle-cloud-infrastructure/

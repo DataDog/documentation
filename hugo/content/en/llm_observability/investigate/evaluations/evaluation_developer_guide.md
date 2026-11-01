@@ -19,14 +19,14 @@ further_reading:
 
 ## Overview
 
-This guide covers how to build custom evaluators with the Agent Observability SDK and use them in LLM Experiments and in production. 
+This guide covers how to build custom evaluators with the Agent Observability SDK and use them in Offline Experiments and in production.
 
 ## Key concepts
 
 An **evaluation** measures a specific quality of your LLM application's output, such as accuracy, tone, or harmfulness. You write the evaluation logic inside an **evaluator**, which receives context about the LLM interaction and returns a result.
 
 ### Running evaluators in an Experiment
-To test your LLM application against a dataset before deploying, run your evaluators in [LLM Experiments][4]. In Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
+To test your LLM application against a dataset before deploying, run your evaluators in [Offline Experiments][4]. In Offline Experiments, evaluators run automatically: the SDK calls your evaluator on each distinct record. Use evaluators through the SDK.
 
 ### Running evaluators in production
 To monitor the quality of your live LLM responses, run evaluators in production. You can run evaluators manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluators][5]. Use evaluators through the SDK, HTTP API, or the Datadog UI.
@@ -41,20 +41,20 @@ This guide focuses on manual evaluations. For custom LLM-as-a-judge evaluators, 
 
 The evaluation system has four main components:
 
-- **[EvaluatorContext](#evaluatorcontext)**: The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In Experiments, the SDK builds this automatically from each dataset record. In production, you construct the EvaluatorContext yourself.
+- **[EvaluatorContext](#evaluatorcontext)**: The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In Offline Experiments, the SDK builds this automatically from each dataset record. In production, you construct the EvaluatorContext yourself.
 - **[EvaluatorResult](#evaluatorresult)**: The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
 - **[MultiEvaluatorResult](#multievaluatorresult)**: An optional container for returning multiple named metrics from a single evaluator. Each sub-value can be a plain value or its own `EvaluatorResult`. Useful when one evaluator pass produces several related metrics (for example, precision, recall, and F1).
 - **[Metric type](#metric-types)**: Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
-- **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
+- **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Offline Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
 The typical flow:
 
-- **Experiments**: Dataset record → `EvaluatorContext` → Evaluator → `EvaluatorResult` (or `MultiEvaluatorResult`) → (after all records) `SummaryEvaluatorContext` → Summary evaluator → summary result
+- **Offline Experiments**: Dataset record → `EvaluatorContext` → Evaluator → `EvaluatorResult` (or `MultiEvaluatorResult`) → (after all records) `SummaryEvaluatorContext` → Summary evaluator → summary result
 - **Production**: Span data → `EvaluatorContext` (built manually) → Evaluator → `EvaluatorResult` → `LLMObs.submit_evaluation()` or HTTP API
 
 ## Building evaluators
 
-There are two ways to define an evaluator using Agent Observability: class-based and function-based. In addition to these evaluators, Agent Observability has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in Agent Observability Experiments.
+There are two ways to define an evaluator using Agent Observability: class-based and function-based. In addition to these evaluators, Agent Observability has integrations with open source evaluation frameworks, such as [DeepEval][6] and [Pydantic][], that can be used in Agent Observability Offline Experiments.
 
 | | Class-based | Function-based |
 |---|---|---|
@@ -100,7 +100,7 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
 
 #### BaseSummaryEvaluator
 
-<div class="alert alert-info">Summary evaluators are only available in experiments.</div>
+<div class="alert alert-info">Summary evaluators are only available in offline experiments.</div>
 
 Subclass `BaseSummaryEvaluator` to create an evaluator that operates on the aggregated results of an entire experiment run. It receives a [`SummaryEvaluatorContext`](#summaryevaluatorcontext) containing all inputs, outputs, and per-evaluator results.
 
@@ -280,7 +280,7 @@ judge = LLMJudge(
 
 #### Publishing an LLMJudge as a custom LLM-as-a-judge evaluator {#publishing-an-llmjudge-as-a-datadog-managed-evaluation}
 
-Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in experiments, then promote it to production without manually recreating the configuration in the UI.
+Use `LLMObs.publish_evaluator()` to push a locally-defined `LLMJudge` configuration to Datadog as a custom LLM-as-a-judge draft. This lets you define and validate an evaluator in offline experiments, then promote it to production without manually recreating the configuration in the UI.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -537,7 +537,7 @@ class ConfusionMatrixEvaluator(BaseEvaluator):
         )
 {{< /code-block >}}
 
-## Using evaluators in experiments
+## Using evaluators in offline experiments
 
 Pass your evaluators to `LLMObs.experiment()` to run them against every record in a dataset. The SDK automatically builds an `EvaluatorContext` for each record and calls your evaluator. After all records are processed, any summary evaluators run on the aggregated results.
 
@@ -702,11 +702,11 @@ A frozen dataclass containing all the information needed to run an evaluation.
 | `span_id` | `str` | The span's unique identifier. |
 | `trace_id` | `str` | The trace's unique identifier. |
 
-In Experiments, the SDK populates this automatically from each dataset record. In production, you construct it yourself from your span data.
+In Offline Experiments, the SDK populates this automatically from each dataset record. In production, you construct it yourself from your span data.
 
 ### EvaluatorResult
 
-Allows you to return rich evaluation results with additional context. Used in both Experiments and production.
+Allows you to return rich evaluation results with additional context. Used in both Offline Experiments and production.
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -765,7 +765,7 @@ Evaluation labels must follow these conventions:
 
 ### Concurrent execution
 
-Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing experiments to complete faster when processing multiple dataset records.
+Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing offline experiments to complete faster when processing multiple dataset records.
 
 <div class="alert alert-info">Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.</div>
 
@@ -780,7 +780,7 @@ When submitting evaluations for [OpenTelemetry-instrumented spans][3], include t
 [1]: /llm_observability/investigate/evaluations/external_evaluations
 [2]: /llm_observability/instrument/api/#evaluations-api
 [3]: /llm_observability/instrument/otel_instrumentation
-[4]: /llm_observability/improve/experiments
+[4]: /llm_observability/improve/offline_experiments
 [5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
 [6]: /llm_observability/investigate/evaluations/external_evaluations/deepeval/
 [7]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations#configure-the-prompt
