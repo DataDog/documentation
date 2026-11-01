@@ -683,6 +683,14 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.prompt_tokens` | `metrics.prompt_tokens` |
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
+| `gen_ai.usage.cache_read.input_tokens` | `metrics.cache_read_input_tokens` |
+| `gen_ai.usage.cache_creation.input_tokens` | `metrics.cache_write_input_tokens` |
+| `gen_ai.usage.reasoning.output_tokens` | `metrics.reasoning_output_tokens` |
+| `gen_ai.usage.non_cached_input_tokens` | `metrics.non_cached_input_tokens` |
+| `gen_ai.usage.cache_read_input_tokens` | `metrics.cache_read_input_tokens` |
+| `gen_ai.usage.cache_write_input_tokens` | `metrics.cache_write_input_tokens` |
+
+**Note**: `gen_ai.usage.cache_write.input_tokens` (dotted) is not read. Use `gen_ai.usage.cache_creation.input_tokens` (or `gen_ai.usage.cache_write_input_tokens`) for cache write tokens.
 
 #### Request parameters
 
