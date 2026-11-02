@@ -130,4 +130,4 @@ All available integration pipelines are enabled by default when you first add an
 See [Processor buffer metrics][2] for more information on metrics emitted by all processors. To filter or group by this processor, use `component_type:integration_pipelines`.
 
 [1]: /observability_pipelines/search_syntax/logs/
-[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#component-metrics
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=processors#buffer
