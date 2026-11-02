@@ -17,13 +17,13 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 
 ## Containers
 
-If you are using Docker containers, you have the following options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, use Docker or set the `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` environment variables.
 
 {{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
@@ -35,15 +35,15 @@ If you are using Serverless, you have the following options depending on your se
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
 ## Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+If you are using a host, set the `DD_GIT_REPOSITORY_URL` and `DD_GIT_COMMIT_SHA` environment variables.
 
-{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="Environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
