@@ -661,7 +661,7 @@ final configuration = DatadogConfiguration(
 
 <!-- Electron -->
 {% if equals($platform, "electron") %}
-The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See See [Step 2 - Enable Session Replay in the main process](#enable-electron).
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#enable-electron).
 {% /if %}
 <!-- end Electron -->
 
