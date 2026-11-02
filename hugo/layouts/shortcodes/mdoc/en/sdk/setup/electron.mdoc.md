@@ -57,8 +57,6 @@ yarn add @datadog/electron-sdk
 
 The example assumes an ES module main process, which supports top-level `await`. Otherwise, wrap the code in an async function.
 
-{% site-region region="us" %}
-
 ```typescript
 // src/main.ts
 import '@datadog/electron-sdk/instrument';
@@ -68,7 +66,7 @@ import { init } from '@datadog/electron-sdk';
 await init({
   clientToken: '<CLIENT_TOKEN>',
   applicationId: '<APPLICATION_ID>',
-  site: 'datadoghq.com',
+  site: '{% region-param key="dd_site" /%}',
   service: '<SERVICE_NAME>',
   env: '<ENV_NAME>', // optional
   version: '1.0.0', // optional
@@ -79,183 +77,6 @@ await app.whenReady();
 
 const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
 ```
-
-{% /site-region %}
-
-{% site-region region="us3" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'us3.datadoghq.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="us5" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'us5.datadoghq.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="eu" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'datadoghq.eu',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="ap1" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'ap1.datadoghq.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="ap2" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'ap2.datadoghq.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="gov" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'ddog-gov.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
-
-{% site-region region="gov2" %}
-
-```typescript
-// src/main.ts
-import '@datadog/electron-sdk/instrument';
-import { app, BrowserWindow } from 'electron';
-import { init } from '@datadog/electron-sdk';
-
-await init({
-  clientToken: '<CLIENT_TOKEN>',
-  applicationId: '<APPLICATION_ID>',
-  site: 'us2.ddog-gov.com',
-  service: '<SERVICE_NAME>',
-  env: '<ENV_NAME>', // optional
-  version: '1.0.0', // optional
-  allowedRendererHosts: ['*'], // restrict to specific hostnames in production
-});
-
-await app.whenReady();
-
-const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
-```
-
-{% /site-region %}
 
 Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Advanced Configuration][setup-init-1].
 
