@@ -47,7 +47,7 @@ module.exports = {
   ],
   plugins: [
     nodeResolve(),
-    commonjs()
+    commonjs(),
 +    injectProcessEnv({
 +       DD_GIT_REPOSITORY_URL,
 +       DD_GIT_COMMIT_SHA
