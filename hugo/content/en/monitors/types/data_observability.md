@@ -174,6 +174,8 @@ The {{< ui >}}Custom SQL{{< /ui >}} metric type tracks a custom metric value ret
 
 If your SQL query includes a `GROUP BY` clause, list the grouped columns as a comma-separated list in the {{< ui >}}Group by{{< /ui >}} field (for example, `column_a, column_b`). Each group is evaluated independently.
 
+<div class="alert alert-warning">Datadog stores the <code>dd_value</code> result and the value of each grouped column. Avoid grouping by columns that contain sensitive data. For details, see <a href="/data_observability/quality_monitoring/#data-sent-to-datadog">Data sent to Datadog</a>.</div>
+
 **Note**: Each Custom SQL monitor counts as an individual monitored table for billing purposes.
 
 {{< img src="monitors/monitor_types/data_observability/custom_sql_example.png" alt="Input field for custom SQL monitor creation." style="width:60%;" >}}

@@ -1,3 +1,3 @@
 ---
-title: Push d'événements pour une expérience Agent Observability.
+title: Envoyez des événements pour une expérience Agent Observability
 ---
