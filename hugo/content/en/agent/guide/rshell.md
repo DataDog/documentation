@@ -82,7 +82,7 @@ The following commands and shell features are available as of Agent 7.86.
 | `uname` | Print system information (Linux only) |
 | `uptime` | Show how long the system has been running and the load averages |
 | `free` | Report memory and swap usage (Linux only) |
-| `vmstat` | Report virtual memory, swap, IO, and CPU statistics (Linux and macOS) |
+| `vmstat` | Report virtual memory, swap, I/O, and CPU statistics (Linux and macOS) |
 | `df` | Report file system disk space usage (Linux and macOS) |
 | `lsof` | List open files, including files still open after deletion (Linux only); paths outside the allowed paths show as `(restricted)` |
 | `pmap` | Report the memory mappings of a process |
