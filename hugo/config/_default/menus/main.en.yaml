@@ -5454,16 +5454,21 @@ menu:
       parent: dbm
       identifier: dbm_workbench
       weight: 7
+    - name: Database Monitoring PR Reviews
+      url: database_monitoring/pr_reviews/
+      parent: dbm
+      identifier: dbm_pr_reviews
+      weight: 8
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 8
+      weight: 9
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 9
+      weight: 10
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5554,6 +5559,11 @@ menu:
       identifier: redshift
       parent: data_warehouses
       weight: 4000000
+    - name: ClickHouse Cloud
+      url: data_observability/quality_monitoring/data_warehouses/clickhouse
+      identifier: clickhouse_cloud_data_obs
+      parent: data_warehouses
+      weight: 5000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
@@ -5933,6 +5943,11 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
       weight: 603
+    - name: AI Gateway
+      url: llm_observability/configure/ai_gateway
+      parent: llm_obs_configure
+      identifier: llm_obs_ai_gateway
+      weight: 604
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -11013,6 +11028,11 @@ menu:
       url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
+    - name: Shared Roles
+      identifier: account_management_organization_groups_shared_roles
+      url: account_management/organization_groups/shared_roles/
+      parent: account_management_organization_groups
+      weight: 101
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/

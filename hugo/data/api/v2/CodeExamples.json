@@ -1,4 +1,21 @@
 {
+  "EvaluateAIGuardRequest": [
+    {
+      "group": "ai_guard",
+      "suffix": "",
+      "description": "Evaluate an AI Guard request returns \"OK\" response"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_3923646360",
+      "description": "Evaluate an AI Guard request with a numeric confidence threshold"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_1377048937",
+      "description": "Evaluate an AI Guard request with per-category confidence thresholds"
+    }
+  ],
   "CreateApmRetentionFilter": [
     {
       "group": "apm_retention_filters",
@@ -468,6 +485,13 @@
       "group": "case_management_type",
       "suffix": "",
       "description": "Create a case type returns \"CREATED\" response"
+    }
+  ],
+  "CreateAWSCloudAuthIntakeMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
   "CreateCostAWSCURConfig": [
@@ -3227,6 +3251,13 @@
       "group": "threat_intelligence",
       "suffix": "",
       "description": "Ingest STIX threat intelligence returns \"OK\" response"
+    }
+  ],
+  "UpdateTemporaryGrantRequest": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Decide a temporary grant request returns \"OK\" response"
     }
   ],
   "CreateUser": [
