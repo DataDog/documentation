@@ -91,7 +91,6 @@ The following commands and shell features are available as of Agent 7.86.
 
 | Command | Description |
 |---------|-------------|
-| `ping` | Send ICMP echo requests and report round-trip statistics; flood, broadcast, and multicast are blocked |
 | `ss` | Display network socket statistics; `-p` (process disclosure) and `-K` (kill) are blocked |
 | `ip addr` / `ip link` | Show network interface addresses and link-layer information |
 | `ip route` | Show IPv4 routing table or resolve a route for a given address (Linux only) |
