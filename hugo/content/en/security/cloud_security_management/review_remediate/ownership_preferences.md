@@ -87,7 +87,7 @@ The first rule removes `deploy-bot` from all results. The second removes the `le
 
 ## Custom instructions
 
-Custom instructions give the Ownership Agent context that you can't express as a tag mapping or exclusion, such as naming conventions or which data sources to trust most.
+Custom instructions give the Ownership Agent context that you can't express as a tag mapping or exclusion. For example, describe naming conventions or which data sources to trust most.
 
 You can add up to three instructions of up to 4,000 characters each. Set an optional **Priority** (**High**, **Medium**, or **Low**) to control the order in which the agent reads them. Instructions without a priority come last, and every instruction is used.
 
@@ -102,7 +102,7 @@ For example:
 
 | Name                     | Priority | Instruction                                                                                                                                       |
 |--------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `cost-center-convention` | High     | Ownership is assigned by cost center. Team identifiers always use the team- prefix followed by the team name (for example, team-platform). |
+| `cost-center-convention` | High     | Ownership is assigned by cost center. Team identifiers always start with team- (for example, team-platform). |
 
 ## Validation
 
