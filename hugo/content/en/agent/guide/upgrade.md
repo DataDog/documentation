@@ -80,6 +80,8 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 
 On AIX, the legacy Agent is the Datadog UNIX Agent (based on Agent 5); Agent 6 was never distributed on AIX. To upgrade to Agent 7, follow the [migrate from the UNIX Agent instructions][4]: back up the existing configuration, uninstall the UNIX Agent with `installp -u datadog-unix-agent`, then [install Agent 7][5].
 
+[4]: /agent/supported_platforms/aix/#migrate-from-the-unix-agent
+[5]: /agent/supported_platforms/aix/#install-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -90,5 +92,3 @@ On AIX, the legacy Agent is the Datadog UNIX Agent (based on Agent 5); Agent 6 w
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/python-3/
-[4]: /agent/supported_platforms/aix/#migrate-from-the-unix-agent
-[5]: /agent/supported_platforms/aix/#install-the-agent
