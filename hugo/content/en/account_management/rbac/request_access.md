@@ -13,9 +13,7 @@ further_reading:
       text: 'Access for Enterprises'
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Request Access is in Preview and is rolling out gradually. It may not be available in your organization yet.
-{{< /callout >}}
+<div class="alert alert-info">Datadog is rolling out Request Access gradually, so it might not be available in your organization.</div>
 
 ## Overview
 
@@ -29,7 +27,7 @@ Request Access lets a user ask for the permission they need directly from the pa
 
 To enable manual or auto-approval requests for your organization, navigate to [Organization Settings][1] and select {{< ui >}}Access Controls{{< /ui >}}, then create the corresponding configuration. See [Configuring access requests as an administrator](#configuring-access-requests-as-an-administrator) for setup details.
 
-To disable manual or auto-approval requests, delete all corresponding configurations. Disabling is especially relevant if you manage access through a separate internal access elevation process.
+To disable manual or auto-approval requests, delete or disable all corresponding configurations. Disabling is especially relevant if you manage access through a separate internal access elevation process.
 
 ## Requesting access as an end user
 

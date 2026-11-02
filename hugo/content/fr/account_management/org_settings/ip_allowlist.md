@@ -33,6 +33,8 @@ La fonctionnalité de liste d'autorisation IP ne bloque pas l'accès aux éléme
 - L'endpoint [validate API key][2], que l'Agent utilise avant de soumettre des données
 - [Soumission de flares d'Agent][3]
 - [Dashboards publics][4]
+- Actions que le support Datadog effectue en votre nom au sein de votre organisation
+- Routes gérées par Datadog qui fournissent la configuration du produit via le CDN de Datadog
 
 Les applications et intégrations qui soumettent des données de télémétrie depuis l'Agent (métriques, traces et logs), ainsi que celles qui utilisent une clé d'API fournie par l'utilisateur, ne sont pas affectées par la liste d'autorisation IP. Datadog recommande d'utiliser le [Audit Trail][5] pour surveiller les adresses IP provenant d'applications et d'intégrations tierces.
 
@@ -41,6 +43,8 @@ Pour permettre aux clients d'applications mobiles de se connecter à Datadog lor
 ### Fonctionnalité {#functionality}
 
 Seuls les utilisateurs disposant de l'autorisation {{< ui >}}Org Management{{< /ui >}} peuvent configurer la liste d'autorisation IP.
+
+La liste d'autorisation IP n'est pas héritée entre les organisations parentes et enfants. Chaque organisation doit avoir sa propre liste d'autorisation IP configurée séparément.
 
 Avec l'API ou l'interface utilisateur de la liste d'autorisation IP, vous pouvez :
 - Vérifier le statut de la liste d'autorisation IP. L'activation ou la désactivation de la liste d'autorisation IP détermine si votre organisation restreint les requêtes en fonction de l'appartenance à la liste d'autorisation d'adresses IP.
@@ -59,7 +63,7 @@ Lorsque vous activez ou modifiez la liste d'autorisation IP, le système appliqu
 
 ## Gestion de la liste d'autorisation IP dans l'interface utilisateur {#managing-the-ip-allowlist-in-the-ui}
 
-**Remarque :** La page de la liste d'autorisation IP n'apparaît dans l'interface utilisateur que si votre organisation Datadog a activé cette fonctionnalité.
+**Remarque** : La page de la liste d'autorisation IP n'apparaît dans l'interface utilisateur que si votre organisation Datadog a activé cette fonctionnalité. Pour demander l'accès, [contactez le support](/help/).
 
 Pour trouver l'[interface utilisateur de la liste d'autorisation IP][6] :
 

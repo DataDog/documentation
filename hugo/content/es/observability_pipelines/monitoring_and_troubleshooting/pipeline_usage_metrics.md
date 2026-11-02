@@ -61,7 +61,7 @@ Bytes ingeridos por Observability Pipelines
 
 ## Métricas de servidor {#host-metrics}
 
-Estas métricas proporcionan información sobre el host que ejecuta el Observability Pipelines Worker.
+Estas métricas proporcionan información sobre el servidor que ejecuta el Observability Pipelines Worker.
 
 Memoria disponible
 : **Métrica**: `pipelines.host.memory_available_bytes`
@@ -143,7 +143,7 @@ Recargas del Worker
 
 Estas métricas están disponibles para fuentes, procesadores y destinos.
 
-- Utilice la etiqueta `component_id` para filtrar o agrupar por componentes individuales.
+- Utilice la etiqueta `component_id` para filtrar o agrupar por componentes individuales. Consulte [Find the component ID][7] para obtener instrucciones.
 - Utilice la etiqueta `component_type` para filtrar o agrupar por el tipo de fuente, procesador o destino, como `quota` para el procesador Quota.
 - Utilice la etiqueta `component_kind` para filtrar o agrupar por `source`, `transform` (procesador) o `sink` (destino).
 
@@ -436,3 +436,4 @@ Estas métricas proporcionan información sobre el controlador de concurrencia a
 [4]: /es/getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://docs.datadoghq.com/es/account_management/billing/usage_metrics/
+[7]: /es/observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#find-the-component-id

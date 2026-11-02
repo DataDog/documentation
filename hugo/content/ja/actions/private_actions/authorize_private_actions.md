@@ -1,20 +1,20 @@
 ---
-description: Datadog が Execution Policies とコネクションを使用してプライベートアクションを承認する方法を学びます。
+description: Datadog が実行ポリシーとコネクションを使用してプライベートアクションを承認する方法を学びます。
 disable_toc: false
 further_reading:
-- link: actions/private_actions/
+- link: /actions/private_actions/
   tag: ドキュメント
   text: Private Actions の概要
-- link: actions/private_actions/enroll_runner/
+- link: /actions/private_actions/enroll_runner/
   tag: ドキュメント
   text: 登録と所有権
-- link: actions/private_actions/set_up_agent_based/
+- link: /actions/private_actions/set_up_agent_based/
   tag: ドキュメント
   text: プライベートアクションランナーのセットアップ
-- link: actions/private_actions/execution_policies/
+- link: /actions/private_actions/execution_policies/
   tag: ドキュメント
   text: 実行ポリシー
-- link: actions/connections/
+- link: /actions/connections/
   tag: ドキュメント
   text: コネクション
 title: Private Actions の認証
@@ -27,7 +27,11 @@ title: Private Actions の認証
 
 ## 承認モデルを確認する {#find-your-authorization-model}
 
-ランナーは、[**実行ポリシー**](#execution-policies)または[**コネクション**](#connections)のいずれかのモデルを使用して承認されます。モデルはランナーの所有権によって決定され、ランナーの登録時に一度設定されます。特定のランナーは、その存続期間中、これらのモデルのいずれか 1 つのみを使用します。同じランナーで両方を混在させることはできません。所有権はランナーごとに設定されるため、単一の Agent ベースフリートに所有者なしのランナーと所有者ありのランナーの両方を含めることができ、それぞれが独自のモデルによって承認されます。
+ランナーは、ご利用の Datadog サイトに応じて、[**実行ポリシー**](#execution-policies)または[**コネクション**](#connections)のいずれかのモデルで認可されます。
+
+<div class="alert alert-danger">US1-FED および US2-FED では、<a href="/actions/connections/">コネクション</a> がサポートされている認証モデルです。</div>
+
+モデルはランナーの所有権によって決定され、ランナーの登録時に一度設定されます。特定のランナーは、その存続期間中、これらのモデルのいずれか 1 つのみを使用します。同じランナーで両方を混在させることはできません。所有権はランナーごとに設定されるため、単一の Agent ベースフリートに所有者なしのランナーと所有者ありのランナーの両方を含めることができ、それぞれが独自のモデルによって承認されます。
 
 - **Datadog Agent におけるランナー**は、どのように登録されたかによって異なります。所有者なしの Agent ランナーは[実行ポリシー](#execution-policies)を使用し、所有者ありの Agent ランナーは[コネクション](#connections)を使用します。
 - **スタンドアロンランナー**は常に所有されているため、常に[コネクション](#connections)を使用します。
@@ -44,6 +48,9 @@ title: Private Actions の認証
 | **制御** | きめ細かな制御: 特定のアクションやアクションセットの許可または拒否に加え、Kubernetes アクションのターゲット Kubernetes ネームスペースなど、インテグレーション固有のスコープを設定する | ランナー単位: コネクションは特定の 1 つのランナーをターゲットにする |
 
 ## 実行ポリシー {#execution-policies}
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">実行ポリシーは、ご利用の <a href="/getting_started/site">Datadog サイト</a>ではサポートされていません ({{< region-param key="dd_site_name" >}})。</div>
+{{< /site-region >}}
 
 **実行ポリシー**は、Datadog Agent 内のランナーのための認可モデルです。各ポリシーは、1 つ以上のランナーセット全体のアクセスを一度に管理します。インテグレーションごと、ランナーごとに個別のコネクションを作成する代わりに、**Agent タグ**を使用してターゲットの Agent を定義します。次に、それらに許可または拒否ルールを適用します。
 

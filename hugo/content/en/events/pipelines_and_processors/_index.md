@@ -53,6 +53,7 @@ You can add processors after you create a pipeline. The processors available are
 - [Service Remapper][10]
 - [Status Remapper][11]
 - [String Builder Processor][12]
+- [VRL Processor][14]
 
 
 ## Pipeline permissions
@@ -69,7 +70,7 @@ Administrators can assign these permissions to roles using [Role Based Access Co
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/event/pipelines
+[1]: https://app.datadoghq.com/event/settings/pipelines
 [2]: https://app.datadoghq.com/event/explorer
 [3]: /events/pipelines_and_processors/aggregation_key
 [4]: /events/pipelines_and_processors/arithmetic_processor
@@ -82,3 +83,4 @@ Administrators can assign these permissions to roles using [Role Based Access Co
 [11]: /events/pipelines_and_processors/status_remapper
 [12]: /events/pipelines_and_processors/string_builder_processor
 [13]: /account_management/rbac/permissions/
+[14]: /events/pipelines_and_processors/vrl_processor

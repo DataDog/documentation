@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "attributes": {
+        "end": "2021-11-12T11:11:11+00:00",
+        "start": "2021-11-11T11:11:11+00:00"
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "string",
+            "type": "users"
+          }
+        }
+      },
+      "type": "overrides"
+    }
+  ]
+}

@@ -18,7 +18,7 @@ title: Serverless 환경
 ---
 ## 개요 {#overview}
 
-Datadog Feature Flags Java, Node.js 및 Python SDK는 Datadog 관리 CDN에서 직접 플래그 구성을 수신할 수 있습니다. 이 _Agentless_ 구성 소스는 플래그 구성에 Datadog Agent가 필요하지 않으므로 온보딩을 간소화합니다. 또한 Datadog Agent에 연결할 수 없는 Serverless 애플리케이션도 지원합니다.
+Datadog Feature Flags Java, Node.js, Python 및 .NET SDK는 Datadog 관리 CDN에서 직접 플래그 구성을 수신할 수 있습니다. 이 _Agentless_ 구성 소스는 플래그 구성에 Datadog Agent가 필요하지 않으므로 온보딩을 간소화합니다. 또한 Datadog Agent에 연결할 수 없는 Serverless 애플리케이션도 지원합니다.
 
 구성이 로드된 후 플래그 평가는 애플리케이션 내에서 로컬로 수행됩니다. SDK는 각 평가마다 네트워크 요청을 수행하지 않습니다.
 
@@ -29,8 +29,11 @@ Datadog Feature Flags Java, Node.js 및 Python SDK는 Datadog 관리 CDN에서 �
 | Java `dd-openfeature` 및 `dd-java-agent` | 1.66.0 | 지원됨 | 지원됨 | 지원됨 | 호환되는 로컬 텔레메트리 릴레이를 사용하는 것이 좋으며, 사용할 수 없는 경우 직접 폴백을 사용하세요 |
 | Node.js `dd-trace` | 6.12.0 | 지원됨 | 지원됨 | 지원되지 않음 | 호환되는 로컬 텔레메트리 릴레이를 사용하는 것이 좋으며, 사용할 수 없는 경우 직접 폴백을 사용하세요 |
 | Python `ddtrace` | 4.14.0 | 지원됨 | 지원됨 | 지원됨 | 호환되는 로컬 텔레메트리 릴레이 |
+| .NET `dd-trace-dotnet` 및 `Datadog.FeatureFlags.OpenFeature` | 3.54.0 및 2.3.1 | 지원됨 | 호환되는 릴레이와 함께 지원됨 | 지원되지 않음 | 호환되는 로컬 텔레메트리 릴레이; 직접 대체 없음 |
 
 Java CDN 전달에는 `dd-openfeature` 및 `dd-java-agent`가 필요합니다. Java 런타임이 `-javaagent` JVM 옵션을 사용하여 `dd-java-agent` 로드를 지원해야 합니다. 이 옵션은 Java 명령에서 전달하거나 `JAVA_TOOL_OPTIONS`를 통해 전달할 수 있습니다.
+
+.NET CDN 전달을 위해서는 [자동 계측][12]과 함께 OpenFeature 공급자와 Datadog .NET 트레이서를 로드해야 합니다. 공급자만 설치하는 것으로는 충분하지 않습니다.
 
 나열된 버전은 표에 표시된 기능을 제공합니다. 기타 서버 SDK는 플래그 전달을 위해 Agent Remote Configuration을 사용합니다.
 
@@ -38,10 +41,10 @@ Agentless 전달은 플래그 구성 소스만 변경합니다. Feature Flags �
 
 ## Agentless 아키텍처 {#agentless-architecture}
 
-Serverless 런타임이 Datadog으로 아웃바운드 HTTPS 요청을 보낼 수 있는 경우 Agentless 전달을 사용하세요. Java의 경우 런타임에서 `-javaagent` JVM 옵션도 설정할 수 있어야 합니다.
+Serverless 런타임이 Datadog으로 아웃바운드 HTTPS 요청을 보낼 수 있는 경우 Agentless 전달을 사용하세요. 런타임은 언어 트레이서 로드를 지원해야 합니다:
 
 1. [지원되는 SDK 버전](#overview)을 사용합니다.
-2. Java의 경우 `dd-java-agent`를 `-javaagent` 또는 `JAVA_TOOL_OPTIONS`로 로드합니다. 예시는 [Cloud Run 함수][7] 또는 [Cloud Run 컨테이너][8]에 대한 Java 설정을 참조하세요.
+2. Java의 경우 `dd-java-agent`를 `-javaagent` 또는 `JAVA_TOOL_OPTIONS`로 로드합니다. 예시는 [Cloud Run 함수][7] 또는 [Cloud Run 컨테이너][8]에 대한 Java 설정을 참조하세요. .NET의 경우, [자동 계측][12]을 사용하여 트레이서를 로드하십시오.
 3. Serverless 애플리케이션에서 API 키, Datadog 사이트 및 환경을 구성합니다.
 
    {{< code-block lang="bash" >}}
@@ -49,7 +52,7 @@ Serverless 런타임이 Datadog으로 아웃바운드 HTTPS 요청을 보낼 수
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. [Java][6], [Node.js][3] 또는 [Python][9] 설정에 설명된 대로 Datadog OpenFeature 공급자를 초기화하거나 이에 액세스합니다. 이로써 CDN 폴링이 시작됩니다. Feature Flags 활성화 또는 소스 설정이 필요하지 않습니다.
+4. [Java][6], [Node.js][3], [Python][9] 또는 [.NET][13] 설정에 설명된 대로 Datadog OpenFeature 공급자를 초기화하거나 이에 액세스합니다. 이로써 CDN 폴링이 시작됩니다. Feature Flags 활성화 또는 소스 설정이 필요하지 않습니다.
 5. `DD_API_KEY`를 Serverless 플랫폼의 시크릿 관리자에 저장하고 애플리케이션 프로세스에만 노출합니다.
 
 SDK는 기본적으로 30초마다 Datadog 관리 CDN을 폴링하며 변경되지 않은 구성에는 ETag를 사용합니다. 일시적인 오류가 발생하는 동안에는 마지막으로 수락된 구성을 유지합니다. 수락된 구성이 없으면 OpenFeature 평가는 호출자가 제공한 기본값을 반환합니다.
@@ -70,6 +73,7 @@ Agentless 모드는 _플래그 구성_에 대한 Datadog Agent 의존성을 제�
 
 - 실험 노출 이벤트는 실험과 관련된 플래그에 대해서만 발생합니다.
 - Java 및 Python은 EVP 플래그 평가 이벤트를 집계하여 기본적으로 전송합니다.
+- .NET 3.54.0은 구성된 Agent 전송을 통해 실험 노출을 보냅니다. 직접적인 EVP 대체 또는 집계된 EVP 플래그 평가 이벤트를 제공하지 않습니다. 호환되는 릴레이가 없으면 노출이 전달되지 않습니다.
 - EVP 플래그 평가 이벤트 경로만 비활성화하려면 `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`를 설정하세요.
 
 `feature_flag.evaluations` 메트릭은 별도의 OpenTelemetry(OTLP) 신호입니다. 포트 8126의 표준 `serverless-init` 연결은 이 메트릭에 대한 OTLP 엔드포인트를 구성하지 않습니다. Agent가 없는 서버리스 환경의 경우, 이 메트릭을 활성화하기 전에 플랫폼에 대한 서버리스 텔레메트리 경로를 구성하세요. [서버 측 플래그 평가 메트릭 설정][10]을 참조하세요.
@@ -82,7 +86,7 @@ Agentless 모드는 _플래그 구성_에 대한 Datadog Agent 의존성을 제�
    - `serverless-init` 1.9.13 이상을 사용하세요. 이전 버전은 필요한 EVP 경로를 지원하지 않습니다.
    - Agentless CDN 구성 전달을 위해 애플리케이션 환경에 `DD_API_KEY` 및 `DD_SITE`를 유지하세요. 사이드카도 텔레메트리 송신에 해당 항목이 필요합니다.
    - Feature Flags 전용 엔드포인트를 구성하지 마세요. SDK는 Serverless Monitoring 설정에 의해 구성된 표준 트레이서 연결을 사용합니다.
-   - Node.js 및 Java는 로컬 EVP 프록시를 찾기 위해 트레이서 URL에서 `GET /info`를 호출합니다. Python은 이 검색 요청 없이 동일한 URL로 지원되는 EVP 이벤트를 보냅니다.
+   - Node.js 및 Java는 로컬 EVP 프록시를 찾기 위해 트레이서 URL에서 `GET /info`를 호출합니다. Python 및 .NET 3.54.0은 이 검색 요청 없이 동일한 URL로 지원되는 EVP 이벤트를 보냅니다.
 
 ### 텔레메트리 송신 검증 {#verify-telemetry-egress}
 
@@ -124,7 +128,7 @@ Serverless 워크로드는 프라이빗 네트워크에서 Agent에 도달할 �
 - **API 키 소유권**: Agentless 모드에서는 애플리케이션이 구성을 위해 `DD_API_KEY`를 소유합니다. `serverless-init` 사이드카도 텔레메트리 송신을 위해 키가 필요합니다. `remote_config` 모드에서는 Agent가 API 키를 소유합니다.
 - **플래그 업데이트**: 전달이 결과적으로 일관성을 유지합니다. 변경 사항을 테스트할 때는 SDK 폴링 간격과 애플리케이션 시작 시간을 고려하세요.
 - **마지막으로 알려진 정상 동작**: 구성이 수락된 후에는 일시적인 네트워크 오류나 잘못된 형식의 응답이 이를 대체하지 않습니다.
-- **런타임 지원**: Java는 Java 11 이상이 필요합니다. Node.js 및 Python의 경우, 트레이서의 런타임 호환성 요구 사항을 확인하세요.
+- **런타임 지원**: Java는 Java 11 이상이 필요합니다. Node.js, Python 및 .NET의 경우, 트레이서의 런타임 호환성 요구 사항을 검사하십시오. .NET 런타임은 자동 계측 트레이서 로드를 지원해야 합니다.
 - **킬 스위치**: `DD_FEATURE_FLAGS_ENABLED`는 기본적으로 `true`입니다. 공급자와 두 구성 전달 경로를 모두 비활성화하려면 이를 `false`로 설정하세요. 그러면 평가가 호출자 제공 기본값을 반환합니다.
 
 Datadog 관리 Agentless 전달은 이러한 버전의 Datadog for Government에서 사용할 수 없습니다. 해당 사이트에서 Agent Remote Configuration을 사용하세요.
@@ -159,7 +163,7 @@ Java 함수 앱은 런타임이 `dd-java-agent`를 로드할 수 있는 경우 J
 
 프로덕션 환경에서 Feature Flags를 활성화하기 전에 다음을 확인하세요.
 
-1. 애플리케이션이 [최소 지원 SDK 버전](#overview)을 사용하는지 확인합니다. Java의 경우, JVM이 `dd-java-agent`를 로드하는지 확인하세요.
+1. 애플리케이션이 [최소 지원 SDK 버전](#overview)을 사용하는지 확인합니다. Java의 경우, JVM이 `dd-java-agent`를 로드하는지 확인하세요. .NET의 경우, 자동 계측이 트레이서를 로드하는지 확인하십시오.
 2. Agentless 전달의 경우, 애플리케이션에 `DD_API_KEY`, `DD_SITE` 및 `DD_ENV`가 있는지 확인하세요. Agent Remote Configuration의 경우 Agent에 API 키가 있고 Remote Configuration이 활성화되어 있는지 확인하세요.
 3. OpenFeature 공급자를 초기화하고 준비 상태에 도달했는지 확인합니다.
 4. Datadog에서 프로덕션 환경이 아닌 플래그를 변경하고 폴링 간격 후에 워크로드가 업데이트된 값을 수신하는지 확인합니다.
@@ -181,3 +185,5 @@ Java 함수 앱은 런타임이 `dd-java-agent`를 로드할 수 있는 경우 J
 [9]: /ko/feature_flags/server/python/
 [10]: /ko/feature_flags/guide/server_flag_evaluation_metrics/
 [11]: /ko/serverless/
+[12]: /ko/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[13]: /ko/feature_flags/server/dotnet/

@@ -1,3 +1,3 @@
 ---
-title: Update case custom attribute
+title: Update work item custom attribute
 ---

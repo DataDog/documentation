@@ -128,7 +128,7 @@ Las [palabras clave recomendadas][15] se utilizan de forma predeterminada cuando
     - Para agregar palabras clave, ingrese una palabra clave y haga clic en el icono de más para agregar la palabra clave a la lista.
     - Para eliminar palabras clave, haga clic en la **X** junto a la palabra clave que desea eliminar.
     - También puede requerir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. De forma predeterminada, las palabras clave deben estar dentro de los 30 caracteres antes de un valor coincidente.
-    - Para eventos estructurados, las palabras clave también se comparan con los nombres de los atributos en la ruta del evento. Los separadores como `-`, `_` y `.` en los nombres de los atributos cuentan como límites de palabra, por lo que la palabra clave `card` coincide con un atributo llamado `card_number` o `card-type`. El límite de caracteres no se aplica a la coincidencia de nombres de atributos.
+    - Para eventos estructurados, las palabras clave también se comparan con los nombres de los atributos en la ruta del evento. Consulte la sección [Cómo funciona la coincidencia de palabras clave de Sensitive Data Scanner](#how-sensitive-data-scanner-keyword-matching-works) para obtener información sobre la distinción entre mayúsculas y minúsculas, los separadores y el manejo de camel case.
     - **Nota**: No puede tener más de 20 palabras clave para una regla.
 1. En la sección {{< ui >}}Type or paste event data to test the rule{{< /ui >}}, agregue datos de evento para evaluar su regla y agregue palabras clave para refinar las condiciones de coincidencia.
 1. Haga clic en {{< ui >}}Update{{< /ui >}}.
@@ -161,7 +161,7 @@ Puede crear reglas de escaneo personalizadas utilizando patrones regex para busc
     - Para agregar palabras clave, ingrese una palabra clave y haga clic en el icono de más para agregar la palabra clave a la lista.
     - Para eliminar palabras clave, haga clic en la **X** junto a la palabra clave que desea eliminar.
     - También puede requerir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. De forma predeterminada, las palabras clave deben estar dentro de los 30 caracteres antes de un valor coincidente.
-    - Para eventos estructurados, las palabras clave también se comparan con los nombres de los atributos en la ruta del evento. Los separadores como `-`, `_` y `.` en los nombres de los atributos cuentan como límites de palabra, por lo que la palabra clave `card` coincide con un atributo llamado `card_number` o `card-type`. El límite de caracteres no se aplica a la coincidencia de nombres de atributos.
+    - Para eventos estructurados, las palabras clave también se comparan con los nombres de los atributos en la ruta del evento. Consulte la sección [Cómo funciona la coincidencia de palabras clave de Sensitive Data Scanner](#how-sensitive-data-scanner-keyword-matching-works) para obtener información sobre la distinción entre mayúsculas y minúsculas, los separadores y el manejo de camel case.
       **Nota**: No puede tener más de 20 palabras clave para una regla.
 {{% sds-suppressions %}}
 1. En la sección {{< ui >}}Type or paste event data to test the rule{{< /ui >}}, agregue datos de evento para evaluar su regla y agregue palabras clave para refinar las condiciones de coincidencia.
@@ -169,6 +169,36 @@ Puede crear reglas de escaneo personalizadas utilizando patrones regex para busc
 1. Haga clic en {{< ui >}}Add Rule{{< /ui >}}.
 
 {{% /collapse-content %}}
+
+#### Cómo funciona la coincidencia de palabras clave de Sensitive Data Scanner {#how-sensitive-data-scanner-keyword-matching-works}
+
+La coincidencia de palabras clave sigue estas reglas tanto para las reglas de biblioteca como para las reglas personalizadas:
+
+- **Coincidencia sin distinción entre mayúsculas y minúsculas**: La palabra clave `secret` coincide con `secret`, `Secret` y `SECRET`.
+- **Separadores intercambiables (espacios, guiones bajos, guiones, puntos, barras)**: La palabra clave `secret access key` coincide con `secret access key`, `secret_access_key`, `secret-access-key`, `secret.access.key` y `secret/access/key`. La palabra clave también coincide con un atributo llamado `AWS_SECRET_ACCESS_KEY`.
+- **Camel case en nombres de atributos**: Para eventos estructurados, las palabras clave también se comparan con los nombres de los atributos en la ruta del evento. Los mismos separadores (espacios, `_`, `-`, `.` y `/`) cuentan como límites de palabra, al igual que un cambio de minúscula a mayúscula (camel case). El límite de caracteres no se aplica a la coincidencia de nombres de atributos. Por ejemplo, con la palabra clave `card`, los atributos `card_number`, `card-type` y `creditCardNumber` coinciden. El siguiente evento coincide con una regla cuyo patrón es `secret` y cuya palabra clave es `card`, porque `creditCardNumber` se divide en `credit`, `card` y `number`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "secret"
+      }
+    }
+  }
+  ```
+
+- **Camel case en el texto circundante**: Cuando las palabras clave se comparan con los caracteres antes de un valor coincidente, incluido el valor de un atributo en un evento estructurado, las palabras en camel case no se dividen. Por ejemplo, el siguiente evento no coincide con una regla cuyo patrón es `secret` y cuya palabra clave es `bank`, porque `anotherBank` en el valor no se divide en `another` y `bank`:
+
+  ```json
+  {
+    "some": {
+      "creditCardNumber": {
+        "value": "anotherBank secret"
+      }
+    }
+  }
+  ```
 
 **Notas**:
 

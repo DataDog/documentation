@@ -1,7 +1,6 @@
 ---
 title: Azure App Insights Integration
-private: true
-description: "Bring your Azure Application Insights distributed traces into Datadog APM into Datadog APM without reinstrumenting your application."
+description: "Bring your Azure Application Insights distributed traces into Datadog APM without reinstrumenting your application."
 further_reading:
 - link: "/integrations/azure/"
   tag: "Documentation"

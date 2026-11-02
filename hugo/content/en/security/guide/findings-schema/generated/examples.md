@@ -59,54 +59,66 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
   "title": "Read operations on routes use predictable IDs",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -118,7 +130,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -131,11 +143,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -146,11 +154,9 @@ build:
 {
   "base_severity": "critical",
   "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
+    "account": "123456789012",
+    "account_name": "Main production account",
+    "cloud_provider": "aws",
     "cloud_provider_url": "https://us-east-1.console.aws.amazon.com/ec2/home#Instances:instanceId=i-0123456789abcdef0",
     "configuration": {
       "account_id": "123456789012",
@@ -222,54 +228,66 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
   "title": "Publicly accessible instance with overprivileged IAM role",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -281,7 +299,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -294,11 +312,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -343,41 +357,46 @@ build:
   "title": "Simplify complex conditional logic",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -389,7 +408,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -402,11 +421,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:static-analysis",
-    "source:code_security"
-  ]
+  }
 }
 ```
 
@@ -424,11 +439,9 @@ build:
   },
   "base_severity": "critical",
   "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
+    "account": "123456789012",
+    "account_name": "Main production account",
+    "cloud_provider": "aws",
     "cloud_provider_url": "https://us-east-1.console.aws.amazon.com/ec2/home#Instances:instanceId=i-0123456789abcdef0",
     "configuration": {
       "account_id": "123456789012",
@@ -514,13 +527,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -533,41 +553,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -579,7 +604,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -592,11 +617,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -607,11 +628,9 @@ build:
 {
   "base_severity": "critical",
   "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
+    "account": "123456789012",
+    "account_name": "Main production account",
+    "cloud_provider": "aws",
     "cloud_provider_url": "https://us-east-1.console.aws.amazon.com/ec2/home#Instances:instanceId=i-0123456789abcdef0",
     "configuration": {
       "account_id": "123456789012",
@@ -694,13 +713,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -710,41 +736,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -756,7 +787,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -769,11 +800,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -784,11 +811,9 @@ build:
 {
   "base_severity": "critical",
   "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
+    "account": "123456789012",
+    "account_name": "Main production account",
+    "cloud_provider": "aws",
     "cloud_provider_url": "https://us-east-1.console.aws.amazon.com/ec2/home#Instances:instanceId=i-0123456789abcdef0",
     "configuration": {
       "account_id": "123456789012",
@@ -853,54 +878,66 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
   "title": "Inactive IAM user with administrative access keys",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -912,7 +949,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -925,11 +962,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -1024,13 +1057,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -1043,41 +1083,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1089,7 +1134,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1102,11 +1147,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -1117,11 +1158,9 @@ build:
 {
   "base_severity": "critical",
   "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
+    "account": "123456789012",
+    "account_name": "Main production account",
+    "cloud_provider": "aws",
     "cloud_provider_url": "https://us-east-1.console.aws.amazon.com/ec2/home#Instances:instanceId=i-0123456789abcdef0",
     "configuration": {
       "account_id": "123456789012",
@@ -1193,54 +1232,66 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
   "title": "Security group allows unrestricted SSH access",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1252,7 +1303,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1265,11 +1316,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -1340,13 +1387,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -1356,41 +1410,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1402,7 +1461,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1415,11 +1474,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -1490,13 +1545,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -1506,41 +1568,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1552,7 +1619,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1565,11 +1632,126 @@ build:
         }
       }
     }
+  }
+}
+```
+
+{{% /tab %}}
+{{% tab "Sensitive Data" %}}
+
+```json
+{
+  "base_severity": "medium",
+  "detection_changed_at": 1738575599859,
+  "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
+  "finding_type": "sensitive_data",
+  "first_seen_at": 1738575592659,
+  "is_in_security_inbox": false,
+  "last_seen_at": 1738624280889,
+  "metadata": {
+    "schema_version": "2"
   },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  "resource_id": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+  "resource_name": "checkout-service",
+  "resource_type": "logs",
+  "rule": {
+    "id": "sds-001-ccn",
+    "name": "Credit Card Number Scanner",
+    "type": "sensitive_data"
+  },
+  "sensitive_data": {
+    "match_action_type": "redact"
+  },
+  "service": {
+    "name": "checkout-service"
+  },
+  "severity": "medium",
+  "severity_details": {
+    "adjusted": {
+      "score": 5.5,
+      "value": "medium",
+      "value_id": 7
+    },
+    "base": {
+      "score": 5.5,
+      "value": "medium",
+      "value_id": 7
+    },
+    "user_adjusted": {
+      "score": 5.5,
+      "value": "medium",
+      "value_id": 7
+    }
+  },
+  "status": "open",
+  "title": "Credit card number detected in CI pipeline logs",
+  "workflow": {
+    "auto_closed_at": 1738575600859,
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
+    "due_date": {
+      "due_at": 1738575599859,
+      "is_overdue": false,
+      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    "integrations": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
+        }
+      ]
+    },
+    "mute": {
+      "description": "Free text",
+      "expire_at": 1738575599859,
+      "is_muted": false,
+      "is_muted_by_rule": false,
+      "muted_at": 1738575599859,
+      "muted_by": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
+      },
+      "reason": "risk_accepted"
+    },
+    "triage": {
+      "assignee": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice",
+        "updated_at": 1738575600859,
+        "updated_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -1640,13 +1822,20 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
@@ -1656,41 +1845,46 @@ build:
   },
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1702,7 +1896,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1715,11 +1909,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 
@@ -1766,54 +1956,66 @@ build:
   "severity_details": {
     "adjusted": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
     },
     "base": {
       "score": 9.8,
-      "value": "Critical",
+      "value": "critical",
+      "value_id": 10,
       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "user_adjusted": {
+      "score": 9.8,
+      "value": "critical",
+      "value_id": 10
     }
   },
   "status": "open",
   "title": "Unexpected process execution in container",
   "workflow": {
     "auto_closed_at": 1738575600859,
-    "automations": {
-      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
-      "rule_type": "mute"
-    },
+    "automations": [
+      {
+        "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "rule_name": "Mute findings on test environment",
+        "rule_type": "mute"
+      }
+    ],
     "due_date": {
       "due_at": 1738575599859,
       "is_overdue": false,
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
     },
     "integrations": {
-      "cases": {
-        "assignee": {
+      "cases": [
+        {
+          "assignee": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
+          "created_at": 1738575599859,
+          "created_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          },
           "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "created_at": 1738575599859,
-        "created_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
-        },
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-        "jira_issue": {
-          "key": "PROJ-12345",
-          "status": "To Do",
-          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
-        },
-        "key": "CASE-42",
-        "status": "open",
-        "updated_at": 1738575599859,
-        "updated_by": {
-          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-          "name": "Alice"
+          "jira_issue": {
+            "key": "PROJ-12345",
+            "status": "To Do",
+            "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+          },
+          "key": "CASE-42",
+          "status": "open",
+          "title": "Investigate security finding",
+          "updated_at": 1738575599859,
+          "updated_by": {
+            "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "Alice"
+          }
         }
-      }
+      ]
     },
     "mute": {
       "description": "Free text",
@@ -1825,7 +2027,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1838,11 +2040,7 @@ build:
         }
       }
     }
-  },
-  "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
-  ]
+  }
 }
 ```
 

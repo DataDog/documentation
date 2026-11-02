@@ -6,7 +6,7 @@ further_reading:
 - link: /tests
   tag: Documentación
   text: Aprenda sobre Test Optimization
-title: Pruebas en contenedores
+title: Pruebas en containers
 ---
 ## Descripción general {#overview}
 
@@ -43,7 +43,7 @@ Esta tabla proporciona una lista no exhaustiva de las variables de entorno dispo
 | `APPVEYOR_BUILD_FOLDER`                      | La ruta al directorio donde se clona el repositorio.                                                     |
 | `APPVEYOR_REPO_PROVIDER`                     | Especifica el proveedor de control de fuente para el repositorio, como `github`, `bitbucket` o `kiln`.         |
 | `APPVEYOR_REPO_NAME`                         | El nombre del repositorio en el formato `owner-name/repo-name`.                                              |
-| `APPVEYOR_REPO_BRANCH`                       | La rama del repositorio que se está compilando. Para las solicitudes de extracción (pull requests), es la rama base en la que se fusiona la PR.    |
+| `APPVEYOR_REPO_BRANCH`                       | La rama del repositorio que se está compilando. Para las solicitudes de extracción (solicitud de extracción), es la rama base en la que se fusiona la PR.    |
 | `APPVEYOR_REPO_COMMIT`                       | El ID de confirmación (SHA) de la compilación actual.                                                                     |
 | `APPVEYOR_REPO_TAG_NAME`                     | El nombre de la etiqueta para las compilaciones iniciadas por una etiqueta. Esta variable no está definida si la compilación no es activada por una etiqueta.  |
 | `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH`     | La rama del repositorio desde la cual se originó la solicitud de extracción.                                         |
@@ -118,7 +118,7 @@ Para obtener una lista de las variables de entorno configuradas por Bitbucket pa
 | `GIT_REPOSITORY_URL`                | La URL del repositorio de Git que aloja su aplicación.                                                               |
 | `BITRISE_GIT_COMMIT`                | El hash de confirmación (commit) de Git que activó la compilación, cuando corresponda.                                     |
 | `GIT_CLONE_COMMIT_HASH`             | El hash de la confirmación (commit) que utiliza la compilación (la confirmación clonada).                                                  |
-| `BITRISEIO_GIT_BRANCH_DEST`         | La rama de destino o de llegada de la solicitud de extracción (pull request) que activó la compilación, utilizada solo con compilaciones activadas por solicitudes de extracción. |
+| `BITRISEIO_GIT_BRANCH_DEST`         | La rama de destino o de llegada de la solicitud de extracción (solicitud de extracción) que activó la compilación, utilizada solo con compilaciones activadas por solicitudes de extracción. |
 | `BITRISE_GIT_BRANCH`                | La rama de Git que compila Bitrise, por ejemplo, `main`.                                                    |
 | `BITRISE_GIT_TAG`                   | Si una compilación es activada por una etiqueta (tag) de Git, esta variable de entorno almacena la etiqueta utilizada.                                          |
 | `BITRISE_GIT_MESSAGE`               | El mensaje de confirmación (commit), el título de la solicitud de extracción o el mensaje que especificó si activó la compilación manualmente.        |
@@ -299,13 +299,11 @@ Para obtener una lista de las variables de entorno establecidas por Jenkins para
 | `TEAMCITY_VERSION`           | La versión del servidor de TeamCity.                                                                        |
 | `TEAMCITY_BUILDCONF_NAME`    | El nombre de la configuración de compilación a la que pertenece la compilación actual.                                           |
 | `BUILD_URL`                  | El enlace a la compilación actual.                                                                             |
-| `DATADOG_BUILD_ID`           | Variable personalizada establecida por la [Integración de Datadog con TeamCity][102].                                             |
 
 Para obtener una lista de las variables de entorno establecidas por TeamCity para cada compilación, consulte la [documentación oficial de TeamCity][101].
 
 
 [101]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[102]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 
 {{% /tab %}}
 {{% tab "Travis CI" %}}
@@ -322,8 +320,8 @@ Para obtener una lista de las variables de entorno establecidas por TeamCity par
 | `TRAVIS_COMMIT`              | La confirmación (commit) que la compilación actual está probando.                                                         |
 | `TRAVIS_BRANCH`              | Para compilaciones de tipo push, el nombre de la rama. Para compilaciones de tipo PR, el nombre de la rama a la que apunta la PR.    |
 | `TRAVIS_TAG`                 | Si la compilación actual es para una etiqueta de Git, esta variable se establece en el nombre de la etiqueta; de lo contrario, está vacía. |
-| `TRAVIS_PULL_REQUEST_SLUG`   | Si el trabajo actual es una solicitud de extracción (pull request), el slug del repositorio del cual se originó la PR.        |
-| `TRAVIS_PULL_REQUEST_BRANCH` | Si el trabajo actual es una solicitud de extracción (pull request), el nombre de la rama de la cual se originó la PR.            |
+| `TRAVIS_PULL_REQUEST_SLUG`   | Si el trabajo actual es una solicitud de extracción (solicitud de extracción), el slug del repositorio del cual se originó la PR.        |
+| `TRAVIS_PULL_REQUEST_BRANCH` | Si el trabajo actual es una solicitud de extracción (solicitud de extracción), el nombre de la rama de la cual se originó la PR.            |
 | `TRAVIS_COMMIT_MESSAGE`      | El asunto y el cuerpo de la confirmación (commit), sin ajustar.                                                               |
 
 

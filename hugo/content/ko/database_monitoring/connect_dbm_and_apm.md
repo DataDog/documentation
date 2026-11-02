@@ -7,7 +7,7 @@ further_reading:
   text: DBM 및 APM 텔레메트리 상관관계 분석을 통한 엔드투엔드 쿼리 성능 파악
 title: Database Monitoring과 트레이스 상호 연결
 ---
-이 가이드에서는 [Database Monitoring][1]을 이미 구성했고 [APM][2]을 사용하고 있다고 가정합니다. APM과 DBM을 연결하면 APM 트레이스 식별자가 DBM 데이터 수집에 주입되어 두 데이터 소스를 연관지을 수 있습니다. 이로 인해 APM 제품에서 DBM 정보를 표시하고 DBM 제품에서 APM 데이터를 표시하는 제품 기능이 활성화됩니다.
+이 가이드에서는 [Database Monitoring][1]을 이미 구성했고 [APM][2]을 사용하고 있다고 가정합니다. APM과 DBM을 연결하면 APM 트레이스 식별자가 DBM 데이터 수집에 주입되어 두 데이터 소스를 연관지을 수 있습니다. 이로 인해 APM 제품에서 데이터베이스 정보를 표시하고 DBM 제품에서 APM 데이터를 표시하는 제품 기능이 활성화됩니다.
 
 ## 시작 전 참고 사항 {#before-you-begin}
 
@@ -95,11 +95,17 @@ Java 및 .NET의 `full` 모드:
 | 언어 | 최소 트레이서 버전 | 라이브러리/프레임워크 | 모드 |
 |:---------|:-------------------|:------------------|:-----|
 | **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
+| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service`<br>`dynamic_service` |
 
 Java의 `full` 모드:
 - 계측 기능이 `V$SESSION.ACTION`을 덮어씁니다.
 - 전제 조건: Java 트레이서 1.45 이상
+
+Java의 `dynamic_service` 모드에서는 SQL 문 텍스트를 변경하지 않고도 서비스 정보를 전파할 수 있습니다. SQL Plan Management 베이스라인처럼 SQL 문 텍스트의 정확한 일치 여부에 의존하는 기능을 사용하는 경우 이 옵션을 사용하세요.
+- `DD_DBM_PROPAGATION_MODE=dynamic_service` 및 `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`를 설정합니다.
+- 계측은 SQL 주석을 삽입하는 대신 `V$SESSION.ACTION`에 서비스 해시를 씁니다. 이 작업은 기존 `V$SESSION.ACTION` 값을 덮어씁니다.
+- `V$SESSION.ACTION` 이 값은 연결당 한 번 설정되며, 서비스 해시가 변경되는 경우에만 업데이트됩니다.
+- 전제 조건: Java 트레이서 1.67.0 이상
 
 {{% /tab %}}
 
@@ -126,7 +132,7 @@ DD_VERSION=(application version)
 
 이 태그는 APM 상관관계 보기 및 DBM 활성 연결 분석 화면에서 서비스를 식별하는 데 사용됩니다.
 
-Datadog는 Agent 버전 `7.63` 이상에서는 SQL 난독화 모드를 `obfuscate_and_normalize`로 설정할 것을 권장합니다. APM Agent 구성 파일의 `apm_config` 섹션에 다음 파라미터를 추가합니다.
+Datadog은 Agent 버전 `7.63` 이상에서는 난독화 모드를 `obfuscate_and_normalize`로 설정할 것을 권장합니다. APM Agent 구성 파일의 `apm_config` 섹션에 다음 파라미터를 추가합니다.
 
 ```yaml
   sql_obfuscation_mode: "obfuscate_and_normalize"
@@ -243,10 +249,17 @@ public class Application {
 }
 ```
 
+**SQL 주석이 없는 Oracle(트레이서 버전 1.67.0 이상)**:
+SQL 문 텍스트를 수정하지 않고 Oracle에 서비스 정보를 전파하려면 다음 **두 가지**를 모두 설정합니다.
+- `DD_DBM_PROPAGATION_MODE=dynamic_service`(또는 시스템 속성 `dd.dbm.propagation.mode=dynamic_service`)
+- `DD_DBM_PROPAGATION_ORACLE_ACTION_ONLY_ENABLED=true`(또는 시스템 속성 `dd.dbm.propagation.oracle.action-only.enabled=true`)
+
+이 구성을 사용하면 트레이서는 준비된 문을 포함한 Oracle 문에 SQL 주석을 삽입하는 대신 `V$SESSION.ACTION`에 서비스 해시를 씁니다. 다른 데이터베이스 연결에는 계속 SQL 주석이 삽입됩니다.
+
 **트레이서 버전 1.44 이상**:
 다음 방법 중 **하나**를 사용하여 준비된 Postgres의 문 트레이스를 활성화합니다.
 - 시스템 속성 설정 `dd.dbm.trace_prepared_statements=true`
-- 환경 변수 설정 `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
+- 환경 변수 `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`를 설정합니다.
 
 **참고**: 준비한 문 계측은 `Application` 속성을 텍스트 `_DD_overwritten_by_tracer`로 덮어쓰며, 데이터베이스와의 추가 왕복을 발생시킵니다. 이 추가 왕복은 SQL 문 실행 시간에 미치는 영향이 매우 작습니다.
 
@@ -513,7 +526,7 @@ Database Monitoring에서 [쿼리 샘플][37]을 볼 때 연결된 트레이스�
 ### APM 서비스의 다운스트림 데이터베이스 호스트 시각화 {#visualize-the-downstream-database-hosts-of-apm-services}
 
 특정 서비스의 APM 페이지에서 Database Monitoring이 식별한 해당 서비스의 직접적인 다운스트림 데이터베이스 종속성을 확인하고, 다른 워크로드의 영향으로 인해 특정 호스트에 과도한 부하가 집중되어 있는지 파악할 수 있습니다. 서비스의 데이터베이스 종속성을 보려면:
-1. [Software Catalog][26]에서 서비스를 선택하여 세부 정보 패널을 엽니다.
+1. [Catalog][26]에서 서비스를 선택하여 세부 정보 패널을 엽니다.
 1. 패널에서 {{< ui >}}Service Page{{< /ui >}}를 선택합니다.
 1. Service 페이지에서 {{< ui >}}Databases{{< /ui >}} 섹션을 선택합니다.
 1. Databases 섹션 내에서 {{< ui >}}Databases{{< /ui >}} 탭을 선택합니다.

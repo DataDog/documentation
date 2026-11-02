@@ -126,7 +126,11 @@ Enabling Remote Configuration impacts the following products. Each product defin
 
 ## Enable Remote Configuration
 
-In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
+In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page.
+{{< site-region region="gov,gov2" >}}
+**Note**: On US1-FED and US2-FED, Remote Configuration is not enabled by default.
+{{< /site-region >}}
+To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your {{< ui >}}Organization Settings{{< /ui >}} page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 1. Follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
@@ -144,6 +148,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
+| Data Observability      | [PostgreSQL](/data_observability/quality_monitoring/transactional_databases/postgres/#enable-remote-configuration) |
 | Private Action Runner   | [Private Actions Overview](/actions/private_actions/)                                                          |
 | Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
 

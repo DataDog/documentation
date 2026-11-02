@@ -21,6 +21,8 @@ To create an extraction calculated field, see [Create a calculated field][1].
 
 ## Tap to Parse
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Tap to Parse is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+
 Use Tap to Parse to generate an extraction rule from your log data automatically. Datadog analyzes your log message and generates a Grok rule or a regex pattern.
 
 {{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of Tap to Parse in Datadog Calculated Fields" style="width:100%;" >}}

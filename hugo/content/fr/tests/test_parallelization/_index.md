@@ -1,6 +1,11 @@
 ---
 description: Réduisez le temps de test CI en répartissant les fichiers de test sur
   des nœuds ou des workers CI grâce aux données Test Optimization.
+further_reading:
+- link: https://www.datadoghq.com/blog/ci-cd-optimization/
+  tag: Blog
+  text: Livrez plus rapidement, améliorez la fiabilité et maîtrisez les coûts de CI
+    avec Datadog CI/CD Optimization
 title: Parallélisation des tests
 ---
 ## Présentation {#overview}
@@ -45,6 +50,10 @@ Pour des exemples à nœud unique et multi-nœuds, consultez [Set Up Test Parall
 {{< nextlink href="/tests/test_parallelization/best_practices/" >}}Bonnes pratiques pour la parallélisation des tests.{{< /nextlink >}}
 {{< nextlink href="/tests/test_parallelization/troubleshooting/" >}}Dépannage de la parallélisation des tests{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Lectures complémentaires {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tests/test_impact_analysis/
 [2]: /fr/tests/setup/

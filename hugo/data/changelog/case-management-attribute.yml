@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-09-29'
+    link: https://github.com/DataDog/documentation/pull/40282
+    operations:
+      - CreateCustomAttributeConfig
+      - DeleteCustomAttributeConfig
+      - GetAllCustomAttributeConfigsByCaseType
+      - GetAllCustomAttributes
+      - UpdateCustomAttributeConfig
+    title: Rename Case Management API documentation to Work Management

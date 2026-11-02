@@ -924,6 +924,20 @@ Then, run the [configuration command based on your environment](#install-your-pr
 3. If you use the installer's **Modify** option, select your existing configuration file. Leaving the field blank or generating a new configuration replaces your current one.
 4. Confirm that the private location worker service is running and references the correct configuration file.
 
+### Run the latest browser versions
+
+The Chrome, Edge, and Firefox versions in the `latest` image are updated with each private location release after being tested. As a result, they can be older than the newest versions released by the browser vendors. Use the opt-in `browsers-latest` image to run the newest browsers and their security patches sooner, which reduces the browser vulnerabilities (CVEs) reported against your private location.
+
+The `browsers-latest` image is rebuilt every week. To use it, pull the `browsers-latest` tag instead of `latest`:
+
+```shell
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:browsers-latest
+```
+
+To pin a worker to a specific weekly build, use the dated, immutable tag published alongside it, in the form `X.Y.Z-rc.N-browsers-YYYY-MM-DD`. A FIPS-compliant image is published as `datadog/synthetics-private-location-worker-fips:browsers-latest`.
+
+**Note**: The `browsers-latest` image trades stability for the newest browser versions. These browsers are not validated on Datadog-managed locations, so browser tests may be less stable than those using the latest image.
+
 ### Test your internal endpoint
 
 Once at least one private location worker starts reporting to Datadog, the private location status displays green.

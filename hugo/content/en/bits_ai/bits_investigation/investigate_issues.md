@@ -19,6 +19,8 @@ You can launch a Bits investigation from several entry points:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
+- [Real User Monitoring](#real-user-monitoring)
+- [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
 
 ### Monitor alerts {#manual-monitor-alerts}
@@ -55,6 +57,22 @@ The investigation opens in a new page, and you can also view it from the test de
 #### From a Synthetic monitor
 
 Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
+
+### Real User Monitoring
+
+You can launch a Bits investigation from several places in Real User Monitoring (RUM):
+
+- Recommendation cards on the RUM **Optimization** page and in Operations Monitoring. For details, see [Optimize Performance with Bits AI][19].
+- The **Anomaly · Investigate** button on a RUM vital chart. For details, see [Investigate Regressions and Alerts with Bits AI][20].
+- RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations). For details, see [Investigate Regressions and Alerts with Bits][20].
+
+### Error Tracking
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Investigation in Error Tracking is in Preview.
+{{< /callout >}}
+
+You can launch a Bits investigation from an Error Tracking issue. To start an investigation, click {{< ui >}}Investigate this issue{{< /ui >}} on the {{< ui >}}Review{{< /ui >}} tab of the issue panel. Bits analyzes the error, its stack trace, and related telemetry. If you set up [Source Code Integration][17], Bits also analyzes your source code. It then summarizes the root cause and impact in the issue panel. For details, see [Investigate Errors with Bits AI][21].
 
 ### General prompt
 
@@ -125,6 +143,7 @@ Bits uses the following data sources during investigations:
 - [Source code][17] (GitHub only)
 - Watchdog
 - Real User Monitoring
+- Error Tracking
 - Network Path
 - Database Monitoring
 - Continuous Profiler
@@ -168,6 +187,9 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
 [18]: https://app.datadoghq.com/synthetics/tests
+[19]: /real_user_monitoring/bits_ai/optimize_performance/
+[20]: /real_user_monitoring/bits_ai/investigate_regressions/
+[21]: /error_tracking/bits_investigation/
 
 ## Further reading
 

@@ -89,7 +89,7 @@ Los siguientes pasos habilitan las vistas de recursos del Explorador sin recopil
 
 - OpenTelemetry Collector Contrib [v0.159.0][3] o posterior.
 - OpenTelemetry Collector [Helm chart][4] v0.156.2 o posterior.
-- Una [clave de API de Datadog][15] y su [sitio de Datadog][7].
+- Una [clave de Datadog API][15] y su [sitio de Datadog][7].
 
 #### Limitaciones {#limitations}
 
@@ -102,7 +102,7 @@ Recomendaciones:
 
 #### 1. Cree un secreto de Datadog {#1-create-a-datadog-secret}
 
-Establezca su clave de API de Datadog y su sitio, luego cree un secreto de Kubernetes. Estos pasos utilizan el espacio de nombres `default` tanto para el secreto como para el Collector:
+Establezca su clave de Datadog API y su sitio, luego cree un secreto de Kubernetes. Estos pasos utilizan el espacio de nombres `default` tanto para el secreto como para el Collector:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
@@ -168,7 +168,7 @@ config:
   exporters:
     otlp_http:
       endpoint: https://otlp.${env:DD_SITE}
-      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
+      logs_endpoint: https://otlp.${env:DD_SITE}/v1/logs
       headers:
         dd-api-key: ${env:DD_API_KEY}
       compression: zstd
@@ -212,7 +212,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. Verifique la instalación {#4-verify-the-installation}
 
-Abra el [Kubernetes Explorer][9] y filtre por el nombre de su clúster de OpenTelemetry. Todas las secciones de recursos principales de Kubernetes deberían llenarse, junto con **Custom Resources > CRD**. La sección **Custom Resources > Resources** no es compatible con esta configuración.
+Abra el [Kubernetes Explorer][9] y filtre por el nombre de su clúster de OpenTelemetry. Todas las secciones de recursos principales de Kubernetes deberían llenarse, junto con **Custom Resources > CRD**. Para también completar **Custom Resources > Resources**, consulte [Collect custom resources][17].
 
 #### 5. Correlacione registros, métricas y trazas con Kubernetes Explorer (opcional) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
@@ -279,17 +279,16 @@ Para ver un ejemplo completo de un Collector de telemetría de aplicaciones, con
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /es/account_management/api-app-keys/#api-keys
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[17]: /es/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
 
 Puede completar Kubernetes Explorer utilizando el `opentelemetry-kube-stack` Helm chart en lugar del Datadog Agent.
 
-<div class="alert alert-info">La configuración de referencia en esta pestaña utiliza el Datadog Exporter. Para nuevas implementaciones, utilice la pestaña <strong>OpenTelemetry Collector</strong> para enviar datos de recursos de Kubernetes directamente a Datadog a través de OTLP HTTP.</div>
+El [`opentelemetry-kube-stack`][1] Helm chart instala el Operador de OpenTelemetry y gestiona los colectores como Custom Resources `OpenTelemetryCollector`. Datadog mantiene una referencia [`values-otlp-http.yaml`][2] que configura dos colectores:
 
-El [`opentelemetry-kube-stack`][1] Helm chart instala el Operador de OpenTelemetry y gestiona los colectores como Custom Resources `OpenTelemetryCollector`. Datadog mantiene una referencia [`values.yaml`][2] que configura dos colectores:
-
-- **`cluster`** (Deployment): Extrae métricas de kube-state-metrics, observa objetos de Kubernetes y permite que `orchestrator_explorer` complete Kubernetes Explorer.
+- **`cluster`** (Deployment): Extrae kube-state-metrics y utiliza el receptor `k8s_objects` para observar objetos de Kubernetes, los cuales envía a Datadog a través de OTLP HTTP para completar Kubernetes explorador.
 - **`daemon`** (DaemonSet): Recopila métricas del servidor y del kubelet, y expone un punto de conexión OTLP para los datos de telemetría de la aplicación.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Esta función no está disponible para {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
@@ -311,7 +310,7 @@ Recomendaciones:
 
 #### Inicio rápido (instalador interactivo) {#quickstart-interactive-installer}
 
-El repositorio [`opentelemetry-examples`][6] incluye un instalador interactivo que gestiona todos los pasos a continuación. Desde `guides/kubernetes/configuration/opentelemetry-kube-stack/`:
+El repositorio [`opentelemetry-examples`][6] incluye un instalador interactivo que gestiona la instalación completa. Desde `guides/kubernetes/configuration/opentelemetry-kube-stack/`:
 
 ```sh
 ./install
@@ -321,84 +320,22 @@ El instalador solicita su clave de Datadog API, [sitio de Datadog][7], plataform
 
 #### Instalar con archivos de valores {#install-with-values-files}
 
-Si no utilizó el instalador interactivo anterior, siga los pasos a continuación para realizar la instalación manualmente.
-
-##### 1. Instale cert-manager (si aún no está presente) {#1-install-cert-manager-if-not-already-present}
-
-```sh
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace \
-  --set crds.enabled=true
-```
-
-##### 2. Cree el secreto de Datadog {#2-create-the-datadog-secret}
-
-Establezca `DD_SITE` en su [sitio de Datadog][7] (el valor predeterminado es `datadoghq.com`):
-
-```sh
-export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="datadoghq.com"  # for example us3.datadoghq.com, datadoghq.eu
-
-kubectl create namespace opentelemetry-operator-system \
-  --dry-run=client -o yaml | kubectl apply -f -
-
-kubectl create secret generic datadog-secret \
-  --namespace opentelemetry-operator-system \
-  --from-literal="api-key=$DD_API_KEY" \
-  --from-literal="dd-site=$DD_SITE" \
-  --dry-run=client -o yaml | kubectl apply -f -
-```
-
-##### 3. Cree una superposición de implementación {#3-create-a-deployment-overlay}
-
-La referencia `values.yaml` es la base; la configuración específica de la implementación (plataforma de clúster, entorno, nombre del clúster) reside en un archivo de superposición. Desde `guides/kubernetes/configuration/opentelemetry-kube-stack/`, copie el ejemplo que coincida con su plataforma:
-
-```sh
-mkdir -p deployment
-
-# EKS, GKE, or AKS (resource detector auto-populates k8s.cluster.name):
-cp examples/eks-deployment/values.yaml deployment/values.yaml
-cp examples/gcp-deployment/values.yaml deployment/values.yaml
-cp examples/aks-deployment/values.yaml deployment/values.yaml
-
-# Other platforms (set the cluster name manually):
-cp examples/manually-set-k8s-cluster-name/values.yaml deployment/values.yaml
-```
-
-Para plataformas que no sean EKS/GKE/AKS, edite `deployment/values.yaml` y reemplace `my_k8s_cluster` y `production` con el nombre de su clúster y el entorno de implementación.
-
-##### 4. Implemente los recolectores de referencia {#4-deploy-the-reference-collectors}
-
-Instale o actualice el chart con la base `values.yaml` y su superposición:
-
-```sh
-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-helm repo update
-
-helm upgrade --install opentelemetry-kube-stack \
-  open-telemetry/opentelemetry-kube-stack \
-  --namespace opentelemetry-operator-system \
-  --values ./values.yaml \
-  --values ./deployment/values.yaml
-```
-
-Ambos recolectores tienen límites predeterminados de `500m` de CPU y `1Gi` de memoria, y solicitudes de `200m` de CPU y `500Mi` de memoria. Aumente la escala para clústeres grandes.
+Para instalar manualmente en lugar de usar el instalador interactivo, siga los pasos de [Install with values files][10] en el repositorio `opentelemetry-examples`.
 
 #### Verifique la instalación {#verify-the-installation}
 
-Abra el [Explorador de Kubernetes][8] y filtre por el nombre de su clúster. Todas las secciones de recursos principales de Kubernetes deberían llenarse, junto con **Custom Resources > CRD**. La sección **Custom Resources > Resources** no es compatible con esta configuración.
+Abra el [Explorador de Kubernetes][8] y filtre por el nombre de su clúster. Todas las secciones de recursos principales de Kubernetes deberían llenarse, junto con **Custom Resources > CRD**. Para también completar **Custom Resources > Resources**, consulte [Collect custom resources][9].
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
-[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values-otlp-http.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.1
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 [7]: /es/getting_started/site/
 [8]: https://app.datadoghq.com/orchestration/overview
+[9]: /es/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
+[10]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#install-with-values-files
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -515,7 +452,7 @@ Examine los recursos desde los mapas de clúster haciendo clic en cualquier cír
 
 ### Panel de información {#information-panel}
 
-Haga clic en cualquier fila de la tabla o en cualquier objeto de un mapa de clúster para ver información sobre un recurso específico en un panel lateral.
+Haga clic en cualquier fila de la tabla o en cualquier objeto de un mapa de clúster para visualizar información sobre un recurso específico en un panel lateral.
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="Una vista de los recursos en el panel lateral, abierta en procesos." style="width:80%;">}}
 
@@ -541,7 +478,7 @@ Las otras pestañas muestran más información para la solución de problemas de
 * [**Eventos**][5]: Visualice todos los eventos de Kubernetes para su recurso.
 * {{< ui >}}Monitors{{< /ui >}}: Vea los monitores etiquetados, con alcance o agrupados para este recurso.
 
-Para obtener un Dashboard detallado de este recurso, haga clic en Ver Dashboard en la esquina superior derecha de este panel.
+Para obtener un Dashboard detallado de este recurso, haga clic en Visualizar Dashboard en la esquina superior derecha de este panel.
 
 {{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="Un enlace a un pod Dashboard desde la visualización general de Containers en vivo." style="width:80%;">}}
 
@@ -672,7 +609,7 @@ Según las etiquetas adjuntas al recurso, también se extraerán las siguientes 
 Los recursos relacionados se etiquetarán entre sí. Algunos ejemplos:
 
 - Un pod que forma parte del despliegue "XYZ" tendrá una etiqueta `kube_deployment:xyz`.
-- Un ingress que apunta al servicio "A" tendrá una etiqueta `kube_service:a`.
+- Un ingreso que apunta al servicio "A" tendrá una etiqueta `kube_service:a`.
 
 Los recursos que se generan a partir de recursos "padre" tendrán las etiquetas `kube_ownerref_kind` y `kube_ownerref_name` (como pods y jobs).
 
@@ -760,7 +697,7 @@ Los porcentajes (`*_pct_*`) se almacenan como números de punto flotante, donde 
 ## Notas y problemas conocidos {#notes-and-known-issues}
 
 * Los datos se actualizan automáticamente en intervalos constantes.
-* En clústeres con más de 1000 implementaciones (Deployments) o conjuntos de réplicas (ReplicaSets), es posible que note un mayor uso de CPU por parte del agente de clúster. Existe una opción para deshabilitar la limpieza de contenedor en el gráfico de Helm. Consulte [el repositorio del gráfico de Helm][11] para obtener más detalles.
+* En clústeres con más de 1000 implementaciones (Deployments) o conjuntos de réplicas (ReplicaSets), es posible que note un mayor uso de CPU por parte del Agent de clúster. Existe una opción para deshabilitar la limpieza de contenedor en el gráfico de Helm. Consulte [el repositorio del gráfico de Helm][11] para obtener más detalles.
 
 ## Lecturas adicionales {#further-reading}
 

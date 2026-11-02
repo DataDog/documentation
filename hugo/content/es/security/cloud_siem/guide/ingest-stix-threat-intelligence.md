@@ -17,6 +17,9 @@ further_reading:
 - link: /reference_tables/
   tag: Documentación
   text: Cree y administre tablas de referencia
+- link: /security/cloud_siem/ingest_and_enrich/muted_indicators/
+  tag: Documentación
+  text: Silenciar indicadores benignos en Cloud SIEM
 title: Ingiera inteligencia de amenazas STIX
 ---
 ## Descripción general {#overview}
@@ -47,7 +50,7 @@ Las tablas estarán disponibles unos minutos después de su primera solicitud. E
 ## Requisitos previos {#prerequisites}
 
 - Cloud SIEM está habilitado para su organización.
-- Una [API key][5] de Datadog y una [clave de aplicación][6]. La clave de aplicación debe tener el permiso de escritura en tablas de referencia.
+- Una [clave de API][5] de Datadog y una [clave de aplicación][6]. La clave de aplicación debe tener el permiso de escritura en tablas de referencia.
 
 ## Enviar indicadores {#send-indicators}
 

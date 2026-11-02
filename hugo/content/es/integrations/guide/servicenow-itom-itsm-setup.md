@@ -24,7 +24,7 @@ Antes de instalar la integración, asegúrese de tener el [mosaico de ServiceNow
 
 Hay dos formas de instalar la integración:
 - Datadog recomienda instalar la versión más reciente de la integración [ITOM/ITSM Integration for Datadog][1] desde la tienda de ServiceNow.
-- Alternativamente, puede descargar el Update Set más reciente ([Datadog-Snow_Update_Set_v2.7.9.xml][2]) y cargarlo manualmente en su instancia de ServiceNow.
+- Alternativamente, puede descargar el conjunto de actualizaciones más reciente ([Datadog-Snow_Update_Set_v2.8.0.xml][2]) y cargarlo manualmente en su instancia de ServiceNow.
 
 ## Configure la integración {#configure-the-integration}
 
@@ -124,7 +124,7 @@ Estado de transición de la alerta: `Triggered`, `Warn`, o `Recovered`
 `assignment_group_sys_id`
 : **Tipo**: Referencia<br>
 **Transformación ITSM**: `assignment_group`<br>
-**Tabla de referencia**: Grupo<br>
+**Reference Table**: Grupo<br>
 sys_id de ServiceNow para el grupo de asignación del identificador con plantilla
 
 `business_service_sys_id`
@@ -266,7 +266,7 @@ En ServiceNow, puede sincronizar el estado, el impacto y la urgencia de forma bi
 1. Escriba **ITOM/ITSM Integration for Datadog** en el filtro.
 1. Haga clic en el enlace **Configuration** de los resultados filtrados y luego ingrese la configuración requerida:
    1. Seleccione su **Datadog Data Center**.
-   1. Pegue su **Datadog API Key**.
+   1. Pegue su **clave de Datadog API**.
    1. Pegue la **clave de aplicación de cuenta de servicio** que creó.
    1. Marque la casilla **Enabled**.
 1. Haga clic en **Guardar**.
@@ -293,11 +293,11 @@ Para crear una asignación de campo personalizada en ServiceNow:
    En la parte superior hay dos campos importantes en el registro de transformación: <code>Source table</code> y <code>Target table</code>:
    {{< img src="integrations/guide/servicenow/servicenow-source-target-fields.png" alt="Mapa de transformación de incidentes de Datadog en ServiceNow que muestra la tabla fuente 'Datadog Incident Table' asignada a la tabla de destino Incidente [incident]" style="width:100%;" >}}
 1. Haga clic en **Nuevo**:
-   {{< img src="integrations/guide/servicenow/servicenow-click-new.png" alt="Pestaña de asignaciones de campos en ServiceNow que muestra las asignaciones de campos de origen y destino para la transformación de incidentes de Datadog. Una flecha rosa señala el botón Nuevo utilizado para agregar una nueva asignación de campo." style="width:100%;" >}}
-1. Seleccione los campos de origen y destino para las asignaciones uno a uno:
-   {{< img src="integrations/guide/servicenow/servicenow-select-source-target.png" alt="Configuración de asignación de campos de ServiceNow que muestra el campo de origen PRIORITY asignado al campo de destino Severity en el mapa de transformación de incidentes de Datadog" style="width:100%;" >}}
-   O marque la casilla <strong>Usar script de origen</strong> y defina las transformaciones:
-   {{< img src="integrations/guide/servicenow/servicenow-script-example.png" alt="Script de asignación de campos de ServiceNow en la Transformación de incidentes de Datadog que muestra un script de origen que asigna valores de source.priority a niveles de gravedad numéricos para el campo Prioridad en la tabla de Incidentes." style="width:100%;" >}}
+   {{< img src="integrations/guide/servicenow/servicenow-click-new.png" alt="Pestaña de asignaciones de campos en ServiceNow que muestra las asignaciones de campos de fuente y destino para la transformación de incidentes de Datadog. Una flecha rosa señala el botón Nuevo utilizado para agregar una nueva asignación de campo." style="width:100%;" >}}
+1. Seleccione los campos de fuente y destino para las asignaciones uno a uno:
+   {{< img src="integrations/guide/servicenow/servicenow-select-source-target.png" alt="Configuración de asignación de campos de ServiceNow que muestra el campo de fuente PRIORITY asignado al campo de destino Severity en el mapa de transformación de incidentes de Datadog" style="width:100%;" >}}
+   O marque la casilla <strong>Usar script fuente</strong> y defina las transformaciones:
+   {{< img src="integrations/guide/servicenow/servicenow-script-example.png" alt="Script de asignación de campos de ServiceNow en la Transformación de incidentes de Datadog que muestra un script de fuente que asigna valores de source.priority a niveles de gravedad numéricos para el campo Prioridad en la tabla de Incidentes." style="width:100%;" >}}
 
 Para asignar campos personalizados en el mosaico de integración, puede usar el siguiente script para los mapas de transformación Datadog Monitors ITOM y Datadog Monitors ITSM. En este ejemplo, el campo `my_field` se define como un campo personalizado en el mosaico de integración:
 
@@ -398,7 +398,7 @@ Si un monitor vuelve a abrir el mismo incidente en lugar de crear uno nuevo para
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /es/resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
+[2]: /es/resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
 [3]: /es/integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/work/settings

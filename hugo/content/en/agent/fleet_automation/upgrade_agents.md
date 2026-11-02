@@ -11,12 +11,13 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through the API.
+Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through Terraform or the API.
 
 ## Prerequisites
 
-- [Remote Configuration][7] enabled for your organization
-- Agent version 7.71 for Windows and 7.69 for Linux
+- [Remote Configuration][7] enabled for your organization and the Agent's API key
+- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
+- Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
 - Linux VMs or Windows VMs
 - At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
 
@@ -72,6 +73,38 @@ Remote upgrading of Agents in containerized workloads is not supported.
 
 Fleet Automation provides an API to trigger Agent upgrades programmatically or on a recurring schedule. Start upgrades for any set of hosts with filter queries, or create schedules that run during defined maintenance windows with a specified Agent version. For full details, see the [Fleet Automation API][3].
 
+## Schedule Agent upgrades with Terraform
+
+Use the Datadog Terraform provider to create and manage Agent upgrade schedules as code. The `datadog_fleet_schedule` resource defines the target hosts, Agent version, and recurring maintenance window. Fleet Automation performs the upgrades according to the schedule.
+
+Before you begin:
+
+- Verify that the Agents meet the [upgrade prerequisites](#prerequisites).
+- [Set up the Datadog Terraform provider][9] (version 4.22.0 or later).
+- Use an application key with the `agent_upgrade_write` and `hosts_read` permissions.
+
+The following example defines an inactive schedule for hosts matching `env:staging service:example`. The schedule targets the latest Agent version (`version_to_latest = 0`). It specifies a two-hour maintenance window (`maintenance_window_duration = 120`, in minutes), starting at 03:00 on Tuesdays and Thursdays in the `America/New_York` time zone.
+
+```hcl
+resource "datadog_fleet_schedule" "staging" {
+  name              = "Staging Agent upgrades"
+  query             = "env:staging service:example"
+  status            = "inactive"
+  version_to_latest = 0
+
+  rule = {
+    days_of_week                = ["Tue", "Thu"]
+    maintenance_window_duration = 120
+    start_maintenance_window    = "03:00"
+    timezone                    = "America/New_York"
+  }
+}
+```
+
+Replace the host query and maintenance window with values for your environment. Run `terraform plan` to review the changes, then `terraform apply` to create the schedule. When you are ready to enable scheduled upgrades, set `status` to `active` and apply the change.
+
+For all supported options and instructions for importing an existing schedule, see the [`datadog_fleet_schedule` resource documentation][10].
+
 ## Upgrade process
 
 Similar to a manual upgrade, expect 5-30 seconds of downtime while the Agent restarts. The full upgrade process takes approximately 5 minutes: around 2 minutes for the upgrade itself, with the remaining time spent monitoring stability. If the upgrade fails, the Agent automatically reverts to the previous version.
@@ -95,6 +128,12 @@ Datadog recommends managing upgrades from one source at a time. Use either Fleet
 
 ## Troubleshooting
 
+### Remote Agent Management is not enabled
+
+If the Agent's side panel shows **Remote Agent Management: NOT ENABLED**, follow [Enable remote Agent management][8] to enable `remote_updates` on the host and restart the Agent. Remote Configuration can be connected while remote updates are disabled.
+
+If the Agent is still unavailable for upgrades, verify the [prerequisites](#prerequisites), Remote Configuration connectivity, and whether the Datadog Installer is running.
+
 ### Newly released Agent version is not yet available for upgrade
 
 After a new Agent version is released, it can take up to 24 hours before it appears as an upgrade target in Fleet Automation. If a recently released version is missing from the upgrade picker, wait up to 24 hours and retry.
@@ -111,9 +150,9 @@ To diagnose and fix the issue:
    ```txt
    support_remote_upgrade:datadog-installer
    ```
-1. If your setup is impacted, [re-run the install script][6] on each affected Agent to upgrade to Agent 7.66 or later.
+1. If your setup is impacted, [re-run the install script][6] on each affected Agent to upgrade to an Agent version that meets the [prerequisites](#prerequisites).
 
-After updating to 7.66 or later, future upgrades are handled automatically. If you do not upgrade, the existing Agent continues to function, but remote upgrades remain unavailable.
+After updating, [enable remote Agent management][8] to use Fleet Automation for future upgrades. If you do not upgrade, the existing Agent continues to function, but remote upgrades remain unavailable.
 
 ## Further Reading
 
@@ -126,3 +165,6 @@ After updating to 7.66 or later, future upgrades are handled automatically. If y
 [5]: https://app.datadoghq.com/fleet?query=support_remote_upgrade%3Adatadog-installer
 [6]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [7]: /agent/guide/setup_remote_config
+[8]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /getting_started/integrations/terraform/
+[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/fleet_schedule

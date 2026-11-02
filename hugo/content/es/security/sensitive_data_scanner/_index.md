@@ -10,10 +10,6 @@ further_reading:
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: Documentación
   text: Configurar Sensitive Data Scanner para Almacenamiento en la Nube
-- link: coterm
-  tag: Documentación
-  text: 'CoTerm: Monitorear sesiones de terminal y actividades sensibles en sistemas
-    locales y remotos'
 - link: /data_security/
   tag: Documentación
   text: Reduciendo riesgos relacionados con datos

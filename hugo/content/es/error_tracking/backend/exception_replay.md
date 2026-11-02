@@ -54,7 +54,7 @@ a continuación para obtener más detalles.
 |---|---|---|---|
 | **Cómo habilitar** | Habilitado de forma predeterminada | Página de configuración | Variables de entorno |
 | **Versión del Agent** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **Versiones mínimas del rastredor** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
+| **Versiones mínimas del rastreador** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **¿Se requiere Remote Configuration?** | Sí | Sí | No |
 
 Para habilitar Exception Replay en la aplicación, navegue a la página de Exception Replay {{< ui >}}Settings{{< /ui >}} en Error Tracking, seleccione el
@@ -108,7 +108,7 @@ entornos de preproducción como `staging` o `preprod`.
 ### Redacción basada en identificadores {#identifier-based-redaction}
 
 Los valores de las variables asociados con [identificadores confidenciales comunes][3] (por ejemplo, `password`, `accessToken` y términos similares)
-se depuran antes de que las instantáneas salgan del servidor. Se integran reglas de depuración adicionales específicas del lenguaje en cada rastredor
+se depuran antes de que las instantáneas salgan del servidor. Se integran reglas de depuración adicionales específicas del lenguaje en cada rastreador
 (por ejemplo, el rastreador de Python mantiene una lista de identificadores confidenciales predeterminados).
 
 Puede ampliar el comportamiento de redacción mediante:
@@ -141,6 +141,7 @@ entornos de ejecución, una instantánea solo se captura después de la **segund
 - Registros con `source:dd_debugger` faltantes debido a la configuración de retención de [Log Index][6] o a los [Filtros de exclusión][7] en los índices anteriores
 - La reproducción de excepciones no está disponible en la región FedRAMP
 - Java: En JDK 18 y versiones anteriores, es posible que no se admitan las clases compiladas con el marcador `-parameters`. Spring 6+, Spring Boot 3+ y Scala usan este marcador de forma predeterminada.
+- .NET: En hosts con FIPS habilitados, las versiones del tracer anteriores a la 3.55.0 no admiten Exception Replay. En Linux, la aplicación puede bloquearse. Actualice a la versión 3.55.0 del tracer o posterior para usar Exception Replay. En versiones anteriores, configure `DD_EXCEPTION_REPLAY_ENABLED=false` para evitar que se bloquee.
 
 Utilice la consulta `@error.debug_info_captured:true` en Error Tracking Explorer para encontrar errores con Exception Replay
 instantáneas.

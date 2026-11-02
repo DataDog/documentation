@@ -16,6 +16,7 @@ rum_sdk_profiling_options:
     default: true
   - id: android
   - id: ios
+  - id: electron
 
 rum_session_replay_sdk_options:
   - id: browser
@@ -26,6 +27,7 @@ rum_session_replay_sdk_options:
   - id: react_native
   - id: flutter
   - id: maui
+  - id: electron
 
 rum_mobile_proxy_protocol_options:
   - id: http_https

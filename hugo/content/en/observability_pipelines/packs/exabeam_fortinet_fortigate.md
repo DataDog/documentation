@@ -1,6 +1,10 @@
 ---
 title: Exabeam - Fortinet FortiGate
 description: Learn more about the Exabeam - Fortinet FortiGate pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Drops DNS and health checks
 - Drops internal accept traffic
 - Keeps threats and denied logs
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

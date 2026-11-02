@@ -25,13 +25,13 @@ Configurez CI Visibility pour GitLab afin de collecter des données sur vos exé
 |---|---|---|
 | [Pipelines en cours d'exécution][24] | Pipelines en cours d'exécution | Affichez les exécutions de pipeline en cours d'exécution. Les pipelines en file d'attente ou en attente s'affichent avec le statut « Running » sur Datadog. |
 | [Jobs en cours d'exécution][32] | Jobs en cours d'exécution | Affichez les exécutions de jobs actuellement en cours d'exécution. |
-| [Analyse des échecs des jobs CI][28] | Analyse des échecs des jobs CI | Utilise des modèles LLM sur les logs pertinents pour analyser la cause racine des jobs CI ayant échoué. |
+| [Analyse des logs][28] | Analyse des logs | Utilise des modèles LLM sur les logs pertinents pour analyser la cause racine des jobs CI ayant échoué. |
+| Corrélation des logs | Corrélation des logs | Corréler les spans de pipeline aux logs. Nécessite le [Stockage des logs][12]. |
 | [Filtrer les jobs CI sur le chemin critique][29] | Filtrer les jobs CI sur le chemin critique | Filtrez par jobs sur le chemin critique. |
 | [Réessais partiels][19] | Pipelines partiels | Affichez les exécutions de pipeline ayant fait l'objet de réessais partiels. |
 | [Réessais automatiques de jobs][31] | Réessais automatiques de jobs | Datadog réessaie les jobs ayant échoué classés comme transitoires par son modèle d'erreur IA. |
 | [Étapes manuelles][20] | Étapes manuelles | Affichez les pipelines déclenchés manuellement. |
 | [Temps de file d'attente][21] | Temps de file d'attente | Affichez la durée pendant laquelle les jobs de pipeline restent dans la file d'attente avant d'être traités. |
-| Corrélation des logs | Corrélation des logs | Corrélez les spans de pipeline aux logs et activez la [collecte des logs de job][12]. |
 | Corrélation des métriques d'infrastructure | Corrélation des métriques d'infrastructure | Corrélez les jobs aux [métriques de host d'infrastructure][14] pour les runners GitLab auto-hébergés. |
 | Tags prédéfinis personnalisés | Tags prédéfinis personnalisés | Définissez des [tags personnalisés][10] pour tous les spans générés de pipeline, de phase et de job. |
 | [Tags personnalisés][15] [et mesures au moment de l'exécution][16] | Tags et mesures personnalisés au moment de l'exécution | Configurez des [tags et mesures personnalisés][13] au moment de l'exécution. |
@@ -232,7 +232,7 @@ Allez dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} dans vo
 
 - {{< ui >}}URL{{< /ui >}} : <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> où `<API_KEY>` est votre [clé d'API Datadog][102].
 - {{< ui >}}Secret Token{{< /ui >}} : Laissez ce champ vide.
-- {{< ui >}}Trigger{{< /ui >}} : Sélectionnez `Job events` et `Pipeline events`.
+- {{< ui >}}Trigger{{< /ui >}} : Sélectionnez `Job events` et `Pipeline events`.
 
 Pour définir des paramètres `env` ou `service` personnalisés, ajoutez d'autres paramètres de requête dans l'URL des webhooks. Par exemple, `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
 
@@ -341,14 +341,6 @@ Pour les exécutions de pipeline GitLab ayant échoué, chaque erreur sous l'ong
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="Raison de l'échec GitLab" style="width:100%;">}}
 
-#### Analyse des échecs de jobs CI {#ci-jobs-failure-analysis}
-
-Si la collecte des logs de jobs est activée, CI Visibility utilise des modèles LLM pour analyser les jobs CI ayant échoué en se basant sur les logs pertinents provenant de GitLab.
-
-Vous pouvez également ajouter une analyse des échecs de jobs à un commentaire de PR. Consultez le guide sur [l'utilisation des commentaires de PR][30].
-
-Pour une explication complète, consultez le guide sur [l'utilisation de l'analyse des échecs de jobs CI][28].
-
 #### Erreurs fournies par GitLab {#errors-provided-by-gitlab}
 
 Les messages d'erreur sont pris en charge pour les versions 15.2.0 ou supérieures de GitLab.
@@ -390,17 +382,27 @@ Le tableau suivant décrit le message et le domaine corrélés à chaque type d'
 | `reached_max_descendant_pipelines_depth` | utilisateur   | Nombre maximal de pipelines descendants atteint.                        |
 | `ip_restriction_failure`          | fournisseur     | Échec de la restriction IP.                                    |
 
-### Collecter les logs des jobs {#collect-job-logs}
+### Gérer les logs de jobs {#manage-job-logs}
 
-Les versions GitLab suivantes prennent en charge la collecte des logs des jobs :
+#### Analyse des logs {#logs-analysis}
+
+L'Analyse des logs utilise des modèles LLM pour classer les échecs de jobs par cause racine en fonction des logs pertinents provenant de GitLab.
+
+Pour une explication complète, consultez le guide sur [l'utilisation de l'Analyse des logs][28].
+
+L'Analyse des logs est activée par défaut dans Datadog, mais nécessite que le transfert des logs de jobs soit configuré, comme décrit ci-dessous.
+
+Vous pouvez également ajouter l'Analyse des logs à un commentaire de PR. Consultez le guide sur [l'utilisation des commentaires de PR][30].
+
+L'activation de l'Analyse des logs est également un prérequis pour les [réessais automatiques de jobs][31].
+
+Les versions de GitLab suivantes prennent en charge le transfert des logs de jobs vers Datadog :
 
 * GitLab.com (SaaS)
 * GitLab >= 15.3 (auto-hébergé) uniquement si vous utilisez le [stockage d'objets pour stocker les logs des jobs][7]
 * GitLab >= 14.8 (auto-hébergé) en activant le feature flag `datadog_integration_logs_collection`
 
-Les logs des jobs sont collectés dans [Log Management][9] et sont automatiquement corrélés avec le pipeline GitLab dans CI Visibility. Les fichiers logs de plus d'un Gio sont tronqués.
-
-Pour activer la collecte des logs des jobs :
+Pour activer le transfert des logs de jobs depuis GitLab :
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
@@ -431,7 +433,13 @@ L'<a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-
 {{% /tab %}}
 {{< /tabs >}}
 
-Les logs sont facturés séparément de CI Visibility. La rétention, l'exclusion et les index des logs sont configurés dans [Log Management][6]. Les logs des jobs GitLab peuvent être identifiés par les tags `datadog.product:cipipeline` et `source:gitlab`.
+#### Stockage des logs {#logs-storage}
+
+Une fois les étapes pour votre version de GitLab terminées, accédez aux [paramètres du dépôt CI/CD][35] et activez le Stockage des logs au niveau de l'organisation Datadog ou pour les dépôts souhaités.
+
+Logs Storage est facturé séparément de CI Visibility. La rétention, l'exclusion et les index des logs sont configurés dans [Log Management][6]. Les logs des jobs GitLab peuvent être identifiés par les tags `datadog.product:cipipeline` et `source:gitlab`.
+
+Les logs des jobs sont collectés dans [Log Management][9] et sont automatiquement corrélés avec le pipeline GitLab dans CI Visibility. Les fichiers logs de plus d'un Gio sont tronqués.
 
 Pour plus d'informations sur le traitement des logs de jobs collectés via l'intégration GitLab, consultez la [documentation des processeurs][17].
 
@@ -472,7 +480,7 @@ La page {{< ui >}}CI Pipeline List{{< /ui >}} affiche uniquement les données de
 [9]: /fr/logs/
 [10]: /fr/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /fr/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /fr/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[12]: /fr/continuous_integration/pipelines/gitlab/#logs-storage
 [13]: /fr/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /fr/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /fr/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
@@ -495,3 +503,4 @@ La page {{< ui >}}CI Pipeline List{{< /ui >}} affiche uniquement les données de
 [32]: /fr/glossary/#running-job
 [33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
 [34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
+[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

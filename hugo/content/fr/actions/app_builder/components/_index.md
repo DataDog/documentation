@@ -20,12 +20,6 @@ further_reading:
     tierces.
 title: Composants
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder est en préversion sur le site Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Présentation {#overview}
 Cette page fournit une liste de composants d'interface utilisateur que vous pouvez utiliser lors de la création d'applications dans App Builder.
 
@@ -43,7 +37,7 @@ Les composants de bouton possèdent les propriétés suivantes.
 
 #### Général {#general}
 
-Étiquette
+Label
 : Le texte qui s'affiche sur le bouton.<br>
 **Valeur**: chaîne ou expression
 
@@ -53,34 +47,34 @@ Intent
 : Contrôle la couleur du bouton, les couleurs représentant l'intention du bouton.<br>
 **Valeurs fournies**: default, danger, success, warning
 
-Est primaire
+Is Primary
 : Conçu pour attirer l'attention de l'utilisateur sur la ou les actions les plus importantes pour une page ou un workflow donné.<br>
 **Valeurs fournies**: on, off
 
-Est sans bordure
+Is Borderless
 : Supprime la bordure de tout bouton. Au survol, il obtient un remplissage d'arrière-plan.<br>
 **Valeurs fournies**: on, off
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies** : on, off
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events}
 
-Événement
+Event
 : **Valeur** : click
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data}
 
@@ -92,20 +86,20 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Valeur de l'appel" level="h3" %}}
+{{% collapse-content title="Valeur d'appel" level="h3" %}}
 Les composants de valeur d'appel possèdent les propriétés suivantes.
 
 #### Général {#general-1}
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
-Valeur
+Value
 : La valeur mise en évidence par l'appel.<br>
 **Valeur**: chaîne ou expression
 
-Unité
+Unit
 : L'unité associée à la valeur.<br>
 **Valeur**: chaîne ou expression
 
@@ -121,15 +115,15 @@ Size
 
 #### Apparence {#appearance-1}
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies** : on, off
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -149,7 +143,7 @@ Les composants de case à cocher ont les propriétés suivantes.
 
 #### Général {#general-2}
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
@@ -172,26 +166,26 @@ Options
 
 #### Apparence {#appearance-2}
 
-Est multiligne
+Is Multiline
 : Détermine si le texte de la case à cocher doit passer à la ligne ou être tronqué par des points de suspension.<br>
 **Valeurs fournies** : on, off
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-1}
 
-Événement
+Event
 : **Valeur** : change<br>
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data-2}
 
@@ -209,7 +203,7 @@ Les composants conteneurs possèdent les propriétés suivantes.
 
 #### Apparence {#appearance-3}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -224,21 +218,21 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 
 
 
-{{% collapse-content title="Custom chart" level="h3" %}}
-Les Custom chart components possèdent les propriétés suivantes.
+{{% collapse-content title="Graphique personnalisé" level="h3" %}}
+Les composants de graphique personnalisé possèdent les propriétés suivantes.
 
 #### Général {#general-3}
 
-Spécification Vega
+Vega Specification
 : Une chaîne représentant une spécification JSON Vega-Lite ou Vega valide.
 
 #### Apparence {#appearance-4}
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies**: on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -248,50 +242,50 @@ Affiche les paires de propriétés et de valeurs au format JSON.
 
 #### Exemple {#example-4}
 
-Pour un exemple montrant comment utiliser ce composant, voir [Custom charts][10].
+Pour un exemple montrant comment utiliser ce composant, voir [Graphiques personnalisés][10].
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Date picker" level="h3" %}}
-Les composants Date picker possèdent les propriétés suivantes.
+{{% collapse-content title="Sélecteur de date" level="h3" %}}
+Les composants de sélecteur de date possèdent les propriétés suivantes.
 
 #### Général {#general-4}
 
-Étiquette
-: L'étiquette affichée en haut du Date picker.<br>
+Label
+: L'étiquette affichée en haut du sélecteur de date.<br>
 **Valeur**: chaîne ou expression
 
-Info-bulle
+Tooltip
 : L'info-bulle à afficher lors du survol de l'étiquette de saisie. L'info-bulle peut contenir du markdown.<br>
 **Valeur**: chaîne ou expression
 
-Valeur par défaut
-: La date par défaut du Date picker, affichée sous forme d'horodatage UNIX en millisecondes.<br>
+Default Value
+: La date par défaut du sélecteur de date, affichée sous forme d'horodatage UNIX en millisecondes.<br>
 **Valeur**: entier
 
-Autoriser les dates futures
+Allow Future Dates
 : Détermine si la date peut être définie après la date du jour.<br>
 **Valeurs fournies**: on, off
 
 #### Apparence {#appearance-5}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-2}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
-**Exemple** : Voir [State functions][9].
+**Exemple** : Voir [Fonctions d'état][9].
 
 #### Inspecter les données {#inspect-data-5}
 
@@ -305,24 +299,24 @@ Les composants de sélection de plage de dates possèdent les propriétés suiva
 
 #### Général {#general-5}
 
-Période par défaut
+Default timeframe
 : La période par défaut affichée par le sélecteur de date.<br>
 **Valeurs fournies**: 5 dernières minutes, 30 dernières minutes, 1 dernière heure, 4 dernières heures, 1 dernier jour
 
 #### Apparence {#appearance-6}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies**: on, off
 
 #### Événements {#events-3}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data-6}
 
@@ -339,7 +333,7 @@ Les composants séparateurs ont les propriétés suivantes.
 
 #### Apparence {#appearance-7}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -355,24 +349,24 @@ Les composants d'entrée de fichier ont les propriétés suivantes.
 
 #### Général {#general-6}
 
-Types de fichiers acceptés
+Accepted File Types
 : Détermine les types de fichiers que le composant d'entrée de fichier accepte.<br>
 **Valeurs**: .csv, .json
 
 #### Apparence {#appearance-8}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies**: on, off
 
 #### Événements {#events-4}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data-8}
 
@@ -392,35 +386,35 @@ Source
 
 #### Apparence {#appearance-9}
 
-Ajustement
+Fit
 : Détermine les dimensions de l'image dans les limites du composant image.<br>
 **Valeurs fournies**: fill, contain, cover, none
 
-Remplissage
+Padding
 : Détermine la largeur de l'espace entre les limites de l'image et les limites du composant image.<br>
 **Valeurs fournies**: none, small, medium, large
 
-Alignement vertical
+Vertical Alignment
 : Détermine la position verticale de l'image dans les limites du composant image.<br>
 **Valeurs fournies**: aligner en haut, aligner au centre, aligner en bas
 
-Alignement horizontal 
+Horizontal Alignment 
 : Détermine la position horizontale de l'image dans les limites du composant image.<br>
 **Valeurs fournies** : aligner à gauche, aligner au centre, aligner à droite
 
-Bordure
+Border
 : Détermine si le composant image possède une bordure visuelle autour de ses bords.<br>
 **Valeurs fournies** : on, off
 
-Arrière-plan transparent
+Transparent Background
 : Détermine si l'arrière-plan à l'intérieur du composant image est transparent.<br>
 **Valeurs fournies** : on, off
 
-Est en chargement
+Is Loading
 : Détermine si une icône de chargement est affichée pendant le chargement de l'image.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -436,26 +430,26 @@ Les composants de logo d'intégration possèdent les propriétés suivantes.
 
 #### Général {#general-8}
 
-Identifiant d'intégration
+Integration Id
 : Spécifie l'icône de logo d'intégration à afficher.<br>
 **Valeur**: chaîne ou expression<br>
 **Exemples**: datadog, amazon-s3, postgres, okta
 
 #### Apparence {#appearance-10}
 
-Alignement horizontal
+Horizontal Alignment
 : Contrôle le positionnement horizontal du logo dans le composant.<br>
 **Valeurs fournies**: aligner à gauche, aligner au centre, aligner à droite
 
-Alignement vertical
+Vertical Alignment
 : Contrôle le positionnement vertical du logo dans le composant.<br>
 **Valeurs fournies** : aligner en haut, aligner au centre, aligner en bas
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies** : on, off
 
@@ -475,7 +469,7 @@ Title
 : Le titre du formulaire.<br>
 **Valeur**: chaîne ou expression
 
-Valeur par défaut
+Default value
 : La valeur par défaut que l'application renseigne dans le formulaire. Pour renseigner un champ spécifique, vous pouvez utiliser la notation JSON, par exemple `{"org":"frontend"}` pour renseigner le champ `org` avec la valeur `frontend`.<br>
 **Valeur**: chaîne ou expression
 
@@ -485,15 +479,15 @@ Chaque élément représente un champ dans le formulaire. Les champs ont chacun 
 
 Les champs possèdent certaines ou toutes les propriétés suivantes selon leur type de champ :
 
-Nom du champ
+Field name
 : L'identifiant unique d'un champ. Vous pouvez utiliser cet identifiant pour référencer le champ dans une expression.<br>
 **Valeur**: chaîne ou expression
 
-Étiquette
+Label
 : L'étiquette qui s'affiche au-dessus du champ.<br>
 **Valeur**: chaîne ou expression
 
-Contenu
+Content
 : Le contenu qui s'affiche dans un champ `text`.<br>
 **Valeur**: chaîne ou expression
 
@@ -501,40 +495,40 @@ Options
 : Les options disponibles dans un champ `select`. Les options doivent être un tableau d'objets, avec une clé `const` pour la valeur de l'option et une clé `title` facultative pour l'étiquette de l'option.<br>**Valeur**: La `label` et le `value` de chaque objet peuvent être une chaîne ou une expression.<br>
 Vous pouvez remplir chaque objet à l'aide de l'interface graphique (par défaut), ou basculer {{< ui >}}Raw{{< /ui >}} pour utiliser une saisie JSON brute afin de fournir l'ensemble du tableau d'objets.
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche dans un champ `textInput` ou `textArea` lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le champ est visible dans le formulaire.<br>
 **Valeurs fournies** : on, off
 
-Est requis
+Is Required
 : Détermine si le champ est requis pour soumettre le formulaire.<br>
 **Valeurs fournies** : on, off
 
 #### Apparence {#appearance-11}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-5}
 
-Événement
+Event
 : **Valeur** : submit, change, validate
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -553,30 +547,30 @@ Les composants d'entrée JSON ont les propriétés suivantes.
 
 #### Général {#general-10}
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.
 
-Valeur par défaut
+Default value
 : La valeur JSON par défaut que le composant affiche.
 
 #### Apparence {#appearance-12}
 
-Est en lecture seule
+Is Read Only
 : Détermine si le composant est en lecture seule.<br>
 **Valeurs fournies**: on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies**: on, off
 
 #### Événements {#events-6}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data-12}
 
@@ -600,18 +594,18 @@ Size
 : L'échelle de la modale.<br>
 **Valeurs fournies**: sm, md, lg
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies**: on, off
 
 #### Événements {#events-7}
 
-Événement
+Event
 : **Valeurs**: toggleOpen, close, open
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setIsOpen<br>
@@ -632,15 +626,15 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 {{% collapse-content title="Saisie numérique" level="h3" %}}
 Les composants de saisie numérique ont les propriétés suivantes.
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
-Valeur par défaut
+Default value
 : La valeur par défaut que l'application renseigne dans la zone de saisie.<br>
 **Valeur**: nombre ou expression qui s'évalue en un nombre
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
@@ -656,22 +650,22 @@ Max
 
 #### Apparence {#appearance-14}
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-8}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -695,7 +689,7 @@ Les composants radio ont les propriétés suivantes.
 
 #### Général {#general-12}
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
@@ -711,33 +705,33 @@ Options
        },
        {
            "label": "Production",
-           "value": « production »
+           "value": "production"
        }
      ]}
      ```
 
-Valeur par défaut
+Default value
 : La valeur qui est sélectionnée lors du chargement de la radio.<br>
 **Valeur** : chaîne ou expression
 
 #### Apparence {#appearance-15}
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-9}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -756,31 +750,31 @@ Les composants React renderer possèdent les propriétés suivantes.
 
 #### Général {#general-13}
 
-Définition du composant React
+React Component Definition
 : Le code qui est exécuté pour créer un composant React.<br>
 
-Props d'entrée du composant
+Component Input Props
 : Les props qui sont transmises au composant React et qui sont accessibles dans l'objet props du composant.
 
-État initial du composant
+Initial Component State
 : Définit les valeurs d'état initiales pour votre composant. Cet état est utilisé lors du premier rendu du composant ou si aucun état n'a encore été défini. Le composant peut accéder à ces données via <code>props.state</code>.<br>
 
 #### Apparence {#appearance-16}
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies**: on, off
 
 #### Événements {#events-10}
-Événement
+Event
 : **Valeurs**: définir l'état du composant, fonction de rappel
 
-Nom de la fonction
+Function Name
 : **Valeur**: <code>props.customFunctionName</code>
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 #### Inspecter les données {#inspect-data-16}
 
@@ -798,16 +792,16 @@ Pour un exemple montrant comment utiliser ce composant, consultez [React rendere
 
 
 
-{{% collapse-content title="Rechercher des monitors" level="h3" %}}
+{{% collapse-content title="Recherche" level="h3" %}}
 Les composants de recherche possèdent les propriétés suivantes.
 
 #### Général {#general-14}
 
-Valeur par défaut
+Default value
 : La valeur par défaut que l'application renseigne dans la zone de recherche.<br>
 **Valeur**: chaîne ou expression
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
@@ -817,22 +811,22 @@ Size
 : L'échelle du composant de recherche.<br>
 **Valeurs fournies**: sm, md, lg
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies**: on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-11}
 
-Événement
+Event
 : **Valeurs** : change, submit
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -850,16 +844,16 @@ Affiche les paires de propriétés et de valeurs au format JSON.
 Pour voir ce composant en contexte, consultez le plan d'application [EC2 Instance Manager][3].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Sélectionner" level="h3" %}}
-Les composants Select ont les propriétés suivantes.
+{{% collapse-content title="Sélection" level="h3" %}}
+Les composants de sélection ont les propriétés suivantes.
 
 #### Général {#general-15}
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
@@ -875,37 +869,37 @@ Options
         },
         {
             "label": "Production",
-            "value": « production »
+            "value": "production"
         }
       ]}
       ```
 
-Valeur par défaut
+Default value
 : La valeur qui est sélectionnée lors du chargement du Select.<br>
 **Valeur** : chaîne ou expression
 
-Multiselect
+Is Multiselect
 : Détermine si l'utilisateur peut sélectionner plus d'une option à la fois.<br>
 **Valeurs fournies** : on, off
 
 #### Apparence {#appearance-18}
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-12}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -923,7 +917,7 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 
 
 {{% collapse-content title="Panneau latéral" level="h3" %}}
-Les composants du panneau latéral ont les propriétés suivantes.
+Les composants de panneau latéral ont les propriétés suivantes.
 
 #### Général {#general-16}
 
@@ -933,7 +927,7 @@ Title
 
 #### Apparence {#appearance-19}
 
-Largeur
+Width
 : Détermine la largeur du panneau latéral. Un signe de pourcentage (`%`) doit être inclus après la valeur.<br>
 **Valeur**: entier
 
@@ -943,12 +937,12 @@ Masquer le bouton de fermeture
 
 #### Événements {#events-13}
 
-Événement
+Event
 : **Valeurs** : toggle open, close, open
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setIsOpen<br>
@@ -964,7 +958,7 @@ Affiche les propriétés et les valeurs au format JSON.
 
 {{% collapse-content title="Onglet" level="h3" %}}
 
-Les composants Tabs ont les propriétés suivantes.
+Les composants d'onglet ont les propriétés suivantes.
 
 #### Tabs {#tabs}
 
@@ -975,39 +969,39 @@ Une liste de vues d'onglets. Utilisez le ({{< ui >}}\+{{< /ui >}}) pour ajouter 
 
 Style
 : Le style de coloration utilisé pour le composant d'onglet.<br>
-**Valeurs fournies**: Par défaut, violet, rose, orange, rouge, vert
+**Valeurs fournies**: Default, purple, pink, orange, red, green
 
-Alignement
-: La manière dont les Tabs sont alignés au sein du composant Tabs.<br>
-**Provided values**: Horizontal (→), vertical (↓)
+Alignment
+: La manière dont les onglets sont alignés au sein du composant d'onglet.<br>
+**Valeurs fournies**: Horizontal (→), vertical (↓)
 
 Impact
-: Contrôle si l'arrière-plan du Tabs sélectionné est entièrement coloré ou si seule une petite bande en bas est colorée.<br>
-**Provided values**: High, low
+: Contrôle si l'arrière-plan de l'onglet sélectionné est entièrement coloré ou si seule une petite bande en bas est colorée.<br>
+**Valeurs fournies**: High, low
 
 
 #### Apparence {#appearance-20}
 
-Masquer Tabs
-: Contrôle si les tab markers sont affichés.<br>
+Hide Tabs
+: Contrôle si les marqueurs d'onglet sont affichés.<br>
 **Valeurs fournies**: on, off
 
-Masquer Body
-: Contrôle si le Body des Tabs est affiché.<br>
+Hide Body
+: Contrôle si le corps des onglets est affiché.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-14}
 
-Événement
+Event
 : **Valeur**: change
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setTabIndex<br>
@@ -1020,7 +1014,7 @@ Affiche les paires de propriétés et de valeurs au format JSON.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Table (Tableau)" level="h3" %}}
+{{% collapse-content title="Tableau" level="h3" %}}
 
 Les composants de tableau possèdent les propriétés suivantes.
 
@@ -1030,7 +1024,7 @@ Title
 : Un titre pour le tableau. Sélectionnez {{< ui >}}Markdown{{< /ui >}} pour un formatage personnalisé.<br>
 **Valeur**: chaîne
 
-Source de données
+Data source
 : Le tableau d'objets à afficher dans un tableau.<br>
 **Valeurs**: requête, données de démonstration, composants
 
@@ -1038,26 +1032,26 @@ Source de données
 
 Chaque colonne de données provenant de la source de données est représentée ici et possède les propriétés suivantes :
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut de la colonne.<br>
 **Valeur**: chaîne ou expression
 
-Chemin de données
+Data path
 : Chemin JSON pour accéder aux valeurs imbriquées dans les objets et les tableaux d'une colonne donnée.<br>
 **Valeur**: chaîne ou expression
 
-Formatage
+Formatting
 : Le type de format que prend la colonne.<br>
 **Valeurs fournies**: chaîne, lien, pastille de statut, date / heure, markdown, tags, barre de pourcentage, nombre, barre de score, avatar
 
-Triable
+Sortable
 : Détermine si l'utilisateur peut effectuer un tri par colonne.<br>
 
-Copiable
+Copyable
 : Détermine si l'utilisateur peut cliquer pour copier le contenu de la colonne.<br>
 **Valeurs fournies**: on, off
 
-Filtrable
+Filterable
 : Détermine si une option de filtrage est disponible pour la colonne.<br>
 **Valeurs fournies**: on, off
 
@@ -1065,15 +1059,15 @@ Certaines colonnes possèdent des propriétés supplémentaires basées sur leur
 
 #### Pagination {#pagination}
 
-Possède un résumé
+Has summary
 : Détermine s'il faut afficher un résumé de pagination directement au-dessus du tableau.<br>
 **Valeurs fournies**: on, off
 
-Taille de page
+Page size
 : Nombre de lignes à afficher par page.<br>
 **Valeur**: nombre ou expression qui s'évalue en un nombre
 
-Nombre total
+Total count
 : Nombre total de lignes à afficher dans le tableau.<br>
 **Valeur**: nombre ou expression qui s'évalue en un nombre
 
@@ -1084,7 +1078,7 @@ Type
 #### Tri {#sorting}
 
 Sélectionnez la colonne et la direction pour le tri par défaut du tableau.
-Colonne
+Column
 : La colonne selon laquelle effectuer le tri.<br>
 **Valeur**: nom de colonne
 
@@ -1096,15 +1090,15 @@ Direction
 
 L'ajout d'une action de ligne ajoute une colonne {{< ui >}}Actions{{< /ui >}} au tableau, qui contient des boutons d'action définis par l'utilisateur. Les lignes peuvent avoir plusieurs actions. Les actions possèdent les propriétés suivantes :
 
-Étiquette
+Label
 : Le texte qui s'affiche sur le bouton d'action.<br>
 **Valeur**: chaîne ou expression
 
-Primaire
+Primary
 : Conçu pour attirer l'attention de l'utilisateur sur la ou les actions les plus importantes pour une page ou un workflow donné.<br>
 **Valeurs fournies**: on, off
 
-Sans bordure
+Borderless
 : Supprime la bordure de tout bouton. Au survol, il obtient un remplissage d'arrière-plan.<br>
 **Valeurs fournies**: on, off
 
@@ -1112,61 +1106,61 @@ Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies** : on, off
 
-Niveau
+Level
 : Contrôle la couleur du bouton en fonction de son intention.<br>
 **Valeurs fournies** : default, danger, success, warning
 
-Réactions
+Reactions
 : Les réactions que le bouton déclenche. Un bouton peut avoir plusieurs réactions.<br>
 **Valeurs fournies** : download file, open modal, close modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action, custom<br>
 Certains types de réaction possèdent des propriétés supplémentaires.
 
 #### Apparence {#appearance-21}
 
-Défilable
+Scrollable
 : Détermine les manières dont le tableau est défilable.<br>
 **Valeurs fournies** : both, vertical
 
-Est en chargement
+Is Loading
 : Affiche un indicateur de chargement.<br>
 **Valeurs fournies** : on, off
 
-Retour à la ligne
+Has text wrapping
 : Détermine si le texte de la cellule revient à la ligne.<br>
 **Valeurs fournies** : on, off
 
-A des sous-lignes
+Has subrows
 : Active les sous-lignes pour chaque ligne. Incluez la propriété `subRows` dans la source de données.<br>
 **Valeurs fournies** : on, off
 
-Est interrogeable
+Is searchable
 : Détermine s'il faut ajouter une barre de recherche au tableau. <br>
 **Valeurs fournies** : on, off
 
-Afficher les options de tri
+Show sort options
 : Ajoute un bouton {{< ui >}}Sort{{< /ui >}} au tableau qui offre aux utilisateurs des options de tri.<br>
 **Valeurs fournies** : on, off
 
-Afficher les options de colonne
+Show column options
 : Ajoute un bouton {{< ui >}}Columns{{< /ui >}} au tableau pour afficher, masquer ou réorganiser les colonnes du tableau.<br>
 **Valeurs fournies** : on, off
 
-Possède un filtre de plage de dates
+Has date range filter
 : Ajoute un filtre de plage de dates au tableau.<br>
 **Valeurs fournies** : on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-15}
 
-Événement
+Event
 : **Valeurs** : pageChange, tableRowClick
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setSelectedRow<br>
@@ -1194,25 +1188,25 @@ Les composants texte possèdent les propriétés suivantes.
 
 #### Général {#general-18}
 
-Contenu
+Content
 : Le contenu affiché par le composant.<br>
 **Valeur**: chaîne ou expression
 
-Type de contenu
+Content type
 : Détermine comment le texte est rendu. Lorsque {{< ui >}}Markdown{{< /ui >}} est sélectionné, le composant texte prend en charge la [syntaxe Markdown de base][8], y compris les images que vous hébergez ailleurs.<br>
 **Valeurs fournies**: texte brut, Markdown
 
 #### Apparence {#appearance-22}
 
-Alignement du texte
+Text alignment
 : Détermine l'alignement horizontal du texte au sein du composant.<br>
 **Valeurs fournies** : aligner à gauche, aligner au centre, aligner à droite
 
-Alignement vertical
+Vertical alignment
 : Détermine l'alignement vertical du texte au sein du composant.<br>
 **Valeurs fournies** : aligner en haut, aligner au centre, aligner en bas
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
@@ -1233,36 +1227,36 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 {{% collapse-content title="Zone de texte" level="h3" %}}
 Les composants de zone de texte possèdent les propriétés suivantes.
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
-Valeur par défaut
+Default value
 : La valeur qui est sélectionnée au chargement de la zone de texte.<br>
 **Valeur**: chaîne ou expression
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
 #### Apparence {#appearance-23}
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies**: on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-16}
 
-Événement
+Event
 : **Valeurs** : change, submit
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -1278,36 +1272,36 @@ Affiche les paires de propriétés et de valeurs au format JSON.
 {{% collapse-content title="Saisie de texte" level="h3" %}}
 Les composants de saisie de texte possèdent les propriétés suivantes.
 
-Étiquette
+Label
 : Le texte qui s'affiche en haut du composant.<br>
 **Valeur**: chaîne ou expression
 
-Valeur par défaut
+Default value
 : La valeur sélectionnée au chargement de la saisie de texte.<br>
 **Valeur**: chaîne ou expression
 
-Texte d'espace réservé
+Placeholder text
 : Le texte qui s'affiche lorsqu'aucune valeur n'est saisie.<br>
 **Valeur**: chaîne ou expression
 
 #### Apparence {#appearance-24}
 
-Est désactivé
+Is Disabled
 : Applique un style désactivé et supprime les interactions.<br>
 **Valeurs fournies**: on, off
 
-Est visible
+Is Visible
 : Détermine si le composant est visible pour l'utilisateur final. En mode édition, tous les composants restent visibles.<br>
 **Valeurs fournies** : on, off
 
 #### Événements {#events-17}
 
-Événement
+Event
 : **Valeurs** : change, submit
 
-Réaction
+Reaction
 : **Valeurs** : les exemples incluent open modal, trigger action et set component state<br>
-Consultez [Events][1] pour obtenir la liste complète des réactions disponibles.
+Consultez [Evénements][1] pour obtenir la liste complète des réactions disponibles.
 
 State Function
 : setValue<br>
@@ -1324,7 +1318,7 @@ Pour voir ce composant en contexte, consultez le plan d'application [Metrics Exp
 {{% /collapse-content %}}
 
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
