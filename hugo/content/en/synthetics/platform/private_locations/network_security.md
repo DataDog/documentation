@@ -1,0 +1,208 @@
+---
+title: Private Location Network Security Hardening
+description: Restrict the network access of your Synthetic Monitoring private locations with egress allow and block lists, network segmentation, and scoped keys.
+further_reading:
+- link: "synthetics/platform/private_locations/configuration"
+  tag: "Documentation"
+  text: "Private Locations Configuration"
+- link: "synthetics/platform/private_locations/dimensioning"
+  tag: "Documentation"
+  text: "Dimension your private locations"
+---
+
+## Overview
+
+A private location worker runs Synthetic tests against any endpoint that its host can reach. By default, the worker does not restrict outbound (egress) network access. Any user who can create a test on the private location can point that test at any reachable address, including cloud metadata services, secret stores, and cluster APIs.
+
+To reduce this risk, combine the following controls:
+
+- [Restrict egress with allow and block lists](#restrict-egress-with-allow-and-block-lists) in the worker configuration.
+- [Apply the recommended defaults](#recommended-defaults).
+- [Allow access to internal services on purpose](#allow-access-to-internal-services-on-purpose) only where tests need it.
+- [Segment the network](#segment-the-network) around the worker.
+- [Scope API and application keys](#scope-api-and-application-keys).
+
+The allow and block lists apply to all test types that run on the private location.
+
+## Restrict egress with allow and block lists
+
+The worker supports five options to control which addresses and hostnames tests can reach. For the full reference, see [All configuration options][1].
+
+| Option | Type | Default | Effect |
+|--------|------|---------|--------|
+| [`enableDefaultBlockedIpRanges`][1] | Boolean | `false` | Blocks reserved and private IP ranges (see [Default blocked ranges](#default-blocked-ranges)). |
+| [`blockedIPRanges`][1] | Array of strings, per IP family | none | Blocks additional IP addresses or CIDR ranges. |
+| [`allowedIPRanges`][1] | Array of strings, per IP family | none | Allows IP addresses or CIDR ranges that a block list otherwise blocks. |
+| [`blockedDomainNames`][1] | Array of strings | none | Blocks hostnames. Accepts wildcards such as `*.example.com`. |
+| [`allowedDomainNames`][1] | Array of strings | none | Allows hostnames that a block list otherwise blocks. Accepts wildcards. |
+
+The worker evaluates the lists in this order:
+
+1. Before the DNS lookup, the worker checks the hostname. A hostname that matches `allowedDomainNames` is allowed, and the worker skips the IP checks for that request. A hostname that matches `blockedDomainNames` is blocked.
+2. After the DNS lookup, the worker checks the resolved IP address. An address in `allowedIPRanges` is allowed. An address in `blockedIPRanges`, or in the default blocked ranges when `enableDefaultBlockedIpRanges` is `true`, is blocked.
+
+Allow lists take precedence over block lists. `allowedIPRanges` has no effect if no IP range is blocked. In that case, the worker logs a warning at startup.
+
+<div class="alert alert-warning">A hostname in <code>allowedDomainNames</code> bypasses all IP checks. If an allowed hostname resolves to a private or metadata address, tests can reach that address. Add only hostnames whose DNS records you control.</div>
+
+### Default blocked ranges
+
+When `enableDefaultBlockedIpRanges` is `true`, the worker blocks the following IPv4 ranges:
+
+- `0.0.0.0/8`, `10.0.0.0/8`, `100.64.0.0/10`, `127.0.0.0/8`, `169.254.0.0/16`, `172.16.0.0/12`, `192.168.0.0/16`
+- `192.0.0.0/24`, `192.0.2.0/24`, `192.31.196.0/24`, `192.52.193.0/24`, `192.88.99.0/24`, `192.175.48.0/24`, `198.18.0.0/15`, `198.51.100.0/24`, `203.0.113.0/24`
+- `224.0.0.0/4`, `240.0.0.0/4`, `255.255.255.255/32`
+
+It also blocks IPv6 special-purpose ranges, including `::1/128`, `fc00::/7`, `fe80::/10`, `::ffff:0:0/96`, and `2002::/16`. These ranges come from the IANA [IPv4][2] and [IPv6][3] Special-Purpose Address Registries.
+
+**Note**: The default list includes the private ranges `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`. If your private location tests internal applications, add the address ranges of those applications to `allowedIPRanges`.
+
+## Recommended defaults
+
+Datadog recommends the following configuration:
+
+1. Set `enableDefaultBlockedIpRanges` to `true`.
+2. Add only the ranges that your tests need to `allowedIPRanges`. Use the smallest range possible, and use `/32` (IPv4) or `/128` (IPv6) for single hosts.
+3. Use `allowedDomainNames` only for hostnames whose DNS records you control.
+4. Optionally, to restrict tests to a known set of hostnames, set `blockedDomainNames` to `*` and list the hostnames that tests need in `allowedDomainNames`. A `*` entry matches every hostname, so the worker blocks every hostname that is not explicitly allowed.
+
+The following examples block the default ranges and allow one internal application subnet and one hostname:
+
+{{< tabs >}}
+{{% tab "JSON configuration" %}}
+
+```json
+{
+  "enableDefaultBlockedIpRanges": true,
+  "allowedIPRanges": {
+    "4": ["10.20.30.0/24"]
+  },
+  "allowedDomainNames": ["app.internal.example.com"]
+}
+```
+
+{{% /tab %}}
+{{% tab "Docker" %}}
+
+```shell
+docker run --rm -v $PWD/worker-config.json:/etc/datadog/synthetics-check-runner.json \
+  datadog/synthetics-private-location-worker \
+  --enableDefaultBlockedIpRanges \
+  --allowedIPRanges.4="10.20.30.0/24" \
+  --allowedDomainNames="app.internal.example.com"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Merge the options into the JSON configuration that you pass in `configFile`:
+
+```yaml
+configFile: |-
+  {
+    "enableDefaultBlockedIpRanges": true,
+    "allowedIPRanges": {
+      "4": ["10.20.30.0/24"]
+    },
+    "allowedDomainNames": ["app.internal.example.com"]
+  }
+```
+
+If you manage the configuration in your own secret with `configSecret`, add the same options to that secret.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Allow access to internal services on purpose
+
+Some tests need to reach services that the default block list covers, such as the cloud instance metadata service (IMDS), a Vault server, or the Kubernetes API. Keep `enableDefaultBlockedIpRanges` set to `true`, and allow only the exact addresses that tests need.
+
+| Service | Typical address | Covered by default range | Example `allowedIPRanges` entry |
+|---------|-----------------|--------------------------|---------------------------------|
+| IMDS (AWS, GCP, Azure) | `169.254.169.254` | `169.254.0.0/16` | `169.254.169.254/32` |
+| Vault | A private address, for example `10.0.5.12` | `10.0.0.0/8` | `10.0.5.12/32` |
+| Kubernetes API | The cluster service IP, for example `172.20.0.1` | `172.16.0.0/12` | `172.20.0.1/32` |
+
+For example:
+
+```json
+{
+  "enableDefaultBlockedIpRanges": true,
+  "allowedIPRanges": {
+    "4": ["169.254.169.254/32", "10.0.5.12/32"]
+  }
+}
+```
+
+Follow these guidelines:
+
+- Allow the smallest range that the test needs. Do not allow the full `169.254.0.0/16` or `10.0.0.0/8` range.
+- Do not disable the default block list to reach one service.
+- Prefer an IP entry in `allowedIPRanges` over a hostname in `allowedDomainNames`. A hostname entry bypasses all IP checks for every address that the hostname resolves to.
+- Review which users can create tests on a private location that can reach these services.
+
+## Segment the network
+
+<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the pending hardening notes before publishing. -->
+
+The worker options are a second layer of protection. They do not replace network controls. Restrict egress at the network level as well:
+
+- Run the worker in a dedicated subnet, namespace, or VPC.
+- Restrict outbound traffic with firewall rules, security groups, or a Kubernetes `NetworkPolicy`.
+- Allow outbound traffic to the [Datadog intake endpoints][4] for your site and to the endpoints that your tests target.
+
+For example, the following `NetworkPolicy` allows DNS and HTTPS egress from the worker pods, and blocks egress to the metadata service and private ranges:
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: synthetics-private-location-egress
+  namespace: synthetics
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: synthetics-private-location
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 10.0.0.0/8
+        - 172.16.0.0/12
+        - 192.168.0.0/16
+        - 169.254.0.0/16
+    ports:
+    - protocol: TCP
+      port: 443
+```
+
+Adjust the pod labels, ports, and ranges to match your deployment and the endpoints that your tests target.
+
+## Scope API and application keys
+
+<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the pending key scoping guidance, including exact scope names, before publishing. -->
+
+- Use a dedicated key for each private location.
+- Give each key the minimum permissions that it needs.
+- Store keys in a secret store, and rotate them on a regular schedule.
+
+## Known limitations
+
+<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the browser test findings before publishing. -->
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/platform/private_locations/configuration/#all-configuration-options
+[2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[3]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[4]: /synthetics/platform/private_locations/#datadog-private-locations-endpoints
