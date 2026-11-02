@@ -30,7 +30,7 @@ To add, edit, or delete preferences, you need the **Security Monitoring Findings
 2. In the **Ownership preferences** section, click **Add tag mapping**, **Add exclusion**, or **Add instruction**.
 3. Fill in the form and click **Add**.
 
-Every rule needs a **Name** that is unique within its panel. You cannot rename a rule after you create it; to rename it, delete it and add it again.
+Every rule needs a **Name** that is unique within its panel. You cannot rename a rule after you create it. To rename a rule, delete it and add it again.
 
 The Ownership Agent picks up saved rules automatically. Each resource keeps its current ownership suggestion until its next inference run.
 
