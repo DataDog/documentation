@@ -56,26 +56,28 @@ For example, add this resource to your Terraform configuration to combine two CP
 
 ```hcl
 resource "datadog_derived_metric" "cpu_total" {
-  name    = "custom.cpu.total"
-  formula = "a + b"
-  queries = [
-    {
-      name        = "a"
-      data_source = "metrics"
-      query       = "avg:system.cpu.user{*}"
-    },
-    {
-      name        = "b"
-      data_source = "metrics"
-      query       = "avg:system.cpu.system{*}"
-    },
-  ]
+  name = "custom.cpu.total"
+  definition = {
+    formula = "a + b"
+    queries = [
+      {
+        name        = "a"
+        data_source = "metrics"
+        query       = "avg:system.cpu.user{*}"
+      },
+      {
+        name        = "b"
+        data_source = "metrics"
+        query       = "avg:system.cpu.system{*}"
+      },
+    ]
+  }
 }
 ```
 
 Run `terraform plan` to review the changes, then run `terraform apply` to create the derived metric.
 
-Changes to `formula` or `queries` update the existing definition. Changing `name` replaces the derived metric.
+Changes to `definition.formula` or `definition.queries` update the existing definition. Changing `name` replaces the derived metric.
 
 To manage an existing derived metric, add its resource configuration and import it by name:
 
