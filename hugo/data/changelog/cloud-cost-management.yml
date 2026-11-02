@@ -11,3 +11,9 @@ entries:
     operations:
       - ListCostOCIConfigs
     title: Publish Cloud Cost Management cloud account listing
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41134
+    operations:
+      - SearchCostRecommendations
+    title: Document errors and page size limits for cost recommendations search

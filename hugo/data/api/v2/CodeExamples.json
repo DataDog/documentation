@@ -1,4 +1,21 @@
 {
+  "EvaluateAIGuardRequest": [
+    {
+      "group": "ai_guard",
+      "suffix": "",
+      "description": "Evaluate an AI Guard request returns \"OK\" response"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_3923646360",
+      "description": "Evaluate an AI Guard request with a numeric confidence threshold"
+    },
+    {
+      "group": "ai_guard",
+      "suffix": "_1377048937",
+      "description": "Evaluate an AI Guard request with per-category confidence thresholds"
+    }
+  ],
   "CreateApmRetentionFilter": [
     {
       "group": "apm_retention_filters",
@@ -341,13 +358,6 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Create a Workload Protection agent rule (US1-FED) returns \"OK\" response"
-    }
-  ],
   "CreateCSMThreatsAgentRule": [
     {
       "group": "csm_threats",
@@ -370,13 +380,6 @@
       "group": "csm_threats",
       "suffix": "",
       "description": "Create a Workload Protection policy returns \"Created\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "csm_threats",
-      "suffix": "",
-      "description": "Update a Workload Protection agent rule (US1-FED) returns \"OK\" response"
     }
   ],
   "UpdateCSMThreatsAgentPolicy": [
@@ -482,6 +485,13 @@
       "group": "case_management_type",
       "suffix": "",
       "description": "Create a case type returns \"CREATED\" response"
+    }
+  ],
+  "CreateAWSCloudAuthIntakeMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create an AWS cloud authentication intake mapping returns \"Created\" response"
     }
   ],
   "CreateCostAWSCURConfig": [
@@ -788,6 +798,16 @@
   "CreateExecutionPolicy": [
     {
       "group": "execution_policy",
+      "suffix": "_1868371302",
+      "description": "Create a Slack execution policy returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_3240435177",
+      "description": "Create a Slack execution policy with scope and targets returns \"Created\" response"
+    },
+    {
+      "group": "execution_policy",
       "suffix": "",
       "description": "Create an execution policy returns \"Created\" response"
     },
@@ -802,6 +822,11 @@
       "group": "execution_policy",
       "suffix": "",
       "description": "Update an execution policy returns \"OK\" response"
+    },
+    {
+      "group": "execution_policy",
+      "suffix": "_2851872075",
+      "description": "Update an execution policy to Slack with scope and targets returns \"OK\" response"
     }
   ],
   "CancelExperiment": [
@@ -1474,13 +1499,6 @@
       "group": "logs_restriction_queries",
       "suffix": "",
       "description": "Grant role to a restriction query returns \"OK\" response"
-    }
-  ],
-  "CreateBulkTagsMetricsConfiguration": [
-    {
-      "group": "metrics",
-      "suffix": "",
-      "description": "Configure tags for multiple metrics returns \"Accepted\" response"
     }
   ],
   "CreateDerivedMetric": [
@@ -2197,6 +2215,13 @@
       "description": "Create a new RUM application without default retention filters returns \"Created\" response"
     }
   ],
+  "GetServiceRepositoryInfo": [
+    {
+      "group": "rum",
+      "suffix": "",
+      "description": "Get service repository information returns \"OK\" response"
+    }
+  ],
   "SearchRUMEvents": [
     {
       "group": "rum",
@@ -2730,6 +2755,13 @@
       "description": "Search security findings returns \"OK\" response with pagination"
     }
   ],
+  "StartSecurityMonitoringRuleProposal": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Start a rule proposal returns \"Accepted\" response"
+    }
+  ],
   "SendSecurityMonitoringNotificationPreview": [
     {
       "group": "security_monitoring",
@@ -3219,6 +3251,13 @@
       "group": "threat_intelligence",
       "suffix": "",
       "description": "Ingest STIX threat intelligence returns \"OK\" response"
+    }
+  ],
+  "UpdateTemporaryGrantRequest": [
+    {
+      "group": "usage_metering",
+      "suffix": "",
+      "description": "Decide a temporary grant request returns \"OK\" response"
     }
   ],
   "CreateUser": [

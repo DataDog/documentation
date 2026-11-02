@@ -1,0 +1,7 @@
+entries:
+  - change_type: added
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41045
+    operations:
+      - RerouteOnCallPage
+    title: Add POST /api/v2/on-call/pages/page_id/reroute endpoint
