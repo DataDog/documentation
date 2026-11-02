@@ -220,7 +220,7 @@ For example, to calculate the time elapsed in seconds since the last reported ba
 ```text
 time() - max:backup.last_completed_timestamp{*}
 ```
-**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in Unix milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
+**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in UNIX milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
 
 To return the elapsed time in seconds, divide the millisecond field by 1000:
 
