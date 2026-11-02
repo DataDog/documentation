@@ -155,9 +155,9 @@ If the traffic between your private location and Datadog has to go through a pro
 
 #### Blocking reserved IPs
 
-By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the {{< ui >}}Block reserved IPs{{< /ui >}} button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
+New private locations block the reserved IP ranges by default. Private locations created before <RELEASE_DATE_PLACEHOLDER> do not change. The {{< ui >}}Block reserved IPs{{< /ui >}} toggle is on by default. It blocks a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and sets the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file. To disable the block, turn off the toggle or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
 
-If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
+If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
@@ -186,7 +186,7 @@ Run this command to boot your private location worker by mounting your configura
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
@@ -206,7 +206,7 @@ This command starts a Docker container and makes your private location ready to 
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 2. Start your container with:
 
@@ -273,7 +273,7 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
               secretName: private-location-worker-config
     ```
 
-    **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
@@ -306,7 +306,9 @@ Alternatively:
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-**Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+
+In multi-container mode, the Helm chart creates a Kubernetes NetworkPolicy by default. To disable it, set `multiContainer.networkPolicy.create` to `false`.
 
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
 [3]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#define-container-environment-variables-using-secret-data
@@ -347,7 +349,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 ```
 **Notes:**
 
-- If you have blocked reserved IPs, configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
+- Reserved IPs are blocked by default, configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
@@ -387,7 +389,7 @@ Create a new Fargate task definition that matches the following. Replace each pa
 }
 ```
 
-**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+**Note:** AWS Fargate does not support the `NET_ADMIN` capability. The private location still blocks reserved IPs for API tests. Chrome and Edge browser tests are not protected. To disable the block, set `enableDefaultBlockedIpRanges` to `false`.
 
 {{< /tab >}}
 
@@ -474,7 +476,7 @@ If you didn't save all the configuration in the secret manager, you can still pa
 }
 ```
 
-**Note:** Because the private location firewall option is not supported on AWS Fargate, the `enableDefaultBlockedIpRanges` parameter cannot be set to `true`.
+**Note:** AWS Fargate does not support the `NET_ADMIN` capability. The private location still blocks reserved IPs for API tests. Chrome and Edge browser tests are not protected. To disable the block, set `enableDefaultBlockedIpRanges` to `false`.
 
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 
@@ -521,7 +523,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
               name: private-location-worker-config
     ```
 
-    **Note:** If you have blocked reserved IPs, configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
+    **Note:** Reserved IPs are blocked by default, configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
 
 3. Apply the configuration:
 
