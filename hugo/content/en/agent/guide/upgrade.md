@@ -1,6 +1,6 @@
 ---
 title: Upgrade to Datadog Agent 7
-description: Instructions for upgrading from Datadog Agent 5 or 6 to Agent 7 across Linux, Windows, and macOS platforms with Python 3 compatibility notes.
+description: Instructions for upgrading from Datadog Agent 5 or 6 to Agent 7 across Linux, Windows, macOS, and AIX platforms with Python 3 compatibility notes.
 aliases:
 - /agent/versions/upgrade_to_agent_v7/
 - /agent/upgrade/
@@ -76,6 +76,11 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 ```
 
 {{% /tab %}}
+{{% tab "AIX" %}}
+
+On AIX, the legacy Agent is the Datadog UNIX Agent (based on Agent 5); Agent 6 was never distributed on AIX. To upgrade to Agent 7, follow the [migrate from the UNIX Agent instructions][4]: back up the existing configuration, uninstall the UNIX Agent with `installp -u datadog-unix-agent`, then [install Agent 7][5].
+
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note:** The upgrade process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box. See the [Python 3 Custom Check Migration][1] guide to discover how to migrate your custom check from Python 2 to Python 3.
@@ -85,3 +90,5 @@ DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.da
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/guide/python-3/
+[4]: /agent/supported_platforms/aix/#migrate-from-the-unix-agent
+[5]: /agent/supported_platforms/aix/#install-the-agent
