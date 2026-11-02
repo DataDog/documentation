@@ -63,7 +63,7 @@ Analyze trends in GPU resources and metrics (including GPU utilization, power, a
 
 {{< img src="gpu_monitoring/training-page.png" alt="GPU Monitoring Training page showing run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
 
-{{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
+{{< img src="gpu_monitoring/inference-page3.png" alt="GPU Monitoring Inference page showing key metrics for a model deployment, such as time-to-first-token and output tokens." style="width:100%;" >}}
 
 ### Safeguard device reliability
 GPUs are an expensive and scarce resource with higher failure rates than standard servers. GPU Monitoring provides out-of-the-box monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
