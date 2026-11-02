@@ -99,7 +99,7 @@ The [Datadog MCP Server][8] is enabled by default. You can connect to any API us
 
 Add skills from the [Skills Library][18] to give an agent task-specific knowledge and procedures without putting them in its main instructions.
 
-Agents load skills automatically through the Datadog MCP Server. If you disable the Datadog MCP Server on an agent, the agent cannot use its skills.
+Agents load skills automatically through the [Datadog MCP Server][8], which is enabled by default. If you disable the Datadog MCP Server on an agent, the agent cannot use its skills.
 
 To add a skill:
 * In the **Skills** section of the agent configuration, click **+** and select the skill.
