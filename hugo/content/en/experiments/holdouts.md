@@ -140,7 +140,7 @@ An experiment that ships control does not create a qualifying exposure. Subjects
 
 ### Variance reduction
 
-The primary analysis uses [CUPED][7] when it is enabled in the analysis settings. The preliminary analysis does not use CUPED. Its purpose is to monitor early results while the treatment is changing, and its timeseries results do not use the CUPED calculation. Skipping it avoids unnecessary computation.
+The primary analysis uses [CUPED][7] when it is enabled in the analysis settings. The preliminary analysis does not use CUPED.
 
 Using the first qualifying exposure also gives CUPED the correct point from which to look back. Data collected after a subject could receive a shipped change must not be treated as data from before exposure.
 
