@@ -24,7 +24,7 @@ Agent Tracking enables you to:
 - Compare two versions side by side, including a diff of their instructions, tools, and model
 - Jump to the spans for an agent or a specific version
 
-<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent-tracking-hero.png</code>): The Agents section of an app's Overview: Agent Usage chart, Recent agents table, and the Most Expensive Agents and Highest Latency Agents tiles.</div>
+{{< img src="llm_observability/monitoring/agent-tracking-hero.png" alt="Agents section of an app's Overview in Agent Observability, showing Agent Usage, Recent agents, Most Expensive Agents, and Highest Latency Agents." style="width:100%;" >}}
 
 Agent Tracking is built on three pieces of data:
 
@@ -173,7 +173,7 @@ All manifest fields are optional. Values that cannot be reported are dropped, an
 | `model_settings` | Inference parameters such as `temperature`, `max_tokens`, and `top_p`. Provider-specific keys are dropped. |
 | `tools` | The tools the agent can call. Each tool requires a `name` and accepts an optional `description` and `parameters`. |
 
-<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_version_manifest.png</code>): A single version selected in the agent side panel, showing its instructions, tools, model, and model settings.</div>
+{{< img src="llm_observability/monitoring/agent-version-manifest.png" alt="A single agent version in the agent side panel, showing its tools along with usage, cost, and latency charts." style="width:100%;" >}}
 
 ## Use Agent Tracking in Agent Observability
 
@@ -188,11 +188,11 @@ Tokens and cost are summed from the LLM and embedding spans attributed to each a
 
 Click an agent to open a side panel with metrics broken down by version. Select a version to see its instructions and manifest.
 
-<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_details.png</code>): The side panel for an agent with three versions: the per-version table and timeseries.</div>
+{{< img src="llm_observability/monitoring/agent-version-details.png" alt="Agent side panel showing usage by version and a table of versions with spans, tokens, cost, latency, and error rate." style="width:100%;" >}}
 
 Click {{< ui >}}Compare{{< /ui >}} to diff two versions side by side, including their instructions, tools, and model.
 
-<div class="alert alert-warning"><strong>Screenshot placeholder</strong> (<code>agent_version_compare.png</code>): Two versions compared, with an instructions diff, added tools, and a model change.</div>
+{{< img src="llm_observability/monitoring/agent-version-compare.png" alt="Two agent versions compared side by side, with a diff of their instructions and usage by version." style="width:100%;" >}}
 
 Click {{< ui >}}View Spans{{< /ui >}} to open Trace Explorer filtered to that agent or version.
 
