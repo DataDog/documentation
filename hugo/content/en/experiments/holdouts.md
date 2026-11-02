@@ -24,8 +24,6 @@ The following sections describe holdouts with Datadog Feature Flags. Use a consi
 
 ## Holdout types
 
-The **inclusion period** sets the dates when experiments can join the holdout.
-
 | Type | Experiments included |
 | --- | --- |
 | Global | Automatically includes eligible experiments with the same subject type. They must start during the inclusion period and after the holdout is created. |
@@ -33,14 +31,9 @@ The **inclusion period** sets the dates when experiments can join the holdout.
 
 Global holdouts do not include experiments already running when the holdout is created. Global holdouts with the same subject type cannot overlap from the inclusion start date to the analysis end date. An experiment can belong to only one active selective holdout.
 
-### Global and selective measurement
+Global and selective holdouts can run at the same time. For example, a global holdout can measure all eligible changes, while a selective holdout measures changes for a product initiative or checkout.
 
-Global and selective holdouts can measure different sets of changes at the same time:
-
-- A global holdout measures the combined effect of shipped changes from all eligible experiments with the same subject type.
-- A selective holdout measures a chosen set of changes, such as a product initiative, updates to checkout, or a team's work.
-
-Each holdout has its own randomized comparison. This measures the impact of each set of changes directly. The selective result is not inferred from the global result or the sum of individual experiment results.
+Each holdout has its own randomized comparison. The selective result is not inferred from the global result or the sum of individual experiment results.
 
 An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes, so don't add them together.
 
@@ -57,6 +50,8 @@ The goal is to measure the combined effect of all five changes. The holdout trea
 During inclusion, preliminary results give the team an early directional read without waiting until October. These results include time when only some changes had shipped, so they do not measure the full combination.
 
 ### Experiment inclusion phase
+
+The **inclusion period** sets the dates when experiments can join the holdout.
 
 During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts. Both holdout groups receive an experiment's control experience while it runs. After a non-control variant rolls out, the all-shipped group receives that change.
 
