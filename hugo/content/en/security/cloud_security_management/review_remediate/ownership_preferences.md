@@ -9,6 +9,7 @@ further_reading:
 - link: "/security/cloud_security_management/guide/frontier_group/"
   tag: "Documentation"
   text: "Cloud Security Frontier Group"
+description: "Customize the Ownership Agent with tag mappings, exclusions, and custom instructions on the Ownership Agent settings page."
 ---
 
 ## Overview
@@ -76,7 +77,7 @@ You can add up to 20 exclusions.
 | **Owner**                    | Owner to exclude (for example, `deploy-bot`). Matched case-insensitively                                      |
 | **Resource type** (optional) | Only exclude the owner for this resource type (for example, `aws_ec2_instance`). Leave empty for any type     |
 
-When you set both optional fields, the exclusion applies only when both match. For example:
+When you set both optional fields, the exclusion applies only when both match. The settings page shows empty optional fields as **Any**. For example:
 
 | Name                 | Owner type | Owner        | Resource type      |
 |----------------------|------------|--------------|--------------------|
@@ -116,7 +117,7 @@ The settings page checks each rule before saving it and shows any problem next t
 
 | Problem                                    | Fix                                                                                                                        |
 |--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| A rule shows a warning icon and saves fail | Hover over the icon to see the problem, then edit the rule. If the problem is with the name, delete the rule and add it again |
+| A rule shows a warning icon and saving fails | Hover over the icon to see the problem, then edit the rule. If the problem is with the name, delete the rule and add it again |
 | A tag mapping doesn't match a resource     | Check the exact tag key and value on the resource                                                                          |
 | An exclusion isn't applied                 | Leave **Owner type** and **Resource type** empty unless you need to narrow the exclusion                                   |
 
