@@ -30,7 +30,7 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 |---------|-------------|
 | [Manage Tags modal](#manage-tags-modal) | Estimates the impact of tag changes on point volume instead of cardinality volume. |
 | [Metric side panel](#metric-side-panel) | Displays ingested and indexed point volume instead of timeseries volume. |
-| [Volume Management page](#volume-management-page) | Volume Overview graphs display new billing dimensions for Metric Name Pricing. |
+| [Metrics Catalog page](#metrics-catalog-page) | Volume Overview graphs display new billing dimensions for Metric Name Pricing. |
 | [Plan & Usage page](#plan--usage-page) | Reflects the Metric Name Pricing billing breakdown. |
 | [Estimated usage metrics](#estimated-usage-metrics) | New points-volume metrics replace cardinality-based estimated usage metrics. |
 
@@ -50,7 +50,7 @@ To open the metric side panel, click any metric name on the [Metrics Catalog pag
 
 {{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
 
-## Volume Management page
+## Metrics Catalog page
 
 The Volume Overview graphs on the [Metrics Catalog page][4] display the following Metric Name Pricing billing dimensions:
 

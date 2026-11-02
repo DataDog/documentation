@@ -66,7 +66,7 @@ To provide clarity when querying, the metric source and equivalent metrics are d
 
 For a comprehensive view of how specific OTel and Datadog metrics relate, check the Metrics Catalog page:
 
-1. Navigate to [{{< ui >}}Metrics > Summary{{< /ui >}}][2].
+1. Navigate to the [Metrics Catalog][2].
 2. Search for a known Datadog or OTel metric.
 3. Open the {{< ui >}}Metric Details{{< /ui >}} side panel.
 

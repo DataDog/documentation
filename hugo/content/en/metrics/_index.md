@@ -190,7 +190,7 @@ Click on any metric name to display a details sidepanel with more detailed infor
 
 **Note:** The number of distinct metrics reported in the details side panel in the Metrics Catalog does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
 
-Read the [metrics summary documentation][22] for more details.
+Read the [Metrics Catalog documentation][22] for more details.
 
 ## Further reading
 
