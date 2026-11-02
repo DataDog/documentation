@@ -161,7 +161,9 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 {{% collapse-content title="2. Configure the bucket and integration role policies" level="h3" expanded=false id="manual-setup-step2" %}}
 
-1. Confirm the Datadog AWS integration role has `s3:GetObject` and `s3:ListBucket` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
+1. Confirm the Datadog AWS integration role **in the AWS account that owns the destination bucket** has `s3:GetObject` and `s3:ListBucket` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files. That account must be integrated with Datadog.
+
+   **Note**: If source buckets in other AWS accounts deliver inventory reports to a central destination bucket, Datadog reads every report with the integration role of the destination bucket's account. The integration roles in the source accounts do not need access to the destination bucket.
 
 2. Confirm the destination bucket policy allows S3 to write inventory files to your destination bucket.
 
@@ -244,7 +246,7 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
       "type": "cloud_provider",
       "attributes": {
         "aws": {
-          "aws_account_id": "<AWS_ACCOUNT_ID>",
+          "aws_account_id": "<DESTINATION_ACCOUNT_ID>",
           "destination_bucket_name": "<DESTINATION_BUCKET_NAME>",
           "destination_bucket_region": "<DESTINATION_BUCKET_REGION>",
           "destination_prefix": "<DESTINATION_PREFIX>"
@@ -255,7 +257,7 @@ curl -X PUT "https://api.${DD_SITE}/api/v2/cloudinventoryservice/syncconfigs" \
 ```
 
 To use the example above:
-- Replace `<AWS_ACCOUNT_ID>` with the 12-digit AWS account ID that owns the destination bucket.
+- Replace `<DESTINATION_ACCOUNT_ID>` with the 12-digit ID of the AWS account that owns the destination bucket. In cross-account setups, this is not the source buckets' account.
 - Replace `<DESTINATION_BUCKET_NAME>` with the name of the destination bucket holding inventory reports.
 - Replace `<DESTINATION_BUCKET_REGION>` with the AWS region of the destination bucket.
 - Replace `<DESTINATION_PREFIX>` with the prefix in the destination bucket where your S3 Inventory reports are written, for example `datadog-inventories/`. This must match the prefix in your S3 Inventory configuration. To read inventory reports from the entire bucket, set the value to `/`. Leaving the value empty does not read from the entire bucket; it defaults to `datadog-inventories/`.

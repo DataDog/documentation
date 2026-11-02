@@ -11,1160 +11,395 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: CI Visibility のトラブルシューティング
-title: Jenkins パイプラインでトレースを設定する
+title: CI Visibility 向け Jenkins セットアップ
 ---
+## 概要{#overview}
 
-## Overview
+[Jenkins][19] は、継続的インテグレーションおよびデリバリー機能を備えた自動化サーバーです。プラグインアーキテクチャにより、Jenkins はあらゆる CI/CD ニーズに合わせてカスタマイズでき、プロジェクトの開発、テスト、デプロイのあらゆる側面を自動化します。
 
-[Jenkins][19] is an automation server with continuous integration and delivery features. With its plugin architecture, Jenkins can be customized to fit any CI/CD need and automates all aspects of project development, testing, and deployment.
+Jenkins 用に CI Visibility をセットアップして、パイプライン実行のさまざまなステージでデータを収集し、パフォーマンスのボトルネックを特定し、運用上の課題を解決し、デプロイプロセスを改善します。
 
-Set up tracing in Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
+### 互換性 {#compatibility}
 
-### Compatibility
+| Pipeline Visibility | プラットフォーム | 定義                                                                                               |
+|---|---|----------------------------------------------------------------------------------------------------------|
+| [Manual steps][20] | Manual steps | 手動でトリガーされたパイプラインを表示します。                                                                      |
+| [Queue time][21] | Queue time | パイプラインのジョブが処理される前にキューに残っている時間を表示します。                               |
+| ログの相関付け | ログの相関付け | パイプラインスパンをログに関連付けます。[ログストレージ][10]が必要です。                                  |
+| インフラストラクチャーメトリクスの相関 | インフラストラクチャーメトリクスの相関 | Jenkins ワーカーの[インフラストラクチャーホストメトリクス][11]にジョブを相関付けます。                                |
+| [カスタムスパン][26] | カスタムスパン | パイプラインのカスタムスパンを構成します。                                                              |
+| カスタム事前定義タグ | カスタム事前定義タグ | 生成されたすべてのパイプライン、ステージ、およびジョブスパンに[カスタムタグ][12]を設定します。                                 |
+| [実行時のカスタムタグ][22][およびメジャー][23] | 実行時のカスタムタグおよびメジャー | 実行時の[カスタムタグおよびメジャー][12]を構成します。                                                    |
+| [パラメーター][24] | パラメーター | パイプラインのトリガー時にカスタムパラメーター (デフォルトのブランチ名や Git 情報など) を設定します。|
+| [パイプラインの障害理由][25] | パイプラインの障害理由 | エラーメッセージからパイプラインの障害理由を特定します。                                                  |
+| [実行中のパイプライン][32] | 実行中のパイプライン | 稼働中のパイプライン実行を表示します。Jenkins プラグインバージョン 8.0.0 以上が必要です。                      |
+| [クリティカルパスでの CI ジョブのフィルタリング][33] | クリティカルパスでの CI ジョブのフィルタリング | クリティカルパスでジョブでフィルタリングします。|
+| [実行時間][34] | 実行時間  | パイプラインによるジョブ実行時間を表示します。|
 
-| Pipeline Visibility | Platform | Definition |
-|---|---|---|
-| [Manual steps][20] | Manual steps | View manually triggered pipelines. |
-| [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][10]. |
-| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][11] for Jenkins workers. |
-| [Custom spans][26] | Custom spans | Configure custom spans for your pipelines. |
-| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][12] to all generated pipeline, stages, and job spans. |
-| [Custom tags][22] [and measures at runtime][23] | Custom tags and measures at runtime | Configure [custom tags and measures][12] at runtime. |
-| [Parameters][24] | Parameters | Set custom parameters (such as the default branch name or Git information) when a pipeline is triggered. |
-| [Pipeline failure reasons][25] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
+以下の Jenkins バージョンに対応しています。
 
-The following Jenkins versions are supported:
+- Jenkins 2.346.1 以上
 
-- Jenkins >= 2.346.1
+このインテグレーションは、Agentless および Agent ベース両方のインストールをサポートしています。
+インフラストラクチャーのメトリクス相関には、Agent のインストールが必要です。
 
-This integration supports both [Agentless](#install-the-datadog-jenkins-plugin-agentless) and [Agent-based](#install-the-datadog-agent) installation. For infrastructure metric correlation, installing with the Agent-based mode is recommended.
+### 用語 {#terminology}
 
-## Install the Datadog Jenkins plugin (agentless)
+次の表に、Datadog CI Visibility と Jenkins の概念の対応を示します。
 
-Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or later:
+| Datadog  | Jenkins  |
+|----------|----------|
+| パイプライン | パイプライン |
+| ステージ    | ステージ    |
+| ジョブ      | ステップ     |
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Manage Plugins**.
-2. In the [Update Center][4] on the **Available** tab, search for `Datadog Plugin`.
-3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
-4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
+## Datadog Agent をインストールする {#install-the-datadog-agent}
 
-### Enable CI Visibility on the plugin
+インフラストラクチャーのメトリクス相関が不要な場合は、このステップをスキップしてください。
 
-There are several ways you can configure the Datadog Jenkins plugin.
+[Agent のインストール手順][14]に従って、Jenkins コントローラーノードおよびワーカーノードに Datadog Agent をインストールします。
 
-#### Configure with the Jenkins configuration UI
+Jenkins コントローラーと Datadog Agent が Kubernetes クラスターにデプロイされている場合、Datadog では [Admission Controller][2] を使用することをお勧めします。これにより、Jenkins コントローラー Pod の `DD_AGENT_HOST` 環境変数がローカルの Datadog Agent と通信するように自動的に設定されます。
 
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
+Jenkins ジョブのログを Datadog にレポートする場合は、TCP 経由のカスタムログ収集が Agent で[有効化され、構成][29]されていることを確認してください。
 
-Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
+Agent がコンテナ内で実行されている場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true` 環境変数を追加し、Jenkins コントローラーから以下のポートにアクセスできることを確認してください。
+- [DogStadsD][30] ポート、デフォルトは `8125/udp`
+- [APM トレースポート][31]、デフォルトは `8126/tcp`
+- [ログ収集ポート][29]、デフォルトは `10518/tcp`
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use Datadog API URL and Key to report to Datadog`.
-4. For Datadog sites other that `datadoghq.com`, change the `Datadog API URL`, `Log Intake URL`, and `Webhook Intake URL` to point to your Datadog site.
-5. Enter a valid `Datadog API Key`.
-6. Mark the `Enable CI Visibility` checkbox.
-7. (Optional) Configure your CI Instance name.
-8. Save your configuration.
+<div class="alert alert-info">UNIX ドメインソケットを介した CI Visibility トレースの送信はサポートされていません。</div>
 
-{{< img src="ci/jenkins_plugin_agentless_urls_blurred.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+## Datadog Jenkins プラグインをインストールする {#install-the-datadog-jenkins-plugin}
 
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use the Datadog Agent to report to Datadog`.
-4. Configure the `Agent` host.
-5. Configure the `Traces Collection Port` if not using the default port `8126`.
-6. Mark the `Enable CI Visibility` checkbox.
-7. (Optional) Configure your CI Instance name.
-8. Check the connectivity with the Datadog Agent.
-9. Save your configuration.
+<div class="alert alert-info">Datadog にデータをレポートするモードとして、Agentless モードと Agent ベースモードのいずれを選択する場合でも、プラグインの使用は<strong>必須</strong>です。</div>
 
-{{< img src="ci/ci-jenkins-plugin-config-agentful.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
-{{% /tab %}}
-{{< /tabs >}}
+[Datadog Jenkins プラグイン][3] v3.1.0 以降をインストールおよび有効化します。
 
-#### Configuration-as-code
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] (Jenkins の管理) > [{{< ui >}}Manage Plugins{{< /ui >}}] (プラグインの管理) に移動します。
+2. [Update Center][4] の [{{< ui >}}Available{{< /ui >}}] (使用可能) タブで、「{{< ui >}}Datadog Plugin{{< /ui >}}」(Datadog プラグイン) を検索します。
+3. プラグインの横にあるチェックボックスを選択肢、画面下にある 2 つのインストールボタンの一方を使用してインストールします。
+4. [{{< ui >}}Installed{{< /ui >}}] (インストール済み) タブで「{{< ui >}}Datadog Plugin{{< /ui >}}」を検索し、プラグインがインストールされたことを確認します。
 
-{{< tabs >}}
+## Datadog Jenkins プラグインを構成する {#configure-the-datadog-jenkins-plugin}
 
-{{% tab "Agentless (using an API key)" %}}
+Datadog Jenkins プラグインを構成する方法は、いくつかあります。
 
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
+### Jenkins の構成 UI で構成する {#configure-with-the-jenkins-configuration-ui}
 
-1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
+#### Datadog Agent を介したレポート (推奨) {#report-through-the-datadog-agent-recommended}
 
-    {{% site-region region="us" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configure System{{< /ui >}}] (システムの構成) に移動します。
+2. コンフィギュレーション画面を下にスクロールして、[{{< ui >}}Datadog Plugin{{< /ui >}}] セクションに移動します。
+3. [{{< ui >}}Use the Datadog Agent to report to Datadog{{< /ui >}}] (Datadog へのレポートに Datadog Agent を使用する) モードを選択します。
+4. {{< ui >}}Agent{{< /ui >}} ホストを構成します。
+5. CI Visibility を構成します。
+   1. デフォルトポートの `8126` を使用していない場合は、[{{< ui >}}Traces Collection Port{{< /ui >}}] (トレース収集ポート) を構成します。
+   2. [{{< ui >}}Test traces connection{{< /ui >}}] (トレース接続のテスト) ボタンをクリックして、構成が有効であることを確認します。
+   3. [{{< ui >}}Enable CI Visibility{{< /ui >}}] (CI Visibility の有効化) チェックボックスをオンにします。
+   4. (オプション) CI インスタンス名を構成します。
+6. (オプション) ログ収集を構成します。
+   1. Datadog Agent で構成した [{{< ui >}}Log Collection{{< /ui >}}] (ログ収集) ポートを構成します。
+   2. [{{< ui >}}Test logs connection{{< /ui >}}] (ログ接続のテスト) ボタンをクリックして、構成が有効であることを確認します。
+   3. [{{< ui >}}Enable Log Collection{{< /ui >}}] (ログ収集の有効化) チェックボックスをオンにします。
+7. (オプション) Datadog UI へのアクセスに使用するホストの名前 (例: `app.datadoghq.com`) を [{{< ui >}}Datadog App hostname{{< /ui >}}] (Datadog App のホスト名) フィールドに入力します。
+8. 構成を保存します。
 
-    {{% /site-region %}}
-    {{% site-region region="eu" %}}
+{{< img src="ci/ci-jenkins-plugin-config-agentful-app-hostname.png" alt="Jenkins 向けの Datadog プラグイン構成" style="width:100%;">}}
 
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.datadoghq.eu/api/"
-            targetLogIntakeURL: "https://http-intake.logs.datadoghq.eu/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.datadoghq.eu/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
+#### Agentless (API キーを使用) {#agentless-using-an-api-key}
 
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
+このオプションを使用すると、Jenkins プラグインは Datadog Agent を使用せずに Datadog に直接レポートするようになります。これには、API キーが必要です。
 
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.dd-gov.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.dd-gov.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.dd-gov.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configure System{{< /ui >}}] に移動します。
+2. コンフィギュレーション画面を下にスクロールして、[{{< ui >}}Datadog Plugin{{< /ui >}}] セクションに移動します。
+3. [{{< ui >}}Use Datadog site and API key to report to Datadog{{< /ui >}}] (Datadog へのレポートに Datadog サイトと API キーを使用する) モードを選択します。
+4. [{{< ui >}}Pick a site{{< /ui >}}] (サイトの選択) ドロップダウンで、ご使用の [Datadog サイト][1]を選択します。
+5. 有効な [{{< ui >}}Datadog API Key{{< /ui >}}] (Datadog API キー) を入力します (または [{{< ui >}}Select from credentials{{< /ui >}}] (認証情報から選択) オプションを使用します)。
+6. [{{< ui >}}Test Key{{< /ui >}}] (キーのテスト) ボタンをクリックして、API キーが有効であることを確認します。
+7. CI Visibility を構成します。
+   1. [{{< ui >}}Enable CI Visibility{{< /ui >}}] チェックボックスをオンにします。
+   2. (オプション) CI インスタンス名を構成します。
+8. (オプション) ログ収集を構成します。
+   1. [{{< ui >}}Enable Log Collection{{< /ui >}}] チェックボックスをオンにします。
+9. (オプション) Datadog UI へのアクセスに使用するホストの名前 (例: `app.datadoghq.com`) を [{{< ui >}}Datadog App hostname{{< /ui >}}] フィールドに入力します。
+10. 構成を保存します。
 
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
+{{< img src="ci/ci-jenkins-plugin-config-agentless-app-hostname.png" alt="Jenkins 向けの Datadog プラグイン構成" style="width:100%;">}}
 
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.us3.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.us3.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.us3.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
+[1]: /ja/getting_started/site/#access-the-datadog-site
 
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
+### Configuration-as-Code を使用する {#use-configuration-as-code}
 
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.us5.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.us5.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.us5.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
+#### Datadog Agent を介したレポート (推奨) {#report-through-the-datadog-agent-recommended-1}
 
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
+Jenkins インスタンスで Jenkins [`configuration-as-code`][1] プラグインを使用している場合は、次のようにします。
 
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Agentless` mode (HTTP).
-            reportWith: "HTTP"
-            # Update the endpoints if reporting to Datadog sites other that `datadoghq.com`
-            targetApiURL: "https://api.ap1.datadoghq.com/api/"
-            targetLogIntakeURL: "https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-            targetWebhookIntakeURL: "https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/"
-            # Configure your API key
-            targetCredentialsApiKey: "<your-api-key>"
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    {{< /code-block >}}
-    {{% /site-region %}}
+1. `datadogGlobalConfiguration` のエントリを追加して、コンフィギュレーション YAML を作成または変更します。
 
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
-3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
+```yaml
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Datadog Agent` mode
+      datadogAgentConfiguration:
+        # Configure Datadog Agent host
+        agentHost: '<your-agent-host>'
+        # Configure Datadog Agent port
+        agentPort: 8125
+        # (Optional) Configure logs collection port as configured in your Datadog Agent
+        agentLogCollectionPort: 10518
+        # Configure traces collection port
+        agentTraceCollectionPort: 8126
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: 'app.datadoghq.com'
+    # (Optional) Enable Logs Storage
+    collectBuildLogs: true
+```
 
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
-
-1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
-
-    ```yaml
-    unclassified:
-        datadogGlobalConfiguration:
-            # Select the `Datadog Agent` mode (DSD).
-            reportWith: "DSD"
-            # Configure the `Agent` host
-            targetHost: "<your-agent-host>"
-            # Configure the `Traces Collection` port
-            targetTraceCollectionPort: 8126
-            # Enable CI Visibility flag
-            enableCiVisibility: true
-            # (Optional) Configure your CI Instance name
-            ciInstanceName: "jenkins"
-    ```
-
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
-3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
+2. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configuration as Code{{< /ui >}}] に移動します。
+3. コンフィギュレーションを適用または再ロードします。
+4. [{{< ui >}}View Configuration{{< /ui >}}] (コンフィギュレーションの表示) ボタンを使用して、コンフィギュレーションを確認します。
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Configure with Groovy
-
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Run the configuration script:
-
-    {{% site-region region="us" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.datadoghq.com/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="eu" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.ap1.datadoghq.eu/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.eu/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.eu/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.dd-gov.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.dd-gov.com/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.us3.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.us3.datadoghq.com/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.us5.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.us5.datadoghq.com/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('HTTP')
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetApiURL("https://api.ap1.datadoghq.com/api/")
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
-    d.setTargetWebhookIntakeURL("https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/")
-
-    // Configure your API key
-    d.setTargetApiKey("your-api-key")
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Run the configuration script:
-
-    ```groovy
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Select the Datadog Agent mode
-    d.setReportWith('DSD')
-
-    // Configure the Agent host.
-    d.setTargetHost('<your-agent-host>')
-
-    // Configure the Traces Collection port (default 8126)
-    d.setTargetTraceCollectionPort(8126)
-
-    // Enable CI Visibility
-    d.setEnableCiVisibility(true)
-
-    // (Optional) Configure your CI Instance name
-    d.setCiInstanceName("jenkins")
-
-    // Save config
-    d.save()
-    ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Use environment variables
-
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
-
-1. Set the following environment variables on your Jenkins instance machine:
-
-    {{% site-region region="us" %}}
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.com/api/v2/webhook/"
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
+#### Agentless (API キーを使用) {#agentless-using-an-api-key-1}
+
+Jenkins インスタンスで Jenkins [`configuration-as-code`][1] プラグインを使用している場合は、次のようにします。
+
+1. `datadogGlobalConfiguration` のエントリを追加して、コンフィギュレーション YAML を作成または変更します。
+
+```yaml
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: '{{< region-param key=jenkins_site_name >}}'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
     # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
+    ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: '{{< region-param key=dd_full_site >}}'
+    # (Optional) Enable Logs Storage
+    collectBuildLogs: true
+```
 
-    {{% /site-region %}}
+2. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configuration as Code{{< /ui >}}] に移動します。
+3. コンフィギュレーションを適用または再ロードします。
+4. [{{< ui >}}View Configuration{{< /ui >}}] (コンフィギュレーションの表示) ボタンを使用して、コンフィギュレーションを確認します。
 
-    {{% site-region region="eu" %}}
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.datadoghq.eu/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.datadoghq.eu/api/v2/webhook/"
+### Groovy を使った構成 {#configure-with-groovy}
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+#### Datadog Agent を介したレポート (推奨) {#report-through-the-datadog-agent-recommended-2}
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Script Console{{< /ui >}}] (スクリプトコンソール) に移動します。
+2. コンフィギュレーションスクリプトを実行します。
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
+```groovy
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogAgentConfiguration
 
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+def agentHost = 'localhost' // Configure your Datadog Agent host
+def agentPort = 8125
+def agentLogCollectionPort = 10518 // (Optional) Configure logs collection port as configured in your Datadog Agent
+def agentTraceCollectionPort = 8126 // Configure traces collection port
+datadog.datadogClientConfiguration = new DatadogAgentConfiguration(agentHost, agentPort, agentLogCollectionPort, agentTraceCollectionPort)
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.dd-gov.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.dd-gov.com/api/v2/webhook/"
+datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+// Save config
+datadog.save()
+```
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
+#### Agentless (API キーを使用) {#agentless-using-an-api-key-2}
 
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Script Console{{< /ui >}}] に移動します。
+2. コンフィギュレーションスクリプトを実行します。
 
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+```groovy
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us3.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us3.datadoghq.com/api/v2/webhook/"
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+def site = new DatadogIntakeSite(DatadogSite.{{< region-param key=jenkins_site_name >}}) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+datadog.datadogAppHostname = '{{< region-param key=dd_full_site >}}' // the name of the host that you use to access Datadog UI
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable Logs Storage
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
+// Save config
+datadog.save()
+```
 
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+### 環境変数を使用する {#use-environment-variables}
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.us5.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.us5.datadoghq.com/api/v2/webhook/"
+#### Datadog Agent を介したレポート (推奨) {#report-through-the-datadog-agent-recommended-3}
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+1. Jenkins インスタンスマシンで次の環境変数を設定します。
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
+# Configure the Agent host
+DATADOG_JENKINS_PLUGIN_TARGET_HOST=your-agent-host
 
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
+# Configure the Traces Collection port (default 8126)
+DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
 
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+# Enable CI Visibility
+DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 
-    # Endpoint URLs correspond to your Datadog site
-    DATADOG_JENKINS_PLUGIN_TARGET_API_URL="https://api.ap1.datadoghq.com/api/"
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-    DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL="https://webhook-intake.ap1.datadoghq.com/api/v2/webhook/"
+# (Optional) Configure your CI Instance name
+DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+# (Optional) Configure Log Collection port as configured in your Datadog Agent
+DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+# (Optional) Enable Logs Storage
+DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    {{< /code-block >}}
-    {{% /site-region %}}
+# (Optional) Configure the name of the host that you use to access Datadog UI
+DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
+```
 
-2. Restart your Jenkins instance.
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent - recommended" %}}
+2. Jenkins インスタンスを再起動します。
 
-1. Set the following environment variables on your Jenkins instance machine:
+#### Agentless (API キーを使用) {#agentless-using-an-api-key-3}
 
-    ```bash
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+1. Jenkins インスタンスマシンで次の環境変数を設定します。
 
-    # Configure the Agent host
-    DATADOG_JENKINS_PLUGIN_TARGET_HOST=your-agent-host
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Configure the Traces Collection port (default 8126)
-    DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
+# Configure your Datadog site
+DATADOG_JENKINS_PLUGIN_DATADOG_SITE={{< region-param key=jenkins_site_name >}}
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+# Configure your API key
+DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-    ```
+# Enable CI Visibility
+DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 
-2. Restart your Jenkins instance.
+# (Optional) Configure your CI Instance name
+DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-{{% /tab %}}
-{{< /tabs >}}
+# (Optional) Enable Logs Storage
+DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
-### Validate the configuration
+# (Optional) Configure the name of the host that you use to access Datadog UI
+DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME={{< region-param key=dd_full_site >}}
+```
 
-To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
+2. Jenkins インスタンスを再起動します。
 
-{{< code-block lang="text" >}}
-Re/Initialize Datadog-Plugin Agent Http Client
-TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
-{{< /code-block >}}
+## ログストレージ {#logs-storage}
 
-## Install the Datadog Agent
+ログストレージは、Jenkins プラグインの構成時にオプションで有効にできます (前のセクションの `DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` を参照)。
+Agentless と Agent ベースの両方のオプションがサポートされています。
 
-The Datadog Jenkins plugin can either report metrics through the Datadog Agent or directly to Datadog if an API key is provided. If you don't have a Datadog Agent running on the Jenkins controller instance, Datadog recommends installing it first by following the [Agent installation instructions][14]. Whether you choose to use Agentless mode or the Agent-based mode, you are **required** to use the plugin.
+ログストレージは、CI Visibility とは別に課金されます。
 
-If the Jenkins controller and the Datadog Agent have been deployed to a Kubernetes cluster, Datadog recommends using the [Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the Jenkins controller pod to communicate with the local Datadog Agent.
+ログの保持、除外、インデックスは [Log Management][27] で構成されます。Jenkins ジョブのログは、`source:jenkins` タグで確認できます。
 
-<div class="alert alert-info"><strong>Note</strong>: Sending CI Visibility traces through UNIX domain sockets is not supported.</div>
+## インフラストラクチャーメトリクスの相関付け {#correlate-infrastructure-metrics}
 
-### Configure the Agent for log collection
+Jenkins のワーカーを使用している場合、パイプラインを実行しているインフラストラクチャーでパイプラインを関連付けることができます。この機能を使用できるようにするには、次のようにします。
 
-[ジョブからのログ収集](#enable-job-log-collection)を有効にするには、Datadog Agent が TCP ポートでログをリッスンするように構成します。
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `/etc/datadog-agent/conf.d/jenkins.d/conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "Windows" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml`  configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `%ProgramData%\Datadog\conf.d\jenkins.d\conf.yaml` with the following. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{% tab "macOS" %}}
-1. Add `logs_enabled: true` to your Agent's `datadog.yaml` configuration file, or set the `DD_LOGS_ENABLED` environment variable to true.
-
-2. Create a file at `~/.datadog-agent/conf.d/jenkins.d/conf.yaml` with the following contents. Ensure the `service` matches the CI instance name provided earlier.
-
-   ```yaml
-   logs:
-   - type: tcp
-     port: 10518
-     service: my-jenkins-instance
-     source: jenkins
-   ```
-
-3. [Restart the Agent][101] for the changes to take effect.
-
-[101]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
-{{% /tab %}}
-
-{{< /tabs >}}
-
-この構成では、Agent はポート `10518` でログをリッスンします。
-
-<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for Jenkins jobs can be identified by the <code>source:jenkins</code> tag.</div>
-
-### Correlate infrastructure metrics
-
-Jenkins のワーカーを使用している場合、パイプラインを実行しているインフラストラクチャーでパイプラインを関連付けることができます。この機能を動作させるには
-
-1. 各 Jenkins Worker に [Datadog Agent][1] をインストールします。
+1. 各 Jenkins ワーカーに [Datadog Agent][1] をインストールします。
 2. 各 Jenkins ワーカーに `DD_CI_HOSTNAME` という新しい環境変数をワーカーのホスト名で設定し、エクスポートします。
-  * Datadog Agent がそのワーカーのインフラストラクチャーメトリクスで報告しているホスト名と同じである必要があります。
-  * 有効な値として、固定値や他の環境変数が使用できます。
+  * これは、Datadog Agent がそのワーカーのインフラストラクチャーメトリクスで報告しているホスト名と同じである必要があります。
+  * 固定値やほかの環境変数を有効な値として使用できます。
 
 ```bash
 export DD_CI_HOSTNAME=my-hostname
 ```
 
-Jenkins インスタンスの管理に Kubernetes を使用している場合は、`DD_CI_HOSTNAME` 環境変数を [Jenkins ジョブを実行するポッド][9]に追加してください。この環境変数の値は、インフラストラクチャーメトリクスをレポートする際に、Datadog Agent のデーモンセットで何を使用しているかに依存します。
+Kubernetes を使用して Jenkins インスタンスを管理している場合は、`DD_CI_HOSTNAME` 環境変数を [Jenkins ジョブを実行する Pod][9] に追加します。この環境変数の値は、Datadog Agent デーモンセットで、何を使用してインフラストラクチャーメトリクスをレポートしているかによって異なります。
 
-これは、Jenkins ワーカーにのみ必要です。Jenkins コントローラの場合、インフラストラクチャーメトリクスの相関は追加アクションを必要としません。
+これは、Jenkins ワーカーでのみ必要です。Jenkins コントローラーの場合、インフラストラクチャーメトリクスの相関は追加アクションを必要としません。
 
-**注**: インフラストラクチャーメトリクスの相関は、Jenkins Plugin v5.0.0+ 以降でサポートされています。
+**注**: インフラストラクチャーメトリクスの相関は、Jenkins プラグイン v5.0.0 以降でサポートされています。
 
-## ジョブログ収集を有効にする
+## Test Optimization を有効にする {#enable-test-optimization}
 
-This is an optional step that enables the collection of job logs. Both Agentless and Agent-based options are supported.
+これは、[Test Optimization][16] を使用したテストデータの収集を有効にするオプションのステップです。
 
-### Jenkins の構成 UI で有効にする
+使用しているテストフレームワークがサポートされていることを確認するには、お使いの言語の [Test Optimization ドキュメント][17]を参照してください。
 
-{{< tabs >}}
+Jenkins ジョブまたはパイプライン内で Test Optimization を有効にするには、いくつかの方法があります。
+1. Jenkins の構成 UI を使用します。
+2. `datadog` ステップをパイプラインスクリプト内に追加します。
+3. SDK を手動で構成します。
 
-{{% tab "エージェントレス (API キー使用)" %}}
+テストを実行するために Docker コンテナを起動するパイプラインの場合、SDK は手動でしか構成できません。
 
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** に移動します。
-2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
-3. `Use the Datadog Agent to report to Datadog` が選択されていることと、`Log Intake URL` が現在の Datadog サイトの URL を指していることを再度確認します。
-4. `Enable Log Collection` チェックボックスをクリックしてアクティブにします。
-5. 構成を保存します。
+### Jenkins の構成 UI で有効にする {#enable-with-the-jenkins-configuration-ui}
 
-{{% /tab %}}
+UI ベースの Test Optimization 構成は、Datadog Jenkins プラグイン v5.6.0 以降で利用可能です。
 
-{{% tab "Report through the Datadog Agent - recommended" %}}
+このオプションは、`Jenkinsfile` で完全に構成されるパイプライン (マルチブランチパイプラインや Organization フォルダーのパイプラインなど) には適していません。
+このようなパイプラインでは、`datadog` ステップで宣言型構成 (次のセクションで説明します) を使用してください。
 
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** に移動します。
-2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
-3. `Use the Datadog Agent to report to Datadog` オプションが選択されていることを再度確認します。
-4. Datadog Agent で構成した `Log Collection` ポートを構成します。
-5. `Enable Log Collection` チェックボックスをクリックしてアクティブにします。
-6. Datadog Agent との接続を確認します。
-7. 構成を保存します。
-{{% /tab %}}
+UI を使用して Test Optimization を有効にするには、以下の手順を実行します。
+1. Jenkins インスタンスの Web インターフェースで、インスツルメントするジョブまたはパイプラインに移動し、[{{< ui >}}Configure{{< /ui >}}] (構成) オプションを選択します。
+2. [{{< ui >}}General{{< /ui >}}] (一般) 構成セクションで、[{{< ui >}}Enable Datadog Test Optimization{{< /ui >}}] (Datadog Test Optimization の有効化) チェックボックスをオンにします。
+3. テスト対象のサービスまたはライブラリの名前を [{{< ui >}}Service Name{{< /ui >}}] (サービス名) 入力欄に入力します。必要な任意の値を指定できます。
+4. テストのインスツルメンテーションを有効にする言語を選択します。一部の言語では、UI を使用した構成を行えません。これらの言語の Test Optimization を構成するには、手動の[構成手順][18]に従います。
+5. 必要に応じて、[追加の構成設定][18]を指定します。
+6. [{{< ui >}}Save{{< /ui >}}] をクリックします。
 
-{{< /tabs >}}
+{{< img src="ci/ci-jenkins-plugin-tests-config-2.png" alt="Jenkins 用の Datadog Test Optimization の構成" style="width:100%;">}}
 
-### configuration-as-code で有効にする
+### `datadog` パイプラインステップで有効にする {#enable-with-the-datadog-pipeline-step}
 
-{{< tabs >}}
+この構成オプションは、Datadog Jenkins プラグイン v5.6.2 以降で利用可能です。
 
-{{% tab "エージェントレス (API キー使用)" %}}
-
-Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグインを使用する場合:
-
-1. エントリ `datadogGlobalConfiguration` の構成 YAML に、以下を含めるように修正します。
-
-    {{% site-region region="us" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-    {{% site-region region="eu" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.datadoghq.eu/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.dd-gov.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.us3.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.us5.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-    unclassified:
-    datadogGlobalConfiguration:
-        # Endpoint URLs correspond to your Datadog site
-        targetLogIntakeURL: "https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-        # Enable Log collection
-        collectBuildLogs: true
-    {{< /code-block >}}
-    {{% /site-region %}}
-
-2. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configuration as Code** にアクセスします。
-3. コンフィギュレーションを適用または再ロードします。
-4. `View Configuration` ボタンを使用してコンフィギュレーションを確認します。
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-Jenkins インスタンスが Jenkins [`configuration-as-code`][1] プラグインを使用する場合:
-
-1. エントリ `datadogGlobalConfiguration` の構成 YAML に、以下を含めるように修正します。
-    ```yaml
-    unclassified:
-    datadogGlobalConfiguration:
-        # Configure the `Log Collection` port, as configured in the Datadog Agent,
-        targetLogCollectionPort: 10518
-        # Enable Log collection
-        collectBuildLogs: true
-    ```
-2. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configuration as Code** にアクセスします。
-3. コンフィギュレーションを適用または再ロードします。
-4. `View Configuration` ボタンを使用してコンフィギュレーションを確認します。
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### Groovy で有効にする
-
-{{< tabs >}}
-
-{{% tab "エージェントレス (API キー使用)" %}}
-
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Script Console** にアクセスします。
-2. 構成スクリプトを、以下を含めるように更新します。
-    {{% site-region region="us" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-    {{% site-region region="eu" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.datadoghq.eu/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.us3.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.us5.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.dd-gov.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Endpoint URLs correspond to your Datadog site
-    d.setTargetLogIntakeURL("https://http-intake.logs.ap1.datadoghq.com/v1/input/")
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    {{< /code-block >}}
-    {{% /site-region %}}
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Script Console** にアクセスします。
-2. 構成スクリプトを、以下を含めるように更新します。
-    ```groovy
-    import jenkins.model.*
-    import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-
-    def j = Jenkins.getInstance()
-    def d = j.getDescriptor("org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration")
-
-    // Configure the Log Collection port, as configured in the Datadog Agent.
-    d.setTargetLogCollectionPort(10518)
-
-    // Enable log collection
-    d.setCollectBuildLogs(true)
-
-    // Save config
-    d.save()
-    ```
-{{% /tab %}}
-
-{{< /tabs >}}
-
-### 環境変数を使う
-
-{{< tabs >}}
-
-{{% tab "エージェントレス (API キー使用)" %}}
-
-1. Jenkins インスタンスマシンで次の環境変数を追加します。
-
-   {{% site-region region="us" %}}
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.com/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-
-   {{% site-region region="eu" %}}
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.datadoghq.eu/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="us3" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us3.datadoghq.com/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="us5" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.us5.datadoghq.com/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="gov" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.dd-gov.com/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-
-   {{% /site-region %}}
-   {{% site-region region="ap1" %}}
-
-   {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-   # Endpoint URLs correspond to your Datadog site
-   DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL="https://http-intake.logs.ap1.datadoghq.com/v1/input/"
-
-   # ログ収集の有効化
-   DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-   {{< /code-block >}}
-   {{% /site-region %}}
-
-2. Jenkins インスタンスを再起動します。
-
-{{% /tab %}}
-
-{{% tab "Report through the Datadog Agent - recommended" %}}
-
-1. Jenkins インスタンスマシンで次の環境変数を追加します。
-    ```bash
-    # Configure the Log Collection port, as configured in the previous step.
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
-
-    # Enable log collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-    ```
-2. Jenkins インスタンスを再起動します。
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Enable Test Visibility
-
-This is an optional step that enables the collection of tests data using [Test Visibility][16].
-
-See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
-
-There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
-1. Using the Jenkins configuration UI.
-2. Adding the `datadog` step inside the pipeline script.
-3. Configuring the tracer manually.
-
-For pipelines that spin up a Docker container to execute tests, you can only configure the tracer manually.
-
-### Jenkins の構成 UI で有効にする
-
-UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or later.
-
-This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
-For these pipelines use declarative configuration with the `datadog` step (described in the next section).
-
-To enable Test Visibility via UI do the following:
-1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
-3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
-5. Optionally, provide [additional configuration settings][18].
-6. **Save** をクリックします。
-
-{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
-
-### Enable with the `datadog` pipeline step
-
-This configuration option is available in Datadog Jenkins plugin v5.6.2 or later.
-
-宣言的パイプラインでは、トップレベルの `options` ブロックに、次のようにステップを追加します。
+宣言型パイプラインでは、トップレベルの `options` ブロックに、次のようにステップを追加します。
 
 ```groovy
 pipeline {
     agent any
     options {
-        datadog(testVisibility: [
+        datadog(testOptimization: [
             enabled: true,
             serviceName: "my-service", // the name of service or library being tested
-            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET", "RUBY")
             additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
         ])
     }
@@ -1178,10 +413,10 @@ pipeline {
 }
 ```
 
-In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
+スクリプト化されたパイプラインで、次のように関連セクションを `datadog` ステップでラップします。
 
 ```groovy
-datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+datadog(testOptimization: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
   node {
     stage('Example') {
       echo "Hello world."
@@ -1190,17 +425,201 @@ datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: [
 }
 ```
 
-`collectLogs` や `tags` などの他の `datadog` の設定は `testVisibility` ブロックと一緒に追加することができます。
+`collectLogs` や `tags` などのほかの `datadog` 設定を、`testOptimization` ブロックとともに追加できます。
 
-### Enable with manual tracer configuration
+### 手動トレーサー構成で有効化する {#enable-with-manual-tracer-configuration}
 
-Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
+ご使用の言語専用の Test Optimization [構成手順][17] に従ってください。
 
-## デフォルトのブランチ名を設定する
+## Git 情報を伝搬する {#propagate-git-information}
 
-パイプラインの結果を報告するには、デフォルトのブランチ名 (例: `main`) をパイプラインのスパンに `git.default_branch` という属性で付加します。これは通常、自動的に行われますが、Jenkins からこの情報が提供されず、プラグインがこの情報を抽出できない場合もあります。
+Datadog Jenkins プラグインの一部の機能が正しく動作するには、Jenkins ビルドに関連付けられた Git 情報が必要です。
 
-この場合、ビルドで `DD_GIT_DEFAULT_BRANCH` 環境変数を使用してデフォルトのブランチを手動で設定します。例:
+ビルドに最小限必要な Git 情報は、リポジトリ URL、ブランチ、コミット SHA、コミット作成者のメールアドレスです。
+この情報は、プラグインによって自動的に決定される、SCM から伝搬される、環境変数を使用して手動で指定する、あるいはこれらの方法を組み合わせて取得することができます。
+
+**注:** パイプラインで複数のリポジトリをチェックアウトする場合、パイプラインの後半でチェックアウトされたリポジトリの Git 情報が優先されます。
+
+### SCM から Git 情報を伝搬する {#propagate-git-information-from-scm}
+
+Jenkins プラグインは、ビルドやパイプラインに関連付けられた Git 情報を自動的に検出できます。
+ただし、Jenkins のバージョンやパイプラインの詳細によっては、Git データの自動検出ができない場合があります。
+
+この場合、`checkout` または `git` ステップを実行した後に `.each {k,v -> env.setProperty(k, v)}` 関数を使用することで、プラグインで Git 情報を使用できるようになります。例:
+
+#### 宣言型パイプラインの使用 {#using-declarative-pipelines}
+
+宣言型パイプラインを使ってパイプラインの構成を行う場合は、以下のように `script` ブロックを使って Git の情報を伝搬させます。
+
+`checkout` ステップの使用:
+
+```groovy
+pipeline {
+  stages {
+    stage('Checkout') {
+        script {
+          checkout(...).each {k,v -> env.setProperty(k,v)}
+        }
+    }
+    ...
+  }
+}
+```
+
+`git` ステップの使用:
+
+```groovy
+pipeline {
+  stages {
+    stage('Checkout') {
+      script {
+        git(...).each {k,v -> env.setProperty(k,v)}
+      }
+    }
+    ...
+  }
+}
+```
+
+#### スクリプト化されたパイプラインの使用 {#using-scripted-pipelines}
+
+スクリプト化されたパイプラインを使ってパイプラインの構成を行う場合は、git の情報を直接環境変数に伝搬させることができます。
+
+`checkout` ステップの使用:
+
+```groovy
+node {
+  stage('Checkout') {
+    checkout(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+```
+
+`git` ステップの使用:
+
+```groovy
+node {
+  stage('Checkout') {
+    git(...).each {k,v -> env.setProperty(k,v)}
+  }
+  ...
+}
+```
+
+
+### Git の情報を手動で設定する {#set-git-information-manually}
+
+プラグインが Git 情報を自動的に検出できず、SCM を使用して Git データを伝播させることができない場合は、
+必要な Git 情報を手動で設定できます。
+
+その場合は、以下の環境変数を設定します。
+
+**注:** これらの変数はオプションですが、設定された場合、ほかの Jenkins プラグインで設定された Git 情報よりも優先されます。
+
+`DD_GIT_REPOSITORY_URL`(オプション)
+: サービスのリポジトリ URL。<br/>
+**例**: `https://github.com/my-org/my-repo.git`
+
+`DD_GIT_BRANCH` (オプション)
+: ブランチ名。<br/>
+**例**: `main`
+
+`DD_GIT_TAG` (オプション)
+: コミットのタグ (ある場合)。<br/>
+**例**: `0.1.0`
+
+`DD_GIT_COMMIT_SHA` (オプション)
+: 16 進数 40 文字形式で表されるコミット。<br/>
+**例**: `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
+
+`DD_GIT_COMMIT_MESSAGE` (オプション)
+: コミットメッセージ。<br/>
+**例**: `Initial commit message`
+
+`DD_GIT_COMMIT_AUTHOR_NAME` (オプション)
+: コミット作成者の名前。<br/>
+**例**: `John Smith`
+
+`DD_GIT_COMMIT_AUTHOR_EMAIL` (オプション)
+: コミット作成者のメールアドレス。<br/>
+**例**: `john@example.com`
+
+`DD_GIT_COMMIT_AUTHOR_DATE` (オプション)
+: ISO 8601 形式で表される、作成者がコミットを実行した日付。<br/>
+**例**: `2021-08-16T15:41:45.000Z`
+
+`DD_GIT_COMMIT_COMMITTER_NAME` (オプション)
+: コミットのコミッターの名前。<br/>
+**例**: `Jane Smith`
+
+`DD_GIT_COMMIT_COMMITTER_EMAIL` (オプション)
+: コミットのコミッターのメールアドレス。<br/>
+**例**: `jane@example.com`
+
+`DD_GIT_COMMIT_COMMITTER_DATE` (オプション)
+: ISO 8601 形式で表される、コミッターがコミットを実行した日付。<br/>
+**例**: `2021-08-16T15:41:45.000Z`
+
+リポジトリ、ブランチ、コミットのみを設定した場合、プラグインは `.git` フォルダーから残りの Git 情報を取り出そうとします。
+
+使用方法の一例をご紹介します。
+
+{{< code-block lang="groovy" >}}
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        script {
+          def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
+
+          // Setting Git information manually via environment variables.
+          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
+          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
+          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        // Execute the rest of the pipeline.
+      }
+    }
+  }
+}
+{{< /code-block >}}
+
+## パイプラインを含めるまたは除外する {#include-or-exclude-pipelines}
+
+一部のパイプラインを含めるか除外するように Jenkins プラグインを構成できます。
+
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configure System{{< /ui >}}] に移動します。
+2. コンフィギュレーション画面を下にスクロールして、[{{< ui >}}Datadog Plugin{{< /ui >}}] セクションに移動します。
+3. [{{< ui >}}Advanced{{< /ui >}}] (高度) ボタンをクリックします。
+4. [{{< ui >}}Excluded Jobs{{< /ui >}}] (除外するジョブ) を設定します。
+5. [{{< ui >}}Included Jobs{{< /ui >}}] (含めるジョブ) を設定します。
+6. 構成を保存します。
+
+{{< ui >}}Excluded jobs{{< /ui >}}
+: 監視対象としない Jenkins ジョブのカンマ区切りリスト。この除外は、すべてのメトリクス、トレース、イベント、およびサービスチェックに適用されます。[Excluded jobs] では、正規表現を使用して複数のジョブを参照できます。<br/>
+**環境変数**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
+**例**: `susans-job,johns-.*,prod_folder/prod_release`
+
+{{< ui >}}Included jobs{{< /ui >}}
+: 監視対象とする Jenkins ジョブ名のカンマ区切りリスト。含めるジョブのリストが空の場合、明示的に除外されていないすべてのジョブが監視されます。この包含は、すべてのメトリクス、トレース、イベント、およびサービスチェックに適用されます。[Included jobs] では、正規表現を使用して複数のジョブを参照できます。<br/>
+**環境変数**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
+**例**: `susans-job,johns-.*,prod_folder/prod_release`
+
+含めるジョブと除外するジョブのリストには正規表現を含めることができますが、glob パターンは使用できません。特定のプレフィックスを持つジョブを含めるには、`prefix-*` ではなく `prefix-.*` を使用します。
+
+## 高度な構成 {#advanced-configuration}
+
+### デフォルトのブランチ名を設定する {#set-the-default-branch-name}
+
+パイプラインの結果を報告するには、デフォルトのブランチ名 (例: `main`) を `git.default_branch` という属性のパイプラインスパンに付加します。これは通常自動的に行われますが、Jenkins によって情報が提供されない場合など、プラグインがこの情報を抽出できないことがあります。
+
+この場合は、ビルド内の `DD_GIT_DEFAULT_BRANCH` 環境変数を使用して、デフォルトのブランチを手動で設定してください。例:
 
 {{< code-block lang="groovy" >}}
 pipeline {
@@ -1215,164 +634,8 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Propagate Git information
 
-Some features of the Datadog Jenkins plugin need Git information associated with the Jenkins builds to work correctly.
-The minimum required Git info for a build is repository URL, branch, commit SHA, and commit author email.
-This information can be determined by the plugin automatically, propagated from SCM, provided manually with environment variables, or obtained by combining these approaches.
-
-### Propagate Git information from SCM
-
-The Jenkins plugin is capable of automatically detecting Git information associated with a build or a pipeline.
-However, depending on the Jenkins version and the pipeline details, there may be cases when automatic Git data detection is not possible.
-
-In this case you can make the Git information available to the plugin by using the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
-
-{{< tabs >}}
-{{% tab "宣言型パイプラインの使用" %}}
-宣言型パイプラインを使ってパイプラインの構成を行う場合は、以下のように `script` ブロックを使って Git の情報を伝搬させます。
-
-`checkout` ステップを使用する:
-{{< code-block lang="groovy" >}}
-pipeline {
-  stages {
-    stage('Checkout') {
-        script {
-          checkout(...).each {k,v -> env.setProperty(k,v)}
-        }
-    }
-    ...
-  }
-}
-{{< /code-block >}}
-
- `git` ステップを使用する:
-{{< code-block lang="groovy" >}}
-pipeline {
-  stages {
-    stage('Checkout') {
-      script {
-        git(...).each {k,v -> env.setProperty(k,v)}
-      }
-    }
-    ...
-  }
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "スクリプトパイプラインの使用" %}}
-スクリプトパイプラインを使ってパイプラインの構成を行う場合は、git の情報を直接環境変数に伝搬させることができます。
-
-`checkout` ステップを使用する:
-{{< code-block lang="groovy" >}}
-node {
-  stage('Checkout') {
-    checkout(...).each {k,v -> env.setProperty(k,v)}
-  }
-  ...
-}
-{{< /code-block >}}
-
-`git` ステップを使用する:
-{{< code-block lang="groovy" >}}
-node {
-  stage('Checkout') {
-    git(...).each {k,v -> env.setProperty(k,v)}
-  }
-  ...
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-### Git の情報を手動で設定する
-
-In case the plugin cannot detect Git information automatically and propagating Git data via SCM is not an option,
-the necessary Git information can be set manually.
-
-To do so, set the following environment variables.
-
-**注:** これらの変数はオプションですが、設定された場合、他の Jenkins プラグインで設定された Git 情報よりも優先されます。
-
-`DD_GIT_REPOSITORY` (オプション)
-: サービスのリポジトリ URL。<br/>
-**例**: `https://github.com/my-org/my-repo.git`
-
-`DD_GIT_BRANCH` (オプション)
-: ブランチ名。<br/>
-**例**: `main`
-
-`DD_GIT_TAG` (オプション)
-: コミットのタグ (ある場合)。<br/>
-**例**: `0.1.0`
-
-`DD_GIT_COMMIT_SHA` (オプション)
-: 16 進数 40 文字で表されるコミットメント。<br/>
-**例**: `faaca5c59512cdfba9402c6e67d81b4f5701d43c`
-
-`DD_GIT_COMMIT_MESSAGE` (オプション)
-: コミットのメッセージ。<br/>
-**例**: `Initial commit message`
-
-`DD_GIT_COMMIT_AUTHOR_NAME` (オプション)
-: コミットの作成者の名前。<br/>
-**例**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL` (オプション)
-: コミットの作成者のメールアドレス。<br/>
-**例**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE` (オプション)
-: 作成者がコミットを提出した日付 (ISO 8601 形式)。<br/>
-**例**: `2021-08-16T15:41:45.000Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME` (オプション)
-: コミットのコミッターの名前。<br/>
-**例**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL` (オプション)
-: コミットのコミッターのメールアドレス。<br/>
-**例**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE` (オプション)
-: コミッターがコミットを提出した日付 (ISO 8601 形式)。<br/>
-**例**: `2021-08-16T15:41:45.000Z`
-
-リポジトリ、ブランチ、コミットのみを設定した場合、プラグインは `.git` フォルダから残りの Git 情報を取り出そうとします。
-
-使用方法の一例をご紹介します。
-
-{{< code-block lang="groovy" >}}
-pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        script {
-          def gitVars = git url:'https://github.com/my-org/my-repo.git', branch:'some/feature-branch'
-
-          // Git 情報を環境変数で手動設定する。
-          env.DD_GIT_REPOSITORY_URL=gitVars.GIT_URL
-          env.DD_GIT_BRANCH=gitVars.GIT_BRANCH
-          env.DD_GIT_COMMIT_SHA=gitVars.GIT_COMMIT
-        }
-      }
-    }
-    stage('Test') {
-      steps {
-        // 残りのパイプラインを実行します。
-      }
-    }
-  }
-}
-{{< /code-block >}}
-
-## カスタマイズ
-
-### パイプラインのカスタムタグを設定する
+### パイプラインのカスタムタグを設定する {#set-custom-tags-for-your-pipelines}
 
 Datadog プラグインは、パイプラインベースのジョブにカスタムタグを付加するために `datadog` ステップを追加します。
 
@@ -1395,7 +658,7 @@ pipeline {
 }
 {{< /code-block >}}
 
-Scripted Pipeline で、関連するセクションを `datadog` ステップでラップします:
+スクリプト化されたパイプラインで、関連するセクションを `datadog` ステップでラップします。
 
 {{< code-block lang="groovy" >}}
 datadog(tags: ["team:backend", "release:canary"]){
@@ -1407,81 +670,68 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
-#### Integrate with Datadog Teams
-To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][15] team handle exactly.
+#### Datadog Teams との統合 {#integrate-with-datadog-teams}
+パイプラインに関連付けられたチームを表示およびフィルタリングするには、`team:<your-team>` をカスタムタグとして追加します。カスタムタグ名は、[Datadog Teams][15] のチームハンドルと完全に一致している必要があります。
 
-### グローバルカスタムタグを設定する
+### グローバルカスタムタグを設定する {#set-global-custom-tags}
 
-すべてのパイプライントレースにカスタムタグを送信するよう、Jenkins プラグインを構成することができます:
+Jenkins プラグインを構成して、すべてのパイプライントレースにカスタムタグ (グローバルタグやグローバグジョブタグなど) を送信することができます。
 
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** に移動します。
-2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
-3. `Advanced` ボタンをクリックします。
-4. `Global Tags` を構成します。
-5. `Global Job Tags` を構成します。
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Configure System{{< /ui >}}] に移動します。
+2. コンフィギュレーション画面を下にスクロールして、[{{< ui >}}Datadog Plugin{{< /ui >}}] セクションに移動します。
+3. [{{< ui >}}Advanced{{< /ui >}}] ボタンをクリックします。
+4. [{{< ui >}}Global Tags{{< /ui >}}] (グローバルタグ) を構成します。
+5. [{{< ui >}}Global Job Tags{{< /ui >}}] (グローバルジョブタグ) を構成します。
 6. 構成を保存します。
 
-**Global tags**
-: すべてのメトリクス、トレース、イベント、サービスチェックに適用するタグのコンマ区切りのリスト。タグには、Jenkins コントローラーインスタンスで定義されている環境変数を含めることができます。<br/>
+{{< ui >}}Global tags{{< /ui >}}
+: すべてのメトリクス、トレース、イベント、サービスチェックに適用するカンマ区切りのタグのリストです。タグには、Jenkins コントローラーインスタンスで定義されている環境変数を含めることができます。<br/>
 **環境変数**: `DATADOG_JENKINS_PLUGIN_GLOBAL_TAGS`<br/>
 **例**: `key1:value1,key2:${SOME_ENVVAR},${OTHER_ENVVAR}:value3`
 
-**Global job tags**
-: ジョブに一致する正規表現のコンマ区切りのリストと、そのジョブに適用するタグのリスト。タグには、Jenkins コントローラーインスタンスで定義されている環境変数を含めることができます。タグは、`$` 記号を使用して正規表現内の一致グループを参照できます。<br/>
+{{< ui >}}Global job tags{{< /ui >}}
+: ジョブに一致させる正規表現のカンマ区切りリストと、そのジョブに適用するタグのリストです。タグには、Jenkins コントローラーインスタンスで定義されている環境変数を含めることができます。タグでは、`$` 記号を使用して正規表現で一致グループを参照できます。<br/>
 **環境変数**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **例**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
-### パイプラインを含めるまたは除外する
+## Datadog でパイプラインデータを視覚化する{#visualize-pipeline-data-in-datadog}
 
-一部のパイプラインを含めるか除外するように Jenkins プラグインを構成できます。
+インテグレーションが正常に構成されたら、パイプラインが終了した後、[[**CI Pipeline List**] (CI パイプラインリスト)][7] ページと [[**Executions**] (実行)][8] ページの両方にデータが表示されます。
 
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Configure System** に移動します。
-2. コンフィギュレーション画面を下にスクロールして、`Datadog Plugin` セクションに移動します。
-3. `Advanced` ボタンをクリックします。
-4. `Excluded Jobs` を構成します。
-5. `Included Jobs` を構成します。
-6. 構成を保存します。
+[{{< ui >}}CI Pipeline List{{< /ui >}}] ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。詳細については、「[CI パイプラインの検索と管理][28]」を参照してください。
 
-**Excluded jobs**
-: 監視すべきではない Jenkins ジョブのコンマ区切りのリスト。除外は、すべてのメトリクス、トレース、イベント、サービスチェックに適用されます。除外されたジョブは、正規表現を使用して複数のジョブを参照できます。<br/>
-**環境変数**: `DATADOG_JENKINS_PLUGIN_EXCLUDED`<br/>
-**例**: `susans-job,johns-.*,prod_folder/prod_release`
+## トラブルシューティング {#troubleshooting}
 
-**Included jobs**
-: 監視する必要がある Jenkins ジョブ名のコンマ区切りのリスト。含まれるジョブのリストが空の場合、明示的に除外されていないすべてのジョブが監視されます。包含は、すべてのメトリクス、トレース、イベント、サービスチェックに適用されます。含まれるジョブは、正規表現を使用して複数のジョブを参照できます。<br/>
-**環境変数**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
-**例**: `susans-job,johns-.*,prod_folder/prod_release`
+### 診断フレアを生成する {#generate-diagnostic-flare}
 
-Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+Datadog サポートチームに問題を報告する際は、プラグインの診断フレアを生成し、問題の説明と一緒に提供してください。
 
-## Datadog でパイプラインデータを視覚化する
+診断フレアを生成するには、次の手順を実行します。
 
-Once the integration is successfully configured, both the [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after pipelines finish.
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] (Jenkins の管理) > [{{< ui >}}Troubleshooting{{< /ui >}}] (トラブルシューティング) > [{{< ui >}}Datadog{{< /ui >}}] に移動します。
+2. 診断フレアフォームで、フレアに含める情報にチェックマークを付けます。デフォルトの選択が最適です。提供する情報が多いほど、問題の診断が容易になります。
+3. [{{< ui >}}Download{{< /ui >}}] (ダウンロード) をクリックして、フレアアーカイブを生成およびダウンロードします。
 
-The **CI Pipeline List** page shows data for only the default branch of each repository.
+### Datadog プラグインの DEBUG ログレベルを有効にする {#enable-debug-log-level-for-the-datadog-plugin}
 
-## トラブルシューティング
+Datadog プラグインで問題が発生した場合は、プラグインのログを `DEBUG` レベルに設定できます。このレベルを使用すると、例外がスローされた場合にスタックトレースの詳細を確認できます。
 
-### Datadog プラグインの DEBUG ログレベルを有効にする
-
-Datadog プラグインに問題がある場合は、プラグインのログを `DEBUG` レベルで設定できます。このレベルを使用すると、例外がスローされた場合にスタックトレースの詳細を確認できます。
-
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > System log** にアクセスします。
-2. `Add new log recorder` ボタンをクリックします。
-3. ログレコーダー名を入力します。例: **Datadog プラグインログ**
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}System log{{< /ui >}}] (システムログ) に移動します。
+2. [{{< ui >}}Add new log recorder{{< /ui >}}] (新規ログレコーダーの追加) ボタンをクリックします。
+3. ログレコーダー名を入力します。例: **Datadog Plugin Logs**。
 4. 次のロガーをリストに追加します。
-    - Logger: `org.datadog.jenkins.plugins.datadog.clients` -> Log Level `ALL`
-    - Logger: `org.datadog.jenkins.plugins.datadog.traces` -> Log Level `ALL`
-    - Logger: `org.datadog.jenkins.plugins.datadog.logs` -> Log Level `ALL`
-    - Logger: `org.datadog.jenkins.plugins.datadog.model` -> Log Level `ALL`
-    - Logger: `org.datadog.jenkins.plugins.datadog.listeners` -> Log Level `ALL`
+    - ロガー: `org.datadog.jenkins.plugins.datadog.clients` -> ログレベル `ALL`
+    - ロガー: `org.datadog.jenkins.plugins.datadog.traces` -> ログレベル `ALL`
+    - ロガー: `org.datadog.jenkins.plugins.datadog.logs` -> ログレベル `ALL`
+    - ロガー: `org.datadog.jenkins.plugins.datadog.model` -> ログレベル `ALL`
+    - ロガー: `org.datadog.jenkins.plugins.datadog.listeners` -> ログレベル `ALL`
 5. 構成を保存します。
 
 ロガーを異なるログレコーダーに分割することもできます。
 
-ログレコーダーが正常に構成されたら、**Manage Jenkins > System log** から目的のログレコーダーにアクセスして、`DEBUG` モードでログを確認できます。
+ログレコーダーが正常に構成されたら、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}System log{{< /ui >}}] から目的のログレコーダーにアクセスして、`DEBUG` モードでログを確認できます。
 
-Jenkins パイプラインをトリガーすると、**Datadog Plugin Logs** でメッセージ `Send pipeline traces` を検索できます。このメッセージは、プラグインが **CI Visibility** データを **Datadog Agent** に送信していることを示しています。
+Jenkins パイプラインをトリガーすると、[{{< ui >}}Datadog Plugin Logs{{< /ui >}}] (Datadog プラグインログ) でメッセージ `Send pipeline traces` を検索できます。このメッセージは、プラグインが CI Visibility データを Datadog Agent に送信していることを示しています。
 
 {{< code-block lang="text" >}}
 Send pipeline traces.
@@ -1490,55 +740,65 @@ Send pipeline traces.
 ...
 {{< /code-block >}}
 
-### Datadog Plugin がサーバーにペイロードを書き込めない
+### パイプライン実行データは Datadog では使用できない {#pipeline-executions-data-is-not-available-in-datadog}
 
-**Jenkins Log** に以下のエラーメッセージが表示された場合、プラグインの構成が正しいかどうか確認してください。
+#### HTTP 接続チェック {#http-connectivity-check}
+
+Jenkins インスタンスが HTTP プロキシの後ろにある場合は、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Manage Plugins{{< /ui >}}] (プラグインの管理) > [{{< ui >}}Advanced tab{{< /ui >}}] (詳細タブ) に移動し、プロキシ構成が正しいことを確認します。
+- Datadog プラグインが Datadog Agent にデータを送信するように構成されている場合は、Agent ホストが [{{< ui >}}No Proxy Hosts{{< /ui >}}] (プロキシホストなし) セクションに追加されていることを確認します。
+- Datadog プラグインが Datadog に直接データを送信するように構成されている場合は (Agentless モード)、Datadog ホストが [{{< ui >}}No Proxy Hosts{{< /ui >}}] セクションに追加されていることを確認します。次の表に、サポートされている Datadog サイトと対応するホスト値を示します。
+
+| Datadog サイト | ホスト値 |
+| ------------ | ----------------------- |
+| US1          | datadoghq.com           |
+| US3          | us3.datadoghq.com       |
+| US5          | us5.datadoghq.com       |
+| EU1          | datadoghq.eu            |
+| AP1          | ap1.datadoghq.com       |
+| UK1          | uk1.datadoghq.com       |
+
+#### Datadog Plugin がサーバーにペイロードを書き込めない {#the-datadog-plugin-cannot-write-payloads-to-the-server}
+
+[{{< ui >}}Jenkins Log{{< /ui >}}] (Jenkins ログ) に以下のエラーメッセージが表示された場合、プラグインの構成が正しいかどうか確認してください。
 
 {{< code-block lang="text" >}}
 Error writing to server
 {{< /code-block >}}
 
-1. ホスト名として `localhost` を使用している場合は、代わりにサーバーのホスト名に変更してみてください。
-2. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
+ホスト名として `localhost` を使用している場合は、代わりにサーバーのホスト名に変更してください。
 
-#### HTTP 504
+### Jenkins ログを Datadog で使用できない {#jenkins-logs-are-not-available-in-datadog}
 
-HTTP 504 のエラーメッセージが表示される場合は、Jenkins のプロキシ構成が正しいかどうかを確認してください。
+Datadog プラグインが Datadog Agent にデータを送信するように構成されている場合は、以下の手順を実行してください。
+- TCP 経由のカスタムログ収集が Agent で[有効化され、構成されている][29]ことを確認します。
+- プラグイン構成 UI に移動し、[{{< ui >}}Test logs connection{{< /ui >}}] (ログ接続のテスト) をクリックしてログの接続性を確認します。
 
-{{< code-block lang="text" >}}
-Failed to send HTTP request: PUT http://localhost:8126/v0.3/traces - Status: HTTP 504
-{{< /code-block >}}
+### Datadog プラグインセクションが Jenkins コンフィギュレーションに表示されない {#the-datadog-plugin-section-does-not-appear-in-the-jenkins-configuration}
 
-1. Jenkins インスタンスが HTTP プロキシの後ろにある場合、**Manage Jenkins** > **Manage Plugins** > **Advanced tab** に移動して、プロキシ構成が正しいことを確認します。
-  1. `No Proxy Hosts` に `localhost` が構成されていることを確認します。
+Datadog プラグインセクションが Jenkins コンフィギュレーションセクションに表示されない場合は、プラグインが有効になっていることを確認します。そのためには、以下の作業を行います。
 
-### Datadog プラグインセクションが Jenkins コンフィギュレーションに表示されない
-
-Datadog プラグインセクションが Jenkins コンフィギュレーションセクションに表示されない場合は、プラグインが有効になっていることを確認してください。手順:
-
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Manage Plugins** にアクセスします。
-2. **Installed** タブで `Datadog Plugin` を検索します。
-3. `Enabled` チェックボックスがオンになっていることを確認します。
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Manage Plugins{{< /ui >}}] に移動します。
+2. [{{< ui >}}Datadog Plugin{{< /ui >}}] (Datadog プラグイン) を [{{< ui >}}Installed{{< /ui >}}] (インストール済み) タブで検索します。
+3. [{{< ui >}}Enabled{{< /ui >}}] (有効化) チェックボックスがオンになっていることを確認します。
 4. ここでプラグインを有効にする場合は、`/safeRestart` URL パスを使用して Jenkins インスタンスを再起動します。
 
-### CI Visibility オプションが Datadog プラグインセクションに表示されない。
+### CI Visibility オプションが Datadog プラグインセクションに表示されない。{#the-ci-visibility-option-does-not-appear-in-the-datadog-plugin-section}
 
-CI Visibility オプションが Datadog プラグインセクションに表示されない場合は、正しいバージョンがインストールされていることを確認して、Jenkins インスタンスを再起動してください。手順:
+CI Visibility オプションが Datadog プラグインセクションに表示されない場合は、正しいバージョンがインストールされていることを確認して、Jenkins インスタンスを再起動してください。そのためには、以下の作業を行います。
 
-1. Jenkins インスタンスの Web インターフェースで、**Manage Jenkins > Manage Plugins** にアクセスします。
-2. **Installed** タブで `Datadog Plugin` を検索します。
+1. Jenkins インスタンスの Web インターフェースで、[{{< ui >}}Manage Jenkins{{< /ui >}}] > [{{< ui >}}Manage Plugins{{< /ui >}}] に移動します。
+2. [{{< ui >}}Datadog Plugin{{< /ui >}}] (Datadog プラグイン) を [{{< ui >}}Installed{{< /ui >}}] (インストール済み) タブで検索します。
 3. インストールされているバージョンが正しいことを確認します。
 4. `/safeRestart` URL パスを使用して Jenkins インスタンスを再起動します。
 
-### プラグインのトレーサーが、APM Java トレーサーが Jenkins のインスツルメントに使用されているため、初期化に失敗する。
+### インフラストラクチャーメトリクスが Jenkins パイプラインに関連付けられない {#infrastructure-metrics-do-not-get-correlated-with-jenkins-pipelines}
 
-このエラーメッセージが **Jenkins Log** に表示される場合は、Jenkins プラグイン v3.1.0 以降を使用していることを確認してください
+[インフラストラクチャーメトリクスと Jenkins パイプラインを関連付ける][11]ための手順を完了していることを確認してください。
 
-{{< code-block lang="text" >}}
-Datadog-Plugin Tracer の再初期化に失敗した。Jenkins 起動コマンドで Datadog Java Tracer が javaagent として使用されている場合、プラグインを介したトレース収集を有効にできない。このエラーは、パイプラインの実行には影響しません。
-{{< /code-block >}}
+この手順を完了してもインフラストラクチャーメトリクスが Jenkins パイプラインと関連付けられない場合は、
+Jenkins インスタンスを再起動してみてください。
 
-## 参考資料
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1549,8 +809,8 @@ Datadog-Plugin Tracer の再初期化に失敗した。Jenkins 起動コマン�
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
-[10]: /ja/continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
-[11]: /ja/continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
+[10]: /ja/continuous_integration/pipelines/jenkins/?tab=linux#logs-storage
+[11]: /ja/continuous_integration/pipelines/jenkins/?tab=agentlessusinganapikey#correlate-infrastructure-metrics
 [12]: /ja/continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /ja/agent/
 [15]: /ja/account_management/teams/
@@ -1565,3 +825,11 @@ Datadog-Plugin Tracer の再初期化に失敗した。Jenkins 起動コマン�
 [24]: /ja/glossary/#parameter
 [25]: /ja/glossary/#pipeline-failure
 [26]: /ja/glossary/#custom-span
+[27]: /ja/logs/guide/best-practices-for-log-management/
+[28]: /ja/continuous_integration/search/#search-for-pipelines
+[29]: /ja/agent/logs/?tab=tcpudp#custom-log-collection
+[30]: /ja/extend/dogstatsd/
+[31]: /ja/containers/docker/apm/#tracing-from-the-host
+[32]: /ja/glossary/#running-pipeline
+[33]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[34]: /ja/glossary/#pipeline-execution-time

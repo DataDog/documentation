@@ -75,6 +75,8 @@ To create a SAT for a service account:
 2. Under **Access Tokens**, click {{< ui >}}\+ New Token{{< /ui >}}.
 3. Follow the steps in [Create a Service Access Token][5].
 
+**Note:** Each service account can have up to 500 SATs.
+
 ### Create or revoke application keys
 
 To create or revoke service account application keys, select an account from the service account list. The service account's side panel appears.

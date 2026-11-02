@@ -1,75 +1,90 @@
 ---
-description: Configura Datadog Feature Flags para aplicaciones de Java.
+description: Configure las Feature Flags de Datadog para aplicaciones Java.
 further_reading:
 - link: /feature_flags/server/
   tag: Documentación
-  text: Indicadores de características del servidor
+  text: Feature Flags del lado del servidor
 - link: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
   tag: Documentación
-  text: APM de Java y rastreo distribuido
-title: Java Feature Flags
+  text: APM y Distributed Tracing de Java
+- link: /feature_flags/guide/server_flag_evaluation_metrics/
+  tag: Guía
+  text: Configure las métricas de evaluación de marcadores del lado del servidor
+- link: /feature_flags/guide/apm_trace_enrichment/
+  tag: Guía
+  text: Configure el enriquecimiento de trazas de APM para Feature Flags
+- link: /feature_flags/concepts/flag_graphs/
+  tag: Concepto
+  text: Gráficos de Feature Flag
+- link: /feature_flags/concepts/configuration_sources/
+  tag: Concepto
+  text: Fuentes de configuración del SDK del servidor
+title: Feature Flags de Java
 ---
+## Descripción general {#overview}
 
-<div class="alert alert-warning">La compatibilidad de Datadog Feature Flags es experimental y requiere habilitar una indicador experimental en el rastreador. Consulta la <a href="#configuration">sección Configuración</a> para obtener más información.</div>
+Esta página describe cómo añadir Feature Flags de Datadog a una aplicación Java. En la versión 1.66.0 y posteriores, `dd-openfeature` carga la configuración de flags directamente desde la CDN gestionada por Datadog de forma predeterminada. Esta fuente Agentless admite servidores de larga ejecución y entornos de ejecución serverless que no pueden conectarse a un Datadog Agent.
 
-## Información general
+El proveedor de Datadog implementa el estándar [OpenFeature](https://openfeature.dev/). Utiliza `dd-java-agent` para la entrega de configuración. La entrega Agentless elimina el requisito del Datadog Agent externo, pero `dd-java-agent` debe cargarse de todos modos en la JVM.
 
-En esta página se describe cómo instrumentar tu aplicación de Java con el SDK de  Datadog Feature Flags. Los indicadores de características de Datadog ofrecen una forma unificada de controlar de forma remota la disponibilidad de características en tu aplicación, experimentar de forma segura y ofrecer nuevas experiencias con confianza.
+Agentless Java evalúa las flags localmente y envía eventos de exposición a experimentos y eventos de evaluación de flags agregados del Event Platform Proxy (EVP). Prefiere un relay de telemetría local compatible. Envía ambos tipos de eventos directamente cuando no hay un relay compatible disponible.
 
-El kit de desarrollo de software (SDK) de Java integra indicadores de características directamente en el rastreador de Datadog APM e implementa el estándar de [OpenFeature](https://openfeature.dev/) para ofrecer la máxima flexibilidad y compatibilidad.
+## Requisitos de compatibilidad {#compatibility-requirements}
 
-<div class="alert alert-info">Si utilizas Datadog APM y tu aplicación ya tiene activados el rastreador de Datadog Java y Remote Configuration, ve directamente a <a href="#initialize-the-openfeature-provider">Inicializar el proveedor OpenFeature</a>. Solo tienes que añadir las dependencias de OpenFeature e inicializar el proveedor.</div>
+Para la configuración sin agente predeterminada, necesita:
 
-## Requisitos de compatibilidad
+- **Java 11 o superior**
+- **Datadog Java agent** (`dd-java-agent`, cargado con `-javaagent`): Versión **1.66.0** o posterior
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, añadido como dependencia de compilación): Versión **1.66.0** o posterior
+- **OpenFeature SDK**: Versión **1.20.1** o posterior
+- Una [**clave de API**] de Datadog[7]
+- Su Datadog [**sitio**][14]
 
-El SDK de Datadog Feature Flags para Java requiere:
-- **Java 11 o posterior**
-- **Rastreador de APM de Datadog Java**: versión 2.4.0 o posterior
-- **SDK de OpenFeature**: versión **1.18.2** o posterior
-- **Datadog Agent**: versión **7.x o posterior** con [Remote Configuration][1] activada
-- **Clave de API de Datadog**: necesaria para Remote Configuration
+Utilice la misma versión de `dd-java-agent` y `dd-openfeature`. La entrega Agentless no requiere un servicio de Datadog Agent independiente.
 
-Para obtener una lista completa de la versión de Java de Datadog y la compatibilidad con el framework, lee [Requisitos de compatibilidad](/tracing/trace_collection/compatibility/java/).
+<div class="alert alert-info">Para Java sin servidor, el entorno de ejecución debe admitir la <code>-javaagent</code> opción de JVM. Puede pasar la opción en el comando de Java o a través de <code>JAVA_TOOL_OPTIONS</code>. Consulte la configuración de Java para <a href="/serverless/google_cloud_run/functions/java/?tab=maven">Cloud Run Functions</a> o <a href="/serverless/google_cloud_run/containers/in_container/java/">Cloud Run containers</a> para ver ejemplos.</div>
 
-## Empezando
+Para obtener la lista de versiones de Java y compatibilidad con frameworks de Datadog, lea [Requisitos de compatibilidad](/tracing/trace_collection/compatibility/java/).
 
-Antes de empezar, asegúrate de que ya has [instalado y configurado el Agent](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#install-and-configure-the-agent).
+## Primeros pasos {#getting-started}
 
-## Instalación
+Instale las dependencias de OpenFeature y agregue el agente de Java a la JVM.
 
-El marcado de características está integrado en el rastreador de APM de Datadog Java. Necesitas el JAR del rastreador y las dependencias del SDK de OpenFeature.
+## Instalación {#installation}
+
+Necesita el proveedor de OpenFeature de Datadog y las dependencias del SDK de OpenFeature.
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
-Añade las siguientes dependencias a tu `build.gradle`:
+Agregue las siguientes dependencias a su `build.gradle`:
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.66.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Gradle (Kotlin)" %}}
-Añade las siguientes dependencias a tu `build.gradle.kts`:
+Agregue las siguientes dependencias a su `build.gradle.kts`:
 
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation("dev.openfeature:sdk:1.18.2")
+    implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.57.0")
+    implementation("com.datadoghq:dd-openfeature:1.66.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Maven" %}}
-Añade las siguientes dependencias a tu `pom.xml`:
+Agregue las siguientes dependencias a su `pom.xml`:
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependencies>
@@ -77,98 +92,51 @@ Añade las siguientes dependencias a tu `pom.xml`:
     <dependency>
         <groupId>dev.openfeature</groupId>
         <artifactId>sdk</artifactId>
-        <version>1.18.2</version>
+        <version>1.20.1</version>
     </dependency>
 
     <!-- Datadog OpenFeature Provider -->
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.57.0</version>
+        <version>1.66.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuración
+Los ejemplos de instalación de Gradle y Maven fijan versiones específicas de `dd-openfeature` y del SDK de OpenFeature. Consulte [Requisitos de compatibilidad](#compatibility-requirements) para conocer las versiones mínimas admitidas.
 
-Si tu Datadog Agent ya tiene activado Remote Configuration para otras funciones (como Dynamic Instrumentation o Application Security), puedes omitir la configuración del Agent e ir directamente a [Configuración de aplicaciones](#application-configuration).
+Las métricas de evaluación de flags utilizan una ruta de telemetría independiente de la configuración de flags. Consulte [Configurar las métricas de evaluación de flags del lado del servidor][8].
 
-### Configuración del Agent
+### Agregue el agente de Java a la JVM {#add-the-java-agent-to-the-jvm}
 
-Configura tu Datadog Agent para activar Remote Configuration:
+Cargue `dd-java-agent` con la opción de JVM `-javaagent`. Para obtener instrucciones de instalación, consulte [Agregue el SDK de Java a la JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-# Activar la configuración remota
-remote_configuration:
-  enabled: true
+Si el entorno de ejecución controla el comando de Java, establezca la opción a través de `JAVA_TOOL_OPTIONS`. Consulte la configuración de Java para [Cloud Run Functions][15] o [Cloud Run containers][16] para ver ejemplos.
 
-# Set your API key
-api_key: <YOUR_API_KEY>
-{{< /code-block >}}
+## Configuración {#configuration}
 
-### Configuración de la aplicación
+### Configure la entrega Agentless {#configure-agentless-delivery}
 
-Si tu aplicación ya se ejecuta con `-javaagent:dd-java-agent.jar` y tiene habilitada Remote Configuration (`DD_REMOTE_CONFIG_ENABLED=true`), solo necesitas añadir el indicador de característica experimental (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`). Omite los pasos de descarga del rastreador y configuración de la JVM.
+Configure la clave de API, el sitio de Datadog y el entorno en el proceso de la aplicación:
 
-Configura tu aplicación Java con las variables de entorno o propiedades del sistema necesarias:
-
-{{< tabs >}}
-{{% tab "Environment Variables" %}}
 {{< code-block lang="bash" >}}
-# Required: Enable Remote Configuration in the tracer
-export DD_REMOTE_CONFIG_ENABLED=true
-
-# Required: Enable experimental feature flagging support
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Your Datadog API key
 export DD_API_KEY=<YOUR_API_KEY>
-
-# Required: Service name
-export DD_SERVICE=<YOUR_SERVICE_NAME>
-
-# Required: Environment (e.g., prod, staging, dev)
+export DD_SITE=<YOUR_DATADOG_SITE>
 export DD_ENV=<YOUR_ENVIRONMENT>
-
-# Optional: Version
+export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_VERSION=<YOUR_APP_VERSION>
 
-# Start your application with the tracer
-java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
+java -javaagent:/path/to/dd-java-agent.jar -jar your-application.jar
 {{< /code-block >}}
-{{% /tab %}}
 
-{{% tab "System Properties" %}}
-{{< code-block lang="bash" >}}
-java -javaagent:path/to/dd-java-agent.jar \
-  -Ddd.remote.config.enabled=true \
-  -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.api.key=<YOUR_API_KEY> \
-  -Ddd.service=<YOUR_SERVICE_NAME> \
-  -Ddd.env=<YOUR_ENVIRONMENT> \
-  -Ddd.version=<YOUR_APP_VERSION> \
-  -jar your-application.jar
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+No se requiere la habilitación de Feature Flags ni la configuración de la fuente. Inicialice el proveedor de OpenFeature de Datadog para comenzar el sondeo.
 
-El sistema de marcado de características de Datadog se inicia automáticamente cuando se inicializa el rastreador con Remote Configuration y el proveedor de marcado experimental activados. No se requiere ningún código de inicialización adicional en tu aplicación.
+## Inicialice el proveedor de OpenFeature {#initialize-the-openfeature-provider}
 
-<div class="alert alert-danger">El marcado de características requiere <code>DD_REMOTE_CONFIG_ENABLED=true</code> y <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Sin el indicador experimental, el sistema de marcado de características no se inicia y el <code>proveedor</code> devuelve el valor programático predeterminado.</div>
-
-### Añadir el rastreador de Java a la JVM
-
-Para obtener instrucciones sobre cómo añadir el argumento `-javaagent` a tu servidor de aplicaciones o framework, consulta [Add the Java Tracer to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-tracer-to-the-jvm).
-
-Asegúrate de incluir los indicadores de configuración del marcado de características:
-- `-Ddd.remote.config.enabled=true`
-- `-Ddd.experimental.flagging.provider.enabled=true`
-
-## Inicializar el proveedor OpenFeature
-
-Inicializa el proveedor Datadog OpenFeature en el código de inicio de tu aplicación. El proveedor se conecta al sistema de marcado de características que se ejecuta en el rastreador de Datadog.
+Inicialice el proveedor de OpenFeature de Datadog en el código de inicio de su aplicación. El proveedor inicia la fuente de configuración seleccionada.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -194,7 +162,7 @@ public class App {
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
             // Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
+            logger.warn("Provider not ready (configuration unavailable), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
         } catch (Exception e) {
@@ -207,13 +175,13 @@ public class App {
 }
 {{< /code-block >}}
 
-Utiliza `setProviderAndWait()` para bloquear la evaluación hasta que se reciba la configuración inicial del indicador desde Remote Configuration. Esto asegura que los indicadores estén listos antes de que la aplicación comience a atender tráfico. El tiempo de espera por defecto es de 30 segundos.
+Use `setProviderAndWait()` para bloquear la evaluación hasta que la fuente seleccionada proporcione la configuración inicial de flags. Esto carga los flags antes de que la aplicación comience a recibir tráfico. El tiempo de espera de inicialización predeterminado es de 30 segundos.
 
-`ProviderNotReadyError` es una excepción del SDK de OpenFeature que se lanza cuando se agota el tiempo de espera del proveedor durante la inicialización. Su captura permite que la aplicación se inicie con los valores por defecto del indicador si Remote Configuration no está disponible. Si no se captura, la excepción se propaga y puede impedir el inicio de la aplicación. Gestiona esto basándote en tus requisitos de disponibilidad.
+`ProviderNotReadyError` es una excepción del SDK de OpenFeature que se lanza cuando el proveedor agota el tiempo de espera durante la inicialización. Capturarla permite que la aplicación se inicie con valores de flag predeterminados si la entrega de configuración no está disponible. Si no se captura, la excepción se propaga y puede impedir el inicio de la aplicación. Maneje esto según sus requisitos de disponibilidad.
 
-### Inicialización asíncrona
+### Inicialización asíncrona{#asynchronous-initialization}
 
-Para una inicialización no bloqueante, utiliza `setProvider()` y escuche los eventos del proveedor:
+Para una inicialización no bloqueante, use `setProvider()` y escuche los eventos del proveedor:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -238,9 +206,11 @@ client.on(ProviderEvent.PROVIDER_STALE, (event) -> {
 api.setProvider(new Provider());
 {{< /code-block >}}
 
-## Definir el contexto de evaluación
+## Establezca el contexto de evaluación {#set-the-evaluation-context}
 
-El contexto de evaluación define el sujeto (usuario, dispositivo, sesión) para la evaluación del indicador. Determina qué variaciones del indicador se devuelven en función de las reglas de orientación.
+El contexto de evaluación define al sujeto (usuario, dispositivo, sesión) para la evaluación de flags. Determina qué variaciones de flag se devuelven según las reglas de segmentación.
+
+<div class="alert alert-warning">Datadog Feature Flags requiere que los atributos del contexto de evaluación sean valores primitivos planos: cadenas, números y booleanos. No pase objetos o arreglos anidados; no son compatibles y pueden causar que los datos de exposición se descarten.</div>
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.EvaluationContext;
@@ -254,14 +224,14 @@ EvaluationContext context = new MutableContext("user-123")
 // Use the context for flag evaluations (see next section)
 {{< /code-block >}}
 
-El `targetingKey` (por ejemplo, `user-123`) es el identificador principal utilizado para las evaluaciones de indicadores coherentes y las implantaciones basadas en porcentajes. Suele ser un identificador de usuario, de sesión o de dispositivo.
+El `targetingKey` (por ejemplo, `user-123`) es el identificador principal utilizado para evaluaciones consistentes de flags y despliegues basados en porcentajes. Por lo general, es un ID de usuario, ID de sesión o ID de dispositivo.
 
-## Evaluar indicadores
+## Evalúe marcadores {#evaluate-flags}
 
-Evalúa los indicadores de características con el cliente OpenFeature. Se admiten todos los tipos de indicadores: booleano, cadena, entero, doble y objeto.
+Evalúe los Feature Flags usando el cliente de OpenFeature. Se admiten todos los tipos de flag: Booleano, cadena, entero, doble y objeto.
 
 {{< tabs >}}
-{{% tab "Boolean" %}}
+{{% tab "Booleano" %}}
 {{< code-block lang="java" >}}
 // Simple Boolean evaluation
 boolean enabled = client.getBooleanValue("checkout.new", false, context);
@@ -284,7 +254,7 @@ logger.info("Reason: {}", details.getReason());
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "String" %}}
+{{% tab "Cadena" %}}
 {{< code-block lang="java" >}}
 // Evaluate string flags (e.g., UI themes, API endpoints)
 String theme = client.getStringValue("ui.theme", "light", context);
@@ -323,9 +293,9 @@ if (config.isStructure()) {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tratamiento de errores
+## Manejo de errores {#error-handling}
 
-El SDK de OpenFeature utiliza un patrón de valores por defecto. Si la evaluación falla por cualquier motivo, se devuelve el valor predeterminado que proporciones.
+El SDK de OpenFeature utiliza un patrón de valor predeterminado. Si la evaluación falla por cualquier motivo, se devuelve el valor predeterminado que usted proporcione.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ErrorCode;
@@ -354,21 +324,34 @@ if (details.getErrorCode() != null) {
 }
 {{< /code-block >}}
 
-### Códigos de error habituales
+### Códigos de error comunes {#common-error-codes}
 
 | Código de error | Descripción | Resolución |
 |------------|-------------|------------|
 | `PROVIDER_NOT_READY` | Configuración inicial no recibida | Espere a la inicialización del proveedor o utilice `setProviderAndWait()` |
-| `FLAG_NOT_FOUND` | El indicador no existe en la configuración | Comprueba la clave del indicador o crea un indicador en la interfaz de usuario de Datadog |
-| `TARGETING_KEY_MISSING` | Ninguna clave de orientación en el contexto de la evaluación | Proporcionar una clave de orientación al crear el contexto |
-| `TYPE_MISMATCH` | El valor del indicador no se puede convertir al tipo solicitado | Utilizar el método de evaluación correcto para el tipo de indicador |
-| `INVALID_CONTEXT` | El contexto de evaluación es nulo | Proporcionar un contexto de evaluación válido |
+| `FLAG_NOT_FOUND` | El flag no existe en la configuración | Verifique la clave del flag o cree el flag en la interfaz de usuario de Datadog |
+| `TARGETING_KEY_MISSING` | No hay clave de segmentación en el contexto de evaluación | Proporcione una clave de segmentación al crear el contexto |
+| `TYPE_MISMATCH` | El valor del flag no se puede convertir al tipo solicitado | Utilice el método de evaluación correcto para el tipo de flag |
+| `INVALID_CONTEXT` | El contexto de evaluación es nulo | Proporcione un contexto de evaluación válido |
 
-## Configuración avanzada
+## Configuración avanzada {#advanced-configuration}
 
-### Tiempo de espera de inicialización personalizado
+Utilice [Server SDK Configuration Sources][9] como referencia canónica para la selección de fuente y los ajustes operativos:
 
-Configura cuánto tiempo espera el proveedor para la configuración inicial:
+- [Configure la entrega Agentless][12], incluyendo el sondeo, el tiempo de espera de la solicitud y los ajustes del punto de conexión
+- [Utilice un punto de conexión Agentless personalizado][10] para pruebas avanzadas, desarrollo local o un proxy gestionado por el operador
+- [Utilice Remote Configuration del Agent][13] para conservar la entrega gestionada por el Agent
+- [Migre una configuración de Remote Configuration existente][11] y elimine el ajuste `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` obsoleto
+
+En el modo Agentless, Java prefiere un relay de telemetría local compatible para la exposición a experimentos y eventos de evaluación de flags agregados. Envía ambos tipos de eventos directamente cuando no hay un relay compatible disponible. La ruta directa utiliza los ajustes `DD_API_KEY` y `DD_SITE` de la aplicación. Para entornos serverless sin Agent, puede utilizar [`serverless-init`][17] como relay de telemetría local.
+
+La métrica `feature_flag.evaluations` utiliza la configuración de OTLP independiente en la guía [Server-Side Flag Evaluation Metrics][8].
+
+Para obtener más información sobre los gráficos disponibles, consulte [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+
+### Tiempo de espera de inicialización personalizado {#custom-initialization-timeout}
+
+Configure cuánto tiempo espera el proveedor para la configuración inicial:
 
 {{< code-block lang="java" >}}
 import datadog.trace.api.openfeature.Provider;
@@ -380,9 +363,9 @@ Provider.Options options = new Provider.Options()
 api.setProviderAndWait(new Provider(options));
 {{< /code-block >}}
 
-### Eventos de cambio de configuración
+### Eventos de cambio de configuración {#configuration-change-events}
 
-Escucha actualizaciones de configuración desde Remote Configuration:
+Escuche las actualizaciones de la fuente de configuración seleccionada:
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.ProviderEvent;
@@ -393,11 +376,11 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` es un evento opcional de OpenFeature. Consulta la documentación del proveedor de Datadog para comprobar si tu versión admite este evento.
+`PROVIDER_CONFIGURATION_CHANGED` es un evento opcional de OpenFeature. Consulte la documentación del proveedor de Datadog para verificar si este evento es compatible con su versión.
 
-### Múltiples clientes
+### Múltiples clientes {#multiple-clients}
 
-Utiliza clientes con nombre para organizar el contexto y los indicadores por dominio o equipo:
+Use clientes con nombre para organizar el contexto y las flags por dominio o equipo:
 
 {{< code-block lang="java" >}}
 // Named clients share the same provider instance but can have different contexts
@@ -417,15 +400,15 @@ boolean enhancedAnalytics = analyticsClient.getBooleanValue(
 );
 {{< /code-block >}}
 
-La instancia `Provider` se comparte globalmente. Los nombres de los clientes solo tienen fines organizativos y no crean instancias de proveedores independientes. Todos los clientes utilizan el mismo proveedor subyacente de Datadog y las mismas configuraciones de indicadores.
+La instancia `Provider` se comparte globalmente. Los nombres de los clientes son solo para fines organizativos y no crean instancias de proveedor separadas. Todos los clientes usan el mismo proveedor de Datadog subyacente y las mismas configuraciones de flags.
 
-## Prácticas recomendadas
+## Mejores prácticas {#best-practices}
 
-### Inicialización temprana
-Inicializa el proveedor OpenFeature lo antes posible en el ciclo de vida de tu aplicación (por ejemplo, en `main()` o al iniciar la aplicación). Esto garantiza que los indicadores estén listos antes de que se ejecute la lógica empresarial.
+### Inicialice temprano {#initialize-early}
+Inicialice el proveedor de OpenFeature lo antes posible en el ciclo de vida de su aplicación (por ejemplo, en `main()` o al iniciar la aplicación). Esto ayuda a asegurar que las flags estén listas antes de que se ejecute la lógica de negocio.
 
-### Utilizar valores por defecto significativos
-Proporciona siempre valores por defecto razonables que mantengan un comportamiento seguro si falla la evaluación del indicador:
+### Use valores predeterminados significativos {#use-meaningful-default-values}
+Proporcione siempre valores predeterminados sensatos que mantengan un comportamiento seguro si la evaluación de la flag falla:
 
 {{< code-block lang="java" >}}
 // Good: Safe default that maintains current behavior
@@ -435,8 +418,8 @@ boolean useNewAlgorithm = client.getBooleanValue("algorithm.new", false, context
 int rateLimit = client.getIntegerValue("rate.limit", 100, context);
 {{< /code-block >}}
 
-### Crear contexto una vez
-Crea el contexto de evaluación una vez por solicitud/usuario/sesión y reutilízalo para todas las evaluaciones de indicadores:
+### Cree el contexto una vez {#create-context-once}
+Cree el contexto de evaluación una vez por solicitud/usuario/sesión y reutilícelo para todas las evaluaciones de flags:
 
 {{< code-block lang="java" >}}
 // In a web filter or request handler
@@ -449,10 +432,10 @@ boolean featureA = client.getBooleanValue("feature.a", false, userContext);
 boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
-Reconstruir el contexto de evaluación para cada evaluación de indicador añade una sobrecarga innecesaria. Crea el contexto una vez al inicio del ciclo de vida de la solicitud y, a continuación, pásalo a todas las evaluaciones de indicadores posteriores.
+Reconstruir el contexto de evaluación para cada evaluación de flag añade una sobrecarga innecesaria. Cree el contexto una vez al inicio del ciclo de vida de la solicitud, luego páselo a todas las evaluaciones de flags posteriores.
 
-### Gestión de fallos de inicialización (opcional)
-Considera gestionar los fallos de inicialización si tu aplicación puede funcionar con valores de indicador predeterminados:
+### Maneje los fallos de inicialización (opcional) {#handle-initialization-failures-optional}
+Considere manejar los fallos de inicialización si su aplicación puede funcionar con valores de flag predeterminados:
 
 {{< code-block lang="java" >}}
 try {
@@ -464,15 +447,15 @@ try {
 }
 {{< /code-block >}}
 
-Si los indicadores de características son críticos para que tu aplicación funcione, deja que la excepción se propague para evitar el inicio.
+Si los Feature Flags son críticos para que su aplicación funcione, permita que la excepción se propague para evitar el inicio.
 
-### Utilizar claves de orientación coherentes
-Utilizar identificadores coherentes y estables como claves de orientación:
+### Utilice claves de segmentación coherentes {#use-consistent-targeting-keys}
+Utilice identificadores coherentes y estables como claves de segmentación:
 - **Bueno**: ID de usuario, ID de sesión, ID de dispositivo
-- **Evitar**: marcas de tiempo, valores aleatorios, IDs que cambian frecuentemente
+- **Evite**: Marcas de tiempo, valores aleatorios, ID que cambian con frecuencia
 
-### Monitorizar la evaluación del indicador
-Utiliza los resultados detallados de la evaluación para el registro y la depuración:
+### Haga un seguimiento de la evaluación de flags {#monitor-flag-evaluation}
+Utilice los resultados detallados de la evaluación para el registro y la depuración:
 
 {{< code-block lang="java" >}}
 FlagEvaluationDetails<Boolean> details =
@@ -486,89 +469,197 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 );
 {{< /code-block >}}
 
-## Solucionar problemas
+## Pruebas {#testing}
 
-### Proveedor no preparado
+Puede realizar pruebas en un entorno de prueba dedicado de Datadog con el `DatadogProvider` real, o cambiarlo por el `InMemoryProvider` de OpenFeature para controlar los valores de los marcadores directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. `InMemoryProvider` se envía en `dev.openfeature:sdk` (ya es una dependencia de contexto de prueba), por lo que no se requiere ninguna biblioteca adicional. Agregue `dev.openfeature:sdk` a su configuración de prueba si aún no está presente.
 
-**Problema**: errores `PROVIDER_NOT_READY`  al evaluar los indicadores
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.OpenFeatureAPI;
+import dev.openfeature.sdk.providers.memory.Flag;
+import dev.openfeature.sdk.providers.memory.InMemoryProvider;
+import java.util.Map;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-**Causas comunes**:
-1. **Indicador experimental no activado**: el marcado de características está desactivado por defecto
-2. **Agent no está listo**: la aplicación se inició antes de que el Agent estuviera completamente inicializado
-3. **No hay indicadores configurados**: no hay indicadores publicados en tu combinación de servicio/entorno.
-4. **Remote Configuration desactivada en el Agent**: el Agent no está configurado para Remote Configuration
+class CheckoutFlagTest {
+    private Client client;
 
-**Soluciones**:
-1. **Activar característica experimental**:
-   ```bash
-   export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-   ```
-2. **Verificar el sistema de marcado de características iniciado** en los logs de la aplicación:
-   ```
-   [dd.trace] Feature Flagging system starting
-   [dd.trace] Feature Flagging system started
-   ```
-3. **Asegúrate de que el Agent está listo** antes de que se inicie la aplicación (utiliza checks de estado en Docker/Kubernetes)
-4. **Comprobar EVP Proxy detectado** en los logs:
-   ```
-   discovered ... evpProxyEndpoint=evp_proxy/v4/ configEndpoint=v0.7/config
-   ```
-5. **Espera a la sincronización de Remote Configuration* (puede tardar entre 30 y 60 segundos después de publicar los indicadores)
-6. **Verificar que los indicadores se publican** en la interfaz de usuario de Datadog al servicio y entorno correctos.
+    @BeforeEach
+    void setUp() {
+        Map<String, Flag<?>> flags = Map.of(
+            "new-checkout-flow", Flag.<Boolean>builder()
+                .variant("on", true)
+                .variant("off", false)
+                .defaultVariant("on")
+                .build(),
+            "ui-theme", Flag.<String>builder()
+                .variant("dark", "dark")
+                .variant("light", "light")
+                .defaultVariant("light")
+                .build()
+        );
 
-### El sistema de marcado de indicadores no se inicia
+        OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+        api.setProviderAndWait(new InMemoryProvider(flags));
+        client = api.getClient();
+    }
 
-**Problema**: no hay mensajes "Feature Flagging system starting" en los logs.
+    @AfterEach
+    void tearDown() {
+        OpenFeatureAPI.getInstance().shutdown();
+    }
 
-**Causa**: indicador experimental no habilitado en el rastreador
+    @Test
+    void newCheckoutEnabledByDefault() {
+        assertTrue(client.getBooleanValue("new-checkout-flow", false));
+    }
 
-**Solución**:
-añadir `-Ddd.experimental.flagging.provider.enabled=true` a tu comando Java o configurar `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`
+    @Test
+    void missingFlagReturnsDefault() {
+        assertFalse(client.getBooleanValue("does-not-exist", false));
+    }
+}
+{{< /code-block >}}
 
-### Error de proxy EVP no disponible
+`OpenFeatureAPI.getInstance()` es un singleton. Llame siempre a `shutdown()` en `@AfterEach` (o equivalente); de lo contrario, el estado del proveedor se filtra entre las clases de prueba y provoca conjuntos de pruebas inestables.
 
-**Problema**: los logs muestran "EVP Proxy no disponible" o "el agent no admite EVP proxy"
+En las pruebas de Spring Boot, registre el `InMemoryProvider` a través de un bean `@TestConfiguration` o en un gancho `@BeforeAll` en una clase `@SpringBootTest`: el singleton de la API de OpenFeature persiste durante toda la vida útil del contexto de Spring, por lo que la inicialización solo necesita ejecutarse una vez.
 
-**Causa**: la aplicación se inició antes de que el Agent estuviera completamente inicializado
+## Solución de problemas {#troubleshooting}
 
-**Soluciones**:
-1. **Añadir check de estado del Agent** en orquestación (Docker Compose, Kubernetes)
-2. **Añadir retardo de inicio** a la aplicación
-3. **Lógica de reintento**: implementar reintento en caso de fallo de inicialización del proveedor
-4. **Actualización del Agent**: asegúrate de utilizar el Agent 7.x o posterior compatible con EVP Proxy
+Siga la ruta de datos del indicador desde la **Plataforma de indicadores** a través de la fuente de configuración seleccionada hasta el **SDK de Java**. Agentless y Remote Configuration tienen requisitos diferentes. Verifique la fuente activa antes de solucionar problemas de conectividad.
 
-### Los indicadores no se actualizan
+### 1. Plataforma de indicadores: Verifique la configuración del indicador {#1-flagging-platform-verify-flag-configuration}
 
-**Problema**: los cambios de configuración del indicador no se reflejan en la aplicación
+Antes de verificar la infraestructura, confirme que el indicador en sí esté configurado correctamente:
 
-**Soluciones**:
-1. Comprueba que Remote Configuration está activada tanto en el Agent como en la aplicación
-2. Verifica que el Agent puede conectarse al backend de Datadog
-3. Comprueba si en los logs de la aplicación aparece "Sin cambios de configuración" o "Configuración recibida".
-4. Asegúrate de que los indicadores se publican (no se guardan como borradores) en la interfaz de usuario de Datadog 
-5. Verifica que las etiquetas de servicio y entorno coincidan entre la aplicación y la orientación del indicador
+1. El Feature Flag está **habilitado** para el entorno de destino, no deshabilitado. Los Feature Flags están deshabilitados de forma predeterminada en cada entorno.
+2. El Feature Flag apunta al **entorno correcto** (`DD_ENV`). Los Feature Flags no se dirigen a servicios específicos; se aplican a todos los servicios dentro del entorno habilitado.
+3. Su valor `DD_ENV` aparece en [{{< ui >}}Feature Flag Environments{{< /ui >}}][5]. Si está ausente, el entorno aún no ha recibido tráfico de Feature Flags.
 
-### Errores de coincidencia de tipo
+### 2. Verifique la fuente de configuración {#2-verify-the-configuration-source}
 
-**Problema**: errores `TYPE_MISMATCH` al evaluar los indicadores
+#### Agentless {#agentless}
 
-**Soluciones**:
-1. Verifica que el tipo de indicador en la interfaz de usuario de Datadog coincide con el método de evaluación
-2. Utiliza el método correcto: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`
-3. Comprueba que la configuración de los indicadores es correcta
+1. Confirme que `dd-openfeature` y `dd-java-agent` sean de la versión 1.66.0 o posterior. Utilice la misma versión para ambos componentes.
+2. Confirme que la JVM cargue `dd-java-agent` con `-javaagent`, ya sea en el comando de Java o a través de `JAVA_TOOL_OPTIONS`.
+3. Confirme que `DD_FEATURE_FLAGS_ENABLED` no esté configurado o esté configurado en `true`.
+4. Confirme que `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` esté configurado, o que la fuente y la configuración del proveedor heredado no estén configuradas.
+5. Confirme que el código de la aplicación inicialice el proveedor OpenFeature de Datadog.
+6. Confirme que `DD_API_KEY`, `DD_SITE` y `DD_ENV` están configurados en el proceso de la aplicación.
+7. Confirme que la aplicación puede realizar solicitudes HTTPS salientes a Datadog.
+8. Habilite `DD_TRACE_DEBUG=true` y verifique si hay mensajes de autenticación, tiempo de espera o carga útil mal formada desde el punto de conexión de Feature Flags Agentless.
 
-### Ninguna exposición en Datadog
+#### Agent Remote Configuration {#agent-remote-configuration}
 
-**Problema**: las evaluaciones de los indicadores no aparecen en la interfaz de usuario de Datadog
+1. Confirme que `dd-openfeature` y `dd-java-agent` sean de la versión 1.66.0 o posterior. Utilice la misma versión para ambos componentes.
+2. Confirme que `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` esté configurado. Durante la ventana de migración, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` también selecciona Remote Configuration cuando no se establece ninguna fuente.
+3. Confirme que `DD_FEATURE_FLAGS_ENABLED` no esté configurado o esté configurado en `true`.
+4. Confirme que el Agent 7.55 o posterior se esté ejecutando y sea accesible. Consulte [APM Connection Errors][2].
+5. Confirme que Remote Configuration está habilitado en el Agent. Si está deshabilitado, establezca `remote_configuration.enabled: true` en `datadog.yaml` o `DD_REMOTE_CONFIGURATION_ENABLED=true`. Consulte [Remote Configuration][1].
+6. Confirme que `DD_API_KEY` es válido en el Agent y pertenece a la organización de destino.
+7. Confirme que `DD_SITE` está configurado correctamente en el Agent. Consulte [Agent Site Issues][3].
+8. Ejecute `datadog-agent status` y revise la sección de Remote Configuration. Consulte [Agent Commands][6].
 
-**Soluciones**:
-1. Verifica que la asignación del indicador tiene `doLog=true` configurado
-2. Comprueba que el Datadog Agent recibe eventos de exposición
-3. Comprueba que `DD_API_KEY` es correcta
-4. Comprueba los errores de carga de la exposición en los logs del Agent 
+### 3. SDK: Verifique el estado del SDK de Java {#3-sdk-verify-java-sdk-state}
 
-## Referencias adicionales
+#### Habilite el registro de depuración {#enable-debug-logging}
+
+Establezca `DD_TRACE_DEBUG=true` para habilitar los mensajes de inicio de Feature Flags. Para la fuente Agentless predeterminada, confirme que el sondeo de CDN comience después de la inicialización del proveedor.
+
+Con `remote_config`, el proveedor utiliza el puente en el Agent de Java. Un Agent más antiguo produce un error de inicialización del proveedor que indica la versión del Agent requerida. No recurre a la entrega por CDN.
+
+#### Hacer un seguimiento de los cambios de estado del proveedor {#monitor-provider-state-changes}
+
+Agregue detectores de eventos al inicio de la aplicación para observar las transiciones del ciclo de vida del proveedor. Los detectores de eventos detectan cambios de conectividad después de la inicialización:
+
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.ProviderEvent;
+
+client.on(ProviderEvent.PROVIDER_READY, (event) -> {
+    logger.info("Feature flag provider is ready");
+});
+
+client.on(ProviderEvent.PROVIDER_ERROR, (event) -> {
+    logger.error("Feature flag provider error: {}", event.getMessage());
+});
+
+client.on(ProviderEvent.PROVIDER_STALE, (event) -> {
+    logger.warn("Feature flag provider configuration is stale");
+});
+
+client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
+    logger.info("Feature flag configuration updated");
+});
+{{< /code-block >}}
+
+Un evento `PROVIDER_ERROR` o `PROVIDER_STALE` después de la operación normal indica una interrupción en la fuente de configuración seleccionada.
+
+#### Proveedor no listo {#provider-not-ready}
+
+`PROVIDER_NOT_READY` se devuelve cuando se intenta evaluar un Feature Flag antes de que el proveedor reciba su primera configuración de la fuente seleccionada.
+
+Causas comunes:
+
+- **Inicialización asíncrona**: se utilizó `setProvider()` en lugar de `setProviderAndWait()`. Las evaluaciones antes de que llegue la primera configuración devuelven `PROVIDER_NOT_READY`.
+- **Tiempo de espera de inicialización**: `setProviderAndWait()` excedió el tiempo de espera (predeterminado 30 segundos) y lanzó `ProviderNotReadyError`, el cual fue capturado. La aplicación continúa evaluando Feature Flags mientras espera la primera configuración.
+
+Si `PROVIDER_NOT_READY` persiste más allá de los intervalos de sondeo e inicialización, verifique la fuente seleccionada nuevamente.
+
+#### Evaluaciones de Feature Flags de depuración {#debug-flag-evaluations}
+
+Si los Feature Flags devuelven valores inesperados, utilice `getBooleanDetails()` en lugar de `getBooleanValue()`. La variante `Details` devuelve un objeto `FlagEvaluationDetails` que expone el estado interno del proveedor:
+
+{{< code-block lang="java" >}}
+FlagEvaluationDetails<Boolean> details =
+    client.getBooleanDetails("your.flag.key", false, context);
+
+logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode={}",
+    details.getValue(),
+    details.getVariant(),
+    details.getReason(),
+    details.getErrorCode());
+{{< /code-block >}}
+
+Revise `reason` y `errorCode` para entender por qué el proveedor devolvió un resultado determinado.
+
+#### Errores de discrepancia de tipo {#type-mismatch-errors}
+
+`TYPE_MISMATCH` se devuelve cuando el método de evaluación no coincide con el tipo configurado del Feature Flag. Utilice el método correcto para cada tipo de Feature Flag: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
+
+### 4. Plataforma de Feature Flags: Verifique que los datos aparezcan en Datadog {#4-flagging-platform-verify-data-appears-in-datadog}
+
+<div class="alert alert-warning">Cuando no hay una ruta de telemetría compatible configurada, Java no exporta eventos de exposición o el <code>feature_flag.evaluations</code> métrica. Su ausencia no indica que la carga de la configuración o la evaluación local hayan fallado.</div>
+
+#### Métricas de evaluación de Feature Flags {#flag-evaluation-metrics}
+
+Los conteos de evaluación de flags aparecen en Datadog como una métrica de contador `feature_flag.evaluations` etiquetada con la clave de la flag, la variante del resultado y la razón de la evaluación. Consulte <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Configuración de métricas de evaluación de flags del lado del servidor</a> para obtener la guía de configuración completa y los pasos de solución de problemas.
+
+#### Exposiciones de experimentos {#experiment-exposures}
+
+Cuando la ruta de configuración seleccionada admite exposiciones, las exposiciones aparecen solo para las flags asociadas con un experimento. Los feature flags estándar no generan eventos de exposición. Si faltan las exposiciones:
+
+1. Verifique que la Feature Flag esté asociada con un experimento en la interfaz de usuario de Datadog.
+2. Verifique la clave de API de Agent y la conectividad.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/remote_configuration/
+[2]: /es/tracing/troubleshooting/connection_errors/
+[3]: /es/agent/troubleshooting/site/
+[5]: https://app.datadoghq.com/feature-flags/settings/environments
+[6]: /es/agent/configuration/agent-commands/
+[7]: /es/account_management/api-app-keys/#api-keys
+[8]: /es/feature_flags/guide/server_flag_evaluation_metrics/
+[9]: /es/feature_flags/concepts/configuration_sources/
+[10]: /es/feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint
+[11]: /es/feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[12]: /es/feature_flags/concepts/configuration_sources/#configure-agentless-delivery
+[13]: /es/feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
+[14]: /es/getting_started/site/
+[15]: /es/serverless/google_cloud_run/functions/java/?tab=maven
+[16]: /es/serverless/google_cloud_run/containers/in_container/java/
+[17]: /es/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry

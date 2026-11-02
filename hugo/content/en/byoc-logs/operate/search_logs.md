@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/explorer/search_syntax/"
   tag: "Documentation"
   text: "Log Search Syntax"
+- link: "https://www.datadoghq.com/blog/byoc-cross-cluster-queries/"
+  tag: "Blog"
+  text: "Unify data across Datadog BYOC with cross-cluster queries for teams and AI agents"
 aliases:
   - /cloudprem/operate/search_logs/
 ---

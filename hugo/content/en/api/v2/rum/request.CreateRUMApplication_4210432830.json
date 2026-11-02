@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "name": "test-rum-with-product-scales-5c67ebb32077e1d9",
+      "type": "browser",
+      "rum_event_processing_state": "ERROR_FOCUSED_MODE",
+      "product_analytics_retention_state": "NONE"
+    },
+    "type": "rum_application_create"
+  }
+}

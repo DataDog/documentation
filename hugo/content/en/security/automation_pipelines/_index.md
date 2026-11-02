@@ -51,6 +51,20 @@ Automation Pipelines operates through a rules-based system that allows you to au
 - **Rule configuration**: Each rule consists of multiple criteria, designed to filter findings based on specific attributes. Within a rule, the combination of these criteria operates as a logical AND; however, if any criteria include multiple values, those values operate as a logical OR. This structure gives you the flexibility to create rules that precisely target your needs.
 - **Rule matching**: Automation Pipelines evaluates findings against your rules in the order you've listed them. As each finding is processed, Automation Pipelines moves through the list until it finds a matching rule, at which point the specified action—such as muting non-urgent issues or highlighting critical threats—is triggered. Automation Pipeline rules apply immediately to new findings. For existing findings, updates can take up to two hours.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+## Rule suggestions
+
+Datadog suggests automation rules tailored to your organization. An AI agent investigates your findings, your existing rules, and the triage your teams perform manually, to identify the patterns worth automating. Each suggestion shows the scope it covers, the action it takes, how many findings it matches, and the observation that justifies it.
+
+{{< img src="security/automation_pipelines/suggestions.png" alt="The Suggested for your environment panel on the Findings Automation page, showing three suggestion cards: each names the action, the finding types and query it covers, how many findings it matches, and the reason Datadog suggested it, with Review and Approve buttons" style="width:100%;" >}}
+
+Your suggestions are listed on the [Findings Automation][1] page. They also come to you as you work: depending on the findings you are looking at in an explorer, or the action you are about to take on them, Datadog can surface the suggestions relevant to that context.
+
+Clicking **Review** opens the rule creation form prefilled with the suggested scope and action, so you can adjust anything before saving. Datadog learns from the suggestions you approve and dismiss, and adapts to changes in your environment, to keep offering relevant suggestions.
+
+[1]: https://app.datadoghq.com/security/configuration/findings-automation
+{{< /site-region >}}
+
 ## Use cases
 
 ### Adjust finding severities to reflect your business context

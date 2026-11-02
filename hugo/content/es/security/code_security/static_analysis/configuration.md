@@ -68,7 +68,7 @@ sast:
 
 El siguiente formato de configuración se aplica a todas las ubicaciones de configuración: nivel de organización, nivel de repositorio y nivel de repositorio (archivo).
 
-El archivo de configuración debe comenzar con un `schema-version` compatible (`v1.0`, `v1.1`, `v1.2`, `v1.3` o `v1.4`), seguido de una clave `sast` que contenga la configuración de análisis. Use `v1.4` para todas las configuraciones nuevas. La configuración está estructurada como se muestra a continuación:
+El archivo de configuración debe comenzar con una clave `schema-version`, seguida de una clave `sast` que contenga la configuración de análisis. La configuración está estructurada como se muestra a continuación:
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
@@ -126,37 +126,37 @@ sast:
     max-file-size-kb: 200
 {{< /code-block >}}
 
-La clave `sast` admite los siguientes campos:
+La clave `sast` se introdujo en `schema-version: v1.0` y admite los siguientes campos:
 
-| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** |
-| --- | --- | --- | --- |
-| `use-default-rulesets` | Booleano | Si se deben habilitar los conjuntos de reglas predeterminados de Datadog. | `true` |
-| `use-rulesets` | Matriz | Una lista de nombres de conjuntos de reglas para habilitar. | Ninguno |
-| `ignore-rulesets` | Matriz | Una lista de nombres de conjuntos de reglas para deshabilitar. Tiene prioridad sobre `use-rulesets` y `use-default-rulesets`. | Ninguno |
-| `ruleset-configs` | Objeto | Un mapa del nombre del conjunto de reglas a su configuración. | Ninguno |
-| `global-config` | Objeto | Configuración global para el repositorio. | Ninguno |
+| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** | **Mínimo `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `use-default-rulesets` | Booleano | Si se deben habilitar los conjuntos de reglas predeterminados de Datadog. | `true` | `v1.0` |
+| `use-rulesets` | Matriz | Una lista de nombres de conjuntos de reglas para habilitar. | Ninguno | `v1.0` |
+| `ignore-rulesets` | Matriz | Una lista de nombres de conjuntos de reglas para deshabilitar. Tiene prioridad sobre `use-rulesets` y `use-default-rulesets`. | Ninguno | `v1.0` |
+| `ruleset-configs` | Objeto | Un mapa del nombre del conjunto de reglas a su configuración. | Ninguno | `v1.0` |
+| `global-config` | Objeto | Configuración global para el repositorio. | Ninguno | `v1.0` |
 
 ## Configuración del conjunto de reglas {#ruleset-configuration}
 
 Cada entrada en el mapa `ruleset-configs` configura un conjunto de reglas específico. No es necesario que un conjunto de reglas aparezca en `use-rulesets` para que se aplique su configuración; la configuración se utiliza siempre que el conjunto de reglas esté habilitado, incluso a través de `use-default-rulesets`.
 
-| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** |
-| --- | --- | --- | --- |
-| `only-paths` | Matriz | Rutas de archivo o patrones glob. Solo los archivos que coinciden con estos patrones se procesan para este conjunto de reglas. | Ninguno |
-| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir del análisis para este conjunto de reglas. | Ninguno |
-| `rule-configs` | Objeto | Un mapa del nombre de la regla a su configuración. | Ninguno |
+| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** | **Mínimo `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Matriz | Rutas de archivo o patrones glob. Solo los archivos que coinciden con estos patrones se procesan para este conjunto de reglas. | Ninguno | `v1.0` |
+| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir del análisis para este conjunto de reglas. | Ninguno | `v1.0` |
+| `rule-configs` | Objeto | Un mapa del nombre de la regla a su configuración. | Ninguno | `v1.0` |
 
 ## Configuración de regla {#rule-configuration}
 
 Cada entrada en el mapa `rule-configs` de un ruleset configura una regla específica:
 
-| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** |
-| --- | --- | --- | --- |
-| `only-paths` | Matriz | Rutas de archivo o patrones glob. La regla se aplica solo a los archivos que coinciden con estos patrones. | Ninguno |
-| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir. La regla no se aplica a los archivos que coinciden con estos patrones. | Ninguno |
-| `arguments` | Objeto | Parámetros y valores para la regla. Los valores pueden ser escalares o definirse por ruta. | Ninguno |
-| `severity` | Cadena u objeto | La gravedad de la regla. Valores válidos: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Puede ser un valor único o definirse por ruta. | Ninguno |
-| `category` | Cadena | La categoría de la regla. Valores válidos: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | Ninguno |
+| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** | **Mínimo `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Matriz | Rutas de archivo o patrones glob. La regla se aplica solo a los archivos que coinciden con estos patrones. | Ninguno | `v1.0` |
+| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir. La regla no se aplica a los archivos que coinciden con estos patrones. | Ninguno | `v1.0` |
+| `arguments` | Objeto | Parámetros y valores para la regla. Los valores pueden ser escalares o definirse por ruta. | Ninguno | `v1.0` |
+| `severity` | Cadena u objeto | La gravedad de la regla. Valores válidos: `ERROR`, `WARNING`, `NOTICE`, `NONE`. Puede ser un valor único o definirse por ruta. | Ninguno | `v1.0` |
+| `category` | Cadena | La categoría de la regla. Valores válidos: `BEST_PRACTICES`, `CODE_STYLE`, `ERROR_PRONE`, `PERFORMANCE`, `SECURITY`. | Ninguno | `v1.0` |
 
 ## Configuración de argumento y gravedad {#argument-and-severity-configuration}
 
@@ -193,13 +193,13 @@ El campo `category` acepta un único valor de cadena para todo el repositorio.
 
 El objeto `global-config` controla la configuración de todo el repositorio:
 
-| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** |
-| --- | --- | --- | --- |
-| `only-paths` | Matriz | Rutas de archivo o patrones glob. Solo se analizan los archivos que coinciden. | Ninguno |
-| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir. Los archivos que coinciden no se analizan. | Ninguno |
-| `use-gitignore` | Booleano | Si se deben incluir entradas del archivo `.gitignore` en `ignore-paths`. | `true` |
-| `ignore-generated-files` | Booleano | Si se deben incluir patrones de archivos generados comunes en `ignore-paths`. | `true` |
-| `max-file-size-kb` | Número | Tamaño máximo de archivo (en kB) a analizar. Los archivos más grandes se ignoran. | `200` |
+| **Propiedad** | **Tipo** | **Descripción** | **Predeterminado** | **Mínimo `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `only-paths` | Matriz | Rutas de archivo o patrones glob. Solo se analizan los archivos que coinciden. | Ninguno | `v1.0` |
+| `ignore-paths` | Matriz | Rutas de archivo o patrones glob para excluir. Los archivos que coinciden no se analizan. | Ninguno | `v1.0` |
+| `use-gitignore` | Booleano | Si se deben incluir entradas del archivo `.gitignore` en `ignore-paths`. | `true` | `v1.0` |
+| `ignore-generated-files` | Booleano | Si se deben incluir patrones de archivos generados comunes en `ignore-paths`. | `true` | `v1.0` |
+| `max-file-size-kb` | Número | Tamaño máximo de archivo (en kB) a analizar. Los archivos más grandes se ignoran. | `200` | `v1.0` |
 
 Ejemplo de configuración:
 

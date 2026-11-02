@@ -2,9 +2,9 @@
 aliases:
 - /es/app_builder/build
 - /es/service_management/app_builder/build
-description: Crea aplicaciones personalizadas a partir de planos o desde cero utilizando
-  componentes de interfaz de usuario de arrastrar y soltar, consultas y expresiones
-  JavaScript.
+description: Cree aplicaciones personalizadas a partir de Blueprints o desde cero
+  utilizando componentes de interfaz de usuario de arrastrar y soltar, consultas y
+  expresiones de JavaScript.
 disable_toc: false
 further_reading:
 - link: /actions/actions_catalog/
@@ -12,181 +12,232 @@ further_reading:
   text: Action Catalog
 - link: https://learn.datadoghq.com/courses/getting-started-app-builder/
   tag: Centro de aprendizaje
-  text: Empezando con App Builder
+  text: Introducción a App Builder
 title: Crear aplicaciones
 ---
-
-Puedes crear una aplicación o editar aplicaciones existentes desde la página de [App Builder][1]. La página muestra información sobre las aplicaciones existentes e incluye lo siguiente:
+Puede crear una aplicación o editar aplicaciones existentes desde la página [App Builder][1]. La página enumera información sobre las aplicaciones existentes, incluida la siguiente:
 - Autor
-- Estado
-- Fecha de la última modificación de cada aplicación
-- Si la aplicación está publicada
+- Etiquetas
+- Fecha en la que se modificó por última vez cada aplicación
+- Si cada aplicación está publicada
 
-En la página de App Builder, puedes acceder a tus aplicaciones y filtrarlas. Pasa el cursor sobre una aplicación para ver las opciones de editar, eliminar, ver o clonar la aplicación. También puedes activar la opción **My apps** (Mis aplicaciones) para ver únicamente las aplicaciones que has creado:
+En la página App Builder, puede acceder y filtrar sus aplicaciones. Pase el cursor sobre una aplicación para ver las opciones de editar, eliminar, visualizar o clonar la aplicación. También puede activar el interruptor {{< ui >}}My apps{{< /ui >}} para ver solo las aplicaciones que usted creó:
 
-{{< img src="actions/app_builder/app-builder-my-apps-2025-11-19.png" alt="Página de App Builder con filtro aplicado para mostrar únicamente 'My apps' (Mis aplicaciones)" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-my-apps-2025-11-19.png" alt="La página App Builder, filtrada para mostrar solo 'Mis aplicaciones'" style="width:100%;" >}}
 
-## Crear una aplicación
+## Crear una aplicación {#create-an-app}
 
-### Crear una aplicación a partir de un modelo
+Al crear una nueva aplicación, puede usar [IA][22], [un Blueprint][18], [un diseño][19] o [una acción][20] para comenzar. Alternativamente, puede [comenzar desde cero][21] o usar el [App Playground][23] para obtener más información sobre App Builder.
 
-Los modelos son aplicaciones de inicio útiles que cubren casos de uso comunes. Vienen cargados con datos de demostración que puedes utilizar para conocer la aplicación. Los modelos también incluyen las prácticas recomendadas para configurar las funciones y la presentación visual de la aplicación.
+### Crear una aplicación con IA {#build-an-app-with-ai}
 
-1. En [App Builder][1], haz clic en la pestaña [Blueprints (Modelos)][2].
-1. Busca el modelo que quieres utilizar y haz clic en **Preview** (Vista previa).
-1. Haz clic en **Use Blueprint** (Utilizar modelo) para abrir el proyecto de la aplicación.
-1. Para cambiar el nombre y la descripción de la aplicación, haz clic en su nombre.
-1. Cada modelo viene cargado con datos de demostración. Para personalizar la aplicación, edita la **Connection** (Conexión) de cada consulta.
-1. Para guardar la aplicación, haz clic en **Save as New App** (Guardar como nueva aplicación).
-1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), en la pantalla de vista previa, para volver a la vista de configuración.
-1. Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
-
-### Crear una aplicación con IA
-
-Con Bits AI, puedes generar una aplicación completa a partir de un único mensaje. Describe la aplicación que quieres crear y el agente de interfaz de usuario generará automáticamente la interfaz de usuario, las acciones y la lógica asignada a los datos y permisos existentes. A continuación, puedes iterar por chat-refinar componentes, flujos o estilos, sin escribir ningún código.
+Con Bits AI, puede generar una aplicación completa a partir de una sola instrucción. Describa la aplicación que desea crear y el agente de interfaz de usuario generará automáticamente la interfaz, las acciones y la lógica asignadas a sus datos y permisos existentes. Luego puede iterar mediante chat (refinando componentes, flujos o estilos) sin escribir código.
 
 Para crear una aplicación con Bits AI:
-1. En [App Builder][1], haz clic en **New App** (Nueva aplicación).
-1. Haz clic en **Start with AI** (Iniciar con IA).
-1. Haz clic en una sugerencia o introduce una sugerencia que describa la aplicación que quieres crear. Introduce tanta información como sea posible, para mejorar los resultados. Estos son algunos ejemplos:
-   - `Muestra una lista de funciones Lambda AWS en una tabla. Permite al usuario filtrar por nombre de función y especifica el límite.`
-   - `Muestra solicitudes pull de GitHub en una tabla.`
-1. Presiona **Intro** para enviar tu solicitud. Bits AI genera automáticamente la interfaz de usuario, las acciones y la lógica de tu aplicación, asignadas a tus datos y permisos existentes.
-1. Mientras responde, Bits AI te pide que configures una conexión para crear la aplicación con datos reales. Puedes completar este paso u omitirlo para crear el diseño de la aplicación más rápidamente sin datos.
-1. Bits AI algunas veces hace preguntas aclaratorias mientras responde a tu pregunta. Si esto ocurre, introduce una respuesta y presiona **Intro**. 
-1. Después de que Bits AI añada un acción a la aplicación, se te pedirá **imitar con datos de IA** u **omitir la configuración**. Configurar tu acción durante la ejecución del agente de interfaz de usuario ayuda a conectar los tipos de datos con otros componentes.
-1. Después de que Bits AI responda a tu pregunta, puedes hacer clic en **Edit with AI** (Editar con IA) o [personalizar tu aplicación][15] manualmente.
-1. Para guardar la aplicación, haz clic en **Save** (Guardar).
-1. Para previsualizar la aplicación, haz clic en **View** (Ver). Haz clic en **Edit** (Editar) para volver a la vista de configuración.
-1. Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
+1. Desde [App Builder][1], haga clic en {{< ui >}}New App{{< /ui >}}.
+1. Haga clic en una instrucción sugerida o ingrese una instrucción que describa la aplicación que desea crear. Ingrese la mayor cantidad de detalles posible para mejorar los resultados. Aquí hay algunos ejemplos de instrucciones:
+   - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
+   - `Display GitHub pull requests in a table.`
+1. Presione <kbd>Enter</kbd> para enviar su instrucción. Bits AI genera automáticamente la interfaz de usuario, las acciones y la lógica para su aplicación, asignadas a sus datos y permisos existentes.
+    - Mientras Bits AI genera su aplicación, puede darle la oportunidad de configurar una conexión para crear la aplicación con datos reales. Puede completar este paso, u omitirlo para crear el diseño de la aplicación más rápido, sin datos.
+    - Bits AI a veces hace preguntas de aclaración mientras responde a su instrucción. Si esto sucede, ingrese una respuesta y luego presione <kbd>Enter</kbd>. 
+    - Después de que Bits AI agrega una acción a la aplicación, le da la oportunidad de usar datos simulados en su acción o de omitir ese paso. Con datos simulados, Bits AI puede inferir el resultado de la acción y conectar automáticamente esos datos a los componentes (como establecer la fuente de datos de una tabla). Si omite este paso, puede conectar las salidas manualmente más tarde.
+1. Después de que Bits AI haya generado su aplicación, puede hacer clic en {{< ui >}}Edit with AI{{< /ui >}} o [personalizar su aplicación][15] manualmente.
 
-Para iterar en una aplicación existente:
-1. En una aplicación existente, haz clic en **UI Agent Chat** (Chat del agente de interfaz de usuario) (**<i class="icon-bits-ai"></i>**).
-1. Introduce una indicación detallada del comportamiento que quieres añadir a tu aplicación. Incluye las integraciones y acciones que te gustaría utilizar.
-1. Presiona **Intro** para añadir la funcionalidad a tu aplicación.
+Para iterar sobre una aplicación existente:
+1. Desde [su lista de aplicaciones][14], coloque el cursor sobre una aplicación y haga clic en editar {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icono.
+1. Haga clic en el icono de IA **<i class="icon-bits-ai"></i>**.
+1. Ingrese una instrucción detallada para el comportamiento que desea agregar a su aplicación. Incluya las integraciones y acciones que desea utilizar.
+1. Presione <kbd>Enter</kbd> para agregar la funcionalidad a su aplicación.
 
-### Crear una aplicación personalizada
+### Cree una aplicación a partir de Blueprints {#build-an-app-from-a-blueprint}
 
-1. En [App Builder][1], haz clic en **New App** (Nueva aplicación).
-1. Para cambiar el nombre y la descripción de la aplicación, haz clic en su nombre.
-1. Para añadir un [componente de interfaz de usuario](#app-canvas-and-components) al lienzo de la aplicación, haz clic en el signo más ({{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes) y, luego, haz clic en el componente o arrástralo hasta el lienzo.
-1. Utiliza [consultas][12] para rellenar o interactuar con tu lienzo.
-1. Para guardar la aplicación, haz clic en **Save as New App** (Guardar como nueva aplicación).
-1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), en la pantalla de vista previa, para volver a la vista de configuración.
-1. Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
+Blueprints son plantillas de aplicaciones útiles que cubren casos de uso comunes y muestran las mejores prácticas para configurar aplicaciones. Vienen cargados con datos de demostración que puede usar para familiarizarse con las funciones de la aplicación. Algunos Blueprints crean una aplicación inicial que puede personalizar, como [Manage Datastore][24] y [Export Synthetics][25]. Los Blueprints con "how to" en su título, como [How to: Custom Code][26], son plantillas con tutoriales integrados para las funciones de App Builder.
 
-## Personalizar tu aplicación
+1. Desde [App Builder][1], haga clic en la pestaña [**Blueprints**][2].
+1. Haga clic en el Blueprints que desea usar. 
+1. Haga clic en {{< ui >}}Open in Editor{{< /ui >}}.
+1. [Personalice su aplicación][15].
 
-Las aplicaciones están conformadas por componentes de interfaz de usuario y consultas que interactúan entre sí para crear la experiencia de usuario y la lógica de cada aplicación. La lista de consultas y el editor aparecen en la parte izquierda de la página, mientras que el lienzo de la aplicación y los componentes de interfaz de usuario ocupan la parte derecha de la página.
+<div class="alert alert-tip">También puede acceder a los Blueprints desde la <a href="https://app.datadoghq.com/integrations">página de integraciones</a>. Haga clic en una integración y, a continuación, haga clic en <b>Recursos de monitoreo</b> para ver los Blueprints disponibles.</div>
 
-Personalización básica:
-- Para editar **Name**, **Description**, or **Canvas Color** (Nombre, Descripción o Color del lienzo) en tu aplicación, haz clic en el nombre de la aplicación en la parte superior izquierda.
-- Haz clic en el botón **Preview** (Vista previa) para obtener una vista previa de tu aplicación. El modo de vista previa te permite ver la aplicación desde la perspectiva del usuario. Utiliza el modo de vista previa para interactuar con la interfaz de usuario de la aplicación y realizar un test de tus consultas. Cuando hayas terminado, haz clic en **Edit** (Editar) para volver al generador de aplicaciones.
-- Para guardar tu aplicación, haz clic en **Save** (Guardar).
-- Cuando tu aplicación esté lista para ser publicada, haz clic en **Publish** (Publicar). La publicación de una aplicación la pone a disposición de tus dashboards.
+### Cree una aplicación a partir de un diseño {#build-an-app-from-a-layout}
 
-### Lienzo y componentes de una aplicación
+Elegir un diseño es la forma más rápida de crear una aplicación mínima y lista para editar. 
 
-El lienzo de la aplicación representa la interfaz gráfica con la que interactúan los usuarios. Puedes arrastrar y soltar componentes para moverlos por el lienzo. Para ver todos los componentes disponibles, haz clic en el signo más ({{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes).
+Para crear una aplicación a partir de un diseño:
+1. Desde [App Builder][1], haga clic en {{< ui >}}New App{{< /ui >}}.
+1. Haga clic en {{< ui >}}Layouts{{< /ui >}} en el modal de incorporación.
+1. Seleccione un diseño. Hay tres opciones: 
+    - {{< ui >}}Table Manager{{< /ui >}}: Liste, filtre y ordene datos de una consulta.
+    - {{< ui >}}Form{{< /ui >}}: Recopile entradas y active acciones (crear, actualizar, solicitar, etc.). Para obtener plantillas de formulario más detalladas, consulte [**Formularios**][27].
+    - {{< ui >}}Custom Chart{{< /ui >}}: Visualice una consulta intercambiando sus datos en un gráfico de barras preconfigurado.
+1. Haga clic en {{< ui >}}Use Layout{{< /ui >}}.
+1. [Personalice su aplicación][15].
 
-Cada componente cuenta con una lista de opciones de configuración correspondientes que controlan la forma en que los usuarios interactúan con tu aplicación. Por ejemplo, el componente **Text Input** (Entrada de texto) te permite establecer un valor predeterminado, el texto de un parámetro y una etiqueta (label). El componente **Button** (Botón) incluye una etiqueta y un evento que se activa cuando se pulsa el botón. Los componentes también cuentan con la sección **Appearance** (Aspecto) que cambia el aspecto y el funcionamiento de los componentes. Por ejemplo, puedes desactivar un botón o controlar su visibilidad.
+### Crear una aplicación a partir de una acción {#build-an-app-from-an-action}
 
-Para borrar o duplicar un componente, selecciónalo y haz clic en los tres puntos (*...*) para mostrar las opciones **Delete** (Borrar) o **Duplicate** (Duplicar).
+Puede crear una aplicación eligiendo una integración y una acción específica del [Action Catalog][17]. App Builder preconfigura la acción y sus consultas, llevando datos en tiempo real al lienzo de la aplicación. Luego puede conectar componentes y probar la aplicación de inmediato. Este método es mejor si ya tiene en mente una integración y una acción (como interactuar con [Datastore de Datadog][28]).
 
-Para ver una lista de los componentes de interfaz de usuario disponibles y sus propiedades, consulta [Componentes][9].
+1. Desde [App Builder][1], haga clic en {{< ui >}}New App{{< /ui >}}. 
+1. Haga clic en **Action** en el modal de incorporación. 
+1. Elija una integración y, a continuación, haga clic en **Continuar**.
+1. Elija una o más acciones. Cada conjunto de acciones es una plantilla específica para la integración que ha seleccionado. No hay límite en la cantidad de acciones que puede elegir.
+1. Haga clic en {{< ui >}}Create{{< /ui >}}.
+1. [Personalice su aplicación][15].
 
-Los componentes de la interfaz de usuario pueden desencadenar reacciones en un [evento][11].
+### Crear una aplicación personalizada {#create-a-custom-app}
 
-Las [consultas][12] rellenan tu aplicación con datos procedentes de las API de Datadog o con integraciones compatibles. Toman entradas de otras consultas u otros componentes de interfaz de usuario y devuelven resultados para su uso en otras consultas o en otros componentes de interfaz de usuario.
+Si no desea utilizar ninguno de los métodos anteriores, puede crear una nueva aplicación desde el lienzo en blanco de App Builder.
 
-Puedes utilizar [expresiones de JavaScript][13] en cualquier parte de App Builder para crear interacciones personalizadas entre las diferentes partes de tu aplicación.
+1. Desde [App Builder][1], haga clic en {{< ui >}}New App{{< /ui >}}. 
+1. Haga clic en {{< ui >}}Start From Scratch{{< /ui >}}, o haga clic en {{< ui >}}X{{< /ui >}} para cerrar el modal de incorporación.
+1. [Personalice su aplicación][15].
 
-## Etiquetar una aplicación
+### Vea lo que es posible con App Playground {#see-whats-possible-with-app-playground}
 
-Las etiquetas (tags) se muestran en una columna de la [lista de aplicaciones][14].
+App Playground es una demostración interactiva que guía a los usuarios a través de la creación y el uso de una aplicación. Si es nuevo en App Builder, puede usar App Playground para aprender sobre sus conceptos principales, que incluyen: 
+- Obtención de datos
+- Visualización de datos de consulta en una tabla
+- Configuración de un botón para ejecutar una consulta
+- Configuración de los estados de carga de un componente para reflejar el estado de carga de una consulta
+- Visualización de datos en un gráfico
 
-Para añadir una etiqueta a una aplicación:
+Para acceder a App Playground:
+1. Desde [App Builder][1], haga clic en {{< ui >}}New App{{< /ui >}}. 
+1. Haga clic en {{< ui >}}App Playground{{< /ui >}}.
+1. En la siguiente pantalla, el lienzo de la aplicación (el panel derecho) muestra información para guiarlo a través de App Builder. Haga clic en elementos como {{< ui >}}Fetching Data{{< /ui >}} para ver información e instrucciones sobre el uso de esa función. 
 
-1. Abre la pestaña **App Properties** (Propiedades de la aplicación) en tu aplicación.
-1. En **Tags** (Etiquetas), utiliza el menú desplegable para seleccionar una etiqueta existente, o ingresa un valor nuevo y haz clic en **Add option: [your text]** (Añadir opción: [tu texto]).
-1. Guarda tu aplicación.
+## Personalice su aplicación {#customize-your-app}
 
-La etiqueta aparece en la línea correspondiente a esta aplicación en la lista de aplicaciones. Puedes hacer clic en la etiqueta de esta lista para copiarla en el portapapeles.
+Las aplicaciones están compuestas por componentes de interfaz de usuario y consultas que interactúan entre sí para formar la experiencia del usuario y la lógica detrás de cada aplicación. La lista de consultas y el editor aparecen en el lado izquierdo de la página, mientras que el lienzo de la aplicación y los componentes de la interfaz de usuario conforman el lado derecho de la página.
 
-## Marcar una aplicación como favorita
+Para cambiar elementos básicos de su aplicación:
+1. Desde [App Builder][1], coloque el cursor sobre una aplicación y haga clic en editar {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icono.
+1. Realice ediciones en su aplicación según sea necesario. 
+    1. Haga clic en el nombre de la aplicación para editar estos elementos:
+        - Nombre
+        - Descripción
+        - Etiquetas
+        - Apariencia
+    1. Edite los [parámetros de entrada][29].
+    1. Para agregar un [componente de IU](#app-canvas-and-components) al lienzo de la aplicación, haga clic en el icono {{< ui >}}Add Component{{< /ui >}} <i class="icon-component-wui" style="position:relative; top:4px;"></i> para abrir la pestaña {{< ui >}}Components{{< /ui >}}. Haga clic en el componente o arrástrelo al lienzo.
+1. Haga clic en el botón {{< ui >}}View{{< /ui >}} para ver su aplicación desde la perspectiva del usuario. Utilice el modo de visualizar para interactuar con la IU de la aplicación y probar sus consultas. Cuando haya terminado, haga clic en {{< ui >}}Edit{{< /ui >}} para volver a App Builder.
+1. Para guardar su aplicación, haga clic en {{< ui >}}Save{{< /ui >}}.
+1. Cuando esté listo para publicar su aplicación, haga clic en {{< ui >}}Publish{{< /ui >}}. Publicar una aplicación la hace disponible para sus tableros.
 
-Para marcar una aplicación como favorita y anclarla a la parte superior de tu lista de aplicaciones, haz clic en el icono de estrella que aparece junto al nombre de la aplicación en [lista de aplicaciones][14]:
+### Lienzo de la aplicación y componentes {#app-canvas-and-components}
 
-{{< img src="actions/app_builder/app-list-star.png" alt="Una lista de aplicaciones con cuatro aplicaciones, ninguna de las cuales está marcada con una estrella." style="width:40%;" >}}
+El lienzo de la aplicación representa la interfaz gráfica con la que interactúan sus usuarios. Puede arrastrar y soltar componentes para moverlos por el lienzo. Para ver todos los componentes disponibles, haga clic en el signo más {{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}} icono para abrir la pestaña {{< ui >}}Components{{< /ui >}}.
 
-Cuando actualices la página, la aplicación marcada con una estrella aparecerá en una sección en la parte superior de tu lista de aplicaciones:
+Cada componente cuenta con una lista de opciones de configuración correspondientes que controlan cómo interactúan los usuarios con su aplicación. Por ejemplo, el componente {{< ui >}}Text Input{{< /ui >}} le permite establecer un valor predeterminado, texto de marcador de posición y una etiqueta. El componente {{< ui >}}Button{{< /ui >}} incluye una etiqueta y un evento que se activa cuando se presiona el botón. Los componentes también cuentan con una sección {{< ui >}}Appearance{{< /ui >}} que cambia la forma en que los componentes se ven y actúan. Por ejemplo, puede deshabilitar un botón o controlar su visibilidad.
 
-{{< img src="actions/app_builder/app-list-with-favorited-app.png" alt="Una lista de aplicaciones con cuatro aplicaciones, una de las cuales está marcada con una estrella y anclada en la parte superior de la lista." style="width:40%;" >}}
+Para eliminar o duplicar un componente, seleccione el componente y haga clic en los tres puntos (*...*) para mostrar las opciones {{< ui >}}Delete{{< /ui >}} o {{< ui >}}Duplicate{{< /ui >}}.
 
-## Ver el historial de versiones de la aplicación
+Para obtener una lista de los componentes de interfaz de usuario disponibles y sus propiedades, consulte [Componentes][9].
 
-App Builder mantiene un registro de cada versión guardada de tu aplicación.
+Los componentes de interfaz de usuario pueden activar reacciones en un [Evento][11].
 
-Para ver el historial de versiones de tu aplicación, en el menú de la izquierda de tu aplicación haz clic en el icono de historial de versiones {{< img src="icons/version-history.png" inline="true" style="width:14px;">}}.
+Las [Consultas][12] pueblan su aplicación con datos de las API de Datadog o integraciones compatibles. Toman entradas de otras consultas o de componentes de la interfaz de usuario y devuelven salidas para su uso en otras consultas o en componentes de la interfaz de usuario.
 
-La interfaz de usuario muestra hasta 50 versiones guardadas o publicadas de tu aplicación, junto con el icono del usuario que guardó o publicó la versión:
+Puede usar [Expresiones de JavaScript][13] en cualquier parte de App Builder para crear interacciones personalizadas entre las diferentes partes de su aplicación.
 
-{{< img src="actions/app_builder/version-history-example.png" alt="Un ejemplo de lista del historial de versiones de App Builder con dos elementos, la versión actual y una versión anterior." style="width:70%;" >}}
+## Etiquetar una aplicación {#tag-an-app}
 
-Puedes realizar las siguientes operaciones:
+Las etiquetas se muestran en una columna en la [lista][14].
 
-* Para ver la versión de una aplicación, haz clic en ella en la lista.
-* Para sobrescribir una aplicación existente con una versión anterior, selecciona la versión y haz clic en **Restore Version** (Restaurar versión) en la parte superior derecha.
-* Para crear una nueva aplicación que sea una copia de una versión, selecciona la versión y haz clic en **Clone Version** (Clonar versión) en la parte superior derecha.
+Para agregar una etiqueta a una aplicación:
+
+1. Abra la pestaña {{< ui >}}App Properties{{< /ui >}} en su aplicación.
+1. En {{< ui >}}Tags{{< /ui >}}, use el menú desplegable para seleccionar una etiqueta existente, o ingrese un valor nuevo y haga clic en {{< ui >}}Add option: [your text]{{< /ui >}}.
+1. Guarde su aplicación.
+
+La etiqueta se muestra en la línea de esta aplicación en la lista. Puede hacer clic en la etiqueta en esta lista para copiarla en su portapapeles.
+
+## Marcar una aplicación como favorita {#favorite-an-app}
+
+Marcar una aplicación como favorita la fija en la parte superior de su [lista][14]. 
+
+Para marcar una aplicación como favorita, haga clic en el icono de estrella <i class="icon-star-empty-wui" style="position:relative; top:4px;"></i> junto al nombre de la aplicación. Cuando actualiza la página, la aplicación marcada aparece en la parte superior de su lista.
+
+## Visualizar el historial de versiones de la aplicación {#view-app-version-history}
+
+App Builder mantiene un registro de cada versión guardada de su aplicación.
+
+Para ver el historial de versiones de su aplicación, en el menú de la izquierda de su aplicación, haga clic en el historial de versiones {{< img src="icons/version-history.png" inline="true" style="width:14px;">}} icono.
+
+La interfaz de usuario muestra las versiones guardadas o publicadas anteriormente de su aplicación, junto con el icono del usuario que guardó o publicó la versión:
+
+{{< img src="actions/app_builder/version-history-example.png" alt="Un ejemplo de lista de historial de versiones de App Builder con dos elementos, la versión actual y una versión anterior" style="width:70%;" >}}
+
+Puede realizar las siguientes operaciones:
+
+* Para ver una versión de la aplicación, haga clic en la versión en la lista.
+* Para sobrescribir una aplicación existente con una versión anterior, seleccione la versión y, luego, haga clic en {{< ui >}}Restore Version{{< /ui >}} en la parte superior derecha.
+* Para crear una nueva aplicación que sea una copia de una versión, seleccione la versión y, luego, haga clic en {{< ui >}}Clone Version{{< /ui >}} en la parte superior derecha.
 
 
-## Interactuar con una aplicación en JSON
+## Interactuar con una aplicación en JSON {#interact-with-an-app-in-json}
 
-### Editar una aplicación
+### Editar una aplicación {#edit-an-app}
 
-Para editar una aplicación con JSON, haz clic en **Settings** (Configuración) {{< img src="icons/settings.png" inline="true" style="width:14px;">}} y selecciona **Switch to JSON** (Cambiar a JSON). La opción **Switch to GUI** (Cambiar a GUI) del menú de parámetros te devuelve al editor GUI.
+Para editar una aplicación con JSON, haga clic en la configuración {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icono y seleccione {{< ui >}}Switch to JSON{{< /ui >}}. La opción {{< ui >}}Switch to GUI{{< /ui >}} en el menú de configuración lo lleva de regreso al editor de la GUI.
 
-### Exportar una aplicación
+### Copiar una aplicación {#copy-an-app}
 
-Para copiar el diseño de una aplicación en varias organizaciones o realizar una copia de seguridad de la aplicación, haz clic en **Settings** (Configuración) {{< img src="icons/settings.png" inline="true" style="width:14px;">}} y selecciona **Switch to JSON** (Cambiar a JSON). Aparecerá el código JSON de toda la aplicación. Copia este código JSON y guárdalo en un editor de texto. Puedes guardar estados intermedios de tu aplicación durante el desarrollo y volver a ellos si es necesario.
+Para copiar el diseño de una aplicación entre organizaciones o realizar una copia de seguridad de una aplicación, haga clic en la configuración {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icono y seleccione {{< ui >}}Switch to JSON{{< /ui >}}. Esto muestra el código JSON de toda la aplicación. Copie este código JSON y guárdelo en un editor de texto. Puede guardar estados intermedios de su aplicación durante el desarrollo y volver a ellos si es necesario.
 
-Para copiar la aplicación en otra organización:
-1. Crea una aplicación. 
-1. Haz clic en **Settings** (Configuración) {{< img src="icons/settings.png" inline="true" style="width:14px;">}} y selecciona **Switch to JSON** (Cambiar a JSON).
-1. Remplaza el código JSON existente por el que copiaste antes. 
+Para copiar la aplicación a otra organización:
+1. Crear una aplicación. 
+1. Haga clic en {{< ui >}}Settings{{< /ui >}} {{< img src="icons/settings.png" inline="true" style="width:14px;">}} y seleccione {{< ui >}}Switch to JSON{{< /ui >}}. 
+1. Reemplace el JSON existente con el JSON que copió anteriormente. 
 
-La opción **Switch to GUI** (Cambiar a la interfaz gráfica de usuario) del menú de configuración te lleva devuelta al editor de la interfaz gráfica de usuario.
+La opción {{< ui >}}Switch to GUI{{< /ui >}} en el menú de configuración lo lleva de regreso al editor de la GUI.
 
-## Depurar una aplicación
+## Depurar una aplicación {#debug-an-app}
 
-La consola de depuración de App Builder ofrece un espacio central para ver logs, ejecuciones de acciones y errores en tiempo real.
+La consola de depuración de App Builder proporciona un lugar central para ver registros en tiempo real, ejecuciones de acciones y errores. 
 
-Para acceder a la consola de depuración, ve a [tu lista de aplicaciones][14] y haz clic en **Edit** (Editar) {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} para una de tus aplicaciones. Haz clic en **Expand** (Ampliar) {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} para visualizar toda la consola de depuración. La información de la consola incluye:
-- **Ejecuciones de acciones:** Realiza un seguimiento del éxito y fracaso de las ejecuciones de acciones con sus entradas y salidas asociadas.
-- **Errores:** Visualiza logs de errores, advertencias y mensajes de información.
-- **Logs:** Visualiza errores de configuración de tus acciones, transformadores, variables y componentes.
-- **Estado de la aplicación:** Accede a los cambios de estado de la aplicación en tiempo real.
+Para acceder a la consola de depuración, pase el cursor sobre una aplicación en [su lista][14] y haga clic en editar {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icono. Haga clic en expandir {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} icono en la parte inferior derecha para ver toda la consola de depuración. La información dentro de la consola incluye:
+- {{< ui >}}Action Executions{{< /ui >}}: Realice un seguimiento del éxito y el fracaso de las ejecuciones de acciones con sus entradas y salidas asociadas.
+- {{< ui >}}Errors{{< /ui >}}: Vea los registros de errores, advertencias y mensajes informativos.
+- {{< ui >}}Logs{{< /ui >}}: Vea los errores de configuración de sus acciones, transformadores, variables y componentes.
+- {{< ui >}}App State{{< /ui >}}: Acceda a los cambios de estado de la aplicación en tiempo real.
 
-{{< img src="actions/app_builder/app-builder-debug-console.png" alt="Panel ampliado de la consola de depuración dentro de la vista de edición de una aplicación" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-debug-console.png" alt="El panel expandido de la consola de depuración dentro de la vista del editor de una aplicación" style="width:100%;" >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>¿Tienes preguntas o comentarios? Únete al canal **#app-builder** en [Datadog Community Slack][8].
+<br>¿Tiene preguntas o comentarios? Únase al canal **#app-builder** en el [Datadog Community Slack][8].
 
 [1]: https://app.datadoghq.com/app-builder/
 [2]: https://app.datadoghq.com/app-builder/blueprints
-[3]: /es/service_management/app_builder/embedded_apps
+[3]: /es/actions/app_builder/embedded_apps
 [4]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
-[5]: /es/service_management/workflows/connections
-[6]: /es/service_management/workflows
+[5]: /es/actions/connections
+[6]: /es/actions/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
 [8]: https://chat.datadoghq.com/
-[9]: /es/service_management/app_builder/components
+[9]: /es/actions/app_builder/components
 [10]: https://app.datadoghq.com/app-builder/action-catalog
-[11]: /es/service_management/app_builder/events
-[12]: /es/service_management/app_builder/queries
-[13]: /es/service_management/app_builder/expressions
+[11]: /es/actions/app_builder/events
+[12]: /es/actions/app_builder/queries
+[13]: /es/actions/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
 [15]: /es/actions/app_builder/build/#customize-your-app
+[16]: /es/getting_started/integrations/
+[17]: /es/actions/actions_catalog/
+[18]: /es/actions/app_builder/build/#build-an-app-from-a-blueprint
+[19]: /es/actions/app_builder/build/#build-an-app-from-a-layout
+[20]: /es/actions/app_builder/build/#build-an-app-from-an-action
+[21]: /es/actions/app_builder/build/#create-a-custom-app
+[22]: /es/actions/app_builder/build/#build-an-app-with-ai
+[23]: /es/actions/app_builder/build/#see-whats-possible-with-app-playground
+[24]: https://app.datadoghq.com/app-builder/apps/edit?template=manage-datastore&viewMode=templatePreview
+[25]: https://app.datadoghq.com/app-builder/apps/edit?template=export-synthetics&viewMode=templatePreview
+[26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
+[27]: /es/actions/forms/
+[28]: /es/actions/datastores/
+[29]: /es/actions/app_builder/embedded_apps/input_parameters/

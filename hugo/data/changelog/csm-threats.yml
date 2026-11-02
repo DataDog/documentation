@@ -6,3 +6,11 @@ entries:
       - CreateCSMThreatsAgentPolicy
     title: Fix Workload Protection policy creation success response to 201 
       Created
+  - change_type: modified
+    date: '2026-10-14'
+    link: https://github.com/DataDog/documentation/pull/40682
+    operations:
+      - CreateCSMThreatsAgentPolicy
+      - UpdateCSMThreatsAgentPolicy
+    title: Use disabled policy in Workload Protection policy create and update 
+      examples

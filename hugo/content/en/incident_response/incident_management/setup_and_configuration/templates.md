@@ -88,6 +88,21 @@ Standard variables pull directly from incident fields and also include any defin
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Duration variables" level="h4" %}}
+Include an incident's response times and compare them with historical averages:
+
+```text
+Time to Detect: {{incident.time_to_detect}}
+Time to Internal Response: {{incident.time_to_internal_response}}
+Time to Repair: {{incident.time_to_repair}}
+Time to Resolve: {{incident.time_to_resolve}}
+Time from Detect to Resolve: {{incident.time_from_detect_to_resolve}}
+Mean Time to Resolve (past 30 days): {{incident.mean_time_to_resolve_30_days}}
+```
+
+Individual durations render as `N/A` when they cannot be calculated or are zero or negative. Mean durations render as `N/A` when no eligible incidents have a positive value. See the [Incident Variables Reference][9] for all variables and averaging windows.
+{{% /collapse-content %}}
+
 {{% collapse-content title="Incident card variable" level="h4" %}}
 The incident card variable (`{{incident.card}}`) embeds a summary card that reflects incident fields in real time. When incident fields change, the card in the postmortem updates automatically. The card includes postmortem status and owner fields.
 
@@ -130,3 +145,4 @@ For more information on generating postmortems using these templates, see [Incid
 [6]: /integrations/google_drive/
 [7]: /incident_response/incident_management/setup_and_configuration/property_fields
 [8]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
+[9]: /incident_response/incident_management/setup_and_configuration/variables/#incident-variables

@@ -10,91 +10,90 @@ cascade:
   algolia:
     rank: 70
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Serverless
-  tag: Notas de la versión
-  text: Consulta las últimas versiones de Serverless. (Es necesario iniciar sesión
-    en la aplicación).
-- link: https://www.datadoghq.com/state-of-serverless
-  tag: Blog
-  text: Estado de Serverless
 - link: /serverless/installation/
   tag: Documentación
-  text: Instalación de la monitorización serverless
+  text: Instalación de Serverless Monitoring
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Únase a una sesión interactiva para obtener más información sobre Serverless
+    Monitoring
+- link: https://www.datadoghq.com/state-of-serverless
+  tag: Blog
+  text: El estado de Serverless
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: Blog
-  text: Monitoriza las aplicaciones del contenedor de Azure con Datadog
-- link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
-  text: Participar en una sesión interactiva para saber más sobre la monitorización
-    serverless
+  text: Haga un seguimiento de Azure Container Apps con Datadog
+- link: https://app.datadoghq.com/release-notes?category=Serverless
+  tag: Notas de la versión
+  text: ¡Eche un vistazo a las últimas versiones de Serverless! (Se requiere inicio
+    de sesión en la aplicación).
 title: Serverless
 ---
-
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/543362476/rendition/1080p/file.mp4?loc=external&signature=4927d13b131aea1e3b4f77efca5af49bb509f5e7f1d6ca06a5267ba02a8c194a" poster="/images/poster/serverless.png" >}}
 
 <br/>
 
-<div class="alert alert-info">Asegúrate de revisar las discusiones que se desarrollan en el canal <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> en la <a href="https://chat.datadoghq.com/">Comunidad de Slack de Datadog</a>.</div>
+<div class="alert alert-info">Asegúrese de consultar las discusiones que tienen lugar en el canal <a href="https://datadoghq.slack.com/archives/CFDPB83M4">#serverless</a> en la <a href="https://chat.datadoghq.com/">comunidad de Slack de Datadog</a>.</div>
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
-Descubre cómo la monitorización serverless permite a tus equipos mantenerse ágiles y concentrar su tiempo en crear aplicaciones que generen ingresos y, al mismo tiempo, reducir los gastos operativos.
+{{< learning-center-callout header="Únase a una sesión de seminario web de habilitación" hide_image="true" btn_title="Registrarse" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Serverless">}}
+Aprenda cómo Serverless Monitoring permite a sus equipos mantenerse ágiles y concentrar su tiempo en crear aplicaciones que generen ingresos, mientras reducen la carga operativa.
 {{< /learning-center-callout >}}
 
-[Datadog Serverless Monitoring][1] brinda visibilidad completa de todos los servicios administrados que impulsan tus aplicaciones serverless al reunir métricas, logs y trazas (traces) en tiempo real de su informática serverless, así como API, colas, transmisiones y almacenes de datos totalmente gestionados relacionados.
+[Datadog Serverless Monitoring][1] proporciona visibilidad completa de todos los servicios gestionados que impulsan sus aplicaciones serverless al reunir métricas, registros y trazas en tiempo real de su computación serverless, así como de las API, colas, flujos y almacenes de datos totalmente gestionados relacionados.
 
-Datadog brinda soluciones para monitorizar [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps) y [Google Cloud Run](#google-cloud-run).
+Datadog proporciona soluciones para hacer un seguimiento de [AWS Lambda](#aws-lambda), [Azure App Service](#azure-app-service), [Azure Container Apps](#azure-container-apps) y [Google Cloud Run](#google-cloud-run).
 
-### AWS Lambda
+### AWS Lambda {#aws-lambda}
 
-[Serverless Monitoring para AWS Lambda][2] te permite correlacionar métricas de alto nivel de los recursos de AWS con las de las funciones Lambda para que puedas detectar problemas rápidamente y comenzar tu investigación.
+[Serverless Monitoring for AWS Lambda][2] le permite correlacionar métricas de alto nivel de los recursos de AWS con las de las funciones Lambda, para que pueda detectar problemas rápidamente e iniciar su investigación.
 
-Las [métricas mejoradas de Lambda][3], que aparecen en Datadog con el prefijo `aws.lambda.enhanced`, están disponibles con una granularidad de segundos y casi en tiempo real. Puedes usar métricas mejoradas de Lambda para alertas o SLOs en arranques en frío, costes estimados de AWS, tiempos de espera, errores de falta de memoria y uso de memoria en todas tus funciones Lambda.
+[Enhanced Lambda metrics][3], que aparecen en Datadog con el prefijo `aws.lambda.enhanced`, están disponibles con granularidad de un segundo y casi en tiempo real. Puede utilizar las métricas Lambda mejoradas para alertas o SLO sobre arranques en frío, costos estimados de AWS, tiempos de espera, errores de falta de memoria y uso de memoria en todas sus funciones Lambda.
 
-Puedes enviar [métricas personalizadas][4] desde una función Lambda generando métricas a partir de logs y trazas, utilizando la extensión Lambda de Datadog o el forwarder Lambda de Datadog.
+Puede enviar [custom metrics][4] desde una función Lambda generando métricas a partir de registros y trazas, utilizando Datadog Lambda Extension o utilizando Datadog Forwarder Lambda.
 
-Con el [rastreo distribuido][5], puedes conectar tus trazas serverless a métricas para obtener una imagen contextual del rendimiento de tu aplicación. Las bibliotecas de rastreo de Python, Node.js, Ruby, Go, Java y .NET de Datadog admiten el rastreo distribuido para AWS Lambda.
+Con [Distributed Tracing][5], puede conectar sus trazas sin servidor con métricas para obtener una imagen rica en contexto del rendimiento de su aplicación. Los SDK de Datadog para Python, Node.js, Ruby, Go, Java y .NET admiten el rastreo distribuido para AWS Lambda.
 
-[Deployment Tracking][6] te ayuda a correlacionar el código serverless, la configuración y los cambios de despliegue con métricas, trazas y logs de tus funciones para obtener información en tiempo real sobre cómo estos cambios pueden afectar el estado y el rendimiento de tus aplicaciones.
+[Deployment Tracking][6] le ayuda a correlacionar los cambios de código, configuración e implementación sin servidor con métricas, trazas y registros de sus funciones para obtener información en tiempo real sobre cómo estos cambios pueden afectar la salud y el rendimiento de sus aplicaciones.
 
-### AWS Step Functions
+### AWS Step Functions {#aws-step-functions}
 
-AWS Step Functions es un servicio de orquestación serverless que permite a los desarrolladores crear y gestionar flujos de trabajo de aplicaciones de varios pasos en AWS.
+AWS Step Functions es un servicio de orquestación sin servidor que permite a los desarrolladores crear y gestionar flujos de trabajo de aplicaciones de varios pasos en AWS.
 
-Monitorice las métricas y los logs de la [integración de AWS Step Functions][13] para ver la telemetría nativa de la nube dentro de la vista de la aplicación serverless.
+Hacer un seguimiento de las métricas y registros de la [AWS Step Functions Integration][13] para visualizar la telemetría nativa de la nube dentro de la vista de la aplicación {{< ui >}}Serverless{{< /ui >}}.
 
-Identifica errores y cuellos de botella con las [trazas de ejecución][14]. Las trazas de Step Functions se pueden generar a partir de logs de Step Functions y brindan información de ejecución granular, incluida la ruta de ejecución de la máquina de estados, las entradas y salidas para cada paso y la duración de la ejecución del paso.
+Identifique errores y cuellos de botella con las trazas de ejecución [execution traces][14]. Las trazas para Step Functions se pueden generar a partir de los registros de Step Functions y proporcionan información de ejecución granular, incluida la ruta de ejecución de la máquina de estados, las entradas y salidas para cada paso y la duración de la ejecución del paso.
 
-Las métricas mejoradas de Step Functions, que aparecen en Datadog con el prefijo `aws.states.enhanced`, están disponibles con una granularidad de segundos y se generan directamente dentro de Datadog.
+Las métricas mejoradas de Step Function, que aparecen en Datadog con el prefijo `aws.states.enhanced`, están disponibles a nivel de segundo y se generan directamente dentro de Datadog.
 
-### Azure App Service
+### Servicio de Azure App {#azure-app-service}
 
-La [extensión Datadog para Azure App Service][7] proporciona capacidades de rastreo para Azure Web Apps.
+La [extensión de Datadog para Azure App Service][7] proporciona capacidades de rastreo para Azure Web Apps.
 
-Utiliza la [vista de Azure App Service][8] para:
+Utilice la [{{< ui >}}Azure App Service{{< /ui >}} view][8] para:
 
-- Identificar rápidamente las aplicaciones con alta latencia o errores
+- Identificar rápidamente aplicaciones con alta latencia o errores
 
-- Rastrear la utilización de tus planes de App Service, Web Apps y Function Apps
+- Realizar un seguimiento de la utilización de sus Web Apps, Function Apps y App Service Plans
 
-- Obtener información sobre los costes de tus planes de App Service visualizando la cantidad de instancias activas y viendo cuáles son las aplicaciones en ejecución que envían trazas o logs a Datadog
+- Obtener información sobre los costos de sus App Service Plans visualizando la cantidad de instancias activas y viendo cuáles ejecutan aplicaciones que envían trazas o registros a Datadog
 
-- Mapear las aplicaciones que se ejecutan en tus planes de App Service para identificar las aplicaciones que pueden estar afectando a los costes o al rendimiento
+- Mapear las aplicaciones que se ejecutan en sus App Service Plans para identificar aplicaciones que pueden estar afectando los costos o el rendimiento
 
-La extensión de Datadog para Azure App Service proporciona capacidades de rastreo para Azure Web Apps. Para obtener más información sobre cómo configurar el rastreo en Azure, consulta [Azure App Service][7].
+La extensión de Datadog para Azure App Service proporciona capacidades de rastreo para Azure Web Apps. Para obtener más información sobre cómo configurar el rastreo en Azure, consulte [Azure App Service][7].
 
-### Azure Container Apps
+### Azure Container Apps {#azure-container-apps}
 
-Azure Container Apps es una plataforma serverless totalmente gestionada para desplegar y escalar aplicaciones basadas en contenedores. Datadog proporciona la monitorización y la recopilación de log para Container Apps a través de la [integración Azure][9].
+Azure Container Apps es una plataforma sin servidor totalmente administrada para implementar y escalar aplicaciones basadas en contenedores. Datadog proporciona monitoreo y recopilación de registros para Container Apps a través de la [integración de Azure][9].
 
-Datadog también ofrece una solución para [instrumentar tus aplicaciones de Container Apps][10] con un Agent específico para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
+Datadog también ofrece una solución para [instrumentar sus aplicaciones de Container Apps][10] con un Serverless Agent para habilitar el rastreo, métricas personalizadas y la recopilación directa de registros.
 
-### Google Cloud Run
+### Google Cloud Run {#google-cloud-run}
 
-Google Cloud Run es una solución informática asíncrona, liviana y basada en eventos que te permite crear funciones pequeñas con un solo propósito. Para monitorizar las funciones serverless que se ejecutan en Google Cloud Platform, habilita la [integración de Google Cloud Platform][11].
+Google Cloud Run es una solución de cómputo asíncrona, ligera y basada en eventos que le permite crear funciones pequeñas de un solo propósito. Para hacer un seguimiento de las funciones sin servidor que se ejecutan en Google Cloud Platform, habilite la [integración de Google Cloud Platform][11].
 
-Datadog también ofrece una solución para [instrumentar tus aplicaciones de Cloud Run][12] con un Agent específico para permitir el rastreo, las métricas personalizadas y la recopilación directa de logs.
+Datadog también ofrece una solución para [instrumentar sus aplicaciones de Cloud Run][12] con un Serverless Agent para habilitar el rastreo, métricas personalizadas y la recopilación directa de registros.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

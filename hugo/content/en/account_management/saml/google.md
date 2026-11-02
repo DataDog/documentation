@@ -27,7 +27,7 @@ Description
 : Can be anything
 
 ACS URL
-: Use the URL shown under {{< ui >}}Assertion Consumer Service URL{{< /ui >}} on the [SAML setup page][2] (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
+: Use the URL shown under {{< ui >}}Assertion Consumer Service URL for IdP Initiated Login{{< /ui >}} on the [SAML setup page][2] (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
 
 Entity ID
 : Use the URL shown under {{< ui >}}Entity ID{{< /ui >}} on the [SAML setup page][2].

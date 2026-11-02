@@ -1,0 +1,15 @@
+{
+  "data": {
+    "type": "protocols",
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "attributes": {
+      "subject_type_id": "550e8400-e29b-41d4-a716-446655440010",
+      "is_equal_split_enforced": false,
+      "is_minimum_duration_enabled": false,
+      "is_duration_required_to_start": false,
+      "is_metric_limit_enabled": false,
+      "metric_groups": [],
+      "default_duration_days": 14
+    }
+  }
+}

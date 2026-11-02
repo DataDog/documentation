@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40947
+    operations:
+      - CreateLogsArchive
+      - GetLogsArchive
+      - ListLogsArchives
+      - UpdateLogsArchive
+    title: Default logs archive compression to ZSTD

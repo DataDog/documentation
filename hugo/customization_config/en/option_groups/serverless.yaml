@@ -16,3 +16,11 @@ aca_runtime_options:
   - id: dot_net
   - id: ruby
   - id: php
+
+# Question: Which SDK sends traces to the Azure Container Apps managed OpenTelemetry agent?
+aca_otel_managed_agent_sdk_options:
+  - id: dd_api
+    label: Datadog SDK
+    default: true
+  - id: otel_api
+    label: OpenTelemetry SDK
