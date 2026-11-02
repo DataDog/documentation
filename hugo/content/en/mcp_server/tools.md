@@ -548,15 +548,17 @@ Tools for interacting with [Bits Chat][75], the AI-powered companion that helps 
 **Note**: Bits Chat can propose changes to some Datadog resources and ask for confirmation before making them. For direct resource changes, use the specific product toolset, such as `dashboards` or `alerting`.
 
 ### `send_message_to_chat`
+
 *Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`; use `get_chat_message_result` to retrieve the result.
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
 
 - Ask Bits Chat what's causing the latency spike on the checkout service.
 - Continue conversation `abc-123-def` and ask Bits Chat for next steps.
 - Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
 
 ### `get_chat_message_result`
+
 *Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
 Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
@@ -565,6 +567,7 @@ Polls an asynchronous Bits Chat response using the `task_id` and `conversation_i
 - Check whether a Bits Chat request needs an action before it can continue.
 
 ### `get_chat_conversation_history`
+
 *Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
 Retrieves the full history of a Bits Chat conversation by its ID.
@@ -573,6 +576,7 @@ Retrieves the full history of a Bits Chat conversation by its ID.
 - Show the history of the Bits Chat conversation about the payment outage.
 
 ### `list_chat_conversations`
+
 *Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
 Lists all Bits Chat conversations for the current user.
