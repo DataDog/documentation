@@ -188,8 +188,8 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 ### Analyze profiling data with AI
 
-- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a view, action, vital, or long task. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
-- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
+- **[Bits Chat][29]**: From the side panel of a view, action, vital, or long task, ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
 
 {% /if %}
 <!-- end Browser -->
@@ -323,7 +323,7 @@ Android profiling data is attached to operations events in a RUM session. You ca
 ### Within the Profiling page
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience.png" alt="Android profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found under [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][24] or [time to full display][25]), a long task, or a critical [RUM Operation][27]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
 {% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_2.png" alt="Step 2 of the Android profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
@@ -337,8 +337,8 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 
 ### Analyze profiling data with AI
 
-- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a time to initial display, time to full display, ANR error, long task, or operation. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
-- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
+- **[Bits Chat][29]**: Open the side panel of a slow event, such as a time to initial display, time to full display, ANR error, long task, or operation. Then ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
 
 {% /if %}
 <!-- end Android -->
@@ -453,8 +453,8 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 
 ### Analyze profiling data with AI
 
-- **[Bits AI][29]**: Ask what made an event slow from its side panel, such as a time to initial display, time to full display, application hang, long task, or operation. On the Profiling page, ask Bits AI to identify system-level bottlenecks across sessions.
-- **[Datadog MCP Server][30]**: Query and analyze profiling data remotely from your AI agents and IDEs.
+- **[Bits Chat][29]**: Open the side panel of a slow event, such as a time to initial display, time to full display, application hang, long task, or operation. Then ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
 
 {% /if %}
 <!-- end iOS -->
@@ -484,5 +484,6 @@ The Profiling page, found under [**Real User Monitoring > Investigate > Profiles
 [26]: /real_user_monitoring/operations_monitoring/?tab=ios
 [27]: /real_user_monitoring/operations_monitoring/?tab=android
 [28]: https://app.datadoghq.com/rum/profiling
-[29]: /bits_ai/
+[29]: /real_user_monitoring/bits_ai/bits_chat/
 [30]: /mcp_server/tools/#profiling
+[31]: /mcp_server/setup/#toolsets
