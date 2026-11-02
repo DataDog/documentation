@@ -179,7 +179,7 @@ To configure split-by dimensions:
 
 ## Launch your experiment
 
-If the flag or environment requires approval, follow [Experiment Approvals][14] to submit the setup for review. Submitting a request or approving it without applying does not start the experiment. An authorized user must apply it. The steps below apply to experiments that do not require approval.
+If the flag or environment requires approval, follow [Experiment Approvals][14] to submit the setup for review. Submitting a request or approving it without applying does not start the experiment. An authorized user must apply it. The following steps apply to experiments that do not require approval.
 
 To launch your experiment:
 

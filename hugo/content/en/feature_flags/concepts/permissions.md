@@ -24,7 +24,7 @@ Control access at the organization level with the following permissions:
 | **Feature Flag Config Write** | Create and modify feature flag configuration |
 | **Feature Flag Environment Config Read** | View environment configuration |
 | **Feature Flag Environment Config Write** | Create and modify environments |
-| **Feature Flag Approvals Override** | Disable approvals on existing flags, and override the approvals workflow |
+| **Feature Flag Approvals Override** | Disable approvals on existing flags and override the approvals workflow |
 
 Assign these permissions through [Datadog roles][1].
 
@@ -46,7 +46,7 @@ Users without granular access can still view the flag if they have read permissi
 
 ## Experiment approval permissions
 
-Experiment approvals also require access to the experiment. Submitting or applying an experiment action requires `product_analytics_experiments_write` and Editor access to the experiment. Approving without applying or rejecting a request requires flag Editor access or **Feature Flag Approvals Override**. It does not require permission to edit the experiment. See [Experiment Approvals][4] for the full permission matrix and a role configuration that allows submission without approval.
+Experiment approvals also require access to the experiment. Submitting or applying an experiment action requires `product_analytics_experiments_write` and Editor access to the experiment. Approving a request without applying it, or rejecting a request, requires flag Editor access or **Feature Flag Approvals Override**. Neither action requires permission to edit the experiment. See [Experiment Approvals][4] for the full permission matrix and a role configuration that allows submission without approval.
 
 ## Further reading
 

@@ -43,7 +43,7 @@ When creating a flag, toggle **Require approval on changes to this flag for all 
 ### Existing flag
 
 <div class="alert alert-info">
-Enabling approvals on an existing flag requires <code>feature_flag_config_write</code> and Contributor or Editor access to the flag. Disabling approvals also requires <strong>Feature Flag Approvals Override</strong>. That permission also allows an authorized user to override the approval workflow; see <a href="#override-approvals">Override approvals</a>.
+Enabling approvals on an existing flag requires <strong>Feature Flag Config Write</strong> and Contributor or Editor access to the flag. Disabling approvals also requires <strong>Feature Flag Approvals Override</strong>. That permission also lets an authorized user override the approval workflow. For more information, see <a href="#override-approvals">Override approvals</a>.
 </div>
 
 1. Navigate to your flag's details page.
@@ -83,7 +83,7 @@ After a change is approved, apply it when you are ready for it to take effect in
 
 The **Feature Flag Approvals Override** organization permission serves two purposes:
 
-- **Existing flags:** Required to disable approvals on a flag, in addition to `feature_flag_config_write` and [Contributor or Editor access][1].
+- **Existing flags:** Required to disable approvals on a flag, in addition to **Feature Flag Config Write** and [Contributor or Editor access][1].
 - **Workflow bypass:** Allows holders to bypass the approvals workflow where that option is available, so changes can proceed without the usual review and approval steps.
 
 Treat this permission as highly sensitive: assign it only to people who may need to change approval requirements or make exceptions to governance. Organization permissions are granted through [Datadog roles][4]. For related Feature Flags permissions, see [Permissions and Access Control][1].
