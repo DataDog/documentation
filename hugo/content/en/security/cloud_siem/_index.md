@@ -203,7 +203,7 @@ Review which ISPs are sending signals. Click on a pie chart wedge to scope down 
 
 ### Security overview
 
-{{< img src="security/security_monitoring/landing/05_security_overview_resolve.png" alt="Security Overview showing signal distribution and mean time to resolve signals by severity" style="width:100%;" >}}
+{{< img src="security/security_monitoring/landing/05_security_overview_resolve_v2.png" alt="Security Overview showing signal distribution and mean time to resolve signals by severity" style="width:100%;" >}}
 
 A high-level overview of all signals.
 
