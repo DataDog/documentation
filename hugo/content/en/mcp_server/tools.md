@@ -545,8 +545,6 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-Select the `chat` toolset explicitly. For URL-based configuration, use `?toolsets=chat`. It is not included in `toolsets=all`. Existing `assistant` toolset selections continue to work, but clients must refresh their tool lists to use the Chat-named tools.
-
 **Note**: Bits Chat can propose changes to some Datadog resources and ask for confirmation before making them. For direct resource changes, use the specific product toolset, such as `dashboards` or `alerting`.
 
 ### `send_message_to_chat`
