@@ -733,7 +733,7 @@ Talos Linux is an immutable OS with no shell and no host user database, and it m
 
 Datadog Operator version 1.31.0 or later detects Talos automatically from the node's OS image and applies that configuration. With Helm, set `providers.talos.enabled` to `true`.
 
-Detection assumes every node runs Talos, so a single Talos node makes the Operator treat the whole cluster as Talos. To opt out, set the `agent.datadoghq.com/cluster-provider` annotation to `default` on the `DatadogAgent`. On a mixed cluster, target the Talos nodes with a [DatadogAgentProfile][15] instead.
+Detection resolves from one node and applies to the whole cluster: the Operator reads the node its own pod runs on. If that node runs Talos, every Agent in the cluster gets the Talos configuration. On a mixed cluster, the outcome therefore depends on where the Operator pod is scheduled. Target the Talos nodes with a [DatadogAgentProfile][15] instead, or set the `agent.datadoghq.com/cluster-provider` annotation to `default` on the `DatadogAgent` to opt out.
 
 By default, Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
 
@@ -744,7 +744,7 @@ kubectl label --overwrite ns <NAMESPACE> \
 
 **Note**: If the DaemonSet was rejected before the label was applied, its controller delays retrying for several minutes. Run `kubectl rollout restart ds <DAEMONSET_NAME> -n <NAMESPACE>` to apply the change immediately.
 
-Features that use eBPF, such as Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP Queue Length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.261.0 or later mount tracefs at the location Talos uses. On earlier versions, the Agent reports as healthy while these probes fail to attach. Run `agent status` to confirm they are running.
+Features that use eBPF, such as Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP Queue Length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.261.0 or later mount tracefs at the location Talos uses. On earlier Operator or chart versions, the Agent reports as healthy while these probes fail to attach. Run `agent status` to confirm they are running.
 
 For control plane metrics, see [Kubernetes on Talos Linux][14].
 
