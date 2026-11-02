@@ -1,0 +1,37 @@
+---
+disable_sidebar: true
+further_reading:
+- link: /security/application_security/
+  tag: Documentation
+  text: Protégez contre les menaces avec Datadog App and API Protection
+- link: /security/application_security/add-user-info/
+  tag: Documentation
+  text: Suivi de l'activité des utilisateurs
+- link: /security/default_rules/?category=cat-application-security
+  tag: Documentation
+  text: Règles de protection des applications et des API prêtes à l'emploi
+- link: /security/application_security/troubleshooting
+  tag: Documentation
+  text: Dépannage de la protection des applications et des API
+- link: /security/application_security/how-it-works/
+  tag: Documentation
+  text: Comment fonctionne App et API Protection dans Datadog
+title: Configurez App and API Protection sur Windows
+---
+Apprenez à configurer App and API Protection (AAP) sur vos services Windows en sélectionnant le langage de programmation du service.
+
+<div class="alert alert-info">
+  <p class="fs-bold m-0">Votre environnement manque-t-il ?</p>
+  <span>Envoyez-nous une demande pour l'environnement qui vous manque <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">ici</a>.</span>
+</div>
+
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Python" avatar="python" link="/security/application_security/setup/python/windows" >}}
+  {{< appsec-integration name="Node.js" avatar="node" link="/security/application_security/setup/nodejs/windows" >}}
+  {{< appsec-integration name="Java" avatar="java" link="/security/application_security/setup/java/windows" >}}
+  {{< appsec-integration name=".NET" avatar="dotnet" link="/security/application_security/setup/dotnet/windows" >}}
+{{< /appsec-integrations >}}
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
