@@ -58,7 +58,6 @@ The following commands and shell features are available as of Agent 7.86.
 | `stat -f` | Report file system status (type, block sizes, free and available blocks, inodes) for a path |
 | `du` | Estimate file space usage; `--exclude`, `--exclude-from`, and `--files0-from` are blocked |
 | `sha256sum` | Compute SHA-256 digests of files or verify checksum files with `-c` |
-| `ntfs-du` | Find large folders, files, and file extensions across an NTFS volume (Windows only; requires Administrator) |
 
 ### Text processing
 
@@ -87,7 +86,6 @@ The following commands and shell features are available as of Agent 7.86.
 | `df` | Report file system disk space usage (Linux and macOS) |
 | `lsof` | List open files, including files still open after deletion (Linux only); paths outside the allowed paths show as `(restricted)` |
 | `pmap` | Report the memory mappings of a process |
-| `journalctl` | Read bounded journal entries for specific system services (`-u`) or kernel messages (`-k`) (Linux only); requires an explicit grant for each service |
 
 ### Network diagnostics (read-only)
 
