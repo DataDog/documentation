@@ -39,13 +39,19 @@ See the [list of permissions][2] for Security products.
 
 ## Restrict access to detection rules
 
+{{< product-availability names="Cloud SIEM,Workload Protection,App and API Protection,Cloud Security" >}}
+
 {{% security-products/detection-rules-granular-access %}}
 
 ## Restrict access to suppression rules
 
+{{< product-availability names="Cloud SIEM,Workload Protection,App and API Protection" >}}
+
 {{% security-products/suppressions-granular-access %}}
 
 ## Restrict access to dynamic severity rules
+
+{{< product-availability names="Cloud SIEM,Workload Protection,App and API Protection" >}}
 
 {{% security-products/dynamic-severity-granular-access %}}
 
