@@ -29,8 +29,6 @@ Datadog collects the applied quota limits for the account, reads the matching AW
 Service quota monitoring calls the CloudWatch <code>GetMetricData</code> API every 30 minutes in each enabled region. AWS bills these calls to your account.
 </div>
 
-Datadog calculates usage percentages from the collected quota limits, so a newly enabled account reports no percentages until its first limits collection finishes.
-
 ## Data collected
 
 Datadog collects quota limits for every AWS service that reports quotas for your account. It reports usage percentages for a smaller set of services, identified by the `service_code` tag:
