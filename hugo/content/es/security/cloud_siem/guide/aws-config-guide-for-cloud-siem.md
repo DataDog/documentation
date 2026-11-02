@@ -5,66 +5,68 @@ aliases:
 further_reading:
 - link: /security/default_rules/#cat-cloud-siem-log-detection
   tag: Documentación
-  text: Explorar las reglas de detección predeterminadas de Cloud SIEM
-- link: /security/cloud_siem/investigate_security_signals
+  text: Explore las reglas de detección predeterminadas de Cloud SIEM
+- link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: Documentación
-  text: Más información sobre Security Signals Explorer
-- link: /security/cloud_siem/log_detection_rules/
+  text: Obtenga información sobre el Explorador de señales de seguridad
+- link: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule
   tag: Documentación
-  text: Crear nuevas reglas de detección
+  text: Crear reglas de detección personalizadas
 - link: /getting_started/integrations/aws/
   tag: Documentación
-  text: Empezando con AWS
+  text: Primeros pasos con AWS
 - link: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
   tag: Documentación
-  text: Enviar logs de servicios de AWS con la función Lambda de Datadog
+  text: Envíe registros de servicios de AWS con la función Lambda de Datadog
 - link: /logs/explorer/
   tag: Documentación
-  text: Consulta cómo explorar tus logs
+  text: Vea cómo explorar sus registros
+- link: https://learn.datadoghq.com/courses/cloud-siem-configure-aws
+  tag: Centro de aprendizaje
+  text: Configure Cloud SIEM para AWS
 title: Guía de configuración de AWS para Cloud SIEM
 ---
+## Descripción general {#overview}
 
-## Información general
+Cloud SIEM aplica reglas de detección a todos los registros procesados en Datadog para detectar amenazas, como un ataque dirigido, una IP listada en inteligencia de amenazas que se comunica con sus sistemas o una configuración insegura. Las amenazas se muestran como Security Signals en el [Explorador de Security Signals][1] para su clasificación.
 
-Cloud SIEM aplica reglas de detección a todos los logs procesados en Datadog para detectar amenazas, como un ataque dirigido, una IP incluida en la lista de amenazas que se comunica con tus sistemas o una configuración insegura. Las amenazas aparecen como señales de seguridad en el [Security Signals Explorer][1] para su clasificación.
+Esta guía presenta los siguientes pasos para que pueda comenzar a detectar amenazas con sus registros de AWS CloudTrail:
 
-Esta guía te indicará los siguientes pasos para que puedas empezar a detectar amenazas con tus logs de AWS CloudTrail:
+1. [Configure la integración de AWS de Datadog](#set-up-aws-integration-using-cloudformation)
+2. [Habilite los registros de AWS CloudTrail](#enable-aws-cloudtrail-logging)
+3. [Envíe registros de AWS CloudTrail a Datadog](#send-aws-cloudtrail-logs-to-datadog)
+4. [Utilice Cloud SIEM para clasificar los Security Signals](#use-cloud-siem-to-triage-security-signals)
 
-1. [Configurar la integración de AWS de Datadog](#set-up-aws-integration-using-cloudformation)
-2. [Habilitar logs de AWS CloudTrail](#enable-aws-cloudtrail-logging)
-3. [Enviar logs de AWS CloudTrail a Datadog](#send-aws-cloudtrail-logs-to-datadog)
-4. [Usar Cloud SIEM para clasificar señales de seguridad](#use-cloud-siem-to-triage-security-signals)
-
-## Configurar la integración de AWS con CloudFormation
+## Configure la integración de AWS mediante CloudFormation {#set-up-aws-integration-using-cloudformation}
 
 {{% cloud-siem-aws-setup-cloudformation %}}
 
-## Habilitar el registro de AWS CloudTrail
+## Habilite el registro de AWS CloudTrail {#enable-aws-cloudtrail-logging}
 
 {{% cloud-siem-aws-cloudtrail-enable %}}
 
-## Enviar logs de AWS CloudTrail a Datadog
+## Envíe registros de AWS CloudTrail a Datadog {#send-aws-cloudtrail-logs-to-datadog}
 
 {{% cloud-siem-aws-cloudtrail-send-logs %}}
 
-## Usar Cloud SIEM para clasificar señales de seguridad
+## Utilice Cloud SIEM para clasificar los Security Signals {#use-cloud-siem-to-triage-security-signals}
 
-Cloud SIEM aplica reglas de detección predefinidas a todos los logs procesados, incluidos los logs de CloudTrail que acabas de configurar. Cuando se detecta una amenaza con una regla de detección, se genera una señal de seguridad que se puede ver en el Security Signals Explorer.
+Cloud SIEM aplica reglas de detección preconfiguradas a todos los registros procesados, incluidos los registros de CloudTrail que acaba de configurar. Cuando se detecta una amenaza con una Detection Rule, se genera un Security Signal que se puede visualizar en el Explorador de Security Signals.
 
-- Ve al [Cloud SIEM Signals Explorer][9] para ver y clasificar las amenazas. Consulta [Security Signals Explorer][10] para obtener más información.
-- También puedes utilizar el [dashboard de AWS CloudTrail][11] para investigar actividades anómalas.
-- Consulta las [reglas de detección predefinidas][12] que se aplican a tus logs.
-- Crea [nuevas reglas][13] para detectar amenazas que coincidan con tu caso de uso específico.
+- Vaya al [Explorador de Cloud SIEM Signals][9] para visualizar y clasificar las amenazas. Consulte el [Explorador de Security Signals][10] para obtener más detalles.
+- También puede utilizar el [AWS CloudTrail dashboard][11] para investigar actividades anómalas.
+- Consulte las [reglas de detección predeterminadas][12] que se aplican a sus registros.
+- Cree [nuevas reglas][13] para detectar amenazas que coincidan con su caso de uso específico.
 
-Dado que Cloud SIEM aplica reglas de detección a todos los logs procesados, consulta las [instrucciones dentro de la aplicación][14] sobre cómo recopilar [logs de auditoría de Kubernetes][15] y logs de otras fuentes para la detección de amenazas. También puedes habilitar diferentes [servicios de AWS][16] para loguear en un bucket S3 y enviarlos a Datadog para la monitorización de amenazas.
+Dado que Cloud SIEM aplica reglas de detección a todos los registros procesados, consulte las [instrucciones en la aplicación][14] sobre cómo recopilar [registros de auditoría de Kubernetes][15] y registros de otras fuentes para la detección de amenazas. También puede habilitar diferentes [servicios de AWS][16] para que guarden registros en un bucket de S3 y enviar esos registros a Datadog para el monitoreo de amenazas.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/signals?query=%40workflow.rule.type%3A%22Log%20Detection%22
 [9]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
-[10]: /es/security/cloud_siem/investigate_security_signals
+[10]: /es/security/cloud_siem/triage_and_investigate/investigate_security_signals
 [11]: https://app.datadoghq.com/dash/integration/30459/aws-cloudtrail
 [12]: https://docs.datadoghq.com/es/security/default_rules/#cat-cloud-siem
 [13]: https://docs.datadoghq.com/es/security/detection_rules/

@@ -1,0 +1,23 @@
+entries:
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41122
+    operations:
+      - CreateOwnershipFeedback
+      - GetOwnershipEvidence
+      - GetOwnershipInference
+      - ListOwnershipHistory
+      - ListOwnershipHistoryByOwnerType
+      - ListOwnershipInferences
+    title: Move CSM Ownership endpoints to /api/v2/security/ownership
+  - change_type: removed
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41122
+    operations:
+      - CreateOwnershipFeedback
+      - GetOwnershipEvidence
+      - GetOwnershipInference
+      - ListOwnershipHistory
+      - ListOwnershipHistoryByOwnerType
+      - ListOwnershipInferences
+    title: Move CSM Ownership endpoints to /api/v2/security/ownership

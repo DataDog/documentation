@@ -1,0 +1,1272 @@
+/**
+ * $ref resolution and schema-to-SchemaField conversion for OpenAPI specs.
+ *
+ * This module reads parsed OpenAPI spec objects and converts them to a flat,
+ * component-ready format. It does NOT read files — it works with the parsed
+ * YAML objects already loaded by `src/lib/api/specParser.ts`.
+ */
+
+import type { SchemaField } from "./schemas/schemaField";
+
+/**
+ * Maximum row-nesting level emitted in the schema table, matching Hugo's
+ * `assets/scripts/build-api-pages.js` (`if (level > 10) return ''`).
+ *
+ * Counts only parent → child row descents (the same boundary Hugo's
+ * `rowRecursive` uses). $ref resolution, `allOf` merging, and `oneOf`/
+ * `anyOf` unwrapping at the same property level do NOT increment.
+ *
+ * Cycle detection is handled separately by the `visited` set of $ref
+ * strings; Hugo dodges this by replacing circular `items` with the
+ * literal `[Circular]` sentinel upstream, but Astro reads the raw spec
+ * and so still needs an in-pass cycle check.
+ */
+const MAX_DEPTH = 10;
+
+/** Name of the row shown for an object's `additionalProperties`. */
+export const ANY_KEY_FIELD_NAME = "<any-key>";
+
+/* ------------------------------------------------------------------ */
+/*  Module-level cache for resolved $ref schemas                       */
+/*                                                                     */
+/*  Keyed by the spec object itself so v1 and v2 don't share entries — */
+/*  both specs use overlapping ref strings (e.g. `#/components/schemas */
+/*  /APIErrorResponse`) that resolve to different schemas.             */
+/* ------------------------------------------------------------------ */
+
+const refCache = new WeakMap<object, Map<string, any>>();
+
+/* ------------------------------------------------------------------ */
+/*  $ref resolution                                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Follow a `$ref` string (e.g. `#/components/schemas/Foo`) to its target
+ * object within the given spec. Uses JSON Pointer semantics: split on `/`,
+ * skip the leading `#`.
+ *
+ * @param spec  The full parsed OpenAPI spec object.
+ * @param refString  A JSON Pointer reference string starting with `#/`.
+ * @returns The resolved object, or `undefined` if the path is invalid.
+ */
+export function resolveRef(spec: any, refString: string): any {
+  let perSpec = refCache.get(spec);
+  if (perSpec) {
+    const cached = perSpec.get(refString);
+    if (cached !== undefined || perSpec.has(refString)) return cached;
+  }
+
+  const parts = refString.replace(/^#\//, "").split("/");
+  let current: any = spec;
+
+  for (const part of parts) {
+    if (current == null || typeof current !== "object") {
+      return undefined;
+    }
+    // JSON Pointer escapes: ~1 → /, ~0 → ~
+    const unescaped = part.replace(/~1/g, "/").replace(/~0/g, "~");
+    current = current[unescaped];
+  }
+
+  if (!perSpec) {
+    perSpec = new Map();
+    refCache.set(spec, perSpec);
+  }
+  perSpec.set(refString, current);
+  return current;
+}
+
+/* ------------------------------------------------------------------ */
+/*  oneOf / anyOf option labels                                        */
+/*                                                                     */
+/*  Ports the discriminant-based labeling introduced in Hugo by         */
+/*  DataDog/documentation#38288 ("Widgets: better oneOf schema          */
+/*  support"). Instead of positional `Option N` labels, a union branch  */
+/*  is labeled `<type=toplist>` when the branches can be told apart by  */
+/*  a single-value string enum property. Branches that can't be named   */
+/*  uniquely fall back to `Object N`.                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Group items by a derived key. Stands in for `Map.groupBy()` (ES2024), which
+ * isn't in this project's TS lib target.
+ */
+function groupBy<T, K>(
+  items: T[],
+  keyFn: (item: T, i: number) => K,
+): Map<K, T[]> {
+  const map = new Map<K, T[]>();
+  items.forEach((item, i) => {
+    const key = keyFn(item, i);
+    const group = map.get(key);
+    if (group) {
+      group.push(item);
+    } else {
+      map.set(key, [item]);
+    }
+  });
+  return map;
+}
+
+/**
+ * Read a branch's property schema, following a single `$ref` hop.
+ *
+ * Hugo works on a fully dereferenced spec, so `item.properties.type` is
+ * already the enum schema. In the raw spec it is usually a `$ref` (e.g.
+ * `#/components/schemas/AlertValueWidgetDefinitionType`), so it has to be
+ * resolved before the enum can be inspected.
+ */
+function resolveProperty(spec: any, item: any, name: string): any {
+  const prop = item?.properties?.[name];
+  if (prop?.$ref) {
+    return resolveRef(spec, prop.$ref) ?? prop;
+  }
+  return prop;
+}
+
+/**
+ * Returns `<discriminant=value>` when the branch's `discriminant` property is
+ * a single-value string enum, otherwise `undefined`.
+ *
+ * Unlike the Hugo implementation this returns raw `<`/`>` rather than HTML
+ * entities: Astro escapes the label when rendering it, and the plaintext
+ * renderer needs the unescaped form.
+ */
+function getMaybeConstTypeName(
+  spec: any,
+  item: any,
+  discriminant: string,
+): string | undefined {
+  const type = resolveProperty(spec, item, discriminant);
+  if (type && type.type === "string" && type.enum && type.enum.length === 1) {
+    return `<${discriminant}=${type.enum[0]}>`;
+  }
+  return undefined;
+}
+
+/**
+ * Auto-detect the best discriminant property across a set of union branches.
+ *
+ * A property is a candidate discriminant when every branch either omits it or
+ * defines it as a string enum.
+ *
+ * Preference order:
+ *  1. The first candidate that covers every branch (all-defined + unique).
+ *  2. Otherwise, the candidate covering the most branches, provided it covers
+ *     all-but-one branch or at least 75% of branches.
+ *
+ * Branches must already be `$ref`-resolved; their property schemas need not
+ * be. Mirrors `getBestDiscriminant` in Hugo's
+ * `assets/scripts/build-api-pages.js`.
+ *
+ * @param spec   The full parsed OpenAPI spec object (for property `$ref`s).
+ * @param items  Resolved `oneOf`/`anyOf` branch schemas.
+ * @returns The discriminant property name, or `undefined` if none qualifies.
+ */
+export function getBestDiscriminant(
+  spec: any,
+  items: any[],
+): string | undefined {
+  const candidates = Array.from(
+    new Set(items.flatMap((item) => Object.keys(item?.properties ?? {}))),
+  );
+  const enumCandidates = candidates.filter((d) =>
+    items.some((item) => {
+      const prop = resolveProperty(spec, item, d);
+      return prop && prop.type === "string" && prop.enum?.length === 1;
+    }),
+  );
+  const onlyEnumCandidates = enumCandidates.filter(
+    (d) =>
+      !items.some((item) => {
+        const prop = resolveProperty(spec, item, d);
+        return prop && (prop.type !== "string" || !prop.enum);
+      }),
+  );
+
+  const countedCandidates = onlyEnumCandidates.map((d) => {
+    const byName = groupBy(items, (item) =>
+      getMaybeConstTypeName(spec, item, d),
+    );
+    const nUnique = [...byName].reduce(
+      (acc, [value, arr]) => acc + (value && arr.length === 1 ? 1 : 0),
+      0,
+    );
+    return { name: d, nUnique };
+  });
+  countedCandidates.sort((a, b) => b.nUnique - a.nUnique);
+
+  const bestCandidate = countedCandidates[0];
+  if (!bestCandidate) return undefined;
+
+  const { name, nUnique } = bestCandidate;
+  if (nUnique >= items.length - 1 || nUnique / items.length >= 0.75) {
+    return name;
+  }
+
+  return undefined;
+}
+
+/**
+ * Build the display label for each branch of a `oneOf`/`anyOf`, positionally
+ * aligned with `variants`.
+ *
+ * Hugo operates on a fully dereferenced spec, so it can read `item.properties`
+ * directly; Astro resolves lazily, so each branch's `$ref` is resolved here
+ * before inspecting it.
+ *
+ * @param spec      The full parsed OpenAPI spec object.
+ * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
+ * @returns One label per variant, e.g. `["<type=toplist>", "Object 2"]`.
+ */
+export function unionOptionLabels(spec: any, variants: any[]): string[] {
+  const items = variants.map((variant) =>
+    variant?.$ref ? (resolveRef(spec, variant.$ref) ?? variant) : variant,
+  );
+
+  const discriminant = getBestDiscriminant(spec, items);
+  const names = items.map((item) =>
+    discriminant ? getMaybeConstTypeName(spec, item, discriminant) : undefined,
+  );
+  const byName = groupBy(names, (name) => name);
+
+  // Keep a name only when it uniquely identifies one branch.
+  return names.map((name, i) =>
+    name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`,
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Schema → SchemaField[] conversion                                  */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Top-level entry point for converting a request or response body schema
+ * into rows.
+ *
+ * Mirrors the unwrap performed by `schemaTable` in
+ * `assets/scripts/build-api-pages.js` before it calls `rowRecursive`:
+ *
+ * - Top-level array → render the items' fields directly at level 0,
+ *   no wrapping `[Foo]` row.
+ * - Top-level array of arrays → unwrap to the innermost items.
+ * - Top-level array of primitives → no rows (the table is hidden).
+ * - Top-level `oneOf` → one `Option n` row per branch, at level 0.
+ * - Anything else → equivalent to `schemaToFields`.
+ *
+ * `$ref` and `allOf` are resolved before the array check, matching
+ * Hugo's pre-flattened input.
+ */
+export function topLevelSchemaToFields(spec: any, schema: any): SchemaField[] {
+  if (!schema) return [];
+
+  const visited = new Set<string>();
+
+  let resolved: any = schema;
+  while (resolved && resolved.$ref) {
+    if (visited.has(resolved.$ref)) break;
+    visited.add(resolved.$ref);
+    const next = resolveRef(spec, resolved.$ref);
+    if (!next) return [];
+    resolved = next;
+  }
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.oneOf?.length > 0) {
+    return topLevelOptionFields(spec, resolved.oneOf, visited);
+  }
+
+  if (resolved.type !== "array") {
+    return schemaToFields(spec, schema);
+  }
+
+  const items = resolved.items;
+  if (!items) return [];
+
+  let resolvedItems: any = items;
+  while (resolvedItems && resolvedItems.$ref) {
+    if (visited.has(resolvedItems.$ref)) break;
+    visited.add(resolvedItems.$ref);
+    const next = resolveRef(spec, resolvedItems.$ref);
+    if (!next) return [];
+    resolvedItems = next;
+  }
+  if (resolvedItems.allOf) {
+    resolvedItems = mergeAllOf(resolvedItems.allOf, spec);
+  }
+
+  if (resolvedItems.type === "array") {
+    return topLevelSchemaToFields(spec, resolvedItems);
+  }
+
+  if (resolvedItems.properties || resolvedItems.oneOf || resolvedItems.anyOf) {
+    // Pass the already-resolved schema, not the original $ref wrapper:
+    // we've added the resolved $refs to `visited` for cycle protection
+    // on later descents, so re-resolving here would self-trigger.
+    return schemaToFields(spec, resolvedItems, visited);
+  }
+
+  return [];
+}
+
+/**
+ * The rows of a top-level `oneOf` body. Hugo's `schemaTable` turns each branch
+ * into an ordinary level-0 row named `Option n`, with no row for the union
+ * itself. Hugo doesn't do this for `anyOf`.
+ */
+function topLevelOptionFields(
+  spec: any,
+  variants: any[],
+  visited: Set<string>,
+): SchemaField[] {
+  // Level -1 puts the option rows at level 0 and their fields at level 1.
+  return buildUnionOptions(spec, variants, visited, -1).map((option, idx) =>
+    optionAsField({ ...option, label: `Option ${idx + 1}` }),
+  );
+}
+
+/**
+ * Build the option rows for a `oneOf`/`anyOf`.
+ *
+ * Each option carries its *own* branch type. Hugo keys the union's child rows
+ * by label and renders each one as an ordinary row, so a numeric branch shows
+ * `double` and a string branch shows `string` — not a blanket `object`. A
+ * scalar branch therefore needs no nested row at all: `schemaToFields` returns
+ * a single anonymous leaf for it, which would render as an unnamed child under
+ * the option, so that leaf is folded into the option itself.
+ *
+ * @param spec      The full parsed OpenAPI spec object.
+ * @param variants  The raw `oneOf`/`anyOf` branch schemas (may be `$ref`s).
+ * @param visited   `$ref`s already seen on this path.
+ * @param level     Row-nesting level of the union field itself.
+ */
+function buildUnionOptions(
+  spec: any,
+  variants: any[],
+  visited: Set<string>,
+  level: number,
+): NonNullable<SchemaField["unionOptions"]> {
+  // The option rows sit one level below the union, so past the cap there are
+  // none.
+  if (level + 1 > MAX_DEPTH) return [];
+
+  const labels = unionOptionLabels(spec, variants);
+
+  return variants.map((variant: any, idx: number) => {
+    const fields = optionFields(spec, variant, visited, level + 2);
+
+    // A scalar branch's type, enum values and default are text on the option
+    // row itself, so they show even when the row sits at the cap and
+    // `fields` came back empty. Resolve the branch at the row's own level to
+    // recover them.
+    const leaf =
+      scalarLeaf(fields) ??
+      (level + 2 > MAX_DEPTH
+        ? scalarLeaf(optionFields(spec, variant, visited, level + 1))
+        : undefined);
+
+    return {
+      label: labels[idx],
+      type: leaf ? leaf.type : unionOptionType(spec, variant),
+      description: variantDescription(spec, variant),
+      ...(variantDeprecated(spec, variant)
+        ? { deprecated: true as const }
+        : {}),
+      ...(leaf?.enumValues ? { enumValues: leaf.enumValues } : {}),
+      ...(leaf?.defaultValue !== undefined
+        ? { defaultValue: leaf.defaultValue }
+        : {}),
+      fields: leaf ? [] : fields,
+    };
+  });
+}
+
+/**
+ * The single anonymous leaf a scalar branch yields, if `fields` is one. Its
+ * type belongs on the option row rather than on a nested unnamed row.
+ */
+function scalarLeaf(fields: SchemaField[]): SchemaField | undefined {
+  return fields.length === 1 &&
+    fields[0].name === "" &&
+    !fields[0].children &&
+    !fields[0].unionOptions
+    ? fields[0]
+    : undefined;
+}
+
+/**
+ * The rows under one union option, resolved at `fieldLevel`.
+ *
+ * Hugo's `rowRecursive` puts no nameless row between an option and what it
+ * holds. An option that is an array of objects gets its item fields directly
+ * (`items.properties`), and keeps the array's `[object]` type. An option that
+ * is itself a union gets its inner options directly, as rows of their own.
+ */
+function optionFields(
+  spec: any,
+  variant: any,
+  visited: Set<string>,
+  fieldLevel: number,
+): SchemaField[] {
+  const optionVisited = new Set(visited);
+  let resolved = variant;
+  if (variant?.$ref && !visited.has(variant.$ref)) {
+    optionVisited.add(variant.$ref);
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  if (resolved?.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  const unionKey = resolved?.oneOf ? "oneOf" : resolved?.anyOf ? "anyOf" : null;
+  if (unionKey) {
+    return buildUnionOptions(
+      spec,
+      resolved[unionKey],
+      optionVisited,
+      fieldLevel - 1,
+    ).map(optionAsField);
+  }
+
+  const items = resolved?.type === "array" ? resolved.items : undefined;
+  const itemsUnion = items ? resolveUnion(spec, items, optionVisited) : null;
+  if (itemsUnion) {
+    // The items' options sit right under this option, with no row for the
+    // array in between.
+    return buildUnionOptions(
+      spec,
+      itemsUnion.variants,
+      itemsUnion.visited,
+      fieldLevel - 1,
+    ).map(optionAsField);
+  }
+
+  const itemTypeName = items ? resolveItemTypeName(items, spec) : undefined;
+  const itemsAreObjects =
+    items &&
+    arrayItemsHaveChildren(items, spec) &&
+    itemTypeName !== "<oneOf>" &&
+    itemTypeName !== "<anyOf>";
+
+  return itemsAreObjects
+    ? schemaToFields(spec, items, optionVisited, fieldLevel)
+    : schemaToFields(spec, variant, new Set(visited), fieldLevel);
+}
+
+/** A schema's `oneOf` or `anyOf` variants, following a `$ref` and `allOf`. */
+function resolveUnion(
+  spec: any,
+  schema: any,
+  visited: Set<string>,
+): { variants: any[]; visited: Set<string> } | null {
+  const unionVisited = new Set(visited);
+  let resolved = schema;
+  if (schema?.$ref && !visited.has(schema.$ref)) {
+    unionVisited.add(schema.$ref);
+    resolved = resolveRef(spec, schema.$ref) ?? schema;
+  }
+  if (resolved?.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+  const variants = resolved?.oneOf ?? resolved?.anyOf;
+  return variants ? { variants, visited: unionVisited } : null;
+}
+
+/** An inner union option, as a row under its outer option. */
+function optionAsField(
+  option: NonNullable<SchemaField["unionOptions"]>[number],
+): SchemaField {
+  return {
+    name: option.label,
+    type: option.type,
+    required: false,
+    deprecated: option.deprecated === true,
+    readOnly: false,
+    description: option.description ?? "",
+    ...(option.enumValues ? { enumValues: option.enumValues } : {}),
+    ...(option.defaultValue !== undefined
+      ? { defaultValue: option.defaultValue }
+      : {}),
+    ...(option.fields.length > 0 ? { children: option.fields } : {}),
+  };
+}
+
+/**
+ * Display type for a union branch that has nested rows of its own.
+ *
+ * Mirrors the type a property row would get for the same schema, so an
+ * object branch reads `object`, an array branch `[object]`, and a branch that
+ * is itself a union `<oneOf>`.
+ */
+function unionOptionType(spec: any, variant: any): string {
+  let resolved = variant;
+  if (variant?.$ref) {
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.oneOf) return "<oneOf>";
+  if (resolved.anyOf) return "<anyOf>";
+  if (resolved.type === "array") {
+    return `[${resolved.items ? resolveItemTypeName(resolved.items, spec) : "any"}]`;
+  }
+  if (resolved.type === "object" || resolved.properties) return "object";
+
+  return displayType(resolved);
+}
+
+/**
+ * Convert an OpenAPI schema object into a `SchemaField[]` tree suitable for
+ * rendering in UI components.
+ *
+ * Handles:
+ * - `$ref` resolution
+ * - `object` with `properties`
+ * - `array` with `items`
+ * - `oneOf` / `anyOf` (union options)
+ * - `allOf` (merged properties)
+ * - Primitives (`string`, `integer`, `number`, `boolean`)
+ * - `enum` values
+ * - `format`, `example`, `default`, `readOnly`, `writeOnly`, `deprecated`
+ * - Circular reference detection via a visited set
+ *
+ * @param spec     The full parsed OpenAPI spec object.
+ * @param schema   The schema object (or object with `$ref`) to convert.
+ * @param visited  Set of `$ref` strings already seen on this path (for cycle detection).
+ * @param level    Row-nesting level (0 at the schema root; see `MAX_DEPTH`).
+ * @returns A flat array of `SchemaField` objects, possibly with nested children.
+ */
+export function schemaToFields(
+  spec: any,
+  schema: any,
+  visited: Set<string> = new Set(),
+  level: number = 0,
+): SchemaField[] {
+  if (!schema) return [];
+  if (level > MAX_DEPTH) return [];
+
+  // ── $ref resolution ──────────────────────────────────────────────
+  if (schema.$ref) {
+    const ref: string = schema.$ref;
+
+    // Cut a cycle off here, so the field that repeats the schema has
+    // no rows under it.
+    if (visited.has(ref)) return [];
+
+    const resolved = resolveRef(spec, ref);
+    if (!resolved) return [];
+
+    const nextVisited = new Set(visited);
+    nextVisited.add(ref);
+    return schemaToFields(spec, resolved, nextVisited, level);
+  }
+
+  // ── oneOf / anyOf (union types) ──────────────────────────────────
+  const unionKey = schema.oneOf ? "oneOf" : schema.anyOf ? "anyOf" : null;
+  if (unionKey) {
+    const variants: any[] = schema[unionKey];
+    const unionOptions = buildUnionOptions(spec, variants, visited, level);
+
+    // Return a single synthetic field that carries the union options
+    return [
+      {
+        name: schema.title ?? "",
+        type: unionKey,
+        required: false,
+        deprecated: schema.deprecated === true,
+        readOnly: schema.readOnly === true,
+        ...writeOnlyFlag(schema),
+        description: schema.description ?? "",
+        unionOptions,
+      },
+    ];
+  }
+
+  // ── allOf (merged schemas) ───────────────────────────────────────
+  if (schema.allOf) {
+    const merged = mergeAllOf(schema.allOf, spec);
+    return schemaToFields(spec, merged, visited, level);
+  }
+
+  // ── object type ──────────────────────────────────────────────────
+  if (schema.type === "object" || schema.properties || anyKeySchema(schema)) {
+    const additionalProperties = schema.properties
+      ? undefined
+      : anyKeySchema(schema);
+    if (additionalProperties) {
+      return [
+        propertyToField(
+          spec,
+          ANY_KEY_FIELD_NAME,
+          additionalProperties,
+          false,
+          visited,
+          level,
+        ),
+      ];
+    }
+
+    const requiredSet = new Set<string>(schema.required ?? []);
+    const properties: Record<string, any> = schema.properties ?? {};
+
+    return Object.entries(properties).map(
+      ([propName, propSchema]: [string, any]) => {
+        return propertyToField(
+          spec,
+          propName,
+          propSchema,
+          requiredSet.has(propName),
+          visited,
+          level,
+        );
+      },
+    );
+  }
+
+  // ── array type ───────────────────────────────────────────────────
+  if (schema.type === "array") {
+    const items = schema.items;
+    if (!items) {
+      return [
+        {
+          name: "",
+          type: "[any]",
+          required: false,
+          deprecated: schema.deprecated === true,
+          readOnly: schema.readOnly === true,
+          ...writeOnlyFlag(schema),
+          description: schema.description ?? "",
+        },
+      ];
+    }
+
+    const itemTypeName = resolveItemTypeName(items, spec);
+    const children = arrayItemsHaveChildren(items, spec)
+      ? schemaToFields(
+          spec,
+          items,
+          new Set(visited),
+          arrayItemsLevel(items, spec, level),
+        )
+      : [];
+
+    return [
+      {
+        name: "",
+        type: `[${itemTypeName}]`,
+        required: false,
+        deprecated: schema.deprecated === true,
+        readOnly: schema.readOnly === true,
+        ...writeOnlyFlag(schema),
+        description: schema.description ?? "",
+        ...arrayChildFields(children),
+      },
+    ];
+  }
+
+  // ── primitive types ──────────────────────────────────────────────
+  const field: SchemaField = {
+    name: "",
+    type: displayType(schema),
+    required: false,
+    deprecated: schema.deprecated === true,
+    readOnly: schema.readOnly === true,
+    ...writeOnlyFlag(schema),
+    description: schema.description ?? "",
+  };
+
+  if (schema.enum) {
+    field.enumValues = schema.enum.map(String);
+  }
+  if (schema.default !== undefined) {
+    field.defaultValue = formatDefault(schema.default);
+  }
+
+  return [field];
+}
+
+/**
+ * The `writeOnly` half of a `SchemaField`, present only when the spec marks
+ * the schema write-only.
+ *
+ * `writeOnly` is rare — a handful of properties across both specs — so it is
+ * spread in conditionally to keep it out of the serialized view of the
+ * thousands of fields that are not write-only.
+ */
+function writeOnlyFlag(schema: any): { writeOnly?: true } {
+  return schema?.writeOnly === true ? { writeOnly: true } : {};
+}
+
+/**
+ * Drop read-only fields from a field tree, at every depth.
+ *
+ * A client cannot send a read-only field, so it does not belong in a request
+ * body. Hugo emits the rows and hides them with
+ * `.table-request .isReadOnly { display: none }`, scoped so response tables
+ * still show them — which is where read-only fields belong, since `id` and
+ * `created_at` are exactly what a response returns.
+ *
+ * Filtering the tree rather than hiding rows in CSS also covers the plaintext
+ * `.md` output and the serialized view, neither of which a stylesheet reaches.
+ *
+ * Removing a read-only object removes its subtree, matching Hugo, where
+ * hiding a row hides the nested rows it contains.
+ *
+ * @param fields  Field tree to filter.
+ * @returns A new tree with read-only fields omitted.
+ */
+export function stripReadOnlyFields(fields: SchemaField[]): SchemaField[] {
+  return stripFields(fields, (field) => field.readOnly === true);
+}
+
+/**
+ * Drop write-only fields from a field tree, at every depth.
+ *
+ * The mirror image of `stripReadOnlyFields`: the server accepts a write-only
+ * field (`webhookSecret`, `secret_access_key`) but never returns it, so it
+ * belongs in the request body and nowhere in the response — neither the Model
+ * table nor the generated example. Ports DataDog/documentation#39558.
+ *
+ * @param fields  Field tree to filter.
+ * @returns A new tree with write-only fields omitted.
+ */
+export function stripWriteOnlyFields(fields: SchemaField[]): SchemaField[] {
+  return stripFields(fields, (field) => field.writeOnly === true);
+}
+
+/** Rebuild a field tree without the fields `shouldOmit` selects, at any depth. */
+function stripFields(
+  fields: SchemaField[],
+  shouldOmit: (field: SchemaField) => boolean,
+): SchemaField[] {
+  const kept: SchemaField[] = [];
+
+  for (const field of fields) {
+    if (shouldOmit(field)) continue;
+
+    const next: SchemaField = { ...field };
+
+    if (field.children) {
+      const children = stripFields(field.children, shouldOmit);
+      if (children.length > 0) {
+        next.children = children;
+      } else {
+        delete next.children;
+      }
+    }
+
+    if (field.unionOptions) {
+      next.unionOptions = field.unionOptions.map((option) => ({
+        ...option,
+        fields: stripFields(option.fields, shouldOmit),
+      }));
+    }
+
+    kept.push(next);
+  }
+
+  return kept;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Parameter → SchemaField[] conversion                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The text shown for a schema `default`. An empty string is written as `""`,
+ * since a bare empty string would render as an empty code span.
+ */
+function formatDefault(value: unknown): string {
+  return value === "" ? '""' : String(value);
+}
+
+/**
+ * Convert an array of OpenAPI parameter objects (path, query, header)
+ * into `SchemaField[]`.
+ *
+ * Each parameter typically has `name`, `required`, `description`, and a
+ * `schema` sub-object (which may itself contain a `$ref`).
+ *
+ * @param spec    The full parsed OpenAPI spec object.
+ * @param params  Array of OpenAPI parameter objects.
+ * @returns An array of `SchemaField` objects (one per parameter).
+ */
+export function paramsToFields(spec: any, params: any[]): SchemaField[] {
+  if (!params || !Array.isArray(params)) return [];
+
+  return params.map((param) => {
+    // Parameters themselves can be $ref pointers
+    let resolved = param;
+    if (param.$ref) {
+      resolved = resolveRef(spec, param.$ref) ?? param;
+    }
+
+    const name: string = resolved.name ?? "";
+    const required: boolean = resolved.required === true;
+    const description: string = resolved.description ?? "";
+    const deprecated: boolean = resolved.deprecated === true;
+
+    // Resolve the parameter's inner schema
+    let paramSchema = resolved.schema;
+    if (paramSchema?.$ref) {
+      paramSchema = resolveRef(spec, paramSchema.$ref) ?? paramSchema;
+    }
+
+    if (!paramSchema) {
+      return {
+        name,
+        type: "any",
+        required,
+        deprecated,
+        readOnly: false,
+        description,
+      };
+    }
+
+    const field: SchemaField = {
+      name,
+      type: parameterType(paramSchema),
+      required,
+      deprecated,
+      readOnly: paramSchema.readOnly === true,
+      description,
+    };
+
+    if (paramSchema.enum) {
+      field.enumValues = paramSchema.enum.map(String);
+    }
+    if (paramSchema.default !== undefined) {
+      field.defaultValue = formatDefault(paramSchema.default);
+    }
+
+    return field;
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Private helpers                                                    */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Build a display type string for a schema. Handles format annotations
+ * (e.g. "string (date-time)") and enums.
+ */
+/**
+ * Display type for a path, query, or header parameter row.
+ *
+ * Parameters are rendered by a different Hugo template than request and
+ * response bodies — `layouts/partials/api/arguments.html` — and it reports
+ * `.schema.type` directly. `format` is ignored there, so `list_id` shows
+ * `integer` rather than `int64`. This is deliberately not `displayType`,
+ * which applies the body rules.
+ *
+ * Hugo substitutes `enum` in the query-parameter table only; the path and
+ * header tables print the bare type. No parameter in either spec currently
+ * carries an `enum`, so the substitution is applied uniformly here rather
+ * than reproducing an asymmetry that never renders.
+ */
+function parameterType(schema: any): string {
+  if (schema.enum) {
+    return "enum";
+  }
+  return schema.type ?? "object";
+}
+
+/**
+ * The type of a union property row. Hugo's `typeColumn` prints the schema's
+ * own `format || type`, then appends `<oneOf>`, so a `oneOf` with a sibling
+ * `type: object` reads `object <oneOf>`. Hugo has no `anyOf` handling, and a
+ * bare union stays the semantic `oneOf`/`anyOf` tag the renderers bracket.
+ */
+function unionFieldType(schema: any, unionKey: "oneOf" | "anyOf"): string {
+  const ownType: string | undefined = schema.format ?? schema.type;
+  if (unionKey === "oneOf" && ownType) return `${ownType} <oneOf>`;
+  return unionKey;
+}
+
+function displayType(schema: any): string {
+  // A schema with no `type` accepts any value. Hugo leaves the type cell
+  // blank; `any` says so explicitly, and matches the `[any]` of an array
+  // whose items have no `type`. Object-shaped schemas never reach here.
+  const base: string = schema.type ?? "any";
+
+  // An enumerated field reports `enum` rather than its underlying type. The
+  // permitted values travel separately in `enumValues` and render in the
+  // description column.
+  if (schema.enum) {
+    return "enum";
+  }
+
+  // A `format` supersedes the base type.
+  // OpenAPI defines `format` as a refinement of `type`, and every format in
+  // these specs implies exactly one base type (`int64` → integer,
+  // `date-time` → string), so reporting the format alone loses nothing while
+  // saying strictly more. The invariant that makes this safe is asserted in
+  // `tests/integration/refResolver.full-spec.test.ts`.
+  if (schema.format) {
+    return schema.format;
+  }
+
+  return base;
+}
+
+/**
+ * Extract the human-readable name from a `$ref` string.
+ * e.g. `#/components/schemas/DashboardCreateRequest` → `DashboardCreateRequest`
+ */
+function refName(refString: string): string {
+  const parts = refString.split("/");
+  return parts[parts.length - 1];
+}
+
+/**
+ * The description shown for a `oneOf`/`anyOf` option row. Option labels are
+ * derived from a discriminant property or fall back to `Object N`, so the
+ * variant's own description (e.g. "The definition of
+ * `AWSIntegration` object.") is the only place the underlying schema name
+ * survives. Resolves a single `$ref` hop to reach it.
+ */
+function variantDescription(spec: any, variant: any): string {
+  let resolved = variant;
+  if (variant?.$ref) {
+    resolved = resolveRef(spec, variant.$ref) ?? variant;
+  }
+  return resolved?.description ?? "";
+}
+
+/** True when the variant, or the `$ref` that points at it, is deprecated. */
+function variantDeprecated(spec: any, variant: any): boolean {
+  if (variant?.deprecated === true) return true;
+  if (!variant?.$ref) return false;
+  return resolveRef(spec, variant.$ref)?.deprecated === true;
+}
+
+/**
+ * Collapse an array's children when they are a single anonymous union.
+ *
+ * `schemaToFields` represents a `oneOf`/`anyOf` as one synthetic nameless
+ * field carrying `unionOptions`. As an array's only child that renders an
+ * extra blank row between the array and its options. Lifting the options
+ * onto the array field hangs them directly off the array instead.
+ *
+ * @param children  Fields produced from the array's `items`.
+ * @returns The partial `SchemaField` to spread — either `unionOptions` or
+ *          `children`, or nothing when there is neither.
+ */
+function arrayChildFields(
+  children: SchemaField[],
+): Pick<SchemaField, "children" | "unionOptions"> {
+  const only = children.length === 1 ? children[0] : undefined;
+  if (only && only.name === "" && only.unionOptions) {
+    return { unionOptions: only.unionOptions };
+  }
+  return children.length > 0 ? { children } : {};
+}
+
+/**
+ * Convert a single named property into a `SchemaField`, recursing into
+ * nested objects, arrays, and unions as needed.
+ */
+function propertyToField(
+  spec: any,
+  name: string,
+  schema: any,
+  required: boolean,
+  visited: Set<string>,
+  level: number,
+): SchemaField {
+  if (!schema) {
+    return {
+      name,
+      type: "any",
+      required,
+      deprecated: false,
+      readOnly: false,
+      description: "",
+    };
+  }
+
+  // Resolve $ref first so we can inspect the real schema. A target can itself
+  // be only a `$ref` (`ProductAnalyticsBaseQuery`), so follow the chain,
+  // keeping the first description found.
+  let resolved = schema;
+  let chainDescription: string | undefined;
+  let chainDeprecated = false;
+  const nextVisited = new Set(visited);
+  while (resolved.$ref) {
+    const ref: string = resolved.$ref;
+    // A `$ref`'s own `description` and `deprecated` win over the target's.
+    chainDescription ??= resolved.description;
+    chainDeprecated ||= resolved.deprecated === true;
+
+    if (nextVisited.has(ref)) {
+      return {
+        name,
+        type: refName(ref),
+        required,
+        deprecated: false,
+        readOnly: false,
+        description: `Circular reference to ${refName(ref)}.`,
+      };
+    }
+    nextVisited.add(ref);
+
+    const target = resolveRef(spec, ref);
+    if (!target) break;
+    chainDescription ??= target.description;
+    resolved = target;
+  }
+  if (
+    chainDescription !== undefined &&
+    resolved.description !== chainDescription
+  ) {
+    resolved = { ...resolved, description: chainDescription };
+  }
+  if (chainDeprecated && resolved.deprecated !== true) {
+    resolved = { ...resolved, deprecated: true };
+  }
+
+  // ── oneOf / anyOf ────────────────────────────────────────────────
+  const unionKey = resolved.oneOf ? "oneOf" : resolved.anyOf ? "anyOf" : null;
+  if (unionKey) {
+    const variants: any[] = resolved[unionKey];
+    const unionOptions = buildUnionOptions(spec, variants, nextVisited, level);
+
+    return {
+      name,
+      type: unionFieldType(resolved, unionKey),
+      required,
+      deprecated: resolved.deprecated === true,
+      readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
+      description: resolved.description ?? "",
+      unionOptions,
+    };
+  }
+
+  // ── allOf ────────────────────────────────────────────────────────
+  if (resolved.allOf) {
+    const merged = mergeAllOf(resolved.allOf, spec);
+    const children = schemaToFields(spec, merged, nextVisited, level + 1);
+    return {
+      name,
+      type: "object",
+      required,
+      deprecated: resolved.deprecated === true,
+      readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
+      description: resolved.description ?? "",
+      ...(children.length > 0 ? { children } : {}),
+    };
+  }
+
+  // ── object ───────────────────────────────────────────────────────
+  if (
+    resolved.type === "object" ||
+    resolved.properties ||
+    anyKeySchema(resolved)
+  ) {
+    const children = schemaToFields(spec, resolved, nextVisited, level + 1);
+    return {
+      name,
+      type: "object",
+      required,
+      deprecated: resolved.deprecated === true,
+      readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
+      description: resolved.description ?? "",
+      ...(children.length > 0 ? { children } : {}),
+    };
+  }
+
+  // ── array ────────────────────────────────────────────────────────
+  if (resolved.type === "array") {
+    const items = resolved.items;
+    const itemTypeName = items ? resolveItemTypeName(items, spec) : "any";
+    const children =
+      items && arrayItemsHaveChildren(items, spec)
+        ? schemaToFields(
+            spec,
+            items,
+            new Set(nextVisited),
+            arrayItemsLevel(items, spec, level),
+          )
+        : [];
+
+    return {
+      name,
+      type: `[${itemTypeName}]`,
+      required,
+      deprecated: resolved.deprecated === true,
+      readOnly: resolved.readOnly === true,
+      ...writeOnlyFlag(resolved),
+      description: resolved.description ?? "",
+      ...arrayChildFields(children),
+    };
+  }
+
+  // ── primitive / enum ─────────────────────────────────────────────
+  const field: SchemaField = {
+    name,
+    type: displayType(resolved),
+    required,
+    deprecated: resolved.deprecated === true,
+    readOnly: resolved.readOnly === true,
+    ...writeOnlyFlag(resolved),
+    description: resolved.description ?? "",
+  };
+
+  if (resolved.enum) {
+    field.enumValues = resolved.enum.map(String);
+  }
+  if (resolved.default !== undefined) {
+    field.defaultValue = formatDefault(resolved.default);
+  }
+
+  return field;
+}
+
+/**
+ * The schema of an object's `additionalProperties`, when it describes values.
+ *
+ * Mirrors Hugo's `rowRecursive`, which renders a non-empty
+ * `additionalProperties` object as one `<any-key>` child row, and only when
+ * the object has no `properties`. `true` and `{}` say nothing about the
+ * values, so they get no row.
+ */
+function anyKeySchema(schema: any): any {
+  const additionalProperties = schema.additionalProperties;
+  if (
+    !additionalProperties ||
+    typeof additionalProperties !== "object" ||
+    Object.keys(additionalProperties).length === 0
+  ) {
+    return undefined;
+  }
+  return additionalProperties;
+}
+
+/**
+ * Determine the display type name for array items.
+ *
+ * Reports the items' JSON type — `object`, `string`, `<oneOf>` — never the
+ * name of the referenced schema. Hugo reads a dereferenced spec, so its type
+ * column shows `[object]` for an array of `SyntheticsConfigVariable` and
+ * `[<oneOf>]` for an array of `LogsProcessor`; the schema name never appears.
+ * A `$ref` therefore has to be resolved before the type can be reported.
+ */
+function resolveItemTypeName(items: any, spec: any): string {
+  let resolved = items;
+
+  if (items.$ref) {
+    resolved = resolveRef(spec, items.$ref) ?? items;
+  }
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  if (resolved.oneOf) {
+    return "<oneOf>";
+  }
+  if (resolved.anyOf) {
+    return "<anyOf>";
+  }
+  if (resolved.type === "object" || resolved.properties) {
+    return "object";
+  }
+  return resolved.type ?? "any";
+}
+
+/**
+ * Decide whether an array's `items` should expand into child rows.
+ *
+ * Mirrors Hugo's `rowRecursive` array branch in
+ * `assets/scripts/build-api-pages.js`, which sets `childData` only when
+ * `items.properties` or `items.oneOf` exists. Primitive items, nested
+ * arrays, and enums get no child row.
+ *
+ * Hugo's upstream pipeline pre-resolves `$ref` and `allOf`, so we do the
+ * same locally before applying that check.
+ */
+function arrayItemsHaveChildren(items: any, spec: any): boolean {
+  if (!items || typeof items !== "object") return false;
+
+  let resolved = items;
+  if (items.$ref) {
+    const r = resolveRef(spec, items.$ref);
+    if (!r) return false;
+    resolved = r;
+  }
+
+  if (resolved.allOf) {
+    resolved = mergeAllOf(resolved.allOf, spec);
+  }
+
+  return !!(resolved.properties || resolved.oneOf || resolved.anyOf);
+}
+
+/**
+ * The level to resolve an array's `items` at.
+ *
+ * Object items put their properties one level below the array. A union's
+ * option rows hang directly off the array (see `arrayChildFields`), so union
+ * items resolve at the array's own level: `buildUnionOptions` then puts the
+ * options at + 1 and their fields at + 2, as Hugo's `rowRecursive` does for a
+ * `oneOf` property and for `items.oneOf` alike.
+ */
+function arrayItemsLevel(items: any, spec: any, level: number): number {
+  const itemTypeName = resolveItemTypeName(items, spec);
+  const itemsAreUnion =
+    itemTypeName === "<oneOf>" || itemTypeName === "<anyOf>";
+  return itemsAreUnion ? level : level + 1;
+}
+
+/**
+ * Merge an `allOf` array into a single schema object by combining
+ * `properties`, `required`, and top-level fields from each sub-schema.
+ */
+function mergeAllOf(schemas: any[], spec: any): any {
+  const merged: Record<string, unknown> = {
+    type: "object",
+    properties: {},
+    required: [],
+  };
+
+  for (const sub of schemas) {
+    let resolved = sub;
+    if (sub.$ref) {
+      resolved = resolveRef(spec, sub.$ref) ?? sub;
+    }
+
+    if (resolved.properties) {
+      Object.assign(
+        merged.properties as Record<string, unknown>,
+        resolved.properties,
+      );
+    }
+    if (resolved.required) {
+      (merged.required as string[]).push(...resolved.required);
+    }
+    // Preserve top-level metadata from the first schema that has it
+    if (resolved.description && !merged.description) {
+      merged.description = resolved.description;
+    }
+    if (resolved.deprecated === true) {
+      merged.deprecated = true;
+    }
+    if (resolved.readOnly === true) {
+      merged.readOnly = true;
+    }
+    if (resolved.writeOnly === true) {
+      merged.writeOnly = true;
+    }
+  }
+
+  // Deduplicate required array
+  merged.required = [...new Set<string>(merged.required as string[])];
+  return merged;
+}
