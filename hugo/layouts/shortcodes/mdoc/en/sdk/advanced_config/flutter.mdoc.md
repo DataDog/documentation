@@ -217,7 +217,6 @@ The `requestStarted` and `responseFinished` callbacks receive the same mutable `
 ```dart
 import 'dart:io';
 
-import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:datadog_tracking_http_client/datadog_tracking_http_client.dart';
 
 class ResourceAttributesListener implements DatadogTrackingHttpClientListener {
