@@ -54,7 +54,9 @@ Set a version on your agent span. The version is set as an `agent_version` tag o
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.14.0+. Before v4.17.0, child spans are not tagged automatically, so tag them with `LLMObs.annotation_context(tags={"agent_version": "v2"})` to break down tokens and cost by version.
+Requires `dd-trace` v4.14.0+.
+
+**Note**: On versions before v4.17.0, child spans are not tagged automatically. Tag them with `LLMObs.annotation_context(tags={"agent_version": "v2"})` to break down tokens and cost by version.
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -170,7 +172,7 @@ All manifest fields are optional. Values that cannot be reported are dropped, an
 
 ## Use Agent Tracking in Agent Observability
 
-View your app in Agent Observability and open the {{< ui >}}Overview{{< /ui >}}. The {{< ui >}}Agents{{< /ui >}} section features the following information:
+View your app in Agent Observability and open the {{< ui >}}Overview{{< /ui >}}. The {{< ui >}}Agents{{< /ui >}} section contains:
 
 - {{< ui >}}Agent Usage{{< /ui >}}: A timeseries chart displaying calls per agent over time
 - {{< ui >}}Recent agents{{< /ui >}}: Each agent's last seen time, number of versions, p95 latency, tokens, estimated cost, span count, and error rate
@@ -187,7 +189,7 @@ Click {{< ui >}}Compare{{< /ui >}} to diff two versions side by side, including 
 
 {{< img src="llm_observability/monitoring/agent-version-compare.png" alt="Two agent versions compared side by side, with a diff of their instructions and usage by version." style="width:100%;" >}}
 
-Click {{< ui >}}View Spans{{< /ui >}} to open Trace Explorer filtered to that agent or version.
+Click {{< ui >}}View Spans{{< /ui >}} to open [Trace Explorer][1] filtered to that agent or version.
 
 ## Limitations
 
@@ -199,3 +201,5 @@ Click {{< ui >}}View Spans{{< /ui >}} to open Trace Explorer filtered to that ag
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/llm/traces
