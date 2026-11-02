@@ -157,13 +157,14 @@ Choose the locations your test runs from and the devices it runs on:
    - **Physical** locations, {{< ui >}}Europe (Frankfurt){{< /ui >}} and {{< ui >}}United States{{< /ui >}}: The test runs on devices hosted in that region.
    - **Routed** locations, grouped by region: The test runs on a hosted device whose network traffic goes out through the country or city you select. See [Routed locations](#routed-locations).
 3. Use the {{< ui >}}Select Device(s){{< /ui >}} dropdown to select the devices you want to test on.
+
+   {{< img src="mobile_app_testing/locations_and_devices_mat.png" alt="The Locations dropdown in the Locations and Devices section, with Europe (Frankfurt) and United States under Physical, and countries such as Argentina, Bolivia (La Paz), Brazil, and Canada under Routed, grouped by region." style="width:100%;" >}}
+
 4. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to save your test configuration.
 
 **Notes**:
 - Tests on devices in the United States run from AWS US West (Oregon). Tests on devices in Europe run from AWS Germany (Frankfurt).
 - Not all devices are available in every location. For more details, see the list of [supported devices][16].
-
-{{< img src="mobile_app_testing/locations_and_devices_mat.png" alt="The Locations dropdown in the Locations and Devices section, with Europe (Frankfurt) and United States under Physical, and countries such as Argentina, Bolivia (La Paz), Brazil, and Canada under Routed, grouped by region." style="width:100%;" >}}
 
 ### Routed locations
 
@@ -175,13 +176,7 @@ Use routed locations to test your mobile app as if the device were in another co
 
 With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select. Your mobile app sees the device as being in that country.
 
-A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's:
-
-- GPS location
-- Time zone
-- Language
-
-Routed locations also don't simulate network conditions, such as a slow 3G connection.
+A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's GPS location, time zone, or language.
 
 Tests that use routed locations work the same way as tests on physical locations:
 
