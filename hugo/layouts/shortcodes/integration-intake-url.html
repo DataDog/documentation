@@ -12,7 +12,13 @@
 
 <div class="shortcode-wrapper shortcode-integration-intake-url">
 {{- if eq $intake "logs" -}}
-  <code>{{ partial "region-param.html" (dict "key" "http_endpoint_full") }}/api/v2/logs{{ with $source }}?ddsource={{ . }}{{ end }}</code>
+  <span class="copyable-inline-code">
+    <code>{{ partial "region-param.html" (dict "key" "http_endpoint_full") }}/api/v2/logs{{ with $source }}?ddsource={{ . }}{{ end }}</code>
+    <button class="js-copy-inline-button" aria-label="Copy intake URL">
+      {{ partial "icon" (dict "name" "copy-wui" "color" "#632ca6" "size" "14px") }}
+      {{ partial "icon" (dict "name" "check-bold" "color" "#632ca6" "size" "14px") }}
+    </button>
+  </span>
 {{- else -}}
   {{- if not $integration_id -}}
     {{ errorf "integration-intake-url shortcode error: No integration ID found. Set 'app_id' in page frontmatter or pass 'id' param. %s" .Position }}
