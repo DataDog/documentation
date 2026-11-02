@@ -329,7 +329,7 @@ After the initial Git history scan, scans analyze only the latest commit and do 
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
-A committer is counted toward billing if they make **at least three commits in a calendar month** across all repositories where Code Security is enabled. For example, two commits in one repository and one commit in another repository count as three commits.
+A committer is counted toward billing if they make **at least three commits in a calendar month** across all repositories where Code Security is enabled. For example, two commits in one repository and one commit in another repository count as three commits. A commit counts toward the month in which it's pushed, not the month of its commit date.
 
 Each Code Security product (SAST, SCA, Secret Scanning, IaC Security) counts committers separately, using only commits in repositories where that product is enabled. For example, a developer makes two commits in a repository with SAST and SCA enabled and one commit in a repository with only SAST enabled. The developer counts as a SAST committer, but not as an SCA committer.
 
@@ -387,7 +387,7 @@ The command requires a Bash-compatible shell, such as the default shell on macOS
 
 The command's result is an estimate. It differs from billing in the following ways:
 
-- The command uses a rolling 30-day window and commit dates. Billing uses calendar months and counts each commit in the month that Datadog scans it.
+- The command uses a rolling 30-day window and commit dates. Billing uses calendar months and counts each commit in the month it's pushed.
 - The command counts each email address separately. For GitHub repositories with the Datadog GitHub App installed, billing counts multiple emails that belong to the same developer once, so your billed count can be lower than the estimate.
 - The command counts commits across all repositories in the directory. Billing counts committers separately for each Code Security product. To estimate committers for one product, run the command in a directory that contains only the repositories where you plan to enable that product.
 
