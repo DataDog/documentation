@@ -729,8 +729,7 @@ body.docs-ai-panel-resizing {
 
     // Pull messages in to align with the footer's input box.
     .conv-search-message-user,
-    .conv-search-message-assistant,
-    .conv-search-loading-state {
+    .conv-search-message-assistant {
         padding-left: 16px;
         padding-right: 16px;
     }

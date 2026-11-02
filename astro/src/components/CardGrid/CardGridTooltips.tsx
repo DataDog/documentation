@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import styles from "./CardGridTooltips.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 
@@ -31,53 +31,52 @@ export default function CardGridTooltips({
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) return;
+    return withExternalContext(externalContext, (loaded) => {
+      const hide = () => setTooltip(null);
 
-    const hide = () => setTooltip(null);
+      // Measured on show rather than tracked, so an idle grid does no layout work.
+      const showFor = (card: HTMLElement) => {
+        const label = tooltipLabelsByCardId[card.id];
+        if (!label) return;
+        const rect = card.getBoundingClientRect();
+        setTooltip({
+          label,
+          top: rect.top,
+          left: rect.left + rect.width / 2,
+        });
+      };
 
-    // Measured on show rather than tracked, so an idle grid does no layout work.
-    const showFor = (card: HTMLElement) => {
-      const label = tooltipLabelsByCardId[card.id];
-      if (!label) return;
-      const rect = card.getBoundingClientRect();
-      setTooltip({
-        label,
-        top: rect.top,
-        left: rect.left + rect.width / 2,
-      });
-    };
+      const onEscape = (event: KeyboardEvent) => {
+        if (event.key === "Escape") hide();
+      };
 
-    const onEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") hide();
-    };
+      const teardowns: Array<() => void> = [];
+      for (const card of loaded.cardEls) {
+        const show = () => showFor(card);
+        card.addEventListener("mouseenter", show);
+        card.addEventListener("mouseleave", hide);
+        card.addEventListener("focus", show);
+        card.addEventListener("blur", hide);
+        teardowns.push(() => {
+          card.removeEventListener("mouseenter", show);
+          card.removeEventListener("mouseleave", hide);
+          card.removeEventListener("focus", show);
+          card.removeEventListener("blur", hide);
+        });
+      }
 
-    const teardowns: Array<() => void> = [];
-    for (const card of loaded.cardEls) {
-      const show = () => showFor(card);
-      card.addEventListener("mouseenter", show);
-      card.addEventListener("mouseleave", hide);
-      card.addEventListener("focus", show);
-      card.addEventListener("blur", hide);
-      teardowns.push(() => {
-        card.removeEventListener("mouseenter", show);
-        card.removeEventListener("mouseleave", hide);
-        card.removeEventListener("focus", show);
-        card.removeEventListener("blur", hide);
-      });
-    }
+      document.addEventListener("keydown", onEscape);
+      teardowns.push(() => document.removeEventListener("keydown", onEscape));
 
-    document.addEventListener("keydown", onEscape);
-    teardowns.push(() => document.removeEventListener("keydown", onEscape));
+      // Set last: every listener above is attached by this point, so the flag
+      // never advertises readiness the component cannot yet honor.
+      setHydrated(true);
 
-    // Set last: every listener above is attached by this point, so the flag
-    // never advertises readiness the component cannot yet honor.
-    setHydrated(true);
-
-    return () => {
-      for (const teardown of teardowns) teardown();
-      setHydrated(false);
-    };
+      return () => {
+        for (const teardown of teardowns) teardown();
+        setHydrated(false);
+      };
+    });
   }, [externalContext, tooltipLabelsByCardId]);
 
   // One bubble per grid, reused by every card, so only one can ever be visible.

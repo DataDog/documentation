@@ -4,6 +4,7 @@ import {
   buildRumInitOptions,
   buildLogsInitOptions,
   buildGlobalContext,
+  buildIntakeProxy,
   TELEMETRY_SERVICE,
   ASTRO_STACK,
 } from "./initOptions";
@@ -39,7 +40,9 @@ function logsOptions(overrides: Record<string, unknown> = {}) {
 
 describe("buildRumInitOptions", () => {
   it("builds the full RUM init object", () => {
-    expect(rumOptions()).toEqual({
+    const { proxy, ...options } = rumOptions();
+    expect(typeof proxy).toBe("function");
+    expect(options).toEqual({
       applicationId: "app-id",
       clientToken: "client-token",
       env: "live",
@@ -53,7 +56,6 @@ describe("buildRumInitOptions", () => {
       trackLongTasks: true,
       defaultPrivacyLevel: "mask-user-input",
       allowedTracingUrls: [ORIGIN],
-      internalAnalyticsSubdomain: "ia-subdomain",
     });
   });
 
@@ -73,9 +75,20 @@ describe("buildRumInitOptions", () => {
     expect("version" in options).toBe(false);
   });
 
-  it("omits an empty internalAnalyticsSubdomain", () => {
-    const options = rumOptions({ internalAnalyticsSubdomain: "" });
+  it("routes events to the internal intake through the SDK's proxy option", () => {
+    // `proxy` is the only init option the v7 SDK uses to change the intake
+    // host. An unknown option, such as the pre-v7 `internalAnalyticsSubdomain`,
+    // is silently ignored, so it must not be passed.
+    const options = rumOptions();
     expect("internalAnalyticsSubdomain" in options).toBe(false);
+    expect(
+      options.proxy?.({ path: "/api/v2/rum", parameters: "ddsource=browser" }),
+    ).toBe("https://ia-subdomain.datadoghq.com/api/v2/rum?ddsource=browser");
+  });
+
+  it("omits the proxy when the subdomain is empty, so the SDK uses the public intake", () => {
+    const options = rumOptions({ internalAnalyticsSubdomain: "" });
+    expect("proxy" in options).toBe(false);
   });
 
   it("scopes allowed tracing URLs to the current origin", () => {
@@ -88,23 +101,32 @@ describe("buildRumInitOptions", () => {
 describe("buildLogsInitOptions", () => {
   it("builds the full Logs init object", () => {
     // No applicationId: Browser Logs is keyed by client token alone.
-    expect(logsOptions()).toEqual({
+    const { proxy, ...options } = logsOptions();
+    expect(typeof proxy).toBe("function");
+    expect(options).toEqual({
       clientToken: "client-token",
       forwardErrorsToLogs: true,
       env: "live",
       service: "docs",
       version: "abc1234",
-      internalAnalyticsSubdomain: "ia-subdomain",
     });
   });
 
-  it("omits empty version and internalAnalyticsSubdomain", () => {
+  it("routes logs to the internal intake through the SDK's proxy option", () => {
+    const options = logsOptions();
+    expect("internalAnalyticsSubdomain" in options).toBe(false);
+    expect(
+      options.proxy?.({ path: "/api/v2/logs", parameters: "ddsource=browser" }),
+    ).toBe("https://ia-subdomain.datadoghq.com/api/v2/logs?ddsource=browser");
+  });
+
+  it("omits empty version and proxy", () => {
     const options = logsOptions({
       version: "",
       internalAnalyticsSubdomain: "",
     });
     expect("version" in options).toBe(false);
-    expect("internalAnalyticsSubdomain" in options).toBe(false);
+    expect("proxy" in options).toBe(false);
   });
 
   it("initializes with development credentials, which carry no application ID", () => {
@@ -116,6 +138,24 @@ describe("buildLogsInitOptions", () => {
     });
     expect(options.clientToken).toBe("dev-token");
     expect(options.env).toBe("development");
+  });
+});
+
+describe("buildIntakeProxy", () => {
+  it("rewrites every intake request onto the subdomain host, keeping path and parameters", () => {
+    const proxy = buildIntakeProxy("ia-subdomain");
+    expect(
+      proxy?.({
+        path: "/api/v2/replay",
+        parameters: "ddsource=browser&dd-api-key=client-token",
+      }),
+    ).toBe(
+      "https://ia-subdomain.datadoghq.com/api/v2/replay?ddsource=browser&dd-api-key=client-token",
+    );
+  });
+
+  it("returns undefined for an empty subdomain", () => {
+    expect(buildIntakeProxy("")).toBeUndefined();
   });
 });
 
