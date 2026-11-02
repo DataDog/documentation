@@ -35,7 +35,10 @@ interface RumInitInput {
   env: SiteEnv;
   /** `CI_COMMIT_SHORT_SHA`, or empty when CI did not provide it. */
   version: string;
-  /** `IA_SUBDOMAIN`, or empty for the public telemetry intake. */
+  /**
+   * `IA_SUBDOMAIN`, or empty for the public telemetry intake. Becomes the SDK's
+   * `proxy` option (see `buildIntakeProxy`).
+   */
   internalAnalyticsSubdomain: string;
   /** `window.location.origin`, passed in so this stays a pure function. */
   origin: string;
@@ -72,7 +75,7 @@ export function buildRumInitOptions({
     trackLongTasks: true,
     defaultPrivacyLevel: "mask-user-input",
     allowedTracingUrls: [origin],
-    ...optional("internalAnalyticsSubdomain", internalAnalyticsSubdomain),
+    ...intakeProxyOption(internalAnalyticsSubdomain),
     // `satisfies` rather than a return-type annotation: it checks the object
     // against the SDK's own type — so a renamed field stops compiling — while
     // keeping the literal types precise enough for the tests to assert on.
@@ -91,7 +94,7 @@ export function buildLogsInitOptions({
     env,
     service: TELEMETRY_SERVICE,
     ...optional("version", version),
-    ...optional("internalAnalyticsSubdomain", internalAnalyticsSubdomain),
+    ...intakeProxyOption(internalAnalyticsSubdomain),
   } satisfies LogsInitConfiguration;
 }
 
@@ -104,6 +107,36 @@ export function buildGlobalContext({ branch }: { branch: string }) {
     stack: ASTRO_STACK,
     ...optional("branch", branch),
   };
+}
+
+/** The shape of the SDKs' function form of `proxy`. */
+type IntakeProxy = (request: { path: string; parameters: string }) => string;
+
+/**
+ * Sends every intake request (RUM, Session Replay, Logs) to the internal
+ * analytics host instead of the public `browser-intake-datadoghq.com`, with the
+ * SDK's own path and query parameters unchanged. Undefined for an empty
+ * subdomain, which leaves the SDK on the public intake.
+ *
+ * Uses `proxy` because it is the only init option the v7 SDKs read to change
+ * the intake host. Any other key, such as `internalAnalyticsSubdomain` (not an
+ * option in v7), is dropped without a warning — and slips past `satisfies`
+ * when it arrives through a spread.
+ *
+ * HUGO_DUPLICATE: `intakeProxy` in
+ * `hugo/assets/scripts/components/dd-browser-logs-rum.js`. Keep the URL shape
+ * (`https://${IA_SUBDOMAIN}.datadoghq.com${path}?${parameters}`) identical, so
+ * both sites report through the same intake.
+ */
+export function buildIntakeProxy(subdomain: string): IntakeProxy | undefined {
+  if (!subdomain) return undefined;
+  return ({ path, parameters }) =>
+    `https://${subdomain}.datadoghq.com${path}?${parameters}`;
+}
+
+function intakeProxyOption(subdomain: string): { proxy?: IntakeProxy } {
+  const proxy = buildIntakeProxy(subdomain);
+  return proxy ? { proxy } : {};
 }
 
 /**

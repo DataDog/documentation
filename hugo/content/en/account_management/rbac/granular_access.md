@@ -43,6 +43,7 @@ Use the different principals to control access patterns in your organization and
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Sheets][21]                                     | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Status Pages][28]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Workflows][17]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
@@ -78,4 +79,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [25]: /getting_started/feature_flags/
 [26]: /security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
 [27]: /experiments/
-
+[28]: /incident_response/status_pages/#granular-access-control

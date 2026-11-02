@@ -21,6 +21,7 @@ $conv-neutral-200: #efefef;
 @import "resources";
 @import "message-actions";
 @import "home-ask-ai";
+@import "activity";
 
 // Messages area (scrollable)
 .conv-search-messages {
@@ -356,71 +357,9 @@ $conv-neutral-200: #efefef;
     }
 }
 
-// Loading indicator (spinner + status text, shown before first content token)
-.conv-search-loading-state {
-    padding: 0 36px;
-
-    @media (max-width: 640px) {
-        padding: 0 20px;
-    }
-}
-
-.conv-search-loading-indicator {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
-}
-
-.conv-search-loading-spinner {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    position: relative;
-
-    &::before, &::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-    }
-
-    &::before {
-        border: 2px solid $conv-primary-200;
-    }
-
-    &::after {
-        border: 2px solid transparent;
-        border-top-color: $conv-primary-400;
-        animation: conv-search-spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-}
-
-.conv-search-status-text {
-    color: $conv-neutral-600;
-    font-size: 14px;
-    font-weight: 300;
-    letter-spacing: 0.01em;
-    animation: conv-search-fade-in 0.3s ease;
-}
-
 @keyframes conv-search-fade-in {
     from { opacity: 0; transform: translateY(2px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.conv-search-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 16px;
-    background: $conv-search-purple;
-    animation: conv-search-blink 1s infinite;
-    vertical-align: text-bottom;
-}
-
-@keyframes conv-search-blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
 }
 
 // Footer with input and disclaimer
@@ -548,18 +487,6 @@ $conv-neutral-200: #efefef;
         font-size: 12px;
         line-height: 14px;
     }
-}
-
-// Loading spinner for assistant messages
-.conv-search-message-assistant .conv-search-message-content:empty::after {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid $conv-search-border;
-    border-top-color: $conv-search-purple;
-    border-radius: 50%;
-    animation: conv-search-spin 0.8s linear infinite;
 }
 
 @keyframes conv-search-spin {

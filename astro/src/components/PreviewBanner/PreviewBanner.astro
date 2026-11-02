@@ -1,0 +1,31 @@
+---
+// Staging-only banner naming the previewed branch. Internal tooling, not
+// user-facing, so it copies Hugo's exact markup and styles rather than using
+// design tokens: the banner should look identical as you move between Hugo
+// and Astro pages on the same preview.
+//
+// HUGO_DUPLICATE: hugo/layouts/partials/preview_banner/preview_banner.html and
+// hugo/assets/styles/components/_preview_banner.scss. Keep the markup, link
+// target, and styles in sync.
+import styles from "./PreviewBanner.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { resolveSiteEnv } from "@lib/site/siteEnv";
+import { branchRef } from "@lib/site/siteUrl";
+
+const cl = classListFactory(styles);
+const branch = resolveSiteEnv() === "preview" ? branchRef() : undefined;
+---
+
+{
+  branch && (
+    <div class={cl("preview-banner")}>
+      PREVIEWING:{" "}
+      <a
+        class={cl("preview-banner__link")}
+        href={`https://github.com/DataDog/documentation/pull/${branch}`}
+      >
+        {branch}
+      </a>
+    </div>
+  )
+}

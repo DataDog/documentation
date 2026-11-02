@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "preact/hooks";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 
@@ -20,46 +20,46 @@ export function CollapseContentController({
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) return;
-    const { detailsEl } = loaded;
-    if (!(detailsEl instanceof HTMLDetailsElement)) return;
+    return withExternalContext(externalContext, (loaded) => {
+      const { detailsEl } = loaded;
+      if (!(detailsEl instanceof HTMLDetailsElement)) return;
 
-    const summary = detailsEl.querySelector<HTMLElement>(
-      ".collapse-content__header",
-    );
+      const summary = detailsEl.querySelector<HTMLElement>(
+        ".collapse-content__header",
+      );
 
-    const syncAria = (): void => {
-      summary?.setAttribute("aria-expanded", String(detailsEl.open));
-    };
+      const syncAria = (): void => {
+        summary?.setAttribute("aria-expanded", String(detailsEl.open));
+      };
 
-    const handleToggle = (): void => {
+      const handleToggle = (): void => {
+        syncAria();
+        if (!detailsEl.id) return;
+        if (detailsEl.open) {
+          history.replaceState(null, "", `#${detailsEl.id}`);
+        } else if (location.hash.slice(1) === detailsEl.id) {
+          history.replaceState(null, "", location.pathname + location.search);
+        }
+      };
+
+      const openFromHash = (): void => {
+        if (detailsEl.id && location.hash.slice(1) === detailsEl.id) {
+          detailsEl.open = true;
+        }
+      };
+
+      detailsEl.addEventListener("toggle", handleToggle);
+      window.addEventListener("hashchange", openFromHash);
+
+      openFromHash();
       syncAria();
-      if (!detailsEl.id) return;
-      if (detailsEl.open) {
-        history.replaceState(null, "", `#${detailsEl.id}`);
-      } else if (location.hash.slice(1) === detailsEl.id) {
-        history.replaceState(null, "", location.pathname + location.search);
-      }
-    };
+      detailsEl.setAttribute("data-hydrated", "true");
 
-    const openFromHash = (): void => {
-      if (detailsEl.id && location.hash.slice(1) === detailsEl.id) {
-        detailsEl.open = true;
-      }
-    };
-
-    detailsEl.addEventListener("toggle", handleToggle);
-    window.addEventListener("hashchange", openFromHash);
-
-    openFromHash();
-    syncAria();
-    detailsEl.setAttribute("data-hydrated", "true");
-
-    return () => {
-      detailsEl.removeEventListener("toggle", handleToggle);
-      window.removeEventListener("hashchange", openFromHash);
-    };
+      return () => {
+        detailsEl.removeEventListener("toggle", handleToggle);
+        window.removeEventListener("hashchange", openFromHash);
+      };
+    });
   }, []);
 
   return <span ref={ref} hidden aria-hidden="true" />;

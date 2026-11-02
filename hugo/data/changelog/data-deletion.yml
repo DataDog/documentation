@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41061
+    operations:
+      - CancelDataDeletionRequest
+      - CreateDataDeletionRequest
+      - GetDataDeletionRequests
+    title: Add recovery deadline and deletion slots to data deletion requests
