@@ -1,3 +1,3 @@
 ---
-title: Agent Observability の実験を作成します。
+title: Agent Observability 実験の作成
 ---

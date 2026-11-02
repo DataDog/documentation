@@ -415,6 +415,14 @@ $ddpurple: #632ca6;
 }
 
 
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner anchor offset
+@include media-breakpoint-down(md) {
+    .announcement.api:has(.announcement-banner--hide-mobile) .main-api h2 {
+        margin-top: -145px;
+        padding-top: 145px;
+    }
+}
+
 .main-api {
     margin-bottom: 160px;
     padding-left: 15px;

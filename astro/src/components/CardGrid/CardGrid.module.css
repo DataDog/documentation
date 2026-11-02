@@ -1,0 +1,10 @@
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  /* Flex, not grid, so each wrapped line justifies on its own: a short last
+     row centers instead of sitting against the left edge. CSS grid centers
+     its whole track set at once and cannot align one row differently. */
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block: var(--space-md);
+}

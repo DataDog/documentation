@@ -72,6 +72,7 @@ To set up the runner programmatically:
 
 1. Provide your Datadog API and application keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
 1. Pass the `--with-api-key` flag to the runner container.
+1. Replace `<DATADOG_SITE>` in the following examples with your Datadog site: {{< region-param key=dd_site code="true" >}}.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -81,7 +82,7 @@ export DD_API_KEY="<YOUR_API_KEY>"
 export DD_APP_KEY="<YOUR_APP_KEY>"
 
 docker run -d \
-  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_BASE_URL=https://<DATADOG_SITE> \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \
@@ -102,7 +103,7 @@ services:
     environment:
       DD_API_KEY: ${DD_API_KEY}
       DD_APP_KEY: ${DD_APP_KEY}
-      DD_BASE_URL: https://{{< region-param key=dd_site >}}
+      DD_BASE_URL: https://<DATADOG_SITE>
       DD_PRIVATE_RUNNER_CONFIG_DIR: /etc/dd-action-runner/config
       RUNNER_NAME: my-compose-runner
     volumes:
@@ -127,7 +128,7 @@ export DD_API_KEY="<YOUR_API_KEY>"
 export DD_APP_KEY="<YOUR_APP_KEY>"
 
 docker run \
-  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_BASE_URL=https://<DATADOG_SITE> \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \
@@ -150,7 +151,7 @@ When the runner shows **Ready to use**, create a connection for it, or view it o
 
 ## Custom CA certificates
 
-If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA.
+If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA. In the following examples, replace `<DATADOG_SITE>` with your Datadog site: {{< region-param key=dd_site code="true" >}}.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -159,7 +160,7 @@ Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `d
 
 {{< highlight bash "hl_lines=7 9" >}}
 docker run -d \
-  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_BASE_URL=https://<DATADOG_SITE> \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \

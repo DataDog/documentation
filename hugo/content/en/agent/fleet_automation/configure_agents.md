@@ -22,7 +22,8 @@ You can configure:
 
 ### Prerequisites
 
-- [Remote Configuration][9] enabled for your organization
+- [Remote Configuration][9] enabled for your organization and the Agent's API key
+- [Remote updates][12] enabled on each target VM Agent (`remote_updates: true`)
 - Agent version 7.73+ for Agent and OTel Collector configuration (version 7.76+ for configuring integrations and secrets). To upgrade your Agents, see [Upgrade Agents][10].
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
 
@@ -75,7 +76,7 @@ Use Fleet Automation to edit the `DatadogAgent` custom resource for an Operator-
 - The Datadog Agent is running in the Kubernetes cluster.
 - Datadog Operator v1.27 or later manages the Agent deployment.
 - Remote Configuration is enabled for the API key used by the Agent.
-- The Operator is configured to accept remote updates. For the required Operator settings, API and application keys, and cluster name requirements, see [Prerequisites for Kubernetes view][12].
+- The Operator is configured to accept remote updates. For the required Operator settings, API and application keys, and cluster name requirements, see [Prerequisites for Kubernetes view][13].
 
 ### Edit the cluster configuration
 
@@ -133,4 +134,5 @@ For instructions on using mirrored or air-gapped repositories, see:
 [9]: /agent/guide/setup_remote_config
 [10]: /agent/fleet_automation/upgrade_agents/
 [11]: /agent/fleet_automation/supported_datadog_yaml_fields/
-[12]: /agent/fleet_automation/fleet_view/#prerequisites-for-kubernetes-view
+[12]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[13]: /agent/fleet_automation/fleet_view/#prerequisites-for-kubernetes-view

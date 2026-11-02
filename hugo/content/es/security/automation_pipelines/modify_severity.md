@@ -47,14 +47,16 @@ Configure reglas de modificador de gravedad para ajustar la gravedad de los hall
 1. Opcionalmente, haga clic en **Add Severity** para filtrar los hallazgos por nivel de gravedad. La regla coincide con la gravedad ajustada por Datadog de cada hallazgo, antes de cualquier ajuste definido por el usuario.
 1. Defina la acción de modificación de gravedad:
     - **Establecer en un nivel específico**: Establece los hallazgos coincidentes en una gravedad fija. Elija entre **Información / Ninguna**, **Baja**, **Media**, **Alta** o **Crítica**.
-      <div class="alert alert-info"><strong>Info / None</strong> is only valid for some finding types; see <a href="#severity-floors-by-finding-type">Severity floors by finding type</a>.</div>
+      <div class="alert alert-info"><strong>Info./ninguno</strong> solo es válido para algunos tipos de hallazgos; consulte <a href="#severity-floors-by-finding-type">Severity floors by finding type</a>.</div>
     - **Shift up or down one level**: Increases or decreases the severity of matching findings by one level. See [Severity floors by finding type](#severity-floors-by-finding-type) for the lowest severity a finding type can shift down to, and [Evaluation order](#evaluation-order) for what happens when a finding is already at that bound.
 1. Opcionalmente, ingrese una **Description** que explique por qué se aplica la regla. Este texto aparece en el panel de desglose de gravedad cuando un usuario ve un hallazgo modificado.
 1. Haga clic en **Guardar**. La regla se aplica a los nuevos hallazgos de inmediato y comienza a verificar los hallazgos existentes dentro de la próxima hora.
 
 **Nota**: No puede usar `@severity` ni `@severity_details.user_adjusted` en la consulta de la regla. Las reglas de modificación de gravedad se evalúan con respecto a la gravedad ajustada por Datadog (`@severity_details.adjusted.value`), no al valor `@severity` almacenado en el hallazgo.
 
-## Evaluation order {#evaluation-order}
+También puede crear reglas de modificador de gravedad con la [API][3] o el [`datadog_security_findings_severity_modifier_rule`recurso de Terraform][4].
+
+## Orden de evaluación {#evaluation-order}
 
 Las reglas de modificación de gravedad son el primer paso en la canalización de automatización y se ejecutan antes que las mute rules, due date, inbox y ticket creation rules. Dentro de las reglas de modificador de gravedad, Datadog utiliza una política de primera coincidencia: los hallazgos se evalúan según sus reglas en orden, y se aplica la primera regla que coincida. No se evalúan más reglas de modificador de gravedad para ese hallazgo.
 
@@ -62,7 +64,7 @@ Una regla cuenta como coincidencia solo si la aplicación de su acción cambiara
 
 Debido a que las reglas de modificación de gravedad se ejecutan primero, todas las downstream automation rules —incluidas las mute rules— ven la gravedad modificada cuando se evalúan.
 
-## Identify modified findings {#identify-modified-findings}
+## Identificar hallazgos modificados {#identify-modified-findings}
 
 Los hallazgos afectados por una regla de modificador de gravedad muestran un indicador visual en las vistas de lista del explorador y en el encabezado del panel lateral del hallazgo. Al pasar el cursor sobre el indicador se muestra la regla de automatización responsable del cambio:
 
@@ -75,39 +77,39 @@ Para los hallazgos que tienen una puntuación CVSS (vulnerabilidad de imagen de 
 
 {{< img src="security/automation_pipelines/severity_breakdown.png" alt="Un panel lateral de hallazgo que muestra el desglose de gravedad, con la gravedad original, la puntuación CVSS y el vector CVSS; la regla de automatización que activó el cambio; y el nivel de gravedad resultante y la puntuación CVSS ajustada." style="width:100%;" >}}
 
-## Severity floors by finding type {#severity-floors-by-finding-type}
+## Suelos de severidad por tipo de hallazgo {#severity-floors-by-finding-type}
 
 No todos los tipos de hallazgos utilizan la misma escala de gravedad. La siguiente tabla muestra la gravedad más baja disponible para cada tipo de hallazgo:
 
-| Finding type | Lowest severity |
+| Tipo de hallazgo | Severidad más baja |
 |---|---|
-| API Security | Info |
-| Attack Path | Info |
-| Identity Risk | Info |
-| Misconfiguration | Info |
-| Workload Activity | Info |
-| Container Image Vulnerability | None |
-| Host Vulnerability | None |
-| Library Vulnerability | None |
-| Infrastructure as Code | Low |
-| Runtime Code Vulnerability | Low |
-| Secret | Low |
-| Static Code Vulnerability | Low |
+| Seguridad de API | Info. |
+| Ruta de ataque | Info. |
+| Riesgo de identidad | Info. |
+| Mala configuración | Info. |
+| Actividad de carga de trabajo | Info. |
+| Vulnerabilidad de imagen de contenedor | Ninguno |
+| Vulnerabilidad de servidor | Ninguno |
+| Vulnerabilidad de librería | Ninguno |
+| Infraestructura como código | Bajo |
+| Vulnerabilidad de código de tiempo de ejecución | Bajo |
+| Secreto | Bajo |
+| Vulnerabilidad de código estático | Bajo |
 
-**Info / None** is not available for finding types that use **Low** as their lowest severity. Incluir dichos tipos de hallazgos en la regla y seleccionar **Info / None** resulta en un error de validación.
+**Info./ninguno** no está disponible para los tipos de hallazgos que usan **Bajo** como su severidad más baja. Incluir dichos tipos de hallazgos en la regla y seleccionar **Info / None** resulta en un error de validación.
 
-## Findings with Unknown severity {#findings-with-unknown-severity}
+## Hallazgos con severidad desconocida {#findings-with-unknown-severity}
 
 Las reglas de modificador de gravedad manejan los hallazgos con una gravedad **Unknown** de la siguiente manera:
 
 - **Shift action**: La regla no coincide con los hallazgos con **Unknown** severity. Debido a que la regla no coincide, las reglas de modificador de gravedad posteriores aún pueden evaluarse para ese hallazgo.
 - **Set action**: Si la gravedad **Unknown** se incluye en el selector de gravedad de la regla, la regla coincide y reemplaza **Unknown** con la gravedad objetivo especificada. No puede establecer la gravedad de un hallazgo en **Unknown** usando una regla de modificador de gravedad.
 
-## Vulnerability findings and CVSS scores {#vulnerability-findings-and-cvss-scores}
+## Hallazgos de vulnerabilidad y puntuaciones de CVSS {#vulnerability-findings-and-cvss-scores}
 
 Para los hallazgos de vulnerabilidad que tienen una puntuación CVSS ajustada por Datadog, un modificador de gravedad también actualiza la puntuación ajustada almacenada en `@severity_details.user_adjusted`. La puntuación actualizada se establece aproximadamente en el punto medio del rango CVSS v3 de la gravedad objetivo:
 
-| Target severity | CVSS v3 range |
+| Severidad objetivo | Rango CVSS v3 |
 |---|---|
 | None | 0.0 |
 | Low | 0.1–3.9 |
@@ -117,7 +119,7 @@ Para los hallazgos de vulnerabilidad que tienen una puntuación CVSS ajustada po
 
 El vector CVSS original nunca se modifica. No se genera ningún vector sintético para que coincida con la puntuación ajustada. Debido a que una regla solo coincide cuando cambia la gravedad del hallazgo, la puntuación se ajusta solo cuando la gravedad misma cambia; consulte [Evaluation order](#evaluation-order).
 
-## Auto-closed and passed findings {#auto-closed-and-passed-findings}
+## Hallazgos cerrados automáticamente y pasados {#auto-closed-and-passed-findings}
 
 Los modificadores de gravedad no se borran ni se actualizan para los hallazgos que pasan a estar cerrados automáticamente o cuando el resultado de la evaluación es "pass" **pass**. Si la regla que modificó originalmente un hallazgo se edita o elimina posteriormente, esos hallazgos conservan la gravedad que se estableció cuando se cerraron.
 
@@ -126,3 +128,5 @@ Los modificadores de gravedad no se borran ni se actualizan para los hallazgos q
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /es/api/latest/security-monitoring/create-a-severity-modifier-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_severity_modifier_rule

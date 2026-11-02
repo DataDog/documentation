@@ -1,3 +1,3 @@
 ---
-title: Mettez à jour une expérience Agent Observability
+title: Mettre à jour une expérience Agent Observability
 ---

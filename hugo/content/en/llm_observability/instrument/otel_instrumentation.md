@@ -25,9 +25,9 @@ To send [external evaluations directly to the API](/llm_observability/investigat
 
 For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/instrument/prompt_tracking#opentelemetry-instrumentation).
 
-### Experiments
+### Offline Experiments
 
-You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+You can use OpenTelemetry spans inside [Agent Observability Offline Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ### Multimodal support
 
@@ -193,30 +193,30 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 
 {{% collapse-content title="Using Claude Platform" level="h3" expanded=false id="using-claude-managed-agents" %}}
 
-The [Claude Platform][18] emits spans that follow the GenAI semantic conventions natively through [OpenTelemetry export][19], so no additional instrumentation library is required. This covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
+The [Claude Platform][18] natively emits spans that follow the GenAI semantic conventions through [OpenTelemetry export][19], so you don't need an instrumentation library. Native export covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
 
-- **API spans** for the requests Anthropic runs: Messages API requests, and for Managed Agents each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these to a destination that you configure in the Claude Console.
+- **API spans** cover requests that Anthropic runs: Messages API requests and, for Managed Agents, each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these spans to a destination that you configure in the Claude Console.
 - **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
 
-If your application uses a Claude SDK, both sets of spans land in the same trace, because the SDK propagates W3C trace context on its API requests.
+If your application uses a Claude SDK, both sets of spans appear in the same trace, because the SDK propagates W3C trace context on its API requests.
 
 #### Export API spans
 
 Anthropic delivers API spans from its own infrastructure, so you add a Datadog destination in the Claude Console rather than setting `OTEL_EXPORTER_OTLP_*` environment variables.
 
-1. In the Claude Console, go to **Organization settings** > **OpenTelemetry** and click **Add destination**. Complete the fields:
+1. In the Claude Console, go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}OpenTelemetry{{< /ui >}} and click {{< ui >}}Add destination{{< /ui >}}. Complete the fields:
    | Field | Value |
    |-------|-------|
-   | Provider | **Datadog** |
+   | Provider | {{< ui >}}Datadog{{< /ui >}} |
    | Site | Your Datadog site, for example `US1` |
    | API key | Your [Datadog API key][2]. Application keys do not work. |
-   | Content mode | **Full content** so spans carry message and tool content, or **Metadata only** for identifiers, timing, status, and token counts |
+   | Content mode | {{< ui >}}Full content{{< /ui >}} so spans carry message and tool content, or {{< ui >}}Metadata only{{< /ui >}} for identifiers, timing, status, and token counts |
 
-   Selecting **Datadog** as the provider sets the OTLP endpoint for the site you choose, shown under **OTLP details**. There is no endpoint or header to enter by hand.
+   Selecting {{< ui >}}Datadog{{< /ui >}} as the provider sets the OTLP endpoint for the site you choose, shown under {{< ui >}}OTLP details{{< /ui >}}. You don't need to enter an endpoint or headers.
 
-   Choose **Full content** only if your Datadog organization may store model prompts and responses. To restrict who can read them once they arrive, see [Data Access Controls][8].
-2. Set **Workspaces** on the destination to choose which workspaces export to it: **All**, **Selected** for a specific list, or **All except** to exclude a few.
-3. Run a session, then check that the destination's **Delivery** column reads **Healthy**. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
+   Choose {{< ui >}}Full content{{< /ui >}} only if your Datadog organization is permitted to store model prompts and responses. To restrict who can read them after they arrive, see [Data Access Controls][8].
+2. Set {{< ui >}}Workspaces{{< /ui >}} on the destination to choose which workspaces export to it: {{< ui >}}All{{< /ui >}}, {{< ui >}}Selected{{< /ui >}} for a specific list, or {{< ui >}}All except{{< /ui >}} to exclude a few.
+3. Send a request or run a session, then check that the destination's {{< ui >}}Delivery{{< /ui >}} column reads {{< ui >}}Healthy{{< /ui >}}. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
    | Span | Agent Observability span kind |
    |------|-------------------------------|
    | `anthropic.sessions.events.send` | Workflow |
@@ -261,7 +261,7 @@ client = Anthropic(
 )
 ```
 
-Unlike the Console destination, this exporter is an ordinary OTLP client, so its endpoint does include `/v1/traces`. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, and turn SDK spans off entirely with `ANTHROPIC_OPEN_TELEMETRY=false`.
+The endpoint for this exporter includes the `/v1/traces` path. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, or turn off SDK spans with `ANTHROPIC_OPEN_TELEMETRY=false`.
 
 To group several calls into one conversation, set a conversation ID on the client. The SDK sends it as `gen_ai.conversation.id`, which Agent Observability indexes as the session:
 
@@ -281,7 +281,7 @@ Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to
 
 #### Avoid double-counted tokens
 
-Claude SDK spans and Claude Platform API spans both carry token counts for the same model calls. If you export both, Agent Observability counts those tokens twice, which inflates token metrics and estimated cost.
+If you export both Claude SDK spans and Claude Platform API spans for the same workspace, Agent Observability counts tokens for the same model calls twice. The duplicate counts inflate token metrics and estimated cost. If the Claude SDK is your only source of spans, skip this step.
 
 To count each model call once, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
 
@@ -345,8 +345,6 @@ provider.add_span_processor(
     BatchSpanProcessor(StripClaudeTokenUsage(OTLPSpanExporter(endpoint=..., headers=...)))
 )
 ```
-
-Apply this only when a Console destination is also exporting API spans for the same workspace. If the Claude SDK is your only source of spans, leave the token counts in place, because nothing else reports them.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
@@ -500,7 +498,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
    | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
    | Header | `dd-api-key`: `<YOUR_API_KEY>` |
    | Header | `dd-otlp-source`: `llmobs` |
-   
+
    The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
 3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
    ```typescript
@@ -685,6 +683,47 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.prompt_tokens` | `metrics.prompt_tokens` |
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
+
+#### Cost metrics
+
+For [supported models and providers][58], Datadog can estimate costs from token usage without cost attributes. Supply costs directly for unsupported models or custom pricing.
+
+The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Each supplied cost field takes precedence over its automatic estimate. Datadog can still estimate cost fields you omit.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.usage.cost.amount` | `metrics.estimated_total_cost` |
+| `gen_ai.usage.cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.total_cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.input_cost` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.output_cost` | `metrics.estimated_output_cost` |
+| `llm.cost.total` | `metrics.estimated_total_cost` |
+| `llm.cost.prompt` | `metrics.estimated_input_cost` |
+| `llm.cost.completion` | `metrics.estimated_output_cost` |
+| `llm.cost.prompt_details.input` | `metrics.estimated_non_cached_input_cost` |
+| `llm.cost.prompt_details.cache_read` | `metrics.estimated_cache_read_input_cost` |
+| `llm.cost.prompt_details.cache_write` | `metrics.estimated_cache_write_input_cost` |
+| `llm.cost.completion_details.reasoning` | `metrics.estimated_reasoning_output_cost` |
+
+Set `gen_ai.usage.cost.currency` to `USD` when using `gen_ai.usage.cost.amount`. This amount/currency format is an [OpenTelemetry proposal][57]. The other attributes use their producers' USD conventions. Datadog ignores these USD cost attributes if they declare a currency other than `USD`.
+
+If several USD attributes from the table above supply the same cost field, Datadog uses the first valid value. The precedence order is: `gen_ai.usage.cost.amount`, `gen_ai.usage.cost`, `gen_ai.cost.*`, then `llm.cost.*`. Zero is a valid supplied cost.
+
+##### Estimated cost attributes (nanodollars)
+
+These Datadog-supported extensions accept optional fallback estimates in **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.cost.estimated_total` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.estimated_input` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.estimated_output` | `metrics.estimated_output_cost` |
+| `gen_ai.cost.estimated_cache_read_input` | `metrics.estimated_cache_read_input_cost` |
+| `gen_ai.cost.estimated_cache_write_input` | `metrics.estimated_cache_write_input_cost` |
+| `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
+| `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
+
+Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
 
 #### Request parameters
 
@@ -1129,8 +1168,9 @@ A span can display warnings not listed in the following table if Datadog adds ch
 | Malformed embedding input | `otel_warning_embedding_input_malformed` | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
 | Unreadable token counts | `otel_warning_token_usage_unparseable` | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
 | Invalid token counts | `otel_warning_token_usage_invalid` | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
-| Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
-| Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On cost attributes | Emit cost metrics as integers or floats, not strings or objects. |
+| Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On cost attributes | Emit non-negative cost values. |
+| Invalid cost currency | `otel_warning_cost_currency_invalid` | On USD cost attributes | Set `gen_ai.usage.cost.currency` to `USD`. This attribute is required for `gen_ai.usage.cost.amount`. |
 | Malformed invocation parameters | `otel_warning_params_malformed` | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
 | Malformed tool definitions | `otel_warning_tool_definitions_malformed` | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
 | Malformed tool definition | `otel_warning_tool_definition_entry_malformed` | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
@@ -1207,3 +1247,6 @@ with tracer.start_as_current_span("my-span") as span:
 [17]: https://sdk.vercel.ai/
 [18]: https://platform.claude.com/docs
 [19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
+[55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
+[57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
+[58]: /llm_observability/investigate/cost/#supported-providers

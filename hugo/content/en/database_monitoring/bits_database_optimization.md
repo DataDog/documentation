@@ -47,6 +47,8 @@ Optimization candidates are selected automatically from Database Monitoring tele
 
 The instances included in Continuous Optimizations are listed below the toggle. To remove an instance, click the minus (**-**) button on the right side of its row, then click **Save**.
 
+{{< img src="database_monitoring/database_optimization_continuous_optimizations_toggle.png" alt="The Bits Database Optimization configuration panel, showing the Continuous Optimizations toggle and a list of included database instances with their tags." style="width:100%;">}}
+
 When continuous optimizations are enabled, Bits Database Optimization selects eligible queries from the included instances on an ongoing basis until the limit of 50 distinct queries per database instance per month is reached. Queries are prioritized by total execution duration.
 
 Each analyzed query counts toward this limit even when no optimization is found. After a query has been analyzed, it is not analyzed again in the same month. The limit resets at the start of each month (UTC).

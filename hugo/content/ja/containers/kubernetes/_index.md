@@ -10,7 +10,7 @@ aliases:
 - /ja/integrations/faq/container-integration-event/
 - /ja/integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
 - /ja/agent/kubernetes/
-description: Kubernetes 上に Datadog Agent をインストールして構成します。
+description: Datadog AgentまたはOpenTelemetryを使用してKubernetesを監視します。
 further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-k8s
   tag: ラーニングセンター
@@ -35,9 +35,11 @@ further_reading:
   text: Kubernetes オペレーターをモニターしてアプリケーションがスムーズに動作するようにする
 title: Kubernetes
 ---
-{{< learning-center-callout header="エンゲージメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Kubernetes">}}
   この基盤イネーブルメントセッションでは、Datadog が Kubernetes を監視する方法に焦点を当てます。Kubernetes 用に Datadog を構成する方法と、開始方法を学びます。クラスターやアプリケーションのメトリクス、トレース、ログを可視化し分析するために、Datadog が提供するさまざまなビューとツールを探索します。
 {{< /learning-center-callout >}}
+
+Datadog Agentの代わりにOpenTelemetryを使用してKubernetesリソースおよびインフラストラクチャーのメトリクスをDatadogに送信するには、「[OpenTelemetryによるKubernetesの監視][10]」を参照してください。
 
 ## Agent のインストール {#agent-installation}
 
@@ -95,3 +97,4 @@ Agent のコマンドについては、[Agent コマンドガイド][9]を参照
 [7]: /ja/containers/kubernetes/installation
 [8]: https://docs.datadoghq.com/ja/containers/guide/kubernetes_daemonset/
 [9]: /ja/agent/configuration/agent-commands/
+[10]: /ja/containers/kubernetes/opentelemetry/

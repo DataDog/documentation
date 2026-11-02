@@ -1,4 +1,5 @@
 ---
+description: モニターのロールベースのアクセス制御（RBAC）を設定して、編集権限を特定のロールに制限し、不正な変更を防いでください。
 further_reading:
 - link: /account_management/rbac/permissions/#monitors
   tag: ドキュメント
@@ -11,25 +12,24 @@ further_reading:
   text: UI を使った制限付きモニターの作成について詳しく見る
 title: モニター用に RBAC を設定する方法
 ---
+## 概要{#overview}
 
-## 概要
-
-モニターは、システムの潜在的な問題をチームに警告します。権限のあるユーザーだけがモニターを編集できるようにすることで、モニターの構成が誤って変更されることを防ぎます。
+モニターは、システムに関する潜在的な問題についてチームにアラートを送信します。許可されたユーザーのみがモニターを編集できるようにすることで、モニター設定の誤った変更を防ぐことができます。
 
 個々のモニターの編集権限を特定のロールに制限することで、モニターを安全に管理することができます。
 
-## ロールを設定する
+## ロールを設定する {#set-up-roles}
 
 デフォルトロールとカスタムロールの詳細、カスタムロールの作成方法、ロールへの権限の割り当て、ユーザーへのロールの割り当てについては、[ロールベースアクセス制御][1]を参照してください。
 
-## モニターへのアクセスを制限する
+## モニターへのアクセスを制限する {#restrict-access-to-monitors}
 
 {{< tabs >}}
 
 {{% tab "UI" %}}
 
-1. 新規にモニターを作成するか、既存のモニターを編集して、モニター編集画面に移動します。
-2. フォームの下部で、作成者に加えてモニターの編集を許可されるロールを指定します。
+1. 新しいモニターを作成するか、既存のモニターを編集して、モニター編集画面に移動してください。
+2. フォームの下部で、作成者に加えてモニターの編集を許可するロールを指定してください。
 
 {{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" >}}
 
@@ -83,9 +83,9 @@ curl --request GET 'https://api.datadoghq.com/api/v2/roles' \
 }
 ```
 
-[Create][2] または [Edit a monitor][3] API エンドポイントと `restricted_roles` パラメーターを使用すると、モニターの編集を特定のロールセットとモニターの作成者に制限することができます。
+[Create][2] または [Edit a monitor][3] API エンドポイントと `restricted_roles` パラメーターを使用して、モニターを編集できるユーザーを特定のロールに属するユーザーとモニターの作成者に制限してください。
 
-**注:** 1 つまたは複数のロール UUID を指定することができます。`restricted_roles` を `null` に設定すると、[Monitor Write 権限][4]を持つすべてのユーザーに対して、モニター編集を許可します。
+**注:** 1 つまたは複数のロール UUID を指定できます。`restricted_roles` を `null` に設定すると、[Monitor Write permissions][4] を持つすべてのユーザーがモニターを編集できるようになります。
 
 ```bash
 curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
@@ -121,24 +121,26 @@ curl --location --request POST 'https://api.datadoghq.com/api/v1/monitor' \
 {{% /tab %}}
 {{< /tabs >}}
 
-## 制限されたロール
+## 制限されたロール {#restricted-roles}
 
-Datadog では、ロール制限オプションにより、特定のロールに対してモニターの編集を制限することができます。これにより、モニターの編集を許可するユーザーを柔軟に定義することができます。
+Datadog では、ロール制限オプションを使用して、モニターの編集を特定のロールに制限できます。これにより、どのユーザーがモニターを編集できるかを柔軟に定義できます。
 
-### API
+### API{#api}
 
-API または Terraform で管理されているモニターの定義を更新するには、`restricted_roles` パラメーターを使用します。また、[制限ポリシー][4]エンドポイントを使用して、モニターに対するアクセス制御ルールを定義し、一連の関係 (エディターやビューアーなど) を一連の許可されたプリンシパル (ロール、チーム、ユーザーなど) にマッピングすることもできます。制限ポリシーは、モニター上で誰がどのようなアクションを実行する権限を持つかを決定します。
+API または Terraform を通じて管理されているモニターの定義は、`restricted_roles` パラメーターを使用して更新できます。[Restriction Policies][4] エンドポイントを使用して、モニターのアクセス制御ルールを定義し、関係（編集者や閲覧者など）の集合を、許可されたプリンシパル（ロール、チーム、ユーザーなど）の集合にマッピングすることもできます。制限ポリシーは、そのモニターで誰がどのアクションを実行できるかを決定します。
+
+モニターは、`viewer`、`muter`、および `editor` の関係をサポートしています。ミュートのみのアクセスを許可する `muter` 関係は、プレビュー版です。`muter` 関係をバインドするポリシーは `editor` 関係もバインドする必要があり、各プリンシパルはポリシーごとに 1 つの関係のみを保持できます。`restricted_roles` パラメーターは編集アクセスのみを制御します。ミュートのみのアクセス権を付与するには、制限ポリシーを使用してください。詳しくは、[アクセスレベル][5]をご覧ください。
 
 詳細については、[モニターの編集 API エンドポイント][3]および[制限ポリシー API][4] を参照してください。
 
-### UI
+### UI {#ui}
 
-UI から作成されるすべての新しいモニターは `restricted_roles` パラメーターを使用します。
-また、基本的なメカニズムに関係なく、すべてのモニターはロール制限オプションを表示します。
+UI から作成されたすべての新規モニターは、`restricted_roles` パラメーターを使用します。
+また、すべてのモニターには、基盤となるメカニズムに関係なく、ロール制限オプションが表示されます：
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC 非制限モニター" >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC 制限なしのモニター" >}}
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,3 +148,4 @@ UI から作成されるすべての新しいモニターは `restricted_roles` 
 [2]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [3]: /ja/api/latest/monitors/#edit-a-monitor
 [4]: /ja/api/latest/restriction-policies/
+[5]: /ja/monitors/configuration/#access-levels

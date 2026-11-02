@@ -223,7 +223,7 @@ For event-based journeys, Datadog uses RUM data to identify Synthetic tests that
 
 To create coverage, create a browser test or mobile application test, then add it to the journey's suite.
 
-**Preview**: When no Synthetic test covers a journey, [Bits Testing][18] can generate a covering browser test. [Sign up for the Bits Testing preview][19].
+When no Synthetic test covers a journey, [Bits Testing][18] can generate covering tests.
 
 ### Manage tests
 
@@ -273,7 +273,6 @@ After you change a journey's start or end events, review its variants, matching 
 [16]: /journey_monitoring/overview/#upstream-and-downstream-journeys
 [17]: /journey_monitoring/details_report/#synthetic-monitoring--testing
 [18]: https://www.datadoghq.com/blog/bits-testing-test-coverage/
-[19]: https://www.datadoghq.com/product-preview/bits-testing/
 [20]: /journey_monitoring/overview/#journey-catalog
 [21]: /real_user_monitoring/operations_monitoring/
 [22]: /product_analytics/

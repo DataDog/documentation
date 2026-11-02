@@ -11,7 +11,7 @@ further_reading:
   text: ソースコード
 - link: /integrations/amazon_ecs/#trace-collection
   tag: ドキュメント
-  text: ECS アプリケーションをトレースする
+  text: ECS アプリケーションのトレース
 - link: /agent/docker/log/
   tag: ドキュメント
   text: アプリケーションログの収集
@@ -23,7 +23,7 @@ further_reading:
   text: データ収集をコンテナのサブセットのみに制限
 - link: /agent/docker/tag/
   tag: ドキュメント
-  text: コンテナから送信された全データにタグを割り当てる
+  text: コンテナから送信された全データにタグを割り当て
 title: Docker アプリケーションのトレース
 ---
 Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`registry.datadoghq.com/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
@@ -74,7 +74,9 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 
 ## Docker APM Agent の環境変数 {#docker-apm-agent-environment-variables}
 
-以下の環境変数を使用して、Datadog Agent を構成します。詳細については、[サンプル `config_template.yaml` ファイル][8]を参照してください。
+以下の環境変数を使用して、Docker Agent を構成します。
+
+利用可能なすべてのオプションとそのデフォルト値については、[Agent 構成ファイルの例][8]`apm_config`のセクションを参照してください。
 
 `DD_API_KEY`                     
 : 必須 - _文字列_
@@ -120,7 +122,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 
 `DD_APM_FILTER_TAGS_REGEX_REQUIRE`
 : オプション - _オブジェクト_
-<br/>エージェント 7.49+ でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。Datadog に送信されるようにするには、トレースがこれらの正規表現パターンに一致するタグを持っている必要があります。
+<br/>Agent 7.49 以上でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。Datadog に送信されるようにするには、トレースがこれらの正規表現パターンに一致するタグを持っている必要があります。
 
 `DD_APM_FILTER_TAGS_REJECT`       
 : オプション - _オブジェクト_
@@ -128,7 +130,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
 
 `DD_APM_FILTER_TAGS_REGEX_REJECT` 
 : オプション - _オブジェクト_
-<br/>エージェント 7.49+ でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。トレースがこれらの正規表現パターンに一致するタグを持っている場合、そのトレースは Datadog に送信されません。
+<br/>Agent 7.49 以上でサポートされています。正規表現を使用したタグベースのトレースフィルタリングのルールを定義します。トレースがこれらの正規表現パターンに一致するタグを持っている場合、そのトレースは Datadog に送信されません。
 
 `DD_APM_REPLACE_TAGS`             
 : オプション - _[オブジェクト]_
@@ -394,4 +396,4 @@ docker run -d --name app \
 [5]: /ja/tracing/guide/ignoring_apm_resources/
 [6]: /ja/tracing/troubleshooting/agent_rate_limits
 [7]: /ja/getting_started/site/
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

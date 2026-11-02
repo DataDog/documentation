@@ -7,7 +7,7 @@ description: Cree, implemente y asigne el contexto a las políticas de Workload 
 disable_toc: false
 title: Gestión de políticas
 ---
-Las reglas de Agent están **organizadas en políticas**. Una política es un conjunto de reglas de Agent que usted implementa en conjunto y **asigna el contexto para una infraestructura específica** (hosts, clústeres, etcétera).
+Las reglas de Agent están **organizadas en políticas**. Una política es un conjunto de reglas de Agent que usted implementa en conjunto y **asigna el contexto para una infraestructura específica** (servidores, clústeres, etcétera).
 
 Además de las [reglas predeterminadas de Agent][7] (OOTB), puede escribir **reglas personalizadas de Agent** para detectar eventos que Datadog no muestra solo con las reglas OOTB estándar.
 
@@ -43,11 +43,11 @@ Para fijar una política, haga lo siguiente:
 
 ### Reglas en conflicto {#conflicting-rules}
 
-Cuando dos políticas implementadas en el mismo host contienen la misma regla con un estado diferente (activa e inactiva), la regla se considerará activa.
+Cuando dos políticas implementadas en el mismo servidor contienen la misma regla con un estado diferente (activa e inactiva), la regla se considerará activa.
 
 ### Aplicar etiquetas {#apply-tags}
 
-Las etiquetas definen dónde se aplica una política, como en entornos, clústeres o hosts. Agregue etiquetas a una política para limitar sus reglas a una parte de su infraestructura.
+Las etiquetas definen dónde se aplica una política, como en entornos, clústeres o servidores. Agregue etiquetas a una política para limitar sus reglas a una parte de su infraestructura.
 
 1. Vaya a [Agent Configuration][6].
 2. Abra una política y haga clic en {{< ui >}}Edit{{< /ui >}}.
@@ -74,7 +74,7 @@ Después de crear una regla de Agent personalizada, el cambio se guarda junto co
 
 Las políticas habilitadas aplican sus reglas a los objetivos de infraestructura identificados por sus etiquetas. Habilitar una política es lo mismo que implementarla.
 
-Puede usar **Remote Configuration** en la interfaz de usuario de Datadog para implementar automáticamente la política personalizada en los hosts designados por las etiquetas de política (todos los hosts o un subconjunto definido de hosts), o puede **implementar manualmente** la política en el Agent de cada host.
+Puede usar **Remote Configuration** en la interfaz de usuario de Datadog para implementar automáticamente la política personalizada en los servidores designados por las etiquetas de política (todos los servidores o un subconjunto definido de servidores), o puede **implementar manualmente** la política en el Agent de cada servidor.
 
 ### Remote Configuration {#remote-configuration}
 
@@ -82,17 +82,17 @@ Puede usar **Remote Configuration** en la interfaz de usuario de Datadog para im
 
 #### Estrategias de implementación {#deployment-strategies}
 
-Para implementar un cambio en las reglas o políticas del Agent con Remote Configuration, puede elegir entre dos estrategias: implementar el cambio al instante en todos sus hosts o escalonar la implementación en pasos mediante una implementación administrada. Realice el seguimiento de las implementaciones desde la [página de implementaciones][23].
+Para implementar un cambio en las reglas o políticas del Agent con Remote Configuration, puede elegir entre dos estrategias: implementar el cambio al instante en todos sus servidores o escalonar la implementación en pasos mediante una implementación administrada. Realice el seguimiento de las implementaciones desde la [página de implementaciones][23].
 
 ##### Implementar al instante {#deploy-instantly}
 
-La implementación instantánea envía la política actualizada a todos los hosts en el contexto al mismo tiempo, sin validación por etapas. Esto generalmente toma unos minutos y es mejor cuando desea que el cambio se aplique en todas partes de inmediato.
+La implementación instantánea envía la política actualizada a todos los servidores en el contexto al mismo tiempo, sin validación por etapas. Esto generalmente toma unos minutos y es mejor cuando desea que el cambio se aplique en todas partes de inmediato.
 
 Seleccione {{< ui >}}Deploy instantly{{< /ui >}}, luego haga clic en {{< ui >}}Update Policy{{< /ui >}}. Siga el progreso desde la [página de implementaciones][23].
 
 ##### Implementación administrada {#managed-deployment}
 
-Una implementación administrada despliega su cambio en etapas para que pueda validarlo en un subconjunto de hosts antes de que llegue a toda su infraestructura.
+Una implementación administrada despliega su cambio en etapas para que pueda validarlo en un subconjunto de servidores antes de que llegue a toda su infraestructura.
 
 1. Al editar una política o una regla, seleccione {{< ui >}}Start a managed deployment{{< /ui >}}. Si la política o regla ya se implementó con un despliegue administrado, seleccione {{< ui >}}Start from your last deployment{{< /ui >}} para reutilizar los parámetros de la última implementación. Para un cambio de regla, los parámetros reutilizados son los de la última implementación de la política que contiene la regla.
 2. En {{< ui >}}Customize deployment roll-out plan{{< /ui >}}, establezca el alcance de la implementación, luego configure hasta 10 etapas para implementar el cambio gradualmente. Defina cada etapa {{< ui >}}By percentage of hosts in scope{{< /ui >}} o {{< ui >}}By host tags{{< /ui >}}.
@@ -177,8 +177,6 @@ Aquí hay algunos [roles y permisos][11] importantes para usar en el RBAC de reg
 [5]: /es/security/notifications/variables/?tab=cloudsiem
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /es/security/workload_protection/detect_and_monitor/agent_rules/#ootb-rules
-[8]: /es/security/workload_protection/
-[9]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /es/account_management/rbac/permissions/
 [12]: /es/security/workload_protection/respond_and_report/#automated-response

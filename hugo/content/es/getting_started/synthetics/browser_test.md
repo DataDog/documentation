@@ -1,141 +1,155 @@
 ---
-description: Crea tests de navegador en Datadog para monitorizar las experiencias
-  de los usuarios con los dispositivos y los navegadores. Graba escenarios de test,
-  configura alertas y confirma transacciones empresariales.
+description: Cree pruebas de navegador de Datadog para hacer un seguimiento de los
+  recorridos de los usuarios en dispositivos y navegadores. Grabe escenarios de prueba,
+  configure alertas y valide transacciones comerciales.
 further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: Centro de aprendizaje
-  text: Empezando con los tests de monitorización Synthetic
+  text: Primeros pasos con las pruebas Synthetic de navegador
 - link: /synthetics/browser_tests
   tag: Documentación
-  text: Más información sobre los tests de navegador
+  text: Más información sobre las pruebas de navegador
 - link: /getting_started/synthetics/private_location
   tag: Documentación
-  text: Más información sobre las localizaciones privadas
+  text: Más información sobre ubicaciones privadas
 - link: /continuous_testing/cicd_integrations
   tag: Documentación
-  text: Descubre cómo activar los tests Synthetic desde tu pipeline de integración/distribución
-    continuas (CI/CD)
+  text: Aprenda a activar pruebas Synthetic desde su canalización de CI/CD
 - link: /synthetics/identify_synthetics_bots
   tag: Documentación
-  text: Descubre cómo identificar los bots Synthetic de los tests de API
+  text: Aprenda a identificar bots Synthetic para pruebas de API.
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de test sintéticos
-title: Empezando con los tests de navegador
+  text: Obtenga información sobre los monitores de prueba Synthetic
+- link: /synthetics/guide/export-tests-to-terraform
+  tag: Guía
+  text: Exportar pruebas Synthetic a Terraform
+title: Primeros pasos con las pruebas de navegador
 ---
+## Descripción general {#overview}
 
-## Información general
+[Las pruebas de navegador][1] son escenarios que Datadog ejecuta en sus aplicaciones web. Puede configurar intervalos periódicos para ejecutar pruebas desde múltiples ubicaciones, dispositivos y navegadores, así como ejecutarlas desde sus canalizaciones de CI/CD. Estas pruebas verifican que sus usuarios puedan realizar **transacciones comerciales clave** en sus aplicaciones y que no se vean afectados negativamente por cambios recientes en el código.
 
-Los [tests de navegador][1] son escenarios que Datadog ejecuta en tus aplicaciones web. Puedes configurar intervalos periódicos para ejecutar tests desde diferentes localizaciones, dispositivos y navegadores, así como desde tus pipelines CI/CD. Estos tests garantizan que tus usuarios puedan realizar **transacciones comerciales clave** en tus aplicaciones y que no se vean afectados negativamente por cambios recientes en el código.
+## Crear una prueba de navegador {#create-a-browser-test}
 
-## Crear un test de navegador
+El siguiente ejemplo demuestra la creación de una prueba de navegador que mapea el recorrido de un usuario desde que agrega un artículo a un carrito hasta que finaliza la compra con éxito. 
 
-El siguiente ejemplo demuestra la creación de un test de navegador que mapea el recorrido de un usuario desde que añade un artículo al carrito hasta que realiza el pago.
+### Configure los detalles de su prueba {#configure-your-test-details}
 
-### Configurar los detalles de tu test
+1. En el sitio de Datadog, pase el cursor sobre {{< ui >}}Digital Experience{{< /ui >}} en el menú de la izquierda y seleccione [{{< ui >}}Tests{{< /ui >}}][2] (bajo {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}).
+2. En la esquina superior derecha, haga clic en {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}Browser Test{{< /ui >}}][3].
 
-1. En el sitio Datadog, coloca el ratón encima de **Experiencia digital** en el menú de la izquierda y selecciona **[Tests][2]** (en **Monitorización y tests Synthetic**).
-2. En la esquina superior derecha, haz clic en **New Test** (Nuevo test) > **[Browser Test][3]** (Test de navegador).
+Puede crear una prueba utilizando una de las siguientes opciones:
 
-Puedes crear un test utilizando una de las siguientes opciones:
+- **Cree una prueba a partir de una plantilla**:
 
-- **Crea un test a partir de una plantilla**:
+    1. Pase el cursor sobre una de las plantillas precargadas y haga clic en {{< ui >}}View Template{{< /ui >}}. Esto abre un panel lateral que muestra información de configuración precargada, incluyendo: Detalles de la prueba, Condiciones de alerta, Pasos y, opcionalmente, Variables.
+    2. Haga clic en {{< ui >}}\+ Create Test{{< /ui >}} para abrir la página de configuración, donde puede revisar y editar las opciones de configuración prellenadas. Los campos presentados son idénticos a los disponibles al crear una prueba desde cero.
+    3. Haga clic en {{< ui >}}Save & Quit{{< /ui >}} en la esquina superior derecha para enviar su prueba de navegador.<br /><br>
 
-    1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, condiciones de alerta, pasos e incluso variables.
-    2. Haz clic en **+Create Test** (+Crear test) para abrir la página de configuración, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
-    3. Haz clic en **Save & Quit** (Guardar y salir) en la esquina superior derecha para enviar tu test de navegador.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video de la página de inicio de la prueba de navegador de Synthetics con plantillas" video="true" >}}
 
-       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Vídeo de la página de inicio del test de navegador Synthetics con plantillas" video="true" >}}
+- **Cree una prueba desde cero**:
 
-- **Crea un test desde cero**:
+    1. Haga clic en la plantilla {{< ui >}}\+{{< /ui >}} para iniciar una nueva prueba de navegador desde cero.
+    1. Agregue la URL del sitio web que desea hacer un seguimiento Si no sabe por dónde empezar, puede usar `https://www.shopist.io`, una aplicación web de comercio electrónico de prueba.
+    2. Seleccione {{< ui >}}Advanced Options{{< /ui >}} para establecer opciones de solicitud personalizadas, certificados, credenciales de autenticación y más. 
+    3. Asigne un nombre a su prueba y establézcale etiquetas como `env:prod` y `app:shopist`. Las etiquetas le permiten mantener organizado su conjunto de pruebas y encontrar rápidamente las pruebas que le interesan en la página de inicio.
+    4. Elija los navegadores y dispositivos con los que desea probar. 
+    5. Haga clic en {{< ui >}}Save & Edit Recording{{< /ui >}} para enviar su prueba de navegador.
 
-    1. Haz clic en la plantilla **+** para iniciar un nuevo test de navegador desde cero.
-    1. Añade la URL al sitio web que quieres monitorizar. Si no sabes con qué empezar, puedes utilizar `https://www.shopist.io`, una aplicación web de comercio electrónico de test.
-    2. Selecciona **Advanced Options** (Opciones avanzadas) para establecer las opciones de solicitud, certificados, credenciales de autenticación y otros parámetros personalizados.
-    3. Elige un nombre para tu test y configura las etiquetas (tags) asociadas, como `env:prod` y `app:shopist`. Las etiquetas te ayudarán a organizar tu conjunto de tests y a encontrar rápidamente los que necesites en la página de inicio.
-    4. Elige los navegadores y dispositivos con los que quieres hacer los tests.
-    5. Haz clic en **Save & Edit Recording** (Guardar y editar grabación) para enviar tu test de navegador.
+### Seleccione ubicaciones {#select-locations}
 
-### Seleccionar localizaciones
+Seleccione una o más {{< ui >}}Managed Locations{{< /ui >}} o {{< ui >}}Private Locations{{< /ui >}} desde las cuales ejecutar su prueba.
 
-Elige una o varias **localizaciones gestionadas** o **localizaciones privadas** desde las que ejecutar tu test.
+Las ubicaciones administradas le permiten probar sitios web y puntos de conexión públicos. Para probar aplicaciones internas o simular el comportamiento del usuario en regiones geográficas discretas, utilice [ubicaciones privadas][4] en su lugar.
 
-Las localizaciones gestionadas te permiten hacer tests en sitios web y endpoints públicos. Para hacer tests en aplicaciones internas o simular el comportamiento de los usuarios en regiones geográficas discretas, utiliza [localizaciones privadas][4].
+La aplicación Shopist está disponible públicamente en `https://www.shopist.io/`, por lo que puede elegir cualquier ubicación administrada desde la cual ejecutar su prueba.
 
-La aplicación Shopist está disponible públicamente en `https://www.shopist.io/`, así que puedes elegir cualquier localización gestionada para ejecutar tu test.
+### Especifique la frecuencia de la prueba {#specify-test-frequency}
 
-### Especificar la frecuencia de los tests 
+Seleccione la frecuencia con la que desea que se ejecute su prueba. Puede dejar la frecuencia predeterminada de 1 hora.
 
-Elige la frecuencia con la que quieres que se ejecute tu test. Si lo prefieres, puedes dejar la frecuencia predeterminada de 1 hora.
+Además de ejecutar su prueba Synthetic según un horario, puede activarla manualmente o directamente desde sus [CI/CD pipelines][5].
 
-Además de ejecutar tu test Synthetic de forma programada, puedes activarlo manualmente o desde tus [pipelines de CI/CD][5].
+### Defina las condiciones de alerta {#define-alert-conditions}
 
-### Definir las condiciones de alerta 
+Puede definir condiciones de alerta para asegurarse de que su prueba no se active por cosas como una falla de red esporádica, de modo que solo reciba una alerta en caso de problemas reales con su aplicación.
 
-Puedes definir las condiciones de alerta para asegurarte de que tu test no se active en situaciones como un incidente breve y esporádico en la red. De este modo, solo recibirás alertas en caso de que haya problemas reales con tu aplicación.
-
-Puedes indicar el número de fallos consecutivos que deberían producirse antes de considerar que una localización ha fallado:
+Puede especificar el número de fallas consecutivas que deben ocurrir antes de considerar que una ubicación falló:
 
 ```text
 Retry test 2 times after 300 ms in case of failure
 ```
 
-También puedes configurar tu test para activar solo una notificación cuando la aplicación deje de funcionar durante cierto tiempo y en un número determinado de localizaciones. En el siguiente ejemplo, la regla de alerta está configurada para enviar una notificación si el test falla durante tres minutos en dos localizaciones distintas:
+También puede configurar su prueba para que solo active una notificación cuando su aplicación deje de funcionar durante una cierta cantidad de tiempo y número de ubicaciones. En el siguiente ejemplo, la regla de alerta está configurada para enviar una notificación si la prueba falla durante tres minutos en dos ubicaciones diferentes:
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### Configurar el monitor de tests
+### Configure el seguimiento de prueba {#configure-the-test-monitor}
 
-Redacta el mensaje de la alerta y añade la dirección de correo electrónico a la que deben enviarse las alertas del test.
+Utilice esta sección para crear el **mensaje** que desea enviar con la notificación. La notificación incluye su mensaje personalizado y detalles sobre cualquier ubicación con fallas. Los mensajes de seguimiento prellenados se incluyen en el cuerpo del mensaje:
 
-{{< img src="getting_started/synthetics/configured-browser-test.mp4" alt="Ejemplo de configuración del test de un navegador" video="true" >}}
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Sección de seguimiento de Synthetic Monitoring, que destaca los mensajes de seguimiento prellenados" style="width:100%;" >}}
 
-También puedes usar [integraciones de notificaciones][6] como Slack, PagerDuty, Microsoft Teams y webhooks. Para activar una alerta Synthetic para estas herramientas de notificación, primero deberás configurar la [integración][7] correspondiente.
+Por ejemplo, el siguiente mensaje de seguimiento crea un seguimiento que itera sobre los pasos y extrae variables para pruebas de navegador:
 
-Cuando lo tengas todo listo para guardar la configuración y el monitor de tu prueba, haz clic en **Save & Edit Recording** (Guardar y editar grabación).
+   ```text
+   {{! Liste las variables extraídas en todos los pasos exitosos }}
+   # Variables extraídas
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Nombre**: `{{extractedValue.name}}`
+   **Valor:** {{#if extractedValue.secure}}*Ofuscado (valor oculto)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
-Para obtener más información, consulta [Usar monitores de tests Synthetic][8].
+When you're ready to save your test configuration and monitor, click {{< ui >}}Save & Edit Recording{{< /ui >}}.
 
-## Crear una grabación
+For more information, see [Using Synthetic Test Monitors][8].
 
-Una vez guardada la configuración del test, Datadog te pedirá que descargues e instales la extensión de Chrome [Datadog Test Recorder][9]. (Esta extensión de Chrome también puede instalarse en un navegador Microsoft Edge).
+## Create recording 
 
-Cuando hayas instalado la extensión, haz clic en **Start Recording** (Iniciar grabación) para empezar a grabar los pasos del test.
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. (This Chrome extension can also be installed on a Microsoft Edge browser)
 
-Navega por la página en el iframe ubicado a la derecha de la página de grabación. Cuando selecciones un div, una imagen o cualquier área de la página, Datadog grabará y creará el paso correspondiente en el test de navegador.
+Once you have installed the extension, click {{< ui >}}Start Recording{{< /ui >}} to begin recording your test steps.
 
-Para finalizar la grabación de los pasos del test, haz clic en **Stop Recording** (Detener la grabación).
+Navigate through the page in the iframe located on the right of the recorder page. When you select a div, image, or any area of the page, Datadog records and creates the associated step in the browser test. 
 
-El siguiente ejemplo muestra cómo mapear el recorrido de un usuario desde que se añade un artículo al carrito hasta que se realiza el pago en `https://www.shopist.io`:
+To end recording your test steps, click {{< ui >}}Stop Recording{{< /ui >}}.
 
-1. Dirígete a alguna de las secciones de muebles en el sitio web de ejemplo, como la de **Chairs** (Sillas), y selecciona **Add to cart** (Añadir al carrito).
-2. Haz clic en **Cart** (Carrito) y **Checkout** (Pagar).
-3. En **Add New** (Añadir nuevo), selecciona **Assertion** (Aserción) y haz clic en **"Test that some text is present on the active page"** (Comprobar que hay texto en la página activa).
-4. Para confirmar que las palabras "Thank you!" (Gracias) aparecen después de realizar el pago, escribe `Thank you!` en el campo **Value** (Valor).
-5. Haz clic en **Save & Quit** (Guardar y cerrar).
+The example below demonstrates how to map a user journey from adding an item to a cart to successfully checking out in `https://www.shopist.io`:
 
-Es importante finalizar el test de navegador con una **aserción** para asegurarte de que la aplicación cambie al estado esperado después del recorrido del usuario que hayas definido.
+1. Navigate to one of the furniture sections on the example website such as {{< ui >}}Chairs{{< /ui >}} and select {{< ui >}}Add to cart{{< /ui >}}.
+2. Click on {{< ui >}}Cart{{< /ui >}} and {{< ui >}}Checkout{{< /ui >}}.
+3. Under {{< ui >}}Add New{{< /ui >}}, select {{< ui >}}Assertion{{< /ui >}} and click {{< ui >}}"Test that some text is present on the active page"{{< /ui >}}.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the {{< ui >}}Value{{< /ui >}} field. 
+5. Press {{< ui >}}Save & Quit{{< /ui >}}.
 
-{{< img src="getting_started/synthetics/record-test.mp4" alt="Grabar los pasos del test" video="true" >}}
+It is important to finish your browser test with an {{< ui >}}Assertion{{< /ui >}} to ensure your application resulted in the expected state after the defined user journey.
 
-El sitio web de ejemplo genera con frecuencia un error que hace que falle intencionadamente. Si incluyes tu dirección de correo electrónico en el campo **Configurar el monitor para el test**, recibirás un aviso por correo electrónico cuando el test falle y se recupere.
+{{< img src="getting_started/synthetics/record-test.mp4" alt="Grabar pasos de prueba" video="true" >}}
 
-## Consultar los resultados del test
+El sitio web de ejemplo arroja un error regularmente, lo que provoca que falle intencionalmente. Si incluye su dirección de correo electrónico en el campo {{< ui >}}Configure the monitor for this test{{< /ui >}}, recibirá una notificación por correo electrónico cuando la prueba falle y se recupere.
 
-La página de detalles del **test de navegador** muestra la información general sobre la configuración de tu test, el tiempo de actividad global y por localización, gráficos sobre el tiempo de interacción y la duración del test, ejemplos de resultados de test correctos y fallidos, y una lista con todos los resultados del test. Dependiendo de la duración del test, quizá tengas que esperar unos minutos hasta ver los primeros resultados.
+## Consulte los resultados de la prueba {#look-at-test-results}
 
-Para solucionar los problemas de un [test fallido][10], selecciona el test que corresponda y repasa las capturas de pantalla hasta encontrar el paso fallido. También puedes consultar los posibles **[errores y advertencias][11]**, **[recursos][12]** y **[métricas de Core Web Vitals][13]** para hacer un diagnóstico del problema.
+La página de detalles de {{< ui >}}Browser Test{{< /ui >}} muestra una descripción general de la configuración de su prueba, el tiempo de actividad global y por ubicación, gráficos sobre el tiempo hasta la interactividad y la duración de la prueba, ejemplos de resultados de pruebas exitosos y fallidos, y la lista de todos los resultados de las pruebas. Dependiendo de la duración de su prueba, es posible que deba esperar unos minutos para ver los primeros resultados de la prueba.
 
-En el siguiente ejemplo, el test ha fallado debido al tiempo de espera del servidor.
+Para solucionar problemas de una [prueba fallida][10], revise las fallas en la pestaña **Actividad** o en la pestaña **Ejecuciones de prueba**. Seleccione una alerta de la línea de tiempo para ver un **¿Qué sucedió?** resumen que describe el paso fallido y el mensaje de error. Desde el panel **Próximos pasos**, puede investigar con Bits Investigation, ver la recuperación, pausar la programación o declarar un incidente. También puede revisar posibles [{{< ui >}}Errors & Warnings{{< /ui >}}][11], [{{< ui >}}Resources{{< /ui >}}][12] y [{{< ui >}}Core Web Vitals{{< /ui >}}][13] para diagnosticar el problema.
 
-{{< img src="getting_started/synthetics/browser-test-failure.mp4" alt="Fallo en el test del navegador" video="true" >}}
+{{< img src="synthetics/browser_tests/synthetics_bits_investigation.png" alt="Página de detalles de la prueba de navegador que muestra la pestaña Actividad con una línea de tiempo de alertas, un resumen de fallas y un panel de Próximos pasos" style="width:100%;">}}
 
-Utiliza la [integración de APM con la monitorización Synthetic][14] de Datadog para ver las trazas generadas por tu backend en las ejecuciones del test desde la pestaña **Traces** (Trazas).
+Utilice la [integración de APM con Synthetic Monitoring][14] de Datadog para ver los traces generados desde su backend por las ejecuciones de prueba desde la pestaña {{< ui >}}Traces{{< /ui >}}.
 
-## Referencias adicionales
+### Inicie una Bits Investigation {#launch-a-bits-investigation}
+
+Para identificar la causa raíz de una prueba Synthetic de navegador fallida, inicie una [Bits Investigation][15]. Bits Investigation analiza los resultados de las pruebas, trazas, registros y métricas para revelar una causa raíz y marcar si el fallo es una regresión o una configuración incorrecta.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -147,10 +161,11 @@ Utiliza la [integración de APM con la monitorización Synthetic][14] de Datadog
 [5]: /es/continuous_testing/cicd_integrations
 [6]: /es/integrations/#cat-notification
 [7]: https://app.datadoghq.com/account/settings
-[8]: /es/synthetics/guide/synthetic-test-monitors
+[8]: /es/monitors/types/synthetic_monitoring/
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
 [10]: /es/synthetics/browser_tests/test_results#test-failure
 [11]: /es/synthetics/browser_tests/test_results#errors
 [12]: /es/synthetics/browser_tests/test_results#resources
-[13]: /es/synthetics/browser_tests/test_results#page-performance
+[13]: /es/synthetics/browser_tests/test_results#test-performance
 [14]: /es/synthetics/apm/
+[15]: /es/bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page
