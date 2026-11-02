@@ -5,7 +5,7 @@ description: Core concepts for configuring subjects, exposures, warehouse querie
 
 ## Overview
 
-These pages cover foundational Experiments concepts: how subjects are randomized, how to analyze experiments randomized outside Datadog Feature Flags, how to optimize warehouse-native queries, and how to measure cumulative impact across multiple experiments.
+These pages cover foundational Experiments concepts: subject randomization, analysis with external randomization, and warehouse-native query optimization. They also explain how to measure cumulative impact across experiments and the combined effect of shipped changes with holdouts.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/experiments/concepts/subject_types" >}}Subject Types: Configure the units Datadog uses to randomize experiments and join exposures to metrics{{< /nextlink >}}

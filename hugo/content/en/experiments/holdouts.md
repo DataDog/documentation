@@ -42,7 +42,7 @@ Global and selective holdouts can measure different sets of changes at the same 
 
 Each holdout has its own randomized comparison. This measures the impact of each set of changes directly. The selective result is not inferred from the global result or the sum of individual experiment results.
 
-An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes and should not be added together.
+An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes, so don't add them together.
 
 ## Holdout phases
 
@@ -50,7 +50,7 @@ The all-shipped group receives changes as they roll out. During this time, the h
 
 Measuring the entire period as one result would mix time spent with some changes and time spent with the full combination. Holdouts separate these periods so you can monitor early results, then measure the complete treatment.
 
-A team includes 10 experiments in a holdout from July through September. Five experiments produce changes that ship. The first ships on July 15, and the last ships on September 30.
+For example, a team includes 10 experiments in a holdout from July through September. Five experiments produce changes that ship. The first ships on July 15, and the last ships on September 30.
 
 The goal is to measure the combined effect of all five changes. The holdout treatment is still changing during the inclusion phase and is complete only when the last change ships. The team sets an analysis phase from October 1 through October 15 to measure the full combination.
 
@@ -66,7 +66,7 @@ A preliminary analysis runs during the inclusion phase. It gives an early direct
 
 ### Analysis phase
 
-The analysis phase starts at or after inclusion phase ends. During the analysis phase, the all-shipped group should have received all shipped changes. The status-quo group continues to receive the original experiences. Each subject still sees only the components they use and for which they meet the targeting rules.
+The analysis phase starts when or after the inclusion phase ends. During the analysis phase, the all-shipped group should have received all shipped changes. The status-quo group continues to receive the original experiences. Each subject still sees only the components they use and whose targeting rules they meet.
 
 The primary analysis uses metric data from the analysis phase to measure the combined effect of the shipped changes.
 
@@ -115,7 +115,7 @@ After inclusion ends, you cannot change the included experiments. The holdout co
 
 ## Exposure criteria
 
-As a general principle, count exposure when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
+For the primary analysis, an exposure qualifies when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
 
 For a holdout, exposure occurs when a subject first interacts with a component where a covered experiment has shipped a non-control variant. Datadog records this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control.
 
@@ -146,7 +146,7 @@ Using the first qualifying exposure also gives CUPED the correct point from whic
 
 ## Interpret results
 
-Use the primary analysis to assess the combined changes during the analysis phase. Preliminary results provide an early directional read and help identify problems during inclusion. They include time before the full treatment is available, so they should not be interpreted as the impact of the complete set of shipped changes.
+Use the primary analysis to assess the combined changes during the analysis phase. Preliminary results provide an early directional read and help identify problems during inclusion. They include time before the full treatment is available, so don't interpret them as the impact of the complete set of shipped changes.
 
 The scorecard compares all-shipped with status-quo. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
@@ -160,11 +160,11 @@ If primary results are empty, check that:
 
 Use an [Exposure SQL Model][3] to analyze holdouts when you manage experiment randomization outside Datadog Feature Flags. This also applies when you use Datadog Feature Flags with your own warehouse logging. The holdout phases and interpretation of results are the same. The model supplies the exposure records for analysis.
 
-When creating the holdout, select the model and its subject type. The holdout key must match the key in the exposure records. With external randomization, your system handles group assignment and serves the experiences described above. With Datadog Feature Flags, preserve the holdout fields from the exposure events.
+When creating the holdout, select the model and its subject type. The holdout key must match the key in the exposure records. With external randomization, your system handles group assignment and serves the experiences described in [Subject assignment](#subject-assignment). With Datadog Feature Flags, preserve the holdout fields from the exposure events.
 
 ### Warehouse exposure model
 
-The model must return records for both holdout groups, using the [exposure criteria][9] above. Add the holdout fields to your [Exposure SQL Model][3]. For example:
+The model must return records for both holdout groups, following the rules in the [Exposure criteria](#exposure-criteria) section. Add the holdout fields to your [Exposure SQL Model][3]. For example:
 
 ```sql
 SELECT
@@ -179,7 +179,7 @@ SELECT
 FROM analytics.holdout_exposures
 ```
 
-Keep the standard exposure mappings and add the holdout mappings below. Omit `allocation_key` from the query unless the holdout uses selective coverage with Datadog Feature Flags.
+Keep the standard exposure mappings and add the following holdout mappings. Omit `allocation_key` from the query unless the holdout uses selective coverage with Datadog Feature Flags.
 
 | Field | Example column | Value |
 | --- | --- | --- |
@@ -188,9 +188,9 @@ Keep the standard exposure mappings and add the holdout mappings below. Omit `al
 | Include in holdout analysis | `should_include_in_holdout_analysis` | Optional for external randomization. Required when using Datadog Feature Flags with your own warehouse logging. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
 | Allocation key | `allocation_key` | The allocation key from the exposure event. Only required for selective holdouts using Datadog Feature Flags with your own warehouse logging. |
 
-Datadog uses the holdout key and assignment group to select holdout records. The experiment ID and variant ID do not determine holdout membership. Return only exposures for experiences covered by this holdout. For external randomization, adding experiments in Datadog does not filter these rows. Do not use experiment or allocation key template variables in this model: a holdout analysis does not supply those values.
+Datadog uses the holdout key and assignment group to select holdout records. The experiment ID and variant ID do not determine holdout membership. Return only exposures for experiences covered by this holdout. For external randomization, adding experiments in Datadog does not filter these rows. Don't use experiment or allocation key template variables in this model, because a holdout analysis doesn't supply those values.
 
-With external randomization, the inclusion field is optional. Include it when logging exposures before changes ship. The preliminary analysis uses all holdout exposure records within the inclusion period. The primary analysis uses only records marked `true`. Without this mapping, Datadog does not apply that filter. In that case, the model must return only qualifying exposures, as described in [Exposure criteria][9].
+With external randomization, the inclusion field is optional. Include it when logging exposures before changes ship. The preliminary analysis uses all holdout exposure records within the inclusion period. The primary analysis uses only records marked `true`. Without this mapping, Datadog does not apply that filter. In that case, the model must return only qualifying exposures, as described in the [Exposure criteria](#exposure-criteria) section.
 
 [1]: /experiments/concepts/subject_types/
 [2]: /experiments/statistics/analysis_methods/
@@ -200,4 +200,3 @@ With external randomization, the inclusion field is optional. Include it when lo
 [6]: /experiments/diagnostics/
 [7]: /experiments/statistics/cuped/
 [8]: /experiments/concepts/cumulative_impact/#why-naive-aggregation-overstates-impact
-[9]: #exposure-criteria
