@@ -5569,6 +5569,11 @@ menu:
       identifier: clickhouse_cloud_data_obs
       parent: data_warehouses
       weight: 5000000
+    - name: Microsoft Fabric Warehouse
+      url: data_observability/quality_monitoring/data_warehouses/fabric
+      identifier: data_obs_fabric_warehouse
+      parent: data_warehouses
+      weight: 6000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
