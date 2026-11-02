@@ -181,9 +181,11 @@ Finally, start the Datadog Agent service to apply the changes.
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" start-service
 ```
 
-### AIX
+### AIX (UNIX Agent)
 
-`Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+This section applies only to the legacy [Datadog UNIX Agent][7].
+
+`jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
 ### Containerized ecosystems
 
@@ -278,9 +280,11 @@ Instructions are different depending on the Linux distribution:
 
 **Note**: This applies to all JVMs running on the host.
 
-### AIX
+### AIX (UNIX Agent)
 
-`Jmxfetch.jar` is included in the AIX agent install bundle, but there is no code in the AIX agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
+This section applies only to the legacy [Datadog UNIX Agent][7].
+
+`jmxfetch.jar` is included in the UNIX Agent install bundle, but there is no code in the UNIX Agent that runs the `jmxfetch` code. If you are not manually starting the `jmxfetch` process, the `jmxfetch.jar` is not used and can be deleted from `/opt/datadog-agent/bin/agent/dist/jmx/jmxfetch.jar`.
 
 If you are manually running the `jmxfetch.jar`, pass the following flag to the Java process: `‐Dlog4j2.formatMsgNoLookups=True`
 
@@ -341,3 +345,4 @@ You can also check specific Agent version information with the Agent CLI `versio
 [4]: /dashboards/#copy-import-or-export-dashboard-json
 [5]: /resources/json/agent-version-dashboard.json
 [6]: /agent/configuration/agent-commands/?tab=agentv6v7#other-commands
+[7]: /agent/guide/install-unix-agent-aix/
