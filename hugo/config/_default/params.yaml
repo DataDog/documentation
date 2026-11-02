@@ -361,6 +361,7 @@ unsupported_sites:
   fips-compliance: [us,us3,us5,eu,ap1,ap2,uk1]
   fips-integrations: [us,us3,us5,eu,ap1,ap2,uk1]
   fips-proxy: [us,us3,us5,eu,ap1,ap2,gov2,uk1]
+  fleet-automation-host-features: [gov2]
   fleet-automation-standard-features: [gov,gov2]
   forwarding_audit_events: [gov,gov2]
   gcp-private-service-connect: [us,us3,gov,gov2,ap1,ap2,uk1]

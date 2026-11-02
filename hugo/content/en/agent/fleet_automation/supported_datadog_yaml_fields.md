@@ -11,7 +11,7 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
-site_support_id: fleet-automation-standard-features
+site_support_id: fleet-automation-host-features
 ---
 
 Fleet Automation supports a subset of `datadog.yaml` fields when you [configure Agents][1]. Every change you supply is validated against a schema, and any field not listed here is rejected with a schema validation error.
