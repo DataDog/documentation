@@ -1830,8 +1830,7 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRulesForMetric
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Update a tag indexing rule exemption
       url: /api/latest/metrics/update-a-tag-indexing-rule-exemption/
@@ -1955,8 +1954,7 @@ menu:
           - v2
         operationids:
           - UpdateTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 19
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
@@ -1968,8 +1966,7 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 18
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
@@ -1981,8 +1978,7 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 20
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
@@ -1994,8 +1990,7 @@ menu:
           - v2
         operationids:
           - ReorderTagIndexingRules
-        unstable:
-          - v2
+        unstable: []
         order: 17
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
@@ -2007,8 +2002,7 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRule
-        unstable:
-          - v2
+        unstable: []
         order: 16
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
@@ -2020,8 +2014,7 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRules
-        unstable:
-          - v2
+        unstable: []
         order: 15
     - name: List tag indexing rule exemptions
       url: /api/latest/metrics/list-tag-indexing-rule-exemptions/
