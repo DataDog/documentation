@@ -678,12 +678,6 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve all generally available tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
-- Retrieve Bits Chat tools (requires Bits Chat access):
-  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=chat</code></pre>
-
-- Retrieve all generally available tools and Bits Chat tools:
-  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all,chat</code></pre>
-
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
