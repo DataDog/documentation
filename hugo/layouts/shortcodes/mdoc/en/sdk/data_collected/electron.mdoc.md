@@ -8,7 +8,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 The Electron SDK collects data from two sources:
 
 - **Renderer processes** are monitored by the Browser SDK. Views, actions, resources, errors, and other renderer events follow the [Browser data collected][1] reference.
-- **The main process** is monitored by the Electron SDK, which generates RUM events, and by dd-trace-js, which generates traces.
+- **The main process** is monitored by the Electron SDK, which generates RUM events, and by `dd-trace-js`, which generates traces.
 
 Every event has attributes. See the [Shared attributes](#shared-attributes) section. Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to filter and group telemetry in analytics (group by). You can further enrich your data by [adding global context][2].
 
@@ -50,7 +50,7 @@ To filter events by process in the RUM Explorer, use the `execution_context.type
 
 ## Main process traces
 
-The Electron SDK uses and configures dd-trace-js, so tracing requires no additional setup. The SDK generates traces for the following main process activity:
+The Electron SDK uses and configures `dd-trace-js`, so tracing requires no additional setup. The SDK generates traces for the following main process activity:
 
 - Network requests
 - Command execution

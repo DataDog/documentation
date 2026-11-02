@@ -4,7 +4,7 @@ This partial contains setup instructions for the Electron SDK.
 
 Instrument your Electron applications for [Real User Monitoring (RUM)][setup-overview-1] with the Electron SDK.
 
-- The Electron SDK monitors the main process. It uses dd-trace-js to collect traces and sends the data from the main process to Datadog.
+- The Electron SDK monitors the main process. It uses `dd-trace-js` to collect traces and sends the data from the main process to Datadog.
 - The Browser SDK monitors renderer processes. It forwards its events to the main process, which uploads them to Datadog.
 
 [setup-overview-1]: /real_user_monitoring/
@@ -78,7 +78,7 @@ await app.whenReady();
 const mainWindow = new BrowserWindow({ width: 1200, height: 800 });
 ```
 
-Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Advanced Configuration][setup-init-1].
+Replace the placeholders with the values from your application, and set `allowedRendererHosts` to the hostnames of the renderer pages that are allowed to report through the main process. For the supported values, see [Allowed renderer hosts][setup-init-1].
 
 {% alert level="info" %}
 Windows opened before `init` completes are not tracked until you reload them. These windows send no data, including the interactions that keep the session alive. If end users interact only with such windows, the session expires after 15 minutes of inactivity and no new session starts.
@@ -109,7 +109,7 @@ For details on `allowedRendererHosts`, see [Advanced Configuration][setup-render
 
 The SDK must load before Electron. Add the Datadog plugin for your bundler to the main-process bundler configuration so that this order is respected.
 
-By default, the plugins do not copy the SDK or dd-trace-js into the build output. Your application packager must include `@datadog/electron-sdk` and its runtime dependencies, so keep `@datadog/electron-sdk` in your application's production `dependencies`.
+By default, the plugins do not copy the SDK or `dd-trace-js` into the build output. Your application packager must include `@datadog/electron-sdk` and its runtime dependencies, so keep `@datadog/electron-sdk` in your application's production `dependencies`.
 
 ### Electron Forge
 
@@ -215,7 +215,7 @@ await esbuild.build({
 {% /tab %}
 {% /tabs %}
 
-If your packager cannot include external dependencies, pass `{ copyRuntimeDependencies: true }` to the plugin as a fallback. The plugin then copies the SDK, dd-trace-js, and their runtime dependencies into the build output on a best-effort basis.
+If your packager cannot include external dependencies, pass `{ copyRuntimeDependencies: true }` to the plugin as a fallback. The plugin then copies the SDK, `dd-trace-js`, and their runtime dependencies into the build output on a best-effort basis.
 
 [setup-bundler-1]: https://www.electronforge.io/cli#usage
 

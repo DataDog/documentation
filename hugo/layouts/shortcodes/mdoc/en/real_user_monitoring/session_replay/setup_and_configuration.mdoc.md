@@ -472,7 +472,7 @@ Session Replay for Electron records the UI of renderer processes. The Browser SD
 
 Make sure you've [set up the Electron SDK][36], including the Browser SDK in your renderer processes.
 
-### Step 2 - Enable Session Replay in the main process
+### Step 2 - Enable Session Replay in the main process {% #enable-electron %}
 
 In the main process `init` call, set `sessionReplaySampleRate` and, optionally, `defaultPrivacyLevel`:
 
@@ -661,7 +661,7 @@ final configuration = DatadogConfiguration(
 
 <!-- Electron -->
 {% if equals($platform, "electron") %}
-The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#step-2-enable-session-replay-in-the-main-process).
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See See [Step 2 - Enable Session Replay in the main process](#enable-electron).
 {% /if %}
 <!-- end Electron -->
 

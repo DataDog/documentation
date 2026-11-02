@@ -29,7 +29,7 @@ The Electron SDK collects:
 - Native crashes. The SDK stores a crash report locally and sends it the next time the application launches.
 - Errors you report manually with `addError`.
 
-Errors from renderer processes are collected by the Browser SDK. See the [renderer setup instructions][6].
+The Browser SDK collects errors from renderer processes. See the [renderer setup instructions][6].
 
 ## Setup
 

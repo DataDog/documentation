@@ -19,7 +19,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 RUM for Electron monitors both layers of your application:
 
 - The Electron SDK monitors the main process. It uses the Datadog Node.js tracer, `dd-trace-js`, to collect traces.
-- Renderer processes are monitored by the Browser SDK.
+- The Browser SDK monitors renderer processes.
 
 ## Get started
 

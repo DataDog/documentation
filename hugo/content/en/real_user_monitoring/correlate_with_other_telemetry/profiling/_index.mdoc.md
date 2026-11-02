@@ -239,7 +239,7 @@ Pages loaded from `file://` are not served with this header by default, so profi
 
 ## Explore profiling
 
-Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the browser SDK.
+Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the Browser SDK.
 
 [electron-1]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
 [electron-2]: /real_user_monitoring/application_monitoring/electron/setup/
