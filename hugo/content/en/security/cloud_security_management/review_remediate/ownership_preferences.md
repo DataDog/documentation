@@ -229,14 +229,14 @@ Custom instructions, and other fields the Ownership Agent reads as text, cannot 
 ## When preferences take effect
 
 1. You add, edit, or delete a rule on the settings page.
-2. Datadog validates and saves the full set of preferences.
+2. Datadog validates and saves the full set of preferences, and the Ownership Agent picks up the new rules automatically.
 3. On the next ownership inference run for each resource:
    - **Tag mappings** add ownership candidates based on your tag rules.
    - **Exclusions** remove unwanted owners from results.
    - **Custom instructions** guide the Ownership Agent.
 4. Updated results appear in the Cloud Security side panel for each finding.
 
-Changes take effect within **24 hours**.
+Saved rules don't change existing ownership suggestions right away. Each resource keeps its current suggestion until its next inference run.
 
 ## Troubleshooting
 
