@@ -1,6 +1,6 @@
 ---
 title: Apps
-description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
+description: Build and deploy custom Apps as code with React and backend functions, using Bits AI in App Builder, an AI coding agent, or the CLI.
 aliases:
 - /internal_developer_portal/plugins/
 further_reading:
@@ -27,7 +27,7 @@ Datadog Apps is in Preview. Use this form to request access.
 
 ## Overview
 
-With Apps, you build applications locally as code with React and TypeScript (or JavaScript), using your standard development workflow.
+With Apps, you build applications as code with React and TypeScript (or JavaScript). You can build an app in App Builder with Bits AI, or locally with your standard development workflow.
 
 Apps use the same [permissions model][1] as [App Builder apps][2]. You can also embed them in other Datadog products, such as [dashboards and the Internal Developer Portal][3].
 
@@ -35,11 +35,23 @@ Choose Apps when you need:
 
 - **Team collaboration**: Multiple engineers contributing to the same app, with code review and version history through your existing source control.
 - **Source control and CI/CD**: Store your app in GitHub and deploy automatically on merge.
-- **AI-assisted development**: Use your preferred local tooling (such as Cursor, GitHub Copilot, or Claude) to generate and refine code.
+- **AI-assisted development**: Prompt Bits AI in App Builder, or use your preferred local tooling (such as Cursor, GitHub Copilot, or Claude) to generate and refine code.
 - **Custom cloud providers and APIs**: Integrate with services beyond the [Action Catalog][4] using your own backend code.
 - **Complex UI and logic**: Full React and TypeScript control over components, state, and rendering.
 
-To build an app in Datadog without a local development environment, see [Build an app with Bits AI](#build-an-app-with-bits-ai).
+## Choose a workflow
+
+You can build an app in one of three ways:
+
+| Workflow | Where you build | How it works |
+|---|---|---|
+| [Build with Bits AI](#build-an-app-with-bits-ai) | App Builder | Describe your app in Datadog. Bits Code writes the code and opens a pull request in your GitHub repository. No local development environment required. |
+| [Build with an AI agent](#build-an-app-with-an-ai-agent) | Your local environment | Install the `datadog-app` skill in your coding agent, then prompt the agent to scaffold, develop, and upload your app. |
+| [Build with the CLI](#build-an-app-with-the-cli) | Your local environment | Run the scaffolding, development, and upload commands yourself. |
+
+All three workflows produce the same kind of app. After you upload or publish an app, you manage it the same way. See [Publish and manage your apps](#publish-and-manage-your-apps).
+
+**Note**: In the [App list][12], the **New App** menu also includes **Build with Classic**, which creates a drag-and-drop [App Builder app][2] instead of a code-based app.
 
 ## Build an app with Bits AI
 
@@ -70,13 +82,41 @@ Complete these steps before you build your first app. To view the steps in Datad
 1. Review Bits Code's changes in the **Changed Files** tab.
 1. Open a pull request with the changes, then review and merge it in GitHub. Merging the pull request triggers a GitHub Action that uploads and publishes the app.
 
-<!-- TODO(SME): Confirm how the PR gets opened (Bits Code opens it automatically, or the user asks or clicks a button). Add the Preview tab after live preview ships. -->
+After the action finishes, your app appears as **Published** in the [App list][12]. To change the app, open it, prompt Bits Code again, and merge the new pull request.
 
-While the GitHub Action runs, the editor shows **Deploying your app…**. After the action finishes, your app appears as **Published** in the [App list][12]. To change the app, open it, prompt Bits Code again, and merge the new pull request.
+<!-- **Note**: To use Bits Code with an app you built locally, push its source code to a GitHub repository that Bits Code can access. -->
 
-**Note**: To use Bits Code with an app you built locally, push its source code to a GitHub repository that Bits Code can access.
+## Build an app with an AI agent
 
-## Prerequisites
+The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
+
+With the skill installed, your agent runs the steps in [Build an app with the CLI](#build-an-app-with-the-cli) for you. Your environment needs the same [prerequisites](#prerequisites).
+
+### Install the skill
+
+{{< skill-callout
+    title="Build an app with an agent"
+    text="Install the `datadog-app` skill in your AI coding agent for guided app development."
+    action_name="copy_datadog_app_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill datadog-app --full-depth -y
+{{< /skill-callout >}}
+
+The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
+
+### Example prompts
+
+- `Scaffold a Datadog App called my-app.`
+- `Run this Datadog App locally.`
+- `Upload and publish this Datadog App.`
+- `Set up CI/CD for this Datadog App.`
+- `Troubleshoot this Datadog App authentication error.`
+- `Add a table component to this Datadog App using DRUIDS.`
+
+## Build an app with the CLI
+
+Use the CLI to scaffold, develop, and upload your app from your local environment.
+
+### Prerequisites
 
 - **Node.js version 20.12.0 or later**. Check your version:
   ```shell
@@ -90,15 +130,13 @@ While the GitHub Action runs, the editor shows **Deploying your app…**. After 
   1. Select your application key.
   1. Enable **Actions API Access**.
 
-## Scaffold an app
+### Scaffold an app
 
 1. Run the scaffolding command to create an app:
    ```shell
    npm create @datadog/apps@latest
    ```
 2. Follow the interactive prompts to configure your app name and template.
-
-### Generated app structure
 
 The scaffolded project includes:
 
@@ -109,30 +147,7 @@ The scaffolded project includes:
 | `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][9] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`, `upload`) |
 
-## Use the `datadog-app` skill
-
-The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21].
-
-### Install
-
-```shell
-npx skills add datadog-labs/agent-skills \
-  --skill datadog-app \
-  --full-depth -y
-```
-
-The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
-
-### Example prompts
-
-- `Scaffold a Datadog App called my-app.`
-- `Run this Datadog App locally.`
-- `Upload and publish this Datadog App.`
-- `Set up CI/CD for this Datadog App.`
-- `Troubleshoot this Datadog App authentication error.`
-- `Add a table component to this Datadog App using DRUIDS.`
-
-## Develop your app locally
+### Develop your app locally
 
 1. Start the development server:
    ```shell
@@ -144,7 +159,7 @@ When the dev server needs to call Datadog, such as when running a backend functi
 
 If you set both `DD_API_KEY` and `DD_APP_KEY`, the generated app uses those keys instead of OAuth.
 
-### Backend functions
+#### Backend functions
 
 Files matching `*.backend.ts` or `*.backend.js` contain backend functions. Backend functions run server-side with access to your [connections][8]. The frontend imports and calls them like standard ES modules.
 
@@ -210,7 +225,7 @@ export default App;
 ```
 {{% /collapse-content %}}
 
-### UI components
+#### UI components
 
 Use [`@datadog/druids`][23] to build your app's UI with the same React components used across Datadog products, such as tables, buttons, charts, and forms. Building with DRUIDS helps your app match the look and feel of the rest of Datadog.
 
@@ -230,7 +245,7 @@ DRUIDS requires React 18 or 19 as a peer dependency. For the set of available co
 DRUIDS components are for use in Datadog Apps and App Builder only. See the package's license for details.
 </div>
 
-## Build and upload your app
+### Build and upload your app
 
 Use `npm run build` to build the app locally without uploading it. This is the recommended default for local development, where you typically don't want to upload every build.
 
@@ -256,61 +271,7 @@ For production deployments, [set up CI/CD with GitHub Actions](#set-up-cicd-with
 
 After a successful upload, the build output displays a URL where your app is accessible in Datadog.
 
-## Publish and manage your apps
-
-After you upload an app, it appears in your [App list][12]. From the App list, you can:
-
-- [Publish your app][13]
-- [Edit the app name and description][13]
-- Manage [permissions][14]
-- [Embed the app][3] in dashboards, notebooks, and the Internal Developer Portal
-
-<div class="alert alert-danger">
-The following features are not available for locally-built apps:
-<ul>
-<li>UI editing with drag-and-drop components</li>
-<li>Variables, events, and expressions managed in the App Builder UI</li>
-</ul>
-To change an app's UI or logic, update the code in your local project and re-upload.
-</div>
-
-## Share embedded app state with deep links
-
-When an app is [embedded][3], its URL state mirrors into the host page's URL. This includes routes, tabs, hash values, and query parameters. Copying and sharing that host URL opens the app to the same in-app state.
-
-Deep links are automatically supported with the `DatadogAppProvider` wrapper. If deep links don't work in your app, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
-
-```shell
-npm install @datadog/apps-frontend@latest
-```
-
-```tsx
-import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
-
-function App() {
-  return (
-    <DatadogAppProvider>
-      {/* your app */}
-    </DatadogAppProvider>
-  );
-}
-```
-
-No other code changes are required. Any `history.pushState`, `history.replaceState`, or hash navigation in the app mirrors into the host page's URL automatically.
-
-To turn off deep links, pass the `datadog.deep-links` module to `disabledModules`:
-
-```tsx
-<DatadogAppProvider disabledModules={['datadog.deep-links']}>
-  {/* your app */}
-</DatadogAppProvider>
-```
-
-<div class="alert alert-info">
-Deep links capture only state stored in the app's URL. They do not capture React component state or data in local storage.
-</div>
-
-## Set up CI/CD with GitHub Actions
+### Set up CI/CD with GitHub Actions
 
 To automatically upload your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][11] GitHub Action. This action builds your app and uploads it to Datadog.
 
@@ -363,6 +324,60 @@ jobs:
           datadog-app-key: ${{ secrets.DATADOG_APP_KEY }}
           app-directory: .
 ```
+
+## Publish and manage your apps
+
+After you upload an app, it appears in your [App list][12]. From the App list, you can:
+
+- [Publish your app][13]
+- [Edit the app name and description][13]
+- Manage [permissions][14]
+- [Embed the app][3] in dashboards, notebooks, and the Internal Developer Portal
+
+<div class="alert alert-danger">
+The following features are not available for Datadog Apps, including apps built with Bits AI:
+<ul>
+<li>UI editing with drag-and-drop components</li>
+<li>Variables, events, and expressions managed in the App Builder UI</li>
+</ul>
+To change an app's UI or logic, update its code and re-upload, or prompt Bits Code and merge the pull request.
+</div>
+
+## Share embedded app state with deep links
+
+When an app is [embedded][3], its URL state mirrors into the host page's URL. This includes routes, tabs, hash values, and query parameters. Copying and sharing that host URL opens the app to the same in-app state.
+
+Deep links are automatically supported with the `DatadogAppProvider` wrapper. If deep links don't work in your app, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
+
+```shell
+npm install @datadog/apps-frontend@latest
+```
+
+```tsx
+import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
+
+function App() {
+  return (
+    <DatadogAppProvider>
+      {/* your app */}
+    </DatadogAppProvider>
+  );
+}
+```
+
+No other code changes are required. Any `history.pushState`, `history.replaceState`, or hash navigation in the app mirrors into the host page's URL automatically.
+
+To turn off deep links, pass the `datadog.deep-links` module to `disabledModules`:
+
+```tsx
+<DatadogAppProvider disabledModules={['datadog.deep-links']}>
+  {/* your app */}
+</DatadogAppProvider>
+```
+
+<div class="alert alert-info">
+Deep links capture only state stored in the app's URL. They do not capture React component state or data in local storage.
+</div>
 
 ## Troubleshooting
 
