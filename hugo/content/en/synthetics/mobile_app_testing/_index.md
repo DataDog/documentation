@@ -173,7 +173,7 @@ Routed locations for mobile app tests are in Preview. To request access, contact
 
 Use routed locations to test your mobile app as if the device were in another country. They're useful when your mobile app only works in a specific country, or to see how it behaves for users in other regions.
 
-With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select, so your mobile app sees the device as being in that country.
+With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select. Your mobile app sees the device as being in that country.
 
 A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's:
 
