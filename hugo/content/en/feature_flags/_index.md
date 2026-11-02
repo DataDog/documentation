@@ -67,10 +67,11 @@ Feature Flags telemetry includes exposure events, flag evaluation metrics, and o
 
 ## Automate feature flag events
 
-Use [Feature Flag automations](/feature_flags/automations/) to run workflows when flags are created, enabled, disabled, or archived, and when rollouts, approvals, or targeting rules change. For example, send a notification when a rollout pauses or a flag is disabled.
+Use [Feature Flags automations][2] to run workflows when flags are created, enabled, disabled, or archived, and when rollouts, approvals, or targeting rules change. For example, send a notification when a rollout pauses or a flag is disabled.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/configuration_sources/
+[2]: /feature_flags/concepts/workflow_automation/
