@@ -10,9 +10,14 @@ further_reading:
 - link: "synthetics/private_locations/dimensioning"
   tag: "Documentation"
   text: "Dimension your private locations"
+- link: "synthetics/platform/private_locations/network_security"
+  tag: "Documentation"
+  text: "Private Location Network Security Hardening"
 ---
 
 ## Overview
+
+<div class="alert alert-warning">Private locations do not restrict outbound network access by default. To restrict access, see <a href="/synthetics/platform/private_locations/network_security">Private Location Network Security Hardening</a>.</div>
 
 Synthetic private locations come with a set of options you can configure to match your environment requirements. All options for the [private location worker][1] can be found by running the `help` command:
 
@@ -145,6 +150,14 @@ Maximum duration for API test execution, in milliseconds. Default is one minute 
 
 **Note**: Private Location containers output logs to `stdout` and `stderr` without saving them within the container.
 
+### Network security configuration
+
+By default, a private location can reach any network address that its host can reach. Restrict egress with the following options:
+
+`allowedIPRanges`, `blockedIPRanges`, `enableDefaultBlockedIpRanges`, `allowedDomainNames`, `blockedDomainNames`
+
+Datadog recommends that you set `enableDefaultBlockedIpRanges` to `true` and allow only the addresses that your tests need. For recommended settings and examples, see [Private Location Network Security Hardening][6].
+
 ## All configuration options
 
 `--accessKey`
@@ -256,27 +269,27 @@ Retry any error in API tests
 `--allowedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Grant access to specific IPs and/or CIDR among IP ranges blocked through `--enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`.
+Grant access to specific IPs and/or CIDR among IP ranges blocked through `--enableDefaultBlockedIpRanges` or `blockedIPRanges` (for example, `"allowedIPRanges.4": "10.0.0.0/8"`). **Note:** `allowedIPRanges` has precedence over `blockedIPRanges`. See [Private Location Network Security Hardening][6].
 
 `--blockedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `--enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.) An allowed domain name, set with the `--allowedDomainNames` parameter, bypasses the IP ranges blocked by `--blockedIPRanges`.
+Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `--enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.) An allowed domain name, set with the `--allowedDomainNames` parameter, bypasses the IP ranges blocked by `--blockedIPRanges`. See [Private Location Network Security Hardening][6].
 
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. Configuration files generated for new private locations set this parameter to `true`.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. Configuration files generated for new private locations set this parameter to `true`. See [Private Location Network Security Hardening][6].
 
 `--allowedDomainNames`
 : **Type**: Array <br>
 **Default**: `none`<br>
-Grant access to domain names in test. Has precedence over `--blockedDomainNames`, for example: `--allowedDomainNames="*.example.com"`. Domain names match the full hostname and support the `*` wildcard. An allowed domain name bypasses the IP blocklist, including the reserved IP ranges blocked by `--enableDefaultBlockedIpRanges`.
+Grant access to domain names in test. Has precedence over `--blockedDomainNames`, for example: `--allowedDomainNames="*.example.com"`. Domain names match the full hostname and support the `*` wildcard. An allowed domain name bypasses the IP blocklist, including the reserved IP ranges blocked by `--enableDefaultBlockedIpRanges`. See [Private Location Network Security Hardening][6].
 
 `--blockedDomainNames`
 : **Type**: Array <br>
 **Default**: `none`<br>
-Deny access to domain names in tests, for example: `--blockedDomainNames="example.org" --blockedDomainNames="*.com"`.
+Deny access to domain names in tests, for example: `--blockedDomainNames="example.org" --blockedDomainNames="*.com"`. See [Private Location Network Security Hardening][6].
 
 `--enableIPv6`
 : **Type**: Boolean <br>
@@ -323,3 +336,4 @@ Command options can also be set using environment variables such as `DATADOG_API
 [3]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
 [4]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [5]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[6]: /synthetics/platform/private_locations/network_security
