@@ -61,7 +61,7 @@ You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces, Experiments, Datasets, Annotation Queues, and Evaluator Configs
+- Agent Observability traces, Experiments, Datasets, Annotation Queues, Evaluator Configs, and managed prompts
 - APM traces
 - Cloud costs
 - Custom metrics
@@ -160,7 +160,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * Traces, using any tag.
   * Experiments, Datasets, and Annotation Queues, restricted by project. An `ml_app` filter set to a project ID hides that project and its experiments, datasets, dataset records, spans, evaluation metrics, and annotation queues from list views, search, and direct links. An annotation queue that does not belong to a project cannot be restricted. See [Data Access Control in Agent Observability][14].
   * Evaluator Configs, restricted by application. An `ml_app` filter set to an application name prevents users outside the granted teams or roles from viewing, editing, or creating evaluator configs that target that application. Filters on other tag keys do not restrict evaluator configs. See [Data Access Control in Agent Observability][14].
-* **Not supported**: Managed prompts.
+  * Managed prompts, restricted by application. An `ml_app` filter set to an application name prevents users outside the granted teams or roles from accessing or modifying managed prompts associated with that application. Prompts created directly in Prompt Management have no application association and cannot be restricted. See [Data Access Control in Agent Observability][14].
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
@@ -288,4 +288,4 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/
-[14]: /llm_observability/improve/access_control/
+[14]: /llm_observability/data_governance/access_control/

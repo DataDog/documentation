@@ -1,0 +1,30 @@
+---
+// Markdoc's `heading` node renders through this component. @astrojs/markdoc
+// still generates the id and passes it in with the level.
+import styles from "./Heading.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+interface Props {
+  id: string;
+  level: number;
+}
+
+const { id, level } = Astro.props;
+const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+// Link h2–h5 to their own anchor so readers can copy a link to the
+// section; h1 and h6 stay plain.
+const linked = level >= 2 && level <= 5;
+const cl = classListFactory(styles);
+---
+
+<Tag id={id}>
+  {
+    linked ? (
+      <a class={cl("heading__link")} href={`#${id}`}>
+        <slot />
+      </a>
+    ) : (
+      <slot />
+    )
+  }
+</Tag>
