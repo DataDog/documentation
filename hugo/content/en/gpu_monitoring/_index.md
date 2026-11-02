@@ -57,7 +57,7 @@ View your entire fleet's size and spend across hyperscalers, on-premises, and ne
 Analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) by host, node, or pod over time to understand how your devices affect model and application performance.
 
 - Troubleshoot stalled workloads with shared context for both platform and ML teams instead of switching between siloed tools.
-- Pinpoint why workloads are slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
+- Identify whether workload slowdowns are caused by unhealthy hardware, communication bottlenecks, memory bandwidth limitations, or scheduling issues.
 - Detect bottlenecks in your training and inference workloads with lightweight, continuous tracing.
 - Discover recommendations on the optimizations that produce the largest throughput improvements.
 
