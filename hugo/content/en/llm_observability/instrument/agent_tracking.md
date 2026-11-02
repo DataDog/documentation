@@ -45,7 +45,7 @@ Spans with no `agent` ancestor are not attributed.
 | SDK | Minimum version |
 |-----|-----------------|
 | Python | `dd-trace` v4.13.0 |
-| Node.js | `dd-trace` TBD |
+| Node.js | `dd-trace` v5.121.0 or v6.10.0 |
 | Java | `dd-trace-java` v1.66.0 |
 
 ### Agent version
@@ -73,7 +73,7 @@ with LLMObs.annotation_context(agent={"version": "v2"}):
 A version set with `annotate()` after the agent has started only reaches spans started after the call.
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Requires `dd-trace` TBD.
+Requires `dd-trace` v5.134.0+ or v6.23.0+.
 
 ```javascript
 const { llmobs } = require('dd-trace')
@@ -133,7 +133,7 @@ with LLMObs.agent(name="travel_planner") as span:
 ```
 {{% /tab %}}
 {{% tab "Node.js" %}}
-Requires `dd-trace` TBD.
+Requires `dd-trace` v5.132.0+ or v6.21.0+.
 
 ```javascript
 llmobs.trace({ kind: 'agent', name: 'travel_planner' }, () => {
