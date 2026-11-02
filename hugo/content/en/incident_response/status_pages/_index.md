@@ -419,7 +419,7 @@ Then, from a published page with Microsoft Teams subscriptions enabled:
 
 1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
 1. Click **Subscribe**.
-   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_subscription_modal.png" alt="Subscribe To Updates modal with the Microsoft Teams tab selected, a Microsoft Teams URL field, and a Subscribe button" style="width:70%;" >}}
+   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_subscription_modal.png" alt="Subscribe to Updates modal with the Microsoft Teams tab selected, a Microsoft Teams URL field, and a Subscribe button" style="width:70%;" >}}
 
 After subscribing, a confirmation message appears.
 
