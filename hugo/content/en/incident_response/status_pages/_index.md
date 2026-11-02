@@ -421,8 +421,6 @@ Feeds are available on public status pages only.
 1. Enable **RSS feed**.
 1. Click **Save Settings**.
 
-You can also set the `rss_feed_enabled` attribute with the [Status Pages API][5] or the [Datadog Terraform provider][4].
-
 ### Feed URLs
 
 After the page is published, its feeds are served at the following paths:
