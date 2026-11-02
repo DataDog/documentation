@@ -170,7 +170,7 @@ Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], you
 
 [AWS service quotas][62] cap how much of a service an account can use in a region. Service quota monitoring reports how much of each quota an account is consuming in the metric `aws.servicequota.percentage_used`, so you can alert before a quota is reached instead of after a request is throttled or rejected.
 
-Under the {{< ui >}}General{{< /ui >}} tab on the [AWS integration page][8], select an account and enable {{< ui >}}Enable service quota tracking{{< /ui >}}. The toggle is unavailable until resource collection is enabled for that account.
+On the [AWS integration page][8], on the {{< ui >}}General{{< /ui >}} tab, select an account and turn on {{< ui >}}Enable service quota tracking{{< /ui >}}. The toggle is only available if resource collection is enabled for that account.
 
 <div class="alert alert-info">
 Service quota monitoring calls the CloudWatch <code>GetMetricData</code> API every 30 minutes in each enabled region. AWS bills these calls to your account.

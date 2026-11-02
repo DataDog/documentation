@@ -17,25 +17,23 @@ further_reading:
 
 [AWS service quotas][1] cap how much of a service an account can use in a region. Service quota monitoring reports how much of each quota an account is consuming, so you can alert before a quota is reached instead of after a request is throttled or rejected.
 
-Datadog collects the applied quota limits for the account, reads the matching AWS usage metrics from CloudWatch, and reports usage as a percentage of the limit in the metric `aws.servicequota.percentage_used`. Because the limits come from resource collection and the usage comes from CloudWatch, both must be enabled for the account.
+Datadog collects the applied quota limits for the account, reads the matching AWS usage metrics from CloudWatch, and reports usage as a percentage of the limit in the metric `aws.servicequota.percentage_used`. The limits come from resource collection, so resource collection must be enabled for the account.
 
 ## Setup
 
-1. Go to the **General** tab on the [AWS integration page][2] and select an AWS account.
-1. Make sure resource collection is enabled for that account. The service quota toggle is unavailable until it is.
-1. Turn on **Enable service quota tracking**.
+1. In Datadog, go to the [AWS integration page][2], click the {{< ui >}}General{{< /ui >}} tab, and select an AWS account.
+1. Verify that resource collection is enabled for the account. The {{< ui >}}Enable service quota tracking{{< /ui >}} toggle is only available if resource collection is enabled.
+1. Turn on {{< ui >}}Enable service quota tracking{{< /ui >}}.
 
 <div class="alert alert-info">
 Service quota monitoring calls the CloudWatch <code>GetMetricData</code> API every 30 minutes in each enabled region. AWS bills these calls to your account.
 </div>
 
-Quota limits are collected on a separate schedule from usage, so a newly enabled account reports usage percentages before its limits are available.
+Datadog collects quota limits on a separate schedule from usage, so a newly enabled account reports usage percentages before its limits are available.
 
 ## Data collected
 
-Quota limits are collected for every AWS service that reports quotas for your account.
-
-Usage percentages are reported for a smaller set of services, identified by the `service_code` tag:
+Datadog collects quota limits for every AWS service that reports quotas for your account. It reports usage percentages for a smaller set of services, identified by the `service_code` tag:
 
 | Service | `service_code` |
 | --- | --- |
@@ -53,15 +51,15 @@ Usage percentages are reported for a smaller set of services, identified by the 
 
 The out-of-the-box [AWS Service Quota Usage][6] dashboard shows this data for your accounts, filterable by service, region, account, and whether the quota can be raised. Clone it to add your own widgets.
 
-**Note**: AWS does not publish a usage metric for every quota, so a percentage is only reported for quotas that have one. Quotas without a usage metric, and quotas for services outside this list, still have their limits collected.
+**Note**: AWS does not publish a usage metric for every quota, so Datadog reports a percentage only for quotas that have one. Quotas without a usage metric, and quotas for services outside this list, still have their limits collected.
 
 ## Query quota limits
 
-`aws.servicequota.percentage_used` reports how close an account is to a quota, but not the limit value itself, and it only covers the services listed above. The applied limits for every quota collected for your account are available in the [DDSQL Editor][5], where you can query them and save the result to a dashboard.
+`aws.servicequota.percentage_used` reports how close an account is to a quota, but not the limit value itself. It also covers only the services listed in the [Data collected](#data-collected) section. To see the applied limits for every quota collected for your account, query them in the [DDSQL Editor][5], and optionally save the results to a dashboard.
 
-1. Go to the [DDSQL Editor][5] and enter the following query. Replace `ACCOUNT_ID` with your AWS account ID and `SERVICE_CODE` with a service, such as `ec2`:
+1. Go to the [DDSQL Editor][5] and enter the following query. Replace `<ACCOUNT_ID>` with your AWS account ID and `<SERVICE_CODE>` with a service, such as `ec2`:
 
-{{< code-block lang="sql" >}}
+   {{< code-block lang="sql" >}}
 SELECT
   CASE
     WHEN q.global_quota OR split_part(q.quota_arn, ':', 4) = '' THEN 'GLOBAL'
@@ -82,34 +80,32 @@ LEFT JOIN dd.metrics_scalar(
   AND u.tags->'service_code' = q.service_code
   AND u.tags->'quota_code'   = lower(q.quota_code)
   AND u.tags->'region'       = split_part(q.quota_arn, ':', 4)
-WHERE q.account_id   = 'ACCOUNT_ID'
-  AND q.service_code = 'SERVICE_CODE'
+WHERE q.account_id   = '<ACCOUNT_ID>'
+  AND q.service_code = '<SERVICE_CODE>'
 ORDER BY
   percent_used DESC NULLS LAST,
   region,
   q.quota_name
 LIMIT 100
-{{< /code-block >}}
+   {{< /code-block >}}
 
-1. Click **Run** to check the results, then click **Save** to save the query.
-1. Click **Save to dashboard** and choose the dashboard to add it to.
+1. Click {{< ui >}}Run{{< /ui >}} to check the results, then click {{< ui >}}Save{{< /ui >}} to save the query.
+1. Click {{< ui >}}Save to dashboard{{< /ui >}} and choose the dashboard to add it to.
 1. Select the columns to display in the widget.
 
 Each row is one quota in one region, with the limit Datadog collected, the percentage of that limit in use, and whether the quota can be raised. The quotas closest to their limit are listed first.
 
-**Note**: The query returns one row per quota per region, and most accounts have more quotas than the `LIMIT` returns. Sort by `percent_used` as shown, or add a region to the `WHERE` clause, rather than ordering by region alone, which returns only the first region.
+**Note**: The query returns one row per quota per region, and most accounts have more quotas than the 100-row `LIMIT`. Keep the default sort by `percent_used`, or add a region to the `WHERE` clause. Sorting by region alone returns quotas from only the first region.
 
-To see every service for the account, remove the `q.service_code` line from the `WHERE` clause. To look up a single quota across all regions, replace it with a quota code, such as `AND q.quota_code = 'L-1216C47A'`.
-
-**Note**: `quota_code` values are uppercase, such as `L-1216C47A`, and comparisons are case-sensitive. The query lowercases the code when joining to the metric, because Datadog converts metric tag values to lowercase.
+To see every service for the account, remove the `AND q.service_code = '<SERVICE_CODE>'` line from the `WHERE` clause. To look up a single quota across all regions, replace that line with a quota code filter, such as `AND q.quota_code = 'L-1216C47A'`. These comparisons are case-sensitive, and `quota_code` values are uppercase. The query lowercases the code when joining to the metric, because Datadog converts metric tag values to lowercase.
 
 Note the following about the results:
 
-- **`region`** is read from the quota ARN, because quotas are stored per region rather than with a region column. Quotas that apply to the whole account, such as most IAM quotas, are reported as `GLOBAL`.
+- **`region`** is derived from the quota ARN. Quotas that apply to the whole account, such as most IAM quotas, are reported as `GLOBAL`.
 - **`percent_used`** is empty when AWS publishes no usage metric for that quota. The limit is still accurate; only the percentage is unavailable.
 - **`limit_value`** is in the unit AWS reports for that quota, which is a plain count for most quotas and a size or a rate for the rest. Units are not comparable between quotas, so avoid ranking unrelated quotas by this value alone. A limit of `9999999` means AWS treats the quota as effectively unlimited for that account.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
