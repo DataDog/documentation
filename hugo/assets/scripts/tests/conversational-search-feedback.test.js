@@ -237,6 +237,100 @@ describe('thumbs and comments', () => {
         expect(form()).toBeNull();
     });
 
+    it('blocks vote changes while a comment is sending and preserves a failed submission', async () => {
+        const { sendFeedback, answer } = controlledSender();
+        const { thumb, click, form } = renderActions(sendFeedback);
+        click('thumbs-down');
+        await answer();
+
+        type(form(), 'Keep this feedback for retry.');
+        const chip = form().querySelector('[data-reason="sources"]');
+        chip.click();
+        const pendingForm = form();
+        submit(pendingForm);
+
+        expect(thumb('thumbs-up').disabled).toBe(true);
+        expect(thumb('thumbs-down').disabled).toBe(true);
+        click('thumbs-up');
+        submit(pendingForm);
+        expect(sendFeedback).toHaveBeenCalledTimes(2);
+
+        await answer(false);
+        expect(form()).toBe(pendingForm);
+        expect(form().querySelector('textarea').value).toBe('Keep this feedback for retry.');
+        expect(chip.getAttribute('aria-pressed')).toBe('true');
+        expect(form().querySelector('.conv-search-feedback-form-error').hidden).toBe(false);
+        expect(thumb('thumbs-up').disabled).toBe(false);
+        expect(thumb('thumbs-down').classList.contains('active')).toBe(true);
+
+        submit(form());
+        await answer();
+        expect(form()).toBeNull();
+        expect(thumb('thumbs-up').disabled).toBe(false);
+    });
+
+    it('blocks form actions while a vote change is pending and restores them on failure', async () => {
+        const { sendFeedback, answer } = controlledSender();
+        const { click, form } = renderActions(sendFeedback);
+        click('thumbs-down');
+        await answer();
+        type(form(), 'Keep the draft.');
+        form().querySelector('[data-reason="incomplete"]').click();
+        const pendingForm = form();
+
+        click('thumbs-up');
+        expect([...pendingForm.querySelectorAll('button, textarea')].every((control) => control.disabled)).toBe(true);
+        submit(pendingForm);
+        pendingForm.querySelector('.conv-search-feedback-dismiss').click();
+        expect(sendFeedback).toHaveBeenCalledTimes(2);
+        expect(form()).toBe(pendingForm);
+
+        await answer(false);
+        expect(form()).toBe(pendingForm);
+        expect(form().querySelector('textarea').value).toBe('Keep the draft.');
+        expect(form().querySelector('[data-reason="incomplete"]').getAttribute('aria-pressed')).toBe('true');
+        expect([...pendingForm.querySelectorAll('button, textarea')].every((control) => !control.disabled)).toBe(true);
+        submit(form());
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete'], comment: 'Keep the draft.' });
+        await answer();
+    });
+
+    it('keeps an empty form send button disabled after a failed vote change', async () => {
+        const { sendFeedback, answer } = controlledSender();
+        const { click, form } = renderActions(sendFeedback);
+        click('thumbs-down');
+        await answer();
+
+        click('thumbs-up');
+        await answer(false);
+        expect(form().querySelector('.conv-search-feedback-send').disabled).toBe(true);
+        expect(form().querySelector('textarea').disabled).toBe(false);
+    });
+
+    it('locks only the answer whose feedback is pending', async () => {
+        const first = controlledSender();
+        const second = controlledSender();
+        const { click, form } = renderActions(first.sendFeedback);
+        const otherMessage = document.createElement('div');
+        document.body.appendChild(otherMessage);
+        addMessageActions(otherMessage, 'another question', 'another answer', {
+            conversationId: 'c1', sendFeedback: second.sendFeedback
+        });
+        click('thumbs-down');
+        await first.answer();
+        type(form(), 'First answer feedback.');
+        submit(form());
+
+        const otherThumb = otherMessage.querySelector('[data-action="thumbs-up"]');
+        expect(otherThumb.disabled).toBe(false);
+        otherThumb.click();
+        expect(second.sendFeedback).toHaveBeenCalledWith({ rating: 'up' });
+        await second.answer();
+        expect(otherThumb.classList.contains('active')).toBe(true);
+        await first.answer(false);
+        expect(form().querySelector('textarea').value).toBe('First answer feedback.');
+    });
+
     it('withdraws the comment form after a recorded thumbs-up', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form } = renderActions(sendFeedback);

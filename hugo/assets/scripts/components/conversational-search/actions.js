@@ -132,14 +132,30 @@ function markRating(button, positive, response, ctx) {
     }, ctx);
 }
 
-// A rating counts only once the API has recorded it; until then both thumbs wait, and a failure leaves them as they were.
+// A vote change must not remove a form whose feedback request is still pending.
+function lockFeedback(actionsDiv) {
+    if (actionsDiv.getAttribute('aria-busy') === 'true') return null;
+    const next = actionsDiv.nextElementSibling;
+    const form = next?.classList.contains('conv-search-feedback-form') ? next : null;
+    const controls = [
+        ...actionsDiv.querySelectorAll('[data-action="thumbs-up"], [data-action="thumbs-down"]'),
+        ...(form?.querySelectorAll('button, textarea') || [])
+    ].map((control) => [control, control.disabled]);
+    controls.forEach(([control]) => { control.disabled = true; });
+    actionsDiv.setAttribute('aria-busy', 'true');
+    return () => {
+        controls.forEach(([control, disabled]) => { control.disabled = disabled; });
+        actionsDiv.removeAttribute('aria-busy');
+    };
+}
+
+// Confirm a rating only after the API accepts it; failures leave the previous selection intact.
 async function submitRating(button, positive, response, ctx) {
     const actionsDiv = button.parentElement;
-    const thumbs = actionsDiv.querySelectorAll('[data-action="thumbs-up"], [data-action="thumbs-down"]');
-    thumbs.forEach((thumb) => { thumb.disabled = true; });
+    const unlock = lockFeedback(actionsDiv);
+    if (!unlock) return;
     clearFeedbackTooltip(button);
     button.classList.add('is-pending');
-    actionsDiv.setAttribute('aria-busy', 'true');
 
     let sent = false;
     try {
@@ -148,9 +164,8 @@ async function submitRating(button, positive, response, ctx) {
     } catch (error) {
         showFeedbackTooltip(button, "Couldn't send feedback. Try again.", true);
     } finally {
-        thumbs.forEach((thumb) => { thumb.disabled = false; });
         button.classList.remove('is-pending');
-        actionsDiv.removeAttribute('aria-busy');
+        unlock();
     }
     if (!sent) return;
 
@@ -220,14 +235,6 @@ function showCommentForm(actionsDiv, ctx) {
     form.append(title, reasons, field, error, buttons);
 
     const hasFeedback = () => selectedReasons().length > 0 || Boolean(field.value.trim());
-    let sending = false;
-    const setSending = (value) => {
-        sending = value;
-        [field, dismiss, ...chips].forEach((control) => { control.disabled = value; });
-        send.disabled = value || !hasFeedback();
-        send.textContent = value ? 'Sending\u2026' : 'Send';
-    };
-
     chips.forEach((chip) => chip.addEventListener('click', () => {
         chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
         send.disabled = !hasFeedback();
@@ -238,19 +245,23 @@ function showCommentForm(actionsDiv, ctx) {
     dismiss.addEventListener('click', () => form.remove());
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        if (sending || !hasFeedback()) return;
+        if (!hasFeedback()) return;
+        const unlock = lockFeedback(actionsDiv);
+        if (!unlock) return;
         const comment = field.value.trim();
         const picked = selectedReasons();
         error.hidden = true;
-        setSending(true);
+        send.textContent = 'Sending\u2026';
         try {
             await ctx.sendFeedback({ ...(picked.length && { reasons: picked }), ...(comment && { comment }) });
         } catch (err) {
-            setSending(false);
             error.textContent = "Couldn't send your feedback. Try again.";
             error.hidden = false;
             form.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
             return;
+        } finally {
+            unlock();
+            send.textContent = 'Send';
         }
         logAction('Conversational Search Feedback Comment', {
             conversational_search: {
