@@ -19,6 +19,8 @@ The Ownership Agent infers an owner for cloud resources with security findings, 
 - **Exclusions** prevent an owner from ever being suggested.
 - **Custom instructions** give the Ownership Agent organization-specific context in plain text.
 
+{{< img src="security/csm/ownership_preferences.png" alt="The Ownership preferences section of the Ownership Agent settings page, with the Tag mappings, Exclusions, and Custom instructions panels" width="100%">}}
+
 ## Manage ownership preferences
 
 To add, edit, or delete preferences, you need the **Security Monitoring Findings Write** permission.
