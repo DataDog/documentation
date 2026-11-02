@@ -296,9 +296,9 @@ Learn more about [Metrics without Limits™][2].
 
 Administrative users (those with [Datadog Admin roles][7]) can see the monthly average number of **ingested** and **indexed** custom metrics per hour. The top custom metrics table also lists the average number of **indexed** custom metrics on the [usage details page][8]. See the [Usage Details][9] documentation for more information.
 
-For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Catalog page][10]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
+For more real-time tracking of the count of custom metrics for a particular metric name, click the metric name on the [Metrics Catalog page][10]. You can view the number of **ingested** custom metrics and **indexed** custom metrics in the metric's details side panel.
 
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="Metrics Catalog sidepanel" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_3142025.jpg" alt="Metric details side panel on the Metrics Catalog page showing ingested and indexed custom metrics." style="width:80%;">}}
 
 
 ## Allocation

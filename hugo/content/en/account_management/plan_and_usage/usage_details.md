@@ -170,7 +170,7 @@ For billing questions, contact your [Customer Success][10] Manager.
 [4]: /metrics/custom_metrics/
 [5]: https://app.datadoghq.com/billing/usage
 [6]: https://docs.datadoghq.com/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[7]: https://docs.datadoghq.com/metrics/catalog/#overview
+[7]: /metrics/catalog/#overview
 [8]: https://docs.datadoghq.com/logs/archives/rehydrating/?tab=awss3#overview
 [9]: /help/
 [10]: mailto:success@datadoghq.com

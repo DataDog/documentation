@@ -86,7 +86,7 @@ Individual teams might have limited insights into the costs of the metrics and t
 <div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 <!-- TODO(screenshot): Recapture to show the "See in Metrics Catalog" icon label in the Plan & Usage custom metrics table. -->
-{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navigate to the Metrics Catalog from the Plan & Usage page through the Top Custom Metrics table" style="width:90%;" >}}
+{{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="The Top Custom Metrics table on the Plan & Usage page, with an icon that opens a metric in the Metrics Catalog." style="width:90%;" >}}
 
 To identify which team or service is responsible for your top custom metric names:
 
@@ -99,13 +99,13 @@ To identify which team or service is responsible for your top custom metric name
 
 All teams should have visibility into which metrics are driving their bill spikes in real-time and feel confident that their cost optimization efforts do not impact another team's visibility.
 
-To see all actively reporting metric names submitted by your team, go to the [Metrics Catalog page][6], type in the tag key value pair (for example, `team:dev` or `service:demo`) in the {{< ui >}}Filter by Tag Value{{< /ui >}} field.
+To see all actively reporting metric names submitted by your team, go to the [Metrics Catalog page][6] and enter a tag `key:value` pair (for example, `team:dev` or `service:demo`) in the {{< ui >}}Tag{{< /ui >}} search field.
 
 #### Identify any team's metrics that have the biggest impact on your bill
 
-All users in your organization can see OOTB realtime estimated custom metrics usage in the usage graphs on the [Metrics Catalog page][6]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™ to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
+All users in your organization can see out-of-the-box, real-time estimated custom metrics usage in the usage graphs on the [Metrics Catalog page][6]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™ to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
 
-On the Metrics Catalog page, sort the metrics table by volume to identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
+On the Metrics Catalog page, sort the metrics table by volume to identify your organization's largest metrics as well as the metric names spiking in volume (likely causes of any unexpected overage).
 
 <!-- TODO(screenshot): Replace with a Metrics Catalog screenshot, and update the alt text. -->
 {{< img src="metrics/guide/custom_metrics_governance/volume_management_page_2025-01-27.png" alt="Metrics Volume Management page" style="width:90%;" >}}
@@ -169,7 +169,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 3. Find the {{< ui >}}Tag Configuration{{< /ui >}} facet on the left side, and select {{< ui >}}All Tags{{< /ui >}}. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
 
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
-5. (Optional) To export this list, click the download icon ({{< ui >}}Download as CSV{{< /ui >}}) above the metric table.
+5. (Optional) To export this list, click the download icon ({{< ui >}}Download as CSV{{< /ui >}}) next to {{< ui >}}Columns{{< /ui >}} above the metrics table.
 
    After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics.
 
@@ -222,7 +222,7 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 
 ## Summary of best practices
 
-1. Start by identifying your largest metric names (your Top Custom Metrics table or the Metrics Catalog page), begin using Metrics without Limits™ to optimize these top metrics to the most cost-effective volume. 
+1. Start by identifying your largest metric names in your Top Custom Metrics table or on the Metrics Catalog page. Then use Metrics without Limits™ to optimize these top metrics to the most cost-effective volume.
 2. Use the Metrics Catalog page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
 3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
 4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.

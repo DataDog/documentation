@@ -20,7 +20,7 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ lets you configure tags on all metric types in-app by selecting an allowlist of tags to remain queryable throughout Datadog; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Catalog][1] page.
+Metrics without Limits™ lets you configure tags on all metric types in-app by selecting an allowlist of tags to remain queryable throughout Datadog; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. You can configure both on the [Metrics Catalog page][1].
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
@@ -63,6 +63,8 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 ### Configure multiple metrics at a time
 
 To configure tags on multiple metrics, such as all metrics in a namespace, use [Tag Indexing Rules][16]. Tag Indexing Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+
+To manage Tag Indexing Rules programmatically, use the [Tag Indexing Rules API][17].
 
 ## Metrics without Limits™ billing
 
@@ -130,3 +132,4 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 [12]: https://app.datadoghq.com/event/stream
 [15]: /account_management/billing/metric_name_pricing/
 [16]: /metrics/guide/tag-indexing-rules/
+[17]: /api/latest/metrics/#create-a-tag-indexing-rule

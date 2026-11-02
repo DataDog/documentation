@@ -184,7 +184,7 @@ Add additional layers of aggregation on the results of existing queries in time 
 
 ### View real-time information about metrics
 
-The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
+The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog under a specified time frame. You can filter metrics by metric name or tag.
 
 Click on any metric name to display a details sidepanel with more detailed information. The details sidepanel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
