@@ -41,7 +41,7 @@ Use this procedure when temporary ingestion and search failures are acceptable.
 3. Wait for the rollout to finish. During the rollout, nodes with different cluster IDs cannot communicate, which can interrupt ingestion and search.
 4. Verify that all pods are ready and that ingestion and search have recovered.
 
-## Rename gracefully
+## Rename without downtime
 
 Use `config.extra_cluster_ids` to allow nodes with the old and new cluster IDs to communicate during the rename. These aliases apply only to communication between nodes; they do not preserve the old Datadog index names. Complete each rollout before starting the next one.
 
