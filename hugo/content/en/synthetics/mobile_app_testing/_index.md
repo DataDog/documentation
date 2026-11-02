@@ -171,9 +171,9 @@ Choose the locations your test runs from and the devices it runs on:
 Routed locations for mobile app tests are in Preview. To request access, contact your Datadog account team.
 {{< /callout >}}
 
-Use routed locations to test your app as if the device were in another country. They're useful when your app only works in a specific country, or to see how it behaves for users in other regions.
+Use routed locations to test your mobile app as if the device were in another country. They're useful when your mobile app only works in a specific country, or to see how it behaves for users in other regions.
 
-With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select, so your app sees the device as being in that country.
+With a routed location, the device stays in a Datadog-hosted region. Its network traffic goes out through an IP address in the country you select, so your mobile app sees the device as being in that country.
 
 A routed location changes anything that depends on the device's IP address, such as geofencing checks and content delivery network (CDN) selection. It doesn't change the device's:
 
@@ -186,7 +186,7 @@ Routed locations also don't simulate network conditions, such as a slow 3G conne
 Tests that use routed locations work the same way as tests on physical locations:
 
 - **Mix locations**: Select routed locations on their own or together with physical locations.
-- **Record**: The recorder offers the locations selected on the test. Check how your app behaves in a routed location before you save your steps.
+- **Record**: The recorder offers the locations selected on the test. Check how your mobile app behaves in a routed location before you save your steps.
 - **Run**: Run the test on a schedule, with {{< ui >}}Run Test Now{{< /ui >}}, or from your CI/CD pipelines.
 - **Review results**: Test results, the test details page, and the Synthetic Monitoring & Testing Results Explorer show the routed country or city as the test location. For example, a test that runs from Brazil shows **Brazil** as its location, even though the device is hosted elsewhere.
 
