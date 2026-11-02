@@ -54,7 +54,7 @@ Set a version on your agent span. The version is set as an `agent_version` tag o
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.17.0+.
+Requires `dd-trace` v4.14.0+. Before v4.17.0, child spans are not tagged automatically, so tag them with `LLMObs.annotation_context(tags={"agent_version": "v2"})` to break down tokens and cost by version.
 
 ```python
 from ddtrace.llmobs import LLMObs
