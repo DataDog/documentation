@@ -15,7 +15,7 @@ further_reading:
 title: テーブルウィジェット
 widget_type: query_table
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 テーブルによる視覚化では、タグキーでグループ化された集計データの列が表示されます。テーブルを使用して、多くのデータグループ間で値を比較し、傾向、変化、外れ値を確認します。
 
@@ -56,6 +56,10 @@ widget_type: query_table
   * クエリ数の上限を大きくして、できる限り多くの列が組み合わさるようにする
   * インサイトを「生み出している」と思われる列でテーブルをソートする
 
+## CSV へのエクスポート {#export-to-csv}
+
+テーブルウィジェット内のデータは、CSV ファイルとしてダウンロードできます。CSV へのエクスポートは一度に 1 つのウィジェットに対して機能し、Datadog サポートは組織に対してこの機能を無効にできます。詳細については、「[ウィジェットデータを CSV にエクスポート][12]」を参照してください。
+
 ## API {#api}
 
 このウィジェットは、**ダッシュボード API** で使用できます。詳細については、[ダッシュボード API に関するドキュメント][8] を参照してください。
@@ -79,3 +83,4 @@ widget_type: query_table
 [9]: /ja/dashboards/graphing_json/widget_json/
 [10]: /ja/dashboards/guide/context-links/
 [11]: /ja/dashboards/querying/#advanced-graphing
+[12]: /ja/dashboards/widgets/configuration/#export-widget-data-to-csv

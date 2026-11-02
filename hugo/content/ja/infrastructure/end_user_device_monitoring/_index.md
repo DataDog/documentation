@@ -67,6 +67,10 @@ Network Path のトレースを使用すると、次のことが可能になり�
 [6]: /ja/agent/fleet_automation/
 [7]: /ja/logs/
 
-## 参考資料{#further-reading}
+## End User Device Monitoring を設定する {#set-up-end-user-device-monitoring}
+
+プレビュー版へのアクセスが承認されたら、対応プラットフォームとデバイス固有のインストール手順については、「[End User Device Monitoring を設定する](/infrastructure/end_user_device_monitoring/setup/)」を参照してください。
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
