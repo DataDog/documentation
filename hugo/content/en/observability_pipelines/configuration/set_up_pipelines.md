@@ -59,7 +59,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 #### Add another source
 
-{{< img src="observability_pipelines/setup/another_source.png" alt="The Pipelines page showing two sources sending logs to one processor group and two destinations." style="width:100%;" >}}
+{{< img src="observability_pipelines/setup/another_source.png" alt="The Pipelines page showing two sources sending logs to one processor group and one destination." style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_source %}}
 
