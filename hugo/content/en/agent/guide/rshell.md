@@ -43,7 +43,7 @@ rshell enforces the following constraints by design:
 
 ## Supported commands
 
-The following commands and shell features are available as of Agent 7.79.
+The following commands and shell features are available as of Agent 7.86.
 
 ### File inspection
 
@@ -53,14 +53,20 @@ The following commands and shell features are available as of Agent 7.79.
 | `ls` | List directory contents; supports pagination using `--offset` and `--limit` |
 | `head` | Print the first N lines or bytes of a file (default: 10 lines) |
 | `tail` | Print the last N lines or bytes of a file (default: 10 lines); supports `+N` offset mode; `-f` (follow) is blocked |
-| `find` | Search for files by name, type, size, permissions, and modification time; `-delete` and `-regex` are blocked |
+| `find` | Search for files by name, type, size, permissions, and modification time; `-exec` and `-execdir` run only allowed rshell commands; `-delete` and `-regex` are blocked |
 | `strings` | Print printable character sequences in files (default minimum length: 4) |
+| `stat -f` | Report file system status (type, block sizes, free and available blocks, inodes) for a path |
+| `du` | Estimate file space usage; `--exclude`, `--exclude-from`, and `--files0-from` are blocked |
+| `sha256sum` | Compute SHA-256 digests of files or verify checksum files with `-c` |
+| `ntfs-du` | Find large folders, files, and file extensions across an NTFS volume (Windows only; requires Administrator) |
 
 ### Text processing
 
 | Command | Description |
 |---------|-------------|
 | `grep` | Search for patterns; uses RE2 regex engine (linear-time, no backtracking) |
+| `awk` | Process text with POSIX-oriented awk programs; `system()`, `getline`, command pipes, and file output are blocked |
+| `jq` | Filter and transform JSON with a subset of jq 1.8 (fields, indexes, iteration, pipes, `select`, `map`, and more) |
 | `sed` | Filter and transform text; uses RE2 regex engine; `-i` (in-place edit) and `-f` (script file) are blocked |
 | `cut` | Extract fields or byte ranges from lines |
 | `tr` | Translate, squeeze, or delete characters |
@@ -73,8 +79,15 @@ The following commands and shell features are available as of Agent 7.79.
 
 | Command | Description |
 |---------|-------------|
-| `ps` | Report process status; `-e`/`-A` shows all processes; `-f` adds UID/PPID/start time |
+| `ps` | Report process status; `-e`/`-A` shows all processes; `-f` adds UID/PPID/start time; `-p` selects by PID; `-o` and `--sort` select and sort output fields; process arguments and environment are never read |
 | `uname` | Print system information (Linux only) |
+| `uptime` | Show how long the system has been running and the load averages |
+| `free` | Report memory and swap usage (Linux only) |
+| `vmstat` | Report virtual memory, swap, IO, and CPU statistics (Linux and macOS) |
+| `df` | Report file system disk space usage (Linux and macOS) |
+| `lsof` | List open files, including files still open after deletion (Linux only); paths outside the allowed paths show as `(restricted)` |
+| `pmap` | Report the memory mappings of a process |
+| `journalctl` | Read bounded journal entries for specific system services (`-u`) or kernel messages (`-k`) (Linux only); requires an explicit grant for each service |
 
 ### Network diagnostics (read-only)
 
@@ -90,6 +103,9 @@ The following commands and shell features are available as of Agent 7.79.
 | Command | Description |
 |---------|-------------|
 | `echo` | Write arguments to stdout |
+| `cd` / `pwd` | Change or print the working directory; targets must be within the allowed paths |
+| `read` | Read a line from stdin into shell variables |
+| `xargs` | Build and run commands from stdin; runs only allowed rshell commands |
 | `test` / `[ ]` | Evaluate conditional expressions (file tests, string and integer comparison, logical operators) |
 | `help` | Display supported features and available commands |
 | `true` / `false` | Return exit code 0 or 1 |
