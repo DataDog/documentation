@@ -69,7 +69,7 @@ Analyze trends in GPU resources and metrics (including GPU utilization, power, a
 GPUs are an expensive and scarce resource with higher failure rates than standard servers. GPU Monitoring provides out-of-the-box monitors and proactive recommendations to help you detect and remediate hardware issues before they impact your mission-critical workloads.
 
 - Catch thermal throttling early with out-of-the-box alerts before failures spread across the cluster.
-- Detect and remediate ECC and XID errors proactively, with prescriptive next steps that help teams act fast.
+- Proactively detect and remediate ECC and XID errors with prescriptive next steps that help teams respond quickly.
 - Isolate unhealthy GPUs before failures cascade.
 
 ### Reduce wasted spend
