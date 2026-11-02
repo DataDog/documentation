@@ -1,15 +1,10 @@
 # Astro docs
 
-This folder contains the Astro-rendered portion of the docs site. The API reference docs are live on Astro. The rest of the Astro docs are in development, and are going live gradually, in sections.
-
-> [!IMPORTANT]
-> The API reference docs (`/api/`) are rendered from this folder. To change the API docs or the way they are rendered, update this folder, not the [`hugo`][1] folder. Changes to the API docs in the `hugo` folder do not update the Datadog documentation site.
->
-> All other docs in this folder are not live. To revise any docs outside of `/api/`, update the [`hugo`][1] folder instead.
+This folder contains the Astro-rendered portion of the docs site. The API reference docs (anything with a URL containing `/api/`) are live on Astro. The rest of the Astro docs are in development.
 
 ## Status of the migration from Hugo to Astro
 
-The API docs have been migrated to Astro. No other docs have been migrated yet.
+Only the API docs have been migrated from Hugo to Astro.
 
 | Doc type | Description | Status |
 | --- | --- | --- |
