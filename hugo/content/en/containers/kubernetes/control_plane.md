@@ -914,18 +914,13 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 Both the Datadog Operator and Helm support Talos Linux.
 
-Datadog Operator version 1.32.0 or later configures control plane monitoring on Talos for you. The Operator detects Talos automatically from the node's OS image, which requires version 1.31.0 or later.
+Datadog Operator version 1.32.0 or later configures control plane monitoring on Talos for you. The Operator detects Talos automatically from the node's OS image. Detection requires version 1.31.0 or later.
 
-On Operator versions earlier than 1.32.0, configure the checks manually: mount the check configurations through `override.nodeAgent.extraConfd` and add the etcd certificate volumes, using the Helm tab in the [Etcd](#TalosEtcd) and Controller Manager and Scheduler sections as the reference for both.
+On Operator versions 1.31.0 through 1.31.x, configure the checks manually. Take the check definitions from the Helm tab in the [Etcd](#TalosEtcd) and Controller Manager and Scheduler sections, mount them with `override.nodeAgent.extraConfd`, add the control-plane toleration and the etcd certificate volume, and mask the Agent's bundled check configurations with empty volumes, as the Datadog Operator tab in [Kubernetes with Kubeadm](#Kubeadm) does for `etcd`. Operator versions earlier than 1.31.0 do not support Talos: use Helm instead.
 
 With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
 
-By default, Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
-
-```shell
-kubectl label --overwrite ns <namespace> \
-  pod-security.kubernetes.io/enforce=privileged
-```
+Before you deploy the Agent, label the target namespace for the `privileged` Pod Security Standard, as described in [Talos Linux][13].
 
 ### API server
 
@@ -1021,15 +1016,9 @@ providers:
 
 Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
 
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
+With Datadog Operator version 1.32.0 or later, the Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they need no toleration and no Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only. The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`, as described in the following notes.
 
-The Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they need no toleration and no Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only.
-
-The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`, as described in the following notes.
-
-{{% /tab %}}
-{{% tab "Helm" %}}
+With Helm, declare the checks:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
@@ -1082,9 +1071,6 @@ providers:
   talos:
     enabled: true
 {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
 
 **Notes:**
 
@@ -1453,3 +1439,4 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
 [11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html
+[13]: /containers/kubernetes/distributions/#Talos

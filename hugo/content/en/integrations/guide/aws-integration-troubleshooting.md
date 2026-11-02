@@ -152,7 +152,9 @@ In containerized environments the problem might be that you have locked down the
 IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. The following options may remedy this issue:
 
  * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well.
- * Use the hostname discovered by cloud-init. With Helm, [set `providers.eks.ec2.useHostnameFromFile` to true][9]. With the Datadog Operator `1.29.0+`, set the `agent.datadoghq.com/cluster-provider` annotation to `eks-ec2-use-hostname-from-file` on the `DatadogAgent`, or on a [DatadogAgentProfile][31] targeting the affected nodes. See the [providers documentation][32].
+ * Use the hostname discovered by cloud-init:
+     * With Helm, [set `providers.eks.ec2.useHostnameFromFile` to true][9].
+     * With Datadog Operator version 1.29.0 or later, set the `agent.datadoghq.com/cluster-provider` annotation to `eks-ec2-use-hostname-from-file` on the `DatadogAgent`, or on a [DatadogAgentProfile][31] targeting the affected nodes. See the [providers documentation][32].
  * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
 
 ### EC2 hostname with IMDS
