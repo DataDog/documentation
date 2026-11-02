@@ -108,7 +108,7 @@ To restrict access:
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view <br>- **Private** - Visitors can request a secure link to be sent to an email address allowed by the page's email rules. Visitors do not need a Datadog account. |
+   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view <br>- **Private** - Visitors enter an email address matching the page's email rules to receive a secure link. Visitors do not need a Datadog account. |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Public page example: shopist → shopist.statuspage.datadoghq.com*<br>*Private page example: shopist → shopist.private.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email and Slack subscriptions can be turned on or off independently for each status page. Private status pages support email subscriptions only. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
@@ -119,7 +119,7 @@ To restrict access:
 
 ## Configure visitor access for a private status page
 
-Private status pages let you share status updates with selected external visitors without requiring them to have a Datadog account. Visitors enter their email address and, if they have access, receive a secure link to open the page.
+Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
 
 You can configure email rules while creating a private status page or from **Settings** > **General** under **Email Rules**.
 
@@ -131,7 +131,7 @@ You can configure email rules while creating a private status page or from **Set
 
 You can separate multiple entries with commas. An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
 
-Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access. Publishing or unpublishing a private status page requires the **Status Pages Private Page Publish** permission.
+Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access.
 
 ## Add components
 
@@ -178,7 +178,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.
 - **Internal**, access is limited to authenticated Datadog users in your organization.
-- **Private**, visitors must enter an email address allowed by the page's email rules. If they have access, Datadog sends them a secure link to open the page.
+- **Private**, visitors enter an email address. If it matches the page's email rules, Datadog sends them a secure link to view the page.
 
 ## Add a notice
 
