@@ -243,7 +243,6 @@ Saved rules don't change existing ownership suggestions right away. Each resourc
 | Problem                                                          | Likely cause                                   | Fix                                                                                                                                                       |
 |------------------------------------------------------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**, **Edit**, and **Delete** are disabled                   | Missing permission                             | Ask an administrator for the **Security Monitoring Findings Write** permission                                                                            |
-| "Editing ownership preferences isn't enabled for your organization yet" | Feature not enabled for your organization | Contact [Datadog support][2] to enable ownership preferences                                                                                             |
 | "These preferences were changed by someone else"                 | Another user saved a change first              | Click **Reload** to get the latest rules, then submit your change again. If the message appears in a form, the values you entered are kept               |
 | A rule shows a warning icon, and saves fail                      | A stored rule doesn't meet the validation rules | Hover over the icon to see the problem, then edit or delete the rule. If the problem is with the name, delete the rule and add it again                  |
 | Save rejected for a conflict                                     | The rule conflicts with an existing rule       | See [Conflicting rules](#conflicting-rules). Edit the existing rule instead of adding a new one                                                           |
@@ -256,4 +255,3 @@ Saved rules don't change existing ownership suggestions right away. Each resourc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/csm/ownership-agent
-[2]: /help
