@@ -432,8 +432,7 @@ After the page is published, its feeds are served at the following paths:
 | RSS 2.0 | `https://<prefix>.statuspage.datadoghq.com/history.rss` |
 | Atom | `https://<prefix>.statuspage.datadoghq.com/history.atom` |
 
-If you [set a custom domain](#set-a-custom-domain), the feeds are also served from that domain, for example `https://status.acme.com/history.rss` where `status.acme.com` is the
-configured custom domain.
+If you [set a custom domain](#set-a-custom-domain), the feeds are also served from that domain; for example, `https://status.acme.com/history.rss`, where `status.acme.com` is the configured custom domain.
 
 Each feed entry corresponds to a notice published on the page and includes the notice title, status, message, and the time the update was posted. Resolved notices remain in the feed as part of the page history. The last 20 notices are shown in the feed.
 
