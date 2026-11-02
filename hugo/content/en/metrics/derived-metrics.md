@@ -85,6 +85,8 @@ To manage an existing derived metric, add its resource configuration and import 
 terraform import datadog_derived_metric.cpu_total "custom.cpu.total"
 ```
 
+After importing, run `terraform plan` and `terraform apply` to adopt the configured name and definition. The first apply updates the existing metric. Later changes to `name` replace it.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
