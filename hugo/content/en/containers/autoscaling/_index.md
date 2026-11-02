@@ -702,7 +702,7 @@ Datadog recommends enabling the [OOM Kill][20] check using the recommended confi
 
 Without this check enabled OOM Kill detection relies on the Agent capturing the container *activily* in the terminated state. Depending on the workload and the frequency of the OOM Kills, the container may not stay in this state too long before Kubernetes restarts it. Which can make the Agent miss this state.
 
-This OOM Kill check also requires the check to report with the Tag Cardinality set to `orchestrator`. This can be set globally in your config as seen in the [setup](#setup), or as the default with Datadog Agent `7.86.0` or greater.
+This OOM Kill handling requires the check to report with the Tag Cardinality set to `orchestrator`. Starting in Datadog Agent `7.86.0`, the OOM Kill check runs with this cardinality by default. In earlier versions this can be set globally in your config as seen in the [setup](#setup).
 
 ### Unbundled Event Collection
 
