@@ -41,7 +41,7 @@ Each organization can have up to 20 collections with polling enabled at a time. 
 | Domain | `domain-name` |
 | SHA-256 file hash | `file:hashes.'SHA-256'` |
 
-Datadog skips other indicator types. Datadog extracts exact values from `=` and `IN` comparisons in the STIX pattern, and also accepts `OR` expressions, importing each value as a separate indicator. `AND` between bracketed expressions, negation, ranges, wildcard matching, regular expression matching, subnet relations, existence checks, temporal qualifiers, and `FOLLOWEDBY` are not supported, and Datadog skips any indicator whose pattern uses an unsupported expression.
+Datadog skips other indicator types. Datadog extracts exact values from `=` and `IN` comparisons in the STIX pattern, and also accepts `OR` expressions, importing each value as a separate indicator. `AND` between bracketed expressions, negation, ranges, wildcard matching, regular expression matching, subnet relations, existence checks, temporal qualifiers, and `FOLLOWEDBY` are not supported. Datadog skips all indicators with patterns containing unsupported expressions.
 
 The optional `valid_until` field sets an expiration for the indicator, and Datadog removes the indicator after that time. An indicator published without `valid_until` does not expire automatically.
 
