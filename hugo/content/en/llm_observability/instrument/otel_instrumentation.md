@@ -688,7 +688,7 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 For [supported models and providers][58], Datadog can estimate costs from token usage without cost attributes. Supply costs directly for unsupported models or custom pricing.
 
-Cost attributes use two paths: [**Datadog preserves supplied costs**](#supplied-cost-attributes), while [**automatic pricing can replace fallback estimates**](#fallback-estimated-cost-attributes-nanodollars). Both paths populate the same `metrics.estimated_*_cost` fields listed below, which you can query in Datadog. The `estimated_` prefix also applies to supplied costs that Datadog preserves.
+Cost attributes use two paths: [**Datadog preserves supplied costs**](#supplied-cost-attributes), while [**automatic pricing can replace fallback estimates**](#fallback-estimated-cost-attributes-nanodollars). While both paths populate the same `metrics.estimated_*_cost` fields, Datadog preserves supplied costs despite the `estimated_` prefix. Use these fields when querying costs in Datadog.
 
 ##### Supplied cost attributes
 
