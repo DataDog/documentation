@@ -122,7 +122,9 @@ In addition to the [normalized AI tags](#normalized-ai-tags), each provider repo
 | `aws_iam_principal_session_name` | IAM Session Name | The session name of the IAM role session that made the request. |
 | `aws_iam_principal_application_role` | IAM Application Role | The IAM role that the application assumed to make the request. |
 
-The IAM principal tags are available only when your AWS Cost and Usage Report (CUR 2.0) includes IAM principal data.
+The IAM principal tags are available only when your [AWS Cost and Usage Report (CUR 2.0)][101] includes IAM principal data.
+
+[101]: /cloud_cost_management/setup/aws/?tab=cloudformation#configure-the-cost-and-usage-report-settings
 
 {{% /tab %}}
 {{% tab "Amazon SageMaker" %}}
