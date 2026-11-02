@@ -51,7 +51,7 @@ sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
 To install a BFF file in the current directory for AIX:
 
 ```bash
-sudo installp -aXYgd datadog-agent-7-latest.aix.ppc64.bff datadog-agent
+sudo installp -acXYd datadog-agent-7-latest.aix.ppc64.bff datadog-agent
 ```
 
 Alternatively, transfer the [AIX install script](https://install.datadoghq.com/scripts/install_aix.sh) to the target system and run it with the `DD_BFF_PATH` environment variable set to the path of the downloaded BFF package.
