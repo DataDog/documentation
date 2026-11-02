@@ -61,7 +61,7 @@ Analyze trends in GPU resources and metrics (including GPU utilization, power, a
 - Detect bottlenecks in your training and inference workloads with lightweight, continuous tracing.
 - Discover recommendations on the optimizations that produce the largest throughput improvements.
 
-{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
+{{< img src="gpu_monitoring/training-page.png" alt="GPU Monitoring Training page showing run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
 
 {{< img src="gpu_monitoring/inference-page3.png" alt="Inference page in GPU Monitoring showing for a given model deployment key metrics like time-to-first-token and output tokens." style="width:100%;" >}}
 
