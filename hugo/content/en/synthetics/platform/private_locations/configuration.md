@@ -266,12 +266,12 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. Configuration files generated for new private locations set this parameter to `true`. The worker default stays `false`.
 
 `--allowedDomainNames`
 : **Type**: Array <br>
 **Default**: `none`<br>
-Grant access to domain names in test. Has precedence over --blockedDomainNames, for example: `--allowedDomainNames="*.example.com"`.
+Grant access to domain names in test. Has precedence over `--blockedDomainNames`, for example: `--allowedDomainNames="*.example.com"`. Domain names match the full hostname and support the `*` wildcard. An allowed domain name bypasses the IP blocklist, including the reserved IP ranges blocked by `--enableDefaultBlockedIpRanges`.
 
 `--blockedDomainNames`
 : **Type**: Array <br>
