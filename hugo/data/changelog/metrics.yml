@@ -47,3 +47,61 @@ entries:
     operations:
       - CreateTagIndexingRuleExemption
     title: Add tag indexing rule exemptions list endpoint
+  - change_type: added
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - UpdateTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41055
+    operations:
+      - DeleteTagIndexingRuleExemption
+    title: Add tag indexing rule exemption update endpoint
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41146
+    operations:
+      - CreateBulkTagsMetricsConfiguration
+      - DeleteBulkTagsMetricsConfiguration
+    title: Move metric bulk-tags endpoints sunset date to 2026-11-01
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41191
+    operations:
+      - CreateDerivedMetric
+      - CreateHistoricalMetricsConfiguration
+      - CreateTagIndexingRule
+      - CreateTagIndexingRuleExemption
+      - DeleteDerivedMetric
+      - DeleteHistoricalMetricsConfiguration
+      - DeleteTagIndexingRule
+      - DeleteTagIndexingRuleExemption
+      - EstimateMetricsOutputSeries
+      - GetDerivedMetric
+      - GetHistoricalMetricsConfiguration
+      - GetMetricTagCardinalityDetails
+      - GetTagIndexingRule
+      - GetTagIndexingRuleExemption
+      - ListMetricAssets
+      - ListTagIndexingRuleExemptions
+      - ListTagIndexingRules
+      - ListTagIndexingRulesForMetric
+      - QueryScalarData
+      - QueryTimeseriesData
+      - ReorderTagIndexingRules
+      - SubmitMetrics
+      - UpdateDerivedMetric
+      - UpdateTagIndexingRule
+      - UpdateTagIndexingRuleExemption
+    title: Remove deprecated metric bulk-tags endpoints from public docs and 
+      SDKs
+  - change_type: removed
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41191
+    operations:
+      - CreateBulkTagsMetricsConfiguration
+      - DeleteBulkTagsMetricsConfiguration
+    title: Remove deprecated metric bulk-tags endpoints from public docs and 
+      SDKs

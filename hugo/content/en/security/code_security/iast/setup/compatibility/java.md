@@ -53,6 +53,8 @@ Versions 22 and above are supported as in Preview.
 
 ### Web framework compatibility
 
+**Web framework integrations provide:**
+
 - Attacker source HTTP request details
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications

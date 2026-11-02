@@ -1,0 +1,31 @@
+---
+import styles from "./ApiChangelogTimeline.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import ApiChangelogEntry from "./ApiChangelogEntry.astro";
+import { groupByDate, type ResolvedChangelogEntry } from "@lib/api/changelog";
+
+interface Props {
+  entries: ResolvedChangelogEntry[];
+}
+
+const { entries } = Astro.props;
+const cl = classListFactory(styles);
+const dateGroups = groupByDate(entries);
+---
+
+<div class={cl("api-changelog-timeline")}>
+  {
+    dateGroups.map((dateGroup) => (
+      <section class={cl("api-changelog-timeline__section")}>
+        <h2 class={cl("api-changelog-timeline__date")}>
+          <time datetime={dateGroup.date}>{dateGroup.date}</time>
+        </h2>
+        <div class={cl("api-changelog-timeline__entries")}>
+          {dateGroup.entries.map((entry) => (
+            <ApiChangelogEntry entry={entry} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</div>

@@ -12,7 +12,7 @@ further_reading:
   text: init 컨테이너 리소스 사용량에 관해 알아보기
 - link: /tracing/guide/local_sdk_injection
   tag: 설명서
-  text: 로컬 SDK 주입을 사용한 애플리케이션 계측
+  text: 로컬 SDK 인젝션을 사용한 애플리케이션 계측
 - link: https://learn.datadoghq.com/courses/configuring-ssi-k8s
   tag: 학습 센터
   text: Kubernetes에서 Single Step Instrumentation 구성
@@ -22,6 +22,13 @@ type: multi-code-lang
 ## 개요 {#overview}
 
 Kubernetes 환경에서는 APM에 Single Step Instrumentation(SSI)을 사용하여 Datadog Agent를 설치하고 Datadog SDK를 사용해 애플리케이션을 한 단계 만에 [계측][3]하세요.
+
+{{< skill-callout
+    title="에이전트로 APM 설정"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## 요구 사항 {#requirements}
 
@@ -35,27 +42,141 @@ Kubernetes 환경에서는 APM에 Single Step Instrumentation(SSI)을 사용하�
 
 <div class="alert alert-info">Single Step Instrumentation은 Datadog Agent가 설치된 네임스페이스의 애플리케이션을 계측하지 않습니다. Agent를 애플리케이션을 실행하지 않는 별도의 네임스페이스에 설치하세요.</div>
 
-클러스터 전체에서 Single Step Instrumentation을 활성화하려면 다음 단계를 따르세요. 이렇게 하면 지원되는 언어로 작성된 모든 애플리케이션에서 자동으로 트레이스를 전송합니다.
+클러스터 전체에서 Single Step Instrumentation을 활성화하면 지원되는 언어로 작성된 모든 애플리케이션의 트레이스가 자동으로 전송됩니다.
 
 **참고:** 특정 네임스페이스 또는 포드만 계측하려면 [고급 옵션](#advanced-options)의 워크로드 대상 지정을 참조하세요.
 
-1. Datadog에서 [Kubernetes에 Datadog Agent 설치][11] 페이지로 이동합니다.
-1. 화면의 지침에 따라 설치 방법을 선택하고, API 키를 선택하고 Operator 또는 Helm 리포지토리를 설정합니다.
-1. **구성 `datadog-agent.yaml`** 섹션에서 **추가 구성** > **Application Observability**로 이동하여 **APM Instrumentation**을 켭니다.
+다음 명령을 사용하여 SSI를 활성화합니다. 이때 다음 항목을 바꿉니다.
 
-   {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="Datadog 앱을 통해 Kubernetes에 Datadog Agent를 설치하기 위한 구성 블록" style="width:100%;" >}}
+- `<YOUR_DD_API_KEY>`를 [Datadog API 키][40]로 대체합니다.
+- `<YOUR_CLUSTER_NAME>`을 클러스터 이름으로 대체합니다.
+- `<DATADOG_SITE>`를 [Datadog 사이트][43]로 대체합니다. {{< region-param key="dd_site" code="true" >}}
 
-1. 생성된 구성 파일을 사용하여 Agent를 배포합니다.
-1. 애플리케이션을 재시작하세요.
+예시에서는 `apm.instrumentation.enabled: true`를 사용하여 SSI를 활성화하고 `datadog` 네임스페이스를 사용합니다. Agent가 다른 위치에 설치되어 있다면 네임스페이스를 바꿉니다.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+1. Datadog Operator를 설치하고 API 키가 포함된 시크릿을 생성합니다.
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   helm install datadog-operator datadog/datadog-operator --namespace datadog --create-namespace
+   kubectl create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY> -n datadog
+   ```
+
+1. APM 계측을 활성화하는 `datadog-agent.yaml` 파일을 생성합니다.
+
+   ```yaml
+   kind: "DatadogAgent"
+   apiVersion: "datadoghq.com/v2alpha1"
+   metadata:
+     name: "datadog"
+     namespace: "datadog"
+   spec:
+     global:
+       clusterName: "<YOUR_CLUSTER_NAME>"
+       site: "<DATADOG_SITE>"
+       credentials:
+         apiSecret:
+           secretName: "datadog-secret"
+           keyName: "api-key"
+     features:
+       apm:
+         instrumentation:
+           enabled: true
+   ```
+
+   최신 버전을 설치하는 대신 특정 SDK 버전을 고정하려면 `ddTraceVersions`가 포함된 `targets` 블록을 추가합니다. 전체 스키마는 [특정 워크로드 대상 지정](#target-specific-workloads)을 참조하세요.
+
+1. Agent를 배포합니다.
+
+   ```shell
+   kubectl apply -f datadog-agent.yaml
+   ```
+
+기존 Operator 설치를 업데이트하려면 `datadog-agent.yaml`에 SSI 구성을 추가하고 `kubectl -n datadog apply -f datadog-agent.yaml`을 사용하여 다시 적용합니다.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+1. Datadog Helm 리포지토리를 추가하고 `datadog` 네임스페이스를 생성한 다음 API 키가 포함된 시크릿을 생성합니다.
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   kubectl create namespace datadog
+   kubectl -n datadog create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY>
+   ```
+
+1. APM 계측을 활성화하는 `datadog-values.yaml` 파일을 생성합니다.
+
+   ```yaml
+   datadog:
+     site: "<DATADOG_SITE>"
+     clusterName: "<YOUR_CLUSTER_NAME>"
+     apiKeyExistingSecret: "datadog-secret"
+     apm:
+       instrumentation:
+         enabled: true
+   ```
+
+   최신 버전을 설치하는 대신 특정 SDK 버전을 고정하려면 `ddTraceVersions`가 포함된 `targets` 블록을 추가합니다. 전체 스키마는 [특정 워크로드 대상 지정](#target-specific-workloads)을 참조하세요.
+
+1. Agent를 배포합니다.
+
+   ```shell
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog --namespace datadog
+   ```
+
+기존 Helm 설치를 업데이트하려면 `datadog-values.yaml`에 SSI 구성을 추가하고 `helm upgrade -n datadog -f datadog-values.yaml <RELEASE_NAME> datadog/datadog`을 실행합니다.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Agent를 배포한 후 애플리케이션을 다시 시작합니다.
 
 <div class="alert alert-info">SSI는 계측된 애플리케이션에 약간의 시작 시간을 추가합니다. 사용 사례에서 이 오버헤드를 수용할 수 없는 경우, <a href="/help/">Datadog 지원팀</a>에 문의하세요.</div>
+
+### Datadog에서 구성 생성 {#generate-the-configuration-from-datadog}
+
+UI를 통해 구성을 생성하려면 [Kubernetes에 Datadog Agent 설치][11] 페이지로 이동하여 화면의 안내에 따라 설치 방법과 API 키를 선택합니다. {{< ui >}}Configure `datadog-agent.yaml`{{< /ui >}} 섹션에서 {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}로 이동하여 {{< ui >}}APM Instrumentation{{< /ui >}}을 활성화합니다. 그런 다음 생성된 구성 파일을 사용하여 Agent를 배포합니다.
+
+{{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="Datadog 앱을 통해 Kubernetes에 Datadog Agent를 설치하기 위한 구성 블록" style="width:100%;" >}}
+
+##  설치 확인 {#verify-the-installation}
+
+1. Agent 포드가 실행 중인지 확인합니다.
+
+   ```shell
+   kubectl get pods -n datadog
+   ```
+
+1. Agent가 정상 상태이고 APM Agent가 실행 중인지 확인합니다. `<AGENT_POD>`를 노드 Agent 포드 이름으로 바꿉니다.
+
+   ```shell
+   kubectl exec <AGENT_POD> -n datadog -- agent status
+   ```
+
+   출력의 **APM Agent** 섹션을 확인합니다.
+
+1. 계측 대상 애플리케이션 포드에 인젝션이 적용되었는지 확인합니다. `<APP_POD>` 및 `<APP_NAMESPACE>`를 애플리케이션 포드 중 하나와 해당 네임스페이스로 바꿉니다.
+
+   ```shell
+   kubectl get pod <APP_POD> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
+   ```
+
+   출력에는 계측된 각 언어에 대한 `datadog-init-apm-inject` 및 `datadog-lib-<language>-init` 컨테이너가 포함됩니다.
+
+1. 애플리케이션이 트래픽을 수신한 후 [APM 서비스 페이지][42]에 서비스가 표시되는지 확인합니다. 몇 분 이내에 서비스가 표시되지 않으면 [SSI 문제 해결 가이드][35]를 따릅니다.
 
 ## Unified Service Tags 구성 {#configure-unified-service-tags}
 
 Unified Service Tags(UST)는 트레이스, 메트릭, 로그에 일관된 태그를 적용해 탐색 및 관측 가능성 데이터 상호 연계가 간편합니다. UST는 자동 레이블 추출(권장)을 통해 구성할 수도 있고, `ddTraceConfigs`를 사용한 명시적 구성을 통하거나 배포 매니페스트에서 구성할 수도 있습니다.
 
 <div class="alert alert-warning">
-<a href="/agent/remote_config/">Remote Configuration</a>을 사용하는 경우, <a href="#recommended-configure-usts-through-automatic-label-extraction">자동 레이블 추출</a>이 호환되지 않습니다. 다음을 사용해 <a href="#configure-usts-explicitly-with-ddtraceconfigs">명시적으로 UST를 구성</a>해야 합니다. <code>ddTraceConfigs</code>.
+<a href="/agent/remote_config/">Remote Configuration</a>을 사용하는 경우, <a href="#recommended-configure-usts-through-automatic-label-extraction">자동 레이블 추출</a>이 호환되지 않습니다. <a href="#configure-usts-explicitly-with-ddtraceconfigs">명시적으로 UST를 구성</a>해야 합니다. 이때 <code>ddTraceConfigs</code>를 사용합니다.
 </div>
 
 ### (권장) 자동 레이블 추출을 통해 UST 구성 {#recommended-configure-usts-through-automatic-label-extraction}
@@ -74,7 +195,7 @@ SSI를 사용하면 개별 배포를 수정하지 않고 자동으로 포드 레
 
 #### 구성 {#configuration}
 
-다음 예시의 `app.kubernetes.io/name`를 서비스 이름이 포함된 레이블로 교체하세요(예: `service.kubernetes.io/name` 또는 `component`). 이렇게 하면 레이블 여러 개를 구성할 수 있습니다.
+다음 예시의 `app.kubernetes.io/name`을 서비스 이름이 포함된 레이블로 바꾸세요(예: `service.kubernetes.io/name` 또는 `component`). 이렇게 하면 레이블 여러 개를 구성할 수 있습니다.
 
 ```yaml
 datadog:
@@ -152,30 +273,30 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 - **[환경 변수 설정][7]**:
 
-  애플리케이션 구성에서 직접 환경 변수를 설정하여 제품을 활성화합니다.
+  애플리케이션 구성에서 직접 환경 변수를 설정하여 제품을 활성화하세요.
 
 ## 고급 옵션{#advanced-options}
 
 다음 고급 옵션을 사용하여 Single Step Instrumentation이 환경에서 어떻게 동작할지 사용자 지정할 수 있습니다. 이러한 설정은 선택 사항이며 일반적으로 특수 설정에서만 필요합니다.
 
-### 주입 모드 구성 {#configure-injection-modes}
+### 인젝션 모드 구성 {#configure-injection-modes}
 
-SSI는 여러 가지 주입 모드를 지원합니다. 주입 모드는 인젝터와 APM 라이브러리 파일이 애플리케이션 컨테이너에 전송되는 방식을 제어합니다. 일반적으로 이 설정을 수동으로 구성할 필요가 없습니다. 포드 시작이 많이 지연되는 것이 눈에 띄거나, 포드 초기화 중에 리소스 사용량이(CPU, 메모리) 예상보다 많은 경우 이 설정을 조정하는 것을 고려해 보세요. 인젝터의 작동 원리에 관한 자세한 내용은 [Single Step Instrumentation 사용 시 인젝터 동작][41]을 참조하세요.
+SSI는 여러 인젝션 모드를 지원합니다. 인젝션 모드는 인젝터와 APM 라이브러리 파일이 애플리케이션 컨테이너에 전송되는 방식을 제어합니다. 일반적으로 이 설정을 수동으로 구성할 필요가 없습니다. 포드 시작이 많이 지연되는 것이 눈에 띄거나, 포드 초기화 중에 리소스 사용량이(CPU, 메모리) 예상보다 많은 경우 이 설정을 조정하는 것을 고려해 보세요. 인젝터의 작동 원리에 관한 자세한 내용은 [Single Step Instrumentation 사용 시 인젝터 동작][41]을 참조하세요.
 
 
 | 모드 | 설명 | 요구 사항 |
 |------|-------------|--------------|
 | `init_container` | init 컨테이너를 사용하여 인젝터 및 APM 라이브러리 파일을 애플리케이션 컨테이너로 복사합니다. | Helm Chart 또는 Datadog Operator로 배포된 Agent |
-| `csi` | **미리 보기 상태입니다.** [Datadog CSI 드라이버][37]를 사용하여 인젝터 또는 APM 라이브러리 파일을 마운팅합니다. init 컨테이너 모드보다 포드 시작 시간이 단축됩니다. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ 또는 Datadog Operator 1.25.0+ |
+| `csi` | **미리 보기로 제공되고 있습니다.** [Datadog CSI 드라이버][37]를 사용하여 인젝터 또는 APM 라이브러리 파일을 마운팅합니다. init 컨테이너 모드보다 포드 시작 시간이 단축됩니다. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ 또는 Datadog Operator 1.25.0+ |
 
 `csi` 모드를 사용하기 전에 Datadog CSI 드라이버를 설치하고 활성화하세요. Helm을 사용하여 배포하는 경우, `datadog-values.yaml`에서 `datadog.csi.enabled: true`도 설정하세요. 설치 단계 및 GKE Autopilot과 같은 환경별 요구 사항은 [CSI 드라이버 설명서][37]를 참조하세요.
 
-#### 전역적으로 주입 모드 구성 {#configure-injection-mode-globally}
+#### 전역적으로 인젝션 모드 구성 {#configure-injection-mode-globally}
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-클러스터 전체에 주입 모드를 설정하려면 `datadog-values.yaml`에 `injectionMode` 추가:
+클러스터 전체에 인젝션 모드를 설정하려면 `datadog-values.yaml`에 `injectionMode`를 추가합니다.
 
 ```yaml
 datadog:
@@ -189,7 +310,7 @@ datadog:
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-클러스터 전체에 주입 모드를 설정하려면 `datadog-agent.yaml`에 `injectionMode` 추가:
+클러스터 전체에 인젝션 모드를 설정하려면 `datadog-agent.yaml`에 `injectionMode`를 추가합니다.
 
 ```yaml
 features:
@@ -200,14 +321,14 @@ features:
 
 지원되는 값: `init_container`, `csi`.
 
-Datadog Operator 1.25.0 이전 버전을 사용하는 경우, [포드 어노테이션](#configure-injection-mode-per-pod)을 사용하여 특정 포드의 주입 모드를 재정의합니다.
+Datadog Operator 1.25.0 이전 버전을 사용하는 경우, [포드 어노테이션](#configure-injection-mode-per-pod)을 사용하여 특정 포드의 인젝션 모드를 재정의합니다.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 포드당 주입 모드 구성 {#configure-injection-mode-per-pod}
+#### 포드당 인젝션 모드 구성 {#configure-injection-mode-per-pod}
 
-특정 포드의 주입 모드를 재정의하려면 포드 사양에 다음 어노테이션 추가:
+특정 포드의 인젝션 모드를 재정의하려면 포드 사양에 다음 어노테이션을 추가합니다.
 
 ```yaml
 metadata:
@@ -232,27 +353,27 @@ metadata:
 | 키             | 설명 |
 |------------------|-------------|
 | `name`            | 대상 블록의 이름입니다. 이것은 모니터링 상태에는 아무런 영향을 미치지 않고 메타데이터로만 사용됩니다. |
-| `namespaceSelector` | 계측할 네임스페이스입니다. 다음 중 하나 이상을 사용하여 지정:<br> - `matchNames`: 하나 이상의 네임스페이스 이름 목록. <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`:네임스페이스 선택기 요구 사항 목록. <br><br> 네임스페이스가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요.|
-| `podSelector`     | 계측할 포드입니다. 다음 중 하나 이상을 사용하여 지정: <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`: 포드 선택기 요구 사항 목록. <br><br> 포드가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요. |
+| `namespaceSelector` | 계측할 네임스페이스입니다. 다음 중 하나 이상을 사용하여 지정합니다.<br> - `matchNames`: 하나 이상의 네임스페이스 이름 목록. <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`: 네임스페이스 선택기 요구 사항 목록. <br><br> 네임스페이스가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요.|
+| `podSelector`     | 계측할 포드입니다. 다음 중 하나 이상을 사용하여 지정합니다. <br> - `matchLabels`: `{key,value}` 쌍에서 정의된 하나 이상의 레이블 목록. <br> - `matchExpressions`: 포드 선택기 요구 사항 목록. <br><br> 포드가 일치하려면 모든 기준을 충족해야 합니다. 자세한 내용은 [Kubernetes 선택기 설명서][10]를 참조하세요. |
 | `ddTraceVersions` | 각 언어에 사용할 [Datadog APM SDK][9] 버전입니다. |
 | `ddTraceConfigs`  | [Unified Service Tags][8] 설정, 트레이싱 외 [SDK 종속적 제품](#enable-sdk-dependent-products-and-features) 활성화, 기타 [APM 설정][14] 사용자 지정을 지원하는 APK SDK 구성입니다. |
 
-구성해야 하는 파일은 Single Step Instrumentation을 활성화한 방식에 따라 다름:
-- SSI를 Datadog Operator로 활성화한 경우, `datadog-agent.yaml`을 편집합니다..
+구성해야 하는 파일은 Single Step Instrumentation을 활성화한 방식에 따라 다릅니다.
+- SSI를 Datadog Operator로 활성화한 경우, `datadog-agent.yaml`을 편집합니다.
 - SSI를 Helm으로 활성화한 경우, `datadog-values.yaml`을 편집합니다.
 
 **참고**: 대상은 순서대로 평가되며, 첫 번째 일치 항목이 우선합니다.
 
-#### 구성 예시{#example-configurations}
+#### 예시 구성 {#example-configurations}
 
-특정 서비스를 선택하는 방법에 관한 다음 예시 참조:
+특정 서비스를 선택하는 방법에 관한 다음 예시를 검토하세요.
 
-{{< collapse-content title="예 1: 하나만 빼고 모든 네임스페이스 활성화" level="h4" >}}
+{{< collapse-content title="예 1: 하나만 빼고 모든 네임스페이스 활성화" level="h5" >}}
 
 이 구성:
 - 사용 시 `jenkins` 네임스페이스를 제외한 모든 네임스페이스에 대하여 APM을 활성화합니다.
   - **참고**: 목록에 나열된 것을 제외하고 모든 네임스페이스에 대하여 비활성화하려면 `enabledNamespaces`를 사용하세요.
-- Datadog에 Java 애플리케이션은 기본 Java SDK로, Python 애플리케이션은 Python SDK의 `v.3.1.0`를 사용하여 계측하도록 지시합니다.
+- Datadog에 Java 애플리케이션은 기본 Java SDK로, Python 애플리케이션은 Python SDK의 `v.3.1.0`을 사용하여 계측하도록 지시합니다.
 
 {{< highlight yaml "hl_lines=4-10" >}}
    apm:
@@ -269,7 +390,7 @@ metadata:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="예 2: 이름 및 레이블이 일치하는 네임스페이스의 부분 집합을 계측" level="h4" >}}
+{{< collapse-content title="예 2: 이름 및 레이블이 일치하는 네임스페이스의 부분 집합을 계측" level="h5" >}}
 
 이 구성을 사용하면 대상 블록을 두 개 생성합니다.
 
@@ -279,7 +400,7 @@ metadata:
   - 이 대상 그룹에 대하여 환경 변수 `DD_PROFILING_ENABLED` 설정
 - 두 번째 블록(이름 `billing-service_apps`)
   - 레이블 `app:billing-service`가 있는 네임스페이스의 서비스에 대하여 APM을 활성화합니다.
-  - Datadog에 이 서비스 세트를 Python SDK `v3.1.0`로 계측하도록 지시합니다.
+  - Datadog에 이 서비스 세트를 Python SDK의 `v3.1.0`을 사용하여 계측하도록 지시합니다.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -305,7 +426,7 @@ metadata:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="예 3: 다양한 워크로드를 다양한 트레이서로 계측" level="h4" >}}
+{{< collapse-content title="예 3: 다양한 워크로드를 다양한 트레이서로 계측" level="h5" >}}
 
 이 구성이 하는 일은 다음과 같습니다.
 - 다음 레이블이 있는 포드에 대하여 APM 활성화:
@@ -338,7 +459,7 @@ metadata:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="예 4: 네임스페이스 내 포드 계측" level="h4" >}}
+{{< collapse-content title="예 4: 네임스페이스 내 포드 계측" level="h5" >}}
 
 이 구성:
 - 사용 시 `login-service` 네임스페이스 안에 있고, `app:password-resolver` 레이블이 지정된 포드에 대하여 APM을 활성화합니다.
@@ -366,7 +487,7 @@ metadata:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="예 5: 다음을 사용하여 포드의 부분 집합 계측 <code>matchExpressions</code>" level="h4" >}}
+{{< collapse-content title="예 5: 다음을 사용하여 포드의 부분 집합 계측 <code>matchExpressions</code>" level="h5" >}}
 
 이 구성을 사용하면 레이블 `app=app1` 또는 `app=app2`가 있는 포드만 제외하고 모든 포드에 대하여 APM을 활성화합니다.
 
@@ -387,7 +508,7 @@ metadata:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="예 6: 다음을 사용하여 추가적인 제품 활성화 <code>ddTraceConfigs</code>" level="h4" >}}
+{{< collapse-content title="예 6: 다음을 사용하여 추가적인 제품 활성화 <code>ddTraceConfigs</code>" level="h5" >}}
 
 이 구성을 사용하면 `web-apps` 네임스페이스의 서비스에 대하여 [App and API Protection(AAP)][12] 및 [Continuous Profiler][11]를 활성화하고, `ddTraceConfigs`를 사용해 필수 환경 변수를 설정합니다.
 
@@ -433,7 +554,7 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
 
 {{< collapse-content title="Datadog Operator" level="h5" >}}
 
-특정 네임스페이스의 계측을 활성화하려면 `datadog-agent.yaml`에 `enabledNamespaces` 구성 추가:
+특정 네임스페이스에 대해 계측을 활성화하려면 `datadog-agent.yaml`에 `enabledNamespaces` 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-7" >}}
    features:
@@ -445,7 +566,7 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
            - applications
 {{< /highlight >}}
 
-특정 네임스페이스의 계측을 비활성화하려면 `datadog-agent.yaml`에 `disabledNamespaces` 구성 추가:
+특정 네임스페이스에 대해 계측을 비활성화하려면 `datadog-agent.yaml`에 `disabledNamespaces` 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-7" >}}
    features:
@@ -461,7 +582,7 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
 
 {{< collapse-content title="Helm" level="h5" >}}
 
-특정 네임스페이스의 계측을 활성화하려면 `datadog-values.yaml`에 `enabledNamespaces` 구성 추가:
+특정 네임스페이스에 대해 계측을 활성화하려면 `datadog-values.yaml`에 `enabledNamespaces` 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-7" >}}
    datadog:
@@ -473,7 +594,7 @@ SSI를 통해 활성화할 수 있는 제품 전체 목록은 [SDK 종속적 제
              - namespace_2
 {{< /highlight >}}
 
-특정 네임스페이스의 계측을 비활성화하려면 `datadog-values.yaml`에 `disabledNamespaces` 구성 추가:
+특정 네임스페이스에 대해 계측을 비활성화하려면 `datadog-values.yaml`에 `disabledNamespaces` 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-7" >}}
    datadog:
@@ -500,7 +621,7 @@ Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리�
 
 ##### 서비스 수준에서 지정 {#specify-at-the-service-level}
 
-특정 포드의 애플리케이션을 자동으로 계측하려면 포드 사양의 애플리케이션에 적절한 언어 어노테이션 및 라이브러리 버전 추가:
+특정 포드의 애플리케이션을 자동으로 계측하려면 포드 사양의 애플리케이션에 적절한 언어 어노테이션 및 라이브러리 버전을 추가합니다.
 
 | 언어   | 포드 어노테이션                                                        |
 |------------|-----------------------------------------------------------------------|
@@ -511,7 +632,7 @@ Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리�
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | PHP        | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-`<CONTAINER IMAGE TAG>`를 원하는 라이브러리 버전으로 교체하세요. 사용 가능한 버전은 [Datadog 컨테이너 레지스트리](#change-the-default-image-registry) 및 각 언어의 트레이서 소스 리포지토리에 목록으로 나열되어 있습니다.
+`<CONTAINER IMAGE TAG>`를 원하는 라이브러리 버전으로 바꾸세요. 사용 가능한 버전은 [Datadog 컨테이너 레지스트리](#change-the-default-image-registry) 및 각 언어의 트레이서 소스 리포지토리에 목록으로 나열되어 있습니다.
 
 - [Java][34]
 - [Node.js][35]
@@ -520,9 +641,9 @@ Datadog SDK와 그 버전을 지정하면 해당 언어로 작성된 애플리�
 - [Ruby][38]
 - [PHP][39]
 
-메이저 라이브러리 릴리스로 인해 이전 버전과 호환되지 않는 변경 사항이 도입될 수 있으므로 <div class="alert alert-danger"> <code>latest</code> 태그를 사용할 때는 주의해야 합니다.</div>
+<div class="alert alert-danger">메이저 라이브러리 릴리스로 인해 이전 버전과 호환되지 않는 변경 사항이 도입될 수 있으므로 <code>latest</code> 태그를 사용할 때는 주의해야 합니다.</div>
 
-예를 들어 Java 애플리케이션을 자동으로 계측하려면:
+예를 들어, Java 애플리케이션을 자동으로 계측하려면 다음과 같이 합니다.
 
 {{< highlight yaml "hl_lines=10" >}}
 apiVersion: apps/v1
@@ -546,9 +667,9 @@ spec:
 
 구성해야 하는 파일은 Single Step Instrumentation을 Datadog Operator 또는 Helm 중 무엇으로 활성화했는지에 따라 다릅니다.
 
-{{< collapse-content title="Datadog Operator" level="h5" >}}
+{{< collapse-content title="Datadog Operator" level="h6" >}}
 
-예를 들어 .NET, Python, Node.js 애플리케이션을 계측하려면 `datadog-agent.yaml` 파일에 다음 구성 파일 추가:
+예를 들어, .NET, Python, Node.js 애플리케이션을 계측하려면 `datadog-agent.yaml` 파일에 다음 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-8" >}}
    features:
@@ -563,9 +684,9 @@ spec:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h5" >}}
+{{< collapse-content title="Helm" level="h6" >}}
 
-예를 들어 .NET, Python, Node.js 애플리케이션을 계측하려면 `datadog-values.yaml` 파일에 다음 구성 파일 추가:
+예를 들어, .NET, Python, Node.js 애플리케이션을 계측하려면 `datadog-values.yaml` 파일에 다음 구성을 추가합니다.
 
 {{< highlight yaml "hl_lines=5-8" >}}
    datadog:
@@ -594,7 +715,7 @@ spec:
 
 ### 기본 이미지 레지스트리 변경 {#change-the-default-image-registry}
 
-Datadog은 계측 라이브러리 이미지를 gcr.io, Docker Hub, Amazon ECR에 게시:
+Datadog은 계측 라이브러리 이미지를 gcr.io, Docker Hub, Amazon ECR에 게시합니다.
 
 | 언어   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
@@ -615,7 +736,7 @@ Datadog Cluster Agent 구성의 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CO
 
 조직이 퍼블릭 레지스트리(예: `gcr.io`, `docker.io` 또는 `public.ecr.aws`)에서 직접 가져오기를 허용하지 않는 경우, 필수 Datadog 이미지를 내부에서 호스팅하고 Admission Controller가 이를 사용하도록 구성할 수 있습니다.
 
-SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하는 방법:
+SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하려면 다음 단계를 따르세요.
 
 1. [이러한 지침][34]을 따라 Datadog의 컨테이너 이미지를 프라이빗 레지스트리에 미러링합니다.
 
@@ -634,12 +755,12 @@ SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하는 방법:
 2. 구성에 따라 이미지를 태그합니다.
 
    미러링하는 버전이 워크로드에서 구성된 버전과 일치해야 하며, 이는 다음 중 한 가지 방법으로 설정할 수 있습니다.
-   - `ddTraceVersions`를 사용하여 Agent 구성에서 전역적으로, 또는
+   - `ddTraceVersions`를 사용하여 Agent 구성에서 전역적으로 또는
    - `admission.datadoghq.com/java-lib.version`과 같은 어노테이션을 사용하여 포드당.
 
    명시적으로 구성된 버전이 없으면 기본 버전(`0`)이 사용됩니다.
 
-   예:
+   예를 들면 다음과 같습니다.
 
    ```
    apm:
@@ -665,8 +786,8 @@ SSI를 프라이빗 컨테이너 레지스트리와 함께 사용하는 방법:
 
 ### EKS에서 Container Network Interface 사용{#using-a-container-network-interface-on-eks}
 
-Calico와 같은 CNI를 사용하는 경우,컨트롤 플레인 노드가 Datadog의 Admission Controller로의 네트워크 연결을 시작할 수 없고 "Address is not allowed(주소가 허용되지 않음)" 오류를 보고합니다.
-Single Step instrumentation을 사용하려면 Datadog의 Cluster Agent를 `useHostNetwork: true` 파라미터를 사용해 수정하세요.
+Calico와 같은 CNI를 사용하는 경우, 컨트롤 플레인 노드가 Datadog의 Admission Controller에 대한 네트워크 연결을 시작할 수 없고 'Address is not allowed' 오류를 보고합니다.
+Single Step Instrumentation을 사용하려면 Datadog의 Cluster Agent를 `useHostNetwork: true` 파라미터를 사용해 수정하세요.
 
 ```
 datadog:
@@ -679,7 +800,7 @@ clusterAgent:
     ...
 ```
 
-## Agent에서 Single Step APM 계측 제거 {#remove-single-step-apm-instrumentation-from-your-agent}
+## Agent에서 단일 단계 APM 계측 제거 {#remove-single-step-apm-instrumentation-from-your-agent}
 
 특정 서비스, 호스트, VM 또는 컨테이너의 트레이스 데이터를 수집하지 않고자 하는 경우, 다음 단계를 따르세요.
 
@@ -693,11 +814,11 @@ clusterAgent:
 
 #### Datadog Admission Controller 사용 {#use-the-datadog-admission-controller}
 
-대안으로, 또는 계측 규칙을 지원하지 않는 에이전트 버전인 경우, 포드에 레이블을 추가하여 포드 변형을 비활성화할 수도 있습니다.
+대안으로 또는 계측 규칙을 지원하지 않는 에이전트 버전인 경우, 포드에 레이블을 추가하여 포드 변형을 비활성화할 수도 있습니다.
 
 <div class="alert alert-danger">다음 단계를 따르면 SSI를 비활성화할 뿐만 아니라 다른 변형 웹훅도 비활성화합니다. 사용 시 주의하세요.</div>
 
-1. `admission.datadoghq.com/enabled:` 레이블을 포드 사양의 `"false"`에 대하여 설정:
+1. 포드 사양에 대해 `admission.datadoghq.com/enabled:` 레이블을 `"false"`로 설정합니다.
    ```yaml
    spec:
      template:
@@ -705,7 +826,7 @@ clusterAgent:
          labels:
            admission.datadoghq.com/enabled: "false"
    ```
-2. 구성 적용:
+2. 구성을 적용합니다.
    ```shell
    kubectl apply -f /path/to/your/deployment.yaml
    ```
@@ -713,14 +834,14 @@ clusterAgent:
 
 ### 인프라의 모든 서비스에 대하여 APM 제거 {#remove-apm-for-all-services-on-the-infrastructure}
 
-트레이스 생성을 중단하려면 APM을 제거하고 인프라를 재시작:
+트레이스 생성을 중단하려면 APM을 제거하고 인프라를 재시작하세요.
 
 구성해야 하는 파일은 Single Step Instrumentation을 Datadog Operator 또는 Helm 중 무엇으로 활성화했는지에 따라 다릅니다.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. `datadog-agent.yaml`에서 `instrumentation.enabled=false` 설정:
+1. `datadog-agent.yaml`에서 `instrumentation.enabled=false`를 설정합니다.
    ```yaml
    features:
      apm:
@@ -728,7 +849,7 @@ clusterAgent:
          enabled: false
    ```
 
-2. Datadog Agent를 업데이트된 구성 파일로 배포:
+2. Datadog Agent를 업데이트된 구성 파일로 배포합니다.
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
@@ -736,7 +857,7 @@ clusterAgent:
 
 {{% tab "Helm" %}}
 
-1. `datadog-values.yaml`에서 `instrumentation.enabled=false` 설정:
+1. `datadog-values.yaml`에서 `instrumentation.enabled=false`를 설정합니다.
    ```yaml
    datadog:
      apm:
@@ -744,7 +865,7 @@ clusterAgent:
          enabled: false
    ```
 
-2. 다음 명령 실행:
+2. 다음 명령을 실행합니다.
    ```shell
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
@@ -757,9 +878,9 @@ SSI를 활성화하고 나면 몇 분 안에 클러스터의 모든 지원되는
 
 APM이 어디에서 활성화되는지 제어하고 오버헤드를 줄이려면 다음 모범 사례를 고려하세요.
 
-{{% collapse-content title="통제된 APM 롤아웃을 위해 옵트인 레이블 사용" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="통제된 APM 롤아웃을 위해 옵트인 레이블 사용" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
-#### 기본값 vs. 옵트인 계측 {#default-vs-opt-in-instrumentation}
+#### 기본값과 옵트인 계측 {#default-vs-opt-in-instrumentation}
 | 모드    | 동작    | 사용해야 하는 경우 |
 | ---  | ----------- | ----------- |
 | 기본값 | 클러스터에서 모든 지원되는 프로세스가 계측됩니다. | 작은 클러스터 또는 프로토타입. |
@@ -817,9 +938,9 @@ APM이 어디에서 활성화되는지 제어하고 오버헤드를 줄이려면
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="로드할 Datadog SDK 제어" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="로드할 Datadog SDK 제어" level="h3" expanded=false id="control-loaded-datadog-sdks" %}}
 
-Agent Helm 구성에서 `ddTraceVersions`를 사용하여 Datadog SDK의 언어와 버전을 모두 제어합니다. 이렇게 하면 불필요한 SDK가 다운로드되는 것을 방지하므로 init 컨테이너 풋프린트가 최소화되고, 이미지 크기가 감소하며 좀 더 신중한 트레이서 업그레이드를 할 수 있습니다(예를 들어 규정 준수 요구 사항에 충족하기 위해, 또는 디버깅 간소화를 위해).
+Agent Helm 구성에서 `ddTraceVersions`를 사용하여 Datadog SDK의 언어와 버전을 모두 제어합니다. 이렇게 하면 불필요한 SDK가 다운로드되는 것이 방지되므로 init-container 풋프린트가 최소화되고, 이미지 크기가 감소하며, 좀 더 신중한 트레이서 업그레이드를 할 수 있습니다(예: 규정 준수 요구 사항을 충족하거나 디버깅을 간소화하기 위해).
 
 #### 예: 네임스페이스에 대하여 Java SDK 지정 {#example-specify-a-java-sdk-for-a-namespace}
 
@@ -893,4 +1014,7 @@ SSI로 APM 활성화와 관련한 문제가 발생하는 경우, [SSI 문제 해
 [35]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 [37]: /ko/containers/kubernetes/csi_driver/
+[40]: https://app.datadoghq.com/organization-settings/api-keys
+[42]: https://app.datadoghq.com/apm/services
 [41]: /ko/tracing/guide/injectors/
+[43]: /ko/getting_started/site/

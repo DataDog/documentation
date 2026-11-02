@@ -342,7 +342,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
-Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+Use the [Agentic Onboarding][10] page to instrument your browser application using the Pup CLI or the Datadog MCP Server.
 
 {% /collapse-content %}
 

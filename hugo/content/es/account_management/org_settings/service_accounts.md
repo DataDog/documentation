@@ -1,108 +1,131 @@
 ---
+description: Cree y administre cuentas de servicio no interactivas para scripts automatizados
+  y claves de aplicación compartidas entre equipos con controles de acceso seguros.
 further_reading:
+- link: /account_management/service-access-tokens/
+  tag: Documentación
+  text: Tokens de acceso de servicio
 - link: https://docs.datadoghq.com/api/latest/service-accounts/
   tag: Documentación
-  text: Referencia de API de cuentas de servicio
+  text: Referencia de la API de Cuentas de servicio
 title: Cuentas de servicio
 ---
+## Descripción general {#overview}
 
-## Información general
+Las cuentas de servicio son cuentas no interactivas que puede usar para poseer claves de aplicación y otros recursos que se comparten entre sus equipos. Las claves de aplicación de las cuentas de servicio solo pueden ser vistas una vez por la persona que creó la clave.
 
-Las cuentas de servicio son cuentas no interactivas que puedes usar para tener claves de aplicación y otros recursos compartidos en tus equipos. Las claves de aplicación de cuentas de servicio solo las puede ver una vez la persona que las creó.
+Suponga que un empleado de su empresa configura un script automatizado para enviar solicitudes a la Datadog API, utilizando su clave de aplicación personal. Cuando ese empleado deja la empresa, usted desactiva su cuenta de Datadog y su clave de aplicación deja de funcionar. El script automatizado también deja de funcionar, hasta que alguien lo actualiza con una clave de aplicación válida. Usar una clave de aplicación de cuenta de servicio en lugar de una clave de aplicación personal para solicitudes automatizadas a la Datadog API evita este problema.
 
-Supón que un empleado de tu empresa configura un script automatizado para enviar solicitudes a la API de Datadog, utilizando para ello su clave de aplicación personal. Cuando ese empleado se marcha de la empresa, desactivas su cuenta de Datadog y su clave de aplicación deja de funcionar. El script automatizado también deja de funcionar, hasta que alguien lo actualiza con una clave de aplicación válida. Para evitar este problema, utiliza una clave de aplicación de cuenta de servicio en lugar de una clave de aplicación personal para las solicitudes automatizadas a la API de Datadog.
+## Navigation {#navigation}
 
-## Navegación
+Las cuentas de servicio se encuentran en [Organization Settings][1]. 
 
-Las cuentas de servicio se encuentran en [Organization Settings][1] (Parámetros de organización).
+Para acceder a las cuentas de servicio en la interfaz de usuario:
 
-Para acceder a las cuentas de servicio en la IU:
+1. Navegue a {{< ui >}}Organization Settings{{< /ui >}} desde el menú de su cuenta.
+2. En {{< ui >}}Accounts{{< /ui >}}, seleccione {{< ui >}}Service Accounts{{< /ui >}}.
 
-1. Dirígete a **Organization Settings** (Parámetros de organización) desde el menú de tu cuenta.
-2. En **Accounts** (Cuentas), selecciona **Service Accounts** (Cuentas de servicio).
+La [página Service Accounts][2] contiene una lista de todas las cuentas de servicio de su organización. Los usuarios con el permiso Service Account Write, incluidos los usuarios con el rol Datadog Admin, pueden crear cuentas de servicio. Los usuarios sin el permiso de Write de cuenta de servicio ven una vista de solo lectura.
 
-La [página Service Accounts][2] (Cuentas de servicio) contiene una lista de todas las cuentas de servicio de tu organización. Los usuarios con permiso de escritura para cuentas de servicio, incluidos los usuarios que tienen el rol de administrador de Datadog, pueden crear cuentas de servicio. Los usuarios que no tienen este permiso tienen acceso a una vista de solo lectura.
+### Visualizar cuentas de servicio {#view-service-accounts}
 
-### Ver las cuentas de servicio
+De forma predeterminada, la página Service Accounts muestra solo las cuentas de servicio activas. Para incluir cuentas de servicio deshabilitadas en la lista a continuación, seleccione {{< ui >}}Disabled{{< /ui >}}.
 
-De forma predeterminada, la página Service Accounts (Cuentas de servicio) solo muestra cuentas de servicio activas. Para incluir cuentas de servicio desactivadas en la siguiente lista, selecciona **Disabled** (Desactivadas).
+Use el cuadro de búsqueda en la parte superior de la página para filtrar las cuentas de servicio. El filtro busca en los campos de nombre, correo electrónico y rol.
 
-Utiliza el cuadro de búsqueda de la parte superior de la página para filtrar cuentas de servicio. El filtro busca por nombre, correo electrónico y rol.
+Haga clic en una cuenta para acceder a una vista detallada del panel lateral con la siguiente información: 
 
-Haz clic en una cuenta para acceder a una vista detallada del panel lateral con la siguiente información:
-
-- Estado (activa o desactivada)
-- Fechas de creación y de última modificación
+- Estado (activo o deshabilitado)
+- Fechas de creación y última modificación
 - Roles
 - Claves de aplicación
 - Permisos
 
-### Crear una cuenta de servicio
+### Crear cuenta de servicio {#create-service-account}
 
-Para crear una cuenta de servicio, sigue estos pasos:
+Para crear una cuenta de servicio, realice los siguientes pasos:
 
-1. Haz clic en **New Service Account** (Nueva cuenta de servicio). Aparecerá un cuadro de diálogo.
-2. Introduce un nombre y una dirección de correo electrónico para tu cuenta de servicio.
-3. Utiliza el menú desplegable **Assign Roles** (Asignar roles) para elegir uno o varios roles para tu cuenta de servicio.
-4. Para guardar, haz clic en **Create Service Account** (Crear cuenta de servicio).
+1. Haga clic en {{< ui >}}New Service Account{{< /ui >}}. Aparece un cuadro de diálogo.
+2. Ingrese un nombre y una dirección de correo electrónico para su cuenta de servicio.
+3. Utilice el menú desplegable {{< ui >}}Assign Roles{{< /ui >}} para elegir uno o más roles para su cuenta de servicio.
+4. Para guardar, haga clic en {{< ui >}}Create Service Account{{< /ui >}}.
 
-Las direcciones de correo electrónico de las cuentas de servicio, a diferencia de las de los usuarios de Datadog, no tienen por qué ser únicas dentro de una organización.
+A diferencia de las direcciones de correo electrónico de los usuarios de Datadog, las direcciones de correo electrónico de las cuentas de servicio no necesitan ser únicas en toda la organización.
 
-### Editar una cuenta de servicio
+### Editar cuenta de servicio {#edit-service-account}
 
-Para modificar una cuenta de servicio, haz clic en ella en la lista de cuentas de servicio.
+Para modificar una cuenta de servicio, haga clic en una de la lista de cuentas de servicio. 
 
-1. En el panel lateral, haz clic en **Edit** (Editar) junto al nombre de la cuenta de servicio. Aparecerá un cuadro de diálogo.
-2. Actualiza los campos que quieras modificar. Puedes editar el nombre, la dirección de correo electrónico, el estado y los roles.
-3. Haz clic en **Save** (Guardar).
+1. En el panel lateral, haga clic en {{< ui >}}Edit{{< /ui >}} junto al nombre de la cuenta de servicio. Aparece un cuadro de diálogo.
+2. Actualice los campos que desea cambiar. Puede editar el nombre, la dirección de correo electrónico, el estado y los roles.
+3. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Para desactivar una cuenta de servicio, el usuario debe tener el permiso User Manage Access además de Service Account Write.
+Para deshabilitar una cuenta de servicio, el usuario debe tener el permiso User Manage Access además de Service Account Write.
 
-Para desactivar una cuenta de servicio, sigue el procedimiento anterior para editar la cuenta de servicio y establece el estado en **Disabled** (Desactivado).
+Para deshabilitar una cuenta de servicio, siga el procedimiento anterior para editar la cuenta de servicio y establezca el estado en {{< ui >}}Disabled{{< /ui >}}.
 
-### Crear o revocar claves de aplicación
+### Service Access Tokens {#service-access-tokens}
 
-Para crear o revocar claves de aplicación de cuentas de servicio, selecciona una cuenta en la lista de cuentas de servicio. Aparecerá el panel lateral de esa cuenta.
+[Los Service Access Tokens (SATs)][4] son la forma recomendada de autenticar las llamadas a Datadog API desde
+una cuenta de servicio. Los SAT tienen un alcance definido, son opcionalmente de larga duración y autónomos; no requieren una clave de API.
 
-Para crear una nueva clave de aplicación, sigue estos pasos:
+Para crear un SAT para una cuenta de servicio:
 
-- Haz clic en **New Key** (Nueva clave). Aparecerá un cuadro de diálogo.
-- Pon un nombre descriptivo a la clave.
-- Haz clic en **Create Key** (Crear clave).
+1. Vaya a [**Organization Settings** > **Service Accounts**][2] y haga clic en una cuenta de servicio. Aparece el panel de detalles.
+2. En **Access Tokens**, haga clic en {{< ui >}}\+ New Token{{< /ui >}}.
+3. Siga los pasos de [Crear un Service Access Token][5].
 
-El cuadro de diálogo se actualizará y te mostrará la clave. Copia y pega la clave en la ubicación que quieras. Una vez cerrado el cuadro de diálogo, ya no podrás volver a obtener el valor de la clave.
+**Nota:** Cada cuenta de servicio puede tener hasta 500 SATs.
 
-Para revocar una clave de aplicación, busca la clave en el panel lateral de vista detallada de cuentas de servicio y pasa por encima con el ratón. A la derecha verás el icono de un lápiz y el de una papelera. Haz clic en la papelera para revocar la clave. Una vez revocada, haz clic en **Confirm** (Confirmar).
+### Crear o revocar claves de aplicación {#create-or-revoke-application-keys}
 
-### API
+Para crear o revocar claves de aplicación de cuenta de servicio, seleccione una cuenta de la lista de cuentas de servicio. Aparece el panel lateral de la cuenta de servicio.
 
-Consulta la [referencia API de cuentas de servicio][3] para utilizar cuentas de servicio a través de la API de Datadog.
+Para crear una nueva clave de aplicación, siga los pasos a continuación:
 
-## Claves de aplicación de cuentas de servicio
+- Haga clic en {{< ui >}}New Key{{< /ui >}}. Aparece un cuadro de diálogo.
+- Asigne a la clave un nombre descriptivo.
+- Haga clic en {{< ui >}}Create Key{{< /ui >}}. 
 
-La clave de aplicaciones de una cuenta de servicio solo se puede ver una única vez, inmediatamente después de crearla. Limitar el acceso a la clave de aplicación evita cualquier problema que pueda surgir si otro usuario accede a la clave. Si pierdes u olvidas una clave de cuenta de servicio, revócala y crea una nueva.
+El cuadro de diálogo se actualiza y le muestra la clave. Copie y pegue la clave en la ubicación deseada. Después de cerrar el cuadro de diálogo, no podrá recuperar el valor de la clave.
 
-## Permisos
+{{< site-region region="ap2,gov,gov2" >}}
+<div class="alert alert-danger">Las claves de aplicación de las cuentas de servicio solo se pueden consultar una vez. Asegúrese de almacenar de forma segura su clave de aplicación inmediatamente después de crearla, ya que el secreto de la clave no se puede recuperar más tarde.</div>
+{{< /site-region >}}
 
-Al crear una cuenta de servicio, creas un agente que interactúa con Datadog en tu nombre. Lo que puedas hacer en la página Service Accounts (Cuentas de servicio) variará en función de los roles y permisos de Datadog que tengas.
+Para revocar una clave de aplicación, busque la clave en el panel lateral de la vista detallada de la cuenta de servicio y coloque el cursor sobre ella. Los iconos de lápiz y papelera aparecen a la derecha. Haga clic en la papelera para revocar la clave. Después de revocar la clave, haga clic en {{< ui >}}Confirm{{< /ui >}}.
 
-Para crear una cuenta de servicio es necesario tener el permiso de escritura para cuentas de servicio. El rol de administrador de Datadog incluye este permiso, por lo que cualquier persona que tenga dicho rol podrá crear cuentas de servicio.
+### API {#api}
 
-A la hora de crear una cuenta de servicio, puedes otorgarle cualquier subcojunto de roles y permisos que tengas; excepto si tienes el permiso de gestión de acceso de usuarios, que te da acceso de administrador para hacer cualquier cosa en Datadog. Las cuentas de Datadog con este permiso no tienen ninguna restricción sobre los roles y permisos que pueden asignar a las cuentas de servicio.
+Consulte la [referencia de la API de cuentas de servicio][3] para utilizar cuentas de servicio a través de Datadog API.
+
+## Claves de aplicación de cuenta de servicio {#service-account-application-keys}
+
+Puede visualizar la clave de aplicación de una cuenta de servicio exactamente una vez, inmediatamente después de crearla. Limitar el acceso a la clave de aplicación evita cualquier problema que pueda ocurrir cuando otro usuario accede a la clave. Si pierde u olvida una clave de cuenta de servicio, revóquela y cree una nueva.
+
+## Permisos {#permissions}
+
+Al crear una cuenta de servicio, usted crea un actor que interactúa con Datadog en su nombre. Sus capacidades en la página Service Accounts varían según sus roles y permisos de Datadog.
+
+La creación de una cuenta de servicio requiere el permiso Service Account Write. El rol Datadog Admin incluye el permiso Service Account Write, por lo que cualquier persona con el rol Datadog Admin puede crear cuentas de servicio.
+
+Al crear una cuenta de servicio, puede asignarle cualquier subconjunto de los roles y permisos que usted tenga. La excepción es si usted tiene el permiso User Access Manage, que le otorga acceso de administrador para realizar cualquier acción en Datadog. Las cuentas de Datadog con el permiso User Access Manage no tienen restricciones sobre los roles y permisos que pueden asignar a las cuentas de servicio.
 
 
-## Notificaciones
+## Notifications {#notifications}
 
-Datadog envía una notificación a la dirección de correo electrónico asociada a la cuenta de servicio cuando se realizan las siguientes acciones:
+Datadog envía una notificación a la dirección de correo electrónico asociada con la cuenta de servicio cuando ocurren las siguientes acciones:
 - Crear una clave de aplicación
-- Se revoca una clave de aplicación
-- Se desactiva la cuenta de servicio
+- Revocar una clave de aplicación
+- Deshabilitar la cuenta de servicio
 
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/account_management/org_settings/
 [2]: https://app.datadoghq.com/organization-settings/service-accounts
 [3]: /es/api/latest/service-accounts/
+[4]: /es/account_management/service-access-tokens/
+[5]: /es/account_management/service-access-tokens/#create-a-service-access-token
