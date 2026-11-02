@@ -2853,11 +2853,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Google Meet
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_meet
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_meet
+      weight: 508
     - name: Zoom
       url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
       parent: incidents_integrations
       identifier: incidents_integrations_zoom
-      weight: 508
+      weight: 509
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
@@ -5454,16 +5459,21 @@ menu:
       parent: dbm
       identifier: dbm_workbench
       weight: 7
+    - name: Database Monitoring PR Reviews
+      url: database_monitoring/pr_reviews/
+      parent: dbm
+      identifier: dbm_pr_reviews
+      weight: 8
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 8
+      weight: 9
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 9
+      weight: 10
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
