@@ -197,6 +197,12 @@ Each entry in `checks` accepts the following fields:
 `instances`
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
+`checkTagCardinality`
+: Optional. Overrides the Agent's check tag cardinality with `low`, `orchestrator`, or `high`. If omitted, the check inherits the Agent setting. This does not affect DogStatsD metrics.
+
+`ignoreAutodiscoveryTags`
+: Optional. Set to `true` to suppress container and pod tags added by Autodiscovery. Defaults to `false`. Explicitly configured tags and tags emitted by the integration are retained.
+
 Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 
 ### Target services
@@ -287,4 +293,4 @@ Auto-discovery IDs:
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
 [7]: https://argoproj.github.io/rollouts/
-[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation
+[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdv785#enable-apm-with-datadoginstrumentation
