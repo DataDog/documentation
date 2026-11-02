@@ -465,4 +465,3 @@ You can use Terraform to create or manage your status pages. For details on the 
 [3]: /account_management/org_settings/smtp_configuration
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page
 [5]: /account_management/rbac/granular_access/
-[6]: /api/latest/status-pages/
