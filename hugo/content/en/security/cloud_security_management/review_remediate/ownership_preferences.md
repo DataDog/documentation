@@ -31,7 +31,7 @@ To add, edit, or delete ownership preferences, you need the **Security Monitorin
 
 ## Manage ownership preferences
 
-1. In Datadog, go to **Security** > **Settings** > [**Ownership Agent**][1].
+1. In Datadog, go to **Security** > **Settings** > **Cloud Security** > [**Ownership Agent**][1].
 2. Scroll to the **Ownership preferences** section. It contains a **Tag mappings** panel, an **Exclusions** panel, and a **Custom instructions** panel.
 3. To add a rule, click **Add tag mapping**, **Add exclusion**, or **Add instruction** on the matching panel, fill in the form, and click **Add**.
 4. To change a rule, click the pencil icon on its row, update the form, and click **Update**.
