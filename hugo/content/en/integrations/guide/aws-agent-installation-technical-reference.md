@@ -76,7 +76,7 @@ Lambda instrumentation runs entirely from Datadog. Datadog does not deploy any c
 
 1. Datadog reads the function's current configuration and tags, and checks that it meets the [Lambda prerequisites][3].
 2. Datadog checks whether the function is already instrumented. Datadog skips a function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Datadog also skips a function managed by [remote instrumentation][4], and reports which of the two reasons applies.
-3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Datadog applies layer versions it has validated rather than whatever is newest at that moment, so an installation is reproducible.
+3. Datadog resolves the layer versions set on the rule for the function's runtime, architecture, region, and AWS partition. Datadog applies the rule's versions rather than whatever is newest at that moment, so an installation is reproducible. When a version doesn't exist for the function, Datadog skips the function and reports `lambda_layer_version_not_found`.
 4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
 5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See the [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated) section.
 6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. Datadog marks the change as applied only after AWS reports success.
@@ -90,6 +90,7 @@ A Lambda update is a replace-style operation: the submitted layer list and envir
 | Adds the Datadog extension layer (`Datadog-Extension` or `Datadog-Extension-ARM`) | All supported runtimes |
 | Adds the matching Datadog tracing layer | Node.js, Python, Ruby, Java, and .NET |
 | Sets `DD_SITE` and `DD_ORG_UUID` | All supported runtimes |
+| Sets `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED` to `true` or `false` to match the rule's APM and Logs toggles, overwriting existing values | All supported runtimes |
 | Redirects the handler to the Datadog handler and moves the original into `DD_LAMBDA_HANDLER` | Node.js and Python |
 | Sets `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper` | Java and .NET |
 
@@ -159,11 +160,11 @@ Datadog continuously maintains the state you define on the covered resources:
   - **EC2**: Events come from the CloudFormation stack's EventBridge rule.
   - **Lambda**: The `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
 - On EC2, instances that already have the Agent are re-verified less frequently, to avoid unnecessary activity.
-- On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet already on current layer versions produces no per-function activity.
+- On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet already on the rule's layer versions and APM and Logs settings produces no per-function activity.
 
 ### How Lambda functions pick up new layer versions
 
-Datadog compares a covered function's layers against the versions Datadog deploys, rather than against the versions applied at first instrumentation. When Datadog releases new layer versions, covered functions are updated to them. Your functions therefore move forward with Datadog's layer releases without any action from you.
+Datadog compares a covered function's layers against the versions set on the rule. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version. Datadog does not upgrade the versions on a rule for you. A covered function picks up a new layer version only when you edit the rule. For how to set the versions, see [Lambda layer versions][8] in the setup guide.
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
@@ -216,3 +217,4 @@ To remove instrumentation, remove resources from a rule, edit the rule's query, 
 [5]: https://docs.datadoghq.com/account_management/workload_identity_federation/
 [6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
 [7]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-how-your-rule-matches-resources
+[8]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#lambda-layer-versions
