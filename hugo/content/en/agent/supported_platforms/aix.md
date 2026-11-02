@@ -73,7 +73,7 @@ Alternatively, see the [datadog.yaml.example file][10] for all available configu
 
 Configuration files for integrations exist in `/etc/datadog-agent/conf.d/`.
 Each integration has its own subdirectory, `<INTEGRATION>.d/`, that contains:
-- `conf.yaml`: The active configuration controlling how the integration gathers metrics and logs
+- `conf.yaml`: The active configuration controlling how the integration gathers metrics
 - `conf.yaml.example`: A sample illustrating supported keys and defaults
 
 
