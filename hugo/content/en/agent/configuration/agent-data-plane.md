@@ -217,6 +217,71 @@ The `agent-data-plane dogstatsd stats` command is always available. You do not n
 
 If you monitor the Agent's DogStatsD internals with the [Go-Expvar integration][5], the main Agent's DogStatsD counters report `0` when ADP is enabled. This is expected, because ADP handles that traffic instead. ADP's internal metrics are exposed through the Agent's OpenMetrics telemetry endpoint (`localhost:5000/telemetry`) and are tagged with `emitter:agent-data-plane`. Some metric names and tags differ from those emitted by the main Agent.
 
+## Resource requirements
+
+ADP's CPU usage scales with the number of DogStatsD packets received per second. Its memory usage scales with the number of active contexts. A context is a unique combination of a metric name and its tag set. In Kubernetes, the `agent-data-plane` container has no resource requests or limits by default.
+
+Based on your DogStatsD packets per second, use the following table to set resources for the `agent-data-plane` container:
+
+| Packets per second | CPU request | Memory request and limit |
+|--------------------|-------------|--------------------------|
+| Fewer than 1,000   | 150m        | 256Mi                    |
+| 1,000 to 10,000    | 500m        | 2Gi                      |
+| 10,000 to 50,000   | 2           | 2.5Gi                    |
+| More than 50,000   | 2 or more   | 2.5Gi or more            |
+
+If you know your peak number of active contexts, size memory from contexts instead. Set the memory request and limit to at least 128 MiB plus 2.5 KiB per context. For example, 1,000,000 contexts requires about 2.5Gi.
+
+Datadog recommends not setting a CPU limit on the `agent-data-plane` container. DogStatsD traffic is bursty, and CPU throttling can cause dropped packets. If your cluster requires a CPU limit, set it well above observed peaks.
+
+To measure your DogStatsD volume, use the following metrics from the Agent's [OpenMetrics telemetry endpoint](#agent-telemetry) (`localhost:5000/telemetry`):
+
+| Measurement        | Metric                                             |
+|--------------------|----------------------------------------------------|
+| Packets per second | `dogstatsd__udp_packets`, `dogstatsd__uds_packets` |
+| Active contexts    | `aggregator__dogstatsd_contexts`                   |
+
+The packet metrics are counters, so graph them as a rate to get packets per second. You can also view packet counts in the [Agent status][2] output. They appear in the **DogStatsD** section, or in the **Agent Data Plane** section when ADP is enabled.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+{{< code-block lang="yaml" >}}
+spec:
+  override:
+    nodeAgent:
+      containers:
+        agent-data-plane:
+          resources:
+            requests:
+              cpu: 500m
+              memory: 2Gi
+            limits:
+              memory: 2Gi
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+{{< code-block lang="yaml" >}}
+agents:
+  containers:
+    agentDataPlane:
+      resources:
+        requests:
+          cpu: 500m
+          memory: 2Gi
+        limits:
+          memory: 2Gi
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notes**:
+- These values are based on observed usage across Datadog's own infrastructure. Workloads with many distribution metrics, high tag cardinality, or unbuffered DogStatsD clients may need more resources.
+- These values apply to the `agent-data-plane` container only. Size the main `agent` container separately.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
