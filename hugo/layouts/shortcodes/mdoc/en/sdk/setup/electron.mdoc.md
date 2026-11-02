@@ -2,8 +2,6 @@
 This partial contains setup instructions for the Electron SDK.
 -->
 
-## Overview
-
 Instrument your Electron applications for [Real User Monitoring (RUM)][setup-overview-1] with the Electron SDK.
 
 - The Electron SDK monitors the main process. It uses dd-trace-js to collect traces and sends the data from the main process to Datadog.

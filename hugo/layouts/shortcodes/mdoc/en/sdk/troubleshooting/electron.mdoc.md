@@ -11,7 +11,7 @@ If you experience unexpected behavior with the Datadog Electron SDK, use this gu
 
 ### Browser windows opened before `init` completes are not tracked
 
-Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users only interact with such windows, the session expires after 15 minutes of inactivity and no new session starts.
+Windows opened before `init` completes are not tracked until you reload them. They send nothing, not even the interactions that keep the session alive. If end users interact only with such windows, the session expires after 15 minutes of inactivity and no new session starts.
 
 To fix this, wait for `init` to complete before you create any browser window, as described in [Initialize the SDK in the main process][2]. If a window must open earlier, reload it after `init` completes. To wait for the end user's consent, call `init` at startup with `trackingConsent: 'pending'` instead of deferring it. See [Tracking consent][8].
 

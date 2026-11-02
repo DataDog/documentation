@@ -220,7 +220,7 @@ setTrackingConsent(accepted ? 'granted' : 'not-granted');
 - Refusing consent ends the session. The next `'pending'` or `'granted'` value starts a new session. Moving between `'pending'` and `'granted'` keeps the session.
 - RUM events, logs, spans, profiles, and Session Replay recordings that start while consent is refused, or pending and then refused, are not sent, even if they are reported after consent is granted again.
 - The SDK does not restore the consent at the next launch, so pass it at each launch. Data kept while consent is pending is deleted at the next launch if no decision was made.
-- Call `setTrackingConsent` after `init` resolves. An earlier call can be ignored.
+- Call `setTrackingConsent` after `init` resolves. An earlier call might be ignored.
 - An invalid `trackingConsent` value aborts `init`. An invalid value passed to `setTrackingConsent` is handled as `'not-granted'`.
 - The SDK starts Electron's crash reporter, which writes native crash dumps locally regardless of consent. At the next launch, a crash is evaluated against the consent at the time it happened, then sent, kept, or dropped according to the consent of that launch. Its dump is deleted either way.
 - Requests that the main process makes carry trace headers when consent is `'granted'` or `'pending'`, so their traces link to the data sent if consent is granted. They carry none when consent is refused.

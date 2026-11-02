@@ -67,7 +67,7 @@ Stack traces collected in an Electron app contain the app's install path, which 
 
 ### Upload with `datadog-ci`
 
-Use [`datadog-ci`][5] to upload source maps. The `--service` and `--release-version` values must match your SDK configuration. The `--minified-path-prefix` value must be the path at which the uploaded files appear in stack traces. Run `datadog-ci` from your git working tree: it sends the repository URL and the commit of the uploaded sources so Error Tracking can link stack frames to your code.
+Use [`datadog-ci`][5] to upload source maps. The `--service` and `--release-version` values must match your SDK configuration. The `--minified-path-prefix` value must be the path at which the uploaded files appear in stack traces. Run `datadog-ci` from your Git working tree. It sends the repository URL and the commit of the uploaded sources so Error Tracking can link stack frames to your code.
 
 The examples assume an app packaged with its `dist/` folder.
 

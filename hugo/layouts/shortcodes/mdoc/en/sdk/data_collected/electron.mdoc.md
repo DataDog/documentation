@@ -10,7 +10,7 @@ The Electron SDK collects data from two sources:
 - **Renderer processes** are monitored by the Browser SDK. Views, actions, resources, errors, and other renderer events follow the [Browser data collected][1] reference.
 - **The main process** is monitored by the Electron SDK, which generates RUM events, and by dd-trace-js, which generates traces.
 
-Every event has attributes. See [Shared attributes](#shared-attributes). Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to filter and group telemetry in analytics (group by). You can further enrich your data by [adding global context][2].
+Every event has attributes. See the [Shared attributes](#shared-attributes) section. Quantifiable attributes can be used for measurements related to the event, while non-quantifiable attributes can be used to filter and group telemetry in analytics (group by). You can further enrich your data by [adding global context][2].
 
 ## Main process RUM events
 
@@ -34,7 +34,7 @@ An execution context is a unit of code execution, such as an operating system pr
 |----------------------------|--------|-------------|
 | `execution_context.id`     | string | Unique identifier (UUID) of the execution context. |
 | `execution_context.type`   | string | Type of the execution context: `main-process` or `renderer-process`. |
-| `execution_context.name`   | string | Name of the execution context, described below. |
+| `execution_context.name`   | string | Name of the execution context. See the following table. |
 
 The name of the main process is `Main Process`. The name of a renderer process is derived from the URL of its window, after the page is loaded:
 
