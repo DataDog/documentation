@@ -334,18 +334,28 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 {{% /tab %}}
 
-{{% tab "Unix" %}}
+{{% tab "AIX" %}}
 
-The UNIX Agent supports the following [AIX][1] versions:
+## Agent 7
+
+Agent 7.85.0 and later support the following [AIX][1] versions:
+
+- 7.2 TL5 and later
+- 7.3 TL1 and later
+
+## Datadog UNIX Agent
+
+The [Datadog UNIX Agent][2] is the legacy Agent for AIX. It supports the following AIX versions:
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
 - 7.3 TL3 SP0
 
-Note: The Datadog UNIX Agent is developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
+**Note**: The Datadog UNIX Agent is developed for specific system architectures, and is not the same as the Windows, Linux, and macOS Agents.
 
-[1]: /agent/basic_agent_usage/aix/
+[1]: /agent/supported_platforms/aix/
+[2]: /agent/guide/install-unix-agent-aix/
 {{% /tab %}}
 {{< /tabs >}}
 

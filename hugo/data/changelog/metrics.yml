@@ -105,3 +105,20 @@ entries:
       - DeleteBulkTagsMetricsConfiguration
     title: Remove deprecated metric bulk-tags endpoints from public docs and 
       SDKs
+  - change_type: modified
+    date: '2026-10-30'
+    link: https://github.com/DataDog/documentation/pull/41251
+    operations:
+      - CreateTagIndexingRule
+      - CreateTagIndexingRuleExemption
+      - DeleteTagIndexingRule
+      - DeleteTagIndexingRuleExemption
+      - GetTagIndexingRule
+      - GetTagIndexingRuleExemption
+      - ListTagIndexingRuleExemptions
+      - ListTagIndexingRules
+      - ListTagIndexingRulesForMetric
+      - ReorderTagIndexingRules
+      - UpdateTagIndexingRule
+      - UpdateTagIndexingRuleExemption
+    title: Remove preview notes from tag indexing rules endpoints

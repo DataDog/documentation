@@ -1142,7 +1142,7 @@
     "summary": "Get the rule-based view of compliance findings"
   },
   "ListContainerImages": {
-    "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
+    "description": "Get all container images for your organization. This endpoint queries current\ninventory and does not support time-range parameters.\n\nUse `group_by` to return image groups with counts. Grouped results are limited\nby `page[size]`, may be incomplete, and do not support pagination.\n\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
   },
   "ListContainers": {
@@ -8197,6 +8197,24 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAWSCloudAuthIntakeMappings": {
+    "description": "List AWS cloud authentication intake mappings configured for the organization.",
+    "summary": "List AWS cloud authentication intake mappings"
+  },
+  "CreateAWSCloudAuthIntakeMapping": {
+    "description": "Create an AWS cloud authentication intake mapping to authorize an AWS ARN pattern for Agent authentication. The AWS account must already be integrated with Datadog, and managed API key rotation must be enabled for the organization. Patterns that conflict with existing intake or persona mappings are rejected.",
+    "summary": "Create an AWS cloud authentication intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication intake mapping."
+  },
+  "DeleteAWSCloudAuthIntakeMapping": {
+    "description": "Delete an AWS cloud authentication intake mapping by ID.",
+    "summary": "Delete an AWS cloud authentication intake mapping"
+  },
+  "GetAWSCloudAuthIntakeMapping": {
+    "description": "Get an AWS cloud authentication intake mapping by ID.",
+    "summary": "Get an AWS cloud authentication intake mapping"
   },
   "ListAWSCloudAuthPersonaMappings": {
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
