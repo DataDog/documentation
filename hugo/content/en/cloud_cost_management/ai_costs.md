@@ -14,6 +14,9 @@ further_reading:
 - link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Tag Pipelines"
+- link: "/cloud_cost_management/ai_costs/litellm_proxy_metrics"
+  tag: "Documentation"
+  text: "LiteLLM Proxy Usage and Cost Metrics"
 - link: "/cloud_cost_management/reporting"
   tag: "Documentation"
   text: "Reporting"
@@ -167,7 +170,6 @@ To connect your AI gateway, you need:
 - A source of gateway token usage:
   - [Agent Observability][20], which reports `ml_obs.span.llm.*.tokens` metrics
   - The [LiteLLM integration][21], which reports `litellm.*_tokens.metric.count` metrics
-  - The [`ddtrace` LiteLLM proxy usage metrics][23], which report `gen_ai.client.inference.usage.*` metrics
 - The `cloud_cost_management_write` permission
 
 A provider is available to allocate only if its bill is connected to Cloud Cost Management **and** your usage source reports requests to that provider.
@@ -230,4 +232,3 @@ Rules created by the **Connect your AI Gateway** flow appear in the **AI Gateway
 [20]: /llm_observability/
 [21]: /integrations/litellm/
 [22]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
-[23]: /cloud_cost_management/ai_costs/litellm_proxy_metrics/

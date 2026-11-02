@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Python tracer (`ddtrace`) can emit usage and cost metrics for a [LiteLLM proxy][1] that serves as a shared AI gateway. The metrics cover the proxy's calls to model providers and follow the [OpenTelemetry GenAI semantic conventions][2]. They include the IDs needed to match gateway usage to provider bills. [AI Costs][3] can use them to split a gateway's provider spend across the teams, users, and services that sent the requests.
+The Datadog Python tracer (`ddtrace`) can emit usage and cost metrics for a [LiteLLM proxy][1] that serves as a shared AI gateway. The metrics cover the proxy's calls to model providers and follow the [OpenTelemetry GenAI semantic conventions][2]. For each call, they carry token counts by type, the provider account, project, and API key ID, and an estimated cost. These are the inputs needed to split a provider bill, such as one tracked in [AI Costs][3], by the callers that generated it.
 
 This feature is part of the `ddtrace` LiteLLM integration and runs inside the proxy process. It is separate from the [LiteLLM integration][4] that the Datadog Agent runs against the proxy's Prometheus endpoint, which reports `litellm.*` metrics.
 
@@ -171,7 +171,7 @@ model_list:
 
 [1]: https://docs.litellm.ai/docs/simple_proxy
 [2]: https://github.com/open-telemetry/semantic-conventions-genai/blob/main/docs/gen-ai/gen-ai-token-metrics.md
-[3]: /cloud_cost_management/ai_costs/#allocating-your-ai-gateway-spend
+[3]: /cloud_cost_management/ai_costs/
 [4]: /integrations/litellm/
 [5]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [6]: /extend/dogstatsd/
