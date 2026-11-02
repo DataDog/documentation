@@ -1,6 +1,6 @@
 ---
 title: Metrics Experience Changes for Metric Name Pricing
-description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Volume Management page, Plan & Usage page, and estimated usage metrics."
+description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Metrics Catalog usage graphs, Plan & Usage page, and estimated usage metrics."
 further_reading:
 - link: "/account_management/billing/metric_name_pricing/"
   tag: "Documentation"
@@ -11,9 +11,9 @@ further_reading:
 - link: "/account_management/billing/usage_metrics/"
   tag: "Documentation"
   text: "Estimated Usage Metrics"
-- link: "/metrics/volume/"
+- link: "/metrics/catalog/"
   tag: "Documentation"
-  text: "Metrics Volume Management"
+  text: "Metrics Catalog"
 algolia:
   tags: ['metric name pricing', 'custom metrics', 'estimated usage metrics']
 ---
@@ -30,7 +30,7 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 |---------|-------------|
 | [Manage Tags modal](#manage-tags-modal) | Estimates the impact of tag changes on point volume instead of cardinality volume. |
 | [Metric side panel](#metric-side-panel) | Displays ingested and indexed point volume instead of timeseries volume. |
-| [Volume Management page](#volume-management-page) | Volume Overview graphs display new billing dimensions for Metric Name Pricing. |
+| [Metrics Catalog usage graphs](#metrics-catalog-usage-graphs) | Usage graphs display new billing dimensions for Metric Name Pricing. |
 | [Plan & Usage page](#plan--usage-page) | Reflects the Metric Name Pricing billing breakdown. |
 | [Estimated usage metrics](#estimated-usage-metrics) | New points-volume metrics replace cardinality-based estimated usage metrics. |
 
@@ -46,19 +46,20 @@ For more information on configuring tags, see [Metrics without Limits™][2].
 
 The metric details side panel displays **ingested and indexed point volume** instead of timeseries volume.
 
-To open the metric side panel, click any metric name on the [Metrics Summary page][3].
+To open the metric side panel, click any metric name on the [Metrics Catalog page][3].
 
 {{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
 
-## Volume Management page
+## Metrics Catalog usage graphs
 
-The Volume Overview graphs on the [Metrics Volume Management page][4] display the following Metric Name Pricing billing dimensions:
+The usage graphs on the [Metrics Catalog page][3] display the following Metric Name Pricing billing dimensions:
 
 - Estimated unique metric names
 - Billable indexed point volume
 - Ingested-to-indexed points ratio
 
-{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Volume Overview graphs for Metric Name Pricing: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
+<!-- TODO(screenshot): The current image shows the retired "Volume Overview" heading and "Hide Graphs" link. Recapture the graphs in Catalog from an org on Metric Name Pricing, or crop off the heading row as a stopgap. -->
+{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Metric Name Pricing usage graphs: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
 
 ## Plan & Usage page
 
@@ -134,8 +135,7 @@ For billing questions, contact your [Customer Success][8] Manager.
 
 [1]: /account_management/billing/metric_name_pricing/
 [2]: /metrics/metrics-without-limits/
-[3]: https://app.datadoghq.com/metric/summary
-[4]: https://app.datadoghq.com/metric/volume
+[3]: https://app.datadoghq.com/metric/catalog
 [5]: https://app.datadoghq.com/billing/usage
 [6]: /account_management/billing/usage_metrics/
 [7]: /help/
