@@ -22,7 +22,7 @@
   {{- $r := partial "otel-compatibility/value.html" (dict "v" (index ($f.receiver | default dict) $receiver) "where" (printf "feature %s, receiver %s" $f.id $receiver)) -}}
   {{- $sRank := index $rank $s.support -}}
   {{- $rRank := index $rank $r.support -}}
-  {{- /* An unknown side means the pair isn't documented, so the cell stays blank */ -}}
+  {{- /* An unknown side means the pair isn't documented, so the cell stays unknown */ -}}
   {{- if or (eq $s.support "unknown") (eq $r.support "unknown") -}}
     {{- $out = dict "support" "unknown" "label" "" "notes" slice -}}
   {{- else if lt $sRank $rRank -}}

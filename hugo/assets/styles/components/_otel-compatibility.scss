@@ -1,8 +1,9 @@
 // Styles for the otel-compatibility shortcode.
-// The picker follows the Cdocs filter menu: uppercase labels, pills, and dropdowns.
+// The view toggle follows the Cdocs filter menu pills.
 
-$otel-compat-border: $gray-light;
 $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23632ca6' stroke-width='2'/%3E%3C/svg%3E";
+// Opaque, so the sticky feature column doesn't show content scrolling under it
+$otel-compat-differs: mix($brand-primary, #fff, 6%);
 
 .otel-compat {
   margin: 1.5rem 0 2rem;
@@ -10,10 +11,9 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   &__controls {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 0.5rem 2rem;
-    margin-bottom: 1rem;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
 
     &[hidden] {
       display: none;
@@ -27,21 +27,10 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     min-width: 0;
   }
 
-  &__label {
-    float: none;
-    width: auto;
-    margin: 0 0 10px;
-    padding: 0;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-
   // Radio inputs stay in the DOM for keyboard and screen reader use; the span is the visible pill
   &__pill {
     display: inline-block;
-    margin: 0 6px 6px 0;
+    margin: 0 6px 0 0;
     cursor: pointer;
 
     input {
@@ -56,7 +45,7 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       align-items: center;
       height: 31px;
       padding: 0 10px;
-      border: 1px solid $otel-compat-border;
+      border: 1px solid $gray-light;
       border-radius: 4px;
       background: #fff;
       color: #000;
@@ -76,44 +65,7 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
   }
 
-  &__select {
-    appearance: none;
-    width: 100%;
-    height: 31px;
-    padding: 0 2rem 0 0.6rem;
-    border: 1px solid $otel-compat-border;
-    border-radius: 4px;
-    background: $gray-lightest url($otel-compat-chevron) no-repeat right 0.6rem center;
-    color: $brand-primary;
-    font-size: 14px;
-    font-weight: 600;
-    font-variant-numeric: lining-nums;
-    text-overflow: ellipsis;
-    cursor: pointer;
-
-    &:focus-visible {
-      outline: 2px solid $brand-primary;
-      outline-offset: 2px;
-    }
-  }
-
-  &__diff {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    height: 31px;
-    margin: 0 0 6px;
-    font-size: 14px;
-    cursor: pointer;
-
-    input {
-      accent-color: $brand-primary;
-      margin: 0;
-    }
-  }
-
   &__status {
-    flex-basis: 100%;
     margin: 0;
     font-size: 14px;
     color: $gray-dark;
@@ -129,28 +81,42 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
   &__table {
     width: 100%;
+    border: 0;
     border-collapse: collapse;
     font-size: 0.875rem;
 
+    // Row dividers only; no column lines
     th,
     td {
       padding: 0.5rem 0.6rem;
-      border: 1px solid $gray-border;
+      border: 0;
+      border-bottom: 1px solid $gray-border;
       vertical-align: top;
+    }
+
+    // The site's table styles add column lines with !important, and drop the first row's divider
+    > thead > tr > th,
+    > tbody > tr > td {
+      border-left: 0 !important;
+    }
+
+    > tbody > tr:first-child > td {
+      border-bottom: 1px solid $gray-border;
     }
 
     thead th {
       min-width: 9rem;
+      border-bottom-color: $gray-light;
+      background: #fff;
+      font-weight: 400;
+      text-align: left;
+      text-transform: none;
+      vertical-align: bottom;
+      overflow-wrap: normal;
 
       @media (max-width: 576px) {
         min-width: 7.5rem;
       }
-
-      background: $gray-lightest;
-      font-weight: 400;
-      text-align: left;
-      text-transform: none;
-      overflow-wrap: normal;
     }
 
     tbody td {
@@ -171,9 +137,17 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       }
     }
 
-    // Keep feature names visible while the table scrolls sideways
+    tfoot td {
+      padding-top: 0.6rem;
+      border-bottom: 0;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    // Keep feature names visible while the full table scrolls sideways
     .otel-compat__feature-col,
-    tbody th {
+    tbody th,
+    tfoot td:first-child {
       position: sticky;
       left: 0;
       z-index: 1;
@@ -188,144 +162,176 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       }
     }
 
-    thead .otel-compat__feature-col {
-      background: $gray-lightest;
-      vertical-align: bottom;
+    // Row dividers replace the site's zebra stripes, which the white feature column would break up
+    > tbody > tr:nth-child(n) {
+      background: none;
+    }
+
+    tr.otel-compat__row--differs > * {
+      background: $otel-compat-differs;
     }
   }
 
-  &__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.25rem 0.4rem;
-    min-height: 1.4rem;
-    margin-bottom: 0.4rem;
-  }
+  // Compare and one-setup views fit the page width, with room for feature names on one line
+  &[data-view] &__table {
+    table-layout: fixed;
 
-  &__fields {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.3rem 0.6rem;
-    align-items: center;
-    margin: 0;
-
-    div {
-      display: contents;
-    }
-
-    dt {
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: $gray-darkish;
-      white-space: nowrap;
-    }
-
-    dd {
-      margin: 0;
+    thead th,
+    .otel-compat__feature-col,
+    tbody th {
       min-width: 0;
-      font-weight: 600;
     }
 
-    // Narrow columns: put each label above its value so the menus get the full width
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 0;
+    // A set height lets the two menus fill the cell, so they match when one label wraps more
+    thead th {
+      height: 1px;
+    }
+  }
 
-      dd {
-        margin-bottom: 0.35rem;
+  &[data-view="compare"] &__feature-col {
+    width: 38%;
+  }
+
+  &[data-view="compare"] thead th[data-pair] {
+    width: 31%;
+  }
+
+  // Narrow screens: give the menus more of the width, and their labels more of each menu
+  @media (max-width: 576px) {
+    &[data-view="compare"] &__feature-col {
+      width: 34%;
+    }
+
+    &[data-view="compare"] thead th[data-pair] {
+      width: 33%;
+      padding-left: 0.3rem;
+      padding-right: 0.3rem;
+    }
+  }
+
+  &[data-view="one"] &__feature-col {
+    width: 58%;
+  }
+
+  &[data-view="one"] thead th[data-pair] {
+    width: 42%;
+  }
+
+  // Column label: the SDK above where it sends data
+  &__visual {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__sdk {
+    font-size: 12px;
+    color: $gray-darkish;
+  }
+
+  &__dest {
+    font-weight: 600;
+    line-height: 1.3;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  // The column's menu covers its label, so the label works as the menu button
+  &__visual--menu {
+    position: relative;
+    height: 100%;
+    padding: 0.35rem 1.6rem 0.35rem 0.6rem;
+    border: 1px solid $gray-light;
+    border-radius: 4px;
+    background: $gray-lightest url($otel-compat-chevron) no-repeat right 0.6rem center;
+
+    // The chevron moves up beside the SDK name, so the destination gets the full width
+    @media (max-width: 576px) {
+      padding: 0.3rem 0.45rem;
+      background-position: right 0.45rem top 0.6rem;
+
+      .otel-compat__sdk {
+        padding-right: 0.9rem;
       }
     }
-  }
 
-  &__menu {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  &__info {
-    flex: none;
-    color: $gray-darkish;
-    font-size: 14px;
-    line-height: 1;
-    text-decoration: none;
-  }
-
-  &__plus {
-    color: $gray-darkish;
-  }
-
-  &__value .tooltip-trigger {
-    font-weight: inherit;
-    text-align: left;
-  }
-
-  // Outside compare view (the full table, and the page without JavaScript), headers show
-  // just the two component names. Field labels stay for screen readers.
-  &:not([data-view="compare"]) &__fields {
-    display: block;
-
-    dt {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
+    &:hover {
+      border-color: $brand-primary;
     }
 
-    dd {
+    &:focus-within {
+      outline: 2px solid $brand-primary;
+      outline-offset: 2px;
+    }
+
+    .otel-compat__dest {
+      color: $brand-primary;
+    }
+  }
+
+  // 16px keeps iOS from zooming the page when the menu opens
+  &__select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    opacity: 0;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none;
+  }
+
+  &__diff {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 13px;
+    color: $gray-dark;
+    cursor: pointer;
+
+    input {
+      accent-color: $brand-primary;
       margin: 0;
     }
-
-    [data-field="receiver"] dd {
-      font-weight: 400;
-    }
   }
 
-  &[data-view="compare"] &__plus {
+  &__count {
+    font-size: 13px;
+    color: $gray-dark;
+  }
+
+  &__diff[hidden],
+  &__count[hidden],
+  &__corner-label[hidden] {
     display: none;
   }
 
-  // Two setups side by side get equal columns
-  &[data-view="compare"] thead th[data-pair] {
-    width: 50%;
-  }
-
-  &__setup-link {
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-size: 12px;
-  }
-
-  // Notes show as text in compare view, where there is room, and as tooltips otherwise
   &__note {
-    display: none;
+    display: block;
     margin-top: 0.2rem;
     font-size: 12px;
     line-height: 1.35;
     color: $gray-darkish;
   }
 
-  &[data-view="compare"] &__note {
-    display: block;
-  }
+  &__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    margin: 0.75rem 0 0;
+    font-size: 12px;
+    color: $gray-darkish;
 
-  &[data-view="compare"] .tooltip-trigger {
-    text-decoration: none;
-    cursor: default !important;
+    .icon-check-bold {
+      color: $brand-primary;
+    }
   }
 
   // Only for the .md version of the page, which is built from this HTML
   &__md-label {
     display: none;
-  }
-
-  &__pair-name {
-    font-weight: 700;
   }
 
   &__badge {
@@ -339,9 +345,6 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     white-space: nowrap;
     vertical-align: middle;
 
-    color: $brand-primary;
-    border-color: $brand-primary;
-
     &--agent {
       color: $gray-dark;
       border-color: $gray-light;
@@ -354,7 +357,8 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       color: $brand-primary;
     }
 
-    &--not_supported {
+    &--not_supported,
+    &--unknown {
       color: $gray;
     }
 
@@ -373,23 +377,5 @@ $otel-compat-chevron: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
-  }
-}
-
-// Cells with a note render their mark inside a tooltip button, which resets color
-.otel-compat .tooltip-trigger.otel-compat__mark--supported {
-  color: $brand-primary;
-}
-
-// Override the site's boxed definition-list styles for the header fields
-.otel-compat .otel-compat__fields {
-  border: 0;
-  font-size: inherit;
-  line-height: inherit;
-
-  dt,
-  dd,
-  dd:last-of-type {
-    padding: 0;
   }
 }

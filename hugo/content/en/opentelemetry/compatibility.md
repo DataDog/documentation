@@ -25,7 +25,7 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 ## Feature compatibility
 
-Compare two setups to see which Datadog features each one supports, or view all setups at once.
+Compare two setups to see which Datadog features each one supports, or pick one setup to see its full list.
 
 {{< otel-compatibility >}}
 

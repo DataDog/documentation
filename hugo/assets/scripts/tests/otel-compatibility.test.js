@@ -1,56 +1,49 @@
 import { initOtelCompat } from '../components/otel-compatibility';
 
 // A small version of the markup that layouts/shortcodes/otel-compatibility.html renders
-const SDKS = ['ddot_sdk', 'datadog_sdk', 'otel_sdk'];
-const RECEIVERS = ['ddot_collector', 'upstream_collector', 'agents_collector', 'otlp_intake'];
 const PAIRS = [
-    { sdk: 'ddot_sdk', receiver: 'ddot_collector', recommended: true },
-    { sdk: 'otel_sdk', receiver: 'upstream_collector', recommended: true },
-    { sdk: 'datadog_sdk', receiver: 'agents_collector' },
-    { sdk: 'otel_sdk', receiver: 'agents_collector' },
-    { sdk: 'ddot_sdk', receiver: 'otlp_intake', confirmed: false }
+    { id: 'ddot_sdk.ddot_collector', recommended: true },
+    { id: 'otel_sdk.upstream_collector', recommended: true },
+    { id: 'datadog_sdk.agents_collector' },
+    { id: 'otel_sdk.agents_collector' }
 ];
 // Support per feature, in PAIRS order
 const FEATURES = {
-    tracing: ['unknown', 'supported', 'supported', 'supported', 'unknown'],
-    profiler: ['unknown', 'not_supported', 'supported', 'not_supported', 'unknown']
+    tracing: ['unknown', 'supported', 'supported', 'supported'],
+    profiler: ['unknown', 'not_supported', 'supported', 'not_supported']
 };
 
-const id = (p) => `${p.sdk}.${p.receiver}`;
-const options = (ids) => ids.map((v) => `<option value="${v}" data-description="About ${v}">${v}</option>`).join('');
-const menu = (slot, role, ids) => `
-    <span class="otel-compat__menu" data-slot="${slot}" data-role="${role}">
-        <select class="otel-compat__select">${options(ids)}</select>
-        <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tip-${slot}-${role}"></button><span id="tip-${slot}-${role}" class="tooltip-content"></span></span>
-    </span>`;
-const field = (role, label) => `<div data-field="${role}"><dt>${role}</dt><dd><span class="otel-compat__value">${label}</span></dd></div>`;
+const options = PAIRS.map((p) => `<option value="${p.id}">${p.id}</option>`).join('');
 
 function render() {
-    const hidden = (p) => (p.confirmed === false ? ' hidden' : '');
     document.body.innerHTML = `
         <div class="otel-compat" data-otel-compat>
             <div class="otel-compat__controls" hidden>
                 <fieldset class="otel-compat__view">
                     <label><input type="radio" name="view" value="compare" checked></label>
-                    <label><input type="radio" name="view" value="all"></label>
+                    <label><input type="radio" name="view" value="one"></label>
                 </fieldset>
-                <label><input type="checkbox" data-role="diff"></label>
                 <p class="otel-compat__status"></p>
                 <div class="otel-compat__holder" hidden>
-                    ${['a', 'b'].map((slot) => menu(slot, 'sdk', SDKS) + menu(slot, 'receiver', RECEIVERS)).join('')}
+                    <select data-slot="a">${options}</select>
+                    <select data-slot="b">${options}</select>
                 </div>
             </div>
             <table class="otel-compat__table">
-                <thead><tr><th>Feature</th>${PAIRS.map((p) => `
-                    <th data-pair="${id(p)}" data-sdk="${p.sdk}" data-receiver="${p.receiver}" data-confirmed="${p.confirmed !== false}" data-recommended="${!!p.recommended}"${hidden(p)}>
-                        <dl class="otel-compat__fields">${field('sdk', p.sdk)}${field('receiver', p.receiver)}</dl>
-                    </th>`).join('')}
+                <thead><tr>
+                    <th class="otel-compat__feature-col">
+                        <span class="otel-compat__corner-label">Feature</span>
+                        <label class="otel-compat__diff" hidden><input type="checkbox" data-role="diff"></label>
+                        <span class="otel-compat__count" hidden></span>
+                    </th>${PAIRS.map((p) => `
+                    <th data-pair="${p.id}" data-recommended="${!!p.recommended}"><span class="otel-compat__visual">${p.id}</span></th>`).join('')}
                 </tr></thead>
                 <tbody>${Object.entries(FEATURES).map(([feature, support]) => `
                     <tr data-feature="${feature}"><th>${feature}</th>${PAIRS.map((p, i) => `
-                        <td data-pair="${id(p)}" data-support="${support[i]}"${hidden(p)}></td>`).join('')}
+                        <td data-pair="${p.id}" data-support="${support[i]}"></td>`).join('')}
                     </tr>`).join('')}
                 </tbody>
+                <tfoot><tr><td></td>${PAIRS.map((p) => `<td data-pair="${p.id}"></td>`).join('')}</tr></tfoot>
             </table>
         </div>`;
     const root = document.querySelector('[data-otel-compat]');
@@ -58,8 +51,9 @@ function render() {
     return root;
 }
 
-const shownPairs = (root) => [...root.querySelectorAll('thead th[data-pair]')].filter((th) => !th.hidden).map((th) => th.dataset.pair);
-const select = (root, slot, role) => root.querySelector(`.otel-compat__menu[data-slot="${slot}"][data-role="${role}"] select`);
+const shown = (root, selector) => [...root.querySelectorAll(selector)].filter((el) => !el.hidden).map((el) => el.dataset.pair);
+const shownPairs = (root) => shown(root, 'thead th[data-pair]');
+const select = (root, slot) => root.querySelector(`select[data-slot="${slot}"]`);
 const choose = (el, value) => {
     el.value = value;
     el.dispatchEvent(new Event('change'));
@@ -69,94 +63,93 @@ const view = (root, value) => {
     input.checked = true;
     input.dispatchEvent(new Event('change'));
 };
+const checkDiff = (root) => {
+    const diff = root.querySelector('[data-role="diff"]');
+    diff.checked = true;
+    diff.dispatchEvent(new Event('change'));
+};
 
 describe('otel-compatibility', () => {
     beforeEach(() => {
         window.history.replaceState(null, '', '/');
     });
 
-    it('compares the two recommended setups by default, with their menus in the headers', () => {
+    it('compares the two recommended setups by default, with one menu in each header', () => {
         const root = render();
         expect(shownPairs(root)).toEqual(['ddot_sdk.ddot_collector', 'otel_sdk.upstream_collector']);
-        expect(root.querySelector('thead th[data-pair="ddot_sdk.ddot_collector"]').querySelectorAll('select')).toHaveLength(2);
+        expect(root.querySelector('thead th[data-pair="ddot_sdk.ddot_collector"] select').dataset.slot).toBe('a');
+        expect(root.querySelector('thead th[data-pair="otel_sdk.upstream_collector"] select').dataset.slot).toBe('b');
+        expect(shown(root, 'tfoot td[data-pair]')).toEqual(shownPairs(root));
         expect(root.querySelector('.otel-compat__controls').hidden).toBe(false);
+        expect(root.querySelector('.otel-compat__diff').hidden).toBe(false);
         // A plain page visit keeps a clean URL
         expect(window.location.search).toBe('');
     });
 
-    it('disables receivers that have no pair with the chosen SDK', () => {
+    it('moves the menu into the header of the setup it picks', () => {
         const root = render();
-        choose(select(root, 'a', 'sdk'), 'datadog_sdk');
-        const disabled = [...select(root, 'a', 'receiver').options].filter((o) => o.disabled).map((o) => o.value);
-        expect(disabled).toEqual(['ddot_collector', 'upstream_collector', 'otlp_intake']);
-        expect(select(root, 'a', 'receiver').value).toBe('agents_collector');
-        expect(shownPairs(root)[0]).toBe('datadog_sdk.agents_collector');
+        choose(select(root, 'a'), 'datadog_sdk.agents_collector');
+        expect(shownPairs(root)).toEqual(['datadog_sdk.agents_collector', 'otel_sdk.upstream_collector']);
+        expect(root.querySelector('thead th[data-pair="datadog_sdk.agents_collector"] select')).toBe(select(root, 'a'));
+        expect(root.querySelectorAll('thead select')).toHaveLength(2);
     });
 
-    it("swaps the setups when one picks the other's pair", () => {
+    it("swaps the setups when one picks the other's setup", () => {
         const root = render();
-        // Setup 2 moves to DDOT SDK, whose first confirmed receiver makes it the same as setup 1,
-        // so setup 1 takes setup 2's previous pair
-        choose(select(root, 'b', 'sdk'), 'ddot_sdk');
+        choose(select(root, 'b'), 'ddot_sdk.ddot_collector');
         expect(shownPairs(root)).toEqual(['otel_sdk.upstream_collector', 'ddot_sdk.ddot_collector']);
     });
 
-    it('hides features that both setups support the same way', () => {
+    it('marks features that differ, and can hide the rest', () => {
         const root = render();
-        choose(select(root, 'a', 'sdk'), 'datadog_sdk');
-        const diff = root.querySelector('[data-role="diff"]');
-        diff.checked = true;
-        diff.dispatchEvent(new Event('change'));
+        choose(select(root, 'a'), 'datadog_sdk.agents_collector');
+        const differs = [...root.querySelectorAll('tbody tr.otel-compat__row--differs')].map((tr) => tr.dataset.feature);
+        expect(differs).toEqual(['profiler']);
+        checkDiff(root);
         const visible = [...root.querySelectorAll('tbody tr')].filter((tr) => !tr.hidden).map((tr) => tr.dataset.feature);
         expect(visible).toEqual(['profiler']);
         expect(root.querySelector('.otel-compat__status').textContent).toMatch('Hiding 1 features');
     });
 
-    it('shows every confirmed setup in the all view, with no menus in the headers', () => {
+    it("doesn't mark or hide a row with an undocumented cell", () => {
         const root = render();
-        view(root, 'all');
-        expect(shownPairs(root)).toEqual(PAIRS.filter((p) => p.confirmed !== false).map(id));
-        expect(root.querySelectorAll('thead select')).toHaveLength(0);
-        expect(window.location.search).toBe('?compat_view=all');
+        checkDiff(root);
+        expect(root.querySelectorAll('tbody tr.otel-compat__row--differs')).toHaveLength(0);
+        expect([...root.querySelectorAll('tbody tr')].every((tr) => !tr.hidden)).toBe(true);
     });
 
-    it('restores the setups from the URL', () => {
+    it('shows one setup with its count in the one-setup view', () => {
+        const root = render();
+        checkDiff(root);
+        view(root, 'one');
+        expect(shownPairs(root)).toEqual(['ddot_sdk.ddot_collector']);
+        expect(root.querySelectorAll('thead select')).toHaveLength(1);
+        expect(root.querySelector('.otel-compat__diff').hidden).toBe(true);
+        expect(root.querySelector('.otel-compat__count').textContent).toBe('Supports 0 of 2 features, 2 not yet documented');
+        // The differences filter only applies to compare view
+        expect([...root.querySelectorAll('tbody tr')].every((tr) => !tr.hidden)).toBe(true);
+        expect(window.location.search).toBe('?compat_view=one&compat_a=ddot_sdk.ddot_collector');
+        choose(select(root, 'a'), 'otel_sdk.agents_collector');
+        expect(root.querySelector('.otel-compat__count').textContent).toBe('Supports 1 of 2 features');
+    });
+
+    it('picks a different second setup when compare view starts from the same one', () => {
+        const root = render();
+        view(root, 'one');
+        choose(select(root, 'a'), 'otel_sdk.upstream_collector');
+        view(root, 'compare');
+        expect(shownPairs(root)).toEqual(['otel_sdk.upstream_collector', 'ddot_sdk.ddot_collector']);
+    });
+
+    it('restores the view and setups from the URL', () => {
         window.history.replaceState(null, '', '/?compat_view=compare&compat_a=otel_sdk.agents_collector&compat_b=datadog_sdk.agents_collector');
-        const root = render();
-        expect(shownPairs(root)).toEqual(['otel_sdk.agents_collector', 'datadog_sdk.agents_collector']);
+        expect(shownPairs(render())).toEqual(['otel_sdk.agents_collector', 'datadog_sdk.agents_collector']);
+        window.history.replaceState(null, '', '/?compat_view=one&compat_a=otel_sdk.agents_collector');
+        expect(shownPairs(render())).toEqual(['otel_sdk.agents_collector']);
     });
 
-    it('fills the info tooltips with the selected one-line descriptions', () => {
-        const root = render();
-        expect(document.getElementById('tip-a-sdk').textContent).toBe('About ddot_sdk');
-        choose(select(root, 'a', 'receiver'), 'otlp_intake');
-        expect(document.getElementById('tip-a-receiver').textContent).toBe('About otlp_intake');
-    });
-
-    it('keeps updating a tooltip that the tooltip script took out of the page', () => {
-        const root = render();
-        const tip = document.getElementById('tip-a-receiver');
-        tip.remove();
-        choose(select(root, 'a', 'receiver'), 'otlp_intake');
-        expect(tip.textContent).toBe('About otlp_intake');
-    });
-
-    it('moves off a receiver that has no pair with the chosen SDK', () => {
-        const root = render();
-        choose(select(root, 'a', 'receiver'), 'agents_collector');
-        expect(select(root, 'a', 'receiver').value).toBe('ddot_collector');
-        expect(shownPairs(root)).toEqual(['ddot_sdk.ddot_collector', 'otel_sdk.upstream_collector']);
-    });
-
-    it('opens and closes tooltips on keyboard focus', () => {
-        const root = render();
-        const trigger = root.querySelector('.tooltip-trigger');
-        const events = [];
-        trigger.addEventListener('mouseenter', () => events.push('enter'));
-        trigger.addEventListener('mouseleave', () => events.push('leave'));
-        trigger.dispatchEvent(new FocusEvent('focusin', { bubbles: true }));
-        trigger.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-        trigger.dispatchEvent(new FocusEvent('focusout', { bubbles: true }));
-        expect(events).toEqual(['enter', 'leave', 'leave']);
+    it('falls back to compare view for an unknown view in the URL', () => {
+        window.history.replaceState(null, '', '/?compat_view=all');
+        expect(shownPairs(render())).toEqual(['ddot_sdk.ddot_collector', 'otel_sdk.upstream_collector']);
     });
 });

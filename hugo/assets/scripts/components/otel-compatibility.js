@@ -1,10 +1,10 @@
-// Setup picker and compare view for the otel-compatibility shortcode.
+// Compare and one-setup views for the otel-compatibility shortcode.
 // The shortcode renders the full table; this script only shows, hides, and orders its columns.
-// In compare view, it moves the SDK and receiver menus into the two visible column headers.
+// It moves each setup menu into the header of the column that menu shows.
 // layouts/partials/footer-scripts.html loads it only on pages that use the shortcode.
 
 const PARAMS = { view: 'compat_view', a: 'compat_a', b: 'compat_b' };
-const VIEWS = ['compare', 'all'];
+const VIEWS = ['compare', 'one'];
 
 function readParams() {
     try {
@@ -17,11 +17,10 @@ function readParams() {
 function writeParams(state) {
     const url = new URL(window.location.href);
     url.searchParams.set(PARAMS.view, state.view);
+    url.searchParams.set(PARAMS.a, state.a);
     if (state.view === 'compare') {
-        url.searchParams.set(PARAMS.a, state.a);
         url.searchParams.set(PARAMS.b, state.b);
     } else {
-        url.searchParams.delete(PARAMS.a);
         url.searchParams.delete(PARAMS.b);
     }
     window.history.replaceState(window.history.state, '', url);
@@ -32,156 +31,111 @@ function initOtelCompat(root) {
     const controls = root.querySelector('.otel-compat__controls');
     if (!table || !controls) return;
 
+    const holder = controls.querySelector('.otel-compat__holder');
     const headerRow = table.tHead.rows[0];
     const featureRows = [...table.tBodies[0].rows];
-    const holder = controls.querySelector('.otel-compat__holder');
+    const footerRow = table.tFoot ? table.tFoot.rows[0] : null;
 
     const headers = new Map([...headerRow.querySelectorAll('th[data-pair]')].map((th) => [th.dataset.pair, th]));
-    const pairs = [...headers.values()].map((th) => ({
-        id: th.dataset.pair,
-        sdk: th.dataset.sdk,
-        receiver: th.dataset.receiver,
-        confirmed: th.dataset.confirmed !== 'false',
-        recommended: th.dataset.recommended === 'true'
-    }));
-    const pairById = new Map(pairs.map((p) => [p.id, p]));
+    const pairIds = [...headers.keys()];
+    const recommended = pairIds.filter((id) => headers.get(id).dataset.recommended === 'true');
 
-    // Cells keyed by pair id for the header row and each feature row
+    // Cells keyed by pair id, for every row that has one cell per setup
     const cellMap = (row) => new Map([...row.cells].filter((cell) => cell.dataset.pair).map((cell) => [cell.dataset.pair, cell]));
-    const columnRows = [headerRow, ...featureRows].map((row) => ({ row, cells: cellMap(row) }));
-    const cellsByFeatureRow = new Map(columnRows.slice(1).map(({ row, cells }) => [row, cells]));
+    const columnRows = [headerRow, ...featureRows, footerRow].filter(Boolean).map((row) => ({ row, cells: cellMap(row) }));
+    const cellsByFeatureRow = new Map(featureRows.map((row) => [row, cellMap(row)]));
 
-    // Each slot has an SDK menu and a receiver menu; a menu is a select plus an info tooltip
-    const slots = ['a', 'b'].map((key) => {
-        const menus = {
-            sdk: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="sdk"]`),
-            receiver: holder.querySelector(`.otel-compat__menu[data-slot="${key}"][data-role="receiver"]`)
-        };
-        // Keep the tooltip elements now: the site's tooltip script moves them to the end of the
-        // page while open and removes them from the page when closed
-        return {
-            key,
-            menus,
-            sdk: menus.sdk.querySelector('select'),
-            receiver: menus.receiver.querySelector('select'),
-            tips: {
-                sdk: menus.sdk.querySelector('.tooltip-content'),
-                receiver: menus.receiver.querySelector('.tooltip-content')
-            }
-        };
-    });
+    const selects = ['a', 'b'].map((key) => holder.querySelector(`select[data-slot="${key}"]`));
     const viewInputs = [...controls.querySelectorAll('.otel-compat__view input')];
-    const diffInput = controls.querySelector('[data-role="diff"]');
     const status = controls.querySelector('.otel-compat__status');
+    const corner = headerRow.querySelector('.otel-compat__feature-col');
+    const cornerLabel = corner.querySelector('.otel-compat__corner-label');
+    const diffLabel = corner.querySelector('.otel-compat__diff');
+    const diffInput = diffLabel.querySelector('input');
+    const count = corner.querySelector('.otel-compat__count');
 
     // Default compare: the first two recommended setups
-    const recommended = pairs.filter((p) => p.recommended);
-    const fallbackA = (recommended[0] || pairs[0]).id;
-    const fallbackB = (recommended[1] || pairs.find((p) => p.id !== fallbackA) || pairs[0]).id;
-
-    function pairIdOf(slot) {
-        return `${slot.sdk.value}.${slot.receiver.value}`;
-    }
-
-    // Disable receivers that have no pair with the chosen SDK, then move off a disabled choice
-    function syncReceiverOptions(slot) {
-        let firstValid = null;
-        [...slot.receiver.options].forEach((option) => {
-            const pair = pairById.get(`${slot.sdk.value}.${option.value}`);
-            option.disabled = !pair;
-            if (pair && (!firstValid || (pair.confirmed && !firstValid.confirmed))) {
-                firstValid = pair;
-            }
-        });
-        if (slot.receiver.selectedOptions[0]?.disabled && firstValid) {
-            slot.receiver.value = firstValid.receiver;
-        }
-    }
-
-    function setSlot(slot, pairId) {
-        const pair = pairById.get(pairId);
-        if (!pair) return;
-        slot.sdk.value = pair.sdk;
-        syncReceiverOptions(slot);
-        slot.receiver.value = pair.receiver;
-    }
+    const fallbackA = recommended[0] || pairIds[0];
+    const fallbackB = recommended.find((id) => id !== fallbackA) || pairIds.find((id) => id !== fallbackA) || fallbackA;
+    const otherThan = (id) => [fallbackA, fallbackB, ...pairIds].find((p) => p !== id) || id;
 
     function currentView() {
         const checked = viewInputs.find((input) => input.checked);
         return checked ? checked.value : 'compare';
     }
 
-    function showColumns(pairIds) {
+    function showColumns(ids) {
         columnRows.forEach(({ row, cells }) => {
-            pairIds.forEach((id) => {
+            ids.forEach((id) => {
                 const cell = cells.get(id);
                 cell.hidden = false;
                 row.appendChild(cell);
             });
             cells.forEach((cell, id) => {
-                if (!pairIds.includes(id)) cell.hidden = true;
+                if (!ids.includes(id)) cell.hidden = true;
             });
         });
     }
 
-    // Put each slot's menus in its column header, in place of the SDK and receiver text
-    function placeMenus(pairIds) {
-        headers.forEach((th) => {
-            th.querySelectorAll('.otel-compat__value').forEach((value) => {
-                value.hidden = false;
-            });
-        });
-        slots.forEach((slot) => {
-            holder.append(slot.menus.sdk, slot.menus.receiver);
-        });
-        pairIds.forEach((id, i) => {
-            const th = headers.get(id);
-            ['sdk', 'receiver'].forEach((role) => {
-                const dd = th.querySelector(`[data-field="${role}"] dd`);
-                dd.querySelector('.otel-compat__value').hidden = true;
-                dd.appendChild(slots[i].menus[role]);
-            });
+    // Put each menu in the header of the column it shows, over that column's label
+    function placeMenus(ids) {
+        headers.forEach((th) => th.querySelector('.otel-compat__visual').classList.remove('otel-compat__visual--menu'));
+        selects.forEach((select) => holder.appendChild(select));
+        ids.forEach((id, i) => {
+            const visual = headers.get(id).querySelector('.otel-compat__visual');
+            visual.classList.add('otel-compat__visual--menu');
+            visual.appendChild(selects[i]);
         });
     }
 
-    // Show the one-line description of the selected SDK or receiver in the menu's info tooltip
-    function syncDescriptions() {
-        slots.forEach((slot) => {
-            ['sdk', 'receiver'].forEach((role) => {
-                const option = slot[role].selectedOptions[0];
-                slot.tips[role].textContent = (option && option.dataset.description) || '';
-            });
-        });
+    function countText(id) {
+        const support = featureRows.map((row) => cellsByFeatureRow.get(row).get(id).dataset.support);
+        const supported = support.filter((s) => s === 'supported' || s === 'partial').length;
+        const unknown = support.filter((s) => s === 'unknown').length;
+        const text = `Supports ${supported} of ${support.length} features`;
+        return unknown ? `${text}, ${unknown} not yet documented` : text;
     }
 
-    // Each slot's last pair, so picking the other slot's pair swaps the two
+    // Each slot's last setup, so picking the other slot's setup swaps the two
     const current = { a: null, b: null };
 
     function render(updateUrl = true) {
         const view = currentView();
+        const compare = view === 'compare';
         const focused = document.activeElement;
-        const a = pairIdOf(slots[0]);
-        const b = pairIdOf(slots[1]);
+        // Coming from the one-setup view, the second menu may match the first
+        if (compare && selects[1].value === selects[0].value) {
+            selects[1].value = otherThan(selects[0].value);
+        }
+        const a = selects[0].value;
+        const b = selects[1].value;
         current.a = a;
         current.b = b;
+        const shown = compare ? [a, b] : [a];
 
-        diffInput.parentElement.hidden = view !== 'compare';
-        const shown = view === 'all' ? pairs.filter((p) => p.confirmed).map((p) => p.id) : [a, b];
+        root.dataset.view = view;
         showColumns(shown);
-        placeMenus(view === 'compare' ? shown : []);
-        syncDescriptions();
+        placeMenus(shown);
         // Moving a menu drops its focus, so put focus back for keyboard users
         if (focused && focused !== document.activeElement && root.contains(focused)) focused.focus();
 
-        // In compare view, optionally hide rows where both setups have the same support value
-        const filterDiff = view === 'compare' && diffInput.checked;
+        // In compare view, mark rows where the setups differ, and optionally hide rows where they match.
+        // A row with an undocumented cell isn't marked, since it may not differ, but it isn't hidden either.
+        const filterDiff = compare && diffInput.checked;
         let hiddenRows = 0;
         featureRows.forEach((row) => {
             const cells = cellsByFeatureRow.get(row);
-            const same = filterDiff && cells.get(a).dataset.support === cells.get(b).dataset.support;
-            row.hidden = same;
-            if (same) hiddenRows += 1;
+            const support = compare ? [cells.get(a).dataset.support, cells.get(b).dataset.support] : [];
+            const same = compare && support[0] === support[1];
+            row.classList.toggle('otel-compat__row--differs', compare && !same && !support.includes('unknown'));
+            row.hidden = filterDiff && same;
+            if (row.hidden) hiddenRows += 1;
         });
+
+        cornerLabel.hidden = true;
+        diffLabel.hidden = !compare;
+        count.hidden = compare;
+        count.textContent = compare ? '' : countText(a);
 
         if (filterDiff && hiddenRows === featureRows.length) {
             status.textContent = 'These setups support the same features.';
@@ -191,17 +145,14 @@ function initOtelCompat(root) {
             status.textContent = '';
         }
 
-        root.dataset.view = view;
         if (updateUrl) writeParams({ view, a, b });
     }
 
-    function onSlotChange(slot) {
-        // A receiver with no pair for this SDK can't be shown, so move to a valid one
-        syncReceiverOptions(slot);
-        const other = slots.find((s) => s !== slot);
-        const previous = current[slot.key];
-        if (pairIdOf(slot) === pairIdOf(other) && previous) {
-            setSlot(other, previous);
+    function onSelectChange(i) {
+        const key = i === 0 ? 'a' : 'b';
+        const other = selects[1 - i];
+        if (currentView() === 'compare' && selects[i].value === other.value && current[key]) {
+            other.value = current[key];
         }
         render();
     }
@@ -212,36 +163,12 @@ function initOtelCompat(root) {
     viewInputs.forEach((input) => {
         input.checked = input.value === initialView;
     });
-    const initialA = pairById.has(params.get(PARAMS.a)) ? params.get(PARAMS.a) : fallbackA;
-    let initialB = pairById.has(params.get(PARAMS.b)) ? params.get(PARAMS.b) : fallbackB;
-    if (initialA === initialB) {
-        initialB = initialA === fallbackA ? fallbackB : fallbackA;
-    }
-    setSlot(slots[0], initialA);
-    setSlot(slots[1], initialB);
+    selects[0].value = headers.has(params.get(PARAMS.a)) ? params.get(PARAMS.a) : fallbackA;
+    selects[1].value = headers.has(params.get(PARAMS.b)) ? params.get(PARAMS.b) : fallbackB;
 
-    slots.forEach((slot) => {
-        slot.sdk.addEventListener('change', () => onSlotChange(slot));
-        slot.receiver.addEventListener('change', () => onSlotChange(slot));
-    });
+    selects.forEach((select, i) => select.addEventListener('change', () => onSelectChange(i)));
     viewInputs.forEach((input) => input.addEventListener('change', () => render()));
     diffInput.addEventListener('change', () => render());
-
-    // The site's tooltip script opens tooltips on hover and touch only. Open them on keyboard
-    // focus too, by sending the trigger the mouse events that script listens for.
-    const triggerOf = (event) => event.target.closest && event.target.closest('.tooltip-trigger');
-    root.addEventListener('focusin', (event) => {
-        const trigger = triggerOf(event);
-        if (trigger) trigger.dispatchEvent(new MouseEvent('mouseenter'));
-    });
-    root.addEventListener('focusout', (event) => {
-        const trigger = triggerOf(event);
-        if (trigger) trigger.dispatchEvent(new MouseEvent('mouseleave'));
-    });
-    root.addEventListener('keydown', (event) => {
-        const trigger = triggerOf(event);
-        if (trigger && event.key === 'Escape') trigger.dispatchEvent(new MouseEvent('mouseleave'));
-    });
 
     controls.hidden = false;
     root.classList.add('otel-compat--initialized');

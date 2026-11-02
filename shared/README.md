@@ -133,7 +133,7 @@ support value.
 | ------------- | -------- | ----------------------------------------------------------------------------- |
 | `id`          | yes      | Key used everywhere else in the file                                          |
 | `label`       | yes      | Display name                                                                  |
-| `description` | yes      | One sentence about what it is, shown on hover in the column headers           |
+| `description` | yes      | One sentence about what it is. The table doesn't show it.                     |
 
 ### `pairs`
 
@@ -141,12 +141,11 @@ support value.
 | ------------- | -------- | -------------------------------------------------------------------- |
 | `sdk`         | yes      | An SDK `id`                                                          |
 | `receiver`    | yes      | A receiver `id`                                                      |
-| `name`        | no       | Short name shown above the pair, such as `DDOT`                      |
-| `recommended` | no       | `true` marks a recommended setup. The first two are compared by default. |
+| `recommended` | no       | `true` adds "(recommended)" in the setup menus. The first two are compared by default. |
 | `link`        | no       | Setup guide for this pair                                            |
-| `confirmed`   | no       | `false` means the pair may not work. The picker offers it, but the full table leaves it out. |
+| `confirmed`   | no       | `false` means the pair may not work. It stays in this file but not on the page. |
 
-A pair that isn't listed is disabled in the setup picker.
+Only the pairs listed here appear in the setup menus.
 
 ### `features`
 
@@ -163,12 +162,11 @@ A pair that isn't listed is disabled in the setup picker.
 
 A **support value** is one of `supported`, `partial`, `not_supported`, or
 `unknown`. An SDK or receiver that a feature doesn't list is `unknown`. An
-`unknown` cell renders blank, which means not yet documented. Don't
+`unknown` cell renders as `?`, which means not yet documented. Don't
 write `yes` or `no`: YAML reads them as booleans, and the build fails.
 
 Notes accept Markdown, so a note can link to another page. HTML in a note shows as
-plain text. In compare view,
-notes show as text under the cell; in the full table they show on hover.
+plain text. Notes show as small text under the cell.
 
 To add a note or a short cell label, use a map instead of a single word:
 
@@ -177,7 +175,7 @@ receiver:
   otlp_intake:
     support: partial
     label: Sampled          # shown in the cell instead of "Partial"
-    note: Calculated from spans that reach Datadog.   # shown on hover and focus
+    note: Calculated from spans that reach Datadog.   # shown under the cell
 ```
 
 An override names one pair:
@@ -194,11 +192,11 @@ overrides:
 
 1. If an override matches the pair, use it.
 2. Otherwise, if the SDK value or the receiver value is `unknown`, the cell is
-   blank.
+   `unknown`.
 3. Otherwise, use the lower of the two, in this order:
    `not_supported` < `partial` < `supported`.
 
-Rule 2 keeps a cell blank until both sides are documented, so the file never
+Rule 2 keeps a cell `unknown` until both sides are documented, so the file never
 claims more than the docs state. When a feature's support depends on the
 combination rather than on either part, add an override instead of changing
 an SDK or receiver value.
@@ -216,4 +214,4 @@ value for each SDK and receiver you know about. Leave out the ones you don't.
 If the SDK or receiver is new, add it to `sdks` or `receivers` with a
 one-sentence `description`. Then add a
 `pairs` entry, and give each feature a value for the new SDK or receiver.
-Features without a value show a blank cell.
+Features without a value show `?`.

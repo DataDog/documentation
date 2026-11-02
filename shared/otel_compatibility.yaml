@@ -3,7 +3,7 @@
 # Schema and editing guide: shared/README.md, section `otel_compatibility.yaml`.
 #
 # Seeded from the feature table on the compatibility page. Values the table did
-# not state are `unknown` and render as blank cells (not yet documented).
+# not state are `unknown` and render as ? (not yet documented).
 
 sdks:
   - id: ddot_sdk
@@ -33,17 +33,15 @@ receivers:
     label: Direct OTLP intake
     description: Your applications send OTLP straight to Datadog, with no Collector or Agent.
 
-# Valid SDK and receiver combinations, in display order. Any pair not listed
-# here is disabled in the setup picker.
+# Valid SDK and receiver combinations, in display order. Only these pairs
+# appear in the setup menus.
 pairs:
   - sdk: ddot_sdk
     receiver: ddot_collector
-    name: DDOT
     recommended: true
     link: /opentelemetry/setup/ddot_collector/
   - sdk: otel_sdk
     receiver: upstream_collector
-    name: Upstream
     recommended: true
     link: /opentelemetry/setup/collector_exporter/
   - sdk: datadog_sdk
@@ -64,7 +62,8 @@ pairs:
   - sdk: ddot_sdk
     receiver: upstream_collector
     link: /opentelemetry/instrument/dd_sdks/ddot_setup/
-  # The DDOT SDK sends OTLP, so these receivers may work. Not confirmed.
+  # The DDOT SDK sends OTLP, so these receivers may work. Not confirmed, so not
+  # shown on the page.
   - sdk: ddot_sdk
     receiver: agents_collector
     confirmed: false
