@@ -1,5 +1,8 @@
-import { addMessageActions, FEEDBACK_REASONS, MAX_FEEDBACK_COMMENT_CHARS } from '../components/conversational-search/actions';
+import { addMessageActions, FEEDBACK_REASONS } from '../components/conversational-search/actions';
 import { FEEDBACK_TIMEOUT_MS, sendDocsAiFeedback, streamDocsAiChat } from '../components/conversational-search/docsai-client';
+import { logAction } from '../components/conversational-search/logger';
+
+jest.mock('../components/conversational-search/logger', () => ({ logAction: jest.fn() }));
 
 const config = { apiUrl: 'https://example.test', apiKey: 'key' };
 
@@ -38,11 +41,12 @@ describe('Docs AI feedback requests', () => {
         expect(onFeedbackToken).toHaveBeenCalledWith('answer.1.sig');
     });
 
-    it('posts a rating or comment with the token and survives leaving the page', async () => {
+    it('posts only structured feedback, omitting any supplied comment', async () => {
         global.fetch = jest.fn().mockResolvedValue({ ok: true, status: 202 });
 
         await sendDocsAiFeedback({
-            config, token: 't', conversationId: 'c1', rating: 'down', reasons: ['incorrect'], comment: 'Wrong page'
+            config, token: 't', conversationId: 'c1', rating: 'down', reasons: ['incorrect'],
+            comment: 'PRIVATE_FEEDBACK_MARKER'
         });
 
         const [url, init] = global.fetch.mock.calls[0];
@@ -52,10 +56,11 @@ describe('Docs AI feedback requests', () => {
         expect(JSON.parse(init.body)).toEqual({
             data: {
                 attributes: {
-                    feedback_token: 't', rating: 'down', reasons: ['incorrect'], comment: 'Wrong page', conversation_id: 'c1'
+                    feedback_token: 't', rating: 'down', reasons: ['incorrect'], conversation_id: 'c1'
                 }
             }
         });
+        expect(init.body).not.toContain('PRIVATE_FEEDBACK_MARKER');
     });
 
     it('rejects with the HTTP status when feedback is refused', async () => {
@@ -78,8 +83,9 @@ describe('Docs AI feedback requests', () => {
     });
 });
 
-describe('thumbs and comments', () => {
+describe('thumbs and predefined reasons', () => {
     beforeEach(() => {
+        logAction.mockClear();
         document.body.innerHTML = `
             <template id="conv-search-actions-template">
                 <div class="conv-search-message-actions">
@@ -119,15 +125,10 @@ describe('thumbs and comments', () => {
         return { thumb, click, form, notice };
     }
 
-    function type(form, text) {
-        const field = form.querySelector('textarea');
-        field.value = text;
-        field.dispatchEvent(new Event('input'));
-    }
-
+    const pick = (form, id) => form.querySelector(`[data-reason="${id}"]`).click();
     const submit = (form) => form.dispatchEvent(new Event('submit', { cancelable: true }));
 
-    it('marks a thumbs-down only once it is recorded, then offers a comment', async () => {
+    it('marks a thumbs-down only after acceptance, then offers predefined reasons', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { thumb, click, form, notice } = renderActions(sendFeedback);
 
@@ -143,10 +144,10 @@ describe('thumbs and comments', () => {
         expect(thumb('thumbs-down').classList.contains('active')).toBe(true);
         expect(thumb('thumbs-up').disabled).toBe(false);
         expect(notice().textContent).toBe('Thanks for your feedback!');
-        expect(form().querySelector('textarea').maxLength).toBe(MAX_FEEDBACK_COMMENT_CHARS);
+        expect(form().querySelector('textarea, input, [contenteditable="true"]')).toBeNull();
     });
 
-    it('leaves the thumbs unchanged and lets the reader retry when recording fails', async () => {
+    it('leaves the thumbs unchanged and lets the reader retry when saving fails', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { thumb, click, form, notice } = renderActions(sendFeedback);
 
@@ -165,7 +166,7 @@ describe('thumbs and comments', () => {
         expect(thumb('thumbs-down').classList.contains('active')).toBe(true);
     });
 
-    it('ignores clicks while a rating is being recorded', async () => {
+    it('ignores clicks while a rating is being saved', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click } = renderActions(sendFeedback);
 
@@ -177,27 +178,30 @@ describe('thumbs and comments', () => {
         expect(sendFeedback).toHaveBeenCalledTimes(1);
     });
 
-    it('sends a comment once, keeping it when sending fails', async () => {
+    it('sends reasons once, retaining selections on failure and logging only the selected IDs', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form, notice } = renderActions(sendFeedback);
         click('thumbs-down');
         await answer();
 
-        type(form(), '  Missing the Python example.  ');
+        pick(form(), 'sources');
         submit(form());
-        expect(sendFeedback).toHaveBeenLastCalledWith({ comment: 'Missing the Python example.' });
-        expect(form().querySelector('textarea').disabled).toBe(true);
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['sources'] });
         expect(form().querySelector('.conv-search-feedback-send').textContent).toBe('Sending\u2026');
 
         await answer(false);
-        expect(form().querySelector('textarea').value).toBe('  Missing the Python example.  ');
-        expect(form().querySelector('textarea').disabled).toBe(false);
+        expect(form().querySelector('[data-reason="sources"]').getAttribute('aria-pressed')).toBe('true');
         expect(form().querySelector('.conv-search-feedback-form-error').hidden).toBe(false);
 
         submit(form());
         await answer();
         expect(form()).toBeNull();
         expect(notice().textContent).toBe('Thanks, this helps us improve!');
+        expect(logAction).toHaveBeenLastCalledWith('Conversational Search Feedback Reasons', {
+            conversational_search: {
+                action: 'feedback_reasons', feedback_reasons: ['sources'], conversation_id: 'c1'
+            }
+        }, expect.any(Object));
 
         click('thumbs-up');
         await answer();
@@ -206,46 +210,36 @@ describe('thumbs and comments', () => {
         expect(form()).toBeNull();
     });
 
-    it('sends the reasons picked after a thumbs-down, alone or with a comment', async () => {
+    it('offers all six reason chips, including Other without a free-text field', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form } = renderActions(sendFeedback);
         click('thumbs-down');
         await answer();
 
-        const chip = (id) => form().querySelector(`[data-reason="${id}"]`);
+        const send = form().querySelector('.conv-search-feedback-send');
         expect([...form().querySelectorAll('.conv-search-feedback-reason')].map((c) => c.dataset.reason))
             .toEqual(FEEDBACK_REASONS.map((r) => r.id));
-        const send = form().querySelector('.conv-search-feedback-send');
-        chip('incorrect').click();
-        expect(chip('incorrect').getAttribute('aria-pressed')).toBe('true');
+        expect(send.disabled).toBe(true);
+        pick(form(), 'incorrect');
         expect(send.disabled).toBe(false);
-        chip('incorrect').click();
+        pick(form(), 'incorrect');
         expect(send.disabled).toBe(true);
 
-        chip('sources').click();
-        chip('incomplete').click();
+        pick(form(), 'other');
+        pick(form(), 'incomplete');
+        expect(form().querySelector('textarea, input, [contenteditable="true"]')).toBeNull();
         submit(form());
-        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete', 'sources'] });
-        expect(chip('sources').disabled).toBe(true);
-        await answer(false);
-        expect(chip('sources').getAttribute('aria-pressed')).toBe('true');
-
-        type(form(), 'The links 404.');
-        submit(form());
-        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete', 'sources'], comment: 'The links 404.' });
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete', 'other'] });
         await answer();
-        expect(form()).toBeNull();
     });
 
-    it('blocks vote changes while a comment is sending and preserves a failed submission', async () => {
+    it('blocks vote changes while reasons are sending and preserves a failed submission', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { thumb, click, form } = renderActions(sendFeedback);
         click('thumbs-down');
         await answer();
 
-        type(form(), 'Keep this feedback for retry.');
-        const chip = form().querySelector('[data-reason="sources"]');
-        chip.click();
+        pick(form(), 'sources');
         const pendingForm = form();
         submit(pendingForm);
 
@@ -257,8 +251,7 @@ describe('thumbs and comments', () => {
 
         await answer(false);
         expect(form()).toBe(pendingForm);
-        expect(form().querySelector('textarea').value).toBe('Keep this feedback for retry.');
-        expect(chip.getAttribute('aria-pressed')).toBe('true');
+        expect(form().querySelector('[data-reason="sources"]').getAttribute('aria-pressed')).toBe('true');
         expect(form().querySelector('.conv-search-feedback-form-error').hidden).toBe(false);
         expect(thumb('thumbs-up').disabled).toBe(false);
         expect(thumb('thumbs-down').classList.contains('active')).toBe(true);
@@ -274,12 +267,11 @@ describe('thumbs and comments', () => {
         const { click, form } = renderActions(sendFeedback);
         click('thumbs-down');
         await answer();
-        type(form(), 'Keep the draft.');
-        form().querySelector('[data-reason="incomplete"]').click();
+        pick(form(), 'incomplete');
         const pendingForm = form();
 
         click('thumbs-up');
-        expect([...pendingForm.querySelectorAll('button, textarea')].every((control) => control.disabled)).toBe(true);
+        expect([...pendingForm.querySelectorAll('button')].every((control) => control.disabled)).toBe(true);
         submit(pendingForm);
         pendingForm.querySelector('.conv-search-feedback-dismiss').click();
         expect(sendFeedback).toHaveBeenCalledTimes(2);
@@ -287,15 +279,14 @@ describe('thumbs and comments', () => {
 
         await answer(false);
         expect(form()).toBe(pendingForm);
-        expect(form().querySelector('textarea').value).toBe('Keep the draft.');
         expect(form().querySelector('[data-reason="incomplete"]').getAttribute('aria-pressed')).toBe('true');
-        expect([...pendingForm.querySelectorAll('button, textarea')].every((control) => !control.disabled)).toBe(true);
+        expect([...pendingForm.querySelectorAll('button')].every((control) => !control.disabled)).toBe(true);
         submit(form());
-        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete'], comment: 'Keep the draft.' });
+        expect(sendFeedback).toHaveBeenLastCalledWith({ reasons: ['incomplete'] });
         await answer();
     });
 
-    it('keeps an empty form send button disabled after a failed vote change', async () => {
+    it('keeps Send disabled without selected reasons after a failed vote change', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form } = renderActions(sendFeedback);
         click('thumbs-down');
@@ -304,7 +295,7 @@ describe('thumbs and comments', () => {
         click('thumbs-up');
         await answer(false);
         expect(form().querySelector('.conv-search-feedback-send').disabled).toBe(true);
-        expect(form().querySelector('textarea').disabled).toBe(false);
+        expect(form().querySelector('[data-reason="incomplete"]').disabled).toBe(false);
     });
 
     it('locks only the answer whose feedback is pending', async () => {
@@ -318,7 +309,7 @@ describe('thumbs and comments', () => {
         });
         click('thumbs-down');
         await first.answer();
-        type(form(), 'First answer feedback.');
+        pick(form(), 'incorrect');
         submit(form());
 
         const otherThumb = otherMessage.querySelector('[data-action="thumbs-up"]');
@@ -328,10 +319,10 @@ describe('thumbs and comments', () => {
         await second.answer();
         expect(otherThumb.classList.contains('active')).toBe(true);
         await first.answer(false);
-        expect(form().querySelector('textarea').value).toBe('First answer feedback.');
+        expect(form().querySelector('[data-reason="incorrect"]').getAttribute('aria-pressed')).toBe('true');
     });
 
-    it('withdraws the comment form after a recorded thumbs-up', async () => {
+    it('withdraws the reasons form after an accepted thumbs-up', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form } = renderActions(sendFeedback);
 
@@ -345,21 +336,19 @@ describe('thumbs and comments', () => {
         expect(form()).toBeNull();
     });
 
-    it('closes the comment form without sending a blank comment', async () => {
+    it('closes the form without submitting an empty selection', async () => {
         const { sendFeedback, answer } = controlledSender();
         const { click, form } = renderActions(sendFeedback);
         click('thumbs-down');
         await answer();
 
-        type(form(), '   ');
         submit(form());
         expect(sendFeedback).toHaveBeenCalledTimes(1);
-
         form().querySelector('.conv-search-feedback-dismiss').click();
         expect(form()).toBeNull();
     });
 
-    it('marks the reaction immediately for answers that cannot be rated', () => {
+    it('marks the reaction immediately for answers without feedback support', () => {
         const { thumb, click, form } = renderActions(null);
 
         click('thumbs-down');

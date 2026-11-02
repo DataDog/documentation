@@ -2,8 +2,6 @@ import { logAction } from './logger';
 
 const feedbackHideTimers = new WeakMap();
 
-export const MAX_FEEDBACK_COMMENT_CHARS = 500;
-
 // Reasons offered after a thumbs-down. The IDs are the API's reason values.
 export const FEEDBACK_REASONS = [
     { id: 'incorrect', label: 'Incorrect' },
@@ -139,7 +137,7 @@ function lockFeedback(actionsDiv) {
     const form = next?.classList.contains('conv-search-feedback-form') ? next : null;
     const controls = [
         ...actionsDiv.querySelectorAll('[data-action="thumbs-up"], [data-action="thumbs-down"]'),
-        ...(form?.querySelectorAll('button, textarea') || [])
+        ...(form?.querySelectorAll('button') || [])
     ].map((control) => [control, control.disabled]);
     controls.forEach(([control]) => { control.disabled = true; });
     actionsDiv.setAttribute('aria-busy', 'true');
@@ -170,19 +168,19 @@ async function submitRating(button, positive, response, ctx) {
     if (!sent) return;
 
     markRating(button, positive, response, ctx);
-    if (positive) removeCommentForm(actionsDiv);
-    else showCommentForm(actionsDiv, ctx);
+    if (positive) removeReasonsForm(actionsDiv);
+    else showReasonsForm(actionsDiv, ctx);
 }
 
-function removeCommentForm(actionsDiv) {
+function removeReasonsForm(actionsDiv) {
     const next = actionsDiv.nextElementSibling;
     if (next && next.classList.contains('conv-search-feedback-form')) next.remove();
 }
 
-// Optional reasons and a note after a thumbs-down, sent once per answer.
-function showCommentForm(actionsDiv, ctx) {
+// Optional predefined reasons after a thumbs-down, sent once per answer.
+function showReasonsForm(actionsDiv, ctx) {
     const next = actionsDiv.nextElementSibling;
-    if (actionsDiv.dataset.commented || (next && next.classList.contains('conv-search-feedback-form'))) return;
+    if (actionsDiv.dataset.reasonsSubmitted || (next && next.classList.contains('conv-search-feedback-form'))) return;
 
     const form = document.createElement('form');
     form.className = 'conv-search-feedback-form';
@@ -209,13 +207,6 @@ function showCommentForm(actionsDiv, ctx) {
     const selectedReasons = () => chips.filter((chip) => chip.getAttribute('aria-pressed') === 'true')
         .map((chip) => chip.dataset.reason);
 
-    const field = document.createElement('textarea');
-    field.className = 'conv-search-feedback-comment';
-    field.rows = 2;
-    field.maxLength = MAX_FEEDBACK_COMMENT_CHARS;
-    field.placeholder = 'Tell us more (optional)';
-    field.setAttribute('aria-label', 'Tell us more');
-
     const buttons = document.createElement('div');
     buttons.className = 'conv-search-feedback-form-buttons';
     const dismiss = document.createElement('button');
@@ -232,28 +223,24 @@ function showCommentForm(actionsDiv, ctx) {
     error.className = 'conv-search-feedback-form-error';
     error.setAttribute('role', 'alert');
     error.hidden = true;
-    form.append(title, reasons, field, error, buttons);
+    form.append(title, reasons, error, buttons);
 
-    const hasFeedback = () => selectedReasons().length > 0 || Boolean(field.value.trim());
+    const hasFeedback = () => selectedReasons().length > 0;
     chips.forEach((chip) => chip.addEventListener('click', () => {
         chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
         send.disabled = !hasFeedback();
     }));
-    field.addEventListener('input', () => {
-        send.disabled = !hasFeedback();
-    });
     dismiss.addEventListener('click', () => form.remove());
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!hasFeedback()) return;
         const unlock = lockFeedback(actionsDiv);
         if (!unlock) return;
-        const comment = field.value.trim();
         const picked = selectedReasons();
         error.hidden = true;
         send.textContent = 'Sending\u2026';
         try {
-            await ctx.sendFeedback({ ...(picked.length && { reasons: picked }), ...(comment && { comment }) });
+            await ctx.sendFeedback({ reasons: picked });
         } catch (err) {
             error.textContent = "Couldn't send your feedback. Try again.";
             error.hidden = false;
@@ -263,15 +250,14 @@ function showCommentForm(actionsDiv, ctx) {
             unlock();
             send.textContent = 'Send';
         }
-        logAction('Conversational Search Feedback Comment', {
+        logAction('Conversational Search Feedback Reasons', {
             conversational_search: {
-                action: 'feedback_comment',
+                action: 'feedback_reasons',
                 feedback_reasons: picked,
-                comment_length: comment.length,
                 conversation_id: ctx.conversationId
             }
         }, ctx);
-        actionsDiv.dataset.commented = 'true';
+        actionsDiv.dataset.reasonsSubmitted = 'true';
         form.remove();
         const thumbsDown = actionsDiv.querySelector('[data-action="thumbs-down"]');
         if (thumbsDown) showFeedbackTooltip(thumbsDown, 'Thanks, this helps us improve!');
