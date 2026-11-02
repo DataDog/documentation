@@ -48,8 +48,6 @@ Optionally, link Synthetic mobile test data with RUM mobile data if the [RUM SDK
 
 You can create mobile app tests in Datadog by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}New Test{{< /ui >}}][12] and selecting {{< ui >}}Mobile Application Test{{< /ui >}}.
 
-{{< img src="mobile_app_testing/new_test_2.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
-
 ## Configuration
 
 You may create a test using one of the following options:
