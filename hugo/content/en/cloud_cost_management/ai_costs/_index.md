@@ -96,6 +96,7 @@ The following tags are available for all supported AI providers:
 | Tag&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Tag description |
 |---|---|
 | `providername` | The AI provider. |
+| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, or `anthropic_platform`). |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
 | `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
 | `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
@@ -104,7 +105,7 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to sources
 
-AI Costs attributes spend to its sources in two ways: provider-specific tags that each provider reports on its bill, and [out-of-the-box (OOTB) allocation rules][12] that enrich provider costs with Datadog observability data.
+Each provider reports its own tags that attribute AI spend to the users, API keys, projects, and other sources that generated it. For Anthropic and OpenAI, Datadog also adds tags through [out-of-the-box (OOTB) allocation rules][12], which require no configuration.
 
 ### Provider-specific tags
 
@@ -159,6 +160,21 @@ Anthropic reports a different set of tags for each plan.
 | `context_window` | Context Window | The context window size range of the request (for example, `tier_0-200k` or `tier_200k-1m`). |
 | `service_tier` | Service Tier | The service tier that processed the request (for example, `Standard`). |
 | `cost_type` | Cost Type | The type of charge (for example, `tokens`). |
+
+**Additional tags**
+
+The following Anthropic tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `api_key_id` | The unique identifier of the API key that made the request. |
+| `model` | An alias for `model_id`, provided for consistency with usage metrics. |
+| `model_id` | The canonical Anthropic model identifier (for example, `claude-opus-4-6`). |
+| `org_id` | The unique identifier of the Anthropic organization. |
+| `org_name` | A tag-normalized version of the Anthropic organization's name. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+| `user_name` | The name of the user who generated the cost. |
+| `workspace_id` | The unique identifier of the Anthropic workspace. |
 
 {{% /tab %}}
 {{% tab "Azure Foundry" %}}
@@ -228,6 +244,23 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 | `project` | Project | The OpenAI project that the cost belongs to. |
 | `api_key_name` | API Key Name | The name of the API key that made the request. |
 
+**Additional tags**
+
+The following OpenAI tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `account_id` | The unique identifier of the OpenAI account. |
+| `account_name` | The name of the OpenAI account. |
+| `api_key_id` | The unique identifier of the API key that made the request. |
+| `batch` | Whether the request used the OpenAI Batch API. |
+| `endpoint` | The OpenAI API endpoint that the request was sent to. |
+| `model` | The OpenAI model identifier (for example, `gpt-4.1`). |
+| `org_id` | The unique identifier of the OpenAI organization. |
+| `project_id` | The unique identifier of the OpenAI project. |
+| `project_name` | The name of the OpenAI project. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+
 {{% /tab %}}
 {{% tab "Snowflake AI" %}}
 
@@ -246,48 +279,9 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 {{% /tab %}}
 {{< /tabs >}}
 
-### Out-of-the-box allocation tags
+### Map tags to teams
 
-OOTB allocation rules use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
-
-The following tags are available through OOTB allocation rules:
-
-{{< tabs >}}
-{{% tab "Anthropic" %}}
-
-- `api_key_id`
-- `api_key_name`
-- `context_window`
-- `model`
-- `model_id`
-- `org_id`
-- `org_name`
-- `service_tier`
-- `user_email`
-- `user_id`
-- `user_name`
-- `workspace_id`
-- `workspace_name`
-
-{{% /tab %}}
-{{% tab "OpenAI" %}}
-
-- `account_id`
-- `account_name`
-- `api_key_id`
-- `batch`
-- `endpoint`
-- `model`
-- `org_id`
-- `project_id`
-- `project_name`
-- `user_email`
-- `user_id`
-
-{{% /tab %}}
-{{< /tabs >}}
-
-Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
+Configure [Tag Pipelines][13] to map provider-specific tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
 
 {{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values through an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
