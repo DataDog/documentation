@@ -103,7 +103,7 @@ Note the following about the results:
 
 - **`region`** is derived from the quota ARN. Quotas that apply to the whole account, such as most IAM quotas, are reported as `GLOBAL`.
 - **`percent_used`** is empty when AWS publishes no usage metric for that quota. The limit is still accurate; only the percentage is unavailable.
-- **`limit_value`** is in the unit AWS reports for that quota, which is a plain count for most quotas and a size or a rate for the rest. Units are not comparable between quotas, so avoid ranking unrelated quotas by this value alone. A limit of `9999999` means AWS treats the quota as effectively unlimited for that account.
+- **`limit_value`** is in the unit AWS reports for that quota, which is a plain count for most quotas and a size or a rate for the rest. Units are not comparable between quotas, so avoid ranking unrelated quotas by this value alone.
 
 ## Further reading
 
