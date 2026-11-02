@@ -285,7 +285,7 @@ This option does **not** skip the initialization request. To initialize entirely
 
 The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to limit each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
 
-<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+<div class="alert alert-info">The <code>flagConfigurationFetch</code> option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';

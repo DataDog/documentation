@@ -10,17 +10,20 @@ cascade:
     rank: 70
 further_reading:
 - link: /profiler/enabling
-  tag: よくあるご質問
+  tag: ドキュメント
   text: アプリケーションの継続的なプロファイラー有効化
 - link: getting_started/profiler
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Continuous Profiler の概要
 - link: profiler/profile_visualizations
-  tag: よくあるご質問
+  tag: ドキュメント
   text: 使用可能なプロファイルタイプの詳細
 - link: /extend/guide/data-collection-resolution/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: データ収集と解決
+- link: https://learn.datadoghq.com/courses/profiling-timeline
+  tag: ラーニングセンター
+  text: プロファイリングタイムラインでのリクエストのレイテンシーの最適化
 - link: https://www.datadoghq.com/blog/source-code-preview/
   tag: ブログ
   text: Continuous Profiler のソースコードプレビュー機能を使用して、重要なコードに集中する
@@ -53,7 +56,7 @@ further_reading:
   text: Kubernetes オペレーターをモニターしてアプリケーションがスムーズに動作するようにする
 - link: https://www.datadoghq.com/blog/gitlab-source-code-integration
   tag: ブログ
-  text: Datadog で GitLab ソースコード統合を使用して迅速にトラブルシューティングを実行する
+  text: Datadog で GitLab ソースコードインテグレーションを使用して迅速にトラブルシューティングを実行する
 title: Continuous Profiler
 ---
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
@@ -94,7 +97,7 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 アプリケーションからプロファイルを Datadog に送信するための構成が完了した後は、コードのパフォーマンスに関するインサイトを確認してみましょう。
 
-デフォルトでは、プロファイルは 8 日間、プロファイルデータから生成されたメトリクスは 1 か月間保持されます。
+デフォルトでは、フレームグラフ、コールグラフ、およびスレッドタイムラインは 8 日間保持され、プロファイルメトリクスは 1 か月間保持されます。フレームグラフをノートブックにエクスポートすると、それを 1 年間保持できます。
 
 {{< learning-center-callout header="学習センターでコードパフォーマンスの問題を診断してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
   Datadog 学習センターには、このトピックについて学ぶための実践演習コースが多数用意されています。登録は無料です。Datadog Continuous Profiler を使用して、本番環境でアプリケーションコードのパフォーマンスを調査し、改善する方法を体験してください。
@@ -120,15 +123,15 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 ### プロファイリングデータにトレースを関連付ける {#connect-traces-to-profiling-data}
 
-[APM 分散型トレーシング][3] と Continuous Profiler の両方が有効化されたアプリケーションプロセスは自動的にリンクされるため、[プロファイルタブ][4] でスパン情報からプロファイリングデータを直接開き、パフォーマンスの問題に関連する特定のコード行を見つけることができます。
+[APM 分散型トレーシング][3] と Continuous Profiler の両方が有効化されたアプリケーションプロセスは自動的にリンクされるため、[{{< ui >}}Profiles{{< /ui >}}タブ][4] でスパン情報からプロファイリングデータを直接開き、パフォーマンスの問題に関連する特定のコード行を見つけることができます。
 
-{{< img src="profiler/profiles_tab.png" alt="[Profiles] (プロファイル) タブに APM トレーススパンのプロファイル情報が表示されています。" >}}
+{{< img src="profiler/profiles_tab.png" alt="プロファイルタブに APM トレーススパンのプロファイル情報が表示されています。" >}}
 
 ### プロファイルを比較して、パフォーマンスの変化を特定 {#find-changes-in-performance-by-comparing-profiles}
 
-異なる時間、環境、またはデプロイメントの類似のプロファイルを比較すると、パフォーマンスの問題に対する原因や解決策の把握に役立ちます。Datadog プロファイラーでは [比較の視覚化][5] が提供されるため、時間枠やスコープに使用したタグによってプロファイルが異なる理由を理解できます。
+異なる時間、環境、またはデプロイメントの類似のプロファイルを比較すると、パフォーマンスの問題に対する原因や解決策の把握に役立ちます。Datadog プロファイラーでは[比較の視覚化][5]が提供されるため、時間枠やスコープに使用したタグによってプロファイルが異なる理由を理解できます。
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

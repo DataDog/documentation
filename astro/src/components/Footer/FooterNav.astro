@@ -1,0 +1,212 @@
+---
+/**
+ * The footer's link nav: the nested Product column (category → subcategory →
+ * products) plus the Resources / Blog / About lists. Port of the `footer-nav`
+ * block of websites-modules `layouts/partials/footer.html`.
+ *
+ * Hybrid component — all of this markup is static, and there is a lot of it
+ * (100+ links and seven inline category icons), so it renders in Astro and
+ * `FooterAccordionController` attaches the mobile accordion behavior to it
+ * rather than receiving the whole tree as island props.
+ */
+import styles from "./Footer.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory.ts";
+import FooterAccordionController from "./FooterAccordionController.tsx";
+import { iconHtml } from "@lib/componentUtils/menuData";
+import type { FooterData } from "@lib/componentUtils/footerMenus";
+
+interface Props {
+  product: FooterData["product"];
+  linkSections: FooterData["linkSections"];
+}
+
+const { product, linkSections } = Astro.props;
+
+const cl = classListFactory(styles);
+
+const navId = "footer-nav";
+const caretSvg = iconHtml("angle-down-wui");
+
+/** `--footer-tablet-order` drives the 3-column band's reordering; see the CSS. */
+function orderStyle(tabletOrder: number | undefined): string | undefined {
+  return tabletOrder === undefined
+    ? undefined
+    : `--footer-tablet-order:${tabletOrder}`;
+}
+
+function breakModifiers(layout: {
+  tabletBreakAfter: boolean;
+  desktopBreakAfter: boolean;
+}): string {
+  return [
+    layout.tabletBreakAfter ? cl("footer__column-break--tablet") : "",
+    layout.desktopBreakAfter ? cl("footer__column-break--desktop") : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+---
+
+{
+  /* Upstream carries the Bootstrap `container` on the <nav> itself
+   (`class="footer-nav container"`), so the gutter lives here, not on a
+   wrapper. */
+}
+<nav
+  aria-label="Footer"
+  class={cl("footer__nav", "footer__container")}
+  id={navId}
+>
+  <ul class={cl("footer__sections")}>
+    {/* Product — the only section that nests categories. */}
+    <li
+      class={`${cl("footer__product-section")} footer-section footer-section--product`}
+      data-footer-section="product"
+    >
+      <button
+        type="button"
+        class={cl("footer__section-header")}
+        aria-expanded="false"
+        aria-controls="footer-section-product"
+        data-footer-section-toggle
+      >
+        <span class={cl("footer__section-title")}>{product.title}</span>
+        <span
+          class={cl("footer__caret")}
+          aria-hidden="true"
+          set:html={caretSvg}
+        />
+      </button>
+      <ul
+        id="footer-section-product"
+        class={`${cl("footer__category-list")} ${cl("footer__section-panel")}`}
+        data-footer-section-panel
+      >
+        {
+          product.categories.map((category) => (
+            <>
+              <li
+                class={cl("footer__category-wrapper")}
+                style={orderStyle(category.layout.tabletOrder)}
+                data-footer-category={category.identifier}
+              >
+                <div class={cl("footer__category-block")}>
+                  <button
+                    type="button"
+                    class={cl("footer__category-header")}
+                    aria-expanded="false"
+                    aria-controls={`footer-category-${category.identifier}`}
+                    data-footer-category-toggle
+                  >
+                    <span class={cl("footer__category-label")}>
+                      <span
+                        class={cl("footer__category-icon")}
+                        aria-hidden="true"
+                        set:html={category.iconHtml}
+                      />
+                      {category.label}
+                    </span>
+                    <span
+                      class={cl("footer__caret")}
+                      aria-hidden="true"
+                      set:html={caretSvg}
+                    />
+                  </button>
+                  <ul
+                    id={`footer-category-${category.identifier}`}
+                    class={`${cl("footer__subcategory-list")} ${cl("footer__category-panel")}`}
+                    data-footer-category-panel
+                  >
+                    {category.groups.map((group) => (
+                      <li class={cl("footer__subcategory")}>
+                        {group.label && (
+                          <span class={cl("footer__subcategory-label")}>
+                            {group.label}
+                          </span>
+                        )}
+                        <ul class={cl("footer__menu-list")}>
+                          {group.products.map((item) => (
+                            <li class={cl("footer__menu-item")}>
+                              <a href={item.href}>{item.label}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+              {/* Zero-width, full-column-height spacer that pushes the next
+                  category into a fresh column. It inherits the order of the
+                  category it follows, so it breaks in the right place in the
+                  reordered tablet band too. */}
+              {(category.layout.tabletBreakAfter ||
+                category.layout.desktopBreakAfter) && (
+                <li
+                  class={`${cl("footer__column-break")} ${breakModifiers(category.layout)}`}
+                  aria-hidden="true"
+                  style={orderStyle(category.layout.tabletOrder)}
+                />
+              )}
+            </>
+          ))
+        }
+      </ul>
+    </li>
+
+    {/* Resources / Blog / About — plain lists sharing one grid cell. */}
+    <li class={cl("footer__link-sections-cell")}>
+      <ul class={cl("footer__link-sections")}>
+        {
+          linkSections.map((section) => (
+            <li
+              class={`${cl("footer__link-section")} ${cl(`footer__link-section--${section.id}`)} footer-section footer-section--${section.id}`}
+              data-footer-section={section.id}
+            >
+              <button
+                type="button"
+                class={cl("footer__section-header")}
+                aria-expanded="false"
+                aria-controls={`footer-section-${section.id}`}
+                data-footer-section-toggle
+              >
+                <span class={cl("footer__section-title")}>{section.title}</span>
+                <span
+                  class={cl("footer__caret")}
+                  aria-hidden="true"
+                  set:html={caretSvg}
+                />
+              </button>
+              <ul
+                id={`footer-section-${section.id}`}
+                class={`${cl("footer__menu-list")} ${cl("footer__section-panel")}`}
+                data-footer-section-panel
+              >
+                {section.links.map((link) => (
+                  <li class={cl("footer__menu-item")}>
+                    <a href={link.href} target={link.target}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+{
+  /* `client:idle`, not `client:visible`: the controller renders nothing, so its
+   <astro-island> has no box for an IntersectionObserver to ever report. */
+}
+<FooterAccordionController
+  client:idle
+  externalContext={{ scope: navId, entries: { nav: navId } }}
+  openClass={cl("footer__section-panel--open")}
+  openCategoryClass={cl("footer__category-panel--open")}
+  openHeaderClass={cl("footer__section-header--open")}
+  openCategoryHeaderClass={cl("footer__category-header--open")}
+/>
