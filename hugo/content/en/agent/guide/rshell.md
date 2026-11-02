@@ -152,4 +152,4 @@ private_action_runner:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /mcp_server/tools/#remote-actions
-[2]: https://github.com/DataDog/rshell
+[2]: https://github.com/DataDog/datadog-agent/tree/main/pkg/rshell
