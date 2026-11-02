@@ -1,16 +1,15 @@
-announcement_banner:
-  desktop_message: "<span>Datadog Live Seoul 2026: AI & Observability의 미래 (4/16), 지금 바로 등록하세요!</span>"
-  external_link: "https://events.datadoghq.com/ko/events/datadog-live-seoul-2026"
-  mobile_message: "<span>Datadog Live Seoul 2026 (4/16), 지금 등록하세요!</span>"
-  background_color: "#000000"
-  custom_classes: 'dash-announcement-banner'
-disclaimer: 이 페이지는 아직 한국어로 제공되지 않습니다. 번역 작업 중입니다. <br>현재 번역 프로젝트에 대한 질문이나 피드백이 있으신
-  경우<a href="https://docs.datadoghq.com/ko/help/"> 언제든지 연락주시기 바랍니다.</a>
-meta_description: 클라우드 스케일 모니터링의 선두주자, Datadog
-meta_title: Datadog로 시작하기
-site_name: Datadog 인프라스트럭처 및 응용 프로그램 모니터링
-site_support_banner: 이 제품은 선택한 <a href="/getting_started/site">Datadog 사이트</a>에서 지원되지
-  않습니다.
+site_name: "Datadog 인프라 및 애플리케이션 모니터링"
+meta_title: Datadog 시작하기
+meta_description: "Datadog, 클라우드 규모 모니터링 서비스 선도 기업."
+disclaimer: "이 페이지는 아직 영어로 제공되지 않습니다. 현재 번역 작업을 진행 중입니다. <br> 현재 번역 프로젝트에 대해 궁금한 점이나 의견이 있으시면 <a href=\"https://docs.datadoghq.com/help/\">언제든지 문의하세요!</a>"
+# announcement_banner:
+#   desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
+#   mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
+#   hide_on_mobile: true
+#   background_color: "#000000"
+#   custom_classes: 'dash-announcement-banner'
+#   external_link: https://dash.datadoghq.com/?utm_source=events&utm_medium=internal&utm_campaign=summit-202606dash&utm_term=HPbanner
+translate_status_banner: "이 번역은 최신 버전이 아닙니다. 최신 영어 버전을 보려면 여기를 클릭"
+site_support_banner: "이 제품은 선택한 <a href=\"/getting_started/site\">Datadog 사이트</a>에서는 지원되지 않습니다."
 us2_fed_integration_banner_availability: "To find out if this integration is available in your organization, see your <a href=\"https://app.datadoghq.com/integrations\">Datadog Integrations</a> page or ask your organization administrator."
 us2_fed_integration_banner_exception: "To initiate an exception request to enable this integration for your organization, email <a href=\"mailto:support@ddog-gov.com\">support@ddog-gov.com</a>."
-translate_status_banner: 이 번역은 최신 버전이 아닙니다. 최신 영문 버전을 보려면 여기를 클릭하세요.
