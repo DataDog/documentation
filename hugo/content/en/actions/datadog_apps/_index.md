@@ -92,8 +92,6 @@ The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog A
 
 With the skill installed, your agent runs the steps in [Build an app with the CLI](#build-an-app-with-the-cli) for you. Your environment needs the same [prerequisites](#prerequisites).
 
-### Install the skill
-
 {{< skill-callout
     title="Build an app with an agent"
     text="Install the `datadog-app` skill in your AI coding agent for guided app development."
@@ -103,7 +101,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill datadog-app 
 
 The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
 
-### Example prompts
+After you install the skill, describe what you want your agent to do. For example:
 
 - `Scaffold a Datadog App called my-app.`
 - `Run this Datadog App locally.`
