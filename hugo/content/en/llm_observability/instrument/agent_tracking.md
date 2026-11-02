@@ -54,7 +54,7 @@ Set a version on your agent span. The version is set as an `agent_version` tag o
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.14.0+. In versions before TBD, only the agent span is tagged. To break down tokens and cost by version on those versions, add the `agent_version` tag to the agent's child spans with `LLMObs.annotation_context(tags={"agent_version": "v2"})`.
+Requires `dd-trace` v4.17.0+.
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -63,14 +63,7 @@ with LLMObs.agent(name="travel_planner", version="v2"):
     ...
 ```
 
-You can also set the version on the active agent span with `LLMObs.annotate()`, or on every agent span in a block with `LLMObs.annotation_context()`:
-
-```python
-with LLMObs.annotation_context(agent={"version": "v2"}):
-    run_agent()
-```
-
-A version set with `annotate()` after the agent has started only reaches spans started after the call.
+You can also pass `agent={"version": "v2"}` to `LLMObs.annotate()` or `LLMObs.annotation_context()`.
 {{% /tab %}}
 {{% tab "Node.js" %}}
 Requires `dd-trace` v5.134.0+ or v6.23.0+.
