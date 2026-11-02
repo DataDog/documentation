@@ -50,12 +50,18 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
-1. Select and set up your [log sources][3].
+1. Select and set up a [log source][3]. To add more sources, see [Add another source][7].
 1. Select and set up [destinations][5] for your processed logs.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+
+#### Add another source
+
+{{< img src="observability_pipelines/setup/another_source.png" alt="The Pipelines page showing two sources sending logs to one processor group and two destinations." style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_source %}}
 
 #### Add another processor group
 
@@ -81,6 +87,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/?tab=logs#destinations
 [6]: /observability_pipelines/configuration/pipeline_simulation/
+[7]: /observability_pipelines/configuration/set_up_pipelines/?tab=logs#add-another-source
 [11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
@@ -88,12 +95,18 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Metrics Pipeline{{< /ui >}}.
-1. Select and set up a [metrics source][3].
+1. Select and set up a [metrics source][3]. To add more sources, see [Add another source][7].
 1. Select and set up [destinations][5] for your processed metrics.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
       - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
+
+#### Add another source
+
+{{< img src="observability_pipelines/setup/another_source_metrics.png" alt="The Pipelines page showing two sources sending metrics to one processor group and one destination." style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_source %}}
 
 #### Add another processor group
 
@@ -119,6 +132,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 [4]: /observability_pipelines/processors/?tab=metrics#processors
 [5]: /observability_pipelines/destinations/?tab=metrics#destinations
 [6]: /observability_pipelines/configuration/pipeline_simulation/
+[7]: /observability_pipelines/configuration/set_up_pipelines/?tab=metrics#add-another-source
 [11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
