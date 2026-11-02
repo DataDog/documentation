@@ -28,6 +28,12 @@ Some setup steps require specific Datadog permissions. An admin might need to cr
 | {{< ui >}}AI Guard Evaluate{{< /ui >}} | `ai_guard_evaluate` | Write | Required to call the AI Guard evaluation API and to create an application key with the `ai_guard_evaluate` scope. |
 | {{< ui >}}AI Guard View{{< /ui >}} | `ai_guard_view` | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings. |
 | {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies, custom rules, and sensitive data scanning. |
+| {{< ui >}}Security Notification Rules Read{{< /ui >}} | `security_monitoring_notification_profiles_read` | Read | Required to view notification rules for AI Guard security signals. |
+| {{< ui >}}Security Notification Rules Write{{< /ui >}} | `security_monitoring_notification_profiles_write` | Write | Required to create and edit notification rules for AI Guard security signals. |
+| {{< ui >}}Security Rules Read{{< /ui >}} | `security_monitoring_rules_read` | Read | Required to view AI Guard detection rules. |
+| {{< ui >}}Security Rules Write{{< /ui >}} | `security_monitoring_rules_write` | Write | Required to create and edit AI Guard detection rules. |
+| {{< ui >}}Security Signals Read{{< /ui >}} | `security_monitoring_signals_read` | Read | Required to view AI Guard security signals. |
+| {{< ui >}}Security Signals Write{{< /ui >}} | `security_monitoring_signals_write` | Write | Required to triage AI Guard security signals. |
 | {{< ui >}}User Access Manage{{< /ui >}} | `user_access_manage` | Write | Required only to restrict access to AI Guard spans with Data Access Control. |
 
 ### Datadog Agent and Datadog SDK
@@ -44,8 +50,6 @@ AI Guard requires these minimum Datadog SDK versions:
 | Ruby | `dd-trace-rb` | 2.44.0 |
 
 Some features require a later version, such as streamed response evaluation and sensitive data redaction. Each page lists its own requirements.
-
-<!-- TODO: Confirm that one minimum version per language applies to the SDK and manual integrations, not only to automatic integrations. These versions are aligned on the highest version previously listed for each language: `dd-trace-py` 4.13.0, `dd-trace-js` 5.122.0 or 6.11.0, `dd-trace-java` 1.54.0, and `dd-trace-rb` 2.44.0. -->
 
 To take advantage of all AI Guard features, use the latest version of the Datadog SDK for your language.
 
@@ -130,7 +134,7 @@ Confirm that AI Guard is evaluating agent traffic.
 
 1. Send several requests through the agent.
 1. In Datadog, go to {{< ui >}}Security > AI Guard > Discover{{< /ui >}}.
-1. Find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}.
+1. Find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}, and its evaluations appear in the AI Guard {{< ui >}}Investigate{{< /ui >}} tab.
 
 ### Troubleshooting: AI Guard spans don't appear
 
