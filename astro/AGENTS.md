@@ -4,11 +4,11 @@ This file guides AI coding agents, such as Claude Code, Codex, and Cursor, when 
 
 # Warning: Only the API docs are live
 
-The API docs (`/api/`) are rendered by this site, and are live on [the production site](https://docs.datadoghq.com). All other docs in this folder are in development, and updating them has no impact on the production site.
+The API docs (`/api/`) are rendered by this site, and are live on [the production site](https://docs.datadoghq.com). All other docs and components in this folder are in development, and updating them has no impact on the production site.
 
-If a contributor wants to change the `/api/` docs or the way they are rendered, this folder is the right place. If they're trying to make those changes in the `hugo` folder instead, redirect them here: Hugo no longer renders the live API docs.
+If a contributor wants to change the production `/api/` docs, this folder is the right place.
 
-If someone who has never contributed to the `astro` folder asks you to revise any other docs, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead.
+If someone who has never contributed to the `astro` folder asks you to revise any non-API docs or components in `astro`, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead.
 
 ## About the Astro site
 
