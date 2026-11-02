@@ -541,36 +541,44 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 - Delete the `web-store` service remapping rule.
 
-## Assistant
+## Chat
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+Select the `chat` toolset explicitly. For URL-based configuration, use `?toolsets=chat`. It is not included in `toolsets=all`. Existing `assistant` toolset selections continue to work, but clients must refresh their tool lists to use the Chat-named tools.
 
-### `send_message_to_assistant`
-*Toolset: **assistant***\
+### `send_message_to_chat`
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`; use `get_chat_message_result` to retrieve the result.
 
-- Ask the assistant what's causing the latency spike on the checkout service.
-- Continue conversation `abc-123-def` and ask the assistant for next steps.
-- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+- Ask Bits Chat what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
+- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
 
-### `get_assistant_conversation_history`
-*Toolset: **assistant***\
+### `get_chat_message_result`
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Retrieves the full conversation history for a specific assistant conversation by its ID.
+Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
+
+- Get the result of a pending Bits Chat response.
+- Check whether a Bits Chat request needs an action before it can continue.
+
+### `get_chat_conversation_history`
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full history of a Bits Chat conversation by its ID.
 
 - Get the full conversation history for conversation `abc-123-def`.
-- Show me everything the assistant said in my last conversation about the payment outage.
+- Show the history of the Bits Chat conversation about the payment outage.
 
-### `list_assistant_conversations`
-*Toolset: **assistant***\
+### `list_chat_conversations`
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Lists all Datadog Assistant conversations for the current user.
+Lists all Bits Chat conversations for the current user.
 
-- List all my past conversations with the Datadog Assistant.
-- Show me my most recent assistant conversations.
+- List past Bits Chat conversations.
+- Show recent Bits Chat conversations.
 
 ## Audit Trail
 

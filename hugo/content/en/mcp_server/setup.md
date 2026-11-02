@@ -678,6 +678,12 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve all generally available tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
+- Retrieve Bits Chat tools (requires Bits Chat access):
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=chat</code></pre>
+
+- Retrieve all generally available tools and Bits Chat tools:
+  <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all,chat</code></pre>
+
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
@@ -704,13 +710,13 @@ Provide tool names as a comma-separated list. When both parameters are present, 
 
 ### Available toolsets
 
-These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
+The following toolsets are available. Unless noted, `toolsets=all` includes them. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
-- `assistant`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `cases`: Tools for [Work Management][42], including creating, searching, updating, and commenting on work items (cases); managing projects; linking work items to each other and to Jira issues; managing attachments; and finding users to assign. Some tools in this toolset are in Preview and are available only when you request `cases` by name. See [Datadog MCP Server Tools][49] for details.
+- `chat`: [Bits Chat][73] tools for messages and conversation history. Requires Bits Chat access. Select with `toolsets=chat`; `toolsets=all` excludes it.
 - `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
@@ -925,7 +931,7 @@ If your AI client does not list Datadog MCP Server tools that create or modify r
 
 - **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of individual user role permissions. An organization administrator can enable {{< ui >}}MCP Write Access{{< /ui >}} from [Organization Settings][27].
 - **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
-- **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
+- **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. The `chat` and Preview toolsets are not included in `toolsets=all`, so request them by name.
 - **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
 
 After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
