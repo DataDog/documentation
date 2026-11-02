@@ -15,16 +15,17 @@ further_reading:
   tag: "Documentation"
   text: "Agent architecture"
 ---
+{{< callout url="#" header="false" btn_hidden="true" >}}
+Agent Data Plane is in Preview. Datadog plans to enable it by default over the next few Datadog Agent versions as part of becoming Generally Available. You can opt in early using the instructions below.
+{{< /callout >}}
 
 ## Overview
 
-The Agent Data Plane (ADP) is a high-performance data pipeline that runs alongside the core Datadog Agent. It is designed to process high-volume telemetry with lower and more predictable CPU and memory usage.
+The Agent Data Plane (ADP) is a high-performance data pipeline that runs alongside the main Datadog Agent. It is designed to process high-volume telemetry with lower and more predictable CPU and memory usage.
 
 ADP implements the DogStatsD pipeline only. When ADP is enabled, it receives, aggregates, and forwards all DogStatsD metrics, events, and service checks in place of the main Agent. Metrics from integrations and checks continue to be processed by the main Agent.
 
 ADP ships with the Datadog Agent and requires no separate installation. Your DogStatsD clients, ports, and sockets do not change, and the metrics sent to Datadog are the same with or without ADP.
-
-Datadog plans to make ADP the default DogStatsD implementation in upcoming Agent releases.
 
 ## Prerequisites
 
