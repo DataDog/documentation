@@ -20,6 +20,7 @@ further_reading:
 ---
 {{< callout url="#" header="false" btn_hidden="true" >}}
 Agent-side tag aggregation is in Preview.
+To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.
 {{< /callout >}}
 
 ## Overview

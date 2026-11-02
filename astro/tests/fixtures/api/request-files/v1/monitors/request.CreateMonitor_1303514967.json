@@ -1,0 +1,26 @@
+{
+  "name": "Example Monitor",
+  "type": "cost alert",
+  "query": "formula(\"exclude_null(query1)\").last(\"7d\").anomaly(direction=\"above\", threshold=10) >= 5",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "priority": 3,
+  "options": {
+    "thresholds": {
+      "critical": 5,
+      "warning": 3
+    },
+    "variables": [
+      {
+        "data_source": "cloud_cost",
+        "query": "sum:aws.cost.net.amortized.shared.resources.allocated{aws_product IN (amplify ,athena, backup, bedrock ) } by {aws_product}.rollup(sum, 86400)",
+        "name": "query1",
+        "aggregator": "sum"
+      }
+    ],
+    "include_tags": true
+  }
+}
