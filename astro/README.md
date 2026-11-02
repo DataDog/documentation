@@ -1,19 +1,19 @@
 # Astro docs
 
-This folder contains the Astro-rendered portion of the docs site. The Astro docs are in development, and will gradually go live in sections.
+This folder contains the Astro-rendered portion of the docs site. The API reference docs are live on Astro. The rest of the Astro docs are in development, and are going live gradually, in sections.
 
 > [!IMPORTANT]
-> These docs are not live. Changing something in this folder does not update the Datadog documentation site. To revise the live docs, update the [`hugo`][1] folder instead.
+> The API reference docs (`/api/`) are rendered from this folder. To change the API docs or the way they are rendered, update this folder, not the [`hugo`][1] folder. Changes to the API docs in the `hugo` folder do not update the Datadog documentation site.
 >
-> If you revise the API Reference docs on Hugo, we recommend revising the unpublished Astro version as well, to avoid losing your changes in the upcoming migration.
+> All other docs in this folder are not live. To revise any docs outside of `/api/`, update the [`hugo`][1] folder instead.
 
 ## Status of the migration from Hugo to Astro
 
-No docs have been migrated to Astro yet.
+The API docs have been migrated to Astro. No other docs have been migrated yet.
 
 | Doc type | Description | Status |
 | --- | --- | --- |
-| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | In QA against the Hugo API docs. Not live. |
+| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | Live. |
 | Product docs | All other docs. `.mdoc` files in `src/content/en/`, rendered on demand (SSR). | Proof of concept only. Only test fixtures in `dd_e2e/`. |
 | Single-sourced docs | Docs located in other repositories or content-management systems. These are imported into our build. | Development not started. |
 
