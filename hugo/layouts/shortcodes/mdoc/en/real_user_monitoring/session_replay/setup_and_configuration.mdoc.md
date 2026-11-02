@@ -16,7 +16,7 @@ To set up Session Replay for Browser:
 
 Make sure you've set up the [RUM Browser SDK][30].
 
-### Step 2 - Enable Session Replay
+### Step 2 - Enable Session Replay {% #enable-browser %}
 
 To enable Session Replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
 
@@ -586,7 +586,7 @@ This sample rate is applied in addition to the RUM sample rate. For example, if 
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-The sample rate is set through the `sessionReplaySampleRate` parameter passed to `datadogRum.init()`. See [Step 2 - Enable Session Replay](#step-2-enable-session-replay) above.
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to `datadogRum.init()`. See [Step 2 - Enable Session Replay](#enable-browser) above.
 {% /if %}
 <!-- end Browser -->
 
