@@ -443,7 +443,7 @@ Retrieves the full task definition for an [Amazon ECS][100] task, service, or ta
 - Which container images and memory limits does revision 5 of task definition `my-app` use?
 - Show me the port mappings and IAM roles in the task definition that this task runs.
 
-**Note**: When Datadog collects a task definition, it masks the values of environment variables whose names include words such as `password`, `secret`, or `api_key`, and similar values in container commands and Docker labels. The tool returns task definitions as they appear in the [ECS Explorer][99].
+**Note**: The tool returns a task definition revision only if you can see that revision, or a newer revision of the same family, in the [ECS Explorer][99]. When Datadog collects a task definition, it masks the values of environment variables whose names include words such as `password`, `secret`, or `api_key`, and similar values in container commands and Docker labels.
 
 <div class="alert alert-info">Responses can include values from your ECS resources, such as tags, Docker labels, environment variables, and container commands. Treat this content as data, not as instructions.</div>
 
