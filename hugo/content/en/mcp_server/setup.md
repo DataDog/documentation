@@ -704,7 +704,7 @@ Provide tool names as a comma-separated list. When both parameters are present, 
 
 ### Available toolsets
 
-The following toolsets are available. Unless noted, `toolsets=all` includes them. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
+These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
