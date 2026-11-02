@@ -813,13 +813,17 @@ The Agent tries each service in order and uses the first successful response. Al
 
 Agent versions `v7.75` to `v7.85` use a different list, in this order: `https://icanhazip.com`, `https://ipinfo.io/ip`, `https://checkip.amazonaws.com`, `https://api.ipify.org`, `https://whatismyip.akamai.com`.
 
-To turn off source public IP resolution for dynamic tests, including basic dynamic tests, set the following in `datadog.yaml`, or set the environment variable `DD_NETWORK_PATH_COLLECTOR_DISABLE_SOURCE_PUBLIC_IP_COLLECTION` to `"true"`. The Agent then makes no requests to these services, and paths are still collected, without the source public IP.
+In Agent `v7.82+`, you can turn off source public IP resolution. Paths are still collected, without the source public IP.
 
-```yaml
-network_path:
-  collector:
-    disable_source_public_ip_collection: true
-```
+- For dynamic tests, including basic dynamic tests, set the following in `datadog.yaml`, or set the environment variable `DD_NETWORK_PATH_COLLECTOR_DISABLE_SOURCE_PUBLIC_IP_COLLECTION` to `"true"`:
+
+  ```yaml
+  network_path:
+    collector:
+      disable_source_public_ip_collection: true
+  ```
+
+- For [scheduled tests](#scheduled-tests), set `disable_source_public_ip_collection: true` in the `init_config` section of `conf.d/network_path.d/conf.yaml` to apply it to all instances, or in an individual instance.
 
 ## Troubleshooting
 
