@@ -101,8 +101,8 @@ To migrate from the Datadog UNIX Agent to Agent 7, uninstall the UNIX Agent and 
    ```
 3. [Install Agent 7](#install-the-agent).
 4. Configure Agent 7 in `/etc/datadog-agent/datadog.yaml`. Use your backup as a reference, but do not copy the file as is:
-   - `api_key`, `site`, `hostname`, `tags`, `log_level`, and `proxy.*` keep the same names.
-   - Other options are renamed or removed. Check each option against the [AIX example configuration][10].
+   - Basic settings like `api_key`, `site`, `hostname`, `tags`, `log_level`, and `proxy.*` keep the same names.
+   - Most other options are renamed or removed. Check each option against the [AIX example configuration][10].
    - Do not copy the `dd_url: https://unix.agent.datadoghq.com` setting.
 5. Check your integration configurations in `/etc/datadog-agent/conf.d/`. Some options are different in Agent 7.
 6. Run `datadog-agent status` to confirm that the Agent is running and sending data.
