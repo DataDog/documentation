@@ -108,7 +108,7 @@ To restrict access:
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view <br>- **Private** - Visitors enter an email address matching the page's email rules to receive a secure link. Visitors do not need a Datadog account. |
+   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view <br>- **Private** - Visitors enter an email address. If it matches the page's email rules, Datadog sends them a secure link to view the page. Visitors do not need a Datadog account. |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Public page example: shopist → shopist.statuspage.datadoghq.com*<br>*Private page example: shopist → shopist.private.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
    | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email and Slack subscriptions can be turned on or off independently for each status page. Private status pages support email subscriptions only. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
@@ -123,13 +123,15 @@ Private status pages let you share status updates with external visitors without
 
 You can configure email rules while creating a private status page or from **Settings** > **General** under **Email Rules**.
 
-1. In **Allow**, add individual email addresses or domains. Enter a domain as `@example.com`.
+You can separate multiple entries with commas.
+
+1. In **Allow**, add individual email addresses or domains. Format domains with a leading `@`, for example `@example.com`.
 1. (Optional) In **Deny**, add individual email addresses that should be blocked. Deny rules take precedence over Allow rules.
 1. Click **Save**.
 
 {{< img src="/incident_response/status_pages/private_status_page_email_rules.png" alt="Private status page settings with Email Rules that allow a domain and email address and deny an individual email address" style="width:100%;" >}}
 
-You can separate multiple entries with commas. An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
+An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
 
 Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access.
 
