@@ -250,7 +250,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block in [Step 1: Configure GPU tracing](#1-configure-gpu-tracing). Set each variable from the same annotations:
+For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block in [Step 1: Configure GPU tracing](?tab=kubernetes#1-configure-gpu-tracing). Set each variable from the same annotations:
 
 ```yaml
 ddTraceConfigs:
