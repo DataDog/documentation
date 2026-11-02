@@ -1,6 +1,6 @@
 ---
 title: Monitoring Resource Performance
-description: "Track web resource performance including XHR, Fetch, images, CSS, and JavaScript assets with detailed timing data and provider identification."
+description: "Track web resource performance including XHR, Fetch, images, CSS, JavaScript assets, and WebSocket connections with detailed timing data and provider identification."
 aliases:
   - /real_user_monitoring/browser/monitoring_resource_performance/
 further_reading:
@@ -106,6 +106,71 @@ For matching requests, the SDK automatically extracts operation type, operation 
 
 **Note**: You can modify GraphQL variables in the [`beforeSend` callback][9] if needed (for example, to redact sensitive data).
 
+## Track WebSocket connections
+
+{{< callout header="Preview" btn_hidden="true" >}}
+WebSocket monitoring is in Preview. The `betaTrackWebSockets` option and the collected attributes may change before general availability.
+{{< /callout >}}
+
+The Browser SDK can collect [WebSocket][11] connections. Each connection is reported as a RUM Resource event with `resource.type:websocket`. The event summarizes the lifetime of the connection: how long it took to open, how long it stayed open, how it closed, and how many messages were exchanged in each direction.
+
+This feature requires Browser SDK v7.16.0+.
+
+### Setup
+
+Set [`betaTrackWebSockets`][14] to `true` during SDK initialization. WebSocket collection only runs when resource collection is enabled (`trackResources: true`).
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: 'datadoghq.com',
+    trackResources: true,
+    betaTrackWebSockets: true
+})
+```
+
+A connection that is still open when the user leaves the page, or when the session ends, is still reported. The `resource.websocket.tracking_end_reason` attribute indicates why tracking stopped. See [WebSocket attributes](#websocket-attributes).
+
+### Redact sensitive data
+
+The SDK removes the query string from WebSocket URLs automatically. The rest of the URL, including the path, the fragment, and any credentials, is collected as is. If it contains sensitive data, such as an identifier in the path, redact it with the [`beforeSend` callback][9].
+
+The WebSocket resource is built by Datadog from events that the SDK sends, so you cannot modify the resource event itself. Instead, modify the SDK events of type `vital` where `vital.type` is `websocket`.
+
+The following properties of these events can be modified:
+
+| Attribute                             | Type   | Description                                                                         |
+| ------------------------------------- | ------ | ----------------------------------------------------------------------------------- |
+| `vital.websocket.url`                 | String | The URL of the WebSocket connection.                                                |
+| `vital.websocket.requested_protocols` | Array  | The subprotocols requested by the application when opening the connection.          |
+| `vital.websocket.selected_protocol`   | String | The subprotocol selected by the server.                                             |
+| `vital.websocket.close_reason`        | String | The reason the connection was closed, as provided by the application or the server. |
+
+For example, to redact a room identifier from the WebSocket URL:
+
+```javascript
+datadogRum.init({
+    ...,
+    betaTrackWebSockets: true,
+    beforeSend: (event) => {
+        if (event.type === 'vital' && event.vital.type === 'websocket') {
+            // The URL is not present on every WebSocket event, so check it exists
+            if (event.vital.websocket.url) {
+                event.vital.websocket.url = event.vital.websocket.url.replace(/\/rooms\/[^/]+/, '/rooms/REDACTED')
+            }
+        }
+        return true
+    }
+})
+```
+
+Do not restrict the redaction to a single event name: the SDK sends several `websocket` events per connection, and the URL is included on more than one of them. Applying the same redaction to every `websocket` event guarantees the URL is redacted wherever it appears.
+
+**Note**: Unlike other events, WebSocket events cannot be discarded with `beforeSend`. Returning `false` is ignored and a warning is logged to the browser console. To stop collecting WebSocket connections, remove `betaTrackWebSockets` from your configuration.
+
 ## Resource timing attributes
 
 Detailed network timing data for resources is collected from the Fetch and XHR native browser methods and from the [Performance Resource Timing API][3].
@@ -127,7 +192,7 @@ Detailed network timing data for resources is collected from the Fetch and XHR n
 
 | Attribute                  | Type   | Description                                                                                       |
 | -------------------------- | ------ | ------------------------------------------------------------------------------------------------- |
-| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`). |
+| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`, `websocket`). |
 | `resource.method`          | string | The HTTP method (for example `POST`, `GET`).                                                      |
 | `resource.status_code`     | number | The response status code.                                                                         |
 | `resource.url`             | string | The resource URL.                                                                                 |
@@ -149,6 +214,48 @@ For resources configured with `trackResourceHeaders`, additional network header 
 | --------------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- |
 | `resource.request.headers`  | object | Request headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch resources only).     |
 | `resource.response.headers` | object | Response headers as key/value pairs (available only if `trackResourceHeaders` is enabled, for Fetch and XHR resources). |
+
+## WebSocket attributes
+
+For [WebSocket connections](#track-websocket-connections) (`resource.type:websocket`), the following attributes are collected in addition to `resource.url` (without the query string), `resource.duration` (the total lifetime of the connection), and the other [resource attributes](#resource-attributes). `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][12]. `resource.status_code` is `101` when the opening handshake succeeds, and is not set when it fails, because browsers do not expose the status code of a rejected handshake.
+
+### Connection attributes
+
+| Attribute                                     | Type        | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resource.websocket.id`                       | string      | The unique identifier of the WebSocket connection. Same value as `resource.id`.                                                                                                                                                                                                                                                                                                                             |
+| `resource.websocket.requested_protocols`      | array       | The subprotocols requested by the application when creating the connection. Only present if the application requested any.                                                                                                                                                                                                                                                                                  |
+| `resource.websocket.selected_protocol`        | string      | The subprotocol selected by the server. Only present if the connection opened with a subprotocol.                                                                                                                                                                                                                                                                                                           |
+| `resource.websocket.selected_extensions`      | string      | The extensions negotiated with the server (for example, `permessage-deflate`). Only present if the connection opened with extensions.                                                                                                                                                                                                                                                                       |
+| `resource.websocket.connecting_date`          | number (ms) | The date the connection was created, in milliseconds since the Unix epoch.                                                                                                                                                                                                                                                                                                                                  |
+| `resource.websocket.connecting_duration`      | number (ns) | Time between the creation of the connection and the completion of the opening handshake. If the handshake fails, this is the time before the browser gave up.                                                                                                                                                                                                                                               |
+| `resource.websocket.open_handshake_succeeded` | Boolean     | Whether the opening handshake succeeded.                                                                                                                                                                                                                                                                                                                                                                    |
+| `resource.websocket.open_date`                | number (ms) | The date the connection opened, in milliseconds since the Unix epoch.                                                                                                                                                                                                                                                                                                                                       |
+| `resource.websocket.open_duration`            | number (ns) | Time the connection stayed open. `0` if the connection never opened.                                                                                                                                                                                                                                                                                                                                        |
+| `resource.websocket.closing_duration`         | number (ns) | Time spent in the closing state, between the start of the closing handshake and the closure of the connection. `0` if there was no closing handshake.                                                                                                                                                                                                                                                       |
+| `resource.websocket.closed_date`              | number (ms) | The date the connection closed, in milliseconds since the Unix epoch.                                                                                                                                                                                                                                                                                                                                       |
+| `resource.websocket.close_code`               | number      | The close status code, as defined in [RFC 6455, section 7.4][13].                                                                                                                                                                                                                                                                                                                                           |
+| `resource.websocket.close_reason`             | string      | The reason the connection was closed, as provided by the application or the server.                                                                                                                                                                                                                                                                                                                         |
+| `resource.websocket.was_clean`                | Boolean     | Whether the connection was closed cleanly, meaning the closing handshake completed.                                                                                                                                                                                                                                                                                                                         |
+| `resource.websocket.close_initiator`          | string      | Which side started the closing handshake: `client` if the application called `close()`, `server` if the server started the closing handshake, or `unknown` if no closing handshake was observed (for example, if the opening handshake failed or the connection was lost).                                                                                                                                  |
+| `resource.websocket.tracking_end_reason`      | string      | Why tracking of the connection ended: `close_event` (the connection closed), `session_end` (the RUM session ended), `page_terminated` (the user left the page), or `heartbeat_timeout` (the SDK stopped reporting without a close event, for example because the tab crashed or the device went offline). With `heartbeat_timeout`, close attributes are inferred and `resource.duration` is a lower bound. |
+| `resource.websocket.start_view.id`            | string      | The ID of the view that was active when the connection was created.                                                                                                                                                                                                                                                                                                                                         |
+| `resource.websocket.end_view.id`              | string      | The ID of the view that was active when tracking ended.                                                                                                                                                                                                                                                                                                                                                     |
+
+### Message attributes
+
+Message statistics are reported separately for messages received by the browser (`inbound`) and messages sent by the application (`outbound`). They are not set if the connection never opened.
+
+| Attribute                                                     | Type           | Description                                                                                                                                                       |
+| ------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `resource.websocket.{inbound,outbound}.message_count`         | number         | Number of messages.                                                                                                                                               |
+| `resource.websocket.{inbound,outbound}.message_size_total`    | number (bytes) | Total size of all messages.                                                                                                                                       |
+| `resource.websocket.{inbound,outbound}.message_size_max`      | number (bytes) | Size of the largest message.                                                                                                                                      |
+| `resource.websocket.{inbound,outbound}.time_to_first_message` | number (ns)    | Time between the opening of the connection and the first message. Only present if at least one message was exchanged.                                             |
+| `resource.websocket.{inbound,outbound}.longest_silence`       | number (ns)    | Longest period during which no message was exchanged while the connection was open.                                                                               |
+| `resource.websocket.{inbound,outbound}.silence_before_close`  | number (ns)    | Time between the last message and the closure of the connection. Only present if at least one message was exchanged and the connection closed with a close event. |
+| `resource.websocket.outbound.buffered_amount_max`             | number (bytes) | Highest amount of outgoing data queued in the browser and not yet sent to the network.                                                                            |
+| `resource.websocket.outbound.buffered_amount_at_close`        | number (bytes) | Amount of outgoing data still queued when the connection closed.                                                                                                  |
 
 ## Identify third-party resources
 
@@ -180,3 +287,7 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [8]: /real_user_monitoring/application_monitoring/browser/data_collected/#graphql-attributes
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
+[11]: https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API
+[12]: https://datatracker.ietf.org/doc/html/rfc6455
+[13]: https://datatracker.ietf.org/doc/html/rfc6455#section-7.4
+[14]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#betatrackwebsockets
