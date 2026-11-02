@@ -727,8 +727,6 @@ These Datadog-supported extensions accept optional fallback estimates in **nanod
 | `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
 | `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
 
-Supplied USD costs from the preceding table take precedence over these nanodollar estimates.
-
 #### Request parameters
 
 All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
