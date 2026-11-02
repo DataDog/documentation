@@ -38,7 +38,7 @@ You can access insights into your GPU fleet by deploying the Datadog Agent on yo
 [Capacity Planning](/gpu_monitoring/capacity_planning) in GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
-Understand your entire fleet's size and spend across hyperscalers, on-premises, and neocloud providers in one unified view.
+View your entire fleet's size and spend across hyperscalers, on-premises, and neocloud providers.
 
 {{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
