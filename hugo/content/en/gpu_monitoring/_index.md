@@ -42,7 +42,7 @@ View your entire fleet's size and spend across hyperscalers, on-premises, and ne
 
 {{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
-- Attribute GPU usage and quotas by team, service, or any tag to allocate capacity more fairly across teams, and to distinguish real capacity shortages from inefficiencies.
+- Attribute GPU usage and quotas by team, service, or any tag to allocate capacity more fairly across teams and distinguish capacity shortages from inefficiencies.
 - Identify resource contention and forecast demand for each GPU type to shorten procurement cycles and make spend more predictable.
 - Diagnose why workloads are delayed or evicted.
 
