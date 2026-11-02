@@ -11,6 +11,12 @@ products:
 - name: App and API Protection
   url: /security/application_security/
   icon: app-sec
+- name: Cloud Security
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Code Security
+  url: /security/code_security/
+  icon: security-code-security
 further_reading:
 - link: "logs/processing/pipelines"
   tag: "Documentation"
