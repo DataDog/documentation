@@ -14,7 +14,7 @@ description: "Customize the Ownership Agent with tag mappings, exclusions, and c
 
 ## Overview
 
-The Ownership Agent infers an owner for cloud resources with security findings, using cloud resource tags, Service Catalog data, and other data sources. **Ownership preferences** let you customize this process with three kinds of rules:
+The Ownership Agent infers an owner for cloud resources with security findings, using cloud resource tags, Software Catalog data, and other data sources. **Ownership preferences** let you customize this process with three kinds of rules:
 
 - **Tag mappings** use a tag on your resources to suggest an owner.
 - **Exclusions** prevent an owner from ever being suggested.
@@ -27,7 +27,7 @@ The Ownership Agent infers an owner for cloud resources with security findings, 
 To add, edit, or delete preferences, you need the **Security Monitoring Findings Write** permission.
 
 1. In Datadog, go to **Security** > **Settings** > **Cloud Security** > [**Ownership Agent**][1].
-2. In the **Ownership preferences** section, click **Add tag mapping**, **Add exclusion**, or **Add instruction**.
+2. In the **Ownership preferences** section, click **Add Tag Mapping**, **Add Exclusion**, or **Add Instruction**.
 3. Fill in the form and click **Add**.
 
 Every rule needs a **Name** that is unique within its panel. You cannot rename a rule after you create it. To rename a rule, delete it and add it again.
@@ -36,7 +36,7 @@ The Ownership Agent picks up saved rules automatically. Each resource keeps its 
 
 ## Tag mappings
 
-A tag mapping says: _"When a resource has tag `X:Y`, it belongs to this owner."_ When a resource's tag matches a mapping, the Ownership Agent adds the owner as a candidate and ranks it alongside other data sources. Tag mappings do not override a direct ownership tag (like `dd-team`) already on the resource.
+A tag mapping assigns an owner to resources that have a specific tag. When a resource's tag matches a mapping, the Ownership Agent adds the owner as a candidate and ranks it alongside other data sources. Tag mappings don't override a direct ownership tag (such as `dd-team`) already on the resource.
 
 You can add up to 50 tag mappings.
 
@@ -67,15 +67,15 @@ With these rules, a resource tagged `squad:payments` gets `payments` as a team c
 
 ## Exclusions
 
-An exclusion tells the Ownership Agent, "Never suggest this owner." Use exclusions for bot accounts, CI runners, and shared service accounts that appear in cloud resource metadata but don't own the resource.
+An exclusion prevents the Ownership Agent from suggesting a specific owner. Use exclusions for bot accounts, CI runners, and shared service accounts that appear in cloud resource metadata but don't own the resource.
 
 You can add up to 20 exclusions.
 
 | Field                        | Description                                                                                                  |
 |------------------------------|--------------------------------------------------------------------------------------------------------------|
-| **Owner type** (optional)    | Only exclude the owner for this type: **User**, **Team**, or **Service**. Leave empty to exclude it for any type |
+| **Owner type** (optional)    | Exclude only the owner for this type: **User**, **Team**, or **Service**. Leave empty to exclude it for any type |
 | **Owner**                    | Owner to exclude (for example, `deploy-bot`). Matched case-insensitively                                      |
-| **Resource type** (optional) | Only exclude the owner for this resource type (for example, `aws_ec2_instance`). Leave empty for any type     |
+| **Resource type** (optional) | Exclude only the owner for this resource type (for example, `aws_ec2_instance`). Leave empty for any type     |
 
 When you set both optional fields, the exclusion applies only when both match. The settings page shows empty optional fields as **Any**. For example:
 
@@ -103,17 +103,25 @@ For example:
 
 | Name                     | Priority | Instruction                                                                                                                                       |
 |--------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `cost-center-convention` | High     | Ownership is assigned by cost center. Team identifiers always start with team- (for example, team-platform). |
+| `cost-center-convention` | High     | Ownership is assigned by cost center. Team identifiers always start with `team-` (for example, `team-platform`). |
 
-## Validation
+## Ownership preference validation rules
 
 The settings page checks each rule before saving it and shows any problem next to the field.
 
-- Fields accept ASCII letters, digits, and a small set of punctuation. Accented letters, emoji, and typographic (curly) quotes are not allowed. Fields are limited to 1,024 characters.
+- Fields accept only the characters listed in the following table. Accented letters, emoji, and typographic (curly) quotes are not allowed.
+- Fields are limited to 1,024 characters, and instructions to 4,000 characters.
 - Two tag mappings with the same tag key and value must have the same owner and confidence. Exact duplicates are not allowed.
 - An exclusion can't duplicate another exclusion with the same owner, owner type, and resource type.
 
-## Troubleshooting
+| Field                                                                   | Allowed characters                                                                                             |
+|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Name**                                                                | Letters, digits, and `-` `_` `.` `:` `@`                                                                       |
+| **Tag key**, **Owner**, **Owner type**, **Resource type**, **Priority** | Letters, digits, and `-` `_` `.` `:` `/` `@`                                                                   |
+| **Tag value**                                                           | Letters, digits, spaces, and `-` `_` `.` `:` `/` `@`                                                           |
+| **Instruction**                                                         | Letters, digits, spaces, line breaks, and `-` `_` `.` `:` `/` `@` `#` `,` `;` `!` `?` `(` `)` `'` `"` `` ` `` |
+
+## Troubleshoot ownership preferences
 
 | Problem                                    | Fix                                                                                                                        |
 |--------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
