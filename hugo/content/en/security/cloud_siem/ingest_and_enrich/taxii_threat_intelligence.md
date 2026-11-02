@@ -33,7 +33,7 @@ A collection with a large backlog can take several polling cycles to complete it
 
 Each organization can have up to 20 collections with polling enabled at a time. You can still add more collections beyond that limit, but you must leave scheduled polling disabled for them. Enabling polling on a collection after reaching the limit returns an error, and that collection's polling stays disabled until you disable polling on another one.
 
-### Supported indicator types
+### Indicator handling
 
 | Indicator type | STIX pattern object |
 |---|---|
