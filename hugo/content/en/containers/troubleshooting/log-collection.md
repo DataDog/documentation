@@ -677,7 +677,7 @@ Docker’s default is the [json-file logging driver][23] so the Agent tries to r
 [15]: /agent/configuration/agent-commands/
 [16]: /logs/log_configuration/pipelines/?tab=host#preprocessing
 [17]: https://app.datadoghq.com/logs/pipelines
-[18]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
+[18]: /agent/logs/advanced_log_collection/?tab=annotations#scrub-sensitive-data-from-your-logs
 [19]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 [20]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#integration-inheritance
 [21]: https://kubernetes.io/docs/concepts/workloads/controllers/ttlafterfinished/#cleanup-for-finished-jobs
