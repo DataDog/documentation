@@ -76,7 +76,7 @@ GPUs are an expensive and scarce resource with higher failure rates than standar
 Identify total spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlate GPU usage to related pods or processes.
 
 - Break down total and idle GPU spend by any tag over any time frame to see where spend is concentrated.
-- Identify the key drivers of wasted GPU spend and inefficiencies (for example, the most wasteful teams) to support internal chargebacks and data-driven quota management decisions.
+- Identify the key drivers of wasted GPU spend and inefficiencies, such as teams with the highest GPU waste, to support internal chargebacks and data-driven quota management decisions.
 - Make cost optimization part of daily operations by giving teams clear reporting on GPU usage and spend.
 
 {{< img src="gpu_monitoring/cost-and-utilization2.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:100%;" >}}
