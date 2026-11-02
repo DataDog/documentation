@@ -17,7 +17,7 @@ esbuild.build({
   format: 'cjs',
   outfile: 'dist/bundle.js',
   packages: 'external',
-  external: ['dd-trace', 'express']
+  external: ['dd-trace', 'express'],
 +  plugins: [ddPlugin],
 }).catch((e) => {
   console.error(e);
