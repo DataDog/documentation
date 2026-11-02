@@ -638,13 +638,13 @@
           "instructions": {
             "exampleFile": "example.rb",
             "runCommandByRegion": {
-              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\""
+              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\""
             }
           }
         },
@@ -684,13 +684,13 @@
           "instructions": {
             "exampleFile": "example.ts",
             "runCommandByRegion": {
-              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\""
+              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\""
             }
           }
         }
@@ -1059,13 +1059,13 @@
           "instructions": {
             "exampleFile": "example.rb",
             "runCommandByRegion": {
-              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\"",
-              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" rb \"example.rb\""
+              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" ruby \"example.rb\""
             }
           }
         },
@@ -1105,13 +1105,13 @@
           "instructions": {
             "exampleFile": "example.ts",
             "runCommandByRegion": {
-              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\"",
-              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" tsc \"example.ts\""
+              "us": "DD_SITE=\"datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "us3": "DD_SITE=\"us3.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "us5": "DD_SITE=\"us5.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "eu": "DD_SITE=\"datadoghq.eu\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "ap1": "DD_SITE=\"ap1.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "ap2": "DD_SITE=\"ap2.datadoghq.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\"",
+              "gov": "DD_SITE=\"ddog-gov.com\" DD_API_KEY=\"<API-KEY>\" DD_APP_KEY=\"<APP-KEY>\" npx tsx \"example.ts\""
             }
           }
         }

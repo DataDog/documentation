@@ -2,7 +2,7 @@
 title: Data Access Control in Agent Observability
 aliases:
 - /llm_observability/improve/access_control/
-description: Use Data Access Control to restrict Agent Observability projects, and the evaluator configs for an application, to specific teams or roles.
+description: Use Data Access Control to restrict Agent Observability projects, evaluator configs, and application-associated managed prompts to specific teams or roles.
 further_reading:
 - link: "/account_management/rbac/data_access/"
   tag: "Documentation"
@@ -30,7 +30,7 @@ When a project is restricted, users outside the teams or roles you granted acces
 
 Users outside those teams or roles receive a *not found* response when they open a direct link to the project or to anything inside it.
 
-You can also restrict the evaluator configs that run on an application's traces. See [Evaluator configs](#evaluator-configs).
+You can also restrict the evaluator configs that run on an application's traces and the managed prompts associated with that application. See [Restrict application-scoped data](#restrict-application-scoped-data).
 
 Restrictions apply in the Datadog UI and in the API. Application keys are subject to the same restrictions as the user who owns them.
 
@@ -38,7 +38,7 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 - Data Access Control is configured for your organization. See [Data Access Control][1].
 - You have the Datadog Admin role, or another role carrying the [`user_access_manage` permission][2].
-- The project you want to restrict already exists in Agent Observability.
+- The project or application you want to restrict already exists in Agent Observability.
 
 ## Restrict a project in the UI
 
@@ -85,6 +85,15 @@ You can also create a restriction with the Data Access Control [Datasets API][5]
 }
 ```
 
+## Restrict application-scoped data
+
+Evaluator configs and managed prompts are restricted by application rather than by project. To restrict them, create a Restricted Dataset with an Agent Observability `ml_app` filter whose value is the application name:
+
+- On the Access Control page, select the application from the applications group in the value list.
+- On the Data Access Controls page or in the Datasets API, enter the application name as the `ml_app` value. Matching on the application name is not case-sensitive.
+
+Grant access to the teams or roles that should be able to access the application's data, then save the Restricted Dataset.
+
 ## Annotation queues
 
 An annotation queue that belongs to a project inherits that project's restriction. Restricting a project hides its queues, the traces they hold for review, the labels that reviewers applied, and each queue's label schema. Users outside the granted teams or roles cannot annotate, edit, or delete a queue, and cannot export its annotated interactions to a dataset or to CSV.
@@ -98,6 +107,14 @@ Every annotation queue you create must belong to a project. Queues created befor
 [Evaluator configs][8], including custom LLM-as-a-judge and managed evaluator configs, are restricted by application rather than by project. Each evaluator config targets one application, and it follows the Restricted Dataset whose `ml_app` value is that application's name. Matching on the application name is not case-sensitive.
 
 Users outside the granted teams or roles cannot view, edit, or create evaluator configs that target a restricted `ml_app` or project.
+
+## Managed prompts
+
+[Managed prompts][9] promoted from [Prompt Tracking][11] retain the application name from their tracked spans. They follow the Restricted Dataset whose `ml_app` value is that application name.
+
+Users outside the granted teams or roles cannot list, view, retrieve, resolve, update, or delete the managed prompt or its versions. This restriction applies in the Datadog UI and to Prompt Management API and SDK operations. A restricted prompt also cannot be used as a source in [prompt composition][10] without access to that prompt.
+
+Prompts created directly in the Prompt Management UI, API, or SDK are not associated with an application. They cannot be restricted with Data Access Control. To create an application-associated managed prompt, first track the prompt in an instrumented application, then promote it to the managed prompt registry.
 
 ## Find a project's ID
 
@@ -113,7 +130,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 
 - **Spans from an experiment run through the SDK are not restricted by a Restricted Dataset on the project.** These spans are attributed to the application that ran the experiment, not to the project. A Restricted Dataset on the project hides the project and its datasets, dataset records, and evaluation metrics, but not the inputs and outputs on those spans. To restrict those spans too, add a second filter for the application's `ml_app` value to the same Restricted Dataset.
 - **Evaluator configs follow only Restricted Datasets that filter on `ml_app`.** A Restricted Dataset filter on any other tag key does not restrict evaluator configs, even if it restricts the application's traces.
-- **Managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
+- **Only application-associated managed prompts can be restricted.** Prompts created directly in Prompt Management have no `ml_app` value and remain visible to everyone with the required Agent Observability permissions, including when Agent Observability data outside Restricted Datasets is set to [Restricted][6].
 - **An annotation queue that does not belong to a project is visible to everyone** with Agent Observability read access, and no Restricted Dataset can hide it. Move the queue into a project, or recreate it in one, to bring it under a restriction.
 - **A project with no Restricted Dataset is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization sets Agent Observability data outside Restricted Datasets to [Restricted][6]. A Restricted Dataset whose value matches no project silently restricts nothing. Confirm every new restriction with a user outside the granted teams or roles.
 - **When Agent Observability is set to [Restricted][6], a project is visible only if a Restricted Dataset names its project ID.** An `ml_app` value that is an application name grants nothing in Offline Experiments, so the project stays hidden from everyone, including the teams and roles on your other Restricted Datasets. See [Find a project's ID](#find-a-projects-id).
@@ -130,3 +147,6 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 [6]: /account_management/rbac/data_access/#strict-mode
 [7]: /llm_observability/investigate/annotation_queues/#managing-queue-access
 [8]: /llm_observability/investigate/evaluations/
+[9]: /llm_observability/configure/prompt_management/
+[10]: /llm_observability/configure/prompt_management/#reuse-prompts-with-composition
+[11]: /llm_observability/instrument/prompt_tracking/

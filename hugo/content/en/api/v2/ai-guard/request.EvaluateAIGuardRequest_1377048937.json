@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "evaluations",
+    "attributes": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello world!"
+        }
+      ],
+      "meta": {
+        "confidence_threshold": {
+          "flagging_global": 0.6,
+          "policy-evasion": 0.9,
+          "indirect-prompt-injection": 0.4
+        }
+      }
+    }
+  }
+}
