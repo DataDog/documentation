@@ -70,7 +70,7 @@ Attributes may be included in a SAML Assertion. Datadog looks for three attribut
   2. **sn**: This is optional, and should be set to the user's surname.
   3. **givenName**: This is optional, and should be set to the user's first, or given name.
 
-<div class="alert alert-info">For the Microsoft Entra ID IdP, use the attribute `surname` instead of `sn` in the assertion.</div>
+<div class="alert alert-info">For the Microsoft Entra ID IdP, use the attribute <code>surname</code> instead of <code>sn</code> in the assertion.</div>
 
 Datadog expects that Attributes use the URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` or the Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`. The name used for each attribute depends on the NameFormat that your IdP uses.
 

@@ -1,118 +1,117 @@
 ---
-description: Más información sobre el Explorador de Error Tracking.
+description: Aprenda sobre Error Tracking Explorer.
 further_reading:
 - link: /monitors/types/error_tracking
   tag: Documentación
-  text: Más información sobre los monitores de Error Tracking.
+  text: Obtenga información sobre los monitores de Error Tracking
 title: Explorador de Error Tracking
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Los detalles de un problema en Error Tracking Explorer" style="width:100%;" >}}
 
-{{< img src="error_tracking/error-tracking-overview-3.png" alt="Detalles de un incidente en el Explorador de Error Tracking" style="width:100%;" >}}
+Error Tracking Explorer le permite visualizar, filtrar e investigar problemas. Un problema es un grupo de errores similares relacionados con el mismo error de software. Datadog crea problemas calculando una huella digital para cada error utilizando algunos de sus atributos, como el tipo de error, el mensaje de error o la traza de pila. Los errores con la misma huella digital se agrupan en el mismo problema.
 
-El Explorador de Error Tracking permite ver, filtrar e investigar incidentes. Un incidente es un grupo de errores similares relacionados con el mismo fallo. Datadog crea incidentes contando una huella digital por cada error, utilizando algunos de sus atributos como el tipo de error, el mensaje de error o la traza (trace) de stack tecnológico. Los errores con la misma huella digital se agrupan en el mismo incidente.
+## Explore sus problemas {#explore-your-issues}
 
-## Explorar tus incidentes
-
-Cada elemento listado en el Explorador de Error Tracking es un incidente que contiene información clara sobre el error, incluyendo lo siguiente:
+Cada elemento listado en Error Tracking Explorer es un problema que contiene información general sobre el error, incluida la siguiente:
 
 -   El tipo de error y el mensaje de error
 -   La ruta al archivo en el que se activan los errores subyacentes
--   Información importante sobre la duración del incidente:
-    -   Cuándo fue visto por primera y última vez
-    -   Gráfico de casos a lo largo del tiempo
-    -   Número de casos en el periodo de tiempo seleccionado
+-   Información importante sobre el ciclo de vida del problema:
+    -   Cuándo se vio por primera y última vez
+    -   Gráfico de ocurrencias a lo largo del tiempo
+    -   Número de ocurrencias en el período de tiempo seleccionado
 
-El tema también está etiquetado como:
-- `New`, si el incidente fue visto por primera vez hace menos de dos días y está en estado **PARA REVISIÓN** (Para revisión) (consulta [Estados de incidentes][5])
-- `Regression`, si el incidente se **RESOLVIÓ** y volvió a producirse en una versión más reciente (consulta [Detección de regresiones][6])
-- `Crash`, si la aplicación se bloquea
-- Con una [causa sospechada][3]
+Los problemas también se etiquetan como:
+- `New` si el problema se vio por primera vez hace menos de dos días y está en estado {{< ui >}}FOR REVIEW{{< /ui >}} (consulte [Estados del problema][5])
+- `Regression` si el problema fue {{< ui >}}RESOLVED{{< /ui >}} y ocurrió de nuevo en una versión más reciente (consulte [Regression Detection][6])
+- `Crash` si la aplicación falló
+- Tener una [Suspected Cause][3]
 
-### Rango de tiempo
+### Rango de tiempo {#time-range}
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Rango de tiempo de Error Tracking" style="width:80%;" >}}
 
-El rango de tiempo aparece en la parte superior derecha del Explorador como una línea de tiempo. Esta función te permite visualizar los incidentes con errores ocurridos dentro del periodo de tiempo seleccionado. Cambia el rango de tiempo seleccionando un rango preestablecido en el menú desplegable.
+El rango de tiempo aparece en la parte superior derecha de Explorer como una línea de tiempo. Esta función le permite visualizar los problemas que presentan ocurrencias de errores dentro del período de tiempo seleccionado. Cambie el rango de tiempo seleccionando un rango preestablecido en el menú desplegable.
 
-### Clasificación
+### Ordenamiento {#sorting}
 
-Clasifica incidentes en la lista utilizando una de estas opciones:
--   **Relevancia** combina varias características de incidentes para priorizar aquellos relacionados con el código, recientes o con picos de error. Error Tracking analiza la antigüedad de los incidentes, los casos del último día, el aumento significativo en la última hora o si han provocado un bloqueo de la aplicación.
--   **Recuento** clasifica los incidentes en función del recuento total de casos en el rango de tiempo seleccionado.
--   **Más recientes** ordena los incidentes en función de cuándo fueron vistos por primera vez.
--   **Sesiones afectadas** ordena los incidentes por el número de [sesiones RUM][4] afectadas.
+Ordene los problemas en la lista usando una de estas opciones:
+-   {{< ui >}}Relevance{{< /ui >}} combina varias características de los problemas para priorizar los relacionados con el código, los recientes o los que presentan un aumento repentino de ocurrencias. Error Tracking analiza qué tan antiguos son los problemas, las ocurrencias durante el último día, el aumento notable durante la última hora o si provocaron un bloqueo de la aplicación.
+-   {{< ui >}}Count{{< /ui >}} ordena los problemas según el recuento total de ocurrencias durante el rango de tiempo seleccionado.
+-   {{< ui >}}Newest{{< /ui >}} ordena los problemas según cuándo fueron vistos por primera vez.
+-   {{< ui >}}Impacted Sessions{{< /ui >}} ordena los problemas por el número de [sesiones RUM][4] impactadas.
 
-### Facetas
+### Facetas {#facets}
 
 {{< img src="/error_tracking/facets-panel-2.png" alt="Facetas de Error Tracking" style="width:100%;" >}}
 
-Error Tracking indexa automáticamente una lista predefinida de atributos de tus incidentes y crea facetas a partir de ella. Una faceta muestra todos los miembros distintos de un atributo para el periodo de tiempo seleccionado y proporciona algunos análisis básicos, como el número de incidentes representados. Las facetas permiten pivotar o filtrar los incidentes en función de un atributo determinado.
+Error Tracking indexa automáticamente una lista predefinida de atributos de sus problemas y crea facetas a partir de ellos. Una faceta muestra todos los miembros distintos de un atributo para el período de tiempo seleccionado y proporciona algunos análisis básicos, como la cantidad de problemas representados. Las facetas le permiten pivotar o filtrar sus problemas según el atributo dado.
 
-Algunos de los atributos de error más utilizados son
-| Atributo | Descripción
+Algunos atributos de error utilizados comúnmente incluyen:
+| Atributo | Descripción |
 |-----------|-------------|
 | `error.message`| El mensaje asociado con el error. |
-| `error.type` | El tipo o la clase de error. |
-| `error.stack` | La traza de stack tecnológico asociada al error. |
-| `error.handling` | Indica si el error fue gestionado. Los errores APM se consideran `handled` si un tramo (span) principal informa una operación exitosa (`HTTP 200`, `gRPC OK`) o una gestión de error exitosa (`HTTP 400`, `gRPC NOT_FOUND`). Los errores RUM se consideran `unhandled` si no se capturan manualmente en el código. |
+| `error.type` | El tipo o la clase del error. |
+| `error.stack` | La traza de pila asociada con el error. |
+| `error.handling` | Indica si el error fue manejado. Los errores de APM se consideran `handled` si un tramo principal informa una operación exitosa (`HTTP 200`, `gRPC OK`) o un manejo de errores exitoso (`HTTP 400`, `gRPC NOT_FOUND`). Los errores de RUM son `unhandled` si no se capturan manualmente en el código. |
 
-Haz clic en el icono Edit (Editar) para ver la lista de facetas disponibles que puedes mostrar u ocultar de la vista.
+Haga clic en el ícono Edit para ver la lista de facetas disponibles que puede mostrar u ocultar de la vista.
 
-{{< img src="/error_tracking/error-tracking-facets.png" alt="Haz clic en el ícono del lápiz para ocultar o mostrar facetas de Error Tracking disponibles en la vista." style="width:100%;" >}}
+{{< img src="/error_tracking/error-tracking-facets.png" alt="Haga clic en el icono de lápiz para ocultar o mostrar las facetas de Error Tracking disponibles de la vista." style="width:100%;" >}}
 
-### Filtros de nivel de incidente
+### Filtros a nivel de problema {#issue-level-filters}
 
-Además de los eventos de error, Error Tracking ofrece filtros de nivel de incidente para refinar la lista de incidentes mostrados.
+Además de los eventos de error, Error Tracking ofrece filtros a nivel de problema para refinar la lista de problemas mostrados.
 
-{{< img src="error_tracking/issue-level-filters-2.png" alt="Filtros de nivel de incidente en Error Tracking" style="width:100%;" >}}
+{{< img src="error_tracking/issue-level-filters-2.png" alt="Filtros a nivel de problema en Error Tracking" style="width:100%;" >}}
 
-#### Fuentes
+#### Fuentes {#sources}
 
-Error Tracking consolida los errores de varios productos de Datadog (RUM, logs, APM) en una vista unificada, lo que te permite observar y solucionar errores en todo el stack tecnológico. En el Explorador puedes elegir mostrar **Todos los incidentes**, o incidentes de **Navegador**, **Móvil** o **Backend**.
+Error Tracking consolida errores de múltiples productos de Datadog (RUM, Logs, APM) en una vista unificada, lo que le permite observar y solucionar problemas en toda su pila. Puede elegir mostrar problemas {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}} o {{< ui >}}Backend{{< /ui >}} en el explorador.
 
-Para un filtrado más granular, puedes limitar los incidentes por fuentes específicas de logs o por SDK y delimitarlos a un lenguaje de programación.
+Para un filtrado más granular, puede limitar los problemas por fuentes de registros específicas o por SDK y acotar el contexto a un lenguaje de programación.
 
-#### Parche disponible
+#### Fix available {#fix-available}
 
-Muestra solo los incidentes que tienen un parche generado por AI, disponible para corregir rápidamente los incidentes.
+Muestre solo los problemas que tienen una solución generada por IA disponible para remediar problemas rápidamente.
 
-#### Filtros de equipos
+#### Filtros de Teams {#teams-filters}
 
-[Issue Team Ownership][2] te ayuda a identificar rápidamente los incidentes relevantes para tu equipo mediante `CODEOWNERS` Git y propietarios de servicios.
+[Issue Team Ownership][2] le ayuda a identificar rápidamente los problemas relevantes para su equipo mediante el uso de `CODEOWNERS` de Git y propietarios de servicios.
 
-#### Asignado a
+#### Assigned to {#assigned-to}
 
-Realiza un seguimiento de los incidentes, asígnalos a los miembros del equipo con más conocimientos y refina fácilmente la lista de incidentes por destinatario.
+Haga un seguimiento de los problemas y asígnelos a usted mismo o a los miembros del equipo con más conocimientos; además, filtre fácilmente la lista de problemas por persona asignada.
 
-#### Causa sospechada
+#### Suspected Cause {#suspected-cause}
 
-[Causa sospechada][3] ayuda a filtrar y priorizar los errores con mayor rapidez, lo que permite a los equipos abordar las posibles causas con mayor eficacia.
+[Suspected Cause][3] permite un filtrado y una priorización más rápidos de los errores, lo que permite a los equipos abordar las posibles causas raíz de manera más efectiva.
 
-## Inspeccionar un incidente
+## Inspeccione un problema {#inspect-an-issue}
 
-Haz clic en cualquier incidente para abrir el panel de incidentes y ver más información sobre este.
+Haga clic en cualquier problema para abrir el panel de problemas y ver más información al respecto.
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Parte superior del panel de incidentes de Tracking que ofrece una vista resumida del incidente" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Parte superior del panel de problemas de Error Tracking que ofrece una vista resumida del problema" style="width:80%;" >}}
 
-Los detalles claros que necesitas para solucionar un incidente se encuentran en la parte superior del panel. Desde allí, podrás entender su ciclo de vida: las fechas del primero y el último caso, el recuento total, así como el recuento a lo largo del tiempo para el incidente en cuestión.
+Los detalles de alto nivel que necesita al solucionar un problema se pueden encontrar en la parte superior del panel. Desde aquí, puede comprender su ciclo de vida: fechas de primera y última aparición, recuento total, así como el recuento a lo largo del tiempo para el problema determinado.
 
-{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Parte inferior del panel de incidentes de Error Tracking que ofrece ejemplos de error" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="Parte inferior del panel de problemas de Error Tracking que ofrece muestras de error" style="width:80%;" >}}
 
-La información mostrada en el panel de incidentes varía en función de la fuente del error. Por ejemplo, un incidente creado a partir de errores APM muestra etiquetas del tramo de error, como el recurso o el nombre de la operación, con acceso directo a la traza relacionada o a los logs vinculados a ella.
+La información que se muestra en el panel de problemas varía según la fuente del error. Por ejemplo, un problema creado a partir de errores de APM muestra las etiquetas del tramo del error, como el nombre del recurso o de la operación, con acceso directo a la traza relacionada o a los registros vinculados a ella.
 
-La parte inferior del panel de incidentes te ofrece la posibilidad de navegar por los ejemplos de error del incidente relacionado. Cada ejemplo de error ofrece información para la resolución de problemas, como la traza de stack tecnológico del error y las características de los usuarios afectados.
+La parte inferior del panel de problemas le brinda la capacidad de navegar por las muestras de error del problema relacionado. Cada muestra de error le proporciona información para solucionar problemas, como la traza de pila del error y las características de los usuarios afectados.
 
-## Recibir alertas sobre errores nuevos o impactantes
+## Reciba alertas sobre errores nuevos o de alto impacto {#get-alerted-on-new-or-impactful-errors}
 
-Ver un nuevo incidente en cuanto se produce te da la oportunidad de identificarlo y solucionarlo de forma proactiva antes de que se convierta en crítico. Los monitores de Error Tracking te permiten realizar un seguimiento de cualquier incidente nuevo o incidentes que tengan un alto impacto en tus sistemas o en tus usuarios (consulta [Monitores de Error Tracking][7]).
+Ver un problema nuevo tan pronto como ocurre le da la oportunidad de identificarlo y corregirlo de manera proactiva antes de que se vuelva crítico. Los seguimientos de Error Tracking le permiten hacer un seguimiento de cualquier problema nuevo o de los problemas que tengan un alto impacto en sus sistemas o en sus usuarios (consulte [Error Tracking Monitors][7])
 
-Puedes exportar directamente tu consulta de búsqueda desde el Explorador para crear un monitor de Error Tracking en el contexto relacionado:
+Puede exportar directamente su consulta de búsqueda desde el explorador para crear un Error Tracking Monitor en el contexto relacionado:
 
-{{< img src="/error_tracking/create-monitor.mp4" alt="Exportar tu consulta de búsqueda a un monitor de Error Tracking" video=true >}}
+{{< img src="/error_tracking/create-monitor.mp4" alt="Exporte su consulta de búsqueda a un seguimiento de Error Tracking" video=true >}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

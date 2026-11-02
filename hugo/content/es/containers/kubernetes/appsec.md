@@ -114,17 +114,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Esta opción requiere la versión 1.27.1 o posterior de Datadog Operator.
+Esta opción requiere la versión 1.31.0 o posterior de Datadog Operator.
 
-Agregue anotaciones a su recurso `DatadogAgent`. El modo sidecar es el predeterminado, por lo que habilitar el inyector es suficiente:
+Configure el inyector en la sección `spec.features.appsec.injector` de su recurso `DatadogAgent`. El modo sidecar es el predeterminado, por lo que habilitar el inyector es suficiente:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 Aplique la configuración:
@@ -138,58 +141,58 @@ kubectl apply -f datadog-agent.yaml
 
 ### Referencia de configuración de sidecar {#sidecar-configuration-reference}
 
-Todos los parámetros de sidecar están disponibles como valores de Helm anidados bajo `datadog.appsec.injector.sidecar`, o como anotaciones `DatadogAgent` (versión 1.27.1 o posterior de Datadog Operator):
+Todos los parámetros de sidecar están disponibles como valores de Helm anidados bajo `datadog.appsec.injector.sidecar` o como campos `DatadogAgent` bajo `spec.features.appsec.injector.sidecar` (versión 1.31.0 o posterior de Datadog Operator):
 
 `sidecar.image`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.image`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.image`
 : **Tipo**: Cadena
 : **Predeterminado**: `ghcr.io/datadog/dd-trace-go/service-extensions-callout`
 : **Descripción**: Imagen del contenedor sidecar
 
 `sidecar.imageTag`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.image_tag`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.imageTag`
 : **Tipo**: Cadena
 : **Predeterminado**: `v2.6.0`
 : **Descripción**: Etiqueta de imagen del contenedor sidecar
 
 `sidecar.port`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.port`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.port`
 : **Tipo**: Entero
 : **Predeterminado**: `8080`
 : **Descripción**: Puerto de escucha gRPC para el procesador sidecar
 
 `sidecar.healthPort`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.health_port`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.healthPort`
 : **Tipo**: Entero
 : **Predeterminado**: `8081`
 : **Descripción**: Puerto de verificación de estado para el procesador sidecar
 
 `sidecar.bodyParsingSizeLimit`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.body_parsing_size_limit`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.bodyParsingSizeLimit`
 : **Tipo**: Entero
 : **Predeterminado**: `0`
 : **Descripción**: Tamaño máximo del cuerpo de la solicitud en bytes a procesar. `0` deshabilita el procesamiento del cuerpo. Use `-1` para deshabilitar el parseo del cuerpo por completo.
 
 `sidecar.resources.requests.cpu`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.resources.requests.cpu`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.resources.requests.cpu`
 : **Tipo**: Cadena
 : **Predeterminado**: `10m`
 : **Descripción**: Solicitud de CPU para el contenedor sidecar
 
 `sidecar.resources.requests.memory`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.resources.requests.memory`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.resources.requests.memory`
 : **Tipo**: Cadena
 : **Predeterminado**: `128Mi`
 : **Descripción**: Solicitud de memoria para el contenedor sidecar
 
 `sidecar.resources.limits.cpu`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.resources.limits.cpu`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.resources.limits.cpu`
 : **Tipo**: Cadena
 : **Predeterminado**: `""`
 : **Descripción**: Límite de CPU para el contenedor sidecar (opcional)
 
 `sidecar.resources.limits.memory`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.sidecar.resources.limits.memory`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.sidecar.resources.limits.memory`
 : **Tipo**: Cadena
 : **Predeterminado**: `""`
 : **Descripción**: Límite de memoria para el contenedor sidecar (opcional)
@@ -293,20 +296,25 @@ Apunte el Datadog Cluster Agent a su servicio de procesador de seguridad usando 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Esta opción requiere la versión 1.27.1 o posterior de Datadog Operator.
+Esta opción requiere la versión 1.31.0 o posterior de Datadog Operator.
 
-Agregue anotaciones a su recurso `DatadogAgent`. La anotación del nombre del servicio es obligatoria y debe coincidir con su servicio de procesador de seguridad:
+Configure el inyector en la sección `spec.features.appsec.injector` de su recurso `DatadogAgent`. El nombre del servicio del procesador es obligatorio y debe coincidir con su servicio de procesador de seguridad:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.mode: "external"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
-    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        mode: external
+        processor:
+          service:
+            name: datadog-aap-extproc-service  # Required: must match your security processor service name
+            namespace: datadog
 ```
 
 Aplique la configuración:
@@ -365,52 +373,54 @@ Envíe solicitudes a través de su puerta de enlace y verifique que aparezcan en
 
 ## Referencia de configuración {#configuration-reference}
 
+**Nota**: Las anotaciones `agent.datadoghq.com/appsec.*` están obsoletas en la versión 1.31.0 de Datadog Operator y se eliminan en la versión 1.32.0. En su lugar, configure el inyector en `spec.features.appsec.injector`. Las dos fuentes son mutuamente excluyentes: cuando se establece `spec.features.appsec.injector`, las anotaciones se ignoran por completo, incluso para los campos que el CRD deja sin establecer, así que migre toda la configuración en un solo paso.
+
 ### Opciones de configuración automática {#automatic-configuration-options}
 
 `enabled`
-: **Anotación del Datadog Operator**: `agent.datadoghq.com/appsec.injector.enabled`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.enabled`
 : **Tipo**: Booleano
 : **Predeterminado**: `false`
 : **Descripción**: Habilitar o deshabilitar la integración
 
 `mode`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.mode`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.mode`
 : **Tipo**: Cadena
 : **Predeterminado**: `""`; cuando está vacío, el valor predeterminado es sidecar
 : **Descripción**: Modo de inyección: `"sidecar"` o `"external"`
 
 `autoDetect`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.autoDetect`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.autoDetect`
 : **Tipo**: Booleano
 : **Predeterminado**: `true`
 : **Descripción**: Detectar y configurar automáticamente los proxies admitidos
 
 `proxies`
-: **Anotación del Datadog Operator**: `agent.datadoghq.com/appsec.injector.proxies`
-: **Tipo**: Matriz JSON
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.proxies`
+: **Tipo**: Matriz de cadenas
 : **Predeterminado**: `[]`
 : **Descripción**: Lista manual de tipos de proxy a configurar. Para obtener valores válidos, consulte la [página de configuración][10].
 
 `processor.service.name`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.processor.service.name`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.processor.service.name`
 : **Tipo**: Cadena
 : **Predeterminado**: Ninguno
 : **Descripción**: **Requerido.** Nombre del servicio de seguridad de Kubernetes
 
 `processor.service.namespace`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.processor.service.namespace`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.processor.service.namespace`
 : **Tipo**: Cadena
 : **Predeterminado**: De forma predeterminada, el espacio de nombres es aquel donde se ejecuta el Cluster Agent
 : **Descripción**: Espacio de nombres donde se despliega el servicio del procesador de seguridad
 
 `processor.address`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.processor.address`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.processor.address`
 : **Tipo**: Cadena
 : **Predeterminado**: `{service.name}.{service.namespace}.svc`
 : **Descripción**: Anulación de la dirección completa del servicio
 
 `processor.port`
-: **Anotación de Datadog Operator**: `agent.datadoghq.com/appsec.injector.processor.port`
+: **Campo de Datadog Operator**: `spec.features.appsec.injector.processor.port`
 : **Tipo**: Entero
 : **Predeterminado**: `443`
 : **Descripción**: Puerto del servicio del procesador de seguridad
@@ -473,8 +483,8 @@ Todos los errores se registran como eventos de Kubernetes. Busque eventos en el 
 **Síntoma**: El controlador está en ejecución pero faltan recursos de configuración.
 
 **Soluciones**:
-- Verifique los registros del Agente de clúster en busca de errores de permisos RBAC
-- Verifique que la cuenta de servicio del Agente de clúster tenga permisos para crear los recursos de configuración de proxy
+- Verifique los registros del Agent de clúster en busca de errores de permisos RBAC
+- Verifique que la cuenta de servicio del Agent de clúster tenga permisos para crear los recursos de configuración de proxy
 - Verifique que el servicio del procesador exista y sea accesible
 - Verifique si existen políticas o filtros conflictivos
 
@@ -502,7 +512,7 @@ Todos los errores se registran como eventos de Kubernetes. Busque eventos en el 
 
 ### Errores de permisos de RBAC {#rbac-permission-errors}
 
-**Síntoma**: Los registros del Agente de clúster muestran errores de permiso denegado.
+**Síntoma**: Los registros del Agent de clúster muestran errores de permiso denegado.
 
 **Soluciones**:
 - Verifique que el clúster Agent ClusterRole incluya permisos para:

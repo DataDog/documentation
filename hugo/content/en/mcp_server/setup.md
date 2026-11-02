@@ -641,6 +641,22 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /tab %}}
 {{< /tabs >}}
 
+## MCP Server endpoints
+
+Each [Datadog site][86] has its own MCP Server endpoint. To build the endpoint for your site, add `mcp.` before your site parameter and append `/v1/mcp`. Use the endpoint that matches the site where your Datadog organization is hosted:
+
+| Site    | Site parameter      | MCP Server endpoint                     |
+|---------|---------------------|-----------------------------------------|
+| US1     | `datadoghq.com`     | `https://mcp.datadoghq.com/v1/mcp`      |
+| US3     | `us3.datadoghq.com` | `https://mcp.us3.datadoghq.com/v1/mcp`  |
+| US5     | `us5.datadoghq.com` | `https://mcp.us5.datadoghq.com/v1/mcp`  |
+| EU1     | `datadoghq.eu`      | `https://mcp.datadoghq.eu/v1/mcp`       |
+| AP1     | `ap1.datadoghq.com` | `https://mcp.ap1.datadoghq.com/v1/mcp`  |
+| AP2     | `ap2.datadoghq.com` | `https://mcp.ap2.datadoghq.com/v1/mcp`  |
+| UK1     | `uk1.datadoghq.com` | `https://mcp.uk1.datadoghq.com/v1/mcp`  |
+| US1-FED | `ddog-gov.com`      | Not supported                           |
+| US2-FED | `us2.ddog-gov.com`  | Not supported                           |
+
 ## Toolsets
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
@@ -999,3 +1015,4 @@ After you change any of these settings, refresh the tool list in your AI client.
 [83]: /logs/log_configuration/indexes/
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
+[86]: /getting_started/site/

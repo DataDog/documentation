@@ -21,6 +21,7 @@ Use these integrations to:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

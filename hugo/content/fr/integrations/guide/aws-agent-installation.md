@@ -41,13 +41,13 @@ title: Installez l'instrumentation Datadog via l'intégration AWS
 ---
 ## Présentation {#overview}
 
-L'[intégration AWS][1] collecte des métriques, des événements et des logs depuis Amazon CloudWatch sans rien installer sur vos ressources. L'instrumentation Datadog collecte des données de télémétrie depuis l'intérieur de vos workloads AWS que CloudWatch seul ne peut pas fournir, notamment des métriques au niveau du host, des traces distribuées (APM), des processus en direct et des logs détaillés.
+L'[intégration AWS][1] collecte des métriques, des événements et des logs depuis Amazon CloudWatch sans rien installer sur vos ressources. L'instrumentation Datadog collecte des données de télémétrie depuis l'intérieur de vos charges de travail AWS que CloudWatch seul ne peut pas fournir, notamment des métriques au niveau du host, des traces distribuées (APM), des processus en direct et des logs détaillés.
 
-Vous pouvez instrumenter vos workloads AWS directement depuis Datadog, sans vous connecter à chaque host ni redéployer chaque fonction. Activez l'instrumentation lors de la configuration de l'intégration AWS, ou à tout moment par la suite.
+Vous pouvez instrumenter vos charges de travail AWS directement depuis Datadog, sans vous connecter à chaque host ni redéployer chaque fonction. Activez l'instrumentation lors de la configuration de l'intégration AWS, ou à tout moment par la suite.
 
-## Workloads pris en charge {#supported-workloads}
+## Charges de travail prises en charge {#supported-workloads}
 
-| Workload | Ce que Datadog installe |
+| Charge de travail | Ce que Datadog installe |
 |---|---|
 | Instances Amazon EC2 | Le Datadog Agent |
 | Fonctions AWS Lambda | L'extension Lambda Datadog et, pour les runtimes pris en charge, la couche de tracing Datadog correspondant au runtime de la fonction |
@@ -160,7 +160,7 @@ L'instrumentation Lambda ne nécessite ni Secrets Manager, ni Systems Manager, n
 
 ## Fonctionnement {#how-it-works}
 
-L'instrumentation est basée sur une **règle d'instrumentation** : un compte AWS associé à une requête qui décrit les ressources à couvrir. Datadog évalue la requête, instrumente chaque ressource couverte au sein de votre propre compte et la maintient instrumentée :
+Une **règle d'instrumentation** est la sélection **Scope to** enregistrée pour un compte AWS. Elle détermine les ressources que Datadog instrumente automatiquement, y compris les ressources qui correspondent ultérieurement à la sélection. Datadog évalue la sélection, instrumente chaque ressource couverte au sein de votre propre compte et la maintient instrumentée :
 
 1. Vous rédigez une requête décrivant les ressources à couvrir, sélectionnez des ressources spécifiques ou ajoutez toutes les ressources éligibles.
 1. Datadog évalue la règle par rapport à votre compte et enregistre les ressources qu'elle couvre.
@@ -208,6 +208,8 @@ Datadog préserve vos couches et variables d'environnement existantes. Pour les 
 Pour ajuster ce que l'extension collecte, définissez les variables d'environnement Datadog standard sur la fonction. Pour la liste complète, consultez [Configure Serverless Monitoring for AWS Lambda][14]. Pour savoir ce que l'instrumentation collecte et les fonctionnalités de surveillance Lambda qu'elle active, consultez [Serverless Monitoring for AWS Lambda][13].
 
 ## Installer l'instrumentation Datadog {#install-datadog-instrumentation}
+
+<div class="alert alert-info">Cette fonctionnalité est disponible uniquement pour les clients en période d'essai et ceux qui l'ont activée pendant leur période d'essai. Cela s'applique à la fois à la configuration de l'intégration AWS et à Fleet Automation.</div>
 
 Vous pouvez démarrer l'instrumentation à partir de deux points d'entrée, selon le degré de contrôle que vous souhaitez avoir sur les ressources instrumentées :
 
