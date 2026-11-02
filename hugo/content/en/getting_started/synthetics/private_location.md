@@ -46,7 +46,7 @@ Your private locations test results display identically to your managed location
 4. Click {{< ui >}}Save Location and Generate Configuration File{{< /ui >}} to generate the configuration file associated with your private location on your worker. 
 5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
-    - If you want to block reserved IPs, toggle {{< ui >}}Block reserved IPs{{< /ui >}} and enter the IP ranges. 
+    - The {{< ui >}}Block reserved IPs{{< /ui >}} toggle is on by default. To allow specific endpoints, enter IP ranges or domain names. To disable the block, turn off the toggle. 
 
     For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
 
