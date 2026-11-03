@@ -15,4 +15,3 @@ If you are using [Microsoft SourceLink][201], Datadog can extract the git commit
 [203]: https://www.nuget.org/packages/Microsoft.SourceLink.Bitbucket.Git
 [204]: https://www.nuget.org/packages/Microsoft.SourceLink.GitLab
 [205]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureRepos.Git
-[206]: https://www.nuget.org/packages/Microsoft.SourceLink.AzureDevOpsServer.Git
