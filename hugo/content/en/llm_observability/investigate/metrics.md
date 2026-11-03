@@ -89,25 +89,26 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 
 ### Evaluation metrics
 
-Evaluation metrics aggregate the results of your [evaluations][1] so you can track the quality of your application over time, alert on it with monitors and SLOs, and compare it with other Datadog metrics.
+Evaluation metrics aggregate the results of your [evaluations][1] and end-user feedback so you can track the quality of your application over time, alert on it with monitors and SLOs, and compare it with other Datadog metrics.
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.evaluation.count` | Number of evaluation results | Count | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `value` |
-| `ml_obs.evaluation.score` | Value of score evaluation results, and of JSON evaluation results whose post-processing returns a numeric `value` | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version` |
+| `ml_obs.evaluation.count` | Number of evaluation and feedback results | Count | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `value`, `is_feedback` |
+| `ml_obs.evaluation.score` | Value of score evaluation and feedback results, and of JSON evaluation results whose post-processing returns a numeric `value` | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `is_feedback` |
 
 The evaluation metric tags have the following values:
 
 | Tag | Values |
 |-----|--------|
-| `evaluation_name` | The name of the evaluation, for example `faithfulness` |
-| `metric_type` | `boolean`, `categorical`, `score`, or `json` |
+| `evaluation_name` | The name of the evaluation, for example `faithfulness`, or the label of the feedback, for example `thumbs` |
+| `metric_type` | `boolean`, `categorical`, `score`, `numerical`, `json`, or `text`. `numerical` and `text` results are reported only in `ml_obs.evaluation.count`. |
 | `assessment` | `pass` or `fail` when the evaluation has pass/fail criteria, otherwise `none` |
-| `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations you submit through the SDK or API |
-| `evaluation_version` | The version of a managed evaluation. Not set for evaluations you submit through the SDK or API. |
+| `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations and feedback you submit through the SDK or API |
+| `evaluation_version` | The version of a custom LLM-as-a-judge evaluation. Not set for other evaluations or for feedback. |
 | `value` | The evaluation result. Available only on `ml_obs.evaluation.count`. See the [`value` tag](#the-value-tag) section. |
 | `ml_app` | The ML application the evaluation belongs to |
-| `env`, `service`, `version` | Taken from the evaluated span |
+| `is_feedback` | `true` for [end-user feedback][4]. Not set for evaluations. |
+| `env`, `service`, `version` | Taken from the evaluated span. For feedback, taken from the tags on the feedback event. |
 
 #### The value tag
 
@@ -117,14 +118,14 @@ How each type of evaluation reports its result:
 - **Score**: `value` is not set. The score is reported in `ml_obs.evaluation.score`.
 - **JSON**: `value` is not set, unless [post-processing][3] returns a `value`. A boolean or string becomes the `value` tag, and a number is reported in `ml_obs.evaluation.score`.
 
-String values in the `value` tag are lowercased.
+String values in the `value` tag are lowercased, and characters that aren't allowed in tags are replaced with underscores. For example, the category `FAIL(OFF_TOPIC)` becomes `fail_off_topic`.
 
 #### Evaluation metric scope and sampling
 
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
 - Evaluation results from [experiments][2]
 - Evaluations that were skipped or that failed to run
-- Evaluations submitted through the SDK or API that can't be matched to a span, for example because the span ID is wrong or the span was never sent
+- Evaluations submitted through the SDK or API that can't be matched to a span, for example because the span ID is wrong or the span was never sent. Feedback is included whether or not it matches a span.
 
 When a managed evaluation samples a portion of your traffic, `ml_obs.evaluation.count` reflects only the sampled results, so it does not match `ml_obs.span` one to one. Rates (such as pass rate) and score distributions are not affected by sampling.
 
@@ -144,6 +145,15 @@ Distribution of results for a categorical evaluation:
 ```text
 sum:ml_obs.evaluation.count{evaluation_name:answer_quality} by {value}.as_count().fill(null)
 ```
+
+Thumbs-up rate from end-user feedback:
+
+```text
+sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true,value:up}.as_count().fill(null)
+  / sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true}.as_count().fill(null)
+```
+
+To leave feedback out of a query, add `NOT is_feedback:true`.
 
 90th percentile of a score evaluation by application:
 
@@ -183,3 +193,4 @@ The following metrics are deprecated, and are maintained only for backward compa
 [1]: /llm_observability/investigate/evaluations/
 [2]: /llm_observability/improve/offline_experiments/
 [3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/#post-processing
+[4]: /llm_observability/investigate/evaluations/end_user_feedback/
