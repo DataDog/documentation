@@ -65,6 +65,8 @@ Use these variables to access test configuration and execution location informat
 `{{synthetics.attributes.test.id}}`
 : The test's public ID (for example, `abc-def-ghi`)
 
+**Mobile-specific:**
+
 `{{synthetics.attributes.application.versionId}}`
 : Mobile application version identifier
 {% /tab %}
@@ -99,10 +101,10 @@ Path: `synthetics.attributes.device`
 `{{synthetics.attributes.device.resolution.width}}`, `{{synthetics.attributes.device.resolution.height}}`
 : Screen resolution dimensions
 
+**Mobile-specific:**
+
 `{{synthetics.attributes.device.resolution.pixelRatio}}`
 : Device pixel ratio
-
-**Mobile-specific:**
 
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (for example, `android`, `ios`)
@@ -140,7 +142,7 @@ Review the [conditional alerting][1] page for an example of how to use the `synt
 
 Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran. For information on how to access the `<step-index>`, see the step summary section.
+These are step execution metadata and results containing detailed information about how each step ran. For information on how to access the `<step-index>`, see [Step summary][2].
 
 {% tabs %}
 {% tab label="General steps" %}
@@ -182,7 +184,7 @@ Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
 These are the actual variable values that a step captured during test execution. For example, if you have a mobile test step that extracts a value into a variable, this is where you access that extracted value.
 
-For information on how to access the `<step-index>`, see the step summary section.
+For information on how to access the `<step-index>`, see [Step summary][2].
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name
@@ -226,3 +228,4 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 
 [1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut
+[2]: #step-summary

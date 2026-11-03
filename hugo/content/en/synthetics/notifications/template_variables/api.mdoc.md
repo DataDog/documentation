@@ -353,6 +353,8 @@ This section covers three categories of variables:
 
 ### ICMP Protocol Variables
 
+ICMP test results don't include `synthetics.attributes.result.duration` or `synthetics.attributes.result.timings.total`. Use the ping latency variables instead.
+
 {% tabs %}
 {% tab label="Traceroute" %}
 `synthetics.attributes.result.traceroute`

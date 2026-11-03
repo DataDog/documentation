@@ -113,7 +113,7 @@ Use these variables to access information about the step that caused a test fail
 
 Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data. For information on how to access the `<step-index>`, see the step summary section.
+These are step execution metadata and results containing detailed information about how each step ran, including response data. For information on how to access the `<step-index>`, see [Step summary][1].
 
 `synthetics.attributes.result.steps.<step-index>.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
@@ -154,7 +154,7 @@ These are step execution metadata and results containing detailed information ab
 : Caching headers and CDN information of the step response
 
 {% alert level="info" %}
-Step response headers and bodies are not available in notifications.
+Step response headers and bodies aren't available in notifications.
 {% /alert %}
 
 {% /if %}
@@ -169,3 +169,5 @@ Step response headers and bodies are not available in notifications.
 <!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
+
+[1]: #step-summary
