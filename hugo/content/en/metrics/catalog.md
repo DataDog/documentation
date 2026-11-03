@@ -168,7 +168,7 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 * {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
-To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Unindexed tags are no longer queryable, but Datadog still ingests them. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
 
 To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
 

@@ -97,7 +97,7 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 
 2. Unindex tags on your unqueried metrics.
 
-   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can minimize the costs of these unqueried metrics by unindexing their tags. To unindex tags across many unqueried metrics, create a [Tag Indexing Rule][16] scoped to their metric names or namespaces. To configure a single metric, give it an empty allowlist of tags.
+   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can minimize the costs of these unqueried metrics by unindexing their tags. Unindexed tags are no longer queryable, but Datadog still ingests them. To unindex tags across many unqueried metrics, create a [Tag Indexing Rule][16] scoped to their metric names or namespaces. To configure a single metric, give it an empty allowlist of tags.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
