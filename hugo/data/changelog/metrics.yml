@@ -122,3 +122,12 @@ entries:
       - UpdateTagIndexingRule
       - UpdateTagIndexingRuleExemption
     title: Remove preview notes from tag indexing rules endpoints
+  - change_type: modified
+    date: '2026-11-02'
+    link: https://github.com/DataDog/documentation/pull/41289
+    operations:
+      - CreateDerivedMetric
+      - DeleteDerivedMetric
+      - GetDerivedMetric
+      - UpdateDerivedMetric
+    title: Add Terraform support for Derived Metrics
