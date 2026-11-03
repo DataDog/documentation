@@ -51,16 +51,16 @@ title: Paquets de contenu
 - Alertes tierces provenant de l'intégration, mappées sur les signaux de sécurité Cloud SIEM
 
 Vous pouvez filtrer les Content Packs par les types suivants :
-- **Content Packs**: intégrations regroupant du contenu lié à la sécurité, tel que des règles de détection, des workflows SOAR (Security Orchestration, Automation, and Response) et des outils personnalisés.
-- **Enrichment Packs**: contenu permettant d'ajouter un contexte précieux à l'analyse SIEM, comme des vulnérabilités ou des informations tierces, afin d'améliorer les investigations.
-- **Integration Packs**: contenu sélectionné dans le catalogue Datadog pour être pertinent avec Cloud SIEM.
-<!-- - **Entity Packs**: Integrations and bundled content that power UEBA (User and Entity Behavior Analytics) by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM -->
+- **Packs de contenu** : intégrations regroupant du contenu pertinent pour la sécurité, telles que des règles de détection, des workflows SOAR (Security Orchestration, Automation, and Response) et des outils personnalisés.
+- **Packs d'enrichissement** : contenu permettant d'ajouter un contexte précieux à l'analyse SIEM, telles que des vulnérabilités ou des informations tierces, afin d'améliorer les enquêtes.
+- **Packs d'intégration** : contenu sélectionné dans le catalogue Datadog pour être pertinent à l'usage avec Cloud SIEM.
+- **Packs d'entités** : intégrations qui identifient les utilisateurs dans votre environnement. Ils permettent d'obtenir un contexte utilisateur dans les signaux et les risques, une évaluation des risques par utilisateur et des enquêtes basées sur les utilisateurs. Au moins un pack d'entités est requis pour détecter les utilisateurs à risque.
 
-En plus des Content Packs listés sur cette page, Cloud SIEM inclut **Always-On Content Packs** : des enrichissements de threat intelligence que Datadog applique automatiquement à vos logs et signaux de sécurité, sans aucune installation ni configuration requise.
+En plus des Content Packs listés sur cette page, Cloud SIEM inclut **Always-On Content Packs** : des enrichissements de renseignements sur les menaces que Datadog applique automatiquement à vos logs et signaux de sécurité, sans aucune installation ni configuration requise.
 
 {{% cloud-siem-content-packs %}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
