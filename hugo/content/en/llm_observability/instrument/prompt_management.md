@@ -12,6 +12,8 @@ Use an existing Datadog managed prompt or promote an application's local prompt.
 
 Prompt Management is optional. Complete [instrumentation][1] before starting this integration.
 
+This guide covers Prompt Management runtime retrieval in Python and Node.js applications. To record local prompt templates and variables without runtime retrieval, use [Prompt Tracking][2].
+
 ## Select the workflow
 
 - **Use an existing managed prompt**: Retrieve a prompt from the Datadog registry using its prompt ID, deployment environment, and variable names.
@@ -25,13 +27,12 @@ If the user's request includes a prompt ID, environment, and variable names, use
 
 ## Prerequisites
 
-This guide covers Prompt Management runtime retrieval in Python and Node.js applications. To record local prompt templates and variables without runtime retrieval, use [Prompt Tracking][2].
+To retrieve an environment's deployed prompt directly from Datadog or to promote a local prompt, obtain:
 
-Before changing prompt construction, identify the application's package manager, configuration and secret-management workflow, startup command, Datadog instrumentation, LLM provider, and provider call site.
+- A [Datadog API key][7].
+- A [Datadog application key][8] with the [permissions required for the selected workflow][9].
 
-Keep retrieval at the existing prompt-construction boundary. Preserve the application's provider, model, startup workflow, and behavior. When local prompt fragments form a single provider-facing message list, promote that final list as one managed prompt. Do not create nested managed-prompt references. To manage a fragment independently, preserve the existing composition and track the fragment explicitly.
-
-Creating and deploying a managed prompt is a one-time setup operation. Do not create, update, or deploy prompts from application startup or a request path.
+For retrieval through the Agent, see [Configure prompt retrieval][6] for the credentials required by each language.
 
 {{< agent-only >}}
 1. Use the public Prompt Management APIs for the application's language: `LLMObs` from `ddtrace.llmobs` for Python, or `tracer.llmobs.prompts` from `dd-trace` for Node.js. For another language, check its SDK documentation for runtime retrieval support. If unsupported, return to the main [instrumentation guide](/llm_observability/instrument.md) and use structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in another language.
@@ -49,12 +50,14 @@ Creating and deploying a managed prompt is a one-time setup operation. Do not cr
 
 ## Install the Prompt Management SDK
 
-Use a `ddtrace` version for Python or a `dd-trace` version for Node.js that supports the public Prompt Management APIs required by the selected workflow. Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and preserve its dependency-management conventions. The dependency must be available after installation from a clean environment.
+Use a `ddtrace` version for Python or a `dd-trace` version for Node.js that supports the public Prompt Management APIs required by the selected workflow:
 
 - **Python**: Use `ddtrace` version 4.13.0 or later.
 - **Node.js**: Use `dd-trace` version 5.128.0 or later in the 5.x release line, or 6.17.0 or later in the 6.x release line.
 
 {{< agent-only >}}
+Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and preserve its dependency-management conventions. The dependency must be available after installation from a clean environment.
+
 Inspect the installed SDK before changing dependencies. Explain any required installation or update. Ask before updating an existing dependency, and treat this optional integration separately from updates required for instrumentation. For Node.js, preserve the application's module system and async control flow.
 {{< /agent-only >}}
 
@@ -65,10 +68,7 @@ Skip this section if you use an existing managed prompt.
 1. At the existing prompt-construction boundary, separate the static text or chat-message template from its dynamic values. Use `{{variable}}` placeholders and keep a value available for every variable.
 2. Choose a stable, descriptive prompt ID and the deployment environment.
 3. Obtain a Datadog API key and a one-time application key with the `llm_observability_write`, `feature_flag_config_write`, and `feature_flag_environment_config_read` permissions. Keep this setup credential out of the application's runtime configuration.
-4. Follow the [List environments API][3] and call `GET /api/v2/feature-flags/environments?dd_env=<URL_ENCODED_DD_ENV>`. The `dd_env` filter matches `DD_ENV` exactly against each environment's `attributes.queries`.
-   - If exactly one environment matches, use its `data[].id` as the Feature Flags environment ID.
-   - If multiple environments match, select the intended environment.
-   - If no environment matches, create a matching environment with the [Create an environment API][4] before deploying the prompt. Set `queries` to contain the exact `DD_ENV` value, choose a display name, and specify whether the environment represents production. Environment creation requires `feature_flag_environment_config_write`. Use the returned `data.id`.
+4. Use the target environment's Feature Flags environment ID for deployment. For details, see [Manage prompts programmatically][10].
 5. Check for an exact prompt-ID match with `LLMObs.list_prompts()` in Python or `await tracer.llmobs.prompts.listPrompts()` in Node.js. If a managed prompt already uses the ID, integrate that prompt or choose another ID. A tracked prompt that is not yet managed can be promoted with its existing ID.
 6. Create and deploy the first version with the environment ID:
 
@@ -114,11 +114,12 @@ After promotion, configure runtime retrieval. If retrieval requires an applicati
 {{< agent-only >}}
 Before promotion, propose a prompt ID based on its purpose and wait for confirmation. If the deployment environment is missing, ask for it at the same time. If the user did not supply a suitable application key, ask for one.
 
-For environment resolution:
+Resolve the environment ID with the [List environments API](/api/latest/feature-flags/list-environments/). Call `GET /api/v2/feature-flags/environments?dd_env=<URL_ENCODED_DD_ENV>`. The `dd_env` filter matches `DD_ENV` exactly against each environment's `attributes.queries`.
 
+- If exactly one environment matches, use its `data[].id` as the Feature Flags environment ID without asking the user to look it up or confirm it.
 - If multiple environments match `DD_ENV`, ask which one to use. Do not guess.
 - If none match, explain that the application's `DD_ENV` is not mapped to a Feature Flags environment and ask whether to create one. Do not ask for a different `DD_ENV` or create an environment without explicit approval.
-- If the user agrees, ask for the display name and whether the environment represents production. Attempt creation with the supplied application key. If Datadog rejects it for missing permissions, ask for `feature_flag_environment_config_write` or a key with that permission, then retry. Leave feature-flag approval disabled unless the user requests it.
+- If the user agrees, ask for the display name and whether the environment represents production. Use the [Create an environment API](/api/latest/feature-flags/create-an-environment/) with `queries` containing the exact `DD_ENV` value. Attempt creation with the supplied application key. If Datadog rejects it for missing permissions, ask for `feature_flag_environment_config_write` or a key with that permission, then retry. Leave feature-flag approval disabled unless the user requests it. Use the returned `data.id` for deployment.
 - If the user declines, do not deploy to another environment. Explain that a matching Feature Flags environment is required.
 
 If the prompt ID already belongs to a managed prompt, ask whether to integrate it or choose a different ID. If creation reports a conflict, list prompts again. Integrate only if the confirmed ID belongs to the intended managed prompt; otherwise, ask for a different ID. Do not silently update or replace an existing managed prompt.
@@ -139,8 +140,6 @@ DD_APP_KEY=<DATADOG_APP_KEY>
 DD_ENV=<DEPLOYMENT_ENVIRONMENT>
 DD_LLMOBS_ENABLED=1
 ```
-
-Preserve the application's existing identity. If `DD_SERVICE` or `DD_LLMOBS_ML_APP` is configured, keep that value. If neither is configured, set `DD_SERVICE` to a name based on the application, service, or project.
 
 Direct retrieval of an environment's deployed prompt requires both keys. The application key must have the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
 
@@ -174,6 +173,8 @@ For shell-based startup, export variables, assign them inline on the launch comm
 If runtime retrieval requires an application key, use a separate key with the required read permissions. A write-capable promotion key is a one-time setup credential.
 
 {{< agent-only >}}
+Preserve the application's existing identity. If `DD_SERVICE` or `DD_LLMOBS_ML_APP` is configured, keep that value. If neither is configured, set `DD_SERVICE` to a name based on the application, service, or project.
+
 Do not add the promotion key to runtime configuration unless the user explicitly selected it for runtime use and it also has the required read permissions.
 
 For an existing managed-prompt integration, if the user did not supply credentials, do not ask for them. Complete the code and configuration references where possible, then report that live prompt resolution and tracking could not be verified. Promotion requires user approval and the write-capable credentials described above.
@@ -302,14 +303,9 @@ Inspect every provider call that uses the managed prompt. Attach metadata with `
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< agent-only >}}
 ## Verify the integration
 
-1. Run local checks with the application's existing workflow.
-2. Run the application and exercise the modified provider call when you are ready to make provider requests and send telemetry.
-3. Open the prompt page in Datadog and allow a short delay for prompt usage to appear. Use the UUID returned by `LLMObs.create_prompt()` or `tracer.llmobs.prompts.createPrompt()` for a promoted prompt.
-4. Check for authentication, authorization, retrieval, or tracking errors.
-
-{{< agent-only >}}
 1. Use the application's existing workflow to perform local checks that do not make external requests.
 2. Do not query Datadog or use SDK span-reading methods to verify prompt tracking.
 3. If verification requires running the application, making a provider request, incurring cost, emitting telemetry, or causing another external side effect, do not finish the task merely by providing the run command. Request approval for that exact command through the coding environment's approval mechanism, or ask the user directly and wait for confirmation. A tool execution approval counts as confirmation.
@@ -321,7 +317,9 @@ Inspect every provider call that uses the managed prompt. Attach metadata with `
 
 [1]: /llm_observability/instrument/
 [2]: /llm_observability/instrument/prompt_tracking/
-[3]: /api/latest/feature-flags/list-environments/
-[4]: /api/latest/feature-flags/create-an-environment/
 [5]: /getting_started/site/
 [6]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval
+[7]: /account_management/api-app-keys/#api-keys
+[8]: /account_management/api-app-keys/#application-keys
+[9]: /llm_observability/configure/prompt_management/#prerequisites
+[10]: /llm_observability/configure/prompt_management/#manage-prompts-programmatically
