@@ -233,7 +233,7 @@ replacing it. Send both attributes, using an empty array for the one you are not
 using. Metric names are matched exactly, so each variant of a metric
 (`.count`, `.avg`, `.95percentile`, and so on) must be listed individually.
 
-`{rule-id}` is the `id` returned by [List filtered metric rules](#list-filtered-metric-rules).
+`{rule-id}` is the `id` returned by the request in the [List filtered metric policies](#list-filtered-metric-policies) section.
 
 #### Example body
 
