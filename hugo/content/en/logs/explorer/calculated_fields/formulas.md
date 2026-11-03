@@ -65,7 +65,7 @@ Returns the absolute value of a number.
 {{% /collapse-content %}}
 
 
-<h4>ceil(<i>num</i> value)</h4>
+<h4>ceiling(<i>num</i> value)</h4>
 
 Rounds number up to the nearest integer.
 
@@ -73,7 +73,7 @@ Rounds number up to the nearest integer.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@value` = 2.2 | `#rounded_up = ceil(@value)` | `#rounded_up` = 3 |
+| A log event has the following attribute:<br>`@value` = 2.2 | `#rounded_up = ceiling(@value)` | `#rounded_up` = 3 |
 
 {{% /collapse-content %}}
 
@@ -99,7 +99,7 @@ Finds maximum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#highest_temp = max(@CPU_temperatures)` | `#highest_temp` = 5 |
+| A log event has the following attributes: <br> - `@cpu1_temp` = -1 <br> - `@cpu2_temp` = 1 <br> - `@cpu3_temp` = 5 | `#highest_temp = max(@cpu1_temp, @cpu2_temp, @cpu3_temp)` | `#highest_temp` = 5 |
 
 {{% /collapse-content %}}
 
@@ -112,12 +112,12 @@ Finds the minimum value amongst a set of numbers.
 
 | Example  | Formula | Result |
 |----------|-------------|---------|
-| A log event has the following attribute:<br>`@CPU_temperatures` = [-1, 1, 5, 5] | `#lowest_temp = min(@CPU_temperatures)` | `#lowest_temp` = -1 |
+| A log event has the following attributes: <br> - `@cpu1_temp` = -1 <br> - `@cpu2_temp` = 1 <br> - `@cpu3_temp` = 5 | `#lowest_temp = min(@cpu1_temp, @cpu2_temp, @cpu3_temp)` | `#lowest_temp` = -1 |
 
 {{% /collapse-content %}}
 
 
-<h4>round(<i>num</i> value, <i>int</i> precision)</h4>
+<h4>round(<i>num</i> value, [<i>int</i> precision])</h4>
 
 Rounds a number. Optionally, define how many decimal places to maintain.
 
@@ -133,7 +133,7 @@ Rounds a number. Optionally, define how many decimal places to maintain.
 
 ### String
 
-<h4>concat(<i>str</i> string [<i>str</i> string, <i>expr</i> value, …])</h4>
+<h4>concat(<i>str</i> string, <i>str</i> string, [<i>expr</i> value, …])</h4>
 
 Combines multiple values into a single string.
 
