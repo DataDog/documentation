@@ -1,13 +1,13 @@
 ---
 title: Subscriptions
-description: Let visitors subscribe to status page updates by email, Slack, or Microsoft Teams, and manage subscribers.
+description: Let visitors subscribe to status page updates by email, Slack, Microsoft Teams, or an RSS or Atom feed, and manage subscribers.
 further_reading:
 - link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Datadog Status Pages"
 ---
 
-Status page visitors can subscribe to updates by email, Slack, or Microsoft Teams. Each subscription type is turned on or off independently for each status page. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, subscribers receive updates for the components they follow.
+Status page visitors can subscribe to updates by email, Slack, Microsoft Teams, or an RSS or Atom feed. Each subscription type is turned on or off independently for each status page. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, email, Slack, and Microsoft Teams subscribers receive updates for the components they follow.
 
 When more than one subscription type is enabled, clicking **Subscribe** on the published page opens a modal with a tab for each enabled type.
 
@@ -161,9 +161,37 @@ Status page owners can review subscribers in the status page settings. For a pub
 
 A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, remove the subscription from the list, then subscribe again with a working URL.
 
+## RSS and Atom feeds
+
+Public status pages can publish their notice history as an RSS 2.0 or Atom feed. Visitors subscribe in any feed reader and receive new notices and updates. Feeds are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+
+Feeds are available on public status pages only.
+
+### Enable feeds
+
+1. From your status page, click **Settings**, then select **RSS** under **Subscriptions**.
+1. Enable **RSS feed**.
+1. Click **Save Settings**.
+
+### Feed URLs
+
+After the page is published, its feeds are served at the following paths:
+
+| Feed | URL |
+| ---- | --- |
+| RSS 2.0 | `https://<prefix>.statuspage.datadoghq.com/history.rss` |
+| Atom | `https://<prefix>.statuspage.datadoghq.com/history.atom` |
+
+If you [set a custom domain][3], the feeds are also served from that domain; for example, `https://status.acme.com/history.rss`, where `status.acme.com` is the configured custom domain.
+
+Each feed entry corresponds to a notice published on the page and includes the notice title, status, message, and the time the update was posted. Resolved notices remain in the feed as part of the page history. The last 20 notices are shown in the feed.
+
+**Note**: Feeds are unauthenticated. Anyone who can view the status page can read its feed.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/org_settings/smtp_configuration
 [2]: /incident_response/status_pages/#publish-your-status-page
+[3]: /incident_response/status_pages/#set-a-custom-domain

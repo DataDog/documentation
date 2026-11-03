@@ -29,14 +29,14 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email, Slack, and Microsoft Teams notifications
+* Reduce inbound support volume with proactive email, Slack, Microsoft Teams, and RSS feed notifications
 
 Use the following pages to set up and run your status pages:
 
 - [Components][5]: Represent the services and features your users rely on.
 - [Notices][6]: Publish degradations and schedule maintenance windows.
 - [Notice Templates][7]: Reuse notice titles, messages, and components.
-- [Subscriptions][8]: Notify subscribers by email, Slack, or Microsoft Teams.
+- [Subscriptions][8]: Notify subscribers by email, Slack, or Microsoft Teams, or publish an RSS or Atom feed.
 
 ## Configure permissions
 
@@ -113,7 +113,7 @@ To restrict access:
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email][9], [Slack][10], or [Microsoft Teams][11]. For email, you can let visitors subscribe from the published page or [add subscribers][12] yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions][9] are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email][9], [Slack][10], [Microsoft Teams][11], or an [RSS or Atom feed][14]. For email, you can let visitors subscribe from the published page or [add subscribers][12] yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions][9] are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components][5] to show the status of individual services.
 1. Click **Save Settings**.
@@ -163,3 +163,4 @@ You can use Terraform to create or manage your status pages. For details on the 
 [11]: /incident_response/status_pages/subscriptions/#microsoft-teams-subscriptions
 [12]: /incident_response/status_pages/subscriptions/#add-or-import-subscribers
 [13]: /incident_response/status_pages/subscriptions/#configure-a-custom-email-sender-domain
+[14]: /incident_response/status_pages/subscriptions/#rss-and-atom-feeds
