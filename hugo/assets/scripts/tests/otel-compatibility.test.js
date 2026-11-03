@@ -108,7 +108,7 @@ describe('otel-compatibility', () => {
         checkDiff(root);
         const visible = [...root.querySelectorAll('tbody tr')].filter((tr) => !tr.hidden).map((tr) => tr.dataset.feature);
         expect(visible).toEqual(['profiler']);
-        expect(root.querySelector('.otel-compat__status').textContent).toMatch('Hiding 1 features');
+        expect(root.querySelector('.otel-compat__status').textContent).toBe('');
     });
 
     it("doesn't mark or hide a row with an undocumented cell", () => {

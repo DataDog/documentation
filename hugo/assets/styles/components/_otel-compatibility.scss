@@ -316,19 +316,6 @@ $otel-compat-differs: mix($brand-primary, #fff, 6%);
     color: $gray-darkish;
   }
 
-  &__legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem 1.25rem;
-    margin: 0.75rem 0 0;
-    font-size: 12px;
-    color: $gray-darkish;
-
-    .icon-check-bold {
-      color: $brand-primary;
-    }
-  }
-
   // Only for the .md version of the page, which is built from this HTML
   &__md-label {
     display: none;

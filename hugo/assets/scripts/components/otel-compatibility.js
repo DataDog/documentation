@@ -137,13 +137,8 @@ function initOtelCompat(root) {
         count.hidden = compare;
         count.textContent = compare ? '' : countText(a);
 
-        if (filterDiff && hiddenRows === featureRows.length) {
-            status.textContent = 'These setups support the same features.';
-        } else if (filterDiff && hiddenRows > 0) {
-            status.textContent = `Hiding ${hiddenRows} features that both setups support the same way.`;
-        } else {
-            status.textContent = '';
-        }
+        // Explain an empty table; otherwise the filtered rows speak for themselves
+        status.textContent = filterDiff && hiddenRows === featureRows.length ? 'These setups support the same features.' : '';
 
         if (updateUrl) writeParams({ view, a, b });
     }
