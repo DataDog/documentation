@@ -88,7 +88,7 @@ Each trace contains spans representing each choice made by an agent or each step
 
 View every step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
 
-{{< img src="llm_observability/errors.png" alt="Errors that occurred in a trace on the Errors tab in a trace side panel" style="width:100%;" >}}
+{{< img src="llm_observability/errors.png" alt="Errors that occurred in a trace, shown in the trace side panel" style="width:100%;" >}}
 
 ## Monitor operational metrics and optimize cost
 
