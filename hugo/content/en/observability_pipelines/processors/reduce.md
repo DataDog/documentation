@@ -47,11 +47,15 @@ These are the available merge strategies for combining log events.
 
 ### Set the aggregation window
 
-Optionally, use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long a Reduce processor aggregates events before it sends a reduced log. The setting applies to every Reduce processor on the Worker. Matching events processed by different Workers are not merged. The variable accepts values from `1` to `300` seconds. The default is `10` seconds.
+Optionally, use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long a Reduce processor aggregates events before it sends a reduced log. The variable accepts values from `1` to `300` seconds. The default is `10` seconds.
+
+The setting applies to every Reduce processor on the Worker. Matching events processed by different Workers are not merged because Workers run independently of each other. For example, if event A should be merged with event B but the two events end up on different Workers, the two events are not merged. Therefore, increasing the number of Workers in a pipeline can reduce the number of merges.
 
 A longer aggregation window lets the processor merge events that arrive farther apart, so more events are merged. Each Reduce processor holds its groups of events in memory until the window closes. Memory usage grows with the window size, the number of unique groups, and the number of Reduce processors. If most events are unique, memory can grow substantially and the Worker can run out of memory.
 
 A shorter aggregation window frees memory sooner, which can help high-throughput pipelines. However, fewer events are merged, so more similar events are sent downstream.
+
+Workers run independently of each other, so each reduce is working on its own. So more workers means less reduce happening, because Log A that should reduce with Log B can land on different workers and the workers don't communicate or shift logs from one to another.
 
 Increase the aggregation window gradually and monitor the Worker's memory usage. See [Process metrics][5] for the Worker memory metrics.
 
