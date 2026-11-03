@@ -55,8 +55,6 @@ A longer aggregation window lets the processor merge events that arrive farther 
 
 A shorter aggregation window frees memory sooner, which can help high-throughput pipelines. However, fewer events are merged, so more similar events are sent downstream.
 
-Workers run independently of each other, so each reduce is working on its own. So more workers means less reduce happening, because Log A that should reduce with Log B can land on different workers and the workers don't communicate or shift logs from one to another.
-
 Increase the aggregation window gradually and monitor the Worker's memory usage. See [Process metrics][5] for the Worker memory metrics.
 
 **Note**: The `DD_OP_REDUCE_WINDOW_SECS` environment variable is available for Worker versions 2.25.0 or later.
