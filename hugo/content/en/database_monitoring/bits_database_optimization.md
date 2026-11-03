@@ -55,6 +55,25 @@ Each analyzed query counts toward this limit even when no optimization is found.
 
 Bits Database Optimization is priced according to AI credits. For details, see the [AI credits pricing page][5].
 
+## SQL Server (Preview)
+
+Bits Database Optimization for SQL Server is in Preview. To request access, click **Get Early Access** in the SQL Server banner on the [Optimizations][7] page, or contact your Datadog representative.
+
+### Requirements
+
+In addition to the [prerequisites](#prerequisites), SQL Server requires:
+
+- **Datadog Agent 7.86 or later.** During the Preview, Datadog provides a pre-release Agent build after your organization is enabled.
+- **Schema collection** enabled on each SQL Server instance. Schema collection is off by default for SQL Server. Set `collect_schemas.enabled: true` in the instance configuration. See [Exploring Database Schemas][8].
+- **Access to each database.** The Agent's login needs a user in every database you want optimized, and `database_autodiscovery` must be enabled so the Agent collects schemas from all databases, not only the one set in `database`. On Azure SQL Database, configure one check instance per database instead. See [Setting Up Database Monitoring for SQL Server][9].
+- **Column statistics.** The Agent collects column statistics (`collect_column_statistics.enabled: true`) so that simulations use synthetic data shaped like yours. This requires SQL Server 2017 or later and a `datadog.column_statistics` stored procedure installed in each database. Only statistics properties and histogram counts are collected, never column values. Datadog sends installation instructions after your organization is enabled.
+- **Continuous optimizations** turned on. See [Enable continuous optimizations](#enable-continuous-optimizations). SQL Server optimizations come only from continuous optimizations.
+
+### Limitations
+
+- Automated pull requests are not available for SQL Server during the Preview.
+- Queries that use temporary tables or table variables are not analyzed.
+
 ## Viewing optimizations
 
 ### Query list
@@ -99,3 +118,5 @@ To review the PR for the optimization fix to your database, select **Review PR b
 [5]: https://www.datadoghq.com/pricing/?product=ai-credits#products
 [6]: /bits_ai/
 [7]: https://app.datadoghq.com/databases/optimizations
+[8]: /database_monitoring/schema_explorer/
+[9]: /database_monitoring/setup_sql_server/
