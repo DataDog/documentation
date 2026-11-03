@@ -70,7 +70,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
 | Databricks Mosaic AI     | [SaaS integration][19] |
-| Snowflake AI | [SaaS integration][22] |
+| Snowflake AI | [SaaS integration][21] |
 
 ## AI cost summary
 
