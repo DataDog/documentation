@@ -228,10 +228,7 @@ Substitute `<BASE_URL>` in the example below with the base URL.
 
 **PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/rules/{rule-id}`
 
-Use `metrics_to_add` and `metrics_to_remove` to change a rule's metric list without
-replacing it. Send both attributes, using an empty array for the one you are not
-using. Metric names are matched exactly, so each variant of a metric
-(`.count`, `.avg`, `.95percentile`, and so on) must be listed individually.
+Use `metrics_to_add` and `metrics_to_remove` to change a rule's metric list without replacing it. Send both attributes, and use an empty array for the one you don't need. Metric names must match exactly, so list each variant of a metric individually, such as `.count`, `.avg`, and `.95percentile`.
 
 `{rule-id}` is the `id` returned by the request in the [List filtered metric policies](#list-filtered-metric-policies) section.
 
