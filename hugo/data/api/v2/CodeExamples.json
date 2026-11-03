@@ -1839,6 +1839,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_292428701",
+      "description": "Create a monitor notification rule with rule options returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1379932371",
       "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
@@ -1872,6 +1877,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_365435820",
+      "description": "Update a monitor notification rule with rule options returns \"OK\" response"
     },
     {
       "group": "monitors",
