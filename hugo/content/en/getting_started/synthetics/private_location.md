@@ -48,7 +48,7 @@ Your private locations test results display identically to your managed location
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
     - {{< ui >}}Block reserved IPs{{< /ui >}} is on by default, which limits the private location's access to reserved IPs. To allow access to specific endpoints, enter IP ranges and/or domain names.  
 
-    For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+    For more information, see [Private Locations Configuration Options][6], [Run Synthetic Tests from Private Locations][7], and [Private Location Network Security Hardening][17]. 
 
 6. Copy and paste your private location configuration file to your working directory.
 
@@ -117,3 +117,4 @@ Use your new private location just like a managed location in your Synthetic tes
 [14]: https://www.datadoghq.com/legal/eula/
 [15]: https://www.datadoghq.com/support/
 [16]: /synthetics/guide/kerberos-authentication/
+[17]: /synthetics/platform/private_locations/network_security/

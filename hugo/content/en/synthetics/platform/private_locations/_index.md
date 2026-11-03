@@ -159,6 +159,8 @@ New private locations block the reserved IP ranges by default ([IPv4 address reg
 
 Some of the endpoints you want to test might be in the blocked reserved IP ranges. To allow access to them, add their IPs and/or CIDRs to the allowed lists. This adds the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
 
+For recommended egress settings and examples, see [Private Location Network Security Hardening][35].
+
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
 ### View your configuration file
@@ -1045,3 +1047,5 @@ Restricting a Private Location may limit other users from adding it to a test or
 [32]: /synthetics/platform/private_locations/configuration
 [33]: /synthetics/guide/kerberos-authentication/
 [34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
+
+[35]: /synthetics/platform/private_locations/network_security/
