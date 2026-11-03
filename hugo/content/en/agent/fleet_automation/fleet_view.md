@@ -46,7 +46,7 @@ For what Fleet Automation supports for each kind of Collector, see [Manage OpenT
 - Configuration view is enabled by default for Agents and OTel Collectors with version 7.47.0 and later. To enable it manually for older versions, set `inventories_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
 - Agent integration configuration is enabled by default in Agent version 7.49.0 or later. To enable it manually on older versions, set `inventories_checks_configuration_enabled` to `true` in your [Agent configuration file][3], or use the `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED` environment variable.
 
-<div class="alert alert-info">Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> to display OpenTelemetry Collector configuration, pipelines, and topology. Configure the extension before using the OTel Collector features described on this page.</div>
+<div class="alert alert-info">Fleet Automation requires the <a href="/opentelemetry/integrations/datadog_extension/#setup">Datadog Extension</a> to display OpenTelemetry Collector configuration, pipelines, and topology. Configure the extension before using the OTel Collector features described on this page. As an alternative, you can use the <a href="/opentelemetry/integrations/opamp_extension/">OpAMP extension</a>, which doesn't support the Topology view.</div>
 
 ## Examine a Datadog Agent or OpenTelemetry Collector
 

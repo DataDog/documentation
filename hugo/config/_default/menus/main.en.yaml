@@ -922,71 +922,76 @@ menu:
       identifier: otel_datadog_extension
       parent: otel_integrations
       weight: 804
+    - name: OpAMP Extension
+      url: opentelemetry/integrations/opamp_extension/
+      identifier: otel_opamp_extension
+      parent: otel_integrations
+      weight: 805
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
       parent: otel_integrations
-      weight: 805
+      weight: 806
     - name: HAProxy Metrics
       url: opentelemetry/integrations/haproxy_metrics/
       identifier: otel_haproxy_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
     - name: Host Metrics
       url: opentelemetry/integrations/host_metrics/
       identifier: otel_host_metrics
       parent: otel_integrations
-      weight: 807
+      weight: 808
     - name: IIS Metrics
       url: opentelemetry/integrations/iis_metrics/
       identifier: otel_iis_metrics
       parent: otel_integrations
-      weight: 808
+      weight: 809
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 809
+      weight: 810
     - name: Kubernetes Metrics
       url: opentelemetry/integrations/kubernetes_metrics/
       identifier: otel_kubernetes_metrics
       parent: otel_integrations
-      weight: 810
+      weight: 811
     - name: MySQL Metrics
       url: opentelemetry/integrations/mysql_metrics/
       identifier: otel_mysql_metrics
       parent: otel_integrations
-      weight: 811
+      weight: 812
     - name: PostgreSQL Metrics
       url: opentelemetry/integrations/postgres_metrics/
       identifier: otel_postgres_metrics
       parent: otel_integrations
-      weight: 812
+      weight: 813
     - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations
-      weight: 813
+      weight: 814
     - name: Podman Metrics
       url: opentelemetry/integrations/podman_metrics/
       identifier: otel_podman_metrics
       parent: otel_integrations
-      weight: 814
+      weight: 815
     - name: Runtime Metrics
       url: opentelemetry/integrations/runtime_metrics/
       identifier: otel_runtime_metrics
       parent: otel_integrations
-      weight: 815
+      weight: 816
     - name: SQL Server Metrics
       url: opentelemetry/integrations/sqlserver_metrics/
       identifier: otel_sqlserver_metrics
       parent: otel_integrations
-      weight: 816
+      weight: 817
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
       parent: otel_integrations
-      weight: 817
+      weight: 818
     - name: Fleet Automation
       url: opentelemetry/fleet_automation/
       identifier: otel_fleet_automation
