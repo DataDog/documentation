@@ -300,7 +300,7 @@ Confirm that the publish summary reports the Portable PDB upload as `uploaded`, 
 **iOS C# frames show the first line of the method instead of the line that threw**:
 iOS Release builds report C# frames without an IL offset. See [C# line numbers on iOS](#c-line-numbers-on-ios).
 
-**No Datadog output visible during publish**
+**No Datadog output visible during publish**:
 The terminal logger hides informational messages. Add `-v n -tl:off` to your `dotnet publish` command.
 
 **Upload completes but symbols don't appear in Datadog**
