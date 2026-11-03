@@ -17,7 +17,7 @@ further_reading:
 ---
 
 
-Datadog provides official Bazel rules for Go Test Optimization. The rules build each instrumented test with a Go SDK that [`ddtest instrument`][3] prepares, so your Go module needs no Datadog requirement in `go.mod`, and the instrumentation needs no Go installation on the host. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended Test Optimization defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper.
+Datadog provides official Bazel rules for Go Test Optimization. The rules build each instrumented test with a Go SDK that [`ddtest instrument`][3] prepares. Your Go module needs no Datadog requirement in `go.mod`, and the instrumentation needs no Go installation on the host. Guided bootstrap writes a local `dd_go_test` wrapper that calls Datadog's `dd_topt_go_test` macro with the recommended Test Optimization defaults. Use `dd_go_test` in package `BUILD.bazel` files after running bootstrap. Use `dd_topt_go_test` directly when you maintain your own wrapper.
 
 ## Compatibility
 

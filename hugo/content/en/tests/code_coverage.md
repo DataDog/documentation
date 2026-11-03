@@ -309,7 +309,7 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 * `go test -cover`
 
 <div class="alert alert-danger">
-  <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>ddtest instrument</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
+  <strong>Note</strong>: The Datadog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>ddtest instrument</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
 </div>
 
 If your tests are executed with the `-cover` flag, the Datadog library instruments it and automatically reports the coverage data to Datadog under the `test.code_coverage.lines_pct` tag for your test sessions.
