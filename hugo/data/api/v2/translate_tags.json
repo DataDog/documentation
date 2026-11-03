@@ -1,4 +1,8 @@
 {
+  "ai-guard": {
+    "name": "AI Guard",
+    "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
@@ -465,7 +469,7 @@
   },
   "rum-replay-sessions": {
     "name": "Rum Replay Sessions",
-    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+    "description": "Retrieve segments for RUM replay sessions.\nAccess session replay data stored in event platform or blob storage."
   },
   "rum-replay-viewership": {
     "name": "Rum Replay Viewership",
