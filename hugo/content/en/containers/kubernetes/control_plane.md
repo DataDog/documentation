@@ -877,15 +877,7 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 Both the Datadog Operator and Helm support Talos Linux.
 
-Datadog Operator support for Talos starts at version 1.31.0, where the Operator detects Talos automatically from the node's OS image. On earlier Operator versions, use Helm.
-
-Datadog Operator version 1.32.0 or later also configures control plane monitoring for you. On versions 1.31.0 through 1.31.x, configure the checks manually:
-
-1. Take the check definitions from the Helm tab in the [Etcd](#TalosEtcd) and Controller Manager and Scheduler sections, and mount them with `override.nodeAgent.extraConfd`.
-1. Add the control-plane toleration and the etcd certificate volume.
-1. Mask the Agent's bundled `etcd`, `kube_scheduler`, and `kube_controller_manager` configurations with empty volumes, as the Datadog Operator tab in [Kubernetes with Kubeadm](#Kubeadm) does for `etcd`. Without the masking, the Agent collects each check twice.
-
-With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
+Control plane monitoring on Talos requires Datadog Operator version 1.32.0 or later, which detects Talos from the node's OS image and configures the checks for you. With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
 
 Before you deploy the Agent, label the target namespace for the `privileged` Pod Security Standard, as described in the [Talos Linux section of Kubernetes distributions][13].
 
