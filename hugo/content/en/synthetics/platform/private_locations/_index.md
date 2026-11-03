@@ -188,7 +188,7 @@ Run this command to boot your private location worker by mounting your configura
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Note**: Private locations block reserved IPs by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
@@ -208,7 +208,7 @@ This command starts a Docker container and makes your private location ready to 
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Note**: Private locations block reserved IPs by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 2. Start your container with:
 
@@ -275,7 +275,7 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
               secretName: private-location-worker-config
     ```
 
-    **Note**: Private locations block reserved IPs by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
@@ -308,7 +308,7 @@ Alternatively:
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-**Note**: Private locations block reserved IPs by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 In multi-container mode, the Helm chart creates a Kubernetes NetworkPolicy by default. To disable it, set `multiContainer.networkPolicy.create` to `false`.
 
@@ -351,7 +351,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 ```
 **Notes:**
 
-- Private locations block reserved IPs by default. Configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
+- Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][31] to your private location container.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
@@ -525,7 +525,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
               name: private-location-worker-config
     ```
 
-    **Note**: Private locations block reserved IPs by default. Configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
+    **Note**: Configuration files generated for new private locations block reserved IPs by default. When reserved IP blocking is enabled, add the NET_ADMIN [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
