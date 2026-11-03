@@ -1,6 +1,6 @@
 ---
 title: Private Location Network Security Hardening
-description: Restrict the network access of your Synthetic Monitoring private locations with egress allow and block lists, network segmentation, and scoped keys.
+description: Restrict the network access of your Synthetic Monitoring private locations with egress allow and block lists.
 further_reading:
 - link: "synthetics/platform/private_locations/configuration"
   tag: "Documentation"
@@ -14,12 +14,10 @@ further_reading:
 
 A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. Configuration files generated for new private locations set `enableDefaultBlockedIpRanges` to `true`, which blocks reserved and private IP ranges. The worker default is `false`, so private locations with older configuration files, and workers started without this option, do not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
 
-To reduce this risk, combine the following controls:
+To reduce this risk:
 
 - [Restrict egress with allow and block lists](#restrict-egress-with-allow-and-block-lists) in the worker configuration.
 - [Apply the recommended defaults](#recommended-defaults).
-- [Allow access to internal services on purpose](#allow-access-to-internal-services-on-purpose) only where tests need it.
-- [Segment the network](#segment-the-network) around the worker.
 
 The allow and block lists apply to all test types that run on the private location.
 
@@ -53,6 +51,8 @@ When `enableDefaultBlockedIpRanges` is `true`, the worker blocks the following I
 - `224.0.0.0/4`, `240.0.0.0/4`, `255.255.255.255/32`
 
 It also blocks IPv6 special-purpose ranges, including `::1/128`, `fc00::/7`, `fe80::/10`, `::ffff:0:0/96`, and `2002::/16`. These ranges come from the IANA [IPv4][2] and [IPv6][3] Special-Purpose Address Registries.
+
+**Note**: The default list includes the private ranges `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`. If your private location tests internal applications, add their address ranges to `allowedIPRanges`.
 
 ## Recommended defaults
 
@@ -110,7 +110,6 @@ If you manage the configuration in your own secret with `configSecret`, add the 
 {{% /tab %}}
 {{< /tabs >}}
 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -118,4 +117,3 @@ If you manage the configuration in your own secret with `configSecret`, add the 
 [1]: /synthetics/platform/private_locations/configuration/#all-configuration-options
 [2]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [3]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[4]: /synthetics/platform/private_locations/#datadog-private-locations-endpoints
