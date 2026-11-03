@@ -5,15 +5,11 @@ description: Measure the combined effect of released changes with holdouts.
 
 ## Overview
 
-A holdout measures the combined effect of shipped changes from covered experiments.
+Holdouts set aside a share of eligible subjects to measure the effect of released changes.
 
-Conceptually, a holdout is a controlled experiment. The treatment is a combination of shipped changes from covered experiments. The control keeps the original experiences.
+Conceptually, a holdout is a controlled experiment. The treatment is a combination of shipped changes from covered experiments. The control keeps the original experiences. This comparison naturally captures interaction effects and avoids exaggeration bias due to the [winner's curse][8].
 
-Holdouts measure the effect of combined changes in a way that naturally captures interaction effects and avoids exaggeration bias due to the [winner's curse][8].
-
-A holdout sets aside a share of eligible subjects.
-
-These subjects are assigned at random to two groups:
+Subjects are assigned at random to two groups:
 
 - **Status quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
 - **All shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
@@ -45,15 +41,13 @@ Measuring the entire period as one result would mix time spent with some changes
 
 For example, a team includes 10 experiments in a holdout from July through September. Five experiments produce changes that ship. The first ships on July 15, and the last ships on September 30.
 
-The goal is to measure the combined effect of all five changes. The holdout treatment is still changing during the inclusion phase and is complete only when the last change ships. The team sets an analysis phase from October 1 through October 15 to measure the full combination.
-
-During inclusion, preliminary results give the team an early directional read without waiting until October. These results include time when only some changes had shipped, so they do not measure the full combination.
+The team sets an analysis phase from October 1 through October 15 to measure the combined effect of all five changes. Preliminary results let the team monitor performance during inclusion without waiting until October.
 
 ### Experiment inclusion phase
 
 The **inclusion period** sets the dates when experiments can join the holdout.
 
-During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts. Both holdout groups receive an experiment's control experience while it runs. After a non-control variant rolls out, the all-shipped group receives that change.
+During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts.
 
 The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created. These rules do not require every rollout to finish by the inclusion end date. The interval before analysis starts allows time for the remaining rollouts to complete.
 
@@ -73,7 +67,7 @@ For example, a 10% holdout assigns about 5% of eligible subjects to each group. 
 
 A subject keeps the same group across included experiments. Each experiment's targeting and traffic rules still apply.
 
-Both groups receive control until the experiment's rollout completes. Selecting a winner alone does not change the experience. After a change's rollout completes, only the all-shipped group receives it. If control wins, both groups keep control.
+Selecting a winner alone does not change the experience. The rollout must complete first. If control wins, both groups keep control.
 
 ## Requirements
 
@@ -85,8 +79,6 @@ For holdouts that use Datadog Feature Flags, included experiments must:
 - Be standard experiments, not other holdout analyses.
 
 Add selective experiments while they are drafts. The holdout must be waiting to start or within its inclusion period.
-
-An **exposure record** identifies the experience served to a subject.
 
 ## Set up a holdout
 
@@ -112,6 +104,8 @@ After inclusion ends, you cannot change the included experiments. The holdout co
 
 ## Exposure criteria
 
+An **exposure record** identifies the experience served to a subject.
+
 For the primary analysis, an exposure qualifies when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
 
 For a holdout, exposure occurs when a subject first interacts with a component where a covered experiment has shipped a non-control variant. Datadog records this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control.
@@ -127,7 +121,7 @@ The exposure property `holdout.should_include_in_holdout_analysis` distinguishes
 - **`false`**: The covered experiment has not shipped a non-control variant. Both groups receive control.
 - **`true`**: A non-control variant has shipped. The groups can receive different experiences. This value applies to both groups, including subjects who remain on control.
 
-The preliminary analysis uses all holdout exposures during inclusion, including those marked `false`. It provides an early directional read while changes are still being released.
+The preliminary analysis uses all holdout exposures during inclusion, including those marked `false`.
 
 The primary analysis uses only exposures with `should_include_in_holdout_analysis = true`. It selects each subject's first qualifying exposure and excludes earlier records where both groups received control. This focuses the comparison on subjects whose experiences could differ and improves the ability to detect an effect.
 
