@@ -43,7 +43,7 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. Click {{< ui >}}Save{{< /ui >}} to apply your changes.
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the {{< ui >}}Configure{{< /ui >}} tab.
 1. When you are finished modifying the workflow, Click {{< ui >}}Run{{< /ui >}} to test your workflow.
-1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 ## Create or edit a workflow with AI {#create-a-workflow-with-ai}
 
@@ -84,7 +84,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
 1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon ({{< ui >}}\+{{< /ui >}}) to add another step, or save the workflow if you're done.
-1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+1. When you're ready to publish your workflow, click {{< ui >}}Publish{{< /ui >}}. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
@@ -108,7 +108,7 @@ See the test and debug page for information on [how to test a step][11].
 
 Scheduled and triggered workflows don't trigger automatically until you've published them. To publish the workflow, click {{< ui >}}Publish{{< /ui >}} from the workflow's page.
 
-Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][4].
 
 ### Updating a published workflow
 

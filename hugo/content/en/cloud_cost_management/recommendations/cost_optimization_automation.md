@@ -107,7 +107,7 @@ Open an automation and select the {{< ui >}}Activity{{< /ui >}} tab to see past 
 - Execution time and status (success, failure, or pending approval)
 - The resources acted on
 - Estimated savings realized by the run
-- A link to the underlying Workflow Automation execution
+- A link to the underlying Workflow Automation run
 
 Use the filters at the top of the {{< ui >}}Activity{{< /ui >}} view to find executions by status, recommendation type, or date range.
 
