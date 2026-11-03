@@ -40,6 +40,21 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.36 — 2026-11-03
+
+*Bundled in chart: `0.6.0`.*
+
+#### Changed
+
+- Protects searchers from excessive memory usage during wildcard searches, and makes filters on multi-value fields more efficient.
+- Reduces indexing memory retention and log-processing overhead.
+- Improves ingestion reliability by fixing an issue where recently acknowledged logs could be lost after an unexpected indexer restart.
+
+#### Helm chart changes
+
+- **Breaking**: Defaults `indexer.podManagementPolicy` to `Parallel`, so indexers start concurrently during scale-out instead of one at a time. Kubernetes does not allow changing this field on an existing StatefulSet. Before upgrading, either set `indexer.podManagementPolicy: OrderedReady` to keep the current policy, or migrate the indexer StatefulSet by following [Upgrading indexers to `Parallel`][1].
+- Enables gossip message compression by default with `config.gossip_protocol_version: 1`. If any node runs a version older than v0.1.33, keep `config.gossip_protocol_version: 0` until all nodes run v0.1.33 or later, then set it to `1`.
+
 ### v0.1.35 — 2026-10-20
 
 *Bundled in chart: `0.5.6`.*
@@ -171,3 +186,5 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/cloudprem#upgrading-indexers-to-parallel
