@@ -40,7 +40,7 @@ These test spans are still ingested and indexed. You can search and analyze them
 
 The following test spans are still billed:
 
-- Retries configured in your test framework, such as the `retries` option in Playwright.
+- Retries configured in your test framework.
 - Tests that you skip in your code or test framework configuration.
 
 These exceptions don't change how committers are counted.
