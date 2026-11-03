@@ -276,7 +276,7 @@ To verify your Crash Reporting and Error Tracking configuration, trigger a crash
 **`Skipping symbol upload — datadog-ci is not installed`**:
 Run `npm install -g @datadog/datadog-ci` and verify with `datadog-ci version`.
 
-**`Skipping symbol upload — DATADOG_API_KEY is not set`**
+**`Skipping symbol upload — DATADOG_API_KEY is not set`**:
 Export the key in your shell: `export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>`. Verify with `echo $DATADOG_API_KEY`.
 
 **`Skipping dSYM upload — file not found`**:
