@@ -41,7 +41,7 @@ The commands in this guide use your current namespace. Create the Collector and 
 
 Choose one of these installation methods:
 
-- [OpenTelemetry Operator][55]: Manages the Collector as a Kubernetes resource and keeps it running as you declared it. The Operator also injects DDOT SDKs into your pods.
+- [OpenTelemetry Operator][55]: Manages the Collector as a Kubernetes resource and keeps it running as you declared it. The Operator can also inject SDKs into your pods.
 - [Helm chart][4]: Installs the Collector from a values file, without the Operator.
 
 {{< tabs >}}
@@ -786,9 +786,9 @@ To apply later changes, run `helm upgrade node-collector open-telemetry/opentele
 
 ## Instrument your application
 
-Instrument your application with the DDOT SDK or an OpenTelemetry SDK. Either one sends OTLP to the Collector on the application's node, which publishes the OTLP ports on the node.
+Instrument your application with a Datadog SDK or an OpenTelemetry SDK. Either one sends OTLP to the Collector on the application's node, which publishes the OTLP ports on the node.
 
-### DDOT SDK
+### Datadog SDK
 
 Turn on OTLP export in the Datadog SDK for your language, as described in [Export Traces from Datadog SDKs in OTLP Format][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [OpenTelemetry SDK](#opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
 
@@ -929,7 +929,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 
 ## Next steps
 
-- **Instrument more applications**: [DDOT SDKs][66].
+- **Instrument more applications**: [OpenTelemetry SDKs][12] or [Datadog SDKs with OTLP export][66].
 - **Check host names and tags**: [Hostnames and Tagging][67].
 - **Compare setups**: [Feature Compatibility][68].
 
