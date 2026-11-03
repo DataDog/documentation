@@ -43,6 +43,7 @@ This documentation covers the SQL support available and includes:
 - [Network address functions](#network-address-functions-and-operators)
 - [Table functions](#table-functions)
 - [Tags](#tags)
+- [Template variables](#template-variables)
 
 
 {{< img src="/logs/workspace/sql_reference/sql_syntax_analysis_cell.png" alt="Example workspace cell with SQL syntax" style="width:100%;" >}}
@@ -1201,6 +1202,39 @@ FROM aws.ec2_instance
 | tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
 | akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
 | avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
+
+## Template variables
+
+<div class="alert alert-info">Template variables in DDSQL Editor are in Preview. Contact <a href="/help/">Datadog support</a> to request access.</div>
+
+Template variables let you change query filters without editing SQL.
+
+### Filter rows with `matches`
+
+Use `matches(column, $var)` in a `WHERE` clause to compare a column or expression with the variable's selected values. For example, for a variable named `env`:
+
+{{< code-block lang="sql" >}}
+SELECT *
+FROM aws.ec2_instance
+WHERE matches(tags->'env', $env);
+{{< /code-block >}}
+
+| Selected values | Matches |
+|-----------------|---------|
+| `prod` | An exact, case-sensitive match. |
+| `prod, staging` | Either value. |
+| `*` | No filter. An empty selection also applies no filter. |
+| `prod*` | Values starting with `prod`. |
+| `*prod` | Values ending with `prod`. |
+| `*prod*` | Values containing `prod`. |
+
+### Variable syntax
+
+Pass `$env` directly, without single quotes or `.value`. The column or expression determines what is filtered; the variable's tag is not added.
+
+For non-text columns, cast the expression to `VARCHAR` first, for example `matches(CAST(status_code AS VARCHAR), $status)`.
+
+Use `$env` for a lowercase variable name. Enclose names containing uppercase letters, spaces, or punctuation in double quotes, for example `$"aws-region"`.
 
 ## Writing efficient queries
 
