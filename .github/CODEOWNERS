@@ -148,6 +148,7 @@ hugo/content/en/disaster_recovery/                                              
 hugo/content/en/error_tracking/                                                              @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/events/                                                                      @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/experiments/                                                                 @DataDog/documentation @DataDog/documentation-dem
+hugo/content/en/extend/                                                                      @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/feature_flags/                                                               @DataDog/documentation @DataDog/documentation-software-delivery
 hugo/content/en/gpu_monitoring/                                                              @DataDog/gpu-monitoring-agent @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/ide_plugins/                                                                 @DataDog/documentation @DataDog/documentation-software-delivery
