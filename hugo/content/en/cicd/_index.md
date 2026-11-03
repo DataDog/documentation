@@ -21,13 +21,13 @@ This section provides an overview of CI/CD Optimization's key features, which re
 
 ### CI/CD Overview
 
-Explore key CI reliability and performance metrics in the [CI/CD {{< ui >}}Overview{{< /ui >}} page][8]. The dashboard includes widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
+Explore key CI reliability and performance metrics in the CI/CD {{< ui >}}Overview{{< /ui >}} page. The dashboard includes widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
 
 {{< img src="cicd_optimization/cicd_overview.png" alt="CI/CD Overview dashboard" style="width:100%;" >}}
 
 ### Unified explorer
 
-Browse pipeline executions and test runs from a single view in the [CI/CD {{< ui >}}Explorer{{< /ui >}}][3]. Toggle between pipelines and tests, and search, filter, and analyze each type of data. Narrow down results by specific levels of aggregation:
+Browse pipeline executions and test runs from a single view in the [CI/CD {{< ui >}}Explorer{{< /ui >}}][1]. Toggle between pipelines and tests, and search, filter, and analyze each type of data. Narrow down results by specific levels of aggregation:
 
 - **Pipelines**: Pipeline, Stage, Job, Step, or Command
 - **Tests**: Session, Module, Suite, or Test
@@ -36,17 +36,17 @@ Browse pipeline executions and test runs from a single view in the [CI/CD {{< ui
 
 ### Flaky Management
 
-Get a high-level view of flakiness across your repositories in the {{< ui >}}Flaky Management Overview{{< /ui >}}. This page provides trend charts, prioritization suggestions, and tooling to validate your setup.
+Get a high-level view of flakiness across your repositories in the [{{< ui >}}Flaky Management Overview{{< /ui >}}][2]. This page provides trend charts, prioritization suggestions, and tooling to validate your setup.
 
 {{< img src="cicd_optimization/flaky_overview-2.png" alt="Flaky Management overview with trend charts and prioritization suggestions" style="width:100%;" >}}
 
-Track and remediate flaky tests directly from the {{< ui >}}Flaky Management Explorer{{< /ui >}}. You can view flaky test trends, identify problematic tests, and take action to improve test reliability. See [Flaky Tests Management][5] for more information.
+Track and remediate flaky tests directly from the {{< ui >}}Flaky Management Explorer{{< /ui >}}. You can view flaky test trends, identify problematic tests, and take action to improve test reliability.
 
 {{< img src="cicd_optimization/flaky_management-2.png" alt="Flaky Management interface showing flaky test trends and actions" style="width:100%;" >}}
 
 ### Continuous setup flow
 
-Set up CI/CD Optimization for a repository in one continuous, guided process. After [connecting your CI provider][6] to Datadog, continue directly to the next step to [set up the test suite][7] you want to monitor.
+Set up CI/CD Optimization for a repository in one continuous, guided process. After [connecting your CI provider][3] to Datadog, continue directly to the next step to [set up the test suite][4] you want to monitor.
 
 {{< img src="cicd_optimization/setup_flow.png" alt="Continuous setup flow for CI provider and test suite" style="width:90%;" >}}
 
@@ -55,7 +55,6 @@ Set up CI/CD Optimization for a repository in one continuous, guided process. Af
 {{< whatsnext desc="Get started with CI/CD Optimization:" >}}
     {{< nextlink href="/continuous_integration/pipelines/" >}}CI Pipeline Setup{{< /nextlink >}}
     {{< nextlink href="/tests/setup/" >}}Test Suite Setup{{< /nextlink >}}
-    {{< nextlink href="/cicd/overview/" >}}Overview{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/explorer/" >}}Explorer{{< /nextlink >}}
     {{< nextlink href="/tests/flaky_management/" >}}Flaky Test Management{{< /nextlink >}}
     {{< nextlink href="/cicd/features/" >}}Features{{< /nextlink >}}
@@ -68,11 +67,7 @@ Set up CI/CD Optimization for a repository in one continuous, guided process. Af
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/
-[2]: /tests/
-[3]: /continuous_integration/explorer/
-[4]: /tests/explorer/
-[5]: /tests/flaky_management/
-[6]: /continuous_integration/pipelines/
-[7]: /tests/setup/
-[8]: /cicd/overview/
+[1]: /continuous_integration/explorer/
+[2]: /tests/flaky_management/
+[3]: /continuous_integration/pipelines/
+[4]: /tests/setup/

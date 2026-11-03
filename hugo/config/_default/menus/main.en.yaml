@@ -6081,11 +6081,6 @@ menu:
       parent: cicd_pipeline_setup
       identifier: cicd_pipeline_custom
       weight: 110
-    - name: Automatic Job Retries
-      url: continuous_integration/pipelines/automatic_retries/
-      parent: cicd_pipeline_setup
-      identifier: cicd_pipeline_automatic_retries
-      weight: 111
     - name: Custom Commands
       url: continuous_integration/pipelines/custom_commands/
       parent: cicd_pipeline_setup
@@ -6176,11 +6171,6 @@ menu:
       parent: cicd_test_setup
       identifier: cicd_test_setup_containers
       weight: 211
-    - name: Overview
-      url: cicd/overview/
-      parent: cicd
-      identifier: cicd_overview
-      weight: 5
     - name: Explorer
       url: continuous_integration/explorer/
       parent: cicd
