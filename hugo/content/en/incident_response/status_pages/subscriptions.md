@@ -163,7 +163,7 @@ A subscription is **Active** while Datadog delivers updates to it. If Datadog ca
 
 ## RSS and Atom feeds
 
-Public status pages can publish their notice history as an RSS 2.0 or Atom feed. Visitors subscribe in any feed reader and receive new notices and updates. Feeds are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+Public status pages can publish their notice history as an RSS 2.0 or Atom feed. Visitors subscribe in any feed reader and receive new notices and updates.
 
 Feeds are available on public status pages only.
 
