@@ -11,5 +11,6 @@ Explore the features that help you optimize your CI pipelines and testing proces
     {{< nextlink href="/tests/flaky_tests/auto_test_retries/" >}}Auto Test Retries{{< /nextlink >}}
     {{< nextlink href="/tests/test_impact_analysis/" >}}Test Impact Analysis{{< /nextlink >}}
     {{< nextlink href="/tests/test_parallelization/" >}}Test Parallelization{{< /nextlink >}}
+    {{< nextlink href="/tests/developer_workflows/" >}}Enhance Developer Workflows with Test Optimization{{< /nextlink >}}
     {{< nextlink href="/cicd/features/legacy/" >}}Legacy Features{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -33,8 +33,4 @@ This section contains guides for optimizing your CI pipelines and tests. The gui
     {{< nextlink href="/tests/guides/setup_new_flaky_pr_gate" >}}Set up a New Flaky Test PR Gate{{< /nextlink >}}
     {{< nextlink href="/tests/guides/validate_optimizations" >}}Validate Optimizations{{< /nextlink >}}
     {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing Test Runs in Test Optimization{{< /nextlink >}}
-    {{< nextlink href="/tests/browser_tests" >}}Instrument Browser Tests with RUM{{< /nextlink >}}
-    {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with RUM{{< /nextlink >}}
-    {{< nextlink href="/tests/correlate_logs_and_tests" >}}Correlate Logs and Tests{{< /nextlink >}}
-    {{< nextlink href="/tests/developer_workflows/" >}}Enhance Developer Workflows with Test Optimization{{< /nextlink >}}
 {{< /whatsnext >}}

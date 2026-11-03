@@ -6171,6 +6171,21 @@ menu:
       parent: cicd_test_setup
       identifier: cicd_test_setup_containers
       weight: 211
+    - name: Correlate Logs and Tests
+      url: tests/correlate_logs_and_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_correlate_logs
+      weight: 212
+    - name: Browser Tests with RUM
+      url: tests/browser_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_browser_tests
+      weight: 213
+    - name: Swift Tests with RUM
+      url: tests/swift_tests/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift_tests
+      weight: 214
     - name: Explorer
       url: continuous_integration/explorer/
       parent: cicd
@@ -6311,11 +6326,16 @@ menu:
       parent: cicd_features_parallelization
       identifier: cicd_features_parallelization_troubleshooting
       weight: 60404
+    - name: Developer Workflows
+      url: tests/developer_workflows/
+      parent: cicd_features
+      identifier: cicd_features_developer_workflows
+      weight: 605
     - name: Legacy Features
       url: cicd/features/legacy/
       parent: cicd_features
       identifier: cicd_features_legacy
-      weight: 605
+      weight: 606
     - name: Monitors
       url: monitors/types/ci/?tab=pipelines
       parent: cicd
