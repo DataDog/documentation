@@ -54,7 +54,7 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
-**Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the {{< ui >}}Edit{{< /ui >}} button for a metric in the Metrics Catalog.
+**Note:** To manage tags on a metric, the metric must have a declared type. The type is typically declared when the metric is submitted, but you can also set it manually with the {{< ui >}}Edit{{< /ui >}} button for the metric on the Metrics Catalog page.
 
 #### Use the API
 

@@ -42,7 +42,7 @@ To see only custom metrics, filter the list with the {{< ui >}}Metric Category{{
 The usage graphs at the top of the Metrics Catalog page show your account's estimated custom metrics usage in real time. The graphs display different billing dimensions depending on your pricing model:
 
 - **Cardinality pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
-- **Metric Name Pricing**: Your account's estimated unique metric names, indexed points, and the ratio of ingested to indexed points. For more information, see the [Metrics Experience Changes for Metric Name Pricing][41] guide.
+- **Metric Name Pricing**: Your account's estimated unique metric names, billable indexed point volume, and ingested-to-indexed points ratio. For more information, see the [Metrics Experience Changes for Metric Name Pricing][41] guide.
 
 To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
 
@@ -145,7 +145,7 @@ To download the metrics table, click the download icon ({{< ui >}}Download as CS
 Use the {{< ui >}}Change in Volume{{< /ui >}} column to compare a metric name's number of indexed custom metrics (its cardinality) over time. A single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][42].
 
 To compare your spiking metric's cardinality over time:
-1. Select a time frame in the top-right corner of the page. The recommended time frame is {{< ui >}}Past 1 Day{{< /ui >}} or {{< ui >}}Past 4 Weeks{{< /ui >}}.
+1. Select a time frame in the top-right corner of the page. Datadog recommends {{< ui >}}Past 1 Day{{< /ui >}} or {{< ui >}}Past 4 Weeks{{< /ui >}}.
 2. In the row for the metric whose cardinality you want to view, click the value in the {{< ui >}}Change in Volume{{< /ui >}} column. A popover opens with a graph comparing your metric's cardinality over time and the percentage increase in its spike.
 3. (Optional) Create a Change monitor for `% change` to alert on this spiking metric. For more information, see the [Change Alert Monitor][43] documentation.
 

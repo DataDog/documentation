@@ -92,7 +92,7 @@ To identify which team or service is responsible for your top custom metric name
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
 1. Click the {{< ui >}}Custom Metrics{{< /ui >}} tab to view your organization's billable usage, usage trends, and top custom metrics.
-1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This takes you to the *Metrics Catalog* page with the metric details side panel open.
+1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This opens the metric's details side panel on the Metrics Catalog page.
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
 #### View your team's custom metrics
@@ -197,7 +197,7 @@ In this section, learn about how to:
 - Alert when a particular metric's cardinality exceeds a user-defined threshold or anomalously spikes
 After you have an understanding of your account's metric usage and the teams responsible for those costs, build monitors to alert you when your custom metrics usage exceeds a certain threshold. Get alerts on spikes in custom metric usage, so you can prevent unintentional bill spikes.
 
-Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. You can use these metrics in your dashboard visualizations and monitor alerts. 
+Datadog offers OOTB metrics that measures [estimated custom metrics usage][19]. You can use these metrics in your dashboard visualizations and monitor alerts. 
 
 | Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
@@ -211,7 +211,7 @@ Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. 
 You can also see a breakdown of your realtime estimated custom metrics usage by metric name with either the dashboard timeseries widget, or a metric monitor. Use the `datadog.estimated_usage.metrics.custom.by_metric` metric to build a monitor so you can always have up-to-date visibility into each of your metric names' volumes. 
 
 ### Additional monitoring use cases
-After you've received an alert, use the Metrics Catalog page to inspect any spiking metrics' tag keys and use Metrics without Limits™ to immediately drop any anomalous tag keys that are causing your metric to spike. This helps you resolve unintentional billing spikes.
+After you receive an alert, use the Metrics Catalog page to inspect the tag keys of any spiking metric. Then use Metrics without Limits™ to unindex the anomalous tag keys that are causing the spike. This helps you resolve unintentional billing spikes.
 {{< whatsnext desc="Additional use cases to build monitors for with the estimated usage metrics:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
@@ -246,3 +246,4 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 [16]: /metrics/catalog/#facet-panel
 [17]: https://tour.datadoghq.com/psl/swa0y11
 [18]: /metrics/guide/tag-indexing-rules/
+[19]: /account_management/billing/usage_metrics/

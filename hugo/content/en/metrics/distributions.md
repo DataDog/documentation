@@ -48,7 +48,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
-However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Catalog page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
+However, on the Metrics Catalog page, you can enable advanced query functionality for your distribution, such as the calculation of globally accurate percentile aggregations for all queryable tags. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also adds support for threshold queries and standard deviation queries.
 
 {{< img src="metrics/distributions/metric_detail_enable_percentiles.mp4" alt="A user enabling advanced percentiles and threshold query functionality by clicking on configure under the advanced section of a metric detail panel" video=true width=80% >}}
 
