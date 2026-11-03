@@ -11,19 +11,19 @@ further_reading:
   tag: 외부 사이트
   text: Collector 설명서
 - link: /opentelemetry/config/log_collection
-  tag: 설명서
+  tag: 문서
   text: 로그 수집 설정
 - link: /opentelemetry/config/collector_batch_memory
-  tag: 설명서
+  tag: 문서
   text: 메모리 제한 구성
 - link: /opentelemetry/config/otlp_receiver
-  tag: 설명서
+  tag: 문서
   text: OTLP 수신기 활성화
 - link: /opentelemetry/setup/ddot_collector/install/
-  tag: 설명서
+  tag: 문서
   text: DDOT Collector 설치(권장)
 - link: /opentelemetry/compatibility/
-  tag: 설명서
+  tag: 문서
   text: 기능 호환성
 - link: https://www.datadoghq.com/architecture/opentelemetry-collector-in-kubernetes/
   tag: 아키텍처 센터
@@ -36,7 +36,7 @@ title: OpenTelemetry Collector 설정
 OpenTelemetry Collector를 사용하여 Datadog으로 트레이스, 메트릭, 로그를 전송하세요. 이 페이지의 구성은 OpenTelemetry Collector Contrib 배포판 v0.154.0에서 테스트되었으며, 다음 주요 구성 요소를 포함하는 OTLP 기반 텔레메트리 파이프라인을 사용합니다.
 
 - **OTLP HTTP 익스포터**: Datadog의 OTLP 수집 엔드포인트로 텔레메트리를 전송합니다.
-- **스팬 메트릭 커넥터**: 트레이스 데이터에서 RED(Rate, Error, Duration) 메트릭을 생성하여 Service Catalog 및 Service Page와 같은 APM 기능을 지원합니다.
+- **스팬 메트릭 커넥터**: 트레이스 데이터에서 RED(Rate, Error, Duration) 메트릭을 생성하여 Catalog 및 Service Page와 같은 APM 기능을 지원합니다.
 - **리소스 탐지 프로세서**: 호스트 및 클라우드 리소스 속성을 탐지하며, Datadog은 이러한 속성을 호스트 이름 확인 및 태깅에 사용합니다.
 - **Datadog 확장 프로그램**: Fleet Automation을 위해 Collector의 구성을 Datadog에 보고합니다. 텔레메트리 데이터는 내보내지 않습니다.
 
@@ -928,7 +928,7 @@ GKE Autopilot 및 AKS Automatic은 호스트 포트를 허용하지 않습니다
 
 ### 스팬 메트릭 커넥터 {#span-metrics-connector}
 
-`span_metrics` 커넥터는 트레이스 데이터에서 RED 메트릭을 생성합니다. 이러한 메트릭은 Service Catalog, Service Page 및 Resource Page를 포함한 APM 기능을 지원합니다. 이 커넥터는 Datadog이 트레이스에서 호스트 태그, 피어 서비스 및 작업 이름을 계산하도록 지원하는 차원으로 구성됩니다.
+`span_metrics` 커넥터는 트레이스 데이터에서 RED 메트릭을 생성합니다. 이러한 메트릭은 Catalog, Service Page 및 Resource Page를 포함한 APM 기능을 지원합니다. 이 커넥터는 Datadog이 트레이스에서 호스트 태그, 피어 서비스 및 작업 이름을 계산하도록 지원하는 차원으로 구성됩니다.
 
 [Collector 구성 및 배포](#2-configure-and-deploy-the-collector)의 각 환경별 구성에는 전체 `span_metrics` 커넥터 블록이 포함되어 있습니다. Datadog이 필요한 호스트 태그, 피어 서비스, 작업 이름 및 리소스 이름을 파생할 수 있도록 구성을 조정할 때 모든 차원을 유지하세요.
 
