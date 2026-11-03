@@ -2116,8 +2116,6 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 
 Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
 
-<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
-
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
 *Permissions Required: `Observability Pipelines Read`*\
@@ -3133,6 +3131,15 @@ Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog s
 - Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
 - Get the data for tab "Pivot 1" in spreadsheet "ABC".
 - Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `move_datadog_spreadsheet_tab`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Moves a tab to a new position in a Datadog spreadsheet. The tab is placed after a specified tab, or becomes the first tab if no tab is specified. To reorder multiple tabs, the tool moves one tab at a time, from the first position to the last. Use `get_datadog_spreadsheet` first to find tab IDs and types.
+
+- Move tab "Pivot 1" to the front of spreadsheet "ABC".
+- Move table "Table 2" after sheet "Sheet 1" in spreadsheet "ABC".
+- Reorder the tabs in spreadsheet "ABC" alphabetically.
 
 ### `delete_datadog_spreadsheet`
 *Toolset: **sheets***\

@@ -8,7 +8,7 @@ further_reading:
   tag: Documentación
   text: Habilitar métricas de tiempo de ejecución
 - link: https://www.datadoghq.com/blog/single-step-instrumentation-rules/
-  tag: blog
+  tag: Blog
   text: Administre el rastreo de servicios entre servidores con reglas de instrumentación
     de Single Step
 title: Instrumentación de Single Step APM en Linux
@@ -143,6 +143,8 @@ Para actualizar las versiones del SDK:
 {{< /site-region >}}
 
 Las reglas de instrumentación (disponibles para el Agent v7.73+) le permiten controlar qué procesos son instrumentados automáticamente por SSI en servidores Linux.
+
+**Nota**: Puede usar Bits AI para crear reglas de instrumentación con lenguaje natural. Describa qué procesos desea instrumentar y Bits AI generará la regla correspondiente.
 
 Para configurar las reglas de instrumentación:
 

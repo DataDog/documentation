@@ -62,39 +62,7 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 
 ### Configure multiple metrics at a time
 
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify the metrics to be configured, click {{< ui >}}Configure Metrics{{< /ui >}}, then {{< ui >}}Manage Tags{{< /ui >}}* on the Metrics Summary page. Select the metric or metric namespace you want to configure, then choose to do either of the following:
-   - [Allow all tags](#allow-all-tags) to override any previous tag configurations and make all tags queryable.
-   - [Include or exclude tags](#include-or-exclude-tags) to define queryable and non-queryable tags, respectively.
-
-#### Allow all tags
-
-{{< img src="metrics/bulk_allow_all_tags.png" alt="The Manage Tags option with Allow all tags selected in the Configure tags section" style="width:100%" >}}
-
-This option is selected by default, and overrides previously set tag configurations to make all tags queryable.
-
-#### Include or exclude tags
-
-When selecting tags to include or exclude, choose to either [override existing tag configurations](#override-existing-tag-configurations) or [keep existing tag configurations](#keep-existing-tag-configurations).
-
-##### Override existing tag configurations
-
-{{< img src="metrics/bulk_include_tags.png" alt="The Manage Tags option with Include tags and Override selected in the Configure tags section. The options to include tags actively queried on dashboards and monitors from the past 90 days and Specific tags are selected" style="width:100%" >}}
-
-All existing tag configurations for the selected metrics are overridden, and you define a new tag configuration. This allows you to make all tags queryable on all metric names. If you are choosing to {{< ui >}}include tags{{< /ui >}}, you can select to include either or both of the following:
-   - Tags actively queried in Datadog from the past 30, 60, or 90 days.
-   - A specific set of tags that you define.
-
-##### Keep existing tag configurations
-
-{{< img src="metrics/bulk_exclude_tags.png" alt="The Manage Tags option with Exclude tags and Keep selected in the Configure tags section" style="width:100%" >}}
-
-Existing tag configurations are retained, and you define new tags to be added to the configuration.
-
-#### Use the API
-
-You can [configure][13] and [delete][14] tags for multiple metrics through the API.
-
-**Note**: Use the `include_actively_queried_tags_window` attribute to include only tags actively queried within a given time frame.
+To configure tags on many metrics at once, use [Tag Indexing Rules][16]. A tag rule applies an allowlist or blocklist of tags to every metric that matches a metric name or prefix, including metrics submitted after you create the rule.
 
 ## Metrics without Limits™ billing
 
@@ -121,7 +89,7 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 ## Getting started with Metrics without Limits™
 
 1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Summary page or by using the [API][2].
-   You can use bulk metric configuration (`*` syntax) to configure tags on multiple metrics. Datadog notifies you when the bulk configuration job is completed.
+   To configure tags on many metrics at once, create a [Tag Indexing Rule][16] scoped to a metric name prefix.
 
 **Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
@@ -155,12 +123,10 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 [4]: /api/latest/metrics/#delete-a-tag-configuration
 [5]: /api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /metrics/#time-and-space-aggregation
-[7]: /metrics/summary/#configuration-of-multiple-metrics
 [8]: /account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics
 [12]: https://app.datadoghq.com/event/stream
-[13]: /api/latest/metrics/#configure-tags-for-multiple-metrics
-[14]: /api/latest/metrics/#delete-tags-for-multiple-metrics
 [15]: /account_management/billing/metric_name_pricing/
+[16]: /metrics/guide/tag-indexing-rules/
