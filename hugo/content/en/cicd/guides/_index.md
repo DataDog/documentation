@@ -29,12 +29,12 @@ This section contains guides for optimizing your CI pipelines and tests. The gui
 ## Test Optimization Guides
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/tests/guides/add_custom_measures" >}}Add custom measures to your tests{{< /nextlink >}}
-    {{< nextlink href="/tests/guides/setup_new_flaky_pr_gate" >}}Set up a new Flaky Test PR Gate{{< /nextlink >}}
-    {{< nextlink href="/tests/guides/validate_optimizations" >}}Validate optimizations{{< /nextlink >}}
+    {{< nextlink href="/tests/guides/add_custom_measures" >}}Add Custom Measures to Your Tests{{< /nextlink >}}
+    {{< nextlink href="/tests/guides/setup_new_flaky_pr_gate" >}}Set up a New Flaky Test PR Gate{{< /nextlink >}}
+    {{< nextlink href="/tests/guides/validate_optimizations" >}}Validate Optimizations{{< /nextlink >}}
     {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing test runs in Test Optimization{{< /nextlink >}}
     {{< nextlink href="/tests/browser_tests" >}}Instrument Browser tests with RUM{{< /nextlink >}}
     {{< nextlink href="/tests/swift_tests" >}}Instrument Swift tests with RUM{{< /nextlink >}}
-    {{< nextlink href="/tests/correlate_logs_and_tests" >}}Correlate logs and tests{{< /nextlink >}}
+    {{< nextlink href="/tests/correlate_logs_and_tests" >}}Correlate Logs and Tests{{< /nextlink >}}
     {{< nextlink href="/tests/developer_workflows/" >}}Enhance developer workflows with Test Optimization{{< /nextlink >}}
 {{< /whatsnext >}}
