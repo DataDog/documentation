@@ -113,7 +113,7 @@ Cost values are in nanodollars. Divide the cost total by 1,000,000,000 to conver
 
 `ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` are distributions with one total observation per applicable span. Use those metrics for per-span averages and percentiles.
 
-`ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` partition available totals into additive contributions. Sum these contributions for the same spans and filters to recover the corresponding totals. Use one metric family per calculation to avoid counting the same usage twice.
+`ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` break down cost and token usage by category. Sum across categories to get totals. To avoid double counting, use either these metrics or the corresponding `.total.*` metrics in each calculation.
 
 ### Trace metrics
 
