@@ -815,7 +815,7 @@ Agent versions `v7.75` to `v7.85` use a different list, in this order: `https://
 
 In Agent `v7.82+`, you can turn off source public IP resolution. Tests still run and paths are still collected, without the source public IP and the source's location and network provider details.
 
-- For dynamic tests, both standard and basic, set the following in `datadog.yaml`, or set the environment variable `DD_NETWORK_PATH_COLLECTOR_DISABLE_SOURCE_PUBLIC_IP_COLLECTION` to `"true"`:
+- For [dynamic tests](#dynamic-tests) (standard and basic) and [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental), set the following in `datadog.yaml`, or set the environment variable `DD_NETWORK_PATH_COLLECTOR_DISABLE_SOURCE_PUBLIC_IP_COLLECTION` to `"true"`:
 
   ```yaml
   network_path:
