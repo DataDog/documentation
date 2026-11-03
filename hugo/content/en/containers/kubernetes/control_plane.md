@@ -330,26 +330,12 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### Prerequisites
 
-1. Datadog Operator >= `v1.18.0`
+1. Datadog Operator >= `v1.29.0`
 1. Datadog Agent >= `v7.69`
 
 #### General setup
 
-Control plane monitoring is enabled by default, but requires introspection to be enabled.
-
-You can enable introspection using the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
-introspection:
-  enabled: true
-{{< /code-block >}}
-
-Using the command line:
-```shell
-helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
-```
-
-Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+The Operator detects EKS from the node labels and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
 
 {{% /tab %}}
 
@@ -462,36 +448,14 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### Prerequisites
 
-1. Datadog Operator >= `v1.18.0`
+1. Datadog Operator >= `v1.29.0`
 1. Datadog Agent >= `v7.69`
 
 **Note**: `etcd` is not supported on versions 4.0-4.13.
 
 #### General setup
 
-Control plane monitoring is enabled by default, but requires introspection to be enabled.
-
-You can enable introspection using the [datadog-operator Helm chart][12]:
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
-introspection:
-  enabled: true
-{{< /code-block >}}
-
-Using the command line:
-```shell
-helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
-```
-
-Or, for **OpenShift users** who installed the operator through OperatorHub/Marketplace (the [recommended method](install-openshift.md)), by patching the operator cluster service version:
-
-```shell
-oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
-  --type='json' \
-  -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
-```
-
-Since this feature is enabled by default, you can deploy a minimal DatadogAgent spec.
+The Operator detects OpenShift from the `node.openshift.io/os_id` node label and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
 
 Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
 
@@ -503,7 +467,6 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
   oc apply -f -
 ```
 
-[12]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -916,7 +879,11 @@ Both the Datadog Operator and Helm support Talos Linux.
 
 Datadog Operator support for Talos starts at version 1.31.0, where the Operator detects Talos automatically from the node's OS image. On earlier Operator versions, use Helm.
 
-Version 1.32.0 or later also configures control plane monitoring for you. On versions 1.31.0 through 1.31.x, configure the checks manually. Take the check definitions from the Helm tab in the [Etcd](#TalosEtcd) and Controller Manager and Scheduler sections, mount them with `override.nodeAgent.extraConfd`, and add the control-plane toleration and the etcd certificate volume. Mask the Agent's bundled `etcd`, `kube_scheduler`, and `kube_controller_manager` configurations with empty volumes, as the Datadog Operator tab in [Kubernetes with Kubeadm](#Kubeadm) does for `etcd`. Without the masking, the Agent collects each check twice.
+Datadog Operator version 1.32.0 or later also configures control plane monitoring for you. On versions 1.31.0 through 1.31.x, configure the checks manually:
+
+1. Take the check definitions from the Helm tab in the [Etcd](#TalosEtcd) and Controller Manager and Scheduler sections, and mount them with `override.nodeAgent.extraConfd`.
+1. Add the control-plane toleration and the etcd certificate volume.
+1. Mask the Agent's bundled `etcd`, `kube_scheduler`, and `kube_controller_manager` configurations with empty volumes, as the Datadog Operator tab in [Kubernetes with Kubeadm](#Kubeadm) does for `etcd`. Without the masking, the Agent collects each check twice.
 
 With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
 
