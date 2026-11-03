@@ -62,6 +62,15 @@ Some Observability Pipelines components require setting up environment variables
 
 ### Splunk TCP
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
+- Maximum frame length (optional):
+    - The maximum frame length, in bytes, for an event. By default, there is no limit.
+    - The environment variable is `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH`.
+- TCP keepalive idle time (optional):
+    - The number of seconds a connection can be idle before the Worker sends a TCP keepalive probe. Defaults to `60`.
+    - The environment variable is `DD_OP_SPLUNK_TCP_KEEPALIVE_TIME_SECS`.
+- Connection limit (optional):
+    - The maximum number of connections to the source. If unset or set to `0`, there is no limit.
+    - The environment variable is `DD_OP_SPLUNK_TCP_CONNECTION_LIMIT`.
 
 ### Sumo Logic
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
