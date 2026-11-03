@@ -57,7 +57,7 @@ A shorter aggregation window frees memory sooner, which can help high-throughput
 
 Increase the aggregation window gradually and monitor the Worker's memory usage. See [Process metrics][5] for the Worker memory metrics.
 
-**Note**: The `DD_OP_REDUCE_WINDOW_SECS` environment variable is available for Worker versions 2.25.0 or later.
+**Note**: The `DD_OP_REDUCE_WINDOW_SECS` environment variable requires Worker version 2.25.0 or later.
 
 ## Health metrics
 
