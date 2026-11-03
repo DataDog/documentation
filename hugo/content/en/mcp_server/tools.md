@@ -545,13 +545,15 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-**Note**: Bits Chat can propose changes to some Datadog resources and ask for confirmation before making them. For direct resource changes, use the specific product toolset, such as `dashboards` or `alerting`.
+**Note**: The `chat` toolset does not provide direct tools to create, edit, or delete Datadog resources. In some configurations, Bits Chat can propose a change and ask for approval before applying it. For direct resource changes, use the specific product toolset, such as `dashboards` or `alerting`.
 
 ### `send_message_to_chat`
 
 *Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
 Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
+
+Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
 
 - Ask Bits Chat what's causing the latency spike on the checkout service.
 - Continue conversation `abc-123-def` and ask Bits Chat for next steps.
@@ -3684,6 +3686,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
+[99]: /account_management/billing/ai_credits/
 
 ## Further reading
 
