@@ -19,7 +19,7 @@ Database Monitoring Role Observability is in open preview. APIs may change befor
 
 ## Overview
 
-Role Observability shows who can access your PostgreSQL data and how they got that access, without connecting to the database or querying system catalogs yourself. Datadog collects role and privilege information from each monitored instance on a 10 second interval and resolves it into a view of effective access, surfacing the relationships, inheritance, and membership behind every grant.
+Role Observability shows who can access your PostgreSQL data and how they got that access, without connecting to the database or querying system catalogs yourself. Datadog collects role and privilege information from each monitored instance on a configurable interval (10 minutes by default) and resolves it into a view of effective access, surfacing the relationships, inheritance, and membership behind every grant.
 
 This page explains how to:
 
@@ -47,7 +47,7 @@ curl -X GET "{{< region-param key="dd_api" >}}/api/unstable/TODO_endpoint" \
   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
 ```
 
-The application key must belong to a user or service account with the **Database Monitoring Read** permission.
+The application key must belong to a user or service account with the [**Database Monitoring Read**][1] permission.
 
 | Parameter | Description |
 | --------- | ----------- |
@@ -80,9 +80,9 @@ TODO: Add a short example of what an agent interaction looks like (for example, 
 
 Role Observability answers questions about who can access your Postgres data. It does not cover other engines, row-filtering policies, or data sensitivity.
 
-- **PostgreSQL only.** Role Observability supports Postgres 12 through 18. Other database engines are not covered.
-- **Scope is per monitored database.** Each view is scoped to a single database monitored by Database Monitoring. Cross-database and cross-instance queries are not supported.
-- **Data refreshes every 10 seconds.** Role and privilege changes made between refresh intervals are not visible until the next collection cycle.
+- **PostgreSQL only.** Other database engines are not covered.
+- **Scope is per monitored database.** Each view is scoped to a single database monitored by Database Monitoring. There is no single API call to compare roles or privileges across instances. To compare two instances, use the MCP server and ask a coding agent to fetch and diff the data.
+- **Data refreshes on an interval (default 10 minutes).** Role and privilege changes made between refresh intervals are not visible until the next collection cycle. The interval is configurable in the Agent configuration.
 - **Row-level security is not surfaced.** Policies defined with `CREATE POLICY` are not included. Role Observability reflects grant-level access only.
 - **No data sensitivity classification.** Role Observability shows access to database objects. It does not describe the sensitivity of the data those objects contain. Pair it with a data classification tool to identify who can read sensitive columns or tables.
 - **APIs may change.** The feature is in open preview, so endpoint shapes, parameter names, and response formats can change before general availability.
@@ -91,6 +91,7 @@ Role Observability answers questions about who can access your Postgres data. It
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /account_management/rbac/permissions/#database-monitoring
 [2]: /mcp_server/
 [3]: /database_monitoring/
 [4]: /mcp_server/setup/
