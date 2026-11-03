@@ -143,7 +143,9 @@ When a rollout pauses for a selected flag and environment, the workflow sends a 
 - **Conditions:** Select the flags and environments that require review.
 - **Action:** Send a message with the flag name and `{{Source.featureFlag.changedBy.name}}` so reviewers know who requested the change.
 
-### Report approval decisions
+<!-- vale Datadog.headings = NO -->
+### Example: Report approval decisions
+<!-- vale Datadog.headings = YES -->
 
 - **Event:** Feature Flag Approval Reviewed.
 - **Conditions:** Select the flags and environments to monitor.
@@ -235,4 +237,4 @@ Click the delete icon on the automation's list entry and confirm with {{< ui >}}
 [12]: /actions/workflows/variables/#source-object-variables
 [13]: /actions/actions_catalog/
 [14]: /actions/workflows/test_and_debug/
-[15]: /actions/workflows/trigger/#datadog-feature-flags-triggers
+[15]: /actions/workflows/trigger/#feature-flags-triggers

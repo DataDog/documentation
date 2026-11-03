@@ -109,7 +109,7 @@ To add an incident trigger to your workflow:
 1. Click {{< ui >}}Create{{< /ui >}}.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-## Datadog feature flags triggers
+## Feature flags triggers
 
 A Datadog Feature Flags trigger starts a workflow automatically when flag events occur. Events include flag creation, configuration changes, rollout progress, and approval requests or reviews. For example, notify a Slack channel when a rollout pauses or a flag is disabled.
 
