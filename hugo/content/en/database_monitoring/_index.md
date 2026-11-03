@@ -49,16 +49,19 @@ cascade:
 ---
 
 
+<!-- vale Datadog.sentencelength = NO -->
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Database">}}
-  With Database Monitoring, learn how to quickly pinpoint costly and slow queries. Drill into precise execution details to address bottlenecks.
+  With Database Monitoring, learn how to pinpoint costly and slow queries. Examine precise execution details to address bottlenecks.
 {{< /learning-center-callout >}}
+<!-- vale Datadog.sentencelength = YES -->
 
-Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
+Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Explore historical query performance metrics, explain plans, and host-level metrics together. Use these insights to understand database health and performance and troubleshoot issues.
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **MariaDB**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **MariaDB**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. It also supports self-hosted **IBM Db2**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
+<!-- vale Datadog.sentencelength = NO -->
 ### Postgres
 
 {{< card-grid >}}
@@ -85,7 +88,9 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< /card-grid >}}
 <p></p>
 
+<!-- vale Datadog.headings = NO -->
 ### MariaDB
+<!-- vale Datadog.headings = YES -->
 
 {{< card-grid card_width="130px">}}
   {{< image-card href="/database_monitoring/setup_mariadb/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
@@ -129,7 +134,9 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< /card-grid >}}
 <p></p>
 
+<!-- vale Datadog.headings = NO -->
 ### ClickHouse
+<!-- vale Datadog.headings = YES -->
 
 {{< card-grid >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
@@ -137,13 +144,24 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< /card-grid >}}
 <p></p>
 
+<!-- vale Datadog.headings = NO -->
+### IBM Db2
+<!-- vale Datadog.headings = YES -->
+
+{{< card-grid >}}
+  {{< image-card href="/database_monitoring/setup_db2/selfhosted" src="integrations_logos/ibm_db2.png" alt="Self-hosted" title="Self-hosted" >}}
+{{< /card-grid >}}
+<p></p>
+
+<!-- vale Datadog.sentencelength = YES -->
+
 ## Explore Datadog Database Monitoring
 
 Navigate to [Database Monitoring][1] in Datadog.
 
 ### Dig into query performance metrics
 
-The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and set alerts for anomalies.
+The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as data center availability zone, and set alerts for anomalies.
 
 - Identify slow queries and which queries are consuming the most time.
 - Show database-level metrics not captured by APM such as rows updated/returned.
@@ -173,11 +191,11 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 
 ### Collect custom metrics
 
-Use [`custom_queries`][7] to collect metrics from your own database tables — application state, business counters, queue depths, or any data you want correlated with query performance.
+Use [`custom_queries`][7] to collect metrics from your own database tables—application state, business counters, queue depths, or any data you want correlated with query performance.
 
 ### Visualize everything on enriched dashboards
 
-Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the {{< ui >}}Dashboards{{< /ui >}} link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
+Pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the {{< ui >}}Dashboards{{< /ui >}} link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
@@ -196,9 +214,11 @@ The [Recommendations page][6] highlights problems and optimization opportunities
 
 ## Further Reading
 
-{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+<!-- vale Datadog.sentencelength = NO -->
+{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to identify inefficiencies and optimize your Postgres database.
 {{< /learning-center-callout >}}
+<!-- vale Datadog.sentencelength = YES -->
 
 {{< partial name="whats-next/whats-next.html" >}}
 
