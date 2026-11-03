@@ -261,7 +261,7 @@ Grant access to specific IPs and/or CIDR among IP ranges blocked through `--enab
 `--blockedIPRanges`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `--enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.)
+Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges blocked when setting the `--enableDefaultBlockedIpRanges` parameter to `true` (for example, `--blockedIPRanges.4="127.0.0.0/8" --blockedIPRanges.6="::1/128"`.) An allowed domain name, set with the `--allowedDomainNames` parameter, bypasses the IP ranges blocked by `--blockedIPRanges`.
 
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
