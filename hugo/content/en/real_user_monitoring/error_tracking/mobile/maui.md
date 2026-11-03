@@ -297,7 +297,7 @@ For one or more assemblies, none of the PDB files found matches the assembly the
 **C# frames show method names but no file names or line numbers**
 Confirm that the publish summary reports the Portable PDB upload as `uploaded`, and that the frames belong to one of your app's assemblies. See [C# assemblies without Portable PDBs](#c-assemblies-without-portable-pdbs). If the error was reported with `DdRum.AddError`, see [Manually reported errors](#manually-reported-errors).
 
-**iOS C# frames show the first line of the method instead of the line that threw**
+**iOS C# frames show the first line of the method instead of the line that threw**:
 iOS Release builds report C# frames without an IL offset. See [C# line numbers on iOS](#c-line-numbers-on-ios).
 
 **No Datadog output visible during publish**
