@@ -73,13 +73,13 @@ AI Guard authenticates every evaluation with a Datadog API key and application k
 
 Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate model traffic.
 
-AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values, and applies policies by service and environment. Use the same service name that the agent reports to APM. The AI Guard {{< ui >}}Discover{{< /ui >}} page lists the AI agent services in your organization and shows which ones AI Guard protects, matched by service name.
+AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values, and applies policies by service and environment. Use the same service name that the agent reports to APM. The AI Guard {{< ui >}}Discover{{< /ui >}} tab lists the AI agent services in your organization and shows which ones AI Guard protects, matched by service name.
 
 ### Find the agent language and libraries
 
 If you don't know which language or AI libraries an agent uses, check its APM service page.
 
-1. In Datadog, go to {{< ui >}}APM{{< /ui >}} and open the agent's service page.
+1. In {{< ui >}}APM{{< /ui >}}, open the agent's service page.
 1. Find the language icon next to the service name.
 1. Open the {{< ui >}}operation{{< /ui >}} dropdown. Operations such as `openai.request`, `anthropic.request`, `langchain.request`, or `litellm.request` show which AI libraries the agent calls.
 
@@ -124,7 +124,7 @@ Optionally restrict who can view AI Guard spans, because they can contain sensit
 
 You must have the {{< ui >}}User Access Manage{{< /ui >}} permission to complete this task.
 
-1. In Datadog, go to [Data Access Control][10] and create a restricted dataset scoped to {{< ui >}}APM data{{< /ui >}}.
+1. In {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Data Access Control{{< /ui >}}, create a restricted dataset scoped to {{< ui >}}APM data{{< /ui >}}.
 1. Apply the filter `resource_name:ai_guard`.
 1. Grant access to the dataset to specific roles or teams.
 
@@ -133,8 +133,9 @@ You must have the {{< ui >}}User Access Manage{{< /ui >}} permission to complete
 Confirm that AI Guard is evaluating agent traffic.
 
 1. Send several requests through the agent.
-1. In Datadog, go to {{< ui >}}Security > AI Guard > Discover{{< /ui >}}.
-1. Find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}, and its evaluations appear in the AI Guard {{< ui >}}Investigate{{< /ui >}} tab.
+1. In AI Guard, verify the setup:
+   - On the {{< ui >}}Discover{{< /ui >}} tab, find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}.
+   - On the {{< ui >}}Investigate{{< /ui >}} tab, confirm that the agent's evaluations appear.
 
 ### Troubleshooting: AI Guard spans don't appear
 
@@ -157,4 +158,3 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 [7]: /security/ai_guard/setup/sdk/
 [8]: /security/ai_guard/setup/http_api/
 [9]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
-[10]: https://app.datadoghq.com/organization-settings/data-access-controls/

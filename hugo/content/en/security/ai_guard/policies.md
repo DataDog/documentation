@@ -11,7 +11,7 @@ AI Guard policies decide what AI Guard identifies as unsafe and what happens to 
 
 Start with the default policy, then add custom policies for services and environments that need different settings.
 
-Manage AI Guard policies on the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} page. Creating and modifying policies requires the {{< ui >}}AI Guard Write{{< /ui >}} permission.
+Manage AI Guard policies on the AI Guard {{< ui >}}Policies{{< /ui >}} tab. Creating and modifying policies requires the {{< ui >}}AI Guard Write{{< /ui >}} permission.
 
 ## How AI Guard policies work
 
@@ -72,7 +72,7 @@ AI Guard assigns a confidence score to each attack category it detects. Sensitiv
 - **Lower** values are more aggressive. AI Guard flags threats even at low confidence, surfacing more potential attacks and more false positives.
 - **Higher** values are more lenient. AI Guard flags threats only at high confidence, reducing noise but potentially missing some attacks.
 
-Sensitivity is a percentage. The {{< ui >}}Policies{{< /ui >}} page and the policy editor label each value:
+Sensitivity is a percentage. The {{< ui >}}Policies{{< /ui >}} tab and the policy editor label each value:
 
 | Sensitivity | Label |
 | --- | --- |
@@ -82,7 +82,7 @@ Sensitivity is a percentage. The {{< ui >}}Policies{{< /ui >}} page and the poli
 | 51-74% | {{< ui >}}Lenient{{< /ui >}} |
 | 75-100% | {{< ui >}}Very lenient{{< /ui >}} |
 
-Policies can use one sensitivity for every attack category, or a separate sensitivity for each attack category. {{< ui >}}Customize by attack category{{< /ui >}} sets a separate value for each attack category, and the policy shows the label {{< ui >}}Custom{{< /ui >}}. Switching back to one value with {{< ui >}}Switch to general evaluation{{< /ui >}} discards the per-category values, and you can't undo the switch. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} page.
+Policies can use one sensitivity for every attack category, or a separate sensitivity for each attack category. {{< ui >}}Customize by attack category{{< /ui >}} sets a separate value for each attack category, and the policy shows the label {{< ui >}}Custom{{< /ui >}}. Switching back to one value with {{< ui >}}Switch to general evaluation{{< /ui >}} discards the per-category values, and you can't undo the switch. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
 
 ### Evaluation context
 
@@ -150,7 +150,7 @@ The default policy protects every onboarded service from the start, so editing t
 
 When a service or environment needs different settings, create a custom policy instead.
 
-1. On the [{{< ui >}}Policies{{< /ui >}}][1] page, open a policy:
+1. On the AI Guard {{< ui >}}Policies{{< /ui >}} tab, open a policy:
    - To edit the default policy, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Default policy{{< /ui >}} header.
    - To edit a custom policy, click the policy in the custom policies list.
    - To create a custom policy, click {{< ui >}}Add Custom Policy{{< /ui >}}. Under {{< ui >}}Scope{{< /ui >}}, select a {{< ui >}}Service{{< /ui >}} and an {{< ui >}}Environment{{< /ui >}}. To cover every service or every environment, select {{< ui >}}All{{< /ui >}} for that value. {{< ui >}}Service{{< /ui >}} and {{< ui >}}Environment{{< /ui >}} can't both be {{< ui >}}All{{< /ui >}}.
@@ -210,14 +210,13 @@ To keep one SDK call from raising `AIGuardAbortError` while the rest of the agen
 
 ### Alert on blocked requests
 
-Monitors on blocked requests tell your team when AI Guard blocks traffic for a service, without someone watching the {{< ui >}}Policies{{< /ui >}} page.
+Monitors on blocked requests tell your team when AI Guard blocks traffic for a service, without someone watching the {{< ui >}}Policies{{< /ui >}} tab.
 
-On the {{< ui >}}Policies{{< /ui >}} page, the {{< ui >}}Alerting{{< /ui >}} column has a {{< ui >}}Set up alerting{{< /ui >}} button for each custom policy. The button opens a Trace Analytics monitor with a query for blocked AI Guard spans in the policy scope, such as `@ai_guard.blocked:true service:<SERVICE> env:<ENV>`. Complete the alert conditions and notifications, then save the monitor. The default policy has no {{< ui >}}Set up alerting{{< /ui >}} button.
+On the {{< ui >}}Policies{{< /ui >}} tab, the {{< ui >}}Alerting{{< /ui >}} column has a {{< ui >}}Set up alerting{{< /ui >}} button for each custom policy. The button opens a Trace Analytics monitor with a query for blocked AI Guard spans in the policy scope, such as `@ai_guard.blocked:true service:<SERVICE> env:<ENV>`. Complete the alert conditions and notifications, then save the monitor. The default policy has no {{< ui >}}Set up alerting{{< /ui >}} button.
 
 For other AI Guard monitor queries, see [Alert on AI Guard activity with Datadog Monitors][8].
 
 
-[1]: https://app.datadoghq.com/security/ai-guard/policies
 [2]: /security/ai_guard/setup/manual_integrations/#evaluated-operations
 [3]: /security/ai_guard/setup/http_api/#evaluate-messages-with-the-http-api
 [4]: /security/ai_guard/setup/sdk/#per-call-blocking-options

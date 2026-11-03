@@ -112,7 +112,7 @@ AI Guard detects these attack categories:
 - Indirect prompt injection
 - Jailbreak
 
-The list of attack categories expands as AI Guard adds detections. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} page.
+The list of attack categories expands as AI Guard adds detections. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
 
 ## Integration methods
 
