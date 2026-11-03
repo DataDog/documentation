@@ -13,12 +13,12 @@ further_reading:
 title: Linux での Single Step APM インスツルメンテーション
 type: multi-code-lang
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 Linux ホストまたは VM 上では、APM 用の Single Step Instrumentation (SSI) を使用して Datadog Agent をインストールし、ワンステップで [アプリケーションをインスツルメント][4] します。追加の構成は不要です。
 
 {{< skill-callout
-    title="agent を使用して APM をセットアップする"
+    title="エージェントを使用して APM をセットアップする"
     text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
     action_name="copy_dd_apm_skill_install_cmd" >}}
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
@@ -26,7 +26,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ## アプリケーションで APM を有効にする {#enable-apm-on-your-applications}
 
-<div class="alert alert-info">続行する前に、<a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">続行する前に、SSI 互換性ガイド</a>を確認して、環境に互換性があることを確認してください。</div>
+<div class="alert alert-info">続行する前に、<a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 互換性ガイド</a>を確認して、環境に互換性があることを確認してください。</div>
 
 ### 新しい Agent インストール {#new-agent-installation}
 
@@ -142,6 +142,8 @@ SDK バージョンを更新するには、以下の手順を実行します。
 {{< /site-region >}}
 
 インスツルメンテーションルール (Agent v7.73 以降で利用可能) を使用すると、Linux ホスト上で SSI によって自動的にインスツルメンテーションされるプロセスを制御できます。
+
+**注**：Bits AIを使用して、自然言語でインスツルメンテーションルールを作成できます。どのプロセスをインスツルメンテーションするか記述してください。そうすると、Bits AIが対応するルールを生成します。
 
 インスツルメンテーションルールを構成するには、以下の手順を実行します。
 
