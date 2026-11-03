@@ -253,7 +253,7 @@ Use `metrics_to_add` and `metrics_to_remove` to change a rule's metric list with
 }
 {{< /code-block >}}
 
-#### Example response
+#### Example response body
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
