@@ -282,7 +282,7 @@ Export the key in your shell: `export DATADOG_API_KEY=<YOUR_DATADOG_API_KEY>`. V
 **`Skipping dSYM upload — file not found`**:
 dSYMs are only generated for device builds (`-r ios-arm64`). Simulator builds do not produce dSYMs. To upload Portable PDBs from a simulator build, see the iOS tab in [Enable the upload](#3-enable-the-upload).
 
-**`Skipping mapping upload — mapping.txt not found`**
+**`Skipping mapping upload — mapping.txt not found`**:
 R8 is not enabled for the build. Add `<AndroidLinkTool>r8</AndroidLinkTool>` and `<AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>` to your `.csproj`. See [Enable R8 on Android](#enable-r8-on-android).
 
 **`Skipping Portable PDB upload — no debug-id manifest found`**
