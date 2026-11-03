@@ -29597,6 +29597,10 @@ components:
     CustomCostsFileMetadata:
       description: Schema of a Custom Costs metadata.
       properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: false
+          type: boolean
         billed_cost:
           description: Total cost in the cost file.
           example: 100.50
@@ -29646,6 +29650,10 @@ components:
     CustomCostsFileMetadataWithContent:
       description: Schema of a cost file's metadata.
       properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: false
+          type: boolean
         billed_cost:
           description: Total cost in the cost file.
           example: 100.50
@@ -164105,6 +164113,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          ai_provider: false
                           billed_cost: 100.5
                           billing_currency: USD
                           charge_period:
@@ -164153,6 +164162,14 @@ paths:
     put:
       description: Upload a Custom Costs file.
       operationId: UploadCustomCostsFile
+      parameters:
+        - description: Whether the uploaded file contains the costs of an AI provider.
+          in: query
+          name: ai_provider
+          required: false
+          schema:
+            default: false
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -164176,6 +164193,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        ai_provider: false
                         billed_cost: 100.5
                         billing_currency: USD
                         charge_period:
@@ -164266,6 +164284,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        ai_provider: false
                         billed_cost: 100.5
                         billing_currency: USD
                         charge_period:
