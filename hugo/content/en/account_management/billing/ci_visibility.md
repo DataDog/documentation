@@ -37,8 +37,9 @@ To set up billing enrichment:
 2. In Datadog, go to [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Billing & Committers{{< /ui >}}][6].
 3. Turn on {{< ui >}}Enrich billing metrics{{< /ui >}}.
 4. Select the {{< ui >}}Reference table{{< /ui >}} to use.
-5. Select the {{< ui >}}Email key column{{< /ui >}}: the column in the reference table that contains the committer email address. Datadog uses this column to join billing data with the reference table.
-6. Select the {{< ui >}}Enrichment columns{{< /ui >}}: the columns from the reference table to expose as tags on billing metrics. Leave empty to include all columns.
+5. Select the {{< ui >}}Enrichment columns{{< /ui >}}: the columns from the reference table to expose as tags on billing metrics. Leave empty to include all columns.
+
+<div class="alert alert-info">The primary key of the reference table must be the column that contains the committer email addresses. Datadog uses the primary key to join billing data with the reference table.</div>
 
 After billing enrichment is configured, the additional tags from the reference table appear alongside your existing billable-committer metrics.
 
