@@ -285,7 +285,7 @@ dSYMs are only generated for device builds (`-r ios-arm64`). Simulator builds do
 **`Skipping mapping upload — mapping.txt not found`**:
 R8 is not enabled for the build. Add `<AndroidLinkTool>r8</AndroidLinkTool>` and `<AndroidCreateProguardMappingFile>true</AndroidCreateProguardMappingFile>` to your `.csproj`. See [Enable R8 on Android](#enable-r8-on-android).
 
-**`Skipping Portable PDB upload — no debug-id manifest found`**
+**`Skipping Portable PDB upload — no debug-id manifest found`**:
 The debug ID manifest (`dd_debug_ids.json`) is generated during the build that `dotnet publish` runs. Confirm that the build succeeded and that debug symbols are enabled with `<DebugType>portable</DebugType>`.
 
 **`Skipping Portable PDB upload — no Portable PDB found`**
