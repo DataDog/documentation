@@ -134,6 +134,8 @@ At the end of an investigation, Bits either presents a clear, evidence-backed co
 
 {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits built and tested" style="width:100%;" >}}
 
+When Bits reaches a conclusion, it suggests next steps, such as a code fix, a triage action, or an infrastructure action. For details, see [Bits Remediation][23].
+
 ### Supported data sources
 Bits uses the following data sources during investigations:
 
@@ -195,6 +197,7 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [20]: /real_user_monitoring/bits_ai/investigate_regressions/
 [21]: /error_tracking/bits_investigation/
 [22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
+[23]: /bits_ai/bits_remediation/
 
 ## Further reading
 
