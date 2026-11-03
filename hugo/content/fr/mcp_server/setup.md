@@ -670,13 +670,13 @@ Le Datadog MCP Server prend en charge les _ensembles d'outils_, qui vous permett
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Par exemple, en fonction de votre [site Datadog][17] sélectionné ({{< region-param key="dd_site_name" >}}) :
 
-- Récupérer uniquement les outils principaux (c'est la valeur par défaut si `toolsets` n'est pas spécifié) :
+- Récupérer uniquement les outils Core (c'est la valeur par défaut si `toolsets` n'est pas spécifié) :
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
 - Récupérer uniquement les outils liés à Synthetic Testing :
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=synthetics</code></pre>
 
-- Récupérer les outils principaux, Synthetic Testing et Software Delivery :
+- Récupérer les outils Core, Synthetic Testing et Software Delivery :
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
 
 - Récupérer tous les outils généralement disponibles :
@@ -725,7 +725,7 @@ Ces ensembles d'outils sont généralement disponibles. Consultez [Datadog MCP S
 - `llmobs` : Outils pour rechercher et analyser les spans et les expériences d'[Agent Observability][36].
 - `networks` : Outils pour l'analyse de [Cloud Network Monitoring][37] et de [Network Device Monitoring][38].
 - `notebooks` : Outils étendus pour les [notebooks][54], au-delà des outils de [notebooks] inclus dans l'ensemble d'outils `core`.
-- `onboarding` : Outils d'intégration Agentic pour la configuration guidée de Datadog.
+- `onboarding` : Outils d'intégration agentiques pour la configuration guidée de Datadog.
 - `product-analytics` : Outils pour interagir avec les requêtes de [Product Analytics][41].
 - `profiling` : Outils pour découvrir, explorer et analyser les données du [Continuous Profiler][58].
 - `reference-tables` : Outils pour gérer les [Reference Tables][48], y compris la liste des tables, la lecture des lignes, l'ajout de lignes et la création de tables à partir du stockage cloud.

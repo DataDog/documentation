@@ -2,157 +2,159 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/route-logs-with-datadog-log-forwarding/
   tag: Blog
-  text: Dirigir logs a sistemas de terceros con el reenvío de logs de Datadog
+  text: Envíe registros a sistemas de terceros con el reenvío de registros de Datadog
 - link: /logs/log_collection
   tag: Documentación
-  text: Empezar con la recopilación de tus logs
+  text: Comience a recopilar sus registros
 - link: /logs/log_configuration/pipelines
   tag: Documentación
-  text: Obtener más información sobre pipelines de logs
+  text: Obtenga información sobre las canalizaciones de registros
 - link: /observability_pipelines/
   tag: Documentación
-  text: Reenviar logs directamente desde tu entorno con pipelines de observabilidad
+  text: Reenvíe registros directamente desde su entorno con Observability Pipelines
 - link: https://www.datadoghq.com/blog/microsoft-sentinel-logs/
   tag: Blog
-  text: Procesa y gobierna de forma centralizada tus logs en Datadog antes de enviarlos
+  text: Procese y gestione centralmente sus registros en Datadog antes de enviarlos
     a Microsoft Sentinel
-title: Reenvío de logs a destinos personalizados
+- link: /security/events_forwarding
+  tag: Documentación
+  text: Reenvíe señales de seguridad, spans y otros tipos de eventos a destinos personalizados
+title: Reenvío de registros a destinos personalizados
 ---
+## Descripción general {#overview}
 
-## Información general
+El reenvío de registros le permite enviar registros desde Datadog a destinos personalizados como Splunk, Elasticsearch y puntos de conexión HTTP. Esto significa que puede usar [Log Pipelines][1] para recopilar, procesar y estandarizar centralmente sus registros en Datadog. Luego, envíe los registros desde Datadog a otras herramientas para respaldar los flujos de trabajo de los equipos individuales. Puede elegir reenviar cualquiera de los registros ingeridos, independientemente de si están indexados o no, a destinos personalizados. Los registros se reenvían en formato JSON y se comprimen con GZIP de forma predeterminada.
 
-El reenvío de logs te permite enviar logs desde Datadog a destinos personalizados como como endpoints de Splunk, Elasticsearch y HTTP. Esto significa que puedes utilizar [Pipelines de logs][1] para recopilar, procesar y estandarizar tus logs de forma centralizada en Datadog. A continuación, envía los logs desde Datadog a otras herramientas para admitir workflows (UI) / procesos (generic) individuales de equipos. Puedes optar por reenviar cualquiera de los logs ingeridos, estén o no indexados, a destinos personalizados. En forma predeterminada, los logs se reenvían en formato JSON y se comprimen con GZIP.
+**Nota**: Solo los usuarios de Datadog con el permiso [`logs_write_forwarding_rules`][2] pueden [crear][6], [editar][7] y [eliminar][8] destinos personalizados para el reenvío de registros.
 
-**Nota**: Sólo los usuarios de Datadog con el permiso [`logs_write_forwarding_rules`][2] pueden [crear][6], [editar][7] y [eliminar][8] destinos personalizados para el reenvío de logs.
+{{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="La página de reenvío de registros, que muestra los destinos personalizados resaltados. La lista de destinos incluye Splunk (filtrado por service:logs-processing), punto de conexión HTTP (filtrado por source:okta OR source:paloalto) y Elasticsearch (filtrado por team:acme env:prod)." >}}
 
-{{< img src="logs/log_configuration/forwarding/forwarding_page.png" alt="Página de reenvío de logs que muestra los destinos personalizados resaltados. La lista de destinos incluye Splunk (filtrado por servicio: logs-processing), endpoint HTTP (filtrado por origen: okta OR source:paloalto) y Elasticsearch (filtrado por equipo: acme env:prod)." >}}
+Si un intento de reenvío falla (por ejemplo: si su destino deja de estar disponible temporalmente), Datadog vuelve a intentarlo periódicamente durante 2 horas utilizando una estrategia de retroceso exponencial. El primer intento se realiza después de un retraso de 1 minuto. Para los reintentos posteriores, el retraso aumenta progresivamente hasta un máximo de 8-12 minutos (10 minutos con un 20% de varianza).
 
-Si falla un intento de reenvío (por ejemplo: si el destino deja de estar disponible temporalmente), Datadog vuelve a intentarlo periódicamente durante 2 horas, utilizando una estrategia de retraso exponencial. El primer intento se realiza luego de un retraso de 1 minuto. En los siguientes reintentos, el retraso aumenta progresivamente hasta un máximo de 8 a 12 minutos (10 minutos con una variación del 20%).
-
-Las siguientes métricas informan sobre los logs que se han reenviado correctamente, incluyendo aquellos que se han enviado correctamente después de algunos reintentos, así como de los logs que se han descartado.
+Las siguientes métricas informan sobre los registros que se han reenviado correctamente, incluidos los registros que se enviaron correctamente después de los reintentos, así como los registros que se descartaron.
 
 - datadog.forwarding.logs.bytes
 - datadog.forwarding.logs.count
 
 
-## Configurar el reenvío de logs a destinos personalizados
+## Configure el reenvío de registros a destinos personalizados {#set-up-log-forwarding-to-custom-destinations}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-danger">El envío de logs a un destino personalizado queda fuera del entorno de Datadog GovCloud, que está fuera del control de Datadog. Datadog no será responsable de ningún log que haya salido del entorno de Datadog GovCloud, incluidas, entre otras, las obligaciones o requisitos que el usuario pueda tener en relación con FedRAMP, los niveles de impacto del DoD, ITAR, el cumplimiento de las normas de exportación, la residencia de datos o normativas similares aplicables a dichos logs.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">El envío de registros a un destino personalizado se realiza fuera del entorno Datadog GovCloud, el cual está fuera del control de Datadog. Datadog no será responsable de ningún registro que haya salido del entorno Datadog GovCloud, incluyendo, sin limitación, cualquier obligación o requisito que el usuario pueda tener relacionado con FedRAMP, niveles de impacto del DoD, ITAR, cumplimiento de exportaciones, residencia de datos o regulaciones similares aplicables a dichos registros.
+<br><br>
+Debido a los protocolos de seguridad para el {{< region-param key="dd_datacenter" >}} sitio, solo los puertos 443 y 8088 están abiertos para el reenvío de registros. Para usar un puerto diferente, comuníquese con <a href="https://www.datadoghq.com/support/">Soporte de Datadog</a>.</div>
 {{< /site-region >}}
 
-1. Añade las IP de webhook de {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
-1. Ve a [Archivo y reenvío de logs][4].
-3. Selecciona **Custom Destrinations** (Destinos personalizados).
-4. Haz clic en **New Destination** (Nuevo destino).
-5. Introduce la consulta para filtrar tus logs para el reenvío. Consulta [Sintaxis de búsqueda][5] para obtener más información.
-6. Selecciona el **Destination Type** (Tipo de destino).
+1. Agregue las IP de webhook del {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} a la lista de permitidos.
+1. Vaya a [Log Archiving & Forwarding][4].
+3. Seleccione {{< ui >}}Custom Destinations{{< /ui >}}.
+4. Haga clic en {{< ui >}}New Destination{{< /ui >}}.
+5. Ingrese la consulta para filtrar sus registros para el reenvío. Consulte [Sintaxis de búsqueda][5] para obtener más información.
+6. Seleccione {{< ui >}}Destination Type{{< /ui >}}.
 
-{{< img src="logs/log_configuration/forwarding/log-forwarding-gzip-opt-out.png" alt="La page (´página de configuración del destino, en la que se muestran los steps (UI) / pasos (generic) para configurar un nuevo destino." style="width:70%;">}}
+{{< img src="logs/log_configuration/forwarding/log-forwarding-gzip-opt-out.png" alt="La página de configuración de destino, que muestra los pasos para configurar un nuevo destino." style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-7. Introduce un nombre para el destino.
-8. En el campo **Define endpoint** (Definir endpoint), introduce el endpoint al que desees enviar logs. El endpoint debe empezar con `https://`.
-    - Por ejemplo, si deseas enviar logs a Sumo Logic, siguie sus [Configurar la source (fuente) de HTTP para documentación de logs y métricas][1] para obtener la dirección URL de la source (fuente) de HTTP para enviar datos a su recopilador. Introduce la dirección URL de la source (fuente) de HTTP en el campo **Define endpoint** (Definir endpoint).
-9. (Opcional) Desactiva la compresión de GZIP si tu endpoint de HTTP no admite cargas útiles comprimidas.
-10. En la sección **Configure Authentication** (Configurar autenticación), selecciona uno de los siguientes tipos de autenticación y proporciona los detalles pertinentes:
-  | Tipo de autenticación | Descripción | Ejemplo
+7. Ingrese un nombre para el destino.
+8. En el campo {{< ui >}}Define endpoint{{< /ui >}}, ingrese el punto de conexión al que desea enviar los registros. El punto de conexión debe comenzar con `https://`.
+    - Por ejemplo, si desea enviar registros a Sumo Logic, siga su [documentación sobre cómo configurar una fuente HTTP para registros y métricas][1] para obtener la URL de la dirección de la fuente HTTP a la cual enviar datos a su recopilador. Ingrese la URL de la dirección de la fuente HTTP en el campo {{< ui >}}Define endpoint{{< /ui >}}.
+9. (Opcional) Deshabilite la compresión GZIP si su punto de conexión HTTP no admite cargas útiles comprimidas.
+10. En la sección {{< ui >}}Configure Authentication{{< /ui >}}, seleccione uno de los siguientes tipos de autenticación y proporcione los detalles pertinentes:
+  | Tipo de autenticación      | Descripción                                                                                                              | Ejemplo                                                             |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
-| **Autenticación básica** | Proporciona el nombre de usuario y la contraseña de la cuenta a la que desees enviar logs.                                        | Nombre de usuario: `myaccount`<br> Contraseña: `mypassword`                       |
-| **Encabezado de solicitud** | Proporciona el nombre y el valor del encabezado. Ejemplo para autorización:<br>- Introduce `Authorization` para **Header Name** (Nombre del encabezado).<br>- Utiliza un valor de encabezado con el formato `Basic username:password`, codificado en base64. | Nombre del encabezado: `Authorization`<br>Valor del encabezado: `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` |
+| {{< ui >}}Basic Authentication{{< /ui >}} | Proporcione el nombre de usuario y la contraseña de la cuenta a la que desea enviar los registros.                                        | Nombre de usuario: `myaccount`<br>Contraseña: `mypassword`                       |
+| {{< ui >}}Request Header{{< /ui >}}       | Proporcione el nombre y el valor del encabezado. Ejemplo para Authorization:<br>- Ingrese `Authorization` para {{< ui >}}Header Name{{< /ui >}}.<br>- Use un valor de encabezado con el formato `Basic username:password`, codificado en base64. | Nombre del encabezado: `Authorization`<br>Valor del encabezado: `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` |
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
 
 {{% tab "Splunk" %}}
 
-7. Introduce un nombre para el destino.
-8. En la sección **Configure Destination** (Configurar destino), introduce el endpoint al que desees enviar los logs. El endpoint debe empezar con `https://`. Por ejemplo, introduce `https://<your_account>.splunkcloud.com:8088`.  
-    **Nota: `/services/collector/event` se anexa automáticamente al endpoint.
-9. En la sección **Configure Authentication** (Configurar autenticación), introduce el token HEC de Splunk. Consulta [Configurar y utilizar HTTP Event Collector][1] para obtener más información sobre el token HEC de Splunk.  
-    **Nota**: El [acuse de recibo del indexador][2] necesita ser desactivado.
+7. Ingrese un nombre para el destino.
+8. En la sección {{< ui >}}Configure Destination{{< /ui >}}, ingrese el punto de conexión al cual desea enviar los registros. El punto de conexión debe comenzar con `https://`. Por ejemplo, ingrese `https://<your_account>.splunkcloud.com:8088`.  
+    **Nota**: `/services/collector/event` se añade automáticamente al punto de conexión.
+9. En la sección {{< ui >}}Configure Authentication{{< /ui >}}, ingrese el token HEC de Splunk. Consulte [Configurar y usar el recopilador de eventos HTTP][1] para obtener más información sobre el token HEC de Splunk.  
+    **Nota**: El [reconocimiento del indexador][2] debe estar deshabilitado.
+10. (Opcional) En la sección {{< ui >}}Configure Sourcetype{{< /ui >}}, especifique el tipo de fuente de Splunk que se asignará a los eventos reenviados. Consulte [Por qué es importante el tipo de fuente][3] para obtener más información sobre el tipo de fuente de Splunk. Si no se establece, se utiliza el sourcetype predeterminado `_json`. Para enviar eventos sin ningún sourcetype, seleccione **Enviar sin sourcetype**.
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
+[3]: https://help.splunk.com/en/splunk-enterprise/get-started/get-data-in/10.4/configure-source-types/why-source-types-matter
 {{% /tab %}}
 
 {{% tab "Elasticsearch" %}}
 
-7. Introduce un nombre para el destino.
-8. En la sección **Configure Destination** (Configurar destino), introduce los siguientes detalles:
-  | Configuración | Descripción | Ejemplo |
+7. Ingrese un nombre para el destino.
+8. En la sección {{< ui >}}Configure Destination{{< /ui >}}, ingrese los siguientes detalles:
+  | Configuración                        | Descripción                                                                                                  | Ejemplo                                  |
 |--------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------|
-| **Endpoint** | Introduce el endpoint al que desees enviar los logs. El endpoint debe empezar con `https://`.               | `https://<your_account>.us-central1.gcp.cloud.es.io` (Elasticsearch)
-| **Nombre del índice de destino** | Especifica el nombre del índice de destino al que desees enviar los logs.                                   | `your_index_name` |
-| **Rotación del índice** | Opcionalmente, selecciona la frecuencia de creación de un nuevo índice: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, `Every Month`. El valor predeterminado es `No Rotation`. | `Every Day` |
-9. En la sección **Configure Authentication** (Configurar autenticación), introduce el nombre de usuario y la contraseña de tu cuenta de Elasticsearch.
+| {{< ui >}}Endpoint{{< /ui >}}                   | Ingrese el punto de conexión al que desea enviar los registros. El punto de conexión debe comenzar con `https://`.               | `https://<your_account>.us-central1.gcp.cloud.es.io` (Elasticsearch) |
+| {{< ui >}}Destination Index Name{{< /ui >}}     | Especifique el nombre del índice de destino donde desea enviar los registros.                                   | `your_index_name`                        |
+| {{< ui >}}Index Rotation{{< /ui >}}             | Opcionalmente, seleccione la frecuencia con la que se debe crear un nuevo índice: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, `Every Month`. El valor predeterminado es `No Rotation`. | `Every Day`                              |
+9. En la sección {{< ui >}}Configure Authentication{{< /ui >}}, ingrese el nombre de usuario y la contraseña de su cuenta de Elasticsearch.
 
 {{% /tab %}}
 
 {{% tab "Microsoft Sentinel" %}}
 
-7. Introduce un nombre para el destino.
-8. La autenticación para el Microsoft Sentinel Forwarder requiere configurar un registro de aplicación a través de la integración de Datadog y Azure.
-9. En la sección **Configure Destination** (Configurar destino), introduce los siguientes detalles:
-  | Configuración | Descripción | Ejemplo |.
+7. Ingrese un nombre para el destino.
+8. La autenticación para Microsoft Sentinel Forwarder requiere un registro de aplicación configurado a través de la integración de Datadog Azure. Si ya tiene un registro de aplicación para la integración de Azure, puede reutilizarlo en lugar de crear uno nuevo.
+9. En la sección {{< ui >}}Configure Destination{{< /ui >}}, ingrese los siguientes detalles:
+  | Configuración                   | Descripción                                                                                                          | Ejemplo                                                   |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| **Endpoint de ingesta de datos** | Introduce el endpoint en el endpoint de recopilación de datos (DCE) donde se envían los lgos. Aparece etiquetado como "Ingesta de logs" en la page (página) de información general del DCE. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com` 
-| **ID inmutable** | Especifique el ID inmutable de la regla de recopilación de datos (DCR) donde se definen las rutas de registro, tal y como se encuentra en la page (página) de información general de la DCR como "ID inmutable".  **Nota**: Asegúrate de que el rol de Editor de métricas de monitorización esté asignado en la configuración IAM de la DCR. | `dcr-000a00a000a00000a000000aa000a0aa` |
-| **Nombre de la declaración de stream (flujo)**| Proporciona el nombre de la declaración de stream (flujo) de destino que se encuentra en el JSON de recursos de la DCR en `streamDeclarations`.  | `Custom-MyTable` 
+| {{< ui >}}Logs Ingestion Endpoint{{< /ui >}} | Ingrese el punto de conexión en el Data Collection Endpoint (DCE) donde se envían los registros. Esto está etiquetado como \"Logs Ingestion\" en la página de descripción general del DCE. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`   |
+| {{< ui >}}Immutable ID{{< /ui >}}           | Especifique el ID inmutable de la Regla de recopilación de datos (DCR) donde se definen las rutas de registro, tal como se encuentra en la página de descripción general de la DCR como \"Immutable Id\".  **Nota**: Asegúrese de que el rol de Publicador de métricas de supervisión esté asignado en la configuración de IAM de la DCR. | `dcr-000a00a000a00000a000000aa000a0aa`                     |
+| {{< ui >}}Stream Declaration Name{{< /ui >}}| Proporcione el nombre de la Declaración de flujo de destino que se encuentra en el JSON de recursos de la DCR en `streamDeclarations`.  | `Custom-MyTable`                                          |
 
 {{% /tab %}}
 
 {{% tab "Google SecOps (Chronicle)" %}}
 
-<div class="alert alert-info">
-<b>Vista previa disponible</b>: Puedes enviar logs a Google SecOps (Chronicle) desde Datadog <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-google-chronicle/">Regístrate para la vista previa</a>.
-</div>
-
-7. Introduce un nombre para el destino.
+7. Ingrese un nombre para el destino.
 8. La autenticación para Google Chronicle Forwarder requiere el uso de una cuenta de servicio de GCP con acceso de escritura a Chronicle.
-9. En la sección **Configure Destination** (Configurar el destino), introduce los siguientes datos:
+9. En la sección {{< ui >}}Configure Destination{{< /ui >}}, ingrese los siguientes detalles:
   | Configuración                   | Descripción                                                                                                          | Ejemplo                                                   |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| **ID de cliente** | El ID de cliente de Chronicle proporcionado por Google. | `abcd1234` 
-| **Endpoint regional** | URL del punto final de la API de ingesta de Chronicle en función de tu región.  **Nota**: Asegúrate de que el rol de Editor de métricas de monitorización esté asignada en la configuración de IAM del DCR. | `https://us.chronicle.googleapis.com` |
-| **Espacio de nombres**| El espacio de nombres en el que deben ingerirse tus logs de Chronicle.  | `default` 
+| {{< ui >}}Customer ID{{< /ui >}} | El ID de cliente de Chronicle proporcionado por Google. | `abcd1234`   |
+| {{< ui >}}Regional Endpoint{{< /ui >}}           | La URL del punto de conexión de la API de ingesta de Chronicle según su región.  **Nota**: Asegúrese de que el rol de Publicador de métricas de supervisión esté asignado en la configuración de IAM de la DCR. | `https://us.chronicle.googleapis.com`              |
+| {{< ui >}}Namespace{{< /ui >}}| El espacio de nombres en el que se deben ingerir sus registros de Chronicle.  | `default`                                          |
 
-10. En la sección **Configure authenticaton settngs** (Configurar los parámetros de autenticación), introduce los siguientes datos:
+10. En la sección {{< ui >}}Configure authentication settings{{< /ui >}}, ingrese los siguientes detalles:
   | Configuración                   | Descripción                                                                                                          | Ejemplo                                                   |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| **ID del project (proyecto)**| El ID del project (proyecto) de GCP asociado con la instancia de Chronicle.  | `my-gcp-chronicle-project (proyecto)` |
-| **ID de la clave privada** | El ID de la clave privada de las credenciales de tu cuenta de servicio.  | `0123456789abcdef` |
-| **Clave privada**| La clave privada de las credenciales de tu cuenta de servicio.  | `-----BEGIN PRIVATE KEY-----\nMIIE...` |
-| **Correo electrónico del cliente**| La dirección de correo electrónico de la cuenta de servicio.  | `chronicle-writer@my-gcp-chronicle-project (proyecto).iam.gserviceaccount.com` |
-| **Client ID**| El ID del cliente de las credenciales de tu cuenta de servicio.  | `123456789012345678901` |
+| {{< ui >}}Project ID{{< /ui >}}| El ID del proyecto de GCP asociado con la instancia de Chronicle.  | `my-gcp-chronicle-project`                                          |
+| {{< ui >}}Private Key ID{{< /ui >}}| El ID de la clave privada de las credenciales de su cuenta de servicio.  | `0123456789abcdef`                                          |
+| {{< ui >}}Private Key{{< /ui >}}| La clave privada de las credenciales de su cuenta de servicio.  | `-----BEGIN PRIVATE KEY-----\nMIIE...`                                          |
+| {{< ui >}}Client Email{{< /ui >}}| La dirección de correo electrónico de la cuenta de servicio.  | `chronicle-writer@my-gcp-chronicle-project.iam.gserviceaccount.com`                                          |
+| {{< ui >}}Client ID{{< /ui >}}| El ID de cliente de las credenciales de su cuenta de servicio.  | `123456789012345678901`                                          |
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-10. En la sección **Select Tags to Forward** (Seleccionar tags (etiquetas) para reenviar):
-    1. Selecciona si deseas que se incluyan **All tags** (Todas las tags (etiquetas)), **No tags** (Sin tags (etiquetas)) o **Specific tags** (Etiquetas específicas).
-    1. Selecciona si deseas **Include** (Incluir) o **Exclude specific tags** (Excluir tags (etiquetas) específicas), y especifica qué etiquetas incluir o excluir.
-11. Haz clic en **Save** (Guardar).
+10. En la sección {{< ui >}}Select Tags to Forward{{< /ui >}}:
+    1. Seleccione si desea que se incluyan {{< ui >}}All tags{{< /ui >}}, {{< ui >}}No tags{{< /ui >}} o {{< ui >}}Specific Tags{{< /ui >}}.
+    1. Seleccione si desea {{< ui >}}Include{{< /ui >}} o {{< ui >}}Exclude specific tags{{< /ui >}}, y especifique qué etiquetas incluir o excluir.
+11. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
 
-En la página [Reenvío de logs][4], sitúate sobre el estado de un destino para ver el porcentaje de logs que coinciden con los criterios de filtrado y que se han reenviado en la última hora.
+En la página [Log Forwarding][4], coloque el cursor sobre el estado de un destino para ver el porcentaje de registros que coincidieron con los criterios de filtro y que se han reenviado en la última hora.
 
-## Editar un destino
-1. Ve a [Log Forwarding (Reenvío de logs)][4].
-2. Selecciona **Custom Destinations** (Destinos personalizados) para ver la lista de todos los destinos existentes.
-3. Haz clic en el botón **Edit** (Editar) del destino que desees editar.
-4. Realiza los cambios en la página de configuración.
-5. Haz clic en **Save** (Guardar).
+## Editar un destino {#edit-a-destination}
+1. Vaya a [Log Forwarding][4].
+2. Seleccione {{< ui >}}Custom Destinations{{< /ui >}} para ver una lista de todos los destinos existentes.
+3. Haga clic en el botón {{< ui >}}Edit{{< /ui >}} para el destino que desea editar.
+4. Realice los cambios en la página de configuración.
+5. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-## Eliminar un destino
-1. Ve a [Log Forwarding (Reenvío de logs)][4].
-2. Selecciona **Custom Destinations** (Destinos personalizados) para ver la lista de todos los destinos existentes.
-3. Haz clic en el botón **Delete** (Eliminar) del destino que quieres eliminar y luego en **Confirm** (Confirmar). De este modo, el destino se elimina de la lista de destinos configurados y los logs dejan de reenviarse a ese destino.
+## Eliminar un destino {#delete-a-destination}
+1. Vaya a [Log Forwarding][4].
+2. Seleccione {{< ui >}}Custom Destinations{{< /ui >}} para ver una lista de todos los destinos existentes.
+3. Haga clic en el botón {{< ui >}}Delete{{< /ui >}} para el destino que desea eliminar y haga clic en {{< ui >}}Confirm{{< /ui >}}. Esto elimina el destino de la lista configurada de destinos y los registros ya no se reenvían a él.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -163,3 +165,4 @@ En la página [Reenvío de logs][4], sitúate sobre el estado de un destino para
 [6]: /es/logs/log_configuration/forwarding_custom_destinations#set-up-log-forwarding-to-custom-destinations
 [7]: /es/logs/log_configuration/forwarding_custom_destinations#edit-a-destination
 [8]: /es/logs/log_configuration/forwarding_custom_destinations#delete-a-destination
+[9]: /es/security/events_forwarding/
