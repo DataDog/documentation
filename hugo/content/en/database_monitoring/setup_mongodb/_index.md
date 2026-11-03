@@ -13,7 +13,7 @@ disable_sidebar: true
 | MongoDB 6.0           | {{< X >}}   | {{< X >}}     |
 | MongoDB 7.0           | {{< X >}}   | {{< X >}}     |
 | MongoDB 8.0           | {{< X >}}   | {{< X >}}     |
-| MongoDB 9.0           | {{< X >}}   |               |
+| MongoDB 9.0           | {{< X >}}   | {{< X >}}     |
 
 MongoDB 9.0 requires Datadog Agent 7.85.0 or later.
 
