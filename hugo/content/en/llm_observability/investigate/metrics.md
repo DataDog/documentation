@@ -79,6 +79,42 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 | `ml_obs.span.llm.input.cache_read.cost` | Estimated cache read input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.non_cached.cost` | Estimated non cached input cost in an LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 
+### Cost and token breakdown metrics
+
+Use the following Count metrics to group usage and spend by token modality, I/O direction, and cache or reasoning category.
+
+| Metric Name | Description | Metric Type | Unit |
+|-------------|-------------|-------------|------|
+| `ml_obs.span.llm.cost` | Additive cost contributions from LLM and embedding spans, and user-provided tool-span costs | Count | Nanodollars |
+| `ml_obs.span.llm.tokens` | Additive input and output token contributions from LLM spans | Count | Tokens |
+
+These metrics carry the available application, model, service, and environment tags from their corresponding total metrics. They also support the following breakdown tags:
+
+| Tag | Values | Description |
+|-----|--------|-------------|
+| `io_type` | `input`, `output`, `unknown` | Input or output contribution. |
+| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Cache category for input contributions. |
+| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Reasoning category for output contributions when the data establishes the category. Non-token tool charges omit this tag. |
+| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Token modality. `other` applies only to non-token cost contributions, such as provider tool charges. |
+| `ttl` | `5m`, `1h` | Cache-write lifetime when that breakdown is available. |
+
+Unavailable details use `unknown`; missing data does not mean zero. For example, a provider that does not report cache usage has `input_type:unknown`.
+
+The Count values sum contribution amounts; they are not counts of requests. Use `sum` with `.as_count()` for usage or cost totals over a time window:
+
+```text
+sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
+sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
+```
+
+Cost values are in nanodollars. Divide the cost total by 1,000,000,000 to convert it to US dollars.
+
+#### Choose a metric family
+
+`ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` are distributions with one total observation per applicable span. Use those metrics for per-span averages and percentiles.
+
+`ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` partition available totals into additive contributions. Sum these contributions for the same spans and filters to recover the corresponding totals. Use one metric family per calculation to avoid counting the same usage twice.
+
 ### Trace metrics
 
 | Metric Name | Description | Metric Type | Tags |
