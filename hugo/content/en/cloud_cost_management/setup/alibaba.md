@@ -30,7 +30,7 @@ To set up Cloud Cost Management for Alibaba Cloud in Datadog, you should:
 ## Setup
 
 ### Subscribe to FOCUS bills in Alibaba Cloud
-In the Alibaba Cloud Billing console, subscribe to cost reports in [FOCUS format][2] and deliver them to an Object Storage Service (OSS) bucket:
+In the Alibaba Cloud Billing console, subscribe to cost reports in FOCUS format and deliver them to an Object Storage Service (OSS) bucket:
 
 1. Create an OSS bucket to receive the cost reports, or use an existing one.
 2. Enable bill subscription with the FOCUS format, selecting your bucket as the destination.
@@ -39,7 +39,7 @@ In the Alibaba Cloud Billing console, subscribe to cost reports in [FOCUS format
 Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
 
 ### Configure the Alibaba Cloud integration
-Navigate to [Setup & Configuration][3], add an Alibaba Cloud account and follow the steps to configure the Alibaba Cloud integration.
+Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account and follow the steps to configure the Alibaba Cloud integration.
 
 ### Enable Cloud Cost Management
 In the Alibaba Cloud integration tile, enable the toggle for Cloud Cost Management and provide:
@@ -94,13 +94,8 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `usageunit` | A provider-specified measurement unit, indicating how the provider rates measured usage and purchase quantities.|
 | `x_instanceid` | The instance identifier for the resource associated with the charge.|
 
-### Container cost allocation
-Container cost allocation is not available for Alibaba Cloud. See [Container Cost Allocation][4] for more details.
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/alibaba_cloud/
-[2]: https://focus-insights.org/
-[3]: https://app.datadoghq.com/cost/setup
-[4]: /cloud_cost_management/allocation/container_cost_allocation/
+[2]: https://app.datadoghq.com/cost/setup

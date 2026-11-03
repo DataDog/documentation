@@ -30,10 +30,10 @@ To set up Cloud Cost Management for Nebius Cloud in Datadog, you should:
 ## Setup
 
 ### Configure the Nebius Cloud integration
-Navigate to [Setup & Configuration][2], add a Nebius Cloud account and follow the steps to configure the Nebius Cloud integration.
+Navigate to [Provider Settings on the cloud cost page][2], add a Nebius Cloud account and follow the steps to configure the Nebius Cloud integration.
 
 ### Configure a cost export
-In the Nebius console, create a cost report export in [FOCUS format][3] to a Nebius Object Storage bucket. Datadog reads the exported cost reports directly from this bucket.
+In the Nebius console, create a cost report export in FOCUS format to a Nebius Object Storage bucket. Datadog reads the exported cost reports directly from this bucket.
 
 ### Enable Cloud Cost Management
 In the Nebius Cloud integration tile, enable the toggle for Cloud Cost Management and provide:
@@ -87,13 +87,8 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `subaccountname` | A name assigned to a grouping of resources or services to manage access and/or cost.|
 | `usageunit` | A provider-specified measurement unit, indicating how the provider rates measured usage and purchase quantities.|
 
-### Container cost allocation
-Container cost allocation is not available for Nebius Cloud. See [Container Cost Allocation][4] for more details.
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/nebius_cloud/
 [2]: https://app.datadoghq.com/cost/setup
-[3]: https://focus-insights.org/
-[4]: /cloud_cost_management/allocation/container_cost_allocation/
