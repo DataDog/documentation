@@ -67,7 +67,7 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
     <tr>
       <td style="white-space: nowrap;">Status Pages Internal Page Publish<br><code style="white-space: nowrap;">status_pages_internal_page_publish</code></td>
       <td>Publish and unpublish internal Status Pages.</td>
-      <td>None</td>
+      <td>Datadog Admin Role</td>
     </tr>
   </tbody>
 </table>
