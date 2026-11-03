@@ -42,6 +42,8 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
+<div class="alert alert-info">You cannot start an investigation from Microsoft Teams. To receive investigation findings in Microsoft Teams, <a href="/bits_ai/bits_investigation/configure/#microsoft-teams-preview">send monitor notifications to a Microsoft Teams channel</a>.</div>
+
 ### Synthetic tests
 
 When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
