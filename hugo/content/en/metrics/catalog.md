@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, both custom and standard, for a specified time frame. The default time frame is the past 4 hours. Use the Metrics Catalog page to see how your metrics are configured and used, monitor your custom metrics volume, and manage your metric configurations in one place.
+The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, both custom and standard, for a specified time frame. The default time frame is the past 4 hours.
 
 <!-- TODO(screenshot): Full-page overview showing usage graphs, search, facets, and the metrics table. Save to metrics/catalog/. Exclude preview banners and features that are not generally available. -->
 
@@ -71,8 +71,8 @@ The search fields provide the most comprehensive set of actions to filter the li
 
 ### Core facets
 
-- {{< ui >}}Metric Category{{< /ui >}}: Differentiate between Custom Metrics and Standard Integration Metrics.
-- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates).
+- {{< ui >}}Metric Category{{< /ui >}}: Whether the metric is a custom metric or a standard integration metric.
+- {{< ui >}}Metric Type{{< /ui >}}: Whether the metric is a distribution or a non-distribution metric (count, gauge, or rate).
 - {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see the [Metric origin definitions](#metric-origin-definitions) section.
 
 ### Usage facets

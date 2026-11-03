@@ -96,7 +96,7 @@ Some products incorporate standard metrics to surface insights out of the box (f
 
 ### Available Metrics
 
-The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. If you're interested in managing your custom metrics volume, see the [Best Practices for Custom Metrics Governance page][25] and the [Metrics Catalog page][26] for more detailed insights.
+The {{< ui >}}Available Metrics{{< /ui >}} column breaks down your total metric volume by standard and custom metrics over the past month. To manage your custom metrics volume, see the [Best Practices for Custom Metrics Governance][25] guide and the [Metrics Catalog documentation][26].
 
 ## Your metrics by source
 
