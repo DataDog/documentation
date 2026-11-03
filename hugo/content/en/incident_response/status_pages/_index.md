@@ -121,7 +121,7 @@ To restrict access:
 
 Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
 
-You can configure email rules while creating a private status page or from **Settings** > **General** under **Email Rules**.
+You can configure email rules while creating a private status page. For an existing page, click **Settings**, select **General**, and go to **Email Rules**.
 
 You can separate multiple entries with commas.
 
@@ -180,7 +180,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.
 - **Internal**, access is limited to authenticated Datadog users in your organization.
-- **Private**, visitors enter an email address. If it matches the page's email rules, Datadog sends them a secure link to view the page.
+- **Private**, access is limited to visitors whose email address matches the page's [email rules](#configure-visitor-access-for-a-private-status-page).
 
 ## Add a notice
 
