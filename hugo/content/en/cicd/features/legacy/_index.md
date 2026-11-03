@@ -7,5 +7,5 @@ This section provides reference documentation for features only available in the
 
 {{< whatsnext desc="Legacy features include:" >}}
     {{< nextlink href="/tests/test_health/" >}}Test Health page{{< /nextlink >}}
-    {{< nextlink href="/tests/code_coverage/" >}}Code coverage in Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/tests/code_coverage/" >}}Code Coverage in Test Optimization{{< /nextlink >}}
 {{< /whatsnext >}}

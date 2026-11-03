@@ -17,13 +17,13 @@ This section contains guides for optimizing your CI pipelines and tests. The gui
 ## CI Pipeline Visibility Guides
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating exclusion filters for ingestion control{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the pipeline data model and execution types{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Correlating infrastructure metrics with GitLab jobs in Datadog{{< /nextlink >}}
-    {{< nextlink href="/account_management/billing/ci_visibility/" >}}CI Visibility billing considerations{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/" >}}Identify CI jobs on the critical path to reduce pipeline duration{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/use_ci_jobs_failure_analysis/" >}} Use Logs Analysis to identify root causes in failed CI jobs{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/track_reusable_workflows/" >}}Track GitHub reusable workflow usage with custom tags{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating Exclusion Filters for Ingestion Control{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the Pipeline Data Model and Execution Types{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Correlating Infrastructure Metrics with GitLab Jobs in Datadog{{< /nextlink >}}
+    {{< nextlink href="/account_management/billing/ci_visibility/" >}}CI Visibility Billing Considerations{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/" >}}Identify CI Jobs on the Critical Path to Reduce Pipeline Duration{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/use_ci_jobs_failure_analysis/" >}}Use Logs Analysis to Identify Root Causes in Failed CI Jobs{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/track_reusable_workflows/" >}}Track GitHub Reusable Workflow Usage with Custom Tags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Test Optimization Guides
@@ -32,9 +32,9 @@ This section contains guides for optimizing your CI pipelines and tests. The gui
     {{< nextlink href="/tests/guides/add_custom_measures" >}}Add Custom Measures to Your Tests{{< /nextlink >}}
     {{< nextlink href="/tests/guides/setup_new_flaky_pr_gate" >}}Set up a New Flaky Test PR Gate{{< /nextlink >}}
     {{< nextlink href="/tests/guides/validate_optimizations" >}}Validate Optimizations{{< /nextlink >}}
-    {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing test runs in Test Optimization{{< /nextlink >}}
-    {{< nextlink href="/tests/browser_tests" >}}Instrument Browser tests with RUM{{< /nextlink >}}
-    {{< nextlink href="/tests/swift_tests" >}}Instrument Swift tests with RUM{{< /nextlink >}}
+    {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing Test Runs in Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/tests/browser_tests" >}}Instrument Browser Tests with RUM{{< /nextlink >}}
+    {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with RUM{{< /nextlink >}}
     {{< nextlink href="/tests/correlate_logs_and_tests" >}}Correlate Logs and Tests{{< /nextlink >}}
-    {{< nextlink href="/tests/developer_workflows/" >}}Enhance developer workflows with Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/tests/developer_workflows/" >}}Enhance Developer Workflows with Test Optimization{{< /nextlink >}}
 {{< /whatsnext >}}
