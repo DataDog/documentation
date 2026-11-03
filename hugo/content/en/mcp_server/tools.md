@@ -545,7 +545,7 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-**Note**: The `chat` toolset does not provide direct tools to create, edit, or delete Datadog resources. In some configurations, Bits Chat can propose a change and ask for approval before applying it. For direct resource changes, use the specific product toolset, such as `dashboards` or `alerting`.
+**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
 
 ### `send_message_to_chat`
 
