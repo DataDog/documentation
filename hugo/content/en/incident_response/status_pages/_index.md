@@ -29,7 +29,7 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email, Slack, and Microsoft Teams notifications
+* Reduce inbound support volume with proactive email, Slack, Microsoft Teams, and RSS feed notifications
 
 ## Configure permissions
 
@@ -106,7 +106,7 @@ To restrict access:
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), or [Microsoft Teams](#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), [Microsoft Teams](#microsoft-teams-subscriptions), or an [RSS or Atom feed](#rss-and-atom-feeds). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
@@ -468,6 +468,33 @@ Subscribers can change the components they follow or unsubscribe at any time wit
 Status page owners can review subscribers in the status page settings. For a published page, the **Microsoft Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value. To remove subscribers, select one or more rows and click **Unsubscribe**.
 
 A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, remove the subscription from the list, then subscribe again with a working URL.
+
+## RSS and Atom feeds
+
+Public status pages can publish their notice history as an RSS 2.0 or Atom feed. Visitors subscribe in any feed reader and receive new notices and updates. Feeds are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+
+Feeds are available on public status pages only.
+
+### Enable feeds
+
+1. From your status page, click **Settings**, then select **RSS** under **Subscriptions**.
+1. Enable **RSS feed**.
+1. Click **Save Settings**.
+
+### Feed URLs
+
+After the page is published, its feeds are served at the following paths:
+
+| Feed | URL |
+| ---- | --- |
+| RSS 2.0 | `https://<prefix>.statuspage.datadoghq.com/history.rss` |
+| Atom | `https://<prefix>.statuspage.datadoghq.com/history.atom` |
+
+If you [set a custom domain](#set-a-custom-domain), the feeds are also served from that domain; for example, `https://status.acme.com/history.rss`, where `status.acme.com` is the configured custom domain.
+
+Each feed entry corresponds to a notice published on the page and includes the notice title, status, message, and the time the update was posted. Resolved notices remain in the feed as part of the page history. The last 20 notices are shown in the feed.
+
+**Note**: Feeds are unauthenticated. Anyone who can view the status page can read its feed.
 
 ## Set a custom domain
 
