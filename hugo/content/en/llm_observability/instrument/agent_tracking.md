@@ -44,9 +44,9 @@ Spans with no `agent` ancestor are not attributed.
 
 | SDK | Minimum version |
 |-----|-----------------|
-| Python | `dd-trace` v4.13.0 |
-| Node.js | `dd-trace` v5.121.0 or v6.10.0 |
-| Java | `dd-trace-java` v1.66.0 |
+| Python | 4.13.0 |
+| Node.js | 5.121.0 or 6.10.0 |
+| Java | 1.66.0 |
 
 ### Agent version
 
