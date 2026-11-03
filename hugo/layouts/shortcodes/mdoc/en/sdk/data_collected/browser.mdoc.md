@@ -115,7 +115,7 @@ Detailed network timing data for the loading of an application's resources are c
 |----------------------------|--------|------------------------------------------------------------------------------------------------------|
 | `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, `image`, or `websocket`). |
 | `resource.method`          | string | The HTTP method (for example `POST` or `GET`).                                                       |
-| `resource.status_code`     | number | The response status code (available for fetch/XHR resources only).                                   |
+| `resource.status_code`     | number | The response status code (available for fetch/XHR resources and successful WebSocket handshakes). |
 | `resource.url`             | string | The resource URL.                                                                                    |
 | `resource.url_host`        | string | The host part of the URL.                                                                            |
 | `resource.url_path`        | string | The path part of the URL.                                                                            |
