@@ -1,6 +1,6 @@
 ---
 title: Data Observability Monitor
-description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses, and failed or long-running data jobs."
+description: "Monitor freshness, row count, column-level metrics, and custom SQL queries across your data warehouses, as well as failed or long-running data jobs."
 further_reading:
   - link: "/data_observability/"
     tag: "Documentation"
@@ -26,7 +26,9 @@ further_reading:
 
 [Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
-Data Observability monitors support the following metric types:
+Data Observability also includes [job monitors](#job-monitors), which alert when data jobs such as Airflow DAGs, Databricks jobs, or dbt models fail or run longer than expected.
+
+Data quality monitors support the following metric types:
 
 **Table-level metric types:**
 | Metric type | Description |
@@ -48,7 +50,7 @@ Data Observability monitors support the following metric types:
 
 Datadog collects metrics such as row count and freshness from warehouse system metadata (for example, `INFORMATION_SCHEMA`) when available. This avoids running a query against your warehouse and reduces compute costs. Not all warehouses expose system metadata. For metrics that cannot be collected from system metadata, the monitor runs a query directly against your warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
+Data quality, source to target, and schema change monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]). Job monitors require [Jobs Monitoring][14] to be set up for at least one supported technology.
 
 Data Observability offers four monitor types, selected in the first step of the [monitor creation flow][13]:
 
@@ -362,7 +364,7 @@ Job monitors support two checks:
 | Check | Alerts when |
 |---|---|
 | [Job failure](#job-failure) | A job run fails N times in a row. |
-| [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than is normal with anomalous duration. |
+| [Job duration](#job-duration) | A run takes longer than a fixed threshold, or longer than normal when using the Anomalies detection method. |
 
 You can add both checks in one monitor definition. Datadog then creates two monitors, one for failures and one for duration, that share the same jobs and notification settings.
 
@@ -372,12 +374,14 @@ You can add both checks in one monitor definition. Datadog then creates two moni
 2. Under {{< ui >}}Select jobs{{< /ui >}}, choose the jobs to monitor:
     - In {{< ui >}}Technology{{< /ui >}}, select the kind of job. You cannot change the technology after you create the monitor.
     - In {{< ui >}}Filter to jobs{{< /ui >}}, search for jobs by name, or filter with `key:value` tags or attributes to match a set of jobs.
-    - In {{< ui >}}Filter runs{{< /ui >}} (only for some technologies), filter runs monitored by tags or attributes that change per run of the same job.
+    - In {{< ui >}}Filter runs{{< /ui >}} (only for some technologies), filter the monitored runs by tags or attributes that change per run of the same job.
 3. Under {{< ui >}}Add checks{{< /ui >}}, select {{< ui >}}Job failure{{< /ui >}}, {{< ui >}}Job duration{{< /ui >}}, or both. Configure each check as described in [Job failure](#job-failure) and [Job duration](#job-duration).
 4. Under {{< ui >}}Notify & schedule{{< /ui >}}, enter a monitor name and a message. Job failure alerts already include the job name, the failure count, the error, and links to the job and the failed run. Use the message for routing, `@-mentions`, and team context.
 5. Under {{< ui >}}Permissions{{< /ui >}}, optionally restrict who can edit the monitor. Then review the monitor and create it.
 
-Each check is grouped by the attributes that identify a job in the selected technology, so each group alerts separately. Adding additional tags to group by is useful when you want different alerting behavior for different runs of the same job. You can add {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
+### Group by for job monitors
+
+Each check is grouped by the attributes that identify a job in the selected technology, so each group alerts separately. Adding more tags to group by is useful when you want different alerting behavior for different runs of the same job. You can add {{< ui >}}Group by{{< /ui >}} tags, but you cannot remove the required ones:
 
 | Technology | Job types | Required group by |
 |---|---|---|
@@ -408,16 +412,16 @@ Choose a {{< ui >}}Detection method{{< /ui >}}:
 {{< tabs >}}
 {{% tab "Anomalies" %}}
 
-{{< ui >}}Anomalies{{< /ui >}} is the default and our recommendation since it reduces false positives and configuration management of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
+{{< ui >}}Anomalies{{< /ui >}} is the default and recommended method because it reduces false positives and the configuration overhead of these monitors. The monitor learns how long each job usually takes from its recent successful runs, and alerts when a run takes unusually long for that job. You don't set a threshold, so this method suits a monitor that covers many jobs with different run times.
 
 - The baseline is learned from successful runs.
-- A job needs 24 hours of history of completed runs before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
+- A job needs 24 hours of completed-run history before the monitor can evaluate it. Until a baseline exists, the job is not evaluated.
 - To give the model feedback on its bounds, see [Annotate bounds](#annotate-bounds).
 
 {{% /tab %}}
 {{% tab "Thresholds" %}}
 
-{{< ui >}}Thresholds{{< /ui >}} alerts when a run crosses a fixed duration.
+The {{< ui >}}Thresholds{{< /ui >}} method alerts when a run crosses a fixed duration.
 
 1. Under {{< ui >}}Alert threshold{{< /ui >}}, set {{< ui >}}Trigger when a run exceeds{{< /ui >}} to a duration in minutes or hours.
 2. Optionally, set {{< ui >}}Warning threshold{{< /ui >}} to a shorter duration. The warning threshold must be less than the alert threshold.
