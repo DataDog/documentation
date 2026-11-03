@@ -47,7 +47,7 @@ When you [plan an experiment][1], select the appropriate subject type:
 
 {{< img src="/product_analytics/experiment/subject_types/select_subject_type.png" alt="The experiment setup page with the subject type selector above primary metric selection, showing User and Organization options." style="width:80%;" >}}
 
-By default, Datadog includes a **User** subject type. To manage subject types, navigate to **Experiments** > **Settings** > **Subject Types**:
+By default, Datadog includes a {{< ui >}}User{{< /ui >}} subject type. To manage subject types, navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Subject Types{{< /ui >}}:
 
 {{< img src="/product_analytics/experiment/subject_types/subject_type_list.png" alt="The Subject Types settings page listing User and Organization subject types." style="width:80%;" >}}
 
@@ -81,7 +81,7 @@ LEFT JOIN measures
 
 ### Identity resolution
 
-For warehouse experiments that use different identifiers for exposures and outcomes, configure a randomization subject and an additional subject. For example, connect anonymous exposures to purchases recorded under a signed-in user ID. See [Identity Resolution][5] for the data requirements and setup steps.
+For warehouse experiments that use different identifiers for exposures and metric events, configure a randomization subject and an additional subject. For example, connect anonymous exposures to purchases recorded under a signed-in user ID. See [Identity Resolution][5] for the data requirements and setup steps.
 
 ### Product Analytics and RUM metrics
 

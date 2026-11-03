@@ -24,20 +24,24 @@ An Exposure SQL Model supplies the relationship between those IDs. Datadog conne
 | Randomization subject | The identifier used to assign participants to variants and the unit used to analyze results. | Anonymous browser ID |
 | Additional subject | A related identifier used to connect metric events to the randomization subject. | Signed-in user ID |
 
-Each experiment supports one randomization subject and one additional subject. Adding an additional subject does not change variant assignment or turn multiple randomization subjects into one participant.
+Each experiment supports one randomization subject and one additional subject. Adding an additional subject does not change variant assignment.
 
-## Prerequisites
+## Prerequisites and limitations
 
 Before you begin:
 
 - [Connect a data warehouse][1] to Datadog Experiments.
-- Configure two distinct [subject types][2]. The examples below use **Anonymous** and **User**.
+- Configure two distinct [subject types][2]. The examples on this page use {{< ui >}}Anonymous user{{< /ui >}} and {{< ui >}}User{{< /ui >}}. Your subject type names can differ.
 - Prepare exposure data with the randomization ID, any known additional ID, exposure timestamp, experiment key, and variant.
 - Create [warehouse metrics][3] with subject columns that match one or both subject types.
 - Use the same warehouse connection for the Exposure SQL Model and Metric SQL Models.
-- Create a manually configured experiment without an experiment protocol.
+- Don't apply an [experiment protocol][7] to the experiment. Identity resolution is not supported for experiments created from a protocol.
 
-Identity resolution requires warehouse exposures and warehouse metrics. It does not support Product Analytics or RUM metrics queried directly from Datadog.
+Identity resolution requires warehouse exposures and warehouse metrics. It does not support:
+
+- Product Analytics or RUM metrics queried directly from Datadog.
+- Holdout experiments, sample-size calculations, or interaction-effects analysis.
+- Metric-property breakouts for ratio metrics whose numerator and denominator use different Metric SQL Models.
 
 ## Set up identity resolution
 
@@ -47,47 +51,45 @@ Follow [Create Exposure SQL Models][4] to create a model that returns both ident
 
 ```sql
 SELECT
-  anonymous_id,
-  user_id,
-  exposed_at,
-  experiment_key,
-  variant_id
+  ANONYMOUS_ID,
+  USER_ID,
+  ASSIGNED_TS,
+  EXPERIMENT,
+  VARIANT
 FROM analytics.experiment_exposures
 ```
 
-1. Click **Run** to preview the query output.
-1. Under **Subject columns**, map **Anonymous** to `anonymous_id` and **User** to `user_id`.
-1. Map **Timestamp column** to `exposed_at`, **Experiment key column** to `experiment_key`, and **Variant ID column** to `variant_id`.
-1. Click **Create exposure SQL model**, or **Update exposure SQL model** when editing an existing model.
+1. Click {{< ui >}}Run{{< /ui >}} to preview the query output.
+1. Under {{< ui >}}Subject columns{{< /ui >}}, map {{< ui >}}Anonymous user{{< /ui >}} to `ANONYMOUS_ID` and {{< ui >}}User{{< /ui >}} to `USER_ID`.
+1. Map {{< ui >}}Timestamp column{{< /ui >}} to `ASSIGNED_TS`, {{< ui >}}Experiment key column{{< /ui >}} to `EXPERIMENT`, and {{< ui >}}Variant ID column{{< /ui >}} to `VARIANT`.
+1. Click {{< ui >}}Create Exposure SQL Model{{< /ui >}}, or {{< ui >}}Update Exposure SQL Model{{< /ui >}} if you're editing an existing model.
 
-The screenshots use synthetic checkout data. The subject named **Anonymous user** corresponds to **Anonymous** in this guide.
+The screenshots use synthetic checkout data. The worked example below uses a smaller illustrative dataset with the same column names.
 
-{{< img src="experiments/concepts/identity_resolution/exposure-model.png" alt="Exposure SQL Model showing Anonymous user mapped to ANONYMOUS_ID and User mapped to USER_ID, with timestamp, experiment key, and variant mappings." caption="The exposure model maps both anonymous and user IDs. Click Run to refresh the preview before editing the mappings." >}}
+{{< img src="/experiments/concepts/identity_resolution/exposure-model.png" alt="Exposure SQL Model showing Anonymous user mapped to ANONYMOUS_ID and User mapped to USER_ID, with timestamp, experiment key, and variant mappings." caption="The exposure model maps both anonymous and user IDs." style="width:90%;" >}}
 
-Keep exposure rows where `user_id` is null. Removing them excludes participants who have not signed in. If the relationship is stored in another table, use a `LEFT JOIN` to retain unmatched exposures.
+Keep exposure rows where `USER_ID` is null. Removing them excludes participants who have not signed in. If the relationship is stored in another table, use a `LEFT JOIN` to retain unmatched exposures.
 
 Preserve the original exposure timestamp when joining identity data into the model. Replacing it with a sign-in timestamp can exclude metric activity that occurred after exposure but before sign-in.
 
 ### Select the experiment subjects
 
 1. [Create a draft experiment][6] and select the warehouse experiment key from the Exposure SQL Model.
-1. Under **Calculate metrics by**, click **+** if only one subject selector appears.
-1. Select **Anonymous** as the **Randomization subject** and **User** as the **Additional subject**.
+1. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}+{{< /ui >}} if only one subject selector appears.
+1. Select {{< ui >}}Anonymous user{{< /ui >}} as the {{< ui >}}Randomization subject{{< /ui >}} and {{< ui >}}User{{< /ui >}} as the {{< ui >}}Additional subject{{< /ui >}}.
 1. Verify that the randomization subject matches the identifier used to assign variants.
 
-For a draft without metrics or manually selected subjects, Datadog can preselect both subjects. This requires exactly two distinct subject types in the exposure model and one identifiable as Anonymous. Review these selections before starting the experiment.
+**Note**: For a draft with no metrics, Datadog might fill in both subjects for you. Check them before you start the experiment.
 
-Removing the additional subject preserves that choice while the key stays selected. Clearing and reselecting the key can fill both subjects again for a draft without metrics.
+**Note**: You can change subject roles only while the experiment is a draft. After the experiment starts, subject roles are locked.
 
-Subject roles can be edited while the experiment is a draft. They cannot be changed after the experiment starts.
+Changing or removing a subject can make existing metrics incompatible. Review the list in {{< ui >}}Remove incompatible metrics?{{< /ui >}} before clicking {{< ui >}}Remove metrics and save{{< /ui >}}.
 
-Changing or removing a subject can make existing metrics incompatible. Review the list in **Remove incompatible metrics?** before clicking **Remove metrics and save**.
+### Add metrics to the experiment
 
-### Add metrics and start the experiment
+Add warehouse metrics to the experiment. The purchase Metric SQL Model maps {{< ui >}}User{{< /ui >}} to `USER_ID`, uses `EVENT_TS` as the timestamp, and records purchase amounts in `REVENUE`:
 
-Add warehouse metrics and complete the [experiment setup][6]. The purchase Metric SQL Model maps events to the **User** subject:
-
-{{< img src="experiments/concepts/identity_resolution/purchase-model.png" alt="Purchase revenue Metric SQL Model showing User mapped to USER_ID, EVENT_TS as the timestamp, and REVENUE as a measure." caption="The purchase model maps User to USER_ID and records revenue events. Click Run before editing the mappings." >}}
+{{< img src="/experiments/concepts/identity_resolution/purchase-model.png" alt="Purchase revenue Metric SQL Model showing User mapped to USER_ID, EVENT_TS as the timestamp, and REVENUE as a measure." caption="The purchase model maps User to USER_ID and records revenue events." style="width:90%;" >}}
 
 Each metric uses one subject to match events to exposures:
 
@@ -98,11 +100,16 @@ Each metric uses one subject to match events to exposures:
 | Both subjects | Randomization subject |
 | Neither subject | The metric is unavailable for selection. |
 
-For example, a click metric that supports only **Anonymous** uses the randomization subject. A purchase metric that supports only **User** uses the additional subject. A metric that supports both uses **Anonymous** when first added; Datadog does not calculate it twice.
+For example, a click metric that supports only {{< ui >}}Anonymous user{{< /ui >}} uses the randomization subject. A purchase metric that supports only {{< ui >}}User{{< /ui >}} uses the additional subject. A metric that supports both uses {{< ui >}}Anonymous user{{< /ui >}} when first added. Datadog does not calculate it twice.
 
 Metrics already in the experiment keep their selected subject if it remains compatible. For a ratio metric, both the numerator and denominator must support that subject.
 
-{{< img src="experiments/concepts/identity_resolution/experiment-setup.png" alt="Draft experiment setup with Anonymous user and User subject roles, purchase revenue as the primary metric, and checkout clicks as a secondary metric." caption="In this draft, Anonymous user is the randomization subject and User is the additional subject. Purchase revenue and checkout clicks are selected as decision metrics." >}}
+{{< img src="/experiments/concepts/identity_resolution/experiment-setup.png" alt="Draft experiment setup with Anonymous user and User subject roles, purchase revenue as the primary metric, and checkout clicks as a secondary metric." caption="In this draft, Anonymous user is the randomization subject and User is the additional subject. Purchase revenue and checkout clicks are selected as decision metrics." style="width:90%;" >}}
+
+### Start the experiment
+
+1. Complete the variant mappings, expected traffic split, and experiment dates in the [experiment setup][6].
+1. Click {{< ui >}}Create Experiment{{< /ui >}}. Datadog starts the analysis using the Exposure SQL Model and Metric SQL Models.
 
 After analysis completes, [review experiment results][5]. Events matched through the additional ID contribute to the original randomization subject's result.
 
@@ -110,7 +117,7 @@ After analysis completes, [review experiment results][5]. Events matched through
 
 Suppose the Exposure SQL Model returns these rows for `checkout_test`. All timestamps in this example are on the same day and use UTC.
 
-| `anonymous_id` | `user_id` | `exposed_at` | `experiment_key` | `variant_id` |
+| `ANONYMOUS_ID` | `USER_ID` | `ASSIGNED_TS` | `EXPERIMENT` | `VARIANT` |
 |---|---|---|---|---|
 | `anon_123` | `NULL` | `10:00:00` | `checkout_test` | `control` |
 | `anon_123` | `user_456` | `10:05:00` | `checkout_test` | `control` |
@@ -118,9 +125,9 @@ Suppose the Exposure SQL Model returns these rows for `checkout_test`. All times
 
 The second row connects `user_456` to `anon_123`. The first exposure for `anon_123` remains `10:00:00`.
 
-A purchase Metric SQL Model maps **User** to `user_id` and returns:
+A purchase Metric SQL Model maps {{< ui >}}User{{< /ui >}} to `USER_ID` and returns:
 
-| `user_id` | Purchase time | Amount |
+| `USER_ID` | `EVENT_TS` | `REVENUE` |
 |---|---|---:|
 | `user_456` | `09:55:00` | 10 |
 | `user_456` | `10:02:00` | 30 |
@@ -128,16 +135,16 @@ A purchase Metric SQL Model maps **User** to `user_id` and returns:
 
 ### Expected attribution
 
-For a SUM purchase metric with an observation window starting at exposure and ending after `10:10:00`:
+For a {{< ui >}}Sum of{{< /ui >}} purchase metric with an observation window starting at exposure and ending after `10:10:00`:
 
-- The purchase at `09:55:00` does not contribute to the purchase SUM because it precedes exposure.
+- The purchase at `09:55:00` does not contribute to the purchase {{< ui >}}Sum of{{< /ui >}} because it precedes exposure.
 - The purchase at `10:02:00` contributes 30 to `anon_123` in control. Attribution starts at the original exposure time, even though the model first shows the ID relationship at `10:05:00`.
 - `user_unlinked` contributes no events because the exposure model contains no matching relationship.
-- `anon_789` remains in the experiment population with no attributed purchase events. Its purchase SUM is zero.
+- `anon_789` remains in the experiment population with no attributed purchase events. Its purchase {{< ui >}}Sum of{{< /ui >}} is zero.
 
-The experiment still analyzes anonymous participants. The user ID connects metric events to those participants; it does not replace the randomization subject. This example illustrates event attribution, not a statistical conclusion from two participants.
+This example illustrates event attribution, not a statistical conclusion from two participants.
 
-Updated relationships can change historical attribution when results are recalculated. After correcting the exposure data, [update the experiment results][5] and check them again.
+Updated relationships can change historical attribution when results are recalculated. After correcting the exposure data, [update the experiment results][8] and check them again.
 
 ## Missing or ambiguous relationships
 
@@ -153,21 +160,15 @@ Datadog resolves relationships using the selected experiment's exposures within 
 
 For shared accounts or devices, check that these rules match the population the experiment is intended to measure. An additional ID shared across participants does not contribute its events to every participant.
 
-## Limitations
-
-- Identity resolution requires warehouse exposures and metrics on the same warehouse connection, and an experiment without a protocol.
-- Holdout experiments, sample-size calculations, and interaction-effects analysis are not supported.
-- Metric-property breakouts are not supported for ratio metrics whose numerator and denominator use different Metric SQL Models.
-
 ## Troubleshooting
 
 | Symptom | What to check |
 |---|---|
-| The additional subject is missing during setup. | Confirm the Exposure SQL Model maps both subject types under **Subject columns**. Under **Calculate metrics by**, click **+** to add the second selector. |
+| The additional subject is missing during setup. | Confirm the Exposure SQL Model maps both subject types under {{< ui >}}Subject columns{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, click {{< ui >}}+{{< /ui >}} to add the second selector. |
 | A metric is unavailable or shows a subject-type mismatch. | Confirm the Metric SQL Model supports an experiment subject and uses the same warehouse connection. For a ratio metric, check both numerator and denominator models. |
 | Expected metric events are missing. | Preview the exposure and metric queries. Check ID values, experiment key, variants, analysis dates, and the metric's observation window. Keep unmatched exposure rows and preserve the original exposure timestamp. |
 | A shared ID contributes to an unexpected participant. | Compare exposure rows containing that ID. Check the earliest timestamp, ties, and whether the selected participant was excluded for receiving multiple variants. |
-| Results have not changed after correcting a relationship. | [Update the experiment results][5] after the model output includes the corrected relationship, then review the completed results. |
+| Results have not changed after correcting a relationship. | [Update the experiment results][8] after the model output includes the corrected relationship, then review the completed results. |
 
 ## Further reading
 
@@ -179,3 +180,5 @@ For shared accounts or devices, check that these rules match the population the 
 [4]: /experiments/concepts/exposure_sql/
 [5]: /experiments/reading_results/
 [6]: /experiments/plan_and_launch_experiments/
+[7]: /experiments/protocols/
+[8]: /experiments/concepts/exposure_sql/#update-schedule
