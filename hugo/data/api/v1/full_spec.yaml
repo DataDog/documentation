@@ -4719,10 +4719,14 @@ components:
         - $ref: "#/components/schemas/HeatgridThemeColors"
     HeatgridColorBin:
       additionalProperties: false
-      description: A color and optional lower threshold for a discrete bin.
+      description: A color, optional lower threshold, and optional label for a discrete bin.
       properties:
         color:
           $ref: "#/components/schemas/HeatgridColor"
+        label:
+          description: Name of the bin.
+          maxLength: 255
+          type: string
         lower_bound:
           description: Inclusive lower bound. Omit for the first bin.
           format: double
@@ -4856,12 +4860,15 @@ components:
       type: object
     HeatgridLabelColumn:
       additionalProperties: false
-      description: Configuration of the group label column.
+      description: Configuration of the group label column. Its width is sized automatically when omitted.
       properties:
+        text_formats:
+          description: Ordered string replacement rules for the group labels.
+          items:
+            $ref: "#/components/schemas/HeatgridTextFormatRule"
+          type: array
         width:
           $ref: "#/components/schemas/HeatgridLabelColumnWidth"
-      required:
-        - width
       type: object
     HeatgridLabelColumnWidth:
       description: Width of the label column.
@@ -4987,6 +4994,107 @@ components:
       x-enum-varnames:
         - ASC
         - DESC
+    HeatgridTextFormatMatch:
+      additionalProperties: false
+      description: Match a group label against a string.
+      properties:
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatMatchType"
+        value:
+          description: String to compare with the group label.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    HeatgridTextFormatMatchType:
+      description: Comparison used to match a group label.
+      enum:
+        - is
+        - is_not
+        - contains
+        - does_not_contain
+        - starts_with
+        - ends_with
+      example: is
+      type: string
+      x-enum-varnames:
+        - IS
+        - IS_NOT
+        - CONTAINS
+        - DOES_NOT_CONTAIN
+        - STARTS_WITH
+        - ENDS_WITH
+    HeatgridTextFormatReplace:
+      description: Replace all or part of a matching group label.
+      oneOf:
+        - $ref: "#/components/schemas/HeatgridTextFormatReplaceAll"
+        - $ref: "#/components/schemas/HeatgridTextFormatReplaceSubstring"
+    HeatgridTextFormatReplaceAll:
+      additionalProperties: false
+      description: Replace the entire matching group label.
+      properties:
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatReplaceAllType"
+        with:
+          description: Replacement string.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - with
+      type: object
+    HeatgridTextFormatReplaceAllType:
+      description: Replace the entire matching group label.
+      enum:
+        - all
+      example: all
+      type: string
+      x-enum-varnames:
+        - ALL
+    HeatgridTextFormatReplaceSubstring:
+      additionalProperties: false
+      description: Replace a substring of the matching group label.
+      properties:
+        substring:
+          description: Substring to replace.
+          example: ""
+          maxLength: 255
+          type: string
+        type:
+          $ref: "#/components/schemas/HeatgridTextFormatReplaceSubstringType"
+        with:
+          description: Replacement string.
+          example: ""
+          maxLength: 255
+          type: string
+      required:
+        - type
+        - substring
+        - with
+      type: object
+    HeatgridTextFormatReplaceSubstringType:
+      description: Replace a substring of a matching group label.
+      enum:
+        - substring
+      example: substring
+      type: string
+      x-enum-varnames:
+        - SUBSTRING
+    HeatgridTextFormatRule:
+      additionalProperties: false
+      description: A rule for matching and optionally replacing a group label.
+      properties:
+        match:
+          $ref: "#/components/schemas/HeatgridTextFormatMatch"
+        replace:
+          $ref: "#/components/schemas/HeatgridTextFormatReplace"
+      required:
+        - match
+      type: object
     HeatgridThemeColors:
       description: Two color strings for the light and dark themes, in that order.
       example: ["#FFFFFF", "#000000"]
