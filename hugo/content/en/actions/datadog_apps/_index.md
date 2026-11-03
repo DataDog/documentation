@@ -35,9 +35,13 @@ Choose Apps when you need:
 - **Custom cloud providers and APIs**: Integrate with services beyond the [Action Catalog][4] using your own backend code.
 - **Complex UI and logic**: Full React and TypeScript control over components, state, and rendering.
 
-## Get started with an AI agent
+## Build with an AI agent
 
-To build your first app without installing anything, copy this prompt into your AI coding agent, such as Claude Code, Codex, or Cursor. The agent reads the current Datadog Apps guidance from Datadog, asks what you want to build, then scaffolds the app and runs it locally. It asks before uploading, because uploading publishes the app to your users.
+AI coding agents such as Claude Code, Codex, and Cursor can scaffold, run, upload, and publish Datadog Apps for you. The agent reads current guidance that Datadog hosts at `https://api.datadoghq.com/api/unstable/app-builder-code/agents/`, so it follows the current scaffolder and CLI instead of what it remembers. If your agent's sandbox restricts network access, allow `api.datadoghq.com`. Your machine still needs the [prerequisites](#prerequisites).
+
+### Start with a prompt
+
+To build your first app without installing anything, copy this prompt into your agent. The agent asks what you want to build, then scaffolds the app and runs it locally. It asks before uploading, because uploading publishes the app to your users.
 
 {{< skill-callout
     title="Build a Datadog App with an agent"
@@ -58,7 +62,28 @@ Uploading publishes the app live, so ask me before you upload. Once it's publish
 give me the app's URL.
 {{< /skill-callout >}}
 
-Your machine still needs the [prerequisites](#prerequisites). If your agent's sandbox restricts network access, allow `api.datadoghq.com`. After your app works, the agent offers to install the [`datadog-app` skill](#use-the-datadog-app-skill) so you don't need to paste the prompt again.
+After your app works, the agent offers to install the `datadog-app` skill so you don't need to paste the prompt again.
+
+### Install the `datadog-app` skill
+
+The [`datadog-app` agent skill][20] covers scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. It reads the hosted guidance each time it runs, so it stays up to date without reinstalling. The skill is available in the [agent-skills GitHub repository][21].
+
+```shell
+npx skills add datadog-labs/agent-skills \
+  --skill datadog-app \
+  --full-depth -y
+```
+
+The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
+
+With the skill installed, you can ask your agent things like:
+
+- `Scaffold a Datadog App called my-app.`
+- `Run this Datadog App locally.`
+- `Upload and publish this Datadog App.`
+- `Set up CI/CD for this Datadog App.`
+- `Troubleshoot this Datadog App authentication error.`
+- `Add a table component to this Datadog App using DRUIDS.`
 
 ## Prerequisites
 
@@ -92,29 +117,6 @@ The scaffolded project includes:
 | `src/**/*.backend.ts` | Backend functions that run server-side with access to [Datadog connections][8] |
 | `vite.config.ts` | Build configuration with [`@datadog/vite-plugin`][9] pre-configured |
 | `package.json` | Dependencies and scripts (`dev`, `build`, `upload`) |
-
-## Use the `datadog-app` skill
-
-The [`datadog-app` agent skill][20] gives AI coding agents guidance on Datadog Apps workflows, including scaffolding, local development, uploads, publishing, CI/CD, troubleshooting, DDSQL, and Action Catalog usage. The skill is available in the [agent-skills GitHub repository][21]. The skill reads the current guidance from Datadog each time it runs, so it stays up to date without reinstalling. If your agent's sandbox restricts network access, allow `api.datadoghq.com`.
-
-### Install
-
-```shell
-npx skills add datadog-labs/agent-skills \
-  --skill datadog-app \
-  --full-depth -y
-```
-
-The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and other coding agents. To target a specific agent, see the [skills CLI documentation][22]. If the skill does not appear after installation, restart your coding agent.
-
-### Example prompts
-
-- `Scaffold a Datadog App called my-app.`
-- `Run this Datadog App locally.`
-- `Upload and publish this Datadog App.`
-- `Set up CI/CD for this Datadog App.`
-- `Troubleshoot this Datadog App authentication error.`
-- `Add a table component to this Datadog App using DRUIDS.`
 
 ## Develop your app locally
 
