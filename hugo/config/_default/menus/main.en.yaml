@@ -11064,6 +11064,11 @@ menu:
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
       weight: 1512
+    - name: Test Optimization
+      identifier: account_management_billing_test_optimization
+      url: account_management/billing/test_optimization/
+      parent: account_management_billing
+      weight: 1512
     - name: Incident Response
       identifier: account_management_billing_incident_response
       url: account_management/billing/incident_response/
