@@ -27,7 +27,7 @@ further_reading:
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
-Fleet View is available on US1-FED and US2-FED. On these sites, you can also upgrade and configure Agents on Linux and Windows VMs. SDK upgrades and remote flare collection are not supported.
+Fleet View is available on US1-FED and US2-FED. On these sites, you can also upgrade and configure Agents on Linux and Windows hosts. SDK upgrades and remote flare collection are not supported.
 </div>
 {{< /site-region >}}
 
