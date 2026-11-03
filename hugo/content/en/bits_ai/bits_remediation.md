@@ -15,9 +15,9 @@ site_support_id: bits_remediation
 
 ## Overview of Bits Remediation
 
-Bits Remediation helps on-call engineers, SREs, and platform teams respond to production issues by acting on the root cause that a [Bits Investigation][9] finds. With Bits Remediation, you can generate code fixes, run triage and infrastructure actions, and confirm the fix worked, starting from the investigation. Admins use [Bits Guardrails](#govern-how-bits-takes-remediation-action) to control which actions Bits can take and who must approve them.
+Bits Remediation helps on-call engineers, SREs, and platform teams act on the root cause that [Bits Investigation][9] finds. From an investigation, you can generate code fixes, run triage and infrastructure actions, and verify that the issue is resolved.  Admins use [Bits Guardrails](#govern-how-bits-takes-remediation-action) to control which actions Bits can take and who must approve them.
 
-For example, Bits Investigation might trace rising error rates to a faulty Kubernetes deployment. Bits Remediation can then open an incident, roll the deployment back to the last healthy version, and generate a pull request that fixes the underlying error. Afterward, Bits can verify that error rates returned to normal.
+For example, Bits Investigation might trace rising error rates to a faulty Kubernetes deployment. From the investigation, you can open an incident, roll back the deployment, and generate a pull request that fixes the underlying error. Afterward, Bits can verify that error rates returned to normal.
 
 ## Automate code fixes
 
