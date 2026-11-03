@@ -9,16 +9,9 @@ further_reading:
   text: "OpenTelemetry Collector components included in DDOT"
 ---
 
-
-{{< callout header="false" btn_hidden="true" >}}
-The DDOT Collector is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. You don't need the Datadog Agent.
-
-To install DDOT with one script instead, see the [Kubernetes quickstart][69].
 
 ## Requirements
 
@@ -797,7 +790,7 @@ Instrument your application with the DDOT SDK or an OpenTelemetry SDK. Either on
 
 ### DDOT SDK
 
-Turn on the DDOT SDK as described in [DDOT SDKs][66]. To inject it with the OpenTelemetry Operator, follow the DDOT tab of the [Kubernetes quickstart][69]. If you installed the Collector with Helm, install the Operator too. Then continue to [Verify the setup](#verify-the-setup).
+Turn on OTLP export in the Datadog SDK for your language, as described in [Export Traces from Datadog SDKs in OTLP Format][66]. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Collector on the node, as in the [OpenTelemetry SDK](#opentelemetry-sdk) example. Then continue to [Verify the setup](#verify-the-setup).
 
 ### OpenTelemetry SDK
 
@@ -960,8 +953,7 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [60]: https://app.datadoghq.com/infrastructure
 [61]: https://app.datadoghq.com/metric/explorer
 [62]: https://app.datadoghq.com/logs
-[66]: /opentelemetry/instrument/dd_sdks/
+[66]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
-[69]: /opentelemetry/getting_started/kubernetes/?tab=ddot
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
