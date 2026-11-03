@@ -288,7 +288,7 @@ R8 is not enabled for the build. Add `<AndroidLinkTool>r8</AndroidLinkTool>` and
 **`Skipping Portable PDB upload — no debug-id manifest found`**:
 The debug ID manifest (`dd_debug_ids.json`) is generated during the build that `dotnet publish` runs. Confirm that the build succeeded and that debug symbols are enabled with `<DebugType>portable</DebugType>`.
 
-**`Skipping Portable PDB upload — no Portable PDB found`**
+**`Skipping Portable PDB upload — no Portable PDB found`**:
 No `.pdb` file was written to the build output directory. Confirm that debug symbols are enabled for the configuration you publish, with `<DebugType>portable</DebugType>`.
 
 **Warning: no Portable PDB matching the shipped assembly was found**
