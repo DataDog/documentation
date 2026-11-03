@@ -86,7 +86,7 @@ Create the holdout before starting the experiments:
 
 1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
 1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}. If {{< ui >}}Managed by{{< /ui >}} is shown, select {{< ui >}}Datadog (Managed){{< /ui >}}.
-1. Set the start and end dates for {{< ui >}}Experiment inclusion phase{{< /ui >}}. Allow time for the covered experiments to run and complete their rollouts within this period.
+1. Set the start and end dates for the {{< ui >}}Experiment inclusion phase{{< /ui >}}. Allow time for the covered experiments to run and complete their rollouts within this period.
 1. Review the start and end dates for {{< ui >}}Analysis phase{{< /ui >}} and adjust them as needed. Analysis starts at or after inclusion ends.
 1. Set {{< ui >}}Holdout traffic exposure{{< /ui >}}. This share includes both holdout groups.
 1. Select the {{< ui >}}Subject type{{< /ui >}} used by the experiments, a {{< ui >}}Primary metric{{< /ui >}}, and optional {{< ui >}}Secondary metrics{{< /ui >}}. Review the [analysis method][2] under {{< ui >}}Analysis settings{{< /ui >}}.
