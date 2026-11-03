@@ -1,13 +1,21 @@
+# Policy for: .github/workflows/workflow_automation.yml in DataDog/websites-modules
+#
+# Jobs: process-clients-for-preview-branches (creates the generated branch and
+# commits go.mod/go.sum) and process-clients-for-main-branch (re-points the
+# branch at the new websites-modules release and opens the PR).
+#
+# Both jobs are driven by the same `pull_request` trigger on the same workflow,
+# so their OIDC claims are identical and they necessarily share one policy.
 issuer: https://token.actions.githubusercontent.com
 
 subject: "repo:DataDog/websites-modules:pull_request"
 
 permissions:
-  contents: write
-  pull_requests: write
+  contents: write # create refs + commit go.mod/go.sum on the generated branch
+  pull_requests: write # open the generated PR
 
 claim_pattern:
-  repository: "DataDog/websites-modules"
-  ref_type: "branch"
-  # job_workflow_ref: DataDog/websites-modules/.github/workflows/workflow_automation.yml@refs/heads/main
   event_name: "pull_request"
+  job_workflow_ref: 'DataDog/websites-modules/\.github/workflows/workflow_automation\.yml@refs/heads/main'
+  ref_type: "branch"
+  repository: "DataDog/websites-modules"
