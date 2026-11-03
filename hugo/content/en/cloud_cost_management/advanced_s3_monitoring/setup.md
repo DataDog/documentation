@@ -279,7 +279,7 @@ To verify your setup:
 1. Wait for the first inventory report to generate (up to 24 hours for daily inventories).
 2. Open the [Amazon S3 integration tile][3], go to the **Configure** tab, and click **Settings** in the **Advanced Monitoring** section. Confirm that the buckets you configured appear in the bucket table when **Monitored Buckets** is selected.
 
-  {{< img src="infrastructure/storage_management/monitored-buckets.png" alt="Validate bucket is enabled for monitoring" responsive="true">}}
+  {{< img src="infrastructure/storage_management/monitored-buckets-2.png" alt="Advanced Monitoring Settings page with Monitored Buckets selected, listing configured buckets" responsive="true">}}
 
 ### Best practices
 
@@ -356,7 +356,7 @@ Seeing recommendations has the following prerequisites:
 - Expire old non-current version objects in S3 bucket prefix
 - Consolidate small files in prefix to minimize per-object storage costs
 
-  {{< img src="infrastructure/storage_management/storage-recs.png" alt="Advanced S3 Monitoring recommendations" responsive="true">}}
+  {{< img src="infrastructure/storage_management/storage-recs-2.png" alt="Advanced S3 Monitoring recommendations" responsive="true">}}
 
 
 [1]: mailto:storage-monitoring@datadoghq.com
