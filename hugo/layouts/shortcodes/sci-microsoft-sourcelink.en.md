@@ -8,7 +8,6 @@ If you are using [Microsoft SourceLink][201], Datadog can extract the git commit
    | Bitbucket | [Microsoft.SourceLink.Bitbucket.Git][203] |
    | GitLab | [Microsoft.SourceLink.GitLab][204] |
    | Azure DevOps | [Microsoft.SourceLink.AzureRepos.Git][205] |
-   | Azure DevOps Server | [Microsoft.SourceLink.AzureDevOpsServer.Git][206] |
 
 [201]: https://github.com/dotnet/sourcelink
 [202]: https://www.nuget.org/packages/Microsoft.SourceLink.GitHub
