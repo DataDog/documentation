@@ -69,6 +69,11 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
       <td>Publish and unpublish internal Status Pages.</td>
       <td>None</td>
     </tr>
+    <tr>
+      <td style="white-space: nowrap;">Status Pages Private Page Publish<br><code style="white-space: nowrap;">status_pages_private_page_publish</code></td>
+      <td>Publish and unpublish private Status Pages.</td>
+      <td>None</td>
+    </tr>
   </tbody>
 </table>
 
@@ -94,7 +99,7 @@ To restrict access:
 1. Add teams, roles, users, or service accounts and assign each an access level.
 1. Click **Save**.
 
-**Note**: Access restrictions apply to users in your Datadog organization. They do not change who can view a published public status page.
+**Note**: Access restrictions apply to users in your Datadog organization. They do not change who can view a published public or private status page.
 
 ## Create a status page
 
@@ -103,10 +108,10 @@ To restrict access:
 
    | Field             | Description |
    | ----------------- | ----------- |
-   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
+   | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view <br>- **Private** - Visitors enter an email address. If it matches the page's email rules, Datadog sends them a secure link to view the page. Visitors do not need a Datadog account. |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
-   | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), or [Microsoft Teams](#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Public page example: shopist → shopist.statuspage.datadoghq.com*<br>*Private page example: shopist → shopist.private.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), or [Microsoft Teams](#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. Private status pages support email subscriptions only. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
@@ -150,6 +155,24 @@ Each component status affects the uptime bars and uptime percentage differently:
 
 **Note**: Partial Outage and Major Outage are weighted equally. The full duration at either status counts as downtime in the uptime percentage calculation.
 
+## Configure visitor access for a private status page
+
+Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
+
+You can configure email rules while creating a private status page. For an existing page, click **Settings**, select **General**, and go to **Email Rules**.
+
+You can separate multiple entries with commas.
+
+1. In **Allow**, add individual email addresses or domains. Format domains with a leading `@`, for example `@example.com`.
+1. (Optional) In **Deny**, add individual email addresses that should be blocked. Deny rules take precedence over Allow rules.
+1. Click **Save**.
+
+{{< img src="/incident_response/status_pages/private_status_page_email_rules.png" alt="Private status page settings with Email Rules that allow a domain and email address and deny an individual email address" style="width:100%;" >}}
+
+An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
+
+Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access.
+
 ## Publish your status page
 
 After you save your status page settings, click **Launch Status Page** to make the page available at its URL.
@@ -157,6 +180,7 @@ After you save your status page settings, click **Launch Status Page** to make t
 If you selected:
 - **Public**, the page is immediately accessible to all visitors.
 - **Internal**, access is limited to authenticated Datadog users in your organization.
+- **Private**, access is limited to visitors whose email address matches the page's [email rules](#configure-visitor-access-for-a-private-status-page).
 
 ## Add a notice
 
@@ -325,6 +349,8 @@ Email subscriptions on status pages are **double opt-in**. After entering an ema
 
 For **internal** status pages, the subscription process is the same, but users must log in to the same Datadog organization to confirm their subscription and receive notifications.
 
+For **private** status pages, visitors can subscribe only with an email address that matches the page's email rules.
+
 {{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
 ### Enable email subscriptions
@@ -341,7 +367,7 @@ Two settings control email subscriptions:
 
 {{< img src="incident_response/status_pages/status_pages_enable_email.png" alt="Status page email subscription settings showing the Notify subscribers and Show subscribe option to visitors toggles" style="width:80%;" >}}
 
-Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a private audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
+Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a specific audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
 
 ### Add or import subscribers
 
@@ -471,7 +497,7 @@ A subscription is **Active** while Datadog delivers updates to it. If Datadog ca
 
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
+For public and private status pages, you can map the status page URL to a custom domain like `status.example.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**, then select **Custom Domain** under **General**.
 1. Follow the instructions to enter your domain and add DNS records.
