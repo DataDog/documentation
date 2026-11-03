@@ -1,7 +1,7 @@
 site_name: "Surveillance d'applications et d'infrastructures avec Datadog"
 meta_title: Débuter avec Datadog
 meta_description: "Datadog, le principal prestataire de services de surveillance à l'échelle du cloud."
-disclaimer: "Cette page n'est pas encore disponible en anglais. Nous travaillons sur sa traduction. <br> Si vous avez des questions ou des commentaires concernant notre projet de traduction actuel, <a href=\"https://docs.datadoghq.com/help/\">n'hésitez pas à nous contacter !</a>"
+disclaimer: "Cette page n'est pas encore disponible en français. Nous travaillons sur sa traduction. <br> Si vous avez des questions ou des commentaires concernant notre projet de traduction actuel, <a href=\"https://docs.datadoghq.com/help/\">n'hésitez pas à nous contacter !</a>"
 # announcement_banner:
 #   desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
 #   mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
