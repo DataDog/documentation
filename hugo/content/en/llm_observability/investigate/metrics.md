@@ -100,7 +100,7 @@ These metrics carry the available application, model, service, and environment t
 
 Unavailable details use `unknown`; missing data does not mean zero. For example, a provider that does not report cache usage has `input_type:unknown`.
 
-The Count values sum contribution amounts; they are not counts of requests. Use `sum` with `.as_count()` for usage or cost totals over a time window:
+Use these queries to chart spending and token usage by modality and cache category. `.as_count()` shows totals for each chart interval.
 
 ```text
 sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
