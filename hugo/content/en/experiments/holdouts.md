@@ -92,6 +92,7 @@ An **exposure record** identifies the experience served to a subject.
 
 Create the holdout before starting the experiments:
 
+1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Datadog Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
 1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}.
 1. Select the subject type used by the experiments.
 1. Set the traffic allocation. Include both groups when calculating how much traffic remains for individual experiments.
