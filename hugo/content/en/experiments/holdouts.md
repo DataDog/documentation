@@ -86,7 +86,7 @@ For holdouts that use Datadog Feature Flags, included experiments must:
 
 Add selective experiments while they are drafts. The holdout must be waiting to start or within its inclusion period.
 
-An **exposure record** identifies the experience served to a subject. If the holdout uses Datadog-hosted exposure data, {{< ui >}}Ignore Datadog-hosted exposure data{{< /ui >}} must be disabled in each included experiment's analysis settings.
+An **exposure record** identifies the experience served to a subject.
 
 ## Set up a holdout
 
