@@ -41,7 +41,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 ## Enable Remote Configuration
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">
+<div class="alert alert-info">
 Remote Configuration is not enabled by default for organizations on US1-FED or US2-FED. Enable it in <a href="https://app.datadoghq.com/organization-settings/remote-config">Organization Settings &gt; Remote Configuration</a> using the steps below.
 </div>
 {{< /site-region >}}
