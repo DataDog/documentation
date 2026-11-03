@@ -174,7 +174,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 Tag Indexing Rules and Metrics without Limits™ tag configurations both control which tags are indexed. Rules apply across many metrics, while Metrics without Limits™ configurations apply to one metric at a time and take precedence over rules.
 
-Across thousands of customers, Datadog's query insights show that using Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%.
+Across thousands of customers, Datadog's query insights show that unindexing tags on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%.
 
 ### Understand the relative utility of your metrics
 

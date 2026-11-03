@@ -111,7 +111,7 @@ To sort the list, click a column header.
 
 #### Customize columns
 
-You can show, hide, reorder, and resize the columns in the metrics table. Datadog saves your column choices.
+You can show, hide, reorder, and resize the columns in the metrics table. Datadog saves your column choices to your user account.
 
 To show, hide, or reorder columns:
 1. Click {{< ui >}}Columns{{< /ui >}} above the metrics table.
