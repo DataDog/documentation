@@ -160,7 +160,7 @@ agentSpan.annotateAgentManifest(
 {{% /tab %}}
 {{< /tabs >}}
 
-All manifest fields are optional. Values that cannot be reported are dropped, and later annotations update the manifest field by field.
+All manifest fields are optional. Keys that are not in the following table are dropped, and each later annotation updates only the fields that it sets.
 
 | Field | Description |
 |-------|-------------|
