@@ -42,6 +42,10 @@ Enter the maximum number of seconds to keep a connection open. If left unset, co
 
 ### Settings configured with environment variables
 
+#### Connection limit
+
+By default, the Splunk TCP source doesn't limit the number of connections. To set a maximum number of connections, set the `DD_OP_SPLUNK_TCP_CONNECTION_LIMIT` environment variable. If the variable is unset or set to `0`, there is no limit.
+
 #### Maximum frame length
 
 By default, the Splunk TCP source doesn't limit the size of an event. To prevent unbounded memory consumption, such as from malformed connections or connections that remain open indefinitely, set the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` environment variable to the maximum frame length in bytes.
@@ -49,10 +53,6 @@ By default, the Splunk TCP source doesn't limit the size of an event. To prevent
 #### TCP keepalive
 
 TCP keepalive is enabled by default with a 60-second idle time. This helps detect dead connections when clients disconnect without closing the connection. To change the idle time, set the `DD_OP_SPLUNK_TCP_KEEPALIVE_TIME_SECS` environment variable to the number of seconds.
-
-#### Connection limit
-
-By default, the Splunk TCP source doesn't limit the number of connections. To set a maximum number of connections, set the `DD_OP_SPLUNK_TCP_CONNECTION_LIMIT` environment variable. If the variable is unset or set to `0`, there is no limit.
 
 ## Secret defaults
 
