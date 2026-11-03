@@ -319,4 +319,4 @@ If your teams send LLM requests through a shared AI gateway, you can split that 
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
 [19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
 [20]: /cloud_cost_management/ai_costs/ai_gateway_allocation
-[22]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
+[21]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
