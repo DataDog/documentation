@@ -131,8 +131,6 @@ The exposure and metric periods are different. A qualifying exposure can occur d
 
 The primary analysis uses [CUPED][7] when it is enabled in the analysis settings. The preliminary analysis does not use CUPED.
 
-Using the first qualifying exposure also gives CUPED the correct point from which to look back. Data collected after a subject could receive a shipped change must not be treated as data from before exposure.
-
 ## Interpret results
 
 Use the primary analysis to assess the combined changes during the analysis phase. See [Holdout phases](#holdout-phases) for the distinction between preliminary and primary results.
