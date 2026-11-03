@@ -82,7 +82,7 @@ Some Observability Pipelines components require setting up environment variables
 ### Reduce
 
 - Aggregation window (optional)
-  - How long a Reduce processor aggregates events before sending out the reduced log. See [Set the aggregation window](#set-the-aggregation-window) for more information.
+  - How long a Reduce processor aggregates events before sending the reduced log. See [Set the aggregation window](/observability_pipelines/processors/reduce/#set-the-aggregation-window) for more information.
   - Stored in the environment variable `DD_OP_REDUCE_WINDOW_SECS`.
   - Requires Worker version 2.25.0 or later.
 
