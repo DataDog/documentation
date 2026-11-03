@@ -155,9 +155,9 @@ If the traffic between your private location and Datadog has to go through a pro
 
 #### Blocking reserved IPs
 
-New private locations block the reserved IP ranges by default. Private locations created before <RELEASE_DATE_PLACEHOLDER> do not change. The {{< ui >}}Block reserved IPs{{< /ui >}} toggle is on by default. It blocks a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and sets the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file. To disable the block, turn off the toggle or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
+New private locations block the reserved IP ranges by default. Private locations created before <RELEASE_DATE_PLACEHOLDER> do not change. The {{< ui >}}Block reserved IPs{{< /ui >}} toggle is on by default. It blocks a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]). It also sets `enableDefaultBlockedIpRanges` to `true` in your generated configuration file. To disable the block, turn off the toggle or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
 
-If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
+Some of the endpoints you want to test might be in the blocked reserved IP ranges. To allow them, add their IPs and/or CIDRs to the allowed lists. This adds the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
 
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
@@ -186,7 +186,7 @@ Run this command to boot your private location worker by mounting your configura
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
-**Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note:** Reserved IPs are blocked by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
@@ -206,7 +206,7 @@ This command starts a Docker container and makes your private location ready to 
             volumes:
                 - PATH_TO_PRIVATE_LOCATION_CONFIG_FILE:/etc/datadog/synthetics-check-runner.json
     ```
-    **Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note:** Reserved IPs are blocked by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 2. Start your container with:
 
@@ -273,7 +273,7 @@ To deploy the private locations worker in a secure manner, set up and mount a Ku
               secretName: private-location-worker-config
     ```
 
-    **Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+    **Note:** Reserved IPs are blocked by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 3. Apply the configuration:
 
@@ -306,7 +306,7 @@ Alternatively:
     helm install <RELEASE_NAME> datadog/synthetics-private-location --set-file configFile=<MY_WORKER_CONFIG_FILE_NAME>.json
     ```
 
-**Note:** Reserved IPs are blocked by default, add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
+**Note:** Reserved IPs are blocked by default. Add the `NET_ADMIN` [Linux capabilities][26] to your private location container.
 
 In multi-container mode, the Helm chart creates a Kubernetes NetworkPolicy by default. To disable it, set `multiContainer.networkPolicy.create` to `false`.
 
@@ -349,7 +349,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 ```
 **Notes:**
 
-- Reserved IPs are blocked by default, configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
+- Reserved IPs are blocked by default. Configure a [linuxParameters][31] to grant `NET_ADMIN` capabilities to your private location containers.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
@@ -523,7 +523,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
               name: private-location-worker-config
     ```
 
-    **Note:** Reserved IPs are blocked by default, configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
+    **Note:** Reserved IPs are blocked by default. Configure a security context to grant `NET_ADMIN` [Linux capabilities][26] to your private location containers.
 
 3. Apply the configuration:
 
