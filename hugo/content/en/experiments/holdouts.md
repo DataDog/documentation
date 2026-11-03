@@ -143,7 +143,7 @@ Using the first qualifying exposure also gives CUPED the correct point from whic
 
 ## Interpret results
 
-Use the primary analysis to assess the combined changes during the analysis phase. Preliminary results provide an early directional read and help identify problems during inclusion. They include time before the full treatment is available, so don't interpret them as the impact of the complete set of shipped changes.
+Use the primary analysis to assess the combined changes during the analysis phase. See [Holdout phases](#holdout-phases) for the distinction between preliminary and primary results.
 
 The scorecard compares all-shipped with status-quo. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
