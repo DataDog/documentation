@@ -2,7 +2,6 @@
 title: Remote Configuration for Fleet Automation
 description: Configure Remote Configuration with Fleet Automation to enable Agent flares, remote upgrades, and centralized configuration management.
 disable_toc: false
-site_support_id: fleet-automation-host-features
 further_reading:
 - link: "/remote_configuration"
   tag: "Documentation"
@@ -22,7 +21,7 @@ This page covers configuring and using {{< tooltip glossary="remote_configuratio
 | Feature | Description | Minimum Agent Version |
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
-| **[Agent upgrades][10]** | Remotely upgrade your Agents | US1-FED: 7.85.0+ for Linux and Windows<br>Other supported sites: Linux 7.69.0+, Windows 7.71.1+ |
+| **[Agent upgrades][10]** | Remotely upgrade your Agents | US1-FED and US2-FED: 7.85.0+ for Linux and Windows<br>Other supported sites: Linux 7.69.0+, Windows 7.71.1+ |
 | **[Agent configuration][13]** | Remotely configure your Agents | 7.73+ |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
@@ -39,8 +38,8 @@ In most cases, Remote Configuration is enabled by default for your organization.
 1. Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][3]. This enables Datadog components across your organization to receive configurations from Datadog.
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">On US1-FED, Remote Configuration is not enabled by default for your organization. Enable it using the steps above.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">On US1-FED and US2-FED, Remote Configuration is not enabled by default for your organization. Enable it using the steps above, then enable it on each Agent as described below.</div>
 {{< /site-region >}}
 
 ## Enable remote Agent management

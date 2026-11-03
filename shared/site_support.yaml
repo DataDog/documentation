@@ -162,8 +162,6 @@ site_support_ids:
     regions: [us, us3, us5, eu, ap1, ap2, uk1]
   fips-proxy:
     regions: [us, us3, us5, eu, ap1, ap2, gov2, uk1]
-  fleet-automation-host-features:
-    regions: [gov2]
   fleet-automation-standard-features:
     regions: [gov, gov2]
   forwarding_audit_events:
@@ -275,8 +273,6 @@ site_support_ids:
   scaleway:
     regions: [gov, gov2]
   service_override_removal:
-    regions: [gov, gov2]
-  setup_remote_config:
     regions: [gov, gov2]
   snmp_profile_manager:
     regions: [gov, gov2]
