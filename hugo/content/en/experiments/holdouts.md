@@ -15,8 +15,8 @@ A holdout sets aside a share of eligible subjects.
 
 These subjects are assigned at random to two groups:
 
-- **status-quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
-- **all-shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
+- **Status quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
+- **All shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
 
 Both groups stay on control while covered experiments run, so rejected variants cannot distort the comparison. The result measures the combined impact of changes that remain in the product and continue to affect existing and future users.
 
