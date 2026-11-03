@@ -33,10 +33,10 @@ Use Status Pages to:
 
 Use the following pages to set up and run your status pages:
 
-- [Components](/incident_response/status_pages/components/): Represent the services and features your users rely on.
-- [Notices](/incident_response/status_pages/notices/): Publish degradations and schedule maintenance windows.
-- [Notice Templates](/incident_response/status_pages/templates/): Reuse notice titles, messages, and components.
-- [Subscriptions](/incident_response/status_pages/subscriptions/): Notify subscribers by email, Slack, or Microsoft Teams.
+- [Components][5]: Represent the services and features your users rely on.
+- [Notices][6]: Publish degradations and schedule maintenance windows.
+- [Notice Templates][7]: Reuse notice titles, messages, and components.
+- [Subscriptions][8]: Notify subscribers by email, Slack, or Microsoft Teams.
 
 ## Configure permissions
 
@@ -113,12 +113,11 @@ To restrict access:
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](/incident_response/status_pages/subscriptions/#email-subscriptions), [Slack](/incident_response/status_pages/subscriptions/#slack-subscriptions), or [Microsoft Teams](/incident_response/status_pages/subscriptions/#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](/incident_response/status_pages/subscriptions/#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](/incident_response/status_pages/subscriptions/#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email][9], [Slack][10], or [Microsoft Teams][11]. For email, you can let visitors subscribe from the published page or [add subscribers][12] yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions][9] are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
-1. (Optional) [Add components](/incident_response/status_pages/components/) to show the status of individual services.
+1. (Optional) [Add components][5] to show the status of individual services.
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
-
 
 ## Publish your status page
 
@@ -128,10 +127,9 @@ If you selected:
 - **Public**, the page is immediately accessible to all visitors.
 - **Internal**, access is limited to authenticated Datadog users in your organization.
 
-
 ## Set a custom domain
 
-To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](/incident_response/status_pages/subscriptions/#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
+To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain][13], which controls the from address on subscription emails.
 
 1. From your status page, click **Settings**, then select **Custom Domain** under **General**.
 1. Follow the instructions to enter your domain and add DNS records.
@@ -156,3 +154,12 @@ You can use Terraform to create or manage your status pages. For details on the 
 [2]: /account_management/rbac/granular_access/
 [3]: https://app.datadoghq.com/status-pages
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page
+[5]: /incident_response/status_pages/components/
+[6]: /incident_response/status_pages/notices/
+[7]: /incident_response/status_pages/templates/
+[8]: /incident_response/status_pages/subscriptions/
+[9]: /incident_response/status_pages/subscriptions/#email-subscriptions
+[10]: /incident_response/status_pages/subscriptions/#slack-subscriptions
+[11]: /incident_response/status_pages/subscriptions/#microsoft-teams-subscriptions
+[12]: /incident_response/status_pages/subscriptions/#add-or-import-subscribers
+[13]: /incident_response/status_pages/subscriptions/#configure-a-custom-email-sender-domain

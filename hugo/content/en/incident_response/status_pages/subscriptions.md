@@ -47,7 +47,7 @@ You can add or import subscribers before you publish your page or enable **Notif
 New subscribers must confirm their email address before they receive notifications:
 
 - **Published page**: Datadog sends the confirmation email immediately.
-- **Unpublished page**: Subscribers are saved as **pending**. Datadog sends the confirmation email when you [publish the page](/incident_response/status_pages/#publish-your-status-page).
+- **Unpublished page**: Subscribers are saved as **pending**. Datadog sends the confirmation email when you [publish the page][2].
 
 Unpublishing a page doesn't affect existing subscribers.
 
@@ -68,7 +68,7 @@ If the selected SMTP server fails, notifications are sent to subscribers through
 
 ## Slack subscriptions
 
-Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender. Slack subscriptions are configured independently of [email subscriptions](#email-subscriptions).
+Visitors can subscribe to status page updates in Slack through the **Datadog Status Pages** Slack app. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, the app posts updates to each subscribed channel for the components it follows, using your page name and Slack app icon as the sender.
 
 ### Enable Slack subscriptions
 
@@ -103,7 +103,7 @@ Status page owners can review subscribers in the status page settings, which lis
 
 ## Microsoft Teams subscriptions
 
-Visitors can subscribe a Microsoft Teams channel to status page updates through a Teams workflow. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, Datadog posts an Adaptive Card to each subscribed channel for the components it follows. Microsoft Teams subscriptions are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+Visitors can subscribe a Microsoft Teams channel to status page updates through a Teams workflow. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, Datadog posts an Adaptive Card to each subscribed channel for the components it follows.
 
 ### Enable Microsoft Teams subscriptions
 
@@ -166,3 +166,4 @@ A subscription is **Active** while Datadog delivers updates to it. If Datadog ca
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/org_settings/smtp_configuration
+[2]: /incident_response/status_pages/#publish-your-status-page

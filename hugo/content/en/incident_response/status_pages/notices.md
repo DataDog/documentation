@@ -26,7 +26,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Message** | Additional details for your users <br>*Example: We are aware of the issue and are actively working on a fix.* |
 | **Components impacted** | One or more components affected by the degradation |
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-| **Notify subscribers** | Toggle to send updates to subscribed users. Email also requires the page-level [**Notify subscribers**](/incident_response/status_pages/subscriptions/#enable-email-subscriptions) setting. |
+| **Notify subscribers** | Toggle to send updates to subscribed users. Email also requires the page-level [**Notify subscribers**][1] setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
@@ -82,7 +82,7 @@ From the status page, click **Schedule Maintenance**, or click **Publish Notice*
 | **Maintenance window** | Scheduled start and end time for the maintenance |
 | **Messages** | Messages that are automatically published as the maintenance progresses |
 | **Components impacted** | Components affected during the maintenance window |
-| **Notify subscribers** | Toggle to send advance notification to subscribers. Email also requires the page-level [**Notify subscribers**](/incident_response/status_pages/subscriptions/#enable-email-subscriptions) setting. |
+| **Notify subscribers** | Toggle to send advance notification to subscribers. Email also requires the page-level [**Notify subscribers**][1] setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
 
@@ -129,3 +129,5 @@ Only the **Message** field can be edited. Click **Save Changes** to apply the ed
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /incident_response/status_pages/subscriptions/#enable-email-subscriptions
