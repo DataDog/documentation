@@ -2853,11 +2853,16 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Google Meet
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_meet
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_meet
+      weight: 508
     - name: Zoom
       url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
       parent: incidents_integrations
       identifier: incidents_integrations_zoom
-      weight: 508
+      weight: 509
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
@@ -5564,6 +5569,11 @@ menu:
       identifier: clickhouse_cloud_data_obs
       parent: data_warehouses
       weight: 5000000
+    - name: Microsoft Fabric Warehouse
+      url: data_observability/quality_monitoring/data_warehouses/fabric
+      identifier: data_obs_fabric_warehouse
+      parent: data_warehouses
+      weight: 6000000
     - name: Data Lakes
       url: data_observability/quality_monitoring/data_lakes
       identifier: data_lakes
@@ -7486,56 +7496,61 @@ menu:
       url: logs/log_collection/maui/
       parent: log_collection
       weight: 109
+    - name: Electron
+      identifier: log_electron
+      url: logs/log_collection/electron/
+      parent: log_collection
+      weight: 110
     - name: C#
       identifier: log_collection_csharp
       url: logs/log_collection/csharp/
       parent: log_collection
-      weight: 110
+      weight: 111
     - name: Go
       identifier: log_go
       url: logs/log_collection/go/
       parent: log_collection
-      weight: 111
+      weight: 112
     - name: Java
       url: logs/log_collection/java/
       parent: log_collection
       identifier: log_collection_java
-      weight: 112
+      weight: 113
     - name: Node.js
       identifier: log_collection_nodejs
       url: logs/log_collection/nodejs/
       parent: log_collection
-      weight: 113
+      weight: 114
     - name: PHP
       identifier: log_php
       url: logs/log_collection/php/
       parent: log_collection
-      weight: 114
+      weight: 115
     - name: Python
       identifier: log_python
       url: logs/log_collection/python/
       parent: log_collection
-      weight: 115
+      weight: 116
     - name: Ruby
       url: logs/log_collection/ruby/
       parent: log_collection
       identifier: log_collection_ruby
-      weight: 116
+      weight: 117
     - name: OpenTelemetry
       url: opentelemetry/otel_logs/
       parent: log_collection
       identifier: log_collection_opentelemetry
-      weight: 115
+      weight: 116
     - name: Agent Integrations
       url: logs/log_collection/agent_checks/
       parent: log_collection
       identifier: log_collection_agent_checks
-      weight: 116
+      weight: 117
     - name: Other Integrations
       url: integrations/#cat-log-collection
       identifier: other_integrations
       parent: log_collection
-      weight: 117
+      weight: 118
     - name: Log Configuration
       url: logs/log_configuration/
       parent: log_management
@@ -9979,11 +9994,41 @@ menu:
       parent: rum_cpp
       identifier: rum_cpp_supported_versions
       weight: 107
+    - name: Electron
+      url: real_user_monitoring/application_monitoring/electron
+      parent: application_monitoring
+      identifier: rum_electron
+      weight: 206
+    - name: Setup
+      url: real_user_monitoring/application_monitoring/electron/setup
+      parent: rum_electron
+      identifier: rum_electron_setup
+      weight: 101
+    - name: Error Tracking
+      url: real_user_monitoring/application_monitoring/electron/error_tracking
+      parent: rum_electron
+      identifier: rum_electron_error_tracking
+      weight: 102
+    - name: Advanced Configuration
+      url: real_user_monitoring/application_monitoring/electron/advanced_configuration
+      parent: rum_electron
+      identifier: rum_electron_advanced_configuration
+      weight: 103
+    - name: Data Collected
+      url: real_user_monitoring/application_monitoring/electron/data_collected
+      parent: rum_electron
+      identifier: rum_electron_data_collected
+      weight: 104
+    - name: Troubleshooting
+      url: real_user_monitoring/application_monitoring/electron/troubleshooting
+      parent: rum_electron
+      identifier: rum_electron_troubleshooting
+      weight: 105
     - name: Roku
       url: real_user_monitoring/application_monitoring/roku
       parent: application_monitoring
       identifier: rum_mobile_roku
-      weight: 206
+      weight: 207
     - name: Setup
       url: real_user_monitoring/application_monitoring/roku/setup
       parent: rum_mobile_roku
@@ -10013,7 +10058,7 @@ menu:
       url: real_user_monitoring/application_monitoring/unity
       parent: application_monitoring
       identifier: rum_mobile_unity
-      weight: 207
+      weight: 208
     - name: Setup
       url: real_user_monitoring/application_monitoring/unity/setup
       parent: rum_mobile_unity
@@ -10048,7 +10093,7 @@ menu:
       url: real_user_monitoring/application_monitoring/maui
       parent: application_monitoring
       identifier: rum_mobile_maui
-      weight: 208
+      weight: 209
     - name: Setup
       url: real_user_monitoring/application_monitoring/maui/setup
       parent: rum_mobile_maui
@@ -10491,21 +10536,26 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_plan
       weight: 3
+    - name: Experiment Approvals
+      url: experiments/approvals/
+      parent: pa_experiments
+      identifier: pa_experiments_approvals
+      weight: 4
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 4
+      weight: 5
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 5
+      weight: 6
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 6
+      weight: 7
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10530,7 +10580,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 7
+      weight: 8
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10560,22 +10610,22 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 8
+      weight: 9
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
       identifier: pa_experiments_troubleshooting
-      weight: 10
+      weight: 11
     - name: Experiments MCP Tools
       url: experiments/mcp_tools
       parent: pa_experiments
       identifier: pa_experiments_mcp_tools
-      weight: 11
+      weight: 12
     - name: Guides
       url: experiments/guide/
       parent: pa_experiments
       identifier: pa_experiments_guide
-      weight: 12
+      weight: 13
     - name: Session Replay
       url: session_replay/
       pre: play-circle
