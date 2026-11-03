@@ -20,7 +20,7 @@ These subjects are assigned at random to two groups:
 
 Both groups stay on control while covered experiments run, so rejected variants cannot distort the comparison. The result measures the combined impact of changes that remain in the product and continue to affect existing and future users.
 
-The following sections describe holdouts with Datadog Feature Flags. Use a consistent subject ID across covered experiments. See [Subject Types][1].
+The following sections describe holdouts with Datadog Feature Flags.
 
 ## Holdout types
 
@@ -75,6 +75,19 @@ A subject keeps the same group across included experiments. Each experiment's ta
 
 Both groups receive control until the experiment's rollout completes. Selecting a winner alone does not change the experience. After a change's rollout completes, only the all-shipped group receives it. If control wins, both groups keep control.
 
+## Requirements
+
+For holdouts that use Datadog Feature Flags, included experiments must:
+
+- Use Datadog Feature Flags to assign subjects at random.
+- Use the same subject type as the holdout.
+- Use a consistent subject ID across covered experiments. See [Subject Types][1].
+- Be standard experiments, not other holdout analyses.
+
+Add selective experiments while they are drafts. The holdout must be waiting to start or within its inclusion period.
+
+An **exposure record** identifies the experience served to a subject. If the holdout uses Datadog-hosted exposure data, included experiments must not ignore that data.
+
 ## Set up a holdout
 
 Create the holdout before starting the experiments:
@@ -86,18 +99,6 @@ Create the holdout before starting the experiments:
 1. Set the **analysis start** and **end** dates. Analysis must start at or after inclusion ends. Its end date must be after its start date. Allow time for experiments and rollouts to finish before analysis starts.
 1. Select a primary metric, optional secondary metrics, and an [analysis method][2].
 1. For a selective holdout, add the draft experiments. Global holdouts add eligible experiments automatically when they start.
-
-### Eligible experiments
-
-For holdouts that use Datadog Feature Flags, included experiments must:
-
-- Use Datadog Feature Flags to assign subjects at random.
-- Use the same subject type as the holdout.
-- Be standard experiments, not other holdout analyses.
-
-Add selective experiments while they are drafts. The holdout must be waiting to start or within its inclusion period.
-
-An **exposure record** identifies the experience served to a subject. If the holdout uses Datadog-hosted exposure data, included experiments must not ignore that data.
 
 ### Run the experiments
 
