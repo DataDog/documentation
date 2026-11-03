@@ -1,6 +1,6 @@
 ---
 title: Metrics Experience Changes for Metric Name Pricing
-description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Volume Management page, Plan & Usage page, and estimated usage metrics."
+description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Metrics Catalog page, Plan & Usage page, and estimated usage metrics."
 further_reading:
 - link: "/account_management/billing/metric_name_pricing/"
   tag: "Documentation"
@@ -52,7 +52,7 @@ To open the metric side panel, click any metric name on the [Metrics Catalog pag
 
 ## Metrics Catalog page
 
-The Volume Overview graphs on the [Metrics Catalog page][4] display the following Metric Name Pricing billing dimensions:
+The Volume Overview graphs on the [Metrics Catalog page][3] display the following Metric Name Pricing billing dimensions:
 
 - Estimated unique metric names
 - Billable indexed point volume
@@ -135,7 +135,6 @@ For billing questions, contact your [Customer Success][8] Manager.
 [1]: /account_management/billing/metric_name_pricing/
 [2]: /metrics/metrics-without-limits/
 [3]: https://app.datadoghq.com/metric/catalog
-[4]: https://app.datadoghq.com/metric/catalog
 [5]: https://app.datadoghq.com/billing/usage
 [6]: /account_management/billing/usage_metrics/
 [7]: /help/

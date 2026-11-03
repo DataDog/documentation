@@ -102,7 +102,7 @@ To see all actively reporting metric names submitted by your team, go to the [Me
 
 #### Identify any team's metrics that have the biggest impact on your bill
 
-All users in your organization can see OOTB realtime estimated custom metrics usage on the [Metrics Catalog page][7]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™, to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
+All users in your organization can see OOTB realtime estimated custom metrics usage on the [Metrics Catalog page][6]. Datadog's intelligent insights help identify which metrics to focus your cost-optimization efforts on. Use the Metrics Catalog with Metrics without Limits™, to control your indexed custom metrics usage and reduce costs without sacrificing accuracy.
 
 With the Metrics Catalog, you can identify your organization's largest metrics as well as the metric names spiking in volume (likely culprits of any unexpected overage).
 
@@ -238,7 +238,6 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 [4]: /metrics/metrics-without-limits/
 [5]: https://app.datadoghq.com/billing/usage-attribution?view=table
 [6]: https://app.datadoghq.com/metric/catalog
-[7]: https://app.datadoghq.com/metric/catalog
 [8]: /metrics/volume/
 [9]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#metrics
 [10]: /glossary/#cardinality
