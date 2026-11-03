@@ -731,13 +731,16 @@ agents:
 
 ## Talos Linux {#Talos}
 
-Talos Linux is an immutable OS with no shell and no host user database, and it mounts tracefs at `/sys/kernel/tracing` rather than nesting it under `/sys/kernel/debug`. The Agent needs Talos-specific configuration to account for this.
+Talos Linux is an immutable OS with no shell, no host user or group database, and no kernel sources. As a result, it requires some specific configurations:
+- Host paths that do not exist on Talos (`/usr/src`, `/lib/modules`, `/etc/passwd`, and `/etc/group`) must not be mounted, or the Agent containers fail to start
+- tracefs must be mounted from `/sys/kernel/tracing`, which Talos exposes as a standalone mount rather than nesting it under `/sys/kernel/debug`
+- Runtime compilation is not supported
+- Kubelet TLS verification must be disabled, because Talos uses self-signed Kubelet certificates
+- The namespace where the Agent is deployed must use the `privileged` Pod Security Standard
 
-Datadog Operator version 1.31.0 or later detects Talos automatically from the node's OS image and applies that configuration. With Helm, set `providers.talos.enabled` to `true`.
+Datadog Operator version 1.31.0 or later applies this configuration automatically. With Helm, enable it with the `providers.talos` option shown in the Helm tab.
 
-Detection resolves from one node and applies to the whole cluster: the Operator reads the node its own pod runs on. If that node runs Talos, every Agent in the cluster gets the Talos configuration. On a mixed cluster, the outcome therefore depends on where the Operator pod is scheduled. Target the Talos nodes with a [DatadogAgentProfile][15] instead, or set the `agent.datadoghq.com/cluster-provider` annotation to `default` on the `DatadogAgent` to opt out.
-
-By default, Talos enforces the `baseline` Pod Security Standard on every namespace except `kube-system`. Before you deploy the Agent, label the target namespace:
+Talos exempts only `kube-system` from `baseline` enforcement, so label the target namespace before you deploy the Agent:
 
 ```shell
 kubectl label --overwrite ns <NAMESPACE> \
@@ -746,12 +749,14 @@ kubectl label --overwrite ns <NAMESPACE> \
 
 **Note**: If the DaemonSet was rejected before the label was applied, its controller delays retrying for several minutes. Run `kubectl rollout restart ds <DAEMONSET_NAME> -n <NAMESPACE>` to apply the change immediately.
 
-Features that use eBPF, such as Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP Queue Length, and Workload Protection, read tracefs from the host. Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.261.0 or later mount tracefs at the location Talos uses. On earlier Operator or chart versions, the Agent reports as healthy while these probes fail to attach. Run `agent status` to confirm they are running.
+Datadog Operator version 1.31.0 or later and `datadog` Helm chart version 3.261.0 or later mount tracefs. On earlier versions, features that use eBPF, such as Cloud Network Monitoring, Universal Service Monitoring, OOM Kill, TCP Queue Length, and Workload Protection, fail to attach their probes while the Agent still reports as healthy. Run `agent status` to confirm they are running.
 
 For control plane metrics, see [Kubernetes on Talos Linux][14].
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
+The Operator detects Talos from the node's OS image. Detection reads the node the Operator pod runs on and applies to the whole cluster, so on a mixed cluster the outcome depends on where that pod is scheduled. Target the Talos nodes with a [DatadogAgentProfile][15] instead, or set the `agent.datadoghq.com/cluster-provider` annotation to `default` on the `DatadogAgent` to opt out.
 
 DatadogAgent Kubernetes Resource:
 
@@ -775,6 +780,7 @@ spec:
       tlsVerify: false
 ```
 
+[15]: /containers/datadog_operator/datadog_agent_profiles
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -960,4 +966,3 @@ agents:
 [12]: https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port
 [13]: https://learn.microsoft.com/en-us/azure/aks/certificate-rotation#kubelet-serving-certificate-rotation
 [14]: /containers/kubernetes/control_plane/#TalosLinux
-[15]: /containers/datadog_operator/datadog_agent_profiles
