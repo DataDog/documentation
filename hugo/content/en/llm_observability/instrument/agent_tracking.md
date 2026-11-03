@@ -99,7 +99,7 @@ The agent manifest describes how an agent is configured. Agent Tracking uses it 
 
 #### Automatic
 
-The Python SDK reports a manifest automatically for agents built with PydanticAI. Other framework integrations report a partial manifest, which may not render fully.
+The Python SDK reports a manifest automatically for agents built with supported frameworks. Each integration reports the manifest fields that its framework makes available, so the fields can differ by framework. Supported frameworks include PydanticAI, OpenAI Agents SDK, CrewAI, LangGraph, Google ADK, and Claude Agent SDK.
 
 #### Manual
 
