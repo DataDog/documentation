@@ -16,9 +16,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
   tag: "Blog"
   text: "Unify and correlate frontend and backend data with retention filters"
-- link: "https://www.datadoghq.com/blog/datadog-electron-sdk/"
-  tag: "Blog"
-  text: "Extend RUM to Electron’s main process with the Datadog Electron SDK"
 ---
 
 ## Overview

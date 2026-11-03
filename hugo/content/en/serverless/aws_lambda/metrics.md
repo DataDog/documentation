@@ -9,9 +9,6 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
   tag: "Learning Center"
   text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
-- link: "https://www.datadoghq.com/blog/serverless-ai-agents/"
-  tag: "Blog"
-  text: "Default to serverless for AI agents, then let production data decide what moves"
 ---
 
 This page discusses metrics for monitoring serverless applications on AWS Lambda. There are 3 ways to get metrics from AWS Lambda:
