@@ -25,12 +25,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-Fleet View is available on US1-FED and US2-FED. On these sites, you can also upgrade and configure Agents on Linux and Windows hosts. SDK upgrades and remote flare collection are not supported.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.
@@ -49,6 +43,10 @@ With Fleet Automation, you can:
 - **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
 - **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
+
+{{< site-region region="gov,gov2" >}}
+<p>SDK upgrades and remote flare collection are not supported on US1-FED or US2-FED.</p>
+{{< /site-region >}}
 
 ## Set up Fleet Automation
 
