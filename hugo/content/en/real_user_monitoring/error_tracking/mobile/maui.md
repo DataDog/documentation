@@ -294,7 +294,7 @@ No `.pdb` file was written to the build output directory. Confirm that debug sym
 **Warning: no Portable PDB matching the shipped assembly was found**:
 For one or more assemblies, none of the PDB files found matches the assembly the app ships, so C# frames from those assemblies are not resolved to file names and line numbers. The publish output lists each affected assembly in a `not uploading a Portable PDB for <assembly>` line. This can happen when the PDB files are left over from an earlier build. Delete the `bin/` and `obj/` directories and publish again.
 
-**C# frames show method names but no file names or line numbers**
+**C# frames show method names but no file names or line numbers**:
 Confirm that the publish summary reports the Portable PDB upload as `uploaded`, and that the frames belong to one of your app's assemblies. See [C# assemblies without Portable PDBs](#c-assemblies-without-portable-pdbs). If the error was reported with `DdRum.AddError`, see [Manually reported errors](#manually-reported-errors).
 
 **iOS C# frames show the first line of the method instead of the line that threw**:
