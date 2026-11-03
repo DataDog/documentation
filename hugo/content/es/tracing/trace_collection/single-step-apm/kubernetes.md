@@ -6,75 +6,196 @@ code_lang_weight: 20
 further_reading:
 - link: /tracing/metrics/runtime_metrics/
   tag: Documentación
-  text: Habilitar métricas en tiempo de ejecución
+  text: Habilitar métricas de tiempo de ejecución
 - link: /tracing/guide/init_resource_calc/
   tag: Documentación
-  text: Aprender sobre el uso de recursos de contenedores init
+  text: Obtenga información sobre el uso de recursos del contenedor de inicialización
 - link: /tracing/guide/local_sdk_injection
   tag: Documentación
-  text: Instrumente sus aplicaciones utilizando la inyección local del SDK.
+  text: Instrumente sus aplicaciones mediante la inyección de SDK local
 - link: https://learn.datadoghq.com/courses/configuring-ssi-k8s
-  tag: Centro de Aprendizaje
-  text: Configurando la instrumentación de un solo paso en Kubernetes
-title: Instrumentación APM de un solo paso en Kubernetes
+  tag: Centro de aprendizaje
+  text: Configuración de la instrumentación de un solo paso en Kubernetes
+title: Instrumentación de un solo paso de APM en Kubernetes
 type: multi-code-lang
 ---
 ## Descripción general {#overview}
 
-En un entorno de Kubernetes, utilice la instrumentación de un solo paso (SSI) para APM para instalar el Datadog Agent e [instrumentar][3] sus aplicaciones con los Datadog SDKs en un solo paso.
+En un entorno de Kubernetes, utilice la instrumentación de un solo paso (SSI) para APM a fin de instalar el Datadog Agent e [instrumentar][3] sus aplicaciones con los SDK de Datadog en un solo paso.
+
+{{< skill-callout
+    title="Configure APM con un Agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Requisitos {#requirements}
 
 - Kubernetes v1.20+.
-- [`Helm`][1] para desplegar el Datadog Operator.
+- [`Helm`][1] para implementar el Datadog Operator.
 - [`Kubectl` CLI][2] para instalar el Datadog Agent.
-- Compatibilidad del entorno confirmada según la [guía de compatibilidad de instrumentación de un solo paso][36].
+- Compatibilidad del entorno confirmada según la [guía de compatibilidad de la instrumentación de un solo paso][36].
 
 
-## Habilitar APM en sus aplicaciones {#enable-apm-on-your-applications}
+## Habilite APM en sus aplicaciones {#enable-apm-on-your-applications}
 
-<div class="alert alert-info">La instrumentación de un solo paso no instrumenta aplicaciones en el espacio de nombres donde se instala el Datadog Agent. Instale el Datadog Agent en un espacio de nombres separado donde no ejecute sus aplicaciones.</div>
+<div class="alert alert-info">La instrumentación de un solo paso no instrumenta aplicaciones en el espacio de nombres donde está instalado el Datadog Agent. Instale el Agent en un espacio de nombres separado donde no ejecute sus aplicaciones.</div>
 
-Siga estos pasos para habilitar la instrumentación de un solo paso en todo su clúster. Esto envía automáticamente trazas de todas las aplicaciones escritas en lenguajes compatibles.
+Habilitar la instrumentación de un solo paso en todo su clúster envía automáticamente trazas desde todas las aplicaciones escritas en lenguajes compatibles.
 
-**Nota:** Para instrumentar solo espacios de nombres o pods específicos, consulte la segmentación de carga de trabajo en [Opciones avanzadas](#advanced-options).
+**Nota:** Para instrumentar solo espacios de nombres o pods específicos, consulte la segmentación de cargas de trabajo en [Opciones avanzadas](#advanced-options).
 
-1. En Datadog, vea la página [Instalar el Datadog Agent en Kubernetes][11].
-1. Siga las instrucciones en pantalla para elegir su método de instalación, seleccionar una clave de API y configurar el repositorio del Datadog Operator o de Helm.
-1. En la sección **Configurar `datadog-agent.yaml`**, ve a **Configuración adicional** > **Observabilidad de aplicaciones** y activa **Instrumentación APM**.
+Utilice los siguientes comandos para habilitar SSI, reemplazando:
 
-   {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="El bloque de configuración para instalar el Agente de Datadog en Kubernetes a través de la aplicación de Datadog." style="width:100%;" >}}
+- `<YOUR_DD_API_KEY>` con su [clave de Datadog API][40]
+- `<YOUR_CLUSTER_NAME>` con el nombre de su clúster
+- `<DATADOG_SITE>` con su [sitio de Datadog][43]: {{< region-param key="dd_site" code="true" >}}
 
-1. Despliega el Agente utilizando el archivo de configuración generado.
-1. Reinicie sus aplicaciones.
+Los ejemplos habilitan SSI con `apm.instrumentation.enabled: true` y utilizan el espacio de nombres `datadog`. Reemplace el espacio de nombres si su Agent está instalado en otro lugar.
 
-<div class="alert alert-info">SSI añade un pequeño tiempo de inicio a las aplicaciones instrumentadas. Si esta sobrecarga no es aceptable para su caso de uso, contacte a Datadog Support</div>
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
-## Configurar Etiquetas de Servicio Unificadas {#configure-unified-service-tags}
+1. Instale el Datadog Operator y cree un secreto que contenga su clave de API:
 
-Las Etiquetas de Servicio Unificadas (USTs) aplican etiquetas consistentes a través de trazas, métricas y registros, facilitando la navegación y correlación de sus datos de observabilidad. Puede configurar USTs a través de la extracción automática de etiquetas (recomendado), mediante la configuración explícita con `ddTraceConfigs` o en manifiestos de despliegue.
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   helm install datadog-operator datadog/datadog-operator --namespace datadog --create-namespace
+   kubectl create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY> -n datadog
+   ```
+
+1. Cree un archivo `datadog-agent.yaml` que habilite la instrumentación de APM:
+
+   ```yaml
+   kind: "DatadogAgent"
+   apiVersion: "datadoghq.com/v2alpha1"
+   metadata:
+     name: "datadog"
+     namespace: "datadog"
+   spec:
+     global:
+       clusterName: "<YOUR_CLUSTER_NAME>"
+       site: "<DATADOG_SITE>"
+       credentials:
+         apiSecret:
+           secretName: "datadog-secret"
+           keyName: "api-key"
+     features:
+       apm:
+         instrumentation:
+           enabled: true
+   ```
+
+   Para fijar versiones específicas del SDK en lugar de instalar la última, agregue un bloque `targets` con `ddTraceVersions`. Consulte [Target specific workloads](#target-specific-workloads) para ver el esquema completo.
+
+1. Implementar el Agent:
+
+   ```shell
+   kubectl apply -f datadog-agent.yaml
+   ```
+
+Para actualizar una instalación existente del Datadog Operator, agregue la configuración de SSI a su `datadog-agent.yaml` y vuelva a aplicarla con `kubectl -n datadog apply -f datadog-agent.yaml`.
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+1. Agregue el repositorio de Helm de Datadog, cree el espacio de nombres `datadog` y cree un secreto que contenga su clave de API:
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   kubectl create namespace datadog
+   kubectl -n datadog create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY>
+   ```
+
+1. Cree un archivo `datadog-values.yaml` que habilite la instrumentación de APM:
+
+   ```yaml
+   datadog:
+     site: "<DATADOG_SITE>"
+     clusterName: "<YOUR_CLUSTER_NAME>"
+     apiKeyExistingSecret: "datadog-secret"
+     apm:
+       instrumentation:
+         enabled: true
+   ```
+
+   Para fijar versiones específicas del SDK en lugar de instalar la última, agregue un bloque `targets` con `ddTraceVersions`. Consulte [Target specific workloads](#target-specific-workloads) para ver el esquema completo.
+
+1. Implementar el Agent:
+
+   ```shell
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog --namespace datadog
+   ```
+
+Para actualizar una instalación existente de Helm, agregue la configuración de SSI a su `datadog-values.yaml` y ejecute `helm upgrade -n datadog -f datadog-values.yaml <RELEASE_NAME> datadog/datadog`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Después de implementar el Agent, reinicie sus aplicaciones.
+
+<div class="alert alert-info">La SSI añade una pequeña cantidad de tiempo de inicio a las aplicaciones instrumentadas. Si esta sobrecarga no es aceptable para su caso de uso, contacte a <a href="/help/">Soporte de Datadog</a>.</div>
+
+### Genere la configuración desde Datadog {#generate-the-configuration-from-datadog}
+
+Para generar la configuración a través de la interfaz de usuario, vaya a la página [Install the Datadog Agent on Kubernetes][11] y siga las instrucciones en pantalla para elegir su método de instalación y clave de API. En la sección {{< ui >}}Configure `datadog-agent.yaml`{{< /ui >}}, vaya a {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}} y active {{< ui >}}APM Instrumentation{{< /ui >}}. Luego, implemente el Agent utilizando el archivo de configuración generado.
+
+{{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="El bloque de configuración para instalar el Datadog Agent en Kubernetes a través de la aplicación de Datadog" style="width:100%;" >}}
+
+## Verifique la instalación {#verify-the-installation}
+
+1. Confirme que los pods del Agent se estén ejecutando:
+
+   ```shell
+   kubectl get pods -n datadog
+   ```
+
+1. Confirme que el Agent esté en buen estado y que el APM Agent se esté ejecutando. Reemplace `<AGENT_POD>` con el nombre de un pod del Agent en el nodo:
+
+   ```shell
+   kubectl exec <AGENT_POD> -n datadog -- agent status
+   ```
+
+   Verifique la sección **APM Agent** de la salida.
+
+1. Confirme que la inyección llegó a un pod de aplicación instrumentado. Reemplace `<APP_POD>` y `<APP_NAMESPACE>` con uno de sus pods de aplicación y su espacio de nombres:
+
+   ```shell
+   kubectl get pod <APP_POD> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
+   ```
+
+   La salida incluye `datadog-init-apm-inject` y un contenedor `datadog-lib-<language>-init` para cada lenguaje instrumentado.
+
+1. Después de que sus aplicaciones reciban tráfico, confirme que sus servicios aparecen en la [página de servicios de APM][42]. Si no aparecen en unos minutos, siga la [guía de solución de problemas de SSI][35].
+
+## Configurar etiquetas de servicio unificadas {#configure-unified-service-tags}
+
+Las etiquetas de servicio unificadas (USTs) aplican etiquetas coherentes en trazas, métricas y registros, lo que facilita la navegación y la correlación de sus datos de observabilidad. Puede configurar las UST mediante la extracción automática de etiquetas (recomendado), mediante la configuración explícita con `ddTraceConfigs` o en los manifiestos de implementación.
 
 <div class="alert alert-warning">
-Si está utilizando <a href="/agent/remote_config/">Remote Configuration</a>, <a href="#recommended-configure-usts-through-automatic-label-extraction">la extracción automática de etiquetas</a> no es compatible. Debe <a href="#configure-usts-explicitly-with-ddtraceconfigs">configurar USTs explícitamente</a> utilizando <code>ddTraceConfigs</code>.
+Si está utilizando <a href="/agent/remote_config/">Remote Configuration</a>, la <a href="#recommended-configure-usts-through-automatic-label-extraction">extracción automática de etiquetas</a> no es compatible. Debe <a href="#configure-usts-explicitly-with-ddtraceconfigs">configurar las UST explícitamente</a> usando <code>ddTraceConfigs</code>.
 </div>
 
-### (Recomendado) Configure USTs a través de la extracción automática de etiquetas {#recommended-configure-usts-through-automatic-label-extraction}
+### (Recomendado) Configure las UST mediante la extracción automática de etiquetas {#recommended-configure-usts-through-automatic-label-extraction}
 
-Con SSI, puede extraer automáticamente los valores de UST de las etiquetas y metadatos de los pods sin modificar despliegues individuales. Para hacer esto, configure `kubernetesResourcesLabelsAsTags` para mapear sus etiquetas de Kubernetes existentes a las etiquetas de servicio de Datadog.
+Con SSI, puede extraer automáticamente los valores de UST de las etiquetas y los metadatos de los pods sin modificar las implementaciones individuales. Para hacer esto, configure `kubernetesResourcesLabelsAsTags` para asignar sus etiquetas de Kubernetes existentes a las etiquetas de servicio de Datadog.
 
-**Nota:** Este método no es compatible con Remote Configuration. Si está utilizando Remote Configuration, consulte [Configure USTs explícitamente con ddTraceConfigs](#configure-usts-explicitly-with-ddtraceconfigs).
+**Nota:** Este método no es compatible con Remote Configuration. Si está utilizando Remote Configuration, consulte [Configure las UST explícitamente con ddTraceConfigs](#configure-usts-explicitly-with-ddtraceconfigs).
 
 #### Requisitos previos {#prerequisites}
 
-| Componente | Versión mínima |
+| Componente | Versión mínima  |
 |-----------|------------------|
-| `datadog-agent` | 7.69 |
-| `datadog-operator` | 1.16.0 |
+| `datadog-agent` | 7.69        |
+| `datadog-operator` | 1.16.0   |
 | `datadog-helm-chart` | 3.120.0 |
 
 #### Configuración {#configuration}
 
-Reemplace `app.kubernetes.io/name` en el siguiente ejemplo con cualquier etiqueta que contenga el nombre de su servicio (por ejemplo, `service.kubernetes.io/name` o `component`). Puede configurar múltiples etiquetas de esta manera.
+Reemplace `app.kubernetes.io/name` en el siguiente ejemplo con cualquier etiqueta que contenga el nombre de su servicio (por ejemplo, `service.kubernetes.io/name` o `component`). Puede configurar varias etiquetas de esta manera.
 
 ```yaml
 datadog:
@@ -98,9 +219,9 @@ datadog:
 
 Con esta configuración, Datadog establece automáticamente la etiqueta `service` utilizando el valor de la etiqueta `app.kubernetes.io/name` para cualquier carga de trabajo instrumentada que incluya esta etiqueta.
 
-### Configure USTs explícitamente con ddTraceConfigs {#configure-usts-explicitly-with-ddtraceconfigs}
+### Configure las UST explícitamente con ddTraceConfigs {#configure-usts-explicitly-with-ddtraceconfigs}
 
-En la mayoría de los casos, la configuración automática es suficiente. Sin embargo, si necesita un control granular sobre la configuración para cargas de trabajo específicas, utilice `ddTraceConfigs` para mapear explícitamente etiquetas a configuraciones de servicio:
+En la mayoría de los casos, la configuración automática es suficiente. Sin embargo, si necesita un control granular sobre los ajustes para cargas de trabajo específicas, utilice `ddTraceConfigs` para asignar explícitamente etiquetas a las configuraciones de servicio:
 
 ```yaml
 datadog:
@@ -132,50 +253,50 @@ datadog:
 ```
 
 
-### Configure USTs en manifiestos de despliegue {#configure-usts-in-deployment-manifests}
+### Configure las UST en manifiestos de despliegue {#configure-usts-in-deployment-manifests}
 
-Si su configuración no utiliza etiquetas adecuadas para la extracción de UST, puede establecer USTs directamente en sus manifiestos de despliegue utilizando variables de entorno. Este enfoque requiere modificar cada despliegue individualmente, pero ofrece un control preciso.
+Si su configuración no utiliza etiquetas adecuadas para la extracción de UST, puede establecer las UST directamente en sus manifiestos de despliegue utilizando variables de entorno. Este enfoque requiere modificar cada despliegue individualmente, pero ofrece un control preciso.
 
-Para instrucciones completas, consulta [configuración de USTs para servicios de Kubernetes][5].
+Para obtener instrucciones completas, consulte [configuración de UST para servicios de Kubernetes][5].
 
-## Habilitar productos y características dependientes del SDK {#enable-sdk-dependent-products-and-features}
+## Habilitar productos y funciones que dependen del SDK {#enable-sdk-dependent-products-and-features}
 
-Después de que SSI cargue el SDK de Datadog en tus aplicaciones y habilite el rastreo distribuido, puedes configurar productos adicionales que dependen del SDK:
+Después de que SSI cargue el SDK de Datadog en sus aplicaciones y habilite el rastreo distribuido, puede configurar productos adicionales que dependen del SDK:
 
 {{< ssi-products >}}
 
 Utilice uno de los siguientes métodos de configuración:
 
-- **[Configurar con orientación de carga de trabajo (recomendado)](#target-specific-workloads)**:
+- **[Configure con segmentación de cargas de trabajo (recomendado)](#target-specific-workloads)**:
 
-  Por defecto, la instrumentación de un solo paso instrumenta todos los servicios en todos los espacios de nombres. Utilice la orientación de carga de trabajo para limitar la instrumentación a espacios de nombres, pods o cargas de trabajo específicos, y aplique configuraciones personalizadas.
+  De forma predeterminada, la instrumentación de un solo paso instrumenta todos los servicios en todos los espacios de nombres. Utilice la selección de carga de trabajo para limitar la instrumentación de un solo paso a espacios de nombres, pods o cargas de trabajo específicos, y aplique configuraciones personalizadas.
 
 - **[Establecer variables de entorno][7]**:
 
-  Habilite productos configurando variables de entorno directamente en la configuración de su aplicación.
+  Habilite productos estableciendo variables de entorno directamente en la configuración de su aplicación.
 
 ## Opciones avanzadas {#advanced-options}
 
-Utilice las siguientes opciones avanzadas para personalizar cómo se comporta la instrumentación de paso único en su entorno. Estas configuraciones son opcionales y generalmente solo se necesitan en configuraciones especializadas.
+Utilice las siguientes opciones avanzadas para personalizar cómo se comporta la instrumentación de un solo paso en su entorno. Estos ajustes son opcionales y normalmente solo se necesitan en configuraciones especializadas.
 
 ### Configurar modos de inyección {#configure-injection-modes}
 
-SSI admite múltiples modos de inyección, que controlan cómo se entregan los archivos del inyector y de la biblioteca APM a los contenedores de su aplicación. Generalmente, no necesita configurar esta opción manualmente. Considere ajustarla si observa retrasos significativos en el inicio de los pods o un uso de recursos (CPU, memoria) superior al esperado durante la inicialización del pod. Para más información sobre cómo funciona el inyector, consulte [Comportamiento del inyector con la instrumentación de un solo paso][41].
+SSI admite múltiples modos de inyección, los cuales controlan cómo se entregan el inyector y los archivos de la biblioteca APM a los contenedores de su aplicación. Normalmente no necesita configurar este ajuste manualmente. Considere ajustarlo si nota retrasos significativos en el inicio de los pods o un uso de recursos (CPU, memoria) mayor al esperado durante la inicialización del pod. Para obtener más información sobre cómo funciona el inyector, consulte [Comportamiento del inyector con instrumentación de un solo paso][41].
 
 
 | Modo | Descripción | Requisitos |
 |------|-------------|--------------|
-| `init_container` | Utiliza contenedores de inicialización para copiar archivos del inyector y de la biblioteca APM en los contenedores de la aplicación. | Datadog Agent desplegado con Helm Chart o Datadog Operator |
-| `csi` | **En versión preliminar.** Monta archivos del inyector y de la biblioteca APM utilizando el [controlador CSI de Datadog][37]. Reduce el tiempo de inicio del pod en comparación con el modo de contenedor de inicialización. | Datadog Agent 7.76.0+, Datadog CSI driver 1.2.0+, Helm Chart 3.178.1+ o Datadog Operator 1.25.0+ |
+| `init_container` | Utiliza contenedores de inicialización para copiar los archivos del inyector y de la biblioteca APM en los contenedores de la aplicación. | Agent implementado con Helm Chart o Datadog Operator |
+| `csi` | **En vista previa.** Monta los archivos del inyector y de la biblioteca APM utilizando el [controlador CSI de Datadog][37]. Reduce el tiempo de inicio del pod en comparación con el modo de contenedor de inicialización. | Agent 7.76.0+, controlador CSI 1.2.0+, Helm Chart 3.178.1+ o Datadog Operator 1.25.0+ |
 
-Antes de usar el modo `csi`, instale y active el Datadog CSI driver. Si está implementando con Helm, también establezca `datadog.csi.enabled: true` en su `datadog-values.yaml`. Consulte la [documentación del Datadog CSI driver][37] para los pasos de instalación y los requisitos específicos del entorno, como GKE Autopilot.
+Antes de usar el modo `csi`, instale y active el controlador CSI de Datadog. Si está realizando la implementación con Helm, establezca también `datadog.csi.enabled: true` en su `datadog-values.yaml`. Consulte la [documentación del controlador CSI][37] para conocer los pasos de instalación y los requisitos específicos del entorno, como GKE Autopilot.
 
-#### Configura el modo de inyección globalmente {#configure-injection-mode-globally}
+#### Configure el modo de inyección globalmente {#configure-injection-mode-globally}
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Para establecer el modo de inyección a nivel de clúster, agregue `injectionMode` a su `datadog-values.yaml`:
+Para establecer el modo de inyección en todo el clúster, agregue `injectionMode` a su `datadog-values.yaml` :
 
 ```yaml
 datadog:
@@ -184,12 +305,12 @@ datadog:
       injectionMode: <mode>
 ```
 
-Valores soportados: `init_container`, `csi`.
+Valores admitidos: `init_container`, `csi`.
 
 {{% /tab %}}
-{{% tab "Operador de Datadog" %}}
+{{% tab "Datadog Operator" %}}
 
-Para establecer el modo de inyección a nivel de clúster, agregue `injectionMode` a su `datadog-agent.yaml`:
+Para establecer el modo de inyección en todo el clúster, agregue `injectionMode` a su `datadog-agent.yaml` :
 
 ```yaml
 features:
@@ -198,9 +319,9 @@ features:
       injectionMode: <mode>
 ```
 
-Valores soportados: `init_container`, `csi`.
+Valores admitidos: `init_container`, `csi`.
 
-Si está utilizando Datadog Operator en una versión anterior a la 1.25.0, utilice la [anotación del pod](#configure-injection-mode-per-pod) para anular el modo de inyección para pods específicos.
+Si está utilizando una versión de Datadog Operator anterior a la 1.25.0, utilice la [anotación de pod](#configure-injection-mode-per-pod) para anular el modo de inyección para pods específicos.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -215,15 +336,15 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Valores soportados: `init_container`, `csi`.
+Valores admitidos: `init_container`, `csi`.
 
 ### Dirija cargas de trabajo específicas {#target-specific-workloads}
 
-Por defecto, SSI instrumenta todos los servicios en todos los espacios de nombres de su clúster. Dependiendo de la versión de su Datadog Agent, utilice uno de los siguientes métodos de configuración para refinar qué servicios se instrumentan y cómo.
+De forma predeterminada, SSI instrumenta todos los servicios en todos los espacios de nombres de su clúster. Dependiendo de su versión del Agent, utilice uno de los siguientes métodos de configuración para definir qué servicios se instrumentan y cómo.
 
 {{< tabs >}}
 
-{{% tab "Datadog Agent v7.64+ (Recomendado)" %}}
+{{% tab "Agent v7.64+ (Recomendado)" %}}
 
 Cree bloques de destino con la etiqueta `targets` para especificar qué cargas de trabajo instrumentar y qué configuraciones aplicar.
 
@@ -232,27 +353,27 @@ Cada bloque de destino tiene las siguientes claves:
 | Clave             | Descripción |
 |------------------|-------------|
 | `name`            | El nombre del bloque de destino. Esto no tiene efecto en el estado de monitoreo y se utiliza solo como metadatos. |
-| `namespaceSelector` | El(los) espacio(s) de nombres a instrumentar. Especifique utilizando uno o más de: <br> - `matchNames`: Una lista de uno o más nombre(s) de espacio(s) de nombres. <br> - `matchLabels`: Una lista de uno o más etiqueta(s) definidas en pares `{key,value}`. <br> - `matchExpressions`: Una lista de requisitos de selección de espacio de nombres. <br><br> Los espacios de nombres deben cumplir con todos los criterios para coincidir. Para más detalles, consulte la [documentación del selector de Kubernetes][10].|
-| `podSelector`     | El(los) pod(s) a instrumentar. Especifique utilizando uno o más de: <br> - `matchLabels`: Una lista de uno o más etiqueta(s) definidas en pares `{key,value}`. <br> - `matchExpressions`: Una lista de requisitos de selección de pod. <br><br> Los pods deben cumplir con todos los criterios para coincidir. Para más detalles, consulte la [documentación del selector de Kubernetes][10]. |
-| `ddTraceVersions` | La versión del [SDK de APM de Datadog][9] que se utilizará para cada lenguaje. |
-| `ddTraceConfigs`  | Configuraciones del SDK de APM que permiten establecer [Etiquetas de Servicio Unificadas][8], habilitando [productos dependientes del SDK](#enable-sdk-dependent-products-and-features) más allá de la traza, y personalizando otras [configuraciones de APM][14]. |
+| `namespaceSelector` | El/los espacio(s) de nombres a instrumentar. Especifique utilizando uno o más de:<br> - `matchNames`: Una lista de uno o más nombres de espacio de nombres. <br> - `matchLabels`: Una lista de una o más etiquetas definidas en pares `{key,value}`. <br> - `matchExpressions`: Una lista de requisitos de selector de espacio de nombres. <br><br> Los espacios de nombres deben cumplir con todos los criterios para coincidir. Para obtener más detalles, consulte la [documentación del selector de Kubernetes][10].|
+| `podSelector`     | El/los pod(s) a instrumentar. Especifique utilizando uno o más de: <br> - `matchLabels`: Una lista de una o más etiquetas definidas en pares `{key,value}`. <br> - `matchExpressions`: Una lista de requisitos de selector de pod. <br><br> Los pod deben cumplir con todos los criterios para coincidir. Para obtener más detalles, consulte la [documentación del selector de Kubernetes][10]. |
+| `ddTraceVersions` | La versión de Datadog APM SDK [9] a utilizar para cada idioma. |
+| `ddTraceConfigs`  | Configuraciones de APM SDK que permiten establecer [Unified Service Tags][8], habilitar [productos dependientes del SDK](#enable-sdk-dependent-products-and-features) más allá del rastreo, y personalizar otras [APM settings][14]. |
 
-El archivo que necesita configurar depende de cómo habilitó la Instrumentación de Paso Único:
+El archivo que necesita configurar depende de cómo habilitó la instrumentación de un solo paso:
 - Si habilitó SSI con Datadog Operator, edite `datadog-agent.yaml`.
 - Si habilitó SSI con Helm, edite `datadog-values.yaml`.
 
-**Nota**: Los objetivos se evalúan en orden; la primera coincidencia tiene prioridad.
+**Nota**: Los destinos se evalúan en orden; la primera coincidencia tiene prioridad.
 
-#### Ejemplos de configuraciones {#example-configurations}
+#### Ejemplos de configuración {#example-configurations}
 
 Revise los siguientes ejemplos que demuestran cómo seleccionar servicios específicos:
 
-{{< collapse-content title="Ejemplo 1: Habilitar todos los espacios de nombres excepto uno" level="h4" >}}
+{{< collapse-content title="Ejemplo 1: Habilitar todos los espacios de nombres excepto uno" level="h5" >}}
 
 Esta configuración:
-- habilita APM para todos los espacios de nombres excepto el `jenkins` espacio de nombres.
-  - **Nota**: use `enabledNamespaces` para deshabilitar para todos los espacios de nombres excepto aquellos listados.
-- instruye a Datadog a instrumentar las aplicaciones Java con el SDK de Java predeterminado y las aplicaciones de Python con `v.3.1.0` del SDK de Python.
+- habilita APM para todos los espacios de nombres excepto el espacio de nombres `jenkins`.
+  - **Nota**: utilice `enabledNamespaces` para deshabilitar la instrumentación en todos los espacios de nombres excepto aquellos enumerados.
+- indica a Datadog que instrumente las aplicaciones Java con el SDK de Java predeterminado y las aplicaciones Python con `v.3.1.0` del SDK de Python.
 
 {{< highlight yaml "hl_lines=4-10" >}}
    apm:
@@ -269,17 +390,17 @@ Esta configuración:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Ejemplo 2: Instrumentar un subconjunto de espacios de nombres, coincidiendo con nombres y etiquetas" level="h4" >}}
+{{< collapse-content title="Ejemplo 2: Instrumentar un subconjunto de espacios de nombres, haciendo coincidir nombres y etiquetas" level="h5" >}}
 
-Esta configuración crea dos bloques de destino:
+Esta configuración crea dos bloques de destinos:
 
-- El primer bloque (nombrado `login-service_namespace`):
-  - habilita APM para servicios en el espacio de nombres `login-service`.
-  - instruye a Datadog a instrumentar servicios en este espacio de nombres con la versión predeterminada del kit de desarrollo de software de Java.
-  - establece la variable de entorno `DD_PROFILING_ENABLED` para este grupo de objetivos
-- El segundo bloque (nombrado `billing-service_apps`)
-  - habilita APM para servicios en el(los) espacio(s) de nombres con la etiqueta `app:billing-service`.
-  - instruye a Datadog a instrumentar este conjunto de servicios con `v3.1.0` del kit de desarrollo de software de Python.
+- El primer bloque (llamado `login-service_namespace`):
+  - habilita APM para los servicios en el espacio de nombres `login-service`.
+  - indica a Datadog que instrumente los servicios en este espacio de nombres con la versión predeterminada del SDK de Java.
+  - establece la variable de entorno `DD_PROFILING_ENABLED` para este grupo de destino
+- El segundo bloque (llamado `billing-service_apps`)
+  - habilita APM para los servicios en el o los espacios de nombres con la etiqueta `app:billing-service`.
+  - indica a Datadog que instrumente este conjunto de servicios con `v3.1.0` del SDK de Python.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -305,14 +426,14 @@ Esta configuración crea dos bloques de destino:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Ejemplo 3: Instrumentar diferentes cargas de trabajo con diferentes trazadores" level="h4" >}}
+{{< collapse-content title="Ejemplo 3: Instrumentar diferentes cargas de trabajo con diferentes trazadores" level="h5" >}}
 
 Esta configuración hace lo siguiente:
 - habilita APM para pods con las siguientes etiquetas:
   - `app:db-user`, que marca los pods que ejecutan la aplicación `db-user`.
   - `webserver:routing`, que marca los pods que ejecutan la aplicación `request-router`.
-- instruye a Datadog para usar las versiones predeterminadas de los kits de desarrollo de software del Datadog Tracer.
-- establece las variables de entorno de Datadog que se aplican a cada grupo objetivo y configura los kits de desarrollo de software.
+- indica a Datadog que utilice las versiones predeterminadas de los SDK de Datadog Tracer.
+- establece las variables de entorno de Datadog para aplicarlas a cada grupo de destino y configurar los SDK.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
@@ -338,12 +459,12 @@ Esta configuración hace lo siguiente:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Ejemplo 4: Instrumentar un pod dentro de un espacio de nombres" level="h4" >}}
+{{< collapse-content title="Ejemplo 4: Instrumentar un pod dentro de un espacio de nombres" level="h5" >}}
 
 Esta configuración:
-- habilita APM para los pods etiquetados `app:password-resolver` dentro del espacio de nombres `login-service`.
-- instruye a Datadog para usar la versión predeterminada del kit de desarrollo de software del Datadog Java Tracer.
-- establece las variables de entorno de Datadog que se aplican a este objetivo.
+- habilita APM para pods etiquetados como `app:password-resolver` dentro del espacio de nombres `login-service`.
+- indica a Datadog que utilice la versión predeterminada del SDK de Datadog Java Tracer.
+- establece las variables de entorno de Datadog para aplicarlas a este destino.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
@@ -366,9 +487,9 @@ Esta configuración:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Ejemplo 5: Instrumentar un subconjunto de pods usando <code>matchExpressions</code>" level="h4" >}}
+{{< collapse-content title="Ejemplo 5: Instrumentar un subconjunto de pods usando <code>matchExpressions</code>" level="h5" >}}
 
-Esta configuración habilita APM para todos los pods, excepto aquellos que tienen alguna de las etiquetas `app=app1` o `app=app2`.
+Esta configuración habilita APM para todos los pods excepto aquellos que tienen cualquiera de las etiquetas `app=app1` o `app=app2`.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
@@ -387,9 +508,9 @@ Esta configuración habilita APM para todos los pods, excepto aquellos que tiene
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Ejemplo 6: Habilitar productos adicionales con <code>ddTraceConfigs</code>" level="h4" >}}
+{{< collapse-content title="Ejemplo 6: Habilitar productos adicionales con <code>ddTraceConfigs</code>" level="h5" >}}
 
-Esta configuración habilita [App and API Protection (AAP)][12] y [Continuous Profiler][11] para los servicios en el espacio de nombres `web-apps`, utilizando `ddTraceConfigs` para establecer las variables de entorno requeridas:
+Esta configuración habilita [App and API Protection (AAP)][12] y [Continuous Profiler][11] para servicios en el espacio de nombres `web-apps`, usando `ddTraceConfigs` para establecer las variables de entorno requeridas:
 
 {{< highlight yaml "hl_lines=4-20" >}}
    apm:
@@ -410,7 +531,7 @@ Esta configuración habilita [App and API Protection (AAP)][12] y [Continuous Pr
                value: "auto"
 {{< /highlight >}}
 
-Para una lista completa de productos que puede habilitar a través de SSI, consulte [Habilitar productos y características dependientes del kit de desarrollo de software](#enable-sdk-dependent-products-and-features).
+Para obtener la lista de productos que puede habilitar a través de SSI, consulte [Habilitar productos y funciones que dependen del SDK](#enable-sdk-dependent-products-and-features).
 
 {{< /collapse-content >}}
 
@@ -423,17 +544,17 @@ Para una lista completa de productos que puede habilitar a través de SSI, consu
 
 {{% /tab %}}
 
-{{% tab "Agent <=v7.63 (Legacy)" %}}
+{{% tab "Agent <=v7.63 (Legado)" %}}
 
-#### Habilitar o deshabilitar la instrumentación para espacios de nombres {#enable-or-disable-instrumentation-for-namespaces}
+#### Habilite o deshabilite la instrumentación para los espacios de nombres {#enable-or-disable-instrumentation-for-namespaces}
 
-Puede elegir habilitar o deshabilitar la instrumentación para aplicaciones en espacios de nombres específicos. Solo puede establecer enabledNamespaces o disabledNamespaces, no ambos.
+Puede elegir habilitar o deshabilitar la instrumentación para aplicaciones en espacios de nombres específicos. Solo puede configurar enabledNamespaces o disabledNamespaces, no ambos.
 
-El archivo que necesita configurar depende de si habilitó la Instrumentación de Paso Único con Datadog Operator o Helm:
+El archivo que necesita configurar depende de si habilitó la instrumentación de un solo paso (Single Step Instrumentation) con Datadog Operator o Helm:
 
 {{< collapse-content title="Datadog Operator" level="h5" >}}
 
-Para habilitar la instrumentación para espacios de nombres específicos, agregue `enabledNamespaces` configuración a `datadog-agent.yaml`:
+Para habilitar la instrumentación para espacios de nombres específicos, agregue la configuración `enabledNamespaces` a `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=5-7" >}}
    features:
@@ -445,7 +566,7 @@ Para habilitar la instrumentación para espacios de nombres específicos, agregu
            - applications
 {{< /highlight >}}
 
-Para deshabilitar la instrumentación para espacios de nombres específicos, agregue `disabledNamespaces` configuración a `datadog-agent.yaml`:
+Para deshabilitar la instrumentación para espacios de nombres específicos, agregue la configuración `disabledNamespaces` a `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=5-7" >}}
    features:
@@ -487,22 +608,22 @@ Para deshabilitar la instrumentación para espacios de nombres específicos, agr
 
 {{< /collapse-content >}}
 
-#### Especifique las versiones de los SDK {#specify-sdk-versions}
+#### Especifique las versiones del SDK {#specify-sdk-versions}
 
 <div class="alert alert-info">A partir de Datadog Cluster Agent v7.52.0+, puede instrumentar automáticamente un subconjunto de sus aplicaciones, según los SDK que especifique.</div>
 
-Especifique los SDK de Datadog y sus versiones para instrumentar automáticamente las aplicaciones escritas en esos lenguajes. Puede configurar esto de dos maneras, que se aplican en el siguiente orden de precedencia:
+Especifique los SDK de Datadog y sus versiones para instrumentar automáticamente las aplicaciones escritas en esos lenguajes. Puede configurar esto de dos maneras, las cuales se aplican en el siguiente orden de precedencia:
 
 1. [Especifique a nivel de servicio](#specify-at-the-service-level), o
 2. [Especifique a nivel de clúster](#specify-at-the-cluster-level).
 
-**Por defecto**: Si no especifica ninguna versión de biblioteca, las aplicaciones escritas en lenguajes soportados se instrumentan automáticamente utilizando las últimas versiones de los SDK.
+**Predeterminado**: Si no especifica ninguna versión de biblioteca, las aplicaciones escritas en lenguajes compatibles se instrumentan automáticamente utilizando las versiones más recientes del SDK.
 
 ##### Especifique a nivel de servicio {#specify-at-the-service-level}
 
-Para instrumentar automáticamente aplicaciones en pods específicos, agregue la anotación de lenguaje apropiada y la versión de la biblioteca para su aplicación en la especificación de su pod:
+Para instrumentar automáticamente aplicaciones en pods específicos, agregue la anotación de lenguaje y la versión de biblioteca correspondientes para su aplicación en la especificación de su pod:
 
-| Lenguaje   | Anotación del pod                                                        |
+| Lenguaje   | Anotación de Pod                                                        |
 |------------|-----------------------------------------------------------------------|
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | Node.js    | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
@@ -511,7 +632,7 @@ Para instrumentar automáticamente aplicaciones en pods específicos, agregue la
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | PHP        | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
-Reemplace `<CONTAINER IMAGE TAG>` con la versión de biblioteca deseada. Las versiones disponibles se enumeran en los [registros de contenedores de Datadog](#change-the-default-image-registry) y en los repositorios de código fuente de tracer para cada lenguaje:
+Reemplace `<CONTAINER IMAGE TAG>` con la versión de biblioteca deseada. Las versiones disponibles se enumeran en los [registros de contenedores de Datadog](#change-the-default-image-registry) y en los repositorios de código fuente del rastreador para cada lenguaje:
 
 - [Java][34]
 - [Node.js][35]
@@ -520,7 +641,7 @@ Reemplace `<CONTAINER IMAGE TAG>` con la versión de biblioteca deseada. Las ver
 - [Ruby][38]
 - [PHP][39]
 
-<div class="alert alert-danger">Ejercite precaución al usar el <code>latest</code> etiqueta, ya que las versiones principales de la biblioteca pueden introducir cambios incompatibles.</div>
+<div class="alert alert-danger">Tenga cuidado al usar la <code>latest</code> etiqueta, ya que las versiones principales de la biblioteca pueden introducir cambios importantes.</div>
 
 Por ejemplo, para instrumentar automáticamente aplicaciones Java:
 
@@ -542,13 +663,13 @@ spec:
 
 ##### Especifique a nivel de clúster {#specify-at-the-cluster-level}
 
-Si no habilita la instrumentación automática para pods específicos usando anotaciones, puede especificar qué lenguajes instrumentar en todo el clúster usando la configuración SSI. Cuando `apm.instrumentation.libVersions` está configurado, solo se instrumentan las aplicaciones escritas en los lenguajes especificados, utilizando las versiones de los SDK especificadas.
+Si no habilita la instrumentación automática para pods específicos mediante anotaciones, puede especificar qué lenguajes instrumentar en todo el clúster utilizando la configuración de SSI. Cuando `apm.instrumentation.libVersions` está configurado, solo se instrumentan las aplicaciones escritas en los lenguajes especificados, utilizando las versiones de biblioteca especificadas.
 
-El archivo que necesita configurar depende de si habilitó la Instrumentación de Paso Único con Datadog Operator o Helm:
+El archivo que necesita configurar depende de si habilitó la instrumentación de un solo paso (Single Step Instrumentation) con Datadog Operator o Helm:
 
-{{< collapse-content title="Datadog Operator" level="h5" >}}
+{{< collapse-content title="Datadog Operator" level="h6" >}}
 
-Por ejemplo, para instrumentar aplicaciones de .NET, Python y Node.js, agregue la siguiente configuración a su archivo `datadog-agent.yaml`:
+Por ejemplo, para instrumentar aplicaciones .NET, Python y Node.js, agregue la siguiente configuración a su archivo `datadog-agent.yaml`:
 
 {{< highlight yaml "hl_lines=5-8" >}}
    features:
@@ -563,9 +684,9 @@ Por ejemplo, para instrumentar aplicaciones de .NET, Python y Node.js, agregue l
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h5" >}}
+{{< collapse-content title="Helm" level="h6" >}}
 
-Por ejemplo, para instrumentar aplicaciones de .NET, Python y Node.js, agregue la siguiente configuración a su archivo `datadog-values.yaml`:
+Por ejemplo, para instrumentar aplicaciones .NET, Python y Node.js, agregue la siguiente configuración a su archivo `datadog-values.yaml`:
 
 {{< highlight yaml "hl_lines=5-8" >}}
    datadog:
@@ -592,11 +713,11 @@ Por ejemplo, para instrumentar aplicaciones de .NET, Python y Node.js, agregue l
 {{% /tab %}}
 {{< /tabs >}}
 
-### Cambie el registro de contenedor predeterminado {#change-the-default-image-registry}
+### Cambie el registro de imágenes predeterminado {#change-the-default-image-registry}
 
 Datadog publica imágenes de bibliotecas de instrumentación en gcr.io, Docker Hub y Amazon ECR:
 
-| Lenguaje   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
+| Idioma   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
 | Node.js    | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
@@ -605,21 +726,21 @@ Datadog publica imágenes de bibliotecas de instrumentación en gcr.io, Docker H
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
 | PHP        | [gcr.io/datadoghq/dd-lib-php-init][30] | [hub.docker.com/r/datadog/dd-lib-php-init][31] | [gallery.ecr.aws/datadog/dd-lib-php-init][32] |
 
-La variable de entorno `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` en la configuración del Agente de Clúster de Datadog especifica el registro utilizado por el Controlador de Admisión. El valor predeterminado es `gcr.io/datadoghq`.
+La variable de entorno `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` en la configuración del Datadog Cluster Agent especifica el registro utilizado por el Admission Controller. El valor predeterminado es `gcr.io/datadoghq`.
 
-Puede obtener el SDK de un registro diferente cambiándolo a `docker.io/datadog`, `public.ecr.aws/datadog` o a otra URL si está alojando las imágenes en un registro de contenedor local.
+Puede extraer el SDK de un registro diferente cambiándolo a `docker.io/datadog`, `public.ecr.aws/datadog`, u otra URL si está alojando las imágenes en un registro de contenedor local.
 
-Para obtener instrucciones sobre cómo cambiar su registro de contenedor, consulte [Cambiar su registro de contenedor][33].
+Para obtener instrucciones sobre cómo cambiar su registro de contenedor, consulte [Changing Your Container Registry][33].
 
 ### Utilice un registro de contenedor privado {#use-a-private-container-registry}
 
-Si su organización no permite descargas directas de registros públicos (como `gcr.io`, `docker.io` o `public.ecr.aws`), puede alojar las imágenes requeridas de Datadog internamente y configurar el Controlador de Admisión para usarlas.
+Si su organización no permite extracciones directas de registros públicos (como `gcr.io`, `docker.io` o `public.ecr.aws`), puede alojar las imágenes de Datadog requeridas internamente y configurar el Admission Controller para que las utilice.
 
 Para usar SSI con un registro de contenedor privado:
 
-1. Siga [estas instrucciones][34] para reflejar las imágenes de contenedor de Datadog en su registro privado.
+1. Siga [estas instrucciones][34] para replicar las imágenes de contenedor de Datadog en su registro privado.
 
-   Solo necesita las imágenes para los lenguajes que está instrumentando. Si no está seguro de cuáles necesita, aquí hay una línea base que cubre la mayoría de los casos de uso:
+   Solo necesita las imágenes para los lenguajes que está instrumentando. Si no está seguro de cuáles necesita, aquí tiene una base que cubre la mayoría de los casos de uso:
 
    - `apm-inject`
    - `dd-lib-java-init`
@@ -631,13 +752,13 @@ Para usar SSI con un registro de contenedor privado:
 
    Puede encontrar estas imágenes en [gcr.io][12], [Docker Hub][13] o [Amazon ECR Public Gallery][14].
 
-2. Etiquete las imágenes de acuerdo a su configuración.
+2. Etiquete las imágenes de acuerdo con su configuración.
 
-   Las versiones que refleja deben coincidir con las versiones configuradas en sus cargas de trabajo, que pueden estar establecidas de una de las siguientes maneras:
-   - globalmente en la configuración del Agente usando `ddTraceVersions`, o
+   Las versiones que refleje deben coincidir con las versiones configuradas en sus cargas de trabajo, las cuales podrían establecerse de una de las siguientes maneras:
+   - globalmente en la configuración del Agent usando `ddTraceVersions`, o
    - por pod usando anotaciones como `admission.datadoghq.com/java-lib.version`.
 
-   Si no se configura explícitamente una versión, se utiliza la versión predeterminada (`0`).
+   Si no se configura explícitamente ninguna versión, se utiliza la versión predeterminada (`0`).
 
    Por ejemplo:
 
@@ -657,16 +778,16 @@ Para usar SSI con un registro de contenedor privado:
    - `dd-lib-java-init:1`
    - `dd-lib-python-init:3`
 
-3. Actualice la configuración del Agente de Clúster de Datadog para utilizar su registro privado.
+3. Actualice la configuración del Cluster Agent para usar su registro privado.
 
-   Establezca la variable de entorno `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` en la configuración de su Agente de Clúster de Datadog para utilizar su registro privado.
+   Establezca la variable de entorno `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` en la configuración de su Cluster Agent para usar su registro privado.
 
-Para más detalles sobre cómo cambiar tu registro de contenedores, consulta [Cambiando Tu Registro de Contenedores][33].
+Para obtener más detalles sobre cómo cambiar su registro de contenedor, consulte [Changing Your Container Registry][33].
 
-### Usando una Interfaz de Red de Contenedores en EKS {#using-a-container-network-interface-on-eks}
+### Uso de una interfaz de red de contenedor (CNI) en EKS {#using-a-container-network-interface-on-eks}
 
-Al usar un CNI como Calico, los nodos del plano de control no pueden iniciar conexiones de red al Controlador de Admisión de Datadog y reportan un error de "Dirección no permitida".
-Para usar la instrumentación de Un Solo Paso, modifique el Agente de Clúster de Datadog con el parámetro `useHostNetwork: true`.
+Cuando se utiliza una CNI como Calico, los nodos del plano de control no pueden iniciar conexiones de red al controlador de admisión de Datadog y reportan un error de "Address is not allowed".
+Para usar la instrumentación de un solo paso (Single Step), modifique el Cluster Agent de Datadog con el parámetro `useHostNetwork: true`.
 
 ```
 datadog:
@@ -679,23 +800,23 @@ clusterAgent:
     ...
 ```
 
-## Elimine la instrumentación de APM de Un Solo Paso de su Agente {#remove-single-step-apm-instrumentation-from-your-agent}
+## Elimine la instrumentación de Single Step APM de su Agent {#remove-single-step-apm-instrumentation-from-your-agent}
 
-Si no desea recopilar datos de trazas para un servicio, host, VM o contenedor en particular, complete los siguientes pasos:
+Si no desea recopilar datos de traza para un servicio, servidor, VM o contenedor en particular, complete los siguientes pasos:
 
-### Elimine la instrumentación para servicios específicos {#remove-instrumentation-for-specific-services}
+### Eliminar la instrumentación de servicios específicos {#remove-instrumentation-for-specific-services}
 
-Para eliminar la instrumentación de APM y dejar de enviar trazas desde un servicio específico, puede hacer una de las siguientes acciones:
+Para eliminar la instrumentación de APM y dejar de enviar trazas desde un servicio específico, puede hacer una de las siguientes cosas:
 
-#### Utilice reglas de instrumentación para dirigir cargas de trabajo específicas (recomendado) {#use-instrumentation-rules-to-target-specific-workloads-recommended}
+#### Utilice reglas de instrumentación para dirigirse a cargas de trabajo específicas (recomendado) {#use-instrumentation-rules-to-target-specific-workloads-recommended}
 
-Con las reglas de instrumentación (disponibles para el Agente v7.64+), puede habilitar y deshabilitar la producción de trazas para aplicaciones específicas. [Consulte los detalles de configuración aquí](#advanced-options)
+Con las reglas de instrumentación (disponibles para Agent v7.64+), puede habilitar y deshabilitar el rastreo para aplicaciones específicas. [Consulte los detalles de configuración aquí](#advanced-options).
 
-#### Utilice el Controlador de Admisión de Datadog {#use-the-datadog-admission-controller}
+#### Utilice el controlador de admisión de Datadog {#use-the-datadog-admission-controller}
 
-Como alternativa, o para una versión del agente que no soporte reglas de instrumentación, también puede deshabilitar la mutación de pods añadiendo una etiqueta a su pod.
+Como alternativa, o para una versión de Agent que no admita reglas de instrumentación, también puede deshabilitar la mutación de pods agregando una etiqueta a su pod.
 
-<div class="alert alert-danger">Además de deshabilitar SSI, los siguientes pasos deshabilitan otros webhooks de mutación. Utilícelo con precaución.</div>
+<div class="alert alert-danger">Además de deshabilitar SSI, los siguientes pasos deshabilitan otros webhooks de mutación. Use con precaución.</div>
 
 1. Establezca la etiqueta `admission.datadoghq.com/enabled:` en `"false"` para la especificación del pod:
    ```yaml
@@ -709,13 +830,13 @@ Como alternativa, o para una versión del agente que no soporte reglas de instru
    ```shell
    kubectl apply -f /path/to/your/deployment.yaml
    ```
-3. Reinicie los servicios de los cuales desea eliminar la instrumentación.
+3. Reinicie los servicios para los que desea eliminar la instrumentación.
 
-### Elimine APM para todos los servicios en la infraestructura {#remove-apm-for-all-services-on-the-infrastructure}
+### Eliminar APM para todos los servicios en la infraestructura {#remove-apm-for-all-services-on-the-infrastructure}
 
 Para dejar de producir trazas, desinstale APM y reinicie la infraestructura:
 
-El archivo que necesita configurar depende de si habilitó la Instrumentación de Paso Único con Datadog Operator o Helm:
+El archivo que necesita configurar depende de si habilitó la instrumentación de un solo paso (Single Step Instrumentation) con Datadog Operator o Helm:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -728,7 +849,7 @@ El archivo que necesita configurar depende de si habilitó la Instrumentación d
          enabled: false
    ```
 
-2. Despliegue el Agente de Datadog con el archivo de configuración actualizado:
+2. Implemente el Datadog Agent con el archivo de configuración actualizado:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
@@ -753,21 +874,21 @@ El archivo que necesita configurar depende de si habilitó la Instrumentación d
 
 ## Mejores prácticas {#best-practices}
 
-Después de habilitar SSI, todos los procesos soportados en el clúster se instrumentan automáticamente y comienzan a producir trazas en minutos.
+Después de habilitar SSI, todos los procesos compatibles en el clúster se instrumentan automáticamente y comienzan a producir trazas en cuestión de minutos.
 
 Para controlar dónde se activa APM y reducir la sobrecarga, considere las siguientes mejores prácticas.
 
-{{% collapse-content title="Utilice etiquetas de opt-in para un despliegue controlado de APM" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Use etiquetas opt-in para un despliegue controlado de APM" level="h3" expanded=false id="opt-in-labels-controlled-apm-rollout" %}}
 
-#### Instrumentación por defecto vs. instrumentación por opt-in {#default-vs-opt-in-instrumentation}
-| Modo    | Comportamiento    | Cuándo usar |
+#### Instrumentación predeterminada frente a opt-in {#default-vs-opt-in-instrumentation}
+| Modo    | Comportamiento    | Cuándo usarlo |
 | ---  | ----------- | ----------- |
-| Predeterminado | Todos los procesos soportados en el clúster están instrumentados. | Clústeres pequeños o prototipos. |
-| Opt-in | Utilice [reglas de instrumentación][4] para restringir la instrumentación a espacios de nombres o pods específicos. | Clústeres de producción, implementaciones escalonadas o casos de uso sensibles al costo. |
+| Predeterminado | Todos los procesos compatibles en el clúster están instrumentados. | Clústeres pequeños o prototipos. |
+| Opt-in | Utilice [reglas de instrumentación][4] para restringir la instrumentación a espacios de nombres o pods específicos. | Clústeres de producción, despliegues graduales o casos de uso sensibles a los costos. |
 
 #### Ejemplo: Habilite la instrumentación para pods específicos {#example-enable-instrumentation-for-specific-pods}
 
-1. Agregue una etiqueta significativa (por ejemplo, `datadoghq.com/apm-instrumentation: "enabled"`) tanto a los metadatos de implementación como a la plantilla del pod.
+1. Agregue una etiqueta significativa (por ejemplo, `datadoghq.com/apm-instrumentation: "enabled"`) tanto a los metadatos del despliegue como a la plantilla del pod.
 
    ```
    apiVersion: apps/v1
@@ -799,7 +920,7 @@ Para controlar dónde se activa APM y reducir la sobrecarga, considere las sigui
                - containerPort: 8080
    ```
 
-2. En la configuración de Helm de su Datadog Agent, habilite SSI y use `podSelector` para inyectar solo en pods con la etiqueta de opt-in correspondiente.
+2. En su configuración de Helm del Datadog Agent, habilite SSI y use `podSelector` para inyectar solo en los pods con la etiqueta opt-in correspondiente.
 
    ```
      apm:
@@ -812,18 +933,18 @@ Para controlar dónde se activa APM y reducir la sobrecarga, considere las sigui
                  datadoghq.com/apm-instrumentation: "enabled"
    ```
 
-Consulte [reglas de instrumentación][4] para ejemplos adicionales.
+Consulte [reglas de instrumentación][4] para ver ejemplos adicionales.
 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Controle qué SDKs de Datadog se cargan" level="h3" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Controle qué SDKs de Datadog se cargan" level="h3" expanded=false id="control-loaded-datadog-sdks" %}}
 
-Utilice `ddTraceVersions` en la configuración de Helm de su Datadog Agent para controlar tanto el lenguaje como la versión del SDK de Datadog. Esto evita que se descarguen SDKs innecesarios, lo que minimiza la huella del contenedor de inicialización, reduce el tamaño de la imagen y permite actualizaciones más deliberadas del tracer (por ejemplo, para cumplir con requisitos de cumplimiento o simplificar la depuración).
+Use `ddTraceVersions` en su configuración de Helm del Agent para controlar tanto el lenguaje como la versión del SDK de Datadog. Esto evita que se descarguen SDK innecesarios, lo que minimiza la huella del contenedor de inicialización, reduce el tamaño de la imagen y permite actualizaciones de tracer más deliberadas (por ejemplo, para cumplir con los requisitos de cumplimiento o simplificar la depuración).
 
 #### Ejemplo: Especifique un SDK de Java para un espacio de nombres {#example-specify-a-java-sdk-for-a-namespace}
 
-Solo las aplicaciones Java se ejecutan en el espacio de nombres `login-service`. Para evitar la descarga de otros SDKs, configure el Agente para apuntar a ese espacio de nombres e inyectar únicamente la versión 1.48.2 del SDK de Java.
+Solo las aplicaciones Java se ejecutan en el espacio de nombres `login-service`. Para evitar la descarga de otros SDK, configure el Agent para que apunte a ese espacio de nombres e inyecte solo la versión 1.48.2 del SDK de Java.
 
 
 ```
@@ -837,7 +958,7 @@ targets:
 
 #### Configuración predeterminada {#default-configuration}
 
-Si un pod no coincide con ninguna regla `ddTraceVersions`, se aplica el objetivo predeterminado.
+Si un pod no coincide con ninguna regla `ddTraceVersions`, se aplica el destino predeterminado.
 
 ```
 targets:
@@ -856,7 +977,7 @@ targets:
 
 Si encuentra problemas al habilitar APM con SSI, consulte la [guía de solución de problemas de SSI][35].
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -893,4 +1014,7 @@ Si encuentra problemas al habilitar APM con SSI, consulte la [guía de solución
 [35]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [36]: /es/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 [37]: /es/containers/kubernetes/csi_driver/
+[40]: https://app.datadoghq.com/organization-settings/api-keys
+[42]: https://app.datadoghq.com/apm/services
 [41]: /es/tracing/guide/injectors/
+[43]: /es/getting_started/site/

@@ -26,11 +26,11 @@ The <code>ml_obs.*</code> entries on this page are <a href="/metrics/">Datadog M
 They are distinct from two other things in Agent Observability:
 <ul>
 <li><strong>Per-span operational data</strong> (cost, tokens, latency, errors on each individual trace or span): the raw values these metrics roll up from. Stored with spans, follow <a href="/llm_observability/data_governance/#traces-and-spans">Agent Observability trace retention</a>, and are queried from the Traces explorer rather than as metrics.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or experiment rows. These are not derived from operational telemetry, and follow <a href="/llm_observability/data_governance/">Agent Observability trace and experiment retention</a> rather than Datadog metric retention.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">Evaluation scores</a></strong> (also called "evals"): quality and safety judgments (for example, hallucination, faithfulness, custom LLM-as-a-judge) attached to individual spans or offline experiment rows. These are not derived from operational telemetry, and follow <a href="/llm_observability/data_governance/">Agent Observability trace and offline experiment retention</a> rather than Datadog metric retention.</li>
 </ul>
 </div>
 
-<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics.</div>
+<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics, except LLM token and cost metric tags. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
 ### Span metrics
 

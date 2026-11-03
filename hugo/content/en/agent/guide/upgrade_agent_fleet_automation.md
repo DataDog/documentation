@@ -6,7 +6,6 @@ aliases:
   - /agent/guide/upgrade-between-agent-minor-versions
   - /agent/versions/upgrade_between_agent_minor_versions/
   - /agent/guide/upgrade_between_minor_versions/
-  - /agent/guide/upgrade
 further_reading:
   - link: "/agent/troubleshooting/"
     tag: "Documentation"
@@ -85,9 +84,9 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 {{% tab "Windows" %}}
 
 1. Upgrade your Agent to version 6 following the [manual upgrade process][1].
-2. Follow the [From Agent v6 to Agent v7](#from-agent-v6-to-agent-v7) upgrade instructions.
+2. Follow the [From Agent v6 to Agent v7](#upgrade-from-agent-6-to-agent-7) upgrade instructions.
 
-[1]: /agent/versions/upgrade_to_agent_v6/?tab=windows#manual-upgrade
+[1]: /agent/guide/upgrade_to_agent_6/?tab=windows#manual-upgrade
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

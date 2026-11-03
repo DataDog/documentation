@@ -23,7 +23,7 @@ further_reading:
   text: Terraform による Synthetic プライベートロケーションの作成と管理
 title: Synthetic テストをプライベートロケーションから実行する
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 プライベートロケーションから、**内部用アプリケーションの監視や、パブリックインターネットから接続できないプライベートエンドポイントの監視**を行えます。これは以下にも使用できます。
 
@@ -84,15 +84,17 @@ FIPS サポートが必要な場合は、Docker Hub で [FIPS 準拠のイメー
 
 | システム | 要件 |
 |---|---|
-| OS | Windows Server 2022、Windows Server 2019、Windows Server 2016、または Windows 10。|
+| OS | Windows Server 2025、Windows Server 2022、Windows Server 2019、Windows Server 2016、Windows 11、または Windows 10。|
 | RAM | 最低 4GB。8GB 推奨。|
 | CPU | 64 ビット対応の Intel または AMD プロセッサー。2.8 GHz 以上のプロセッサーを推奨。|
 
-**注**: Windows プライベートロケーションでブラウザテストを実行するには、Windows コンピュータにブラウザ (たとえば、Chrome、Edge、Firefox) がインストールされている必要があります。
+**注:** ブラウザテストには、Windows サーバーにインストールされたブラウザが必要です。
+- Windows Private Location 1.71.0 以降: Chrome と Firefox が含まれています。Edge は別途インストールしてください。
+- Windows Private Location 1.70.0 以前: Chrome、Edge、および Firefox をインストールしてください。
 
 MSI インストーラーを使用する前に、コンピューターに .NET バージョン 4.7.2 以降をインストールする必要があります。
 
-**FIPS 140-2 暗号化モードを有効にする**</br>
+**FIPS 140-2 暗号化モードを有効にする**: </br>
 安全な通信のために FIPS 準拠の暗号化モジュールを有効にします。このオプションを使用するには、Windows ホストが Windows FIPS モードで実行されている必要があります。プライベートロケーション `v1.63.0` 以上で利用可能です。
 
 {{< img src="synthetics/private_locations/synthetics_pl_windows_fips.png" alt="Synthetics Private Location Worker ウィザード、MSI インストーラー。FIPS 140-2 暗号化モードの設定が表示されています。" style="width:80%;" >}}
@@ -125,16 +127,16 @@ MSI インストーラーを使用する前に、コンピューターに .NET �
 
 ### プライベートロケーションを作成する {#create-your-private-location}
 
-[[**Synthetic Monitoring**] > [**Settings**] (設定) > [**Private Locations**] (プライベートロケーション)][22] に移動し、[**Add Private Location**] (プライベートロケーションを追加) をクリックします。
+[[{{< ui >}}Synthetic Monitoring{{< /ui >}}] > [{{< ui >}}Settings{{< /ui >}}] (設定) > [{{< ui >}}Private Locations{{< /ui >}}] (プライベートロケーション)][22] に移動し、[{{< ui >}}Add Private Location{{< /ui >}}] (プライベートロケーションを追加) をクリックします。
 
 {{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="プライベートロケーションを作成する" style="width:90%;">}}
 
 プライベートロケーションの詳細を入力します。
 
-1. プライベートロケーションの [**Name**] (名前) と [**Description**] (説明) を指定します。
-2. プライベートロケーションに関連付ける [**Tags**] (タグ) を追加します。
-3. 既存の [**API Key**] (API キー) を 1 つ選択します。API キーを選択すると、プライベートロケーションと Datadog 間の通信が可能になります。既存の API キーがない場合は、[**Generate API key**] (API キーを生成) をクリックして専用ページで作成します。`Name` と `API key` のフィールドのみが必須です。
-4. プライベートロケーションのアクセス権を設定し、[**Save Location and Generate Configuration File**] (ロケーションを保存して構成ファイルを生成) をクリックします。Datadog がプライベートロケーションを作成し、関連する構成ファイルを生成します。
+1. プライベートロケーションの [{{< ui >}}Name{{< /ui >}}] (名前) と [{{< ui >}}Description{{< /ui >}}] (説明) を指定します。
+2. プライベートロケーションに関連付ける [{{< ui >}}Tags{{< /ui >}}] (タグ) を追加します。
+3. 既存の{{< ui >}}API Keys{{< /ui >}} (API キー) を 1 つ選択します。API キーを選択すると、プライベートロケーションと Datadog 間の通信が可能になります。既存の API キーがない場合は、[{{< ui >}}Generate API key{{< /ui >}}] (API キーを生成) をクリックして専用ページで作成します。`Name` と `API key` のフィールドのみが必須です。
+4. プライベートロケーションのアクセス権を設定し、[{{< ui >}}Save Location and Generate Configuration File{{< /ui >}}] (ロケーションを保存して構成ファイルを生成) をクリックします。Datadog がプライベートロケーションを作成し、関連する構成ファイルを生成します。
 
 {{< img src="synthetics/private_locations/pl_creation_1.png" alt="プライベートロケーションに詳細を追加する" style="width:85%;">}}
 
@@ -146,13 +148,13 @@ MSI インストーラーを使用する前に、コンピューターに .NET �
 
 #### プロキシの構成 {#proxy-configuration}
 
-プライベートロケーションと Datadog の間のトラフィックがプロキシを経由する必要がある場合は、`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` の形式でプロキシ URL を指定して、関連する `proxyDatadog` パラメータを生成された構成ファイルに追加します。
+プライベートロケーションと Datadog の間のトラフィックがプロキシを経由する必要がある場合は、`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` の形式でプロキシ URL を指定して、関連する `proxyDatadog` パラメーターを生成された構成ファイルに追加します。
 
 {{<img src="synthetics/private_locations/pl_proxy_1.png" alt="プライベートロケーションの構成ファイルにプロキシを追加する" style="width:90%;">}}
 
 #### 予約済み IP のブロック {#blocking-reserved-ips}
 
-デフォルトでは、Synthetic ユーザーは任意の IP を使用してエンドポイントで Synthetic テストを作成できます。ユーザーがネットワーク内の機密性の高い内部 IP でテストを作成できないようにする場合は、[**Block reserved IPs**] (予約済み IP のブロック) ボタンを切り替えて、予約済み IP 範囲のデフォルトセット ([IPv4 アドレスレジストリ][6]および [IPv6 アドレスレジストリ][7]) をブロックし、生成された構成ファイルで関連する `enableDefaultBlockedIpRanges` パラメータを `true` に設定します。
+デフォルトでは、Synthetic ユーザーは任意の IP を使用してエンドポイントで Synthetic テストを作成できます。ユーザーがネットワーク内の機密性の高い内部 IP でテストを作成できないようにする場合は、[{{< ui >}}Block reserved IPs{{< /ui >}}] (予約済み IP のブロック) ボタンを切り替えて、予約済み IP 範囲のデフォルトセット ([IPv4 アドレスレジストリ][6]および [IPv6 アドレスレジストリ][7]) をブロックし、生成された構成ファイルで関連する `enableDefaultBlockedIpRanges` パラメーターを `true` に設定します。
 
 テストするエンドポイントの一部がブロックされた予約済み IP 範囲の 1 つまたは複数にある場合は、その IP または CIDR、あるいはその両方を許可リストに追加して、生成された構成ファイルに関連する `allowedIPRanges` パラメーターを追加できます。
 
@@ -164,7 +166,7 @@ MSI インストーラーを使用する前に、コンピューターに .NET �
 
 {{< img src="synthetics/private_locations/pl_view_file_1.png" alt="予約済み IP を構成する" style="width:90%;">}}
 
-Datadog はシークレットを保存しないので、[**View Installation Instructions**] (インストール手順を表示) をクリックする前に、ローカルに保存してください。
+Datadog はシークレットを保存しないので、[{{< ui >}}View Installation Instructions{{< /ui >}}] (インストール手順を表示) をクリックする前に、シークレットをローカルに保存してください。
 
 **注:** ワーカーをさらに追加する場合、または他のホストにワーカーをインストールする場合は、これらのシークレットを再度参照できる必要があります。
 
@@ -177,7 +179,7 @@ Datadog はシークレットを保存しないので、[**View Installation Ins
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-次のコマンドを実行して、構成ファイルをコンテナにマウントすることで、プライベートロケーションワーカーを起動します。`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルがルートホームフォルダーではなく `/etc/docker` にあることを確認してください。
+次のコマンドを実行して、構成ファイルをコンテナにマウントすることで、プライベートロケーションワーカーを起動します。以下のコマンドの `$PWD` はコマンドを実行するディレクトリを指しているため、これを `<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルが保存されている場所のパスに置き換えてください。コロンの前のパス (ホストマシン上の場所) は任意のディレクトリにできますが、コロンの後のパス (`/etc/datadog/synthetics-check-runner.json`) は、ワーカーがコンテナ内で構成を検索する場所であるため、正確に一致させる必要があります。
 
 ```shell
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
@@ -533,8 +535,8 @@ Datadog はすでに Kubernetes および AWS と統合されているため、�
 {{% tab "GUI 経由の Windows" %}}
 
 1. [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` ファイル][101]をダウンロードし、プライベートロケーションをインストールしたいマシンからこのファイルを実行します。
-1. ウェルカムページで [**Next**] (次へ) をクリックし、EULA を読み、利用規約に同意します。[**Next**] (次へ) をクリックします。
-1. アプリケーションのインストール先を変更するか、デフォルト設定のままにします。[**Next**] (次へ) をクリックします。
+1. ウェルカムページで [{{< ui >}}Next{{< /ui >}}] (次へ) をクリックし、EULA を読み、利用規約に同意します。[{{< ui >}}Next{{< /ui >}}] (次へ) をクリックします。
+1. アプリケーションのインストール先を変更するか、デフォルト設定のままにします。[{{< ui >}}Next{{< /ui >}}] (次へ) をクリックします。
 1. Windows プライベートロケーションを構成するには以下の方法があります。
    - Datadog Synthetics Private Location Worker の JSON 構成を貼り付けて入力します。このファイルは、[プライベートロケーションの作成][102]時に Datadog によって生成されます。
    - Datadog Synthetics Private Location Worker の JSON 構成を含むファイルのパスを参照または入力します。
@@ -564,9 +566,9 @@ Datadog はすでに Kubernetes および AWS と統合されているため、�
    Enable FIPS 140-2 cryptographic mode (FIPS 140-2 暗号化モードを有効にする)
    : 安全な通信のために FIPS 準拠の暗号化モジュールを有効にします。このオプションを使用するには、Windows ホストが Windows FIPS モードで実行されている必要があります。プライベートロケーション v1.63.0 以上で利用可能です。
 
-1. [**Next**] (次へ)、[**Install**] (インストール) をクリックしてインストールプロセスを開始します。
+1. [{{< ui >}}Next{{< /ui >}}] (次へ) と [{{< ui >}}Install{{< /ui >}}] (インストール) をクリックしてインストールプロセスを開始します。
 
-プロセスが完了したら、インストール完了ページで [**Finish**] (完了) をクリックします。
+プロセスが完了したら、インストール完了ページで [{{< ui >}}Finish{{< /ui >}}] (完了) をクリックします。
 
 <div class="alert alert-danger">JSON 構成を入力した場合は、その構成を使用して Windows サービスの実行が開始されます。構成を入力していない場合は、コマンドプロンプトから  <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code>  を実行するか、 <code>start menu</code>  のショートカットを使用して Synthetics Private Location Worker を起動します。</div>
 
@@ -583,13 +585,13 @@ Datadog はすでに Kubernetes および AWS と統合されているため、�
    - PowerShell ターミナルで
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<ワーカー構成ファイルのパス>";
+     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>";
      ```
 
    - またはコマンドターミナルで
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<ワーカー構成ファイルのパス>
+     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn CONFIG_FILEPATH=<path_to_your_worker_config_file>
      ```
 
 パラメーターを追加することができます。
@@ -598,7 +600,7 @@ Datadog はすでに Kubernetes および AWS と統合されているため、�
 |---|---|---|---|---|
 | APPLYDEFAULTFIREWALLRULES | プログラムに必要なファイアウォールルールを適用します。| 1 | 該当なし | 0: 無効<br>1: 有効 |
 | APPLYFIREWALLDEFAULTBLOCKRULES | インストールされている各ブラウザ (Chrome、Edge、Firefox) の予約済み IP アドレスをブロックします。Windows ファイアウォールでは、ループバック接続をブロックすることはできません。| 0 | 該当なし | 0: 無効<br>1: 有効 |
-| LOGGING_ENABLED | 有効にすると、ファイルログが構成されます。これらのログは、インストールディレクトリの logs フォルダに保存されます。| 0 | `--enableFileLogging` | 0: 無効<br>1: 有効 |
+| LOGGING_ENABLED | 有効にすると、ファイルログが構成されます。これらのログは、インストールディレクトリの logs フォルダーに保存されます。| 0 | `--enableFileLogging` | 0: 無効<br>1: 有効 |
 | LOGGING_VERBOSITY | プログラムのロギングの冗長性を構成します。これはコンソールログとファイルログに影響します。| これはコンソールログとファイルログに影響します。| `-vvv` | `-v`: エラー<br>`-vv`: 警告<br>`-vvv`: 情報<br>`vvvv`: デバッグ |
 | LOGGING_MAXDAYS | システム上のファイルログを削除するまでの保存日数。無人インストールを実行する場合は、任意の数値を設定できます。| 7 | `--logFileMaxDays` | 整数 |
 | CONFIG_FILEPATH | これは、Synthetics Private Location Worker JSON 構成ファイルのパスに変更する必要があります。パスにスペースが含まれている場合は引用符で囲んでください。| <None> | `--config` | 文字列 |
@@ -906,7 +908,7 @@ livenessProbe:
 
 ### プライベートロケーションのイメージをアップグレードする {#upgrade-a-private-location-image}
 
-既存のプライベートロケーションをアップグレードするには、プライベートロケーションのサイドパネルにある**歯車**アイコンをクリックし、[**Installation instructions**] (インストール手順) をクリックします。
+既存のプライベートロケーションをアップグレードするには、プライベートロケーションのサイドパネルにある {{< ui >}}Gear{{< /ui >}} (歯車) アイコンをクリックし、[{{< ui >}}Installation instructions{{< /ui >}}] (インストール手順) をクリックします。
 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="プライベートロケーションのセットアップワークフローにアクセスする" style="width:90%;" >}}
 
@@ -914,13 +916,34 @@ livenessProbe:
 
 **注**: プライベートロケーションのイメージを起動するために `docker run` を使用していて、以前に `latest` タグを使用してプライベートロケーションのイメージをインストールしたことがある場合は、同じ `latest` タグでローカルに存在するキャッシュバージョンのイメージに依存するのではなく、最新バージョンがプルされるように、`docker run` コマンドに `--pull=always` を追加してください。
 
+#### Windows プライベートロケーションをアップグレードする{#upgrade-a-windows-private-location}
+
+1. アップグレードや変更を行う前に、構成ファイル (`C:\ProgramData\Datadog Synthetics Private Location\config.json`) のバックアップを作成します。
+2. 最新の [MSI インストーラー][34]をダウンロードして実行し、プロンプトに従います。構成の変更や更新を求められた場合は、必ずバックアップしたファイルを使用してください。
+3. インストーラーの [**Modify**] (変更) オプションを使用する場合は、既存の構成ファイルを選択します。フィールドを空白のままにするか、新しい構成を生成すると、現在の構成が置き換えられます。
+4. プライベートロケーションのワーカーサービスが実行されており、正しい構成ファイルを参照していることを確認します。
+
+### 最新のブラウザバージョンを実行する {#run-the-latest-browser-versions}
+
+`latest` イメージ内の Chrome、Edge、および Firefox のバージョンは、テストの後に各プライベートロケーションのリリースで更新されます。その結果、ブラウザベンダーがリリースする最新バージョンよりも古いリリースになることがあります。オプトインの `browsers-latest` イメージを使用して、最新のブラウザとそのセキュリティパッチを早期に実行してください。これにより、プライベートロケーションに対して報告されるブラウザの脆弱性 (CVE) を軽減できます。
+
+`browsers-latest` イメージは毎週再ビルドされます。このイメージを使用するには、`latest` の代わりに `browsers-latest` タグをプルします。
+
+```shell
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:browsers-latest
+```
+
+ワーカーを特定の週次ビルドに固定するには、そのビルドとともに公開されている日付付きの不変タグ (`X.Y.Z-rc.N-browsers-YYYY-MM-DD` 形式) を使用してください。FIPS 準拠イメージは `datadog/synthetics-private-location-worker-fips:browsers-latest` として公開されています。
+
+**注**: `browsers-latest` ブラウザは Datadog が管理するロケーションでは検証されていないため、ブラウザテストが `latest` イメージの場合よりも不安定になる可能性があります。このチャネルは、安定性と引き換えに最新のブラウザバージョンを提供します。
+
 ### 内部エンドポイントをテストする {#test-your-internal-endpoint}
 
 少なくとも 1 つのプライベートロケーションワーカーが Datadog にレポートを開始すると、プライベートロケーションのステータスが緑色で表示されます。
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="プライベートロケーションのレポート" style="width:90%;">}}
 
-`REPORTING` ヘルスステータスおよび関連するモニターステータスが、[**Settings**] (設定) ページのプライベートロケーションのリストに表示されます。
+`REPORTING` 健全性ステータスおよび関連するモニターステータスが、[{{< ui >}}Settings{{< /ui >}}] (設定) ページのプライベートロケーションのリストに表示されます。
 
 {{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="プライベートロケーションのヘルスステータスとモニターステータス" style="width:100%;">}}
 
@@ -932,7 +955,7 @@ livenessProbe:
 
 ## Synthetic テストをプライベートロケーションから起動する {#launch-synthetic-tests-from-your-private-location}
 
-API テスト、マルチステップ API テスト、またはブラウザテストを作成し、関心のある**プライベートロケーション**を選択します。
+API テスト、マルチステップ API テスト、またはブラウザテストを作成し、関心のある {{< ui >}}Private Locations{{< /ui >}} (プライベートロケーション) を選択します。
 
 {{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Synthetic テストをプライベートロケーションに割り当てる" style="width:90%;">}}
 
@@ -969,13 +992,13 @@ API テスト、マルチステップ API テスト、またはブラウザテ�
 ロール、チーム、または個々のユーザーに基づいてテストへのアクセス権を制限するには、[きめ細かなアクセス制御][24]を使用します。
 
 1. フォームの権限セクションを開きます。
-2. [**Edit Access**] (アクセスの編集) をクリックします。
+2. [{{< ui >}}Edit Access{{< /ui >}}] をクリックします。
   {{< img src="synthetics/settings/grace_2.png" alt="プライベートロケーションの構成フォームからテストの権限を設定する" style="width:100%;" >}}
-3. [**Restrict Access**] (アクセスの制限) をクリックします。
+3. [{{< ui >}}Restrict Access{{< /ui >}}] をクリックします。
 4. チーム、ロール、またはユーザーを選択します。
-5. [**Add**] (追加) をクリックします。
+5. [{{< ui >}}Add{{< /ui >}}] をクリックします。
 6. それぞれに関連付けたいアクセスレベルを選択します。
-7. [**Done**] (完了) をクリックします。
+7. [{{< ui >}}Done{{< /ui >}}] をクリックします。
 
 <div class="alert alert-info">プライベートロケーションへの Viewer アクセス権がなくても、プライベートロケーションから結果を表示できます。<br><br>
 プライベートロケーションを制限すると、他のユーザーがそれをテストに追加したり編集したりできなくなる場合がありますが、権限のあるユーザーによってテストに追加されていればその名前を見ることはできます。</div>
@@ -986,7 +1009,7 @@ API テスト、マルチステップ API テスト、またはブラウザテ�
 | Viewer       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
 | Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1018,3 +1041,4 @@ API テスト、マルチステップ API テスト、またはブラウザテ�
 [31]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 [32]: /ja/synthetics/platform/private_locations/configuration
 [33]: /ja/synthetics/guide/kerberos-authentication/
+[34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi

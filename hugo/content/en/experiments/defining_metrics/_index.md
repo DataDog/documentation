@@ -81,7 +81,7 @@ Before you create an experiment metric from Agent Observability data:
 - [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
 - To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
 - To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value.
-- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
+- Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Online Experiments][17].
 
 <div class="alert alert-warning"><strong>Supported evaluation type</strong>: Experiment metrics support only Agent Observability evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types are not available in the metric picker.</div>
 
@@ -131,7 +131,7 @@ After you configure either source:
 [14]: /llm_observability/instrument/
 [15]: /llm_observability/investigate/cost/
 [16]: /llm_observability/investigate/evaluations/
-[17]: /experiments/guide/run_online_experiment_on_llm_application/
+[17]: /llm_observability/improve/online_experiments/
 
 {{% /tab %}}
 {{% tab "Warehouse" %}}

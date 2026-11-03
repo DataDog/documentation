@@ -2,7 +2,7 @@
 aliases:
 - /es/llm_observability/evaluations/pydantic_evaluations/
 - /es/llm_observability/configure/evaluations/external_evaluations/pydantic/
-description: Utilice evaluaciones de Pydantic con experimentos de Agent Observability.
+description: Utilice evaluadores de Pydantic con Agent Observability Offline Experiments.
 further_reading:
 - link: /llm_observability/investigate/evaluations/external_evaluations
   tag: Documentación
@@ -11,16 +11,16 @@ title: Evaluaciones de Pydantic
 ---
 ## Descripción general {#overview}
 
-Pydantic es un marco de código abierto que proporciona evaluaciones listas para usar y permite evaluaciones de LLM personalizables. Para obtener más información, consulte la [documentación de Pydantic][3].
+Pydantic es un marco de código abierto que proporciona evaluadores listos para usar y permite evaluaciones de LLM personalizables. Para obtener más información, consulte la [documentación de Pydantic][3].
 
-Puede utilizar Agent Observability para ejecutar evaluaciones de Pydantic y evaluaciones de informes escalares de Pydantic en [Experimentos][1]. Los resultados de la evaluación de Pydantic aparecen como resultados del evaluador vinculados a cada instancia en un [conjunto de datos de Agent Observability][5]. Las evaluaciones de informes de Pydantic se ejecutan en todo un conjunto de datos de Agent Observability e informan un resultado escalar para el conjunto de datos.
+Puede utilizar Agent Observability para ejecutar evaluadores de Pydantic y evaluadores de informes de Pydantic que producen resultados escalares en [Offline Experiments][1]. Los resultados de la evaluación de Pydantic aparecen como resultados del evaluador vinculados a cada instancia en un [conjunto de datos de Agent Observability][5]. Los evaluadores de informes de Pydantic se ejecutan en todo un conjunto de datos de Agent Observability e informan un resultado escalar para el conjunto de datos.
 
 ## Configuración {#setup}
 
-1. Configure un [experimento de Agent Observability][2] y un [conjunto de datos de Agent Observability][4].
+1. Configure un [experimento sin conexión de Agent Observability][2] y un [Agent Observability Dataset][4].
 2. Proporcione un evaluador de Pydantic al parámetro `evaluators` en un `Experiment` de LLMObs como se demuestra en el siguiente ejemplo de código. (Opcional) Proporcione un evaluador de informes de Pydantic al parámetro `summary_evaluators` en un `Experiment` de LLMObs. **Nota**: Solo se admiten evaluadores de informes de Pydantic que devuelvan un `ScalarResult`.
 
-```python 
+```python
 
 from pydantic_evals.evaluators import (
     EqualsExpected,
@@ -47,7 +47,7 @@ LLMObs.enable(
 
 # this can be any Pydantic evaluator
 @dataclass
-class ComprehensiveCheck(Evaluator): 
+class ComprehensiveCheck(Evaluator):
     def evaluate(self, ctx: EvaluatorContext) -> EvaluatorOutput:
         format_valid = self._check_format(ctx.output)
 
@@ -56,8 +56,8 @@ class ComprehensiveCheck(Evaluator):
                 value=format_valid,
                 reason='Valid JSON format' if format_valid else 'Invalid JSON format',
             ),
-            'quality_score': self._score_quality(ctx.output),  
-            'category': self._classify(ctx.output),  
+            'quality_score': self._score_quality(ctx.output),
+            'category': self._classify(ctx.output),
         }
         return to_return
 
@@ -115,7 +115,7 @@ llm_judge = LLMJudge(
 
 experiment = LLMObs.experiment(
     name="<EXPERIMENT_NAME>",
-    task=my_task, 
+    task=my_task,
     dataset=dataset,
     evaluators=[EqualsExpected(), ComprehensiveCheck(), llm_judge],
     summary_evaluators=[TotalCasesEvaluator()],
@@ -131,17 +131,17 @@ print(f"View experiment: {experiment.url}")
 Para ver un ejemplo funcional, consulte la [demostración de Pydantic de Datadog en GitHub][6].
 
 ### Uso {#usage}
-Después de ejecutar un experimento con una evaluación de Pydantic, puede visualizar los resultados de la evaluación de Pydantic por instancia en la ejecución del experimento correspondiente en Datadog. En el siguiente experimento, se ejecutaron dos evaluaciones de Pydantic (un evaluador de Pydantic personalizado con el nombre "ComprehensiveCheck" y un evaluador integrado con el nombre "EqualsExpected") y un evaluador de informes de Pydantic (un evaluador de informes de Pydantic personalizado con el nombre "TotalCasesEvaluator"):
+Después de ejecutar un experimento con un evaluador de Pydantic, puede visualizar los resultados de la evaluación de Pydantic por instancia en la ejecución del experimento correspondiente en Datadog. En el siguiente experimento, se ejecutaron dos evaluadores de Pydantic (un evaluador de Pydantic personalizado con el nombre "ComprehensiveCheck" y un evaluador integrado con el nombre "EqualsExpected") y un evaluador de informes de Pydantic (un evaluador de informes de Pydantic personalizado con el nombre "TotalCasesEvaluator"):
 
-{{< img src="llm_observability/pydantic-experiment-result.png" alt="Un experimento de Agent Observability con un evaluador de Pydantic." style="width:100%;" >}}
+{{< img src="llm_observability/pydantic-experiment-result.png" alt="Un experimento sin conexión de Agent Observability con un evaluador de Pydantic." style="width:100%;" >}}
 
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/llm_observability/improve/experiments
-[2]: /es/llm_observability/improve/experiments/setup#create-an-experiment
+[1]: /es/llm_observability/improve/offline_experiments
+[2]: /es/llm_observability/guide/offline_experiments#create-an-experiment
 [3]: https://ai.pydantic.dev/evals/
-[4]: /es/llm_observability/improve/experiments/setup#create-a-dataset
+[4]: /es/llm_observability/guide/offline_experiments#create-a-dataset
 [5]: /es/llm_observability/improve/datasets
 [6]: https://github.com/DataDog/llm-observability/blob/main/experiments/eval-integrations/2-pydantic-demo.py

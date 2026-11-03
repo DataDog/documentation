@@ -36,9 +36,10 @@ To create a routing rule:
 
 1. Under **Set targets**, click **Add** and select a target type. The target type determines what happens when the rule matches:
    - **Page escalation policy**: Select an [escalation policy][3] and set the urgency to `DYNAMIC` (based on alert status), `HIGH`, or `LOW`.
-   - **Send Slack message** (Preview): Select a Slack workspace and channel.
-   - **Send Microsoft Teams message** (Preview): Select a Teams tenant, team, and channel.
-   - **Run Workflow** (Preview): Select an existing [Workflow][4].
+   - **Send Slack message**: Select a Slack workspace and channel.
+   - **Send Microsoft Teams message**: Select a Teams tenant, team, and channel.
+   - **Run Workflow**: Select an existing [Workflow][4].
+   - **Sync with a ServiceNow Incident** (Preview): Select a ServiceNow connection. Datadog creates a ServiceNow incident for each Page and keeps it in sync. See [Integrate ServiceNow with Datadog On-Call][5].
 
 1. If you selected **Page escalation policy**, optionally configure [acknowledgment timeout](#acknowledgment-timeout):
    1. Toggle on **Acknowledgment timeout**.
@@ -146,3 +147,4 @@ When a Page is acknowledged or resolved in Slack or Teams, Datadog updates the o
 [2]: /tracing/trace_explorer/query_syntax/
 [3]: /incident_response/on-call/escalation_policies/
 [4]: /actions/workflows/
+[5]: /incident_response/on-call/integrations/servicenow/

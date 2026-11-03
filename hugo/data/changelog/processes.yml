@@ -5,3 +5,9 @@ entries:
     operations:
       - ListProcesses
     title: Add executable and identifying_tags to process summary attributes
+  - change_type: modified
+    date: '2026-10-22'
+    link: https://github.com/DataDog/documentation/pull/40908
+    operations:
+      - ListProcesses
+    title: Document Processes API time window, retention, and filter semantics
