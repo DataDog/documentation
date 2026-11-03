@@ -27,29 +27,24 @@ The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, bot
 
 <!-- TODO(screenshot): Full-page overview showing usage graphs, search, facets, and the metrics table. Save to metrics/catalog/. Exclude preview banners and features that are not generally available. -->
 
-With the Metrics Catalog page, you can:
+Use the Metrics Catalog page to discover and understand your metrics, and to manage your custom metrics volume.
+
+To discover and understand your metrics, you can:
+- Search for metrics by metric name or tag, with fuzzy matching and Boolean tag filters.
+- Filter metrics with facets, such as metric type, metric origin, and query activity.
+- View a metric's metadata, tags, source code, and the assets that use it.
+
+To manage your custom metrics volume, you can:
 - Monitor your account's estimated indexed and ingested custom metrics usage in real time.
 - Find your largest metric names and the metric names with the greatest change in volume.
 - Identify metrics that aren't queried or used in any assets.
 - Configure tags, percentiles, and historical metrics ingestion for your metrics.
 
-To see only custom metrics, filter the list with the {{< ui >}}Metric Category{{< /ui >}} facet.
+## Discover metrics
 
-<div class="alert alert-info">For customers on the <a href="/account_management/billing/metric_name_pricing/">Metric Name Pricing model</a>, see the <a href="/metrics/guide/metric_name_pricing_experience/">Metrics Experience Changes for Metric Name Pricing guide</a> to optimize your metric usage.</div>
+Use search, facets, the metrics table, and the metric details side panel to find metrics and understand how they're configured and used.
 
-## Custom metrics usage graphs
-
-The usage graphs at the top of the Metrics Catalog page show your account's estimated custom metrics usage in real time. The graphs display different billing dimensions depending on your pricing model:
-
-- **Cardinality pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
-- **Metric Name Pricing**: Your account's estimated unique metric names, billable indexed point volume, and ingested-to-indexed points ratio. For more information, see the [Metrics Experience Changes for Metric Name Pricing][41] guide.
-
-To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
-
-<!-- TODO(screenshot): Replace with a Catalog usage graphs screenshot (standard pricing). -->
-{{< img src="metrics/volume/volume_graph.png" alt="Estimated real-time indexed and ingested custom metrics volume graphs." style="width:100%;" >}}
-
-## Search and filter
+### Search and filter
 
 Search your metrics by metric name or tag using the {{< ui >}}Metric{{< /ui >}} or {{< ui >}}Tag{{< /ui >}} search fields:
 
@@ -65,17 +60,17 @@ Tag filtering supports Boolean and wildcard syntax so that you can identify:
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
 * Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
 
-## Facet panel
+### Facet panel
 
 The search fields provide the most comprehensive set of actions to filter the list of metrics. You can also filter your metrics with facets, which are grouped into {{< ui >}}Core{{< /ui >}}, {{< ui >}}Usage{{< /ui >}}, and {{< ui >}}Configuration{{< /ui >}} sections.
 
-### Core facets
+#### Core facets
 
 - {{< ui >}}Metric Category{{< /ui >}}: Whether the metric is a custom metric or a standard integration metric.
 - {{< ui >}}Metric Type{{< /ui >}}: Whether the metric is a distribution or a non-distribution metric (count, gauge, or rate).
 - {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see the [Metric origin definitions](#metric-origin-definitions) section.
 
-### Usage facets
+#### Usage facets
 
 - {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days.
 - {{< ui >}}Related Assets{{< /ui >}}: Metrics that are used in dashboards, notebooks, monitors, and SLOs.
@@ -85,7 +80,7 @@ A metric is **unqueried** if it has not been accessed in monitors, SLOs, execute
 
 A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
-### Configuration facets
+#### Configuration facets
 
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled.
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
@@ -94,7 +89,7 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 <!-- TODO(screenshot): Replace with a facet panel screenshot showing the Core, Usage, and Configuration groups. -->
 {{< img src="metrics/summary/facet_panel_2025-02-26.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
-## Metrics table
+### Metrics table
 
 The metrics table lists your metrics with their configuration and volume details. By default, the table displays the following columns:
 
@@ -112,13 +107,9 @@ Volume columns apply only to custom metrics. For standard metrics, the {{< ui >}
 
 **Note**: For customers on the Metric Name Pricing model, "Points" replaces "Metrics" in the volume column names.
 
-### Sort metrics by volume
+To sort the list, click a column header.
 
-To sort the list, click a column header. For example:
-- Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to find your largest metric names by indexed custom metrics volume.
-- Sort by {{< ui >}}Change in Volume{{< /ui >}} to find the metric names with the greatest change in volume. These metrics may have spiked unintentionally in the selected time frame. If you receive an alert on your account's estimated real-time custom metrics usage, use this view to investigate the spike.
-
-### Customize columns
+#### Customize columns
 
 You can show, hide, reorder, and resize the columns in the metrics table. Datadog saves your column choices.
 
@@ -133,80 +124,31 @@ To restore the default columns, click {{< ui >}}Reset default columns{{< /ui >}}
 
 <!-- TODO(screenshot): Column customization control, open. -->
 
-### Download as CSV
+#### Download as CSV
 
 To download the metrics table, click the download icon ({{< ui >}}Download as CSV{{< /ui >}}) next to {{< ui >}}Columns{{< /ui >}}. The CSV file includes only the columns that are visible in the table.
 
-## Compare a metric's volume over time
-
-<!-- TODO(screenshot): Replace with a screenshot of the Change in Volume popover in Catalog. -->
-{{< img src="metrics/volume/compare_metric_cardinality_2025-01-27.png" alt="Metrics list filtered to metric names containing shopist, sorted by estimated custom metrics." style="width:100%;" >}}
-
-Use the {{< ui >}}Change in Volume{{< /ui >}} column to compare a metric name's number of indexed custom metrics (its cardinality) over time. A single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][42].
-
-To compare your spiking metric's cardinality over time:
-1. Select a time frame in the top-right corner of the page. Datadog recommends {{< ui >}}Past 1 Day{{< /ui >}} or {{< ui >}}Past 4 Weeks{{< /ui >}}.
-2. In the row for the metric whose cardinality you want to view, click the value in the {{< ui >}}Change in Volume{{< /ui >}} column. A popover opens with a graph comparing your metric's cardinality over time and the percentage increase in its spike.
-3. (Optional) Create a Change monitor for `% change` to alert on this spiking metric. For more information, see the [Change Alert Monitor][43] documentation.
-
-## Identify unqueried metrics
-
-To reduce custom metrics costs, start with your largest metric names that aren't actively queried. To find these metrics, select a time frame in the {{< ui >}}Query Activity{{< /ui >}} facet. The list is filtered to show only metric names that aren't queried in dashboards, notebooks, monitors, SLOs, Metrics Explorer, or the API. Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to see the largest of these metrics first.
-
-To reduce the volume and cost of these metrics, configure their tags in bulk. For more information, see the [Configure multiple metrics](#configuration-of-multiple-metrics) section. For a complete cost-optimization workflow, see [Best Practices for Custom Metrics Governance][44].
-
-## Configure multiple metrics {#configuration-of-multiple-metrics}
-
-Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more than one metric at a time:
-
-<!-- TODO(screenshot): Replace with the open Actions menu on the Catalog page. -->
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons." style="width:100%;">}}
-
-* {{< ui >}}Manage Percentile Aggregations{{< /ui >}}: Enable or disable percentile, threshold, and standard deviation queries across multiple distribution metrics. See the [Distributions page][31] for more information.
-
-{{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
-
-* {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
-
-To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Unindexed tags are no longer queryable, but Datadog still ingests them. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
-
-To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
-
-## Metric details side panel {#metric-details-sidepanel}
+### Metric details side panel {#metric-details-sidepanel}
 
 Click any metric name to open its details side panel, which shows the metric's metadata and tags:
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
-### Metric name
+The side panel shows the following details for the metric:
 
-The name of your metric in the [Metrics Explorer][2], [dashboards][3], etc.
+| Field | Description |
+|-------|-------------|
+| Metric name | The name of your metric in the [Metrics Explorer][2], [dashboards][3], etc. |
+| Ingested custom metrics | A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all of the data originally submitted with code. Learn more in the [custom metrics][4] documentation. |
+| Indexed custom metrics | Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][0] documentation. |
+| Hosts | The total number of hosts reporting a metric. |
+| Tag values | The total number of unique tag values attached to a metric. [Learn more about tagging][5]. |
 
-### Ingested custom metrics
-
-A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all of the data originally submitted with code.
-
-Learn more in the [custom metrics][4] documentation.
-
-### Indexed custom metrics
-
-Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without Limits™. Learn more in the [Metrics without Limits™][0] documentation.
-
-### Hosts
-
-The total number of hosts reporting a metric.
-
-### Tag values
-
-The total number of unique tag values attached to a metric.
-
-[Learn more about tagging][5].
-
-### Metrics metadata
+#### Metrics metadata
 
 The metadata attached to your metric. You can edit most of the metadata on the Metrics Catalog page or with the [Datadog API][6].
 
-#### Metric unit
+##### Metric unit
 
 The unit for your metric (byte, second, request, query, etc.). See the [metric unit][7] page for more details.
 
@@ -214,25 +156,25 @@ When you submit custom metrics to Datadog, you can change the [unit of measureme
 
 **Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as when you hover over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
 
-#### Metric type
+##### Metric type
 
 The type for your metric (gauge, rate, count, distribution). See the [metric type][8] page for more details.
 
 **Warning**: Editing the metric type changes that metric's behavior for **ALL** your dashboards and monitors.
 
-#### Integration name
+##### Integration name
 
 If the metric is coming from a supported [integration][9], the metadata lists the integration name. This information cannot be edited.
 
-#### Interval
+##### Interval
 
 The collection interval for the metric in seconds.
 
-#### Metric description
+##### Metric description
 
 The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Use this field to view and update descriptions for your [custom metrics][4]. Descriptions are pre-populated for metrics coming from supported [integrations][9].
 
-#### AI-generated description
+##### AI-generated description
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">AI-generated metric descriptions are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
@@ -243,7 +185,7 @@ For custom metrics, Datadog can automatically generate descriptions using availa
 {{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="An AI-generated metric description in the metric details side panel." style="width:80%;">}}
 
 
-### Source Code
+#### Source Code
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">Metric Source Code is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
@@ -255,7 +197,7 @@ Use the Source Code section in the metric side panel to identify a metric's sour
 
 {{< img src="metrics/summary/metric_source_code_03262026.png" alt="The Source Code section in the metric details side panel, linking to the metric's source file." style="width:80%;">}}
 
-#### Troubleshooting missing metrics
+##### Troubleshooting missing metrics
 
 If a metric doesn't appear in Source Code, it may be due to how it's defined.
 
@@ -286,7 +228,7 @@ timer = meterRegistry.timer("my.metric.name");
 
 To help ensure full coverage of your metric's source code, install Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and connect all your [repositories][39].
 
-### Tags table
+#### Tags table
 
 The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
 
@@ -308,7 +250,7 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-### Metrics Related Assets
+#### Metrics Related Assets
 
 {{< img src="metrics/summary/related_assets_dashboards_08_05_2025.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
@@ -318,12 +260,73 @@ To determine the value of any metric name to your organization, use Metrics Rela
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
 3. The {{< ui >}}Tags{{< /ui >}} column shows exactly which tags are used in each asset.
    
-## Custom Metrics Tags Cardinality Explorer 
+## Manage custom metrics volume
+
+Use the following tools to monitor your custom metrics usage, find the metrics that drive it, and reduce their volume.
+
+To see only custom metrics, filter the list with the {{< ui >}}Metric Category{{< /ui >}} facet.
+
+<div class="alert alert-info">For customers on the <a href="/account_management/billing/metric_name_pricing/">Metric Name Pricing model</a>, see the <a href="/metrics/guide/metric_name_pricing_experience/">Metrics Experience Changes for Metric Name Pricing guide</a> to optimize your metric usage.</div>
+
+### Custom metrics usage graphs
+
+The usage graphs at the top of the Metrics Catalog page show your account's estimated custom metrics usage in real time. The graphs display different billing dimensions depending on your pricing model:
+
+- **Cardinality pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
+- **Metric Name Pricing**: Your account's estimated unique metric names, billable indexed point volume, and ingested-to-indexed points ratio. For more information, see the [Metrics Experience Changes for Metric Name Pricing][41] guide.
+
+To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
+
+<!-- TODO(screenshot): Replace with a Catalog usage graphs screenshot (standard pricing). -->
+{{< img src="metrics/volume/volume_graph.png" alt="Estimated real-time indexed and ingested custom metrics volume graphs." style="width:100%;" >}}
+
+### Sort metrics by volume
+
+Sort the metrics table by a volume column. For example:
+- Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to find your largest metric names by indexed custom metrics volume.
+- Sort by {{< ui >}}Change in Volume{{< /ui >}} to find the metric names with the greatest change in volume. These metrics may have spiked unintentionally in the selected time frame. If you receive an alert on your account's estimated real-time custom metrics usage, use this view to investigate the spike.
+
+### Compare a metric's volume over time
+
+<!-- TODO(screenshot): Replace with a screenshot of the Change in Volume popover in Catalog. -->
+{{< img src="metrics/volume/compare_metric_cardinality_2025-01-27.png" alt="Metrics list filtered to metric names containing shopist, sorted by estimated custom metrics." style="width:100%;" >}}
+
+Use the {{< ui >}}Change in Volume{{< /ui >}} column to compare a metric name's number of indexed custom metrics (its cardinality) over time. A single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][42].
+
+To compare your spiking metric's cardinality over time:
+1. Select a time frame in the top-right corner of the page. Datadog recommends {{< ui >}}Past 1 Day{{< /ui >}} or {{< ui >}}Past 4 Weeks{{< /ui >}}.
+2. In the row for the metric whose cardinality you want to view, click the value in the {{< ui >}}Change in Volume{{< /ui >}} column. A popover opens with a graph comparing your metric's cardinality over time and the percentage increase in its spike.
+3. (Optional) Create a Change monitor for `% change` to alert on this spiking metric. For more information, see the [Change Alert Monitor][43] documentation.
+
+### Identify unqueried metrics
+
+To reduce custom metrics costs, start with your largest metric names that aren't actively queried. To find these metrics, select a time frame in the {{< ui >}}Query Activity{{< /ui >}} facet. The list is filtered to show only metric names that aren't queried in dashboards, notebooks, monitors, SLOs, Metrics Explorer, or the API. Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to see the largest of these metrics first.
+
+To reduce the volume and cost of these metrics, configure their tags in bulk. For more information, see the [Configure multiple metrics](#configuration-of-multiple-metrics) section. For a complete cost-optimization workflow, see [Best Practices for Custom Metrics Governance][44].
+
+### Custom Metrics Tags Cardinality Explorer 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.
 
-## Metrics without Limits™
+### Configure multiple metrics {#configuration-of-multiple-metrics}
+
+Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more than one metric at a time:
+
+<!-- TODO(screenshot): Replace with the open Actions menu on the Catalog page. -->
+{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons." style="width:100%;">}}
+
+* {{< ui >}}Manage Percentile Aggregations{{< /ui >}}: Enable or disable percentile, threshold, and standard deviation queries across multiple distribution metrics. See the [Distributions page][31] for more information.
+
+{{< img src="metrics/summary/percentile_aggregations_toggle_2025-04-16.png" alt="Toggle to manage percentile aggregations" style="width:100%;">}}
+
+* {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
+
+To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Unindexed tags are no longer queryable, but Datadog still ingests them. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+
+To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
+
+### Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
 **Note**: Metrics without Limits™ is only available for custom metrics.
@@ -339,7 +342,7 @@ To configure tags on a single metric, follow these steps. To configure tags on m
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
-### Queryable tags 
+#### Queryable tags 
 
 After you configure your metric with Metrics without Limits™, you can view which tags remain queryable. These are the tags that contribute to _Indexed Custom Metrics_ volume. You can also toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume.
 
