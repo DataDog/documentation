@@ -151,7 +151,7 @@ If primary results are empty, check that:
 - Subjects have exposure records after that rollout.
 - Metric data exists within the analysis period.
 
-## Analysis-only holdouts
+## Analyze holdouts with your own exposure data
 
 Use an [Exposure SQL Model][3] to analyze holdouts when you manage experiment randomization outside Datadog Feature Flags. This also applies when you use Datadog Feature Flags with your own warehouse logging. The holdout phases and interpretation of results are the same. The model supplies the exposure records for analysis.
 
