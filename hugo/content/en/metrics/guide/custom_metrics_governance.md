@@ -124,7 +124,7 @@ Datadog's [Metrics without Limits™][4] is a first in industry cost management 
 
 Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="An example of using Metrics without Limits™ to reduce volume by limiting the tag allowlist in a tag configuration." style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations based on actively queried tags and tags used on assets (powered by our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
@@ -175,6 +175,8 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 6. To unindex tags that aren't queried or used in assets across these metrics, create a [Tag Indexing Rule][18] scoped to their metric names or namespaces.
 
+Tag Indexing Rules and Metrics without Limits™ tag configurations both control which tags are indexed. Rules apply across many metrics, while Metrics without Limits™ configurations apply to one metric at a time and take precedence over rules.
+
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
 ### Understand the relative utility of your metrics
@@ -212,7 +214,7 @@ Datadog offers OOTB metrics that measures [estimated custom metrics usage][15]. 
 You can also see a breakdown of your realtime estimated custom metrics usage by metric name with either the dashboard timeseries widget, or a metric monitor. Use the `datadog.estimated_usage.metrics.custom.by_metric` metric to build a monitor so you can always have up-to-date visibility into each of your metric names' volumes. 
 
 ### Additional monitoring use cases
-After you've received an alert, use the Metrics Catalog page to inspect any spiking metrics' tag keys and use Metrics without Limits™ to immediately drop any anomalous tag keys that are causing your metric to spike. This helps you immediately resolve any unintentional billing spikes. 
+After you've received an alert, use the Metrics Catalog page to inspect any spiking metrics' tag keys and use Metrics without Limits™ to immediately drop any anomalous tag keys that are causing your metric to spike. This helps you resolve unintentional billing spikes.
 {{< whatsnext desc="Additional use cases to build monitors for with the estimated usage metrics:" >}}
     {{< nextlink href="/monitors/types/change-alert/" >}}Alert when the volume changes beyond a certain percent.{{< /nextlink >}}
     {{< nextlink href="/monitors/types/anomaly/" >}}Alert on anomalous changes in usage.{{< /nextlink >}}
@@ -224,7 +226,7 @@ After you've received an alert, use the Metrics Catalog page to inspect any spik
 
 1. Start by identifying your largest metric names in your Top Custom Metrics table or on the Metrics Catalog page. Then use Metrics without Limits™ to optimize these top metrics to the most cost-effective volume.
 2. Use the Metrics Catalog page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
-3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
+3. For immediate cost savings, identify your unqueried custom metrics and use a [Tag Indexing Rule][18] to unindex tags that aren't queried or used in assets.
 4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
 
 ## Further reading

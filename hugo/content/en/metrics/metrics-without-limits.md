@@ -90,7 +90,7 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 
 ## Getting started with Metrics without Limits™
 
-1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Catalog page or by using the [API][2].
+1. Identify your top 20 metrics on your [Plan & Usage page][9], then configure them from the Metrics Catalog page or by using the [API][2].
    To configure tags on multiple metrics, use [Tag Indexing Rules][16].
 
 **Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
@@ -102,7 +102,7 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
    - Prior to saving your configuration, the tag configuration cardinality estimator returns the estimated resulting number of indexed custom metrics which should be lower than your ingested custom metrics volumes.
-   - After saving your configuration, the Metrics Catalog details sidepanel should show that your indexed custom metrics are lower than your ingested custom metrics volume.
+   - After saving your configuration, the metric's details side panel on the Metrics Catalog page should show that your indexed custom metrics are lower than your ingested custom metrics volume.
    - 24 hours after you've saved your configuration, you can also view the impact on your Plan & Usage page's {{< ui >}}Top Custom Metrics{{< /ui >}} table. There should be reduction in the volume of custom metrics between the {{< ui >}}Month-to-Date{{< /ui >}} tab and the {{< ui >}}Most Recent Day{{< /ui >}} tab of this table.
 
 ## Best practices
