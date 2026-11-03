@@ -54,7 +54,7 @@ Set a version on your agent span. The version is set as an `agent_version` tag o
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.14.0+.
+Requires `ddtrace` v4.14.0+.
 
 **Note**: On versions before v4.17.0, child spans are not tagged automatically. Tag them with `LLMObs.annotation_context(tags={"agent_version": "v2"})` to break down tokens and cost by version.
 
@@ -103,7 +103,7 @@ The Python SDK reports a manifest automatically for agents built with PydanticAI
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Requires `dd-trace` v4.16.0+. Pass an `agent` dictionary to `LLMObs.annotate()` on an agent span, or to `LLMObs.annotation_context()` to apply it to every agent span in a block:
+Requires `ddtrace` v4.16.0+. Pass an `agent` dictionary to `LLMObs.annotate()` on an agent span, or to `LLMObs.annotation_context()` to apply it to every agent span in a block:
 
 ```python
 from ddtrace.llmobs import LLMObs
