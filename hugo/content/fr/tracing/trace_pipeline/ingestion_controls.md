@@ -31,22 +31,31 @@ Les contrôles d'ingestion affectent les traces envoyées par vos applications �
 La page Ingestion Control offre une visibilité sur la configuration d'ingestion de vos applications et services. Depuis la [page Ingestion Control][2] :
 
 - Obtenez une visibilité sur la configuration d'ingestion au niveau de vos services.
-- Ajustez les taux d'échantillonnage des traces pour les services ou endpoints à haut débit afin de mieux gérer le budget d'ingestion.
+- Ajustez les taux d'échantillonnage des traces pour les services ou endpoints à haut débit afin de mieux gérer votre dotation.
 - Ajustez les taux d'échantillonnage des traces pour les services ou endpoints à faible débit ou à trafic rare afin d'accroître la visibilité.
 - Comprenez quels [mécanismes d'ingestion][11] sont responsables de l'échantillonnage de la plupart de vos traces.
 - Enquêtez sur les problèmes potentiels de configuration d'ingestion et agissez en conséquence, tels que des ressources CPU ou RAM limitées pour l'Agent.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Vue d'ensemble de la page Ingestion Control" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page_redesigned.png" style="width:100%;" alt="Vue d'ensemble de la page Ingestion Control" >}}
 
 ## Comprendre votre configuration d'ingestion {#understanding-your-ingestion-configuration}
 
-Utilisez les données de l'en-tête de contrôle de l'ingestion pour surveiller l'ingestion de vos traces. L'en-tête affiche la quantité totale de données ingérées au cours de la dernière heure, votre utilisation mensuelle estimée et le pourcentage de votre limite d'ingestion mensuelle allouée, calculé en fonction de votre infrastructure APM active (telle que les hosts, les tâches Fargate et les fonctions serverless).
+Utilisez les données de l'en-tête de page pour surveiller l'ingestion de vos traces :
 
-Si l'utilisation mensuelle est inférieure à `100%`, les données ingérées projetées tiennent dans votre allocation mensuelle. Une valeur d'utilisation mensuelle supérieure à `100%` signifie que les données ingérées mensuelles devraient dépasser votre allocation mensuelle.
+Ingestion mensuelle
+: Affiche la quantité de données ingérées jusqu'à présent ce mois-ci, votre ingestion projetée pour la fin du mois et votre dotation mensuelle, ainsi qu'un message d'état indiquant si l'ingestion projetée est en bonne voie pour rester dans les limites de votre dotation.
+
+Échantillonnage adaptatif APM
+: Affiche la part de votre dotation mensuelle couverte par votre cible d'[échantillonnage adaptatif][17] et le nombre de services intégrés par rapport à la limite de services.
+
+Ingestion au fil du temps
+: Un graphique de votre volume d'ingestion au fil du temps, ventilé par origine (APM, autres produits Datadog ou OTel), avec votre dotation mensuelle affichée comme ligne de référence.
+
+Si l'ingestion projetée est inférieure à votre dotation mensuelle, vous êtes dans les limites. Si le volume projeté dépasse votre dotation, ajustez vos [taux d'ingestion de service](#configuring-ingestion-for-a-service) ou votre [cible d'échantillonnage adaptatif][21].
 
 ### Niveaux d'ingestion par service {#ingestion-levels-by-service}
 
-Le tableau des services fournit des informations sur les volumes ingérés et les paramètres d'ingestion pour chaque service :
+Le tableau des services contient des informations sur les volumes ingérés et la configuration de l'ingestion, ventilées par service. Utilisez les onglets **Tous les services**, **Géré par APM**, **Géré par d'autres produits Datadog** et **Géré par OTel** au-dessus du tableau pour filtrer les services par origine d'ingestion.
 
 Type
 : Le type de service: service web, base de données, cache, navigateur, etc.
@@ -64,18 +73,18 @@ Octets en aval/s
 : Nombre moyen d'octets par seconde ingérés pour lesquels le service _prend la décision d'échantillonnage_. Cela inclut les octets de tous les spans des services en aval dans la pile d'appels qui suivent la décision prise au début de la trace. Les données de cette colonne sont basées sur la dimension `sampling_service`, définie sur les métriques `datadog.estimated_usage.apm.ingested_bytes`. Pour plus d'informations, consultez [Métriques d'utilisation APM][15].
 
 Répartition du trafic
-: Une répartition détaillée du trafic échantillonné et non échantillonné pour les traces commençant à partir du service. Voir [Répartition du trafic](#traffic-breakdown) pour plus d'informations.
+: Une répartition détaillée du trafic échantillonné et non échantillonné pour les traces commençant à partir du service. Une icône d'avertissement apparaît à côté de la répartition lorsque 25 % ou plus du trafic du service est abandonné par le limiteur de débit. Voir [Répartition du trafic](#traffic-breakdown) pour plus d'informations.
 
-Configuration de l'ingestion
-: Indique `Automatic` si le [default head-based sampling mechanism][4] de l'Agent s'applique. Si l'ingestion a été configurée avec des [trace sampling rules][8], le service est marqué comme `Configured` ; une étiquette `Local` est définie lorsque la règle d'échantillonnage est appliquée à partir de la configuration dans le SDK, une étiquette `Remote` est définie lorsque la règle d'échantillonnage est appliquée à distance, depuis l'interface utilisateur. Pour plus d'informations sur la configuration de l'ingestion pour un service, lisez la section sur la [modification du taux d'ingestion par défaut](#configure-the-service-ingestion-rate).
+Configuration
+: Indique de quel produit provient l'ingestion du service et, pour les services APM, comment l'échantillonnage est configuré: `APM Agent` si le [mécanisme par défaut d'échantillonnage basé sur le début de la trace][4] de l'Agent s'applique, `APM Local` si une [règle d'échantillonnage][8] est appliquée à partir de la configuration dans le SDK, ou `APM Remote` si une règle d'échantillonnage — définie par l'utilisateur ou [échantillonnage adaptatif][17] — est appliquée à distance depuis l'UI. L'ingestion via OpenTelemetry est étiquetée `OTel`. L'ingestion provenant d'autres produits Datadog est étiquetée `RUM`, `Synthetics`, `AppSec`, `CI Visibility` ou `AWS X-Ray`. Un service correspondant à plus d'une catégorie affiche un `N Configurations` badge ; survolez-le pour voir la liste complète. Pour plus d'informations sur la configuration de l'ingestion pour un service, lisez la section sur la [modification du taux d'ingestion par défaut](#configuring-ingestion-for-a-service).
+
+Échantillonnage adaptatif
+: Affiche le statut d'adoption de l'[échantillonnage adaptatif][17] du service : `Full` ou `Partial` lorsque le service est couvert par l'échantillonnage adaptatif (survolez le badge pour voir le pourcentage de couverture), `Compatible` lorsque le service pourrait être intégré mais ne l'est pas encore, `Not Compatible` lorsque la version du traceur ou de l'Agent du service ne prend pas en charge l'échantillonnage adaptatif, ou `Disabled` lorsque l'échantillonnage adaptatif est explicitement désactivé pour le service.
 
 Infrastructure
-: hosts, conteneurs et fonctions sur lesquels le service s'exécute.
+: Hosts, conteneurs et fonctions sur lesquels le service s'exécute. Cette colonne est masquée par défaut ; activez-la dans le menu **Options** du tableau.
 
-Statut de service
-: Affiche `Limited Resource` lorsque certains spans sont abandonnés car le Datadog Agent atteint les limites de CPU ou de RAM définies [dans sa configuration][9], `Legacy Setup` lorsque certains spans sont ingérés via l'ancien [App Analytics mechanism][7], ou `OK` sinon.
-
-Filtrez la page par environnement, configuration et statut pour afficher les services pour lesquels vous devez effectuer une action. Pour réduire le volume d'ingestion global, triez le tableau par la colonne `Downstream Bytes/s` pour afficher les services responsables de la plus grande part de votre ingestion.
+Filtrez la page par nom de service, environnement, configuration ou état d'échantillonnage adaptatif, ou activez **Services racine uniquement** pour afficher les services pour lesquels vous devez effectuer une action. Pour réduire le volume d'ingestion global, triez le tableau par la colonne `Downstream Bytes/s` pour afficher les services responsables de la plus grande part de votre ingestion.
 
 **Remarque** : Le tableau est alimenté par les [métriques d'utilisation][10] `datadog.estimated_usage.apm.ingested_spans` et `datadog.estimated_usage.apm.ingested_bytes`. Ces métriques sont taguées par `service`, `env` et `ingestion_reason`.
 
@@ -90,8 +99,8 @@ Les données détaillées sont composées des parties suivantes :
 - {{< ui >}}Complete traces ingested{{< /ui >}} (bleu) : Le pourcentage de traces qui ont été ingérées par Datadog.
 - {{< ui >}}Complete traces not retained{{< /ui >}} (gris) : Le pourcentage de traces qui n'ont pas été ingérées par Datadog. Certaines traces peuvent être abandonnées car : 
 
-    1. Par défaut, [Agent automatically sets a sampling rate][4] sur les services, en fonction du trafic du service.
-    2. Le service est configuré pour ingérer un certain pourcentage de traces à l'aide de [sampling rules][8].
+    1. Par défaut, l'[Agent définit automatiquement un taux d'échantillonnage][4] sur les services, en fonction du trafic du service.
+    2. Le service est configuré pour ingérer un certain pourcentage de traces à l'aide de [règles d'échantillonnage][8].
 
 - {{< ui >}}Complete traces dropped by the SDK rate limiter{{< /ui >}} (orange) : Lorsque vous choisissez de définir manuellement le taux d'ingestion du service sous forme de pourcentage avec des règles d'échantillonnage de traces, un limiteur de débit est automatiquement activé, réglé par défaut sur 100 traces par seconde. Consultez la documentation sur le [rate limiter][8] pour modifier ce taux.
 
@@ -111,7 +120,7 @@ Le tableau répertorie les taux d'échantillonnage appliqués par ressource du s
 
 - La colonne `Ingested bytes` affiche les octets ingérés à partir des spans du service et de la ressource, tandis que la colonne `Downstream bytes` affiche les octets ingérés à partir des spans où la décision d'échantillonnage est prise à partir de ce service et de cette ressource, y compris les octets provenant des services en aval dans la chaîne d'appel.
 - La colonne `Configuration` indique où le taux d'échantillonnage de la ressource est appliqué : 
-  - `Automatic` si le [default head-based sampling mechanism][4] de l'Agent s'applique.
+  - `Automatic` si le [mécanisme par défaut d'échantillonnage basé sur le début de la trace][4] de l'Agent s'applique.
   - `Local Configured` si une [sampling rule][8] a été définie localement dans le SDK.
   - `Remote Configured` si une règle d'échantillonnage à distance a été définie depuis l'interface utilisateur Datadog. Pour savoir comment configurer des règles d'échantillonnage depuis la page Ingestion Control, lisez la section sur la [configuration à distance des règles d'échantillonnage](#configure-the-service-ingestion-rates-by-resource).
 
@@ -136,7 +145,7 @@ Consultez la {{< ui >}}Datadog Agent and SDK versions{{< /ui >}} que votre servi
 ### Gestion des taux d'échantillonnage des services {#managing-services-sampling-rates}
 
 Pour contrôler les taux d'échantillonnage d'un service, vous pouvez utiliser :
-- {{< ui >}}Adaptive sampling{{< /ui >}} : Ajustez automatiquement les taux d'échantillonnage pour correspondre à un budget de volume ingéré mensuel configuré.
+- {{< ui >}}Adaptive sampling{{< /ui >}}: Ajustez automatiquement les taux d'échantillonnage pour correspondre à un objectif de volume ingéré mensuel configuré.
 - {{< ui >}}Resource-based sampling{{< /ui >}} : Définissez manuellement des taux d'échantillonnage explicites par ressource.
 
 Les configurations pour ces stratégies peuvent être appliquées {{< ui >}}Remotely{{< /ui >}} via l'interface utilisateur Datadog. Cette méthode permet aux modifications de prendre effet immédiatement sans redéployer votre service. Pour {{< ui >}}Resource-based Sampling{{< /ui >}}, vous avez également la possibilité d'appliquer des configurations **localement** en mettant à jour les fichiers de configuration de votre service et en redéployant.
@@ -176,9 +185,9 @@ Pour configurer l'échantillonnage adaptatif :
 4. Choisissez {{< ui >}}Datadog adaptive sampling rates{{< /ui >}} comme stratégie d'échantillonnage de votre service.
 5. Cliquez sur {{< ui >}}Apply{{< /ui >}}.
 
-<div class="alert alert-info">Si l'application de cette configuration <strong>Remote Configuration</strong> est désactivée, assurez-vous que les <a href="#remote-configuration-requirements">Remote Configuration requirements</a> sont remplies.</div>
+<div class="alert alert-info">Si l'application de cette configuration <strong>Remote Configuration</strong> est désactivée, assurez-vous que les <a href="#remote-configuration-requirements">exigences de Remote Configuration</a> sont remplies.</div>
 
-Pour plus d'informations, consultez [Adaptive Sampling][17].
+Pour plus d'informations, consultez [Échantillonnage adaptatif][17].
 
 
 #### Échantillonnage basé sur les ressources {#resource-based-sampling}
@@ -201,7 +210,7 @@ Cliquez sur {{< ui >}}Apply{{< /ui >}} pour enregistrer la configuration.
 
 Les ressources configurées à distance s'affichent sous la forme `Configured Remote` dans la colonne {{< ui >}}Configuration{{< /ui >}}.  
 
-<br><div class="alert alert-info">Si l'application de cette configuration <strong>Remote Configuration</strong> est désactivée, assurez-vous que les <a href="#remote-configuration-requirements">Remote Configuration requirements</a> sont remplies.</div>
+<br><div class="alert alert-info">Si l'application de cette configuration <strong>Remote Configuration</strong> est désactivée, assurez-vous que les <a href="#remote-configuration-requirements">exigences de Remote Configuration</a> sont remplies.</div>
 
 [100]: /fr/tracing/trace_explorer/?tab=listview#live-search-for-15-minutes
 
@@ -220,13 +229,13 @@ Cette option génère une configuration que vous pouvez appliquer manuellement.
 
 ## Gestion de la configuration de l'ingestion du Datadog Agent {#managing-datadog-agent-ingestion-configuration}
 
-Cliquez sur {{< ui >}}Configure Datadog Agent Ingestion{{< /ui >}} pour gérer les taux d'échantillonnage par défaut (head-based), l'échantillonnage des erreurs et l'échantillonnage des traces rares.
+Cliquez sur {{< ui >}}Configure Datadog Agent Ingestion{{< /ui >}} pour gérer les taux d'échantillonnage par défaut basés sur le début de la trace (head-based), l'échantillonnage des erreurs et l'échantillonnage des traces rares.
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Fenêtre modale de configuration au niveau de l'Agent" >}}
 
 - [{{< ui >}}Head-based Sampling{{< /ui >}}][4] : Lorsqu'aucune règle d'échantillonnage n'est définie pour un service, le Datadog Agent calcule automatiquement les taux d'échantillonnage à appliquer pour vos services, en ciblant **10 traces par seconde par Agent**. Modifiez ce nombre cible de traces dans Datadog, ou définissez `DD_APM_TARGET_TPS` localement au niveau de l'Agent.
-- [{{< ui >}}Error Spans Sampling{{< /ui >}}][5]: Pour les traces non capturées par l'échantillonnage head-based, le Datadog Agent capture les traces d'erreur locales **jusqu'à 10 traces par seconde par Agent**. Modifiez ce nombre cible de traces dans Datadog, ou définissez `DD_APM_ERROR_TPS` locally au niveau de l'Agent.
-- [{{< ui >}}Rare Spans Sampling{{< /ui >}}][6]: Pour les traces non capturées par l'échantillonnage head-based, le Datadog Agent capture les traces rares locales **jusqu'à 5 traces par seconde par Agent**. Ce paramètre est désactivé par défaut. Activez la collecte des traces rares dans Datadog, ou définissez `DD_APM_ENABLE_RARE_SAMPLER` locally au niveau de l'Agent.
+- [{{< ui >}}Error Spans Sampling{{< /ui >}}][5]: Pour les traces non capturées par l'échantillonnage basé sur le début de la trace (head-based), le Datadog Agent capture les traces d'erreur locales **jusqu'à 10 traces par seconde par Agent**. Modifiez ce nombre cible de traces dans Datadog, ou définissez `DD_APM_ERROR_TPS` localement au niveau de l'Agent.
+- [{{< ui >}}Rare Spans Sampling{{< /ui >}}][6]: Pour les traces non capturées par l'échantillonnage basé sur le début de la trace (head-based), le Datadog Agent capture les traces rares locales **jusqu'à 5 traces par seconde par Agent**. Ce paramètre est désactivé par défaut. Activez la collecte des traces rares dans Datadog, ou définissez `DD_APM_ENABLE_RARE_SAMPLER` localement au niveau de l'Agent.
 
 Grâce à Remote Configuration, vous n'avez pas besoin de redémarrer l'Agent pour mettre à jour ces paramètres. Cliquez sur `Apply` pour enregistrer les modifications de configuration, et la nouvelle configuration prend effet immédiatement. La configuration à distance pour les paramètres d'échantillonnage de l'Agent est disponible si vous utilisez la version [7.42.0][13] ou supérieure de l'Agent.
 
@@ -246,9 +255,9 @@ Si des règles d'échantillonnage sont définies à plusieurs emplacements, les 
 1. [Taux provenant du trace agent contrôlés indirectement avec les paramètres de l'Agent](#managing-datadog-agent-ingestion-configuration) à distance ou localement (`DD_APM_TARGET_TPS`)
 
 En d'autres termes, Datadog utilise les règles de priorité suivantes :
-- Tracer settings > Agent settings
-- Sampling rules > Global sampling rate
-- Remote > Local
+- Paramètres du traceur > Paramètres de l'Agent
+- Règles d'échantillonnage > Taux d'échantillonnage global
+- Distant > Local
 
 ## Pour aller plus loin {#further-reading}
 
@@ -273,3 +282,4 @@ En d'autres termes, Datadog utilise les règles de priorité suivantes :
 [18]: /fr/tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
 [20]: /fr/account_management/rbac/permissions/
+[21]: /fr/tracing/trace_pipeline/adaptive_sampling/#configure-the-adaptive-sampling-target

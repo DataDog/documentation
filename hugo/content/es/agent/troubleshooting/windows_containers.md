@@ -8,47 +8,46 @@ further_reading:
   text: Kubernetes Agent
 - link: /agent/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas del Agent
-title: Problemas de los contenedores de Windows
+  text: Agent Troubleshooting
+title: Problemas de Containers de Windows
 ---
+Esta página describe los problemas conocidos y abiertos para la supervisión de aplicaciones de Windows en contenedores.
 
-En esta página se describen los problemas detectados y no resueltos de monitorización de aplicaciones contenerizadas de Windows.
+## Problemas comunes {#common-issues}
 
-## Problemas frecuentes
+Containerized Windows Applications Monitoring requires Datadog Agent 7.19+.
 
-La monitorización de aplicaciones contenedorizadas de Windows requiere el Datadog Agent v7.19 o posterior.
-
-Las versiones de sistemas operativos compatibles son:
-- Windows Server 2019 (LTSC /1809)
+Las versiones de SO compatibles son:
+- Windows Server 2019 (LTSC / 1809)
 - Windows Server 2019 1909 (hasta el Agent 7.39, ya no es compatible con Microsoft)
 - Windows Server 2019 2004 o 20H1 (hasta el Agent 7.39, ya no es compatible con Microsoft)
 - Windows Server 2019 20H2 (Agent 7.33 a 7.39, ya no es compatible con Microsoft)
-- Windows Server 2022 LTSC (Agent v7.34 o posterior)
+- Windows Server 2022 LTSC (Agent >=7.34)
 
-El modo de aislamiento Hyper-V no es compatible.
+El modo de aislamiento de Hyper-V no es compatible.
 
-Las métricas de host para disco, E/S y red están deshabilitadas. No son compatibles con Windows Server, por lo que los checks del Agent están deshabilitados de forma predeterminada.
+Las métricas del servidor para disco, E/S y red están deshabilitadas. No son compatibles con Windows Server, por lo que las Agent Checks están deshabilitadas de forma predeterminada.
 
-## Problemas con Docker
+## Problemas de Docker {#docker-issues}
 
-Los Live Processes no aparecen en los contenedores (excepto el Datadog Agent).
+Live processes do not appear in containers (except for the Datadog Agent).
 
-## Problemas con Kubernetes
+## Problemas de Kubernetes {#kubernetes-issues}
 
-Los Live Processes no aparecen en los contenedores (excepto el Datadog Agent).
+Live processes do not appear in containers (except for the Datadog Agent).
 
-### Clústeres mixtos (Linux + Windows)
+### Clústeres mixtos (Linux + Windows) {#mixed-clusters-linux-windows}
 
-El método recomendado para desplegar el Datadog Agent en un clúster mixto es realizar dos instalaciones del Helm chart con diferentes `targetSystem`.
+La forma recomendada de implementar el Datadog Agent en un clúster mixto es realizar dos instalaciones del chart de Helm con diferentes `targetSystem`. 
 
-El Datadog Agent utiliza un `nodeSelector` para seleccionar automáticamente nodos Linux o Windows basados en `targetSystem`.
+El Datadog Agent utiliza un `nodeSelector` para seleccionar automáticamente nodos Linux o Windows según `targetSystem`.
 
-Sin embargo, este no es el caso de las métricas de Kube State (que se instala por defecto), lo que lleva a situaciones en las que las métricas de Kube State no se pueden programar en los nodos de Windows.
+Sin embargo, este no es el caso de Kube State Metrics (que se instala de forma predeterminada), lo que genera situaciones en las que Kube State Metrics no se puede programar en nodos Windows.
 
-Para evitar este problema existen tres posibilidades:
+Hay tres opciones disponibles para evitar este problema:
 
-* Usar la función taint en tus nodos Windows. En Windows, el Agent siempre permite el taint `node.kubernetes.io/os=windows:NoSchedule`.
-* Definir el selector de nodo Kube State Metrics a través del Helm chart `values.yaml` de Datadog:
+* Aplique un taint a sus nodos Windows. En Windows, el Agent siempre permite el `node.kubernetes.io/os=windows:NoSchedule` taint.
+* Configure el selector de nodos de Kube State Metrics a través del `values.yaml` del chart de Helm de Datadog:
 
    ```
    kube-state-metrics:
@@ -57,17 +56,17 @@ Para evitar este problema existen tres posibilidades:
        kubernetes.io/os: linux // Kubernetes >= 1.14
    ```
 
-* Desplegar Kube State Metrics por tu cuenta de forma independiente estableciendo `datadog.kubeStateMetricsEnabled` como `false`.
+* Implemente Kube State Metrics usted mismo por separado configurando `datadog.kubeStateMetricsEnabled` en `false`.
 
-**Nota**: Cuando se utilizan dos instalaciones de Datadog (una con `targetSystem: linux`, otra con `targetSystem: windows`), es necesario verificar que la segunda tiene `datadog.kubeStateMetricsEnabled` definido como `false` para evitar que se desplieguen dos instancias de Kube State Metrics.
+**Nota**: Al utilizar dos instalaciones de Datadog (una con `targetSystem: linux`, otra con `targetSystem: windows`), asegúrese de que la segunda tenga `datadog.kubeStateMetricsEnabled` configurado en `false` para evitar implementar dos instancias de Kube State Metrics.
 
-Algunas métricas no están disponibles para los despliegues de Windows. Consulta [métricas disponibles](#limited-metrics-for-windows-deployments).
+Algunas métricas no están disponibles para implementaciones en Windows. Consulte las [métricas disponibles](#limited-metrics-for-windows-deployments).
 
-#### Clústeres mixtos con el Datadog Cluster Agent
+#### Clústeres mixtos con el Datadog Cluster Agent {#mixed-clusters-with-the-datadog-cluster-agent}
 
-Con Cluster Agent v1.18 y posteriores, el Datadog Cluster Agent admite una configuración con clústeres mixtos.
+Con el Cluster Agent v1.18+, el Datadog Cluster Agent admite una configuración con clústeres mixtos.
 
-Para configurar la comunicación entre los Agents desplegados en nodos Windows y el Cluster Agent, utiliza el siguiente archivo `values.yaml`.
+Utilice el siguiente archivo `values.yaml` para configurar la comunicación entre los Agent desplegados en nodos de Windows y el Cluster Agent.
 
 ```yaml
 targetSystem: windows
@@ -85,52 +84,56 @@ datadog:
   kubeStateMetricsEnabled: false
 ```
 
-#### Opciones de configuración limitadas para las implementaciones de Windows
+#### Opciones de configuración limitadas para implementaciones en Windows {#limited-configuration-options-for-windows-deployments}
 
-Algunas opciones de configuración no están disponibles en Windows. A continuación se muestra una lista de opciones **no compatibles**:
+<div class="alert alert-info">Implementar el Agent en nodos de Windows con el <code>DatadogAgent</code> recurso por sí solo no es compatible.</div>
+
+A partir de Datadog Operator v1.30.0, el soporte para nodos Windows está disponible para clústeres de nodos mixtos (Windows y Linux). Para usarlo, agregue un [DatadogAgentProfile](/containers/datadog_operator/datadog_agent_profiles) dirigido a Windows junto con su recurso `DatadogAgent`. Si no está utilizando un `DatadogAgentProfile`, utilice el [chart de Helm](/containers/kubernetes/installation/?tab=helm) para implementar el Agent en nodos de Windows.
+
+Algunas opciones de configuración no están disponibles en Windows. La siguiente es una lista de opciones **no compatibles**:
 
 | Parámetro                      | Motivo |
 | --- | ----------- |
 | `datadog.dogstatsd.useHostPID` |  El PID del host no es compatible con los contenedores de Windows |
-| `datadog.dogstatsd.useSocketVolume` | Los sockets del Unix no son compatibles con Windows |
-| `datadog.dogstatsd.socketPath` |  Los sockets del Unix no son compatibles con Windows |
-| `datadog.processAgent.processCollection` |  No es posible acceder a los procesos del host/otros contenedores |
-| `datadog.systemProbe.seccomp` | System probe no está disponible para Windows |
-| `datadog.systemProbe.seccompRoot` | System probe no está disponible para Windows |
-| `datadog.systemProbe.debugPort` | System probe no está disponible para Windows |
-| `datadog.systemProbe.enableConntrack` | System probe no está disponible para Windows |
-| `datadog.systemProbe.bpfDebug` |  System probe no está disponible para Windows |
-| `datadog.systemProbe.apparmor` |  System probe no está disponible para Windows |
-| `agents.useHostNetwork` | La red del host no es compatible con los contenedores de Windows |
+| `datadog.dogstatsd.useSocketVolume` | Los sockets Unix no son compatibles con Windows |
+| `datadog.dogstatsd.socketPath` |  Los sockets Unix no son compatibles con Windows |
+| `datadog.processAgent.processCollection` |  No se puede acceder a los procesos del host/otros contenedores |
+| `datadog.systemProbe.seccomp` | La sonda del sistema no está disponible para Windows |
+| `datadog.systemProbe.seccompRoot` | La sonda del sistema no está disponible para Windows |
+| `datadog.systemProbe.debugPort` | La sonda del sistema no está disponible para Windows |
+| `datadog.systemProbe.enableConntrack` | La sonda del sistema no está disponible para Windows |
+| `datadog.systemProbe.bpfDebug` |  La sonda del sistema no está disponible para Windows |
+| `datadog.systemProbe.apparmor` |  La sonda del sistema no está disponible para Windows |
+| `agents.useHostNetwork` | Host network not supported by Windows Containers |
 
-### HostPort para el APM o DogStatsD
+### HostPort para APM o DogStatsD {#hostport-for-apm-or-dogstatsd}
 
-`HostPort` es compatible parcialmente con Kubernetes, dependiendo de la versión del sistema operativo subyacente y del plugin CNI.
-Los requisitos para que funcione `HostPort` son los siguientes:
+`HostPort` es parcialmente compatible con Kubernetes, dependiendo de la versión del sistema operativo subyacente y del complemento CNI.
+Los requisitos para que `HostPort` funcione son los siguientes:
 
-* Se requiere la versión de Windows Server 1909 o posterior
-* El plugin CNI debe ser compatible con la función `portMappings`
+* La versión de Windows Server debe ser >= 1909
+* El complemento CNI debe admitir la capacidad `portMappings`
 
-Actualmente, al menos dos plugins CNI admiten esta función:
+Actualmente, al menos dos complementos de CNI admiten esta capacidad:
 
-* Plugin oficial `win-bridge` (versión 0.8.6 y posteriores), utilizado por GKE
-* Plugin CNI de Azure, utilizado por AKS
+* Complemento `win-bridge` oficial (versión >= 0.8.6) - utilizado por GKE
+* Complemento de Azure CNI - utilizado por AKS
 
-Si tu configuración no cumple estos requisitos, APM y DogStatsD solo funcionarán cuando esté configurada la red pod-to-pod entre el Tracer y el Agent.
+Si su configuración no cumple con estos requisitos, APM y DogStatsD solo funcionarán cuando la red pod-to-pod esté configurada entre el Tracer y el Agent.
 
-### Check de Kubelet
+### Kubelet check {#kubelet-check}
 
-Según la versión de Kubernetes, es posible que algunas métricas de Kubelet no estén disponibles (o que el check de Kubelet agote el tiempo de espera).
-Para una experiencia óptima, utiliza cualquiera de las siguientes opciones con el Datadog Agent v7.19.2+:
+Depending on your Kubernetes version, some Kubelet metrics might not be available (or that the Kubelet check times out).
+Para una experiencia óptima, utilice cualquiera de los siguientes con Datadog Agent v7.19.2+:
 
 * Kubelet v1.16.13+ (v1.16.11+ en GKE)
 * Kubelet v1.17.9+ (v1.17.6+ en GKE)
 * Kubelet v1.18.6+
 * Kubelet v1.19+
 
-### Métricas limitadas para despliegues de Windows 
+### Métricas limitadas para implementaciones de Windows {#limited-metrics-for-windows-deployments}
 
-Las siguientes métricas de `kubernetes.*` están disponibles para los contenedores de Windows:
+The following `kubernetes.*` metrics are available for Windows Containers:
 
 * `kubernetes.cpu.usage.total`
 * `kubernetes.containers.restarts`

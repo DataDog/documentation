@@ -20,9 +20,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/experiments
   tag: Blog
   text: Mesurez l'impact commercial de chaque changement de produit avec Datadog Experiments
+- link: https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/
+  tag: Blog
+  text: Coordonnez les lancements de produits avec Datadog
+- link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
+  tag: Blog
+  text: Analysez vos expérimentations dans ChatGPT avec le plugin Datadog Experiments
+- link: https://www.datadoghq.com/blog/how-we-built-datadog-experiments/
+  tag: Blog
+  text: Comment nous avons conçu Datadog Experiments
 title: Experiments
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Datadog Experiments est une plateforme composable pour l'expérimentation de bout en bout. Une expérience dans Datadog se compose de deux éléments :
 
@@ -39,7 +48,7 @@ Pour commencer, sélectionnez un lien dans le tableau ci-dessous. Sinon, poursui
 | [Lancer une expérience à l'aide de Datadog Feature Flags][16] | Planifiez votre hypothèse, configurez la randomisation avec Datadog Feature Flags et démarrez votre expérience |
 | [Standardiser les expériences avec des protocoles][21] | Définissez des valeurs par défaut réutilisables pour les métriques, la randomisation, la durée et l'analyse statistique |
 | [Analyser une expérience déjà randomisée][17] | Définir les données d'exposition dans votre entrepôt lorsque la randomisation s'exécute en dehors de Datadog Feature Flags |
-| [Comprendre les diagnostics d'expérience][20] | Interpréter les vérifications automatisées pour les expositions, les métriques, la randomisation et la santé de l'analyse |
+| [Comprendre les diagnostics d'expérience][20] | Interpréter les checks automatisés pour les expositions, les métriques, la randomisation et la santé de l'analyse |
 
 ## Randomisation {#randomization}
 
@@ -63,7 +72,7 @@ Les métriques d'expérience définissent ce que vous mesurez pour décider si u
 
 ### Mode natif d'entrepôt {#warehouse-native-mode}
 
-En mode natif d'entrepôt, Datadog exécute l'analyse d'expérience directement dans Snowflake, BigQuery, Redshift ou Databricks. Après avoir [connecté votre entrepôt][13], créez un **Modèle SQL de métrique** qui mappe les tables de l'entrepôt vers Datadog, puis définissez des métriques à partir de ce modèle. Mappez chaque modèle à un ou plusieurs [types de sujets][18] et spécifiez une colonne d'horodatage afin que Datadog puisse joindre les événements de métrique aux expositions de l'expérience.
+En mode natif d'entrepôt, Datadog exécute l'analyse d'expérience directement dans Snowflake, BigQuery, Redshift ou Databricks. Après avoir [connecté votre entrepôt][13], créez un **Modèle SQL de métrique** qui mappe les tableaux de l'entrepôt vers Datadog, puis définissez des métriques à partir de ce modèle. Mappez chaque modèle à un ou plusieurs [types de sujets][18] et spécifiez une colonne d'horodatage afin que Datadog puisse joindre les événements de métrique aux expositions de l'expérience.
 
 Le mode entrepôt est requis lorsque vous utilisez des [modèles SQL d'exposition][17] pour la randomisation. Il convient également aux équipes dont la source de vérité pour les métriques métier se trouve déjà dans l'entrepôt.
 
@@ -71,15 +80,15 @@ Le mode entrepôt est requis lorsque vous utilisez des [modèles SQL d'expositio
 
 Pour les expériences côté client, construisez des métriques à partir des événements collectés par les SDK [Real User Monitoring (RUM)][2] et [Product Analytics][3]. Définissez des métriques à partir d'actions, de vues, de sessions et d'autres types d'événements, puis choisissez une méthode d'agrégation telle que le nombre d'événements, le nombre d'utilisateurs uniques ou la somme d'une propriété.
 
-Cette approche fonctionne lorsque la randomisation est effectuée via les [Datadog Feature Flags][1] et que vous souhaitez mesurer le comportement des utilisateurs, la conversion dans un tunnel ou les performances des applications sans interroger d'entrepôt. Les métriques de Product Analytics et RUM sont disponibles en temps quasi réel au lancement des expériences.
+Cette approche fonctionne lorsque la randomisation est effectuée via les [Datadog Feature Flags][1] et que vous souhaitez mesurer le comportement des utilisateurs, la conversion dans un entonnoir ou les performances des applications sans interroger d'entrepôt. Les métriques de Product Analytics et RUM sont disponibles en temps quasi réel au lancement des expériences.
 
 ## Statistiques {#statistics}
 
 Datadog applique une analyse statistique pour comparer les variantes et estimer le lift. Lors de la configuration d'une expérience, choisissez une [méthode d'analyse][11] (fréquentiste séquentielle, fréquentiste à échantillon fixe ou bayésienne) et effectuez éventuellement un [calcul de taille d'échantillon][8] pour estimer la durée nécessaire de l'expérience. Une fois les résultats obtenus, utilisez [Global Lift][19] pour comprendre comment le lift d'une expérience ciblée se traduit par un impact sur le total des métriques de votre entreprise, et [Cumulative Impact][12] pour agréger les effets ajustés au bruit sur de nombreuses expériences portant sur la même métrique.
 
-{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="La vue des métriques d'Experiments affichant les métriques métier, de funnel et de performance avec les valeurs de contrôle et de variante ainsi que le lift relatif pour chaque métrique. Une info-bulle est ouverte sur la métrique Revenue, affichant les valeurs sans CUPED pour le revenu par utilisateur, le revenu total et le nombre d'assignations d'utilisateurs dans les groupes de contrôle et de variante." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="La vue des métriques Experiments affichant les métriques métier, d'entonnoir et de performance avec les valeurs de contrôle et de variante ainsi que le lift relatif pour chaque métrique. Une info-bulle est ouverte sur la métrique Revenue, affichant les valeurs sans CUPED pour le revenu par utilisateur, le revenu total et le nombre d'assignations d'utilisateurs dans les groupes de contrôle et de variante." style="width:90%;" >}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/feature_flags/

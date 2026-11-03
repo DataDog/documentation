@@ -40,14 +40,14 @@ Test Optimization integrates with GitHub to show summaries of test results direc
 
 With this information, developers get instant feedback about their tests results, and they can debug any failed or flaky tests without leaving the pull request view.
 
-<div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
+<div class="alert alert-info">This integration is only available for test services hosted on <code>github.com</code>.</div>
 
 ## Enable test summaries
 
 You can enable test summaries in pull requests with the following steps:
 
 1. Install the [GitHub integration][4]:
-   1. Navigate to the {{< ui >}}Configuration{{< /ui >}} tab on the [GitHub integration tile][6] and click {{< ui >}}+ Create GitHub App{{< /ui >}}.
+   1. Navigate to the {{< ui >}}Configuration{{< /ui >}} tab on the [GitHub integration tile][6] and click {{< ui >}}\+ Create GitHub App{{< /ui >}}.
    1. Give the application read and write permissions for pull requests.
 1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
 1. Choose where to apply the setting:

@@ -67,9 +67,9 @@ To build a Software Template from scratch:
   
 3. Configure the templating workflow:
 
-   1. Use GitHub, Gitlab, or HTTP [actions][7] to retrieve your template files.
+   1. Use GitHub, GitLab, or HTTP [actions][7] to retrieve your template files.
    1. Use the Apply Template [action][7] to manipulate your template repository and pass in your input parameters.
-   1. Use GitHub, Gitlab, or HTTP [actions][7] to upload the project files to the repository.
+   1. Use GitHub, GitLab, or HTTP [actions][7] to upload the project files to the repository.
    1. Save the workflow.
 
   {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building Software Template automations" style="width:100%;" >}}

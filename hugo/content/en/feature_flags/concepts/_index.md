@@ -9,6 +9,7 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/environments" >}}Environments{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/variants_and_flag_types" >}}Variants and Flag Types{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/evaluation_context" >}}Evaluation Context{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/evaluation_results" >}}Flag Evaluation Results{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_rules" >}}Targeting Rules and Filters{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/targeting_attributes" >}}Targeting Attributes{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/evaluation_tester" >}}Evaluation Tester{{< /nextlink >}}
@@ -22,6 +23,8 @@ Learn how Datadog Feature Flags work and how to configure flags, environments, t
     {{< nextlink href="/feature_flags/concepts/flag_history" >}}Flag History{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/flag_graphs" >}}Feature Flag Graphs{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/stale_flags" >}}Stale Flags{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/flag_key_obfuscation" >}}Flag Key Obfuscation{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/permissions" >}}Permissions and Access Control{{< /nextlink >}}
     {{< nextlink href="/feature_flags/concepts/approvals" >}}Approvals{{< /nextlink >}}
+    {{< nextlink href="/feature_flags/concepts/workflow_automation" >}}Workflow Automation{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -7,6 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/"
+  tag: "Architecture Center"
+  text: "Hybrid Multi-cloud Network Observability Reference Architecture"
 - link: "https://www.datadoghq.com/blog/cnm-network-health"
   tag: "Blog"
   text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"

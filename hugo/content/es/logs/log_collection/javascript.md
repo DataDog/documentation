@@ -4,54 +4,55 @@ algolia:
   - browser logs
 aliases:
 - /es/logs/log_collection/web_browser
-title: Colección de registros del navegador
+title: Recopilación de registros del navegador
 ---
-Envía registros a Datadog desde páginas del navegador con el SDK de registros del navegador.
+Envíe registros a Datadog desde páginas de navegadores web con el SDK de registros del navegador.
 
-Con el SDK de Registros del Navegador, puedes enviar registros directamente a Datadog desde páginas del navegador y aprovechar las siguientes características:
+Con el SDK de registros del navegador, puede enviar registros directamente a Datadog desde páginas de navegadores web y aprovechar las siguientes funciones:
 
-- Usa el SDK de Registros del Navegador como herramienta de registro. Todo se reenvía a Datadog como documentos JSON.
-- Agrega `context` y atributos personalizados adicionales a cada registro enviado.
-- Envuelve y reenvía automáticamente cada error del frontend.
-- Reenvía errores del frontend.
-- Registra direcciones IP reales de clientes y agentes de usuario.
-- Uso de red optimizado con publicaciones automáticas en bloque.
-- Usa en entornos de Worker y Service Worker.
+- Utilice el SDK como registrador. Todo se reenvía a Datadog como documentos JSON.
+- Agregue `context` y atributos personalizados adicionales a cada registro enviado.
+- Envuelva y reenvíe automáticamente cada error de frontend.
+- Reenvíe errores de frontend.
+- Registre las direcciones IP reales del cliente y los agentes de usuario.
+- Uso de red optimizado con publicaciones automáticas por lotes.
+- Uso en entornos de Worker y Service Worker.
 
 **Notas**:
 
-- **Independiente del SDK de RUM**: El SDK de Registros del Navegador se puede usar sin el SDK de RUM.
-- **Entornos de Worker**: El SDK de Registros del Navegador funciona en entornos de Worker y Service Worker utilizando los mismos métodos de configuración. Sin embargo, los registros enviados desde entornos de Worker no incluyen automáticamente información de sesión.
+- **Independiente del SDK de RUM**: El SDK de registros del navegador se puede utilizar sin el SDK de RUM.
+- **Entornos de Worker**: El SDK de registros del navegador funciona en entornos de Worker y Service Worker utilizando los mismos métodos de configuración. Sin embargo, los registros enviados desde entornos de Worker no incluyen automáticamente información de la sesión.
+- **Errores de WebAssembly**: Para simbolizar marcos WASM en los registros del navegador, [configure el plugin WASM del SDK del navegador](#webassembly-errors) y [cargue los símbolos de depuración del módulo][14].
 
-## Configura {#setup}
+## Configuración {#setup}
 
-### Paso 1 - Crea un token de cliente {#step-1-create-a-client-token}
+### Paso 1: Cree un token de cliente {#step-1-create-a-client-token}
 
-En Datadog, navega a [**Configuración de la organización > Nuevos tokens de cliente**][1]
+En Datadog, navegue a [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}New Client Tokens{{< /ui >}}][1]
 
-**Entornos soportados**: El SDK de Registros del Navegador soporta todos los navegadores modernos de escritorio y móviles, así como entornos de Worker y Service Worker. Consulta la tabla de [Soporte del Navegador][4].
+**Entornos compatibles**: El SDK de registros del navegador es compatible con todos los navegadores modernos de escritorio y móviles, así como con entornos de Worker y Service Worker. Consulte la tabla de [Compatibilidad del navegador][4].
 
-<div class="alert alert-info">Por razones de seguridad, <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">las claves de API</a> no pueden ser utilizadas para configurar el SDK de registros del navegador, porque estarían expuestas del lado del cliente en el código JavaScript. Para recopilar registros de navegadores web, se debe utilizar un <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">token de cliente</a>.</div>  
+<div class="alert alert-info">Por razones de seguridad, las <a href="https://docs.datadoghq.com/account_management/api-app-keys/#api-keys">claves de API</a> no se pueden utilizar para configurar el SDK de registros del navegador, ya que quedarían expuestas en el lado del cliente en el código JavaScript. Para recopilar registros de navegadores web, se debe utilizar un <a href="https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens">token de cliente</a>.</div>  
 
-### Paso 2 - Instalar el SDK de Registros del Navegador {#step-2-install-the-logs-browser-sdk}
+### Paso 2 - Instalar el SDK de registros del navegador {#step-2-install-the-logs-browser-sdk}
 
-Elija el método de instalación para el SDK de Registros del Navegador.
+Elija el método de instalación para el SDK de registros del navegador.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Para aplicaciones web modernas, Datadog recomienda instalar a través de Node Package Manager (npm). El SDK de Registros del Navegador está empaquetado con el resto de su código JavaScript del frontend. No tiene impacto en el rendimiento de carga de la página. Sin embargo, el SDK puede no capturar errores o registros de consola que ocurran antes de que el SDK sea inicializado. Datadog recomienda usar una versión coincidente con el SDK de Registros del Navegador.  
+Para aplicaciones web modernas, Datadog recomienda realizar la instalación a través de Node Package Manager (npm). El Browser SDK se empaqueta con el resto de su código JavaScript de frontend. No tiene impacto en el rendimiento de carga de la página. Sin embargo, es posible que el SDK no capture errores o registros de consola que ocurran antes de que se inicialice el SDK. Datadog recomienda usar una versión que coincida con el Browser Logs SDK.  
 
-Agregue [`@datadog/browser-logs`][13] a su `package.json` archivo. Por ejemplo, si utiliza npm cli.  
+Agregue [`@datadog/browser-logs`][13] a su archivo `package.json`. Por ejemplo, si utiliza la CLI de npm.  
 
 [13]: https://www.npmjs.com/package/@datadog/browser-logs
 
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-Las aplicaciones web con objetivos de rendimiento deben instalarse a través de CDN asíncrono. El SDK del Navegador se carga desde el CDN de Datadog de manera asíncrona, asegurando que no impacte en el rendimiento de carga de la página. Sin embargo, el SDK puede no capturar errores o registros de consola que ocurran antes de que el SDK sea inicializado.  
+Las aplicaciones web con objetivos de rendimiento deben realizar la instalación a través de CDN de forma asincrónica. El Browser SDK se carga desde la CDN de Datadog de forma asincrónica, lo que garantiza que no afecte el rendimiento de carga de la página. Sin embargo, es posible que el SDK no capture errores o registros de consola que ocurran antes de que se inicialice el SDK.  
 
-Agregue el fragmento de código generado a la etiqueta head de cada página HTML que desee monitorear en su aplicación.
+Agregue el fragmento de código generado a la etiqueta head de cada página HTML que desee hacer un seguimiento en su aplicación.
 
 {{< site-region region="us" >}}
 
@@ -74,7 +75,7 @@ Agregue el fragmento de código generado a la etiqueta head de cada página HTML
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js','DD_LOGS')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js','DD_LOGS')
 </script>
 ```
 
@@ -131,6 +132,19 @@ Agregue el fragmento de código generado a la etiqueta head de cada página HTML
 ```
 
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js','DD_LOGS')
+</script>
+```
+
+{{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 
 ```javascript
@@ -148,9 +162,9 @@ Agregue el fragmento de código generado a la etiqueta head de cada página HTML
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Para recopilar todos los eventos, debe instalarse a través de CDN síncrono. El SDK del Navegador se carga desde el CDN de Datadog de manera síncrona, asegurando que el SDK se cargue primero y recopile todos los errores, recursos y acciones del usuario. Este método puede afectar el rendimiento de carga de la página.  
+Para recopilar todos los eventos, debe realizar la instalación a través de CDN de forma sincrónica. El Browser SDK se carga desde la CDN de Datadog de forma sincrónica, lo que garantiza que el SDK se cargue primero y recopile todos los errores, recursos y acciones del usuario. Este método puede afectar el rendimiento de carga de la página.  
 
-Agrega el fragmento de código generado a la etiqueta head (delante de cualquier otra etiqueta de script) de cada página HTML que desees monitorear en tu aplicación. Colocar la etiqueta de script más arriba y cargarla de manera sincrónica asegura que Datadog RUM pueda recopilar todos los datos de rendimiento y errores.
+Agregue el fragmento de código generado a la etiqueta head (antes de cualquier otra etiqueta script) de cada página HTML que desee hacer un seguimiento en su aplicación. Colocar la etiqueta script más arriba y cargarla de forma sincrónica garantiza que Datadog RUM pueda recopilar todos los datos de rendimiento y errores.
 
 {{< site-region region="us" >}}
 
@@ -167,7 +181,7 @@ Agrega el fragmento de código generado a la etiqueta head (delante de cualquier
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/eu/v7/datadog-logs.js"
+    src="https://www.datadoghq-browser-agent.com/eu1/v7/datadog-logs.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -218,6 +232,17 @@ Agrega el fragmento de código generado a la etiqueta head (delante de cualquier
 ```
 
 {{< /site-region >}}
+{{< site-region region="uk1" >}}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-logs.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 
 ```javascript
@@ -233,11 +258,11 @@ Agrega el fragmento de código generado a la etiqueta head (delante de cualquier
 {{% /tab %}}
 {{< /tabs >}}
 
-### Paso 3 - Inicializa el SDK del Navegador de Logs {#step-3-initialize-the-logs-browser-sdk}
+### Paso 3 - Inicializar el SDK de registros del navegador {#step-3-initialize-the-logs-browser-sdk}
 
-El SDK debe ser inicializado tan pronto como sea posible en el ciclo de vida de la aplicación. Esto asegura que todos los registros sean capturados correctamente.
+El SDK debe inicializarse lo antes posible en el ciclo de vida de la aplicación. Esto garantiza que todos los registros se capturen correctamente.
 
-En el fragmento de inicialización, establece el token del cliente y el sitio. Consulta la lista completa de [parámetros de inicialización][4].
+En el fragmento de inicialización, configure el token de cliente y el sitio. Consulte la lista completa de [parámetros de inicialización][4].
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -293,25 +318,25 @@ datadogLogs.init({
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Configura el consentimiento de seguimiento (cumplimiento de GDPR) {#configure-tracking-consent-gdpr-compliance}
+#### Configurar el consentimiento de seguimiento (cumplimiento del RGPD) {#configure-tracking-consent-gdpr-compliance}
 
-Para cumplir con GDPR, CCPA y regulaciones similares, el SDK del Navegador RUM te permite proporcionar el [valor de consentimiento de seguimiento en la inicialización][5].
+Para cumplir con el RGPD, la CCPA y regulaciones similares, el RUM Browser SDK le permite proporcionar el [valor de consentimiento de seguimiento durante la inicialización][5].
 
-#### Configura la Política de Seguridad de Contenidos (CSP) {#configure-content-security-policy-csp}
+#### Configurar la Política de Seguridad de Contenido (CSP) {#configure-content-security-policy-csp}
 
-Si usas la integración de la Política de Seguridad de Contenidos (CSP) de Datadog en tu sitio, consulta [la documentación de CSP][6] para pasos adicionales de configuración.
+Si utiliza la integración de Política de Seguridad de Contenido (CSP) de Datadog en su sitio, consulte [la documentación de CSP][6] para conocer los pasos de configuración adicionales.
 
-### Paso 4 - Visualiza tus datos {#step-4-visualize-your-data}
+### Paso 4: Visualice sus datos {#step-4-visualize-your-data}
 
-Ahora que has completado la configuración básica para Logs, tu aplicación está recopilando registros del navegador y puedes comenzar a monitorear y depurar problemas en tiempo real.
+Ahora que ha completado la configuración básica para registros, su aplicación está recopilando registros del navegador y puede comenzar a monitorear y depurar problemas en tiempo real.
 
-Visualiza los registros en el [Explorador de Logs][7].
+Visualice los registros en el [Explorador de registros][7].
 
 ## Uso {#usage}
 
-### Logs personalizados {#custom-logs}
+### Registros personalizados {#custom-logs}
 
-Después de que el SDK de registros del navegador de Datadog esté inicializado, envía una entrada de registro personalizada directamente a Datadog con la API:
+Después de inicializar el SDK de registros del navegador de Datadog, envíe una entrada de registro personalizada directamente a Datadog con la API:
 
 ```typescript
 logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
@@ -335,7 +360,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -344,14 +369,14 @@ window.DD_LOGS.onReady(function () {
 window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Resultados {#results}
 
-Los resultados son los mismos al usar NPM, CDN asíncrono o CDN síncrono:
+Los resultados son los mismos al usar NPM, CDN async o CDN sync:
 
 ```json
 {
@@ -378,13 +403,13 @@ Los resultados son los mismos al usar NPM, CDN asíncrono o CDN síncrono:
 }
 ```
 
-El SDK de Registros del Navegador agrega la siguiente información por defecto (se pueden agregar más campos si el SDK de RUM está
+El SDK de registros del navegador agrega la siguiente información de forma predeterminada (se pueden agregar más campos si el SDK de RUM está
 presente):
 
 - `date`
 - `view.url`
 - `view.referrer`
-- `session_id` (solo si se utiliza una sesión)
+- `session_id` (solo si se usa una sesión)
 
 El backend de Datadog agrega más campos, como:
 
@@ -393,7 +418,7 @@ El backend de Datadog agrega más campos, como:
 
 ### Seguimiento de errores {#error-tracking}
 
-El SDK de Registros del Navegador de Datadog permite el seguimiento manual de errores utilizando el parámetro opcional `error` (Disponible en SDK v4.36.0+). Cuando se proporciona una instancia de un [Error de JavaScript][8], el SDK extrae información relevante (tipo, mensaje, traza de pila) del error.
+El SDK de registros del navegador de Datadog permite el seguimiento de errores manual mediante el uso del parámetro opcional `error` (disponible en el SDK v4.36.0+). Cuando se proporciona una instancia de un [JavaScript Error][8], el SDK extrae información relevante (tipo, mensaje, traza de pila) del error.
 
 ```typescript
 logger.{debug|info|warn|error}(message: string, messageContext?: Context, error?: Error)
@@ -429,7 +454,7 @@ try {
 }
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -444,14 +469,14 @@ try {
 }
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Resultados {#results-1}
 
-Los resultados son los mismos al usar NPM, CDN asíncrono o CDN síncrono:
+Los resultados son los mismos al usar NPM, CDN async o CDN sync:
 
 ```json
 {
@@ -469,9 +494,38 @@ Los resultados son los mismos al usar NPM, CDN asíncrono o CDN síncrono:
 }
 ```
 
-### Función de registro genérica {#generic-logger-function}
+#### Errores de WebAssembly {#webassembly-errors}
 
-El SDK de Registros del Navegador de Datadog agrega funciones abreviadas (`.debug`, `.info`, `.warn`, `.error`) a las herramientas de registro para mayor conveniencia. También está disponible una función de registro genérica, exponiendo el parámetro `status`:
+Para simbolizar los marcos de pila de WebAssembly (WASM), instale el plugin WASM del SDK de registros del navegador. Utilice la misma versión para el plugin y el SDK de registro de navegador:
+
+```shell
+npm install --save-exact \
+  @datadog/browser-logs@<VERSION> \
+  @datadog/browser-plugin-wasm@<VERSION>
+```
+
+Registre el plugin cuando inicialice el SDK de registros del navegador:
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs';
+import { makeWasmPlugin } from '@datadog/browser-plugin-wasm';
+
+datadogLogs.init({
+  // ...
+  forwardErrorsToLogs: true,
+  plugins: [makeWasmPlugin()],
+});
+```
+
+Inicialice el SDK de registros del navegador antes de cargar cualquier módulo WASM. El plugin observa los módulos creados con las API `WebAssembly` del navegador y agrega sus URL y los ID de compilación a los errores que contienen trazas de pila WASM.
+
+Establezca `forwardErrorsToLogs` en `true` para reenviar automáticamente los errores de WASM no controlados. Al registrar un error de WASM controlado, pase su objeto `Error` como tercer argumento a `logger.error()`, como se muestra en [Seguimiento de errores](#error-tracking).
+
+Luego, [suba los símbolos de WebAssembly][14] para simbolizar los errores.
+
+### Función de registrador genérica {#generic-logger-function}
+
+El SDK de registros del navegador de Datadog añade funciones abreviadas (`.debug`, `.info`, `.warn`, `.error`) a los registradores para mayor comodidad. También hay disponible una función de registrador genérica, que expone el parámetro `status`:
 
 ```typescript
 log(message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
@@ -495,7 +549,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -504,7 +558,7 @@ window.DD_LOGS.onReady(function() {
 window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -515,31 +569,31 @@ Los marcadores de posición en los ejemplos anteriores se describen a continuaci
 
 | Marcador de posición         | Descripción                                                                             |
 | ------------------- | --------------------------------------------------------------------------------------- |
-| `<MESSAGE>`         | El mensaje de tu registro que está completamente indexado por Datadog.                               |
+| `<MESSAGE>`         | El mensaje de su registro que está totalmente indexado por Datadog.                               |
 | `<JSON_ATTRIBUTES>` | Un objeto JSON válido, que incluye todos los atributos adjuntos al `<MESSAGE>`.         |
-| `<STATUS>`          | El estado de tu registro; los valores de estado aceptados son `debug`, `info`, `warn` o `error`. |
+| `<STATUS>`          | El estado de su registro; los valores de estado aceptados son `debug`, `info`, `warn` o `error`. |
 | `<ERROR>`           | Una instancia de un objeto [JavaScript Error][8].                                         |
 
 ## Uso avanzado {#advanced-usage}
 
-### Eliminar datos sensibles de sus registros del navegador {#scrub-sensitive-data-from-your-browser-logs}
+### Eliminar datos confidenciales de sus registros del navegador {#scrub-sensitive-data-from-your-browser-logs}
 
-Si tus registros del navegador contienen información sensible que necesita ser redactada, configura el SDK del navegador para eliminar secuencias sensibles utilizando el callback `beforeSend` cuando inicialices el recolector de registros del navegador.
+Si sus registros del navegador contienen información confidencial que necesita ser redactada, configure el SDK del navegador para eliminar secuencias confidenciales usando la devolución de llamada `beforeSend` cuando inicialice el recopilador de registros del navegador.
 
-La función de callback `beforeSend` se puede invocar con dos argumentos: el evento `log` y `context`. Esta función le da acceso a cada registro recopilado por el SDK del navegador antes de que se envíe a Datadog, y le permite usar el contexto para ajustar cualquier propiedad del registro. El contexto contiene información adicional relacionada con el evento, pero no necesariamente incluida en el evento. Normalmente puede usar esta información para [enriquecer][11] su evento o [descartarlo][12].
+La función de devolución de llamada `beforeSend` puede invocarse con dos argumentos: el evento `log` y `context`. Esta función le da acceso a cada registro recopilado por el SDK del navegador antes de que se envíe a Datadog, y le permite usar el contexto para ajustar cualquier propiedad de registro. El contexto contiene información adicional relacionada con el evento, pero no necesariamente incluida en el evento. Normalmente puede usar esta información para [enriquecer][11] su evento o [descartarlo][12].
 
 ```javascript
 function beforeSend(log, context)
 ```
 
-Los posibles valores `context` son:
+Los posibles valores de `context` son:
 
-| Valor | Tipo de dato | Caso de uso |
+| Valor | Tipo de datos | Caso de uso |
 |-------|---------|------------|
-| `isAborted` | Booleano | Para eventos de registro de red, esta propiedad le indica si la solicitud fallida fue abortada por la aplicación, en cuyo caso es posible que no desee enviar este evento porque puede haber sido abortado intencionalmente. |
-| `handlingStack` | Cadena | Una traza de pila de dónde se manejó el evento de registro. Esto se puede usar para identificar de qué [micro-frontend][9] se envió el registro. |
+| `isAborted` | Booleano | Para eventos de registros de red, esta propiedad le indica si la solicitud fallida fue abortada por la aplicación, en cuyo caso es posible que no desee enviar este evento porque puede haber sido abortado intencionalmente. |
+| `handlingStack` | Cadena | Una traza de pila de dónde se manejó el evento de registro. Esto se puede usar para identificar desde qué [micro-frontend][9] se envió el registro. |
 
-Para redactar direcciones de correo electrónico de las URL de su aplicación web:
+Para anonimizar las direcciones de correo electrónico de las URL de su aplicación web:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -573,7 +627,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -590,24 +644,24 @@ window.DD_LOGS &&
     });
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Las siguientes propiedades son recopiladas automáticamente por el SDK y podrían contener datos sensibles:
+Las siguientes propiedades son recopiladas automáticamente por el SDK y podrían contener datos confidenciales:
 
 | Atributo       | Tipo   | Descripción                                                                                      |
 | --------------- | ------ | ------------------------------------------------------------------------------------------------ |
 | `view.url`      | Cadena | La URL de la página web activa.                                                                  |
-| `view.referrer` | Cadena | La URL de la página web anterior desde la cual se siguió un enlace a la página actualmente solicitada. |
+| `view.referrer` | Cadena | La URL de la página web anterior desde la cual se siguió un enlace a la página solicitada actualmente. |
 | `message`       | Cadena | El contenido del registro.                                                                          |
 | `error.stack`   | Cadena | La traza de pila o información complementaria sobre el error.                                    |
 | `http.url`      | Cadena | La URL HTTP.                                                                                    |
 
 ### Descartar registros específicos {#discard-specific-logs}
 
-La `beforeSend` función de callback también le permite descartar un registro antes de que se envíe a Datadog.
+La función de devolución de llamada `beforeSend` le permite también descartar un registro antes de que sea enviado a Datadog.
 
 Para descartar errores de red si su estado es 404:
 
@@ -647,7 +701,7 @@ window.DD_LOGS.onReady(function() {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -666,7 +720,7 @@ window.DD_LOGS &&
     });
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -677,7 +731,7 @@ El SDK de registros del navegador de Datadog contiene un registrador predetermin
 
 #### Crear un nuevo registrador {#create-a-new-logger}
 
-Después de que se inicializa el SDK de registros del navegador de Datadog, use la API `createLogger` para definir un nuevo registrador:
+Después de que el SDK de registros del navegador de Datadog se inicializa, utilice la API `createLogger` para definir un nuevo registrador:
 
 ```typescript
 createLogger (name: string, conf?: {
@@ -687,11 +741,11 @@ createLogger (name: string, conf?: {
 })
 ```
 
-**Nota**: Estos parámetros se pueden establecer con la API [setLevel](#filter-by-status), [setHandler](#change-the-destination) y [setContext](#overwrite-context).
+**Nota**: Estos parámetros pueden establecerse con las API [setLevel](#filter-by-status), [setHandler](#change-the-destination) y [setContext](#overwrite-context).
 
-#### Obtén un registrador personalizado {#get-a-custom-logger}
+#### Obtener un registrador personalizado {#get-a-custom-logger}
 
-Después de la creación de un registrador, accede a él en cualquier parte de tu código JavaScript con la API:
+Después de la creación de un registrador, acceda a él en cualquier parte de su código JavaScript con la API:
 
 ```typescript
 getLogger(name: string)
@@ -700,7 +754,7 @@ getLogger(name: string)
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Por ejemplo, supón que hay un `signupLogger`, definido con todos los demás registradores:
+Por ejemplo, suponga que existe un `signupLogger`, definido con todos los demás registradores:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -712,7 +766,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego puede utilizarse en una parte diferente del código con:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -724,7 +778,7 @@ signupLogger.info('Test sign up completed')
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-Por ejemplo, supón que hay un `signupLogger`, definido con todos los demás registradores:
+Por ejemplo, suponga que existe un `signupLogger`, definido con todos los demás registradores:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -736,7 +790,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego puede utilizarse en una parte diferente del código con:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -745,12 +799,12 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Por ejemplo, supón que hay un `signupLogger`, definido con todos los demás registradores:
+Por ejemplo, suponga que existe un `signupLogger`, definido con todos los demás registradores:
 
 ```javascript
 if (window.DD_LOGS) {
@@ -762,7 +816,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-Luego se puede usar en otra parte del código con:
+Luego puede utilizarse en una parte diferente del código con:
 
 ```javascript
 if (window.DD_LOGS) {
@@ -771,7 +825,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -780,15 +834,15 @@ if (window.DD_LOGS) {
 
 #### Contexto global {#global-context}
 
-Después de que se inicializa el SDK de registros del navegador de Datadog, es posible:
+Después de que el SDK de registros del navegador de Datadog se inicializa, es posible:
 
-- Establece el contexto completo para todos tus registradores con la API `setGlobalContext (context: object)`.
-- Agrega un contexto a todos tus registradores con la API `setGlobalContextProperty (key: string, value: any)`.
-- Obtén el contexto global completo con la API `getGlobalContext ()`.
-- Elimina la propiedad del contexto con la API `removeGlobalContextProperty (key: string)`.
-- Limpia todas las propiedades de contexto existentes con la API `clearGlobalContext ()`.
+- Establecer el contexto completo para todos sus registradores con la API `setGlobalContext (context: object)`.
+- Agregar un contexto a todos sus registradores con la API `setGlobalContextProperty (key: string, value: any)`.
+- Obtener el contexto global completo con la API `getGlobalContext ()`.
+- Eliminar una propiedad de contexto con la API `removeGlobalContextProperty (key: string)`.
+- Borrar todas las propiedades de contexto existentes con la API `clearGlobalContext ()`.
 
-> El SDK de registros del navegador de Datadog v4.17.0 ha actualizado los nombres de varias API:
+> El SDK de registros del navegador v4.17.0 ha actualizado los nombres de varias API:
 >
 > - `getGlobalContext` en lugar de `getLoggerGlobalContext`
 > - `setGlobalContext` en lugar de `setLoggerGlobalContext`
@@ -798,7 +852,7 @@ Después de que se inicializa el SDK de registros del navegador de Datadog, es p
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Para NPM, usa:
+Para NPM, utilice:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -821,7 +875,7 @@ datadogLogs.getGlobalContext() // => {}
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-Para CDN asíncrono, usa:
+Para CDN asíncrono, utilice:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -853,12 +907,12 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Para CDN síncrono, usa:
+Para la sincronización con CDN, utilice:
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setGlobalContext({ env: 'staging' })
@@ -876,27 +930,27 @@ window.DD_LOGS && window.DD_LOGS.clearGlobalContext()
 window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Contexto del usuario {#user-context}
+#### Contexto de usuario {#user-context}
 
-El SDK de registros de Datadog proporciona funciones convenientes para asociar un `User` con los registros generados.
+El SDK de logs de Datadog proporciona funciones convenientes para asociar un `User` con los logs generados.
 
-- Establece el usuario para todos tus registradores con la API `setUser (newUser: User)`.
-- Agrega o modifica una propiedad de usuario para todos tus registradores con la API `setUserProperty (key: string, value: any)`.
-- Obtén el usuario almacenado actualmente con la API `getUser ()`.
-- Elimina una propiedad de usuario con la API `removeUserProperty (key: string)`.
-- Limpia todas las propiedades de usuario existentes con la API `clearUser ()`.
+- Establezca el usuario para todos sus registradores con la API `setUser (newUser: User)`.
+- Agregue o modifique una propiedad de usuario en todos sus registradores con la API `setUserProperty (key: string, value: any)`.
+- Obtenga el usuario almacenado actualmente con la API `getUser ()`.
+- Elimine una propiedad de usuario con la API `removeUserProperty (key: string)`.
+- Borre todas las propiedades de usuario existentes con la API `clearUser ()`.
 
-**Nota**: El contexto del usuario se aplica antes del contexto global. Por lo tanto, cada propiedad de usuario incluida en el contexto global sobrescribirá el contexto del usuario al generar registros.
+**Nota**: El contexto de usuario se aplica antes que el contexto global. Por lo tanto, cada propiedad de usuario incluida en el contexto global anulará el contexto de usuario al generar logs.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-Para NPM, usa:
+Para NPM, utilice:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -915,7 +969,7 @@ datadogLogs.getUser() // => {}
 {{% /tab %}}
 {{% tab "CDN asíncrono" %}}
 
-Para CDN asíncrono, usa:
+Para CDN asíncrono, utilice:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -947,12 +1001,12 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Para CDN síncrono, usa:
+Para la sincronización con CDN, utilice:
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
@@ -970,22 +1024,22 @@ window.DD_LOGS && window.DD_LOGS.clearUser()
 window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Contexto de la cuenta {#account-context}
+#### Contexto de cuenta {#account-context}
 
-El SDK de registros de Datadog proporciona funciones convenientes para asociar una `Account` con los registros generados.
+El SDK de logs de Datadog proporciona funciones convenientes para asociar una `Account` con los logs generados.
 
-- Establece la cuenta para todos tus registradores con la API `setAccount (newAccount: Account)`.
-- Agrega o modifica una propiedad de cuenta para todos tus registradores con la API `setAccountProperty (key: string, value: any)`.
-- Obtén la cuenta almacenada actualmente con la API `getAccount ()`.
-- Elimina una propiedad de cuenta con la API `removeAccountProperty (key: string)`.
-- Limpia todas las propiedades de cuenta existentes con la API `clearAccount ()`.
+- Establezca la cuenta para todos sus registradores con la API `setAccount (newAccount: Account)`.
+- Agregue o modifique una propiedad de cuenta en todos sus registradores con la API `setAccountProperty (key: string, value: any)`.
+- Obtenga la cuenta almacenada actualmente con la API `getAccount ()`.
+- Elimine una propiedad de cuenta con la API `removeAccountProperty (key: string)`.
+- Borre todas las propiedades de cuenta existentes con la API `clearAccount ()`.
 
-**Nota**: El contexto de la cuenta se aplica antes del contexto global. Por lo tanto, cada propiedad de cuenta incluida en el contexto global sobrescribirá el contexto de la cuenta al generar registros.
+**Nota**: El contexto de la cuenta se aplica antes que el contexto global. Por lo tanto, cada propiedad de cuenta incluida en el contexto global anulará el contexto de la cuenta al generar registros.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1037,7 +1091,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -1058,37 +1112,37 @@ window.DD_LOGS && window.DD_LOGS.clearAccount()
 window.DD_LOGS && window.DD_LOGS.getAccount() // => {}
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Ciclo de vida de los contextos {#contexts-life-cycle}
 
-Por defecto, los contextos se almacenan en la memoria de la página actual, lo que significa que no están:
+De forma predeterminada, los contextos se almacenan en la memoria de la página actual, lo que significa que no se:
 
-- guardados después de una recarga completa de la página
+- se mantienen después de una recarga completa de la página
 - compartidos entre diferentes pestañas o ventanas de la misma sesión
 
-Para agregarlos a todos los eventos de la sesión, deben estar adjuntos a cada página.
+Para agregarlos a todos los eventos de la sesión, deben adjuntarse a cada página.
 
-Con la introducción de la opción de configuración `storeContextsAcrossPages` en la v4.49.0 del SDK del navegador, esos contextos pueden ser almacenados en [`localStorage`][9], permitiendo los siguientes comportamientos:
+Con la introducción de la opción de configuración `storeContextsAcrossPages` en la v4.49.0 del SDK de navegador, esos contextos pueden almacenarse en [`localStorage`][9], lo que permite los siguientes comportamientos:
 
-- Los contextos se preservan después de una recarga completa
+- Los contextos se conservan después de una recarga completa
 - Los contextos se sincronizan entre pestañas abiertas en el mismo origen
 
-Sin embargo, esta función viene con algunas **limitaciones**:
+Sin embargo, esta función conlleva algunas **limitaciones**:
 
-- No se recomienda establecer Información Personal Identificable (PII) en esos contextos, ya que los datos almacenados en `localStorage` sobreviven a la sesión del usuario
-- La función es incompatible con las `trackSessionAcrossSubdomains` opciones porque `localStorage` los datos solo se comparten entre el mismo origen (login.site.com ≠ app.site.com)
+- No se recomienda establecer información de identificación personal (PII) en esos contextos, ya que los datos almacenados en `localStorage` sobreviven a la sesión del usuario
+- La función es incompatible con las opciones `trackSessionAcrossSubdomains` porque los datos `localStorage` solo se comparten entre el mismo origen (login.site.com ≠ app.site.com)
 - `localStorage` está limitado a 5 MiB por origen, por lo que los datos específicos de la aplicación, los contextos de Datadog y otros datos de terceros almacenados en `localStorage` deben estar dentro de este límite para evitar problemas
 
 #### Contexto del registrador {#logger-context}
 
-Después de que se crea un registrador, es posible:
+Después de crear un registrador, es posible:
 
-- Establece todo el contexto para tu registrador con la `setContext (context: object)` API.
-- Establece una propiedad de contexto en tu registrador con la `setContextProperty (key: string, value: any)` API:
+- Establezca todo el contexto para su registrador con la API `setContext (context: object)`.
+- Establezca una propiedad de contexto en su registrador con la API `setContextProperty (key: string, value: any)`:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1114,7 +1168,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -1125,20 +1179,20 @@ window.DD_LOGS && window.DD_LOGS.setContext("{'env': 'staging'}")
 window.DD_LOGS && window.DD_LOGS.setContextProperty('referrer', document.referrer)
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Filtrar por estado {#filter-by-status}
 
-Después de que se inicializa el SDK de registros del navegador de Datadog, el nivel mínimo de registro para tu registrador se establece con la API:
+Después de inicializar el SDK de registro para navegador de Datadog, el nivel de registro mínimo para su registrador se establece con la API:
 
 ```typescript
 setLevel (level?: 'debug' | 'info' | 'warn' | 'error')
 ```
 
-Solo se envían registros con un estado igual o superior al nivel especificado.
+Solo se envían los registros con un estado igual o superior al nivel especificado.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1158,7 +1212,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
@@ -1167,18 +1221,18 @@ window.DD_LOGS.onReady(function () {
 window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Cambiar el destino {#change-the-destination}
+### Cambie el destino {#change-the-destination}
 
-Por defecto, los registradores creados por el SDK de registros del navegador de Datadog están enviando registros a Datadog. Después de que se inicializa el SDK de registros del navegador de Datadog, es posible configurar tu registrador para:
+De forma predeterminada, los registradores creados por el SDK de registro para navegador de Datadog envían registros a Datadog. Después de inicializar el SDK de registro para navegador de Datadog, es posible configurar el registrador para:
 
 - enviar registros al `console` y a Datadog (`http`)
 - enviar registros solo al `console`
-- no enviar registros (`silent`) en absoluto
+- no enviar registros en absoluto (`silent`)
 
 ```typescript
 setHandler (handler?: 'http' | 'console' | 'silent' | Array<handler>)
@@ -1205,38 +1259,38 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-**Nota**: Las llamadas a la API tempranas deben estar envueltas en el `window.DD_LOGS.onReady()` callback. Esto asegura que el código solo se ejecute una vez que el SDK esté correctamente cargado.
+**Nota**: Las llamadas a la API tempranas deben incluirse en el callback `window.DD_LOGS.onReady()`. Esto asegura que el código solo se ejecute una vez que el SDK se haya cargado correctamente.
 
 {{% /tab %}}
 {{% tab "CDN síncrono" %}}
 
-Para CDN síncrono, usa:
+Para la sincronización con CDN, utilice:
 
 ```javascript
 window.DD_LOGS && window.DD_LOGS.logger.setHandler('<HANDLER>')
 window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
-**Nota**: La `window.DD_LOGS` verificación previene problemas cuando ocurre una falla de carga con el SDK.
+**Nota**: La verificación `window.DD_LOGS` evita problemas cuando ocurre un error de carga con el SDK.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Consentimiento de seguimiento del usuario {#user-tracking-consent}
 
-Para cumplir con el GDPR, CCPA y regulaciones similares, el SDK de registros del navegador de Datadog te permite proporcionar el valor de consentimiento de seguimiento durante la inicialización.
+Para cumplir con el RGPD, la CCPA y regulaciones similares, el SDK de registro para navegador le permite proporcionar el valor de consentimiento de seguimiento durante la inicialización.
 
-`trackingConsent`El parámetro de inicialización puede ser uno de los siguientes valores:
+El parámetro de inicialización `trackingConsent` puede ser uno de los siguientes valores:
 
-1. `"granted"`: El SDK de registros del navegador de Datadog comienza a recopilar datos y los envía a Datadog.
-2. `"not-granted"`: El SDK de registros del navegador de Datadog no recopila ningún dato.
+1. `"granted"`: El SDK de registro para navegador comienza a recopilar datos y los envía a Datadog.
+2. `"not-granted"`: El SDK de registro para navegador no recopila ningún dato.
 
-Para cambiar el valor de consentimiento de seguimiento después de que se inicializa el SDK de registros del navegador de Datadog, utiliza la llamada a la API `setTrackingConsent()`. El SDK de registros del navegador de Datadog cambia su comportamiento de acuerdo con el nuevo valor:
+Para cambiar el valor de consentimiento de seguimiento después de que el SDK de registro para navegador se haya inicializado, utilice la llamada API `setTrackingConsent()`. El SDK de registro para navegador cambia su comportamiento de acuerdo con el nuevo valor:
 
-- cuando se cambia de `"granted"` a `"not-granted"`, la sesión de registros se detiene y los datos ya no se envían a Datadog.
-- cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de registros si no hay una sesión anterior activa, y la recopilación de datos se reanuda.
+- cuando se cambia de `"granted"` a `"not-granted"`, la sesión de registro se detiene y los datos ya no se envían a Datadog.
+- cuando se cambia de `"not-granted"` a `"granted"`, se crea una nueva sesión de registro si no hay ninguna sesión previa activa, y la recopilación de datos se reanuda.
 
-Este estado no se sincroniza entre pestañas ni se persiste entre navegaciones. Es tu responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de registros del navegador de Datadog o utilizando `setTrackingConsent()`.
+Este estado no se sincroniza entre pestañas ni persiste entre navegaciones. Es su responsabilidad proporcionar la decisión del usuario durante la inicialización del SDK de registro para navegador o mediante el uso de `setTrackingConsent()`.
 
 Cuando se utiliza `setTrackingConsent()` antes de `init()`, el valor proporcionado tiene prioridad sobre el parámetro de inicialización.
 
@@ -1291,15 +1345,15 @@ acceptCookieBannerButton.addEventListener('click', () => {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Acceder al contexto interno {#access-internal-context}
+### Acceda al contexto interno {#access-internal-context}
 
-Después de que se inicializa el SDK de registros del navegador de Datadog, puedes acceder al contexto interno del SDK. Esto te permite acceder al `session_id`.
+Después de inicializar el SDK de registro para navegador de Datadog, puede acceder al contexto interno del SDK. Esto le permite acceder a `session_id`.
 
 ```typescript
 getInternalContext (startTime?: 'number' | undefined)
 ```
 
-Puedes usar opcionalmente `startTime`el parámetro para obtener el contexto de un momento específico. Si se omite el parámetro, se devuelve el contexto actual.
+Opcionalmente, puede utilizar el parámetro `startTime` para obtener el contexto de un momento específico. Si se omite el parámetro, se devuelve el contexto actual.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -1341,3 +1395,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [11]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [12]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
+[14]: /es/real_user_monitoring/guide/upload-webassembly-symbols/

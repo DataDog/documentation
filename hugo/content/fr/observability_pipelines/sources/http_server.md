@@ -24,7 +24,7 @@ Vous pouvez également [envoyer des logs fournis par AWS avec le Datadog Lambda 
 
 <div class="alert alert-danger">Pour la gestion des secrets : Saisissez uniquement les identifiants pour l'adresse du HTTP/S Server et, le cas échéant, le nom d'utilisateur et le mot de passe pour l'autorisation simple (également appelée basique) ainsi que la clé de mot de passe TLS. Ne <b>saisissez pas</b> les valeurs réelles.</div>
 
-Configurez cette source lorsque vous [configurez un pipeline][3]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][4] ou avec [Terraform][5]. Les instructions de cette section concernent la configuration de la source dans l'IU.
+Configurez cette source lorsque vous [configurez un pipeline][3]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][4] ou avec [Terraform][5]. Les instructions de cette section concernent la configuration de la source dans l'UI.
 
 Après avoir sélectionné la source HTTP/S Server dans l'interface utilisateur du pipeline :
 
@@ -87,7 +87,7 @@ Pour envoyer des logs fournis par AWS vers Observability Pipelines avec la sourc
 - [Configurez un pipeline avec la source HTTP/S Server](#set-up-a-pipeline).
 - [Déployez le Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).
 
-**Remarque** : Ceci est disponible pour les versions 2.51 ou ultérieures du Worker.
+**Note** : ceci est disponible pour les versions de Worker 2.15 ou ultérieures.
 
 ### Configurez un pipeline {#set-up-a-pipeline}
 

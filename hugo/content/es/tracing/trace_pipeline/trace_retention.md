@@ -4,9 +4,6 @@ aliases:
 - /es/tracing/trace_queries/one_percent_flat_sampling/
 description: Aprenda a controlar la retención de trazas con filtros de retención.
 further_reading:
-- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
-  tag: Blog
-  text: Unifique y correlacione datos de frontend y backend con filtros de retención
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: Documentación
   text: Mecanismos de ingesta
@@ -19,6 +16,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/apm-rate-limit-retention
   tag: Centro de aprendizaje
   text: Limitación de tasa y retención de APM
+- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
+  tag: Blog
+  text: Unifique y correlacione datos de frontend y backend con filtros de retención
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: Blog
+  text: Rastree funciones durables de AWS Lambda con Datadog
 - link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
   tag: Centro de arquitectura
   text: 'Dominio del rastreo distribuido: desafíos de volumen de datos y el enfoque
@@ -35,7 +38,7 @@ Para hacer un seguimiento de su volumen de datos ingeridos e indexados, consulte
 
 Después de que los tramos han sido ingeridos, algunos se conservan durante 15 días de acuerdo con los filtros de retención que están configurados en su cuenta:
 1. El **[Filtro de retención inteligente](#datadog-intelligent-retention-filter)** retiene tramos para cada entorno, servicio, operación y recurso para diferentes distribuciones de latencia.
-2. Se crean varios **[Filtros de retención predeterminados](#default-retention-filters)** para garantizar que mantenga la visibilidad sobre todos sus servicios y endpoints, así como errores y trazas de alta latencia. 
+2. Se crean varios **[Filtros de retención predeterminados](#default-retention-filters)** para garantizar que mantenga la visibilidad sobre todos sus servicios y puntos de conexión, así como errores y trazas de alta latencia. 
 3. Puede crear cualquier cantidad de **[Filtros de retención personalizados](#create-your-own-retention-filter)** para sus servicios, para capturar las trazas que más le importan a su negocio, según cualquier atributo de tramo o filtro de etiqueta.
 
 **Nota**: Se requiere el permiso `apm_retention_filter_write` para crear, eliminar, modificar, habilitar o deshabilitar filtros de retención.
@@ -116,7 +119,7 @@ El conjunto de datos capturado por el muestreo de diversidad no se muestrea de m
 
 #### Muestreo plano del 1% {#one-percent-flat-sampling}
 
-El muestreo plano del 1% captura:
+Los datos del muestreo uniforme del 1 % se conservan durante 30 días e incluyen:
 1. Todas las trazas correlacionadas con el 1% de las sesiones RUM ingeridas**que tuvieron trazas ingeridas**, lo que garantiza que siempre pueda encontrar algunas sesiones indexadas que tengan datos de rastreo asociados. Esto mejora la [correlación entre APM y RUM][20], lo que le permite depurar problemas de usuario al visualizar tanto las sesiones de frontend como las trazas de backend juntas. La muestra se aplica según el `session_id`, lo que significa que todas las trazas vinculadas a la misma sesión RUM comparten una decisión de indexación coherente.
 2. Una **muestra uniforme del 1%** de los [tramos ingeridos][12], aplicada según el `trace_id` para que todos los tramos en la misma traza compartan la misma decisión de muestreo. Utilice esta muestra para el monitoreo general del estado del sistema y el análisis de tendencias.
 

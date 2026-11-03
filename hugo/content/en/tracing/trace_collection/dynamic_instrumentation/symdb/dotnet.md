@@ -10,9 +10,9 @@ aliases:
     - /dynamic_instrumentation/symdb/dotnet
     - /tracing/dynamic_instrumentation/symdb/dotnet
 ---
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Autocomplete and search are in Preview.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Requirements
 

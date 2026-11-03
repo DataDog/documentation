@@ -90,56 +90,6 @@ multifiltersearch:
     recommendation_prerequisite: APM + RUM
     recommendation_type: Dependency Timeouts
     scope: Backend services
-  - category: Performance
-    recommendation_description: Un servicio realiza un trabajo costoso y repetido
-      en la ruta de solicitud que podría servirse desde una caché de corta duración,
-      lo que reduce la latencia de cola y la carga descendente.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Missing Cache
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un servicio presenta una latencia de cola extrema
-      impulsada por tramos descendentes lentos en la ruta crítica, a menudo debido
-      a una latencia de dependencia ilimitada o llamadas secuenciales que podrían
-      ejecutarse simultáneamente.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Tail Latency
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un servicio dedica una parte importante del tiempo
-      de solicitud a tareas de serialización o parseo vinculadas a la CPU, lo que
-      añade latencia y sobrecarga de CPU evitables.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Excessive Serialization
-    scope: Backend services
-  - category: Performance
-    recommendation_description: Un servicio acepta parámetros de solicitud sin límites
-      de tamaño o rango, lo que permite que las entradas de gran tamaño generen un
-      trabajo descendente costoso, latencia de cola y tiempos de espera.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Unbounded Payload
-    scope: Backend services
-  - category: Performance
-    recommendation_description: El manejo de solicitudes se serializa detrás de una
-      primitiva de sincronización o una sección crítica de larga duración, lo que
-      provoca latencia de cola bajo concurrencia.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Resource Contention
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: Un servicio agota repetidamente su grupo de conexiones
-      a una dependencia descendente, lo que pone en cola las solicitudes y provoca
-      picos de latencia o fallas bajo carga.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Connection Pool Exhaustion
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: Un servicio muestra resultados esperados como errores
-      en APM, lo que infla las tasas de error de los puntos de conexión y oculta regresiones
-      de confiabilidad reales.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Error Misclassification
-    scope: Backend services
   headers:
   - filter_by: true
     id: category
@@ -149,7 +99,7 @@ multifiltersearch:
     name: Tipo de recomendación
   - filter_by: true
     id: scope
-    name: Alcance de la recomendación
+    name: Contexto de la recomendación
   - id: recommendation_description
     name: Descripción de la recomendación
   - filter_by: true

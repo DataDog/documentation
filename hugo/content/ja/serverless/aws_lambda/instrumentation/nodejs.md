@@ -17,6 +17,9 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: ドキュメント
   text: サーバーレスアプリケーションからのカスタムメトリクスの送信
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: ブログ
+  text: Datadog で AWS Lambda Durable Functions をトレースする
 title: Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 <div class="alert alert-info">Datadog Lambda Extension バージョン 67 以降では、コールドスタート時間を大幅に短縮するよう最適化されています。<a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">さらに詳しく</a></div>
@@ -25,13 +28,13 @@ title: Node.js サーバーレスアプリケーションのインスツルメ�
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-Node.js AWS Lambda アプリケーションを Datadog 内で直接インスツルメントできます。[Serverless > AWS Lambda][2] ページに移動し、[**Instrument Functions**][3] を選択します。
+Node.js AWS Lambda アプリケーションを Datadog 内で直接インスツルメントできます。[{{< ui >}}Serverless{{< /ui >}} &gt; {{< ui >}}AWS Lambda{{< /ui >}}][2] ページに移動し、[{{< ui >}}Settings{{< /ui >}}][3] を選択します。{{< ui >}}Remote Instrumentation{{< /ui >}} セクションで、{{< ui >}}AWS Lambda{{< /ui >}} タブを選択します。
 
 詳細については、[AWS Lambda のリモートインスツルメンテーション][1]を参照してください。
 
 [1]: /ja/serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -194,7 +197,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
     You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
-2. Datadog Lambda Extension をインストールします。
+2. Datadog Lambda Extension をインストールする
 
     Dockerfile に以下を追加して、Datadog Lambda Extension をコンテナイメージに追加します。
 
@@ -218,7 +221,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 4. Datadog サイトと API キーを構成します。
 
-    - 環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定します (右側で正しいサイトが選択されていることを確認してください)。
+    - 環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} (右側で正しいサイトが選択されていることを確認してください)。
     - [Datadog API キー][3]が安全に保存されている AWS シークレットの ARN を環境変数 `DD_API_KEY_SECRET_ARN` に設定します。キーはプレーンテキストの文字列として保存する必要があります (JSON ブロブではありません)。`secretsmanager:GetSecretValue` の権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用し、Datadog API キーをプレーンテキストで設定できます。
 
 
@@ -311,7 +314,7 @@ SST v3 を使用して Datadog を構成するには、次のステップに従�
 
   1. Configure the Datadog Lambda Library and Datadog Lambda Extension layers
 
-     - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
+     - The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}です。
 
   2. `dd-trace` と `datadog-lambda-js` を `nodejs.install` リストに追加します。
 
@@ -348,7 +351,7 @@ SST v3 を使用して Datadog を構成するには、次のステップに従�
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
+      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}です。
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
 
@@ -356,7 +359,7 @@ SST v3 を使用して Datadog を構成するには、次のステップに従�
       npm install datadog-lambda-js dd-trace
       ```
 
-2. Datadog Lambda Extension をインストールします。
+2. Datadog Lambda Extension をインストールする
 
     次のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
 
@@ -387,7 +390,7 @@ SST v3 を使用して Datadog を構成するには、次のステップに従�
 
 4. Datadog サイトと API キーを構成します。
 
-    - 環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定します (右側で正しいサイトが選択されていることを確認してください)。
+    - 環境変数 `DD_SITE` を {{< region-param key="dd_site" code="true" >}} (右側で正しいサイトが選択されていることを確認してください)。
     - [Datadog API キー][3]が安全に保存されている AWS シークレットの ARN を環境変数 `DD_API_KEY_SECRET_ARN` に設定します。キーはプレーンテキストの文字列として保存する必要があります (JSON ブロブではありません)。`secretsmanager:GetSecretValue` の権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用し、Datadog API キーをプレーンテキストで設定できます。
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
@@ -407,6 +410,10 @@ SST v3 を使用して Datadog を構成するには、次のステップに従�
 ## AWS Lambda と VPC {#aws-lambda-and-vpc}
 
 {{% svl-lambda-vpc %}}
+
+## Durable Function {#durable-function}
+
+{{% svl-lambda-durable-function %}}
 
 ## 次のステップ{#whats-next}
 

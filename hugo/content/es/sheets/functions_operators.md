@@ -1,7 +1,7 @@
 ---
 description: Guía de referencia para funciones y operadores disponibles en columnas
-  calculadas y fórmulas de Sheets, incluyendo operaciones de texto, fecha, lógicas,
-  matemáticas, de búsqueda, estadísticas y financieras.
+  calculadas de Sheets y fórmulas de Sheets, incluyendo operaciones de texto, fecha,
+  lógicas, matemáticas, de búsqueda, estadísticas y financieras.
 title: Funciones y operadores
 ---
 ## Descripción general {#overview}
@@ -9,7 +9,7 @@ title: Funciones y operadores
 Utilice funciones y operadores en Sheets para analizar y transformar sus datos. Las funciones están disponibles en dos contextos:
 
 - **Columnas calculadas de tabla**: Funciones que transforman o enriquecen valores de filas individuales en una tabla, aplicadas a nivel de columna.
-- **Sheets**: Funciones ingresadas directamente en una pestaña de [hoja][1], lo que le permite hacer referencia a otras pestañas de hoja o tabla (cuando corresponda).
+- **Sheets**: Funciones ingresadas directamente en una pestaña de [Sheets][1], lo que le permite hacer referencia a otras pestañas de Sheets o de tabla (cuando corresponda).
 
 ## Operadores {#operators}
 
@@ -207,124 +207,124 @@ Utilice funciones y operadores en Sheets para analizar y transformar sus datos. 
 : Devuelve la fecha actual. <br>**Ejemplo**: `TODAY()` <br>**Disponible en**: Tabla
 
 `NOW()`
-: Devuelve la fecha y hora actuales. <br>**Ejemplo**: `NOW()` <br>**Disponible en**: Tabla, Hoja
+: Devuelve la fecha y hora actuales. <br>**Ejemplo**: `NOW()` <br>**Disponible en**: tabla, Sheet
 
 `TIME(hour, minute, second)`
-: Convierte una hora, minuto y segundo proporcionados en una hora. <br>**Ejemplo**: `TIME(11, 40, 59)` <br>**Disponible en**: Tabla
+: Convierte una hora, un minuto y un segundo proporcionados en una hora. <br>**Ejemplo**: `TIME(11, 40, 59)` <br>**Disponible en**: Sheets
 
 `YEAR(date)`
-: Extrae el componente del año de un valor de fecha. <br>**Ejemplo**: `YEAR(DATE(2025, 12, 31))` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente del año de un valor de fecha. <br>**Ejemplo**: `YEAR(DATE(2025, 12, 31))` <br>**Disponible en**: tabla, Sheet
 
 `MONTH(date)`
-: Extrae el componente del mes de un valor de fecha. <br>**Ejemplo**: `MONTH("2023-07-15")` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente del mes de un valor de fecha. <br>**Ejemplo**: `MONTH("2023-07-15")` <br>**Disponible en**: tabla, Sheet
 
 `DAY(date)`
-: Extrae el componente del día de un valor de fecha. <br>**Ejemplo**: `DAY(DATE(2023, 12, 25))` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente del día de un valor de fecha. <br>**Ejemplo**: `DAY(DATE(2023, 12, 25))` <br>**Disponible en**: tabla, Sheet
 
 `HOUR(datetime)`
-: Extrae el componente de la hora (0–23) de un valor de fecha y hora. <br>**Ejemplo**: `HOUR("14:30:45")` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente de la hora (0–23) de un valor de fecha y hora. <br>**Ejemplo**: `HOUR("14:30:45")` <br>**Disponible en**: tabla, Sheet
 
 `MINUTE(datetime)`
-: Extrae el componente de los minutos (0–59) de un valor de fecha y hora. <br>**Ejemplo**: `MINUTE("14:30:45")` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente de minuto (0–59) de un valor de fecha y hora. <br>**Ejemplo**: `MINUTE("14:30:45")` <br>**Disponible en**: tabla, Sheet
 
 `SECOND(datetime)`
-: Extrae el segundo componente (0–59) de un valor de fecha y hora. <br>**Ejemplo**: `SECOND("14:30:45")` <br>**Disponible en**: Tabla, Hoja
+: Extrae el componente de segundo (0–59) de un valor de fecha y hora. <br>**Ejemplo**: `SECOND("14:30:45")` <br>**Disponible en**: tabla, Sheet
 
 `DATEVALUE(date_string)`
-: Convierte una cadena de fecha en un valor de fecha. <br>**Ejemplo**: `DATEVALUE("07/23/2024")` <br>**Disponible en**: Tabla, Hoja
+: Convierte una cadena de fecha en un valor de fecha. <br>**Ejemplo**: `DATEVALUE("07/23/2024")` <br>**Disponible en**: tabla, Sheet
 
 `EPOCHTODATE(timestamp, [unit])`
-: Convierte una marca de tiempo de época Unix en una fecha. `unit` usa `1` (segundos) de forma predeterminada; use `2` para milisegundos o `3` para microsegundos. <br>**Ejemplo**: `EPOCHTODATE(#"Timestamp", 2)` <br>**Disponible en**: Tabla, Hoja
+: Convierte una marca de tiempo de época Unix a una fecha. `unit` tiene como valor predeterminado `1` (segundos); use `2` para milisegundos o `3` para microsegundos. <br>**Ejemplo**: `EPOCHTODATE(#"Timestamp", 2)` <br>**Disponible en**: tabla, Sheet
 
 `EDATE(start_date, months)`
-: Devuelve la fecha que corresponde al número indicado de meses antes o después de una fecha de inicio. <br>**Ejemplo**: `EDATE("2023-01-15", 6)` <br>**Disponible en**: Tabla
+: Devuelve la fecha que es el número indicado de meses antes o después de una fecha de inicio. <br>**Ejemplo**: `EDATE("2023-01-15", 6)` <br>**Disponible en**: Sheet
 
 `EOMONTH(start_date, months)`
-: Devuelve el último día de un mes que es un número especificado de meses antes o después de una fecha determinada. <br>**Ejemplo**: `EOMONTH(DATE(2023, 12, 12), 0)` <br>**Disponible en**: Hoja
+: Devuelve el último día de un mes que es un número especificado de meses antes o después de una fecha determinada. <br>**Ejemplo**: `EOMONTH(DATE(2023, 12, 12), 0)` <br>**Disponible en**: Sheet
 
 `WEEKDAY(date, [type])`
-: Devuelve el día de la semana como un número. Tipo 1 (predeterminado) = dom–sáb (1–7), tipo 2 = lun–dom (1–7), tipo 3 = lun–dom (0–6). <br>**Ejemplo**: `WEEKDAY(DATE(2023, 12, 12))` <br>**Disponible en**: Tabla, Hoja
+: Devuelve el día de la semana como un número. Tipo 1 (predeterminado) = Dom–Sáb (1–7), tipo 2 = Lun–Dom (1–7), tipo 3 = Lun–Dom (0–6). <br>**Ejemplo**: `WEEKDAY(DATE(2023, 12, 12))` <br>**Disponible en**: tabla, Sheet
 
 `WEEKNUM(date, [type])`
-: Devuelve el número de semana de una fecha específica dentro del año. <br>**Ejemplo**: `WEEKNUM("2023-01-15")` <br>**Disponible en**: Tabla, Hoja
+: Devuelve el número de semana de una fecha específica dentro del año. <br>**Ejemplo**: `WEEKNUM("2023-01-15")` <br>**Disponible en**: tabla, Sheet
 
 ### Búsqueda y referencia {#lookup-and-reference}
 
 `VLOOKUP(search_key, range, index, [is_sorted])`
-: Busca un valor en la primera columna de un rango y devuelve un valor en la misma fila de una columna especificada. <br>**Ejemplo**: `VLOOKUP("Apple", A1:C10, 2, FALSE)` <br>**Disponible en**: Hoja
+: Busca un valor en la primera columna de un rango y devuelve un valor en la misma fila desde una columna especificada. <br>**Ejemplo**: `VLOOKUP("Apple", A1:C10, 2, FALSE)` <br>**Disponible en**: Sheet
 
 `HLOOKUP(search_key, range, index, [is_sorted])`
-: Busca un valor en la primera fila de un rango y devuelve un valor en la misma columna de una fila especificada. <br>**Ejemplo**: `HLOOKUP("Apple", A1:D3, 2, FALSE)` <br>**Disponible en**: Hoja
+: Busca un valor en la primera fila de un rango y devuelve un valor en la misma columna desde una fila especificada. <br>**Ejemplo**: `HLOOKUP("Apple", A1:D3, 2, FALSE)` <br>**Disponible en**: Sheet
 
 `INDEX(reference, row, [column])`
-: Devuelve el valor de un elemento en una tabla según los números de fila y columna. <br>**Ejemplo**: `INDEX(A1:D3, 2, 3)` <br>**Disponible en**: Hoja
+: Devuelve el valor de un elemento en una tabla según los números de fila y columna. <br>**Ejemplo**: `INDEX(A1:D3, 2, 3)` <br>**Disponible en**: Sheet
 
 `MATCH(search_key, range, [search_type])`
-: Devuelve la posición relativa de un elemento en una matriz que coincide con un valor especificado. <br>**Ejemplo**: `MATCH("Apple", A1:A4, 0)` <br>**Disponible en**: Hoja
+: Devuelve la posición relativa de un elemento en una lista que coincide con un valor especificado. <br>**Ejemplo**: `MATCH("Apple", A1:A4, 0)` <br>**Disponible en**: Sheet
 
 `CHOOSE(index, value1, value2, ...)`
-: Devuelve un valor de una lista según un índice. <br>**Ejemplo**: `CHOOSE(2, "A", "B", "C")` <br>**Disponible en**: Hoja
+: Devuelve un valor de una lista basado en un índice. <br>**Ejemplo**: `CHOOSE(2, "A", "B", "C")` <br>**Disponible en**: Sheet
 
 `ROW([reference])`
-: Devuelve el número de fila de una referencia. <br>**Ejemplo**: `ROW(A5) => 5` <br>**Disponible en**: Hoja
+: Devuelve el número de fila de una referencia. <br>**Ejemplo**: `ROW(A5) => 5` <br>**Disponible en**: Sheet
 
 `COLUMN([reference])`
-: Devuelve el número de columna de una referencia. <br>**Ejemplo**: `COLUMN(C1) => 3` <br>**Disponible en**: Hoja
+: Devuelve el número de columna de una referencia. <br>**Ejemplo**: `COLUMN(C1) => 3` <br>**Disponible en**: Sheet
 
 ### Estadística {#statistical}
 
 `AVERAGE(value1, [value2, ...])`
-: Devuelve el valor promedio numérico en un conjunto de datos, ignorando el texto. <br>**Ejemplo**: `AVERAGE('APM'#"duration")` <br>**Disponible en**: Hoja
+: Devuelve el valor promedio numérico en un conjunto de datos, ignorando el texto. <br>**Ejemplo**: `AVERAGE('APM'#"duration")` <br>**Disponible en**: Sheet
 
 `AVERAGEIF(range, criteria, [average_range])`
-: Devuelve el promedio de las celdas que cumplen con un criterio especificado. <br>**Ejemplo**: `AVERAGEIF('APM'#"env", "prod", 'APM'#"duration")` <br>**Disponible en**: Hoja
+: Devuelve el promedio de las celdas que cumplen con un criterio especificado. <br>**Ejemplo**: `AVERAGEIF('APM'#"env", "prod", 'APM'#"duration")` <br>**Disponible en**: Sheet
 
 `AVERAGEIFS(average_range, range1, criteria1, ...)`
-: Devuelve el promedio de las celdas que cumplen con múltiples criterios. <br>**Ejemplo**: `AVERAGEIFS('APM'#"duration", 'APM'#"env", "prod", 'APM'#"service", "web")` <br>**Disponible en**: Hoja
+: Devuelve el promedio de las celdas que cumplen con múltiples criterios. <br>**Ejemplo**: `AVERAGEIFS('APM'#"duration", 'APM'#"env", "prod", 'APM'#"service", "web")` <br>**Disponible en**: Sheet
 
 `MEDIAN(value1, [value2, ...])`
-: Devuelve la mediana (valor central) de un conjunto de datos. Si el conjunto de datos tiene un número par de valores, devuelve el promedio de los dos valores centrales. <br>**Ejemplo**: `MEDIAN('APM'#"duration")` <br>**Disponible en**: Hoja
+: Devuelve la mediana (valor central) de un conjunto de datos. Si el conjunto de datos tiene un número par de valores, devuelve el promedio de los dos valores centrales. <br>**Ejemplo**: `MEDIAN('APM'#"duration")` <br>**Disponible en**: Sheet
 
 `MODE(value1, [value2, ...])`
-: Devuelve el valor que ocurre con mayor frecuencia en un conjunto de datos. <br>**Ejemplo**: `MODE('Logs'#"status_code")` <br>**Disponible en**: Hoja
+: Devuelve el valor que aparece con mayor frecuencia en un conjunto de datos. <br>**Ejemplo**: `MODE('Logs'#"status_code")` <br>**Disponible en**: Sheet
 
 `PERCENTILE(data, percentile)`
-: Devuelve el valor en un percentil dado de un conjunto de datos utilizando interpolación lineal. <br>**Ejemplo**: `PERCENTILE('APM'#"duration", 0.95)` <br>**Disponible en**: Hoja
+: Devuelve el valor en un percentil determinado de un conjunto de datos mediante interpolación lineal. <br>**Ejemplo**: `PERCENTILE('APM'#"duration", 0.95)` <br>**Disponible en**: Sheet
 
 `STDEV(value1, [value2, ...])`
-: Calcula la desviación estándar de un conjunto de datos de muestra. <br>**Ejemplo**: `STDEV('APM'#"duration")` <br>**Disponible en**: Hoja
+: Calcula la desviación estándar de un conjunto de datos de muestra. <br>**Ejemplo**: `STDEV('APM'#"duration")` <br>**Disponible en**: Sheet
 
 `VAR(value1, [value2, ...])`
-: Calcula la varianza muestral de un conjunto de datos. <br>**Ejemplo**: `VAR('APM'#"duration")` <br>**Disponible en**: Hoja de cálculo
+: Calcula la varianza muestral de un conjunto de datos. <br>**Ejemplo**: `VAR('APM'#"duration")` <br>**Disponible en**: Sheet
 
 `FORECAST(x, data_y, data_x)`
-: Predice un valor futuro utilizando valores existentes y regresión lineal. <br>**Ejemplo**: `FORECAST(5, {1,2,3,4}, {10,20,30,40})` <br>**Disponible en**: Hoja
+: Predice un valor futuro utilizando valores existentes y regresión lineal. <br>**Ejemplo**: `FORECAST(5, {1,2,3,4}, {10,20,30,40})` <br>**Disponible en**: Sheet
 
 `SUMPRODUCT(array1, [array2, ...])`
-: Multiplica los elementos correspondientes en matrices y devuelve la suma de esos productos. <br>**Ejemplo**: `SUMPRODUCT({1,2,3}, {4,5,6}) => 32` <br>**Disponible en**: Hoja de cálculo
+: Multiplica los elementos correspondientes en matrices y devuelve la suma de esos productos. <br>**Ejemplo**: `SUMPRODUCT({1,2,3}, {4,5,6}) => 32` <br>**Disponible en**: Sheet
 
-### Financiero {#financial}
+### Financiera {#financial}
 
 `PMT(rate, number_of_periods, present_value, [future_value], [end_or_beginning])`
-: Calcula el pago de un préstamo basado en pagos constantes y una tasa de interés constante. <br>**Ejemplo**: `PMT(0.05/12, 60, 20000)` <br>**Disponible en**: Hoja
+: Calcula el pago de un préstamo basado en pagos constantes y una tasa de interés constante. <br>**Ejemplo**: `PMT(0.05/12, 60, 20000)` <br>**Disponible en**: Sheet
 
 `PV(rate, number_of_periods, payment_amount, [future_value], [end_or_beginning])`
-: Calcula el valor presente de una inversión. <br>**Ejemplo**: `PV(0.05/12, 60, -377.42)` <br>**Disponible en**: Hoja
+: Calcula el valor presente de una inversión. <br>**Ejemplo**: `PV(0.05/12, 60, -377.42)` <br>**Disponible en**: Sheet
 
 `FV(rate, number_of_periods, payment_amount, [present_value], [end_or_beginning])`
-: Calcula el valor futuro de una inversión basado en pagos periódicos constantes y una tasa de interés constante. <br>**Ejemplo**: `FV(0.06/12, 240, -500)` <br>**Disponible en**: Hoja
+: Calcula el valor futuro de una inversión basado en pagos periódicos constantes y una tasa de interés constante. <br>**Ejemplo**: `FV(0.06/12, 240, -500)` <br>**Disponible en**: Sheet
 
 `NPV(discount, cashflow1, [cashflow2, ...])`
-: Calcula el valor presente neto de una inversión basado en una tasa de descuento y una serie de flujos de efectivo futuros. <br>**Ejemplo**: `NPV(0.10, -50000, 8000, 9200, 10400)` <br>**Disponible en**: Hoja
+: Calcula el valor presente neto de una inversión basado en una tasa de descuento y una serie de flujos de efectivo futuros. <br>**Ejemplo**: `NPV(0.10, -50000, 8000, 9200, 10400)` <br>**Disponible en**: Sheet
 
 `IRR(cashflow_amounts, [rate_guess])`
 : Calcula la tasa interna de retorno para una serie de flujos de efectivo. <br>**Ejemplo**: `IRR({-50000, 8000, 9200, 10400, 11600, 12800})` <br>**Disponible en**: Hoja
 
 `NPER(rate, payment_amount, present_value, [future_value], [end_or_beginning])`
-: Calcula el número de periodos para una inversión o préstamo. <br>**Ejemplo**: `NPER(0.05/12, -377.42, 20000)` <br>**Disponible en**: Hoja
+: Calcula el número de períodos para una inversión o préstamo. <br>**Ejemplo**: `NPER(0.05/12, -377.42, 20000)` <br>**Disponible en**: Hoja
 
 `RATE(number_of_periods, payment_amount, present_value, [future_value], [end_or_beginning], [guess])`
-: Calcula la tasa de interés por periodo de una anualidad. <br>**Ejemplo**: `RATE(48, -200, 8000)` <br>**Disponible en**: Hoja
+: Calcula la tasa de interés por período de una anualidad. <br>**Ejemplo**: `RATE(48, -200, 8000)` <br>**Disponible en**: Hoja
 
 `RRI(number_of_periods, present_value, future_value)`
 : Calcula la tasa de interés equivalente para el crecimiento de una inversión. <br>**Ejemplo**: `RRI(10, 100, 200)` <br>**Disponible en**: Hoja
@@ -332,12 +332,12 @@ Utilice funciones y operadores en Sheets para analizar y transformar sus datos. 
 ### Información {#info}
 
 `ISBLANK(value)`
-: Prueba si una celda está en blanco. <br>**Ejemplo**: `ISBLANK(A1)` <br>**Disponible en**: Hoja
+: Comprueba si una celda está en blanco. <br>**Ejemplo**: `ISBLANK(A1)` <br>**Disponible en**: Hoja
 
 `ISNUMBER(value)`
-: Prueba si un valor es un número. <br>**Ejemplo**: `ISNUMBER(123)` <br>**Disponible en**: Hoja
+: Comprueba si un valor es un número. <br>**Ejemplo**: `ISNUMBER(123)` <br>**Disponible en**: Hoja
 
 `TYPE(value)`
 : Devuelve el tipo de datos de un valor como un número (1 = número, 2 = texto, 4 = lógico, 16 = error). <br>**Ejemplo**: `TYPE(123) => 1` <br>**Disponible en** : Hoja
 
-[1]: /es/sheets/#sheet-preview
+[1]: /es/sheets/#sheet

@@ -1,57 +1,55 @@
 ---
-description: Conoce el Asistente de seguimiento de errores.
+description: Aprenda sobre el Error Tracking Assistant.
 further_reading:
 - link: /monitors/types/error_tracking
   tag: Documentación
-  text: Más información sobre el uso del contexto de ejecución en el seguimiento de
-    errores
+  text: Aprenda a usar el contexto de ejecución en Error Tracking.
 - link: /tracing/error_tracking
   tag: Documentación
-  text: Más información sobre el seguimiento de errores para los servicios de backend
+  text: Obtenga información sobre Error Tracking para servicios backend
 is_beta: true
 private: true
-title: Asistente de seguimiento de errores
+title: Error Tracking Assistant
 ---
+{{< callout url="#" btn_hidden="true" >}}
+El Error Tracking Assistant para APM Error Tracking está en versión preliminar. Para solicitar acceso, comuníquese con Soporte en support@datadoghq.com.
+{{< /callout >}}
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-El Asistente de seguimiento de errores para el seguimiento de errores de APM está en la versión beta privada. Para solicitar acceso, comunícate con Soporte en support@datadoghq.com.
-{{< /beta-callout >}}
+## Descripción general {#overview}
 
-## Información general
+El Error Tracking Assistant en APM Error Tracking proporciona un resumen de sus errores y le ayuda a resolverlos con casos de prueba y correcciones sugeridas. 
 
-El Asistente de seguimiento de errores en el seguimiento de errores de APM proporciona un resumen de los errores y te ayuda a resolverlos con casos de tests y correcciones sugeridos.
+{{< img src="tracing/error_tracking/error_tracking_assistant.mp4" video="true" alt="Contexto de ejecución del Explorador de Error Tracking" style="width:100%" >}}
 
-{{< img src="tracing/error_tracking/error_tracking_assistant.mp4" video="true" alt="Contexto de ejecución de Error Tracking Explorer" style="width:100%" >}}
-
-## Requisitos y configuración
-Lenguajes admitidos
+## Requisitos y configuración {#requirements-and-setup}
+Idiomas admitidos
 : Python, Java
 
-El Asistente de seguimiento de errores requiere [integración de código fuente][3]. Para activar la integración de código fuente:
+El Error Tracking Assistant requiere [Integración de código fuente][3]. Para habilitar la Integración de código fuente:
 
-1. Ve a **Integrations** (Integraciones) y elige **Link Source Code** (Enlazar código fuente) en la barra de navegación superior.
-2. Sigue los pasos para asociar un commit a tu telemetría y configurar tu repositorio de GitHub.
+1. Vaya a {{< ui >}}Integrations{{< /ui >}} y elija {{< ui >}}Link Source Code{{< /ui >}} en la barra de navegación superior.
+2. Siga los pasos para asociar una confirmación con su telemetría y configurar su repositorio de GitHub.
 
-{{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="Configuración de la integración del código fuente de APM" style="width:80%" >}}
+{{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="Configuración de la Integración de código fuente de APM" style="width:80%" >}}
 
-### Configuración adicional recomendada
-- A fin de mejorar las sugerencias para Python proporcionando valores de variables de producción reales al asistente, inscríbete en [Contexto de ejecución de Python Beta][1].
-- Para enviar casos de test y correcciones a tu IDE, haz clic en **Apply in VS Code** (Aplicar en VS Code) en cualquier sugerencia generada y sigue la configuración guiada para instalar la extensión de Datadog para VS Code.
+### Configuración adicional recomendada {#recommended-additional-setup}
+- Para mejorar las sugerencias para Python proporcionando valores de variables de producción reales al Asistente, inscríbase en la [Beta de contexto de ejecución de Python][1].
+- Para enviar casos de prueba y correcciones a su IDE, haga clic en {{< ui >}}Apply in VS Code{{< /ui >}} en cualquier sugerencia generada y siga la configuración guiada para instalar la extensión de Datadog para VS Code.
 
-## Empezando
-1. Ve a [**APM** > **Error Tracking** (Seguimiento de errores)][4].
-2. Haz clic en cualquier problema del seguimiento de errores para ver la nueva sección **Generate test & fix** (Generar test y corrección).
+## Primeros pasos {#getting-started}
+1. Navegue a [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][4].
+2. Haga clic en cualquier problema de Error Tracking para visualizar la nueva sección {{< ui >}}Generate test & fix{{< /ui >}}.
 
-{{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Asistente de seguimiento de errores" style="width:80%" >}}
+{{< img src="tracing/error_tracking/error_tracking_assistant.png" alt="Error Tracking Assistant" style="width:80%" >}}
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Si no ves las sugerencias generadas:
+Si no ve las sugerencias generadas:
 
-1. Asegúrate de que [la integración del código fuente][2] con la integración de GitHub esté correctamente configurada.
-2. Mejora las sugerencias del Asistente de seguimiento de errores inscribiéndote en [Contexto de ejecución de Python Beta][1].
+1. Asegúrese de que la [Integración de código fuente][2] con la integración de GitHub esté configurada correctamente.
+2. Mejore las sugerencias del Error Tracking Assistant inscribiéndose en la [Beta de contexto de ejecución de Python][1].
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

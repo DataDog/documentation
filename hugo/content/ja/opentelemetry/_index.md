@@ -43,7 +43,7 @@ further_reading:
   text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
 - link: https://www.datadoghq.com/blog/opentelemetry-runtime-metrics-datadog/
   tag: ブログ
-  text: Datadog APM で OTel インスツルメンテーションさ れたアプリのランタイムメトリクスを監視する
+  text: Datadog APM で OTel インスツルメンテーションされたアプリのランタイムメトリクスを監視する
 - link: https://www.datadoghq.com/blog/otel-deployments/
   tag: ブログ
   text: OpenTelemetry のデプロイメントを選択する方法
@@ -53,9 +53,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/understanding-opentelemetry
   tag: ラーニングセンター
   text: OpenTelemetry について理解する
+- link: https://www.datadoghq.com/blog/control-trace-volume-with-opentelemetry-tail-based-sampling/
+  tag: ブログ
+  text: OpenTelemetryのテールベースサンプリングでトレース量を制御します
 title: Datadog の OpenTelemetry
 ---
-{{< learning-center-callout hide_image="true" header="学習センターで「Datadog を利用した OpenTelemetry の紹介」をお試しくださいer" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
+{{< learning-center-callout hide_image="true" header="学習センターで「Datadog を利用した OpenTelemetry の紹介」をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/otel-with-datadog">}}
   OpenTelemetry を構成して、Datadog にメトリクス、トレース、ログをエクスポートし、プラットフォームで収集したデータを探索する方法について説明します。
 {{< /learning-center-callout >}}
 
@@ -76,14 +79,14 @@ OpenTelemetry をすでに使用しているか、または導入を検討して
 
 ### 重要な決定{#key-decisions}
 
-Datadog 利用を伴う OpenTelemetry を使用する際には、2つの重要な決定を下す必要があります。
+Datadog 利用を伴う OpenTelemetry を使用する際には、2 つの重要な決定を下す必要があります。
 
-- [アプリケーションにインスツルメンテーションを施す方法](#instrument-your-applications)
+- [アプリケーションのインスツルメンテーション](#instrument-your-applications)
 - [データを Datadog に送信する方法](#send-opentelemetry-data-to-datadog)
 
 利用可能な機能は、これらの選択に依存します。たとえば、Datadog SDK と共に OpenTelemetry API を使用する場合、OpenTelemetry SDK だけを使用するよりも多くの Datadog 機能にアクセスできます。
 
-詳細については、[機能の互換性][9]をお読みください。
+詳細については、[機能の互換性][9] をお読みください。
 
 ## アプリケーションのインスツルメンテーション {#instrument-your-applications}
 
@@ -93,7 +96,7 @@ OpenTelemetry と Datadog を使ってアプリケーションにインスツル
 - **OpenTelemetry API**: Datadog の SDK 実装と共に OpenTelemetry API を使用します。
 - **OpenTelemetry インスツルメンテーションライブラリ**: Datadog の監視可能性を追加のフレームワークや技術に拡張します。
 
-詳細については、[アプリケーションのインスツルメンテーション][8]をご覧ください。
+詳細については、[アプリケーションのインスツルメンテーション][8] をご覧ください。
 
 ## OpenTelemetry のデータを Datadog に送信する {#send-opentelemetry-data-to-datadog}
 
@@ -134,7 +137,7 @@ OpenTelemetry と Datadog を使ってアプリケーションにインスツル
 
 ### 追加のセットアップオプション {#additional-setup-options}
 
-直接 OTLP 取り込みなど、その他のセットアップオプションについて詳しくは、[データを Datadog に送信する][7]を参照してください。
+直接 OTLP 取り込みなど、その他のセットアップオプションについて詳しくは、[データを Datadog に送信する][7] を参照してください。
 
 ## 参考資料 {#further-reading}
 

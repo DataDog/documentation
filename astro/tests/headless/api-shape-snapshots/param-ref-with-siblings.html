@@ -1,0 +1,100 @@
+<!-- param-ref-with-siblings: /api/latest/rendering-shapes/list-org-group-policies/ -->
+<div class="api-endpoint__section _api-endpoint__section_071384" data-api-section="arguments">
+  <h3>Arguments</h3>
+  <div id="schema-table-X3" class="schema-table">
+    <h4>Query Strings</h4>
+    <div class="schema-table__table _schema-table__table_d7636a">
+      <div class="schema-table__columns _schema-table__columns_d7636a">
+        <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+        <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+        <div class="schema-table__columns-description _schema-table__columns-description_d7636a">Description</div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="filter[org_group_id]" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">filter[org_group_id]</code
+            ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">string</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>Filter policies by org group ID.</p>
+          </div>
+        </div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="filter[policy_type]" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">filter[policy_type]</code></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>Filter policies by policy type. Supported values are <code>org_config</code> and <code>role</code>.</p>
+          </div>
+          <div class="schema-table__enum _schema-table__enum_d7636a">
+            Allowed enum values: <code>org_config, role</code>
+          </div>
+        </div>
+      </div>
+    </div>
+    <astro-island
+      uid="X1"
+      ssr=""
+      client="idle"
+      before-hydration-url="astro:scripts/before-hydration.js"
+      opts='{"name":"ApiSchemaTableNav","value":true}'
+      await-children=""
+      ><span hidden="" aria-hidden="true"></span><!--astro:end--></astro-island
+    >
+  </div>
+</div>
+<div
+  id="api-code-example-X4-panel-0"
+  role="tabpanel"
+  class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+>
+  <div class="api-code-example__card _api-code-example__card_c15178">
+    <div class="api-code-example__label _api-code-example__label_c15178">List org group policies</div>
+    <div data-region="us" class="api-code-example__code-block _api-code-example__code-block_c15178">
+      <div id="code-block-X5" class="code-block _code-block_961fb8" data-language="bash">
+        <div id="code-block-X5-content" class="code-block__content _code-block__content_961fb8">
+          <astro-island
+            uid="X2"
+            ssr=""
+            client="idle"
+            before-hydration-url="astro:scripts/before-hydration.js"
+            opts='{"name":"CopyButton","value":true}'
+            await-children=""
+            ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8"><span>Copy</span></button
+            ><!--astro:end--></astro-island
+          >
+          <div class="code-block__highlighted _code-block__highlighted_961fb8">
+            <pre
+              class="shiki datadog-chroma"
+              style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+              tabindex="0"
+            ><code><span class="line"><span style="color:var(--color-syntax-comment)"># Required query arguments</span></span>
+<span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> filter_org_group_id=</span><span style="color:var(--color-syntax-string)">"X6-e5f6-7890-abcd-ef0123456789"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--color-syntax-comment)"># Set your Datadog site and credentials</span></span>
+<span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_SITE=</span><span style="color:var(--color-syntax-string)">"datadoghq.com"</span></span>
+<span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_API_KEY=</span><span style="color:var(--color-syntax-string)">"&lt;DD_API_KEY&gt;"</span></span>
+<span class="line"><span style="color:var(--color-syntax-keyword)">export</span><span style="color:var(--color-panel-text)"> DD_APP_KEY=</span><span style="color:var(--color-syntax-string)">"&lt;DD_APP_KEY&gt;"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:var(--color-panel-text)">curl </span><span style="color:var(--color-syntax-string)">-X</span><span style="color:var(--color-syntax-string)"> GET</span><span style="color:var(--color-syntax-string)"> "https://api.</span><span style="color:var(--color-panel-text)">${DD_SITE}</span><span style="color:var(--color-syntax-string)">/api/v2/org_group_policies?filter%5Borg_group_id%5D=</span><span style="color:var(--color-panel-text)">${filter_org_group_id}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"Accept: application/json"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-API-KEY: </span><span style="color:var(--color-panel-text)">${DD_API_KEY}</span><span style="color:var(--color-syntax-string)">"</span><span style="color:var(--color-syntax-string)"> \</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">-H </span><span style="color:var(--color-syntax-string)">"DD-APPLICATION-KEY: </span><span style="color:var(--color-panel-text)">${DD_APP_KEY}</span><span style="color:var(--color-syntax-string)">"</span></span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

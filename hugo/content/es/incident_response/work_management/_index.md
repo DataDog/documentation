@@ -31,6 +31,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-service-management/
   tag: Blog
   text: Garantice una alta disponibilidad del servicio con Datadog Service Management
+- link: https://www.datadoghq.com/blog/work-management/
+  tag: Blog
+  text: Centralice el trabajo humano y de agent con Datadog Work Management
 title: Work Management
 ---
 <div class="alert alert-info">Work Management se conocía anteriormente como Case Management. Los puntos de conexión de la API y los permisos aún utilizan la <code>case</code> terminología.</div>

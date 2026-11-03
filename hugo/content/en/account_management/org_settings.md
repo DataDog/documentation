@@ -81,6 +81,13 @@ If your application does not have an existing Datadog integration, and you don't
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
 
+### MCP Server
+
+Manage how AI agents and tools access your organization's Datadog data through the [Datadog MCP Server][18]:
+
+- Enable or disable [organization-wide access][19] to the MCP Server and its tools, and separately, write access for tools that create or modify resources.
+- Configure [redirect URLs][20] for OAuth authentication with the MCP Server.
+
 ## Security
 
 ### Safety Center
@@ -174,3 +181,6 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [15]: /account_management/org_settings/mobile_third_party_access
 [16]: /help/
 [17]: /account_management/org_settings/smtp_configuration
+[18]: /mcp_server/
+[19]: /mcp_server/setup/#required-permissions
+[20]: /mcp_server/setup/#adding-oauth-clients

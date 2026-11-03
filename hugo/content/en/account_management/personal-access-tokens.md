@@ -39,10 +39,12 @@ For Service Access Tokens, see [Service Access Tokens][7].
 ## Create a Personal Access Token
 
 1. Navigate to [**Personal Settings** > **Access Tokens**][1].
-2. Click {{< ui >}}+ New Access Token{{< /ui >}}.
+2. Click {{< ui >}}\+ New Access Token{{< /ui >}}.
 3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
 4. Select an {{< ui >}}Expiration Date{{< /ui >}}. The minimum expiration is 24 hours and the maximum is one year from creation.
 5. Click {{< ui >}}Select Scopes{{< /ui >}} to choose the scopes that define what this token can access. At least one scope is required. Grant only the permissions your workflow requires, then click {{< ui >}}Save{{< /ui >}}.
+
+**Note:** Each user can have up to 500 PATs.
 
 <div class="alert alert-warning">Datadog displays the token secret only once at creation time. Copy and store it securely. You cannot retrieve it later.</div>
 
@@ -55,7 +57,7 @@ PATs support two authentication methods.
 Pass the PAT as a Bearer token in the `Authorization` header. This method does not require an API key:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "Authorization: Bearer <YOUR_PAT>"
 ```
 
@@ -64,7 +66,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 Pass the PAT in the `dd-application-key` header. This is useful for migrating existing integrations that already use the application key header format:
 
 ```bash
-curl -X GET "https://api.datadoghq.com/api/v2/users" \
+curl -X GET "{{< region-param key="dd_api" >}}/api/v2/users" \
   -H "dd-application-key: <YOUR_PAT>"
 ```
 
@@ -133,7 +135,7 @@ PATs use the same permissions as application keys:
 |------------|-------------|
 | `user_app_keys` | Create and manage your own PATs |
 | `org_app_keys_read` | View PATs for all users in the organization |
-| `org_app_keys_write` | Create, edit, and revoke PATs for any user in the organization |
+| `org_app_keys_write` | Edit and revoke PATs for any user in the organization |
 
 For more information about permissions, see [Role Based Access Control][3].
 

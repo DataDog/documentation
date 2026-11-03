@@ -1,6 +1,6 @@
 ---
 title: Manage Incident Management with Terraform
-description: Use Terraform to manage Incident Management configuration, including incident types, property fields, responder types, notification rules, postmortem templates, and notification templates.
+description: Use Terraform to manage Incident Management configuration, including incident types, property fields, responder roles, notification rules, postmortem templates, and notification templates.
 disable_toc: false
 further_reading:
 - link: "/incident_response/incident_management/"
@@ -28,7 +28,7 @@ You can also [import][2] your existing incident type, notification, and postmort
 | --- | --- |
 | [Incident types](#incident-types) (`datadog_incident_type`) | The category of incident (for example, "Security Incident" or "Customer Impacting"). Also includes the settings on the [Information][19] page, such as private incidents and incident deletion. Anchors everything else in this table. |
 | [Property fields](#property-fields) (`datadog_incident_user_defined_field`) | Structured data responders fill out on an incident, such as root cause or affected region. Also used to configure severity and status levels on the [Information][19] page. |
-| [Responder types](#responder-types) (`datadog_incident_user_defined_role`) | Custom roles beyond the built-in Incident Commander and Responder. |
+| [Responder roles](#responder-roles) (`datadog_incident_user_defined_role`) | Custom roles beyond the built-in Incident Commander and Responder. |
 | [Notification rules](#notification-rules) (`datadog_incident_notification_rule`) | Rules that decide when and who gets notified as incidents change. |
 | [Postmortem templates](#postmortem-templates) (`datadog_incident_postmortem_template`) | Where and how a postmortem document is generated for an incident type. |
 | [Notification templates](#notification-templates) (`datadog_incident_notification_template`) | Reusable message content for incident notifications. |
@@ -49,11 +49,11 @@ Property fields let responders capture structured data on an incident, for examp
 
 To learn how this works in Datadog, see [Property Fields][9].
 
-## Responder types
+## Responder roles
 
-Responder types define the roles people can be assigned during an incident. Examples include Incident Commander or a custom role like Comms Lead. Use the [incident user-defined role resource][12] to create custom responder types. Scope each one to an incident type.
+Responder roles define the roles people can be assigned during an incident. Examples include Incident Commander or a custom role like Comms Lead. Use the [incident user-defined role resource][12] to create custom responder roles. Scope each one to an incident type.
 
-To learn how this works in Datadog, see [Responder Types][11].
+To learn how this works in Datadog, see [Responder Roles][11].
 
 ## Notification rules
 
@@ -151,7 +151,7 @@ resource "datadog_incident_notification_rule" "sev1_sev2_created" {
 [8]: /incident_response/incident_management/setup_and_configuration/information/#private-incidents-incident-visibility
 [9]: /incident_response/incident_management/setup_and_configuration/property_fields/
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/incident_user_defined_field
-[11]: /incident_response/incident_management/setup_and_configuration/responder_types/
+[11]: /incident_response/incident_management/setup_and_configuration/responder_roles/
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/incident_user_defined_role
 [13]: /incident_response/incident_management/setup_and_configuration/templates/#messages
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/incident_notification_template

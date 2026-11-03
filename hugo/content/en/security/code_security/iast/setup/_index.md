@@ -632,20 +632,36 @@ The minimum tracer version to get all supported code security capabilities for .
 
 #### Supported .NET versions
 
-| .NET Framework Version  | Microsoft End of Life | Support level       | Package version     |
-| ----------------------- | --------------------- | ------------------- | ------------------- |
-| 4.8                     |                       | GA                  | latest              |
-| 4.7.2                   |                       | GA                  | latest              |
-| 4.7                     |                       | GA                  | latest              |
-| 4.6.2                   |                       | GA                  | latest              |
-| 4.6.1                   | 04/26/2022            | GA                  | latest              |
+All versions listed in this section are generally available (GA).
 
+Runtime Code Analysis (IAST) supports the following .NET and .NET Core runtimes:
+
+| .NET Version  | Microsoft End of Life | Package version    |
+| ------------- | --------------------- | ------------------ |
+| .NET 10       | _November 14, 2028_   | latest (>= 3.31.0) |
+| .NET 9        | _November 10, 2026_   | latest (>= 3.6.0)  |
+| .NET 8        | _November 10, 2026_   | latest (>= 2.42.0) |
+| .NET 7        | May 14, 2024          | latest (>= 2.42.0) |
+| .NET 6        | November 12, 2024     | latest (>= 2.42.0) |
+| .NET 5        | May 10, 2022          | latest (>= 2.42.0) |
+| .NET Core 3.1 | December 13, 2022     | latest (>= 2.42.0) |
+
+Runtime Code Analysis (IAST) supports the following .NET Framework versions:
+
+| .NET Framework Version  | Microsoft End of Life | Package version     |
+| ----------------------- | --------------------- | ------------------- |
+| 4.8                     |                       | latest              |
+| 4.7.2                   |                       | latest              |
+| 4.7                     |                       | latest              |
+| 4.6.2                   |                       | latest              |
+| 4.6.1                   | April 26, 2022        | latest              |
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, ARM64
 - Alpine Linux (musl) x86-64, ARM64
-- macOS (Darwin) x86-64, ARM64
 - Windows (msvc) x86, x86-64
+
+For more information on the runtimes and operating systems that the .NET tracer supports, see [.NET and .NET Core Compatibility Requirements][45] and [.NET Framework Compatibility Requirements][46].
 
 #### Web framework compatibility
 ##### Code Security capability notes
@@ -655,6 +671,7 @@ These are supported on the following architectures:
 
 | Framework               | Runtime Code Analysis (IAST)     |
 | ----------------------- | -------------------------------- |
+| ASP.NET Core (including minimal APIs) | <i class="icon-check-bold"></i>  |
 | ASP.NET MVC             | <i class="icon-check-bold"></i>  |
 | ASP.NET Web API 2       | <i class="icon-check-bold"></i>  |
 
@@ -694,6 +711,8 @@ These are supported on the following architectures:
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
 [3]: /remote_configuration#enabling-remote-configuration
+[45]: /tracing/trace_collection/compatibility/dotnet-core/
+[46]: /tracing/trace_collection/compatibility/dotnet-framework/
 
 
 {{% /collapse-content %}}

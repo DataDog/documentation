@@ -127,6 +127,7 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/electron/setup/" src="integrations_logos/rum-electron_large.svg" alt="Electron" >}}
 {{< /card-grid >}}
 
 ### Capabilities and platform support
@@ -294,7 +295,7 @@ You must have edit access to restore general access to a restricted application.
 [9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
 [11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
-[12]: /session_replay/browser/
+[12]: /session_replay/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
 [15]: /real_user_monitoring/application_monitoring/browser/setup/

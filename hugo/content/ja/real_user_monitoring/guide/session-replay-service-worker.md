@@ -1,37 +1,37 @@
 ---
 aliases:
 - /ja/real_user_monitoring/faq/session_replay_service_worker/
+description: Session Replay のサードパーティサービスワーカーの権限を設定し、最適なパフォーマンスとデータセキュリティを確保します。
 further_reading:
-- link: /real_user_monitoring/session_replay/browser/
+- link: /session_replay/
   tag: ドキュメント
-  text: セッションリプレイについて
-title: サードパーティーのサービスワーカーによるセッションリプレイの許可
+  text: Session Replay について
+title: サードパーティサービスワーカーによる Session Replay を許可する
 ---
+## 概要 {#overview}
 
-## 概要
+Session Replay は、プライバシーを保護し、データの安全性を保証しながら、最高の体験を提供するために、別のドメイン `session-replay-datadoghq.com` にあるサービスワーカーを使用しています。
 
-セッションリプレイは、お客様のプライバシーを保護し、データの安全性を保証しながら、最高の体験を提供するために、別のドメイン `session-replay-datadoghq.com` にあるサービスワーカーを使用しています。
+ブラウザの設定でサードパーティのクッキーをブロックしている場合、またはブラウザの初期設定でブロックしている場合、サービスワーカーが正しく登録できないことがあります。
 
-お客様がブラウザの設定でサードパーティーのクッキーをブロックしている場合、またはブラウザの初期設定でブロックしている場合、サービスワーカーが正しく登録できないことがあります。
+### 例外を許可する {#allow-an-exception}
 
-### 例外を許可する
-
-Datadog では、セッションリプレイのサービスワーカーが正しく機能するように、サードパーティーのクッキーブロックを例外化することを推奨しています。
+Datadog では、Session Replay のサービスワーカーが正しく機能するように、サードパーティのクッキーブロックを例外化することを推奨しています。
 
 Google Chrome を使用している場合は、以下の手順に従ってください。この例外的なワークフローは、Firefox や、Brave、Edge を含むその他のデスクトップブラウザにも適用されます。
 
-1. Web ブラウザで、ページの URL の左側にある **Lock** アイコンをクリックします。
-2. **Cookies** をクリックします。ポップアップモーダルが表示されます。
+1. Web ブラウザで、ページの URL の左側にある {{< ui >}}Lock{{< /ui >}} アイコンをクリックします。
+2. {{< ui >}}Cookies{{< /ui >}} をクリックします。ポップアップモーダルが表示されます。
 
-   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="セッションリプレイサードパーティサービスワーカーを許可する" >}}
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="サードパーティサービスワーカーによる Session Replay を許可する" >}}
 
-3. **Blocked** タブを開き、ページの一覧から `session-replay-datadoghq.com` を選択します。
-4. **Allow** と **Done** をクリックします。
+3. {{< ui >}}Blocked{{< /ui >}} タブに移動し、ページのリストから `session-replay-datadoghq.com` を選択します。
+4. {{< ui >}}Allow{{< /ui >}} と {{< ui >}}Done{{< /ui >}} をクリックします。
 
-   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="セッションリプレイサードパーティサービスワーカーを許可する" >}}
+   {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="サードパーティサービスワーカーによる Session Replay を許可する" >}}
 
 クッキーの設定を更新したら、ページを再読み込みしてください。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,0 +1,17 @@
+# dd-octo-sts policy — allows PR creation for the translations Lambda via the guacbot_token_tool Lambda.
+#
+# Grants Lambda write access to push branches and open pull requests against corp-hugo.
+#
+# The issuer is the AWS workload identity endpoint for account 520699495846 
+# and the subject is the function's execution role ARN.
+#
+# The role is allowlisted in the dedicated dd-guacbot pool in DataDog/dd-source:
+# .../static-config/enterprises/ddoghq/pools/dd-guacbot/datacenters/build.prod/allow.json
+
+issuer: https://a18b3735-48a4-4bcd-a183-61e7ffa6743c.tokens.sts.global.api.aws
+
+subject: "arn:aws:iam::520699495846:role/webops-lambda-production-guacbot-token-tools"
+
+permissions:
+  contents: write
+  pull_requests: write

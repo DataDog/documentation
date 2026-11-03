@@ -1,5 +1,5 @@
 ---
-title: Trace-Level Evaluations
+title: Trace-Level Evaluators
 aliases:
 - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations/
 - /llm_observability/configure/evaluations/llm_as_a_judge_evaluations/trace_level_evaluations/
@@ -7,7 +7,7 @@ description: Run a custom LLM-as-a-judge across an entire trace, with examples o
 further_reading:
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations"
   tag: "Documentation"
-  text: "Custom LLM-as-a-Judge Evaluations"
+  text: "Custom LLM-as-a-Judge Evaluators"
 - link: "/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/prompt_templating"
   tag: "Documentation"
   text: "Prompt Templating"
@@ -16,9 +16,9 @@ further_reading:
   text: "Agent Observability terms and concepts"
 ---
 
-A trace-level evaluation runs once per trace, with every span in the trace available to the LLM judge in a single prompt. This is the right choice when the answer to a question depends on the interaction between spans—for example, whether an agent reached its goal, whether tools were called in the correct order, or whether a multi-turn conversation stayed on topic.
+A trace-level evaluator runs once per trace, with every span in the trace available to the LLM judge in a single prompt. This is the right choice when the answer to a question depends on the interaction between spans—for example, whether an agent reached its goal, whether tools were called in the correct order, or whether a multi-turn conversation stayed on topic.
 
-Span-level evaluations, by contrast, run once per matching span and only see that span's input and output.
+Span-level evaluators, by contrast, run once per matching span and only see that span's input and output.
 
 ## When to use trace scope over span scope
 
@@ -140,12 +140,12 @@ A trace-level evaluation triggers after Datadog considers a trace complete. A tr
 
 Any spans that arrive more than 3 minutes after the previous span on a trace are not included in the trace-level evaluation. If your application emits long-running agents whose steps are sparser than 3 minutes apart, plan for those late spans to be excluded.
 
-## Configure a trace-level evaluation
+## Configure a trace-level evaluator
 
-The walkthrough below highlights the parts of the configuration that are specific to trace scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span-scoped evaluations.
+The walkthrough below highlights the parts of the configuration that are specific to trace scope. The rest of the configuration (account, model, output type, assessment criteria) is the same as for span-scoped evaluators.
 
-1. Navigate to the Agent Observability [Evaluations page][1] and select {{< ui >}}Create Evaluation{{< /ui >}}, then in the `Evaluate On` select  {{< ui >}}Trace{{< /ui >}}. (You can also start from a [template evaluation][2].)
-1. Fill in the {{< ui >}}evaluation name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluation.
+1. Navigate to the Agent Observability [Evaluators page][1] and select {{< ui >}}Create Evaluator{{< /ui >}}, then in the `Evaluate On` select  {{< ui >}}Trace{{< /ui >}}. (You can also start from an [evaluator template][2].)
+1. Fill in the {{< ui >}}evaluator name{{< /ui >}}, {{< ui >}}account{{< /ui >}}, and {{< ui >}}model{{< /ui >}} as you would for any custom LLM-as-a-judge evaluator.
 1. Under {{< ui >}}Evaluation Type{{< /ui >}} >, select {{< ui >}}Trace{{< /ui >}}.
 
    {{< img src="llm_observability/evaluations/trace_level_evaluation_scope.png" alt="The Evaluate On scope picker with Trace selected and Span as the alternative." style="width:100%;" >}}
@@ -167,14 +167,14 @@ The walkthrough below highlights the parts of the configuration that are specifi
 
    See [Prompt Templating][3] for the full reference.
 
-   {{< img src="llm_observability/evaluations/trace_level_prompt_editor.png" alt="The User prompt editor for a trace-level evaluation, with the autocomplete dropdown listing spans-prefixed fields after typing two open braces." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/trace_level_prompt_editor.png" alt="The User prompt editor for a trace-level evaluator, with the autocomplete dropdown listing spans-prefixed fields after typing two open braces." style="width:100%;" >}}
 
 1. Pick a sample trace from the panel on the right. The pane title becomes {{< ui >}}Spans in Selected Trace{{< /ui >}} and renders the spans of that trace, with the fields referenced by your prompt highlighted.
 
    {{< img src="llm_observability/evaluations/trace_level_filtered_traces.png" alt="The configuration page in trace scope, with the Spans in Selected Trace pane on the right showing one span's input and output values highlighted." style="width:100%;" >}}
 
-1. Click {{< ui >}}Test Evaluation{{< /ui >}} to run the prompt against the selected trace and preview the LLM judge's output before saving.
-1. Continue with the rest of the [evaluation configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluation against new traces.
+1. Click {{< ui >}}Test Evaluator{{< /ui >}} to run the prompt against the selected trace and preview the LLM judge's output before saving.
+1. Continue with the rest of the [evaluator configuration][5] (output type, assessment criteria) and {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluator against new traces.
 
 ## Viewing results
 
@@ -187,7 +187,7 @@ Trace-level evaluation results use the same query syntax as span-level evaluatio
 | Query | Purpose |
 |---|---|
 | `@evaluation.<evaluation_name>.value:complete` | Filter to traces with a specific evaluation value |
-| `@evaluation.<evaluation_name>.assessment:fail` | Filter to traces that failed your evaluation's pass criteria |
+| `@evaluation.<evaluation_name>.assessment:fail` | Filter to traces that failed your evaluator's pass criteria |
 | `@evaluation.<evaluation_name>.value:*` | All traces that have a result for this evaluator (excludes pending) |
 
 Substitute `<evaluation_name>` with the name you set when creating the evaluator. Evaluation values can also be used as [facets][6] for grouping in dashboards and monitors.
@@ -215,7 +215,7 @@ Wire trace-level evaluation results into [monitors][7] and [annotation queues][8
 
 ## Permissions
 
-Configuring evaluations requires the `Agent Observability Write` [permission][4].
+Configuring evaluators requires the `Agent Observability Write` [permission][4].
 
 ## Further Reading
 

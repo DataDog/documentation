@@ -35,7 +35,7 @@ To create and store monitors in a draft state:
 
 When your monitor is ready:
 
-1. Open the draft from [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `status:draft`.  
+1. Open the draft from [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `draft_status:draft`.  
 2. Review the configuration.  
 3. Click {{< ui >}}Publish Monitor{{< /ui >}}.  
 4. This publishes your monitor and begins alerting based on your conditions.
@@ -49,6 +49,21 @@ Find draft monitors from the [{{< ui >}}Monitors List{{< /ui >}}][3] by using th
 ## Permissions
 
 Anyone with [edit permissions][4] can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
+
+The **Draft Monitors Write** permission lets users manage draft monitors without the broader **Monitors Write** permission. Grant this permission to users who need to work on drafts without modifying published monitors.
+
+A user with only the **Draft Monitors Write** permission can:
+
+- Create a monitor, as long as it's saved with `draft_status` set to `draft`.
+- Edit an existing draft monitor, as long as the edit does not change `draft_status` away from `draft`.
+- Delete a draft monitor they created, or a draft owned by a team they belong to.
+
+A user with only the **Draft Monitors Write** permission cannot:
+
+- Publish draft monitors.
+- Edit or delete published monitors.
+
+These permissions apply in both the Datadog UI and API.
 
 ## Best practices
 

@@ -3,37 +3,38 @@ aliases:
 - /es/security/application_security/threats/setup/compatibility/gcp-service-extensions
 code_lang: gcp-service-extensions
 code_lang_weight: 40
-title: Requisitos de compatibilidad de las extensiones de servicio GCP de App and
-  API Protection
-type: lenguaje de código múltiple
+title: Requisitos de compatibilidad de las extensiones de servicio de GCP para App
+  and API Protection
+type: multi-code-lang
 ---
+La siguiente tabla enumera las capacidades de App and API Protection para las extensiones de servicio de GCP según la versión especificada de la imagen de callout de Service Extensions de Datadog:
 
-En la siguiente tabla se enumeran las capacidades de App and API Protection para las extensiones de servicio GCP según la versión de imagen de llamada de extensiones de servicio de Datadog especificada:
-
-| Función de protección de las aplicaciones y las API        | Versión mínima de la imagen de llamada de las extensiones de servicio de App and API Protection  |
+| Capacidad de App and API Protection        | Versión mínima de la imagen de callout de las extensiones de servicio de App and API Protection  |
 |------------------------------------------|--------------------------------------------------------------------------|
 | Detección de amenazas                         | 1.71.0                                                                   |
-| Protección frente a amenazas                        | 1.71.0                                                                   |
-| Personalizar la respuesta a las solicitudes bloqueadas   | 1.71.0                                                                   |
-| Seguridad de la API                             | v2.2.2                                                                   |
+| Protección contra amenazas                        | 1.71.0                                                                   |
+| Personalice la respuesta a las solicitudes bloqueadas   | 1.71.0                                                                   |
+| Security de API                             | v2.2.2                                                                   |
 | App and API Protection independiente        | v2.2.2                                                                   |
-| Rastreo automático de los eventos de actividad de los usuarios   | no compatible                                                            |
+| Seguimiento automático de eventos de actividad del usuario   | no compatible                                                            |
 
-Consulta las [limitaciones][1] de la integración de las extensiones de servicio GCP de App and API Protection.
+Consulte las [limitaciones][1] de la integración de las extensiones de servicio de GCP para App and API Protection.
 
-### Soporte para el procesamiento del cuerpo
+### Soporte para el procesamiento del cuerpo {#body-processing-support}
 
-La llamada a extensiones de servicio de Datadog admite el procesamiento de cuerpos de solicitud y respuesta para los siguientes tipos de carga útil:
+El callout de las extensiones de servicio de Datadog admite el procesamiento de cuerpos de solicitud y respuesta para los siguientes tipos de carga útil:
 
-| Tipo de carga útil | Versión mínima de la imagen de llamada de las extensiones de servicio de App and API Protection  |
+| Tipo de carga útil | Versión mínima de la imagen de callout de las extensiones de servicio de App and API Protection  |
 |--------------|--------------------------------------------------------------------------|
 | JSON         | v2.2.2                                                                   |
 
-## Compatibilidad con extensiones de servicio GCP de App and API Protection
+## Soporte de las extensiones de servicio de GCP para App and API Protection {#app-and-api-protection-gcp-service-extensions-support}
 
-<div class="alert alert-info">Las extensiones de servicio GCP de App and API Protection están en vista previa.</div>
+<div class="alert alert-info">App and API Protection GCP Service Extensions está en vista previa.</div>
 
-<div class="alert alert-info">Si quieres que agreguemos la compatibilidad para alguna función que aún no es compatible, háznoslo saber. Rellena <a
-href="https://forms.gle/gHrxGQMEnAobukfn7">este breve formulario para enviarnos tu información</a>.</div>
+<div class="alert alert-info">Si desea que se agregue soporte para alguna de
+las capacidades no compatibles, ¡háganoslo saber! Complete <a
+href=\"https://forms.gle/gHrxGQMEnAobukfn7\">este breve formulario para enviar
+detalles</a>.</div>
 
 [1]: /es/security/application_security/setup/gcp/service-extensions

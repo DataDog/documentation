@@ -1,21 +1,20 @@
 ---
-description: データベースモニタリングセットアップのトラブルシューティング
-title: MySQL のデータベースモニタリングセットアップのトラブルシューティング
+description: Database Monitoring セットアップのトラブルシューティング
+title: MySQL の Database Monitoring セットアップのトラブルシューティング
 ---
+このページでは、MySQL で Database Monitoring をセットアップおよび使用する際の一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースに伴い変更される可能性があるため、常に最新の安定版 Agent バージョンを使用し、最新の [セットアップドキュメント][1]に従うことを推奨しています。
 
-このページでは、MySQL による Database Monitoring のセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
+## 一般的な問題の診断{#diagnosing-common-problems}
 
-## 一般的な問題の診断
+### Database Monitoring を構成してもデータが表示されない{#no-data-is-showing-after-configuring-database-monitoring}
 
-### Database Monitoring を構成してもデータが表示されない
+[セットアップ手順][1]に従って Agent を構成した後にデータが表示されない場合は、Agent の構成または API キーに問題がある可能性が最も高いです。[トラブルシューティングガイド][2]に従って、Agent からデータを受信できていることを確認してください。
 
-[セットアップ手順][1]に従って Agent を構成してもデータが表示されない場合は、Agent の構成または API キーに問題がある可能性があります。[トラブルシューティングガイド][2]に従って、Agent からデータを受信していることを確認してください。
-
-システムメトリクスなどの他のデータは受信しているが、Database Monitoring のデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースの構成に問題がある可能性があります。Agent の構成が[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
+システムメトリクスなどの他のデータは受信できているのに、Database Monitoring データ (クエリメトリクスやクエリサンプルなど) が受信できない場合は、Agent またはデータベースの構成に問題がある可能性があります。[セットアップ手順][1]の例のように Agent が構成されていることを確認し、構成ファイルの場所を再確認してください。
 
 デバッグを行うには、まず[Agent のステータスコマンド][3]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
 
-`Config Errors` セクションをチェックして、コンフィギュレーションファイルが有効であることを確認してください。例えば、次のような場合は、インスタンス構成が存在しないか、ファイルが無効であることを示しています。
+`Config Errors` セクションを確認し、構成ファイルが有効であることを確認してください。たとえば、以下はインスタンス構成が欠落しているか、ファイルが無効であることを示しています。
 
 ```
   Config Errors
@@ -67,39 +66,41 @@ Database Monitoring Query Samples: Last Run: 1, Total: 74,451
 
 Agent の構成が正しいことを確認したら、[Agent のログ][4]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
 
-Datadog Agent で `check` CLI コマンドを実行し、出力にエラーがないかを検査することで、明示的にチェックを実行することもできます。
+Datadog Agent で `check` CLI コマンドを実行し、出力にエラーがないかを確認することで、明示的にチェックを実行することもできます。
 
 ```bash
-# Agent をセルフホストでインストールした場合
+# For self-hosted installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# Agent をコンテナベースでインストールした場合
+# For container-based installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 ```
-### クエリに実行計画が欠けている
+### クエリに実行計画が欠けている{#queries-are-missing-explain-plans}
 
-一部またはすべてのクエリで計画が利用できない場合があります。これは、サポートされていないクエリコマンド、サポートされていないクライアントアプリケーションによって生成されたクエリ、Agent のバージョンが古い、またはデータベースのセットアップが不完全であることなどが原因です。以下は、実行計画が欠けている原因として考えられるものです。
+一部またはすべてのクエリで実行計画を利用できない場合があります。これは、サポートされていないクエリコマンド、サポートされていないクライアントアプリケーションからのクエリ、古い Agent、または不完全なデータベースのセットアップなどが原因です。実行計画が欠けている場合の考えられる原因を以下に示します。
 
 #### イベントステートメントコンシューマーの欠落 {#events-statements-consumer-missing}
-実行計画をキャプチャするには、イベントステートメントのコンシューマーを有効にする必要があります。これを行うには、コンフィグレーションファイル (例: `mysql.conf`) に以下のオプションを追加します。
+実行計画を取得するには、イベントステートメントコンシューマーを有効にする必要があります。これを行うには、構成ファイル (例: `mysql.conf`) に次のオプションを追加します。
+
 ```
 performance-schema-consumer-events-statements-current=ON
 ```
 
 Datadog では、さらに以下を有効にすることを推奨しています。
+
 ```
 performance-schema-consumer-events-statements-history-long=ON
 ```
-このオプションは、すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。これをオンにすると、頻度の低いクエリの実行内容をキャプチャできる可能性が高くなります。
+このオプションを有効にすると、すべてのスレッドでより多くの最近のクエリを追跡できるようになります。これをオンにすると、実行頻度の低いクエリから実行詳細をキャプチャできる可能性が高まります。
 
 #### 実行計画プロシージャの欠落 {#explain-plan-procedure-missing}
-Agent は `datadog.explain_statement(...)` というプロシージャが `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成の詳細については、[セットアップ手順][1]を参照してください。 
+Agent は、プロシージャ `datadog.explain_statement(...)` が `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成方法の詳細については、[セットアップ手順][1]を参照してください。
 
-Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
+Agent が実行計画を収集できるようにするには、`explain_statement` プロシージャを作成します。
 
 ```sql
 DELIMITER $$
@@ -116,7 +117,7 @@ DELIMITER ;
 #### 完全修飾実行計画プロシージャの欠落 {#explain-plan-fq-procedure-missing}
 Agent は、プロシージャ `explain_statement(...)` が、Agent がサンプルを収集できる**すべてのスキーマ**に存在することを必要とします。
 
-実行計画を収集する**すべてのスキーマ**でこのプロシージャを作成します。`<YOUR_SCHEMA>` をデータベーススキーマに置き換えます。
+実行計画を収集する**すべてのスキーマ**に、このプロシージャを作成します。`<YOUR_SCHEMA>` をデータベーススキーマに置き換えます。
 
 ```sql
 DELIMITER $$
@@ -132,46 +133,59 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-#### Agent がサポートされていないバージョンで動作している
+#### Agent がサポートされていないバージョンで動作している{#agent-is-running-an-unsupported-version}
 
-Agent のバージョンが 7.36.1 以上であることを確認してください。Datadog では、新機能、より良いパフォーマンス、およびセキュリティアップデートをご利用いただくために、定期的な Agent のアップデートをお勧めします。
+Agent のバージョンが 7.36.1 以上であることを確認してください。Datadog では、新機能、パフォーマンスの改善、およびセキュリティアップデートを利用できるように、Agent を定期的にアップデートすることを推奨しています。
 
-#### クエリが切り捨てられる
+#### クエリが切り捨てられる {#queries-are-truncated}
 
 クエリのサンプルテキストのサイズを大きくする方法については、[切り捨てられたクエリサンプル](#query-samples-are-truncated)のセクションを参照してください。
 
-#### クエリを説明することができない 
+#### クエリを説明することができない {#query-cannot-be-explained}
 
-BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。
+BEGIN、COMMIT、SHOW、USE、ALTER クエリなど、一部のクエリでは、データベースから有効な実行計画を取得できません。実行計画がサポートされているのは、SELECT、UPDATE、INSERT、DELETE、および REPLACE クエリのみです。
 
-#### クエリの実行頻度が比較的低い、または実行速度が速い。
+#### クエリの実行頻度が比較的低い、または実行速度が速い{#query-is-relatively-infrequent-or-executes-quickly}
 
-このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。クエリをキャプチャするために、[サンプリングレートを上げる][5]ことを試してみてください。
+このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。[サンプリングレートを上げる][5]ことで、クエリをキャプチャします。
 
-### クエリメトリクスが見つからない
+### クエリメトリクスが見つからない {#query-metrics-are-missing}
 
-クエリメトリクスデータの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリメトリクスが見つからない場合、以下のような原因が考えられます。
+クエリメトリクスデータの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-showing-after-configuring-database-monitoring)に従っていることを確認してください。以下は、クエリメトリクスが欠落している可能性のある原因です。
+
+### インデックスメトリクスが欠落している {#index-metrics-are-missing}
+
+Agent にこのエラーが表示される場合、
+
+```
+Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
+```
+エラーを解決するには、インデックスメトリクスを収集できるように `datadog` ユーザーに SELECT 権限を付与します。
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
 
 #### `performance_schema` が有効になっていない {#performance-schema-not-enabled}
-Agent は、`performance_schema` オプションが有効になっていることを必要とします。これは、MySQL ではデフォルトで有効になっていますが、構成やクラウドプロバイダーによっては無効になっている場合があります。有効にするには、[セットアップ手順][1]に従ってください。
+Agent には `performance_schema` オプションが有効になっている必要があります。これは MySQL ではデフォルトで有効になっていますが、構成またはクラウドプロバイダーによって無効になっている場合があります。有効にするための[セットアップ手順][1]に従います。
 
-#### Google Cloud SQL の制限
-このホストは Google Cloud SQL で管理されており、`performance_schema` をサポートしていません。Google Cloud SQL の制限により、Datadog Database Monitoring は[16GB 以下の RAM を持つインスタンスではサポートされません][6]。
+#### Google Cloud SQL の制限 {#google-cloud-sql-limitation}
+ホストは Google Cloud SQL によって管理されており、`performance_schema` をサポートしていません。Google Cloud SQL の制限により、Datadog Database Monitoring は[RAM が 16GB 未満のインスタンスではサポートされません][6]。
 
-### 特定のクエリが見つからない
+### 特定のクエリが見つからない {#certain-queries-are-missing}
 
 いくつかのクエリのデータはあるが、Database Monitoring で特定のクエリやクエリセットを確認したい場合は、以下のガイドに従ってください。
 
 
-| 考えられる原因                         | ソリューション                                  |
+| 考えられる原因                         | 解決策                                  |
 |----------------------------------------|-------------------------------------------|
-| クエリが「トップクエリ」ではなく、そのクエリの実行時間の合計が、選択した期間のどの時点においても正規化された上位 200 のクエリに含まれていない。 | クエリが「Other Queries」の行にまとめられている場合があります。どのクエリが追跡されるかの詳細については、[収集データ][7]を参照してください。追跡されるトップクエリの数を増やしたい場合は、Datadog サポートにお問い合わせください。 |
-| `events_statements_summary_by_digest` が満杯の可能性がある。 | `performance_schema` の MySQL テーブル `events_statements_summary_by_digest` には、保存対象となるダイジェスト (正規化されたクエリ) の数に上限があります。メンテナンスタスクでこのテーブルを定期的にデータを削除することで、すべてのクエリが長期にわたって追跡されるようになります。詳しくは[高度な構成][5]をご覧ください。 |
-| Agent が最後に再起動してから、クエリが一回実行された。 | クエリメトリクスは、Agent の再起動後、10 秒間隔で 2 回以上実行された後にのみ発行されます。 |
+| クエリが「トップクエリ」ではなく、そのクエリの実行時間の合計が、選択した期間のどの時点においても正規化された上位 200 のクエリに含まれていない。| [Other Queries] 行にグループ化されている可能性があります。どのクエリが追跡されるかについて詳しくは、[収集されるデータ][7]をご覧ください。追跡されるトップクエリの数は、Datadog サポートに問い合わせることで増やすことができます。|
+| `events_statements_summary_by_digest`がいっぱいになっている可能性があります。| `performance_schema`内の MySQL テーブル `events_statements_summary_by_digest` には、保存できるダイジェスト (正規化されたクエリ) の数に上限があります。メンテナンス作業としてこのテーブルを定期的に切り詰めることで、すべてのクエリが長期にわたって追跡されるようになります。詳しくは、[高度な構成][5]をご覧ください。|
+| Agent が最後に再起動されてから、クエリは 1 回だけ実行されています。| クエリメトリクスは、Agent の再起動後、10 秒間隔で 2 回以上実行された場合にのみ発行されます。|
 
-### クエリサンプルが切り捨てられる
+### クエリサンプルが切り捨てられる{#query-samples-are-truncated}
 
-長いクエリの場合、データベースの構成上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
+データベースの構成により、長いクエリの SQL テキスト全体が表示されない場合があります。ワークロードに合わせて調整するには、いくつかのチューニングが必要です。
 
 Datadog Agent から見える MySQL の SQL テキストの長さは、以下の[システム変数][8]によって決定されます。
 
@@ -181,14 +195,14 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-### クエリアクティビティがない
+### クエリアクティビティがない{#query-activity-is-missing}
 
-<div class="alert alert-danger">クエリアクティビティと待機イベントコレクションは、Flexible Server ホストでは利用できない MySQL 設定が必要なため、Flexible Server ではサポートされていません。</div>
+<div class="alert alert-danger">クエリアクティビティと待機イベントの収集は、Flexible Server ホストでは利用できない MySQL 設定を必要とするため、Flexible Server ではサポートされていません。</div>
 
-クエリアクティビティの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリアクティビティが見つからない場合、以下のような原因が考えられます。
+クエリアクティビティが表示されない問題を診断するために以下の手順を実行する前に、Agent が正常に動作していること、および [Agent データが表示されない場合の診断手順](#no-data-is-showing-after-configuring-database-monitoring)に従っていることを確認してください。クエリアクティビティがない場合に考えられる原因を、以下に示します。
 
-#### `performance-schema-consumer-events-waits-current` が有効になっていない {#events-waits-current-not-enabled}
-Agent は `performance-schema-consumer-events-waits-current` オプションが有効であることを必要とします。このオプションは MySQL ではデフォルトで無効になっていますが、クラウドプロバイダーによって有効化されている場合があります。有効にするには、[セットアップの説明][1]に従ってください。また、データベースのバウンスを回避するために、ランタイムセットアップコンシューマーの設定を検討してください。以下のプロシージャを作成し、実行時に `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えます。
+#### `performance-schema-consumer-events-waits-current`が有効になっていません {#events-waits-current-not-enabled}
+Agent では `performance-schema-consumer-events-waits-current` オプションを有効にする必要があります。これは MySQL ではデフォルトで無効になっていますが、クラウドプロバイダーによって有効にされている場合があります。有効にするための[セットアップ手順][1]に従います。あるいは、データベースを再起動せずに済むように、ランタイムセットアップコンシューマーのセットアップを検討してください。Agent が実行時に `performance_schema.events_*` コンシューマーを有効にできるように、以下のプロシージャを作成します。
 
 
 ```SQL
@@ -203,48 +217,35 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-**注:** このオプションを使用するには、さらに `performance_schema` が有効であることが必要です。
+**注:** このオプションを使用するには、さらに `performance_schema` を有効にする必要があります。
 
 
-<!-- TODO: SQL テキストの最大長を取得するためのカスタムクエリレシピを追加 -->
+<!-- TODO: add a custom query recipe for getting the max sql text length -->
 
-### MySQL Query Metrics & Samples でスキーマまたはデータベースが見つからない
+### 収集されたスキーマにテーブルがありません {#tables-are-missing-from-collected-schemas}
 
-`schema` タグ (別名 "database") は、クエリを実行した接続にデフォルトデータベースが設定されている場合のみ MySQL Query Metrics and Samples に存在します。デフォルトデータベースは、データベース接続パラメーターで "schema" を指定するか、すでに存在する接続で [USE Statement][9] を実行することで、アプリケーションによって構成されます。
+Agent が以下で始まる警告をログに記録する場合、
 
-接続にデフォルトのデータベースが構成されていない場合、その接続で行われるクエリには `schema` タグは付きません。
+```
+No tables were found across any of the N databases.
+```
+MySQL は `INFORMATION_SCHEMA` 内のテーブルをそのテーブルに対する権限を持つユーザーにのみ公開するため、`datadog` ユーザーは権限がないとテーブルをまったく表示できません。`REFERENCES` 権限を付与して警告を解決します。これにより、Agent にデータを読み取る権限を与えることなく、テーブルのメタデータを表示できるようになります。
 
-## MariaDB の既知の制限事項
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
 
-### 非互換の InnoDB メトリクス
+一部のテーブルのみが表示されない場合は、付与された権限の範囲にそれらのテーブルが含まれているか確認してください。個々の列に限定された権限付与では、付与された列のみが公開されます。また、1 つのデータベースまたはテーブルに限定された権限付与では、そのデータベースまたはテーブルのみが対象となります。利用可能なスコープについては、[スキーマを収集する][10]を参照してください。
 
-以下の InnoDB メトリクスは、一部の MariaDB バージョンでは利用できません。
+### MySQL Query Metrics & Samples でスキーマまたはデータベースが見つからない{#schema-or-database-missing-on-mysql-query-metrics-samples}
 
-| メトリクス名                             | MariaDB バージョン        |
-| --------------------------------------- | ----------------------- |
-| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
-| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
-| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
-| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
-| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
-| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
-| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
-| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
-| `mysql.innodb.rows_read`                | 10.11, 11.1             |
-| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
-| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
-| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
-| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+`schema`タグ (「データベース」とも呼ばれます) は、クエリを実行したコネクションにデフォルトデータベースが設定されている場合にのみ、MySQL Query Metrics and Samples に表示されます。Default Database は、データベースコネクションパラメーターで「schema」を指定するか、既存のコネクションで [USE Statement][9] を実行することによって、アプリケーション側で構成されます。
 
-### MariaDB の実行計画
+コネクションにデフォルトデータベースが構成されていない場合、そのコネクションで行われるクエリには `schema` タグは付きません。
 
-MariaDB は実行計画で MySQL と同じ JSON 形式を出力しません。そのため、MariaDB の実行計画では、`cost_info`、`rows_examined_per_scan`、`rows_produced_per_join`、`used_columns` など一部の実行計画のフィールドが欠落する場合があります。
+## MariaDB の既知の制限事項 {#mariadb-known-limitations}
+
+MariaDB を使用している場合は、MariaDB トラブルシューティングガイドの [MariaDB の既知の制限事項][14]を参照してください。
 
 [1]: /ja/database_monitoring/setup_mysql/
 [2]: /ja/agent/troubleshooting/
@@ -255,3 +256,5 @@ MariaDB は実行計画で MySQL と同じ JSON 形式を出力しません。�
 [7]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
 [9]: https://dev.mysql.com/doc/refman/8.0/en/use.html
+[10]: /ja/database_monitoring/setup_mysql/selfhosted/?tab=mysql57#collecting-schemas
+[14]: /ja/database_monitoring/setup_mariadb/troubleshooting/#mariadb-known-limitations

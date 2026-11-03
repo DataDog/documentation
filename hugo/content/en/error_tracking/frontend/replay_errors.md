@@ -12,9 +12,9 @@ further_reading:
   text: 'Learn about Error Tracking'
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/error-tracking-replay-snippets/" btn_hidden="false"  >}}
+{{< callout url="https://www.datadoghq.com/product-preview/error-tracking-replay-snippets/" btn_hidden="false"  >}}
 Error Tracking Replay snippets is in Preview.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 

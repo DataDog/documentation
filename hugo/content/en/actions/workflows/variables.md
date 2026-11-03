@@ -14,6 +14,10 @@ further_reading:
 
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 The following variables and parameters are available in workflows:
 - [Context variables](#context-variables): Context variables are a broad category of immutable variables that store contextual information about a workflow, or contain data that is passed into the workflow by a triggering event or by a step in the workflow.
 - [Input parameters](#input-parameters): Input parameters are immutable key-value pairs that you can use to pass data into a workflow at runtime.

@@ -105,17 +105,13 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
-## Edit an SLO
-
-To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
-
 ## Permissions
 
 ### Role based access
 
 All users can view SLOs and [SLO status corrections](#slo-status-corrections), regardless of their associated [role][10]. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
 
-To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][11].
+To create, edit, and delete status corrections, users require the `slos_corrections` permission. A user with this permission can make status corrections, even if they do not have the `slos_write` permission. To create a correction for a single SLO that has [granular access controls](#granular-access-controls), a user must also have edit access to that SLO. [Tag-based corrections](#tag-based-corrections) do not check granular access controls, so they apply to all SLOs that match the query, including restricted SLOs. For the full list of permissions, see the [RBAC documentation][11].
 
 ### Granular access controls
 
@@ -127,7 +123,7 @@ Restrict access to individual SLOs by specifying a list of [roles][10] that are 
 1. Click the cog icon in the upper right of the panel.
 1. Select {{< ui >}}Permissions{{< /ui >}}.
 1. Click {{< ui >}}Restrict Access{{< /ui >}}.
-1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
+1. The dialog box updates to show that everyone in your organization has full access by default.
 1. Use the drop-down to select one or more roles, teams, or users that may edit the SLO.
 1. Click {{< ui >}}Add{{< /ui >}}.
 1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
@@ -136,6 +132,10 @@ Restrict access to individual SLOs by specifying a list of [roles][10] that are 
 To maintain your edit access to the SLO, the system requires you to include at least one role that you are a member of before saving. Users on the access control list can add roles and can only remove roles other than their own.
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][12] or the [guide on how to set up RBAC for Monitors][13].
+
+## Editing an SLO
+
+To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
 ## Searching SLOs
 
@@ -151,13 +151,25 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
+## Recovering deleted SLOs
+
+<div class="alert alert-warning">Auto-generated SLOs for <a href="/synthetics/test_suites/#service-level-objectives">Synthetic test suites</a> cannot be restored.</div>
+
+Deleted SLOs are retained for 30 days before being permanently deleted. To restore a recently deleted SLO:
+
+1. On the [SLO manage page][2], click the **Settings** gear icon in the top right corner.
+1. Select the SLO(s) you want to restore.
+1. Click {{< ui >}}Restore{{< /ui >}}.
+
+**Note**: Deleted SLO status corrections cannot be restored. This recovery process applies only to deleted SLOs.
+
 ## Viewing SLOs
 
 Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
 {{< img src="service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
-Sort SLOs by the {{< ui >}}status{{< /ui >}} and {{< ui >}}error budget{{< /ui >}} columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
+Sort SLOs by the {{< ui >}}status{{< /ui >}} and {{< ui >}}Error Budget Left{{< /ui >}} columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][14], available on the [Apple App Store][15] and [Google Play Store][16].
 
@@ -210,12 +222,12 @@ After you query for a subset of SLOs on the list view, you can add that query as
 To add a saved view:
 
 1. Query for your SLOs.
-2. Click {{< ui >}}Save View +{{< /ui >}} at the top left of the page.
+2. Click {{< ui >}}Save{{< /ui >}} at the top left of the page.
 3. Name your view and save.
 
 #### Load a saved view
 
-To load a saved view, open the {{< ui >}}Saved Views{{< /ui >}} panel by pressing the {{< ui >}}Show Views{{< /ui >}} button at the top left of the page and select a saved view from the list. You can also search for saved views in the {{< ui >}}Filter Saved Views{{< /ui >}} search box at the top of that same {{< ui >}}Saved Views{{< /ui >}} panel.
+To load a saved view, open the {{< ui >}}Saved Views{{< /ui >}} panel by pressing the {{< ui >}}Views{{< /ui >}} button at the top left of the page and select a saved view from the list. You can also search for saved views in the {{< ui >}}Filter Saved Views{{< /ui >}} search box at the top of that same {{< ui >}}Saved Views{{< /ui >}} panel.
 
 #### Share a saved view
 
@@ -272,10 +284,6 @@ With [Event Monitors][28], you can set up notifications to track SLO audit event
 
 ## SLO widgets
 
-{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
-{{< /learning-center-callout >}}
-
 After creating your SLO, you can visualize the data through Dashboards and widgets.
   - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
@@ -291,16 +299,20 @@ Status corrections allow you to exclude specific time periods from SLO status an
 - Ensure that temporary issues caused by deployments do not negatively impact your SLOs
 
 When you apply a correction, the time period you specify is dropped from the SLO's calculation.
-- For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
-- For Time Slice SLOs, the correction time window is treated as uptime.
+- For time slice SLOs, the correction time window is treated as uptime.
+- For monitor-based SLOs, the correction time window is not counted.
 
-You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+Each correction applies to either a single SLO or to all SLOs that match a tag query:
+- **By SLO name**: The correction applies to one SLO.
+- **By tags**: The correction applies to every SLO whose tags match a query, such as `env:prod service:checkout`. This includes SLOs that you create or tag after you create the correction. For more information, see [Tag-based corrections](#tag-based-corrections).
+
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL`, and `BYDAY`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}}, and {{< ui >}}Other{{< /ui >}}. You can optionally include a description to provide additional context if necessary.
 
 Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that:
-- If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
+- If the end time of a one-time correction is before the past 90 days, it does not count towards your limit.
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
 
 The 90-day limits per SLO are as follows:
@@ -311,28 +323,75 @@ The 90-day limits per SLO are as follows:
 | Daily recurring   | 2             |
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
+| Yearly recurring  | 20            |
 
-You may configure status corrections through the UI by selecting {{< ui >}}Correct Status{{< /ui >}} in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
+These limits apply only to corrections created by SLO name. They do not apply to [tag-based corrections](#tag-based-corrections).
+
+You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26].
+
+To create a tag-based correction with the API or Terraform, set the `slo_query` attribute instead of `slo_id`.
+
+#### Tag-based corrections
+
+A tag-based correction uses a query to select SLOs by their tags, so you can apply one correction across many SLOs. For example, use a tag-based correction to cover outside business hours for every SLO owned by a team, or every SLO in an environment.
+
+Tag-based corrections are evaluated when the SLO status is calculated, so the correction applies to all SLOs that match the query at that time. If you create a new SLO or add tags to an existing SLO that match the query, the correction applies to that SLO as well.
+
+Queries use the [Events search syntax][29], and each term is matched against SLO tags. You can combine terms with `AND`, `OR`, and `NOT` (or `-`), group terms with parentheses, and use `*` as a wildcard. Terms separated by a space are combined with `AND`.
+
+| Query                          | Matches SLOs                                            |
+| ------------------------------ | ------------------------------------------------------- |
+| `env:prod`                     | Tagged `env:prod`                                       |
+| `team:payments -env:staging`   | Tagged `team:payments` and not tagged `env:staging`     |
+| `team:(payments OR checkout)`  | Tagged `team:payments` or `team:checkout`               |
+| `service:web-*`                | With a `service` tag whose value starts with `web-`     |
+
+A query cannot be empty or consist only of `*`.
+
+#### Manage corrections across your organization
+
+The [{{< ui >}}Corrections{{< /ui >}} tab][31] on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. From this page, you can create, edit, and delete corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. 
+
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="The Corrections tab of the SLO manage page, listing corrections with their scope, duration, schedule, and creator, with facets on the left for filtering." style="width:80%;">}}
+
+#### Create corrections from monitor downtimes
+
+To create a correction from a downtime, you need the `slos_corrections` permission.
+
+When you schedule a new [monitor downtime][30] by monitor tags, Datadog checks for SLOs that have the same tags. If any SLOs match, the downtime editor displays a card with the number of matching SLOs. To create a correction for the same time window:
+
+1. On the card, click {{< ui >}}Preview SLO Correction{{< /ui >}}. The correction form opens with {{< ui >}}By Tags{{< /ui >}} selected, the downtime's monitor tags as the query, and the downtime's schedule and message filled in.
+2. Review the query and the SLOs that match it, select a {{< ui >}}Category{{< /ui >}}, and click {{< ui >}}Apply{{< /ui >}}.
+3. Save the downtime. Datadog creates the SLO correction.
+
+**Note**: The card does not appear when you edit an existing downtime.
+
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="The Schedule Downtime page scoped by monitor tags. A highlighted card in the lower right reads 'We found 5 SLOs with this scope' and includes a Preview SLO Correction link." style="width:80%;">}}
 
 #### Access in the UI
 
-To access SLO status corrections in the UI:
+To create a status correction in the UI:
 
-1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO's details side panel view.
-3. Under the gear icon, select {{< ui >}}Correct Status{{< /ui >}} to access the {{< ui >}}Status Corrections{{< /ui >}} creation modal.
-4. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
-5. Select a {{< ui >}}Correction Type{{< /ui >}}.
-6. Optionally add {{< ui >}}Notes{{< /ui >}}.
-7. Click {{< ui >}}Apply Correction{{< /ui >}}.
+1. Open the correction form in one of the following ways:
+   - On the [{{< ui >}}Corrections{{< /ui >}} tab][31] of the [SLO manage page][2], click {{< ui >}}New Correction{{< /ui >}}.
+   - In an SLO's details side panel, under the gear icon, select {{< ui >}}Correct status{{< /ui >}}. The form opens with that SLO selected.
+2. Under {{< ui >}}Select SLOs and category{{< /ui >}}, choose the correction scope:
+   - {{< ui >}}By Tags{{< /ui >}}: Enter a tag query. The form displays the SLOs that match the query.
+   - {{< ui >}}By SLO Name{{< /ui >}}: Search for and select a single SLO.
+3. Select a {{< ui >}}Category{{< /ui >}}.
+4. Under {{< ui >}}Select time window{{< /ui >}}, choose {{< ui >}}One-Time{{< /ui >}} or {{< ui >}}Recurring{{< /ui >}}, and specify the time period to correct. For recurring corrections, use the {{< ui >}}Basic{{< /ui >}} tab to set a schedule, or the {{< ui >}}Advanced{{< /ui >}} tab to enter an RRULE.
+5. Optionally, add notes under {{< ui >}}Add any notes{{< /ui >}}.
+6. Click {{< ui >}}Apply{{< /ui >}}.
 
-{{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="The New SLO Correction form, with By Tags and One-Time selected, showing fields for a tag query, category, time window, and notes." style="width:80%;">}}
 
-To view, edit, and delete existing status corrections, click on the {{< ui >}}Corrections{{< /ui >}} tab at the top of an SLO's detailed side panel view.
+**Note**: After you create a correction, you cannot change its scope or switch it between one-time and recurring.
+
+To view, edit, and delete existing status corrections, use the {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2], or the {{< ui >}}Corrections{{< /ui >}} tab in an SLO's details side panel. The side panel tab includes tag-based corrections that apply to the SLO.
 
 #### Visualizing status corrections
 
-For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the {{< ui >}}History{{< /ui >}} section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
+For SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the {{< ui >}}Performance{{< /ui >}} section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
 
 {{< img src="service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 
@@ -374,3 +433,6 @@ The SLO Calendar View is available on the [SLO manage page][2]. On the top right
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /events/explorer/
 [28]: /monitors/types/event/
+[29]: /events/explorer/searching/
+[30]: /monitors/downtimes/
+[31]: https://app.datadoghq.com/slo/corrections

@@ -29,6 +29,8 @@ Use the `DatadogInstrumentation` CR when you want to:
 
 When you create or update a `DatadogInstrumentation` resource, the [Datadog Cluster Agent][3] validates the target, reports resource status, and applies the Autodiscovery configuration to the targeted workload.
 
+To configure APM Single Step Instrumentation through `spec.config.apm`, see [Single Step APM Instrumentation on Kubernetes][8]. The Operator setup for APM requires Agent and Cluster Agent v7.85+ and Datadog Operator v1.31+. APM settings apply when pods are created, so existing workloads must be restarted to apply changes. The setup and supported targets below describe checks and logs.
+
 ## Requirements
 
 Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `DatadogInstrumentation` CRD with one of the following:
@@ -132,6 +134,7 @@ You can target the following Kubernetes resources:
 | Deployment | `apps/v1/deployments` | 7.82.0 | |
 | DaemonSet | `apps/v1/daemonsets` | 7.82.0 | |
 | StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
+| StrimziPodSet | `apps.strimzi.io/v1beta2/strimzipodsets` | 7.84.0 | |
 | CronJob | `batch/v1/cronjobs` | 7.82.0 | |
 | Job | `batch/v1/jobs` | 7.82.0 | |
 | Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |
@@ -281,3 +284,4 @@ Auto-discovery IDs:
 [5]: /containers/guide/template_variables/
 [6]: /containers/cluster_agent/endpointschecks/
 [7]: https://argoproj.github.io/rollouts/
+[8]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation

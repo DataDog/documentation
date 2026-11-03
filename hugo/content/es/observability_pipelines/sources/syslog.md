@@ -1,6 +1,6 @@
 ---
 description: Aprenda a recopilar registros enviados a rsyslog o syslog-ng utilizando
-  el Observability Pipelines Worker.
+  Observability Pipelines Worker.
 disable_toc: false
 products:
 - icon: logs
@@ -14,7 +14,9 @@ title: Fuente Syslog
 
 Utilice rsyslog o syslog-ng de Observability Pipelines para recibir registros enviados a rsyslog o syslog-ng.
 
-También puede [reenviar registros de terceros a syslog](#forward-third-party-logs-to-syslog) y luego enviarlos al Observability Pipelines Worker.
+También puede [reenviar registros de terceros a syslog](#forward-third-party-logs-to-syslog) y luego enviarlos a Observability Pipelines Worker.
+
+Si sus registros utilizan un formato que la fuente Syslog no admite, consulte [Parseo](#parsing).
 
 ## Requisitos previos {#prerequisites}
 
@@ -22,7 +24,7 @@ También puede [reenviar registros de terceros a syslog](#forward-third-party-lo
 
 ## Configuración {#setup}
 
-<div class="alert alert-danger">Para la gestión de secretos: solo ingrese los identificadores para la dirección de syslog y, si corresponde, la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
+<div class="alert alert-danger">Para la gestión de secretos: solo ingrese los identificadores para la dirección de syslog y, si corresponde, la contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
 
 Configure esta fuente cuando [configure una canalización][1]. Puede configurar una canalización en la [UI][7], utilizando la [API][8] o con [Terraform][9]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
@@ -39,6 +41,26 @@ Después de seleccionar la fuente Syslog en la interfaz de usuario de la canaliz
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
+## Parseo {#parsing}
+
+Observability Pipelines Worker hace todo lo posible por realizar el parseo de los siguientes formatos de syslog:
+
+- [RFC 6587][10]
+- [RFC 5424][11]
+- [RFC 3164][12]
+- Otras variaciones comunes, como el estilo syslog de NGINX
+
+Si el Worker no puede realizar el parseo de un registro, se registra un error.
+
+### Realice el parseo de los formatos de syslog no admitidos {#parse-unsupported-syslog-formats}
+
+Si sus registros utilizan un formato que la fuente Syslog no admite, o si el parseo falla con frecuencia:
+
+1. Utilice la [fuente Socket][13] en lugar de la fuente Syslog para recibir los registros.
+1. Agregue un [Procesador personalizado][14] a la canalización para realizar el parseo de los registros con VRL. Por ejemplo:
+    - Utilice `parse_regex` para escribir sus propias reglas de parseo.
+    - Utilice `parse_syslog` y gestione usted mismo los errores de parseo.
+
 ## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
@@ -47,9 +69,9 @@ Después de seleccionar la fuente Syslog en la interfaz de usuario de la canaliz
 {{% tab "Gestión de secretos" %}}
 
 - Identificador de dirección de rsyslog o syslog-ng:
-	- Hace referencia a la dirección de enlace, como `0.0.0.0:9997`, en la que el Observability Pipelines Worker escucha para recibir registros del reenviador de Syslog.
+	- Hace referencia a la dirección de enlace, como `0.0.0.0:9997`, en la que Observability Pipelines Worker escucha para recibir registros del reenviador de Syslog.
 	- El identificador predeterminado es `SOURCE_SYSLOG_ADDRESS`.
-- Identificador de la frase de contraseña TLS de rsyslog o syslog-ng (cuando TLS está habilitado):
+- Identificador de frase de contraseña TLS de rsyslog o syslog-ng (cuando TLS está habilitado):
 	- El identificador predeterminado es `SOURCE_SYSLOG_KEY_PASS`.
 
 {{% /tab %}}
@@ -67,7 +89,7 @@ Después de seleccionar la fuente Syslog en la interfaz de usuario de la canaliz
 
 ## Reenvíe registros de terceros al Observability Pipelines Worker {#forward-third-party-logs-to-the-observability-pipelines-worker}
 
-Syslog es un protocolo de registro ampliamente utilizado para enviar registros de red a un servidor central. Muchos dispositivos de red admiten la salida syslog, por lo que puede reenviar registros de terceros a la fuente Syslog de Observability Pipelines para su procesamiento y enrutamiento. Ejemplos de estos servicios de terceros incluyen:
+Syslog es un protocolo de registro ampliamente utilizado para enviar registros de red a un servidor central. Muchos dispositivos de red admiten la salida syslog, por lo que puede reenviar registros de terceros a la fuente de syslog de Observability Pipelines para su procesamiento y enrutamiento. Ejemplos de estos servicios de terceros incluyen:
 
 ### Fortinet {#fortinet}
 - [Configurar el reenvío de registros][2]
@@ -85,3 +107,8 @@ Syslog es un protocolo de registro ampliamente utilizado para enviar registros d
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /es/api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: https://datatracker.ietf.org/doc/html/rfc6587
+[11]: https://datatracker.ietf.org/doc/html/rfc5424
+[12]: https://datatracker.ietf.org/doc/html/rfc3164
+[13]: /es/observability_pipelines/sources/socket/
+[14]: /es/observability_pipelines/processors/custom_processor/

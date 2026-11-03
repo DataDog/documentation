@@ -28,8 +28,8 @@ Set up CI Visibility for Azure Pipelines to gain real time insights into your CI
 
 | Pipeline Visibility                             | Platform                            | Definition                                                |
 |-------------------------------------------------|-------------------------------------|-----------------------------------------------------------|
-| [CI jobs failure analysis][21] | CI jobs failure analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
-| Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs. Requires [job log collection](#collect-job-logs). |
+| [Logs Analysis][21] | Logs Analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs. Requires [Logs Storage](#logs-storage). |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime.       |
 | [Custom spans][15]                              | Custom spans                        | Configure custom spans for your pipelines.                |
 | [Filter CI Jobs on the critical path][19]       | Filter CI Jobs on the critical path | Filter by jobs on the critical path.                      |
@@ -44,7 +44,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and Azure
 | Pipeline                   | Pipeline        |
 | Stage                      | Stage           |
 | Job                        | Job             |
-| _Not available in Datadog_ | Step            |
+| Step ([Datadog Integration](#collect-job-steps) only) | Step |
 
 ## Configure the Datadog integration
 {{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
@@ -151,6 +151,13 @@ Example for enabling the hooks in specified projects:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect job steps
+
+For each step in an Azure Pipelines job, Datadog collects a corresponding step. Each step appears under its job, with the step's name and duration.
+
+Steps require the Datadog Integration setup method. After you enable CI Visibility for an organization or project, Datadog collects steps automatically. Steps are not available with Service Hook Subscriptions.
+
+<div class="alert alert-warning">Datadog retrieves steps through the Azure DevOps API, which enforces <a href="https://learn.microsoft.com/en-us/azure/devops/integrate/concepts/rate-limits?view=azure-devops">rate limits</a>. Steps are collected on a best-effort basis, so organizations with a high volume of pipeline runs may be missing steps for some executions. Missing steps are not backfilled. Pipeline, stage, and job data is not affected.</div>
 
 ## Advanced configuration
 
@@ -158,25 +165,23 @@ Example for enabling the hooks in specified projects:
 
 You can set custom tags for all pipeline and job spans from your Azure projects to improve traceability. For more information, see [Custom Tags and Measures][6].
 
-### Collect job logs
+### Manage job logs
 
-To enable log collection for Azure DevOps pipelines:
+#### Logs Analysis
 
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from Azure Pipelines.
 
-1. Set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14].
+For a full explanation, see the guide on [using Logs Analysis][21].
 
-2. In Datadog, open [**CI/CD Optimization** > **Settings** > **Azure DevOps**][23].
-3. Enable log pulling for Azure DevOps.
+Logs Analysis is enabled by default in Datadog. To receive Azure Pipelines job logs for analysis, set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14]. To manage Logs Analysis settings, go to [CI/CD Repository settings][23], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
+You can also add Logs Analysis to a PR comment. See the guide on [using PR comments][22].
 
-### CI jobs failure analysis
+#### Logs Storage
 
-If job logs collection is enabled, CI Visibility uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Azure Pipelines.
+To enable Logs Storage, go to [CI/CD Repository settings][23], and enable Logs Storage at the Datadog organization level or for the desired repositories.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
-
-For a full explanation, see the guide on [using CI jobs failure analysis][21].
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
 
 ## Visualize pipeline data in Datadog
 
@@ -203,4 +208,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [20]: /glossary/#pipeline-execution-time
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
-[23]: https://app.datadoghq.com/ci/settings/ci-cd/azure-devops
+[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

@@ -19,12 +19,6 @@ further_reading:
   text: "How App and API Protection Works in Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 Learn how to set up App and API Protection (AAP) on your AWS Fargate tasks by selecting your task's programming language.
 
 <div class="alert alert-info">

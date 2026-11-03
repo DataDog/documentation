@@ -18,10 +18,6 @@ algolia:
   tags: ["cd gates"]
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 Deployment Gates allow you to reduce the likelihood and impact of incidents caused by deployments.
 
 When performing a production rollout, you can use Deployment Gates to evaluate the impact of the new changes by using [monitors][1] and APM anomalies.

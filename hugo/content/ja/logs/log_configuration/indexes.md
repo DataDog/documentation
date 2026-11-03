@@ -4,14 +4,17 @@ aliases:
 - /ja/logs/indexes/
 description: Datadog でインデックス化するログの量を制御する
 further_reading:
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Architecture Center
+  text: Datadog を使用した Log Management インデックス戦略ガイド
 - link: /logs/explorer/#visualize
-  tag: よくあるご質問
+  tag: ドキュメント
   text: ログ分析の実行
 - link: /logs/log_configuration/processors
-  tag: よくあるご質問
+  tag: ドキュメント
   text: ログの処理方法
 - link: /logs/log_configuration/parsing
-  tag: よくあるご質問
+  tag: ドキュメント
   text: パースの詳細
 - link: https://www.datadoghq.com/blog/logging-without-limits/
   tag: ブログ
@@ -41,7 +44,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7] をサ�
 
 ### インデックスを追加 {#add-indexes}
 
-"New Index” ボタンを使って、新しいインデックスを作成します。各アカウントで作成できるインデックスの最大数は決まっており、デフォルトでは 100 に設定されています。
+[{{< ui >}}New Index{{< /ui >}}] (インデックスの新規作成) ボタンを使用して、新しいインデックスを作成します。各アカウントで作成できるインデックスの最大数は決まっており、デフォルトでは 100 に設定されています。
 
 {{< img src="logs/indexes/add-index.png" alt="インデックスを追加" style="width:70%;">}}
 
@@ -53,7 +56,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7] をサ�
 
 ### インデックスの削除 {#delete-indexes}
 
-組織からインデックスを削除するには、インデックスのアクショントレイにある「削除アイコン」を使用します。このオプションは、`Logs delete data`権限を持つユーザーのみが使用できます。
+組織からインデックスを削除するには、インデックスのアクショントレイにある [{{< ui >}}Delete{{< /ui >}}] (削除) アイコンを使用します。このオプションは、`Logs delete data`権限を持つユーザーのみが使用できます。
 
 {{< img src="logs/indexes/delete-index.png" alt="インデックスの削除" style="width:70%;">}}
 
@@ -83,7 +86,7 @@ Log Explorer は、[複数のインデックスにわたるクエリ][7] をサ�
 
 1. [ログインデックス][11] に移動します。
 2. 除外フィルターを追加したいインデックスを展開します。
-3. **除外フィルターを追加する**をクリックします。
+3. [{{< ui >}}Add an Exclusion Filter{{< /ui >}}] (除外フィルターを追加) をクリックします。
 
 除外フィルターは、クエリ、サンプリング規則、および active/inactive のトグルで定義します。
 
@@ -170,7 +173,7 @@ Web アクセスサーバーリクエストからのすべてのログを保持�
 
 使用量を監視してアラートを出す方法については、[ログの使用量を監視する][20] を参照してください。
 
-##  参考資料 {#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

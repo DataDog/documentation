@@ -13,11 +13,7 @@ Organization admins can set monthly caps on AI Credit usage at the organization 
 
 ## Permissions
 
-To view and set AI Credit limits, a user needs all of the following [permissions][6]:
-
-- `user_access_manage`
-- `billing_edit`
-- `org_management`
+To view and set AI Credit limits, a user needs the [`billing_edit` permission][6].
 
 ## Where to set limits
 
@@ -70,4 +66,4 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 [3]: /bits_ai/bits_code/
 [4]: /actions/agents/
 [5]: https://app.datadoghq.com/bits-ai/ai-credits-management
-[6]: /account_management/rbac/permissions/
+[6]: /account_management/rbac/permissions/#billing-and-usage

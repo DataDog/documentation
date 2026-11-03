@@ -14,9 +14,7 @@ title: Destination Archives Datadog
 
 Utilisez la destination Archives Datadog pour envoyer des logs vers Amazon S3 pour l'[archivage][1] au format réhydratable par Datadog. Vous pouvez ensuite interroger ces logs avec la [Archive Search][16]. Utilisez le mode {{< ui >}}Search & Rehydration{{< /ui >}} d'Archive Search lorsque vous devez réindexer les résultats pour un accès complet à la plateforme.
 
-**Remarques** : 
-- La destination Archives Datadog compresse les logs en utilisant gzip.
-- Utilisez la destination [Amazon S3][12] si vous souhaitez envoyer vos logs vers Amazon S3 au format JSON ou Parquet.
+**Remarque** : Utilisez la destination [Amazon S3][12] pour envoyer vos logs vers Amazon S3 au format JSON ou Parquet.
 
 Vous pouvez également [acheminer les logs vers Snowflake en utilisant la destination Archives Datadog](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -26,7 +24,7 @@ Pour utiliser la destination Archives Datadog, vous devez installer l'[intégrat
 
 ## Configurer Log Archives{#configure-log-archives}
 
-Si vous avez déjà configuré Datadog Log Archives, passez à [Configurer la destination pour votre pipeline](#set-up-the-destination-for-your-pipeline).
+Si vous avez déjà configuré Datadog Log Archives, passez à [Configurez la destination de votre pipeline](#set-up-the-destination-for-your-pipeline).
 
 {{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
@@ -102,7 +100,7 @@ Consultez la documentation Log Archives [1] pour plus d'informations.
 
 ## Configurez la destination de votre pipeline {#set-up-the-destination-for-your-pipeline}
 
-Configurez la destination Datadog Archives lorsque vous configurez un Log Archives pipeline [4]. Vous pouvez configurer un pipeline dans l'[UI][13], en utilisant l'[API][14] ou avec [Terraform][15]. Les étapes de cette section sont configurées dans l'UI.
+Configurez la destination Datadog Archives lorsque vous configurez un Log Archives pipeline [4]. Vous pouvez configurer un pipeline dans l'[UI][13], en utilisant l'[API][14] ou avec [Terraform][15]. Les étapes de cette section sont configurées dans l'interface utilisateur.
 
 Après avoir sélectionné la destination Datadog Archives dans l'interface utilisateur du pipeline :
 
@@ -110,7 +108,7 @@ Après avoir sélectionné la destination Datadog Archives dans l'interface util
 1. Saisissez la région AWS dans laquelle se trouve le bucket S3.
 1. Saisissez le préfixe de clé.
     - Les préfixes sont utiles pour partitionner les objets. Par exemple, vous pouvez utiliser un préfixe comme clé d'objet pour stocker des objets dans un répertoire particulier. Si vous utilisez un préfixe à cette fin, il doit se terminer par `/` pour agir comme un chemin de répertoire ; une barre oblique finale `/` n'est pas ajoutée automatiquement.
-    - Consultez la [template syntax][8] si vous souhaitez acheminer les logs vers différentes clés d'objet en fonction de champs spécifiques dans vos logs.
+    - Consultez la [syntaxe de modèle][8] si vous souhaitez acheminer les logs vers différentes clés d'objet en fonction de champs spécifiques dans vos logs.
      - **Remarque** : Datadog recommande de commencer vos préfixes par le nom du répertoire et sans barre oblique initiale (`/`). Par exemple, `app-logs/` ou `service-logs/`.
 1. Sélectionnez la classe de stockage pour votre bucket S3 dans le menu déroulant {{< ui >}}Storage Class{{< /ui >}}. Si vous prévoyez d'archiver et de réhydrater vos logs :
     - **Remarque** : La réhydratation ne prend en charge que les [classes de stockage][9] suivantes :
@@ -122,6 +120,16 @@ Après avoir sélectionné la destination Datadog Archives dans l'interface util
     - Consultez la section [Exemple de configuration de destination et d'archive de logs](#example-destination-and-log-archive-setup) de cette page pour savoir comment configurer votre archive de logs en fonction de votre configuration de destination Amazon S3.
 
 ### Paramètres facultatifs {#optional-settings}
+
+#### Compression {#compression}
+
+1. Dans le menu déroulant {{< ui >}}Compression - Algorithm{{< /ui >}}, sélectionnez l'algorithme de compression pour vos logs archivés ({{< ui >}}gzip{{< /ui >}} ou {{< ui >}}zstd{{< /ui >}}).
+    - **Remarque** : Si aucun algorithme de compression n'est spécifié, gzip avec un niveau de compression de `6` est utilisé.
+1. Dans le champ {{< ui >}}Compression - Level {{< /ui >}}, vous devez saisir un niveau de compression. Datadog recommande `6` pour gzip et `3` pour zstd.
+
+#### Chiffrement côté serveur {#server-side-encryption}
+
+Sélectionnez un type de chiffrement pour votre bucket S3 dans le menu déroulant {{< ui >}}Server-Side Encryption{{< /ui >}} ({{< ui >}}AWS KMS{{< /ui >}} ou {{< ui >}}AES256{{< /ui >}}). Si vous avez sélectionné {{< ui >}}AWS KMS{{< /ui >}}, saisissez l'ID de clé AWS KMS.
 
 #### Authentification AWS {#aws-authentication}
 
@@ -143,7 +151,7 @@ Si vous saisissez les valeurs suivantes pour votre Datadog Archives destination 
 
 {{< img src="observability_pipelines/setup/amazon_s3_destination.png" alt="La configuration de la Datadog Archives destination avec les valeurs d'exemple" style="width:40%;" >}}
 
-Alors voici les valeurs que vous saisissez pour configurer le S3 bucket pour Datadog Log Archives :
+Alors voici les valeurs que vous saisissez pour configurer le bucket S3 pour Datadog Log Archives :
 
 - Bucket S3 : `test-op-bucket`
 - Chemin : `op-logs`
@@ -171,9 +179,9 @@ Il n'y a aucun identifiant de secret à configurer.
 
 ## Acheminer les logs vers Snowflake en utilisant la Datadog Archives destination {#route-logs-to-snowflake-using-the-datadog-archives-destination}
 
-Vous pouvez acheminer les logs d'Observability Pipelines vers Snowflake en utilisant la Datadog Archives destination en configurant Snowpipe dans Snowflake pour ingérer automatiquement ces logs. Snowpipe surveille en continu votre S3 bucket pour détecter les nouveaux fichiers et les ingère automatiquement dans vos tables Snowflake, garantissant ainsi une disponibilité des données en temps quasi réel pour l'analyse ou un traitement ultérieur. Lorsque les logs sont collectés par Observability Pipelines, ils sont écrits dans un S3 bucket. Pour configurer cela :
+Vous pouvez acheminer les logs d'Observability Pipelines vers Snowflake en utilisant la Datadog Archives destination en configurant Snowpipe dans Snowflake pour ingérer automatiquement ces logs. Snowpipe surveille en continu votre bucket S3 pour détecter les nouveaux fichiers et les ingère automatiquement dans vos tables Snowflake, garantissant ainsi une disponibilité des données en temps quasi réel pour l'analyse ou un traitement ultérieur. Lorsque les logs sont collectés par Observability Pipelines, ils sont écrits dans un bucket S3. Pour configurer cela :
 1. Configurez [Log Archives](#configure-log-archives).
-1. [Set up a pipeline][5] pour utiliser Datadog Archives comme destination de logs. Utilisez la configuration détaillée dans [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+1. [Set up a pipeline][5] pour utiliser Datadog Archives comme destination de logs. Utilisez la configuration détaillée dans [Configurez la destination de votre pipeline](#set-up-the-destination-for-your-pipeline).
 1. Configurez Snowpipe dans Snowflake. Consultez [Automating Snowpipe for Amazon S3][6] pour obtenir des instructions.
 
 ## Comment fonctionne la destination {#how-the-destination-works}
@@ -182,7 +190,7 @@ Vous pouvez acheminer les logs d'Observability Pipelines vers Snowflake en utili
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
-#### Permissions {#permissions}
+#### Autorisations {#permissions}
 
 L'Observability Pipelines Worker nécessite ces autorisations de politique pour envoyer des logs vers Amazon S3 :
 
@@ -192,7 +200,7 @@ L'Observability Pipelines Worker nécessite ces autorisations de politique pour 
 
 ### Regroupement d'événements {#event-batching}
 
-Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Destinations event batching][7] pour plus d'informations.
+Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Regroupement d'événements par destination][7] pour plus d'informations.
 
 | Nombre maximal d'événements | Taille maximale (Mo) | Délai d'expiration (secondes)   |
 |----------------|-------------------|---------------------|

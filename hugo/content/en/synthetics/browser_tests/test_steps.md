@@ -547,7 +547,7 @@ Some variables only compute at runtime, such as a variable from an HTTP request 
 
 You can add multiple variables to your browser test recording steps.
 
-In your browser test recording, click the {{< ui >}}+ Add Variable{{< /ui >}} button to add one or more variables to your test:
+In your browser test recording, click the {{< ui >}}\+ Add Variable{{< /ui >}} button to add one or more variables to your test:
 
   {{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="Defining a local variable from global variables" width="90%" >}}
 

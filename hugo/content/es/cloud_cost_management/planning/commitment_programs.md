@@ -1,141 +1,179 @@
 ---
-description: Más información sobre cómo gestionar el rendimiento y el estado de tus
-  programas de descuentos en la nube.
+description: Aprenda a administrar el rendimiento y el estado de sus programas de
+  descuento en la nube.
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentación
-  text: Más información sobre Cloud Cost Management
+  text: Obtenga información sobre Cloud Cost Management
 title: Programas de compromiso
 ---
+<div class="alert alert-info">CCM Commitment Programs admite instancias reservadas y planes de ahorro para EC2, RDS y ElastiCache en AWS, y máquinas virtuales en Azure.</div>
 
-<div class="alert alert-info">Los programas de compromiso de CCM admiten las instancias reservadas de Amazon RDS y las instancias reservadas de Amazon EC2.</div>
+## Descripción general {#overview}
 
-## Información general
+Los proveedores de la nube ofrecen programas de descuento basados en compromisos, tales como {{< tooltip text="Reserved Instance (RI)" tooltip="Un descuento de facturación por comprometerse a utilizar una configuración de instancia específica durante un plazo de uno o tres años." >}} y {{< tooltip text="Savings Plans" tooltip="Programas de descuento en la nube flexibles que ofrecen precios más bajos a cambio de un compromiso de una cantidad constante de uso (medido en $/hora) durante un plazo." >}}, para ayudarle a ahorrar en el uso predecible. La función Programas de compromiso de Datadog le ayuda a hacer un seguimiento, optimizar y maximizar el valor de estos descuentos en sus entornos de nube.
 
-Los proveedores de la nube ofrecen programas de descuentos basados en compromisos, como {{< tooltip text="Reserved Instance (RI)" tooltip="A billing discount for committing to use a specific instance configuration for a one- or three-year term." >}} y {{< tooltip text="Savings Plans" tooltip="Flexible cloud discount programs that provide lower prices in exchange for a commitment to a consistent amount of usage (measured in $/hour) over a term." >}}, para ayudarte a ahorrar en un uso previsible. La función de los Programas de compromiso de Datadog ayuda a monitorizar, optimizar y maximizar el valor de estos descuentos en todos tus entornos de la nube.
+Con los Programas de compromiso, usted puede:
+- Haga un seguimiento y gestione los compromisos no utilizados o subutilizados
+- Apunte a un gasto alto {{< tooltip text="on-demand" tooltip="Recursos en la nube facturados a tarifas estándar, sin ningún compromiso o programa de descuento." >}} con compromisos adicionales
+- Supervise las fechas de vencimiento y planifique las renovaciones a tiempo
 
-Con los Programas de Compromiso, puedes:
-- Rastrear y abordar los compromisos no utilizados o subutilizados
-- Dirigir el gasto elevado {{< tooltip text="on-demand" tooltip="Cloud resources billed at standard rates, without any commitment or discount program." >}} con compromisos adicionales
-- Monitorizar vencimientos y renovaciones puntuales del plan
+## Primeros pasos {#getting-started}
 
-{{< img src="cloud_cost/planning/planning-commitments-overview.png" alt="Dashboard en el que se muestran filtros, indicadores clave de rendimiento (Tasa de ahorro efectiva, ahorro absoluto, cobertura, utilización), un gráfico de barras de costos en el tiempo y una tabla de zonas cubiertas bajo demanda por región, familia de instancias y motor de base de datos." style="width:100%;" >}}
+Utilice los Programas de compromiso para comprender y optimizar sus compromisos en la nube.
 
+1. Vaya a [**Cloud Cost > Planning > Commitment Programs**][1] en Cloud Cost Management.
+2. Utilice el selector de productos para elegir un tipo de compromiso y el selector de marco temporal para establecer el período de informes.
+3. Obtenga información sobre sus KPI, costos de compromiso y recomendaciones de renovación:
+   - Revise los KPI en la sección [Commitments overview](#commitments-overview).
+   - Analice las áreas de gasto bajo demanda para comprender cómo mejorar su cobertura en la sección [On-demand hot-spots](#on-demand-hot-spots).
+   - Vea los compromisos activos por tipo en la tabla [Inventario de compromisos](#commitments-inventory).
+   - Identifique los planes de ahorro que generan más desperdicio en [Planes de ahorro menos utilizados](#least-used-savings-plans).
+4. Tome medidas basadas en estos conocimientos:
+   - Ajuste las cargas de trabajo para utilizar mejor sus compromisos y evitar cargos adicionales bajo demanda.
+   - Actualice los compromisos comprándolos o cambiándolos según sus datos de uso.
+   - Planifique las renovaciones o retire los compromisos antes de que caduquen.
+   - Optimice el gasto utilizando las recomendaciones de Datadog para ahorrar más y reducir el desperdicio.
 
-## Empezando
+## Descripción general de compromisos {#commitments-overview}
 
-Utiliza los Programas de compromiso para comprender y optimizar tus compromisos de la nube.
+Revise estos indicadores clave de rendimiento (KPI) para sus proveedores y servicios en la nube:
 
-1. Ve a [**Cloud Cost > Planning > Commitment Programs**][1] (Costo en la nube > Planificación > Programas de compromiso) en Cloud Cost Management.
-2. Utiliza filtros para centrarte en cuentas, regiones o servicios específicos.
-3. Obtén información sobre tus indicadores clave de rendimiento, costos de compromiso y recomendaciones de renovación:
-   - Revisa los KPI en la sección [Información general de compromisos](#commitments-overview).
-   - Explora el [Información general de costos](#costs-overview) para analizar la utilización y la cobertura.
-   - Check las fechas de vencimiento y las recomendaciones de renovación en [Explorer de compromisos](#commitment-explorer).
-4. En función de esta información, realiza una acción:
-   - Ajusta las cargas de trabajo para aprovechar mejor tus compromisos y evitar cargos adicionales bajo demanda.
-   - Actualiza los compromisos comprándolos o cambiándolos en función de tus datos de uso.
-   - Planifica las renovaciones o retira los compromisos antes de que expiren.
-   - Optimiza el gasto utilizando las recomendaciones de Datadog para ahorrar más y reducir el despilfarro.
+{{< img src="cloud_cost/planning/commitments-inventory.png" alt="Panel de descripción general de compromisos que muestra métricas clave de ahorro y un gráfico de barras que compara los costos de los compromisos con los costos equivalentes bajo demanda a lo largo del tiempo." style="width:100%;" >}}
 
-## Información general de compromisos
+- {{< ui >}}Effective Savings Rate (ESR){{< /ui >}}: Porcentaje de ahorro de costos logrado por sus programas de descuento en comparación con los precios bajo demanda, teniendo en cuenta tanto los compromisos utilizados como los subutilizados.
+  - _Ejemplo: Sus RI pueden ofrecer un 62% de descuento, pero si su ESR es solo del 45%, los compromisos subutilizados están reduciendo sus ahorros reales._
+- {{< ui >}}Realized Savings{{< /ui >}}: Monto total en dólares ahorrado mediante el uso de programas de compromiso frente a las tarifas bajo demanda.
+  - _Ejemplo: Usted gastó $10,000 en servicios en la nube el mes pasado, pero habría gastado $14,000 a tarifas bajo demanda, por lo que su ahorro absoluto es de $4,000._
 
-Revisa estos indicadores clave de rendimiento (KPI) para tus proveedores y servicios en la nube:
+## Puntos críticos bajo demanda {#on-demand-hot-spots}
 
-{{< img src="cloud_cost/planning/commitments-overview.png" alt="Dashboard en el que se resumen los KPI de compromisos en la nube, en el que se provee información general rápida del rendimiento de ahorro y se resaltan áreas que necesitan atención." style="width:100%;" >}}
+Los puntos críticos bajo demanda resaltan áreas con costos bajo demanda elevados, lo que puede indicar oportunidades para comprar compromisos adicionales.
 
-- **Tasa de ahorro efectiva (TEA):** Porcentaje de ahorro de costos logrado por tus programas de descuentos en comparación con los precios bajo demanda, teniendo en cuenta los compromisos utilizados y los subutilizados.
-  - _Ejemplo: Tus IR pueden ofrecer un descuento del 62 %, pero si tu TEA es solo del 45 %, los compromisos subutilizados están reduciendo sus ahorros reales._
-- **Ahorro absoluto:** Importe total en dólares ahorrado al utilizar programas de compromiso frente a tarifas bajo demanda.
-  - _Ejemplo: El mes pasado gastaste 10 000 dólares en servicios en la nube, pero habrías gastado 14 000 dólares con tarifas bajo demanda, por lo que tu ahorro absoluto es de 4000 dólares._
-- **Cobertura:** Proporción de tu uso protegida por un programa de descuentos (como instancias reservadas, planes de ahorro o {{< tooltip text="Committed Use Contracts" tooltip="Agreements with cloud providers to use a certain amount of resources for a discounted rate over a set period." >}}).
-  - _Ejemplo: Si la cobertura informática de EC2 es del 50 %, la mitad de su uso es bajo demanda. Aumentar la cobertura al 80 % podría reducir tu factura._
-- **Utilización:** Cuántos de los compromisos adquiridos se utilizan realmente.
-  - _Ejemplo: Si un Contrato de Uso Comprometido de GCP de 1 año solo se utiliza en un 70 %, el 30 % no se está utilizando y puede necesitar un ajuste._
+{{< img src="cloud_cost/planning/commitments-on-demand-2.png" alt="Tabla de puntos críticos bajo demanda para AWS RDS que muestra la región, la familia de instancias, el motor de base de datos, el porcentaje de cobertura y el costo bajo demanda." style="width:100%;" >}}
 
-## Información general de costes
+Utilice las pestañas {{< ui >}}Cost{{< /ui >}} y {{< ui >}}Hours{{< /ui >}} para alternar entre el gasto bajo demanda en dólares o el uso en horas. Utilice los filtros disponibles para limitar los resultados; los filtros varían según el producto seleccionado.
 
-En la información general de costos se resume tu gasto en programas de compromiso, lo que te ayuda a comprender a dónde van tus costos de la nube y cómo los compromisos afectan a tu gasto general. En esta sección, puedes:
+Las columnas de la tabla corresponden a los filtros del producto seleccionado, mostrando las dimensiones que caracterizan el uso bajo demanda (como la región, la familia de instancias o el motor de base de datos), junto con {{< ui >}}Coverage{{< /ui >}} (porcentaje de uso cubierto por compromisos) y {{< ui >}}On-Demand Cost{{< /ui >}} (ordenado en orden descendente para mostrar primero los puntos críticos de mayor gasto).
 
-{{< img src="cloud_cost/planning/commitments-rds-costs-overview.png" alt="Gráfico de barras de costos de RDS desde el 1 de marzo hasta el 31 de marzo, agrupados por tipo de costo, región y familia de instancias, con un total resaltado de 20 550 dólares." style="width:100%;" >}}
+## Inventario de compromisos {#commitments-inventory}
 
-- **Mostrar cuota de RI:** Alterna la visualización de las cuotas de RI para cambiar la capacidad reservada a compromisos, lo que facilita la distinción entre el gasto bajo demanda y el basado en compromisos.
-- **Agrupar por opciones:** Organiza y analiza tus costos por tipo de costo, región, familia de instancias o motor de base de datos. Identifica qué regiones o servicios generan más gastos, compara costos y señala las áreas en las que es necesario realizar compromisos adicionales o ajustes de estrategia.
-- **Gasto total en compromisos:** Visualiza cuánto gastas en capacidad reservada frente a bajo demanda, lo que te ayudará a evaluar la eficacia de tu estrategia de compromisos.
-- **Desglose del ahorro:** Check el ahorro conseguido con los programas de compromiso en comparación con los precios bajo demanda.
-- **Detalles a nivel de servicio:** Analiza los costos por servicio, región o cuenta para identificar dónde tus programas de compromiso están proporcionando el mayor valor y dónde puede haber oportunidades para una mayor optimización.
+El Inventario de compromisos proporciona una vista detallada de los compromisos activos durante el período seleccionado, organizados por tipo de compromiso. Esto incluye los compromisos que vencen pronto (dentro de 30 días) y los compromisos que ya han vencido al momento de la visualización.
 
-Utiliza esta sección para tomar decisiones informadas sobre la compra, renovación o ajuste de tus compromisos para maximizar el ahorro y minimizar el despilfarro.
+{{< img src="cloud_cost/planning/commitments-inventory-1.png" alt="Sección del Inventario de compromisos que muestra la pestaña Planes de ahorro con un gráfico de utilización y una tabla de planes de ahorro de EC2." style="width:100%;" >}}
 
-## Zonas cubiertas bajo demanda
+Use las pestañas {{< ui >}}Savings Plans{{< /ui >}} y {{< ui >}}Reserved Instances{{< /ui >}} para cambiar entre los tipos de compromiso. Cada pestaña muestra:
 
-Las zonas cubiertas bajo demanda resaltan las zonas con costos elevados bajo demanda, lo que puede indicar oportunidades de adquirir compromisos adicionales.
+- {{< ui >}}Utilization{{< /ui >}}: Porcentaje del tipo de compromiso que se está utilizando durante el período seleccionado.
+- {{< ui >}}Unused spend{{< /ui >}}: Gasto total en compromisos no utilizados.
+- {{< ui >}}Daily chart{{< /ui >}}: Realiza un seguimiento del gasto de compromiso utilizado y no utilizado junto con la tasa de utilización a lo largo del tiempo.
 
-{{< img src="cloud_cost/planning/commitments-on-demand.png" alt="Tabla de zonas cubiertas bajo demanda de AWS RDS, en la que se enumeran regiones, familias de instancias y motores de base de datos con 0 % de cobertura y sus costos elevados bajo demanda asociados." style="width:100%;" >}}
+Use la casilla de verificación {{< ui >}}Only show Expiring{{< /ui >}} para filtrar la tabla y mostrar los compromisos próximos a su fecha de finalización.
 
-- **Identificación de uso elevado bajo demanda:** Identifica rápidamente los servicios, regiones o cuentas con un gasto bajo demanda significativo.
-- **Cálculo del ahorro potencial:** Consulta cuánto podrías ahorrar al convertir el uso bajo demanda a precios basados en compromisos.
-- **Toma de acciones:** Ajusta las cargas de trabajo o adquiere nuevos compromisos para reducir los futuros costos bajo demanda.
+La tabla enumera sus compromisos activos. Las columnas varían según el producto y el tipo de compromiso, pero las columnas comunes incluyen:
 
-## Explorer de compromisos
+| Columna | Descripción |
+|---|---|
+| ARN del plan de ahorro, ARN de la reserva o ID de compromiso | Identificador único del compromiso (ID de compromiso para Azure). |
+| Nombre del beneficio | Nombre del plan de ahorro o beneficio de reserva de Azure. |
+| Modelo de pago | Opción de pago (por ejemplo, sin pago inicial, pago inicial parcial, pago inicial total). |
+| Plazo | Duración del compromiso (por ejemplo, 1 año, 3 años). |
+| Tipo | El tipo de compromiso (por ejemplo, `ComputeSavingsPlans`). |
+| Gasto comprometido/hora | Gasto por hora comprometido bajo el plan. |
+| Fecha de finalización | Fecha en la que vence el compromiso. |
+| Utilización | Porcentaje del compromiso utilizado durante el período seleccionado. |
 
-En Explorer de compromisos se proporciona una tabla detallada e interactiva de todos tus contratos de compromiso de la nube, como las instancias reservadas de base de datos. Explora, busca, filtra y ordena tus compromisos por atributos clave para rastrear tu inventario, monitorizar fechas de vencimiento e identificar oportunidades para optimizar el uso y el ahorro.
+Use el botón {{< ui >}}Columns{{< /ui >}} para mostrar u ocultar columnas adicionales.
 
-{{< img src="cloud_cost/planning/commitments-explorer-3.png" alt="Tabla de compromisos de instancia reservada de AWS RDS, en la que está resaltado el botón 'Columnas', un compromiso que expiró y uno que lo hará en breve." style="width:100%;" >}}
+## Planes de ahorro menos utilizados {#least-used-savings-plans}
 
-- Personaliza la vista de tabla para mostrar u ocultar columnas y centrarte en la información más relevante.
-- En la tabla se resaltan los compromisos que han expirado recientemente o que lo harán en breve, lo que te ayudará a planificar las renovaciones y evitar pagar precios bajo demanda.
+Planes de ahorro menos utilizados le ayuda a identificar qué planes de ahorro están generando la mayor cantidad de desperdicio. Utilice esta sección para determinar cuándo ocurre ese desperdicio y tome medidas para mejorar la utilización.
 
-Las columnas que se muestran en Explorer de compromisos varían en función del producto (por ejemplo, Amazon RDS o EC2) y del programa de compromisos específico. Estas son las columnas disponibles:
+{{< img src="cloud_cost/planning/commitment-programs-least-used-savings-plans-1.png" alt="Sección de Planes de ahorro menos utilizados que muestra un gráfico de barras del gasto promedio diario no utilizado del plan de ahorro por día de la semana, una tabla de los planes de ahorro más derrochadores con el monto de desperdicio, la utilización y el ARN, y un mapa de calor del porcentaje de gasto comprometido no utilizado por hora por día de la semana." style="width:100%;" >}}
 
-| Columna | Descripción | Producto |
-|---|---|---|
-| ARN de reserva | Nombre único de recurso de Amazon (ARN) que identifica el compromiso de instancia reservada. | Todos |
-| Modelo de pago | Opción de pago para la instancia reservada (por ejemplo, Sin pago inicial, Pago inicial parcial, Pago inicial total). | Todos |
-| Plazo | Duración del compromiso de la instancia reservada (por ejemplo, 1 año, 3 años). | Todos |
-| Región | Región de AWS en la que se aplica la instancia reservada. | Todas |
-| Tipo de instancia | Tipo y tamaño de la instancia cubierta por el compromiso (por ejemplo, `db.r6g.large` para RDS o `m5.large` para EC2). | Todos |
-| Fecha de inicio | Fecha en la que comienza el plazo de vigencia de la Instancia Reservada. | Todas |
-| Fecha de finalización | Fecha en la que finaliza el plazo de la Instancia Reservada. | Todas |
-| Número de instancias | Número de instancias cubiertas por la instancia reservada. | Todos |
-| Número de NFU | Número de unidades del factor de normalización (NFU) cubiertas, que normaliza los tamaños de las instancias para su comparación. | Todos |
-| Utilización | Porcentaje de la instancia reservada utilizado durante el periodo seleccionado. | Todos |
-| Motor de base de datos | Motor de base de datos utilizado por la instancia (como PostgreSQL, MySQL, SQL Server). | Amazon RDS |
-| Multi-AZ | Indica si la instancia reservada cubre un despliegue de varias zonas de disponibilidad (Sí/No). | Amazon RDS |
-| Sistema operativo | Sistema operativo de la instancia (como Linux o Windows). | Amazon EC2 |
-| Clase de oferta | Clase de instancia reservada (estándar o convertible). | Amazon EC2 |
-| AZ | Zona de disponibilidad específica en la que se halla la instancia reservada. | Amazon EC2 |
+{{< ui >}}Daily average unused Savings Plans{{< /ui >}}: Un gráfico de barras que muestra el costo diario promedio del gasto del plan de ahorro no utilizado para cada día de la semana. Utilice esto para detectar patrones, como un mayor desperdicio los fines de semana cuando las cargas de trabajo pueden ser menores.
 
-## Ejemplos de uso
+{{< ui >}}Savings Plans with most waste{{< /ui >}}: Una tabla que enumera los planes de ahorro subutilizados, ordenados por desperdicio total. Las columnas incluyen:
 
-### Identificar los compromisos subutilizados
+- {{< ui >}}Waste{{< /ui >}}: Monto total en dólares del gasto comprometido no utilizado durante el período seleccionado.
+- {{< ui >}}Utilization{{< /ui >}}: Porcentaje del plan de ahorro que se está utilizando, mostrado como porcentaje y barra de progreso.
+- {{< ui >}}Savings Plan ARN{{< /ui >}}: Identificador único para el plan de ahorro.
 
-**Escenario**: Tu Tasa de Ahorro Efectivo (TEA) es inferior a la esperada, aunque tu cobertura sea elevada.
+{{< ui >}}Hourly unused committed spend percentage{{< /ui >}}: Un mapa de calor que muestra el porcentaje de gasto comprometido que no se utilizó, desglosado por hora (UTC) y día de la semana. Las celdas más oscuras indican porcentajes no utilizados más altos, lo que permite identificar ventanas de tiempo específicas donde los compromisos se subutilizan constantemente.
+
+## Simulación de Plan de Ahorro {#savings-plan-simulation}
+
+<div class="alert alert-info">La simulación de Plan de Ahorro está en Preview. Es compatible con AWS Savings Plans y se ejecuta a nivel de <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account">cuenta de administración de AWS</a>.</div>
+
+La simulación de Plan de Ahorro le permite estimar el impacto de un nuevo Plan de Ahorro en su factura antes de comprarlo. En lugar de unir exportaciones de Cost Explorer y hojas de cálculo, puede modelar un compromiso frente a su uso histórico. Los resultados muestran la cobertura, la utilización y los ahorros proyectados.
+
+La simulación es retrospectiva. Vuelve a calcular el precio de su uso bajo demanda del período seleccionado como si el Savings Plan hubiera estado activo. Los resultados muestran lo que sus costos y ahorros _habrían sido_, no un pronóstico del uso futuro.
+
+{{< img src="cloud_cost/planning/commitment-simulation.png" alt="Simulación de Savings Plan que muestra los parámetros de entrada, un resumen de impacto estimado con una tabla de métricas antes y después, y un gráfico de series temporales de costo simulado." style="width:100%;" >}}
+
+### Ejecutar una simulación {#run-a-simulation}
+
+1. Vaya a la pestaña [**Simulator**][2] en **Cloud Cost > Planning > Commitment Programs**.
+2. Elija el tipo de Savings Plan y, a continuación, establezca sus preferencias de compromiso: la cuenta propietaria, el plazo y el modelo de pago.
+3. Ingrese un compromiso por hora adicional y elija el período de uso para realizar la simulación, hasta los últimos 3 meses. El período predeterminado es de los últimos 30 días.
+4. Revise los resultados proyectados en las secciones {{< ui >}}Estimated Impact{{< /ui >}} y {{< ui >}}Estimated Service Breakdown{{< /ui >}}.
+
+Si [AWS Cost Optimization Hub][3] tiene una recomendación de Savings Plan para su organización, aparecerá en un aviso. El aviso muestra el compromiso por hora, el plazo y la opción de pago sugeridos. Haga clic en él para aplicar esa configuración a la simulación. Cost Optimization Hub genera estas recomendaciones solo para Compute Savings Plans.
+
+Para recibir estas recomendaciones, asegúrese de que su rol de IAM de integración de AWS incluya los permisos `cost-optimization-hub:GetRecommendation` y `cost-optimization-hub:ListRecommendations`. Para conocer los pasos de configuración, consulte [Permisos para las recomendaciones de AWS Cost Optimization Hub][4].
+
+### Interprete los resultados {#interpret-the-results}
+
+Todos los resultados son estimaciones basadas en su uso durante el período seleccionado, y los ahorros reales dependen de su uso futuro. Debido a que los Savings Plans se comparten en una [Consolidated Billing Family][5], un compromiso puede aplicarse al uso en varias cuentas. Si a Datadog le faltan datos de costos para el período, el simulador marca los resultados como incompletos.
+
+Los resultados aparecen en dos secciones:
+
+- {{< ui >}}Estimated Impact{{< /ui >}}: Compara sus métricas clave antes y después del compromiso simulado, junto con un gráfico {{< ui >}}Simulated Cost{{< /ui >}} durante el período seleccionado.
+- {{< ui >}}Estimated Service Breakdown{{< /ui >}}: Desglosa el costo estimado y la cobertura por servicio de AWS.
+
+## Ejemplos de casos de uso {#example-use-cases}
+
+### Identifique compromisos subutilizados {#identify-underutilized-commitments}
+
+**Escenario**: Su tasa de ahorro efectiva (ESR) es menor de lo esperado, aunque su cobertura es alta.
 
 **Cómo utilizar los programas de compromiso**:  
-1. Ve a **Commitment Overview** (Información general de compromisos) y check el KPI de utilización.
-2. Filtra por cuenta, región o familia de instancias para saber qué compromisos están subutilizados.
-3. Reasigna las cargas de trabajo para utilizar estos compromisos de forma más eficaz o considere la posibilidad de modificar o vender los compromisos no utilizados si tu proveedor de la nube lo permite.
+1. Vaya a {{< ui >}}Commitments Overview{{< /ui >}} y verifique la utilización KPI.
+2. En {{< ui >}}Commitments inventory{{< /ui >}}, ordene por utilización en orden ascendente para identificar los compromisos menos utilizados. Para los planes de ahorro, consulte también la tabla {{< ui >}}Savings Plans with most waste{{< /ui >}} en la sección [Planes de ahorro menos utilizados](#least-used-savings-plans).
+3. Reasigne las cargas de trabajo para utilizar estos compromisos de manera más efectiva, o considere modificar o vender los compromisos no utilizados si su proveedor de nube lo permite.
 
-### Planificar los compromisos que expiran
+### Planifique los compromisos que vencen {#plan-for-expiring-commitments}
 
-**Escenario**: Varias instancias reservadas van a caducar el mes que viene y quieres evitar cargos inesperados bajo demanda.
+**Escenario**: Varias instancias reservadas vencen pronto y desea evitar cargos inesperados bajo demanda.
 
 **Cómo utilizar los programas de compromiso**: 
-1. En **Commitment Explorer** (Explorer de compromisos), revisa la lista de compromisos y sus fechas de caducidad.
-2. Utiliza los filtros para centrarte en los compromisos que expirarán pronto.
-3. Planifica las renovaciones o sustituciones con antelación para mantener la cobertura y maximizar el ahorro.
+1. En {{< ui >}}Commitments Explorer{{< /ui >}}, revise la lista de compromisos y sus fechas de vencimiento.
+2. Utilice los filtros para centrarse en los compromisos que vencen pronto.
+3. Planifique las renovaciones o reemplazos con antelación para mantener la cobertura y maximizar los ahorros.
 
-### Dirigirse a los gastos bajo demanda elevados
+### Apunte al gasto alto bajo demanda {#target-high-on-demand-spend}
 
-**Escenario**: Tu factura de la nube muestra un uso bajo demanda elevado y constante para un servicio o región concretos.
+**Escenario**: Sus costos de nube muestran un uso alto y constante bajo demanda para un servicio o región en particular.
 
 **Cómo utilizar los programas de compromiso**:
-1. Utiliza **On-Demand Hot-Spots** (Zonas cubiertas a demanda) para identificar qué servicios, regiones o cuentas tienen costos bajo demanda significativos y constantes.
-2. Analiza los patrones de uso para confirmar que sean previsibles.
-3. Adquiriere nuevos compromisos para cubrir el uso constante y reducir costos.
+1. Utilice {{< ui >}}On-demand hot-spots{{< /ui >}} para identificar qué servicios, regiones o cuentas tienen costos bajo demanda significativos y constantes.
+2. Analice los patrones de uso para confirmar que son predecibles.
+3. Adquiera nuevos compromisos para cubrir el uso constante y reducir los costos.
 
-## Referencias adicionales
+### Reduzca el desperdicio trasladando cargas de trabajo para cubrir planes de ahorro no utilizados {#reduce-waste-by-shifting-workloads-to-cover-unused-savings-plans}
+
+**Escenario**: Usted tiene planes de ahorro subutilizados y altos costos bajo demanda ejecutándose en paralelo.
+
+**Cómo utilizar los programas de compromiso**:
+1. Utilice {{< ui >}}Least used savings plans{{< /ui >}} la sección para identificar patrones recurrentes de baja utilización; por ejemplo, capacidad constantemente no utilizada en ciertos días u horas.
+2. Identifique las cargas de trabajo bajo demanda que podrían programarse durante esas ventanas de baja utilización para aprovechar la cobertura de planes de ahorro no utilizada.
+3. Traslade o reprograme esas cargas de trabajo para reducir el gasto bajo demanda y mejorar la utilización de los planes de ahorro.
+
+## Lecturas adicionales {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/commitment-programs
+[2]: https://app.datadoghq.com/cost/plan/commitment-programs/simulator
+[3]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
+[4]: /es/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations
+[5]: https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-applying.html

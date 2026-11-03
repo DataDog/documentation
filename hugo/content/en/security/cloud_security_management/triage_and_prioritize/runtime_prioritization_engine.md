@@ -18,7 +18,10 @@ further_reading:
   text: "Securing the AI era: Outpace AI-powered attacks with unified security and observability"
 - link: "https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/"
   tag: "Blog"
-  text: "How CISA’s BOD 26-04 changes vulnerability prioritization"
+  text: "How CISA's BOD 26-04 changes vulnerability prioritization"
+- link: "https://www.datadoghq.com/blog/how-we-replaced-our-host-vulnerability-scanner-with-the-datadog-agent/"
+  tag: "Blog"
+  text: "How we replaced our host vulnerability scanner with the Datadog Agent"
 ---
 
 Security scanners surface thousands of findings per environment. Most teams default to ranking by CVSS severity, but static scores flag many findings that are never exploited in practice as critical. Real risk depends on live context: is the vulnerable code running, is an exploit available, and does the affected resource touch sensitive data or a business-critical workflow?
@@ -102,6 +105,23 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 | **Update frequency** | Hourly, when Datadog re-evaluates the image's findings. | Once per Agentless scan of the resource, every 12 hours. |
 | **Container-level detail** | The side panel of a finding in the [Vulnerability Explorer][11] lists the containers that recently ran the image. | Not available. |
 
+## CISA BOD 26-04 remediation timelines
+
+The Runtime Prioritization Engine computes remediation timelines that follow the risk-based approach in [CISA Binding Operational Directive (BOD) 26-04][15]. It combines signals for reachability, exposure, exploitability (including [CISA KEV][1] status), business criticality, and actionability.
+
+Datadog computes each vulnerability's remediation timeline according to the directive and adds it to the finding as one of the following values: 
+- `three_days_and_forensic_triage`
+- `three_days`
+- `fourteen_days`
+- `sixty_days`
+- `fix_on_system_upgrade`
+
+The due date computed from this timeline appears directly on the vulnerability finding. Datadog also records the date the vulnerability's CVE was added to the [CISA KEV catalog][1] as a `@vulnerability.cisa.kev_added_at` timestamp on the finding.
+
+For more information, see [How CISA's BOD 26-04 changes vulnerability prioritization][16].
+
+{{< img src="security/cloud_security_management/cisa_bod_26_04_remediation_timeline.png" alt="The Cloud Security Vulnerabilities Explorer filtered to the 3 Days + Forensic Triage CISA BOD 26-04 remediation timeline facet, with a search bar query combining the remediation timeline and kev_added_at attributes, and the time helper dropdown open." width="100%">}}
+
 ## Get started
 
 1. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments. See [Setting Up Cloud Security][3].
@@ -114,14 +134,16 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [1]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [2]: https://www.first.org/epss/
 [3]: /security/cloud_security_management/setup/
-[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization-preview
+[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
 [7]: /security/cloud_security_management/review_remediate/ownership_agent/
 [8]: /security/cloud_security_management/crown_jewels/
-[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
-[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
+[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization
+[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization
 [11]: https://app.datadoghq.com/security/csm/vm
 [12]: /containers/
 [13]: /security/cloud_security_management/setup/agentless_scanning/
 [14]: /security/cloud_security_management/vulnerabilities/
+[15]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
+[16]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/

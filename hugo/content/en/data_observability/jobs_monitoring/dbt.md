@@ -27,7 +27,7 @@ Follow the steps below to connect dbt Cloud to Datadog.
 Create a service token in dbt Cloud so Datadog can access your account's metadata.
 
 1. In dbt Cloud, go to {{< ui >}}User Profile{{< /ui >}} > {{< ui >}}API Tokens{{< /ui >}} > {{< ui >}}Service Tokens{{< /ui >}}.
-2. Click on {{< ui >}}+ Create Service Token{{< /ui >}}.
+2. Click on {{< ui >}}\+ Create Service Token{{< /ui >}}.
 3. Provide a name for the token.
 4. Set the token permissions:
    - If you create the webhook in dbt Cloud yourself, use the {{< ui >}}Stakeholder/Read-Only{{< /ui >}} permission set scoped to the relevant dbt Cloud projects.

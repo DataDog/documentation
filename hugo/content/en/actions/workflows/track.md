@@ -18,6 +18,10 @@ further_reading:
   text: "Usage Attribution"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 This page explains how to track different kinds of workflow activity and workflow costs.
 
 ## Out-of-the-box dashboard

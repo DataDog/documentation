@@ -2,171 +2,147 @@
 aliases:
 - /es/synthetics/settings
 further_reading:
-- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-  tag: Blog
-  text: Introducción a Datadog Synthetic Monitoring
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
   tag: Sitio externo
-  text: Crear y gestionar variables globales de Synthetic con Terraform
+  text: Cree y administre variables globales sintéticas con Terraform
 - link: /synthetics/api_tests/
   tag: Documentación
-  text: Configurar un test de API
+  text: Configure una prueba de API
 - link: /synthetics/multistep/
   tag: Documentación
-  text: Configurar un test de API de varios pasos
+  text: Configure una prueba de API en varios pasos
 - link: /synthetics/browser_tests/
   tag: Documentación
-  text: Configurar un test de navegador
+  text: Configure una prueba de navegador
 - link: /mobile_app_testing/
   tag: Documentación
-  text: Configurar un test de móvil
+  text: Configure una prueba móvil
 - link: /synthetics/private_locations/
   tag: Documentación
-  text: Crear una localización privada
-- link: /synthetics/guide/explore-rum-through-synthetics/
+  text: Cree una ubicación privada
+- link: /synthetics/platform/rum/
   tag: Documentación
-  text: Explorar RUM y Session Replay en Synthetics
-- link: /synthetics/guide/browser-tests-totp
-  tag: Documentación
-  text: TOTP para autenticación multifactor (MFA) en test de navegador
-title: Parámetros de monitorización y tests de Synthetic
+  text: Conecte RUM a Synthetic Monitoring
+title: Configuración de Synthetic Testing y Monitoring
 ---
+## Descripción general {#overview}
 
-## Información general
+En la [página de configuración de Synthetic Monitoring & Continuous Testing][1], puede acceder y controlar los siguientes temas:
 
-En la [página Synthetic Monitoring & Continuous Testing Settings][1] (Parámetros de Synthetic Monitoring y Continuous Testing), puedes controlar los siguientes temas y acceder a ellos:
-
-* [Parámetros predeterminados](#default-settings)
-* [Localizaciones privadas](#private-locations)
+* [Configuración predeterminada](#default-settings)
+* [Tiempos de inactividad][25]
+* [Ubicaciones privadas](#private-locations)
 * [Variables globales](#global-variables)
-* [Parámetros de integración](#integration-settings)
-* [Parámetros de Continuous Testing][2]
-* [Parámetros de aplicaciones móviles][18]
+* [Configuración de integración](#integration-settings)
+* [Continuous Testing Settings][2]
+* [Mobile Applications Settings][18]
 
-## Parámetros predeterminados
+## Configuración predeterminada {#default-settings}
 
-### Parámetros de etiquetas (tags) aplicados
+### Configuración de etiquetas obligatorias {#enforced-tags-settings}
 
-#### Aplicar etiquetas (tags) para la **atribución de uso** en todos los tests
+#### Aplique etiquetas para **atribución de uso** en todas las pruebas {#enforce-tags-for-usage-attribution-on-all-tests}
 
-En la página Usage Attribution (Atribución de uso), puedes configurar hasta tres etiquetas con las que desglosar los atributos de coste y uso. Selecciona **Enforce tags for usage attribution on all tests** (Aplicar etiquetas para la atribución de uso en todos los tests) para requerir que los usuarios introduzcan todas las etiquetas de atribución de uso configuradas al crear o editar tests de Synthetic. Con esta opción habilitada, los usuarios no podrán guardar los tests sin introducir todas las etiquetas necesarias.
+En la página de Atribución de uso, puede configurar hasta tres etiquetas para desglosar los atributos de costo y uso. Seleccione {{< ui >}}Enforce tags for usage attribution on all tests{{< /ui >}} para requerir que los usuarios ingresen todas las etiquetas de Atribución de uso configuradas al crear o editar pruebas Synthetic. Con esta configuración habilitada, los usuarios no pueden guardar pruebas sin ingresar todas las etiquetas requeridas.
 
-#### Aplicar **políticas de etiqueta de monitor** obligatorias en todos los tests
+#### Aplicar políticas de **etiquetas de monitor** requeridas en todas las pruebas {#enforce-required-monitor-tag-policies-on-all-tests}
 
-En la página de [configuración de Synthetic Monitoring y Testing][20], selecciona **Enforce required monitor tag policies on all tests** (Aplicar políticas de etiqueta de monitor obligatorias en todos los tests) para exigir que las políticas de etiqueta de monitor definidas por el usuario se apliquen en los tests de Synthetic. Con esta opción activada, los usuarios no podrán guardar los tests sin introducir todas las etiquetas obligatorias.
+En la página de [configuración de pruebas y Synthetic Monitoring][20], seleccione {{< ui >}}Enforce required monitor tag policies on all tests{{< /ui >}} para requerir que se apliquen las políticas de etiquetas de monitor definidas por el usuario en las pruebas Synthetic. Con esta configuración habilitada, los usuarios no pueden guardar pruebas sin ingresar todas las etiquetas requeridas.
 
   <br>
 
-  1. Configura las etiquetas de monitor en la página [**Monitors** > **Settings** > **Policies**][21] (Monitores > Configuración > Políticas):
+  1. Configure las etiquetas de monitor en la página [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Policies{{< /ui >}}][21]:
 
   <br>
 
    {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Página de Configuración del monitor, que muestra las etiquetas de política de monitor configuradas" style="width:80%;">}}
 
-  2. Crea un test de navegador de Synthetic y añade las etiquetas de política necesarias:
+  2. Cree una prueba de navegador Synthetic y agregue las etiquetas de política requeridas:
 
   <br>
 
-  {{< img src="synthetics/settings/monitor_tags.png" alt="Página Nuevo test de Synthetics, con la función Etiquetas de política resaltada" style="width:80%;">}}
+  {{< img src="synthetics/settings/monitor_tags.png" alt="Página de nueva prueba Synthetic, que resalta la función de etiquetas de política" style="width:80%;">}}
 
-### Localizaciones predeterminadas
+### Ubicaciones predeterminadas {#default-locations}
 
-Elige las localizaciones predeterminadas para los detalles de tu [test de API][4], [test de API de varios pasos][5] o [test de navegador][6].
+Elija las ubicaciones predeterminadas para los detalles de su [prueba de API][4], [prueba de API en varios pasos][5] o [prueba de navegador][6].
 
-Tus opciones incluyen todas las localizaciones gestionadas disponibles que ofrece Datadog y las localizaciones privadas que configuraste para tu cuenta.
+Sus opciones incluyen todas las ubicaciones administradas disponibles que ofrece Datadog y las ubicaciones privadas que configuró para su cuenta.
 
-Cuando termines de seleccionar las localizaciones, haz clic en **Save Default Locations** (Guardar localizaciones predeterminadas).
+Cuando termine de seleccionar las ubicaciones, haga clic en {{< ui >}}Save Default Locations{{< /ui >}}.
 
-### Navegadores y dispositivos predeterminados
+### Navegadores y dispositivos predeterminados {#default-browsers-and-devices}
 
-Elige los tipos de navegador y dispositivo predeterminados para los detalles de tu [test de navegador][6].
+Elija los tipos de navegador y dispositivo predeterminados para los detalles de su [prueba de navegador][6].
 
-Las opciones de navegador son Google Chrome, Mozilla Firefox y Microsoft Edge. En cuanto a los dispositivos, puedes elegir entre un portátil grande, una tableta y un dispositivo móvil pequeño.
+Sus opciones de navegadores incluyen Google Chrome, Mozilla Firefox y Microsoft Edge. Sus opciones de dispositivos incluyen una computadora portátil grande, una tableta y un dispositivo móvil pequeño.
 
-Cuando termines de seleccionar los navegadores y dispositivos, haz clic en **Save Default Browsers & Devices** (Guardar los navegadores y dispositivos predeterminados).
+Cuando termine de seleccionar los navegadores y dispositivos, haga clic en {{< ui >}}Save Default Browsers & Devices{{< /ui >}}.
 
-### Etiquetas predeterminadas
+### Etiquetas predeterminadas {#default-tags}
 
-Elige o añade las etiquetas predeterminadas para los detalles de tu [test de API][4], [test de API de varios pasos][5] o [test de navegador][6].
+Elija o agregue las etiquetas predeterminadas para los detalles de su [prueba de API][4], [prueba de API en varios pasos][5] o [prueba de navegador][6].
 
-Cuando termines de seleccionar las etiquetas relacionadas, haz clic en **Save Default Tags** (Guardar etiquetas predeterminadas).
+Cuando termine de seleccionar las etiquetas relacionadas, haga clic en {{< ui >}}Save Default Tags{{< /ui >}}.
 
-### Tiempo de espera predeterminado
+### Tiempo de espera predeterminado {#default-timeout}
 
-Añade los tiempos de espera predeterminados para los detalles de tu [test de API][4].
+Agregue los tiempos de espera predeterminados para los detalles de su [API test][4].
 
-Cuando hayas terminado de introducir los nuevos tiempos de espera, haz clic en **Save Default Timeouts** (Guardar tiempos de espera predeterminados).
+Cuando termine de ingresar los nuevos tiempos de espera, haga clic en {{< ui >}}Save Default Timeouts{{< /ui >}}.
 
-### Frecuencia predeterminada
+### Frecuencia predeterminada {#default-frequency}
 
-Elige o añade las frecuencias predeterminadas para los detalles de tu [test de API][4], [test de navegador][6] o [test de móvil][17].
+Elija o agregue las frecuencias predeterminadas para los detalles de su [prueba de API][4], [prueba de navegador][6] o [prueba móvil][17].
 
-Cuando hayas terminado de seleccionar las etiquetas relacionadas, haz clic en **Save Default Frequencies** (Guardar frecuencias predeterminadas).
+Cuando termine de seleccionar las etiquetas relacionadas, haga clic en {{< ui >}}Save Default Frequencies{{< /ui >}}.
 
-### Reintentos predeterminados
+### Reintentos predeterminados {#default-retries}
 
-Elige o añade el número predeterminado de veces que deseas que tu test se reintente en caso de fallo para los detalles de tu [test de API][4], [test de navegador][6] o [test de móvil][17].
+Elija o agregue la cantidad predeterminada de veces que desea que su prueba se reintente en caso de error para los detalles de su [prueba de API][4], [prueba de navegador][6] o [prueba móvil][17].
 
-Cuando hayas terminado de introducir los valores de reintentos predeterminados, haz clic en **Save Default Retries** (Guardar reintentos predeterminados).
+Cuando termine de ingresar los valores de reintento predeterminados, haga clic en {{< ui >}}Save Default Retries{{< /ui >}}.
 
-### Dispositivos móviles predeterminados
+### Dispositivos móviles predeterminados {#default-mobile-devices}
 
-Elige o añade los dispositivos móviles predeterminados que desees utilizar en los detalles de tu [test de móvil][17].
+Elija o agregue los dispositivos móviles predeterminados que desea usar en los detalles de su [prueba móvil][17].
 
-Cuando hayas terminado de introducir los dispositivos móviles predeterminados, haz clic en **Save Default Devices** (Guardar dispositivos predeterminados).
+Cuando termine de ingresar los dispositivos móviles predeterminados, haga clic en {{< ui >}}Save Default Devices{{< /ui >}}.
 
-### Permisos
+### Permisos {#permissions}
 
-De forma predeterminada, solo los usuarios con [roles Admin y Standard de Datadog][11] pueden acceder a la página **Default Settings** (Parámetros predeterminados) de Synthetic Monitoring. Para obtener acceso a la página **Default Settings** (Parámetros predeterminados), tu usuario debe pasar a tener uno de estos dos [roles predeterminados][11].
+De forma predeterminada, solo los usuarios con los [Datadog Admin and Datadog Standard roles][11] pueden acceder a la página de {{< ui >}}Default Settings{{< /ui >}} de Synthetic Monitoring. Para obtener acceso a la página {{< ui >}}Default Settings{{< /ui >}}, actualice su usuario a uno de esos dos [default roles][11].
 
-Si utilizas la [función de rol personalizado][12], añade tu usuario a cualquier rol personalizado que incluya los permisos `synthetics_default_settings_read` y `synthetics_default_settings_write`.
+Si está utilizando la [custom role feature][12], agregue su usuario a cualquier custom role que incluya los permisos `synthetics_default_settings_read` y `synthetics_default_settings_write`.
 
-## Parámetros de integración
+## Tiempos de inactividad {#downtimes}
 
-{{< img src="synthetics/settings/integration_settings.png" alt="Página de parámetros de integración" style="width:100%;">}}
+Para obtener más información, consulte [tiempo de inactividad programado][25].
 
-### Integración de APM para tests de navegador
+## Ubicaciones privadas {#private-locations}
 
-Los encabezados de la integración de APM de Datadog permiten que Datadog vincule los tests de navegador con APM.
+Para obtener más información, consulte [Run Synthetic Tests from Private Locations][3].
 
-Define a qué endpoints deseas enviar los encabezados de APM añadiendo una URL a la lista **Value** (Valor). Si el endpoint está siendo rastreado y está permitido, los resultados de su test de navegador se vinculan automáticamente a su traza (trace) correspondiente.
+## Variables globales {#global-variables}
 
-Utiliza `*` para permitir nombres de dominio más amplios. Por ejemplo, añadir `https://*.datadoghq.com/*` permite todo en `https://datadoghq.com/`. Cuando termines de añadir las URL, haz clic en **Save APM Integration Settings** (Guardar los parámetros de la integración de APM).
+Las variables globales son variables a las que se puede acceder desde todas sus pruebas Synthetic. Se pueden utilizar en todas las [pruebas individuales][4], [pruebas de API en varios pasos][5], [pruebas de navegador][6] y [pruebas de aplicaciones móviles][17] de su conjunto de pruebas.
 
-Para obtener más información, consulta [Conectar trazas (traces) de Synthetics y APM][15].
+Para crear una variable global, navegue a la pestaña {{< ui >}}Global Variables{{< /ui >}} en la [página {{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][7] y haga clic en {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
-### Recopilación de datos de Synthetic y aplicaciones de RUM
-
-Para permitir que Datadog recopile datos RUM de tus tests, haz clic en **Enable Synthetic RUM data collection** (Habilitar la recopilación de datos RUM de Synthetic). Si está deshabilitada, no podrás editar el parámetro RUM de la grabación de test de navegador. Para aplicar los cambios, haz clic en **Save RUM Data Collection** (Guardar recopilación de datos RUM).
-
-Selecciona una aplicación predeterminada para que los nuevos tests de navegador envíen datos. Utiliza el menú desplegable **Default Application** (Aplicación predeterminada) para seleccionar una aplicación de RUM que recopile datos de tests de navegador. Para aplicar los cambios, haz clic en **Save RUM Data Applications** (Guardar aplicaciones de datos RUM).
-
-Para obtener más información, consulta [Explorar RUM y Session Replay][14].
-
-## Localizaciones privadas
-
-Para obtener más información, consulta [Ejecutar tests de Synthetic desde localizaciones privadas][3].
-
-## Variables globales
-
-Las variables globales son variables a las que se puede acceder desde todos los tests Synthetic. Se pueden utilizar en todos los tests [únicos][4], [tests de API de varios pasos][5], [tests de navegador][6] y [tests de aplicaciones móviles][17] de tu conjunto de tests.
-
-Para crear una variable global, ve a la pestaña **Global Variables** (Variables globales) de la [página **Synthetic Monitoring & Continuous Testing** > **Settings**][7] (Synthetic Monitoring & Continuous Testing > Parámetros) y haz clic en **+ New Global Variable** (+ Nueva variable global).
-
-Elige el tipo de variable que quieres crear:
+Elija el tipo de variable que desea crear:
 
 {{< tabs >}}
-{{% tab "Valor específico" %}}
+{{% tab "Especificar valor" %}}
 
-1. Introduce un **Variable Name** (Nombre de variable). Solo puedes utilizar mayúsculas, números y guiones bajos. No pueden existir varias variables con el mismo nombre.
-2. Opcionalmente, completa **Description** (Descripción) y en **Tags** (Etiquetas) selecciona etiquetas para asociar con tu variable.
-3. Indica el valor quieres darle a tu variable en **Value** (Valor).
-4. Si lo deseas, puedes utilizar las funciones integradas para asignar valores a tu variable. Por ejemplo, haz clic en la función integrada `{{ alphabetic(n) }}` para rellenar el campo **Value** (Valor) con un ejemplo de valor alfabético.
-5. Opcionalmente, habilita la ofuscación de tu variable para ocultar su valor en los resultados de los tests.
+1. Ingrese un {{< ui >}}Variable Name{{< /ui >}}. El nombre de su variable solo puede usar letras mayúsculas, números y guiones bajos. Este nombre debe ser único entre sus variables globales.
+2. Opcionalmente, ingrese una {{< ui >}}Description{{< /ui >}} y seleccione {{< ui >}}Tags{{< /ui >}} para asociarla con su variable.
+3. Ingrese el {{< ui >}}Value{{< /ui >}} que desea asignar a su variable.
+4. Opcionalmente, utilice funciones integradas para asignar valores a su variable. Por ejemplo, haga clic en la `Por ejemplo, haga clic en la `{{ alphabetic(n) }}` función integrada para completar el campo {{< ui >}}Value{{< /ui >}} con un ejemplo de un valor alfabético.
+5. Opcionalmente, habilite la ofuscación de su variable para ocultar su valor en los resultados de las pruebas.
 
-{{< img src="synthetics/settings/variable_value_3.png" alt="Valor específico de la variable global" style="width:100%;">}}
+{{< img src="synthetics/settings/variable_value_3.png" alt="Especificar valor de variable global" style="width:100%;">}}
 
-Están disponibles las siguientes funciones integradas:
+Las siguientes funciones integradas están disponibles:
 
 &#x7b;&#x7b; numeric(n) &#x7d;&#x7d;
 : Genera una cadena numérica con `n` dígitos.
@@ -178,51 +154,51 @@ Están disponibles las siguientes funciones integradas:
 : Genera una cadena alfanumérica con `n` caracteres.
 
 &#x7b;&#x7b; date(n unit, format) &#x7d;&#x7d;
-: Genera una fecha en uno de los formatos aceptados de Datadog con un valor correspondiente a la fecha UTC en la que se inicia el test, más o menos `n` unidades.
+: Genera una fecha en uno de los formatos aceptados por Datadog con un valor correspondiente a la fecha UTC en la que se inicia la prueba, más o menos `n` unidades.
 
 &#x7b;&#x7b; timestamp(n, unit) &#x7d;&#x7d;
-: Genera una marca de tiempo en una de las unidades aceptadas de Datadog con un valor correspondiente a la marca de tiempo UTC en la que se inicia el test, más o menos `n` unidades.
+: Genera una marca de tiempo en una de las unidades aceptadas por Datadog con un valor correspondiente a la marca de tiempo UTC en la que se inicia la prueba, más o menos `n` unidades.
 
 &#x7b;&#x7b; uuid &#x7d;&#x7d;
-: Genera un identificador único universal (UUID) versión 4.
+: Genera un identificador único universal (UUID) de versión 4.
 
 &#x7b;&#x7b; public-id &#x7d;&#x7d;
-: Inyecta el ID público de tu test.
+: Inserta el ID público de su prueba.
 
 &#x7b;&#x7b; result-id &#x7d;&#x7d;
-: Inyecta el ID de resultado de la ejecución de tu test.
+: Inserta el ID de resultado de la ejecución de prueba.
 
 {{% /tab %}}
 
-{{% tab "Crear desde un test" %}}
+{{% tab "Crear a partir de una prueba" %}}
 
-Puedes crear variables desde los [tests de HTTP][1] existentes parseando los encabezados y los cuerpos de respuesta asociados o desde tus [tests de API de varios pasos][2] existentes utilizando las variables extraídas.
+Puede crear variables a partir de sus [pruebas HTTP][1] existentes con el parseo de los encabezados y el cuerpo de respuesta asociados, o a partir de sus [pruebas de API en varios pasos][2] existentes utilizando las variables extraídas.
 
-{{< img src="synthetics/settings/global_variable.png" alt="Variables disponibles que puedes extraer de un test de API de varios pasos" style="width:100%;" >}}
+{{< img src="synthetics/settings/global_variable.png" alt="Variables disponibles que puede extraer de una prueba de API en varios pasos" style="width:100%;" >}}
 
-1. Completa **Variable Name** (Nombre de variable). Recuerda que solo puede contener mayúsculas, números y guiones bajos.
-2. Opcionalmente, completa **Description** (Descripción) y en **Tags** (Etiquetas) selecciona etiquetas para asociar con tu variable.
-3. Habilita la ofuscación de tu variable para ocultar su valor en los resultados de los tests (opcional).
-4. Elige el **test** del que quieres extraer la variable.
-5. Si utilizas un test de API de varios pasos, extrae tu variable local del test. Si utilizas un test de HTTP, extrae la variable del encabezado o del cuerpo de la respuesta.
+1. Ingrese un {{< ui >}}Variable Name{{< /ui >}}. El nombre de su variable solo puede usar letras mayúsculas, números y guiones bajos.
+2. Opcionalmente, ingrese una {{< ui >}}Description{{< /ui >}} y seleccione {{< ui >}}Tags{{< /ui >}} para asociarla con su variable.
+3. Habilite la ofuscación de su variable para ocultar su valor en los resultados de la prueba (opcional).
+4. Seleccione la **prueba** de la que desea extraer una variable.
+5. Si está utilizando una prueba de API en varios pasos, extraiga su variable local de la prueba. Si está utilizando una prueba HTTP, elija extraer su variable del encabezado de respuesta o del cuerpo de respuesta.
 
-    * Extrae el valor del **Response Header** (Encabezado de la respuesta): utiliza el encabezado completo de la respuesta de la  variable o parséalo con un [`regex`][3].
-    * Extrae el valor del **Response Body** (Cuerpo de la respuesta): parsea el cuerpo de la respuesta con un [`regex`][3], un [`jsonpath`][4], un [`xpath`][5] o utiliza el cuerpo completo de la respuesta.
-    * Extrae el valor del **Response Status Code** (Código de estado de la respuesta).
+    * Extraiga el valor de {{< ui >}}Response Header{{< /ui >}}: utilice el encabezado de respuesta completo para su variable o parsee con un [`regex`][3].
+    * Extraiga el valor de {{< ui >}}Response Body{{< /ui >}}: parsee el cuerpo de respuesta de la solicitud con un [`regex`][3], un [`jsonpath`][4], un [`xpath`][5] o utilice el cuerpo de respuesta completo.
+    * Extraiga el valor de {{< ui >}}Response Status Code{{< /ui >}}.
 
-Además de para extraer un valor, también puedes utilizar un [regex][3] para parsear lo siguiente:
+Además de extraer un valor con una expresión regular, también puede usar una [regex][3] para analizar lo siguiente:
 
-  - Activar la coincidencia no solo con la primera instancia de un patrón, sino con todas las instancias del patrón proporcionado.
-  - Ignorar las mayúsculas y minúsculas del patrón coincidente.
-  - Activar la coincidencia con cadenas en varias líneas.
-  - Tratar el patrón de regex como unicode.
-  - Permitir el uso de puntos para identificar nuevas líneas.
-  - Activar la coincidencia con un índice concreto de un patrón de regex.
-  - Sustituir el patrón coincidente por un valor proporcionado.
+  - Coincida no solo con la primera instancia de un patrón, sino también con todas las instancias del patrón proporcionado.
+  - Ignore las mayúsculas y minúsculas del patrón coincidente.
+  - Coincida con cadenas en varias líneas.
+  - Trate el patrón de expresión regular pasado como unicode.
+  - Permita que los símbolos de punto identifiquen nuevas líneas.
+  - Coincida a partir de un índice determinado dentro de un patrón de expresión regular.
+  - Sustituya el patrón coincidente por un valor proporcionado.
 
-{{< img src="synthetics/settings/parsing_regex_field.png" alt="Parsear el cuerpo de la respuesta de un test de HTTP con una expresión regular" style="width:80%;">}}
+{{< img src="synthetics/settings/parsing_regex_field.png" alt="Analice el cuerpo de la respuesta de una prueba HTTP con una expresión regular." style="width:80%;">}}
 
-Los valores de la variable se actualizan cuando se ejecuta el test del que se extrajeron.
+Los valores de las variables se actualizan cada vez que se ejecuta la prueba de la que se extraen.
 
 [1]: /es/synthetics/api_tests/http_tests/
 [2]: /es/synthetics/multistep/
@@ -233,93 +209,102 @@ Los valores de la variable se actualizan cuando se ejecuta el test del que se ex
 
 {{% tab "Token MFA" %}}
 
-Para generar y utilizar un TOTP en tus tests, crea una variable global donde introducir una clave secreta o subir un código QR de tu proveedor de autenticación. **Nota:** Actualmente, solo se admite el algoritmo hash SHA1 para TOTP.
+Para generar y usar un TOTP en tus pruebas, crea una variable global donde ingreses una clave secreta o cargues un código QR de tu proveedor de autenticación. **Nota:** Actualmente, solo se admite el algoritmo de hash SHA1 para TOTP.
 
-1. En **Choose variable type** (Elegir el tipo de variable), selecciona **MFA Token**.
-2. En **Define Variable** (Definir la variable), completa **Variable Name** (Nombre de variable). Recuerda que el nombre solo puede contener mayúsculas, números y guiones bajos.
-3. Opcionalmente, completa **Description** (Descripción) y en **Tags** (Etiquetas) selecciona etiquetas para asociar con tu variable.
-4. Añade la **clave secreta** a tu variable o carga la imagen de un código QR.
-5. Haz clic en **+ Generate** (+ Generar) para crear un OTP. También puedes copiar el OTP generado con el icono de **copia**.
+1. En {{< ui >}}Choose variable type{{< /ui >}}, seleccione {{< ui >}}MFA Token{{< /ui >}}.
+2. En {{< ui >}}Define Variable{{< /ui >}}, ingrese un {{< ui >}}Variable Name{{< /ui >}}. El nombre de su variable solo puede usar letras mayúsculas, números y guiones bajos.
+3. Opcionalmente, ingrese un {{< ui >}}Description{{< /ui >}} y seleccione {{< ui >}}Tags{{< /ui >}} para asociarlo con su variable.
+4. Ingrese el {{< ui >}}Secret Key{{< /ui >}} para su variable o cargue una imagen de código QR.
+5. Haga clic en {{< ui >}}\+ Generate{{< /ui >}} para crear una OTP. Puede copiar la OTP generada con el icono {{< ui >}}Copy{{< /ui >}}.
 
-{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Crear un token MFA" style="width:100%;" >}}
+{{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Cree un token MFA" style="width:100%;" >}}
 
-Para obtener más información acerca de MFA basada en TOTP en un test de navegador, consulta [TOTP para autenticación multifactor (MFA) en tests de navegador][1].
+**Nota**: Si su token TOTP funciona en Google Authenticator, es probable que sea compatible con Datadog.
+Algunos códigos QR están limitados a métodos de verificación específicos y es posible que no funcionen en todas las plataformas. Para garantizar la compatibilidad, utilice un código QR o un secreto que siga los protocolos TOTP estándar.
+
+Para obtener más información sobre MFA basado en TOTP en una prueba de navegador, consulte [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][1].
 
 [1]: /es/synthetics/guide/browser-tests-totp
 {{% /tab %}}
 {{% tab "Autenticador virtual" %}}
 
-Para completar un recorrido del usuario con una clave de paso de tus tests de Synthetic, crea una variable global de autenticador virtual. Esta variable global se usa para generar y grabar claves de paso para todos tus tests de navegador de Synthetic. Para obtener más información, consulta [Uso de claves de paso en tests de navegador][1].
+Para completar un recorrido de usuario con una passkey en sus pruebas Synthetics, cree una variable global de Autenticador virtual. Esta variable global se utiliza para generar y almacenar passkeys para todas sus pruebas de navegador de Synthetics. Para obtener más información, consulte [Using passkeys In Browser Tests][1].
 
-1. Accede a la pestaña **Global Variables** (Variables globales) en  [**Synthetic Monitoring & Continuous Testing** > **Settings**][1] (Synthetic Monitoring & Continuous Testing > Parámetros) y haz clic en **+ New Global Variable** (+ Nueva variable global).
+1. Navegue a la pestaña {{< ui >}}Global Variables{{< /ui >}} en [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] y haga clic en {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
-1. En la sección **Choose variable type** (Elegir tipo de variable), selecciona **Virtual Authenticator** (Autenticador virtual).
-2. En la sección **Specify variable details** (Especificar los detalles de la variable), completa **Variable Name** (Nombre de variable). Recuerda que el nombre solo puede contener mayúsculas, números y guiones bajos.
-3. Opcionalmente, completa **Description** (Descripción) y en **Tags** (Etiquetas) selecciona etiquetas para asociar con tu variable. Datadog creará un autenticador virtual que empleará para generar y almacenar tus claves de paso.
-4. En la sección **Permissions settings** (Parámetros de permisos), restringe el acceso a tu variable basada en roles en tu organización. Para obtener más información acerca de los roles, consulta la [documentación sobre Control de acceso basado en roles (RBAC)][2].
+1. En la sección {{< ui >}}Choose variable type{{< /ui >}}, seleccione {{< ui >}}Virtual Authenticator{{< /ui >}}.
+2. En la sección {{< ui >}}Specify variable details{{< /ui >}}, ingrese un {{< ui >}}Variable Name{{< /ui >}}. El nombre de su variable solo puede usar letras mayúsculas, números y guiones bajos.
+3. Opcionalmente, ingrese un {{< ui >}}Description{{< /ui >}} y seleccione {{< ui >}}Tags{{< /ui >}} para asociarlo con su variable. Datadog crea entonces un autenticador virtual utilizado para generar y almacenar sus passkeys.
+4. En la sección {{< ui >}}Permissions settings{{< /ui >}}, restrinja el acceso a su variable según los roles en su organización. Para obtener más información sobre los roles, consulte la [documentación de RBAC][2].
 
-{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Crear un autenticador virtual" style="width:80%;" >}}
+{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Cree un autenticador virtual" style="width:80%;" >}}
 
 [1]: /es/synthetics/guide/browser-tests-passkeys
 [2]: /es/account_management/rbac/?tab=datadogapplication#custom-roles
 {{% /tab %}}
 {{< /tabs >}}
 
-Una vez creadas, las variables globales se pueden usar en todos los tests de Synthetic. Para importar tus variables globales en tu test, haz clic en **+ Variables** (+ Variables), escribe `{{` en un campo en el que quieras añadir la variable y selecciona tu variable global.
+Una vez creadas, las variables globales se pueden utilizar en todas las pruebas Synthetic. Para importar sus variables globales a su prueba, haga clic en {{< ui >}}\+ Variables{{< /ui >}}, escriba `{{` en un campo en el que desee agregar la variable y seleccione su variable global.
 
 
-Para obtener más información sobre las variables, consulta [Test de HTTP][8], [Test de API de varios pasos][9], [Test de navegador][10], [Test de aplicación móvil][19] y la [documentación de los pasos del test de navegador][16].
+Para obtener más información sobre las variables, consulte la [documentación de pruebas HTTP][8], [prueba de API en varios pasos][9], [pruebas de navegador][10], [pruebas de aplicaciones móviles][19] y [pasos de pruebas de navegador][16].
 
-### Permisos
+### Permisos {#permissions-1}
 
-De forma predeterminada, solo los usuarios con los [roles Admin y Standard en Datadog][11] pueden acceder a la página **Global Variables** (Variables globales) de Synthetic Monitoring. Podrás acceder a la página **Global Variables** (Variables globales) si tu usuario pasa a tener uno de esos dos [roles predeterminados][11].
+De forma predeterminada, solo los usuarios con los [roles de Datadog Admin y Datadog Standard][11] pueden acceder a la página de Synthetic Monitoring {{< ui >}}Global Variables{{< /ui >}}. Puede obtener acceso a la página de {{< ui >}}Global Variables{{< /ui >}} haciendo que su usuario sea actualizado a uno de esos dos [roles predeterminados][11].
 
-Si utilizas la [función de rol personalizado][12], añade tu usuario a cualquier rol personalizado que incluya los permisos `synthetics_default_settings_read` y `synthetics_default_settings_write`.
+Si está utilizando la [custom role feature][12], agregue su usuario a cualquier custom role que incluya los permisos `synthetics_default_settings_read` y `synthetics_default_settings_write`.
 
-### Restringir el acceso
+### Restringir acceso {#restrict-access}
 
-Utiliza el [control de acceso granular][22] para limitar quién tiene acceso a tu test en función de roles, equipos o usuarios individuales:
+Utilice el [control de acceso granular][22] para limitar quién tiene acceso a su prueba según los roles, equipos o usuarios individuales:
 
-1. Abre la sección de permisos del formulario.
-2. Haz clic en **Edit Access** (Editar acceso).
-  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de Localizaciones privadas" style="width:100%;" >}}
-3. Haz clic en **Restrict Access** (Restringir el acceso).
-4. Selecciona equipos, roles o usuarios.
-5. Haz clic en **Add** (Añadir).
-6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
-7. Haz clic en **Done** (Listo).
+1. Abra la sección de permisos del formulario.
+2. Haga clic en {{< ui >}}Edit Access{{< /ui >}}.
+  {{< img src="synthetics/settings/grace_2.png" alt="Establezca los permisos para su prueba desde el formulario de configuración de Private Locations" style="width:100%;" >}}
+3. Haga clic en {{< ui >}}Restrict Access{{< /ui >}}.
+4. Seleccione equipos, roles o usuarios.
+5. Haga clic en {{< ui >}}Add{{< /ui >}}.
+6. Seleccione el nivel de acceso que desea asociar con cada uno de ellos.
+7. Haga clic en {{< ui >}}Done{{< /ui >}}.
 
-<div class="alert alert-info"><strong>Nota</strong>: Puedes ver los resultados de una localización privada incluso sin tener acceso a esa localización privada.</div>
+<div class="alert alert-info">Puede visualizar los resultados de una Ubicación privada incluso sin acceso de visualización a esa Ubicación privada.</div>
 
-| Nivel de acceso | Ver valor de GV | Ver metadatos de GV | Utilizar GV en tests | Editar valor/metadatos de GV  |
+| Nivel de acceso | Visualizar valor de GV | Ver metadatos de GV | Usar GV en prueba | Editar valor/metadatos de GV  |
 | ------------ | --------------| ---------------- | -------------- | ----------------------- |
 | Sin acceso    |               |                  |                |                         |
-| Visor       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
+| Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
 
-## Parámetros de integración
+**Nota**: Restringir una variable impide que otros usuarios la agreguen a una prueba y la utilicen; no oculta el nombre de la variable si ya se utiliza en una prueba existente.
 
-{{< img src="synthetics/settings/integration_settings.png" alt="Página de parámetros de integración" style="width:100%;">}}
+## Configuración de integración {#integration-settings}
 
-### Integración de APM para tests de navegador
+{{< img src="synthetics/settings/integration_settings.png" alt="Página de configuración de integración" style="width:100%;">}}
 
-Permite que las URL incluyan encabezados de la integración de APM. Los encabezados de la integración de APM de Datadog permiten que Datadog vincule los tests de navegador con APM.
+### Integración de APM para pruebas de navegador {#apm-integration-for-browser-tests}
 
-Define los endpoints que quieres enviar a los encabezados de APM introduciendo una URL en el campo **Value** (Valor). Si el endpoint se está rastreando y esta acción está permitida, los resultados de tu test de navegador se asocian automáticamente a la traza correspondiente.
+Permita que las URL agreguen encabezados de integración de APM a esas URL. Los encabezados de integración de APM de Datadog permiten a Datadog vincular pruebas de navegador con APM.
 
-Utiliza `*` para permitir nombres de dominio más amplios. Por ejemplo, añadir `https://*.datadoghq.com/*` permite todo en `https://datadoghq.com/`. Cuando termines de añadir las URL, haz clic en **Save APM Integration Settings** (Guardar los parámetros de la integración de APM).
+Defina a qué puntos de conexión desea enviar los encabezados de APM ingresando una URL en el campo {{< ui >}}Value{{< /ui >}}. Si el punto de conexión está siendo trazado y está permitido, los resultados de su prueba de navegador se vinculan automáticamente a su traza correspondiente.
 
-Para obtener más información, consulta [Conectar trazas (traces) de Synthetics y APM][15].
+Utilice `*` para permitir nombres de dominio más amplios. Por ejemplo, agregar `https://*.datadoghq.com/*` permite todo en `https://datadoghq.com/`. Cuando termine de agregar URLs, haga clic en {{< ui >}}Save APM Integration Settings{{< /ui >}}.
 
-### Recopilación de datos de Synthetic y aplicaciones de RUM
+Para obtener más información, consulte [Conectar Synthetics y trazas de APM][15].
 
-Para permitir que Datadog recopile datos RUM de tus tests, haz clic en **Enable Synthetic RUM data collection** (Habilitar la recopilación de datos RUM de Synthetic). Si la deshabilitas, no podrás editar el parámetro RUM de la grabación de test de navegador. Cuando termines de habilitar la recopilación de datos, haz clic en **Save RUM Data Collection** (Guardar la recopilación de datos RUM).
+### Recopilación de datos de pruebas de navegador de Synthetics y aplicaciones RUM {#synthetic-browser-test-data-collection-and-rum-applications}
 
-Selecciona una aplicación de RUM del menú desplegable **Default Application** (Aplicación predeterminada) que recopile datos del test de navegador. Cuando hayas especificado la aplicación predeterminada, haz clic en **Save RUM Data Applications** (Guardar aplicaciones de datos RUM).
+Para permitir que Datadog recopile datos RUM de sus ejecuciones de pruebas de navegador, haga clic en {{< ui >}}Enable Synthetic RUM data collection{{< /ui >}}. Si está deshabilitado, no puede editar la configuración de RUM en la grabadora de pruebas de navegador. Cuando termine de habilitar la recopilación de datos, haga clic en {{< ui >}}Save RUM Data Collection{{< /ui >}}.
 
-Para obtener más información, consulta [Explorar RUM y Session Replay][14].
+Seleccione una aplicación RUM del menú desplegable {{< ui >}}Default Application{{< /ui >}} que recopila datos de pruebas de navegador. Cuando termine de especificar una aplicación predeterminada, haga clic en {{< ui >}}Save RUM Data Applications{{< /ui >}}.
 
-## Referencias adicionales
+Para obtener más información, consulte [Conectar RUM a Synthetic Monitoring][14].
+
+### Recopilación de datos de pruebas de aplicaciones móviles de Synthetic Monitoring {#synthetic-mobile-application-test-data-collection}
+
+Para permitir que Datadog recopile datos RUM de sus ejecuciones de pruebas de aplicaciones móviles, configure y empaquete el [SDK de iOS][23] o el [SDK de Android][24] de RUM con su archivo `.ipa` o `.apk`. Esto vincula automáticamente los datos RUM, brindándole observabilidad de extremo a extremo de las ejecuciones de prueba.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -336,12 +321,15 @@ Para obtener más información, consulta [Explorar RUM y Session Replay][14].
 [11]: /es/account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [12]: /es/account_management/rbac/?tab=datadogapplication#custom-roles
 [13]: /es/account_management/billing/usage_attribution
-[14]: /es/synthetics/guide/explore-rum-through-synthetics/
+[14]: /es/synthetics/platform/rum/
 [15]: /es/synthetics/apm/#prerequisites
-[16]: /es/synthetics/browser_tests/actions/#use-variables
+[16]: /es/synthetics/browser_tests/test_steps/#use-variables
 [17]: /es/synthetics/mobile_app_testing/
 [18]: /es/synthetics/mobile_app_testing/settings/
 [19]: /es/synthetics/mobile_app_testing/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies
 [22]: /es/account_management/rbac/granular_access
+[23]: https://docs.datadoghq.com/es/real_user_monitoring/application_monitoring/ios/setup?tab=swiftpackagemanagerspm
+[24]: https://docs.datadoghq.com/es/real_user_monitoring/application_monitoring/android/setup?tab=rum
+[25]: /es/synthetics/platform/downtime/

@@ -18,6 +18,14 @@ title: RUM ブラウザモニタリング
 
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのリアルタイムパフォーマンスとユーザージャーニーを視覚化して分析できます。
 
+{{< skill-callout
+    title="agent を使用して RUM をセットアップしてください"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided RUM setup."
+    action_name="copy_dd_orchestrator_rum_setup_prompt"
+    lang="text" >}}
+https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md のスキルを使用して、Datadog RUM をプロジェクトでセットアップしてください
+{{< /skill-callout >}}
+
 ## ブラウザアプリケーションのモニタリングを開始する {#start-monitoring-browser-applications}
 
 ブラウザ向け RUM を使い始めるには、アプリケーションを作成し、ブラウザ SDK を構成します。

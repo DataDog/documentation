@@ -27,7 +27,8 @@ Use [Fleet Automation][2] to manage [custom log collection][4] settings on your 
 
 ## Prerequisites
 
-- [Remote Configuration][1] enabled for your organization
+- [Remote Configuration][1] enabled for your organization and the Agent's API key
+- [Remote updates][10] enabled on each target VM Agent (`remote_updates: true`)
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][5].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
 - Log collection enabled on the target Agents (`logs_enabled: true` in `datadog.yaml`). Fleet Automation deploys the configuration file either way, but the Agent does not start collecting logs until log collection is enabled. See [Host Agent Log Collection][8].
@@ -45,7 +46,7 @@ Configuring custom logs on Agents in containerized workloads is not supported. F
 1. Choose {{< ui >}}Custom Logs{{< /ui >}}.
 1. Select an operation (for more information, see [How configuration changes are applied](#how-configuration-changes-are-applied)):
 
-    - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted. For an explanation of the log collection fields, see [Custom log collection][4]. Use the {{< ui >}}Tags{{< /ui >}} field to attach [tags][6] to the collected logs. Click {{< ui >}}+ Add Log Collection{{< /ui >}} to add more log collection settings.
+    - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted. For an explanation of the log collection fields, see [Custom log collection][4]. Use the {{< ui >}}Tags{{< /ui >}} field to attach [tags][6] to the collected logs. Click {{< ui >}}\+ Add Log Collection{{< /ui >}} to add more log collection settings.
     - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a File{{< /ui >}} and choose the configuration file you want to replace, then update the log collection settings.
     - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}}.
 
@@ -86,3 +87,4 @@ If the deployment succeeded but no logs arrive, see the [Log Collection Troubles
 [7]: /logs/guide/log-collection-troubleshooting-guide/
 [8]: /agent/logs/
 [9]: https://app.datadoghq.com/fleet
+[10]: /agent/guide/setup_remote_config/#enable-remote-agent-management

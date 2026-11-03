@@ -22,7 +22,7 @@ Required dict keys:
 {{ $d2 := .d2 }}
 
 {{ $anchorStr := $menuChild.Name }}
-{{ $endpointSlug := $anchorStr | anchorize }}
+{{ $endpointSlug := $menuChild.Params.originalsummary | default $anchorStr | anchorize }}
 {{ $versions := $menuChild.Params.versions | default (slice "v2") }}
 {{ $versionCount := len $versions }}
 

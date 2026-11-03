@@ -8,7 +8,7 @@ code_lang_weight: 20
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentation
-  text: Transmettre des variables d'environnement pour des tests au sein de conteneurs
+  text: Transmettre des variables d'environnement pour des tests dans Containers
 - link: /continuous_integration/tests
   tag: Documentation
   text: Explorer les résultats de test et la performance
@@ -33,7 +33,8 @@ type: multi-code-lang
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) est pris en charge à partir de `dd-trace>=6.1.0`. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) est pris en charge à partir de `dd-trace>=6.1.0`. [Le mode navigateur](https://vitest.dev/guide/browser/) est pris en charge à partir de `dd-trace>=6.8.0`. |
+| WebdriverIO | >= 9.0.0 | Pris en charge avec les adaptateurs de framework Mocha et Jasmine à partir de `dd-trace>=6.10.0`. |
 
 `dd-trace` v6 nécessite Node.js 22 ou une version ultérieure.
 
@@ -47,7 +48,8 @@ type: multi-code-lang
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.6.0 | Pris en charge à partir de `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) est pris en charge à partir de `dd-trace>=5.112.0`. |
+| Vitest | >= 1.6.0 | Pris en charge à partir de `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) est pris en charge à partir de `dd-trace>=5.112.0`. [Le mode navigateur](https://vitest.dev/guide/browser/) est pris en charge à partir de `dd-trace>=5.119.0`. |
+| WebdriverIO | >= 9.0.0 | Pris en charge avec les adaptateurs de framework Mocha et Jasmine à partir de `dd-trace>=5.121.0`. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -97,7 +99,7 @@ Définissez la variable d'environnement `NODE_OPTIONS` sur `-r dd-trace/ci/init`
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=unit-tests yarn test
 ```
 
-**Remarque**&nbsp;: si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}`&nbsp;:
+**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}` :
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -155,7 +157,7 @@ Définissez la variable d'environnement `NODE_OPTIONS` sur `-r dd-trace/ci/init`
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
 ```
 
-**Remarque**&nbsp;: si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}`&nbsp;:
+**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}` :
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -199,11 +201,11 @@ test('user profile', async ({ page }) => {
 
 Pour plus d'informations sur les mesures personnalisées, consultez le [guide d'ajout de mesures personnalisées][2].
 
-### Playwright - RUM integration {#playwright-rum-integration}
+### Intégration Playwright - RUM {#playwright-rum-integration}
 
-Si l'application de navigateur testée est instrumentée à l'aide de [Browser Monitoring][3], les résultats des tests Playwright et leurs RUM browser sessions et session replays générées sont automatiquement liés. Pour plus d'informations, consultez le [Instrumenting your browser tests with RUM guide][4].
+Si l'application de navigateur testée est instrumentée à l'aide de [Browser Monitoring][3], les résultats des tests Playwright et leurs RUM browser sessions et session replays générées sont automatiquement liés. Pour plus d'informations, consultez le [guide Instrumenter vos tests Browser avec RUM][4].
 
-### Télécharger les captures d'écran d'échec de test {#upload-test-failure-screenshots}
+### Téléversez les captures d'écran d'échec de test {#upload-test-failure-screenshots}
 
 Lorsqu'elle est activée, Test Optimization télécharge les captures d'écran que Playwright capture lorsqu'un test échoue. Affichez les captures d'écran dans l'onglet {{< ui >}}Media{{< /ui >}} du panneau latéral des détails de test de Test Optimization. Utilisez-les pour inspecter l'état du navigateur au moment de l'échec.
 
@@ -235,7 +237,7 @@ Définissez la variable d'environnement `NODE_OPTIONS` sur `-r dd-trace/ci/init`
 NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=integration-tests yarn test:integration
 ```
 
-**Remarque**&nbsp;: si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}`&nbsp;:
+**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `-r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}` :
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -449,6 +451,7 @@ Pour activer les téléchargements de captures d'écran, définissez la variable
 </div>
 
 Utilisez une version de Node.js prise en charge par votre version majeure de `dd-trace` pour l'instrumentation Vitest :
+
 - `dd-trace` v5 nécessite Node.js 18.19+ ou Node.js 20.6+.
 - `dd-trace` v6 nécessite Node.js 22 ou une version ultérieure.
 
@@ -458,7 +461,7 @@ Définissez la variable d'environnement `NODE_OPTIONS` sur `--import dd-trace/re
 NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=smoke-tests yarn test:smoke
 ```
 
-**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `--import dd-trace/register.js -r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}`&nbsp;:
+**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `--import dd-trace/register.js -r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}` :
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -468,7 +471,7 @@ NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION
 }
 {{< /code-block >}}
 
-### Ajout de tags personnalisés ou de mesures personnalisées aux tests {#adding-custom-tags-or-measures-to-tests}
+### Ajout de tags ou de mesures personnalisés aux tests {#adding-custom-tags-or-measures-to-tests}
 
 Vous pouvez ajouter des tags personnalisés à vos tests en utilisant la span actuellement active :
 
@@ -506,6 +509,70 @@ Pour plus d'informations sur les mesures personnalisées, consultez le [guide d'
 [2]: /fr/tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
 
+{{% tab "WebdriverIO" %}}
+Utilisez une version de Node.js prise en charge par votre `dd-trace` version majeure pour l'instrumentation WebdriverIO :
+
+- `dd-trace` v5 nécessite Node.js 18.19+ ou Node.js 20.6+.
+- `dd-trace` v6 nécessite Node.js 22 ou une version ultérieure.
+
+Définissez la variable d'environnement `NODE_OPTIONS` sur `--import dd-trace/register.js -r dd-trace/ci/init`. Exécutez vos tests comme vous le feriez normalement, en spécifiant éventuellement un nom pour votre session de test avec `DD_TEST_SESSION_NAME` :
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
+```
+
+**Remarque** : si vous définissez une valeur pour `NODE_OPTIONS`, assurez-vous qu'elle n'écrase pas `--import dd-trace/register.js -r dd-trace/ci/init`. Cela peut être fait en utilisant la clause `${NODE_OPTIONS:-}` :
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:e2e": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+  }
+}
+{{< /code-block >}}
+
+### Ajout de tags ou de mesures personnalisés aux tests {#adding-custom-tags-or-measures-to-tests-1}
+
+Vous pouvez ajouter des tags personnalisés à vos tests en utilisant la span actuellement active :
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('team_owner', 'my_team')
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+Pour créer des filtres ou des champs `group by` pour ces tags, vous devez d'abord créer des facettes. Pour plus d'informations sur l'ajout de tags, consultez la section [Adding Tags][1] de la documentation sur l'instrumentation personnalisée de Node.js.
+
+Vous pouvez également ajouter des mesures personnalisées à vos tests en utilisant le span actif :
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('memory_allocations', 16)
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+Pour plus d'informations sur les mesures personnalisées, consultez le [guide d'ajout de mesures personnalisées][2].
+
+[1]: /fr/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /fr/tests/guides/add_custom_measures/?tab=javascripttypescript
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### Comment corriger les erreurs « Cannot find module 'dd-trace/ci/init' » {#how-to-fix-cannot-find-module-dd-traceciinit-errors}
@@ -518,7 +585,7 @@ Lorsque vous utilisez `dd-trace`, vous pourriez rencontrer le message d'erreur s
 
 Cela peut être dû à une utilisation incorrecte de `NODE_OPTIONS`.
 
-Par exemple, si votre GitHub Action ressemble à ceci&nbsp;:
+Par exemple, si votre GitHub Action ressemble à ceci :
 
 ```yml
 jobs:
@@ -539,9 +606,9 @@ jobs:
         run: npm test
 ```
 
-**Remarque&nbsp;:** Cela ne fonctionne pas car `NODE_OPTIONS` sont interprétés par chaque processus de nœud, y compris `npm install`. Si vous essayez d'importer `dd-trace/ci/init` avant qu'il ne soit installé, cette étape échoue.
+**Remarque :** Cela ne fonctionne pas car `NODE_OPTIONS` sont interprétés par chaque processus de nœud, y compris `npm install`. Si vous essayez d'importer `dd-trace/ci/init` avant qu'il ne soit installé, cette étape échoue.
 
-Votre GitHub Action devrait plutôt ressembler à ceci&nbsp;:
+Votre GitHub Action devrait plutôt ressembler à ceci :
 
 ```yml
 jobs:
@@ -561,7 +628,7 @@ jobs:
           NODE_OPTIONS: -r dd-trace/ci/init
 ```
 
-Suivez ces bonnes pratiques&nbsp;:
+Suivez ces bonnes pratiques :
 
 * Assurez-vous que la variable d'environnement `NODE_OPTIONS` est uniquement définie sur le processus exécutant les tests.
 * Évitez spécifiquement de définir `NODE_OPTIONS` dans les paramètres des variables d'environnement globales de votre pipeline ou de votre définition de job.
@@ -575,7 +642,7 @@ Si vous utilisez `yarn>=2` et un fichier `.pnp.cjs`, vous pourriez également ob
  Error: Cannot find module 'dd-trace/ci/init'
 ```
 
-Vous pouvez le corriger en définissant `NODE_OPTIONS` sur ce qui suit&nbsp;:
+Vous pouvez le corriger en définissant `NODE_OPTIONS` sur ce qui suit :
 
 ```bash
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
@@ -628,7 +695,7 @@ Pour plus d'informations sur les tags réservés `service` et `env`, consultez [
   <strong>Remarque</strong> : L'API de test manuel est disponible à partir de <code>dd-trace</code> versions <code>5.23.0</code> et <code>4.47.0</code>.
 </div>
 
-Si vous utilisez Jest, Mocha, Cypress, Playwright, Cucumber ou Vitest, **n'utilisez pas l'API de test manuel**, car Test Optimization les instrumente automatiquement et envoie les résultats des tests à Datadog. L'API de test manuel est **incompatible** avec les frameworks de test déjà pris en charge.
+Si vous utilisez Jest, Mocha, Cypress, Playwright, Cucumber, Vitest ou WebdriverIO, **n'utilisez pas l'API de test manuel**. Test Optimization instrumente automatiquement ces frameworks et envoie les résultats des tests à Datadog. L'API de test manuel est **incompatible** avec les frameworks de test pris en charge.
 
 Utilisez l'API de test manuel uniquement si vous utilisez un framework de test non pris en charge ou si vous disposez d'un mécanisme de test différent.
 
@@ -750,8 +817,8 @@ Le mode interactif Cypress (auquel vous pouvez accéder en exécutant `cypress o
 
 L'isolation des tests de Cypress [test isolation][13] doit être activée (par défaut) pour
 que les fonctionnalités Test Optimization basées sur les tentatives fonctionnent. Lorsque `testIsolation` est défini sur
-`false` dans votre configuration Cypress, `dd-trace` désactive toutes les tentatives
-de test—[Early Flake Detection][22], [Auto Test Retries][23], et
+`false` dans votre configuration Cypress, `dd-trace` désactive toutes les tentatives de test
+—[Early Flake Detection][22], [Auto Test Retries][23] et
 [tentative de correction][24]—car ces fonctionnalités réexécutent chaque test sur place, ce qui nécessite l'isolation.
 
 Lorsque l'isolation est désactivée, le traceur enregistre l'avertissement `Test isolation is
@@ -764,9 +831,6 @@ L'option [--forceExit][15] de Jest peut entraîner une perte de données. Datado
 
 ### Mocha `--exit` {#mochas-exit}
 L'option [--exit][16] de Mocha peut entraîner une perte de données. Datadog essaie d'envoyer des données immédiatement après la fin de vos tests, mais l'arrêt brutal du processus peut entraîner l'échec de certaines requêtes. Utilisez `--exit` avec prudence.
-
-### Le mode navigateur de Vitest {#vitests-browser-mode}
-Le [mode navigateur][17] de Vitest n'est pas pris en charge.
 
 ### La surcharge de durée de test de Vitest {#vitests-test-duration-overhead}
 
@@ -841,7 +905,7 @@ Si `DD_TEST_SESSION_NAME` n'est pas spécifié, la valeur par défaut est :
 
 Le nom de la session de test doit être unique au sein d'un dépôt pour vous aider à distinguer différents groupes de tests.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -858,7 +922,6 @@ Le nom de la session de test doit être unique au sein d'un dépôt pour vous ai
 [13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
-[17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle

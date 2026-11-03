@@ -10,11 +10,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="#"
- btn_hidden="true" header="Join the Preview!">}}
-The Databricks (Zerobus) destination is in Preview. Contact your account manager to request access.
-{{< /callout >}}
-
 ## Overview
 
 Use Observability Pipelines' Databricks (Zerobus) destination to send logs to a Databricks Unity Catalog table. The destination streams logs to the [Zerobus Ingest API][1] and authenticates to Databricks with an OAuth service principal.

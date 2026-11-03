@@ -7,115 +7,135 @@ code_lang_weight: 0
 further_reading:
 - link: https://www.datadoghq.com/blog/visualize-network-device-topology/
   tag: Blog
-  text: Visualisez les relations au sein de votre réseau sur site avec la carte de
-    topologie des appareils
+  text: Visualisez les relations à travers votre réseau sur site avec la Carte de
+    topologie des périphériques
 - link: /network_monitoring/devices/data
   tag: Documentation
   text: Données collectées avec le Network Device Monitoring
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
   text: Surveiller des périphériques SNMP avec Datadog
-title: Map topologique des appareils
+title: Carte de topologie des appareils
 type: multi-code-lang
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La [carte de topologie des appareils réseau][2] utilise des diagrammes [Cloudcraft][7] pour fournir une représentation visuelle interactive des connexions physiques de votre réseau. La carte découvre et affiche automatiquement les appareils, leurs interfaces et les relations entre eux. Cette visualisation vous aide à identifier les problèmes dans vos appareils réseau, à comprendre leurs impacts en amont et en aval, à résoudre les problèmes de connectivité et à obtenir des informations sur la façon dont le trafic circule à travers votre infrastructure.
+La [Carte de topologie des périphériques][2] utilise des diagrammes [Cloudcraft][7] pour fournir une représentation visuelle interactive des connexions physiques de votre réseau. La carte découvre et affiche automatiquement les périphériques, leurs interfaces et les relations entre eux. Cette visualisation vous aide à identifier les problèmes dans vos périphériques réseau, à comprendre leurs impacts en amont et en aval, à résoudre les problèmes de connectivité et à obtenir des informations sur la manière dont le trafic circule dans votre infrastructure.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_4.mp4" alt="Un utilisateur ajoute des étiquettes d'équipe, de service et de fournisseur à la carte de topologie des appareils réseau, puis sélectionne un appareil pour ouvrir la vue de l'appareil NDM." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_new_4.mp4" alt="Un utilisateur ajoute des tags d'équipe, de service et de fournisseur à la Carte de topologie des périphériques, puis sélectionne un périphérique pour ouvrir la vue des périphériques NDM." video="true" >}}
 
 ## Configuration {#setup}
 
-La version 7.52 ou ultérieure de l'Agent Datadog collecte automatiquement les données de topologie. Aucune installation supplémentaire n'est nécessaire.
+Le Datadog Agent version 7.52 ou ultérieure collecte automatiquement les données de topologie. Aucune installation supplémentaire n'est nécessaire.
 
 ### Prérequis {#prerequisites}
 
-1. Les appareils ont LLDP (Link Layer Discovery Protocol) et/ou CDP (Cisco Discovery Protocol) activés avec SNMP. Utilisez le même protocole sur les appareils connectés afin qu'ils puissent se découvrir mutuellement. LLDP est généralement préféré car c'est une option plus courante.
-2. La version 7.52 ou ultérieure de l'Agent Datadog est installée.
+1. Les périphériques ont LLDP (Link Layer Discovery Protocol) et/ou CDP (Cisco Discovery Protocol) activés avec SNMP. Utilisez le même protocole sur les périphériques connectés afin qu'ils puissent se découvrir mutuellement. LLDP est généralement privilégié car il s'agit d'une option plus courante.
+2. Le Datadog Agent version 7.52 ou ultérieure est installé.
 
 ## Options de navigation {#navigation-options}
 
-Dans la carte de topologie réseau, les options de navigation suivantes sont disponibles :
+Dans la Carte de topologie des périphériques, les options de navigation suivantes sont disponibles :
 
-### Regrouper par {#group-by}
+### Grouper par {#group-by}
 
-Sous Regrouper par, utilisez **étiquettes** telles que `location` et `vendor` pour sélectionner comment vous souhaitez visualiser vos appareils :
+Sous {{< ui >}}Group By{{< /ui >}}, utilisez des tags tels que `location` et `vendor` pour sélectionner la manière dont vous souhaitez visualiser vos périphériques :
 
-{{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="Un contrôle de regroupement montrant des étiquettes pour l'emplacement et le fournisseur." style="width:90%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="Un contrôle « Group by » affichant les tags pour l'emplacement et le fournisseur." style="width:90%;" >}}
 
-### Filtrer les appareils {#filter-devices}
+### Filtrer les périphériques {#filter-devices}
 
-Sélectionnez le menu déroulant **+ Filtre** pour affiner les appareils affichés sur la carte de topologie des appareils.
+Sélectionnez le menu déroulant {{< ui >}}\+ Filter{{< /ui >}} pour affiner les périphériques affichés sur la carte de topologie des périphériques.
 
-{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_3.png" alt="La carte de topologie des dispositifs avec le menu déroulant des filtres ouvert." style="width:90%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_3.png" alt="La carte de topologie des périphériques avec le menu déroulant de filtrage ouvert." style="width:90%;" >}}
 
-**Remarque :** Le paramètre **Filtrer les dispositifs** détermine quels dispositifs apparaissent sur la carte de topologie des dispositifs pour toutes les requêtes, y compris celles qui filtrent par un aspect de dispositif dans la barre de recherche.
+**Remarque :** Le paramètre {{< ui >}}Filter Devices{{< /ui >}} détermine quels périphériques apparaissent sur la carte de topologie des périphériques pour toutes les requêtes, y compris celles qui filtrent par une facette de périphérique dans la barre de recherche.
 
 ### Ressources {#resources}
 
-Utilisez le menu déroulant **Ressource** pour filtrer le diagramme par types de dispositifs spécifiques, tels que les pare-feu, les points d'accès et les routeurs.
+Utilisez le menu déroulant {{< ui >}}Resource{{< /ui >}} pour filtrer le diagramme par types de périphériques spécifiques, tels que les pare-feu, les points d'accès et les routeurs.
 
-{{< img src="/network_device_monitoring/network_topology_map/resources_dropdown.png" alt="La carte de topologie des dispositifs avec le menu déroulant Ressources ouvert, et l'option Dispositif non surveillé décochée." style="width:30%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/resources_dropdown.png" alt="La Carte de topologie des périphériques avec le menu déroulant Ressources ouvert et Périphérique non surveillé décoché." style="width:30%;" >}}
 
-Par défaut, l'option **Dispositif non surveillé** est décochée, ce qui cache les dispositifs qui ne sont pas directement surveillés par la surveillance des dispositifs réseau mais qui sont découverts via LLDP/CDP à partir de dispositifs surveillés adjacents. Cochez cette option pour afficher ces dispositifs non surveillés sur le diagramme.
+Par défaut, l'option {{< ui >}}Unmonitored Device{{< /ui >}} est décochée, ce qui masque les périphériques qui ne sont pas directement surveillés par Network Device Monitoring, mais qui sont découverts via LLDP/CDP à partir de périphériques surveillés adjacents. Cochez cette option pour afficher ces périphériques non surveillés sur le diagramme.
 
-## Enquête sur les dispositifs {#investigating-devices}
+## Examen des périphériques {#investigating-devices}
 
-En plus de montrer un aperçu des connexions physiques de votre réseau, la carte de topologie des dispositifs vous permet d'enquêter sur des dispositifs individuels pour comprendre leurs connexions, flux et état général. Survolez un dispositif pour voir son état et ses indicateurs clés, ou cliquez sur un dispositif pour ouvrir la vue du dispositif NDM avec des détails tels que son adresse IP, ses étiquettes, son débit, son CPU et sa mémoire.
+En plus d'afficher une vue d'ensemble des connexions physiques de votre réseau, la carte de topologie des périphériques vous permet d'examiner des périphériques individuels pour comprendre leurs connexions, leurs flux et leur état général. Survolez un périphérique pour voir son état et ses métriques clés, ou cliquez sur un périphérique pour ouvrir la vue du périphérique NDM avec des détails tels que son adresse IP, ses tags, son débit, son processeur et sa mémoire.
 
-Lors de l'enquête sur un dispositif, cliquez sur le menu déroulant **Ouvrir la page du dispositif** en haut à droite de la vue du dispositif pour naviguer vers [Surveillance NetFlow][1] ou d'autres pages connexes pour une enquête plus approfondie.
+Lors de l'examen d'un périphérique, cliquez sur le menu déroulant {{< ui >}}Open Device Page{{< /ui >}} en haut à droite de la vue du périphérique pour accéder à [NetFlow Monitoring][1] ou à d'autres pages connexes pour une analyse plus approfondie.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="La carte de topologie des dispositifs réseau avec un dispositif sélectionné, affichant des informations dans la vue du dispositif NDM." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="La Carte de topologie des périphériques avec un périphérique sélectionné, affichant des informations dans la vue du périphérique NDM." style="width:100%;" >}}
 
 ### Dépendances {#dependencies}
 
-La section **Dépendances** dans la vue du dispositif NDM montre le nombre de dispositifs physiquement connectés et de tunnels VPN d'un coup d'œil, ainsi qu'un graphique visuel des dispositifs voisins.
+La section {{< ui >}}Dependencies{{< /ui >}} dans la vue du périphérique NDM affiche en un coup d'œil le nombre de périphériques réseau, d'endpoints et de tunnels VPN physiquement connectés, ainsi qu'un graphique visuel des périphériques voisins.
 
-{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies.png" alt="La vue du dispositif NDM montrant la section Dépendances avec un graphique des dispositifs connectés." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies_2.png" alt="La vue du périphérique NDM affichant la section Dépendances avec un graphique des périphériques connectés." style="width:100%;" >}}
 
-Cliquez sur **Voir les dépendances** pour ouvrir la page complète du dispositif. Dans l'onglet **Dépendances**, utilisez les filtres **Physique** ou **VPN** pour passer entre les connexions physiques et les tunnels VPN (les dépendances VPN nécessitent que [la surveillance VPN][12] soit configurée). La vue physique affiche un graphique de topologie aux côtés d'un tableau de dispositifs connectés montrant leur état, nom du dispositif, adresse IP, moniteurs, interface locale et interface distante.
+Cliquez sur {{< ui >}}View dependencies{{< /ui >}} pour ouvrir la page complète du périphérique. Sous l'onglet {{< ui >}}Dependencies{{< /ui >}}, sélectionnez les options {{< ui >}}VPN tunnels{{< /ui >}}, {{< ui >}}Network devices{{< /ui >}} ou {{< ui >}}Endpoints{{< /ui >}} pour basculer entre les vues de dépendances.
 
-{{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="L'onglet Dépendances sur la page du dispositif NDM avec le filtre Physique sélectionné, montrant un graphique de topologie et un tableau de dispositifs connectés avec état, adresse IP et détails d'interface." style="width:100%;" >}}
+<div class="alert alert-info">
+Les dépendances VPN nécessitent que <a href="/network_monitoring/devices/vpn_monitoring/">VPN Monitoring</a> soit configuré. Les dépendances des endpoints nécessitent que <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring (EUDM)</a> soit configuré.
+</div>
 
-### Indicateurs {#metrics}
+#### Tunnels VPN {#vpn-tunnels}
 
-Cliquez sur l'onglet **Indicateurs** dans la vue du dispositif NDM pour voir les indicateurs clés pour le dispositif, y compris l'utilisation du CPU, l'utilisation de la mémoire et le débit. Les statistiques résumées sont affichées en haut, et chaque métrique est présentée sous forme de graphique au fil du temps. Cliquez sur **Voir toutes les métriques** pour explorer la liste complète des métriques collectées.
+La vue {{< ui >}}VPN tunnels{{< /ui >}} affiche un graphique de topologie ainsi qu'un tableau des VPN connectés indiquant les adresses IP des pairs, le protocole, l'interface et les sous-réseaux de destination.
 
-{{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="La vue de l'appareil NDM avec l'onglet Métriques ouvert, montrant les graphiques de l'UC, de la mémoire et du débit." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_VPN_tunnels.png" alt="L'onglet Dépendances sur la page du périphérique NDM avec l'onglet Tunnels VPN sélectionné, affichant un graphique de topologie et un tableau des VPN connectés." style="width:100%;" >}}
+
+#### Périphériques réseau {#network-devices}
+
+La vue {{< ui >}}Network devices{{< /ui >}} affiche un graphique de topologie ainsi qu'un tableau des périphériques connectés indiquant leur état, le nom du périphérique, l'adresse IP, les monitors, l'interface locale et l'interface distante.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_network_devices.png" alt="L'onglet Dépendances sur la page de périphérique NDM avec l'onglet Périphériques réseau sélectionné, affichant un graphique de topologie avec onze périphériques connectés, codés par couleur selon leur état, et un tableau avec plus de détails sur les périphériques connectés." style="width:100%;" >}}
+
+#### Endpoints {#endpoints}
+
+La vue {{< ui >}}Endpoints{{< /ui >}} affiche un graphique de topologie ainsi qu'un tableau des périphériques des utilisateurs finaux et de leurs états. Sélectionnez un endpoint dans le graphique pour afficher plus de détails et y accéder dans [EUDM][12].
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_endpoints.png" alt="L'onglet Dependencies sur la page de périphérique NDM avec l'onglet Endpoints sélectionné, affichant un graphique de topologie avec cinq périphériques des utilisateurs finaux connectés, dont la vue détaillée d'un périphérique est ouverte, ainsi qu'un tableau avec plus de détails sur les périphériques connectés." style="width:100%;" >}}
+
+### Métriques {#metrics}
+
+Cliquez sur l'onglet {{< ui >}}Metrics{{< /ui >}} dans la vue de périphérique NDM pour voir les métriques clés du périphérique, notamment l'utilisation du processeur, l'utilisation de la mémoire et le débit. Les statistiques récapitulatives sont affichées en haut, et chaque métrique est présentée sous forme de graphique au fil du temps. Cliquez sur {{< ui >}}View all metrics{{< /ui >}} pour explorer la liste complète des métriques collectées.
+
+{{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="La vue de périphérique NDM avec l'onglet Métriques ouvert, affichant les graphiques du processeur, de la mémoire et du débit." style="width:100%;" >}}
 
 ### Trafic {#traffic}
 
-Cliquez sur l'onglet **Trafic** pour voir le débit total, entrant et sortant pour l'appareil. Un graphique de trafic montre l'activité au fil du temps, et le tableau **Conversations Principales** répertorie les flux source-destination à fort volume avec le débit binaire, le taux de paquets et le total des octets. Cliquez sur **Voir le trafic** pour enquêter davantage sur la page de résumé de l'appareil, et dans [Surveillance NetFlow][1].
+Cliquez sur l'onglet {{< ui >}}Traffic{{< /ui >}} pour afficher le débit total, entrant et sortant du périphérique. Un graphique de trafic montre l'activité au fil du temps, et le tableau {{< ui >}}Top Conversations{{< /ui >}} répertorie les flux source-destination à volume élevé avec le débit binaire, le taux de paquets et le nombre total d'octets. Cliquez sur {{< ui >}}View traffic{{< /ui >}} pour approfondir l'analyse sur la page de résumé du périphérique et dans [NetFlow Monitoring][1].
 
-{{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="La vue de l'appareil NDM avec l'onglet Trafic ouvert, montrant les statistiques de débit, un graphique de trafic et un tableau des Conversations Principales." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="La vue de périphérique NDM avec l'onglet Trafic ouvert, affichant les statistiques de débit, un graphique de trafic et un tableau des principales conversations." style="width:100%;" >}}
 
 ### Événements {#events}
 
-Cliquez sur l'onglet **Événements** pour voir les messages Syslog et les traps SNMP dans une vue combinée. Utilisez des filtres pour affiner les résultats par type d'événement. Les pics de volume d'événements sont visuellement mis en évidence, vous aidant à identifier et à enquêter sur les erreurs.
+Cliquez sur l'onglet {{< ui >}}Events{{< /ui >}} pour afficher les messages Syslog et les traps SNMP dans une vue unique et combinée. Utilisez des filtres pour restreindre les résultats par type d'événement. Les pics de volume d'événements sont mis en évidence visuellement, ce qui vous aide à identifier et à examiner les erreurs.
 
-{{< img src="/network_device_monitoring/network_topology_map/events.png" alt="La vue de l'appareil NDM avec l'onglet Événements ouvert, montrant les messages Syslog et les traps SNMP." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/events.png" alt="La vue de périphérique NDM avec l'onglet Événements ouvert, affichant les messages Syslog et les traps SNMP." style="width:100%;" >}}
 
-### Voir les détails du flux {#view-flow-details}
+### Afficher les détails du flux {#view-flow-details}
 
-Pour explorer les sources, destinations et volumes de trafic d'un appareil, cliquez sur le menu déroulant **Ouvrir la page de l'appareil** et sélectionnez **Surveillance NetFlow**. Les données sont automatiquement filtrées par le `@device.ip` de l'appareil. Pour plus d'informations, voir [Surveillance NetFlow][1].
+Pour explorer les sources, les destinations et le volume du trafic d'un appareil, cliquez sur le menu déroulant {{< ui >}}Open Device Page{{< /ui >}} et sélectionnez {{< ui >}}NetFlow Monitoring{{< /ui >}}. Les données sont automatiquement filtrées par le `@device.ip` de l'appareil. Pour plus d'informations, consultez [NetFlow Monitoring][1].
 
-{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="La vue de l'appareil NDM avec le menu déroulant Ouvrir la page de l'appareil montrant l'option de Surveillance NetFlow." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="La vue de l'appareil NDM avec le menu déroulant Ouvrir la page de l'appareil affichant l'option NetFlow Monitoring." style="width:100%;" >}}
 
 ### Paramètres de l'appareil {#device-settings}
 
-Cliquez sur l'icône **Paramètres de l'appareil** dans la vue de l'appareil NDM pour ouvrir le panneau des Paramètres de l'appareil. L'onglet **Informations** affiche des détails généraux (nom, espace de noms et description), des détails réseau (adresse IP, sous-réseau et géolocalisation) et des détails matériels (modèle, fournisseur, système d'exploitation et version). L'onglet **Tags** vous permet de visualiser et de gérer les tags associés à l'appareil.
+Cliquez sur l'icône {{< ui >}}Device Settings{{< /ui >}} dans la vue de l'appareil NDM pour ouvrir le panneau Paramètres de l'appareil. L'onglet {{< ui >}}Information{{< /ui >}} affiche les détails généraux (nom, espace de noms et description), les détails réseau (adresse IP, sous-réseau et géolocalisation) et les détails matériels (modèle, fournisseur, système d'exploitation et version). L'onglet {{< ui >}}Tags{{< /ui >}} vous permet d'afficher et de gérer les tags associée à l'appareil.
 
-{{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="Le panneau des paramètres de l'appareil pour un appareil NDM, montrant l'onglet Informations avec des détails généraux, réseau et matériels." style="width:90%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="Le panneau Paramètres de l'appareil pour un appareil NDM, affichant l'onglet Informations avec les détails généraux, réseau et matériels." style="width:90%;" >}}
 
 ### Détails du lien {#link-details}
 
-Cliquez sur un lien entre les appareils pour explorer les détails de connexion, y compris le volume de trafic, l'utilisation de la bande passante, les erreurs et les pertes, avec des options pour visualiser les données dans [Aperçu de l'appareil][10] ou [Surveillance NetFlow][11].
+Cliquez sur un lien entre des appareils pour explorer les détails de la connexion, notamment le volume de trafic, l'utilisation de la bande passante, les erreurs et les rejets, avec des options pour afficher les données dans [Device Overview][10] ou [NetFlow Monitoring][11].
 
-{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="Un utilisateur cliquant sur un lien entre les appareils pour voir des détails supplémentaires sur le lien." video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/link_details.mp4" alt="Un utilisateur cliquant sur un lien entre des appareils pour afficher des détails supplémentaires sur le lien." video="true" >}}
 
-### Légende des icônes {#icon-legend}
+### Légende des icônes{#icon-legend}
 
-Les appareils SNMP sont associés à une icône représentative en fonction de leur type d'appareil dans chaque nœud d'appareil, comme défini dans leurs [profils d'appareil][4].
+Les appareils SNMP sont associés à une icône représentative basée sur leur type d'appareil dans chaque nœud d'appareil, tel que défini dans leurs [profils d'appareil][4].
 
 <table>
   <colgroup>
@@ -147,36 +167,36 @@ Les appareils SNMP sont associés à une icône représentative en fonction de l
     <td>Commutateur</td>
   </tr>
   <tr>
-    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/device.png" alt="Icône de l'appareil" style="width:10%; border:none;" popup="false">}}</td>
-    <td>Appareil</td>
+    <td style="text-align:center;">{{<img src="/network_device_monitoring/network_topology_map/icons/device.png" alt="Icône de périphérique" style="width:10%; border:none;" popup="false">}}</td>
+    <td>Périphérique</td>
   </tr>
 </table>
 
 ## Dépannage {#troubleshooting}
 
-Si vous rencontrez des problèmes lors de l'utilisation de la carte de topologie réseau, utilisez les directives de dépannage suivantes. Si vous avez besoin d'une assistance supplémentaire, contactez [le support Datadog][5].
+Si vous rencontrez des problèmes lors de l'utilisation de la carte de topologie réseau, utilisez les consignes de dépannage suivantes. Si vous avez besoin d'une assistance supplémentaire, contactez le [support Datadog][5].
 
 ### Message de carte vide {#empty-map-message}
 
-{{< img src="/network_device_monitoring/network_topology_map/no_devices_found.png" alt="Le message indiquant qu'aucun appareil n'a été trouvé s'affiche lorsque NDM n'est pas configuré ou en raison d'un filtrage." style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/no_devices_found.png" alt="Le message « aucun périphérique trouvé » qui s'affiche lorsque NDM n'est pas configuré ou en raison d'un filtrage." style="width:80%;" >}}
 
-Il n'y a pas d'appareils car NDM n'est pas configuré.
+Il n'y a aucun périphérique car NDM n'est pas configuré.
 
-### Aucune connexion trouvée / Aucun appareil connecté à afficher {#no-connections-found-no-connected-devices-to-show}
+### Aucune connexion trouvée / Aucun périphérique connecté à afficher {#no-connections-found-no-connected-devices-to-show}
 
-{{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="Le message indiquant qu'aucun appareil n'a été trouvé s'affiche lorsque NDM n'est pas configuré ou en raison d'un filtrage." style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="Le message « aucun périphérique trouvé » qui s'affiche lorsque NDM n'est pas configuré ou en raison d'un filtrage." style="width:80%;" >}}
 
-- Activez la sélection **Appareil non surveillé** pour afficher les appareils non surveillés.
-- Utilisez le tag de catégorisation pour aider à comprendre votre vue de carte avec une hiérarchie d'informations.
+- Activez la sélection {{< ui >}}Unmonitored Device{{< /ui >}} pour afficher les périphériques non surveillés.
+- Utilisez un tag de catégorisation pour mieux comprendre votre vue cartographique avec une hiérarchie d'informations.
 
-### Appareils/connections manquants {#missing-devicesconnections}
+### Périphériques/connexions manquants {#missing-devicesconnections}
 
-Les données de la carte de topologie des appareils sont basées sur les informations LLDP (Link Layer Discovery Protocol) et CDP (Cisco Discovery Protocol) collectées avec SNMP. Si votre carte manque d'appareils et/ou de connexions, vérifiez les éléments suivants :
+Les données de la carte de topologie des périphériques sont basées sur les informations LLDP (Link Layer Discovery Protocol) et CDP (Cisco Discovery Protocol) collectées via SNMP. Si votre carte manque de périphériques et/ou de connexions, vérifiez les points suivants :
 
-- La version 7.52 ou ultérieure de l'Agent Datadog est installée.
-- Les appareils ont LLDP et/ou CDP activés avec SNMP.
+- Le Datadog Agent version 7.52 ou ultérieure est installé.
+- Les périphériques ont LLDP et/ou CDP activés avec SNMP.
 
-Vérifiez que vos appareils exposent les données LLDP et CDP avec les commandes suivantes :
+Vérifiez que vos périphériques exposent les données LLDP et CDP avec les commandes suivantes :
 
 Pour les données LLDP :
 
@@ -190,38 +210,38 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 
 ### Connexions ou liens manquants {#missing-connections-or-links}
 
-Si votre appareil expose des données de topologie avec LLDP ou CDP mais que certaines connexions manquent, vérifiez que la sélection **Appareil non surveillé** est désactivée.
+Si votre périphérique expose des données de topologie avec LLDP ou CDP mais que certaines connexions sont manquantes, vérifiez que la sélection {{< ui >}}Unmonitored Device{{< /ui >}} est désactivée.
 
-### Appareils non surveillés affichés sur la carte {#unmonitored-devices-showing-on-map}
+### Périphériques non surveillés apparaissant sur la carte {#unmonitored-devices-showing-on-map}
 
-La carte de topologie des appareils montre tous les appareils découverts avec LLDP ou CDP. Il peut s'agir de nouveaux appareils qui ne sont pas déjà surveillés avec SNMP ou d'appareils existants qui n'ont pas été [résolus](#device-resolution) en l'appareil surveillé équivalent.
-Vous pouvez utiliser la sélection **Appareil non surveillé** pour masquer ces nœuds.
+La carte de topologie des périphériques affiche tous les périphériques découverts avec LLDP ou CDP. Il peut s'agir de nouveaux périphériques qui ne sont pas encore surveillés avec SNMP ou de périphériques existants qui n'ont pas été [résolus](#device-resolution) en tant que périphérique surveillé équivalent.
+Vous pouvez utiliser la sélection {{< ui >}}Unmonitored Device{{< /ui >}} pour masquer ces nœuds.
 
-### Appareil dupliqué sur la carte {#device-duplicated-on-map}
+### Périphérique dupliqué sur la carte {#device-duplicated-on-map}
 
-La carte de topologie des appareils montre tous les appareils découverts avec LLDP et/ou CDP. Dans certains cas, ces appareils sont déjà surveillés avec SNMP mais ne peuvent pas être [résolus](#device-resolution) en l'appareil surveillé équivalent. Dans ce cas, l'appareil est affiché deux fois : un nœud représentant l'appareil surveillé et un nœud représentant l'appareil découvert par LLDP/CDP.
-Utilisez la sélection **Appareil non surveillé** pour masquer les nœuds non surveillés.
+La carte de topologie des périphériques affiche tous les périphériques découverts avec LLDP et/ou CDP. Dans certains cas, ces périphériques sont déjà surveillés avec SNMP mais ne peuvent pas être [résolus](#device-resolution) en tant que périphérique surveillé équivalent. Dans ce cas, le périphérique est affiché deux fois : un nœud représentant le périphérique surveillé et un nœud représentant le périphérique découvert via LLDP/CDP.
+Utilisez la sélection {{< ui >}}Unmonitored Device{{< /ui >}} pour masquer les nœuds non surveillés.
 
 ### Nœuds sans bordure ou noirs sur la carte {#borderless-or-black-nodes-on-the-map}
 
-Les nœuds sans bordure ou noirs sur la carte de topologie des appareils peuvent représenter des appareils découverts avec LLDP ou CDP qui ne sont pas configurés pour être surveillés avec NDM, ou des appareils découverts avec LLDP ou CDP qui ne peuvent pas être résolus en l'équivalent [appareil surveillé](#device-resolution).
+Les nœuds sans bordure ou noirs sur la carte de topologie des périphériques peuvent représenter des périphériques découverts avec LLDP ou CDP qui ne sont pas configurés pour être surveillés avec NDM, ou des périphériques découverts avec LLDP ou CDP qui ne peuvent pas être résolus en tant que [périphérique surveillé](#device-resolution) équivalent.
 
-## Résolution des appareils {#device-resolution}
+## Résolution de périphérique {#device-resolution}
 
-La carte de topologie des appareils fournit un aperçu des appareils surveillés avec NDM et de leurs connexions physiques. Les données de liens de topologie sont basées sur les informations LLDP (Link Layer Discovery Protocol) ou CDP (Cisco Discovery Protocol) collectées avec SNMP.
-Les connexions découvertes avec LLDP ou CDP peuvent correspondre à des appareils déjà surveillés avec SNMP. La résolution des appareils consiste à faire correspondre l'appareil découvert à l'appareil surveillé.
+La carte de topologie des périphériques fournit une vue d'ensemble des périphériques surveillés avec NDM et de leurs connexions physiques. Les données des liens de topologie sont basées sur les informations LLDP (Link Layer Discovery Protocol) ou CDP (Cisco Discovery Protocol) collectées avec SNMP.
+Les connexions découvertes avec LLDP ou CDP peuvent correspondre à des périphériques déjà surveillés avec SNMP. La résolution de périphérique consiste à faire correspondre le périphérique découvert au périphérique surveillé.
 
-### Échecs de résolution des appareils {#device-resolution-failures}
+### Échecs de résolution de périphérique {#device-resolution-failures}
 
-La résolution des appareils peut échouer si l'appareil n'est pas surveillé avec NDM, ou si les données LLDP ou CDP sont insuffisantes pour faire correspondre l'appareil découvert à l'appareil surveillé.
+La résolution de périphérique peut échouer si le périphérique n'est pas surveillé avec NDM, ou si les données LLDP ou CDP sont insuffisantes pour faire correspondre le périphérique découvert au périphérique surveillé.
 
 ## Étapes suivantes {#next-steps}
 
 NDM fournit plusieurs outils de visualisation pour surveiller votre infrastructure :
 
-- **[Carte géographique des appareils][9]**: Consultez la répartition géographique des appareils dans différentes localités pour identifier les problèmes régionaux et les lacunes de couverture.
-- **[Aperçu des appareils][10]**: Accédez à des métriques détaillées et des données de performance pour chaque appareil.
-- **[Surveillance NetFlow][1]**: Analysez les flux de trafic et l'utilisation de la bande passante sur votre réseau.
+- **[Device Geomap][9]** : Visualisez la répartition géographique des périphériques sur les différents sites pour identifier les problèmes régionaux et les lacunes de couverture.
+- **[Device Overview][10]** : Accédez à des métriques détaillées et aux données de performance pour chaque périphérique.
+- **[NetFlow Monitoring][1]** : Analysez les flux de trafic et l'utilisation de la bande passante sur votre réseau.
 
 ## Pour aller plus loin {#further-reading}
 
@@ -238,4 +258,4 @@ NDM fournit plusieurs outils de visualisation pour surveiller votre infrastructu
 [9]: /fr/network_monitoring/devices/geomap
 [10]: https://app.datadoghq.com/devices
 [11]: https://app.datadoghq.com/devices/netflow
-[12]: /fr/network_monitoring/devices/vpn_monitoring/
+[12]: /fr/infrastructure/end_user_device_monitoring/

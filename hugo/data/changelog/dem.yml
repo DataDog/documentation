@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - SearchInferredJourneys
+    title: Remove discriminator and anyOf usage

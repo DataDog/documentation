@@ -16,7 +16,7 @@ To set up Session Replay for Browser:
 
 Make sure you've set up the [RUM Browser SDK][30].
 
-### Step 2 - Enable Session Replay
+### Step 2 - Enable Session Replay {% #enable-browser %}
 
 To enable Session Replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
 
@@ -98,6 +98,10 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 
 SessionReplay.enable(sessionReplayConfig)
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Android -->
 
@@ -136,6 +140,10 @@ SessionReplay.enable(
   )
 )
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end iOS -->
@@ -188,12 +196,61 @@ If your app uses Material on Android, add:
 ```kotlin
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
+To set up Mobile Session Replay for .NET MAUI:
+
+### Step 1 - Set up the .NET MAUI RUM SDK
+
+Make sure you've [set up and initialized the Datadog .NET MAUI SDK][34] with RUM enabled.
+
+Session Replay is included in the `Datadog.Maui` NuGet package. There is no additional package to install.
+
+### Step 2 - Enable Session Replay {% #enable-maui %}
+
+Enable Session Replay after RUM. If you configure the SDK with the builder extensions, chain `UseDatadogSessionReplay`:
+
+```csharp {% filename="MauiProgram.cs" %}
+using Datadog.Maui.Configuration;
+using Datadog.Maui.Hosting;
+
+builder
+    .UseDatadog(new DdSdkConfiguration
+    {
+        ClientToken = "<CLIENT_TOKEN>",
+        Environment = "<ENV_NAME>",
+        TrackingConsent = TrackingConsent.Granted,
+    })
+    .UseDatadogRum(new DdRumConfiguration
+    {
+        ApplicationId = "<RUM_APPLICATION_ID>",
+    })
+    .UseDatadogSessionReplay(new SessionReplayConfiguration
+    {
+        ReplaySampleRate = <SAMPLE_RATE>,
+    });
+```
+
+If you call the static APIs directly instead, call `DdSessionReplay.Enable` after `DdRum.Enable`:
+
+```csharp
+using Datadog.Maui;
+using Datadog.Maui.Configuration;
+
+DdSessionReplay.Enable(new SessionReplayConfiguration
+{
+    ReplaySampleRate = <SAMPLE_RATE>,
+});
+```
+
+Recording begins as soon as Session Replay is enabled.
 {% /if %}
 <!-- end .NET MAUI -->
 
@@ -299,7 +356,7 @@ DdSdkReactNative.initialize(configuration)
 
 During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
-### Step 4 - (iOS only) Update your iOS pods.
+### Step 4 - (iOS only) Update your iOS pods
 
 ```shell
 cd ios && pod install
@@ -307,7 +364,11 @@ cd ios && pod install
 
 ### Step 5 - Rebuild your app
 
-Rebuild your iOS and Android apps
+Rebuild your iOS and Android apps.
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 
@@ -396,14 +457,61 @@ Flutter Session Replay relies on FFI, and some symbols may be stripped when buil
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
 
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
+
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Session Replay for Electron records the UI of renderer processes. The Browser SDK in the renderer streams the records to the main process, which uploads them.
+
+### Step 1 - Set up the Electron SDK
+
+Make sure you've [set up the Electron SDK][36], including the Browser SDK in your renderer processes.
+
+### Step 2 - Enable Session Replay in the main process {% #enable-electron %}
+
+In the main process `init` call, set `sessionReplaySampleRate` and, optionally, `defaultPrivacyLevel`:
+
+```typescript
+await init({
+  // ...
+  sessionReplaySampleRate: 100, // percentage of sampled sessions that record Session Replay
+  defaultPrivacyLevel: 'mask', // 'mask' | 'allow' | 'mask-user-input'
+});
+```
+
+The main process decides which sessions record Session Replay. `sessionReplaySampleRate` and `defaultPrivacyLevel` set in the renderer `datadogRum.init` call are ignored.
+
+### Step 3 - Initialize the Browser SDK in the renderer
+
+In each renderer page, initialize `@datadog/browser-rum` as described in [Set up renderer processes][37]. No Session Replay option is needed in the renderer:
+
+```typescript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+  clientToken: '<CLIENT_TOKEN>',
+  applicationId: '<APPLICATION_ID>',
+  site: '<DATADOG_SITE>',
+  service: '<SERVICE_NAME>',
+});
+```
+
+You don't need to call `startSessionReplayRecording()`. The Browser SDK streams the records to the main process automatically.
+{% /if %}
+<!-- end Electron -->
+
 ## Web view instrumentation
 
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 You can record the entire user journey across both [web and native views][1] on iOS or Android and watch it in a single Session Replay.
 
 The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
+{% /if %}
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -439,7 +547,7 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
+The .NET MAUI SDK does not support webview tracking, so consolidated web and native Session Replay views are not available for .NET MAUI applications.
 {% /if %}
 <!-- end .NET MAUI -->
 
@@ -463,16 +571,22 @@ Datadog Session Replay for Flutter does not currently support Web view capture.
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Electron renderers are web pages, so the setup records them directly. No web view instrumentation is needed.
+{% /if %}
+<!-- end Electron -->
+
 ## Additional configuration
 ### Set the sample rate for recorded sessions to appear
 
-The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
+The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %} If the sample rate is not specified in the configuration, the default value of 100 is applied.{% /if %}
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-The sample rate is set through the `sessionReplaySampleRate` parameter passed to `datadogRum.init()`. See [Step 2 - Enable Session Replay](#step-2-enable-session-replay) above.
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to `datadogRum.init()`. See [Step 2 - Enable Session Replay](#enable-browser) above.
 {% /if %}
 <!-- end Browser -->
 
@@ -508,7 +622,14 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
+The sample rate is set through the `ReplaySampleRate` property on `SessionReplayConfiguration`:
+
+```csharp {% filename="MauiProgram.cs" %}
+.UseDatadogSessionReplay(new SessionReplayConfiguration
+{
+    ReplaySampleRate = <SAMPLE_RATE>,
+});
+```
 {% /if %}
 <!-- end .NET MAUI -->
 
@@ -538,7 +659,35 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to the main process `init` call, and defaults to `0`. See [Step 2 - Enable Session Replay in the main process](#enable-electron).
+{% /if %}
+<!-- end Electron -->
 
+### Disable Session Replay
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][35].
+
+**Note**: If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0` instead.
+{% /if %}
+<!-- end Browser -->
+
+<!-- Mobile -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
+To stop session recordings, set the sample rate shown in the [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) section to `0`.
+{% /if %}
+<!-- end Mobile -->
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0` in the main process `init` call, or remove it.
+{% /if %}
+<!-- end Electron -->
+
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ### Start or stop the recording manually
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
@@ -645,7 +794,9 @@ SessionReplay.stopRecording()
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
+Starting and stopping the recording manually is not supported in the .NET MAUI SDK. Recording begins when Session Replay is enabled and continues for the lifetime of the session.
+
+To control which sessions are recorded, use `ReplaySampleRate`. To decide at runtime whether a session is recorded at all, enable Session Replay conditionally rather than unconditionally on the builder chain.
 {% /if %}
 <!-- end .NET MAUI -->
 
@@ -664,7 +815,9 @@ SessionReplay.stopRecording();
 ```
 {% /if %}
 <!-- end React Native -->
+{% /if %}
 
+{% if includes($platform, ["browser", "android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ### Validate whether Session Replay data is being sent
 
 To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK.
@@ -702,7 +855,17 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
+Set the SDK verbosity to `DEBUG` when you initialize the SDK:
+
+```csharp {% filename="MauiProgram.cs" %}
+.UseDatadog(new DdSdkConfiguration
+{
+    Verbosity = SdkVerbosity.DEBUG,
+    // ...
+})
+```
+
+Session Replay upload messages from the underlying iOS and Android SDKs then appear in the platform device log.
 {% /if %}
 <!-- end .NET MAUI -->
 
@@ -729,6 +892,7 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 ```
 {% /if %}
 <!-- end Flutter -->
+{% /if %}
 
 ### Privacy options
 
@@ -759,7 +923,7 @@ See [Connect Session Replay to your third-party tools][30].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
@@ -777,3 +941,7 @@ See [Connect Session Replay to your third-party tools][30].
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
+[34]: /real_user_monitoring/application_monitoring/maui/setup
+[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
+[36]: /real_user_monitoring/application_monitoring/electron/setup/
+[37]: /real_user_monitoring/application_monitoring/electron/setup/#set-up-renderer-processes

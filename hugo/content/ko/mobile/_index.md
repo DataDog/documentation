@@ -56,17 +56,17 @@ SAML 로그인 시 기본 iOS/Android 브라우저를 사용하여 SAML 공급�
 
 ##### QR 코드 {#qr-code}
 
-1. 브라우저에서 [Datadog 계정 개인 설정 조직][4] 페이지로 이동하고 현재 로그인한 조직의 **Log in to Mobile App**을 클릭합니다. QR 코드가 표시됩니다.
+1. 브라우저에서 [Datadog 계정 개인 설정 조직][4] 페이지로 이동하고 현재 로그인한 조직의 {{< ui >}}Log in to Mobile App{{< /ui >}}을 클릭합니다. QR 코드가 표시됩니다.
 2. 휴대폰 기본 카메라 앱을 사용해 QR 코드를 스캔한 다음, 연결되는 링크를 누르면 Datadog 앱이 실행됩니다. 자동으로 로그인됩니다.
 
-**참고**: 현재 로그인하지 않은 조직의 **Log in to Mobile App** 버튼을 클릭하면 조직 UUID가 로그인 화면에 자동으로 삽입됩니다. 표준 방법을 사용하여 인증을 제공해야 합니다.
+**참고**: 현재 로그인하지 않은 조직의 {{< ui >}}Log in to Mobile App{{< /ui >}} 버튼을 클릭하면 조직 UUID가 로그인 화면에 자동으로 삽입됩니다. 표준 방법을 사용하여 인증을 제공해야 합니다.
 
 ##### 수동 입력 {#manual-entry}
 
-1. 수동으로 SAML ID를 입력하려면 Datadog 모바일 앱을 열고 'Using Single Sign-On (SAML)?' 버튼을 누릅니다.
-2. 'Use another method to login' 버튼을 누르고 SAML ID를 직접 입력합니다.
+1. 수동으로 SAML ID를 입력하려면 Datadog 모바일 앱을 열고 {{< ui >}}Using Single Sign-On (SAML)?{{< /ui >}} 버튼을 누릅니다.
+2.  {{< ui >}}Use another method to login{{< /ui >}} 버튼을 누르고 SAML ID를 수동으로 입력합니다.
 
-로그인 시 **Authorize**를 클릭하면 사용 중인 모바일 기기가 계정에 연동됩니다. 보안을 위해 1개월에 한 번씩 이 절차를 진행해야 합니다.
+로그인 시 {{< ui >}}Authorize{{< /ui >}}를 클릭하면 사용 중인 모바일 기기가 계정에 연동됩니다. 보안을 위해 한 달에 한 번씩 이 절차를 진행해야 합니다.
 
 ##### IdP 시작 SAML 로그인 {#saml-idp-initiated-login}
 
@@ -79,28 +79,28 @@ SAML 로그인 시도 중에 계속 오류가 발생하는 경우, ID 제공자�
 
 ### 조직 전환 {#switch-organizations}
 
-조직을 전환하려면 모바일 앱의 **Settings** 페이지로 이동하여 **Organization**을 클릭하세요. 
+조직을 전환하려면 Datadog 모바일 앱의 {{< ui >}}Settings{{< /ui >}} 페이지로 이동하여 {{< ui >}}Organization{{< /ui >}}을 클릭합니다.
 
 **참고**: 조직을 전환할 때 재인증이 필요할 수 있습니다.
 
 ### 로그아웃 {#log-out}
-로그아웃하려면 모바일 앱의 **Settings** 페이지로 이동하여 **Log Out**을 클릭하세요. **Yes**를 클릭해 확인합니다. 
+로그아웃하려면 Datadog 모바일 앱의 {{< ui >}}Settings{{< /ui >}} 페이지로 이동하여 {{< ui >}}Log Out{{< /ui >}}을 클릭합니다. {{< ui >}}Yes{{< /ui >}}를 클릭해 확인합니다.
 
 ## On-Call {#on-call}
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="교대 근무, 일정 및 에스컬레이션 옵션을 보여주는 iOS on-call 페이지">}}
+{{< img src="mobile/on_call_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="교대 근무, 일정 및 에스컬레이션 옵션을 보여주는 iOS on-call 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="교대 근무, 일정 및 에스컬레이션 옵션을 보여주는 Android on-call 페이지">}}
+{{< img src="mobile/Android_On_Call.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="교대 근무, 일정 및 에스컬레이션 옵션을 보여주는 Android on-call 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-On-Call 페이지는 온콜 교대 근무, 일정, 페이지 및 에스컬레이션 정책에 대한 포괄적인 뷰를 제공합니다. 사용자, 팀, 긴급성, 상태 또는 날짜별로 정보를 필터링하여 관련 세부정보를 빠르게 찾을 수 있습니다. **Escalate**를 누르면 다음 정책 수준으로의 에스컬레이션을 확인하라는 메시지가 표시됩니다. **Declare Incident**를 누르면 제목을 입력하고 관련 인시던트 특성을 제공하라는 메시지가 표시됩니다.
+On-Call 페이지는 온콜 교대 근무, 일정, 페이지 및 에스컬레이션 정책에 대한 포괄적인 뷰를 제공합니다. 사용자, 팀, 긴급성, 상태 또는 날짜별로 정보를 필터링하여 관련 세부정보를 빠르게 찾을 수 있습니다. {{< ui >}}Escalate{{< /ui >}}를 누르면 다음 정책 수준으로의 에스컬레이션을 확인하라는 메시지가 표시됩니다. {{< ui >}}Declare Incident{{< /ui >}}를 누르면 제목을 입력하고 관련 인시던트 특성을 제공하라는 메시지가 표시됩니다.
 
 개인 또는 팀에 페이지를 시작할 수 있으며, 재정의하려는 교대 근무를 눌러 기존 교대 근무를 덮어쓸 수 있습니다. Bits Investigation 모니터링 조사를 통해 초기 발견 및 결론을 확인할 수 있습니다. 자세한 내용은 [Datadog On-Call][20]을 참조하세요.
 
@@ -115,34 +115,34 @@ On-Call 페이지는 온콜 교대 근무, 일정, 페이지 및 에스컬레이
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/incident_may_2025.png" alt="Datadog On-call 모바일 앱의 Incidents 페이지" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incident_may_2025.png" alt="Datadog On-call 모바일 앱의 Incidents 페이지" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Incident.png" alt="Datadog On-call 모바일 앱의 Incidents 페이지" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/Android_Incident.png" alt="Datadog On-call 모바일 앱의 Incidents 페이지" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Incidents 페이지에서는 Datadog 계정에서 액세스할 수 있는 모든 인시던트를 보고, 검색하고, 필터링하여 어디서나 응답 및 해결을 보장할 수 있습니다. 또한 Slack, Zoom 등과의 통합을 통해 인시던트를 선언 및 편집하고, 팀과 원활하게 소통할 수 있습니다. 인시던트에 대한 자세한 내용은 [Datadog 인시던트 관리][12]를 참조하세요.
+Incidents 페이지에서는 Datadog 계정에서 액세스할 수 있는 모든 인시던트를 보고, 검색하고, 필터링하여 어디서나 응답 및 해결을 보장할 수 있습니다. 또한 Slack, Zoom 등과의 통합을 통해 인시던트를 선언 및 편집하고, 팀과 원활하게 소통할 수 있습니다. 인시던트에 대한 자세한 내용은 [Datadog Incident Management][12]를 참조하세요.
 
 ### 인시던트 생성 {#create-an-incident}
 
-1. 하단 바에 있는 Incidents 탭을 눌러 인시던트 목록으로 이동합니다.
-2. 오른쪽 상단 모서리의 **+** 버튼을 누릅니다.
-3. 인시던트의 제목, 심각도 및 커맨더를 지정합니다.
+1. 하단 바에 있는 {{< ui >}}Incidents{{< /ui >}} 탭을 눌러 인시던트 목록으로 이동합니다.
+2. 오른쪽 상단 모서리의 {{< ui >}}\+{{< /ui >}} 버튼을 누릅니다.
+3. 인시던트의 제목, 중요도, 커맨더를 설정합니다.
 
 ## Notification Center {#notification-center}
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_notification_center.png" alt="Datadog 모바일 앱의 ios Notification center" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/ios_notification_center.png" alt="iOS용 Datadog 모바일 앱의 Notification Center" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_notification_center.png" alt="Datadog 모바일 앱의 Android Notification center" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/android_notification_center.png" alt="Android용 Datadog 모바일 앱의 Notification Center" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -154,19 +154,19 @@ Notification Center는 수신된 모든 푸시 알림을 나열하여 알림의 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 대시보드 목록을 보여주는 iOS 대시보드 페이지">}}
+{{< img src="mobile/dashboard_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 대시보드 목록을 보여주는 iOS 대시보드 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 대시보드 목록을 보여주는 Android 대시보드 페이지">}}
+{{< img src="mobile/Android_Dashboards.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 대시보드 목록을 보여주는 Android 대시보드 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Dashboards 페이지에서는 Datadog 조직에서 액세스할 수 있는 모든 대시보드를 보고 검색할 수 있으며, Datadog 웹 앱에서 설정한 동일한 템플릿 변수를 사용하여 필터링할 수 있습니다. 템플릿 변수 저장된 뷰를 사용하여 여러 대시보드를 빠르게 필터링합니다. 템플릿 변수 저장된 뷰에 대한 자세한 내용은 [대시보드 저장된 뷰][9]를 참조하세요. 개별 대시보드를 클릭하여 확인합니다. 대시보드 범위를 사용자 정의하려면 오른쪽 하단의 시간 범위를 클릭하세요. 
+Dashboards 페이지에서는 Datadog 조직에서 액세스할 수 있는 모든 대시보드를 보고 검색할 수 있으며, Datadog 웹 앱에서 설정한 동일한 템플릿 변수를 사용하여 필터링할 수 있습니다. 템플릿 변수 저장된 뷰를 사용하여 여러 대시보드를 빠르게 필터링합니다. 템플릿 변수 저장된 뷰에 대한 자세한 내용은 [Dashboard Saved Views][9]를 참조하세요. 개별 대시보드를 클릭하여 확인합니다. 대시보드 범위를 사용자 정의하려면 오른쪽 하단의 시간 범위를 클릭하세요.
 
-**참고**: 
+**참고**:
 - 대시보드를 설정하거나 편집하려면 [Datadog 브라우저 앱에 로그인][10]해야 합니다. 자세한 내용은 [대시보드][11]를 참조하세요.
 - UTC로 구성된 대시보드 링크는 모바일 앱에서 UTC로 열립니다. 자세한 내용은 [대시보드 구성][24]을 참조하세요.
 - 모든 위젯 유형을 이용할 수 있는 것은 아니므로 모바일 앱에서 데이터가 표시되지 않습니다. 여기에는 토폴로지 맵, 목록 위젯(모든 데이터 소스), 레거시 트리맵 위젯 및 SLO 요약 위젯이 포함됩니다.
@@ -176,12 +176,12 @@ Dashboards 페이지에서는 Datadog 조직에서 액세스할 수 있는 모�
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 모니터링 목록을 보여주는 iOS monitors 페이지">}}
+{{< img src="mobile/monitor_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 모니터링 목록을 보여주는 iOS monitors 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 모니터링 목록을 보여주는 Android monitors 페이지">}}
+{{< img src="mobile/Android_Monitors.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 모니터링 목록을 보여주는 Android monitors 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -197,12 +197,12 @@ Monitors 페이지에서는 소속 Datadog 조직 내에서 액세스 가능한 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터핑 옵션과 함께 Notebooks 목록을 보여주는 iOS notebooks 페이지">}}
+{{< img src="mobile/notebook_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터핑 옵션과 함께 노트북 목록을 보여주는 iOS 노트북 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터핑 옵션과 함께 Notebooks 목록을 보여주는 Android notebooks 페이지">}}
+{{< img src="mobile/Android_Notebooks.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터핑 옵션과 함께 노트북 목록을 보여주는 Android 노트북 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -216,12 +216,12 @@ Notebooks 페이지에서는 Datadog 조직에서 접근할 수 있는 모든 �
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 트레이스 목록을 보여주는 iOS traces 페이지">}}
+{{< img src="mobile/trace_may_2025.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 트레이스 목록을 보여주는 iOS traces 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 트레이스 목록을 보여주는 Android traces 페이지">}}
+{{< img src="mobile/Android_Traces.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 트레이스 목록을 보여주는 Android traces 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -238,12 +238,12 @@ Traces 페이지에서는 소속 Datadog 조직 내에서 액세스 가능한 �
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 로그 목록을 보여주는 iOS logs 페이지">}}
+{{< img src="mobile/iOS_logs_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 로그 목록을 보여주는 iOS Logs 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 로그 목록을 보여주는 Android logs 페이지">}}
+{{< img src="mobile/Android_Logs.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 로그 목록을 보여주는 Android Logs 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -262,12 +262,12 @@ Logs 페이지에서는 Datadog 조직에서 액세스할 수 있는 모든 로�
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 서비스 목록을 보여주는 iOS services 페이지">}}
+{{< img src="mobile/service_may_2025_v2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 서비스 목록을 보여주는 iOS services 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 서비스 목록을 보여주는 Android services 페이지">}}
+{{< img src="mobile/Android_Services.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="검색 및 필터 옵션과 함께 서비스 목록을 보여주는 Android services 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -279,28 +279,28 @@ Services 페이지에서는 Datadog 모바일 앱을 통해 Datadog 계정에서
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="사용자가 서비스에 대해 질문하는 ios에서의 Bits AI 챗봇 인터페이스">}}
+{{< img src="/mobile/bits_chat_ios_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="서비스에 대한 사용자 쿼리가 포함된 iOS Datadog 모바일 앱의 Bits AI 채팅 페이지">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_chat.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="사용자가 서비스에 대해 질문하는 Android에서의 Bits AI 챗봇 인터페이스">}}
+{{< img src="mobile/bits_chat_android_2026.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="서비스에 대한 사용자 쿼리가 포함된 Android Datadog 모바일 앱의 Bits AI 채팅 페이지">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Bits AI 홈페이지에서 조직의 시스템 상태에 대한 질문을 할 수 있습니다. Bits AI는 로그 및 APM 트레이스에 대한 자연어 쿼리를 지원합니다. 자세한 내용은 [Bits 채팅][27]을 참조하세요.
+Bits AI 홈페이지에서 시스템 또는 활성 인시던트에 대한 질문을 할 수 있습니다. Bits Chat 페이지는 Datadog 공개 설명서, 텔레메트리, 소유권에 대한 컨텍스트를 제시합니다. 자세한 내용은 [Bits Chat][27]을 참조하세요.
 
 ### Bits Investigation {#bits-investigation}
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="On-Call 페이지에 표시된 Bits Investigation 결과">}}
+{{< img src="mobile/ios_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="On-Call 페이지에 표시된 Bits Investigation 결과">}}
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-{{< img src="service_management/mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="On-Call 페이지에 표시된 Bits Investigation 결과">}}
+{{< img src="mobile/android_bits_sre.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="On-Call 페이지에 표시된 Bits Investigation 결과">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -309,7 +309,7 @@ Bits AI 홈페이지에서 조직의 시스템 상태에 대한 질문을 할 �
 
 ## 자주 묻는 질문 {#frequently-asked-question}
 ### 모바일 앱에서 계속 로그인 상태를 유지하려면 어떻게 해야 하나요? {#how-do-i-remain-logged-into-the-mobile-app}
-모바일 앱에서 성공적으로 인증을 마치면 90일 동안 로그인 상태를 유지합니다.  
+모바일 앱에서 성공적으로 인증을 마치면 90일 동안 로그인 상태를 유지합니다.
 
 **참고**: 알림이 활성화된 경우, 토큰 만료 10일 전에 사전 알림이 전송됩니다.
 
@@ -319,10 +319,10 @@ Bits AI 홈페이지에서 조직의 시스템 상태에 대한 질문을 할 �
 **참고**: 앱에서 수동으로 로그아웃하면 알림 수신이 중단됩니다.
 
 ### 왜 알림을 받지 못하나요? {#why-am-i-not-receiving-notifications}
-기기 앱 설정에서 Datadog 앱에 대한 알림이 활성화되어 있는지 확인하세요. 알림이 방해 금지 모드를 우회하도록 하려면, 중요 알림이 켜져 있는지 확인하세요.
+기기 앱 설정에서 Datadog 앱에 대한 알림이 활성화되어 있는지 확인하세요. 알림이 Do Not Disturb 모드를 우회하도록 하려면, Critical Alerts가 켜져 있는지 확인하세요.
 
 ### 내가 로그인한 모든 조직에 대해 알림을 받을 수 있나요? {#will-i-receive-notifications-for-all-organizations-that-i-am-signed-into}
-네, 전환하는 조직에 관계없이 로그인한 모든 조직에 대한 알림을 받습니다. 여기에는 중요한 푸시 알림이 포함됩니다. 
+네, 전환하는 조직에 관계없이 로그인한 모든 조직에 대한 알림을 받습니다. 여기에는 중요한 푸시 알림이 포함됩니다.
 
 ### 사용자가 비활성화되면 어떻게 되나요? {#what-happens-if-a-user-is-disabled}
 모바일 앱 토큰이 무효화되어 사용자가 로그아웃됩니다.
@@ -362,6 +362,6 @@ Bits AI 홈페이지에서 조직의 시스템 상태에 대한 질문을 할 �
 [24]: /ko/dashboards/configure/#configuration-actions
 [25]: /ko/logs/explorer/watchdog_insights/
 [26]: /ko/watchdog/insights/?tab=logmanagement
-[27]: /ko/bits_ai/bits_assistant/
-[28]: /ko/bits_ai/bits_ai_sre/
+[27]: /ko/bits_ai/bits_chat/
+[28]: /ko/bits_ai/bits_investigation/
 [29]: /ko/account_management/multi_organization/#custom-sub-domains

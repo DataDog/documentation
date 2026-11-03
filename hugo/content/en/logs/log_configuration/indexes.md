@@ -5,6 +5,9 @@ aliases:
   - /logs/dynamic_volume_control
   - /logs/indexes/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+  tag: "Architecture Center"
+  text: "A guide to Log Management Indexing Strategies with Datadog"
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
   text: "Perform Log Analytics"

@@ -12,7 +12,7 @@ title: Destino de Google Cloud Storage
 
 ## Descripción general {#overview}
 
-<div class="alert alert-info">Para las versiones 2.7 y posteriores de Worker, el destino de Google Cloud admite <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">acceso uniforme a nivel de bucket</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recomienda</a> usar el acceso uniforme a nivel de bucket. <br>Para versiones de Worker anteriores a la 2.7, solo se admiten <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access</a> Control Lists.</div>
+<div class="alert alert-info">Para las versiones 2.7 y posteriores de Worker, el destino de Google Cloud admite <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">acceso uniforme a nivel de bucket</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recomienda</a> usar el acceso uniforme a nivel de bucket. <br>Para versiones de Worker anteriores a la 2.7, solo se admiten <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a>.</div>
 
 Utilice el destino de Google Cloud Storage para enviar sus registros a un bucket de Google Cloud Storage. Si desea enviar registros a Google Cloud Storage para [archiving][1] y [rehydration][2], debe [configurar Log Archives](#configure-log-archives). Si no desea rehidratar registros en Datadog, salte a [Configurar el destino para su canalización](#set-up-the-destinations).
 
@@ -24,7 +24,7 @@ Este paso solo es necesario si desea enviar registros a Google Cloud Storage par
 
 Si ya tiene un Datadog Log Archive configurado para Observability Pipelines, salte a [Configurar el destino para su canalización](#set-up-the-destination-for-your-pipeline).
 
-Necesita tener instalada la integración de Google Cloud Platform de Datadog para configurar Datadog Log Archives.
+Necesita tener instalada la integración de [Google Cloud Platform][3] de Datadog para configurar Datadog Log Archives.
 
 ### Crear un bucket de almacenamiento {#create-a-storage-bucket}
 
@@ -32,8 +32,8 @@ Necesita tener instalada la integración de Google Cloud Platform de Datadog par
 1. En la página Buckets, haga clic en **Crear** para crear un bucket para sus archivos.
 1. Ingrese un nombre para el bucket y elija dónde almacenar sus datos.
 1. Seleccione **Fine-grained** en la sección **Choose how to control access to objects**.
-1. No agregue una política de retención porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente un caso de tiempo de espera).
-1. Haga clic en **Create**.
+1. No agregue una política de retención porque los datos más recientes deben sobrescribirse en algunos casos poco frecuentes (normalmente una incidencia de tiempo de espera).
+1. Haga clic en **Crear**.
 
 ### Cree una cuenta de servicio para permitir que los Workers escriban en el bucket {#create-a-service-account-to-allow-workers-to-write-to-the-bucket}
 
@@ -86,11 +86,17 @@ Ingrese un prefijo que desee aplicar a todos los objetos clave.
 1. Haga clic en {{< ui >}}Add Header{{< /ui >}} para agregar metadatos.
 1. Ingrese los valores para el nombre y el valor del encabezado.
 
+#### Compression {#compression}
+
+1. En el menú desplegable {{< ui >}}Compression - Algorithm{{< /ui >}}, seleccione el algoritmo de compresión para sus registros archivados ({{< ui >}}gzip{{< /ui >}} o {{< ui >}}zstd{{< /ui >}}).
+    - **Nota**: Si no se especifica un algoritmo de compresión, se utiliza gzip con un nivel de compresión de `6`.
+1. En el campo {{< ui >}}Compression - Level {{< /ui >}}, debe ingresar un nivel de compresión. Datadog recomienda `6` para gzip y `3` para zstd.
+
 #### Almacenamiento en búfer {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Valores predeterminados de secretos {#secret-defaults}
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -108,7 +114,7 @@ No hay identificadores de secretos para configurar.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Métricas de estado {#health-metrics}
+## Métricas de salud {#health-metrics}
 
 Para [component metrics][13] y [destination buffer metrics][14] emitidas por todos los destinos, consulte la documentación de [Pipelines Usage Metrics][15]. Para filtrar o agrupar por métricas de destino de Google Cloud Storage, use la etiqueta `component_type:datadog_archives_gcs`.
 
@@ -118,7 +124,7 @@ Para [component metrics][13] y [destination buffer metrics][14] emitidas por tod
 
 Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Destinations event batching][5] para obtener más información.
 
-| Eventos máximos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
+| Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
 |----------------|-------------------|---------------------|
 | Ninguno           | 100               | 900                 |
 

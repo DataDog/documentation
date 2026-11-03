@@ -145,7 +145,9 @@ datadogWebpackPlugin({
     site: 'datadoghq.com',
   },
   logLevel: 'warn',
-  // Source map uploads (see Source Maps plugin page)
+  // Source map uploads by debug ID (see Source Maps plugin page)
+  sourcemaps: { /* ... */ },
+  // Source map uploads by service and version (see Source Maps plugin page)
   errorTracking: {
     sourcemaps: { /* ... */ },
   },
@@ -156,6 +158,8 @@ datadogWebpackPlugin({
   },
 })
 ```
+
+`sourcemaps` and `errorTracking.sourcemaps` are mutually exclusive: set one, based on the matching method you choose. See [Source Maps][2] for details.
 
 ## Available plugins
 
@@ -170,3 +174,4 @@ datadogWebpackPlugin({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/

@@ -13,9 +13,9 @@ further_reading:
 site_support_id: autocomplete_search
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Autocomplete and search are in Preview for Python and .NET.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 

@@ -1,0 +1,3 @@
+---
+title: Reglas de etiqueta
+---

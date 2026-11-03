@@ -3,7 +3,7 @@ description: Network Path のセットアップ
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-network-path-monitoring/
   tag: ブログ
-  text: Network Path とSD-WAN モニタリングを使用してエンドツーエンドでネットワークを可視化
+  text: Network Path と SD-WAN モニタリングを使用してエンドツーエンドでネットワークを可視化
 - link: /network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/
   tag: ガイド
   text: アプリケーションの可用性をネットワークインサイトで検知する
@@ -15,26 +15,27 @@ title: セットアップ
 ---
 ## 概要 {#overview}
 
-Network Path のセットアップには、サービスとエンドポイントの間のネットワークルートを監視およびトレースするための環境の構成が含まれます。これは、ネットワークインフラストラクチャーにおけるボトルネック、レイテンシーの問題、および潜在的な障害点を特定するのに役立ちます。Network Path では、ニーズに応じて、個々のネットワークパスを手動で構成するか、自動的に検出するか、両方の方法を同時に使用することができます。
+Network Path のセットアップには、サービスとエンドポイントの間のネットワークルートを監視およびトレースするための環境の構成が含まれます。これは、ネットワークインフラストラクチャーにおけるボトルネック、レイテンシーの問題、および潜在的な障害点を特定する上で役立ちます。Network Path では、ニーズに応じて、個々のネットワークパスを手動で構成するか、自動的に検出するか、両方の方法を同時に使用することができます。
 
-**注**: ネットワーク構成でアウトバウンドトラフィックを制限している場合は、[Agent プロキシの構成][2]ドキュメントのセットアップ手順に従ってください。
+**注**: ネットワーク構成でアウトバウンドトラフィックを制限している場合は、[Agent プロキシの構成][2] ドキュメントのセットアップ手順に従ってください。
 
 ## セットアップ {#setup}
 
 <div class="alert alert-info">このページでは、Network Monitoring における Agent ベースの構成のための Network Path のセットアップについて説明します。Synthetic Monitoring で Network Path テストを作成するには、<a href="/synthetics/network_path_tests/">Synthetic Monitoring の Network Path テスト</a>を参照してください。</div>
 
-Datadog には、Agent ベースの収集方法が 2 つあります。いずれかの方法を単独で使用することも、両方を組み合わせて使用することもできます。
+Datadog には、Agent ベースの収集方法が 3 つあります。1 つの方法を単独で使用することも、複数の方法を組み合わせることもできます。
 
 | 方法 | 用途 |
 |--------|-------------|
-| **[スケジュールテスト](#scheduled-tests)** | Agent 構成で定義した特定の送信元と宛先のペアを監視します。重要な API やパートナーサービスなど、既知のエンドポイントのセットを追跡するのに最適です。|
-| **[動的テスト](#dynamic-tests)** | [Cloud Network Monitoring][1] によって観測されたトラフィックに基づいて、パスを自動的に検出して監視します。それぞれの宛先を手動でリストせずに広範な可視性を得るのに最適です。|
+| **[スケジュールテスト](#scheduled-tests)** | Agent 構成で定義した特定の送信元と宛先のペアを監視します。重要な API やパートナーサービスなど、既知のエンドポイントのセットを追跡する上で最適です。|
+| **[動的テスト](#dynamic-tests)** | [Cloud Network Monitoring][1] によって観測されたトラフィックに基づいて、パスを自動的に検出して監視します。それぞれの宛先を手動でリストせずに広範な可視性を得る上で最適です。|
+| **[NetFlow の動的テスト](#dynamic-tests-for-netflow-experimental)** | Agent ホストから [NetFlow Monitoring][6] で観測された宛先 IP への Network Path のテストを自動的に実行します。個々の宛先を手動で構成することなく、NetFlow トラフィックにホップバイホップのルート可視性を追加する上で最適です。|
 
 ### スケジュールテスト {#scheduled-tests}
 
 特定のネットワークパスを Agent 構成ファイルで定義することで監視できます。ファイルは `/etc/datadog-agent/conf.d/network_path.d/conf.yaml` にあります。
 
-開始するには、[構成例][5]をコピーして `.example` 拡張子を削除し、希望の設定で更新するか、下記の環境固有の構成のいずれかを使用します。大規模な環境でのパフォーマンス最適化については、[ワーカーの数を増やす](#increase-the-number-of-workers)を参照してください。
+開始するには、[構成例][5] をコピーして `.example` 拡張子を削除し、希望の設定で更新するか、下記の環境固有の構成のいずれかを使用します。大規模な環境でのパフォーマンス最適化については、[ワーカーの数を増やす](#increase-the-number-of-workers)を参照してください。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -171,7 +172,7 @@ Agent `v7.72+` が必要です。
          - "tag_key2:tag_value2"
     ```
 
-  3. これらの構成を変更した後、Agent を再起動します。ネットワークパスが表示されるようになります。
+3. これらの構成を変更した後、Agent を再起動します。ネットワークパスが表示されるようになります。
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -372,7 +373,7 @@ Agent `v7.73+` が必要です。
 
 3. これらの構成を変更した後、Agent を再起動します。ネットワークパスが表示されるようになります。
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -388,57 +389,59 @@ Agent `v7.73+` が必要です。
 
 2. CNM の接続を監視するために、`%ProgramData%\Datadog\datadog.yaml` ファイルを作成または編集して `network_path` を有効にします。
 
-    ```yaml
-    network_path:
-      connections_monitoring:
-        enabled: true
-      # collector:
-        # workers: <NUMBER OF WORKERS> # default 4
-    ```
+   <div class="alert alert-info"><a href="/infrastructure/end_user_device_monitoring/">エンドユーザーデバイス</a>で Network Path を有効にする場合は、このステップをスキップしてください。</div>
 
-    For full configuration details, reference the [example config][3], or use the following:
+   ```yaml
+   network_path:
+     connections_monitoring:
+       enabled: true
+     # collector:
+       # workers: <NUMBER OF WORKERS> # default 4
+   ```
 
-    ```yaml
-    network_path:
-      connections_monitoring:
-        ## @param enabled - bool - required - default:false
-        ## Enable network path collection
-        #
-        enabled: true
-      collector:
-        ## @param workers - int - optional - default:4
-        ## Number of workers that can collect paths in parallel
-        ## Recommendation: leave at default
-        #
-        # workers: <NUMBER OF WORKERS> # default 4
+   構成の詳細については、[構成例][3] を参照するか、以下を使用してください。
 
-        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
-        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-        # pathtest_interval: 10m
+   ```yaml
+   network_path:
+     connections_monitoring:
+       ## @param enabled - bool - required - default:false
+       ## Enable network path collection
+       #
+       enabled: true
+     collector:
+       ## @param workers - int - optional - default:4
+       ## Number of workers that can collect paths in parallel
+       ## Recommendation: leave at default
+       #
+       # workers: <NUMBER OF WORKERS> # default 4
 
-        # @param pathtest_ttl - integer - optional - default: 35m
-        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-        # The TTL is reset each time the connection is seen again.
-        # pathtest_ttl: 35m
+       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+       # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+       # pathtest_interval: 10m
 
-        ## @param filters - list - optional
-        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
-        ## Filters are applied sequentially, with later filters taking precedence.
-        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
-        #
-        # filters:
-        #   - match_domain: '*.example.com'
-        #     type: exclude
-        #   - match_ip: 10.0.0.0/8
-        #     type: exclude
-        #   - match_domain: 'api.datadoghq.com'
-        #     type: include
-    ```
+       # @param pathtest_ttl - integer - optional - default: 35m
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+       # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+       # The TTL is reset each time the connection is seen again.
+       # pathtest_ttl: 35m
+
+       ## @param filters - list - optional
+       ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+       ## Filters are applied sequentially, with later filters taking precedence.
+       ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+       #
+       # filters:
+       #   - match_domain: '*.example.com'
+       #     type: exclude
+       #   - match_ip: 10.0.0.0/8
+       #     type: exclude
+       #   - match_domain: 'api.datadoghq.com'
+       #     type: include
+   ```
 
 3. これらの構成を変更した後、Agent を再起動します。ネットワークパスが表示されるようになります。
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -446,7 +449,7 @@ Agent `v7.73+` が必要です。
 Agent `v7.73+` が必要です。
 
 Kubernetes で Helm を使用して Network Path を有効にするには、`values.yaml` ファイルに次の内容を追加します。
-**注:** Helm Chart v3.124.0 以降が必要です。詳細については、[Datadog Helm チャートのドキュメント][1]および [Kubernetes とインテグレーション][2]のドキュメントを参照してください。
+**注:** Helm Chart v3.124.0 以降が必要です。詳細については、[Datadog Helm チャートのドキュメント][1] および [Kubernetes とインテグレーション][2] のドキュメントを参照してください。
 
 ```yaml
 datadog:
@@ -501,20 +504,86 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### フィルター構文 {#filter-syntax}
+### Dynamic Tests for NetFlow (試験) {#dynamic-tests-for-netflow-experimental}
 
-ドメインや IP を含めたり除外したりするフィルターを構成します。次のことが可能になります:
+<div class="alert alert-info">Dynamic Tests for NetFlow は試験機能であり、Agent が必要です <code>v7.81+</code>。この機能を有効にするには、Datadog Support またはアカウントチームにお問い合わせください。</div>
+
+Dynamic Tests for NetFlow を構成して、Agent ホストから NetFlow レコードで観測された宛先 IP への Network Path のテストを実行します。Dynamic Tests for NetFlow には、[Cloud Network Monitoring][1] や `network_path.connections_monitoring.enabled` は必要ありません。
+
+Dynamic Tests for NetFlow は、NetFlow トラフィックを収集する Datadog Agent から実行されます。これらは、NetFlow エクスポーター、ルーター、または元のフローソースからは実行されません。その Agent からの traceroute が調査対象のパスを表すように、観測されたフローソースに近い場所に Agent をデプロイしてください。
+
+**前提条件**:
+
+- [NetFlow Monitoring][6] が構成され、フローを受信している必要があります。
+- Agent `v7.81+` が必要です。
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+1. `system-probe` で次の内容を追加して `/etc/datadog-agent/system-probe.yaml` traceroute モジュールを有効にします。
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. で Dynamic Tests for NetFlow を有効にする`/etc/datadog-agent/datadog.yaml`:
+
+   ```yaml
+   network_path:
+     netflow_monitoring:
+       enabled: true
+     collector:
+       monitor_ip_without_domain: true
+   ```
+
+   Dynamic Tests for NetFlow が観測された宛先 IP アドレスをターゲットとし、Network Path collector がデフォルトで IP のみのターゲットをスキップするため、`monitor_ip_without_domain: true` が必要です。
+
+3. これらの構成を変更した後、Agent を再起動します。
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+1. `system-probe` で次の内容を追加して `%ProgramData%\Datadog\system-probe.yaml` traceroute モジュールを有効にします。
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. で Dynamic Tests for NetFlow を有効にします`%ProgramData%\Datadog\datadog.yaml`。
+
+   ```yaml
+   network_path:
+     netflow_monitoring:
+       enabled: true
+     collector:
+       monitor_ip_without_domain: true
+   ```
+
+   Dynamic Tests for NetFlow が観測された宛先 IP アドレスをターゲットとし、Network Path collector がデフォルトで IP のみのターゲットをスキップするため、`monitor_ip_without_domain: true` が必要です。
+
+3. これらの構成を変更した後、Agent を再起動します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Agent がパスを報告した後、[Network Path][4] UI を開き、`origin:netflow` でフィルタリングして、NetFlow トラフィックから生成されたパスを表示します。
+
+### フィルター構文 {#filter-syntax}
+
+ドメインや IP を含めたり除外したりするフィルターを構成します。次のことが可能になります。
 
 - 内部ネットワークの監視オーバーヘッドを削減する
 - 外部トラフィックパターンに焦点を当てる
 - 監視が不要な既知のインフラストラクチャー範囲を除外する
 
+同じ `network_path.collector.filters` リストが動的テストおよび Dynamic Tests for NetFlow に適用されます。Dynamic Tests for NetFlow では、Dynamic Tests for NetFlow が観測された宛先 IP アドレスをターゲットとするため、`match_ip` フィルターを使用してください。
+
 動的テストから特定のドメインや IP 範囲を含めたり除外したりするには、`/etc/datadog-agent/datadog.yaml` ファイルに次の内容を追加します。
 
 ```yaml
 network_path:
-  connections_monitoring:
-    enabled: true
   collector:
     filters:
       # exclude single domain
@@ -581,7 +650,7 @@ Agent は、各サービスを順番に試し、最初に成功した応答を�
 
 ## トラブルシューティング {#troubleshooting}
 
-Network Path の問題のトラブルシューティングには、次のガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][3]にお問い合わせください。
+Network Path の問題のトラブルシューティングには、次のガイドラインを使用してください。さらにサポートが必要な場合は、[Datadog サポート][3] にお問い合わせください。
 
 ### Network Path のデータが UI に表示されない {#no-network-path-data-in-the-ui}
 
@@ -596,8 +665,23 @@ Network Path の問題のトラブルシューティングには、次のガイ�
 
 2. Network Path の機能が少なくとも 1 つはアクティブになっている必要があります。次に例を示します。
 
-   - [個々のパス](#monitor-individual-paths)が `conf.d/network_path.d` ファイルで構成されている。
-   - 試験的な[ネットワークトラフィックパス](#network-traffic-paths-experimental)が `network_path.connections_monitoring` と [Cloud Network Monitoring][1](CNM) の両方を有効にすることで構成されている。
+   - [スケジュール済みテスト](#scheduled-tests)が `conf.d/network_path.d` ファイルで構成されている。
+   - [動的テスト](#dynamic-tests)が `network_path.connections_monitoring.enabled` と [Cloud Network Monitoring][1] の両方を有効にすることで構成されている。
+   - [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental)が `network_path.netflow_monitoring.enabled` と [NetFlow Monitoring][6] を有効にすることで構成されている。
+
+### UI に Dynamic Tests for NetFlow のデータが表示されない {#no-dynamic-tests-for-netflow-data-in-the-ui}
+
+`origin:netflow` を含むパスが [Network Path][4] UI に表示されない場合は、以下を確認してください。
+
+1. Agent のバージョンが `7.81+` であること。
+2. [NetFlow Monitoring][6] が有効になっており、フローを受信していること。
+3. traceroute モジュールが `system-probe.yaml` で有効になっていること。
+4. `network_path.netflow_monitoring.enabled`および `network_path.collector.monitor_ip_without_domain` が `datadog.yaml` で `true` に設定されていること。
+5. `network_path.collector.filters` 構成で監視対象とする宛先 IP アドレスが除外されていないこと。
+
+Dynamic Tests for NetFlow は、宛先フィルターが評価される前に、送信元 IP が Agent ホストに割り当てられている NetFlow レコードを自動的にスキップします。これは自己スケジューリングループを防ぐためのものであり、想定内の動作です。NAT やエイリアスの場合で、Agent を送信元とするトラフィックが別の送信元 IP から発生しているように見えるときは、`network_path.collector.source_excludes` を使用してそれらの送信元 IP を除外してください。
+
+その後、`origin:netflow` の [Network Path][4] UI をフィルタリングします。
 
 ### エラー: ステータスコード: 404 {#error-status-code-404}
 
@@ -616,8 +700,9 @@ Network Path の問題のトラブルシューティングには、次のガイ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/network_monitoring/cloud_network_monitoring/setup/
-[2]: https://docs.datadoghq.com/ja/agent/configuration/proxy/?tab=linux
+[2]: /ja/agent/configuration/proxy/?tab=linux
 [3]: /ja/help
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
+[6]: /ja/network_monitoring/netflow/
 [15]: /ja/synthetics/network_path_tests/

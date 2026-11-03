@@ -16,7 +16,7 @@ You can also use saved views to share common queries and configurations with you
 
 ## Create a saved view
 
-To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} in the [Synthetic Tests page][1]. To create a saved view, search through your Synthetic tests and click {{< ui >}}+ Save new view as{{< /ui >}}. 
+To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left of {{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} in the [Synthetic Tests page][1]. To create a saved view, search through your Synthetic tests and click {{< ui >}}\+ Save new view as{{< /ui >}}. 
 
 {{< img src="synthetics/search/create_a_new_saved_view_2.png" alt="Create a new saved view in the Synthetic Tests page" style="width:100%" >}}
 
@@ -36,7 +36,7 @@ You can:
 
 You can set a [saved view](#create-a-saved-view) to be your default landing page in the [Synthetic Tests page][2]. Default views are set per user and have no impact on your organization. 
 
-Temporarily override your default saved view by adding facets to your search query and clicking {{< ui >}}Update your default view{{< /ui >}}. To create a new saved view, Click the {{< ui >}}+ Save new view as{{< /ui >}} button.
+Temporarily override your default saved view by adding facets to your search query and clicking {{< ui >}}Update your default view{{< /ui >}}. To create a new saved view, Click the {{< ui >}}\+ Save new view as{{< /ui >}} button.
 
 {{< img src="synthetics/search/update_your_default_view_2.png" alt="Update your default view in the Synthetic Tests page" style="width:100%" >}}
 

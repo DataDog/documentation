@@ -18,7 +18,6 @@ products:
 - icon: cloud-security-management
   name: Cloud Security Identity Risks
   url: /security/cloud_security_management/identity_risks/
-site_support_id: workflows
 title: Workflow Automation によるセキュリティワークフローの自動化
 ---
 

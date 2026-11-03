@@ -7,9 +7,9 @@ further_reading:
 - link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule"
   tag: "Documentation"
-  text: "Create new detection rules"
+  text: "Create custom detection rules"
 ---
 
 ## Overview
@@ -80,7 +80,7 @@ If you want to use an existing resource group, skip to Create an Event Hubs name
 
 ### Create an event hub
 
-1. In the Event Hubs namespace you just created, click {{< ui >}}+ Event Hub{{< /ui >}}.
+1. In the Event Hubs namespace you just created, click {{< ui >}}\+ Event Hub{{< /ui >}}.
 1. Enter a name for the event hub.
 1. Optionally, configure the partition count and retention options.
 1. Click {{< ui >}}Review + create{{< /ui >}}.

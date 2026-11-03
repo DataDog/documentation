@@ -1,5 +1,5 @@
 ---
-description: 변수를 사용하여 모니터 알림 사용자 지정
+description: 변수를 사용하여 모니터링 알림 사용자 지정하기
 further_reading:
 - link: /monitors/guide/template-variable-evaluation/
   tag: 가이드
@@ -15,7 +15,7 @@ further_reading:
   text: 모니터 관리
 - link: https://learn.datadoghq.com/courses/alert-monitor-notifications
   tag: 학습 센터
-  text: 코스를 듣고 경보 모니터 알림 사용자 지정
+  text: 코스를 수강하여 경보 모니터링 알림 사용자 지정하기
 - link: https://www.datadoghq.com/blog/monitor-notification-rules/
   tag: 블로그
   text: Datadog 모니터 알림 규칙을 사용해 모니터 경보 라우팅
@@ -31,31 +31,32 @@ title: 변수
 
 | 조건 변수       | 텍스트 표시 조건                                           |
 |----------------------------|--------------------------------------------------------------------|
-| `{{#is_alert}}`            | The monitor alerts                                                 |
-| `{{^is_alert}}`            | The monitor does not alert                                         |
-| `{{#is_match}}`            | The context matches the provided substring. If a numeric value is used, it is converted to a string.|
-| `{{^is_match}}`            | The context does not match the provided substring                  |
-| `{{#is_exact_match}}`      | The context exactly matches the provided string.<br> If a number is used, the numeric value is considered, regardless of its type. This means that as long as two numbers have the same value, they are considered equal by the function. |
-| `{{^is_exact_match}}`      | The context does not exactly match the provided string             |
-| `{{#is_no_data}}`          | The monitor is triggered for missing data                          |
-| `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
-| `{{#is_warning}}`          | The monitor warns                                                  |
-| `{{^is_warning}}`          | The monitor does not warn                                          |
-| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA`         |
-| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
-| `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
-| `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
-| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
-| `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
-| `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
-| `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
-| `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
-| `{{^is_no_data_recovery}}` | The monitor does not recover from `NO DATA`                        |
-| `{{#is_priority 'value'}}` | The monitor has priority `value`. Value ranges from `P1` to `P5`   |
-| `{{#is_unknown}}`          | The monitor is in the unknown state                                |
-| `{{^is_unknown}}`          | The monitor is not in the unknown state                            |
-| `{{#is_renotify}}`         | The monitor is renotifying                                         |
-| `{{^is_renotify}}`         | 모니터가 다시 알리지 않습니다.                                    |
+| `{{#is_alert}}`            | 모니터가 경보 상태입니다.                                                 |
+| `{{^is_alert}}`            | 모니터가 경보 상태가 아닙니다.                                         |
+| `{{#is_match}}`            | 컨텍스트가 제공된 하위 문자열과 일치합니다. 숫자 값을 사용하면 문자열로 변환됩니다.|
+| `{{^is_match}}`            | 컨텍스트가 제공된 하위 문자열과 일치하지 않습니다.                  |
+| `{{#is_exact_match}}`      | 컨텍스트가 제공된 문자열과 정확히 일치합니다.
+숫자를 사용하면 숫자 형식과 관계없이 숫자 값 자체를 기준으로 판단합니다. 즉, 두 숫자의 값이 같으면 이 함수는 두 숫자를 동일한 것으로 간주합니다. |
+| `{{^is_exact_match}}`      | 컨텍스트가 제공된 문자열과 정확히 일치하지 않습니다.             |
+| `{{#is_no_data}}`          | 데이터 누락으로 인해 모니터가 트리거됩니다.                          |
+| `{{^is_no_data}}`          | 데이터 누락이 있지만 모니터가 트리거되지 않습니다.                      |
+| `{{#is_warning}}`          | 모니터가 경고 상태입니다.                                               |
+| `{{^is_warning}}`          | 모니터가 경고 상태가 아닙니다.                                          |
+| `{{#is_recovery}}`         | 모니터가 `ALERT`, `WARNING`, `UNKNOWN` 또는 `NO DATA`         | 상태에서 복구됩니다.
+| `{{^is_recovery}}`         | 모니터가 `ALERT`, `WARNING`, `UNKNOWN` 또는 `NO DATA` | 상태에서 복구되지 않습니다.
+| `{{#is_warning_recovery}}` | 모니터가 `WARNING` 상태에서 `OK`                        | 상태로 복구됩니다.
+| `{{^is_warning_recovery}}` | 모니터가 `WARNING` 상태에서 `OK`                | 상태로 복구되지 않습니다.
+| `{{#is_alert_recovery}}`   | 모니터가 `ALERT` 상태에서 `OK` 상태로 복구됩니다. <br> **참고**: `ALERT` 상태에서 `WARNING` 상태로 전환될 때 `{{#is_alert_recovery}}` 수신자에게는 메시지 본문 없이 알림이 전송됩니다. 메시지를 포함하려면 `{{#is_alert_to_warning}}`을 사용하세요.  |
+| `{{^is_alert_recovery}}`   | 모니터가 `ALERT` 상태에서 `OK` 상태로 복구되지 않습니다.               |
+| `{{#is_alert_to_warning}}` | 모니터가 `ALERT` 상태에서 `WARNING` 상태로 전환됩니다.                  |
+| `{{^is_alert_to_warning}}` | 모니터가 `ALERT` 상태에서 `WARNING` 상태로 전환되지 않습니다.          |
+| `{{#is_no_data_recovery}}` | 모니터가 `NO DATA` 상태에서 복구됩니다.                               |
+| `{{^is_no_data_recovery}}` | 모니터가 `NO DATA` 상태에서 복구되지 않습니다.                        |
+| `{{#is_priority 'value'}}` | 모니터의 우선순위가 `value`입니다. 값의 범위는 `P1`~`P5`입니다.   |
+| `{{#is_unknown}}`          | 모니터가 알 수 없음 상태입니다.                                |
+| `{{^is_unknown}}`          | 모니터가 알 수 없음 상태가 아닙니다.                            |
+| `{{#is_renotify}}`         | 모니터가 다시 알림을 전송하고 있습니다.                                         |
+| `{{^is_renotify}}`         | 모니터가 다시 알림을 전송하고 있지 않습니다.                                    |
 
 ### 예시 {#examples}
 
@@ -231,7 +232,7 @@ This part is generic and sent both for the first trigger and the escalation mess
 
 ```
 
-모니터 다시 알리기가 발생하면 사용자에게 다음과 같은 에스컬레이션 메시지가 발송됩니다.
+모니터 재알림이 발생하면 사용자에게 다음과 같은 에스컬레이션 메시지가 발송됩니다.
 
 ```
 This part is generic and sent both for the first trigger and the escalation message.
@@ -256,7 +257,7 @@ This is the escalation message @dev-team@company.com
 태그
 : 자동으로 연결되거나(예: 호스트 이름, 컨테이너 이름, 로그 파일 이름, 서버리스 함수 이름 등) 사용자 지정 태그를 통해 추가됩니다(담당 팀, 환경, 애플리케이션 또는 버전).
 
-속성
+특성
 : 로그 내용을 따르며 참조표에서 조회하여 구문 분석되거나 추가됩니다(예: geoip).
 
 **참고**: 모니터가 데이터 없음 조건에서 복구되도록 구성된 경우(예를 들어 쿼리와 일치하는 이벤트가 없을 때), 복구 메시지에 아무런 데이터가 포함되지 않습니다. 복구 메시지에 정보를 계속 유지하려면 추가적인 태그 기준으로 그룹화하세요. 여기에는 `{{tag.name}}`으로 액세스할 수 있습니다.
@@ -265,8 +266,7 @@ This is the escalation message @dev-team@company.com
 
 다중 경보 그룹 박스에서 선택한 디멘션에 따라 [다중 경보 모니터][1]에서 다중 경보 변수를 구성합니다. 알림을 강화하려면 각 경보의 그룹화 기준 디멘션과 연결된 값을 포함하세요.
 
-**참고**: 집계에 `group_by` 필드를 사용하는 경우, 모니터에서 추가적인 태그 및 경보가 자동으로 상속될 수 있습니다. 다시 말해 모니터링되는 엔드포인트에 설정된 모든 경보 또는 구성이 집계로 인해 발생하는 각 그룹에 적용될 수 있습니다.
-
+**참고**: 집계에 `group_by` 필드를 사용하는 경우 모니터의 추가 태그와 경보가 자동으로 상속될 수 있으므로, 모니터링 대상 엔드포인트에 설정된 모든 경보나 구성이 집계 결과로 생성된 각 그룹에 적용될 수 있습니다. [예약된 태그 키][21]는 예외입니다. 선택한 그룹화 기준과 관계없이 모든 경보에서 사용할 수 있습니다.
 {{< tabs >}}
 {{% tab "태그 기준으로 그룹화" %}}
 
@@ -315,7 +315,7 @@ This alert was triggered on {{ @machine_id.name }}
 
 #### 그룹 기준으로 알림 사용자 지정 {#customize-the-notification-based-on-the-group}
 
-쿼리가 특정 디멘션을 기준으로 그룹화되는 경우, 그룹과 연결된 동적 메타데이터를 사용해 알림을 강화할 수 있습니다. 태그 선택에 따른 태그 변수 목록을 보려면 **구성 알림 및 자동화** 섹션 아래에 있는 **메시지 템플릿 변수 사용**을 클릭하세요. 다음 예시 참조:
+쿼리가 특정 디멘션을 기준으로 그룹화되는 경우, 그룹과 연결된 동적 메타데이터를 사용해 알림을 강화할 수 있습니다. 태그 선택에 따른 태그 변수 목록을 보려면 {{< ui >}}Configure notifications & automations{{< /ui >}} 섹션의 {{< ui >}}Use message template variables{{< /ui >}}를 클릭합니다. 다음 예시 참조:
 
 {{% collapse-content title="호스트 기준 쿼리 그룹" level="h5" %}}
 
@@ -364,7 +364,7 @@ This alert was triggered on {{ @machine_id.name }}
 
 {{% collapse-content title="서비스 기준 쿼리 그룹" level="h5" %}}
 
-모니터가 각 `service`에 대해 경보를 트리거하는 경우, [Software Catalog][10]에 정의된 대로 서비스의 일부 속성에 액세스할 수 있습니다.
+모니터가 각 `service`에 대해 경보를 트리거하는 경우, [Catalog][10]에 정의된 대로 서비스의 일부 속성에 액세스할 수 있습니다.
 
 서비스 메타데이터 변수:
 
@@ -380,11 +380,43 @@ This alert was triggered on {{ @machine_id.name }}
 ```
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="device_ip 및 device_namespace 기준 쿼리 그룹" level="h5" %}}
+
+모니터가 각 `device_ip` 및 `device_namespace`에 대해 경보를 트리거하는 경우, 네트워크 장치의 모든 속성에 액세스할 수 있습니다.
+
+네트워크 장치 메타데이터 변수:
+- 표준 ID: `{{network_device.canonical_id}}`
+- 설명: `{{network_device.description}}`
+- 장치 유형: `{{network_device.device_type}}`
+- 장치 ID: `{{network_device.device_id}}`
+- ID 태그: `{{network_device.id_tags}}`
+- 통합: `{{network_device.integrations}}`
+- IP 주소: `{{network_device.ip_address}}`
+- 위치: `{{network_device.location}}`
+- 모델: `{{network_device.model}}`
+- 이름: `{{network_device.name}}`
+- 네임스페이스: `{{network_device.namespace}}`
+- OS 호스트 이름: `{{network_device.os_hostname}}`
+- OS 이름: `{{network_device.os_name}}`
+- OS 버전: `{{network_device.os_version}}`
+- 핑 상태: `{{network_device.ping_status}}`
+- 제품 이름: `{{network_device.product_name}}`
+- 프로필: `{{network_device.profile}}`
+- 일련번호: `{{network_device.serial_number}}`
+- 상태: `{{network_device.status}}`
+- 서브넷: `{{network_device.subnet}}`
+- Sys 객체 ID: `{{network_device.sys_object_id}}`
+- 태그: `{{network_device.tags}}`
+- 벤더: `{{network_device.vendor}}`
+- 버전: `{{network_device.version}}`
+{{% /collapse-content %}}
+
 ### 일치하는 속성/태그 변수 {#matching-attributetag-variables}
 
 모니터 쿼리와 일치하는 로그, 트레이스 스팬, RUM 이벤트, CI 파이프라인 또는 CI 테스트 이벤트의 속성 또는 태그를 아무것이나 포함할 수 있습니다. 다음 테이블에 다양한 모니터 유형에서 추가할 수 있는 속성 및 변수의 예를 표시했습니다.
 
-<div class="alert alert-info">모니터에 사용할 수 있는 변수 전체 목록을 보려면 알림 구성 맨 아래에서 <strong>{{&nbsp;변수 추가</strong>를 클릭하고 확장된 메뉴 옵션 중에서 선택하세요.</div>
+<div class="alert alert-info">모니터에 사용할 수 있는 전체 변수 목록을 보려면 알림 구성 하단의 {{< ui >}}{{ Add Variable{{< /ui >}}을 클릭하고 확장된 메뉴 옵션 중에서 선택합니다.</div>
 
 | 모니터 유형             | 변수 구문                                         |
 |--------------------------|--------------------------------------------------------|
@@ -622,7 +654,7 @@ https://app.datadoghq.com/infrastructure/map?filter=service:{{service.name}}
 | `sizeby`  | `sizeby=avg:<METRIC_NAME>` | 호스트 육각형의 크기.       |
 
 {{% /tab %}}
-{{% tab "모니터" %}}
+{{% tab "Monitors" %}}
 
 `{{host.name}}` [태그 변수](#attribute-and-tag-variables)를 사용하여 특정 호스트와 관련된 모든 모니터로 이동하는 링크 제공:
 
@@ -673,7 +705,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*100
 
 ### Raw 형식 {#raw-format}
 
-경보 메시지가 중괄호 두 개, 예를 들어 `{{ <TEXT> }}`, use `{{{{raw}}}}` 형식을 보내야 하는 경우입니다. 예를 들면 다음과 같습니다.
+경보 메시지에서 `{{ <TEXT> }}`와 같은 이중 중괄호를 전송해야 하는 경우, `{{{raw}}}}` 형식을 사용합니다. 예를 들면 다음과 같습니다.
 
 ```text
 {{{{raw}}}}
@@ -687,7 +719,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*100
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-[조건 변수](#conditional-variables)에 사용된 `^|#` 도우미는 `{{{{raw}}}}` formatting and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable use the following template:
+[조건 변수](#conditional-variables)에 사용되는 `^|#` 도우미는 `{{{{raw}}}}` 형식과 함께 사용할 수 없으므로 제거해야 합니다. 예를 들어 `{{is_match}}` 조건 변수로 원시 텍스트를 출력하려면 다음 템플릿을 사용합니다.
 
 ```text
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
@@ -705,7 +737,7 @@ https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*100
 
 경보 메시지에 URL로 인코딩해야 하는 정보가 포함된 경우(예를 들어 리디렉션용으로) `{{ urlencode "<variable>"}}` 구문을 사용하세요.
 
-**예**: 모니터 메시지에 특정 서비스로 필터링된 Software Catalog로 이동하는 URL이 포함된 경우, `service` [태그 변수](#attribute-and-tag-variables)를 사용하고 URL에 `{{ urlencode "<variable>"}}` 구문을 추가하세요.
+**예**: 모니터 메시지에 특정 서비스로 필터링된 카탈로그로 이동하는 URL이 포함된 경우, `service` [태그 변수](#attribute-and-tag-variables)를 사용하고 URL에 `{{ urlencode "<variable>"}}` 구문을 추가하세요.
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
@@ -724,8 +756,8 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /ko/monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /ko/monitors/types/error_tracking/
-[10]: /ko/software_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/ko/software_catalog/service_definitions/v2-2/#example-yaml
+[10]: /ko/internal_developer_portal/catalog/entity_model/
+[11]: https://docs.datadoghq.com/ko/internal_developer_portal/catalog/entity_model/
 [12]: /ko/monitors/types/log/
 [13]: /ko/monitors/types/apm/?tab=analytics
 [14]: /ko/monitors/types/error_tracking/
@@ -735,3 +767,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [18]: /ko/monitors/types/ci/?tab=pipelines
 [19]: /ko/monitors/types/database_monitoring/
 [20]: /ko/synthetics/notifications/template_variables/
+[21]: /ko/getting_started/tagging/

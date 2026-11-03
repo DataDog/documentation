@@ -44,7 +44,7 @@ You must have an external archive configured to rehydrate data from it. To archi
 Datadog requires permission to read from your archives to rehydrate content. Archives must be configured with appropriate authentication:
 
 - **S3**: Must use role delegation (IAM roles)
-- **Azure Storage**: Must use Azure AD with Storage Blob Data Contributor role
+- **Azure Storage**: Must use Microsoft Entra ID with Storage Blob Data Contributor role
 - **Google Cloud Storage**: Must use service account with Storage Object Viewer role
 
 Only archives with proper authentication are available for rehydrating. For detailed setup instructions, see [Cloud-specific permissions](#cloud-specific-permissions).
@@ -131,16 +131,16 @@ Datadog requires the permission to read from your archives to rehydrate content 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
 
-To rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
+To rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. If that Role has the policy from [Set archive permissions][4], skip the following statement. Otherwise, add the following permission statement to the Role's IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
 ```json
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
+      "Sid": "DatadogRehydrateLogArchives",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": "s3:GetObject",
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
         "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
@@ -161,18 +161,19 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
 
 #### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog supports rehydrating only from archives that use role delegation to grant access. After you modify your Datadog IAM role to include the preceding IAM policy, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+[4]: /logs/log_configuration/archives/?tab=awss3#set-permissions
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
 
-Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
+Datadog uses a Microsoft Entra ID group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role" style="width:75%;">}}
 

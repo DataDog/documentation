@@ -29,7 +29,7 @@ Use Status Pages to:
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
 * Announce scheduled maintenance and planned downtime in advance
-* Reduce inbound support volume with proactive email and Slack notifications
+* Reduce inbound support volume with proactive email, Slack, and Microsoft Teams notifications
 
 ## Configure permissions
 
@@ -72,6 +72,30 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
   </tbody>
 </table>
 
+### Granular access control
+
+By default, access to a status page is unrestricted within your organization. Use [granular access controls][5] to restrict an individual status page by team, role, user, or service account.
+
+| Access level | Capabilities |
+|---|---|
+| **Viewer** | View the status page. |
+| **Responder** | View the status page and publish or update notices. |
+| **Manager** | View and respond to the status page, edit its settings, and manage its access. |
+
+Granular access control only restricts access and does not grant RBAC permissions. Users must also have the corresponding Status Pages permissions described above.
+
+Configuring granular access requires the **Status Pages Settings Write** permission. If the status page is already restricted, you must also have **Manager** access to it.
+
+To restrict access:
+
+1. Navigate to [Status Pages][2] and select a status page.
+1. Click **Settings**, then select **Access**.
+1. Click **Edit Access**, then click **Restrict Access**.
+1. Add teams, roles, users, or service accounts and assign each an access level.
+1. Click **Save**.
+
+**Note**: Access restrictions apply to users in your Datadog organization. They do not change who can view a published public status page.
+
 ## Create a status page
 
 1. In Datadog, navigate to [**Status Pages**][2].
@@ -82,7 +106,7 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). When subscriptions are enabled, visitors can sign up from the published page to get notified about new notices and updates. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions), [Slack](#slack-subscriptions), or [Microsoft Teams](#microsoft-teams-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email, Slack, and Microsoft Teams subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
@@ -155,7 +179,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Message** | Additional details for your users <br>*Example: We are aware of the issue and are actively working on a fix.* |
 | **Components impacted** | One or more components affected by the degradation |
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-| **Notify subscribers** | Toggle to send updates to subscribed users |
+| **Notify subscribers** | Toggle to send updates to subscribed users. Email also requires the page-level [**Notify subscribers**](#enable-email-subscriptions) setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
@@ -211,7 +235,7 @@ From the status page, click **Schedule Maintenance**, or click **Publish Notice*
 | **Maintenance window** | Scheduled start and end time for the maintenance |
 | **Messages** | Messages that are automatically published as the maintenance progresses |
 | **Components impacted** | Components affected during the maintenance window |
-| **Notify subscribers** | Toggle to send advance notification to subscribers |
+| **Notify subscribers** | Toggle to send advance notification to subscribers. Email also requires the page-level [**Notify subscribers**](#enable-email-subscriptions) setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
 
@@ -223,6 +247,16 @@ After reviewing and scheduling, the maintenance window:
 You can post updates if plans change or reschedule the maintenance window as needed.
 
 **Note**: Each status page supports a maximum of 100 scheduled or in-progress maintenance windows at a time.
+
+### Cancel a maintenance window
+
+To cancel a scheduled maintenance window before it starts, open the maintenance notice, click the three-dot icon, and select **Cancel Maintenance**. Confirm the cancellation in the dialog that appears.
+
+{{< img src="incident_response/status_pages/cancel-maintenance-window.png" alt="Cancel Maintenance confirmation dialog for a scheduled maintenance window" style="width:60%;" >}}
+
+Canceling a maintenance window removes it from **Upcoming Maintenance** on the status page. This action cannot be undone.
+
+**Note**: An in-progress maintenance window can't be canceled.
 
 ### Backfill a maintenance window
 
@@ -293,6 +327,37 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+### Enable email subscriptions
+
+Two settings control email subscriptions:
+
+- **Notify subscribers**: Sends an email to all subscribers when new updates are published. When disabled, notices still go to other subscription types, such as Slack and Microsoft Teams.
+- **Show subscribe option to visitors**: Adds a **Subscribe** option to the published page.
+
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
+2. Enable **Notify subscribers**.
+3. (Optional) Enable **Show subscribe option to visitors**. This option requires **Notify subscribers**.
+4. (Optional) Under **Email Header Image**, upload an image to display at the top of notification emails.
+
+{{< img src="incident_response/status_pages/status_pages_enable_email.png" alt="Status page email subscription settings showing the Notify subscribers and Show subscribe option to visitors toggles" style="width:80%;" >}}
+
+Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a private audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
+
+### Add or import subscribers
+
+You can add or import subscribers before you publish your page or enable **Notify subscribers**.
+
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
+2. Under **Email Subscribers**, do one of the following:
+   - To add one subscriber, click **Add Subscriber** and enter an email address.
+   - To import a list, click **Import Subscribers** and upload a `.txt` file with one email address per line. You can import up to 1,000 subscribers at a time.
+
+New subscribers must confirm their email address before they receive notifications:
+
+- **Published page**: Datadog sends the confirmation email immediately.
+- **Unpublished page**: Subscribers are saved as **pending**. Datadog sends the confirmation email when you [publish the page](#publish-your-status-page).
+
+Unpublishing a page doesn't affect existing subscribers.
 
 ## Configure a custom email sender domain
 
@@ -300,10 +365,14 @@ By default, status page subscription emails are sent from a Datadog email addres
 
 <div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
-1. On your status page, go to **Settings** > **Subscriptions**.
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Under **Email Sender Domain**, click **Organization Settings**.
 3. In Organization Settings, [add and validate an SMTP server][3].
-4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+4. Return to your status page **Settings**, select **Email** under **Subscriptions**, and select your SMTP server as the email sender domain.
+
+<div class="alert alert-info">
+If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
+</div>
 
 ## Slack subscriptions
 
@@ -311,7 +380,7 @@ Visitors can subscribe to status page updates in Slack through the **Datadog Sta
 
 ### Enable Slack subscriptions
 
-1. From your status page, click **Settings**.
+1. From your status page, click **Settings**, then select **Slack** under **Subscriptions**.
 2. Enable **Slack subscriptions**.
 3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
 
@@ -340,16 +409,71 @@ Subscribers can change the components they follow or unsubscribe at any time fro
 
 Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
 
-<div class="alert alert-info">
-If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
-</div>
+## Microsoft Teams subscriptions
+
+Visitors can subscribe a Microsoft Teams channel to status page updates through a Teams workflow. When a notice or scheduled maintenance is published with **Notify subscribers** enabled, Datadog posts an Adaptive Card to each subscribed channel for the components it follows. Microsoft Teams subscriptions are configured independently of [email](#email-subscriptions) and [Slack](#slack-subscriptions) subscriptions.
+
+### Enable Microsoft Teams subscriptions
+
+1. From your status page, click **Settings**, then select **Microsoft Teams** under **Subscriptions**.
+1. Turn on the **Enable Microsoft Teams subscriptions** toggle.
+1. Click **Save**.
+
+{{< img src="incident_response/status_pages/status_pages_enable_microsoft_teams.png" alt="Status page settings showing the Enable Microsoft Teams subscriptions toggle" style="width:80%;" >}}
+
+Click **Subscribe** on the published page to open a modal with a tab for each enabled subscription type. Turn off **Enable Microsoft Teams subscriptions** to remove the **Microsoft Teams** tab and stop sending Microsoft Teams notifications.
+
+### Subscribe in Microsoft Teams
+
+Microsoft Teams subscriptions use a workflow webhook URL from the channel that receives updates. Create the URL in Microsoft Teams first:
+
+1. In Microsoft Teams, open the channel that should receive updates.
+1. Click the **More options** (`...`) menu for the channel, select **Workflows**, and search for the **Send webhook alerts to** template, which is named after the channel (for example, **Send webhook alerts to devops**).
+1. Select the team and the channel, follow the prompts to create the workflow, then copy the webhook URL.
+   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_workflow_config.png" alt="Microsoft Teams Send webhook alerts workflow configuration with the team and channel fields" style="width:80%;" >}}
+
+Then, from a published page with Microsoft Teams subscriptions enabled:
+
+1. Click **Subscribe** and open the **Microsoft Teams** tab.
+1. In **Microsoft Teams URL**, paste the workflow webhook URL. For example:
+
+   ```text
+   https://default0a1b2c3d4e5f.0a.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/01/workflows/0123456789abcdef0123456789abcdef/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EXAMPLE_SIGNATURE
+   ```
+
+1. (Optional) Select **Subscribe to specific services** to choose individual components, or leave it cleared to follow the entire page.
+1. Click **Subscribe**.
+   {{< img src="incident_response/status_pages/status_pages_microsoft_teams_subscription_modal.png" alt="Subscribe to Updates modal with the Microsoft Teams tab selected, a Microsoft Teams URL field, and a Subscribe button" style="width:70%;" >}}
+
+After subscribing, a confirmation message appears.
+
+The URL must use HTTPS and be a Power Automate workflow URL, with a host that ends in `.logic.azure.com` or `.environment.api.powerplatform.com`. The **Subscribe** button stays disabled until the URL is valid. A URL can be subscribed to a page only once. On **internal** status pages, users must be logged in to the same Datadog organization to subscribe.
+
+### Notifications
+
+Each Microsoft Teams notification is an Adaptive Card that includes:
+
+- The page name, and the notice title linked to the notice on your status page, followed by the type of event: **New Degradation**, **Degradation Updated**, **Scheduled Maintenance**, **Maintenance Schedule Changed**, **Maintenance Canceled**, or **Maintenance Updated**.
+- The message of the update, if there is one.
+- The **Status** of the notice. For maintenance windows, the card also shows the **Start** and **End** times, and the previous times when a window is rescheduled.
+- A **Components Impacted** list. Each component shows its status, except in scheduled maintenance notifications, which list component names only. Long lists are shortened with a **+N more** row.
+- **Manage subscription** and **Unsubscribe** buttons.
+
+Only **Active** subscriptions receive notifications.
+
+### Manage subscriptions
+
+Subscribers can change the components they follow or unsubscribe at any time with the **Manage subscription** and **Unsubscribe** buttons in any notification.
+
+Status page owners can review subscribers in the status page settings. For a published page, the **Microsoft Teams Subscribers** list shows the URL, components, subscription date, and status of each subscription, and can be filtered by status. Hover over a truncated URL to see the full value. To remove subscribers, select one or more rows and click **Unsubscribe**.
+
+A subscription is **Active** while Datadog delivers updates to it. If Datadog can't deliver updates to the URL, for example because the workflow was deleted or turned off, the subscription is marked **Undeliverable** and stops receiving updates. To resume updates, remove the subscription from the list, then subscribe again with a working URL.
 
 ## Set a custom domain
 
 To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
-1. From your status page, click **Settings**.
-1. Select **Custom Domain**.
+1. From your status page, click **Settings**, then select **Custom Domain** under **General**.
 1. Follow the instructions to enter your domain and add DNS records.
 1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.
 
@@ -373,3 +497,4 @@ You can use Terraform to create or manage your status pages. For details on the 
 [2]: https://app.datadoghq.com/status-pages
 [3]: /account_management/org_settings/smtp_configuration
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/status_page
+[5]: /account_management/rbac/granular_access/

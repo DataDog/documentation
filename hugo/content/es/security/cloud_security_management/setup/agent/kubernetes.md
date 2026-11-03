@@ -14,9 +14,9 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
 ## Requisitos previos {#prerequisites}
 
-- Última versión del Datadog Agent. Para obtener instrucciones de instalación, consulte [Getting Started with the Agent][5] o instale el Agent desde la [Datadog UI][6].
+- Última versión del Datadog Agent. Para obtener instrucciones de instalación, consulte [Primeros pasos con el Agent][5] o instale el Agent desde la [Datadog UI][6].
 
-**Nota**: La recopilación de SBOM no es compatible con la función de transmisión de imágenes en Google Kubernetes Engine (GKE). Para deshabilitarla, consulte la sección [Deshabilitar la transmisión de imágenes][7] de la documentación de GKE.
+**Nota**: La recopilación de SBOM no es compatible con la función de transmisión de imágenes en Google Kubernetes Engine (GKE). Para deshabilitarla, consulte la sección [Disable Image streaming][7] de la documentación de GKE.
 
 ## Instalación {#installation}
 
@@ -56,7 +56,7 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # Enables runtime package prioritization (Agent 7.79+)
           # See Runtime Package Prioritization section below.
           enrichment:
             usage:
@@ -97,7 +97,7 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # Enables runtime package prioritization (Agent 7.79+)
         # See Runtime Package Prioritization section below.
         enrichment:
           usage:
@@ -110,7 +110,7 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
 {{% tab "DaemonSet" %}}
 
-1. Agregue las siguientes variables de entorno a cada contenedor del Agent en el archivo `daemonset.yaml`, incluyendo `agent`, `security-agent` y `system-probe`. Estas variables habilitan Misconfigurations, Vulnerability Management, el escaneo de imágenes de contenedores basado en montaje y la priorización de paquetes en tiempo de ejecución.
+1. Agregue las siguientes variables de entorno a cada contenedor del Agent en el archivo `daemonset.yaml`, incluyendo `agent`, `security-agent` y `system-probe`. Estas variables habilitan Misconfigurations, Vulnerability Management, el escaneo de imágenes de contenedor basado en montaje y la priorización de paquetes en tiempo de ejecución.
 
     ```yaml
     - name: DD_COMPLIANCE_CONFIG_ENABLED
@@ -133,7 +133,7 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
    Si su DaemonSet monta la raíz del servidor en una ruta diferente, establezca `HOST_ROOT` en esa ruta de montaje en cada contenedor del Agent.
 
-2. Establezca `hostPID: true` en la especificación del pod y agregue el siguiente `securityContext` al contenedor `agent`. Estos ajustes son necesarios para el escaneo de imágenes de contenedores basado en montaje con `DD_SBOM_CONTAINER_IMAGE_USE_MOUNT=true`.
+2. Establezca `hostPID: true` en la especificación del pod y agregue el siguiente `securityContext` al contenedor `agent`. Estos ajustes son necesarios para el escaneo de imágenes de contenedor basado en montaje con `DD_SBOM_CONTAINER_IMAGE_USE_MOUNT=true`.
 
     ```yaml
       # Source: datadog/templates/daemonset.yaml
@@ -165,55 +165,55 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
 {{< /tabs >}}
 
-**Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Priorización de paquetes en tiempo de ejecución](#runtime-package-prioritization-preview) para conocer los requisitos.
+**Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Runtime Package Prioritization](#runtime-package-prioritization) para conocer los requisitos.
 
-**Nota**: El `languages` analyzer requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en las bibliotecas de aplicaciones administradas por los administradores de paquetes a continuación, además de los paquetes del SO. Cuando se omite el campo `analyzers`, Datadog solo escanea los paquetes del SO para las imágenes de contenedor.
+**Nota**: El `languages` analizador requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en las bibliotecas de aplicaciones administradas por los administradores de paquetes a continuación, además de los paquetes del sistema operativo. Cuando se omite el campo `analyzers`, Datadog solo escanea los paquetes del SO para las imágenes de contenedor.
 
 ### Administradores de paquetes de bibliotecas de aplicaciones compatibles {#supported-application-library-package-managers}
 
-El `languages` analyzer cubre los siguientes ecosistemas de paquetes:
+El analizador `languages` cubre los siguientes ecosistemas de paquetes:
 
-| Ecosistema | Administrador de paquetes/formato |
+| Ecosistema | Gestor/formato de paquetes |
 |-----------|------------------------|
 | Ruby | Bundler, GemSpec |
-| Rust | Cargo, binario de Rust |
+| Rust | Cargo, el binario de Rust |
 | PHP | Composer |
-| Java | Jar, Maven (pom.xml), Gradle lock, Sbt lock |
-| JavaScript | npm (package-lock.json), Yarn, pnpm, Node package |
+| Java | Jar, Maven (pom.xml), bloqueo de Gradle, bloqueo de Sbt |
+| JavaScript | npm (package-lock.json), Yarn, pnpm, paquete de Node |
 | .NET | NuGet, .NET Core, PackagesProps |
-| Python | Python package (egg), pip, Pipenv, Poetry, uv, Conda package, Conda environment |
-| Go | Go binary, Go modules |
-| C/C++ | Conan lock |
+| Python | Paquete de Python (egg), pip, Pipenv, Poetry, uv, paquete de Conda, entorno de Conda |
+| Go | Go binario, módulos de Go |
+| C/C++ | Bloqueo de Conan |
 | Swift / Objective-C | CocoaPods, Swift |
-| Dart | PubSpec lock |
-| Elixir | Mix lock |
+| Dart | Bloqueo de PubSpec |
+| Elixir | Bloqueo de Mix |
 | Julia | Julia |
 
-## Priorización de paquetes en tiempo de ejecución (versión preliminar) {#runtime-package-prioritization-preview}
+## Runtime Package Prioritization {#runtime-package-prioritization}
 
-La priorización de paquetes en tiempo de ejecución identifica qué paquetes en una imagen de contenedor se utilizan durante la ejecución, para que pueda priorizar las vulnerabilidades en el código que se ejecuta sobre las vulnerabilidades en los paquetes que están instalados pero nunca se ejecutan.
+Runtime Package Prioritization identifica qué paquetes en una imagen de contenedor se utilizan durante la ejecución, para que pueda priorizar las vulnerabilidades en el código que se ejecuta sobre las vulnerabilidades en paquetes que están instalados pero nunca se ejecutan.
 
-Cuando está habilitado, el Agente utiliza eBPF para observar el acceso a archivos en sus cargas de trabajo y añade estas señales a los hallazgos de vulnerabilidad para esa imagen:
+Cuando está habilitado, el Agent utiliza eBPF para observar el acceso a archivos en sus cargas de trabajo y agrega estas señales a los hallazgos de vulnerabilidades para esa imagen:
 
 | Señal | Qué le indica |
 |--------|-------------------|
 | El paquete se está ejecutando | Se observó que los archivos del paquete fueron accedidos por un proceso en ejecución. |
-| Accedido por proceso root | El paquete fue accedido por un proceso que se ejecuta como root (UID 0). |
-| Binario SUID presente | El paquete contiene un binario con el bit SUID establecido, lo cual puede permitir la escalada de privilegios. |
+| Accedido por proceso raíz | El paquete fue accedido por un proceso que se ejecuta como raíz (UID 0). |
+| Binario SUID presente | El paquete contiene un binario con el bit SUID establecido, lo que puede permitir la escalada de privilegios. |
 
-*Package is running* alimenta la dimensión de **Reachability** del [Runtime Prioritization Engine][9]. Para consultar estas señales directamente, consulte [Filter findings by runtime signals][10].
+*El paquete se está ejecutando* alimenta la dimensión de **Reachability** del [Runtime Prioritization Engine][9]. Para consultar estas señales directamente, consulte [Filtrar hallazgos por señales de tiempo de ejecución][10].
 
 **Requisitos**:
-- Datadog Agent **7.79.0 o posterior**. En Kubernetes, utilice **7.81.0 o posterior** para obtener la cobertura de señales más completa.
+- Datadog Agent **7.79.0 o superior**. En Kubernetes, utilice **7.81.0 o superior** para obtener la cobertura de señales más completa.
 - Solo Linux (dependencia de eBPF). Consulte [Workload Protection setup][11] para conocer las distribuciones y versiones de kernel compatibles.
 
-Las señales de tiempo de ejecución se aplican a los paquetes instalados por un administrador de paquetes del sistema operativo (`apt`, `yum` o `apk`) en los hallazgos de vulnerabilidad de imágenes de contenedor.
+Las señales de tiempo de ejecución se aplican a los paquetes instalados por un administrador de paquetes del sistema operativo (`apt`, `yum` o `apk`) en los hallazgos de vulnerabilidades de imágenes de contenedor.
 
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
 
-Añada el bloque `enrichment` a la sección `sbom` de su archivo `datadog-agent.yaml`:
+Agregue el bloque `enrichment` a la sección `sbom` de su archivo `datadog-agent.yaml`:
 
 ```yaml
 spec:
@@ -222,7 +222,7 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      # Enables runtime package prioritization (Agent 7.79+)
       enrichment:
         usage:
           enabled: true
@@ -234,14 +234,14 @@ Aplique los cambios y reinicie el Agent.
 
 {{% tab "Helm" %}}
 
-Añada el bloque `enrichment` a la sección `sbom` de su archivo `datadog-values.yaml`:
+Agregue el bloque `enrichment` a la sección `sbom` de su archivo `datadog-values.yaml`:
 
 ```yaml
 datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    # Enables runtime package prioritization (Agent 7.79+)
     enrichment:
       usage:
         enabled: true
@@ -253,7 +253,7 @@ Reinicie el Agent.
 
 {{% tab "DaemonSet" %}}
 
-Establezca `hostPID: true` en la especificación del pod y añada las siguientes variables de entorno a cada contenedor de Agent en su archivo `daemonset.yaml`, incluyendo `agent`, `security-agent` y `system-probe`:
+Establezca `hostPID: true` en la especificación del pod y agregue las siguientes variables de entorno a cada contenedor del Agent en su archivo `daemonset.yaml`, incluidos `agent`, `security-agent` y `system-probe`:
 
 ```yaml
 # Pod spec
@@ -274,7 +274,7 @@ Reinicie el Agent.
 
 {{< /tabs >}}
 
-Para verificar la configuración, filtre los hallazgos de vulnerabilidad por [runtime signals][10].
+Para verificar la configuración, filtre los hallazgos de vulnerabilidades por [señales de tiempo de ejecución][10].
 
 [1]: /es/security/cloud_security_management/misconfigurations/
 [2]: /es/security/threats

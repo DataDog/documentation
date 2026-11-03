@@ -21,7 +21,7 @@ title: Configuration
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="La page des pipelines avec une source allant vers deux groupes de processeurs et deux destinations" style="width:100%;" >}}
 
-Observability Pipelines vous permet de collecter et de traiter {{< tooltip text="logs, metrics, and traces" tooltip="Contactez votre responsable de compte pour discuter des cas d'utilisation et de la tarification." >}} au sein de votre propre infrastructure, puis acheminez-les vers différentes destinations. Un pipeline se compose de trois composants principaux :
+Observability Pipelines vous permet de collecter et de traiter des logs et des métriques au sein de votre propre infrastructure, puis de les acheminer vers différentes destinations. Un pipeline se compose de trois composants principaux :
 
 - [Source][1] : reçoit des données provenant d'un outil tel que le Datadog Agent.
 - [Processors][2] : transforment, enrichissent ou filtrent les données.
@@ -110,7 +110,7 @@ Les types de métriques disponibles :
 | Type de métrique ; | Description                                                                                                                                                       | Exemple                                                                                       |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | COUNTER      | Le nombre total d'occurrences d'événements dans un intervalle de temps. Peut être réinitialisé à zéro, mais ne peut pas être diminué.                                                        | Vous souhaitez compter le nombre de logs avec `status:error`.                                     |
-| GAUGE        | Un instantané d'une valeur au moment où elle est rapportée.                                                                                                                 | Vous souhaitez suivre la dernière utilisation du CPU pour chaque host.                                   |
+| JAUGE        | Un instantané d'une valeur au moment où elle est rapportée.                                                                                                                 | Vous souhaitez suivre la dernière utilisation du CPU pour chaque host.                                   |
 | HISTOGRAM    | Agrégations statistiques (`avg`, `min`, `max`, `count`, `median`, percentiles) calculées par host par le Datadog Agent dans un intervalle de temps, puis envoyées à Datadog. | Vous souhaitez des agrégations de latence de requête par host à partir de chaque serveur web.                          |
 | DISTRIBUTION | Valeurs brutes envoyées à Datadog afin que les agrégations de percentiles soient calculées côté serveur, globalement sur chaque host rapportant la métrique dans un intervalle de temps.             | Vous souhaitez la latence p95 globale d'un endpoint d'API, calculée sur chaque host qui le dessert.  |
 
@@ -122,20 +122,9 @@ Consultez [Metric Types][3] pour plus d'informations.
 [4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
 
 {{% /tab %}}
-
-{{% tab "Traces" %}}
-
-Vous pouvez ingérer, traiter et envoyer {{< tooltip text="traces" tooltip="Contactez votre responsable de compte pour demander l'accès." >}} vers différentes destinations en utilisant le modèle [Trace Sampling][1].
-
-Consultez [Set Up Pipelines][2] pour plus d'informations sur la configuration d'une source, de processors et de destinations.
-
-[1]: /fr/observability_pipelines/configuration/explore_templates/?tab=traces#trace-sampling
-[2]: /fr/observability_pipelines/configuration/set_up_pipelines/
-
-{{% /tab %}}
 {{< /tabs >}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
  {{< partial name="whats-next/whats-next.html" >}}
 

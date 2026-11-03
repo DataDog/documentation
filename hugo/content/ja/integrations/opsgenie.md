@@ -30,6 +30,10 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
+<div class="alert alert-warning">
+Atlassian は、Opsgenie の新規セットアップのサポートを終了し、Opsgenie の機能を Jira Service Management に統合しています。Opsgenie は、2027年4月5日にサポート終了を迎える予定です。新規にセットアップする場合は、代わりに <a href="https://docs.datadoghq.com/integrations/jira-service-management-ops/" class="alert-link">Atlassian Jira Service Management Ops インテグレーション</a>を使用してください。
+</div>
+
 `@opsgenie` を使用して、次の方法でアラートを作成できます。
 
 - スナップショットを取得して作成

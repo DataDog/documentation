@@ -33,7 +33,7 @@ To add a subquery filter:
 
 1. Navigate to [Log Explorer][1].
 1. Enter a query in the search bar to filter your logs. This is the main query.
-1. Click {{< ui >}}+ Add{{< /ui >}}.
+1. Click {{< ui >}}\+ Add{{< /ui >}}.
 1. Under the {{< ui >}}Add Query Filter{{< /ui >}} section, select {{< ui >}}Logs{{< /ui >}}.
 
 This introduces new elements to the query editor:

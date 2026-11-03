@@ -47,11 +47,7 @@ Store your API and application keys as secrets in your CI/CD platform to protect
 
 ### Install the Datadog Security CLI
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview" >}}
-The Datadog Security CLI is in Preview and available to install from Datadog package repositories.
-{{< /callout >}}
-
-You can install Datadog Security CLI on Debian/Ubuntu, Red Hat/CentOS, and macOS systems. Container image scanning works with all major CI/CD platforms, including:
+The Datadog Security CLI is available to install from Datadog package repositories. You can install Datadog Security CLI on Debian/Ubuntu, Red Hat/CentOS, and macOS systems. Container image scanning works with all major CI/CD platforms, including:
 - GitHub Actions
 - GitLab CI/CD
 - Azure DevOps

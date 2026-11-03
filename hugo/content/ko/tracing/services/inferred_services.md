@@ -6,6 +6,9 @@ further_reading:
 - link: /tracing/services/service_page/
   tag: 설명서
   text: Datadog 서비스에 관해 자세히 알아보기
+- link: https://www.datadoghq.com/blog/service-remapping/
+  tag: 블로그
+  text: 서비스 재매핑을 사용하여 서비스 데이터를 포괄적으로 연결하세요.
 title: 추론된 서비스
 ---
 ## 개요 {#overview}
@@ -14,7 +17,7 @@ Datadog은 데이터베이스, 대기열, 타사 API 등 계측된 서비스의 
 
 {{< img src="tracing/visualization/service/dependencies_section.png" alt="서비스 페이지 종속성 맵" style="width:90%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 
 [카탈로그][1]에서 데이터베이스, 대기열 또는 타사 API와 같은 엔터티 유형별로 항목을 필터링하여 추론된 서비스를 탐색하세요. 각 [서비스 페이지][2]는 조사 중인 서비스 유형에 맞게 맞춤화되어 있습니다. 예를 들어, 데이터베이스 서비스 페이지에는 데이터베이스 관련 인사이트가 표시되며, [Database Monitoring][3]을 사용 중인 경우 데이터베이스 모니터링 관련 데이터도 포함됩니다.
 

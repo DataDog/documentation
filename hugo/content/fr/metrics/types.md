@@ -12,6 +12,9 @@ aliases:
 - /fr/developers/metrics_type/
 - /fr/developers/metrics/metrics_type/
 - /fr/developers/metrics/types/
+description: Découvrez les types de soumission de métriques Datadog (nombre, taux,
+  jauge, histogramme, distribution) et la manière dont ils correspondent aux types
+  dans l'application.
 further_reading:
 - link: extend/dogstatsd
   tag: Documentation
@@ -24,11 +27,11 @@ further_reading:
   text: Bibliothèques client de Datadog et sa communauté pour DogStatsD et les API
 title: Types de métriques
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-Chaque métrique soumise à Datadog doit avoir un type. Le type d'une métrique influe sur la manière dont les valeurs de la métrique sont affichées lors des requêtes, ainsi que sur les possibilités de création de graphiques dans Datadog en utilisant des [modificateurs][1] et des [fonctions][2]. Le type d'une métrique est affiché dans le panneau latéral des détails pour la métrique donnée sur la [page Résumé des métriques][3].
+Chaque métrique soumise à Datadog doit avoir un type. Le type d'une métrique affecte la manière dont les valeurs de la métrique sont affichées lors d'une requête, ainsi que les possibilités de représentation graphique associées dans Datadog à l'aide de [modificateurs][1] et de [fonctions][2] supplémentaires. Le type d'une métrique est affiché dans le panneau latéral des détails pour la métrique donnée sur la [page Metrics Summary][3].
 
-**Remarque** : Modifier le type de métrique dans ce panneau latéral des détails peut modifier le comportement de la métrique dans toutes les visualisations et monitors existants, rendant potentiellement les données historiques incohérentes.
+**Note** : La modification du type de métrique dans ce panneau latéral de détails peut modifier le comportement de la métrique dans toutes les visualisations et tous les monitors existants, rendant potentiellement les données historiques dénuées de sens.
 
 Les types d'envoi de métrique suivants sont acceptés :
 
@@ -39,28 +42,30 @@ Les types d'envoi de métrique suivants sont acceptés :
 - [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
-Ces différents types de métriques envoyés correspondent à quatre types de métriques stockés dans l'application Web Datadog :
+Ces différents types de soumission de métriques sont mappés sur cinq types de métriques stockés dans l'application Web Datadog :
 
-- COMPTE
-- TAUX
-- JAUGE
+- COUNT
+- RATE
+- GAUGE
 - DISTRIBUTION
+- HISTOGRAM (Explicit, Exponential)
 
-**Remarque** : Si vous soumettez une métrique à Datadog sans type, le type de métrique apparaît comme `Not Assigned` dans Datadog. Le type de métrique `Not Assigned` ne peut pas être changé en un autre type dans l'application tant qu'un type de métrique initial n'est pas soumis.
+**Remarque** : Si vous soumettez une métrique à Datadog sans type, le type de métrique apparaît comme {{< ui >}}Not Assigned{{< /ui >}} dans Datadog. Le type de métrique {{< ui >}}Not Assigned{{< /ui >}} ne peut pas être modifié en un autre type intégré tant qu'un type de métrique initial n'a pas été soumis.
 
-## Soumission vs. type dans l'application {#submission-vs-in-app-type}
+## Type envoyé et type stocké {#submission-vs-in-app-type}
 
-Les métriques sont envoyées à Datadog de trois façons différentes :
+Les métriques sont envoyées à Datadog de quatre manières principales :
 
-- [Vérification de l'agent][5]
+- [Check de l'Agent][5]
 - [DogStatsD][6]
-- [Datadog's HTTP API][7]
+- [API HTTP de Datadog][7]
+- [API OTLP Metrics][20]
 
-La majorité des données que Datadog reçoit est soumise par l'Agent, soit par le biais d'un [Agent check], soit par DogStatsD. Pour ces méthodes de soumission, le type d'une métrique détermine comment plusieurs valeurs collectées sur un Agent dans [un intervalle de temps de vidage][8] sont agrégées. L'Agent combine ces valeurs en une seule valeur métrique représentative pour cet intervalle. Cette valeur combinée est stockée avec un seul horodatage dans Datadog.
+La majorité des données reçues par Datadog sont soumises par l'Agent, soit via [Agent check], soit via DogStatsD. Pour ces méthodes de soumission, le type d'une métrique détermine comment les valeurs multiples collectées sur un Agent dans [a flush time interval][8] sont agrégées. L'Agent combine ces valeurs en une seule valeur de métrique représentative pour cet intervalle. Cette valeur combinée est stockée avec un horodatage unique dans Datadog.
 
-Les données soumises directement à l'API Datadog ne sont pas agrégées par Datadog, à l'exception des métriques de distribution. Les valeurs brutes envoyées à Datadog sont stockées telles quelles.
+Les données envoyées directement à la Datadog API ne sont pas agrégées par Datadog, à l'exception des métriques de distribution. Les valeurs brutes envoyées à Datadog sont stockées telles quelles.
 
-Lisez la section [Types de soumission et types dans l'application Datadog](#submission-types-and-datadog-in-app-types) pour en savoir plus sur la façon dont différents types de soumission de métriques sont mappés à leurs types correspondants dans l'application.
+Lisez la section [Types envoyés et types stockés dans Datadog](#submission-types-and-datadog-in-app-types) pour en savoir plus sur la manière dont les différents types de soumission de métriques sont mappés à leurs types correspondants dans l'application.
 
 ## Types de métriques {#metric-types}
 
@@ -69,90 +74,89 @@ Lisez la section [Types de soumission et types dans l'application Datadog](#subm
 {{< tabs >}}
 {{% tab "NOMBRE" %}}
 
-Le type de soumission de métriques COUNT représente le nombre total d'occurrences d'événements dans un intervalle de temps. Un COUNT peut être utilisé pour suivre le nombre total de connexions établies à une base de données ou le nombre total de requêtes à un point de terminaison. Ce nombre d'événements peut s'accumuler ou diminuer au fil du temps—il n'est pas monotoniquement croissant.
+Le type de soumission de métrique COUNT représente le nombre total d'occurrences d'événements dans un intervalle de temps. Un COUNT peut être utilisé pour suivre le nombre total de connexions établies vers une base de données ou le nombre total de requêtes vers un endpoint. Ce nombre d'événements peut augmenter ou diminuer au fil du temps ; il n'est pas strictement croissant.
 
-**Remarque** : Un COUNT est différent du type de métrique RATE, qui représente le nombre d'occurrences d'événements normalisées par seconde compte tenu de l'intervalle de temps défini.
+**Remarque** : Un COUNT est différent du type de métrique RATE, qui représente le nombre d'occurrences d'événements normalisé par seconde sur l'intervalle de temps défini.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Le type de soumission de métriques RATE représente le nombre total d'occurrences d'événements par seconde dans un intervalle de temps. Un RATE peut être utilisé pour suivre la fréquence à laquelle quelque chose se produit — par exemple, le nombre de connexions établies à une base de données ou le flux de requêtes adressées à un point de terminaison.
+Le type de soumission de métrique RATE représente le nombre total d'occurrences d'événements par seconde dans un intervalle de temps. Un RATE peut être utilisé pour suivre la fréquence à laquelle quelque chose se produit, comme la fréquence des connexions établies vers une base de données ou le flux de requêtes effectuées vers un endpoint.
 
-**Remarque** : Un RATE est différent du type de soumission de métriques COUNT, qui représente le nombre total d'occurrences d'événements dans l'intervalle de temps donné.
+**Remarque** : Un RATE est différent du type de soumission de métrique COUNT, qui représente le nombre total d'occurrences d'événements dans l'intervalle de temps donné.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Le type de soumission de métriques GAUGE représente un instantané d'événements dans un intervalle de temps. Cette valeur d'instantané représentative est la dernière valeur soumise à l'Agent pendant un intervalle de temps. Un GAUGE peut être utilisé pour mesurer quelque chose qui rapporte en continu—comme l'espace disque disponible ou la mémoire utilisée.
+Le type de soumission de métrique GAUGE représente un instantané des événements dans un intervalle de temps. Cette valeur instantanée représentative est la dernière valeur soumise à l'Agent pendant un intervalle de temps. Une GAUGE peut être utilisée pour prendre une mesure de quelque chose qui fait rapport en continu, comme l'espace disque disponible ou la mémoire utilisée.
 
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-Le type de soumission de métriques HISTOGRAM représente la distribution statistique d'un ensemble de valeurs calculées côté Agent dans un intervalle de temps. Le type de métrique HISTOGRAM de Datadog est une extension du type de métrique de timing StatsD. L'Agent agrège les valeurs qui sont envoyées dans un intervalle de temps défini et produit différentes métriques qui représentent l'ensemble des valeurs.
+Le type de soumission de métrique HISTOGRAM représente la distribution statistique d'un ensemble de valeurs calculées côté Agent dans un intervalle de temps. Le type de métrique HISTOGRAM de Datadog est une extension du type de métrique de timing StatsD. L'Agent agrège les valeurs envoyées dans un intervalle de temps défini et produit différentes métriques qui représentent l'ensemble des valeurs.
 
-Si vous envoyez `X` valeurs pour une métrique HISTOGRAM `<METRIC_NAME>` dans un intervalle de temps donné, les métriques suivantes sont produites par défaut par l'Agent :
+Si vous envoyez `X` valeurs pour une métrique HISTOGRAM `<METRIC_NAME>` dans un intervalle de temps donné, les métriques suivantes sont produites par l'Agent par défaut :
 
 `<METRIC_NAME>.avg`
 : Représente la moyenne de ces `X` valeurs dans l'intervalle de temps.<br>
-**Type In-App de Datadog**: GAUGE
+**Type dans l'application Datadog**: GAUGE
 
 `<METRIC_NAME>.count`
-: Représente le nombre de valeurs soumises pendant l'intervalle, `X`. L'Agent soumet ce nombre en tant que RATE afin qu'il affiche dans l'application la valeur de `X/interval`. <br>
-**Type In-App de Datadog**: RATE
+: Représente le nombre de valeurs soumises pendant l'intervalle, `X`. L'Agent soumet ce nombre en tant que TAUX, de sorte qu'il affiche dans l'application la valeur de `X/interval`. <br>
+**Type dans l'application Datadog**: RATE
 
 `<METRIC_NAME>.median`
 : Représente la médiane de ces `X` valeurs dans l'intervalle de temps.<br>
-**Type In-App de Datadog** : GAUGE
+**Type dans l'application Datadog** : GAUGE
 
 `<METRIC_NAME>.95percentile` 
-: Représente le 95ème percentile de ces `X` valeurs dans l'intervalle de temps.<br>
-**Type In-App de Datadog** : GAUGE
+: Représente le 95e percentile de ces `X` valeurs dans l'intervalle de temps.<br>
+**Type dans l'application Datadog** : GAUGE
 
 `<METRIC_NAME>.max`
 : Représente la valeur maximale de ces `X` valeurs envoyées pendant l'intervalle de temps.<br>
-**Type In-App de Datadog** : GAUGE
+**Type dans l'application Datadog** : GAUGE
 
 **Remarques** :
 
 - Configurez les agrégations que vous souhaitez envoyer à Datadog avec le paramètre `histogram_aggregates` dans votre [`datadog.yaml` fichier de configuration][1]. Par défaut, seules les agrégations `max`, `median`, `avg` et `count` sont envoyées à Datadog. `sum` et `min` sont également disponibles.
-- Configurez l'agrégation de percentile que vous souhaitez envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre [`datadog.yaml` fichier de configuration][2]. Par défaut, seul le `95percentile` est envoyé à Datadog.
+- Configurez l'agrégation de centiles que vous souhaitez envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre [`datadog.yaml` fichier de configuration][1]. Par défaut, seule la `95percentile` est envoyée à Datadog.
 
 
-[1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
-[2]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L116-L121
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-Le type de soumission de métriques DISTRIBUTION représente la distribution statistique globale d'un ensemble de valeurs calculées sur l'ensemble de votre infrastructure distribuée dans un intervalle de temps. Une DISTRIBUTION peut être utilisée pour instrumenter des objets logiques, comme des services, indépendamment des hôtes sous-jacents.
+Le type de soumission de métrique DISTRIBUTION représente la distribution statistique globale d'un ensemble de valeurs calculées sur l'ensemble de votre infrastructure distribuée dans un intervalle de temps. Une DISTRIBUTION peut être utilisée pour instrumenter des objets logiques, comme des services, indépendamment des hosts sous-jacents.
 
-Contrairement au type de métrique HISTOGRAM, qui agrège sur l'Agent pendant un intervalle de temps donné, une métrique DISTRIBUTION envoie toutes les données brutes pendant un intervalle de temps à Datadog. Les agrégations se produisent côté serveur. Parce que la structure de données sous-jacente représente des données brutes, non agrégées, les distributions offrent deux fonctionnalités majeures :
+Contrairement au type de soumission de métrique HISTOGRAM, qui agrège les valeurs sur l'Agent durant un intervalle de temps donné, une métrique DISTRIBUTION envoie toutes les données brutes à Datadog pendant un intervalle de temps. Les agrégations se produisent côté serveur. Comme la structure de données sous-jacente représente des données brutes non agrégées, les distributions offrent deux fonctionnalités majeures :
 
-- Calcul des agrégations de percentile
-- Personnalisation des tags
+- Calcul des agrégations de centiles
+- Personnalisation du marquage
 
-Si vous envoyez `X` valeurs pour une métrique DISTRIBUTION `<METRIC_NAME>` dans un intervalle de temps donné, les agrégations suivantes sont disponibles par défaut pour la requête :
+Si vous envoyez `X` valeurs pour une métrique DISTRIBUTION `<METRIC_NAME>` dans un intervalle de temps donné, les agrégations suivantes sont disponibles par défaut pour les requêtes :
 
 `avg:<METRIC_NAME>`
 : Représente la moyenne de ces `X` valeurs dans l'intervalle de temps.<br>
-**Type In-App de Datadog**: GAUGE
+**Type dans l'application Datadog**: GAUGE
 
 `count:<METRIC_NAME>`
 : Représente le nombre de points soumis dans l'intervalle de temps, `X`. L'Agent l'envoie ensuite en tant que COUNT.<br>
-**Type In-App Datadog**: COUNT
+**Type dans l'application Datadog**: COUNT
 
 `max:<METRIC_NAME>`
 : Représente la valeur maximale de ces `X` valeurs envoyées dans l'intervalle de temps.<br>
-**Type In-App Datadog** : GAUGE
+**Type dans l'application Datadog** : GAUGE
 
 `min:<METRIC_NAME>`
-: Représente la valeur minimale de ces `X` envoyées dans l'intervalle de temps.<br>
-**Type In-App Datadog** : GAUGE
+: Représente la valeur minimale de ces `X` valeurs envoyées dans l'intervalle de temps.<br>
+**Type dans l'application Datadog** : GAUGE
 
 `sum:<METRIC_NAME>`
-: Représente la somme de toutes les `X` valeurs envoyées dans l'intervalle de temps.<br>
-**Type In-App Datadog** : COUNT
+: Représente la somme de toutes les valeurs `X` envoyées dans l'intervalle de temps.<br>
+**Type dans l'application Datadog** : COUNT
 
-**Remarque** : Bien que les différentes agrégations des valeurs des métriques de distribution soient représentées sous forme de GAUGE ou de COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
+**Remarque** : Bien que les différentes agrégations des valeurs de métriques de distribution soient _représentées_ en tant que GAUGE ou COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -162,30 +166,30 @@ Si vous envoyez `X` valeurs pour une métrique DISTRIBUTION `<METRIC_NAME>` dans
 {{< tabs >}}
 {{% tab "NOMBRE" %}}
 
-Supposons que vous soumettiez une métrique COUNT, `notifications.sent`, depuis un seul hôte exécutant l'Agent Datadog. Cet hôte émet les valeurs suivantes dans un intervalle de temps de vidage : `[1,1,1,2,2,2,3,3]`.
+Supposons que vous soumettiez une métrique COUNT, `notifications.sent`, depuis un seul host exécutant le Datadog Agent. Cet host émet les valeurs suivantes dans un intervalle de temps de vidage : `[1,1,1,2,2,2,3,3]`.
 
-L'Agent additionne toutes les valeurs reçues dans un intervalle de temps. Ensuite, il soumet le nombre total, dans ce cas `15`, comme valeur de la métrique COUNT.
+L'Agent ajoute toutes les valeurs reçues dans un intervalle de temps. Ensuite, il soumet le nombre total, dans ce cas `15`, en tant que valeur de la métrique COUNT.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Supposons que vous soumettiez une métrique RATE, `queue_messages.rate`, depuis un seul hôte exécutant l'Agent Datadog. Cet hôte émet les valeurs suivantes dans un intervalle de temps de vidage : `[1,1,1,2,2,2,3,3]`.
+Supposons que vous soumettiez une métrique RATE, `queue_messages.rate`, depuis un seul host exécutant le Datadog Agent. Cet host émet les valeurs suivantes dans un intervalle de temps de vidage : `[1,1,1,2,2,2,3,3]`.
 
-L'Agent additionne toutes les valeurs reçues dans un intervalle de temps. Ensuite, il soumet le nombre total divisé par le nombre total de secondes dans cet intervalle de temps. Dans ce cas, si l'intervalle de vidage est de 10 secondes, la valeur soumise serait `1.5` comme valeur de la métrique RATE.
+L'Agent ajoute toutes les valeurs reçues dans un intervalle de temps. Ensuite, il soumet le nombre total divisé par le nombre total de secondes dans cet intervalle de temps. Dans ce cas, si l'intervalle de vidage est de 10 secondes, la valeur soumise serait `1.5` en tant que valeur de la métrique RATE.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Supposons que vous soumettiez une métrique GAUGE, `temperature`, depuis un seul hôte exécutant l'Agent Datadog. Cet hôte émet les valeurs suivantes dans un intervalle de temps de vidage : `[71,71,71,71,71,71,71.5]`.
+Supposons que vous soumettiez une métrique GAUGE, `temperature`, depuis un seul host exécutant le Datadog Agent. Cet host émet les valeurs suivantes dans un intervalle de temps de vidage : `[71,71,71,71,71,71,71.5]`.
 
-L'Agent soumet le dernier nombre rapporté, dans ce cas `71.5`, comme valeur de la métrique GAUGE.
+L'Agent soumet le dernier nombre rapporté, dans ce cas `71.5`, en tant que valeur de la métrique GAUGE.
 
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-Par exemple, supposons que vous soumettiez une métrique HISTOGRAM, `request.response_time.histogram`, depuis un serveur web qui rapporte les valeurs `[1,1,1,2,2,2,3,3]` pendant une période de flush de 10 secondes. Par défaut, l'Agent soumet les métriques suivantes à Datadog qui représentent la distribution statistique de ces valeurs dans cet intervalle de temps :
+Par exemple, supposons que vous soumettiez une métrique HISTOGRAM, `request.response_time.histogram`, depuis un serveur web qui rapporte les valeurs `[1,1,1,2,2,2,3,3]` dans un intervalle de vidage de 10 secondes. Par défaut, l'Agent soumet les métriques suivantes à Datadog, qui représentent la distribution statistique de ces valeurs dans cet intervalle de temps :
 
-| Nom de la métrique                                    | Valeur  | Type dans l’application Datadog |
+| Nom de la métrique                                    | Valeur  | Type dans l'application Datadog |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `0.8`  | RATE                |
@@ -196,9 +200,9 @@ Par exemple, supposons que vous soumettiez une métrique HISTOGRAM, `request.res
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-Supposons que vous soumettiez une métrique DISTRIBUTION, `request.response_time.distribution`, depuis deux serveurs web : `webserver:web_1` et `webserver:web_2`. Supposons que dans un intervalle de temps de flush donné, `webserver:web_1` rapporte la métrique avec les valeurs `[1,1,1,2,2,2,3,3]`, et `webserver:web_2` rapporte la même métrique avec les valeurs `[1,1,2]`. Au cours de cet intervalle de temps, les cinq agrégations suivantes représenteront la distribution statistique globale de toutes les valeurs collectées à partir des deux serveurs web :
+Supposons que vous soumettiez une métrique DISTRIBUTION, `request.response_time.distribution`, depuis deux serveurs web : `webserver:web_1` et `webserver:web_2`. Supposons que dans un intervalle de temps de vidage donné, `webserver:web_1` rapporte la métrique avec les valeurs `[1,1,1,2,2,2,3,3]`, et `webserver:web_2` rapporte la même métrique avec les valeurs `[1,1,2]`. Sur cet intervalle de temps, les cinq agrégations suivantes représenteront la distribution statistique globale de toutes les valeurs collectées à partir des deux serveurs web :
 
-| Nom de la métrique                                | Valeur  | Type dans l’application Datadog |
+| Nom de la métrique                                | Valeur  | Type dans l'application Datadog |
 | ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | COUNT               |
@@ -206,13 +210,13 @@ Supposons que vous soumettiez une métrique DISTRIBUTION, `request.response_time
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
-#### Calcul des agrégations de percentile {#calculation-of-percentile-aggregations}
+#### Calcul des agrégations de centiles {#calculation-of-percentile-aggregations}
 
-Comme d'autres types de métriques, tels que GAUGE ou HISTOGRAM, le type de métrique DISTRIBUTION a les agrégations suivantes disponibles : `count`, `min`, `max`, `sum`, et `avg`. Les métriques de distribution sont initialement étiquetées de la même manière que les autres métriques (avec des étiquettes personnalisées définies dans le code).
+Comme pour les autres types de métriques, tels que GAUGE ou HISTOGRAM, le type de métrique DISTRIBUTION propose les agrégations suivantes : `count`, `min`, `max`, `sum` et `avg`. Les métriques de distribution sont initialement taguées de la même manière que les autres métriques (avec des tags personnalisés définis dans le code).
 
-Des agrégations de percentile supplémentaires (`p50`, `p75`, `p90`, `p95`, `p99`) peuvent être ajoutées aux métriques de distribution depuis le [panneau latéral des détails][2] de la métrique. Si vous deviez ajouter des agrégations de percentile à votre métrique de distribution dans l'application, les cinq agrégations supplémentaires suivantes sont disponibles pour la requête :
+Des agrégations de centiles supplémentaires (`p50`, `p75`, `p90`, `p95`, `p99`) peuvent être ajoutées aux métriques de distribution depuis le [panneau latéral des détails][2] de la métrique. Si vous ajoutiez des agrégations de centiles à votre métrique de distribution dans l'application, les cinq agrégations supplémentaires suivantes seraient disponibles pour la requête :
 
-| Nom de la métrique                              | Valeur | Type dans l’application Datadog |
+| Nom de la métrique                              | Valeur | Type dans l'application Datadog |
 | ---------------------------------------- | ----- | ------------------- |
 | `p50:request.response_time.distribution` | `2`   | GAUGE               |
 | `p75:request.response_time.distribution` | `2`   | GAUGE               |
@@ -220,15 +224,15 @@ Des agrégations de percentile supplémentaires (`p50`, `p75`, `p90`, `p95`, `p9
 | `p95:request.response_time.distribution` | `3`   | GAUGE               |
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
-C'est-à-dire que pour une métrique de distribution avec des agrégations de percentile ajoutées pendant un intervalle de temps donné, les 10 agrégations suivantes sont disponibles : `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, et `p99`.
+C'est-à-dire que pour une métrique de distribution avec des agrégations de centiles ajoutées au cours d'un intervalle de temps donné, les 10 agrégations suivantes sont disponibles : `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95` et `p99`.
 
-**Remarque** : Bien que les différentes agrégations des valeurs métriques de distribution soient _représentées_ sous forme de jauges ou de comptes dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
+**Remarque** : Bien que les différentes agrégations des valeurs de métriques de distribution soient _représentées_ en tant que GAUGE ou COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
 
-#### Personnalisation des étiquettes {#customization-of-tagging}
+#### Personnalisation du tagging {#customization-of-tagging}
 
-Cette fonctionnalité vous permet de contrôler l'étiquetage pour les métriques où la granularité au niveau de l'hôte n'est pas nécessaire. En savoir plus sur [Metrics without Limits™][1].
+Cette fonctionnalité vous permet de contrôler le tagging pour les métriques où une granularité au niveau du host n'est pas nécessaire. En savoir plus sur [Metrics without Limits™][1].
 
-**Remarque** : L'exclusion des étiquettes n'est pas prise en charge dans la personnalisation des étiquettes basée sur la liste autorisée. L'ajout d'étiquettes commençant par `!` n'est pas accepté.
+**Remarque** : L'exclusion de tags n'est pas prise en charge dans la personnalisation des tags basée sur une liste d'autorisation. L'ajout de tags commençant par `!` n'est pas accepté.
 
 [1]: /fr/metrics/metrics-without-limits/
 [2]: /fr/metrics/summary/#metric-details-sidepanel
@@ -244,14 +248,14 @@ Envoyez vos métriques de type COUNT depuis l'une des sources suivantes :
 
 | Source de soumission | Méthode de soumission (python)           | Type de soumission | Type dans l'application Datadog |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Vérification de l'agent][1]  | `self.count(...)`                    | COUNT           | COUNT               |
-| [Vérification de l'agent][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Check de l'Agent][1]  | `self.count(...)`                    | COUNT           | COUNT               |
+| [Check de l'Agent][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
 | [API][3]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [DogStatsD][4]    | `dog.count(...)`                     | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.increment(...)`                 | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.decrement(...)`                 | COUNT           | RATE                |
 
-**Remarque** : Lors de la soumission d'une métrique de type COUNT via DogStatsD, la métrique apparaît comme un RATE dans l'application pour garantir une comparaison pertinente entre différents agents. Par conséquent, les COUNT StatsD peuvent apparaître avec une valeur décimale dans Datadog (puisqu'ils sont normalisés sur un intervalle de temps pour rapporter des unités par seconde).
+**Remarque** : Lors de la soumission d'un type de métrique COUNT via DogStatsD, la métrique apparaît comme un RATE dans l'application pour garantir une comparaison pertinente entre différents Agents. Par conséquent, les comptes StatsD peuvent apparaître avec une valeur décimale dans Datadog (puisqu'ils sont normalisés sur un intervalle de temps pour rapporter des unités par seconde).
 
 
 [1]: /fr/metrics/custom_metrics/agent_metrics_submission/?tab=count#count
@@ -265,10 +269,10 @@ Envoyez vos métriques de type RATE depuis l'une des sources suivantes :
 
 | Source de soumission | Méthode de soumission (python)          | Type de soumission | Type dans l'application Datadog |
 | ----------------- | ----------------------------------- | --------------- | ------------------- |
-| [Vérification de l'agent][1]  | `self.rate(...)`                    | TAUX            | JAUGE               |
-| [API][2]          | `api.Metric.send(type="rate", ...)` | TAUX            | TAUX                |
+| [Check de l'Agent][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
+| [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Remarque** : Pour obtenir des métriques de RATE via DogStatsD, soumettez soit une métrique COUNT soit une métrique HISTOGRAM. Les valeurs de la métrique COUNT et `<HISTOGRAM>.count` sont des deltas normalisés dans le temps de la valeur de la métrique sur la période de flush de StatsD.
+**Remarque** : Pour obtenir des métriques de type RATE via DogStatsD, soumettez soit une métrique [COUNT][16], soit une métrique [HISTOGRAM][18]. Les valeurs des métriques COUNT et `<HISTOGRAM>.count` sont des deltas normalisés dans le temps de la valeur de la métrique sur la période de flush de StatsD.
 
 
 [1]: /fr/metrics/custom_metrics/agent_metrics_submission/?tab=rate
@@ -280,7 +284,7 @@ Envoyez vos métriques de type GAUGE depuis l'une des sources suivantes :
 
 | Source de soumission | Méthode de soumission (Python)           | Type de soumission | Type dans l'application Datadog |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Vérification de l'agent][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Check de l'Agent][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 | [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
@@ -293,12 +297,12 @@ Envoyez vos métriques de type GAUGE depuis l'une des sources suivantes :
 
 Envoyez vos métriques de type HISTOGRAM depuis l'une des sources suivantes :
 
-| Source de soumission | Méthode de soumission (Python) | Type de soumission | Types dans l'application Datadog |
+| Source de soumission | Méthode de soumission (Python) | Type de soumission | Types Datadog dans l'application |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [Vérification de l'agent][1]  | `self.histogram(...)`      | HISTOGRAM           | GAUGE, RATE          |
+| [Check de l'Agent][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
 | [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
 
-Soumettre une métrique TIMER à l'Agent Datadog équivaut à soumettre une métrique de type HISTOGRAM via DogStatsD (à ne pas confondre avec les timers du StatsD standard). [DogStatsD `TIMER`][3] représente uniquement des données de durée. Par exemple, le temps qu'une section de code met à s'exécuter ou combien de temps il faut pour rendre complètement une page.
+La soumission d'une métrique TIMER au Datadog Agent équivaut à la soumission d'un type de métrique HISTOGRAM dans DogStatsD (à ne pas confondre avec les timers dans le StatsD standard). [DogStatsD `TIMER`][3] représente uniquement des données de durée. Par exemple, le temps qu'une section de code met à s'exécuter ou le temps nécessaire pour rendre entièrement une page.
 
 
 [1]: /fr/metrics/custom_metrics/agent_metrics_submission/?tab=histogram
@@ -309,29 +313,29 @@ Soumettre une métrique TIMER à l'Agent Datadog équivaut à soumettre une mét
 
 Envoyez vos métriques de type DISTRIBUTION depuis la source suivante :
 
-| Source de soumission | Méthode de soumission (Python) | Type de soumission | Types dans l'application Datadog |
+| Source de soumission | Méthode de soumission (Python) | Type de soumission | Types Datadog dans l'application |
 | ----------------- | -------------------------- | --------------- | -------------------- |
 | [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
 | [API][2]          | `api_instance.submit_distribution_points(...)` | DISTRIBUTION           | GAUGE, COUNT               |
 
-**Remarque**: Bien que les différentes agrégations des valeurs métriques de distribution soient _représentées_ sous forme de gauges ou de counts dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
+**Remarque** : Bien que les différentes agrégations des valeurs de métriques de distribution soient _représentées_ en tant que GAUGE ou COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`.
 
 [1]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
 [2]: /fr/api/latest/metrics/#submit-distribution-points
 {{% /tab %}}
 {{< /tabs >}}
 
-## Types de soumission et types dans l'application Datadog {#submission-types-and-datadog-in-app-types}
+## Types envoyés et types stockés dans Datadog {#submission-types-and-datadog-in-app-types}
 
-Ci-dessous se trouve un résumé de toutes les sources et méthodes de soumission de métriques disponibles. Ce tableau montre la correspondance entre le type de soumission de métrique correspondant et les types dans l'application :
+Vous trouverez ci-dessous un résumé de toutes les sources et méthodes de soumission de métriques disponibles. Ce tableau présente le mappage entre le type de soumission de métrique correspondant et les types dans l'application :
 
-| Source de soumission | Méthode de soumission (Python)           | Type de soumission | Types dans l'application Datadog |
+| Source de soumission | Méthode de soumission (Python)           | Type de soumission | Type dans l'application Datadog |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
-| [Vérification de l'agent][9]  | `self.count(...)`                    | COUNT           | COUNT                |
-| [Vérification de l'agent][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
-| [Vérification de l'agent][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
-| [Agent check][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
-| [Vérification de l'agent][13] | `self.rate(...)`                     | RATE            | GAUGE                |
+| [Check de l'Agent][9]  | `self.count(...)`                    | COUNT           | COUNT                |
+| [Check de l'Agent][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
+| [Check de l'Agent][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
+| [Check de l'Agent][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
+| [Check de l'Agent][13] | `self.rate(...)`                     | RATE            | GAUGE                |
 | [API][7]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
 | [API][7]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][7]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
@@ -343,9 +347,9 @@ Ci-dessous se trouve un résumé de toutes les sources et méthodes de soumissio
 | [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
 | [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
 
-**Remarque&nbsp;:** Bien que les différentes agrégations des valeurs de distribution soient _représentées_ sous forme de GAUGE ou de COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`. Consultez la section [Définitions][19] de cette page pour plus d'informations.
+**Remarque** : Bien que les différentes agrégations des valeurs de métriques de distribution soient _représentées_ en tant que GAUGE ou COUNT dans l'application, la métrique elle-même conserve le type `DISTRIBUTION`. Consultez la section [Définitions][19] de cette page pour plus d'informations.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -368,3 +372,4 @@ Ci-dessous se trouve un résumé de toutes les sources et méthodes de soumissio
 [17]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#set
 [18]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#histogram
 [19]: /fr/metrics/types/?tab=distribution#definition
+[20]: /fr/opentelemetry/setup/otlp_ingest/metrics/

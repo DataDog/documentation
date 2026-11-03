@@ -30,7 +30,7 @@ Use the Cost Explorer to:
 1. Navigate to [**Cloud Cost > Analyze > Explorer**][1] in Datadog.
 2. Build a search query using the query editor or dropdown filters:
    - Use the {{< ui >}}Provider{{< /ui >}} dropdown to select one or more cloud providers
-   - Click {{< ui >}}+ Filter{{< /ui >}} to add filters for services, tags, regions, teams, and other attributes
+   - Click {{< ui >}}\+ Filter{{< /ui >}} to add filters for services, tags, regions, teams, and other attributes
    - Type directly in the search bar for more advanced queries
 
    {{< img src="cloud_cost/reporting/reporting-overview-1.png" alt="The Cloud Cost Explorer query builder showing provider selection, cost type filters, tag search, service filters, and group by options" style="width:100%;" >}}

@@ -1,62 +1,73 @@
 ---
-private: true
+description: Elimine datos de logs de Datadog con los permisos adecuados, consultas
+  basadas en tiempo y registro con Audit Trail para el cumplimiento.
+further_reading:
+- link: /account_management/rbac/
+  tag: Documentación
+  text: Obtenga información sobre roles y permisos
+- link: /account_management/audit_trail/
+  tag: Documentación
+  text: Haga un seguimiento de la actividad del usuario con Audit Trail
 title: Eliminar datos
 ---
+Esta página explica cómo eliminar datos confidenciales que no deberían haberse ingerido en Datadog.
 
-{{< callout url="#" btn_hidden="true" header="false">}}
-  La eliminación de datos mediante la interfaz de usuario está en Vista previa.
-{{< /callout >}} 
+## Elimine datos que no sean de Logs{#delete-non-logs-data}
 
-En esta página se explica cómo eliminar datos de Datadog.
+Para eliminar datos de un producto que no sea Logs, comuníquese con [Support][1] con su solicitud.
 
-## Eliminar datos que no son de logs
+## Elimine datos de Logs{#delete-logs-data}
 
-Para eliminar los datos de un producto que no sean logs, ponte en contacto con [Soporte][1] con tu solicitud.
+Puede eliminar datos del producto Logs utilizando la interfaz de usuario.
 
-## Borrar datos de logs
+### Habilite la función de eliminación{#enable-deletion-feature}
 
-Puedes eliminar datos del producto de logs utilizando la interfaz de usuario.
+La eliminación de datos de Logs solo puede ser habilitada por los administradores de la organización. Para habilitar la eliminación de datos de Logs:
+1. En la configuración de la organización, vaya a Preferencias.
+2. Active {{< ui >}}Logs Data Deletion{{< /ui >}} y guarde.
 
-### Eliminación de accesos
+Para otorgar a un usuario la capacidad de eliminar logs:
+1. En la configuración de la organización, vaya a [Roles][3].
+2. Cree un rol que tenga el permiso {{< ui >}}Logs Delete Data{{< /ui >}}.
 
-Para conceder a una cuenta acceso a la eliminación de datos, realiza los siguientes pasos:
+### Inicie eliminaciones{#start-deletions}
 
-1. En Configuración de la organización, ve a [Roles][3].
-2. Solicita o crea un rol que tenga el permiso **Delete Data** (Eliminar datos) para el producto del que deseas eliminar datos. Por ejemplo, para eliminar datos de logs, solicita o crea un rol con el permiso **Logs Delete Data** (Logs de eliminación de datos).
+<div class="alert alert-info">Una solicitud de eliminación puede cancelarse hasta 10 días después de su envío.</div>
 
-### Iniciar eliminaciones
+<div class="alert alert-danger"><strong>Para Logs</strong>: La eliminación de datos es permanente después de 10 días. Revise sus solicitudes de eliminación cuidadosamente.</div>
 
-<div class="alert alert-warning">Los datos eliminados nunca se pueden recuperar y las eliminaciones no se pueden deshacer.</div>
+Para eliminar datos, realice los siguientes pasos:
 
-<div class="alert alert-info"><strong>Para logs</strong>: las eliminaciones no pueden asignarse a un índice específico, y se producen en todos los índices, índices flexibles y archivos en línea.
-</div>
+1. En la configuración de la organización, vaya a [Data Deletion][4].
+2. Seleccione un producto del cual eliminar. 
+3. Seleccione un marco de tiempo en el cual buscar.
+4. Realice una consulta de eventos dentro del marco de tiempo para eliminar.
+5. Después de que la búsqueda muestre los resultados que desea eliminar, haga clic en el botón {{< ui >}}Delete{{< /ui >}} en la parte inferior derecha.
+6. Confirme la eliminación seleccionando la casilla de verificación e ingresando el texto de confirmación solicitado. 
+7. Haga clic en {{< ui >}}Confirm{{< /ui >}}.
 
-Para eliminar datos, sigue estos pasos:
+La eliminación comienza instantáneamente después de que usted confirma la solicitud; los datos de destino son inaccesibles.
 
-1. En Parámetros de organización, ve a [Data Deletion][4] (Eliminación de datos).
-2. Selecciona el producto que deseas eliminar. 
-3. Selecciona un plazo entre el que buscar.
-4. Consulta eventos dentro del plazo que deseas eliminar.
-5. Una vez que la búsqueda muestre los resultados que deseas eliminar, haz clic en el botón **Delete** (Eliminar) de la parte inferior derecha.
-6. Se te pedirá que confirmes la eliminación seleccionando una casilla de verificación e introduciendo un texto de confirmación. Haz clic en **Confirm** (Confirmar).
-
-La eliminación comienza 2 horas después de que confirmes la solicitud.
-
-Para validar una eliminación, marca la pestaña [Historial de eliminaciones][5], donde puedes ver el estado de las eliminaciones. También puedes buscar eliminaciones en [Audit Trail][6] mediante la cadena `@asset.name:"Data Deletion"`.
+Desde la pestaña [Deletion History][5], puede ver el estado de las eliminaciones. También puede buscar eliminaciones en [Audit Trail][6] usando la cadena de búsqueda `@asset.name:"Data Deletion"`.
 
 **Notas**:
-- Las eliminaciones comienzan 2 horas después de la confirmación, y los registros coincidentes que lleguen durante este periodo se incluyen en la eliminación. En algunos casos, es posible que los registros que lleguen una vez iniciado el trabajo no se eliminen porque la eliminación ya ha procesado el plazo en el que se produjo ese registro.
-- Al eliminar un registro, no se eliminan los datos derivados de ese registro (por ejemplo, métricas generadas a partir de logs).
+- Las eliminaciones comienzan instantáneamente después de la confirmación. En algunos casos, los registros que llegan después de que el trabajo ha comenzado podrían no ser eliminados porque la eliminación ya ha procesado la ventana de tiempo en la que ocurrió ese registro.
+- Al eliminar un registro, los datos derivados de ese registro no se eliminan (por ejemplo, las métricas generadas a partir de Logs).
+- Se admite un máximo de 5 eliminaciones simultáneas.
 
-### Detener las eliminaciones
+### Cancelar eliminaciones {#cancel-deletions}
 
-**Nota**: Las eliminaciones en curso pueden cancelarse. Sin embargo, esto sólo impide la eliminación de datos que aún no se han procesado para un trabajo concreto.
+**Nota**: Cuando se crea una solicitud de eliminación, esta se encuentra en un estado recuperable durante 10 días. Durante este período, los datos eliminados son inaccesibles en Datadog pero se recuperan si la solicitud de eliminación se cancela.
 
-Para cancelar una eliminación, haz clic en **Cancel** (Cancelar) en un trabajo **Upcoming** (Futuro) o **In Progress** (En curso).
+Para cancelar una eliminación, haga clic en {{< ui >}}Cancel{{< /ui >}} en un trabajo {{< ui >}}Upcoming{{< /ui >}} o {{< ui >}}Done (Recoverable){{< /ui >}}.
 
-### Auditoría de eliminaciones
+### Auditar eliminaciones {#audit-deletions}
 
-Las eliminaciones se registran en el [Historial de eliminaciones][5] durante 90 días. También se registran en [Audit Trail][6] junto con los datos del usuario solicitante.
+Las eliminaciones se registran en [Deletion History][5] durante 90 días. También se registran en [Audit Trail][6] junto con los detalles del usuario que realizó la solicitud.
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/support/
 [2]: /es/account_management/rbac/permissions/

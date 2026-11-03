@@ -23,7 +23,7 @@ You can create and manage datastores from the [Datastore page][1].
 To create a datastore:
 
 1. Navigate to the [Datastores page][1].
-1. Click {{< ui >}}+ New Datastore{{< /ui >}}.
+1. Click {{< ui >}}\+ New Datastore{{< /ui >}}.
 1. Enter a {{< ui >}}Name{{< /ui >}} for your datastore.
 1. Enter a {{< ui >}}Primary Key{{< /ui >}} or toggle the option to {{< ui >}}Autogenerate a Primary Key{{< /ui >}} if a primary key is not essential to your use case.
    - If you choose to enter a primary key, the key must be a column name in your data where each key has a unique value.

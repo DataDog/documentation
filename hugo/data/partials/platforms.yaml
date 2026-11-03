@@ -17,7 +17,7 @@ platforms:
     category: "Host-based"
   - name: docker
     link: "agent/docker/"
-    image: "platform_docker.png"
+    image: "platform_docker_2.png"
     category: "Container platforms"
   - name: kubernetes
     link: "agent/kubernetes/"
@@ -109,7 +109,7 @@ gs:
     image: "platform_coreos.png"
   - name: docker
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=docker"
-    image: "platform_docker.png"
+    image: "platform_docker_2.png"
   - name: kubernetes
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes"
     image: "platform_kubernetes.png"

@@ -8,47 +8,53 @@ code_lang_weight: 40
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: ドキュメント
-  text: コンテナ内のテスト用に環境変数を転送する
+  text: Containers 内でテスト用に環境変数を転送する
 - link: /continuous_integration/tests
   tag: ドキュメント
-  text: テスト結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
+  text: テスト結果とパフォーマンスを調べる
+- link: /tests/test_parallelization/
   tag: ドキュメント
-  text: CI Visibility のトラブルシューティング
+  text: テスト並列化のセットアップ
+- link: /tests/troubleshooting/
+  tag: ドキュメント
+  text: Test Optimization のトラブルシューティング
 title: Ruby テスト
 type: multi-code-lang
 ---
+## 互換性{#compatibility}
 
-## 互換性
-
-サポートされている言語:
+サポート対象言語:
 
 | 言語 | バージョン |
-|---|---|
-| Ruby | >= 2.7 |
-| JRuby | >= 9.4 |
+| -------- | ------- |
+| Ruby     | 2.7 以上|
 
-サポートされているテストフレームワーク:
+サポート対象テストフレームワーク:
 
-| テストフレームワーク | バージョン |
-|---|---|
-| RSpec | >= 3.0.0 |
-| Minitest | >= 5.0.0 |
-| Cucumber | >= 3.0 |
+| テストフレームワーク | バージョン  |
+| -------------- | -------- |
+| RSpec          | 3.0.0 以上|
+| Minitest       | 5.0.0 以上|
+| Cucumber       | 3.0 以上  |
 
-サポートされているテストランナー:
+サポート対象テストランナー:
 
-| テストランナー | バージョン |
-|---|---|
-| Knapsack Pro | >= 7.2.0 |
-| ci-queue | >= 0.53.0 |
+| テストランナー    | バージョン   |
+| -------------- | --------- |
+| Knapsack Pro   | 7.2.0 以上 |
+| parallel_tests | 4.0.0 以上 |
+| ci-queue       | 0.53.0 以上|
 
-## レポート方法の構成
+## 報告方法の構成 {#configuring-reporting-method}
 
-Datadog にテスト結果を報告するには、`datadog-ci` gem を構成する必要があります。
+Datadog にテスト結果を報告するには、以下のように `datadog-ci` gem を構成する必要があります。
 
 {{< tabs >}}
-{{% tab "クラウド CI プロバイダー (エージェントレス)" %}}
+{{% tab "自動インスツルメンテーションサポートがある CI プロバイダー" %}}
+{{% ci-autoinstrumentation %}}
+{{% /tab %}}
+
+{{% tab "クラウド CI プロバイダー (Agentless)" %}}
 
 {{% ci-agentless %}}
 
@@ -60,328 +66,177 @@ Datadog にテスト結果を報告するには、`datadog-ci` gem を構成す�
 {{% /tab %}}
 {{< /tabs >}}
 
-## Ruby Test Visibility ライブラリのインストール
+## 手動インスツルメンテーション {#manual-instrumentation}
 
-Ruby Test Visibility ライブラリをインストールするには
+<div class="alert alert-info">
+このセクションは、CI プロバイダーが自動インスツルメンテーションをサポートしていない場合に<strong>のみ必要</strong>です。上記の『<a href="#configuring-reporting-method">報告方法の構成</a>』セクションで「<strong>自動インスツルメンテーションサポートがある CI プロバイダー</strong>」を選択した場合は、このセクションをスキップして『<a href="#configuration-settings">構成設定</a>』に進んでください。
+</div>
 
-1. `Gemfile` に `datadog-ci` gem を追加します。
+CI プロバイダーが自動インスツルメンテーションをサポートしていない場合 (たとえば、{{< ui >}}Cloud CI provider (Agentless){{< /ui >}} または {{< ui >}}On-Premises CI Provider (Datadog Agent){{< /ui >}} を選択した場合)、以下の手順に従ってライブラリをインストールし、テストを手動でインスツルメンテーションしてください。
+
+1. Gemfile に [Ruby Test Optimization gem][10] を追加します。
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
-source "<https://rubygems.org>"
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
-2. `bundle install` を実行して gem をインストールします。
+2. [報告方法を構成します。](#configuring-reporting-method)
 
-## テストのインスツルメンテーション
+3. テストを実行するコマンドで `RUBYOPT` 環境変数を設定します。
 
-{{< tabs >}}
-{{% tab "RSpec" %}}
+   ```bash
+   RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument" bundle exec rake test
+   ```
 
-RSpec インテグレーションは、`rspec` テストフレームワークを使用している際に、すべてのグループや例の実行をトレースします。
+   **注**: `RUBYOPT` 環境変数を設定したくない場合は、テストコマンドの先頭に `bundle exec ddcirb exec` を追加してください。
 
-インテグレーションを有効にするには、`spec_helper.rb` ファイルに次の内容を追加します。
+   ```bash
+   bundle exec ddcirb exec rake test
+   ```
 
-```ruby
-require "rspec"
-require "datadog/ci"
+## 構成設定{#configuration-settings}
 
-# CI 上でテストインスツルメンテーションのみを有効にします
-if ENV["DD_ENV"] == "ci"
-Datadog.configure do |c|
-# Test Visibility を有効にします
-c.ci.enabled = true
+Test Optimization ライブラリを構成するには、テストプロセスを開始する前に以下の環境変数を設定します。並列テストランナーの場合、すべてのワーカーが継承するように親プロセスで設定してください。
 
-# テスト対象のサービスまたはライブラリの名前
-c.service = "my-ruby-app"
+`DD_CIVISIBILITY_ENABLED=true`(必須)
+: Test Optimization を有効にします。<br/>
+**デフォルト**: `false`
 
-# RSpec のインスツルメンテーションを有効にします
-c.ci.instrument :rspec
-end
-end
-```
+`DD_ENV` (オプション)
+: テストが実行されている環境の名前。<br/>
+**デフォルト**: `(empty)`<br/>
+**例**: `local`、`ci`
 
-通常通りテストを実行し、`DD_ENV` 環境変数でテスト環境を指定します。
+`DD_SERVICE` (オプション)
+: テスト対象のサービスまたはライブラリの名前。<br/>
+**デフォルト**: リポジトリ名<br/>
+**例**: `my-ruby-app`
 
-次の環境を使用できます。
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Agentless モードの場合、必須)
+Agentless モードを有効にして、テスト結果を Datadog に直接送信します。<br/>
+**デフォルト**: `false`
 
-* 開発者のワークステーションでテストを実行する場合は `local`
-* CI プロバイダー上で実行する場合は `ci`
+`DD_API_KEY` (Agentless モードの場合、必須)
+: テスト結果のアップロードを認証するために使用される Datadog API キー。この変数で Agentless モードが有効になることはありません。<br/>
+**デフォルト**: `(empty)`
 
-例えば:
+`DD_SITE` (Agentless モードの場合、オプション)
+: テスト結果のアップロード先の [Datadog サイト][11]。US1 以外のサイトを使用する場合は、この構成を設定します。<br/>
+**デフォルト**: `datadoghq.com`
 
-```bash
-DD_ENV=ci bundle exec rake spec
-```
+`DD_TRACE_AGENT_URL` (Datadog Agent を使用する場合のみ)
+: トレース収集用の Datadog Agent URL。`http://hostname:port` の形式にします。<br/>
+**デフォルト**: `http://127.0.0.1:8126`
 
-{{% /tab %}}
+`DD_TEST_SESSION_NAME` (オプション)
+: `unit-tests`、`integration-tests`、`smoke-tests` などのテストグループを識別します。<br/>
+**デフォルト**: CI ジョブ名とテストコマンド、または CI ジョブ名が利用できない場合はテストコマンド。<br/>
+**例**: `unit-tests`、`integration-tests`、`smoke-tests`
 
-{{% tab "Minitest" %}}
+他のすべての [Datadog トレーサー構成][5] オプションも使用できます。
 
-Minitest インテグレーションは、`minitest` フレームワークで実行されるすべてのテストをトレースします。
+追加の Test Optimization 機能には、それぞれのページに記載されている独自の構成オプションがあります。
 
-インテグレーションを有効にするには、`test_helper.rb` ファイルに次の内容を追加します。
-
-```ruby
-require "minitest"
-require "datadog/ci"
-
-# CI 上でテストインスツルメンテーションのみを有効にします。
-if ENV["DD_ENV"] == "ci"
-Datadog.configure do |c|
-# Test Visibility を有効にします
-c.ci.enabled = true
-
-# テスト対象のサービスまたはライブラリの名前
-c.service = "my-ruby-app"
-
-c.ci.instrument :minitest
-end
-end
-```
-
-通常通りテストを実行し、`DD_ENV` 環境変数でテスト環境を指定します。
-
-次の環境を使用できます。
-
-* 開発者のワークステーション上でテストを実行する場合は `local`
-* CI プロバイダー上で実行する場合は `ci`
-
-例えば:
-
-```bash
-DD_ENV=ci bundle exec rake test
-```
-
-<div class="alert alert-danger">
-<strong>注:</strong> `minitest/autorun` を使用する場合、`datadog/ci` が `minitest/autorun` より先に実行されるようにしてください。
-</div>
-
-`minitest/autorun` を使用した構成例:
-
-```ruby
-require "datadog/ci"
-require "minitest/autorun"
-
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    c.ci.enabled = true
-
-    c.service = "my-ruby-app"
-
-    c.ci.instrument :minitest
-  end
-end
-```
-
-{{% /tab %}}
-
-{{% tab "Cucumber" %}}
-
-Cucumber インテグレーションでは、`cucumber` フレームワークを使用している場合のシナリオとステップの実行をトレースすることができます。
-
-インテグレーションをアクティブ化するには、次のコードをアプリケーションに追加します。
-
-```ruby
-require "cucumber"
-require "datadog/ci"
-
-# CI 上でテストインスツルメンテーションのみを有効にします
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    # Test Visibility を有効にします
-    c.ci.enabled = true
-
-    # テスト対象のサービスまたはライブラリの名前
-    c.service = "my-ruby-app"
-
-    # Cucumber のインスツルメンテーションを有効にします
-    c.ci.instrument :cucumber
-  end
-end
-```
-
-環境変数 `DD_ENV` でテストが実行されている環境を指定し、通常どおりテストを実行します。
-以下の環境が使えます。
-
-* 開発者のワークステーションでテストを実行している場合は `local`
-* CI プロバイダー上で実行している場合は `ci`
-
-例:
-
-```bash
-DD_ENV=ci bundle exec rake cucumber
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### テストにカスタムタグを追加する
+## テストにカスタムタグを追加する {#adding-custom-tags-to-tests}
 
 現在アクティブなテストを使用して、テストにカスタムタグを追加することができます。
 
 ```ruby
 require "datadog/ci"
 
-# テスト内
+# inside your test
 Datadog::CI.active_test&.set_tag("test_owner", "my_team")
-# テストは正常に続きます
+# test continues normally
 # ...
 ```
 
-これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加に関する詳細は、Ruby カスタムインスツルメンテーションドキュメントの[タグの追加][2]セクションを参照してください。
+これらのタグに対してフィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加の詳細については、Ruby カスタムインスツルメンテーションドキュメントの [タグの追加][2] セクションを参照してください。
 
-### テストへのカスタム測定値の追加
+## テストへのカスタム測定値の追加 {#adding-custom-measures-to-tests}
 
 タグと同様に、現在アクティブなテストを使用して、テストにカスタムメジャーを追加できます。
 
 ```ruby
 require "datadog/ci"
 
-# テスト内
+# inside your test
 Datadog::CI.active_test&.set_metric("memory_allocations", 16)
-# テストは正常に続きます
+# test continues normally
 # ...
 ```
 
-カスタムメジャーの詳細については、[カスタムメジャーの追加ガイド][3]を参照してください。
+カスタムメジャーの詳細については、[カスタムメジャーの追加ガイド][3] を参照してください。
 
-## 構成設定
-
-以下は、`Datadog.configure` ブロックを使用するか、環境変数を使用するコードで、Test Visibility ライブラリで使用できる最も重要なコンフィギュレーション設定のリストです。
-
-`service`
-: テスト中のサービスまたはライブラリの名前。<br/>
-**環境変数**: `DD_SERVICE`<br/>
-**デフォルト**: `$PROGRAM_NAME`<br/>
-**例**: `my-ruby-app`
-
-`env`
-: テストが実行されている環境の名前。<br/>
-**環境変数**: `DD_ENV`<br/>
-**デフォルト**: `none`<br/>
-**例**: `local`、`ci`
-
-`service` と `env` の予約タグの詳細については、[統合サービスタグ付け][4]を参照してください。
-
-次の環境変数を使用して、Datadog Agent の場所を構成できます。
-
-`DD_TRACE_AGENT_URL`
-: `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
-**デフォルト**: `http://localhost:8126`
-
-他のすべての [Datadog トレーサーコンフィギュレーション][5]オプションも使用できます。
-
-## 追加のインスツルメンテーションの使用
+## 追加のインスツルメンテーションの使用{#using-additional-instrumentation}
 
 データベース操作やその他の外部呼び出しに費やされた時間を含む、テストに関する詳細なトレース情報を取得すると便利です。次のフレームグラフを参照してください。
 
-{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Redis でインスツルメンテーションされたテストトレース" >}}
+{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Redis インスツルメンテーションを使用したテストトレース" >}}
 
-これを実現するには、`configure` ブロックで追加のインスツルメンテーションを構成します。
-
-```ruby
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    #  ... ci 構成とインスツルメンテーションをここに ...
-    c.tracing.instrument :redis
-    c.tracing.instrument :pg
-    # ... Datadog gem がサポートするその他のインスツルメンテーション ...
-  end
-end
-```
-
-または、`test_helper/spec_helper` で自動インスツルメンテーションを有効にすることもできます。
+`test_helper/spec_helper` に以下の行を追加することで、自動 APM インスツルメンテーションを有効にできます。
 
 ```ruby
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-**注**: CI モードでは、これらのトレースは CI Visibility に送信され、Datadog APM には**表示されません**。
+**注**: CI モードでは、これらのトレースは Test Optimization に送信され、Datadog APM には**表示されません**。
 
-利用可能なインスツルメンテーション方法の全リストについては、[トレースドキュメント][6]を参照してください。
+利用可能なインスツルメンテーション方法の全リストについては、[トレースドキュメント][6] を参照してください。
 
-## Webmock/VCR
-
-[Webmock][7] と [VCR][9] は、テスト実行時に HTTP リクエストをスタブ化する人気の高い Ruby ライブラリです。デフォルトでは、HTTP コールでトレースが Datadog に送信されるため、datadog-ci と併用時には失敗します。
-
-Datadog バックエンドへの HTTP 接続を許可するには、Webmock と VCR を適切に構成する必要があります。
-
-```ruby
-# Webmock
-# エージェントレスモードを使用している場合:
-WebMock.disable_net_connect!(:allow => /datadoghq/)
-
-# ローカルで実行している Agent を使用している場合:
-WebMock.disable_net_connect!(:allow_localhost => true)
-
-# または、より詳細な設定を行うには、Agent URL を設定します。例:
-WebMock.disable_net_connect!(:allow => "localhost:8126")
-
-# VCR
-VCR.configure do |config|
-  # ... your usual configuration here ...
-
-  # Agent を使用している場合
-  config.ignore_hosts "127.0.0.1", "localhost"
-
-  # エージェントレスモードを使用している場合
-  config.ignore_request do |request|
-    # datadoghq ホストへのすべてのリクエストを無視します
-    request.uri =~ /datadoghq/
-  end
-end
-```
-
-## Git のメタデータを収集する
+## Git のメタデータを収集する{#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
-## 手動テスト API の使用
+## サポート対象外のテストフレームワークに対するライブラリのパブリック API の使用{#using-librarys-public-api-for-unsupported-test-frameworks}
 
-RSpec、Minitest、または Cucumber を使用している場合は、**手動テスト API を使用しないでください**。CI Visibility は自動的にインスツルメンテーションを行い、テスト結果を Datadog に送信するためです。手動テスト API は、すでにサポートされているテストフレームワークと**互換性がありません**。
+RSpec、Minitest、または Cucumber を使用する場合、Test Optimization がそれらを自動的にインスツルメンテーションしてテスト結果を Datadog に送信するため、**手動テスト API は使用しないでください**。手動テスト API は、すでにサポートされているテストフレームワークと**互換性がありません**。
 
-サポートされていないテストフレームワークを使用している場合や、異なるテストメカニズムを使用している場合のみ、手動テスト API を使用してください。
-完全な公開 API ドキュメントは、[YARD サイト][8]で入手できます。
+サポート対象外のテストフレームワークを使用する場合や、別のテストメカニズムを持っている場合のみ、手動テスト API を使用してください。
+完全なパブリック API ドキュメントは [YARD サイト][8] にあります。
 
-### ドメインモデル
+### ドメインモデル{#domain-model}
 
 この API は、テストセッション、テストモジュール、テストスイート、テストの 4 つの概念に基づいています。
 
-#### テストセッション
+#### テストセッション{#test-session}
 
 テストセッションはテストコマンドの実行を表します。
 
-テストセッションを開始するには、`Datadog::CI.start_test_session` を呼び出し、Datadog サービスとタグ (使用しているテストフレームワークなど) を渡します。
+テストセッションを開始するには、`Datadog::CI.start_test_session` を呼び出し、Datadog サービスとタグ (使用している
+テストフレームワークなど) を渡します。
 
-すべてのテストが終了したら、`Datadog::CI::TestSession#finish` を呼び出してセッションを終了し、セッションのトレースをバックエンドに送信します。
+すべてのテストが終了したら、`Datadog::CI::TestSession#finish` を呼び出します。これによりセッションが閉じられ、セッションのトレースが
+バックエンドに送信されます。
 
-#### テストモジュール
+#### テストモジュール {#test-module}
 
-テストモジュールは、セッション内のより小さな作業単位を表します。サポートされているテストフレームワークでは、テストモジュールは常にテストセッションと同じです。お客様のユースケースでは、コンポーネント化されたアプリケーション内のパッケージに相当する可能性があります。
+テストモジュールは、セッション内のより小さな作業単位を表します。
+サポート対象テストフレームワークの場合、テストモジュールは常にテストセッションと同じです。
+お客様のユースケースでは、これはコンポーネント化されたアプリケーションのパッケージに相当する場合があります。
 
 テストモジュールを開始するには、`Datadog::CI.start_test_module` を呼び出し、モジュール名を渡します。
 
 モジュールの実行が終了したら、`Datadog::CI::TestModule#finish` を呼び出します。
 
-#### テストスイート
+#### テストスイート{#test-suite}
 
-テストスイートは、類似した機能をテストする一連のテストで構成されます。通常、1 つのスイートはテストが定義された 1 つのファイルに対応します。
+テストスイートは、類似した機能をテストする一連のテストで構成されます。
+通常、1 つのスイートは、テストが定義されている 1 つのファイルに対応します。
 
-`Datadog::CI#start_test_suite` を呼び出してテストスイートの名前を渡すことで、テストスイートを作成します。
+`Datadog::CI#start_test_suite` を呼び出し、テストスイート名を渡すことで、テストスイートを作成します。
 
-スイートの中の関連するテストがすべて実行を終えたら `Datadog::CI::TestSuite#finish` を呼び出します。
+テストスイート内の関連するテストがすべて実行を完了したら `Datadog::CI::TestSuite#finish` を呼び出します。
 
-#### テスト
+#### テスト{#test}
 
 テストは、テストスイートの一部として実行される単一のテストケースを表します。
-通常、テストのロジックを含む 1 つのメソッドに対応します。
+通常、これはテストロジックを含むメソッドに対応します。
 
-`Datadog::CI#start_test` または `Datadog::CI.trace_test` を呼び出して、テストの名前とテストスイートの名前を渡すことで、スイート内のテストを作成します。テストスイートの名前は、前のステップで開始したテストスイートの名前と一致させる必要があります。
+`Datadog::CI#start_test` または `Datadog::CI.trace_test` を呼び出し、テスト名とテストスイート名を渡すことで、スイート内にテストを作成します。テストスイート名は、前のステップで開始されたテストスイートの名前と同じである必要があります。
 
 テストの実行が終了したら、`Datadog::CI::Test#finish` を呼び出します。
 
-### コード例
+### コード例{#code-example}
 
 次のコードは、API の使用例を表しています。
 
@@ -427,7 +282,32 @@ Datadog::CI.active_test_session&.passed!
 Datadog::CI.active_test_session&.finish
 ```
 
-## 参考資料
+## ベストプラクティス{#best-practices}
+
+### テストセッション名 `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
+
+`DD_TEST_SESSION_NAME` を使用してテストセッションの名前と関連するテストグループを定義します。このタグの値の例は次のとおりです。
+
+-   `unit-tests`
+-   `integration-tests`
+-   `smoke-tests`
+-   `flaky-tests`
+-   `ui-tests`
+-   `backend-tests`
+
+`DD_TEST_SESSION_NAME` が指定されていない場合、デフォルトで CI ジョブ名とテストコマンドになります。CI ジョブ名が利用できない場合は、テストコマンドが使用されます。
+
+異なるテストグループを区別しやすくするため、テストセッション名はリポジトリ内で一意でなければなりません。
+
+#### `DD_TEST_SESSION_NAME` を使用するタイミング{#when-to-use-dd-test-session-name}
+
+Datadog がテストセッション間の対応関係を確立するためにチェックするパラメーターのセットがあります。テストの実行に使用されるテストコマンドもその 1 つです。テストコマンドに、実行するファイルのリストなど、実行ごとに変化する文字列が含まれている場合、Datadog はそれらのセッションを互いに無関係なものとみなします。たとえば、以下のような場合です。
+
+-   `bundle exec rspec my_spec.rb my_other_spec.rb`
+
+テストコマンドが実行ごとに異なる場合、Datadog は `DD_TEST_SESSION_NAME` を使用することを推奨します。
+
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -439,3 +319,5 @@ Datadog::CI.active_test_session&.finish
 [7]: https://github.com/bblimke/webmock
 [8]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html
 [9]: https://github.com/vcr/vcr
+[10]: https://github.com/DataDog/datadog-ci-rb
+[11]: /ja/getting_started/site/

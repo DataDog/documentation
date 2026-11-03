@@ -12,6 +12,8 @@ further_reading:
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
+**Note**: If you use MariaDB, see [Setting Up MariaDB][13] instead.
+
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
@@ -24,10 +26,6 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
-
-Supported MariaDB versions
-: 10.5, 10.6, or 10.11 <br/><br/>
-Database Monitoring for MariaDB is supported with [known limitations][11].
 
 Supported Agent versions
 : 7.36.1+
@@ -465,5 +463,5 @@ If you have installed and configured the integrations and Agent as described and
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
-[11]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
 [12]: /database_monitoring/setup_mysql/rds?tab=mysql57#collecting-schemas
+[13]: /database_monitoring/setup_mariadb/

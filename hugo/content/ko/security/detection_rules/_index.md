@@ -19,151 +19,196 @@ further_reading:
   text: 불가능한 여행 탐지 규칙으로 의심스러운 로그인 활동 탐지하기
 products:
 - icon: siem
-  name: 클라우드 SIEM
+  name: Cloud SIEM
   url: /security/cloud_siem/
 - icon: cloud-security-management
-  name: 클라우드 보안 관리
+  name: Cloud Security
   url: /security/cloud_security_management/
 - icon: app-sec
-  name: 애플리케이션 보안 관리
+  name: App and API Protection
   url: /security/application_security/
+- icon: cloud-security-management
+  name: Workload Protection
+  url: /security/workload_protection/
 title: 탐지 규칙
 ---
-
 {{< product-availability >}}
 
-탐지 규칙은 수집된 로그와 클라우드 구성 모두에 적용되는 조건 논리를 정의합니다. 주어진 시간 내에 규칙에 정의된 사례 최소 1개와 일치하는 경우 보안 신호가 생성됩니다. [Signals Explorer][16]에서 이와 같은 신호를 확인할 수 있습니다.
+탐지 규칙은 모든 수집된 로그와 클라우드 구성에 적용되는 조건부 논리를 정의합니다. 규칙에 정의된 케이스 중 하나 이상이 지정된 기간 동안 일치하면 보안 신호가 생성됩니다. [Signals Explorer][1]에서 이러한 신호를 확인할 수 있습니다.
 
-## 기본 탐지 규칙
+## 기본 탐지 규칙 {#out-of-the-box-detection-rules}
 
-Datadog에는 [기본 탐지 규칙][1] 기능이 있어 공격 기술과 잠재적 구성 오류를 잡아낼 수 있습니다. 새로운 탐지 규칙이 릴리즈되면 자동으로 각 계정에 적용되기 때문에 내 구성에 따라 Application Security Management 라이브러리와 에이전트에서 가져올 수 있습니다.
+Datadog은 공격자 기법과 잠재적인 구성 오류를 표시하는 [기본 탐지 규칙][2]을 제공합니다. 새로운 탐지 규칙이 릴리스되면, 구성에 따라 계정, App and API Protection 라이브러리, 그리고 Agent로 자동으로 가져옵니다.
 
 기본 규칙은 다음 보안 제품에서 사용할 수 있습니다.
 
-- [Cloud SIEM][2]에서는 로그 탐지를 사용해 수집된 로그를 실시간으로 분석합니다.
-- 클라우드 보안 관리(CSM):
-    - [CSM Misconfigurations][4]에서는 클라우드 구성과 인프라스트럭처 구성 탐지 규칙을 사용해 클라우드 환경 상태를 스캔합니다.
-    - [CSM Threats][5]에서는 Datadog 에이전트와 탐지 규칙을 사용해 적극적으로 시스템 활동을 모니터링하고 평가합니다.
-    - [CSM Identity Risks][14]에서는 탐지 규칙을 사용해 클라우드 인프라스트럭처에 있는 IAM 기반 위험을 탐지합니다.
-- [Application Security Management][6](ASM)에서는 Datadog [APM][7], [Datadog 에이전트][8], 탐지 규칙을 활용해 애플리케이션 환경의 위협을 탐지합니다.
+- [Cloud SIEM][3]에서는 로그 탐지를 사용해 수집된 로그를 실시간으로 분석합니다.
+- Cloud Security:
+    - [Cloud Security Misconfigurations][4]에서는 클라우드 구성과 인프라 구성 탐지 규칙을 사용해 클라우드 환경 상태를 스캔합니다.
+    - [Cloud Security Identity Risks][6]에서는 탐지 규칙을 사용해 클라우드 인프라에 있는 IAM 기반 위험을 탐지합니다.
+- [Workload Protection][5]에서는 Datadog Agent와 탐지 규칙을 사용해 적극적으로 시스템 활동을 모니터링하고 평가합니다.
+- [App and API Protection][7](AAP)에서는 Datadog [APM][8], [Datadog Agent][9], 탐지 규칙을 활용해 애플리케이션 환경의 위협을 탐지합니다.
 
-## 베타 탐지 규칙
+## MITRE ATT&CK 맵 {#mitre-attck-map}
 
-Datadog의 보안 연구팀에서 새 OOTB 보안 탐지 규칙을 지속적으로 추가하고 있습니다. 이는 새 통합이나 기능을 릴리즈할 때 탐지가 잘 되도록 하기 위함입니다. 다만 대규모 대상에 적용할 수 있는 일반 규칙을 만드는 데는 사례를 관찰하는 시간이 필요합니다. 이 시간 동안 Datadog 보안 연구팀에서 표준에 맞지 않는 탐지 규칙을 재정비하거나 삭제할 수 있습니다.
+{{< product-availability names="Cloud SIEM,App and API Protection,Workload Protection" >}}
 
-## 커스텀 탐지 규칙
+MITRE ATT&CK는 조직이 사이버 공격자의 운영 방식을 이해하도록 돕는 프레임워크입니다. 다음 항목을 매핑합니다.
 
-내 환경이나 워크로드에 맞게 규칙을 사용자 지정해야 할 경우가 있습니다. 예를 들어 ASM을 사용할 경우, 내 사업이 운영되는 위치가 아닌 곳에서 일어나는 사용자 활동을 탐지하는 규칙이 필요할 수 있습니다.
+- **전술(Tactics):** 공격의 '이유'입니다. 이는 초기 액세스 획득, 악성 코드 실행, 데이터 탈취와 같은 상위 수준의 목표를 의미합니다.
+- **기법(Techniques):** 공격의 '방법'입니다. 이는 시스템에 침입하기 위해 피싱을 사용하거나 소프트웨어의 취약점을 악용하는 등 공격자가 전술을 달성하기 위해 취하는 구체적인 행동입니다.
 
-[커스텀 규칙을 생성](#create-detection-rules)하려면 기본 규칙을 복제해 편집하거나, 내 규칙을 처음부터 만들 수 있습니다.
+MITRE ATT&CK는 전술과 기법을 매핑함으로써 보안 팀에게 위협을 소통하고 방어 태세를 더 잘 갖출 수 있는 공통 언어를 제공합니다.
 
-## 탐지 규칙 검색 및 필터링
+MITRE ATT&CK 맵을 사용하려면 다음을 수행하세요.
 
-Datadog의 기본 및 커스텀 탐지 규칙을 보려면 [**보안 설정**][15] 페이지로 이동하세요. 규칙은 각 제품(애플리케이션 보안, 클라우드 보안 관리, 클라우드 SIEM)별로 별도의 페이지에 나열되어 있습니다.
+1. [SIEM][16] 또는 [Workload Protection][17]에서 탐지 규칙을 엽니다.
+2. {{< ui >}}MITRE ATT&CK map{{< /ui >}}을 선택합니다.
+3. 필터 <i class="icon-filter"></i>에서 하나 이상의 제품을 선택합니다.
+4. 맵에서 다음 사항을 검토합니다.
+   - 커버리지 평가: 어떤 공격 기법이 잘 커버되고 어떤 기법이 모니터링이 부족한지 확인합니다.
+   - 규칙 생성 우선순위 지정: 커버리지가 낮거나 없는 기법에 대한 탐지 규칙 생성에 집중합니다.
+   - 규칙 관리 간소화: 최신 위협 인텔리전스와 일치하도록 탐지 규칙을 관리하고 업데이트합니다.
+MITRE ATT&CK 맵은 SIEM 또는 Workload Protection에서 사용할 수 있지만, 필터에서 Application and API Protection을 선택할 수도 있습니다. Application and API Protection은 포괄적인 보안 커버리지를 위해 MITRE ATT&CK 맵에 포함되어 있습니다.
 
-검색 상자와 패싯에서 값을 이용해 규칙을 검색하고 필터링할 수 있습니다. 예를 들어 원하는 규칙 유형만 표시하려면 규칙 유형 위에 마우스 커서를 올리고 `only`를 선택하세요. 또 들어오는 문제를 조사하고 심사하고자 할 때 `source`와 `severity`와 같은 패싯별로 필터링할 수 있습니다.
+## 베타 탐지 규칙 {#beta-detection-rules}
 
-{{< img src="security/default_detection_rules.png" alt="기본값 및 커스텀 Cloud SIEM 탐지 규칙을 보여주는 구성 페이지" width="100%">}}
+Datadog의 Security Research 팀은 새로운 기본 보안 탐지 규칙을 지속적으로 추가합니다. 통합 또는 기타 새로운 기능의 릴리스와 함께 고품질 탐지를 제공하는 것이 목표이지만, 규칙을 일반적으로 적용하기 전에 대규모 탐지 성능을 관찰해야 하는 경우가 많습니다. 이를 통해 Datadog의 Security Research 팀은 당사 표준을 충족하지 않는 탐지 기회를 개선하거나 폐기할 시간을 확보할 수 있습니다.
 
-## 탐지 규칙 생성
+## 사용자 지정 탐지 규칙 {#custom-detection-rules}
 
-커스텀 탐지 규칙을 생성하려면 Detection Rules 페이지 우측 상단 모서리에 있는 **New Rule** 버튼을 클릭하세요. 또는 [기존의 기본 규칙 또는 커스텀 규칙을 복제](#clone-a-rule)하여 템플릿으로 사용할 수도 있습니다.
+환경이나 워크로드에 따라 규칙을 사용자 지정해야 하는 상황이 있을 수 있습니다. 예를 들어 AAP를 사용하는 경우, 비즈니스가 운영되지 않는 지리적 위치에서 민감한 작업을 수행하는 사용자를 탐지하는 탐지 규칙을 사용자 지정할 수 있습니다.
+
+[사용자 지정 탐지 규칙을 생성](#create-detection-rules)하려면 기본 규칙을 복제하여 편집하거나, 자신의 규칙을 처음부터 만들 수 있습니다.
+
+## 탐지 규칙 검색 및 필터링 {#search-and-filter-detection-rules}
+
+Datadog에서 기본 및 사용자 지정 탐지 규칙을 확인하려면 [{{< ui >}}Security Settings{{< /ui >}}][10] 페이지로 이동하세요. 규칙은 각 제품(App and API Protection, Cloud Security, Cloud SIEM)별로 별도의 페이지에 나열됩니다.
+
+규칙을 검색하고 필터링하려면 검색 상자와 패싯을 사용하여 값별로 쿼리하세요. 예를 들어, 특정 규칙 유형에 대한 규칙만 표시하려면 규칙 유형 위로 마우스를 가져가서 `only`를 선택합니다. 들어오는 문제를 조사하고 분류할 때 `source` 및 `severity`와 같은 패싯별로 필터링할 수도 있습니다.
+
+{{< img src="security/default_detection_rules.png" alt="구성 페이지에서 기본 및 사용자 지정 Cloud SIEM 탐지 규칙을 보여줍니다." width="100%">}}
+
+## 탐지 규칙 생성 {#create-detection-rules}
+
+사용자 지정 탐지 규칙을 생성하려면 탐지 규칙 페이지 오른쪽 상단 모서리에 있는 {{< ui >}}New Rule{{< /ui >}} 버튼을 클릭하세요. 또한 [기존의 기본 또는 사용자 지정 규칙을 복제](#clone-a-rule)하여 템플릿으로 사용할 수 있습니다.
 
 자세한 지침을 보려면 다음을 참고하세요.
 
-- [Cloud SIEM][3]
-- [ASM][11]
-- [CSM Misconfigurations][12]
-- [CSM Threats][13]
+- [Cloud SIEM][11]
+- [AAP][12]
+- [Cloud Security Misconfigurations][13]
+- [Workload Protection][14]
 
-## 탐지 규칙 관리
+## 탐지 규칙 관리 {#manage-detection-rules}
 
-### 규칙 활성화 또는 비활성화하기
+Datadog의 [SIEM][16] 또는 [Workload Protection][17] 페이지에서 탐지 규칙을 관리할 수 있습니다. 이 지침은 해당 페이지에서 이러한 작업을 수행하는 방법을 설명하지만, 탐지 규칙을 클릭하여 사이드 패널에서 열 때도 이러한 옵션을 사용할 수 있습니다.
+
+### 규칙 활성화 또는 비활성화하기 {#enable-or-disable-rules}
 
 규칙을 활성화 또는 비활성화하려면 규칙 이름 오른쪽으로 스위치를 토글하세요.
 
-규칙을 대량으로 활성화하거나 비활성화할 수도 있습니다.
+규칙을 일괄 활성화하거나 비활성화할 수도 있습니다.
 
-1. **Select Rules**를 클릭합니다.
-1. 활성화하거나 비활성화하고자 하는 규칙을 선택하세요.
-1. **Edit Rules** 드롭다운 메뉴를 클릭하세요.
-1. **Enable Rules** 또는 **Disable Rules**를 선택하세요.
+1. {{< ui >}}Select Rules{{< /ui >}}를 클릭합니다.
+1. 활성화하거나 비활성화하고자 하는 규칙을 선택합니다.
+1. {{< ui >}}Bulk Actions{{< /ui >}} 드롭다운 메뉴를 클릭합니다.
+1. {{< ui >}}Enable Rules{{< /ui >}} 또는 {{< ui >}}Disable Rules{{< /ui >}}를 선택합니다.
 
-### 규칙 편집
+### 규칙 편집 {#edit-a-rule}
 
-기본 탐지 규칙 기능에서는 제거 쿼리만 추가하고 편집할 수 있습니다. 쿼리를 업데이트하거나, 트리거를 조정하거나, 알림을 관리하려면 [기본 규칙을 복제](#clone-a-rule)하고 이를 템플릿으로 사용해 커스텀 규칙을 만들 수 있습니다. 그 후 [기본 규칙](#enable-or-disable-rules)을 비활성화하면 됩니다.
+기본 및 사용자 지정 탐지 규칙은 편집할 수 있습니다. 원본 규칙을 직접 편집하는 대신 보존하고 싶다면 [규칙을 복제](#clone-a-rule)하고, 복제된 규칙을 변경한 다음 [원본 규칙을 비활성화](#enable-or-disable-rules)할 수 있습니다.
 
-- 기본 규칙을 편집하려면 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Edit default rule**을 선택하세요.
-- 커스텀 규칙을 편집하려면 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Edit rule**을 선택하세요.
+규칙을 편집하려면 규칙에서 세로 점 세 개 메뉴를 클릭한 후, 규칙 유형에 따라 {{< ui >}}Edit default rule{{< /ui >}} 또는 {{< ui >}}Edit rule{{< /ui >}}을 선택하세요.
 
-### 규칙 복제
+### 규칙 복제 {#clone-a-rule}
 
-규칙을 복제하려면 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Clone rule**을 선택하세요.
+규칙을 복제하려면 규칙에서 세로 점 세 개 메뉴를 클릭한 후, {{< ui >}}Clone rule{{< /ui >}}을 선택하세요.
 
-기존 규칙을 복제하여 설정을 약간만 수정해 다른 영역을 탐지에 포함시키고 싶을 때는 규칙 복제 기능이 유용합니다. 예를 들어 로그 탐지 규칙을 복제해 **Threshold**에서 **Anomaly**로 수정하면, 동일한 쿼리와 트리거를 사용해 위협 탐지에 새로운 차원을 추가할 수 있습니다. 
+기존 규칙을 복제하고 설정을 약간 수정하여 다른 탐지 영역을 다루려는 경우 규칙 복제가 유용합니다. 예를 들어, 로그 탐지 규칙을 복제하고 {{< ui >}}Threshold{{< /ui >}}에서 {{< ui >}}Anomaly{{< /ui >}}로 수정하여 동일한 쿼리와 트리거를 사용하여 위협 탐지에 새로운 차원을 추가할 수 있습니다.
 
-### 규칙 삭제
+### 규칙 삭제 {#delete-a-rule}
 
-커스텀 규칙을 삭제하려면 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Delete rule**를 선택하세요.
+규칙을 삭제하려면 규칙에서 세로 점 세 개 메뉴를 클릭한 후, {{< ui >}}Delete rule{{< /ui >}}을 선택하세요.
 
-**참고**: 커스텀 규칙만 삭제할 수 있습니다. 기본 규칙을 삭제하려면 [비활성화](#enable-or-disable-rules)해야 합니다.
+규칙을 일괄 삭제할 수도 있습니다.
 
-### 편집 권한 제한하기
+1. {{< ui >}}Select Rules{{< /ui >}}를 클릭합니다.
+1. 삭제할 규칙을 선택합니다.
+1. {{< ui >}}Bulk Actions{{< /ui >}} 드롭다운 메뉴를 클릭합니다.
+1.  {{< ui >}}Delete Rules{{< /ui >}}를 선택합니다.
 
-기본적으로 사용자 모두가 탐지 규칙에 액세스할 수 있습니다. 세부 액세스 컨트롤을 사용해 단일 규칙을 편집하는 [역할][10]을 제한하려면 다음을 따르세요.
+### 규칙의 버전 기록 보기 {#see-the-version-history-for-a-rule}
 
-1. 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Permissions**을 선택하세요.
-1. **Restrict Access**를 클릭하세요. 이 대화 상자는 조직 구성원이 기본적으로 **Viewer** 액세스를 갖고 있는지를 업데이트하고 보여줍니다.
-1. 드롭다운 메뉴를 사용해 역할, 팀, 사용자를 하나 이상을 선택해 보안 규칙을 편집할 수 있습니다.
-1. **추가**를 클릭합니다.
-1. **저장**을 클릭합니다.
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="GitHub OAuth 액세스 토큰 손상에 대한 버전 기록 표시" style="width:80%;" >}}
 
-**참고**: 규칙에 편집 액세스를 유지하려면 저장하기 전에 구성원에게 역할이 최소 한 개가 있어야 합니다.
+규칙 버전 기록을 사용하여 다음을 수행할 수 있습니다.
+- 탐지 규칙의 이전 버전을 확인하고 시간 경과에 따른 변경 사항을 파악합니다.
+- 협업 개선을 위해 누가 변경했는지 확인합니다.
+- 버전 간 차이점을 비교하여 수정 사항과 변경의 영향을 분석합니다.
 
-규칙 액세스를 복원하려면 다음을 따르세요.
+규칙의 버전 기록을 보려면 다음을 수행합니다.
+1. [Security Settings][15] 페이지로 이동합니다. 왼쪽 탐색 패널에서 다음을 수행합니다.
+    - AAP의 경우: {{< ui >}}App and API Protection{{< /ui >}}을 클릭한 후, {{< ui >}}Detection Rules{{< /ui >}}를 클릭합니다.
+    - Cloud Security의 경우: {{< ui >}}Cloud Security{{< /ui >}}를 클릭한 후, {{< ui >}}Threat Detection Rules{{< /ui >}}를 클릭합니다.
+    - Cloud SIEM의 경우: {{< ui >}}Cloud SIEM{{< /ui >}}을 클릭한 후, {{< ui >}}Detection Rules{{< /ui >}}를 클릭합니다.
+1. 관심 있는 규칙을 클릭한 후, {{< ui >}}Edit rule{{< /ui >}}을 클릭합니다.
+1. 규칙 편집기에서 {{< ui >}}Version History{{< /ui >}}를 클릭하여 과거 변경 사항을 확인합니다.
+   - 특정 버전을 클릭하여 어떤 변경 사항이 있었는지 확인합니다.
+   - {{< ui >}}Open Version Comparison{{< /ui >}}을 클릭하여 버전 간 변경 사항을 확인한 후, 비교하려는 두 버전을 선택합니다. 동일한 패널에서 비교하여 보려면 {{< ui >}}Unified{{< /ui >}}를 클릭합니다.
+     - 빨간색으로 강조 표시된 데이터는 수정되거나 제거된 데이터를 나타냅니다.
+     - 녹색으로 강조 표시된 데이터는 추가된 데이터를 나타냅니다.
 
-1. 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Permissions**을 선택하세요.
-1. **Restore Full Access**를 클릭하세요.
-1. **저장**을 클릭합니다.
+### 편집 권한 제한하기 {#restrict-edit-permissions}
 
-### 생성된 신호 보기
+{{% security-products/detection-rules-granular-access %}}
 
-[Signals Explorer][16]에서 규칙 보안 신호를 보려면 세로 점 세 개 메뉴를 클릭하고 **View generated signals**를 선택하세요. 규칙별로 여러 소스에서 신호의 상호 관련성을 파악하거나 규칙 감사를 완료하고자 할 때 유용합니다.
+### 생성된 신호 보기 {#view-generated-signals}
 
-### 규칙을 JSON으로 내보내기
+[Signals Explorer][1]에서 규칙에 대한 보안 신호를 확인하려면, 세로 점 3개 메뉴를 클릭한 후 {{< ui >}}View generated signals{{< /ui >}}를 선택하세요. 이는 규칙별로 여러 소스에 걸쳐 신호를 상관 분석하거나 규칙 감사를 완료할 때 유용합니다.
 
-규칙 사본을 JSON으로 내보내려면 규칙에서 세로 점 세 개 메뉴를 클릭하고 **Export as JSON**을 선택하세요.
+### 규칙 내보내기 {#export-a-rule}
 
-## 사용되지 않는 규칙
+규칙 사본을 내보내려면 먼저 규칙을 클릭하여 사이드 패널에서 엽니다. {{< ui >}}Export{{< /ui >}}를 클릭한 다음 {{< ui >}}Export rule to JSON{{< /ui >}} 또는 {{< ui >}}Export rule to Terraform{{< /ui >}}을 선택하세요.
 
-모든 탐지 규칙은 정규 감사를 통해 신호 충실도가 높게 유지됩니다. 더 이상 사용되지 않는 규칙은 향상된 규칙으로 대체됩니다.
+규칙을 일괄 내보낼 수도 있습니다.
 
-사용되지 않는 규칙은 다음 프로세스를 통해 결정됩니다.
+1. {{< ui >}}Select Rules{{< /ui >}}를 클릭합니다.
+1. 내보내려는 규칙을 선택합니다.
+1. {{< ui >}}Bulk Actions{{< /ui >}} 드롭다운 메뉴를 클릭합니다.
+1. {{< ui >}}Export to JSON{{< /ui >}} 또는 {{< ui >}}Export to Terraform{{< /ui >}}을 선택합니다.
 
-1. 규칙에 사용되지 않는 날짜 경고가 있습니다. UI의 다음 위치에서 이 경고가 표시됩니다.
-    - 신호 사이드 패널의 **Rule Details > Playbook** 섹션
-    - Misconfiguration 사이드 패널(CSM Misconfigurations에서만)
-    - 특정 규칙의 경우 [규칙 편집기][15]
-2. 규칙이 더 이상 사용되지 않는 경우, 15개월이 지나면 규칙이 삭제됩니다. 이는 신호 보존 기간이 15개월이기 때문입니다. 이 기간 동안 UI에서 [규칙을 복제](#clone-a-rule)하면 규칙을 재활성화할 수 있습니다.
-3. 규칙이 삭제된 후에는 복제하여 재활성화할 수 없습니다.
+## 규칙 사용 중단 {#rule-deprecation}
 
-## 참고 자료
+높은 충실도의 신호 품질을 유지하기 위해 모든 탐지 규칙에 대해 정기적인 감사가 수행됩니다. 사용 중단된 규칙은 개선된 규칙으로 대체됩니다.
+
+규칙 사용 중단 프로세스는 다음과 같습니다.
+
+- 규칙에 사용 중단 날짜가 포함된 경고가 표시됩니다. UI에서 경고는 다음 위치에 표시됩니다.
+    - 신호 사이드 패널의 {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} 섹션
+    - Misconfigurations 사이드 패널(Cloud Security Misconfigurations만 해당)
+    - 해당 특정 규칙에 대한 [규칙 편집기][10]
+- 규칙이 사용 중단된 후, 규칙이 삭제되기까지 15개월의 기간이 있습니다. 이는 15개월의 신호 보존 기간 때문입니다. 이 기간 동안 UI에서 [규칙을 복제](#clone-a-rule)하여 규칙을 재활성화할 수 있습니다.
+- 규칙이 삭제된 후에는 복제하여 재활성화할 수 없습니다.
+
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/security/default_rules/
-[2]: /ko/security/cloud_siem/
-[3]: /ko/security/cloud_siem/log_detection_rules/
+[1]: https://app.datadoghq.com/security
+[2]: /ko/security/default_rules/
+[3]: /ko/security/cloud_siem/
 [4]: /ko/security/cloud_security_management/misconfigurations/
-[5]: /ko/security/threats/
-[6]: /ko/security/application_security/
-[7]: /ko/tracing/
-[8]: /ko/agent/
-[9]: https://app.datadoghq.com/security/configuration/rules
-[10]: /ko/account_management/rbac/
-[11]: /ko/security/application_security/threats/custom_rules/
-[12]: /ko/security/cloud_security_management/misconfigurations/custom_rules
-[13]: /ko/security/threats/workload_security_rules?tab=host#create-custom-rules
-[14]: /ko/security/cloud_security_management/identity_risks/
+[5]: /ko/security/workload_protection/
+[6]: /ko/security/cloud_security_management/identity_risks/
+[7]: /ko/security/application_security/
+[8]: /ko/tracing/
+[9]: /ko/agent/
+[10]: https://app.datadoghq.com/security/configuration/
+[11]: /ko/security/cloud_siem/detect_and_monitor/custom_detection_rules/
+[12]: /ko/security/application_security/policies/custom_rules/
+[13]: /ko/security/cloud_security_management/misconfigurations/custom_rules
+[14]: /ko/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-a-custom-detection-rule
 [15]: https://app.datadoghq.com/security/configuration/
-[16]: https://app.datadoghq.com/security
+[16]: https://app.datadoghq.com/security/siem/rules
+[17]: https://app.datadoghq.com/security/workload-protection/detection-rules

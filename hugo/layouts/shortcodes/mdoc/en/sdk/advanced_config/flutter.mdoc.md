@@ -208,6 +208,44 @@ To enable Datadog [distributed tracing][13], you must set the `DatadogConfigurat
 
 - `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
+### Add custom attributes to automatically tracked resources
+
+For resources tracked by `datadog_tracking_http_client`, implement `DatadogTrackingHttpClientListener` to attach custom attributes to individual RUM resource events. Pass the listener to `enableHttpTracking(clientListener: ...)` before initializing the SDK.
+
+The `requestStarted` and `responseFinished` callbacks receive the same mutable `userAttributes` map for each resource. Add or update attributes in either callback. Only the attributes remaining after `responseFinished` are sent to Datadog for that resource.
+
+```dart
+import 'dart:io';
+
+import 'package:datadog_tracking_http_client/datadog_tracking_http_client.dart';
+
+class ResourceAttributesListener implements DatadogTrackingHttpClientListener {
+  @override
+  void requestStarted({
+    required Object resourceKey,
+    required HttpClientRequest request,
+    required Map<String, Object?> userAttributes,
+  }) {
+    userAttributes['request_host'] = request.uri.host;
+  }
+
+  @override
+  void responseFinished({
+    required Object resourceKey,
+    required HttpClientResponse response,
+    required Map<String, Object?> userAttributes,
+    Object? error,
+  }) {
+    userAttributes['response_status'] = response.statusCode;
+  }
+}
+
+// Add the listener to your configuration before initializing the SDK.
+configuration.enableHttpTracking(
+  clientListener: ResourceAttributesListener(),
+);
+```
+
 ### Capture resource headers
 
 When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
@@ -310,6 +348,8 @@ In addition to tracking resources automatically using the [Datadog Tracking HTTP
 - `DdRum.stopResourceWithError`
 - `DdRum.stopResourceWithErrorInfo`
 
+To attach custom attributes to an individual resource, pass an attributes map to `startResource` or `stopResource`. The attributes are optional positional arguments. For `stopResource`, pass the resource size, or `null` if it is unknown, before the attributes map.
+
 For example:
 
 ```dart
@@ -319,6 +359,7 @@ DatadogSdk.instance.rum?.startResource(
     "resource-key",
     RumHttpMethod.get,
     url,
+    {'image_source': 'catalog'},
 );
 
 // Later
@@ -326,7 +367,9 @@ DatadogSdk.instance.rum?.startResource(
 DatadogSdk.instance.rum?.stopResource(
     "resource-key",
     200,
-    RumResourceType.image
+    RumResourceType.image,
+    null,
+    {'cache_hit': false},
 );
 ```
 
@@ -352,6 +395,8 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 * To add or update an attribute, use `DdRum.addAttribute`.
 * To remove the key, use `DdRum.removeAttribute`.
+
+To attach attributes to an individual resource event, see [Add custom attributes to automatically tracked resources][23] or [Track custom resources][24].
 
 ### Track user sessions
 
@@ -391,6 +436,57 @@ DatadogSdk.instance.addUserExtraInfo({
  'attribute_2': null,
 });
 ```
+
+### Track user accounts
+
+If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
+
+* Analyze performance and errors by account
+* Know which accounts are the most impacted by an issue
+* Prioritize fixes based on account value
+
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
+
+| Attribute      | Type   | Description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| `account.id`   | String | (Required) Unique account identifier.                       |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
+
+To identify accounts, use `DatadogSdk.setAccountInfo`.
+
+For example:
+
+```dart
+DatadogSdk.instance.setAccountInfo(
+  id: 'acct-1234',
+  name: 'Acme Corp',
+  extraInfo: {'tier': 'enterprise'},
+);
+```
+
+Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
+
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists has no effect. To remove an existing attribute, set it to `null`.
+
+```dart
+DatadogSdk.instance.addAccountExtraInfo({
+  'seats': 42,
+});
+```
+
+To clear the account (for example, when the user signs out), use `clearAccountInfo`.
+
+```dart
+DatadogSdk.instance.clearAccountInfo();
+```
+
+Account information is attached to RUM events, logs, and traces.
+
+{% alert level="info" %}
+Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `DatadogRum.stopSession` or the view with `DatadogRum.stopView` before clearing.
+{% /alert %}
 
 ## Clear all data
 
@@ -529,3 +625,5 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[23]: #add-custom-attributes-to-automatically-tracked-resources
+[24]: #track-custom-resources

@@ -7,48 +7,48 @@ further_reading:
   text: Cómo funciona App and API Protection
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentación
-  text: Reglas de protección de aplicaciones y API predefinidas
+  text: Reglas de protección de aplicaciones y API listas para usar
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solucionar problemas con la protección de aplicaciones y API
-title: Configurar App and API Protection para Python en Kubernetes
+  text: Solución de problemas de protección de aplicaciones y API
+title: Configure App and API Protection para Python en Kubernetes
 type: multi-code-lang
 ---
 {{% app_and_api_protection_python_setup_options platform="kubernetes" %}}
 
 {{% app_and_api_protection_python_overview %}}
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
 - Clúster de Kubernetes
-- Aplicación Python en contenedor con Docker
-- kubectl configurado para acceder a tu clúster
+- Aplicación de Python en un contenedor de Docker
+- kubectl configurado para acceder a su clúster
 - Helm (recomendado para la instalación del Agent)
-- Tu clave de API Datadog 
-- Biblioteca de rastreo Python Datadog (consulta los [requisitos de la versión][1])
+- Su clave de API de Datadog
+- SDK de Python de Datadog (consulte los [requisitos de versión][1])
 
-## 1. Instalación del Datadog Agent
+## 1. Instale el Datadog Agent {#1-installing-the-datadog-agent}
 
-Instala el Datadog Agent siguiendo las [instrucciones de instalación de Kubernetes](/agent/?tab=cloud_and_container).
+Instale el Datadog Agent siguiendo las [instrucciones de configuración para Kubernetes](/agent/?tab=cloud_and_container).
 
-## 2. Activación de la monitorización de App and API Protection
+## 2. Habilite la supervisión de App and API Protection {#2-enabling-app-and-api-protection-monitoring}
 
 {{% app_and_api_protection_python_navigation_menu %}}
 {{% appsec-remote-config-activation %}}
 
-### Activación manual de la monitorización de App and API Protection
+### Habilite manualmente la supervisión de App and API Protection {#manually-enabling-app-and-api-protection-monitoring}
 
-Instala la biblioteca de rastreo Python Datadog utilizando un contenedor de inicialización o en el archivo Docker de tu aplicación:
+Instale el SDK de Python de Datadog usando un init container o en el Dockerfile de su aplicación:
 
 ```dockerfile
 RUN pip install ddtrace
 ```
 
-Configura y ejecuta tu servicio con Datadog:
+Configure y ejecute su servicio con Datadog:
 
-{{% collapse-content title="Rastreo APM activado" level="h4" %}}
+{{% collapse-content title="APM Tracing habilitado" level="h4" %}}
 
-Inicia tu aplicación Python con App and API Protection activado mediante variables de entorno:
+Inicie su aplicación de Python con App and API Protection habilitado mediante variables de entorno:
 
 ```yaml
 apiVersion: apps/v1
@@ -73,10 +73,10 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Rastreo APM desactivado" level="h4" %}}
-Para desactivar el rastreo APM mientras se mantiene App and API Protection activado, debes configurar la variable de rastreo APM como false.
+{{% collapse-content title="APM Tracing deshabilitado" level="h4" %}}
+Para deshabilitar APM Tracing mientras mantiene habilitada App and API Protection, debe establecer la variable de APM Tracing en false.
 
-Inicia tu aplicación Python con App and API Protection activado mediante variables de entorno:
+Inicie su aplicación de Python con App and API Protection habilitado mediante variables de entorno:
 
 ```yaml
 apiVersion: apps/v1
@@ -103,23 +103,23 @@ spec:
 
 {{% /collapse-content %}}
 
-## 3. Ejecutar tu aplicación
+## 3. Ejecute su aplicación {#3-run-your-application}
 
-Aplica tu despliegue actualizado:
+Aplique su despliegue actualizado:
 
 ```bash
 kubectl apply -f your-deployment.yaml
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-Si tienes problemas al configurar App and API Protection para tu aplicación Python, consulta la [guía de resolución de problemas de App and API Protection en Python][2].
+Si encuentra problemas al configurar App and API Protection para su aplicación de Python, consulte la [guía de solución de problemas de App and API Protection para Python][2].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/security/application_security/setup/python/compatibility
+[1]: /es/security/application_security/setup/compatibility/python
 [2]: /es/security/application_security/setup/python/troubleshooting

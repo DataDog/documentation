@@ -66,7 +66,7 @@ Enabling resource collection can impact your AWS CloudWatch costs. To avoid thes
 
 - Enable [resource collection][14] for your Azure accounts:
   1. Navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][15].
-  2. Add your Azure subscription by selecting {{< ui >}}+ Add New App Registration{{< /ui >}} if not already added.
+  2. Add your Azure subscription by selecting {{< ui >}}\+ Add New App Registration{{< /ui >}} if not already added.
   3. Select the App Registration containing your Azure subscription.
   4. On the {{< ui >}}Resource Collection{{< /ui >}} tab, ensure the {{< ui >}}Enable Resource Collection{{< /ui >}} toggle is enabled.
 
@@ -151,7 +151,7 @@ To get started using Cloudcraft, use the following steps:
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
 
-Enable the {{< ui >}}Show All Controls{{< /ui >}} toggle to display the available {{< ui >}}Group By{{< /ui >}} options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the {{< ui >}}+ Tags{{< /ui >}} menu.
+Enable the {{< ui >}}Show All Controls{{< /ui >}} toggle to display the available {{< ui >}}Group By{{< /ui >}} options. You can remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the {{< ui >}}\+ Tags{{< /ui >}} menu.
 
 {{< img src="datadog_cloudcraft/cloudcraft_group_by_with_network_acl_2.png" alt="Group by feature in Cloudcraft, highlighting the Group By menu." >}}
 
@@ -169,7 +169,7 @@ Saved views allow you to save specific filters on your diagram that are most imp
 
 To apply a saved view to your diagram:
 
-- Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resources{{< /ui >}} > {{< ui >}}Cloudcraft{{< /ui >}}][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click {{< ui >}}+Save as new view{{< /ui >}}.
+- Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Resources{{< /ui >}} > {{< ui >}}Cloudcraft{{< /ui >}}][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click {{< ui >}}\+Save as new view{{< /ui >}}.
 - Select the desired saved view from the menu at the top of the diagram view. The diagram automatically updates to reflect the chosen view.
 
 {{< img src="datadog_cloudcraft/saved_views.png" alt="Screenshot of the saved views" style="width:50%;" >}}
@@ -190,7 +190,7 @@ Toggle the projection from 3D (default) to 2D to visualize your resources from a
 
 Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
 
-Click the {{< ui >}}+ Filter{{< /ui >}} menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the {{< ui >}}More Filters{{< /ui >}} option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
+Click the {{< ui >}}\+ Filter{{< /ui >}} menu to filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the {{< ui >}}More Filters{{< /ui >}} option to filter by AWS and Azure tags, custom tags, and Terraform tags. The filter option reloads the diagram to display only the infrastructure that matches the filter criteria.
 
 ### Search and highlight
 

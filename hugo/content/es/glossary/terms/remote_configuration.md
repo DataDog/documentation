@@ -1,11 +1,14 @@
 ---
-id: remote_configuration
 core_product:
 - apm
-- seguridad de las aplicaciones
-- pipelines de observabilidad
+- appsec
+- workload protection
+- observability pipelines
+id: remote_configuration
+short_definition: Remote Configuration enables users to remotely configure and change
+  the behavior of Datadog components deployed in their environment.
 synonyms:
 - RC
-title: Configuración remota
+title: Remote Configuration
 ---
-La configuración remota permite a los usuarios configurar y cambiar de manera remota el comportamiento de los componentes de Datadog (por ejemplo, Agents, bibliotecas de rastreo y workers de pipelines de observabilidad) desplegados en su entorno.
+Remote Configuration permite a los usuarios configurar y cambiar de forma remota el comportamiento de los componentes de Datadog (por ejemplo, Agents, SDKs y Observability Pipelines Workers) desplegados en su entorno.

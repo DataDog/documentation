@@ -2,16 +2,16 @@
 title: Private Action Runner Reference
 description: Reference tables for private action runner configuration settings, supported actions and integrations, and credential file formats.
 further_reading:
-- link: "actions/private_actions/"
+- link: "/actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "actions/private_actions/set_up_agent_based/"
+- link: "/actions/private_actions/set_up_agent_based/"
   tag: "Documentation"
   text: "Set up a private action runner"
-- link: "actions/private_actions/execution_policies/"
+- link: "/actions/private_actions/execution_policies/"
   tag: "Documentation"
   text: "Execution Policies"
-- link: "actions/connections/private_action_credentials/"
+- link: "/actions/connections/private_action_credentials/"
   tag: "Documentation"
   text: "Handling private action credentials"
 ---

@@ -11,6 +11,15 @@ further_reading:
  - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
    tag: "Blog"
    text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
+ - link: "https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/"
+   tag: "Blog"
+   text: "Monitor warehouse data quality beyond pipeline health"
+ - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+   tag: 'Architecture Center'
+   text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+ - link: 'https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/'
+   tag: 'Architecture Center'
+   text: 'Monitoring Insurance Data Lakes on AWS using Datadog'
 ---
 
 ## Overview

@@ -319,7 +319,7 @@ To narrow the log list, use the query filter or filter by impact:
 
 Identify when the last change to a pipeline or processor was made and which user made the change using the modification information on the pipeline. Filter your pipelines using this modification information, as well as other faceted properties such as whether the pipeline is enabled or read-only.
 
-{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modificiation information, and the reordering modal" style="width:50%;">}}
+{{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modification information, and the reordering modal" style="width:50%;">}}
 
 Reorder pipelines precisely with the {{< ui >}}Move to{{< /ui >}} option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the {{< ui >}}Move to{{< /ui >}} modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
@@ -332,6 +332,63 @@ Clone pipelines to reuse existing rules and processors without having to start o
 Estimated usage metrics are displayed for each pipeline. This shows the volume and count of logs being ingested and modified by each pipeline. Every pipeline includes a link to the out-of-the-box [Logs Estimated Usage Dashboard][13]. This dashboard offers detailed charts of the pipeline's usage metrics.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}
+
+<!-- vale Datadog.headings = NO -->
+## Auto-Processing
+<!-- vale Datadog.headings = YES -->
+
+{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="Auto-Processing is in Preview" >}}
+Complete the form to request access.
+{{< /callout >}}
+
+Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring parsing.
+
+Auto-Processing only handles logs that do not match the filter of any existing integration or custom pipeline. If a log matches an existing pipeline's filter, Auto-Processing does not process it, even if that pipeline does not modify the log. Your existing pipeline configurations remain unchanged.
+
+### How it works
+
+Datadog groups supported logs by source and service and creates Auto-Processing entries for them. Datadog automatically updates entries to support new log patterns without changing how previously supported patterns are parsed.
+
+[Review transformations](#review-transformations) and [control which entries process your logs](#enable-or-disable-an-entry). [Switch an entry to a manual pipeline](#switch-to-a-manual-pipeline) to customize its configuration.
+
+<!-- vale Datadog.headings = NO -->
+### Configure Auto-Processing
+<!-- vale Datadog.headings = YES -->
+
+Go to the [{{< ui >}}Processing{{< /ui >}} page][8] and select the {{< ui >}}Auto-Processing{{< /ui >}} tab.
+
+#### Turn Auto-Processing on or off
+
+Use the feature toggle to turn Auto-Processing on or off for your organization.
+
+#### Choose how new entries are enabled
+
+When Auto-Processing is on, choose whether new entries are enabled automatically:
+
+- **Automatically enable new entries**: New entries are enabled on creation and begin processing matching incoming logs.
+- **Review new entries before enabling**: New entries are disabled on creation. Review their transformations, then enable the ones you want to use.
+
+### Review transformations
+
+1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service you want to review.
+2. Select {{< ui >}}View Transformations{{< /ui >}}.
+3. Select a log pattern and inspect example logs to compare their original and processed attributes.
+
+### Enable or disable an entry
+
+In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service. Disabling an entry affects future logs only. Logs that are already processed don't change.
+
+### Switch to a manual pipeline
+
+To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page.
+
+After switching, you manage the pipeline's configuration and any future updates.
+
+### Limitations
+
+- Each organization can have up to 100 Auto-Processing entries.
+- Some new log patterns might remain unparsed, even for a source and service that Auto-Processing already covers.
+- You cannot customize parsing or rename attributes within an Auto-Processing entry. Switch to a manual pipeline to make these changes.
 
 ## Further Reading
 

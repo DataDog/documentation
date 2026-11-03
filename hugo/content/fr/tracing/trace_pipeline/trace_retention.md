@@ -5,9 +5,6 @@ aliases:
 description: Découvrez comment contrôler la rétention des traces grâce aux filtres
   de rétention.
 further_reading:
-- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
-  tag: Blog
-  text: Unifiez et corrélez les données frontend et backend avec des filtres de rétention
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: Documentation
   text: Mécanismes d'ingestion
@@ -20,6 +17,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/apm-rate-limit-retention
   tag: Centre d'apprentissage
   text: 'Limitation du débit et rétention APM :'
+- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
+  tag: Blog
+  text: Unifiez et corrélez les données frontend et backend avec des filtres de rétention
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: Blog
+  text: Tracez les fonctions Lambda AWS durables avec Datadog
 - link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
   tag: Architecture Center
   text: 'Maîtriser le traçage distribué : défis liés au volume de données et approche
@@ -65,7 +68,7 @@ Bouton activé
 
 **Remarque** : L'ordre de la liste des filtres de rétention modifie le comportement d'indexation. Si un span correspond à un filtre de rétention situé en début de liste, le span est soit conservé, soit supprimé. Tout filtre de rétention personnalisé correspondant situé plus bas dans la liste ne capture pas le span déjà traité.
 
-La colonne `Spans Indexed` pour chaque filtre de rétention est alimentée par la métrique `datadog.estimated_usage.apm.indexed_spans`, que vous pouvez utiliser pour suivre votre utilisation des spans indexés. Pour plus d'informations, lisez [Métriques d'utilisation][2], ou explorez le [tableau de bord d'utilisation prêt à l'emploi][4] disponible dans votre compte.
+La colonne `Spans Indexed` pour chaque filtre de rétention est alimentée par la métrique `datadog.estimated_usage.apm.indexed_spans`, que vous pouvez utiliser pour suivre votre utilisation des spans indexés. Pour plus d'informations, lisez [Métriques d'utilisation][2], ou explorez le [dashboard d'utilisation prêt à l'emploi][4] disponible dans votre compte.
 
 <div class="alert alert-info">Les filtres de rétention n'affectent pas les traces collectées par l'Agent et envoyées à Datadog (« ingérées »). Pour contrôler l'ingestion, utilisez des <a href="/tracing/trace_pipeline/ingestion_controls/">contrôles d'ingestion</a> dédiés.</div>
 
@@ -117,7 +120,7 @@ L'ensemble des données capturées par l'échantillonnage par diversité n'est p
 
 #### Échantillonnage uniforme de 1 % {#one-percent-flat-sampling}
 
-L'échantillonnage uniforme de 1 % capture :
+L'échantillonnage à taux fixe de 1 % conserve les données pendant 30 jours et capture :
 1. Toutes les **traces corrélées avec 1 % des sessions RUM ingérées ayant des traces ingérées**, garantissant que vous pouvez toujours trouver des sessions indexées associées à des données de trace. Cela améliore la [corrélation entre APM et RUM][20], vous permettant de déboguer les problèmes des utilisateurs en visualisant simultanément les sessions frontend et les traces backend. L'échantillon est appliqué en fonction du `session_id`, ce qui signifie que toutes les traces liées à la même session RUM partagent une décision d'indexation cohérente.
 2. Un **échantillon uniforme de 1 %** des [spans ingérés][12], appliqué en fonction du `trace_id` afin que tous les spans de la même trace partagent la même décision d'échantillonnage. Utilisez cet échantillon pour la surveillance générale de l'état du système et l'analyse des tendances.
 
@@ -135,7 +138,7 @@ Par exemple, vous pouvez créer des filtres pour conserver toutes les traces cor
 
 Lorsque vous indexez un span à l'aide d'un filtre de rétention :
 
-- **Recherchabilité** : Le span indexé peut être trouvé dans Trace Explorer, dashboards et surveillé pendant 15 jours.
+- **Facilité de recherche** : Le span indexé peut être trouvé dans Trace Explorer, dashboards et surveillé pendant 15 jours.
 
 - **Contexte de visualisation** : Lorsque vous cliquez sur un span indexé dans Trace Explorer, vous voyez toujours son contexte de trace complet (tous les spans parents et enfants) dans une vue flamegraph ou waterfall, que ces autres spans aient été indexés ou non.
 

@@ -11,8 +11,8 @@ further_reading:
   text: "Learn how to query and visualize deployment executions"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility for Argo CD is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 ## Overview
@@ -191,9 +191,11 @@ The following diagram represents an example of this kind of setup:
 
 {{< img src="ci/diagram_argo-cd-deployment_240910.png" alt="Triggering Argo CD deployments using git" style="width:100%;">}}
 
+<div class="alert alert-info">Image correlation requires Argo CD v3.1.0 or later.</div>
+
 The [`datadog-ci deployment correlate-image` command][14] can be used to correlate an image with an application repository commit. When an Argo CD deployment occurs, the configuration commit information in the deployment event is replaced with the related application repository commit obtained by looking at the deployed images, if any.
 
-To enable this correlation, you also need to add the `dd_k8s_cluster` annotation to your Argo CD application, specifying the name of the Kubernetes cluster that the application deploys to. The name must match the name reported in the [Datadog Kubernetes product][16]. The image name must also contain the service name it relates to. This helps us discard irrelevant images on a deployment.
+To enable this correlation, add the `dd_k8s_cluster` annotation to your Argo CD application and set it to the name of the Kubernetes cluster the application deploys to. This name must match the cluster name reported in the [Kubernetes Explorer][16].
 
 Here is an example on how you can run the command when generating the image that will later be deployed by Argo CD:
 ```yaml
@@ -207,7 +209,7 @@ Here is an example on how you can run the command when generating the image that
 ```
 
 
-This command correlates images from deployment resources. When Datadog receives a deployment, if multiple images are present and more than one of the images is correlated, Datadog takes the image that contains the service name. The correlation only works for deployment resources.
+This command correlates images from Kubernetes Deployment resources only. If a service's Deployment contains multiple correlated images, it uses the image whose name contains the service name.
 
 
 
