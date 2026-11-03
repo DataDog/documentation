@@ -21,8 +21,14 @@ This page covers configuring and using {{< tooltip glossary="remote_configuratio
 | Feature | Description | Minimum Agent Version |
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
-| **[Agent upgrades][10]** | Remotely upgrade your Agents | Linux: 7.69.0+<br>Windows: 7.71.1+<br>US1-FED and US2-FED: 7.85.0+ on either platform |
+| **[Agent upgrades][10]** | Remotely upgrade your Agents | Linux: 7.69.0+<br>Windows: 7.71.1+ |
 | **[Agent configuration][13]** | Remotely configure your Agents | 7.73+ |
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+On US1-FED and US2-FED, Agent upgrades require version 7.85.0 or later on both Linux and Windows. Remote flare collection is not supported; use <a href="/agent/troubleshooting/send_a_flare/#manual-submission">manual flare submission</a> instead.
+</div>
+{{< /site-region >}}
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
@@ -34,13 +40,13 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 ## Enable Remote Configuration
 
-Remote Configuration is enabled by default for most organizations. Check your organization's [Remote Configuration][3] setting.
+In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][3] settings page. If you need to enable it:
+1. Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
+1. From your Organization Settings page, enable [Remote Configuration][3]. This enables Datadog components across your organization to receive configurations from Datadog.
 
 {{< site-region region="gov,gov2" >}}
 Organizations on US1-FED and US2-FED do not have Remote Configuration enabled by default.
 {{< /site-region >}}
-
-If Remote Configuration is disabled, enable it on the [Remote Configuration][3] settings page. You need the [`org_management`][1] permission.
 
 ## Enable remote Agent management
 
@@ -48,7 +54,7 @@ To remotely upgrade or configure Agents on Linux or Windows VMs, enable Remote C
 
 Starting with Agent version 7.73.0, `remote_updates` defaults to `true`. On earlier supported versions, explicitly set it to `true`.
 
-Agents that report to a Datadog Government site or run in FIPS mode require explicit Remote Configuration enablement. Set `remote_configuration.enabled` to `true` using the following steps. Enabling `remote_updates` alone does not enable Remote Configuration.
+Agents that report to US1-FED or US2-FED, or run in FIPS mode, require explicit Remote Configuration enablement. Set `remote_configuration.enabled` to `true` using the following steps. Enabling `remote_updates` alone does not enable Remote Configuration.
 
 1. Enable Remote Configuration for your organization and [on the Agent's API key](#enable-remote-configuration-on-the-api-key).
 1. In the Agent's [configuration file][16], enable the following settings. `remote_updates` is a top-level setting:

@@ -16,13 +16,13 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 - [Remote Configuration][7] enabled for your organization and the Agent's API key
 - [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
-- Agent version 7.71.1 or later on Windows or 7.69.0 or later on Linux. On US1-FED and US2-FED, you need Agent 7.85.0 or later on either platform.
+- Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
 - Linux VMs or Windows VMs
 - At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
-If a host runs an Agent older than 7.85.0, follow the <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">Agent installation instructions</a> to update it before using Fleet Automation. The host remains visible in Fleet View.
+On US1-FED and US2-FED, remote upgrades require Agent 7.85.0 or later on both Linux and Windows. If you run an older version, use the <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">Agent installation instructions</a> to update it before upgrading through Fleet Automation.
 </div>
 {{< /site-region >}}
 
@@ -48,13 +48,11 @@ Remote upgrading of Agents in containerized workloads is not supported.
 
 ## Schedule Agent upgrades
 
-A schedule checks for its target release each time it runs. If the release is unavailable, Fleet Automation skips that run and checks again at the next scheduled time.
-
 1. From the [{{< ui >}}Upgrades{{< /ui >}} tab][1], click {{< ui >}}\+ Create Schedule{{< /ui >}}.
 
 1. On the Upgrade Schedule page, add a {{< ui >}}Schedule name{{< /ui >}}.
 
-1. Select a target release: the latest, one minor release behind, or two minor releases behind.
+1. Select the Agent version. You can upgrade to the latest version, one version behind, or two versions behind. 
 
    {{< img src="/agent/fleet_automation/agent_upgrade_select_version1.png" alt="See a list of scheduled Agent upgrades." style="width:100%;" >}}
 
