@@ -26,7 +26,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 After you select the Splunk TCP source in the pipeline UI, enter the identifier for your Splunk TCP address. If you leave it blank, the [default](#secret-defaults) is used.
 
-**Note**: If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP_`. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
