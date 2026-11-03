@@ -352,6 +352,8 @@ Using the command line:
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
+Then deploy a minimal `DatadogAgent` spec.
+
 {{% /collapse-content %}}
 
 {{% /tab %}}
@@ -496,6 +498,8 @@ oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
   --type='json' \
   -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
 ```
+
+Then deploy a minimal `DatadogAgent` spec.
 
 {{% /collapse-content %}}
 
