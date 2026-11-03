@@ -303,7 +303,7 @@ iOS Release builds report C# frames without an IL offset. See [C# line numbers o
 **No Datadog output visible during publish**:
 The terminal logger hides informational messages. Add `-v n -tl:off` to your `dotnet publish` command.
 
-**Upload completes but symbols don't appear in Datadog**
+**Upload completes but symbols don't appear in Datadog**:
 Symbols take up to 5 minutes to process. Check [{{< ui >}}Error Tracking{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Symbol Files{{< /ui >}}][4].
 
 ## Further Reading
