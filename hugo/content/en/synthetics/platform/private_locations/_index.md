@@ -155,7 +155,7 @@ If the traffic between your private location and Datadog has to go through a pro
 
 #### Blocking reserved IPs
 
-New private locations block the reserved IP ranges by default. Private locations created before <RELEASE_DATE_PLACEHOLDER> do not change. The {{< ui >}}Block reserved IPs{{< /ui >}} toggle is on by default. It blocks a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]). It also sets `enableDefaultBlockedIpRanges` to `true` in your generated configuration file. To disable the block, turn off the toggle or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
+New private locations block the reserved IP ranges by default. It blocks a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]). To disable the block, turn off the toggle or set `enableDefaultBlockedIpRanges` to `false` in your configuration file.
 
 Some of the endpoints you want to test might be in the blocked reserved IP ranges. To allow them, add their IPs and/or CIDRs to the allowed lists. This adds the associated `allowedIPRanges` parameters to your generated configuration file. You can also enter domain names in the {{< ui >}}Allowed domain names{{< /ui >}} input to add the associated `allowedDomainNames` parameter. Domain names match the full hostname and support the `*` wildcard (for example, `*.example.com`). Requests to an allowed domain name bypass the reserved IP block.
 
@@ -1045,4 +1045,3 @@ Restricting a Private Location may limit other users from adding it to a test or
 [32]: /synthetics/platform/private_locations/configuration
 [33]: /synthetics/guide/kerberos-authentication/
 [34]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
-
