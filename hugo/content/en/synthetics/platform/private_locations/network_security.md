@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-A private location worker runs Synthetic tests against any endpoint that its host can reach, unless its configuration restricts outbound (egress) network access. Configuration files generated for new private locations set `enableDefaultBlockedIpRanges` to `true`, which blocks reserved and private IP ranges. The worker default is `false`, so private locations with older configuration files, and workers started without this option, do not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address, including cloud metadata services, secret stores, and cluster APIs.
+A private location worker can reach any endpoint that its underlying host can reach, unless its configuration restricts outbound (egress) network access. Configuration files generated for new private locations set `enableDefaultBlockedIpRanges` to `true`, which blocks reserved and private IP ranges. The worker default is `false`, so private locations with older configuration files, and workers started without this option, do not restrict egress. Without restrictions, any user who can create a test on the private location can point that test at any reachable address.
 
 To reduce this risk, combine the following controls:
 
@@ -20,7 +20,6 @@ To reduce this risk, combine the following controls:
 - [Apply the recommended defaults](#recommended-defaults).
 - [Allow access to internal services on purpose](#allow-access-to-internal-services-on-purpose) only where tests need it.
 - [Segment the network](#segment-the-network) around the worker.
-- [Scope API and application keys](#scope-api-and-application-keys).
 
 The allow and block lists apply to all test types that run on the private location.
 
@@ -43,7 +42,7 @@ The worker evaluates the lists in this order:
 
 Allow lists take precedence over block lists. `allowedIPRanges` has no effect if no IP range is blocked. In that case, the worker logs a warning at startup.
 
-<div class="alert alert-warning">A hostname in <code>allowedDomainNames</code> bypasses all IP checks. If an allowed hostname resolves to a private or metadata address, tests can reach that address. Add only hostnames whose DNS records you control.</div>
+<div class="alert alert-warning">A hostname in <code>allowedDomainNames</code> bypasses all IP checks. If an allowed hostname resolves to a private or metadata address, tests can reach that address.</div>
 
 ### Default blocked ranges
 
@@ -54,8 +53,6 @@ When `enableDefaultBlockedIpRanges` is `true`, the worker blocks the following I
 - `224.0.0.0/4`, `240.0.0.0/4`, `255.255.255.255/32`
 
 It also blocks IPv6 special-purpose ranges, including `::1/128`, `fc00::/7`, `fe80::/10`, `::ffff:0:0/96`, and `2002::/16`. These ranges come from the IANA [IPv4][2] and [IPv6][3] Special-Purpose Address Registries.
-
-**Note**: The default list includes the private ranges `10.0.0.0/8`, `172.16.0.0/12`, and `192.168.0.0/16`. If your private location tests internal applications, add the address ranges of those applications to `allowedIPRanges`.
 
 ## Recommended defaults
 
@@ -113,90 +110,6 @@ If you manage the configuration in your own secret with `configSecret`, add the 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Allow access to internal services on purpose
-
-Some tests need to reach services that the default block list covers, such as the cloud instance metadata service (IMDS), a Vault server, or the Kubernetes API. Keep `enableDefaultBlockedIpRanges` set to `true`, and allow only the exact addresses that tests need.
-
-| Service | Typical address | Covered by default range | Example `allowedIPRanges` entry |
-|---------|-----------------|--------------------------|---------------------------------|
-| IMDS (AWS, GCP, Azure) | `169.254.169.254` | `169.254.0.0/16` | `169.254.169.254/32` |
-| Vault | A private address, for example `10.0.5.12` | `10.0.0.0/8` | `10.0.5.12/32` |
-| Kubernetes API | The cluster service IP, for example `172.20.0.1` | `172.16.0.0/12` | `172.20.0.1/32` |
-
-For example:
-
-```json
-{
-  "enableDefaultBlockedIpRanges": true,
-  "allowedIPRanges": {
-    "4": ["169.254.169.254/32", "10.0.5.12/32"]
-  }
-}
-```
-
-Follow these guidelines:
-
-- Allow the smallest range that the test needs. Do not allow the full `169.254.0.0/16` or `10.0.0.0/8` range.
-- Do not disable the default block list to reach one service.
-- Prefer an IP entry in `allowedIPRanges` over a hostname in `allowedDomainNames`. A hostname entry bypasses all IP checks for every address that the hostname resolves to.
-- Review which users can create tests on a private location that can reach these services.
-
-## Segment the network
-
-<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the pending hardening notes before publishing. -->
-
-The worker options are a second layer of protection. They do not replace network controls. Restrict egress at the network level as well:
-
-- Run the worker in a dedicated subnet, namespace, or VPC.
-- Restrict outbound traffic with firewall rules, security groups, or a Kubernetes `NetworkPolicy`.
-- Allow outbound traffic to the [Datadog intake endpoints][4] for your site and to the endpoints that your tests target.
-
-For example, the following `NetworkPolicy` allows DNS and HTTPS egress from the worker pods, and blocks egress to the metadata service and private ranges:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: synthetics-private-location-egress
-  namespace: synthetics
-spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: synthetics-private-location
-  policyTypes:
-  - Egress
-  egress:
-  - ports:
-    - protocol: UDP
-      port: 53
-    - protocol: TCP
-      port: 53
-  - to:
-    - ipBlock:
-        cidr: 0.0.0.0/0
-        except:
-        - 10.0.0.0/8
-        - 172.16.0.0/12
-        - 192.168.0.0/16
-        - 169.254.0.0/16
-    ports:
-    - protocol: TCP
-      port: 443
-```
-
-Adjust the pod labels, ports, and ranges to match your deployment and the endpoints that your tests target.
-
-## Scope API and application keys
-
-<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the pending key scoping guidance, including exact scope names, before publishing. -->
-
-- Use a dedicated key for each private location.
-- Give each key the minimum permissions that it needs.
-- Store keys in a secret store, and rotate them on a regular schedule.
-
-## Known limitations
-
-<!-- PLACEHOLDER (SYNTH-30422): Complete this section with the browser test findings before publishing. -->
 
 ## Further Reading
 
