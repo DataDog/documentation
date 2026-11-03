@@ -52,28 +52,26 @@ Ask Bits Chat to make a code change, and it creates a dedicated [code channel][4
 
 Ask Bits questions about your system or active incident from a Microsoft Teams channel. Bits Chat replies in the channel thread so your team can keep the question, context, and answer in one place.
 
-### Setup
-
 1. [Install the Microsoft Teams integration][6] and connect your Microsoft tenant to Datadog.
-2. Add the Datadog bot to the team where you want to use Bits Chat.
-3. [Connect your Microsoft Teams account to your Datadog account][7]. If you mention `@Datadog` before you connect your account, the Datadog bot prompts you to connect it.
-4. (Optional) To let Bits Chat read earlier messages in a thread for context, a Microsoft Teams administrator must [grant tenant-wide admin consent][8] to Datadog. Without admin consent, Bits Chat only uses the message that mentions it.
+2. Add the Datadog app to the team where you want to use Bits Chat.
+3. [Connect your Microsoft Teams account to your Datadog account][7]. If you mention `@Datadog` before you connect your account, the Datadog app prompts you to connect it.
+4. (Optional) To let Bits Chat read earlier messages in a thread for context, a Microsoft Teams administrator must [grant tenant-wide admin consent][8] to Datadog. Without admin consent, Bits Chat uses only the message that mentions it.
 
 Your Datadog role must have the **Bits Chat Access** permission. See [Permissions][9].
 
-### Usage
+### Using Bits Chat in Microsoft Teams
 
-In a channel where the Datadog bot is installed, mention `@Datadog` followed by your question in natural language. To ask a follow-up, reply in the same thread and mention `@Datadog` again.
+In a channel where the Datadog app is installed, mention `@Datadog` followed by your question in natural language. To ask a follow-up, reply in the same thread and mention `@Datadog` again.
 
 - If your Microsoft tenant is connected to more than one Datadog organization, Bits Chat asks which organization to use. When you reply to a Datadog notification, such as a monitor alert, Bits Chat uses the organization that sent it.
 - When Bits Chat needs to take an action that requires approval, it posts an approval card in the thread. Only the user who asked the question can approve or deny the action.
-- Existing `@Datadog` commands, such as `@Datadog incident`, continue to work as before.
+- `@Datadog` commands, such as `@Datadog incident`, work alongside Bits Chat.
 
-### Limitations
+### Bits Chat limitations in Microsoft Teams
 
 - Bits Chat responds only in Microsoft Teams channels. It does not respond in personal chats or group chats.
 - Bits Chat in Microsoft Teams cannot start or steer [Bits Investigations][10]. To start an investigation, use the Datadog web application, the mobile app, the API, or a monitor. To receive investigation findings in Microsoft Teams, [send monitor notifications to a Microsoft Teams channel][11].
-- [Code channels with Bits Code](#code-channels-with-bits-code) are only available in Slack.
+- [Code channels with Bits Code](#code-channels-with-bits-code) are not supported.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}

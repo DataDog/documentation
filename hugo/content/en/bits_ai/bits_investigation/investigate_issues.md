@@ -42,7 +42,9 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-<div class="alert alert-info">You cannot start an investigation from Microsoft Teams. To receive investigation findings in Microsoft Teams, <a href="/bits_ai/bits_investigation/configure/#microsoft-teams-preview">send monitor notifications to a Microsoft Teams channel</a>.</div>
+#### Option 5: Microsoft Teams
+
+To receive investigation findings in Microsoft Teams, [send monitor notifications to a Microsoft Teams channel][22].
 
 ### Synthetic tests
 
@@ -192,6 +194,7 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [19]: /real_user_monitoring/bits_ai/optimize_performance/
 [20]: /real_user_monitoring/bits_ai/investigate_regressions/
 [21]: /error_tracking/bits_investigation/
+[22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
 
 ## Further reading
 
