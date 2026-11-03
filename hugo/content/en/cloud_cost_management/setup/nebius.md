@@ -33,7 +33,7 @@ To set up Cloud Cost Management for Nebius Cloud in Datadog, you should:
 Navigate to [Provider Settings on the cloud cost page][2], add a Nebius Cloud account and follow the steps to configure the Nebius Cloud integration.
 
 ### Configure a cost export
-In the Nebius console, create a cost report export in FOCUS format to a Nebius Object Storage bucket. Datadog reads the exported cost reports directly from this bucket.
+In the Nebius console, navigate to **Billing > Export > Periodic Export** and create a new export in FOCUS format to a Nebius Object Storage bucket. Datadog reads the exported cost reports directly from this bucket.
 
 ### Enable Cloud Cost Management
 In the Nebius Cloud integration tile, enable the toggle for Cloud Cost Management and provide:

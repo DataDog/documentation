@@ -30,10 +30,10 @@ To set up Cloud Cost Management for Alibaba Cloud in Datadog, you should:
 ## Setup
 
 ### Subscribe to FOCUS bills in Alibaba Cloud
-In the Alibaba Cloud Billing console, subscribe to cost reports in FOCUS format and deliver them to an Object Storage Service (OSS) bucket:
+In the Alibaba Cloud console, navigate to **Expenses > Billing > Bill Subscription** and subscribe to cost reports in FOCUS format with all available added fields, delivered to an Object Storage Service (OSS) bucket:
 
 1. Create an OSS bucket to receive the cost reports, or use an existing one.
-2. Enable bill subscription with the FOCUS format, selecting your bucket as the destination.
+2. Enable bill subscription with the FOCUS format and all available added fields, selecting your bucket as the destination.
 3. Complete the one-click authorization when prompted. This creates the service-linked role required to export bills to the bucket.
 
 Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
