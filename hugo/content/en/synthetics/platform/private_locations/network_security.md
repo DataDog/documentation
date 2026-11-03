@@ -82,7 +82,7 @@ The following examples block the default ranges and allow one internal applicati
 {{% tab "Docker" %}}
 
 ```shell
-docker run --rm -v $PWD/worker-config.json:/etc/datadog/synthetics-check-runner.json \
+docker run --rm --cap-add=NET_ADMIN -v $PWD/worker-config.json:/etc/datadog/synthetics-check-runner.json \
   datadog/synthetics-private-location-worker \
   --enableDefaultBlockedIpRanges \
   --allowedIPRanges.4="10.20.30.0/24" \
