@@ -217,7 +217,7 @@ For resources configured with `trackResourceHeaders`, additional network header 
 
 ## WebSocket attributes
 
-For [WebSocket connections](#track-websocket-connections) (`resource.type:websocket`), the following attributes are collected in addition to `resource.url` (without the query string), `resource.duration` (the total lifetime of the connection), and the other [resource attributes](#resource-attributes). `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][12]. `resource.status_code` is `101` when the opening handshake succeeds, and is not set when it fails, because browsers do not expose the status code of a rejected handshake.
+For [WebSocket connections](#track-websocket-connections) (`resource.type:websocket`), the following attributes are collected in addition to `resource.url` (without the query string), `resource.duration` (the total lifetime of the connection), and the other [resource attributes](#resource-attributes). `resource.method` is `GET`, the method of the opening handshake defined in [RFC 6455][12].
 
 ### Connection attributes
 
