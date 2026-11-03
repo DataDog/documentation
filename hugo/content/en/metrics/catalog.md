@@ -78,20 +78,18 @@ The search fields provide the most comprehensive set of actions to filter the li
 ### Usage facets
 
 - {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days.
-- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs.
+- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are used in dashboards, notebooks, monitors, and SLOs.
 - {{< ui >}}First Submitted{{< /ui >}}: How long ago the metric was first submitted to Datadog, from {{< ui >}}Less than 1 week ago{{< /ui >}} to {{< ui >}}Over 1 year ago{{< /ui >}}.
+
+A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, used in Metrics Explorer queries, or accessed through API calls within the past 30, 60, or 90 days.
+
+A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
 ### Configuration facets
 
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled.
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
 - {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
-
-### Definitions
-
-A metric is **unqueried** if it has not been accessed in monitors, SLOs, executed notebooks, opened dashboards, used in Metrics Explorer queries, or accessed through API calls within the past 30, 60, or 90 days.
-
-A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
 <!-- TODO(screenshot): Replace with a facet panel screenshot showing the Core, Usage, and Configuration groups. -->
 {{< img src="metrics/summary/facet_panel_2025-02-26.png" alt="Metrics Facet Panel" style="width:75%;">}}
@@ -102,7 +100,7 @@ The metrics table lists your metrics with their configuration and volume details
 
 | Column | Description |
 |--------|-------------|
-| {{< ui >}}Metric Name{{< /ui >}} | The name of the metric. Click a metric name to open its [details side panel](#metric-details-sidepanel). |
+| {{< ui >}}Metric Name{{< /ui >}} | The name of the metric. Click a metric name to open its details side panel. For more information, see the [Metric details side panel](#metric-details-sidepanel) section. |
 | {{< ui >}}Last Tag Configuration{{< /ui >}} | When the metric's tag configuration was last changed. |
 | {{< ui >}}Est. Ingested Metrics{{< /ui >}} | The estimated number of ingested custom metrics that the metric name emits. |
 | {{< ui >}}Est. Indexed Metrics{{< /ui >}} | The estimated number of indexed custom metrics that the metric name emits. |
@@ -170,7 +168,9 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 * {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
-To configure tags on multiple metrics, use [Tag Indexing Rules][45]. To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
+To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+
+To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
 
 ## Metric details side panel {#metric-details-sidepanel}
 
