@@ -170,14 +170,11 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 5. (Optional) To export this list, click the download icon ({{< ui >}}Download as CSV{{< /ui >}}) next to {{< ui >}}Columns{{< /ui >}} above the metrics table.
-
-   After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics.
-
-6. To unindex tags that aren't queried or used in assets across these metrics, create a [Tag Indexing Rule][18] scoped to their metric names or namespaces.
+6. After you identify the metrics that your developers don't need, reduce their custom metrics volume and associated costs by creating a [Tag Indexing Rule][18] scoped to their metric names or namespaces. The rule unindexes tags that aren't queried or used in assets across these metrics.
 
 Tag Indexing Rules and Metrics without Limits™ tag configurations both control which tags are indexed. Rules apply across many metrics, while Metrics without Limits™ configurations apply to one metric at a time and take precedence over rules.
 
-Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
+Datadog's intelligent query insights across thousands of custom metrics customers show that **using Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
 ### Understand the relative utility of your metrics
 

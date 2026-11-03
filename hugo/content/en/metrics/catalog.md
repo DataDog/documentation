@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, both custom and standard, under a specified time frame. The default time frame is the past 4 hours. Use the Metrics Catalog page to see how your metrics are configured and used, monitor your custom metrics volume, and manage your metric configurations in one place.
+The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, both custom and standard, for a specified time frame. The default time frame is the past 4 hours. Use the Metrics Catalog page to see how your metrics are configured and used, monitor your custom metrics volume, and manage your metric configurations in one place.
 
 <!-- TODO(screenshot): Full-page overview showing usage graphs, search, facets, and the metrics table. Save to metrics/catalog/. Exclude preview banners and features that are not generally available. -->
 
@@ -37,11 +37,11 @@ To see only custom metrics, filter the list with the {{< ui >}}Metric Category{{
 
 <div class="alert alert-info">For customers on the <a href="/account_management/billing/metric_name_pricing/">Metric Name Pricing model</a>, see the <a href="/metrics/guide/metric_name_pricing_experience/">Metrics Experience Changes for Metric Name Pricing guide</a> to optimize your metric usage.</div>
 
-## Usage graphs
+## Custom metrics usage graphs
 
-The usage graphs at the top of the Metrics Catalog page show your account's real-time _estimated_ custom metrics usage. The graphs display different billing dimensions depending on your pricing model:
+The usage graphs at the top of the Metrics Catalog page show your account's estimated custom metrics usage in real time. The graphs display different billing dimensions depending on your pricing model:
 
-- **Standard pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
+- **Cardinality pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
 - **Metric Name Pricing**: Your account's estimated unique metric names, indexed points, and the ratio of ingested to indexed points. For more information, see the [Metric Name Pricing experience guide][41].
 
 To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
@@ -112,7 +112,7 @@ You can also display the optional {{< ui >}}First Submitted{{< /ui >}} column, w
 
 Volume columns apply only to custom metrics. For standard metrics, the {{< ui >}}Est. Ingested Metrics{{< /ui >}}, {{< ui >}}Est. Indexed Metrics{{< /ui >}}, and {{< ui >}}Change in Volume{{< /ui >}} columns display a dash (—).
 
-**Note**: For customers on the Metric Name Pricing model, column names display "Points" instead of "Metrics".
+**Note**: For customers on the Metric Name Pricing model, the volume column names display "Points" instead of "Metrics".
 
 ### Sort metrics by volume
 
@@ -172,9 +172,9 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
 
-## Metric details sidepanel
+## Metric details side panel {#metric-details-sidepanel}
 
-Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags: 
+Click on any metric name to display its details side panel for more information regarding the metric's metadata and tags: 
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
@@ -240,7 +240,7 @@ The metric description helps you understand what a metric represents, why it exi
 
 For custom metrics, Datadog can automatically generate descriptions using available context, including the metric's name, meaningful tags, query activity, and connected source code. To use source code as additional context, install Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and connect your [repositories][39].
 
-{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics side panel" style="width:80%;">}}
 
 
 ### Source Code
@@ -253,7 +253,7 @@ The Source Code section in the metric side panel provides a centralized view of 
 
 Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
-{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics side panel" style="width:80%;">}}
 
 #### Troubleshooting missing metrics
 
@@ -341,7 +341,7 @@ To configure tags on a single metric, follow these steps. To configure tags on m
 
 ### Queryable tags 
 
-After your metric has been configured with Metrics without Limits™, you can view which tags remain queryable. These are the tags that contribute to _Indexed Custom Metrics_ volume. You can also toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume.
+After you configure your metric with Metrics without Limits™, you can view which tags remain queryable. These are the tags that contribute to _Indexed Custom Metrics_ volume. You can also toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume.
 
 ## Metric origin definitions
 

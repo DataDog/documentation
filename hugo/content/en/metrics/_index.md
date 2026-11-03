@@ -105,7 +105,7 @@ See the [metrics types][16] documentation for more detailed examples of each met
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
-**Tip**: To open the Metrics Catalog page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `catalog`.
+**Tip**: To open the Metrics Catalog page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>, search for `catalog`, and select the {{< ui >}}Catalog{{< /ui >}} result labeled {{< ui >}}Metrics{{< /ui >}}.
 
 Here's an example of a timeseries visualization:
 
@@ -184,11 +184,11 @@ Add additional layers of aggregation on the results of existing queries in time 
 
 ### View real-time information about metrics
 
-The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog under a specified time frame. You can filter metrics by metric name or tag.
+The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog for a specified time frame. You can filter metrics by metric name or tag.
 
-Click on any metric name to display a details sidepanel with more detailed information. The details sidepanel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
+Click on any metric name to display a details side panel with more detailed information. The details side panel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
-**Note:** The number of distinct metrics reported in the details sidepanel on the Metrics Catalog page does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
+**Note:** The number of distinct metrics reported in the details side panel on the Metrics Catalog page does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
 
 Read the [Metrics Catalog documentation][22] for more details.
 
