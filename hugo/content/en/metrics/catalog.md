@@ -112,7 +112,7 @@ You can also display the optional {{< ui >}}First Submitted{{< /ui >}} column, w
 
 Volume columns apply only to custom metrics. For standard metrics, the {{< ui >}}Est. Ingested Metrics{{< /ui >}}, {{< ui >}}Est. Indexed Metrics{{< /ui >}}, and {{< ui >}}Change in Volume{{< /ui >}} columns display a dash (—).
 
-**Note**: For customers on the Metric Name Pricing model, the volume column names display "Points" instead of "Metrics".
+**Note**: For customers on the Metric Name Pricing model, "Points" replaces "Metrics" in the volume column names.
 
 ### Sort metrics by volume
 
@@ -170,11 +170,11 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 * {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
-To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules.
+To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
 
 ## Metric details side panel {#metric-details-sidepanel}
 
-Click on any metric name to display its details side panel for more information regarding the metric's metadata and tags: 
+Click any metric name to open its details side panel, which shows the metric's metadata and tags:
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
@@ -240,7 +240,7 @@ The metric description helps you understand what a metric represents, why it exi
 
 For custom metrics, Datadog can automatically generate descriptions using available context, including the metric's name, meaningful tags, query activity, and connected source code. To use source code as additional context, install Datadog's [GitHub][36], [GitLab][37], or [Azure DevOps][38] integration and connect your [repositories][39].
 
-{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="AI generated descriptions in Metrics side panel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_ai_generated_descriptions_03062026.png" alt="An AI-generated metric description in the metric details side panel." style="width:80%;">}}
 
 
 ### Source Code
@@ -253,7 +253,7 @@ The Source Code section in the metric side panel provides a centralized view of 
 
 Use the Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
-{{< img src="metrics/summary/metric_source_code_03262026.png" alt="Source Code Example in Metrics side panel" style="width:80%;">}}
+{{< img src="metrics/summary/metric_source_code_03262026.png" alt="The Source Code section in the metric details side panel, linking to the metric's source file." style="width:80%;">}}
 
 #### Troubleshooting missing metrics
 

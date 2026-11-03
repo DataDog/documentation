@@ -186,7 +186,7 @@ Add additional layers of aggregation on the results of existing queries in time 
 
 The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog for a specified time frame. You can filter metrics by metric name or tag.
 
-Click on any metric name to display a details side panel with more detailed information. The details side panel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
+Click any metric name to open its details side panel. The details side panel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
 **Note:** The number of distinct metrics reported in the details side panel on the Metrics Catalog page does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
 
