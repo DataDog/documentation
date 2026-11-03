@@ -254,9 +254,9 @@ Message statistics are reported separately for messages received by the browser 
 | `resource.websocket.{inbound,outbound}.message_size_max`      | number (bytes) | Size of the largest message.                                                                                                                                      |
 | `resource.websocket.{inbound,outbound}.time_to_first_message` | number (ns)    | Time between the opening of the connection and the first message. Only present if at least one message was exchanged.                                             |
 | `resource.websocket.{inbound,outbound}.longest_silence`       | number (ns)    | Longest gap after the first message in this direction, including the final gap until tracking ends. Excludes the wait for the first message; `0` if no messages were observed in this direction. |
-| `resource.websocket.{inbound,outbound}.silence_before_close`  | number (ns)    | Time between the last message and the closure of the connection. Only present if at least one message was exchanged and the connection closed with a close event. |
+| `resource.websocket.{inbound,outbound}.silence_before_close`  | number (ns)    | Time between the last message in this direction and the end of tracking. Only present if at least one message was exchanged in this direction. Not set when `resource.websocket.tracking_end_reason` is `heartbeat_timeout`. |
 | `resource.websocket.outbound.buffered_amount_max`             | number (bytes) | Highest amount of outgoing data queued in the browser and not yet sent to the network.                                                                            |
-| `resource.websocket.outbound.buffered_amount_at_close`        | number (bytes) | Amount of outgoing data still queued when the connection closed.                                                                                                  |
+| `resource.websocket.outbound.buffered_amount_at_close`        | number (bytes) | Amount of outgoing data still queued when tracking ended. Not set when `resource.websocket.tracking_end_reason` is `heartbeat_timeout`.                           |
 
 ## Identify third-party resources
 
