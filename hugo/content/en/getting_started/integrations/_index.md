@@ -131,7 +131,7 @@ check_tag_cardinality: low
 # Rest of the config here
 ```
 
-For supported Kubernetes workloads, configure these settings in a [`DatadogInstrumentation` resource][49] using `ignoreAutodiscoveryTags` and `checkTagCardinality` on each entry in `spec.config.checks`. You can also use [Kubernetes Autodiscovery annotations][47].
+For containerized environments, you can also set these parameters with a [`DatadogInstrumentation` resource][49] or [Kubernetes Autodiscovery annotations][47].
 
 ### Validation
 
