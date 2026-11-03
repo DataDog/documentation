@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">Private locations do not restrict outbound network access by default. To restrict access, see <a href="/synthetics/platform/private_locations/network_security">Private Location Network Security Hardening</a>.</div>
+<div class="alert alert-warning">New private locations block reserved IP ranges by default. Private locations with older configuration files do not restrict outbound network access unless you configure it. To review and restrict access, see <a href="/synthetics/platform/private_locations/network_security">Private Location Network Security Hardening</a>.</div>
 
 Synthetic private locations come with a set of options you can configure to match your environment requirements. All options for the [private location worker][1] can be found by running the `help` command:
 
@@ -152,11 +152,11 @@ Maximum duration for API test execution, in milliseconds. Default is one minute 
 
 ### Network security configuration
 
-By default, a private location can reach any network address that its host can reach. Restrict egress with the following options:
+A private location can reach any network address that its host can reach, unless its configuration restricts egress. Configuration files generated for new private locations set `enableDefaultBlockedIpRanges` to `true`. The worker default is `false`. Restrict egress with the following options:
 
 `allowedIPRanges`, `blockedIPRanges`, `enableDefaultBlockedIpRanges`, `allowedDomainNames`, `blockedDomainNames`
 
-Datadog recommends that you set `enableDefaultBlockedIpRanges` to `true` and allow only the addresses that your tests need. For recommended settings and examples, see [Private Location Network Security Hardening][6].
+Datadog recommends that you keep `enableDefaultBlockedIpRanges` set to `true` and allow only the addresses that your tests need. For recommended settings and examples, see [Private Location Network Security Hardening][6].
 
 ## All configuration options
 
@@ -279,7 +279,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. Configuration files generated for new private locations set this parameter to `true`. See [Private Location Network Security Hardening][6].
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` or `--allowedDomainNames` parameters. Configuration files generated for new private locations set this parameter to `true`. The worker default is `false`. See [Private Location Network Security Hardening][6].
 
 `--allowedDomainNames`
 : **Type**: Array <br>
