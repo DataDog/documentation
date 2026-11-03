@@ -106,7 +106,7 @@ Use your new private location just like a managed location in your Synthetic tes
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
 [5]: https://app.datadoghq.com/synthetics/settings/private-locations
-[6]: /synthetics/private_locations/configuration/#configuration-options
+[6]: /synthetics/platform/private_locations/configuration/#all-configuration-options
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /getting_started/synthetics/browser_test
