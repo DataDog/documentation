@@ -179,7 +179,7 @@ Keep the standard exposure mappings and add the following holdout mappings. Omit
 | Include in holdout analysis | `should_include_in_holdout_analysis` | Optional for external randomization. Required when using Datadog Feature Flags with your own warehouse logging. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
 | Allocation key | `allocation_key` | The allocation key from the exposure event. Only required for selective holdouts using Datadog Feature Flags with your own warehouse logging. |
 
-Datadog uses the holdout key and assignment group to select holdout records. The experiment ID and variant ID do not determine holdout membership. Return only exposures for experiences covered by this holdout. For external randomization, adding experiments in Datadog does not filter these rows. Don't use experiment or allocation key template variables in this model, because a holdout analysis doesn't supply those values.
+Datadog uses the holdout key and assignment group to identify the exposure records for each holdout group.
 
 With external randomization, the inclusion field is optional. Include it when logging exposures before changes ship. The preliminary analysis uses all holdout exposure records within the inclusion period. The primary analysis uses only records marked `true`. Without this mapping, Datadog does not apply that filter. In that case, the model must return only qualifying exposures, as described in the [Exposure criteria](#exposure-criteria) section.
 
