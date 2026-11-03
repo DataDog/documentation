@@ -71,7 +71,6 @@ Both add the same Datadog Lambda extension and tracing layers, and both restore 
 | Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
 | Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
 | Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
-| Layer versions | You set them on the rule, starting from the latest versions, and they stay fixed until you change them | You set them, and they stay fixed until you change them |
 | How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
 | Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
 | Removing instrumentation | Remove from Datadog | Delete the CloudFormation stack in that region |
@@ -202,37 +201,15 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 ## What Datadog changes on a Lambda function
 
-Datadog preserves your existing layers and environment variables. The exceptions are `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED`, which Datadog sets to match the rule's [APM and Logs](#apm-and-logs) toggles. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
+Datadog preserves your existing layers and environment variables. The exceptions are `DD_TRACE_ENABLED` and `DD_SERVERLESS_LOGS_ENABLED`, which Datadog sets to match the rule's APM and Logs settings. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
 
 **No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so no Datadog credential is stored in your account for Lambda instrumentation. Datadog sets up this authentication for you, so there is nothing to configure.
 
 To tune what the extension collects, set the standard Datadog environment variables on the function. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
 
-### Lambda layer versions
-
-Each Lambda rule sets the layer versions Datadog applies to the functions it covers, in the **Configure Lambda Layers** step:
-
-- **Datadog Lambda extension**: One version for all covered functions. The version must be 96 or higher.
-- **Tracing layers**: One version each for Node.js, Python, Java, Ruby, and .NET. A function receives the tracing layer for its runtime.
-
-A new rule starts at the latest versions, and each field shows the latest version available. Datadog moves every function the rule covers to the rule's versions. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version.
-
-Datadog does not upgrade the versions on a rule for you. To upgrade or roll back, edit the versions on the rule. Datadog then moves the covered functions to the new versions.
-
-When a version doesn't exist for a function's runtime, architecture, or region, Datadog skips the function and reports the reason, `lambda_layer_version_not_found`, in **Integration Health**. Choose a version that exists for the function to instrument it.
-
-### APM and Logs
-
-Each Lambda rule has an **APM** toggle for traces and a **Logs** toggle. Both are on by default. Datadog sets the following environment variables on every function the rule covers to match the toggles:
-
-| Toggle | Environment variable |
-|---|---|
-| APM | `DD_TRACE_ENABLED`, set to `true` or `false` |
-| Logs | `DD_SERVERLESS_LOGS_ENABLED`, set to `true` or `false` |
-
-The rule takes precedence over values set on the function by hand: Datadog overwrites them to match the rule. Rules created before the toggles existed behave as if both toggles are on. When you uninstall, Datadog restores each variable's original value, or removes the variable if the function didn't set it before instrumentation. For what these variables control, see [Configure Serverless Monitoring for AWS Lambda][14].
-
 ## Install Datadog instrumentation
+
+<div class="alert alert-info">This feature is available only to trial customers and customers who enabled it during their trial. This applies to both AWS integration setup and Fleet Automation.</div>
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
@@ -252,7 +229,7 @@ To install from the AWS Install Agents page:
 1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
 1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
-1. For Lambda, set the layer versions in the **Configure Lambda Layers** step, and turn **APM** and **Logs** on or off. See [Lambda layer versions](#lambda-layer-versions) and [APM and Logs](#apm-and-logs).
+1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and stay fixed until you edit the rule.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
