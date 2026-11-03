@@ -32,7 +32,7 @@ This section shows all of your metric sources, the additional processing and con
 
 ### Metric Sources
 
-The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click any of the sources to open the [Metrics Catalog page][2] scoped to that source. Your Datadog metrics can originate from the following sources:
+The {{< ui >}}Metric Sources{{< /ui >}} column shows a summary of the metric sources reporting to Datadog. Click any of the sources to open the Metrics Catalog page scoped to that source. For more information, see the [Metrics Catalog documentation][2]. Your Datadog metrics can originate from the following sources:
 
 {{% collapse-content title="Datadog Agent" level="h4" %}}
 The [Datadog Agent][3] collects metrics from the hosts where it's installed and forwards them to Datadog. These metrics could originate from:
