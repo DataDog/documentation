@@ -161,7 +161,9 @@ helm repo update
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: 
+**Notes**:
+- Vertical scaling recommendations are applied to new pods through the [Admission Controller][19] mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
+- See the [reference](#reference) section for details on [OOM Kill and check cardinality](#oom-kill-handling) and [Kubernetes unbundled event handling](#unbundled-event-collection).
 - Vertical scaling recommendations are applied to new pods through the [Admission Controller][19] mutating webhook. The Admission Controller is enabled by default. If you disable it, horizontal scaling continues to work but vertical scaling has no effect.
 - See the [reference](#reference) section for details on the [OOM Kill and check cardinality](#oom-kill-handling) and [Kubernetes unbundled event handling](#unbundled-event-collection).
 
@@ -696,17 +698,17 @@ Datadog computes vertical scaling recommendations for CPU and memory by analyzin
 | **Request and limit recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
 
 #### OOM Kill handling
-When an out of memory kill (OOM Kill) occurrs for a pod managed by Datadog vertical autoscaling, the recommended memory limit for the corresponding container is increased by 20%. This updates your pods with a new pod rollout or [in place vertical scaling](#in-place-vertical-scaling) depending on your settings. This is re-applied on each subsequent OOM Kill (on updated pods) until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures. Change the ratio with `spec.options.outOfMemory.bumpUpRatio`; see the [DatadogPodAutoscaler manifest reference][15].
+When an out-of-memory kill (OOM Kill) occurs for a pod managed by Datadog vertical autoscaling, the recommended memory limit for the corresponding container is increased by 20%. This updates your pods with a new pod rollout or [in-place vertical scaling](#in-place-vertical-scaling), depending on your settings. This is re-applied on each subsequent OOM Kill (on updated pods) until the workload stabilizes, reducing the likelihood of repeated out-of-memory failures. Change the ratio with `spec.options.outOfMemory.bumpUpRatio`; see the [DatadogPodAutoscaler manifest reference][15].
 
-Datadog recommends enabling the [OOM Kill][20] check using the recommended configuration for the best OOM Kill detection. With this enabled the Agent can readily capture the OOM Kill events reported per pod. 
+Datadog recommends enabling the [OOM Kill][20] check using the recommended configuration for the best OOM Kill detection. With this enabled, the Agent can capture the OOM Kill events reported per pod.
 
-Without this check enabled OOM Kill detection relies on the Agent capturing the container *activily* in the terminated state. Depending on the workload and the frequency of the OOM Kills, the container may not stay in this state too long before Kubernetes restarts it. Which can make the Agent miss this state.
+Without this check enabled, OOM Kill detection relies on the Agent capturing the container *actively* in the terminated state. Depending on the workload and the frequency of the OOM Kills, the container may not stay in this state long enough before Kubernetes restarts it, which can cause the Agent to miss this state.
 
-This OOM Kill handling requires the check to report with the Tag Cardinality set to `orchestrator`. Starting in Datadog Agent `7.86.0`, the OOM Kill check runs with this cardinality by default. In earlier versions this can be set globally in your config as seen in the [setup](#setup).
+This OOM Kill handling requires the check to report with the tag cardinality set to `orchestrator`. Starting in Datadog Agent `7.86.0`, the OOM Kill check runs with this cardinality by default. In earlier versions, this can be set globally in your config, as shown in the [setup](#setup).
 
-### Unbundled Event Collection
+### Unbundled event collection
 
-Datadog recommends to enable the unbundled Kubernetes event collection. This reports the Kubernetes events for your Pods and the Datadog Pod Autoscaling at a higher granularity, rather than bundling multiple like events together.
+Datadog recommends enabling the unbundled Kubernetes event collection. This reports the Kubernetes events for your pods and Datadog Pod Autoscaling at a higher granularity, rather than bundling multiple similar events together.
 
 This is especially useful with the visualizations on the Datadog Pod Autoscaling page, linking your pod's usage with its scaling events.
 
