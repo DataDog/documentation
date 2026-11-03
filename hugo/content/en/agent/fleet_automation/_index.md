@@ -27,7 +27,7 @@ further_reading:
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
-On US1-FED and US2-FED, Fleet Automation supports Fleet View and remote Agent upgrades and configuration on Linux and Windows VMs. Remote SDK upgrades are not supported.
+Fleet View is available on US1-FED and US2-FED. On these sites, you can also upgrade and configure Agents on Linux and Windows VMs. Remote SDK upgrades are not supported.
 </div>
 {{< /site-region >}}
 

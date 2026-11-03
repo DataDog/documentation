@@ -13,12 +13,6 @@ further_reading:
   text: "Install the Datadog Agent on Kubernetes"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-On US1-FED and US2-FED, Fleet Automation supports Fleet View and remote Agent upgrades and configuration on Linux and Windows VMs. Remote SDK upgrades are not supported.
-</div>
-{{< /site-region >}}
-
 Use [Fleet View][1] to gain insight into observability gaps on your hosts, outdated Agents or OTel Collectors, and Agents with integration issues.
 
 For each Datadog Agent, you can see:
