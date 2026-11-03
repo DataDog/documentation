@@ -50,9 +50,7 @@ To use an integration that is not packaged with the Datadog Agent, you must buil
 
 Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][20] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
 
-For supported workloads, use the `DatadogInstrumentation` custom resource (recommended) to configure checks and logs without changing application pod templates. Before creating a resource, follow the [DDI requirements and setup instructions][29].
-
-To configure an integration:
+Otherwise, configure an integration:
 
 1. Choose a configuration method: `DatadogInstrumentation`, Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
@@ -88,6 +86,8 @@ spec:
 ```
 
 For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -446,6 +446,8 @@ spec:
 
 For setup and supported fields, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
 
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
 {{% /tab %}}
 {{% tab "Annotations" %}}
 
@@ -549,7 +551,7 @@ To apply this configuration to your Postgres containers:
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][29], create this resource in the namespace of a Postgres StatefulSet named `postgres`, with a container named `postgres`:
+Create this resource in the namespace of the targeted Postgres workload.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -588,7 +590,7 @@ kubectl apply -f postgres-instrumentation.yaml
 kubectl describe datadoginstrumentation postgres-instrumentation -n <WORKLOAD_NAMESPACE>
 ```
 
-Pod annotations take precedence over DDI check and log configuration. To verify the scheduled check, run `agent configcheck` on the node Agent running alongside a Postgres pod. Look for the `postgres` check with configuration provider `instrumentation-checks`. Confirm log collection in the Agent's `status` output and the [Log Explorer][32].
+[30]: /containers/kubernetes/log/#from-a-container-local-log-file
 
 {{% /tab %}}
 {{% tab "Annotations" %}}
@@ -862,6 +864,3 @@ For more examples, including how to configure multiple checks for multiple sets 
 [26]: /integrations/postgres
 [27]: /getting_started/integrations/#per-check-tag-configuration
 [28]: https://github.com/DataDog/datadog-agent/blob/main/comp/core/autodiscovery/providers/names/provider_names.go#L10-L38
-[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
-[30]: /containers/kubernetes/log/#from-a-container-local-log-file
-[32]: /logs/explorer/

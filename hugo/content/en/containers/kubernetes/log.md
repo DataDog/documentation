@@ -195,7 +195,7 @@ Setting a `source` and `service` tag on these log configurations is strongly rec
 
 ### Configure logs with `DatadogInstrumentation` {#datadoginstrumentation-crd}
 
-Use a `DatadogInstrumentation` resource to configure log collection without modifying application pod templates. Enable [Agent log collection](#log-collection), then complete the [DDI requirements and setup][23]. Create the resource in the same namespace as the target workload.
+Use a `DatadogInstrumentation` resource to configure log collection without modifying application pod templates. Enable [Agent log collection](#log-collection). Create the resource in the same namespace as the target workload.
 
 The following example collects logs from the `app` container in the `example` Deployment:
 
@@ -219,14 +219,12 @@ spec:
           - foo:bar
 ```
 
-Save the resource as `example-logs.yaml` and apply it:
+Save the resource as `java-logs.yaml` and apply it:
 
 ```shell
-kubectl apply -f example-logs.yaml
+kubectl apply -f java-logs.yaml
 kubectl describe datadoginstrumentation example-logs -n <WORKLOAD_NAMESPACE>
 ```
-
-Match `containerName` to the container's name in the pod spec, not its image. Pod log annotations take precedence over DDI configuration. Confirm that the Agent's `status` output lists the log source and that logs arrive in the [Log Explorer][25]. Resource status alone does not confirm log delivery.
 
 #### Configure multiple containers
 
@@ -469,35 +467,9 @@ For example, use a shared `hostPath` volume for an application that writes to `/
 {{< tabs >}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-After completing the [DDI setup][23], apply the following Deployment and resource in the same namespace:
+Apply this resource in the namespace of the targeted workload:
 
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: logger
-spec:
-  selector:
-    matchLabels:
-      app: logger
-  template:
-    metadata:
-      labels:
-        app: logger
-    spec:
-      containers:
-        - name: busybox
-          image: busybox
-          command: ["/bin/sh", "-c"]
-          args: ["while true; do date >> /var/log/example/app.log; sleep 1; done"]
-          volumeMounts:
-            - name: applogs
-              mountPath: /var/log/example
-      volumes:
-        - name: applogs
-          hostPath:
-            path: /var/log/example
----
 apiVersion: datadoghq.com/v1alpha1
 kind: DatadogInstrumentation
 metadata:
@@ -626,4 +598,3 @@ For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 [21]: /containers/troubleshooting/log-collection/?tab=datadogoperator
 [22]: /containers/guide/ad_identifiers/
 [23]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
-[25]: /logs/explorer/
