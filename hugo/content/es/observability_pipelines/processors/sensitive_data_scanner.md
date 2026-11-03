@@ -12,6 +12,9 @@ further_reading:
   tag: Blog
   text: Enrutar datos de OTel de aplicaciones de IA a ClickHouse y Datadog usando
     Observability Pipelines
+- link: https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/
+  tag: Centro de arquitectura
+  text: Optimización de Observability Pipelines Sensitive Data Scanner
 products:
 - icon: logs
   name: Registros
@@ -69,20 +72,20 @@ Después de agregar reglas de escaneo de la biblioteca, puede editar cada regla 
 {{% /tab %}}
 {{% tab "Reglas personalizadas" %}}
 
-1. En la sección {{< ui >}}Define match conditions{{< /ui >}}, especifique el patrón regex que se utilizará para buscar coincidencias con eventos en el campo {{< ui >}}Define the regex{{< /ui >}}. Consulte [Writing Effective Grok Parseo Rules with Regular Expressions][1] para obtener más información.
+1. En la sección {{< ui >}}Define match conditions{{< /ui >}}, especifique el patrón de expresiones regulares que se utilizará para buscar coincidencias con eventos en el campo {{< ui >}}Define the regex{{< /ui >}}. Consulte [Writing Effective Grok Parseo Rules with Regular Expressions][1] para obtener más información.
     Sensitive Data Scanner admite expresiones regulares compatibles con Perl (PCRE), pero no se admiten los siguientes patrones:
     - Referencias inversas y subexpresiones de captura (lookarounds)
     - Aserciones arbitrarias de ancho cero
     - Referencias de subrutinas y patrones recursivos
     - Patrones condicionales
-    - Verbos de control de backtracking
+    - Verbos de control de retroceso
     - La directiva `\C` "single-byte" (que rompe secuencias UTF-8)
     - La coincidencia de nueva línea `\R`
     - La directiva de reinicio de coincidencia `\K`
     - Callouts y código incrustado
     - Agrupación atómica y cuantificadores posesivos
-1. Ingrese datos de muestra en el campo {{< ui >}}Add sample data{{< /ui >}} para verificar que su patrón regex sea válido.
-1. Para {{< ui >}}Create keyword dictionary{{< /ui >}}, agregue palabras clave para refinar la precisión de la detección al hacer coincidir condiciones regex. Por ejemplo, si está escaneando un número de tarjeta de crédito Visa de dieciséis dígitos, puede agregar palabras clave como `visa`, `credit` y `card`. También puede requerir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. De forma predeterminada, las palabras clave deben estar dentro de los 30 caracteres antes de un valor coincidente.
+1. Ingrese datos de muestra en el campo {{< ui >}}Add sample data{{< /ui >}} para verificar que su patrón de expresiones regulares sea válido.
+1. Para {{< ui >}}Create keyword dictionary{{< /ui >}}, agregue palabras clave para refinar la precisión de la detección al hacer coincidir condiciones de expresiones regulares. Por ejemplo, si está escaneando un número de tarjeta de crédito Visa de dieciséis dígitos, puede agregar palabras clave como `visa`, `credit` y `card`. También puede requerir que estas palabras clave estén dentro de un número especificado de caracteres de una coincidencia. De forma predeterminada, las palabras clave deben estar dentro de los 30 caracteres antes de un valor coincidente.
 1. En la sección {{< ui >}}Define rule target and conditions{{< /ui >}}, seleccione si desea escanear {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}} o {{< ui >}}Exclude Attributes{{< /ui >}} en el menú desplegable.
     - Si está escaneando todo el evento, puede excluir opcionalmente atributos específicos del escaneo. Utilice [notación de ruta](#path-notation-example) (`outer_key.inner_key`) para acceder a claves anidadas. Para los atributos especificados con datos anidados, se excluyen todos los datos anidados.
     - Si está escaneando atributos específicos, especifique qué atributos desea escanear. Utilice [notación de ruta](#path-notation-example-custom) (`outer_key.inner_key`) para acceder a claves anidadas. Para atributos especificados con datos anidados, se escanean todos los datos anidados.
@@ -121,7 +124,7 @@ Para eliminar una regla en el Sensitive Data Scanner:
 
 Puede utilizar el [Datadog Observability Pipeline Terraform resource][4] para configurar una pipeline con el procesador Sensitive Data Scanner. Para agregar una regla al procesador Sensitive Data Scanner usando Terraform:
 
-1. Utilice la fuente de datos [Datadog Sensitive Data Scanner Standard Pattern][5] para recuperar el ID de regla de la [library rule][6] de Sensitive Data Scanner.
+1. Utilice la fuente de datos [Datadog Sensitive Data Scanner Standard Pattern][5] para recuperar el ID de regla de la [regla de biblioteca][6] de Sensitive Data Scanner.
 
    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
@@ -353,7 +356,7 @@ Para visualizar la métrica `pipelines.component_latency_seconds`:
 
 ## Métricas de estado {#health-metrics}
 
-Para [component metrics][13] y [processor buffer metrics][14] emitidas por todos los procesadores, consulte la documentación de [Pipelines Usage Metrics][15].
+Para [métricas de componentes][13] y [métricas de búfer del procesador][14] emitidas por todos los procesadores, consulte la documentación de [Pipelines Usage Metrics][15].
 
 ### Métricas de Sensitive Data Scanner {#sensitive-data-scanner-metrics}
 
