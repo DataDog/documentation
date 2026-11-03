@@ -1,4 +1,8 @@
-If you use Spring Boot, add a build plugin to embed git information in your JAR. The Datadog Java tracer reads the `git.properties` file that Spring Boot Actuator generates at startup.
+Add a build plugin to generate Git properties during the build. The Datadog Java tracer reads the packaged properties directly; Spring Boot Actuator is not required.
+
+For Spring Boot JARs and WARs, package `git.properties` or `datadog_git.properties` under `BOOT-INF/classes/` or `WEB-INF/classes/`. For other layouts, package `datadog_git.properties` at the root of the classpath. The file must contain `git.remote.origin.url` and either `git.commit.id` or `git.commit.id.full`.
+
+The following examples generate `git.properties` for a Spring Boot application. For other layouts, configure the plugin to generate `datadog_git.properties` instead.
 
 **Maven**
 
