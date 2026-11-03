@@ -58,10 +58,10 @@ It also blocks IPv6 special-purpose ranges, including `::1/128`, `fc00::/7`, `fe
 
 Datadog recommends the following configuration:
 
-1. Keep `enableDefaultBlockedIpRanges` set to `true`. Configuration files generated for new private locations set it to `true`. For older private locations, set it to `true` in the configuration file.
-2. Add only the ranges that your tests need to `allowedIPRanges`. Use the smallest range possible, and use `/32` (IPv4) or `/128` (IPv6) for single hosts.
-3. Use `allowedDomainNames` only for hostnames whose DNS records you control.
-4. Optionally, to restrict tests to a known set of hostnames, set `blockedDomainNames` to `*` and list the hostnames that tests need in `allowedDomainNames`. A `*` entry matches every hostname, so the worker blocks every hostname that is not explicitly allowed.
+- Keep `enableDefaultBlockedIpRanges` set to `true`. Configuration files generated for new private locations set it to `true`. For older private locations, set it to `true` in the configuration file.
+- Add only the ranges that your tests need to `allowedIPRanges`. Use the smallest range possible, and use `/32` (IPv4) or `/128` (IPv6) for single hosts.
+- Use `allowedDomainNames` only for hostnames whose DNS records you control.
+- Optionally, to restrict tests to a known set of hostnames, set `blockedDomainNames` to `*` and list the hostnames that tests need in `allowedDomainNames`. A `*` entry matches every hostname, so the worker blocks every hostname that is not explicitly allowed.
 
 The following examples block the default ranges and allow one internal application subnet and one hostname:
 
