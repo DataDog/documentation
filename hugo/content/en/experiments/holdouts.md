@@ -84,7 +84,7 @@ Add selective experiments while they are drafts. The holdout must be waiting to 
 
 Create the holdout before starting the experiments:
 
-1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Datadog Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
+1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
 1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}. If {{< ui >}}Managed by{{< /ui >}} is shown, select {{< ui >}}Datadog (Managed){{< /ui >}}.
 1. Set the start and end dates for {{< ui >}}Experiment inclusion phase{{< /ui >}}. Allow time for the covered experiments to run and complete their rollouts within this period.
 1. Review the start and end dates for {{< ui >}}Analysis phase{{< /ui >}} and adjust them as needed. Analysis starts at or after inclusion ends.
