@@ -14,6 +14,9 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "https://www.datadoghq.com/blog/bits-investigations-cost-speed-accuracy/"
+  tag: "Blog"
+  text: "Bits investigations are faster, more accurate, and cost less"
 ---
 
 ## Overview

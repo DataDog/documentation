@@ -11,6 +11,9 @@ further_reading:
   - link: "/metrics/open_telemetry/otlp_metric_types/"
     tag: "Documentation"
     text: "OTLP Metric Types"
+  - link: "https://www.datadoghq.com/blog/agent-observability-voice-agent/"
+    tag: "Blog"
+    text: "Trace voice agents with Datadog Agent Observability"
 ---
 ## Overview
 

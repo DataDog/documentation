@@ -15,6 +15,9 @@ further_reading:
   - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=aws#lambda"
     tag: "Documentation"
     text: "Send AWS Lambda traces to Datadog with OTLP"
+  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+    tag: "Learning Center"
+    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
   - link: "https://www.datadoghq.com/blog/monitoring-lambda-containers/"
     tag: "Blog"
     text: "Monitor AWS Lambda functions deployed using container images"
@@ -42,9 +45,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/lambda-managed-instances
     tag: Blog
     text: Monitor AWS Lambda Managed Instances with Datadog
-  - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
-    tag: "Learning Center"
-    text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
+  - link: "https://www.datadoghq.com/blog/serverless-ai-agents/"
+    tag: "Blog"
+    text: "Default to serverless for AI agents, then let production data decide what moves"
 
 ---
 

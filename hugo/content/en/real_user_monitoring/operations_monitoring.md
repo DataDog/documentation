@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
   tag: "Blog"
   text: "Monitor the performance of critical steps in user journeys with RUM operations"
+- link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
+  tag: "Blog"
+  text: "Diagnose frontend performance issues with RUM Profiling"
 ---
 
 ## Overview

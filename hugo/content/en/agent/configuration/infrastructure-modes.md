@@ -8,6 +8,9 @@ further_reading:
 - link: "/agent/guide/upgrade/"
   tag: "Guide"
   text: "Upgrade your Datadog Agent"
+- link: "https://www.datadoghq.com/blog/infrastructure-monitoring-basic/"
+  tag: "Blog"
+  text: "Match monitoring depth to workload needs with Infrastructure Basic"
 algolia:
   tags: ['infrastructure modes']
 ---

@@ -29,6 +29,9 @@ further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
   text: "SAML Single Sign-On"
+- link: "https://www.datadoghq.com/blog/infrastructure-monitoring-basic/"
+  tag: "Blog"
+  text: "Match monitoring depth to workload needs with Infrastructure Basic"
 ---
 
 ## Overview

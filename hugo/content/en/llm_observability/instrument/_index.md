@@ -4,15 +4,18 @@ aliases:
 - /llm_observability/instrumentation/
 description: Overview of instrumentation options for Agent Observability, including SDK-based and API-based approaches for Python, Node.js, and Java.
 further_reading:
-    - link: '/llm_observability/auto_instrumentation'
-      tag: 'Auto instrumentation'
-      text: 'Get started quickly with Automatic Instrumentation'
-    - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
-      tag: Blog
-      text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
     - link: "https://learn.datadoghq.com/courses/llm-obs-getting-started"
       tag: "Learning Center"
       text: "Getting Started with Agent Observability"
+    - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+      tag: Blog
+      text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+    - link: "https://www.datadoghq.com/blog/agent-observability-voice-agent/"
+      tag: "Blog"
+      text: "Trace voice agents with Datadog Agent Observability"
+    - link: '/llm_observability/auto_instrumentation'
+      tag: 'Auto instrumentation'
+      text: 'Get started quickly with Automatic Instrumentation'
 
 ---
 

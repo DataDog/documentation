@@ -17,6 +17,9 @@ further_reading:
 - link: "/experiments/guide/connecting_a_data_warehouse/"
   tag: "Documentation"
   text: "Connect your data warehouse"
+- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
+  tag: "Blog"
+  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview

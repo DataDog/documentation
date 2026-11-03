@@ -8,6 +8,9 @@ further_reading:
 - link: '/real_user_monitoring/rum_without_limits/'
   tag: Documentation
   text: RUM without Limits
+- link: "https://www.datadoghq.com/blog/rum-managed-archive/"
+  tag: "Blog"
+  text: "Store and recover user sessions with RUM Managed Archive"
 ---
 
 ## Overview

@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ai-agent-security-lessons/"
   tag: "Blog"
   text: "What we learned about AI agent security by monitoring our agents"
+- link: "https://www.datadoghq.com/blog/runtime-security-for-ai-agents/"
+  tag: "Blog"
+  text: "Agents make decisions at runtime—your security controls should too"
 ---
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>

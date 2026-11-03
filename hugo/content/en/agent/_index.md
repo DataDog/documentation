@@ -14,12 +14,18 @@ further_reading:
 - link: "/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "Documentation"
   text: "Why install the Agent on cloud instances?"
-- link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
-  tag: "Blog"
-  text: "Don't fear the Agent"
 - link: "https://learn.datadoghq.com/courses/agent-on-host"
   tag: "Learning Center"
   text: "The Agent on a Host"
+- link: "https://www.datadoghq.com/blog/dont-fear-the-agent/"
+  tag: "Blog"
+  text: "Don't fear the Agent"
+- link: "https://www.datadoghq.com/blog/infrastructure-monitoring-basic/"
+  tag: "Blog"
+  text: "Match monitoring depth to workload needs with Infrastructure Basic"
+- link: "https://www.datadoghq.com/blog/monitor-native-apps-datadog-rum/"
+  tag: "Blog"
+  text: "Monitor C and C++ applications with Datadog RUM"
 aliases:
   - /agent/faq/agent-check-directory-structure
   - /agent/faq/install-core-extra

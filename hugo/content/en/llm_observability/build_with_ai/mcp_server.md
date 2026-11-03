@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-evals/"
   tag: "Blog"
   text: "Improve AI agent quality with Bits Evals"
+- link: "https://www.datadoghq.com/blog/improving-insights-agent-observability/"
+  tag: "Blog"
+  text: "How we use Insights to improve the agent behind Insights"
 ---
 
 ## Overview

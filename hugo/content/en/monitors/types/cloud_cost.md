@@ -26,6 +26,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/how-kubernetes-dra-can-improve-gpu-utilization-and-cut-costs/"
       tag: "Blog"
       text: "How Kubernetes DRA can improve GPU utilization and cut costs"
+    - link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+      tag: "Blog"
+      text: "Monitor Oracle AI Database across clouds with Datadog"
 ---
 
 ## Overview
