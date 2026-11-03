@@ -281,7 +281,7 @@ An evaluation tells your code what AI Guard decided and why, so your agent can r
 | --- | --- |
 | `action` | `ALLOW` or `DENY` |
 | `reason` | A natural language summary of the decision. |
-| `tags` | The attack categories AI Guard detected, such as `indirect-prompt-injection` or `destructive-tool-call`. |
+| `tags` | The attack categories AI Guard detected, such as `indirect-prompt-injection` or `credential-access`. |
 | `sds` | The Sensitive Data Scanner findings. |
 | `messages` | The conversation with sensitive data replaced, when sensitive data redaction is enabled for the service. See [Redact sensitive data][9]. |
 

@@ -56,17 +56,7 @@ To create AI Guard detection rules:
          <td>Target specific attack types</td>
          <td>
            <ul>
-             <li><code>jailbreak</code></li>
-             <li><code>indirect-prompt-injection</code></li>
-             <li><code>destructive-tool-call</code></li>
-             <li><code>denial-of-service-tool-call</code></li>
-             <li><code>security-exploit</code></li>
-             <li><code>authority-override</code></li>
-             <li><code>role-play</code></li>
-             <li><code>instruction-override</code></li>
-             <li><code>obfuscation</code></li>
-             <li><code>system-prompt-extraction</code></li>
-             <li><code>data-exfiltration</code></li>
+             <li><a href="/security/ai_guard/#attack-categories">Attack category tags</a></li>
              <li><code>tool-blocked</code> and <code>tool-allowed</code>, added by tool policies</li>
              <li><code>regexp-blocked</code>, added by custom rules</li>
            </ul>

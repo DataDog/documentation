@@ -96,21 +96,23 @@ AI Guard complements Agent Observability by adding runtime security to AI applic
 
 ## Attack categories
 
-AI Guard classifies each threat it detects into an attack category, such as instruction override or jailbreak. Use attack categories to understand what a policy protects against and to filter signals and spans.
+AI Guard classifies each threat it detects into an attack category, such as policy evasion or indirect prompt injection. Use attack categories to understand what a policy protects against and to filter signals and spans.
 
 AI Guard detects these attack categories:
 
-- Role play
-- Authority override
-- Instruction override
-- Obfuscation
-- Destructive tool call
-- Denial of service tool call
-- Security exploit
-- Data exfiltration
-- System prompt extraction
-- Indirect prompt injection
-- Jailbreak
+| Attack category | Tag | Description |
+| --- | --- | --- |
+| Policy evasion | `policy-evasion` | Attempts to bypass or hide from controls, such as rewording a refused request, role play, claiming authority or approval to skip verification, or encoding, splitting, or hiding instructions to override system rules. |
+| Indirect prompt injection | `indirect-prompt-injection` | Instructions in third-party content, such as tool outputs, documents, configuration, or retrieved pages, that try to steer the AI agent. |
+| System and capability discovery | `system-and-capability-discovery` | Attempts to extract hidden instructions, safety rules, or detection limits, or to map the tools, permissions, data sources, and internal services available to the AI agent. |
+| Credential access | `credential-access` | Attempts to read or expose passwords, API keys, tokens, cookies, SSH keys, or secret environment variables that aren't the user's own. |
+| Sensitive data collection | `sensitive-data-collection` | Gathering sensitive, private, or restricted data, or bulk-extracting records well beyond what the task requires. |
+| Data exfiltration | `data-exfiltration` | Sending sensitive or protected data to an external destination, such as a webhook, email, external URL, or tracking pixel, or surfacing the AI agent's system prompt. |
+| Privilege escalation | `privilege-escalation` | Attempts to exceed stated authorization, such as skipping approval, acting as an admin, root, or service account, changing roles or access policies, or escaping a sandbox. |
+| Malicious execution | `malicious-execution` | Requests to run a visibly harmful payload, such as a reverse shell, a downloaded script, or an untrusted package. |
+| Private network target | `private-network-target` | Tool calls, fetches, or probes that target cloud metadata or link-local addresses, or destinations the conversation identifies as internal, admin, or metadata. |
+| Destructive or resource abuse | `destructive-or-resource-abuse` | Deleting or corrupting production, shared, backup, customer, or security data, disabling security controls, disrupting infrastructure, or consuming resources without bounds, including excessive or unnecessarily broad tool use. |
+| Poisoning or persistence | `poisoning-or-persistence` | Storing instructions that steer later turns, such as in agent memory, RAG documents, tickets, tool data, the system prompt, approval policies, or tool destinations. |
 
 The list of attack categories expands as AI Guard adds detections. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
 
