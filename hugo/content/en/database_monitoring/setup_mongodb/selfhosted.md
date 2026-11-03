@@ -240,7 +240,7 @@ For more information about the server parameters that control query stats collec
 
 ### Write query statistics on MongoDB 9.0
 
-MongoDB 9.0 samples 1% of write operations by default. To collect statistics for all write commands, set [`internalQueryStatsWriteCmdSampleRate`][5] to `1.0` on each `mongod` or `mongos` process. This setting is independent of the read query sampling settings.
+MongoDB 9.0 samples 1% of write operations by default. To collect statistics for all write commands, set `internalQueryStatsWriteCmdSampleRate` to `1.0` on each `mongod` or `mongos` process. This setting is independent of the read query sampling settings.
 
 To enable write query statistics at runtime until the next restart, run:
 
@@ -297,4 +297,3 @@ instances:
 [2]: /integrations/mongo/?tab=standalone#metrics
 [3]: /database_monitoring/query_metrics/
 [4]: https://github.com/mongodb/mongo/blob/master/src/mongo/db/query/query_stats/README.md#server-parameters
-[5]: https://github.com/mongodb/mongo/blob/v9.0/src/mongo/db/query/query_integration_knobs.idl
