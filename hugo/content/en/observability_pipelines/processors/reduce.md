@@ -47,7 +47,7 @@ These are the available merge strategies for combining log events.
 
 ### Set the aggregation window
 
-Use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long a Reduce processor aggregates events before it sends a reduced log. The setting applies to every Reduce processor on the Worker. Matching events processed by different Workers are not merged. The variable accepts values from `1` to `300` seconds. The default is `10` seconds.
+Optionally, use the `DD_OP_REDUCE_WINDOW_SECS` environment variable to set how long a Reduce processor aggregates events before it sends a reduced log. The setting applies to every Reduce processor on the Worker. Matching events processed by different Workers are not merged. The variable accepts values from `1` to `300` seconds. The default is `10` seconds.
 
 A longer aggregation window lets the processor merge events that arrive farther apart, so more events are merged. Each Reduce processor holds its groups of events in memory until the window closes. Memory usage grows with the window size, the number of unique groups, and the number of Reduce processors. If most events are unique, memory can grow substantially and the Worker can run out of memory.
 
