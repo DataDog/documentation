@@ -117,24 +117,6 @@ To restrict access:
 1. Click **Save Settings**.
    <div class="alert alert-info">A status page <strong>is not Live</strong> after you save your settings. To make the page available, <a href="#publish-your-status-page">publish your status page</a>.</div>
 
-## Configure visitor access for a private status page
-
-Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
-
-You can configure email rules while creating a private status page. For an existing page, click **Settings**, select **General**, and go to **Email Rules**.
-
-You can separate multiple entries with commas.
-
-1. In **Allow**, add individual email addresses or domains. Format domains with a leading `@`, for example `@example.com`.
-1. (Optional) In **Deny**, add individual email addresses that should be blocked. Deny rules take precedence over Allow rules.
-1. Click **Save**.
-
-{{< img src="/incident_response/status_pages/private_status_page_email_rules.png" alt="Private status page settings with Email Rules that allow a domain and email address and deny an individual email address" style="width:100%;" >}}
-
-An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
-
-Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access.
-
 ## Add components
 
 {{< img src="/incident_response/status_pages/status_page_components.png" alt="Status page component configuration with live preview panel" style="width:100%;" >}}
@@ -172,6 +154,24 @@ Each component status affects the uptime bars and uptime percentage differently:
 | Operational | Shown as healthy | No impact |
 
 **Note**: Partial Outage and Major Outage are weighted equally. The full duration at either status counts as downtime in the uptime percentage calculation.
+
+## Configure visitor access for a private status page
+
+Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
+
+You can configure email rules while creating a private status page. For an existing page, click **Settings**, select **General**, and go to **Email Rules**.
+
+You can separate multiple entries with commas.
+
+1. In **Allow**, add individual email addresses or domains. Format domains with a leading `@`, for example `@example.com`.
+1. (Optional) In **Deny**, add individual email addresses that should be blocked. Deny rules take precedence over Allow rules.
+1. Click **Save**.
+
+{{< img src="/incident_response/status_pages/private_status_page_email_rules.png" alt="Private status page settings with Email Rules that allow a domain and email address and deny an individual email address" style="width:100%;" >}}
+
+An email address can access the page only if it matches an Allow rule and does not match a Deny rule.
+
+Configuring email rules requires the **Status Pages Settings Write** permission. If access to the status page is restricted with granular access controls, you must also have **Manager** access.
 
 ## Publish your status page
 
