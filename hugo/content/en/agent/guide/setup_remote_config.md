@@ -40,13 +40,15 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 ## Enable Remote Configuration
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">
+Remote Configuration is not enabled by default for organizations on US1-FED or US2-FED. Enable it in <a href="https://app.datadoghq.com/organization-settings/remote-config">Organization Settings &gt; Remote Configuration</a> using the steps below.
+</div>
+{{< /site-region >}}
+
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][3] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][1], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][3]. This enables Datadog components across your organization to receive configurations from Datadog.
-
-{{< site-region region="gov,gov2" >}}
-Organizations on US1-FED and US2-FED do not have Remote Configuration enabled by default.
-{{< /site-region >}}
 
 ## Enable remote Agent management
 

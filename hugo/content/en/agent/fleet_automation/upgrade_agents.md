@@ -14,17 +14,17 @@ Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet
 
 ## Prerequisites
 
-- [Remote Configuration][7] enabled for your organization and the Agent's API key
-- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
-- Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
-- Linux VMs or Windows VMs
-- At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
-
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-info">
 On US1-FED and US2-FED, remote upgrades require Agent 7.85.0 or later on both Linux and Windows. If you run an older version, use the <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">Agent installation instructions</a> to update it before upgrading through Fleet Automation.
 </div>
 {{< /site-region >}}
+
+- [Remote Configuration][7] enabled for your organization and the Agent's API key
+- [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)
+- Agent version 7.71.1 or later for Windows and 7.69.0 or later for Linux
+- Linux VMs or Windows VMs
+- At least 2 GB disk space for the initial Agent install, plus an additional 2 GB for upgrades. (The upgrade requires 1.3 GB in `/opt/datadog-packages` on Linux, or `C:\ProgramData\Datadog\Installer\packages` on Windows. The additional space maintains two Agent installs temporarily during the upgrade in case a rollback is needed.)
 
 <div class="alert alert-info">
 Remote upgrading of Agents in containerized workloads is not supported.
