@@ -46,11 +46,9 @@ Para habilitar Crash Reporting nativo, establezca `NativeCrashReportEnabled = tr
 })
 ```
 
-{% alert level="info" %}
-Cuando `NativeCrashReportEnabled = true`, una excepción de C# no controlada que bloquea la aplicación se informa **dos veces**: una vez como un error de C# capturado por `AppDomain.UnhandledException`, y otra vez como un fallo nativo de iOS o Android capturado por el crash reporter de la plataforma. Ambos eventos comparten la misma sesión y vista de RUM, por lo que puede correlacionarlos en el Explorador.
-
-Si desea conservar solo una de las dos, utilice [`ErrorEventMapper`][5] para descartar la copia que no se ajuste a su flujo de trabajo (por ejemplo, filtre por contenido de `Source` o `Stacktrace`).
-{% /alert %}
+<div class="alert alert-info">
+Cuando <code>NativeCrashReportEnabled = true</code>, una excepción de C# no controlada que provoca el cierre de la aplicación se reporta <strong>dos veces</strong>. Un reporte es un error de C# capturado por <code>AppDomain.UnhandledException</code>. El otro es un cierre inesperado nativo de iOS o Android capturado por el sistema de informes de fallos de la plataforma. Ambos eventos comparten la misma sesión y vista de RUM, por lo que puede correlacionarlos en el Explorer.<br><br>Para mantener solo uno de los dos, use <a href="/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events"><code>ErrorEventMapper</code></a> para descartar la copia que no se ajuste a su flujo de trabajo. Por ejemplo, filtre por <code>Source</code> o <code>Stacktrace</code> contenido.
+</div>
 
 ## Configuración {#setup}
 
@@ -78,7 +76,7 @@ npm install -g @datadog/datadog-ci
 
 Verifique la instalación con `datadog-ci version`.
 
-#### 2. Configure su clave de API de Datadog {#2-set-your-datadog-api-key}
+#### 2. Configure su clave de Datadog API {#2-set-your-datadog-api-key}
 
 Exporte la clave en el shell que ejecuta `dotnet publish`:
 
@@ -203,4 +201,3 @@ Los símbolos pueden tardar hasta 5 minutos en procesarse. Verifique [{{< ui >}}
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /es/real_user_monitoring/application_monitoring/maui/setup
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /es/real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events

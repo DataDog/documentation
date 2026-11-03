@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-10-21'
+    link: https://github.com/DataDog/documentation/pull/40731
+    operations:
+      - ListScorecardOutcomes
+    title: Scope Scorecards Outcomes Test And Document Pagination
