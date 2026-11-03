@@ -105,7 +105,7 @@ Distributions provide functionality that allows you to control the tagging for c
 
 To customize tagging:
 
-1. Click on your custom distribution metric name in the Metrics Catalog table to open the metrics details sidepanel.
+1. Click your custom distribution metric name in the metrics table on the Metrics Catalog page to open the metric's details side panel.
 2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
 3. Click the {{< ui >}}Custom...{{< /ui >}} tab to customize the tags you'd like to keep available for query. 
 

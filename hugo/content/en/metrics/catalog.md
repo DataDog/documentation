@@ -72,20 +72,20 @@ The search bars provide the most comprehensive set of actions to filter the list
 ### Core facets
 
 - {{< ui >}}Metric Category{{< /ui >}}: Differentiate between Custom Metrics and Standard Integration Metrics.
-- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
+- {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates).
+- {{< ui >}}Metric Origin{{< /ui >}}: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
 
 ### Usage facets
 
-- {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
-- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
-- {{< ui >}}First Submitted{{< /ui >}}: How long ago the metric was first submitted to Datadog, from {{< ui >}}Less than 1 week ago{{< /ui >}} to {{< ui >}}Over 1 year ago{{< /ui >}}
+- {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days.
+- {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs.
+- {{< ui >}}First Submitted{{< /ui >}}: How long ago the metric was first submitted to Datadog, from {{< ui >}}Less than 1 week ago{{< /ui >}} to {{< ui >}}Over 1 year ago{{< /ui >}}.
 
 ### Configuration facets
 
-- {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled
-- {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled 
-- {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations
+- {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics with percentiles and advanced query capabilities enabled.
+- {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
+- {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
 
 ### Definitions
 
@@ -118,11 +118,11 @@ Volume columns apply only to custom metrics. For standard metrics, the {{< ui >}
 
 To sort the list, click a column header. For example:
 - Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to find your largest metric names by indexed custom metrics volume.
-- Sort by {{< ui >}}Change in Volume{{< /ui >}} to find the metric names with the greatest variance in their cardinality. These metrics may have spiked unintentionally in the time frame of your choosing. If you receive an alert on your account's estimated real-time custom metrics usage, use this view to investigate the spike.
+- Sort by {{< ui >}}Change in Volume{{< /ui >}} to find the metric names with the greatest variance in their cardinality. These metrics may have spiked unintentionally in the selected time frame. If you receive an alert on your account's estimated real-time custom metrics usage, use this view to investigate the spike.
 
 ### Customize columns
 
-You can show, hide, reorder, and resize the columns in the metrics table. Your column choices are saved.
+You can show, hide, reorder, and resize the columns in the metrics table. Datadog saves your column choices.
 
 To show, hide, or reorder columns:
 1. Click {{< ui >}}Columns{{< /ui >}} above the metrics table.
@@ -153,7 +153,7 @@ To compare your spiking metric's cardinality over time:
 
 To reduce custom metrics costs, start with your largest metric names that aren't actively queried. To find these metrics, select a time frame in the {{< ui >}}Query Activity{{< /ui >}} facet. The list is filtered to show only metric names that aren't queried in dashboards, notebooks, monitors, SLOs, Metrics Explorer, or the API.
 
-To reduce the volume and cost of these metrics, [configure their tags in bulk](#configuration-of-multiple-metrics). For a complete cost-optimization workflow, see [Best Practices for Custom Metrics Governance][44].
+To reduce the volume and cost of these metrics, configure their tags in bulk. For more information, see the [Configuration of multiple metrics](#configuration-of-multiple-metrics) section. For a complete cost-optimization workflow, see [Best Practices for Custom Metrics Governance][44].
 
 ## Configuration of multiple metrics 
 
@@ -208,7 +208,7 @@ The metadata attached to your metric. You can edit most of the metadata on the M
 
 The unit for your metric (byte, second, request, query, etc.). See the [metric unit][7] page for more details.
 
-When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][7] that displays when hovering over the metric in your graph.
+When you submit custom metrics to Datadog, you can change the [unit of measurement][7] that displays when you hover over the metric in your graph.
 
 **Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as when you hover over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
 
@@ -326,11 +326,11 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note**: Metrics without Limits™ is only available for custom metrics.
 
-To configure tags on a single metric, click the {{< ui >}}Manage Tags{{< /ui >}} button in the metric's details side panel. To configure tags on multiple metrics, see [Configuration of multiple metrics](#configuration-of-multiple-metrics).
+To configure tags on a single metric, click the {{< ui >}}Manage Tags{{< /ui >}} button in the metric's details side panel. To configure tags on multiple metrics, see the [Configuration of multiple metrics](#configuration-of-multiple-metrics) section.
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
-1. Click your custom distribution metric name in the {{< ui >}}Metrics Catalog{{< /ui >}} table to open the metrics details side panel.
+1. Click your custom distribution metric name in the metrics table to open the metric's details side panel.
 2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
 3. Select {{< ui >}}Include tags...{{< /ui >}} or {{< ui >}}Exclude tags...{{< /ui >}} to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting {{< ui >}}Save{{< /ui >}}.
