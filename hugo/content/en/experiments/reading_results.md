@@ -86,7 +86,7 @@ For each metric, the {{< ui >}}Global lift{{< /ui >}} tab displays:
 
 ## Holdout results
 
-For a [holdout][10], the scorecard compares the all-shipped group with the status-quo group. Preliminary results give an early read while changes roll out. The primary analysis measures the combined effect during the analysis phase. See [Interpret results][11].
+For a [holdout][10], the scorecard compares the shipped-changes group with the control group. Preliminary results give an early read while changes roll out. The primary analysis measures the combined effect during the analysis phase. See [Interpret results][11].
 
 ## Exploring results
 

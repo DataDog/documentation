@@ -11,8 +11,8 @@ Conceptually, a holdout is a controlled experiment. The treatment is a combinati
 
 Subjects are assigned at random to two groups:
 
-- **Status quo** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
-- **All shipped** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
+- **Control group** (`status_quo`): Keeps each experiment's control experience, the version used for comparison.
+- **Shipped-changes group** (`all_shipped`): Receives each experiment's selected change after its rollout completes.
 
 Both groups stay on control while covered experiments run, so rejected variants cannot distort the comparison. The result measures the combined impact of changes that remain in the product and continue to affect existing and future users.
 
@@ -25,17 +25,17 @@ The following sections describe holdouts with Datadog Feature Flags.
 | Global | Automatically includes eligible experiments with the same subject type. They must start during the inclusion period and after the holdout is created. |
 | Selective | Includes experiments that you choose and add before they start. |
 
-Global holdouts do not include experiments already running when the holdout is created. Global holdouts with the same subject type cannot overlap from the inclusion start date to the analysis end date. An experiment can belong to only one active selective holdout.
+Global holdouts with the same subject type use separate time periods, from inclusion start to analysis end. An experiment can belong to only one active selective holdout.
 
 Global and selective holdouts can run at the same time. For example, a global holdout can measure all eligible changes, while a selective holdout measures changes for a product initiative or checkout.
 
-Each holdout has its own randomized comparison. The selective result is not inferred from the global result or the sum of individual experiment results.
+Each holdout has its own randomized comparison.
 
-An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. The results describe different sets of changes, so don't add them together.
+An experiment can be covered by both a global and a selective holdout. When both cover an experiment, Datadog applies the global holdout first. For that experiment, the selective holdout uses eligible traffic outside the global holdout. Each result measures the combined effect of the changes covered by that holdout.
 
 ## Holdout phases
 
-The all-shipped group receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
+The shipped-changes group receives changes as they roll out. During this time, the holdout treatment is still changing. It is complete only after all changes covered by the holdout have been released.
 
 Measuring the entire period as one result would mix time spent with some changes and time spent with the full combination. Holdouts separate these periods so you can monitor early results, then measure the complete treatment.
 
@@ -47,15 +47,15 @@ The team sets an analysis phase from October 1 through October 15 to measure the
 
 The **inclusion period** sets the dates when experiments can join the holdout.
 
-During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must conclude during this phase to be included in the holdout analysis. Rollouts should complete before the analysis phase starts.
+During the experiment inclusion phase, covered experiments run, winners are selected, and changes are rolled out. Covered experiments must complete their rollouts by the end of this phase to remain included in the holdout analysis.
 
-The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created. These rules do not require every rollout to finish by the inclusion end date. The interval before analysis starts allows time for the remaining rollouts to complete.
+The inclusion dates also determine which experiments can join a global holdout. Eligible experiments must start during this period and after the holdout is created.
 
 A preliminary analysis runs during the inclusion phase. It gives an early directional read of performance and helps identify data problems before the primary analysis starts. Its results include data from a period when the holdout treatment is still changing and not all changes have shipped. They do not measure the full combined treatment.
 
 ### Analysis phase
 
-The analysis phase starts when or after the inclusion phase ends. During the analysis phase, the all-shipped group should have received all shipped changes. The status-quo group continues to receive the original experiences. Each subject still sees only the components they use and whose targeting rules they meet.
+The analysis phase starts when or after the inclusion phase ends. Subjects remain in their holdout groups during any interval between the two phases. During the analysis phase, the shipped-changes group should have received all shipped changes. The control group continues to receive the original experiences. Each subject still sees only the components they use and whose targeting rules they meet.
 
 The primary analysis uses metric data from the analysis phase to measure the combined effect of the shipped changes.
 
@@ -69,14 +69,14 @@ A subject keeps the same group across included experiments. Each experiment's ta
 
 Selecting a winner alone does not change the experience. The rollout must complete first. If control wins, both groups keep control.
 
-## Requirements
+## Requirements for Datadog Feature Flags
 
 For holdouts that use Datadog Feature Flags, included experiments must:
 
 - Use Datadog Feature Flags to assign subjects at random.
 - Use the same subject type as the holdout.
 - Use a consistent subject ID across covered experiments. See [Subject Types][1].
-- Be standard experiments, not other holdout analyses.
+- Be standard experiments.
 
 Add selective experiments while they are drafts. The holdout must be waiting to start or within its inclusion period.
 
@@ -85,22 +85,22 @@ Add selective experiments while they are drafts. The holdout must be waiting to 
 Create the holdout before starting the experiments:
 
 1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} in Datadog Product Analytics and click {{< ui >}}Create Holdout{{< /ui >}}.
-1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}.
-1. Select the subject type used by the experiments.
-1. Set the traffic allocation. Include both groups when calculating how much traffic remains for individual experiments.
-1. Set the start and end dates for {{< ui >}}Experiment inclusion phase{{< /ui >}}. A global holdout includes eligible experiments that start during this period. Add selective experiments before they start and before inclusion ends.
-1. Review the start and end dates for {{< ui >}}Analysis phase{{< /ui >}} and adjust them as needed. Analysis must start at or after inclusion ends. Allow time for experiments and rollouts to finish before analysis starts.
-1. Select a primary metric, optional secondary metrics, and an [analysis method][2].
-1. For a selective holdout, add the draft experiments. Global holdouts add eligible experiments automatically when they start.
+1. Enter a name and select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}. If {{< ui >}}Managed by{{< /ui >}} is shown, select {{< ui >}}Datadog (Managed){{< /ui >}}.
+1. Set the start and end dates for {{< ui >}}Experiment inclusion phase{{< /ui >}}. Allow time for the covered experiments to run and complete their rollouts within this period.
+1. Review the start and end dates for {{< ui >}}Analysis phase{{< /ui >}} and adjust them as needed. Analysis starts at or after inclusion ends.
+1. Set {{< ui >}}Holdout traffic exposure{{< /ui >}}. This share includes both holdout groups.
+1. Select the {{< ui >}}Subject type{{< /ui >}} used by the experiments, a {{< ui >}}Primary metric{{< /ui >}}, and optional {{< ui >}}Secondary metrics{{< /ui >}}. Review the [analysis method][2] under {{< ui >}}Analysis settings{{< /ui >}}.
+1. Click {{< ui >}}Create Holdout{{< /ui >}}, review the settings, and click {{< ui >}}Confirm and Create Holdout{{< /ui >}}.
+1. For each draft experiment covered by a selective holdout, choose {{< ui >}}Add Selective Holdout{{< /ui >}} during [experiment setup][4] and select the holdout. Global holdouts add eligible experiments automatically when they start.
 
 ### Run the experiments
 
 1. Check whether the experiment belongs to a holdout before [starting it][4]. Start experiments for a global holdout during its inclusion period.
 1. Review each experiment's results and select a winner.
 1. Complete the winner's rollout.
-1. Keep the flags and exposure logging active through the analysis end. The status-quo group must keep receiving control.
+1. Keep the flags and exposure logging active through the analysis end. The control group must keep receiving control.
 
-After inclusion ends, you cannot change the included experiments. The holdout continues serving both groups through the analysis period. You also cannot remove a selective experiment after recording its decision.
+Selective coverage can be changed before inclusion ends and before the experiment's decision is recorded. The holdout continues serving both groups through the analysis period.
 
 ## Exposure criteria
 
@@ -108,7 +108,7 @@ An **exposure record** identifies the experience served to a subject.
 
 For the primary analysis, an exposure qualifies when treatment and control can first give a subject different experiences. Counting subjects before that point includes people whose outcomes the change could not yet affect. This can dilute the measured effect and make a difference harder to detect.
 
-For a holdout, exposure occurs when a subject first interacts with a component where a covered experiment has shipped a non-control variant. Datadog records this exposure for both groups. The all-shipped group receives the change, while the status-quo group receives control.
+For a holdout, exposure occurs when a subject first interacts with a component where a covered experiment has shipped a non-control variant. Datadog records this exposure for both groups. The shipped-changes group receives the change, while the control group receives control.
 
 For example, a subject can open checkout while a covered checkout experiment is still running. Both holdout groups receive the old checkout, so that exposure does not qualify for the primary analysis. After the new checkout rolls out, the subject's next checkout exposure qualifies. The holdout groups can receive different experiences.
 
@@ -127,8 +127,6 @@ The primary analysis uses only exposures with `should_include_in_holdout_analysi
 
 The exposure and metric periods are different. A qualifying exposure can occur during inclusion or analysis. The primary analysis measures **metric data only from the analysis phase**. A subject first exposed to a shipped change in September can therefore contribute metric data to an October analysis.
 
-An experiment that ships control does not create a qualifying exposure. Subjects who encounter only such experiments do not enter the primary analysis through them.
-
 ### Variance reduction
 
 The primary analysis uses [CUPED][7] when it is enabled in the analysis settings. The preliminary analysis does not use CUPED.
@@ -139,19 +137,25 @@ Using the first qualifying exposure also gives CUPED the correct point from whic
 
 Use the primary analysis to assess the combined changes during the analysis phase. See [Holdout phases](#holdout-phases) for the distinction between preliminary and primary results.
 
-The scorecard compares all-shipped with status-quo. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
+The scorecard compares the shipped-changes group with the control group. Interpret it as you would an experiment result. See [Reading Experiment Results][5] for lift and confidence intervals, and [Experiment Diagnostics][6] for data checks.
 
-If primary results are empty, check that:
-
-- A treatment rollout has completed.
-- Subjects have exposure records after that rollout.
-- Metric data exists within the analysis period.
+Primary results become available after the analysis phase starts and an analysis run processes metric data from that phase.
 
 ## Analyze holdouts with your own exposure data
 
 Use an [Exposure SQL Model][3] to analyze holdouts when you manage experiment randomization outside Datadog Feature Flags. This also applies when you use Datadog Feature Flags with your own warehouse logging. The holdout phases and interpretation of results are the same. The model supplies the exposure records for analysis.
 
-When creating the holdout, select the model and its subject type. The holdout key must match the key in the exposure records. With external randomization, your system handles group assignment and serves the experiences described in [Subject assignment](#subject-assignment). With Datadog Feature Flags, preserve the holdout fields from the exposure events.
+Configure the [warehouse exposure model](#warehouse-exposure-model), then create the holdout:
+
+1. Navigate to {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Holdouts{{< /ui >}} and click {{< ui >}}Create Holdout{{< /ui >}}.
+1. Enter a name and select how the holdout is managed:
+   - For external randomization, select {{< ui >}}Your flagging system (External){{< /ui >}} under {{< ui >}}Managed by{{< /ui >}}. Enter the {{< ui >}}Holdout key{{< /ui >}} used in your exposure records.
+   - For Datadog Feature Flags with warehouse logging, select {{< ui >}}Datadog (Managed){{< /ui >}}, then {{< ui >}}Your exposure SQL model{{< /ui >}} under {{< ui >}}Exposure source{{< /ui >}}. Select {{< ui >}}Global{{< /ui >}} or {{< ui >}}Selective{{< /ui >}}.
+1. Set the inclusion and analysis dates. For external randomization, enter the {{< ui >}}Share of subjects in the holdout{{< /ui >}} and {{< ui >}}Control group share{{< /ui >}} used by your system. For Datadog Feature Flags, set {{< ui >}}Holdout traffic exposure{{< /ui >}}.
+1. Select {{< ui >}}Subject type{{< /ui >}}, then {{< ui >}}Exposure SQL model{{< /ui >}} and the metrics to analyze. Review {{< ui >}}Analysis settings{{< /ui >}}.
+1. Click {{< ui >}}Create Holdout{{< /ui >}}, review the settings, and click {{< ui >}}Confirm and Create Holdout{{< /ui >}}.
+
+With external randomization, your system assigns subjects to groups and serves their experiences. With Datadog Feature Flags, preserve the holdout fields from the exposure events and follow the selective attachment steps in [Set up a holdout](#set-up-a-holdout).
 
 ### Warehouse exposure model
 
@@ -170,18 +174,18 @@ SELECT
 FROM analytics.holdout_exposures
 ```
 
-Keep the standard exposure mappings and add the following holdout mappings. Omit `allocation_key` from the query unless the holdout uses selective coverage with Datadog Feature Flags.
+Keep the standard exposure mappings and add the following holdout mappings.
 
 | Field | Example column | Value |
 | --- | --- | --- |
-| Holdout key | `holdout_key` | The holdout key recorded in the exposure events. |
-| Holdout assignment group | `holdout_assignment_group` | `status_quo` or `all_shipped`. Convert your system's group names to these values in the query if needed. |
-| Include in holdout analysis | `should_include_in_holdout_analysis` | Optional for external randomization. Required when using Datadog Feature Flags with your own warehouse logging. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
-| Allocation key | `allocation_key` | The allocation key from the exposure event. Only required for selective holdouts using Datadog Feature Flags with your own warehouse logging. |
+| Holdout key column | `holdout_key` | The holdout key recorded in the exposure events. |
+| Holdout assignment group column | `holdout_assignment_group` | `status_quo` or `all_shipped`. Convert your system's group names to these values in the query if needed. |
+| Include in holdout analysis column | `should_include_in_holdout_analysis` | Optional for external randomization. Required when using Datadog Feature Flags with your own warehouse logging. A Boolean value: `true` after a covered experiment ships a non-control variant; `false` before that point. Apply the same rule to both groups. |
+| Allocation key column | `allocation_key` | The allocation key from the exposure event. Only required for selective holdouts using Datadog Feature Flags with your own warehouse logging. |
 
 Datadog uses the holdout key and assignment group to identify the exposure records for each holdout group.
 
-With external randomization, the inclusion field is optional. Include it when logging exposures before changes ship. The preliminary analysis uses all holdout exposure records within the inclusion period. The primary analysis uses only records marked `true`. Without this mapping, Datadog does not apply that filter. In that case, the model must return only qualifying exposures, as described in the [Exposure criteria](#exposure-criteria) section.
+For external randomization, map the inclusion field when the model contains exposures from before and after changes ship. The preliminary analysis uses both values. The primary analysis uses records marked `true`. A model that contains [qualifying exposures](#exposure-criteria) only can omit this mapping.
 
 [1]: /experiments/concepts/subject_types/
 [2]: /experiments/statistics/analysis_methods/
