@@ -56,7 +56,7 @@ Uploading publishes the app live, so ask me before you upload. Once it's publish
 give me the app's URL.
 {{< /skill-callout >}}
 
-Once your app works, the agent offers to install the [`datadog-app` skill][20] so you don't need the prompt next time. To install it yourself:
+After your app works, the agent offers to install the [`datadog-app` skill][20] so you don't need the prompt next time. To install it yourself:
 
 ```shell
 npx skills add datadog-labs/agent-skills \
