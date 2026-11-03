@@ -92,7 +92,7 @@ To identify which team or service is responsible for your top custom metric name
 
 1. From the [Plan & Usage page][2], scroll down to the *Usage Summary* section.
 1. Click the {{< ui >}}Custom Metrics{{< /ui >}} tab to view your organization's billable usage, usage trends, and top custom metrics.
-1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This takes you to the *Metrics Catalog* page with the opened metric details side panel. 
+1. Under the table for *Top Custom Metrics for <MONTH YEAR>*, click the icon to {{< ui >}}See in Metrics Catalog{{< /ui >}} for the top custom metric. This takes you to the *Metrics Catalog* page with the metric details side panel open.
 1. In the side panel, scroll down to the *Tags* section to view associated tags such as teams and service.
 
 #### View your team's custom metrics
@@ -174,7 +174,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 
 Tag Indexing Rules and Metrics without Limits™ tag configurations both control which tags are indexed. Rules apply across many metrics, while Metrics without Limits™ configurations apply to one metric at a time and take precedence over rules.
 
-Datadog's intelligent query insights across thousands of custom metrics customers show that **using Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
+Datadog's intelligent query insights across thousands of custom metrics customers show that using Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%.
 
 ### Understand the relative utility of your metrics
 

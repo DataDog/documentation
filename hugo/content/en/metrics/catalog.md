@@ -42,7 +42,7 @@ To see only custom metrics, filter the list with the {{< ui >}}Metric Category{{
 The usage graphs at the top of the Metrics Catalog page show your account's estimated custom metrics usage in real time. The graphs display different billing dimensions depending on your pricing model:
 
 - **Cardinality pricing**: {{< ui >}}Total Estimated Indexed Custom Metrics{{< /ui >}} (the metrics and tags that remain queryable in Datadog) and {{< ui >}}Total Estimated Ingested Custom Metrics{{< /ui >}} (the original volume of all metrics configured with Metrics without Limits™).
-- **Metric Name Pricing**: Your account's estimated unique metric names, indexed points, and the ratio of ingested to indexed points. For more information, see the [Metric Name Pricing experience guide][41].
+- **Metric Name Pricing**: Your account's estimated unique metric names, indexed points, and the ratio of ingested to indexed points. For more information, see the [Metrics Experience Changes for Metric Name Pricing][41] guide.
 
 To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
 
@@ -67,7 +67,7 @@ Tag filtering supports Boolean and wildcard syntax so that you can identify:
 
 ## Facet panel
 
-The search bars provide the most comprehensive set of actions to filter the list of metrics. You can also filter your metrics with facets, which are grouped into {{< ui >}}Core{{< /ui >}}, {{< ui >}}Usage{{< /ui >}}, and {{< ui >}}Configuration{{< /ui >}} sections.
+The search fields provide the most comprehensive set of actions to filter the list of metrics. You can also filter your metrics with facets, which are grouped into {{< ui >}}Core{{< /ui >}}, {{< ui >}}Usage{{< /ui >}}, and {{< ui >}}Configuration{{< /ui >}} sections.
 
 ### Core facets
 
@@ -153,7 +153,7 @@ To compare your spiking metric's cardinality over time:
 
 ## Identify unqueried metrics
 
-To reduce custom metrics costs, start with your largest metric names that aren't actively queried. To find these metrics, select a time frame in the {{< ui >}}Query Activity{{< /ui >}} facet. The list is filtered to show only metric names that aren't queried in dashboards, notebooks, monitors, SLOs, Metrics Explorer, or the API.
+To reduce custom metrics costs, start with your largest metric names that aren't actively queried. To find these metrics, select a time frame in the {{< ui >}}Query Activity{{< /ui >}} facet. The list is filtered to show only metric names that aren't queried in dashboards, notebooks, monitors, SLOs, Metrics Explorer, or the API. Sort by {{< ui >}}Est. Indexed Metrics{{< /ui >}} to see the largest of these metrics first.
 
 To reduce the volume and cost of these metrics, configure their tags in bulk. For more information, see the [Configure multiple metrics](#configuration-of-multiple-metrics) section. For a complete cost-optimization workflow, see [Best Practices for Custom Metrics Governance][44].
 
@@ -170,7 +170,7 @@ Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more tha
 
 * {{< ui >}}Manage Historical Metrics{{< /ui >}}: Enable or disable historical metrics ingestion to backfill or correct past metric data. See the [Historical Metrics Ingestion page][30] for more information.
 
-To configure tags on multiple metrics, use [Tag Indexing Rules][45]. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
+To configure tags on multiple metrics, use [Tag Indexing Rules][45]. To create a rule, navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][46] and click {{< ui >}}+ Create Rule{{< /ui >}}. Rules apply to metric names, namespaces, or all custom metrics, and they automatically govern new metrics that match. For example, a rule can unindex tags that aren't queried or used in assets. Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. To configure tags on a single metric, see the [Metrics without Limits™](#metrics-without-limits) section.
 
 ## Metric details side panel {#metric-details-sidepanel}
 
@@ -419,3 +419,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [43]: /monitors/types/change-alert/
 [44]: /metrics/guide/custom_metrics_governance/
 [45]: /metrics/guide/tag-indexing-rules/
+[46]: https://app.datadoghq.com/metric/settings

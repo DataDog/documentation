@@ -68,7 +68,7 @@ To manage Tag Indexing Rules programmatically, use the [Tag Indexing Rules API][
 
 ## Metrics without Limits™ billing
 
-Configuring your tags gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Catalog page. 
+Configuring your tags gives you control over which custom metrics can be queried, which reduces your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Catalog page.
 
 - {{< ui >}}Ingested Custom Metrics{{< /ui >}}: The original volume of custom metrics based on all ingested tags.
 - {{< ui >}}Indexed Custom Metrics{{< /ui >}}: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations).
@@ -95,9 +95,9 @@ For full details on the model, see [Metric Name Pricing for Custom Metrics][15].
 
 **Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
-2. Configure your unqueried metrics with empty tag configurations.
+2. Unindex tags on your unqueried metrics.
 
-   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
+   As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can minimize the costs of these unqueried metrics by unindexing their tags. To unindex tags across many unqueried metrics, create a [Tag Indexing Rule][16] scoped to their metric names or namespaces. To configure a single metric, give it an empty allowlist of tags.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
