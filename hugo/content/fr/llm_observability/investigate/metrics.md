@@ -21,12 +21,12 @@ title: Métriques Agent Observability.
 Une fois que vous avez instrumenté votre application avec Agent Observability, vous pouvez accéder aux métriques Agent Observability pour les utiliser dans des dashboards et des monitors. Ces métriques capturent le nombre de spans, le nombre d'erreurs, l'utilisation des jetons et les mesures de latence pour vos applications LLM. Ces métriques sont calculées sur la base de 100 % du trafic de l'application.
 
 <div class="alert alert-info">
-Le <code>ml_obs.*</code> Les entrées sur cette page sont <a href="/metrics/">Datadog Metrics</a> : des valeurs numériques qui décrivent un aspect de votre application LLM au fil du temps, dérivées de vos spans LLM (comptes, distributions de coûts, jetons, latence, erreurs). Elles sont échantillonnées à 100 %, suivent la <a href="/developers/guide/data-collection-resolution-retention/">rétention des métriques Datadog</a> standard (15 mois à granularité complète) et peuvent être interrogées depuis des dashboards, des monitors et des notebooks comme n'importe quelle autre métrique Datadog.
+Les entrées <code>ml_obs.*</code> sur cette page sont des <a href="/metrics/">métriques Datadog</a> : des valeurs numériques qui décrivent un aspect de votre application LLM au fil du temps, dérivées de vos spans LLM (comptes, distributions de coûts, jetons, latence, erreurs). Elles sont échantillonnées à 100 %, suivent la <a href="/data_security/data_retention_periods/">rétention des métriques Datadog</a> standard (15 mois à granularité complète) et peuvent être interrogées depuis des dashboards, des monitors et des notebooks comme n'importe quelle autre métrique Datadog.
 <br><br>
 Elles se distinguent de deux autres éléments dans Agent Observability :
 <ul>
-<li><strong>Données opérationnelles par span</strong> (coût, jetons, latence, erreurs sur chaque trace ou span individuel) : les valeurs brutes à partir desquelles ces métriques sont agrégées. Stockées avec les spans, elles suivent la <a href="/llm_observability/setup/#data-retention">rétention des traces d'Agent Observability </a> et sont interrogées depuis le Trace Explorer plutôt qu'en tant que métriques.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">Scores d'évaluation</a></strong> (également appelés « evals ») : jugements de qualité et de sécurité (par exemple, hallucination, fidélité, LLM-as-a-judge personnalisé) associés à des spans individuels ou à des lignes d'expérience. Celles-ci ne sont pas dérivées de la télémétrie opérationnelle et suivent la rétention des traces et des expériences d'Agent Observability plutôt que la rétention des métriques de Datadog.</li>
+<li><strong>Données opérationnelles par span</strong> (coût, jetons, latence, erreurs sur chaque trace ou span individuel) : les valeurs brutes à partir desquelles ces métriques sont agrégées. Stockés avec les spans, ils suivent la <a href="/llm_observability/data_governance/#traces-and-spans">rétention des traces d'Agent Observability</a> et sont interrogés depuis le Trace Explorer plutôt que comme des métriques.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">Scores d'évaluation</a></strong> (également appelés « evals ») : jugements de qualité et de sécurité (par exemple, hallucination, fidélité, LLM-as-a-judge personnalisé) associés à des spans individuels ou à des lignes d'expérience. Ceux-ci ne sont pas dérivés de la télémétrie opérationnelle et suivent la <a href="/llm_observability/data_governance/">rétention des traces et des expériences d'Agent Observability</a> plutôt que la rétention des métriques Datadog.</li>
 </ul>
 </div>
 
@@ -34,7 +34,7 @@ Elles se distinguent de deux autres éléments dans Agent Observability :
 
 ### Métriques de span {#span-metrics}
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.span` | Nombre total de spans avec un type de span | Compteur | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.duration` | Durée totale des spans en secondes | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
@@ -42,13 +42,13 @@ Elles se distinguent de deux autres éléments dans Agent Observability :
 
 ### Métriques de jetons LLM {#llm-token-metrics}
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.span.llm.input.tokens` | Nombre de jetons dans l'entrée envoyée au LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.tokens` | Nombre de jetons dans la sortie | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.output.reasoning.tokens` | Nombre de jetons de raisonnement dans la sortie | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.prompt.tokens` | Nombre de jetons utilisés dans le prompt | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
-| `ml_obs.span.llm.completion.tokens` | Jetons générés en tant que complétion pendant l'intervalle | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
+| `ml_obs.span.llm.completion.tokens` | Jetons générés en tant que complétion pendant le span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.total.tokens` | Nombre total de jetons consommés pendant le span (entrée + sortie + prompt) | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.cache_write.tokens` | Nombre de jetons d'entrée écrits dans le cache de prompt dans un span LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.llm.input.cache_read.tokens` | Nombre de jetons d'entrée servis depuis le cache de prompt dans un span LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
@@ -58,17 +58,17 @@ Elles se distinguent de deux autres éléments dans Agent Observability :
 
 ### Métriques d'embedding {#embedding-metrics}
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.span.embedding.input.tokens` | Nombre de jetons d'entrée utilisés pour générer un embedding | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider` |
 
 ### Métriques de coût LLM {#llm-cost-metrics}
 
 <div class="alert alert-info">
-L'unité pour les métriques de coût estimé pour Agent Observability est le <strong>nanodollars</strong>.
+L'unité pour les métriques de coût estimé pour Agent Observability est le <strong>nanodollar</strong>.
 </div>
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.span.llm.input.cost` | Coût d'entrée estimé dans un span LLM | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
 | `ml_obs.span.embedding.input.cost` | Coût d'entrée estimé dans un span d'embedding | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `source`, `matched_model_name`, `matched_model_provider` |
@@ -81,7 +81,7 @@ L'unité pour les métriques de coût estimé pour Agent Observability est le <s
 
 ### Métriques de trace {#trace-metrics}
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.trace` | Nombre de traces | Compteur | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
 | `ml_obs.trace.duration` | Durée totale de toutes les traces sur tous les spans | Distribution | `env`, `error`, `ml_app`, `service`, `span_kind`, `version` |
@@ -89,7 +89,7 @@ L'unité pour les métriques de coût estimé pour Agent Observability est le <s
 
 ### Métriques d'utilisation estimées {#estimated-usage-metrics}
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.estimated_usage.llm.input.tokens` | Nombre estimé de jetons d'entrée utilisés | Distribution | `evaluation_name`, `ml_app`, `model_name`, `model_provider`, `model_server` |
 
@@ -99,7 +99,7 @@ L'unité pour les métriques de coût estimé pour Agent Observability est le <s
 Les métriques suivantes sont obsolètes et ne sont conservées que pour des raisons de compatibilité ascendante. Datadog recommande vivement d'utiliser les métriques de jetons non obsolètes pour tous les cas d'utilisation de mesure de consommation de jetons.
 </div>
 
-| Nom de la métrique | Description | Type de métrique | Étiquettes |
+| Nom de la métrique | Description | Type de métrique | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.estimated_usage.llm.output.tokens` | Nombre estimé de jetons de sortie générés | Distribution | `evaluation_name`, `ml_app`, `model_name`, `model_provider`, `model_server` |
 | `ml_obs.estimated_usage.llm.total.tokens` | Nombre total estimé de jetons (entrée + sortie) utilisés | Distribution | `evaluation_name`, `ml_app`, `model_name`, `model_provider`, `model_server` |

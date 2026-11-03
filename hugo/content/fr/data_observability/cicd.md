@@ -43,7 +43,7 @@ La détection de dérive compare les données produites par vos modèles avant e
 
 ### 1. Connectez votre fournisseur de contrôle de version et votre projet dbt {#1-connect-your-source-control-provider-and-dbt-project}
 
-1. Connectez votre [fournisseur de contrôle de version][2]. Les checks CI/CD prennent en charge GitHub et GitLab.
+1. Connectez votre [fournisseur de contrôle de version][2]. Les checks CI/CD prennent en charge GitHub, GitLab, Bitbucket Cloud et Azure DevOps.
 2. Connectez le [compte de source de données pris en charge][3] où vos modèles dbt s'exécutent.
 3. Connectez votre projet [dbt Cloud][4] ou [dbt Core][5] à Datadog. Vous pouvez également connecter votre projet dbt lors de la configuration des checks CI/CD.
 
@@ -102,6 +102,78 @@ Pour **dbt Core**, la détection de dérive nécessite également que le numéro
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CI Job URL` | Le localisateur du job CI dbt Cloud qui est déclenché par les pull requests et matérialise les modèles dbt pour l'intégration continue. Datadog reçoit les événements d'exécution de ce job via l'intégration dbt Cloud. Ceux-ci ressemblent généralement à `https://cloud.getdbt.com/...`. |
 
+**Bitbucket Cloud et Azure DevOps**
+
+Si votre dépôt Azure DevOps utilise l'intégration native Azure DevOps de dbt Cloud (forfaits Enterprise), les jobs CI démarrent automatiquement. Ignorez cette section.
+
+Sinon, démarrez le job CI depuis votre pipeline avec l'[API administrative dbt Cloud][9]. Tout d'abord, remplacez ces espaces réservés dans l'exemple pour votre fournisseur CI :
+
+| Espace réservé | Valeur |
+| ----------- | ----- |
+| `<DBT_CLOUD_HOST>` | Votre nom de host dbt Cloud, par exemple `cloud.getdbt.com`. |
+| `<ACCOUNT_ID>` | Votre ID de compte provenant de l'URL du job CI dbt Cloud. |
+| `<CI_JOB_ID>` | Votre ID de job CI provenant de la même URL. |
+
+{{< tabs >}}
+{{% tab "Bitbucket Pipelines" %}}
+
+1. Créez un jeton d'API dbt Cloud capable d'exécuter des jobs.
+2. Dans Bitbucket, enregistrez le jeton en tant que variable de dépôt sécurisée nommée `DBT_API_KEY`.
+3. Ajoutez l'étape suivante à `bitbucket-pipelines.yml`. Si votre fichier contient déjà `pipelines`, ajoutez cette étape sous `pipelines > pull-requests > '**'`.
+
+```yaml
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Trigger dbt Cloud CI job
+          script:
+            - |
+              curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+                -H "Authorization: Token $DBT_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{\"cause\": \"Bitbucket PR #$BITBUCKET_PR_ID\",
+                     \"git_sha\": \"$BITBUCKET_COMMIT\",
+                     \"non_native_pull_request_id\": $BITBUCKET_PR_ID,
+                     \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$BITBUCKET_PR_ID\"}"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+Pour un dépôt dans Azure Repos :
+
+1. Créez un jeton d'API dbt Cloud capable d'exécuter des jobs.
+2. Enregistrez le jeton en tant que variable secrète Azure Pipelines nommée `DBT_API_KEY`.
+3. Ajoutez une [stratégie de branche de validation de build][10] sur la branche cible pour exécuter votre pipeline pour les pull requests.
+4. Ajoutez cette étape Bash à la section `steps` de votre pipeline. Le bloc `env` transmet les valeurs du secret et de la pull request au script, et le `condition` ignore l'étape sur les builds qui ne concernent pas une pull request.
+
+```yaml
+steps:
+  - bash: |
+      curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+        -H "Authorization: Token $DBT_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{\"cause\": \"Azure DevOps PR #$PR_NUMBER\",
+             \"git_sha\": \"$HEAD_SHA\",
+             \"non_native_pull_request_id\": $PR_NUMBER,
+             \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$PR_NUMBER\"}"
+    displayName: Trigger dbt Cloud CI job
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    env:
+      DBT_API_KEY: $(DBT_API_KEY)
+      PR_NUMBER: $(System.PullRequest.PullRequestId)
+      HEAD_SHA: $(System.PullRequest.SourceCommitId)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Remarques** :
+- Incluez à la fois `non_native_pull_request_id` et `git_sha`, et définissez `git_sha` sur le commit de tête de la pull request. Datadog utilise les deux pour faire correspondre l'exécution à la pull request.
+- `schema_override` maintient les tables CI hors de vos schémas de production. Inclure l'ID de job empêche deux jobs CI d'écrire dans le même schéma.
+- dbt Cloud ne supprime pas ces schémas pour les exécutions déclenchées par API. Nettoyez-les selon un planning.
+
 ##### dbt Core {#dbt-core}
 
 | Paramètre            | Description                                                                                                                                                                                                                                        |
@@ -109,11 +181,30 @@ Pour **dbt Core**, la détection de dérive nécessite également que le numéro
 | `CI Job Name`      | Le nom du job qui est déclenché par les pull requests, matérialise les modèles dbt pour la CI et envoie des événements OpenLineage à Datadog.                                                                                                                   |
 | `CI Job Namespace` | La variable OPENLINEAGE_NAMESPACE spécifiée lors de l'envoi d'événements OpenLineage depuis le job spécifié ci-dessus. Consultez [Définir les variables d'environnement][7]. Si vous ne définissez pas cette variable lors de l'envoi d'événements OpenLineage, vous n'avez pas besoin de la spécifier ici. |
 
+**Bitbucket Cloud et Azure DevOps**
+
+Tout d'abord, terminez la configuration dans [Définir les variables d'environnement][7]. Ensuite, dans l'étape qui exécute `dbt-ol`, définissez ces deux variables sur les valeurs correspondantes à votre fournisseur CI :
+
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER`
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__VERSION`
+
+| Fournisseur CI | `PULL_REQUEST_NUMBER` | `VERSION` |
+| ----------- | --------------------- | --------- |
+| Bitbucket Pipelines | `$BITBUCKET_PR_ID` | `$BITBUCKET_COMMIT` |
+| Azure Pipelines avec Azure Repos | `$(System.PullRequest.PullRequestId)` | `$(System.PullRequest.SourceCommitId)` |
+| Azure Pipelines avec un dépôt GitHub | `$(System.PullRequest.PullRequestNumber)` | `$(System.PullRequest.SourceCommitId)` |
+
+Définissez `VERSION` explicitement. Sur ces fournisseurs, les builds de pull request effectuent un checkout d'un merge commit, de sorte que le commit détecté via git n'est pas celui de tête de la pull request, et l'exécution ne correspond pas à la pull request.
+
+Pour Azure Repos, ajoutez une [stratégie de branche de validation de build][10] sur la branche cible afin que le pipeline s'exécute avec le contexte de la pull request.
+
 #### Exécution de votre job CI dbt Core dans un conteneur {#running-your-dbt-core-ci-job-in-a-container}
 
-Si votre job CI dbt Core s'exécute à l'intérieur d'un conteneur lancé par le runner CI (par exemple, un workflow GitHub Actions qui exécute le job avec `docker run`), le conteneur n'hérite pas du contexte git du runner CI. Par conséquent, l'URL du dépôt, le SHA du commit et le numéro de la pull request ne sont pas détectés automatiquement, et la facette `sourceCodeLocation` est envoyée sans eux. Datadog utilise ces valeurs pour faire correspondre l'exécution à la pull request que vous avez ouverte ou mise à jour ; sans elles, aucun résultat de dérive n'apparaît sur la pull request.
+Si votre exécuteur CI lance dbt Core avec `docker run`, transmettez l'URL du dépôt, le SHA du commit de tête de la pull request et le numéro de la pull request dans le conteneur. Le conteneur n'hérite pas automatiquement du contexte git de l'exécuteur.
 
-L'exemple suivant utilise GitHub Actions ; sur d'autres fournisseurs CI, les noms des variables d'environnement diffèrent, mais l'approche est la même. Sur le runner CI, lisez les valeurs et transmettez-les explicitement dans le conteneur :
+Datadog a besoin que les trois valeurs de la facette `sourceCodeLocation` correspondent pour associer l'exécution à la pull request et afficher les résultats de dérive.
+
+Pour **GitHub Actions**, lisez les valeurs sur l'exécuteur et transmettez-les dans le conteneur :
 
 ```shell
 # On the CI runner, before launching the container:
@@ -137,6 +228,40 @@ on:
     types: [opened, synchronize, reopened]
 ```
 
+Pour d'autres fournisseurs CI, remplacez les valeurs assignées à `PR_NUMBER`, `HEAD_SHA` et `REPO_URL` dans l'exemple ci-dessus. Exécutez le job en tant que pipeline de pull request (un pipeline de merge request GitLab, un pipeline Bitbucket `pull-requests`, ou une build Azure Pipelines démarrée par une stratégie de validation de build). Sinon, ces valeurs sont vides.
+
+{{< tabs >}}
+{{% tab "GitLab CI" %}}
+
+```shell
+PR_NUMBER="$CI_MERGE_REQUEST_IID"
+# In merged results pipelines, use $CI_MERGE_REQUEST_SOURCE_BRANCH_SHA instead.
+HEAD_SHA="$CI_COMMIT_SHA"
+REPO_URL="$CI_PROJECT_URL"
+```
+
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
+
+```shell
+PR_NUMBER="$BITBUCKET_PR_ID"
+HEAD_SHA="$BITBUCKET_COMMIT"
+REPO_URL="https://bitbucket.org/$BITBUCKET_REPO_FULL_NAME"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+```shell
+# For a GitHub repository, use $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER instead.
+PR_NUMBER="$SYSTEM_PULLREQUEST_PULLREQUESTID"
+HEAD_SHA="$SYSTEM_PULLREQUEST_SOURCECOMMITID"
+REPO_URL="$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -149,3 +274,5 @@ on:
 [6]: /fr/data_observability/jobs_monitoring/openlineage/
 [7]: /fr/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables
 [8]: /fr/data_observability/quality_monitoring/data_warehouses/snowflake/
+[9]: https://docs.getdbt.com/docs/deploy/ci-jobs#trigger-a-ci-job-with-the-api-
+[10]: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#build-validation
