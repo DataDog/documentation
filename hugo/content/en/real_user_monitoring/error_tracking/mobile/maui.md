@@ -291,7 +291,7 @@ The debug ID manifest (`dd_debug_ids.json`) is generated during the build that `
 **`Skipping Portable PDB upload — no Portable PDB found`**:
 No `.pdb` file was written to the build output directory. Confirm that debug symbols are enabled for the configuration you publish, with `<DebugType>portable</DebugType>`.
 
-**Warning: no Portable PDB matching the shipped assembly was found**
+**Warning: no Portable PDB matching the shipped assembly was found**:
 For one or more assemblies, none of the PDB files found matches the assembly the app ships, so C# frames from those assemblies are not resolved to file names and line numbers. The publish output lists each affected assembly in a `not uploading a Portable PDB for <assembly>` line. This can happen when the PDB files are left over from an earlier build. Delete the `bin/` and `obj/` directories and publish again.
 
 **C# frames show method names but no file names or line numbers**
