@@ -330,12 +330,29 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### Prerequisites
 
-1. Datadog Operator >= `v1.29.0`
+1. Datadog Operator >= `v1.18.0`
 1. Datadog Agent >= `v7.69`
 
 #### General setup
 
-The Operator detects EKS from the node labels and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
+On Datadog Operator `v1.29.0` and later, the Operator detects EKS from the node labels and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
+
+{{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
+
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable it with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+introspection:
+  enabled: true
+{{< /code-block >}}
+
+Using the command line:
+
+```shell
+helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
+```
+
+{{% /collapse-content %}}
 
 {{% /tab %}}
 
@@ -448,14 +465,39 @@ Datadog supports monitoring Kubernetes Control Plane components, including the A
 
 #### Prerequisites
 
-1. Datadog Operator >= `v1.29.0`
+1. Datadog Operator >= `v1.18.0`
 1. Datadog Agent >= `v7.69`
 
 **Note**: `etcd` is not supported on versions 4.0-4.13.
 
 #### General setup
 
-The Operator detects OpenShift from the `node.openshift.io/os_id` node label and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
+On Datadog Operator `v1.29.0` and later, the Operator detects OpenShift from the `node.openshift.io/os_id` node label and enables control plane monitoring automatically, so a minimal `DatadogAgent` spec is enough. No additional configuration is required.
+
+{{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
+
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable it with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+introspection:
+  enabled: true
+{{< /code-block >}}
+
+Using the command line:
+
+```shell
+helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
+```
+
+If you installed the Operator through OperatorHub or Marketplace, which is the [recommended method](https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md), patch the Operator cluster service version instead:
+
+```shell
+oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
+  --type='json' \
+  -p='[{"op": "add", "path": "/spec/install/spec/deployments/0/spec/template/spec/containers/0/args/-", "value": "--introspectionEnabled=true"}]'
+```
+
+{{% /collapse-content %}}
 
 Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
 
