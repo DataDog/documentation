@@ -88,14 +88,9 @@ Carried-forward data is automatically replaced as soon as a real report is uploa
 - Fresh reports uploaded for the commit
 - Carried-forward reports for flags where no fresh report was uploaded
 
-## Use with PR Gates
-
-Datadog recommends starting with a non-blocking [PR Gate][3] to observe how carryforward affects evaluation before enforcing it as a merge requirement.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /code_coverage/flags
 [2]: /code_coverage/flags#add-flags-to-coverage-reports
-[3]: /code_coverage/configuration#pr-gates
