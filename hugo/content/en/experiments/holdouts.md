@@ -98,7 +98,7 @@ Create the holdout before starting the experiments:
 1. Check whether the experiment belongs to a holdout before [starting it][4]. Start experiments for a global holdout during its inclusion period.
 1. Review each experiment's results and select a winner.
 1. Complete the winner's rollout.
-1. Keep the flags and exposure logging active through the analysis end. The control group must keep receiving control.
+1. Keep the flags and exposure logging active through the analysis end. The control group must keep receiving the original experiences.
 
 Selective coverage can be changed before inclusion ends and before the experiment's decision is recorded. The holdout continues serving both groups through the analysis period.
 
