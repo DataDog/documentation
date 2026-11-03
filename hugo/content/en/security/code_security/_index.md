@@ -36,6 +36,8 @@ aliases:
 - /code_analysis/
 ---
 
+test
+
 Code Security scans your first-party code and open source libraries used in your applications in both your repositories and running services, providing end-to-end visibility from development to production. It encompasses the following capabilities:
 
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
