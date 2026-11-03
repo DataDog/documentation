@@ -16,7 +16,7 @@ Use these variables to access test execution results, status, duration, and step
 : Test execution status (for example, `passed` or `failed`)
 
 `{{synthetics.attributes.result.duration}}`
-: Test duration in milliseconds
+: Test duration in milliseconds (not available for ICMP tests)
 
 `{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
 : Epoch timestamps in milliseconds

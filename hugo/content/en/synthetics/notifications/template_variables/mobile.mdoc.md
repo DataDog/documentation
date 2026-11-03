@@ -64,6 +64,9 @@ Use these variables to access test configuration and execution location informat
 
 `{{synthetics.attributes.test.id}}`
 : The test's public ID (for example, `abc-def-ghi`)
+
+`{{synthetics.attributes.application.versionId}}`
+: Mobile application version identifier
 {% /tab %}
 {% tab label="Location" %}
 `{{synthetics.attributes.location}}`
@@ -93,8 +96,11 @@ Path: `synthetics.attributes.device`
 `{{synthetics.attributes.device.type}}`
 : Device type classification
 
-`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
+`{{synthetics.attributes.device.resolution.width}}`, `{{synthetics.attributes.device.resolution.height}}`
 : Screen resolution dimensions
+
+`{{synthetics.attributes.device.resolution.pixelRatio}}`
+: Device pixel ratio
 
 **Mobile-specific:**
 
@@ -132,45 +138,42 @@ Review the [conditional alerting][1] page for an example of how to use the `synt
 
 ### Step execution details
 
-Path: `synthetics.attributes.variables.extracted`
+Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
+These are step execution metadata and results containing detailed information about how each step ran. For information on how to access the `<step-index>`, see the step summary section.
 
 {% tabs %}
 {% tab label="General steps" %}
-`synthetics.attributes.variables.extracted.steps.allowFailure`
+`synthetics.attributes.result.steps.<step-index>.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
-`synthetics.attributes.variables.extracted.steps.duration`
+`synthetics.attributes.result.steps.<step-index>.duration`
 : Step execution duration in milliseconds
 
-`synthetics.attributes.variables.extracted.steps.failure`
+`synthetics.attributes.result.steps.<step-index>.failure`
 : Failure information object containing `.code` and `.message`
 
-`synthetics.attributes.variables.extracted.steps.id`
+`synthetics.attributes.result.steps.<step-index>.id`
 : Unique step identifier
 
-`synthetics.attributes.variables.extracted.steps.isCritical`
+`synthetics.attributes.result.steps.<step-index>.isCritical`
 : Whether the step is critical to the test
 
-`synthetics.attributes.variables.extracted.steps.status`
+`synthetics.attributes.result.steps.<step-index>.status`
 : Step execution status
 
-`synthetics.attributes.variables.extracted.steps.type`
+`synthetics.attributes.result.steps.<step-index>.type`
 : Type of step being executed
 
 **Mobile-specific:**
 
-`synthetics.attributes.variables.extracted.application.versionId`
-: Mobile application version identifier
-
-`synthetics.attributes.variables.extracted.apiTest`
+`synthetics.attributes.result.steps.<step-index>.apiTest`
 : API test data (for API test steps within mobile tests)
 
-`synthetics.attributes.variables.extracted.description`
+`synthetics.attributes.result.steps.<step-index>.description`
 : Step description
 
-`synthetics.attributes.variables.extracted.warnings`
+`synthetics.attributes.result.steps.<step-index>.warnings`
 : List of warnings, each containing `.message` (the warning message) and `.type` (the warning type)
 {% /tab %}
 
@@ -192,16 +195,19 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% /tab %}
 
 {% tab label="Sub-tests" %}
-`synthetics.attributes.variables.extracted.steps.subTest.id`
+`synthetics.attributes.result.steps.<step-index>.subTest.id`
 : Subtest identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
+`synthetics.attributes.result.steps.<step-index>.subTest.version`
+: Subtest version
+
+`synthetics.attributes.result.steps.<step-index>.subStep.parentStep.id`
 : Parent step identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
+`synthetics.attributes.result.steps.<step-index>.subStep.parentTest.id`
 : Parent test identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.level`
+`synthetics.attributes.result.steps.<step-index>.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
 {% /tab %}
 {% /tabs %}

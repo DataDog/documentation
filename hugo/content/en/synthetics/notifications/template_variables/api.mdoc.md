@@ -262,10 +262,10 @@ This section covers three categories of variables:
 {% /tab %}
 
 {% tab label="Close" %}
-`synthetics.attributes.result.close.reason`
+`synthetics.attributes.result.response.close.reason`
 : Connection close reason
 
-`synthetics.attributes.result.close.statusCode`
+`synthetics.attributes.result.response.close.statusCode`
 : Connection close status code
 {% /tab %}
 {% /tabs %}
@@ -307,9 +307,6 @@ This section covers three categories of variables:
 {% tab label="Connection" %}
 `synthetics.attributes.result.connectionOutcome`
 : Connection result (`established`, `refused`, or `timeout`)
-
-`synthetics.attributes.result.netpath.routers.ip`
-: Router IP addresses from network path data
 {% /tab %}
 
 {% tab label="Traceroute" %}
@@ -480,7 +477,7 @@ These variables are available for all API test protocols.
 
 {% tab label="Timings" %}
 `synthetics.attributes.result.timings.total`
-: Total time of the test in milliseconds (same as `result.duration`)
+: Total time of the test in milliseconds (same as `result.duration`, not available for ICMP tests)
 
 `synthetics.attributes.result.timings.dns`
 : Duration of the DNS lookup in milliseconds (available when testing a domain rather than an IP)
