@@ -18,6 +18,10 @@ further_reading:
 Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
 a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
+## Exclude individual tests from retries
+
+Apply the `no_auto_retry` annotation to prevent Auto Test Retries from retrying an individual test. This also excludes Early Flake Detection and Attempt to Fix retries while preserving explicit retries configured in the test framework. For JavaScript, Java, and Python examples, see [Control Test Automation with Code Annotations](/tests/guides/test_automation_exclusions/).
+
 ## Setup
 
 Ensure [Test Optimization][1] is configured for your test runs.

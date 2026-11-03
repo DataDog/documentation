@@ -15,4 +15,5 @@ cascade:
     {{< nextlink href="/tests/guides/setup_new_flaky_pr_gate" >}}Set up a New Flaky Test PR Gate{{< /nextlink >}}
     {{< nextlink href="/tests/guides/validate_optimizations" >}}Validate Optimizations{{< /nextlink >}}
      {{< nextlink href="/continuous_testing/guide/view-continuous-testing-test-runs-in-test-optimization" >}}View Continuous Testing Test Runs in Test Optimization{{< /nextlink >}}
+    {{< nextlink href="/tests/guides/test_automation_exclusions" >}}Control Test Automation with Code Annotations{{< /nextlink >}}
 {{< /whatsnext >}}

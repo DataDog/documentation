@@ -39,6 +39,12 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Control automation with code annotations
+
+Use test annotations to protect individual tests from Datadog quarantine and disabling, or exclude them from automatic retries. The `prevent_failure_suppression` annotation overrides quarantine failure suppression and disabling. The `no_auto_retry` annotation excludes Auto Test Retries, Early Flake Detection, and Attempt to Fix retries while preserving explicit framework retries.
+
+Apply either annotation independently, or combine them. They preserve test selection, framework skips, and Test Impact Analysis. For JavaScript, Java, and Python syntax and framework requirements, see [Control Test Automation with Code Annotations](/tests/guides/test_automation_exclusions/).
+
 ## Configure policies to automate the flaky test lifecycle
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
