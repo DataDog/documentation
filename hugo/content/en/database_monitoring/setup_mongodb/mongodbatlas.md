@@ -20,8 +20,6 @@ Supported MongoDB Atlas cluster tiers
 
 {{% dbm-mongodb-before-you-begin %}}
 
-MongoDB 9.0 requires Datadog Agent 7.85.0 or later. Agent 7.85.0 includes MongoDB integration version 11.0.0.
-
 ## Setup
 
 To enable Database Monitoring for your database:

@@ -18,8 +18,6 @@ Supported MongoDB editions
 
 {{% dbm-mongodb-before-you-begin %}}
 
-MongoDB 9.0 requires Datadog Agent 7.85.0 or later. Agent 7.85.0 includes MongoDB integration version 11.0.0.
-
 ## Setup
 
 To enable Database Monitoring for your database:
@@ -190,9 +188,9 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 ## Query Metrics
 
-Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
+Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Read query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
 
-### MongoDB 8.0.20+ and MongoDB 9.0
+### MongoDB 8.0.20 or later
 
 Set `internalQueryStatsSampleRate` to `1.0` (100% sampling).
 
@@ -242,7 +240,7 @@ For more information about the server parameters that control query stats collec
 
 ### Write query statistics on MongoDB 9.0
 
-To collect statistics for write commands on MongoDB 9.0, also set `internalQueryStatsWriteCmdSampleRate` to `1` on each `mongod` or `mongos` process. This requires query stats collection to be enabled as described above.
+MongoDB 9.0 samples 1% of write operations by default. To collect statistics for all write commands, set [`internalQueryStatsWriteCmdSampleRate`][5] to `1` on each `mongod` or `mongos` process. This setting is independent of the read query sampling settings.
 
 To enable write query statistics at runtime until the next restart, run:
 
@@ -299,3 +297,4 @@ instances:
 [2]: /integrations/mongo/?tab=standalone#metrics
 [3]: /database_monitoring/query_metrics/
 [4]: https://github.com/mongodb/mongo/blob/master/src/mongo/db/query/query_stats/README.md#server-parameters
+[5]: https://github.com/mongodb/mongo/blob/v9.0/src/mongo/db/query/query_integration_knobs.idl
