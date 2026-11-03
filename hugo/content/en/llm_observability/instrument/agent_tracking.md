@@ -193,7 +193,7 @@ Click {{< ui >}}Compare{{< /ui >}} to diff two versions side by side, including 
 
 Click {{< ui >}}View Spans{{< /ui >}} to open [Trace Explorer][1] filtered to that agent or version.
 
-## Limitations
+## Agent Tracking limitations
 
 - **Nearest agent only**: A span is attributed to its nearest agent ancestor. When one agent calls another, the LLM calls made by the inner agent count toward the inner agent only, not the outer one.
 - **Agents are identified by name**: Two agents with the same name are combined, and renaming an agent starts a new history.
