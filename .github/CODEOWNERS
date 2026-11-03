@@ -148,7 +148,6 @@ hugo/content/en/disaster_recovery/                                              
 hugo/content/en/error_tracking/                                                              @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/events/                                                                      @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/experiments/                                                                 @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/extend/                                                                      @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/feature_flags/                                                               @DataDog/documentation @DataDog/documentation-software-delivery
 hugo/content/en/gpu_monitoring/                                                              @DataDog/gpu-monitoring-agent @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/ide_plugins/                                                                 @DataDog/documentation @DataDog/documentation-software-delivery
@@ -160,7 +159,7 @@ hugo/content/en/internal_developer_portal/                                      
 hugo/content/en/journey_monitoring/                                                          @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/llm_observability/                                                           @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/logs/                                                                        @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/mcp_server/                                                                  @DataDog/mcp-services @DataDog/documentation @DataDog/documentation-software-delivery
+hugo/content/en/mcp_server/                                                                  @DataDog/documentation @DataDog/documentation-software-delivery
 hugo/content/en/metrics/                                                                     @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/mobile/                                                                      @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/monitors/                                                                    @DataDog/documentation @DataDog/documentation-csm-platform
@@ -168,7 +167,7 @@ hugo/content/en/network_monitoring/                                             
 hugo/content/en/notebooks/                                                                   @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/observability_pipelines/                                                     @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/opentelemetry/                                                               @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/pr_gates/                                                                    @DataDog/ci-app-backend @DataDog/documentation @DataDog/documentation-software-delivery
+hugo/content/en/pr_gates/                                                                    @DataDog/documentation @DataDog/documentation-software-delivery
 hugo/content/en/product_analytics/                                                           @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/profiler/                                                                    @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/real_user_monitoring/                                                        @DataDog/documentation @DataDog/documentation-dem
@@ -277,22 +276,6 @@ hugo/layouts/shortcodes/sci-*.md                                                
 # 3. Product teams that co-own specific pages
 # ============================================================================
 
-# Agent Runtimes
-hugo/content/en/agent/configuration/proxy.md                                                 @DataDog/agent-runtimes @DataDog/documentation @DataDog/documentation-observability
-
-# Agent integrations and Marketplace
-hugo/content/en/extend/integrations/agent_integration.md                                     @DataDog/agent-integrations @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/python.md                                                @DataDog/agent-integrations @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/guide/legacy.md                                                       @DataDog/agent-integrations @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/api_integration.md                                       @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/log_pipeline.md                                          @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/marketplace_offering.md                                  @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/create-an-integration-dashboard.md                       @DataDog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/create-an-integration-monitor-template.md                @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/extend/integrations/check_references.md                                      @DataDog/marketplace-product-management @DataDog/agent-integrations @DataDog/documentation @DataDog/documentation-observability
-hugo/layouts/shortcodes/integration-assets.*.md                                              @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/layouts/shortcodes/integration-assets-reference.*.md                                    @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
-hugo/layouts/shortcodes/integration_categories.*.md                                          @DataDog/marketplace-product-management @DataDog/documentation @DataDog/documentation-observability
 
 # Log collection
 hugo/content/en/logs/log_collection/android.md                                               @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
@@ -310,30 +293,15 @@ hugo/content/en/tracing/**/*dotnet*                                             
 
 # Mobile SDK
 hugo/content/en/real_user_monitoring/application_monitoring/react_native/setup/              @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/error_tracking/mobile/android.md                        @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/error_tracking/mobile/expo.md                           @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/error_tracking/mobile/flutter.md                        @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/error_tracking/mobile/ios.md                            @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/error_tracking/mobile/kotlin-multiplatform.md           @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/error_tracking/mobile/reactnative.md                    @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/real_user_monitoring/error_tracking/mobile/unity.md                          @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
 
 # Browser SDK
-hugo/content/en/real_user_monitoring/application_monitoring/browser/                         @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/real_user_monitoring/guide/                                                  @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/real_user_monitoring/error_tracking/browser.md                               @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-observability
 
 # Synthetic Monitoring, Continuous Testing, Mobile Application Testing
 hugo/content/en/synthetics/*.md                                                              @DataDog/synthetics-app @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/synthetics/mobile_app_testing/*.md                                           @DataDog/synthetics-executing-mobile @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/continuous_testing/*.md                                                      @DataDog/synthetics-orchestrating-managing @DataDog/documentation @DataDog/documentation-software-delivery
-
-# Software Delivery
-hugo/content/en/delivery_performance/dora_metrics/                                           @DataDog/ci-app-backend @DataDog/documentation @DataDog/documentation-software-delivery
-
-# Code Security
-hugo/content/en/security/code_security/static_analysis/                                      @DataDog/static-analysis @DataDog/documentation @DataDog/documentation-cloud-sec
-hugo/content/en/security/code_security/software_composition_analysis/                        @DataDog/static-analysis @DataDog/documentation @DataDog/documentation-cloud-sec
 
 # DDSQL Editor References
 hugo/content/en/ddsql_reference/*.md                                                         @DataDog/advanced-query-guild @DataDog/documentation @DataDog/documentation-csm-platform
@@ -366,14 +334,7 @@ hugo/content/en/serverless/**/*.mdoc.md                                         
 hugo/content/en/session_replay/**/*.mdoc.md                                                  @DataDog/cdocs-reviewers @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/synthetics/**/*.mdoc.md                                                      @DataDog/cdocs-reviewers @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/tracing/**/*.mdoc.md                                                         @DataDog/cdocs-reviewers @DataDog/documentation @DataDog/documentation-observability
-hugo/content/en/real_user_monitoring/application_monitoring/android/setup.mdoc.md            @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/flutter/setup.mdoc.md            @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/ios/setup.mdoc.md                @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup.mdoc.md @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/real_user_monitoring/application_monitoring/react_native/setup/**/*.mdoc.md  @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/roku/setup.mdoc.md               @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/unity/setup.mdoc.md              @DataDog/cdocs-reviewers @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/application_monitoring/browser/**/*.mdoc.md             @DataDog/cdocs-reviewers @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/real_user_monitoring/guide/**/*.mdoc.md                                      @DataDog/cdocs-reviewers @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
 
 # Cdocs partials
