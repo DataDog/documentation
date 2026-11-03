@@ -21,7 +21,7 @@ This page covers configuring and using {{< tooltip glossary="remote_configuratio
 | Feature | Description | Minimum Agent Version |
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
-| **[Agent upgrades][10]** | Remotely upgrade your Agents | US1-FED and US2-FED: 7.85.0+ for Linux and Windows<br>Other supported sites: Linux 7.69.0+, Windows 7.71.1+ |
+| **[Agent upgrades][10]** | Remotely upgrade your Agents | Linux: 7.69.0+; Windows: 7.71.1+<br>US1-FED and US2-FED: 7.85.0+ on both platforms |
 | **[Agent configuration][13]** | Remotely configure your Agents | 7.73+ |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
