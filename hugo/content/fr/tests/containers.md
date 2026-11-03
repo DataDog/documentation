@@ -79,7 +79,7 @@ Pour une liste complète des variables d'environnement définies par AppVeyor po
 | `SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI`  | L'URL du dépôt source pour la demande de tirage.                                                      |
 | `SYSTEM_PULLREQUEST_SOURCEBRANCH`         | La branche source de la demande de tirage.                                                                      |
 | `SYSTEM_PULLREQUEST_SOURCECOMMITID`       | L'ID de commit de la branche source dans la demande de tirage.                                                     |
-| `SYSTEM_STAGEDISPLAYNAME`                 | Le nom complet de l'étape dans le pipeline.                                                              |
+| `SYSTEM_STAGEDISPLAYNAME`                 | Le nom complet de la phase dans le pipeline.                                                              |
 | `SYSTEM_JOBDISPLAYNAME`                   | Le nom complet du job dans le pipeline.                                                                |
 
 Pour obtenir une liste complète des variables d'environnement définies par Azure DevOps Pipelines pour chaque build, consultez la [documentation officielle Azure][101].
@@ -223,7 +223,7 @@ Pour une liste complète des variables d'environnement définies par Codefresh p
 | `GITHUB_HEAD_REF`          | La référence principale ou la branche source de la pull request (uniquement définie pour les événements `pull_request` ou `pull_request_target`). Par exemple : `feature-branch-1`. |
 | `GITHUB_REF`               | La référence complète de la branche ou du tag qui a déclenché le workflow. Par exemple : `refs/heads/feature-branch-1`. |
 | `GITHUB_JOB`               | L'ID du job actuel. Par exemple : `greeting_job`.                                           |
-| `JOB_CHECK_RUN_ID`         | L'ID de la vérification en cours du job actuel. L'action GitHub Datadog Test Optimization exporte cette variable pour les étapes suivantes. Pour une instrumentation manuelle, définissez `JOB_CHECK_RUN_ID: ${{ job.check_run_id }}`. |
+| `JOB_CHECK_RUN_ID`         | L'ID d'exécution du check du job actuel. L'action GitHub Datadog Test Optimization exporte cette variable pour les étapes suivantes. Pour une instrumentation manuelle, définissez `JOB_CHECK_RUN_ID: ${{ job.check_run_id }}`. |
 
 
 Pour une liste complète des variables d'environnement définies par GitHub Actions pour chaque build, consultez la [documentation officielle de GitHub][101].
@@ -243,7 +243,7 @@ Pour une liste complète des variables d'environnement définies par GitHub Acti
 | `CI_PROJECT_PATH`     | L'espace de noms du projet avec le nom du projet inclus.                                                     |
 | `CI_PROJECT_URL`      | L'adresse HTTP(S) du projet.                                                                       |
 | `CI_PROJECT_DIR`      | Le chemin complet vers lequel le dépôt est cloné, et à partir duquel le job est exécuté.                                   |
-| `CI_JOB_STAGE`        | Le nom de l'étape du job.                                                                            |
+| `CI_JOB_STAGE`        | Le nom de la phase du job.                                                                            |
 | `CI_JOB_NAME`         | Le nom du job.                                                                                     |
 | `CI_JOB_URL`          | L'URL des détails du job.                                                                                     |
 | `CI_JOB_ID`           | L'ID interne du job, unique parmi tous les jobs de l'instance GitLab.                               |
@@ -299,13 +299,11 @@ Pour une liste complète des variables d'environnement définies par Jenkins pou
 | `TEAMCITY_VERSION`           | La version du serveur TeamCity.                                                                        |
 | `TEAMCITY_BUILDCONF_NAME`    | Le nom de la configuration de build à laquelle appartient la build actuelle.                                           |
 | `BUILD_URL`                  | Le lien vers la build actuelle.                                                                             |
-| `DATADOG_BUILD_ID`           | Variable personnalisée définie par l'[intégration Datadog TeamCity][102].                                             |
 
 Pour une liste complète des variables d'environnement définies par TeamCity pour chaque build, consultez la [documentation officielle de TeamCity][101].
 
 
 [101]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[102]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 
 {{% /tab %}}
 {{% tab "Travis CI" %}}

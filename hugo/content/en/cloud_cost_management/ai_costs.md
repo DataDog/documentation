@@ -67,6 +67,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
 | Databricks Mosaic AI     | [SaaS integration][19] |
+| Snowflake AI | [SaaS integration][22] |
 
 ## AI cost summary
 
@@ -227,3 +228,4 @@ Rules created by the **Connect your AI Gateway** flow appear in the **AI Gateway
 [19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
 [20]: /llm_observability/
 [21]: /integrations/litellm/
+[22]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts

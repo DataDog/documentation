@@ -1,65 +1,61 @@
 ---
 aliases:
 - /es/video-categories/flamegraph/
-description: Gráfico de desglose de las líneas de código que más consumen (CPU, Memoria,
-  ...)
+description: Visualización del consumo de recursos en las rutas de código perfiladas.
 further_reading:
 - link: /profiler/profile_visualizations/
   tag: Documentación
-  text: Más información sobre las visualizaciones de perfiles
+  text: Obtenga más información sobre las visualizaciones de perfil.
 - link: /dashboards/graphing_json/
   tag: Documentación
-  text: Creación de dashboards con JSON
-title: Widget gráfico de llamas de perfiles
+  text: Creación de Dashboards mediante JSON
+title: Widget de gráfico de llama de perfilado
 widget_type: flame_graph
 ---
+## Descripción general {#overview}
 
-## Información general
+{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_2.png" alt="Gráfico de llama de perfilado" >}}
 
-{{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="Gráfico de llamas de perfiles" >}}
+El [gráfico de llama de perfilado][1] visualiza los seguimientos de pila recopilados por Continuous Profiler. Cada marco representa una unidad de código, como un método o una línea. El ancho de un marco representa su parte de la métrica de perfil seleccionada, y los marcos en la fila siguiente representan el código llamado por el marco superior. Utilice el widget para identificar rutas de código que consumen muchos recursos en sus aplicaciones perfiladas.
 
-La [profiling flame graph visualization (visualización de gráfico de llamas de perfiles)][1] representa un desglose de las líneas de código que más consumen, como CPU y Memory. Añade este widget para visualizar la stack traces de tus aplicaciones perfiladas e identificar con precisión las solicitudes frecuentes de recursos. 
+## Configuración {#setup}
+ 
+ {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config_2.png" alt="Sección Graph your data en la configuración del widget de gráfico de llama de perfilado" style="width:100%;" >}}
 
-## Configuración
+### Graph your data {#graph-your-data}
 
- {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Grafica tu sección de datos en la configuración del widget del gráfico de llamas de perfiles" style="width:100%;" >}}
+1. En el campo de búsqueda, establezca el contexto de sus datos de perfilado mediante etiquetas. Por ejemplo, `host`, `container_name`, `service`, `env` o `version`.
+2. En el menú {{< ui >}}Show{{< /ui >}}, seleccione un tipo de perfil. Los [tipos de perfil disponibles][2] dependen del lenguaje.
+3. En el menú {{< ui >}}by{{< /ui >}}, seleccione la granularidad de los marcos, como método o línea.
+4. Utilice los menús {{< ui >}}color by{{< /ui >}} y {{< ui >}}sort{{< /ui >}} para seleccionar cómo se sombrean y ordenan los marcos.
+5. Utilice las secciones de contexto para refinar el gráfico de llama:
+   - {{< ui >}}Scope to methods{{< /ui >}}: Seleccione los métodos que desea incluir. El nombre de esta sección cambia según la granularidad seleccionada en el menú {{< ui >}}by{{< /ui >}}.
+   - {{< ui >}}Scope to endpoints{{< /ui >}}: Filtre a un punto de conexión específico. Seleccione `per Minute by Endpoint` para ver el consumo total de recursos o `per Endpoint Call` para ver el consumo de recursos por solicitud.
 
-### Configuración
+### Establezca las preferencias de tiempo {#set-time-preferences}
 
-1. Contextualiza tus datos de perfiles con etiquetas (tags). Por ejemplo, `host`, `container_name`, `servicio`, `env` o `versión`.
-2. Para seleccionar el recurso, haz clic en el menú desplegable situado junto a **Show** (Mostrar). Las opciones pueden incluir `Tiempo de CPU`, `Memoria asignada`, o `Excepciones lanzadas`.
-3. Haz clic en el menú desplegable junto a **por** y **para** para seleccionar la granularidad del marco y la procedencia del código, respectivamente.
-4. Dale un título a tu gráfico o deja la casilla en blanco para el título sugerido.
-5. Haz clic en **Save** (Guardar).
+Seleccione {{< ui >}}Global dashboard time{{< /ui >}} para usar el marco de tiempo de los tableros, o seleccione {{< ui >}}Custom time{{< /ui >}} para establecer un marco de tiempo para el widget.
 
-### Opciones
+**Nota**: Los notebooks conservan los datos del gráfico de llama durante un año cuando el widget utiliza un rango {{< ui >}}Custom time{{< /ui >}} fijo. El rango debe estar dentro del [período de retención de datos de perfilado de 8 días][5] cuando cree el widget.
 
-#### Opciones avanzadas y filtrado
+### Agregue un título y una descripción {#add-a-title-and-description}
 
-Haz clic en la elipsis de tres puntos para abrir las Opciones avanzadas para especificar el color y la resolución.
+Asigne un título a su gráfico o deje el cuadro en blanco para el título sugerido. También puede agregar una descripción opcional. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-Personaliza tu gráfico de llamas. Añade acciones o filtros de crear gráficas en el campo *Filter flame graph* (Filtro del gráfico de llamas).
+## Interactúe con el widget {#interact-with-the-widget}
 
-#### Contexto a los endpoints
+Pase el cursor sobre un marco para ver sus valores de perfil. Seleccione un marco para enfocarse en su ruta de código. Para investigar el perfil con más detalle, haga clic en el icono de abrir en página completa en la esquina superior derecha del gráfico de llama.
 
-Filtro sobre un endpoint específico, por consumo total (`por minuto por endpoint`) o por solicitud (`por llamada de endpoint`).
+## API {#api}
 
-#### Contexto a funciones
+Este widget se puede utilizar con el **[Dashboards API][3]**. Consulte la [definición del esquema JSON del widget][4].
 
-Filtra por otros criterios como `Método`, `Paquete`, `Nombre del hilo` u `Operación de rastreo`.
-
-#### Hora mundial
-
-Elige si tu widget tiene un marco temporal personalizado o el marco temporal global del dashboard.
-
-## API
-
-Este widget puede utilizarse con la **[API de dashboards][2]**. Ve la [definición de esquema de JSON  de widget][3].
-
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/profiler/profile_visualizations/#flame-graph
-[2]: /es/api/latest/dashboards/
-[3]: /es/dashboards/graphing_json/widget_json/
+[2]: /es/profiler/profile_types/
+[3]: /es/api/latest/dashboards/
+[4]: /es/dashboards/graphing_json/widget_json/
+[5]: /es/data_security/data_retention_periods/
