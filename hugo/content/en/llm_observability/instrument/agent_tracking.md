@@ -42,6 +42,8 @@ Agent attribution requires no code changes. When a span starts, the SDK finds it
 
 Spans with no `agent` ancestor are not attributed.
 
+#### Supported SDK versions
+
 | SDK | Minimum version |
 |-----|-----------------|
 | Python | 4.13.0 |
