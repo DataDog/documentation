@@ -1,5 +1,9 @@
 ---
 description: Rego 계약, 구문 분석된 입력, 공유 라이브러리, 결과 필드 및 테스트 관행을 참조하세요.
+further_reading:
+- link: https://www.datadoghq.com/blog/custom-iac-security-rules/
+  tag: 블로그
+  text: Datadog IaC Security 스캔에서 사용자 지정 규칙을 적용하십시오.
 title: IaC 사용자 지정 규칙 참조
 ---
 이 IaC 사용자 지정 규칙 참조는 규칙 계약, 구문 분석된 입력 및 플랫폼별 패턴을 설명합니다.
@@ -289,6 +293,10 @@ Terraform `searchKey` 값은 일반적으로 리소스 유형 및 레이블로 �
 - `http.send` 또는 `opa.runtime`와 같은 제한된 내장 함수를 호출하지 않습니다.
 
 탐지 결과가 없는 평가를 해석하기 전에 보고된 모든 오류를 수정합니다. 유효성 검사 오류는 정책이 성공적으로 실행되지 않았음을 의미합니다.
+
+## 추가 자료 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /ko/security/code_security/iac_security/custom_rules/
