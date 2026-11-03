@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-This guide describes how Datadog bills [Test Optimization][1]. Test Optimization is billed separately from [CI Visibility][2]. For prices and plan details, see the [Test Optimization pricing page][3].
+This guide describes how Datadog bills [Test Optimization][1]. For prices and plan details, see the [Test Optimization pricing page][2].
 
 Test Optimization is billed based on:
 
@@ -33,10 +33,10 @@ Every individual test run counts as a test span, except for the test spans that 
 
 Some Test Optimization features run or report tests on your behalf. The test spans that these features generate do not count as billable test spans:
 
-- Retries from [Auto Test Retries][4], [Early Flake Detection][5], and the [Attempt to Fix][6] remediation flow. The first execution of the test is billed, but the retries that the feature adds are not.
-- Tests skipped by [Test Impact Analysis][7].
+- Retries from [Auto Test Retries][3], [Early Flake Detection][4], and the [Attempt to Fix][5] remediation flow. The first execution of the test is billed, but the retries that the feature adds are not.
+- Tests skipped by [Test Impact Analysis][6].
 
-These test spans are still ingested and indexed. You can search and analyze them in the [Test Optimization Explorer][8] like any other test span.
+These test spans are still ingested and indexed. You can search and analyze them in the [Test Optimization Explorer][7] like any other test span.
 
 The following test spans are still billed:
 
@@ -50,10 +50,9 @@ These exceptions don't change how committers are counted.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/
-[2]: /account_management/billing/ci_visibility/
-[3]: https://www.datadoghq.com/pricing/?product=test-optimization#products
-[4]: /tests/flaky_tests/auto_test_retries/
-[5]: /tests/flaky_tests/early_flake_detection/
-[6]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
-[7]: /tests/test_impact_analysis/
-[8]: /tests/explorer/
+[2]: https://www.datadoghq.com/pricing/?product=test-optimization#products
+[3]: /tests/flaky_tests/auto_test_retries/
+[4]: /tests/flaky_tests/early_flake_detection/
+[5]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
+[6]: /tests/test_impact_analysis/
+[7]: /tests/explorer/
