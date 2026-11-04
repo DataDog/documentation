@@ -10596,6 +10596,11 @@ menu:
       parent: pa_experiments_concepts
       identifier: pa_experiments_cumulative_impact
       weight: 4
+    - name: Holdouts
+      url: experiments/holdouts/
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_holdouts
+      weight: 5
     - name: Statistics
       url: experiments/statistics/
       parent: pa_experiments
