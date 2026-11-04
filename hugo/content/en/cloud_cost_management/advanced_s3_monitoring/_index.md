@@ -1,7 +1,7 @@
 ---
 title: Advanced S3 Monitoring
 further_reading:
-    - link: "/cloud_cost_management/advanced_s3_monitoring/setup/"
+    - link: "/integrations/amazon-s3/#advanced-s3-monitoring"
       tag: "Documentation"
       text: "Set up Advanced S3 Monitoring"
     - link: "/cloud_cost_management/recommendations/"
@@ -25,11 +25,11 @@ Advanced S3 Monitoring provides deep, prefix-level analytics for Amazon S3 to he
 
 You can access Advanced S3 Monitoring in Datadog by navigating to **Cloud Cost** > **Summarize** > **Storage**.
 
-To enable Advanced Monitoring on your S3 buckets, open the [Amazon S3 integration tile][1] and go to the **Configure** tab. The **Advanced Monitoring** section is where you enable buckets and manage their settings. For step-by-step instructions, see [Set up Advanced S3 Monitoring][2].
+To enable Advanced Monitoring on your S3 buckets, open the [Amazon S3 integration tile][1] and go to the **Configure** tab. The **Advanced Monitoring** section is where you enable buckets and manage their settings. For step-by-step setup instructions, metrics, and recommendations, see [Advanced S3 Monitoring][2] on the Amazon S3 integration page.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations?search=s3&integrationId=amazon-s3
-[2]: /cloud_cost_management/advanced_s3_monitoring/setup/
+[2]: /integrations/amazon-s3/#advanced-s3-monitoring
