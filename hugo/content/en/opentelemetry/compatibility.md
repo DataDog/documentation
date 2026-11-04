@@ -47,7 +47,7 @@ The following table shows feature compatibility across different setups:
 | [Data Observability: Jobs Monitoring][13] (DJM) | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
-| [Source code integration][24] | {{< X >}} | | | |
+| [Source Code Integration][24] | {{< X >}} | {{< X >}} | {{< X >}} | |
 
 
 ## API support
