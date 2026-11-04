@@ -37,27 +37,11 @@ This page explains how to:
 
 Role Observability data is available through the Datadog API and the [Datadog MCP server][2]. At this time, there is no UI available for this feature.
 
-### Using the API
-
-TODO: Document the Role Observability API endpoints (list roles, list grants, resolve effective access for a given principal or object, change history, etc.).
-
-```shell
-curl -X GET "{{< region-param key="dd_api" >}}/api/unstable/TODO_endpoint" \
-  -H "DD-API-KEY: <DATADOG_API_KEY>" \
-  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
-```
-
-The application key must belong to a user or service account with the [**Database Monitoring Read**][1] permission.
-
-| Parameter | Description |
-| --------- | ----------- |
-| <code style="white-space: nowrap;">TODO_param</code> | TODO description. |
-
-TODO: Document the response shape, pagination, and any rate limits.
+Every answer is computed from the latest role and privilege snapshot that Database Monitoring collected for the instance. Role Observability reads collected metadata only: it does not connect to your database, run queries as the role, or change any grant.
 
 ### Using the MCP server
 
-Use the [Datadog MCP server][2] to query Role Observability from a coding agent. To add it to your agent, see [Set up the Datadog MCP server][4]. The MCP server exposes Role Observability as the following tools:
+Use the [Datadog MCP server][2] to ask a coding agent who can access your data and why. To add it to your agent, see [Set up the Datadog MCP server][4]. The tools are part of the `dbm` toolset:
 
 <table style="width: 100%;">
   <thead>
@@ -68,13 +52,81 @@ Use the [Datadog MCP server][2] to query Role Observability from a coding agent.
   </thead>
   <tbody>
     <tr>
-      <td style="white-space: nowrap;"><code>TODO_tool_name</code></td>
-      <td>TODO description.</td>
+      <td style="white-space: nowrap;"><code>get_datadog_database_role_access_status</code></td>
+      <td>Checks whether role and privilege data has been collected and is ready for an instance and database.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>list_datadog_database_roles</code></td>
+      <td>Lists the roles on an instance, with their attributes such as <code>LOGIN</code> and <code>SUPERUSER</code>. Agents use it to translate a role name into the role OID that the other tools take.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>get_datadog_database_role</code></td>
+      <td>Gets one role's attributes, direct memberships, and role settings.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>get_datadog_database_object_access</code></td>
+      <td>Answers "who can access this object?" for a table, view, sequence, function, schema, or database, optionally down to one column.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>get_datadog_database_role_access</code></td>
+      <td>Answers "what can this role access?" across one logical database, with optional schema, object type, name, and privilege filters.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>explain_datadog_database_access</code></td>
+      <td>Answers "why can this role access this object?" by returning the grants that contribute to the access and the membership path behind each one. For audits, it can return the full proof graph instead.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>list_datadog_database_default_privileges</code></td>
+      <td>Lists the default-privilege rules (<code>ALTER DEFAULT PRIVILEGES</code>) that decide what grants objects created in the future receive.</td>
     </tr>
   </tbody>
 </table>
 
-TODO: Add a short example of what an agent interaction looks like (for example, "list every role that can read `customers.email`").
+You can ask questions in plain language. For example:
+
+- "Who can read `billing.invoices` on `orders-db-primary`, and through which role?"
+- "Why can `analyst` delete rows from `billing.invoices`?"
+- "What can the `etl_service` role write to in the `shop` database?"
+- "Which roles will get access to new tables created in the `billing` schema?"
+
+The agent resolves role names to OIDs, picks the right tool, and pages through results as needed. If Role Observability is not enabled for your organization, the tools return the preview sign-up link instead of data.
+
+{{< img src="database_monitoring/database_monitoring_role_observability/role_observability_mcp_demo.mp4" alt="A coding agent uses the Datadog MCP server to find every role that can read a billing table, explains an unexpected access path through nested role membership, and checks which roles new tables in the schema will be granted to" video="true" >}}
+
+### Using the API
+
+Use the Role Observability API to answer access questions from a script or an access review. All endpoints are `GET` requests under `/api/unstable/databases/postgres/`, and every request takes `filter[database_instance]`, the instance name in Database Monitoring.
+
+For example, to list every role that can access a table:
+
+```shell
+curl -G "{{< region-param key="dd_api" >}}/api/unstable/databases/postgres/objects/access" \
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+  --data-urlencode "filter[database_instance]=orders-db-primary" \
+  --data-urlencode "filter[database]=shop" \
+  --data-urlencode "filter[schema]=billing" \
+  --data-urlencode "filter[object]=invoices" \
+  --data-urlencode "filter[object_type]=table"
+```
+
+The application key must belong to a user or service account with the [**Database Monitoring Read**][1] permission.
+
+| Endpoint | Answers | Also requires |
+| -------- | ------- | ------------- |
+| `GET /access/status` | Is role data collected and ready? | |
+| `GET /roles` | Which roles exist? | |
+| `GET /roles/{role_oid}` | What are this role's attributes and memberships? | |
+| `GET /objects/access` | Who can access this object? | `filter[database]`, `filter[schema]`, `filter[object]`, `filter[object_type]` |
+| `GET /roles/{role_oid}/access` | What can this role access? | `filter[database]` |
+| `GET /access/explain` | Why can this role access this object? | Same as `/objects/access`, plus `filter[role_oid]` |
+| `GET /default-privileges` | What will new objects be granted? | `filter[database]` |
+
+Most endpoints also accept optional filters such as `filter[privilege]` and `filter[column]`, and are paginated with `page[size]` and `page[cursor]`.
+
+Each result reports access in two modes: `without_set_role`, for access the role has directly or through membership, and `via_set_role`, for access it can get only after `SET ROLE`. Each mode is `usable`, `blocked` (a grant exists, but a database `CONNECT` or schema `USAGE` check fails), `unknown` (the collected data can't prove it either way), or `not_applicable`. The response also includes a representative path from the role to the grant.
+
+If `meta.resolution_status` is `partial`, some access could not be resolved and `meta.warnings` explains why. In that case, an empty result does not prove that nobody has access. A `404` with `role_data_not_collected` means no data has been collected yet, so check `/access/status`.
 
 ## Limitations
 
