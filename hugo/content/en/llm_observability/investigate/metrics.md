@@ -94,16 +94,18 @@ Evaluation metrics aggregate the results of your [evaluations][1] and end-user f
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
 | `ml_obs.evaluation.count` | Number of evaluation and feedback results | Count | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `value`, `is_feedback` |
-| `ml_obs.evaluation.score` | Value of score evaluation and feedback results, and of JSON evaluation results whose post-processing returns a numeric `value` | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `is_feedback` |
+| `ml_obs.evaluation.score` | Values of score evaluations and feedback, and numeric values returned by post-processing of JSON evaluations | Distribution | `env`, `ml_app`, `service`, `version`, `evaluation_name`, `metric_type`, `assessment`, `evaluation_source`, `evaluation_version`, `is_feedback` |
 
-The evaluation metric tags have the following values:
+#### Evaluation metric tags
 
-| Tag | Values |
-|-----|--------|
+The following tags are available on evaluation metrics:
+
+| Tag | Description |
+|-----|-------------|
 | `evaluation_name` | The name of the evaluation, for example `faithfulness`, or the label of the feedback, for example `thumbs` |
 | `metric_type` | `boolean`, `categorical`, `score`, `numerical`, `json`, or `text`. `numerical` and `text` results are reported only in `ml_obs.evaluation.count`. |
 | `assessment` | `pass` or `fail` when the evaluation has pass/fail criteria, otherwise `none` |
-| `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations; `external` for evaluations and feedback you submit through the SDK or API |
+| `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations. `external` for evaluations and feedback you submit through the SDK or API. |
 | `evaluation_version` | The version of a custom LLM-as-a-judge evaluation. Not set for other evaluations or for feedback. |
 | `value` | The evaluation result. Available only on `ml_obs.evaluation.count`. See the [`value` tag](#the-value-tag) section. |
 | `ml_app` | The ML application the evaluation belongs to |
@@ -112,7 +114,7 @@ The evaluation metric tags have the following values:
 
 #### The value tag
 
-How each type of evaluation reports its result:
+The `value` tag holds the result of an evaluation. How it's set depends on the evaluation's `metric_type`:
 - **Boolean**: `value` is `true` or `false`.
 - **Categorical**: `value` is the category.
 - **Score**: `value` is not set. The score is reported in `ml_obs.evaluation.score`.
@@ -124,23 +126,26 @@ String values in the `value` tag are lowercased, and characters that aren't allo
 
 Evaluation metrics include production evaluation results that completed successfully. They do not include:
 - Evaluation results from [experiments][2]
-- Evaluations that were skipped or that failed to run
-- Evaluations submitted through the SDK or API that can't be matched to a span, for example because the span ID is wrong or the span was never sent. Feedback is included whether or not it matches a span.
+- Evaluations that were skipped or failed to run
+- Evaluations you submit through the SDK or API that don't match a span
 
-When a managed evaluation samples a portion of your traffic, `ml_obs.evaluation.count` reflects only the sampled results, so it does not match `ml_obs.span` one to one. Rates (such as pass rate) and score distributions are not affected by sampling.
+An SDK or API evaluation doesn't match a span when, for example, its span ID is incorrect or the span never reached Datadog. Feedback is included whether or not it matches a span.
+
+Managed evaluations can run on a sample of your traffic. When they do, `ml_obs.evaluation.count` includes only the sampled results, so its counts don't line up one to one with `ml_obs.span`. Sampling doesn't skew rates, such as pass rate, or score distributions.
 
 #### Example evaluation metric queries
 
-<div class="alert alert-info">Add <code>.fill(null)</code> to <code>ml_obs.evaluation.count</code> queries so that empty intervals are not <a href="/dashboards/functions/interpolation/">interpolated</a> with nearby values, which would inflate counts.</div>
+The following queries show common ways to use evaluation metrics in dashboards and monitors. Replace the evaluation names with your own.
+
+<div class="alert alert-info">Add <code>.fill(null)</code> to <code>ml_obs.evaluation.count</code> queries. Without it, Datadog can <a href="/dashboards/functions/interpolation/">interpolate</a> empty intervals from nearby values, which inflates counts.</div>
 
 Pass rate of an evaluation:
 
 ```text
 sum:ml_obs.evaluation.count{evaluation_name:faithfulness,assessment:pass}.as_count().fill(null)
   / sum:ml_obs.evaluation.count{evaluation_name:faithfulness AND assessment IN (pass,fail)}.as_count().fill(null)
-```
 
-Distribution of results for a categorical evaluation:
+Breakdown of results for a categorical evaluation:
 
 ```text
 sum:ml_obs.evaluation.count{evaluation_name:answer_quality} by {value}.as_count().fill(null)
@@ -153,7 +158,7 @@ sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true,value:up}.as
   / sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true}.as_count().fill(null)
 ```
 
-To leave feedback out of a query, add `NOT is_feedback:true`.
+To exclude feedback from a query, add `NOT is_feedback:true` to the tag filter.
 
 90th percentile of a score evaluation by application:
 
@@ -194,3 +199,7 @@ The following metrics are deprecated, and are maintained only for backward compa
 [2]: /llm_observability/improve/offline_experiments/
 [3]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/#post-processing
 [4]: /llm_observability/investigate/evaluations/end_user_feedback/
+[5]: /metrics/
+[6]: /data_security/data_retention_periods/
+[7]: /llm_observability/data_governance/#traces-and-spans
+[8]: /llm_observability/data_governance/
