@@ -190,7 +190,7 @@ Use `--timeout 20m` to change the default 10-minute command timeout. To submit w
 
 ### Interrupted and failed operations
 
-An execute operation applies all of its source and metric changes together. If any definition write fails, Datadog rolls back the operation and applies none of its changes.
+An execute operation applies all of its source and metric changes together. If the operation fails at any step, Datadog applies none of its changes.
 
 After Datadog accepts the submission, the operation runs independently of the CLI. Stopping the CLI, canceling a CI job, or reaching the command timeout does not cancel the server operation, and a polling error does not mean the operation failed. Use the operation ID (`metric_sync_id`) with `status` and `result` to confirm the outcome. The operation ID differs from the stable `sync_id` values in YAML.
 
@@ -211,6 +211,8 @@ If a command stops before you see the result, follow these steps before you subm
 Choose the key before you submit and reuse it for retries of that request. For a matching key and request, Datadog returns the existing operation instead of creating a new one. Reusing a key with a different request returns a conflict, so use separate keys for `plan` and `execute`.
 
 When you omit `--idempotency-key`, the CLI generates a key. A CI job rerun or a new local command can generate a different key, so Datadog treats it as a new submission. To retry the same submission, set the key explicitly.
+
+A CI retry that submits the same files and options can also reuse the generated key and return the earlier result.
 
 If the server operation failed, reusing its key returns the same failed operation. Correct the cause and use a new key for the next attempt.
 
