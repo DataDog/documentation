@@ -1,6 +1,6 @@
 ---
 title: Cross-App Access
-description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Okta, Claude, or another OIDC identity provider.
+description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Okta, Claude, or a custom issuer.
 algolia:
   tags: ["cross-app access", "XAA", "Okta", "Claude", "Anthropic", "OIDC", "AI agent", "MCP", "ID-JAG"]
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized. Without it, every user authorizes the agent individually through a browser consent screen. With it, an administrator grants that access once, centrally, and users skip the per-user consent step.
 
-A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, and any other OIDC-compliant identity provider that issues them.
+A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, and custom issuers: other identity providers that issue ID-JAGs for users of your organization's SAML single sign-on.
 
 Claude is the only agent that Cross-App Access supports, and it works with any of these issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. With Claude Auto-Connect, Claude is also the issuer and mints the ID-JAG that it presents to Datadog. You can trust more than one issuer.
 
@@ -97,7 +97,7 @@ Enter the issuer URL of your own Okta tenant, for example `https://<YOUR_OKTA_SU
 - The URL must contain only a scheme and a host, with no path or trailing slash.
 - The host must be a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not work.
 - Okta custom authorization servers, whose issuer URLs contain a path such as `/oauth2/default`, are not supported.
-- If your Okta org issues tokens from a custom domain, follow the **Custom OIDC provider** tab instead.
+- If your Okta org issues tokens from a custom domain, follow the **Custom issuer** tab instead.
 
 #### Configure Okta
 
@@ -183,34 +183,34 @@ If a request fails with a user resolution error, confirm the user's email addres
 
 {{% /tab %}}
 
-{{% tab "Custom OIDC provider" %}}
+{{% tab "Custom issuer" %}}
 
-You can use any OIDC-compliant identity provider that issues ID-JAGs, including an Okta org on a custom domain.
+A custom issuer is an identity provider, other than Okta and Claude, that issues ID-JAGs for users of your organization's SAML single sign-on. It is not a plain OIDC integration: Datadog uses the issuer's OpenID configuration only to find its signing keys, and identifies each user through the SAML identity in the token. An Okta org that issues tokens from a custom domain is a custom issuer.
 
 #### Prerequisites
 
-- Your organization uses SAML single sign-on to Datadog. Datadog resolves users through the SAML identity in the token, so a custom provider does not work without it. See [Configure SAML single sign-on][1].
-- Your provider can issue ID-JAGs that meet the token requirements below.
+- Your organization uses SAML single sign-on to Datadog. Datadog resolves users through the SAML identity in the token, so a custom issuer does not work without it. See [Configure SAML single sign-on][1].
+- Your issuer can issue ID-JAGs that meet the token requirements below.
 
 #### Values you exchange
 
 | Value                     | Direction           | Where you enter it |
 | ------------------------- | ------------------- | ------------------ |
-| Datadog organization UUID | Datadog to provider | The `aud_tenant` claim of the ID-JAG |
-| Agent client ID           | Datadog to provider | The `client_id` claim of the ID-JAG |
-| Provider issuer URL       | Provider to Datadog | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
+| Datadog organization UUID | Datadog to issuer   | The `aud_tenant` claim of the ID-JAG |
+| Agent client ID           | Datadog to issuer   | The `client_id` claim of the ID-JAG |
+| Custom issuer URL         | Issuer to Datadog   | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
 
 #### Issuer URL
 
-Enter the `issuer` value from your provider's `/.well-known/openid-configuration` document, character for character, including any path or trailing slash.
+Enter the `issuer` value from your issuer's `/.well-known/openid-configuration` document, character for character, including any path or trailing slash.
 
 Datadog rejects hostnames that belong to Datadog, internal-only names such as `.internal` or `.local`, and shared issuers that many unrelated tenants sign with, such as `https://accounts.google.com`.
 
 #### Token requirements
 
-Configure your provider to issue ID-JAGs for Datadog that meet these requirements:
+Configure your issuer to issue ID-JAGs for Datadog that meet these requirements:
 
-- **Discovery**: The provider publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you added in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet.
+- **Discovery**: The issuer publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you added in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet.
 - **Signature**: The token's `typ` header is `oauth-id-jag+jwt`, and it is signed with an asymmetric algorithm (RSA with a 2048-bit to 4096-bit key, ECDSA, or EdDSA) using a key published at the `jwks_uri`.
 - **Audience**: The `aud` claim is the Datadog authorization server URL for your Datadog site, {{< region-param key="mcp_xaa_issuer_url" code="true" >}}, and `aud_tenant` is your [Datadog organization UUID](#copy-your-organization-uuid).
 - **Client**: The `client_id` claim is the agent client ID from the [{{< ui >}}Supported agents{{< /ui >}}](#copy-the-agent-client-id) table.
