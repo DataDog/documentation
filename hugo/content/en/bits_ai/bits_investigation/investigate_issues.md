@@ -23,7 +23,7 @@ You can launch a Bits investigation from several entry points in the Datadog UI:
 - [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
 
-You can also use Bits Investigation from AI assistants, applications, and the command line. For more information, see the [Use Bits Investigation from MCP, the API, or the CLI](/bits_ai/bits_investigation/mcp_api_cli/) page.
+You can also use Bits Investigation from AI assistants, applications, and the command line. For more information, see the [MCP, API, CLI](/bits_ai/bits_investigation/mcp_api_cli/) page.
 
 ### Monitor alerts {#manual-monitor-alerts}
 
@@ -107,7 +107,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
 1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
-<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">Use Bits Investigation from MCP, the API, or the CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
+<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
 
 ### Supported monitors
