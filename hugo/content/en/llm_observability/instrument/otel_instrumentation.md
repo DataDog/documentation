@@ -651,7 +651,7 @@ Claude exports also qualify for routing through these source markers:
 - Instrumentation scope `com.anthropic.claude-platform`
 - Instrumentation scope starting with `com.anthropic.sdk.` and a non-empty suffix
 
-When the Platform scope is absent, service `claude-platform` together with `gen_ai.provider.name=anthropic` also identifies Platform exports. Source recognition alone does not guarantee that every span can be mapped.
+Source recognition alone does not guarantee that every span can be mapped.
 
 Within an eligible trace, conversion retains spans with `gen_ai.*` attributes or a non-empty `openinference.span.kind`, `langfuse.observation.type`, or `tfy.span_type`. Other context spans can be omitted.
 
