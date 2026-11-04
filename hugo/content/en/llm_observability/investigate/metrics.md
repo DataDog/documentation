@@ -81,37 +81,14 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 
 ### Cost and token breakdown metrics
 
-Use the following Count metrics to group usage and spend by token modality, I/O direction, and cache or reasoning category.
+Use these Count metrics to group usage and spend by token modality, I/O direction, and cache or reasoning category. Cost values use **nanodollars**; token values use **tokens**.
 
-| Metric Name | Description | Metric Type | Unit |
+| Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.span.llm.cost` | Cost from LLM and embedding spans, plus user-provided tool-span costs | Count | Nanodollars |
-| `ml_obs.span.llm.tokens` | Input and output token usage from LLM spans | Count | Tokens |
+| `ml_obs.span.llm.cost` | Cost from LLM and embedding spans, plus user-provided tool-span costs | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `input_without_output`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_match`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `source`, `span_kind`, `token_modality`, `ttl`, `version` |
+| `ml_obs.span.llm.tokens` | Input and output token usage from LLM spans; excludes embedding spans | Count | `context_tier`, `cost_estimate_status`, `env`, `error`, `input_type`, `io_type`, `matched_model_name`, `matched_model_provider`, `ml_app`, `ml_app_version`, `model_name`, `model_provider`, `model_server`, `model_version`, `output_type`, `service`, `token_modality`, `ttl`, `version` |
 
-These metrics carry the available application, model, service, and environment tags from their corresponding total metrics. They also support the following breakdown tags:
-
-| Tag | Values | Description |
-|-----|--------|-------------|
-| `io_type` | `input`, `output`, `unknown` | Input or output contribution. |
-| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Cache category for input contributions. |
-| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Reasoning category for output contributions when the data establishes the category. Non-token tool charges omit this tag. |
-| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Token modality. `other` applies only to non-token cost contributions, such as provider tool charges. |
-| `ttl` | `5m`, `1h` | Cache-write lifetime when that breakdown is available. |
-
-Unavailable details use `unknown`; missing data does not mean zero. For example, a provider that does not report cache usage has `input_type:unknown`.
-
-Use these queries to chart spending and token usage by modality and cache category.
-
-```text
-sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
-sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
-```
-
-#### Choose a metric family
-
-`ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` are distributions with one total observation per applicable span. Use those metrics for per-span averages and percentiles.
-
-`ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` break down cost and token usage by category. Sum across categories to get totals. Do not add these breakdown metrics to their matching `.total.*` metrics when calculating totals, because that counts the same usage twice.
+Embedding tokens are available through `ml_obs.span.embedding.input.tokens`. Tags appear when the corresponding span data or breakdown is available. These metrics also support [custom tags][2]. For breakdown tag values, query examples, and help choosing a metric family, see [Cost and token metrics][1].
 
 ### Trace metrics
 
@@ -149,3 +126,6 @@ The following metrics are deprecated, and are maintained only for backward compa
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /llm_observability/investigate/cost/#metrics
+[2]: /llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics
