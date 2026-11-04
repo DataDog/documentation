@@ -13,8 +13,6 @@ further_reading:
     text: 'Data Observability: Lineage'
 ---
 
-<div class="alert alert-info">Jobs Monitoring for Azure Data Factory is in Preview.</div>
-
 ## Overview
 
 [Data Observability: Jobs Monitoring][1] gives visibility into the performance and reliability of your Azure Data Factory pipelines. Datadog reads pipeline and activity run history from the Data Factory management API. Each pipeline run appears as a job run with its activities broken out, along with the error message for failed runs.

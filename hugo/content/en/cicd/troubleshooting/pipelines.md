@@ -1,5 +1,7 @@
 ---
 title: CI Visibility Troubleshooting
+aliases:
+  - /continuous_integration/troubleshooting/
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
@@ -9,7 +11,7 @@ further_reading:
     text: "Learn how to monitor your CI pipelines"
   - link: "/tests/test_impact_analysis"
     tag: "Documentation"
-    text: "Learn about Test Impact Analyzer"
+    text: "Learn about Test Impact Analysis"
 ---
 
 ## Overview

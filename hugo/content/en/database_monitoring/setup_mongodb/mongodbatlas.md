@@ -12,7 +12,7 @@ Database Monitoring offers comprehensive insights into your MongoDB databases by
 ## Before you begin
 
 Supported MongoDB major versions
-: 4.4, 5.0, 6.0, 7.0, 8.0
+: 4.4, 5.0, 6.0, 7.0, 8.0, 9.0
 
 Supported MongoDB Atlas cluster tiers
 : M10 and higher<br/><br/>
@@ -246,7 +246,7 @@ Refer to the [MongoDB integration documentation][4] for a comprehensive list of 
 ### Query Metrics
 
 <div class="alert alert-info">
-  This requires Datadog Agent v7.78 or later and MongoDB 7.0+ for Atlas Deployments.
+  Query metrics require Datadog Agent 7.78 or later and MongoDB 7.0 or later. MongoDB 9.0 requires Agent 7.85.0 or later.
 </div>
 
 Query metrics provide insights into the performance of your MongoDB operations. For more information, see [Query Metrics][5].
