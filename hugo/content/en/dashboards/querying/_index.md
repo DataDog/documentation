@@ -51,7 +51,7 @@ You may also see Datadog or OpenTelemetry source indicators. If your environment
 
 {{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
-Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Summary][6] page.
+Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Catalog][6] page.
 
 ### Filter
 
@@ -273,7 +273,7 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [3]: /dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
-[6]: https://app.datadoghq.com/metric/summary
+[6]: https://app.datadoghq.com/metric/catalog
 [7]: /metrics/advanced-filtering/
 [8]: /dashboards/template_variables/
 [9]: /getting_started/tagging/

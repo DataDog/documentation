@@ -87,7 +87,7 @@ The following custom metric naming convention must be followed:
 
 ### Metric units
 
-Set metric units through [Metrics Summary][12] or set custom metric units with the [Unit override][13] feature in the graph editor of your visualizations. For more information, see the [Metrics Units][14] documentation.
+Set metric units through the [Metrics Catalog][12] or set custom metric units with the [Unit override][13] feature in the graph editor of your visualizations. For more information, see the [Metrics Units][14] documentation.
 
 ## Submitting custom metrics
 
