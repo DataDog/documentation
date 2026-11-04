@@ -47,8 +47,8 @@ The MCP server exposes the following tools that AI coding assistants can call to
 | [`datadog_iac_scan`][5]                   | Infrastructure-as-Code security scanning                 |      Yes      |
 | [`datadog_generate_sbom`][6]              | Software Bill of Materials generation                    |      No       |
 | [`datadog_library_vulnerability_scan`][7] | Library vulnerability lookup by package URL              |      Yes      |
-| [`datadog_ephemeral_sast_scan`][29]       | Run one local, unpublished SAST rule                     |      No       |
-| [`datadog_promote_sast_rule`][30]         | Save an approved SAST rule as a Datadog custom rule      |      Yes      |
+| [`datadog_ephemeral_sast_scan`][29]       | Local scan with one unpublished SAST rule                |      No       |
+| [`datadog_promote_sast_rule`][30]         | Upload of an approved SAST rule as a custom rule         |      Yes      |
 
 `datadog_code_security_scan` and `datadog_sast_scan` accept optional `min_sast_severity` (`LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`). It applies to SAST only, defaults to `LOW`, and does not return in-source suppressed findings.
 
