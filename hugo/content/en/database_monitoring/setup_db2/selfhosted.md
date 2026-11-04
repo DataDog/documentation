@@ -164,9 +164,29 @@ instances:
 If each server runs its own Agent, include only that server's entry in its configuration. Add an entry for each additional database.
 
 - Use each server's direct address. Do not use a virtual IP, load balancer, or failover DNS name. See [Connect to a fixed server][14].
-- Disable automatic client reroute (ACR) for the Agent's IBM driver. Set both `enableAcr` and `enableAlternateServerListFirstConnect` to `false` in the driver's `db2dsdriver.cfg`. See [Disable automatic client reroute][15] for file placement and `DB2DSDRIVER_CFG_PATH` configuration.
+- If your databases use HADR or have an alternate server configured, disable automatic client reroute (ACR) for the Agent's IBM driver, as described below.
 - Keep each server's identifier stable across primary and standby role changes. Do not share a cluster identifier between servers. See [HADR configuration][16].
 - Do not configure two Agents or duplicate check instances to collect the same database on the same server.
+
+#### Disable automatic client reroute
+
+When a database uses HADR or has an alternate server configured, the server sends alternate server information to clients, and the IBM driver can move the Agent's connection to another server. This mixes the workloads of two servers under one identifier. Skip this section if your databases have no alternate server.
+
+1. Create a `db2dsdriver.cfg` file for the Agent's driver, such as `/etc/datadog-agent/db2dsdriver.cfg`. For each configured database, host, and port, set both `enableAcr` and `enableAlternateServerListFirstConnect` to `false`. For a complete example, see [Disable automatic client reroute][15].
+2. Set the `DB2DSDRIVER_CFG_PATH` environment variable in the Agent service's environment to the absolute path of the file. Setting the variable in your shell does not affect the Agent service.
+   - **Linux (systemd)**: Run `sudo systemctl edit datadog-agent` and add:
+
+     ```ini
+     [Service]
+     Environment="DB2DSDRIVER_CFG_PATH=/etc/datadog-agent/db2dsdriver.cfg"
+     ```
+
+   - **Windows**: Add `DB2DSDRIVER_CFG_PATH=<PATH>` to the `Environment` multi-string value of the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\datadogagent` registry key.
+   - **Containers**: Set the variable in the container environment.
+
+   Alternatively, place the file in the driver's default configuration directory, such as `/opt/datadog-agent/embedded/lib/python3.13/site-packages/clidriver/cfg/` on Linux.
+
+Apply these settings to the Agent's driver configuration, not your application's driver configuration.
 
 After configuring the check, driver, and secret backend, [restart the Agent][17].
 
