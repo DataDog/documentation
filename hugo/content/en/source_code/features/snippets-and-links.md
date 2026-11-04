@@ -1,6 +1,6 @@
 ---
-title: Links to Git Providers and Code Snippets
-description: "See links to your source code and inline code snippets across Datadog products."
+title: Code Snippets and Context Links
+description: "View inline code snippets and links to your source code from stack traces, profiles, test runs, and code findings across Datadog products."
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
@@ -33,6 +33,36 @@ further_reading:
   tag:  "Blog"
   text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
+
+## Overview
+
+Code snippets and context links connect what you see in Datadog to the source code behind it:
+
+- **Context links** take you from a stack frame, flame graph, test run, or code finding to the file, Git blame, or commit in your repository.
+- **Code snippets** display the relevant lines of code inline in Datadog, so you can read the code without leaving the page.
+
+For example, in an Error Tracking issue, each stack frame shows a code snippet of the line that raised the error. A {{< ui >}}View{{< /ui >}} button on the frame links to the file in your repository.
+
+To use code snippets and context links, connect your Git repositories with a [source code management provider integration][10] and [tag your telemetry with Git information][11].
+
+## Supported Datadog products
+
+Code snippets and context links are available in several Datadog products, including the following:
+
+| Product | Capabilities |
+|---|---|
+| [App and API Protection][12] | Links stack traces in security signals to your source code |
+| [Code Security][13] | Highlights the lines of code that triggered Static Analysis and Software Composition Analysis findings |
+| [Continuous Profiler][14] | Previews the source code of methods in flame graphs |
+| [Dynamic Instrumentation][15] | Displays full source code files when you create or edit an instrumentation |
+| [Error Tracking][16] | Links stack frames in backend error issues to your source code |
+| [Error Tracking for RUM][17] | Links stack frames in Browser, React Native, Android, and Electron errors to your source code |
+| [Serverless Monitoring][18] | Links stack traces from AWS Lambda function errors to your source code |
+| [Test Optimization][19] | Links failed test runs to your source code |
+
+## View code snippets and context links by product
+
+Select a product to see how to view code snippets and context links:
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
@@ -178,3 +208,14 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[10]: /source_code/source-code-management/
+[11]: /source_code/service-mapping/
+[12]: /security/application_security/
+[13]: /security/code_security/
+[14]: /profiler/
+[15]: /dynamic_instrumentation/
+[16]: /tracing/error_tracking/
+[17]: /real_user_monitoring/error_tracking/
+[18]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
+[19]: /tests/developer_workflows/

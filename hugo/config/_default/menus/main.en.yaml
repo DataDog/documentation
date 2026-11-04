@@ -6883,7 +6883,7 @@ menu:
       parent: source_code_integration
       identifier: sci_features
       weight: 4
-    - name: Links to Git Providers and Code Snippets
+    - name: Code Snippets and Context Links
       url: source_code/features/snippets-and-links/
       parent: sci_features
       identifier: sci_features_snippets_and_links
