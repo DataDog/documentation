@@ -176,7 +176,7 @@ Vulnerabilities with CVE ID, GHSA ID, severity, CVSS score, affected library, re
 
 Run one local, unpublished SAST rule against a repository. The caller supplies the rule JavaScript and the tree-sitter query. The tool does not require `DD_API_KEY` or `DD_APP_KEY`.
 
-The scan runs only the supplied rule, but still follows the repository's [Static Code Analysis configuration][4]: `ignore-paths`, `only-paths`, `max-file-size-kb`, and `use-gitignore`.
+The scan runs only the supplied rule but still follows the repository's [Static Code Analysis configuration][4]: `ignore-paths`, `only-paths`, `max-file-size-kb`, and `use-gitignore`.
 
 ### Parameters
 
