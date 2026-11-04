@@ -28,10 +28,10 @@ OpenFeature is the recommended application API. For existing applications, see [
 
 This integration requires:
 
-- `datadog_flags` 1.2.0 or later, or `datadog_flags_flutter` 1.2.0 or later for Flutter with RUM.
+- `datadog_flags` 1.2.0 or later (or `datadog_flags_flutter` 1.2.0 or later for Flutter with RUM).
 - Dart 3.10 or later.
 - `openfeature_dart_client_sdk` 0.0.1.
-- For Flutter applications, Flutter 3.38.1 or later with stable Dart 3.10 or later.
+- For Flutter applications, Flutter 3.38.1 or later.
 
 For standalone Dart or Flutter usage, install `datadog_flags` and the OpenFeature client SDK:
 
@@ -167,11 +167,11 @@ final enabled = client.getBooleanValue('checkout.enabled', false);
 
 Configure the provider explicitly. It does not derive its configuration or evaluation context from the Flutter SDK. Keep the token, environment, site, and optional telemetry fields consistent across both configurations.
 
-The hook adds the variant to the active RUM view. When no variant is available, it uses the evaluated value. It skips evaluations with errors. Omit the hook to disable RUM association; the provider still controls exposure and evaluation telemetry separately.
+The hook adds the variant to the active RUM view. When no variant is available, it uses the evaluated value. It skips evaluations with errors. Omit the hook to disable RUM association. The provider still controls exposure and evaluation telemetry separately.
 
 For a custom `DatadogSdk` instance, use `DatadogRumHook(sdk: instance)`. RUM requires the main isolate. For background evaluation, initialize a separate pure Dart provider in that isolate.
 
-Do not register `DatadogFlagsPluginConfiguration` for the same evaluations. That plugin belongs to the deprecated API.
+<div class="alert alert-warning">Do not register <code>DatadogFlagsPluginConfiguration</code> (legacy API) together with <code>DatadogRumHook</code> for the same flags. The legacy plugin initializes a separate Flags client and reports legacy evaluations to RUM. It does not associate OpenFeature evaluations with RUM; use the hook for those evaluations. Evaluating the same flags through both APIs can report them to RUM twice.</div>
 
 ## Create and retrieve a client
 
@@ -333,9 +333,9 @@ DatadogFlagsConfiguration(
 : Defaults to `true`. Records aggregated telemetry for evaluations against active assignments, including missing-flag and type-mismatch defaults. Defaults returned before assignments become available are not recorded. Set to `false` to disable evaluation telemetry.
 
 `initializationTimeout`
-: Defaults to 5 seconds. The OpenFeature provider requires a positive duration of at most 20 seconds. Do not use the legacy API's disabled-timeout values. If using an isolated OpenFeature API with a shorter life cycle deadline, choose a smaller provider timeout.
+: Defaults to 5 seconds. The OpenFeature provider requires a positive duration of at most 20 seconds. Do not use the legacy API's disabled-timeout values. OpenFeature also enforces its own initialization deadline, which defaults to 30 seconds. If you configure an isolated OpenFeature API with a shorter deadline, set `initializationTimeout` to less than that deadline. This lets the provider handle its timeout before OpenFeature stops waiting.
 
-  The budget covers cache loading, the assignment request, decoding, assignment publication, and storage. It bounds the caller's wait without cancelling the underlying operation. Synchronous work can delay timer delivery.
+  The budget covers cache loading, the assignment request, decoding, assignment publication, and storage. It bounds the caller's wait without canceling the underlying operation. Synchronous work can delay timer delivery.
 
   The provider handles `FlagsInitializationTimeoutException` internally. Matching cached assignments produce a `stale` state. Without assignments, registration fails and evaluations return defaults. A late successful response emits `ready` and makes assignments available before cache storage completes.
 
@@ -376,7 +376,7 @@ class MyFlagsStore implements DatadogFlagsStore {
 
 Implement the storage operations with the application's storage mechanism. The package does not provide a disk store. Preserve the complete `FlagsData.toJson()` result and restore it with `FlagsData.fromJson()`, including metadata for obfuscated assignments.
 
-The provider serializes writes and deletes for each store instance and client name. Make every storage operation complete; an operation that never completes can block later persistence operations.
+The provider serializes writes and deletes for each store instance and client name. Make every storage operation complete. An operation that never completes can block later persistence operations.
 
 ## Shutdown
 
@@ -413,7 +413,7 @@ Register the test provider during test setup. Shut down the API during teardown 
 
 ## Migrate from the legacy API
 
-The legacy Datadog evaluation API is deprecated. Removal is planned for the next major version. Existing clients remain functional during migration.
+The legacy Datadog evaluation API is deprecated and planned for removal in the next major version. Existing clients remain functional during migration.
 
 | Legacy API | OpenFeature replacement |
 | --- | --- |

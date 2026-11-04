@@ -38,7 +38,7 @@ The JavaScript SDK, `@datadog/openfeature-browser`, supports [flag key obfuscati
 
 ## Telemetry options by platform
 
-The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. The Boolean options below default to `true`; set an option to `false` to disable its behavior. Flutter OpenFeature RUM association requires an explicit hook.
+The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. The following Boolean options default to `true`; set an option to `false` to disable its behavior. Flutter OpenFeature RUM association requires an explicit hook.
 
 The web options below apply to `DatadogProvider`, the recommended browser provider. The advanced `DatadogCoreProvider` does not enable telemetry automatically. Applications using it explicitly register tracking hooks and manage their life cycle. See [Browser Rules-Based Evaluation][1].
 
