@@ -233,18 +233,16 @@ Cross-product retention filters are also available on the <a href="/real_user_mo
 
 ## Suggested retention filters
 
-Datadog provides suggested retention filters for each RUM application. The suggestions are based on the application's platform, enabled capabilities, and ingested data. They cover these categories:
+Datadog provides suggested retention filters for each RUM application. The suggestions are based on the application's platform, enabled capabilities, and ingested data. The following categories are covered:
 
 - Dynamic session sampling
-- Added capabilities, such as Session Replay and RUM Profiling
-- Errors
-- Slow performance
-- User activity
-- Specific application versions
+- Sessions with errors
+- Sessions with slow performance
+- Sessions with user activity
+- Sessions with added-on products, such as [Session Replay][11] and [RUM Frontend Profiling][12]
+- Sessions from specific versions
 
-{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Recommended Filters sidepanel, with suggested retention filters grouped by category and an Add Filter button for each." style="width:80%" >}}
-
-<div class="alert alert-info">Performance-based suggestions require AI features to be enabled for your organization.</div>
+{{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Suggested Filters side panel, with suggested retention filters grouped by category. Each suggestion has a View Filter button if it is already configured, or an Add Filter button if it is not." style="width:80%" >}}
 
 For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days and refreshes them every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
 
@@ -258,7 +256,7 @@ To review and apply suggestions:
 1. Review and edit the pre-filled query and retention rate.
 1. Save the filter.
 
-Datadog adds the filter to the bottom of the custom retention filters list. Filter order determines which sessions are retained, so reorder the filter if needed. You can also dismiss suggestions that do not apply and revisit them later.
+Datadog adds the filter to the bottom of the custom retention filters list. Filters are evaluated from top to bottom, so filters at the top of the list evaluate a session before filters at the bottom. If a filter higher in the list matches the session's events first, the new filter does not apply to them. To give the new filter priority, [move it higher in the list](#reorder-filters). You can also dismiss suggestions that do not apply and revisit them later.
 
 Creating a filter from a suggestion requires the `RUM Retention Filters Write` permission.
 
@@ -288,3 +286,5 @@ Analyze performance with [metrics][8].
 [8]: /real_user_monitoring/rum_without_limits/metrics
 [9]: /real_user_monitoring/rum_without_limits/retention_quotas
 [10]: /error_tracking/issue_states/#excluding-an-issue
+[11]: /session_replay/
+[12]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser
