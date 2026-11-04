@@ -71,7 +71,7 @@ A gate can have one or more rules, including any combination of monitor and APM 
 
 ## Evaluations
 
-An evaluation is a single run of a gate's rules against a specific deployment. Evaluations are asynchronous—your pipeline triggers an evaluation, then checks back for the result while the rules run in the background.
+An evaluation is a single run of a gate's rules against a specific deployment. Evaluations are asynchronous: your pipeline triggers an evaluation, then checks back for the result while the rules run in the background.
 
 1. **Your pipeline requests a gate evaluation.** The request identifies the service, environment, and version being deployed. For a [JIT](#configuration-sources) gate, the request also contains the gate's rules. For a [preconfigured](#configuration-sources) gate, Datadog uses the service, environment, and optional identifier to find the gate. The version is required if the gate has an APM Faulty Deployment Detection rule.
 2. **Datadog starts the evaluation.** The API immediately returns an evaluation ID, and each rule runs for its configured duration.
