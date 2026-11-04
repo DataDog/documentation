@@ -351,7 +351,9 @@ Auto-Processing only handles logs that don't match the filter of any integration
 
 Datadog groups supported logs into Auto-Processing entries. Each entry covers one source and service pair. For example, logs with `source:storefront` and `service:catalog-api` form one entry. As new log patterns appear, Datadog updates entries to support them without changing how previously supported patterns are parsed. Attributes already extracted keep their names, so facets, dashboards, and monitors that use them keep working.
 
-Datadog creates an entry for a new source and service about 15 minutes after receiving its first logs, if that source and service has at least 1,000 indexed logs in the past 24 hours. Logs dropped by [exclusion filters][15] don't count toward this threshold. If volume is below the threshold, Datadog checks again about 12 hours later. If volume is still below the threshold, Datadog doesn't create an entry until a new log pattern appears for that source and service.
+Datadog creates an entry for a new source and service pair about 15 minutes after it receives the first logs for that pair. The pair must have at least 1,000 indexed logs in the past 24 hours. Logs dropped by [exclusion filters][15] don't count toward this threshold. If volume is below the threshold, Datadog checks again about 12 hours later. If volume is still below the threshold, Datadog doesn't create an entry until a new log pattern appears for that pair.
+
+Each organization can have up to 100 Auto-Processing entries. If your organization already sends logs when you turn on Auto-Processing, Datadog creates entries for up to 100 source and service pairs. Datadog selects the pairs that would process the most logs. After that, Datadog creates entries for new pairs as their logs arrive, until the organization has 100 entries.
 
 {{< img src="logs/processing/pipelines/auto_processing_list.png" alt="The Auto-Processing tab on the Processing page, listing entries by source and service with the number of parsed attributes, usage, and an enable toggle for each entry" style="width:100%;" >}}
 
@@ -370,35 +372,33 @@ In the {{< ui >}}Auto-Processing{{< /ui >}} tab, choose whether new entries are 
 
 ### Review transformations
 
-1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service you want to review.
+1. In the {{< ui >}}Auto-Processing{{< /ui >}} tab, find the source and service pair you want to review.
 2. Click {{< ui >}}View Transformations{{< /ui >}}.
-3. Click a log pattern and inspect example logs to compare their original and processed attributes.
+3. Click a log pattern.
+4. Inspect the example logs to compare their original and processed attributes.
 
 {{< img src="logs/processing/pipelines/auto_processing_transformations.png" alt="The View Transformations page for an Auto-Processing entry, showing detected log patterns on the left and a diff of an example log's original and processed attributes on the right" style="width:100%;" >}}
 
 ### Enable or disable an entry
 
-In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service. Disabling an entry affects future logs only. Logs that are already processed don't change.
+In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service pair. Disabling an entry affects future logs only. Logs that are already processed don't change.
 
 ### Switch to a manual pipeline
 
-To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page. Datadog creates a custom pipeline with the same filter and processors, and removes the Auto-Processing entry for that source and service.
+To customize parsing or attribute names, click {{< ui >}}Switch to manual pipeline{{< /ui >}} on the {{< ui >}}View Transformations{{< /ui >}} page. Datadog creates a custom pipeline with the same filter and processors and removes the Auto-Processing entry for that source and service pair.
 
 After switching:
 
-- The pipeline appears in your pipelines list and parses logs the same way, so attribute names stay the same and existing facets, dashboards, and monitors keep working.
+- The pipeline appears in your pipelines list and parses logs the same way. Attribute names stay the same, so existing facets, dashboards, and monitors keep working.
 - Datadog no longer updates the pipeline when new log patterns appear. You manage its configuration from then on.
 - Because the pipeline's filter matches these logs, Auto-Processing no longer processes them.
 
-To return to Auto-Processing, delete the manual pipeline. Datadog then creates a new entry for that source and service after its logs meet the [entry creation requirements](#how-entries-are-created). The new entry is generated from scratch and doesn't restore your earlier entry or your edits.
+To return to Auto-Processing, delete the manual pipeline. Datadog then creates a new entry for that source and service pair after its logs meet the [entry creation requirements](#how-entries-are-created). The new entry is generated from scratch and doesn't restore your earlier entry or your edits.
 
 ### Limitations
 
-- Each organization can have up to 100 Auto-Processing entries:
-  - When you turn on Auto-Processing in an organization that already sends logs, Datadog creates entries for the source and service pairs that would process the most logs, up to 100.
-  - After that, Datadog creates entries for new source and service pairs as their logs arrive, until the organization reaches 100 entries.
-  - Datadog doesn't process logs from source and service pairs beyond this limit.
-- Some log patterns can remain unparsed, even for a source and service that Auto-Processing already covers.
+- Each organization can have up to 100 Auto-Processing entries. Datadog doesn't process logs from source and service pairs beyond this limit. For details, see [How entries are created](#how-entries-are-created).
+- Some log patterns can remain unparsed, even for a source and service pair that Auto-Processing already covers.
 
 ## Further Reading
 
