@@ -76,7 +76,7 @@ Lambda instrumentation runs entirely from Datadog. Datadog does not deploy any c
 
 1. Datadog reads the function's current configuration and tags, and checks that it meets the [Lambda prerequisites][3].
 2. Datadog checks whether the function is already instrumented. Datadog skips a function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Datadog also skips a function managed by [remote instrumentation][4], and reports which of the two reasons applies.
-3. Datadog resolves the layer versions set on the rule for the function's runtime, architecture, region, and AWS partition.
+3. For the function's runtime, architecture, region, and AWS partition, Datadog resolves the matching layer versions from the ones set on the rule.
 4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
 5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See the [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated) section.
 6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. Datadog marks the change as applied only after AWS reports success.
