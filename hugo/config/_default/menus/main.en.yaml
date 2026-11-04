@@ -9336,6 +9336,11 @@ menu:
       parent: synthetics_private_location
       identifier: synthetics_private_location_monitoring
       weight: 7043
+    - name: Network Security
+      url: synthetics/platform/private_locations/network_security
+      parent: synthetics_private_location
+      identifier: synthetics_private_location_network_security
+      weight: 7044
     - name: Connect APM
       url: synthetics/platform/apm/
       parent: synthetics_platform
