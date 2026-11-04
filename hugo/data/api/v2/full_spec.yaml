@@ -85577,6 +85577,9 @@ components:
           type: array
         type:
           $ref: "#/components/schemas/NotificationChannelEmailConfigType"
+        verified:
+          description: Whether this email address has been verified.
+          type: boolean
       required:
         - type
         - address
@@ -85605,6 +85608,11 @@ components:
     NotificationChannelPhoneConfig:
       description: "Phone notification channel configuration"
       properties:
+        available_notification_types:
+          description: Notification methods currently available for this phone number. Omitted when no methods are available.
+          items:
+            $ref: "#/components/schemas/OnCallPhoneNotificationRuleMethod"
+          type: array
         formatted_number:
           description: "The formatted international version of Number (e.g. +33 7 1 23 45 67)."
           example: ""
