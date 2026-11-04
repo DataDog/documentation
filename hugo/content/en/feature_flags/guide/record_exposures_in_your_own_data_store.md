@@ -57,13 +57,14 @@ OpenFeatureAPI.getInstance().addHooks(new ExposureHook(evaluation -> {
         Instant.now(),
         evaluation.getContext().getTargetingKey(),
         evaluation.getDetails().getFlagKey(),
+        evaluation.getDetails().getFlagMetadata().getString("allocationKey"),
         evaluation.getDetails().getVariant(),
         evaluation.getFeatures()));
 }));
 // A background thread takes records from `exposures` and writes them to your data store.
 {{< /code-block >}}
 
-<!-- TODO(Danyal): how Java customers read the allocation key -->
+<div class="alert alert-info">In version 1.68.x, read the allocation key from the flag metadata, under the <code>allocationKey</code> key, as in the example. A later Java release adds the <code>getAllocationKey()</code>, <code>getFlagKey()</code>, <code>getVariant()</code>, and <code>getTargetingKey()</code> methods to <code>ExposureHook.Evaluation</code>. Use <code>getAllocationKey()</code> instead of the flag metadata after you upgrade to that release.</div>
 
 Evaluate flags through an OpenFeature client. If you call the Datadog provider directly, the SDK records no exposure.
 
@@ -173,7 +174,7 @@ To analyze exposures in Datadog Experiments with an [Exposure SQL Model][6], rec
 | Timestamp | The time of the evaluation |
 | Subject | The targeting key of the evaluation context |
 | Flag key | The evaluation details |
-| Allocation key | <!-- TODO(Danyal): allocation key source for each SDK --> |
+| Allocation key | Java 1.68.x: the `allocationKey` flag metadata key. A later Java release replaces it with `getAllocationKey()`. Go: `AllocationKey()`. Browser: `allocation`. |
 | Variant | The evaluation details |
 | `holdout.key`, `holdout.assignment_group`, `holdout.should_include_in_holdout_analysis` | The features, for flags in a holdout |
 
