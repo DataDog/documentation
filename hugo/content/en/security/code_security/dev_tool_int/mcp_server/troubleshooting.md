@@ -48,7 +48,7 @@ Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KE
 
 If the rule does not report the expected number of findings on its two examples, or fails on them, nothing is saved. If the error says an example was not scanned, give its file name the extension of the rule's language. Otherwise, fix the rule and retry.
 
-If Datadog rejects the rule after creating it, the error says the rule was left empty. Fix the cause the error reports, then retry with `overwrite: true` (`--overwrite` in the CLI) to replace the empty rule.
+If Datadog creates the rule but rejects its content, the error reports that the rule was left empty. Fix the cause the error reports, then retry with `overwrite: true` (`--overwrite` in the CLI) to replace the empty rule.
 
 If a rule with the same name already exists, nothing is saved. Choose another rule name, or retry with `overwrite: true` (`--overwrite` in the CLI) to replace the existing rule.
 
