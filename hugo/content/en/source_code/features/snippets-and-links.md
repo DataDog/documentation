@@ -65,6 +65,75 @@ Code snippets and context links are available in several Datadog products, inclu
 Select a product to see how to view code snippets and context links:
 
 {{< tabs >}}
+{{% tab "App and API Protection Monitoring" %}}
+
+You can see links from errors in your security signals' associated stack traces to their source repository in **App and API Protection Monitoring**.
+
+1. Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}}][101] and select a security signal.
+2. Scroll down to the {{< ui >}}Traces{{< /ui >}} section on the {{< ui >}}Related Signals{{< /ui >}} tab and click on an associated stack trace.
+3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+
+{{< img src="source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/security/appsec
+
+{{% /tab %}}
+{{% tab "Code Security" %}}
+
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
+
+1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
+2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click on a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
+
+For more information, see the [Code Security documentation][102].
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+[102]: /security/code_security/
+
+{{% /tab %}}
+{{% tab "Continuous Profiler" %}}
+
+You can see source code previews directly in [Continuous Profiler][1] flame graphs.
+
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][2].
+2. Select the service you want to investigate.
+3. Hover your cursor over a method in the flame graph.
+4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
+5. If prompted, click {{< ui >}}Connect to preview{{< /ui >}}. The first time you do this for a repository, you will be redirected to GitHub to {{< ui >}}Authorize{{< /ui >}} the Datadog application.
+6. After authorizing, the source code preview appears in the tooltip.
+7. Click the file link in the tooltip to open the full source code file in your repository.
+
+{{< img src="source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
+
+[1]: /profiler/
+[2]: https://app.datadoghq.com/profiling/explorer
+{{% /tab %}}
+{{% tab "Dynamic Instrumentation" %}}
+
+You can see full source code files in [{{< ui >}}Dynamic Instrumentation{{< /ui >}}][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+
+### Create new instrumentation
+
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
+2. Select {{< ui >}}Create New Instrumentation{{< /ui >}} and choose a service to instrument.
+3. Search for and select a source code filename or method.
+
+### View or edit instrumentation
+
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
+2. Select an existing instrumentation from the list, then click {{< ui >}}View Events{{< /ui >}}.
+3. Select the instrumentation card to view its location in the source code.
+
+{{< img src="source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
+
+For more information, see the [Dynamic Instrumentation documentation][102].
+
+[101]: https://app.datadoghq.com/dynamic-instrumentation/events
+[102]: /dynamic_instrumentation/
+
+{{% /tab %}}
 {{% tab "Error Tracking" %}}
 You can see links from stack frames to their source repository in [Error Tracking][1].
 
@@ -106,23 +175,6 @@ Source code integration is supported for the following RUM platforms when source
 [7]: /real_user_monitoring/application_monitoring/electron/error_tracking/#upload-source-maps
 
 {{% /tab %}}
-{{% tab "Continuous Profiler" %}}
-
-You can see source code previews directly in [Continuous Profiler][1] flame graphs.
-
-1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][2].
-2. Select the service you want to investigate.
-3. Hover your cursor over a method in the flame graph.
-4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
-5. If prompted, click {{< ui >}}Connect to preview{{< /ui >}}. The first time you do this for a repository, you will be redirected to GitHub to {{< ui >}}Authorize{{< /ui >}} the Datadog application.
-6. After authorizing, the source code preview appears in the tooltip.
-7. Click the file link in the tooltip to open the full source code file in your repository.
-
-{{< img src="source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
-
-[1]: /profiler/
-[2]: https://app.datadoghq.com/profiling/explorer
-{{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
 You can see links from errors in your Lambda functions' associated stack traces to their source repository in **Serverless Monitoring**.
@@ -149,58 +201,6 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
-
-{{% /tab %}}
-{{% tab "Code Security" %}}
-
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in **Code Security**.
-
-1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
-2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click on a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
-
-{{< img src="source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
-
-For more information, see the [Code Security documentation][102].
-
-[101]: https://app.datadoghq.com/ci/code-analysis
-[102]: /security/code_security/
-
-{{% /tab %}}
-{{% tab "App and API Protection Monitoring" %}}
-
-You can see links from errors in your security signals' associated stack traces to their source repository in **App and API Protection Monitoring**.
-
-1. Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}}][101] and select a security signal.
-2. Scroll down to the {{< ui >}}Traces{{< /ui >}} section on the {{< ui >}}Related Signals{{< /ui >}} tab and click on an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
-
-{{< img src="source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
-
-[101]: https://app.datadoghq.com/security/appsec
-
-{{% /tab %}}
-{{% tab "Dynamic Instrumentation" %}}
-
-You can see full source code files in [{{< ui >}}Dynamic Instrumentation{{< /ui >}}][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
-
-### Create new instrumentation
-
-1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
-2. Select {{< ui >}}Create New Instrumentation{{< /ui >}} and choose a service to instrument.
-3. Search for and select a source code filename or method.
-
-### View or edit instrumentation
-
-1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Dynamic Instrumentation{{< /ui >}}][101].
-2. Select an existing instrumentation from the list, then click {{< ui >}}View Events{{< /ui >}}.
-3. Select the instrumentation card to view its location in the source code.
-
-{{< img src="source_code_integration/dynamic-instrumentation-create-new.png" alt="Source Code File in Dynamic Instrumentation" style="width:100%;">}}
-
-For more information, see the [Dynamic Instrumentation documentation][102].
-
-[101]: https://app.datadoghq.com/dynamic-instrumentation/events
-[102]: /dynamic_instrumentation/
 
 {{% /tab %}}
 {{< /tabs >}}
