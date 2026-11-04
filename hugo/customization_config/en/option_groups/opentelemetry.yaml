@@ -16,3 +16,30 @@ otel_api_support_signal_options:
     default: true
   - id: metrics
   - id: logs
+
+# OpenTelemetry compatibility option groups.
+# The destination filter uses the group for the selected SDK, so each group
+# lists only the destinations that pair with that SDK.
+
+otel_compatibility_sdk_options:
+  - id: ddot_sdk
+  - id: datadog_sdk
+  - id: opentelemetry_sdk
+    default: true
+
+otel_compatibility_ddot_sdk_destination_options:
+  - id: ddot_collector
+    default: true
+  - id: upstream_otel_collector
+
+otel_compatibility_datadog_sdk_destination_options:
+  - id: agents_collector
+    default: true
+
+otel_compatibility_opentelemetry_sdk_destination_options:
+  - id: upstream_otel_collector
+    default: true
+  - id: agents_collector
+  - id: otlp_intake
+  - id: ddot_collector
+  - id: agent_otlp_endpoint

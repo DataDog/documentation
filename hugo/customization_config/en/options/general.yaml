@@ -587,3 +587,27 @@ options:
 
 - label: ECS Fargate
   id: ecs_fargate
+
+- label: DDOT SDK
+  id: ddot_sdk
+
+- label: Datadog SDK
+  id: datadog_sdk
+
+- label: OpenTelemetry SDK
+  id: opentelemetry_sdk
+
+- label: DDOT Collector
+  id: ddot_collector
+
+- label: Upstream OpenTelemetry Collector
+  id: upstream_otel_collector
+
+- label: Agent’s Collector
+  id: agents_collector
+
+- label: Agent’s OTLP endpoint
+  id: agent_otlp_endpoint
+
+- label: Direct OTLP intake
+  id: otlp_intake
