@@ -1,25 +1,25 @@
 ---
-title: BYOC Releases and Updates
-description: Learn how Datadog versions, publishes, and recommends deploying BYOC updates.
+title: BYOC Logs Releases and Updates
+description: Learn how Datadog versions, publishes, and recommends deploying BYOC Logs updates.
 disable_toc: false
 further_reading:
 - link: "/byoc-logs/release_notes/"
   tag: "Documentation"
-  text: "BYOC release notes"
+  text: "BYOC Logs release notes"
 - link: "/observability_pipelines/guide/upgrade_worker/"
   tag: "Documentation"
   text: "Upgrade the Observability Pipelines Worker"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
-  text: "Install or upgrade BYOC"
+  text: "Install or upgrade BYOC Logs"
 ---
 
-BYOC (Bring Your Own Cloud) includes two customer-deployed components:
+BYOC (Bring Your Own Cloud) Logs includes two customer-deployed components:
 
-- The BYOC engine
+- The BYOC Logs engine
 - The Observability Pipelines Worker (OPW)
 
-The components are versioned independently. Deploy them with the Datadog Operator or their separate Helm charts. For Helm deployments, each BYOC release identifies a validated version pair and corresponding chart versions. For Operator deployments, the Operator supplies the default engine and Worker images.
+The components are versioned independently. Deploy them with the Datadog Operator or their separate Helm charts. For Helm deployments, each BYOC Logs release identifies a validated version pair and corresponding chart versions. For Operator deployments, the Operator supplies the default engine and Worker images.
 
 ## Operator-managed deployments
 
@@ -57,9 +57,9 @@ After the update, inspect `Reconciled` and `Available` on the `DatadogBYOCCluste
 
 ## Release cadence
 
-Datadog publishes at least one BYOC engine release per month. Releases may occur more frequently, and patch releases are published as needed. Each engine release includes a corresponding Helm chart and release notes.
+Datadog publishes at least one BYOC Logs engine release per month. Releases may occur more frequently, and patch releases are published as needed. Each engine release includes a corresponding Helm chart and release notes.
 
-A BYOC release is published when the engine changes or when Datadog adds an OPW update to the validated pair. One component can remain unchanged between releases.
+A BYOC Logs release is published when the engine changes or when Datadog adds an OPW update to the validated pair. One component can remain unchanged between releases.
 
 ## Versioning
 
@@ -75,7 +75,7 @@ Minor and patch updates are intended to remain backward compatible. Datadog does
 
 ## Release communication
 
-Each BYOC release communication includes:
+Each BYOC Logs release communication includes:
 
 - The release date, release type, and recommended update timeline
 - Changes, fixes, known issues, and release-specific upgrade instructions
@@ -84,7 +84,7 @@ For deployments using separate Helm charts, the release communication identifies
 
 | Component | Version |
 |-----------|---------|
-| BYOC engine | `<ENGINE_VERSION>` (`datadog/cloudprem` Helm chart `<ENGINE_CHART_VERSION>`) |
+| BYOC Logs engine | `<ENGINE_VERSION>` (`datadog/cloudprem` Helm chart `<ENGINE_CHART_VERSION>`) |
 | OPW | `<OPW_VERSION>` (`datadog/observability-pipelines-worker` Helm chart `<OPW_CHART_VERSION>`) |
 
 Use the exact versions listed in the release communication. A component or chart version might not change in every release.

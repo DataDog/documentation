@@ -3,24 +3,24 @@ title: Cluster Sizing
 aliases:
 - /cloudprem/configure/cluster_sizing/
 - /cloudprem/operate/sizing/
-description: Learn about cluster sizing for BYOC
+description: Learn about cluster sizing for BYOC Logs
 further_reading:
 - link: "/byoc-logs/configure/ingress/"
   tag: "Documentation"
-  text: "Configure BYOC Ingress"
+  text: "Configure BYOC Logs Ingress"
 - link: "/byoc-logs/configure/pipelines/"
   tag: "Documentation"
-  text: "Configure BYOC Log Processing"
+  text: "Configure BYOC Logs Log Processing"
 - link: "/byoc-logs/introduction/architecture/"
   tag: "Documentation"
-  text: "Learn more about BYOC Architecture"
+  text: "Learn more about BYOC Logs Architecture"
 ---
 
 {{< jqmath-vanilla >}}
 
 ## Overview
 
-Size your BYOC (Bring Your Own Cloud) cluster in three steps:
+Size your BYOC (Bring Your Own Cloud) Logs cluster in three steps:
 
 1. Estimate your daily ingest volume in TB/day.
 2. Pick a [starter configuration](#starter-configurations) for that volume.
@@ -114,14 +114,14 @@ Enable automated backups on the metastore database. See [Enable automated backup
 
 ### Object storage
 
-BYOC compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
+BYOC Logs compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
 
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
 <div class="alert alert-info">
-Use standard-tier object storage (for example, S3 Standard or GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC.
+Use standard-tier object storage (for example, S3 Standard or GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
 </div>
 
 To estimate PUT request volume and cost, see [Object Storage Request Estimation][6].

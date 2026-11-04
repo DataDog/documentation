@@ -1,6 +1,6 @@
 ---
 title: Architecture
-description: Understand how Observability Pipelines and the BYOC engine collect, store, maintain, and query logs in your environment.
+description: Understand how Observability Pipelines and the BYOC Logs engine collect, store, maintain, and query logs in your environment.
 aliases:
 - /cloudprem/architecture/
 - /cloudprem/introduction/architecture/
@@ -10,24 +10,24 @@ further_reading:
   text: "Observability Pipelines"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
-  text: "BYOC Installation Prerequisites"
+  text: "BYOC Logs Installation Prerequisites"
 - link: "/byoc-logs/introduction/network/"
   tag: "Documentation"
-  text: "Connect BYOC to Datadog"
+  text: "Connect BYOC Logs to Datadog"
 ---
 
 ## Overview
 
-{{< img src="/cloudprem/overview_architecture_v2.png" alt="BYOC architecture showing log sources sending data through Observability Pipelines to the BYOC engine. The engine contains indexers, compactors, searchers, a control plane, a metastore, and a janitor, and uses object storage and PostgreSQL. Searchers connect to the Datadog UI." style="width:100%;" >}}
+{{< img src="/cloudprem/overview_architecture_v2.png" alt="BYOC Logs architecture showing log sources sending data through Observability Pipelines to the BYOC Logs engine. The engine contains indexers, compactors, searchers, a control plane, a metastore, and a janitor, and uses object storage and PostgreSQL. Searchers connect to the Datadog UI." style="width:100%;" >}}
 
-BYOC (Bring Your Own Cloud) consists of two main blocks:
+BYOC (Bring Your Own Cloud) Logs consists of two main blocks:
 
 - [**Observability Pipelines**][1] collects, processes, and routes logs.
-- The **BYOC engine** indexes, stores, and queries logs. Datadog distributes the engine as the `datadog/cloudprem` Docker image.
+- The **BYOC Logs engine** indexes, stores, and queries logs. Datadog distributes the engine as the `datadog/cloudprem` Docker image.
 
-The Observability Pipelines Worker and the BYOC engine process log data in your environment. Datadog hosts the pipeline configuration UI and Log Explorer, and routes queries to the engine.
+The Observability Pipelines Worker and the BYOC Logs engine process log data in your environment. Datadog hosts the pipeline configuration UI and Log Explorer, and routes queries to the engine.
 
-The BYOC engine separates compute from object storage. You can scale ingestion, compaction, and search independently based on workload demand while keeping log data in your object storage.
+The BYOC Logs engine separates compute from object storage. You can scale ingestion, compaction, and search independently based on workload demand while keeping log data in your object storage.
 
 ## Architecture components
 
@@ -35,11 +35,11 @@ For new AWS deployments, the [Datadog Operator][4] manages the engine components
 
 ### Observability Pipelines
 
-Observability Pipelines is the ingestion block for BYOC. The Observability Pipelines Worker receives logs from Datadog Agents and other sources, applies the processing rules defined in your pipeline, and routes the processed logs to the BYOC engine. You configure the pipeline in Datadog, and the Worker runs in your environment.
+Observability Pipelines is the ingestion block for BYOC Logs. The Observability Pipelines Worker receives logs from Datadog Agents and other sources, applies the processing rules defined in your pipeline, and routes the processed logs to the BYOC Logs engine. You configure the pipeline in Datadog, and the Worker runs in your environment.
 
-### BYOC engine {#byoc-logs-engine}
+### BYOC Logs engine
 
-The BYOC engine runs in your environment. In Kubernetes deployments, the `datadog/cloudprem` image runs with different roles:
+The BYOC Logs engine runs in your environment. In Kubernetes deployments, the `datadog/cloudprem` image runs with different roles:
 
 **Indexers**
 : Receive processed logs from Observability Pipelines, create index files called *splits*, and write the splits to object storage.
@@ -73,7 +73,7 @@ The engine uses two data stores in your environment:
 Logs remain in your environment throughout ingestion:
 
 1. Applications and other sources send logs to an **Observability Pipelines Worker**.
-2. The Worker processes the logs and routes them to the BYOC engine.
+2. The Worker processes the logs and routes them to the BYOC Logs engine.
 3. **Indexers** create splits in object storage and register their metadata through the metastore.
 4. **Compactors** asynchronously merge splits on dedicated nodes and write the merged splits back to object storage.
 
@@ -81,7 +81,7 @@ Logs remain in your environment throughout ingestion:
 
 ### Query path
 
-When you search BYOC data in Log Explorer, the query travels over a secure connection between Datadog and the BYOC engine:
+When you search BYOC Logs data in Log Explorer, the query travels over a secure connection between Datadog and the BYOC Logs engine:
 
 1. The Datadog UI sends the search query to Datadog's backend.
 2. Datadog forwards the query to the engine through a reverse connection or ingress.
@@ -92,7 +92,7 @@ When you search BYOC data in Log Explorer, the query travels over a secure conne
 
 ## Connection to Datadog UI
 
-Operator deployments use the reverse connection. Helm deployments can connect the Datadog UI to the BYOC engine in either of the following ways:
+Operator deployments use the reverse connection. Helm deployments can connect the Datadog UI to the BYOC Logs engine in either of the following ways:
 
 - **[Reverse connection][2]**: Let the engine initiate a secure connection to Datadog.
 - **[External requests from Datadog][3]**: Provide Datadog with a DNS endpoint and configure a public ingress to accept requests.

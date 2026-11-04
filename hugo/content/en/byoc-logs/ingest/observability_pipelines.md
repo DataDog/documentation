@@ -1,9 +1,9 @@
 ---
-title: Send logs to BYOC with Observability Pipelines
+title: Send logs to BYOC Logs with Observability Pipelines
 aliases:
 - /cloudprem/ingest_logs/observability_pipelines/
 - /cloudprem/ingest/observability_pipelines/
-description: Configure Observability Pipelines to send logs to BYOC with optional dual shipping
+description: Configure Observability Pipelines to send logs to BYOC Logs with optional dual shipping
 further_reading:
 - link: "/byoc-logs/ingest/agent/"
   tag: "Documentation"
@@ -16,14 +16,14 @@ further_reading:
   text: "Observability Pipelines Overview"
 - link: "/observability_pipelines/destinations/datadog_byoc_logs/"
   tag: "Documentation"
-  text: "Datadog BYOC destination for Observability Pipelines"
+  text: "Datadog BYOC Logs destination for Observability Pipelines"
 ---
 
 ## Overview
 
-Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC (Bring Your Own Cloud), allowing you to process, transform, and route logs before they reach your BYOC deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC.
+Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC (Bring Your Own Cloud) Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs.
 
-For hybrid environments with logs split between on-premises data centers and the cloud, deploy an Observability Pipelines Worker in an on-premises data center and configure it to route those logs to the AWS data center that hosts BYOC. BYOC then collects the forwarded logs through the standard ingestion path. **Note**: This pattern requires an existing cloud footprint and does not support environments that run entirely on premises.
+For hybrid environments with logs split between on-premises data centers and the cloud, deploy an Observability Pipelines Worker in an on-premises data center and configure it to route those logs to the AWS data center that hosts BYOC Logs. BYOC Logs then collects the forwarded logs through the standard ingestion path. **Note**: This pattern requires an existing cloud footprint and does not support environments that run entirely on premises.
 
 To configure this setup:
 
@@ -38,7 +38,7 @@ To configure this setup:
 1. Set up your pipeline:
     1. Choose the [**Datadog Agent** source][3].
     1. Remove any default processors from the pipeline.
-    1. Select the [**Datadog BYOC** destination][4] to forward logs to your BYOC instance. Leave the configuration empty.
+    1. Select the [**Datadog BYOC Logs** destination][4] to forward logs to your BYOC Logs instance. Leave the configuration empty.
 
 <!-- This image shows an example with dual shipping when the instructions say log volume control -->
 <!-- {{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}} -->
@@ -80,7 +80,7 @@ The Operator creates a Worker and Service named `<CLUSTER_NAME>-pipeline-agent`.
 
 ### Standalone Worker Helm chart
 
-The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC indexer.
+The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC Logs indexer.
 <br>
 **Note**: You need the `pipelineId` from the pipeline you created in the previous step. This ID links the Worker to your pipeline configuration.
 
@@ -95,7 +95,7 @@ helm upgrade --install opw \
 	datadog/observability-pipelines-worker
 ```
 
-Verify that the Worker pods are ready, then configure the Agent below. After the Agent sends logs, verify that they reach the BYOC destination.
+Verify that the Worker pods are ready, then configure the Agent below. After the Agent sends logs, verify that they reach the BYOC Logs destination.
 
 ## Configure the Datadog Agent
 

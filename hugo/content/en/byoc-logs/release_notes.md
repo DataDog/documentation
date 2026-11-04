@@ -1,26 +1,26 @@
 ---
-title: BYOC Release Notes
-description: Per-version changes for the BYOC engine, deployed with the Datadog Operator or the datadog/cloudprem Helm chart.
+title: BYOC Logs Release Notes
+description: Per-version changes for the BYOC Logs engine, deployed with the Datadog Operator or the datadog/cloudprem Helm chart.
 disable_toc: false
 further_reading:
 - link: "/byoc-logs/operate/updates/"
   tag: "Documentation"
-  text: "Plan BYOC updates"
+  text: "Plan BYOC Logs updates"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
-  text: "Install BYOC"
+  text: "Install BYOC Logs"
 - link: "/byoc-logs/operate/troubleshooting/"
   tag: "Documentation"
-  text: "Troubleshoot BYOC"
+  text: "Troubleshoot BYOC Logs"
 ---
 
 ## Overview
 
-This page tracks releases of the **BYOC (Bring Your Own Cloud) engine**, distributed as a container image. Deploy the image with the Datadog Operator or the `datadog/cloudprem` Helm chart. New features and fixes ship in the engine; the Operator supplies a default image version and the chart bundles an image version.
+This page tracks releases of the **BYOC (Bring Your Own Cloud) Logs engine**, distributed as a container image. Deploy the image with the Datadog Operator or the `datadog/cloudprem` Helm chart. New features and fixes ship in the engine; the Operator supplies a default image version and the chart bundles an image version.
 
 ### Check your installed binary version
 
-Look at the `image` field on a BYOC pod:
+Look at the `image` field on a BYOC Logs pod:
 
 ```shell
 kubectl get pods -n <BYOC_LOGS_NAMESPACE> \
@@ -52,8 +52,8 @@ The chart versions below refer to the BYOC engine Helm chart, not to Datadog Ope
 
 #### Helm chart changes
 
-- Exports `QW_CLUSTER_ID` to all BYOC pods, using `config.cluster_id` when set.
-- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC telemetry with an unrelated host.
+- Exports `QW_CLUSTER_ID` to all BYOC Logs pods, using `config.cluster_id` when set.
+- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC Logs telemetry with an unrelated host.
 
 ### v0.1.34 — 2026-09-23
 

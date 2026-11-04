@@ -1,6 +1,6 @@
 ---
 title: Autoscale BYOC Workloads
-description: Configure Horizontal Pod Autoscalers for BYOC workloads deployed with Helm or the Datadog Operator.
+description: Configure Horizontal Pod Autoscalers for BYOC Logs workloads deployed with Helm or the Datadog Operator.
 aliases:
 - /cloudprem/operate/autoscaling/
 further_reading:
@@ -9,7 +9,7 @@ further_reading:
   text: "Cluster Sizing"
 - link: "/byoc-logs/operate/monitoring/"
   tag: "Documentation"
-  text: "Monitor BYOC"
+  text: "Monitor BYOC Logs"
 - link: "https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml"
   tag: "Source"
   text: "CloudPrem Helm chart default values"
@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for BYOC (Bring Your Own Cloud) indexers and standalone compactors when you enable them. HPAs are disabled by default, and each component is configured independently.
+The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for BYOC (Bring Your Own Cloud) Logs indexers and standalone compactors when you enable them. HPAs are disabled by default, and each component is configured independently.
 
 ## Before you begin
 
@@ -25,7 +25,7 @@ The following Helm instructions cover indexers and standalone compactors. For a 
 
 Before you enable autoscaling, you need:
 
-- A BYOC deployment installed with the `datadog/cloudprem` Helm chart.
+- A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
 - Chart version `0.4.6` or later for standalone compactor autoscaling.
 - Kubernetes Metrics Server, or another metrics API implementation, installed in the cluster.
 - Enough node capacity for the maximum number of indexer and compactor pods.
@@ -89,7 +89,7 @@ indexer:
 
 ## Apply the configuration
 
-Add the autoscaling values to your BYOC values file, then upgrade your release:
+Add the autoscaling values to your BYOC Logs values file, then upgrade your release:
 
 ```shell
 helm upgrade <RELEASE_NAME> datadog/cloudprem \
@@ -99,7 +99,7 @@ helm upgrade <RELEASE_NAME> datadog/cloudprem \
 
 ## Verify the HPAs
 
-List HPAs in the BYOC namespace:
+List HPAs in the BYOC Logs namespace:
 
 ```shell
 kubectl get hpa -n <NAMESPACE_NAME>

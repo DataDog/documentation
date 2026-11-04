@@ -1,6 +1,6 @@
 ---
-title: Datadog BYOC Destination
-description: Learn how to send logs to Datadog BYOC (Bring Your Own Cloud) using the Observability Pipelines Worker.
+title: Datadog BYOC Logs Destination
+description: Learn how to send logs to Datadog BYOC (Bring Your Own Cloud) Logs using the Observability Pipelines Worker.
 disable_toc: false
 aliases:
 - /observability_pipelines/destinations/cloudprem/
@@ -14,16 +14,16 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' BYOC (Bring Your Own Cloud) destination to send logs to Datadog BYOC.
+Use Observability Pipelines' BYOC (Bring Your Own Cloud) Logs destination to send logs to Datadog BYOC Logs.
 
 
 ## Prerequisites
 
-A running BYOC cluster is required to receive logs. For an Operator deployment, create the pipeline and its destination first, then deploy the cluster and managed Worker with the pipeline ID. For a separately managed Worker, deploy the cluster and obtain its intake endpoint before installing the Worker. See the [BYOC installation guides][3].
+A running BYOC Logs cluster is required to receive logs. For an Operator deployment, create the pipeline and its destination first, then deploy the cluster and managed Worker with the pipeline ID. For a separately managed Worker, deploy the cluster and obtain its intake endpoint before installing the Worker. See the [BYOC Logs installation guides][3].
 
 ## Setup
 
-Configure the BYOC destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
+Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 ### Optional settings
 
@@ -38,11 +38,11 @@ Configure the BYOC destination when you [set up a pipeline][4]. You can set up a
 
 #### Buffering
 
-After you select the BYOC destination in the pipeline UI, you can configure buffering.
+After you select the BYOC Logs destination in the pipeline UI, you can configure buffering.
 
 {{% observability_pipelines/destination_buffer %}}
 
-{{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC destination settings" style="width:35%;" >}}
+{{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC Logs destination settings" style="width:35%;" >}}
 
 ## Secret defaults
 
@@ -53,26 +53,26 @@ For a Worker managed by a `DatadogBYOCCluster`, the Operator supplies the BYOC i
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- BYOC endpoint URL identifier:
+- BYOC Logs endpoint URL identifier:
 	- References the intake endpoint to which Observability Pipelines sends logs.
 	- In your secrets manager:
 		- Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
 	- The default identifier is `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
-- BYOC TLS passphrase identifier (when TLS is enabled):
+- BYOC Logs TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 
 {{% tab "Environment Variables" %}}
 
-{{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the BYOC environment variable field" style="width:75%;" >}}
+{{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the BYOC Logs environment variable field" style="width:75%;" >}}
 
-- BYOC endpoint URL
-	- Observability Pipelines sends logs to the BYOC intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
+- BYOC Logs endpoint URL
+	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
-- BYOC TLS passphrase (when TLS is enabled)
+- BYOC Logs TLS passphrase (when TLS is enabled)
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}

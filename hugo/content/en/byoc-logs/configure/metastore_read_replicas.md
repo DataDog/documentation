@@ -1,10 +1,10 @@
 ---
 title: Metastore Read Replicas
-description: Learn how to configure a read-only metastore backed by a database read replica to scale search in BYOC
+description: Learn how to configure a read-only metastore backed by a database read replica to scale search in BYOC Logs
 further_reading:
 - link: "/byoc-logs/configure/"
   tag: "Documentation"
-  text: "Configure BYOC"
+  text: "Configure BYOC Logs"
 - link: "/byoc-logs/operate/sizing/"
   tag: "Documentation"
   text: "Size your cluster"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-By default, indexers and searchers in a BYOC (Bring Your Own Cloud) cluster all read index metadata from the same metastore database. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing and isolates the search path from the indexing path.
+By default, indexers and searchers in a BYOC (Bring Your Own Cloud) Logs cluster all read index metadata from the same metastore database. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing and isolates the search path from the indexing path.
 
 ## Prerequisite: A read replica database
 
@@ -25,7 +25,7 @@ Prepare one or more read replica instances of your metastore PostgreSQL database
 
 ## Create a Kubernetes secret for the read replica
 
-The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your BYOC namespace:
+The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your BYOC Logs namespace:
 
 ```shell
 kubectl create secret generic byoclogs-metastore-read-replica-uri \

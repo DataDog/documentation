@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/byoc-logs/introduction/architecture/"
   tag: "Documentation"
-  text: "BYOC Architecture"
+  text: "BYOC Logs Architecture"
 - link: "/observability_pipelines/scaling_and_performance/"
   tag: "Documentation"
   text: "Observability Pipelines Scaling and Performance"
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC (Bring Your Own Cloud). It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC (Bring Your Own Cloud) Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
 
 
 ## Component health
@@ -61,7 +61,7 @@ kubectl describe pod -n datadog-byoc-logs <pod-name>
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC components: indexer pods, metastore pods, and searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC Logs components: indexer pods, metastore pods, and searcher pods.
 
 ## Metastore errors
 
@@ -100,7 +100,7 @@ postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ERROR quickwit: command failed error=metastore error `index `datadog` not found`
 ```
 
-The cluster eventually crashes, and the BYOC console shows multiple clusters where you expect one.
+The cluster eventually crashes, and the BYOC Logs console shows multiple clusters where you expect one.
 
 **Cause:** The metastore URI is not set correctly, so the metastore falls back to a local file-backed store. Each time the metastore pod restarts, the file is wiped and a fresh metastore is created—all index metadata is lost. An earlier error in the logs often points to the misconfiguration:
 
@@ -129,7 +129,7 @@ Action: Check if your pod has access to the bucket.
 
 ## Ingestion issues
 
-### Ingest errors on BYOC indexers {#ingest-errors-on-byoc-logs-indexers}
+### Ingest errors on BYOC Logs indexers
 
 **Symptom:** Indexer logs show ingest errors, or the `ingest_requests.count` metric shows failures in the OOTB dashboard.
 
@@ -137,7 +137,7 @@ Action: Check if your pod has access to the bucket.
 - **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 
-In case you use Observability Pipelines in front of BYOC, you will need to check what's happening there, see OP [Scaling and Performance][2].
+In case you use Observability Pipelines in front of BYOC Logs, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
 ### Occasional 429 (Too Many Requests) errors
 
