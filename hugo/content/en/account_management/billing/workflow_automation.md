@@ -17,7 +17,7 @@ Datadog [Workflow Automation][8] billing is based on the number of **workflow ru
 ## Pricing model
 
 ### Definition of workflow run {#definition-of-workflow-execution}
-A workflow run is one full pass through a published workflow, regardless of how many steps, actions, iterations, or retries it includes. Billing is recorded one time when a run starts. Runs that are rejected before starting—for example, due to spec validation errors, admission limits, or a workflow being marked inactive—are not billed. Runs can be triggered through:
+A workflow run is one full pass through of a published workflow, regardless of how many steps, actions, iterations, or retries it includes. Billing is recorded one time when a run starts. Runs that are rejected before starting—for example, due to spec validation errors, admission limits, or a workflow being marked inactive—are not billed. Runs can be triggered through:
 - Manual starts in the Datadog UI
 - API or programmatic triggers
 - Event-based triggers (monitors, incidents, etc.)
