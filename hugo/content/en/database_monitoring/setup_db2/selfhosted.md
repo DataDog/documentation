@@ -123,7 +123,16 @@ Install the Agent on the Db2 server or on a separate host with network access to
 
 #### Optional: Run the Agent in a container
 
-For a containerized Agent, install the `ibm_db` driver in the Agent container's Python environment. Provide the dependency whenever the container is recreated.
+The Agent container image does not include the `ibm_db` driver. Build a custom image that installs it, so the driver persists when the container is recreated:
+
+```dockerfile
+FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
+```
+
+Replace `<AGENT_VERSION>` with 7.86.0 or later. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For restricted networks, see [Installing the `ibm_db` client library offline][8].
+
+If you disable automatic client reroute as described in [Step 4](#step-4-configure-the-agent), copy `db2dsdriver.cfg` into the image or mount it into the container, and set `DB2DSDRIVER_CFG_PATH` in the container environment.
 
 For check configuration, see [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster checks][11]. Use the `ibm_db2` check name and the instance settings in Step 4. Configure the [secret backend][10] and driver reroute settings on the Agent that executes the check. Configure only one collector per database per server.
 
