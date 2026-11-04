@@ -17,7 +17,7 @@ further_reading:
 
 To send APM stats such as hits, errors, and duration, set up the [`span_metrics` connector][1]. Configure the connector before any sampling processors so that it computes metrics from all spans received by the Collector.
 
-If the SDK samples traces before export, use a connector version that reads the sampling probability from `tracestate` and extrapolates trace metrics. See [minimum versions and trace metric extrapolation][3], including how to avoid overcounting or undercounting sampled traffic.
+If the SDK samples traces before export, see [trace metric extrapolation setup and minimum versions][3].
 
 ## Setup
 

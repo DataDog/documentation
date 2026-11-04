@@ -61,7 +61,7 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 #### Considerations
 
-Head-based sampling reduces the spans available for APM metric computation. A compatible SDK and receiver can preserve estimates of total traffic by recording and reading the sampling probability, as described below.
+Head-based sampling reduces the spans available for APM metric computation. Use [trace metric extrapolation][27] to estimate total traffic from sampled traces.
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -77,14 +77,12 @@ Use these minimum versions for automatic extrapolation:
 | Datadog connector in OpenTelemetry Collector Contrib | [0.159.0][25] |
 | Datadog connector in DDOT, or the Datadog Agent OTLP receiver | [7.82.0][26] |
 
-These are minimum versions for extrapolation; the [recommended Collector configuration][1] can require a newer version.
-
 To configure trace metrics from sampled spans:
 
-1. Use an SDK that records the effective sampling probability in exported OTLP spans. For Datadog SDKs, see [minimum supported versions][23].
-2. Preserve `tracestate` through the pipeline and place the metrics connector before any Collector sampling processors. Extrapolation is automatic when a valid `ot.th` threshold is present; `enable_metrics_sampling_method` only adds a label.
+1. Use a [supported SDK][23] that records the sampling probability in exported spans' `tracestate`.
+2. Preserve `tracestate` and place the metrics connector before any Collector sampling processors.
 
-The recorded probability must match the spans sent. Extra drops or selective retention, such as keeping all errors, can make extrapolated counts inaccurate. Do not manually scale metrics that the receiver has already extrapolated.
+Extrapolation is automatic when a valid `ot.th` threshold is present. For accurate counts, the recorded probability must match the spans actually exported.
 
 ### Tail-based sampling
 
@@ -100,7 +98,7 @@ A limitation of tail-based sampling is that all spans for a given trace must be 
 
 The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
 
-To calculate APM metrics from all spans received by the Collector, configure the [`span_metrics` connector][20] before the sampling processor. If the SDK has already sampled traces, the connector also needs the probability metadata and version support described in [Trace metric extrapolation][27].
+Configure the [`span_metrics` connector][20] before the sampling processor. If the SDK samples traces before export, follow the [trace metric extrapolation requirements][27].
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
