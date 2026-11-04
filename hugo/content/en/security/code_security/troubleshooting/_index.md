@@ -282,7 +282,7 @@ There are a series of steps that must run successfully for vulnerability informa
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
-1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
+1. Go to the {{< ui >}}Metrics Catalog{{< /ui >}} page in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.sca.host_instance`. If the metric doesn't exist, then there are no services running Runtime Software Composition Analysis (SCA). If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
@@ -309,7 +309,7 @@ Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corres
 
 If you have enabled Runtime Code Analysis (IAST) on your services, you can use the metric `datadog.appsec.risk_management.iast.host_instance` to check if it is running.
 
-1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
+1. Go to the {{< ui >}}Metrics Catalog{{< /ui >}} page in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.iast.host_instance`. If the metric doesn't exist, then there are no services running Runtime Code Analysis (IAST). If the metric exists, the services are reported with the metric tags `host` and `service`.
 3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 

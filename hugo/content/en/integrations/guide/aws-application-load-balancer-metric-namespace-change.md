@@ -53,7 +53,7 @@ Metrics under `aws.elb.*` can come from either Classic ELB or Application Load B
 
 To find monitors, dashboards, and notebooks that reference an affected metric:
 
-1. Go to the [Metrics Summary page][1] in Datadog.
+1. Go to the [Metrics Catalog page][1] in Datadog.
 2. Search for a metric from the [Metrics to update](#metrics-to-update-application-load-balancer) table below, such as `aws.elb.peak_lcus`.
 3. In the metric detail panel, open **Related Assets**.
 4. Review the list of monitors, dashboards, and notebooks that use the metric.
@@ -219,5 +219,5 @@ If you need help determining which of your monitors, dashboards, or notebooks ar
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /help/

@@ -124,7 +124,7 @@ The "All" view provides the following information about all your custom metrics:
 * This data can be downloaded as a CSV file, with a maximum of 300,000 custom metrics. You can download over 300,000 custom metrics using our [API endpoint][6].
 
 
-For more details on your metrics, navigate to the [Metrics Summary][7] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
+For more details on your metrics, navigate to the [Metrics Catalog][7] by hovering over the row of the metric you are interested in and clicking on the meter icon that shows up on the right side.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Overview of Top Custom Metrics table" >}}
 
