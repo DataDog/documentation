@@ -52,6 +52,19 @@ Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lamb
 
 To get started, follow the [installation instructions][1] to collect metrics, traces, and logs from your serverless applications.
 
+## Lambda compute types
+
+Datadog support differs by AWS Lambda compute type:
+
+| Lambda type | What it runs | Datadog support |
+|---|---|---|
+| Lambda Event Functions | Code that runs in response to events or API calls. This is the original Lambda function type. | Serverless Monitoring: metrics, traces, logs, and every capability on this page. |
+| Lambda Web Functions | Web applications and API backends that serve HTTP requests directly. | CloudWatch metrics, an out-of-the-box dashboard, and recommended monitors through the [AWS Lambda integration][2]. |
+
+[Lambda Managed Instances][3] and [Lambda Durable Functions][4] are ways to run Event Functions, and Datadog supports both.
+
+In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions, so you don't need to change your instrumentation or infrastructure code. For more information, see [What is AWS Lambda?][5] in the AWS documentation.
+
 ## How it works
 
 {{< img src="serverless/serverless_custom_metrics.png" alt="Collecting Enhanced Metrics from AWS Lambda" >}}
@@ -113,3 +126,7 @@ Easily correlate serverless code, configuration, and deployment changes with met
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/installation
+[2]: /integrations/amazon-lambda/
+[3]: /serverless/aws_lambda/managed_instances/
+[4]: /serverless/aws_lambda/durable_functions/
+[5]: https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
