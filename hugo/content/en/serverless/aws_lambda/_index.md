@@ -64,7 +64,7 @@ Datadog support differs by AWS Lambda compute type:
 
 [Lambda Managed Instances][4] and [Lambda Durable Functions][5] are ways to run Event Functions, and Datadog supports both. For supported runtimes, see each page.
 
-In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions, so you don't need to change your instrumentation or infrastructure code. For more information, see [What is AWS Lambda?][6] in the AWS documentation.
+In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions. You don't need to change your instrumentation or infrastructure code. For more information, see [What is AWS Lambda?][6] in the AWS documentation.
 
 ## How it works
 
