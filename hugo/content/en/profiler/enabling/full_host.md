@@ -125,7 +125,7 @@ The Full-Host Profiler is built as an OpenTelemetry Collector distribution for h
 
 Datadog is a major contributor to the OpenTelemetry profiling ecosystem, including:
 
-- the OTLP Profiles signal, which reached alpha in April 2026 (see the [OpenTelemetry profiles alpha announcement][16] and [KubeCon talk][17]);
+- the OTLP Profiles signal, which reached alpha in April 2026 (see the [OpenTelemetry profiles alpha announcement][16] and [KubeCon talk][17])
 - the [OpenTelemetry eBPF Profiler][13];
 - OpenTelemetry specification work for [process][18] and [thread][19] context sharing, which supports trace-to-profile correlation.
 
