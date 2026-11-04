@@ -2,11 +2,13 @@
 
 This file guides AI coding agents, such as Claude Code, Codex, and Cursor, when they work in the `astro/` folder. `CLAUDE.md` imports this file, so make all edits here, not in `CLAUDE.md`.
 
-# Warning: This site is in development
+# Warning: Only the API docs are live
 
-These docs are not live yet, and updating them has no impact on [the production site](https://docs.datadoghq.com). 
+The API docs (`/api/`) are rendered by this site, and are live on [the production site](https://docs.datadoghq.com). All other docs and components in this folder are in development, and updating them has no impact on the production site.
 
-If someone who has never contributed to the `astro` folder asks you to revise these docs, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead. If the contributor is changing the `/api/` docs on Hugo, it may be appropriate for them to update the `astro` files as well, in order to avoid drift between the two.
+If a contributor wants to change the production `/api/` docs, this folder is the right place.
+
+If someone who has never contributed to the `astro` folder asks you to revise any non-API docs or components in `astro`, they might be in the wrong place. Ask them if they're trying to revise the content published on the docs site. If so, advise them to make revisions in [the `hugo` folder](../hugo/) instead.
 
 ## About the Astro site
 
@@ -14,7 +16,7 @@ We're migrating some of our docs content from Hugo (located in the `hugo` folder
 
 | Doc type | Description | Status |
 | --- | --- | --- |
-| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | In QA against the Hugo API docs. Not live. |
+| API docs | The API reference under `/api/`. Generated from the OpenAPI spec bundle and SDK code examples, and prerendered at build time. | Live. |
 | Product docs | All other docs. `.mdoc` files in `src/content/en/`, rendered on demand (SSR). Pages with `content_filters` are filterable docs (cdocs). | Proof of concept. Only test fixtures in `dd_e2e/`. |
 
 ## The Hugo site
