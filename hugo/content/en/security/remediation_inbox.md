@@ -137,8 +137,8 @@ To route remediation work items to Jira, ServiceNow, or Linear, configure the th
 From the side panel, click **Remediate with AI** and choose one of the following:
 
 - **Fix with Bits Code**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item.
-- **Copy fix prompt** (SCA only): Copy a prompt with the context of the fix to use with your own coding agent.
-- **Fix with Cursor** (SCA only): Open the fix prompt in Cursor.
+- **Copy fix prompt**: Copy a prompt with the context of the fix to use with your own coding agent.
+- **Fix with Cursor**: Open the fix prompt in Cursor.
 
 To check the fix from your coding agent, connect the [Datadog MCP Server][7].
 
