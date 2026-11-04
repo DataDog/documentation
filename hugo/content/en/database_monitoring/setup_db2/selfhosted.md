@@ -40,7 +40,7 @@ Database Monitoring collects the following data from IBM Db2:
 : Instance metadata every 5 minutes, including the database version, hostname, port, Agent version, and integration version. Configured tags support filtering and grouping.
 
 **Query metrics**
-: Metrics per normalized query from `SYSPROC.MON_GET_PKG_CACHE_STMT`, collected every 10 seconds by default. These include execution count, total coordinator execution time, CPU time, rows read, rows returned, lock waits, and lock wait time. Execution counts include executions with activity metrics collected.
+: Metrics per normalized query from `SYSPROC.MON_GET_PKG_CACHE_STMT`, collected every 10 seconds by default. These include execution count, total coordinator execution time, CPU time, rows read, rows returned, lock waits, and lock wait time. Execution counts reflect only coordinator executions for which activity metrics were collected, which depends on the `MON_ACT_METRICS` setting in [Step 1](#step-1-enable-monitoring).
 
 **Full query text**
 : Obfuscated SQL linked to query metrics by query signature.
@@ -82,7 +82,7 @@ GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_TRANSACTION_LOG TO USER datadog;
 GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_PKG_CACHE_STMT TO USER datadog;
 ```
 
-These grants do not require access to application data. Users with `DATAACCESS`, `DBADM`, or `SQLADM` authority can also access the monitoring functions. For details, see [Database permissions][5].
+These grants do not include read access to tables. Users with `DATAACCESS`, `DBADM`, or `SQLADM` authority can also access the monitoring functions. For details, see [Database permissions][5].
 
 #### Restrictive databases
 
