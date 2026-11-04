@@ -3,6 +3,7 @@ import type { JSX } from "preact";
 import styles from "./LanguageSelector.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { Select } from "@components/Select/Select";
+import { setLangPrefCookie } from "@lib/i18n/langPrefCookie";
 
 const cl = classListFactory(styles);
 
@@ -28,7 +29,9 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
   const handleChange = (code: string) => {
     setSelected(code);
     const opt = options.find((o) => o.code === code);
-    if (opt) window.location.href = opt.href;
+    if (!opt) return;
+    setLangPrefCookie(code);
+    window.location.href = opt.href;
   };
 
   return (

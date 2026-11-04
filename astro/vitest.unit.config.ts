@@ -85,12 +85,27 @@ export default getViteConfig({
   // `requestFileLoader.ts` read through `@hugo-site` for the same reason, so
   // each is redirected with a narrower key. These aliases are merged ahead of
   // `astro.config.mjs`'s, so these keys match before `@hugo-site` does.
+  //
+  // The translation overlays' glob in `translationsLoader.ts` lives under
+  // `@api-spec` beside the spec itself, so no key prefix can pick it out
+  // without also catching `full_spec.yaml`. A regex on the `translate_`
+  // filename does, and it rewrites the glob pattern itself, `v*` included.
   resolve: {
-    alias: {
-      "@api-examples": path.resolve(fixture, "examples"),
-      "@hugo-site/data/changelog": path.resolve(fixture, "changelog"),
-      "@hugo-site/content/en/api": path.resolve(fixture, "request-files"),
-    },
+    alias: [
+      { find: "@api-examples", replacement: path.resolve(fixture, "examples") },
+      {
+        find: "@hugo-site/data/changelog",
+        replacement: path.resolve(fixture, "changelog"),
+      },
+      {
+        find: "@hugo-site/content/en/api",
+        replacement: path.resolve(fixture, "request-files"),
+      },
+      {
+        find: /^@api-spec\/(v[^/]*)\/translate_/,
+        replacement: `${fixture}/$1/translate_`,
+      },
+    ],
   },
   // `astro.config.mjs` reads the live `api-code-examples/` stamp into this
   // define. Override it with frozen versions so `{% $sdkVersions.<client> %}`

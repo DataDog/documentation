@@ -154,9 +154,18 @@
   padding: 0;
 }
 
-.schema-table__required {
+.schema-table__required,
+.schema-table__deprecated {
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
+  font-style: italic;
   color: var(--color-text);
+  /* The name group breaks anywhere, so keep the label on one line. */
+  white-space: nowrap;
+}
+
+.schema-table__deprecated {
+  color: var(--color-red);
 }
 
 .schema-table__type {
@@ -174,29 +183,17 @@
 
 .schema-table__deprecated-label {
   color: var(--color-red);
-  font-size: var(--font-size-xs);
-  margin-right: var(--space-xs);
 }
 
-.schema-table__default {
+/* Default and enum labels share one style, at the description's size. */
+.schema-table__default,
+.schema-table__enum {
   display: block;
   margin-top: var(--space-xs);
   color: var(--color-text-muted);
-  font-size: var(--font-size-xs);
 }
 
-.schema-table__default code {
-  background: var(--color-highlight-bg);
-  padding: 0 0.25em;
-  border-radius: 2px;
-}
-
-.schema-table__enum {
-  margin-top: var(--space-xs);
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
+.schema-table__default code,
 .schema-table__enum code {
   background: var(--color-highlight-bg);
   padding: 0 0.25em;

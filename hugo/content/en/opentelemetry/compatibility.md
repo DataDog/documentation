@@ -36,10 +36,11 @@ The following table shows feature compatibility across different setups:
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) |  | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| [Cloud Network Monitoring][21] (CNM) | | {{< X >}} | {{< X >}} | | |
 | [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Source Code Integration][24] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Database Monitoring][14] (DBM) |  | {{< X >}} | {{< X >}} |  |  |
+| [Cloud Network Monitoring][21] (CNM) | | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring][46] | | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | | {{< X >}} | {{< X >}} | | |
@@ -48,7 +49,6 @@ The following table shows feature compatibility across different setups:
 | [Data Observability: Jobs Monitoring][13] (DJM) | | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | | {{< X >}} | | | |
-| [Source code integration][24] | | {{< X >}} | | | |
 
 **Note**: Features that need the Datadog Agent, such as [Cloud Network Monitoring][21], [Live Container Monitoring][46], [Live Processes][16], and [Universal Service Monitoring][17], work with the DDOT Collector when you also run the Agent. See [Add the Datadog Agent][48].
 

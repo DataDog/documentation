@@ -99,9 +99,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
-   * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+   * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. To view them, open the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results and click any Fetch or XHR resource row. The captured payloads are also included when you export a test run with {{< ui >}}Actions{{< /ui >}} > {{< ui >}}Export as HAR{{< /ui >}}.
 
-     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.</div>
+     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test or to exported HAR files.</div>
 
      Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
 

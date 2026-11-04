@@ -10,8 +10,8 @@ further_reading:
   text: "Measure and optimize security team efficiency with Cloud SIEM security operational metrics"
 ---
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
 {{< /site-region >}}
 
 ## Overview

@@ -38,6 +38,38 @@ export function loadExternalContext<
   return result as Loaded<E>;
 }
 
+/**
+ * Loads the context and passes it to `setup` once the whole document is
+ * parsed. On a large page, an island can hydrate while the browser is still
+ * parsing the HTML after it, so an immediate lookup can miss elements that
+ * come later (such as a tab group's other panels).
+ *
+ * Returns a cleanup function, so callers can return it from `useEffect`.
+ */
+export function withExternalContext<
+  E extends { [K in keyof E]: string | string[] },
+>(
+  context: ExternalContext<E>,
+  setup: (loaded: Loaded<E>) => void | (() => void),
+): () => void {
+  let teardown: void | (() => void);
+  const run = () => {
+    const loaded = loadExternalContext(context);
+    if (loaded) teardown = setup(loaded);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+  } else {
+    run();
+  }
+
+  return () => {
+    document.removeEventListener("DOMContentLoaded", run);
+    teardown?.();
+  };
+}
+
 function findInScope(scope: HTMLElement, id: string): HTMLElement | null {
   if (scope.id === id) {
     return scope;
