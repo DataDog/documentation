@@ -24,7 +24,7 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-info">The <code>feature_flag.evaluations</code> metric is separate from experiment exposure events and Event Platform Proxy (EVP) flag evaluation events. Exposure and EVP events use a compatible local relay or, in supported agentless SDK versions, direct intake. This metric uses an OTLP endpoint on port 4317 or 4318.</div>
 
-For EVP event versions, privacy controls, and direct delivery, see [Server-Side Evaluation Events and Privacy][8].
+For the SDK versions that send EVP events, their privacy controls, and direct delivery, see [Server-Side Evaluation Events and Privacy][8].
 
 ## Prerequisites
 

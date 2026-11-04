@@ -21,9 +21,9 @@ Use these SDK versions or later for the evaluation-event privacy behavior descri
 
 <!-- Release readiness: Publish after .NET tracer 3.57.0 and PHP 1.27.0 are released. Confirm the .NET provider package containing the evaluation-event hook and replace the provider requirement below with its released version. -->
 
-| SDK | Recommended version | Event delivery |
+| SDK | Minimum version | Event delivery |
 |---|---|---|
-| Node.js `dd-trace` | 6.20.0 and 5.131.0 | Local relay with direct fallback |
+| Node.js `dd-trace` | 6.20.0 (6.x) or 5.131.0 (5.x) | Local relay with direct fallback |
 | Java `dd-openfeature` and `dd-java-agent` | 1.68.0 | Local relay with direct fallback |
 | Python `ddtrace` | 4.16.0 | Local relay with direct fallback |
 | Go `dd-trace-go/v2` | 2.11.0 | Local relay with direct fallback |
@@ -46,7 +46,7 @@ This guide does not describe client-side SDK telemetry.
 | `feature_flag.evaluations` OTLP metric | Graph evaluations as an OpenTelemetry metric | Configure the separate [metrics export path][1]. |
 | APM trace enrichment | Attach evaluated flags to traces | Configure [APM trace enrichment][2] separately. |
 
-To disable only EVP flag evaluation events, set this variable before starting the application, then restart it:
+To disable only EVP flag evaluation events, set this variable in the application environment, then start or restart the application:
 
 {{< code-block lang="bash" >}}
 DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false
@@ -69,15 +69,15 @@ Hashing pseudonymizes targeting keys. Identical keys produce identical hashes, a
 
 These controls apply to EVP flag evaluation events. They do not redact application logs, experiment exposure payloads, or other telemetry. Review the attributes you put in evaluation contexts before enabling full data collection. Do not include passwords, API keys, or other secrets.
 
-## Enable full evaluation data
+## Benefits of full evaluation data
 
-We recommend setting `observe_full_evaluation_data` to `true` for each environment. This allows EVP flag evaluation events to include original targeting keys and evaluation attributes, giving you more detail about how your application uses feature flags.
+Set `observe_full_evaluation_data` to `true` for each environment to include original targeting keys and evaluation attributes in EVP flag evaluation events. This gives you more detail about how your application uses feature flags.
 
 Use this data in Datadog to:
 
 - Identify which subjects evaluated a flag and which variants they received.
 - Investigate unexpected evaluation results using the attributes supplied with the evaluation.
-- Compare evaluation patterns across groups defined by attributes you provided such as subscription plan, region, or application version.
+- Compare evaluation patterns across groups defined by attributes you provided, such as subscription plan, region, or application version.
 
 ## Event delivery and direct fallback
 
@@ -87,10 +87,10 @@ With `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, the SDKs that support di
 
 For direct delivery:
 
-1. Use a version listed above for an SDK that supports direct fallback. For .NET, also meet the OpenFeature provider requirement described in the overview.
+1. Use an SDK that supports direct fallback, at a version listed in the [Overview](#overview) table. For .NET, also meet the OpenFeature provider requirement described in the [Overview](#overview).
 2. Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process, as described in [agentless setup][5]. Store the API key in a secret manager.
 3. Allow outbound HTTPS to the event intake for the selected Datadog site, in addition to the flag configuration endpoint.
-4. Initialize the provider using the language-specific setup instructions.
+4. Initialize the provider using the [language-specific setup instructions][9].
 
 The custom `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` setting changes only the configuration endpoint. It does not redirect event delivery. Without an application API key, a custom configuration endpoint can serve flags, but direct event delivery is unavailable.
 
@@ -108,17 +108,20 @@ For Node.js, keep `dd-trace` external to a single-file application bundle and ma
 
 1. Confirm the SDK version and selected configuration source.
 2. Initialize the provider and evaluate an enabled non-production flag with a non-sensitive targeting key.
-3. Open the flag's details page in Datadog and select the environment and time range used for your test. In the **Evaluations** graph, select **Total** and confirm that data appears for your server SDK source. Allow time for the SDK to send its batch and for Datadog to process it. Data from a browser or another SDK does not confirm delivery from the server application you are testing.
+3. Open the flag's details page in Datadog and select the environment and time range used for your test. In the **Evaluations** graph, select **Total** and confirm that data appears for your server SDK source.
+
+   **Note**: Allow time for the SDK to send its batch and for Datadog to process it. Data from a browser or another SDK does not confirm delivery from the server application you are testing.
+
+   Use **Total** to check evaluation volume. Use **Unique** to view counts aggregated by targeting key, as shown below. Check `source.name` labels to identify data from your server SDK.
+
+   {{< img src="feature_flags/guide/server_evaluation_events/evaluations_graph.png" alt="Evaluations graph in Unique mode showing server SDK data grouped by variant and SDK source" style="width:100%;" >}}
+
 4. Check application logs for event transport errors. A ready provider confirms configuration delivery, not event delivery.
 5. Confirm that `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` is not `false` when you need EVP flag evaluation events.
-6. Check the environment's `observe_full_evaluation_data` value in the [environment API response][4] when troubleshooting missing targeting attributes. Allow the configuration polling interval for changes to reach the SDK.
+6. Check the environment's `observe_full_evaluation_data` value in the [environment API response][4] when troubleshooting missing targeting attributes. Allow time for a successful configuration refresh. Agentless polling defaults to a 30-second interval; Agent-backed delivery uses the Agent's Remote Configuration refresh interval. See [configuration settings][5] for polling options.
 7. Validate experiment exposures and the OTLP metric separately if your application uses them.
 
 EVP flag evaluation event counts are available with either value of `observe_full_evaluation_data`. Setting it to `true` enables the additional targeting-key and evaluation-context data described above.
-
-{{< img src="feature_flags/guide/server_evaluation_events/evaluations_graph.png" alt="Evaluations graph in Unique mode showing server SDK data grouped by variant and SDK source" style="width:100%;" >}}
-
-The example above shows server SDK data in **Unique** mode (aggregated by targeting key). Check `source.name` labels to determine which server SDKs are sending flag evaluation events.
 
 ## Further reading
 
@@ -132,3 +135,4 @@ The example above shows server SDK data in **Unique** mode (aggregated by target
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [8]: /api/latest/feature-flags/#update-an-environment
+[9]: /feature_flags/server/

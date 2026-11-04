@@ -40,7 +40,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 The default configuration source is `agentless`. Creating the provider with `NewDatadogProvider` starts CDN polling. Starting the tracer alone does not start agentless flag configuration requests.
 
-### Choose Agent delivery
+### Use Agent Remote Configuration
 
 For Agent-based delivery, use Datadog Agent 7.55 or later with [Remote Configuration][2] enabled and an API key configured on the Agent. Select the source explicitly:
 
@@ -70,7 +70,7 @@ go get github.com/open-feature/go-sdk/openfeature
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider. Starting the Datadog Go tracer first is recommended when you also use tracing. The provider can fetch flag configuration without starting the tracer.
+Register the Datadog OpenFeature provider. If you also use tracing, start the Datadog Go tracer first. The provider can fetch flag configuration without starting the tracer.
 
 When using Remote Configuration, start the Datadog Agent before the application. If the application starts first, restart it after the Agent is available. See [Agent availability][6].
 
@@ -295,7 +295,7 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
-## Advanced configuration
+## Configure polling and initialization timeouts
 
 See [Server SDK Configuration Sources][8] for custom endpoints, source selection, and migration. Agentless polling defaults to 30 seconds, with a 5-second request timeout. Go falls back to those defaults for invalid values; supported upper limits are 3600 seconds for polling and 300 seconds for requests.
 

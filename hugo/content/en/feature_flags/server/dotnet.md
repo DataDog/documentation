@@ -304,7 +304,7 @@ When your application exits, shut down the OpenFeature API to clean up resources
 await Api.Instance.ShutdownAsync();
 {{< /code-block >}}
 
-## Evaluation events and experiment exposure delivery
+## Evaluation events and privacy
 
 With tracer 3.56.0 or later and the `agentless` source, experiment exposures prefer a compatible local EVP relay. If no compatible route is available, the tracer can send exposures directly using the application's `DD_API_KEY` and `DD_SITE`. Remote Configuration retains Agent-backed delivery.
 

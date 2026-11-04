@@ -24,10 +24,10 @@ After configuration is loaded, flag evaluation happens locally in the applicatio
 
 The following table shows the Feature Flags functionality available in each SDK version:
 
-| SDK | Recommended version | Agentless configuration and local evaluation | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Event delivery |
+| SDK | Minimum version | Agentless configuration and local evaluation | Experiment exposure events | Event Platform Proxy (EVP) flag evaluation events | Event delivery |
 |---|---|---|---|---|---|
 | Java `dd-openfeature` and `dd-java-agent` | 1.68.0 | Supported | Supported | Supported | Local relay with direct fallback |
-| Node.js `dd-trace` | 6.20.0 and 5.131.0 | Supported | Supported | Supported | Local relay with direct fallback |
+| Node.js `dd-trace` | 6.20.0 (6.x) or 5.131.0 (5.x) | Supported | Supported | Supported | Local relay with direct fallback |
 | Python `ddtrace` | 4.16.0 | Supported | Supported | Supported | Local relay with direct fallback |
 | Go `dd-trace-go/v2` | 2.11.0 | Supported | Supported | Supported | Local relay with direct fallback |
 | .NET `dd-trace-dotnet` | 3.57.0 | Supported | Supported | Supported with an updated OpenFeature provider | Local relay with direct fallback |
