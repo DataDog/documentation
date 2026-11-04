@@ -4465,11 +4465,6 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_skill
       weight: 10
-    - name: Advanced S3 Monitoring
-      url: cloud_cost_management/advanced_s3_monitoring/
-      parent: cloud_cost
-      identifier: cloud_cost_advanced_s3_monitoring
-      weight: 11
     - name: APM
       url: tracing/
       pre: apm
