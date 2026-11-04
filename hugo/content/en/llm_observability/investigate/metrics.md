@@ -85,8 +85,8 @@ Use the following Count metrics to group usage and spend by token modality, I/O 
 
 | Metric Name | Description | Metric Type | Unit |
 |-------------|-------------|-------------|------|
-| `ml_obs.span.llm.cost` | Additive cost contributions from LLM and embedding spans, and user-provided tool-span costs | Count | Nanodollars |
-| `ml_obs.span.llm.tokens` | Additive input and output token contributions from LLM spans | Count | Tokens |
+| `ml_obs.span.llm.cost` | Cost from LLM and embedding spans, plus user-provided tool-span costs | Count | Nanodollars |
+| `ml_obs.span.llm.tokens` | Input and output token usage from LLM spans | Count | Tokens |
 
 These metrics carry the available application, model, service, and environment tags from their corresponding total metrics. They also support the following breakdown tags:
 
@@ -100,14 +100,12 @@ These metrics carry the available application, model, service, and environment t
 
 Unavailable details use `unknown`; missing data does not mean zero. For example, a provider that does not report cache usage has `input_type:unknown`.
 
-Use these queries to chart spending and token usage by modality and cache category. `.as_count()` shows totals for each chart interval.
+Use these queries to chart spending and token usage by modality and cache category.
 
 ```text
 sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
 sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
 ```
-
-Cost values are in nanodollars. Divide the cost total by 1,000,000,000 to convert it to US dollars.
 
 #### Choose a metric family
 
