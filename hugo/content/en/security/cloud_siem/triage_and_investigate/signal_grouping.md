@@ -22,6 +22,11 @@ When a [Notification Rule][1] sends security signals to a case project, Datadog 
 
 With signal grouping, Datadog first looks for related signals that are already in a case. If it finds one, it adds the new signal to that case instead of creating a new one.
 
+Signal grouping has two parts:
+
+- **Grouping strategies** define when two signals are related. You configure them once for your organization.
+- **Automatic case creation** uses the grouping strategies you select to decide which case a new signal goes to.
+
 For example, a detection rule grouped by `@usr.id` fires three times in a few hours for the same user. Without grouping, you get three cases. With grouping, the three signals are in one case.
 
 ## Grouping strategies
@@ -44,8 +49,13 @@ A new rule version counts as a different detection, because it can match differe
 
 ## Turn on signal grouping
 
+### Configure a grouping strategy
+
 1. Navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Grouping Strategies{{< /ui >}}.
 1. Open {{< ui >}}Repeated detection{{< /ui >}} and select the lookback you want.
+
+### Select strategies for automatic case creation
+
 1. Navigate to the Cloud SIEM [Security cases settings][2] page.
 1. Select the grouping strategies that automatic case creation uses, and save.
 
