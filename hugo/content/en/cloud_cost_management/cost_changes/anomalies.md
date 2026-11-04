@@ -122,7 +122,7 @@ To set up real-time anomaly notifications:
 
 1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
 1. Select {{< ui >}}AI providers{{< /ui >}} or {{< ui >}}Cloud/SaaS providers{{< /ui >}}, and turn on {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}} or {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. The {{< ui >}}Cloud/SaaS providers{{< /ui >}} option covers AWS, Azure, and Google Cloud.
-1. Under {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, optionally group alerts by up to two tags and filter the cost. Then set the minimum cost impact. Notifications are sent only when the anomaly cost is likely to exceed, over the next 24 hours, the higher of:
+1. Under {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, optionally group alerts by up to two tags and filter the cost. Then set the minimum cost impact. Notifications are sent only when the anomaly cost over the next 24 hours is likely to exceed the higher of:
    - an amount in your organization's currency (a whole number greater than 0)
    - a percentage of the baseline cost
 1. Under {{< ui >}}Choose who to notify{{< /ui >}}, add email addresses or Slack channels.

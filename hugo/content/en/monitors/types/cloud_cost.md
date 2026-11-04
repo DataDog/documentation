@@ -175,7 +175,7 @@ To set up real-time anomaly notifications for your whole organization from a sin
 ### Prerequisites
 
 - For AI cost: [Agent Observability][102] is sending LLM cost data. Estimated cost is calculated from token counts and provider pricing. See [Agent Observability costs][103].
-- For cloud cost: [Real-Time Costs][105] are set up for the provider, which requires the Datadog Agent on your instances. See the [Real-Time Costs requirements][107].
+- For cloud cost: [Real-Time Costs][105] are set up for the provider. Real-Time Costs require the Datadog Agent on your instances. See the [Real-Time Costs requirements][107].
 - The real-time metric for the provider has reported. The {{< ui >}}real time{{< /ui >}} option appears after at least one real-time metric has reported, and each cloud provider appears in the {{< ui >}}Scope to{{< /ui >}} list after its metric has reported.
 - At least 3 days of cost data is available. Datadog recommends 21 days for detection quality.
 
@@ -185,7 +185,7 @@ To set up real-time anomaly notifications for your whole organization from a sin
 2. Select {{< ui >}}Cost Anomalies{{< /ui >}}.
 3. Set {{< ui >}}Alert on{{< /ui >}} to {{< ui >}}real time{{< /ui >}}, then select the cost type: {{< ui >}}AI cost{{< /ui >}} or {{< ui >}}Cloud / SaaS cost{{< /ui >}}. The monitor alerts on anomalies detected within the last 15 minutes.
 4. Choose what to scope the monitor to:
-   - For {{< ui >}}AI cost{{< /ui >}}, optionally select {{< ui >}}Providers{{< /ui >}}. By default, the monitor covers all AI providers, including ones your organization starts reporting later.
+   - For {{< ui >}}AI cost{{< /ui >}}, optionally select {{< ui >}}Providers{{< /ui >}}. By default, the monitor covers all AI providers, including any that your organization starts using later.
    - For {{< ui >}}Cloud / SaaS cost{{< /ui >}}, select the provider in {{< ui >}}Scope to{{< /ui >}}: AWS, Azure, or Google Cloud.
 5. Optionally, use {{< ui >}}Filter cost to{{< /ui >}} to scope the cost, and {{< ui >}}Detect anomalies on{{< /ui >}} to group by up to two tags. For AI cost, `ml_app` and `model_provider` are listed under {{< ui >}}Preferred Tags{{< /ui >}}. For AWS, `instance_type` is listed under {{< ui >}}Preferred Tags{{< /ui >}}.
 6. Set the minimum cost impact. The monitor alerts only when Datadog detects an anomaly and, over the next 24 hours, the anomaly cost is likely to exceed the higher of:
