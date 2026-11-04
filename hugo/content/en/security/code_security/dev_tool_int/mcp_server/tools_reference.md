@@ -199,7 +199,7 @@ Violations reported by the rule, grouped by file. If the rule throws an exceptio
 
 ## `datadog_promote_sast_rule`
 
-Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if a finding count differs or the rule fails. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
+Save an approved SAST rule as a [custom rule][3] in Datadog. The tool uploads the rule exactly as it receives it, and only after the user approves it. Before saving, the tool runs the rule on the two `tests` examples and saves nothing if either example's finding count differs from its `annotation_count` or if the rule fails. If a rule with the same name exists, the tool does not replace it unless `overwrite` is `true`.
 
 Scans use the saved rule only after the repository configuration lists its ruleset. Add it under `sast.use-rulesets` in `code-security.datadog.yaml`. When the only configuration file is `static-analysis.datadog.yml` or `static-analysis.datadog.yaml`, add the ruleset to its `rulesets` list. A new `code-security.datadog.yaml` hides that legacy file. See [Static Code Analysis configuration][4].
 
