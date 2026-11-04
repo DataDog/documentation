@@ -84,18 +84,16 @@ Use the [Datadog MCP server][2] to ask a coding agent who can access your data a
 
 You can ask questions in plain language. For example:
 
-- "Who can read `billing.invoices` on `orders-db-primary`, and through which role?"
-- "Why can `analyst` delete rows from `billing.invoices`?"
-- "What can the `etl_service` role write to in the `shop` database?"
-- "Which roles will get access to new tables created in the `billing` schema?"
+- "Why does `reporting_svc` get `permission denied` on `analytics.daily_revenue`?"
+- "Who can read `analytics.daily_revenue` on `orders-db-primary`, and through which role?"
+- "Is the `bi_readers` group actually read-only?"
+- "Which roles will get access to new tables created in the `analytics` schema?"
 
-The agent resolves role names to OIDs, picks the right tool, and pages through results as needed. If Role Observability is not enabled for your organization, the tools return the preview sign-up link instead of data.
-
-{{< img src="database_monitoring/database_monitoring_role_observability/role_observability_mcp_demo.mp4" alt="A coding agent uses the Datadog MCP server to find every role that can read a billing table, explains an unexpected access path through nested role membership, and checks which roles new tables in the schema will be granted to" video="true" >}}
+{{< img src="database_monitoring/database_monitoring_role_observability/role_observability_mcp_demo.mp4" alt="A coding agent uses the Datadog MCP server to work a permission-denied ticket: it finds a table grant blocked by missing schema USAGE, uses default privileges to recommend group membership as the lasting fix, and finds that the group also has write access it should not have" video="true" >}}
 
 ### Using the API
 
-Use the Role Observability API to answer access questions from a script or an access review. All endpoints are `GET` requests under `/api/unstable/databases/postgres/`, and every request takes `filter[database_instance]`, the instance name in Database Monitoring.
+Use the Role Observability API to answer access questions from scripts and automation, such as a scheduled export for a periodic access review. All endpoints are `GET` requests under `/api/unstable/databases/postgres/`, and every request takes `filter[database_instance]`, the instance name in Database Monitoring.
 
 For example, to list every role that can access a table:
 
