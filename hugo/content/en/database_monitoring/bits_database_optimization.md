@@ -57,7 +57,9 @@ Bits Database Optimization is priced according to AI credits. For details, see t
 
 ## SQL Server (Preview)
 
-Bits Database Optimization for SQL Server is in Preview. To request access, click **Get Early Access** in the SQL Server banner on the [Optimizations][7] page, or contact your Datadog representative.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Database Optimization for SQL Server is in Preview. To request access, click <strong>Get Early Access</strong> in the SQL Server banner on the <a href="https://app.datadoghq.com/databases/optimizations">Optimizations</a> page, or contact your Datadog representative.
+{{< /callout >}}
 
 ### Requirements
 
