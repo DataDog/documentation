@@ -65,9 +65,12 @@ Bits Database Optimization for SQL Server is in Preview. To request access, clic
 
 In addition to the [prerequisites](#prerequisites), SQL Server requires:
 
-- **Datadog Agent 7.86 or later.** During the Preview, Datadog provides a pre-release Agent build after your organization is enabled.
 - **Schema collection** enabled on each SQL Server instance. Schema collection is off by default for SQL Server. Set `collect_schemas.enabled: true` in the instance configuration. See [Exploring Database Schemas][8].
 - **Continuous optimizations** turned on. See [Enable continuous optimizations](#enable-continuous-optimizations). SQL Server optimizations come only from continuous optimizations.
+
+### Recommended
+
+- **Datadog Agent 7.86 or later.** Upgrading the Agent helps Bits Database Optimization produce higher-quality optimizations for SQL Server. During the Preview, the Datadog team can provide a custom Agent build.
 
 ### Limitations
 
