@@ -21,7 +21,7 @@ Deployment Gates allow you to reduce the likelihood and impact of incidents caus
 
 When performing a production rollout, you can use Deployment Gates to evaluate the impact of new changes with [monitors][1] and [APM Faulty Deployment Detection][4]. When your gate detects a performance regression, you can automatically halt the release, preventing unstable code from reaching a wider user base. You can then use Deployment Gates as the entry point to investigate the problem.
 
-{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" alt="The Deployment Gate evaluation page in Datadog" style="width:100%" >}}
+{{< img src="/deployment_gates/explore/deployment_gates_explorer.png" alt="The Deployment Gates Evaluations page, listing recent gate evaluations with their status and failing rules" style="width:100%" >}}
 
 For setup instructions, see [Set up Deployment Gates][2].
 
@@ -29,7 +29,7 @@ For setup instructions, see [Set up Deployment Gates][2].
 
 A Deployment Gate has two main components:
 
-- **Gate**: A gate, defined for a given service and environment, evaluates one or more rules to decide whether a deployment should proceed.
+- **Gate**: Defined for a given service, environment, and optional identifier, a gate evaluates one or more rules to decide whether a deployment should proceed.
 - **Rule**: A [rule](#rules) checks the status of one or more [monitors][1] or runs [APM Faulty Deployment Detection][4] on the deployed version. The outcome determines whether the associated gate should pass or fail.
 
 Although a gate reports whether a regression is detected, it doesn't stop a deployment on its own. After receiving a gate evaluation result, your deployment pipeline decides what to do next—for example, halting the deployment, performing a rollback, or alerting your team.
@@ -45,7 +45,7 @@ A gate's configuration source is where the gate is defined: in the evaluation re
 |---|---|---|
 | **Where the gate is defined** | In your deployment configuration or CI step | In Datadog |
 | **Setup in Datadog** | None | Create the gate and its rules before the first evaluation |
-| **What the evaluation request contains** |  The full gate configuration, including service, environment, and rules | Service, environment, and optionally identifier, which reference the preconfigured gate |
+| **What the evaluation request contains** | The full gate configuration, including service, environment, and rules | Service, environment, and optionally an identifier, which identify the preconfigured gate |
 | **Does the gate have an ID?** | No, the gate exists only within each evaluation | Yes, the gate persists between evaluations |
 | **Evaluations shown on [Evaluations][6] page?** | Yes | Yes |
 | **Best for** | Managing rules as code alongside your pipeline, and teams that own their own gate configuration | Sharing rules across services, managing gates centrally, and editing rules outside of CI |
@@ -78,14 +78,14 @@ An evaluation is a single run of a gate's rules against a specific deployment. E
 3. **Your pipeline polls for the result.** Your pipeline uses the evaluation ID to check the evaluation's status, which stays `in_progress` while the rules run. The [`datadog-ci` CLI][5] and the [GitHub Action][8] handle polling for you: they wait until the evaluation completes or a configurable timeout is reached.
 4. **The evaluation resolves to `pass` or `fail`.** The gate passes if all of its active rules pass, and fails if any active rule fails. Your pipeline then decides how to proceed based on the result.
 
-Each evaluation and its per-rule results, including the reason a rule failed, are recorded on the [Deployment Gates Evaluations][6] page. Here, you can also identify frequently failing rules and gates and track patterns over time.
+Each evaluation and its per-rule results, including the reason a rule failed, are recorded on the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][6] page. On this page, you can also identify frequently failing rules and gates and track patterns over time.
 
 ### Evaluation modes
 
 Gates and rules each have an evaluation mode, which determines whether their results affect your deployment:
 
 - **Active**: The result counts. An active gate returns its actual result (`pass` or `fail`) to your pipeline, and an active rule's result counts toward the gate's result.
-- **Dry run**: The result is recorded on the [Evaluations][6] page, but doesn't affect your deployment. A dry run gate always returns `pass` to your pipeline, and a dry run rule's result is excluded from the gate's result.
+- **Dry run**: The result is recorded on the [Evaluations][6] page but doesn't affect your deployment. A dry run gate always returns `pass` to your pipeline, and a dry run rule's result is excluded from the gate's result.
 
 Dry run lets you see how a gate or rule behaves against real deployments before it can block one, which is useful when onboarding or adding a new rule. When the results match what you expect, switch to active.
 
