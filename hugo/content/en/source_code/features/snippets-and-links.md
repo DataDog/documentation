@@ -45,21 +45,6 @@ For example, in an Error Tracking issue, each stack frame shows a code snippet o
 
 To use code snippets and context links, connect your Git repositories with a [source code management provider integration][10] and [tag your telemetry with Git information][11].
 
-## Supported Datadog products
-
-Code snippets and context links are available in several Datadog products, including the following:
-
-| Product | Capabilities |
-|---|---|
-| [App and API Protection][12] | Links stack traces in security signals to your source code |
-| [Code Security][13] | Highlights the lines of code that triggered Static Analysis and Software Composition Analysis findings |
-| [Continuous Profiler][14] | Previews the source code of methods in flame graphs |
-| [Dynamic Instrumentation][15] | Displays full source code files when you create or edit an instrumentation |
-| [Error Tracking][16] | Links stack frames in backend error issues to your source code |
-| [Error Tracking for RUM][17] | Links stack frames in Browser, React Native, Android, and Electron errors to your source code |
-| [Serverless Monitoring][18] | Links stack traces from AWS Lambda function errors to your source code |
-| [Test Optimization][19] | Links failed test runs to your source code |
-
 ## View code snippets and context links by product
 
 Select a product to see how to view code snippets and context links:
@@ -67,7 +52,7 @@ Select a product to see how to view code snippets and context links:
 {{< tabs >}}
 {{% tab "App and API Protection Monitoring" %}}
 
-You can see links from errors in your security signals' associated stack traces to their source repository in App and API Protection Monitoring.
+You can see links from errors in your security signals' associated stack traces to their source repository in [App and API Protection Monitoring][102].
 
 1. Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}}][101] and select a security signal.
 2. Scroll down to the {{< ui >}}Traces{{< /ui >}} section on the {{< ui >}}Related Signals{{< /ui >}} tab and click an associated stack trace.
@@ -76,11 +61,12 @@ You can see links from errors in your security signals' associated stack traces 
 {{< img src="source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/security/appsec
+[102]: /security/application_security/
 
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in Code Security.
+You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in [Code Security][102].
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
 2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
@@ -112,7 +98,7 @@ You can see source code previews directly in [Continuous Profiler][1] flame grap
 {{% /tab %}}
 {{% tab "Dynamic Instrumentation" %}}
 
-You can see full source code files in [{{< ui >}}Dynamic Instrumentation{{< /ui >}}][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
+You can see full source code files in [Dynamic Instrumentation][102] when creating or editing an instrumentation (dynamic log, metric, span, or span tags).
 
 ### Create new instrumentation
 
@@ -177,7 +163,7 @@ Source code integration is supported for the following RUM platforms when source
 {{% /tab %}}
 {{% tab "Serverless Monitoring" %}}
 
-You can see links from errors in your Lambda functions' associated stack traces to their source repository in Serverless Monitoring.
+You can see links from errors in your Lambda functions' associated stack traces to their source repository in [Serverless Monitoring][102].
 
 1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Serverless{{< /ui >}}][101] and click the {{< ui >}}AWS{{< /ui >}} tab.
 2. Click a Lambda function and click the {{< ui >}}Open Trace{{< /ui >}} button for an invocation with an associated stack trace.
@@ -186,11 +172,12 @@ You can see links from errors in your Lambda functions' associated stack traces 
 {{< img src="source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
 [101]: https://app.datadoghq.com/functions?cloud=aws&entity_view=lambda_functions
+[102]: /serverless/
 
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-You can see links from failed test runs to their source repository in Test Optimization.
+You can see links from failed test runs to their source repository in [Test Optimization][103].
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select a failed test run.
 2. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
@@ -201,6 +188,7 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
 [102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
+[103]: /tests/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -211,11 +199,3 @@ For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [10]: /source_code/source-code-management/
 [11]: /source_code/service-mapping/
-[12]: /security/application_security/
-[13]: /security/code_security/
-[14]: /profiler/
-[15]: /dynamic_instrumentation/
-[16]: /tracing/error_tracking/
-[17]: /real_user_monitoring/error_tracking/
-[18]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[19]: /tests/developer_workflows/
