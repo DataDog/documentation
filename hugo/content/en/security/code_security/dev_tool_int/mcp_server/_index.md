@@ -122,7 +122,7 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 
 | Binary                    | Used For      | Install Method                                |
 | ------------------------- | ------------- | --------------------------------------------- |
-| `datadog-static-analyzer` | SAST, Secrets, ephemeral SAST, custom rule saves | `brew install datadog-static-analyzer` |
+| `datadog-static-analyzer` | SAST, Secrets, ephemeral SAST scans, saving custom SAST rules | `brew install datadog-static-analyzer` |
 | `datadog-sbom-generator`  | SBOM, SCA     | [GitHub releases][10]                         |
 | `datadog-security-cli`    | SCA           | `brew install --cask datadog-security-cli`    |
 | `datadog-iac-scanner`     | IaC           | [GitHub releases][11]                         |
