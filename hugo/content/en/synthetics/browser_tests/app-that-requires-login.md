@@ -84,7 +84,7 @@ Alternatively, you can configure your Datadog Browser Tests to authenticate usin
 - Cookies
 - HTTP Basic, Digest, or NTLM credentials (username and password)
 
-For more information, see the [Advanced options][10] section of the browser test documentation.
+For more information, see the [Advanced options][10] section.
 
 These configuration options are set at every test execution and apply to every step of your browser test at execution time, not recording time. 
 

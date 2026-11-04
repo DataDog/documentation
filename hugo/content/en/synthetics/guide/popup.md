@@ -33,7 +33,7 @@ For basic authentication pop-ups, specify the associated credentials in your bro
 
 ### Anchored pop-ups
 
-If a pop-up appears at a specific point of your journey, record a step to close it. In the step's advanced options, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default). If the pop-up does not appear, the step fails without failing the whole test. For more information, see the [Optional step][3] section of the browser test advanced options documentation.
+If a pop-up appears at a specific point of your journey, record a step to close it. In the step's advanced options, select {{< ui >}}If this step fails, continue to next step{{< /ui >}}. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default). If the pop-up does not appear, the step fails without failing the whole test. For more information, see the [Optional step][3] section.
 
 {{< img src="synthetics/browser_tests/advanced_options/optional_step_2.png" alt="Step advanced options with continue to next step selected and mark test as failed cleared." style="width:60%" >}}
 

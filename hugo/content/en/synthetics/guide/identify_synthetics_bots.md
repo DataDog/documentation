@@ -85,7 +85,7 @@ For Microsoft Edge and Google Chrome, these cookies are set only for the start U
 
 In Firefox, these cookies are available to scripts on the page for all steps, but they are not sent to your server.
 
-When your server cannot read these cookies, use default headers to identify Synthetic tests. For more information, see the [Default headers][2] section.
+If your server cannot read these cookies, use default headers to identify Synthetic tests. For more information, see the [Default headers][2] section.
 
 ## Further Reading
 
