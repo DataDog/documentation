@@ -47,7 +47,7 @@ Choose a deployment path based on how your Kubernetes cluster is managed:
 
 | If your cluster...                                                                    | Deploys the profiler as...                                          |
 |-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| Already runs the Datadog Agent with Helm, including Datadog Distribution of OpenTelemetry (DDOT) deployments | A sidecar in the Agent DaemonSet, using the Datadog Helm chart        |
+| Already runs the Datadog Agent with Helm, including Datadog Distribution of OpenTelemetry (DDOT) deployments | A sidecar in the Agent DaemonSet, using the **Datadog Helm chart** tab       |
 | Already runs the Datadog Agent with the Datadog Operator, including DDOT deployments    | A sidecar in the Agent DaemonSet, using the **Datadog Operator** tab         |
 | Doesn't run the Datadog Agent, and you use Helm                                         | Its own OpenTelemetry Collector DaemonSet, using the **OpenTelemetry Helm chart** tab |
 | Doesn't run the Datadog Agent, and you use the OpenTelemetry Operator                    | Its own OpenTelemetry Collector DaemonSet, using the **OpenTelemetry Operator** tab |
