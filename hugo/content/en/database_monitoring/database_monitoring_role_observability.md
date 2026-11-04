@@ -52,6 +52,10 @@ Use the [Datadog MCP server][2] to ask a coding agent who can access your data a
   </thead>
   <tbody>
     <tr>
+      <td style="white-space: nowrap;"><code>list_datadog_database_role_access_instances</code></td>
+      <td>Lists the instances that are sending role and privilege data, with each instance's collection state and the databases it covers. Agents use it to find the instance name when you don't give one.</td>
+    </tr>
+    <tr>
       <td style="white-space: nowrap;"><code>get_datadog_database_role_access_status</code></td>
       <td>Checks whether role and privilege data has been collected and is ready for an instance and database.</td>
     </tr>
@@ -93,7 +97,7 @@ You can ask questions in plain language. For example:
 
 ### Using the API
 
-Use the Role Observability API to answer access questions from scripts and automation, such as a scheduled export for a periodic access review. All endpoints are `GET` requests under `/api/unstable/databases/postgres/`, and every request takes `filter[database_instance]`, the instance name in Database Monitoring.
+Use the Role Observability API to answer access questions from scripts and automation, such as a scheduled export for a periodic access review. All endpoints are `GET` requests under `/api/unstable/databases/postgres/`, and every request except `/access/instances` takes `filter[database_instance]`, the instance name in Database Monitoring.
 
 For example, to list every role that can access a table:
 
@@ -112,6 +116,7 @@ The application key must belong to a user or service account with the [**Databas
 
 | Endpoint | Answers | Also requires |
 | -------- | ------- | ------------- |
+| `GET /access/instances` | Which instances are sending role data? | None. Optionally narrow by name with `filter[search]`. |
 | `GET /access/status` | Is role data collected and ready? | |
 | `GET /roles` | Which roles exist? | |
 | `GET /roles/{role_oid}` | What are this role's attributes and memberships? | |
