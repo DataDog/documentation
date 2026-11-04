@@ -18,10 +18,10 @@ PR comments are automated comments added by Datadog's [source code management in
 
 There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
 * One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
-* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
-* Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Comments (or [PR Gates][11]) enabled is still waiting for results to arrive. After all results have arrived:
+* For products that post inline comments, such as Code Security, up to 30 inline comments are posted. Each one appears on the line of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
+* Datadog posts a 👀 reaction on the description of the PR when a product that has PR comments (or [PR Gates][11]) enabled is still waiting for results to arrive. After all results have arrived:
   * If all results are positive, the reaction is changed to 👍.
-  * If there is at least one finding, the 👀 reaction is removed because the Summary Comment includes details on the findings instead.
+  * If there is at least one finding, the 👀 reaction is removed because the summary comment includes details on the findings instead.
 
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
