@@ -8160,9 +8160,9 @@ menu:
       weight: 5
     - name: Remediation Inbox
       url: security/remediation_inbox
-      parent: security_inbox
+      parent: security_platform
       identifier: security_remediation_inbox
-      weight: 501
+      weight: 6
     - name: Threat Intelligence
       url: security/threat_intelligence
       parent: security_platform
