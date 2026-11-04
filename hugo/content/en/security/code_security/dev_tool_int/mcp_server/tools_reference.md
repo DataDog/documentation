@@ -226,7 +226,7 @@ Each entry in `tests`:
 
 | Field              | Type      | Required | Description                                                                      |
 | ------------------ | --------- | :------: | -------------------------------------------------------------------------------- |
-| `filename`         | `string`  |   Yes    | File name without directories. Its extension must match the rule's `language`, for example `.ts` for `TYPESCRIPT`. |
+| `filename`         | `string`  |   Yes    | Filename without directories. Its extension must match the rule's `language`, for example `.ts` for `TYPESCRIPT`. |
 | `code`             | `string`  |   Yes    | Example source, not base64-encoded                                               |
 | `annotation_count` | `integer` |   Yes    | Number of findings the rule must report on this example: `0` for the fixed code, and a positive number (usually `1`) for the code before the fix |
 
