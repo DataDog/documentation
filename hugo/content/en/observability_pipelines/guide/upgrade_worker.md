@@ -14,6 +14,29 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.25.1
+
+To upgrade to Worker version 2.25.1:
+
+- Docker: Run the `docker pull` command for the [2.25.1 image][66].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.1`.
+
+Worker version 2.25.1 gives you access to the following:
+
+#### Security
+
+- The Microsoft Sentinel destination now verifies server certificates and hostnames for Azure OAuth token requests and log ingestion requests. Previously, these requests did not verify TLS certificates, which could expose the Azure client secret, access tokens, and log data to an attacker on the network.
+
+#### Fixes
+
+- The Microsoft Sentinel destination:
+    - Now splits a batch into multiple requests when needed so that each request stays under Azure's 1 MB limit. Previously, batches with many escaped characters, such as JSON text inside a string field, could exceed the limit and be dropped with HTTP 413.
+    - Now returns to its normal token refresh schedule after a failed token refresh succeeds on retry. Previously, a single failed refresh made the destination request a new token every 2 seconds until the Worker restarted.
+    - Now times out Azure OAuth token requests after 30 seconds, then logs an error and retries. Previously, a token request that never received a response could stop token refresh without logging an error. After the token expired, Azure rejected every request with HTTP 401 and the destination dropped all events until the Worker restarted.
+- The `rc_version` tag on pipeline component metrics, and the `op_component.rc_version` field in component logs, now report the latest configuration version that each component runs. Previously, a component that a pipeline update left unchanged kept reporting the version it was first deployed with.
+
 ## Worker version 2.25.0
 
 To upgrade to Worker version 2.25.0:
@@ -1014,3 +1037,4 @@ Worker version 2.7.0 gives you access to the following:
 [63]: /observability_pipelines/sources/prometheus/
 [64]: /observability_pipelines/destinations/prometheus/
 [65]: /observability_pipelines/destinations/opentelemetry/metrics/
+[66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1
