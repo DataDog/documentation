@@ -7,12 +7,14 @@ const PAIRS = [
     { sdk: 'ddot_sdk', receiver: 'ddot_collector', recommended: true },
     { sdk: 'otel_sdk', receiver: 'upstream_collector', recommended: true },
     { sdk: 'datadog_sdk', receiver: 'agents_collector' },
-    { sdk: 'otel_sdk', receiver: 'agents_collector' }
+    { sdk: 'otel_sdk', receiver: 'agents_collector' },
+    // With this pair, the OpenTelemetry SDK pairs with every receiver
+    { sdk: 'otel_sdk', receiver: 'ddot_collector' }
 ];
 // Support per feature, in PAIRS order
 const FEATURES = {
-    tracing: ['unknown', 'supported', 'supported', 'supported'],
-    profiler: ['unknown', 'not_supported', 'supported', 'not_supported']
+    tracing: ['unknown', 'supported', 'supported', 'supported', 'unknown'],
+    profiler: ['unknown', 'not_supported', 'supported', 'not_supported', 'not_supported']
 };
 
 const id = (p) => `${p.sdk}.${p.receiver}`;
@@ -38,7 +40,6 @@ function render() {
                     <th class="otel-compat__feature-col">
                         <span class="otel-compat__corner-label">Feature</span>
                         <label class="otel-compat__diff" hidden><input type="checkbox" data-role="diff"></label>
-                        <span class="otel-compat__count" hidden></span>
                     </th>${PAIRS.map((p) => `
                     <th data-pair="${id(p)}" data-sdk="${p.sdk}" data-receiver="${p.receiver}" data-recommended="${!!p.recommended}">
                         <span class="otel-compat__visual"><span class="otel-compat__sdk">${p.sdk}</span><span class="otel-compat__dest">${p.receiver}</span></span>
@@ -60,7 +61,12 @@ function render() {
 const shown = (root, selector) => [...root.querySelectorAll(selector)].filter((el) => !el.hidden).map((el) => el.dataset.pair);
 const shownPairs = (root) => shown(root, 'thead th[data-pair]');
 const select = (root, slot, role) => root.querySelector(`select[data-slot="${slot}"][data-role="${role}"]`);
-const optionTexts = (el) => [...el.options].map((o) => o.textContent);
+// A menu's options as { group label: option texts }, or a plain list when it has no groups
+const menuOf = (el) => {
+    const groups = [...el.querySelectorAll('optgroup')];
+    if (!groups.length) return [...el.options].map((o) => o.textContent);
+    return Object.fromEntries(groups.map((g) => [g.label, [...g.querySelectorAll('option')].map((o) => o.textContent)]));
+};
 const choose = (el, value) => {
     el.value = value;
     el.dispatchEvent(new Event('change'));
@@ -76,6 +82,7 @@ const checkDiff = (root) => {
     diff.dispatchEvent(new Event('change'));
 };
 const announcement = (root) => root.querySelector('[data-role="announce"]').textContent;
+const changed = (root) => [...root.querySelectorAll('.otel-compat__part--changed')].map((el) => el.className.split(' ')[0]);
 
 describe('otel-compatibility', () => {
     beforeEach(() => {
@@ -94,26 +101,51 @@ describe('otel-compatibility', () => {
         expect(window.location.search).toBe('');
     });
 
-    it('offers only destinations that pair with the chosen SDK', () => {
+    it('lists every option, grouped by whether it pairs with the other part', () => {
         const root = render();
-        expect(optionTexts(select(root, 'a', 'receiver'))).toEqual(['ddot_collector (recommended)']);
-        expect(optionTexts(select(root, 'b', 'receiver'))).toEqual(['upstream_collector (recommended)', 'agents_collector']);
+        expect(menuOf(select(root, 'a', 'sdk'))).toEqual({
+            'Works with ddot_collector': ['ddot_sdk (recommended)', 'otel_sdk'],
+            'Switches the destination': ['datadog_sdk']
+        });
+        expect(menuOf(select(root, 'a', 'receiver'))).toEqual({
+            'Works with ddot_sdk': ['ddot_collector (recommended)'],
+            'Switches the SDK': ['upstream_collector', 'agents_collector']
+        });
+        expect(menuOf(select(root, 'b', 'sdk'))).toEqual({
+            'Works with upstream_collector': ['otel_sdk (recommended)'],
+            'Switches the destination': ['ddot_sdk', 'datadog_sdk']
+        });
     });
 
-    it('swaps only the destination, keeping the SDK', () => {
+    it('drops the groups when every option pairs with the other part', () => {
+        const root = render();
+        expect(menuOf(select(root, 'b', 'receiver'))).toEqual(['ddot_collector', 'upstream_collector (recommended)', 'agents_collector']);
+    });
+
+    it('swaps only the destination when it pairs with the SDK', () => {
         const root = render();
         choose(select(root, 'b', 'receiver'), 'agents_collector');
         expect(shownPairs(root)).toEqual(['ddot_sdk.ddot_collector', 'otel_sdk.agents_collector']);
         expect(root.querySelector('thead th[data-pair="otel_sdk.agents_collector"] .otel-compat__dest select')).toBe(select(root, 'b', 'receiver'));
         expect(announcement(root)).toBe('');
+        expect(changed(root)).toEqual([]);
     });
 
-    it('moves to a destination that pairs with a new SDK, and says so', () => {
+    it('switches the destination when a new SDK does not pair with it, and says so', () => {
         const root = render();
         choose(select(root, 'a', 'sdk'), 'datadog_sdk');
         expect(shownPairs(root)).toEqual(['datadog_sdk.agents_collector', 'otel_sdk.upstream_collector']);
-        expect(root.querySelector('thead th[data-pair="datadog_sdk.agents_collector"] .otel-compat__dest').classList).toContain('otel-compat__dest--changed');
+        expect(changed(root)).toEqual(['otel-compat__dest']);
         expect(announcement(root)).toBe('Setup 1 now sends data to agents_collector, which works with the datadog_sdk.');
+    });
+
+    it('switches the SDK when a new destination does not pair with it, and says so', () => {
+        const root = render();
+        choose(select(root, 'a', 'receiver'), 'agents_collector');
+        // The first pair with that receiver, in display order
+        expect(shownPairs(root)).toEqual(['datadog_sdk.agents_collector', 'otel_sdk.upstream_collector']);
+        expect(changed(root)).toEqual(['otel-compat__sdk']);
+        expect(announcement(root)).toBe('Setup 1 now uses the datadog_sdk, which works with agents_collector.');
     });
 
     it('keeps the destination when the new SDK pairs with it', () => {
@@ -150,26 +182,25 @@ describe('otel-compatibility', () => {
         expect([...root.querySelectorAll('tbody tr')].every((tr) => !tr.hidden)).toBe(true);
     });
 
-    it('shows one setup with its count in the one-setup view', () => {
+    it('shows one setup in the one-setup view, with the feature label in the corner', () => {
         const root = render();
         checkDiff(root);
         view(root, 'one');
         expect(shownPairs(root)).toEqual(['ddot_sdk.ddot_collector']);
         expect(root.querySelectorAll('thead select')).toHaveLength(2);
         expect(root.querySelector('.otel-compat__diff').hidden).toBe(true);
-        expect(root.querySelector('.otel-compat__count').textContent).toBe('Supports 0 of 2 features, 2 not yet documented');
+        expect(root.querySelector('.otel-compat__corner-label').hidden).toBe(false);
         // The differences filter only applies to compare view
         expect([...root.querySelectorAll('tbody tr')].every((tr) => !tr.hidden)).toBe(true);
         expect(window.location.search).toBe('?compat_view=one&compat_a=ddot_sdk.ddot_collector');
         choose(select(root, 'a', 'sdk'), 'otel_sdk');
-        expect(shownPairs(root)).toEqual(['otel_sdk.upstream_collector']);
-        expect(root.querySelector('.otel-compat__count').textContent).toBe('Supports 1 of 2 features');
+        expect(shownPairs(root)).toEqual(['otel_sdk.ddot_collector']);
     });
 
     it('picks a different second setup when compare view starts from the same one', () => {
         const root = render();
         view(root, 'one');
-        choose(select(root, 'a', 'sdk'), 'otel_sdk');
+        choose(select(root, 'a', 'receiver'), 'upstream_collector');
         view(root, 'compare');
         expect(shownPairs(root)).toEqual(['otel_sdk.upstream_collector', 'ddot_sdk.ddot_collector']);
     });

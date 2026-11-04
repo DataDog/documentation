@@ -38,7 +38,6 @@
 {{- range $data.sdks }}{{ $id := .id }}{{ range $shown }}{{ if and (eq .sdk $id) (not (in $menuSDKs $id)) }}{{ $menuSDKs = $menuSDKs | append $id }}{{ end }}{{ end }}{{ end -}}
 {{- $menuReceivers := slice -}}
 {{- range $data.receivers }}{{ $id := .id }}{{ range $shown }}{{ if and (eq .receiver $id) (not (in $menuReceivers $id)) }}{{ $menuReceivers = $menuReceivers | append $id }}{{ end }}{{ end }}{{ end -}}
-{{- $reasons := dict "sdk" "Not with this SDK" "receiver" "Not with this destination" "both" "Not with this SDK or destination" "pair" "Not with this combination" -}}
 
 <div class="otel-compat" id="{{ $uid }}" data-otel-compat>
   <div class="otel-compat__controls exclude-from-md" hidden>
@@ -49,8 +48,8 @@
     </fieldset>
     <p class="otel-compat__status" aria-live="polite"></p>
     <p class="otel-compat__sr" aria-live="polite" data-role="announce"></p>
-    {{- /* The script moves each menu into the header of the column it shows, and limits each
-        destination menu to the receivers that pair with its SDK */}}
+    {{- /* The script moves each menu into the header of the column it shows, and groups each
+        menu's options by whether they pair with the column's other part */}}
     <div class="otel-compat__holder" hidden>
       {{- range $slot := slice "a" "b" }}
       {{- $name := cond (eq $slot "a") "Setup 1" "Setup 2" }}
@@ -74,9 +73,8 @@
         <tr>
           <th scope="col" class="otel-compat__feature-col" aria-label="Feature">
             <span class="otel-compat__corner-label">Feature</span>
-            {{- /* The script shows one of these in place of the label */}}
+            {{- /* The script shows this in place of the label in compare view */}}
             <label class="otel-compat__diff exclude-from-md" hidden><input type="checkbox" data-role="diff"> Only differences</label>
-            <span class="otel-compat__count exclude-from-md" hidden></span>
           </th>
           {{- range $p := $shown }}
           {{- $sdk := index $sdks $p.sdk }}
@@ -122,11 +120,6 @@
             {{- with $c.notes }}
             {{- /* Escape HTML first: the site's Markdown settings allow raw HTML, and notes only need Markdown links */}}
             <span class="otel-compat__note">{{ delimit . " " | htmlEscape | markdownify }}</span>
-            {{- else }}
-            {{- /* Name the part to swap. A note, when there is one, explains the cell instead */}}
-            {{- with index $reasons $c.blocked_by }}
-            <span class="otel-compat__note">{{ . }}</span>
-            {{- end }}
             {{- end }}
           </td>
           {{- end }}

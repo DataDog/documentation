@@ -1,10 +1,12 @@
 // Compare and one-setup views for the otel-compatibility shortcode.
 // The shortcode renders the full table; this script only shows, hides, and orders its columns.
 // Each shown column gets an SDK menu and a destination menu, so readers can swap one part at a time.
+// Both menus list every option. Picking one that doesn't pair with the other part switches that part.
 // layouts/partials/footer-scripts.html loads it only on pages that use the shortcode.
 
 const PARAMS = { view: 'compat_view', a: 'compat_a', b: 'compat_b' };
 const VIEWS = ['compare', 'one'];
+const ROLES = ['sdk', 'receiver'];
 
 function readParams() {
     try {
@@ -36,6 +38,7 @@ function initOtelCompat(root) {
     const featureRows = [...table.tBodies[0].rows];
     const footerRow = table.tFoot ? table.tFoot.rows[0] : null;
 
+    // Pairs in display order, which puts recommended setups first
     const headers = new Map([...headerRow.querySelectorAll('th[data-pair]')].map((th) => [th.dataset.pair, th]));
     const pairs = [...headers.values()].map((th) => ({
         id: th.dataset.pair,
@@ -46,21 +49,26 @@ function initOtelCompat(root) {
     const pairIds = pairs.map((p) => p.id);
     const pairById = new Map(pairs.map((p) => [p.id, p]));
     const recommended = pairIds.filter((id) => pairById.get(id).recommended);
+    const pairOf = (sdk, receiver) => pairById.get(`${sdk}.${receiver}`);
 
     // Cells keyed by pair id, for every row that has one cell per setup
     const cellMap = (row) => new Map([...row.cells].filter((cell) => cell.dataset.pair).map((cell) => [cell.dataset.pair, cell]));
     const columnRows = [headerRow, ...featureRows, footerRow].filter(Boolean).map((row) => ({ row, cells: cellMap(row) }));
     const cellsByFeatureRow = new Map(featureRows.map((row) => [row, cellMap(row)]));
 
-    const slots = ['a', 'b'].map((key) => ({
-        key,
-        name: key === 'a' ? 'Setup 1' : 'Setup 2',
-        sdk: holder.querySelector(`select[data-slot="${key}"][data-role="sdk"]`),
-        receiver: holder.querySelector(`select[data-slot="${key}"][data-role="receiver"]`)
-    }));
-    // Every destination, in menu order. Each SDK change refills a destination menu with the ones that pair with it.
-    const receiverLabels = new Map([...slots[0].receiver.options].map((option) => [option.value, option.textContent]));
-    const sdkLabels = new Map([...slots[0].sdk.options].map((option) => [option.value, option.textContent]));
+    // Each slot keeps its SDK and receiver here; its menus are rebuilt from this state
+    const slots = ['a', 'b'].map((key) => {
+        const menus = {};
+        ROLES.forEach((role) => {
+            menus[role] = holder.querySelector(`select[data-slot="${key}"][data-role="${role}"]`);
+        });
+        return { key, name: key === 'a' ? 'Setup 1' : 'Setup 2', menus, sdk: null, receiver: null };
+    });
+    // Every SDK and receiver the menus offer, in menu order, with their labels
+    const labels = {};
+    ROLES.forEach((role) => {
+        labels[role] = new Map([...slots[0].menus[role].options].map((option) => [option.value, option.textContent]));
+    });
 
     const viewInputs = [...controls.querySelectorAll('.otel-compat__view input')];
     const status = controls.querySelector('.otel-compat__status');
@@ -69,7 +77,6 @@ function initOtelCompat(root) {
     const cornerLabel = corner.querySelector('.otel-compat__corner-label');
     const diffLabel = corner.querySelector('.otel-compat__diff');
     const diffInput = diffLabel.querySelector('input');
-    const count = corner.querySelector('.otel-compat__count');
 
     // Default compare: the first two recommended setups
     const fallbackA = recommended[0] || pairIds[0];
@@ -81,33 +88,59 @@ function initOtelCompat(root) {
         return checked ? checked.value : 'compare';
     }
 
-    function pairIdOf(slot) {
-        return `${slot.sdk.value}.${slot.receiver.value}`;
+    const pairIdOf = (slot) => `${slot.sdk}.${slot.receiver}`;
+    const otherRole = (role) => (role === 'sdk' ? 'receiver' : 'sdk');
+    // The pair an SDK or receiver makes with the slot's other part, if any
+    const pairWith = (slot, role, value) => (role === 'sdk' ? pairOf(value, slot.receiver) : pairOf(slot.sdk, value));
+
+    function option(value, text) {
+        const el = document.createElement('option');
+        el.value = value;
+        el.textContent = text;
+        return el;
     }
 
-    // Offer only destinations that pair with the slot's SDK, and keep the current one if it still does
-    function fillReceivers(slot) {
-        const sdk = slot.sdk.value;
-        const valid = [...receiverLabels.keys()].filter((id) => pairById.has(`${sdk}.${id}`));
-        const keep = valid.includes(slot.receiver.value) ? slot.receiver.value : valid[0];
-        slot.receiver.textContent = '';
-        slot.receiver.append(
-            ...valid.map((id) => {
-                const option = document.createElement('option');
-                option.value = id;
-                option.textContent = receiverLabels.get(id) + (pairById.get(`${sdk}.${id}`).recommended ? ' (recommended)' : '');
-                return option;
-            })
-        );
-        slot.receiver.value = keep;
+    // List every option, grouped by whether it pairs with the slot's other part.
+    // With nothing to switch to, the menu has no groups.
+    function fillMenu(slot, role) {
+        const menu = slot.menus[role];
+        const other = otherRole(role);
+        const works = [];
+        const switches = [];
+        labels[role].forEach((label, value) => {
+            const pair = pairWith(slot, role, value);
+            if (pair) {
+                works.push(option(value, label + (pair.recommended ? ' (recommended)' : '')));
+            } else {
+                switches.push(option(value, label));
+            }
+        });
+        menu.textContent = '';
+        if (switches.length) {
+            const group = (label, items) => {
+                const el = document.createElement('optgroup');
+                el.label = label;
+                el.append(...items);
+                return el;
+            };
+            const otherLabel = labels[other].get(slot[other]);
+            menu.append(group(`Works with ${otherLabel}`, works), group(role === 'sdk' ? 'Switches the destination' : 'Switches the SDK', switches));
+        } else {
+            menu.append(...works);
+        }
+        menu.value = slot[role];
+    }
+
+    function fillMenus(slot) {
+        ROLES.forEach((role) => fillMenu(slot, role));
     }
 
     function setSlot(slot, pairId) {
         const pair = pairById.get(pairId);
         if (!pair) return;
-        slot.sdk.value = pair.sdk;
-        fillReceivers(slot);
-        slot.receiver.value = pair.receiver;
+        slot.sdk = pair.sdk;
+        slot.receiver = pair.receiver;
+        fillMenus(slot);
     }
 
     function showColumns(ids) {
@@ -126,21 +159,13 @@ function initOtelCompat(root) {
     // Put each slot's menus over the SDK and destination labels in the header of the column it shows
     function placeMenus(ids) {
         headers.forEach((th) => th.querySelector('.otel-compat__visual').classList.remove('otel-compat__visual--menu'));
-        slots.forEach((slot) => holder.append(slot.sdk, slot.receiver));
+        slots.forEach((slot) => holder.append(slot.menus.sdk, slot.menus.receiver));
         ids.forEach((id, i) => {
             const visual = headers.get(id).querySelector('.otel-compat__visual');
             visual.classList.add('otel-compat__visual--menu');
-            visual.querySelector('.otel-compat__sdk').appendChild(slots[i].sdk);
-            visual.querySelector('.otel-compat__dest').appendChild(slots[i].receiver);
+            visual.querySelector('.otel-compat__sdk').appendChild(slots[i].menus.sdk);
+            visual.querySelector('.otel-compat__dest').appendChild(slots[i].menus.receiver);
         });
-    }
-
-    function countText(id) {
-        const support = featureRows.map((row) => cellsByFeatureRow.get(row).get(id).dataset.support);
-        const supported = support.filter((s) => s === 'supported' || s === 'partial').length;
-        const unknown = support.filter((s) => s === 'unknown').length;
-        const text = `Supports ${supported} of ${support.length} features`;
-        return unknown ? `${text}, ${unknown} not yet documented` : text;
     }
 
     // Each slot's last setup, so picking the other slot's setup swaps the two
@@ -179,10 +204,8 @@ function initOtelCompat(root) {
             if (row.hidden) hiddenRows += 1;
         });
 
-        cornerLabel.hidden = true;
+        cornerLabel.hidden = compare;
         diffLabel.hidden = !compare;
-        count.hidden = compare;
-        count.textContent = compare ? '' : countText(a);
 
         // Explain an empty table; otherwise the filtered rows speak for themselves
         status.textContent = filterDiff && hiddenRows === featureRows.length ? 'These setups support the same features.' : '';
@@ -190,23 +213,35 @@ function initOtelCompat(root) {
         if (updateUrl) writeParams({ view, a, b });
     }
 
-    function onSlotChange(slot, role) {
-        const before = slot.receiver.value;
-        if (role === 'sdk') fillReceivers(slot);
-        const moved = slot.receiver.value !== before;
-        const other = slots.find((s) => s !== slot);
-        if (currentView() === 'compare' && pairIdOf(slot) === pairIdOf(other) && current[slot.key]) {
-            setSlot(other, current[slot.key]);
+    // The part the reader picked wins. If it doesn't pair with the other part, the other part
+    // moves to the first one that does, in display order.
+    function onMenuChange(slot, role) {
+        const other = otherRole(role);
+        slot[role] = slot.menus[role].value;
+        let switched = false;
+        if (!pairOf(slot.sdk, slot.receiver)) {
+            slot[other] = pairs.find((p) => p[role] === slot[role])[other];
+            switched = true;
         }
+        const otherSlot = slots.find((s) => s !== slot);
+        if (currentView() === 'compare' && pairIdOf(slot) === pairIdOf(otherSlot) && current[slot.key]) {
+            setSlot(otherSlot, current[slot.key]);
+        }
+        fillMenus(slot);
         announce.textContent = '';
         render();
-        // A new SDK can force a new destination. Point that out, since the reader didn't pick it.
-        if (moved) {
-            const dest = headers.get(pairIdOf(slot)).querySelector('.otel-compat__dest');
-            dest.classList.remove('otel-compat__dest--changed');
-            void dest.offsetWidth; // restart the highlight if it's still running
-            dest.classList.add('otel-compat__dest--changed');
-            announce.textContent = `${slot.name} now sends data to ${receiverLabels.get(slot.receiver.value)}, which works with the ${sdkLabels.get(slot.sdk.value)}.`;
+        // Point out the part the reader didn't pick
+        if (switched) {
+            const part = headers.get(pairIdOf(slot)).querySelector(other === 'sdk' ? '.otel-compat__sdk' : '.otel-compat__dest');
+            part.classList.remove('otel-compat__part--changed');
+            void part.offsetWidth; // restart the highlight if it's still running
+            part.classList.add('otel-compat__part--changed');
+            const sdk = labels.sdk.get(slot.sdk);
+            const receiver = labels.receiver.get(slot.receiver);
+            announce.textContent =
+                other === 'sdk'
+                    ? `${slot.name} now uses the ${sdk}, which works with ${receiver}.`
+                    : `${slot.name} now sends data to ${receiver}, which works with the ${sdk}.`;
         }
     }
 
@@ -220,12 +255,11 @@ function initOtelCompat(root) {
     setSlot(slots[1], pairById.has(params.get(PARAMS.b)) ? params.get(PARAMS.b) : fallbackB);
 
     slots.forEach((slot) => {
-        slot.sdk.addEventListener('change', () => onSlotChange(slot, 'sdk'));
-        slot.receiver.addEventListener('change', () => onSlotChange(slot, 'receiver'));
+        ROLES.forEach((role) => slot.menus[role].addEventListener('change', () => onMenuChange(slot, role)));
     });
     viewInputs.forEach((input) => input.addEventListener('change', () => render()));
     diffInput.addEventListener('change', () => render());
-    root.addEventListener('animationend', (event) => event.target.classList.remove('otel-compat__dest--changed'));
+    root.addEventListener('animationend', (event) => event.target.classList.remove('otel-compat__part--changed'));
 
     controls.hidden = false;
     root.classList.add('otel-compat--initialized');

@@ -141,12 +141,14 @@ support value.
 | ------------- | -------- | -------------------------------------------------------------------- |
 | `sdk`         | yes      | An SDK `id`                                                          |
 | `receiver`    | yes      | A receiver `id`                                                      |
-| `recommended` | no       | `true` adds "(recommended)" to the receiver in the destination menu. The first two are compared by default. |
+| `recommended` | no       | `true` adds "(recommended)" to the pair's SDK and receiver in the menus. The first two are compared by default. |
 | `link`        | no       | Setup guide for this pair                                            |
 | `confirmed`   | no       | `false` means the pair may not work. It stays in this file but not on the page. |
 
-Each column on the page has an SDK menu and a destination menu. The destination
-menu offers only the receivers that have a pair with the chosen SDK.
+Each column on the page has an SDK menu and a destination menu. Both list every
+option, grouped by whether it pairs with the column's other part. When a reader
+picks one that doesn't pair, the other part switches to the first pair, in the
+order listed here, that uses the reader's pick.
 
 ### `features`
 
@@ -205,11 +207,6 @@ part, add an override instead of changing an SDK or receiver value.
 
 The cell shows the `label` and `note` of the side that decided the value. When
 both sides have the same value, it shows both notes.
-
-A `not_supported` cell without a note names the part to swap: "Not with this
-SDK", "Not with this destination", or "Not with this SDK or destination". An
-override that is `not_supported` when neither part is shows "Not with this
-combination".
 
 ### Add a feature
 
