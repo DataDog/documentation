@@ -47,7 +47,7 @@ Identity resolution requires warehouse exposures and warehouse metrics. It does 
 
 ### Prepare exposure data
 
-Follow [Create Exposure SQL Models][4] to create a model that returns both identifiers. Adapt this query to the warehouse schema:
+Follow [Create Exposure SQL Models][4] to create a model that returns both identifiers. Adapt this query to your warehouse schema:
 
 ```sql
 SELECT
@@ -64,7 +64,7 @@ FROM analytics.experiment_exposures
 1. Map {{< ui >}}Timestamp column{{< /ui >}} to `ASSIGNED_TS`, {{< ui >}}Experiment key column{{< /ui >}} to `EXPERIMENT`, and {{< ui >}}Variant ID column{{< /ui >}} to `VARIANT`.
 1. Click {{< ui >}}Create Exposure SQL Model{{< /ui >}}, or {{< ui >}}Update Exposure SQL Model{{< /ui >}} if you're editing an existing model.
 
-The screenshots use synthetic checkout data. The worked example below uses a smaller illustrative dataset with the same column names.
+The screenshots on this page use sample checkout data. The [connect an anonymous exposure to a purchase](#example-connect-an-anonymous-exposure-to-a-purchase) example uses a smaller dataset with the same column names.
 
 {{< img src="/experiments/concepts/identity_resolution/exposure-model.png" alt="Exposure SQL Model showing Anonymous user mapped to ANONYMOUS_ID and User mapped to USER_ID, with timestamp, experiment key, and variant mappings." caption="The exposure model maps both anonymous and user IDs." style="width:90%;" >}}
 
@@ -79,9 +79,7 @@ Preserve the original exposure timestamp when joining identity data into the mod
 1. Select {{< ui >}}Anonymous user{{< /ui >}} as the {{< ui >}}Randomization subject{{< /ui >}} and {{< ui >}}User{{< /ui >}} as the {{< ui >}}Additional subject{{< /ui >}}.
 1. Verify that the randomization subject matches the identifier used to assign variants.
 
-**Note**: For a draft with no metrics, Datadog might fill in both subjects for you. Check them before you start the experiment.
-
-**Note**: You can change subject roles only while the experiment is a draft. After the experiment starts, subject roles are locked.
+**Note**: For a draft with no metrics, Datadog might fill in both subjects for you. Check them before you start the experiment. After the experiment starts, subject roles are locked.
 
 Changing or removing a subject can make existing metrics incompatible. Review the list in {{< ui >}}Remove incompatible metrics?{{< /ui >}} before clicking {{< ui >}}Remove metrics and save{{< /ui >}}.
 
@@ -144,8 +142,6 @@ For a {{< ui >}}Sum of{{< /ui >}} purchase metric with an observation window sta
 
 This example illustrates event attribution, not a statistical conclusion from two participants.
 
-Updated relationships can change historical attribution when results are recalculated. After correcting the exposure data, [update the experiment results][8] and check them again.
-
 ## Missing or ambiguous relationships
 
 Datadog resolves relationships using the selected experiment's exposures within its configured exposure date range:
@@ -158,7 +154,9 @@ Datadog resolves relationships using the selected experiment's exposures within 
 | The selected randomization ID was exposed to multiple variants and is excluded. | Datadog excludes its relationships instead of moving them to another participant. |
 | One randomization ID has multiple additional IDs. | Metric events from those IDs contribute to the same randomization subject. |
 
-For shared accounts or devices, check that these rules match the population the experiment is intended to measure. An additional ID shared across participants does not contribute its events to every participant.
+For shared accounts or devices, check that these rules match the population the experiment is intended to measure.
+
+Updated relationships can change historical attribution when results are recalculated. After correcting the exposure data, [update the experiment results][8] and check them again.
 
 ## Troubleshooting
 
