@@ -1,5 +1,6 @@
 ---
 title: Triage and Investigate AI Guard Signals
+description: Create detection rules for AI Guard evaluations, investigate the signals they generate, and alert on AI Guard activity.
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
@@ -132,16 +133,16 @@ To create monitors for alerting at certain thresholds, you can use [Datadog Moni
 
 ### APM monitor
 
-Follow the instructions to create a new [APM monitor][11], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
+Follow the instructions to create an [APM monitor][11], with its scope set to {{< ui >}}Trace Analytics{{< /ui >}}.
 
-- To monitor evaluation traffic, use the query `@ai_guard.action:DENY`.
+- To monitor denied evaluations, use the query `@ai_guard.action:DENY`.
 - To monitor blocked traffic, use the query `@ai_guard.blocked:true`.
 
 ### Metric monitor
 
-Follow the instructions to create a new [metric monitor][12].
+Follow the instructions to create a [metric monitor][12].
 
-- To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tag `action:deny`.
+- To monitor denied evaluations, use the metric `datadog.ai_guard.evaluations` with the tag `action:deny`.
 - To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
 
 ## Further reading

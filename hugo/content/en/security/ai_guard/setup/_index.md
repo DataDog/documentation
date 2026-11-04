@@ -9,11 +9,13 @@ aliases:
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-Set up AI Guard to start evaluating agent prompts, responses, and tool calls for threats. After setup, the default policy monitors every evaluation, and you can [enable blocking][1] when you're ready.
+Set up AI Guard to start evaluating agent prompts, responses, and tool calls for threats. After setup, the default policy monitors every evaluation, and you can [start blocking unsafe requests][1] when you're ready.
 
 AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
-AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for each of these methods. In step 3, you choose the method that fits your agent's language and libraries.
+AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for each of these methods. When you're instrumenting your application, you choose the method that fits your agent's language and libraries.
+
+AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect:
 
 ## 1. Check prerequisites {#prerequisites}
 
@@ -56,7 +58,12 @@ To take advantage of all AI Guard features, use the latest version of the Datado
 <div class="alert alert-info">
 <p>By default, running the Datadog SDK and the Agent turns on other Datadog products, which are billed separately from AI Guard:</p>
 <ul>
-<li>The Datadog SDK sends full APM traces. To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. AI Guard spans still reach Datadog, and indexed AI Guard spans count toward your APM indexed span usage. See <a href="#retention-filter">Create a retention filter for AI Guard spans</a>. Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
+<li>The Datadog SDK sends full APM traces.
+<ul>
+<li>To turn off APM tracing but keep AI Guard, set <code>DD_APM_TRACING_ENABLED=false</code>. AI Guard spans still reach Datadog, and indexed AI Guard spans count toward your APM indexed span usage. See <a href="#retention-filter">Create a retention filter for AI Guard spans</a>.</li>
+<li>Don't set <code>DD_TRACE_ENABLED=false</code>, because that setting turns off AI Guard spans and integrations too.</li>
+</ul>
+</li>
 <li>The Agent reports Infrastructure Monitoring data. To turn off Infrastructure Monitoring, set <code>DD_INFRASTRUCTURE_MODE=none</code>. This setting requires Agent 7.77.0 or later.</li>
 </ul>
 </div>
@@ -71,7 +78,7 @@ AI Guard authenticates every evaluation with a Datadog API key and application k
 
 ## 3. Instrument your application {#instrumentation}
 
-Instrument each agent with the integration method that matches its language and libraries, so AI Guard can evaluate model traffic.
+Instrument each AI agent with the integration method that matches its language and libraries, so AI Guard can evaluate model traffic.
 
 AI Guard identifies each protected agent by its `DD_SERVICE` and `DD_ENV` values, and applies policies by service and environment. Use the same service name that the agent reports to APM. The AI Guard {{< ui >}}Discover{{< /ui >}} tab lists the AI agent services in your organization and shows which ones AI Guard protects, matched by service name.
 
@@ -104,7 +111,7 @@ The appropriate integration method depends on how an agent reaches its model and
 
 ## 4. Create a retention filter for AI Guard spans {#retention-filter}
 
-Create a retention filter so Datadog keeps every AI Guard span. By default, APM samples spans. Without a retention filter, Datadog can drop AI Guard spans, and dropped spans never appear in AI Guard, even though AI Guard still evaluates your agent's requests.
+Create a retention filter so Datadog keeps every AI Guard span. By default, APM samples spans. Without a retention filter, even though AI Guard still evaluates your agent's requests, Datadog can drop the corresponding spans, preventing them from appearing in AI Guard.
 
 You must have the {{< ui >}}APM Retention Filters Write{{< /ui >}} permission to complete this task.
 

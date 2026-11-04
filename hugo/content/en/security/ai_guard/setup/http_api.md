@@ -32,7 +32,7 @@ To keep full visibility for an agent in a language that the SDK doesn't support,
 
 Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call before your agent acts on it.
 
-**Before you begin**: [Check prerequisites][3] and [Create API and application keys][4].
+**Before you begin**: [Check prerequisites][3] and [create API and application keys][4].
 
 1. At each point you want AI Guard to check, send a `POST` request to the AI Guard evaluation endpoint with the conversation so far. This example evaluates a tool call in the context of the system prompt and the user prompt:
 
@@ -102,7 +102,7 @@ To apply the AI Guard policy settings for a specific service and environment, ad
 | Field | Description |
 | --- | --- |
 | `role` | `system`, `developer`, `user`, `assistant`, or `tool` |
-| `content` | The message text, or an array of content parts to include images. Each part has a `type` of `text` or `image_url`, with a `text` value or an `image_url.url` value. For an assistant message with tool calls, an empty string. |
+| `content` | The message text, or an array of content parts to include images. Each part has a `type` of `text` or `image_url`, with a `text` value or an `image_url.url` value. For an assistant message with tool calls, this is an empty string. |
 | `tool_calls` | For an assistant message, the tool calls the model requested. Each tool call has an `id` and a `function` with a `name` and `arguments`. `arguments` is a JSON string. |
 | `tool_call_id` | For a tool message, the `id` of the tool call that produced the result. |
 
@@ -156,8 +156,8 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | Attribute | Description |
 | --- | --- |
 | `data.id` | The evaluation ID. |
-| `data.type` | Always `evaluations` |
-| `data.attributes.action` | `ALLOW` or `DENY` |
+| `data.type` | Always `evaluations`. |
+| `data.attributes.action` | `ALLOW` or `DENY`. |
 | `data.attributes.reason` | A natural language summary of the decision, for auditing and logging. Don't pass `reason` back to the model or the end user. |
 | `data.attributes.tags` | The attack categories AI Guard detected. |
 | `data.attributes.tag_probs` | The confidence score for each attack category. |

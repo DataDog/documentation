@@ -37,7 +37,7 @@ Policies range from least to most specific:
 
 When more than one policy matches a request, AI Guard applies the most specific one.
 
-Custom policies inherit settings from their parent policy, which is the next broader policy that exists. Inherited settings remain in-sync with the parent policy unless you override them. Overridden settings use only the custom policy value. For example, overriding custom rules or individual tool behaviors replaces the parent settings rather than adding to them.
+Custom policies inherit settings from their parent policy, which is the next broader policy that exists. Inherited settings remain in sync with the parent policy unless you override them. Overridden settings use only the custom policy value. For example, overriding custom rules or individual tool behaviors replaces the parent settings rather than adding to them.
 
 ## Policy settings
 
@@ -65,7 +65,7 @@ AI Guard returns `ALLOW` or `DENY` for every evaluation and records every evalua
 
 ### Evaluation sensitivity
 
-Tuning evaluation sensitivity helps reduce false positives and missed threats, so you can match AI Guard to your risk tolerance for each service or environment.
+Evaluation sensitivity balances false positives against missed threats, so you can match AI Guard to your risk tolerance for each service or environment.
 
 AI Guard assigns a confidence score to each attack category it detects. Sensitivity sets the minimum confidence AI Guard needs to flag a threat:
 
@@ -76,17 +76,17 @@ Sensitivity is a percentage. The {{< ui >}}Policies{{< /ui >}} tab and the polic
 
 | Sensitivity | Label |
 | --- | --- |
-| 0-24% | {{< ui >}}Aggressive{{< /ui >}} |
-| 25-49% | {{< ui >}}Moderate{{< /ui >}} |
+| 0–24% | {{< ui >}}Aggressive{{< /ui >}} |
+| 25–49% | {{< ui >}}Moderate{{< /ui >}} |
 | 50% | {{< ui >}}Balanced{{< /ui >}} (Default) |
-| 51-74% | {{< ui >}}Lenient{{< /ui >}} |
-| 75-100% | {{< ui >}}Very lenient{{< /ui >}} |
+| 51–74% | {{< ui >}}Lenient{{< /ui >}} |
+| 75–100% | {{< ui >}}Very lenient{{< /ui >}} |
 
 Policies can use one sensitivity for every attack category, or a separate sensitivity for each attack category. {{< ui >}}Customize by attack category{{< /ui >}} sets a separate value for each attack category, and the policy shows the label {{< ui >}}Custom{{< /ui >}}. Switching back to one value with {{< ui >}}Switch to general evaluation{{< /ui >}} discards the per-category values, and you can't undo the switch. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
 
 ### Evaluation context
 
-Evaluation context describes what an application does and what data the application handles. With evaluation context, AI Guard can tell expected agent behavior from a genuine threat and flag fewer legitimate requests.
+Evaluation context describes what an application does and what data the application handles. With evaluation context, AI Guard can distinguish expected agent behavior from a genuine threat and flag fewer false positives.
 
 For example, a fintech application might describe account queries and transfers as expected operations:
 
@@ -106,9 +106,9 @@ Sensitive data scanning is managed with these options:
 
 | Option | Behavior |
 | --- | --- |
-| {{< ui >}}Disabled{{< /ui >}} | Don't scan requests for sensitive data. (Default) |
-| {{< ui >}}Scanning{{< /ui >}} | Scan requests for sensitive data, and return the messages unchanged. |
-| {{< ui >}}Scanning and redacting{{< /ui >}} | Scan requests for sensitive data and redact matches. Redaction requires direct SDK calls or the HTTP API. |
+| {{< ui >}}Disabled{{< /ui >}} | AI Guard doesn't scan requests for sensitive data. (Default) |
+| {{< ui >}}Scanning{{< /ui >}} | AI Guard scans requests for sensitive data, reports the findings on the AI Guard span, and returns the messages unchanged. |
+| {{< ui >}}Scanning and redacting{{< /ui >}} | AI Guard scans requests for sensitive data and redacts the matches. Redaction requires direct SDK calls or the HTTP API. |
 
 Automatic integrations, SDK calls, and the HTTP API report sensitive data findings. Redaction works with direct SDK calls and the HTTP API. AI Guard returns the content with sensitive values redacted, and your code sends the redacted content to the model. Automatic integrations report findings but don't redact messages. Manual integrations don't support sensitive data scanning.
 
@@ -122,10 +122,10 @@ Each policy sets a default behavior for every tool call in the policy scope, and
 
 | Behavior | Description |
 | --- | --- |
-| {{< ui >}}Evaluate{{< /ui >}} | Send every tool call to AI Guard for evaluation. (Default) |
-| {{< ui >}}Pass{{< /ui >}} | Always allow every tool call. AI Guard still evaluates tool calls set to {{< ui >}}Pass{{< /ui >}} and reports the results, but never blocks them. Tool calls set to {{< ui >}}Pass{{< /ui >}} still count toward usage. |
-| {{< ui >}}Block{{< /ui >}} | Reject every tool call in the scope. |
-| {{< ui >}}Inherit{{< /ui >}} | Apply the behavior from the parent policy. Available for individual tools in a custom policy. |
+| {{< ui >}}Evaluate{{< /ui >}} | AI Guard evaluates every tool call. (Default) |
+| {{< ui >}}Pass{{< /ui >}} | AI Guard allows every tool call. AI Guard still evaluates tool calls set to {{< ui >}}Pass{{< /ui >}} and reports the results, but never blocks them. Tool calls set to {{< ui >}}Pass{{< /ui >}} still count toward usage. |
+| {{< ui >}}Block{{< /ui >}} | AI Guard rejects every tool call in the scope. |
+| {{< ui >}}Inherit{{< /ui >}} | The tool uses the behavior from the parent policy. Available for individual tools in a custom policy. |
 
 Tools with their own behavior appear in the {{< ui >}}Individual policies{{< /ui >}} table. To add a tool, click {{< ui >}}Add{{< /ui >}} in the {{< ui >}}Individual policies{{< /ui >}} table. In {{< ui >}}Add tools{{< /ui >}}, type or select tool names. To add a tool that isn't in the list, type the tool name, then select {{< ui >}}Add option{{< /ui >}}.
 
@@ -146,7 +146,7 @@ Custom rules come in two kinds:
 
 ## Edit or create a policy
 
-The default policy protects every onboarded service from the start, so editing the default policy is the fastest way to tune AI Guard.
+The default policy protects every service you set up from the start, so editing the default policy is the fastest way to tune AI Guard.
 
 When a service or environment needs different settings, create a custom policy instead.
 
@@ -159,9 +159,7 @@ When a service or environment needs different settings, create a custom policy i
    <div class="alert alert-info">Before you switch a policy to {{< ui >}}Block unsafe{{< /ui >}}, update every agent in the policy scope to handle blocked requests. Otherwise, the agent fails when AI Guard blocks a request. See the <a href="#blocking-policy">Turn on blocking</a> section.</div>
 
 1. (Optional) Test the change in the {{< ui >}}Simulator{{< /ui >}} panel.
-1. Save the policy.
-
-   The policy applies to new evaluations within seconds after you save.
+1. Save the policy. It applies to new evaluations within seconds after you save.
 
 ## Turn on blocking {#blocking-policy}
 

@@ -64,7 +64,7 @@ AI Guard doesn't evaluate streamed responses from LangChain or RubyLLM.
 
 Enable automatic integrations so the Datadog SDK sends every supported model call and tool call from the agent to AI Guard for evaluation.
 
-**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
+**Before you begin**: [Check prerequisites][3], [create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
 
 1. Set these environment variables in the application's environment:
 
@@ -76,7 +76,7 @@ Enable automatic integrations so the Datadog SDK sends every supported model cal
    | `DD_SERVICE` | The service name the agent reports to APM. |
    | `DD_ENV` | The environment name. |
 
-   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set any of these variables to <code>false</code>: <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code>.</div>
+   <div class="alert alert-tip">In Python, to turn off AI Guard for one integration without turning it off for the others, set the appropriate variables to <code>false</code>: <code>DD_AI_GUARD_OPENAI_ENABLED</code>, <code>DD_AI_GUARD_ANTHROPIC_ENABLED</code>, or <code>DD_AI_GUARD_LANGCHAIN_ENABLED</code>.</div>
 
 1. Start the application with the Datadog SDK loaded:
 

@@ -61,7 +61,7 @@ Some activity through manual integrations isn't evaluated or can't be blocked. R
 
 Enable the Amazon Strands integration for each Strands agent you want to protect, so every model call and tool call in the agent goes to AI Guard for evaluation.
 
-**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
+**Before you begin**: [Check prerequisites][3], [create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the application.
 
 1. Set these environment variables in the application's environment:
 
@@ -97,7 +97,7 @@ Enable the Amazon Strands integration for each Strands agent you want to protect
 
 Enable the LiteLLM Proxy integration for each LiteLLM Proxy, so AI Guard evaluates the model traffic of every agent that routes through the proxy, whatever language the agent uses.
 
-**Before you begin**: [Check prerequisites][3], [Create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their model requests through the proxy.
+**Before you begin**: [Check prerequisites][3], [create API and application keys][4], and install a [supported Datadog SDK version](#supported-frameworks-and-libraries) in the LiteLLM Proxy environment. The agents you want to protect must send their model requests through the proxy.
 
 1. Set these environment variables in the LiteLLM Proxy environment:
 

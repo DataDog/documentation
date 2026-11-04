@@ -1,5 +1,6 @@
 ---
 title: Redact Sensitive Data
+description: Redact personal information and secrets from the messages that AI Guard evaluates, before the messages reach the model.
 further_reading:
 - link: /security/ai_guard/setup/
   tag: Documentation
@@ -92,7 +93,6 @@ The way you read the redacted conversation depends on the SDK language:
 
 When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it from the `messages` key:
 
-```py
 from ddtrace.aiguard import Message, new_ai_guard_client
 
 client = new_ai_guard_client()
@@ -196,7 +196,7 @@ const answer = await callModel(messages)
 messages.push({ role: 'assistant', content: answer })
 ```
 
-On the blocking path, a `DENY` decision rejects the promise with `AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
+When blocking is enabled, a `DENY` decision rejects the promise with `AIGuardAbortError`, which carries no messages. In that case, AI Guard reports the redacted conversation only on the AI Guard span.
 {{% /tab %}}
 {{% tab "Java" %}}
 <div class="alert alert-info">Sensitive data redaction requires dd-trace-java v1.67.0 or later.</div>
@@ -255,7 +255,7 @@ final String answer = callModel(messages);
 messages.add(AIGuard.Message.message("assistant", answer));
 ```
 
-On the blocking path, a `DENY` decision throws `AIGuard.AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
+When blocking is enabled, a `DENY` decision throws `AIGuard.AIGuardAbortError`, which carries no messages. In that case, AI Guard reports the redacted conversation only on the AI Guard span.
 {{% /tab %}}
 {{% tab "Ruby" %}}
 <div class="alert alert-info">Sensitive data redaction requires dd-trace-rb v2.44.0 or later.</div>
@@ -292,7 +292,7 @@ answer = call_model(messages)
 messages << Datadog::AIGuard.message(role: :assistant, content: answer)
 ```
 
-On the blocking path, a `DENY` decision raises `Datadog::AIGuard::AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
+When blocking is enabled, a `DENY` decision raises `Datadog::AIGuard::AIGuardAbortError`, which carries no messages. In that case, AI Guard reports the redacted conversation only on the AI Guard span.
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -41,7 +41,7 @@ AI Guard sits in the critical path of your agent's model calls, so AI Guard can 
 1. AI Guard returns an `ALLOW` or `DENY` action, with the reason for it. For a `DENY` action, what happens next depends on the enforcement mode in the policy:
 
    - In the default {{< ui >}}Monitor only{{< /ui >}} mode, AI Guard reports the action without blocking the request.
-   - In {{< ui >}}Block unsafe{{< /ui >}} mode, the request is blocked. Integrations stop the call, and the SDK raises an error that your code handles.
+   - In {{< ui >}}Block unsafe{{< /ui >}} mode, AI Guard blocks the request. Integrations stop the call, and the SDK raises an error that your code handles.
 
 1. The Datadog SDK records the evaluation as an AI Guard span. With a retention filter, Datadog keeps every AI Guard span.
 
@@ -55,7 +55,7 @@ AI Guard uses models to detect threats. Model-based detection judges each prompt
 
 Datadog manages the detection models. To adjust how AI Guard applies them to a service, use the controls in a policy, such as evaluation sensitivity and evaluation context.
 
-Each evaluation runs in up to two passes:
+Each evaluation takes up to two passes:
 
 1. A fast classifier screens the conversation. Most evaluations finish in this pass.
 1. If the classifier flags the conversation as suspicious, AI Guard escalates the conversation to a large language model for a deeper assessment.
@@ -64,7 +64,7 @@ Images skip the classifier and always go to the second pass, so image evaluation
 
 Custom rules and sensitive data scanning work differently. Custom rules flag messages that match a keyword or regular expression. Sensitive data scanning uses Sensitive Data Scanner rules to find personally identifiable information and secrets.
 
-### Key concepts: traces, spans, and signals
+### Key concepts: Traces, spans, and signals
 
 Knowing key AI Guard concepts helps you triage signals, evaluate AI Guard decisions, and remediate threats.
 
@@ -145,7 +145,7 @@ Knowing which content AI Guard evaluates helps you predict which parts of a conv
 
 Latency indicates how much time evaluation adds to each model call in your agent.
 
-AI Guard evaluations typically complete in under 100 milliseconds. Latency varies with the size of the conversation and the region where your application runs.
+AI Guard evaluations typically complete in under 100 ms. Latency varies with the size of the conversation and the region where your application runs.
 
 Image evaluation takes longer than text evaluation, because the classifier doesn't support images. Image latency also varies more.
 

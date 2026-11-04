@@ -14,7 +14,7 @@ AI Guard isn't available in the {% region-param key="dd_site_name" /%} site.
 {% /alert %}
 {% /site-region %}
 
-The AI Guard SDK evaluates prompts, model responses, and tool calls at the points in your agent's code that you choose. Use the SDK when no [automatic integration][1] or [manual integration][2] covers your agent's framework, or when you need to control exactly what AI Guard evaluates and when.
+The AI Guard SDK evaluates prompts, model responses, and tool calls at points in your agent's code that you choose. Use the SDK when no [automatic integration][1] or [manual integration][2] covers your agent's framework, or when you need to control exactly what AI Guard evaluates and when.
 
 The AI Guard SDK is part of the Datadog SDK. You call the SDK evaluate method with the conversation so far, and AI Guard returns an action. If the AI Guard policy for the service blocks unsafe requests, the SDK raises an error for a `DENY` action, so your code can stop the request.
 
@@ -49,7 +49,7 @@ For languages that the SDK doesn't support, AI Guard provides an [HTTP API][3]. 
 
 Evaluate messages with the SDK so AI Guard checks each prompt, model response, and tool call before your agent acts on it.
 
-**Before you begin**: [Check prerequisites][4], [Create API and application keys][5], and install a [supported Datadog SDK version](#supported-languages-and-versions) in the application.
+**Before you begin**: [Check prerequisites][4], [create API and application keys][5], and install a [supported Datadog SDK version](#supported-languages-and-versions) in the application.
 
 1. Set these environment variables in the application's environment:
 
@@ -67,7 +67,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
    {% if includes($prog_lang, ["node_js", "java", "ruby"]) %}
    {% alert level="warning" %}
-   If `DD_AI_GUARD_ENABLED` isn't `true`, the SDK doesn't call AI Guard. The evaluate method returns `ALLOW` for every request, so unsafe requests proceed without any evaluation.
+   `DD_AI_GUARD_ENABLED` must be set to `true` for the SDK to call AI Guard. Otherwise, the evaluate method returns `ALLOW` for every request, so unsafe requests proceed without any evaluation.
    {% /alert %}
    {% /if %}
 
@@ -268,10 +268,10 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
 ## Handling evaluation outcomes
 
-Knowing how SDK calls report AI Guard decisions tells your code where to look for decisions and what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
+With context on how SDK calls reported AI Guard decisions, your code can look for those decisions and determine what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
 
-- **The SDK returns an evaluation** when AI Guard allows the request, and when the policy for the service uses {% ui %}Monitor only{% /ui %} mode. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
-- **The SDK raises `AIGuardAbortError`** when AI Guard returns `DENY` and the policy for the service uses {% ui %}Block unsafe{% /ui %} mode. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests with the SDK][11].
+- {% ui %}Monitor only{% /ui %} mode: The SDK returns an **evaluation** when AI Guard allows the request. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
+- {% ui %}Block unsafe{% /ui %} mode: The SDK raises **`AIGuardAbortError`** when AI Guard returns `DENY`. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests with the SDK][11].
 
 ### Evaluation fields
 
