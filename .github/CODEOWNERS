@@ -173,6 +173,8 @@ hugo/content/en/product_analytics/                                              
 hugo/content/en/profiler/                                                                    @DataDog/documentation @DataDog/documentation-observability
 hugo/content/en/real_user_monitoring/                                                        @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/real_user_monitoring/error_tracking/                                         @DataDog/documentation @DataDog/documentation-observability
+hugo/content/en/real_user_monitoring/error_tracking/browser.md                               @DataDog/documentation @DataDog/documentation-dem
+hugo/content/en/real_user_monitoring/error_tracking/mobile/                                  @DataDog/documentation @DataDog/documentation-dem
 hugo/content/en/reference_tables/                                                            @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/remote_configuration/                                                        @DataDog/documentation @DataDog/documentation-csm-platform
 hugo/content/en/security/                                                                    @DataDog/documentation @DataDog/documentation-cloud-sec
@@ -294,11 +296,11 @@ hugo/content/en/tracing/**/*dotnet*                                             
 
 # Mobile SDK
 hugo/content/en/real_user_monitoring/application_monitoring/react_native/setup/              @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/error_tracking/mobile/unity.md                          @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-observability
+hugo/content/en/real_user_monitoring/error_tracking/mobile/unity.md                          @DataDog/rum-mobile @DataDog/documentation @DataDog/documentation-dem
 
 # Browser SDK
 hugo/content/en/real_user_monitoring/guide/                                                  @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
-hugo/content/en/real_user_monitoring/error_tracking/browser.md                               @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-observability
+hugo/content/en/real_user_monitoring/error_tracking/browser.md                               @DataDog/rum-browser @DataDog/documentation @DataDog/documentation-dem
 
 # Synthetic Monitoring, Continuous Testing, Mobile Application Testing
 hugo/content/en/synthetics/*.md                                                              @DataDog/synthetics-app @DataDog/documentation @DataDog/documentation-dem
