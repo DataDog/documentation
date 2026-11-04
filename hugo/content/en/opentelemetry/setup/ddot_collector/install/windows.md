@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector on Windows
+title: Set Up the Collector in the Datadog Agent on Windows
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 5
@@ -11,7 +11,9 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector on Windows-based bare-metal hosts and virtual machines.
+This page was previously titled "Install the DDOT Collector on Windows."
+
+Set up the Collector in the Agent on Windows-based bare-metal hosts and virtual machines. The Collector in the Agent is the OpenTelemetry Collector that runs inside the Datadog Agent.
 
 ## Requirements
 
@@ -30,7 +32,7 @@ To complete this guide, you need the following:
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Collector in the Agent and OpenTelemetry SDK + Collector in the Agent configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Collector in the Agent to process and forward OTLP metrics and logs.</div>
 
 ### Installation
 

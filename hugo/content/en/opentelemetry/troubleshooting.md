@@ -371,5 +371,5 @@ features:
 [13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
 [14]: /opentelemetry/setup/ddot_collector/install/
 [15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
-[16]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[16]: /opentelemetry/setup/ddot_collector/kubernetes/
 [17]: /opentelemetry/setup/otlp_ingest_in_the_agent/
