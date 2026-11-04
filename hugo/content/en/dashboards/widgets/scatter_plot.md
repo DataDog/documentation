@@ -25,7 +25,7 @@ A scatter plot identifies a possible relationship between changes observed in tw
     1. Set X and Y axis controls.
     1. Add a legend to view the datapoints in a list.
     1. Configure units as they display on the graph.
-    1. Add additional [context links][1], which are enabled by default. Context links bridge dashboard widgets with other pages in Datadog or third-party applications.
+    1. Add context links. {{% partial name="dashboards/context-links.html" %}}
 1. Choose whether your widget has a custom time frame or the dashboard's global time frame.
 1. Give your graph a title or leave the box blank for the suggested title.
 
@@ -88,7 +88,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/context-links/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
 [4]: https://app.datadoghq.com/dashboard/

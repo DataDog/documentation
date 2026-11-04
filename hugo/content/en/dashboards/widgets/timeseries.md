@@ -146,6 +146,8 @@ For timeboards, legends display automatically when a dashboard is set to L or XL
 
 ### Context links
 
+{{% partial name="dashboards/context-links.html" %}}
+
 To add a context link in the dropdown menu that appears when you click in a dashboard widget, click {{< ui >}}Add a Context Link{{< /ui >}} in the {{< ui >}}Context Links{{< /ui >}} section.
 
 For more information about editing and deleting context links, see [Context Links][10].

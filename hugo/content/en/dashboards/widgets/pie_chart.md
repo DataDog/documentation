@@ -47,7 +47,7 @@ By default, the {{< ui >}}Automatic{{< /ui >}} option shows a labeled Aside lege
 
 ### Context links
 
-[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+{{% partial name="dashboards/context-links.html" %}}
 
 ## Display and interaction
 
@@ -83,7 +83,6 @@ Like the pie chart widget, the [treemap][8] can also be used to display nested p
 [1]: /dashboards/querying
 [2]: /logs/explorer/search_syntax/
 [3]: /dashboards/functions/
-[4]: /dashboards/guide/context-links/
 [5]: /dashboards/widgets/#full-screen
 [6]: /api/latest/dashboards/
 [7]: /dashboards/graphing_json/widget_json/

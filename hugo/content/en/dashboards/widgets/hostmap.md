@@ -66,7 +66,7 @@ DDSQL mode maps the columns of a published dataset to the host map's visualizati
 
 #### Context links
 
-[Context links][2] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
+{{% partial name="dashboards/context-links.html" %}}
 
 ## API
 
@@ -79,7 +79,6 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /infrastructure/hostmap/
-[2]: /dashboards/guide/context-links/
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/
 [5]: /ddsql_editor/

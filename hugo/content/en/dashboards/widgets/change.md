@@ -49,7 +49,7 @@ The Change graph shows you the change in a metric over a period of time. It comp
 
 #### Context links
 
-[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+{{% partial name="dashboards/context-links.html" %}}
 
 ## API
 
@@ -61,7 +61,6 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/context-links/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
 [6]: /monitors/types/metric/?tab=change

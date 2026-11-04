@@ -58,7 +58,7 @@ The widget displays the difference below the primary metric, helping highlight r
 
 #### Context links
 
-[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+{{% partial name="dashboards/context-links.html" %}}
 
 #### Global time
 
@@ -80,7 +80,6 @@ This widget can be used with the **[Dashboards API][5]**. See the following tabl
 [1]: /dashboards/querying/#overview
 [2]: /tracing/trace_explorer/query_syntax/#search-bar
 [3]: /logs/search_syntax/
-[4]: /dashboards/guide/context-links/
 [5]: /api/latest/dashboards/
 [6]: /dashboards/graphing_json/widget_json/
 [7]: https://en.wikipedia.org/wiki/Law_of_large_numbers

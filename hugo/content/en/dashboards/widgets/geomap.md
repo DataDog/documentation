@@ -86,7 +86,7 @@ You can also:
 
 #### Context links
 
-[Context links][7] are enabled by default, you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog, or third-party).
+{{% partial name="dashboards/context-links.html" %}}
 
 #### Visual formatting rules
 

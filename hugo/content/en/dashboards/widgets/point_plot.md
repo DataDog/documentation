@@ -51,7 +51,7 @@ When cross-widget highlighting is enabled, hovering over a datapoint highlights 
 
 #### Context links
 
-[Context links][2] are enabled by default and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog or third-party applications, so you can pivot from a point plot directly into the relevant trace, log, or query.
+{{% partial name="dashboards/context-links.html" %}} Use context links to pivot from a point plot directly into the relevant trace, log, or query.
 
 #### Global time
 
@@ -84,6 +84,5 @@ This widget can be used with the **[Dashboards API][3]**. See the following tabl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/timeseries/
-[2]: /dashboards/guide/context-links/
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

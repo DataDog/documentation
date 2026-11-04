@@ -36,7 +36,7 @@ Configure units as they display in the grid and tooltips.
 
 #### Context links
 
-[Context links][1] are enabled by default; you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog or third-party).
+{{% partial name="dashboards/context-links.html" %}}
 
 <!-- ## API
 
@@ -48,6 +48,5 @@ This widget can be used with the **[Dashboards API][2]**. See the following tabl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/guide/context-links/
 [2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/

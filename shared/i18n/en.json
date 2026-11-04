@@ -327,5 +327,8 @@
   },
   "home_enablement_banner_cta": {
     "other": "View Sessions >"
+  },
+  "context_links_description": {
+    "other": "<a href=\"{{ .URL }}\">Context links</a> are enabled by default, and you can toggle them on or off. Context links connect dashboard widgets with other pages in Datadog or in third-party applications."
   }
 }

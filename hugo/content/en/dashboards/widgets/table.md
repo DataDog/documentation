@@ -50,7 +50,7 @@ Customize the visualization of cell values for each column with Column Formattin
 
 #### Context links
 
-[Context links][10] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+{{% partial name="dashboards/context-links.html" %}}
 
 ## N/A values
 
@@ -83,6 +83,5 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [7]: /dashboards/guide/apm-stats-graph
 [8]: /api/latest/dashboards/
 [9]: /dashboards/graphing_json/widget_json/
-[10]: /dashboards/guide/context-links/
 [11]: /dashboards/querying/#advanced-graphing
 [12]: /dashboards/widgets/configuration/#export-widget-data-to-csv
