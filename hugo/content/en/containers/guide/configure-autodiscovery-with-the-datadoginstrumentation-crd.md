@@ -42,10 +42,11 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-To use `DatadogInstrumentation` (DDI), a controller in your Agent must be enabled to track and reconcile each CR.
+With Datadog Operator **v1.30+** or Datadog Helm chart **v3.241.0+**, the `DatadogInstrumentation` controller is enabled by default and requires no additional setup.
 
-<div class="alert alert-info">Skip setup if you're using <code>v1.30+</code> of the Datadog Operator or <code>v3.241.0+</code> of the Datadog Helm Chart since the
-controller is enabled by default starting from these versions.</div>
+{{% collapse-content title="Legacy setup (Operator < v1.30 or Helm chart < v3.241.0)" level="h3" expanded=false id="legacy-setup" %}}
+
+For earlier versions, enable the DDI controller with the following steps.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -109,6 +110,8 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% /collapse-content %}}
 
 Make sure the `DatadogInstrumentation` CRD is installed before creating resources:
 
