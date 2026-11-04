@@ -70,7 +70,7 @@ The connection allows the configuration update to take effect online. For detail
 
 ### Step 2: Create the Datadog user and grant access
 
-Create a dedicated `datadog` user in the operating system or authentication provider used by Db2. Connect as an administrator to each database you want to monitor, and grant access to the monitoring functions:
+Create a dedicated `datadog` user in the operating system or authentication provider used by Db2. Connect to each database you want to monitor as a user with `ACCESSCTRL` or `SECADM` authority, and grant access to the monitoring functions:
 
 ```sql
 GRANT CONNECT ON DATABASE TO USER datadog;
@@ -86,16 +86,21 @@ These grants do not require access to application data. Users with `DATAACCESS`,
 
 #### Restrictive databases
 
-On databases created with `RESTRICTIVE`, also grant workload usage and access to the IBM CLI packages:
+Databases created with `RESTRICTIVE` do not grant workload usage or IBM CLI package access to `PUBLIC`. On these databases, also grant workload usage to the `datadog` user:
 
 ```sql
 GRANT USAGE ON WORKLOAD SYSDEFAULTUSERWORKLOAD TO USER datadog;
-GRANT EXECUTE ON PACKAGE NULLID.SYSSH200 TO USER datadog;
-GRANT EXECUTE ON PACKAGE NULLID.SYSSH100 TO USER datadog;
-GRANT EXECUTE ON PACKAGE NULLID.SYSSN200 TO USER datadog;
 ```
 
-Package names can vary with the installed IBM client. Grant access to the packages used by the Agent's driver.
+The Agent's IBM driver runs SQL through the CLI packages in the `NULLID` schema. Package names vary with the IBM client version, so generate a grant for each installed CLI package:
+
+```sql
+SELECT 'GRANT EXECUTE ON PACKAGE NULLID.' || TRIM(PKGNAME) || ' TO USER datadog;'
+  FROM SYSCAT.PACKAGES
+  WHERE PKGSCHEMA = 'NULLID';
+```
+
+Run the generated `GRANT` statements. If the Agent log reports `SQL0551N` for a `NULLID` package, grant `EXECUTE` on the package named in the error.
 
 ### Securely store your password
 
