@@ -44,7 +44,7 @@ If the values are set but scans still fail, verify your keys have the correct pe
 
 ## Custom SAST rule not saved
 
-Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KEY` and `DD_APP_KEY`. See [Authentication errors](#authentication-errors).
+Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KEY` and `DD_APP_KEY`. See the [Authentication errors](#authentication-errors) section.
 
 If the rule does not report the expected number of findings on its two examples, or fails on them, nothing is saved. If the error says an example was not scanned, rename the example file so its extension matches the rule's language, for example `.ts` for `TYPESCRIPT`. Otherwise, fix the rule and retry.
 
