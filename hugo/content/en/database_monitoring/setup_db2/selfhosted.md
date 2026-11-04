@@ -51,17 +51,17 @@ Database Monitoring collects the following data from IBM Db2:
 
 As the Db2 instance administrator, enable the monitor switches described in the IBM Db2 integration's [Enable monitoring instructions][1].
 
-In each monitored database, check the activity and request metrics settings:
+In each monitored database, check the activity and request metrics settings. Replace `<DB_NAME>` with the name of the database you want to monitor:
 
 ```shell
-db2 get db cfg for <DB> | grep -i MON_
+db2 get db cfg for <DB_NAME> | grep -i MON_
 ```
 
 `MON_ACT_METRICS` and `MON_REQ_METRICS` must be `BASE` or `EXTENDED`. The Db2 default is `BASE`. If either setting is `NONE`, connect to the database as an administrator and set both to `BASE`:
 
 ```shell
-db2 connect to <DB>
-db2 UPDATE DB CFG FOR <DB> USING MON_ACT_METRICS BASE MON_REQ_METRICS BASE
+db2 connect to <DB_NAME>
+db2 UPDATE DB CFG FOR <DB_NAME> USING MON_ACT_METRICS BASE MON_REQ_METRICS BASE
 ```
 
 The connection allows the configuration update to take effect online. Execution counts include coordinator executions recorded with activity metrics, controlled by `MON_ACT_METRICS`.
@@ -148,7 +148,7 @@ instances:
   - dbm: true
     host: db2-a.example.com
     port: 50000
-    db: <DB>
+    db: <DB_NAME>
     username: datadog
     password: "ENC[datadog_user_database_password]"
     service: <SERVICE>
@@ -160,7 +160,7 @@ instances:
   - dbm: true
     host: db2-b.example.com
     port: 50000
-    db: <DB>
+    db: <DB_NAME>
     username: datadog
     password: "ENC[datadog_user_database_password]"
     service: <SERVICE>
