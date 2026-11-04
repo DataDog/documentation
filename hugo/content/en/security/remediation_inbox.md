@@ -134,8 +134,6 @@ To route remediation work items to Jira, ServiceNow, or Linear, configure the th
 
 <!-- TODO: confirm which third-party coding agents are supported -->
 
-<div class="alert alert-info">AI remediation is available for Software Composition Analysis and Cloud Security Vulnerabilities remediations.</div>
-
 From the side panel, click **Remediate with AI** and choose one of the following:
 
 - **Fix with Bits Code**: [Bits Code][6] opens a code session on the repository and prepares a pull request. When the session starts, Datadog attaches it to the remediation work item.
