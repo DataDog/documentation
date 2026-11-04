@@ -307,7 +307,7 @@ datadog-code-security-mcp setup
 
 `dd-codesec-setup-toolchain` covers the wrapper CLI and `datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-iac-scanner`, and `datadog-security-cli`.
 
-`dd-codesec-find-security-variants` asks you to confirm the invariant before it searches, and saves a rule only after you approve it.
+`dd-codesec-find-security-variants` asks you to confirm what the fix protects against before it searches and saves a rule only after you approve it.
 
 The `setup` command installs skills into `~/.agents/skills`, the shared directory used by Cursor and other clients that follow the Agent Skills convention. It also installs into `~/.claude/skills` (or `$CLAUDE_CONFIG_DIR/skills`) and `~/.codex/skills` when it detects Claude Code or Codex. Restart updated clients after setup.
 
