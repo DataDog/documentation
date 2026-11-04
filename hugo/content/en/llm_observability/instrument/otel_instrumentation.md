@@ -79,7 +79,7 @@ OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=llmob
 OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
 ```
 
-Replace `<YOUR_API_KEY>` with your [Datadog API key][2]. Add `dd_llmobs_enabled=true` to any existing `OTEL_RESOURCE_ATTRIBUTES` values. The `dd-otlp-source=llmobs` header identifies the source; it does not enable conversion. See [Enabling LLM Observability conversion](#enabling-llm-observability-conversion).
+Replace `<YOUR_API_KEY>` with your [Datadog API key][2]. Add `dd_llmobs_enabled=true` to any existing `OTEL_RESOURCE_ATTRIBUTES` values. The `dd-otlp-source=llmobs` header identifies the source but doesn't enable conversion. See [Enabling LLM Observability conversion](#enabling-llm-observability-conversion).
 
 If your framework previously supported a pre-1.37 OpenTelemetry specification version, you also need to set:
 
@@ -634,7 +634,7 @@ This section provides the mappings from OpenTelemetry GenAI semantic conventions
 
 ### Trace eligibility
 
-A trace qualifies for routing when at least one span carries an attribute below. Also [enable conversion](#enabling-llm-observability-conversion) unless it is already enabled for your organization.
+A trace is eligible for conversion when at least one span has one of the following attributes. You must also [enable conversion](#enabling-llm-observability-conversion).
 
 | Attribute | Requirement |
 |-----------|-------------|
@@ -645,27 +645,27 @@ A trace qualifies for routing when at least one span carries an attribute below.
 | `langfuse.observation.type` | Non-empty value |
 | `tfy.span_type` | Non-empty value (TrueFoundry AI Gateway) |
 
-Claude exports also qualify for routing through these source markers:
+Agent Observability also accepts Claude traces that match any of the following:
 
 - Span names starting with `claude_code.`
 - Instrumentation scope `com.anthropic.claude-platform`
 - Instrumentation scope starting with `com.anthropic.sdk.` and a non-empty suffix
 
-Source recognition alone does not guarantee that every span can be mapped.
+Some spans in these traces may not map to Agent Observability fields. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings).
 
-Within an eligible trace, conversion retains spans with `gen_ai.*` attributes or a non-empty `openinference.span.kind`, `langfuse.observation.type`, or `tfy.span_type`. Other context spans can be omitted.
+In a trace that qualifies, Agent Observability keeps only spans that have `gen_ai.*` attributes or a non-empty `openinference.span.kind`, `langfuse.observation.type`, or `tfy.span_type`. It drops all other spans.
 
-### Additional compatibility
+### Framework-specific compatibility
 
 | Instrumentation | Compatibility notes |
 |-----------------|---------------------|
-| TrueFoundry AI Gateway | Native `tfy.*` attributes support span kind, model/provider, token usage, cost, and I/O mapping without requiring `gen_ai.*` attributes. |
+| TrueFoundry AI Gateway | Native `tfy.*` attributes support span kind, model, provider, token usage, cost, and I/O mapping without requiring `gen_ai.*` attributes. |
 | Older GenAI conventions | Deprecated attributes and pre-1.30 message events are supported. See [Input and output messages](#input-and-output-messages). |
 | Vercel AI SDK legacy telemetry | Selected model-call spans identified by `ai.operationId` have I/O mappings. This differs from the [Cloudflare wrapper example](#using-cloudflare-agents), which emits GenAI attributes. |
-| LiteLLM, Google ADK, Logfire/OpenAI Agents, and Claude Code | Compatibility handling includes inference of span kinds for selected legacy span formats. Contact [Datadog support][4] to confirm enablement before relying on this inference. |
-| Strands and Spring AI/Micrometer | Compatibility handling includes Strands provider/model parsing and Spring AI/Micrometer string-valued numeric attributes and structured message content. |
+| LiteLLM, Google ADK, Logfire instrumentation for OpenAI Agents, and Claude Code | Agent Observability can infer span kinds for some legacy span formats. This inference requires enablement for your organization. Contact [Datadog support][4] to confirm access. |
+| Strands and Spring AI (through Micrometer) | For Strands, Agent Observability parses provider and model names. For Spring AI through Micrometer, it supports numeric attributes sent as strings and structured message content. |
 
-Routing eligibility, span kind inference, and field mapping are separate. Legacy Vercel span kind inference also requires enablement; contact [Datadog support][4]. Prefer supported GenAI operation names when the instrumentation can emit them.
+Span kind inference for legacy Vercel AI SDK spans requires enablement for your organization. Contact [Datadog support][4] to confirm access. If your instrumentation can send supported `gen_ai.operation.name` values, use them instead of relying on span kind inference.
 
 If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
 
@@ -1238,11 +1238,11 @@ For the complete list of supported attributes and their specifications, see the 
 
 ## Enabling LLM Observability conversion
 
-To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute so every exported span carries the opt-in. Setting it on an individual span also enables eligible spans in the same received payload, but may miss other fragments of a large trace. Explicit opt-outs take precedence over organization enablement under the standard conversion policy.
+To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute so that every exported span includes it. If you set the attribute on a single span instead, large traces might be only partially converted. Under the standard conversion policy, an explicit `dd_llmobs_enabled=false` overrides organization enablement.
 
 ### Using an export header
 
-For OTLP HTTP exports directly to Datadog, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`, alongside the API key. Datadog applies the opt-in to every span in protobuf and JSON exports. An explicit opt-out in span or resource attributes takes precedence over the header. Set this header on telemetry exports to Datadog, not on model API requests.
+If you export over OTLP HTTP directly to Datadog, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. The header sets opt-in for every span in the export. Under the standard conversion policy, setting `dd_llmobs_enabled=false` on a span or resource overrides the header. Add this header only to trace exports sent to Datadog, not to requests sent to your model provider.
 
 ### Using environment variables
 
