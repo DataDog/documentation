@@ -114,14 +114,14 @@ For Python, Node.js, or Java, follow the language-specific setup in the [automat
 
 ## Instrument prompts
 
-See [Integrate Prompt Management][7] for prompt instrumentation instructions. You can use an existing managed prompt or promote a local prompt. Keep the local prompt as a fallback.
+See [Configure Prompt Management][7] for prompt instrumentation instructions. You can use an existing managed prompt or promote a local prompt. Keep the local prompt as a fallback.
 
 Follow [Track prompt usage][6] to choose between automatic tracking and explicit annotations.
 
 {{< agent-only >}}
 After reporting the instrumentation results:
 
-- If the user supplied a Datadog managed prompt ID, follow the [Prompt Management integration guide](/llm_observability/instrument/prompt_management.md). Do not ask whether to enable it again.
+- If the user supplied a Datadog managed prompt ID, follow the [Prompt Management guide](/llm_observability/configure/prompt_management.md). Do not ask whether to enable it again.
 - Otherwise, identify the Python or Node.js application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to promote the selected prompts and integrate runtime retrieval.
 - If the user declines or does not answer, leave the instrumented local prompts unchanged.
 - If Prompt Management requires an SDK update, explain why and ask before changing the dependency. This optional update must not delay core instrumentation or context sharing.
@@ -240,8 +240,8 @@ Provide a direct application link using the supplied or inferred application nam
 [2]: /llm_observability/instrument/sdk/
 [3]: /llm_observability/instrument/api/
 [4]: /llm_observability/instrument/otel_instrumentation/
-[6]: /llm_observability/instrument/prompt_management/#track-prompt-usage
-[7]: /llm_observability/instrument/prompt_management/
+[6]: /llm_observability/configure/prompt_management/#track-prompt-usage
+[7]: /llm_observability/configure/prompt_management/
 [8]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [9]: /getting_started/site/
 [10]: /llm_observability/instrument/sdk/#application-naming-guidelines
