@@ -869,7 +869,7 @@ Starting with Agent version 7.84.0, if a file matches a log source but is not ta
 
 ### Collect logs from SMB/CIFS and Azure Files mounts
 
-This feature requires Agent version 7.84.4 or above.
+This feature requires Agent version 7.84.4 and Linux Kernel version 7 or above.
 
 On Linux, the SMB/CIFS client can return cached content for a file after the file was rotated on the file share. On these mounts, file fingerprinting alone can read the previous file's content, miss the rotation, and send the same logs again. For log files on SMB/CIFS mounts, including Azure Files, enable the `unreliable_mount` profile.
 
@@ -939,7 +939,7 @@ When the profile is enabled:
 For best results on SMB/CIFS mounts:
 - Use a wildcard in `path`, even for a single file. For example, use `/mnt/share/logs/*.log`, or `/mnt/share/logs/[a]pp.log` to match only `app.log`. Avoid patterns such as `app.log*` that also match rotated files.
 - If your workload allows it, mount the file share with the `cache=none` option. Mount options apply to new mounts only. On Kubernetes, add the option to the `mountOptions` of the StorageClass or PersistentVolume, then recreate the pods that use the volume.
-- Make sure the Agent user can read the log files directly. Fingerprint reads in this profile do not use system-probe privileged log access (`privileged_logs.enabled`), so files that the Agent can read only through system-probe are not collected.
+- Make sure the Agent user can read the log files directly.
 
 **Notes**:
 - Each rotation pauses collection of the new file for at least 30 seconds. If a file is rotated again before the Agent finishes reading the previous file, the Agent does not read it.
