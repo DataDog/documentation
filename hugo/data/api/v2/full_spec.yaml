@@ -21576,11 +21576,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         offering_class:
           description: The offering class of the Reserved Instance.
@@ -21602,14 +21604,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21643,11 +21645,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21661,14 +21665,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21705,11 +21709,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21723,14 +21729,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21756,9 +21762,18 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        instance_type_family:
+          description: |-
+            The EC2 instance family covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: m5
+          type: string
         purchase_option:
           description: The payment option for the Savings Plan.
           example: All Upfront
+          type: string
+        region:
+          description: The AWS region covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: us-east-1
           type: string
         savings_plan_type:
           description: The Savings Plan type.
@@ -21768,14 +21783,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21803,18 +21818,24 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        savings_plan_type:
+          description: |-
+            The Azure Savings Plan type, `Compute` or `Database`, based on the product order name. Omitted when
+            the type can't be classified.
+          example: Compute
+          type: string
         start_date:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21844,6 +21865,10 @@ components:
           description: The Azure meter sub-category for the reservation.
           example: D4s v3
           type: string
+        product:
+          description: The Azure product of the reservation. Omitted when it cannot be classified.
+          example: VirtualMachines
+          type: string
         region:
           description: The Azure region of the Reserved Instance.
           example: eastus
@@ -21854,14 +21879,14 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/CommitmentsAzureVMRIStatus"
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21939,17 +21964,58 @@ components:
       properties:
         committed_spend_unit:
           $ref: "#/components/schemas/CommitmentsUnit"
+        unused_cost_unavailable:
+          description: |-
+            Whether Azure cost data lacks the unused cost of some commitments, for example when an export is
+            scoped below the billing profile. When `true`, utilization is overstated.
+          example: true
+          type: boolean
       type: object
     CommitmentsListResponse:
       description: Response containing a list of cloud commitment details.
+      properties:
+        data:
+          $ref: "#/components/schemas/CommitmentsListResponseData"
+      required:
+        - data
+      type: object
+    CommitmentsListResponseAttributes:
+      description: Attributes of a commitments list response.
       properties:
         commitments:
           $ref: "#/components/schemas/CommitmentsListItems"
         meta:
           $ref: "#/components/schemas/CommitmentsListMeta"
+        query_definition:
+          $ref: "#/components/schemas/CommitmentsQueryDefinition"
       required:
         - commitments
       type: object
+    CommitmentsListResponseData:
+      description: The commitments list resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CommitmentsListResponseAttributes"
+        id:
+          description: The identifier of the commitments list response.
+          example: commitments_list_response
+          type: string
+        type:
+          $ref: "#/components/schemas/CommitmentsListResponseType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CommitmentsListResponseType:
+      default: commitments_list_response
+      description: Type of the commitments list response resource.
+      enum:
+        - commitments_list_response
+      example: commitments_list_response
+      type: string
+      x-enum-varnames:
+        - COMMITMENTS_LIST_RESPONSE
     CommitmentsOnDemandHotspotsScalarMeta:
       description: Metadata for the on-demand hot-spots scalar response.
       properties:
@@ -21983,6 +22049,90 @@ components:
       x-enum-varnames:
         - AWS
         - AZURE
+    CommitmentsQueryDefinition:
+      description: |-
+        The query that produces the response values, in the same format as dashboard and notebook widget
+        requests, so a client can graph the values in a widget. Each formula's `id` names the response value
+        that it produces.
+      properties:
+        formulas:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionFormulas"
+        queries:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionQueries"
+      required:
+        - formulas
+        - queries
+      type: object
+    CommitmentsQueryDefinitionAggregator:
+      description: The reducer a scalar widget applies to the query.
+      enum:
+        - sum
+        - avg
+        - min
+        - max
+      example: sum
+      type: string
+      x-enum-varnames:
+        - SUM
+        - AVG
+        - MIN
+        - MAX
+    CommitmentsQueryDefinitionDataSource:
+      description: The data source of the query.
+      enum:
+        - cloud_cost
+        - metrics
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+        - CLOUD_COST
+        - METRICS
+    CommitmentsQueryDefinitionFormula:
+      description: A formula of a query definition.
+      properties:
+        formula:
+          description: The formula expression over the named queries.
+          example: used / (used + unused) * 100
+          type: string
+        id:
+          description: The name of the response value the formula produces.
+          example: utilization
+          type: string
+      required:
+        - formula
+        - id
+      type: object
+    CommitmentsQueryDefinitionFormulas:
+      description: The formulas of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionFormula"
+      type: array
+    CommitmentsQueryDefinitionQueries:
+      description: The metric queries of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionQuery"
+      type: array
+    CommitmentsQueryDefinitionQuery:
+      description: A metric query of a query definition.
+      properties:
+        aggregator:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionAggregator"
+        data_source:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionDataSource"
+        name:
+          description: The name formulas use to reference the query.
+          example: used
+          type: string
+        query:
+          description: The metric query.
+          example: "sum:aws.cost.amortized{aws_cost_type:SavingsPlanCoveredUsage}.rollup(sum, daily)"
+          type: string
+      required:
+        - aggregator
+        - data_source
+        - name
+        - query
+      type: object
     CommitmentsSavingsScalarResponse:
       description: Response containing scalar savings metrics for cloud commitment programs.
       properties:
@@ -163347,17 +163497,24 @@ paths:
               examples:
                 default:
                   value:
-                    commitments:
-                      - commitment_id: ri-0123456789abcdef0
-                        expiration_date: "2025-12-31T00:00:00Z"
-                        instance_type: m5.xlarge
-                        offering_class: standard
-                        operating_system: Linux
-                        purchase_option: All Upfront
-                        region: us-east-1
-                        start_date: "2023-01-01T00:00:00Z"
-                        term_length: 1
-                        utilization: 0.85
+                    data:
+                      attributes:
+                        commitments:
+                          - availability_zone: us-east-1a
+                            commitment_id: ri-0123456789abcdef0
+                            expiration_date: "2025-12-31T00:00:00Z"
+                            instance_type: m5.xlarge
+                            number_of_nfus: 4
+                            number_of_reservations: 1
+                            offering_class: standard
+                            operating_system: Linux
+                            purchase_option: All Upfront
+                            region: us-east-1
+                            start_date: "2024-12-31T00:00:00Z"
+                            term_length_months: 12
+                            utilization: 85.5
+                      id: commitments_list_response
+                      type: commitments_list_response
               schema:
                 $ref: "#/components/schemas/CommitmentsListResponse"
           description: OK
