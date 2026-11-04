@@ -13,7 +13,7 @@ further_reading:
 
 Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. You don't need the Datadog Agent.
 
-Already run the upstream OpenTelemetry Collector? [Switch it to the DDOT Collector](#switch-an-existing-collector) by changing its image.
+Already run the upstream OpenTelemetry Collector? To switch it to the DDOT Collector by changing its image, see [Migrate to the DDOT Collector][72].
 
 ## Requirements
 
@@ -34,99 +34,6 @@ Already run the upstream OpenTelemetry Collector? [Switch it to the DDOT Collect
 |:---------|:----------|-----:|
 | gRPC     | TCP       | 4317 |
 | HTTP     | TCP       | 4318 |
-
-## Switch an existing Collector {#switch-an-existing-collector}
-
-If you run the upstream OpenTelemetry Collector on Kubernetes, switch it to the DDOT Collector by changing its container image. You keep your pipeline configuration. To switch back, restore the original image.
-
-### Before you switch
-
-1. Check that the DDOT Collector includes every component your configuration uses. Compare the receivers, processors, exporters, connectors, and extensions in your configuration with the [included components][71]. If your configuration uses a component that the DDOT Collector doesn't include, the Collector doesn't start.
-1. Set `DD_HOSTNAME` in the Collector's environment, as described in [Configure the Collector](#configure-the-collector). DDOT Collector versions before 7.85.0 can exit when they can't detect a hostname.
-1. **[Placeholder: Which other settings does the DDOT Collector image need that the upstream image doesn't, such as `DD_API_KEY`, `DD_SITE`, or `DD_OTELCOLLECTOR_CONVERTER_FEATURES`? Does a `command.name` override in Collector chart values need to change?]**
-
-### Change the image
-
-{{< tabs >}}
-{{% tab "Operator" %}}
-In your `OpenTelemetryCollector` resource, set `spec.image`. This changes only this Collector:
-
-```yaml
-apiVersion: opentelemetry.io/v1beta1
-kind: OpenTelemetryCollector
-metadata:
-  name: <COLLECTOR_NAME>
-spec:
-  image: datadog/ddot-collector:{{< version key="agent_version" >}}
-```
-
-Apply the change:
-
-```shell
-kubectl apply -f <COLLECTOR_FILE>
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-In your Collector chart values file, set `image.repository` and `image.tag`:
-
-```yaml
-image:
-  repository: datadog/ddot-collector
-  tag: {{< version key="agent_version" >}}
-```
-
-Upgrade the release. Set `--version` to the chart version you already run, so the upgrade changes only the image:
-
-```shell
-helm upgrade <RELEASE_NAME> open-telemetry/opentelemetry-collector \
-  --version <CHART_VERSION> -f <VALUES_FILE>
-```
-{{% /tab %}}
-{{% tab "Kube-stack" %}}
-In your `opentelemetry-kube-stack` values file, set the Operator's default Collector image:
-
-```yaml
-opentelemetry-operator:
-  manager:
-    collectorImage:
-      repository: datadog/ddot-collector
-      tag: {{< version key="agent_version" >}}
-```
-
-This image applies to every Collector in the release that doesn't set its own `image`.
-
-Upgrade the release. Set `--version` to the chart version you already run, so the upgrade changes only the image:
-
-```shell
-helm upgrade <RELEASE_NAME> open-telemetry/opentelemetry-kube-stack \
-  --version <CHART_VERSION> -f <VALUES_FILE>
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">For FED, use the tag <code>{{< version key="agent_version" >}}-fips</code> for the FIPS-compliant DDOT image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
-{{% /site-region %}}
-
-### Check the switch
-
-1. Wait for the new pods to run. Replace `<DAEMONSET_NAME>` with the name of your Collector's DaemonSet:
-
-   ```shell
-   kubectl rollout status daemonset/<DAEMONSET_NAME> --timeout=5m
-   ```
-
-1. Check that the pods run the DDOT Collector image:
-
-   ```shell
-   kubectl get daemonset <DAEMONSET_NAME> -o jsonpath='{.spec.template.spec.containers[0].image}'
-   ```
-
-1. Check that your data reaches Datadog, as described in [Verify the setup](#verify-the-setup). If the pods don't start, see [Troubleshooting](#troubleshooting).
-
-### Switch back
-
-Restore the image you used before, and apply the change the same way: with `kubectl apply` for the Operator, or `helm upgrade` for a Helm chart. For the Operator, you can also remove `spec.image` to use the Operator's default image. Settings you added for the DDOT Collector, such as `DD_HOSTNAME`, can stay.
 
 ## Install the DDOT Collector
 
@@ -967,7 +874,7 @@ kubectl describe secret datadog-secret
 
 ### The Collector pod exits with `unable to reliably determine the host name`
 
-Check that `DD_HOSTNAME` is set, as described in [Configure the Collector](#configure-the-collector). Collector versions before 7.85.0 can exit with this error when they can't detect a hostname.
+Check that `DD_HOSTNAME` is set, as described in [Configure the Collector](#configure-the-collector). The Collector exits with this error when it can't detect a hostname, such as on a node without cloud provider metadata.
 
 ### No data in Datadog
 
@@ -1052,4 +959,4 @@ If you also installed the Datadog Agent, remove the `DatadogAgent` resource and 
 [67]: /opentelemetry/config/hostname_tagging/
 [68]: /opentelemetry/compatibility/
 [70]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#baseline
-[71]: /opentelemetry/setup/ddot_collector/#opentelemetry-collector-components
+[72]: /opentelemetry/migrate/upstream_to_ddot_collector/

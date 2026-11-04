@@ -10,4 +10,5 @@ aliases:
 {{< nextlink href="/opentelemetry/migrate/migrate_operation_names" >}}Migrate to New Operation Name Mappings{{< /nextlink >}}
 {{< nextlink href="/opentelemetry/migrate/ddot_collector" >}}Migrate to the Agent's Collector
 {{< /nextlink >}}
+{{< nextlink href="/opentelemetry/migrate/upstream_to_ddot_collector" >}}Migrate to the DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}
