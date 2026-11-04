@@ -217,6 +217,7 @@ The example values read `DD_API_KEY` from a Kubernetes Secret named `datadog-sec
    - Adapt the `DD_API_KEY` secret reference if you don't use the example `datadog-secret` Kubernetes Secret.
    - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][3].
    - Review the remaining pod settings, including resource requests and limits. For all supported values, see the [OpenTelemetry Collector Helm chart values][9].
+   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
 2. In [`collector-config-values.yaml`][10]:
    - Review the OpenTelemetry Collector pipelines and Datadog export configuration.
    - Adapt it like any other [OpenTelemetry Collector configuration][11].
@@ -225,6 +226,24 @@ The example values read `DD_API_KEY` from a Kubernetes Secret named `datadog-sec
    - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy-values.yaml`][13] instead.
 
 If your cluster doesn't enforce NetworkPolicy resources, these values don't restrict egress. Use your cluster's supported network controls instead.
+
+**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, set `presets.resourceDetection.enabled: true` in [`collector-values.yaml`][7] and enable the detector you need:
+
+- **Explicit**: Set `presets.resourceDetection.env.enabled: true`, and set the `OTEL_RESOURCE_ATTRIBUTES` environment variable under `extraEnvs` to `k8s.cluster.name=<CLUSTER_NAME>`.
+- **Automatic**: Enable the `eks`, `aks`, or `gcp` detector. The preset enables `k8s.cluster.name` for these detectors.
+
+Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][22] to enable one.
+
+**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][23] and [usage details][24].
+
+To send them, set the Collector metrics level to `normal` in your Collector configuration:
+
+```yaml
+service:
+  telemetry:
+    metrics:
+      level: normal
+```
 
 **Deploy**:
 
@@ -288,12 +307,31 @@ The example manifests read `DD_API_KEY` from a Kubernetes Secret named `datadog-
    - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][3].
    - Review the resource requests and limits under `spec.resources`.
    - Review the OpenTelemetry Collector configuration under `spec.config`. Adapt it like any other [OpenTelemetry Collector configuration][11].
+   - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
 3. Choose a network policy manifest:
    - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy.yaml`][17] by default.
    - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy.yaml`][18] instead.
    - If you change the namespace or `OpenTelemetryCollector` name, update the policy metadata and pod selectors.
 
 If your cluster doesn't enforce NetworkPolicy resources, these manifests don't restrict egress. Use your cluster's supported network controls instead.
+
+**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, uncomment a detector and its configuration under `resourcedetection` in [`collector.yaml`][15]:
+
+- **Explicit**: Uncomment the `env` detector, and uncomment the `OTEL_RESOURCE_ATTRIBUTES` environment variable in `spec.env`, set to `k8s.cluster.name=<CLUSTER_NAME>`.
+- **Automatic**: Uncomment the `eks`, `aks`, or `gcp` detector and its configuration block.
+
+Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][22] to enable one.
+
+**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][23] and [usage details][24].
+
+To send them, set the Collector metrics level to `normal` in your Collector configuration:
+
+```yaml
+service:
+  telemetry:
+    metrics:
+      level: normal
+```
 
 **Deploy**:
 
@@ -354,24 +392,37 @@ Most bundled deployments don't need these settings. Use them to expose Full-Host
 
 #### Health metrics
 
-| Name                                  | Values | Default          | Description                                                                                                                                      |
-|:---------------------------------------|:-------|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `hostprofiler.health_metrics.enabled` | bool   | `true`            | Sends internal Full-Host Profiler health metrics to Datadog.                                                                                     |
-| `hostprofiler.health_metrics.target`  | string | `127.0.0.1:8889`  | Address used for the Full-Host Profiler internal Prometheus metrics endpoint. Change this only if the default address conflicts with another service. |
+| Name                                  | Values | Default          | Description |
+|:--------------------------------------|:-------|:-----------------|:------------|
+| `hostprofiler.health_metrics.enabled` | bool   | `false`          | Sends internal Full-Host Profiler health metrics to Datadog. These might count as [custom metrics][25]. Sent only when [`infrastructure_mode`][26] is `full` or `basic`. |
+| `hostprofiler.health_metrics.target`  | string | `127.0.0.1:8889` | Address used for the Full-Host Profiler internal Prometheus metrics endpoint. Change this only if the default address conflicts with another service. |
 
 #### Diagnostics
 
-| Name                            | Values                          | Default                              | Description                                                                                                                                                                                                                                       |
-|:---------------------------------|:----------------------------------|:---------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `hostprofiler.hpflare.port`     | int                              | `7778`                                | Local port used to collect Full-Host Profiler flare diagnostics. Change this only if the default port conflicts with another service.                                                                                                            |
-| `hostprofiler.debug.verbosity`  | `basic`, `normal`, `detailed`    | _(disabled)_                          | Enables the OpenTelemetry debug exporter for troubleshooting. See the [debug exporter verbosity documentation][19]. Use temporarily, since it can increase log volume.                                                                           |
-| `hostprofiler.log_file`         | string                           | `${log_path}/host-profiler.log`       | Path to the Full-Host Profiler log file. `${log_path}` resolves to the Agent's configured log directory.                                                                                                                                          |
+| Name                                    | Values                        | Default                         | Description |
+|:----------------------------------------|:------------------------------|:--------------------------------|:------------|
+| `hostprofiler.hpflare.port`             | int                           | `7778`                          | Local port used to collect Full-Host Profiler flare diagnostics. Change this only if the default port conflicts with another service. |
+| `hostprofiler.debug.exporter.verbosity` | `basic`, `normal`, `detailed` | _(disabled)_                    | Enables the OpenTelemetry debug exporter for troubleshooting. See the [debug exporter verbosity documentation][19]. Use temporarily, since it can increase log volume. |
+| `hostprofiler.debug.ebpf_logs`          | bool                          | `false`                         | Enables verbose eBPF profiler logging. |
+| `hostprofiler.log_file`                 | string                        | `${log_path}/host-profiler.log` | Path to the Full-Host Profiler log file. `${log_path}` resolves to the Agent's configured log directory. |
 
 #### Advanced export settings
 
-| Name                                    | Values              | Default    | Description                                                                                                |
-|:------------------------------------------|:----------------------|:-------------|:--------------------------------------------------------------------------------------------------------------|
-| `hostprofiler.additional_http_headers`  | map[string]string    | _(empty)_  | Adds custom headers to profile export requests, for example when required by an outbound proxy or gateway. |
+| Name                                   | Values                   | Default   | Description |
+|:---------------------------------------|:-------------------------|:----------|:------------|
+| `hostprofiler.reporter_interval`       | duration                 | `60s`     | Interval between profile reports. Must be at least `60s`; shorter intervals are rejected. |
+| `hostprofiler.additional_http_headers` | map[string]string        | _(empty)_ | Adds custom headers to profile export requests, for example when required by an outbound proxy or gateway. |
+| `hostprofiler.send_error_frames`       | bool                     | `false`   | Includes unwind error frames in profiles for troubleshooting. |
+| `hostprofiler.include_env_vars`        | string (comma-separated) | _(empty)_ | Collects additional environment variables from profiled processes, in addition to the default metadata collection. Include only variables whose values are safe to send with profiles. Don't include secrets. |
+| `hostprofiler.filter_min_process_age`  | duration                 | `0s`      | Skips profiling processes younger than this duration, to filter out short-lived processes. `0s` disables the filter. |
+
+#### Symbol uploader
+
+| Name                                                       | Values | Default | Description |
+|:-----------------------------------------------------------|:-------|:--------|:------------|
+| `hostprofiler.symbol_uploader.enabled`                     | bool   | `true`  | Uploads debug symbols to Datadog using the Agent's profiling intake destinations and API keys. Disabling it can leave native and Go frames unresolved. |
+| `hostprofiler.symbol_uploader.report.interval`             | int    | `300`   | Interval, in seconds, at which the Full-Host Profiler logs symbol upload reports. Maximum `86400` (24 hours). Values outside `1` to `86400` fall back to the default. |
+| `hostprofiler.symbol_uploader.report.max_paths_per_report` | int    | `100`   | Maximum number of binary paths kept per symbol upload report, per log level. Maximum `100000`. Values outside `1` to `100000` fall back to the default. |
 
 #### Self-profiling (Datadog Support diagnostics only)
 
@@ -411,3 +462,8 @@ Profiles appear on the [Datadog Profiler][20] page within a few minutes after de
 [19]: https://pkg.go.dev/go.opentelemetry.io/collector/exporter/debugexporter#readme-verbosity-levels
 [20]: https://app.datadoghq.com/profiling
 [21]: /profiler/profiler_troubleshooting/full_host/
+[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md#supported-detectors
+[23]: /account_management/billing/#hosts
+[24]: /account_management/plan_and_usage/usage_details/
+[25]: /metrics/custom_metrics/
+[26]: /agent/configuration/infrastructure-modes/
