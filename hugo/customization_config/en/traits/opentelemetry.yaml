@@ -1,0 +1,10 @@
+traits:
+- id: otel_sdk
+  label: "SDK"
+  type: text
+  internal_notes: The SDK that instruments the customer's application in an OpenTelemetry setup, such as the DDOT SDK or the upstream OpenTelemetry SDK. Pair with `otel_destination`. Differs from `api_type`, which is the API the code calls, and from `prog_lang`, which is the language.
+
+- id: otel_destination
+  label: "Destination"
+  type: text
+  internal_notes: Where an OpenTelemetry setup sends telemetry from the SDK, such as the DDOT Collector, an upstream OpenTelemetry Collector, the Datadog Agent, or Datadog's OTLP intake. Pair with `otel_sdk`.
