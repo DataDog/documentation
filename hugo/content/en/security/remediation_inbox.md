@@ -111,7 +111,7 @@ Click **Edit Filters** to add or remove filters from the bar.
 
 Click a remediation to open its side panel:
 
-- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead, for example: "Clears 3 CVEs across 10 findings (2 critical, 8 high) in 2 files. Upgrades lodash to 4.17.21."
+- **Know before you remediate**: An AI-generated summary of why the fix matters and what it changes. If generative AI features are disabled for your organization, a summary of the impact is shown instead.
 - **Ticketing, Assignee, and PRs**: The remediation work item, its owner, and the linked pull requests grouped by status (Draft, Open, Merged, Closed), with their authors.
 - **Vulnerabilities**: The vulnerabilities the fix closes, with severity, finding count, and owner. Expand a vulnerability to see the affected files.
 - **View findings**: Open the findings of the remediation in the SCA or Cloud Security Vulnerabilities explorer.
