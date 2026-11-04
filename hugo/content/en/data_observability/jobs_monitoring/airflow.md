@@ -635,7 +635,7 @@ With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ linea
 
 ### Exclude specific DAGs from Jobs Monitoring
 
-<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later, which requires Airflow 2.11 or later.</div>
+<div class="alert alert-info">The <code>emission_policy</code> configuration requires <code>apache-airflow-providers-openlineage</code> 2.19.0 or later, which requires Airflow 2.11 or later. On earlier versions, see <a href="#exclude-specific-dags-on-earlier-provider-versions">Exclude specific DAGs on earlier provider versions</a>.</div>
 
 To stop specific DAGs from sending OpenLineage events to Datadog, add an `emission_policy` rule for each DAG to the `[openlineage]` section of your Airflow configuration:
 
@@ -657,6 +657,22 @@ Set `emission_policy` the same way you set the other OpenLineage provider option
 
 For additional scopes and controls, see the [OpenLineage emission policy documentation][9].
 
+### Exclude specific DAGs on earlier provider versions
+
+<div class="alert alert-info">Use this method if your <code>apache-airflow-providers-openlineage</code> version is earlier than 2.19.0 and therefore does not support <code>emission_policy</code>. It requires <code>openlineage-python</code> 1.23.0 or later.</div>
+
+Set the `OPENLINEAGE__FILTERS` environment variable on **both your Airflow schedulers and workers**:
+
+```
+OPENLINEAGE__FILTERS=[{"type":"regex","regex":"^<YOUR_DAG_ID>(\\.|$)"}]
+```
+
+OpenLineage job names are `<dag_id>` for DAG run events and `<dag_id>.<task_id>` for task run events, so this pattern excludes the DAG and all of its tasks. To exclude multiple DAGs, use an alternation such as `^(dag_one|dag_two)(\\.|$)`.
+
+`OPENLINEAGE__FILTERS` is an OpenLineage client option, not an Airflow provider option. Setting `AIRFLOW__OPENLINEAGE__FILTERS` has no effect.
+
+Restart your Airflow schedulers and workers to apply the change. For more filter options, see the [OpenLineage client configuration documentation][10].
+
 
 ## Further Reading
 
@@ -671,3 +687,4 @@ For additional scopes and controls, see the [OpenLineage emission policy documen
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
 [8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection
 [9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/emission_policy.html
+[10]: https://openlineage.io/docs/client/python/configuration/
