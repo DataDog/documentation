@@ -65,11 +65,41 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 ## Setup
 
+### 1. Enable LLM Observability conversion {#enabling-llm-observability-conversion}
+
+To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute so that every exported span includes it. If you set the attribute on a single span instead, large traces might be only partially converted. Under the standard conversion policy, an explicit `dd_llmobs_enabled=false` overrides organization enablement.
+
+#### Using an export header
+
+If you export over OTLP HTTP directly to Datadog, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. The header sets opt-in for every span in the export. Under the standard conversion policy, setting `dd_llmobs_enabled=false` on a span or resource overrides the header. Add this header only to trace exports sent to Datadog, not to requests sent to your model provider.
+
+#### Using environment variables
+
+Add the `dd_llmobs_enabled=true` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+
+```
+OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
+```
+
+#### Using code
+
+You can also set the attribute programmatically on any span in your trace:
+
+```python
+from opentelemetry import trace
+
+tracer = trace.get_tracer(__name__)
+
+with tracer.start_as_current_span("my-span") as span:
+    # Enable LLM Observability conversion for this entire trace
+    span.set_attribute("dd_llmobs_enabled", True)
+```
+
+### 2. Configure the exporter {#configuration}
+
 Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
 
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
-
-### Configuration
 
 Set the following environment variables in your application:
 
@@ -104,7 +134,7 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 This environment variable ensures that `strands-agents` emits traces following the OpenTelemetry v1.37+ semantic conventions for generative AI, which are required by Agent Observability.
 
-### Instrumentation
+### 3. Instrument the application {#instrumentation}
 
 To generate traces compatible with Agent Observability, do one of the following:
 
@@ -1236,36 +1266,6 @@ Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic 
 - Model parameters and metadata
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
-
-## Enabling LLM Observability conversion
-
-To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute so that every exported span includes it. If you set the attribute on a single span instead, large traces might be only partially converted. Under the standard conversion policy, an explicit `dd_llmobs_enabled=false` overrides organization enablement.
-
-### Using an export header
-
-If you export over OTLP HTTP directly to Datadog, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. The header sets opt-in for every span in the export. Under the standard conversion policy, setting `dd_llmobs_enabled=false` on a span or resource overrides the header. Add this header only to trace exports sent to Datadog, not to requests sent to your model provider.
-
-### Using environment variables
-
-Add the `dd_llmobs_enabled=true` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
-
-```
-OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
-```
-
-### Using code
-
-You can also set the attribute programmatically on any span in your trace:
-
-```python
-from opentelemetry import trace
-
-tracer = trace.get_tracer(__name__)
-
-with tracer.start_as_current_span("my-span") as span:
-    # Enable LLM Observability conversion for this entire trace
-    span.set_attribute("dd_llmobs_enabled", True)
-```
 
 [1]: https://github.com/open-telemetry/semantic-conventions-genai
 [2]: https://app.datadoghq.com/organization-settings/api-keys
