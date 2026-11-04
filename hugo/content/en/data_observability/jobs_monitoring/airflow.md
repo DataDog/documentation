@@ -659,7 +659,7 @@ For additional scopes and controls, see the [OpenLineage emission policy documen
 
 ### Exclude specific DAGs on earlier provider versions
 
-<div class="alert alert-info">Use this method if your <code>apache-airflow-providers-openlineage</code> version is earlier than 2.19.0 and therefore does not support <code>emission_policy</code>. It requires <code>openlineage-python</code> 1.23.0 or later.</div>
+<div class="alert alert-info">Use this method if your <code>apache-airflow-providers-openlineage</code> version is earlier than 2.19.0, which does not support <code>emission_policy</code>. This method requires <code>openlineage-python</code> 1.23.0 or later.</div>
 
 Set the `OPENLINEAGE__FILTERS` environment variable on **both your Airflow schedulers and workers**:
 
