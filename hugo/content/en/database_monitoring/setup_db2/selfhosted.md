@@ -45,8 +45,6 @@ Database Monitoring collects the following data from IBM Db2:
 **Full query text**
 : Obfuscated SQL linked to query metrics by query signature.
 
-DBM for IBM Db2 does not collect query samples, query activity, explain plans, or schemas.
-
 ## Setup
 
 ### Step 1: Enable monitoring
