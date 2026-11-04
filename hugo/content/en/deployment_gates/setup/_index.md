@@ -2,12 +2,6 @@
 title: Set Up Deployment Gates
 description: "Compare Just-In-Time (JIT) and preconfigured Deployment Gates and follow the setup walkthrough for your chosen configuration source."
 further_reading:
-- link: "/deployment_gates/setup/jit"
-  tag: "Documentation"
-  text: "Set up Just-In-Time (JIT) Deployment Gates"
-- link: "/deployment_gates/setup/preconfigured"
-  tag: "Documentation"
-  text: "Set up preconfigured Deployment Gates"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"
