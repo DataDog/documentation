@@ -105,7 +105,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
      Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
 
-   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the `user-agent` header to [identify Datadog scripts][1]. **Note**: The browser controls some headers, such as `Host`, `Origin`, `Referer`, `Accept-Encoding`, `Connection`, `Content-Length`, and headers starting with `Sec-` or `Proxy-`. When the test runs, Synthetic Monitoring ignores the values you set for these headers and displays a warning in the test result.
+   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the `user-agent` header to [identify Datadog scripts][1].
+
+     **Note**: The browser controls some headers, such as `Host`, `Origin`, `Referer`, `Accept-Encoding`, `Connection`, `Content-Length`, and headers starting with `Sec-` or `Proxy-`. When the test runs, Synthetic Monitoring ignores the values you set for these headers, and the test result shows the warning `Headers with wrong format were ignored.`
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 

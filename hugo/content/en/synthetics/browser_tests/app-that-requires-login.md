@@ -59,7 +59,7 @@ Some SSO providers might detect Datadog's browser tests as bots and prevent them
 An alternative would be to use a non-SSO approach and leverage a regular username and password combination to go through login.
 
 ### Passkeys
-Datadog Synthetic Monitoring supports [passkeys][4], a security method that reduces the risks of phishing, password theft, and replay attacks. Passkeys work in browser tests only on Google Chrome and Microsoft Edge.
+Datadog Synthetic Monitoring supports [passkeys][4], a security method that reduces the risks of phishing, password theft, and replay attacks. In browser tests, passkeys work only on Google Chrome and Microsoft Edge.
 
 Create a Virtual Authenticator global variable and import it in your test. Then, record any passkey-related steps inside the browser.
 

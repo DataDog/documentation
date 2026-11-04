@@ -72,7 +72,7 @@ To set up this pattern:
 
 1. Add a step that interacts with the target element (for example, clicking an {{< ui >}}Add to Cart{{< /ui >}} button or selecting a size from a {{< ui >}}Select a Size{{< /ui >}} dropdown).
 2. In the step's advanced options, set a {{< ui >}}User Specified Locator{{< /ui >}} using XPath or CSS that targets only available elements (for example, `.size.available` or a class that indicates in-stock status).
-3. Select {{< ui >}}If this step fails, continue to next step{{< /ui >}} so the test continues if no matching element is found. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}}, which is selected by default, so the test does not fail.
+3. Select {{< ui >}}If this step fails, continue to next step{{< /ui >}} so the test continues if no matching element is found. Then, clear {{< ui >}}If this step fails, mark test as failed{{< /ui >}} (selected by default) so the test does not fail.
 4. Add a follow-up step or subtest that tries the next option (for example, a different size or product).
 5. If the UI has filters or search, add steps that narrow the page to available items first so the locator targets only the correct elements.
 
