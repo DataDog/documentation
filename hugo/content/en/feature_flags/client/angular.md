@@ -503,7 +503,7 @@ The Angular provider uses the Datadog browser provider, which also supports thes
 
 | Option | Default | Use |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `trackExposures` | `true` | Send exposure events to the exposures intake. Available in version 2.3.0 and later. Replaces the deprecated `enableExposureLogging` option. To record exposures in your own data store, see [Record Feature Flag Exposures in Your Own Data Store](/feature_flags/guide/record_exposures_in_your_own_data_store/). |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
