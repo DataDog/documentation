@@ -46,7 +46,7 @@ To enable the ingestion of historical metrics for a specific metric:
 1. Within the *Advanced* section of the side panel, click {{< ui >}}Configure{{< /ui >}}.
 1. Select the {{< ui >}}Enable historical metrics{{< /ui >}} toggle and press {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Catalog page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
 
 ### Bulk configuration for multiple metrics
 
