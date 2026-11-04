@@ -86,7 +86,7 @@ Use the {{< ui >}}Type{{< /ui >}} filter to show all events, only degradations, 
 
 To monitor a provider that External Provider Status does not support out of the box, add it as a custom provider using its public Atlassian Statuspage.
 
-{{< img src="internal_developer_portal/external_provider_status/external_provider_status_custom_provider.png" alt="Add a Custom Provider modal with Atlassian Statuspage URL and Display Name fields" style="width:60%;" >}}
+{{< img src="internal_developer_portal/external_provider_status/external_provider_status_custom_provider.png" alt="Add a Custom Provider modal with Atlassian Statuspage URL and Display Name fields, open over the External Provider Status page" >}}
 
 1. On the [External Provider Status page][1], click {{< ui >}}Add Custom Provider{{< /ui >}} in the upper right corner.
 2. In {{< ui >}}Atlassian Statuspage URL{{< /ui >}}, enter the URL of the provider's public status page, such as `https://status.example.com`.
