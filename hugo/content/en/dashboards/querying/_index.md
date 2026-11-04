@@ -213,7 +213,7 @@ minimum(status:error, status:warn)
 
 {{% collapse-content title="time() function" level="h5" %}}
 
-The `time()` function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
+The `time()` function returns the Unix time in seconds as a timeseries, based on the queried time range. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
 
 For example, to calculate the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between the present and the timestamp of the backup metric.
 
