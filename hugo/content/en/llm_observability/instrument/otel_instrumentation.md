@@ -706,7 +706,7 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 These fields are estimates in nanodollars, not the dollar-unit manual cost fields. For more information, see [Cost][56].
 
-When Agent Observability can price the model, it recomputes each cost component from the span's token counts and the model's pricing, and replaces the value you supplied for that component. Agent Observability keeps your supplied value for models it cannot price and for any component whose recomputed cost is zero (for example, cache writes on a provider that does not bill them).
+When Agent Observability can price the model, it recomputes each cost component from the span's token counts and the model's pricing, and replaces the value you supplied for that component. Agent Observability keeps your supplied value for models it cannot price and for any component whose recomputed cost is zero, such as cache writes on a provider that does not bill them.
 
 #### Request parameters
 
