@@ -27,4 +27,4 @@ Some implementations lead applications to render a certain way only when using a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests#default-headers
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=browsertests#user-agent
