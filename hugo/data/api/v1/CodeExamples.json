@@ -558,6 +558,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_620827773",
+      "description": "Create a new dashboard with topology_map custom widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2815497946",
       "description": "Create a new dashboard with topology_map data_streams widget"
     },

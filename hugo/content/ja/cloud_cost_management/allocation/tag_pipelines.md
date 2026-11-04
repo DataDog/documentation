@@ -11,10 +11,10 @@ further_reading:
   text: タグの使用を開始する
 - link: /integrations/guide/reference-tables
   tag: ドキュメント
-  text: リファレンステーブルについて
+  text: Reference Tableについて学びます。
 - link: https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/
   tag: ブログ
-  text: Datadog Cloud Cost Management を使用してプロバイダー間で AI コストを配分する
+  text: Datadog Cloud Cost Managementを使用して、プロバイダー間でAIコストを割り当てます。
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: ブログ
   text: Datadog Cloud Cost Management を使用して OCI コストを管理および最適化する
@@ -22,92 +22,103 @@ title: タグパイプライン
 ---
 ## 概要 {#overview}
 
-タグは、Cloud Cost Management のすべての分析と割り当ての基盤となります。タグを使用すると、サービス、チーム、プロジェクト、環境のほか、ビジネスに関連するあらゆるディメンション別に支出を分類できます。タグパイプラインは、すべてのクラウドリソースに対して標準化されたタグの使用を強制し、組織全体で一貫した正確なコスト配分を保証するのに役立ちます。
+タグは、すべての Cloud Cost Management の分析と割り当ての基盤となります。タグを使用すると、サービス、チーム、プロジェクト、環境、またはビジネスに関連するあらゆるディメンションごとに支出を分類できます。Tag Pipelinesは、クラウド全体のリソースで標準化されたタグの使用を強制し、組織全体で一貫性のある正確なコスト割り当てを保証します。
 
-[タグパイプライン][1]を使用すると、クラウドの請求で欠落したタグや誤ったタグに対処するためのタグルールを作成できます。また、特定のビジネスロジックに沿った新しい推論タグを作成して、コスト追跡の精度を高めることもできます。これらの標準化されたタグは、コンテナコスト割り当て、カスタム割り当てルール、コスト推奨事項など、すべてのコスト分析機能を強化します。
+[Tag Pipelines][1]を使用すると、クラウド請求書上の不足しているタグや誤ったタグに対処するためのタグルールを作成できます。また、特定のビジネスロジックに沿った新しい推論タグを作成して、コスト追跡の精度を高めることもできます。これらの標準化されたタグは、コンテナコストの割り当て、カスタム割り当てルール、コスト推奨事項など、すべてのコスト分析機能を強化します。
 
-タグパイプラインは、すべてのプロバイダーの Cloud Cost メトリクスに適用されます。作成したルールはすべてのコストデータとコスト推奨事項に反映され、ダッシュボード、モニター、割り当てレポート全体で一貫性が確保されます。
+Tag Pipelines は、すべてのプロバイダーの Cloud Cost メトリクスに適用されます。作成したルールはすべてのコストデータとコスト推奨事項に影響し、ダッシュボード、モニター、割り当てレポート全体で一貫性が保たれます。
 
-タグパイプラインが変更されると、新しいルールが直近 3 か月分のデータに自動的に適用されます。ルールが追加または変更された後、過去のデータの更新が完了するまでに最大 24 時間かかる場合があります。
+Tag Pipelines が変更されると、新しいルールが直近3か月分のデータに自動的に適用されます。ルールの追加または変更後、過去データの更新が完了するまでに最大24時間かかる場合があります。
 
-すべての新規ユーザーに対して、[タグの正規化を有効にする][6]ための推奨ルールがデフォルトで有効になります。
+すべての新規ユーザーには、[タグの正規化を有効にする][6]ための推奨ルールがデフォルトで有効になっています。
 
-## ルールセットを作成する {#create-a-ruleset}
+## ルールセットを作成してください {#create-a-ruleset}
 
-タグパイプラインのルールセットは、[API][7] または [Terraform][8] を使用するか、次の手順に従って Datadog で直接管理できます。
+[API][7]、[Terraform][8]、または以下の手順に従って Datadog で直接、Tag Pipelinesルールセットを管理できます。
 
 ルールセットを作成するには、[{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1] に移動します。
 
-<div class="alert alert-danger"> ルールは最大で 100 個まで作成できます。API ベースのリファレンステーブルはサポートされていません。 </div>
+<div class="alert alert-info"> 最大100個のルールを作成できます。 </div>
 
-個別のルールを作成する前に、{{< ui >}}+ New Ruleset{{< /ui >}} をクリックしてルールセット (ルール用のフォルダー) を作成します。
+個別のルールを作成する前に、{{< ui >}}\+ New Ruleset{{< /ui >}} をクリックしてルールセット（ルールのフォルダー）を作成してください。
 
-各ルールセット内で {{< ui >}}+ Add New Rule{{< /ui >}} をクリックし、ルールタイプ ({{< ui >}}Add tag{{< /ui >}}、{{< ui >}}Alias tag keys{{< /ui >}}、または {{< ui >}}Map multiple tags{{< /ui >}}) を選択します。これらのルールは、上から下の順に決定論的な順序で実行されます。
+各ルールセット内で {{< ui >}}\+ Add New Rule{{< /ui >}} をクリックし、ルールタイプとして {{< ui >}}Add tag{{< /ui >}}、{{< ui >}}Alias tag keys{{< /ui >}}、または {{< ui >}}Map multiple tags{{< /ui >}} を選択してください。これらのルールは、上から下へ順番に決定論的な順序で実行されます。
 
-{{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="チーム、アカウント、サービス、部門、ビジネスユニットなど、さまざまなカテゴリを表示するタグパイプラインページのタグルールの一覧" style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="チーム、アカウント、サービス、部門、ビジネスユニットなど、さまざまなカテゴリを一覧表示するTag Pipelinesページのタグルール一覧表示。" style="width:60%;" >}}
 
-ビジネスロジックに合わせて実行順序を確実に制御できるよう、ルールとルールセットを整理できます。
+ルールとルールセットを整理することで、実行順序がビジネスロジックと一致するように調整できます。
 
-### Add tag {#add-tag}
+### タグを追加してください{#add-tag}
 
-Cloud Cost データに既存のタグがあるかどうかに基づいて、新しいタグ (キーと値) を追加します。
+クラウドコストデータ上の既存のタグの存在に基づいて、新しいタグ (キー + 値) を追加してください。
 
-たとえば、リソースが属するサービスに基づいて、すべてのリソースにビジネスユニットのタグを付けるルールを作成できます。
+例えば、リソースが所属するサービスに基づいて、すべてのリソースにビジネスユニットのタグを付けるルールを作成できます。
 
-{{< img src="cloud_cost/pipelines-add-tag-2.png" alt="service:process-agent または service:process-billing を持つリソースに businessunit タグを新たに追加" style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-add-tag-2.png" alt="service:process-agentまたはservice:process-billingを持つリソースに、新しいビジネスユニットタグを追加してください。" style="width:60%;" >}}
 
-{{< ui >}}Additional options{{< /ui >}} セクションには、次のオプションがあります。
+{{< ui >}}Additional options{{< /ui >}}セクションの下には、以下のオプションがあります。
 
-- {{< ui >}}Action when tag `{tag}` exists{{< /ui >}} - 指定したタグ (上記の例では `business-unit`) がすでに存在する場合の動作を選択します。
-  - {{< ui >}}Don't apply the rule{{< /ui >}} - タグがすでに存在する場合はルールをスキップし、元の値を保持します。
+- {{< ui >}}Action when tag `{tag}` exists{{< /ui >}} - 指定されたタグ（上記の例では`business-unit`）が既に存在する場合の動作を選択してください。
+  - {{< ui >}}Don't apply the rule{{< /ui >}} - タグが既に存在する場合はルールをスキップし、元の値を保持してください。
+  - {{< ui >}}Append the tag{{< /ui >}} - 元の値を削除せずに、既存のタグに新しい値を追加してください。
+  - {{< ui >}}Replace the tag{{< /ui >}} - 既存のタグ値を新しい値で置き換えてください。<div class="alert alert-warning">タグを置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
+- {{< ui >}}Apply case-insensitive matching to resource tags{{< /ui >}}- `To resources with tag(s)`フィールドで定義されたタグとコストデータからのタグを大文字と小文字を区別せずに扱えるようにします。例えば、UIからのリソースタグが`foo:bar`で、コストデータからのタグが`Foo:bar`である場合、両者を一致させることができます。
+
+### エイリアス設定 タグキー{#alias-tag-keys}
+
+既存のタグ値をより標準化されたタグにマッピングします。
+
+例えば、組織で標準の`application`タグキーを使用したいが、複数のチームがそのタグのバリエーション（`app`、`webapp`、または`apps`など）を使用している場合、`apps`を`application`にエイリアス設定できます。各エイリアスタグルールでは、最大25個のタグキーを新しいタグにエイリアス設定できます。
+
+{{< img src="cloud_cost/pipelines-alias-tag-4.png" alt="app、webapp、またはappsタグを持つリソースにアプリケーションタグを追加します。" style="width:60%;" >}}
+
+`app`、`webapp`、または`apps`タグを持つリソースにアプリケーションタグを追加します。ルールは、最初の一致が見つかった時点で、各リソースに対する実行を停止します。例えば、リソースに既に `app` タグがある場合、そのルールは `webapp` または `apps` タグを特定しようとしなくなります。
+
+{{< ui >}}Additional options{{< /ui >}} セクションには、以下のオプションがあります。
+
+- {{< ui >}}Action when tag `{tag}` exists{{< /ui >}} - 指定されたタグ（上記の例では `application`）が既に存在する場合の動作を選択します。
+  - {{< ui >}}Don't apply the rule{{< /ui >}} - タグが既に存在する場合はルールをスキップし、元の値を保持します。
   - {{< ui >}}Append the tag{{< /ui >}} - 元の値を削除せずに、新しい値を既存のタグに追加します。
-  - {{< ui >}}Replace the tag{{< /ui >}} - 既存のタグの値を新しい値で置き換えます。<div class="alert alert-warning">タグを置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
-- {{< ui >}}Apply case-insensitive matching to resource tags{{< /ui >}}- `To resources with tag(s)`フィールドで定義されたタグとコストデータのタグを、大文字と小文字を区別せずに扱えるようにします。たとええば、UI のリソースタグが `foo:bar` で、コストデータのタグが `Foo:bar` である場合に、両者を照合することができます。
+  - {{< ui >}}Replace the tag{{< /ui >}} - 既存のタグ値を新しい値で置き換えます。<div class="alert alert-warning">タグを置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
+- {{< ui >}}Apply case-insensitive matching to resource tags{{< /ui >}}- エイリアスタグキーで定義されたタグとコストデータからのタグを大文字と小文字を区別しないようにします。例えば、UIからのリソースタグが `app:bar` で、コストデータからのタグが `App:bar` である場合、両者を一致させることができます。
 
-### Alias tag keys {#alias-tag-keys}
+### 複数のタグのマッピング {#map-multiple-tags}
 
-既存のタグの値を、より標準化されたタグにマッピングします。
+[Reference Table][2]を使用して、複数のルールを作成することなく、コストデータに複数のタグを追加してください。これにより、Reference Tableの主キー列の値がコストタグの値にマッピングされます。見つかった場合、パイプラインは選択されたReference Tableの列をタグとしてコストデータに追加します。
 
-たとえば、組織で標準の `application` タグキーを使用したいが、複数のチームでそのタグのバリエーション (`app`、`webapp`、`apps` など) を使用している場合、`application` を `apps` のエイリアスに設定できます。各エイリアスタグルールで、最大 25 個のタグキーのエイリアスとして新しいタグを設定できます。
+例えば、さまざまなAWSおよびAzureアカウントがどのVP、組織、ビジネスユニットに該当するかに関する情報を追加したい場合、テーブルを作成してタグをマッピングできます。
 
-{{< img src="cloud_cost/pipelines-alias-tag-4.png" alt="app、webapp、または apps タグを持つリソースに application タグを追加" style="width:60%;" >}}
+{{< img src="cloud_cost/pipelines-map-multiple-tags-2.png" alt="Tag PipelinesのReference Tableを使用して、customer_nameのようなアカウントメタデータを追加してください。" style="width:60%;" >}}
 
-`app`、`webapp`、または `apps` タグを持つリソースに application タグを追加します。各リソースについて、最初の一致が見つかった時点でルールの実行は停止します。たとえば、リソースにすでに `app` タグがある場合、ルールで `webapp` タグや `apps` タグの特定は行われません。
+[エイリアスタグキー](#alias-tag-keys)と同様に、このルールは最初のマッチが見つかった後、リソースごとに実行を停止します。例えば、`application` が見つかった場合、そのルールは `subscription_id` を探そうとしなくなります。
 
-{{< ui >}}Additional options{{< /ui >}} セクションには、次のオプションがあります。
+{{< ui >}}Additional options{{< /ui >}} セクションには、以下のオプションがあります。
 
-- {{< ui >}}Action when tag `{tag}` exists{{< /ui >}} - 指定したタグ (上記の例では `application`) がすでに存在する場合の動作を選択します。
-  - {{< ui >}}Don't apply the rule{{< /ui >}} - タグがすでに存在する場合はルールをスキップし、元の値を保持します。
-  - {{< ui >}}Append the tag{{< /ui >}} - 元の値を削除せずに、新しい値を既存のタグに追加します。
-  - {{< ui >}}Replace the tag{{< /ui >}} - 既存のタグの値を新しい値で置き換えます。<div class="alert alert-warning">タグを置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
-- {{< ui >}}Apply case-insensitive matching to resource tags{{< /ui >}}- タグキーで定義されたタグとコストデータのタグを、大文字と小文字を区別せずに扱えるようにします。たとええば、UI のリソースタグが `app:bar` で、コストデータのタグが `App:bar` である場合に、両者を照合することができます。
+- {{< ui >}}Action when column exists{{< /ui >}} - 指定された列が既に存在する場合の動作を選択してください。
+  - {{< ui >}}Don't apply the rule{{< /ui >}} - 列が既に存在する場合はルールをスキップし、元の値を保持してください。
+  - {{< ui >}}Append the column{{< /ui >}} - 元の値を削除せずに、既存の列に新しい値を追加してください。
+  - {{< ui >}}Replace the column{{< /ui >}} - 既存の列の値を新しい値で置き換えてください。<div class="alert alert-warning">列を置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
+- {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}}- Reference Tableの主キー値と、タグキーが主キーと一致するコストデータのタグ値との間で、大文字と小文字を区別しない照合を有効にします。例えば、UIからの主キー値ペアが`foo:Bar`で、コストデータからのタグが`foo:bar`である場合、両者を照合できます。
 
-### Map multiple tags {#map-multiple-tags}
+#### APIベースのReference Table {#api-based-reference-tables}
 
-複数のルールを作成する代わりに、[リファレンステーブル][2]を使用してコストデータに複数のタグを追加します。これにより、リファレンステーブルの主キー列の値がコストタグの値にマッピングされます。選択されたリファレンステーブルの列が見つかった場合、パイプラインはその列をコストデータにタグとして追加します。
+Tag PipelinesでAPIベースのReference Tableを使用することもできます。一部の古いテーブルでは、ルールで使用する前に、Cloud Cost Managementと同期するためのデータ更新が必要になる場合があります。
 
-たとえば、それぞれの AWS アカウントや Azure アカウントがどの VP、組織、ビジネスユニットに属しているかについての情報を追加する場合、テーブルを作成してタグをマッピングできます。
+##### 同期エラーのトラブルシューティング {#troubleshooting-synchronization-errors}
 
-{{< img src="cloud_cost/pipelines-map-multiple-tags-2.png" alt="タグパイプラインのリファレンステーブルを使用して customer_name のようなアカウントメタデータを追加" style="width:60%;" >}}
+ルールを保存する際に、参照テーブルがCloud Cost Managementと同期されていないことを示すエラーが表示された場合：
 
-[[Alias tag keys]](#alias-tag-keys) と同様に、各リソースについて、最初の一致が見つかった時点でルールの実行は停止します。たとえば、`application` が見つかった場合、そのルールは `subscription_id` を探そうとはしません。
-
-{{< ui >}}Additional options{{< /ui >}} セクションには、次のオプションがあります。
-
-- {{< ui >}}Action when column exists{{< /ui >}} - 指定した列がすでに存在する場合の動作を選択します。
-  - {{< ui >}}Don't apply the rule{{< /ui >}} - 列がすでに存在する場合はルールをスキップし、元の値を保持します。
-  - {{< ui >}}Append the column{{< /ui >}} - 元の値を削除せずに、新しい値を既存の列に追加します。
-  - {{< ui >}}Replace the column{{< /ui >}} - 既存の列の値を新しい値で置き換えます。<div class="alert alert-warning">列を置き換えると、既存のデータが上書きされる可能性があります。このオプションは慎重に使用してください。</div>
-- {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}}- リファレンステーブルの主キーの値と、タグキーが主キーと一致するコストデータ内のタグの値との間で、大文字と小文字を区別しない照合を有効にします。たとえば、UI の主キーの値のペアが `foo:Bar` で、コストデータのタグが `foo:bar` である場合に、両者を照合することができます。
+1. **伝播を待つ:** テーブルを最近作成または更新した場合は、変更が伝播されるまで数分待ってから、ルールを再度保存してください。
+2. **同期をトリガーする:** エラーが解決しない場合は、テーブルのデータファイルを再アップロードするか、行を更新してCloud Cost Managementとの同期をトリガーしてください。
 
 ## 予約済みタグ {#reserved-tags}
 
-`env` や `host` などの特定のタグは[予約済みタグ][4]であり、[統合サービスタグ付け][3]の一部です。`host` タグは、タグパイプラインでは追加できません。
+`env`や`host`などの特定のタグは[予約済みタグ][4]であり、[Unified Service Tagging][3]の一部です。`host`タグは、Tag Pipelinesに追加できません。
 
-タグを使用すると、メトリクス、トレース、プロセス、ログの関連付けに役立ちます。`host` のような予約済みタグは、インフラストラクチャー全体にわたる可視性と効果的な監視を提供します。最適な関連付けと実用的なインサイトを得るために、Datadog のタグ付け戦略の一環としてこれらの予約済みタグを使用してください。
+タグを使用すると、メトリクス、トレース、プロセス、ログの関連付けに役立ちます。`host`のような予約済みタグは、インフラストラクチャー全体にわたる可視性と効果的な監視を提供します。最適な関連付けと実用的なインサイトを得るために、Datadogでのタグ付け戦略の一環としてこれらの予約済みタグを使用してください。
 
-## タグを削除{#delete-tags}
-タグパイプラインを使用して作成されたタグを削除するには、そのタグを作成したルールを削除します。24 時間以内に、そのタグが直近 3 か月分のデータから自動的に削除されます。それよりも古いデータからタグを削除する場合は、[Datadog サポート][5]にお問い合わせください。
+## タグを削除 {#delete-tags}
+Tag Pipelinesを使用して作成されたタグを削除するには、そのタグを作成したルールを削除してください。24時間以内に、直近3か月分のデータからタグが自動的に削除されます。それより古いデータからタグを削除するには、[Datadog support][5]までお問い合わせください。
 
 ## 参考資料 {#further-reading}
 

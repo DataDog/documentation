@@ -1,0 +1,177 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { SelectDemo } from "@components/Select/SelectDemo";
+
+const title = "Select";
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
+    <div class="prose">
+      <h1>Select</h1>
+
+      <p>
+        A dropdown that opens a styled menu below its button, matching the Hugo
+        Bootstrap dropdown used for the Language and Datadog site selectors. It
+        replaces the native <code>&lt;select&gt;</code>, whose popup is drawn by
+        the operating system: on macOS it opens over the current value and
+        ignores CSS.
+      </p>
+
+      <p>
+        It follows the WAI-ARIA listbox button pattern. The button opens the
+        menu on click, <kbd>Enter</kbd>, <kbd>Space</kbd>, or <kbd>&darr;</kbd>.
+        In the menu, <kbd>&uarr;</kbd>/<kbd>&darr;</kbd>, <kbd>Home</kbd>, and
+        <kbd>End</kbd> move the highlight, <kbd>Enter</kbd> or <kbd>Space</kbd>
+        chooses, and <kbd>Escape</kbd>, <kbd>Tab</kbd>, or a click outside
+        closes it.
+      </p>
+
+      <p>
+        State and persistence live in the consuming component (for example,
+        <code>RegionSelector</code> keeps the region in a cookie);
+        <code>Select</code> only renders the control and reports the chosen value.
+      </p>
+
+      <h2>Properties</h2>
+      <table>
+        <thead>
+          <tr
+            ><th>Property</th><th>Type</th><th>Default</th><th>Description</th
+            ></tr
+          >
+        </thead>
+        <tbody>
+          <tr
+            ><td><code>id</code></td><td><code>string</code></td><td>&mdash;</td
+            ><td
+              >Applied to the button. Also prefixes the listbox and option IDs.</td
+            ></tr
+          >
+          <tr
+            ><td><code>labelledBy</code></td><td><code>string</code></td><td
+              >&mdash;</td
+            ><td
+              >ID of the visible label element. Screen readers announce the
+              label, then the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>options</code></td><td
+              ><code>{"{ value: string; label: string }[]"}</code></td
+            ><td>&mdash;</td><td>The choices, in display order.</td></tr
+          >
+          <tr
+            ><td><code>value</code></td><td><code>string</code></td><td
+              >&mdash;</td
+            ><td>The current value.</td></tr
+          >
+          <tr
+            ><td><code>onChange</code></td><td
+              ><code>(value: string) =&gt; void</code></td
+            ><td>&mdash;</td><td
+              >Called with the chosen value, only when it differs from <code
+                >value</code
+              >.</td
+            ></tr
+          >
+        </tbody>
+      </table>
+
+      <h2>BEM classes</h2>
+      <table>
+        <thead>
+          <tr><th>Class</th><th>Element</th></tr>
+        </thead>
+        <tbody>
+          <tr
+            ><td><code>select</code></td><td
+              >Outer wrapper. Its <code>data-value</code> holds the current value;
+              tests should read state here.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select--open</code></td><td
+              >Modifier on the wrapper while the menu is open. Flips the
+              chevron.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__button</code></td><td
+              >The button that shows the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__menu</code></td><td
+              >The listbox. Has the <code>hidden</code> attribute while closed.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option</code></td><td
+              >One choice. Its <code>data-value</code> holds the option value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option--selected</code></td><td
+              >The option that matches the current value.</td
+            ></tr
+          >
+          <tr
+            ><td><code>select__option--active</code></td><td
+              >The highlighted option, from pointer hover or arrow keys.</td
+            ></tr
+          >
+        </tbody>
+      </table>
+
+      <h2>Live example</h2>
+
+      <p>
+        The readout next to the dropdown shows the value passed to
+        <code>onChange</code>.
+      </p>
+
+      <div class="select-example">
+        <SelectDemo client:load />
+      </div>
+
+      <h2>Consumers</h2>
+      <ul>
+        <li>
+          <code>LanguageSelector</code> — in the toolbar of every API page, for example
+          <a href="/api/latest/aws-integration/">AWS Integration</a>.
+        </li>
+        <li>
+          <code>RegionSelector</code> — see the <a
+            href="/dd_e2e/components/region-selector/">Region Selector</a
+          > test page.
+        </li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h1 {
+    border-bottom: var(--border-width-thick) solid var(--color-border-strong);
+    padding-bottom: var(--space-sm);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+
+  /* Room for the open menu, so it doesn't cover the next section. */
+  .select-example {
+    min-height: 12rem;
+  }
+</style>

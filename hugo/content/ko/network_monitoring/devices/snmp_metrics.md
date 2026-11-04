@@ -1,21 +1,21 @@
 ---
 further_reading:
 - link: /network_monitoring/devices/profiles
-  tag: 설명서
+  tag: 문서
   text: Network Device Monitoring을 통해 프로필 사용
 - link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
   tag: 지식 센터
   text: SNMP 모니터링 개요
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그
-  text: Datadog으로 SNMP 모니터링
+  text: Datadog으로 SNMP 모니터링하기
 title: SNMP 메트릭
 ---
 ## 설치 {#installation}
 
-Network Device Monitoring은 [Datadog Agent][1] 패키지에 포함된 SNMP 통합에 의존하며, SNMP의 세 가지 버전 `SNMPv1`, `SNMPv2`, `SNMPv3`를 모두 지원합니다. 탐색 중에 SNMP 포트(기본값 161)가 폴링됩니다. 응답이 있고 일치하는 프로필이 있는 경우 기기는 발견된 것으로 간주됩니다.
+Network Device Monitoring은 [Datadog Agent][1] 패키지에 포함된 SNMP 통합에 의존하며, SNMP의 3가지 버전 `SNMPv1`, `SNMPv2`, `SNMPv3`를 모두 지원합니다. 탐색 중에 SNMP 포트(기본값 161)가 폴링됩니다. 응답이 있고 일치하는 프로필이 있는 경우 기기는 발견된 것으로 간주됩니다.
 
-## 사전 요구 사항 {#pre-requisites}
+## 전제 조건 {#pre-requisites}
 
 Agent v7.32+
 
@@ -33,19 +33,19 @@ Agent v7.32+
 
 Datadog Network Device Monitoring은 전체 서브넷에 있는 개별 기기나 자동 검색 기기(고유한 IP 주소)에서 메트릭 수집을 지원합니다.
 
-네트워크에 있는 기기 수에 따라 수집 전략을 고르세요. 또한 네트워크의 역동성(기기 추가 또는 제거 빈도)를 고려해야 합니다.
+네트워크에 있는 기기 수에 따라 수집 전략을 고르세요. 또한 네트워크의 역동성(기기 추가 또는 제거 빈도)을 고려해야 합니다.
 
 [개별 기기 모니터링](#monitoring-individual-devices)
-: 작고 대부분 정적인 네트워크의 경우.
+: 규모가 작고 대부분 정적인 네트워크의 경우.
 
 [Autodiscovery](#autodiscovery)
-: 더 크거나 동적인 네트워크의 경우.
+: 규모가 크거나 동적인 네트워크의 경우.
 
 수집 전략에 관계없이 Datadog의 [sysObjectID 매핑된 기기 프로필][2]을 활용해 자동으로 기기에서 관련 메트릭을 수집합니다.
 
 ### 개별 기기 모니터링 {#monitoring-individual-devices}
 
-개별 기기 모니터링 방법:
+개별 기기를 모니터링하려면 다음 단계를 따르세요.
 
 - IP 주소와 추가 기기 메타데이터(태그로)를 `snmp.d/conf.yaml` 파일에 포함한 후, 이를 [Agent's configuration directory][3]의 루트에 있는 `conf.d/` 폴더에 배치하세요. 사용 가능한 모든 구성 옵션은 [샘플 snmp.d/conf.yaml][4]을 참조하세요.
 
@@ -95,7 +95,7 @@ Datadog Network Device Monitoring은 전체 서브넷에 있는 개별 기기나
 
 설정 후 Agent가 기기를 [Datadog 지원 기기 프로필][6] 중 하나와 일치시켜 관련 메트릭을 수집합니다.
 
-설정을 확장하는 방법:
+설정을 확장하려면 다음 단계를 따르세요.
 
 * 네트워크의 더 많은 기기로부터 메트릭을 수집하기 위해 인스턴스를 추가하세요.
 * 동적 네트워크 전반의 많은 기기에서 메트릭을 수집해야 하는 경우, [Autodiscovery](#autodiscovery)를 사용하세요.
@@ -112,7 +112,7 @@ Network Device Monitoring 및 Autodiscovery를 사용하려면 다음 단계를 
 
 2. [`datadog.yaml`][8] Agent 구성 파일을 수정하여 Datadog이 스캔할 모든 서브넷을 포함합니다. 다음 샘플 구성은 Autodiscovery를 위한 필수 파라미터, 기본값 및 예제를 제공합니다.
 
-3. 필요 시, Agent의 Autodiscovery 중에 기기의 [중복 제거][11]를 활성화합니다. 이 기능은 기본적으로 비활성화되어 있으며 Agent 버전 `7.67+`이 필요합니다.
+3. 선택적으로, Agent의 Autodiscovery 중에 기기의 중복 제거를 활성화할 수 있습니다. 이 기능은 기본적으로 비활성화되어 있으며 Agent 버전 7.67+가 필요합니다. 자세한 내용은 [Agent 구성 파일 예시][11]의 `use_deduplication` 파라미터를 참조하세요.
 
    ```yaml
    network_devices:
@@ -194,9 +194,9 @@ network_devices:
 
 ### 인터페이스 속도 재정의 {#override-interface-speed}
 
-기본적으로 SNMP 검사는 기기에서 감지된 인터페이스 속도를 보고합니다. 물리적 포트 속도가 실제 회선 대역폭과 다를 경우, 예를 들어 50 Mbps 회선에 대해 프로비저닝된 1 Gbps 물리적 포트의 경우, `interface_configs`를 사용하여 특정 인터페이스의 수신 및 송신 속도를 재정의할 수 있습니다.
+기본적으로 SNMP 검사는 기기에서 탐지된 인터페이스 속도를 보고합니다. 물리적 포트 속도가 실제 회선 대역폭과 다를 경우, 예를 들어 50Mbps 회선에 대해 프로비저닝된 1Gbps 물리적 포트의 경우, `interface_configs`를 사용하여 특정 인터페이스의 인바운드 및 아웃바운드 속도를 재정의할 수 있습니다.
 
-인스턴스 구성에 `interface_configs`를 `snmp.d/conf.yaml`에 추가하세요.
+`snmp.d/conf.yaml`의 인스턴스 구성에 `interface_configs`를 추가하세요.
 
 ```yaml
 instances:
@@ -230,4 +230,4 @@ instances:
 [8]: /ko/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855
 [10]: /ko/agent/configuration/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L4036
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

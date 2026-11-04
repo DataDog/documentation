@@ -23,7 +23,7 @@ title: Fuente del Datadog Agent
 Utilice la fuente del Datadog Agent de Observability Pipelines para recibir registros o métricas del Datadog Agent.
 
 **Notas**:
-- Si está utilizando el Datadog Distribution of OpenTelemetry (DDOT) Collector para recopilar registros o métricas, debe [utilizar la fuente de OpenTelemetry para enviar esos datos a Observability Pipelines][4].
+- Si está utilizando la distribución de Datadog del Collector de OpenTelemetry (DDOT) para recopilar registros o métricas, debe [utilizar la fuente de OpenTelemetry para enviar esos datos a Observability Pipelines][4].
 - El Datadog Agent envía registros y métricas etiquetados con `ddsource` y `ddtags`, no con `source` y `tags`. Cuando defina consultas o filtros de procesador para estos eventos, utilice `ddsource` y `ddtags` en su lugar.
 
 ## Requisitos previos {#prerequisites}
@@ -32,11 +32,11 @@ Utilice la fuente del Datadog Agent de Observability Pipelines para recibir regi
 
 ## Configuración {#setup}
 
-<div class="alert alert-danger">Para la gestión de secretos: solo ingrese el identificador para la dirección del Datadog Agent y, si corresponde, la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
+<div class="alert alert-danger">Para la gestión de secretos: solo ingrese el identificador para la dirección del Datadog Agent y, si corresponde, la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales. Consulte <a href="/observability_pipelines/configuration/secrets_management/">Secrets Management</a> para obtener instrucciones de configuración.</div>
 
 Configure esta fuente cuando [configure una canalización][1]. Puede configurar un pipeline en la [UI][6], utilizando la [API][7] o con [Terraform][8]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
-Después de seleccionar la fuente del Datadog Agent en la UI de la canalización, ingrese el identificador para su dirección del Datadog Agent. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+Después de seleccionar la fuente del Datadog Agent en la UI de la canalización, ingrese el identificador para su dirección del Datadog Agent. Este identificador hace referencia a la dirección de enlace en la que el Worker escucha las conexiones entrantes del Agent, como `<OPW_HOST>:8282`. Si deja el campo de identificador en blanco, se utiliza el [predeterminado](#secret-defaults).
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -73,7 +73,7 @@ Después de seleccionar la fuente del Datadog Agent en la UI de la canalización
 
 Utilice el archivo de configuración del Agent o el archivo de valores del gráfico de Helm del Agent para conectar el Datadog Agent al Observability Pipelines Worker.
 
-**Nota**: Si su Agent se está ejecutando en un contenedor Docker, debe excluir los registros de Observability Pipelines utilizando la variable de entorno `DD_CONTAINER_EXCLUDE_LOGS`. Para Helm, utilice `datadog.containerExcludeLogs`. Esto evita registros duplicados, ya que el Worker también envía sus propios registros directamente a Datadog. Consulte [Colección de logs de Docker][1] o [Configuración de variables de entorno][2] para obtener más información.
+**Nota**: Si su Agent se está ejecutando en un contenedor Docker, debe excluir los registros de Observability Pipelines utilizando la variable de entorno `DD_CONTAINER_EXCLUDE_LOGS`. Para Helm, utilice `datadog.containerExcludeLogs`. Esto evita registros duplicados, ya que el Worker también envía sus propios registros directamente a Datadog. Consulte [Colección de registros de Docker][1] o [Configuración de variables de entorno][2] para obtener más información.
 
 {{% collapse-content title="Archivo de configuración del Agent" level="h3" expanded=false id="logs-agent-config-file" %}}
 

@@ -1,0 +1,5 @@
+<!-- schema-deprecated: /api/latest/dashboards/get-all-dashboards/ -->
+
+| Parent field | Field         | Type      | Description                                                                                                                                                                                                                                                                                                             |
+| ------------ | ------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| dashboards   | is_read_only  | boolean   | **DEPRECATED**: Whether this dashboard is read-only. If True, only the author and admins can make changes to it. This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies.md) instead to manage write authorization for individual dashboards. |

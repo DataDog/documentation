@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: 학습 센터
   text: Product Analytics 시작하기
+- link: https://learn.datadoghq.com/courses/define-user-behavior-with-labeled-actions-in-product-analytics
+  tag: 학습 센터
+  text: Product Analytics 에서 레이블이 지정된 작업을 사용하여 사용자 행동을 정의하십시오
 title: 퍼널
 ---
 퍼널 분석을 이용하면 주요 워크플로 전반의 전환율을 추적하여 엔드투엔드 사용자 여정에서 발생하는 병목 현상을 파악하고 이를 해결할 수 있습니다. 구체적으로 다음을 할 수 있습니다.
