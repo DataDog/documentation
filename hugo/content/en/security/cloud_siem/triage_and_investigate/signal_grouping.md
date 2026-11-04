@@ -89,7 +89,7 @@ When a new signal is sent to a case project, Datadog:
 
 Datadog also adds the related signals that are not yet in an eligible case. Related signals that are already in an eligible case stay where they are.
 
-Datadog also follows these rules:
+Datadog follows these rules:
 
 - Closed cases are never reopened. If the only related case is closed, Datadog creates a new case.
 - If the new signal is already in an {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} case, it stays in that case.
