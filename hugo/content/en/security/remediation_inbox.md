@@ -39,8 +39,6 @@ The Remediation Inbox answers one question: **what are the most impactful fixes 
 
 <!-- TODO: screenshot of the Remediations tab -->
 
-The first time you open the **Remediations** tab, a guided introduction walks you through the remediation flow and the capabilities to set up.
-
 ## Prerequisites
 
 - Findings from at least one supported product:
