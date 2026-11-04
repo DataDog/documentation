@@ -413,7 +413,7 @@ datadog-code-security-mcp ephemeral-scan \
   --code-file rule.js --query-file rule.scm
 ```
 
-Save an approved rule as a Datadog custom rule. `--tests-file` is a JSON array with two examples, the fixed code and the code before the fix. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
+Save an approved rule as a Datadog custom rule. `--tests-file` is a JSON file that contains an array of two examples: the fixed code and the code before the fix. Each example uses the fields described in [`datadog_promote_sast_rule`][30]. This command uses `DD_API_KEY` and `DD_APP_KEY` from the shell:
 
 ```shell
 datadog-code-security-mcp promote-sast-rule --user-confirmed \
