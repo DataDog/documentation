@@ -545,6 +545,8 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
+See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
+
 **Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
 
 ### `send_message_to_chat`
