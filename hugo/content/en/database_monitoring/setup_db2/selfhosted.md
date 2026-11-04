@@ -28,7 +28,7 @@ Supported Agent versions
 : 7.86 or later. The Agent does not bundle the `ibm_db` Python driver. Install the driver as described in [Step 3](#step-3-install-the-agent-and-the-ibm_db-driver).
 
 Supported platforms
-: Self-hosted IBM Db2 for Linux, UNIX, and Windows (Db2 LUW). Db2 for z/OS, Db2 for IBM i, pureScale, and Database Partitioning Feature (DPF) deployments are not supported.
+: IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
 <!-- vale Datadog.headings = NO -->
 ## Data collected
@@ -248,7 +248,6 @@ For all integration options, see the [sample configuration][19].
 
 ## Limitations
 
-- Only self-hosted Db2 LUW is supported. Db2 for z/OS, Db2 for IBM i, pureScale, and DPF deployments are not supported.
 - Query metrics are differences between cumulative package-cache counters. New cache entries establish a baseline before subsequent executions appear in metrics. Executions of statements evicted from the package cache between collections can be missed.
 - An HADR standby requires reads enabled to accept the SQL connections used for collection. Each server reports its own query workload. Query metrics do not report replication lag, HADR health, or which server is primary. See [High availability disaster recovery (HADR)][16].
 

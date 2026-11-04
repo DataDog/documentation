@@ -25,7 +25,7 @@ This feature is in preview and requires Datadog Agent v7.86 or later. Customers 
 | 11.5            | {{< X >}}   |
 | 12.1            | {{< X >}}   |
 
-Database Monitoring supports IBM Db2 for Linux, UNIX, and Windows (Db2 LUW). Db2 for z/OS, Db2 for IBM i, pureScale, and Database Partitioning Feature (DPF) deployments are not supported.
+Database Monitoring supports IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
 ### Setup instructions by hosting type
 
