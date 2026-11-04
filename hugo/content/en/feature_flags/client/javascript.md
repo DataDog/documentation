@@ -182,6 +182,8 @@ console.log(details.reason);      // Why this value was chosen
 console.log(details.errorCode);   // Error code, if evaluation failed
 {{< /code-block >}}
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][7].
+
 ## Complete example
 
 Here's a complete example showing how to set up and use Datadog Feature Flags in a JavaScript application:
@@ -368,3 +370,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

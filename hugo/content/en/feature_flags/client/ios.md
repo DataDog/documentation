@@ -398,6 +398,8 @@ print(details.reason)   // Reason (for example: "TARGETING_MATCH" or "DEFAULT")
 print(details.errorCode) // Error code, if evaluation failed
 {{< /code-block >}}
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][3].
+
 ### Observe provider events
 
 <div class="alert alert-info">Provider event observation for the Datadog OpenFeature provider is available in <code>dd-openfeature-provider-swift</code> 0.2.0 and later. Version 0.2.0 depends on <code>dd-sdk-ios</code> 3.13.0 or later.</div>
@@ -563,3 +565,4 @@ final class CheckoutFlagTests: XCTestCase {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /account_management/api-app-keys/#client-tokens
+[3]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

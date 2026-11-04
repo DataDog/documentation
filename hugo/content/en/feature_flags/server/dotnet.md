@@ -256,6 +256,8 @@ Console.WriteLine($"Error Message: {details.ErrorMessage}");
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][11].
+
 ## Waiting for provider initialization
 
 By default, the provider initializes asynchronously and flag evaluations return default values until the first flag configuration is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
@@ -405,6 +407,7 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
 [9]: /feature_flags/concepts/configuration_sources/
 [10]: /feature_flags/concepts/configuration_sources/#agent-availability
+[11]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/
 
 ## Further reading
 

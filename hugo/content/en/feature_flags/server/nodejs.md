@@ -296,6 +296,8 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][13].
+
 ## Advanced configuration
 
 Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
@@ -386,3 +388,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [12]: /feature_flags/concepts/configuration_sources/#agent-availability
+[13]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

@@ -38,9 +38,11 @@ If multiple experiments share the same flag, Datadog evaluates their targeting r
 
 ## Exposures
 
-Each time the SDK evaluates a flag's experiment targeting rule for a subject, Datadog records an _exposure_: the subject, the variant served, and a timestamp. Datadog joins exposures to metric events to calculate the lift between variants. Those metric events can come from Product Analytics, Real User Monitoring, or your data warehouse.
+Each time the SDK evaluates a flag's experiment targeting rule for a subject, Datadog records an _exposure_: the subject, the flag key, the allocation key of the experiment targeting rule, the variant served, and a timestamp. Datadog joins exposures to metric events to calculate the lift between variants. Those metric events can come from Product Analytics, Real User Monitoring, or your data warehouse.
 
 Datadog joins exposures and metrics by subject identifier. The `targetingKey` your SDK sets in the [evaluation context][5] must match the [subject type attribute][6] configured for the experiment, such as `@usr.id`, or Datadog can't associate metric events with the correct exposure.
+
+To log exposures to your own data warehouse in addition to Datadog, see [Log Feature Flag Exposures to Your Data Warehouse][8].
 
 ## Bring your own randomization
 
@@ -57,3 +59,4 @@ If you randomize subjects with a system other than Datadog Feature Flags, this f
 [5]: /feature_flags/concepts/evaluation_context/
 [6]: /experiments/concepts/subject_types/
 [7]: /experiments/concepts/exposure_sql/
+[8]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

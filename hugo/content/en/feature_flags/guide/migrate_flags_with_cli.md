@@ -16,6 +16,8 @@ The [Datadog Flag Migration CLI][1] is a command-line tool that helps you migrat
 
 <div class="alert alert-info">If you migrate flags from Eppo, they keep Eppo-compatible bucketing. Existing subjects continue to receive the same variants after you switch flag evaluation to Datadog.</div>
 
+If you migrate flags from Eppo and log experiment exposures to your own data warehouse, the migration can change the allocation keys of your flags. See [Log Feature Flag Exposures to Your Data Warehouse][4].
+
 ## Prerequisites
 
 Before running the CLI, make sure your Datadog organization is set up:
@@ -42,3 +44,4 @@ For full configuration options, supported source providers, authentication setup
 [1]: https://github.com/DataDog/dd-flag-migration
 [2]: /feature_flags/
 [3]: /feature_flags/concepts/environments/
+[4]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

@@ -200,6 +200,8 @@ print(f"Error Message: {details.error_message}")
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][13].
+
 ### Evaluation without context
 
 You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
@@ -353,6 +355,7 @@ Verify the following:
 [10]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [11]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [12]: /feature_flags/concepts/configuration_sources/#agent-availability
+[13]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/
 
 ## Further reading
 

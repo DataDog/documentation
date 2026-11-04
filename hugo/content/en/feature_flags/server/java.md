@@ -646,6 +646,8 @@ When the selected configuration path supports exposures, exposures appear only f
 2. Verify the Agent API key and connectivity.
 3. If you use Agent Remote Configuration, verify that the Agent was available when the application started. If it was not, restart the application. See [Agent availability][18].
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][19].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -667,3 +669,4 @@ When the selected configuration path supports exposures, exposures appear only f
 [16]: /serverless/google_cloud_run/containers/in_container/java/
 [17]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
 [18]: /feature_flags/concepts/configuration_sources/#agent-availability
+[19]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

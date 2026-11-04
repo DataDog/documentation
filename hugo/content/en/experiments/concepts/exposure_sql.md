@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. **Exposure SQL Models** tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse. If you randomize subjects outside of Datadog Feature Flags, create an Exposure SQL Model for bring-your-own randomization. For a Datadog Feature Flag experiment whose decision metrics use warehouse data, an Exposure SQL Model can supply exposure records as an alternative to Datadog's default exported exposure logs.
+Datadog Experiments analyzes experiments run with [Datadog Feature Flags][1] or an independent randomization system. **Exposure SQL Models** tell Datadog who was exposed to your experiment and when, by reading exposure records from your warehouse. If you randomize subjects outside of Datadog Feature Flags, create an Exposure SQL Model for bring-your-own randomization. For a Datadog Feature Flag experiment whose decision metrics use warehouse data, an Exposure SQL Model can supply exposure records as an alternative to Datadog's default exported exposure logs. To log these records from your application, see [Log Feature Flag Exposures to Your Data Warehouse][6].
 
 
 Similar to [Metric SQL Models][2], Exposure SQL Models are SQL queries that describe exposure data in your warehouse. Exposure SQL Models return the following columns:
@@ -27,7 +27,7 @@ Similar to [Metric SQL Models][2], Exposure SQL Models are SQL queries that desc
 |--------|----------|-------------|
 | Subject Key | Yes | A unique identifier for the subject randomized into the experiment. The model must map the experiment's subject type and every subject type required by the analysis so Datadog can join exposures to metric data. |
 | Timestamp | Yes | The timestamp when the user was exposed to the experiment. |
-| Experiment ID | Yes | The experiment that the user was exposed to. One Exposure SQL Model can track many experiments; this column filters records to a specific experiment. |
+| Experiment ID | Yes | The experiment that the user was exposed to. One Exposure SQL Model can track many experiments; this column filters records to a specific experiment. For an experiment that uses Datadog Feature Flags, the value is `<FLAG_KEY>-<ALLOCATION_KEY>`, not the flag key alone. |
 | Variant ID | Yes | The variant the user was assigned to (for example, `treatment` or `control`). |
 | Split-by properties | No | Categorical data used to create dimensional split-by charts, such as customer tier, device type, or region. |
 
@@ -124,3 +124,4 @@ To view a simplified version of the pipeline logic, click {{< ui >}}Copy SQL{{< 
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /experiments/plan_and_launch_experiments/
 [5]: /experiments/concepts/sql_template_variables/
+[6]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

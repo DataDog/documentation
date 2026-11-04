@@ -237,6 +237,8 @@ function PaywallLayout() {
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][5].
+
 ## Complete example
 
 Here's a complete example showing how to set up and use Datadog Feature Flags in a React application:
@@ -344,3 +346,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Us
 [2]: /account_management/api-app-keys/#client-tokens
 [3]: /feature_flags/client/javascript/#supply-initial-precomputed-fallback-data
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[5]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

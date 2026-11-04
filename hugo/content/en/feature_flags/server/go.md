@@ -292,6 +292,8 @@ fmt.Printf("Error: %v\n", details.Error())
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][7].
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's in-memory provider to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. The in-memory provider ships in the upstream `go-sdk` module under `github.com/open-feature/go-sdk/openfeature/memprovider`, so no additional dependency is required.
@@ -366,6 +368,7 @@ func TestNewCheckoutFlow(t *testing.T) {
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
 [6]: /feature_flags/concepts/configuration_sources/#agent-availability
+[7]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/
 
 ## Further reading
 

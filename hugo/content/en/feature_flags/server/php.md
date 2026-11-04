@@ -234,6 +234,8 @@ if ($details->isError()) {
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+The PHP OpenFeature provider does not return the allocation key in the flag metadata yet. To log experiment exposures to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][8].
+
 ## Complete examples
 
 The following examples combine initialization, evaluation context, typed evaluation, and evaluation details.
@@ -444,3 +446,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [5]: /feature_flags/concepts/environments/
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /feature_flags/concepts/configuration_sources/#agent-availability
+[8]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/#php

@@ -26,7 +26,9 @@ Reference template variables using the `{{variable}}` syntax. Datadog replaces t
 | `{{assignments_start_timestamp}}`, `{{assignments_end_timestamp}}` | The experiment's assignment window. |
 | `{{experiment_key}}` | The experiment's flag-allocation key, rendered as a quoted string literal. |
 | `{{experiment_keys}}` | A comma-separated list of quoted flag-allocation keys, for use in an `IN (...)` clause. |
-| `{{allocation_key}}` | The allocation portion of the flag-allocation key, rendered as a quoted string literal. |
+| `{{allocation_key}}` | The allocation portion of the flag-allocation key, rendered as a quoted string literal. For an experiment that does not use a Datadog feature flag, this value is an empty string. |
+
+The flag-allocation key has the format `<FLAG_KEY>-<ALLOCATION_KEY>`. The allocation key identifies the targeting rule of the experiment. To log the allocation key with your exposures, see [Log Feature Flag Exposures to Your Data Warehouse][1].
 
 Timestamp variables render as ISO 8601 strings, so wrap them in quotes and cast them as needed. Key variables are already quoted, so use them without adding quotes.
 
@@ -56,3 +58,5 @@ WHERE experiment_id = {{experiment_key}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

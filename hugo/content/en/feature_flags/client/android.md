@@ -257,6 +257,8 @@ Similar detail methods exist for other types: `getBooleanDetails()`, `getInteger
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][4].
+
 ## Observe provider events
 
 <div class="alert alert-info">Provider event observation is available in <code>dd-sdk-android-flags-openfeature</code> 3.6.0 and later. Use the same version for <code>dd-sdk-android-flags</code>.</div>
@@ -602,3 +604,4 @@ class CheckoutFlagsTest {
 [1]: https://openfeature.dev/
 [2]: /account_management/api-app-keys/#client-tokens
 [3]: https://github.com/open-feature/kotlin-sdk/pull/226
+[4]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

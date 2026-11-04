@@ -257,6 +257,8 @@ puts "Error Message: #{details.error_message}"
 
 Flag details help you debug evaluation behavior and understand why a user received a given value.
 
+To log experiment exposures, including the allocation key, to your own data warehouse, see [Log Feature Flag Exposures to Your Data Warehouse][12].
+
 ## Evaluation without context
 
 You can evaluate flags without providing an evaluation context. This is useful for global flags that don't require user-specific targeting:
@@ -401,3 +403,4 @@ Before the first valid configuration, evaluations return caller-provided default
 [9]: /feature_flags/server/java/#compatibility-requirements
 [10]: #use-the-java-sdk-on-jruby
 [11]: /feature_flags/concepts/configuration_sources/#agent-availability
+[12]: /experiments/guide/log_feature_flag_exposures_to_your_warehouse/

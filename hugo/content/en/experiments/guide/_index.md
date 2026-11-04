@@ -12,6 +12,8 @@ cascade:
 {{< whatsnext desc="Warehouse Connections:" >}}
     {{< nextlink href="experiments/guide/connecting_a_data_warehouse" >}}Connect your data warehouse for warehouse-native experiment analysis
 {{< /nextlink >}}
+    {{< nextlink href="experiments/guide/log_feature_flag_exposures_to_your_warehouse" >}}Log feature flag exposures to your data warehouse
+{{< /nextlink >}}
 
 {{< /whatsnext >}}
 
