@@ -162,11 +162,11 @@ Datadog continuously maintains the state you define on the covered resources:
   - **EC2**: Events come from the CloudFormation stack's EventBridge rule.
   - **Lambda**: The `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
 - On EC2, instances that already have the Agent are re-verified less frequently, to avoid unnecessary activity.
-- On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet already on the instrumentation rule's layer versions and APM and Logs settings produces no per-function activity.
+- On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet whose functions already match the instrumentation rule's layer versions and APM and Logs settings produces no per-function activity.
 
 ### How Lambda functions pick up new layer versions
 
-Datadog compares a covered function's layers against the versions set on the instrumentation rule. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version. Datadog does not upgrade the versions on a rule for you. A covered function picks up a new layer version only when you edit the rule. For where to set the versions, see [Install Datadog instrumentation][8] in the setup guide.
+Datadog compares a covered function's layers against the versions set on the instrumentation rule. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version. Datadog does not upgrade the layer versions on a rule for you. A covered function picks up a new layer version only when you edit the rule. For where to set the versions, see [Install Datadog instrumentation][8] in the setup guide.
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
