@@ -25864,6 +25864,8 @@ components:
     CreateConnectionRequestDataAttributes:
       description: Attributes defining the data source connection, including join configuration and custom fields.
       properties:
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields to import from the data source.
           items:
@@ -25882,6 +25884,10 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          maxLength: 255
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           example: ""
@@ -51076,13 +51082,15 @@ components:
       type: object
     FacetInfoRequestDataType:
       default: users_facet_info_request
-      description: Users facet info request resource type.
+      description: Facet info request resource type.
       enum:
         - users_facet_info_request
+        - accounts_facet_info_request
       example: users_facet_info_request
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO_REQUEST
+        - ACCOUNTS_FACET_INFO_REQUEST
     FacetInfoResponse:
       description: Response containing facet information for an attribute, including its distinct values and occurrence counts.
       example:
@@ -51140,11 +51148,15 @@ components:
       description: The numeric range of a facet attribute, representing the minimum and maximum observed values.
       properties:
         max:
-          description: The maximum observed value for the numeric facet attribute.
-          type: object
+          description: The maximum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
         min:
-          description: The minimum observed value for the numeric facet attribute.
-          type: object
+          description: The minimum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
       type: object
     FacetInfoResponseDataAttributesResultValuesItems:
       description: A single facet value with its occurrence count in the dataset.
@@ -51159,13 +51171,15 @@ components:
       type: object
     FacetInfoResponseDataType:
       default: users_facet_info
-      description: Users facet info resource type.
+      description: Facet info resource type.
       enum:
         - users_facet_info
+        - accounts_facet_info
       example: users_facet_info
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO
+        - ACCOUNTS_FACET_INFO
     FastlyAPIKey:
       description: The definition of the `FastlyAPIKey` object.
       properties:
@@ -78146,6 +78160,8 @@ components:
         created_by:
           description: Identifier of the user who created the connection.
           type: string
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields imported from the data source.
           items:
@@ -78161,6 +78177,9 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           type: string
@@ -78170,6 +78189,40 @@ components:
           type: string
         updated_by:
           description: Identifier of the user who last updated the connection.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetails:
+      description: Type-specific configuration of the connection. Only the field matching the connection type is set.
+      properties:
+        ref_table:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable"
+        snowflake:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake"
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable:
+      description: Configuration of a reference table connection.
+      properties:
+        table_id:
+          description: Identifier of the reference table.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake:
+      description: Configuration of a Snowflake connection.
+      properties:
+        account_id:
+          description: Identifier of the Snowflake account.
+          type: string
+        database_name:
+          description: Name of the Snowflake database.
+          type: string
+        schema:
+          description: Name of the Snowflake schema.
+          type: string
+        table_name:
+          description: Name of the Snowflake table.
           type: string
       type: object
     ListConnectionsResponseDataAttributesConnectionsItemsJoin:
@@ -142592,6 +142645,10 @@ components:
           items:
             $ref: "#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems"
           type: array
+        name:
+          description: New display name for the connection.
+          maxLength: 255
+          type: string
       type: object
     UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
       description: Specification for updating an existing field in a connection, including which field to modify and the new values.
