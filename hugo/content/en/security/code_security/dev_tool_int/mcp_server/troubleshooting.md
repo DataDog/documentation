@@ -46,7 +46,7 @@ If the values are set but scans still fail, verify your keys have the correct pe
 
 Ephemeral scans work without Datadog keys, but saving a rule requires `DD_API_KEY` and `DD_APP_KEY`. See [Authentication errors](#authentication-errors).
 
-If the rule does not report the expected number of findings on its two examples, or fails on them, nothing is saved. If the error says an example was not scanned, give its file name the extension of the rule's language. Otherwise, fix the rule and retry.
+If the rule does not report the expected number of findings on its two examples, or fails on them, nothing is saved. If the error says an example was not scanned, rename the example file so its extension matches the rule's language, for example `.ts` for `TYPESCRIPT`. Otherwise, fix the rule and retry.
 
 If Datadog creates the rule but rejects its content, the error reports that the rule was left empty. Fix the cause the error reports, then retry with `overwrite: true` (`--overwrite` in the CLI) to replace the empty rule.
 
