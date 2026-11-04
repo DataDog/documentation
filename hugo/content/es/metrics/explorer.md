@@ -1,91 +1,111 @@
 ---
 aliases:
 - /es/graphing/metrics/explorer/
-description: Explora todas tus métricas y realiza análisis.
+description: Explore todas sus métricas y realice análisis.
 further_reading:
 - link: /metrics/summary/
   tag: Documentación
-  text: Resumen de métricas
+  text: Metrics Summary
 - link: /metrics/distributions/
   tag: Documentación
-  text: Distribuciones de métricas
+  text: Distribución de métricas
 - link: /dashboards/guide/quick-graphs/
   tag: Documentación
   text: Quick Graphs
-title: Explorador de métricas
+- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+  tag: Blog
+  text: Administre el volumen de métricas y las etiquetas en su entorno con Observability
+    Pipelines
+- link: https://www.datadoghq.com/blog/metrics-natural-language-queries/
+  tag: Blog
+  text: Explore las métricas de Datadog con consultas en lenguaje natural
+title: Metrics Explorer
 ---
+## Descripción general {#overview}
 
-## Información general
+El [Metrics Explorer][1] es una interfaz básica para examinar sus métricas en Datadog. Para opciones más avanzadas, cree un [notebook][2] o un [Dashboard] ([screenboard][3] o [timeboard][4]).
 
-El [Explorador de métricas][1] es una interfaz básica para examinar tus métricas en Datadog. Para opciones más avanzadas, crea un [notebook][2] o dashboard [screenboard][3], o un [timeboard][4]).
+## Consultas en lenguaje natural {#natural-language-queries}
 
-## Consultas en lenguaje natural
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Las Natural Language Queries para Metrics Explorer no están disponibles para su sitio de Datadog seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
-La consulta en lenguaje natural (NLQ) en el Metrics Explorer está en fase de vista previa. Si estás interesado en esta función, haz clic en <strong>Solicitar acceso</strong> y rellena el formulario.
-{{< /callout >}}
+Utilice Natural Language Queries (NLQ) para describir lo que busca en inglés sencillo. Datadog traduce automáticamente su solicitud a una consulta de métricas estructurada, entendiendo el contexto como sus servicios, atributos y etiquetas. Esto facilita la exploración de métricas sin necesidad de escribir sintaxis compleja.
 
+Para acceder a esta función, haga clic en {{< ui >}}Ask{{< /ui >}} en el campo de búsqueda y escriba su consulta.
 
-Utiliza consultas en lenguaje natural (NLQ) para describir lo que buscas en inglés sencillo. Datadog traduce automáticamente tu solicitud en una consulta estructurada de métricas, comprendiendo el contexto, como tus servicios, atributos y etiquetas. Esto facilita la exploración de métricas sin necesidad de escribir una sintaxis compleja.
+{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Consulta en lenguaje natural en Metrics Explorer que muestra cómo buscar métricas mediante frases en inglés sencillo" video=true >}}
 
-Para acceder a esta función, haz clic en **Ask** (Preguntar) en el campo de búsqueda y escribe tu consulta.
+Para deshabilitar NLQ para su organización, debe tener [org_management permissions][11]. Navegue a {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Preferences{{< /ui >}} y desactive la función de Natural Language Queries.
 
-{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Consulta de lenguaje natural en el Metrics Explorer que muestra cómo buscar métricas usando frases en inglés sencillo" video=true >}}
+## Sessions {#sessions}
 
-Para desactivar NLQ para tu organización, debes tener [permisos org_management][11]. Ve a **Organization Settings > Preferences** (Configuración de la organización > Preferencias) y desactiva la función de consultas en lenguaje natural.
+Metrics Explorer mantiene automáticamente un historial de sus investigaciones recientes, lo que facilita explorar y compartir diferentes preguntas sin tener que volver a realizar el trabajo anterior.
 
-## Creación de gráficos
+Utilice sesiones para:
 
-Utiliza el editor de consultas para personalizar el gráfico que aparece en la página del Explorador de métricas.
+- **Inicie una investigación independiente:** Haga clic en {{< ui >}}New Session{{< /ui >}} para explorar otra pregunta sin perder su trabajo actual.
+- **Regrese a su trabajo anterior:** Seleccione o busque una sesión reciente para continuar una investigación.
+- **Conserve una investigación importante:** Fije y cambie el nombre de una sesión para facilitar su reconocimiento y su localización posterior.
+- **Explore una alternativa:** Duplique una sesión y modifique la copia mientras conserva la original.
+- **Comparta una investigación:** Copie un enlace de sesión para compartirlo con otro usuario.
+- **Eliminar una sesión no utilizada:** Elimine una sesión que ya no necesite.
 
-Puedes especificar el intervalo de tiempo en la esquina superior derecha de la página. El valor predeterminado es **Más de 1 hora**.
+{{< img src="metrics/explorer/09282026_metric_explorer_sessions.png" alt="Ejemplo de sesiones de Metrics Explorer" style="width:80%;" >}}
 
-{{< img src="metrics/explorer/metrics_explorer.png" alt="Explorador de métricas que muestra dos consultas en una barra de gráficos" style="width:80%;" >}}
+## Graphing {#graphing}
 
-Las métricas que no se han notificado en las últimas 24 horas no aparecen en el editor de consultas. Puedes añadir estas métricas a tus gráficos manualmente, introduciendo el nombre de la métrica o la consulta completa.
+Utilice el editor de consultas para personalizar el gráfico que se muestra en la página de Metrics Explorer.
 
-### Contexto
+Puede especificar el marco de tiempo en la esquina superior derecha de la página. El valor predeterminado es {{< ui >}}Past 1 Hour{{< /ui >}}.
 
-Define un contexto de filtrado con el cuadro de texto **desde**, seleccionando o buscando valores de etiquetas (tags). Por ejemplo, puedes utilizar el cuadro de texto **desde** para filtrar valores específicos de métricas de un host, clúster, entorno o región.
+{{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer mostrando dos consultas en un gráfico de barras" style="width:80%;" >}}
 
-### Agregación de espacio
+Las métricas que no se han reportado en las últimas 24 horas no aparecen en el editor de consultas. Puede agregar estas métricas a sus gráficos manualmente ingresando el nombre de la métrica o la consulta completa.
 
-Define la [agregación de espacio][5] utilizada para combinar los valores de una métrica.
+### Contexto {#scope}
+
+Defina un contexto de filtrado con el cuadro de texto {{< ui >}}from{{< /ui >}} seleccionando o buscando valores de etiquetas. Por ejemplo, puede usar el cuadro de texto {{< ui >}}from{{< /ui >}} para filtrar valores de métricas de un servidor, clúster, entorno o región específicos.
+
+### Desglose espacial {#space-aggregation}
+
+Defina el [desglose espacial][5] utilizado para combinar los valores de una métrica.
 
 Las opciones posibles son:
 
-* Media de los valores notificados (por defecto)
-* Máximo de valores notificados
-* Mínimo de valores notificados
-* Suma de los valores notificados
+* Promedio de los valores reportados (predeterminado)
+* Máximo de los valores reportados
+* Mínimo de los valores reportados
+* Suma de los valores reportados
 
-**Nota**: Las opciones pueden variar en función del tipo de métrica seleccionado.
+**Nota**: Las opciones pueden variar según el tipo de métrica seleccionado.
 
-### Funciones y fórmulas
+### Funciones y fórmulas {#functions-and-formulas}
 
-También puedes añadir funciones a tu consulta utilizando el botón de función. No todas las funciones están disponibles para todos los tipos de métricas. Para obtener más información, consulta la documentación sobre [consultas][6]. 
+Opcionalmente, puede agregar funciones a su consulta usando el botón de funciones. No todas las funciones están disponibles para todos los tipos de métricas. Para obtener más información, consulte la [documentación de querying][6]. 
 
-### Gráfica dividida
+### Gráfico dividido {#split-graph}
 
-Utiliza el botón **Split Graph** (Gráfico dividido) para ver los datos divididos en gráficos individuales por valores de etiquetas como región, servicio o entorno.
+Utilice el botón {{< ui >}}Split Graph{{< /ui >}} para visualizar los datos divididos en gráficos individuales por valores de etiquetas como región, servicio o entorno.
 
-### Exportar
+### Exportar {#export}
 
-Utiliza el botón **Export** (Exportar) (<i class="icon-export"></i>) para exportar tu gráfico:
+Utilice el botón {{< ui >}}Export{{< /ui >}} (<i class="icon-export"></i>) para exportar su gráfico:
 
-- Copia un enlace al gráfico para compartirlo
-- Añádelo a un [incidente][8]
-- Crea un [monitor][9]
-- Guárdalo en un [dashboard][10]
-- Guárdalo en un [notebook][2] 
+- Copie un enlace al gráfico para compartirlo
+- Agregue un [incidente][8]
+- Cree un [monitor][9]
+- Guárdelo en un [Dashboard][10]
+- Guárdelo en un [notebook][2] 
 
-### Quick Graphs
+### Quick Graphs {#quick-graphs}
 
-Con Quick Graphs, tienes más opciones para visualizar tus datos, sin necesidad de crear un [dashboard][4] o [notebook][2]. Estos gráficos son útiles para entender y solucionar problemas cuestiones sin crear dashboards permanentes o configuraciones de visualización complejas.
+Con Quick Graphs, tiene más opciones para visualizar sus datos, sin necesidad de crear un [Dashboard][4] o un [Notebook][2]. Estos gráficos son útiles para comprender y solucionar problemas sin crear Dashboards permanentes o configuraciones de visualización complejas.
 
-Para más información, consulta la documentación de [Quick Graphs][7].
+Para obtener más información, consulte la [documentación de Quick Graphs][7].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -96,7 +116,7 @@ Para más información, consulta la documentación de [Quick Graphs][7].
 [5]: /es/metrics/introduction/#space-aggregation
 [6]: /es/dashboards/querying/#advanced-graphing
 [7]: /es/dashboards/guide/quick-graphs/
-[8]: /es/service_management/incident_management/
+[8]: /es/incident_response/incident_management/
 [9]: /es/monitors/
 [10]: /es/dashboards/
 [11]: /es/account_management/rbac/permissions/#access-management

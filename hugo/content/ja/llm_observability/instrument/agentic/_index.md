@@ -9,7 +9,10 @@ title: Agentic インスツルメンテーション
 
 1. Datadog Agent Observability および Datadog トレーサーに関連するコードのみを追加してください。手動インスツルメンテーションを目的とする場合を除き、関連のないコードを変更しないでください。
 2. モノレポや複数のサービスまたはインスツルメンテーションターゲットを持つプロジェクトで実行する場合は、どのサービスまたはサブプロジェクトを Agent Observability のインスツルメンテーション対象とするかをユーザーに確認してください。
-3. 最新の Datadog SDK をインストールしてください。既にインストールされている場合は、依存関係を更新してもよいかユーザーにチェックしてください。
+3. インストールされている Datadog SDK が、アプリケーションに必要なインスツルメンテーションをサポートしているかどうかをチェックします。サポートされている場合は、そのバージョンを使用します。インスツルメンテーションに SDK の更新が必要な場合は、その理由を説明し、依存関係を更新する前に必ず問い合わせを行ってください。オプションの Prompt Management にのみ必要な更新は、ユーザーがその統合を選択するまで延期します。
+4. アプリケーションの既存のプロバイダー、モデル、プロンプトコンテンツ、動作、パッケージマネージャー、およびシークレット管理ワークフローを維持します。
+
+まず、プロンプト追跡（Prompt Tracking）や要求されたコンテキスト共有を含む、インスツルメンテーションを完了させます。次に、オプションのホスト型 Prompt Management を提案します。Prompt Management は、インスツルメンテーション、コンテキスト共有、またはチェックの推奨事項には必須ではありません。
 
 ## 前提条件 {#pre-requisites}
 
@@ -64,10 +67,18 @@ DD_SITE=<provided-dd-site>
 
 | 言語 | 手順 |
 |----------|-------------|
-| Python| [Python アプリケーションの Agentic インスツルメンテーション](/llm_observability/instrument/agentic/python.md) |
-| Node.js| [Node.js アプリケーションの Agentic インスツルメンテーション](/llm_observability/instrument/agentic/nodejs.md) |
-| Java| [Java アプリケーションの Agentic インスツルメンテーション](/llm_observability/instrument/agentic/java.md) |
-| OpenTelemetry| [OpenTelemetry のインスツルメンテーション](/llm_observability/instrument/otel_instrumentation.md) |
+| Python | [Python アプリケーションの Agentic インスツルメンテーション][1] |
+| Node.js | [Node.js アプリケーションの Agentic インスツルメンテーション][2] |
+| Java | [Java アプリケーションの Agentic インスツルメンテーション][3] |
+| OpenTelemetry | [OpenTelemetry のインスツルメンテーション][4] |
+
+## プロンプトのインスツルメンテーション {#instrument-prompts}
+
+Prompt Tracking は、デフォルトの Agent Observability インスツルメンテーションの一部です。選択した各 LLM 呼び出しについて、アプリケーションがどこでプロンプトを構築しているかを特定します。プロンプトテンプレートは、それを埋めるために使用される変数値とは分けて保持してください。
+
+ローカルプロンプトの場合は、[プロンプト追跡の指示][5]に従って、プロンプトテンプレートと変数値を LLM スパンとともに記録します。プロンプトを構築する既存のコードはそのまま保持してください。Datadog Prompt Management からプロンプトを取得するコードに置き換えないでください。
+
+アプリケーションがすでに Datadog Prompt Management からプロンプトを取得している場合は、その統合を維持してください。自動追跡は、フォーマット済みのプロンプトが変更されずに、サポートされている自動インスツルメンテーション対象のプロバイダーに渡される場合に適用されます。アプリケーションがフォーマット済みのプロンプトをプロバイダーに送信する前にコピーまたは変更する場合は、[Track prompt usage][6] で説明されているように明示的なアノテーションを追加してください。自動追跡によってすでにプロンプトのメタデータが取得されている場合は、手動でアノテーションを追加しないでください。
 
 {{< agent-only >}}
 ## 推奨されるチェックのためにエージェントのコンテキストを共有する{#share-agent-context-for-check-recommendations}
@@ -157,20 +168,9 @@ Datadog の初期オンボーディングのプロンプトに、エージェン
 - アップロードが失敗した場合は、インスツルメンテーションを継続し、Datadog がオプションのコンテキストを受信しなかったことをユーザーに伝えてください。より広範なデータで再試行しないでください。
 
 {{< /agent-only >}}
-## プロンプトをインスツルメンテーションし、Prompt Management を提供する{#instrument-prompts-and-offer-prompt-management}
-
-Prompt Tracking は、デフォルトの Agent Observability インスツルメンテーションの一部です。選択した各 LLM 呼び出しのプロンプト構築境界を特定し、プロンプトテンプレートを動的変数とは別に保持してください。
-
-1. ユーザーのリクエストで既に Datadog 管理プロンプト ID が指定されている場合は、「[Prompt Management Agentic インテグレーションガイド](/llm_observability/instrument/agentic/prompt_management.md)」に従ってください。Prompt Management を使用するかどうかについて再度尋ねないでください。
-2. それ以外の場合は、アプリケーションのプロンプトと、それらのフォーマットに使用される動的変数を特定してください。既存のプロバイダー、モデル、プロンプトコンテンツ、およびアプリケーションの動作を保持してください。
-3. サポートされている Python アプリケーションの場合は、特定したプロンプトをユーザーに伝え、それらのプロンプトを Datadog で管理するかどうかを尋ねてください。ユーザーが同意した場合は、「[Prompt Management Agentic インテグレーションガイド](/llm_observability/instrument/agentic/prompt_management.md)」に従って、選択したローカルプロンプトを昇格させ、ローカルでの構築を管理対象プロンプトの取得に置き換えてください。
-4. ユーザーが Prompt Management を拒否した場合、またはアプリケーションの言語がサポートされていない場合は、「[Prompt Tracking の手順](/llm_observability/instrument/prompt_tracking)」に従って、選択したプロンプトに構造化プロンプトメタデータを組み込んでください。ランタイムでのプロンプト取得は追加しないでください。
-
-Prompt Management がローカルプロンプトを置き換える場合は、重複する構造化プロンプトメタデータを添付するのではなく、管理対象プロンプトの自動追跡を使用してください。
-
 ## トレースを表示する {#viewing-traces}
 
-アプリケーションにアクセスして Datadog でデータを確認できることをユーザーに伝えてください。
+インスツルメンテーションの変更点、残りのセットアップ要件、およびコンテキストのアップロードが要求された場合にそのステップが成功したかどうかを報告してください。アプリケーションの実行方法と Datadog でデータを表示する方法をユーザーに伝えてください。検証なしにトレースや推奨事項が利用可能であると主張しないでください。
 
 **必須**: ユーザーがこのアプリケーションに関連付けられたデータを表示できるパーマリンクを提供してください。これは以下の形式になります。
 
@@ -179,8 +179,20 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 提供された値を入力してください。
-1. `dd_site` - [Datadog site](#datadog-site)の値が提供されている場合は、その値を使用してください。それ以外の場合は、`datadoghq.com` を使用してください。
-2. `application_name`- [Agent Observability アプリケーション名](#llm-observability-application-name)セクションから提供された値、または推論された値のいずれかを使用してください。
+1. `dd_site`: [Datadog site](#datadog-site)の値が提供されている場合は、その値を使用してください。それ以外の場合は、`datadoghq.com` を使用してください。
+2. `application_name`: [Agent Observability アプリケーション名](#agent-observability-application-name)セクションから提供された値、または推論された値のいずれかを使用してください。
+
+## オプションのプロンプト管理 {#optional-prompt-management}
+
+インスツルメンテーションと要求されたコンテキストの共有が完了したら、結果を報告してください。次に、Python アプリケーション向けのオプションのホスト型 Prompt Management に対応してください。
+
+- ユーザーがすでに Datadog 管理プロンプト ID を提供している場合は、「Prompt Management Agentic インテグレーションガイド」に従ってください。Prompt Management を有効にするかどうかについて再度尋ねないでください。
+- そうでない場合は、アプリケーションのローカルプロンプトを特定し、Datadog でそれらを管理するかどうかをユーザーに尋ねてください。ユーザーが同意した場合は、ガイドに従って選択したプロンプトの管理バージョンを作成し、それらを取得するようにアプリケーションを更新してください。
+- ユーザーが拒否した場合、または回答がない場合は、インスツルメンテーションされたローカルプロンプトをそのままにしてください。
+
+ガイドの [Track prompt usage section][6] に従って、自動追跡が必要か、明示的なアノテーションが必要かを判断してください。プロンプトのメタデータが重複しないようにしてください。
+
+Prompt Management に SDK の更新が必要な場合は、その理由を説明し、依存関係を更新する前に許可を求めてください。このオプションの更新によって、コアとなるインスツルメンテーションやコンテキストの共有が遅延してはなりません。
 
 ## 言語固有の指示{#language-specific-instructions}
 
@@ -190,3 +202,11 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
     {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java アプリケーションの Agentic インスツルメンテーション{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Prompt Management Agentic インテグレーション{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /ja/llm_observability/instrument/agentic/python.md
+[2]: /ja/llm_observability/instrument/agentic/nodejs.md
+[3]: /ja/llm_observability/instrument/agentic/java.md
+[4]: /ja/llm_observability/instrument/otel_instrumentation.md
+[5]: /ja/llm_observability/instrument/prompt_tracking.md
+[6]: /ja/llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
+[7]: /ja/llm_observability/instrument/agentic/prompt_management.md

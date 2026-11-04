@@ -1,3 +1,3 @@
 ---
-title: Update case description
+title: Update work item description
 ---

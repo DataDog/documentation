@@ -44,7 +44,7 @@ Debug complex LLM workflows with detailed execution visibility:
 
 {{< img src="llm_observability/index/llm_example_eval_light.png" alt="Detail view of a span in Agent Observability, Evaluations tab. Displays a Hallucination evaluation with 'Confirmed Contradiction', the flagged output, context quote, and an explanation of why this was flagged." style="width:100%">}}
 
-Ensure your LLM agents or applications meets quality standards with online evaluations. For comprehensive information about Datadog-hosted and managed evaluations, ingesting custom evaluations, and safety monitoring capabilities, see the [Evaluations documentation][5].
+Help your LLM agents or applications meet quality standards with online evaluations. For comprehensive information about Datadog-hosted and managed evaluators, ingesting custom evaluations, and safety monitoring capabilities, see the [Evaluations documentation][5].
 
 ### Query your LLM application's traces and spans
 

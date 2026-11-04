@@ -131,7 +131,7 @@ Here are the filter and group by text boxes on the Live Processes page:
 
 ## Monitors
 
-To filter monitors and [monitor downtimes][31] by [assigned tags][32], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
+To filter monitors and [monitor downtimes][31] by [assigned tags][32], use the search bar or facet checkboxes. The search bar format is `tag:"<KEY>:<VALUE>"`, for example: `tag:"service:coffee-house"`. To match any value of a tag key, escape the colon with a backslash (`\`) instead of using quotes, because wildcards are not supported inside quotes. For example, `tag:service\:*` returns all monitors that have a `service` tag. To exclude monitors with a specific tag from your search, use `-`, for example: `-tag:"service:coffee-house"`.
 
 {{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filter monitors in the search bar with tags" style="width:80%;">}}
 

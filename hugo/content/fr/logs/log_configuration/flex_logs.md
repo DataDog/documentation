@@ -75,7 +75,7 @@ Utilisez le spectre des types de logs illustré dans l'image ci-dessous pour dé
 
 Le calcul est la capacité d'interrogation permettant d'exécuter des requêtes pour Flex Logs. Il est utilisé lors de l'interrogation des logs dans le niveau Flex Logs. Il n'est pas utilisé pour l'ingestion ni pour la recherche exclusivement dans Standard Indexing. Les niveaux de calcul disponibles sont :
 
-<div class="alert alert-danger">Les tailles de calcul disponibles pour US3, US5, AP1, AP2, US1-FED et US2-FED sont Starter, XS et S.</div>
+<div class="alert alert-danger">Les tailles de calcul disponibles pour US3, US5, AP1, AP2, US1-FED et US2-FED sont Starter, XS, XS+ et S.</div>
 
 - Starter
 - Extra small (XS)

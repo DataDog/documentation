@@ -1,3 +1,3 @@
 ---
-title: List LLM Observability experiment spans (v1)
+title: List LLM Observability offline experiment spans (v1)
 ---

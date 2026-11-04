@@ -44,6 +44,9 @@ further_reading:
 - link: /integrations/github
   tag: Documentation
   text: En savoir plus sur l'intégration GitHub
+- link: /integrations/gitlab-source-code/
+  tag: Documentation
+  text: Découvrez l'intégration GitLab
 - link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
   tag: Blog
   text: Importez des fichiers YAML Backstage dans Datadog
@@ -60,6 +63,8 @@ title: Entity Model
 ## Présentation {#overview}
 
 Catalog utilise des schémas de définition pour stocker et afficher les métadonnées sur vos entités. Les schémas disposent de règles de validation intégrées pour garantir que seules des valeurs valides sont acceptées. Vous pouvez consulter les avertissements dans l'onglet **Définition** du panneau latéral de Catalog pour tous les services sélectionnés.
+
+Utilisez le champ `links` pour ajouter des liens de code source vers des dépôts GitHub ou GitLab.
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="Un organigramme montrant comment les composants de Catalog se connectent entre eux et avec votre environnement cloud " style="width:100%;" >}}
 
@@ -316,7 +321,7 @@ Les composants (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) héri
 - La clause `inheritFrom:<entity_kind>:<name>` est absente du fichier YAML.
 
 ### Migration vers la v3.0{#migrating-to-v30}
-La v3.0 prend en charge les mêmes méthodes de création de métadonnées que les versions précédentes, notamment Github, l'API, Terraform, Backstage, ServiceNow et l'interface utilisateur. Cependant, il existe de nouveaux [endpoints d'API][5] et une nouvelle [ressource Terraform][6] pour la v3.0.
+La v3.0 prend en charge les mêmes méthodes de création de métadonnées que les versions précédentes, notamment GitHub, GitLab, API, Terraform, Backstage, ServiceNow et la UI. Cependant, il existe de nouveaux [endpoints d'API][5] et une nouvelle [ressource Terraform][6] pour la v3.0.
 
 Pour migrer les fichiers YAML de service existants de la v1, v2, v2.1 ou v2.2 vers la v3, consultez [Migrer vos définitions de service vers la v3][7].
 
@@ -544,7 +549,7 @@ integrations:
 Les extensions personnalisées vous permettent d'attacher des métadonnées spécifiques à l'organisation aux entités, permettant la prise en charge d'outils et de workflows personnalisés. Par exemple, utilisez le champ `extensions` pour inclure des notes de version, des tags de conformité ou des modèles de propriété dans vos définitions d'entité.
 
 Datadog prend également en charge des clés d'extension spécifiques pour certaines fonctionnalités. Celles-ci incluent :
-- `datadoghq.com/dora-metrics` : Définissez des modèles de chemin de code source pour filtrer les commits Git lors du calcul des [DORA Metrics][21].
+- `datadoghq.com/dora-metrics` : Définissez des modèles de chemin de code source pour filtrer les commits Git lors du calcul des [métriques DORA][21].
 - `datadoghq.com/cd-visibility` : Contrôlez quels commits sont considérés comme faisant partie d'un déploiement dans [CD Visibility][22].
 
 L'exemple suivant définit une extension personnalisée utilisée pour gérer la planification des versions dans les environnements :

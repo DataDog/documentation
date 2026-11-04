@@ -20,37 +20,44 @@ title: .NET Feature Flags
 ---
 ## Présentation {#overview}
 
-Cette page décrit comment instrumenter votre application .NET avec le Datadog Feature Flags SDK. Le SDK .NET s'intègre à [OpenFeature][1], un standard ouvert pour la gestion des Feature Flags, et reçoit les mises à jour des flags via Remote Configuration dans le Datadog .NET tracer (`dd-trace-dotnet`).
+Cette page décrit comment instrumenter votre application .NET avec le Datadog Feature Flags SDK. Le SDK .NET s'intègre à [OpenFeature][1], une norme ouverte pour la gestion des feature flags, et utilise le Datadog .NET tracer (`dd-trace-dotnet`) pour recevoir les mises à jour des feature flags depuis le CDN géré ou Agent Remote Configuration.
 
-Ce guide explique comment installer et activer le SDK, créer un client OpenFeature et évaluer les Feature Flags dans votre application.
+À partir de la version 3.54.0 du traceur, les nouvelles configurations chargent par défaut la configuration des feature flags depuis le CDN géré par Datadog. Ce guide explique comment installer le SDK, créer un client OpenFeature et évaluer les feature flags dans votre application.
+
+<div class="alert alert-warning">Dans la version 3.54.0, le mode sans agent modifie uniquement la configuration des feature flags. Les événements d'exposition des expérimentations nécessitent toujours un Agent local compatible ou un relais de télémétrie ; le recours direct au proxy de la plateforme d'événements (EVP) n'est pas pris en charge. Les métriques d'évaluation nécessitent un chemin d'exportation OpenTelemetry configuré séparément. Sans chemin de télémétrie, seuls la distribution de la configuration et l'évaluation locale des feature flags fonctionnent.</div>
 
 ## Prérequis {#prerequisites}
 
-Avant de configurer le Datadog Feature Flags SDK, assurez-vous de disposer de :
+Pour une distribution de configuration sans agent, installez le traceur .NET Datadog version **3.54.0 ou ultérieure** et `Datadog.FeatureFlags.OpenFeature` version **2.3.1 ou ultérieure**. Le traceur doit être chargé avec l'[instrumentation automatique][8] ; l'installation du fournisseur OpenFeature seul ne suffit pas. Un Datadog Agent distinct n'est pas requis pour récupérer la configuration des feature flags.
 
-- **Datadog Agent** version 7.55 ou ultérieure avec [Remote Configuration][2] activée
-- **Datadog [API key][5]** configurée sur l'Agent
-- **Datadog .NET SDK** (`dd-trace-dotnet`):
-  - Version 3.36.0 ou ultérieure pour .NET 6+
-  - Version 3.38.0 ou ultérieure pour .NET Framework 4.6.2+
-
-Définissez les variables d'environnement suivantes :
+Définissez ces variables d'environnement dans le processus de l'application avant le démarrage :
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info">Le <code>EXPERIMENTAL_</code> Le préfixe est conservé pour la rétrocompatibilité ; le provider lui-même est stable.</div>
+Utilisez une [clé d'API][5] Datadog et le site qui héberge votre organisation, tel que `datadoghq.com`. Aucune activation des Feature Flags ni aucun paramètre de source n'est requis pour une nouvelle configuration. Initialisez le fournisseur OpenFeature Datadog dans votre application pour commencer l'interrogation ; l'installation ou l'initialisation du traceur seul ne lance pas l'interrogation du CDN. Les évaluations utilisent une configuration mise en cache localement et n'effectuent pas de requêtes réseau.
 
-Pour configurer `feature_flag.evaluations`, y compris la version requise du traceur et la configuration OTLP de l'Agent, consultez [Set Up Server-Side Flag Evaluation Metrics][6]. Pour plus d'informations sur les graphiques disponibles, consultez [Feature Flag Graphs][7].
+Les métriques d'évaluation des feature flags utilisent un pipeline OpenTelemetry configuré séparément ; l'activation de la distribution par CDN ne configure pas l'exportation des métriques. Consultez [Configurer les métriques d'évaluation des Feature Flags côté serveur][6] et [Graphiques des Feature Flags][7].
+
+### Utilisez Agent Remote Configuration {#use-agent-remote-configuration}
+
+Pour une distribution basée sur l'Agent, utilisez Datadog Agent 7.55 ou une version ultérieure avec [Remote Configuration][2] activé et une clé d'API configurée sur l'Agent. Les versions minimales du traceur sont 3.36.0 pour .NET 6+ et 3.38.0 pour .NET Framework 4.6.2+.
+
+Avec le traceur 3.54.0 ou une version ultérieure, sélectionnez explicitement la source :
+
+{{< code-block lang="bash" >}}
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+Les versions antérieures du traceur utilisent `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`. Dans la version 3.54.0, ce paramètre obsolète préserve Remote Configuration lorsque ni le nouveau paramètre d'activation ni une source explicite ne sont fournis. Pour migrer, supprimez le paramètre hérité, configurez les informations d'identification de l'application ci-dessus et définissez `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` si vous sélectionnez déjà une source explicitement. `DD_FEATURE_FLAGS_ENABLED=false` désactive les Feature Flags, quelle que soit la source sélectionnée.
+
+Consultez [Configuration Sources][9] pour les paramètres d'interrogation, de délai d'attente de requête, d'endpoint personnalisé et de migration. L'intervalle d'interrogation sans agent par défaut est de 30 secondes, le délai d'attente de la requête est de 5 secondes et l'initialisation du fournisseur attend jusqu'à 30 secondes pour la première configuration.
 
 ## Installation {#installation}
 
@@ -88,7 +95,7 @@ Ou ajoutez-les à votre fichier `.csproj` :
 
 ## Initialiser le SDK {#initialize-the-sdk}
 
-Enregistrez le provider Datadog OpenFeature auprès de l'API OpenFeature. Le fournisseur se connecte au Remote Configuration du traceur .NET de Datadog pour recevoir les configurations des flags.
+Enregistrez le provider Datadog OpenFeature auprès de l'API OpenFeature. Le fournisseur active la source de configuration sélectionnée dans le traceur .NET de Datadog.
 
 ### Initialisation bloquante {#blocking-initialization}
 
@@ -250,7 +257,7 @@ Les détails des indicateurs vous aident à déboguer le comportement d'évaluat
 
 ## En attente de l'initialisation du fournisseur {#waiting-for-provider-initialization}
 
-Par défaut, le fournisseur s'initialise de manière asynchrone et les évaluations de flags renvoient des valeurs par défaut jusqu'à ce que la première charge utile de Remote Configuration soit reçue. Si votre application nécessite que les flags soient prêts avant de traiter les requêtes, vous pouvez attendre que le fournisseur s'initialise en utilisant des gestionnaires d'événements :
+Par défaut, le fournisseur s'initialise de manière asynchrone et les évaluations des feature flags renvoient des valeurs par défaut jusqu'à ce que la première configuration de feature flags soit reçue. Si votre application nécessite que les flags soient prêts avant de traiter les requêtes, vous pouvez attendre que le fournisseur s'initialise en utilisant des gestionnaires d'événements :
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -356,27 +363,20 @@ Pour éviter de coupler les tests aux composants internes du SDK, préférez rem
 
 ## Dépannage {#troubleshooting}
 
-### Fournisseur non activé {#provider-not-enabled}
+### La configuration Agentless ne fonctionne pas {#agentless-configuration-not-working}
 
-Si vous recevez des avertissements indiquant que le fournisseur n'est pas activé, assurez-vous que `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` est défini dans votre environnement ou votre configuration d'application :
+- Vérifiez que le traceur 3.54.0 ou une version ultérieure est chargé et que le fournisseur OpenFeature est initialisé.
+- Vérifiez `DD_API_KEY`, `DD_SITE` et `DD_ENV` dans le processus de l'application.
+- Confirmez que `DD_FEATURE_FLAGS_ENABLED` n'est pas `false`. Laissez `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` non défini pour une nouvelle configuration, ou définissez-le explicitement sur `agentless`. Supprimez le paramètre hérité `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` lors de la migration.
+- Autorisez le trafic HTTPS sortant vers `ufc-server.ff-cdn.<DD_SITE>`.
+- Activez `DD_TRACE_DEBUG=true` et vérifiez les logs du traceur pour détecter les erreurs d'authentification, de délai d'attente ou de configuration incorrecte.
 
-{{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-Pour les applications conteneurisées, ajoutez ceci à votre configuration Docker ou Kubernetes :
-
-{{< code-block lang="yaml" filename="docker-compose.yml" >}}
-environment:
-  - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-  - DD_SERVICE=my-service
-  - DD_ENV=production
-{{< /code-block >}}
+Avant la première configuration valide, les évaluations renvoient les valeurs par défaut de l'appelant. Après une initialisation réussie, les échecs de livraison transitoires conservent la dernière configuration valide.
 
 ### Remote Configuration ne fonctionne pas {#remote-configuration-not-working}
 
 Vérifiez les points suivants pour vous assurer que Remote Configuration fonctionne :
-- L'agent Datadog est à la [version requise](#prerequisites)
+- Le Datadog Agent est à la [version requise](#prerequisites)
 - Remote Configuration est activé sur l'Agent
 - `DD_SERVICE` et `DD_ENV` variables d'environnement sont définies
 - Le SDK peut communiquer avec l'Agent
@@ -400,6 +400,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [5]: /fr/account_management/api-app-keys/#api-keys
 [6]: /fr/feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /fr/feature_flags/concepts/flag_graphs/
+[8]: /fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[9]: /fr/feature_flags/concepts/configuration_sources/
 
 ## Pour aller plus loin {#further-reading}
 

@@ -1,3 +1,3 @@
 ---
-title: Case Management Type
+title: Work Management Type
 ---

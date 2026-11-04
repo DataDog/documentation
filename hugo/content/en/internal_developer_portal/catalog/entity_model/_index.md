@@ -40,6 +40,9 @@ further_reading:
   - link: "/integrations/github"
     tag: "Documentation"
     text: "Learn about the GitHub Integration"
+  - link: "/integrations/gitlab-source-code/"
+    tag: "Documentation"
+    text: "Learn about the GitLab integration"
   - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
     tag: "Blog"
     text: "Import Backstage YAML files into Datadog"
@@ -56,6 +59,8 @@ algolia:
 ## Overview
 
 Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Catalog side panel for any selected services.
+
+Use the `links` field to add source code links to GitHub or GitLab repositories.
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="A flow chart showing how components of Catalog connect with each other and with your cloud environment " style="width:100%;" >}}
 
@@ -312,7 +317,7 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit a
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 ### Migrating to v3.0
-v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
+v3.0 supports the same methods of creating metadata as previous versions, including GitHub, GitLab, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
 
 To migrate existing service YAML files from v1, v2, v2.1, or v2.2 to v3, see [Migrate Your Service Definitions to v3][7].
 
@@ -537,7 +542,6 @@ integrations:
 Custom extensions allow you to attach organization-specific metadata to entities, enabling support for custom tooling and workflows. For example, use the `extensions` field to include release notes, compliance tags, or ownership models in your entity definitions.
 
 Datadog also supports specific extension keys for certain features. These include:
-- `datadoghq.com/dora-metrics`: Define source code path patterns for filtering Git commits when calculating [DORA metrics][21].
 - `datadoghq.com/cd-visibility`: Control which commits are considered as part of a deployment in [CD Visibility][22].
 
 The following example defines a custom extension used to manage release scheduling across environments:
@@ -606,5 +610,4 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
-[21]: /delivery_performance/dora_metrics/setup/#handling-multiple-services-in-the-same-repository
 [22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

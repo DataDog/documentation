@@ -11,12 +11,6 @@ further_reading:
   text: "Build Apps"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 Queries are actions that populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
 The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.

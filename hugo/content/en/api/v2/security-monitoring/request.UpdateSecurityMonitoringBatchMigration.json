@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "batchMigration",
+    "attributes": {
+      "name": "Example-Security-Monitoring-updated",
+      "tags": [
+        "source:splunk",
+        "team:secops"
+      ]
+    }
+  }
+}

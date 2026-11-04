@@ -31,12 +31,10 @@ cascade:
   aliases:
     - /api/latest/service-scorecards
 - _target:
-    path: /api/latest/app-builder
+    path: /api/latest/delivery-performance
     lang: en
-  site_support_id: app_builder_override
-- _target:
-    path: /api/latest/app-builder/**
-    lang: en
-  site_support_id: app_builder_override
+  aliases:
+    - /api/latest/dora-metrics
+    - /api/latest/ai-impact
 
 ---

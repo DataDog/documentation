@@ -95,6 +95,16 @@ Dans un canal Slack d'incident, vous pouvez exécuter des commandes Slack pour m
 
 Pour obtenir la liste complète des commandes Slack, consultez les [commandes Slack](#slack-commands).
 
+### Réinviter un transcripteur de réunion {#re-inviting-a-meeting-transcriber}
+
+Si le transcripteur Datadog quitte une réunion liée à Zoom, Google Meet ou Microsoft Teams, un message de réinvitation peut apparaître dans le fil de discussion de la carte de réunion. Cela peut se produire après l'expiration du délai d'attente de la salle d'attente, lorsque personne ne rejoint la réunion, après le départ de tous les participants ou lorsque quelqu'un supprime le transcripteur.
+
+Sélectionnez **Oui** pour réinviter le transcripteur ou **Non** pour refuser l'invite. Si nécessaire, admettez le transcripteur depuis le lobby ou la salle d'attente de la réunion.
+
+Cette action nécessite un compte Datadog connecté et l'autorisation de modifier l'incident. Pour les organisations avec une facturation basée sur les sièges, cela nécessite également un [Incident Management or Incident Response seat][8]. Les paramètres de résumé de réunion et les conditions d'exclusion s'appliquent toujours.
+
+Vous pouvez également réinviter le transcripteur depuis l'en-tête de l'incident dans Datadog. Pour obtenir des instructions, consultez la documentation sur les résumés de réunion pour [Zoom][9], [Google Meet][10] ou [Microsoft Teams][11].
+
 ### Autres options de configuration du canal d'incidents {#other-incident-channel-configuration-options}
 
 Accédez à toutes les options de configuration de Slack dans Incident Management via la page [**Incidents** > **Settings** > **Integrations**][3].
@@ -168,7 +178,7 @@ Dans les commandes suivantes, vous pouvez utiliser `inc` comme raccourci pour `i
 | `/datadog followup list` | Afficher et gérer les suivis existants pour l'incident. |
 {{< /site-region >}}
 
-### Boutons du volet d’actions {#action-tray-buttons}
+### Boutons du volet d'actions {#action-tray-buttons}
 
 Datadog publie le volet d'actions directement dans le canal Slack de l'incident lors des changements de statut, afin que les intervenants puissent effectuer des actions courantes, telles que la mise à jour de la gravité ou du statut, sans avoir à taper une commande. Vous pouvez également ouvrir le volet d'actions en tapant `/dd shortcuts` dans Slack.
 
@@ -203,3 +213,7 @@ Les boutons suivants sont disponibles dans le volet d'actions. Les types d'incid
 [5]: /fr/incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /fr/integrations/slack/?tab=datadogforslack#permissions
 [7]: /fr/incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /fr/account_management/billing/incident_response/#allocate-seats
+[9]: /fr/integrations/zoom-incident-management/#meeting-summaries
+[10]: /fr/integrations/google-meet-incident-management/#meeting-summaries
+[11]: /fr/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries

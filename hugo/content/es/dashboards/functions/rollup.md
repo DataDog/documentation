@@ -1,42 +1,41 @@
 ---
 aliases:
 - /es/graphing/functions/rollup/
-description: Controla la agregación temporal y los intervalos de puntos de datos mediante
-  funciones de rollup personalizadas y rollups móviles para métricas.
+description: Controle el desglose temporal y los intervalos de puntos de datos mediante
+  funciones de resumen personalizadas y resúmenes móviles para métricas.
 further_reading:
 - link: /dashboards/guide/rollup-cardinality-visualizations
   tag: Documentación
-  text: Comprensión de la función y la cardinalidad de rollup en las visualizaciones
+  text: Comprensión de la función de resumen y la cardinalidad en las visualizaciones
 title: Rollup
 ---
+Cada consulta de métrica se agrega de forma inherente. Sin embargo, agregar la función `.rollup()` al final de una consulta le permite realizar un [desglose temporal][1] personalizado que anula los valores predeterminados. Esta función le permite definir:
 
-Cada consulta de métricas se agrega de forma inherente. Sin embargo, si añades la función `.rollup()` al final de una consulta, podrás realizar una [agregación temporal][1] personalizada que anule los valores predeterminados. Esta función te permite definir:
+* El resumen `<interval>`: el intervalo de tiempo sobre el cual se agregan sus datos ([si es mayor que el intervalo de resumen aplicado por la consulta](#rollup-interval-enforced-vs-custom)).
+* El resumen `<aggregator>`: cómo se agregan sus puntos de datos dentro de un intervalo de tiempo de resumen determinado.
 
-* El `<interval>` de rollup: el intervalo de tiempo en el que se agregan tus datos ([si es mayor que el intervalo de rollup forzado por la consulta ](#rollup-interval-enforced-vs-custom)).
-* El `<aggregator>` de rollup: la manera en que se agregan los puntos de datos en un intervalo de tiempo de rollup determinado.
+Para aplicar un resumen, navegue al botón {{< ui >}}Add function{{< /ui >}} (Σ) del editor de gráficos: 
 
-Para aplicar un rollup, dirígete al botón **Add function** (Añadir función, Σ) del editor de gráficas: 
+{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Seleccione la opción Promedio de resumen en el botón Agregar función" video=true >}}
 
-{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Seleccionar la opción de Promedio de rollup desde el botón Añadir función" video=true >}}
+**Nota**: El tipo de métrica de distribución no tiene un parámetro de resumen `aggregator`. Este tipo de métrica se agrega tanto en tiempo como en espacio. Consulte la documentación sobre [resumen para distribuciones con percentiles][2] para obtener más información.
 
-**Nota**: El tipo de métrica de distribución no tiene un parámetro `aggregator` de rollup. Este tipo de métrica se agrega tanto en el tiempo como en el espacio. Consulta la documentación sobre [rollup para distribuciones con percentiles][2] a fin de obtener más información.
-
-La función toma dos parámetros, `<AGGREGATOR>` y, de manera opcional, `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` o `.rollup(<AGGREGATOR>)`.
+La función toma dos parámetros, `<AGGREGATOR>` y opcionalmente `<INTERVAL>`: `.rollup(<AGGREGATOR>,<INTERVAL>)` o `.rollup(<AGGREGATOR>)`.
 
 | Parámetro  | Descripción                                                                                                     |
 |------------|-----------------------------------------------------------------------------------------------------------------|
-| `<AGGREGATOR>` | Puede ser `avg`, `sum`, `min`, `max` o `count`, y define cómo se agregan los puntos de datos en un intervalo de tiempo determinado. [Valor predeterminado forzado](#rollup-interval-enforced-vs-custom): `avg`. |
-| `<INTERVAL>`   | Tiempo (en segundos) del intervalo entre dos puntos de datos mostrados. Es opcional.                                            |
+| `<AGGREGATOR>` | Puede ser `avg`, `sum`, `min`, `max` o `count`, y define cómo se agregan los puntos de datos dentro de un intervalo de tiempo determinado. [Predeterminado aplicado](#rollup-interval-enforced-vs-custom): `avg`. |
+| `<INTERVAL>`   | Tiempo (en segundos) del intervalo entre dos puntos de datos mostrados. Opcional.                                            |
 
-Puedes utilizarlos de manera individual o juntos, por ejemplo `.rollup(sum,120)`. En la siguiente gráfica de barras se muestra el uso de la CPU durante una semana para un host **sin** utilizar la función `.rollup()`:
+Puede usarlos individualmente o juntos, por ejemplo `.rollup(sum,120)`. El siguiente gráfico de barras muestra una semana de uso de CPU para un servidor **sin** usar la función `.rollup()`:
 
 {{< img src="dashboards/functions/rollup/smooth_1.png" alt="smooth_1" style="width:60%;" >}}
 
-En la siguiente gráfica de barras se muestra la misma métrica, representada mediante un rollup de un día con `.rollup(avg,86400)`:
+El siguiente gráfico de barras muestra la misma métrica, graficada usando un rollup de un día con `.rollup(avg,86400)`:
 
 {{< img src="dashboards/functions/rollup/smooth_2.png" alt="smooth_2" style="width:60%;" >}}
 
-## Rollup en movimiento
+## Rollup móvil {#moving-rollup}
 
 
 | Función        | Descripción                                    | Ejemplo |
@@ -44,46 +43,86 @@ En la siguiente gráfica de barras se muestra la misma métrica, representada me
 | `moving_rollup` | Rollup para combinar los puntos en los últimos X segundos. | `moving_rollup(<METRIC_NAME>, <INTERVAL> , <AGGREGATOR>)` |
 
 
-La aplicación de la función `moving_rollup()` a una consulta permite combinar puntos del intervalo de tiempo especificado más reciente, es decir, los últimos X segundos. Al igual que con `.rollup()`, `<AGGREGATOR>` puede ser `sum`/`min`/`max`/`count`/`avg` y define cómo se agregan los puntos de datos en el intervalo de tiempo determinado.
+Aplicar la función `moving_rollup()` a una consulta le permite combinar puntos del rango de tiempo especificado más reciente, es decir, los últimos X segundos. Al igual que con `.rollup()`, `<AGGREGATOR>` puede ser `sum`/`min`/`max`/`count`/`avg` y define cómo se agregan los puntos de datos dentro del intervalo de tiempo dado.
 
-## Intervalo de rollup: obligatorio frente a personalizado
+## Intervalo de rollup: forzado vs personalizado {#rollup-interval-enforced-vs-custom}
 
-Al crear gráficas, Datadog establece un límite en la cantidad de puntos por serie temporal. Para mantener la claridad visual, una serie puede tener hasta 1500 puntos. Para respetar este límite, Datadog acumula los puntos de datos de manera automática, por defecto con el método `avg`, mostrando de manera efectiva el promedio de todos los puntos de datos en un intervalo de tiempo de una métrica determinada. El intervalo de tiempo de rollup predeterminado varía en función de cómo se visualizan los datos. Consulta el siguiente gráfico para obtener una referencia de estos intervalos de tiempo predeterminados:
+Al graficar, Datadog establece un límite en la cantidad de puntos por series temporales. Para mantener la claridad visual, una serie puede tener hasta 1,500 puntos. Para respetar este límite, Datadog realiza el rollup de los puntos de datos automáticamente, utilizando de forma predeterminada el método `avg`, mostrando efectivamente el promedio de todos los puntos de datos dentro de un intervalo de tiempo para una métrica determinada. El intervalo de tiempo de rollup predeterminado varía según cómo se visualicen los datos. Consulte el siguiente gráfico para ver estos intervalos de tiempo predeterminados:
 
-| Período de tiempo           | Intervalo de rollup, gráfica de líneas | Intervalo de rollup, gráfica de barras | Intervalo de rollup, API |
+| Marco de tiempo          | Intervalo de rollup, gráfico de líneas | Intervalo de rollup, gráfico de barras | Intervalo de rollup, API |
 |---------------------|-----------------------------|----------------------------|----------------------|
-| La última hora       | 20s                         | 1 m                         | 20s                  |
-| Las últimas cuatro horas    | 1 m                          | 2 m                         | 1 m                   |
-| El último día        | 5 m                          | 20 m                        | 5 m                   |
-| Los últimos dos días     | 10 m                         | 30 m                        | 10 m                  |
-| La última semana       | 1 hora                         | 2 horas                        | 1 hora                  |
-| El último mes      | 4 horas                         | 12 horas                       | 4 horas                  |
+| El último minuto     | 1s                          | 1s                         | 1s                   |
+| Últimos 5 minutos  | 2s                          | 5s                         | 2s                   |
+| Últimos 15 minutos | 5s                          | 10s                        | 5s                   |
+| Últimos 30 minutos | 10s                         | 30s                        | 10s                  |
+| Última hora       | 20s                         | 1m                         | 20s                  |
+| Últimas cuatro horas | 1m                          | 2m                         | 1m                   |
+| Último día        | 5m                          | 20m                        | 5m                   |
+| Últimos dos días   | 10m                         | 30m                        | 10m                  |
+| Última semana       | 1h                         | 2h                        | 1h                  |
+| Último mes      | 4h                         | 12h                       | 4h                  |
+| Últimos 3 meses   | 12h                        | 1d                         | 12h                 |
+| Últimos 6 meses   | 1d                          | 1d                         | 1d                   |
+| El pasado año       | 1d                          | 1w                         | 1d                   |
 
-Se puede utilizar una función `.rollup()` personalizada para forzar el tipo de agregación temporal aplicado (`avg`, `min`, `max`, `count` o `sum`) y, de manera opcional, el intervalo de tiempo para realizar el rollup. Con esta función, se puede establecer el intervalo de tiempo de rollup en un valor diferente al predeterminado, hasta un límite de 1500 puntos. Esto admite hasta un punto por minuto a lo largo de un día.
+Se puede usar una función `.rollup()` personalizada para especificar el tipo de desglose temporal aplicado (`avg`, `min`, `max`, `count` o `sum`) y, opcionalmente, el intervalo de tiempo para el rollup. Al usar esta función, puede establecer el intervalo de tiempo de rollup en un valor diferente a los predeterminados, hasta un límite de 1,500 puntos. Esto admite hasta un punto por minuto durante un día.
 
-**Nota**: A las consultas de métricas de tipo `COUNT` y `RATE` se les agrega de manera automática el modificador `.as_count()` en la interfaz de usuario, que establece el método de rollup que se utiliza en `sum` y deshabilita la interpolación. Este `.as_count()` es explícitamente visible al final de la consulta:
+**Nota**:
+- El [widget de valor de consulta][8] apunta a 150 puntos en lugar de los 1,500 puntos que usan los widgets de gráfico de líneas y gráfico de barras. Para la misma ventana de tiempo, esto resulta en un intervalo de rollup efectivo más amplio para los widgets de valor de consulta.
+- Las consultas para métricas de tipo `COUNT` y `RATE` tienen el modificador `.as_count()` añadido automáticamente en la interfaz de usuario, lo que establece el método de rollup utilizado en `sum` y deshabilita la interpolación. Este `.as_count()` es explícitamente visible al final de la consulta:
 
   {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
-Para obtener más detalles sobre cómo utilizar `.as_count()` y `.as_rate()`, consulta la entrada del blog [Visualizar métricas de StatsD][3], o conoce más sobre los efectos de esas funciones con la documentación sobre los [modificadores en la aplicación][4].
+Para obtener más detalles sobre cómo usar `.as_count()` y `.as_rate()`, consulte la publicación del blog [Visualize StatsD metrics][3], o aprenda más sobre los efectos de esas funciones con la documentación sobre [in-application modifiers][4].
 
-## Rollup con consultas alineadas con el calendario 
+## Rollup con consultas alineadas al calendario {#rollup-with-calendar-aligned-queries}
 
 {{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
 
-Puedes personalizar cómo se agrupan los datos de tus métricas a lo largo del tiempo cuando utilizas la función `.rollup()` con consultas alineadas con el calendario. Esta función te ofrece la flexibilidad para definir:
+Puede personalizar cómo se agrupan sus datos de métricas a lo largo del tiempo cuando usa la función `.rollup()` con consultas alineadas al calendario. Esta función le permite la flexibilidad de definir:
 
-* Consultas mensuales alineadas con el calendario con fecha de inicio y zonas horarias ajustables. Por ejemplo, puedes comparar los errores mensuales de tus clientes de febrero y diciembre del año pasado.
-* Rollups semanales con fecha de inicio y zonas horarias ajustables. Por ejemplo, conoce cuántas transacciones semanales se encuentran abiertas (si tu semana comienza los lunes).
-* Rollups diarios con hora de inicio y zonas horarias ajustables. Por ejemplo, conoce cuántos eventos de interés se produjeron en el día actual (si tu día comienza a medianoche, hora del Pacífico).
+* Consultas mensuales alineadas al calendario con fecha de inicio y zonas horarias ajustables. Por ejemplo, puede comparar sus errores de cliente mensuales de febrero y diciembre del año pasado.
+* Rollups semanales con fecha de inicio y zonas horarias ajustables. Por ejemplo, vea cuántas transacciones semanales están abiertas (si su semana comienza los lunes).
+* Rollups diarios con fecha de inicio y zonas horarias ajustables. Por ejemplo, vea cuántos eventos de interés ocurrieron en el día actual (si su día comienza a la medianoche, hora del Pacífico).
 
-## Rollups en monitores
+La sintaxis de rollup alineada al calendario extiende `.rollup()` con una unidad de calendario y un día de alineación y zona horaria opcionales:
 
-Por lo general, se deben evitar los rollups en las consultas de [monitor][5], debido a la posibilidad de desalineación entre el intervalo de rollup y el período de evaluación del monitor. El inicio y el final de los intervalos de rollup se encuentran alineados con la hora UNIX, no con el inicio y el final de las consultas del monitor. Por lo tanto, un monitor puede evaluar (y activar) un intervalo de rollup incompleto que contenga solo una pequeña muestra de datos. Para evitar este problema, retrasa la evaluación del monitor (al menos) durante el intervalo de rollup de la configuración.
+`.rollup(<AGGREGATOR>, <CALENDAR_UNIT>, <ALIGNMENT>, '<TIMEZONE>')`
 
-Si tus monitores se evalúan de forma inesperada con un estado "No Data" (Sin datos), considera revisar los ajustes de los periodos de rollup y de evaluación. Por ejemplo, si un monitor tiene un intervalo de rollup de 4 minutos y un periodo de evaluación de 20 minutos, se produce un punto de datos cada 4 minutos, lo que lleva a un máximo de 5 puntos de datos en el periodo. Si la opción "Require Full Window" (Requerir intervalo completo) está activada, la evaluación puede dar como resultado "No Data" (Sin datos), ya que el periodo no está completamente rellenado.
+| Parámetro        | Descripción                                                                                                          |
+|------------------|----------------------------------------------------------------------------------------------------------------------|
+| `<AGGREGATOR>`   | Puede ser `avg`, `sum`, `min`, `max` o `count`.                                                                       |
+| `<CALENDAR_UNIT>`| `daily`, `weekly` o `monthly`.                                                                                     |
+| `<ALIGNMENT>`    | Para `weekly`: el día de inicio como un nombre de día en minúsculas (`monday`, `tuesday`, ..., `sunday`). El valor predeterminado es `sunday` si se omite. Para `daily`: una hora de inicio como `12am`. Para `monthly`: una fecha de inicio. |
+| `<TIMEZONE>`     | Opcional. Una cadena de [zona horaria de IANA][7] como `America/New_York` o `Europe/Paris`. El valor predeterminado es UTC si se omite.    |
 
-## Referencias adicionales
+**Ejemplos**:
+
+Rollup semanal que comienza el lunes (UTC):
+
+```
+sum:requests.count{*}.as_count().rollup(sum, weekly, monday)
+```
+
+Rollup semanal que comienza el lunes en hora del Este:
+
+```
+sum:requests.count{*}.as_count().rollup(sum, weekly, monday, 'America/New_York')
+```
+
+Rollup diario que comienza a medianoche en hora del Pacífico:
+
+```
+sum:requests.count{*}.as_count().rollup(sum, daily, 12am, 'America/Los_Angeles')
+```
+
+## Rollups en seguimientos {#rollups-in-monitors}
+
+Por lo general, se deben evitar los rollups en las consultas de seguimiento debido a la posibilidad de desalineación entre el intervalo de rollup y la ventana de evaluación del seguimiento. El inicio y el fin de los intervalos de rollup están alineados con el tiempo UNIX, no con el inicio y el fin de las consultas de seguimiento. Por lo tanto, un seguimiento puede evaluar (y activar) un intervalo de rollup incompleto que contenga solo una pequeña muestra de datos. Para evitar este problema, retrase la evaluación de su seguimiento por (al menos) la duración del intervalo de rollup de configuración.
+
+Si las consultas de su seguimiento aparecen inesperadamente {{< ui >}}No Data{{< /ui >}}, revise la configuración de rollups y ventanas de evaluación. Para obtener más información, consulte [Solución de problemas de falta de datos en los seguimientos][6].
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -92,3 +131,6 @@ Si tus monitores se evalúan de forma inesperada con un estado "No Data" (Sin da
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
 [4]: /es/metrics/custom_metrics/type_modifiers/
 [5]: /es/monitors/types/metric/
+[6]: /es/monitors/guide/troubleshooting-no-data/
+[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[8]: /es/dashboards/widgets/query_value/

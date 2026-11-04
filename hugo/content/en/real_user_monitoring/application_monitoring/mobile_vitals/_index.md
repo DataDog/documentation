@@ -1,6 +1,6 @@
 ---
 title: Mobile Vitals
-description: "Monitor key mobile performance metrics including startup times, frame rates, and resource usage across Android, iOS, Flutter, and React Native."
+description: "Monitor key mobile performance metrics including startup times, frame rates, resource usage, and performance timeseries across Android, iOS, Flutter, and React Native."
 aliases:
 - /real_user_monitoring/android/mobile_vitals
 - /real_user_monitoring/ios/mobile_vitals
@@ -19,6 +19,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
   text: Source code for dd-sdk-reactnative
+- link: /real_user_monitoring/explorer/events/#performance-timeseries
+  tag: Documentation
+  text: Explore the performance timeseries panel
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -158,10 +161,32 @@ The following telemetry provide insight into your mobile application's performan
 
 {{< /tabs >}}
 
+## Performance timeseries
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
+Performance timeseries is in Preview, and collection is off by default. To enable it, join the Preview. Datadog sends setup instructions to participating customers.
+{{< /callout >}}
+
+Performance timeseries is available on the iOS and Android SDKs.
+
+Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels][3].
+
+{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
+
+After collection is enabled, timeseries are captured for all sessions.
+
+Two series are collected:
+
+- **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
+[3]: /real_user_monitoring/explorer/events/#performance-timeseries
+[4]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
+[5]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
 

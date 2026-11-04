@@ -104,7 +104,7 @@ Pour plus d'informations, consultez la documentation [Décrire un incident][20].
 
 ## Évaluer les données d'incident {#evaluate-incident-data}
 
-L'analyse des incidents fournit des informations sur l'efficacité et les performances de votre processus de réponse aux incidents en vous permettant d'agréger et d'analyser les statistiques des incidents passés. Des métriques clés, tels que le temps de résolution et l'impact sur les clients, peuvent être suivis au fil du temps. Vous pouvez interroger ces analyses à l'aide de widgets graphiques dans les tableaux de bord et les notebooks. Datadog propose des modèles personnalisables, tels que le dashboard de vue d'ensemble Incident Management et un rapport d'incident de notebook, pour vous aider à démarrer.
+L'analyse des incidents fournit des informations sur l'efficacité et les performances de votre processus de réponse aux incidents en vous permettant d'agréger et d'analyser les statistiques des incidents passés. Des métriques clés, tels que le temps de résolution et l'impact sur les clients, peuvent être suivis au fil du temps. Vous pouvez interroger ces analyses à l'aide de widgets graphiques dans les dashboards et les notebooks. Datadog propose des modèles personnalisables, tels que le dashboard Incident Management Overview et un rapport d'incident de notebook, pour vous aider à démarrer.
 
 Pour plus de détails sur les mesures collectées et les configurations graphiques étape par étape pour visualiser vos données, consultez [Analyse Incident Management][10].
 
@@ -123,7 +123,6 @@ Incident Management s'intègre à des applications tierces, notamment :
 
 - [Atlassian Statuspage][25] pour créer et mettre à jour des incidents Statuspage.
 - [Confluence][22] pour générer des [post-mortems][34] d'incident.
-- [CoTerm][21] pour suivre en temps réel les activités de remédiation d'incident basées sur le terminal.
 - [Jira][15] pour créer un ticket Jira pour un incident.
 - [Microsoft Teams][23] pour créer des canaux et des réunions vidéo pour les incidents.
 - [PagerDuty][12] et [OpsGenie][13] pour avertir vos ingénieurs d'astreinte et résoudre automatiquement les alertes lors de la résolution de l'incident.
@@ -155,7 +154,6 @@ Incident Management s'intègre à des applications tierces, notamment :
 [18]: /fr/integrations/statuspage/
 [19]: /fr/integrations/servicenow/
 [20]: /fr/incident_response/incident_management/investigate/describe
-[21]: /fr/coterm
 [22]: /fr/integrations/confluence/
 [23]: /fr/integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [24]: /fr/integrations/zoom-incident-management/

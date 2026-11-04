@@ -24,7 +24,7 @@ Avant d'installer l'intégration, assurez-vous d'avoir [configuré la tuile Serv
 
 Il existe deux manières d'installer l'intégration :
 - Datadog recommande d'installer la dernière version de l'intégration [ITOM/ITSM Integration for Datadog][1] depuis le ServiceNow Store.
-- Alternativement, vous pouvez télécharger le dernier Update Set ([Datadog-Snow_Update_Set_v2.7.9.xml][2]) et le charger manuellement dans votre instance ServiceNow.
+- Vous pouvez également télécharger le dernier Update Set ([Datadog-Snow_Update_Set_v2.8.0.xml][2]) et le charger manuellement dans votre instance ServiceNow.
 
 ## Configurer l'intégration{#configure-the-integration}
 
@@ -40,7 +40,7 @@ Par défaut, Datadog n'inclut pas les niveaux d'impact et d'urgence de ServiceNo
 1. Accédez à l'onglet **Configurer**, puis à l'onglet **ITOM/ITSM**, et enfin à l'onglet **monitors**.
 1. Sous **Mappage de priorité d'instance pour les modèles**, ouvrez les paramètres de votre instance ServiceNow.
 1. Activez le commutateur **Utiliser le mappage de priorité d'instance**.
-1. Sous **Urgence ServiceNow** et **Impact ServiceNow**, sélectionnez les niveaux que vous souhaitez faire correspondre aux niveaux de priorité de monitor de Datadog. Exemple :
+1. Sous **Urgence ServiceNow** et **Impact ServiceNow**, sélectionnez les niveaux que vous souhaitez faire correspondre aux niveaux de priorité de monitor de Datadog. Par exemple :
    - Impact : 4
    - Urgence : 5
 1. Cliquez sur **Mettre à jour**.
@@ -55,7 +55,7 @@ Pour créer un enregistrement ServiceNow à partir d'un monitor, vous devez conf
 1. Définissez un **Nom** d'@-handle, une **Instance** et une **Tableau cible** pour la notification de monitor à envoyer.
 1. (Facultatif) Définissez un **Groupe d'affectation**, un **Service métier** et/ou un **Utilisateur** dans le modèle.<br /> **Remarque** : Si vous définissez à la fois un groupe d'affectation et un utilisateur, l'utilisateur doit appartenir au groupe d'affectation sélectionné pour que la création de l'enregistrement ServiceNow aboutisse.
 1. (Facultatif) Développez la section **Personnaliser la charge utile de notification** et cliquez sur **Ajouter un champ** pour ajouter d'autres variables depuis Datadog.
-1. Cliquez sur **Enregistrer**.
+1. Cliquez sur **Save**.
 
 Pour utiliser le nouveau modèle, ajoutez `@servicenow-<TEMPLATE_NAME>` dans une description de monitor. Lorsque le monitor envoie une alerte, ServiceNow crée également un enregistrement correspondant et le définit automatiquement sur **Résolu** lorsque l'alerte sous-jacente est rétablie.
 
@@ -63,8 +63,8 @@ Pour utiliser le nouveau modèle, ajoutez `@servicenow-<TEMPLATE_NAME>` dans une
 Pour configurer les notifications de monitor héritées à l'aide de `@servicenow-<INSTANCE_NAME>` :
 
 1. Dans Datadog, accédez à la page [paramètres d'intégration ServiceNow][4].
-1. Accédez à l'onglet **Configurer**, puis à l'onglet **ITOM/ITSM**, et enfin à l'onglet **monitors**.
-1. Sous **Gérer les notifications de monitor héritées**, sélectionnez l'instance pour laquelle vous souhaitez configurer les notifications, puis sélectionnez le tableau dans lequel les notifications de monitor héritées doivent être écrites.
+1. Accédez à l'onglet **Configure**, puis à l'onglet **ITOM/ITSM**, et enfin à l'onglet **Monitors**.
+1. Sous **Manage Legacy Monitor Notifications**, sélectionnez l'instance pour laquelle vous souhaitez configurer les notifications, puis sélectionnez le tableau dans lequel les notifications de monitor héritées doivent être écrites.
 1. Pour valider que l'intégration est correctement configurée, ajoutez `@servicenow-<INSTANCE_NAME>` dans une notification de monitor ou d'événement. Vous pouvez définir les valeurs `Impact` et `Urgency` afin que ServiceNow puisse les utiliser pour calculer la priorité de l'incident. Les données brutes remplissent des lignes dans le tableau intermédiaire et sont transmises au tableau ServiceNow spécifiée par l'intégration.
    {{< img src="integrations/guide/servicenow/servicenow-priority-field-mapping.png" alt="Exemple de monitor hérité avec des valeurs d'Impact et d'Urgence définies" style="width:100%;" >}}
 1. Utilisez des [transform maps](#transform-maps) dans ServiceNow pour personnaliser la transformation des données envoyées aux tableaux intermédiaires.
@@ -138,44 +138,44 @@ sys_id ServiceNow pour le service métier du gestionnaire basé sur un modèle
 Champs clé-valeur configurés par l'utilisateur formatés sous forme de chaîne convertible en JSON
 
 `datadog_tags`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 Tags Datadog du monitor d'alerte
 
 `description`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `description`<br>
 **Transformation ITOM** : `description`<br>
 Description sommaire de l'alerte du monitor
 
 `event_details`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `work_notes`<br>
 Détails de l'événement avec des liens formatés et cliquables vers Datadog
 
 `event_id`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 ID Datadog de l'événement
 
 `event_link`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 Lien vers l'événement créé à partir de l'alerte du monitor
 
 `event_msg`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 Message de l'événement
 
 `event_title`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `short_description`<br>
 Titre de l'événement.
 
 `event_type`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITOM** : `type`<br>
 Type d'événement
 
 `hostname`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `cmdb_ci`<br>
 **Transformation ITOM** : `node`<br>
 Host du monitor affecté
@@ -186,7 +186,7 @@ Host du monitor affecté
 Valeur d'impact basée sur le mappage défini par l'utilisateur de la priorité du monitor
 
 `logs_sample`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 Échantillon de logs pertinents
 
 `monitor_priority`
@@ -195,22 +195,22 @@ Valeur d'impact basée sur le mappage défini par l'utilisateur de la priorité 
 Priorité du monitor d'alerte sous forme d'entier
 
 `org_name`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 Nom de l'organisation du monitor d'alerte
 
 `sys_created_by`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `caller_id`<br>
 Créateur de l'enregistrement (généralement le compte API ServiceNow configuré)
 
 `ticket_state`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `state`, (script) -> close_code, (script) -> close_notes<br>
 **Transformation ITOM** : (script) -> resolution_notes<br>
 État de l'enregistrement ServiceNow : `new` ou `resolved`
 
 `u_correlation_id`
- : **Type** : Chaîne<br>
+: **Type** : Chaîne<br>
 **Transformation ITSM** : `correlation_id`<br>
 **Transformation ITOM** : `message_key`<br>
 Combinaison de alert_cycle_key et aggreg_key utilisée pour fusionner les enregistrements vers le même incident cible
@@ -269,8 +269,8 @@ Dans ServiceNow, vous pouvez synchroniser l'état, l'impact et l'urgence de mani
    1. Collez votre **clé d'API Datadog**.
    1. Collez la **clé d'application de compte de service** que vous avez créée.
    1. Cochez la case **Enabled**.
-1. Cliquez sur **Enregistrer**.
-1. (Facultatif) Si vous disposez de la version 2.7.0 ou ultérieure de l'intégration ITOM/ITSM, vous pouvez utiliser les informations issues des alertes corrélées pour renseigner des valeurs dans ServiceNow.<br /> Les instructions sur la façon de procéder se trouvent ci-dessous sous **Transform correlated alert data**.
+1. Cliquez sur **Save**.
+1. (Facultatif) Si vous disposez de la version 2.7.0 ou ultérieure de l'intégration ITOM/ITSM, vous pouvez utiliser les informations issues des alertes corrélées pour renseigner des valeurs dans ServiceNow.<br /> Les instructions sur la façon de procéder se trouvent ci-dessous sous **Transformer les données d'alerte corrélées**.
 
 
 
@@ -309,7 +309,7 @@ answer = (function transformEntry(source)
 })(source);
 ```
 
-**Notes**:
+**Remarques** :
 - La source est le tableau de jeu d'importation que vous avez sélectionné (dans cet exemple, Datadog Monitors ITSM Tables) et la cible est votre tableau d'incident (ou tableau d'événement) réel où les événements sont stockés.
 - Les mappages de champs se trouvent en bas de l'enregistrement. Certains mappages de base sont inclus. C'est ici que vous sélectionnez les champs à inclure, définissez le format et sélectionnez les champs cibles dans votre instance ServiceNow.
 {{% /collapse-content %}}
@@ -388,17 +388,17 @@ Si vous voyez des mises à jour de Datadog Work Management vers ServiceNow, mais
 {{% /collapse-content %}}
 
 {{% collapse-content title="Monitors dupliquant les incidents" level="h3" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
-Si un monitor rouvre le même incident au lieu d'en créer un nouveau pour chaque avertissement, assurez-vous qu'il n'est pas défini comme une alerte simple. Convertissez le monitor en [multi-alert][11] en le regroupant à l'aide d'un tag dans la métrique. De cette façon, chaque alerte déclenchera un incident distinct.
+Si un monitor rouvre le même incident au lieu d'en créer un nouveau pour chaque avertissement, assurez-vous qu'il n'est pas défini comme une alerte simple. Convertissez le monitor en [alerte multiple][11] en le regroupant à l'aide d'un tag dans la métrique. De cette façon, chaque alerte déclenchera un incident distinct.
 {{% /collapse-content %}}
 
 Besoin d'aide supplémentaire ? Contactez le [support Datadog][10].
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /fr/resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
+[2]: /fr/resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
 [3]: /fr/integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/work/settings

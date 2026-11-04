@@ -7,8 +7,8 @@ code_lang_weight: 1
 further_reading:
 - link: /opentelemetry/setup/ddot_collector/custom_components
   tag: 설명서
-  text: Datadog Agent와 함께 사용자 지정 OpenTelemetry 구성 요소 사용
-title: Kubernetes DaemonSet으로 DDOT Collector 설치
+  text: Datadog Agent와 함께 사용자 지정 OpenTelemetry 구성 요소 사용하기
+title: Kubernetes DaemonSet으로 DDOT Collector 설치하기
 type: multi-code-lang
 ---
 ## 개요 {#overview}
@@ -28,7 +28,7 @@ type: multi-code-lang
 1. [Datadog API 키][2]를 확인하거나 생성합니다.
 
 **소프트웨어**:
-다음을 시스템에 설치하고 구성합니다.
+다음을 시스템에 설치하고 구성하세요.
 
 - Kubernetes 클러스터(v1.29 이상)
 - [Helm(v3 이상)][54]
@@ -42,7 +42,7 @@ type: multi-code-lang
 
 ### 설치 방법 선택 {#select-installation-method}
 
-다음 설치 방법 중 하나를 선택합니다.
+다음 설치 방법 중 하나를 선택하세요.
 
 - [Datadog Operator][55]: [Kubernetes 네이티브][56] 방식으로 Datadog 설정을 자동으로 조정하고 유지 관리합니다. 사용자 지정 리소스 상태에 배포 상태, 상태 정보 및 오류를 보고하며, 상위 수준 구성 옵션을 통해 구성 오류의 위험을 줄입니다.
 - [Helm 차트][4]: Datadog Agent를 배포하는 간단한 방법입니다. 버전 관리, 롤백 및 템플릿 기능을 제공하므로 일관되고 더 쉽게 재현 가능한 배포가 가능합니다.
@@ -62,9 +62,9 @@ helm install datadog-operator datadog/datadog-operator
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
 {{% /tab %}}
 {{% tab "Helm" %}}
-### Datadog Helm 저장소 추가 {#add-the-datadog-helm-repository}
+### Datadog Helm 리포지토리 추가 {#add-the-datadog-helm-repository}
 
-Datadog 저장소를 Helm 저장소 목록에 추가하려면 다음을 실행합니다.
+Datadog 리포지토리를 Helm 리포지토리 목록에 추가하려면 다음을 실행하세요.
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -107,11 +107,11 @@ Datadog Operator 배포 후 Kubernetes 클러스터에 Datadog Agent, Cluster Ag
            keyName: api-key
 {{< /code-block >}}
 
-  - `<CLUSTER_NAME>`을 클러스터 이름으로 바꿉니다.
-  - `<DATADOG_SITE>`를 [Datadog 사이트][1]로 바꿉니다. 사이트는 현재 선택된 {{< region-param key="dd_site" code="true" >}}입니다(오른쪽에서 올바른 **DATADOG SITE**가 선택되어 있는지 확인).
+  - `<CLUSTER_NAME>`을 클러스터 이름으로 바꾸세요.
+  - `<DATADOG_SITE>`를 [Datadog 사이트][1]로 바꾸세요 사용자의 사이트는 {{< region-param key="dd_site" code="true" >}}사이트입니다. 오른쪽에서 올바른 {{< ui >}}DATADOG SITE{{< /ui >}}가 선택되었는지 확인하세요.
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">FED 환경에서는 <code>useFIPSAgent: true</code> ( <code>spec.global</code> 아래 있음)를 설정하여 FIPS 규격 준수 Agent 이미지를 사용합니다. <a href="/agent/configuration/fips-compliance/">FIPS 준수</a>를 참조하세요.</div>
+<div class="alert alert-info">FED의 경우 FIPS 규격 준수 Agent 이미지를 사용하려면 <code>useFIPSAgent: true</code> 설정을 <code>spec.global</code> 아래에 추가하세요. <a href="/agent/configuration/fips-compliance/">FIPS 준수</a>를 참조하세요.</div>
 {{% /site-region %}}
 
 2. OpenTelemetry Collector 활성화:
@@ -125,7 +125,7 @@ Datadog Operator 배포 후 Kubernetes 클러스터에 Datadog Agent, Cluster Ag
 
 Datadog Operator는 기본적으로 OpenTelemetry Collector를 포트 `4317`(이름: `otel-grpc`) 및 `4318`(이름: `otel-http`)에 자동으로 바인딩합니다.
 
-3. (선택 사항) 추가 Datadog 기능 활성화:
+3. (필요시) 추가 Datadog 기능 활성화:
 
 <div class="alert alert-warning">이 기능을 활성화하면 추가 비용이 발생할 수 있습니다. 진행하기 전에 <a href="https://www.datadoghq.com/pricing/">가격 페이지</a>를 검토하고 고객 성공 관리자와 상담하세요.</div>
 
@@ -157,7 +157,7 @@ Datadog Operator는 기본적으로 OpenTelemetry Collector를 포트 `4317`(이
 [2]: /ko/containers/guide/changing_container_registry/
 {{% /tab %}}
 {{% tab "Helm" %}}
-[Datadog Agent 차트][1]의 Helm Chart 파라미터를 지정하기 위해 YAML 파일을 사용합니다.
+YAML 파일을 사용해 [Datadog Agent 차트][1]의 Helm Chart 파라미터를 지정하세요.
 
 1. 빈 `datadog-values.yaml` 파일 생성:
 
@@ -175,10 +175,10 @@ datadog:
   apiKeyExistingSecret: datadog-secret
 {{< /code-block >}}
 
-`<DATADOG_SITE>`를 [Datadog 사이트][2]로 설정합니다. 설정하지 않으면 기본값으로 US1 사이트(`datadoghq.com`)가 사용됩니다.
+[Datadog 사이트][2]를 `<DATADOG_SITE>`로 설정하세요. 설정하지 않으면 기본값으로 US1 사이트(`datadoghq.com`)가 사용됩니다.
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-info">FED 환경에서는 <code>useFIPSAgent: true</code> ( <code>datadog-values.yaml</code> 의 루트에 있음)를 설정하여 FIPS 규격 준수 Agent 이미지를 사용합니다. <a href="/agent/configuration/fips-compliance/">FIPS 준수</a>를 참조하세요.</div>
+<div class="alert alert-info">FED의 경우 FIPS 규격 준수 Agent 이미지를 사용하려면 <code>useFIPSAgent: true</code> 설정을 <code>datadog-values.yaml</code> 아래에 추가하세요. <a href="/agent/configuration/fips-compliance/">FIPS 준수</a>를 참조하세요.</div>
 {{% /site-region %}}
 
 3. OpenTelemetry Collector 활성화 및 필수 포트 구성:
@@ -200,8 +200,8 @@ datadog:
 컨테이너 포트를 외부 네트워크에 노출하려면 `hostPort`을 설정합니다. 이를 통해 OTLP Exporter가 Datadog Agent가 배치된 노드의 IP 주소를 사용하도록 구성할 수 있습니다.
 
 포트를 노출하고 싶지 않은 경우 Agent 서비스를 사용할 수도 있습니다.
-   - 이 경우 <code>hostPort</code> 항목을 <code>datadog-values.yaml</code> 파일에서 제거합니다.
-   - 애플리케이션 배포 파일(`deployment.yaml`)에서는 OTLP Exporter가 Agent 서비스를 사용하도록 구성합니다.
+   - 이 경우 <code>hostPort</code> 항목을 <code>datadog-values.yaml</code> 파일에서 제거하세요.
+   - 애플리케이션 배포 파일(`deployment.yaml`)에서는 OTLP Exporter가 Agent 서비스를 사용하도록 구성하세요.
       ```yaml
       env:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
@@ -210,7 +210,7 @@ datadog:
           value: 'grpc'
       ```
 
-4. (선택 사항) 추가 Datadog 기능 활성화:
+4. (필요시) 추가 Datadog 기능 활성화:
 
 <div class="alert alert-warning">이 기능을 활성화하면 추가 비용이 발생할 수 있습니다. 진행하기 전에 <a href="https://www.datadoghq.com/pricing/">가격 페이지</a>를 검토하고 고객 성공 관리자와 상담하세요.</div>
 
@@ -229,7 +229,7 @@ datadog:
 
 추가 Datadog 기능을 활성화할 때는 Datadog 환경 변수에 의존하지 말고 Datadog 또는 OpenTelemetry Collector 구성 파일을 사용하세요.
 
-5. (선택 사항) 포드 레이블을 수집하여 메트릭, 트레이스 및 로그에 연결되는 태그로 사용:
+5. (필요시) 포드 레이블을 수집하여 메트릭, 트레이스 및 로그에 연결되는 태그로 사용:
 
 <div class="alert alert-warning">사용자 지정 메트릭은 과금에 영향을 줄 수 있습니다. 자세한 내용은 <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">사용자 지정 메트릭 과금 페이지</a>를 참조하세요.</div>
 
@@ -281,6 +281,8 @@ datadog:
 
 ### OpenTelemetry Collector 구성 {#configure-the-opentelemetry-collector}
 
+DDOT Collector는 Datadog Agent 내부에서 실행되므로 수신되는 텔레메트리의 호스트 이름 속성이 Agent의 호스트 이름과 다른 이름으로 확인될 수 있습니다. `infraattributes` 프로세서는 대신 Agent 호스트 이름을 적용할 수 있습니다. 권장 구성은 [Hostname and Tagging][58]을 참조하세요.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 Datadog Operator는 시작점으로 사용할 수 있는 샘플 OpenTelemetry Collector 구성을 제공합니다. 이 구성을 수정해야 하는 경우 Datadog Operator는 사용자 지정 Collector 구성을 제공하는 두 가지 방법을 지원합니다.
@@ -290,7 +292,7 @@ Datadog Operator는 시작점으로 사용할 수 있는 샘플 OpenTelemetry Co
 
 ####  인라인 Collector 구성 {#inline-collector-configuration}
 
-아래 예제에서는 Collector 구성이 `features.otelCollector.conf.configData` 파라미터 아래에 직접 정의됩니다.
+아래 예시에서는 Collector 구성이 `features.otelCollector.conf.configData` 파라미터 아래에 직접 정의됩니다.
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
   ...
@@ -335,6 +337,7 @@ Datadog Operator는 시작점으로 사용할 수 있는 샘플 OpenTelemetry Co
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -346,7 +349,7 @@ Datadog Operator는 시작점으로 사용할 수 있는 샘플 OpenTelemetry Co
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -427,6 +430,7 @@ spec:
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -438,7 +442,7 @@ spec:
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -458,7 +462,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -490,6 +493,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -501,7 +505,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -579,7 +583,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -611,6 +614,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -622,7 +626,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -665,6 +669,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -676,7 +681,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -738,19 +743,19 @@ receivers:
             - targets: ["0.0.0.0:8888"]
 {{< /code-block >}}
 
-자세한 내용은 [Collector Health Metrics][8] 설명서를 참조하세요.
+자세한 내용은 [수집기 상태 메트릭][8] 설명서를 참조하세요.
 
 ### OpenTelemetry Collector와 함께 Agent 배포 {#deploy-the-agent-with-the-opentelemetry-collector}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-구성 파일을 사용하여 Datadog Agent를 배포합니다.
+구성 파일을 사용하여 Datadog Agent를 배포하세요.
 
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
 
-이 작업은 DDOT OpenTelemetry Collector가 포함된 Datadog Agent를 DaemonSet으로 배포합니다. Collector는 [Agent 배포 패턴][1]에 따라 애플리케이션과 동일한 호스트에서 실행됩니다. [Gateway 배포 패턴][2]은 현재 Preview 상태입니다. 설치 방법은 [DDOT Kubernetes Gateway 설치 가이드][3]를 참조하세요.
+이 작업은 DDOT OpenTelemetry Collector가 포함된 Datadog Agent를 DaemonSet으로 배포합니다. Collector는 [Agent 배포 패턴][1]에 따라 애플리케이션과 동일한 호스트에서 실행됩니다. [Gateway 배포 패턴][2]의 경우 [DDOT Kubernetes Gateway 설치 가이드][3]를 따르세요.
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -776,7 +781,7 @@ Kubernetes 환경에서 OpenTelemetry Collector와 함께 Datadog Agent를 설�
 
 <div class="alert alert-info">배포 과정에서 경고 메시지가 표시될 수 있습니다. 이러한 경고는 무시해도 됩니다.</div>
 
-이 Helm 차트는 OpenTelemetry Collector가 포함된 Datadog Agent를 DaemonSet으로 배포합니다. Collector는 [Agent 배포 패턴][1]에 따라 애플리케이션과 동일한 호스트에 배포됩니다. [Gateway 배포 패턴][2]은 현재 Preview 상태입니다. 설치 방법은 [DDOT Kubernetes Gateway 설치 가이드][3]를 참조하세요.
+이 Helm 차트는 OpenTelemetry Collector가 포함된 Datadog Agent를 DaemonSet으로 배포합니다. Collector는 [Agent 배포 패턴][1]에 따라 애플리케이션과 동일한 호스트에 배포됩니다. [Gateway 배포 패턴][2]의 경우 [DDOT Kubernetes Gateway 설치 가이드][3]를 따르세요.
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -794,15 +799,15 @@ Kubernetes 환경에서 OpenTelemetry Collector와 함께 Datadog Agent를 설�
 
 1. [애플리케이션 계측](#instrument-the-application)
 2. [애플리케이션 구성](#configure-the-application)
-3. [관측성 데이터 상관관계 설정](#correlate-observability-data)
+3. [관측 가능성 데이터 상관관계 설정](#correlate-observability-data)
 4. [애플리케이션 실행](#run-the-application)
 
 ### 애플리케이션 계측 {#instrument-the-application}
 
 [OpenTelemetry API를 사용][12]하여 애플리케이션을 계측합니다.
 
-{{% collapse-content title="OpenTelemetry API로 계측된 예제 애플리케이션" level="p" %}}
-예제로는 이미 계측이 완료된 [Calendar 샘플 애플리케이션][9]을 사용할 수 있습니다. 다음 코드는 OpenTelemetry 주석 및 API를 사용하여 [CalendarService.getDate()][10] 메서드를 계측합니다.
+{{% collapse-content title="OpenTelemetry API로 계측된 예시 애플리케이션" level="p" %}}
+예시로는 이미 계측이 완료된 [Calendar 샘플 애플리케이션][9]을 사용할 수 있습니다. 다음 코드는 OpenTelemetry 주석 및 API를 사용하여 [CalendarService.getDate()][10] 메서드를 계측합니다.
    {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="false" >}}
 @WithSpan(kind = SpanKind.CLIENT)
 public String getDate() {
@@ -833,13 +838,13 @@ env:
     value: 'grpc'
    {{< /code-block >}}
 
-### 관측성 데이터 상관관계 설정 {#correlate-observability-data}
+### 관측 가능성 데이터 상관관계 설정 {#correlate-observability-data}
 
 [unified service tagging][14]은 Datadog에서 메트릭, 트레이스 및 로그를 일관된 태그로 연결하여 서로 간에 쉽게 탐색할 수 있도록 해줍니다.
 
-컨테이너화된 환경에서는 OpenTelemetry Resource Attributes 환경 변수를 사용하여 `env`, `service`, `version`을 설정합니다. DDOT Collector는 이러한 태깅 구성을 감지하고 컨테이너에서 수집한 데이터에 자동으로 적용합니다.
+컨테이너화된 환경에서는 OpenTelemetry Resource Attributes 환경 변수를 사용하여 `env`, `service`, `version`을 설정합니다. DDOT Collector는 이러한 태깅 구성을 탐지하고 컨테이너에서 수집한 데이터에 자동으로 적용합니다.
 
-애플리케이션의 Deployment 매니페스트에 다음 환경 변수를 추가합니다.
+애플리케이션의 Deployment 매니페스트에 다음 환경 변수를 추가하세요.
 
 {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: apps/v1
@@ -862,11 +867,11 @@ spec:
 
 ### 애플리케이션 실행 {#run-the-application}
 
-Deployment 매니페스트 변경 사항을 적용하기 위해 애플리케이션을 다시 배포합니다. 업데이트된 구성이 활성화되면 메트릭, 트레이스 및 로그 전반에서 Unified Service Tagging이 완전히 활성화됩니다.
+애플리케이션을 다시 배포해 Deployment 매니페스트 변경 사항을 적용하세요. 업데이트된 구성이 활성화되면 메트릭, 트레이스 및 로그 전반에서 Unified Service Tagging이 완전히 활성화됩니다.
 
-## Datadog에서 관측성 데이터 탐색하기 {#explore-observability-data-in-datadog}
+## Datadog에서 관측 가능성 데이터 탐색하기 {#explore-observability-data-in-datadog}
 
-Datadog을 사용하여 애플리케이션의 관측성 데이터를 확인할 수 있습니다.
+Datadog을 사용하여 애플리케이션의 관측 가능성 데이터를 확인할 수 있습니다.
 
 ### Fleet Automation {#fleet-automation}
 
@@ -876,39 +881,39 @@ Datadog Agent 및 Collector 구성을 확인하세요.
 
 ### 실시간 컨테이너 모니터링 {#live-container-monitoring}
 
-Live Container Monitoring 기능을 사용하여 컨테이너 상태를 모니터링합니다.
+Live Container Monitoring 기능을 사용하여 컨테이너 상태를 모니터링하세요.
 
 {{< img src="/opentelemetry/embedded_collector/containers.png" alt="Containers 페이지에서 컨테이너 상태를 확인하세요." style="width:100%;" >}}
 
 ### 인프라 노드 상태 {#infrastructure-node-health}
 
-런타임 및 인프라 메트릭을 확인하여 노드 성능을 시각화, 모니터링 및 측정할 수 있습니다.
+런타임 및 인프라 메트릭을 조회하여 노드 성능을 시각화, 모니터링 및 측정할 수 있습니다.
 
-{{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="Host List에서 런타임 및 인프라 메트릭을 확인하세요." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/infrastructure.png" alt="Host List에서 런타임 및 인프라 메트릭을 조회하세요." style="width:100%;" >}}
 
 ### 로그 {#logs}
 
-로그를 확인하여 애플리케이션 및 시스템 작동 문제를 모니터링 및 해결하세요.
+로그를 조회하여 애플리케이션 및 시스템 작동 문제를 모니터링 및 해결하세요.
 
-{{< img src="/opentelemetry/embedded_collector/logs.png" alt="Log Explorer에서 로그를 확인하세요." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/logs.png" alt="Log Explorer에서 로그를 조회하세요." style="width:100%;" >}}
 
 ### 트레이스 {#traces}
 
-트레이스와 스팬을 확인하여 애플리케이션이 처리하는 요청의 상태 및 성능을 관찰할 수 있습니다. 동일한 트레이스 내에서 인프라 메트릭도 함께 연관되어 표시됩니다.
+트레이스와 스팬을 조회하여 애플리케이션이 처리하는 요청의 상태 및 성능을 관찰할 수 있습니다. 동일한 트레이스 내에서 인프라 메트릭도 함께 연관되어 표시됩니다.
 
-{{< img src="/opentelemetry/embedded_collector/traces.png" alt="Trace Explorer에서 트레이스를 확인하세요." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/traces.png" alt="Trace Explorer에서 트레이스를 조회하세요." style="width:100%;" >}}
 
 ### 런타임 메트릭 {#runtime-metrics}
 
-애플리케이션의 런타임(JVM) 메트릭을 모니터링합니다.
+애플리케이션의 런타임(JVM) 메트릭을 모니터링하세요.
 
-{{< img src="/opentelemetry/embedded_collector/metrics.png" alt="JVM Metrics 대시보드에서 JVM 메트릭을 확인하세요." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/metrics.png" alt="JVM Metrics 대시보드에서 JVM 메트릭을 조회하세요." style="width:100%;" >}}
 
 ### Collector 상태 메트릭 {#collector-health-metrics}
 
-DDOT Collector의 상태를 모니터링하기 위해 Collector 메트릭을 확인합니다.
+Collector 메트릭을 조회해 DDOT Collector의 상태를 모니터링하세요.
 
-{{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="OTel 대시보드에서 Collector 상태 메트릭을 확인하세요." style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="OTel 대시보드에서 Collector 상태 메트릭을 조회하세요." style="width:100%;" >}}
 
 ## 추가 자료 {#further-reading}
 
@@ -970,3 +975,4 @@ DDOT Collector의 상태를 모니터링하기 위해 Collector 메트릭을 확
 [55]: /ko/containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: /ko/opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog

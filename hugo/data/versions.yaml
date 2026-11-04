@@ -7,3 +7,6 @@ ddot_gateway_version: "7.83.1"
 
 # Tags
 agent_tag: "7.83.1-full"
+
+# Code Security
+code_security_schema_version: "v1.7"

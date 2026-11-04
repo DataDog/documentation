@@ -1,6 +1,10 @@
 ---
 title: Exabeam - CrowdStrike FDR
 description: Learn more about the Exabeam - CrowdStrike FDR pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Drops sensor telemetry
 - Drops benign processes
 - Keeps all detection fields
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

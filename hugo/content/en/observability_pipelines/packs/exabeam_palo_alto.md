@@ -1,6 +1,10 @@
 ---
 title: Exabeam - Palo Alto
 description: Learn more about the Exabeam - Palo Alto pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Tags PAN-OS source
 - Drops empty traffic logs
 - Leaves raw CSV intact
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

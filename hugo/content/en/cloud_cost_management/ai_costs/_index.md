@@ -1,0 +1,322 @@
+---
+title: AI Costs
+description: "Gain unified visibility into AI spend across providers, normalize cost data, and attribute usage to users and teams."
+further_reading:
+- link: "/cloud_cost_management/"
+  tag: "Documentation"
+  text: "Cloud Cost Management"
+- link: "/cloud_cost_management/setup/saas_costs"
+  tag: "Documentation"
+  text: "SaaS and AI Costs"
+- link: "/cloud_cost_management/allocation/custom_allocation_rules"
+  tag: "Documentation"
+  text: "Custom Allocation Rules"
+- link: "/cloud_cost_management/ai_costs/ai_gateway_allocation"
+  tag: "Documentation"
+  text: "AI Gateway Allocation"
+- link: "/cloud_cost_management/allocation/tag_pipelines"
+  tag: "Documentation"
+  text: "Tag Pipelines"
+- link: "/cloud_cost_management/reporting"
+  tag: "Documentation"
+  text: "Reporting"
+- link: "/cloud_cost_management/cost_changes/monitors"
+  tag: "Documentation"
+  text: "Cloud Cost Monitors"
+- link: "/cloud_cost_management/planning/budgets"
+  tag: "Documentation"
+  text: "Budgets"
+- link: "/cloud_cost_management/planning/forecasting"
+  tag: "Documentation"
+  text: "Forecasting"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/"
+  tag: "Blog"
+  text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/making-agentic-token-costs-visible-in-production/"
+  tag: "Blog"
+  text: "Making agentic token costs visible in production"
+- link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
+  tag: "Blog"
+  text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
+- link: "https://www.datadoghq.com/blog/how-datadog-saves-money-by-optimizing-ai-usage/"
+  tag: "Blog"
+  text: "How Datadog saves over $1 million each month by optimizing AI usage"
+- link: "https://www.datadoghq.com/blog/federal-agencies-ai-spend-cloud-cost-management/"
+  tag: "Blog"
+  text: "Beyond the $1 AI era: How federal agencies can build the evidence for FY27 renewals"
+- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
+  tag: "Blog"
+  text: "Manage Cursor costs with Datadog Cloud Cost Management"
+---
+
+
+## Overview
+
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
+
+## Prerequisites
+
+To use AI Costs, you must have at least one of the following supported providers set up for [Cloud Cost Management][1]:
+
+| AI provider | Setup method |
+|---|---|
+| Amazon Bedrock | [AWS integration][2] |
+| Amazon SageMaker | [AWS integration][2] |
+| Anthropic (Enterprise and Platform) | [SaaS integration][3] |
+| Azure Foundry (Models and Tools) | [Azure integration][18] |
+| Google Gemini  | [Google Cloud integration][4] |
+| OpenAI (Platform only)     | [SaaS integration][5] |
+| Vertex AI  | [Google Cloud integration][4] |
+| GitHub Copilot | [GitHub Copilot][15] |
+| Cursor | [Cursor][16] |
+| Databricks Mosaic AI     | [SaaS integration][19] |
+| Snowflake AI | [SaaS integration][21] |
+
+## AI cost summary
+
+After connecting your AI providers, navigate to [**Cloud Cost** > **Summarize** > **AI**][6] to view the AI cost summary page.
+
+{{< img src="cloud_cost/ai_costs/ccm-ai-costs-overview.png" alt="The AI cost summary dashboard, showing daily spend trends over a one-month period, a list of top spend drivers, and an anomaly graph." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+The AI cost summary page provides:
+
+- **Total AI Cost**: Aggregated AI cost and cost change over the selected time frame.
+- **Daily AI Cost**: Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
+- **Top Cost Drivers**: The models, projects, services, and users generating the most spend.
+- **Active AI Cost Anomalies**: Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **AI Cost Recommendations**: Cost [recommendations][17] and optimization opportunities surfaced across all connected providers. Select a recommendation to open a side panel with more details and options for further action.
+- **AI Cost Dashboards**: Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
+
+## Normalized AI tags
+
+AI cost data from all supported providers is normalized to a consistent set of tags. Use these tags to filter, group, compare, and plan AI spend across dashboards, [monitors][8], [budgets][9], [forecasts][10], and other Datadog tools. Use [Cloud Cost Explorer][11] to query and compare spend across providers without writing per-provider logic.
+
+The following tags are available for all supported AI providers:
+
+| Tag&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Tag description |
+|---|---|
+| `providername` | The AI provider. |
+| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, or `anthropic_platform`). |
+| `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
+| `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
+| `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
+| `token_category` | The specific category of tokens consumed, such as input tokens, output tokens, or tokens related to caching and search operations (for example, `cached input`, `cache write`, `standard input`, `output`). |
+| `project` | The project, workspace, or environment the AI costs belong to. |
+
+## Attribute AI spend to sources
+
+Each provider reports its own tags that attribute AI spend to the users, API keys, projects, and other sources that generated it. For Anthropic and OpenAI, Datadog also adds tags through [out-of-the-box (OOTB) allocation rules][12], which require no configuration.
+
+### Provider-specific tags
+
+In addition to the [normalized AI tags](#normalized-ai-tags), each provider reports its own set of tags. The AI cost summary page uses these tags to break down, filter, and group each provider's spend. The label column shows the name the tag uses on the AI cost summary page.
+
+{{< tabs >}}
+{{% tab "Amazon Bedrock" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The project that the cost belongs to. |
+| `aws_iam_principal_user` | IAM User | The IAM user that made the request. |
+| `aws_iam_principal_session_name` | IAM Session Name | The session name of the IAM role session that made the request. |
+| `aws_iam_principal_application_role` | IAM Application Role | The IAM role that the application assumed to make the request. |
+
+The IAM principal tags are available only when your [AWS Cost and Usage Report (CUR 2.0)][101] includes IAM principal data.
+
+[101]: /cloud_cost_management/setup/aws/?tab=cloudformation#configure-the-cost-and-usage-report-settings
+
+{{% /tab %}}
+{{% tab "Amazon SageMaker" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `sagemaker_resource_type` | Resource Type | The type of SageMaker resource that generated the cost (for example, `app`). |
+| `sagemaker_resource_name` | Resource Name | The name of the SageMaker resource that generated the cost. |
+| `sagemaker_app_type` | App Type | The type of SageMaker app. Available only for resources where `sagemaker_resource_type` is `app`. |
+| `sagemaker_app_name` | App Name | The name of the SageMaker app. Available only for resources where `sagemaker_resource_type` is `app`. |
+| `sagemaker_component` | Component | The SageMaker component that generated the cost. |
+
+{{% /tab %}}
+{{% tab "Anthropic" %}}
+
+Anthropic reports a different set of tags for each plan.
+
+**Anthropic Enterprise**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `product` | Product | The Anthropic product that generated the cost (for example, `claude_code`). |
+| `context_window` | Context Window | The context window size range of the request (for example, `tier_0-200k` or `tier_200k-1m`). |
+| `speed` | Speed | The output speed mode of the request. |
+
+**Anthropic Platform**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `api_key_name` | API Key Name | The name of the API key that made the request. |
+| `workspace_name` | Workspace | The Anthropic workspace that the cost belongs to. |
+| `context_window` | Context Window | The context window size range of the request (for example, `tier_0-200k` or `tier_200k-1m`). |
+| `service_tier` | Service Tier | The service tier that processed the request (for example, `Standard`). |
+| `cost_type` | Cost Type | The type of charge (for example, `tokens`). |
+
+**Additional tags**
+
+The following Anthropic tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `api_key_id` | The unique identifier of the API key that made the request. |
+| `model` | An alias for `model_id`, provided for consistency with usage metrics. |
+| `model_id` | The canonical Anthropic model identifier (for example, `claude-opus-4-6`). |
+| `org_id` | The unique identifier of the Anthropic organization. |
+| `org_name` | A tag-normalized version of the Anthropic organization's name. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+| `user_name` | The name of the user who generated the cost. |
+| `workspace_id` | The unique identifier of the Anthropic workspace. |
+
+{{% /tab %}}
+{{% tab "Azure Foundry" %}}
+
+Azure Foundry spend is split into Foundry Models, which covers the `Foundry Models` meter category, and Foundry Tools, which covers all other AI meter categories.
+
+**Azure Foundry Models**
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `resourcegroupname` | Resource Group | The Azure resource group that the cost belongs to. |
+| `metercategory` | Category | The Azure meter category of the charge (for example, `Foundry Models`). |
+| `metersubcategory` | Subcategory | The Azure meter subcategory of the charge. |
+
+**Azure Foundry Tools**
+
+| Tag | Label | Description |
+|---|---|---|
+| `resourcegroupname` | Resource Group | The Azure resource group that the cost belongs to. |
+| `metercategory` | Category | The Azure meter category of the charge (for example, `Foundry Tools` or `Cognitive Services`). |
+| `metersubcategory` | Subcategory | The Azure meter subcategory of the charge. |
+
+{{% /tab %}}
+{{% tab "Cursor" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `max_mode` | Max Mode | Whether the request used Cursor's Max Mode. |
+| `is_headless` | Headless Mode | Whether the request ran in headless mode, without the Cursor editor. |
+| `billing_group` | Billing Group | The Cursor billing group that the user belongs to. |
+
+{{% /tab %}}
+{{% tab "Databricks Mosaic AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `billing_origin_product` | Billing Origin Product | The Databricks product that generated the cost (for example, `MODEL_SERVING` or `VECTOR_SEARCH`). |
+| `model_name` | Model | The model that generated the cost. |
+| `workspace_name` | Workspace | The Databricks workspace that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "Gemini" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The Google Cloud project that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "GitHub Copilot" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `organization_name` | Organization | The GitHub organization that the cost belongs to. |
+| `repository_name` | Repository | The GitHub repository that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "OpenAI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `project` | Project | The OpenAI project that the cost belongs to. |
+| `api_key_name` | API Key Name | The name of the API key that made the request. |
+
+**Additional tags**
+
+The following OpenAI tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `account_id` | The unique identifier of the OpenAI account. |
+| `account_name` | The name of the OpenAI account. |
+| `api_key_id` | The unique identifier of the API key that made the request. |
+| `batch` | Whether the request used the OpenAI Batch API. |
+| `endpoint` | The OpenAI API endpoint that the request was sent to. |
+| `model` | The OpenAI model identifier (for example, `gpt-4.1`). |
+| `org_id` | The unique identifier of the OpenAI organization. |
+| `project_id` | The unique identifier of the OpenAI project. |
+| `project_name` | The name of the OpenAI project. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+
+{{% /tab %}}
+{{% tab "Snowflake AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `account_name` | Account | The Snowflake account that the cost belongs to. |
+
+{{% /tab %}}
+{{% tab "Vertex AI" %}}
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `project` | Project | The Google Cloud project that the cost belongs to. |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Map tags to teams
+
+Configure [Tag Pipelines][13] to map provider-specific tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
+
+{{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values through an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+After mapping, attributed spend appears in provider-specific dashboards and [Cost Reports][14]:
+
+{{< img src="cloud_cost/ai_costs/ccm-anthropic-ai-cost-reporting.png" alt="A provider-specific dashboard with a stacked bar graph showing daily provider spend attributed by team and model name, and a summary list of the spend attributions." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+
+### Allocate shared AI gateway spend
+
+If your teams send LLM requests through a shared AI gateway, you can split that spend across the teams, users, or services that sent the requests. For more information, see [AI Gateway Allocation][20].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /cloud_cost_management/
+[2]: /cloud_cost_management/setup/aws
+[3]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
+[4]: /cloud_cost_management/setup/google_cloud
+[5]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[6]: https://app.datadoghq.com/cost/summarize/ai-costs
+[7]: /cloud_cost_management/cost_changes/anomalies/
+[8]: /cloud_cost_management/cost_changes/monitors
+[9]: /cloud_cost_management/planning/budgets
+[10]: /cloud_cost_management/planning/forecasting
+[11]: https://app.datadoghq.com/cost/explorer
+[12]: /cloud_cost_management/allocation/custom_allocation_rules/?tab=even
+[13]: /cloud_cost_management/allocation/tag_pipelines
+[14]: /cloud_cost_management/reporting
+[15]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
+[16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
+[17]: /cloud_cost_management/recommendations
+[18]: /cloud_cost_management/setup/azure/?tab=terraform
+[19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
+[20]: /cloud_cost_management/ai_costs/ai_gateway_allocation
+[21]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts

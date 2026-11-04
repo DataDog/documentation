@@ -35,6 +35,7 @@ You can configure three types of monthly limits:
 - If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the organization-wide limit.
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
 - When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, or Bits Agent Builder, and a banner shows the reset date.
+- When a limit is reached, requests to start an investigation through the [Bits AI API][7] return HTTP `429` with the error code `AI_CREDITS_EXHAUSTED`. A `429` with the error code `INVESTIGATION_RATE_LIMIT_EXCEEDED` means an [investigation rate limit][8] was reached instead.
 
 ### Examples
 
@@ -52,10 +53,14 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 
 | Product | Attribution |
 |---|---|
-| [Bits Chat][1] | All Bits Chat usage rolls up to the email address of the user interacting with Bits Chat. |
-| [Bits Investigation][2] | Manually started investigations roll up to the email address of the user who initiated the action.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
+| [Bits Chat][1] | All Bits Chat usage, including chats inside an investigation, rolls up to the email address of the user interacting with Bits Chat. |
+| [Bits Investigation][2] | Manually started investigations roll up to the email address of the user who initiated the action.<br>Investigations started through the API roll up to the user or service account that owns the API key, and count toward that account's limits.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
 | [Bits Code][3] | All Bits Code usage rolls up to the email address of the user interacting with Bits Code. |
 | [Bits Agent Builder][4] | Agent runs for workflows roll up to the email address of the user who created the workflow.<br>Agent runs for workflows created by service accounts roll up to **Autonomous Agents**. |
+
+## Get alerted before reaching a limit
+
+To get notified before users reach their limit, use the AI Credits [usage metrics][10], grouped by `user_handle`, in a [metric monitor][9].
 
 ## Further reading
 
@@ -67,3 +72,7 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 [4]: /actions/agents/
 [5]: https://app.datadoghq.com/bits-ai/ai-credits-management
 [6]: /account_management/rbac/permissions/#billing-and-usage
+[7]: /api/latest/bits-ai/
+[8]: /bits_ai/bits_investigation/configure/#configure-rate-limits
+[9]: /monitors/types/metric/
+[10]: /account_management/billing/ai_credits/#monitor-usage

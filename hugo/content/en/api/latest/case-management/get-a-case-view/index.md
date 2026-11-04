@@ -1,3 +1,3 @@
 ---
-title: Get a case view
+title: Get a work item view
 ---

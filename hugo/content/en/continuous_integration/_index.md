@@ -51,9 +51,9 @@ cascade:
         tags: ['ci/cd', 'continuous integration']
 ---
 
-{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and Test Optimization experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization, and switch back to the original UI at any time.
+{{< callout url=# btn_hidden="true" header="CI Visibility is part of CI/CD Optimization">}}CI/CD Optimization combines CI Visibility and Test Optimization into one unified interface. This page covers CI Visibility; for features shared with Test Optimization, see [CI/CD Optimization][1].
 
-[1]: /continuous_integration/cicd_optimization/
+[1]: /cicd/
 {{< /callout >}}
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}

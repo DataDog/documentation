@@ -35,6 +35,19 @@ You can also save individual logs to a notebook by selecting {{< ui >}}Save to n
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
+## CSV export formatting
+
+To make exported logs compatible with spreadsheet applications, Datadog sanitizes CSV exports. Exported values and column names can therefore differ from the original logs. Datadog makes the following changes:
+
+- **Removes line breaks** (`\n`, `\r\n`, `\r`) without inserting spaces. For example, `foo\nbar` becomes `foobar`.
+- **Replaces consecutive spaces** with a single space.
+- **Prefixes formula characters** starting with `=`, `+`, `-`, `@`, a tab, or a carriage return with a single quote (`'`) to prevent spreadsheet applications from interpreting them as formulas.
+- **Adds numeric suffixes to duplicate column names**, such as `message(1)`.
+
+Datadog also encloses values in double quotes and escapes double quotes within values as `""`, following standard CSV rules.
+
+To retrieve logs without these CSV formatting changes, use the [Log Search API][5] or [Log Archives][9].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -47,3 +60,4 @@ To retrieve a log list longer than the maximum 1000 logs limit returned by the L
 [6]: /integrations/#cat-notification
 [7]: /logs/guide/collect-multiple-logs-with-pagination/?tab=v2api
 [8]: /notebooks/
+[9]: /logs/log_configuration/archives/

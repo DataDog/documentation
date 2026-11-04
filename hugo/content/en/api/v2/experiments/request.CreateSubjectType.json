@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "subject-types",
+    "attributes": {
+      "name": "ex-14bb9543f523edde",
+      "product_analytics_attribute": "@account.id",
+      "warehouse_column_names": [
+        "account_id"
+      ]
+    }
+  }
+}

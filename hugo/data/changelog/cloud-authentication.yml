@@ -1,0 +1,57 @@
+entries:
+  - change_type: added
+    date: '2026-09-30'
+    link: https://github.com/DataDog/documentation/pull/40309
+    operations:
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+    title: Extend Cloud Auth Config endpoints to support new GitHub provider
+  - change_type: added
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41083
+    operations:
+      - CreateAWSCloudAuthPersonaMapping
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - DeleteAWSCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - GetAWSCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - ListAWSCloudAuthPersonaMappings
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+    title: Use WIF URLs for cloud authentication mappings
+  - change_type: removed
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41083
+    operations:
+      - CreateAWSCloudAuthPersonaMapping
+      - CreateGitHubCloudAuthIntakeMapping
+      - CreateGitHubCloudAuthPersonaMapping
+      - DeleteAWSCloudAuthPersonaMapping
+      - DeleteGitHubCloudAuthIntakeMapping
+      - DeleteGitHubCloudAuthPersonaMapping
+      - GetAWSCloudAuthPersonaMapping
+      - GetGitHubCloudAuthIntakeMapping
+      - GetGitHubCloudAuthPersonaMapping
+      - ListAWSCloudAuthPersonaMappings
+      - ListGitHubCloudAuthIntakeMappings
+      - ListGitHubCloudAuthPersonaMappings
+    title: Use WIF URLs for cloud authentication mappings
+  - change_type: added
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41196
+    operations:
+      - CreateAWSCloudAuthIntakeMapping
+      - DeleteAWSCloudAuthIntakeMapping
+      - GetAWSCloudAuthIntakeMapping
+      - ListAWSCloudAuthIntakeMappings
+    title: Add AWS cloud authentication intake mapping endpoints

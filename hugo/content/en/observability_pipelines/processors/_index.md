@@ -21,9 +21,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 Processor groups are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-**Note**: For a pipeline canvas, there is a limit of 25 processors groups and a total of 150 processors.
-
-Select a processor in the left navigation menu to see more information about it.
+**Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 
 ## Processors
 
@@ -94,7 +92,7 @@ These are the available processors:
 
 <div class="alert alert-info">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
 
-{{< img src="observability_pipelines/processors/processor_groups.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/processor_groups.png" alt="A pipeline with a Splunk HEC source sending logs to three processor groups, each with its own filter and processors, which then send logs to Microsoft Sentinel and Splunk HEC destinations." style="width:100%;" >}}
 
 You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific events. For example, if you want the group processors to only process events coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
 

@@ -1,0 +1,18 @@
+entries:
+  - change_type: added
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40633
+    operations:
+      - CreateAIImpactUserActivity
+      - CreateDORADeployment
+      - CreateDORAFailure
+      - CreateDORAIncident
+      - DeleteDORADeployment
+      - DeleteDORAFailure
+      - GetDORADeployment
+      - GetDORAFailure
+      - ListDORADeployments
+      - ListDORAFailures
+      - PatchDORADeployment
+      - PatchDORADeploymentByVersion
+    title: Rename DORA Metrics API section to Delivery Performance

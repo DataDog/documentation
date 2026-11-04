@@ -5,59 +5,59 @@ disable_toc: true
 further_reading:
 - link: /security/cloud_siem/detection_rules
   tag: ドキュメント
-  text: ログ検出ルールの作成
+  text: ログ検出ルールを作成する
 - link: security/cloud_siem/investigator
   tag: ドキュメント
-  text: Investigator の詳細を学ぶ
+  text: Investigator について
 - link: /security/cloud_siem/triage_and_investigate/investigate_security_signals
   tag: ドキュメント
-  text: セキュリティシグナルの調査
+  text: セキュリティシグナルを調査する
 - link: https://www.datadoghq.com/blog/cloud-siem-content-packs-whats-new-2024-09/
   tag: ブログ
-  text: 'Cloud SIEM コンテンツパックの新機能: 2024 年 9 月'
+  text: 'Cloud SIEM Content Packs の新機能: 2024 年 9 月'
 - link: https://www.datadoghq.com/blog/microsoft-365-detections/
   tag: ブログ
-  text: 攻撃者はいかに Microsoft 365 サービスを悪用するか
+  text: 攻撃者が Microsoft 365 サービスを悪用する方法
 - link: https://www.datadoghq.com/blog/google-workspace-detections/
   tag: ブログ
-  text: Datadog Cloud SIEM を使用して Google Workspace アプリの悪意のあるアクティビティを検出する
+  text: Datadog Cloud SIEM で Google Workspace アプリの悪意のあるアクティビティを検出
 - link: https://www.datadoghq.com/blog/ocsf-common-data-model/
   tag: ブログ
   text: Datadog Cloud SIEM で OCSF 共通データモデルを使用してデータを正規化する
 - link: https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026
   tag: ブログ
-  text: 'Cloud SIEM の新機能: AI を活用した調査、脅威インテリジェンスの強化、スケーラブルなセキュリティ運用'
+  text: 'Cloud SIEM の新機能: AI を活用した調査、強化された脅威インテリジェンス、スケーラブルなセキュリティオペレーション'
 - link: https://www.datadoghq.com/blog/cloud-siem-enterprise-security
   tag: ブログ
-  text: 'Datadog Cloud SIEM: セキュリティ運用のイノベーションを推進する'
+  text: 'Datadog Cloud SIEM: セキュリティ運用におけるイノベーションの推進'
 - link: https://www.datadoghq.com/blog/oci-content-pack
   tag: ブログ
   text: Datadog Cloud SIEM で OCI 監査ログを監視する
 title: コンテンツパック
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
-[Cloud SIEM コンテンツパック][1] は、主要なセキュリティのインテグレーションのために、すぐに使えるコンテンツを提供します。インテグレーションに応じて、コンテンツパックには以下が含まれます。
+[Cloud SIEM Content Packs][1] は、主要なセキュリティ Integrations のためのすぐに使えるコンテンツを提供します。統合に応じて、コンテンツパックには以下が含まれる場合があります。
 
-- 環境の包括的なカバレッジを提供する [検出ルール][2]
-- コンテンツパックのログとセキュリティシグナルの状態に関する詳細なインサイトを提供するインタラクティブなダッシュボード
-- ユーザーやリソースによる不審なアクティビティを調査するためのインタラクティブなグラフィカルインターフェースである [Investigator][3]
-- アクションを自動化し、問題をより素早く調査し修復する [Workflow Automation][4]
-- 設定ガイド
-- インテグレーションのログを Open Cybersecurity Schema Framework の共通データモデルに正規化するための [OCSF パイプライン][5]
-- Cloud SIEM セキュリティシグナルにマッピングされる、インテグレーションから送られるサードパーティアラート
+- [検出ルール][2]: 環境を包括的にカバーします
+- コンテンツパックのログとセキュリティシグナルの状態に関する詳細な洞察を提供するインタラクティブなダッシュボード
+- [Investigator][3]: ユーザーやリソースによる疑わしいアクティビティを調査するためのインタラクティブなグラフィカルインターフェイス
+- [Workflow Automation][4]: アクションを自動化し、問題の調査と修正を加速します
+- 構成ガイド
+- [OCSF pipelines][5]: 統合のログを Open Cybersecurity Schema Framework 共通データモデルに正規化します
+- 統合からのサードパーティアラート。Cloud SIEM セキュリティシグナルにマッピングされます
 
-コンテンツパックは、以下のタイプ別にフィルタリングできます。
-- **コンテンツパック**: 検出ルール、SOAR (Security Orchestration, Automation, and Response) ワークフロー、カスタムツールなど、セキュリティ関連のコンテンツがバンドルされたインテグレーション
-- **エンリッチメントパック**: 脆弱性やサードパーティのインサイトなど、調査を改善するために SIEM 分析に有益なコンテキストを追加するコンテンツ
-- **インテグレーションパック**: Cloud SIEM での使用に関連する、Datadog カタログから選別されたコンテンツ
-<!-- - **Entity Packs**: Integrations and bundled content that power UEBA (User and Entity Behavior Analytics) by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM -->
+コンテンツパックは、以下のタイプでフィルタリングできます。
+- **コンテンツパック**: 検出ルール、SOAR (Security Orchestration, Automation, and Response) ワークフロー、カスタムツールなど、セキュリティ関連のコンテンツがバンドルされた統合です。
+- **エンリッチメントパック**: 脆弱性やサードパーティの洞察など、SIEM 分析に価値のあるコンテキストを追加し、調査を改善するためのコンテンツです。
+- **インテグレーションパック**: Cloud SIEM での使用に関連する、Datadog のカタログから厳選されたコンテンツです。
+- **エンティティパック**: 環境内のユーザーを識別する統合です。これらにより、シグナルやリスクにおけるユーザーコンテキスト、ユーザーごとのリスクスコアリング、ユーザーベースの調査が可能になります。リスクの高いユーザーを検出するには、少なくとも 1 つのエンティティパックが必要です。
 
-このページに記載されているコンテンツパックに加え、Cloud SIEM には **Always-On コンテンツパック**が含まれています。これらは、Datadog がログやセキュリティシグナルに自動的に適用する脅威インテリジェンスのエンリッチメントであり、インストールや設定を必要としません。
+このページに記載されているコンテンツパックに加え、Cloud SIEM には **Always-On コンテンツパック**が含まれています。これは、Datadog がログとセキュリティシグナルに自動的に適用する脅威インテリジェンスのエンリッチメントであり、インストールや構成は不要です。
 
 {{% cloud-siem-content-packs %}}
 
-## 参考文献 {#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

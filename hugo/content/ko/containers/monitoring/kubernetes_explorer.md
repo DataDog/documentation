@@ -210,7 +210,7 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 4. 설치 확인 {#4-verify-the-installation}
 
-[Kubernetes Explorer][9]를 열고 OpenTelemetry 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
+[Kubernetes Explorer][9]를 열고 OpenTelemetry 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스**도 채우려면 [사용자 지정 리소스 수집][17]을 참조하세요.
 
 #### 5. Kubernetes Explorer와 로그, 메트릭 및 트레이스 연결(선택 사항) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
@@ -277,17 +277,16 @@ service:
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
 [15]: /ko/account_management/api-app-keys/#api-keys
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
+[17]: /ko/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
 
 Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kubernetes Explorer를 채울 수 있습니다.
 
-<div class="alert alert-info">이 탭의 참조 구성은 Datadog Exporter를 사용합니다. 새 배포의 경우 <strong>OpenTelemetry Collector</strong> 탭을 사용하여 Kubernetes 리소스 데이터를 OTLP HTTP를 통해 Datadog으로 직접 전송하세요.</div>
+[`opentelemetry-kube-stack`][1] Helm 차트는 OpenTelemetry Operator를 설치하고 수집기를 `OpenTelemetryCollector` 사용자 지정 리소스(CR)로 관리합니다. Datadog은 두 개의 수집기를 구성하는 참조 [`values-otlp-http.yaml`][2]를 유지 관리합니다.
 
-[`opentelemetry-kube-stack`][1] Helm 차트는 OpenTelemetry Operator를 설치하고 수집기를 `OpenTelemetryCollector` 사용자 지정 리소스(CR)로 관리합니다. Datadog은 두 개의 수집기를 구성하는 참조 [`values.yaml`][2]를 유지 관리합니다.
-
-- **`cluster`**(Deployment): kube-state-metrics를 수집하고, Kubernetes 객체를 감시하며, `orchestrator_explorer`를 활성화하여 Kubernetes Explorer를 채웁니다.
+- **`cluster`** (Deployment): kube-state-metrics를 스크랩하고 `k8s_objects` 수신기를 사용하여 Kubernetes 객체를 감시하며, 이를 OTLP HTTP를 통해 Datadog으로 전송하여 Kubernetes Explorer를 채웁니다.
 - **`daemon`** (DaemonSet): 호스트 및 kubelet 메트릭을 수집하고 애플리케이션 텔레메트리 데이터를 위한 OTLP 엔드포인트를 노출합니다.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
@@ -309,7 +308,7 @@ Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kube
 
 #### 빠른 시작(대화형 설치 프로그램) {#quickstart-interactive-installer}
 
-[`opentelemetry-examples`][6] 리포지토리는 아래의 모든 단계를 처리하는 대화형 설치 프로그램을 제공합니다. `guides/kubernetes/configuration/opentelemetry-kube-stack/`에서:
+[`opentelemetry-examples`][6] 리포지토리는 전체 설치를 처리하는 대화형 설치 프로그램을 제공합니다. `guides/kubernetes/configuration/opentelemetry-kube-stack/`에서:
 
 ```sh
 ./install
@@ -319,84 +318,22 @@ Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kube
 
 #### 값 파일을 사용하여 설치 {#install-with-values-files}
 
-위의 대화형 설치 프로그램을 사용하지 않은 경우 아래 단계에 따라 수동으로 설치하세요.
-
-##### 1. cert-manager 설치(아직 없는 경우) {#1-install-cert-manager-if-not-already-present}
-
-```sh
-helm repo add jetstack https://charts.jetstack.io
-helm repo update
-
-helm install cert-manager jetstack/cert-manager \
-  --namespace cert-manager --create-namespace \
-  --set crds.enabled=true
-```
-
-##### 2. Datadog 시크릿 생성 {#2-create-the-datadog-secret}
-
-`DD_SITE`를 [Datadog 사이트][7](기본값 `datadoghq.com`)로 설정:
-
-```sh
-export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-export DD_SITE="datadoghq.com"  # for example us3.datadoghq.com, datadoghq.eu
-
-kubectl create namespace opentelemetry-operator-system \
-  --dry-run=client -o yaml | kubectl apply -f -
-
-kubectl create secret generic datadog-secret \
-  --namespace opentelemetry-operator-system \
-  --from-literal="api-key=$DD_API_KEY" \
-  --from-literal="dd-site=$DD_SITE" \
-  --dry-run=client -o yaml | kubectl apply -f -
-```
-
-##### 3. 배포 오버레이 생성 {#3-create-a-deployment-overlay}
-
-참조 `values.yaml`은 기본이며, 배포별 설정(클러스터 플랫폼, 환경, 클러스터 이름)은 오버레이 파일에 있습니다. `guides/kubernetes/configuration/opentelemetry-kube-stack/`에서 플랫폼과 일치하는 예시를 복사합니다.
-
-```sh
-mkdir -p deployment
-
-# EKS, GKE, or AKS (resource detector auto-populates k8s.cluster.name):
-cp examples/eks-deployment/values.yaml deployment/values.yaml
-cp examples/gcp-deployment/values.yaml deployment/values.yaml
-cp examples/aks-deployment/values.yaml deployment/values.yaml
-
-# Other platforms (set the cluster name manually):
-cp examples/manually-set-k8s-cluster-name/values.yaml deployment/values.yaml
-```
-
-EKS/GKE/AKS가 아닌 플랫폼의 경우 `deployment/values.yaml`을 편집하고 `my_k8s_cluster` 및 `production`을 클러스터 이름과 배포 환경으로 바꿉니다.
-
-##### 4. 참조 컬렉터 배포 {#4-deploy-the-reference-collectors}
-
-기본 `values.yaml` 및 오버레이를 모두 사용하여 차트를 설치하거나 업그레이드합니다.
-
-```sh
-helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
-helm repo update
-
-helm upgrade --install opentelemetry-kube-stack \
-  open-telemetry/opentelemetry-kube-stack \
-  --namespace opentelemetry-operator-system \
-  --values ./values.yaml \
-  --values ./deployment/values.yaml
-```
-
-두 컬렉터 모두 기본적으로 `500m` CPU 및 `1Gi` 메모리 제한과 `200m` CPU 및 `500Mi` 메모리 요청으로 설정됩니다. 대규모 클러스터의 경우 확장합니다.
+대화형 설치 프로그램을 사용하는 대신 수동으로 설치하려면 `opentelemetry-examples` 리포지토리의 [값 파일을 사용하여 설치][10] 단계를 따르세요.
 
 #### 설치 확인 {#verify-the-installation}
 
-[Kubernetes Explorer][8]를 열고 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스** 섹션은 이 설정에서 지원되지 않습니다.
+[Kubernetes Explorer][8]를 열고 클러스터 이름으로 필터링합니다. 모든 핵심 Kubernetes 리소스 섹션과 **사용자 지정 리소스 > CRD**가 채워져야 합니다. **사용자 지정 리소스 > 리소스**도 채우려면 [사용자 지정 리소스 수집][9]을 참조하세요.
 
 [1]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
-[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
+[2]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values-otlp-http.yaml
 [3]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.1
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [6]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack
 [7]: /ko/getting_started/site/
 [8]: https://app.datadoghq.com/orchestration/overview
+[9]: /ko/containers/monitoring/kubernetes_explorer_configuration/#manual-configuration
+[10]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/opentelemetry-kube-stack#install-with-values-files
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -471,7 +408,7 @@ clusterAgent:
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-프로세스 에이전트와 클러스터 에이전트 컨테이너 모두에서 환경 변수를 설정합니다.
+Process Agent와 Cluster Agent 컨테이너 모두에서 환경 변수를 설정합니다.
 
 ```yaml
 - name: DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS
@@ -532,14 +469,14 @@ clusterAgent:
 다른 탭에는 선택한 리소스의 문제를 해결하기 위한 추가 정보가 표시됩니다.
 
 * [**로그**][2]: 컨테이너 또는 리소스에서 로그를 확인합니다. 로그를 클릭하여 로그 탐색기에서 관련 로그를 확인합니다.
-* [**APM**][3]: 트레이스의 날짜, 서비스, 기간, 방법, 상태 코드를 포함하여 컨테이너 또는 리소스에서 트레이스를 확인합니다.
+* [**APM**][3]: 날짜, 서비스, 소요 시간, 메서드 및 상태 코드 등의 정보를 포함한 컨테이너 또는 리소스의 트레이스를 확인합니다.
 * [**메트릭**][4]: 컨테이너 또는 리소스에 대한 실시간 메트릭을 조회합니다. 이 탭에서 그래프를 전체 화면으로 보거나, 스냅샷을 공유하거나, 내보낼 수 있습니다.
 * {{< ui >}}Processes{{< /ui >}}: 이 리소스의 컨테이너에서 실행 중인 모든 프로세스를 조회합니다.
 * {{< ui >}}Network{{< /ui >}}: 소스, 대상, 전송 및 수신 볼륨, 처리량 필드를 포함하여 컨테이너 또는 리소스의 네트워크 성능을 조회합니다. {{< ui >}}Destination{{< /ui >}} 필드를 사용하여 `DNS` 또는 `ip_type`과 같은 태그로 검색하거나, 이 조회에서 {{< ui >}}Group by{{< /ui >}} 필터를 사용하여 `pod_name` 또는 `service`와 같은 태그별로 네트워크 데이터를 그룹화할 수 있습니다.
 * [**이벤트**][5]: 리소스에 대한 모든 Kubernetes 이벤트를 조회합니다.
-* {{< ui >}}Monitors{{< /ui >}}: 이 리소스에 대해 태그가 지정되거나, 범위가 지정되거나, 그룹화된 모니터링을 조회합니다.
+* {{< ui >}}Monitors{{< /ui >}}: 이 리소스에 대해 태그가 지정되거나, 범위가 지정되거나, 그룹화된 모니터를 조회합니다.
 
-이 리소스에 대한 자세한 대시보드를 보려면 이 패널의 오른쪽 상단에 있는 대시보드 보기를 클릭합니다.
+이 리소스에 대한 자세한 대시보드를 보려면 이 패널의 오른쪽 상단에 있는 'View Dashboard'를 클릭합니다.
 
 {{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="Live Containers 개요에서 포드 대시보드로 연결되는 링크" style="width:80%;">}}
 
@@ -571,11 +508,11 @@ Kubernetes Explorer 탭 내에서 리소스 사용률 메트릭을 선택하여 
 
 | 유형 | 예시 |
 |---|---|
-| **태그**: [데이터를 수집하는 Agent][7]에 의해 리소스에 연결됩니다. Datadog이 Kubernetes 리소스에 대해 생성하는 추가 태그도 있습니다. | `datacenter:staging`, `tag#datacenter:staging`<br>_(`tag#`은 선택 사항입니다)_ |
+| **태그**: [데이터를 수집하는 에이전트][7]에 의해 리소스에 연결됩니다. Datadog이 Kubernetes 리소스에 대해 생성하는 추가 태그도 있습니다. | `datacenter:staging`, `tag#datacenter:staging`<br>_(`tag#`는 선택 사항입니다)_ |
 | **레이블**: [리소스 메타데이터][8]에서 추출됩니다. 일반적으로 클러스터를 구성하고 선택기를 사용하여 특정 리소스를 타겟팅하는 데 사용됩니다. | `label#chart_version:2.1.0` |
 | **주석**: [리소스 메타데이터][9]에서 추출됩니다. 일반적으로 클러스터 관리를 지원하는 도구를 보조하는 데 사용됩니다. | `annotation#checksum/configmap:a1bc23d4` |
-| **메트릭**: 워크로드 리소스(포드, 디플로이먼트 등)에 추가됩니다. 사용률을 기준으로 리소스를 찾을 수 있습니다. 지원되는 메트릭을 확인하려면 [리소스 사용률 필터](#resource-utilization-filters)를 참조하세요. | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **문자열 일치**: 일부 특정 리소스 속성에서 지원됩니다. 아래를 참조하세요.<br>_참고: 문자열 일치는 키-값 형식을 사용하지 않으며, 일치시킬 속성을 지정할 수 없습니다._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (이름) |
+| **메트릭**: 워크로드 리소스(포드, 배포 등)에 추가됩니다. 사용률을 기준으로 리소스를 찾을 수 있습니다. 지원되는 메트릭을 확인하려면 [리소스 사용률 필터](#resource-utilization-filters)를 참조하세요. | `metric#cpu_usage_pct_limits_avg15:>80%` |
+| **문자열 일치**: 일부 특정 리소스 속성에서 지원됩니다. 아래를 참조하세요.<br>_참고: 문자열 일치는 키-값 형식을 사용하지 않으며, 일치시킬 속성을 지정할 수 없습니다._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"`(UID),<br>`web-api-3`(이름) |
 | **필드**: [리소스 메타데이터][10] 또는 사용자 지정 리소스의 인덱싱된 필드에서 추출됩니다. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
 
 >  ***참고**: 동일한 키-값 쌍이 태그와 레이블(또는 주석)로 모두 존재할 수 있습니다. 이는 클러스터의 구성 방식에 따라 다릅니다.*
@@ -626,7 +563,7 @@ app_name:(web-server OR database OR event-consumer)
 
 ### 와일드카드 {#wildcards}
 
-`*` 와일드카드를 용어의 일부로 사용하여 값과 키 모두에 대해 부분 일치로 필터링할 수 있습니다. 몇 가지 예:
+`*` 와일드카드를 용어의 일부로 사용하여 값과 키 모두에 대해 부분 일치로 필터링할 수 있습니다. 몇 가지 예는 다음과 같습니다.
 
 - `kube_job:stats-*`: `stats-` 항목으로 시작하는 `kube_deployment` 태그 값을 가진 모든 리소스를 찾습니다.
 - `pod_name:*canary`: `canary` 항목으로 끝나는 `pod_name` 값을 가진 모든 리소스를 찾습니다.
@@ -667,7 +604,7 @@ Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 �
 
 #### 연관성 {#relationships}
 
-관련 리소스는 서로 태그가 지정됩니다. 몇 가지 예:
+관련 리소스는 서로 태그가 지정됩니다. 몇 가지 예는 다음과 같습니다.
 
 - 'XYZ' 배포의 일부인 포드에는 `kube_deployment:xyz` 태그가 지정됩니다.
 - 서비스 'A'를 가리키는 인그레스에는 `kube_service:a` 태그가 지정됩니다.
@@ -723,11 +660,11 @@ Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 �
 - 노드
 - 포드
 
-이 메트릭은 수집 시점에 지난 15분 동안의 평균값을 기준으로 계산됩니다. 다음과 같이 메트릭 값으로 필터링할 수 있습니다. `metric#<metric_name><comparator><numeric_value>`.
+이 메트릭은 수집 시점에 지난 15분 동안의 평균값을 기준으로 계산됩니다. 다음과 같은 메트릭 값(`metric#<metric_name><comparator><numeric_value>`)으로 필터링할 수 있습니다.
 
 - `metric_name` 항목은 사용 가능한 메트릭입니다(아래 참조).
 - `comparator` 항목은 지원되는 [비교 연산자](#comparator)입니다.
-- 및 `numeric_value` 항목은 부동 소수점 값입니다.
+- `numeric_value` 항목은 부동 소수점 값입니다.
 
 포드의 경우 다음 메트릭 이름을 사용할 수 있습니다.
 
@@ -758,7 +695,7 @@ CPU 메트릭은 코어 수로 저장됩니다.
 ## 참고 사항 및 알려진 문제 {#notes-and-known-issues}
 
 * 데이터는 일정한 간격으로 자동 업데이트됩니다.
-* 1000개 이상의 배포 또는 레플리카셋이 있는 클러스터에서는 Cluster Agent의 CPU 사용량이 증가할 수 있습니다. Helm 차트에서 컨테이너 스크러빙을 비활성화하는 옵션이 있습니다. 자세한 내용은 [Helm 차트 리포지토리][11]를 참조하세요.
+* 1,000개 이상의 배포 또는 ReplicaSets가 있는 클러스터에서는 Cluster Agent의 CPU 사용량이 증가할 수 있습니다. Helm 차트에서 컨테이너 스크러빙을 비활성화하는 옵션이 있습니다. 자세한 내용은 [Helm 차트 리포지토리][11]를 참조하세요.
 
 ## 추가 자료 {#further-reading}
 

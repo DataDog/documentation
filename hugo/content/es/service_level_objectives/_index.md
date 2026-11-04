@@ -105,15 +105,11 @@ Establecer un objetivo del 100% significa tener un presupuesto de error del 0%, 
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
-## Editar un SLO {#edit-an-slo}
-
-Para editar un SLO, coloque el cursor sobre la fila del SLO en la lista y haga clic en el icono de lápiz de edición que aparece a la derecha de la fila, o haga clic en la fila para abrir el panel lateral de detalles y seleccione el botón de edición en el icono de engranaje en la parte superior derecha del panel.
-
 ## Permisos {#permissions}
 
 ### Acceso basado en roles {#role-based-access}
 
-Todos los usuarios pueden ver los SLO y las [correcciones de estado de SLO](#slo-status-corrections), independientemente de su [rol][10] asociado. Solo los usuarios vinculados a roles con el permiso `slos_write` pueden crear, editar y eliminar SLO.
+Todos los usuarios pueden visualizar los SLO y las [correcciones de estado de SLO](#slo-status-corrections), independientemente de su [rol][10] asociado. Solo los usuarios vinculados a roles con el permiso `slos_write` pueden crear, editar y eliminar SLO.
 
 Para crear, editar y eliminar correcciones de estado, los usuarios requieren los permisos `slos_corrections`. Un usuario con este permiso puede realizar correcciones de estado, incluso si no tiene permiso para editar esos SLO. Para obtener la lista completa de permisos, consulte la [documentación de RBAC][11].
 
@@ -137,6 +133,10 @@ Para mantener su acceso de edición al SLO, el sistema requiere que incluya al m
 
 **Nota**: Los usuarios pueden crear SLO en cualquier monitor incluso si no tienen permisos de escritura para el monitor. De manera similar, los usuarios pueden crear alertas de SLO incluso si no tienen permisos de escritura para los SLO. Para obtener más información sobre los permisos de RBAC para Monitors, consulte la [documentación de RBAC][12] o la [guía sobre cómo configurar RBAC para Monitors][13].
 
+## Edición de un SLO {#editing-an-slo}
+
+Para editar un SLO, coloque el cursor sobre la fila del SLO en la lista y haga clic en el icono de lápiz de edición que aparece a la derecha de la fila, o haga clic en la fila para abrir el panel lateral de detalles y seleccione el botón de edición en el icono de engranaje en la parte superior derecha del panel.
+
 ## Búsqueda de SLO {#searching-slos}
 
 La [página de administración de Service Level Objectives][2] le permite ejecutar una búsqueda avanzada de todos los SLO para que pueda encontrar, visualizar, editar, clonar o eliminar SLO desde los resultados de búsqueda.
@@ -150,6 +150,18 @@ La búsqueda avanzada le permite consultar los SLO mediante cualquier combinaci�
 * `tags` - centro de datos, entorno, servicio, equipo, etc.
 
 Para ejecutar una búsqueda, use las casillas de verificación de faceta a la izquierda y la barra de búsqueda en la parte superior. Cuando marca las casillas, la barra de búsqueda se actualiza con la consulta equivalente. Del mismo modo, cuando modifica la consulta de la barra de búsqueda (o escribe una desde cero), las casillas de verificación se actualizan para reflejar el cambio. Los resultados de la consulta se actualizan en tiempo real a medida que edita la consulta; no hay ningún botón "Buscar" para hacer clic.
+
+## Recuperación de SLO eliminados {#recovering-deleted-slos}
+
+<div class="alert alert-warning">Los SLO generados automáticamente para las <a href="/synthetics/test_suites/#service-level-objectives">pruebas Synthetic</a> no se pueden restaurar.</div>
+
+Los SLO eliminados se conservan durante 30 días antes de ser eliminados permanentemente. Para restaurar un SLO eliminado recientemente:
+
+1. En la [página de administración de SLO][2], haga clic en el icono de engranaje **Settings** en la esquina superior derecha.
+1. Seleccione el o los SLO que desea restaurar.
+1. Haga clic en {{< ui >}}Restore{{< /ui >}}.
+
+**Nota**: Las correcciones de estado de SLO eliminadas no se pueden restaurar. Este proceso de recuperación se aplica solo a los SLO eliminados.
 
 ## Visualizar SLO {#viewing-slos}
 
@@ -268,17 +280,13 @@ También puede usar la pestaña {{< ui >}}Audit History{{< /ui >}} en los detall
 
 {{< img src="service_level_objectives/slo_audit_history_tab.png" alt="Pestaña de historial de auditoría de detalles de SLO" >}}
 
-Con [Event Monitors][28], puede configurar notificaciones para hacer un seguimiento de los eventos de auditoría de SLO. Por ejemplo, si desea recibir una notificación cuando se modifique la configuración de un SLO específico, configure un Event Monitor para hacer un seguimiento del texto `[SLO Modified]` sobre las etiquetas `audit,slo_id:<SLO ID>`.
+Con los [monitores de eventos][28], puede configurar notificaciones para hacer un seguimiento de los eventos de auditoría de SLO. Por ejemplo, si desea recibir una notificación cuando se modifique la configuración de un SLO específico, configure un monitor de eventos para hacer un seguimiento del texto `[SLO Modified]` sobre las etiquetas `audit,slo_id:<SLO ID>`.
 
 ## Widgets de SLO {#slo-widgets}
 
-{{< learning-center-callout header="Intente crear insights críticos para el negocio utilizando tableros y SLO en el Learning Center." btn_title="Inscríbase ahora" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Aprenda sin costo en capacidad de cómputo en la nube real y una cuenta de prueba de Datadog. Inscríbase hoy para aprender más sobre la creación de tableros para realizar un seguimiento de los SLO.
-{{< /learning-center-callout >}}
-
 Después de crear su SLO, puede visualizar los datos a través de tableros y widgets.
   - Utilice el widget de SLO para visualizar el estado de un solo SLO.
-  - Utilice el widget de SLO List para visualizar un conjunto de SLO.
+  - Utilice el widget de lista de SLO para visualizar un conjunto de SLO.
   - Grafique 15 meses de datos de SLO basados en métricas con la [fuente de datos de SLO][20] tanto en widgets de series temporales como escalares (valor de consulta, lista principal, tabla, cambio).
 
 Para obtener más información sobre los widgets de SLO, consulte las páginas de [widget de SLO][21] y [widget de Lista de SLO][22]. Para obtener más información sobre la fuente de datos de SLO, consulte la guía sobre cómo [graficar datos históricos de SLO en tableros][20].

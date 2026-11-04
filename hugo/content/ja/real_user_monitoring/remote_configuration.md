@@ -14,9 +14,10 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: Real User Monitoring
+site_support_id: rum_remote_configuration
 title: RUM Remote Configuration
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 アプリケーションの進化に伴い、RUM SDK が収集するデータやその収集頻度を調整する必要が生じる場合があります。RUM Remote Configuration を使用すると、アプリケーションの新しいバージョンをデプロイすることなく、サポートされているブラウザ、iOS、および Android SDK の設定を Datadog から更新できます。
 
@@ -104,6 +105,10 @@ Remote Configuration は、デフォルトでは SDK 設定を上書きしませ
 
 2. 状態を選択するか、サンプリングレートを変更するか、データを追加して設定を構成します。
 3. 変更を保存します。
+
+## Audit Trailで変更を表示してください {#view-changes-in-audit-trail}
+
+RUMリモート設定への変更は[Datadog Audit Trail][3]に表示され、誰がいつ変更を行ったかを確認できます。
 
 ## 構成可能な設定 {#configurable-settings}
 
@@ -241,3 +246,4 @@ Remote Configuration は、デフォルトでは SDK 設定を上書きしませ
 
 [1]: /ja/account_management/rbac/permissions/#real-user-monitoring
 [2]: /ja/remote_configuration/
+[3]: /ja/account_management/audit_trail/

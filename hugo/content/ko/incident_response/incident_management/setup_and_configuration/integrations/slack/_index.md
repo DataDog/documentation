@@ -5,18 +5,18 @@ aliases:
 description: Slack에서 바로 Datadog 인시던트를 관리하세요.
 further_reading:
 - link: integrations/slack/
-  tag: 설명서
-  text: Slack 통합 설치
+  tag: 문서
+  text: Slack 통합 설치하기
 - link: https://www.datadoghq.com/blog/slack-incident-management/
   tag: 블로그
-  text: Slack용 Datadog 통합을 사용하여 원활하게 인시던트 관리
+  text: Slack용 Datadog 통합을 사용하여 원활하게 인시던트 관리하기
 - link: https://www.datadoghq.com/blog/datadog-incident-response-ai-features/
   tag: 블로그
-  text: Datadog Incident Response의 AI로 조사 가속화
+  text: Datadog Incident Response의 AI로 조사 가속화하기
 - link: https://app.datadoghq.com/integrations/slack
   tag: 앱
   text: 인앱 Slack 통합 타일
-title: Slack과 Datadog Incident Management 통합
+title: Slack과 Datadog Incident Management 통합하기
 ---
 ## 개요 {#overview}
 
@@ -26,9 +26,9 @@ Slack은 팀 차원의 실시간 소통을 위해 널리 사용되는 메시지 
 
 - Slack에서 바로 Datadog 인시던트를 선언하여 더 빠르게 대응합니다.
 - Datadog 인시던트가 선언되면 협업을 위한 Slack 채널이 자동으로 생성됩니다.
-- Slack에서 인시던트 대응을 실시합니다. 예를 들어, 온 콜 팀을 페이징하거나, 대응자 역할을 할당하거나, 심각도를 업데이트합니다.
+- Slack에서 인시던트 대응을 실시하세요. 예를 들어, 온 콜 팀을 페이징하거나, 대응자 역할을 할당하거나, 심각도를 업데이트하세요.
 
-Slack 통합 설명서는 Incident Management와 함께 Slack을 사용하는 일반적인 수명 주기를 중심으로 구성되어 있습니다.
+Slack 통합 문서는 Incident Management와 함께 Slack을 사용하는 일반적인 수명 주기를 중심으로 구성되어 있습니다.
 
 1. [**Slack 설치 및 연결**](#setup): Slack 작업 공간과 Datadog 간의 통합을 설정하세요.
 2. [**인시던트 선언**](#declaring-incidents-from-slack): Slack 명령 또는 메시지 액션을 사용하여 인시던트를 시작하는 방법을 알아보세요.
@@ -38,7 +38,7 @@ Slack 통합 설명서는 Incident Management와 함께 Slack을 사용하는 �
 
 ## 전제 조건 {#prerequisites}
 
-적절한 [OAuth 범위][6]를 사용하여 [Slack 통합 타일][1]을 통해 통합을 설치하세요. 자세한 내용은 [Slack 통합][2] 설명서를 참조하세요.
+적절한 [OAuth 범위][6]를 사용하여 [Slack 통합 타일][1]을 통해 통합을 설치하세요. 자세한 내용은 [Slack 통합][2] 문서를 참조하세요.
 
 통합이 설치된 후 [**Incidents** > **Settings** > **Integrations**][3]로 이동하여 Incident Management를 위한 Slack 기능을 활성화하세요.
 
@@ -52,7 +52,7 @@ Slack 작업 공간을 Datadog 조직에 연결하면 작업 공간 내 사용�
 /datadog incident
 ```
 
-Slack 메시지에서 인시던트를 선언하려면 메시지 위에 마우스를 올리고 **More actions**(세 개의 수직 점)를 클릭한 다음 **Declare incident**를 선택하세요. Datadog은 인시던트 생성을 확인하는 메시지를 해당 메시지의 스레드에 게시합니다.
+Slack 메시지에서 인시던트를 선언하려면 메시지 위에 마우스를 가져간 후 **More actions**(세 개의 수직 점)를 클릭한 다음 **Declare incident**를 선택하세요. Datadog은 인시던트 생성을 확인하는 메시지를 해당 메시지의 스레드에 게시합니다.
 
 기본적으로 Datadog 조직에 연결된 Slack 사용자만 인시던트를 선언할 수 있습니다. Slack 사용자는 `/datadog connect`를 실행하여 Datadog 조직에 연결할 수 있습니다.
 
@@ -78,12 +78,12 @@ Slack 메시지에서 인시던트를 선언하려면 메시지 위에 마우스
 
 두 옵션 모두 Datadog이 메시지를 동기화하기 위해 메시지 작성자가 Datadog 조직에 연결되어 있을 필요가 없습니다. 메시지 고정의 경우, 메시지를 고정하는 사람이 Datadog 조직에 **연결되어 있어야** 고정된 메시지가 동기화됩니다.
 
-사용량 기반 Incident Management 청구가 적용되는 조직:
+사용량 기반 Incident Management 청구를 사용하는 조직에서는 다음이 적용됩니다.
 
 * Datadog에 동기화되는 메시지를 작성해도 작성자가 해당 월에 청구 가능한 사용자가 되지 **않습니다**.
 * 이후에 동기화되는 메시지를 고정하면 사용자가 청구 가능한 사용자가 **됩니다**.
 
-좌석 기반 Incident Management 청구가 적용되는 조직:
+좌석 기반 Incident Management 청구를 사용하는 조직에서는 다음이 적용됩니다.
 
 * Datadog이 사용자의 메시지를 Incident Management에 동기화하는 데에는 좌석이 필요하지 **않습니다**.
 * 메시지를 고정할 때는 사용자에게 좌석이 **있어야** 사용자가 고정한 메시지를 Datadog이 동기화할 수 있습니다.
@@ -93,6 +93,16 @@ Slack 메시지에서 인시던트를 선언하려면 메시지 위에 마우스
 인시던트 Slack 채널에서 Slack 명령을 실행하여 인시던트 상태 및 심각도를 수정하고, 대응자 역할을 할당하며, 온 콜 팀을 페이징하는 등의 작업을 수행할 수 있습니다.
 
 Slack 명령의 전체 목록은 [Slack 명령](#slack-commands)을 참조하세요.
+
+### 회의 기록자 재초대 {#re-inviting-a-meeting-transcriber}
+
+Datadog Transcriber가 연결된 Zoom, Google Meet 또는 Microsoft Teams 회의에서 나가면 회의 카드 스레드에 재초대 메시지가 표시될 수 있습니다. 이는 대기실 시간이 초과된 경우, 아무도 참여하지 않은 경우, 모두가 회의에서 나간 경우 또는 누군가 기록자를 제거한 경우 발생할 수 있습니다.
+
+**Yes**를 선택하여 기록자를 다시 초대하거나 **No**를 선택하여 메시지를 닫으세요. 필요한 경우 회의 로비나 대기실에서 기록자의 입장을 허용하세요.
+
+이 작업을 수행하려면 연결된 Datadog 계정과 인시던트를 편집할 수 있는 권한이 필요합니다. 좌석 기반 요금제를 사용하는 조직의 경우 [Incident Management 또는 Incident Response 좌석][8]도 필요합니다. 회의 요약 설정 및 제외 조건은 그대로 적용됩니다.
+
+Datadog의 인시던트 헤더에서도 기록자를 다시 초대할 수 있습니다. 자세한 내용은 [Zoom][9], [Google Meet][10] 또는 [Microsoft Teams][11] 회의 요약 문서를 참조하세요.
 
 ### 기타 인시던트 채널 구성 옵션{#other-incident-channel-configuration-options}
 
@@ -123,9 +133,9 @@ Datadog은 새로 선언된 인시던트와 인시던트 상태, 심각도, 인�
 
 ## Slack 명령 {#slack-commands}
 
-사용 가능한 전체 Slack 명령 목록을 언제든지 조회할 수 있습니다. Slack에서 `/datadog` 또는 `/dd`를 입력하여 명령 모달을 열고 Datadog 액션을 탐색 및 실행하거나 `/dd help`를 입력하여 해당 옵션을 대신 목록으로 조회하면 됩니다. 일반적인 인시던트 관리 액션을 위한 액션 트레이를 열려면 `/dd shortcuts`를 입력하세요.
+사용 가능한 전체 Slack 명령 목록을 언제든지 조회할 수 있습니다. Slack에서 `/datadog` 또는 `/dd`를 입력하여 명령 모달을 열고 Datadog 액션을 탐색 및 실행하거나 `/dd help`를 입력하여 해당 옵션을 대신 목록으로 조회하세요. 일반적인 인시던트 관리 액션을 위한 액션 트레이를 열려면 `/dd shortcuts`를 입력하세요.
 
-다음 명령어에서 `inc`을 `incident`의 축약 표현으로 사용할 수 있습니다.
+다음 명령어에서는 `inc`를 `incident`의 축약형으로 사용할 수 있습니다.
 
 ### 전역 명령(어디서나 실행 가능) {#global-commands-run-anywhere}
 
@@ -202,3 +212,7 @@ Datadog은 상태가 변경될 때 인시던트 Slack 채널에 액션 트레이
 [5]: /ko/incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /ko/integrations/slack/?tab=datadogforslack#permissions
 [7]: /ko/incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /ko/account_management/billing/incident_response/#allocate-seats
+[9]: /ko/integrations/zoom-incident-management/#meeting-summaries
+[10]: /ko/integrations/google-meet-incident-management/#meeting-summaries
+[11]: /ko/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries

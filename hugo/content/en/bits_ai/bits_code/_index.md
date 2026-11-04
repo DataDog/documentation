@@ -58,10 +58,11 @@ Bits Code supports the following source code providers:
 - **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
 - **GitLab**: GitLab.com and GitLab Self-Managed.
 - **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
+- **Bitbucket**: Bitbucket.org with a [Premium plan][41].
 
 The following plans are not supported:
 - **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
-- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
+- **Bitbucket**: Data Center and Server on-premises deployments are not supported by Bits Code or Datadog [Source Code Integration][37].
 
 ## Supported Datadog products
 
@@ -168,3 +169,4 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
 [39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops
 [40]: /bits_ai/bits_code/slack_code_channels/
+[41]: https://bitbucket.org/product/premium

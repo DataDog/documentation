@@ -10,8 +10,8 @@ further_reading:
   text: "Learn how to query and visualize deployments"
 ---
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
-CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
+{{< callout btn_hidden="true" header="false" >}}
+CD Visibility is in Preview. Access is limited to organizations already enrolled.
 {{< /callout >}}
 
 ## Overview
@@ -45,7 +45,7 @@ For CI-based providers, Datadog uses the `--revision` parameter that you pass to
 ### Version for Argo CD
 For Argo CD deployments, Datadog uses the version from correlated images to detect rollbacks. Datadog identifies the "main" image from your deployment and extracts the version tag from it.
 
-To enable rollback detection for Argo CD deployments, you need to correlate your images with commits using the [`datadog-ci deployment correlate-image` command][2] as explained in the [Argo CD monitoring documentation][3].
+To enable rollback detection for Argo CD deployments, you need to correlate your images with commits using the [`datadog-ci deployment correlate-image` command][2] as explained in the [Argo CD monitoring documentation][3]. Image correlation requires Argo CD v3.1.0 or later.
 
 When images are properly correlated, Datadog populates a version tag from the image metadata, which is then used for rollback detection.
 

@@ -262,7 +262,7 @@ Datadog-hosted SCA scans do **not** support repositories that:
 - Contain file paths with parent directory traversal (`..`)
 - Contain file names longer than 255 characters
 
-If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][19] to run SCA and upload results to Datadog.
+If any of these conditions apply to your repository, and you cannot update your repository to account for these constraints, [set up the analysis in a CI pipeline][32] to run SCA and upload results to Datadog.
 
 ### Missing libraries
 
@@ -425,3 +425,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [29]: https://app.datadoghq.com/integrations/github/
 [30]: /bits_ai/bits_code/setup/#configure-internet-access
 [31]: /security/code_security/secret_scanning/#mute-findings
+[32]: /security/code_security/software_composition_analysis/setup_static/?tab=github#scan-in-ci-pipelines

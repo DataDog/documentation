@@ -93,6 +93,8 @@ For all workloads, confirm the following:
 
 - **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
 - **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
+- **AWS partition**: The instance must be in the commercial `aws` partition. Instances in AWS GovCloud or the AWS China partitions are not supported.
+- **Access to AWS Secrets Manager**: Each instance reads its Datadog API key from Secrets Manager using its own IAM role. Datadog grants the role this access, but a permissions boundary, service control policy (SCP), or VPC endpoint policy can still block it. Any of these that apply must allow `secretsmanager:GetSecretValue` on `arn:aws:secretsmanager:*:<ACCOUNT_ID>:secret:/datadog/ec2-instrumenter/*`. Instances without internet access need a [Secrets Manager VPC endpoint][19].
 
 ### AWS Lambda functions
 
@@ -159,7 +161,7 @@ Lambda instrumentation needs no Secrets Manager, Systems Manager, or IAM write p
 
 ## How it works
 
-Instrumentation is based on an **instrumentation rule**: an AWS account paired with a query that describes which resources to cover. Datadog evaluates the query, instruments each covered resource inside your own account, and keeps it instrumented:
+An **instrumentation rule** is the saved **Scope to** selection for an AWS account. It determines which resources Datadog automatically instruments, including resources that match the selection later. Datadog evaluates the selection, instruments each covered resource inside your own account, and keeps it instrumented:
 
 1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
 1. Datadog evaluates the rule against your account and records which resources it covers.
@@ -207,6 +209,8 @@ Datadog preserves your existing layers and environment variables. For Node.js an
 To tune what the extension collects, set the standard Datadog environment variables on the function. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
 
 ## Install Datadog instrumentation
+
+<div class="alert alert-info">This feature is available only to trial customers and customers who enabled it during their trial. This applies to both AWS integration setup and Fleet Automation.</div>
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
@@ -269,6 +273,10 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 If instrumentation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
 
+### An EC2 installation fails with AccessDeniedException from Secrets Manager
+
+A permissions boundary, SCP, or VPC endpoint policy is blocking the instance from reading its Datadog API key. See the Secrets Manager requirement in the [EC2 prerequisites](#amazon-ec2-instances).
+
 ### A Lambda function is skipped as already instrumented
 
 Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Skipping these functions prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it. Datadog then instruments the function automatically.
@@ -309,3 +317,4 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [16]: https://docs.datadoghq.com/account_management/workload_identity_federation/
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
 [18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
+[19]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html

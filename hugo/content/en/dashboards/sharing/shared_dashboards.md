@@ -156,11 +156,19 @@ Shared dashboards must be shared by an active user within your organization. If 
 
 ### Not all widget types are available
 
-The following widget types are not supported on shared dashboards. Widgets of these types on shared dashboards will not display data.
+Shared dashboards support the widget types in the following table. Widgets of any other type do not display data when the dashboard is shared.
 
-* Topology Map
-* List Widget (all data sources)
-* Legacy treemap widget
+| Category | Supported widgets |
+| -------- | ----------------- |
+| Time series and distributions | Timeseries, Bar Chart, Distribution, Heatmap, Scatter Plot, Sankey |
+| Single values and summaries | Query Value, Change, Top List, Alert Value, Alert Graph, Service Summary |
+| Tables and hierarchies | Table, Treemap, Pie Chart, Funnel, Retention |
+| Maps | Geomap, Host Map |
+| Monitors and SLOs | Monitor Summary, Check Status, SLO, SLO List |
+| Text and media | Notes and Links, Free Text, Image, Iframe |
+| Other | Event Timeline, Wildcard |
+
+Sharing a dashboard that contains an unsupported widget does not produce an error, and the Dashboards API does not reject these widgets. The widget appears on the shared dashboard without data.
 
 ### Limited timeframe options
 

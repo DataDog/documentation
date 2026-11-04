@@ -8,8 +8,8 @@ description: Active Directory, Auth0, Google, Okta, Microsoft Entra ID 등의 ID
   사용하여 Datadog용 SAML 인증을 구성하고 안전한 싱글 사인온을 구현합니다.
 further_reading:
 - link: /account_management/multi_organization/
-  tag: 설명서
-  text: 여러 계정으로 팀 및 조직 설정하기
+  tag: 문서
+  text: 여러 계정으로 팀 및 조직 구성
 title: SAML을 사용한 싱글 사인온
 ---
 {{< site-region region="gov,gov2" >}}
@@ -18,14 +18,14 @@ title: SAML을 사용한 싱글 사인온
 
 ## 개요 {#overview}
 
-Datadog 계정에서 [SAML(Security Assertion Markup Language)][1]을 구성하면 SAML ID 공급자를 통해 구성한 조직의 Active Directory, LDAP, 또는 다른 ID 저장소에 저장된 보안 인증 정보로 나와 내 팀이 Datadog로 로그인할 수 있습니다.
+Datadog 계정에서 [SAML(Security Assertion Markup Language)][1]을 구성하면 SAML ID 공급자를 통해 구성된 조직의 Active Directory, LDAP 또는 기타 ID 저장소에 저장된 자격 증명으로 사용자와 사용자의 모든 팀원이 Datadog에 로그인할 수 있습니다.
 
 **참고**: 
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 - Datadog 계정에서 SAML을 활성화하고 싶은 경우 [지원팀][2]에 문의해 활성화할 수 있습니다.
 {{% /site-region %}}
-- 이 설명서에서는 사용자에게 이미 SAML ID 공급자(IdP)가 있다고 가정합니다. SAML IdP가 없는 경우 [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], [SafeNet][8]와 같은 IdP가 Datadog와 통합되니 참고하세요.
+- 이 설명서에서는 사용자에게 이미 SAML ID 공급자(IdP)가 있다고 가정합니다. SAML IdP가 없는 경우 [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], [SafeNet][8]과 같은 여러 IdP가 Datadog과 통합되어 있으니 참고하세요.
 - SAML 구성에는 [Datadog 관리자][9] 액세스가 필요합니다.
 
 ## SAML 구성 {#configuring-saml}
@@ -38,7 +38,7 @@ Datadog에서 SAML 구성이 완료되고 IdP가 Datadog의 요청을 수락하�
 
 ### SP 시작 로그인 {#sp-initiated-login}
 
-SP 시작 로그인은 Datadog에서 로그인을 시작하는 방식을 의미합니다. 사용자는 [SAML Configuration 페이지][4] 상단 상태 상자에 표시되는 {{< ui >}}Single Sign-on URL{{< /ui >}}를 통해 로그인합니다. 이 URL에 접속하면 사용자의 IdP에 대해 SAML 인증이 시작됩니다. **참고**: 이 URL은 계정에서 SAML이 활성화되어 있고 SP 시작 로그인을 사용하는 경우에만 표시됩니다.
+SP(서비스 공급자) 시작 로그인은 Datadog에서 로그인을 시작하는 방식을 의미합니다. 사용자는 [SAML Configuration 페이지][4] 상단 상태 상자에 표시되는 {{< ui >}}Single Sign-on URL{{< /ui >}}를 통해 로그인합니다. 이 URL에 접속하면 사용자의 IdP에 대해 SAML 인증이 시작됩니다. **참고**: 이 URL은 계정에서 SAML이 활성화되어 있고 SP 시작 로그인을 사용하는 경우에만 표시됩니다.
 
 {{< img src="account_management/saml/saml_enabled_cropped.png" alt="SAML 활성화 확인" >}}
 
@@ -50,7 +50,7 @@ IdP(ID 공급자) 시작 로그인은 애플리케이션 포털에서 로그인�
 
 ## 어설션 및 속성 {#assertions-and-attributes}
 
-로그인을 할 때 사용자 인증이 포함된 SAML 어설션이 ID 공급자에서 Datadog로 전송됩니다.
+로그인이 발생하면 사용자 인증을 포함하는 SAML Assertion이 ID 공급자에서 Datadog으로 전송됩니다.
 
 ### 기능 {#capabilities}
 
@@ -72,7 +72,7 @@ IdP(ID 공급자) 시작 로그인은 애플리케이션 포털에서 로그인�
   2. **sn**: 이 속성은 선택 사항입니다. 사용자의 성으로 설정해야 합니다.
   3. **givenName**: 이 속성은 선택 사항입니다. 사용자의 이름으로 설정해야 합니다.
 
-<div class="alert alert-info">Microsoft Entra ID IdP의 경우 Assertion에서 `sn` 대신 `surname` 속성을 사용하세요.</div>
+<div class="alert alert-info">Microsoft Entra ID IdP의 경우 어설션에서 <code>surname</code> 속성( <code>sn</code> 아님)을 사용합니다.</div>
 
 Datadog은 속성이 URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri` 또는 Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`를 사용하는 것으로 예상합니다. 각 속성에 사용되는 이름은 IdP에서 사용하는 NameFormat에 따라 달라집니다.
 
@@ -85,7 +85,7 @@ IdP가 URI NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:uri`을 사�
 IdP가 Basic NameFormat `urn:oasis:names:tc:SAML:2.0:attrname-format:basic`을 사용하도록 구성된 경우:
 
   1. **eduPersonPrincipalName**: IdP에서 속성 이름을 `urn:mace:dir:attribute-def:eduPersonPrincipalName`으로 설정합니다.
-  2. **sn**: IdP에서 속성 이름을 `urn:mace:dir:attribute-def:sn`로 설정합니다.
+  2. **sn**: IdP에서 속성 이름을 `urn:mace:dir:attribute-def:sn`으로 설정합니다.
   3. **givenName**: IdP에서 속성 이름을 `urn:mace:dir:attribute-def:givenName`으로 설정합니다.
 
 AttributeStatement에 **eduPersonPrincipalName**이 존재하는 경우 이 속성의 값이 사용자 이름으로 사용됩니다. AttributeStatement에 **eduPersonPrincipalName**이 포함되지 않은 경우 사용자 이름은 Subject의 NameID에서 가져옵니다. NameID는 `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` 형식을 사용해야 합니다.
@@ -96,9 +96,9 @@ AttributeStatement에 **eduPersonPrincipalName**이 존재하는 경우 이 속�
 
 ID 공급자 응답의 속성을 Datadog 역할과 팀에 매핑하려면 [SAML 그룹 매핑][5]을 참조하세요.
 
-[SAML 설정 대화상자][4]를 통해 다음 기능을 활성화할 수 있습니다.
+[SAML Configuration 대화 상자][4]를 통해 다음 기능을 활성화할 수 있습니다.
 
-**참고:** SAML 설정 대화상자를 보려면 관리자 권한이 있어야 합니다.
+**참고:** SAML Configuration 대화 상자를 보려면 관리자 권한이 있어야 합니다.
 
 ### 적시(JIT) 프로비저닝 {#just-in-time-jit-provisioning}
 
@@ -120,7 +120,7 @@ Datadog URL이 로드되면 브라우저는 고객의 IdP로 리디렉션되고 
 
 IdP 시작 로그인 기능을 활성화하고 구성을 저장한 후에는 ID 공급자용 최신 서비스 공급자(SP) 메타데이터를 다운로드할 수 있습니다. 새 SP 메타데이터에는 어설션을 전송하기 위한 조직별 `AssertionConsumerService` 엔드포인트가 포함됩니다.
 
-업데이트된 SP 메타데이터를 사용하지 않으면 Datadog에서 어설션을 조직과 연결할 수 없으며, SAML 응답에 "InResponseTo" 속성이 누락되었다는 메시지와 함께 오류 페이지가 표시됩니다.
+업데이트된 SP 메타데이터를 사용하지 않으면 Datadog에서 어설션을 조직과 연결할 수 없으며, SAML 응답에 'InResponseTo' 속성이 누락되었다는 메시지와 함께 오류 페이지가 표시됩니다.
 
 ### SAML strict {#saml-strict}
 
@@ -128,7 +128,7 @@ IdP 시작 로그인 기능을 활성화하고 구성을 저장한 후에는 ID 
 
 ### Datadog SP 메타데이터 자동 업데이트 {#self-updating-datadog-sp-metadata}
 
-일부 ID 공급자(예: Microsoft의 ADFS)의 경우 Datadog에서 최신 SAML 서비스 공급자 메타데이터를 가져오도록 구성할 수 있습니다. Datadog에서 SAML을 구성한 후 SAML 구성 페이지에서 내 조직의 메타데이터 URL을 가져와 내 IdP에서 사용하면 변경 사항이 게시될 때마다 최신 서비스 공급자 메타데이터를 가져올 수 있습니다.
+일부 ID 공급자(예: Microsoft의 ADFS)의 경우 Datadog에서 최신 SAML 서비스 공급자 메타데이터를 가져오도록 구성할 수 있습니다. Datadog에서 SAML을 구성한 후 SAML Configuration 페이지에서 내 조직의 메타데이터 URL을 가져와 내 IdP에서 사용하면 변경 사항이 게시될 때마다 최신 서비스 공급자 메타데이터를 가져올 수 있습니다.
 
 {{< img src="account_management/saml/saml_metadata_url.png" alt="SAML 메타데이터 URL" style="width:50%;" >}}
 

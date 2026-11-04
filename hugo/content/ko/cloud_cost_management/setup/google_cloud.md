@@ -65,6 +65,22 @@ _새로 생성된 BigQuery 청구 내보내기 데이터 세트에는 최근 2�
 
   **참고:** BigQuery Data Transfer API는 서비스 계정이 포함된 Google 프로젝트에서 활성화되어 있어야 합니다.
 
+### (선택 사항) 약정 사용 할인 메타데이터 내보내기 활성화 {#optional-enable-committed-use-discounts-metadata-export}
+
+[약정 사용 할인(CUD) 메타데이터 내보내기][20]를 활성화하면 [약정 인벤토리][22]에서 [지출 기반 약정 사용 할인][21]의 시작일과 종료일, 약정 금액 및 기타 속성을 확인할 수 있습니다. 내보내기에는 만료된 약정을 포함하여 결제 계정에 연결된 프로젝트에서 구매한 CUD가 포함됩니다.
+
+CUD 메타데이터 내보내기를 활성화하려면 다음 단계를 따르세요.
+
+1. Google Cloud 콘솔에서 **Billing > [Billing Export][1]**로 이동합니다.
+2. [약정 사용 할인 내보내기][2]를 활성화합니다. 프로젝트를 선택하고 연결할 새 데이터셋의 이름을 입력합니다. Google Cloud가 연결된 데이터셋을 생성합니다.
+3. {{< ui >}}Location Type{{< /ui >}}과 세부 사용 비용 내보내기 데이터셋의 위치에 해당하는 리전 또는 멀티 리전을 선택합니다. 데이터셋을 생성한 후에는 위치를 변경할 수 없습니다.
+4. {{< ui >}}Save{{< /ui >}}를 클릭합니다.
+5. 내보내기 {{< ui >}}Project ID{{< /ui >}} 및 {{< ui >}}Linked Dataset Name{{< /ui >}}을 기록합니다. [Cloud Cost를 구성할 때](#configure-cloud-cost) 이 값을 {{< ui >}}CUD Metadata Project ID{{< /ui >}} 및 {{< ui >}}CUD Metadata Dataset ID{{< /ui >}}에 입력합니다.
+
+{{< img src="cloud_cost/commitments/cud_metadata_export.png" alt="프로젝트, 연결된 데이터셋, 위치 유형 및 멀티 리전 필드가 강조 표시된 Google Cloud CUD 내보내기 구성 화면" >}}
+
+Datadog에 필요한 권한을 부여하려면 설정 방법에 해당하는 탭을 선택합니다.
+
 {{< tabs >}}
 
 {{% tab "Terraform" %}}
@@ -75,7 +91,7 @@ _새로 생성된 BigQuery 청구 내보내기 데이터 세트에는 최근 2�
 
 구성에 대해 다음 정보를 입력합니다.
 
-* **GCP Storage Bucket**: 스토리지 버킷을 생성하려면 **예**를 선택하고, 기존 버킷을 사용하려면 **아니요**를 선택합니다.
+* **GCP Storage Bucket**: 스토리지 버킷을 생성하려면 **Yes**를 선택하고, 기존 버킷을 사용하려면 **No**를 선택합니다.
 
     **참고**: 기존 버킷을 사용하는 경우 해당 버킷이 BigQuery 내보내기 데이터 세트와 동일한 위치에 있는지 확인하세요.
 
@@ -91,49 +107,64 @@ _새로 생성된 BigQuery 청구 내보내기 데이터 세트에는 최근 2�
 
 ### 생성된 Terraform HCL 복사 및 변경 사항 적용 {#copy-generated-terraform-hcl-and-apply-changes}
 
-CCM Terraform 설정 UI에서 **Terraform 구성 적용** 단계의 지침을 따르세요. CCM으로 돌아가 계정 생성 여부를 확인하기 전에 `terraform plan` 또는 `terraform apply` 실행 중 발생하는 모든 문제를 해결하세요.
+CCM Terraform 설정 UI에서 **Terraform 구성 적용** 단계의 지침을 따르세요. CCM으로 돌아가 계정이 생성되었는지 확인하기 전에 `terraform plan` 또는 `terraform apply` 실행 중 표시되는 모든 문제를 해결하세요.
 
 {{% /tab %}}
 
 {{% tab "수동" %}}
 
-{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="수동 모드의 Cloud Cost Management 설정 양식" style="width:100%" >}}
+{{< img src="cloud_cost/setup/gcp_manual_setup_cud_metadata.png" alt="수동 모드의 Cloud Cost Management 설정 양식" style="width:100%" >}}
 
 #### 내보내기 프로젝트 액세스 구성 {#configure-export-project-access}
-[내보내기 데이터 세트 프로젝트 리소스에 서비스 계정을 주체로 추가][7]:
-1. Google Cloud 콘솔의 IAM 페이지로 이동하여 내보내기 데이터 세트 프로젝트를 선택합니다.
+[내보내기 데이터셋 프로젝트 리소스에 서비스 계정을 주체로 추가][7]:
+1. Google Cloud 콘솔의 IAM 페이지로 이동하여 내보내기 데이터셋 프로젝트를 선택합니다.
 2. 서비스 계정을 주체로 선택합니다.
-3. 드롭다운 목록에서 다음 권한이 포함된 역할을 선택하여 부여합니다.
-  * `bigquery.jobs.create`
-  * `bigquery.transfers.get`
-  * `bigquery.transfers.update`
+3. 다음 권한을 모두 포함하는 하나 이상의 역할을 부여합니다.
+    * `bigquery.jobs.create`
+    * `bigquery.transfers.get`
+    * `bigquery.transfers.update`
 
   **참고:** 사용자 지정 역할을 사용할 수 있으며, 기존 Google Cloud 역할인 `roles/bigquery.admin`을 사용할 수도 있습니다.
 
 #### 내보내기 BigQuery 데이터 세트 액세스 구성 {#configure-export-bigquery-dataset-access}
-[내보내기 BigQuery 데이터 세트 리소스에 서비스 계정을 주체로 추가][8]:
-1. BigQuery 페이지의 Explorer 창에서 프로젝트를 확장한 후 내보내기 BigQuery 데이터 세트를 선택합니다.
+[내보내기 BigQuery 데이터셋 리소스에 서비스 계정을 주체로 추가][8]:
+1. BigQuery 페이지의 탐색기 창에서 프로젝트를 확장한 후 내보내기 BigQuery 데이터셋을 선택합니다.
 2. {{< ui >}}Sharing{{< /ui >}} > {{< ui >}}Permissions{{< /ui >}} > {{< ui >}}add principal{{< /ui >}}을 차례로 클릭합니다.
 3. 새 주체 필드에 서비스 계정을 입력합니다.
-4. 역할 선택 목록에서 다음 권한이 포함된 역할을 할당합니다.
-  * `bigquery.datasets.get`
-  * `bigquery.tables.create`
-  * `bigquery.tables.delete`
-  * `bigquery.tables.export`
-  * `bigquery.tables.get`
-  * `bigquery.tables.getData`
-  * `bigquery.tables.list`
-  * `bigquery.tables.update`
-  * `bigquery.tables.updateData`
+4. 다음 권한을 모두 포함하는 하나 이상의 역할을 부여합니다.
+    * `bigquery.datasets.get`
+    * `bigquery.tables.create`
+    * `bigquery.tables.delete`
+    * `bigquery.tables.export`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+    * `bigquery.tables.update`
+    * `bigquery.tables.updateData`
 
   **참고:** 사용자 지정 역할을 사용할 수 있으며, 기존 Google Cloud 역할인 `roles/bigquery.dataEditor`를 사용할 수도 있습니다.
 
+#### (선택 사항) CUD 메타데이터 프로젝트 액세스 구성 {#optional-configure-cud-metadata-project-access}
+[CUD 메타데이터 프로젝트 리소스에 서비스 계정을 주체로 추가][7]:
+1. Google Cloud 콘솔의 IAM 페이지로 이동하여 CUD 메타데이터 프로젝트를 선택합니다.
+2. 서비스 계정을 주체로 선택합니다.
+3. 다음 권한을 모두 포함하는 하나 이상의 역할을 부여합니다.
+    * `bigquery.datasets.get`
+    * `bigquery.readsessions.create`
+    * `bigquery.readsessions.getData`
+    * `bigquery.readsessions.update`
+    * `bigquery.tables.get`
+    * `bigquery.tables.getData`
+    * `bigquery.tables.list`
+
+  **참고:** 사용자 지정 역할을 사용할 수 있으며, 기존 Google Cloud 역할인 `roles/bigquery.dataViewer` 및 `roles/bigquery.readSessionUser`를 사용할 수도 있습니다.
+
 #### 버킷 액세스 구성 {#configure-bucket-access}
-[GCS 버킷 리소스에 서비스 계정을 주체로 추가][6]:
+[서비스 계정을 GCS 버킷 리소스의 주체로 추가][6]:
 1. Google Cloud 콘솔의 Cloud Storage Buckets 페이지로 이동하여 버킷을 선택합니다.
 2. 권한 탭을 선택한 후 {{< ui >}}grant access{{< /ui >}} 버튼을 클릭합니다.
 3. 새 주체 필드에 서비스 계정을 입력합니다.
-4. 다음 권한이 포함된 역할을 할당합니다.
+4. 다음 권한을 모두 포함하는 하나 이상의 역할을 부여합니다.
    * `storage.buckets.get`
    * `storage.objects.create`
    * `storage.objects.delete`
@@ -158,7 +189,7 @@ Cloud Cost Management는 Detailed Usage Cost BigQuery 데이터 세트에서 추
 ### (선택 사항) 프로젝트 간 서비스 권한 부여 구성 {#optional-configure-cross-project-service-authorization}
 통합된 서비스 계정이 청구 내보내기 데이터세트와 다른 Google Cloud Platform 프로젝트에 존재하는 경우 [프로젝트 간 서비스 계정 권한을 부여][10]해야 합니다.
 
-1. 다음 값을 사용하여 [공식 문서][11]에 따라 서비스 에이전트 생성을 트리거합니다.
+1. 다음 값을 사용하여 [공식 설명서][11]에 따라 서비스 에이전트 생성을 트리거합니다.
    * ENDPOINT: `bigquerydatatransfer.googleapis.com`
    * RESOURCE_TYPE: `project`
    * RESOURCE_ID: 내보내기 데이터 세트 프로젝트<br><br>
@@ -213,11 +244,11 @@ Datadog은 여러 소스의 태그를 사용하여 Google Cloud 비용 데이터
 | `resource_name` | 고객이 리소스에 지정한 이름입니다. 모든 리소스에 존재하는 것은 아닙니다. |
 | `global_resource_name` | Google Cloud에서 생성한 전역 고유 리소스 식별자입니다. |
 
-#### 비용 및 관측성 상관 분석 {#cost-and-observability-correlation}
+#### 비용과 관측 가능성의 상관관계 분석 {#cost-and-observability-correlation}
 
-비용을 관측성 데이터와 함께 확인하는 것은 인프라 변경이 비용에 미치는 영향을 이해하고, 비용 변동 원인을 파악하며, 비용과 성능을 모두 최적화하는 데 중요합니다. Datadog은 비용 메트릭과 관측성 메트릭을 쉽게 연관 분석할 수 있도록 주요 Google Cloud 서비스의 비용 데이터에 리소스 식별 태그를 자동으로 추가합니다.
+비용을 관측 가능성 데이터 맥락에서 조회하는 것은 인프라 변경이 비용에 미치는 영향을 이해하고, 비용 변동 원인을 파악하며, 비용과 성능을 모두 최적화하는 데 중요합니다. Datadog은 비용 메트릭과 관측 가능성 메트릭을 쉽게 연관 분석할 수 있도록 주요 Google Cloud 서비스의 비용 데이터에 리소스 식별 태그를 자동으로 추가합니다.
 
-예를 들어 각 Cloud SQL 데이터베이스의 비용 및 사용률을 확인하려면 `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, `gcp.cloudsql.database.memory.utilization`(또는 다른 Cloud SQL 메트릭)을 포함하는 테이블을 만들고 `database_id` 기준으로 그룹화할 수 있습니다. 또는 Cloud Function 사용량과 비용을 나란히 확인하려면 `gcp.cloudfunctions.function.execution_count` 및 `gcp.cost.amortized`를 `function_name` 기준으로 그룹화하여 그래프로 표시할 수 있습니다.
+예를 들어, 각 Cloud SQL 데이터베이스의 비용 및 사용률을 확인하려면 `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, `gcp.cloudsql.database.memory.utilization`(또는 다른 Cloud SQL 메트릭)을 포함하는 테이블을 만들고 `database_id` 기준으로 그룹화할 수 있습니다. 또는 Cloud Function 사용량과 비용을 나란히 확인하려면 `gcp.cloudfunctions.function.execution_count` 및 `gcp.cost.amortized`를 `function_name` 기준으로 그룹화하여 그래프로 표시할 수 있습니다.
 
 다음 기본 제공 태그를 사용할 수 있습니다.
 | Google 제품     | 태그                        |
@@ -231,7 +262,7 @@ Datadog은 여러 소스의 태그를 사용하여 Google Cloud 비용 데이터
 | BigQuery           | `project_id`, `dataset_id`    |
 | Kubernetes Engine  | `cluster_name`                |
 
-### 컨테이너 할당 {#container-allocation}
+### Container allocation {#container-allocation}
 **컨테이너 할당** 메트릭은 Google Cloud Platform 메트릭과 동일한 비용을 포함하면서도 컨테이너 워크로드를 위한 추가 분석 및 인사이트를 제공합니다. 자세한 내용은 [컨테이너 비용 할당][14]을 참조하세요.
 
 ## 추가 자료 {#further-reading}
@@ -253,3 +284,6 @@ Datadog은 여러 소스의 태그를 사용하여 Google Cloud 비용 데이터
 [17]: /ko/cloud_cost_management/tags
 [18]: /ko/api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
+[20]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export
+[21]: https://cloud.google.com/docs/cuds-spend-based
+[22]: /ko/cloud_cost_management/planning/commitment_programs/#commitments-inventory

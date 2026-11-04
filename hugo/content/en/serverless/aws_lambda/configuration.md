@@ -516,9 +516,9 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 [Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories.
 
-For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
+To set up the source code integration, [select your language][101] and follow the **Serverless** instructions.
 
-[101]: /integrations/guide/source-code-integration/?tab=go#serverless
+[101]: /source_code/service-mapping/
 
 ## Exclude auto-injected tags from custom metrics
 
@@ -817,7 +817,7 @@ To use Workload Identity Federation:
 1. In Datadog, configure an AWS intake mapping that authorizes your function's execution role ARN. For setup steps, see [Set up Workload Identity Federation for the Datadog Agent][59].
 2. Set the `DD_ORG_UUID` environment variable on your function to your Datadog organization UUID. To find it, call the [{{< region-param key="dd_api" >}}/api/v2/current_user][60] endpoint. When `DD_ORG_UUID` is set, the extension authenticates with Workload Identity Federation, which takes precedence over other API key environment variables.
 
-This is available for version 96+ of the Datadog Lambda Extension. Workload Identity Federation for the Agent is available for Enterprise plans only.
+This is available for version 96+ of the Datadog Lambda Extension.
 
 ## Reload API key secret periodically
 

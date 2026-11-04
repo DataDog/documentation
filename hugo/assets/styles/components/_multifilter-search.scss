@@ -4,6 +4,13 @@
     }
 }
 
+// Banner hidden on mobile via `hide_on_mobile`: back to the no-banner offset
+@include media-breakpoint-down(md) {
+    body:has(.announcement-banner--hide-mobile) .multifilter-search-component #multifilter-search-nav {
+        top: 65px;
+    }
+}
+
 .multifilter-search-component {
     [x-cloak] {
         display: none !important;

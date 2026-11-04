@@ -16,6 +16,10 @@ further_reading:
   text: "Workflow Automation"
 ---
 
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation is in Preview on your selected Datadog site ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 The [Datadog MCP Server][1] lets AI agents build and manage workflows through the [Model Context Protocol (MCP)][2].

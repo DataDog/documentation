@@ -38,16 +38,16 @@ la trace de pile et des variables locales avant de les transmettre à Datadog.
 
 <div class="alert alert-info">
 <b>Quels produits sont pris en charge ?</b>
-La relecture d'exceptions est disponible uniquement pour les <b>exceptions basées sur l'APM</b> et ne prend pas en charge les erreurs provenant des logs ou du RUM.
+La relecture d'exceptions est disponible uniquement pour les <b>exceptions basées sur APM</b> et ne prend pas en charge les erreurs provenant des logs ou du RUM.
 </div>
 
 ## Configuration requise et installation {#requirements-setup}
 
-Exception Replay prend en charge Python, Java, .NET et PHP, et capture uniquement les exceptions basées sur l'APM. Il
-nécessite le [Datadog Agent][12] et une [APM-instrumented application][1]. Vous pouvez l'activer pour un environnement entier,
+Exception Replay prend en charge Python, Java, .NET et PHP, et capture uniquement les exceptions basées sur APM. Il
+nécessite le [Datadog Agent][12] et une [application instrumentée par APM][1]. Vous pouvez l'activer pour un environnement entier,
 un service individuel dans l'application, ou un service spécifique en utilisant des variables d'environnement.
 
-La méthode d'activation dépend de la version de votre tracer et de la disponibilité de la [Remote Configuration][2]. Consultez le tableau
+La méthode d'activation dépend de la version de votre traceur et de la disponibilité de [Remote Configuration][2]. Consultez le tableau
 ci-dessous pour plus de détails.
 
 | | Par environnement<br>(Bulk) | Par service<br>(In-App) | Par service<br>(Env Var) |
@@ -108,8 +108,8 @@ Ces modes de masquage ne peuvent pas être désactivés, seulement commutés, et
 ### Masquage basé sur des identifiants {#identifier-based-redaction}
 
 Les valeurs de variable associées aux [identifiants sensibles courants][3] (par exemple, `password`, `accessToken` et des termes similaires)
-sont nettoyées avant que les instantanés ne quittent le host. Des règles de masquage supplémentaires spécifiques au langage sont intégrées dans chaque tracer
-(par exemple, le Python tracer maintient une liste d'identifiants sensibles par défaut).
+sont nettoyées avant que les instantanés ne quittent le host. Des règles de masquage supplémentaires spécifiques au langage sont intégrées dans chaque traceur
+(par exemple, le traceur Python maintient une liste d'identifiants sensibles par défaut).
 
 Vous pouvez étendre le comportement de masquage via :
 
@@ -141,13 +141,14 @@ environnements d'exécution, un instantané n'est capturé qu'après la **deuxi�
 - Logs avec `source:dd_debugger` manquants en raison des paramètres de rétention [Log Index][6] ou des [Exclusion Filters][7] dans les index précédents
 - Exception Replay n'est pas disponible dans la région FedRAMP
 - Java : Sur le JDK 18 et versions antérieures, les classes compilées avec l'indicateur `-parameters` peuvent ne pas être prises en charge. Spring 6+, Spring Boot 3+ et Scala utilisent cet indicateur par défaut.
+- .NET : Sur les hosts avec FIPS activé, les versions du traceur antérieures à 3.55.0 ne prennent pas en charge la relecture d'exception. Sous Linux, l'application peut planter. Mettez à niveau vers le traceur 3.55.0 ou une version ultérieure pour utiliser la relecture d'exception. Sur les versions antérieures, définissez `DD_EXCEPTION_REPLAY_ENABLED=false` pour éviter le plantage.
 
 Utilisez la requête `@error.debug_info_captured:true` dans Error Tracking Explorer pour trouver les erreurs avec Exception Replay.
 instantanés.
 
 ### BatchUploader WARN messages on GovCloud (Java) {#batchuploader-warn-messages-on-govcloud-java}
 
-Sur les sites GovCloud (`app.ddog-gov.com`), Java tracers peuvent enregistrer des messages WARN périodiques provenant de `com.datadog.debugger.uploader.BatchUploader` avec une erreur HTTP 403 et un texte similaire à `This traffic is not permitted on your account`. Ceci est attendu lorsque des téléchargements liés au débogueur sont tentés sur un site où Exception Replay, Dynamic Instrumentation et Code Origin for Spans ne sont pas pris en charge. La fonctionnalité APM principale (traces, métriques, profilage, injection de logs) n'est pas affectée.
+Sur les sites GovCloud (`app.ddog-gov.com`), les traceurs Java peuvent enregistrer des messages WARN périodiques provenant de `com.datadog.debugger.uploader.BatchUploader` avec une erreur HTTP 403 et un texte similaire à `This traffic is not permitted on your account`. Ceci est attendu lorsque des téléchargements liés au débogueur sont tentés sur un site où Exception Replay, Dynamic Instrumentation et Code Origin for Spans ne sont pas pris en charge. La fonctionnalité APM principale (traces, métriques, profilage, injection de logs) n'est pas affectée.
 
 Pour arrêter ces messages de log, définissez les variables d'environnement suivantes sur le pod de l'application Java et redémarrez la charge de travail :
 
@@ -165,7 +166,7 @@ Alternativement, utilisez les propriétés système JVM :
 -Ddd.code.origin.for.spans.enabled=false
 ```
 
-Pour confirmer la correction, vérifiez le JSON de démarrage du tracer (`DATADOG TRACER CONFIGURATION`) et assurez-vous que `debugger_exception_enabled`, `debugger_enabled` et `debugger_span_origin_enabled` sont tous `false`. Les messages WARN sont limités à environ une fois toutes les cinq minutes, attendez donc au moins cette durée après le redémarrage avant de confirmer que les messages ont cessé.
+Pour confirmer la correction, vérifiez le JSON de démarrage du traceur (`DATADOG TRACER CONFIGURATION`) et assurez-vous que `debugger_exception_enabled`, `debugger_enabled` et `debugger_span_origin_enabled` sont tous `false`. Les messages WARN sont limités à environ une fois toutes les cinq minutes, attendez donc au moins cette durée après le redémarrage avant de confirmer que les messages ont cessé.
 
 ## Pour aller plus loin {#further-reading}
 
