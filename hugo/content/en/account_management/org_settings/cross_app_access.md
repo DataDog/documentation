@@ -69,10 +69,12 @@ Click {{< ui >}}Manage App{{< /ui >}} on a row to open the scope settings for th
 
 ## Set up your issuer
 
-Select the issuer you use. If you trust more than one issuer, complete the setup for each.
+Select the issuer you use. Most organizations use Okta or Claude; use a custom issuer only if your identity provider is neither. If you trust more than one issuer, complete the setup for each.
 
 {{< tabs >}}
 {{% tab "Okta" %}}
+
+Use Okta as the issuer when Okta is your SAML identity provider for Datadog. See [Okta's Cross-App Access documentation][2] for Okta's side of the setup.
 
 #### Prerequisites
 
@@ -101,7 +103,7 @@ Enter the issuer URL of your own Okta tenant, for example `https://<YOUR_OKTA_SU
 
 #### Configure Okta
 
-Complete the following steps in the Okta Admin Console as a Super Administrator. See [Okta's Cross-App Access documentation][2] for more details.
+Complete the following steps in the Okta Admin Console as a Super Administrator.
 
 1. **Configure the Datadog application as a resource server.** On your Datadog application, open the {{< ui >}}Machine Assignments{{< /ui >}} tab, select the {{< ui >}}Callers{{< /ui >}} tile, and click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Cross App Access (XAA){{< /ui >}}. Enable XAA, then set {{< ui >}}Audience/tenant ID{{< /ui >}} to your [Datadog organization UUID](#copy-your-organization-uuid).
 
@@ -136,6 +138,8 @@ Set {{< ui >}}Scope Condition{{< /ui >}} to {{< ui >}}Allow all{{< /ui >}}. Okta
 
 {{% tab "Claude" %}}
 
+Use Claude as the issuer (Claude Auto-Connect) when you manage the Datadog connector centrally in Claude. See [Authorize MCP connectors for your entire organization][1] in the Claude Help Center for Claude's side of the setup.
+
 #### Prerequisites
 
 - You are an admin on your organization's Claude plan, with access to set up managed authorization.
@@ -156,7 +160,7 @@ Enter the {{< ui >}}Issuer URL{{< /ui >}} shown in the Datadog connector in Clau
 
 #### Configure Claude
 
-Complete the following steps in Claude as an admin. See [Authorize MCP connectors for your entire organization][1] in the Claude Help Center for more details.
+Complete the following steps in Claude as an admin.
 
 1. In Claude, navigate to [{{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Connectors{{< /ui >}}][2] and select **Datadog**.
 1. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
