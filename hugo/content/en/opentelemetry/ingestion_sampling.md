@@ -67,7 +67,7 @@ Use the [ingestion volume control guide][8] to read more about the implications 
 
 #### Trace metric extrapolation
 
-Compatible receivers use sampling probability in exported spans' `tracestate` to estimate total traffic from sampled traces. See [OpenTelemetry's sampling threshold and adjusted count specification][21] for how extrapolation, also called upsampling, works.
+Compatible receivers use sampling probability in exported spans' `tracestate` to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
 
 Use these minimum versions for automatic extrapolation:
 
@@ -180,6 +180,7 @@ For more information, see [Unified Service Tagging][18].
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [21]: https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/#sampling-threshold-value-th
+[22]: https://github.com/open-telemetry/oteps/blob/main/text/trace/0235-sampling-threshold-in-trace-state.md
 [23]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/#sampling-and-trace-metrics
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
 [25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
