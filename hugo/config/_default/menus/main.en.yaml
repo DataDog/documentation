@@ -6883,6 +6883,16 @@ menu:
       parent: source_code_integration
       identifier: sci_features
       weight: 4
+    - name: Links to Git Providers and Code Snippets
+      url: source_code/features/snippets-and-links/
+      parent: sci_features
+      identifier: sci_features_snippets_and_links
+      weight: 1
+    - name: PR Comments
+      url: source_code/features/pr-comments/
+      parent: sci_features
+      identifier: sci_features_pr_comments
+      weight: 2
     - name: IDE Plugins
       url: ide_plugins/
       pre: ide

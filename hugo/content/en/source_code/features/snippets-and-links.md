@@ -1,6 +1,6 @@
 ---
-title: Features of Source Code Integration
-description: "Learn about the various features enabled by source code integration across Datadog."
+title: Links to Git Providers and Code Snippets
+description: "See links to your source code and inline code snippets across Datadog products."
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
@@ -33,12 +33,6 @@ further_reading:
   tag:  "Blog"
   text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
-
-## Overview
-
-After you have connected your Git repositories and tagged your services, you can use source code integration features across various Datadog products.
-
-## Links to Git providers & code snippets
 
 {{< tabs >}}
 {{% tab "Error Tracking" %}}
@@ -181,65 +175,6 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 {{% /tab %}}
 {{< /tabs >}}
 
-## PR comments
-
-<div class="alert alert-warning">
-  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
-</div>
-
-PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation.
-
-There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
-* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
-* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
-* Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Comments (or [PR Gates][11]) enabled is still waiting for results to arrive. After all results have arrived:
-  * If all results are positive, the reaction is changed to 👍.
-  * If there is at least one finding, the 👀 reaction is removed because the Summary Comment includes details on the findings instead.
-
-{{< tabs >}}
-{{% tab "CI Visibility" %}}
-PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
-
-{{< img src="source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
-
-To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][101].
-
-[101]: https://app.datadoghq.com/ci/settings/ci-visibility
-
-{{% /tab %}}
-{{% tab "Code Security" %}}
-
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
-
-1. A single comment summarizing the new violations detected in your pull request.
-
-{{< img src="source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
-
-2. Inline comments for each violation detected in your pull request placed directly on the lines of code that triggered the violation in the diff of the pull request.
-
-{{< img src="source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
-
-To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
-
-[101]: https://app.datadoghq.com/security/configuration/code-security/settings
-
-{{% /tab %}}
-{{% tab "Test Optimization" %}}
-
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
-
-{{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
-
-To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
-
-[101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[10]: /source_code/source-code-management/
-[11]: /pr_gates
