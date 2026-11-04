@@ -40,7 +40,7 @@ Database Monitoring collects the following data from IBM Db2:
 : Database version, hostname, port, and Agent and integration versions, collected every 5 minutes. Use tags to filter and group instances.
 
 **Query metrics**
-: Execution counts, execution time, CPU time, rows read and returned, and lock waits and wait time. Collected from the Db2 package cache every 10 seconds by default and grouped by normalized query.
+: DBM collects performance metrics for each normalized query from the Db2 package cache every 10 seconds by default. Metrics include execution counts, execution time, CPU time, rows read, rows returned, lock waits, and lock wait time.
 
 **Full query text**
 : Obfuscated SQL linked to query metrics by query signature.
