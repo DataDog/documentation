@@ -108,7 +108,7 @@ For details on which Datadog features each setup supports, see the [feature comp
 [5]: /tracing/trace_explorer/
 [6]: /opentelemetry/setup/
 [7]: /opentelemetry/compatibility/#feature-compatibility
-[8]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-ddot-sdks
+[8]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
 [9]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.67.0
 [10]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.15.0
 [11]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.20.0

@@ -38,5 +38,5 @@ For full working example files, see the [`opentelemetry-examples` repository][5]
 
 [1]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-ddot-sdks
+[3]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

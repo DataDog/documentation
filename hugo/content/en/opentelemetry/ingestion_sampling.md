@@ -65,7 +65,7 @@ Head-based sampling reduces the spans available for APM metric computation. For 
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
-#### Trace metric extrapolation for DDOT SDKs
+#### Trace metric extrapolation for Datadog SDKs
 
 DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
 
@@ -182,4 +182,4 @@ For more information, see [Unified Service Tagging][18].
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
 [25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0
-[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-ddot-sdks
+[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
