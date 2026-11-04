@@ -41,7 +41,7 @@ Monitor the health and performance of your OpenTelemetry Collector:
 
 - [Collector Health Metrics][4] - Track the performance of your OpenTelemetry Collector
 - [Datadog Extension][17] - View Collector configuration and build information in Datadog Infrastructure Monitoring
-- [OpAMP Extension][22] - View Collector configuration and health in Fleet Automation with the OpenTelemetry OpAMP extension
+- [OpAMP Extension][22] - View Collector configuration and health in Fleet Automation, as an alternative to the Datadog Extension
 
 ### Containers and hosts
 

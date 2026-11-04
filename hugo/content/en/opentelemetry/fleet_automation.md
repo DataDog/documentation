@@ -1,9 +1,9 @@
 ---
 title: Fleet Automation for OpenTelemetry Collectors
-description: "Use Fleet Automation to view, visualize, and configure the OpenTelemetry Collectors that send data to Datadog."
+description: "View and visualize OpenTelemetry Collectors across your fleet, and configure the Agent's Collector, with Fleet Automation."
 ---
 
-This page covers the Fleet Automation features for OpenTelemetry Collectors: the Agent's Collector, the DDOT Collector, and upstream Collectors. Fleet Automation also manages Datadog Agents. For Agent-only features, such as configuring integrations and custom log collection or upgrading SDKs, see [Fleet Automation][1].
+Fleet Automation also manages Datadog Agents. For Agent features, such as configuring integrations, configuring custom log collection, and upgrading SDKs, see [Fleet Automation][1].
 
 {{< include-markdown "agent/fleet_automation/otel_collectors" >}}
 

@@ -20,16 +20,16 @@ further_reading:
 
 ## Overview
 
-The [OpenTelemetry OpAMP extension][1] connects an OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2]. The Collector reports its configuration, health, and available components, and you can view them in [Fleet Automation][3].
+The [OpenTelemetry OpAMP extension][1] connects an OpenTelemetry (OTel) Collector to Datadog with the [Open Agent Management Protocol (OpAMP)][2]. The Collector reports its configuration, health, and available components to Datadog. You can view them in [Fleet Automation][3].
 
-The OpAMP extension is an alternative to the [Datadog Extension][4]. Datadog recommends the Datadog Extension, because the OpAMP extension doesn't support:
+The OpAMP extension is an alternative to the [Datadog Extension][4], which Datadog recommends. The OpAMP extension doesn't support:
 
 - The [Topology view][5] in Fleet Automation
 - Remote configuration of the Collector
 
-The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the OpenTelemetry Collector, and you can add it to [custom builds][6].
+The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in the contrib and k8s distributions of the OpenTelemetry Collector, and you can add it to [custom builds][6]. Upstream, the extension's stability level is alpha.
 
-<div class="alert alert-info">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, you don't need the OpAMP extension. The Datadog Extension is enabled automatically in the DDOT Collector.</div>
+<div class="alert alert-info">If you use the <a href="/opentelemetry/setup/agent/#agents-collector">Agent's Collector</a> or the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, you don't need the OpAMP extension. Both connect to Fleet Automation without extra configuration.</div>
 
 ## Setup
 
@@ -63,7 +63,7 @@ The extension's `reports_health`, `reports_effective_config`, and `reports_avail
 
 | Capability | Used for | If you turn it off |
 |---|---|---|
-| `reports_health` | Collector health in Fleet Automation | Fleet Automation shows no health issues for the Collector. |
+| `reports_health` | Collector health in Fleet Automation | Fleet Automation doesn't show health status for the Collector. |
 | `reports_effective_config` | The Collector's configuration and recommendations based on it | Recommendations that depend on the configuration don't appear. |
 | `reports_available_components` | Recommendations based on the Collector's components and versions | Recommendations that depend on components don't appear. |
 
@@ -71,7 +71,7 @@ The extension's `reports_health`, `reports_effective_config`, and `reports_avail
 
 Fleet Automation identifies each Collector by its OpAMP `instance_uid`. If you don't set `instance_uid`, the extension generates a new one each time the Collector starts, and each restart appears in Fleet Automation as a new Collector.
 
-To keep one record per Collector, set `instance_uid` to a UUIDv7 that is unique to each Collector and stays the same across restarts.
+To keep one record per Collector, set `instance_uid` to a UUIDv7, in canonical 36-character string format, that is unique to each Collector and stays the same across restarts.
 
 **[Placeholder: How to generate and persist `instance_uid`, for example on Kubernetes.]**
 
@@ -88,7 +88,9 @@ service:
 
 Send the Collector's internal metrics to Datadog to monitor Collector health and pipeline throughput. Datadog recommends pushing them directly to the OTLP metrics intake endpoint. Scraping them with the Prometheus receiver is an alternative. For both setups, see [Collector Health Metrics][8].
 
-## Complete configuration example
+**[Placeholder: Whether Fleet Automation needs this internal telemetry, for example for health signals or the Show traffic toggle. If it doesn't, mark this step optional.]**
+
+## Complete OpAMP extension configuration example
 
 The following example combines the OpAMP extension with internal telemetry sent to the [Datadog OTLP metrics intake endpoint][9]:
 
@@ -121,15 +123,16 @@ service:
                     value: ${env:DD_API_KEY}
 ```
 
-Set `DD_OTLP_METRICS_ENDPOINT` to the OTLP metrics intake endpoint for your [Datadog site][10]: {{< region-param key="otlp_metrics_endpoint" code="true" >}}.
+Set `DD_OTLP_METRICS_ENDPOINT` to the OTLP metrics intake endpoint for your [Datadog site][10]: {{< region-param key="otlp_metrics_endpoint" code="true" >}}. This setup skips pipeline processors. To add host and environment tags, see [Collector Health Metrics][8].
 
 ## View the Collector in Fleet Automation
 
 1. Navigate to [Fleet Automation][11].
-1. Filter for OTel Collectors, then select a Collector to open its detail panel.
+1. Filter for OTel Collectors.
+1. Select a Collector to open its detail panel.
 1. Click the {{< ui >}}Configuration{{< /ui >}} tab to view the Collector's configuration.
 
-For what you can do with OTel Collectors in Fleet Automation, see [Fleet Automation for OpenTelemetry Collectors][3].
+To see which Fleet Automation features each kind of Collector supports, see [Fleet Automation for OpenTelemetry Collectors][3].
 
 ## Further reading
 

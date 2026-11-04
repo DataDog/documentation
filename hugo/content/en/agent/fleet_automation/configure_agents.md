@@ -1,6 +1,6 @@
 ---
 title: Configure Agents
-description: "Roll out and manage Datadog Agent configuration at scale with Fleet Automation."
+description: "Roll out and manage the configuration of Datadog Agents and their Collectors at scale with Fleet Automation."
 further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
@@ -36,6 +36,8 @@ Managing Datadog Agent tags with Fleet Automation is in Preview. If you're inter
 
 ### Configure multiple Agents and their Collectors
 
+To configure the Agent's Collector with YAML, see [Configure the Agent's Collector][14].
+
 1. In Fleet Automation, open the [Configuration][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
 
@@ -48,9 +50,9 @@ Managing Datadog Agent tags with Fleet Automation is in Preview. If you're inter
 1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment and track its progress from the [Deployments page][2].
 
-To configure the Agent's Collector with YAML, see [Configure the Agent's Collector][14].
-
 ### Edit the configuration of a single Agent or its Collector
+
+**Note**: Editing the Agent's Collector configuration is in Preview and requires Agent 7.82 or later. To request access, see [Configure the Agent's Collector][14].
 
 1. Navigate to [Fleet View][3]. 
 
