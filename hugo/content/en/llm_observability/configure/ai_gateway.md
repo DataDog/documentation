@@ -61,9 +61,9 @@ AI Gateway accepts the following Datadog credentials. The user or service accoun
 | Credential | Request headers |
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
-| [Service Access Token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+| [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
 
-For service workloads, use a Service Access Token. Store credentials in your application's secret manager and keep them out of source control and logs.
+For service workloads, use a service access token. Store credentials in your application's secret manager and keep them out of source control and logs.
 
 ### Send a request
 
@@ -322,7 +322,7 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 - Confirm that the credential is valid for the same Datadog organization and site as the base URL.
 - Confirm that the user or service account and the credential scope allow `ai_gateway_usage`.
 - Confirm that an access policy or the default policy allows that user or service account to use the requested model or routing rule.
-- Send a personal access token or a Service Access Token in the `Authorization: Bearer` header.
+- Send a personal access token or a service access token in the `Authorization: Bearer` header.
 
 ### 402 responses
 
@@ -360,7 +360,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `403`. The caller is not a member of the selected Datadog team.
 
 `gateway_team_user_required`
-: HTTP `403`. Team selection requires a Datadog user identity. A Service Access Token without user context cannot select a team.
+: HTTP `403`. Team selection requires a Datadog user identity. A service access token without user context cannot select a team.
 
 `gateway_team_unavailable`
 : HTTP `503`. Datadog team membership could not be verified. Retry the request.
@@ -411,7 +411,7 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 : HTTP `500` / `500` / `503`. The connection to the provider failed (refused, reset, DNS, or TLS) or broke mid-response.
 
 `provider_credentials_error`
-: HTTP `500` / `500` / `503`. AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or Service Access Token. Check the provider's integration account.
+: HTTP `500` / `500` / `503`. AI Gateway could not load or apply the provider credentials configured for your organization. This is not the Datadog personal access token or service access token. Check the provider's integration account.
 
 `upstream_error`
 : HTTP `500` / `500` / `503`. Any other upstream failure before a provider response. Also used when all targets failed with no more specific code.
