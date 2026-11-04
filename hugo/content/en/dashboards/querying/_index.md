@@ -220,7 +220,7 @@ For example, to calculate the time elapsed in seconds since the last reported ba
 ```text
 time() - max:backup.last_completed_timestamp{*}
 ```
-**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in UNIX milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
+**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in Unix milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
 
 To return the elapsed time in seconds, divide the millisecond field by 1000:
 
@@ -234,11 +234,11 @@ To return the result in milliseconds, multiply `time()` by 1000:
 1000 * time() - max:@timestamp
 ```
 
-`time()` is available only within a formula, so include it in the formula expression rather than adding it as a separate query column.
+`time()` is available only within a formula, so include it in the formula expression rather than adding it as a separate query.
 
-`time()` uses the queried time range rather than the current time. In scalar widgets, such as query value and table widgets, `time()` returns the end of the selected time range. In timeseries widgets, it returns the timestamp of each point. For an accurate "time since" calculation in a scalar widget, use a live time range. If the time range is paused or fixed, `time()` returns the end of that range.
+`time()` uses the queried time range rather than the current time. In timeseries widgets, it returns the timestamp of each point. In scalar widgets, such as query value and table widgets, it returns the end of the selected time range. For an accurate "time since" calculation in a scalar widget, use a live time range rather than a paused or fixed one.
 
-{{< img src="/dashboards/querying/time-function-example.png" alt="A table widget listing branches, when each was last seen, and the minutes elapsed since then, calculated with the time() function." style="width:100%;" >}}
+{{< img src="dashboards/querying/time-function-example.png" alt="A table widget listing branches, when each was last seen, and the minutes elapsed since then, calculated with the time() function." style="width:100%;" >}}
 
 {{% /collapse-content %}}
 
