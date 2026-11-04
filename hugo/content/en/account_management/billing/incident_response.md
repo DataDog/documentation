@@ -38,7 +38,7 @@ A user needs an **On-Call seat** if they perform any of the following:
 In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules.
 
 <div class="alert alert-warning">
-If a user without a seat performs an action that requires an On-Call seat, Datadog automatically assigns them a seat. This includes actions taken through the <a href="/api/latest/on-call/">On-Call API</a>, which do not display a prompt before assigning the seat. If no users in your organization have an On-Call seat yet, the first automatic assignment enables On-Call seats. Datadog then sends your organization a notification email. Automatically assigned seats are billable. For details, see <a href="#billing-and-overages">Billing and overages</a>.
+If a user without a seat performs an action that requires an On-Call seat, Datadog automatically assigns them a billable seat. Actions taken through the <a href="/api/latest/on-call/">On-Call API</a> also assign a seat, without a confirmation prompt. If no one in your organization has an On-Call seat yet, the first automatic assignment enables On-Call seats and Datadog sends your organization a notification email. For details, see <a href="#billing-and-overages">Billing and overages</a>.
 </div>
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
