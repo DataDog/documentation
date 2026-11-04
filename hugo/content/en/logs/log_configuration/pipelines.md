@@ -337,6 +337,10 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 ## Auto-Processing
 <!-- vale Datadog.headings = YES -->
 
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">Auto-Processing is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring pipelines.
 
 Auto-Processing only handles logs that don't match the filter of any integration or custom pipeline. If a log matches a pipeline's filter, Auto-Processing doesn't process it, even if that pipeline doesn't modify the log. Your existing pipeline configurations remain unchanged.
@@ -353,7 +357,7 @@ Datadog creates an entry for a new source and service about 15 minutes after rec
 
 ### Turn Auto-Processing on or off
 
-For new organizations, Auto-Processing is on by default and new entries are enabled automatically. For organizations created before Auto-Processing became generally available, Auto-Processing is off by default.
+For organizations created on or after November 4, 2026, Auto-Processing is on by default and new entries are enabled automatically. For organizations created before November 4, 2026, Auto-Processing is off by default.
 
 On the [{{< ui >}}Processing{{< /ui >}} page][8], select the {{< ui >}}Auto-Processing{{< /ui >}} tab and use the feature toggle to turn Auto-Processing on or off for your organization.
 
