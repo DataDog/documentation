@@ -1890,11 +1890,12 @@ components:
       schema:
         type: string
     RumMetricIDParameter:
-      description: The name of the RUM-based metric.
+      description: The name of the RUM-based metric, as returned in `data.id` by `ListRumMetrics`.
       in: path
       name: metric_id
       required: true
       schema:
+        example: rum.sessions.web.count
         type: string
     RumPermanentRetentionFilterIDParameter:
       description: The identifier of the permanent RUM retention filter.
@@ -1936,20 +1937,6 @@ components:
       required: true
       schema:
         example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
-        type: string
-    SalesforceIncidentsOrganizationIDPathParameter:
-      description: The Datadog-assigned ID of the connected Salesforce organization.
-      in: path
-      name: salesforce_org_id
-      required: true
-      schema:
-        type: string
-    SalesforceIncidentsTemplateIDPathParameter:
-      description: The ID of the Salesforce incident template.
-      in: path
-      name: incident_template_id
-      required: true
-      schema:
         type: string
     SampleLogGenerationContentPackID:
       description: The identifier of the Cloud SIEM content pack to operate on (for example, `aws-cloudtrail`).
@@ -21589,11 +21576,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         offering_class:
           description: The offering class of the Reserved Instance.
@@ -21615,14 +21604,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21656,11 +21645,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21674,14 +21665,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21718,11 +21709,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21736,14 +21729,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21769,9 +21762,18 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        instance_type_family:
+          description: |-
+            The EC2 instance family covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: m5
+          type: string
         purchase_option:
           description: The payment option for the Savings Plan.
           example: All Upfront
+          type: string
+        region:
+          description: The AWS region covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: us-east-1
           type: string
         savings_plan_type:
           description: The Savings Plan type.
@@ -21781,14 +21783,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21816,18 +21818,24 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        savings_plan_type:
+          description: |-
+            The Azure Savings Plan type, `Compute` or `Database`, based on the product order name. Omitted when
+            the type can't be classified.
+          example: Compute
+          type: string
         start_date:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21857,6 +21865,10 @@ components:
           description: The Azure meter sub-category for the reservation.
           example: D4s v3
           type: string
+        product:
+          description: The Azure product of the reservation. Omitted when it cannot be classified.
+          example: VirtualMachines
+          type: string
         region:
           description: The Azure region of the Reserved Instance.
           example: eastus
@@ -21867,14 +21879,14 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/CommitmentsAzureVMRIStatus"
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21952,17 +21964,58 @@ components:
       properties:
         committed_spend_unit:
           $ref: "#/components/schemas/CommitmentsUnit"
+        unused_cost_unavailable:
+          description: |-
+            Whether Azure cost data lacks the unused cost of some commitments, for example when an export is
+            scoped below the billing profile. When `true`, utilization is overstated.
+          example: true
+          type: boolean
       type: object
     CommitmentsListResponse:
       description: Response containing a list of cloud commitment details.
+      properties:
+        data:
+          $ref: "#/components/schemas/CommitmentsListResponseData"
+      required:
+        - data
+      type: object
+    CommitmentsListResponseAttributes:
+      description: Attributes of a commitments list response.
       properties:
         commitments:
           $ref: "#/components/schemas/CommitmentsListItems"
         meta:
           $ref: "#/components/schemas/CommitmentsListMeta"
+        query_definition:
+          $ref: "#/components/schemas/CommitmentsQueryDefinition"
       required:
         - commitments
       type: object
+    CommitmentsListResponseData:
+      description: The commitments list resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CommitmentsListResponseAttributes"
+        id:
+          description: The identifier of the commitments list response.
+          example: commitments_list_response
+          type: string
+        type:
+          $ref: "#/components/schemas/CommitmentsListResponseType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CommitmentsListResponseType:
+      default: commitments_list_response
+      description: Type of the commitments list response resource.
+      enum:
+        - commitments_list_response
+      example: commitments_list_response
+      type: string
+      x-enum-varnames:
+        - COMMITMENTS_LIST_RESPONSE
     CommitmentsOnDemandHotspotsScalarMeta:
       description: Metadata for the on-demand hot-spots scalar response.
       properties:
@@ -21996,6 +22049,90 @@ components:
       x-enum-varnames:
         - AWS
         - AZURE
+    CommitmentsQueryDefinition:
+      description: |-
+        The query that produces the response values, in the same format as dashboard and notebook widget
+        requests, so a client can graph the values in a widget. Each formula's `id` names the response value
+        that it produces.
+      properties:
+        formulas:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionFormulas"
+        queries:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionQueries"
+      required:
+        - formulas
+        - queries
+      type: object
+    CommitmentsQueryDefinitionAggregator:
+      description: The reducer a scalar widget applies to the query.
+      enum:
+        - sum
+        - avg
+        - min
+        - max
+      example: sum
+      type: string
+      x-enum-varnames:
+        - SUM
+        - AVG
+        - MIN
+        - MAX
+    CommitmentsQueryDefinitionDataSource:
+      description: The data source of the query.
+      enum:
+        - cloud_cost
+        - metrics
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+        - CLOUD_COST
+        - METRICS
+    CommitmentsQueryDefinitionFormula:
+      description: A formula of a query definition.
+      properties:
+        formula:
+          description: The formula expression over the named queries.
+          example: used / (used + unused) * 100
+          type: string
+        id:
+          description: The name of the response value the formula produces.
+          example: utilization
+          type: string
+      required:
+        - formula
+        - id
+      type: object
+    CommitmentsQueryDefinitionFormulas:
+      description: The formulas of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionFormula"
+      type: array
+    CommitmentsQueryDefinitionQueries:
+      description: The metric queries of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionQuery"
+      type: array
+    CommitmentsQueryDefinitionQuery:
+      description: A metric query of a query definition.
+      properties:
+        aggregator:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionAggregator"
+        data_source:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionDataSource"
+        name:
+          description: The name formulas use to reference the query.
+          example: used
+          type: string
+        query:
+          description: The metric query.
+          example: "sum:aws.cost.amortized{aws_cost_type:SavingsPlanCoveredUsage}.rollup(sum, daily)"
+          type: string
+      required:
+        - aggregator
+        - data_source
+        - name
+        - query
+      type: object
     CommitmentsSavingsScalarResponse:
       description: Response containing scalar savings metrics for cloud commitment programs.
       properties:
@@ -25864,6 +26001,8 @@ components:
     CreateConnectionRequestDataAttributes:
       description: Attributes defining the data source connection, including join configuration and custom fields.
       properties:
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields to import from the data source.
           items:
@@ -25882,6 +26021,10 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          maxLength: 255
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           example: ""
@@ -51076,13 +51219,15 @@ components:
       type: object
     FacetInfoRequestDataType:
       default: users_facet_info_request
-      description: Users facet info request resource type.
+      description: Facet info request resource type.
       enum:
         - users_facet_info_request
+        - accounts_facet_info_request
       example: users_facet_info_request
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO_REQUEST
+        - ACCOUNTS_FACET_INFO_REQUEST
     FacetInfoResponse:
       description: Response containing facet information for an attribute, including its distinct values and occurrence counts.
       example:
@@ -51140,11 +51285,15 @@ components:
       description: The numeric range of a facet attribute, representing the minimum and maximum observed values.
       properties:
         max:
-          description: The maximum observed value for the numeric facet attribute.
-          type: object
+          description: The maximum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
         min:
-          description: The minimum observed value for the numeric facet attribute.
-          type: object
+          description: The minimum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
       type: object
     FacetInfoResponseDataAttributesResultValuesItems:
       description: A single facet value with its occurrence count in the dataset.
@@ -51159,13 +51308,15 @@ components:
       type: object
     FacetInfoResponseDataType:
       default: users_facet_info
-      description: Users facet info resource type.
+      description: Facet info resource type.
       enum:
         - users_facet_info
+        - accounts_facet_info
       example: users_facet_info
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO
+        - ACCOUNTS_FACET_INFO
     FastlyAPIKey:
       description: The definition of the `FastlyAPIKey` object.
       properties:
@@ -78146,6 +78297,8 @@ components:
         created_by:
           description: Identifier of the user who created the connection.
           type: string
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields imported from the data source.
           items:
@@ -78161,6 +78314,9 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           type: string
@@ -78170,6 +78326,40 @@ components:
           type: string
         updated_by:
           description: Identifier of the user who last updated the connection.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetails:
+      description: Type-specific configuration of the connection. Only the field matching the connection type is set.
+      properties:
+        ref_table:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable"
+        snowflake:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake"
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable:
+      description: Configuration of a reference table connection.
+      properties:
+        table_id:
+          description: Identifier of the reference table.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake:
+      description: Configuration of a Snowflake connection.
+      properties:
+        account_id:
+          description: Identifier of the Snowflake account.
+          type: string
+        database_name:
+          description: Name of the Snowflake database.
+          type: string
+        schema:
+          description: Name of the Snowflake schema.
+          type: string
+        table_name:
+          description: Name of the Snowflake table.
           type: string
       type: object
     ListConnectionsResponseDataAttributesConnectionsItemsJoin:
@@ -85537,6 +85727,9 @@ components:
           type: array
         type:
           $ref: "#/components/schemas/NotificationChannelEmailConfigType"
+        verified:
+          description: Whether this email address has been verified.
+          type: boolean
       required:
         - type
         - address
@@ -85565,6 +85758,11 @@ components:
     NotificationChannelPhoneConfig:
       description: "Phone notification channel configuration"
       properties:
+        available_notification_types:
+          description: Notification methods currently available for this phone number. Omitted when no methods are available.
+          items:
+            $ref: "#/components/schemas/OnCallPhoneNotificationRuleMethod"
+          type: array
         formatted_number:
           description: "The formatted international version of Number (e.g. +33 7 1 23 45 67)."
           example: ""
@@ -110950,7 +111148,7 @@ components:
           type: array
       type: object
     RumMetricCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule to compute the RUM-based metric. It is set at creation and only `include_percentiles` can be updated afterward.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -110958,23 +111156,25 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
-            Only present when `aggregation_type` is `distribution`.
+            The path of the numeric RUM event attribute the metric aggregates on.
+            Only valid when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
       required:
         - aggregation_type
       type: object
     RumMetricComputeAggregationType:
-      description: The type of aggregation to use.
+      description: |-
+        The type of aggregation to use.
+        `count` counts the matching events. `distribution` aggregates the values found at `path`.
       enum: ["count", "distribution"]
       example: "distribution"
       type: string
       x-enum-varnames: ["COUNT", "DISTRIBUTION"]
     RumMetricComputeIncludePercentiles:
       description: |-
-        Toggle to include or exclude percentile aggregations for distribution metrics.
-        Only present when `aggregation_type` is `distribution`.
+        Toggle to include or exclude percentile aggregations (p50, p75, p90, p95, p99) for distribution metrics.
+        Required when `aggregation_type` is `distribution`, and must be omitted otherwise.
       example: true
       type: boolean
     RumMetricCreateAttributes:
@@ -110987,7 +111187,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. Each rule creates a tag on the generated metric. If omitted, the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
@@ -111020,18 +111220,22 @@ components:
         - data
       type: object
     RumMetricEventType:
-      description: The type of RUM events to filter on.
+      description: The type of RUM events the metric is generated from. It is set at creation and cannot be changed.
       enum: ["session", "view", "action", "error", "resource", "long_task", "vital"]
       example: "session"
       type: string
       x-enum-varnames: ["SESSION", "VIEW", "ACTION", "ERROR", "RESOURCE", "LONG_TASK", "VITAL"]
     RumMetricFilter:
-      description: The RUM-based metric filter. Events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. Events matching this filter are aggregated in this metric. The `event_type` filter is added automatically.
       properties:
         query:
           default: "*"
-          description: The search query - following the RUM search syntax.
-          example: "@service:web-ui:"
+          description: |-
+            The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/).
+            Do not include a `@type` filter, it is derived from `event_type`.
+            It must not contain invisible or control characters such as non-breaking or zero-width spaces.
+            When updating a metric, an empty query leaves the filter unchanged.
+          example: "@service:web-ui"
           type: string
       required:
         - query
@@ -111040,19 +111244,26 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute to group the metric by.
           example: "@browser.name"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: |-
+            Name of the tag that gets created on the metric. By default, `path` is used as the tag name.
+            It must be at most 200 characters long, start with a letter, and contain only lowercase letters, digits, underscores, hyphens, colons, periods, and slashes.
           example: "browser_name"
+          maxLength: 200
           type: string
       required:
         - path
       type: object
     RumMetricID:
-      description: The name of the RUM-based metric.
+      description: |-
+        The name of the RUM-based metric.
+        On creation, it must be 1 to 200 characters long, contain only ASCII letters, digits, underscores, and periods, start with a letter, and not start with `rum.measure` or `rum.investigate`.
+        It cannot be changed after creation.
       example: "rum.sessions.webui.count"
+      maxLength: 200
       type: string
     RumMetricResponse:
       description: The RUM-based metric object.
@@ -111070,7 +111281,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricResponseFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules the metric is grouped by. An empty array is returned if the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricResponseGroupBy"
           type: array
@@ -111078,7 +111289,7 @@ components:
           $ref: "#/components/schemas/RumMetricResponseUniqueness"
       type: object
     RumMetricResponseCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule of the RUM-based metric.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -111086,7 +111297,7 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
+            The path of the numeric RUM event attribute the metric aggregates on.
             Only present when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
@@ -111102,10 +111313,10 @@ components:
           $ref: "#/components/schemas/RumMetricType"
       type: object
     RumMetricResponseFilter:
-      description: The RUM-based metric filter. RUM events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. RUM events matching this filter are aggregated in this metric. Omitted if the metric only filters on the event type.
       properties:
         query:
-          description: The search query - following the RUM search syntax.
+          description: The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). It does not include the event type filter.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
       type: object
@@ -111113,30 +111324,32 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute the metric is grouped by.
           example: "@http.status_code"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: Name of the tag created on the metric. By default, `path` is used as the tag name.
           example: "status_code"
           type: string
       type: object
     RumMetricResponseUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `session` or `view`.
+      description: The rule to count updatable events. Only present if `event_type` is `session` or `view`, and absent on older metrics created before this setting existed.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
       type: object
     RumMetricType:
       default: rum_metrics
-      description: The type of the resource. The value should always be rum_metrics.
+      description: The type of the resource. The value must be `rum_metrics`.
       enum:
         - rum_metrics
       example: rum_metrics
       type: string
       x-enum-varnames: ["RUM_METRICS"]
     RumMetricUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `sessions` or `views`.
+      description: |-
+        The rule to count updatable events.
+        Required when `event_type` is `session` or `view`, and must be omitted for other event types. It cannot be changed after creation.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
@@ -111144,32 +111357,32 @@ components:
         - when
       type: object
     RumMetricUniquenessWhen:
-      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete.
+      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete. Sessions and views are updated over time, and each one is counted once.
       enum: ["match", "end"]
       example: "match"
       type: string
       x-enum-varnames: ["WHEN_MATCH", "WHEN_END"]
     RumMetricUpdateAttributes:
-      description: The RUM-based metric properties that will be updated.
+      description: The RUM-based metric properties to update. Omitted properties keep their current value.
       properties:
         compute:
           $ref: "#/components/schemas/RumMetricUpdateCompute"
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. When provided, replaces all the existing group by rules.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
       type: object
     RumMetricUpdateCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule properties that can be updated. Only valid for metrics whose `aggregation_type` is `distribution`.
       properties:
         include_percentiles:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
       type: object
     RumMetricUpdateData:
-      description: The new RUM-based metric properties.
+      description: The RUM-based metric properties to update. `id` is required by the API and must match the `metric_id` path parameter.
       properties:
         attributes:
           $ref: "#/components/schemas/RumMetricUpdateAttributes"
@@ -111182,7 +111395,7 @@ components:
         - attributes
       type: object
     RumMetricUpdateRequest:
-      description: The new RUM-based metric body.
+      description: The RUM-based metric update body.
       properties:
         data:
           $ref: "#/components/schemas/RumMetricUpdateData"
@@ -112986,275 +113199,6 @@ components:
       type: string
       x-enum-varnames:
         - VERSION_2_1
-    SalesforceIncidentsOrganizationResponseAttributes:
-      description: Attributes of a Salesforce organization connected to the Datadog Salesforce integration.
-      properties:
-        instance_url:
-          description: The Salesforce instance URL used to call this organization's APIs.
-          example: "https://acme.my.salesforce.com"
-          type: string
-        name:
-          description: Human-readable name of the Salesforce organization.
-          example: "Acme Production Org"
-          type: string
-        sfdc_org_id:
-          description: The Salesforce organization identifier (15- or 18-character Salesforce org ID).
-          example: "00D000000000000"
-          type: string
-        sfdc_org_type:
-          description: The Salesforce organization type (for example, `Production` or `Sandbox`).
-          example: "Production"
-          type: string
-      type: object
-    SalesforceIncidentsOrganizationResponseData:
-      description: Salesforce organization data from a response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsOrganizationResponseAttributes"
-        id:
-          description: The Datadog-assigned ID of the connected Salesforce organization.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsOrganizationType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsOrganizationType:
-      default: salesforce-incidents-org
-      description: Salesforce organization resource type.
-      enum:
-        - salesforce-incidents-org
-      example: salesforce-incidents-org
-      type: string
-      x-enum-varnames:
-        - SALESFORCE_INCIDENTS_ORG
-    SalesforceIncidentsOrganizationsResponse:
-      description: |-
-        Response containing a list of Salesforce organizations connected to the
-        Datadog Salesforce integration.
-      properties:
-        data:
-          description: An array of Salesforce organizations.
-          items:
-            $ref: "#/components/schemas/SalesforceIncidentsOrganizationResponseData"
-          type: array
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplateCreateAttributes:
-      description: Salesforce incident template attributes for a create request.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          maxLength: 2048
-          minLength: 1
-          type: string
-        name:
-          description: Human-readable name for this incident template. Must be unique within your organization.
-          example: "production-outage"
-          maxLength: 100
-          minLength: 1
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          maxLength: 255
-          minLength: 1
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-        - salesforce_org_id
-        - name
-        - subject
-        - description
-        - owner_id
-        - priority
-      type: object
-    SalesforceIncidentsTemplateCreateData:
-      description: Salesforce incident template data for a create request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateAttributes"
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateCreateRequest:
-      description: Create request for a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplatePriority:
-      description: Priority of the Salesforce incident created from this template.
-      enum:
-        - Critical
-        - High
-        - Moderate
-        - Low
-      example: "High"
-      type: string
-      x-enum-varnames:
-        - CRITICAL
-        - HIGH
-        - MODERATE
-        - LOW
-    SalesforceIncidentsTemplateResponse:
-      description: Response containing a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplateResponseAttributes:
-      description: Salesforce incident template attributes returned by the API.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          type: string
-        name:
-          description: Human-readable name for this incident template.
-          example: "production-outage"
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          type: string
-      type: object
-    SalesforceIncidentsTemplateResponseData:
-      description: Salesforce incident template data from a response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseAttributes"
-        id:
-          description: The ID of the Salesforce incident template.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateType:
-      default: salesforce-incidents-incident-template
-      description: Salesforce incident template resource type.
-      enum:
-        - salesforce-incidents-incident-template
-      example: salesforce-incidents-incident-template
-      type: string
-      x-enum-varnames:
-        - SALESFORCE_INCIDENTS_INCIDENT_TEMPLATE
-    SalesforceIncidentsTemplateUpdateAttributes:
-      description: Salesforce incident template attributes for an update request.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          maxLength: 2048
-          minLength: 1
-          type: string
-        name:
-          description: Human-readable name for this incident template.
-          example: "production-outage"
-          maxLength: 100
-          minLength: 1
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          maxLength: 255
-          minLength: 1
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          maxLength: 255
-          minLength: 1
-          type: string
-      type: object
-    SalesforceIncidentsTemplateUpdateData:
-      description: Salesforce incident template data for an update request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateAttributes"
-        id:
-          description: The ID of the Salesforce incident template being updated. Must match the path parameter.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateUpdateRequest:
-      description: Update request for a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplatesResponse:
-      description: Response containing a list of Salesforce incident templates.
-      properties:
-        data:
-          description: An array of Salesforce incident templates.
-          items:
-            $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseData"
-          type: array
-      required:
-        - data
-      type: object
     SampleLogGenerationBulkSubscriptionAttributes:
       description: The attributes for creating sample log generation subscriptions for multiple content packs.
       properties:
@@ -142592,6 +142536,10 @@ components:
           items:
             $ref: "#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems"
           type: array
+        name:
+          description: New display name for the connection.
+          maxLength: 255
+          type: string
       type: object
     UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
       description: Specification for updating an existing field in a connection, including which field to modify and the new values.
@@ -144261,7 +144209,7 @@ components:
       additionalProperties:
         example: jane@example.com
         type: string
-      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object must contain exactly one entry. Use `"*"` as the value for the default quota applied to entities without a specific quota, or omit the scope for an organization-wide quota. A specific value must identify an existing user handle in the caller's organization when `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's organization or in at least one targeted descendant organization; the quota is then applied only to the organizations where that handle exists, and the request fails only if the handle exists in none of them.
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. See the endpoint description for the supported scope keys, values, and validation rules.
       example:
         user_handle: jane@example.com
       maxProperties: 1
@@ -144336,7 +144284,7 @@ components:
       additionalProperties:
         example: jane@example.com
         type: string
-      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A value of `"*"` identifies the default quota applied to entities without a specific quota. This field is omitted for an organization-wide quota.
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A `user_handle` value of `"*"` identifies the default quota applied to users without a specific quota. This field is omitted for an organization-wide quota.
       example:
         user_handle: jane@example.com
       maxProperties: 1
@@ -163549,17 +163497,24 @@ paths:
               examples:
                 default:
                   value:
-                    commitments:
-                      - commitment_id: ri-0123456789abcdef0
-                        expiration_date: "2025-12-31T00:00:00Z"
-                        instance_type: m5.xlarge
-                        offering_class: standard
-                        operating_system: Linux
-                        purchase_option: All Upfront
-                        region: us-east-1
-                        start_date: "2023-01-01T00:00:00Z"
-                        term_length: 1
-                        utilization: 0.85
+                    data:
+                      attributes:
+                        commitments:
+                          - availability_zone: us-east-1a
+                            commitment_id: ri-0123456789abcdef0
+                            expiration_date: "2025-12-31T00:00:00Z"
+                            instance_type: m5.xlarge
+                            number_of_nfus: 4
+                            number_of_reservations: 1
+                            offering_class: standard
+                            operating_system: Linux
+                            purchase_option: All Upfront
+                            region: us-east-1
+                            start_date: "2024-12-31T00:00:00Z"
+                            term_length_months: 12
+                            utilization: 85.5
+                      id: commitments_list_response
+                      type: commitments_list_response
               schema:
                 $ref: "#/components/schemas/CommitmentsListResponse"
           description: OK
@@ -194430,261 +194385,6 @@ paths:
         operator: OR
         permissions:
           - manage_integrations
-  /api/v2/integration/salesforce-incidents/incident-templates:
-    get:
-      deprecated: true
-      description: Get all Salesforce incident templates configured for your organization.
-      operationId: GetIncidentTemplates
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          description: An incident was detected by Datadog monitors.
-                          name: production-outage
-                          owner_id: "005000000000000"
-                          priority: High
-                          salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                          subject: "Datadog Incident: Production Outage"
-                        id: 00000000-0000-0000-0000-000000000001
-                        type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplatesResponse"
-          description: OK
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get all Salesforce incident templates
-      tags:
-        - Salesforce Integration
-      x-menu-order: 3
-      "x-permission":
-        operator: OR
-        permissions:
-          - integrations_read
-    post:
-      deprecated: true
-      description: |-
-        Create a new Salesforce incident template for your organization. Template
-        names must be unique within an organization.
-      operationId: CreateIncidentTemplate
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: An incident was detected by Datadog monitors.
-                      name: production-outage
-                      owner_id: "005000000000000"
-                      priority: High
-                      salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                      subject: "Datadog Incident: Production Outage"
-                    type: salesforce-incidents-incident-template
-            schema:
-              $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateRequest"
-        description: Salesforce incident template payload.
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: An incident was detected by Datadog monitors.
-                        name: production-outage
-                        owner_id: "005000000000000"
-                        priority: High
-                        salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                        subject: "Datadog Incident: Production Outage"
-                      id: 00000000-0000-0000-0000-000000000002
-                      type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplateResponse"
-          description: CREATED
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-codegen-request-body-name: body
-      x-menu-order: 4
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-  /api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}:
-    delete:
-      deprecated: true
-      description: Delete a single Salesforce incident template from your organization.
-      operationId: DeleteIncidentTemplate
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsTemplateIDPathParameter"
-      responses:
-        "204":
-          description: OK
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-menu-order: 6
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-    patch:
-      deprecated: true
-      description: Update a single Salesforce incident template in your organization.
-      operationId: UpdateIncidentTemplate
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsTemplateIDPathParameter"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      name: production-outage-renamed
-                    id: 596da4af-0563-4097-90ff-07230c3f9db3
-                    type: salesforce-incidents-incident-template
-            schema:
-              $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateRequest"
-        description: Salesforce incident template payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: An incident was detected by Datadog monitors.
-                        name: production-outage-renamed
-                        owner_id: "005000000000000"
-                        priority: High
-                        salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                        subject: "Datadog Incident: Production Outage"
-                      id: 00000000-0000-0000-0000-000000000003
-                      type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplateResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-codegen-request-body-name: body
-      x-menu-order: 5
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-  /api/v2/integration/salesforce-incidents/organizations:
-    get:
-      deprecated: true
-      description: |-
-        Get all Salesforce organizations connected to your Datadog organization
-        through the Salesforce integration. Salesforce organizations are connected
-        through the OAuth setup flow in the Datadog Salesforce integration page.
-      operationId: GetSalesforceOrganizations
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          instance_url: "https://acme.my.salesforce.com"
-                          name: "Acme Production Org"
-                          sfdc_org_id: "00D000000000000"
-                          sfdc_org_type: "Production"
-                        id: 00000000-0000-0000-0000-000000000001
-                        type: salesforce-incidents-org
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsOrganizationsResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get all connected Salesforce organizations
-      tags:
-        - Salesforce Integration
-      x-menu-order: 1
-      "x-permission":
-        operator: OR
-        permissions:
-          - integrations_read
-  /api/v2/integration/salesforce-incidents/organizations/{salesforce_org_id}:
-    delete:
-      deprecated: true
-      description: |-
-        Disconnect a Salesforce organization from your Datadog organization.
-        This also deletes any incident templates referencing the organization.
-      operationId: DeleteSalesforceOrganization
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsOrganizationIDPathParameter"
-      responses:
-        "204":
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a connected Salesforce organization
-      tags:
-        - Salesforce Integration
-      x-menu-order: 2
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
   /api/v2/integration/servicenow/assignment_groups/{instance_id}:
     get:
       description: |-
@@ -225451,7 +225151,11 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/config/metrics:
     get:
-      description: Get the list of configured RUM-based metrics with their definitions.
+      description: |-
+        Get the list of all RUM-based metrics configured for your organization, with their definitions.
+        The list is not paginated.
+        Metrics whose stored definition cannot be converted to the RUM format are omitted from the list.
+        To retrieve a single metric, use `GetRumMetric`.
       operationId: ListRumMetrics
       responses:
         "200":
@@ -225494,13 +225198,33 @@ paths:
     post:
       description: |-
         Create a metric based on your organization's RUM data.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        The metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.
+        The `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.
+        `uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.
+        When `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.
+        Returns the created RUM-based metric when the request is successful.
+        The request returns a `409 Conflict` error if a metric with the same name already exists.
       operationId: CreateRumMetric
       requestBody:
         content:
           application/json:
             examples:
+              count_metric:
+                summary: Count of error events
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        aggregation_type: count
+                      event_type: error
+                      filter:
+                        query: "@view.name:/checkout"
+                      group_by:
+                        - path: "@error.source"
+                    id: rum.errors.checkout.count
+                    type: rum_metrics
               default:
+                summary: Distribution of session durations
                 value:
                   data:
                     attributes:
@@ -225563,7 +225287,9 @@ paths:
       x-menu-order: 2
   /api/v2/rum/config/metrics/{metric_id}:
     delete:
-      description: Delete a specific RUM-based metric from your organization.
+      description: |-
+        Delete a specific RUM-based metric from your organization.
+        Metric data that was already generated is not deleted. Deleting a metric cannot be undone.
       operationId: DeleteRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225581,7 +225307,9 @@ paths:
         - Rum Metrics
       x-menu-order: 5
     get:
-      description: Get a specific RUM-based metric from your organization.
+      description: |-
+        Get a specific RUM-based metric from your organization.
+        The `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.
       operationId: GetRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225628,7 +225356,11 @@ paths:
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        Only `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.
+        Omitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.
+        `data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.
+        The request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.
+        Returns the updated RUM-based metric when the request is successful.
       operationId: UpdateRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225647,6 +225379,15 @@ paths:
                       group_by:
                         - path: "@browser.name"
                           tag_name: browser_name
+                    id: rum.sessions.web.count
+                    type: rum_metrics
+              disable_percentiles:
+                summary: Stop generating percentile aggregations
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        include_percentiles: false
                     id: rum.sessions.web.count
                     type: rum_metrics
             schema:
@@ -258889,6 +258630,34 @@ paths:
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
+
+        ### Quota namespaces and scope keys
+
+        The `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace
+        supports its own scope keys, described below. Omit `scope` for the organization-wide quota.
+
+        #### `ai_credits` scope keys
+
+        Each item's `scope` contains exactly one of the following keys.
+
+        **`user_handle`**
+
+        - **Value:** The handle of a user, for example `jane@example.com`, or `"*"` for the default quota applied to
+          users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the
+          [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+        - **Validation:** A specific handle must identify an existing user in the caller's organization when
+          `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's
+          organization or in at least one targeted descendant organization. The quota is then applied only to the
+          organizations where the handle exists, and the item fails only if the handle exists in none of them.
+
+        **`role_uuid`**
+
+        - **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `"*"` is not accepted
+          because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the
+          [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).
+        - **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so
+          `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's
+          organization only.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -263255,12 +263024,6 @@ tags:
 
       Note: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information.
     name: SCIM
-  - description: |-
-      Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)
-      directly through the Datadog API.
-    externalDocs:
-      url: https://docs.datadoghq.com/api/latest/salesforce-integration
-    name: Salesforce Integration
   - description: |-
       API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
     name: Scorecards
