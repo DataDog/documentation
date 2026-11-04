@@ -103,130 +103,28 @@ Package names can vary with the installed IBM client. Grant access to the packag
 
 ### Step 3: Install the Agent and the `ibm_db` driver
 
-The Agent can run on the Db2 server or on a separate host with network access to each database server's direct address.
-
-{{< tabs >}}
-{{% tab "Linux host" %}}
+Install the Agent on the Db2 server or on a separate host with network access to each database server's direct address. A host-installed Agent can also monitor Db2 running in Docker or Kubernetes.
 
 1. [Install Datadog Agent][6] version 7.86 or later.
-2. Install the IBM driver with the Agent's embedded Python package installer:
+2. On Linux, install the IBM driver with the Agent's embedded Python package installer:
 
    ```shell
    sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
    ```
 
    For compiler and library requirements, see [Dependencies][7]. For restricted networks, see [Installing the `ibm_db` client library offline][8].
-3. Add the configuration in Step 4 to `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`.
 
-[6]: /agent/
-[7]: /integrations/ibm-db2/#dependencies
-[8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
+   For Windows, follow the IBM Db2 integration's [Windows driver installation instructions][13].
 
-{{% /tab %}}
-{{% tab "Docker" %}}
+#### Optional: Run the Agent in a container
 
-Build a custom Agent image that includes the driver. Save this as `Dockerfile`:
+For a containerized Agent, install the `ibm_db` driver in the Agent container's Python environment. Provide the dependency whenever the container is recreated.
 
-```dockerfile
-FROM registry.datadoghq.com/agent:7.86.0
-RUN /opt/datadog-agent/embedded/bin/pip install --no-cache-dir --no-deps ibm_db==3.2.6
-```
-
-Build the image:
-
-```shell
-docker build -t datadog-agent-db2:7.86.0 .
-```
-
-Run the custom image with an [Autodiscovery label][9] for the `ibm_db2` check. Replace the placeholders with your Datadog site, API key, and database settings:
-
-```shell
-docker run -d --name datadog-agent \
-  -e DD_API_KEY="<DATADOG_API_KEY>" \
-  -e DD_SITE="<DATADOG_SITE>" \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -l com.datadoghq.ad.checks='{
-    "ibm_db2": {
-      "init_config": {},
-      "instances": [{
-        "dbm": true,
-        "host": "<DB2_SERVER>",
-        "port": 50000,
-        "db": "<DB>",
-        "username": "datadog",
-        "password": "ENC[datadog_user_database_password]",
-        "service": "<SERVICE>",
-        "database_identifier": {"template": "$host:$port"},
-        "tags": ["env:<ENV>"]
-      }]
-    }
-  }' \
-  datadog-agent-db2:7.86.0
-```
-
-The Agent needs read permission on the Docker socket to discover labels. Configure the [secret backend][10] in the Agent container to resolve the `ENC[]` password. Apply the driver reroute settings in Step 4 to this container.
-
-[9]: /containers/docker/integrations/?tab=dockerlabel
-[10]: /agent/configuration/secrets-management/
-
-{{% /tab %}}
-{{% tab "Kubernetes" %}}
-
-Build the custom image shown in the Docker tab and make it available in your container registry. Use this image for every Agent that executes the `ibm_db2` check, including dedicated cluster check runners.
-
-For a Helm deployment, set `agents.image.repository` and `agents.image.tag` to the custom image repository and tag. If you use dedicated cluster check runners, also set `clusterChecksRunner.image.repository` and `clusterChecksRunner.image.tag`. For example, add these overrides to your Helm values:
-
-```yaml
-agents:
-  image:
-    repository: <REGISTRY>/datadog-agent-db2
-    tag: "7.86.0"
-clusterChecksRunner:
-  image:
-    repository: <REGISTRY>/datadog-agent-db2
-    tag: "7.86.0"
-```
-
-For a database outside Kubernetes, [enable cluster checks][11] and mount the configuration from Step 4 at `/conf.d/ibm_db2.yaml` in the Cluster Agent container. Add `cluster_check: true` at the top level of that file. The Cluster Agent dispatches the check to an Agent or a cluster check runner.
-
-For Db2 running in a Pod, use [Autodiscovery annotations][12] on the Db2 container instead. Replace `<DB2_CONTAINER_NAME>` with the container name, and add one instance per database:
-
-```yaml
-metadata:
-  annotations:
-    ad.datadoghq.com/<DB2_CONTAINER_NAME>.checks: |
-      {
-        "ibm_db2": {
-          "init_config": {},
-          "instances": [{
-            "dbm": true,
-            "host": "%%host%%",
-            "port": 50000,
-            "db": "<DB>",
-            "username": "datadog",
-            "password": "ENC[datadog_user_database_password]",
-            "service": "<SERVICE>",
-            "database_identifier": {"template": "$host:$port"},
-            "tags": ["env:<ENV>"]
-          }]
-        }
-      }
-```
-
-Configure the [secret backend][10] on the Agent that executes the check, and apply the driver reroute settings in Step 4 to that Agent's container. Use either a cluster check or Pod annotations for a database, so that only one Agent collects it.
-
-[10]: /agent/configuration/secrets-management/
-[11]: /agent/cluster_agent/clusterchecks/
-[12]: /containers/kubernetes/integrations/?tab=annotations
-
-{{% /tab %}}
-{{< /tabs >}}
-
-For a Windows host, install Agent 7.86 or later and follow the IBM Db2 integration's [Windows driver installation instructions][13].
+For check configuration, see [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster checks][11]. Use the `ibm_db2` check name and the instance settings in Step 4. Configure the [secret backend][10] and driver reroute settings on the Agent that executes the check. Configure only one collector per database per server.
 
 ### Step 4: Configure the Agent
 
-For a host installation, save this configuration in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. In containers, use the equivalent instance settings in the label, annotation, or cluster check configuration from Step 3.
+On Linux, save this configuration in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. For other platforms, see the [Agent configuration directory][20]. For a containerized Agent, apply the instance settings using the configuration method selected in Step 3.
 
 Configure one check instance per database per server. This example monitors the same database name on two servers with distinct, fixed addresses:
 
@@ -329,6 +227,13 @@ For all integration options, see the [sample configuration][19].
 [3]: https://www.ibm.com/docs/en/db2/11.5.x?topic=parameters-mon-act-metrics-monitoring-activity-metrics
 [4]: https://www.ibm.com/docs/en/db2/11.5.x?topic=parameters-mon-req-metrics-monitoring-request-metrics
 [5]: /integrations/ibm-db2/#database-permissions
+[6]: /agent/
+[7]: /integrations/ibm-db2/#dependencies
+[8]: /integrations/ibm-db2/#installing-ibm_db-client-library-offline
+[9]: /containers/docker/integrations/
+[10]: /agent/configuration/secrets-management/
+[11]: /containers/cluster_agent/clusterchecks/
+[12]: /containers/kubernetes/integrations/
 [13]: /integrations/ibm-db2/#windows
 [14]: /integrations/ibm-db2/#connect-to-a-fixed-server
 [15]: /integrations/ibm-db2/#disable-automatic-client-reroute
@@ -336,3 +241,4 @@ For all integration options, see the [sample configuration][19].
 [17]: /agent/configuration/agent-commands/#restart-the-agent
 [18]: /database_monitoring/guide/database_identifier/
 [19]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
+[20]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
