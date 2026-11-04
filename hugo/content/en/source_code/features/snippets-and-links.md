@@ -41,9 +41,9 @@ Code snippets and context links connect what you see in Datadog to the source co
 - **Context links** take you from a stack frame, flame graph, test run, or code finding to the file, Git blame, or commit in your repository.
 - **Code snippets** display the relevant lines of code inline in Datadog, so you can read the code without leaving the page.
 
-For example, in an Error Tracking issue, each stack frame shows a code snippet of the line that raised the error. A {{< ui >}}View{{< /ui >}} button on the frame links to the file in your repository.
+For example, in Error Tracking, you can preview code snippets in a stack trace or click {{< ui >}}View{{< /ui >}} on a frame to open the file in your repository.
 
-To use code snippets and context links, connect your Git repositories with a [source code management provider integration][10] and [tag your telemetry with Git information][11].
+To use code snippets and context links, connect your Git repositories with a [source code management provider integration][10]. Most products also need Git information attached to their data. For example, APM-based products use [service mapping][11], and RUM uses source maps uploaded with Git metadata.
 
 ## View code snippets and context links by product
 
@@ -137,7 +137,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
 
-Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+Source code integration is supported for the following RUM platforms when source maps or debug symbols are uploaded with Git metadata:
 
 - **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
 - **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
