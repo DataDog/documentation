@@ -23,7 +23,7 @@ Datadog has introduced new logic for generating operation names for OpenTelemetr
 
 The `enable_operation_and_resource_name_logic_v2` feature flag controls this new logic. It is enabled by default starting in the following versions:
 
-- **Datadog Distribution of OpenTelemetry (DDOT) Collector**: Datadog Agent v7.65+
+- **Collector in the Agent**: Datadog Agent v7.65+
 - **OpenTelemetry Collector**: OTel Collector v0.126.0+
 - **OTLP Ingest in the Agent**: Datadog Agent v7.66+
 
