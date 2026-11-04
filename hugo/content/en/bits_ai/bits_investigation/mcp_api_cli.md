@@ -3,7 +3,7 @@ title: MCP, API, CLI
 description: "Use Bits Investigation from AI assistants, applications, and the command line with MCP tools, the Bits AI API, and pup."
 ---
 
-Use Bits Investigation from AI assistants, applications, and the command line.
+Use Bits Investigation from AI assistants, applications, and the command line to search and read existing investigations, trigger new investigations, and steer running investigations with additional context.
 
 ## Requirements
 
@@ -11,20 +11,18 @@ Triggering and steering investigations requires the `Bits Investigations Write` 
 
 ## Datadog MCP Server
 
-The Datadog Model Context Protocol (MCP) Server's `investigator` toolset lets AI assistants trigger investigations for monitor alerts, incidents, or a natural-language description. The tools also support searching investigations, retrieving findings, and steering a running investigation with additional context.
+The Datadog Model Context Protocol (MCP) Server's `investigator` toolset includes read tools to search and read existing investigations and their findings. It also lets AI assistants trigger investigations for monitor alerts, incidents, or a natural-language description, and steer a running investigation with additional context.
 
 For available tools, required permissions, and example prompts, see [Investigations in the MCP tools reference][2].
 
-### Setup
+### Setup and testing
 
-Check whether Bits Investigation tools, such as `trigger_bits_ai_investigation`, are available in your AI assistant. If they aren't available, follow [Set Up the Datadog MCP Server][3]. The `investigator` toolset is included in `toolsets=all`.
-
-### Testing
-
-To try an investigation, enter the following prompt in your AI assistant:
+Enter the following prompt in your AI assistant to check tool availability and try an investigation. For setup details, see [Set Up the Datadog MCP Server][3].
 
 {{< code-block lang="text" wrap="true" >}}
-Help me find a monitor that is currently alerting and trigger a Bits investigation to figure out what's wrong.
+Check whether Bits Investigation tools, such as trigger_bits_ai_investigation, are available. If they aren't available, help me set them up by following https://docs.datadoghq.com/mcp_server/setup/. The investigator toolset is included in toolsets=all.
+
+Once the tools are available, help me find a monitor that is currently alerting and trigger a Bits investigation to figure out what's wrong.
 {{< /code-block >}}
 
 ## Bits AI API
