@@ -29,13 +29,13 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 
 ## How the SDK decides an exposure
 
-An evaluation is an exposure when it succeeds and selects an allocation that logs exposures, such as an experiment or a holdout. A failed evaluation is not an exposure. This includes an evaluation that a later hook fails.
+An evaluation is an exposure when it succeeds and selects an allocation that logs exposures, such as an experiment or a holdout. A failed evaluation is not an exposure, including an evaluation that a later hook marks as failed.
 
 The SDK deduplicates exposures for each flag and subject. It records an exposure again only when the subject's allocation, variant, or split changes. A repeated evaluation with the same result is a _cache hit_.
 
 ## Record exposures with ExposureHook
 
-Create an `ExposureHook` with a callback and register it with OpenFeature. The callback runs for every completed evaluation, including errors, evaluations that are not exposures, and repeats. Use `shouldSend()` to keep only new exposures.
+Create an `ExposureHook` with a callback and register it with OpenFeature. The callback runs for every completed evaluation, including evaluations that error, evaluations that are not exposures, and repeats. Use `shouldSend()` to keep only new exposures.
 
 The callback runs on the evaluation thread, inside your request. Do not write to your data store or do other blocking I/O in the callback. Copy the values you need to a background queue, and write them to your data store from that queue. An error in the callback does not affect the flag evaluation.
 
@@ -98,7 +98,11 @@ client.AddHooks(ddopenfeature.NewExposureHook(func(e ddopenfeature.ExposureEvalu
 // A background goroutine reads from `exposures` and writes the records to your data store.
 {{< /code-block >}}
 
-Create the hook once and reuse it. The callback can run concurrently. Treat `e.Details.Value` as read-only.
+Create the hook once and reuse it.
+
+The callback can run concurrently, so make it safe to call from more than one goroutine.
+
+Do not change `e.Details.Value`. For object flags, the value can share data with the provider. Copy it before you change it or process it in the background.
 
 {{% /tab %}}
 {{% tab "Browser" %}}
@@ -210,7 +214,7 @@ const provider = new DatadogProvider({
 
 - **OpenFeature MultiProvider**:
   - Java: use OpenFeature SDK 1.23.0 or later. With an earlier SDK, a Datadog provider inside a `MultiProvider` sends no exposures to Datadog, and `shouldSend()` is `true` for every exposure.
-  - Go and browser: under a `MultiProvider`, the SDK records no exposures and does not call the `ExposureHook` callback. Flag evaluation is not affected. Register the Datadog provider directly with OpenFeature. In the browser, you can also wrap it in `DatadogDevtools`.
+  - Go and browser: under a `MultiProvider`, the SDK records no exposures and does not call the `ExposureHook` callback. Flag evaluation is not affected. Register the Datadog provider directly with OpenFeature. In the browser, you can also wrap it in `DatadogDevtools`, the provider wrapper for the [Datadog Browser SDK developer extension][8].
 - **Java agent version**: split features need `dd-java-agent` 1.68.0 or later. With an earlier agent, `getFeatures()` is empty.
 
 ## Further reading
@@ -224,3 +228,4 @@ const provider = new DatadogProvider({
 [5]: /experiments/holdouts/
 [6]: /experiments/concepts/exposure_sql/
 [7]: /experiments/holdouts/#analyze-holdouts-with-your-own-exposure-data
+[8]: /feature_flags/browser_developer_extension/
