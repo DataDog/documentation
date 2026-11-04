@@ -60,7 +60,16 @@ For detailed parameters, required binaries, and output formats for each tool, se
 
 ### Prerequisites
 
-The MCP server supports Static Application Security Testing (SAST), secrets detection, Software Composition Analysis (SCA), and Infrastructure-as-Code (IaC) scanning, all of which require a Datadog API key and application key. For instructions on creating them, see [API and Application Keys][9]. Library vulnerability lookup and saving a custom SAST rule also require both keys. SBOM generation and ephemeral SAST scans work without authentication.
+The following capabilities require a Datadog API key and application key:
+
+- Static Application Security Testing (SAST) scans
+- Secrets detection
+- Software Composition Analysis (SCA) scans
+- Infrastructure-as-Code (IaC) scans
+- Library vulnerability lookup
+- Saving custom SAST rules
+
+SBOM generation and ephemeral SAST scans work without authentication. For instructions on creating keys, see [API and Application Keys][9].
 
 ### Install the MCP server
 
