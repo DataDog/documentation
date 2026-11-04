@@ -26,7 +26,7 @@ Use this path when the Datadog Agent is already installed with Helm, including D
 
 The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the Agent enriches profiles with Datadog infrastructure metadata.
 
-**Prerequisite**: Datadog Agent Helm chart version `3.240.2` or later. See [Install the Datadog Agent][2].
+**Prerequisite**: Datadog Agent Helm chart version `3.240.2` or later. See [Install the Datadog Agent][1].
 
 **Deploy**:
 
@@ -51,7 +51,7 @@ The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the
              memory: "1Gi"
    ```
 
-   The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix with your preferred registry prefix. See [Changing your container registry][3].
+   The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix with your preferred registry prefix. See [Changing your container registry][2].
 
 2. Upgrade your existing Datadog Agent Helm release with the updated values. Adapt this command to your Helm or GitOps workflow, and include any existing values files you already use for the release:
 
@@ -84,7 +84,7 @@ This type applies to the Full-Host Profiler and its seccomp setup init container
 
 Use this only if your nodes support AppArmor and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
 
-To enable the provided profile, load [`apparmor-profile`][5] on each node, then set:
+To enable the provided profile, load [`apparmor-profile`][3] on each node, then set:
 
 ```yaml
 datadog:
@@ -94,6 +94,10 @@ datadog:
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
 
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[2]: /containers/guide/changing_container_registry/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
+
 {{% /tab %}}
 
 {{% tab "Datadog Operator" %}}
@@ -102,7 +106,7 @@ Use this path when the Datadog Agent is already installed with the Datadog Opera
 
 The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, and the Agent enriches profiles with Datadog infrastructure metadata.
 
-**Prerequisite**: Datadog Operator version `1.25.0` or later. See [Install the Datadog Agent][2].
+**Prerequisite**: Datadog Operator version `1.25.0` or later. See [Install the Datadog Agent][1].
 
 **Deploy**:
 
@@ -147,7 +151,7 @@ spec:
               memory: "1Gi"
 ```
 
-The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix in the image override with your preferred registry prefix. See [Changing your container registry][3].
+The preview image is available in Datadog's production container registries. If your cluster pulls images from another Datadog registry, replace the `registry.datadoghq.com` prefix in the image override with your preferred registry prefix. See [Changing your container registry][2].
 
 Apply the updated `DatadogAgent` custom resource through your usual workflow.
 
@@ -179,7 +183,7 @@ spec:
 
 Use this only if your nodes support AppArmor and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
 
-To enable the provided profile, load [`apparmor-profile`][5] on each node, then add `appArmorProfileName` to the `host-profiler` container override in your `DatadogAgent` custom resource:
+To enable the provided profile, load [`apparmor-profile`][3] on each node, then add `appArmorProfileName` to the `host-profiler` container override in your `DatadogAgent` custom resource:
 
 ```yaml
 spec:
@@ -192,6 +196,10 @@ spec:
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
 
+[1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[2]: /containers/guide/changing_container_registry/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
+
 {{% /tab %}}
 
 {{% tab "OpenTelemetry Helm chart" %}}
@@ -202,7 +210,7 @@ The Full-Host Profiler runs independently and sends profiles directly to Datadog
 
 **Prerequisites**:
 
-- [OpenTelemetry Collector Helm chart][6] version `0.152.1` or later.
+- [OpenTelemetry Collector Helm chart][1] version `0.152.1` or later.
 - A namespace for the Full-Host Profiler. You can reuse an existing namespace or create a dedicated one.
 - A Datadog API key available to the Collector as `DD_API_KEY`.
 
@@ -212,29 +220,29 @@ The example values read `DD_API_KEY` from a Kubernetes Secret named `datadog-sec
 
 **Adapt the Helm values files**: Before deploying, update the provided Helm values files for your environment. These files are passed to the OpenTelemetry Collector Helm chart with `--values`:
 
-1. In [`collector-values.yaml`][7]:
-   - Set `DD_SITE` if your Datadog site isn't `datadoghq.com`. See [Datadog sites][8].
+1. In [`collector-values.yaml`][2]:
+   - Set `DD_SITE` if your Datadog site isn't `datadoghq.com`. See [Datadog sites][3].
    - Adapt the `DD_API_KEY` secret reference if you don't use the example `datadog-secret` Kubernetes Secret.
-   - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][3].
-   - Review the remaining pod settings, including resource requests and limits. For all supported values, see the [OpenTelemetry Collector Helm chart values][9].
+   - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][4].
+   - Review the remaining pod settings, including resource requests and limits. For all supported values, see the [OpenTelemetry Collector Helm chart values][5].
    - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
-2. In [`collector-config-values.yaml`][10]:
+2. In [`collector-config-values.yaml`][6]:
    - Review the OpenTelemetry Collector pipelines and Datadog export configuration.
-   - Adapt it like any other [OpenTelemetry Collector configuration][11].
+   - Adapt it like any other [OpenTelemetry Collector configuration][7].
 3. Choose a network policy values file:
-   - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy-values.yaml`][12] by default.
-   - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy-values.yaml`][13] instead.
+   - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy-values.yaml`][8] by default.
+   - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy-values.yaml`][9] instead.
 
 If your cluster doesn't enforce NetworkPolicy resources, these values don't restrict egress. Use your cluster's supported network controls instead.
 
-**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, set `presets.resourceDetection.enabled: true` in [`collector-values.yaml`][7] and enable the detector you need:
+**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, set `presets.resourceDetection.enabled: true` in [`collector-values.yaml`][2] and enable the detector you need:
 
 - **Explicit**: Set `presets.resourceDetection.env.enabled: true`, and set the `OTEL_RESOURCE_ATTRIBUTES` environment variable under `extraEnvs` to `k8s.cluster.name=<CLUSTER_NAME>`.
 - **Automatic**: Enable the `eks`, `aks`, or `gcp` detector. The preset enables `k8s.cluster.name` for these detectors.
 
-Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][22] to enable one.
+Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][10] to enable one.
 
-**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][23] and [usage details][24].
+**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][11] and [usage details][12].
 
 To send them, set the Collector metrics level to `normal` in your Collector configuration:
 
@@ -265,7 +273,7 @@ After you apply the values, Helm rolls out an OpenTelemetry Collector DaemonSet 
 
 Use this only if your nodes support AppArmor and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
 
-To enable the provided profile, load [`apparmor-profile`][5] on each node, then update `securityContext` in [`collector-values.yaml`][7]:
+To enable the provided profile, load [`apparmor-profile`][13] on each node, then update `securityContext` in [`collector-values.yaml`][2]:
 
 ```yaml
 securityContext:
@@ -277,6 +285,20 @@ securityContext:
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
 
+[1]: https://opentelemetry.io/docs/platforms/kubernetes/helm/collector/
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/collector-values.yaml
+[3]: /getting_started/site/
+[4]: /containers/guide/changing_container_registry/
+[5]: https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/values.yaml
+[6]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/collector-config-values.yaml
+[7]: https://opentelemetry.io/docs/collector/configuration/
+[8]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/network-policy-values.yaml
+[9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/cilium-network-policy-values.yaml
+[10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md#supported-detectors
+[11]: /account_management/billing/#hosts
+[12]: /account_management/plan_and_usage/usage_details/
+[13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
+
 {{% /tab %}}
 
 {{% tab "OpenTelemetry Operator" %}}
@@ -287,42 +309,42 @@ The Full-Host Profiler runs independently and sends profiles directly to Datadog
 
 **Prerequisites**:
 
-- [OpenTelemetry Operator][14] installed.
+- [OpenTelemetry Operator][1] installed.
 - A namespace for the Full-Host Profiler. You can reuse an existing namespace or create a dedicated one.
 - A Datadog API key available to the Collector as `DD_API_KEY`.
 
-The example manifests read `DD_API_KEY` from a Kubernetes Secret named `datadog-secret`, using the key `api-key`, in the same namespace as the `OpenTelemetryCollector` custom resource. If you use another secret-management mechanism, adapt [`collector.yaml`][15] accordingly.
+The example manifests read `DD_API_KEY` from a Kubernetes Secret named `datadog-secret`, using the key `api-key`, in the same namespace as the `OpenTelemetryCollector` custom resource. If you use another secret-management mechanism, adapt [`collector.yaml`][2] accordingly.
 
 **Note**: Don't put the raw API key directly in Collector configuration, since it might be stored in the cluster.
 
 **Adapt the manifests**: Before deploying, update the provided manifests for your environment:
 
-1. In [`rbac.yaml`][16]:
+1. In [`rbac.yaml`][3]:
    - If you use a namespace other than `host-profiler`, update the `ClusterRoleBinding` subject namespace.
    - If you change the `OpenTelemetryCollector` name, update the service account name in the `ClusterRoleBinding` subject.
-2. In [`collector.yaml`][15]:
+2. In [`collector.yaml`][2]:
    - Set `metadata.namespace` to your chosen namespace.
-   - Set `DD_SITE` if your Datadog site isn't `datadoghq.com`. See [Datadog sites][8].
+   - Set `DD_SITE` if your Datadog site isn't `datadoghq.com`. See [Datadog sites][4].
    - Adapt the `DD_API_KEY` secret reference if you don't use the example `datadog-secret` Kubernetes Secret.
-   - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][3].
+   - To use another Datadog container registry, replace the `registry.datadoghq.com` prefix in the Full-Host Profiler image with your preferred registry prefix. See [Changing your container registry][5].
    - Review the resource requests and limits under `spec.resources`.
-   - Review the OpenTelemetry Collector configuration under `spec.config`. Adapt it like any other [OpenTelemetry Collector configuration][11].
+   - Review the OpenTelemetry Collector configuration under `spec.config`. Adapt it like any other [OpenTelemetry Collector configuration][6].
    - To tag profiles with the Kubernetes cluster name, see **Kubernetes cluster name** below.
 3. Choose a network policy manifest:
-   - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy.yaml`][17] by default.
-   - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy.yaml`][18] instead.
+   - If your cluster enforces Kubernetes NetworkPolicy, use [`network-policy.yaml`][7] by default.
+   - If your cluster uses Cilium and you want FQDN-scoped egress enforcement, use [`cilium-network-policy.yaml`][8] instead.
    - If you change the namespace or `OpenTelemetryCollector` name, update the policy metadata and pod selectors.
 
 If your cluster doesn't enforce NetworkPolicy resources, these manifests don't restrict egress. Use your cluster's supported network controls instead.
 
-**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, uncomment a detector and its configuration under `resourcedetection` in [`collector.yaml`][15]:
+**Kubernetes cluster name (optional)**: To tag profiles with the Kubernetes cluster name, uncomment a detector and its configuration under `resourcedetection` in [`collector.yaml`][2]:
 
 - **Explicit**: Uncomment the `env` detector, and uncomment the `OTEL_RESOURCE_ATTRIBUTES` environment variable in `spec.env`, set to `k8s.cluster.name=<CLUSTER_NAME>`.
 - **Automatic**: Uncomment the `eks`, `aks`, or `gcp` detector and its configuration block.
 
-Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][22] to enable one.
+Cloud detector requirements vary by provider. See the [OpenTelemetry resource detection documentation][9] to enable one.
 
-**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][23] and [usage details][24].
+**Collector health metrics (optional)**: Collector health metrics aren't sent to Datadog by default because they can incur additional charges. They are emitted by each host and might affect Infrastructure Monitoring billing, depending on your plan and whether the host is already billed by Datadog. See [host billing][10] and [usage details][11].
 
 To send them, set the Collector metrics level to `normal` in your Collector configuration:
 
@@ -343,7 +365,7 @@ kubectl apply -f collector.yaml
 kubectl apply -f network-policy.yaml
 ```
 
-If your cluster uses Cilium, apply [`cilium-network-policy.yaml`][18] instead of [`network-policy.yaml`][17].
+If your cluster uses Cilium, apply [`cilium-network-policy.yaml`][8] instead of [`network-policy.yaml`][7].
 
 The provided manifests configure the required capabilities and seccomp profile automatically. An init container installs the seccomp profile onto each node, so no manual seccomp setup is required.
 
@@ -353,7 +375,7 @@ After you apply the manifests, the OpenTelemetry Operator reconciles the custom 
 
 Use this only if your nodes support AppArmor and you already manage node-local AppArmor profiles, which must be loaded on each node before Kubernetes can apply them to a pod.
 
-To enable the provided profile, load [`apparmor-profile`][5] on each node, then update `securityContext` in [`collector.yaml`][15]:
+To enable the provided profile, load [`apparmor-profile`][12] on each node, then update `securityContext` in [`collector.yaml`][2]:
 
 ```yaml
 securityContext:
@@ -364,6 +386,19 @@ securityContext:
 ```
 
 The provided profile limits what the Full-Host Profiler container can run. It allows `objcopy`, which is used for debug symbol extraction.
+
+[1]: https://opentelemetry.io/docs/kubernetes/operator/
+[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/collector.yaml
+[3]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/rbac.yaml
+[4]: /getting_started/site/
+[5]: /containers/guide/changing_container_registry/
+[6]: https://opentelemetry.io/docs/collector/configuration/
+[7]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/network-policy.yaml
+[8]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/cilium-network-policy.yaml
+[9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md#supported-detectors
+[10]: /account_management/billing/#hosts
+[11]: /account_management/plan_and_usage/usage_details/
+[12]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
 
 {{% /tab %}}
 
@@ -394,7 +429,7 @@ Most bundled deployments don't need these settings. Use them to expose Full-Host
 
 | Name                                  | Values | Default          | Description |
 |:--------------------------------------|:-------|:-----------------|:------------|
-| `hostprofiler.health_metrics.enabled` | bool   | `false`          | Sends internal Full-Host Profiler health metrics to Datadog. These might count as [custom metrics][25]. Sent only when [`infrastructure_mode`][26] is `full` or `basic`. |
+| `hostprofiler.health_metrics.enabled` | bool   | `false`          | Sends internal Full-Host Profiler health metrics to Datadog. These might count as [custom metrics][2]. Sent only when [`infrastructure_mode`][3] is `full` or `basic`. |
 | `hostprofiler.health_metrics.target`  | string | `127.0.0.1:8889` | Address used for the Full-Host Profiler internal Prometheus metrics endpoint. Change this only if the default address conflicts with another service. |
 
 #### Diagnostics
@@ -402,7 +437,7 @@ Most bundled deployments don't need these settings. Use them to expose Full-Host
 | Name                                    | Values                        | Default                         | Description |
 |:----------------------------------------|:------------------------------|:--------------------------------|:------------|
 | `hostprofiler.hpflare.port`             | int                           | `7778`                          | Local port used to collect Full-Host Profiler flare diagnostics. Change this only if the default port conflicts with another service. |
-| `hostprofiler.debug.exporter.verbosity` | `basic`, `normal`, `detailed` | _(disabled)_                    | Enables the OpenTelemetry debug exporter for troubleshooting. See the [debug exporter verbosity documentation][19]. Use temporarily, since it can increase log volume. |
+| `hostprofiler.debug.exporter.verbosity` | `basic`, `normal`, `detailed` | _(disabled)_                    | Enables the OpenTelemetry debug exporter for troubleshooting. See the [debug exporter verbosity documentation][4]. Use temporarily, since it can increase log volume. |
 | `hostprofiler.debug.ebpf_logs`          | bool                          | `false`                         | Enables verbose eBPF profiler logging. |
 | `hostprofiler.log_file`                 | string                        | `${log_path}/host-profiler.log` | Path to the Full-Host Profiler log file. `${log_path}` resolves to the Agent's configured log directory. |
 
@@ -436,34 +471,15 @@ Leave self-profiling disabled unless Datadog Support asks you to enable it.
 
 ## After deployment
 
-Profiles appear on the [Datadog Profiler][20] page within a few minutes after deployment. If profiles don't appear, see [Troubleshooting][21].
+Profiles appear on the [Datadog Profiler][5] page within a few minutes after deployment. If profiles don't appear, see [Troubleshooting][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /profiler/enabling/full_host/#supported-environments
-[2]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[3]: /containers/guide/changing_container_registry/
-[5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/apparmor-profile
-[6]: https://opentelemetry.io/docs/platforms/kubernetes/helm/collector/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/collector-values.yaml
-[8]: /getting_started/site/
-[9]: https://github.com/open-telemetry/opentelemetry-helm-charts/blob/main/charts/opentelemetry-collector/values.yaml
-[10]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/collector-config-values.yaml
-[11]: https://opentelemetry.io/docs/collector/configuration/
-[12]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/network-policy-values.yaml
-[13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/helm/cilium-network-policy-values.yaml
-[14]: https://opentelemetry.io/docs/kubernetes/operator/
-[15]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/collector.yaml
-[16]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/rbac.yaml
-[17]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/network-policy.yaml
-[18]: https://github.com/DataDog/datadog-agent/blob/main/cmd/host-profiler/deploy/standalone/operator/cilium-network-policy.yaml
-[19]: https://pkg.go.dev/go.opentelemetry.io/collector/exporter/debugexporter#readme-verbosity-levels
-[20]: https://app.datadoghq.com/profiling
-[21]: /profiler/profiler_troubleshooting/full_host/
-[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md#supported-detectors
-[23]: /account_management/billing/#hosts
-[24]: /account_management/plan_and_usage/usage_details/
-[25]: /metrics/custom_metrics/
-[26]: /agent/configuration/infrastructure-modes/
+[2]: /metrics/custom_metrics/
+[3]: /agent/configuration/infrastructure-modes/
+[4]: https://pkg.go.dev/go.opentelemetry.io/collector/exporter/debugexporter#readme-verbosity-levels
+[5]: https://app.datadoghq.com/profiling
+[6]: /profiler/profiler_troubleshooting/full_host/

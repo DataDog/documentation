@@ -17,7 +17,7 @@ further_reading:
 Full-Host Profiler is in Preview.
 {{< /callout >}}
 
-The Full-Host Profiler collects CPU profiles across all processes on a host, regardless of language or runtime. It runs as a DaemonSet on your Kubernetes nodes and is built on the [OpenTelemetry eBPF Profiler][13].
+The Full-Host Profiler collects CPU profiles across all processes on a host, regardless of language or runtime. It runs as a DaemonSet on your Kubernetes nodes and is built on the [OpenTelemetry eBPF Profiler][1].
 
 ### Use cases
 
@@ -54,7 +54,9 @@ Choose a deployment path based on how your Kubernetes cluster is managed:
 
 If the Datadog Agent is already installed, use one of the Datadog Agent deployment paths so the Agent can enrich profiles with infrastructure metadata. Otherwise, use one of the OpenTelemetry paths.
 
-For step-by-step instructions for each path, see [Deploying the Full-Host Profiler][14].
+The OpenTelemetry paths deploy the Full-Host Profiler as its own OpenTelemetry Collector DaemonSet. They don't require a pre-existing Datadog Agent, DDOT Collector, or other Agent-side Datadog component on the host, and you can run the DaemonSet alongside other Collector distributions.
+
+For step-by-step instructions for each path, see [Deploying the Full-Host Profiler][2].
 
 ## Service naming
 
@@ -81,7 +83,7 @@ For compiled languages such as C, C++, Rust, and Go, debug symbols are required 
 
 The Full-Host Profiler uploads debug symbols to Datadog when they are available locally. If your production binaries are stripped, upload symbols from your build artifacts separately:
 
-1. Install the [datadog-ci][12] CLI.
+1. Install the [datadog-ci][4] CLI.
 2. Set your API key and site:
 
    ```shell
@@ -103,56 +105,57 @@ The Full-Host Profiler doesn't run as a privileged container. In Kubernetes, it 
 - **seccomp** restricts the syscalls the container can make beyond what those capabilities allow. The seccomp profile ships at `/etc/dd-host-profiler/seccomp.json` inside the image and is applied automatically in the Helm-based paths and the OpenTelemetry Operator path. In the Datadog Operator preview path, seccomp is optional and must be provisioned manually.
 - **AppArmor** is optional where available. The provided profile restricts which binaries the profiler can run: only `objcopy`, used for symbol extraction, is permitted.
 
-See [Deploying the Full-Host Profiler][14] for the settings that apply to each deployment path.
+See [Deploying the Full-Host Profiler][2] for the settings that apply to each deployment path.
 
-## FAQ
+## Relationship to OpenTelemetry
 
-**1. Can I deploy the Full-Host Profiler without the Datadog Agent or DDOT?**
+The Full-Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF profiling. It uses the [OpenTelemetry eBPF Profiler][1] and exports profile telemetry to Datadog through OTLP HTTP.
 
-Yes. The OpenTelemetry Helm chart and OpenTelemetry Operator deployment paths deploy the Full-Host Profiler as its own OpenTelemetry Collector DaemonSet. They don't require a pre-existing Datadog Agent, DDOT Collector, or other Agent-side Datadog component on the host.
+### Deployment with DDOT or as a standalone Collector
 
-You can run this DaemonSet alongside other Collector distributions. If the Datadog Agent is already installed, including deployments that also run DDOT, use one of the Datadog Agent deployment paths instead, so the Agent can enrich profiles with infrastructure metadata.
+The Full-Host Profiler is supported in two ways:
 
-**2. Why isn't host profiling included directly in DDOT?**
+- **With the Datadog Agent, including DDOT deployments**: The Full-Host Profiler runs as a sidecar in the Datadog Agent DaemonSet, deployed with the Datadog Helm chart or the Datadog Operator. It infers its configuration from the Agent, and the Agent enriches profiles with Datadog infrastructure metadata.
+- **Standalone**: The Full-Host Profiler runs as its own OpenTelemetry Collector DaemonSet, deployed with the OpenTelemetry Helm chart or the OpenTelemetry Operator, and sends profiles directly to Datadog. No Datadog Agent or DDOT Collector is required.
 
-Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the Full-Host Profiler in a profiling-focused distribution avoids granting that access to a larger general-purpose Collector distribution and reduces the amount of code running with host-level privileges.
+In both cases, the Full-Host Profiler runs in its own profiling-focused container rather than inside the DDOT Collector. Host-wide eBPF profiling requires elevated host access, such as `hostPID: true`, host kernel mounts, and eBPF-related Linux capabilities. Keeping the profiler separate avoids granting that access to a larger general-purpose Collector distribution, and reduces the amount of code running with host-level privileges.
 
 This follows the upstream OpenTelemetry approach: the eBPF profiler is packaged as a dedicated distribution rather than being included directly in `otelcol-contrib`.
 
-**3. How does the Full-Host Profiler relate to OpenTelemetry?**
+For instructions for each option, see [Deploying the Full-Host Profiler][2].
 
-The Full-Host Profiler is built as an OpenTelemetry Collector distribution for host-wide eBPF profiling. It uses the [OpenTelemetry eBPF Profiler][13] and exports profile telemetry to Datadog through OTLP HTTP.
+### Datadog contributions to OpenTelemetry profiling
 
 Datadog is a major contributor to the OpenTelemetry profiling ecosystem, including:
 
-- the OTLP Profiles signal, which reached alpha in April 2026 (see the [OpenTelemetry profiles alpha announcement][16] and [KubeCon talk][17])
-- the [OpenTelemetry eBPF Profiler][13]
-- OpenTelemetry specification work for [process][18] and [thread][19] context sharing, which supports trace-to-profile correlation
+- the OTLP Profiles signal, which reached alpha in April 2026 (see the [OpenTelemetry profiles alpha announcement][5] and [KubeCon talk][6])
+- the [OpenTelemetry eBPF Profiler][1]
+- OpenTelemetry specification work for [process][7] and [thread][8] context sharing, which supports trace-to-profile correlation
 
-**4. What does the Datadog Full-Host Profiler distribution add?**
+### Datadog distribution features
 
 The Datadog Full-Host Profiler distribution packages upstream OpenTelemetry profiling components with Datadog integration and tested defaults, including:
 
-- native debug symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, and Rust can be symbolized without a separate CI symbol-upload setup;
-- curated defaults and components for Datadog export and container tagging;
+- native debug symbol upload to Datadog when symbols are available locally, so native frames for languages such as C, C++, and Rust can be symbolized without a separate CI symbol-upload setup
+- curated defaults and components for Datadog export and container tagging
 - a version tested at scale on thousands of hosts for overhead and stability
 
 The long-term goal is to make these benefits available with upstream OpenTelemetry distributions directly. The preview distribution provides them out of the box today.
 
 ## What's next?
 
-After deploying the Full-Host Profiler, see [Getting Started with Profiler][6] to learn how to use Continuous Profiler to identify and fix performance problems.
+After deploying the Full-Host Profiler, see [Getting Started with Profiler][9] to learn how to use Continuous Profiler to identify and fix performance problems.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://github.com/open-telemetry/opentelemetry-ebpf-profiler
+[2]: /profiler/enabling/full_host_deployment/
 [3]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
-[12]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
-[13]: https://github.com/open-telemetry/opentelemetry-ebpf-profiler
-[14]: /profiler/enabling/full_host_deployment/
-[16]: https://opentelemetry.io/blog/2026/profiles-alpha/
-[17]: https://youtu.be/TKp2snmgvtQ?si=lhQ-n7lREvPCqF6Y
-[18]: https://github.com/open-telemetry/opentelemetry-specification/pull/4719
-[19]: https://github.com/open-telemetry/opentelemetry-specification/pull/4947
+[4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
+[5]: https://opentelemetry.io/blog/2026/profiles-alpha/
+[6]: https://youtu.be/TKp2snmgvtQ?si=lhQ-n7lREvPCqF6Y
+[7]: https://github.com/open-telemetry/opentelemetry-specification/pull/4719
+[8]: https://github.com/open-telemetry/opentelemetry-specification/pull/4947
+[9]: /getting_started/profiler/
