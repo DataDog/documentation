@@ -135,9 +135,19 @@ Triggering and steering investigations requires the `Bits Investigations Write` 
 
 The Datadog Model Context Protocol (MCP) Server's `investigator` toolset lets AI assistants trigger investigations for monitor alerts, incidents, or a natural-language description. The tools also support searching investigations, retrieving findings, and steering a running investigation with additional context.
 
-For available tools, required permissions, and example prompts, see [Investigations in the MCP tools reference][22]. To connect an AI assistant and enable the toolset, see [Set Up the Datadog MCP Server][23].
+For available tools, required permissions, and example prompts, see [Investigations in the MCP tools reference][22].
 
-The `investigator` toolset is included in `toolsets=all`.
+#### Setup
+
+Check whether Bits Investigation tools, such as `trigger_bits_ai_investigation`, are available in your AI assistant. If they aren't available, follow [Set Up the Datadog MCP Server][23]. The `investigator` toolset is included in `toolsets=all`.
+
+#### Testing
+
+To try an investigation, enter the following prompt in your AI assistant:
+
+{{< code-block lang="text" wrap="true" >}}
+Help me find a monitor that is currently alerting and trigger a Bits investigation to figure out what's wrong.
+{{< /code-block >}}
 
 ### Bits AI API
 
