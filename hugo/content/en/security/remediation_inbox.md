@@ -87,22 +87,25 @@ The status of a remediation follows the status of its [remediation work item](#t
 
 ### Remediation table
 
-The table shows one row per remediation:
+Each row is one remediation. Reading left to right, a row answers four questions:
 
-| Column | Description |
-|---|---|
-| Remediation | The fix to make, the number of CVEs it closes, and how many of them have a known exploit. |
-| Findings | The number of findings closed, by severity. |
-| Repository | The repository the fix applies to. Empty for container image remediations. |
-| Detected in | The number of files the fix touches. |
-| Owner | The number of code owners for those files. |
-| Ticketing | The assignee, the remediation work item or synced ticket, and the linked pull requests. |
+- **What is the fix?** The change to make, such as the package or image to update and the target version.
+- **What does it resolve?** The findings and vulnerabilities the fix closes, by severity, and whether any have a known exploit.
+- **What does it take, and who owns it?** Where the fix applies (repository and files) and the code owners or teams responsible for it.
+- **Where does it stand?** The assignee, the remediation work item or synced ticket, and any linked pull requests.
+
+Click a row to open its details in a side panel.
 
 ### Filter remediations
 
-Use the filter bar to scope the list to what your team owns. The default filters are **Team**, **Severity**, **Finding type**, **Service**, and **Repository**. Click **Edit Filters** to add **CVE**, **Package**, **Code owner**, or **Exploit available**.
+Use the filter bar to focus on the remediations your team can act on. Filters apply to the findings behind each remediation, so a remediation appears only if at least one of its findings matches. You can filter by:
 
-To see the remediations you are in charge of, filter on the **Assignee** of the remediation work item.
+- **Ownership**, such as team, code owner, repository, or service, to see the fixes your team owns.
+- **Risk**, such as severity or exploit availability, to focus on the most urgent fixes.
+- **Vulnerability**, such as CVE or package, to track a specific issue across your environment.
+- **Triage**, such as the assignee of the remediation work item, to see the remediations you are in charge of.
+
+Click **Edit Filters** to add or remove filters from the bar.
 
 ## View remediation details
 
