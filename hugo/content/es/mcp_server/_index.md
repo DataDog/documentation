@@ -102,7 +102,7 @@ Las operaciones de escritura requieren el permiso correspondiente, como `monitor
 
 El MCP Server incluye los siguientes límites de uso justo:
 - Límites de ráfaga de 50 solicitudes/10 segundos por llamada a herramienta
-- 50,000 llamadas a herramientas mensuales. 
+- 100,000 llamadas a herramientas mensuales. 
 
 Estos límites están **sujetos a cambios** y pueden ajustarse si su caso de uso requiere más. Comuníquese con el [soporte de Datadog][37] para realizar solicitudes o consultas. 
 

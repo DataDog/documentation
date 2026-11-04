@@ -1,8 +1,6 @@
 ---
 title: Sources
 description: Learn about the sources available for the Observability Pipelines Worker.
-aliases:
-  - /observability_pipelines/sources/prometheus
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
@@ -20,7 +18,9 @@ further_reading:
 
 Use Observability Pipelines' sources to receive logs or metrics from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
 
-Select a source in the left navigation menu to see more information about it.
+**Notes**:
+- You can add a total of 10 sources for a pipeline.
+- If you add multiple sources of the same type to a pipeline, you must use [Secrets Management][4]. For example, if you add two HTTP Client sources for two different HTTP clients, you must use secret identifiers for the HTTP client endpoint URL. You cannot use the default `SOURCE_HTTP_CLIENT_ENDPOINT_URL` to store two different HTTP client URIs.
 
 ## Sources
 
@@ -84,9 +84,11 @@ These are the available sources:
 
 - [Datadog Agent][1]
 - [OpenTelemetry][2]
+- [Prometheus][25]
 
 [1]: /observability_pipelines/sources/datadog_agent/
 [2]: /observability_pipelines/sources/opentelemetry/
+[25]: /observability_pipelines/sources/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -169,4 +171,5 @@ For the Worker host to trust the self-signed certificate:
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#use-tap-to-see-your-data
 [3]: https://letsencrypt.org/
+[4]: /observability_pipelines/configuration/secrets_management/
 

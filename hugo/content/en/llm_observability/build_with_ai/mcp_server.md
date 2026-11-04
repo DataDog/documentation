@@ -2,14 +2,14 @@
 title: Agent Observability MCP and Skills
 aliases:
 - /llm_observability/mcp_server/
-description: "Connect AI agents to your Agent Observability traces and experiments using the Datadog MCP Server."
+description: "Connect AI agents to your Agent Observability traces and offline experiments using the Datadog MCP Server."
 further_reading:
 - link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "/llm_observability/improve/experiments"
+- link: "/llm_observability/improve/offline_experiments"
   tag: "Documentation"
-  text: "Set up and use Agent Observability Experiments"
+  text: "Set up and use Agent Observability Offline Experiments"
 - link: "/llm_observability/investigate/insights/"
   tag: "Documentation"
   text: "Review Agent Observability Insights"
@@ -117,7 +117,7 @@ For security, scope the API key and application key to a [service account][7] wi
 
 ## Agent skills
 
-Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
+Agent skills are prebuilt instruction sets for AI coding agents that automate common Agent Observability workflows. The `agent-observability` skill set is available in the [Datadog agent-skills][8] repository. It provides six skills for classifying sessions, diagnosing failures, analyzing offline experiments, generating experiment code with the `ddtrace.llmobs` SDK, and bootstrapping evaluators against your live production data.
 
 ### Install
 
@@ -146,10 +146,10 @@ Restart Claude Code after running both commands for the skills to appear.
 |-------|-------------|-------------|
 | Session classify | `/agent-observability-session-classify` | Classifies whether user intent was satisfied in a session, trace, or batch |
 | Trace RCA | `/agent-observability-trace-rca` | Root cause analysis on failing production traces |
-| Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare LLM experiment results |
+| Experiment analyzer | `/agent-observability-experiment-analyzer` | Analyze and compare offline experiment results |
 | Experiment Python codegen | `/agent-observability-experiment-py-bootstrap` | Generate Python experiment code using the `ddtrace.llmobs` SDK. Introspects your app to wire a real `task_fn`, auto-discovers `.env` credentials, and accepts a free-form `--purpose` that directs evaluator selection |
 | Evaluator bootstrap | `/agent-observability-eval-bootstrap` | Generate evaluator code, publish online LLM-judge evaluators, or sample traces into a dataset for use in an experiment |
-| Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
+| Eval pipeline | `/agent-observability-eval-pipeline` | Six-phase guided pipeline from production traces through evaluators, datasets, offline experiments, and analysis. Stop early with `--stop-after`, resume mid-flow with `--start-at` |
 
 #### Session classification
 
@@ -207,7 +207,7 @@ The dataset can be a local `DatasetRecordRaw[]` JSON (inlined into the file), a 
 
 #### End-to-end eval pipeline
 
-`/agent-observability-eval-pipeline` walks from production traces through evaluators, datasets, experiments, and analysis in six narrated phases, with a user checkpoint between each:
+`/agent-observability-eval-pipeline` walks from production traces through evaluators, datasets, offline experiments, and analysis in six narrated phases, with a user checkpoint between each:
 
 1. **Classify ml_app traces** — sample and classify recent traces from your `ml_app`
 2. **Root cause analysis** — diagnose why failing traces are failing
@@ -246,12 +246,12 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Reviewing Insights**: Prioritize recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback.
-- **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
-- **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
+- **Evaluating offline experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
+- **Creating offline experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
-- **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
-- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in experiments.
+- **Setting up and exploring Patterns**: Estimate the cost of a [Patterns][12] run, create and update Patterns configurations, start on-demand runs, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
+- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in offline experiments.
 
 ## Available tools
 
@@ -299,7 +299,7 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 ### Experiment tools
 
 `create_llmobs_experiment`
-: Create a new Agent Observability experiment object in a project. Records the experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
+: Create a new Agent Observability offline experiment object in a project. Records the offline experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
 
 `get_llmobs_experiment_summary`
 : Get a high-level experiment summary with pre-computed statistics for all evaluation metrics. Start here before using other experiment tools.
@@ -342,10 +342,10 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 ### Project and dataset tools
 
 `list_llmobs_projects`
-: List all Agent Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+: List all Agent Observability projects for offline experiments in the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
 
 `get_llmobs_project`
-: Look up an Agent Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
+: Look up an Agent Observability project for offline experiments by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
 
 `list_llmobs_datasets`
 : List datasets within a project, with optional ID or name filter. Returns dataset metadata and pagination fields. Use this before `get_llmobs_dataset_records` or `add_llmobs_dataset_records` — those tools require a dataset UUID.
@@ -361,14 +361,28 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 
 ### Patterns tools
 
+<div class="alert alert-warning">A Patterns run calls the configuration's model through your LLM integration account, and the provider bills that account for the run. The Datadog MCP Server instructs agents to ask for confirmation before they start a run.</div>
+
+`estimate_llmobs_topic_discovery_cost`
+: Estimate the cost of a Patterns run for a model, given the expected mean input token count per record and the number of records to sample. Returns the estimated output tokens and the estimated cost. By default, the estimate is capped at a budget limit, and `is_budget_reached` is `true` when the uncapped cost reaches that limit. Cache and tool costs are not included. Use this to size a configuration's query and sampling before you create it.
+
+`create_llmobs_pattern_config`
+: Create a Patterns configuration. Define the spans to cluster with `evp_query`, `sampling_ratio`, `num_records`, and `time_frame_duration_ms`. Define the LLM integration that runs the clustering with `integration_provider`, `account_id`, and `model_name`. Optionally, customize clustering with `clustering_instructions`, `hierarchy_depth`, and up to 30 `seed_topics`, compute each topic's coverage of your datasets with `coverage`, and set a recurring `schedule` and `notification_recipients`. Creating a configuration does not start a run. Configuration names must be unique within the org.
+
+`update_llmobs_pattern_config`
+: Update an existing Patterns configuration. Only the fields you pass change. List fields (`coverage`, `seed_topics`, `notification_recipients`) are replaced as a whole. Pass `clear_schedule=true` to stop recurring runs. Updating a configuration does not start a run.
+
 `list_llmobs_pattern_configs`
-: List all Patterns configurations for the org. Returns each config's `id`, `name`, `evp_query`, sampling settings, and timestamps. Start here to find a `config_id`.
+: List all Patterns configurations for the org. Returns each complete config, including its `id`, `name`, `evp_query`, sampling, model, schedule, and notification settings. Start here to find a `config_id`.
 
 `get_llmobs_pattern_config`
-: Get the most-recently-modified Patterns configuration for the org.
+: Get a Patterns configuration by `config_id`. Omit `config_id` to get the most-recently-modified configuration for the org.
+
+`trigger_llmobs_pattern_run`
+: Start an on-demand Patterns run for an existing configuration. Returns the new run's `run_id`, `config_id`, and `status`. Runs take several minutes. Poll `get_llmobs_pattern_run_status` with the `config_id` until the returned `id` matches the saved `run_id` and its `status` is `completed`, then read its topics with `get_llmobs_patterns`, passing both `config_id` and `run_id`.
 
 `get_llmobs_pattern_run_status`
-: Get the status and per-activity progress of the most recent Patterns run for a config. Use this to check whether clustering is running, completed, or failed before reading topics.
+: Get the status and per-activity progress of the most recent Patterns run for a config. Returns the run's `id`, `status`, current step, and progress. Use this to check whether clustering is running, completed, or failed before reading topics. This tool takes only a `config_id`. To track a specific run, compare the returned `id` with the `run_id` returned by `trigger_llmobs_pattern_run`.
 
 `list_llmobs_pattern_runs`
 : List all completed Patterns runs for a config, newest first. Returns each run's `id`, `status`, timestamps, and the `config_snapshot` used.
@@ -381,6 +395,8 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 
 `get_llmobs_pattern_points`
 : Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
+
+Reading configurations, runs, and topics requires Agent Observability read permission. Creating or updating a configuration and starting a run require Agent Observability read and write permissions.
 
 ### Annotation queue tools
 
@@ -455,6 +471,14 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 4. **Read specific records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 records by ID.
 5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
 
+### Patterns setup
+
+1. **Size the run**: Sample a few spans that match your query with `search_llmobs_spans` to approximate the mean input token count per record, then use `estimate_llmobs_topic_discovery_cost` to estimate the cost for your model and sample size. If the estimate isn't available or `is_budget_reached` is `true`, start with a smaller sample.
+2. **Create a configuration**: Use `create_llmobs_pattern_config` with the span query, sampling settings, and LLM integration account. Optionally, add a recurring `schedule`.
+3. **Start a run**: After you confirm the cost, use `trigger_llmobs_pattern_run` with the new `config_id`. Save the returned `run_id`.
+4. **Wait for completion**: Poll `get_llmobs_pattern_run_status` with the `config_id` until the returned `id` matches the saved `run_id` and its `status` is `completed`.
+5. **Refine**: Read the topics with `get_llmobs_patterns`, passing the `config_id` and the saved `run_id`. To adjust clustering, use `update_llmobs_pattern_config` to change fields such as `clustering_instructions`, `seed_topics`, or `hierarchy_depth`, then start another run.
+
 ### Patterns analysis
 
 1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
@@ -479,6 +503,8 @@ After connecting, try prompts like:
 - Create a new experiment called "prompt-v2-test" in my project `my-chatbot-project` and return its experiment ID so I can attach evaluation metrics to it.
 - List the datasets in my `my-project` project and show me a sample of records from the dataset named `qa-golden-set`, including its schema.
 - I have a CSV of new test cases. Add them to the `qa-golden-set` dataset in `my-project` as a new version. Show me a preview first.
+- Set up Patterns for `@ml_app:customer-support-bot` over the past 7 days, sampling 1000 interactions. Estimate the cost first, then create the configuration and start a run after I approve. When the run completes, summarize the top-level topics and their share of traffic.
+- Rerun my `support-topics` Patterns configuration and compare the new topic distribution with the previous run.
 
 ## Combine with other Datadog tools
 
@@ -486,7 +512,7 @@ The `core` toolset included in the setup URL gives your AI agent access to addit
 
 ### Export analysis to Datadog Notebooks
 
-The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. You can export findings from agent chats into a collaborative, shareable notebook that lives in Datadog alongside your traces and experiments.
+The `core` toolset includes `create_datadog_notebook` and `edit_datadog_notebook`, which let your AI agent create [Datadog Notebooks][3] directly from analysis results. You can export findings from agent chats into a collaborative, shareable notebook that lives in Datadog alongside your traces and offline experiments.
 
 Try prompts like:
 
@@ -513,3 +539,4 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [9]: /llm_observability/build_with_ai/claude_code_skills
 [10]: /llm_observability/investigate/annotation_queues
 [11]: /llm_observability/investigate/insights/
+[12]: /llm_observability/investigate/patterns/

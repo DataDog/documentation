@@ -2,17 +2,17 @@
 title: Playground
 aliases:
 - /llm_observability/playground/
-description: Use the Agent Observability Playground to test prompts interactively against any connected model provider and run experiments with evaluators from a browser-based interface.
+description: Use the Agent Observability Playground to test prompts interactively against any connected model provider and run offline experiments with evaluators from a browser-based interface.
 further_reading:
-  - link: "/llm_observability/improve/experiments"
+  - link: "/llm_observability/improve/offline_experiments"
     tag: "Documentation"
-    text: "Agent Observability Experiments"
+    text: "Agent Observability Offline Experiments"
   - link: "/llm_observability/improve/datasets"
     tag: "Documentation"
     text: "Datasets"
   - link: "/llm_observability/guide/analyzing_experiment_results"
     tag: "Documentation"
-    text: "Analyzing Experiment Results"
+    text: "Analyzing Offline Experiment Results"
 ---
 
 The [Playground][1] is a browser-based interface for testing and evaluating LLM prompts. You can test a prompt with arbitrary input against any connected model provider, or load a dataset, attach evaluators, preview results, and save the configuration as a reproducible experiment—all without writing code.
@@ -56,7 +56,7 @@ Edit messages, variable values, or model settings, then click {{< ui >}}Run{{< /
 
 {{< img src="llm_observability/playground/playground-experiment-preview.png" alt="Agent Observability Playground in experiment mode with all steps completed and Save and Run as experiment active. The Experiment Preview table shows OUTPUT, EVAL_EXPECTED_OUTPUT, INPUT, and EXPECTEDOUTPUT columns with PASS and FAIL badges per row and a summary banner reading 6 of 20 records passed." style="width:100%;" >}}
 
-Use Experiments mode to test your prompt across a dataset, score results with evaluators, and save the configuration as a reproducible experiment.
+Use Offline Experiments mode to test your prompt across a dataset, score results with evaluators, and save the configuration as a reproducible experiment.
 
 ### Configure your prompt
 
@@ -133,7 +133,7 @@ In the dialog:
 1. Select a {{< ui >}}Project{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}}][2].
+The experiment runs across all records in the dataset—not only the 20-record preview sample. When complete, view results in [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Offline Experiments{{< /ui >}}][2].
 
 ## Further reading
 

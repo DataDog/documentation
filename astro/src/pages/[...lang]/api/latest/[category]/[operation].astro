@@ -1,0 +1,110 @@
+---
+export const prerender = true;
+import ApiLayout from "@layouts/ApiLayout.astro";
+import ApiEndpoint from "@components/ApiEndpoint/ApiEndpoint.astro";
+import Tabs from "@components/Tabs/Tabs.astro";
+import ApiPageHeader from "@components/ApiPageHeader/ApiPageHeader.astro";
+import {
+  getCategoriesView,
+  getCategoryStubsView,
+  getCategoryViewBySlug,
+  getOperationView,
+} from "@lib/api/viewsBuilder";
+import { renderMarkdown } from "@lib/api/markdownRenderer";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import {
+  apiBreadcrumbs,
+  hugoOperationContentPath,
+  operationMetaDescription,
+  variantLabel,
+} from "@lib/api/pageMeta";
+import type { GetStaticPaths, GetStaticPathsResult } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: GetStaticPathsResult = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoriesView(lang)) {
+      for (const op of cat.operations) {
+        paths.push({
+          params: {
+            lang: lang === "en" ? undefined : lang,
+            category: cat.slug,
+            operation: op.slug,
+          },
+        });
+      }
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const catSlug = Astro.params.category;
+const opSlug = Astro.params.operation;
+if (
+  !catSlug ||
+  typeof catSlug !== "string" ||
+  !opSlug ||
+  typeof opSlug !== "string"
+) {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoryStubsView(lang);
+const category = await getCategoryViewBySlug(catSlug, lang);
+if (!category) {
+  return new Response(null, { status: 404 });
+}
+
+const operation = await getOperationView(catSlug, opSlug, lang);
+if (!operation) {
+  return new Response(null, { status: 404 });
+}
+
+const tabsId = `api-endpoint-${operation.slug}`;
+const panelIds = operation.variants.map(
+  (v) => `${operation.slug}-${v.version}`,
+);
+const tabLabels = operation.variants.map(variantLabel);
+const tabDisabled = operation.variants.map(
+  (_, _i) => operation.variants.length === 1,
+);
+---
+
+<ApiLayout
+  title={`${operation.summary} - ${category.name} - Datadog API`}
+  description={operationMetaDescription(operation)}
+  categories={categories}
+  activeCategory={category}
+  currentOperationSlug={opSlug}
+  breadcrumbs={apiBreadcrumbs(lang, operation.summary)}
+  contentPath={hugoOperationContentPath(catSlug, opSlug)}
+>
+  <ApiPageHeader title={operation.summary} />
+  <Tabs
+    id={tabsId}
+    labels={tabLabels}
+    panelIds={panelIds}
+    variant="pills"
+    disabled={tabDisabled}
+  >
+    {
+      operation.variants.map((variant, i) => (
+        <div
+          id={`${operation.slug}-${variant.version}`}
+          class:list={["tabs__panel", i === 0 && "tabs__panel--active"]}
+          role="tabpanel"
+          hidden={i !== 0}
+        >
+          <ApiEndpoint data={JSON.stringify(variant)}>
+            <Fragment set:html={renderMarkdown(variant.description)} />
+          </ApiEndpoint>
+        </div>
+      ))
+    }
+  </Tabs>
+</ApiLayout>

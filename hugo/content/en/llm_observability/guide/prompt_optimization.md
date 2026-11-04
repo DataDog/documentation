@@ -6,9 +6,9 @@ aliases:
 description: Automatically improve LLM prompts through iterative refinement and AI-powered evaluation.
 private: true
 further_reading:
-  - link: /llm_observability/guide/experiments
+  - link: /llm_observability/guide/offline_experiments
     tag: "Documentation"
-    text: Set up and use Agent Observability Experiments
+    text: Set up and use Agent Observability Offline Experiments
   - link: /llm_observability/improve/datasets
     tag: "Documentation"
     text: Create and manage datasets

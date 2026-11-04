@@ -3,10 +3,10 @@ title: Advanced Experiment Runs
 aliases:
 - /llm_observability/improve/experiments/advanced_runs/
 - /llm_observability/experiments/advanced_runs/
-description: Run experiments multiple times to account for model variability on a subset of your dataset, and automate experiment execution in CI/CD pipelines. 
+description: Run offline experiments multiple times to account for model variability on a subset of your dataset, and automate experiment execution in CI/CD pipelines.
 ---
 
-This page discusses advanced topics in running experiments, including [multiple experiment runs](#multiple-runs) and [setting up experiments in CI/CD](#setting-up-your-experiment-in-cicd).
+This page discusses advanced topics in running offline experiments, including [multiple experiment runs](#multiple-runs) and [setting up offline experiments in CI/CD](#setting-up-your-experiment-in-cicd).
 
 ## Run an experiment on a subset of your dataset
 
@@ -29,7 +29,7 @@ experiment.run()
 
 ## Multiple runs
 
-You can run the same experiment multiple times to account for model non-determinism. You can use the [Agent Observability Python SDK][1] or [Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators. 
+You can run the same experiment multiple times to account for model non-determinism. You can use the [Agent Observability Python SDK][1] or [Offline Experiments API][2] to specify how many iterations to run; subsequently, each dataset record is executed that many times using the same tasks and evaluators.
 
 ### Multiple runs with the Python SDK
 <div class="alert alert-info">Requires Agent Observability Python SDK v4.1+.</div>
@@ -43,14 +43,14 @@ experiment = LLMObs.experiment(
     task=topic_relevance,
     evaluators=[exact_match, false_confidence],
     config={"model": "gpt-4o-mini", "temperature": 0.3, "personality": "helpful"},
-    runs=5    
+    runs=5
 )
 
 {{< /highlight >}}
 
 If you do not define `runs`, your experiment defaults to running 1 iteration.
 
-### Multiple runs with the Experiments API
+### Multiple runs with the Offline Experiments API
 
 Include a `run_count` field in your request body, as shown in the following example:
 {{< highlight json "hl_lines=9" >}}
@@ -77,7 +77,7 @@ If you do not define `run_count`, your experiment defaults to running 1 iteratio
 
 ### Analyzing multiple-run experiment results in Datadog
 
-Navigate to [LLM Experiments][3] in Datadog and select an experiment with multiple runs.
+Navigate to [Offline Experiments][3] in Datadog and select an experiment with multiple runs.
 
 At the {{< ui >}}Summary{{< /ui >}} level, evaluations and metrics are computed as:
 - For score-based evaluations, the average across record averages
@@ -108,9 +108,9 @@ For example:
 
 #### Comparing experiment runs
 
-Similarly to how you can compare single-run experiments, you can compare multiple-run experiments by selecting particular runs. For example, you can compare Run 1 of Experiment A to Run 4 of Experiment B to analyze variability between runs.
+Similarly to how you can compare single-run offline experiments, you can compare multiple-run offline experiments by selecting particular runs. For example, you can compare Run 1 of Experiment A to Run 4 of Experiment B to analyze variability between runs.
 
-{{< img src="llm_observability/evaluations/multi-run-compare.png" alt="The experiment comparison interface showing two multi-run experiments being compared. The top section displays a comparison table with aggregate metrics for each experiment including answer_correctness, random_evaluator, sentiment_evaluator, exact_match, false_confidence, and duration averages. Below, a detailed comparison view shows a dropdown menu expanded with Run 4 selected from a list of Runs 1 through 7, allowing comparison of specific runs from each experiment. The dataset records section displays input, expected output, and generated output columns with evaluation metrics for the selected runs side by side." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/multi-run-compare.png" alt="The experiment comparison interface showing two multi-run offline experiments being compared. The top section displays a comparison table with aggregate metrics for each experiment including answer_correctness, random_evaluator, sentiment_evaluator, exact_match, false_confidence, and duration averages. Below, a detailed comparison view shows a dropdown menu expanded with Run 4 selected from a list of Runs 1 through 7, allowing comparison of specific runs from each experiment. The dataset records section displays input, expected output, and generated output columns with evaluation metrics for the selected runs side by side." style="width:100%;" >}}
 
 ## Setting up your experiment in CI/CD
 You can run an experiment manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
@@ -237,13 +237,13 @@ jobs:
 ```
 
 ### Querying and comparing CI/CD runs via the API
-When creating experiments for a CI/CD pipeline, use the `name` field to include a shared logical pipeline name and a per-run suffix (for example, `my-pipeline-<run-id>`), and use the `metadata` field for commit, branch, or other pipeline context (for example, `"metadata": {"commit": "abc123", "branch": "feat/foo"}`).
+When creating offline experiments for a CI/CD pipeline, use the `name` field to include a shared logical pipeline name and a per-run suffix (for example, `my-pipeline-<run-id>`), and use the `metadata` field for commit, branch, or other pipeline context (for example, `"metadata": {"commit": "abc123", "branch": "feat/foo"}`).
 
 To retrieve and compare runs through the API, call `GET /api/v2/llm-obs/v1/experiments` with these filters:
 - `filter[experiment]=<pipeline-name>` returns all runs sharing the same logical pipeline name.
 - `filter[metadata]={"branch":"main"}` returns runs whose metadata contains those key-value pairs.
 - Combine both filters to narrow comparisons, for example: `?filter[experiment]=my-pipeline&filter[metadata]={"commit":"abc123"}`.
-- `filter[parent_experiment_id]=<uuid>` returns all experiments that were run against a given baseline experiment. Can be repeated for multiple baseline IDs.
+- `filter[parent_experiment_id]=<uuid>` returns all offline experiments that were run against a given baseline experiment. Can be repeated for multiple baseline IDs.
 
 Each matching experiment includes `aggregate_data` with pre-computed eval score distributions, token costs, and error rates, so you can compare runs without querying individual spans.
 
@@ -272,5 +272,5 @@ GET /api/v2/llm-obs/v1/experiments?filter[experiment]=my-pipeline&filter[metadat
 ```
 
 [1]: /llm_observability/instrument/sdk?tab=python
-[2]: /llm_observability/guide/experiments_api
+[2]: /llm_observability/guide/offline_experiments_api
 [3]: https://app.datadoghq.com/llm/experiments

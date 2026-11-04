@@ -185,7 +185,7 @@ Fill in the provided values:
 
 ## Optional prompt management
 
-After completing instrumentation and any requested context sharing, report the results. Then address optional hosted Prompt Management for Python applications:
+After completing instrumentation and any requested context sharing, report the results. Then address optional hosted Prompt Management for Python and Node.js applications:
 
 - If the user already supplied a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide][7]. Do not ask whether to enable Prompt Management again.
 - Otherwise, identify the application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to create managed versions of the selected prompts and update the application to retrieve them.

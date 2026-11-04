@@ -73,7 +73,7 @@ A multinational conglomerate with 8,000 Datadog users across 5 major divisions: 
 | **Identity** | SAML from Entra ID, with per-division Conditional Access policies. Defense division requires MFA and managed-device attestation. SCIM for team membership. |
 | **Data restrictions** | Defense org uses the **Restricted** setting for data not in Restricted Datasets. All data is hidden by default, and users are explicitly granted access to specific datasets. Healthcare org uses Data Access Control with the default **Unrestricted** setting and restricted datasets for PHI-tagged telemetry. Commercial divisions use Data Access Control with the default **Unrestricted** setting for service-based data segregation. |
 | **Asset protections** | Each org manages its own asset access policies. Production Monitors in the defense and healthcare orgs are restricted to Edit by the owning Team plus the division's security team. |
-| **Cross-org** | Parent org has Cross-Org Visibility enabled for executive dashboards showing system health across all divisions. Organization Groups (Preview) for centralizing policies across child orgs. |
+| **Cross-org** | Parent org has Cross-Org Visibility enabled for executive dashboards showing system health across all divisions. Organization Groups for centralizing policies across child orgs. |
 | **Keys and tokens** | All keys managed through Terraform. Defense org uses a hardened Terraform pipeline with approval gates for any key or role change. Service accounts used exclusively. No human-owned application keys. |
 
 ### Key takeaway

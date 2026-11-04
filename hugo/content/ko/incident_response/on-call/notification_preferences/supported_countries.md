@@ -8,18 +8,18 @@ further_reading:
 - link: /incident_response/on-call/
   tag: 설명서
   text: Datadog On-Call
-title: 지원되는 국가 목록
+title: 지원 국가
 ---
-Datadog On-Call은 푸시 알림, 이메일, SMS, 전화 등 다양한 연락 수단에 대한 알림 채널을 지원합니다. 자세한 내용은 [지원되는 연락 수단][1]을 참조하십시오.
+Datadog On-Call은 푸시 알림, 이메일, SMS, 전화 등 다양한 연락처 알림 채널을 지원합니다. 자세한 내용은 [지원되는 연락 방법][1]을 참조하십시오.
 
-SMS 및 전화 알림에 대한 지원은 현지 규정 및 제한 사항에 따라 국가별로 다릅니다. On-Call 프로필에 전화 연락 수단을 추가하기 전에 다음 표를 사용하여 해당 국가가 지원되는지 검사하십시오.
+SMS 및 전화 알림 지원 여부는 현지 규정 및 제한 사항에 따라 국가별로 다릅니다. On-Call 프로필에 전화 연락처를 추가하기 전에 다음 표를 사용하여 해당 국가가 지원되는지 검사하십시오.
 
 <div class="alert alert-info">
-해당 국가가 다음 표에 없는 경우 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하여 해당 국가에 대한 전화번호 지원을 요청하십시오.
+해당 국가가 다음 표에 나열되어 있지 않으면 <a href="https://docs.datadoghq.com/help/">Datadog Support</a>에 문의하여 해당 국가의 전화번호 지원을 요청하십시오.
 </div>
 
 <div class="alert alert-info">
-최상의 경험을 위해 Datadog <a href="https://docs.datadoghq.com/mobile">모바일 앱</a>을 다운로드하고 푸시 알림을 기본 호출 수단으로 사용하십시오. SMS 및 전화 알림도 사용할 수 있지만, 현지 통신사 제한 및 지역 규정으로 인해 안정성에 영향을 줄 수 있습니다.
+최상의 경험을 위해 Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a>을 다운로드하고 푸시 알림을 기본 호출 수신 방법으로 사용하십시오. SMS 및 전화 알림도 사용할 수 있지만, 현지 통신사의 제한 사항과 지역 규정이 알림의 안정성에 영향을 줄 수 있습니다.
 </div>
 
 | 국가 | 국가 코드 |
@@ -41,12 +41,12 @@ SMS 및 전화 알림에 대한 지원은 현지 규정 및 제한 사항에 따
 | Chile* | +56 |
 | China* | +86 |
 | Christmas Island | +61 |
-| 코코스 제도 | +61 |
+| 코코스(킬링) 제도 | +61 |
 | 콜롬비아 | +57 |
 | Costa Rica | +506 |
 | 크로아티아 | +385 |
 | 키프로스 | +357 |
-| 체코 공화국 | +420 |
+| 체코 | +420 |
 | 덴마크 | +45 |
 | Egypt** | +20 |
 | 에스토니아 | +372 |
@@ -110,7 +110,7 @@ SMS 및 전화 알림에 대한 지원은 현지 규정 및 제한 사항에 따
 | 대한민국 | +82 |
 | 스페인 | +34 |
 | Sri Lanka | +94 |
-| 스발바르 및 얀마옌 | +47 |
+| 스발바르 및 얀마옌 제도 | +47 |
 | 스웨덴 | +46 |
 | Switzerland | +41 |
 | 대만 | +886 |
@@ -123,13 +123,14 @@ SMS 및 전화 알림에 대한 지원은 현지 규정 및 제한 사항에 따
 | 영국 | +44 |
 | 미국 | +1 |
 | 우루과이* | +598 |
+| 베트남 | +84 |
 
-* 부분 지원: 해당 국가에서 알림을 수신하거나 응답하는 기능이 제한될 수 있습니다. Datadog은 해당 국가의 제공업체 파트너에게 알림 요청을 보내지만, 현지 통신사 제한이나 정부 규제로 인해 전송이 제한될 수 있습니다.
+\* 부분 지원: 해당 국가에서는 알림을 수신하거나 알림에 응답하는 기능이 제한될 수 있습니다. Datadog은 해당 국가의 파트너 제공업체에 알림 요청을 보내지만, 현지 통신사 제한이나 정부 규제로 인해 전송이 제한될 수 있습니다.
 
-** 요청 시 사용 가능: 해당 국가에 대한 SMS 및 전화 알림은 지원되지만 기본적으로 활성화되어 있지는 않습니다. 액세스를 요청하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하십시오.
+\*\* 요청 시 사용 가능: 해당 국가에 대한 SMS 및 전화 알림은 지원되지만 기본적으로 활성화되어 있지는 않습니다. 액세스를 요청하려면 <a href="https://docs.datadoghq.com/help/">Datadog Support</a>에 문의하십시오.
 
 <div class="alert alert-info">
-표에 나열된 모든 국가를 체험판 기간 동안 사용할 수 있는 것은 아닙니다. 체험판 기간 동안 사용할 수 없는 국가에 대해 SMS 또는 전화 알림을 테스트해야 하는 경우 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하십시오.
+표에 나열된 모든 국가를 체험판 기간 동안 사용할 수 있는 것은 아닙니다. 체험판 기간 동안 사용할 수 없는 국가에 대해 SMS 또는 전화 알림을 테스트해야 하는 경우 <a href="https://docs.datadoghq.com/help/">Datadog Support</a>에 문의하십시오.
 </div>
 
 [1]: /ko/incident_response/on-call/notification_preferences/#supported-contact-methods

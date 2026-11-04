@@ -66,6 +66,8 @@ The Fleet Automation install flow is the same across platforms.
 
 ### Manual installation
 
+In the following examples, replace `<DATADOG_SITE>` with your Datadog site: {{< region-param key=dd_site code="true" >}}.
+
 {{< tabs >}}
 {{% tab "Linux" %}}
 Set the following environment variables when you install or run the Agent. On the host, private action runner settings use the `DD_PRIVATE_ACTION_RUNNER_*` prefix:
@@ -73,7 +75,7 @@ Set the following environment variables when you install or run the Agent. On th
 ```bash
 DD_API_KEY=<API_KEY> \
 DD_APP_KEY=<APP_KEY> \
-DD_SITE="{{< region-param key=dd_site >}}" \
+DD_SITE="<DATADOG_SITE>" \
 DD_PRIVATE_ACTION_RUNNER_ENABLED=true \
 DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST=com.datadoghq.kubernetes.*,com.datadoghq.remoteaction.* \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -137,7 +139,7 @@ Helm settings use the `privateActionRunner.*` key in camelCase. Create a `values
 ```yaml
 datadog:
   apiKeyExistingSecret: datadog-secret
-  site: {{< region-param key=dd_site >}}
+  site: <DATADOG_SITE>
   clusterName: <YOUR_CLUSTER_NAME>
   remoteConfiguration:
     enabled: true
@@ -212,7 +214,7 @@ metadata:
 spec:
   global:
     clusterName: <YOUR_CLUSTER_NAME>
-    site: {{< region-param key=dd_site >}}
+    site: <DATADOG_SITE>
     credentials:
       apiSecret:
         secretName: datadog-secret

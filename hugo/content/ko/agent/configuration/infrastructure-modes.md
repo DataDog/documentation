@@ -62,7 +62,7 @@ Datadog Agent는 네 가지 인프라 모드를 지원합니다. 체크 표시({
   - [Windows Kernel Memory][10]
   - [Windows Performance Counters][11] (7.80+)
   - [Windows Registry][12] (7.80+)
-  - [Windows Services][13]
+  - [Windows Services][13] (7.78+)
   - [WMI Check][14] (7.80+)
   - [사용자 지정 검사][15] (접두사: `custom_`)
 

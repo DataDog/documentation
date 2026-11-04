@@ -62,9 +62,9 @@ For cases where you want to share a dashboard without exposing it to the open in
 
 Dashboards can be [embedded][4] in external applications or portals, or even another org's Datadog dashboards, using iframes. This is useful for integrating Datadog views into internal tools, customer portals, or ITSM platforms. Embedded dashboards inherit the same access controls as shared dashboards.
 
-## Organization Groups (Preview)
+## Organization Groups
 
-For enterprises with many Datadog organizations, [Organization Groups][5] (in Preview) provide a governance layer across your multi-org deployment. Organization Groups allow you to manage policies, configurations, and access controls centrally and cascade them to child orgs, reducing the need to configure each org individually.
+For enterprises with many Datadog organizations, [Organization Groups][5] provide a governance layer across your multi-org deployment. Organization Groups allow you to manage policies, configurations, and access controls centrally and cascade them to child orgs, reducing the need to configure each org individually.
 
 If your enterprise manages more than a handful of orgs and struggles with configuration consistency, contact your Datadog account team to learn more about Organization Groups.
 
