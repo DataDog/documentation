@@ -62,7 +62,13 @@ Each remediation lists the vulnerabilities (CVEs and advisories) it closes, the 
 
 ## How remediations are prioritized
 
-Remediations are ranked by the highest severity among their findings, then by the number of findings they close. A remediation that closes critical findings appears above one that closes only high findings, regardless of size.
+Remediations are ranked by the findings they close:
+
+1. Number of critical findings.
+1. Number of high findings, when the number of critical findings is equal.
+1. Total number of findings, when both counts are equal.
+
+For example, a remediation that closes five critical findings ranks above one that closes two critical and 50 high findings.
 
 ## Explore remediations
 
