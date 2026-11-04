@@ -36,9 +36,9 @@ Although a gate reports whether a regression is detected, it doesn't stop a depl
 
 ### Configuration sources
 
-A gate's configuration source is where the gate is defined: in the evaluation request itself, or in Datadog ahead of time.
+A gate's configuration source refers to how the gate is defined: in the evaluation request itself, or in Datadog ahead of time.
 
-- **JIT**: A Just-In-Time (JIT) Deployment Gate is defined in your deployment configuration, such as a JSON configuration file passed to the [`datadog-ci` CLI][5] or the payload of an API call, and sent with each evaluation request. There is no setup in Datadog.
+- **JIT**: A Just-In-Time (JIT) Deployment Gate is defined in your deployment configuration, such as a JSON configuration file passed to the [`datadog-ci` CLI][5] or the payload of an API call. The configuration is sent with each evaluation request. There is no setup in Datadog.
 - **Preconfigured**: A preconfigured Deployment Gate is created ahead of time in Datadog, then referenced in an evaluation request.
 
 |  | JIT | Preconfigured |
