@@ -129,7 +129,7 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 
 <div class="alert alert-info"><code>datadog-security-cli</code> is not available on Windows, so SCA scans are not supported there. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
 
-Ephemeral SAST scans and custom rule saves require `datadog-static-analyzer` version 0.9.10 or later.
+Ephemeral SAST scans and saving custom SAST rules require `datadog-static-analyzer` version 0.9.10 or later.
 
 ### Configure your client
 
