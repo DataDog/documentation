@@ -229,7 +229,7 @@ To install from the AWS Install Agents page:
 1. Select the workload you want to instrument: **EC2 Instances** or **Lambda Functions**.
 1. Write a query describing the resources to cover, select specific resources from the list, or add all eligible resources. For Lambda, you can narrow the list by region, runtime, and memory size.
 1. Review the preview of matching resources. Resources Datadog can't instrument appear as ineligible, with the reason.
-1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and stay fixed until you edit the rule.
+1. For Lambda, set the layer versions and turn APM and Logs on or off. These settings apply to every function the rule covers and remain until you edit the rule.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
