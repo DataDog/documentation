@@ -48,12 +48,15 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 - Protects searchers from excessive memory usage during wildcard searches, and makes filters on multi-value fields more efficient.
 - Reduces indexing memory retention and log-processing overhead.
-- Improves ingestion reliability by fixing an issue where recently acknowledged logs could be lost after an unexpected indexer restart.
+- Improves ingestion reliability by preventing the loss of recently acknowledged logs after an unexpected indexer restart.
 
 #### Helm chart changes
 
-- **Breaking**: Defaults `indexer.podManagementPolicy` to `Parallel`, so indexers start concurrently during scale-out instead of one at a time. Kubernetes does not allow changing this field on an existing StatefulSet. Before upgrading, either set `indexer.podManagementPolicy: OrderedReady` to keep the current policy, or migrate the indexer StatefulSet by following [Upgrading indexers to `Parallel`](https://github.com/DataDog/helm-charts/tree/main/charts/cloudprem#upgrading-indexers-to-parallel).
-- Enables gossip message compression by default with `config.gossip_protocol_version: 1`. If any node runs a version older than v0.1.33, keep `config.gossip_protocol_version: 0` until all nodes run v0.1.33 or later, then set it to `1`.
+<div class="alert alert-warning">
+<strong>Breaking</strong>: Defaults <code>indexer.podManagementPolicy</code> to <code>Parallel</code>, so indexers start concurrently during scale-out instead of one at a time. Kubernetes does not allow changing this field on an existing StatefulSet. Before upgrading, either set <code>indexer.podManagementPolicy: OrderedReady</code> to keep the current policy, or migrate the indexer StatefulSet by following <a href="https://github.com/DataDog/helm-charts/tree/main/charts/cloudprem#upgrading-indexers-to-parallel">Upgrading indexers to <code>Parallel</code></a>.
+</div>
+
+- Enables gossip message compression by default with `config.gossip_protocol_version: 1`. If any node runs a binary version older than v0.1.33, keep `config.gossip_protocol_version: 0` until all nodes run v0.1.33 or later. Then, set it to `1`.
 
 ### v0.1.35 — 2026-10-20
 
