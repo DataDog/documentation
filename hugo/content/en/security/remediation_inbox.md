@@ -44,8 +44,12 @@ The Remediation Inbox answers one question: **what are the most impactful fixes 
 - Findings from at least one supported product:
   - [Software Composition Analysis][3] (SCA) library vulnerabilities
   - [Cloud Security Vulnerabilities][4] host and container image vulnerabilities
-- Permission to read security findings or vulnerabilities, to view remediations.
-- The `cases_write` permission, to create work items, assign owners, and link pull requests.
+- The following [permissions][13]:
+
+  | Action | Required permissions |
+  |---|---|
+  | View remediations | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_read` |
+  | Create work items, assign owners, link pull requests, and attach Bits Code fixes | `security_monitoring_findings_read` or `appsec_vm_read`, and `cases_write` |
 
 To enable optional capabilities, such as AI-generated fixes and third-party ticketing, see [Enable remediation capabilities](#enable-remediation-capabilities).
 
@@ -158,7 +162,7 @@ Findings that belong to a remediation work item show the linked work item in the
 
 | Capability | What it unlocks | How to enable |
 |---|---|---|
-| Remediation work items | Assign owners, create work items, and link pull requests. | Grant users the `cases_write` permission. See [Work Management][2]. |
+| Remediation work items | Assign owners, create work items, and link pull requests. | Grant users the `cases_read` and `cases_write` permissions. See [Work Management][2]. |
 | Third-party tickets | Sync remediation work items to Jira, ServiceNow, or Linear. | See [Route remediation work items to your ticketing tool](#route-remediation-work-items-to-your-ticketing-tool). |
 | AI summary | The **Know before you remediate** summary. | Enable generative AI features for your organization. |
 | Fix with Bits Code | AI-generated pull requests from a remediation. | [Set up Bits Code][8] and connect your GitHub repositories. |
@@ -195,3 +199,4 @@ See [Third party tickets][11] in the Work Management documentation and [Ticketin
 [10]: /source_code/
 [11]: /incident_response/work_management/notifications_integrations/#third-party-tickets
 [12]: /security/ticketing_integrations/
+[13]: /account_management/rbac/permissions/
