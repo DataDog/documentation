@@ -31,7 +31,7 @@ Ruby Feature Flags SDK를 설정하기 전에 다음 사항을 확인하세요.
 
 - **Datadog Agent** 버전 7.55 이상, [Remote Configuration][1] 활성화됨
 - **Datadog [API 키][4]**가 Agent에 구성되어 있음
-- **Datadog Go SDK** `datadog` 버전 2.24.0 이상
+- **Datadog Ruby SDK** `datadog` 버전 2.24.0 이상
 - **Ruby 런타임** 버전 3.1 이상(전체 Datadog Feature Flags OpenFeature 통합을 사용하기 위함)
 - **OpenFeature Ruby SDK** `openfeature-sdk` 버전 0.5.1 이상(공급자 후크, 노출 로깅 및 플래그 평가 메트릭 지원을 위함)
 - **OpenTelemetry 메트릭 gem**([플래그 평가 메트릭][5]용): `opentelemetry-metrics-sdk` 버전 0.8.0 이상 및 `opentelemetry-exporter-otlp-metrics` 버전 0.4.0 이상
@@ -101,9 +101,9 @@ client = OpenFeature::SDK.build_client
 
 ## 평가 컨텍스트 설정 {#set-the-evaluation-context}
 
-플래그 타겟팅을 위해 사용자 또는 엔티티를 식별하는 평가 컨텍스트를 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 속성이 포함됩니다.
+플래그 타겟팅을 위해 사용자 또는 엔터티를 식별하는 평가 컨텍스트를 정의하세요. 평가 컨텍스트에는 반환할 플래그 변형을 결정하는 데 사용되는 속성이 포함됩니다.
 
-<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 부울과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
+<div class="alert alert-warning">Datadog Feature Flags는 평가 컨텍스트 속성이 문자열, 숫자, 불리언과 같이 중첩되지 않은 기본값이어야 합니다. 중첩된 객체나 배열은 전달하지 마세요. 지원되지 않으며 노출 데이터가 삭제될 수 있습니다.</div>
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
@@ -123,7 +123,7 @@ context = OpenFeature::SDK::EvaluationContext.new(
 
 각 플래그는 고유한 문자열 _키_로 식별됩니다. 플래그는 예상되는 유형과 일치하는 값을 반환하는 유형화된 메서드를 사용하여 평가됩니다. 각 플래그가 존재하지 않거나 평가할 수 없는 경우, SDK는 제공된 기본값을 반환합니다.
 
-### 부울 플래그 {#boolean-flags}
+### 불리언 플래그 {#boolean-flags}
 
 on/off 또는 true/false 조건을 나타내는 플래그에는 `fetch_boolean_value()`를 사용합니다.
 
@@ -187,7 +187,7 @@ batch_size = client.fetch_number_value(
 )
 ```
 
-### 객체 플래그 {#object-flags}
+### 개체 플래그 {#object-flags}
 
 구조화된 데이터에는 `fetch_object_value()`를 사용합니다. 이 메서드는 해시를 반환합니다. 객체 플래그는 여러 속성을 함께 제공해야 하는 Remote Configuration 시나리오에 유용합니다.
 
@@ -223,7 +223,7 @@ puts "Error Code: #{details.error_code}"
 puts "Error Message: #{details.error_message}"
 ```
 
-플래그 세부 정보는 평가 동작을 디버깅하고 사용자가 특정 값을 받은 이유를 이해하는 데 도움이 됩니다.
+Feature Flag 세부 정보는 평가 동작을 디버깅하고 사용자가 특정 값을 받은 이유를 이해하는 데 도움이 됩니다.
 
 ## 컨텍스트 없는 평가 {#evaluation-without-context}
 
@@ -286,13 +286,60 @@ end
 
 테스트 중에 플래그 상태를 변경하려면 공급자 인스턴스에서 `add_flag(flag_key:, value:)`를 호출하세요. Minitest에도 동일한 패턴이 적용됩니다. `around` 후크를 `setup`/`teardown` 메서드로 교체하세요.
 
+## JRuby에서 Java SDK 사용{#use-the-java-sdk-on-jruby}
+
+Ruby SDK는 JRuby에서 Feature Flags를 지원하지 않습니다. JRuby에서 Ruby SDK는 로그에 경고를 기록하며 Feature Flags를 활성화하지 않습니다. 대신 [Java SDK][6]를 사용하세요. JRuby는 Java 통합을 통해 Java SDK를 호출합니다.
+
+[Java SDK 호환성 요구 사항][7]에 나온 버전을 사용하세요.
+
+1. `dd-openfeature` JAR 파일, OpenFeature Java SDK JAR 파일 및 해당 종속성을 가져옵니다. 예를 들자면, Maven을 사용하여 파일과 종속성을 디렉터리에 복사할 수 있습니다.
+2. 애플리케이션에서 `require`로 JAR 파일을 로드합니다.
+3. 구성 소스에 대한 환경 변수를 설정합니다. [서버 SDK 구성 소스][8]를 참조하세요.
+4. `dd-java-agent`로 JRuby를 시작합니다. `-J` 옵션을 사용하여 `-javaagent` 옵션을 JVM에 전달합니다.
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+JAR 파일만으로는 플래그 전달을 활성화할 수 없습니다. Datadog 공급자는 `dd-java-agent`의 클래스를 사용합니다. JVM이 `dd-java-agent`를 로드하지 않으면 공급자가 초기화되지 않습니다. 그러면 플래그 평가 시 기본값이 반환됩니다.
+
+공급자 이벤트, 오류 처리 및 평가 방법에 대한 자세한 내용은 [Java SDK][6] 페이지를 참조하세요. JRuby는 동일한 클래스와 메서드를 사용합니다.
+
 ## 문제 해결 {#troubleshooting}
 
 ### Feature Flags가 항상 기본값을 반환합니다. {#feature-flags-always-return-default-values}
 
 Feature Flags가 예상치 못하게 항상 기본값을 반환하는 경우 다음 사항을 확인하세요.
 
+- 애플리케이션이 JRuby에서 실행되는 경우 Java SDK를 사용합니다. [JRuby에서 Java SDK 사용][9]을 참조하세요.
 - Datadog Agent 구성에서 Remote Configuration이 활성화되어 있는지 확인합니다.
+- 애플리케이션이 시작될 때 Datadog Agent를 사용할 수 있었는지 확인합니다. Agent를 사용할 수 있게 된 후에도 문제가 계속되면 애플리케이션을 다시 시작해야 합니다. [Agent 가용성][10]을 참조하세요.
 - 서비스와 환경이 구성되어 있는지 확인합니다(`DD_SERVICE` 및 `DD_ENV` 환경 변수 또는 Ruby의 `config.service` 및 `config.env`를 통해).
 - Ruby 애플리케이션의 Datadog 구성에 `config.remote.enabled = true` 및 `config.open_feature.enabled = true`가 설정되어 있는지 확인합니다.
 - `datadog` gem 버전이 OpenFeature 지원(2.24.0 이상)을 포함하는지 확인합니다.
@@ -325,3 +372,8 @@ end
 [3]: https://openfeature.dev/
 [4]: /ko/account_management/api-app-keys/#api-keys
 [5]: /ko/feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /ko/feature_flags/server/java/
+[7]: /ko/feature_flags/server/java/#compatibility-requirements
+[8]: /ko/feature_flags/concepts/configuration_sources/
+[9]: #use-the-java-sdk-on-jruby
+[10]: /ko/feature_flags/concepts/configuration_sources/#agent-availability
