@@ -54,7 +54,7 @@ To delete an automation rule:
 
 Changes you make to a datastore are evaluated by whether they match any of your configured automation rules. Each time a rule is evaluated, a log of that event is created. You can view these logs to help with troubleshooting. 
 
-In the screenshot below, audit logs were created for automation rules run when new entries were added, entries were changed, and entries were deleted. Each run generates three logs: one for the rule match, one for the workflow run starting, and one for the workflow run result.
+In the screenshot below, audit logs were created for automation rules run when new entries were added, entries were changed, and entries were deleted. Each run generates three logs: one for the rule match, one for the workflow run start, and one for the workflow run result.
 
 {{< img src="/actions/datastore/datastore-automation-audit-2.png" alt="An example of a datastore's audit logs" style="width:100%;" >}}
 
