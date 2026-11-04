@@ -17,7 +17,7 @@ further_reading:
 
 To send APM stats such as hits, errors, and duration, set up the [`span_metrics` connector][1]. Configure the connector before any sampling processors so that it computes metrics from all spans received by the Collector.
 
-If the SDK samples traces before export, see [trace metric extrapolation setup and minimum versions][3].
+For DDOT SDKs (Datadog SDKs in OpenTelemetry mode), see [trace metric extrapolation setup and minimum versions][3].
 
 ## Setup
 
@@ -38,5 +38,5 @@ For full working example files, see the [`opentelemetry-examples` repository][5]
 
 [1]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /tracing/metrics/metrics_namespace/
-[3]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation
+[3]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-ddot-sdks
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

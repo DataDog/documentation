@@ -61,13 +61,13 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 #### Considerations
 
-Head-based sampling reduces the spans available for APM metric computation. Use [trace metric extrapolation][27] to estimate total traffic from sampled traces.
+Head-based sampling reduces the spans available for APM metric computation. For DDOT SDKs, see [trace metric extrapolation][27].
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
-#### Trace metric extrapolation
+#### Trace metric extrapolation for DDOT SDKs
 
-Compatible receivers use sampling probability in exported spans' `tracestate` to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
+DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
 
 Use these minimum versions for automatic extrapolation:
 
@@ -79,7 +79,7 @@ Use these minimum versions for automatic extrapolation:
 
 To configure trace metrics from sampled spans:
 
-1. Use a [supported SDK][23] that records the sampling probability in exported spans' `tracestate`.
+1. Use a [supported DDOT SDK version][23].
 2. Preserve `tracestate` and place the metrics connector before any Collector sampling processors.
 
 Extrapolation is automatic when a valid `ot.th` threshold is present. For accurate counts, the recorded probability must match the spans actually exported.
@@ -98,7 +98,7 @@ A limitation of tail-based sampling is that all spans for a given trace must be 
 
 The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
 
-Configure the [`span_metrics` connector][20] before the sampling processor. If the SDK samples traces before export, follow the [trace metric extrapolation requirements][27].
+Configure the [`span_metrics` connector][20] before the sampling processor. For DDOT SDKs that sample traces before export, follow the [trace metric extrapolation requirements][27].
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -182,4 +182,4 @@ For more information, see [Unified Service Tagging][18].
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
 [25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0
-[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation
+[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-ddot-sdks
