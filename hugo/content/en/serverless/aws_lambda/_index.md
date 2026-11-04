@@ -58,13 +58,13 @@ Datadog support differs by AWS Lambda compute type:
 
 | Lambda type | What it runs | Datadog support |
 |---|---|---|
-| Lambda Event Functions | Code that runs in response to events or API calls. This is the original Lambda function type. | Serverless Monitoring: metrics, traces, and logs, plus the capabilities on this page. Some capabilities depend on the runtime. |
+| Lambda Event Functions | Code that runs in response to events or API calls. This is the original Lambda function type. | Serverless Monitoring: metrics, traces, and logs, plus the capabilities on this page. Check each capability's page for runtime support. |
 | Lambda Web Functions | Web applications and API backends that serve HTTP requests directly. | CloudWatch metrics, an out-of-the-box dashboard, and recommended monitors through the [AWS Lambda integration][2]. |
 | Lambda MicroVMs | Isolated compute environments for each user or job, with a lifespan of up to 8 hours. | CloudWatch logs through the [Datadog Forwarder][3], including automatic log subscription. |
 
 [Lambda Managed Instances][4] and [Lambda Durable Functions][5] are ways to run Event Functions, and Datadog supports both. For supported runtimes, see each page.
 
-In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions. You don't need to change your instrumentation or infrastructure code. For more information, see [What is AWS Lambda?][6] in the AWS documentation.
+In the Serverless Monitoring docs, "Lambda function" means a Lambda Event Function unless a page says otherwise. AWS APIs, SDKs, the AWS CLI, the `AWS::Lambda::Function` resource type, and ARNs use "function" for Event Functions. Your existing instrumentation and infrastructure code keep working without changes. For more information, see [What is AWS Lambda?][6] in the AWS documentation.
 
 ## How it works
 
