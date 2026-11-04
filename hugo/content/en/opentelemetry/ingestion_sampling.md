@@ -83,7 +83,6 @@ To configure trace metrics from sampled spans:
 
 1. Use an SDK that records the effective sampling probability in exported OTLP spans. For Datadog SDKs, see [minimum supported versions][23].
 2. Preserve `tracestate` through the pipeline and place the metrics connector before any Collector sampling processors. Extrapolation is automatic when a valid `ot.th` threshold is present; `enable_metrics_sampling_method` only adds a label.
-3. If the SDK exports trace metrics computed before sampling, route its traces around the metrics connector to avoid duplicate metrics. The SMC does not automatically honor `_dd.stats_computed`.
 
 The recorded probability must match the spans sent. Extra drops or selective retention, such as keeping all errors, can make extrapolated counts inaccurate. Do not manually scale metrics that the receiver has already extrapolated.
 

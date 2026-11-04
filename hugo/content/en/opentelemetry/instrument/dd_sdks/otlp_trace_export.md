@@ -76,7 +76,7 @@ To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_END
 
 ## Sampling and trace metrics
 
-For collector-computed metrics from sampled traces, use the SDK versions below and a [receiver that supports extrapolation][8]. These versions add sampling probability to exported OTLP spans; basic OTLP export support alone is not sufficient.
+For collector-computed metrics from sampled traces, use the SDK versions below and a [receiver that supports extrapolation][8]. These versions record the sampling probability in exported OTLP spans' `tracestate`.
 
 | Datadog SDK | Minimum version for sampling probability in OTLP spans |
 | --- | --- |
@@ -86,7 +86,7 @@ For collector-computed metrics from sampled traces, use the SDK versions below a
 | Go | [2.11.0][13] |
 | .NET | [3.55.0][14] |
 
-These SDKs apply sampling decisions before OTLP delivery. Setting `OTEL_TRACES_SPAN_METRICS_ENABLED=false` disables SDK metric export, not sampling. To send all spans, configure 100% sampling throughout the upstream trace path.
+These SDKs apply sampling decisions before OTLP delivery. The receiver reads the recorded probability to extrapolate trace metrics from the sampled spans.
 
 ## Verify
 
