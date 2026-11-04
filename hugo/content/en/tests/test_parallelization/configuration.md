@@ -31,10 +31,10 @@ Use `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` 
 : Test framework.<br/>
 **CLI flag:** `--framework`<br/>
 **Default:** Auto-detected from the current directory<br/>
-**Supported values:** `rspec`, `minitest`, `pytest`, `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, `vitest`
+**Supported values:** `rspec`, `minitest`, `pytest`, `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, `vitest`, `webdriverio` (alias: `wdio`)
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, and Playwright. Vitest rejects this setting. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command. `ddtest` supplies selected test files and framework-specific settings. Supported for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, Playwright, and WebdriverIO. Vitest rejects this setting. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
 **Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`, `pytest`
@@ -108,13 +108,13 @@ Use `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` 
 **Example:** `.ddtest-cache/tests-discovery.json`
 
 `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE`
-: Controls Test Impact Analysis skipping granularity for Ruby. Suite-level skipping requires `datadog-ci` 1.34.0 or later. Set the environment variable in both planning and test jobs so the Datadog SDK uses the same mode. Invalid values fall back to `test`.<br/>
+: Controls Test Impact Analysis skipping granularity for Ruby and Python. Ruby suite-level skipping requires `datadog-ci` 1.34.0 or later. Python suite mode discovers files without running pytest collection; see [pytest suite mode](#pytest-suite-mode). Set the environment variable in both planning and test jobs. Invalid values fall back to `test`.<br/>
 **CLI flag:** `--test-skipping-mode`<br/>
 **Default:** `test`<br/>
 **Supported values:** `test`, `suite`
 
 `DD_TEST_OPTIMIZATION_RUNNER_FORCE_FULL_TEST_DISCOVERY`
-: Forces full test discovery when the framework supports it, including in suite-level skipping mode.<br/>
+: Forces full test discovery when the framework supports it, including in suite-level skipping mode or when Test Impact Analysis is disabled. Use it to refresh the discovery cache or diagnose collection issues.<br/>
 **CLI flag:** `--force-full-test-discovery`<br/>
 **Default:** `false`<br/>
 **Supported values:** `true`, `false`
@@ -158,7 +158,7 @@ If no split can meet the target, `ddtest` logs a warning. It selects the split w
 
 ## Custom test commands
 
-Use `--command` to override the base command for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, or Playwright. The override applies to planning and execution. Vitest uses its Node.js API and rejects both `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`; use `--vitest-config` and [Vitest configuration](/tests/test_parallelization/best_practices/#vitest).
+Use `--command` to override the base command for RSpec, Minitest, pytest, Cucumber.js, Cypress, Jest, Mocha, Playwright, or WebdriverIO. The override applies to planning and execution. Vitest uses its Node.js API and rejects both `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`; use `--vitest-config` and [Vitest configuration](/tests/test_parallelization/best_practices/#vitest).
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec --tag smoke"
@@ -195,9 +195,31 @@ For pytest, `ddtest` discovers test files using this priority:
 
 Ruby and Python full discovery can fall back to file discovery when the tracer is absent or collection fails. `--strict-discovery` makes full-discovery failures fatal; canceled full discovery still falls back. Use `--force-full-test-discovery` when you need full discovery even in a mode that normally uses files.
 
+### Pytest suite mode
+
+Set the skipping mode to `suite` in both planning and test jobs to discover test files without importing test modules or `conftest.py` files:
+
+{{< code-block lang="bash" >}}
+export DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite
+bin/ddtest plan --platform python --framework pytest --min-parallelism 1 --max-parallelism 10
+bin/ddtest run --platform python --framework pytest
+{{< /code-block >}}
+
+Alternatively, pass `--test-skipping-mode suite` to both commands. The default is `test`. To return to test-level skipping, select `test` and regenerate the plan.
+
+Suite mode reduces planning overhead by skipping pytest collection. It trades individual-test skipping for whole-suite skipping, and individual test counts are unavailable during planning. `ddtest` keeps files runnable when their suites are new or lack matching source-file metadata from Test Optimization. It applies TIA skipping in the plan, so the Datadog library does not skip retained files again during execution. Test reporting and coverage collection remain enabled.
+
+File discovery uses the configured file patterns and filters to `.py` files. It excludes files under `.venv`, `venv`, `.tox`, `__pycache__`, `node_modules`, `site-packages`, and `.git`, even when selected explicitly.
+
+Normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. Forced full discovery also applies them during planning. A worker with no matching tests succeeds in suite mode, so an entirely deselected run can succeed. Test failures and collection errors from workers still fail the run. Test mode preserves pytest exit-code-5 failures from workers, but an empty plan can succeed without starting pytest.
+
+Files containing the literal `datadog_itr_unskippable` marker remain runnable, as do files beneath a `conftest.py` containing it. This conservative text check also recognizes comments. For dynamically constructed or imported markers, add a comment containing `datadog_itr_unskippable` to the affected file or ancestor `conftest.py`. Such comments protect DDTest planning; use actual pytest unskippable markers when running pytest directly with Test Impact Analysis.
+
+Use test mode for custom collectors that group multiple suites into one file. Suite mode does not read or refresh the full-discovery cache. `--force-full-test-discovery` restores collection and cache updates without changing the suite-level skipping rules. `--strict-discovery` alone does not enable collection.
+
 ## JavaScript test discovery and instrumentation
 
-JavaScript support uses suite-level Test Impact Analysis. It uses each framework's native configuration during discovery:
+JavaScript discovery uses each framework's native configuration. When the framework supports Test Impact Analysis, skipping operates at suite level. WebdriverIO supports balancing without TIA skipping.
 
 | Framework | Discovery behavior | Execution behavior |
 | --------- | ------------------ | ------------------ |
@@ -207,8 +229,9 @@ JavaScript support uses suite-level Test Impact Analysis. It uses each framework
 | Mocha | Loads Mocha's effective configuration and resolves its `spec` inputs. | Replaces configured `spec` inputs with the files assigned to the worker. |
 | Playwright | Runs `playwright test --list` with a `ddtest` reporter, preserves selection options and positional filters, and deduplicates files included in multiple projects. | Replaces positional filters with exact file filters for the files assigned to the worker and removes `--shard` and interactive UI options. |
 | Vitest | Loads Vitest/Vite configuration through the installed `vitest/node` API. | Runs only project/pool specifications whose canonical file paths match the assignment. A file can run in multiple selected projects. |
+| WebdriverIO | Loads the effective WebdriverIO configuration and resolves spec files for the selected capabilities. Grouped specs are rejected. | Runs assigned files with each capability's selection preserved and native sharding disabled. |
 
-Except for Vitest, `ddtest` uses the local framework executable under `node_modules/.bin` when available, with a package-manager fallback. Custom commands must invoke the framework directly, optionally through a package manager. `--tests-location` and `--tests-exclude-pattern` further restrict discovered files.
+Except for Vitest and WebdriverIO, `ddtest` uses the local framework executable under `node_modules/.bin` when available, with a package-manager fallback. WebdriverIO defaults to the project-local `node_modules/.bin/wdio` executable. Custom commands must invoke the framework directly, optionally through a package manager. `--tests-location` and `--tests-exclude-pattern` further restrict discovered files.
 
 Vitest requires a project-installed package. Use the same `--vitest-config` in both phases. Configuration or discovery errors fail instead of falling back to a broader file system scan. Remove native sharding when `ddtest` owns the split.
 
@@ -220,7 +243,7 @@ For execution, `ddtest` selects a Datadog tracer in this order:
 
 An invalid explicit preload fails execution. An action-installed tracer does not also need a project dependency or `NODE_PATH`. Existing Node.js options and project loaders remain in place.
 
-Vitest also needs a Datadog register import. `ddtest` preserves an existing import, then checks `DD_TRACE_ESM_IMPORT`, the external tracer's adjacent `register.js`, and the project-local `dd-trace/register.js`. Discovery removes Datadog preloads to avoid reporting file listing as test execution.
+Vitest and WebdriverIO also need a Datadog register import. `ddtest` preserves an existing import, then checks `DD_TRACE_ESM_IMPORT`, the external tracer's adjacent `register.js`, and the project-local `dd-trace/register.js`. Discovery removes Datadog preloads to avoid reporting file listing as test execution.
 
 ## Worker environment variables
 

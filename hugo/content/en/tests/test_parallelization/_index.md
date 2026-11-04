@@ -25,16 +25,18 @@ Test Parallelization is supported for the following languages and frameworks:
 | -------- | ---------- | ----------------------- |
 | Ruby     | RSpec, Minitest | `datadog-ci` gem `1.42.0` or later |
 | Python   | pytest | `ddtrace` package `4.11.0` or later |
-| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest | `dd-trace` package `5.125.0` or later for `v5` and `6.14.0` or later for `v6` |
+| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest, WebdriverIO | `dd-trace` package `5.125.0` or later for `v5` and `6.14.0` or later for `v6` |
 
 For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13.
+
+WebdriverIO requires version 9 or later with the local runner and the Mocha or Jasmine adapter. It supports test file balancing, but its Datadog library does not support Test Impact Analysis skipping. See [WebdriverIO setup](/tests/test_parallelization/setup/#webdriverio) for requirements and limitations.
 
 ## How it works
 
 Test Parallelization uses the `ddtest` CLI to plan and run tests:
 
 1. Run `ddtest plan` once to create a fresh `.testoptimization/` plan for that workflow, suite, and execution environment.
-2. Share the complete `.testoptimization/` directory, including hidden files, with each CI job that runs tests.
+2. Share the `.testoptimization/` directory with each CI job that runs tests.
 3. Run `ddtest run --ci-node <CI_NODE_INDEX>` in each CI job to execute only the files assigned to that CI node.
 
 For single-node and multi-node examples, see [Set Up Test Parallelization][3].

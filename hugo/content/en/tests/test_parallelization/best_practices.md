@@ -158,18 +158,20 @@ fi
 
 Keep dependency and configuration changes in your CI cache key when they can affect collection. This cache is an input to a **new plan**, not a replacement for planning.
 
-### Use suite-level skipping for Ruby
+Use `--force-full-test-discovery` to refresh the cache even when Test Impact Analysis or test skipping is disabled, such as on a default branch. Without this flag, suite mode does not read or refresh the full-discovery cache.
 
-If Ruby test discovery remains a bottleneck after applying these optimizations, configure Test Impact Analysis to use suite-level skipping. This mode lets `ddtest plan` use test file discovery instead of discovering every individual test. It trades test-level skipping precision for lower planning overhead because Test Impact Analysis skips or runs an entire suite.
+### Use suite-level skipping for Ruby and Python {#use-suite-level-skipping-for-ruby}
 
-Suite-level skipping requires `datadog-ci >= 1.34.0`. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` for both planning and test execution:
+If Ruby or Python test discovery remains a bottleneck, configure Test Impact Analysis to use suite-level skipping. This mode lets `ddtest plan` discover files instead of individual tests. For pytest, it avoids collection and imports of test modules and `conftest.py`. It trades test-level skipping precision for lower planning overhead because Test Impact Analysis skips or runs an entire suite.
+
+Ruby suite-level skipping requires `datadog-ci >= 1.34.0`. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` for both planning and test execution:
 
 {{< code-block lang="bash" >}}
 DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest plan
 DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest run
 {{< /code-block >}}
 
-If you execute tests with another command, set the same environment variable for that command. In CI workflows that plan and run tests in separate jobs, set the variable in both jobs.
+In CI workflows that plan and run tests in separate jobs, set the variable in both jobs. For Ruby tests executed with another command, set the same environment variable for that command. For Python, `ddtest run` configures the Datadog library to match the selected mode. See [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode) for selection, caching, and unskippable markers.
 
 ## Configure pytest
 
@@ -177,7 +179,7 @@ If you execute tests with another command, set the same environment variable for
 
 For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.ini`, `pyproject.toml`, `tox.ini`, or `setup.cfg`. If no pytest config defines those settings, `ddtest` uses `**/{test_*,*_test}.py`.
 
-During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery).
+During full discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery). Suite mode avoids pytest collection entirely unless `--force-full-test-discovery` is set.
 
 ## Configure JavaScript frameworks
 

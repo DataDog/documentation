@@ -27,15 +27,13 @@ Planning does not require a Datadog SDK. Ruby and Python can use one for full te
 
 ## Install ddtest
 
-Add this step to the jobs that need `ddtest`. This example downloads the latest Linux AMD64 binary:
+Add this step to the jobs that need `ddtest`. The installer selects the latest executable for your operating system and architecture, verifies it against the release's `SHA256SUMS`, and installs it into `bin`:
 
 {{< code-block lang="bash" >}}
-mkdir -p bin
-curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/ddtest-linux-amd64 -o bin/ddtest
-chmod +x bin/ddtest
+curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
 {{< /code-block >}}
 
-For another operating system or architecture, choose the matching asset from [DDTest releases](https://github.com/DataDog/ddtest/releases). Add `.testoptimization/` to your existing `.gitignore`; keep its other entries.
+The examples below use `bin/ddtest`.
 
 {{< collapse-content title="Download with the GitHub CLI" level="h3" >}}
 
@@ -120,6 +118,8 @@ export DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK=pytest
 
 Keep existing `PYTEST_ADDOPTS`; `ddtest` adds `--ddtrace` to load the pytest plugin. Preserve options in both planning and execution.
 
+To reduce planning overhead, add `export DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` to `.ci/ddtest-env.sh`. Suite mode discovers files without running pytest collection. It skips whole suites instead of individual tests; see [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode) for selection and skipping behavior.
+
 {{< collapse-content title="Custom launchers, configuration, or suite roots" level="h3" id="pytest-custom-command" >}}
 
 For an existing command such as `uv run pytest -c config/pytest.ini -q tests/unit tests/integration`, add these settings to `.ci/ddtest-env.sh`:
@@ -143,7 +143,7 @@ Cache dependencies in **both** jobs. For pip on GitHub Actions, use `actions/set
 {{% /tab %}}
 {{% tab "JavaScript" %}}
 
-Complete the [JavaScript Test Optimization setup](/tests/setup/javascript/) for your framework. Use Node.js and framework versions supported by your Datadog SDK. The minimum `dd-trace` version is **5.111.0** on v5 or **6.0.0** on v6; Vitest has an additional requirement below.
+Complete the [JavaScript Test Optimization setup](/tests/setup/javascript/) for your framework. Use Node.js and framework versions supported by your Datadog SDK. The minimum `dd-trace` version is **5.111.0** on v5 or **6.0.0** on v6; Vitest and WebdriverIO have additional requirements below.
 
 Install dependencies using the existing package manager and lockfile. Keep project loaders in `NODE_OPTIONS`. `ddtest` reuses an existing Datadog preload or the tracer installed by the Test Optimization action. See [tracer selection](/tests/test_parallelization/configuration/#javascript-test-discovery-and-instrumentation).
 
@@ -257,6 +257,29 @@ export DD_TEST_OPTIMIZATION_RUNNER_COMMAND='pnpm exec playwright test --project 
 {{< /code-block >}}
 
 Run both phases from the same package directory. `ddtest` lists tests with Playwright and assigns exact file paths to workers. Remove native `--shard` when `ddtest` owns the split. Keep project dependencies and teardown in Playwright configuration.
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="WebdriverIO" level="h3" id="webdriverio" >}}
+
+Use WebdriverIO **9 or later** with the local runner and the Mocha or Jasmine adapter. Use `dd-trace` **5.121.0 or later on v5**, or **6.10.0 or later on v6**. For v5, use Node.js 18.19+ or 20.6+. For v6, use Node.js 22 or later.
+
+{{< code-block lang="bash" filename=".ci/ddtest-env.sh" >}}
+export DD_TEST_OPTIMIZATION_RUNNER_PLATFORM=javascript
+export DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK=webdriverio
+{{< /code-block >}}
+
+The `wdio` framework alias is also accepted. Install `@wdio/cli` in the project. By default, `ddtest` runs the local `wdio run` executable with a detected `wdio.conf.*` file. To select another configuration, add:
+
+{{< code-block lang="bash" >}}
+export DD_TEST_OPTIMIZATION_RUNNER_COMMAND='pnpm exec wdio run config/wdio.ci.conf.ts'
+{{< /code-block >}}
+
+Keep browser capabilities, services, hooks, reporters, and application setup. `ddtest` discovers configured spec files and runs each worker's assignment while preserving each capability's file selection. It disables WebdriverIO's native sharding for the assigned batch.
+
+Grouped specs, such as `[['setup.js', 'case.js']]`, cannot be split across workers. Keep those suites on their existing runner, or flatten the groups only if the files can run independently. Remote cloud grids are not supported by `ddtest run`.
+
+WebdriverIO benefits from balancing, but its Datadog library does not support Test Impact Analysis skipping or per-test code coverage. Keep [WebdriverIO instrumentation](/tests/setup/javascript/?tab=webdriverio) active for test reporting. `ddtest` adds the required Datadog register import when it is absent. Give services and report files distinct ports or paths when multiple workers share a node.
 
 {{< /collapse-content >}}
 

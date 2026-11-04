@@ -40,6 +40,8 @@ In CI-node mode, the plan count means CI nodes, and `--ci-node-workers` controls
 
 ## No skippable tests are applied
 
+WebdriverIO supports balancing but does not support Test Impact Analysis skipping.
+
 Check that:
 
 - Test Impact Analysis is enabled for the test service.
@@ -50,6 +52,14 @@ Check that:
 Ruby and Python can fall back to file discovery when full discovery fails or a Datadog SDK is absent. Check the discovery logs before assuming a successful plan applied test-level skipping. `--strict-discovery` makes full-discovery failures fatal; canceled full discovery still falls back.
 
 See [runtime tags](/tests/test_parallelization/configuration/#stabilize-runtime-tags) and [Test Impact Analysis troubleshooting](/tests/test_impact_analysis/troubleshooting/).
+
+## Pytest reports an import file mismatch or missing tests
+
+Python test files with the same basename can conflict under pytest's default import mode. `ddtest` separates them when the selected runner count is sufficient. When distributing files, it retains all otherwise runnable files and warns if duplicate basenames must share a runner, including with a single runner.
+
+Add `__init__.py` files so the tests have distinct fully qualified module names, rename conflicting files, or configure pytest with `--import-mode=importlib`. Basename warnings can still appear after imports are fixed. Splitting does not prevent collisions during full discovery, which collects tests before distribution. Investigate warnings listing files missing from full-discovery results: those files are not scheduled.
+
+In [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode), normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. Forced full discovery also applies them during planning. `ddtest` treats a suite-mode worker's pytest exit code 5 as success, so an entirely deselected run can succeed. Check the selectors and planned files when no tests execute. Test mode preserves exit-code-5 failures from pytest workers, but an empty plan can still succeed without starting pytest.
 
 ## Planning works but execution cannot load the tracer
 
@@ -89,6 +99,7 @@ Framework-specific checks:
 | Cypress | `ddtest` owns `--spec`. Put a subset in `--tests-location` or Cypress configuration. |
 | Playwright | Keep the package directory, configuration, and selected projects. Remove native `--shard` when using `ddtest` splits. |
 | Vitest | Remove `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`. Use the same `--vitest-config` in both phases and move command options into that configuration. |
+| WebdriverIO | Keep the configuration and capability selections. Grouped specs cannot be distributed as independent files, and remote cloud grids are not supported. See [WebdriverIO setup](/tests/test_parallelization/setup/#webdriverio). |
 
 A package-manager separator before the framework executable is preserved. A framework's own `--` ends its options; `ddtest` inserts discovery flags before it and replaces the file selection after it during execution. See [Custom test commands](/tests/test_parallelization/configuration/#custom-test-commands).
 
