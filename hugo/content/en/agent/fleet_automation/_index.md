@@ -42,12 +42,13 @@ SDK upgrades and remote flare collection are not supported on US1-FED or US2-FED
 With Fleet Automation, you can:
 - **[View Agent and OTel Collector configurations][3]** along with historical changes to confirm deployment updates and verify configuration consistency.
 - **[Configure Datadog Agents][4]** to centralize setup and gain visibility into your environments faster.
+- **[Manage OpenTelemetry Collectors][14]** to view Collector pipelines and topology, and to configure the Agent's Collector.
 - **[Configure Agent Integrations][9]** to deploy, update, and remove integration configuration files across your fleet.
 - **[Configure Custom Logs][10]** to manage custom log collection settings on your Agents at scale.
 - **[Manage Datadog Agent tags][12]** _(Preview)_ to correct and standardize tagging across your fleet.
 - **[Keep your fleet up to date][5]** by identifying and upgrading outdated Agent and OTel Collector versions.
 - **[Upgrade SDKs][11]** _(Preview)_ to keep the SDKs that power APM, Continuous Profiler, and Dynamic Instrumentation up to date.
-- **[Send a support flare remotely][6]**, reducing the time it takes to debug issues on an Agent or DDOT Collector.
+- **[Send a support flare remotely][6]** to debug issues on an Agent or the Agent's Collector.
 - **[View your fleet by Kubernetes cluster][7]** to inspect and configure Agents grouped by cluster instead of as individual hosts.
 
 ## Set up Fleet Automation
@@ -96,3 +97,4 @@ For information on setting up roles and permissions, see [Access Control][2].
 [11]: /agent/fleet_automation/upgrade_sdks/
 [12]: https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/
 [13]: /agent/fleet_automation/upgrade_agents/#schedule-agent-upgrades-with-terraform
+[14]: /agent/fleet_automation/otel_collectors/

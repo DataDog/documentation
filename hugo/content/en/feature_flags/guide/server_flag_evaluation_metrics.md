@@ -49,7 +49,7 @@ Agentless configuration delivery and this metric use independent paths. An agent
 
 ## Step 1: Configure an OTLP receiver
 
-Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
+Flag evaluation metrics are emitted over OpenTelemetry (OTLP). For Agent-backed deployments, enable the Datadog Agent OTLP receiver, which is off by default. For setup instructions, see [Set Up the Agent's OTLP Endpoint][2]. For no-Agent serverless deployments, use the OTLP or custom metrics path supported by your Serverless Monitoring setup.
 
 You only need to enable the protocol your application uses (gRPC on port 4317, or HTTP on port 4318).
 

@@ -57,6 +57,10 @@ further_reading:
       tag: 'Blog'
 ---
 
+{% alert level="info" %}
+This page applies to Datadog SDKs in both setups: [DDOT SDKs][401], which export OTLP to your Collector, and setups that send data to the Datadog Agent. Steps that set the endpoint with `DD_AGENT_HOST` or `DD_TRACE_AGENT_URL`, or that send runtime metrics over DogStatsD, assume the Agent. With DDOT setup, `OTEL_EXPORTER_OTLP_ENDPOINT` sets the endpoint, and the Java and .NET SDKs also send runtime metrics as OTLP.
+{% /alert %}
+
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
 <!-- ============================================== -->
@@ -1801,3 +1805,4 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 <!-- PHP metrics -->
 [400]: /tracing/trace_collection/dd_libraries/php/#install-the-extension
+[401]: /opentelemetry/instrument/dd_sdks/

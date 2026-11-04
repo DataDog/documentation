@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector as a Gateway on Kubernetes
+title: Set Up the Agent's Collector as a Gateway on Kubernetes
 code_lang: kubernetes_gateway
 type: multi-code-lang
 code_lang_weight: 2
@@ -25,7 +25,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-This guide assumes you are familiar with deploying the DDOT Collector as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Install the DDOT Collector as a DaemonSet on Kubernetes</a>.
+This guide assumes you know how to deploy the Agent's Collector, the OpenTelemetry Collector that runs alongside the Datadog Agent as a separate process, as a DaemonSet. For more information, see <a href="/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset">Set Up the Agent's Collector as a Kubernetes DaemonSet</a>.
 </div>
 
 ## Overview
@@ -36,7 +36,7 @@ The OpenTelemetry Collector can be deployed in multiple ways. The *daemonset* pa
 
 The [gateway][6] pattern provides an additional deployment option that uses a centralized, standalone Collector service. This gateway layer can perform actions such as tail-based sampling, aggregation, filtering, and routing before exporting the data to one or more backends such as Datadog. It acts as a central point for managing and enforcing observability policies.
 
-{{< img src="opentelemetry/embedded_collector/ddot_gateway_diagram.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local DDOT DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of DDOT gateway pods. These gateway pods then send the telemetry data to Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/embedded_collector/ddot_gateway_diagram.png" alt="Architecture diagram of the OpenTelemetry Collector gateway pattern. Applications send OTLP data to local Datadog Agent DaemonSets running on each node. The DaemonSets forward this data to a central load balancer, which distributes it to a separate deployment of DDOT gateway pods. These gateway pods then send the telemetry data to Datadog." style="width:100%;" >}}
 
 When you enable the gateway:
 1.  A Kubernetes Deployment (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) manages the standalone **gateway Collector pods**.
@@ -62,9 +62,9 @@ Before you begin, ensure you have the following:
 
 ## Installation and configuration
 
-This guide shows how to configure the DDOT Collector gateway using either the Datadog Operator or Helm chart.
+This guide shows how to configure the Agent's Collector as a gateway using either the Datadog Operator or Helm chart.
 
-<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
+<div class="alert alert-info">This installation is required for both Datadog SDK + Agent's Collector and OpenTelemetry SDK + Agent's Collector configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the Agent's Collector to process and forward OTLP metrics and logs.</div>
 
 Choose one of the following installation methods:
 
@@ -127,7 +127,7 @@ spec:
         keyName: api-key
 
   features:
-    # Enable the Collector in the Agent DaemonSet
+    # Enable the Agent's Collector DaemonSet
     otelCollector:
       enabled: true
 
@@ -161,7 +161,7 @@ targetSystem: "linux"
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Enable the Collector in the Agent Daemonset
+  # Enable the Agent's Collector Daemonset
   otelCollector:
     enabled: true
 
@@ -926,7 +926,7 @@ otelAgentGateway:
 
 ### Enable Autoscaling with Horizontal Pod Autoscaler (HPA)
 
-The DDOT Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature.
+The Agent's Collector gateway supports autoscaling with the Kubernetes Horizontal Pod Autoscaler (HPA) feature.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -1346,17 +1346,17 @@ Deploy each layer as a separate Helm release, starting from the final layer and 
 
 ## View gateway pods on Fleet Automation
 
-The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
+The Agent's Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
 
 To view your gateway pods:
 
 1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
 
-  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing DDOT gateway pods" style="width:100%;" >}}
+  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing gateway pods" style="width:100%;" >}}
 
 2. Select a gateway pod to view detailed build information and the running Collector configuration.
 
-  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Fleet Automation page showing the collector config of one DDOT gateway pod" style="width:100%;" >}}
+  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Fleet Automation page showing the collector config of one gateway pod" style="width:100%;" >}}
 
 ## Known limitations
 

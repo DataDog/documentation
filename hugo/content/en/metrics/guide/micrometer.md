@@ -21,7 +21,7 @@ Micrometer offers multiple ways to integrate with Datadog. This guide outlines D
 OpenTelemetry Protocol (OTLP) Ingestion by the Datadog Agent allows you to take advantage of observability feature in the Datadog Agent.
 
 {{< whatsnext desc="See the configuration outlined in the following documentation:" >}}
-    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}OTLP Ingestion by the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Set Up the Agent's OTLP Endpoint{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Prometheus and OpenMetrics
