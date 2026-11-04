@@ -40,6 +40,19 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.35 — 2026-10-20
+
+*Bundled in chart: `0.5.6`.*
+
+#### Changed
+
+- Updates the trusted root certificate authorities, and removes `emSign ECC Root CA - G3` from the trusted roots.
+
+#### Helm chart changes
+
+- Exports `QW_CLUSTER_ID` to all BYOC Logs pods, using `config.cluster_id` when set.
+- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC Logs telemetry with an unrelated host.
+
 ### v0.1.34 — 2026-09-23
 
 *Bundled in chart: `0.5.5`.*
