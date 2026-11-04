@@ -471,6 +471,38 @@ logger.info("Flag: {} | Value: {} | Variant: {} | Reason: {}",
 );
 {{< /code-block >}}
 
+## Customer exposure hooks
+
+Use customer exposure hooks to send feature flag exposure data to an application-owned destination. After initializing the Datadog provider, add a reusable hook to the OpenFeature client:
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.openfeature.ExposureHook;
+import java.util.HashMap;
+
+ExposureHook exposureHook = new ExposureHook(evaluation -> {
+    if (!evaluation.shouldSend()) {
+        return;
+    }
+
+    // enqueueExposure is application code that copies values into a background queue.
+    enqueueExposure(
+        evaluation.getDetails().getFlagKey(),
+        evaluation.getContext().getTargetingKey(),
+        evaluation.getDetails().getVariant(),
+        new HashMap<>(evaluation.getFeatures())
+    );
+});
+client.addHooks(exposureHook);
+{{< /code-block >}}
+
+Callbacks include errors, non-exposures, and repeated exposures. `isExposure()` identifies a successful evaluation eligible for exposure logging. `isCacheHit()` identifies repeated exposures for the same flag and targeting key. `shouldSend()` selects eligible new or changed exposures. All hooks share this decision. It does not acknowledge successful delivery to Datadog or your destination.
+
+`getFeatures()` returns an unmodifiable map of scalar metadata (`String`, `Double`, and `Boolean`) intended for customer hooks, including holdout metadata when available. Split features require `dd-java-agent` 1.68.0 or later. With an older agent, the map is empty.
+
+Callbacks run synchronously on the evaluation thread and may run concurrently. Avoid blocking, copy values needed for asynchronous processing, and manage queueing, retries, and shutdown in application code. An exception in the callback does not change the flag result.
+
+If you use `MultiProvider`, use OpenFeature SDK 1.23.0 or later for Datadog exposure delivery and repeat detection. Earlier SDK versions still evaluate flags, but do not send exposures to Datadog, and `shouldSend()` returns `true` for every exposure.
+
 ## Testing
 
 You can test against a dedicated Datadog test environment with the real `DatadogProvider`, or swap it for OpenFeature's `InMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `InMemoryProvider` ships in `dev.openfeature:sdk` (already a test-scope dependency), so no additional library is required. Add `dev.openfeature:sdk` to your test configuration if it is not already present.
