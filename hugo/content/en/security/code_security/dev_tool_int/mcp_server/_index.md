@@ -52,7 +52,7 @@ The MCP server exposes the following tools that AI coding assistants can call to
 
 `datadog_code_security_scan` and `datadog_sast_scan` accept optional `min_sast_severity` (`LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`). It applies to SAST only, defaults to `LOW`, and does not return in-source suppressed findings.
 
-`datadog_ephemeral_sast_scan` and `datadog_promote_sast_rule` support the `dd-codesec-find-security-variants` skill. The skill writes a temporary rule from a local security fix, scans the repository with it, and saves the rule only after you approve it. See [Install agent skills](#install-agent-skills).
+`datadog_ephemeral_sast_scan` and `datadog_promote_sast_rule` support the `dd-codesec-find-security-variants` skill. The skill writes a temporary rule from a local security fix, scans the repository with it, and saves the rule after you approve it. See the [Install agent skills](#install-agent-skills) section.
 
 For detailed parameters, required binaries, and output formats for each tool, see the [Tools Reference][8].
 
