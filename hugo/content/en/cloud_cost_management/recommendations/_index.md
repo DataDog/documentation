@@ -754,19 +754,19 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: Kubernetes Pod
       recommendation_type: Fix Stuck Kubernetes Pod
-      recommendation_description: 'Identifies Kubernetes pods that are assigned to a node but stuck Pending, unhealthy (such as CrashLoopBackOff or ImagePullBackOff), or Terminating, and still reserve paid node capacity. Savings come from freeing that capacity: deleting a bare pod, or scaling down or suspending its owning workload until it is fixed.'
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: Azure
       resource_type: Kubernetes Pod
       recommendation_type: Fix Stuck Kubernetes Pod
-      recommendation_description: 'Identifies Kubernetes pods that are assigned to a node but stuck Pending, unhealthy (such as CrashLoopBackOff or ImagePullBackOff), or Terminating, and still reserve paid node capacity. Savings come from freeing that capacity: deleting a bare pod, or scaling down or suspending its owning workload until it is fixed.'
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Terminate
       cloud_provider: GCP
       resource_type: Kubernetes Pod
       recommendation_type: Fix Stuck Kubernetes Pod
-      recommendation_description: 'Identifies Kubernetes pods that are assigned to a node but stuck Pending, unhealthy (such as CrashLoopBackOff or ImagePullBackOff), or Terminating, and still reserve paid node capacity. Savings come from freeing that capacity: deleting a bare pod, or scaling down or suspending its owning workload until it is fixed.'
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Configure
       cloud_provider: OpenAI
