@@ -195,7 +195,7 @@ Violations reported by the rule, grouped by file. If the rule throws an exceptio
 
 ### Required binary
 
-`datadog-static-analyzer` version 0.9.10 or later. See [Troubleshooting][2].
+`datadog-static-analyzer` version 0.9.10 or later. If you have an earlier version, see [Scanner upgrade required][2].
 
 ## `datadog_promote_sast_rule`
 
