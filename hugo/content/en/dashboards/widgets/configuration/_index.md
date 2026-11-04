@@ -85,7 +85,7 @@ After saving, hover over the description icon in the top-left corner of the widg
 
 ## Metrics info
 
-On a metric graph, click the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the Metrics Catalog page for further analysis or edits.
 
 ## Unit override
 
@@ -183,7 +183,7 @@ Click on the context menu (three vertical dots) of any dashboard graph to open a
 | Split graph                       | Create a [split graph][10].                                                                                                |
 | Create custom links               | Create [custom links](#custom-links).                                                                                      |
 | Create monitor                    | Create a monitor preconfigured with the graph's query.                                                                     |
-| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metric Summary page. |
+| Metrics info (metric graphs only) | Get a description of the metrics in this graph. You can click on the metric names to open them in the Metrics Catalog page. |
 | Delete                            | Delete the graph.                                                                                                          |
 
 ## Export widget data to CSV

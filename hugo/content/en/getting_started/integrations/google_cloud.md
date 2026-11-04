@@ -277,9 +277,9 @@ To use the Quick Start method, your Datadog user role must be able to create API
 
 #### Validation
 
-To view your metrics, use the left menu to navigate to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} and search for `gcp`:
+To view your metrics, go to the {{< ui >}}Metrics Catalog{{< /ui >}} page and search for `gcp`:
 
-{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metric Summary page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="The Metrics Catalog page in Datadog filtered to metrics beginning with GCP" style="width:100%;" >}}
 
 ### Google Cloud integrations
 
