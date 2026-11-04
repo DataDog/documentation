@@ -70,37 +70,37 @@ See [Role Based Access Control][3] for more information.
 
 When a new signal is sent to a case project, Datadog:
 
-1. Runs every selected grouping strategy to find related signals.
-1. Looks at the cases of those related signals, and keeps the ones that:
-   - are in the same case project,
-   - have the status {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}}.
-1. Adds the new signal to the most recently updated of those cases. If there is none, Datadog creates a new case.
+1. Runs each selected grouping strategy to find related signals.
+1. Looks at the cases of those related signals, and keeps the eligible ones. An eligible case:
+   - is in the same case project,
+   - has the status {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}},
+   - is not archived, deleted, or merged into another case.
+1. Adds the new signal to the most recently updated eligible case. If there is none, Datadog creates a new case.
+
+Datadog also adds the related signals that are not yet in an eligible case. Related signals that are already in an eligible case stay where they are.
 
 Datadog also follows these rules:
 
-- Closed cases are not reopened. If the only related case is closed, Datadog creates a new case.
-- A signal that is already in a case is not moved to another case.
-- When a case has the maximum number of signals, Datadog creates a new case. Its timeline links to the previous case.
+- Closed cases are never reopened. If the only related case is closed, Datadog creates a new case.
+- If the new signal is already in an {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} case, it stays in that case.
+- When a case is full, Datadog creates a new case. The new case links to the previous one.
 - Adding a signal does not change the case title, priority, or assignee.
 - The [Signal Attachment Settings][4] still apply to the signals added to a case.
 
 ## See why a signal was grouped
 
-Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows:
+Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows the signal that triggered the update, the grouping strategies that ran and what they found, and the result.
 
-- the signal that triggered the update,
-- which grouping strategies ran, and what they found,
-- why the signal was added to this case, or why a new case was created.
+The result is one of the following:
 
-Common messages include:
-
-| Message | Meaning |
+| Result | Meaning |
 | --- | --- |
-| No grouping strategy is selected | Automatic case creation created one case for the signal. |
-| The strategy does not apply | The signal does not have the values the strategy needs, for example no group-by values. |
-| No related signals were found | No related signal was found in the lookback, so Datadog created a new case. |
-| Added to an existing case | A related signal was already in this case. |
-| The previous case is full | The related case has the maximum number of signals, so Datadog created a new case. |
+| No grouping strategy selected | Datadog created one case for the signal. |
+| Strategy does not apply | The signal is missing a value the strategy needs, such as group-by values or a rule version. Datadog created a new case. |
+| No related signals found | No related signal was found in the lookback. Datadog created a new case. |
+| New case with related signals | Related signals were found, but none were in an eligible case. Datadog created a new case and added them. |
+| Existing case updated | A related signal was in an eligible case. Datadog added the signal to that case. |
+| Previous case is full | The eligible case was full. Datadog created a new case that links to the previous one. |
 
 ## Further reading
 
