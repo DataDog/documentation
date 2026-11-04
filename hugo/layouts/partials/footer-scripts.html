@@ -13,6 +13,13 @@ hugo defaults to environment development with hugo server
   <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{- end -}}
 
+{{- if .HasShortcode "otel-compatibility" -}}
+  {{- $opts := dict "targetPath" "static/otel-compatibility.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
+  {{- $js := resources.Get "scripts/components/otel-compatibility.js" | js.Build $opts -}}
+  {{- $js = $js | fingerprint "sha512" -}}
+  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+{{- end -}}
+
 {{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
 {{ if $isProd }}
