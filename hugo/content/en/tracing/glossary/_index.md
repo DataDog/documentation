@@ -67,7 +67,7 @@ All services can be found in the [Catalog][4] and visually represented on the [S
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
 <div class="alert alert-info">
-Don't see the HTTP endpoints you were expecting on the Service page? In APM, endpoints are connected to a service by more than the service name. It is also done with the `span.name` of the entry-point span of the trace. For example, on the web-store service above, `web.request` is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">here</a>.
+Don't see the HTTP endpoints you were expecting on the Service page? In APM, endpoints are connected to a service by more than the service name. It is also done with the <code>span.name</code> of the entry-point span of the trace. For example, on the web-store service above, <code>web.request</code> is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">here</a>.
 </div>
 
 ## Resources
@@ -132,7 +132,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 [13]: /tracing/metrics/runtime_metrics/
 [14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
-[16]: https://app.datadoghq.com/metric/summary
+[16]: https://app.datadoghq.com/metric/catalog
 [17]: https://app.datadoghq.com/monitors/create
 [18]: /tracing/trace_explorer/query_syntax/#facets
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters

@@ -1272,11 +1272,12 @@ Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregati
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
-Updates the state or assignee of an Error Tracking Issue in Datadog.
+Updates the state or assignee of an Error Tracking Issue in Datadog, or snoozes an issue until a condition is met. You can combine multiple snooze conditions, such as occurrences, elapsed time, or distinct values of any error attribute, like `@usr.id`.
 
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+- Snooze Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` until it affects 10 users or a week passes.
 
 ### `manage_datadog_error_tracking_issue_comments`
 *Toolset: **error-tracking***\
@@ -2114,8 +2115,6 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 ## Observability Pipelines
 
 Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
-
-<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3132,6 +3131,15 @@ Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog s
 - Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
 - Get the data for tab "Pivot 1" in spreadsheet "ABC".
 - Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `move_datadog_spreadsheet_tab`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Moves a tab to a new position in a Datadog spreadsheet. The tab is placed after a specified tab, or becomes the first tab if no tab is specified. To reorder multiple tabs, the tool moves one tab at a time, from the first position to the last. Use `get_datadog_spreadsheet` first to find tab IDs and types.
+
+- Move tab "Pivot 1" to the front of spreadsheet "ABC".
+- Move table "Table 2" after sheet "Sheet 1" in spreadsheet "ABC".
+- Reorder the tabs in spreadsheet "ABC" alphabetically.
 
 ### `delete_datadog_spreadsheet`
 *Toolset: **sheets***\

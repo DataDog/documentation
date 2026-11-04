@@ -47,3 +47,12 @@ entries:
       - GetRUMApplications
       - UpdateRUMApplication
     title: Align RUM applications and events spec with responses
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41006
+    operations:
+      - DeleteSourcemaps
+      - GetServiceRepositoryInfo
+      - ListSourcemaps
+      - RestoreSourcemaps
+    title: Document sourcemaps symbol_type and debug_id lookup

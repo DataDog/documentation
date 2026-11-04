@@ -315,5 +315,11 @@
   },
   "alert_tip": {
     "other": "팁"
+  },
+  "site_support_banner": {
+    "other": "이 제품은 선택한 <a href=\"/getting_started/site\">Datadog 사이트</a>에서 지원되지 않습니다."
+  },
+  "site_support_banner_plaintext": {
+    "other": "This product or feature is not supported for the following sites:"
   }
 }

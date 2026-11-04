@@ -13,40 +13,40 @@ further_reading:
   text: Obtenir le statut d'un check de l'Agent
 title: Commande flare de l'Agent
 ---
-Un flare vous permet d'envoyer les informations de dépannage nécessaires à l'équipe de support de Datadog.
+Un flare vous permet d'envoyer les informations de dépannage nécessaires à l'équipe de support Datadog.
 
 Cette page couvre :
-- [Envoyer un flare en utilisant la commande `flare`](#send-a-flare-using-the-flare-command).
+- [Envoyer un flare en utilisant la `flare` commande](#send-a-flare-using-the-flare-command).
 - [Envoyer un flare depuis le site Datadog](#send-a-flare-from-the-datadog-site) en utilisant Remote Configuration.
 - [Soumission manuelle](#manual-submission).
 
-Une flare rassemble tous les fichiers de configuration et journaux de l'Agent dans un fichier d'archive. Elle supprime les informations sensibles, y compris les mots de passe, les clés API, les identifiants de proxy et les chaînes de communauté SNMP. Si APM est activé, le flare inclut [les journaux de débogage du traceur][4] lorsqu'ils sont disponibles.
+Un flare rassemble tous les fichiers de configuration et les logs de l'Agent dans un fichier d'archive. Il supprime les informations sensibles, notamment les mots de passe, les clés d'API, les identifiants de proxy et les chaînes de communauté SNMP. Si APM est activé, le flare inclut les [logs de débogage du traceur][4] lorsqu'ils sont disponibles.
 
-L'Agent Datadog est entièrement open source, ce qui vous permet de [vérifier le comportement du code][1]. Si nécessaire, le flare peut être examiné avant l'envoi, car le flare demande une confirmation avant de le téléverser.
+Le Datadog Agent est entièrement open source, ce qui vous permet de [vérifier le comportement du code][1]. Si nécessaire, le flare peut être examiné avant l'envoi, car le flare demande une confirmation avant de le téléverser.
 
-Lorsque vous contactez Datadog Support avec Remote Configuration activée pour un Agent, l'équipe de support peut initier un flare depuis votre environnement afin de mieux vous aider dans les meilleurs délais. Les flares fournissent des informations de dépannage au support Datadog pour vous aider à résoudre votre problème. 
+Lorsque vous contactez le support Datadog avec Remote Configuration activé pour un Agent, l'équipe de support peut lancer un flare depuis votre environnement afin de mieux vous aider en temps opportun. Les flares fournissent des informations de dépannage au support Datadog pour vous aider à résoudre votre problème. 
 
 ## Envoyer un flare depuis le site Datadog {#send-a-flare-from-the-datadog-site}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">L'envoi d'un flare d'Agent depuis Fleet Automation n'est pas pris en charge pour votre site Datadog sélectionné ({{< region-param key="dd_datacenter" >}}). Utilisez <a href="#manual-submission">la soumission manuelle de flare</a> à la place.</div>
+<div class="alert alert-warning">L'envoi d'un flare d'Agent depuis Fleet Automation n'est pas pris en charge pour votre site Datadog sélectionné ({{< region-param key="dd_datacenter" >}}). Utilisez plutôt <a href="#manual-submission">la soumission manuelle de flare</a>.</div>
 {{< /site-region >}}
 
-Pour envoyer un flare depuis le site Datadog, assurez-vous d'avoir activé [Fleet Automation][2] et [Remote Configuration][3] sur l'Agent.
+Pour envoyer un flare depuis le site Datadog, assurez-vous d'avoir activé [Fleet Automation][2] et [Remote configuration][3] sur l'Agent.
 
 {{% remote-flare %}}
 
-{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Le bouton Envoyer un ticket lance un formulaire pour envoyer un flare pour un ticket de support existant ou nouveau." style="width:70%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="Le bouton Send Ticket lance un formulaire pour envoyer un flare pour un ticket de support existant ou nouveau." style="width:70%;" >}}
 
-## Envoyer un flare en utilisant la commande `flare` {#send-a-flare-using-the-flare-command}
+## Envoyer un flare en utilisant la `flare` commande {#send-a-flare-using-the-flare-command}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">Envoyer un flare d'Agent en utilisant le <code>flare</code> la sous-commande n'est pas prise en charge pour votre site Datadog sélectionné ({{< region-param key="dd_datacenter" >}}). Utilisez <a href="#manual-submission">la soumission manuelle de flare</a> à la place.</div>
+<div class="alert alert-warning">L'envoi d'un flare d'Agent en utilisant la <code>flare</code> sous-commande n'est pas pris en charge pour votre site Datadog sélectionné ({{< region-param key="dd_datacenter" >}}). Utilisez plutôt <a href="#manual-submission">la soumission manuelle de flare</a>.</div>
 {{< /site-region >}}
 
-Utilisez la sous-commande `flare` pour envoyer un flare. Dans les commandes ci-dessous, remplacez `<CASE_ID>` par votre identifiant de cas de support Datadog si vous en avez un, puis entrez l'adresse e-mail associée.
+Utilisez la sous-commande `flare` pour envoyer un flare. Dans les commandes ci-dessous, remplacez `<CASE_ID>` par votre ID de cas de support Datadog si vous en avez un, puis saisissez l'adresse e-mail qui y est associée.
 
-Si vous n'avez pas d'identifiant de cas, entrez votre adresse e-mail utilisée pour vous connecter à Datadog afin de créer un nouveau cas de support.
+Si vous n'avez pas de numéro de cas, saisissez l'adresse e-mail utilisée pour vous connecter à Datadog afin de créer un nouveau cas de support.
 
 **Confirmez le téléversement de l'archive pour l'envoyer immédiatement au support Datadog**.
 
@@ -66,19 +66,19 @@ Si vous n'avez pas d'identifiant de cas, entrez votre adresse e-mail utilisée p
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
 | Source     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Windows    | `& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>`       |
-| Heroku     | Consultez la [Heroku documentation][3]         |
+| Heroku     | Consultez la documentation dédiée [Heroku documentation][3]         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
 ## Conteneurs dédiés {#dedicated-containers}
 
-Lors de l'utilisation de l'Agent v7.19+ et du Datadog Helm Chart avec la [dernière version][4] ou d'un DaemonSet où l'Agent Datadog et le Trace Agent se trouvent dans des conteneurs séparés, vous déployez un Pod Agent contenant :
+Lorsque vous utilisez l'Agent v7.19+ et le Datadog Helm Chart avec la [dernière version][4] ou un DaemonSet dans lequel le Datadog Agent et l'Agent de trace sont dans des conteneurs séparés, vous déployez un Agent Pod contenant :
 
-* Un conteneur avec le processus de l'Agent (Agent + Log Agent)
+* Un conteneur avec le processus Agent (Agent + Log Agent)
 * Un conteneur avec le processus process-agent
 * Un conteneur avec le processus trace-agent
 * Un conteneur avec le processus system-probe
 
-Pour obtenir un flare de chaque container, exécutez les commandes suivantes :
+Pour obtenir un flare de chaque conteneur, exécutez les commandes suivantes :
 
 ### Agent {#agent}
 
@@ -92,7 +92,7 @@ kubectl exec -it <AGENT_POD_NAME> -c agent -- agent flare <CASE_ID>
 kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
 ```
 
-### Agent de Trace {#trace-agent}
+### Trace Agent {#trace-agent}
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
@@ -114,7 +114,14 @@ kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
 
 ## ECS Fargate {#ecs-fargate}
 
-Lors de l'utilisation de la plateforme ECS Fargate v1.4.0, les tâches et services ECS peuvent être configurés pour permettre l'accès aux conteneurs Linux en cours d'exécution en activant [Amazon ECS Exec][5]. Après avoir activé Amazon ECS Exec, exécutez la commande suivante pour envoyer un flare:
+Pour ECS Fargate, Datadog recommande [d'envoyer un flare depuis le site Datadog](#send-a-flare-from-the-datadog-site). Dans Fleet Automation, identifiez votre tâche par son ARN de tâche. Ce processus ne nécessite aucune modification de votre tâche ou service ECS.
+
+Alternativement, si Remote Configuration n'est pas disponible ou si vous devez exécuter d'autres commandes d'Agent, utilisez [Amazon ECS Exec][5]. Plateforme ECS Fargate v1.4.0. Pour l'utiliser :
+
+1. Ajoutez les autorisations ECS Exec à la définition de tâche.
+2. Activez ECS Exec sur le service.
+3. Redéployez la tâche.
+4. Exécutez la commande suivante pour envoyer un flare :
 
 ```bash
 aws ecs execute-command --cluster <CLUSTER_NAME> \
@@ -123,8 +130,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
     --interactive \
     --command "agent flare <CASE_ID>"
 ```
-
-**Remarque :** ECS Exec ne peut être activé que pour de nouvelles tâches. Vous devez recréer les tâches existantes pour utiliser ECS Exec.
 
 [1]: /fr/agent/basic_agent_usage/#gui
 [2]: /fr/agent/basic_agent_usage/windows/#agent-v6
@@ -145,8 +150,8 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 ## Soumission manuelle {#manual-submission}
 
-Le protocole de flare de l'Agent collecte les configurations et les journaux dans un fichier d'archive situé d'abord dans le répertoire local `/tmp`.
-Obtenez ce fichier manuellement et fournissez-le au support s'il y a des problèmes de connectivité avec l'Agent.
+Le protocole Agent flare collecte les configurations et les logs dans un fichier d'archive situé d'abord dans le répertoire local `/tmp`.
+Obtenez ce fichier manuellement et fournissez-le au support en cas de problème de connectivité de l'Agent.
 
 ### Kubernetes {#kubernetes}
 Pour obtenir le fichier d'archive dans Kubernetes, utilisez la commande kubectl :
@@ -155,7 +160,7 @@ Pour obtenir le fichier d'archive dans Kubernetes, utilisez la commande kubectl�
 kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

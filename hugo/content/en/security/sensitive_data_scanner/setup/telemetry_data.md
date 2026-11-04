@@ -75,6 +75,8 @@ A scanning group determines what data to scan. It consists of a query filter, a 
 
 For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
+**Note**: By default, Sensitive Data Scanner supports up to 20 scanning groups per organization for telemetry data (Logs, APM, RUM, and Events). If you reach this limit, consider consolidating scanning groups that use similar query filters and rules. To request a higher limit, contact [Datadog Support][18].
+
 To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
@@ -292,6 +294,9 @@ The excluded namespaces are:
 - `meta.issue`
 - `x-datadog-trace-id`
 - `x-datadog-parent-id`
+- `span_links.span_id`
+- `span_links.trace_id`
+- `span_links.trace_id_high`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
@@ -421,3 +426,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags
 [17]: /security/sensitive_data_scanner/scanning_rules/library_rules/#reference-library-rules-by-id
+[18]: /help/

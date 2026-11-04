@@ -51,6 +51,10 @@ When enabled, users logging in with SAML to your Datadog account are permanently
 Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][7].
 
+### Mobile and Third-Party Access
+
+The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
+
 ## Access
 
 ### API keys
@@ -101,10 +105,6 @@ The {{< ui >}}Public Sharing{{< /ui >}} tab includes org-wide settings for shari
 To apply sharing settings across all your orgs, reach out to [Datadog Support][16].
 
 **Note**: OrgAdmin permission is required to view and manage sharing settings and resources.
-
-### Mobile and Third-Party Access
-
-The [**Mobile and Third-Party Access**][15] page allows you to view and manage mobile and third-party applications in your organization.
 
 ## Compliance
 
