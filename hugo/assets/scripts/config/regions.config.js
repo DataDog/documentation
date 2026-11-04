@@ -482,6 +482,15 @@ export default {
     uk1: 'https://otlp.uk1.datadoghq.com/v1/metrics',
     gov: 'https://otlp.ddog-gov.com/v1/metrics'
   },
+  opamp_endpoint: {
+    us: 'https://opamp.datadoghq.com/v1/opamp',
+    us3: 'https://opamp.us3.datadoghq.com/v1/opamp',
+    us5: 'https://opamp.us5.datadoghq.com/v1/opamp',
+    eu: 'https://opamp.datadoghq.eu/v1/opamp',
+    ap1: 'https://opamp.ap1.datadoghq.com/v1/opamp',
+    ap2: 'https://opamp.ap2.datadoghq.com/v1/opamp',
+    uk1: 'https://opamp.uk1.datadoghq.com/v1/opamp'
+  },
   otlp_logs_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/logs',
     us3: 'https://otlp.us3.datadoghq.com/v1/logs',

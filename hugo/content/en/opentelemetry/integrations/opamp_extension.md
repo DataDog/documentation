@@ -33,7 +33,7 @@ The OpAMP extension is part of OpenTelemetry Collector Contrib. It's included in
 
 ## Setup
 
-**[Placeholder: Minimum OpenTelemetry Collector Contrib version.]**
+The OpAMP extension requires OpenTelemetry Collector Contrib v0.154.0 or later.
 
 ### 1. Add the OpAMP extension to your Collector configuration
 
@@ -55,9 +55,17 @@ service:
 
 Set the following environment variables:
 
-- `DD_OPAMP_ENDPOINT`: The Datadog OpAMP endpoint. **[Placeholder: Endpoint URL, and whether it differs by Datadog site.]**
+- `DD_OPAMP_ENDPOINT`: The Datadog OpAMP endpoint for your [Datadog site][10].
 - `DD_API_KEY`: Your [Datadog API key][7].
 - `OTELCOL_INSTANCE_UID`: A stable identifier for this Collector. See [Set a stable Collector identity](#2-set-a-stable-collector-identity).
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Set `DD_OPAMP_ENDPOINT` to the OpAMP endpoint for your Datadog site: {{< region-param key="opamp_endpoint" code="true" >}}.
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+**[Placeholder: Confirm whether the OpAMP endpoint is available on US1-FED and US2-FED.]**
+{{< /site-region >}}
 
 The extension's `reports_health`, `reports_effective_config`, and `reports_available_components` capabilities are on by default. Don't turn them off. Fleet Automation uses them as follows:
 
