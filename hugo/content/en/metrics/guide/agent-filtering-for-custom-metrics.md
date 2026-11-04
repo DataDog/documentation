@@ -220,22 +220,26 @@ Substitute `<BASE_URL>` in the example below with the base URL.
 }
 {{< /code-block >}}
 
-### Update a filtered metric policy (partial update)
+### Update a filtered metric rule (partial update)
 
 The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
 
 Substitute `<BASE_URL>` in the example below with the base URL.
 
-**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/rules/{rule-id}`
+
+Use `metrics_to_add` and `metrics_to_remove` to change a rule's metric list without replacing it. Send both attributes, and use an empty array for the one you don't need. Metric names must match exactly, so list each variant of a metric individually, such as `.count`, `.avg`, and `.95percentile`.
+
+`{rule-id}` is the `id` returned by the request in the [List filtered metric policies](#list-filtered-metric-policies) section.
 
 #### Example body
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
   "data": {
-    "type": "filtered_metrics",
+    "type": "rule",
     "attributes": {
-      "policy_name": "my policy",
+      "rule_name": "my rule",
       "metrics_to_add": [
         "metric.name.three",
         "metric.name.four"
@@ -245,6 +249,17 @@ Substitute `<BASE_URL>` in the example below with the base URL.
         "metric.name.six"
       ]
     }
+  }
+}
+{{< /code-block >}}
+
+#### Example response body
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+  "data": {
+    "id": "abc-123-def",
+    "type": "rule"
   }
 }
 {{< /code-block >}}
