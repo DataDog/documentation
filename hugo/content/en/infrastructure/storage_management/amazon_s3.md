@@ -1,5 +1,6 @@
 ---
 title: Storage Management for Amazon S3
+private: true
 further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-storage-monitoring/"
       tag: "Blog"
