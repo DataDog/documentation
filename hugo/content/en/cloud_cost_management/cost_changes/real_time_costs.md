@@ -34,8 +34,8 @@ Real-time costs are available for:
 
 Real-time costs cover compute only. The following charges are excluded:
 - **AWS**: EBS, networking, and similar services.
-- **Azure**: everything other than Virtual Machines compute usage (`chargetype:Usage`), such as managed disks, storage, bandwidth, and networking. Unused Azure capacity reservations are also excluded.
-- **Google Cloud**: everything other than the vCPU (Core) and memory (RAM) SKUs of Compute Engine instances, such as Persistent Disk, GPUs, networking, OS licenses, and external IP addresses. Credits and reservation charges are also excluded.
+- **Azure**: Everything other than Virtual Machines compute usage (`chargetype:Usage`), such as managed disks, storage, bandwidth, and networking. Unused Azure capacity reservations are also excluded.
+- **Google Cloud**: Everything other than the vCPU (Core) and memory (RAM) SKUs of Compute Engine instances, such as Persistent Disk, GPUs, networking, OS licenses, and external IP addresses. Credits and reservation charges are also excluded.
 
 ## Requirements
 
@@ -91,7 +91,7 @@ Real-time costs aim to be within 10% accuracy of the daily compute costs from yo
 - **Azure**: daily amortized Virtual Machines usage costs from your Azure cost export
 - **Google Cloud**: daily amortized Compute Engine vCPU and memory costs from your Google Cloud billing export
 
-Because real-time costs prioritize low-latency delivery, temporary drops or gaps in data may occasionally occur, especially for Azure and Google Cloud during the Preview. For long-term cost trend analysis, Datadog recommends using Cloud Cost metrics based on direct billing data, which include final credits.
+Because real-time costs prioritize low-latency delivery, temporary drops or gaps in data may occasionally occur, especially for Azure and Google Cloud while in Preview. For long-term cost trend analysis, Datadog recommends using Cloud Cost metrics based on direct billing data, which include final credits.
 
 You can use the `estimated_hourly_cost` and `estimated_daily_cost` tags to understand the estimated unit cost of an instance type per hour and per day.
 
@@ -101,12 +101,13 @@ You can use the `estimated_hourly_cost` and `estimated_daily_cost` tags to under
 - Underestimation can occur when:
   - Instances are not monitored by the Datadog Agent
   - Newly used instance types or regions have not yet appeared in CCM billing data
-  - Estimates cover compute only (see [Overview](#overview))
+  - Estimates cover compute only (see [Overview][4])
 - Overestimation can occur when:
   - Instances are monitored by the Datadog Agent but are not included in CCM billing data
 
-To reduce variance, filter to an account, subscription, or project (`subaccountid`) that is both included in Cloud Cost Management and has the Datadog Agent on all its instances.
+To reduce variance, filter to an account, subscription, or project that is both included in Cloud Cost Management and has the Datadog Agent on all its instances.
 
 [1]: /metrics/types/?tab=rate#metric-types
 [2]: /cloud_cost_management/allocation/container_cost_allocation/
 [3]: /cloud_cost_management/cost_changes/monitors/#create-a-real-time-anomaly-monitor
+[4]: #overview
