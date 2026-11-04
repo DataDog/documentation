@@ -42,21 +42,16 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 ## Restrict a project in the UI
 
-<div class="alert alert-info">Datadog is rolling out a redesigned access control page. Your organization has either the <strong>Data Access Controls</strong> page or the redesigned <strong>Access Control</strong> page. The link in step 1 takes you to whichever one you have, and both configure the same restriction.</div>
+<!-- TBD (DOCS-15824): Confirm these steps with the Agent Observability team. -->
 
-1. Navigate to [Organization Settings > Data Access Controls][3].
-2. Create a restriction that covers a subset of data:
-   - On the Data Access Controls page, click **New Restricted Dataset**.
-   - On the Access Control page, click **New Policy > Sensitive Data Partition**.
-3. Name it something that identifies the project it protects, for example `Offline Experiments - Fraud Detection`.
-4. Add a filter on the **Agent Observability** product, then specify the project:
-   - On the Access Control page, select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
+1. Navigate to [Organization Settings > Access Control][3].
+2. In the **Restricted Datasets** section, click **New Policy**. On the **New Policy** page, select the **Restricted Datasets** tab.
+3. Under **Choose Data Scope**, select **Agent Observability** as the product, then select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
 
-       <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Offline Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
+    <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Offline Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
 
-   - On the Data Access Controls page, enter the project ID as the `ml_app` value. See [Find a project's ID](#find-a-projects-id).
-
-5. Grant access to the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
+4. Under **Designate Users with Access**, add the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
+5. Under **Name Policy**, enter a name that identifies the project it protects, for example `Offline Experiments - Fraud Detection`.
 6. Save the Restricted Dataset.
 
 **Note**: The filter key may be locked. Agent Observability uses one tag key, `ml_app`, for both applications and projects, and Data Access Control allows one tag key per telemetry type. If your organization already has an Agent Observability Restricted Dataset, new ones reuse the same key.
@@ -118,7 +113,7 @@ Prompts created directly in the Prompt Management UI, API, or SDK are not associ
 
 ## Find a project's ID
 
-The Data Access Controls page and the Datasets API take a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Offline Experiments, or from the `id` field returned by the [Offline Experiments API][4] when listing projects.
+The Datasets API takes a project ID as the `ml_app` value, not a project name. Take the project ID from the URL of the project in Offline Experiments, or from the `id` field returned by the [Offline Experiments API][4] when listing projects.
 
 ## Grant and revoke access
 
@@ -141,7 +136,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 
 [1]: /account_management/rbac/data_access/
 [2]: /account_management/rbac/permissions/#access-management
-[3]: https://app.datadoghq.com/organization-settings/data-access-controls/
+[3]: https://app.datadoghq.com/organization-settings/access-controls
 [4]: /llm_observability/guide/offline_experiments_api/
 [5]: /api/latest/datasets/
 [6]: /account_management/rbac/data_access/#strict-mode

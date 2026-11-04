@@ -565,7 +565,7 @@ For a description of how reports are merged and how each line status is counted,
 [16]: https://reportgenerator.io/
 [17]: /tests/setup/
 [18]: /code_coverage/setup/#integrate-with-source-code-provider
-[19]: https://app.datadoghq.com/organization-settings/data-access-controls
+[19]: https://app.datadoghq.com/organization-settings/access-controls
 [20]: /code_coverage/coverage_calculation
 [21]: /code_coverage/configuration#pr-comments
 [22]: /code_coverage/configuration#inline-annotations
