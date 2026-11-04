@@ -377,8 +377,6 @@ In the {{< ui >}}Auto-Processing{{< /ui >}} tab, choose whether new entries are 
 3. Click a log pattern.
 4. Inspect the example logs to compare their original and processed attributes.
 
-{{< img src="logs/processing/pipelines/auto_processing_transformations.png" alt="The View Transformations page for an Auto-Processing entry, showing detected log patterns on the left and a diff of an example log's original and processed attributes on the right" style="width:100%;" >}}
-
 ### Enable or disable an entry
 
 In the {{< ui >}}Auto-Processing{{< /ui >}} tab, use an entry's toggle to enable or disable processing for that source and service pair. Disabling an entry affects future logs only. Logs that are already processed don't change.
