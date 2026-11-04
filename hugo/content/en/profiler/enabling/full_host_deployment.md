@@ -342,7 +342,7 @@ In bundled deployments, the Full-Host Profiler uses the Datadog Agent configurat
 The Full-Host Profiler uses:
 
 - `apm_config.profiling_dd_url`, when set, as the preferred profiling intake URL
-- `site`, when `apm_config.profiling_dd_url` isn't set;
+- `site`, when `apm_config.profiling_dd_url` isn't set
 - `api_key` for the main Datadog site;
 - `apm_config.profiling_additional_endpoints`, when set, to send profiles to additional Datadog sites with their respective API keys.
 
