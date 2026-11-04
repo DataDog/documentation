@@ -90,7 +90,7 @@ When you search BYOC Logs data in Log Explorer, the query travels over a secure 
 
 ## Connection to Datadog UI
 
-Connect the Datadog UI to the BYOC Logs engine in one of two ways:
+Operator deployments use the reverse connection. Helm deployments can connect the Datadog UI to the BYOC Logs engine in either of the following ways:
 
 - **[Reverse connection][2]**: Let the engine initiate a secure connection to Datadog.
 - **[External requests from Datadog][3]**: Provide Datadog with a DNS endpoint and configure a public ingress to accept requests.

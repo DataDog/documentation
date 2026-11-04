@@ -19,7 +19,7 @@ Use Observability Pipelines' BYOC (Bring Your Own Cloud) Logs destination to sen
 
 ## Prerequisites
 
-Before configuring the destination, you need to deploy a BYOC Logs cluster. Learn how to install it in the [BYOC Logs installation section][3].
+A running BYOC Logs cluster is required to receive logs. For an Operator deployment, create the pipeline and its destination first, then deploy the cluster and managed Worker with the pipeline ID. For a separately managed Worker, deploy the cluster and obtain its intake endpoint before installing the Worker. See the [BYOC Logs installation guides][3].
 
 ## Setup
 
@@ -45,6 +45,8 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The BYOC Logs destination settings" style="width:35%;" >}}
 
 ## Secret defaults
+
+For a Worker managed by a `DatadogBYOCCluster`, the Operator supplies the BYOC indexer endpoint, Datadog site, and shared API key. Configure the pipeline destination before deployment, then provide the pipeline ID in `spec.components.pipelines[].pipelineID`. The manual endpoint settings below apply to separately managed Workers. See [Install BYOC with the Datadog Operator][10].
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -99,3 +101,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /byoc-logs/install/datadog_operator/
