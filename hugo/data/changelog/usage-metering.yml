@@ -35,3 +35,9 @@ entries:
       - ListTemporaryGrantRequests
       - UpdateTemporaryGrantRequest
     title: Publish temporary AI-credit grant request APIs in preview
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41154
+    operations:
+      - GetMonthlyUsageAttribution
+    title: Clarify monthly usage attribution month restriction

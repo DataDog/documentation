@@ -91,7 +91,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-6-latest.amd64.m
 
 To install the Agent on Azure, follow the [Microsoft Azure documentation][8].
 
-## Linux and Unix
+## Linux
 
 {{< tabs >}}
 
@@ -615,68 +615,6 @@ DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://s3.amazon
    ```
 
 [101]: https://github.com/DataDog/agent-linux-install-script/blob/main/README.md#agent-configuration-options
-{{% /tab %}}
-
-{{% tab "AIX" %}}
-### One-step install
-
-The one-step command installs the latest BFF package for the Datadog Agent and prompts you for your password if necessary. If the Agent is not already installed on your machine and you don't want it to start automatically after the installation, prepend `DD_INSTALL_ONLY=true` to the command before running it.
-
-Run the following command, replacing `MY_API_KEY` with your Datadog API key:
-```shell
-DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
-```
-
-### Upgrade from a previous installation
-
-To install the Agent while keeping your existing configuration, run the following command:
-```shell
-DD_UPGRADE=true DD_SITE="datad0g.com" ksh -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-unix-agent/master/scripts/install_script.sh)"
-```
-
-For a full list of the available installation script environment variables, see [Basic Agent Usage for AIX][101].
-
-### Multi-step install
-
-1. Download the preferred BFF from the [datadog-unix-agent][102] repo releases.
-
-1. Install the artifact as root with `installp`:
-   ```shell
-   installp -aXYgd datadog-unix-agent-latest.powerpc.aix..bff datadog-unix-agent
-   ```
-
-1. If you don't have an existing configuration file, copy the example config into place. Replace `MY_API_KEY` with your Datadog API key:
-   ```shell
-   sudo sh -c "sed 's/api_key:.*/api_key: MY_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Configure the Datadog region:
-   ```shell
-   sudo sh -c "sed \'s/# site:.*/site: datad0g.com/\' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Ensure that the Datadog Agent has the correct permissions:
-   ```shell
-   sudo sh -c "chown dd-agent:dd-agent /etc/datadog-agent/datadog.yaml && chmod 660 /etc/datadog-agent/datadog.yaml"
-   ```
-
-1. Stop the Agent service:
-   ```shell
-   sudo stopsrc -s datadog-agent
-   ```
-
-1. Verify the Agent service has stopped:
-   ```
-   sudo lssrc -s datadog-agent
-   ```
-
-1. Restart the Agent service:
-   ```shell
-   sudo startsrc -s datadog-agent
-   ```
-
-[101]: /agent/basic_agent_usage/aix/#installation
-[102]: https://github.com/DataDog/datadog-unix-agent/releases
 {{% /tab %}}
 
 {{< /tabs >}}

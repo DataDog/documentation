@@ -1937,20 +1937,6 @@ components:
       schema:
         example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
         type: string
-    SalesforceIncidentsOrganizationIDPathParameter:
-      description: The Datadog-assigned ID of the connected Salesforce organization.
-      in: path
-      name: salesforce_org_id
-      required: true
-      schema:
-        type: string
-    SalesforceIncidentsTemplateIDPathParameter:
-      description: The ID of the Salesforce incident template.
-      in: path
-      name: incident_template_id
-      required: true
-      schema:
-        type: string
     SampleLogGenerationContentPackID:
       description: The identifier of the Cloud SIEM content pack to operate on (for example, `aws-cloudtrail`).
       in: path
@@ -7356,12 +7342,12 @@ components:
             $ref: "#/components/schemas/GuardrailMetric"
           type: array
         id:
-          description: The unique identifier of the targeting rule allocation.
+          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: The unique key of the targeting rule allocation.
+          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
           example: "prod-rollout"
           type: string
         name:
@@ -7419,7 +7405,7 @@ components:
         attributes:
           $ref: "#/components/schemas/Allocation"
         id:
-          description: The unique identifier of the targeting rule allocation.
+          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -7554,7 +7540,7 @@ components:
           nullable: true
           type: string
         allocation_id:
-          description: The targeting rule allocation ID this progressive rollout belongs to.
+          description: "The unique identifier (UUID) of the targeting rule allocation this progressive rollout belongs to. This is not the allocation key that SDKs report in evaluation results and exposure events."
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
@@ -23260,7 +23246,9 @@ components:
         attributes:
           $ref: "#/components/schemas/ContainerImageAttributes"
         id:
-          description: Container Image ID.
+          description: |-
+            Opaque Container Image ID. Often contains a registry, repository, and digest, but the format
+            varies by collection source. Preserve the returned value rather than constructing an ID.
           type: string
         type:
           $ref: "#/components/schemas/ContainerImageType"
@@ -23274,13 +23262,15 @@ components:
           type: integer
         image_flavors:
           description: |-
-            List of platform-specific images associated with the image record.
-            The list contains more than 1 entry for multi-architecture images.
+            Platform-specific image metadata, including size in bytes and available build and operating
+            system details. Use these objects to associate sizes with platforms when platform information is available.
           items:
             $ref: "#/components/schemas/ContainerImageFlavor"
           type: array
         image_tags:
-          description: List of image tags associated with the Container Image.
+          description: |-
+            Image version tags, such as `latest` or `v1.2.3`. Tags can change; use the returned `id` to
+            identify an image record. The corresponding filter and grouping key is `image_tag`.
           items:
             description: An image tag associated with the Container Image.
             type: string
@@ -23320,34 +23310,38 @@ components:
           description: Time the image was pushed to the container registry.
           type: string
         registry:
-          description: Registry the Container Image was pushed to.
+          description: Registry where the image is stored. Use the `image_registry` tag key for filtering and grouping.
           type: string
         repo_digest:
-          description: Digest of the compressed image manifest.
+          description: |-
+            Digest of the compressed image manifest. Use the `repo_digest` tag key to filter by this value.
           type: string
         repository:
-          description: Repository where the Container Image is stored in.
+          description: |-
+            Repository where the image is stored. Use the `image_repository` tag key for filtering and grouping.
           type: string
         short_image:
           description: Short version of the Container Image name.
           type: string
         sizes:
           description: |-
-            List of size for each platform-specific image associated with the image record.
-            The list contains more than 1 entry for multi-architecture images.
+            Reported sizes in bytes of platform-specific images, with multiple values possible for multi-architecture images.
+            Use `image_flavors` for available platform associations; use `size` as the sort key.
           items:
-            description: Size of the platform-specific Container Image.
+            description: Size of the platform-specific Container Image in bytes.
             format: int64
             type: integer
           type: array
         sources:
-          description: List of sources where the Container Image was collected from.
+          description: Collection sources, such as `live_containers`, `image_check`, `aws_ecr`, or `agentless_scanner`.
           items:
             description: Source where the Container Image was collected from.
             type: string
           type: array
         tags:
-          description: List of tags associated with the Container Image.
+          description: |-
+            Image tags in `key:value` form, such as `image_registry:docker.io` or `status:running`.
+            Use tag keys in `group_by`. Tags used in `filter[tags]` must satisfy its syntax restrictions.
           items:
             description: A tag associated with the Container Image.
             type: string
@@ -23371,7 +23365,7 @@ components:
           description: Operating System version supported by the Container Image.
           type: string
         size:
-          description: Size of the platform-specific Container Image.
+          description: Size of the platform-specific Container Image in bytes.
           format: int64
           type: integer
       type: object
@@ -23392,7 +23386,10 @@ components:
       description: Attributes for a Container Image Group.
       properties:
         count:
-          description: Number of Container Images in the group.
+          description: |-
+            Number of images in the group. An image with multiple values for a grouping tag can appear
+            in multiple groups. Images missing a grouping key are excluded. Summing group counts does
+            not give a reliable inventory total.
           format: int64
           type: integer
         name:
@@ -23417,7 +23414,10 @@ components:
           $ref: "#/components/schemas/ContainerImageGroupImagesRelationshipsLink"
       type: object
     ContainerImageGroupRelationshipsData:
-      description: Links data.
+      description: |-
+        This array is always empty, even when the group includes images. To retrieve the images in
+        this group, make a new request without `group_by`, using the `filter[tags]` value from
+        `links.related` and your site's API host. The tags must satisfy `filter[tags]` syntax restrictions.
       items:
         description: A link data.
         type: string
@@ -23426,7 +23426,10 @@ components:
       description: Links attributes.
       properties:
         related:
-          description: Link to related Container Images.
+          description: |-
+            Link containing the original filters combined with the group tags, without `group_by`.
+            Use its `filter[tags]` value in a new request to your site's API host. The tags must satisfy
+            `filter[tags]` syntax restrictions.
           type: string
       type: object
     ContainerImageGroupType:
@@ -23456,20 +23459,24 @@ components:
           description: The cursor used to get the current results, if any.
           type: string
         limit:
-          description: Number of results returned
+          description: Maximum number of results requested.
           format: int32
           maximum: 10000
           minimum: 0
           type: integer
         next_cursor:
-          description: The cursor used to get the next results, if any.
+          description: |-
+            The cursor used to get the next results, if any. To make the next request, use the same
+            parameters with the addition of `page[cursor]`. Always empty for grouped results, even
+            when additional groups exist.
           type: string
         prev_cursor:
           description: The cursor used to get the previous results, if any.
           nullable: true
           type: string
         total:
-          description: Total number of records that match the query.
+          description: |-
+            Total number of images that match the query. Always `0` for grouped results.
           format: int64
           type: integer
         type:
@@ -23494,7 +23501,9 @@ components:
       x-enum-varnames:
         - CONTAINER_IMAGE
     ContainerImageVulnerabilities:
-      description: Vulnerability counts associated with the Container Image.
+      description: |-
+        Vulnerability counts by severity, when available. An absent `vulnerability_count` does not mean
+        the image has no vulnerabilities.
       properties:
         asset_id:
           description: ID of the Container Image.
@@ -23525,10 +23534,11 @@ components:
           type: integer
       type: object
     ContainerImagesResponse:
-      description: List of Container Images.
+      description: List of Container Images or Container Image groups.
       properties:
         data:
-          description: Array of Container Image objects.
+          description: |-
+            Array of `container_image` objects, or `container_image_group` objects when `group_by` is specified.
           items:
             $ref: "#/components/schemas/ContainerImageItem"
           type: array
@@ -25840,6 +25850,8 @@ components:
     CreateConnectionRequestDataAttributes:
       description: Attributes defining the data source connection, including join configuration and custom fields.
       properties:
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields to import from the data source.
           items:
@@ -25858,6 +25870,10 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          maxLength: 255
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           example: ""
@@ -29573,6 +29589,10 @@ components:
     CustomCostsFileMetadata:
       description: Schema of a Custom Costs metadata.
       properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: false
+          type: boolean
         billed_cost:
           description: Total cost in the cost file.
           example: 100.50
@@ -29622,6 +29642,10 @@ components:
     CustomCostsFileMetadataWithContent:
       description: Schema of a cost file's metadata.
       properties:
+        ai_provider:
+          description: Whether the Custom Costs file contains the costs of an AI provider.
+          example: false
+          type: boolean
         billed_cost:
           description: Total cost in the cost file.
           example: 100.50
@@ -48051,7 +48075,7 @@ components:
       nullable: true
       properties:
         allocation_key:
-          description: "Key of the feature flag allocation linked to the experiment."
+          description: "Key of the feature flag allocation linked to the experiment. Matches the allocation key that SDKs report in flag evaluation results and exposure events."
           type: string
         entry_point:
           $ref: >-
@@ -51044,13 +51068,15 @@ components:
       type: object
     FacetInfoRequestDataType:
       default: users_facet_info_request
-      description: Users facet info request resource type.
+      description: Facet info request resource type.
       enum:
         - users_facet_info_request
+        - accounts_facet_info_request
       example: users_facet_info_request
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO_REQUEST
+        - ACCOUNTS_FACET_INFO_REQUEST
     FacetInfoResponse:
       description: Response containing facet information for an attribute, including its distinct values and occurrence counts.
       example:
@@ -51108,11 +51134,15 @@ components:
       description: The numeric range of a facet attribute, representing the minimum and maximum observed values.
       properties:
         max:
-          description: The maximum observed value for the numeric facet attribute.
-          type: object
+          description: The maximum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
         min:
-          description: The minimum observed value for the numeric facet attribute.
-          type: object
+          description: The minimum observed value for the numeric facet attribute. Null when no records match.
+          format: double
+          nullable: true
+          type: number
       type: object
     FacetInfoResponseDataAttributesResultValuesItems:
       description: A single facet value with its occurrence count in the dataset.
@@ -51127,13 +51157,15 @@ components:
       type: object
     FacetInfoResponseDataType:
       default: users_facet_info
-      description: Users facet info resource type.
+      description: Facet info resource type.
       enum:
         - users_facet_info
+        - accounts_facet_info
       example: users_facet_info
       type: string
       x-enum-varnames:
         - USERS_FACET_INFO
+        - ACCOUNTS_FACET_INFO
     FastlyAPIKey:
       description: The definition of the `FastlyAPIKey` object.
       properties:
@@ -51533,7 +51565,7 @@ components:
           nullable: true
           type: object
         default_allocation_key:
-          description: The allocation key used for the default variant.
+          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -51569,7 +51601,7 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: The allocation key used for the override variant.
+          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -51596,7 +51628,7 @@ components:
       description: Environment-specific settings for a feature flag in list responses.
       properties:
         default_allocation_key:
-          description: The allocation key used for the default variant.
+          description: "A system-generated allocation key, in the format `allocation-default-<hash>`, that SDKs report in flag evaluation results and exposure events when a subject receives the environment's default variant because no targeting rule matched. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
           example: "allocation-default-123abc"
           type: string
         default_variant_id:
@@ -51632,7 +51664,7 @@ components:
           example: false
           type: boolean
         override_allocation_key:
-          description: The allocation key used for the override variant.
+          description: "A system-generated allocation key, in the format `allocation-override-<hash>`, that SDKs report in flag evaluation results and exposure events when the environment's override variant is served. It has no corresponding allocation ID and cannot be used with the allocation endpoints."
           example: "allocation-override-123abc"
           type: string
         override_variant_id:
@@ -71611,16 +71643,18 @@ components:
         - attributes
       type: object
     LLMObsCustomEvalConfigEvalScope:
-      description: Scope at which to evaluate spans.
+      description: Scope at which to evaluate spans. `trace_fan_out` requires `llm_judge_config.target_query`.
       enum:
         - span
         - trace
+        - trace_fan_out
         - session
       example: "span"
       type: string
       x-enum-varnames:
         - SPAN
         - TRACE
+        - TRACE_FAN_OUT
         - SESSION
     LLMObsCustomEvalConfigInferenceParams:
       description: LLM inference parameters for a custom evaluator.
@@ -71657,14 +71691,20 @@ components:
           type: number
       type: object
     LLMObsCustomEvalConfigIntegrationProvider:
-      description: Name of the LLM integration provider.
+      description: >-
+        Name of the LLM integration provider. Use `deterministic` for a code evaluator, which runs `llm_judge_config.user_specified_json_post_processing_function` instead of calling an LLM. `insights_sponsored` is returned for evaluators that Datadog manages and cannot be set.
       enum:
         - openai
-        - amazon-bedrock
+        - amazon_bedrock
         - anthropic
-        - azure-openai
-        - vertex-ai
-        - llm-proxy
+        - azure_openai
+        - vertex_ai
+        - llmproxy
+        - deterministic
+        - typesafe
+        - datadog
+        - datadog_ai_gateway
+        - insights_sponsored
       example: "openai"
       type: string
       x-enum-varnames:
@@ -71674,6 +71714,11 @@ components:
         - AZURE_OPENAI
         - VERTEX_AI
         - LLM_PROXY
+        - DETERMINISTIC
+        - TYPESAFE
+        - DATADOG
+        - DATADOG_AI_GATEWAY
+        - INSIGHTS_SPONSORED
     LLMObsCustomEvalConfigLLMJudgeConfig:
       description: LLM judge configuration for a custom evaluator.
       properties:
@@ -71698,13 +71743,13 @@ components:
           type: boolean
         output_schema:
           additionalProperties: {}
-          description: JSON schema describing the expected output format of the LLM judge.
+          description: JSON schema describing the expected output format of the LLM judge. Omit for a `deterministic` evaluator.
           nullable: true
           type: object
         parsing_type:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigParsingType"
         prompt_template:
-          description: List of messages forming the LLM judge prompt template.
+          description: List of messages forming the LLM judge prompt template. Omit for a `deterministic` evaluator.
           items:
             $ref: "#/components/schemas/LLMObsCustomEvalConfigPromptMessage"
           type: array
@@ -71714,7 +71759,8 @@ components:
           nullable: true
           type: string
         user_specified_json_post_processing_function:
-          description: User-provided function applied to post-process the JSON output of the LLM judge.
+          description: >-
+            User-provided JavaScript function applied to post-process the JSON output of the LLM judge. For a `deterministic` evaluator it is the evaluator itself: it receives the evaluated span (span scope), `{spans}` (trace scope), or `{session_id, traces}` (session scope), and its return value sets the result. A boolean, number, string or object becomes a boolean, score, categorical or JSON metric; `null` skips the evaluation; and `{value, assessment, reasoning, metadata}` also sets pass or fail, reasoning, and metadata.
           nullable: true
           type: string
       required:
@@ -71732,7 +71778,7 @@ components:
         integration_provider:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigIntegrationProvider"
         model_name:
-          description: Name of the LLM model.
+          description: Name of the LLM model. Use `javascript` for a `deterministic` evaluator.
           example: "gpt-4o"
           type: string
         vertex_ai:
@@ -71755,12 +71801,14 @@ components:
         - structured_output
         - json
         - keyword_search
+        - typed_questions
       example: "structured_output"
       type: string
       x-enum-varnames:
         - STRUCTURED_OUTPUT
         - JSON
         - KEYWORD_SEARCH
+        - TYPED_QUESTIONS
     LLMObsCustomEvalConfigPromptContent:
       description: A content block within a prompt message.
       properties:
@@ -78098,6 +78146,8 @@ components:
         created_by:
           description: Identifier of the user who created the connection.
           type: string
+        details:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetails"
         fields:
           description: List of custom attribute fields imported from the data source.
           items:
@@ -78113,6 +78163,9 @@ components:
             type: string
           description: Additional key-value metadata associated with the connection.
           type: object
+        name:
+          description: Display name of the connection.
+          type: string
         type:
           description: The type of data source connection (for example, ref_table).
           type: string
@@ -78122,6 +78175,40 @@ components:
           type: string
         updated_by:
           description: Identifier of the user who last updated the connection.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetails:
+      description: Type-specific configuration of the connection. Only the field matching the connection type is set.
+      properties:
+        ref_table:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable"
+        snowflake:
+          $ref: "#/components/schemas/ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake"
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsRefTable:
+      description: Configuration of a reference table connection.
+      properties:
+        table_id:
+          description: Identifier of the reference table.
+          type: string
+        table_name:
+          description: Name of the reference table.
+          type: string
+      type: object
+    ListConnectionsResponseDataAttributesConnectionsItemsDetailsSnowflake:
+      description: Configuration of a Snowflake connection.
+      properties:
+        account_id:
+          description: Identifier of the Snowflake account.
+          type: string
+        database_name:
+          description: Name of the Snowflake database.
+          type: string
+        schema:
+          description: Name of the Snowflake schema.
+          type: string
+        table_name:
+          description: Name of the Snowflake table.
           type: string
       type: object
     ListConnectionsResponseDataAttributesConnectionsItemsJoin:
@@ -84280,6 +84367,8 @@ components:
           $ref: "#/components/schemas/MonitorNotificationRuleName"
         recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleRecipients"
+        rule_options:
+          $ref: "#/components/schemas/MonitorNotificationRuleOptions"
       required: [name]
       type: object
     MonitorNotificationRuleBundleConfig:
@@ -84420,6 +84509,17 @@ components:
       maxLength: 1000
       minLength: 1
       type: string
+    MonitorNotificationRuleOptions:
+      description: Additional options for the monitor notification rule.
+      properties:
+        is_threaded:
+          description: |-
+            Whether notifications from this rule are threaded. When `true`, follow-up notifications for the same monitor alert are posted in Slack as replies to the first notification.
+            Cannot be `true` when `bundle_config` is set.
+          example: true
+          type: boolean
+      required: [is_threaded]
+      type: object
     MonitorNotificationRuleRecipients:
       description: |-
         A list of recipients to notify. Uses the same format as the monitor `message` field. Must not start with an '@'. Cannot be used with `conditional_recipients`.
@@ -84497,6 +84597,8 @@ components:
           $ref: "#/components/schemas/MonitorNotificationRuleName"
         recipients:
           $ref: "#/components/schemas/MonitorNotificationRuleRecipients"
+        rule_options:
+          $ref: "#/components/schemas/MonitorNotificationRuleOptions"
       type: object
     MonitorNotificationRuleResponseIncludedItem:
       description: An object related to a monitor notification rule.
@@ -106393,6 +106495,7 @@ components:
             Filter expression applied to the recommendations when `attributes.filter` is omitted.
             When supplied, `attributes.filter` overrides this value, including when empty. If the
             resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -106420,6 +106523,7 @@ components:
           description: |-
             Status view to return: `all`, `active` (not dismissed), `dismissed`, `open`, `in-progress`,
             or `completed`. Defaults to `all`, which returns recommendations in every status.
+          example: active
           type: string
       type: object
     RecommendationsFilterRequestDataType:
@@ -106434,25 +106538,32 @@ components:
     RecommendationsFilterRequestScope:
       description: |-
         Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations
-        or `*` for both.
+        or `*` for both. An empty value is treated as `ccm`.
       enum:
         - ccm
         - experiment
         - "*"
+        - ""
+      example: ccm
       type: string
       x-enum-varnames:
         - CCM
         - EXPERIMENT
         - ALL
+        - EMPTY
     RecommendationsFilterRequestSortItems:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
           description: Field to sort by (for example, `@potential_daily_savings`).
+          example: "@potential_daily_savings"
           type: string
         order:
-          description: Sort direction, either `ASC` or `DESC`.
+          description: Sort direction, either `ASC` or `DESC` (case-insensitive).
+          example: DESC
           type: string
+      required:
+        - order
       type: object
     RecommendationsPageMeta:
       description: Top-level JSON:API meta object for paginated cost recommendation responses.
@@ -112914,275 +113025,6 @@ components:
       type: string
       x-enum-varnames:
         - VERSION_2_1
-    SalesforceIncidentsOrganizationResponseAttributes:
-      description: Attributes of a Salesforce organization connected to the Datadog Salesforce integration.
-      properties:
-        instance_url:
-          description: The Salesforce instance URL used to call this organization's APIs.
-          example: "https://acme.my.salesforce.com"
-          type: string
-        name:
-          description: Human-readable name of the Salesforce organization.
-          example: "Acme Production Org"
-          type: string
-        sfdc_org_id:
-          description: The Salesforce organization identifier (15- or 18-character Salesforce org ID).
-          example: "00D000000000000"
-          type: string
-        sfdc_org_type:
-          description: The Salesforce organization type (for example, `Production` or `Sandbox`).
-          example: "Production"
-          type: string
-      type: object
-    SalesforceIncidentsOrganizationResponseData:
-      description: Salesforce organization data from a response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsOrganizationResponseAttributes"
-        id:
-          description: The Datadog-assigned ID of the connected Salesforce organization.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsOrganizationType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsOrganizationType:
-      default: salesforce-incidents-org
-      description: Salesforce organization resource type.
-      enum:
-        - salesforce-incidents-org
-      example: salesforce-incidents-org
-      type: string
-      x-enum-varnames:
-        - SALESFORCE_INCIDENTS_ORG
-    SalesforceIncidentsOrganizationsResponse:
-      description: |-
-        Response containing a list of Salesforce organizations connected to the
-        Datadog Salesforce integration.
-      properties:
-        data:
-          description: An array of Salesforce organizations.
-          items:
-            $ref: "#/components/schemas/SalesforceIncidentsOrganizationResponseData"
-          type: array
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplateCreateAttributes:
-      description: Salesforce incident template attributes for a create request.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          maxLength: 2048
-          minLength: 1
-          type: string
-        name:
-          description: Human-readable name for this incident template. Must be unique within your organization.
-          example: "production-outage"
-          maxLength: 100
-          minLength: 1
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          maxLength: 255
-          minLength: 1
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-        - salesforce_org_id
-        - name
-        - subject
-        - description
-        - owner_id
-        - priority
-      type: object
-    SalesforceIncidentsTemplateCreateData:
-      description: Salesforce incident template data for a create request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateAttributes"
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateCreateRequest:
-      description: Create request for a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplatePriority:
-      description: Priority of the Salesforce incident created from this template.
-      enum:
-        - Critical
-        - High
-        - Moderate
-        - Low
-      example: "High"
-      type: string
-      x-enum-varnames:
-        - CRITICAL
-        - HIGH
-        - MODERATE
-        - LOW
-    SalesforceIncidentsTemplateResponse:
-      description: Response containing a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplateResponseAttributes:
-      description: Salesforce incident template attributes returned by the API.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          type: string
-        name:
-          description: Human-readable name for this incident template.
-          example: "production-outage"
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          type: string
-      type: object
-    SalesforceIncidentsTemplateResponseData:
-      description: Salesforce incident template data from a response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseAttributes"
-        id:
-          description: The ID of the Salesforce incident template.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateType:
-      default: salesforce-incidents-incident-template
-      description: Salesforce incident template resource type.
-      enum:
-        - salesforce-incidents-incident-template
-      example: salesforce-incidents-incident-template
-      type: string
-      x-enum-varnames:
-        - SALESFORCE_INCIDENTS_INCIDENT_TEMPLATE
-    SalesforceIncidentsTemplateUpdateAttributes:
-      description: Salesforce incident template attributes for an update request.
-      properties:
-        description:
-          description: Long-form description body for Salesforce incidents created from this template.
-          example: "An incident was detected by Datadog monitors."
-          maxLength: 2048
-          minLength: 1
-          type: string
-        name:
-          description: Human-readable name for this incident template.
-          example: "production-outage"
-          maxLength: 100
-          minLength: 1
-          type: string
-        owner_id:
-          description: The Salesforce user ID that owns incidents created from this template.
-          example: "005000000000000"
-          maxLength: 255
-          minLength: 1
-          type: string
-        priority:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplatePriority"
-        salesforce_org_id:
-          description: The Datadog-assigned ID of the Salesforce organization this template belongs to.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          format: uuid
-          type: string
-        subject:
-          description: Subject line for Salesforce incidents created from this template.
-          example: "Datadog Incident: Production Outage"
-          maxLength: 255
-          minLength: 1
-          type: string
-      type: object
-    SalesforceIncidentsTemplateUpdateData:
-      description: Salesforce incident template data for an update request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateAttributes"
-        id:
-          description: The ID of the Salesforce incident template being updated. Must match the path parameter.
-          example: "596da4af-0563-4097-90ff-07230c3f9db3"
-          maxLength: 100
-          minLength: 1
-          type: string
-        type:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    SalesforceIncidentsTemplateUpdateRequest:
-      description: Update request for a Salesforce incident template.
-      properties:
-        data:
-          $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateData"
-      required:
-        - data
-      type: object
-    SalesforceIncidentsTemplatesResponse:
-      description: Response containing a list of Salesforce incident templates.
-      properties:
-        data:
-          description: An array of Salesforce incident templates.
-          items:
-            $ref: "#/components/schemas/SalesforceIncidentsTemplateResponseData"
-          type: array
-      required:
-        - data
-      type: object
     SampleLogGenerationBulkSubscriptionAttributes:
       description: The attributes for creating sample log generation subscriptions for multiple content packs.
       properties:
@@ -142520,6 +142362,10 @@ components:
           items:
             $ref: "#/components/schemas/UpdateConnectionRequestDataAttributesFieldsToUpdateItems"
           type: array
+        name:
+          description: New display name for the connection.
+          maxLength: 255
+          type: string
       type: object
     UpdateConnectionRequestDataAttributesFieldsToUpdateItems:
       description: Specification for updating an existing field in a connection, including which field to modify and the new values.
@@ -143703,12 +143549,12 @@ components:
             $ref: "#/components/schemas/GuardrailMetricRequest"
           type: array
         id:
-          description: The unique identifier of the targeting rule allocation.
+          description: "The unique identifier of the targeting rule allocation. Use this ID with the allocation management endpoints, such as `/api/v2/allocations/{allocation_id}`. It is not included in SDK evaluation results or exposure events."
           example: "550e8400-e29b-41d4-a716-446655440020"
           format: uuid
           type: string
         key:
-          description: The unique key of the targeting rule allocation.
+          description: "The unique key of the targeting rule allocation. SDKs report this key in flag evaluation results and exposure events to indicate which targeting rule assigned the variant. Use it to match evaluation or experiment data to this rule."
           example: "prod-rollout"
           type: string
         name:
@@ -147493,6 +147339,7 @@ components:
             product_analytics_settings_read: View Product Analytics Settings.
             product_analytics_settings_write: Edit Product Analytics Settings.
             product_analytics_warehouse_model_write: Create, edit, and delete Product Analytics Warehouse Models.
+            repo_info_read: View data from Git repositories.
             security_comments_read: Read comments of vulnerabilities.
             security_monitoring_critical_assets_read: Read Critical Assets.
             security_monitoring_critical_assets_write: Write Critical Assets.
@@ -161217,32 +161064,53 @@ paths:
   /api/v2/container_images:
     get:
       description: |-
-        Get all Container Images for your organization.
+        Get all container images for your organization. This endpoint queries current
+        inventory and does not support time-range parameters.
+
+        Use `group_by` to return image groups with counts. Grouped results are limited
+        by `page[size]`, may be incomplete, and do not support pagination.
+
         **Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.
       operationId: ListContainerImages
       parameters:
-        - description: Comma-separated list of tags to filter Container Images by.
+        - description: |-
+            Comma-separated `key:value` tags. An image must match every tag. Wildcards, negation
+            (`-key:value`), spaces, and `IN (...)` are not supported. Use keys such as `image_registry`
+            and `image_tag`. To match any of several values of the same key, make one request per value.
           example: short_image:redis,status:running
           in: query
           name: filter[tags]
           required: false
           schema:
             type: string
-        - description: Comma-separated list of tags to group Container Images by.
-          example: registry,image_tags
+        - description: |-
+            Comma-separated list of up to three tag keys, such as `image_registry,image_tag`. Returns
+            `container_image_group` objects with counts and tags. Grouped results ignore `sort` and do
+            not support pagination. Images missing a grouping key are excluded. An image with multiple
+            values for a grouping tag can appear in multiple groups. Grouped results may be incomplete.
+            Compare counts only within the returned groups; they do not establish the most common tags
+            or proportions across the inventory. For inventory-wide comparisons, omit `group_by`, keep the
+            same filters, paginate all results, and deduplicate by returned image ID. For an inventory total,
+            use `meta.pagination.total` from a query without grouping.
+          example: image_registry,image_tag
           in: query
           name: group_by
           required: false
           schema:
             type: string
-        - description: Attribute to sort Container Images by.
-          example: container_count
+        - description: |-
+            Attribute to sort individual images by, such as `size` or `container_count`.
+            Defaults to `image_name` in ascending order. Prefix the attribute with `-` for
+            descending order, such as `-size`. Ignored when `group_by` is specified.
+          example: "-container_count"
           in: query
           name: sort
           required: false
           schema:
             type: string
-        - description: Maximum number of results returned.
+        - description: |-
+            Maximum number of results returned. Grouped queries default to `100`, with a maximum of `1000` groups.
+            Without grouping, queries default to `1000`, with a maximum of `10000` images. Minimum is `1`.
           in: query
           name: page[size]
           required: false
@@ -161253,8 +161121,8 @@ paths:
             minimum: 1
             type: integer
         - description: |-
-            String to query the next page of results.
-            This key is provided with each valid response from the API in `meta.pagination.next_cursor`.
+            Opaque cursor from `meta.pagination.next_cursor` for individual images. Keep the same filters
+            and sort order. Stop when absent or empty. Grouped queries do not support pagination.
           in: query
           name: page[cursor]
           required: false
@@ -161270,18 +161138,57 @@ paths:
                     data:
                       - attributes:
                           container_count: 1
+                          image_flavors:
+                            - built_at: "2026-01-01T00:00:00Z"
+                              os_architecture: amd64
+                              os_name: linux
+                              os_version: ""
+                              size: 100000000
                           image_tags:
                             - latest
                           name: nginx
                           registry: docker.io
                           repository: library/nginx
                           short_image: nginx
+                          sizes:
+                            - 100000000
+                          tags:
+                            - image_registry:docker.io
+                            - image_repository:library/nginx
+                            - image_tag:latest
+                            - short_image:nginx
+                            - status:running
                         id: abc-123
                         type: container_image
                     meta:
                       pagination:
                         limit: 1000
                         total: 1
+                        type: cursor_limit
+                grouped:
+                  summary: Images grouped by registry.
+                  value:
+                    data:
+                      - attributes:
+                          count: 1
+                          name: image_registry:docker.io
+                          tags:
+                            image_registry: docker.io
+                        id: image_registry:docker.io
+                        relationships:
+                          container_images:
+                            data: []
+                            links:
+                              related: >-
+                                https://api.datadoghq.com/api/v2/container_images?filter[tags]=image_registry:docker.io
+                        type: container_image_group
+                    meta:
+                      pagination:
+                        cursor: ""
+                        limit: 100
+                        next_cursor: ""
+                        prev_cursor: ""
+                        total: 0
                         type: cursor_limit
               schema:
                 $ref: "#/components/schemas/ContainerImagesResponse"
@@ -163995,6 +163902,7 @@ paths:
                   value:
                     data:
                       - attributes:
+                          ai_provider: false
                           billed_cost: 100.5
                           billing_currency: USD
                           charge_period:
@@ -164043,6 +163951,14 @@ paths:
     put:
       description: Upload a Custom Costs file.
       operationId: UploadCustomCostsFile
+      parameters:
+        - description: Whether the uploaded file contains the costs of an AI provider.
+          in: query
+          name: ai_provider
+          required: false
+          schema:
+            default: false
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -164066,6 +163982,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        ai_provider: false
                         billed_cost: 100.5
                         billing_currency: USD
                         charge_period:
@@ -164156,6 +164073,7 @@ paths:
                   value:
                     data:
                       attributes:
+                        ai_provider: false
                         billed_cost: 100.5
                         billing_currency: USD
                         charge_period:
@@ -194286,261 +194204,6 @@ paths:
         operator: OR
         permissions:
           - manage_integrations
-  /api/v2/integration/salesforce-incidents/incident-templates:
-    get:
-      deprecated: true
-      description: Get all Salesforce incident templates configured for your organization.
-      operationId: GetIncidentTemplates
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          description: An incident was detected by Datadog monitors.
-                          name: production-outage
-                          owner_id: "005000000000000"
-                          priority: High
-                          salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                          subject: "Datadog Incident: Production Outage"
-                        id: 00000000-0000-0000-0000-000000000001
-                        type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplatesResponse"
-          description: OK
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get all Salesforce incident templates
-      tags:
-        - Salesforce Integration
-      x-menu-order: 3
-      "x-permission":
-        operator: OR
-        permissions:
-          - integrations_read
-    post:
-      deprecated: true
-      description: |-
-        Create a new Salesforce incident template for your organization. Template
-        names must be unique within an organization.
-      operationId: CreateIncidentTemplate
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      description: An incident was detected by Datadog monitors.
-                      name: production-outage
-                      owner_id: "005000000000000"
-                      priority: High
-                      salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                      subject: "Datadog Incident: Production Outage"
-                    type: salesforce-incidents-incident-template
-            schema:
-              $ref: "#/components/schemas/SalesforceIncidentsTemplateCreateRequest"
-        description: Salesforce incident template payload.
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: An incident was detected by Datadog monitors.
-                        name: production-outage
-                        owner_id: "005000000000000"
-                        priority: High
-                        salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                        subject: "Datadog Incident: Production Outage"
-                      id: 00000000-0000-0000-0000-000000000002
-                      type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplateResponse"
-          description: CREATED
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-codegen-request-body-name: body
-      x-menu-order: 4
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-  /api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}:
-    delete:
-      deprecated: true
-      description: Delete a single Salesforce incident template from your organization.
-      operationId: DeleteIncidentTemplate
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsTemplateIDPathParameter"
-      responses:
-        "204":
-          description: OK
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-menu-order: 6
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-    patch:
-      deprecated: true
-      description: Update a single Salesforce incident template in your organization.
-      operationId: UpdateIncidentTemplate
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsTemplateIDPathParameter"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      name: production-outage-renamed
-                    id: 596da4af-0563-4097-90ff-07230c3f9db3
-                    type: salesforce-incidents-incident-template
-            schema:
-              $ref: "#/components/schemas/SalesforceIncidentsTemplateUpdateRequest"
-        description: Salesforce incident template payload.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        description: An incident was detected by Datadog monitors.
-                        name: production-outage-renamed
-                        owner_id: "005000000000000"
-                        priority: High
-                        salesforce_org_id: 596da4af-0563-4097-90ff-07230c3f9db3
-                        subject: "Datadog Incident: Production Outage"
-                      id: 00000000-0000-0000-0000-000000000003
-                      type: salesforce-incidents-incident-template
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsTemplateResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "409":
-          $ref: "#/components/responses/ConflictResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a Salesforce incident template
-      tags:
-        - Salesforce Integration
-      x-codegen-request-body-name: body
-      x-menu-order: 5
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
-  /api/v2/integration/salesforce-incidents/organizations:
-    get:
-      deprecated: true
-      description: |-
-        Get all Salesforce organizations connected to your Datadog organization
-        through the Salesforce integration. Salesforce organizations are connected
-        through the OAuth setup flow in the Datadog Salesforce integration page.
-      operationId: GetSalesforceOrganizations
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      - attributes:
-                          instance_url: "https://acme.my.salesforce.com"
-                          name: "Acme Production Org"
-                          sfdc_org_id: "00D000000000000"
-                          sfdc_org_type: "Production"
-                        id: 00000000-0000-0000-0000-000000000001
-                        type: salesforce-incidents-org
-              schema:
-                $ref: "#/components/schemas/SalesforceIncidentsOrganizationsResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get all connected Salesforce organizations
-      tags:
-        - Salesforce Integration
-      x-menu-order: 1
-      "x-permission":
-        operator: OR
-        permissions:
-          - integrations_read
-  /api/v2/integration/salesforce-incidents/organizations/{salesforce_org_id}:
-    delete:
-      deprecated: true
-      description: |-
-        Disconnect a Salesforce organization from your Datadog organization.
-        This also deletes any incident templates referencing the organization.
-      operationId: DeleteSalesforceOrganization
-      parameters:
-        - $ref: "#/components/parameters/SalesforceIncidentsOrganizationIDPathParameter"
-      responses:
-        "204":
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/ForbiddenResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a connected Salesforce organization
-      tags:
-        - Salesforce Integration
-      x-menu-order: 2
-      "x-permission":
-        operator: OR
-        permissions:
-          - manage_integrations
   /api/v2/integration/servicenow/assignment_groups/{instance_id}:
     get:
       description: |-
@@ -206510,7 +206173,7 @@ paths:
         permissions:
           - metrics_read
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules:
     get:
@@ -206589,9 +206252,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
@@ -206671,9 +206331,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/order:
     post:
       description: |-
@@ -206738,9 +206395,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/tag-indexing-rules/{id}:
     delete:
       description: |-
@@ -206784,9 +206438,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a single tag indexing rule by its UUID.
       operationId: GetTagIndexingRule
@@ -206852,9 +206503,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
@@ -206947,9 +206595,6 @@ paths:
         operator: OR
         permissions:
           - metric_tags_write
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
       description: |-
@@ -207421,7 +207066,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: |-
@@ -207492,7 +207137,7 @@ paths:
         permissions:
           - metrics_read
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
@@ -207568,7 +207213,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
@@ -207651,7 +207296,7 @@ paths:
         permissions:
           - metric_tags_write
       x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tag-indexing-rules:
     get:
@@ -207705,9 +207350,6 @@ paths:
         operator: OR
         permissions:
           - metrics_read
-      x-unstable: |-
-        **Note**: The Tag Indexing Rules feature is currently in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics/{metric_name}/tags:
     delete:
       description: |-
@@ -263132,12 +262774,6 @@ tags:
 
       Note: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information.
     name: SCIM
-  - description: |-
-      Configure your [Datadog Salesforce integration](https://docs.datadoghq.com/integrations/salesforce/)
-      directly through the Datadog API.
-    externalDocs:
-      url: https://docs.datadoghq.com/api/latest/salesforce-integration
-    name: Salesforce Integration
   - description: |-
       API to create and update scorecard rules and outcomes. See [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.
     name: Scorecards
