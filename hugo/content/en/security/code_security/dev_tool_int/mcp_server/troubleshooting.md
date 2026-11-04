@@ -27,7 +27,7 @@ Install a missing binary with the instructions in [Install security binaries][1]
 
 ## Scanner upgrade required
 
-Ephemeral SAST scans and custom rule saves require `datadog-static-analyzer` version 0.9.10 or later. With an earlier version, they return a `Scanner Upgrade` error. Upgrade the binary and retry:
+Ephemeral SAST scans and saving custom SAST rules require `datadog-static-analyzer` version 0.9.10 or later. With an earlier version, they return a `Scanner Upgrade` error. Upgrade the binary and retry:
 
 ```shell
 brew upgrade datadog-static-analyzer
