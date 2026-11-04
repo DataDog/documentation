@@ -688,7 +688,7 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 For [supported models and providers][58], Datadog can estimate costs from token usage without cost attributes. Supply costs directly for unsupported models or custom pricing.
 
-Cost attributes use two paths: [**Datadog preserves supplied costs**](#supplied-cost-attributes), while [**automatic pricing can replace fallback estimates**](#fallback-estimated-cost-attributes-nanodollars). While both paths populate the same `metrics.estimated_*_cost` fields, Datadog preserves supplied costs despite the `estimated_` prefix.
+Cost attributes use two paths: [supplied costs](#supplied-cost-attributes) that Datadog preserves, and [fallback estimates](#fallback-estimated-cost-attributes-nanodollars) that automatic pricing can replace. Both paths populate the same `metrics.estimated_*_cost` fields, but Datadog preserves supplied costs despite the `estimated_` prefix.
 
 ##### Supplied cost attributes
 
@@ -715,7 +715,7 @@ If several USD attributes from the table above supply the same cost field, Datad
 
 ##### Fallback estimated cost attributes (nanodollars)
 
-These Datadog-supported extensions accept optional fallback estimates in **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate. **Datadog replaces a supplied estimate when it calculates a positive cost for that field**, even from partial token counts. Otherwise, Datadog keeps the supplied estimate.
+These Datadog-supported extensions accept optional fallback estimates in nanodollars, without unit conversion. For example, send `10000000` for a $0.01 estimate. Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
