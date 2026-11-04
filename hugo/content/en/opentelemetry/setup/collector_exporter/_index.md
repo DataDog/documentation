@@ -256,10 +256,10 @@ See the [full configuration files][500] for an optional config to gather additio
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
-Run the Collector:
+Run the Collector. Replace `<YOUR_DD_SITE>` with your Datadog site: {{< region-param key="dd_site" code="true" >}}.
 
 ```shell
-DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
+DD_SITE=<YOUR_DD_SITE> DD_API_KEY=<YOUR_API_KEY> \
   otelcol-contrib --config collector.yaml
 ```
 
