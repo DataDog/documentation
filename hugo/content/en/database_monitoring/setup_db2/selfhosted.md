@@ -49,7 +49,7 @@ DBM for IBM Db2 does not collect query samples, query activity, explain plans, o
 
 ## Setup
 
-### Step 1: enable monitoring
+### Step 1: Enable monitoring
 
 As the Db2 instance administrator, enable the monitor switches described in the IBM Db2 integration's [Enable monitoring instructions][1].
 
@@ -165,7 +165,7 @@ If each server runs its own Agent, include only that server's entry in its confi
 
 After configuring the check, driver, and secret backend, [restart the Agent][17].
 
-### Step 5: validate
+### Step 5: Validate
 
 Run the Agent status command on the host or in the Agent container that executes the check:
 
