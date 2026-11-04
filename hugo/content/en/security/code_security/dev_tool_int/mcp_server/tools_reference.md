@@ -209,12 +209,12 @@ Requires `DD_API_KEY` and `DD_APP_KEY`.
 | Parameter           | Type            | Required | Description                                                                                                   |
 | ------------------- | --------------- | :------: | ------------------------------------------------------------------------------------------------------------- |
 | `user_confirmed`    | `boolean`       |   Yes    | Must be `true`. Set it only after the user approves the rule.                                                 |
-| `overwrite`         | `boolean`       |    No    | Replace a rule that already exists. Default: `false`.                                                         |
 | `rule_code`         | `string`        |   Yes    | Rule JavaScript source, not base64-encoded                                                                    |
 | `tree_sitter_query` | `string`        |   Yes    | Tree-sitter query source, not base64-encoded                                                                  |
 | `language`          | `string`        |   Yes    | Language of the rule, for example `TYPESCRIPT`                                                                |
-| `rule_name`         | `string`        |   Yes    | Lowercase rule name, 5 to 32 characters                                                                       |
-| `ruleset_name`      | `string`        |    No    | Lowercase ruleset name, 5 to 32 characters. Default: `security-variants`.                                     |
+| `rule_name`         | `string`        |   Yes    | Lowercase rule name, 5-32 characters                                                                          |
+| `ruleset_name`      | `string`        |    No    | Lowercase ruleset name, 5-32 characters. Default: `security-variants`.                                        |
+| `overwrite`         | `boolean`       |    No    | Replace a rule that already exists. Default: `false`.                                                         |
 | `short_description` | `string`        |    No    | One-line summary, at most 60 characters                                                                       |
 | `description`       | `string`        |    No    | Description stored on the rule                                                                                |
 | `tests`             | `array[object]` |   Yes    | Exactly two examples: the fixed code and the code before the fix. Each object uses the fields in the table below. |
