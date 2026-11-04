@@ -166,7 +166,7 @@ Datadog continuously maintains the state you define on the covered resources:
 
 ### How Lambda functions pick up new layer versions
 
-Datadog compares a covered function's layers against the versions set on the instrumentation rule. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version. Datadog does not upgrade the layer versions on a rule for you. A covered function picks up a new layer version only when you edit the rule. For where to set the versions, see [Install Datadog instrumentation][8] in the setup guide.
+Datadog compares a covered function's layers against the versions set on the instrumentation rule. When a layer on a covered function is changed by hand, Datadog sets it back to the rule's version. Datadog does not upgrade the layer versions on a rule for you. A covered function picks up a new layer version only when you edit the rule. For more information on where to set the versions, see [Install Datadog instrumentation][8] in the setup guide.
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
