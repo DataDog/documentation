@@ -1,26 +1,27 @@
 ---
-title: BYOC Logs
-description: Learn how to deploy and manage Datadog BYOC Logs, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
+title: BYOC
+description: Learn how to deploy and manage Datadog BYOC, a self-hosted log management solution for cost-effective log ingestion, processing, indexing, and search capabilities
 further_reading:
 - link: "https://www.datadoghq.com/blog/introducing-datadog-byoc-logs/"
   tag: "Blog"
-  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC Logs"
+  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC"
 aliases:
   - /cloudprem/
 ---
 
-BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution for organizations that want to keep their data in their own cloud accounts and control costs using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory, and high-volume requirements.
+BYOC (Bring Your Own Cloud) is Datadog's log management solution for organizations that want to keep their data in their own cloud accounts and control costs using their existing cloud provider discounts. It is built to meet stringent security, data residency, regulatory, and high-volume requirements.
 
 
 ## Get started
 
-{{< whatsnext desc="Follow our guides to get BYOC Logs up and running:">}}
-  {{< nextlink href="/byoc-logs/introduction/" >}}What is BYOC Logs?{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/quickstart/" >}}Quickstart: Run BYOC Logs locally in 5 minutes{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC Logs on AWS, GCP, or Azure{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to BYOC Logs{{< /nextlink >}}
+{{< whatsnext desc="Follow our guides to get BYOC up and running:">}}
+  {{< nextlink href="/byoc-logs/introduction/" >}}What is BYOC?{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/quickstart/" >}}Quickstart: Run BYOC locally in 5 minutes{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC on AWS, GCP, or Azure{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/install/datadog_operator/" >}}Datadog Operator - Deploy a new BYOC cluster and Observability Pipelines Workers on AWS{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to BYOC{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/search_logs" >}}Search Logs - Explore your logs in the Datadog Log Explorer{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/guides/" >}}Guides - Step-by-step guides for BYOC Logs features and integrations{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/guides/" >}}Guides - Step-by-step guides for BYOC features and integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

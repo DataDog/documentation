@@ -1,6 +1,6 @@
 ---
-title: Autoscale Indexers and Compactors
-description: Configure Horizontal Pod Autoscalers for BYOC Logs indexer and compactor workloads.
+title: Autoscale BYOC Workloads
+description: Configure Horizontal Pod Autoscalers for BYOC workloads deployed with Helm or the Datadog Operator.
 aliases:
 - /cloudprem/operate/autoscaling/
 further_reading:
@@ -9,7 +9,7 @@ further_reading:
   text: "Cluster Sizing"
 - link: "/byoc-logs/operate/monitoring/"
   tag: "Documentation"
-  text: "Monitor BYOC Logs"
+  text: "Monitor BYOC"
 - link: "https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml"
   tag: "Source"
   text: "CloudPrem Helm chart default values"
@@ -17,13 +17,15 @@ further_reading:
 
 ## Overview
 
-The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for BYOC (Bring Your Own Cloud) Logs indexers and standalone compactors when you enable them. HPAs are disabled by default, and each component is configured independently.
+The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for BYOC (Bring Your Own Cloud) indexers and standalone compactors when you enable them. HPAs are disabled by default, and each component is configured independently.
 
 ## Before you begin
 
+The following Helm instructions cover indexers and standalone compactors. For a `DatadogBYOCCluster`, use [Configure autoscaling with the Operator](#configure-autoscaling-with-the-operator).
+
 Before you enable autoscaling, you need:
 
-- A BYOC Logs deployment installed with the `datadog/cloudprem` Helm chart.
+- A BYOC deployment installed with the `datadog/cloudprem` Helm chart.
 - Chart version `0.4.6` or later for standalone compactor autoscaling.
 - Kubernetes Metrics Server, or another metrics API implementation, installed in the cluster.
 - Enough node capacity for the maximum number of indexer and compactor pods.
@@ -87,7 +89,7 @@ indexer:
 
 ## Apply the configuration
 
-Add the autoscaling values to your BYOC Logs values file, then upgrade your release:
+Add the autoscaling values to your BYOC values file, then upgrade your release:
 
 ```shell
 helm upgrade <RELEASE_NAME> datadog/cloudprem \
@@ -97,7 +99,7 @@ helm upgrade <RELEASE_NAME> datadog/cloudprem \
 
 ## Verify the HPAs
 
-List HPAs in the BYOC Logs namespace:
+List HPAs in the BYOC namespace:
 
 ```shell
 kubectl get hpa -n <NAMESPACE_NAME>
@@ -114,8 +116,52 @@ kubectl describe hpa <RELEASE_NAME>-compactor -n <NAMESPACE_NAME>
 
 If `kubectl get hpa` shows `<unknown>` in the `TARGETS` column, the HPA cannot read CPU metrics. Check that the metrics API is running and that the target pods have CPU requests.
 
+## Configure autoscaling with the Operator
+
+The Operator supports `autoscaling` on indexers, searchers, compactors, and individual pipeline Worker entries. Install Kubernetes Metrics Server or the metrics API used by your HPA, set resource requests, and provision enough node capacity for the maximum replica count.
+
+Merge an `autoscaling` object into the corresponding component of `byoc-cluster.yaml`. For example:
+
+```yaml
+spec:
+  components:
+    indexer:
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+        limits:
+          memory: 16Gi
+      autoscaling:
+        minReplicas: 2
+        maxReplicas: 10
+        metrics:
+          - type: Resource
+            resource:
+              name: cpu
+              target:
+                type: Utilization
+                averageUtilization: 70
+        behavior:
+          scaleDown:
+            stabilizationWindowSeconds: 300
+```
+
+The Operator's `autoscaling` object does not use the Helm chart's `enabled` field. When `autoscaling` is set, the HPA manages the replica count and the component's `replicas` setting is ignored. Omit `autoscaling` to manage a fixed replica count through the custom resource.
+
+Apply the complete manifest and inspect the generated HPAs:
+
+```shell
+kubectl apply -f byoc-cluster.yaml
+kubectl get hpa -n <NAMESPACE_NAME>
+kubectl describe hpa <CLUSTER_NAME>-indexer -n <NAMESPACE_NAME>
+```
+
+For Workers, place the settings on the matching entry in `spec.components.pipelines`. Size [persistent buffers and termination grace periods][2] to account for scale-down. Keep searcher capacity available for the reverse connection to Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /byoc-logs/operate/sizing/
+[2]: /byoc-logs/operate/disk_buffer_durability/

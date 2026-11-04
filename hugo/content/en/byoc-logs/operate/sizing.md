@@ -3,24 +3,24 @@ title: Cluster Sizing
 aliases:
 - /cloudprem/configure/cluster_sizing/
 - /cloudprem/operate/sizing/
-description: Learn about cluster sizing for BYOC Logs
+description: Learn about cluster sizing for BYOC
 further_reading:
 - link: "/byoc-logs/configure/ingress/"
   tag: "Documentation"
-  text: "Configure BYOC Logs Ingress"
+  text: "Configure BYOC Ingress"
 - link: "/byoc-logs/configure/pipelines/"
   tag: "Documentation"
-  text: "Configure BYOC Logs Log Processing"
+  text: "Configure BYOC Log Processing"
 - link: "/byoc-logs/introduction/architecture/"
   tag: "Documentation"
-  text: "Learn more about BYOC Logs Architecture"
+  text: "Learn more about BYOC Architecture"
 ---
 
 {{< jqmath-vanilla >}}
 
 ## Overview
 
-Size your BYOC (Bring Your Own Cloud) Logs cluster in three steps:
+Size your BYOC (Bring Your Own Cloud) cluster in three steps:
 
 1. Estimate your daily ingest volume in TB/day.
 2. Pick a [starter configuration](#starter-configurations) for that volume.
@@ -114,19 +114,21 @@ Enable automated backups on the metastore database. See [Enable automated backup
 
 ### Object storage
 
-BYOC Logs compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
+BYOC compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
 
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
 <div class="alert alert-info">
-Use standard-tier object storage (for example, S3 Standard or GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
+Use standard-tier object storage (for example, S3 Standard or GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC.
 </div>
 
 To estimate PUT request volume and cost, see [Object Storage Request Estimation][6].
 
 ## Helm chart sizing tiers
+
+These presets apply to Helm deployments. For a `DatadogBYOCCluster`, configure [Operator resources](#operator-resource-configuration) instead.
 
 Set `indexer.podSize` and `searcher.podSize` to match the per-pod CPU and memory in the [starter configuration](#starter-configurations). The default is `xlarge`. Each preset also applies ingest queue and search cache sizes.
 
@@ -159,6 +161,51 @@ Actual memory request/limit = (nominal pod memory - Kubernetes system memory res
 
 See the [Helm chart sizing map][1] for the complete configuration.
 
+## Operator resource configuration
+
+With the Datadog Operator, set CPU requests, memory requests and limits, replicas, and storage in the `DatadogBYOCCluster` resource. The Operator derives engine cache and queue settings from memory limits and disk capacity. This tuning does not choose the cluster's capacity or provision Kubernetes nodes for you.
+
+When component resources or replica counts are omitted, the Operator applies these defaults:
+
+| Component | CPU request per pod | Memory request and limit per pod | Replicas |
+|---|---:|---:|---:|
+| Indexer | `4` | `16Gi` | `2` |
+| Searcher | `4` | `16Gi` | `2` |
+| Metastore | `2` | `4Gi` | `2` |
+| Control plane | `2` | `4Gi` | `1` |
+| Janitor | `2` | `4Gi` | `1` |
+| Each pipeline's Workers | `2` | `4Gi` | `2` |
+
+The [minimal installation example][7] explicitly sets one replica for the metastore, indexer, searcher, and Worker. With the default resources, that example requests a total of 16 CPUs and 48 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the workload sizing recommendations above to choose production resources and replica counts.
+
+Merge resource settings into the existing component, for example:
+
+```yaml
+spec:
+  components:
+    indexer:
+      replicas: 2
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+        limits:
+          memory: 16Gi
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            storageClassName: "<STORAGE_CLASS>"
+            resources:
+              requests:
+                storage: 250Gi
+```
+
+Preserve the other required fields in the manifest, then run `kubectl apply -f byoc-cluster.yaml`. Set storage requirements before creating the workload; updating a StatefulSet's volume claim template is not a general-purpose volume-resize procedure.
+
+Without explicit storage settings, indexers and Workers request 30 GiB persistent volumes using the cluster's default StorageClass. Searchers use `emptyDir` by default. Override these defaults to meet ingestion durability and cache requirements. See [persistent Worker buffers][8] and the [CRD reference][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -169,3 +216,6 @@ See the [Helm chart sizing map][1] for the complete configuration.
 [4]: /byoc-logs/operate/best_practices/#scale-searchers-based-on-your-query-patterns
 [5]: /byoc-logs/operate/best_practices/#enable-automated-backups-on-your-metastore-database
 [6]: /byoc-logs/operate/object_storage_requests/
+[7]: /byoc-logs/install/datadog_operator/
+[8]: /byoc-logs/operate/disk_buffer_durability/
+[9]: /containers/datadog_operator/crd_byoccluster/

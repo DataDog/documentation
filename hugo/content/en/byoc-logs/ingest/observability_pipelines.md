@@ -1,14 +1,14 @@
 ---
-title: Send logs to BYOC Logs with Observability Pipelines
+title: Send logs to BYOC with Observability Pipelines
 aliases:
 - /cloudprem/ingest_logs/observability_pipelines/
 - /cloudprem/ingest/observability_pipelines/
-description: Configure Observability Pipelines to send logs to BYOC Logs with optional dual shipping
+description: Configure Observability Pipelines to send logs to BYOC with optional dual shipping
 further_reading:
-- link: "/byoc-logs/ingest_logs/datadog_agent/"
+- link: "/byoc-logs/ingest/agent/"
   tag: "Documentation"
   text: "Datadog Agent Integration"
-- link: "/byoc-logs/ingest_logs/rest_api/"
+- link: "/byoc-logs/ingest/api/"
   tag: "Documentation"
   text: "REST API Integration"
 - link: "/observability_pipelines/"
@@ -16,19 +16,19 @@ further_reading:
   text: "Observability Pipelines Overview"
 - link: "/observability_pipelines/destinations/datadog_byoc_logs/"
   tag: "Documentation"
-  text: "Datadog BYOC Logs destination for Observability Pipelines"
+  text: "Datadog BYOC destination for Observability Pipelines"
 ---
 
 ## Overview
 
-Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC (Bring Your Own Cloud) Logs, allowing you to process, transform, and route logs before they reach your BYOC Logs deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC Logs.
+Observability Pipelines provides a flexible intermediary layer between your Datadog Agents and BYOC (Bring Your Own Cloud), allowing you to process, transform, and route logs before they reach your BYOC deployment. Configure Observability Pipelines to receive logs from the Datadog Agent and forward them to BYOC.
 
-For hybrid environments with logs split between on-premises data centers and the cloud, deploy an Observability Pipelines Worker in an on-premises data center and configure it to route those logs to the AWS data center that hosts BYOC Logs. BYOC Logs then collects the forwarded logs through the standard ingestion path. **Note**: This pattern requires an existing cloud footprint and does not support environments that run entirely on premises.
+For hybrid environments with logs split between on-premises data centers and the cloud, deploy an Observability Pipelines Worker in an on-premises data center and configure it to route those logs to the AWS data center that hosts BYOC. BYOC then collects the forwarded logs through the standard ingestion path. **Note**: This pattern requires an existing cloud footprint and does not support environments that run entirely on premises.
 
 To configure this setup:
 
 1. [**Create and configure the pipeline**](#create-and-configure-an-observability-pipeline) - Define your pipeline configuration (source, processors, destination) in the Observability Pipelines UI. This creates the pipeline definition that will be used by the Worker.
-2. [**Deploy the Observability Pipelines Worker**](##deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration. The Worker must be running and listening for logs before the Agent can connect to it.
+2. [**Deploy the Observability Pipelines Worker**](#deploy-your-observability-pipelines) - Install the Worker with your pipeline configuration using the Operator or a standalone Helm release. The Worker must be running and listening for logs before the Agent can connect to it.
 3. [**Configure the Datadog Agent**](#configure-the-datadog-agent) - Point the Agent to send logs to the deployed Worker. This step must come last because the Agent needs the Worker's address to be available.
 
 ## Create and configure an Observability Pipeline
@@ -38,7 +38,7 @@ To configure this setup:
 1. Set up your pipeline:
     1. Choose the [**Datadog Agent** source][3].
     1. Remove any default processors from the pipeline.
-    1. Select the [**Datadog BYOC Logs** destination][4] to forward logs to your BYOC Logs instance. Leave the configuration empty.
+    1. Select the [**Datadog BYOC** destination][4] to forward logs to your BYOC instance. Leave the configuration empty.
 
 <!-- This image shows an example with dual shipping when the instructions say log volume control -->
 <!-- {{< img src="/cloudprem/ingest/observability-pipelines-cloudprem-setup.png" alt="Screenshot of the Logs Explorer interface showing how to filter logs by selecting the cloudprem index in the facets panel" style="width:80%;" >}} -->
@@ -48,7 +48,39 @@ To configure this setup:
 
 After creating your pipeline in the UI, deploy the Observability Pipelines Worker. The Worker runs your pipeline configuration and listens for logs from the Datadog Agent.
 
-The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC Logs indexer.
+Choose the deployment method for your environment. The Operator manages Workers inside the BYOC Kubernetes cluster. Use a separately deployed Worker for the on-premises forwarding pattern described above.
+
+### Datadog Operator
+
+For a new AWS deployment, follow [Install BYOC with the Datadog Operator][6]. The Operator does not create the pipeline in Datadog. Create it first and provide its ID in `spec.components.pipelines[].pipelineID`.
+
+For the Datadog Agent source used on this page, add an entry like this to the `DatadogBYOCCluster` manifest, preserving the rest of the cluster configuration and any other pipeline entries:
+
+```yaml
+spec:
+  components:
+    pipelines:
+      - name: agent
+        pipelineID: "<PIPELINE_ID>"
+        replicas: 2
+        ports:
+          - name: datadog-agent
+            port: 8282
+```
+
+Apply the complete manifest and wait for the workloads:
+
+```shell
+kubectl apply -f byoc-cluster.yaml
+kubectl wait --for=condition=Available \
+  datadogbyoccluster/<CLUSTER_NAME> -n <NAMESPACE_NAME> --timeout=10m
+```
+
+The Operator creates a Worker and Service named `<CLUSTER_NAME>-pipeline-agent`. It supplies the indexer destination endpoint, Datadog site, and shared API key. Configure the Agent to use `http://<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local:8282`. Do not also install a standalone Worker Helm release for this pipeline entry.
+
+### Standalone Worker Helm chart
+
+The following Helm command installs or upgrades the Worker, configuring it to listen for logs and forward them to your BYOC indexer.
 <br>
 **Note**: You need the `pipelineId` from the pipeline you created in the previous step. This ID links the Worker to your pipeline configuration.
 
@@ -63,13 +95,15 @@ helm upgrade --install opw \
 	datadog/observability-pipelines-worker
 ```
 
-After a minute, verify that logs are flowing through the pipeline and reaching the BYOC Logs destination. This indicates that the Worker is running and ready to receive logs, and you can proceed to configure the Agent.
+Verify that the Worker pods are ready, then configure the Agent below. After the Agent sends logs, verify that they reach the BYOC destination.
 
 ## Configure the Datadog Agent
 
 After the Observability Pipelines Worker is deployed and running, configure your Datadog Agent to send logs to it. The Agent connects to the Worker using the Worker's service address. For more information, see [Connect the Datadog Agent to the Observability Pipelines Worker][5].
 
 Update your Datadog Agent configuration to send logs to the Observability Pipelines worker:
+
+Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example above, use `<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Helm deployment, use its Worker Service address.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -88,7 +122,7 @@ spec:
       - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED
         value: "true"
       - name: DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL
-        value: "http://observability-pipelines-worker:8282"
+        value: "http://<WORKER_SERVICE_HOST>:8282"
 
   features:
     logCollection:
@@ -98,7 +132,15 @@ spec:
 
 ## Verification
 
-Check that logs are flowing through the pipeline:
+For an Operator-managed Worker, inspect its resource and logs:
+
+```shell
+kubectl get datadogobservabilitypipelinesworker <CLUSTER_NAME>-pipeline-agent \
+  -n <NAMESPACE_NAME> -o yaml
+kubectl logs statefulset/<CLUSTER_NAME>-pipeline-agent -n <NAMESPACE_NAME> --tail=100
+```
+
+For a separately installed Worker, use its deployment's labels and namespace. For example:
 
 ```shell
 # Check Observability Pipelines worker status
@@ -106,10 +148,9 @@ kubectl get pods -l app=observability-pipelines-worker
 
 # Check worker logs
 kubectl logs -l app=observability-pipelines-worker
-
-# Verify logs are reaching BYOC Logs
-kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
 ```
+
+Send a log from the configured Agent, select the cluster's BYOC index in Log Explorer, and confirm that the log appears. A ready Worker alone does not verify end-to-end ingestion.
 
 ## Further reading
 
@@ -120,3 +161,4 @@ kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://l
 [3]: /observability_pipelines/sources/datadog_agent/
 [4]: /observability_pipelines/destinations/datadog_byoc_logs/
 [5]: /observability_pipelines/sources/datadog_agent/?tab=agenthelmvaluesfile#connect-the-datadog-agent-to-the-observability-pipelines-worker
+[6]: /byoc-logs/install/datadog_operator/

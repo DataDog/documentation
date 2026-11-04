@@ -1,26 +1,26 @@
 ---
-title: BYOC Logs Release Notes
-description: Per-version changes for the BYOC Logs binary, bundled by the datadog/cloudprem Helm chart.
+title: BYOC Release Notes
+description: Per-version changes for the BYOC engine, deployed with the Datadog Operator or the datadog/cloudprem Helm chart.
 disable_toc: false
 further_reading:
 - link: "/byoc-logs/operate/updates/"
   tag: "Documentation"
-  text: "Plan BYOC Logs updates"
+  text: "Plan BYOC updates"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
-  text: "Install BYOC Logs"
+  text: "Install BYOC"
 - link: "/byoc-logs/operate/troubleshooting/"
   tag: "Documentation"
-  text: "Troubleshoot BYOC Logs"
+  text: "Troubleshoot BYOC"
 ---
 
 ## Overview
 
-This page tracks releases of the **BYOC (Bring Your Own Cloud) Logs binary**, distributed as a Docker image and bundled by the `datadog/cloudprem` Helm chart. New features and fixes ship in the binary; the chart packages them for deployment.
+This page tracks releases of the **BYOC (Bring Your Own Cloud) engine**, distributed as a container image. Deploy the image with the Datadog Operator or the `datadog/cloudprem` Helm chart. New features and fixes ship in the engine; the Operator supplies a default image version and the chart bundles an image version.
 
 ### Check your installed binary version
 
-Look at the `image` field on a BYOC Logs pod:
+Look at the `image` field on a BYOC pod:
 
 ```shell
 kubectl get pods -n <BYOC_LOGS_NAMESPACE> \
@@ -36,9 +36,11 @@ helm show chart datadog/cloudprem --version <CHART_VERSION> | grep appVersion
 
 ### Upgrade
 
-Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/install/) for the chart upgrade command for your platform.
+For Helm deployments, binary upgrades ship through the Helm chart. For Operator deployments, upgrading the Operator updates default engine and Worker images unless an explicit tag or digest pins the image in `spec.imageOverrides`. See [Releases and updates][1] for instructions for your deployment method.
 
 ## Releases
+
+The chart versions below refer to the BYOC engine Helm chart, not to Datadog Operator versions.
 
 ### v0.1.35 — 2026-10-20
 
@@ -50,8 +52,8 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 #### Helm chart changes
 
-- Exports `QW_CLUSTER_ID` to all BYOC Logs pods, using `config.cluster_id` when set.
-- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC Logs telemetry with an unrelated host.
+- Exports `QW_CLUSTER_ID` to all BYOC pods, using `config.cluster_id` when set.
+- Reports the Kubernetes node name as the `kube_node` OpenTelemetry resource attribute instead of `host.name`. Default EC2 node names are unique only within a VPC, so reporting them as `host.name` could associate BYOC telemetry with an unrelated host.
 
 ### v0.1.34 — 2026-09-23
 
@@ -171,3 +173,5 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /byoc-logs/operate/updates/

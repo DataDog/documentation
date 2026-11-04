@@ -1,6 +1,6 @@
 ---
-title: Configure disk buffers for durable BYOC Logs ingestion
-description: Configure persistent disk buffers to retain logs when the BYOC Logs engine is unavailable or cannot accept logs fast enough.
+title: Configure disk buffers for durable BYOC ingestion
+description: Configure persistent disk buffers to retain logs when the BYOC engine is unavailable or cannot accept logs fast enough.
 aliases:
 - /cloudprem/operate/durable_autoscaling/
 - /byoc-logs/operate/durable_autoscaling/
@@ -13,36 +13,36 @@ further_reading:
   text: "Observability Pipelines Buffering and Backpressure"
 - link: "/byoc-logs/operate/monitoring/"
   tag: "Documentation"
-  text: "Monitor BYOC Logs"
+  text: "Monitor BYOC"
 ---
 
 {{< jqmath-vanilla >}}
 
-{{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC Logs ingestion using Observability Pipelines disk buffers and the BYOC Logs engine." style="width:100%;" >}}
+{{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC ingestion using Observability Pipelines disk buffers and the BYOC engine." style="width:100%;" >}}
 
 ## Overview
 
-BYOC Logs combines Observability Pipelines with the BYOC Logs engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Logs engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
+BYOC combines Observability Pipelines with the BYOC engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
 
 A durable setup has four parts:
 
 - Enough buffer capacity for the backlog you want to retain
-- Disk buffering on the BYOC Logs destination
+- Disk buffering on the BYOC destination
 - A persistent volume for each Worker's buffer
 - Enough time for a terminating Worker to drain its buffer
 
 ## Before you begin
 
-This guide assumes that you have a BYOC Logs deployment with:
+This guide assumes that you have a BYOC deployment with:
 
-- Observability Pipelines configured with a [BYOC Logs destination][1]
-- A [BYOC Logs engine deployment][2]
+- Observability Pipelines configured with a [BYOC destination][1]
+- A [BYOC engine deployment][2]
 
 ## Size the disk buffer
 
-A useful starting point is to decide how long Workers need to retain logs if the BYOC Logs engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
+A useful starting point is to decide how long Workers need to retain logs if the BYOC engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
 
-For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Logs engine outage:
+For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC engine outage:
 
 1. **Total backlog:** `50 TB × 1 hour ÷ 24 hours = 2.08 TB`
 2. **Buffer per Worker:** `2.08 TB ÷ 25 Workers ≈ 83 GB`
@@ -51,7 +51,7 @@ Rounding up the result leaves capacity for a longer incident or a higher ingress
 
 ## Disk buffer configuration
 
-The following buffering options are available when editing the BYOC Logs destination in the Observability Pipelines UI or through the API:
+The following buffering options are available when editing the BYOC destination in the Observability Pipelines UI or through the API:
 
 - **Buffer type**: Disk
 - **Buffer size**: The per-Worker capacity from your calculation
@@ -71,6 +71,10 @@ The `max_size` value is expressed in bytes (100 GB = 100,000,000,000 bytes). Whe
 
 ## Persistent storage for the buffer
 
+Choose the configuration for your deployment method. Configure the buffer size in the Observability Pipeline independently of the Worker's volume size.
+
+### Helm
+
 Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB (about 129 GB) persistent volume to each Worker. The extra capacity leaves headroom above the buffer size:
 
 ```yaml
@@ -87,9 +91,39 @@ persistence:
 
 The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain` policies also keep the volume when its Worker is scaled down or the StatefulSet is deleted.
 
+### Datadog Operator
+
+For a `DatadogBYOCCluster`, configure storage on the matching entry in `spec.components.pipelines`. For the same 100 GB buffer, the following entry requests 120 GiB of persistent storage and allows 3600 seconds for shutdown:
+
+```yaml
+spec:
+  components:
+    pipelines:
+      - name: default
+        pipelineID: "<PIPELINE_ID>"
+        replicas: 2
+        ports:
+          - name: otlp-grpc
+            port: 4317
+        terminationGracePeriodSeconds: 3600
+        storage:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              storageClassName: "<STORAGE_CLASS>"
+              resources:
+                requests:
+                  storage: 120Gi
+```
+
+Merge these settings into the existing entry, preserving its name, pipeline ID, source ports, other settings, and any other pipeline entries. Choose storage requirements before creating the Worker. Apply the complete `byoc-cluster.yaml` manifest and verify that its PVCs are bound. Configure the pipeline's disk buffer separately in Datadog; creating a PVC does not enable destination buffering.
+
 ## Draining Workers before shutdown
 
-During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Logs engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
+For Operator deployments, set `terminationGracePeriodSeconds` on the matching entry in `spec.components.pipelines`. For standalone Worker Helm deployments, set it in the Worker's values file.
+
+During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 
 The `terminationGracePeriodSeconds` setting controls how long Kubernetes waits before terminating the pod. This gives the Worker time to empty its buffer before exiting.
 

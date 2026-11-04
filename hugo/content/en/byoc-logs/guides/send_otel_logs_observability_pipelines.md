@@ -1,26 +1,26 @@
 ---
 title: Send OpenTelemetry Logs with Observability Pipelines
-description: A quick guide to send OpenTelemetry logs through Observability Pipelines to BYOC Logs in less than 5 minutes
+description: A quick guide to send OpenTelemetry logs through Observability Pipelines to BYOC in less than 5 minutes
 further_reading:
 - link: "/byoc-logs/quickstart/"
   tag: "Documentation"
-  text: "BYOC Logs Quickstart"
+  text: "BYOC Quickstart"
 - link: "/observability_pipelines/sources/opentelemetry/"
   tag: "Documentation"
   text: "OpenTelemetry Source for Observability Pipelines"
 - link: "/byoc-logs/ingest/observability_pipelines/"
   tag: "Documentation"
-  text: "Send logs to BYOC Logs with Observability Pipelines"
+  text: "Send logs to BYOC with Observability Pipelines"
 aliases:
   - /cloudprem/guides/send_otel_logs_observability_pipelines/
 ---
 
 ## Overview
 
-BYOC (Bring Your Own Cloud) Logs supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC Logs—without disrupting your existing OTEL configuration.
+BYOC (Bring Your Own Cloud) supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to BYOC—without disrupting your existing OTEL configuration.
 
 By the end of this guide, you will be able to:
-1. [Start BYOC Logs locally](#step-1-start-byoc-logs).
+1. [Start BYOC locally](#step-1-start-byoc-logs).
 2. [Create an Observability Pipeline with a custom processor to add tags](#step-2-create-an-observability-pipeline-with-the-api).
 3. [Run the Observability Pipelines Worker](#step-3-run-the-observability-pipelines-worker).
 4. [Send OpenTelemetry logs using the Python SDK](#step-4-send-opentelemetry-logs-using-the-python-sdk).
@@ -28,15 +28,17 @@ By the end of this guide, you will be able to:
 
 ## Prerequisites
 
-- BYOC Logs access. Contact your Datadog account team to request access.
+This guide uses Docker and OTLP HTTP for local evaluation. For a new AWS EKS deployment, follow [Install BYOC with the Datadog Operator][7], which includes pipeline creation and an OTLP gRPC test. Match the pipeline source and Worker's ports to the protocol used by your exporter.
+
+- BYOC access. Contact your Datadog account team to request access.
 - **Datadog API Key**: [Get your API key][2].
 - **Datadog Application Key**: [Get your application key][3].
 - **Docker**: [Install Docker][4].
 - **Python 3 and pip**: For sending test OTLP logs.
 
-## Step 1: Start BYOC Logs
+## Step 1: Start BYOC {#step-1-start-byoc-logs}
 
-Start a local BYOC Logs instance. Replace `<YOUR_API_KEY>` with your Datadog API Key:
+Start a local BYOC instance. Replace `<YOUR_API_KEY>` with your Datadog API Key:
 
 ```shell
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -53,7 +55,7 @@ docker run -d \
 
 ## Step 2: Create an Observability Pipeline with the API
 
-Create a pipeline with an OpenTelemetry source, a filter processor, and a BYOC Logs destination. Replace `<YOUR_APP_KEY>` with your Datadog Application Key:
+Create a pipeline with an OpenTelemetry source, a filter processor, and a BYOC destination. Replace `<YOUR_APP_KEY>` with your Datadog Application Key:
 
 ```shell
 export DD_APP_KEY="<YOUR_APP_KEY>"
@@ -65,7 +67,7 @@ curl -s -X POST "https://api.${DD_SITE}/api/v2/obs-pipelines/pipelines" \
   -d '{
     "data": {
       "attributes": {
-        "name": "OTEL to BYOC Logs Pipeline",
+        "name": "OTEL to BYOC Pipeline",
         "config": {
           "sources": [
             {
@@ -139,7 +141,7 @@ docker run -d \
 
 **Notes**:
 - The Worker exposes port 4318 for HTTP and 4317 for gRPC.
-- On macOS/Windows, use `host.docker.internal` to connect to BYOC Logs on the host machine.
+- On macOS/Windows, use `host.docker.internal` to connect to BYOC on the host machine.
 - On Linux, use `--network host` instead of `-p` flags and `http://localhost:7280` for the endpoint.
 
 {{< img src="/cloudprem/guides/otel-op-cloudprem/op-config.png" alt="The Observability Pipelines configuration" style="width:100%;" >}}
@@ -186,12 +188,12 @@ service:
       exporters: [otlphttp]
 ```
 
-## Verify the pipeline and BYOC Logs
+## Verify the pipeline and BYOC {#verify-the-pipeline-and-byoc-logs}
 
 Check that all components are running:
 
 ```shell
-# Check BYOC Logs status
+# Check BYOC status
 docker logs byoc-logs --tail 20
 
 # Check Observability Pipelines Worker status
@@ -201,10 +203,10 @@ docker logs opw --tail 20
 ## Step 5: View logs in Datadog
 
 1. Go to the [Datadog Log Explorer][5].
-2. In the left facet panel, select your BYOC Logs index under {{< ui >}}BYOC INDEXES{{< /ui >}}.
+2. In the left facet panel, select your BYOC index under {{< ui >}}BYOC INDEXES{{< /ui >}}.
 3. You should see your OpenTelemetry logs from the `otel-demo` service with custom tags: `pipeline:observability-pipelines` and `source:opentelemetry`.
 
-{{< img src="/cloudprem/guides/otel-op-cloudprem/cloudprem_logs.png" alt="BYOC Logs data available in the Datadog Log Explorer" style="width:100%;" >}}
+{{< img src="/cloudprem/guides/otel-op-cloudprem/cloudprem_logs.png" alt="BYOC data available in the Datadog Log Explorer" style="width:100%;" >}}
 
 ## Next steps
 
@@ -231,4 +233,5 @@ docker rm byoc-logs opw
 [4]: https://docs.docker.com/get-docker/
 [5]: https://app.datadoghq.com/logs
 [6]: /observability_pipelines/
+[7]: /byoc-logs/install/datadog_operator/
 

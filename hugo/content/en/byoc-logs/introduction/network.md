@@ -3,19 +3,21 @@ title: Network
 further_reading:
 - link: "/byoc-logs/configure/ingress/"
   tag: "Documentation"
-  text: "BYOC Logs Ingress Configuration"
+  text: "BYOC Ingress Configuration"
 aliases:
   - /cloudprem/introduction/network/
 ---
 
-This document provides an overview of how BYOC (Bring Your Own Cloud) Logs and Datadog communicate with each other.
+This document provides an overview of how BYOC (Bring Your Own Cloud) and Datadog communicate with each other.
 
 ## Reverse connection (default)
 
-By default, BYOC Logs **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
+[Operator-managed BYOC deployments][2] use this connection method. They do not require a public Ingress for Datadog queries or index management.
+
+By default, BYOC **searcher** pods initiate an outbound WebSocket connection to Datadog using your API key. Each searcher pod maintains its own connection to `wss://<DD_SITE>/api/unstable/cloudprem-connection-gateway/connect`.
 
 Datadog recommends this setup because:
-- **No inbound ports need to be opened** in your network.
+- **No inbound ports need to be opened for Datadog query and index-management traffic.**
 - **No DNS record or public ingress is required.**
 - The connection is initiated from your infrastructure, which simplifies firewall and security policies.
 
@@ -23,15 +25,17 @@ Datadog recommends this setup because:
 
 | Data | Direction | Description |
 |------|-----------|-------------|
-| Search queries | Datadog → BYOC Logs | Queries from Log Explorer, dashboards, monitors |
-| Query results | BYOC Logs → Datadog | Matching log entries returned for display |
-| Index management | Datadog → BYOC Logs | Index creation, updates, deletion |
+| Search queries | Datadog → BYOC | Queries from Log Explorer, dashboards, monitors |
+| Query results | BYOC → Datadog | Matching log entries returned for display |
+| Index management | Datadog → BYOC | Index creation, updates, deletion |
 
 ### Network requirements
 
-Searcher pods require **outbound HTTPS (port 443)** access to your Datadog site (for example, `app.datadoghq.com`). No inbound connectivity is required.
+Searcher pods require **outbound HTTPS (port 443)** access to your Datadog site (for example, `app.datadoghq.com`). Datadog does not need inbound connectivity to the cluster for this connection.
 
-If your environment uses an HTTP proxy, BYOC Logs supports standard proxy configuration with `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
+Log ingestion is a separate network path. Sources must reach the Observability Pipelines Worker's declared source ports, and Workers must reach the BYOC indexer and Datadog's pipeline configuration service. An Operator-managed Worker's Service is internal to the Kubernetes cluster. The reverse connection does not expose that Service to external log sources.
+
+If your environment uses an HTTP proxy, BYOC supports standard proxy configuration with `HTTPS_PROXY`, `ALL_PROXY`, and `NO_PROXY` environment variables.
 
 ### Which pods connect to Datadog
 
@@ -41,12 +45,13 @@ Only **searcher** pods establish the reverse connection. Indexers, the control p
 
 ## Public ingress (optional)
 
-It is also possible to configure BYOC Logs to deploy a public ingress so Datadog can establish the connection in the other direction.
+With a Helm deployment that supports Ingress, you can configure a public ingress so Datadog can establish the connection in the other direction. The BYOC Operator does not support Ingress configuration.
 
-The public ingress enables Datadog to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page][1].
+The public ingress enables Datadog to manage and query BYOC clusters over the public internet. It provides secure access to the BYOC gRPC API using mTLS authentication. You can find more information about BYOC ingress in its [configuration page][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /byoc-logs/configure/ingress/
+[2]: /byoc-logs/install/datadog_operator/

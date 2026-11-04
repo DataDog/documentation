@@ -4,9 +4,9 @@ aliases:
 - /cloudprem/troubleshooting/
 - /cloudprem/operate/troubleshooting/
 further_reading:
-- link: "/byoc-logs/architecture/"
+- link: "/byoc-logs/introduction/architecture/"
   tag: "Documentation"
-  text: "BYOC Logs Architecture"
+  text: "BYOC Architecture"
 - link: "/observability_pipelines/scaling_and_performance/"
   tag: "Documentation"
   text: "Observability Pipelines Scaling and Performance"
@@ -14,10 +14,38 @@ further_reading:
 
 ## Overview
 
-This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC (Bring Your Own Cloud) Logs. It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
+This page provides troubleshooting guidance for common issues you may encounter when deploying or operating Datadog BYOC (Bring Your Own Cloud). It includes typical error messages, diagnostic steps, and tips for resolving problems related to access permissions, storage configuration, and component health. Use this guide to quickly diagnose issues or to gather context before reaching out to [Datadog support][1].
 
 
 ## Component health
+
+### Operator-managed deployments
+
+For a `DatadogBYOCCluster`, start with the parent resource and its managed Workers:
+
+```shell
+kubectl get datadogbyoccluster <CLUSTER_NAME> -n <NAMESPACE_NAME> -o yaml
+kubectl get datadogobservabilitypipelinesworkers -n <NAMESPACE_NAME>
+kubectl get pods,services,pvc -n <NAMESPACE_NAME>
+kubectl get events -n <NAMESPACE_NAME> --sort-by=.lastTimestamp
+```
+
+In `status.conditions`, check `Reconciled`, `Available`, and their `observedGeneration`, `reason`, and `message`. A manifest can pass Kubernetes schema validation but fail Operator reconciliation. `Available=True` describes workload health; also verify the cluster's Datadog connection and a test log.
+
+| Symptom | What to check |
+|---|---|
+| Kubernetes does not recognize `DatadogBYOCCluster` | Install its CRD and the `DatadogObservabilityPipelinesWorker` CRD. |
+| The resource exists but has no status or workloads | Confirm Operator v1.33.0 or later, the enabled BYOC controller, BYOC RBAC, and a watch scope that includes the resource's namespace. Inspect the Operator pod logs in its installation namespace. |
+| `Reconciled=False` with `InvalidConfiguration` | Read the condition message for the conflicting or invalid field. Correct the parent manifest and apply it again. |
+| `Reconciled=False` with `Conflict` | Check for a resource with the same name that the cluster does not own. Use a new cluster or pipeline name for a new deployment; do not delete another deployment's resources to resolve the conflict. |
+| A pod cannot read credentials or connect to PostgreSQL | Match the Secret name and key to the manifest, keep the Secret in the workload namespace, and check the database URI and network access. |
+| An indexer or Worker stays pending | Check PVC events, the default or explicit StorageClass, the storage provisioner, and available node CPU and memory. |
+| `Available=False` or `WorkloadsUnavailable` | Inspect the unavailable component and child Worker status, readiness probes, container logs, and image-pull events. |
+| Workers are ready but no logs arrive | Confirm that the pipeline exists in Datadog, the ID is in `spec.components.pipelines[].pipelineID`, and the pipeline source, named Worker port, sender protocol, and Service address match. |
+| A manual workload edit disappears | Edit the parent `DatadogBYOCCluster`; the Operator reconciles generated resources back to its configuration. |
+| Deletion remains pending | Keep the Operator running and inspect managed Worker shutdown and finalizer progress. The cluster waits for Workers before deleting the indexer. |
+
+For the installation example, use `kubectl logs -n byoc statefulset/byoc-demo-pipeline-default --tail=100` to inspect a Worker. See the [Operator installation guide][3] for the complete verification sequence.
 
 ### Pods not starting
 
@@ -33,7 +61,7 @@ kubectl describe pod -n datadog-byoc-logs <pod-name>
 
 ## Access permissions
 
-The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC Logs components: indexer pods, metastore pods, and searcher pods.
+The most common errors come from access permissions to the object storage or to the metastore. To troubleshoot, use `kubectl` and verify logs from BYOC components: indexer pods, metastore pods, and searcher pods.
 
 ## Metastore errors
 
@@ -72,7 +100,7 @@ postgresql://user:abc/def+ghi=@host:5432/byoc-logs
 ERROR quickwit: command failed error=metastore error `index `datadog` not found`
 ```
 
-The cluster eventually crashes, and the BYOC Logs console shows multiple clusters where you expect one.
+The cluster eventually crashes, and the BYOC console shows multiple clusters where you expect one.
 
 **Cause:** The metastore URI is not set correctly, so the metastore falls back to a local file-backed store. Each time the metastore pod restarts, the file is wiped and a fresh metastore is created—all index metadata is lost. An earlier error in the logs often points to the misconfiguration:
 
@@ -101,7 +129,7 @@ Action: Check if your pod has access to the bucket.
 
 ## Ingestion issues
 
-### Ingest errors on BYOC Logs indexers
+### Ingest errors on BYOC indexers {#ingest-errors-on-byoc-logs-indexers}
 
 **Symptom:** Indexer logs show ingest errors, or the `ingest_requests.count` metric shows failures in the OOTB dashboard.
 
@@ -109,7 +137,7 @@ Action: Check if your pod has access to the bucket.
 - **Indexers undersized:** Check CPU utilization and the `pending_merge_ops.gauge` metric. If merge operations are backing up, indexers need more CPU or additional pods.
 - **Disk full:** Check `disk.available_space.gauge`. If the write-ahead log (WAL) fills up, indexers stop accepting new data. Increase persistent volume size or add more indexer pods.
 
-In case you use Observability Pipelines in front of BYOC Logs, you will need to check what's happening there, see OP [Scaling and Performance][2].
+In case you use Observability Pipelines in front of BYOC, you will need to check what's happening there, see OP [Scaling and Performance][2].
 
 ### Occasional 429 (Too Many Requests) errors
 
@@ -150,3 +178,4 @@ If either metric is rising, contact Datadog support.
 
 [1]: /help/
 [2]: /observability_pipelines/scaling_and_performance/
+[3]: /byoc-logs/install/datadog_operator/#verify-the-deployment

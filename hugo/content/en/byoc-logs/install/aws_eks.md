@@ -1,13 +1,13 @@
 ---
-title: Install BYOC Logs on AWS EKS
+title: Install BYOC on AWS EKS
 aliases:
 - /cloudprem/configure/aws_config/
 - /cloudprem/install/aws_eks/
-description: Learn how to install and configure BYOC Logs on AWS EKS
+description: Learn how to install and configure BYOC on AWS EKS
 further_reading:
 - link: "/byoc-logs/configure/ingress/"
   tag: "Documentation"
-  text: "Configure BYOC Logs Ingress"
+  text: "Configure BYOC Ingress"
 - link: "/byoc-logs/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
@@ -15,11 +15,16 @@ further_reading:
 
 ## Overview
 
-This document walks you through the process of configuring your AWS environment and installing BYOC (Bring Your Own Cloud) Logs on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing BYOC (Bring Your Own Cloud) on AWS EKS.
 
 ## Prerequisites
 
-To deploy BYOC Logs on AWS, you must configure:
+For a new deployment, choose one of these methods:
+
+- [Datadog Operator][8]: use Operator v1.33.0 or later to manage the engine and Observability Pipelines Workers with a `DatadogBYOCCluster` resource. This method uses the reverse connection to Datadog.
+- **Helm charts**: follow this page to deploy the engine, then configure ingestion separately. Use this method if your deployment requires Ingress.
+
+To deploy BYOC on AWS, you must configure:
 - AWS credentials and authentication.
 - AWS region selection.
 - IAM permissions for S3 object storage.
@@ -30,7 +35,7 @@ To deploy BYOC Logs on AWS, you must configure:
 
 ### AWS credentials
 
-When starting a node, BYOC Logs uses the default credential provider chain from the [AWS SDK for Rust][4] to find AWS credentials in this order:
+When starting a node, BYOC uses the default credential provider chain from the [AWS SDK for Rust][4] to find AWS credentials in this order:
 
 1. Environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, with `AWS_SESSION_TOKEN` as an optional addition for temporary credentials.
 2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
@@ -42,14 +47,14 @@ An error is returned if no credentials are found in the chain.
 
 ### AWS Region
 
-BYOC Logs attempts to find the AWS region from multiple sources, using the following order of precedence:
+BYOC attempts to find the AWS region from multiple sources, using the following order of precedence:
 
 1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
 2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
 3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
 4. **Default**: Falls back to `us-east-1` if no other source provides a region.
 
-<div class="alert alert-warning">The resolved AWS region must match the region of the S3 bucket used for BYOC Logs storage.</div>
+<div class="alert alert-warning">The resolved AWS region must match the region of the S3 bucket used for BYOC storage.</div>
 
 
 ### IAM access for S3
@@ -114,6 +119,8 @@ POLICY_ARN=$(aws iam list-policies --query \
 
 4. Create the IAM role and service account:
 
+   The following command creates the service account used by the Helm example. For an Operator deployment, follow the [Operator IAM instructions][8] instead: its generated service-account name and the IAM role's trust subject must match the `DatadogBYOCCluster` name and namespace.
+
 ```bash
 eksctl create iamserviceaccount \
   --name byoclogs \
@@ -171,10 +178,12 @@ echo ""
 
 ## Installation steps
 
-1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
+The following installation, verification, and uninstall commands apply to the BYOC Helm chart. For an Operator deployment, follow [Install BYOC with the Datadog Operator][8].
+
+1. [Install the BYOC Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
 
-## Install the BYOC Logs Helm chart
+## Install the BYOC Helm chart {#install-the-byoc-logs-helm-chart}
 
 1. Add and update the Datadog Helm repository:
    ```shell
@@ -206,7 +215,7 @@ echo ""
 
    <div class="alert alert-info"><p>The <code>storageClass</code> (<code>sc</code>) used in the example file below is <code>gp3</code>, which is not installed by default and is not the default <code>sc</code> for EKS. To create the gp3 storage class, follow the instructions in this <a href="https://docs.aws.amazon.com/eks/latest/userguide/create-storage-class.html">AWS guide</a>. If you do not want to set gp3 as the default (and migrate from gp2), set <code>storageclass.kubernetes.io/is-default-class: "false"</code>.</p>
    
-   <p>Datadog recommends gp3 storage volumes for BYOC Logs to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
+   <p>Datadog recommends gp3 storage volumes for BYOC to provide the IOPS and throughput flexibility to support higher indexing rates.</p>
    </div>
 
    Any parameters not explicitly overridden in `datadog-values.yaml` fall back to the defaults defined [in the chart's `values.yaml`][6].
@@ -249,10 +258,10 @@ echo ""
      eksRoleName: byoclogs
      extraAnnotations: {}
 
-   # BYOC Logs node configuration
+   # BYOC node configuration
    config:
      # The root URI where index data is stored. This should be an S3 path.
-     # All indexes created in BYOC Logs are stored under this location.
+     # All indexes created in BYOC are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
    # Internal ingress configuration for access within the VPC
@@ -326,7 +335,7 @@ echo ""
 
 ### Check deployment status
 
-Verify that all BYOC Logs components are running:
+Verify that all BYOC components are running:
 
 ```shell
 kubectl get pods -n <NAMESPACE_NAME>
@@ -336,7 +345,7 @@ kubectl get services -n <NAMESPACE_NAME>
 
 ## Uninstall
 
-To uninstall BYOC Logs:
+To uninstall BYOC:
 
 ```shell
 helm uninstall <RELEASE_NAME> \
@@ -345,7 +354,7 @@ helm uninstall <RELEASE_NAME> \
 
 ## Next step
 
-**[Set up log ingestion with Datadog Agent][7]** - Configure the Datadog Agent to send logs to BYOC Logs
+**[Set up log ingestion with Datadog Agent][7]** - Configure the Datadog Agent to send logs to BYOC
 
 ## Further reading
 
@@ -358,3 +367,4 @@ helm uninstall <RELEASE_NAME> \
 [5]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
 [6]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/values.yaml
 [7]: /byoc-logs/ingest/agent/
+[8]: /byoc-logs/install/datadog_operator/

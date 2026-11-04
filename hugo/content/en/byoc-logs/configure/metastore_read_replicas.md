@@ -1,10 +1,10 @@
 ---
 title: Metastore Read Replicas
-description: Learn how to configure a read-only metastore backed by a database read replica to scale search in BYOC Logs
+description: Learn how to configure a read-only metastore backed by a database read replica to scale search in BYOC
 further_reading:
 - link: "/byoc-logs/configure/"
   tag: "Documentation"
-  text: "Configure BYOC Logs"
+  text: "Configure BYOC"
 - link: "/byoc-logs/operate/sizing/"
   tag: "Documentation"
   text: "Size your cluster"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-By default, indexers and searchers in a BYOC (Bring Your Own Cloud) Logs cluster all read index metadata from the same metastore database. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing and isolates the search path from the indexing path.
+By default, indexers and searchers in a BYOC (Bring Your Own Cloud) cluster all read index metadata from the same metastore database. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing and isolates the search path from the indexing path.
 
 ## Prerequisite: A read replica database
 
@@ -25,7 +25,7 @@ Prepare one or more read replica instances of your metastore PostgreSQL database
 
 ## Create a Kubernetes secret for the read replica
 
-The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your BYOC Logs namespace:
+The read-only metastore requires an environment variable named `QW_METASTORE_READ_REPLICA_URI`. Set it to the connection URI for your read replica instance(s), similar to `QW_METASTORE_URI` for the primary metastore. Store this URI in a Kubernetes secret in your BYOC namespace:
 
 ```shell
 kubectl create secret generic byoclogs-metastore-read-replica-uri \
@@ -34,6 +34,10 @@ kubectl create secret generic byoclogs-metastore-read-replica-uri \
 ```
 
 ## Deploy the read-only metastore
+
+Choose the instructions for your deployment method. Both methods use the Secret created above and require a separately provisioned PostgreSQL read replica.
+
+### Helm
 
 Add a `metastore_ro` section to your `datadog-values.yaml` file to deploy the read-only metastore. At minimum, set `metastore_ro.enabled` to `true` and configure `extraEnvFrom` to reference the secret you created:
 
@@ -56,6 +60,30 @@ helm upgrade <RELEASE_NAME> datadog/cloudprem \
 ```
 
 After the upgrade completes, searchers use the read-only metastore to serve search requests, while indexers continue to use the primary metastore.
+
+### Datadog Operator
+
+Add `readOnlyMetastore` under `spec.components` in the existing `DatadogBYOCCluster` manifest:
+
+```yaml
+spec:
+  components:
+    readOnlyMetastore:
+      replicas: 2
+      database:
+        uriSecretRef:
+          name: byoclogs-metastore-read-replica-uri
+          key: QW_METASTORE_READ_REPLICA_URI
+```
+
+Preserve the other components and the primary metastore configuration, then apply the complete manifest:
+
+```shell
+kubectl apply -f byoc-cluster.yaml
+kubectl get datadogbyoccluster <CLUSTER_NAME> -n <NAMESPACE_NAME> -o yaml
+```
+
+The Operator creates the read-only metastore workload and configures the searchers to use it. It does not create the database read replica. Inspect `status.readOnlyMetastore` and the cluster's conditions to verify workload availability.
 
 ## Further reading
 

@@ -1,13 +1,13 @@
 ---
-title: Monitor BYOC Logs
-description: Learn how to monitor specific metrics for your BYOC Logs deployment
+title: Monitor BYOC
+description: Learn how to monitor specific metrics for your BYOC deployment
 aliases:
   - /cloudprem/operate/monitoring/
 ---
 
 ## Dashboards
 
-BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
+BYOC (Bring Your Own Cloud) provides an out-of-the-box dashboard that monitors key BYOC metrics.
 
 ### Setup
 
@@ -16,11 +16,27 @@ These metrics are exported by [DogStatsD][1]. You can either:
 - Run DogStatsD as a standalone service, or
 - Run the Datadog Agent (which includes DogStatsD by default)
 
-Configure either option with your organization's API key to export these metrics. As soon as your BYOC Logs cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
+Configure either option with your organization's API key to export these metrics. As soon as your BYOC cluster is connected to Datadog, the OOTB dashboard is automatically created, and you can access it from your [Dashboards list][2].
 
 <div class="alert alert-info">To display distribution metrics on your dashboard, you must <a href="/metrics/distributions/#enabling-advanced-query-functionality">enable advanced query functionality</a>.</div>
 
-### Data Collected
+### Operator-managed deployments
+
+The Operator's workload conditions complement engine and Worker metrics. Inspect the parent `DatadogBYOCCluster` and its managed `DatadogObservabilityPipelinesWorker` resources to identify unavailable components. See [Operator troubleshooting][3].
+
+The `DatadogBYOCCluster` does not deploy a monitoring Agent. Deploy the Agent or DogStatsD separately and, when using a service endpoint, configure it in the BYOC resource:
+
+```yaml
+spec:
+  datadog:
+    dogstatsdServer:
+      host: "<DOGSTATSD_SERVICE_HOST>"
+      port: 8125
+```
+
+Merge this fragment with the existing Datadog site and API key reference. Confirm that the endpoint accepts traffic from BYOC pods and that engine metrics appear in Datadog. Monitor Worker throughput, errors, and buffer utilization alongside engine health.
+
+### Data collected
 
 | Metric | Description |
 |---|---|
@@ -54,3 +70,4 @@ Coming soon. -->
 
 [1]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent
 [2]: https://app.datadoghq.com/dashboard/lists?q=byoc&p=1
+[3]: /byoc-logs/operate/troubleshooting/#operator-managed-deployments
