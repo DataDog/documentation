@@ -25,7 +25,7 @@ further_reading:
 
 The [Metrics Catalog page][1] lists all of your metrics reported to Datadog, both custom and standard, for a specified time frame. The default time frame is the past 4 hours.
 
-<!-- TODO(screenshot): Full-page overview showing usage graphs, search, facets, and the metrics table. Save to metrics/catalog/. Exclude preview banners and features that are not generally available. -->
+{{< img src="metrics/catalog/catalog_overview_2026-11-04.png" alt="The Metrics Catalog page, showing the custom metrics usage graphs, the Metric and Tag search fields, the facet panel, and the metrics table." style="width:100%;" >}}
 
 Use the Metrics Catalog page to discover and understand your metrics, and to manage your custom metrics volume.
 
@@ -86,22 +86,20 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled.
 - {{< ui >}}Tag Configuration{{< /ui >}}: Metrics with tag configurations.
 
-<!-- TODO(screenshot): Replace with a facet panel screenshot showing the Core, Usage, and Configuration groups. -->
-{{< img src="metrics/summary/facet_panel_2025-02-26.png" alt="Metrics Facet Panel" style="width:75%;">}}
+{{< img src="metrics/catalog/facet_panel_2026-11-03.png" alt="The facet panel with the Core, Usage, and Configuration facet groups expanded." style="width:40%;" >}}
 
 ### Metrics table
 
-The metrics table lists your metrics with their configuration and volume details. By default, the table displays the following columns:
+The metrics table lists your metrics with their configuration and volume details. You can hide any column except {{< ui >}}Metric Name{{< /ui >}}. By default, the table displays the following columns:
 
 | Column | Description |
 |--------|-------------|
 | {{< ui >}}Metric Name{{< /ui >}} | The name of the metric. Click a metric name to open its details side panel. For more information, see the [Metric details side panel](#metric-details-sidepanel) section. |
+| {{< ui >}}First Submitted{{< /ui >}} | How long ago the metric was first submitted. |
 | {{< ui >}}Last Tag Configuration{{< /ui >}} | When the metric's tag configuration was last changed. |
 | {{< ui >}}Est. Ingested Metrics{{< /ui >}} | The estimated number of ingested custom metrics that the metric name emits. |
 | {{< ui >}}Est. Indexed Metrics{{< /ui >}} | The estimated number of indexed custom metrics that the metric name emits. |
 | {{< ui >}}Change in Volume{{< /ui >}} | The change in the metric name's indexed custom metrics volume over the selected time frame. |
-
-You can also display the optional {{< ui >}}First Submitted{{< /ui >}} column, which shows how long ago each metric was first submitted.
 
 Volume columns apply only to custom metrics. For standard metrics, the {{< ui >}}Est. Ingested Metrics{{< /ui >}}, {{< ui >}}Est. Indexed Metrics{{< /ui >}}, and {{< ui >}}Change in Volume{{< /ui >}} columns display a dash (—).
 
@@ -122,7 +120,7 @@ To resize a column, drag the edge of its header in the metrics table.
 
 To restore the default columns, click {{< ui >}}Reset default columns{{< /ui >}}.
 
-<!-- TODO(screenshot): Column customization control, open. -->
+{{< img src="metrics/catalog/manage_columns_2026-11-04.png" alt="The Manage Columns menu, with toggles to show or hide each column and a Reset default columns option." style="width:40%;" >}}
 
 #### Download as CSV
 
@@ -288,8 +286,7 @@ Sort the metrics table by a volume column. For example:
 
 ### Compare a metric's volume over time
 
-<!-- TODO(screenshot): Replace with a screenshot of the Change in Volume popover in Catalog. -->
-{{< img src="metrics/volume/compare_metric_cardinality_2025-01-27.png" alt="Metrics list filtered to metric names containing shopist, sorted by estimated custom metrics." style="width:100%;" >}}
+{{< img src="metrics/catalog/change_in_volume_popover_2026-11-03.png" alt="The Change in Volume popover, showing a graph of a metric's indexed custom metrics over time and the change in volume for the selected time frame." style="width:70%;" >}}
 
 Use the {{< ui >}}Change in Volume{{< /ui >}} column to compare a metric name's number of indexed custom metrics (its cardinality) over time. A single metric name can emit multiple indexed custom metrics. To learn more, see [Custom Metrics Billing][42].
 
@@ -313,8 +310,7 @@ To determine why a particular metric name is emitting a large number of custom m
 
 Click {{< ui >}}Actions{{< /ui >}} above the metrics table to configure more than one metric at a time:
 
-<!-- TODO(screenshot): Replace with the open Actions menu on the Catalog page. -->
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons." style="width:100%;">}}
+{{< img src="metrics/catalog/actions_menu_2026-11-04.png" alt="The Actions menu, with the Manage Metric Name Filtering Rules, Manage Agent-Side Tag Aggregation Rules, Manage Percentile Aggregations, and Manage Historical Metrics options." style="width:60%;" >}}
 
 * {{< ui >}}Manage Percentile Aggregations{{< /ui >}}: Enable or disable percentile, threshold, and standard deviation queries across multiple distribution metrics. See the [Distributions page][31] for more information.
 
