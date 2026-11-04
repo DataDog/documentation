@@ -37,10 +37,10 @@ Supported platforms
 Database Monitoring collects the following data from IBM Db2:
 
 **Database instance**
-: Instance metadata every 5 minutes, including the database version, hostname, port, Agent version, and integration version. Configured tags support filtering and grouping.
+: Database version, hostname, port, and Agent and integration versions, collected every 5 minutes. Use tags to filter and group instances.
 
 **Query metrics**
-: Metrics per normalized query from `SYSPROC.MON_GET_PKG_CACHE_STMT`, collected every 10 seconds by default. These include execution count, total coordinator execution time, CPU time, rows read, rows returned, lock waits, and lock wait time. Execution counts reflect only coordinator executions for which activity metrics were collected, which depends on the `MON_ACT_METRICS` setting in [Step 1](#step-1-enable-monitoring).
+: Execution counts, execution time, CPU time, rows read and returned, and lock waits and wait time. Collected from the Db2 package cache every 10 seconds by default and grouped by normalized query.
 
 **Full query text**
 : Obfuscated SQL linked to query metrics by query signature.
@@ -64,7 +64,9 @@ db2 connect to <DB>
 db2 UPDATE DB CFG FOR <DB> USING MON_ACT_METRICS BASE MON_REQ_METRICS BASE
 ```
 
-The connection allows the configuration update to take effect online. For details, see IBM's [UPDATE DATABASE CONFIGURATION command][2], [activity metrics parameter][3], and [request metrics parameter][4].
+The connection allows the configuration update to take effect online. Execution counts include coordinator executions recorded with activity metrics, controlled by `MON_ACT_METRICS`.
+
+For details, see IBM's [UPDATE DATABASE CONFIGURATION command][2], [activity metrics parameter][3], and [request metrics parameter][4].
 
 ### Step 2: Create the Datadog user and grant access
 
