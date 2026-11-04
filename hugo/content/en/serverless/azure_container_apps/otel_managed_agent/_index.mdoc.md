@@ -9,9 +9,9 @@ further_reading:
   - link: "/serverless/azure_container_apps/"
     tag: "Documentation"
     text: "Azure Container Apps"
-  - link: "/opentelemetry/instrument/dd_sdks/otlp_trace_export/"
+  - link: "/opentelemetry/instrument/dd_sdks/"
     tag: "Documentation"
-    text: "Export Traces from Datadog SDKs in OTLP Format"
+    text: "DDOT SDKs"
   - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps"
     tag: "Documentation"
     text: "Send Azure Container Apps traces to Datadog with OTLP"
@@ -74,7 +74,7 @@ This page documents Java, the only Datadog SDK that exports OTLP traces over gRP
 | Ruby | Not supported |
 | PHP | Not supported |
 
-For the latest protocol support, see [Export Traces from Datadog SDKs in OTLP Format][6].
+For the latest protocol support, see [DDOT SDKs][6].
 
 For other languages, select **OpenTelemetry SDK** at the top of this page, or use [`serverless-init`][2].
 {% /if %}
@@ -277,7 +277,7 @@ For limitations of the managed OpenTelemetry agent itself, see the [Azure docume
 [3]: /opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps
 [4]: /account_management/api-app-keys/
 [5]: /getting_started/site/
-[6]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/
+[6]: /opentelemetry/instrument/dd_sdks/
 [7]: https://learn.microsoft.com/en-us/azure/container-apps/opentelemetry-export-datadog
 [8]: https://learn.microsoft.com/en-us/azure/container-apps/environment-variables
 [9]: /tracing/trace_explorer/
