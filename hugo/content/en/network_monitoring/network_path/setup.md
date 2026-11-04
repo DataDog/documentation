@@ -663,7 +663,14 @@ network_path:
     basic_tests_enabled: false
 ```
 
-For Helm or other containerized Agents, set the environment variable `DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED` to `"false"`.
+For Helm or other containerized Agents, set the environment variable `DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED` to `"false"`. For example, with Helm, add the following to your `values.yaml` file, then upgrade your Helm release:
+
+```yaml
+datadog:
+  env:
+    - name: DD_NETWORK_PATH_CONNECTIONS_MONITORING_BASIC_TESTS_ENABLED
+      value: "false"
+```
 
 ##### View results
 
