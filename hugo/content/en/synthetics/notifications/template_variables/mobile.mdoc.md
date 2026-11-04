@@ -142,7 +142,7 @@ Review the [conditional alerting][1] page for an example of how to use the `synt
 
 Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran. For information on how to access the `<step-index>`, see [Step summary][2].
+These variables contain metadata and results for each step that ran. For information on how to access the `<step-index>`, see [Step summary][2].
 
 {% tabs %}
 {% tab label="General steps" %}
@@ -184,7 +184,7 @@ Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
 These are the actual variable values that a step captured during test execution. For example, if you have a mobile test step that extracts a value into a variable, this is where you access that extracted value.
 
-For information on how to access the `<step-index>`, see [Step summary][2].
+For information on how to access the `<step-index>`, see the [Step summary][2] section.
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name

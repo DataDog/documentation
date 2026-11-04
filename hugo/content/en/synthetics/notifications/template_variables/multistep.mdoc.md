@@ -113,7 +113,7 @@ Use these variables to access information about the step that caused a test fail
 
 Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data. For information on how to access the `<step-index>`, see [Step summary][1].
+These variables contain metadata and results for each step that ran. For information on how to access the `<step-index>`, see [Step summary][1].
 
 `synthetics.attributes.result.steps.<step-index>.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
