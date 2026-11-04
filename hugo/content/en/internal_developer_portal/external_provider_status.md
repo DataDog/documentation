@@ -24,7 +24,6 @@ The [External Provider Status page][1] provides real-time visibility into the op
 {{< img src="internal_developer_portal/external_provider_status/external_provider_status_page.png" alt="External Provider Status page showing a tile for each third-party provider with its status, a performance graph, and the services that call it" >}}
 
 ## Key capabilities
-
 External Provider Status detects provider degradations from live telemetry instead of waiting for providers to update their status pages. It analyzes requests that Datadog customers' applications send to each provider, which surfaces problems earlier and more accurately. Incidents that providers report on their own status pages appear alongside these detections, so you can compare both views in one place.
 
 External Provider Status shows:
@@ -65,9 +64,7 @@ A degradation is an abnormal change in the behavior of a provider's API, detecte
 - **Impacted endpoints**: When Datadog can identify the affected API endpoints, the degradation shows the number of impacted endpoints, such as {{< ui >}}12 Impacted Endpoints{{< /ui >}}. Click it to see the full list of endpoints.
 - **Region**: The affected provider region, when applicable, such as `us1`.
 - **Duration and time range**: How long the degradation lasted, and when it started and ended.
-- **Status**: Whether the degradation is ongoing or {{< ui >}}Resolved{{< /ui >}}.
-
-Use the time range selector to change the period displayed. Times display in the timezone shown above the selector, such as `UTC+01:00`.
+- **Status**: Whether the degradation is {{< ui >}}Ongoing{{< /ui >}} or {{< ui >}}Resolved{{< /ui >}}.
 
 ## Provider-reported incidents
 
@@ -115,7 +112,7 @@ To view and edit your existing rules, click {{< ui >}}Manage Notifications{{< /u
 
 ## Supported providers
 
-External Provider Status monitors the following third-party providers. If your provider is not listed, [add it as a custom provider](#add-a-custom-provider).
+External Provider Status monitors the following third-party providers. If your provider is not listed and has a public Atlassian Statuspage, try [adding it as a custom provider](#add-a-custom-provider).
 
 
 | External Provider | API monitored |  
