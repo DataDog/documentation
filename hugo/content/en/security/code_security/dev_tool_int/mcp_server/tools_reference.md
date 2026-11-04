@@ -191,7 +191,7 @@ The scan runs only the supplied rule but still follows the repository's [Static 
 
 ### Output
 
-Violations reported by the rule, grouped by file. If the rule throws, fails to compile, or times out on any file, the tool returns an error that lists those files instead.
+Violations reported by the rule, grouped by file. If the rule throws an exception, fails to compile, or times out on any file, the tool returns an error that lists those files instead.
 
 ### Required binary
 
