@@ -11,7 +11,7 @@ further_reading:
 
 Test Parallelization helps you shorten test runs and use CI resources more efficiently by balancing test files across CI nodes or local workers. It uses test duration data from Test Optimization to distribute work by expected runtime and reduce idle time.
 
-Pair it with Test Impact Analysis to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change, and Test Parallelization automatically scales down the CI node count to match the remaining workload - saving the cost and time of provisioning and setting up unnecessary runners.
+Pair it with Test Impact Analysis to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change. Test Parallelization automatically scales down the CI node count to match the remaining workload. This saves the cost and time of provisioning and setting up unnecessary runners.
 
 ## Setup
 
