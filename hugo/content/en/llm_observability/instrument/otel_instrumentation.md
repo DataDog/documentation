@@ -13,6 +13,7 @@ Agent Observability supports ingesting OpenTelemetry traces that follow either t
 ## Prerequisites
 
 - A [Datadog API key][2]
+- [LLM Observability conversion enabled](#enabling-llm-observability-conversion) with `dd_llmobs_enabled=true` or the `DD-LLMObs-Enabled: true` export header
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12]
 
 ## Supported features
