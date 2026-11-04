@@ -2,6 +2,7 @@
   Resolves one feature for one SDK and receiver pair. See shared/README.md, "How a cell gets its value".
   Context: dict "feature" <feature entry> "sdk" <SDK id> "receiver" <receiver id>
   Returns: dict "support" "label" "notes" (a slice of strings)
+    "blocked_by": for a not_supported cell, the part that blocks it ("sdk", "receiver", "both", or "pair"); otherwise ""
 */ -}}
 {{- $rank := dict "not_supported" 0 "partial" 1 "supported" 2 -}}
 {{- $f := .feature -}}
@@ -13,27 +14,39 @@
     {{- $override = . -}}
   {{- end -}}
 {{- end -}}
+{{- $s := partial "otel-compatibility/value.html" (dict "v" (index ($f.sdk | default dict) $sdk) "where" (printf "feature %s, sdk %s" $f.id $sdk)) -}}
+{{- $r := partial "otel-compatibility/value.html" (dict "v" (index ($f.receiver | default dict) $receiver) "where" (printf "feature %s, receiver %s" $f.id $receiver)) -}}
+{{- $sBlocks := eq $s.support "not_supported" -}}
+{{- $rBlocks := eq $r.support "not_supported" -}}
+{{- $blockedBy := cond (and $sBlocks $rBlocks) "both" (cond $sBlocks "sdk" (cond $rBlocks "receiver" "")) -}}
 {{- $out := dict -}}
 {{- if $override -}}
   {{- $o := partial "otel-compatibility/value.html" (dict "v" $override "where" (printf "feature %s, override %s + %s" $f.id $sdk $receiver)) -}}
-  {{- $out = dict "support" $o.support "label" $o.label "notes" (cond (ne $o.note "") (slice $o.note) slice) -}}
+  {{- /* A pair that fails although neither part does is blocked by the combination */ -}}
+  {{- $by := cond (eq $o.support "not_supported") ($blockedBy | default "pair") "" -}}
+  {{- $out = dict "support" $o.support "label" $o.label "notes" (cond (ne $o.note "") (slice $o.note) slice) "blocked_by" $by -}}
+{{- else if or $sBlocks $rBlocks -}}
+  {{- /* A part that doesn't support the feature decides the cell, even when the other part is unknown */ -}}
+  {{- $notes := slice -}}
+  {{- $label := "" -}}
+  {{- if $sBlocks }}{{ with $s.note }}{{ $notes = $notes | append . }}{{ end }}{{ $label = $s.label }}{{ end -}}
+  {{- if $rBlocks }}{{ with $r.note }}{{ $notes = $notes | append . }}{{ end }}{{ $label = $r.label | default $label }}{{ end -}}
+  {{- $out = dict "support" "not_supported" "label" $label "notes" $notes "blocked_by" $blockedBy -}}
+{{- else if or (eq $s.support "unknown") (eq $r.support "unknown") -}}
+  {{- /* Otherwise an unknown part means the pair isn't documented, so the cell stays unknown */ -}}
+  {{- $out = dict "support" "unknown" "label" "" "notes" slice "blocked_by" "" -}}
 {{- else -}}
-  {{- $s := partial "otel-compatibility/value.html" (dict "v" (index ($f.sdk | default dict) $sdk) "where" (printf "feature %s, sdk %s" $f.id $sdk)) -}}
-  {{- $r := partial "otel-compatibility/value.html" (dict "v" (index ($f.receiver | default dict) $receiver) "where" (printf "feature %s, receiver %s" $f.id $receiver)) -}}
   {{- $sRank := index $rank $s.support -}}
   {{- $rRank := index $rank $r.support -}}
-  {{- /* An unknown side means the pair isn't documented, so the cell stays unknown */ -}}
-  {{- if or (eq $s.support "unknown") (eq $r.support "unknown") -}}
-    {{- $out = dict "support" "unknown" "label" "" "notes" slice -}}
-  {{- else if lt $sRank $rRank -}}
-    {{- $out = dict "support" $s.support "label" $s.label "notes" (cond (ne $s.note "") (slice $s.note) slice) -}}
+  {{- if lt $sRank $rRank -}}
+    {{- $out = dict "support" $s.support "label" $s.label "notes" (cond (ne $s.note "") (slice $s.note) slice) "blocked_by" "" -}}
   {{- else if lt $rRank $sRank -}}
-    {{- $out = dict "support" $r.support "label" $r.label "notes" (cond (ne $r.note "") (slice $r.note) slice) -}}
+    {{- $out = dict "support" $r.support "label" $r.label "notes" (cond (ne $r.note "") (slice $r.note) slice) "blocked_by" "" -}}
   {{- else -}}
     {{- $notes := slice -}}
     {{- with $s.note }}{{ $notes = $notes | append . }}{{ end -}}
     {{- with $r.note }}{{ $notes = $notes | append . }}{{ end -}}
-    {{- $out = dict "support" $s.support "label" ($r.label | default $s.label) "notes" $notes -}}
+    {{- $out = dict "support" $s.support "label" ($r.label | default $s.label) "notes" $notes "blocked_by" "" -}}
   {{- end -}}
 {{- end -}}
 {{- return $out -}}

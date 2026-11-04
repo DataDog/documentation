@@ -141,11 +141,12 @@ support value.
 | ------------- | -------- | -------------------------------------------------------------------- |
 | `sdk`         | yes      | An SDK `id`                                                          |
 | `receiver`    | yes      | A receiver `id`                                                      |
-| `recommended` | no       | `true` adds "(recommended)" in the setup menus. The first two are compared by default. |
+| `recommended` | no       | `true` adds "(recommended)" to the receiver in the destination menu. The first two are compared by default. |
 | `link`        | no       | Setup guide for this pair                                            |
 | `confirmed`   | no       | `false` means the pair may not work. It stays in this file but not on the page. |
 
-Only the pairs listed here appear in the setup menus.
+Each column on the page has an SDK menu and a destination menu. The destination
+menu offers only the receivers that have a pair with the chosen SDK.
 
 ### `features`
 
@@ -191,18 +192,24 @@ overrides:
 ### How a cell gets its value
 
 1. If an override matches the pair, use it.
-2. Otherwise, if the SDK value or the receiver value is `unknown`, the cell is
-   `unknown`.
-3. Otherwise, use the lower of the two, in this order:
-   `not_supported` < `partial` < `supported`.
+2. Otherwise, if the SDK value or the receiver value is `not_supported`, the
+   cell is `not_supported`, even when the other value is `unknown`.
+3. Otherwise, if either value is `unknown`, the cell is `unknown`.
+4. Otherwise, use the lower of the two: `partial` < `supported`.
 
-Rule 2 keeps a cell `unknown` until both sides are documented, so the file never
-claims more than the docs state. When a feature's support depends on the
-combination rather than on either part, add an override instead of changing
-an SDK or receiver value.
+Rule 2 holds because a receiver can't add a feature that the SDK lacks, and an
+SDK can't add one that the receiver lacks. Rule 3 keeps a cell `unknown` until
+both sides are documented, so the file never claims more than the docs state.
+When a feature's support depends on the combination rather than on either
+part, add an override instead of changing an SDK or receiver value.
 
 The cell shows the `label` and `note` of the side that decided the value. When
 both sides have the same value, it shows both notes.
+
+A `not_supported` cell without a note names the part to swap: "Not with this
+SDK", "Not with this destination", or "Not with this SDK or destination". An
+override that is `not_supported` when neither part is shows "Not with this
+combination".
 
 ### Add a feature
 

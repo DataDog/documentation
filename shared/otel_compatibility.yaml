@@ -246,13 +246,6 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
 
   - id: continuous_profiler
     label: Continuous Profiler
@@ -262,13 +255,6 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
 
   - id: data_jobs_monitoring
     label: "Data Observability: Jobs Monitoring"
@@ -279,13 +265,6 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
 
   - id: data_streams_monitoring
     label: Data Streams Monitoring
@@ -314,13 +293,6 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
 
   - id: source_code_integration
     label: Source code integration
@@ -330,13 +302,6 @@ features:
       otel_sdk: not_supported
     receiver:
       agents_collector: supported
-    overrides:
-      - sdk: otel_sdk
-        receiver: upstream_collector
-        support: not_supported
-      - sdk: otel_sdk
-        receiver: otlp_intake
-        support: not_supported
 
   # Remote Configuration applies to the Collector, not the SDK, so every SDK is
   # supported and the receiver decides the cell.
