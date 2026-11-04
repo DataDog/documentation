@@ -4006,6 +4006,32 @@ llmSpan.setTag("no_output", "true");
 llmSpan.finish();
 {{< /code-block >}}
 
+### Example: preventing spans from being emitted
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import datadog.trace.api.llmobs.LLMObsSpanProcessor;
+
+LLMObsSpanProcessor filterProcessor = span -> {
+  // Skip spans that are marked as internal or contain sensitive data
+  if ("true".equals(span.getTag("internal")) || "true".equals(span.getTag("sensitive"))) {
+    return null; // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span;
+};
+
+LLMObs.registerProcessor(filterProcessor);
+
+// This span will be filtered out and not sent to Datadog
+LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("internal_workflow", null, null);
+workflowSpan.setTag("internal", "true");
+// ... workflow logic
+workflowSpan.finish();
+{{< /code-block >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
