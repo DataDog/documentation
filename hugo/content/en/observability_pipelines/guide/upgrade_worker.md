@@ -40,7 +40,7 @@ Worker version 2.25.0 gives you access to the following:
 
   Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
 - The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
-- The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group. The variable applies to every Reduce processor on the Worker and accepts values from 1 to 300 seconds. The default is 10 seconds. A longer window lets events that arrive further apart merge, but the processor holds more groups in memory.
+- The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group.
 - The Sample processor now limits memory for tracking sampling groups to 128 MiB. When it reaches the limit, it evicts the least-recently used groups.
 - The Worker has improved log ingestion performance.
 

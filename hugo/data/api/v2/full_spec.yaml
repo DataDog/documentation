@@ -1890,11 +1890,12 @@ components:
       schema:
         type: string
     RumMetricIDParameter:
-      description: The name of the RUM-based metric.
+      description: The name of the RUM-based metric, as returned in `data.id` by `ListRumMetrics`.
       in: path
       name: metric_id
       required: true
       schema:
+        example: rum.sessions.web.count
         type: string
     RumPermanentRetentionFilterIDParameter:
       description: The identifier of the permanent RUM retention filter.
@@ -1967,6 +1968,185 @@ components:
       in: path
       name: token
       required: true
+      schema:
+        type: string
+    SecurityAgentInvestigationFields:
+      description: Attributes to return, comma-separated. Defaults to all attributes.
+      example:
+        - state
+        - verdict
+        - conclusion
+      explode: false
+      in: query
+      name: fields[investigations]
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/SecurityAgentInvestigationField"
+        type: array
+    SecurityAgentInvestigationID:
+      description: The ID of the investigation, as returned by the list.
+      example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+      in: path
+      name: investigation_id
+      required: true
+      schema:
+        type: string
+    SecurityAgentInvestigationsCountField:
+      description: Field to count completed investigations by.
+      in: query
+      name: field
+      required: true
+      schema:
+        $ref: "#/components/schemas/SecurityAgentInvestigationCountField"
+    SecurityAgentInvestigationsFilterEntity:
+      description: |-
+        Only investigations whose signal has all of these entities. Write each entity as `attribute:value`, matching the
+        values returned by the count endpoint with `field=entity`. Comma-separated values; an investigation must have
+        every one of them.
+      example: "@usr.id:jane.doe"
+      in: query
+      name: filter[entity]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterFrom:
+      description: Only investigations last updated at or after this time, as RFC 3339 or milliseconds since the epoch.
+      example: "2026-10-01T00:00:00Z"
+      in: query
+      name: filter[from]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterRuleID:
+      description: |-
+        Only investigations of signals from one of these detection rule IDs. Comma-separated values; an
+        investigation matches any of them.
+      example: abc-def-ghi
+      in: query
+      name: filter[rule_id]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterRuleType:
+      description: |-
+        Only investigations of signals from detection rules of one of these types, as returned by the count with
+        `field=rule_type`. Comma-separated values; an investigation matches any of them.
+      example: log_detection
+      in: query
+      name: filter[rule_type]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalID:
+      description: |-
+        List every investigation of this signal, newest first. Accepts the signal ID in its V1 form, which starts
+        with `AQ`, or in its longer V3 form, which starts with `Aw`. Investigations carry the V1 form, so their
+        `signal_id` can differ from the ID you pass. Can't be combined with other filters or with `sort`.
+      example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+      in: query
+      name: filter[signal_id]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalSeverity:
+      description: |-
+        Only investigations of signals with one of these severities: `info`, `low`, `medium`, `high`, or `critical`.
+        Comma-separated values; an investigation matches any of them.
+      example: high,critical
+      in: query
+      name: filter[signal_severity]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalSource:
+      description: |-
+        Only investigations of signals from one of these sources, as returned by the count with
+        `field=signal_source`. Comma-separated values; an investigation matches any of them.
+      example: okta
+      in: query
+      name: filter[signal_source]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterState:
+      description: |-
+        Only investigations in one of these states: `investigating` or `completed`. Investigations reported as
+        `failed` match `investigating`. Comma-separated values; an investigation matches any of them.
+      example: completed
+      in: query
+      name: filter[state]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTags:
+      description: |-
+        Only investigations whose signal has all of these tags, written `key:value`. Comma-separated values; an
+        investigation must have every one of them.
+      example: env:prod
+      in: query
+      name: filter[tags]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTitle:
+      description: Only investigations whose signal title contains this text, case-insensitive.
+      example: login
+      in: query
+      name: filter[title]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTo:
+      description: Only investigations last updated at or before this time, as RFC 3339 or milliseconds since the epoch.
+      example: "2026-10-31T00:00:00Z"
+      in: query
+      name: filter[to]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterVerdict:
+      description: |-
+        Only investigations with one of these verdicts: `benign`, `suspicious`, or `malicious`.
+        Comma-separated values; an investigation matches any of them.
+      example: suspicious,malicious
+      in: query
+      name: filter[verdict]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsPageNumber:
+      description: Page number, starting at 1.
+      example: 1
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 1
+        format: int64
+        minimum: 1
+        type: integer
+    SecurityAgentInvestigationsPageSize:
+      description: Number of investigations per page.
+      example: 25
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 25
+        format: int64
+        maximum: 100
+        minimum: 1
+        type: integer
+    SecurityAgentInvestigationsSort:
+      description: |-
+        Sort field, prefixed with `-` for descending: `updated_at`, `severity`, `verdict`, `rule_id`, or `signal_title`.
+        Defaults to `-updated_at`. `verdict` sorts by severity (`benign`, `suspicious`, `malicious`), so `-verdict` puts
+        `malicious` first.
+      example: -updated_at
+      in: query
+      name: sort
+      required: false
       schema:
         type: string
     SecurityFilterID:
@@ -21575,11 +21755,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         offering_class:
           description: The offering class of the Reserved Instance.
@@ -21601,14 +21783,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21642,11 +21824,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21660,14 +21844,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21704,11 +21888,13 @@ components:
           description: The number of Normalized Capacity Units.
           example: 8
           format: double
+          nullable: true
           type: number
         number_of_reservations:
           description: The number of reserved instances.
           example: 2
           format: double
+          nullable: true
           type: number
         purchase_option:
           description: The payment option for the Reserved Instance.
@@ -21722,14 +21908,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21755,9 +21941,18 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        instance_type_family:
+          description: |-
+            The EC2 instance family covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: m5
+          type: string
         purchase_option:
           description: The payment option for the Savings Plan.
           example: All Upfront
+          type: string
+        region:
+          description: The AWS region covered by the Savings Plan. Returned only for EC2 Instance Savings Plans.
+          example: us-east-1
           type: string
         savings_plan_type:
           description: The Savings Plan type.
@@ -21767,14 +21962,14 @@ components:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21802,18 +21997,24 @@ components:
           description: The expiration date of the commitment.
           example: "2025-12-31T00:00:00Z"
           type: string
+        savings_plan_type:
+          description: |-
+            The Azure Savings Plan type, `Compute` or `Database`, based on the product order name. Omitted when
+            the type can't be classified.
+          example: Compute
+          type: string
         start_date:
           description: The start date of the commitment.
           example: "2023-01-01T00:00:00Z"
           type: string
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21843,6 +22044,10 @@ components:
           description: The Azure meter sub-category for the reservation.
           example: D4s v3
           type: string
+        product:
+          description: The Azure product of the reservation. Omitted when it cannot be classified.
+          example: VirtualMachines
+          type: string
         region:
           description: The Azure region of the Reserved Instance.
           example: eastus
@@ -21853,14 +22058,14 @@ components:
           type: string
         status:
           $ref: "#/components/schemas/CommitmentsAzureVMRIStatus"
-        term_length:
-          description: The term length in years.
-          example: 1
-          format: double
-          type: number
+        term_length_months:
+          description: The commitment term in whole months. Omitted when the term is unknown.
+          example: 12
+          format: int64
+          type: integer
         utilization:
-          description: The utilization percentage of the commitment.
-          example: 0.85
+          description: The utilization percentage of the commitment, from 0 to 100.
+          example: 85.5
           format: double
           type: number
       required:
@@ -21938,17 +22143,58 @@ components:
       properties:
         committed_spend_unit:
           $ref: "#/components/schemas/CommitmentsUnit"
+        unused_cost_unavailable:
+          description: |-
+            Whether Azure cost data lacks the unused cost of some commitments, for example when an export is
+            scoped below the billing profile. When `true`, utilization is overstated.
+          example: true
+          type: boolean
       type: object
     CommitmentsListResponse:
       description: Response containing a list of cloud commitment details.
+      properties:
+        data:
+          $ref: "#/components/schemas/CommitmentsListResponseData"
+      required:
+        - data
+      type: object
+    CommitmentsListResponseAttributes:
+      description: Attributes of a commitments list response.
       properties:
         commitments:
           $ref: "#/components/schemas/CommitmentsListItems"
         meta:
           $ref: "#/components/schemas/CommitmentsListMeta"
+        query_definition:
+          $ref: "#/components/schemas/CommitmentsQueryDefinition"
       required:
         - commitments
       type: object
+    CommitmentsListResponseData:
+      description: The commitments list resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CommitmentsListResponseAttributes"
+        id:
+          description: The identifier of the commitments list response.
+          example: commitments_list_response
+          type: string
+        type:
+          $ref: "#/components/schemas/CommitmentsListResponseType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CommitmentsListResponseType:
+      default: commitments_list_response
+      description: Type of the commitments list response resource.
+      enum:
+        - commitments_list_response
+      example: commitments_list_response
+      type: string
+      x-enum-varnames:
+        - COMMITMENTS_LIST_RESPONSE
     CommitmentsOnDemandHotspotsScalarMeta:
       description: Metadata for the on-demand hot-spots scalar response.
       properties:
@@ -21982,6 +22228,90 @@ components:
       x-enum-varnames:
         - AWS
         - AZURE
+    CommitmentsQueryDefinition:
+      description: |-
+        The query that produces the response values, in the same format as dashboard and notebook widget
+        requests, so a client can graph the values in a widget. Each formula's `id` names the response value
+        that it produces.
+      properties:
+        formulas:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionFormulas"
+        queries:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionQueries"
+      required:
+        - formulas
+        - queries
+      type: object
+    CommitmentsQueryDefinitionAggregator:
+      description: The reducer a scalar widget applies to the query.
+      enum:
+        - sum
+        - avg
+        - min
+        - max
+      example: sum
+      type: string
+      x-enum-varnames:
+        - SUM
+        - AVG
+        - MIN
+        - MAX
+    CommitmentsQueryDefinitionDataSource:
+      description: The data source of the query.
+      enum:
+        - cloud_cost
+        - metrics
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+        - CLOUD_COST
+        - METRICS
+    CommitmentsQueryDefinitionFormula:
+      description: A formula of a query definition.
+      properties:
+        formula:
+          description: The formula expression over the named queries.
+          example: used / (used + unused) * 100
+          type: string
+        id:
+          description: The name of the response value the formula produces.
+          example: utilization
+          type: string
+      required:
+        - formula
+        - id
+      type: object
+    CommitmentsQueryDefinitionFormulas:
+      description: The formulas of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionFormula"
+      type: array
+    CommitmentsQueryDefinitionQueries:
+      description: The metric queries of a query definition.
+      items:
+        $ref: "#/components/schemas/CommitmentsQueryDefinitionQuery"
+      type: array
+    CommitmentsQueryDefinitionQuery:
+      description: A metric query of a query definition.
+      properties:
+        aggregator:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionAggregator"
+        data_source:
+          $ref: "#/components/schemas/CommitmentsQueryDefinitionDataSource"
+        name:
+          description: The name formulas use to reference the query.
+          example: used
+          type: string
+        query:
+          description: The metric query.
+          example: "sum:aws.cost.amortized{aws_cost_type:SavingsPlanCoveredUsage}.rollup(sum, daily)"
+          type: string
+      required:
+        - aggregator
+        - data_source
+        - name
+        - query
+      type: object
     CommitmentsSavingsScalarResponse:
       description: Response containing scalar savings metrics for cloud commitment programs.
       properties:
@@ -27698,6 +28028,9 @@ components:
           description: The name of the status page.
           example: Status Page US1
           type: string
+        rss_feed_enabled:
+          description: Whether the RSS feed is enabled for the status page.
+          type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
           type: string
@@ -85576,6 +85909,9 @@ components:
           type: array
         type:
           $ref: "#/components/schemas/NotificationChannelEmailConfigType"
+        verified:
+          description: Whether this email address has been verified.
+          type: boolean
       required:
         - type
         - address
@@ -85604,6 +85940,11 @@ components:
     NotificationChannelPhoneConfig:
       description: "Phone notification channel configuration"
       properties:
+        available_notification_types:
+          description: Notification methods currently available for this phone number. Omitted when no methods are available.
+          items:
+            $ref: "#/components/schemas/OnCallPhoneNotificationRuleMethod"
+          type: array
         formatted_number:
           description: "The formatted international version of Number (e.g. +33 7 1 23 45 67)."
           example: ""
@@ -88053,7 +88394,7 @@ components:
             type: string
           type: array
         processors:
-          description: Processors applied sequentially within this group. Events flow through each processor in order.
+          description: Processors applied sequentially within this group. Events flow through each processor in order. Omit or use an empty array for a group without processors.
           example: [{"enabled": true, "fields": [{"name": "env", "value": "prod"}], "id": "add-fields-processor", "include": "*", "type": "add_fields"}, {"enabled": true, "id": "filter-processor", "include": "status:error", "type": "filter"}]
           items:
             $ref: "#/components/schemas/ObservabilityPipelineConfigProcessorItem"
@@ -88062,7 +88403,6 @@ components:
         - id
         - include
         - inputs
-        - processors
         - enabled
       type: object
     ObservabilityPipelineConfigProcessorItem:
@@ -88477,6 +88817,8 @@ components:
 
         **Supported pipeline types:** metrics
       properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         id:
           description: The unique identifier for this component.
           example: datadog-metrics-destination
@@ -91006,7 +91348,7 @@ components:
           example: "service:my-service"
           type: string
         rules:
-          description: The list of Grok parsing rules selected by either source field or include query.
+          description: The list of custom Grok parsing rules selected by either source field or include query. Omit to use only the Datadog library rules.
           items:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleItem"
           type: array
@@ -91016,7 +91358,6 @@ components:
         - id
         - type
         - include
-        - rules
         - enabled
       type: object
       x-pipeline-types: [logs]
@@ -99258,6 +99599,9 @@ components:
           description: The name of the status page.
           example: Status Page US1
           type: string
+        rss_feed_enabled:
+          description: Whether the RSS feed is enabled for the status page.
+          type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
           type: string
@@ -110989,7 +111333,7 @@ components:
           type: array
       type: object
     RumMetricCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule to compute the RUM-based metric. It is set at creation and only `include_percentiles` can be updated afterward.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -110997,23 +111341,25 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
-            Only present when `aggregation_type` is `distribution`.
+            The path of the numeric RUM event attribute the metric aggregates on.
+            Only valid when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
       required:
         - aggregation_type
       type: object
     RumMetricComputeAggregationType:
-      description: The type of aggregation to use.
+      description: |-
+        The type of aggregation to use.
+        `count` counts the matching events. `distribution` aggregates the values found at `path`.
       enum: ["count", "distribution"]
       example: "distribution"
       type: string
       x-enum-varnames: ["COUNT", "DISTRIBUTION"]
     RumMetricComputeIncludePercentiles:
       description: |-
-        Toggle to include or exclude percentile aggregations for distribution metrics.
-        Only present when `aggregation_type` is `distribution`.
+        Toggle to include or exclude percentile aggregations (p50, p75, p90, p95, p99) for distribution metrics.
+        Required when `aggregation_type` is `distribution`, and must be omitted otherwise.
       example: true
       type: boolean
     RumMetricCreateAttributes:
@@ -111026,7 +111372,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. Each rule creates a tag on the generated metric. If omitted, the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
@@ -111059,18 +111405,22 @@ components:
         - data
       type: object
     RumMetricEventType:
-      description: The type of RUM events to filter on.
+      description: The type of RUM events the metric is generated from. It is set at creation and cannot be changed.
       enum: ["session", "view", "action", "error", "resource", "long_task", "vital"]
       example: "session"
       type: string
       x-enum-varnames: ["SESSION", "VIEW", "ACTION", "ERROR", "RESOURCE", "LONG_TASK", "VITAL"]
     RumMetricFilter:
-      description: The RUM-based metric filter. Events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. Events matching this filter are aggregated in this metric. The `event_type` filter is added automatically.
       properties:
         query:
           default: "*"
-          description: The search query - following the RUM search syntax.
-          example: "@service:web-ui:"
+          description: |-
+            The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/).
+            Do not include a `@type` filter, it is derived from `event_type`.
+            It must not contain invisible or control characters such as non-breaking or zero-width spaces.
+            When updating a metric, an empty query leaves the filter unchanged.
+          example: "@service:web-ui"
           type: string
       required:
         - query
@@ -111079,19 +111429,26 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute to group the metric by.
           example: "@browser.name"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: |-
+            Name of the tag that gets created on the metric. By default, `path` is used as the tag name.
+            It must be at most 200 characters long, start with a letter, and contain only lowercase letters, digits, underscores, hyphens, colons, periods, and slashes.
           example: "browser_name"
+          maxLength: 200
           type: string
       required:
         - path
       type: object
     RumMetricID:
-      description: The name of the RUM-based metric.
+      description: |-
+        The name of the RUM-based metric.
+        On creation, it must be 1 to 200 characters long, contain only ASCII letters, digits, underscores, and periods, start with a letter, and not start with `rum.measure` or `rum.investigate`.
+        It cannot be changed after creation.
       example: "rum.sessions.webui.count"
+      maxLength: 200
       type: string
     RumMetricResponse:
       description: The RUM-based metric object.
@@ -111109,7 +111466,7 @@ components:
         filter:
           $ref: "#/components/schemas/RumMetricResponseFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules the metric is grouped by. An empty array is returned if the metric is not grouped.
           items:
             $ref: "#/components/schemas/RumMetricResponseGroupBy"
           type: array
@@ -111117,7 +111474,7 @@ components:
           $ref: "#/components/schemas/RumMetricResponseUniqueness"
       type: object
     RumMetricResponseCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule of the RUM-based metric.
       properties:
         aggregation_type:
           $ref: "#/components/schemas/RumMetricComputeAggregationType"
@@ -111125,7 +111482,7 @@ components:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
         path:
           description: |-
-            The path to the value the RUM-based metric will aggregate on.
+            The path of the numeric RUM event attribute the metric aggregates on.
             Only present when `aggregation_type` is `distribution`.
           example: "@duration"
           type: string
@@ -111141,10 +111498,10 @@ components:
           $ref: "#/components/schemas/RumMetricType"
       type: object
     RumMetricResponseFilter:
-      description: The RUM-based metric filter. RUM events matching this filter will be aggregated in this metric.
+      description: The RUM-based metric filter. RUM events matching this filter are aggregated in this metric. Omitted if the metric only filters on the event type.
       properties:
         query:
-          description: The search query - following the RUM search syntax.
+          description: The search query, following the [RUM search syntax](https://docs.datadoghq.com/real_user_monitoring/explorer/search_syntax/). It does not include the event type filter.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
       type: object
@@ -111152,30 +111509,32 @@ components:
       description: A group by rule.
       properties:
         path:
-          description: The path to the value the RUM-based metric will be aggregated over.
+          description: The path of the RUM event attribute the metric is grouped by.
           example: "@http.status_code"
           type: string
         tag_name:
-          description: Eventual name of the tag that gets created. By default, `path` is used as the tag name.
+          description: Name of the tag created on the metric. By default, `path` is used as the tag name.
           example: "status_code"
           type: string
       type: object
     RumMetricResponseUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `session` or `view`.
+      description: The rule to count updatable events. Only present if `event_type` is `session` or `view`, and absent on older metrics created before this setting existed.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
       type: object
     RumMetricType:
       default: rum_metrics
-      description: The type of the resource. The value should always be rum_metrics.
+      description: The type of the resource. The value must be `rum_metrics`.
       enum:
         - rum_metrics
       example: rum_metrics
       type: string
       x-enum-varnames: ["RUM_METRICS"]
     RumMetricUniqueness:
-      description: The rule to count updatable events. Is only set if `event_type` is `sessions` or `views`.
+      description: |-
+        The rule to count updatable events.
+        Required when `event_type` is `session` or `view`, and must be omitted for other event types. It cannot be changed after creation.
       properties:
         when:
           $ref: "#/components/schemas/RumMetricUniquenessWhen"
@@ -111183,32 +111542,32 @@ components:
         - when
       type: object
     RumMetricUniquenessWhen:
-      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete.
+      description: When to count updatable events. `match` when the event is first seen, or `end` when the event is complete. Sessions and views are updated over time, and each one is counted once.
       enum: ["match", "end"]
       example: "match"
       type: string
       x-enum-varnames: ["WHEN_MATCH", "WHEN_END"]
     RumMetricUpdateAttributes:
-      description: The RUM-based metric properties that will be updated.
+      description: The RUM-based metric properties to update. Omitted properties keep their current value.
       properties:
         compute:
           $ref: "#/components/schemas/RumMetricUpdateCompute"
         filter:
           $ref: "#/components/schemas/RumMetricFilter"
         group_by:
-          description: The rules for the group by.
+          description: The rules to group the metric by. When provided, replaces all the existing group by rules.
           items:
             $ref: "#/components/schemas/RumMetricGroupBy"
           type: array
       type: object
     RumMetricUpdateCompute:
-      description: The compute rule to compute the RUM-based metric.
+      description: The compute rule properties that can be updated. Only valid for metrics whose `aggregation_type` is `distribution`.
       properties:
         include_percentiles:
           $ref: "#/components/schemas/RumMetricComputeIncludePercentiles"
       type: object
     RumMetricUpdateData:
-      description: The new RUM-based metric properties.
+      description: The RUM-based metric properties to update. `id` is required by the API and must match the `metric_id` path parameter.
       properties:
         attributes:
           $ref: "#/components/schemas/RumMetricUpdateAttributes"
@@ -111221,7 +111580,7 @@ components:
         - attributes
       type: object
     RumMetricUpdateRequest:
-      description: The new RUM-based metric body.
+      description: The RUM-based metric update body.
       properties:
         data:
           $ref: "#/components/schemas/RumMetricUpdateData"
@@ -116121,6 +116480,660 @@ components:
         - SYSTEM
         - LIGHT
         - DARK
+    SecurityAgentInvestigationAttributes:
+      description: |-
+        Attributes of an investigation. When `fields[investigations]` is set, only listed attributes are returned.
+        Attributes the investigation doesn't have yet are absent.
+      properties:
+        conclusion:
+          description: Summary of the investigation's findings.
+          example: The login came from a location the user travels to regularly, on a known device.
+          type: string
+        created_at:
+          description: When the investigation started.
+          example: "2026-10-30T14:02:40Z"
+          format: date-time
+          type: string
+        key_entities:
+          $ref: "#/components/schemas/SecurityAgentInvestigationKeyEntities"
+        key_evidence:
+          description: The evidence the verdict rests on.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationKeyEvidence"
+          type: array
+        response_suggestions:
+          $ref: "#/components/schemas/SecurityAgentInvestigationResponseSuggestions"
+        rule_id:
+          description: ID of the detection rule that generated the signal.
+          example: abc-def-ghi
+          type: string
+        signal:
+          $ref: "#/components/schemas/SecurityAgentInvestigationSignal"
+        signal_id:
+          description: ID of the signal, in its V1 form.
+          example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+          type: string
+        state:
+          $ref: "#/components/schemas/SecurityAgentInvestigationState"
+        steps:
+          description: The steps of the investigation, in order.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationStep"
+          type: array
+        updated_at:
+          description: When the investigation last changed.
+          example: "2026-10-30T14:15:02Z"
+          format: date-time
+          type: string
+        verdict:
+          $ref: "#/components/schemas/SecurityAgentInvestigationVerdict"
+      type: object
+    SecurityAgentInvestigationCount:
+      description: One value of the counted field and how many completed investigations have it.
+      properties:
+        count:
+          description: Number of completed investigations with this value.
+          example: 1250
+          format: int64
+          type: integer
+        value:
+          description: A value of the counted field.
+          example: benign
+          type: string
+      required:
+        - value
+        - count
+      type: object
+    SecurityAgentInvestigationCountField:
+      description: Field to count completed investigations by.
+      enum:
+        - verdict
+        - rule_type
+        - signal_source
+        - entity
+      example: verdict
+      type: string
+      x-enum-varnames:
+        - VERDICT
+        - RULE_TYPE
+        - SIGNAL_SOURCE
+        - ENTITY
+    SecurityAgentInvestigationCountsAttributes:
+      description: The counts of each value of the field.
+      properties:
+        counts:
+          description: One bucket per value, sorted by ascending count.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationCount"
+          type: array
+      required:
+        - counts
+      type: object
+    SecurityAgentInvestigationCountsData:
+      description: Counts of completed investigations.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsAttributes"
+        id:
+          description: The counted field.
+          example: verdict
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentInvestigationCountsResponse:
+      description: Completed investigations counted by the values of one field.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsData"
+      required:
+        - data
+      type: object
+    SecurityAgentInvestigationCountsType:
+      default: investigation_counts
+      description: Type of the investigation counts resource.
+      enum:
+        - investigation_counts
+      example: investigation_counts
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_COUNTS
+    SecurityAgentInvestigationData:
+      description: |-
+        An investigation and its content. `attributes` is absent when `fields[investigations]` is empty or lists
+        only attributes the investigation doesn't have.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationAttributes"
+        id:
+          description: The ID of the investigation.
+          example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    SecurityAgentInvestigationEntity:
+      description: An entity the investigation found.
+      properties:
+        sub_type:
+          description: More specific type of the entity.
+          example: okta_user
+          type: string
+        type:
+          description: Type of the entity, such as a user, a host, or an IP address.
+          example: user
+          type: string
+        value:
+          description: Value that identifies the entity.
+          example: jane.doe@example.com
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    SecurityAgentInvestigationField:
+      description: An attribute of an investigation that `fields[investigations]` can select.
+      enum:
+        - signal_id
+        - rule_id
+        - state
+        - verdict
+        - conclusion
+        - signal
+        - key_entities
+        - key_evidence
+        - steps
+        - response_suggestions
+        - created_at
+        - updated_at
+      example: verdict
+      type: string
+      x-enum-varnames:
+        - SIGNAL_ID
+        - RULE_ID
+        - STATE
+        - VERDICT
+        - CONCLUSION
+        - SIGNAL
+        - KEY_ENTITIES
+        - KEY_EVIDENCE
+        - STEPS
+        - RESPONSE_SUGGESTIONS
+        - CREATED_AT
+        - UPDATED_AT
+    SecurityAgentInvestigationKeyEntities:
+      description: The entities the investigation found, by role.
+      properties:
+        actors:
+          description: Entities that performed the activity.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationEntity"
+          type: array
+        targets:
+          description: Entities the activity was aimed at.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationEntity"
+          type: array
+      required:
+        - actors
+        - targets
+      type: object
+    SecurityAgentInvestigationKeyEvidence:
+      description: A piece of evidence the verdict rests on.
+      properties:
+        category:
+          description: Category of the evidence.
+          example: Authentication
+          type: string
+        finding:
+          description: What the investigation found.
+          example: The user logged in from the same country three times in the last 30 days.
+          type: string
+        source_steps:
+          description: Names of the steps the evidence comes from.
+          example:
+            - Has the user logged in from this location before?
+          items:
+            type: string
+          type: array
+      required:
+        - category
+        - finding
+      type: object
+    SecurityAgentInvestigationListItem:
+      description: An investigation in a list.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationListItemAttributes"
+        id:
+          description: The ID of the investigation.
+          example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentInvestigationListItemAttributes:
+      description: |-
+        Attributes of an investigation in a list. To get an investigation's full content, use the get investigation
+        endpoint.
+      properties:
+        created_at:
+          description: When the investigation started.
+          example: "2026-10-30T14:02:40Z"
+          format: date-time
+          type: string
+        is_latest:
+          description: |-
+            Whether this is the latest investigation of the signal. Always true when `filter[signal_id]` isn't set.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule that generated the signal. It can be empty while the investigation runs.
+          example: abc-def-ghi
+          type: string
+        signal:
+          $ref: "#/components/schemas/SecurityAgentInvestigationSignal"
+        signal_id:
+          description: ID of the signal, in its V1 form.
+          example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+          type: string
+        state:
+          $ref: "#/components/schemas/SecurityAgentInvestigationState"
+        updated_at:
+          description: When the investigation last changed.
+          example: "2026-10-30T14:15:02Z"
+          format: date-time
+          type: string
+        verdict:
+          $ref: "#/components/schemas/SecurityAgentInvestigationVerdict"
+      required:
+        - signal_id
+        - rule_id
+        - state
+        - is_latest
+      type: object
+    SecurityAgentInvestigationMitigationAction:
+      description: An action that applies a mitigation.
+      properties:
+        applied:
+          description: Whether the action has run.
+          example: false
+          type: boolean
+        applied_at:
+          description: When the action ran.
+          example: "2026-10-30T14:20:00Z"
+          format: date-time
+          type: string
+        applied_by:
+          description: Who ran the action.
+          example: john.smith@example.com
+          type: string
+        fqn:
+          description: ID of the action in the Action Catalog.
+          example: com.datadoghq.okta.suspend_user
+          type: string
+        id:
+          description: ID of the action.
+          example: action-1
+          type: string
+        name:
+          description: Name of the action in the Action Catalog.
+          example: Suspend user
+          type: string
+        resource:
+          description: The resource the action changes.
+          example: jane.doe@example.com
+          type: string
+        source:
+          description: Integration that runs the action, such as `dd`, `aws`, or `okta`.
+          example: okta
+          type: string
+        source_connected:
+          description: Whether the organization has a connection that can run the action.
+          example: true
+          type: boolean
+        target:
+          description: What the action targets.
+          example: jane.doe@example.com
+          type: string
+      required:
+        - id
+        - source
+        - source_connected
+        - applied
+      type: object
+    SecurityAgentInvestigationMitigationSuggestion:
+      description: A suggested mitigation.
+      properties:
+        actions:
+          description: Actions that apply the mitigation.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationMitigationAction"
+          type: array
+        id:
+          description: ID of the mitigation.
+          example: mitigation-1
+          type: string
+        rationale:
+          description: Why the mitigation is suggested.
+          example: Only needed if the user doesn't confirm the login.
+          type: string
+        recommended:
+          description: Whether the mitigation is recommended.
+          example: false
+          type: boolean
+        scope_note:
+          description: What the mitigation applies to.
+          example: jane.doe@example.com
+          type: string
+        step:
+          description: Order in which to apply the mitigation, starting at 1.
+          example: 1
+          format: int64
+          type: integer
+        title:
+          description: Title of the mitigation.
+          example: Suspend the user
+          type: string
+      required:
+        - id
+        - title
+        - rationale
+        - step
+        - recommended
+      type: object
+    SecurityAgentInvestigationNoRunReason:
+      description: |-
+        Why `filter[signal_id]` returned no investigation. Set only on the first page of an empty result. The reason is
+        based on the organization's current settings. Poll again only on `investigation_not_started`, after the number
+        of seconds in the `Retry-After` header; treat the others as final for this signal.
+        - `investigation_not_started`: no investigation has started yet, but one may still start.
+        - `not_investigated`: no investigation started within an hour of the signal, so none is expected. The signal
+          was skipped for a reason this API doesn't report, such as its severity or a rate limit.
+        - `rule_not_enabled`: the signal's detection rule doesn't have Bits Security Analyst enabled, so no
+          investigation starts automatically.
+        - `signal_not_found`: the ID isn't a signal ID, or no signal with this ID exists in the organization.
+        - `org_not_activated`: the organization hasn't activated Bits Security Analyst.
+      enum:
+        - investigation_not_started
+        - not_investigated
+        - rule_not_enabled
+        - signal_not_found
+        - org_not_activated
+      example: investigation_not_started
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_NOT_STARTED
+        - NOT_INVESTIGATED
+        - RULE_NOT_ENABLED
+        - SIGNAL_NOT_FOUND
+        - ORG_NOT_ACTIVATED
+    SecurityAgentInvestigationResponse:
+      description: An investigation.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentInvestigationData"
+      required:
+        - data
+      type: object
+    SecurityAgentInvestigationResponseSuggestions:
+      description: Suggested responses to the signal.
+      properties:
+        mitigation_suggestions:
+          description: Suggested mitigations, in the order to apply them.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationMitigationSuggestion"
+          type: array
+        rule_tuning_suggestions:
+          $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningSuggestions"
+      type: object
+    SecurityAgentInvestigationRuleTuningCondition:
+      description: A condition of a rule tuning suggestion.
+      properties:
+        field:
+          description: Attribute the condition checks.
+          example: "@usr.device.id"
+          type: string
+        value:
+          description: Value the attribute is compared with.
+          example: 4b8f2c1e-9a7d-4e3b-8c5f-1d2e3f4a5b6c
+          type: string
+      required:
+        - field
+        - value
+      type: object
+    SecurityAgentInvestigationRuleTuningSuggestion:
+      description: A suggestion to tune the detection rule.
+      properties:
+        action_type:
+          description: Kind of change the suggestion makes to the rule.
+          example: create_suppression
+          type: string
+        conditions:
+          description: The conditions the change applies to.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningCondition"
+          type: array
+        description:
+          description: What the suggestion changes.
+          example: Don't generate signals for logins from devices the user has used before.
+          type: string
+        estimated_silenced_count:
+          description: Estimated number of signals the change would have silenced in the window.
+          example: 85
+          format: int64
+          type: integer
+        id:
+          description: ID of the suggestion.
+          example: suggestion-1
+          type: string
+        match_logic:
+          description: How the conditions combine, such as AND or OR.
+          example: AND
+          type: string
+        recommended:
+          description: Whether the suggestion is recommended.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+        title:
+          description: Title of the suggestion.
+          example: Suppress logins from known devices
+          type: string
+        warning:
+          description: What the change could hide. It can be empty.
+          example: A stolen known device would no longer trigger this rule.
+          type: string
+        why:
+          description: Why the suggestion is made.
+          example: The user's known devices accounted for most benign signals.
+          type: string
+      required:
+        - id
+        - title
+        - action_type
+        - rule_id
+        - description
+        - match_logic
+        - conditions
+        - why
+        - recommended
+        - warning
+      type: object
+    SecurityAgentInvestigationRuleTuningSuggestions:
+      description: Suggestions to tune the detection rule that generated the signal.
+      properties:
+        occurrence_window_days:
+          description: Length of the window, in days.
+          example: 30
+          format: int64
+          type: integer
+        reasoning:
+          description: Why tuning the rule is suggested.
+          example: Most signals from this rule in the last 30 days were benign travel.
+          type: string
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+        rule_name:
+          description: Name of the detection rule.
+          example: Unusual login location for a user
+          type: string
+        rule_signal_total:
+          description: Number of signals the rule generated in the window.
+          example: 120
+          format: int64
+          type: integer
+        suggestions:
+          description: The tuning suggestions.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningSuggestion"
+          type: array
+        summary:
+          description: Summary of the suggestions.
+          example: The rule fires often for users who travel to known locations.
+          type: string
+      required:
+        - summary
+        - reasoning
+        - rule_id
+        - rule_name
+        - rule_signal_total
+        - occurrence_window_days
+        - suggestions
+      type: object
+    SecurityAgentInvestigationSignal:
+      description: Summary of the signal the investigation is about.
+      properties:
+        severity:
+          description: "Severity of the signal: `info`, `low`, `medium`, `high`, or `critical`."
+          example: medium
+          type: string
+        sources:
+          description: Sources of the signal.
+          example:
+            - okta
+          items:
+            type: string
+          type: array
+        tactic:
+          description: MITRE ATT&CK tactic, from the signal's `tactic` tag.
+          example: TA0001-initial-access
+          type: string
+        tags:
+          description: Tags of the signal, written `key:value`.
+          example:
+            - "source:okta"
+          items:
+            type: string
+          type: array
+        technique:
+          description: MITRE ATT&CK technique, from the signal's `technique` tag.
+          example: T1078-valid-accounts
+          type: string
+        timestamp:
+          description: Time the signal was generated.
+          example: "2026-10-30T14:02:11Z"
+          type: string
+        title:
+          description: Title of the signal.
+          example: Unusual login location for a user
+          type: string
+      type: object
+    SecurityAgentInvestigationState:
+      description: |-
+        State of the investigation: `investigating` while it runs, `completed` after it has a result, or `failed`
+        when it produced no result before its timeout.
+      enum:
+        - investigating
+        - completed
+        - failed
+      example: completed
+      type: string
+      x-enum-varnames:
+        - INVESTIGATING
+        - COMPLETED
+        - FAILED
+    SecurityAgentInvestigationStep:
+      description: A step of the investigation.
+      properties:
+        name:
+          description: Name of the step, usually the question it answers.
+          example: Has the user logged in from this location before?
+          type: string
+        summary:
+          description: Summary of what the step found. It can be empty.
+          example: Three earlier logins from the same country, on the same device.
+          type: string
+      required:
+        - name
+        - summary
+      type: object
+    SecurityAgentInvestigationType:
+      default: investigations
+      description: Type of the investigation resource.
+      enum:
+        - investigations
+      example: investigations
+      type: string
+      x-enum-varnames:
+        - INVESTIGATIONS
+    SecurityAgentInvestigationVerdict:
+      description: Verdict of the investigation. Only completed investigations have one.
+      enum:
+        - benign
+        - suspicious
+        - malicious
+      example: benign
+      type: string
+      x-enum-varnames:
+        - BENIGN
+        - SUSPICIOUS
+        - MALICIOUS
+    SecurityAgentInvestigationsListMeta:
+      description: Metadata of a page of investigations.
+      properties:
+        reason:
+          $ref: "#/components/schemas/SecurityAgentInvestigationNoRunReason"
+        total_count:
+          description: |-
+            Without `filter[signal_id]`, the number of signals that match the filters. With `filter[signal_id]`, the
+            number of investigations of that signal. Pages past the last page return 0.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_count
+      type: object
+    SecurityAgentInvestigationsListResponse:
+      description: A page of investigations.
+      properties:
+        data:
+          description: The investigations on this page.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationListItem"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityAgentInvestigationsListMeta"
+      required:
+        - data
+        - meta
+      type: object
     SecurityAutomationRulesLinks:
       description: Pagination links for the list of automation rules.
       properties:
@@ -129246,6 +130259,9 @@ components:
         page_url:
           description: The url that the status page is accessible at.
           type: string
+        rss_feed_enabled:
+          description: Whether the RSS feed is enabled for the status page.
+          type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
           type: string
@@ -129422,6 +130438,9 @@ components:
         page_url:
           description: The url that the status page is accessible at.
           type: string
+        rss_feed_enabled:
+          description: Whether the RSS feed is enabled for the status page.
+          type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
           type: string
@@ -138442,6 +139461,253 @@ components:
           description: Pagination type. One of `offset_limit` or `number_size`.
           type: string
       type: object
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Temporal Cloud OpenMetrics integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthRequest"
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Temporal Cloud OpenMetrics integration account.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthResponse"
+    TemporalCloudOpenMetricsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Temporal Cloud OpenMetrics integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthUpdate"
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the API key of a Temporal Cloud service account with the Metrics Read-Only account-level role.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Temporal Cloud.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. Use the API key of a Temporal Cloud service account with the Metrics Read-Only account-level role. Only the fields provided are changed. Omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Temporal Cloud.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Temporal Cloud OpenMetrics integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateData:
+      description: Data envelope for creating a Temporal Cloud OpenMetrics integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountCreateRequest:
+      description: Request payload to create a Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponse:
+      description: Response payload for a single Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponseAttributes:
+      description: Attributes of a Temporal Cloud OpenMetrics integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountResponseData:
+      description: Data envelope of a Temporal Cloud OpenMetrics integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Temporal Cloud OpenMetrics integration account.
+          example: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Temporal Cloud OpenMetrics integration account.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency. Defaults to `false`.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard. For example, `prod-*` matches every namespace starting with `prod-`. Entries may contain only lowercase letters, digits, hyphens, periods, and `*`. Any other value is rejected with a `422` response. Omit this field or leave it empty to collect metrics for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsResponse:
+      description: Settings configured on the Temporal Cloud OpenMetrics integration account.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard. For example, `prod-*` matches every namespace starting with `prod-`. Empty or absent when metrics are collected for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.
+      properties:
+        include_opt_in_labels:
+          description: >-
+            When enabled, Datadog collects Temporal Cloud's [opt-in labels](https://docs.temporal.io/cloud/metrics/openmetrics/metrics-reference#opt-in-labels) (activity type, worker deployment name, and worker build ID) for more granularity on your existing metrics. Enabling them may increase metric collection latency.
+          example: false
+          type: boolean
+        namespaces_to_include:
+          description: >-
+            Comma-separated list of Temporal Cloud namespaces to collect metrics for. An entry can use `*` as a wildcard. For example, `prod-*` matches every namespace starting with `prod-`. Entries may contain only lowercase letters, digits, hyphens, periods, and `*`. Any other value is rejected with a `422` response. Omit this field or leave it empty to collect metrics for all namespaces.
+          example: prod-*,billing.a1b2c
+          type: string
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Temporal Cloud OpenMetrics integration account. Every field is optional. Only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the Temporal Cloud OpenMetrics integration account.
+          example: temporal-cloud-prod
+          type: string
+        settings:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountSettingsUpdate"
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateData:
+      description: Data envelope for updating a Temporal Cloud OpenMetrics integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Temporal Cloud OpenMetrics integration account to update.
+          example: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountUpdateRequest:
+      description: Request payload to update a Temporal Cloud OpenMetrics integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationAccountsResponse:
+      description: Response payload for a list of Temporal Cloud OpenMetrics integration accounts.
+      properties:
+        data:
+          description: List of Temporal Cloud OpenMetrics integration accounts.
+          items:
+            $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    TemporalCloudOpenMetricsIntegrationDataflowsResponse:
+      description: Data Datadog collects from Temporal Cloud OpenMetrics, keyed by dataflow ID.
+      properties:
+        temporal-cloud-openmetrics-metrics:
+          $ref: "#/components/schemas/TemporalCloudOpenMetricsMetricsIntegrationDataflowResponse"
+      type: object
+    TemporalCloudOpenMetricsMetricsIntegrationDataflowResponse:
+      description: >-
+        Temporal Cloud operational metrics for your namespaces, workflows, and task queues, such as workflow and activity rates, task polling, and service request latency, collected from Temporal Cloud's OpenMetrics endpoint. This is the integration's only collection: it is always on and cannot be turned off, which is why it appears only in responses.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
     TemporaryGrantRequestAttributes:
       description: Request history and the linked grant state. List and detail reads include grant_state for approved requests. Decision responses record the decision. Read the request for current grant state.
       properties:
@@ -144035,7 +145301,7 @@ components:
       additionalProperties:
         example: jane@example.com
         type: string
-      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object must contain exactly one entry. Use `"*"` as the value for the default quota applied to entities without a specific quota, or omit the scope for an organization-wide quota. A specific value must identify an existing user handle in the caller's organization when `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's organization or in at least one targeted descendant organization; the quota is then applied only to the organizations where that handle exists, and the request fails only if the handle exists in none of them.
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. See the endpoint description for the supported scope keys, values, and validation rules.
       example:
         user_handle: jane@example.com
       maxProperties: 1
@@ -144110,7 +145376,7 @@ components:
       additionalProperties:
         example: jane@example.com
         type: string
-      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A value of `"*"` identifies the default quota applied to entities without a specific quota. This field is omitted for an organization-wide quota.
+      description: A namespace-specific key and value identifying what the quota applies to within an organization. The object contains exactly one entry. A `user_handle` value of `"*"` identifies the default quota applied to users without a specific quota. This field is omitted for an organization-wide quota.
       example:
         user_handle: jane@example.com
       maxProperties: 1
@@ -163106,9 +164372,17 @@ paths:
                 $ref: "#/components/schemas/BudgetWithEntries"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "404":
-          $ref: "#/components/responses/NotFoundResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -163323,17 +164597,24 @@ paths:
               examples:
                 default:
                   value:
-                    commitments:
-                      - commitment_id: ri-0123456789abcdef0
-                        expiration_date: "2025-12-31T00:00:00Z"
-                        instance_type: m5.xlarge
-                        offering_class: standard
-                        operating_system: Linux
-                        purchase_option: All Upfront
-                        region: us-east-1
-                        start_date: "2023-01-01T00:00:00Z"
-                        term_length: 1
-                        utilization: 0.85
+                    data:
+                      attributes:
+                        commitments:
+                          - availability_zone: us-east-1a
+                            commitment_id: ri-0123456789abcdef0
+                            expiration_date: "2025-12-31T00:00:00Z"
+                            instance_type: m5.xlarge
+                            number_of_nfus: 4
+                            number_of_reservations: 1
+                            offering_class: standard
+                            operating_system: Linux
+                            purchase_option: All Upfront
+                            region: us-east-1
+                            start_date: "2024-12-31T00:00:00Z"
+                            term_length_months: 12
+                            utilization: 85.5
+                      id: commitments_list_response
+                      type: commitments_list_response
               schema:
                 $ref: "#/components/schemas/CommitmentsListResponse"
           description: OK
@@ -190680,6 +191961,249 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/temporal-cloud-openmetrics/accounts:
+    get:
+      description: List Temporal Cloud OpenMetrics integration accounts.
+      operationId: ListTemporalCloudOpenMetricsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            temporal-cloud-openmetrics-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: temporal-cloud-prod
+                          settings:
+                            include_opt_in_labels: false
+                            namespaces_to_include: prod-*,billing.a1b2c
+                        id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Temporal Cloud OpenMetrics accounts
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Temporal Cloud OpenMetrics integration account.
+      operationId: CreateTemporalCloudOpenMetricsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/temporal-cloud-openmetrics/accounts/{account_id}:
+    delete:
+      description: Delete a Temporal Cloud OpenMetrics integration account.
+      operationId: DeleteTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Temporal Cloud OpenMetrics integration account.
+      operationId: GetTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.
+      operationId: UpdateTemporalCloudOpenMetricsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          temporal-cloud-openmetrics-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: temporal-cloud-prod
+                        settings:
+                          include_opt_in_labels: false
+                          namespaces_to_include: prod-*,billing.a1b2c
+                      id: 7c2d4e91-5a3b-4f68-b0e2-9d1f6a8c3e57
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/TemporalCloudOpenMetricsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Temporal Cloud OpenMetrics account
+      tags:
+        - Temporal Cloud OpenMetrics Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/twilio/accounts:
     get:
       description: List Twilio integration accounts.
@@ -210812,7 +212336,11 @@ paths:
                 $ref: "#/components/schemas/ObservabilityPipeline"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
@@ -210885,7 +212413,11 @@ paths:
                 $ref: "#/components/schemas/ValidationResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "429":
@@ -224970,7 +226502,11 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/config/metrics:
     get:
-      description: Get the list of configured RUM-based metrics with their definitions.
+      description: |-
+        Get the list of all RUM-based metrics configured for your organization, with their definitions.
+        The list is not paginated.
+        Metrics whose stored definition cannot be converted to the RUM format are omitted from the list.
+        To retrieve a single metric, use `GetRumMetric`.
       operationId: ListRumMetrics
       responses:
         "200":
@@ -225013,13 +226549,33 @@ paths:
     post:
       description: |-
         Create a metric based on your organization's RUM data.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        The metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.
+        The `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.
+        `uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.
+        When `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.
+        Returns the created RUM-based metric when the request is successful.
+        The request returns a `409 Conflict` error if a metric with the same name already exists.
       operationId: CreateRumMetric
       requestBody:
         content:
           application/json:
             examples:
+              count_metric:
+                summary: Count of error events
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        aggregation_type: count
+                      event_type: error
+                      filter:
+                        query: "@view.name:/checkout"
+                      group_by:
+                        - path: "@error.source"
+                    id: rum.errors.checkout.count
+                    type: rum_metrics
               default:
+                summary: Distribution of session durations
                 value:
                   data:
                     attributes:
@@ -225082,7 +226638,9 @@ paths:
       x-menu-order: 2
   /api/v2/rum/config/metrics/{metric_id}:
     delete:
-      description: Delete a specific RUM-based metric from your organization.
+      description: |-
+        Delete a specific RUM-based metric from your organization.
+        Metric data that was already generated is not deleted. Deleting a metric cannot be undone.
       operationId: DeleteRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225100,7 +226658,9 @@ paths:
         - Rum Metrics
       x-menu-order: 5
     get:
-      description: Get a specific RUM-based metric from your organization.
+      description: |-
+        Get a specific RUM-based metric from your organization.
+        The `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.
       operationId: GetRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225147,7 +226707,11 @@ paths:
     patch:
       description: |-
         Update a specific RUM-based metric from your organization.
-        Returns the RUM-based metric object from the request body when the request is successful.
+        Only `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.
+        Omitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.
+        `data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.
+        The request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.
+        Returns the updated RUM-based metric when the request is successful.
       operationId: UpdateRumMetric
       parameters:
         - $ref: "#/components/parameters/RumMetricIDParameter"
@@ -225166,6 +226730,15 @@ paths:
                       group_by:
                         - path: "@browser.name"
                           tag_name: browser_name
+                    id: rum.sessions.web.count
+                    type: rum_metrics
+              disable_percentiles:
+                summary: Stop generating percentile aggregations
+                value:
+                  data:
+                    attributes:
+                      compute:
+                        include_percentiles: false
                     id: rum.sessions.web.count
                     type: rum_metrics
             schema:
@@ -241895,6 +243468,332 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/security_agent/investigations:
+    get:
+      description: |-
+        List Bits Security Analyst investigations.
+
+        Without `filter[signal_id]`, returns the latest investigation of each signal, filtered, sorted, and paginated.
+        With `filter[signal_id]`, returns every investigation of that signal, newest first. When the signal has no
+        investigation, the first page carries `meta.reason`, which says why.
+      operationId: ListSecurityAgentInvestigations
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTitle"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterFrom"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTo"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterVerdict"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterState"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleType"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSeverity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSource"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTags"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterEntity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsSort"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsPageNumber"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsPageSize"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The latest investigation of each signal
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-10-30T14:02:40Z"
+                          is_latest: true
+                          rule_id: abc-def-ghi
+                          signal:
+                            severity: medium
+                            sources:
+                              - okta
+                            tactic: TA0001-initial-access
+                            tags:
+                              - "source:okta"
+                              - "tactic:TA0001-initial-access"
+                              - "technique:T1078-valid-accounts"
+                            technique: T1078-valid-accounts
+                            timestamp: "2026-10-30T14:02:11Z"
+                            title: Unusual login location for a user
+                          signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                          state: completed
+                          updated_at: "2026-10-30T14:15:02Z"
+                          verdict: benign
+                        id: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+                        type: investigations
+                    meta:
+                      total_count: 1
+                investigation_not_started:
+                  summary: A signal with no investigation yet
+                  value:
+                    data: []
+                    meta:
+                      reason: investigation_not_started
+                      total_count: 0
+                not_investigated:
+                  summary: A signal that won't be investigated
+                  value:
+                    data: []
+                    meta:
+                      reason: not_investigated
+                      total_count: 0
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationsListResponse"
+          description: OK
+          headers:
+            Retry-After:
+              description: |-
+                Present when `meta.reason` is `investigation_not_started`: the number of seconds to wait before
+                listing the signal's investigations again.
+              schema:
+                description: Seconds to wait.
+                example: 60
+                format: int64
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: List Bits Security Analyst investigations
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/investigations/count:
+    get:
+      description: |-
+        Count completed Bits Security Analyst investigations by the values of one field. Buckets are sorted by
+        ascending count. With `field=entity` or `field=signal_source`, an investigation counts in the bucket of
+        each of its entities or sources.
+      operationId: CountSecurityAgentInvestigations
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsCountField"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTitle"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterFrom"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTo"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterVerdict"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleType"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSeverity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSource"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTags"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterEntity"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        counts:
+                          - count: 3
+                            value: malicious
+                          - count: 41
+                            value: suspicious
+                          - count: 1250
+                            value: benign
+                      id: verdict
+                      type: investigation_counts
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationCountsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Count Bits Security Analyst investigations
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/investigations/{investigation_id}:
+    get:
+      description: |-
+        Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and
+        response suggestions. While the investigation is running, the response has a `Retry-After` header.
+      operationId: GetSecurityAgentInvestigation
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationFields"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        conclusion: The login came from a location the user travels to regularly, on a known device.
+                        created_at: "2026-10-30T14:02:40Z"
+                        key_entities:
+                          actors:
+                            - type: user
+                              value: jane.doe@example.com
+                          targets:
+                            - sub_type: okta_app
+                              type: application
+                              value: Corporate VPN
+                        key_evidence:
+                          - category: Authentication
+                            finding: The user logged in from the same country three times in the last 30 days.
+                            source_steps:
+                              - Has the user logged in from this location before?
+                        response_suggestions:
+                          mitigation_suggestions:
+                            - actions:
+                                - applied: false
+                                  fqn: com.datadoghq.okta.suspend_user
+                                  id: action-1
+                                  name: Suspend user
+                                  source: okta
+                                  source_connected: true
+                                  target: jane.doe@example.com
+                              id: mitigation-1
+                              rationale: Only needed if the user doesn't confirm the login.
+                              recommended: false
+                              scope_note: jane.doe@example.com
+                              step: 1
+                              title: Suspend the user
+                          rule_tuning_suggestions:
+                            occurrence_window_days: 30
+                            reasoning: Most signals from this rule in the last 30 days were benign travel.
+                            rule_id: abc-def-ghi
+                            rule_name: Unusual login location for a user
+                            rule_signal_total: 120
+                            suggestions:
+                              - action_type: create_suppression
+                                conditions:
+                                  - field: "@usr.device.id"
+                                    value: 4b8f2c1e-9a7d-4e3b-8c5f-1d2e3f4a5b6c
+                                description: Don't generate signals for logins from devices the user has used before.
+                                estimated_silenced_count: 85
+                                id: suggestion-1
+                                match_logic: AND
+                                recommended: true
+                                rule_id: abc-def-ghi
+                                title: Suppress logins from known devices
+                                warning: A stolen known device would no longer trigger this rule.
+                                why: The user's known devices accounted for most benign signals.
+                            summary: The rule fires often for users who travel to known locations.
+                        rule_id: abc-def-ghi
+                        signal:
+                          severity: medium
+                          sources:
+                            - okta
+                          tactic: TA0001-initial-access
+                          tags:
+                            - "source:okta"
+                            - "tactic:TA0001-initial-access"
+                            - "technique:T1078-valid-accounts"
+                          technique: T1078-valid-accounts
+                          timestamp: "2026-10-30T14:02:11Z"
+                          title: Unusual login location for a user
+                        signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                        state: completed
+                        steps:
+                          - name: Has the user logged in from this location before?
+                            summary: Three earlier logins from the same country, on the same device.
+                        updated_at: "2026-10-30T14:15:02Z"
+                        verdict: benign
+                      id: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+                      type: investigations
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationResponse"
+          description: OK
+          headers:
+            Retry-After:
+              description: |-
+                Present while `state` is `investigating`: the number of seconds to wait before getting the
+                investigation again.
+              schema:
+                description: Seconds to wait.
+                example: 300
+                format: int64
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get a Bits Security Analyst investigation
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/signals:
     get:
       description: |-
@@ -258408,6 +260307,34 @@ paths:
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
+
+        ### Quota namespaces and scope keys
+
+        The `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace
+        supports its own scope keys, described below. Omit `scope` for the organization-wide quota.
+
+        #### `ai_credits` scope keys
+
+        Each item's `scope` contains exactly one of the following keys.
+
+        **`user_handle`**
+
+        - **Value:** The handle of a user, for example `jane@example.com`, or `"*"` for the default quota applied to
+          users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the
+          [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).
+        - **Validation:** A specific handle must identify an existing user in the caller's organization when
+          `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's
+          organization or in at least one targeted descendant organization. The quota is then applied only to the
+          organizations where the handle exists, and the item fails only if the handle exists in none of them.
+
+        **`role_uuid`**
+
+        - **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `"*"` is not accepted
+          because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the
+          [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).
+        - **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so
+          `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's
+          organization only.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -262238,6 +264165,10 @@ tags:
       Use the Bits AI endpoints to retrieve AI-powered investigations.
     name: Bits AI
   - description: |-
+      Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an
+      investigation's verdict and findings, and count investigations.
+    name: Bits Security Analyst
+  - description: |-
       Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the
       [CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)
       for more information.
@@ -262866,6 +264797,15 @@ tags:
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
+  - description: |-
+      Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources
+      directly through the Datadog API. See the
+      [Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for
+      more information.
+    externalDocs:
+      description: Temporal Cloud OpenMetrics integration.
+      url: https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/
+    name: Temporal Cloud OpenMetrics Integration
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization

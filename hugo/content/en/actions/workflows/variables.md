@@ -31,7 +31,7 @@ Creating useful workflows sometimes necessitates passing data from one step to a
 - **Workflow variables** give you information about the current workflow:
     - `WorkflowName`: The name of the workflow.
     - `WorkflowId`: The ID of the workflow.
-    - `InstanceId`: The ID of the execution instance of the workflow.
+    - `InstanceId`: The ID of the workflow run.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
 - **Source object variables** are passed into the workflow by the triggering event.
@@ -56,7 +56,7 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 
 ### Source object variables
 
-Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
+Source object variables are properties of the triggering event that are resolved at runtime. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
 
 All the variables of the Source object are visible in the {{< ui >}}Context Variables{{< /ui >}} tab.
 

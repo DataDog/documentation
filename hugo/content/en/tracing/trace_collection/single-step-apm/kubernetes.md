@@ -292,7 +292,7 @@ SSI supports multiple injection modes, which control how the injector and APM li
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. | Agent deployed with Helm Chart or Datadog Operator |
 | `csi` | Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.25.0+ |
 
-Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot. In `auto` mode, the Cluster Agent selects the CSI driver only when it is installed and safe to use in your cluster.
+Before using `csi` mode, install and activate the Datadog CSI driver. If you are deploying with Helm, also set `datadog.csi.enabled: true` in your `datadog-values.yaml`. If you are deploying with the Datadog Operator, set `spec.global.csi.enabled: true` in your `datadog-agent.yaml`. See the [CSI driver documentation][37] for installation steps and environment-specific requirements such as GKE Autopilot. In `auto` mode, the Cluster Agent selects the CSI driver only when it is installed and safe to use in your cluster.
 
 #### Configure injection mode globally
 
@@ -316,10 +316,11 @@ Supported values: `auto` (default), `init_container`, `csi`.
 To set the injection mode cluster-wide, add `injectionMode` to your `datadog-agent.yaml`:
 
 ```yaml
-features:
-  apm:
-    instrumentation:
-      injectionMode: <mode>
+spec:
+  features:
+    apm:
+      instrumentation:
+        injectionMode: <mode>
 ```
 
 Supported values: `auto` (default), `init_container`, `csi`.

@@ -10043,6 +10043,49 @@ menu:
           - ListInvestigations
         unstable: []
         order: 2
+    - name: Bits Security Analyst
+      url: /api/latest/bits-security-analyst/
+      identifier: bits-security-analyst
+      generated: true
+    - name: Get a Bits Security Analyst investigation
+      url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
+      identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Count Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/count-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-count-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CountSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 2
+    - name: List Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/list-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-list-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 1
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
       identifier: ci-visibility-github-accounts
@@ -24172,6 +24215,75 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Temporal Cloud OpenMetrics Integration
+      url: /api/latest/temporal-cloud-openmetrics-integration/
+      identifier: temporal-cloud-openmetrics-integration
+      generated: true
+    - name: Update a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/update-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-update-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/get-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-get-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/delete-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-delete-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/create-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-create-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Temporal Cloud OpenMetrics accounts
+      url: /api/latest/temporal-cloud-openmetrics-integration/list-temporal-cloud-openmetrics-accounts/
+      identifier: temporal-cloud-openmetrics-integration-list-temporal-cloud-openmetrics-accounts
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporalCloudOpenMetricsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization

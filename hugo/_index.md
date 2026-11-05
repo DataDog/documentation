@@ -1,104 +1,114 @@
 ---
 aliases:
-- /ko/serverless/installation/installing_the_library/
-- /ko/serverless/installation
-- /ko/serverless/aws_lambda/installation
+- /ko/ci
+cascade:
+  algolia:
+    rank: 70
+    tags:
+    - ci/cd
+    - continuous integration
 further_reading:
-- link: /serverless/configuration/
-  tag: 설명서
-  text: Serverless Monitoring 구성
-- link: /integrations/amazon_lambda/
-  tag: 설명서
-  text: AWS Lambda 통합
-- link: https://learn.datadoghq.com/courses/visibility-aws-lambda
-  tag: 학습 센터
-  text: Datadog으로 Serverless Monitoring용 AWS Lambda 구성
-- link: /mcp_server/tools/#serverless_onboarding
-  tag: 설명서
-  text: 'Datadog MCP Server: serverless_onboarding 도구'
-title: AWS Lambda 애플리케이션 계측
+- link: /continuous_integration/pipelines/
+  tag: 문서
+  text: 파이프라인 데이터를 탐색하여 빌드 문제 해결하기
+- link: /account_management/billing/ci_visibility
+  tag: 문서
+  text: CI Visibility 청구 시 고려 사항 알아보기
+- link: /continuous_integration/tests/
+  tag: 문서
+  text: 테스트 데이터를 탐색하여 문제 테스트를 찾고 수정하기
+- link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+  tag: 블로그
+  text: Datadog으로 CircleCI 환경 모니터링하기
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: 블로그
+  text: Datadog CI 모니터로 파이프라인 알림 구성하기
+- link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
+  tag: 블로그
+  text: 정적 웹 애플리케이션 모니터링 모범 사례
+- link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
+  tag: 블로그
+  text: CI/CD 모니터링 모범 사례
+- link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
+  tag: 블로그
+  text: CI/CD 소프트웨어 테스트 모니터링 모범 사례
+- link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
+  tag: 블로그
+  text: Datadog CI Pipeline Visibility로 CI/CD 현대화 모니터링하기
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: 블로그
+  text: Datadog을 DaC(Detection as Code)로 사용하는 방법
+- link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
+  tag: 블로그
+  text: CI/CD Pipeline에서 안전하고 효율적으로 캐시를 삭제하는 패턴
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: 블로그
+  text: Datadog의 GitLab 소스 코드 통합으로 더 빠르게 문제 해결하기
+- link: https://www.datadoghq.com/blog/platform-engineering-metrics/
+  tag: 블로그
+  text: 플랫폼 엔지니어링 팀을 위한 성공 메트릭
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: 릴리스 노트
+  text: 최신 Software Delivery 릴리스를 확인! (앱 로그인 필요)
+title: Continuous Integration Visibility
 ---
+{{< callout url=# btn_hidden="true" header="CI Visibility는 CI/CD Optimization의 일부입니다">}}CI/CD Optimization은 CI Visibility와 Test Optimization을 하나의 통합 인터페이스로 결합합니다. 이 페이지는 CI Visibility를 다룹니다. Test Optimization과 공유되는 기능은 [CI/CD Optimization][1]을 참조하세요.
+
+[1]: /ko/cicd/
+{{< /callout >}}
+
+{{< learning-center-callout header="활성화 웨비나 세션 참가" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  CI Visibility 소개 세션에 참여하여 Datadog CI Visibility가 CI 파이프라인의 효율성을 높이는 방법과 Testing Visibility 및 Pipeline Visibility 제품을 구성하는 방법을 알아보세요. 
+{{< /learning-center-callout >}}
+
 ## 개요 {#overview}
 
-Datadog Lambda Extension을 통해 AWS Lambda 애플리케이션을 계측하여 트레이스, 향상된 메트릭 및 사용자 지정 메트릭을 수집합니다. Datadog Lambda Extension은 호스트 기반 인프라 및 애플리케이션에 대해 Datadog Agent 및 Datadog SDK를 사용하는 것과 유사합니다.
+<div class="alert alert-info">이 페이지는 Continuous Integration(CI) 메트릭과 데이터를 Datadog Dashboards로 가져오는 방법을 설명합니다. CI Pipeline에서 Continuous Testing 테스트를 실행하려면 <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing 및 CI/CD</a> 섹션을 참조하세요.</div>
 
-{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog이 계측된 AWS Lambda 애플리케이션으로부터 텔레메트리를 수신하는 방법을 보여주는 다이어그램입니다. Datadog Lambda 라이브러리로 계측된 Lambda 애플리케이션은 로그, 트레이스, 향상된 메트릭 및 사용자 지정 메트릭을 Datadog Lambda Extension으로 전송하며, 이 데이터는 Datadog으로 푸시됩니다." style="width:100%;" >}}
+Datadog Continuous Integration(CI) Visibility는 CI 환경 전반의 파이프라인 결과, 성능, 추세 및 안정성을 통합적으로 보여줍니다. Datadog을 CI Pipeline과 통합하면 모니터를 생성하고, [Datadog Dashboards][1] 및 [Notebooks][2]에 데이터를 표시하고, 조직의 CI 상태를 시각화할 수 있습니다.
 
-## 빠른 시작 {#quick-start}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">이 기능은 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
+</br>
 
-시작하기 전에 아직 계정이 없으면 [Datadog 계정에 가입][1]하세요. 그런 다음 AWS Lambda 함수의 계측을 위해 AWS Lambda에 대한 [Fleet Automation의 인앱 설치 흐름][8]을 따르세요. 빠른 시작 구성을 완료하면 함수가 실시간 메트릭, 로그, 트레이스를 Datadog으로 전송할 수 있습니다.
+CI Visibility는 개발자가 파이프라인 중단의 원인을 파악하고 파이프라인 실행 시간의 추세를 모니터링하는 데 도움이 됩니다. 또한 빌드 엔지니어가 조직 전반의 CI 상태와 시간에 따른 파이프라인 성능을 파악할 수 있도록 인사이트를 제공합니다.
 
-여러 런타임 및 코드형 인프라 도구를 활용한 배포 방법 지침이 포함된 샘플 애플리케이션은 [GitHub에서 제공][6]됩니다.
+## 파이프라인 안정성 향상 및 트레이스 생성 {#improve-pipeline-reliability-and-create-traces}
 
-빠른 시작 프로세스는 Lambda 함수를 즉시 구성합니다. Lambda 함수를 영구적으로 계측하려면 아래의 에이전트형 온보딩 또는 수동 계측 섹션을 참조하세요.
+CI Visibility는 개발 과정에서 발생한 주요 장애를 해당 장애의 원인이 된 커밋과 연결하여 파이프라인 오류와 빌드 실패 문제를 해결하는 데 도움이 됩니다. 파이프라인을 계측하고 실행 과정을 트레이싱하여 파이프라인 성능을 더욱 심층적으로 분석할 수 있습니다.
 
-## 에이전트형 온보딩으로 설정 {#set-up-with-agentic-onboarding}
+## 원활한 통합을 통한 효율성 향상 {#increase-efficiency-through-seamless-integrations}
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">이 기능은 선택한 <a href="/getting_started/site">Datadog 사이트</a>({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
+Datadog은 다양한 CI 공급자와 통합되어 커밋부터 배포까지 CI 파이프라인의 성능을 추적하는 메트릭을 수집합니다. 이러한 메트릭은 성능 추세와 개선 기회를 식별하는 데 사용됩니다.
 
-에이전트형 온보딩을 사용하여 AI 지원으로 Lambda 함수 모니터링을 설정하세요. 에이전트형 온보딩은 프로젝트의 프레임워크를 탐지하고, 필요한 구성을 제자리에서 적용하며, 데이터 흐름이 정상적인지 검증합니다. 상호 보완적인 두 가지 경로에서 동일한 Datadog 계정이 사용됩니다.
-
-- **Pup CLI**: 터미널에서 `pup setup`을 실행합니다. 자체 코딩 어시스턴트나 AI 모델이 필요하지 않으므로 설정 시 사용자의 모델 토큰이 사용되지 않습니다.
-- **MCP 서버**: Claude Code 또는 Cursor와 같은 코딩 어시스턴트를 통해 IDE에서 설정합니다.
-
-{{< tabs >}}
-{{% tab "Pup CLI" %}}
-
-프로젝트 디렉터리에서 `pup setup`을 실행합니다(Node.js 22 이상 필요). 이는 Datadog 계정을 연결한 다음 Lambda 함수를 계측합니다.
-
-```shell
-npx @datadog/pup setup --product serverless --serverless-compute-type=aws-lambda
-```
-
-대화형으로 실행하려면 `--product`를 생략하고, Datadog 사이트를 대상으로 지정하려면 `--site`를 추가하세요.
-
-{{% /tab %}}
-{{% tab "MCP 서버" %}}
-
-Datadog MCP 서버의 [`serverless_onboarding`](https://docs.datadoghq.com/ko/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) 도구를 사용하여 AI 지원으로 Lambda 함수 모니터링을 설정합니다. 연결한 후 다음과 같은 프롬프트를 시도해 보세요.
-
-```
-Help me monitor my AWS Lambda functions with Datadog.
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## 수동 계측 {#manual-instrumentation}
-
-{{< card-grid card_width="30%" image_width="200" >}}
-  {{< image-card href="/serverless/installation/python/" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/serverless/installation/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/serverless/installation/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/serverless/installation/java/" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/serverless/installation/go/" src="integrations_logos/go-metro.png" alt="go" >}}
-  {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< card-grid >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="AWS CodePipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="Azure DevOps 확장 프로그램" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="Buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="CircleCI orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="Codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="GitHub Actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="GitLab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="Jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="TeamCity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="기타 CI 공급자" >}}
 {{< /card-grid >}}
 
-## 고급 구성 {#advanced-configurations}
+`datadog-ci` CLI를 사용하면 [명령을 트레이싱][8]하고 [사용자 지정 태그 및 측정값][9]을 추가할 수 있습니다. 이를 통해 파이프라인 트레이스에 사용자 정의 텍스트 태그 및 숫자 태그를 추가할 수 있습니다.
 
-계측을 완료하고 텔레메트리 수집을 설정한 후 [AWS Lambda용 Serverless Monitoring 구성][3]을 사용하여 다음 작업을 수행할 수 있습니다.
+## 시작할 준비가 되셨나요? {#ready-to-start}
 
-- 태그를 사용하여 메트릭, 트레이스 및 로그 연결
-- API Gateway, AppSync 및 Step Functions와 같은 AWS 리소스로부터 텔레메트리 수집
-- 개별 Lambda 호출에 대한 요청 및 응답 페이로드 캡처
-- 소스 코드에 Lambda 함수의 오류 연결
-- 로그 또는 트레이스에서 민감한 정보 필터링 또는 스크러빙
+호환성 요구 사항과 데이터 수집 구성 단계를 비롯하여 CI 제공업체에서 CI Visibility를 설정하는 방법은 [Pipeline Visibility][3]를 참조하세요. 그런 다음 [CI Visibility Explorer][7]에서 파이프라인 실행에 대한 세부 정보를 살펴보고 검색 쿼리를 [CI Pipeline Monitor][6]로 내보내세요.
 
 ## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/signup/
-[3]: /ko/serverless/aws_lambda/configuration/
-[4]: /ko/serverless/aws_lambda/fips-compliance/
-[5]: /ko/serverless/aws_lambda/remote_instrumentation
-[6]: https://github.com/DataDog/serverless-sample-app
-[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
-[9]: /ko/mcp_server/tools/#serverless_onboarding
+[1]: https://app.datadoghq.com/dashboard/lists
+[2]: https://app.datadoghq.com/notebook/list
+[3]: /ko/continuous_integration/pipelines/
+[4]: /ko/continuous_integration/tests/
+[6]: /ko/monitors/types/ci/
+[7]: /ko/continuous_integration/explorer/
+[8]: /ko/continuous_integration/pipelines/custom_commands/
+[9]: /ko/continuous_integration/pipelines/custom_tags_and_measures/
