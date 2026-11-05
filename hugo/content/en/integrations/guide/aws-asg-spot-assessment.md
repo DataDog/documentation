@@ -27,8 +27,8 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 1. [Connect the AWS accounts][1] that contain the ASGs.
 2. Enable resource collection for those accounts and regions, using the [AWS integration's resource collection permissions][2]. The assessment needs ASG information and the EC2 launch settings used by those groups.
 3. In the AWS integration's **Metric Collection** tab, enable the `AWS/AutoScaling` namespace. Check that metric filters include `aws.autoscaling.group_in_service_instances`.
-4. [Enable group metrics in AWS][3], including `GroupInServiceInstances`, to provide running-instance history.
-5. Confirm that your Datadog role has the [Hosts Read (`hosts_read`) permission][4].
+4. Recommended for history-based estimates: [enable group metrics in AWS][3], including `GroupInServiceInstances`. Without running-instance history, estimates can use configured desired capacity.
+5. To view assessments, your Datadog role needs the [Hosts Read (`hosts_read`) permission][4].
 
 Cloud Cost Management is optional. Without cost data for an ASG, the assessment uses public On-Demand prices for its current cost estimate. Collecting `AWS/EC2` metrics is not required for this assessment.
 
