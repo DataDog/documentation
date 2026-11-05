@@ -23,12 +23,17 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-<div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
+### Choose a setup method
 
-You can configure Network Path tests in two ways:
+In Network Monitoring, Network Path tests run on the Datadog Agent and come in two kinds: **scheduled tests** monitor destinations that you define, and **dynamic tests** automatically discover destinations from traffic observed by [Cloud Network Monitoring][1]. You can create both kinds in the UI or in the Agent configuration files, and you can use both methods on the same Agent.
 
-- **[In the UI](#create-tests-in-the-ui)** (Preview): Enable the Agent once, then create and update tests from the Network Path UI.
-- **[In the Agent configuration](#configure-tests-in-the-agent-configuration)**: Define tests in the Agent configuration files on each host.
+| Method | Tests run from | Where you configure tests |
+|--------|----------------|---------------------------|
+| **[UI](#create-tests-in-the-ui)** (Preview) | Your hosts, on the Datadog Agent | In the Network Path UI, after a one-time setup on each Agent you want to target |
+| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | Your hosts, on the Datadog Agent | In configuration files on each host |
+| **[Synthetic Monitoring][15]** | Datadog managed locations, or your own Agents | In Synthetic Monitoring, as Synthetic tests |
+
+This page covers the first two methods. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
 
 ### Create tests in the UI (Preview) {#create-tests-in-the-ui}
 
@@ -112,7 +117,7 @@ An Agent appears as eligible in the test creation workflow only after you comple
 {{% /tab %}}
 {{< /tabs >}}
 
-Remote Configuration is enabled by default on recent Agent versions, so no other Agent setting is needed. After this one-time restart, configuration changes made in the UI apply without restarting the Agent.
+Remote Configuration itself is enabled by default on recent Agent versions, so you don't need to turn it on separately. After this one-time restart, configuration changes made in the UI apply without restarting the Agent.
 
 <div class="alert alert-warning">An Agent must not match more than one dynamic test configuration. If targets overlap, that Agent ignores all dynamic test filters set from the UI until you resolve the overlap.</div>
 
