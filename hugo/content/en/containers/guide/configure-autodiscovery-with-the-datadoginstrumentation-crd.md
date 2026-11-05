@@ -44,7 +44,7 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 With Datadog Operator **v1.30+** or Datadog Helm chart **v3.241.0+**, the `DatadogInstrumentation` controller is enabled by default and requires no additional setup.
 
-{{% collapse-content title="Legacy setup (Operator < v1.30 or Helm chart < v3.241.0)" level="h3" expanded=false id="legacy-setup" %}}
+{{% collapse-content title="Legacy setup (Operator < v1.30 or Helm chart < v3.241.0)" level="h4" expanded=false id="legacy-setup" %}}
 
 For earlier versions, enable the DDI controller with the following steps.
 
