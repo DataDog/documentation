@@ -165,7 +165,7 @@ To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< u
 
 The default behavior applies to processes on eligible hosts that don't match any instrumentation rule. It also applies when you haven't created any rules.
 
-1. On the Instrumentation Rules page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Default Behavior{{< /ui >}} card.
+1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
 1. Select one of the following options:
    - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them. .NET applications running outside of IIS remain blocked unless a rule allows them.
    - {{< ui >}}Block everything else{{< /ui >}}: Applications are not instrumented unless a rule allows them.
@@ -177,7 +177,7 @@ Host groups are reusable collections of hosts that you can target with instrumen
 
 To create a host group:
 
-1. On the Instrumentation Rules page, click {{< ui >}}Manage host groups{{< /ui >}} in the {{< ui >}}Hosts in Scope{{< /ui >}} card.
+1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Hosts in Scope{{< /ui >}} card and click {{< ui >}}Manage host groups{{< /ui >}}.
 1. Click {{< ui >}}New Host Group{{< /ui >}}.
 1. Enter a name for the group.
 1. Click {{< ui >}}Add Hosts{{< /ui >}}. Search for hosts by hostname or by facets and host tags, such as `env:` or `os:`. Select the hosts to add, then click {{< ui >}}Add Hosts{{< /ui >}}.
@@ -205,7 +205,7 @@ To change the order of host groups, drag a group by its handle in the group list
 
 To create an instrumentation rule:
 
-1. On the Instrumentation Rules page, click {{< ui >}}New Rule{{< /ui >}}. You can also create a rule from a group's {{< ui >}}Rules{{< /ui >}} tab on the Host Groups page.
+1. On the [Instrumentation Rules][5] page, click {{< ui >}}New Rule{{< /ui >}}. You can also create a rule from a group's {{< ui >}}Rules{{< /ui >}} tab on the Host Groups page.
 1. Under {{< ui >}}Define condition{{< /ui >}}, select an {{< ui >}}Attribute{{< /ui >}} and {{< ui >}}Operator{{< /ui >}}, and enter a {{< ui >}}Value{{< /ui >}}. To add more conditions, click {{< ui >}}Add Condition{{< /ui >}}. See [Define rule conditions](#define-rule-conditions) to learn more.
 1. Under {{< ui >}}Take this action{{< /ui >}}, select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}.
 
@@ -225,7 +225,7 @@ To create an instrumentation rule:
 
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
-After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the Instrumentation Rules page shows how many eligible hosts have received the current rules.
+After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][5] page shows how many eligible hosts have received the current rules.
 
 <!-- TODO: Confirm whether rules still apply within 50 seconds of deployment, and whether the Export option for manual deployment is still available. -->
 
@@ -252,7 +252,7 @@ Supported attributes include:
 
 Review the following examples demonstrating how to apply instrumentation rules:
 
-{{< collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" >}}
+{{% collapse-content title="Example 1: Instrument all processes except specific ones" level="h5" %}}
 
 Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
 
@@ -264,9 +264,9 @@ Instrument all processes by default. Add block rules to exclude services that wo
 | Exclude analytics cron job | <code>Working Directory</code> <code>contains</code> <code>analytics-service</code> | Block Instrumentation |
 | Exclude batch services | <code>Entry Point File</code> <code>contains</code> <code>batch-processor.jar</code> | Block Instrumentation |
 
-{{< /collapse-content >}}
+{{% /collapse-content %}}
 
-{{< collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" >}}
+{{% collapse-content title="Example 2: Instrument only specific IIS applications" level="h5" %}}
 
 Block all instrumentation by default. Add allow rules to opt specific IIS applications into APM. Because all IIS workers share the <code>w3wp.exe</code> executable, use {{< ui >}}IIS Application Pool{{< /ui >}} to identify target applications.
 
@@ -280,9 +280,9 @@ For example, to instrument only a checkout application and a customer portal:
 | Checkout | <code>IIS Application Pool</code> <code>equals</code> <code>CheckoutPool</code> | Allow Instrumentation |
 | Customer portal | <code>IIS Application Pool</code> <code>equals</code> <code>CustomerPortalPool</code> | Allow Instrumentation |
 
-{{< /collapse-content >}}
+{{% /collapse-content %}}
 
-{{< collapse-content title="Example 3: Roll out instrumentation gradually with a host group" level="h5" >}}
+{{% collapse-content title="Example 3: Roll out instrumentation gradually with a host group" level="h5" %}}
 
 Block all instrumentation by default, then allow instrumentation on a small set of canary hosts first. After you validate the results, add more hosts to the group, or change the rule to target all eligible hosts.
 
@@ -298,7 +298,7 @@ Block all instrumentation by default, then allow instrumentation on a small set 
 
 Java applications on hosts in the <code>canary</code> group are instrumented. Applications on all other eligible hosts remain uninstrumented.
 
-{{< /collapse-content >}}
+{{% /collapse-content %}}
 
 ## Remove Single Step APM instrumentation from your Agent
 
