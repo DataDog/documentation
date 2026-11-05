@@ -53,8 +53,6 @@ A provider connects an integration account to the models that callers can use th
 
 After you create a provider, open it to view a generated request example for each operation that the provider supports.
 
-Before you send a request, [grant access](#control-model-access) to the provider or model through the default policy or an access policy.
-
 ### Authenticate requests
 
 AI Gateway accepts the following Datadog credentials. The principal behind the credential must have the `ai_gateway_usage` permission.
@@ -154,19 +152,17 @@ AI Gateway tries the next provider or fallback destination when the current one 
 
 Access policies control who can call each model and routing rule. A policy lists providers, models, routing rules, or a combination of them, and the users, [Datadog teams][13], and service accounts who can use them.
 
+Selecting a provider includes all its models, including models added later. Selecting individual models or routing rules includes only those resources. A policy with no selections grants no access.
+
 A caller can use models included in the default policy. For other models, they need **Runner** or **Editor** access on a policy that includes them. The same model from another provider is a separate entry. Add each provider and model pair you want to govern, such as the OpenAI pair and the Amazon Bedrock pair.
+
+AI Gateway denies access if no policy grants it.
 
 ### Default policy
 
-The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. Its audience is everyone in your organization. Select the providers, models, and routing rules to make available to that audience. Callers still need the `ai_gateway_usage` permission.
+The {{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}} tab sets the default policy. It grants everyone in your organization access to the selected resources.
 
-- Selecting a provider grants access to all its models, including models added later.
-- Selecting individual models or routing rules grants access only to those selections.
-- Leaving the selection empty grants no access through the default policy.
-
-Adding a model or routing rule to an access policy does not remove access granted by the default policy. To restrict it to specific callers, remove it from the default policy and grant access through an access policy. For a model, also remove any provider selection that includes it.
-
-AI Gateway denies access when neither the default policy nor an access policy grants the caller access to the requested model or routing rule.
+Adding a resource to another access policy does not remove access granted by the default policy.
 
 ### Access policies
 
@@ -184,8 +180,7 @@ Access to a routing rule follows that rule's targets, so a change to the targets
 
 For tighter control over who can call models:
 
-- Include only models and routing rules approved for everyone in the default policy, or leave its selection empty.
-- Select a whole provider only if all its models, including models added later, are approved for everyone.
+- Include only resources approved for everyone in the default policy.
 - Create an access policy for each set of approved models.
 - Grant **Runner** only to the users, teams, and service accounts that need it.
 - Review policy membership and routing rule targets regularly.
