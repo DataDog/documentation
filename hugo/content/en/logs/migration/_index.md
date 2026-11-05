@@ -31,5 +31,5 @@ After your logs are in Datadog, use [Migration Tools][3] to convert Splunk Proce
 
 [1]: /agent/logs/
 [2]: /integrations/
-[3]: /logs/migration/query_translation/
+[3]: /logs/migration/migration_tools/
 [4]: /logs/explorer/search_syntax/

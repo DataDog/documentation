@@ -1,5 +1,7 @@
 ---
 title: Migration Tools
+aliases:
+- /logs/migration/query_translation/
 description: "Translate Splunk SPL queries into Datadog syntax and convert Splunk alerts and dashboards into Datadog monitors and dashboards."
 further_reading:
 - link: "/logs/explorer/search_syntax/"
