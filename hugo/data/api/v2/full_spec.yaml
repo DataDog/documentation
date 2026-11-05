@@ -5321,9 +5321,70 @@ components:
       type: string
       x-enum-varnames:
         - ACCOUNT_FILTERS
+    ActionConnectionAWSSecretsManager:
+      description: >-
+        AWS Secrets Manager settings shared by the credential references on a `DATACENTER` connection. These settings are required whenever a field uses an AWS Secrets Manager reference.
+      nullable: true
+      properties:
+        connection_id:
+          description: >-
+            ID of the AWS connection used to retrieve secrets. This connection must be in the same Datadog organization.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        region:
+          description: AWS region containing the referenced secrets.
+          example: us-east-1
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerType"
+      required:
+        - type
+        - connection_id
+        - region
+      type: object
+    ActionConnectionAWSSecretsManagerReference:
+      description: >-
+        Reference to a string value in AWS Secrets Manager. The connection must also specify `external_secrets_manager` settings. AWS Secrets Manager references are supported for token-based credentials and HTTP authentication tokens on `DATACENTER` connections.
+      properties:
+        key:
+          description: >-
+            Top-level JSON key to extract from the secret string. Omit this field to use the entire secret string.
+          example: private_key
+          type: string
+        secret_id:
+          description: Name or ARN of the AWS Secrets Manager secret.
+          example: example/gcp/service-account
+          minLength: 1
+          type: string
+        type:
+          $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerType"
+        version_id:
+          description: >-
+            ID of the secret version to retrieve. Cannot be used together with `version_stage`. If both are omitted, the current version is used.
+          type: string
+        version_stage:
+          description: >-
+            Staging label of the secret version to retrieve. Cannot be used together with `version_id`. If both are omitted, the current version is used.
+          example: AWSCURRENT
+          type: string
+      required:
+        - type
+        - secret_id
+      type: object
+    ActionConnectionAWSSecretsManagerType:
+      description: AWS Secrets Manager secret backend.
+      enum:
+        - aws_secrets_manager
+      example: aws_secrets_manager
+      type: string
+      x-enum-varnames:
+        - AWS_SECRETS_MANAGER
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
+        external_secrets_manager:
+          $ref: "#/components/schemas/ActionConnectionAWSSecretsManager"
         integration:
           $ref: "#/components/schemas/ActionConnectionIntegration"
         name:
@@ -5349,6 +5410,8 @@ components:
     ActionConnectionAttributesUpdate:
       description: The definition of `ActionConnectionAttributesUpdate` object.
       properties:
+        external_secrets_manager:
+          $ref: "#/components/schemas/ActionConnectionAWSSecretsManager"
         integration:
           $ref: "#/components/schemas/ActionConnectionIntegrationUpdate"
         name:
@@ -5456,6 +5519,9 @@ components:
         - $ref: "#/components/schemas/SplitIntegrationUpdate"
         - $ref: "#/components/schemas/StatsigIntegrationUpdate"
         - $ref: "#/components/schemas/VirusTotalIntegrationUpdate"
+    ActionConnectionLiteralValue:
+      description: A literal string value for a connection credential.
+      type: string
     ActionQuery:
       description: An action query. This query type is used to trigger an action, such as sending a HTTP request.
       properties:
@@ -8524,15 +8590,19 @@ components:
       description: The definition of the `AnthropicAPIKey` object.
       properties:
         api_token:
-          description: The `AnthropicAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/AnthropicAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/AnthropicAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    AnthropicAPIKeyApiToken:
+      description: The `AnthropicAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     AnthropicAPIKeyType:
       description: The definition of the `AnthropicAPIKey` object.
       enum:
@@ -8545,13 +8615,17 @@ components:
       description: The definition of the `AnthropicAPIKey` object.
       properties:
         api_token:
-          description: The `AnthropicAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/AnthropicAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/AnthropicAPIKeyType"
       required:
         - type
       type: object
+    AnthropicAPIKeyUpdateApiToken:
+      description: The `AnthropicAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     AnthropicCredentials:
       description: The definition of the `AnthropicCredentials` object.
       oneOf:
@@ -11939,15 +12013,19 @@ components:
       description: The definition of the `AsanaAccessToken` object.
       properties:
         access_token:
-          description: The `AsanaAccessToken` `access_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/AsanaAccessTokenAccessToken"
         type:
           $ref: "#/components/schemas/AsanaAccessTokenType"
       required:
         - type
         - access_token
       type: object
+    AsanaAccessTokenAccessToken:
+      description: The `AsanaAccessToken` `access_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     AsanaAccessTokenType:
       description: The definition of the `AsanaAccessToken` object.
       enum:
@@ -11960,13 +12038,17 @@ components:
       description: The definition of the `AsanaAccessToken` object.
       properties:
         access_token:
-          description: The `AsanaAccessTokenUpdate` `access_token`.
-          type: string
+          $ref: "#/components/schemas/AsanaAccessTokenUpdateAccessToken"
         type:
           $ref: "#/components/schemas/AsanaAccessTokenType"
       required:
         - type
       type: object
+    AsanaAccessTokenUpdateAccessToken:
+      description: The `AsanaAccessTokenUpdate` `access_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     AsanaCredentials:
       description: The definition of the `AsanaCredentials` object.
       oneOf:
@@ -19786,15 +19868,19 @@ components:
       description: The definition of the `CircleCIAPIKey` object.
       properties:
         api_token:
-          description: The `CircleCIAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/CircleCIAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/CircleCIAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    CircleCIAPIKeyApiToken:
+      description: The `CircleCIAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CircleCIAPIKeyType:
       description: The definition of the `CircleCIAPIKey` object.
       enum:
@@ -19807,13 +19893,17 @@ components:
       description: The definition of the `CircleCIAPIKey` object.
       properties:
         api_token:
-          description: The `CircleCIAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/CircleCIAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/CircleCIAPIKeyType"
       required:
         - type
       type: object
+    CircleCIAPIKeyUpdateApiToken:
+      description: The `CircleCIAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CircleCICredentials:
       description: The definition of the `CircleCICredentials` object.
       oneOf:
@@ -19855,15 +19945,19 @@ components:
       description: The definition of the `ClickupAPIKey` object.
       properties:
         api_token:
-          description: The `ClickupAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ClickupAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/ClickupAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    ClickupAPIKeyApiToken:
+      description: The `ClickupAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ClickupAPIKeyType:
       description: The definition of the `ClickupAPIKey` object.
       enum:
@@ -19876,13 +19970,17 @@ components:
       description: The definition of the `ClickupAPIKey` object.
       properties:
         api_token:
-          description: The `ClickupAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/ClickupAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/ClickupAPIKeyType"
       required:
         - type
       type: object
+    ClickupAPIKeyUpdateApiToken:
+      description: The `ClickupAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ClickupCredentials:
       description: The definition of the `ClickupCredentials` object.
       oneOf:
@@ -21212,15 +21310,19 @@ components:
       description: The definition of the `CloudflareAPIToken` object.
       properties:
         api_token:
-          description: The `CloudflareAPIToken` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/CloudflareAPITokenApiToken"
         type:
           $ref: "#/components/schemas/CloudflareAPITokenType"
       required:
         - type
         - api_token
       type: object
+    CloudflareAPITokenApiToken:
+      description: The `CloudflareAPIToken` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CloudflareAPITokenType:
       description: The definition of the `CloudflareAPIToken` object.
       enum:
@@ -21233,13 +21335,17 @@ components:
       description: The definition of the `CloudflareAPIToken` object.
       properties:
         api_token:
-          description: The `CloudflareAPITokenUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/CloudflareAPITokenUpdateApiToken"
         type:
           $ref: "#/components/schemas/CloudflareAPITokenType"
       required:
         - type
       type: object
+    CloudflareAPITokenUpdateApiToken:
+      description: The `CloudflareAPITokenUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CloudflareAccountCreateRequest:
       description: Payload schema when adding a Cloudflare account.
       properties:
@@ -21421,13 +21527,9 @@ components:
       description: The definition of the `CloudflareGlobalAPIToken` object.
       properties:
         auth_email:
-          description: The `CloudflareGlobalAPIToken` `auth_email`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/CloudflareGlobalAPITokenAuthEmail"
         global_api_key:
-          description: The `CloudflareGlobalAPIToken` `global_api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/CloudflareGlobalAPITokenGlobalApiKey"
         type:
           $ref: "#/components/schemas/CloudflareGlobalAPITokenType"
       required:
@@ -21435,6 +21537,18 @@ components:
         - auth_email
         - global_api_key
       type: object
+    CloudflareGlobalAPITokenAuthEmail:
+      description: The `CloudflareGlobalAPIToken` `auth_email`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    CloudflareGlobalAPITokenGlobalApiKey:
+      description: The `CloudflareGlobalAPIToken` `global_api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CloudflareGlobalAPITokenType:
       description: The definition of the `CloudflareGlobalAPIToken` object.
       enum:
@@ -21447,16 +21561,24 @@ components:
       description: The definition of the `CloudflareGlobalAPIToken` object.
       properties:
         auth_email:
-          description: The `CloudflareGlobalAPITokenUpdate` `auth_email`.
-          type: string
+          $ref: "#/components/schemas/CloudflareGlobalAPITokenUpdateAuthEmail"
         global_api_key:
-          description: The `CloudflareGlobalAPITokenUpdate` `global_api_key`.
-          type: string
+          $ref: "#/components/schemas/CloudflareGlobalAPITokenUpdateGlobalApiKey"
         type:
           $ref: "#/components/schemas/CloudflareGlobalAPITokenType"
       required:
         - type
       type: object
+    CloudflareGlobalAPITokenUpdateAuthEmail:
+      description: The `CloudflareGlobalAPITokenUpdate` `auth_email`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    CloudflareGlobalAPITokenUpdateGlobalApiKey:
+      description: The `CloudflareGlobalAPITokenUpdate` `global_api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     CloudflareIntegration:
       description: The definition of the `CloudflareIntegration` object.
       properties:
@@ -22664,17 +22786,11 @@ components:
       description: The definition of the `ConfigCatSDKKey` object.
       properties:
         api_password:
-          description: The `ConfigCatSDKKey` `api_password`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeyApiPassword"
         api_username:
-          description: The `ConfigCatSDKKey` `api_username`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeyApiUsername"
         sdk_key:
-          description: The `ConfigCatSDKKey` `sdk_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeySdkKey"
         type:
           $ref: "#/components/schemas/ConfigCatSDKKeyType"
       required:
@@ -22683,6 +22799,24 @@ components:
         - api_username
         - api_password
       type: object
+    ConfigCatSDKKeyApiPassword:
+      description: The `ConfigCatSDKKey` `api_password`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ConfigCatSDKKeyApiUsername:
+      description: The `ConfigCatSDKKey` `api_username`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ConfigCatSDKKeySdkKey:
+      description: The `ConfigCatSDKKey` `sdk_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ConfigCatSDKKeyType:
       description: The definition of the `ConfigCatSDKKey` object.
       enum:
@@ -22695,19 +22829,31 @@ components:
       description: The definition of the `ConfigCatSDKKey` object.
       properties:
         api_password:
-          description: The `ConfigCatSDKKeyUpdate` `api_password`.
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeyUpdateApiPassword"
         api_username:
-          description: The `ConfigCatSDKKeyUpdate` `api_username`.
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeyUpdateApiUsername"
         sdk_key:
-          description: The `ConfigCatSDKKeyUpdate` `sdk_key`.
-          type: string
+          $ref: "#/components/schemas/ConfigCatSDKKeyUpdateSdkKey"
         type:
           $ref: "#/components/schemas/ConfigCatSDKKeyType"
       required:
         - type
       type: object
+    ConfigCatSDKKeyUpdateApiPassword:
+      description: The `ConfigCatSDKKeyUpdate` `api_password`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ConfigCatSDKKeyUpdateApiUsername:
+      description: The `ConfigCatSDKKeyUpdate` `api_username`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ConfigCatSDKKeyUpdateSdkKey:
+      description: The `ConfigCatSDKKeyUpdate` `sdk_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ConfiguredSchedule:
       description: "Full resource representation of a configured schedule target with position (previous, current, or next)."
       properties:
@@ -34246,20 +34392,13 @@ components:
       description: The definition of the `DatadogAPIKey` object.
       properties:
         api_key:
-          description: The `DatadogAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyApiKey"
         app_key:
-          description: The `DatadogAPIKey` `app_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyAppKey"
         datacenter:
-          description: The `DatadogAPIKey` `datacenter`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyDatacenter"
         subdomain:
-          description: Custom subdomain used for Datadog URLs generated with this Connection. For example, if this org uses `https://acme.datadoghq.com` to access Datadog, set this field to `acme`. If this field is omitted, generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeySubdomain"
         type:
           $ref: "#/components/schemas/DatadogAPIKeyType"
       required:
@@ -34268,6 +34407,29 @@ components:
         - api_key
         - app_key
       type: object
+    DatadogAPIKeyApiKey:
+      description: The `DatadogAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    DatadogAPIKeyAppKey:
+      description: The `DatadogAPIKey` `app_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    DatadogAPIKeyDatacenter:
+      description: The `DatadogAPIKey` `datacenter`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    DatadogAPIKeySubdomain:
+      description: Custom subdomain used for Datadog URLs generated with this Connection. For example, if this org uses `https://acme.datadoghq.com` to access Datadog, set this field to `acme`. If this field is omitted, generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     DatadogAPIKeyType:
       description: The definition of the `DatadogAPIKey` object.
       enum:
@@ -34280,22 +34442,33 @@ components:
       description: The definition of the `DatadogAPIKey` object.
       properties:
         api_key:
-          description: The `DatadogAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyUpdateApiKey"
         app_key:
-          description: The `DatadogAPIKeyUpdate` `app_key`.
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyUpdateAppKey"
         datacenter:
-          description: The `DatadogAPIKeyUpdate` `datacenter`.
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeyUpdateDatacenter"
         subdomain:
-          description: Custom subdomain used for Datadog URLs generated with this Connection. For example, if this org uses `https://acme.datadoghq.com` to access Datadog, set this field to `acme`. If this field is omitted, generated URLs will use the default site URL for its datacenter (see [https://docs.datadoghq.com/getting_started/site](https://docs.datadoghq.com/getting_started/site)).
-          type: string
+          $ref: "#/components/schemas/DatadogAPIKeySubdomain"
         type:
           $ref: "#/components/schemas/DatadogAPIKeyType"
       required:
         - type
       type: object
+    DatadogAPIKeyUpdateApiKey:
+      description: The `DatadogAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    DatadogAPIKeyUpdateAppKey:
+      description: The `DatadogAPIKeyUpdate` `app_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    DatadogAPIKeyUpdateDatacenter:
+      description: The `DatadogAPIKeyUpdate` `datacenter`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     DatadogCredentials:
       description: The definition of the `DatadogCredentials` object.
       oneOf:
@@ -51321,15 +51494,19 @@ components:
       description: The definition of the `FastlyAPIKey` object.
       properties:
         api_key:
-          description: The `FastlyAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/FastlyAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/FastlyAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    FastlyAPIKeyApiKey:
+      description: The `FastlyAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     FastlyAPIKeyType:
       description: The definition of the `FastlyAPIKey` object.
       enum:
@@ -51342,13 +51519,17 @@ components:
       description: The definition of the `FastlyAPIKey` object.
       properties:
         api_key:
-          description: The `FastlyAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/FastlyAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/FastlyAPIKeyType"
       required:
         - type
       type: object
+    FastlyAPIKeyUpdateApiKey:
+      description: The `FastlyAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     FastlyAccounResponseAttributes:
       description: Attributes object of a Fastly account.
       properties:
@@ -55735,13 +55916,9 @@ components:
       description: The definition of the `FreshserviceAPIKey` object.
       properties:
         api_key:
-          description: The `FreshserviceAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/FreshserviceAPIKeyApiKey"
         domain:
-          description: The `FreshserviceAPIKey` `domain`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/FreshserviceAPIKeyDomain"
         type:
           $ref: "#/components/schemas/FreshserviceAPIKeyType"
       required:
@@ -55749,6 +55926,18 @@ components:
         - domain
         - api_key
       type: object
+    FreshserviceAPIKeyApiKey:
+      description: The `FreshserviceAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    FreshserviceAPIKeyDomain:
+      description: The `FreshserviceAPIKey` `domain`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     FreshserviceAPIKeyType:
       description: The definition of the `FreshserviceAPIKey` object.
       enum:
@@ -55761,16 +55950,24 @@ components:
       description: The definition of the `FreshserviceAPIKey` object.
       properties:
         api_key:
-          description: The `FreshserviceAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/FreshserviceAPIKeyUpdateApiKey"
         domain:
-          description: The `FreshserviceAPIKeyUpdate` `domain`.
-          type: string
+          $ref: "#/components/schemas/FreshserviceAPIKeyUpdateDomain"
         type:
           $ref: "#/components/schemas/FreshserviceAPIKeyType"
       required:
         - type
       type: object
+    FreshserviceAPIKeyUpdateApiKey:
+      description: The `FreshserviceAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    FreshserviceAPIKeyUpdateDomain:
+      description: The `FreshserviceAPIKeyUpdate` `domain`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     FreshserviceCredentials:
       description: The definition of the `FreshserviceCredentials` object.
       oneOf:
@@ -56362,13 +56559,9 @@ components:
       description: The definition of the `GCPServiceAccount` object.
       properties:
         private_key:
-          description: The `GCPServiceAccount` `private_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/GCPServiceAccountPrivateKey"
         service_account_email:
-          description: The `GCPServiceAccount` `service_account_email`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/GCPServiceAccountServiceAccountEmail"
         type:
           $ref: "#/components/schemas/GCPServiceAccountCredentialType"
       required:
@@ -56394,6 +56587,18 @@ components:
             type: string
           type: array
       type: object
+    GCPServiceAccountPrivateKey:
+      description: The `GCPServiceAccount` `private_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GCPServiceAccountServiceAccountEmail:
+      description: The `GCPServiceAccount` `service_account_email`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GCPServiceAccountType:
       default: gcp_service_account
       description: The type of account.
@@ -56407,16 +56612,24 @@ components:
       description: The definition of the `GCPServiceAccount` object.
       properties:
         private_key:
-          description: The `GCPServiceAccountUpdate` `private_key`.
-          type: string
+          $ref: "#/components/schemas/GCPServiceAccountUpdatePrivateKey"
         service_account_email:
-          description: The `GCPServiceAccountUpdate` `service_account_email`.
-          type: string
+          $ref: "#/components/schemas/GCPServiceAccountUpdateServiceAccountEmail"
         type:
           $ref: "#/components/schemas/GCPServiceAccountCredentialType"
       required:
         - type
       type: object
+    GCPServiceAccountUpdatePrivateKey:
+      description: The `GCPServiceAccountUpdate` `private_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GCPServiceAccountUpdateServiceAccountEmail:
+      description: The `GCPServiceAccountUpdate` `service_account_email`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GCPUsageCostConfig:
       description: Google Cloud Usage Cost config.
       properties:
@@ -56848,15 +57061,19 @@ components:
       description: The definition of the `GeminiAPIKey` object.
       properties:
         api_key:
-          description: The `GeminiAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/GeminiAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/GeminiAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    GeminiAPIKeyApiKey:
+      description: The `GeminiAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GeminiAPIKeyType:
       description: The definition of the `GeminiAPIKey` object.
       enum:
@@ -56869,13 +57086,17 @@ components:
       description: The definition of the `GeminiAPIKey` object.
       properties:
         api_key:
-          description: The `GeminiAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/GeminiAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/GeminiAPIKeyType"
       required:
         - type
       type: object
+    GeminiAPIKeyUpdateApiKey:
+      description: The `GeminiAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GeminiCredentials:
       description: The definition of the `GeminiCredentials` object.
       oneOf:
@@ -58311,15 +58532,19 @@ components:
       description: The definition of the `GitlabAPIKey` object.
       properties:
         api_token:
-          description: The `GitlabAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/GitlabAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/GitlabAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    GitlabAPIKeyApiToken:
+      description: The `GitlabAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GitlabAPIKeyType:
       description: The definition of the `GitlabAPIKey` object.
       enum:
@@ -58332,13 +58557,17 @@ components:
       description: The definition of the `GitlabAPIKey` object.
       properties:
         api_token:
-          description: The `GitlabAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/GitlabAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/GitlabAPIKeyType"
       required:
         - type
       type: object
+    GitlabAPIKeyUpdateApiToken:
+      description: The `GitlabAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GitlabCredentials:
       description: The definition of the `GitlabCredentials` object.
       oneOf:
@@ -60119,15 +60348,19 @@ components:
       description: The definition of the `GreyNoiseAPIKey` object.
       properties:
         api_key:
-          description: The `GreyNoiseAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/GreyNoiseAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/GreyNoiseAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    GreyNoiseAPIKeyApiKey:
+      description: The `GreyNoiseAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GreyNoiseAPIKeyType:
       description: The definition of the `GreyNoiseAPIKey` object.
       enum:
@@ -60140,13 +60373,17 @@ components:
       description: The definition of the `GreyNoiseAPIKey` object.
       properties:
         api_key:
-          description: The `GreyNoiseAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/GreyNoiseAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/GreyNoiseAPIKeyType"
       required:
         - type
       type: object
+    GreyNoiseAPIKeyUpdateApiKey:
+      description: The `GreyNoiseAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GreyNoiseCredentials:
       description: The definition of the `GreyNoiseCredentials` object.
       oneOf:
@@ -60475,9 +60712,7 @@ components:
         type:
           $ref: "#/components/schemas/TokenType"
         value:
-          description: The `HTTPToken` `value`.
-          example: Some Token Value
-          type: string
+          $ref: "#/components/schemas/HTTPTokenValue"
       required:
         - name
         - value
@@ -60492,6 +60727,13 @@ components:
           description: The `HTTPTokenAuth` `headers`.
           items:
             $ref: "#/components/schemas/HTTPHeader"
+          type: array
+        http_tokens:
+          description: >-
+            HTTP authentication tokens returned by the API. Use `tokens` when creating or updating tokens.
+          items:
+            $ref: "#/components/schemas/HTTPTokenResponse"
+          readOnly: true
           type: array
         tokens:
           description: The `HTTPTokenAuth` `tokens`.
@@ -60541,6 +60783,25 @@ components:
       required:
         - type
       type: object
+    HTTPTokenResponse:
+      description: An HTTP authentication token returned by the API. Its type is implicitly `SECRET`.
+      properties:
+        name:
+          description: Name of the HTTP authentication token.
+          example: MyToken
+          type: string
+        value:
+          $ref: "#/components/schemas/HTTPTokenResponseValue"
+      required:
+        - name
+        - value
+      type: object
+    HTTPTokenResponseValue:
+      description: The `HTTPTokenResponse` `value`.
+      example: Some Token Value
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     HTTPTokenUpdate:
       description: The definition of `HTTPTokenUpdate` object.
       properties:
@@ -60555,14 +60816,18 @@ components:
         type:
           $ref: "#/components/schemas/TokenType"
         value:
-          description: The `HTTPToken` `value`.
-          example: Some Token Value
-          type: string
+          $ref: "#/components/schemas/HTTPTokenValue"
       required:
         - name
         - type
         - value
       type: object
+    HTTPTokenValue:
+      description: The `HTTPToken` `value`.
+      example: Some Token Value
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     HamrOrgConnectionAttributesRequest:
       description: Attributes for a HAMR organization connection request.
       properties:
@@ -77644,15 +77909,19 @@ components:
       description: The definition of the `LaunchDarklyAPIKey` object.
       properties:
         api_token:
-          description: The `LaunchDarklyAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/LaunchDarklyAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/LaunchDarklyAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    LaunchDarklyAPIKeyApiToken:
+      description: The `LaunchDarklyAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     LaunchDarklyAPIKeyType:
       description: The definition of the `LaunchDarklyAPIKey` object.
       enum:
@@ -77665,13 +77934,17 @@ components:
       description: The definition of the `LaunchDarklyAPIKey` object.
       properties:
         api_token:
-          description: The `LaunchDarklyAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/LaunchDarklyAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/LaunchDarklyAPIKeyType"
       required:
         - type
       type: object
+    LaunchDarklyAPIKeyUpdateApiToken:
+      description: The `LaunchDarklyAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     LaunchDarklyCredentials:
       description: The definition of the `LaunchDarklyCredentials` object.
       oneOf:
@@ -86006,15 +86279,19 @@ components:
       description: The definition of the `NotionAPIKey` object.
       properties:
         api_token:
-          description: The `NotionAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/NotionAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/NotionAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    NotionAPIKeyApiToken:
+      description: The `NotionAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     NotionAPIKeyType:
       description: The definition of the `NotionAPIKey` object.
       enum:
@@ -86027,13 +86304,17 @@ components:
       description: The definition of the `NotionAPIKey` object.
       properties:
         api_token:
-          description: The `NotionAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/NotionAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/NotionAPIKeyType"
       required:
         - type
       type: object
+    NotionAPIKeyUpdateApiToken:
+      description: The `NotionAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     NotionCredentials:
       description: The definition of the `NotionCredentials` object.
       oneOf:
@@ -93791,13 +94072,9 @@ components:
       description: The definition of the `OktaAPIToken` object.
       properties:
         api_token:
-          description: The `OktaAPIToken` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/OktaAPITokenApiToken"
         domain:
-          description: The `OktaAPIToken` `domain`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/OktaAPITokenDomain"
         type:
           $ref: "#/components/schemas/OktaAPITokenType"
       required:
@@ -93805,6 +94082,18 @@ components:
         - domain
         - api_token
       type: object
+    OktaAPITokenApiToken:
+      description: The `OktaAPIToken` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    OktaAPITokenDomain:
+      description: The `OktaAPIToken` `domain`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     OktaAPITokenType:
       description: The definition of the `OktaAPIToken` object.
       enum:
@@ -93817,16 +94106,24 @@ components:
       description: The definition of the `OktaAPIToken` object.
       properties:
         api_token:
-          description: The `OktaAPITokenUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/OktaAPITokenUpdateApiToken"
         domain:
-          description: The `OktaAPITokenUpdate` `domain`.
-          type: string
+          $ref: "#/components/schemas/OktaAPITokenUpdateDomain"
         type:
           $ref: "#/components/schemas/OktaAPITokenType"
       required:
         - type
       type: object
+    OktaAPITokenUpdateApiToken:
+      description: The `OktaAPITokenUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    OktaAPITokenUpdateDomain:
+      description: The `OktaAPITokenUpdate` `domain`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     OktaAccount:
       description: Schema for an Okta account.
       properties:
@@ -94848,15 +95145,19 @@ components:
       description: The definition of the `OpenAIAPIKey` object.
       properties:
         api_token:
-          description: The `OpenAIAPIKey` `api_token`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/OpenAIAPIKeyApiToken"
         type:
           $ref: "#/components/schemas/OpenAIAPIKeyType"
       required:
         - type
         - api_token
       type: object
+    OpenAIAPIKeyApiToken:
+      description: The `OpenAIAPIKey` `api_token`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     OpenAIAPIKeyType:
       description: The definition of the `OpenAIAPIKey` object.
       enum:
@@ -94869,13 +95170,17 @@ components:
       description: The definition of the `OpenAIAPIKey` object.
       properties:
         api_token:
-          description: The `OpenAIAPIKeyUpdate` `api_token`.
-          type: string
+          $ref: "#/components/schemas/OpenAIAPIKeyUpdateApiToken"
         type:
           $ref: "#/components/schemas/OpenAIAPIKeyType"
       required:
         - type
       type: object
+    OpenAIAPIKeyUpdateApiToken:
+      description: The `OpenAIAPIKeyUpdate` `api_token`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     OpenAICredentials:
       description: The definition of the `OpenAICredentials` object.
       oneOf:
@@ -124866,25 +125171,31 @@ components:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
         instance:
-          description: The `ServiceNowBasicAuth` `instance`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthInstance"
         password:
-          description: The `ServiceNowBasicAuth` `password`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthPassword"
         type:
           $ref: "#/components/schemas/ServiceNowBasicAuthType"
         username:
-          description: The `ServiceNowBasicAuth` `username`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthUsername"
       required:
         - type
         - instance
         - username
         - password
       type: object
+    ServiceNowBasicAuthInstance:
+      description: The `ServiceNowBasicAuth` `instance`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ServiceNowBasicAuthPassword:
+      description: The `ServiceNowBasicAuth` `password`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ServiceNowBasicAuthType:
       description: The definition of the `ServiceNowBasicAuth` object.
       enum:
@@ -124897,19 +125208,37 @@ components:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
         instance:
-          description: The `ServiceNowBasicAuthUpdate` `instance`.
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthUpdateInstance"
         password:
-          description: The `ServiceNowBasicAuthUpdate` `password`.
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthUpdatePassword"
         type:
           $ref: "#/components/schemas/ServiceNowBasicAuthType"
         username:
-          description: The `ServiceNowBasicAuthUpdate` `username`.
-          type: string
+          $ref: "#/components/schemas/ServiceNowBasicAuthUpdateUsername"
       required:
         - type
       type: object
+    ServiceNowBasicAuthUpdateInstance:
+      description: The `ServiceNowBasicAuthUpdate` `instance`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ServiceNowBasicAuthUpdatePassword:
+      description: The `ServiceNowBasicAuthUpdate` `password`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ServiceNowBasicAuthUpdateUsername:
+      description: The `ServiceNowBasicAuthUpdate` `username`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    ServiceNowBasicAuthUsername:
+      description: The `ServiceNowBasicAuth` `username`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     ServiceNowBusinessServiceAttributes:
       description: Attributes of a ServiceNow business service
       properties:
@@ -129141,15 +129470,19 @@ components:
       description: The definition of the `SplitAPIKey` object.
       properties:
         api_key:
-          description: The `SplitAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/SplitAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/SplitAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    SplitAPIKeyApiKey:
+      description: The `SplitAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     SplitAPIKeyType:
       description: The definition of the `SplitAPIKey` object.
       enum:
@@ -129162,13 +129495,17 @@ components:
       description: The definition of the `SplitAPIKey` object.
       properties:
         api_key:
-          description: The `SplitAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/SplitAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/SplitAPIKeyType"
       required:
         - type
       type: object
+    SplitAPIKeyUpdateApiKey:
+      description: The `SplitAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     SplitCredentials:
       description: The definition of the `SplitCredentials` object.
       oneOf:
@@ -129263,15 +129600,19 @@ components:
       description: The definition of the `StatsigAPIKey` object.
       properties:
         api_key:
-          description: The `StatsigAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/StatsigAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/StatsigAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    StatsigAPIKeyApiKey:
+      description: The `StatsigAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     StatsigAPIKeyType:
       description: The definition of the `StatsigAPIKey` object.
       enum:
@@ -129284,13 +129625,17 @@ components:
       description: The definition of the `StatsigAPIKey` object.
       properties:
         api_key:
-          description: The `StatsigAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/StatsigAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/StatsigAPIKeyType"
       required:
         - type
       type: object
+    StatsigAPIKeyUpdateApiKey:
+      description: The `StatsigAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     StatsigCredentials:
       description: The definition of the `StatsigCredentials` object.
       oneOf:
@@ -145723,15 +146068,19 @@ components:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
         api_key:
-          description: The `VirusTotalAPIKey` `api_key`.
-          example: ""
-          type: string
+          $ref: "#/components/schemas/VirusTotalAPIKeyApiKey"
         type:
           $ref: "#/components/schemas/VirusTotalAPIKeyType"
       required:
         - type
         - api_key
       type: object
+    VirusTotalAPIKeyApiKey:
+      description: The `VirusTotalAPIKey` `api_key`.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     VirusTotalAPIKeyType:
       description: The definition of the `VirusTotalAPIKey` object.
       enum:
@@ -145744,13 +146093,17 @@ components:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
         api_key:
-          description: The `VirusTotalAPIKeyUpdate` `api_key`.
-          type: string
+          $ref: "#/components/schemas/VirusTotalAPIKeyUpdateApiKey"
         type:
           $ref: "#/components/schemas/VirusTotalAPIKeyType"
       required:
         - type
       type: object
+    VirusTotalAPIKeyUpdateApiKey:
+      description: The `VirusTotalAPIKeyUpdate` `api_key`.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     VirusTotalCredentials:
       description: The definition of the `VirusTotalCredentials` object.
       oneOf:
