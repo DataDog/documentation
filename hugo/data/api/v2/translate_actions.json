@@ -3072,30 +3072,6 @@
     "request_description": "",
     "request_schema_description": "Request payload to update a Snowflake integration account."
   },
-  "ListTemporalCloudOpenMetricsIntegrationAccounts": {
-    "description": "List Temporal Cloud OpenMetrics integration accounts.",
-    "summary": "List Temporal Cloud OpenMetrics accounts"
-  },
-  "CreateTemporalCloudOpenMetricsIntegrationAccount": {
-    "description": "Create a Temporal Cloud OpenMetrics integration account.",
-    "summary": "Create a Temporal Cloud OpenMetrics account",
-    "request_description": "",
-    "request_schema_description": "Request payload to create a Temporal Cloud OpenMetrics integration account."
-  },
-  "DeleteTemporalCloudOpenMetricsIntegrationAccount": {
-    "description": "Delete a Temporal Cloud OpenMetrics integration account.",
-    "summary": "Delete a Temporal Cloud OpenMetrics account"
-  },
-  "GetTemporalCloudOpenMetricsIntegrationAccount": {
-    "description": "Get a Temporal Cloud OpenMetrics integration account.",
-    "summary": "Get a Temporal Cloud OpenMetrics account"
-  },
-  "UpdateTemporalCloudOpenMetricsIntegrationAccount": {
-    "description": "Update a Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.",
-    "summary": "Update a Temporal Cloud OpenMetrics account",
-    "request_description": "",
-    "request_schema_description": "Request payload to update a Temporal Cloud OpenMetrics integration account."
-  },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
     "summary": "List Twilio integration accounts"
@@ -5536,15 +5512,15 @@
     "request_schema_description": "Request body for toggling a report schedule."
   },
   "DeleteRestrictionPolicy": {
-    "description": "Deletes the restriction policy associated with a specified resource.",
+    "description": "Deletes the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.\nDeleting a provider policy restores normal unrestricted defaults.",
     "summary": "Delete a restriction policy"
   },
   "GetRestrictionPolicy": {
-    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "description": "Retrieves the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_read`.",
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.\nThe editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.\nReading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -6900,18 +6876,6 @@
   "DeleteSampleLogGenerationSubscription": {
     "description": "Unsubscribe from sample log generation for a Cloud SIEM content pack.\nAfter unsubscribing, no more sample logs are generated for the requested content pack.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
     "summary": "Unsubscribe from sample log generation"
-  },
-  "ListSecurityAgentInvestigations": {
-    "description": "List Bits Security Analyst investigations.\n\nWithout `filter[signal_id]`, returns the latest investigation of each signal, filtered, sorted, and paginated.\nWith `filter[signal_id]`, returns every investigation of that signal, newest first. When the signal has no\ninvestigation, the first page carries `meta.reason`, which says why.",
-    "summary": "List Bits Security Analyst investigations"
-  },
-  "CountSecurityAgentInvestigations": {
-    "description": "Count completed Bits Security Analyst investigations by the values of one field. Buckets are sorted by\nascending count. With `field=entity` or `field=signal_source`, an investigation counts in the bucket of\neach of its entities or sources.",
-    "summary": "Count Bits Security Analyst investigations"
-  },
-  "GetSecurityAgentInvestigation": {
-    "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
-    "summary": "Get a Bits Security Analyst investigation"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",

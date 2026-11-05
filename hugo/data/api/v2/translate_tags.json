@@ -71,10 +71,6 @@
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
   },
-  "bits-security-analyst": {
-    "name": "Bits Security Analyst",
-    "description": "Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an\ninvestigation's verdict and findings, and count investigations."
-  },
   "ci-visibility-github-accounts": {
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
@@ -574,10 +570,6 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
-  },
-  "temporal-cloud-openmetrics-integration": {
-    "name": "Temporal Cloud OpenMetrics Integration",
-    "description": "Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources\ndirectly through the Datadog API. See the\n[Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for\nmore information."
   },
   "test-optimization": {
     "name": "Test Optimization",
