@@ -184,7 +184,7 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [1]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 [2]: /security/ai_guard/setup/
 [4]: /security/ai_guard/policies/
-[6]: /security/ai_guard/setup/sensitive_data_redaction/
+[6]: /security/ai_guard/sensitive_data_redaction/
 [7]: /security/ai_guard/signals/#investigate-signals
 [8]: /security/ai_guard/signals/#get-additional-context-with-spans
 [9]: /security/ai_guard/setup/automatic_integrations/

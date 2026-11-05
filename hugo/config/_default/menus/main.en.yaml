@@ -8830,7 +8830,7 @@ menu:
       parent: ai_guard
       weight: 3
     - name: Redact Sensitive Data
-      url: /security/ai_guard/setup/sensitive_data_redaction/
+      url: /security/ai_guard/sensitive_data_redaction/
       identifier: ai_guard_sensitive_data_redaction
       parent: ai_guard
       weight: 4

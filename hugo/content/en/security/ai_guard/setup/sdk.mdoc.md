@@ -341,6 +341,6 @@ With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluatio
 [6]: /security/ai_guard/setup/#retention-filter
 [7]: /security/ai_guard/setup/#limit-access
 [8]: /security/ai_guard/setup/#verify
-[9]: /security/ai_guard/setup/sensitive_data_redaction/
+[9]: /security/ai_guard/sensitive_data_redaction/
 [10]: /security/ai_guard/policies/#tools-policies
 [11]: /security/ai_guard/policies/#handle-blocked-requests-with-the-sdk

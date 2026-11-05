@@ -218,6 +218,6 @@ For other AI Guard monitor queries, see [Alert on AI Guard activity with Datadog
 [2]: /security/ai_guard/setup/manual_integrations/#evaluated-operations
 [3]: /security/ai_guard/setup/http_api/#evaluate-messages-with-the-http-api
 [4]: /security/ai_guard/setup/sdk/#per-call-blocking-options
-[6]: /security/ai_guard/setup/sensitive_data_redaction/
+[6]: /security/ai_guard/sensitive_data_redaction/
 [7]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
 [8]: /security/ai_guard/signals/#set-up-datadog-monitors

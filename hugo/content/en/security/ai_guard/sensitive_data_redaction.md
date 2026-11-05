@@ -1,5 +1,7 @@
 ---
 title: Redact Sensitive Data
+aliases:
+  - /security/ai_guard/setup/sensitive_data_redaction/
 description: Redact personal information and secrets from the messages that AI Guard evaluates, before the messages reach the model.
 further_reading:
 - link: /security/ai_guard/setup/
