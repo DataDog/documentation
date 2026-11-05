@@ -146,7 +146,7 @@ topt_go_ddtest = use_extension(
 topt_go_ddtest.sdk(go_version = "1.25.0")
 ```
 
-If you do not use bootstrap, add these lines to the root `MODULE.bazel`. To read the Go version from a `go.mod` file instead, use `topt_go_ddtest.sdk(go_mod = "//:go.mod")`. The directory of the `go.mod` file must be a Bazel package.
+If you do not use bootstrap, add these lines to the root `MODULE.bazel`, and set up the metadata sync, the `test-optimization` Bazel config, and the doctor and uploader targets as the [installation reference][5] describes. To read the Go version from a `go.mod` file instead, use `topt_go_ddtest.sdk(go_mod = "//:go.mod")`. The directory of the `go.mod` file must be a Bazel package.
 
 If your Go module lives below the workspace root, pass its path:
 
@@ -229,7 +229,7 @@ If you pass an `env` attribute to `dd_topt_go_test`, keep these variables reserv
 
 ## Large repositories
 
-For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the full repository wiring. Use it in place of the block in [Use `WORKSPACE` mode](#use-workspace-mode), because the helper fails if the Go companion repository is already declared:
+For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the full repository wiring. Keep your `io_bazel_rules_go` declaration, and use the rest in place of the block in [Use `WORKSPACE` mode](#use-workspace-mode), because the helper fails if the Go companion repository is already declared:
 
 ```bash
 bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
@@ -364,3 +364,4 @@ To fix this issue, set `go_version` to the version of the base SDK, or point `ba
 [2]: /code_coverage/configuration/
 [3]: /tests/setup/go/
 [4]: https://github.com/stretchr/testify
+[5]: https://github.com/DataDog/rules_test_optimization/blob/v2.0.0/docs/Installation_Reference.md
