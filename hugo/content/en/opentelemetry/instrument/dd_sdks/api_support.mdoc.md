@@ -683,7 +683,7 @@ histogram.record(duration, Attributes.builder().put("method", "GET").put("status
 
 ### Shut down metrics in short-lived processes
 
-With metrics enabled, request a final export before the process exits. Stop recording metrics before shutdown. These operations are provided by the SDK.
+Before a short-lived process exits, stop recording metrics, then shut down the meter provider to export any pending metrics. This applies only when metrics are enabled.
 
 {% if equals($prog_lang, "node_js") %}
 Requires `dd-trace` 5.127.0 or later on the 5.x release line, or 6.16.0 or later. Wait for the callback before exiting; it receives `null` on success or an error on failure.
