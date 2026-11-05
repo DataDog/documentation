@@ -317,8 +317,6 @@ local/bin/py/build/*
 # Ignore everything inside the configurations folder,
 # except for the files we add explicit exceptions for
 local/bin/py/build/configurations/*
-!local/bin/py/build/configurations/pull_config_preview.yaml
-!local/bin/py/build/configurations/pull_config.yaml
 !local/bin/py/build/configurations/integration_merge.yaml
 local/bin/py/sh
 local/bin/py/js

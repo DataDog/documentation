@@ -57,7 +57,6 @@ The build system automatically fetches:
 - API client examples from multiple language repositories
 - Integration metadata and documentation
 - Vector integration data via CUE files
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Some documentation is sourced from a go module called `websites-sources`
 
 ### Related Repositories
@@ -203,7 +202,6 @@ Extensive library in `hugo/layouts/shortcodes/` for:
 - API examples automatically sync from datadog-api-client-* repositories
 - Integration data pulled from the `websites-sources` go module.
    - The exception is Dogweb integrations, which are pulled from a GitHub repository.
-- Some documentation is sourced from GitHub using the `pull_config.yaml` file at `hugo/local/bin/py/build/configurations/pull_config.yaml`.
 - Build scripts fetched from external repository during setup
 
 ### Build Environments
