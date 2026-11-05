@@ -4,6 +4,9 @@ further_reading:
 - link: "/opentelemetry/setup/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
+- link: "/opentelemetry/integrations/opamp_extension/"
+  tag: "Documentation"
+  text: "OpAMP Extension"
 - link: "/infrastructure/list/"
   tag: "Documentation"
   text: "Infrastructure List"
@@ -17,6 +20,8 @@ further_reading:
 As of OpenTelemetry Collector Contrib [modules v0.129.0][4] and newer, the Datadog Extension is included in [contrib distributions][5] of OpenTelemetry Collector. It is also available for [custom builds][6] of OpenTelemetry Collector. In the [DDOT Collector][8], the extension is automatically enabled.
 
 The Datadog Extension allows you to view OpenTelemetry Collector configuration and build information directly in Datadog using [Fleet Automation][7], the [Infrastructure List][2], and [Resource Catalog][3]. The extension works with the recommended OTLP HTTP exporter setup and with the Datadog Exporter.
+
+The Datadog Extension is the recommended way to connect upstream Collectors to Fleet Automation. As an alternative, you can use the [OpAMP extension][11], which doesn't support the Topology view.
 
 {{< img src="/agent/fleet_automation/fleet-automation-pipeline-view.png" alt="View OTel Collector configurations with Pipeline Visualization in Fleet Automation" style="width:100%;" >}}
 
@@ -365,3 +370,4 @@ This endpoint provides:
 [8]: /opentelemetry/setup/ddot_collector/
 [9]: /opentelemetry/setup/collector_exporter/
 [10]: /opentelemetry/integrations/collector_health_metrics/
+[11]: /opentelemetry/integrations/opamp_extension/
