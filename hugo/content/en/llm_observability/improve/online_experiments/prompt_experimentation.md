@@ -36,8 +36,6 @@ A/B testing and Guarded Rollouts for managed prompts are available in Preview. T
 
 You need a managed prompt with at least two versions, a version deployed to the environment you want to use, and an [Experiment metric][3] that measures your outcome. Complete the [one-time application setup](#set-up-your-application) and check the [permissions](#permissions) for your workflow.
 
-**Permissions:** A/B testing requires permissions in Product Analytics and Feature Flags, in addition to Agent Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
-
 ## Set up your application
 
 Complete this setup once for either workflow. If your application already sends prompt assignments and matching outcomes, go directly to [A/B testing](#run-an-ab-test) or [Guarded Rollouts](#use-a-guarded-rollout).
@@ -179,6 +177,8 @@ When the rollout finishes, the candidate receives all traffic eligible for that 
 <div class="alert alert-warning">Guardrails depend on available outcome data. Sparse, missing, or unmatched data may not trigger a pause. Reaching full exposure does not prove that the candidate is better or safe.</div>
 
 ## Permissions
+
+A/B testing requires permissions in Product Analytics and Feature Flags, in addition to Agent Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
 
 In addition to the [Prompt Management prerequisites][11], your role needs:
 
