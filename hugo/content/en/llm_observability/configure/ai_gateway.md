@@ -24,6 +24,7 @@ Datadog's AI Gateway lets you govern how your organization uses large language m
 - Call models from multiple providers through one endpoint and one set of Datadog credentials
 - Give callers a stable model identifier with [routing rules](#route-requests-with-routing-rules) and ordered fallbacks
 - Control which teams, users, and service accounts can use each model with [access policies](#control-model-access)
+- Let people use Claude Code and Codex on their own Claude or ChatGPT subscription with [subscription providers](#use-subscription-providers)
 - Track and cap spend with [budgets](#set-budgets)
 - Cap requests and tokens per minute with [rate limits](#set-rate-limits)
 - Inspect every request as a span in Agent Observability
@@ -181,6 +182,140 @@ For tighter control over who can call models:
 - Grant **Runner** only to the users, teams, and service accounts that need it.
 - Before you restrict the default policy, keep an administrator on a policy that can restore access.
 - Review policy membership and routing rule targets regularly.
+
+## Use subscription providers
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Subscription providers are in Preview. To enable them for your organization, contact your Customer Success Manager.
+{{< /callout >}}
+
+A subscription provider lets people use Claude Code and Codex through AI Gateway with their own Claude or ChatGPT subscription, instead of an API key. Each person signs in to the coding agent with their own account, and Anthropic or OpenAI bills the usage to that person's subscription. AI Gateway applies access policies and rate limits, attributes each request to the Datadog user who sent it, and records the request in Agent Observability.
+
+Subscription providers support these coding agents:
+
+| Coding agent | Vendor | Required subscription |
+|---|---|---|
+| Claude Code | Anthropic | Claude Pro, Max, Team, or Enterprise |
+| Codex | OpenAI | A ChatGPT plan that includes Codex |
+
+An Anthropic Console account bills API usage per token, so it is not a subscription.
+
+Each person also needs a Datadog [API key][16] and their own [application key][17]. AI Gateway attributes each request to the user who owns the application key, and that user needs the `ai_gateway_usage` permission.
+
+### Create a subscription provider
+
+1. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Models{{< /ui >}} > {{< ui >}}Provider accounts{{< /ui >}}][2] and click {{< ui >}}New provider account{{< /ui >}}.
+2. On the {{< ui >}}Details{{< /ui >}} step, select {{< ui >}}Use each person's own subscription instead of an integration account{{< /ui >}}.
+3. In {{< ui >}}Vendor{{< /ui >}}, select {{< ui >}}Anthropic{{< /ui >}} for Claude Code or {{< ui >}}OpenAI{{< /ui >}} for Codex. To support both coding agents, create a subscription provider for each vendor.
+4. Enter a provider name and a unique slug. People send the slug in the `x-ai-gateway-provider` header.
+5. Optional: On the {{< ui >}}Models{{< /ui >}} step, add models. Without models, people can use any model that their own subscription includes, and the vendor decides which models each person gets. Add a model to set its price, or to allow only specific models when you grant access.
+6. On the {{< ui >}}Access{{< /ui >}} step, choose who can use the provider. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider).
+7. Review the configuration and click {{< ui >}}Create provider{{< /ui >}}.
+
+After you create the provider, open it to copy the Claude Code settings or the Codex configuration for it.
+
+You cannot change whether a provider uses subscriptions after you create it.
+
+### Grant access to a subscription provider
+
+People can use a subscription provider only when the [default policy](#default-policy) or one of their [access policies](#access-policies) includes it. Grant access on the provider's {{< ui >}}Access{{< /ui >}} step, or later in [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][18] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
+
+- {{< ui >}}All models{{< /ui >}}: Any model each person's subscription includes. In a policy, select the provider itself rather than individual models.
+- {{< ui >}}Specific models{{< /ui >}}: Only the selected models, even if a person's subscription includes more. This option appears after you add models to the provider. In a policy, select the individual models.
+
+A request for a model outside a person's access returns HTTP `403` with the `no_permitted_target` error code and the message `access denied: model "<PROVIDER_SLUG>/<MODEL_ID>" is not allowed by your access policies`.
+
+### Set up Claude Code
+
+Each person points Claude Code to AI Gateway, then signs in with their Claude account.
+
+1. Add the following to your Claude Code user settings file, `~/.claude/settings.json`, rather than to a project settings file that you commit to source control. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and application key, and `<PROVIDER_SLUG>` with the slug of the Anthropic subscription provider.
+
+   ```json
+   {
+     "env": {
+       "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
+       "ANTHROPIC_CUSTOM_HEADERS": "dd-api-key: <DATADOG_API_KEY>\ndd-application-key: <DATADOG_APP_KEY>\nx-ai-gateway-provider: <PROVIDER_SLUG>"
+     }
+   }
+   ```
+
+   Claude Code sends your subscription sign-in in the `Authorization` header, so the Datadog keys travel in their own headers. AI Gateway removes them before it forwards the request to Anthropic. The `x-ai-gateway-provider` header sends every request to the subscription provider. You can also set `ANTHROPIC_BASE_URL` and `ANTHROPIC_CUSTOM_HEADERS` as environment variables, with one header per line.
+
+2. Start Claude Code, run `/login`, and sign in with your Claude account, not an Anthropic Console account.
+
+<div class="alert alert-warning">Make sure that <code>ANTHROPIC_API_KEY</code>, <code>ANTHROPIC_AUTH_TOKEN</code>, and <code>apiKeyHelper</code> are not set in your environment or in any Claude Code settings, including managed settings. Any of them replaces the subscription with per-token billing.</div>
+
+To run Claude Code without an interactive sign-in, run `claude setup-token`, then set the token that it prints in the `CLAUDE_CODE_OAUTH_TOKEN` environment variable. Store the token as a secret.
+
+### Set up Codex
+
+Each person adds AI Gateway as a model provider in Codex, then signs in with their ChatGPT account.
+
+1. Add the following to your Codex configuration file, `~/.codex/config.toml`. Place `model_provider` before the first table in the file. Replace `<PROVIDER_SLUG>` with the slug of the OpenAI subscription provider.
+
+   ```toml
+   model_provider = "datadog"
+
+   [model_providers.datadog]
+   name = "Datadog AI Gateway"
+   base_url = "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1"
+   wire_api = "responses"
+   requires_openai_auth = true
+   env_http_headers = { "DD-API-KEY" = "DD_API_KEY", "DD-APPLICATION-KEY" = "DD_APP_KEY" }
+   http_headers = { "x-ai-gateway-provider" = "<PROVIDER_SLUG>" }
+   ```
+
+   With `requires_openai_auth = true`, Codex sends your ChatGPT sign-in. Codex reads the Datadog keys from environment variables and sends them in their own headers. AI Gateway removes them before it forwards the request.
+
+2. Set the `DD_API_KEY` and `DD_APP_KEY` environment variables to your Datadog API key and application key.
+3. Run `codex login` and sign in with your ChatGPT account. To sign in from another device, such as your phone, run `codex login --device-auth`.
+
+### Verify subscription traffic
+
+1. Send a prompt from Claude Code or Codex. The agent answers as usual.
+2. Go to [{{< ui >}}AI Gateway{{< /ui >}} > {{< ui >}}Overview{{< /ui >}}][3] and find the request under the subscription provider. Follow the {{< ui >}}Traces{{< /ui >}} link to inspect its span.
+3. Check the usage page of your Claude or ChatGPT plan. The usage counts against your subscription.
+
+### How AI Gateway handles subscription traffic
+
+- **Billing**: Anthropic or OpenAI bills each request to the subscription of the person who sent it. A subscription provider has no integration account, so AI Gateway never sends your organization's provider credentials for it.
+- **Models**: Without models on the provider, the vendor decides which models each person can use, based on their plan. Claude Code and Codex show their built-in model lists, which can include models that a person's access doesn't allow.
+- **Cost**: AI Gateway reports the cost of subscription traffic at API list prices. This is an API-equivalent estimate, not what you pay for the subscriptions.
+- **Budgets**: [Budgets](#set-budgets) don't count or block subscription traffic. If you select {{< ui >}}Track existing usage for current period{{< /ui >}} when you create a budget, its starting spend can include earlier subscription traffic.
+- **Rate limits**: A [rate limit](#set-rate-limits) that matches subscription traffic counts it together with other matching traffic. In Enforce mode, the rate limit rejects subscription requests over the limit.
+- **Routing rules**: A [routing rule](#route-requests-with-routing-rules) cannot include a subscription provider, and a destination for a model served by any provider skips subscription providers. People pin the provider with the `x-ai-gateway-provider` header instead.
+- **Request formats**: A subscription provider serves only its vendor's coding agent API. An Anthropic subscription provider serves Anthropic Messages, including token counting. An OpenAI subscription provider serves OpenAI Responses. A request in another format returns HTTP `400` with the `unsupported_operation` error code. AI Gateway never sends a subscription sign-in to another vendor. Requests to an OpenAI subscription provider go to ChatGPT, not to the OpenAI API.
+- **Credentials**: AI Gateway does not check which credential a client sends to a subscription provider. If a client sends an API key, such as `ANTHROPIC_API_KEY`, the vendor bills that key per token.
+- **Activity**: On the [{{< ui >}}Overview{{< /ui >}}][3] page, subscription traffic appears with all other traffic. Filter by the subscription provider to see it separately. A vendor `401` or `429` response, such as for an expired sign-in or a reached plan limit, counts as a provider error.
+
+### Troubleshoot subscription providers
+
+To check your setup without using a subscription, send a request without a sign-in to an Anthropic subscription provider. The request checks the Datadog keys, the provider slug, and access. Replace `<MODEL_ID>` with a Claude model ID that your access allows.
+
+```shell
+curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/messages" \
+  -H "Content-Type: application/json" \
+  -H "anthropic-version: 2023-06-01" \
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+  -H "x-ai-gateway-provider: <PROVIDER_SLUG>" \
+  -d '{"model": "<MODEL_ID>", "max_tokens": 16, "messages": [{"role": "user", "content": "Woof!"}]}'
+```
+
+An HTTP `401` with an `authentication_error` from Anthropic means that the setup is correct. AI Gateway accepted the request and forwarded it, and Anthropic rejected it because it has no sign-in. Nothing is billed.
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| The subscription option doesn't appear, or creating the provider returns HTTP `403` with `subscription_providers_disabled`. | Subscription providers are not enabled for your organization. | Contact your Customer Success Manager. |
+| HTTP `403` with `no_permitted_target`. | The person's access doesn't include the provider or the model. | Grant access to the whole provider or to the model. See [Grant access to a subscription provider](#grant-access-to-a-subscription-provider). |
+| Claude Code shows `Failed to authenticate.` followed by `access denied: model "…" is not allowed by your access policies`. | Claude Code adds `Failed to authenticate.` to every `403` response. AI Gateway denied the model. | Signing in again doesn't help. Grant access to the model or to the whole provider. |
+| HTTP `400` with `requested_provider_unavailable`. | The `x-ai-gateway-provider` slug doesn't match an active provider. | Check the slug on the provider's page. |
+| HTTP `400` with `unsupported_operation`. | The request used an API that the subscription provider doesn't serve. | Use Anthropic Messages with an Anthropic subscription provider, and OpenAI Responses with an OpenAI subscription provider. |
+| HTTP `401` from Anthropic or OpenAI during a session. | The subscription sign-in is missing or expired. | Sign in again: run `/login` in Claude Code, or run `codex login`. |
+| Usage is billed per token instead of to the subscription. | Claude Code sends an API credential from `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`. | Remove the setting, then sign in with `/login`. |
+| Saving a routing rule fails with `is a subscription provider, which callers reach by pinning it rather than through a routing rule`. | Routing rules cannot include a subscription provider. | Remove the provider from the rule. People pin it with the `x-ai-gateway-provider` header. |
+| Codex logs `failed to refresh available models`. | AI Gateway does not return Codex's model list. | No action is needed. Codex uses its built-in model list. |
 
 ## Set budgets
 
@@ -427,3 +562,6 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
+[16]: /account_management/api-app-keys/#api-keys
+[17]: /account_management/api-app-keys/#application-keys
+[18]: https://app.datadoghq.com/llm/gateway/governance/general
