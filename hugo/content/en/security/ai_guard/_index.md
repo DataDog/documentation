@@ -7,6 +7,9 @@ further_reading:
 - link: /security/ai_guard/signals/
   tag: Documentation
   text: AI Guard Security Signals
+- link: /security/ai_guard/coding_agents/
+  tag: Documentation
+  text: Coding Agent Runtime Protection
 - link: https://www.datadoghq.com/blog/ai-guard/
   tag: Blog
   text: Protect agentic AI applications with Datadog AI Guard
@@ -41,7 +44,7 @@ AI Guard also detects sensitive data such as personally identifiable information
 
 To quickly evaluate a conversation without any code or setup, use the [{{< ui >}}AI Guard Playground{{< /ui >}}][4] to submit user input, assistant output, and tool calls, and see the evaluation result in real time.
 
-For information on how to set up AI Guard, see [Get Started with AI Guard][1].
+For information on how to set up AI Guard, see [Get Started with AI Guard][1]. To protect coding agents, such as Claude Code, Codex, and Cursor, see [Coding Agent Runtime Protection][6].
 
 ## Further reading
 
@@ -52,3 +55,4 @@ For information on how to set up AI Guard, see [Get Started with AI Guard][1].
 [3]: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 [4]: /security/ai_guard/onboarding/#playground
 [5]: https://app.datadoghq.com/security/ai-guard/discover
+[6]: /security/ai_guard/coding_agents/
