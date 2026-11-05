@@ -71,6 +71,10 @@
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
   },
+  "bits-security-analyst": {
+    "name": "Bits Security Analyst",
+    "description": "Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an\ninvestigation's verdict and findings, and count investigations."
+  },
   "ci-visibility-github-accounts": {
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."

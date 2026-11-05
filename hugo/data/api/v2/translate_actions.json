@@ -6901,6 +6901,18 @@
     "description": "Unsubscribe from sample log generation for a Cloud SIEM content pack.\nAfter unsubscribing, no more sample logs are generated for the requested content pack.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
     "summary": "Unsubscribe from sample log generation"
   },
+  "ListSecurityAgentInvestigations": {
+    "description": "List Bits Security Analyst investigations.\n\nWithout `filter[signal_id]`, returns the latest investigation of each signal, filtered, sorted, and paginated.\nWith `filter[signal_id]`, returns every investigation of that signal, newest first. When the signal has no\ninvestigation, the first page carries `meta.reason`, which says why.",
+    "summary": "List Bits Security Analyst investigations"
+  },
+  "CountSecurityAgentInvestigations": {
+    "description": "Count completed Bits Security Analyst investigations by the values of one field. Buckets are sorted by\nascending count. With `field=entity` or `field=signal_source`, an investigation counts in the bucket of\neach of its entities or sources.",
+    "summary": "Count Bits Security Analyst investigations"
+  },
+  "GetSecurityAgentInvestigation": {
+    "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
+    "summary": "Get a Bits Security Analyst investigation"
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"

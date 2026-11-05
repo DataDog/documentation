@@ -1970,6 +1970,185 @@ components:
       required: true
       schema:
         type: string
+    SecurityAgentInvestigationFields:
+      description: Attributes to return, comma-separated. Defaults to all attributes.
+      example:
+        - state
+        - verdict
+        - conclusion
+      explode: false
+      in: query
+      name: fields[investigations]
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/SecurityAgentInvestigationField"
+        type: array
+    SecurityAgentInvestigationID:
+      description: The ID of the investigation, as returned by the list.
+      example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+      in: path
+      name: investigation_id
+      required: true
+      schema:
+        type: string
+    SecurityAgentInvestigationsCountField:
+      description: Field to count completed investigations by.
+      in: query
+      name: field
+      required: true
+      schema:
+        $ref: "#/components/schemas/SecurityAgentInvestigationCountField"
+    SecurityAgentInvestigationsFilterEntity:
+      description: |-
+        Only investigations whose signal has all of these entities. Write each entity as `attribute:value`, matching the
+        values returned by the count endpoint with `field=entity`. Comma-separated values; an investigation must have
+        every one of them.
+      example: "@usr.id:jane.doe"
+      in: query
+      name: filter[entity]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterFrom:
+      description: Only investigations last updated at or after this time, as RFC 3339 or milliseconds since the epoch.
+      example: "2026-10-01T00:00:00Z"
+      in: query
+      name: filter[from]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterRuleID:
+      description: |-
+        Only investigations of signals from one of these detection rule IDs. Comma-separated values; an
+        investigation matches any of them.
+      example: abc-def-ghi
+      in: query
+      name: filter[rule_id]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterRuleType:
+      description: |-
+        Only investigations of signals from detection rules of one of these types, as returned by the count with
+        `field=rule_type`. Comma-separated values; an investigation matches any of them.
+      example: log_detection
+      in: query
+      name: filter[rule_type]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalID:
+      description: |-
+        List every investigation of this signal, newest first. Accepts the signal ID in its V1 form, which starts
+        with `AQ`, or in its longer V3 form, which starts with `Aw`. Investigations carry the V1 form, so their
+        `signal_id` can differ from the ID you pass. Can't be combined with other filters or with `sort`.
+      example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+      in: query
+      name: filter[signal_id]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalSeverity:
+      description: |-
+        Only investigations of signals with one of these severities: `info`, `low`, `medium`, `high`, or `critical`.
+        Comma-separated values; an investigation matches any of them.
+      example: high,critical
+      in: query
+      name: filter[signal_severity]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterSignalSource:
+      description: |-
+        Only investigations of signals from one of these sources, as returned by the count with
+        `field=signal_source`. Comma-separated values; an investigation matches any of them.
+      example: okta
+      in: query
+      name: filter[signal_source]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterState:
+      description: |-
+        Only investigations in one of these states: `investigating` or `completed`. Investigations reported as
+        `failed` match `investigating`. Comma-separated values; an investigation matches any of them.
+      example: completed
+      in: query
+      name: filter[state]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTags:
+      description: |-
+        Only investigations whose signal has all of these tags, written `key:value`. Comma-separated values; an
+        investigation must have every one of them.
+      example: env:prod
+      in: query
+      name: filter[tags]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTitle:
+      description: Only investigations whose signal title contains this text, case-insensitive.
+      example: login
+      in: query
+      name: filter[title]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterTo:
+      description: Only investigations last updated at or before this time, as RFC 3339 or milliseconds since the epoch.
+      example: "2026-10-31T00:00:00Z"
+      in: query
+      name: filter[to]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsFilterVerdict:
+      description: |-
+        Only investigations with one of these verdicts: `benign`, `suspicious`, or `malicious`.
+        Comma-separated values; an investigation matches any of them.
+      example: suspicious,malicious
+      in: query
+      name: filter[verdict]
+      required: false
+      schema:
+        type: string
+    SecurityAgentInvestigationsPageNumber:
+      description: Page number, starting at 1.
+      example: 1
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 1
+        format: int64
+        minimum: 1
+        type: integer
+    SecurityAgentInvestigationsPageSize:
+      description: Number of investigations per page.
+      example: 25
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 25
+        format: int64
+        maximum: 100
+        minimum: 1
+        type: integer
+    SecurityAgentInvestigationsSort:
+      description: |-
+        Sort field, prefixed with `-` for descending: `updated_at`, `severity`, `verdict`, `rule_id`, or `signal_title`.
+        Defaults to `-updated_at`. `verdict` sorts by severity (`benign`, `suspicious`, `malicious`), so `-verdict` puts
+        `malicious` first.
+      example: -updated_at
+      in: query
+      name: sort
+      required: false
+      schema:
+        type: string
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -116303,6 +116482,660 @@ components:
         - SYSTEM
         - LIGHT
         - DARK
+    SecurityAgentInvestigationAttributes:
+      description: |-
+        Attributes of an investigation. When `fields[investigations]` is set, only listed attributes are returned.
+        Attributes the investigation doesn't have yet are absent.
+      properties:
+        conclusion:
+          description: Summary of the investigation's findings.
+          example: The login came from a location the user travels to regularly, on a known device.
+          type: string
+        created_at:
+          description: When the investigation started.
+          example: "2026-10-30T14:02:40Z"
+          format: date-time
+          type: string
+        key_entities:
+          $ref: "#/components/schemas/SecurityAgentInvestigationKeyEntities"
+        key_evidence:
+          description: The evidence the verdict rests on.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationKeyEvidence"
+          type: array
+        response_suggestions:
+          $ref: "#/components/schemas/SecurityAgentInvestigationResponseSuggestions"
+        rule_id:
+          description: ID of the detection rule that generated the signal.
+          example: abc-def-ghi
+          type: string
+        signal:
+          $ref: "#/components/schemas/SecurityAgentInvestigationSignal"
+        signal_id:
+          description: ID of the signal, in its V1 form.
+          example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+          type: string
+        state:
+          $ref: "#/components/schemas/SecurityAgentInvestigationState"
+        steps:
+          description: The steps of the investigation, in order.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationStep"
+          type: array
+        updated_at:
+          description: When the investigation last changed.
+          example: "2026-10-30T14:15:02Z"
+          format: date-time
+          type: string
+        verdict:
+          $ref: "#/components/schemas/SecurityAgentInvestigationVerdict"
+      type: object
+    SecurityAgentInvestigationCount:
+      description: One value of the counted field and how many completed investigations have it.
+      properties:
+        count:
+          description: Number of completed investigations with this value.
+          example: 1250
+          format: int64
+          type: integer
+        value:
+          description: A value of the counted field.
+          example: benign
+          type: string
+      required:
+        - value
+        - count
+      type: object
+    SecurityAgentInvestigationCountField:
+      description: Field to count completed investigations by.
+      enum:
+        - verdict
+        - rule_type
+        - signal_source
+        - entity
+      example: verdict
+      type: string
+      x-enum-varnames:
+        - VERDICT
+        - RULE_TYPE
+        - SIGNAL_SOURCE
+        - ENTITY
+    SecurityAgentInvestigationCountsAttributes:
+      description: The counts of each value of the field.
+      properties:
+        counts:
+          description: One bucket per value, sorted by ascending count.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationCount"
+          type: array
+      required:
+        - counts
+      type: object
+    SecurityAgentInvestigationCountsData:
+      description: Counts of completed investigations.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsAttributes"
+        id:
+          description: The counted field.
+          example: verdict
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentInvestigationCountsResponse:
+      description: Completed investigations counted by the values of one field.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentInvestigationCountsData"
+      required:
+        - data
+      type: object
+    SecurityAgentInvestigationCountsType:
+      default: investigation_counts
+      description: Type of the investigation counts resource.
+      enum:
+        - investigation_counts
+      example: investigation_counts
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_COUNTS
+    SecurityAgentInvestigationData:
+      description: |-
+        An investigation and its content. `attributes` is absent when `fields[investigations]` is empty or lists
+        only attributes the investigation doesn't have.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationAttributes"
+        id:
+          description: The ID of the investigation.
+          example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    SecurityAgentInvestigationEntity:
+      description: An entity the investigation found.
+      properties:
+        sub_type:
+          description: More specific type of the entity.
+          example: okta_user
+          type: string
+        type:
+          description: Type of the entity, such as a user, a host, or an IP address.
+          example: user
+          type: string
+        value:
+          description: Value that identifies the entity.
+          example: jane.doe@example.com
+          type: string
+      required:
+        - type
+        - value
+      type: object
+    SecurityAgentInvestigationField:
+      description: An attribute of an investigation that `fields[investigations]` can select.
+      enum:
+        - signal_id
+        - rule_id
+        - state
+        - verdict
+        - conclusion
+        - signal
+        - key_entities
+        - key_evidence
+        - steps
+        - response_suggestions
+        - created_at
+        - updated_at
+      example: verdict
+      type: string
+      x-enum-varnames:
+        - SIGNAL_ID
+        - RULE_ID
+        - STATE
+        - VERDICT
+        - CONCLUSION
+        - SIGNAL
+        - KEY_ENTITIES
+        - KEY_EVIDENCE
+        - STEPS
+        - RESPONSE_SUGGESTIONS
+        - CREATED_AT
+        - UPDATED_AT
+    SecurityAgentInvestigationKeyEntities:
+      description: The entities the investigation found, by role.
+      properties:
+        actors:
+          description: Entities that performed the activity.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationEntity"
+          type: array
+        targets:
+          description: Entities the activity was aimed at.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationEntity"
+          type: array
+      required:
+        - actors
+        - targets
+      type: object
+    SecurityAgentInvestigationKeyEvidence:
+      description: A piece of evidence the verdict rests on.
+      properties:
+        category:
+          description: Category of the evidence.
+          example: Authentication
+          type: string
+        finding:
+          description: What the investigation found.
+          example: The user logged in from the same country three times in the last 30 days.
+          type: string
+        source_steps:
+          description: Names of the steps the evidence comes from.
+          example:
+            - Has the user logged in from this location before?
+          items:
+            type: string
+          type: array
+      required:
+        - category
+        - finding
+      type: object
+    SecurityAgentInvestigationListItem:
+      description: An investigation in a list.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityAgentInvestigationListItemAttributes"
+        id:
+          description: The ID of the investigation.
+          example: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityAgentInvestigationType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SecurityAgentInvestigationListItemAttributes:
+      description: |-
+        Attributes of an investigation in a list. To get an investigation's full content, use the get investigation
+        endpoint.
+      properties:
+        created_at:
+          description: When the investigation started.
+          example: "2026-10-30T14:02:40Z"
+          format: date-time
+          type: string
+        is_latest:
+          description: |-
+            Whether this is the latest investigation of the signal. Always true when `filter[signal_id]` isn't set.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule that generated the signal. It can be empty while the investigation runs.
+          example: abc-def-ghi
+          type: string
+        signal:
+          $ref: "#/components/schemas/SecurityAgentInvestigationSignal"
+        signal_id:
+          description: ID of the signal, in its V1 form.
+          example: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+          type: string
+        state:
+          $ref: "#/components/schemas/SecurityAgentInvestigationState"
+        updated_at:
+          description: When the investigation last changed.
+          example: "2026-10-30T14:15:02Z"
+          format: date-time
+          type: string
+        verdict:
+          $ref: "#/components/schemas/SecurityAgentInvestigationVerdict"
+      required:
+        - signal_id
+        - rule_id
+        - state
+        - is_latest
+      type: object
+    SecurityAgentInvestigationMitigationAction:
+      description: An action that applies a mitigation.
+      properties:
+        applied:
+          description: Whether the action has run.
+          example: false
+          type: boolean
+        applied_at:
+          description: When the action ran.
+          example: "2026-10-30T14:20:00Z"
+          format: date-time
+          type: string
+        applied_by:
+          description: Who ran the action.
+          example: john.smith@example.com
+          type: string
+        fqn:
+          description: ID of the action in the Action Catalog.
+          example: com.datadoghq.okta.suspend_user
+          type: string
+        id:
+          description: ID of the action.
+          example: action-1
+          type: string
+        name:
+          description: Name of the action in the Action Catalog.
+          example: Suspend user
+          type: string
+        resource:
+          description: The resource the action changes.
+          example: jane.doe@example.com
+          type: string
+        source:
+          description: Integration that runs the action, such as `dd`, `aws`, or `okta`.
+          example: okta
+          type: string
+        source_connected:
+          description: Whether the organization has a connection that can run the action.
+          example: true
+          type: boolean
+        target:
+          description: What the action targets.
+          example: jane.doe@example.com
+          type: string
+      required:
+        - id
+        - source
+        - source_connected
+        - applied
+      type: object
+    SecurityAgentInvestigationMitigationSuggestion:
+      description: A suggested mitigation.
+      properties:
+        actions:
+          description: Actions that apply the mitigation.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationMitigationAction"
+          type: array
+        id:
+          description: ID of the mitigation.
+          example: mitigation-1
+          type: string
+        rationale:
+          description: Why the mitigation is suggested.
+          example: Only needed if the user doesn't confirm the login.
+          type: string
+        recommended:
+          description: Whether the mitigation is recommended.
+          example: false
+          type: boolean
+        scope_note:
+          description: What the mitigation applies to.
+          example: jane.doe@example.com
+          type: string
+        step:
+          description: Order in which to apply the mitigation, starting at 1.
+          example: 1
+          format: int64
+          type: integer
+        title:
+          description: Title of the mitigation.
+          example: Suspend the user
+          type: string
+      required:
+        - id
+        - title
+        - rationale
+        - step
+        - recommended
+      type: object
+    SecurityAgentInvestigationNoRunReason:
+      description: |-
+        Why `filter[signal_id]` returned no investigation. Set only on the first page of an empty result. The reason is
+        based on the organization's current settings. Poll again only on `investigation_not_started`, after the number
+        of seconds in the `Retry-After` header; treat the others as final for this signal.
+        - `investigation_not_started`: no investigation has started yet, but one may still start.
+        - `not_investigated`: no investigation started within an hour of the signal, so none is expected. The signal
+          was skipped for a reason this API doesn't report, such as its severity or a rate limit.
+        - `rule_not_enabled`: the signal's detection rule doesn't have Bits Security Analyst enabled, so no
+          investigation starts automatically.
+        - `signal_not_found`: the ID isn't a signal ID, or no signal with this ID exists in the organization.
+        - `org_not_activated`: the organization hasn't activated Bits Security Analyst.
+      enum:
+        - investigation_not_started
+        - not_investigated
+        - rule_not_enabled
+        - signal_not_found
+        - org_not_activated
+      example: investigation_not_started
+      type: string
+      x-enum-varnames:
+        - INVESTIGATION_NOT_STARTED
+        - NOT_INVESTIGATED
+        - RULE_NOT_ENABLED
+        - SIGNAL_NOT_FOUND
+        - ORG_NOT_ACTIVATED
+    SecurityAgentInvestigationResponse:
+      description: An investigation.
+      properties:
+        data:
+          $ref: "#/components/schemas/SecurityAgentInvestigationData"
+      required:
+        - data
+      type: object
+    SecurityAgentInvestigationResponseSuggestions:
+      description: Suggested responses to the signal.
+      properties:
+        mitigation_suggestions:
+          description: Suggested mitigations, in the order to apply them.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationMitigationSuggestion"
+          type: array
+        rule_tuning_suggestions:
+          $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningSuggestions"
+      type: object
+    SecurityAgentInvestigationRuleTuningCondition:
+      description: A condition of a rule tuning suggestion.
+      properties:
+        field:
+          description: Attribute the condition checks.
+          example: "@usr.device.id"
+          type: string
+        value:
+          description: Value the attribute is compared with.
+          example: 4b8f2c1e-9a7d-4e3b-8c5f-1d2e3f4a5b6c
+          type: string
+      required:
+        - field
+        - value
+      type: object
+    SecurityAgentInvestigationRuleTuningSuggestion:
+      description: A suggestion to tune the detection rule.
+      properties:
+        action_type:
+          description: Kind of change the suggestion makes to the rule.
+          example: create_suppression
+          type: string
+        conditions:
+          description: The conditions the change applies to.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningCondition"
+          type: array
+        description:
+          description: What the suggestion changes.
+          example: Don't generate signals for logins from devices the user has used before.
+          type: string
+        estimated_silenced_count:
+          description: Estimated number of signals the change would have silenced in the window.
+          example: 85
+          format: int64
+          type: integer
+        id:
+          description: ID of the suggestion.
+          example: suggestion-1
+          type: string
+        match_logic:
+          description: How the conditions combine, such as AND or OR.
+          example: AND
+          type: string
+        recommended:
+          description: Whether the suggestion is recommended.
+          example: true
+          type: boolean
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+        title:
+          description: Title of the suggestion.
+          example: Suppress logins from known devices
+          type: string
+        warning:
+          description: What the change could hide. It can be empty.
+          example: A stolen known device would no longer trigger this rule.
+          type: string
+        why:
+          description: Why the suggestion is made.
+          example: The user's known devices accounted for most benign signals.
+          type: string
+      required:
+        - id
+        - title
+        - action_type
+        - rule_id
+        - description
+        - match_logic
+        - conditions
+        - why
+        - recommended
+        - warning
+      type: object
+    SecurityAgentInvestigationRuleTuningSuggestions:
+      description: Suggestions to tune the detection rule that generated the signal.
+      properties:
+        occurrence_window_days:
+          description: Length of the window, in days.
+          example: 30
+          format: int64
+          type: integer
+        reasoning:
+          description: Why tuning the rule is suggested.
+          example: Most signals from this rule in the last 30 days were benign travel.
+          type: string
+        rule_id:
+          description: ID of the detection rule.
+          example: abc-def-ghi
+          type: string
+        rule_name:
+          description: Name of the detection rule.
+          example: Unusual login location for a user
+          type: string
+        rule_signal_total:
+          description: Number of signals the rule generated in the window.
+          example: 120
+          format: int64
+          type: integer
+        suggestions:
+          description: The tuning suggestions.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationRuleTuningSuggestion"
+          type: array
+        summary:
+          description: Summary of the suggestions.
+          example: The rule fires often for users who travel to known locations.
+          type: string
+      required:
+        - summary
+        - reasoning
+        - rule_id
+        - rule_name
+        - rule_signal_total
+        - occurrence_window_days
+        - suggestions
+      type: object
+    SecurityAgentInvestigationSignal:
+      description: Summary of the signal the investigation is about.
+      properties:
+        severity:
+          description: "Severity of the signal: `info`, `low`, `medium`, `high`, or `critical`."
+          example: medium
+          type: string
+        sources:
+          description: Sources of the signal.
+          example:
+            - okta
+          items:
+            type: string
+          type: array
+        tactic:
+          description: MITRE ATT&CK tactic, from the signal's `tactic` tag.
+          example: TA0001-initial-access
+          type: string
+        tags:
+          description: Tags of the signal, written `key:value`.
+          example:
+            - "source:okta"
+          items:
+            type: string
+          type: array
+        technique:
+          description: MITRE ATT&CK technique, from the signal's `technique` tag.
+          example: T1078-valid-accounts
+          type: string
+        timestamp:
+          description: Time the signal was generated.
+          example: "2026-10-30T14:02:11Z"
+          type: string
+        title:
+          description: Title of the signal.
+          example: Unusual login location for a user
+          type: string
+      type: object
+    SecurityAgentInvestigationState:
+      description: |-
+        State of the investigation: `investigating` while it runs, `completed` after it has a result, or `failed`
+        when it produced no result before its timeout.
+      enum:
+        - investigating
+        - completed
+        - failed
+      example: completed
+      type: string
+      x-enum-varnames:
+        - INVESTIGATING
+        - COMPLETED
+        - FAILED
+    SecurityAgentInvestigationStep:
+      description: A step of the investigation.
+      properties:
+        name:
+          description: Name of the step, usually the question it answers.
+          example: Has the user logged in from this location before?
+          type: string
+        summary:
+          description: Summary of what the step found. It can be empty.
+          example: Three earlier logins from the same country, on the same device.
+          type: string
+      required:
+        - name
+        - summary
+      type: object
+    SecurityAgentInvestigationType:
+      default: investigations
+      description: Type of the investigation resource.
+      enum:
+        - investigations
+      example: investigations
+      type: string
+      x-enum-varnames:
+        - INVESTIGATIONS
+    SecurityAgentInvestigationVerdict:
+      description: Verdict of the investigation. Only completed investigations have one.
+      enum:
+        - benign
+        - suspicious
+        - malicious
+      example: benign
+      type: string
+      x-enum-varnames:
+        - BENIGN
+        - SUSPICIOUS
+        - MALICIOUS
+    SecurityAgentInvestigationsListMeta:
+      description: Metadata of a page of investigations.
+      properties:
+        reason:
+          $ref: "#/components/schemas/SecurityAgentInvestigationNoRunReason"
+        total_count:
+          description: |-
+            Without `filter[signal_id]`, the number of signals that match the filters. With `filter[signal_id]`, the
+            number of investigations of that signal. Pages past the last page return 0.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - total_count
+      type: object
+    SecurityAgentInvestigationsListResponse:
+      description: A page of investigations.
+      properties:
+        data:
+          description: The investigations on this page.
+          items:
+            $ref: "#/components/schemas/SecurityAgentInvestigationListItem"
+          type: array
+        meta:
+          $ref: "#/components/schemas/SecurityAgentInvestigationsListMeta"
+      required:
+        - data
+        - meta
+      type: object
     SecurityAutomationRulesLinks:
       description: Pagination links for the list of automation rules.
       properties:
@@ -242629,6 +243462,332 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/security_agent/investigations:
+    get:
+      description: |-
+        List Bits Security Analyst investigations.
+
+        Without `filter[signal_id]`, returns the latest investigation of each signal, filtered, sorted, and paginated.
+        With `filter[signal_id]`, returns every investigation of that signal, newest first. When the signal has no
+        investigation, the first page carries `meta.reason`, which says why.
+      operationId: ListSecurityAgentInvestigations
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTitle"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterFrom"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTo"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterVerdict"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterState"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleType"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSeverity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSource"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTags"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterEntity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsSort"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsPageNumber"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsPageSize"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: The latest investigation of each signal
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-10-30T14:02:40Z"
+                          is_latest: true
+                          rule_id: abc-def-ghi
+                          signal:
+                            severity: medium
+                            sources:
+                              - okta
+                            tactic: TA0001-initial-access
+                            tags:
+                              - "source:okta"
+                              - "tactic:TA0001-initial-access"
+                              - "technique:T1078-valid-accounts"
+                            technique: T1078-valid-accounts
+                            timestamp: "2026-10-30T14:02:11Z"
+                            title: Unusual login location for a user
+                          signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                          state: completed
+                          updated_at: "2026-10-30T14:15:02Z"
+                          verdict: benign
+                        id: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+                        type: investigations
+                    meta:
+                      total_count: 1
+                investigation_not_started:
+                  summary: A signal with no investigation yet
+                  value:
+                    data: []
+                    meta:
+                      reason: investigation_not_started
+                      total_count: 0
+                not_investigated:
+                  summary: A signal that won't be investigated
+                  value:
+                    data: []
+                    meta:
+                      reason: not_investigated
+                      total_count: 0
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationsListResponse"
+          description: OK
+          headers:
+            Retry-After:
+              description: |-
+                Present when `meta.reason` is `investigation_not_started`: the number of seconds to wait before
+                listing the signal's investigations again.
+              schema:
+                description: Seconds to wait.
+                example: 60
+                format: int64
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: List Bits Security Analyst investigations
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/investigations/count:
+    get:
+      description: |-
+        Count completed Bits Security Analyst investigations by the values of one field. Buckets are sorted by
+        ascending count. With `field=entity` or `field=signal_source`, an investigation counts in the bucket of
+        each of its entities or sources.
+      operationId: CountSecurityAgentInvestigations
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsCountField"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTitle"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterFrom"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTo"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterVerdict"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterRuleType"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSeverity"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterSignalSource"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterTags"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationsFilterEntity"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        counts:
+                          - count: 3
+                            value: malicious
+                          - count: 41
+                            value: suspicious
+                          - count: 1250
+                            value: benign
+                      id: verdict
+                      type: investigation_counts
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationCountsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Count Bits Security Analyst investigations
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+  /api/v2/security_monitoring/security_agent/investigations/{investigation_id}:
+    get:
+      description: |-
+        Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and
+        response suggestions. While the investigation is running, the response has a `Retry-After` header.
+      operationId: GetSecurityAgentInvestigation
+      parameters:
+        - $ref: "#/components/parameters/SecurityAgentInvestigationID"
+        - $ref: "#/components/parameters/SecurityAgentInvestigationFields"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        conclusion: The login came from a location the user travels to regularly, on a known device.
+                        created_at: "2026-10-30T14:02:40Z"
+                        key_entities:
+                          actors:
+                            - type: user
+                              value: jane.doe@example.com
+                          targets:
+                            - sub_type: okta_app
+                              type: application
+                              value: Corporate VPN
+                        key_evidence:
+                          - category: Authentication
+                            finding: The user logged in from the same country three times in the last 30 days.
+                            source_steps:
+                              - Has the user logged in from this location before?
+                        response_suggestions:
+                          mitigation_suggestions:
+                            - actions:
+                                - applied: false
+                                  fqn: com.datadoghq.okta.suspend_user
+                                  id: action-1
+                                  name: Suspend user
+                                  source: okta
+                                  source_connected: true
+                                  target: jane.doe@example.com
+                              id: mitigation-1
+                              rationale: Only needed if the user doesn't confirm the login.
+                              recommended: false
+                              scope_note: jane.doe@example.com
+                              step: 1
+                              title: Suspend the user
+                          rule_tuning_suggestions:
+                            occurrence_window_days: 30
+                            reasoning: Most signals from this rule in the last 30 days were benign travel.
+                            rule_id: abc-def-ghi
+                            rule_name: Unusual login location for a user
+                            rule_signal_total: 120
+                            suggestions:
+                              - action_type: create_suppression
+                                conditions:
+                                  - field: "@usr.device.id"
+                                    value: 4b8f2c1e-9a7d-4e3b-8c5f-1d2e3f4a5b6c
+                                description: Don't generate signals for logins from devices the user has used before.
+                                estimated_silenced_count: 85
+                                id: suggestion-1
+                                match_logic: AND
+                                recommended: true
+                                rule_id: abc-def-ghi
+                                title: Suppress logins from known devices
+                                warning: A stolen known device would no longer trigger this rule.
+                                why: The user's known devices accounted for most benign signals.
+                            summary: The rule fires often for users who travel to known locations.
+                        rule_id: abc-def-ghi
+                        signal:
+                          severity: medium
+                          sources:
+                            - okta
+                          tactic: TA0001-initial-access
+                          tags:
+                            - "source:okta"
+                            - "tactic:TA0001-initial-access"
+                            - "technique:T1078-valid-accounts"
+                          technique: T1078-valid-accounts
+                          timestamp: "2026-10-30T14:02:11Z"
+                          title: Unusual login location for a user
+                        signal_id: AQAAAaGNHjq4XzqcIQAAAABBWm8xY0wybUFBQmNYSjl1QUFBQUFBQUE
+                        state: completed
+                        steps:
+                          - name: Has the user logged in from this location before?
+                            summary: Three earlier logins from the same country, on the same device.
+                        updated_at: "2026-10-30T14:15:02Z"
+                        verdict: benign
+                      id: 7f3c9a2e-5d14-4e8b-9c61-2a0b4f8d1e53
+                      type: investigations
+              schema:
+                $ref: "#/components/schemas/SecurityAgentInvestigationResponse"
+          description: OK
+          headers:
+            Retry-After:
+              description: |-
+                Present while `state` is `investigating`: the number of seconds to wait before getting the
+                investigation again.
+              schema:
+                description: Seconds to wait.
+                example: 300
+                format: int64
+                type: integer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get a Bits Security Analyst investigation
+      tags:
+        - Bits Security Analyst
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        To request access, contact [Datadog support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
   /api/v2/security_monitoring/signals:
     get:
       description: |-
@@ -262999,6 +264158,10 @@ tags:
   - description: |-
       Use the Bits AI endpoints to retrieve AI-powered investigations.
     name: Bits AI
+  - description: |-
+      Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an
+      investigation's verdict and findings, and count investigations.
+    name: Bits Security Analyst
   - description: |-
       Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the
       [CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)
