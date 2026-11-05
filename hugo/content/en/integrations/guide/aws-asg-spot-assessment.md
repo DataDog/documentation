@@ -10,8 +10,8 @@ further_reading:
   text: "Set up AWS Cloud Cost Management"
 ---
 
-{{< callout url="#" btn_hidden="true" header="false" >}}
-Spot migration assessment is in Preview. To request access, contact <a href="/help/">Datadog Support</a>.
+{{< callout url="https://www.datadoghq.com/product-preview/spot-migration-assessment/" header="false" >}}
+Spot migration assessment is in Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -20,7 +20,7 @@ Spot migration assessment is in Preview. To request access, contact <a href="/he
 The Spot migration assessment identifies Amazon EC2 Auto Scaling groups (ASGs) that are candidates for moving from On-Demand Instances to Spot Instances. Use it to compare estimated monthly savings, review Spot potential, and inspect compatible replacement instance types across connected AWS accounts and regions.
 <!-- vale Datadog.words_case_insensitive = YES -->
 
-The assessment uses collected AWS resources, up to 30 days of ASG metrics, and AWS pricing and interruption data. When available, Cloud Cost Management provides the current compute cost baseline.
+The assessment uses the AWS resource data that Datadog collects, up to 30 days of ASG metrics, and AWS pricing and interruption data. When available, Cloud Cost Management provides the current compute cost baseline.
 
 Spot potential helps prioritize groups for investigation. Before migrating, validate that the application can tolerate interruptions and run on the suggested instance types. The assessment does not change AWS resources.
 
@@ -30,7 +30,6 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 2. Enable resource collection for those accounts and regions with the [AWS integration's resource collection permissions][2]. The assessment needs ASG information and the EC2 launch settings those groups use.
 3. In the AWS integration's **Metric Collection** tab, enable the `AWS/AutoScaling` namespace. Check that metric filters include `aws.autoscaling.group_in_service_instances`.
 4. (Recommended) [Enable group metrics in AWS][3], including `GroupInServiceInstances`, so that estimates can use running-instance history.
-
 5. (Optional) [Set up Cloud Cost Management for AWS][8] to base current cost estimates on your actual AWS costs. Without cost data for an ASG, the assessment uses public On-Demand prices.
 
 The assessment doesn't require `AWS/EC2` metrics.
@@ -87,20 +86,20 @@ The current cost baseline depends on data availability:
 | **Current monthly** | Monthly compute cost estimated from recorded net amortized AWS costs in Cloud Cost Management, without custom cost adjustments. |
 | **Modeled current monthly** | Estimated compute cost at public On-Demand prices, adjusted by the **On-Demand discount** you enter. |
 
-Projected cost combines the remaining share of the current baseline with public Spot prices for the replacement types. For example, take a $1000 monthly baseline and a $400 estimate for the same capacity entirely on Spot. A 50% Spot mix projects $700 per month, or $300 in estimated savings.
+Projected cost combines the remaining share of the current baseline with public Spot prices for the replacement types. For example, take a $1,000 monthly baseline and a $400 estimate for the same capacity entirely on Spot. A 50% Spot mix projects $700 per month, or $300 in estimated savings.
 
 For public-price estimates, enter an effective **On-Demand discount** to compare Spot against discounted On-Demand rates. This control does not apply another discount to Cloud Cost Management costs. A discount that removes positive savings can change Spot potential to **LOW**.
 
 To explore other percentages, adjust the Spot percentage in **Projected cost at your Spot mix**. This updates projected costs and estimated savings for the selected mix. Spot potential continues to reflect the default 50% scenario.
 
-Public price estimates use Linux pricing and exclude software licensing charges. Estimates cover compute costs and do not guarantee a reduction in the AWS bill. The Cloud Cost Management scenario assumes commitments freed by migration can be used elsewhere. Review Savings Plans and Reserved Instance utilization before acting on estimated savings.
+Public-price estimates use Linux pricing and exclude software licensing charges. Estimates cover compute costs and do not guarantee a reduction in the AWS bill. The Cloud Cost Management scenario assumes commitments freed by migration can be used elsewhere. Review Savings Plans and Reserved Instance utilization before acting on estimated savings.
 
 ## Troubleshoot missing or stale assessment results
 
 | What you see | What to check |
 | --- | --- |
 | **Assessment is being prepared** | A completed assessment is not yet available. Check resource collection and permissions, then return after an assessment completes. |
-| An ASG is missing | Clear table filters and check the option to show groups outside migration scope. Verify account and region collection, running instances, and supported group configuration. Missing launch settings, pricing, or interruption data can prevent an assessment. |
+| An ASG is missing | Clear table filters and select **Show ASGs outside migration scope**. Verify account and region collection, running instances, and supported group configuration. Missing launch settings, pricing, or interruption data can prevent an assessment. |
 | No running-instance history | Verify AWS group metric publication and Datadog collection of `aws.autoscaling.group_in_service_instances`. Newly enabled collection does not provide a full 30-day history immediately. |
 | Public-price estimates instead of Cloud Cost Management costs | Verify [AWS Cloud Cost Management setup][8] and cost data attributed to the ASG for the assessment period. Public pricing is the fallback when usable cost data is unavailable. |
 | A history chart is absent | Charts are hidden when data is unavailable. Available cost history can still appear without running-instance history. |
