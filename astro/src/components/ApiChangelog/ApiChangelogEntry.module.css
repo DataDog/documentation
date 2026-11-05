@@ -1,0 +1,163 @@
+.api-changelog-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  /* The row gap only applies on phones, where the badge stacks above the
+     body. Matching the top padding keeps the badge from crowding the body. */
+  gap: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+  padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  background: var(--color-bg);
+}
+
+/* The badge takes its own column on wider screens. Every badge is the same
+   width, so the bodies line up. On phones the badge stacks above the body
+   instead. */
+@media (min-width: 768px) {
+  .api-changelog-entry {
+    grid-template-columns: var(--badge-width) minmax(0, 1fr);
+  }
+}
+
+.api-changelog-entry__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.api-changelog-entry__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.api-changelog-entry__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--badge-width);
+  height: var(--badge-height);
+  padding: 0 var(--space-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wide);
+  white-space: nowrap;
+}
+
+.api-changelog-entry__pill--added {
+  background: var(--color-status-success-solid-bg);
+  color: var(--color-status-success-solid-text);
+}
+
+.api-changelog-entry__pill--modified {
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+}
+
+.api-changelog-entry__pill--deprecated {
+  background: var(--color-status-attention-solid-bg);
+  color: var(--color-status-attention-solid-text);
+}
+
+.api-changelog-entry__pill--breaking {
+  background: var(--color-status-danger-solid-bg);
+  color: var(--color-status-danger-solid-text);
+}
+
+/* Trims the leading above the first line, so the tops of its capitals line
+   up with the top of the badge beside it. The small padding is an optical
+   correction: flush capitals read as sitting above the badge's rounded edge. */
+.api-changelog-entry__product {
+  text-box: trim-start cap alphabetic;
+  padding-block-start: var(--space-2xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+a.api-changelog-entry__product-name {
+  color: var(--color-brand);
+}
+
+.api-changelog-entry__title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Semibold monospace reads larger than the title's proportional text at the
+   global inline `code` size, so title code steps down one size. */
+.api-changelog-entry__title code {
+  font-size: var(--font-size-2xs);
+}
+
+/* Inline flow, not flex: a flex list wraps as one block, dropping below the
+   label once it's too long to fit beside it. Inline items start beside the
+   label and wrap under it. The items' block margins space wrapped lines
+   apart, and the row's negative margins cancel them at its outer edges. */
+.api-changelog-entry__operations-row {
+  margin-block: calc(var(--space-xs) / -2);
+}
+
+.api-changelog-entry__operations-label {
+  margin-inline-end: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Specificity bump and ::before reset defeat the global `.prose ul` /
+   `.prose ul li::before` en-dash bullet styles in global.css. */
+.api-changelog-entry .api-changelog-entry__operations {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.api-changelog-entry__operation-item {
+  display: inline-block;
+  margin-block: calc(var(--space-xs) / 2);
+  margin-inline-end: var(--space-xs);
+}
+
+.api-changelog-entry__operations .api-changelog-entry__operation-item::before {
+  content: none;
+}
+
+.api-changelog-entry__operation {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-regular);
+  overflow-wrap: anywhere;
+}
+
+/* The global inline `code` size would otherwise apply inside a link, making
+   linked operations a different size from unlinked ones. */
+a.api-changelog-entry__operation code {
+  font-size: inherit;
+}
+
+/* Underlines run through the monospace operation IDs and make them harder
+   to read, so the links show one only on hover and focus. */
+a.api-changelog-entry__operation {
+  text-decoration: none;
+}
+
+a.api-changelog-entry__operation:hover,
+a.api-changelog-entry__operation:focus-visible {
+  text-decoration: underline;
+}
+
+/* The global inline `code` color would otherwise override the link's hover
+   color, leaving the text a different color from its underline. */
+a.api-changelog-entry__operation:hover code,
+a.api-changelog-entry__operation:focus-visible code {
+  color: inherit;
+}

@@ -13,7 +13,7 @@ further_reading:
   - link: /llm_observability/improve/offline_experiments
     tag: Documentation
     text: Run offline experiments to test improvements
-  - link: /llm_observability/improve/access_control
+  - link: /llm_observability/data_governance/access_control
     tag: Documentation
     text: Restrict a queue to specific teams or roles
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
@@ -412,4 +412,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
 [16]: /llm_observability/data_governance/
-[17]: /llm_observability/improve/access_control/
+[17]: /llm_observability/data_governance/access_control/

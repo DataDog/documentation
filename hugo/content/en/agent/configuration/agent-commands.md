@@ -26,7 +26,7 @@ List of commands to start the Datadog Agent:
 
 | Platform   | Command                                                            |
 |------------|--------------------------------------------------------------------|
-| AIX        | `startsrc -s datadog-agent`                                        |
+| AIX        | `startsrc -g datadog-agent`                                        |
 | Linux      | See the [Agent documentation][1] for your OS.                      |
 | Docker     | Use the [installation command][2].                                 |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
@@ -40,7 +40,7 @@ List of commands to stop the Datadog Agent:
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
-| AIX        | `stopsrc -s datadog-agent`                                                       |
+| AIX        | `stopsrc -g datadog-agent`                                                       |
 | Linux      | See the [Agent documentation][1] for your OS.                                    |
 | Docker     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
@@ -54,6 +54,7 @@ List of commands to restart the Datadog Agent:
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
+| AIX        | `stopsrc -g datadog-agent`, then `startsrc -g datadog-agent`                     |
 | Linux      | See the [Agent documentation][1] for your OS.                                    |
 | Docker     | Use the [installation command][2].                                               |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
@@ -70,7 +71,7 @@ List of commands to display the status of the Datadog Agent:
 
 | Platform        | Command                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
-| AIX             | `lssrc -s datadog-agent`                                                      |
+| AIX             | `lssrc -g datadog-agent`                                                      |
 | Linux           | See the [Agent documentation][1] for your OS.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |

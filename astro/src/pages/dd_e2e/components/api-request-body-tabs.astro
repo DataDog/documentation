@@ -1,0 +1,57 @@
+---
+if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ApiRequestBodyTabs from "@components/ApiRequestBodyTabs/ApiRequestBodyTabs.astro";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
+
+const title = "ApiRequestBodyTabs";
+
+const schema: SchemaField[] = [
+  {
+    name: "title",
+    type: "string",
+    required: true,
+    deprecated: false,
+    readOnly: false,
+    description: "The title.",
+  },
+];
+
+const titledExamples = [
+  { name: "First example", value: '{\n  "title": "first"\n}' },
+  { name: "Second example", value: '{\n  "title": "second"\n}' },
+  { name: "Third example", value: '{\n  "title": "third"\n}' },
+];
+---
+
+<BaseLayout title={title}>
+  <div class="docs-page">
+    <div>
+      <h1>{title}</h1>
+
+      <h2>Examples</h2>
+
+      <h3>Titled examples</h3>
+      <div id="titled">
+        <ApiRequestBodyTabs
+          schema={schema}
+          examples={titledExamples}
+          showExampleTitles
+        />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .docs-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+
+  h2 {
+    margin-top: var(--space-xl);
+  }
+</style>

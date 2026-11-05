@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "rule_proposals",
+    "attributes": {
+      "inputType": "natural_language",
+      "input": "Detect repeated failed Okta logins followed by a successful login from the same IP."
+    }
+  }
+}

@@ -225,7 +225,7 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
         (...)
     ```
 
-6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6].
+6. Verify your metrics are reporting to Datadog on your [Metrics Catalog page][6].
 
 ## Further Reading
 
@@ -236,4 +236,4 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
 [3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: /agent/configuration/agent-commands/#restart-the-agent
 [5]: /agent/configuration/agent-commands/#agent-information
-[6]: https://app.datadoghq.com/metric/summary
+[6]: https://app.datadoghq.com/metric/catalog
