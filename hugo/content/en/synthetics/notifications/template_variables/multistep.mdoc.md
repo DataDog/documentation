@@ -103,40 +103,59 @@ Use these variables to access information about the step that caused a test fail
 `{{synthetics.failed_step.name}}`
 : Multistep API shortcut for `{{synthetics.attributes.result.steps.<step-index>.name}}`
 
+`{{synthetics.failed_step.request.url}}`
+: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.request.url}}`, the URL that the failed step requested
+
+`{{synthetics.failed_step.response.statusCode}}`
+: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.response.statusCode}}`, the HTTP status code that the failed step received (for example, `403`)
+
 ### Step execution details
 
-Path: `synthetics.attributes.variables.extracted`
+Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
+These variables contain metadata and results for each step that ran. For information on how to access the `<step-index>`, see [Step summary][1].
 
-`synthetics.attributes.variables.extracted.steps.allowFailure`
+`synthetics.attributes.result.steps.<step-index>.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
-`synthetics.attributes.variables.extracted.steps.duration`
+`synthetics.attributes.result.steps.<step-index>.duration`
 : Step execution duration in milliseconds
 
-`synthetics.attributes.variables.extracted.steps.failure`
+`synthetics.attributes.result.steps.<step-index>.failure`
 : Failure information object containing `.code` and `.message`
 
-`synthetics.attributes.variables.extracted.steps.id`
+`synthetics.attributes.result.steps.<step-index>.id`
 : Unique step identifier
 
-`synthetics.attributes.variables.extracted.steps.isCritical`
+`synthetics.attributes.result.steps.<step-index>.isCritical`
 : Whether the step is critical to the test
 
-`synthetics.attributes.variables.extracted.steps.status`
+`synthetics.attributes.result.steps.<step-index>.status`
 : Step execution status
 
-`synthetics.attributes.variables.extracted.steps.type`
-: Type of step being executed
+`synthetics.attributes.result.steps.<step-index>.type`
+: Type of step being executed (for example, `http`)
 
 **Multistep-specific:**
 
-`synthetics.attributes.variables.extracted.name`
+`synthetics.attributes.result.steps.<step-index>.name`
 : Step name
 
-`synthetics.attributes.variables.extracted.type`
-: Step type
+`synthetics.attributes.result.steps.<step-index>.request.method`, `synthetics.attributes.result.steps.<step-index>.request.url`
+: HTTP method and URL of the step request
+
+`synthetics.attributes.result.steps.<step-index>.response.statusCode`
+: HTTP status code of the step response
+
+`synthetics.attributes.result.steps.<step-index>.response.bodySize`, `synthetics.attributes.result.steps.<step-index>.response.httpVersion`
+: Body size and HTTP version of the step response
+
+`synthetics.attributes.result.steps.<step-index>.response.cacheHeaders`, `synthetics.attributes.result.steps.<step-index>.response.cdn`
+: Caching headers and CDN information of the step response
+
+{% alert level="info" %}
+Step response headers and bodies aren't available in notifications.
+{% /alert %}
 
 {% /if %}
 <!-- end Step details -->
@@ -150,3 +169,5 @@ These are step execution metadata and results containing detailed information ab
 <!-- end Variables -->
 
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
+
+[1]: #step-summary
