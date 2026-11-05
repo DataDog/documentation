@@ -83,7 +83,7 @@ Before you create an experiment metric from Agent Observability data:
 - To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value or a `pass` or `fail` assessment.
 - Add a `subject_identifier` tag to each trace or evaluation. The value must match the `targetingKey` that you use to evaluate the experiment's feature flag. For setup instructions, see [Online Experiments][17].
 
-<div class="alert alert-warning"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw Boolean and categorical values cannot be used directly as experiment metrics.</div>
+<div class="alert alert-info"><strong>Supported evaluation types</strong>: Experiment metrics can use the average of a <code>score</code> evaluation, or the <strong>pass rate</strong> of any evaluation that returns a pass or fail assessment. Pass rate counts <code>pass</code> as 1 and <code>fail</code> as 0, and excludes evaluations without an assessment. Raw Boolean and categorical values cannot be used directly as experiment metrics.</div>
 
 ### Create a metric from Agent Observability data
 
