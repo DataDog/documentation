@@ -177,8 +177,6 @@ Disable automatic client reroute for the Agent's IBM driver so each collector st
    - **Windows**: Add `DB2DSDRIVER_CFG_PATH=<PATH>` to the `Environment` multi-string value of the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\datadogagent` registry key.
    - **Containers**: Copy `db2dsdriver.cfg` into the image or mount it into the container. Set `DB2DSDRIVER_CFG_PATH` to the file's absolute path inside the container.
 
-   Alternatively, place the file in the driver's default configuration directory, such as `/opt/datadog-agent/embedded/lib/python3.13/site-packages/clidriver/cfg/` on Linux.
-
 Apply these settings to the Agent's driver configuration, not your application's driver configuration.
 
 After configuring the check, driver, and secret backend, [restart the Agent][17].
