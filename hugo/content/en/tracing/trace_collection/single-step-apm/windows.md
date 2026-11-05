@@ -175,6 +175,13 @@ The default behavior applies to processes on eligible hosts that don't match any
 
 Host groups are reusable collections of hosts that you can target with instrumentation rules. Use host groups to apply rules to part of your fleet, such as canary hosts for a gradual rollout.
 
+Host groups work in the following ways:
+
+- Groups are dynamic. When a new host matches a group's filter, Datadog adds the host to the group automatically.
+- A host can belong to more than one host group.
+- All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
+- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
+
 To create a host group:
 
 1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Hosts in Scope{{< /ui >}} card and click {{< ui >}}Manage host groups{{< /ui >}}.
@@ -185,16 +192,9 @@ To create a host group:
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-To change the order of host groups, drag a group by its handle in the group list.
+To change the order of host groups, drag a group by its handle in the group list. Group order affects [how rules are evaluated](#how-rules-are-evaluated).
 
 {{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
-
-##### Host group membership
-
-- Host groups are dynamic. When a new host matches the filter of an existing host group, Datadog adds the host to that group automatically.
-- A host can belong to more than one host group.
-- All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
-- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
 
 #### Create instrumentation rules
 

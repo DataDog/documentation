@@ -381,6 +381,12 @@ The default behavior controls whether the workload targeting in your Agent confi
 
 Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules. Use cluster groups to apply rules to some of your clusters, such as staging clusters for a gradual rollout.
 
+Cluster groups work in the following ways:
+
+- Groups are dynamic. When a new cluster matches a group's filter, Datadog adds the cluster to the group automatically.
+- A cluster can belong to more than one cluster group.
+- Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
+
 To create a cluster group:
 
 1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Clusters in Scope{{< /ui >}} card and click {{< ui >}}Manage cluster groups{{< /ui >}}.
@@ -388,15 +394,9 @@ To create a cluster group:
 1. Click {{< ui >}}Add Clusters{{< /ui >}}, then search for and select the clusters to add.
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-To change the order of cluster groups, drag a group by its handle in the group list.
+To change the order of cluster groups, drag a group by its handle in the group list. Group order affects [how rules are evaluated](#how-rules-are-evaluated).
 
 <!-- TODO: Add screenshot of the Cluster Groups page with at least one cluster group above the All clusters group. Requires eligible clusters. -->
-
-##### Cluster group membership
-
-- Cluster groups are dynamic. When a new cluster matches the filter of an existing cluster group, Datadog adds the cluster to that group automatically.
-- A cluster can belong to more than one cluster group.
-- Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
 
 #### Create instrumentation rules
 
