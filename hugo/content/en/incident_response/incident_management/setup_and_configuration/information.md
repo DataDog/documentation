@@ -52,7 +52,9 @@ On the [Datadog Incidents page][5], you can search for private incidents using t
 
 ### Separate security incidents from operational incidents
 
-To handle security incidents separately from operational incidents, create a dedicated incident type for them. Each incident type has its own settings and its own incident automations, so you can, for example, run a security-specific workflow. Incident types don't have their own access controls; to restrict who can see sensitive incidents, declare them as private incidents.
+To handle security incidents separately from operational incidents, create a dedicated incident type for them. Each incident type has its own settings and incident automations, so you can run a workflow that applies only to security incidents.
+
+Incident types don't have their own access controls. To restrict who can see sensitive incidents, declare them as private incidents.
 
 ### Private incidents in Slack
 
