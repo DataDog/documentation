@@ -9,6 +9,7 @@ algolia:
             'Okta',
             'Claude',
             'Anthropic',
+            'OIDC',
             'AI agent',
             'MCP',
             'ID-JAG',
@@ -27,29 +28,80 @@ further_reading:
     - link: '/account_management/saml/'
       tag: 'Documentation'
       text: 'Configure SAML single sign-on'
+    - link: 'https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/'
+      tag: 'External Site'
+      text: 'Identity Assertion JWT Authorization Grant'
+    - link: 'https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization'
+      tag: 'External Site'
+      text: 'MCP Enterprise-Managed Authorization'
 ---
 
 ## Overview
 
-Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized. Without it, every user authorizes the agent individually through a browser consent screen. With it, an administrator grants that access centrally, and users skip the per-user consent step. Users still act as themselves, so Datadog applies their permissions and records their actions in the audit trail.
+Connecting an AI agent to Datadog across an organization creates two problems. Administrators have no central control over which agents reach their data, and every user has to click through a consent screen before the agent works.
 
-For this flow, a trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, or any other trusted issuer configured for your organization.
+Cross-App Access (XAA) solves both. An administrator authorizes the agent centrally for the whole organization, through the identity provider the organization already runs, and users connect without being prompted.
 
-Claude is the only agent that supports Cross-App Access, and it works with any trusted issuer. Claude supports Cross-App Access on its Team and Enterprise plans. With Claude Auto-Connect, Claude is both the trusted issuer and the agent.
+What does not change is equally important: each user still acts as themselves. Datadog applies that user's own permissions to every call the agent makes, and the audit trail records the action under their name. Authorizing the agent centrally gives no one more access than they already have.
+
+For example, an engineer asks Claude why a service is throwing errors. Claude queries Datadog as that engineer, returns only the data that engineer is allowed to see, and the query lands in the audit trail under their name. The engineer never sees a Datadog consent screen.
+
+### Who this is for
+
+Cross-App Access is for Datadog administrators rolling an AI agent out to a team or an entire organization, who want that access to follow the identity provider they already run. You need the `org_management` permission in Datadog and admin access to your identity provider.
+
+If you are an individual connecting Claude to your own Datadog account, you do not need this page. Use the standard connector sign-in flow instead.
+
+### How it works
+
+Three parties take part:
+
+- **The agent** is the OAuth client that calls the Datadog API, known as the MCP client in MCP terms. Claude is the only agent that supports Cross-App Access, and it works with any trusted issuer.
+- **The trusted issuer** is the system that vouches for the user. It is either your identity provider or Claude itself.
+- **Datadog** owns the data, decides which scopes the agent receives, and issues the access token the agent uses.
+
+When a user asks the agent for something in Datadog:
+
+1. The user signs in to the agent.
+2. The agent asks the issuer for a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant), naming Datadog as the target.
+3. The issuer applies your access policy and signs the ID-JAG if the user is allowed.
+4. The agent presents the ID-JAG to Datadog.
+5. Datadog verifies the issuer's signature, resolves which Datadog user the token names, and returns an access token belonging to that user.
+6. The agent calls the Datadog API with that access token.
+
+Because the access token belongs to the user, every permission check and audit record behaves as though the user made the call directly.
+
+Each product names this feature differently: Okta calls it Cross App Access, Claude calls it managed authorization, and the MCP specification calls it Enterprise-Managed Authorization. All three describe the same exchange.
+
+### Choose your issuer
+
+Your choice of issuer shapes the rest of the setup, so make it before you start.
+
+| If your organization                                                  | Use                               | What you set up                                                                      |
+| --------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| Uses Okta for SAML single sign-on to Datadog                          | **Okta**                          | Okta vouches for users, and you register Claude as an AI Agent in Okta               |
+| Wants Claude to manage the connection, with no identity provider work | **Claude** (Claude Auto-Connect)  | Claude is both the issuer and the agent, and matches users by email address          |
+| Uses another SAML identity provider that can issue ID-JAGs            | **Custom issuer**                 | Your identity provider vouches for users, and you configure the token claims yourself |
+
+You can trust more than one issuer. If you do, complete the setup for each.
+
+Whichever you choose, the path is the same: enable Cross-App Access in Datadog and add the issuer's URL, set up the issuer, choose which scopes the agent may use, then verify the result.
 
 ## Prerequisites
 
-For every issuer:
+These apply whichever issuer you use:
 
 - You have the `org_management` permission in Datadog.
 - Each user of your AI agents exists in your Datadog organization.
+- Your organization is on a Claude Team or Enterprise plan. Claude is the only agent that supports Cross-App Access, so this applies whichever issuer you use.
 
 {{< tabs >}}
 {{% tab "Okta" %}}
 
 - Your organization uses Okta for SAML single sign-on to Datadog. The Okta issuer resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on][1].
-- In Okta, each user is assigned to both the Okta application for the AI agent and the Okta application for Datadog.
+- In Okta, each user is assigned to both the Okta application for Claude and the Okta application for Datadog.
 - Your Okta tenant has the {{< ui >}}AI Agent Identity Assertion{{< /ui >}} and {{< ui >}}Agent to Agent Connections{{< /ui >}} features enabled, and you have Okta Super Administrator access.
+- You are an admin on your organization's Claude plan. The last step of the Okta setup adds the Datadog connector in Claude.
 
 [1]: /account_management/saml/
 
@@ -65,7 +117,7 @@ For every issuer:
 {{% tab "Custom issuer" %}}
 
 - Your organization uses SAML single sign-on to Datadog, and the issuer is your SAML identity provider. Datadog resolves users through the SAML identity in the token, so a custom issuer does not work without it. See [Configure SAML single sign-on][1].
-- Your issuer can issue ID-JAGs that meet the [token requirements](#set-up-your-issuer) in its setup tab.
+- Your issuer can issue ID-JAGs that meet the token requirements in the **Custom issuer** tab of [Set up your issuer](#set-up-your-issuer).
 
 [1]: /account_management/saml/
 
@@ -74,7 +126,9 @@ For every issuer:
 
 ## Configure Cross-App Access in Datadog
 
-Enable Cross-App Access in Datadog before you configure the issuer. Datadog rejects tokens for organizations that have not enabled Cross-App Access.
+Start here, before you configure the issuer. Datadog rejects tokens for organizations that have not enabled Cross-App Access.
+
+This page is also where you collect two values your issuer needs, the organization UUID and the agent client ID, so keep it open while you work through [Set up your issuer](#set-up-your-issuer).
 
 Navigate to [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}}][1].
 
@@ -94,6 +148,8 @@ Every issuer URL must use `https` and a fully qualified, lowercase domain name, 
 
 To stop trusting an issuer, remove it from the {{< ui >}}Issuer URLs{{< /ui >}} list. Datadog stops accepting new ID-JAGs from the issuer. Access tokens that Datadog already issued stay valid until they expire. To cut off access immediately, revoke the user's access to the application in [Mobile and Third-Party Access][2].
 
+Removing the issuer stops Datadog from accepting its tokens, but it does not change the agent's configuration. To retire a setup completely, also turn off managed authorization for the Datadog connector in Claude. Otherwise Claude keeps requesting tokens that Datadog rejects.
+
 ### Copy your organization UUID
 
 Copy the value in the {{< ui >}}Org UUID{{< /ui >}} field. The issuer sends this value as the `aud_tenant` claim, which tells Datadog which organization a token targets when several organizations share one issuer.
@@ -108,7 +164,7 @@ Click {{< ui >}}Manage App{{< /ui >}} on a row to open the scope settings for th
 
 ## Set up your issuer
 
-Select the issuer you use. Most organizations use Okta or Claude; use a custom issuer only if your identity provider is neither. If you trust more than one issuer, complete the setup for each.
+Open the tab for the issuer you picked in [Choose your issuer](#choose-your-issuer). Each tab covers the values you exchange, the issuer URL to use, the configuration steps, and how that issuer handles scopes.
 
 {{< tabs >}}
 {{% tab "Okta" %}}
@@ -163,6 +219,13 @@ Complete the following steps in the Okta Admin Console as a Super Administrator.
 Set {{< ui >}}Scope Condition{{< /ui >}} to {{< ui >}}Allow all{{< /ui >}}. Okta does not filter scopes: with {{< ui >}}Allow all{{< /ui >}}, Okta copies whatever Claude requests into the token, and Datadog decides what to grant. See [Control scopes in Datadog](#control-scopes-in-datadog).
 
 <div class="alert alert-warning">Do not enter a list of scopes in Okta. Okta rejects any token request that contains a scope outside the list. The integration then fails with an error instead of falling back to narrower access.</div>
+
+#### Troubleshooting
+
+- If token exchange fails while every value looks correct, confirm that Anthropic's public key is on the AI Agent's {{< ui >}}Credentials{{< /ui >}} tab. Okta issues no token until the key is in place, and this is the most common cause of a failed first setup.
+- If Okta rejects the token request with a scope error, confirm that {{< ui >}}Scope Condition{{< /ui >}} is set to {{< ui >}}Allow all{{< /ui >}} rather than a list of scopes.
+- If the agent is not activated, confirm that the AI Agent has an owner assigned. Okta does not allow activation without one.
+- Saving the issuer URL in Datadog does not confirm that the connection works. Complete [Verify the configuration](#verify-the-configuration) before you roll the setup out.
 
 [2]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
 
@@ -240,12 +303,44 @@ The agent requests an ID-JAG from your issuer with OAuth 2.0 Token Exchange ([RF
 
 Configure your issuer to issue ID-JAGs for Datadog that meet these requirements:
 
-- **Discovery**: The issuer publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you added in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet.
-- **Signature**: The token's `typ` header is `oauth-id-jag+jwt`. The issuer signs the token with an asymmetric algorithm (RSA with a 2048-bit to 4096-bit key, ECDSA, or EdDSA) using a key it publishes at the `jwks_uri`.
+- **Discovery**: The issuer publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you added in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet. Publish a signing key at the `jwks_uri` before you sign any token with it.
+- **Signature**: The token's `typ` header is `oauth-id-jag+jwt`. The issuer signs the token with an asymmetric algorithm (RSA with a 2048-bit to 4096-bit key, ECDSA, or EdDSA) using a key it publishes at the `jwks_uri`. Include a `kid` header that matches the key.
 - **Audience**: The `aud` claim is the Datadog authorization server URL for your Datadog site, {{< region-param key="mcp_xaa_issuer_url" code="true" >}}, and `aud_tenant` is your [Datadog organization UUID](#copy-your-organization-uuid).
 - **Client**: The `client_id` claim is the agent client ID from the [{{< ui >}}Supported agents{{< /ui >}}](#copy-the-agent-client-id) table.
 - **User**: The `sub_id` claim identifies the user by their SAML assertion, with `format` set to `saml-nameid`, `nameid` set to the user's Datadog handle, `nameid_format` set, and `issuer` set to the entity ID of the SAML identity provider configured for your Datadog organization.
 - **Lifetime**: The token carries `exp`, `iat`, and a unique `jti`. Datadog rejects a `jti` it has already seen.
+
+The following example shows the decoded header and payload of an ID-JAG that meets these requirements. Replace each placeholder with your own value, and replace `<DATADOG_MCP_URL>` with {{< region-param key="mcp_xaa_issuer_url" code="true" >}}.
+
+Header:
+
+```json
+{
+  "typ": "oauth-id-jag+jwt",
+  "alg": "RS256",
+  "kid": "<YOUR_SIGNING_KEY_ID>"
+}
+```
+
+Payload:
+
+```json
+{
+  "iss": "<YOUR_ISSUER_URL>",
+  "aud": "<DATADOG_MCP_URL>",
+  "aud_tenant": "<YOUR_DATADOG_ORG_UUID>",
+  "client_id": "<AGENT_CLIENT_ID>",
+  "sub_id": {
+    "format": "saml-nameid",
+    "nameid": "<USER_DATADOG_HANDLE>",
+    "nameid_format": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
+    "issuer": "<YOUR_SAML_IDP_ENTITY_ID>"
+  },
+  "jti": "<UNIQUE_TOKEN_ID>",
+  "iat": 1762300000,
+  "exp": 1762300300
+}
+```
 
 #### Troubleshooting
 
@@ -272,6 +367,10 @@ To set the scopes Claude is allowed in Datadog:
 **Note**: Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][3].
 
 ## Verify the configuration
+
+Saving an issuer URL does not confirm that the connection works. Verify the setup before you roll it out.
+
+If you use Claude as the issuer, click {{< ui >}}Run test{{< /ui >}} in the Datadog connector's {{< ui >}}Managed authorization{{< /ui >}} setup and confirm that every check passes. The Okta and custom issuer paths have no equivalent test, so verify those with a live request.
 
 Sign in to Claude as a user who meets the prerequisites for your issuer, then run a request that calls Datadog. A successful call confirms the full path: the issuer mints the token, Datadog accepts it, and Datadog resolves the user.
 
