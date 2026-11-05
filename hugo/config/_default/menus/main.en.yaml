@@ -2955,6 +2955,26 @@ menu:
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
+    - name: Components
+      url: incident_response/status_pages/components/
+      parent: status_pages
+      identifier: status_pages_components
+      weight: 1
+    - name: Notices
+      url: incident_response/status_pages/notices/
+      parent: status_pages
+      identifier: status_pages_notices
+      weight: 2
+    - name: Notice Templates
+      url: incident_response/status_pages/templates/
+      parent: status_pages
+      identifier: status_pages_templates
+      weight: 3
+    - name: Subscriptions
+      url: incident_response/status_pages/subscriptions/
+      parent: status_pages
+      identifier: status_pages_subscriptions
+      weight: 4
     - name: Work Management
       url: incident_response/work_management/
       pre: case-management
