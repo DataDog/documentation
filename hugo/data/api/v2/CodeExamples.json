@@ -69,11 +69,31 @@
   "CreateActionConnection": [
     {
       "group": "action_connection",
+      "suffix": "_4171110267",
+      "description": "Create a GCP Action Connection with AWS Secrets Manager references"
+    },
+    {
+      "group": "action_connection",
       "suffix": "",
       "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_4258732703",
+      "description": "Create an Anthropic Action Connection with an AWS Secrets Manager API token"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_4217378621",
+      "description": "Create an HTTP Action Connection with an AWS Secrets Manager token"
     }
   ],
   "UpdateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "_426384263",
+      "description": "Update a GCP Action Connection with a versioned AWS Secrets Manager reference"
+    },
     {
       "group": "action_connection",
       "suffix": "",
@@ -579,6 +599,11 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_3323862424",
+      "description": "Upload Custom Costs file marked as an AI provider file returns \"Accepted\" response"
     }
   ],
   "ValidateQuery": [
@@ -1834,6 +1859,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_292428701",
+      "description": "Create a monitor notification rule with rule options returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1379932371",
       "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
@@ -1867,6 +1897,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_365435820",
+      "description": "Update a monitor notification rule with rule options returns \"OK\" response"
     },
     {
       "group": "monitors",

@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41180
+    operations:
+      - CreateRumMetric
+      - DeleteRumMetric
+      - GetRumMetric
+      - ListRumMetrics
+      - UpdateRumMetric
+    title: Document RUM-based metrics API behavior and constraints

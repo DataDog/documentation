@@ -107,7 +107,7 @@ Remove rules that are no longer needed. When you delete a rule, Datadog recomput
 
 ### Override rules for a specific metric
 
-To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
+To exempt a metric from tag rules, open the metric's details side panel in the Metrics Catalog, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
 
 To reapply rules, restore the metric's default configuration from the same panel.
 
