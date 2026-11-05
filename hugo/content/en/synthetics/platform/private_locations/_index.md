@@ -660,7 +660,9 @@ Example:
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-pl-worker.exe --config "C:\ProgramData\Datadog-Synthetics\worker-config.json"
 ```
 
-FIPS 140-2 cryptographic mode is not available for the standalone Windows worker. It applies only to the Windows service. Enable FIPS mode during installation with the **Enable FIPS 140-2 cryptographic mode** option or the `ENABLE_FIPS=1` MSI parameter.
+FIPS 140-2 cryptographic mode is not available for the standalone Windows worker. It applies only to the Windows service. Enable FIPS mode during installation with the **Enable FIPS 140-2 cryptographic mode** option or the `ENABLE_FIPS=1` MSI parameter. For the installer parameters, see the [Install your private location][101] section.
+
+[101]: /synthetics/platform/private_locations/?tab=windowsviacli#install-your-private-location
 
 {{% /tab %}}
 {{< /tabs >}}
