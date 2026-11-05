@@ -174,7 +174,7 @@ Based on your DogStatsD packets per second, use the following table to set resou
 
 If you know your peak number of active contexts, size memory from contexts instead. Set the memory request and limit to at least 128 MiB plus 2.5 KiB per context. For example, 1,000,000 contexts requires about 2.5Gi.
 
-Datadog recommends not setting a CPU limit on the `agent-data-plane` container. DogStatsD traffic volumes can fluctuate, and CPU throttling can cause dropped packets. If your cluster requires a CPU limit, set it well above observed peaks.
+Datadog recommends not setting a CPU limit on the `agent-data-plane` container. DogStatsD traffic volume can fluctuate, and CPU throttling can cause dropped packets. If your cluster requires a CPU limit, set it well above observed peaks.
 
 To measure your DogStatsD volume, use the following metrics from the Agent's [OpenMetrics telemetry endpoint](#agent-telemetry) (`localhost:5000/telemetry`):
 
