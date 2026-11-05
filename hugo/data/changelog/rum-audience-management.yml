@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41326
+    operations:
+      - CreateConnection
+      - GetAccountFacetInfo
+      - GetUserFacetInfo
+      - ListConnections
+      - UpdateConnection
+    title: Fix rum-audience-management spec drift against service behavior

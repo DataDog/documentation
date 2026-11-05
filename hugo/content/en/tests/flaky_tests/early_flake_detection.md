@@ -93,7 +93,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 {{% /tab %}}
 
@@ -118,7 +118,7 @@ The following Datadog library versions add pagination support on the known tests
 | `dd-trace-dotnet`      | 3.42.0          |
 | `ddtrace` (Python)     | 4.6.0           |
 | `datadog-ci` (Ruby)    | 1.27.0          |
-| `dd-trace-go/v2`       | 2.8.0           |
+| `ddtest` (Go)          | 1.14.0          |
 | `dd-sdk-swift-testing` | 2.6.7           |
 
 ## Explore results in the Test Optimization Explorer

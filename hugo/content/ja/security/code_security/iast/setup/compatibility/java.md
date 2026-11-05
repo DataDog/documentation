@@ -4,27 +4,26 @@ code_lang_weight: 0
 title: Java 互換性要件
 type: multi-code-lang
 ---
-
-## アプリケーションセキュリティ機能
+## アプリケーションセキュリティ機能 {#application-security-capabilities}
 
 指定されたトレーサーバージョンに対して、Java ライブラリでサポートされるアプリケーションセキュリティ機能は以下のとおりです:
 
-| アプリケーションセキュリティ機能  | Java トレーサーの最小バージョン |
+| アプリケーションセキュリティ機能 | Java トレーサーの最小バージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
-| API セキュリティ | 1.31.0 |
+| API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
 | ブロックされたリクエストへの対応をカスタマイズする | 1.11.0 |
-| ソフトウェア構成分析 (SCA) | 1.1.4 |
-| コードセキュリティ  | 1.15.0|
+| Software Composition Analysis (SCA) | 1.1.4 |
+| Code Security  | 1.15.0|
 | ユーザーアクティビティイベントの自動追跡 | 1.20.0 |
 
 Java でサポートされるすべてのアプリケーションセキュリティ機能を利用するための最小トレーサーバージョンは 1.31.0 です。
 
-**注**: Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
+**注**: Threat Protection を利用するには [Remote Configuration][2] を有効にする必要があります。Remote Configuration は上記の最小トレーサーバージョンに含まれています。
 
-### サポートされるデプロイメントタイプ
-| タイプ              | Threat Detection のサポート | ソフトウェア構成分析 |
+### サポートされているデプロイメントタイプ {#supported-deployment-types}
+| タイプ              | Threat Detection のサポート | Software Composition Analysis |
 |-------------------|--------------------------|-------------------------------|
 | Docker            | {{< X >}}                | {{< X >}}                     |
 | Kubernetes        | {{< X >}}                | {{< X >}}                     |
@@ -33,39 +32,43 @@ Java でサポートされるすべてのアプリケーションセキュリテ
 | AWS Lambda        | {{< X >}}                |                               |
 | Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**注**: Azure App Service は **Web アプリケーションのみ**サポートされます。Azure Functions は Application Security のサポート対象外です。
+**注**: Azure App Service は、**Web アプリケーションのみ**サポートされています。アプリケーションセキュリティは Azure Functions をサポートしていません。
 
-## 言語とフレームワークの互換性
+## 言語とフレームワークの互換性 {#language-and-framework-compatibility}
 
-### サポートされている Java バージョン
+### サポートされている Java バージョン {#supported-java-versions}
 Java トレーサーは、次の Oracle JDK および OpenJDK の JVM ランタイムの自動インスツルメンテーションをサポートします。
 
 | JVM バージョン | オペレーティングシステム                                                               | サポートレベル                       | トレーサーバージョン |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8～21      | Windows (x86-64)<br>Linux (glibc、musl) (arm64、x86-64)<br>MacOS (arm64、x86-64)               | サポート                | 最新         |
+| 8 ～ 21      | Windows (x86-64)<br>Linux (glibc、musl) (arm64、x86-64)<br>MacOS (arm64、x86-64)               | サポート対象                | 最新版         |
 
 
 Datadog は、Java の早期アクセスバージョンを公式にサポートしていません。
 
-バージョン 22 以上はプレビュー版としてサポートされています。
+バージョン 22 以降はプレビューとしてサポートされています。
 
-### Web フレームワークの互換性
+**Kotlin のサポート**: Kotlin は Java トレーサーを通じてサポートされます。Kotlin は JVM バイトコードにコンパイルされるため、標準的な Java のセットアップ以外に追加の構成を必要とせず、上記の JVM ランタイム上で動作します。
+
+### Web フレームワークの互換性 {#web-framework-compatibility}
+
+**Web フレームワークの統合によって提供されるもの:**
 
 - 攻撃元の HTTP リクエストの詳細
 - HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
+- アプリケーション内の攻撃フローを確認するための分散トレーシング
 
-##### アプリケーションセキュリティ機能に関する注意事項
+##### アプリケーションセキュリティ機能に関する注意事項 {#application-security-capability-notes}
 - **Software Composition Analysis** はすべてのフレームワークでサポートされます。
-- **Code Security** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知します。
+- お使いのフレームワークが **Code Security** でサポートされていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、HttpOnly フラグのない Cookie、および SameSite フラグのない Cookie の脆弱性が検知されます。
 
 
 
-| フレームワーク                  | バージョン   | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 |Code Security ですか？ |
+| フレームワーク                  | バージョン   | Threat Detection のサポート| Threat Protection のサポート|Code Security のサポート|
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Java Servlet | 2.3+、3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Java Servlet | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Jetty                   | 7.0-9.x, 10.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -73,60 +76,60 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Vert.x                  | 3.4+, 4+   |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
-**注:** 多くのアプリケーションサーバーは Servlet 互換でそのインスツルメンテーションによって自動的にカバーされます (Websphere、Weblogic、JBoss)。また、Spring Boot (バージョン 3) のようなフレームワークは、通常、Tomcat、Jetty、Netty など、サポートされた組み込みアプリケーションサーバーを使うため、本質的に機能します。
+**注:** 多くのアプリケーションサーバーは Servlet 互換で、そのインスツルメンテーションによって自動的にカバーされます (Websphere、Weblogic、JBoss)。また、Spring Boot (バージョン 3) のようなフレームワークは、通常、Tomcat、Jetty、Netty など、サポートされた組み込みアプリケーションサーバーを使用するため、本質的に機能します。
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">お使いのフレームワークがリストにない場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
-### ネットワーキングフレームワークの互換性
+### ネットワーキングフレームワークの互換性 {#networking-framework-compatibility}
 
 `dd-java-agent` には、次のネットワーキングフレームワークの自動トレースのサポートが含まれます。
 
-**ネットワーキングのトレーシングでは以下の確認が可能です**
+**ネットワーキングのトレーシングでは以下の確認が可能です。**
 
-- アプリケーションの分散型トレーシング
+- アプリケーションの分散トレーシング
 - リクエストベースのブロッキング
 
-##### アプリケーションセキュリティ機能に関する注意事項
+##### アプリケーションセキュリティ機能に関する注意事項 {#application-security-capability-notes-1}
 - **Software Composition Analysis** はすべてのフレームワークでサポートされます。
-- **Code Security** がご利用のフレームワークをサポートしていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、Cookie without HttpOnly Flag、Cookie without SameSite Flag の脆弱性は検知します。
+- お使いのフレームワークが **Code Security** でサポートされていない場合でも、Weak Cipher、Weak Hashing、Insecure Cookie、HttpOnly フラグのない Cookie、および SameSite フラグのない Cookie の脆弱性が検知されます。
 
 
-| フレームワーク                | バージョン    | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 | Code Security ですか？ |
+| フレームワーク                | バージョン    | Threat Detection のサポート| Threat Protection のサポート| Code Security のサポート|
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Apache HTTP クライアント       | 4.0+        |  {{< X >}} |  |  |
+| Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
-| HttpURLConnection        | すべて         |  {{< X >}} |  |  |
-| Jax RS クライアント           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
-| Jersey サーバー            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Netty HTTP サーバー        |  3.8+           |  {{< X >}} |    |  |
+| HttpURLConnection        | all         |  {{< X >}} |  |  |
+| Jax RS Clients           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
+| Jersey Server            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Netty HTTP Server        |  3.8+           |  {{< X >}} |    |  |
 | RESTEasy                 |  3.0.x          |  {{< X >}} |    |  |
 | Spring SessionAwareMessageListener     | 3.1+            |  {{< X >}} |  |  |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">お使いのフレームワークがリストにない場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
-### データストアの互換性
+### データストアの互換性 {#data-store-compatibility}
 
 `dd-java-agent` には、次のデータベースフレームワーク/ドライバーの自動トレースのサポートが含まれます。
 
-**データストアのトレーシングでは以下の確認が可能です**
+**データストアのトレーシングでは以下の確認が可能です。**
 
-- リクエストの応答タイミング
-- クエリ情報 (サニタイジングされたクエリ文字列など)
+- リクエストから応答までの所要時間
+- クエリ情報 (サニタイズされたクエリ文字列など)
 - エラーとスタックトレースの取得
 
-##### アプリケーションセキュリティ機能に関する注意事項
+##### アプリケーションセキュリティ機能に関する注意事項 {#application-security-capability-notes-2}
 - **Software Composition Analysis** はすべてのフレームワークでサポートされます。
 - **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
 - ご利用のフレームワークが下記でサポートされていない場合、**Code Security** は SQL インジェクションの脆弱性を検知しませんが、[こちら][3]に挙げられている残りの脆弱性タイプは依然として検知します。
 
-| データベース                | バージョン | Threat Detection のサポートの有無 |  Code Security ですか？ |
+| データベース                | バージョン | Threat Detection のサポート|  Code Security のサポート|
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |
 | JDBC                    | N/A      |  {{< X >}} |   {{< X >}} |
 | MongoDB                 | 3.0-4.0+ |  {{< X >}} |   |
 
-`dd-java-agent` は、次を含む一般的な Threat Detection のための JDBC ドライバーとも互換性があります:
+`dd-java-agent` は、次のような一般的な JDBC ドライバーによる Threat Detection にも対応しています。
 
 - Apache Derby
 - Firebird SQL
@@ -140,9 +143,9 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 - Postgres SQL
 - ScalikeJDBC
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">お使いのフレームワークがリストにない場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
-### User Authentication Frameworks の互換性
+### ユーザー認証フレームワークの互換性 {#user-authentication-frameworks-compatibility}
 
 **User Authentication Frameworks へのインテグレーションは以下を提供します。**
 

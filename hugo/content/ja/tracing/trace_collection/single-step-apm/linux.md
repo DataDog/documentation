@@ -18,7 +18,7 @@ type: multi-code-lang
 Linux ホストまたは VM 上では、APM 用の Single Step Instrumentation (SSI) を使用して Datadog Agent をインストールし、ワンステップで [アプリケーションをインスツルメント][4] します。追加の構成は不要です。
 
 {{< skill-callout
-    title="agent を使用して APM をセットアップする"
+    title="エージェントを使用して APM をセットアップする"
     text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
     action_name="copy_dd_apm_skill_install_cmd" >}}
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
@@ -26,7 +26,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ## アプリケーションで APM を有効にする {#enable-apm-on-your-applications}
 
-<div class="alert alert-info">続行する前に、<a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">続行する前に、SSI 互換性ガイド</a>を確認して、環境に互換性があることを確認してください。</div>
+<div class="alert alert-info">続行する前に、<a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 互換性ガイド</a>を確認して、環境に互換性があることを確認してください。</div>
 
 ### 新しい Agent インストール {#new-agent-installation}
 
@@ -65,28 +65,21 @@ To get a command pre-filled with your API key and site, go to the [Install the D
 
 ### 既存の Agent のインストール {#existing-agent-installation}
 
-Datadog Agent がすでにインストールされている場合は、ホスト上で [新しい Agent のインストール](#new-agent-installation)から Agent インストールコマンドを再度実行します。このコマンドは、既存の Agent を更新し、SSI を有効にします。
+Datadog agent が既にインストールされている場合は、Datadog からリモートで SSI を有効にします。各ホストでコマンドを実行する必要はありません。
 
-または、Fleet Automation を使用して Datadog から SSI を有効にします。
+1. Datadog で、[**APM > Instrument a Service**][21] に移動します。
 
-1. Datadog で、[**Fleet Automation > Configuration**][21] に移動します。
-1. {{< ui >}}Configure Agents{{< /ui >}} をクリックします。
-1. フィルターを適用して、構成する Agent を選択し、**ext** をクリックします。
+1. {{< ui >}}How do you want to instrument these hosts?{{< /ui >}} で {{< ui >}}Deploy on existing hosts{{< /ui >}} を選択し、Datadog agent 経由でリモートからサービスをインスツルメントします。
 
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="環境、オペレーティングシステム、ホスト名ごとにスコープを設定するオプションがある、Fleet Automation のエージェントフィルタリング画面" style="width:100%;" >}}
+1. {{< ui >}}Which hosts should we instrument?{{< /ui >}} で、スコープフィルター ({{< ui >}}Environments{{< /ui >}}、{{< ui >}}Hostname{{< /ui >}}、{{< ui >}}APM enabled{{< /ui >}}) を使用してホストを絞り込みます。次に、{{< ui >}}Eligible for deployment{{< /ui >}} タブでインスツルメントする Agent を選択します。インスツルメントできないホストは {{< ui >}}Excluded from deployment{{< /ui >}} タブに表示されます。
 
-1. {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} タイルをクリックし、{{< ui >}}Next{{< /ui >}} をクリックします。
+1. {{< ui >}}Configure SDKs installation{{< /ui >}} で {{< ui >}}Yes{{< /ui >}} をクリックし、Datadog でトレーシング SDK が自動的にインストールされるようにします。最新バージョンではなく特定の SDK バージョンをピン留めするには、{{< ui >}}Customize library versions{{< /ui >}} を展開します。
 
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="Application Performance Monitoring (APM) タイルが表示されている Fleet Automation での製品選択画面" style="width:80%;" >}}
+1. {{< ui >}}Configure rollout strategy{{< /ui >}} で、一度にデプロイする Agent の割合を選択します。Datadog には、結果として生じるステージと推定所要時間が表示されます。Agent が 3 台連続で失敗した場合、または失敗が全体の 10% に達した場合、デプロイメントは自動的に一時停止します。デプロイメントは後から再実行できます。
 
-1. {{< ui >}}Configure SDKs Installation{{< /ui >}} 画面で {{< ui >}}Yes{{< /ui >}} をクリックして、SDK を自動的にインストールします。{{< ui >}}Use latest version{{< /ui >}} を選択するか、チェックを外して個別の SDK バージョンを指定します。
+1. {{< ui >}}Review and apply APM instrumentation{{< /ui >}} で {{< ui >}}Configuration Summary{{< /ui >}} を確認し ({{< ui >}}Summary{{< /ui >}} と {{< ui >}}YAML{{< /ui >}} を切り替えます)、{{< ui >}}Apply Instrumentation{{< /ui >}} をクリックします。
 
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="SDK の自動インストールを有効にしてバージョンを選択するオプションがある、Fleet Automation の SDK インストール設定画面" style="width:60%;" >}}
-
-1. [**Next**] をクリックします。
-1. 構成を確認し、{{< ui >}}Deploy Configuration{{< /ui >}} をクリックします。
-
-## インストールを検証する {#verify-the-installation}
+## インストールの検証 {#verify-the-installation}
 
 1. Agent が実行されていることを確認します。
 
@@ -138,17 +131,19 @@ SDK バージョンを更新するには、以下の手順を実行します。
 ### インスツルメンテーションルールを定義する {#define-instrumentation-rules}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">インスツルメンテーションルールは、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではサポートされていません。</div>
+<div class="alert alert-warning">インスツルメンテーションルールは、選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Datadog MCP Server はサポートされません。</div>
 {{< /site-region >}}
 
 インスツルメンテーションルール (Agent v7.73 以降で利用可能) を使用すると、Linux ホスト上で SSI によって自動的にインスツルメンテーションされるプロセスを制御できます。
+
+**注**: Bits AI を使用して、自然言語でインスツルメンテーションルールを作成できます。インスツルメントするプロセスを指定すると、Bits AI が対応するルールを生成します。
 
 インスツルメンテーションルールを構成するには、以下の手順を実行します。
 
 1. Datadog で、{{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20] に移動します。
 1. {{< ui >}}Add or Edit Rules{{< /ui >}} をクリックします。
 1. インスツルメンテーションルールを定義します。
-   1. {{< ui >}}Add New Rule{{< /ui >}} をクリックし、{{< ui >}}Allow Rule{{< /ui >}} または {{< ui >}}Block Rule{{< /ui >}} を選択して、一致するプロセスをインスツルメンテーションするかどうかを指定します。
+   1. {{< ui >}}Add New Rule{{< /ui >}} をクリックし、{{< ui >}}Allow Rule{{< /ui >}} または {{< ui >}}Block Rule{{< /ui >}} を選択して、一致するプロセスをインスツルメントするかどうかを指定します。
    1. ルールに名前を付けます。
    1. 1 つ以上の条件を追加します。詳細については、[ルール条件を定義する](#define-rule-conditions)を参照してください。
 
@@ -208,7 +203,7 @@ Remote Configuration が有効な場合、ルールはすべてのホストに�
 
 インフラストラクチャー上のすべてのサービスのトレース生成を停止するには、以下の手順を実行します。
 
-1. 次を実行します。
+1. 以下を実行します。
    ```shell
    dd-host-install --uninstall
    ```
@@ -235,6 +230,6 @@ SSI で APM を有効にする際に問題が発生した場合は、[SSI トラ
 [18]: /ja/tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: https://app.datadoghq.com/fleet/agent-management
+[21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
