@@ -39,7 +39,7 @@ This section includes setup pages for the following language test targets:
 | Python | `dd_topt_py_test` | Supports the managed `pytest` runner and repository-owned pytest wrappers. See [Python compatibility][3]. |
 | Go | `dd_topt_go_test` | Builds each test with a Go SDK that `ddtest instrument` prepares. See [Go compatibility][4]. |
 
-Use the `datadog-rules-test-optimization` version and commit pin shown on each language setup page.
+Use the `datadog-rules-test-optimization` version and pin shown on each language setup page.
 
 ## How the Bazel setup flow works
 

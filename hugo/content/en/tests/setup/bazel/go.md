@@ -53,31 +53,31 @@ Add the core module, the Go companion module, and `rules_go` to `MODULE.bazel`:
 
 ```starlark
 bazel_dep(name = "datadog-rules-test-optimization", version = "2.0.0")
-git_override(
+archive_override(
     module_name = "datadog-rules-test-optimization",
-    remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
+    urls = ["https://github.com/DataDog/rules_test_optimization/releases/download/v2.0.0/rules_test_optimization-2.0.0.tar.gz"],
+    sha256 = "2d319918047c031c6e02561e31879681c3c3f999bf8e682c3d4ab1792d021b3f",
+    strip_prefix = "rules_test_optimization-2.0.0",
 )
 
 bazel_dep(name = "datadog-rules-test-optimization-go", version = "2.0.0")
-git_override(
+archive_override(
     module_name = "datadog-rules-test-optimization-go",
-    remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
-    strip_prefix = "modules/go",
+    urls = ["https://github.com/DataDog/rules_test_optimization/releases/download/v2.0.0/rules_test_optimization-2.0.0.tar.gz"],
+    sha256 = "2d319918047c031c6e02561e31879681c3c3f999bf8e682c3d4ab1792d021b3f",
+    strip_prefix = "rules_test_optimization-2.0.0/modules/go",
 )
 
 bazel_dep(name = "rules_go", version = "0.60.0")
 ```
 
-Use the same commit SHA for the core module and the Go companion module.
+Use the same archive and checksum for the core module and the Go companion module.
 
 ## Use `WORKSPACE` mode
 
 If Bzlmod is disabled, declare upstream `rules_go` as `io_bazel_rules_go`, then the core repository. Use the public Go helper to declare the Go companion repository. After the `rules_go` setup, call `topt_go_ddtest_workspace_repositories` to declare the instrumented Go SDK and register its toolchains:
 
 ```starlark
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -86,10 +86,11 @@ http_archive(
     urls = ["https://github.com/bazel-contrib/rules_go/releases/download/v0.60.0/rules_go-v0.60.0.zip"],
 )
 
-git_repository(
+http_archive(
     name = "datadog-rules-test-optimization",
-    remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
+    urls = ["https://github.com/DataDog/rules_test_optimization/releases/download/v2.0.0/rules_test_optimization-2.0.0.tar.gz"],
+    sha256 = "2d319918047c031c6e02561e31879681c3c3f999bf8e682c3d4ab1792d021b3f",
+    strip_prefix = "rules_test_optimization-2.0.0",
 )
 
 load(
@@ -99,6 +100,10 @@ load(
 
 datadog_go_test_optimization_workspace_repositories(
     rto_commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
+    datadog_fetch = "archive",
+    rto_archive_url = "https://github.com/DataDog/rules_test_optimization/releases/download/v2.0.0/rules_test_optimization-2.0.0.tar.gz",
+    rto_archive_sha256 = "2d319918047c031c6e02561e31879681c3c3f999bf8e682c3d4ab1792d021b3f",
+    rto_archive_prefix = "rules_test_optimization-2.0.0",
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
@@ -231,7 +236,11 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
   --service <SERVICE_NAME> \
   --runtime-version 1.25.0 \
   --sync-repo-name test_optimization_data \
-  --rto-commit 4ee137661f3c1c5360cf5e9a35b286f280837779
+  --rto-commit 4ee137661f3c1c5360cf5e9a35b286f280837779 \
+  --datadog-fetch archive \
+  --rto-archive-url https://github.com/DataDog/rules_test_optimization/releases/download/v2.0.0/rules_test_optimization-2.0.0.tar.gz \
+  --rto-archive-sha256 2d319918047c031c6e02561e31879681c3c3f999bf8e682c3d4ab1792d021b3f \
+  --rto-archive-prefix rules_test_optimization-2.0.0
 ```
 
 Then run bootstrap without `--print-workspace-snippet` to write the local scaffolding. Bootstrap does not edit `WORKSPACE`:
@@ -298,7 +307,7 @@ Earlier versions of the rules instrumented Go tests with Orchestrion and a `rule
 1. Remove the `orchestrion_mode` and `orchestrion_pin_files` attributes from `dd_topt_go_test` calls and wrappers. Builds fail with a migration message while these attributes are set.
 1. Remove the `rules_go` override that points to the fork, and the `orchestrion` extension with its `rules_go_orchestrion_tool` repository. In `WORKSPACE` mode, declare upstream `rules_go`, remove the `rules_go_fetch`, `rules_go_upstream`, and `rules_go_variant` arguments of the Go helper, and remove the `dd_topt_go_orchestrion_tool_repo` call.
 1. Delete `orchestrion.tool.go` and `orchestrion.yml`, and the Orchestrion and `dd-trace-go` requirements in `go.mod` that only served as pins.
-1. Update the commit pins in [Add modules](#add-modules), and rerun bootstrap without the flags that were removed, such as `--dd-trace-go-version` and `--orchestrion-version`. Bootstrap replaces the managed Orchestrion block in `MODULE.bazel`. In `WORKSPACE` mode, call `topt_go_ddtest_workspace_repositories` as shown in [Use `WORKSPACE` mode](#use-workspace-mode).
+1. Update the modules as shown in [Add modules](#add-modules), and rerun bootstrap without the flags that were removed, such as `--dd-trace-go-version` and `--orchestrion-version`. Bootstrap replaces the managed Orchestrion block in `MODULE.bazel`. In `WORKSPACE` mode, call `topt_go_ddtest_workspace_repositories` as shown in [Use `WORKSPACE` mode](#use-workspace-mode).
 1. If an earlier version generated a validation script, regenerate it by rerunning bootstrap with `--write-validation-script`. The old script queries a target of the `rules_go` fork and exits before it runs your tests.
 1. If you read `bazel.go.orchestrion.*` keys from target metadata, read `bazel.go.instrumentation.*` and `bazel.go.sdk.*` instead.
 
