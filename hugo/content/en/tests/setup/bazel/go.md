@@ -211,14 +211,17 @@ dd_topt_go_test(
 
 ## Run and validate tests
 
-Run tests with the generated Bazel config:
+Run tests with the generated Bazel config. The config zips test outputs, so the doctor and the uploader read them through the build event file of the test run:
 
 ```bash
-bazel test --config=test-optimization //...
-bazel run --config=test-optimization //:dd_test_optimization_doctor
-bazel run --config=test-optimization //:dd_upload_payloads -- --dry-run --validate-enrichment
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //:dd_upload_payloads
+BEP_FLAGS="--bep-json=$PWD/bep.json --freshness-source=bep --freshness-mode=required --artifact-source=bep --artifact-staging-dir=$PWD/.topt/artifacts"
+bazel test --config=test-optimization --build_event_json_file="$PWD/bep.json" //...
+bazel run --config=test-optimization //:dd_test_optimization_doctor -- $BEP_FLAGS
+bazel run --config=test-optimization //:dd_upload_payloads -- $BEP_FLAGS --dry-run --validate-enrichment
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE=<DATADOG_SITE> bazel run --config=test-optimization //:dd_upload_payloads -- $BEP_FLAGS
 ```
+
+The doctor and the uploader only accept results from tests that ran in this invocation. If every test result comes from the Bazel cache, the doctor reports that there is nothing fresh to validate.
 
 You do not need to set the Test Optimization runtime variables manually. The `dd_topt_go_test` macro adds them to the generated test target, including:
 
