@@ -152,7 +152,7 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-On CentOS/RHEL 7, the Datadog Agent RPM package bundles and loads an [SELinux policy][3] to grant these permissions to the system-probe binary. On RHEL 8 and later, the standard targeted SELinux policy runs the Agent and system-probe in the `unconfined_service_t` domain. The bundled policy is not necessary.
+On CentOS/RHEL 7, the Datadog Agent RPM package bundles and loads an [SELinux policy][3] to grant these permissions to the system-probe binary. On RHEL 8 and later, the default SELinux policy runs the Agent and system-probe in the `unconfined_service_t` domain, so the bundled policy is not necessary.
 
 If you need to use Cloud Network Monitoring on other systems with SELinux enabled, do the following:
 
@@ -185,7 +185,7 @@ If you need to use Cloud Network Monitoring on other systems with SELinux enable
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
 
-#### In-place upgrades from RHEL 7 to RHEL 8 or later
+#### SELinux cleanup after in-place upgrades from RHEL 7
 
 An in-place upgrade updates the operating system from RHEL 7 to RHEL 8 or later without a new installation (for example, with Leapp). After this upgrade, the `system_probe_t` file contexts from RHEL 7 can stay on the Agent binaries. These contexts stop systemd from running the Agent and system-probe in the `unconfined_service_t` domain. When SELinux is in enforcing mode, it denies actions that the Agent and system-probe need.
 
