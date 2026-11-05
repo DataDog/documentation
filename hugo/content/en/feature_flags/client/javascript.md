@@ -236,7 +236,7 @@ The web provider also supports these optional settings:
 
 | Option | Default | Use |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `trackExposures` | `true` | Send exposure events to the exposures intake. Available in version 2.3.0 and later. Replaces the deprecated `enableExposureLogging` option. To record exposures in your own data store, see [Record Feature Flag Exposures in Your Own Data Store][7]. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
@@ -304,6 +304,10 @@ const provider = new DatadogProvider({
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
 
+## Record exposures in your own data store
+
+Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `trackExposures: false`. This requires `@datadog/openfeature-browser` 2.3.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][7].
+
 ## Advanced: application-managed configuration
 
 Use `DatadogCoreProvider` from `@datadog/openfeature-browser/rules-based` in SDK 2.0.0 and later only when your application needs to own configuration delivery or evaluate rules locally across context changes. Your application supplies and refreshes configuration with `setConfiguration()` and explicitly registers and manages any tracking hooks.
@@ -368,3 +372,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
