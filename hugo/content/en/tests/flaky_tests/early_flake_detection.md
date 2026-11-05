@@ -39,7 +39,7 @@ You can choose to block the merge of the feature branch with a [PR Gate][4]. For
 
 ## Exclude individual tests from retries
 
-Use code annotations to exclude individual tests from Early Flake Detection. This also excludes Auto Test Retries and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
+Use a code annotation to exclude individual tests from Early Flake Detection, Auto Test Retries, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
 
 ## Setup
 

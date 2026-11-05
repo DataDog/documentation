@@ -20,7 +20,7 @@ a failing test case is retried either until it passes successfully or until ther
 
 ## Exclude individual tests from retries
 
-Use code annotations to exclude individual tests from Auto Test Retries. This also excludes Early Flake Detection and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][9] for examples and version requirements.
+Use a code annotation to exclude individual tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][9] for examples and version requirements.
 
 ## Setup
 

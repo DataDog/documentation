@@ -34,8 +34,6 @@ Apply annotations in test source code. Setting a span tag with the same name doe
 
 ## Language-specific setup
 
-Choose a language for SDK requirements, framework support, and annotation syntax.
-
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
@@ -95,7 +93,7 @@ Tags on a `Scenario Outline` apply to every example.
 - Playwright requires version 1.38 or later.
 - Vitest requires version 1.6 or later. Both helpers support initialized workers, Browser Mode, and no-worker-tracer mode. No-worker-tracer mode requires isolated workers and Vitest 3.2.6 or later.
 - WebdriverIO requires version 9 or later with the Mocha or Jasmine adapter.
-- Cucumber.js supports serial scenarios from version 7. Parallel Test Management exclusions require version 11 or later.
+- Cucumber.js supports serial scenarios from version 7. In parallel mode, exclusions for quarantine, disabling, and Attempt to Fix require version 11 or later.
 
 Explicit framework retries, such as `jest.retryTimes`, Mocha retries, Playwright retry settings, and Cucumber.js `--retry`, remain available when `noAutoRetry` is present.
 
@@ -116,9 +114,9 @@ Search in the [Test Optimization Explorer][7] with:
 - `@test.test_management.prevent_failure_suppression:true`
 - `@test.test_management.no_auto_retry:true`
 
-Datadog reports each annotation as `true` when present and omits its tag when absent. Reported skipped tests also include annotations when the instrumentation discovers them. Annotations do not require tests excluded by selection or Test Impact Analysis to run.
+Datadog reports each annotation as `true` when present and omits its tag when absent. Reported skipped tests also include annotations when the instrumentation discovers them. Tests excluded by selection or Test Impact Analysis remain excluded.
 
-Test Management tags continue to describe assigned states, even when an annotation overrides the execution behavior. For example, a protected test can retain `test.test_management.is_quarantined:true` while its failure affects the test command. An excluded Attempt to Fix assignment does not produce Attempt to Fix retries or a completion result.
+Flaky Tests Management tags continue to describe assigned states, even when an annotation overrides the execution behavior. For example, a protected test can retain `test.test_management.is_quarantined:true` while its final failure still fails the test command. An excluded Attempt to Fix assignment does not produce Attempt to Fix retries or a completion result.
 
 ## Further reading
 
