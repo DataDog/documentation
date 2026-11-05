@@ -110,6 +110,12 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 
 go_rules_dependencies()
 
+load("@rules_shell//shell:repositories.bzl", "rules_shell_dependencies", "rules_shell_toolchains")
+
+rules_shell_dependencies()
+
+rules_shell_toolchains()
+
 go_register_toolchains(version = "1.25.0")
 
 load(
@@ -229,7 +235,7 @@ If you pass an `env` attribute to `dd_topt_go_test`, keep these variables reserv
 
 ## Large repositories
 
-For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the full repository wiring. Keep your `io_bazel_rules_go` declaration, and use the rest in place of the block in [Use `WORKSPACE` mode](#use-workspace-mode), because the helper fails if the Go companion repository is already declared:
+For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the full repository wiring. Keep your `io_bazel_rules_go` declaration, and use the rest in place of the block in [Use `WORKSPACE` mode](#use-workspace-mode), because the helper fails if the Go companion repository is already declared. The output does not include the `rules_shell` calls, so keep them after `go_rules_dependencies()`:
 
 ```bash
 bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
