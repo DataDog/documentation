@@ -329,6 +329,7 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are not redacted, masked, or hashed.
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
+- Suppressions apply to the matched value in every attribute the rule scans. To ignore a value in one attribute only, see [Scan or exclude specific attributes](#scan-or-exclude-specific-attributes).
 
 #### Scan or exclude specific attributes
 
@@ -338,6 +339,28 @@ To make matches more precise, you can also do one of the following:
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
 **Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+
+**Note**: Excluded attributes are still evaluated against your scanning rules. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match does not appear on the Findings page or in any other reporting.
+
+For example, you might exclude the `support_contact` attribute because it always contains your company's shared support address. With the Standard Email Address Scanner library rule and `support_contact` excluded, the following event is processed this way:
+
+```json
+{
+  "service": "billing-api",
+  "support_contact": "support@test.com",
+  "reply_to": "support@test.com",
+  "customer_email": "jane.doe@acme-corp.com"
+}
+```
+
+- `support_contact` is excluded from scanning.
+- The match in `reply_to` is dropped because its value matches the value in the excluded `support_contact` attribute.
+- The match in `customer_email` is kept, and the rule's match action is applied.
+
+To control this behavior, choose the option that fits your goal:
+
+- **To ignore specific known-safe values**, use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@test.com` to ignore addresses from this domain. The attribute continues to be scanned, so other sensitive values in it are still matched, and the suppressed values are ignored in every attribute.
+- **To leave an attribute untouched but still match the same value in other attributes**, use {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in attributes that are not listed do not affect matches in the listed attributes.
 
 ### Edit scanning rules
 
