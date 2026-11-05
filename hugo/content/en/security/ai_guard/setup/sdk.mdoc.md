@@ -166,7 +166,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
    ])
    ```
 
-   The evaluate method returns a promise. For the full type definitions, see the `dd-trace-js` TypeScript definition file, `index.d.ts`.
+   The evaluate method returns a promise. For the full type definitions, see the `aiguard` namespace in [`index.d.ts`][12] in the `dd-trace-js` repository.
    {% /if %}
    <!-- end Node.js -->
 
@@ -271,7 +271,7 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 With context on how SDK calls reported AI Guard decisions, your code can look for those decisions and determine what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
 
 - {% ui %}Monitor only{% /ui %} mode: The SDK returns an **evaluation** when AI Guard allows the request. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
-- {% ui %}Block unsafe{% /ui %} mode: The SDK raises **`AIGuardAbortError`** when AI Guard returns `DENY`. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests with the SDK][11].
+- {% ui %}Block unsafe{% /ui %} mode: The SDK raises **`AIGuardAbortError`** when AI Guard returns `DENY`. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests][11].
 
 ### Evaluation fields
 
@@ -282,13 +282,8 @@ An evaluation tells your code what AI Guard decided and why, so your agent can r
 | `action` | `ALLOW` or `DENY` |
 | `reason` | A natural language summary of the decision. |
 | `tags` | The attack categories AI Guard detected, such as `indirect-prompt-injection` or `credential-access`. |
-| `sds` | The Sensitive Data Scanner findings. |
+| {% if equals($prog_lang, "ruby") %}`sds_findings`{% /if %}{% if not(equals($prog_lang, "ruby")) %}`sds`{% /if %} | The Sensitive Data Scanner findings. |
 | `messages` | The conversation with sensitive data replaced, when sensitive data redaction is enabled for the service. See [Redact sensitive data][9]. |
-
-<!-- Ruby -->
-{% if equals($prog_lang, "ruby") %}
-In Ruby, the Sensitive Data Scanner findings field is `sds_findings`, not `sds`.
-{% /if %}
 
 ### Per-call blocking options
 
@@ -314,7 +309,7 @@ Pass `new AIGuard.Options().block(false)` to make a call return an evaluation an
 Pass `allow_raise: false` to make a call return an evaluation and never raise `AIGuardAbortError`, even when the policy uses {% ui %}Block unsafe{% /ui %} mode.
 {% /if %}
 
-To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools Policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. AI Guard still evaluates tool calls set to {% ui %}Pass{% /ui %} and reports the results, but never blocks them. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
+To stop blocking calls to a specific tool without changing code, use the policy instead. In the AI Guard policy, under {% ui %}Tools policies{% /ui %} > {% ui %}Individual policies{% /ui %}, set the tool's behavior to {% ui %}Pass{% /ui %}. AI Guard still evaluates tool calls set to {% ui %}Pass{% /ui %} and reports the results, but never blocks them. Tool calls set to {% ui %}Pass{% /ui %} still count toward usage. For details, see [Tools policies][10].
 
 ## Optional SDK settings
 
@@ -343,4 +338,5 @@ With `dd-trace-js` 5.130.0 or later, or 6.19.0 or later, the SDK sends evaluatio
 [8]: /security/ai_guard/setup/#verify
 [9]: /security/ai_guard/sensitive_data_redaction/
 [10]: /security/ai_guard/policies/#tools-policies
-[11]: /security/ai_guard/policies/#handle-blocked-requests-with-the-sdk
+[11]: /security/ai_guard/policies/#handle-blocked-requests
+[12]: https://github.com/DataDog/dd-trace-js/blob/master/index.d.ts

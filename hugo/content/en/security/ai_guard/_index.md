@@ -128,7 +128,20 @@ Choose the first method that fits your agent:
 | [Manual integrations][10] | Add a plugin or configuration entry that connects a framework to the SDK. | Amazon Strands and LiteLLM Proxy |
 | [SDK][11] | Call the SDK in your code at each point you want evaluated. | Python, Node.js, Java, and Ruby |
 
-For languages that the SDK doesn't support, such as Go or .NET, call the [AI Guard HTTP API][15] directly. The HTTP API needs no Datadog Agent or Datadog SDK, but your code must act on the returned action itself. HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog and don't generate signals.
+For languages that the SDK doesn't support, such as Go or .NET, call the [AI Guard HTTP API][15] directly. The HTTP API needs no Datadog Agent or Datadog SDK.
+
+### Feature support by integration method
+
+AI Guard features vary by integration method, so some features might not be available for your agent.
+
+| Feature | Automatic integrations | Manual integrations | SDK | HTTP API |
+| --- | --- | --- | --- | --- |
+| Blocking in {{< ui >}}Block unsafe{{< /ui >}} mode | Yes | Yes, differs by evaluation point | Yes | No. Your code acts on the returned action. |
+| AI Guard spans and AI Guard pages in Datadog | Yes | Yes | Yes | No |
+| Security signals | Yes | Yes | Yes | No |
+| Sensitive data findings | Yes | No | Yes | Yes |
+| Sensitive data redaction | No | No | Yes | Yes |
+| Per-call blocking options | No | No | Yes | No |
 
 ## Specifications and limitations
 

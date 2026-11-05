@@ -13,13 +13,13 @@ Your code sends the conversation to a single endpoint, and AI Guard returns an a
 
 ## Supported environments
 
-The HTTP API works with any language and any HTTP client, and needs no Datadog Agent or Datadog SDK. Check the limitations before you choose the HTTP API over the SDK.
+The HTTP API needs only a Datadog API key and an application key, and needs no Datadog Agent or Datadog SDK.
 
-The HTTP API needs only a Datadog API key and an application key. For languages that the [SDK][1] supports, use the SDK instead.
+While the HTTP API works with any language and any HTTP client, Datadog recommends using the [SDK][1] for supported languages.
 
 ### Limitations
 
-HTTP API evaluations skip the Datadog SDK, so they lose the Datadog features that depend on AI Guard spans. Review these limits before you rely on the HTTP API.
+HTTP API evaluations skip the Datadog SDK, so they lose the Datadog features that depend on AI Guard spans. Review these limits before you choose the HTTP API over the SDK:
 
 - HTTP API evaluations don't create spans, so they don't appear on any AI Guard page in Datadog.
 - Detection rules don't see HTTP API evaluations, so HTTP API evaluations don't generate signals.
@@ -64,7 +64,7 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
      https://app.datadoghq.com/api/v2/ai-guard/evaluate
    ```
 
-   The endpoint URL depends on your Datadog site. Replace `app.datadoghq.com` with {{< region-param key="dd_full_site" code="true" >}}.
+   The endpoint URL depends on your Datadog site. For your site, use {{< region-param key="dd_full_site" code="true" >}}.
 
 1. Read the `action` attribute in the response:
 
@@ -75,13 +75,16 @@ Evaluate messages with the HTTP API so AI Guard checks each prompt and tool call
        "type": "evaluations",
        "attributes": {
          "action": "DENY",
-         "reason": "Attempt to execute a shutdown command, which could disrupt system availability."
+         "reason": "Attempt to execute a shutdown command, which could disrupt system availability.",
+         "is_blocking_enabled": true
        }
      }
    }
    ```
 
-1. If the action is `ALLOW`, proceed with the request. If the action is `DENY` and `is_blocking_enabled` is `true`, stop the request and return a safe response.
+1. If the action is `ALLOW`, proceed with the request. If the action is `DENY`, check `is_blocking_enabled`:
+   - If `is_blocking_enabled` is `true`, stop the request and return a safe response.
+   - If `is_blocking_enabled` is `false`, the policy uses {{< ui >}}Monitor only{{< /ui >}} mode. Proceed with the request.
 
 ## Request format
 
@@ -164,9 +167,9 @@ The response tells your code what AI Guard decided and why. Use this reference t
 | `data.attributes.is_blocking_enabled` | `true` if the AI Guard policy for the service blocks unsafe requests. Use `is_blocking_enabled` to decide whether to stop a request when the action is `DENY`. |
 | `data.attributes.global_prob` | The overall threat probability, between `0` and `1`. Included only when AI Guard computes it. |
 | `data.attributes.sds_findings` | The Sensitive Data Scanner findings, when sensitive data scanning is enabled. Each finding has `rule_display_name`, `rule_tag`, `category`, and `location` fields. The `location` field has `path`, `start_index`, and `end_index_exclusive` values. |
-| `data.attributes.redaction_replacements` | The replacements AI Guard applied when sensitive data redaction is enabled. Each replacement has a `path`, the location of the redacted value in the request, and a `replacement`, the redacted text. Included only when redaction applies. |
+| `data.attributes.redaction_replacements` | The replacements AI Guard applied when sensitive data redaction is enabled. Each replacement has a `path` that gives the location of the redacted value in the request, and a `replacement` that holds the redacted text. Included only when redaction applies. |
 
 [1]: /security/ai_guard/setup/sdk/
-[2]: /security/ai_guard/setup/manual_integrations/
+[2]: /security/ai_guard/setup/manual_integrations/#litellm-proxy
 [3]: /security/ai_guard/setup/#prerequisites
 [4]: /security/ai_guard/setup/#create-keys

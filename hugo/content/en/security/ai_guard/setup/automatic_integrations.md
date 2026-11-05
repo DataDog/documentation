@@ -7,7 +7,7 @@ description: Protect agents built on supported AI frameworks and client librarie
 <div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-AI Guard automatic integrations protect agents built on supported AI frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you enable AI Guard through environment variables and Datadog SDK configuration, instead of adding evaluation calls by hand.
+With AI Guard automatic integrations, you can protect agents built on supported AI frameworks and client libraries without adding AI Guard evaluation calls to your code. If your agent calls a supported package, you enable AI Guard through environment variables and Datadog SDK configuration, instead of adding evaluation calls by hand.
 
 When the application starts with the Datadog SDK loaded, the SDK detects supported packages and instruments them. The SDK sends each instrumented model call and tool call to AI Guard for evaluation.
 

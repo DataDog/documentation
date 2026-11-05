@@ -11,15 +11,13 @@ aliases:
 
 Set up AI Guard to start evaluating agent prompts, responses, and tool calls for threats. After setup, the default policy monitors every evaluation, and you can [start blocking unsafe requests][1] when you're ready.
 
-AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
-
 AI Guard connects to AI agents through several integration methods: automatic integrations, manual integrations, or the SDK. The setup steps detailed here are the same for each of these methods. When you're instrumenting your application, you choose the method that fits your agent's language and libraries.
 
-AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect:
+AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
 ## 1. Check prerequisites {#prerequisites}
 
-Confirm you have the permissions and components AI Guard needs.
+Confirm you have the Datadog permissions, the Datadog Agent, and the Datadog SDK version that AI Guard needs.
 
 ### Permissions
 
@@ -30,6 +28,7 @@ Some setup steps require specific Datadog permissions. An admin might need to cr
 | {{< ui >}}AI Guard Evaluate{{< /ui >}} | `ai_guard_evaluate` | Write | Required to call the AI Guard evaluation API and to create an application key with the `ai_guard_evaluate` scope. |
 | {{< ui >}}AI Guard View{{< /ui >}} | `ai_guard_view` | Read | Required to view the AI Guard UI, including signals, spans, and read-only settings. |
 | {{< ui >}}AI Guard Write{{< /ui >}} | `ai_guard_write` | Write | Required to change AI Guard configuration, such as policies, custom rules, and sensitive data scanning. |
+| {{< ui >}}APM Retention Filters Write{{< /ui >}} | `apm_retention_filter_write` | Write | Required to create the retention filter for AI Guard spans. |
 | {{< ui >}}Security Notification Rules Read{{< /ui >}} | `security_monitoring_notification_profiles_read` | Read | Required to view notification rules for AI Guard security signals. |
 | {{< ui >}}Security Notification Rules Write{{< /ui >}} | `security_monitoring_notification_profiles_write` | Write | Required to create and edit notification rules for AI Guard security signals. |
 | {{< ui >}}Security Rules Read{{< /ui >}} | `security_monitoring_rules_read` | Read | Required to view AI Guard detection rules. |
@@ -144,11 +143,14 @@ Confirm that AI Guard is evaluating agent traffic.
    - On the {{< ui >}}Discover{{< /ui >}} tab, find the agent service. After its evaluations arrive, the service appears under {{< ui >}}Protected by AI Guard{{< /ui >}}.
    - On the {{< ui >}}Investigate{{< /ui >}} tab, confirm that the agent's evaluations appear.
 
-### Troubleshooting: AI Guard spans don't appear
+## Troubleshooting: AI Guard spans don't appear
 
 If AI Guard spans for the agent don't appear, check these causes in order:
 
-1. **AI Guard isn't enabled.** `DD_AI_GUARD_ENABLED` defaults to `false`. When the variable is unset, integrations don't evaluate anything, and in Node.js, Java, and Ruby, SDK calls return `ALLOW` without calling AI Guard. Set `DD_AI_GUARD_ENABLED=true`.
+1. **AI Guard isn't enabled.** Set `DD_AI_GUARD_ENABLED=true`. The variable defaults to `false`, and when it's unset:
+   - Automatic integrations don't evaluate anything.
+   - SDK calls in Node.js, Java, and Ruby return `ALLOW` without calling AI Guard.
+   - Manual integrations and Python SDK calls still evaluate, but AI Guard spans don't include the evaluated messages.
 1. **The application key is missing the scope.** If evaluation calls fail with a 401 or 403 error, confirm the application key has the `ai_guard_evaluate` scope.
 1. **The Agent isn't reachable.** Confirm the Datadog Agent is running and that your application can connect to it.
 1. **The retention filter is missing or out of order.** Confirm a retention filter matches `resource_name:ai_guard` at 100% span and trace rates, and that it sits above any other filter that matches AI Guard spans. See the [Create a retention filter for AI Guard spans](#retention-filter) section.
