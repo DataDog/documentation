@@ -21,7 +21,7 @@ The flow has three parts:
 
 1. An [API test][2] logs in to your authentication provider on a schedule and extracts an access token.
 2. A [global variable][3] sourced from that test holds the token's value.
-3. Your mobile app test passes the global variable into the app as a launch argument or intent extra. Your app reads it at startup and skips its normal login flow.
+3. Your mobile app test passes the global variable into the app at launch, as an intent extra on Android or an environment variable on iOS. Your app reads it at startup and skips its normal login flow.
 
 Because the API test refreshes the token on a schedule, the global variable's value updates on its own, without any manual work or Datadog API calls.
 
@@ -115,9 +115,7 @@ Back `SecureTokenStore` with `EncryptedSharedPreferences` and a `MasterKey`, rat
 
 {{< code-block lang="swift" >}}
 #if AUTOMATION
-if let index = ProcessInfo.processInfo.arguments.firstIndex(of: "-auth_token"),
-   index + 1 < ProcessInfo.processInfo.arguments.count {
-    let authToken = ProcessInfo.processInfo.arguments[index + 1]
+if let authToken = ProcessInfo.processInfo.environment["auth_token"] {
     KeychainManager.shared.save(token: authToken)
     SessionManager.shared.restoreSession(with: authToken)
 }
@@ -128,6 +126,8 @@ Store the token in the Keychain rather than `UserDefaults`, so it's protected at
 
 {{% /tab %}}
 {{% tab "React Native" %}}
+
+This example reads the token on Android only. On Android, `react-native-launch-arguments` reads the intent extras. On iOS, it reads only launch arguments, and Datadog passes the values as environment variables instead. To get the token on iOS, read it from `ProcessInfo.processInfo.environment` in native code, as in the iOS (Swift) example, and pass it to JavaScript.
 
 {{< code-block lang="javascript" >}}
 import { LaunchArguments } from 'react-native-launch-arguments';
@@ -142,7 +142,7 @@ if (__DEV__ || Config.AUTOMATION) {
 }
 {{< /code-block >}}
 
-`react-native-launch-arguments` reads process arguments on iOS and intent extras on Android through one API. `react-native-keychain` stores the token in the platform Keychain or Keystore instead of `AsyncStorage`.
+`react-native-keychain` stores the token in the platform Keychain or Keystore instead of `AsyncStorage`.
 
 {{% /tab %}}
 {{< /tabs >}}
