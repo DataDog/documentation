@@ -29,6 +29,8 @@ Test Parallelization is supported for the following languages and frameworks:
 
 For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13.
 
+These framework minimums must also satisfy the [JavaScript Test Optimization compatibility requirements](/tests/setup/javascript/#compatibility) for your `dd-trace` major version. For example, Playwright requires version 1.38 or later with `dd-trace` v6. Check the linked requirements for Jest and Node.js too.
+
 [WebdriverIO](/tests/test_parallelization/setup/?prog_lang=javascript&platform=webdriverio#webdriverio) requires version 9 or later with the local runner and Mocha or Jasmine.
 
 ## How it works

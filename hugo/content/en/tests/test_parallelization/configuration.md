@@ -114,7 +114,7 @@ Use `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` 
 **Supported values:** `test`, `suite`
 
 `DD_TEST_OPTIMIZATION_RUNNER_FORCE_FULL_TEST_DISCOVERY`
-: Forces full test discovery when the framework supports it, including in suite-level skipping mode or when Test Impact Analysis is disabled. Use it to refresh the discovery cache or diagnose collection issues.<br/>
+: Requests full test discovery when the framework supports it, including in suite-level skipping mode or when Test Impact Analysis is disabled. A valid discovery cache can still be reused. See [refreshing the discovery cache](/tests/test_parallelization/best_practices/#cache-test-discovery) to collect tests again.<br/>
 **CLI flag:** `--force-full-test-discovery`<br/>
 **Default:** `false`<br/>
 **Supported values:** `true`, `false`
@@ -168,6 +168,8 @@ Keep options that affect test behavior, such as filters, seeds, configuration, a
 
 A wrapper separator before the framework executable is preserved, for example `npx -- jest --runInBand`. A framework's own `--` ends its options: discovery flags go before it, and execution replaces positional selection after it with assigned files. Do not rely on a command's positional paths to restrict every framework; use the [framework-specific guidance](/tests/test_parallelization/setup/#configure-your-framework).
 
+For RSpec, remove positional test files and directories from `--command` and `.rspec` to avoid running those files on multiple workers. Move the selection to `--tests-location` or [positional planning arguments](#positional-file-selections), and preserve other framework options.
+
 For pytest, the default is `python -m pytest <files>`. `--command` replaces that base command without adding `-m pytest`. Keep extra pytest options in `PYTEST_ADDOPTS`; `ddtest` preserves its value and appends `--ddtrace`.
 
 Test workers run non-interactively. Standard input is closed; prompts and interactive debuggers are not supported.
@@ -211,7 +213,7 @@ Suite mode reduces planning overhead by skipping pytest collection. It trades in
 
 File discovery uses the configured file patterns and filters to `.py` files. It excludes files under `.venv`, `venv`, `.tox`, `__pycache__`, `node_modules`, `site-packages`, and `.git`, even when selected explicitly.
 
-Normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. Forced full discovery also applies them during planning. A worker with no matching tests succeeds in suite mode, so an entirely deselected run can succeed. Test failures and collection errors from workers still fail the run. Test mode preserves pytest exit-code-5 failures from workers, but an empty plan can succeed without starting pytest.
+Normal file-only planning does not apply selectors such as `-k` and `-m`; pytest applies them during execution. When pytest collection runs during planning, it also applies these selectors. Cached discovery can reuse an earlier selection; [include selectors in cache keys and refresh the cache](/tests/test_parallelization/best_practices/#cache-test-discovery) after changes. A worker with no matching tests succeeds in suite mode, so an entirely deselected run can succeed. Test failures and collection errors from workers still fail the run. Test mode preserves pytest exit-code-5 failures from workers, but an empty plan can succeed without starting pytest.
 
 Files containing the literal `datadog_itr_unskippable` marker remain runnable, as do files beneath a `conftest.py` containing it. This conservative text check also recognizes comments. For dynamically constructed or imported markers, add a comment containing `datadog_itr_unskippable` to the affected file or ancestor `conftest.py`. Such comments protect DDTest planning; use actual pytest unskippable markers when running pytest directly with Test Impact Analysis.
 
@@ -276,7 +278,7 @@ Use values that describe the test execution environment. Set the same overrides 
 
 {{< code-block lang="bash" >}}
 export DD_TEST_OPTIMIZATION_RUNTIME_TAGS='{"os.architecture":"x86_64","os.platform":"linux","os.version":"6.8.0-aws","runtime.name":"ruby","runtime.version":"3.3.0"}'
-ddtest run
+bin/ddtest run
 {{< /code-block >}}
 
 A complete set of `os.platform`, `os.architecture`, `os.version`, `runtime.name`, and `runtime.version` skips the runtime probe during planning. Partial overrides merge with detected values.
