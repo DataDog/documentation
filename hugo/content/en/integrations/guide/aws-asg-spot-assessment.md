@@ -57,6 +57,7 @@ Groups with insufficient capacity are hidden by default. To inspect these groups
 | Spot potential | How to use it |
 | --- | --- |
 | **HIGH** | The available replacement types, interruption data, and estimated savings make the group a strong candidate for Spot. Validate application behavior before migrating. |
+| **MEDIUM** | The group has potential for Spot, but some assessment signals need further review. Check the detail panel's explanation and supporting evidence before migrating. |
 | **LOW** | Review the explanation in the detail panel. The group might lack enough instances, compatible replacement diversity, or positive estimated savings. |
 
 A high rating does not guarantee Spot capacity or application resilience. Missing history or a single availability zone doesn't, on its own, make a group unsuitable for Spot.
