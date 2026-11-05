@@ -12,8 +12,6 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">These steps apply to custom agents. To set up AI Guard for coding agents, such as Claude Code, Codex, and Cursor, see <a href="/security/ai_guard/coding_agents/setup/">Set Up Coding Agent Runtime Protection</a>.</div>
-
 Complete the following steps to set up AI Guard:
 
 ## 1. Check prerequisites
@@ -71,6 +69,10 @@ The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript,
 ### HTTP API
 
 The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directly with any HTTP client, for languages or environments the SDK doesn't cover.
+
+### Coding agents
+
+[Coding agent protection][22] uses Trajectory hooks to evaluate the prompts, tool calls, and tool results of coding agents, such as Claude Code, Codex, and Cursor, on developer computers.
 
 ## 4. Create a custom retention filter {#retention-filter}
 
@@ -224,3 +226,4 @@ DD_ENV=<YOUR_ENVIRONMENT>
 [19]: https://app.datadoghq.com/security/ai-guard/playground
 [20]: /security/ai_guard/setup/sensitive_data_redaction/
 [21]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
+[22]: /security/ai_guard/setup/coding_agents/

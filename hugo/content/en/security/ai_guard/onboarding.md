@@ -31,7 +31,7 @@ To set up AI Guard, you need to create API keys, install an SDK, configure reten
 
 For full setup instructions, see [Set Up AI Guard][15].
 
-To protect coding agents, such as Claude Code, Codex, and Cursor, see [Set Up Coding Agent Runtime Protection][23].
+To protect coding agents, such as Claude Code, Codex, and Cursor, see [Coding Agents][23].
 
 ## View AI Guard data in Datadog {#in-datadog}
 
@@ -90,4 +90,4 @@ Use the Playground to:
 [20]: /security/ai_guard/setup/#evaluation-sensitivity
 [21]: /security/ai_guard/setup/sdk/
 [22]: /security/ai_guard/setup/#evaluation-context
-[23]: /security/ai_guard/coding_agents/setup/
+[23]: /security/ai_guard/setup/coding_agents/
