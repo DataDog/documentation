@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 - SUSE 15+
 - Amazon AMI 2016.03+
 - Amazon Linux 2
-- CentOS/RHEL 7.6+
+- CentOS/Red Hat Enterprise Linux (RHEL) 7.6+
 
 **Note:** There is an exception to the 4.4.0+ kernel requirement for [CentOS/RHEL 7.6+][3]. The [DNS Resolution][4] feature is not supported on CentOS/RHEL 7.6.
 
