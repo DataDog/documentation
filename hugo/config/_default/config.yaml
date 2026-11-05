@@ -152,6 +152,8 @@ module:
       target: assets
     - source: ../shared/i18n
       target: i18n
+    - source: ../shared/regions.yaml
+      target: data/regions.yaml
     - source: archetypes
       target: archetypes
     # custom mounts

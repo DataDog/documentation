@@ -16,8 +16,7 @@ import {
  *
  * That list is deliberately not derived from the YAML. Comparing the source
  * against itself asserts nothing, and a region silently dropped from the file
- * would pass. `regions.equivalence.test.ts` checks the file's contents against
- * the live Hugo sources; this checks that Astro reads all of them.
+ * would pass. This checks that Astro reads all of them.
  */
 describe("config/regions", () => {
   it("reads the region list from shared/regions.yaml", () => {

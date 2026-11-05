@@ -1,7 +1,9 @@
 # `shared/`
 
 Data read by more than one site in this monorepo. Astro reads these files
-through the `@shared` alias. Hugo will mount them as it adopts each one.
+through the `@shared` alias. Hugo mounts `i18n/` and `regions.yaml` in
+`hugo/config/_default/config.yaml`, and will mount the others as it adopts
+each one.
 
 Documentation lives here rather than in file headers, because these files are
 edited by scripts as well as by hand, and most YAML libraries drop comments on a
@@ -30,7 +32,9 @@ the build rather than rendering an empty hostname on a live page.
 All `values` entries are strings, ports included. Quote anything that would lose
 a leading zero (`"065115117704"`) or that YAML would read as a number.
 
-To add a region, add one block. See `astro/src/config/regions.ts`.
+To add a region, add one block. Astro reads it through
+`astro/src/config/regions.ts`. Hugo reads it as `site.Data.regions` in templates,
+and its scripts get it through `hugo/assets/scripts/config/regions.config.js`.
 
 ## `site_support.yaml`
 
