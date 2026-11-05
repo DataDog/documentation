@@ -173,15 +173,12 @@ To change the order of host groups, drag a group by its handle in the group list
 
 {{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
 
-##### How host groups work
+##### Host group membership
 
 - Host groups are dynamic. When a new host matches the filter of an existing host group, Datadog adds the host to that group automatically.
 - A host can belong to more than one host group.
 - All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
 - Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
-- Rules that target {{< ui >}}All eligible hosts{{< /ui >}} apply to every eligible host, including hosts in other groups.
-- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules that target all eligible hosts are evaluated last.
-- The first rule that matches a process determines whether the process is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Create instrumentation rules
 
@@ -199,7 +196,7 @@ To create an instrumentation rule:
    {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
 
 1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
-1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group.
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How rules are evaluated](#how-rules-are-evaluated).
 
    {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
 
@@ -208,6 +205,13 @@ To create an instrumentation rule:
 After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][20] page shows how many eligible hosts have received the current rules.
 
 Rules are applied on eligible hosts within 50 seconds of deployment. Alternatively, click {{< ui >}}Export{{< /ui >}} above the rules list to export the configuration file and apply it manually to your hosts.
+
+#### How rules are evaluated
+
+- Rules that target {{< ui >}}All eligible hosts{{< /ui >}} apply to every eligible host, including hosts in host groups.
+- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules that target all eligible hosts are evaluated last.
+- Within a group, rules are evaluated from top to bottom, in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+- The first rule that matches a process determines whether the process is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Define rule conditions
 
