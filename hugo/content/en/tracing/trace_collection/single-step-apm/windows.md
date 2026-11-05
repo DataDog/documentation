@@ -179,17 +179,13 @@ To create a host group:
 
 1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Hosts in Scope{{< /ui >}} card and click {{< ui >}}Manage host groups{{< /ui >}}.
 1. Click {{< ui >}}New Host Group{{< /ui >}} and enter a name for the group.
-1. Click {{< ui >}}Add Hosts{{< /ui >}}, then search for and select the hosts to add. You can search by hostname, facets, or host tags. Host groups are dynamic: new hosts that match your search are added to the group automatically.
+1. Click {{< ui >}}Add Hosts{{< /ui >}}, then search for and select the hosts to add. You can search by hostname, facets, or host tags. Host groups are dynamic: new hosts that match your search are added to the group automatically. A host can belong to more than one group, but all hosts in a group must run on the same platform, such as Linux or Windows.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="The new host group form, with two of three hosts selected in the Add Hosts list" style="width:80%;" >}}
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-Host groups work in the following ways:
-
-- A host can belong to more than one host group.
-- All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
-- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
+Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
 
 To change the order of host groups, drag a group by its handle in the group list. Group order affects [how rules are evaluated](#how-rules-are-evaluated).
 
