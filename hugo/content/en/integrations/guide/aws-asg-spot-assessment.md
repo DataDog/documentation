@@ -91,7 +91,7 @@ Projected cost combines the remaining share of the current baseline with public 
 
 For public-price estimates, enter an effective **On-Demand discount** to compare Spot against discounted On-Demand rates. This control does not apply another discount to Cloud Cost Management costs. A discount that removes positive savings can change Spot potential to **LOW**.
 
-To explore other percentages, adjust the Spot percentage in **Projected cost at your Spot mix**. This changes only the projected cost. Spot potential continues to reflect the default 50% scenario.
+To explore other percentages, adjust the Spot percentage in **Projected cost at your Spot mix**. This updates projected costs and estimated savings for the selected mix. Spot potential continues to reflect the default 50% scenario.
 
 Public price estimates use Linux pricing and exclude software licensing charges. Estimates cover compute costs and do not guarantee a reduction in the AWS bill. The Cloud Cost Management scenario assumes commitments freed by migration can be used elsewhere. Review Savings Plans and Reserved Instance utilization before acting on estimated savings.
 
