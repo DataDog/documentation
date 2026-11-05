@@ -7831,7 +7831,7 @@ menu:
       parent: log_management
       identifier: log_migration
       weight: 9
-    - name: Query Translation
+    - name: Migration Tools
       url: logs/migration/query_translation/
       parent: log_migration
       identifier: log_migration_query_translation
