@@ -20,7 +20,6 @@ further_reading:
 - link: "/logs/guide/log-collection-troubleshooting-guide/"
   tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
-site_support_id: fleet-automation-standard-features
 ---
 
 Use [Fleet Automation][2] to manage [custom log collection][4] settings on your Agents remotely at scale. Instead of editing `conf.d` configuration files host by host, scope a change by host information or tag and deploy it to all matching Agents at once. Before deploying, review the configuration diff for each Agent in scope.

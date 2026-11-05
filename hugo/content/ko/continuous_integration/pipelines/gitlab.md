@@ -3,13 +3,13 @@ aliases:
 - /ko/continuous_integration/setup_pipelines/gitlab
 further_reading:
 - link: /continuous_integration/pipelines
-  tag: 설명서
+  tag: 문서
   text: 파이프라인 실행 결과 및 성능 탐색
 - link: /continuous_integration/troubleshooting/
-  tag: 설명서
+  tag: 문서
   text: CI Visibility 문제 해결
 - link: /continuous_integration/pipelines/custom_tags_and_measures/
-  tag: 설명서
+  tag: 문서
   text: 사용자 지정 태그 및 측정값을 추가하여 Pipeline Visibility 확장
 title: GitLab CI Visibility 설정
 ---
@@ -25,13 +25,13 @@ GitLab에 대한 CI Visibility 설정하여 파이프라인 실행에 대한 데
 |---|---|---|
 | [실행 중인 파이프라인][24] | 실행 중인 파이프라인 | 실행 중인 파이프라인 실행을 표시합니다. 대기열에 있거나 대기 중인 파이프라인은 Datadog에서 '실행 중' 상태로 표시됩니다. |
 | [실행 중인 작업][32] | 실행 중인 작업 | 현재 실행 중인 작업 실행을 표시합니다. |
-| [CI 작업 실패 분석][28] | CI 작업 실패 분석 | 관련 로그에 LLM 모델을 사용하여 실패한 CI 작업의 근본 원인을 분석합니다. |
+| [Logs Analysis][28] | Logs Analysis | 관련 로그에 LLM 모델을 사용하여 실패한 CI 작업의 근본 원인을 분석합니다. |
+| 로그 상관관계 | 로그 상관관계 | 파이프라인 스팬을 로그와 상관 분석합니다. [로그 스토리지][12]가 필요합니다. |
 | [임계 경로의 CI 작업 필터링][29] | 임계 경로의 CI 작업 필터링 | 임계 경로에 있는 작업별로 필터링합니다. |
 | [부분 재시도][19] | 부분 파이프라인 | 부분적으로 재시도된 파이프라인 실행을 표시합니다. |
 | [자동 작업 재시도][31] | 자동 작업 재시도 | Datadog은 AI 오류 모델에 의해 일시적인 것으로 분류된 실패 작업을 재시도합니다. |
 | [수동 단계][20] | 수동 단계 | 수동으로 트리거된 파이프라인을 표시합니다. |
 | [대기 시간][21] | 대기 시간 | 파이프라인의 작업이 처리되기 전에 대기열에 남아있는 시간을 표시합니다. |
-| 로그 상관관계 | 로그 상관관계 |  파이프라인 스팬과 로그를 상호 연관시키고 [작업 로그 수집][12]을 활성화합니다. |
 | 인프라 메트릭 상관관계 | 인프라 메트릭 상관관계 | 자체 호스팅 GitLab 러너에 대해 작업을 [인프라 호스트 메트릭][14]과 상호 연관시킵니다. |
 | Custom pre-defined tags | Custom pre-defined tags | 모든 생성된 파이프라인, 스테이지 및 작업 스팬에 [사용자 지정][10]를 설정합니다. |
 | [런타임 시][15] [사용자 지정 태그 및 측정값][16] | 런타임 시 사용자 지정 태그 및 측정값 | 런타임 시 [사용자 지정 태그 및 측정값][13]을 구성합니다. |
@@ -341,14 +341,6 @@ CI Visibility는 다른 실행기에 대한 인프라 메트릭을 지원하지 
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab 실패 이유" style="width:100%;">}}
 
-#### CI 작업 실패 분석 {#ci-jobs-failure-analysis}
-
-작업 로그 수집이 활성화된 경우, CI Visibility는 LLM 모델을 사용하여 GitLab에서 제공하는 관련 로그를 기반으로 실패한 CI 작업을 분석합니다.
-
-PR 댓글에 작업 실패 분석을 추가할 수도 있습니다. [PR 댓글 사용][30]에 대한 가이드를 참조하세요.
-
-자세한 내용은 [CI 작업 실패 분석 사용][28] 가이드를 참조하세요.
-
 #### GitLab에서 제공하는 오류 {#errors-provided-by-gitlab}
 
 오류 메시지는 GitLab 버전 15.2.0 이상에서 지원됩니다.
@@ -390,17 +382,27 @@ GitLab에서 제공하는 오류 정보는 `error.provider_message` 및 `error.p
 | `reached_max_descendant_pipelines_depth` | 사용자   | 최대 하위 파이프라인 수에 도달했습니다.                        |
 | `ip_restriction_failure`          | 공급자     | IP 제한 실패.                                    |
 
-### 작업 로그 수집 {#collect-job-logs}
+### 작업 로그 관리 {#manage-job-logs}
 
-다음 GitLab 버전은 작업 로그 수집을 지원합니다.
+#### 로그 분석 {#logs-analysis}
+
+로그 분석은 GitLab에서 제공되는 관련 로그를 기반으로 LLM 모델을 사용하여 작업 실패를 근본 원인별로 분류합니다.
+
+자세한 내용은 [로그 분석 사용][28] 가이드를 참조하세요.
+
+로그 분석은 Datadog에서 기본적으로 활성화되어 있지만, 아래 설명된 대로 작업 로그 전달을 구성해야 합니다.
+
+PR 댓글에 로그 분석을 추가할 수도 있습니다. [PR 댓글 사용][30]에 대한 가이드를 참조하세요.
+
+로그 분석 활성화는 [자동 작업 재시도][31]의 필수 조건이기도 합니다.
+
+다음 GitLab 버전은 작업 로그를 Datadog으로 전달하는 것을 지원합니다:
 
 * GitLab.com(SaaS)
 * GitLab >= 15.3 (자체 호스팅)은 [작업 로그를 저장하는 개체 스토리지][7]를 사용하는 경우에만 해당됩니다.
 * GitLab >= 14.8 (자체 호스팅)은 `datadog_integration_logs_collection` Feature Flag를 활성화하여 사용합니다.
 
-작업 로그는 [Log Management][9]에서 수집되며, CI Visibility 내에서 GitLab 파이프라인과 자동으로 상관관계가 설정됩니다. 1GiB를 초과하는 로그 파일은 잘립니다.
-
-작업 로그 수집을 실행하려면:
+GitLab에서 작업 로그 전달을 활성화하려면:
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
@@ -431,7 +433,13 @@ GitLab에서 제공하는 오류 정보는 `error.provider_message` 및 `error.p
 {{% /tab %}}
 {{< /tabs >}}
 
-로그는 CI Visibility와 별도로 청구됩니다. 로그 보존, 제외 및 인덱스는 [Log Management][6]에서 구성됩니다. GitLab 작업에 대한 로그는 `datadog.product:cipipeline` 및 `source:gitlab` 태그로 식별할 수 있습니다.
+#### 로그 스토리지 {#logs-storage}
+
+GitLab 버전에 대한 단계를 완료한 후, [CI/CD 리포지토리 설정][35]으로 이동하여 Datadog 조직 수준 또는 원하는 리포지토리에 대해 로그 스토리지를 활성화해야 합니다.
+
+로그 스토리지는 CI Visibility와 별도로 청구됩니다. 로그 보존, 제외 및 인덱스는 [Log Management][6]에서 구성됩니다. GitLab 작업에 대한 로그는 `datadog.product:cipipeline` 및 `source:gitlab` 태그로 식별할 수 있습니다.
+
+작업 로그는 [Log Management][9]에서 수집되며, CI Visibility 내에서 GitLab 파이프라인과 자동으로 상관관계가 설정됩니다. 1GiB를 초과하는 로그 파일은 잘립니다.
 
 GitLab 통합에서 수집된 작업 로그 처리에 대한 자세한 내용은 [프로세서 문서][17]를 참조하세요.
 
@@ -472,7 +480,7 @@ GitLab 통합에서 수집된 작업 로그 처리에 대한 자세한 내용은
 [9]: /ko/logs/
 [10]: /ko/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /ko/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /ko/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[12]: /ko/continuous_integration/pipelines/gitlab/#logs-storage
 [13]: /ko/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /ko/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /ko/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
@@ -495,3 +503,4 @@ GitLab 통합에서 수집된 작업 로그 처리에 대한 자세한 내용은
 [32]: /ko/glossary/#running-job
 [33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
 [34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
+[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

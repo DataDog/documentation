@@ -47,7 +47,7 @@ Send monitor alerts and notifications based on significant event queries. To con
 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /integrations/guide/reference-tables/
-[3]: https://app.datadoghq.com/event/pipelines
+[3]: https://app.datadoghq.com/event/settings/pipelines
 [4]: /help/
 [5]: https://app.datadoghq.com/event/configuration/generate-metrics
 [6]: /events/explorer/analytics

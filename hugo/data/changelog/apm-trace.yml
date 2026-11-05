@@ -1,0 +1,8 @@
+entries:
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/41034
+    operations:
+      - GetTraceByID
+    title: Fix GetTraceByID include_fields example to use resource instead of 
+      resource_name
