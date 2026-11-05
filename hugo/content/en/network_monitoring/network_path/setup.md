@@ -27,14 +27,14 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 You can configure Network Path tests in two ways:
 
-- **[In the UI](#create-tests-in-the-ui)** (Preview, recommended): Enable the Agent once, then create and update tests from the Network Path UI.
+- **[In the UI](#create-tests-in-the-ui)** (Preview): Enable the Agent once, then create and update tests from the Network Path UI.
 - **[In the Agent configuration](#configure-tests-in-the-agent-configuration)**: Define tests in the Agent configuration files on each host.
 
 ### Create tests in the UI (Preview) {#create-tests-in-the-ui}
 
-Create and manage scheduled tests and dynamic test filters from the [Network Path][4] UI. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent. This is the recommended setup for new users.
+Create and manage scheduled tests and dynamic test filters from the [Network Path][4] UI. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent.
 
-After a one-time Agent setup, the Agent appears as eligible in the test creation workflow. If the Agent table shows **No eligible agents**, see [No eligible agents](#no-eligible-agents).
+An Agent appears as eligible in the test creation workflow only after you complete all of the following setup.
 
 #### Prerequisites
 
@@ -940,18 +940,6 @@ If no paths with `origin:netflow` appear in the [Network Path][4] UI, verify the
 Dynamic Tests for NetFlow automatically skip NetFlow records whose source IP is assigned to the Agent host before destination filters are evaluated. This prevents self-scheduling loops and is expected behavior. For NAT or alias cases where Agent-sourced traffic appears from another source IP, use `network_path.collector.source_excludes` to exclude those source IPs.
 
 Then filter the Network Path UI for `origin:netflow`.
-
-### No eligible agents
-
-If the Agent table in the test creation workflow shows **No eligible agents**, check each Agent you want to target:
-
-1. The Agent is version `7.83+`.
-2. The Agent's API key has [Remote Configuration enabled][17].
-3. `traceroute.enabled` is `true` in `system-probe.yaml`.
-4. `network_path.remote_config.enabled` is `true` in `datadog.yaml`, and the Agent was restarted after you changed it.
-5. For dynamic tests: [Cloud Network Monitoring][1] is enabled and `network_path.connections_monitoring.enabled` is `true`.
-
-See [Create tests in the UI](#create-tests-in-the-ui) for the full setup.
 
 ### Error: status code: 404
 
