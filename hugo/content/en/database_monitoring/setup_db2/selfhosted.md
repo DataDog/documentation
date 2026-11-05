@@ -30,9 +30,7 @@ Supported Agent versions
 Supported platforms
 : IBM Db2 for Linux, UNIX, and Windows (Db2 LUW).
 
-<!-- vale Datadog.headings = NO -->
 ## Data collected
-<!-- vale Datadog.headings = YES -->
 
 Database Monitoring collects the following data from IBM Db2:
 
@@ -64,7 +62,7 @@ db2 connect to <DB_NAME>
 db2 UPDATE DB CFG FOR <DB_NAME> USING <PARAMETER> BASE
 ```
 
-The connection allows the configuration update to take effect online. Execution counts include coordinator executions recorded with activity metrics, controlled by `MON_ACT_METRICS`.
+The connection allows the configuration update to take effect online. `MON_ACT_METRICS` must be enabled because query metrics rely on coordinator execution counts recorded through activity metrics.
 
 For details, see IBM's [UPDATE DATABASE CONFIGURATION command][2], [activity metrics parameter][3], and [request metrics parameter][4].
 
@@ -112,13 +110,13 @@ FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 ```
 
-Replace `<AGENT_VERSION>` with `7.86.0` or a later version. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
+Replace `<AGENT_VERSION>` with `7.86.0` or later. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
 
 Deploy the image using the [Docker][21] or [Kubernetes][22] Agent installation instructions.
 
 For integration configuration, follow the [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster check instructions][11]. Specify `ibm_db2` as the integration name and use the database connection settings shown in [Step 4](#step-4-configure-the-agent).
 
-Set up the [secret backend][10] on the Agent that runs the check. With cluster checks, this is the Cluster Checks Runner, which also needs the custom image and the ACR configuration below.
+Set up the [secret backend][10] on the Agent that runs the check. With cluster checks, this is the Cluster Checks Runner, which also needs the custom image and the [ACR configuration](#disable-automatic-client-reroute).
 
 ### Step 4: Configure the Agent
 
@@ -157,7 +155,7 @@ instances:
 If each server runs its own Agent, include only that server's entry in its configuration. Add an entry for each additional database.
 
 - Use each server's direct address. Do not use a virtual IP, load balancer, or failover DNS name. See [Connect to a fixed server][14].
-- Disable automatic client reroute (ACR) for the Agent's IBM driver, as described below.
+- Disable automatic client reroute (ACR) for the Agent's IBM driver. See [Disable automatic client reroute](#disable-automatic-client-reroute).
 - Keep each server's identifier stable across primary and standby role changes. Do not share a cluster identifier between servers. See [HADR configuration][16].
 - Do not configure two Agents or duplicate check instances to collect the same database on the same server.
 
