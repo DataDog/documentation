@@ -28,7 +28,9 @@ Test a [Prompt Management][1] prompt change on live traffic before making it the
 - **Which prompt version performs better?** [Run an A/B test](#run-an-ab-test) to compare versions against an outcome, such as checkout conversion.
 - **How do I introduce a change gradually?** [Use a Guarded Rollout](#use-a-guarded-rollout) to increase exposure to a version over time and pause if Datadog detects a regression.
 
-<div class="alert alert-info"><strong>Preview:</strong> A/B testing and Guarded Rollouts for managed prompts are available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. You can request access to A/B testing and Guarded Rollouts independently.</div>
+{{< callout url="https://www.datadoghq.com/support/" >}}
+A/B testing and Guarded Rollouts for managed prompts are available in Preview. To request access, contact Datadog Support or your Customer Success Manager. You can request access to A/B testing and Guarded Rollouts independently.
+{{< /callout >}}
 
 ## Before you begin
 
