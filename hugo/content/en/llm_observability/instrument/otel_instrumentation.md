@@ -688,7 +688,11 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 
 For [supported models and providers][58], Datadog can estimate costs from token usage without cost attributes. Supply costs directly for unsupported models or custom pricing.
 
-The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. Each supplied cost field takes precedence over its automatic estimate. Datadog can still estimate cost fields you omit.
+Cost attributes use two paths: [supplied costs](#supplied-cost-attributes) that Datadog preserves, and [fallback estimates](#fallback-estimated-cost-attributes-nanodollars) that automatic pricing can replace. Both paths populate the same `metrics.estimated_*_cost` fields, but Datadog preserves supplied costs despite the `estimated_` prefix.
+
+##### Supplied cost attributes
+
+The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. **Automatic pricing does not overwrite these supplied cost fields, including zero.** Datadog can still estimate cost fields you omit.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
@@ -709,9 +713,9 @@ Set `gen_ai.usage.cost.currency` to `USD` when using `gen_ai.usage.cost.amount`.
 
 If several USD attributes from the table above supply the same cost field, Datadog uses the first valid value. The precedence order is: `gen_ai.usage.cost.amount`, `gen_ai.usage.cost`, `gen_ai.cost.*`, then `llm.cost.*`. Zero is a valid supplied cost.
 
-##### Estimated cost attributes (nanodollars)
+##### Fallback estimated cost attributes (nanodollars)
 
-These Datadog-supported extensions accept optional fallback estimates in **nanodollars**, without unit conversion. For example, send `10000000` for a $0.01 estimate.
+These Datadog-supported extensions accept optional fallback estimates in nanodollars, without unit conversion. For example, send `10000000` for a $0.01 estimate. Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
 
 | OTel Attribute | Agent Observability Field |
 |----------------|--------------|
@@ -722,8 +726,6 @@ These Datadog-supported extensions accept optional fallback estimates in **nanod
 | `gen_ai.cost.estimated_cache_write_input` | `metrics.estimated_cache_write_input_cost` |
 | `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
 | `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
-
-Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
 
 #### Request parameters
 

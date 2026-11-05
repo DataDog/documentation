@@ -33,15 +33,12 @@ Metrics prefixed with `ecs.containerinsights.*` can be collected by enabling **c
 
 ### Events
 
-To reduce noise, the Amazon ECS integration is automatically set up to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
+The Amazon ECS integration collects events emitted by clusters and services, which typically look like the following:
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Amazon ECS Events" >}}
-
-To remove this include list and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/agent/docker/data_collected/#metrics
-[2]: https://docs.datadoghq.com/help/

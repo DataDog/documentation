@@ -3458,34 +3458,6 @@
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
   },
-  "GetIncidentTemplates": {
-    "description": "Get all Salesforce incident templates configured for your organization.",
-    "summary": "Get all Salesforce incident templates"
-  },
-  "CreateIncidentTemplate": {
-    "description": "Create a new Salesforce incident template for your organization. Template\nnames must be unique within an organization.",
-    "summary": "Create a Salesforce incident template",
-    "request_description": "Salesforce incident template payload.",
-    "request_schema_description": "Create request for a Salesforce incident template."
-  },
-  "DeleteIncidentTemplate": {
-    "description": "Delete a single Salesforce incident template from your organization.",
-    "summary": "Delete a Salesforce incident template"
-  },
-  "UpdateIncidentTemplate": {
-    "description": "Update a single Salesforce incident template in your organization.",
-    "summary": "Update a Salesforce incident template",
-    "request_description": "Salesforce incident template payload.",
-    "request_schema_description": "Update request for a Salesforce incident template."
-  },
-  "GetSalesforceOrganizations": {
-    "description": "Get all Salesforce organizations connected to your Datadog organization\nthrough the Salesforce integration. Salesforce organizations are connected\nthrough the OAuth setup flow in the Datadog Salesforce integration page.",
-    "summary": "Get all connected Salesforce organizations"
-  },
-  "DeleteSalesforceOrganization": {
-    "description": "Disconnect a Salesforce organization from your Datadog organization.\nThis also deletes any incident templates referencing the organization.",
-    "summary": "Delete a connected Salesforce organization"
-  },
   "ListServiceNowAssignmentGroups": {
     "description": "Get all assignment groups for a ServiceNow instance.",
     "summary": "List ServiceNow assignment groups"
@@ -5540,15 +5512,15 @@
     "request_schema_description": "Request body for toggling a report schedule."
   },
   "DeleteRestrictionPolicy": {
-    "description": "Deletes the restriction policy associated with a specified resource.",
+    "description": "Deletes the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.\nDeleting a provider policy restores normal unrestricted defaults.",
     "summary": "Delete a restriction policy"
   },
   "GetRestrictionPolicy": {
-    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "description": "Retrieves the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_read`.",
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.\nThe editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.\nReading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -5734,28 +5706,28 @@
     "request_schema_description": "Request body for creating the RUM configuration."
   },
   "ListRumMetrics": {
-    "description": "Get the list of configured RUM-based metrics with their definitions.",
+    "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
     "summary": "Get all RUM-based metrics"
   },
   "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Create a metric based on your organization's RUM data.\nThe metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.\nThe `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.\n`uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.\nWhen `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.\nReturns the created RUM-based metric when the request is successful.\nThe request returns a `409 Conflict` error if a metric with the same name already exists.",
     "summary": "Create a RUM-based metric",
     "request_description": "The definition of the new RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
   },
   "DeleteRumMetric": {
-    "description": "Delete a specific RUM-based metric from your organization.",
+    "description": "Delete a specific RUM-based metric from your organization.\nMetric data that was already generated is not deleted. Deleting a metric cannot be undone.",
     "summary": "Delete a RUM-based metric"
   },
   "GetRumMetric": {
-    "description": "Get a specific RUM-based metric from your organization.",
+    "description": "Get a specific RUM-based metric from your organization.\nThe `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.",
     "summary": "Get a RUM-based metric"
   },
   "UpdateRumMetric": {
-    "description": "Update a specific RUM-based metric from your organization.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Update a specific RUM-based metric from your organization.\nOnly `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.\nOmitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.\n`data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.\nThe request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.\nReturns the updated RUM-based metric when the request is successful.",
     "summary": "Update a RUM-based metric",
     "request_description": "New definition of the RUM-based metric.",
-    "request_schema_description": "The new RUM-based metric body."
+    "request_schema_description": "The RUM-based metric update body."
   },
   "DeleteRumQuotaConfig": {
     "description": "Delete the RUM retention quota configuration for a given scope.",
@@ -8045,7 +8017,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."

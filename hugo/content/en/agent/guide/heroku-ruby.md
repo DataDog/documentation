@@ -242,7 +242,7 @@ Collector
 [...]
 ```
 
-Once you have checked that the Postgres check is running correctly, you can start looking at the Postgres metrics available on the [Metrics Summary][15] page:
+After you have checked that the Postgres check is running correctly, you can start looking at the Postgres metrics available on the [Metrics Catalog][15] page:
 
 {{< img src="agent/guide/heroku_ruby/postgres_metrics.png" alt="Datadog Metrics Explorer" >}}
 
@@ -851,7 +851,7 @@ Agent (v7.27.0)
 [12]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Adatadog.heroku_agent.running&filter=dyno%3Aweb.1
 [13]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#enabling-integrations
 [14]: https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#prerun-script
-[15]: https://app.datadoghq.com/metric/summary?filter=postgresql
+[15]: https://app.datadoghq.com/metric/catalog?filter=postgresql
 [16]: https://elements.heroku.com/addons/heroku-redis
 [17]: https://elements.heroku.com/addons/memcachedcloud
 [18]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
