@@ -42,13 +42,14 @@ A gate's configuration source refers to how the gate is defined: in the evaluati
 - **Preconfigured**: A preconfigured Deployment Gate is created ahead of time in Datadog, then referenced in an evaluation request.
 
 Use the following table to choose the right source for your gate:
+
 |  | JIT | Preconfigured |
 |---|---|---|
 | **Where the gate is defined** | In your deployment configuration or CI step | In Datadog |
 | **Setup in Datadog** | None | Create the gate and its rules before the first evaluation |
 | **What the evaluation request contains** | The full gate configuration, including service, environment, and rules | Service, environment, and optionally an identifier, which identify the preconfigured gate |
 | **Does the gate have an ID?** | No, the gate exists only within each evaluation | Yes, the gate persists between evaluations |
-| **Shown on [Evaluations][5] page?** | Yes, even though the gate isn't stored in Datadog | Yes |
+| **Shown on the [Evaluations][5] page?** | Yes, even though the gate isn't stored in Datadog | Yes |
 | **Best for** | Managing rules as code alongside your pipeline, and teams that own their own gate configuration | Sharing rules across services, managing gates centrally, and editing rules outside of CI |
 
 You can use different configuration sources for different gates. If you're unsure where to start, use JIT gates. They require no setup in Datadog, and you can iterate on rules directly in your deployment configuration.
