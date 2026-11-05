@@ -114,13 +114,13 @@ AI Guard detects these attack categories:
 | Destructive or resource abuse | `destructive-or-resource-abuse` | Deleting or corrupting production, shared, backup, customer, or security data, disabling security controls, disrupting infrastructure, or consuming resources without bounds, including excessive or unnecessarily broad tool use. |
 | Poisoning or persistence | `poisoning-or-persistence` | Storing instructions that steer later turns, such as in agent memory, RAG documents, tickets, tool data, the system prompt, approval policies, or tool destinations. |
 
-The list of attack categories expands as AI Guard adds detections. For a description of each attack category, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
+The list of attack categories expands as AI Guard adds detections. For the current list, click {{< ui >}}What does AI Guard detect?{{< /ui >}} on the {{< ui >}}Policies{{< /ui >}} tab.
 
 ## Integration methods
 
 AI Guard connects to agents through the AI Guard SDK, which is part of the Datadog SDK. Every integration method runs on the SDK. The methods differ in how much of the connection you build yourself.
 
-Choose the first method that fits your agent:
+Choose the method that fits your agent:
 
 | Method | What you do | Supported |
 | --- | --- | --- |

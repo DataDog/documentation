@@ -98,7 +98,7 @@ The request needs these headers:
 | `DD-APPLICATION-KEY` | `<DATADOG_APPLICATION_KEY>`. The application key needs the `ai_guard_evaluate` scope. |
 | `Content-Type` | `application/json` |
 
-To apply the AI Guard policy settings for a specific service and environment, add `data.attributes.meta` with `service` and `env` values. Without `meta`, AI Guard applies only your organization-wide settings.
+To apply the AI Guard policy settings for a specific service and environment, add `data.attributes.meta` with `service` and `env` values. Without `meta`, AI Guard applies the default policy.
 
 `messages` holds the full conversation in order. AI Guard evaluates the last message, and uses the earlier messages as context. Each message has these fields:
 
@@ -150,7 +150,7 @@ To evaluate a tool result after the tool runs, end the conversation with the too
 }
 ```
 
-Evaluate the tool call before the agent runs the tool as well, so AI Guard can stop an unsafe tool call before the tool runs.
+Also evaluate the tool call before the agent runs the tool, so AI Guard can stop an unsafe tool call.
 
 ## Response format
 

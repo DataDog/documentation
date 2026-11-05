@@ -59,7 +59,7 @@ In both modes, AI Guard returns `ALLOW` or `DENY` for every evaluation. The mode
 - {{< ui >}}Monitor only{{< /ui >}}: AI Guard detects and tags unsafe requests, but never blocks them.
 - {{< ui >}}Block unsafe{{< /ui >}}: AI Guard rejects requests it judges unsafe.
 
-<div class="alert alert-info">Before you switch a policy to {{< ui >}}Block unsafe{{< /ui >}}, update every agent in the policy scope to handle blocked requests. Otherwise, the agent fails when AI Guard blocks a request. See the <a href="#blocking-policy">Turn on blocking</a> section.</div>
+<div class="alert alert-info">Before you switch a policy to {{< ui >}}Block unsafe{{< /ui >}}, update every agent in the policy scope to handle blocked requests. Otherwise, a blocked request can make the agent fail or let the request through. See the <a href="#blocking-policy">Turn on blocking</a> section.</div>
 
 ### Evaluation sensitivity
 
@@ -100,7 +100,7 @@ Evaluation context is limited to 1,000 characters. Evaluation context isn't avai
 
 ### Sensitive data scanning
 
-Sensitive data scanning finds personal information and secrets in agent conversations, so you can identify and optionally redact sensitive data before it's sent.
+Sensitive data scanning finds personal information and secrets in agent conversations, so you can identify and optionally redact sensitive data before your agent sends it to the model.
 
 The {{< ui >}}Sensitive data scanning{{< /ui >}} setting has these options:
 
@@ -161,7 +161,7 @@ When a service or environment needs different settings, create a custom policy i
    - To create a custom policy, click {{< ui >}}Add Custom Policy{{< /ui >}}. Under {{< ui >}}Scope{{< /ui >}}, select a {{< ui >}}Service{{< /ui >}} and an {{< ui >}}Environment{{< /ui >}}. To cover every service or every environment, select {{< ui >}}All{{< /ui >}} for that value. {{< ui >}}Service{{< /ui >}} and {{< ui >}}Environment{{< /ui >}} can't both be {{< ui >}}All{{< /ui >}}.
 1. Change the settings as needed. In a custom policy, override only the settings that differ from the parent policy. For details, see the [Policy settings](#policy-settings) section.
 
-   <div class="alert alert-info">Before you switch a policy to {{< ui >}}Block unsafe{{< /ui >}}, update every agent in the policy scope to handle blocked requests. Otherwise, the agent fails when AI Guard blocks a request. See the <a href="#blocking-policy">Turn on blocking</a> section.</div>
+   <div class="alert alert-info">Before you switch a policy to {{< ui >}}Block unsafe{{< /ui >}}, update every agent in the policy scope to handle blocked requests. Otherwise, a blocked request can make the agent fail or let the request through. See the <a href="#blocking-policy">Turn on blocking</a> section.</div>
 
 1. (Optional) Test the change in the {{< ui >}}Simulator{{< /ui >}} panel, which evaluates sample conversations with your unsaved settings.
 1. Save the policy. It applies to new evaluations within seconds after you save.

@@ -268,9 +268,9 @@ Evaluate messages with the SDK so AI Guard checks each prompt, model response, a
 
 ## Handling evaluation outcomes
 
-With context on how SDK calls reported AI Guard decisions, your code can look for those decisions and determine what to do with them. SDK calls report decisions in one of two ways, depending on the AI Guard policy for the service:
+SDK calls report AI Guard decisions in one of two ways, depending on the AI Guard policy for the service:
 
-- {% ui %}Monitor only{% /ui %} mode: The SDK returns an **evaluation** when AI Guard allows the request. In {% ui %}Monitor only{% /ui %} mode, a `DENY` action doesn't stop anything on its own. Your code reads the `action` field and decides whether to proceed.
+- {% ui %}Monitor only{% /ui %} mode: The SDK returns an **evaluation** for every decision, including a `DENY` action. A `DENY` action doesn't stop anything on its own, so your code reads the `action` field and decides whether to proceed.
 - {% ui %}Block unsafe{% /ui %} mode: The SDK raises **`AIGuardAbortError`** when AI Guard returns `DENY`. Your code catches the error, stops the request, and returns a safe response. If your code doesn't catch `AIGuardAbortError`, the agent fails. For the error fields in each language, see [Handle blocked requests][11].
 
 ### Evaluation fields
