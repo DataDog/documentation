@@ -686,11 +686,6 @@ menu:
       identifier: integration_guides
       parent: integrations_top_level
       weight: 1
-    - name: AWS ASG Spot Assessment
-      url: integrations/guide/aws-asg-spot-assessment/
-      identifier: aws_asg_spot_assessment
-      parent: integration_guides
-      weight: 1
     - name: OpenTelemetry
       url: opentelemetry/
       identifier: opentelemetry_top_level
