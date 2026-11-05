@@ -23,9 +23,17 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
-### Choose a setup method
+### Choose a test type
 
-Network Path tests run on the Datadog Agent and come in two kinds: **scheduled tests** monitor destinations that you define, and **dynamic tests** automatically discover destinations from traffic observed by [Cloud Network Monitoring][1]. You can create both kinds in the UI and/or in the Agent configuration files.
+| Test type | What it monitors | Best for | Create in the UI (Preview) |
+|-----------|------------------|----------|----------------------------|
+| **[Scheduled&nbsp;tests](#scheduled-tests)** | Destinations that you define | A known set of endpoints, such as critical APIs or partner services | Yes |
+| **[Dynamic&nbsp;tests](#dynamic-tests)** | Destinations discovered from traffic observed by [Cloud Network Monitoring][1] | Broad visibility without listing every destination | Filters only |
+| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** (Experimental) | Destination IPs observed in [NetFlow Monitoring][6] | Hop-by-hop route visibility for NetFlow traffic | No |
+
+These test types run on your Datadog Agents, and you can configure every type in the Agent configuration files.
+
+### Choose a setup method
 
 | Method | Tests run from | Where you configure tests |
 |--------|----------------|---------------------------|
@@ -33,11 +41,11 @@ Network Path tests run on the Datadog Agent and come in two kinds: **scheduled t
 | **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | Your Datadog Agents | In configuration files on each host |
 | **[Synthetic Monitoring][15]** | Datadog managed locations | In Synthetic Monitoring, as Synthetic tests |
 
-This page covers the first two methods. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
+You can use the UI and the Agent configuration files on the same Agent. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
 
 ### Create tests in the UI (Preview) {#create-tests-in-the-ui}
 
-Create and manage scheduled tests and dynamic test filters from the [Network Path][4] UI. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent.
+Create and manage scheduled tests from the [Network Path][4] UI, and set the filters that control which connections dynamic tests monitor. You turn on dynamic tests themselves in the Agent configuration, as shown in step 3 below. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent.
 
 **An Agent appears as eligible in the test creation workflow only after you complete all of the following setup.**
 
@@ -45,7 +53,7 @@ Create and manage scheduled tests and dynamic test filters from the [Network Pat
 
 - Agent `v7.83.2+` is installed.
 - [Remote Configuration][17] is enabled for your organization and for the Agent's API key.
-- Your Datadog role includes the **Network Path Remote Configuration Write** (`network_path_config_write`) permission, which lets you create and update Network Path configurations.
+- You (the person creating tests) need a Datadog role with the **Network Path Remote Configuration Write** (`network_path_config_write`) permission, which lets you create and update Network Path configurations.
 - For dynamic tests: [Cloud Network Monitoring][1] is enabled.
 
 #### Configure the Agent
@@ -70,7 +78,7 @@ Create and manage scheduled tests and dynamic test filters from the [Network Pat
        enabled: true
    ```
 
-3. For dynamic tests, also enable connection monitoring in `/etc/datadog-agent/datadog.yaml`:
+3. For dynamic tests, also enable connection monitoring in `/etc/datadog-agent/datadog.yaml`. The complete `network_path` section looks like this:
 
    ```yaml
    network_path:
@@ -102,7 +110,7 @@ Create and manage scheduled tests and dynamic test filters from the [Network Pat
        enabled: true
    ```
 
-3. For dynamic tests, also enable connection monitoring in `/opt/datadog-agent/etc/datadog.yaml`:
+3. For dynamic tests, also enable connection monitoring in `/opt/datadog-agent/etc/datadog.yaml`. The complete `network_path` section looks like this:
 
    ```yaml
    network_path:
@@ -134,7 +142,7 @@ Create and manage scheduled tests and dynamic test filters from the [Network Pat
        enabled: true
    ```
 
-3. For dynamic tests, also enable connection monitoring in `%ProgramData%\Datadog\datadog.yaml`:
+3. For dynamic tests, also enable connection monitoring in `%ProgramData%\Datadog\datadog.yaml`. The complete `network_path` section looks like this:
 
    ```yaml
    network_path:
@@ -149,19 +157,13 @@ Create and manage scheduled tests and dynamic test filters from the [Network Pat
 {{% /tab %}}
 {{< /tabs >}}
 
-Remote Configuration itself is enabled by default on recent Agent versions, so you don't need to turn it on separately. After this one-time restart, configuration changes made in the UI apply without restarting the Agent.
+After the Agent restarts, go to [Network Path][4] and create a test. The Agent should appear as eligible.
 
 Each Agent can match only one dynamic test configuration. See [Dynamic test filters from the UI are not applied](#dynamic-test-filters-from-the-ui-are-not-applied).
 
 ### Configure tests in the Agent configuration
 
-To configure tests in the Agent configuration files instead, use one of the following collection methods. You can use one method on its own or combine multiple methods:
-
-| Method | When to use |
-|--------|-------------|
-| **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
-| **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
-| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
+To configure tests in the Agent configuration files instead, set up one or more test types: [scheduled tests](#scheduled-tests), [dynamic tests](#dynamic-tests), or [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental). You can use one type on its own or combine them.
 
 ### Scheduled tests
 
