@@ -49,8 +49,6 @@ If only `input_tokens` is provided, Datadog treats all input tokens as non-cache
 ## Supported providers
 Datadog automatically calculates the cost of LLM requests made to the following supported providers using the publicly available pricing information from their official documentation.
 
-<div class="alert alert-info">Cost estimates depend on the token usage and pricing available for the provider and model.</div>
-
 Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face, Gemini, Anthropic to models served by OpenRouter.
 
 ## Metrics
