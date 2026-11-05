@@ -55,7 +55,7 @@ Datadog supports estimated costs for [800+ models][4], from OpenAI, Hugging Face
 
 ## Metrics
 
-Find the available cost and token metrics in [Agent Observability Metrics][5]. Estimated cost metrics use **nanodollars**; token metrics use **tokens**.
+Find the available cost and token metrics in [Agent Observability Metrics][5]. Estimated cost metrics are measured in **nanodollars**, and token metrics are measured in **tokens**.
 
 The cost metrics include a `source` tag to indicate where the value originated:
 - `source:auto` — automatically calculated
@@ -65,23 +65,25 @@ The cost metrics include a `source` tag to indicate where the value originated:
 
 `ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` are Count metrics that partition cost and token usage by the following tags. Cost includes LLM and embedding spans, plus user-provided tool-span costs. Token usage includes LLM spans only. For embedding token usage, use `ml_obs.span.embedding.input.tokens`.
 
+Provider tool charges are charges for built-in tools, such as web search, on LLM spans. User-provided tool-span costs are costs you manually supply on tool spans.
+
 | Tag | Values | Description |
 |-----|--------|-------------|
 | `io_type` | `input`, `output`, `unknown` | Input or output contribution. |
-| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Cache category for input contributions. Omitted for other directions. |
-| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Reasoning category for output contributions when the data establishes the category. Non-token tool charges omit this tag. |
-| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Token modality. `other` applies only to non-token cost contributions, such as provider tool charges. |
+| `input_type` | `non_cached`, `cache_read`, `cache_write`, `unknown` | Cache category for input values. Omitted for other directions. |
+| `output_type` | `reasoning`, `non_reasoning`, `unknown` | Reasoning category for output values when the data establishes the category. Non-token tool charges omit this tag. |
+| `token_modality` | `text`, `audio`, `image`, `unknown`, `other` | Token modality. `other` applies only to non-token cost contributions, such as provider tool charges and user-provided tool-span costs. |
 | `ttl` | `5m`, `1h` | Cache-write lifetime when that breakdown is available. Omitted for other contributions. |
 
-Unavailable details use `unknown`; missing data does not mean zero. For example, a provider that does not report cache usage has `input_type:unknown`. When cache or reasoning totals do not establish their overlap with token modalities, the contributions retain the known category with `token_modality:unknown`.
+For applicable breakdown tags, unavailable details use `unknown`. An `unknown` value does not mean zero usage. For example, if a provider does not report cache usage, input tokens are tagged `input_type:unknown`. When cache or reasoning usage cannot be assigned to individual modalities, the values keep their known category and use `token_modality:unknown`.
 
-### Choose a metric family
+### Choose between total and breakdown metrics
 
-Choose a metric family based on how you want to analyze cost and token usage.
+Use total metrics for per-span statistics, and breakdown metrics to compare usage across categories.
 
 #### Analyze totals per span
 
-Use the `ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` distributions for per-span averages and percentiles. Each distribution records one total observation per applicable span. Total cost includes LLM and embedding spans, plus user-provided tool-span costs; total tokens include LLM spans only.
+Use the `ml_obs.span.llm.total.cost` and `ml_obs.span.llm.total.tokens` distributions for per-span averages and percentiles. Each distribution records one total observation per applicable span. Total cost includes LLM and embedding spans, plus user-provided tool-span costs. Total tokens include LLM spans only.
 
 For example, chart average cost and average token usage per span:
 
@@ -94,14 +96,14 @@ avg:ml_obs.span.llm.total.tokens{ml_app:my-app}
 
 Use `ml_obs.span.llm.cost` and `ml_obs.span.llm.tokens` to compare cost and token usage across categories. Use `sum` with `.as_count()` to aggregate contributions. These metrics do not provide per-span averages or percentiles.
 
-For example, chart spending by direction and modality, and input token usage by cache category and modality:
+For example, the following queries chart cost by input or output and modality, and input tokens by cache category and modality:
 
 ```text
 sum:ml_obs.span.llm.cost{ml_app:my-app} by {io_type,token_modality}.as_count()
 sum:ml_obs.span.llm.tokens{ml_app:my-app,io_type:input} by {input_type,token_modality}.as_count()
 ```
 
-For a span with a valid total, the breakdown contributions sum to that total. If an overall total is unavailable, the breakdown metrics retain the available input or output contributions without creating a total observation in the corresponding distribution.
+For a span with a valid total cost or token count, its breakdown values add up to that total. When a total is unavailable for cost or tokens, the breakdown metrics retain the available input or output values. The corresponding total distribution receives no observation.
 
 Do not add breakdown metrics to their matching `.total.*` metrics when calculating totals, because that counts the same usage twice.
 
