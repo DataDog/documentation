@@ -142,10 +142,10 @@ After these changes, test discovery can run faster and avoid failures when the d
 If full test discovery takes too long, cache the `ddtest` discovery file between CI runs. Restore your CI cache before planning, and pass the restored file to `ddtest`:
 
 {{< code-block lang="bash" >}}
-DD_TEST_OPTIMIZATION_RUNNER_TEST_DISCOVERY_CACHE=.ddtest-cache/tests-discovery.json bin/ddtest plan
+DD_TEST_OPTIMIZATION_RUNNER_TEST_DISCOVERY_CACHE=.ddtest-cache/tests-discovery.json ddtest plan
 {{< /code-block >}}
 
-After planning, save the internal discovery file back to your CI cache:
+After planning, save the refreshed internal discovery file back to your CI cache:
 
 {{< code-block lang="bash" >}}
 if [ -f .testoptimization/tests-discovery/tests.json ]; then
@@ -156,18 +156,9 @@ fi
 
 `ddtest` rejects missing or corrupt caches, mismatched platform/framework or include/exclude settings, unavailable source commits, and changes under the effective test root. In monorepos, invalidation is scoped to the project directory. Refresh the cache after successful full discovery.
 
-Include dependencies, configuration, and collection-affecting selectors such as `PYTEST_ADDOPTS` or RSpec tags in your CI cache key. These settings can change the selected tests without changing test files. This cache is an input to a **new plan**, not a replacement for planning.
+Keep dependency and configuration changes in your CI cache key when they can affect collection. This cache is an input to a **new plan**, not a replacement for planning.
 
-Use `--force-full-test-discovery` to request full discovery even when Test Impact Analysis or test skipping is disabled, such as on a default branch. **A valid discovery cache can still be reused with this flag.** Without this flag, suite mode does not read or refresh the full-discovery cache.
-
-To collect tests again, remove the internal cache and disable importing a restored cache for that run. Skip the CI cache restore step and omit `--test-discovery-cache`:
-
-{{< code-block lang="bash" >}}
-rm -f .testoptimization/tests-discovery/tests.json
-DD_TEST_OPTIMIZATION_RUNNER_TEST_DISCOVERY_CACHE= bin/ddtest plan --force-full-test-discovery
-{{< /code-block >}}
-
-After successful collection, save the new discovery file using the copy command above.
+Use `--force-full-test-discovery` to refresh the cache even when Test Impact Analysis or test skipping is disabled, such as on a default branch. Without this flag, suite mode does not read or refresh the full-discovery cache.
 
 ### Use suite-level skipping for Ruby and Python {#use-suite-level-skipping-for-ruby}
 
@@ -176,8 +167,8 @@ If Ruby or Python test discovery remains a bottleneck, configure Test Impact Ana
 Ruby suite-level skipping requires `datadog-ci >= 1.34.0`. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` for both planning and test execution:
 
 {{< code-block lang="bash" >}}
-DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite bin/ddtest plan
-DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite bin/ddtest run
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest plan
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest run
 {{< /code-block >}}
 
 In CI workflows that plan and run tests in separate jobs, set the variable in both jobs. For Ruby tests executed with another command, set the same environment variable for that command. For Python, `ddtest run` configures the Datadog library to match the selected mode. See [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode) for selection, caching, and unskippable markers.

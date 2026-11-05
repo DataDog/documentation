@@ -23,7 +23,7 @@ further_reading:
     text: "Troubleshoot Test Parallelization"
 ---
 
-Choose your CI provider, platform, and test framework to see the recommended configuration for your suite. {% #adopt-ddtest-in-ci %}
+Choose your CI provider, platform, and test framework to see the recommended configuration for your suite.
 
 {% collapse-content title="Concepts: CI nodes, workers, and plans" level="h3" id="concepts" %}
 
@@ -35,7 +35,6 @@ Choose your CI provider, platform, and test framework to see the recommended con
 
 ## Prerequisites
 
-- Confirm that your framework, runtime, and Datadog library meet the [Test Parallelization compatibility requirements](/tests/test_parallelization/#compatibility).
 - Set up [Test Optimization](/tests/setup/) for the suite. Reuse its credentials, `DD_SITE`, `DD_SERVICE`, and instrumentation.
 - Install Git and check out the repository.
 - Use the same runtime, dependencies, configuration, environment, project directory, and source revision for planning and execution.
@@ -48,7 +47,7 @@ To skip unaffected tests, enable [Test Impact Analysis](/tests/test_impact_analy
 
 ## Install ddtest
 
-Install the latest `ddtest` into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job: {% #1-add-test-planning %}
+Install the latest `ddtest` into `bin` in the planning and test environments. Use the same version in both; the CircleCI example transfers the binary from the planning job:
 
 ```bash
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
@@ -56,7 +55,7 @@ curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh
 
 ## Configure your CI jobs
 
-`ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples use the repository root and Bash. {% #3-replace-the-existing-test-command %}
+`ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples use the repository root and Bash.
 
 {% if equals($prog_lang, "ruby") %}
 
@@ -70,9 +69,7 @@ Repeat your [Python Test Optimization setup](/tests/setup/python/) in the planni
 {% /if %}
 {% if equals($prog_lang, "javascript") %}
 
-JavaScript file discovery does not require auto-instrumentation, but planning needs a Datadog connection to retrieve settings, test durations, and Test Impact Analysis decisions. For Agentless mode, set `DD_API_KEY`, `DD_SITE`, and `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` in every job that runs `ddtest`. For Agent-based setups, make the same Agent connection available to planning and test jobs.
-
-Install the dependencies used by your test configuration and discovery hooks, including any Datadog SDK imports they contain. Keep your [JavaScript Test Optimization setup](/tests/setup/javascript/) in every test job before `ddtest run`.
+JavaScript discovery does not require auto-instrumentation. Install the dependencies used by your test configuration and discovery hooks, including any Datadog SDK imports they contain. Keep your [JavaScript Test Optimization setup](/tests/setup/javascript/) in every test job before `ddtest run`.
 
 {% /if %}
 
@@ -115,7 +112,7 @@ Restore dependency caches and run your installation command before planning and 
 
 {% /if %}
 
-See [dependency caching](/tests/test_parallelization/best_practices/#cache-project-dependencies) for cache examples. {% #ci-examples %}
+See [dependency caching](/tests/test_parallelization/best_practices/#cache-project-dependencies) for cache examples.
 
 <!-- actions -->
 {% if equals($ci_provider, "github_actions") %}
@@ -194,13 +191,8 @@ jobs:
 {% /if %}
 {% if equals($prog_lang, "javascript") %}
 
-These examples use Agentless mode. Set the `DD_API_KEY` repository secret and change `DD_SITE` to your Datadog site.
-
 ```yaml
 env:
-  DD_API_KEY: ${{ secrets.DD_API_KEY }}
-  DD_SITE: datadoghq.com
-  DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
   DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: "{% if equals($prog_lang, "ruby") inline=true %}ruby{% /if %}{% if equals($prog_lang, "python") inline=true %}python{% /if %}{% if equals($prog_lang, "javascript") inline=true %}javascript{% /if %}"
   DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: "{% if equals($platform, "rspec") inline=true %}rspec{% /if %}{% if equals($platform, "minitest") inline=true %}minitest{% /if %}{% if equals($platform, "pytest") inline=true %}pytest{% /if %}{% if equals($platform, "jest") inline=true %}jest{% /if %}{% if equals($platform, "vitest") inline=true %}vitest{% /if %}{% if equals($platform, "mocha") inline=true %}mocha{% /if %}{% if equals($platform, "cucumber") inline=true %}cucumber{% /if %}{% if equals($platform, "cypress") inline=true %}cypress{% /if %}{% if equals($platform, "playwright") inline=true %}playwright{% /if %}{% if equals($platform, "webdriverio") inline=true %}webdriverio{% /if %}"
   DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: "1"
@@ -339,8 +331,6 @@ workflows:
 {% /if %}
 {% if equals($prog_lang, "javascript") %}
 
-These examples use Agentless mode. Set `DD_API_KEY` in the project settings or a context available to both jobs, and change `DD_SITE` to your Datadog site.
-
 ```yaml {% filename=".circleci/config.yml" %}
 version: 2.1
 setup: true
@@ -353,8 +343,6 @@ jobs:
     docker:
       - image: cimg/base:stable # Replace with your existing test image.
     environment:
-      DD_SITE: datadoghq.com
-      DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
       DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: "{% if equals($prog_lang, "ruby") inline=true %}ruby{% /if %}{% if equals($prog_lang, "python") inline=true %}python{% /if %}{% if equals($prog_lang, "javascript") inline=true %}javascript{% /if %}"
       DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: "{% if equals($platform, "rspec") inline=true %}rspec{% /if %}{% if equals($platform, "minitest") inline=true %}minitest{% /if %}{% if equals($platform, "pytest") inline=true %}pytest{% /if %}{% if equals($platform, "jest") inline=true %}jest{% /if %}{% if equals($platform, "vitest") inline=true %}vitest{% /if %}{% if equals($platform, "mocha") inline=true %}mocha{% /if %}{% if equals($platform, "cucumber") inline=true %}cucumber{% /if %}{% if equals($platform, "cypress") inline=true %}cypress{% /if %}{% if equals($platform, "playwright") inline=true %}playwright{% /if %}{% if equals($platform, "webdriverio") inline=true %}webdriverio{% /if %}"
       DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: "1"
@@ -456,8 +444,6 @@ jobs:
     docker:
       - image: cimg/base:stable # Use the same test image as the planning job.
     environment:
-      DD_SITE: datadoghq.com
-      DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
       DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: "{% if equals($prog_lang, "ruby") inline=true %}ruby{% /if %}{% if equals($prog_lang, "python") inline=true %}python{% /if %}{% if equals($prog_lang, "javascript") inline=true %}javascript{% /if %}"
       DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: "{% if equals($platform, "rspec") inline=true %}rspec{% /if %}{% if equals($platform, "minitest") inline=true %}minitest{% /if %}{% if equals($platform, "pytest") inline=true %}pytest{% /if %}{% if equals($platform, "jest") inline=true %}jest{% /if %}{% if equals($platform, "vitest") inline=true %}vitest{% /if %}{% if equals($platform, "mocha") inline=true %}mocha{% /if %}{% if equals($platform, "cucumber") inline=true %}cucumber{% /if %}{% if equals($platform, "cypress") inline=true %}cypress{% /if %}{% if equals($platform, "playwright") inline=true %}playwright{% /if %}{% if equals($platform, "webdriverio") inline=true %}webdriverio{% /if %}"
       DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: "1"
@@ -573,16 +559,7 @@ Keep your existing instrumentation, filters, seeds, and reporters. Apply any env
 
 `ddtest` uses executable `bin/rspec` when present, otherwise `bundle exec rspec`.
 
-Keep options such as tags, seeds, and formatters. Remove positional test files and directories from command overrides and `.rspec`; `ddtest` supplies the files assigned to each worker. Keeping those paths can run files on multiple workers.
-
-Move the suite selection to `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` or [arguments to `ddtest plan`](/tests/test_parallelization/configuration/#positional-file-selections). For example, replace `bundle exec rspec spec/requests --tag smoke` with these CI environment settings:
-
-```yaml
-DD_TEST_OPTIMIZATION_RUNNER_COMMAND: "bundle exec rspec --tag smoke"
-DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION: "spec/requests/**/*_spec.rb"
-```
-
-Use the same settings for planning and execution.
+Keep `.rspec` and any options from your existing test command.
 
 {% /if %}
 <!-- End rspec -->
@@ -748,7 +725,7 @@ Keep [WebdriverIO instrumentation](/tests/setup/javascript/?tab=webdriverio) for
 
 ## Validate your setup
 
-Inspect the planned files and parallelism: {% #2-inspect-the-plan %}
+Inspect the planned files and parallelism:
 
 ```bash
 cat .testoptimization/runner/parallel-runners.txt
@@ -761,4 +738,4 @@ Check that:
 - CI node and worker counts respect your capacity, and concurrent workers have [isolated resources](/tests/test_parallelization/best_practices/#isolate-workers).
 - Tests, failures, and skips appear in [Test Optimization Explorer](/tests/explorer/), and test and coverage reports upload.
 
-Compare CI cost and duration with your previous setup, then [adjust the parallelism budget](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget). {% #4-measure-ci-savings %}
+Compare CI cost and duration with your previous setup, then [adjust the parallelism budget](/tests/test_parallelization/best_practices/#choose-a-parallelism-budget).
