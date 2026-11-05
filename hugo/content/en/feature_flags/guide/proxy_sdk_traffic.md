@@ -203,6 +203,8 @@ DatadogBrowserFlagging.init({
 });
 {{< /code-block >}}
 
+If you use [`flagSelection`][3] to load a subset of flags, return the `DD-Flag-Selection-Ignored` response header to the browser unchanged. If your proxy is on a different origin from your application, also list the header in the `Access-Control-Expose-Headers` response header. Datadog sets this header when it ignores a selection and returns the full flag configuration. If the browser cannot read the header, the full configuration still loads, but the SDK cannot report that the selection was ignored.
+
 ### Event upload proxy
 
 Browser flag event data (exposures and evaluations) is sent through the standard Browser SDK intake pipeline. To route this traffic through a proxy, set the `proxy` option to a URL on your domain.
@@ -234,6 +236,7 @@ The `proxy` option also accepts a function that receives the decoded `path` and 
 
 [1]: /getting_started/site/
 [2]: /real_user_monitoring/guide/proxy-rum-data/
+[3]: /feature_flags/client/javascript/#load-a-subset-of-flags
 
 {{% /tab %}}
 
