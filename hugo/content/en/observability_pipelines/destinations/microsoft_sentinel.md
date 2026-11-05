@@ -199,6 +199,10 @@ After you select the Microsoft Sentinel destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][13] and [Destination buffer metrics][14] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -221,3 +225,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [10]: /observability_pipelines/configuration/set_up_pipelines/
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
