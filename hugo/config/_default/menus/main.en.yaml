@@ -8928,11 +8928,21 @@ menu:
       identifier: ai_guard_http_api
       parent: ai_guard_setup
       weight: 4
+    - name: Coding Agent Runtime Protection
+      url: /security/ai_guard/coding_agents/
+      identifier: ai_guard_coding_agents
+      parent: ai_guard
+      weight: 3
+    - name: Setup
+      url: /security/ai_guard/coding_agents/setup/
+      identifier: ai_guard_coding_agents_setup
+      parent: ai_guard_coding_agents
+      weight: 1
     - name: Security Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 3
+      weight: 4
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security
