@@ -359,7 +359,7 @@ For example, suppose you exclude the `support_contact` attribute because it alwa
 
 To control this behavior, choose the option that fits your goal:
 
-- **To ignore specific known-safe values**, use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@test.com` to ignore addresses from this domain. The attribute continues to be scanned, so other sensitive values in it are still matched, and the suppressed values are ignored in every attribute.
+- **To ignore specific known-safe values**: Use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@test.com` to ignore addresses from that domain. Sensitive Data Scanner still scans the attribute for other sensitive values and ignores the suppressed values in every attribute.
 - **To leave an attribute untouched but still match its values in other attributes**: Select {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in unlisted attributes don't affect matches in the listed attributes.
 
 ### Edit scanning rules
