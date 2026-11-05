@@ -114,8 +114,6 @@ RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 
 Replace `<AGENT_VERSION>` with 7.86.0 or later. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For restricted networks, see [Installing the `ibm_db` client library offline][8].
 
-If you disable automatic client reroute as described in [Step 4](#step-4-configure-the-agent), copy `db2dsdriver.cfg` into the image or mount it into the container, and set `DB2DSDRIVER_CFG_PATH` in the container environment.
-
 For check configuration, see [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster checks][11]. Use the `ibm_db2` check name and the instance settings in Step 4. Configure the [secret backend][10] and driver reroute settings on the Agent that executes the check. Configure only one collector per database per server.
 
 ### Step 4: Configure the Agent
@@ -155,13 +153,13 @@ instances:
 If each server runs its own Agent, include only that server's entry in its configuration. Add an entry for each additional database.
 
 - Use each server's direct address. Do not use a virtual IP, load balancer, or failover DNS name. See [Connect to a fixed server][14].
-- If your databases use HADR or have an alternate server configured, disable automatic client reroute (ACR) for the Agent's IBM driver, as described below.
+- Disable automatic client reroute (ACR) for the Agent's IBM driver, as described below.
 - Keep each server's identifier stable across primary and standby role changes. Do not share a cluster identifier between servers. See [HADR configuration][16].
 - Do not configure two Agents or duplicate check instances to collect the same database on the same server.
 
 #### Disable automatic client reroute
 
-When a database uses HADR or has an alternate server configured, the server sends alternate server information to clients, and the IBM driver can move the Agent's connection to another server. This mixes the workloads of two servers under one identifier. Skip this section if your databases have no alternate server.
+Disable automatic client reroute for the Agent's IBM driver so each collector stays connected to its configured server, including after an HADR takeover. A direct address alone does not prevent the driver from rerouting to another server. Rerouting mixes the workloads of two servers under one identifier.
 
 1. Create a `db2dsdriver.cfg` file for the Agent's driver, such as `/etc/datadog-agent/db2dsdriver.cfg`. For each configured database, host, and port, set both `enableAcr` and `enableAlternateServerListFirstConnect` to `false`. For a complete example, see [Disable automatic client reroute][15].
 2. Set the `DB2DSDRIVER_CFG_PATH` environment variable in the Agent service's environment to the absolute path of the file. Setting the variable in your shell does not affect the Agent service.
@@ -173,7 +171,7 @@ When a database uses HADR or has an alternate server configured, the server send
      ```
 
    - **Windows**: Add `DB2DSDRIVER_CFG_PATH=<PATH>` to the `Environment` multi-string value of the `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\datadogagent` registry key.
-   - **Containers**: Set the variable in the container environment.
+   - **Containers**: Copy `db2dsdriver.cfg` into the image or mount it into the container. Set `DB2DSDRIVER_CFG_PATH` to the file's absolute path inside the container.
 
    Alternatively, place the file in the driver's default configuration directory, such as `/opt/datadog-agent/embedded/lib/python3.13/site-packages/clidriver/cfg/` on Linux.
 
