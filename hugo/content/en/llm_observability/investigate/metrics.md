@@ -88,13 +88,13 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 
 ### Gateway metrics
 
-[AI Gateway][9] provides additional tags on span count, error, duration, streaming latency, token, and cost metrics. To count LLM calls, filter `ml_obs.span` by `_dd.ai_gateway_frntr:true` and `span_kind:llm`. Retries and fallbacks count as separate calls.
+[AI Gateway][9] provides additional tags on span count, error, duration, streaming latency, token, and cost metrics. To count LLM calls, filter `ml_obs.span` by `dd.ai_gateway_frntr:true` and `span_kind:llm`. Retries and fallbacks count as separate calls.
 
 The following tags are available when the Gateway span contains the corresponding information. Historical metric samples are not backfilled with these tags.
 
 | Tag | Description |
 |-----|-------------|
-| `_dd.ai_gateway_frntr` | `true` for AI Gateway traffic. |
+| `dd.ai_gateway_frntr` | `true` for AI Gateway traffic. |
 | `gateway_provider_id` | ID of the configured Gateway provider account. |
 | `gateway_provider` | Slug of the configured Gateway provider account. |
 | `user_id` | Datadog user ID associated with the request. |
