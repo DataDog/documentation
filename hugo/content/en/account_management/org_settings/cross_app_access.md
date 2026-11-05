@@ -1,6 +1,6 @@
 ---
 title: Cross-App Access
-description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Okta, Claude, or a custom issuer.
+description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Claude or a SAML identity provider that supports Cross-App Access, such as Okta.
 algolia:
   tags: ["cross-app access", "XAA", "Okta", "Claude", "Anthropic", "OIDC", "AI agent", "MCP", "ID-JAG", "Identity Assertion JWT Authorization Grant", "Enterprise-Managed Authorization", "managed authorization"]
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized. Without it, every user authorizes the agent individually through a browser consent screen. With it, an administrator grants that access centrally, and users skip the per-user consent step.
 
-A trusted issuer is the identity provider (IdP) that gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog. Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, and custom issuers. A custom issuer is another identity provider that issues ID-JAGs for users of your organization's SAML single sign-on.
+A trusted issuer is the identity provider (IdP) that gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog. Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Claude and from SAML identity providers that support Cross-App Access, such as Okta. This page calls a SAML identity provider other than Okta a custom issuer.
 
 Cross-App Access implements the IETF [Identity Assertion JWT Authorization Grant][4] draft and the MCP [Enterprise-Managed Authorization][5] extension. The draft calls the issuer the IdP authorization server. Okta calls this feature Cross App Access, and Claude calls it managed authorization.
 
