@@ -256,9 +256,9 @@ For all integration options, see the [sample configuration][19].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/ibm-db2/#enable-monitoring
-[2]: https://www.ibm.com/docs/en/db2/11.5.x?topic=commands-update-database-configuration
-[3]: https://www.ibm.com/docs/en/db2/11.5.x?topic=parameters-mon-act-metrics-monitoring-activity-metrics
-[4]: https://www.ibm.com/docs/en/db2/11.5.x?topic=parameters-mon-req-metrics-monitoring-request-metrics
+[2]: https://www.ibm.com/docs/en/db2/12.1.x?topic=commands-update-database-configuration
+[3]: https://www.ibm.com/docs/en/db2/12.1.x?topic=parameters-mon-act-metrics-monitoring-activity-metrics
+[4]: https://www.ibm.com/docs/en/db2/12.1.x?topic=parameters-mon-req-metrics-monitoring-request-metrics
 [5]: /integrations/ibm-db2/#database-permissions
 [6]: /agent/
 [7]: /integrations/ibm-db2/#dependencies
