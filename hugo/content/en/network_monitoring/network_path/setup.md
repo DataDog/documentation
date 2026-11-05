@@ -42,7 +42,7 @@ After a one-time Agent setup, the Agent appears as eligible in the test creation
 
 #### Prerequisites
 
-- Agent `v7.83+` is installed.
+- Agent `v7.83+` is installed. Dynamic test filters require Agent `v7.83.2+`.
 - The Agent uses an API key with [Remote Configuration enabled][17].
 - You have permission to manage Network Path configurations.
 - For dynamic tests: [Cloud Network Monitoring][1] is enabled.
@@ -58,6 +58,8 @@ After a one-time Agent setup, the Agent appears as eligible in the test creation
    traceroute:
      enabled: true
    ```
+
+   On Agent `v7.84+`, the Agent enables the traceroute module automatically for dynamic tests, so this step is only required for scheduled tests.
 
 2. Enable Network Path Remote Configuration in `/etc/datadog-agent/datadog.yaml`:
 
@@ -89,6 +91,8 @@ After a one-time Agent setup, the Agent appears as eligible in the test creation
      enabled: true
    ```
 
+   On Agent `v7.84+`, the Agent enables the traceroute module automatically for dynamic tests, so this step is only required for scheduled tests.
+
 2. Enable Network Path Remote Configuration in `%ProgramData%\Datadog\datadog.yaml`:
 
    ```yaml
@@ -113,15 +117,6 @@ After a one-time Agent setup, the Agent appears as eligible in the test creation
 {{< /tabs >}}
 
 Remote Configuration is enabled by default on recent Agent versions, so no other Agent setting is needed. After this one-time restart, configuration changes made in the UI apply without restarting the Agent.
-
-#### Create a test in the UI
-
-1. In Datadog, open [Network Path][4] and start the test configuration workflow.
-2. Choose **Scheduled Tests** or **Dynamic Tests**.
-3. Add a name and select the Agent targets. Start with one Agent and confirm that it is eligible before you expand the target scope.
-4. For scheduled tests, enter the destination and probe settings.
-5. For dynamic tests, add ordered include or exclude filters. When several filters match, the last matching filter wins.
-6. Review and save the configuration.
 
 <div class="alert alert-warning">An Agent must not match more than one dynamic test configuration. If targets overlap, that Agent ignores all dynamic test filters set from the UI until you resolve the overlap.</div>
 
