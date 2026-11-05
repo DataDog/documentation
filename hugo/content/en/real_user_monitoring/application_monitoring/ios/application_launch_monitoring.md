@@ -43,14 +43,16 @@ In iOS SDK versions 3.5.0+, the time to initial display (TTID) and time to full 
 | Time to initial display | The time it takes to display the first frame of the app's UI. | The time taken for an app to produce its first frame, including process initialization, scene and view hierarchy creation, and initial UI rendering. The splash screen, which the iOS manages, is not included in this calculation. |
 | Time to full display | The time it takes for an app to become interactive for the user. | The time it takes to display the first frame of the app's UI, as well as the content that loads asynchronously after the initial frame is displayed. |
 
-Each time to initial display and time to full display is categorized by launch type:
-- [Cold start][1]: Occurs when the system must fully initialize a new application process because no prior state or memory image can be reused. This includes launches after a first install, device reboot, application updates, or when the system has removed the application from memory. 
-- [Warm start][1]: Occurs when the application process is relaunched, but the system can reuse some resources that were cached in memory. Warm starts typically occur in scenarios such as a user manually force-quitting the application, iOS terminating the application in the background due to memory or resource pressure, or an application crash.
+Each time to initial display and time to full display is categorized by launch type. iOS does not tell an app whether a launch is [cold or warm][1], so the iOS SDK uses a heuristic. It compares the current app process with the previous app process that ran the SDK, including processes that iOS started in the background:
+- Cold start: The SDK labels a launch as a cold start when it has no saved state from a previous launch (for example, on the first launch after an install), when the app version changed, when the device rebooted since that previous process started, or when more than 7 days passed since it started. The 7 days are measured from the start of the previous app process, not from the last time the user used the app.
+- Warm start: The SDK labels every other launch of a new app process as a warm start. This includes launches after the user force quits the app, after iOS terminates the app in the background, and after a crash. Apple also considers a launch cold when iOS has removed the app's code and frameworks from memory, for example after the user played a memory-intensive game. The SDK cannot detect this, so these launches are labeled as warm starts.
 
 Either cold or warm starts can be [prewarmed][2], which is an iOS-specific optimization starting from iOS 15. In this scenario, the system proactively prepares the app process in the background to improve future launch times. Pre-warming typically occurs when:
 - The device has recently rebooted.
 - The system predicts that the user is likely to open the application soon.
 - The OS is executing background optimization routines. 
+
+For prewarmed launches, the SDK measures the time to initial display from when the SDK is loaded, not from the start of the process. Prewarmed durations are not directly comparable with other launches, so filter on `@vital.is_prewarmed` when you compare launch durations.
 
 
 ### Measuring the time to initial display
@@ -103,7 +105,7 @@ The time to initial display and time to full display are presented in the {{< ui
 
 ### Vital events
 
-The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD are captured if the user launches the application in the session. Neither TTID nor TTFD appear if the user does not launch the application during the session. 
+The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD are captured at most once per app process, when the user launches the application or opens a prewarmed app. Returning to an app that is still running in the background does not produce TTID or TTFD, and neither does a process that iOS starts in the background, such as for a background fetch. 
 
   {{< img src="real_user_monitoring/ios/ios-app-launch-session.png" alt="iOS session side panel" style="width:90%;">}}
 
@@ -135,5 +137,5 @@ These metrics contain attributes to specify the launch type for accurate monitor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://developer.apple.com/documentation/xcode/reducing-your-app-s-launch-time 
-[2]: https://developer.apple.com/documentation/uikit/about-the-app-launch-sequence#Prepare-your-app-for-prewarming  
+[1]: https://developer.apple.com/documentation/xcode/reducing-your-app-s-launch-time
+[2]: https://developer.apple.com/documentation/uikit/about-the-app-launch-sequence
