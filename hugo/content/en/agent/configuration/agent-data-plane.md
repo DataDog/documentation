@@ -16,7 +16,7 @@ further_reading:
   text: "Agent architecture"
 ---
 {{< callout url="#" header="false" btn_hidden="true" >}}
-Agent Data Plane is in Preview. Datadog plans to enable it by default over the next few Datadog Agent versions as part of becoming Generally Available. You can opt in early using the instructions below.
+Agent Data Plane is in Preview and disabled by default. You can enable it using the instructions on this page.
 {{< /callout >}}
 
 ## Overview

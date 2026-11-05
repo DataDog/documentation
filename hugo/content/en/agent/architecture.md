@@ -22,7 +22,7 @@ The following optional processes are spawned by the Agent if enabled in the `dat
 
 * The APM Agent is a process that collects [traces][2]. It is enabled by default.
 * The Process Agent is a process that collects live process information. By default, the Process Agent only collects available containers, otherwise it is disabled.
-* The [Agent Data Plane][8] is a process that receives, aggregates, and forwards [DogStatsD metrics][1] in place of the main process. It is disabled by default.
+* The [Agent Data Plane][8] (Preview) is a process that receives, aggregates, and forwards [DogStatsD metrics][1] in place of the main process. It is disabled by default.
 
 On Windows the services are listed as:
 
