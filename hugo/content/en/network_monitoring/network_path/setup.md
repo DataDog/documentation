@@ -35,11 +35,11 @@ All test types run on your Datadog Agents, and you can configure every type in t
 
 ### Choose a setup method
 
-| Method | Where you configure tests |
-|--------|---------------------------|
-| **[UI](#create-tests-in-the-ui)** (Preview) | In the Network Path UI, after a one-time setup on each Agent you want to target |
-| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | In configuration files on each host |
-| **[Synthetic Monitoring][15]** | In Synthetic Monitoring, as Synthetic tests that run from Datadog managed locations |
+| Method | Tests run from | Where you configure tests |
+|--------|----------------|---------------------------|
+| **[UI](#create-tests-in-the-ui)** (Preview) | Your Datadog Agents | In the Network Path UI, after a one-time setup on each Agent you want to target |
+| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | Your Datadog Agents | In configuration files on each host |
+| **[Synthetic Monitoring][15]** | Datadog managed locations | In Synthetic Monitoring, as Synthetic tests |
 
 You can use the UI and the Agent configuration files on the same Agent. This page covers both. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
 
