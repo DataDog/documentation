@@ -28,7 +28,6 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 2. Enable resource collection for those accounts and regions, using the [AWS integration's resource collection permissions][2]. The assessment needs ASG information and the EC2 launch settings used by those groups.
 3. In the AWS integration's **Metric Collection** tab, enable the `AWS/AutoScaling` namespace. Check that metric filters include `aws.autoscaling.group_in_service_instances`.
 4. Recommended for history-based estimates: [enable group metrics in AWS][3], including `GroupInServiceInstances`. Without running-instance history, estimates can use configured desired capacity.
-5. To view assessments, your Datadog role needs the [Hosts Read (`hosts_read`) permission][4].
 
 Cloud Cost Management is optional. Without cost data for an ASG, the assessment uses public On-Demand prices for its current cost estimate. Collecting `AWS/EC2` metrics is not required for this assessment.
 
@@ -36,7 +35,7 @@ Estimates are most representative with a full 30 days of history. Missing instan
 
 ## Find groups to evaluate
 
-1. Open [Spot migration assessment][5]. If the page is unavailable for your organization, contact [Datadog Support][6].
+1. Open [Spot migration assessment][4]. If the page is unavailable for your organization, contact [Datadog Support][5].
 2. Check the **Assessed** timestamp to see when the assessment was last updated. Results describe the latest completed assessment and do not update in real time as AWS resources change.
 3. Filter by AWS account, region, or Spot candidacy, or search for an ASG by name.
 4. Review the estimated monthly savings and **Spot potential** for each group.
@@ -68,7 +67,7 @@ Use the detail panel to inspect:
 
 Replacement types are screened for hardware compatibility with the current instance types. Validate AMI support, application performance, storage, and network requirements before using them. Configure several suitable instance types so AWS has more capacity options.
 
-Interruption risk comes from [AWS Spot Instance Advisor][7] and describes historical interruption ranges. It does not predict whether a specific instance is interrupted. Consider using more than one availability zone and follow [AWS Spot best practices][8] when planning a migration.
+Interruption risk comes from [AWS Spot Instance Advisor][6] and describes historical interruption ranges. It does not predict whether a specific instance is interrupted. Consider using more than one availability zone and follow [AWS Spot best practices][7] when planning a migration.
 
 ## Understand savings estimates
 
@@ -96,9 +95,9 @@ Public price estimates use Linux pricing and exclude software licensing charges.
 | **Assessment is being prepared** | A completed assessment is not available yet. Check resource collection and permissions, then return after an assessment completes. |
 | An ASG is missing | Clear table filters and check the option to show groups outside migration scope. Verify account and region collection, running instances, and supported group configuration. Missing launch settings, pricing, or interruption data can prevent an assessment. |
 | No running-instance history | Verify AWS group metric publication and Datadog collection of `aws.autoscaling.group_in_service_instances`. Newly enabled collection does not provide a full 30-day history immediately. |
-| Public-price estimates instead of Cloud Cost Management costs | Verify [AWS Cloud Cost Management setup][9] and cost data attributed to the ASG for the assessment period. Public pricing is the fallback when usable cost data is unavailable. |
+| Public-price estimates instead of Cloud Cost Management costs | Verify [AWS Cloud Cost Management setup][8] and cost data attributed to the ASG for the assessment period. Public pricing is the fallback when usable cost data is unavailable. |
 | A history chart is absent | Charts are hidden when data is unavailable. Available cost history can still appear without running-instance history. |
-| **Stale** results | The displayed assessment is more than 48 hours old. Check collection settings and contact [Datadog Support][6] if results remain stale. Refreshing the page reads the latest completed assessment. |
+| **Stale** results | The displayed assessment is more than 48 hours old. Check collection settings and contact [Datadog Support][5] if results remain stale. Refreshing the page reads the latest completed assessment. |
 
 ## Further reading
 
@@ -107,9 +106,8 @@ Public price estimates use Linux pricing and exclude software licensing charges.
 [1]: /getting_started/integrations/aws/
 [2]: /integrations/amazon_web_services/#resource-collection
 [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html#as-enable-group-metrics
-[4]: /account_management/rbac/permissions/#permissions-list
-[5]: https://app.datadoghq.com/integrations/amazon-web-services/spot-assessment
-[6]: /help/
-[7]: https://aws.amazon.com/ec2/spot/instance-advisor/
-[8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html
-[9]: /cloud_cost_management/setup/aws/
+[4]: https://app.datadoghq.com/integrations/amazon-web-services/spot-assessment
+[5]: /help/
+[6]: https://aws.amazon.com/ec2/spot/instance-advisor/
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html
+[8]: /cloud_cost_management/setup/aws/
