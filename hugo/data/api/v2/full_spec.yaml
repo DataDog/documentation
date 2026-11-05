@@ -88639,6 +88639,8 @@ components:
 
         **Supported pipeline types:** metrics
       properties:
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
         id:
           description: The unique identifier for this component.
           example: datadog-metrics-destination
