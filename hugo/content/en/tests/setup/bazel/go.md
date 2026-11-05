@@ -245,6 +245,8 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
   --write-wrapper-template
 ```
 
+Bootstrap does not create the doctor and uploader targets in this mode. Define one pair in a lightweight package such as `//tools/test_optimization`, and use those labels instead of the root targets in [Run and validate tests](#run-and-validate-tests). Use `--write-root-targets` only in small repositories that keep these targets in the root `BUILD` file.
+
 Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and platform constraints in your local wrapper. The optimized wrapper should own only Test Optimization wiring.
 
 ### Instrument an existing Go SDK
