@@ -329,16 +329,18 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are not redacted, masked, or hashed.
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
-- Suppressions apply to the matched value in every attribute the rule scans. To ignore a value in one attribute only, see [Scan or exclude specific attributes](#scan-or-exclude-specific-attributes).
+- Suppressions apply to the matched value in every attribute the rule scans. To ignore a value in one attribute only, see [How excluded attributes affect matches in other attributes](#how-excluded-attributes-affect-matches-in-other-attributes).
 
 #### Scan or exclude specific attributes
 
 To make matches more precise, you can also do one of the following:
 
-- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
+- Scan the entire event but exclude certain attributes so that match actions are not applied to them. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
 **Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+
+##### How excluded attributes affect matches in other attributes
 
 Sensitive Data Scanner still checks excluded attributes for matches, but it doesn't apply match actions to them. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match doesn't appear on the Findings page or in other reporting.
 
