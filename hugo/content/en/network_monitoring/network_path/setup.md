@@ -30,11 +30,7 @@ You can configure Network Path tests in two ways:
 - **[In the UI](#create-tests-in-the-ui)** (Preview, recommended): Enable the Agent once, then create and update tests from the Network Path UI.
 - **[In the Agent configuration](#configure-tests-in-the-agent-configuration)**: Define tests in the Agent configuration files on each host.
 
-### Create tests in the UI
-
-{{< callout url="#" btn_hidden="true" header="Preview" >}}
-Creating Network Path tests in the UI is in Preview. Contact your Datadog representative to enable it for your organization.
-{{< /callout >}}
+### Create tests in the UI (Preview) {#create-tests-in-the-ui}
 
 Create and manage scheduled tests and dynamic test filters from the [Network Path][4] UI. Datadog delivers these configurations to the targeted Agents through [Remote Configuration][16], so later changes in the UI apply without restarting the Agent. This is the recommended setup for new users.
 
