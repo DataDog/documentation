@@ -33,8 +33,8 @@ Worker version 2.25.1 gives you access to the following:
 
 - The Microsoft Sentinel destination now:
     - Splits batches into multiple requests as needed, so each request stays under the Azure 1 MB request size limit.
-    - Now returns to its normal token refresh schedule after a failed token refresh succeeds on retry. Previously, a single failed refresh made the destination request a new token every 2 seconds until the Worker restarted.
-    - Now times out Azure OAuth token requests after 30 seconds, then logs an error and retries. Previously, a token request that never received a response could stop token refresh without logging an error. After the token expired, Azure rejected every request with HTTP 401 and the destination dropped all events until the Worker restarted.
+    - Refreshes its Azure OAuth token 60 seconds before the token expires. If a refresh fails, it logs an error and retries every 2 seconds until a refresh succeeds, then returns to that schedule.
+    - Times out Azure OAuth token requests after 30 seconds and retries them like any other failed refresh.
 - The `rc_version` tag on pipeline component metrics and the `op_component.rc_version` field in component logs now report the latest configuration version that each component runs, including components that a pipeline update didn't change.
 
 ## Worker version 2.25.0
