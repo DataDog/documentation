@@ -34,7 +34,20 @@ Test a [Prompt Management][1] prompt change on live traffic before making it the
 
 You need a managed prompt with at least two versions, a version deployed to the environment you want to use, and an [Experiment metric][3] that measures your outcome. Complete the [one-time application setup](#set-up-your-application) and check the [permissions](#permissions) for your workflow.
 
-**Permissions:** A/B testing requires permissions in Product Analytics and Feature Flags, in addition to Agent Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
+## Permissions
+
+A/B testing requires permissions in Product Analytics and Feature Flags, in addition to Agent Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
+
+In addition to the [Prompt Management prerequisites][4], your role needs:
+
+| Action | Required permission |
+|--------|---------------------|
+| Set up an A/B test from a prompt | Product Analytics Experiments Write |
+| Start a Guarded Rollout | LLM Observability Write and Feature Flags Environment Config Read |
+| Pause or resume a Guarded Rollout | Feature Flags Config Write |
+| Stop a Guarded Rollout | LLM Observability Read and Write |
+
+To configure and launch an A/B test in Product Analytics, see [Product Analytics permissions][5] and [Feature Flags permissions][6]. If your environment requires approvals, request approval in Feature Flags before changing live traffic.
 
 ## Set up your application
 
@@ -42,7 +55,7 @@ Complete this setup once for either workflow. If your application already sends 
 
 ### Connect the application
 
-Complete the [Prompt Management setup][4] and set `DD_ENV` to the experiment's environment. Then follow the instructions for your language to configure experiment exposure reporting.
+Complete the [Prompt Management setup][7] and set `DD_ENV` to the experiment's environment. Then follow the instructions for your language to configure experiment exposure reporting.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -82,7 +95,7 @@ Alternatively, use [agentless delivery][34] to retrieve prompt assignments and r
 
 ### Match prompt requests to outcomes
 
-Pass the user ID as the targeting key when retrieving a prompt, as shown in the following examples. Use a stable, non-empty string that matches the user ID recorded with outcome events. Datadog uses this ID to associate outcomes with the assigned prompt version. This is the same requirement as matching the feature flag `targetingKey` and evaluation `subject_identifier` in [Online Experiments][5].
+Pass the user ID as the targeting key when retrieving a prompt, as shown in the following examples. Use a stable, non-empty string that matches the user ID recorded with outcome events. Datadog uses this ID to associate outcomes with the assigned prompt version. This is the same requirement as matching the feature flag `targetingKey` and evaluation `subject_identifier` in [Online Experiments][8].
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -120,11 +133,11 @@ datadogRum.setUser({
 })
 ```
 
-RUM is only needed when it supplies your chosen outcome. For other outcome sources, or to compare organizations rather than users, configure the matching [subject type][6]. Outcomes must occur after the user's first exposure to the prompt version to be attributed to it.
+RUM is only needed when it supplies your chosen outcome. For other outcome sources, or to compare organizations rather than users, configure the matching [subject type][9]. Outcomes must occur after the user's first exposure to the prompt version to be attributed to it.
 
 ### Choose an outcome metric
 
-Create or select an [Experiment metric][3] under [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][7]. Metrics Explorer metrics and monitors are not selectable here.
+Create or select an [Experiment metric][3] under [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][10]. Metrics Explorer metrics and monitors are not selectable here.
 
 For example, for a checkout conversion metric, set {{< ui >}}Desired metric direction{{< /ui >}} to {{< ui >}}Higher is better{{< /ui >}}. Make sure the outcome events use the same user ID as the prompt request. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
 
@@ -138,8 +151,8 @@ For example, compare two versions of a checkout assistant to see which produces 
 
 1. Open the prompt and click {{< ui >}}Set up A/B test{{< /ui >}}.
 1. Select an environment and click {{< ui >}}Create draft & continue{{< /ui >}}. This opens the test in Product Analytics. Creating a draft does not change live traffic.
-1. Configure and start the test as described in [Create and launch the experiment][8]: choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's targeting key (for example, **User** when you pass a user ID).
-1. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that the test receives assignments, then review the results as described in [Run the experiment and review results][9].
+1. Configure and start the test as described in [Create and launch the experiment][11]: choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's targeting key (for example, **User** when you pass a user ID).
+1. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that the test receives assignments, then review the results as described in [Run the experiment and review results][12].
 
 Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to open the results or finish a draft.
 
@@ -149,7 +162,7 @@ Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to
 
 ## Use a Guarded Rollout
 
-A Guarded Rollout works like a Feature Flags [canary][10]: it increases exposure to a prompt version over time while monitoring a guardrail metric. For example, introduce an updated checkout assistant while watching checkout conversion. The deployed version is the **baseline**; the new version is the **candidate**. If the environment has no deployed version, deploy one immediately first to establish a baseline.
+A Guarded Rollout works like a Feature Flags [canary][13]: it increases exposure to a prompt version over time while monitoring a guardrail metric. For example, introduce an updated checkout assistant while watching checkout conversion. The deployed version is the **baseline**; the new version is the **candidate**. If the environment has no deployed version, deploy one immediately first to establish a baseline.
 
 1. Open the candidate version and click {{< ui >}}Deploy Version{{< /ui >}}.
 1. Select the environment in {{< ui >}}Deploy to{{< /ui >}}.
@@ -176,26 +189,13 @@ When the rollout finishes, the candidate receives all traffic eligible for that 
 
 <div class="alert alert-warning">Guardrails depend on available outcome data. Sparse, missing, or unmatched data may not trigger a pause. Reaching full exposure does not prove that the candidate is better or safe.</div>
 
-## Permissions
-
-In addition to the [Prompt Management prerequisites][11], your role needs:
-
-| Action | Required permission |
-|--------|---------------------|
-| Set up an A/B test from a prompt | Product Analytics Experiments Write |
-| Start a Guarded Rollout | LLM Observability Write and Feature Flags Environment Config Read |
-| Pause or resume a Guarded Rollout | Feature Flags Config Write |
-| Stop a Guarded Rollout | LLM Observability Read and Write |
-
-To configure and launch an A/B test in Product Analytics, see [Product Analytics permissions][12] and [Feature Flags permissions][13]. If your environment requires approvals, request approval in Feature Flags before changing live traffic.
-
 ## Troubleshooting
 
 ### I cannot start a test or rollout
 
 - **Controls are missing or disabled:** confirm access to the relevant Preview and the [required permissions](#permissions). A/B setup also requires two prompt versions and an enabled environment whose serving configuration can be loaded.
 - **A guarded deployment is rejected:** establish a baseline first. Resolve the conflict shown for the environment, such as an active all-user experiment or a forced version override, before trying again.
-- **You can create a draft but cannot configure or launch the test:** check your [Product Analytics permissions][12] and [Feature Flags permissions][13] with your Datadog administrator, along with any required environment approvals. Confirm that the test has a primary metric selected.
+- **You can create a draft but cannot configure or launch the test:** check your [Product Analytics permissions][5] and [Feature Flags permissions][6] with your Datadog administrator, along with any required environment approvals. Confirm that the test has a primary metric selected.
 
 ### I do not see assignments or results
 
@@ -219,14 +219,14 @@ Review each environment's deployment strategy: saved guarded settings may alread
 [1]: /llm_observability/configure/prompt_management/
 [2]: /llm_observability/improve/online_experiments/
 [3]: /experiments/defining_metrics/
-[4]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval
-[5]: /llm_observability/improve/online_experiments/#step-2-evaluate-the-flag-in-your-application
-[6]: /experiments/concepts/subject_types/
-[7]: https://app.datadoghq.com/product-analytics/experimentation-metrics
-[8]: /llm_observability/improve/online_experiments/#step-4-create-and-launch-the-experiment
-[9]: /llm_observability/improve/online_experiments/#step-5-run-the-experiment-and-review-results
-[10]: /feature_flags/use_cases/progressive_rollouts/#canaries
-[11]: /llm_observability/configure/prompt_management/#prerequisites
-[12]: /account_management/rbac/permissions/#product-analytics
-[13]: /account_management/rbac/permissions/#feature-flags
+[4]: /llm_observability/configure/prompt_management/#prerequisites
+[5]: /account_management/rbac/permissions/#product-analytics
+[6]: /account_management/rbac/permissions/#feature-flags
+[7]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval
+[8]: /llm_observability/improve/online_experiments/#step-2-evaluate-the-flag-in-your-application
+[9]: /experiments/concepts/subject_types/
+[10]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[11]: /llm_observability/improve/online_experiments/#step-4-create-and-launch-the-experiment
+[12]: /llm_observability/improve/online_experiments/#step-5-run-the-experiment-and-review-results
+[13]: /feature_flags/use_cases/progressive_rollouts/#canaries
 [14]: /experiments/diagnostics/
