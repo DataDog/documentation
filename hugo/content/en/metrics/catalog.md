@@ -275,8 +275,7 @@ The usage graphs at the top of the Metrics Catalog page show your account's esti
 
 To explore the query behind a graph, click {{< ui >}}Open in Metrics Explorer{{< /ui >}}.
 
-<!-- TODO(screenshot): Replace with a Catalog usage graphs screenshot (standard pricing). -->
-{{< img src="metrics/volume/volume_graph.png" alt="Estimated real-time indexed and ingested custom metrics volume graphs." style="width:100%;" >}}
+{{< img src="metrics/catalog/usage_graphs_2026-11-04.png" alt="The Total Estimated Indexed Custom Metrics and Total Estimated Ingested Custom Metrics usage graphs for cardinality pricing." style="width:100%;" >}}
 
 ### Sort metrics by volume
 
