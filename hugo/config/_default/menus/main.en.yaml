@@ -7831,10 +7831,10 @@ menu:
       parent: log_management
       identifier: log_migration
       weight: 9
-    - name: Query Translation
-      url: logs/migration/query_translation/
+    - name: Migration Tools
+      url: logs/migration/migration_tools/
       parent: log_migration
-      identifier: log_migration_query_translation
+      identifier: log_migration_migration_tools
       weight: 901
     - name: Guides
       url: logs/guide/
