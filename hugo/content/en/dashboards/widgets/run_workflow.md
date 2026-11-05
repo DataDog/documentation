@@ -23,7 +23,7 @@ The Run Workflow widget allows you to automate critical tasks from dashboards. T
 
 To run the workflow:
 1. Click {{< ui >}}Run Workflow{{< /ui >}} on your dashboard widget.
-1. Under {{< ui >}}Execution parameters{{< /ui >}}, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
+1. Under {{< ui >}}Run parameters{{< /ui >}}, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped run parameters, or edit the existing values if needed.
 1. Click {{< ui >}}Run{{< /ui >}} to run the workflow.
 
 ## API
