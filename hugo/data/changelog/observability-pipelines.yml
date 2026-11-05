@@ -100,3 +100,13 @@ entries:
       - ValidatePipeline
     title: Add buffer options to Observability Pipelines datadog_metrics 
       destination
+  - change_type: modified
+    date: '2026-11-05'
+    link: https://github.com/DataDog/documentation/pull/41425
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Correct Observability Pipelines schema drift
