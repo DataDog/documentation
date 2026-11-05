@@ -221,7 +221,7 @@ If you pass an `env` attribute to `dd_topt_go_test`, keep these variables reserv
 
 ## Large repositories
 
-For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print repository wiring and write local scaffolding without editing `WORKSPACE`:
+For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the repository wiring, and add it to `WORKSPACE`:
 
 ```bash
 bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
@@ -231,6 +231,18 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
   --runtime-version 1.25.0 \
   --sync-repo-name test_optimization_data \
   --rto-commit 4ee137661f3c1c5360cf5e9a35b286f280837779
+```
+
+Then run bootstrap without `--print-workspace-snippet` to write the local scaffolding. Bootstrap does not edit `WORKSPACE`:
+
+```bash
+bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
+  --workspace-mode \
+  --service <SERVICE_NAME> \
+  --runtime-version 1.25.0 \
+  --sync-repo-name test_optimization_data \
+  --write-bazelrc \
+  --write-wrapper-template
 ```
 
 Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and platform constraints in your local wrapper. The optimized wrapper should own only Test Optimization wiring.
@@ -283,7 +295,8 @@ Earlier versions of the rules instrumented Go tests with Orchestrion and a `rule
 1. Remove the `orchestrion_mode` and `orchestrion_pin_files` attributes from `dd_topt_go_test` calls and wrappers. Builds fail with a migration message while these attributes are set.
 1. Remove the `rules_go` override that points to the fork, and the `orchestrion` extension with its `rules_go_orchestrion_tool` repository. In `WORKSPACE` mode, declare upstream `rules_go`, remove the `rules_go_fetch`, `rules_go_upstream`, and `rules_go_variant` arguments of the Go helper, and remove the `dd_topt_go_orchestrion_tool_repo` call.
 1. Delete `orchestrion.tool.go` and `orchestrion.yml`, and the Orchestrion and `dd-trace-go` requirements in `go.mod` that only served as pins.
-1. Update the commit pins in [Add modules](#add-modules), and rerun bootstrap. Bootstrap replaces the managed Orchestrion block in `MODULE.bazel`. In `WORKSPACE` mode, call `topt_go_ddtest_workspace_repositories` as shown in [Use `WORKSPACE` mode](#use-workspace-mode).
+1. Update the commit pins in [Add modules](#add-modules), and rerun bootstrap without the flags that were removed, such as `--dd-trace-go-version` and `--orchestrion-version`. Bootstrap replaces the managed Orchestrion block in `MODULE.bazel`. In `WORKSPACE` mode, call `topt_go_ddtest_workspace_repositories` as shown in [Use `WORKSPACE` mode](#use-workspace-mode).
+1. If an earlier version generated a validation script, regenerate it by rerunning bootstrap with `--write-validation-script`. The old script queries a target of the `rules_go` fork and exits before it runs your tests.
 1. If you read `bazel.go.orchestrion.*` keys from target metadata, read `bazel.go.instrumentation.*` and `bazel.go.sdk.*` instead.
 
 ## Known limitations
