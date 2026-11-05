@@ -153,6 +153,7 @@ The default behavior applies to processes on eligible hosts that don't match any
 1. Select one of the following options:
    - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them.
    - {{< ui >}}Block everything else{{< /ui >}}: Applications are not instrumented unless a rule allows them.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 #### Create host groups
 
