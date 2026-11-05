@@ -362,6 +362,8 @@ A cluster is eligible for instrumentation rules when it runs Datadog Cluster Age
 
 To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title. Rules, cluster groups, and evaluation order for Kubernetes are managed separately from those for hosts.
 
+<!-- TODO: Add screenshot of the APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards. Requires eligible clusters and at least one rule. -->
+
 #### Set the default behavior
 
 The default behavior determines how instrumentation rules in Datadog interact with the workload targeting in your Agent configuration, such as `targets` or `enabledNamespaces`.
@@ -372,6 +374,8 @@ The default behavior determines how instrumentation rules in Datadog interact wi
    - {{< ui >}}Block everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Only pods that match an allow rule are instrumented.
    - {{< ui >}}Allow everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Every pod is instrumented except those that match a block rule.
 1. Click {{< ui >}}Save{{< /ui >}}.
+
+<!-- TODO: Add screenshot of the Kubernetes Default Behavior options (No default, Block everything else, Allow everything else). Can be taken now. -->
 
 #### Create cluster groups
 
@@ -385,13 +389,17 @@ To create a cluster group:
 1. Add the clusters to include in the group.
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
+Cluster groups are dynamic. When a new cluster matches the filter of an existing cluster group, Datadog adds the cluster to that group automatically.
+
 To change the order of cluster groups, drag a group by its handle in the group list.
+
+<!-- TODO: Add screenshot of the Cluster Groups page with at least one cluster group above the All clusters group. Requires eligible clusters. -->
 
 Cluster groups are evaluated in the following way:
 
 - A cluster can belong to more than one cluster group.
 - Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. You can't edit its cluster list.
-- For each cluster, Datadog combines the rules from all of the cluster's groups in group order, from top to bottom. Rules that target all eligible clusters are evaluated last.
+- For each cluster, Datadog combines the rules from all of the cluster's groups in group order, from top to bottom. Rules that target {{< ui >}}All clusters{{< /ui >}} are evaluated last.
 - The first rule that matches a pod determines whether the pod is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Create instrumentation rules
@@ -403,7 +411,11 @@ To create an instrumentation rule:
 1. On the [Instrumentation Rules][102] page, click {{< ui >}}New Rule{{< /ui >}}.
 1. Under {{< ui >}}Define condition{{< /ui >}}, select an {{< ui >}}Attribute{{< /ui >}}. For label attributes, also select or enter a {{< ui >}}Label key{{< /ui >}}. Then select an {{< ui >}}Operator{{< /ui >}} and enter a {{< ui >}}Value{{< /ui >}}. To add more conditions, click {{< ui >}}Add Condition{{< /ui >}}. A pod must match all of a rule's conditions for the rule to apply.
 1. Under {{< ui >}}Take this action{{< /ui >}}, select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}.
-1. Under the targeting step, select whether the rule applies to all eligible clusters or only to the cluster groups you select. If you select more than one group, the groups share a single rule. Editing the rule later updates it for every selected group.
+1. Under {{< ui >}}Set cluster targeting{{< /ui >}}, select where the rule applies:
+   - {{< ui >}}All clusters{{< /ui >}}: The rule applies to every eligible cluster in your organization.
+   - {{< ui >}}Select cluster groups{{< /ui >}}: The rule applies only to the cluster groups you select. If you select more than one group, the groups share a single rule. Editing the rule later updates it for every selected group.
+
+   <!-- TODO: Add screenshot of the Create instrumentation rule window for Kubernetes, with a condition filled in and Select cluster groups chosen. Requires at least one cluster group. -->
 1. Under {{< ui >}}Name the rule{{< /ui >}}, enter a name for the rule.
 1. Click {{< ui >}}Next{{< /ui >}}.
 1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, select a cluster group and drag rules to change the order they are evaluated in.
@@ -411,7 +423,7 @@ To create an instrumentation rule:
 
 After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the Instrumentation Rules page shows the rollout status of the current rules.
 
-<!-- TODO: Confirm the restart behavior for Kubernetes, the exact label of the cluster targeting options, and whether cluster groups are dynamic. -->
+<!-- TODO: Confirm the restart behavior for Kubernetes, and whether rules apply within 50 seconds and can be exported as on hosts. -->
 
 The following attributes are supported:
 
