@@ -1,4 +1,8 @@
 {
+  "ai-gateway": {
+    "name": "AI Gateway",
+    "description": "AI Gateway routes your applications' LLM requests to the model providers you connect, and\napplies your organization's routing, access, spending, rate limit, and data capture rules.\n\nThese endpoints allow you to configure:\n\n- Providers: the model providers your organization connects, and the models and pricing each offers.\n- Routing rules: the named routes your applications call, and the models that serve each one.\n- Access: inbound routing policies and model groups that decide who can use which models.\n- Budgets and rate limits: spending caps and request limits, and their current usage.\n- Data capture and governance: what request data is recorded, and organization-wide controls."
+  },
   "ai-guard": {
     "name": "AI Guard",
     "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
@@ -70,6 +74,10 @@
   "bits-ai": {
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
+  "bits-security-analyst": {
+    "name": "Bits Security Analyst",
+    "description": "Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an\ninvestigation's verdict and findings, and count investigations."
   },
   "ci-visibility-github-accounts": {
     "name": "CI Visibility GitHub Accounts",
@@ -570,6 +578,10 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
+  },
+  "temporal-cloud-openmetrics-integration": {
+    "name": "Temporal Cloud OpenMetrics Integration",
+    "description": "Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources\ndirectly through the Datadog API. See the\n[Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for\nmore information."
   },
   "test-optimization": {
     "name": "Test Optimization",
