@@ -86,7 +86,7 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 
 ### Evaluation metrics
 
-Evaluation metrics aggregate the results of your [evaluations][1] and end-user feedback so you can track the quality of your application over time, alert on it with monitors and SLOs, and compare it with other Datadog metrics.
+Evaluation metrics aggregate the results of your [evaluations][1] and [end-user feedback][4] so you can track the quality of your application over time, alert on it with monitors and SLOs, and compare it with other Datadog metrics.
 
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
@@ -99,14 +99,14 @@ The following tags are available on evaluation metrics:
 
 | Tag | Description |
 |-----|-------------|
-| `assessment` | `pass` or `fail` when the evaluation has pass/fail criteria, otherwise `none` |
+| `assessment` | `pass` or `fail` when the evaluation has pass-or-fail criteria. Otherwise, `none`. |
 | `env`, `service`, `version` | Taken from the evaluated span. For feedback, taken from the tags on the feedback event. |
-| `evaluation_name` | The name of the evaluation, for example `faithfulness`, or the label of the feedback, for example `thumbs` |
+| `evaluation_name` | The name of the evaluation, for example `faithfulness`, or the label of the feedback, for example `thumbs`. |
 | `evaluation_source` | `managed` for evaluations that Datadog runs, including custom LLM-as-a-judge evaluations. `external` for evaluations and feedback you submit through the SDK or API. |
 | `evaluation_version` | The version of a custom LLM-as-a-judge evaluation. Not set for other evaluations or for feedback. |
 | `is_feedback` | `true` for [end-user feedback][4]. Not set for evaluations. |
 | `metric_type` | `boolean`, `categorical`, `score`, `numerical`, `json`, or `text`. `numerical` and `text` results are reported only in `ml_obs.evaluation.count`. |
-| `ml_app` | The ML application the evaluation belongs to |
+| `ml_app` | The ML application the evaluation belongs to. |
 | `value` | The evaluation result. Available only on `ml_obs.evaluation.count`. See the [`value` tag for evaluation metrics](#value-tag-for-evaluation-metrics) section. |
 
 #### `value` tag for evaluation metrics
@@ -129,7 +129,7 @@ Evaluation metrics include production evaluation results that completed successf
 
 An SDK or API evaluation doesn't match a span when, for example, its span ID is incorrect or the span never reached Datadog. Feedback is included whether or not it matches a span.
 
-Managed evaluations can run on a sample of your traffic. When they do, `ml_obs.evaluation.count` includes only the sampled results, so its counts don't line up one to one with `ml_obs.span`. Rates such as pass rate and score distributions still reflect your overall traffic, but they can be noisier for applications with low traffic.
+Managed evaluations can run on a sample of your traffic. When they do, `ml_obs.evaluation.count` includes only the sampled results, so its counts don't line up one to one with `ml_obs.span`. Rates, such as pass rate, and score distributions still reflect your overall traffic, but they can be noisier for applications with low traffic.
 
 #### Example evaluation metric queries
 
@@ -155,8 +155,8 @@ sum:ml_obs.evaluation.count{evaluation_name:answer_quality} by {value}.as_count(
 Thumbs-up rate from end-user feedback:
 
 ```text
-sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true,value:up}.as_count().fill(null)
-  / sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true}.as_count().fill(null)
+sum:ml_obs.evaluation.count{evaluation_name:thumbs AND is_feedback:true AND value:up}.as_count().fill(null)
+  / sum:ml_obs.evaluation.count{evaluation_name:thumbs AND is_feedback:true}.as_count().fill(null)
 ```
 
 90th percentile of a score evaluation by application:
@@ -165,7 +165,7 @@ sum:ml_obs.evaluation.count{evaluation_name:thumbs,is_feedback:true,value:up}.as
 p90:ml_obs.evaluation.score{evaluation_name:relevance} by {ml_app}
 ```
 
-To exclude feedback from any of these queries, add `NOT is_feedback:true` to the tag filter.
+To exclude feedback from an `ml_obs.evaluation.count` or `ml_obs.evaluation.score` query, add `NOT is_feedback:true` to the tag filter.
 
 ### Estimated usage metrics
 
