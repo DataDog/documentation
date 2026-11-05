@@ -2,7 +2,7 @@
 title: Cross-App Access
 description: Configure Cross-App Access so AI agents can call the Datadog API on behalf of users your organization authorized in Okta, Claude, or a custom issuer.
 algolia:
-  tags: ["cross-app access", "XAA", "Okta", "Claude", "Anthropic", "OIDC", "AI agent", "MCP", "ID-JAG"]
+  tags: ["cross-app access", "XAA", "Okta", "Claude", "Anthropic", "OIDC", "AI agent", "MCP", "ID-JAG", "Identity Assertion JWT Authorization Grant", "Enterprise-Managed Authorization", "managed authorization"]
 further_reading:
     - link: '/mcp_server/setup/'
       tag: 'Documentation'
@@ -19,9 +19,11 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized. Without it, every user authorizes the agent individually through a browser consent screen. With it, an administrator grants that access centrally, and users skip the per-user consent step.
 
-A trusted issuer gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, and custom issuers: other identity providers that issue ID-JAGs for users of your organization's SAML single sign-on.
+A trusted issuer, the identity provider (IdP) that issues the token, gives the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Datadog accepts ID-JAGs from Okta, Claude, and custom issuers: other identity providers that issue ID-JAGs for users of your organization's SAML single sign-on.
 
-Claude is the only agent that Cross-App Access supports, and it works with any of these issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. With Claude Auto-Connect, Claude is also the issuer and mints the ID-JAG that it presents to Datadog. You can trust more than one issuer.
+Cross-App Access implements the IETF [Identity Assertion JWT Authorization Grant][4] draft, where the issuer is called the IdP authorization server, and the MCP [Enterprise-Managed Authorization][5] extension. Okta calls this feature Cross App Access, and Claude calls it managed authorization.
+
+The agent is the OAuth client that calls the Datadog API (the MCP client, in MCP terms). Claude is the only agent that Cross-App Access supports, and it works with any of these issuers. Claude can play two separate roles. As the agent, Claude calls the Datadog API on behalf of the user. With Claude Auto-Connect, Claude is also the issuer and mints the ID-JAG that it presents to Datadog. You can trust more than one issuer.
 
 ## Prerequisites
 
@@ -210,6 +212,10 @@ Enter the `issuer` value from your issuer's `/.well-known/openid-configuration` 
 
 Datadog rejects hostnames that belong to Datadog, internal-only names such as `.internal` or `.local`, and shared issuers that many unrelated tenants sign with, such as `https://accounts.google.com`.
 
+#### How the agent gets the token
+
+The agent requests an ID-JAG from your issuer with OAuth 2.0 Token Exchange ([RFC 8693][2]), asking for the token type `urn:ietf:params:oauth:token-type:id-jag`, then presents it to Datadog with the JWT bearer grant ([RFC 7523][3]). Configure your issuer and the agent for this exchange as described in their documentation.
+
 #### Token requirements
 
 Configure your issuer to issue ID-JAGs for Datadog that meet these requirements:
@@ -227,6 +233,8 @@ Configure your issuer to issue ID-JAGs for Datadog that meet these requirements:
 - If the user isn't found, confirm `nameid` matches the user's Datadog handle exactly.
 
 [1]: /account_management/saml/
+[2]: https://datatracker.ietf.org/doc/html/rfc8693
+[3]: https://datatracker.ietf.org/doc/html/rfc7523
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -257,3 +265,5 @@ If a user signed in before you enabled Cross-App Access, have them sign out of C
 [1]: https://app.datadoghq.com/organization-settings/cross-app-access
 [2]: https://app.datadoghq.com/organization-settings/oauth-applications
 [3]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
+[4]: https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-assertion-authz-grant/
+[5]: https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization
