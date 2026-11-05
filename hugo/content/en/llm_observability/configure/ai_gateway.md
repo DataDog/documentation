@@ -200,7 +200,7 @@ Subscription providers support these coding agents:
 
 An Anthropic Console account bills API usage per token, so it is not a subscription.
 
-Each person also needs a Datadog [API key][16] and their own [application key][17]. AI Gateway attributes each request to the user who owns the application key, and that user needs the `ai_gateway_usage` permission.
+Just like regular API access, requests to a subscription provider need valid AI Gateway authentication. See [Authenticate requests](#authenticate-requests).
 
 ### Create a subscription provider
 
@@ -218,7 +218,7 @@ You cannot change whether a provider uses subscriptions after you create it.
 
 ### Grant access to a subscription provider
 
-People can use a subscription provider only when the [default policy](#default-policy) or one of their [access policies](#access-policies) includes it. Grant access on the provider's {{< ui >}}Access{{< /ui >}} step, or later in [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][18] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
+People can use a subscription provider only when the [default policy](#default-policy) or one of their [access policies](#access-policies) includes it. Grant access on the provider's {{< ui >}}Access{{< /ui >}} step, or later in [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Org defaults{{< /ui >}}][16] or [{{< ui >}}Policies{{< /ui >}} > {{< ui >}}Access policies{{< /ui >}}][8]. Choose which models the access covers:
 
 - {{< ui >}}All models{{< /ui >}}: Any model each person's subscription includes. In a policy, select the provider itself rather than individual models.
 - {{< ui >}}Specific models{{< /ui >}}: Only the selected models, even if a person's subscription includes more. This option appears after you add models to the provider. In a policy, select the individual models.
@@ -562,6 +562,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
-[16]: /account_management/api-app-keys/#api-keys
-[17]: /account_management/api-app-keys/#application-keys
-[18]: https://app.datadoghq.com/llm/gateway/governance/general
+[16]: https://app.datadoghq.com/llm/gateway/governance/general
