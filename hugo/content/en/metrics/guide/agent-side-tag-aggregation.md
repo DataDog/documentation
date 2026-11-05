@@ -144,7 +144,7 @@ After Remote Configuration and the Agent Data Plane are enabled, you can configu
 
 To create a rule:
 
-1. Navigate to the [Metric Summary][8] page or the [Custom Metrics Volume][9] page.
+1. Navigate to the [Metrics Catalog][8].
 2. Select one or more custom metrics for Agent-side tag aggregation.
 
 Your tag aggregation rules are visible from the [Metric Settings][10] page, where you can also create and edit them directly.
@@ -196,6 +196,5 @@ The `sum` aggregation performed by the Agent preserves results for queries that 
 [5]: /remote_configuration/#enable-remote-configuration
 [6]: /account_management/rbac/permissions/#access-management
 [7]: /account_management/rbac/permissions/#api-and-application-keys
-[8]: https://app.datadoghq.com/metric/summary
-[9]: https://app.datadoghq.com/metric/volume
+[8]: https://app.datadoghq.com/metric/catalog
 [10]: https://app.datadoghq.com/metric/settings

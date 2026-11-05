@@ -5,7 +5,7 @@ algolia:
 aliases:
 - /ko/real_user_monitoring/connect_rum_and_traces
 - /ko/real_user_monitoring/platform/connect_rum_and_traces/
-description: 프런트 엔드 RUM 데이터를 백엔드 APM 트레이스와 연결하여 애플리케이션 스택 및 사용자 여정 전체에 대한 종합적인 가시성을
+description: 프런트엔드 RUM 데이터를 백엔드 APM 트레이스와 연결하여 애플리케이션 스택 및 사용자 여정 전체에 대한 엔드투엔드 가시성을
   얻으세요.
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
@@ -16,31 +16,31 @@ further_reading:
   text: 단일 페이지 애플리케이션 모니터링 시작
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: 가이드
-  text: 제품 간 상호 연계를 사용한 간편한 문제 해결
+  text: 교차 제품 연결을 통한 손쉬운 문제 해결
 - link: /tracing/
-  tag: 설명서
+  tag: 문서
   text: APM 및 분산 트레이싱
 - link: /real_user_monitoring
-  tag: 설명서
-  text: RUM 및 세션 리플레이
+  tag: 문서
+  text: RUM 및 Session Replay
 - link: https://www.datadoghq.com/blog/troubleshoot-with-session-replay-developer-tools/
   tag: 블로그
-  text: 세션 리플레이 브라우저 개발 도구를 사용한 문제 해결
+  text: Session Replay 브라우저 개발자 도구를 사용한 문제 해결
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: 블로그
-  text: OpenTelemetry 계측 애플리케이션에서 트레이스와 Datadog RUM 이벤트 상호 연계
+  text: OpenTelemetry 계측 애플리케이션에서 트레이스와 Datadog RUM 이벤트 연결
 - link: https://www.datadoghq.com/blog/rum-apm-single-step
   tag: 블로그
-  text: 명령 한 개로 Java 앱에 대한 종합적인 가시성 얻기
+  text: 명령 한 개로 Java 앱에 대한 엔드투엔드 가시성 얻기
 title: RUM과 트레이스 연결
 ---
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM과 트레이스" style="width:100%;">}}
 
 ## 개요 {#overview}
 
-APM을 Real User Monitoring과 통합하면 웹 및 모바일 애플리케이션의 요청을 상응하는 백엔드 트레이스와 연결할 수 있습니다. 이 조합을 사용하면 프런트 엔드와 백엔드 데이터 전체를 한 개의 렌즈를 통해 볼 수 있습니다.
+APM을 Real User Monitoring과 통합하면 웹 및 모바일 애플리케이션의 요청을 상응하는 백엔드 트레이스와 연결할 수 있습니다. 이 조합을 사용하면 한눈에 프런트엔드 및 백엔드 데이터 전체를 확인할 수 있습니다.
 
-RUM의 프런트 엔드 데이터는 물론 트레이스 ID 주입의 백엔드, 인프라, 로그 정보까지 사용하여 스택 모든 위치의 문제를 정확하게 짚어내고 사용자가 어떤 경험을 하고 있는지 파악하세요.
+RUM의 프런트엔드 데이터는 물론 트레이스 ID 인젝션의 백엔드, 인프라, 로그 정보까지 사용하여 스택 내 모든 위치의 문제를 정확하게 짚어내고 사용자가 어떤 경험을 하고 있는지 파악하세요.
 
 iOS 애플리케이션 트레이스를 Datadog에 전송하려면 [iOS 트레이스 수집][1]을 참조하세요.
 
@@ -125,7 +125,7 @@ iOS 애플리케이션 트레이스를 Datadog에 전송하려면 [iOS 트레이
       - `RegExp`: matches if any substring of the URL matches the provided RegExp. For example, `/^https:\/\/[^\/]+\.my-api-domain\.com/` matches URLs like `https://foo.my-api-domain.com/path`, but not `https://notintended.com/?from=guess.my-api-domain.com`. **Note:** The RegExp is not anchored to the start of the URL unless you use `^`. Be careful, as overly broad patterns can unintentionally match unwanted URLs and cause CORS errors.
       - `function`: evaluates with the URL as parameter. Returning a `boolean` set to `true` indicates a match.
 
-<div class="alert alert-danger">RegExp를 사용하는 경우, 접두사만이 아니라 URL 전체를 하위 문자열로 하여 이를 기준으로 패턴을 테스트합니다. 의도치 않은 일치를 피하려면 RegExp를 `^`로 고정하고 최대한 구체적으로 설정하세요. </div>
+<div class="alert alert-danger">RegExp를 사용하는 경우, 접두사만이 아니라 URL 전체를 하위 문자열로 하여 이를 기준으로 패턴을 테스트합니다. 의도하지 않은 일치를 방지하려면 RegExp에 앵커를 지정하고 <code>^</code> 가능한 한 구체적으로 지정합니다. </div>
 
 3.  _(선택 사항)_`traceSampleRate` 초기화 파라미터를 구성하여 백엔드 트레이스의 정의된 비율을 유지하세요. 이것이 설정되어 있지 않으면 브라우저 요청에서 유입되는 트레이스의 100%가 Datadog으로 전송됩니다. 예를 들어, 백엔드 트레이스의 20%를 유지하려면:
 
@@ -142,7 +142,7 @@ iOS 애플리케이션 트레이스를 Datadog에 전송하려면 [iOS 트레이
 
 4. _(선택 사항)_`traceSampleRate`를 설정하는 경우, 백엔드 서비스의 샘플링 결정이 여전히 적용되도록 보장하려면 `traceContextInjection` 초기화 파라미터를 `sampled`로 구성하세요(기본적으로 `sampled`로 설정됨).
 
-    예를 들어 `traceSampleRate`를 브라우저 SDK의 20%로 설정하는 경우:
+    예를 들어, `traceSampleRate`를 브라우저 SDK의 20%로 설정하는 경우:
     - `traceContextInjection`이 `all`로 설정되면, 백엔드 트레이스의 **20%**는 유지되고 백엔드 트레이스의 **80%**는 삭제됩니다.
 
   {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection이 all로 설정됨" style="width:90%;">}}
@@ -151,7 +151,7 @@ iOS 애플리케이션 트레이스를 Datadog에 전송하려면 [iOS 트레이
 
     {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection이 sampled로 설정됨" style="width:90%;">}}
 
-<div class="alert alert-info">브라우저 SDK가 초기화된 이후 발생한 요청에는 전체 트레이싱을 사용할 수 있습니다. 초기 HTML 문서 및 조기 브라우저 요청의 전체 트레이싱은 지원되지 않습니다.</div>
+<div class="alert alert-info">브라우저 SDK가 초기화된 이후 발생한 요청에는 엔드투엔드 트레이싱을 사용할 수 있습니다. 초기 HTML 문서 및 조기 브라우저 요청의 엔드투엔드 트레이싱은 지원되지 않습니다.</div>
 
 [1]: /ko/real_user_monitoring/application_monitoring/browser/
 [2]: /ko/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
@@ -223,9 +223,9 @@ iOS 애플리케이션 트레이스를 Datadog에 전송하려면 [iOS 트레이
     )
     ```
     
-   기본적으로, 목록에 나열된 호스트의 모든 하위 도메인이 추적됩니다. 예를 들어 `example.com`을 추가하면, `api.example.com` 및 `foo.example.com`에 대한 추적도 활성화합니다.
+   기본적으로, 목록에 나열된 호스트의 모든 하위 도메인이 추적됩니다. 예를 들어, `example.com`을 추가하면 `api.example.com` 및 `foo.example.com`에 대한 추적도 활성화하게 됩니다.
 
-   트레이스 ID 주입은 `URLRequest`를 `URLSession`에 제공하는 경우 작동합니다. `URL` 개체를 사용할 때는 분산 트레이싱이 작동하지 않습니다.
+   트레이스 ID 인젝션은 `URLRequest`를 `URLSession`에 제공하는 경우 작동합니다. `URL` 개체를 사용할 때는 분산 트레이싱이 작동하지 않습니다.
 
 3. _(선택 사항)_ 상세한 타이밍 분석(DNS 확인, SSL 핸드셰이크, 첫 번째 바이트까지 시간, 연결 시간, 다운로드 소요 시간 등)을 원하는 경우, `SessionDelegate` 유형에 맞는 `URLSessionInstrumentation`을 활성화하세요.
     ```swift
@@ -389,7 +389,7 @@ RUM을 사용하여 APM 통합을 구성했는지 확인하려면, RUM을 설치
 {{% tab "브라우저" %}}
 
 1. 애플리케이션 내 페이지를 방문합니다.
-2. 브라우저의 개발자 도구에서 **네트워크** 탭으로 이동합니다.
+2. 브라우저의 개발자 도구에서 {{< ui >}}Network{{< /ui >}} 탭으로 이동합니다.
 3. 상호 연계될 것으로 예상하는 리소스 요청의 요청 헤더가 [Datadog의 상호 연계 헤더][1]를 포함하는지 확인합니다.
 
 [1]: /ko/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-rum-resources-are-linked-to-traces
@@ -463,7 +463,7 @@ RUM Explorer에서 트레이스를 조회하는 방법:
 
 1. [세션 목록][22]으로 이동하여 사용할 수 있는 트레이스가 있는 세션을 클릭합니다. `@_dd.trace_id:*`를 사용하여 트레이스가 있는 리소스를 쿼리할 수도 있습니다.
 
-세션을 선택하면 요청 기간 분석, 각 스팬의 플레임(Flame) 그래프, 그리고 **APM에서 트레이스 조회** 링크가 포함된 세션 패널이 표시됩니다.
+세션을 선택하면 요청 소요 시간의 세부 내역, 각 스팬의 플레임 그래프, {{< ui >}}View Trace in APM{{< /ui >}} 링크가 포함된 세션 패널이 표시됩니다.
 
 ## 트레이스에서 RUM Explorer로 {#traces-to-rum-explorer}
 
@@ -471,8 +471,8 @@ RUM Explorer에서 트레이스를 조회하는 방법:
 
 트레이스에서 RUM 이벤트를 조회하는 방법:
 
-1. 트레이스 조회 내에서 **VIEW**를 클릭하여 해당 조회의 수명 중에 생성된 모든 트레이스를 보거나, **RESOURCE**를 클릭하여 개요 탭에서 특정 리소스와 연결된 트레이스를 봅니다.
-1. **RUM에서 조회 보기** 또는 **RUM에서 리소스 보기**를 클릭하면 RUM Explorer에서 상응하는 이벤트가 열립니다.
+1. 트레이스 보기에서 {{< ui >}}VIEW{{< /ui >}}를 클릭하면 해당 보기의 수명 주기 동안 생성된 모든 트레이스를 볼 수 있고, {{< ui >}}Overview{{< /ui >}} 탭에서 {{< ui >}}RESOURCE{{< /ui >}}를 클릭하면 특정 리소스와 연결된 트레이스를 볼 수 있습니다.
+1. RUM Explorer에서 해당 이벤트를 열려면 {{< ui >}}See View in RUM{{< /ui >}} 또는 {{< ui >}}See Resource in RUM{{< /ui >}}을 클릭합니다.
 
 ## 지원되는 라이브러리 {#supported-libraries}
 
@@ -493,7 +493,7 @@ RUM Explorer에서 트레이스를 조회하는 방법:
 
 RUM은 여러 전파기 유형을 지원하여 OpenTelemetry 라이브러리로 계측된 백엔드와 리소스를 연결합니다.
 
-기본 주입 스타일은 `tracecontext`, `Datadog`입니다.
+기본 인젝션 스타일은 `tracecontext`, `Datadog`입니다.
 
 {{< tabs >}}
 {{% tab "브라우저 RUM" %}}
@@ -655,6 +655,8 @@ RUM은 여러 전파기 유형을 지원하여 OpenTelemetry 라이브러리로 
 ## RUM 리소스가 트레이스에 연결되는 방식 {#how-rum-resources-are-linked-to-traces}
 
 Datadog은 분산 트레이싱 프로토콜을 사용하고 아래의 HTTP 헤더를 설정합니다. 기본적으로 트레이스 컨텍스트와 Datadog 전용 헤더를 둘 다 사용합니다.
+
+이 헤더는 해당 전파자 유형이 활성화된 경우에만 추가됩니다. 기본적으로 RUM은 트레이스 컨텍스트와 함께 `datadog` 전파자를 포함합니다. 활성화된 전파자를 확인하거나 변경하려면 [OpenTelemetry 지원](#opentelemetry-support)을 참조하세요.
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Real User Monitoring SDK에서 생성되었습니다. Datadog이 트레이스를 RUM 리소스와 연결하도록 허용합니다.
@@ -663,14 +665,14 @@ Datadog은 분산 트레이싱 프로토콜을 사용하고 아래의 HTTP 헤�
 : Real User Monitoring SDK에서 생성되었습니다. Datadog이 트레이스에서 첫 스팬을 생성하도록 허용합니다.
 
 `x-datadog-origin: rum`
-: Real User Monitoring SDK에서 생성되었습니다. Datadog이 트레이스의 소스를 감지하도록 허용합니다.
+: Real User Monitoring SDK에서 생성되었습니다. Datadog이 트레이스의 소스를 탐지하도록 허용합니다.
 
 `x-datadog-sampling-priority`
 : 트레이스가 샘플링된 경우, Real User Monitoring SDK가 `1`로 설정하고, 샘플링되지 않은 경우 `0`으로 설정합니다.
 {{% /tab %}}
 {{% tab "W3C 트레이스 컨텍스트" %}}
 
-`traceparent: [version]-[trace id]-[parent id]-[trace flags]`
+`traceparent: [버전]-[트레이스 ID]-[부모 ID]-[트레이스 플래그]`
 : `version`: 현재 사양에서는 버전이 `00`으로 설정된 것으로 가정합니다.
 : `trace id`: 128비트 트레이스 ID, 32자의 16진수입니다. 소스 트레이스 ID는 APM과 호환성 유지를 위해 64비트입니다.
 : `parent id`: 64비트 스팬 ID, 16자의 16진수입니다.
@@ -718,7 +720,7 @@ b3 다중 헤더의 예시:
 
 수집된 트레이스는 [Live Search][19] 탐색기에서 15분 동안 사용할 수 있습니다. 트레이스를 더 오래 보존하려면 [APM 보존 필터][20]를 만드세요. 어떤 스팬 태그에서든 이러한 보존 필터의 범위를 지정하여 중요한 페이지 및 사용자 액션에 대한 트레이스를 보존할 수 있습니다.
 
-RUM Without Limits를 사용하는 경우, [교차 제품 보존 필터][21]를 사용하여 특정 RUM 세션과 연결된 APM 트레이스를 보존할 수도 있습니다. 이렇게 하면 프런트 엔드와 백엔드 사이의 상호 연계가 최적화됩니다. 기본적으로, RUM [세션 및 그 트레이스의 1%가 추가 비용 없이 자동으로 보존][23]됩니다.
+RUM Without Limits를 사용하는 경우, [교차 제품 보존 필터][21]를 사용하여 특정 RUM 세션과 연결된 APM 트레이스를 보존할 수도 있습니다. 이렇게 하면 프런트엔드와 백엔드 사이의 상호 연계가 최적화됩니다. 기본적으로, RUM [세션 및 그 트레이스의 1%가 추가 비용 없이 자동으로 보존][23]됩니다.
 
 ## APM 할당량에 미치는 영향 {#effect-on-apm-quotas}
 

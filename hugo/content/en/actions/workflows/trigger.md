@@ -109,6 +109,22 @@ To add an incident trigger to your workflow:
 1. Click {{< ui >}}Create{{< /ui >}}.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
+## Feature flags triggers
+
+A Datadog Feature Flags trigger starts a workflow automatically when flag events occur. Events include flag creation, configuration changes, rollout progress, and approval requests or reviews. For example, notify a Slack channel when a rollout pauses or a flag is disabled.
+
+For setup from Feature Flags settings, supported events, conditions, and examples, see [Feature Flags and Workflow Automation][18].
+
+To add a Feature Flags trigger to your workflow:
+
+1. From the [Workflow creation page][6], select the Feature Flag event that should trigger your workflow. For example, choose {{< ui >}}Feature Flag Enabled{{< /ui >}} or {{< ui >}}Feature Flag Rollout Paused{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}}.
+1. Click the trigger to configure its conditions. Select the {{< ui >}}Feature flags{{< /ui >}} and, for events associated with an environment, {{< ui >}}Environments{{< /ui >}} to match. Leave a field empty to match all values. The {{< ui >}}Feature Flag Created{{< /ui >}} trigger applies to all newly created flags and has no flag or environment filters.
+1. Add the actions to run and connect the trigger to the first step.
+1. Save your workflow and click {{< ui >}}Publish{{< /ui >}}. Workflows do not run automatically until published. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+To add a Feature Flags trigger to an existing workflow, click {{< ui >}}Add Trigger{{< /ui >}} and select the event type.
+
 ## Security triggers
 
 You can trigger a workflow automatically for any Security Signal or Security Finding. You can also trigger a workflow manually from a Cloud SIEM Security Signal panel, Misconfiguration panel, or Identity Risk panel.
@@ -349,3 +365,4 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [15]: /incident_response/incident_management/setup_and_configuration/automations
 [16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [17]: /actions/workflows/access_and_auth/#run-as-a-service-account
+[18]: /feature_flags/concepts/workflow_automation/
