@@ -231,7 +231,7 @@ For all integration options, see the [sample configuration][19].
 ## Limitations
 
 - Query metrics are differences between cumulative package-cache counters. New cache entries establish a baseline before subsequent executions appear in metrics. Executions of statements evicted from the package cache between collections can be missed.
-- An HADR standby requires reads enabled to accept the SQL connections used for collection. Each server reports its own query workload. Query metrics do not report replication lag, HADR health, or which server is primary. See [High availability disaster recovery (HADR)][16].
+- To collect query metrics from an HADR standby, enable reads on the standby. Each server reports its own query workload. See [High availability disaster recovery (HADR)][16].
 
 ## Further reading
 
