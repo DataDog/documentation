@@ -1,0 +1,35 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "*",
+            "inputs": [
+              "datadog-agent-source"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Pipeline with Empty Processor Group"
+    },
+    "type": "pipelines"
+  }
+}
