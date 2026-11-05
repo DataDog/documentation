@@ -10043,6 +10043,49 @@ menu:
           - ListInvestigations
         unstable: []
         order: 2
+    - name: Bits Security Analyst
+      url: /api/latest/bits-security-analyst/
+      identifier: bits-security-analyst
+      generated: true
+    - name: Get a Bits Security Analyst investigation
+      url: /api/latest/bits-security-analyst/get-a-bits-security-analyst-investigation/
+      identifier: bits-security-analyst-get-a-bits-security-analyst-investigation
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityAgentInvestigation
+        unstable:
+          - v2
+        order: 3
+    - name: Count Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/count-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-count-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CountSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 2
+    - name: List Bits Security Analyst investigations
+      url: /api/latest/bits-security-analyst/list-bits-security-analyst-investigations/
+      identifier: bits-security-analyst-list-bits-security-analyst-investigations
+      parent: bits-security-analyst
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityAgentInvestigations
+        unstable:
+          - v2
+        order: 1
     - name: CI Visibility GitHub Accounts
       url: /api/latest/ci-visibility-github-accounts/
       identifier: ci-visibility-github-accounts
@@ -21764,82 +21807,6 @@ menu:
           - ListSCIMGroups
         unstable: []
         order: 7
-    - name: Salesforce Integration
-      url: /api/latest/salesforce-integration/
-      identifier: salesforce-integration
-      generated: true
-    - name: Delete a connected Salesforce organization
-      url: /api/latest/salesforce-integration/delete-a-connected-salesforce-organization/
-      identifier: salesforce-integration-delete-a-connected-salesforce-organization
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteSalesforceOrganization
-        unstable: []
-        order: 2
-    - name: Get all connected Salesforce organizations
-      url: /api/latest/salesforce-integration/get-all-connected-salesforce-organizations/
-      identifier: salesforce-integration-get-all-connected-salesforce-organizations
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSalesforceOrganizations
-        unstable: []
-        order: 1
-    - name: Update a Salesforce incident template
-      url: /api/latest/salesforce-integration/update-a-salesforce-incident-template/
-      identifier: salesforce-integration-update-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateIncidentTemplate
-        unstable: []
-        order: 5
-    - name: Delete a Salesforce incident template
-      url: /api/latest/salesforce-integration/delete-a-salesforce-incident-template/
-      identifier: salesforce-integration-delete-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteIncidentTemplate
-        unstable: []
-        order: 6
-    - name: Create a Salesforce incident template
-      url: /api/latest/salesforce-integration/create-a-salesforce-incident-template/
-      identifier: salesforce-integration-create-a-salesforce-incident-template
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateIncidentTemplate
-        unstable: []
-        order: 4
-    - name: Get all Salesforce incident templates
-      url: /api/latest/salesforce-integration/get-all-salesforce-incident-templates/
-      identifier: salesforce-integration-get-all-salesforce-incident-templates
-      parent: salesforce-integration
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetIncidentTemplates
-        unstable: []
-        order: 3
     - name: Scorecards
       url: /api/latest/scorecards/
       identifier: scorecards
@@ -24248,6 +24215,75 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Temporal Cloud OpenMetrics Integration
+      url: /api/latest/temporal-cloud-openmetrics-integration/
+      identifier: temporal-cloud-openmetrics-integration
+      generated: true
+    - name: Update a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/update-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-update-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/get-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-get-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/delete-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-delete-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Temporal Cloud OpenMetrics account
+      url: /api/latest/temporal-cloud-openmetrics-integration/create-a-temporal-cloud-openmetrics-account/
+      identifier: temporal-cloud-openmetrics-integration-create-a-temporal-cloud-openmetrics-account
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTemporalCloudOpenMetricsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Temporal Cloud OpenMetrics accounts
+      url: /api/latest/temporal-cloud-openmetrics-integration/list-temporal-cloud-openmetrics-accounts/
+      identifier: temporal-cloud-openmetrics-integration-list-temporal-cloud-openmetrics-accounts
+      parent: temporal-cloud-openmetrics-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTemporalCloudOpenMetricsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization

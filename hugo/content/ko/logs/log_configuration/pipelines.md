@@ -1,22 +1,22 @@
 ---
 aliases:
 - /ko/logs/processing/pipelines/
-description: Datadog pipelines 및 프로세서를 사용하여 로그 구문 분석, 보강 및 관리
+description: Datadog 파이프라인 및 프로세서를 사용하여 로그 구문 분석, 보강 및 관리
 further_reading:
 - link: https://learn.datadoghq.com/courses/log-pipelines
   tag: 학습 센터
   text: 로그 파이프라인 구축 및 관리
 - link: /logs/log_configuration/processors
-  tag: 설명서
+  tag: 문서
   text: 사용 가능한 프로세서 전체 목록 참조
 - link: /logs/logging_without_limits/
-  tag: 설명서
+  tag: 문서
   text: Logging without Limits*
 - link: /logs/explorer/
-  tag: 설명서
+  tag: 문서
   text: 로그 탐색 방법 알아보기
 - link: /logs/troubleshooting/
-  tag: 설명서
+  tag: 문서
   text: 로그 문제 해결
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: 학습 센터
@@ -74,7 +74,7 @@ JSON 로그의 전처리는 로그가 파이프라인 처리에 진입하기 전
 
 JSON 로그 전처리에는 기본 구성이 함께 제공되어 표준 로그 포워더에 사용할 수 있습니다. 이 구성을 편집하여 사용자 지정 또는 특정 로그 전달 접근 방식을 조정하려면:
 
-1. Datadog 에서 [Pipelines][8]으로 이동하여 [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9]를 선택합니다.
+1. Datadog에서 [Pipelines][8]으로 이동하여 [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9]를 선택합니다.
 
     **참고:** JSON 로그를 전처리하는 것만이 로그 속성 중 하나를 로그의 `host`로 정의하는 유일한 방법입니다.
 
@@ -310,7 +310,7 @@ Datadog에서는 통합 파이프라인을 사용하려면 해당하는 로그 `
 
 로그 목록의 범위를 좁히려면 쿼리 필터를 사용하거나 영향도를 기준으로 필터링하세요.
 
-- **모든 로그**: 라이브 테일의 모든 로그입니다.
+- **모든 로그**: Live Tail의 모든 로그입니다.
 - **영향을 받은 로그**: 이번 세션에서 편집을 통해 변경된 로그만 해당합니다.
 - **영향을 받지 않은 로그**: 편집으로 인해 변경되지 않은 로그만 해당합니다.
 
@@ -331,6 +331,63 @@ Datadog에서는 통합 파이프라인을 사용하려면 해당하는 로그 `
 각 파이프라인에 대하여 예상 사용량 메트릭이 표시됩니다. 여기에는 각 파이프라인이 수집하고 수정하는 로그의 양과 수가 표시됩니다. 모든 파이프라인에는 즉시 사용 가능한 [로그 예상 사용량 대시보드][13]로 이동하는 링크가 포함됩니다. 이 대시보드는 파이프라인의 사용량 메트릭에 대한 상세한 차트를 제공합니다.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="파이프라인의 사용량 메트릭을 신속하게 조회하는 방법" style="width:50%;">}}
+
+<!-- vale Datadog.headings = NO -->
+## 자동 처리 {#auto-processing}
+<!-- vale Datadog.headings = YES -->
+
+{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="미리 보기 상태의 자동 처리" >}}
+액세스를 요청하려면 양식을 작성하세요.
+{{< /callout >}}
+
+자동 처리는 사용자 지정 애플리케이션 로그를 구문 분석하고 타임스탬프, 상태, 서비스, 트레이스 ID 및 스팬 ID를 포함한 핵심 속성을 추출합니다. 이를 통해 구문 분석을 수동으로 구성하지 않아도 로그를 검색, 필터링 및 상호 연결할 수 있습니다.
+
+자동 처리는 기존 통합 또는 사용자 지정 파이프라인의 필터와 일치하지 않는 로그만 처리합니다. 로그가 기존 파이프라인의 필터와 일치하면 해당 파이프라인이 로그를 수정하지 않더라도 자동 처리가 로그를 처리하지 않습니다. 기존 파이프라인 구성은 변경되지 않습니다.
+
+### 작동 방식 {#how-it-works}
+
+Datadog은 지원되는 로그를 소스 및 서비스별로 그룹화하고 이에 대한 자동 처리 항목을 생성합니다. Datadog은 이전에 지원되던 패턴의 구문 분석 방식을 변경하지 않아도 새로운 로그 패턴을 지원하도록 항목을 자동으로 업데이트합니다.
+
+[변환을 검토](#review-transformations)하고 [로그를 처리할 항목을 제어합니다](#enable-or-disable-an-entry). [항목을 수동 파이프라인으로 전환](#switch-to-a-manual-pipeline)하여 구성을 사용자 지정할 수 있습니다.
+
+<!-- vale Datadog.headings = NO -->
+### 자동 처리 구성 {#configure-auto-processing}
+<!-- vale Datadog.headings = YES -->
+
+[{{< ui >}}Processing{{< /ui >}} 페이지][8]로 이동하여 {{< ui >}}Auto-Processing{{< /ui >}} 탭을 선택합니다.
+
+#### 자동 처리 켜기 또는 끄기 {#turn-auto-processing-on-or-off}
+
+기능 토글을 사용하여 조직에 대해 자동 처리를 켜거나 끌 수 있습니다.
+
+#### 새 항목을 활성화하는 방법 선택 {#choose-how-new-entries-are-enabled}
+
+자동 처리가 켜져 있을 때 새 항목을 자동으로 활성화할지 여부를 선택합니다.
+
+- **Automatically enable new entries**: 새 항목이 생성 시 활성화되며 일치하는 수신 로그 처리를 시작합니다.
+- **Review new entries before enabling**: 새 항목이 생성 시 비활성화됩니다. 변환을 검토한 다음 사용할 항목을 활성화합니다.
+
+### 변환 검토 {#review-transformations}
+
+1. {{< ui >}}Auto-Processing{{< /ui >}} 탭에서 검토할 소스와 서비스를 찾습니다.
+2. {{< ui >}}View Transformations{{< /ui >}}를 선택합니다.
+3. 로그 패턴을 선택하고 예제 로그를 살펴봐 원본 속성과 처리된 속성을 비교합니다.
+
+### 항목 활성화 또는 비활성화 {#enable-or-disable-an-entry}
+
+{{< ui >}}Auto-Processing{{< /ui >}} 탭에서 항목의 토글을 사용하여 해당 소스 및 서비스에 대한 처리를 활성화하거나 비활성화합니다. 항목을 비활성화하면 향후 로그에만 적용됩니다. 이미 처리된 로그는 변경되지 않습니다.
+
+### 수동 파이프라인으로 전환 {#switch-to-a-manual-pipeline}
+
+구문 분석 또는 속성 이름을 사용자 지정하려면 {{< ui >}}View Transformations{{< /ui >}} 페이지에서 {{< ui >}}Switch to manual pipeline{{< /ui >}}을 클릭합니다.
+
+전환 후에는 파이프라인 구성 및 향후 업데이트를 관리할 수 있습니다.
+
+### 제한 사항 {#limitations}
+
+- 조직마다 자동 처리 항목은 최대 100개까지 만들 수 있습니다.
+- 자동 처리가 이미 적용된 소스 및 서비스의 경우에도 일부 새로운 로그 패턴은 구문 분석되지 않은 상태로 남을 수 있습니다.
+- 자동 처리 항목 내에서는 구문 분석을 사용자 지정하거나 속성 이름을 바꿀 수 없습니다. 이러한 변경을 수행하려면 수동 파이프라인으로 전환하세요.
 
 ## 추가 자료 {#further-reading}
 
