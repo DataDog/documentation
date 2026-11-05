@@ -99,7 +99,7 @@ Framework-specific checks:
 | Cypress | `ddtest` owns `--spec`. Put a subset in `--tests-location` or Cypress configuration. |
 | Playwright | Keep the package directory, configuration, and selected projects. Remove native `--shard` when using `ddtest` splits. |
 | Vitest | Remove `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`. Use the same `--vitest-config` in both phases and move command options into that configuration. |
-| WebdriverIO | Keep the configuration and capability selections. Grouped specs cannot be distributed as independent files, and remote cloud grids are not supported. See [WebdriverIO setup](/tests/test_parallelization/setup/#webdriverio). |
+| WebdriverIO | Keep the configuration and capability selections. Grouped specs cannot be distributed as independent files, and remote cloud grids are not supported. See [WebdriverIO setup](/tests/test_parallelization/setup/?prog_lang=javascript&platform=webdriverio#webdriverio). |
 
 A package-manager separator before the framework executable is preserved. A framework's own `--` ends its options; `ddtest` inserts discovery flags before it and replaces the file selection after it during execution. See [Custom test commands](/tests/test_parallelization/configuration/#custom-test-commands).
 

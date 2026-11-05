@@ -166,7 +166,7 @@ bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec --
 
 Keep options that affect test behavior, such as filters, seeds, configuration, and reporters. `ddtest` supplies assigned files and discovery flags. A command must support the selected framework's arguments; arbitrary shell command chains and scripts that run several frameworks are not supported.
 
-A wrapper separator before the framework executable is preserved, for example `npx -- jest --runInBand`. A framework's own `--` ends its options: discovery flags go before it, and execution replaces positional selection after it with assigned files. Do not rely on a command's positional paths to restrict every framework; use the [framework setup instructions](/tests/test_parallelization/setup/#choose-your-language-and-framework).
+A wrapper separator before the framework executable is preserved, for example `npx -- jest --runInBand`. A framework's own `--` ends its options: discovery flags go before it, and execution replaces positional selection after it with assigned files. Do not rely on a command's positional paths to restrict every framework; use the [framework-specific guidance](/tests/test_parallelization/setup/#configure-your-framework).
 
 For pytest, the default is `python -m pytest <files>`. `--command` replaces that base command without adding `-m pytest`. Keep extra pytest options in `PYTEST_ADDOPTS`; `ddtest` preserves its value and appends `--ddtrace`.
 

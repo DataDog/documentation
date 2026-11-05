@@ -1,0 +1,33 @@
+test_parallelization_ci_options:
+  - id: github_actions
+    label: GitHub Actions
+    default: true
+  - id: circleci
+  - id: other_ci_multi_node
+  - id: other_ci_single_node
+
+test_parallelization_language_options:
+  - id: ruby
+    default: true
+  - id: python
+  - id: javascript
+
+test_parallelization_ruby_framework_options:
+  - id: rspec
+    default: true
+  - id: minitest
+
+test_parallelization_python_framework_options:
+  - id: pytest
+    default: true
+
+test_parallelization_javascript_framework_options:
+  - id: jest
+    default: true
+  - id: vitest
+  - id: mocha
+  - id: cucumber
+    label: Cucumber.js
+  - id: cypress
+  - id: playwright
+  - id: webdriverio
