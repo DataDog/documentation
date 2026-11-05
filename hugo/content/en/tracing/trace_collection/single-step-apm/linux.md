@@ -135,30 +135,80 @@ To update the SDK versions:
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
+Instrumentation rules let you control which processes SSI automatically instruments on Linux hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
 
-**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
+A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][24] enabled. Datadog delivers rules to eligible hosts through Remote Configuration.
 
-To configure instrumentation rules:
+<!-- TODO: Add required permissions for creating rules and managing host groups (pending from engineering). -->
 
-1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20].
-1. Click {{< ui >}}Add or Edit Rules{{< /ui >}}.
-1. Define instrumentation rules:
-   1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
-   1. Name your rule.
-   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20].
 
-   {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/instrumentation-rules-home.png" alt="The Instrumentation Rules page, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 
-1. (Optional) Drag and drop rules to reorder them.
+#### Set the default behavior
 
-   **Note**: Rules are evaluated in order. After a process matches a rule, subsequent rules are ignored.
+The default behavior applies to processes on eligible hosts that don't match any instrumentation rule. It also applies when you haven't created any rules.
 
-1. Set the default behavior (allow or block) for processes that do not match any rule.
-1. Click {{< ui >}}Next{{< /ui >}} to preview your rules.
-1. Click {{< ui >}}Deploy Rules{{< /ui >}}.
+1. On the Instrumentation Rules page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Default Behavior{{< /ui >}} card.
+1. Select one of the following options:
+   - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them.
+   - {{< ui >}}Block everything else{{< /ui >}}: Applications are not instrumented unless a rule allows them.
 
-If Remote Configuration is enabled, rules are deployed to every host and applied on those with SSI enabled within 50 seconds. Alternatively, click {{< ui >}}Export{{< /ui >}} to export the configuration file and apply it manually to your hosts.
+#### Create host groups
+
+Host groups are reusable collections of hosts that you can target with instrumentation rules. Use host groups to apply rules to part of your fleet, such as canary hosts for a gradual rollout.
+
+To create a host group:
+
+1. On the Instrumentation Rules page, click {{< ui >}}Manage host groups{{< /ui >}} in the {{< ui >}}Hosts in Scope{{< /ui >}} card.
+1. Click {{< ui >}}New Host Group{{< /ui >}}.
+1. Enter a name for the group.
+1. Click {{< ui >}}Add Hosts{{< /ui >}}. Search for hosts by hostname or by facets and host tags, such as `env:` or `os:`. Select the hosts to add, then click {{< ui >}}Add Hosts{{< /ui >}}.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="The new host group form, with two of three hosts selected in the Add Hosts list" style="width:80%;" >}}
+
+1. Click {{< ui >}}Save Group{{< /ui >}}.
+
+To change the order of host groups, drag a group by its handle in the group list.
+
+{{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
+
+##### How host groups are evaluated
+
+- A host can belong to more than one host group.
+- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. Rules that target all eligible hosts belong to this group. You can't edit its host list.
+- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules in the {{< ui >}}All hosts{{< /ui >}} group are evaluated last.
+- The first rule that matches a process determines whether the process is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+
+#### Create instrumentation rules
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. Click {{< ui >}}Generate with Bits{{< /ui >}} and describe which processes you want to instrument, and Bits AI generates the corresponding rule.
+
+To create an instrumentation rule:
+
+1. On the Instrumentation Rules page, click {{< ui >}}New Rule{{< /ui >}}. You can also create a rule from a group's {{< ui >}}Rules{{< /ui >}} tab on the Host Groups page.
+1. Under {{< ui >}}Define condition{{< /ui >}}, select an {{< ui >}}Attribute{{< /ui >}} and {{< ui >}}Operator{{< /ui >}}, and enter a {{< ui >}}Value{{< /ui >}}. To add more conditions, click {{< ui >}}Add Condition{{< /ui >}}. See [Define rule conditions](#define-rule-conditions) to learn more.
+1. Under {{< ui >}}Take this action{{< /ui >}}, select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="The Create instrumentation rule window, with a condition of Language equals Python, the Allow Instrumentation action, and the Rule Impact Preview panel" style="width:100%;" >}}
+
+1. Under {{< ui >}}Set host targeting{{< /ui >}}, select where the rule applies:
+   - {{< ui >}}All eligible hosts{{< /ui >}}: The rule applies to every eligible host in your organization.
+   - {{< ui >}}Select host groups{{< /ui >}}: The rule applies only to the host groups you select. If you select more than one group, the groups share a single rule. Editing the rule later updates it for every selected group.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
+
+1. Under {{< ui >}}Name the rule{{< /ui >}}, enter a name for the rule.
+1. Click {{< ui >}}Next{{< /ui >}}.
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, select a host group and drag rules to change the order they are evaluated in.
+
+   {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
+
+1. Click {{< ui >}}Create Rule{{< /ui >}}.
+
+After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the Instrumentation Rules page shows how many eligible hosts have received the current rules.
+
+<!-- TODO: Confirm whether rules still apply within 50 seconds of deployment, and whether the Export option for manual deployment is still available. -->
 
 #### Define rule conditions
 
@@ -186,17 +236,47 @@ Review the following examples demonstrating how to apply instrumentation rules:
 
 Instrument all processes by default. Add block rules to exclude services that would add noise without value, such as analytics cron jobs and Java batch processors.
 
-{{< img src="tracing/trace_collection/instrumentation-rules-example-1.png" alt="Two block instrumentation rules targeting Working Directory and Entry Point File conditions, with a default of allow instrumentation" style="width:100%;" >}}
+1. Set the default behavior to {{< ui >}}Allow everything else{{< /ui >}}.
+1. Create the following rules, each targeting {{< ui >}}All eligible hosts{{< /ui >}}:
+
+| Rule name | Condition | Action |
+| --------- | --------- | ------ |
+| Exclude analytics cron job | <code>Working Directory</code> <code>contains</code> <code>analytics-service</code> | Block Instrumentation |
+| Exclude batch services | <code>Entry Point File</code> <code>contains</code> <code>batch-processor.jar</code> | Block Instrumentation |
 
 {{< /collapse-content >}}
 
 {{< collapse-content title="Example 2: Instrument only specific processes" level="h5" >}}
 
-Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control and works well for gradual rollouts.
+Block all instrumentation by default. Add allow rules to opt specific processes into APM. This approach gives you precise control.
 
-For example, to instrument only a checkout service and a customer portal, create allow rules using {{< ui >}}Working Directory{{< /ui >}}, then set the default behavior to {{< ui >}}Block Instrumentation{{< /ui >}}.
+For example, to instrument only a checkout service and a customer portal:
 
-{{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="Two allow instrumentation rules targeting services in specific working directories, with a default of block instrumentation" style="width:100%;" >}}
+1. Set the default behavior to {{< ui >}}Block everything else{{< /ui >}}.
+1. Create the following rules, each targeting {{< ui >}}All eligible hosts{{< /ui >}}:
+
+| Rule name | Condition | Action |
+| --------- | --------- | ------ |
+| Checkout service | <code>Working Directory</code> <code>equals</code> <code>/srv/checkout</code> | Allow Instrumentation |
+| Customer portal | <code>Working Directory</code> <code>equals</code> <code>/srv/customer-portal</code> | Allow Instrumentation |
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 3: Roll out instrumentation gradually with a host group" level="h5" >}}
+
+Block all instrumentation by default, then allow instrumentation on a small set of canary hosts first. After you validate the results, add more hosts to the group, or change the rule to target all eligible hosts.
+
+1. Set the default behavior to {{< ui >}}Block everything else{{< /ui >}}.
+1. Create a host group named <code>canary</code> and add the hosts to instrument first.
+1. Create a rule with the following settings:
+
+| Setting | Value |
+| ------- | ----- |
+| Condition | <code>Language</code> <code>equals</code> <code>python</code> |
+| Action | Allow Instrumentation |
+| Host targeting | Select host groups: <code>canary</code> |
+
+Python applications on hosts in the <code>canary</code> group are instrumented. Applications on all other eligible hosts remain uninstrumented.
 
 {{< /collapse-content >}}
 
@@ -234,3 +314,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
+[24]: /agent/remote_config/
