@@ -29,7 +29,7 @@ Supported test frameworks:
 - `testing` package
 - [Testify][3] suites
 
-`ddtest instrument` requires a Go 1.25 or later toolchain and runs on Linux, macOS, and Windows. The `go.mod` file of your project can declare Go 1.21 or later.
+`ddtest instrument` requires a Go 1.25 or later toolchain and runs on Linux, macOS, and Windows. The `go.mod` file of your project can declare Go 1.21 or later. If your project depends on `github.com/DataDog/dd-trace-go/v2`, use v2.10.0 or later.
 
 <div class="alert alert-info">If you use Bazel to run Go tests, use the Datadog <a href="/tests/setup/bazel/go/">Bazel rules for Go tests</a>.</div>
 
@@ -146,7 +146,7 @@ With `--go-shim`, only a `go` command found on `PATH` reports test results. A sc
 
 If you run tests with `orchestrion go test`, replace the command with `ddtest instrument go test`. If you only use Orchestrion for Test Optimization, you can also delete the `orchestrion.tool.go` file and remove the Orchestrion requirement from `go.mod`.
 
-If you also use Orchestrion to trace the application under test, keep it and add `ddtest instrument` in front of the command:
+If you also use Orchestrion to trace the application under test, first upgrade `github.com/DataDog/dd-trace-go/v2` to v2.10.0 or later. Keep Orchestrion and add `ddtest instrument` in front of the command:
 
 ```bash
 ddtest instrument orchestrion go test ./...

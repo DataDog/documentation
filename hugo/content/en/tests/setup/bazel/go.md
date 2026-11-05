@@ -34,6 +34,7 @@ Use the following minimum versions:
 | `datadog-rules-test-optimization-go` | `>=2.0.0` |
 | `rules_go` | `>=0.59.0` |
 | Go | `>=1.25.0` |
+| `github.com/DataDog/dd-trace-go/v2`, if your project depends on it | `>=2.10.0` |
 
 The rules pin the `ddtest` release that they use, so you do not need to install `ddtest`.
 
