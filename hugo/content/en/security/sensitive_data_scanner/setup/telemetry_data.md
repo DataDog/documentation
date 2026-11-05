@@ -340,9 +340,9 @@ To make matches more precise, you can also do one of the following:
 
 **Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
 
-**Note**: Excluded attributes are still evaluated against your scanning rules. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match does not appear on the Findings page or in any other reporting.
+Sensitive Data Scanner still checks excluded attributes for matches, but it doesn't apply match actions to them. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match doesn't appear on the Findings page or in other reporting.
 
-For example, you might exclude the `support_contact` attribute because it always contains your company's shared support address. With the Standard Email Address Scanner library rule and `support_contact` excluded, the following event is processed this way:
+For example, suppose you exclude the `support_contact` attribute because it always contains your company's shared support address. With the Standard Email Address Scanner library rule, Sensitive Data Scanner processes the following event like this:
 
 ```json
 {
@@ -353,14 +353,14 @@ For example, you might exclude the `support_contact` attribute because it always
 }
 ```
 
-- `support_contact` is excluded from scanning.
-- The match in `reply_to` is dropped because its value matches the value in the excluded `support_contact` attribute.
-- The match in `customer_email` is kept, and the rule's match action is applied.
+- No match action is applied to `support_contact`, because it's excluded.
+- Sensitive Data Scanner drops the match in `reply_to`, because its value matches the value in the excluded `support_contact` attribute.
+- Sensitive Data Scanner keeps the match in `customer_email` and applies the rule's match action.
 
 To control this behavior, choose the option that fits your goal:
 
 - **To ignore specific known-safe values**, use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@test.com` to ignore addresses from this domain. The attribute continues to be scanned, so other sensitive values in it are still matched, and the suppressed values are ignored in every attribute.
-- **To leave an attribute untouched but still match the same value in other attributes**, use {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in attributes that are not listed do not affect matches in the listed attributes.
+- **To leave an attribute untouched but still match its values in other attributes**: Select {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in unlisted attributes don't affect matches in the listed attributes.
 
 ### Edit scanning rules
 
