@@ -179,6 +179,8 @@ dd_go_test(
 )
 ```
 
+In `WORKSPACE` mode, load `go_library` from `@io_bazel_rules_go//go:def.bzl`.
+
 Use `embed = [":pkg_lib"]` so the macro can infer the Go import path from `rules_go` providers and select the matching per-module Test Optimization metadata.
 
 If you use a manual wrapper instead of guided bootstrap, call `dd_topt_go_test`:
@@ -227,7 +229,7 @@ If you pass an `env` attribute to `dd_topt_go_test`, keep these variables reserv
 
 ## Large repositories
 
-For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the repository wiring, and add it to `WORKSPACE`:
+For large WORKSPACE repositories, use bootstrap `--workspace-mode` to print the full repository wiring. Use it in place of the block in [Use `WORKSPACE` mode](#use-workspace-mode), because the helper fails if the Go companion repository is already declared:
 
 ```bash
 bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
@@ -252,7 +254,8 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
   --runtime-version 1.25.0 \
   --sync-repo-name test_optimization_data \
   --write-bazelrc \
-  --write-wrapper-template
+  --write-wrapper-template \
+  --wrapper-file dd_go_test.bzl
 ```
 
 Bootstrap does not create the doctor and uploader targets in this mode. Define one pair in a lightweight package such as `//tools/test_optimization`, and use those labels instead of the root targets in [Run and validate tests](#run-and-validate-tests). Use `--write-root-targets` only in small repositories that keep these targets in the root `BUILD` file.
@@ -352,17 +355,6 @@ To fix this issue, add an SDK variant with that `sdk_version`. See [Add SDK vari
 This can happen when the SDK in `base_sdk_roots` has a different version than `go_version`, for example after a `go` directive changes in `go.mod`.
 
 To fix this issue, set `go_version` to the version of the base SDK, or point `base_sdk_roots` at an SDK of that version.
-
-### The test fails with `would link Mini's packages twice`
-
-This can happen when your Go module requires `github.com/DataDog/ddtest/ddto` and `go_deps` provides a second copy of the package that the instrumented SDK links.
-
-To fix this issue, replace the `go_deps` copy in the root `MODULE.bazel`:
-
-```starlark
-use_repo(topt_go_ddtest, "topt_go_ddtest_mini")
-override_repo(go_deps, com_github_datadog_ddtest_ddto = "topt_go_ddtest_mini")
-```
 
 ## Further reading
 
