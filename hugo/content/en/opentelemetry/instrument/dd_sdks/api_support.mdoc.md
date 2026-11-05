@@ -741,7 +741,7 @@ try {
 }
 ```
 
-`close()` requests a final export and exporter shutdown, waiting up to 10 seconds. Shutdown continues if the wait times out or the thread is interrupted. The method does not report export success. There is no separate force-flush method.
+`close()` exports pending metrics and shuts down the exporter. It waits up to 10 seconds, and returns early if the thread is interrupted. It doesn't report whether the export succeeded. There is no separate force-flush method.
 {% /if %}
 
 {% /if %}
