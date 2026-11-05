@@ -56,7 +56,7 @@
     "@dd/ask-ai": "link:../shared/packages/ask-ai",
     "@openfeature/core": "^1.12.0",
     "@openfeature/web-sdk": "^1.10.0",
-    "astro": "^7.1.5",
+    "astro": "^7.4.4",
     "astro-adapter-aws-lambda": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/astro-adapter-aws-lambda-v1.0.0.tgz",
     "cdocs-data": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v2.0.0.tgz",
     "marked": "^18.0.7",
@@ -84,5 +84,8 @@
     "typescript": "^5.9.3",
     "typesense": "^3.0.6",
     "vitest": "^4.1.10"
+  },
+  "resolutions": {
+    "@vitest/mocker@npm:4.1.10": "npm:^4.1.12"
   }
 }
