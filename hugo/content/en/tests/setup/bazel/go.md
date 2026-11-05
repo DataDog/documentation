@@ -30,8 +30,8 @@ Use the following minimum versions:
 
 | Component | Version |
 |---|---|
-| `datadog-rules-test-optimization` | Commit `5f8bb75` or later |
-| `datadog-rules-test-optimization-go` | Commit `5f8bb75` or later |
+| `datadog-rules-test-optimization` | `>=2.0.0` |
+| `datadog-rules-test-optimization-go` | `>=2.0.0` |
 | `rules_go` | `>=0.59.0` |
 | Go | `>=1.25.0` |
 
@@ -51,18 +51,18 @@ Before setting up Test Optimization for Go tests in Bazel:
 Add the core module, the Go companion module, and `rules_go` to `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "datadog-rules-test-optimization", version = "1.4.0")
+bazel_dep(name = "datadog-rules-test-optimization", version = "2.0.0")
 git_override(
     module_name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "5f8bb75d1119a9efcff0d707e27cc58387dbbd76",
+    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
 )
 
-bazel_dep(name = "datadog-rules-test-optimization-go", version = "1.4.0")
+bazel_dep(name = "datadog-rules-test-optimization-go", version = "2.0.0")
 git_override(
     module_name = "datadog-rules-test-optimization-go",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "5f8bb75d1119a9efcff0d707e27cc58387dbbd76",
+    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
     strip_prefix = "modules/go",
 )
 
@@ -88,7 +88,7 @@ http_archive(
 git_repository(
     name = "datadog-rules-test-optimization",
     remote = "https://github.com/DataDog/rules_test_optimization.git",
-    commit = "5f8bb75d1119a9efcff0d707e27cc58387dbbd76",
+    commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
 )
 
 load(
@@ -97,7 +97,7 @@ load(
 )
 
 datadog_go_test_optimization_workspace_repositories(
-    rto_commit = "5f8bb75d1119a9efcff0d707e27cc58387dbbd76",
+    rto_commit = "4ee137661f3c1c5360cf5e9a35b286f280837779",
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
@@ -230,7 +230,7 @@ bazel run @datadog-rules-test-optimization-go//:dd_topt_go_bootstrap -- \
   --service <SERVICE_NAME> \
   --runtime-version 1.25.0 \
   --sync-repo-name test_optimization_data \
-  --rto-commit 5f8bb75d1119a9efcff0d707e27cc58387dbbd76
+  --rto-commit 4ee137661f3c1c5360cf5e9a35b286f280837779
 ```
 
 Keep repository-specific scheduling, tags, flaky policy, Docker defaults, and platform constraints in your local wrapper. The optimized wrapper should own only Test Optimization wiring.
