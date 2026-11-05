@@ -187,7 +187,9 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 #### In-place upgrades from RHEL 7 to RHEL 8 or later
 
-After an in-place upgrade from RHEL 7, the `system_probe_t` file contexts can stay on the Agent binaries. These contexts stop systemd from running the Agent and system-probe in the `unconfined_service_t` domain, which causes SELinux denials in enforcing mode. To remove the contexts and the policy module, and restore the default labels, run:
+An in-place upgrade updates the operating system from RHEL 7 to RHEL 8 or later without a new installation (for example, with Leapp). After this upgrade, the `system_probe_t` file contexts from RHEL 7 can stay on the Agent binaries. These contexts stop systemd from running the Agent and system-probe in the `unconfined_service_t` domain. When SELinux is in enforcing mode, it denies actions that the Agent and system-probe need.
+
+To fix the denials, remove the `system_probe_t` file contexts and the policy module, restore the default labels, and restart the Agent:
 
 ```shell
 sudo semanage fcontext -d -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
@@ -196,6 +198,8 @@ sudo restorecon -v /opt/datadog-agent/embedded/bin/system-probe /opt/datadog-age
 sudo semodule -r system_probe_policy
 sudo systemctl restart datadog-agent
 ```
+
+After the restart, systemd runs the Agent and system-probe in the `unconfined_service_t` domain.
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
