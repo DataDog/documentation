@@ -11,7 +11,7 @@ further_reading:
 
 Test Parallelization helps you shorten test runs and use CI resources more efficiently by balancing test files across CI nodes or local workers. It uses test duration data from Test Optimization to balance the workload so CI nodes finish at roughly the same time.
 
-Pair it with Test Impact Analysis to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change. Test Parallelization automatically scales down the CI node count to match the remaining workload. This saves the cost and time of provisioning and setting up unnecessary runners.
+Pair it with [Test Impact Analysis][1] to reduce CI costs further. Test Impact Analysis skips tests unaffected by your code change. Test Parallelization automatically scales down the CI node count to match the remaining workload. This saves the cost and time of provisioning and setting up unnecessary runners.
 
 ## Setup
 
@@ -29,7 +29,7 @@ Test Parallelization is supported for the following languages and frameworks:
 
 For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13.
 
-WebdriverIO requires version 9 or later with the local runner and the Mocha or Jasmine adapter. It supports test file balancing, but its Datadog library does not support Test Impact Analysis skipping. See [WebdriverIO setup](/tests/test_parallelization/setup/#webdriverio) for requirements and limitations.
+[WebdriverIO](/tests/test_parallelization/setup/#webdriverio) requires version 9 or later with the local runner and Mocha or Jasmine.
 
 ## How it works
 
