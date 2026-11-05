@@ -51,17 +51,17 @@ Database Monitoring collects the following data from IBM Db2:
 
 As the Db2 instance administrator, enable the monitor switches described in the IBM Db2 integration's [Enable monitoring instructions][1].
 
-In each monitored database, check the activity and request metrics settings. Replace `<DB_NAME>` with the name of the database you want to monitor:
+In each monitored database on each server, including HADR standbys, check the activity and request metrics settings. Replace `<DB_NAME>` with the name of the database you want to monitor:
 
 ```shell
 db2 get db cfg for <DB_NAME> | grep -i MON_
 ```
 
-`MON_ACT_METRICS` and `MON_REQ_METRICS` must be `BASE` or `EXTENDED`. The Db2 default is `BASE`. If either setting is `NONE`, connect to the database as an administrator and set both to `BASE`:
+`MON_ACT_METRICS` and `MON_REQ_METRICS` must be `BASE` or `EXTENDED`. The Db2 default is `BASE`. If either setting is `NONE`, connect to the database as an administrator and set it to `BASE`:
 
 ```shell
 db2 connect to <DB_NAME>
-db2 UPDATE DB CFG FOR <DB_NAME> USING MON_ACT_METRICS BASE MON_REQ_METRICS BASE
+db2 UPDATE DB CFG FOR <DB_NAME> USING <PARAMETER> BASE
 ```
 
 The connection allows the configuration update to take effect online. Execution counts include coordinator executions recorded with activity metrics, controlled by `MON_ACT_METRICS`.
@@ -118,7 +118,7 @@ Deploy the image using the [Docker][21] or [Kubernetes][22] Agent installation i
 
 For integration configuration, follow the [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster check instructions][11]. Specify `ibm_db2` as the integration name and use the database connection settings shown in [Step 4](#step-4-configure-the-agent).
 
-Set up the [secret backend][10] on the Agent that runs the check.
+Set up the [secret backend][10] on the Agent that runs the check. With cluster checks, this is the Cluster Checks Runner, which also needs the custom image and the ACR configuration below.
 
 ### Step 4: Configure the Agent
 
@@ -137,7 +137,7 @@ instances:
     password: "ENC[datadog_user_database_password]"
     service: <SERVICE>
     database_identifier:
-      template: "$host:$port"
+      template: "$resolved_hostname:$port"
     tags:
       - env:<ENV>
 
@@ -149,7 +149,7 @@ instances:
     password: "ENC[datadog_user_database_password]"
     service: <SERVICE>
     database_identifier:
-      template: "$host:$port"
+      template: "$resolved_hostname:$port"
     tags:
       - env:<ENV>
 ```
@@ -193,14 +193,14 @@ Look for `ibm_db2` under **Checks** and confirm that the check has no errors. In
 
 ## Customizing the database identifier
 
-The `database_identifier.template` option controls how the instance appears in DBM. Set it explicitly to `$host:$port` to distinguish servers and multiple Db2 instances on one host. Template variables include `$resolved_hostname`, `$host`, `$port`, and configured tag keys such as `$env`.
+The `database_identifier.template` option controls how the instance appears in DBM. Set it explicitly to `$resolved_hostname:$port` to distinguish servers and multiple Db2 instances on one host. Template variables include `$resolved_hostname`, `$host`, `$port`, and configured tag keys such as `$env`.
 
 For `host: db2-a.example.com`, `port: 50000`, and the tag `env:production`:
 
 | Template | Result |
 | -------- | ------ |
-| `$host:$port` | `db2-a.example.com:50000` |
-| `$env-$host:$port` | `production-db2-a.example.com:50000` |
+| `$resolved_hostname:$port` | `db2-a.example.com:50000` |
+| `$env-$resolved_hostname:$port` | `production-db2-a.example.com:50000` |
 
 Use distinct identifiers for distinct servers, including both members of an HADR pair. See [Specifying a Database Identifier][18].
 
@@ -218,7 +218,7 @@ For all integration options, see the [sample configuration][19].
 
 | Field | Type | Default | Description |
 | ----- | ---- | ------- | ----------- |
-| `database_identifier.template` | string | `$resolved_hostname` | Template for the database identifier. Supports `$resolved_hostname`, `$host`, `$port`, and configured tag keys. Set explicitly to `$host:$port` for direct connections. |
+| `database_identifier.template` | string | `$resolved_hostname` | Template for the database identifier. Supports `$resolved_hostname`, `$host`, `$port`, and configured tag keys. Set explicitly to `$resolved_hostname:$port` for direct connections. |
 
 ### Query metrics
 
