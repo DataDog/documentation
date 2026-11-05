@@ -82,7 +82,7 @@ GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_TRANSACTION_LOG TO USER datadog;
 GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_PKG_CACHE_STMT TO USER datadog;
 ```
 
-These grants do not include read access to tables. Users with `DATAACCESS`, `DBADM`, or `SQLADM` authority can also access the monitoring functions. For details, see [Database permissions][5].
+These grants do not include read access to tables. For details, see [Database permissions][5].
 
 #### Restrictive databases
 
