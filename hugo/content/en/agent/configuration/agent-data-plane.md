@@ -92,64 +92,6 @@ DD_DATA_PLANE_ENABLED=true
 {{% /tab %}}
 {{< /tabs >}}
 
-## Disable the Agent Data Plane
-
-Disabling ADP returns DogStatsD processing to the main Agent.
-
-If you are disabling ADP because of an issue, [send a flare][1] to Datadog Support first. The flare includes ADP diagnostic data only while ADP is running.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-Set the following in your `DatadogAgent` resource:
-
-{{< code-block lang="yaml" >}}
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  features:
-    dataPlane:
-      enabled: false
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Set the following in your `values.yaml`:
-
-{{< code-block lang="yaml" >}}
-datadog:
-  dataPlane:
-    enabled: false
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Host" %}}
-
-Set the following in your [`datadog.yaml`][1] file, then [restart the Agent][2]:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-data_plane:
-  enabled: false
-{{< /code-block >}}
-
-[1]: /agent/configuration/agent-configuration-files/#main-configuration-file
-[2]: /agent/configuration/agent-commands/#restart-the-agent
-
-{{% /tab %}}
-{{% tab "Docker and ECS" %}}
-
-Set the following environment variable on the Agent container:
-
-{{< code-block lang="shell" >}}
-DD_DATA_PLANE_ENABLED=false
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## What to expect
 
 When ADP is enabled:
@@ -232,7 +174,7 @@ Based on your DogStatsD packets per second, use the following table to set resou
 
 If you know your peak number of active contexts, size memory from contexts instead. Set the memory request and limit to at least 128 MiB plus 2.5 KiB per context. For example, 1,000,000 contexts requires about 2.5Gi.
 
-Datadog recommends not setting a CPU limit on the `agent-data-plane` container. DogStatsD traffic is bursty, and CPU throttling can cause dropped packets. If your cluster requires a CPU limit, set it well above observed peaks.
+Datadog recommends not setting a CPU limit on the `agent-data-plane` container. DogStatsD traffic volumes can fluctuate, and CPU throttling can cause dropped packets. If your cluster requires a CPU limit, set it well above observed peaks.
 
 To measure your DogStatsD volume, use the following metrics from the Agent's [OpenMetrics telemetry endpoint](#agent-telemetry) (`localhost:5000/telemetry`):
 
@@ -281,6 +223,64 @@ agents:
 **Notes**:
 - These values are based on observed usage across Datadog's own infrastructure. Workloads with many distribution metrics, high tag cardinality, or unbuffered DogStatsD clients may need more resources.
 - These values apply to the `agent-data-plane` container only. Size the main `agent` container separately.
+
+## Disable the Agent Data Plane
+
+Disabling ADP returns DogStatsD processing to the main Agent.
+
+If you are disabling ADP because of an issue, [send a flare][1] to Datadog Support first. The flare includes ADP diagnostic data only while ADP is running.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Set the following in your `DatadogAgent` resource:
+
+{{< code-block lang="yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    dataPlane:
+      enabled: false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Set the following in your `values.yaml`:
+
+{{< code-block lang="yaml" >}}
+datadog:
+  dataPlane:
+    enabled: false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Host" %}}
+
+Set the following in your [`datadog.yaml`][1] file, then [restart the Agent][2]:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+data_plane:
+  enabled: false
+{{< /code-block >}}
+
+[1]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Docker and ECS" %}}
+
+Set the following environment variable on the Agent container:
+
+{{< code-block lang="shell" >}}
+DD_DATA_PLANE_ENABLED=false
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
