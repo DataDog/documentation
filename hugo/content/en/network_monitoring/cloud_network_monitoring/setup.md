@@ -152,7 +152,7 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
 
 On systems with SELinux enabled, the system-probe binary needs special permissions to use eBPF features.
 
-The Datadog Agent RPM package for CentOS-based systems bundles an [SELinux policy][3] to grant these permissions to the system-probe binary.
+On CentOS/RHEL 7, the Datadog Agent RPM package bundles and loads an [SELinux policy][3] to grant these permissions to the system-probe binary. On RHEL 8 and later, the standard targeted SELinux policy runs the Agent and system-probe in the `unconfined_service_t` domain. The bundled policy is not necessary.
 
 If you need to use Cloud Network Monitoring on other systems with SELinux enabled, do the following:
 
@@ -184,6 +184,18 @@ If you need to use Cloud Network Monitoring on other systems with SELinux enable
 **Note**: these instructions require to have some SELinux utilities installed on the system (`checkmodule`, `semodule`, `semodule_package`, `semanage` and `restorecon`) that are available on most standard distributions (Ubuntu, Debian, RHEL, CentOS, SUSE). Check your distribution for details on how to install them.
 
 If these utilities do not exist in your distribution, follow the same procedure but using the utilities provided by your distribution instead.
+
+#### In-place upgrades from RHEL 7 to RHEL 8 or later
+
+After an in-place upgrade from RHEL 7, the `system_probe_t` file contexts can stay on the Agent binaries. These contexts stop systemd from running the Agent and system-probe in the `unconfined_service_t` domain, which causes SELinux denials in enforcing mode. To remove the contexts and the policy module, and restore the default labels, run:
+
+```shell
+sudo semanage fcontext -d -t system_probe_t /opt/datadog-agent/embedded/bin/system-probe
+sudo semanage fcontext -d -t system_probe_t /opt/datadog-agent/bin/agent/agent
+sudo restorecon -v /opt/datadog-agent/embedded/bin/system-probe /opt/datadog-agent/bin/agent/agent
+sudo semodule -r system_probe_policy
+sudo systemctl restart datadog-agent
+```
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
