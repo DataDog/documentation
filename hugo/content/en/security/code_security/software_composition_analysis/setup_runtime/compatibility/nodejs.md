@@ -49,7 +49,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### ECMAScript modules (ESM)
 
-Runtime Software Composition Analysis reports the packages your application loads. Packages loaded as ECMAScript modules (ESM), through `import` statements or `import()` calls, are reported only when the Datadog ESM loader is registered. This requires `dd-trace` 6.24.0 or later, or 5.135.0 or later on the v5 release line:
+Runtime Software Composition Analysis reports the packages your application loads. Packages loaded as ECMAScript modules (ESM), through `import` statements or `import()` calls, are reported only when the Datadog ESM loader is registered. This requires `dd-trace` 6.24.0 or later (5.135.0 or later on the v5 release line):
 
 ```sh
 node --import dd-trace/register.js --require dd-trace/init app.js
