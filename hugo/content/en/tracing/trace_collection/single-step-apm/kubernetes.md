@@ -375,7 +375,7 @@ The default behavior determines how instrumentation rules in Datadog interact wi
    - {{< ui >}}Allow everything else{{< /ui >}}: Workload targeting in your Agent configuration is ignored. Every pod is instrumented except those that match a block rule.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-<!-- TODO: Add screenshot of the Kubernetes Default Behavior options (No default, Block everything else, Allow everything else). Can be taken now. -->
+{{< img src="tracing/trace_collection/k8s-default-behavior.png" alt="The Kubernetes Default Behavior options: No default, Block everything else, and Allow everything else" style="width:50%;" >}}
 
 #### Create cluster groups
 
@@ -386,7 +386,7 @@ To create a cluster group:
 1. On the [Instrumentation Rules][102] page, go to the {{< ui >}}Clusters in Scope{{< /ui >}} card and click {{< ui >}}Manage cluster groups{{< /ui >}}.
 1. Click {{< ui >}}New Cluster Group{{< /ui >}}.
 1. Enter a name for the group.
-1. Add the clusters to include in the group.
+1. Click {{< ui >}}Add Clusters{{< /ui >}}. Search for clusters, select the clusters to add, then click {{< ui >}}Add Clusters{{< /ui >}}.
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
 Cluster groups are dynamic. When a new cluster matches the filter of an existing cluster group, Datadog adds the cluster to that group automatically.
@@ -398,7 +398,8 @@ To change the order of cluster groups, drag a group by its handle in the group l
 Cluster groups are evaluated in the following way:
 
 - A cluster can belong to more than one cluster group.
-- Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. You can't edit its cluster list.
+- Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
+- Rules that target {{< ui >}}All clusters{{< /ui >}} apply to every eligible cluster, including clusters in other groups.
 - For each cluster, Datadog combines the rules from all of the cluster's groups in group order, from top to bottom. Rules that target {{< ui >}}All clusters{{< /ui >}} are evaluated last.
 - The first rule that matches a pod determines whether the pod is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
@@ -422,8 +423,6 @@ To create an instrumentation rule:
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
 After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the Instrumentation Rules page shows the rollout status of the current rules.
-
-<!-- TODO: Confirm the restart behavior for Kubernetes, and whether rules apply within 50 seconds and can be exported as on hosts. -->
 
 The following attributes are supported:
 
@@ -708,7 +707,7 @@ For pods eligible for admission, the Cluster Agent selects APM configuration in 
 
 1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
 1. The workload's `DatadogInstrumentation` APM configuration.
-1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogpreview#target-specific-workloads), if enabled.
+1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogpreview#target-specific-workloads), if enabled. <!-- TODO: Engineering to verify that instrumentation rules defined in Datadog are what was previously listed here as "Remote Configuration instrumentation policies." -->
 1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`.
 1. Cluster-wide instrumentation, when enabled without targeting rules.
 
