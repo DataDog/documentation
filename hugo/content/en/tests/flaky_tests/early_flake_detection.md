@@ -37,9 +37,9 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
-## Exclude individual JavaScript tests from retries
+## Exclude individual tests from retries
 
-Apply `noAutoRetry` to prevent Datadog from retrying an individual JavaScript or TypeScript test. This also excludes Auto Test Retries and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control JavaScript Test Automation with Code Annotations][10] for examples and version requirements.
+Use code annotations to exclude individual tests from Early Flake Detection. This also excludes Auto Test Retries and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
 
 ## Setup
 

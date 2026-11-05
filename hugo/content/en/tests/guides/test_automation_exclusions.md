@@ -1,6 +1,6 @@
 ---
-title: Control JavaScript Test Automation with Code Annotations
-description: Protect JavaScript and TypeScript tests from Datadog quarantine, disabling, and automatic retries with code annotations.
+title: Control Test Automation with Code Annotations
+description: Protect individual tests from Datadog quarantine, disabling, and automatic retries with code annotations.
 further_reading:
   - link: "/tests/flaky_management/"
     tag: "Documentation"
@@ -15,16 +15,29 @@ further_reading:
 
 ## Overview
 
-Use code annotations to exclude individual JavaScript and TypeScript tests from Datadog automation. For example, protect a critical test from quarantine or disabling, or prevent Datadog from retrying a test with side effects.
+Use code annotations to exclude individual tests from Datadog automation. For example, protect a critical test from quarantine or disabling, or prevent Datadog from retrying a test with side effects.
 
 | Annotation | Effect |
 |------------|--------|
-| `preventFailureSuppression` | Keeps a test eligible to run despite Datadog disabling and prevents Datadog quarantine from suppressing its failures. It does not prevent retries or turn passing tests into failures. |
-| `noAutoRetry` | Excludes a test from Datadog [Auto Test Retries][1], [Early Flake Detection][2], and [Attempt to Fix][3] retries. Explicit retries configured in the test framework remain available. |
+| Prevent failure suppression | Keeps a test eligible to run despite Datadog disabling and prevents Datadog quarantine from suppressing its failures. It does not prevent retries or turn passing tests into failures. |
+| Disable automatic retries | Excludes a test from Datadog [Auto Test Retries][1], [Early Flake Detection][2], and [Attempt to Fix][3] retries. Explicit retries configured in the test framework remain available. |
 
-Apply either helper independently, or combine them to exclude a test from both behaviors.
+Apply either annotation independently, or combine them to exclude a test from both behaviors.
 
 ## Prerequisites and scope
+
+Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads. An annotation only affects automation that the Datadog library supports for that framework.
+
+Annotations apply to individual test declarations. An annotated parameterized declaration applies to every generated test case. They preserve framework skips, test filters, and expected-failure behavior. They do not override [Test Impact Analysis][5]: a test or file excluded by Test Impact Analysis remains excluded. The annotations do not disable test discovery or flakiness reporting.
+
+Apply annotations in test source code. Setting a span tag with the same name does not change test execution. The annotations control execution without changing the test's configured state in Flaky Tests Management.
+
+## Language-specific setup
+
+Choose a language for SDK requirements, framework support, and annotation syntax.
+
+{{< tabs >}}
+{{% tab "JavaScript/TypeScript" %}}
 
 Use a supported `dd-trace` version:
 
@@ -33,13 +46,9 @@ Use a supported `dd-trace` version:
 | v5 | [5.135.0][8] |
 | v6 | [6.24.0][9] |
 
-Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads. An annotation only affects automation that the Datadog library supports for that framework.
+Configure [Test Optimization for JavaScript and TypeScript][10] for the test framework.
 
-Annotations apply to individual test declarations. An annotated parameterized declaration applies to every generated test case. They preserve framework skips, test filters, and expected-failure behavior. They do not override [Test Impact Analysis][5]: a test or file excluded by Test Impact Analysis remains excluded. The annotations do not disable test discovery or flakiness reporting.
-
-Apply annotations in test source code. Setting a span tag with the same name does not change test execution. The annotations control execution without changing the test's configured state in Flaky Tests Management.
-
-## Annotate test callbacks
+### Annotate test callbacks
 
 Import `preventFailureSuppression` and `noAutoRetry` from `dd-trace/ci/test-annotations` and wrap the test callback. For example, with Jest:
 
@@ -92,6 +101,14 @@ Explicit framework retries, such as `jest.retryTimes`, Mocha retries, Playwright
 
 In Playwright serial groups, `noAutoRetry` excludes the entire group from Datadog retries so tests run with their prerequisites. Explicit Playwright retry settings still apply.
 
+[6]: /tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.135.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.24.0
+[10]: /tests/setup/javascript/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Find annotated test executions
 
 Search in the [Test Optimization Explorer][7] with:
@@ -110,9 +127,6 @@ Test Management tags continue to describe assigned states, even when an annotati
 [1]: /tests/flaky_tests/auto_test_retries/
 [2]: /tests/flaky_tests/early_flake_detection/
 [3]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
-[4]: /tests/setup/javascript/
+[4]: /tests/setup/
 [5]: /tests/test_impact_analysis/
-[6]: /tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation
 [7]: /tests/explorer/
-[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.135.0
-[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.24.0

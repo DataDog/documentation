@@ -18,9 +18,9 @@ further_reading:
 Test Optimization's Auto Test Retries feature allows retrying failing tests up to N times to avoid failing your build due to flaky tests:
 a failing test case is retried either until it passes successfully or until there are no more retry attempts left (in which case the build fails).
 
-## Exclude individual JavaScript tests from retries
+## Exclude individual tests from retries
 
-Apply `noAutoRetry` to prevent Datadog from retrying an individual JavaScript or TypeScript test. This also excludes Early Flake Detection and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control JavaScript Test Automation with Code Annotations][9] for examples and version requirements.
+Use code annotations to exclude individual tests from Auto Test Retries. This also excludes Early Flake Detection and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][9] for examples and version requirements.
 
 ## Setup
 

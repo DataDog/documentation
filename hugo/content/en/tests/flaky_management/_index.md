@@ -39,11 +39,11 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
-## Control JavaScript automation with code annotations
+## Control automation with code annotations
 
-Use `preventFailureSuppression` to protect individual JavaScript and TypeScript tests from Datadog quarantine and disabling. Use `noAutoRetry` to exclude tests from Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Explicit framework retries remain available.
+Use code annotations to protect individual tests from Datadog quarantine and disabling, or exclude them from automatic retries. Explicit framework retries remain available.
 
-For examples and version requirements, see [Control JavaScript Test Automation with Code Annotations][22].
+For supported languages, examples, and version requirements, see [Control Test Automation with Code Annotations][22].
 
 ## Configure policies to automate the flaky test lifecycle
 
