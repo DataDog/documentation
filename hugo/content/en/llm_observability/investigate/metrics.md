@@ -27,7 +27,7 @@ Agent Observability also stores two other kinds of data, which have their own re
 - **Per-span operational data**: The cost, tokens, latency, and errors recorded on each trace or span. Metrics roll up from these values. Span data follows [Agent Observability trace retention][7] and is queried from the Traces explorer.
 - **Individual [evaluation results][1]** (evals): Quality and safety judgments, such as hallucination, faithfulness, or custom LLM-as-a-judge, attached to individual spans or experiment rows, including reasoning. These follow [Agent Observability trace and offline experiment retention][8]. The [Evaluation metrics](#evaluation-metrics) section describes the metrics that aggregate production evaluation results.
 
-<div class="alert alert-info">Span tags are not automatically available on Agent Observability metrics. Exceptions include <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">custom tags on cost and tokens metrics</a> and the <a href="#gateway-metrics">AI Gateway tags</a>.</div>
+<div class="alert alert-info">Other tags set on spans are not available as tags on Agent Observability metrics, except LLM token and cost metric tags and <a href="#gateway-metrics">Gateway tags</a>. See <a href="/llm_observability/investigate/cost/#custom-tags-on-cost-and-tokens-metrics">Custom tags on cost and tokens metrics</a> for more information.</div>
 
 ### Span metrics
 
@@ -36,15 +36,8 @@ Agent Observability also stores two other kinds of data, which have their own re
 | `ml_obs.span` | Total number of spans with a span kind | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.duration` | Total duration of spans in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 | `ml_obs.span.error` | Number of errors that occurred in the span | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
-
-### Streaming latency metrics
-
-Streaming latency metrics are generated when a span includes timing data. Values are in seconds. For AI Gateway, see [Gateway streaming latency](#gateway-streaming-latency).
-
-| Metric Name | Description | Metric Type | Tags |
-|-------------|-------------|-------------|------|
-| `ml_obs.span.time_to_first_token` | Time to the first generated output in a streaming LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
-| `ml_obs.span.time_per_output_token` | Average generation time per output token in a streaming LLM span | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+| `ml_obs.span.time_to_first_token` | Time to the first generated output in a streaming LLM span, in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
+| `ml_obs.span.time_per_output_token` | Average generation time per output token in a streaming LLM span, in seconds | Distribution | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `span_kind`, `version` |
 
 ### LLM token metrics
 
@@ -95,15 +88,9 @@ The unit for estimated cost metrics for Agent Observability is <strong>nanodolla
 
 ### Gateway metrics
 
-[AI Gateway][9] adds tags to span count, error, duration, streaming latency, token, and cost metrics. Use these tags to filter and group metrics by user, team, provider account, or outcome. The `model_name` and `model_provider` tags identify the model and its provider.
+[AI Gateway][9] provides additional tags on span count, error, duration, streaming latency, token, and cost metrics. To count LLM calls, filter `ml_obs.span` by `_dd.ai_gateway_frntr:true` and `span_kind:llm`. Retries and fallbacks count as separate calls.
 
-To count provider attempts, filter `ml_obs.span` by `_dd.ai_gateway_frntr:true` and `span_kind:llm`. This excludes workflow spans. Each retry or fallback counts as a separate attempt.
-
-Gateway metrics support custom time ranges within [metric retention][6], including ranges longer than a month. Metrics and tags are available from when they begin reporting. Historical data is not backfilled.
-
-#### Gateway metric tags
-
-The following tags are available when the Gateway span contains the corresponding information:
+The following tags are available when the Gateway span contains the corresponding information. Historical metric samples are not backfilled with these tags.
 
 | Tag | Description |
 |-----|-------------|
@@ -112,63 +99,39 @@ The following tags are available when the Gateway span contains the correspondin
 | `gateway_provider` | Slug of the configured Gateway provider account. |
 | `user_id` | Datadog user ID associated with the request. |
 | `team_id` | ID of the selected or uniquely inferred Datadog team. Omitted when multiple teams apply. |
-| `team_attribution` | `header` for an explicitly selected team, `single` for one inferred team, or `multiple` when more than one team applies. |
-| `gateway_outcome` | Attempt result: `ok`, `error`, or `canceled`. |
-| `gateway.streaming` | `true` for streaming attempts and `false` otherwise. |
-| `gateway_error_category` | Error category on failed attempts: `http_401`, `http_403`, `http_429`, `http_500`, `http_503`, `other_4xx`, `other_5xx`, `timeout`, `credentials`, `unavailable`, `stream_error`, or `unknown`. |
+| `team_attribution` | `header` for an explicitly selected team, `single` for one inferred team, or `multiple` when more than one team applies. Calls with `multiple` remain in overall totals without a `team_id`. |
+| `gateway_outcome` | Call result: `ok`, `error`, or `canceled`. Canceled calls are excluded from error counts. |
+| `gateway.streaming` | `true` for streaming calls and `false` otherwise. |
+| `gateway_error_category` | Error category on failed calls: `http_401`, `http_403`, `http_429`, `http_500`, `http_503`, `other_4xx`, `other_5xx`, `timeout`, `credentials`, `unavailable`, `stream_error`, or `unknown`. |
 | `error_type` | Error type: `provider_http_error`, `timeout`, `credentials`, `unavailable`, `stream_read_error`, `early_close`, `provider_stream_error`, `incomplete_stream`, or `unknown`. |
-
-Attempts with `team_attribution:multiple` are included in overall totals but have no `team_id`. They are not included in totals for an individual team.
-
-Canceled attempts do not increment error counts. Use `gateway_outcome:ok` to count successful attempts. Streaming failures have `gateway_error_category:stream_error`, including failures after an HTTP `200` response.
-
-Count provider attempts by outcome:
-
-```text
-sum:ml_obs.span{_dd.ai_gateway_frntr:true,span_kind:llm} by {gateway_outcome}.as_count().fill(null)
-```
 
 #### Gateway pricing coverage
 
-Use `ml_obs.span.llm.pricing.count` to identify attempts with complete, partial, inconsistent, or missing cost information. Each attempt contributes one count, including attempts without a cost estimate.
-
 | Metric Name | Description | Metric Type | Tags |
 |-------------|-------------|-------------|------|
-| `ml_obs.span.llm.pricing.count` | Number of Gateway LLM attempts by pricing status | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider`, Gateway metric tags, and `gateway_pricing_status` |
+| `ml_obs.span.llm.pricing.count` | Number of Gateway LLM calls by pricing status | Count | `env`, `error`, `ml_app`, `model_name`, `model_provider`, `service`, `version`, `matched_model_name`, `matched_model_provider`, Gateway metric tags, and `gateway_pricing_status` |
 
-The `gateway_pricing_status` tag is available only on this metric:
+Each LLM call contributes one count, including calls without a cost estimate. The `gateway_pricing_status` tag is available only on this metric:
 
 | Value | Description |
 |-------|-------------|
-| `complete` | The cost estimate covers the full attempt, including attempts with a valid zero cost. |
+| `complete` | The cost estimate covers the full call, including calls with a valid zero cost. |
 | `partial` | The estimate is incomplete, for example because final usage or a price for cached tokens is missing. |
 | `inconsistent` | Token counts or cost components do not match their reported totals, or a cost value is negative. |
 | `unavailable` | There is not enough usage or pricing information to estimate the cost. |
 
-This metric describes the completeness of cost estimates. It does not change cost values or indicate request success. A complete estimate can still differ from the provider's final invoice.
-
-Count attempts by pricing status:
-
-```text
-sum:ml_obs.span.llm.pricing.count{_dd.ai_gateway_frntr:true} by {gateway_pricing_status}.as_count().fill(null)
-```
-
-To calculate the proportion of attempts with complete pricing, divide the `complete` count by the total count across all statuses. Use the same filters and time range for both counts.
-
-If pricing samples are missing for part of the range, the result describes only the attempts with samples. Coverage for the remaining traffic is unknown. Missing samples do not indicate zero cost or complete pricing.
+Pricing coverage does not change the reported cost. If pricing samples are missing for part of the selected time range, coverage for that traffic is unknown.
 
 #### Gateway streaming latency
 
-AI Gateway reports latency for successful streaming LLM attempts when it can measure the output reliably. These metrics are available with metadata-only capture.
+AI Gateway reports timing metrics for successful streaming LLM calls with valid timing data, including calls with metadata-only capture.
 
-- **Time to first token (TTFT)** measures the time from the provider attempt's start to the first generated text, reasoning, or tool arguments received by the Gateway. Empty events, role announcements, and usage updates are excluded. The first generated output can arrive after the first response byte.
-- **Time per output token (TPOT)** estimates the average generation time per output token: `(last output time - first output time) / (output tokens - 1)`. It excludes the wait for first output and the delay after the last output. The token count must match the text being measured.
+- **Time to first token (TTFT)**: Time from the start of an LLM call to the first generated text, reasoning, or tool arguments received by the Gateway. Empty events, role announcements, and usage updates are excluded.
+- **Time per output token (TPOT)**: Average generation time per output token, calculated as `(last output time - first output time) / (output tokens - 1)`. The calculation excludes the wait for first output and the delay after the last output.
 
-TPOT requires a completed text stream, a matching final token count greater than one, and output received at different times. Streams containing reasoning, tool calls, or multiple choices have no TPOT sample. A sample is also omitted if the provider reports insufficient token detail or all output arrives in one read. These attempts can still have a TTFT sample.
+TPOT requires a completed text-only stream, a matching final token count greater than one, and output received at different times. Reasoning, tool calls, multiple choices, or insufficient token information produce no TPOT sample. A TTFT sample can still be available for these calls.
 
-Timing reflects when the Gateway receives output, so buffering and backpressure affect the measured values. Each TPOT sample is one attempt's average. Percentiles compare these averages, not individual token intervals or stalls.
-
-TTFT and TPOT can have different sample counts. Check sample counts alongside latency, and treat missing measurements as no data rather than zero.
+Both metrics reflect when the Gateway receives output, so buffering and backpressure can affect the values. TPOT percentiles describe averages across LLM calls, not individual token intervals. Missing timing data is omitted rather than reported as zero.
 
 ### Evaluation metrics
 
