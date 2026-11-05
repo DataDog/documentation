@@ -12,6 +12,8 @@ further_reading:
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">These steps apply to custom agents. To set up AI Guard for coding agents, such as Claude Code, Codex, and Cursor, see <a href="/security/ai_guard/coding_agents/setup/">Set Up Coding Agent Runtime Protection</a>.</div>
+
 Complete the following steps to set up AI Guard:
 
 ## 1. Check prerequisites

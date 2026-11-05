@@ -153,7 +153,7 @@ The Microsoft Copilot integration collects daily Microsoft 365 Copilot adoption 
 
 [Trajectory][8] is an open source tool that captures sessions from more than 30 coding and desktop agents, such as Claude Code, Claude Desktop, Codex CLI, Cursor, Cline, Windsurf, and Zed, and sends them to Datadog. For the full list and version requirements, see [Supported Clients][9].
 
-Trajectory session data powers the {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views in Agent Console.
+Trajectory session data powers the {{< ui >}}Tasks{{< /ui >}}, {{< ui >}}Skills{{< /ui >}}, {{< ui >}}Tools{{< /ui >}}, and {{< ui >}}Sessions{{< /ui >}} views in Agent Console. Trajectory can also protect coding agents with AI Guard. See [Coding Agent Runtime Protection][13].
 
 {{< tabs >}}
 {{% tab "Individual developers" %}}
@@ -237,3 +237,4 @@ After you connect your tools, open the [Agent Console][1] and check that each co
 [10]: /integrations/github/
 [11]: /integrations/jira/
 [12]: /integrations/openai/?tab=apikey
+[13]: /security/ai_guard/coding_agents/
