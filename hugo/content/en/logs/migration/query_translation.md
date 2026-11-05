@@ -25,7 +25,7 @@ Migration Tools, part of the Migration App, translate Splunk Processing Language
 | [Translate][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
 | [Import][3] | Import CSV exports of Splunk alerts and dashboards, and translate their queries to log search syntax. Review the results, then create the matching Datadog monitors and dashboards. |
 
-Migration Tools support only Splunk as a source platform. They parse and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
+Migration Tools support only Splunk as a source platform. They parse and convert queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Permissions
 
