@@ -124,7 +124,7 @@ Set up the [secret backend][10] on the Agent that runs the check.
 
 On Linux, save this configuration in `/etc/datadog-agent/conf.d/ibm_db2.d/conf.yaml`. For other platforms, see the [Agent configuration directory][20]. For a containerized Agent, apply the instance settings using the configuration method selected in Step 3.
 
-Configure one check instance per database per server. Database Monitoring requires `host` and `port`. Cataloged database aliases are not supported for Database Monitoring. This example monitors the same database name on two servers with distinct, fixed addresses:
+Configure one check instance per database per server. Database Monitoring requires `host` and `port`. This example monitors the same database name on two servers with distinct, fixed addresses:
 
 ```yaml
 init_config: {}
