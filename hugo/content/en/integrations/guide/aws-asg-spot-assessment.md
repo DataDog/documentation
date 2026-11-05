@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Spot migration assessment is in Preview. To request access, fill out the <a href="https://www.datadoghq.com/product-preview/spot-migration-assessment/">Preview form</a>.
+Spot migration assessment is in Preview. To request access, contact <a href="/help/">Datadog Support</a>.
 {{< /callout >}}
 
 ## Overview
@@ -33,7 +33,7 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 
 5. (Optional) [Set up Cloud Cost Management for AWS][8] to base current cost estimates on your actual AWS costs. Without cost data for an ASG, the assessment uses public On-Demand prices.
 
-If you receive a discount on On-Demand pricing, enter it in **On-Demand discount** when using public-price estimates. The assessment doesn't require `AWS/EC2` metrics.
+The assessment doesn't require `AWS/EC2` metrics.
 
 Estimates are most representative with a full 30 days of history. If instance history is missing, estimates use the ASG's configured desired capacity when possible.
 
