@@ -188,7 +188,7 @@ To find a source, processor, or destination in a pipeline:
 1. Navigate to [Observability Pipelines][4].
 1. Select a pipeline.
 1. Click the cog at the top right side of the page, then select {{< ui >}}Search Components{{< /ui >}}.
-1. Enter a component's name, ID, or type. Matching components are grouped by sources, processors, and destinations.
+1. Enter the component's ID or type.
 
 {{< img src="observability_pipelines/setup/search_components.png" alt="The component search box showing sources and processors with their component IDs." style="width:80%;" >}}
 
