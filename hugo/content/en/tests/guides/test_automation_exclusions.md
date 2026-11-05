@@ -30,8 +30,8 @@ Use a supported `dd-trace` version:
 
 | Release line | Minimum version |
 |--------------|-----------------|
-| v5 | `5.135.0` |
-| v6 | `6.24.0` |
+| v5 | [5.135.0][8] |
+| v6 | [6.24.0][9] |
 
 Set up [Test Optimization][4] with native instrumentation for the test framework. Annotations do not apply to JUnit XML uploads. An annotation only affects automation that the Datadog library supports for that framework.
 
@@ -114,3 +114,5 @@ Test Management tags continue to describe assigned states, even when an annotati
 [5]: /tests/test_impact_analysis/
 [6]: /tests/setup/javascript/?tab=cypress#retries-require-cypress-test-isolation
 [7]: /tests/explorer/
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.135.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.24.0
