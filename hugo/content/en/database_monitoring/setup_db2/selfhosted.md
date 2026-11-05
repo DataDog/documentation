@@ -108,7 +108,7 @@ Install the Agent on the Db2 server or on a separate host with network access to
 The Agent container image does not include the `ibm_db` driver. Build a custom image that installs it, so the driver persists when the container is recreated:
 
 ```dockerfile
-FROM gcr.io/datadoghq/agent:<AGENT_VERSION>
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 ```
 
