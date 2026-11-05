@@ -288,7 +288,7 @@ To investigate a request:
 3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
 4. For a failed request, review the error type, the provider's error rate, and the request's trace before you change a routing rule or provider.
 
-To query Gateway activity in dashboards and monitors, see [AI Gateway metrics][16] for available filters, outcomes, pricing coverage, and streaming latency. Metrics follow metric retention independently of individual traces, so you can analyze longer periods even after the corresponding traces expire.
+For reporting over longer time ranges, use [AI Gateway metrics][16] in dashboards and monitors. These metrics remain available after the corresponding traces expire.
 
 ## Configure data capture
 
