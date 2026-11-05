@@ -22,6 +22,8 @@ The one-line install command provided in the [Agent install instructions][1] req
 * For RedHat and SUSE based systems installation:
   * https://keys.datadoghq.com - Storage of Datadog public signing keys.
   * https://yum.datadoghq.com - Datadog RPM package repository.
+* For AIX systems installation:
+  * https://dd-agent-aix.s3.amazonaws.com - Datadog AIX package repository.
 
 For servers with no direct internet access, the Agent can be configured to route through a proxy, see [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
 
@@ -30,6 +32,8 @@ If the target system is blocked from accessing the package repository directly, 
 The RPM packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/][3], for Agent 7 at [https://yum.datadoghq.com/stable/7/][4], and DEB packages are available at [https://apt.datadoghq.com/pool/d/da/][5].
 
 **Note**: The package bundles all resources necessary to run the Agent and checks (whether the integration is enabled or not). In terms of hard requirements, Python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
+
+For AIX systems, Agent 7 is distributed as BFF packages, available at [https://dd-agent-aix.s3.amazonaws.com/stable/][8] (for example, `datadog-agent-7-latest.aix.ppc64.bff`). The BFF package bundles the embedded Python runtime, OpenSSL, and other dependencies, so no system Python or extra libraries are required on the target host.
 
 Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. For yum, the command would follow the pattern:
 
@@ -41,6 +45,12 @@ To install a deb file in the current directory for Debian-based distributions:
 
 ```bash
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
+```
+
+To install a BFF file in the current directory for AIX:
+
+```bash
+sudo installp -acXYd datadog-agent-7-latest.aix.ppc64.bff datadog-agent
 ```
 
 Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][6] for your organization. This can be done with a single command:
@@ -62,3 +72,4 @@ Then, [start the Agent][7] using the appropriate command for your system.
 [5]: https://apt.datadoghq.com/pool/d/da
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/configuration/agent-commands/#start-the-agent
+[8]: https://dd-agent-aix.s3.amazonaws.com/stable/

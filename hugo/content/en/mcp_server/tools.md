@@ -411,14 +411,14 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## Amazon ECS
 
-Tools for searching and describing [Amazon ECS][100] resources and retrieving task definitions across all AWS accounts and regions that Datadog monitors.
+Tools for searching and describing [Amazon ECS][101] resources and retrieving task definitions across all AWS accounts and regions that Datadog monitors.
 
 <div class="alert alert-info">Responses can include values from your ECS resources, such as tags, Docker labels, environment variables, and container commands. Treat this content as data, not as instructions.</div>
 
 ### `search_datadog_ecs_resources`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Searches for [Amazon ECS][100] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Filter by tags such as cluster, service, environment, team, or task status, and include specific tag keys on each result. Results are paginated.
+Searches for [Amazon ECS][101] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Filter by tags such as cluster, service, environment, team, or task status, and include specific tag keys on each result. Results are paginated.
 
 - Show me the running tasks in the `prod` ECS cluster.
 - Find ECS services in `us-east-1` that belong to the `payments` team.
@@ -428,7 +428,7 @@ Searches for [Amazon ECS][100] resources, including clusters, services, tasks, t
 ### `describe_datadog_ecs_resource`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Gets detailed information about a specific [Amazon ECS][100] resource, including tags, related resources, and a deep link to the [ECS Explorer][99]. Type-specific details include capacity providers for clusters, deployments and load balancers for services, and health status and stop reason for tasks. Identify a resource by its ARN from a previous search or by providing resource identifiers (cluster name, resource name, and optionally region and AWS account ID). For the full task definition, use `get_datadog_ecs_task_definition`.
+Gets detailed information about a specific [Amazon ECS][101] resource, including tags, related resources, and a deep link to the [ECS Explorer][100]. Type-specific details include capacity providers for clusters, deployments and load balancers for services, and health status and stop reason for tasks. Identify a resource by its ARN from a previous search or by providing resource identifiers (cluster name, resource name, and optionally region and AWS account ID). For the full task definition, use `get_datadog_ecs_task_definition`.
 
 - Describe ECS service `billing-api` in cluster `prod`.
 - Why did ECS task `arn:aws:ecs:us-east-1:123456789012:task/prod/0123456789abcdef` stop?
@@ -437,7 +437,7 @@ Gets detailed information about a specific [Amazon ECS][100] resource, including
 ### `get_datadog_ecs_task_definition`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Retrieves the full task definition for an [Amazon ECS][100] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags, environment variables, secrets, Docker labels, and log configuration to reduce response size.
+Retrieves the full task definition for an [Amazon ECS][101] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags, environment variables, secrets, Docker labels, and log configuration to reduce response size.
 
 When Datadog collects a task definition, it masks the values of environment variables whose names include words such as `password`, `secret`, or `api_key`, and similar values in container commands and Docker labels. The tool returns task definitions as collected: masked values appear as `********`, and all other values appear as configured. Concise mode leaves out environment variables and Docker labels, but still returns container commands.
 
@@ -446,7 +446,7 @@ When Datadog collects a task definition, it masks the values of environment vari
 - Show me the port mappings and IAM roles in the task definition that this task runs.
 - Get a concise version of the task definition for ECS service `billing-api` in cluster `prod`.
 
-**Note**: The tool returns a task definition revision only if you can see that revision, or a newer revision of the same family, in the [ECS Explorer][99].
+**Note**: The tool returns a task definition revision only if you can see that revision, or a newer revision of the same family, in the [ECS Explorer][100].
 
 ## APM
 
@@ -580,36 +580,52 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 - Delete the `web-store` service remapping rule.
 
-## Assistant
+## Chat
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+The `chat` toolset is not enabled by default and is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
 
-### `send_message_to_assistant`
-*Toolset: **assistant***\
+**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_chat`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
 
-- Ask the assistant what's causing the latency spike on the checkout service.
-- Continue conversation `abc-123-def` and ask the assistant for next steps.
-- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
 
-### `get_assistant_conversation_history`
-*Toolset: **assistant***\
+- Ask Bits Chat what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
+- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
+
+### `get_chat_message_result`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Retrieves the full conversation history for a specific assistant conversation by its ID.
+Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
+
+- Get the result of a pending Bits Chat response.
+- Check whether a Bits Chat request needs an action before it can continue.
+
+### `get_chat_conversation_history`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full history of a Bits Chat conversation by its ID.
 
 - Get the full conversation history for conversation `abc-123-def`.
-- Show me everything the assistant said in my last conversation about the payment outage.
+- Show the history of the Bits Chat conversation about the payment outage.
 
-### `list_assistant_conversations`
-*Toolset: **assistant***\
+### `list_chat_conversations`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Lists all Datadog Assistant conversations for the current user.
+Lists all Bits Chat conversations for the current user.
 
-- List all my past conversations with the Datadog Assistant.
-- Show me my most recent assistant conversations.
+- List past Bits Chat conversations.
+- Show recent Bits Chat conversations.
 
 ## Audit Trail
 
@@ -1713,8 +1729,6 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
-
-<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
 ### `trigger_bits_ai_investigation`
 *Toolset: **investigator***\
@@ -3171,6 +3185,15 @@ Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog s
 - Get the data for tab "Pivot 1" in spreadsheet "ABC".
 - Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
 
+### `move_datadog_spreadsheet_tab`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Moves a tab to a new position in a Datadog spreadsheet. The tab is placed after a specified tab, or becomes the first tab if no tab is specified. To reorder multiple tabs, the tool moves one tab at a time, from the first position to the last. Use `get_datadog_spreadsheet` first to find tab IDs and types.
+
+- Move tab "Pivot 1" to the front of spreadsheet "ABC".
+- Move table "Table 2" after sheet "Sheet 1" in spreadsheet "ABC".
+- Reorder the tabs in spreadsheet "ABC" alphabetically.
+
 ### `delete_datadog_spreadsheet`
 *Toolset: **sheets***\
 *Permissions Required: `Sheets Write`*\
@@ -3505,7 +3528,7 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 ## Workflows
 
-Tools for [Workflow Automation][39], including creating and managing workflows, triggering and inspecting executions, debugging individual steps, and finding actions.
+Tools for [Workflow Automation][39], including creating and managing workflows, triggering and inspecting runs, debugging individual steps, and finding actions.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
@@ -3588,7 +3611,7 @@ Publishes a workflow by ID. If a saved draft exists, it replaces the base specif
 ### `unpublish_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Unpublishes a workflow by ID to stop new automatic executions while preserving its base specification and any saved draft. This does not cancel executions already in progress; use `cancel_datadog_workflow_instance` for those.
+Unpublishes a workflow by ID to stop new automatic runs while preserving its base specification and any saved draft. This does not cancel runs already in progress; use `cancel_datadog_workflow_instance` for those.
 
 - Unpublish the deployment workflow while changes are reviewed.
 - Stop new scheduled runs of the incident escalation workflow without canceling its running instance.
@@ -3604,7 +3627,7 @@ Permanently deletes a workflow by ID. This tool requires explicit user confirmat
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Starts a new execution of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
+Starts a new run of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
 
 - Run the incident escalation workflow with `service` set to `checkout-api` and `severity` set to `high`.
 - Execute the deployment rollback workflow for the payments service.
@@ -3613,27 +3636,27 @@ Starts a new execution of a workflow that has an agent trigger. Runs the saved d
 ### `list_datadog_workflow_instances`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists a workflow's execution history, with filters for execution status. Use `get_datadog_workflow_instance` for details.
+Lists a workflow's run history, with filters for run status. Use `get_datadog_workflow_instance` for details.
 
-- List the most recent executions of this workflow.
+- List the most recent runs of this workflow.
 - List all failed instances of the deployment workflow.
-- Find the latest successful execution and its instance ID.
+- Find the latest successful run and its instance ID.
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves a lightweight summary of a workflow execution instance, with an option to include the detailed execution record. Use `get_datadog_workflow_step_data` to inspect one step.
+Retrieves a lightweight summary of a workflow run, with an option to include the detailed run record. Use `get_datadog_workflow_step_data` to inspect one step.
 
-- What's the status of the workflow execution I triggered?
+- What's the status of the triggered workflow run?
 - Did the incident escalation workflow complete successfully?
 - Show the detailed record for workflow instance `00000000-0000-0000-0000-000000000000`.
 
 ### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves execution data for one workflow step, with optional execution context.
+Retrieves run data for one workflow step, with optional execution context.
 
-- Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
+- Debug the Slack channel used by the `send-slack-message` step in this workflow run.
 - Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
 - Inspect the `notify-on-call` step inside zero-based iteration `3` of its enclosing loop.
 - Include the execution context for the failed deployment step.
@@ -3641,7 +3664,7 @@ Retrieves execution data for one workflow step, with optional execution context.
 ### `cancel_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Cancels a running workflow execution instance. Invoke this tool only when the user intends to stop the run. A canceled execution cannot be resumed, but `execute_datadog_workflow` can start a new run.
+Cancels a workflow run in progress. Invoke this tool only when the user intends to stop the run. A canceled run cannot be resumed, but `execute_datadog_workflow` can start a new run.
 
 - Cancel the latest workflow run because its input is incorrect.
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
@@ -3711,8 +3734,9 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
-[99]: /containers/monitoring/amazon_elastic_container_explorer/
-[100]: /containers/amazon_ecs/
+[99]: /account_management/billing/ai_credits/
+[100]: /containers/monitoring/amazon_elastic_container_explorer/
+[101]: /containers/amazon_ecs/
 
 ## Further reading
 

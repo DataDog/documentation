@@ -170,7 +170,7 @@ To view both periods on the same graph, click {{< ui >}}Overlay{{< /ui >}}. To r
 
 ### Metrics info
 
-On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the metric summary page for further analysis or edits.
+On a metric graph, click on the context menu (three vertical dots) to find the {{< ui >}}Metrics Info{{< /ui >}} option. This opens a panel with a description of the metric. Clicking on the metric name in this panel opens the metric in the Metrics Catalog page for further analysis or edits.
 
 ## API
 
