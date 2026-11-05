@@ -29,7 +29,7 @@ ADP ships with the Datadog Agent and requires no separate installation. Your Dog
 
 ## Prerequisites
 
-ADP requires Agent version 7.84.2 or later on Kubernetes, Docker, ECS, Linux, macOS, and Windows.
+ADP requires Agent version 7.84.2 or later.
 
 ## Enable the Agent Data Plane
 
