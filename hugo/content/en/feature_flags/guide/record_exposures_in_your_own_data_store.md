@@ -27,7 +27,7 @@ Each supported SDK includes an `ExposureHook`, an [OpenFeature hook][1] that cal
 | [Go][3] | `dd-trace-go` 2.12.0 |
 | [Browser][4] (JavaScript, React, Angular) | `@datadog/openfeature-browser` 2.3.0 |
 
-## How the SDK decides an exposure
+## How the SDK identifies exposures
 
 An evaluation is an exposure when it succeeds and selects an allocation that logs exposures, such as an experiment or a holdout. A failed evaluation is not an exposure, including an evaluation that a later hook marks as failed.
 
@@ -64,7 +64,7 @@ OpenFeatureAPI.getInstance().addHooks(new ExposureHook(evaluation -> {
 // A background thread takes records from `exposures` and writes them to your data store.
 {{< /code-block >}}
 
-<div class="alert alert-info">In version 1.68.x, read the allocation key from the flag metadata, under the <code>allocationKey</code> key, as in the example. A later Java release adds the <code>getAllocationKey()</code>, <code>getFlagKey()</code>, <code>getVariant()</code>, and <code>getTargetingKey()</code> methods to <code>ExposureHook.Evaluation</code>. Use <code>getAllocationKey()</code> instead of the flag metadata after you upgrade to that release.</div>
+<div class="alert alert-info">In version 1.68.x, read the allocation key from the flag metadata, under the <code>allocationKey</code> key, as in the example.</div>
 
 Evaluate flags through an OpenFeature client. If you call the Datadog provider directly, the SDK records no exposure.
 
@@ -99,9 +99,7 @@ client.AddHooks(ddopenfeature.NewExposureHook(func(e ddopenfeature.ExposureEvalu
 // A background goroutine reads from `exposures` and writes the records to your data store.
 {{< /code-block >}}
 
-Create the hook once and reuse it.
-
-The callback can run concurrently, so make it safe to call from more than one goroutine.
+Create the hook once and reuse it. The callback can run concurrently, so make it safe to call from more than one goroutine.
 
 Do not change `e.Details.Value`. For object flags, the value can share data with the provider. Copy it before you change it or process it in the background.
 
@@ -142,28 +140,28 @@ The browser SDK keeps its exposure cache across page loads. When a page reload g
 | Is exposure | `isExposure()` | `IsExposure()` | `true` when the evaluation succeeded and selected an allocation that logs exposures. Repeats are included. |
 | Is cache hit | `isCacheHit()` | `IsCacheHit()` | `true` when the subject already received the same allocation, variant, and split for this flag. |
 | Should send | `shouldSend()` | `ShouldSend()` | `true` for a new or changed exposure: an exposure that is not a cache hit. These are the exposures that the SDK sends to Datadog. |
-| Features | `getFeatures()` | `Features()` | The features of the selected split, such as the [holdout fields](#holdout-fields). Empty when the split has none. |
+| Split features | `getFeatures()` | `Features()` | The split features attached to the selected split, such as the [holdout fields](#holdout-fields). Empty when the split has none. |
 | Evaluation | Java: `getDetails()` and `getContext()`<br>Browser: `details`, `context`, `flagKey`, `variant`, `allocation`, `targetingKey` | `Details`, `Context`, `AllocationKey()` | The flag key, variant, flag metadata, and evaluation context, including the targeting key. |
 
 If you use `isExposure()` instead of `shouldSend()`, deduplicate the records yourself.
 
-## Features
+## Split features
 
-Features are values that Datadog attaches to a split of a flag. The hook returns them as a read-only map. Values are strings, numbers, or Booleans.
+Split features are values that Datadog attaches to a split of a flag. The hook returns them as a read-only map. Values are strings, numbers, or Booleans.
 
-The same values are also in the evaluation's flag metadata, under keys that start with `__dd_feature.`, followed by the feature key. For example, `__dd_feature.holdout.key`. A hook that uses only the OpenFeature API can read them there. Read them in the `finally` stage of the hook and skip evaluations that have an error code.
+The same values are also in the evaluation's flag metadata, under keys that start with `__dd_feature.` followed by the feature key, such as `__dd_feature.holdout.key`. A hook that uses only the OpenFeature API can read them there. Read them in the `finally` stage of the hook and skip evaluations that have an error code.
 
 <div class="alert alert-warning">The <code>__dd_feature.&lt;key&gt;</code> entries are the only flag metadata intended for your code. Other flag metadata keys that start with <code>__dd_</code> are internal to the SDK and can change without notice.</div>
 
 ### Holdout fields
 
-When a flag is part of a [holdout][5], the selected split carries these features:
+When a flag is part of a [holdout][5], the selected split carries these split features:
 
 | Feature | Value |
 | --- | --- |
 | `holdout.key` | The holdout key. |
 | `holdout.assignment_group` | `status_quo` or `all_shipped`. |
-| `holdout.should_include_in_holdout_analysis` | `true` when the exposure counts in the primary holdout analysis. `false` before a covered experiment ships a non-control variant. |
+| `holdout.should_include_in_holdout_analysis` | `true` when the exposure counts in the primary holdout analysis. `false` before a [covered experiment][5] ships a non-control variant. |
 
 ## Fields to record
 
@@ -171,12 +169,12 @@ To analyze exposures in Datadog Experiments with an [Exposure SQL Model][6], rec
 
 | Field | Source |
 | --- | --- |
-| Timestamp | The time of the evaluation |
-| Subject | The targeting key of the evaluation context |
-| Flag key | The evaluation details |
-| Allocation key | Java 1.68.x: the `allocationKey` flag metadata key. A later Java release replaces it with `getAllocationKey()`. Go: `AllocationKey()`. Browser: `allocation`. |
-| Variant | The evaluation details |
-| `holdout.key`, `holdout.assignment_group`, `holdout.should_include_in_holdout_analysis` | The features, for flags in a holdout |
+| Timestamp | The time of the evaluation. |
+| Subject | The targeting key of the evaluation context. |
+| Flag key | The evaluation details. |
+| Allocation key | Java 1.68.x: the `allocationKey` flag metadata key. Go: `AllocationKey()`. Browser: `allocation`. |
+| Variant | The evaluation details. |
+| `holdout.key`, `holdout.assignment_group`, `holdout.should_include_in_holdout_analysis` | The split features, for flags in a holdout. |
 
 To map these columns for a holdout, see [Analyze holdouts with your own exposure data][7].
 
@@ -214,9 +212,9 @@ const provider = new DatadogProvider({
 ## Limitations
 
 - **OpenFeature MultiProvider**:
-  - Java: use OpenFeature SDK 1.23.0 or later. With an earlier SDK, a Datadog provider inside a `MultiProvider` sends no exposures to Datadog, and `shouldSend()` is `true` for every exposure.
-  - Go and browser: under a `MultiProvider`, the SDK records no exposures and does not call the `ExposureHook` callback. Flag evaluation is not affected. Register the Datadog provider directly with OpenFeature. In the browser, you can also wrap it in `DatadogDevtools`, the provider wrapper for the [Datadog Browser SDK developer extension][8].
-- **Java agent version**: split features need `dd-java-agent` 1.68.0 or later. With an earlier agent, `getFeatures()` is empty.
+  - Java: Use OpenFeature SDK 1.23.0 or later. With an earlier SDK, a Datadog provider inside a `MultiProvider` sends no exposures to Datadog, and `shouldSend()` is `true` for every exposure.
+  - Go and browser: Under a `MultiProvider`, the SDK records no exposures and does not call the `ExposureHook` callback. Flag evaluation is not affected. Register the Datadog provider directly with OpenFeature. In the browser, you can also wrap it in `DatadogDevtools`, the provider wrapper for the [Datadog Browser SDK developer extension][8].
+- **Java agent version**: Split features require `dd-java-agent` 1.68.0 or later. With an earlier agent, `getFeatures()` is empty.
 
 ## Further reading
 
