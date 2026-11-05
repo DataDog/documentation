@@ -26,6 +26,9 @@ further_reading:
 - link: /tracing/glossary/
   tag: 설명서
   text: 서비스, 리소스, 트레이스 탐색
+- link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
+  tag: 학습 센터
+  text: 애플리케이션용 APM SDK를 구성하고 관리하십시오
 title: PHP 애플리케이션 트레이싱
 type: multi-code-lang
 ---
@@ -35,7 +38,7 @@ type: multi-code-lang
 
 Datadog의 PHP 버전 및 프레임워크 지원 전체 목록(레거시 및 유지 관리 버전 포함)은 [호환성 요구 사항][1] 페이지를 참조하세요.
 
-## 시작하기 {#getting-started}
+## 시작 {#getting-started}
 
 시작하기 전에 먼저 [Agent를 설치하고 구성][14]했는지 확인하세요.
 
@@ -53,12 +56,9 @@ Alpine Linux를 사용 중인 경우, 설치 프로그램을 실행하기 전에
 apk add libgcc
 ```
 
-설치 프로그램 실행:
+설치 프로그램을 실행하고 활성화하려는 기능에 대한 플래그만 전달하십시오:
 
 ```shell
-# Full installation: APM + AAP + Profiling
-php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
-
 # APM only
 php datadog-setup.php --php-bin=all
 
@@ -67,6 +67,9 @@ php datadog-setup.php --php-bin=all --enable-appsec
 
 # APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
+
+# Full installation: APM + AAP + Profiling
+php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 ```
 
 <div class="alert alert-warning">
@@ -455,7 +458,7 @@ Apache를 사용하는 경우, 다음 실행:
 몇몇 문제는 외부 요인으로 인해 발생할 수 있으므로, `strace`를 확보하면 가치가 있을 수 있습니다.
 
 <div class="alert alert-warning">
-<strong>참고</strong>:  <code>strace</code> 를 통해 실행되는 애플리케이션은 네이티브 방식으로 실행할 때보다 몇 배 느립니다. 이 방법은 프로덕션 외 환경에서 권장됩니다.
+<strong>참고</strong>: <code>strace</code> 를 통해 실행되는 애플리케이션은 네이티브 방식으로 실행할 때보다 몇 배 느립니다. 이 방법은 프로덕션 외 환경에서 권장됩니다.
 </div>
 
 패키지 관리자를 사용하여 `strace`를 설치합니다. Datadog 지원팀에 전송할 `strace`를 생성할 때, `-f` 옵션을 사용하여 하위 프로세스를 따라야 합니다.

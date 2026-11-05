@@ -13,10 +13,6 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
-Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Inference workloads serve live traffic, so slow responses and errors directly affect your users. Underused GPUs also drive up serving costs. The Inference page in GPU Monitoring shows the performance of each model deployment alongside the health of the GPUs it runs on. Your MLOps, platform, and ML engineering teams can find and fix serving issues in one place.
@@ -149,8 +145,6 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
-| `vllm.time_per_output_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
@@ -476,7 +470,6 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
@@ -614,6 +607,9 @@ To graph percentiles on certain SGLang metrics, you must opt in to [advanced que
 | `sglang.inter_token_latency.seconds` |
 | `sglang.request.prompt_tokens` |
 | `sglang.request.generation_tokens` |
+| `sglang.e2e_request_latency.seconds` |
+| `sglang.request.stage_latency.seconds` |
+| `sglang.queue_time.seconds` |
 
 ### 6. Enable GPU tracing (optional)
 

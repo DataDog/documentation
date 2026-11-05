@@ -135,7 +135,7 @@ Backfilling is best effort. For large test suites, the coverage of some tests sk
 
 ### Java, .NET, and Go
 
-With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-java`, `dd-trace-dotnet`, and `ddtest instrument`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
 
 ### JavaScript
 
