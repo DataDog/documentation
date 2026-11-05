@@ -341,7 +341,7 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 <div class="alert alert-warning">Auto-Processing is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, service, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring pipelines.
+Auto-Processing parses your custom application logs and extracts core attributes, including timestamp, status, trace ID, and span ID. It helps you search, filter, and correlate logs without manually configuring pipelines.
 
 Auto-Processing only handles logs that don't match the filter of any integration or custom pipeline. If a log matches a pipeline's filter, Auto-Processing doesn't process it, even if that pipeline doesn't modify the log. Your existing pipeline configurations remain unchanged.
 
