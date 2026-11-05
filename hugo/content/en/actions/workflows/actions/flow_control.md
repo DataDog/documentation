@@ -36,7 +36,7 @@ Use the Switch statement action to handle multiple branching paths in a single s
 
 ## Sleep
 
-The {{< ui >}}Sleep{{< /ui >}} action pauses the execution of the workflow for a specified duration. Select a predefined duration from the {{< ui >}}Duration{{< /ui >}} drop-down, or enter a custom variable in seconds.
+The {{< ui >}}Sleep{{< /ui >}} action pauses the workflow run for a specified duration. Select a predefined duration from the {{< ui >}}Duration{{< /ui >}} drop-down, or enter a custom variable in seconds.
 
 ## For loop
 
