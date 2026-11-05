@@ -105,14 +105,14 @@ Install the Agent on the Db2 server or on a separate host with network access to
 
 #### Optional: Run the Agent in a container
 
-The Agent container image does not include the `ibm_db` driver. Build a custom image that installs it, so the driver persists when the container is recreated:
+The Agent container image does not include the `ibm_db` driver. Build a custom image that includes the driver:
 
 ```dockerfile
 FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 ```
 
-Replace `<AGENT_VERSION>` with 7.86.0 or later. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For restricted networks, see [Installing the `ibm_db` client library offline][8].
+Replace `<AGENT_VERSION>` with `7.86.0` or a later version. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
 
 Use the `ibm_db2` check name with the instance settings in Step 4. For deployment instructions, see [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster checks][11].
 
