@@ -45,7 +45,7 @@ An Agent appears as eligible in the test creation workflow only after you comple
 
 - Agent `v7.83+` is installed. Dynamic test filters require Agent `v7.83.2+`.
 - The Agent uses an API key with [Remote Configuration enabled][17].
-- You have permission to manage Network Path configurations.
+- Your Datadog role includes the `network_path_config_write` permission, which lets you create and update Network Path configurations.
 - For dynamic tests: [Cloud Network Monitoring][1] is enabled.
 
 #### Configure the Agent
