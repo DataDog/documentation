@@ -153,11 +153,11 @@ To enable products, [set environment variables][3] in your application configura
 
 Instrumentation rules let you control which processes SSI automatically instruments on Windows hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. Rules are required to instrument .NET applications running outside of IIS. They are also useful for granular control over which Java applications on the host or .NET applications in IIS are instrumented. You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
 
-A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][8] enabled. Datadog delivers rules to eligible hosts through Remote Configuration.
+A host is eligible for instrumentation rules when it runs Agent v7.73 or later with [Remote Configuration][8] enabled. Datadog delivers rules to eligible hosts through Remote Configuration.
 
 <!-- TODO: Add required permissions for creating rules and managing host groups (pending from engineering). -->
 
-To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5].
+To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][5], then select {{< ui >}}Hosts{{< /ui >}} from the dropdown in the page title.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-home.png" alt="The Instrumentation Rules page, showing the Default Behavior, Hosts in Scope, and Deployment Status cards above a list of instrumentation rules" style="width:100%;" >}}
 
@@ -227,11 +227,11 @@ To create an instrumentation rule:
 
 After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][5] page shows how many eligible hosts have received the current rules.
 
-<!-- TODO: Confirm whether rules still apply within 50 seconds of deployment, and whether the Export option for manual deployment is still available. -->
+Rules are applied on eligible hosts within 50 seconds of deployment. Alternatively, click {{< ui >}}Export{{< /ui >}} to export the configuration file and apply it manually to your hosts.
 
 #### Define rule conditions
 
-Each rule consists of one or more conditions. A condition includes the following elements:
+Each rule consists of one or more conditions. A process must match all of a rule's conditions for the rule to apply. A condition includes the following elements:
 - {{< ui >}}Attribute{{< /ui >}}: The process property that the rule evaluates.
 - {{< ui >}}Operator{{< /ui >}}: The comparison logic (`equals`, `not equals`, `prefix`, or `contains`).
 - {{< ui >}}Value{{< /ui >}}: The text or pattern to match, such as a process name or command-line flag.
