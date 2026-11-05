@@ -93,7 +93,7 @@ You can ask questions in plain language. For example:
 - "Is the `bi_readers` group actually read-only?"
 - "Which roles will get access to new tables created in the `analytics` schema?"
 
-{{< img src="database_monitoring/database_monitoring_role_observability/role_observability_mcp_demo.mp4" alt="A coding agent uses the Datadog MCP server to work a permission-denied ticket: it finds a table grant blocked by missing schema USAGE, uses default privileges to recommend group membership as the lasting fix, and finds that the group also has write access it should not have" video="true" >}}
+{{< img src="database_monitoring/database_monitoring_role_observability/role_observability_mcp_example.png" alt="A coding agent answers what the waldo role can access: it summarizes the role's attributes and membership in partner_integrations, flags inherited write access to public.order_payment, and lists the grants made directly to waldo" style="width:100%;" >}}
 
 ### Using the API
 
