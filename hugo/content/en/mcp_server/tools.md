@@ -437,7 +437,7 @@ Gets detailed information about a specific [Amazon ECS][100] resource, including
 ### `get_datadog_ecs_task_definition`
 *Toolset: **ecs***\
 *Permissions Required: `Hosts Read` and `Teams Read`*\
-Retrieves the full task definition for an [Amazon ECS][100] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits environment variables, secrets, Docker labels, and log configuration to reduce response size.
+Retrieves the full task definition for an [Amazon ECS][100] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags, environment variables, secrets, Docker labels, and log configuration to reduce response size.
 
 When Datadog collects a task definition, it masks the values of environment variables whose names include words such as `password`, `secret`, or `api_key`, and similar values in container commands and Docker labels. The tool returns task definitions as collected: masked values appear as `********`, and all other values appear as configured. Concise mode leaves out environment variables and Docker labels, but still returns container commands.
 
