@@ -23,11 +23,15 @@ The Browser SDK collects frontend errors, including the error message and stack 
 When the Browser SDK collects an error:
 
 * The error is captured as an [Error event][14] in RUM.
-* [Retention Filters][15] that target sessions containing an Error event retain the current session.
+* [Retention Filters][15] that target sessions containing an Error event retain the current session, unless the error matches an [exclusion filter][17].
 * The [RUM metrics][16] `rum.measure.error`, `rum.measure.session.error`, and `rum.measure.view.error_free` are updated, regardless of whether the session is retained.
 * The error is captured in [Error Tracking][4].
 
-[Error Tracking rules][17] do not apply to _Error events_, and RUM still records Error events that match [Ignored and Excluded issues][18] in Error Tracking. To prevent errors from being recorded as Error events, you must discard them before they are sent to Datadog [using the `beforeSend` callback][19].
+[Ignoring or excluding an issue][18] in Error Tracking does not stop RUM from collecting its errors. RUM still records them as Error events.
+
+To stop errors from Excluded issues from retaining sessions, enable the **Excluded errors from Error Tracking** exclusion filter in your retention filters. RUM still collects these errors, but they cannot retain their session on their own. For more information, see [Reusing Error Tracking exclusions][21].
+
+To stop errors from being collected at all, discard them with the [`beforeSend` callback][19] before they are sent to Datadog.
 
 ## Error sources
 Frontend errors come from several different sources:
@@ -301,7 +305,8 @@ Get visibility into cross-origin scripts by following these two steps:
 [14]: /real_user_monitoring/explorer/search/#event-types
 [15]: /real_user_monitoring/rum_without_limits/retention_filters
 [16]: /real_user_monitoring/rum_without_limits/metrics
-[17]: /error_tracking/manage_data_collection
+[17]: /real_user_monitoring/rum_without_limits/retention_filters/#exclusion-filters
 [18]: /error_tracking/issue_states#excluding-an-issue
 [19]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#discard-a-frontend-error
 [20]: /real_user_monitoring/guide/upload-webassembly-symbols/
+[21]: /real_user_monitoring/rum_without_limits/retention_filters/#reusing-error-tracking-exclusions
