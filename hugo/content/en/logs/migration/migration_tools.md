@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Migration Tools, part of the Migration App, translate Splunk Processing Language (SPL) into Datadog [log search syntax][1] and convert Splunk assets into their Datadog equivalents. Migration Tools include:
+Migration Tools translate Splunk Processing Language (SPL) into Datadog [log search syntax][1] and convert Splunk assets into their Datadog equivalents. Migration Tools include:
 
 | Tool | Use case |
 |------|-----------|
