@@ -88394,7 +88394,7 @@ components:
             type: string
           type: array
         processors:
-          description: Processors applied sequentially within this group. Events flow through each processor in order.
+          description: Processors applied sequentially within this group. Events flow through each processor in order. Omit or use an empty array for a group without processors.
           example: [{"enabled": true, "fields": [{"name": "env", "value": "prod"}], "id": "add-fields-processor", "include": "*", "type": "add_fields"}, {"enabled": true, "id": "filter-processor", "include": "status:error", "type": "filter"}]
           items:
             $ref: "#/components/schemas/ObservabilityPipelineConfigProcessorItem"
@@ -88403,7 +88403,6 @@ components:
         - id
         - include
         - inputs
-        - processors
         - enabled
       type: object
     ObservabilityPipelineConfigProcessorItem:
@@ -91349,7 +91348,7 @@ components:
           example: "service:my-service"
           type: string
         rules:
-          description: The list of Grok parsing rules selected by either source field or include query.
+          description: The list of custom Grok parsing rules selected by either source field or include query. Omit to use only the Datadog library rules.
           items:
             $ref: "#/components/schemas/ObservabilityPipelineParseGrokProcessorRuleItem"
           type: array
@@ -91359,7 +91358,6 @@ components:
         - id
         - type
         - include
-        - rules
         - enabled
       type: object
       x-pipeline-types: [logs]
@@ -212338,7 +212336,11 @@ paths:
                 $ref: "#/components/schemas/ObservabilityPipeline"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "409":
@@ -212411,7 +212413,11 @@ paths:
                 $ref: "#/components/schemas/ValidationResponse"
           description: OK
         "400":
-          $ref: "#/components/responses/BadRequestResponse"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
         "403":
           $ref: "#/components/responses/NotAuthorizedResponse"
         "429":
