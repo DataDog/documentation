@@ -288,6 +288,8 @@ To investigate a request:
 3. Click a model, a request bar, or an error. The {{< ui >}}Traces{{< /ui >}} page opens with filters already set for that selection.
 4. For a failed request, review the error type, the provider's error rate, and the request's trace before you change a routing rule or provider.
 
+To query Gateway activity in dashboards and monitors, see [AI Gateway metrics][16] for available filters, outcomes, pricing coverage, and streaming latency. Metrics follow metric retention independently of individual traces, so you can analyze longer periods even after the corresponding traces expire.
+
 ## Configure data capture
 
 AI Gateway records every request as a span in Agent Observability. The data capture mode controls whether the span includes prompt and response content.
@@ -427,3 +429,4 @@ The following list shows the HTTP status that AI Gateway returns with each `X-Ai
 [13]: /account_management/teams/manage/
 [14]: https://www.datadoghq.com/support/
 [15]: https://app.datadoghq.com/llm/gateway/rate-limits
+[16]: /llm_observability/investigate/metrics/#gateway-metrics
