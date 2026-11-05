@@ -84,24 +84,6 @@ GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_PKG_CACHE_STMT TO USER datadog;
 
 These grants do not include read access to tables. For details, see [Database permissions][5].
 
-#### Restrictive databases
-
-Databases created with `RESTRICTIVE` do not grant workload usage or IBM CLI package access to `PUBLIC`. On these databases, also grant workload usage to the `datadog` user:
-
-```sql
-GRANT USAGE ON WORKLOAD SYSDEFAULTUSERWORKLOAD TO USER datadog;
-```
-
-The Agent's IBM driver runs SQL through the CLI packages in the `NULLID` schema. Package names vary with the IBM client version, so generate a grant for each installed CLI package:
-
-```sql
-SELECT 'GRANT EXECUTE ON PACKAGE NULLID.' || TRIM(PKGNAME) || ' TO USER datadog;'
-  FROM SYSCAT.PACKAGES
-  WHERE PKGSCHEMA = 'NULLID';
-```
-
-Run the generated `GRANT` statements. If the Agent log reports `SQL0551N` for a `NULLID` package, grant `EXECUTE` on the package named in the error.
-
 ### Securely store your password
 
 {{% dbm-secret %}}
