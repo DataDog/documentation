@@ -23,17 +23,25 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 ## Setup
 
+### Choose a test type
+
+| Test type | What it monitors | Best for | Create in the UI (Preview) |
+|-----------|------------------|----------|----------------------------|
+| **[Scheduled&nbsp;tests](#scheduled-tests)** | Destinations that you define | A known set of endpoints, such as critical APIs or partner services | Yes |
+| **[Dynamic&nbsp;tests](#dynamic-tests)** | Destinations discovered from traffic observed by [Cloud Network Monitoring][1] | Broad visibility without listing every destination | Yes |
+| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** (Experimental) | Destination IPs observed in [NetFlow Monitoring][6] | Hop-by-hop route visibility for NetFlow traffic | No |
+
+All test types run on your Datadog Agents, and you can configure every type in the Agent configuration files.
+
 ### Choose a setup method
 
-Network Path tests run on the Datadog Agent and come in two kinds: **scheduled tests** monitor destinations that you define, and **dynamic tests** automatically discover destinations from traffic observed by [Cloud Network Monitoring][1]. You can create both kinds in the UI and/or in the Agent configuration files.
+| Method | Where you configure tests |
+|--------|---------------------------|
+| **[UI](#create-tests-in-the-ui)** (Preview) | In the Network Path UI, after a one-time setup on each Agent you want to target |
+| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | In configuration files on each host |
+| **[Synthetic Monitoring][15]** | In Synthetic Monitoring, as Synthetic tests that run from Datadog managed locations |
 
-| Method | Tests run from | Where you configure tests |
-|--------|----------------|---------------------------|
-| **[UI](#create-tests-in-the-ui)** (Preview) | Your Datadog Agents | In the Network Path UI, after a one-time setup on each Agent you want to target |
-| **[Agent configuration files](#configure-tests-in-the-agent-configuration)** | Your Datadog Agents | In configuration files on each host |
-| **[Synthetic Monitoring][15]** | Datadog managed locations | In Synthetic Monitoring, as Synthetic tests |
-
-This page covers the first two methods. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
+You can use the UI and the Agent configuration files on the same Agent. This page covers both. For Synthetic Monitoring, see [Network Path Testing in Synthetic Monitoring][15].
 
 ### Create tests in the UI (Preview) {#create-tests-in-the-ui}
 
@@ -153,13 +161,7 @@ Remote Configuration itself is enabled by default on recent Agent versions, so y
 
 ### Configure tests in the Agent configuration
 
-To configure tests in the Agent configuration files instead, use one of the following collection methods. You can use one method on its own or combine multiple methods:
-
-| Method | When to use |
-|--------|-------------|
-| **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
-| **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
-| **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
+To configure tests in the Agent configuration files instead, set up one or more test types: [scheduled tests](#scheduled-tests), [dynamic tests](#dynamic-tests), or [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental). You can use one type on its own or combine them.
 
 ### Scheduled tests
 
