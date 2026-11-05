@@ -193,8 +193,10 @@ To change the order of host groups, drag a group by its handle in the group list
 ##### How host groups are evaluated
 
 - A host can belong to more than one host group.
-- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. Rules that target all eligible hosts belong to this group. You can't edit its host list.
-- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules in the {{< ui >}}All hosts{{< /ui >}} group are evaluated last.
+- All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
+- Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
+- Rules that target {{< ui >}}All eligible hosts{{< /ui >}} apply to every eligible host, including hosts in other groups.
+- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules that target all eligible hosts are evaluated last.
 - The first rule that matches a process determines whether the process is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Create instrumentation rules
