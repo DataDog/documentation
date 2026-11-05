@@ -171,6 +171,12 @@ AI Guard automatically evaluates the following RubyLLM operations:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Control which requests AI Guard evaluates
+
+By default, AI Guard evaluates every supported call made through an enabled integration. In Python, starting with dd-trace-py v4.17.0, you can register middlewares to skip evaluations for specific requests, add custom tags to the AI Guard span, or run your own logic after each evaluation, without disabling the whole integration. See [Filter and observe evaluations with middlewares][1].
+
+[1]: /security/ai_guard/setup/sdk/#python-middlewares
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
