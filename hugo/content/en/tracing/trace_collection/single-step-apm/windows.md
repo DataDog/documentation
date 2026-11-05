@@ -178,22 +178,20 @@ Host groups are reusable collections of hosts that you can target with instrumen
 To create a host group:
 
 1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Hosts in Scope{{< /ui >}} card and click {{< ui >}}Manage host groups{{< /ui >}}.
-1. Click {{< ui >}}New Host Group{{< /ui >}}.
-1. Enter a name for the group.
-1. Click {{< ui >}}Add Hosts{{< /ui >}}. Search for hosts by hostname or by facets and host tags, such as `env:` or `os:`. Select the hosts to add, then click {{< ui >}}Add Hosts{{< /ui >}}.
+1. Click {{< ui >}}New Host Group{{< /ui >}} and enter a name for the group.
+1. Click {{< ui >}}Add Hosts{{< /ui >}}, then search for and select the hosts to add. You can search by hostname, facets, or host tags.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-add-hosts.png" alt="The new host group form, with two of three hosts selected in the Add Hosts list" style="width:80%;" >}}
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-Host groups are dynamic. When a new host matches the filter of an existing host group, Datadog adds the host to that group automatically.
-
 To change the order of host groups, drag a group by its handle in the group list.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
 
-##### How host groups are evaluated
+##### How host groups work
 
+- Host groups are dynamic. When a new host matches the filter of an existing host group, Datadog adds the host to that group automatically.
 - A host can belong to more than one host group.
 - All hosts in a group must run on the same platform. For example, a group can't contain both Linux and Windows hosts.
 - Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
@@ -207,21 +205,17 @@ To change the order of host groups, drag a group by its handle in the group list
 
 To create an instrumentation rule:
 
-1. On the [Instrumentation Rules][5] page, click {{< ui >}}New Rule{{< /ui >}}. You can also create a rule from a group's {{< ui >}}Rules{{< /ui >}} tab on the Host Groups page.
-1. Under {{< ui >}}Define condition{{< /ui >}}, select an {{< ui >}}Attribute{{< /ui >}} and {{< ui >}}Operator{{< /ui >}}, and enter a {{< ui >}}Value{{< /ui >}}. To add more conditions, click {{< ui >}}Add Condition{{< /ui >}}. See [Define rule conditions](#define-rule-conditions) to learn more.
-1. Under {{< ui >}}Take this action{{< /ui >}}, select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}.
+1. On the [Instrumentation Rules][5] page, click {{< ui >}}New Rule{{< /ui >}}. Alternatively, on the Host Groups page, select a group, open its {{< ui >}}Rules{{< /ui >}} tab, and click {{< ui >}}Create a new rule{{< /ui >}}.
+1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See [Define rule conditions](#define-rule-conditions) to learn more.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="The Create instrumentation rule window, with a condition of Language equals Python, the Allow Instrumentation action, and the Rule Impact Preview panel" style="width:100%;" >}}
 
-1. Under {{< ui >}}Set host targeting{{< /ui >}}, select where the rule applies:
-   - {{< ui >}}All eligible hosts{{< /ui >}}: The rule applies to every eligible host in your organization.
-   - {{< ui >}}Select host groups{{< /ui >}}: The rule applies only to the host groups you select. If you select more than one group, the groups share a single rule. Editing the rule later updates it for every selected group.
+1. Under {{< ui >}}Set host targeting{{< /ui >}}, select {{< ui >}}All eligible hosts{{< /ui >}} or {{< ui >}}Select host groups{{< /ui >}}. If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
 
-1. Under {{< ui >}}Name the rule{{< /ui >}}, enter a name for the rule.
-1. Click {{< ui >}}Next{{< /ui >}}.
-1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, select a host group and drag rules to change the order they are evaluated in.
+1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
 
