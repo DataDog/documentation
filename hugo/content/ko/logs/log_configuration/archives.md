@@ -23,9 +23,9 @@ title: 로그 아카이브
 
 Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 모든 로그를 사용자가 소유한 클라우드 스토리지 시스템으로 전달할 수 있습니다. [Rehydration][2] 또는 [Archive Search][16]를 사용하면, 스토리지에 최적화된 아카이브에 로그를 장기간 보관하여 규정 준수 요구 사항을 충족하는 동시에 필요 시 조사를 위한 감사 가능성도 유지할 수 있습니다.
 
-{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwardin 페이지의 Archives 탭" style="width:100%;">}}
+{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding 페이지의 Archives 탭" style="width:100%;">}}
 
-수집된 로그를 사용자가 소유한 클라우드 스토리지 버킷으로 전달하기 위한 아카이브를 설정하려면 [**Log Archiving & Forwarding** 페이지][3]로 이동합니다.
+[{{< ui >}}Log Archiving & Forwarding{{< /ui >}} 페이지][3]로 이동하여 수집된 로그를 자체 클라우드 호스팅 스토리지 버킷에 전달하기 위한 아카이브를 설정하세요.
 
 1. 아직 설정하지 않았다면 클라우드 공급자에 대한 Datadog [통합](#set-up-an-integration)을 설정합니다.
 2. [스토리지 버킷](#create-a-storage-bucket)을 생성합니다.
@@ -59,7 +59,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 아직 설정하지 않았다면 새 스토리지 계정이 포함된 구독에서 [Azure 통합][1]을 설정합니다. 이 과정에는 [Datadog이 통합에 사용할 수 있는 앱 등록을 생성][2]하는 작업이 포함됩니다.
 
-**참고:** Azure ChinaCloud 및 Azure GermanyCloud로의 아카이브는 지원되지 않습니다. Azure GovCloud로의 아카이브는 현재 미리보기로 지원됩니다. 액세스를 요청하려면 Datadog 지원팀에 문의하세요.
+**참고:** Azure ChinaCloud 및 Azure GermanyCloud로의 아카이브는 지원되지 않습니다. Azure GovCloud로의 아카이브는 미리 보기로 제공되고 있습니다. 액세스를 요청하려면 Datadog 지원팀에 문의하세요.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /ko/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -102,8 +102,8 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 {{% tab "Azure Storage" %}}
 
-* [Azure Portal][1]로 이동하여 아카이브를 저장할 [스토리지 계정을 생성][2]합니다. 스토리지 계정 이름을 지정하고, 표준 성능 또는 **Block blobs** 프리미엄 계정 유형을 선택한 후, **hot** 또는 **cool** 액세스 계층을 선택합니다.
-* 해당 스토리지 계정 내에 **컨테이너** 서비스를 생성합니다. 컨테이너 이름은 나중에 Datadog Archive 페이지에 입력해야 하므로 기록해 두세요.
+* [Azure Portal][1]로 이동하여 아카이브를 저장할 [스토리지 계정을 생성][2]합니다. 스토리지 계정 이름을 지정하고, 표준 성능 또는 {{< ui >}}Block blobs{{< /ui >}} 프리미엄 계정 유형을 선택한 후, {{< ui >}}hot{{< /ui >}} 또는 {{< ui >}}cool{{< /ui >}} 액세스 계층을 선택합니다.
+* 해당 스토리지 계정 내에 {{< ui >}}container{{< /ui >}} 서비스를 생성합니다. 컨테이너 이름은 나중에 Datadog Archive 페이지에 입력해야 하므로 기록해 두세요.
 
 **참고:** 드물게(일반적으로 시간 초과 발생 시) 마지막 데이터를 다시 기록해야 하는 경우가 있으므로 [불변성 정책][3]은 설정하지 마세요.
 
@@ -114,7 +114,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 {{% tab "Google Cloud Storage" %}}
 
-[Google Cloud 계정][1]으로 이동하여 아카이브를 저장할 [GCS 버킷을 생성][2]합니다. **객체 액세스 제어 방법 선택**에서 **객체 수준 및 버킷 수준 권한 설정**을 선택합니다.
+[Google Cloud 계정][1]으로 이동하여 아카이브를 저장할 [GCS 버킷을 생성][2]합니다. {{< ui >}}Choose how to control access to objects{{< /ui >}}에서 {{< ui >}}Set object-level and bucket-level permissions{{< /ui >}}를 선택합니다.
 
 **참고:** 드물게(일반적으로 시간 초과 발생 시) 마지막 데이터를 다시 기록해야 하는 경우가 있으므로 [보존 정책][3]은 추가하지 마세요.
 
@@ -158,27 +158,27 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
      ]
    }
    ```
-     * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
+     * The `GetObject` and `ListBucket` permissions allow for [searching archives][2].
      * The `PutObject` permission is sufficient for uploading archives.
      * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets.
 
 2. 버킷 이름을 수정합니다.
 3. 원할 경우 로그 아카이브가 포함된 경로를 지정합니다.
 4. 새 정책을 Datadog 통합 역할에 연결합니다.
-   * AWS IAM 콘솔에서 **Roles**로 이동합니다.
+   * AWS IAM 콘솔의 {{< ui >}}Roles{{< /ui >}}로 이동합니다.
    * Datadog 통합에 사용되는 역할을 찾습니다. 기본 이름은 **DatadogIntegrationRole**이지만 조직에서 이름을 변경한 경우 다를 수 있습니다. 역할 이름을 클릭하여 역할 요약 페이지를 엽니다.
-   * **Add permissions**를 클릭한 다음 **Attach policies**를 클릭합니다.
+   * {{< ui >}}Add permissions{{< /ui >}}를 클릭한 다음 {{< ui >}}Attach policies{{< /ui >}}를 클릭합니다.
    * 위에서 생성한 정책 이름을 입력합니다.
-   * **Attach policies**를 클릭합니다.
+   * {{< ui >}}Attach policies{{< /ui >}}를 클릭합니다.
 
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
-[2]: /ko/logs/archives/rehydrating/
+[2]: /ko/logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-1. Datadog 앱에 스토리지 계정에 대한 쓰기 및 리하이드레이션(Rehydration) 권한을 부여합니다.
-2. [Storage Accounts 페이지][1]에서 스토리지 계정을 선택한 후 **Access Control (IAM)**로 이동하여 **Add -> Add Role Assignment**를 선택합니다.
+1. Datadog 앱에 스토리지 계정에 대한 쓰기 및 읽기 권한을 부여합니다.
+2. [Storage Accounts 페이지][1]에서 스토리지 계정을 선택하고 {{< ui >}}Access Control (IAM){{< /ui >}}로 이동한 다음 {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}를 선택합니다.
 3. **Storage Blob Data Contributor** 역할을 선택하고, Azure 통합을 위해 생성한 Datadog 애플리케이션을 선택한 후 저장합니다.
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Datadog 앱에 Storage Blob Data Contributor 역할을 추가합니다." style="width:75%;">}}
@@ -188,12 +188,12 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 {{% tab "Google Cloud Storage" %}}
 
 1. Datadog Google Cloud 서비스 계정에 아카이브를 버킷에 기록할 수 있는 권한을 부여합니다.
-2. [Google Cloud IAM Admin 페이지][1]에서 Datadog Google Cloud 서비스 계정 주체를 선택하고 **Edit principal**을 선택합니다.
-3. ADD ANOTHER ROLE****을 클릭한 후 **Storage Object Admin** 역할을 선택하고 저장합니다.
+2. [Google Cloud IAM Admin 페이지][1]에서 Datadog Google Cloud 서비스 계정 주체를 선택한 다음 {{< ui >}}Edit principal{{< /ui >}}를 선택합니다.
+3. {{< ui >}}ADD ANOTHER ROLE{{< /ui >}}을 클릭하고 {{< ui >}}Storage Object Admin{{< /ui >}} 역할을 선택한 다음 저장합니다.
 
    {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud 서비스 계정에 Storage Object Admin 역할을 추가합니다." style="width:75%;">}}
 
-**Storage Object Admin** 역할은 Datadog에서 권장하는 구성입니다. 조직에서 최소 권한 원칙에 따른 사용자 지정 역할을 요구하는 경우 아카이브 업로드를 위해 다음 개별 권한이 필요합니다.
+{{< ui >}}Storage Object Admin{{< /ui >}} 역할은 Datadog에서 권장하는 구성입니다. 조직에서 최소 권한 원칙에 따른 사용자 지정 역할을 요구하는 경우 아카이브 업로드를 위해 다음 개별 권한이 필요합니다.
 
 - `storage.objects.create`
 - `storage.objects.get`
@@ -208,7 +208,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 ### 로그를 버킷으로 라우팅하기 {#route-your-logs-to-a-bucket}
 
-[Log Archiving & Forwarding 페이지][6]로 이동하여 **Archives** 탭에서 **Add a new archive**를 선택합니다.
+[Log Archiving & Forwarding 페이지][6]로 이동하여 {{< ui >}}Archives{{< /ui >}} 탭에서 {{< ui >}}Add a new archive{{< /ui >}}를 선택합니다.
 
 **참고:**
 * 이 단계와 다음 단계를 완료하려면 [`logs_write_archive` 권한][5]이 있는 Datadog 사용자여야 합니다.
@@ -219,8 +219,8 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 | 서비스                  | 단계                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Amazon S3**               | - S3 버킷에 맞는 AWS 계정과 역할 조합을 선택합니다.<br>- 버킷 이름을 입력합니다.<br>**선택 사항**: 로그 아카이브 콘텐츠 전체에 대한 접두사 디렉터리를 입력합니다. |
-| **Azure Storage**        | - **Azure Storage** 아카이브 유형을 선택하고, 스토리지 계정에 대해 Storage Blob Data Contributor 역할이 부여된 Datadog 애플리케이션의 Azure 테넌트 및 클라이언트를 선택합니다.<br>- 스토리지 계정 이름과 아카이브용 컨테이너 이름을 입력합니다.<br>**선택 사항**: 로그 아카이브 콘텐츠 전체에 대한 접두사 디렉터리를 입력합니다. |
-| **Google Cloud Storage** | - **Google Cloud Storage** 아카이브 유형을 선택하고, 스토리지 버킷에 대한 쓰기 권한이 있는 GCS 서비스 계정을 선택합니다.<br>- 버킷 이름을 입력합니다.<br>**선택 사항**: 로그 아카이브 콘텐츠 전체에 대한 접두사 디렉터리를 입력합니다. |
+| **Azure Storage**        | - {{< ui >}}Azure Storage{{< /ui >}} 아카이브 유형을 선택하고, 스토리지 계정에 대한 Storage Blob Data Contributor 역할이 부여된 Datadog 앱의 Azure 테넌트 및 클라이언트를 선택합니다.<br>- 스토리지 계정 이름과 아카이브용 컨테이너 이름을 입력합니다.<br>**선택 사항**: 로그 아카이브의 모든 콘텐츠에 대한 접두사 디렉터리를 입력합니다. |
+| **Google Cloud Storage** | - {{< ui >}}Google Cloud Storage{{< /ui >}} 아카이브 유형을 선택하고, 스토리지 버킷에 대한 쓰기 권한이 있는 GCS 서비스 계정을 선택합니다.<br>- 버킷 이름을 입력합니다.<br>**선택 사항**: 로그 아카이브의 모든 콘텐츠에 대한 접두사 디렉터리를 입력합니다. |
 
 ### 고급 설정 {#advanced-settings}
 
@@ -235,32 +235,41 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 #### 최대 스캔 크기 정의하기 {#define-maximum-scan-size}
 
-이 선택적 구성 단계를 사용하여 로그 아카이브에서 리하이드레이션 시 스캔할 수 있는 로그 데이터의 최대 용량(GB)을 정의합니다.
+이 선택적 구성 단계를 사용하여 로그 아카이브에서 Archive Search 또는 리하이드레이션을 위해 스캔할 수 있는 로그 데이터의 최대 용량(GB)을 정의합니다.
 
-최대 스캔 크기가 정의된 아카이브의 경우 모든 사용자는 리하이드레이션을 시작하기 전에 먼저 스캔 크기를 추정해야 합니다. 추정된 스캔 크기가 해당 아카이브에서 허용된 값을 초과하는 경우 사용자는 리하이드레이션 요청 시간 범위를 줄여야 합니다. 시간 범위를 줄이면 스캔 크기가 감소하여 리하이드레이션을 시작할 수 있습니다.
+최대 스캔 크기가 정의된 아카이브의 경우 모든 사용자는 Archive Search 또는 리하이드레이션을 시작하기 전에 먼저 스캔 크기를 추정해야 합니다. 추정된 스캔 크기가 해당 아카이브에서 허용된 값을 초과하는 경우 사용자는 요청 시간 범위를 줄여야 합니다. 시간 범위를 줄이면 스캔 크기가 감소하여 사용자가 Archive Search 또는 리하이드레이션을 시작할 수 있습니다.
 
-#### 아카이브 파티션 속성(미리보기) {#archive-search-partition-attribute}
+**참고**: [Archive Search][16] 중에 스캔되는 데이터 양을 줄이려면 아카이브에서 [Partition Attributes](#archive-partition-attribute)와 [Lookup Attributes](#archive-lookup-attribute)를 구성하세요. 파티션 속성은 관련 없는 데이터 세그먼트를 건너뛰어 검색 범위를 좁히고, 조회 속성은 특정 로그 항목을 정확히 찾아내는 속도를 높입니다.
 
-아카이브된 로그가 스토리지에 물리적으로 저장되는 방식을 최적화하고 [Archive Search][16]를 가속화하려면 Datadog 아카이브에서 파티션 속성을 구성하세요.
+두 속성 유형 모두에 대해 `env`, `service` 또는 `trace_id`과 같은 태그와 [예약된 속성][19]을 `@` 접두사 없이 입력하세요. 다른 모든 속성 앞에는 `@` 접두사를 붙입니다.
 
-* **파티션 속성**: `service`, `source`, `env` 또는 `status`와 같이 자주 검색 필터로 사용하는 낮은 카디널리티 속성을 추가합니다.
-* **이점**: 동일한 파티션 속성 값을 가진 로그가 스토리지 내에 함께 저장됩니다. 검색할 때 Datadog은 쿼리와 맞지 않는 전체 파티션을 건너뛸 수 있으므로 스캔해야 하는 데이터 양을 크게 줄일 수 있습니다.
+#### 아카이브 파티션 속성 {#archive-partition-attribute}
+
+파티션 속성은 공통 필드 값을 기준으로 아카이브된 로그를 그룹으로 구성합니다. 관련 없는 아카이브 세그먼트를 건너뛰고 [Archive Search][16] 중 스캔되는 데이터 양을 줄이려면 파티션 속성을 광범위한 필터로 사용하세요.
+
+아카이브당 최대 **2개의 파티션 속성**을 구성할 수 있습니다.
+
+* **용도**: `service`, `source`, `env` 또는 `status`와 같이 검색 필터로 자주 사용하는 낮은 카디널리티 속성
+* **작동 방식**: 동일한 파티션 속성 값을 가진 로그가 스토리지 내에 함께 저장됩니다. Datadog은 쿼리와 일치하지 않는 전체 파티션을 건너뛰어 스캔되는 데이터 양을 크게 줄입니다.
 
 #### 아카이브 조회 속성 {#archive-lookup-attribute}
 
-[Archive Search][16]를 사용한 아카이브 검색 및 조사 속도를 높이려면 Datadog 아카이브에서 조회 속성을 구성하세요.
+조회 속성은 특정 값을 가진 로그에 대한 빠른 경로를 생성합니다. [Archive Search][16]를 통한 특정 대상 조사 속도를 높이려면 조회 속성을 카디널리티가 높은 식별자에 사용하세요.
 
-* **조회 속성**: `trace_id`, `container_id` 또는 `customer_id`와 같은 높은 카디널리티 속성을 추가합니다.
-* **이점**: 장기 보관 스토리지 내의 특정 로그를 훨씬 빠르게 찾을 수 있어, 임시 조사 시 검색 시간과 스캔 데이터 양을 줄일 수 있습니다.
+아카이브당 최대 **2개의 조회 속성**을 구성할 수 있습니다.
+
+* **용도**: `trace_id`, `@usr.id`, `@http.request_id` 또는 `@transaction_id`와 같은 높은 카디널리티 속성
+* **작동 방식**: Datadog은 쓰기 시점에 이러한 속성에 대한 인덱스를 구축하여 Archive Search가 전체 아카이브를 스캔하지 않고도 특정 로그를 정확히 찾아낼 수 있도록 합니다.
 
 **파티션 속성과 조회 속성 비교**
 
 | | 파티션 | 조회 |
 |---|---|---|
 | **카디널리티** | 낮음(수십에서 수백 개의 값) | 높음(수백만 개의 값) |
-| **일반적인 속성** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
-| **동작 방식** | 전체 파티션을 검색 대상에서 제외 | 아카이브 내 개별 로그 항목을 직접 찾음 |
+| **일반적인 속성** | `service`, `source`, `env`, `status` | `trace_id`, `@usr.id`, `@http.request_id`, `@transaction_id` |
+| **도움이 되는 방식** | 쿼리와 일치하지 않는 전체 파티션을 건너뜁니다. | 전체 아카이브를 스캔하지 않고 특정 로그 항목을 정확히 찾아냅니다. |
 | **적합한 용도** | 환경 또는 서비스 단위의 광범위한 필터링 | 특정 식별자를 사용한 임시 조사 |
+| **한도** | 아카이브당 최대 2개 | 아카이브당 최대 2개 |
 
 최상의 검색 성능을 위해 두 기능을 함께 사용하는 것이 좋습니다. 파티션 속성은 검색 범위를 관련 데이터 세그먼트로 좁히고, 조회 속성은 해당 세그먼트 내에서 특정 로그를 즉시 찾을 수 있도록 해줍니다.
 
@@ -283,10 +292,10 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 기본적으로 Datadog은 gzip보다 더 높은 압축률과 더 빠른 압축 해제 속도를 제공하는 **zstd**(Zstandard) 압축(`.json.zst`)을 사용하여 로그를 아카이브합니다. 또한 **gzip** 압축(`.json.gz`)도 구성할 수 있습니다.
 
 
-압축을 구성하려면 [Log Archiving & Forwarding 페이지][6]에서 아카이브를 생성하거나 편집할 때 **Compression Type**을 선택합니다.
+압축을 구성하려면 [Log Archiving & Forwarding 페이지][6]에서 아카이브를 생성하거나 편집할 때 {{< ui >}}Compression Type{{< /ui >}}을 선택하세요.
 
-- **zstd**(기본값): 더 높은 압축률과 더 빠른 압축 해제 속도를 제공합니다. 특히 [Archive Search][16]를 사용할 계획이라면 신규 아카이브에 권장됩니다.
-- **gzip**: 널리 지원되며 대부분의 도구와 호환됩니다.
+- {{< ui >}}zstd{{< /ui >}}(기본값): 더 높은 압축률과 더 빠른 압축 해제 속도를 제공합니다. 특히 [Archive Search][16]를 사용할 계획이라면 신규 아카이브에 권장됩니다.
+- {{< ui >}}gzip{{< /ui >}}: 널리 지원되며 대부분의 도구와 호환됩니다.
 
 **참고**: 기존 아카이브의 압축 형식을 변경하더라도 새로 생성되는 아카이브 파일에만 적용됩니다. 이미 버킷에 저장된 파일은 기존 형식을 유지합니다.
 
@@ -297,7 +306,7 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 
 아카이브에 사용할 스토리지 클래스를 직접 선택하거나 [S3 버킷에 수명 주기 구성을 설정][1]하여 로그 아카이브를 최적의 스토리지 클래스로 자동 전환할 수 있습니다.
 
-[Rehydration][2]은 다음 스토리지 클래스만 지원합니다.
+[Archive Search][2]는 다음 스토리지 클래스만 지원합니다.
 
 * S3 Standard
 * S3 Standard-IA
@@ -305,44 +314,44 @@ Datadog 계정을 구성하여 [인덱싱][1] 여부와 관계없이 수집된 �
 * S3 Glacier Instant Retrieval
 * S3 Intelligent-Tiering([선택 사항인 비동기식 아카이브 액세스 계층][3]이 모두 비활성화된 경우에만 지원)
 
-다른 스토리지 클래스의 아카이브에서 리하이드레이션하려면 먼저 해당 아카이브를 위의 지원되는 스토리지 클래스 중 하나로 이동해야 합니다.
+아카이브가 다른 스토리지 클래스를 사용하는 경우, 먼저 해당 아카이브를 위의 지원되는 스토리지 클래스 중 하나로 이동해야 합니다.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
-[2]: /ko/logs/archives/rehydrating/
+[2]: /ko/logs/explorer/archive_search/
 [3]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-Archiving 및 [Rehydration][1]은 다음 액세스 계층만 지원합니다.
+Archiving 및 [Archive Search][1]는 다음 액세스 계층만 지원합니다.
 
 - Hot 액세스 계층
 - Cool 액세스 계층
 
-다른 액세스 계층의 아카이브에서 리하이드레이션하려면 먼저 해당 아카이브를 위의 지원되는 계층 중 하나로 이동해야 합니다.
+아카이브가 다른 액세스 계층을 사용하는 경우, 먼저 해당 아카이브를 위의 지원되는 계층 중 하나로 이동해야 합니다.
 
-[1]: /ko/logs/archives/rehydrating/
+[1]: /ko/logs/explorer/archive_search/
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Archiving 및 [Rehydration][1]은 다음 액세스 계층을 지원합니다.
+Archiving 및 [Archive Search][1]는 다음 액세스 계층을 지원합니다.
 
 - Standard
 - Nearline
 - Coldline
 - Archive
 
-[1]: /ko/logs/archives/rehydrating/
+[1]: /ko/logs/explorer/archive_search/
 {{% /tab %}}
 
 {{< /tabs >}}
 
 #### S3 아카이브에 대한 서버 측 암호화(SSE) {#server-side-encryption-sse-for-s3-archives}
 
-Datadog에서 S3 아카이브를 생성하거나 업데이트할 때 **고급 암호화**를 선택적으로 구성할 수 있습니다. **Encryption Type** 드롭다운에서 다음 세 가지 옵션을 사용할 수 있습니다.
+Datadog에서 S3 아카이브를 생성하거나 업데이트할 때 {{< ui >}}Advanced Encryption{{< /ui >}}을 선택적으로 구성할 수 있습니다. {{< ui >}}Encryption Type{{< /ui >}} 드롭다운에서 다음 3가지 옵션을 선택할 수 있습니다.
 
-- **Default S3 Bucket-Level Encryption**(기본값): Datadog은 S3 버킷의 기본 암호화 설정을 재정의하지 않습니다.
-- **Amazon S3 managed keys**: S3 버킷의 기본 암호화와 관계없이 Amazon S3 관리형 키([SSE-S3][17])를 사용한 서버 측 암호화를 강제로 적용합니다.
-- **AWS Key Management Service**: S3 버킷의 기본 암호화와 관계없이 [AWS KMS][18]의 고객 관리형 키(CMK)를 사용한 서버 측 암호화를 강제로 적용합니다. 이 옵션을 사용하려면 CMK ARN을 제공해야 합니다.
+- {{< ui >}}Default S3 Bucket-Level Encryption{{< /ui >}}(기본값): Datadog은 S3 버킷의 기본 암호화 설정을 재정의하지 않습니다.
+- {{< ui >}}Amazon S3 managed keys{{< /ui >}}: S3 버킷의 기본 암호화와 관계없이 Amazon S3 관리형 키([SSE-S3][17])를 사용한 서버 측 암호화를 강제로 적용합니다.
+- {{< ui >}}AWS Key Management Service{{< /ui >}}: S3 버킷의 기본 암호화와 관계없이 [AWS KMS][18]의 고객 관리형 키(CMK)를 사용한 서버 측 암호화를 강제로 적용합니다. 이 옵션을 사용하려면 CMK ARN을 제공해야 합니다.
 
 {{< tabs >}}
 {{% tab "Default S3 Bucket-Level Encryption" %}}
@@ -352,8 +361,8 @@ Datadog에서 S3 아카이브를 생성하거나 업데이트할 때 **고급 �
 S3 버킷의 암호화 구성을 설정하거나 확인하려면 다음 단계를 따릅니다.
 
 1. S3 버킷으로 이동합니다.
-2. **Properties** 탭을 클릭합니다.
-3.  **Default Encryption** 섹션에서 암호화 유형을 구성하거나 확인합니다. 암호화에 [AWS KMS][1]를 사용하는 경우, 유효한 CMK와 해당 CMK에 연결된 CMK 정책이 있는지 확인하세요.
+2. {{< ui >}}Properties{{< /ui >}} 탭을 클릭합니다.
+3. {{< ui >}}Default Encryption{{< /ui >}} 섹션에서 암호화 유형을 구성하거나 확인합니다. 암호화에 [AWS KMS][1]를 사용하는 경우, 유효한 CMK와 해당 CMK에 연결된 CMK 정책이 있는지 확인하세요.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
@@ -424,7 +433,7 @@ S3 버킷의 암호화 구성을 설정하거나 확인하려면 다음 단계�
 }
 ```
 
-3. Datadog에서 **Encryption Type**으로 **AWS Key Management Service**를 선택한 후 AWS KMS 키 ARN을 입력합니다.
+3. Datadog에서 {{< ui >}}Encryption Type{{< /ui >}}으로 {{< ui >}}AWS Key Management Service{{< /ui >}}를 선택한 후 AWS KMS 키 ARN을 입력합니다.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 
@@ -445,11 +454,11 @@ Datadog 계정에서 아카이브 설정이 성공적으로 구성되면 처리 
 
 ## 여러 아카이브 {#multiple-archives}
 
-여러 아카이브가 정의된 경우 로그는 필터를 기반으로 첫 번째 아카이브를 입력합니다.
+여러 아카이브가 정의된 경우 로그는 필터를 기반으로 첫 번째 아카이브에 들어갑니다.
 
 {{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="로그는 필터와 일치하는 첫 번째 아카이브로 전달됩니다." style="width:100%;">}}
 
-따라서 아카이브의 순서를 신중하게 구성하는 것이 중요합니다. 예를 들어 첫 번째 아카이브를 `env:prod` 태그로 필터링하고, 두 번째 아카이브를 필터 없이(`*``와 동일) 구성한 경우, 모든 프로덕션 로그는 하나의 스토리지 버킷 또는 경로로 전송되고 나머지 로그는 다른 버킷 또는 경로로 전송됩니다.
+따라서 아카이브의 순서를 신중하게 구성하는 것이 중요합니다. 예를 들어 첫 번째 아카이브를 `env:prod` 태그로 필터링하고, 두 번째 아카이브를 필터 없이(`*`와 동일) 구성한 경우, 모든 프로덕션 로그는 하나의 스토리지 버킷 또는 경로로 전송되고 나머지 로그는 다른 버킷 또는 경로로 전송됩니다.
 
 ## 아카이브 형식 {#format-of-the-archives}
 
@@ -485,6 +494,7 @@ Datadog이 스토리지 버킷으로 전달하는 로그 아카이브는 압축�
 [13]: /ko/account_management/rbac/permissions#logs_read_data
 [14]: /ko/logs/explorer/live_tail/
 [15]: /ko/events/explorer/
-[16]: /ko/logs/log_configuration/archive_search/?tab=amazons3
+[16]: /ko/logs/explorer/archive_search/?tab=amazons3
 [17]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 [18]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+[19]: /ko/logs/explorer/search_syntax/#reserved-attributes
