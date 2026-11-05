@@ -103,7 +103,7 @@ Install the Agent on the Db2 server or on a separate host with network access to
 
    For Windows, follow the IBM Db2 integration's [Windows driver installation instructions][13].
 
-#### Optional: Run the Agent in a container
+#### Optional: Prepare an Agent container image
 
 The Agent container image does not include the `ibm_db` driver. Build a custom image that includes the driver:
 
@@ -114,7 +114,9 @@ RUN /opt/datadog-agent/embedded/bin/pip install ibm_db==3.2.6
 
 Replace `<AGENT_VERSION>` with `7.86.0` or a later version. Installing `ibm_db` downloads the IBM CLI driver, so the image build requires network access to IBM. For environments with restricted network access, see [Installing the `ibm_db` client library offline][8].
 
-Use the `ibm_db2` check name with the instance settings in Step 4. For deployment instructions, see [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster checks][11].
+Deploy the image using the [Docker][21] or [Kubernetes][22] Agent installation instructions.
+
+For integration configuration, follow the [Docker Autodiscovery][9], [Kubernetes Autodiscovery][12], or [cluster check instructions][11]. Specify `ibm_db2` as the integration name and use the database connection settings shown in [Step 4](#step-4-configure-the-agent).
 
 Set up the [secret backend][10] on the Agent that runs the check.
 
@@ -257,3 +259,5 @@ For all integration options, see the [sample configuration][19].
 [18]: /database_monitoring/guide/database_identifier/
 [19]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [20]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[21]: /containers/docker/
+[22]: /containers/kubernetes/
