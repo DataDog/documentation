@@ -23,7 +23,7 @@ When DogStatsD is used to send a large volume of metrics to a single Agent, if p
 Most of the time the symptoms can be alleviated by tweaking some configuration options described below.
 
 <div class="alert alert-info">
-Agent Data Plane is a Preview feature for processing high-volume custom metrics workloads with improved CPU and memory efficiency. You can <a href="/agent/configuration/agent-data-plane/">enable</a> this Preview feature.
+<a href="/agent/configuration/agent-data-plane/">Agent Data Plane</a> is a Preview feature for processing high-volume custom metrics workloads with improved CPU and memory efficiency. You can enable this Preview feature in your <a href="/agent/configuration/agent-data-plane/#enable-the-agent-data-plane">Agent configuration</a>.
 </div>
 
 ## General tips
