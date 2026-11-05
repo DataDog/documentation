@@ -1,7 +1,6 @@
 ---
 title: Set Up Test Parallelization
 description: Select your CI provider, platform, and framework for a recommended Test Parallelization setup.
-content_intro: Choose your CI provider, platform, and test framework to see the recommended configuration for your suite.
 content_filters:
   - trait_id: ci_provider
     option_group_id: test_parallelization_ci_options
@@ -23,6 +22,8 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshoot Test Parallelization"
 ---
+
+Choose your CI provider, platform, and test framework to see the recommended configuration for your suite.
 
 {% collapse-content title="Concepts: CI nodes, workers, and plans" level="h3" id="concepts" %}
 
