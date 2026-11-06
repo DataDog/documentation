@@ -1498,6 +1498,96 @@ Syncs feature flag allocations for a specific environment. This replaces all exi
 
 - Sync the allocations for flag `new-checkout-flow` in production.
 
+## Fleet Automation
+
+Tools for monitoring and managing Datadog Agent deployments, upgrade schedules, and Agent and package versions across an organization's fleet of hosts with [Fleet Automation][100].
+
+<div class="alert alert-info">The <code>fleet-automation</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `search_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists Datadog Agents monitored by Fleet Automation, filterable by environment, operating system, cloud provider, remote management status, and other attributes.
+
+- Which Agents in `env:prod` do not have remote management enabled?
+
+### `get_fleet_agent`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves detailed information on one Agent, including metadata, integration status, and optional raw configuration files.
+
+- Show me the integrations and configuration files for the Agent on host `web-01`.
+
+### `list_fleet_agent_versions`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists the Datadog Agent versions available to deploy through Fleet Automation.
+
+- Which Agent versions can I upgrade to through Fleet Automation?
+
+### `search_fleet_deployments`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists Agent upgrade and configuration deployments, filterable by status, update type, and date.
+
+- Show me Agent deployments that failed in the last 7 days.
+
+### `get_fleet_deployment`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves one deployment's status, update type, and per-host details.
+
+- Which hosts failed in deployment `<deployment_id>`, and why?
+
+### `list_fleet_packages`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists the language and APM package versions available to deploy through Fleet Automation.
+
+- Which Python APM SDK versions are available to deploy?
+
+### `list_fleet_schedules`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Lists all recurring upgrade schedules, including maintenance window, host targeting query, and status.
+
+- List my Agent upgrade schedules and their maintenance windows.
+
+### `get_fleet_schedule`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Retrieves one upgrade schedule by ID.
+
+- Show me the details of upgrade schedule `<schedule_id>`.
+
+### `get_fleet_integration_schema`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read`*\
+Describes the configuration options a Datadog Agent integration accepts, including each config file and its options (name, type, required, allowed values, default, example, and nested options).
+
+- What configuration options does the Postgres integration accept?
+
+### `upgrade_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+Upgrades the Datadog Agent to a target version across hosts that match a scope query. The tool requires `confirm:true`.
+
+- Upgrade all Agents tagged `env:staging` to the latest Agent version.
+
+### `configure_fleet_agents`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+Pushes configuration changes, and optionally installs or pins packages, across hosts that match a scope query. The tool supports `dry_run` and requires `confirm:true` for a real deployment.
+
+- Enable log collection on Agents tagged `service:checkout`, and do a dry run first.
+
+### `cancel_fleet_deployment`
+*Toolset: **fleet-automation***\
+*Permissions Required: `Hosts Read` and `Agent Upgrade` and `<TODO: fleet_policies_write display name>`*\
+Cancels an active (running or pending) deployment. The cancellation is irreversible and requires `confirm:true`.
+
+- Cancel the Agent upgrade deployment that is running right now.
+
 ## Forms
 
 Tools for creating, publishing, and managing [forms][72], including reading form definitions and submitted responses.
@@ -3696,6 +3786,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
+[100]: /agent/fleet_automation/
 
 ## Further reading
 
