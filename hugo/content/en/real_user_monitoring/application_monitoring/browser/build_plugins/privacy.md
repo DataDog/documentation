@@ -33,7 +33,7 @@ With the `mask-unless-allowlisted` privacy level, the SDK displays text only whe
 
 For example, a static `Order value` label can remain readable in an action name such as `Click on Order value`. A customer-specific value calculated at runtime, such as `$142.75`, stays masked unless it's in the allowlist.
 
-<div class="alert alert-info">Stricter privacy settings on individual elements still apply.</div>
+<div class="alert alert-info">Element-level privacy overrides (for example, <code>data-dd-privacy="mask"</code>) still take precedence over the build-time allowlist.</div>
 
 ## Prerequisites
 
