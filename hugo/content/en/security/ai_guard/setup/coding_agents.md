@@ -41,7 +41,7 @@ If an evaluation fails or times out, the coding agent continues with the action 
 
 ## Supported coding agents
 
-| Agent              | Guardrails      | Supply chain protection | Sensitive data redaction |
+| Agent              | Guardrails<br>Evaluates prompts and tool calls | Supply chain protection<br>Analyzes package installations with [Supply Chain Firewall][16] | Sensitive data redaction<br>Detects and blocks secrets |
 |--------------------|-----------------|-------------------------|--------------------------|
 | Claude Code        | Full            | Full                    | Monitoring only          |
 | Codex              | Full            | Full                    | Monitoring only          |
@@ -205,3 +205,4 @@ trajectory plugins security disable --clients cc,codex,cursor --remove-hooks
 [13]: /security/ai_guard/setup/#retention-filter
 [14]: /security/ai_guard/setup/#limit-access
 [15]: https://github.com/datadog-labs/trajectory/blob/main/docs/MANAGED-ENDPOINTS.md
+[16]: /security/code_security/software_composition_analysis/supply_chain_firewall/
