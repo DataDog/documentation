@@ -1559,11 +1559,6 @@ menu:
       identifier: bits_ai_agent_builder_improve_with_traces
       parent: bits_ai_agent_builder
       weight: 101
-    - name: Bits Autonomous Operations
-      url: bits_ai/bits_autonomous_operations
-      identifier: bits_ai_autonomous_operations
-      parent: bits_ai
-      weight: 1
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
@@ -1674,11 +1669,6 @@ menu:
       identifier: bits_ai_skills_library
       parent: bits_ai
       weight: 12
-    - name: Bits AI Settings
-      url: bits_ai/bits_settings
-      identifier: bits_ai_settings
-      parent: bits_ai
-      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
