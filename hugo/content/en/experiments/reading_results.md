@@ -97,9 +97,11 @@ From the metric scorecard, hover over a metric name to view exploration options.
 Click {{< ui >}}Chart{{< /ui >}} on any metric to open an interactive visualization of how a metric performed during the experiment. Within the chart, you can:
 
 - **Split by segmentation properties**: Compare lift across cohorts such as device type or user tier. Properties reflect subject attributes at the initial time of exposure.
-- **Plot lift over time**: See how lift trends across the experiment, plotted by calendar date or by days since each subject's first experiment exposure.
-- **Add filters**: Narrow the chart to a specific subset of subjects.
+- **Plot lift over time**: See how lift trends across the experiment, plotted by calendar date or by days since each subject's first experiment exposure. Lift over time is not available for percentile metrics.
+- **Add filters**: Narrow the chart to a specific subset of subjects. An exclusion filter, such as country is not `US`, also includes subjects with no recorded country. To leave those subjects out, also exclude the missing value.
 - **Switch lift types**: Toggle between relative lift and absolute lift (Treatment − Control).
+
+To filter a percentile metric, choose one property and select a single value from the values Datadog lists for it. Selecting multiple values, using an exclusion filter, or splitting by a different property than the one you filter on is not supported. While a filter is applied, [metric property breakouts][12] for a percentile metric can be unavailable.
 
 The example below shows a segment-level breakout by country. Use this view to understand when certain cohorts reacted differently to the new experience.
 
@@ -129,3 +131,4 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [9]: /experiments/diagnostics/
 [10]: /experiments/holdouts/
 [11]: /experiments/holdouts/#interpret-results
+[12]: /experiments/metric_property_breakouts/
