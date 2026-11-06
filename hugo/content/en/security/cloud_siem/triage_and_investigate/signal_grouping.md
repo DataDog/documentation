@@ -93,13 +93,23 @@ Datadog follows these rules:
 
 - Closed cases are never reopened. If the only related case is closed, Datadog creates a new case.
 - If the new signal is already in an {{< ui >}}Open{{< /ui >}} or {{< ui >}}In Progress{{< /ui >}} case, it stays in that case.
-- When a case is full, Datadog creates a new case. The new case links to the previous one.
+- When a case is full, Datadog creates a new rollover case. See [Limits](#limits).
 - Adding a signal does not change the case title, priority, or assignee.
 - The [Signal Attachment Settings][4] still apply to the signals added to a case.
 
+## Limits
+
+| Limit | Value |
+| --- | --- |
+| Lookback for repeated detection | 1, 6, 24, or 48 hours. |
+| Related signals per strategy | Each strategy keeps the 100 most recent related signals it finds in the lookback. |
+| Signals per case | Signal grouping adds up to 100 signals to a case. When a case is full, Datadog creates a new rollover case for the remaining related signals. |
+
+The limit of signals per case only applies to signal grouping. You can still add more signals to the case in other ways.
+
 ## See why a signal was grouped
 
-Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows the signal that triggered the update, the grouping strategies that ran and what they found, and the result.
+Each case that automatic case creation creates or updates has an entry in its timeline. The entry shows the signal that triggered the update, the grouping strategies that ran and what they found, and the result. If a strategy found more related signals than its limit, the entry says so.
 
 The result is one of the following:
 
@@ -110,7 +120,7 @@ The result is one of the following:
 | No related signals found | No related signal was found in the lookback. Datadog created a new case. |
 | New case with related signals | Related signals were found, but none were in an eligible case. Datadog created a new case and added them. |
 | Existing case updated | A related signal was in an eligible case. Datadog added the signal to that case. |
-| Previous case is full | The eligible case was full. Datadog created a new case that links to the previous one. |
+| Previous case is full | The eligible case was full. Datadog created a new rollover case for the remaining related signals found. |
 
 ## Further reading
 
