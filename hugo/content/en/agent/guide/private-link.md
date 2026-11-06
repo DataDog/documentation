@@ -366,6 +366,7 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 | `quota.browser-intake-datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `sourcemap-intake.datadoghq.com` | `plum.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-064ac68ae9d8cd604` |
+| `dbm-metrics-intake.datadoghq.com` | `white.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0453781fcd06eb283` |
 | `dbquery-intake.datadoghq.com` | `white.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0453781fcd06eb283` |
 | `agent-http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
 | `http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
@@ -373,7 +374,6 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 | `orchestrator.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
 | `process.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
 | `intake.profile.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
-| `dbm-metrics-intake.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501` |
 | `config.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d` |
 
 {{% /site-region %}}
