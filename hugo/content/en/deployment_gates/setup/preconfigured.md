@@ -120,10 +120,14 @@ The analysis is automatically performed for all APM-instrumented services, and n
 {{% tab "Automatic Detection" %}}
 <div class="alert alert-info">The Automatic Detection rule is in Preview.</div>
 
-This rule type uses an AI investigation to decide whether the deployed version introduced a regression. It compares the deployed version with previous versions of the same service and looks for signals such as:
+This rule type uses an AI investigation to decide whether the deployed version introduced a regression. It compares the deployed version with previous versions of the same service and looks for the following signals:
 
-- New errors and error rate increases detected by [Watchdog][1].
-- Containers of the service in `CrashLoopBackOff` state.
+- **Watchdog stories**: [Watchdog][1] anomalies on the service, such as new errors or error rate increases.
+- **Crash loops**: Containers of the service in `CrashLoopBackOff` state.
+- **Dependency crash loops**: Containers in `CrashLoopBackOff` state in the direct upstream or downstream dependencies of the service.
+- **Faulty change signals**: New errors and error rate increases on the service's resources after the deployment.
+- **New error log patterns**: Error log patterns that were not present in the service's logs before the deployment.
+- **Latency regressions**: Increases in the service's median (p50) latency compared to its expected behavior.
 
 When a signal is found, the rule analyzes the code changes between the previous version and the deployed version, together with the related telemetry, to determine whether the deployment caused the regression. When no signal is found, the rule passes. The rule result includes a summary of the investigation.
 
