@@ -29,9 +29,11 @@ With the `mask-unless-allowlisted` privacy level, the SDK displays text only whe
 ## How the privacy plugin works
 
 1. During the build, the plugin extracts static strings from compiled application artifacts, including bundles and source maps, to generate an allowlist. It excludes dynamic expressions and their runtime values.
-2. At runtime, the RUM Browser SDK checks candidate text against the allowlist before using it in action names or Session Replay. It keeps matching text readable and replaces unknown text with a fixed masking placeholder. Stricter privacy settings on individual elements still apply.
+2. At runtime, the RUM Browser SDK checks candidate text against the allowlist before using it in action names or Session Replay. It keeps matching text readable and replaces unknown text with a fixed masking placeholder.
 
-For example, a static `Order value` label can remain readable in an action name such as `Click on Order value`. A customer-specific value calculated at runtime, such as `$142.75`, remains masked when it is absent from the allowlist.
+For example, a static `Order value` label can remain readable in an action name such as `Click on Order value`. A customer-specific value calculated at runtime, such as `$142.75`, stays masked unless it's in the allowlist.
+
+<div class="alert alert-info">Stricter privacy settings on individual elements still apply.</div>
 
 ## Prerequisites
 
