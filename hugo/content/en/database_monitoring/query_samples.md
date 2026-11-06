@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
+- link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+  tag: "Blog"
+  text: "Monitor Oracle AI Database across clouds with Datadog"
 
 ---
 

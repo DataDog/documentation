@@ -19,6 +19,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci
   tag: Blog
   text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
+- link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
+  tag: "Blog"
+  text: "Monitor Oracle AI Database across clouds with Datadog"
 ---
 
 ## Overview
