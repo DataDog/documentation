@@ -47,7 +47,7 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the Agent Observability [Evaluators page][1]. Select {{< ui >}}Create Evaluator{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluators page after selecting Create Evaluator." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Describe your evaluator page in Agent Observability, shown after selecting Create Evaluator." style="width:100%;" >}}
 1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluator runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.

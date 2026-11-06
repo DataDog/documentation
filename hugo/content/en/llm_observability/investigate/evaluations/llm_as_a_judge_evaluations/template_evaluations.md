@@ -34,7 +34,7 @@ To select a template:
 1. In Datadog, navigate to the [Agent Observability Evaluators][11] page
 1. Click on the {{< ui >}}Create Evaluator{{< /ui >}} button
 1. Select the template of your choice
-    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
+    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="The Create Evaluator page in Agent Observability, showing the option to describe your own evaluator and the available templates." style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
 1. (Optional) Select the application you would like the evaluator to run for and set any desired span filters.

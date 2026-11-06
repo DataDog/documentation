@@ -88,7 +88,7 @@ Each trace contains spans representing each choice made by an agent or each step
 
 View every step of your LLM application chains and calls to pinpoint problematic requests and identify the root cause of errors.
 
-{{< img src="llm_observability/errors.png" alt="Errors that occurred in a trace on the Errors tab in a trace side panel" style="width:100%;" >}}
+{{< img src="llm_observability/errors.png" alt="Errors that occurred in a trace, shown in the trace side panel" style="width:100%;" >}}
 
 ## Monitor operational metrics and optimize cost
 
@@ -111,6 +111,8 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 ## Find agent problems with Insights
 
 [Agent Observability Insights][12] automatically analyzes the traces Agent Observability receives from your applications to identify recurring cost and reliability problems. Each insight includes the root cause, impact, supporting evidence, and a recommended fix. Insights require no additional configuration.
+
+{{< img src="llm_observability/index/llm_insights_light.png" alt="An Agent Observability insight showing the root cause, impact, supporting evidence, and recommended next steps for a recurring tool call error" style="width:100%;" >}}
 
 ## Use integrations with Agent Observability
 
