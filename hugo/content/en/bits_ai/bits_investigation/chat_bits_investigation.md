@@ -8,6 +8,12 @@ Within an investigation, you can chat with Bits to gather additional information
 
 {{< img src="bits_ai/bits_ai_sre_chat_example.png" alt="Example chat where a user asks Bits AI about related ongoing incidents, and Bits AI responds with a list of related incidents and an explanation on what makes them related" style="width:100%;" >}}
 
+## Permissions and billing
+
+Chat on an investigation page runs in [Bits Chat][2]:
+- Users need the **Bits Chat Access** permission. Bits Investigations Read allows users to view the investigation and use Bits Chat; Bits Investigations Write is not required to chat.
+- Messages are billed as Bits Chat usage, not Bits Investigation usage.
+
 ## Data sources
 
 The Bits Investigation chatbot has access to:
@@ -33,3 +39,4 @@ The Bits Investigation chatbot has access to:
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
 [1]: /bits_ai/bits_investigation/configure#confluence
+[2]: /bits_ai/bits_chat/
