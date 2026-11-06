@@ -117,7 +117,7 @@ There are two ways to test your automations:
 
 1. Enable [test incidents][6] in your incident settings.
 2. Declare a test incident that matches your automation's conditions.
-3. View the automation execution in the incident timeline.
+3. View the automation run in the incident timeline.
 
 ### Option 2: Test from an existing incident
 
@@ -128,31 +128,31 @@ There are two ways to test your automations:
 
 This populates the `incident` context variable with data from the selected incident without actually triggering the automation for that incident.
 
-## Viewing automation executions
+## Viewing automation runs {#viewing-automation-executions}
 
 ### From the incident timeline
 
-Every automation execution appears in the [incident timeline][7]. Timeline entries include:
+Every automation run appears in the [incident timeline][7]. Timeline entries include:
 
 - The automation name
-- Execution timestamp
-- Link to the detailed execution view
-- Execution status (success or failure)
+- Run timestamp
+- Link to the detailed run view
+- Run status (success or failure)
 
-You can filter the timeline to show only automation executions or exclude them entirely.
+You can filter the timeline to show only automation runs or exclude them entirely.
 
-### From execution history
+### From run history {#from-execution-history}
 
-To view all executions of an automation:
+To view all runs of an automation:
 
 1. Open the automation.
-2. Click **Execution** in the workflow editor.
+2. Click **Run History** in the workflow editor.
 
-The execution history shows:
+The run history shows:
 - All input parameters and their values
 - The `incident` context data
 - The `fieldDiffs` showing what changed
-- Step-by-step execution results
+- Step-by-step run results
 - Any errors or failures
 
 ## Permissions and access control
@@ -194,7 +194,7 @@ To run automations on private incidents, use a user or service account with the 
 
 ### Security considerations
 
-By default, execution history (including private incident data) is visible to anyone in your organization. To run automations on private incidents securely:
+By default, run history (including private incident data) is visible to anyone in your organization. To run automations on private incidents securely:
 
 1. Use a service account with `Private Incidents Global Access` permission.
 1. Restrict viewer access to only users who should see private incident data.

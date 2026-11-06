@@ -13,7 +13,7 @@ title: 実験メトリクスを作成する
 ---
 ## 概要 {#overview}
 
-実験で測定したいメトリクスを作成します。Real User Monitoring (RUM)、Product Analytics、または独自のウェアハウスのデータを使用して、Datadog Experiments のメトリクスを作成できます。
+実験で測定したいメトリクスを作成します。Real User Monitoring (RUM)、Product Analytics、Agent Observability、または独自のウェアハウスのデータを使用して、Datadog Experiments のメトリクスを作成できます。
 
 <div class="alert alert-info">組織でカスタムロールを使用している場合は、実験メトリクスを作成するために適切な <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics 権限</a>が必要です。</div>
 
@@ -28,9 +28,9 @@ title: 実験メトリクスを作成する
 
 Product Analytics または RUM データからメトリクスを作成するには、アプリケーションに Datadog の [クライアントサイド SDK][3] がインストールされており、データがアクティブにキャプチャされている必要があります。SDK をまだ構成していない場合は、アプリケーションタイプを選択して開始します。
 
-- [Android および Android TV][4]
+- [Android と Android TV][4]
 - [iOS と tvOS][5]
-- [Browser (JavaScript)][6]
+- [ブラウザ (JavaScript)][6]
 - [React Native][7]
 
 Product Analytics は、Real User Monitoring (RUM) と同じ SDK および構成を使用します。RUM のセットアップドキュメントを使用して SDK を構成した後、Product Analytics UI でメトリクスを作成します。
@@ -40,16 +40,16 @@ Product Analytics は、Real User Monitoring (RUM) と同じ SDK および構成
 実験用のメトリクスを作成するには、以下の手順を実行します。
 
 1. Datadog Product Analytics の [メトリクスページ][1] に移動します。
-1. {{< ui >}}Metrics{{< /ui >}} タブを選択し、右上隅の {{< ui >}}Create Metric{{< /ui >}} をクリックします。
+1. [{{< ui >}}Metrics{{< /ui >}}] タブを選択し、右上隅の [{{< ui >}}Create Metric{{< /ui >}}] をクリックします。
 1. {{< ui >}}Metric name{{< /ui >}} を追加し、必要に応じて {{< ui >}}Description{{< /ui >}} を追加します。
-1. {{< ui >}}Metric definition{{< /ui >}} セクションで、{{< ui >}}Select an event{{< /ui >}} をクリックしてイベントピッカーを開きます。右側のチャートは、メトリクスを構成するとリアルタイムで更新されます。
-   1. 特定のイベントを検索するか、{{< ui >}}By Type{{< /ui >}} フィルターを使用してイベントタイプ別に参照します。
-1. ドロップダウンから[集計方法](#aggregation-methods)を選択します。デフォルトは {{< ui >}}Count of events{{< /ui >}} です。
-1. {{< ui >}}Add Filter{{< /ui >}} をクリックして、追加のプロパティで[メトリクスをフィルタリング](#add-filters)します。
-1. (オプション) {{< ui >}}Additional settings{{< /ui >}} セクションで、以下を行います。
-   1. このメトリクスが重要な意思決定のために承認されていることを示すには、{{< ui >}}Mark as certified{{< /ui >}} をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
+1. [{{< ui >}}Metric definition{{< /ui >}}] セクションで、[{{< ui >}}Select an event{{< /ui >}}] をクリックしてイベントピッカーを開きます。右側のチャートは、メトリクスを構成するとリアルタイムで更新されます。
+   1. 特定のイベントを検索するか、[{{< ui >}}By Type{{< /ui >}}] フィルターを使用してイベントタイプ別に参照します。
+1. ドロップダウンから[集計方法](#aggregation-methods)を選択します。デフォルトは [{{< ui >}}Count of events{{< /ui >}}] です。
+1. [{{< ui >}}Add Filter{{< /ui >}}] をクリックして、追加のプロパティで[メトリクスをフィルタリング](#add-filters)します。
+1. (オプション) [{{< ui >}}Additional settings{{< /ui >}}] セクションで、以下を行います。
+   1. このメトリクスが重要な意思決定のために承認されていることを示すには、[{{< ui >}}Mark as certified{{< /ui >}}] をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
    1. 必要に応じて [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) および {{< ui >}}Units{{< /ui >}} を調整します。デフォルト設定は、ほとんどのユースケースに対応しています。
-1. {{< ui >}}Save{{< /ui >}} をクリックします。
+1. [{{< ui >}}Save{{< /ui >}}] をクリックします。
 
 {{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="メトリクス名が「メトリクスの例」に設定され、「カートへ追加をクリック」イベントが選択され、集計方法のドロップダウンがイベント数に設定され、追加設定セクションがあり、右側に棒グラフのプレビューが表示され、保存ボタンが強調表示されている、メトリクスの作成ページ。" style="width:90%;" >}}
 
@@ -62,16 +62,80 @@ Product Analytics は、Real User Monitoring (RUM) と同じ SDK および構成
 
 ### フィルターを追加する {#add-filters}
 
-サービス、国、デバイスタイプなどの {{< ui >}}Event properties{{< /ui >}} フィルターを選択して、メトリクスをフィルタリングできます。{{< ui >}}By Data Type{{< /ui >}} フィルターを使用して、利用可能なプロパティのリストをタイプ (文字列やブール値など) で絞り込みます。
+サービス、国、デバイスタイプなどの [{{< ui >}}Event properties{{< /ui >}}] フィルターを選択して、メトリクスをフィルタリングできます。[{{< ui >}}By Data Type{{< /ui >}}] フィルターを使用して、利用可能なプロパティのリストをタイプ (文字列やブール値など) で絞り込みます。
 
-必要なプロパティが表示されない場合は、{{< ui >}}Custom property{{< /ui >}} フィールドにプロパティ名 (例: `@context.tracking`) を入力し、{{< ui >}}Add{{< /ui >}} をクリックします。
+必要なプロパティが表示されない場合は、[{{< ui >}}Custom property{{< /ui >}}] フィールドにプロパティ名 (例: `@context.tracking`) を入力し、[{{< ui >}}Add{{< /ui >}}] をクリックします。
 
 {{< img src="/product_analytics/experiment/exp_filter_by_2.png" alt="メトリクス定義セクション内にフィルターパネルが開いている。選択されたすべてのプロパティ、中央にはアプリケーション ID、サービス、ブラウザ名、国などのイベントプロパティ、左側には数値、文字列、ブール値のオプションがあるデータタイプフィルター、下部にはプレースホルダー「例: @context.tracking」と表示されるテキストフィールドと追加ボタンがあるカスタムプロパティセクションが表示されている。" style="width:90%;" >}}
 
 {{% /tab %}}
-{{% tab "ウェアハウス" %}}
+{{% tab "Agent Observability" %}}
+
+<div class="alert alert-info"><strong>注</strong>: Agent Observability のオンライン実験はプレビュー版です。アクセスをリクエストするには、Datadog の担当者にお問い合わせください。</div>
 
 ### 前提条件 {#prerequisites-1}
+
+Agent Observability データから実験メトリクスを作成する前に:
+
+- [Agent Observability で LLM アプリケーションを計装][14]し、トレースを Datadog に送信します。
+- コストデータまたはトークンデータを使用するには、トレースにトークン使用量が含まれていることを確認してください。Datadog は、トークン使用量、モデル、およびプロバイダー情報を使用して [推定コスト][15] を計算します。
+- 評価を使用するには、数値の `score` 値を持つカスタム [Agent Observability 評価][16] を送信または構成します。
+- 各トレースまたは評価に `subject_identifier` タグを追加します。値は、実験のフィーチャーフラグの評価に使用する `targetingKey` と一致する必要があります。セットアップ手順については、[LLM アプリケーションでオンライン実験を実行する][17] を参照してください。
+
+<div class="alert alert-warning"><strong>サポートされている評価タイプ</strong>: 実験メトリクスは、以下の評価タイプを持つ Agent Observability 評価のみをサポートしています。 <code>score</code> メトリクスタイプ。ブール値、カテゴリー、その他の評価タイプは、メトリクスピッカーでは使用できません。</div>
+
+### Agent Observability データからメトリクスを作成する {#create-a-metric-from-agent-observability-data}
+
+メトリクスを作成するには:
+
+1. Datadog Product Analytics の [メトリクスページ][1] に移動します。
+1. [{{< ui >}}Metrics{{< /ui >}}] タブを選択し、[{{< ui >}}Create Metric{{< /ui >}}] をクリックします。
+1. {{< ui >}}Metric name{{< /ui >}} を追加し、必要に応じて {{< ui >}}Description{{< /ui >}} を追加します。
+1. [{{< ui >}}Metric definition{{< /ui >}}] セクションで、[{{< ui >}}Select an event{{< /ui >}}] をクリックします。
+1. 以下の Agent Observability ソースのいずれかを選択します。
+
+#### Agent スパン {#agent-spans}
+
+[{{< ui >}}Agent Spans{{< /ui >}}] タブを選択し、以下のいずれかを選択します。
+
+- {{< ui >}}Total estimated cost{{< /ui >}}: 完了した Agent Observability トレース全体の平均推定コスト。
+- {{< ui >}}Total tokens{{< /ui >}}: 完了した Agent Observability トレース全体の平均合計トークン使用量。
+
+コストおよびトークンのテンプレートはデフォルトで、対応するトレースプロパティの [{{< ui >}}Average of{{< /ui >}}] (平均) になります。集計の変更、別のプロパティやカスタムプロパティパスの選択、フィルターの追加、または比率の作成が可能です。
+
+<div class="alert alert-info">Agent Observability の推定コスト値にはナノドル (1 ナノドル = 10⁻⁹ USD) が使用されます。コスト計算とサポートされているモデルの詳細については、<a href="/llm_observability/investigate/cost/">コスト</a>を参照してください。</div>
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="[Agent Spans] (Agent スパン) が選択された [Create Metric] (メトリクス作成) イベントピッカー。すべての Agent スパン イベント、合計推定コスト、合計トークンが表示され、合計推定コストが選択されてその説明が表示されています。" style="width:90%;" >}}
+
+#### 評価 {#evaluations}
+
+[{{< ui >}}Evaluations{{< /ui >}}] タブを選択し、以下を行います。
+
+1. 測定したいカスタムスコア評価を検索して選択します。
+1. ML アプリケーション、スコープ、プロンプト、モデルなどの評価詳細を確認します。
+1. 集計とフィルターを構成します。評価メトリクスはデフォルトで平均スコアになります。
+
+実験メトリクスを作成する前に、少なくとも 1 つのスパンで評価を実行してください。評価は、実行された後にのみピッカーに表示されます。
+
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="[Evaluations] (評価) が選択された [Create Metric] (メトリクス作成) イベントピッカー。忠実性、ユーザースコア、冗長性スコアの評価が表示され、忠実性が選択されています。" style="width:90%;" >}}
+
+#### メトリクスを保存 {#save-the-metric}
+
+いずれかのソースを構成した後:
+
+1. (オプション) [{{< ui >}}Additional settings{{< /ui >}}] で、実験メトリクスを認定済みとしてマークするか、実験設定を調整するか、単位を構成します。
+1. [{{< ui >}}Save{{< /ui >}}] をクリックします。
+
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
+[14]: /ja/llm_observability/instrument/
+[15]: /ja/llm_observability/investigate/cost/
+[16]: /ja/llm_observability/investigate/evaluations/
+[17]: /ja/experiments/guide/run_online_experiment_on_llm_application/
+
+{{% /tab %}}
+{{% tab "ウェアハウス" %}}
+
+### 前提条件 {#prerequisites-2}
 
 ウェアハウスデータからメトリクスを作成するには、[ウェアハウスを Datadog に接続][8] する必要があります。Datadog は、BigQuery、Databricks、Redshift、Snowflake をサポートしています。
 
@@ -86,31 +150,31 @@ SQL クエリを書き込んでデータを定義およびプレビューし、�
 まず、クエリを書き込んでデータを取得します。
 
 1. Datadog Product Analytics の [メトリクスページ][1] に移動します。
-1. {{< ui >}}Metric SQL Models{{< /ui >}} タブを選択し、{{< ui >}}Create SQL Model{{< /ui >}} をクリックします。
-1. {{< ui >}}Write SQL{{< /ui >}} セクションで、目的のデータを返す SQL クエリを入力します。SQL エディターは `SELECT * FROM` およびより高度な SQL ステートメントをサポートしています。
-1. {{< ui >}}Run{{< /ui >}} をクリックしてデータをプレビューします。
+1. [{{< ui >}}Metric SQL Models{{< /ui >}}] タブを選択し、[{{< ui >}}Create SQL Model{{< /ui >}}] をクリックします。
+1. [{{< ui >}}Write SQL{{< /ui >}}] セクションで、目的のデータを返す SQL クエリを入力します。SQL エディターは `SELECT * FROM` およびより高度な SQL ステートメントをサポートしています。
+1. [{{< ui >}}Run{{< /ui >}}] をクリックしてデータをプレビューします。
 
-{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="メトリクス SQL モデルを作成するページの SQL 書き込みセクション。収益注文テーブルから user_id、revenue_timestamp、および amount を取得する SELECT クエリが表示され、その下に USER_ID、REVENUE_TIMESTAMP、および AMOUNT 列を表示するクエリのプレビューが成功例として表示されている。" style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="メトリクス SQL モデルを作成するページの SQL 書き込みセクション。収益注文テーブルからユーザー ID、収益タイムスタンプ、および金額を取得する SELECT クエリが表示され、その下に USER_ID、REVENUE_TIMESTAMP、および AMOUNT 列を表示するクエリのプレビューが成功例として表示されている。" style="width:80%;" >}}
 
 大規模なテーブルの場合は、[SQL テンプレート変数][13] を使用して Datadog の日付フィルターをクエリにプッシュし、実行ごとにデータウェアハウスがスキャンするデータ量を削減します。
 
 #### ウェアハウスデータを Datadog にマッピングする {#map-your-warehouse-data-to-datadog}
 
-データをプレビューした後、それを Datadog にマッピングします。{{< ui >}}Structure your model{{< /ui >}} セクションで以下を行います。
+データをプレビューした後、それを Datadog にマッピングします。[{{< ui >}}Structure your model{{< /ui >}}] セクションで以下を行います。
 
 1. {{< ui >}}Metric SQL Model Name{{< /ui >}} を追加します (例: **Revenue Orders**)。
-1. (オプション) この SQL モデルが重要な意思決定のために承認されていることを示すには、{{< ui >}}Mark as certified{{< /ui >}} をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
+1. (オプション) この SQL モデルが重要な意思決定のために承認されていることを示すには、[{{< ui >}}Mark as certified{{< /ui >}}] をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
 1. ウェアハウステーブルの列を以下にマッピングします。
    - {{< ui >}}Timestamp column{{< /ui >}}
      - メトリクスイベントに関連付けられたタイムスタンプをリストする列。
      - 分析には、対象が実験に登録された後に作成された行のみが含まれます。
    - {{< ui >}}Subject Type{{< /ui >}}
      - Datadog が実験グループをランダムに割り当てるために使用する属性。
-     - [Subject Types][12] ページで、サブジェクトタイプとそのデフォルトのウェアハウス列を定義できます。たとえば、個々のユーザーには `user_id` を、組織アカウントには `org_id` を使用できます。
+     - [Subject Types] (対象タイプ) [12] ページで、対象タイプとそのデフォルトのウェアハウス列を定義できます。たとえば、個々のユーザーには `user_id` を、組織アカウントには `org_id` を使用できます。
    - {{< ui >}}Measures{{< /ui >}} (オプション)
      - Datadog がメトリクスに集計できるウェアハウステーブルの数値列 (例: `revenue` または `amount` 列)。
-     - 各 SQL モデルには、{{< ui >}}each record{{< /ui >}} メジャーが自動的に含まれます。このメジャーを使用して、特定の実験サブジェクトについてテーブル内の関連する行数をカウントします。
-1. {{< ui >}}Create Metric SQL Model{{< /ui >}} をクリックして SQL モデルを保存します。
+     - 各 SQL モデルには、[{{< ui >}}each record{{< /ui >}}] メジャーが自動的に含まれます。このメジャーを使用して、特定の実験サブジェクトについてテーブル内の関連する行数をカウントします。
+1. [{{< ui >}}Create Metric SQL Model{{< /ui >}}] をクリックして SQL モデルを保存します。
 
 {{< img src="/product_analytics/experiment/exp_create_metrics_sql_model_structure4.png" alt="モデルの構造パネル。メトリクス SQL モデル名フィールドが「収益注文」に設定されて強調表示され、認定済みトグルとしてマークされ、タイムスタンプ列が REVENUE_TIMESTAMP に設定され、対象タイプがユーザー (@usr.id) に設定されて列セレクターで USER_ID が選択され、メジャードロップダウンに「収益注文 (各レコード)」が表示され、メトリクス SQL モデルの作成ボタンが強調表示されている。" style="width:80%;" >}}
 
@@ -119,17 +183,17 @@ SQL クエリを書き込んでデータを定義およびプレビューし、�
 SQL モデルを作成したら、それを使用してメトリクスを作成します。
 
 1. Datadog Product Analytics の [メトリクスページ][1] に移動します。
-1. {{< ui >}}Metrics{{< /ui >}} タブを選択し、右上隅の {{< ui >}}Create Metric{{< /ui >}} をクリックします。
+1. [{{< ui >}}Metrics{{< /ui >}}] タブを選択し、右上隅の [{{< ui >}}Create Metric{{< /ui >}}] をクリックします。
 1. {{< ui >}}Metric name{{< /ui >}} を追加し、必要に応じて {{< ui >}}Description{{< /ui >}} を追加します。
-1. {{< ui >}}Metric definition{{< /ui >}} セクションで、{{< ui >}}Select an event{{< /ui >}} をクリックしてイベントピッカーを開きます。右側のチャートは、メトリクスを構成するとリアルタイムで更新されます。
+1. [{{< ui >}}Metric definition{{< /ui >}}] セクションで、[{{< ui >}}Select an event{{< /ui >}}] をクリックしてイベントピッカーを開きます。右側のチャートは、メトリクスを構成するとリアルタイムで更新されます。
    1. 関連する SQL モデルを選択します。SQL モデルはそれぞれのソースの下に表示されます (例: **Snowflake** の下の **Revenue Orders**)。
 1. ドロップダウンから[集計方法](#aggregation-methods)を選択します。
-1. (オプション) {{< ui >}}Additional settings{{< /ui >}} セクションで、以下を行います。
-   1. このメトリクスが重要な意思決定のために承認されていることを示すには、{{< ui >}}Mark as certified{{< /ui >}} をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
+1. (オプション) [{{< ui >}}Additional settings{{< /ui >}}] セクションで、以下を行います。
+   1. このメトリクスが重要な意思決定のために承認されていることを示すには、[{{< ui >}}Mark as certified{{< /ui >}}] をオンにします。これには、Product Analytics 認定メトリクス書き込み権限が必要です。
    1. 必要に応じて [{{< ui >}}Experiment settings{{< /ui >}}](#advanced-options) および {{< ui >}}Units{{< /ui >}} を調整します。デフォルト設定は、ほとんどのユースケースに対応しています。
-1. {{< ui >}}Save{{< /ui >}} をクリックします。
+1. [{{< ui >}}Save{{< /ui >}}] をクリックします。
 
-{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="メトリクスの作成イベントピッカー。すべてのイベントが選択されており、左側には Snowflake、アクション、ビュー、セッション、エラー、ロングタスクなどのイベントタイプ、右側には Snowflake の下に収益注文 SQL モデルがハイライト表示されている。メジャー: amount とフィルタリング可能なディメンション: N/A が表示されている。" style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_metric_from_sqlmodel_2.png" alt="メトリクスの作成イベントピッカー。すべてのイベントが選択されており、左側には Snowflake、アクション、ビュー、セッション、エラー、ロングタスクなどのイベントタイプ、右側には Snowflake の下に収益注文 SQL モデルがハイライト表示されている。メジャー: 金額と、フィルタリング可能なディメンション: N/A が表示されている。" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [8]: /ja/experiments/guide/connecting_a_data_warehouse/
@@ -147,26 +211,26 @@ Datadog Experiments は、以下の集計方法をサポートしています。
 
 - {{< ui >}}Count of events{{< /ui >}} (デフォルト)
 - {{< ui >}}Count of unique users{{< /ui >}} (コンバージョンメトリクスに有用)
-- {{< ui >}}Sum of{{< /ui >}}イベントプロパティ (収益メトリクスに有用)
-- {{< ui >}}Distinct values of{{< /ui >}}イベントプロパティ (ユニークページビューメトリクスに有用)
-- イベントプロパティの {{< ui >}}Percentile{{< /ui >}} (レイテンシーメトリクスに有用)
-- {{< ui >}}Average of{{< /ui >}}イベントプロパティ (満足度メトリクスに有用)
+- イベントプロパティの {{< ui >}}Sum of{{< /ui >}} (合計) (収益メトリクスに有用)
+- イベントプロパティの {{< ui >}}Distinct values of{{< /ui >}} (個別の値) (ユニークページビューメトリクスに有用)
+- イベントプロパティの {{< ui >}}Percentile{{< /ui >}} (パーセンタイル) (レイテンシーメトリクスに有用)
+- イベントプロパティの {{< ui >}}Average of{{< /ui >}} (平均) (満足度メトリクスに有用)
 
-{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="集計方法のドロップダウン。上部にユニークユーザー数 (選択済み) とイベント数が表示され、その後にメジャーを選択セクションが続き、合計、個別の値、パーセンタイル、平均のオプションがあり、右側に「イベントを実行したユーザー数」という説明が表示されている。" style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_default_metric_agg_1.png" alt="集計方法のドロップダウン。上部にユニークユーザー数 (選択済み) とイベント数が表示され、その後に [SELECT A MEASURE] (メジャーを選択) セクションが続き、合計、個別の値、パーセンタイル、平均のオプションがあり、右側に「イベントを実行したユーザー数」という説明が表示されている。" style="width:90%;" >}}
 
-Datadog は、各実験対象のメトリクスを計算します。たとえば、ユーザーごとにランダム化された実験における {{< ui >}}Count of events{{< /ui >}} メトリクスは、バリアント (実験グループ) 内の全ユーザーのイベント総数をそのバリアント内のユーザー数で割って計算します。
+Datadog は、各実験対象のメトリクスを計算します。たとえば、ユーザーごとにランダム化された実験における [{{< ui >}}Count of events{{< /ui >}}] メトリクスは、バリアント (実験グループ) 内の全ユーザーのイベント総数をそのバリアント内のユーザー数で割って計算します。
 
 ### 比率メトリクス {#ratio-metrics}
 
-{{< ui >}}Create Ratio{{< /ui >}} をクリックすると、デフォルトの実験対象数以外の値でメトリクスを割ることができます。分母にはいずれかの[集計方法](#aggregation-methods)を使用できます。たとえば、購入数を製品ページビュー数で割ることで、登録ユーザー全体ではなくファネルの特定のステップにおけるコンバージョンを測定できます。
+[{{< ui >}}Create Ratio{{< /ui >}}] をクリックすると、デフォルトの実験対象数以外の値でメトリクスを割ることができます。分母にはいずれかの[集計方法](#aggregation-methods)を使用できます。たとえば、購入数を製品ページビュー数で割ることで、登録ユーザー全体ではなくファネルの特定のステップにおけるコンバージョンを測定できます。
 
 Datadog は、[デルタ法][2] を使用して分子と分母の間の相関関係を考慮します。
 
-{{< img src="/product_analytics/experiment/exp_create_ratio_new_ui.png" alt="メトリクス定義セクション。「カートに追加をクリック」イベントとイベント数の集計、フィルター追加オプション、その下に強調表示された比率作成ボタン、および認定済みとグルとしてマーク、実験設定、単位を含む、追加設定セクションが表示されている。" style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/exp_create_ratio_new_ui.png" alt="メトリクス定義セクション。「[ADD TO CART] をクリック」イベントとイベント数の集計、フィルター追加オプション、その下に強調表示された比率作成ボタン、および認定済みトグルとしてマーク、実験設定、単位を含む、追加設定セクションが表示されている。" style="width:90%;" >}}
 
 ## 高度なオプション {#advanced-options}
 
-Datadog Experiments は、以下の高度なオプションをサポートしています。これらはメトリクスを作成する際に、{{< ui >}}Additional settings{{< /ui >}} > {{< ui >}}Experiment settings{{< /ui >}} で変更できます。
+Datadog Experiments は、以下の高度なオプションをサポートしています。これらはメトリクスを作成する際に、[{{< ui >}}Additional settings{{< /ui >}}] > [{{< ui >}}Experiment settings{{< /ui >}}] で変更できます。
 
 期間フィルター
 : デフォルトでは、Datadog はユーザーの最初の接触から実験終了までのすべてのイベントを含めます。この設定を使用して、「7 日以内のセッション」のような期間制限のある値を測定します。期間フィルターを追加すると、メトリクスには、実験が最初にユーザーを登録した時点から始まる、指定された期間内のイベントのみが含まれます。

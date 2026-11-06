@@ -1,0 +1,143 @@
+---
+title: "Stepper"
+description: "Astro tag-components (Stepper/Step/StepperFinished) rendered as static HTML, with a headless Preact controller (client:load) driving accordion navigation, expand/collapse, and localStorage progress."
+type: interactive
+---
+
+A step-by-step guide. Steps render as static HTML at build time; a small Preact controller wires up navigation, an expand/collapse-all toggle, and progress persistence on the existing DOM.
+
+By default the stepper behaves as an accordion: only the active step's body is shown, and readers move through with **Next** / **Previous**, or by clicking a step title. Pass `open=true` to start with every step expanded.
+
+## Properties
+
+### `stepper` tag
+
+| Property | Type      | Default | Description                                                        |
+|----------|-----------|---------|--------------------------------------------------------------------|
+| `open`   | `boolean` | `false` | When true, all steps start expanded instead of as an accordion.    |
+| `level`  | `string`  | `h3`    | Heading level for step titles (`h1`–`h6`).                         |
+
+### `step` tag (child of `stepper`)
+
+| Property | Type     | Default | Description                          |
+|----------|----------|---------|--------------------------------------|
+| `title`  | `string` | —       | Required. The step's heading text.   |
+
+### `stepper-finished` tag (child of `stepper`)
+
+Optional. Its content is shown after the reader finishes the last step. No attributes.
+
+## Examples
+
+### Accordion (default)
+
+{% stepper %}
+{% step title="Install the Datadog Agent" %}
+Download and install the Agent for your platform.
+
+```shell
+DD_API_KEY=<YOUR_API_KEY> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+```
+{% /step %}
+{% step title="Configure the integration" %}
+Edit the configuration file and restart the Agent.
+{% /step %}
+{% step title="Verify data is flowing" %}
+Check the integration status in the Datadog UI.
+{% /step %}
+{% stepper-finished %}
+You're all set. Your data should now be flowing into Datadog.
+{% /stepper-finished %}
+{% /stepper %}
+
+### Expanded (`open=true`)
+
+{% stepper open=true %}
+{% step title="First step" %}
+This stepper starts fully expanded.
+{% /step %}
+{% step title="Second step" %}
+All step bodies are visible at once.
+{% /step %}
+{% /stepper %}
+
+### Single step
+
+{% stepper %}
+{% step title="The only step" %}
+A single-step stepper renders no connecting line.
+{% /step %}
+{% /stepper %}
+
+### Complex content (code blocks and tabs)
+
+{% stepper %}
+
+{% step title="Install the database" %}
+Run the following command to install FakeDB:
+
+```shell
+curl -fsSL https://fakedb.example.com/install.sh | bash
+```
+
+After the installation completes, verify that FakeDB is running:
+
+```shell
+fakedb --version
+```
+{% /step %}
+
+{% step title="Configure the database" %}
+
+Create a configuration file for FakeDB:
+
+{% tabs %}
+
+{% tab label="YAML" %}
+```yaml
+fakedb:
+  host: localhost
+  port: 5432
+  database: mydb
+  username: admin
+  password: secret
+  max_connections: 100
+  timeout: 30s
+```
+{% /tab %}
+
+{% tab label="JSON" %}
+```json
+{
+  "fakedb": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "mydb",
+    "username": "admin",
+    "password": "secret",
+    "max_connections": 100,
+    "timeout": "30s"
+  }
+}
+```
+{% /tab %}
+{% /tabs %}
+
+{% /step %}
+
+{% step title="Connect to the database" %}
+Start the FakeDB service and open a connection:
+
+```shell
+fakedb start
+fakedb connect --host localhost --port 5432 --database mydb --username admin
+```
+
+To verify the connection is working, run a test query:
+
+```shell
+fakedb query "SELECT 1;"
+```
+{% /step %}
+
+{% /stepper %}

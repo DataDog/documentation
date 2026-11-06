@@ -1,0 +1,13 @@
+{
+  "data": {
+    "type": "custom_oidc_provider_config",
+    "attributes": {
+      "provider_name": "oidc-de20b7e944abfac3",
+      "issuer_url": "https://oidc-de20b7e944abfac3.example.com",
+      "discovery_type": "oidc_discovery",
+      "audiences": [
+        "sdk-test"
+      ]
+    }
+  }
+}

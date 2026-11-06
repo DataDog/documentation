@@ -38,7 +38,13 @@
 {{/* Not in integrations edit existing docs file */}}
 
     {{ with $ctx.File }}
-        {{ $editLink = ( printf "https://github.com/DataDog/documentation/edit/master/hugo/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
+        {{ $filePath := $ctx.File.Path }}
+        {{/* Cdocs pages compile .mdoc.md to .md; link to the source file instead */}}
+        {{ $mdocPath := replaceRE `\.md$` ".mdoc.md" $filePath }}
+        {{ if fileExists (printf "content/%s/%s" $ctx.Page.Lang $mdocPath) }}
+            {{ $filePath = $mdocPath }}
+        {{ end }}
+        {{ $editLink = ( printf "https://github.com/DataDog/documentation/edit/master/hugo/content/%s/%s/" $ctx.Page.Lang $filePath ) }}
         {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
     {{ end }}
 

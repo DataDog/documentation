@@ -1,0 +1,31 @@
+---
+import styles from "./CardGrid.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import CardGridTooltips from "./CardGridTooltips";
+import type { CardGridProps } from "./cardGridTypes";
+
+type Props = CardGridProps;
+
+const cl = classListFactory(styles);
+
+const { id, card_width, tooltipCardIds, tooltipLabelsByCardId } = Astro.props;
+
+const gridStyle = `--card-grid-card-width: ${card_width}px`;
+
+// Hydrate only when a card actually needs a tooltip. Most grids have none, and
+// this keeps the tooltip code out of their client bundle.
+const needsTooltips = tooltipCardIds.length > 0;
+---
+
+<div id={id} class={cl("card-grid")} style={gridStyle}>
+  <slot />
+  {
+    needsTooltips && (
+      <CardGridTooltips
+        client:idle
+        externalContext={{ scope: id, entries: { cardEls: tooltipCardIds } }}
+        tooltipLabelsByCardId={tooltipLabelsByCardId}
+      />
+    )
+  }
+</div>

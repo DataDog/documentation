@@ -18,7 +18,7 @@ type: multi-code-lang
 Linux 호스트 또는 VM에서 APM에 단일 단계 계측(SSI)을 사용하여 추가 구성을 거치지 않고 한 번에 Datadog Agent를 설치하고 애플리케이션을 [계측][14]하세요. 
 
 {{< skill-callout
-    title="에이전트를 사용해 APM 설정하기"
+    title="에이전트로 APM 설정"
     text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
     action_name="copy_dd_apm_skill_install_cmd" >}}
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
@@ -26,7 +26,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ## 애플리케이션에서 APM 활성화 {#enable-apm-on-your-applications}
 
-<div class="alert alert-info">계속 진행하기 전에 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 호환성 가이드를 검토하여 환경이 호환되는지 확인하세요.</a></div>
+<div class="alert alert-info">계속 진행하기 전에 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 호환성 가이드</a>를 검토하여 환경이 호환되는지 확인하세요.</div>
 
 ### 새 Agent 설치 {#new-agent-installation}
 
@@ -53,40 +53,33 @@ Datadog Agent를 설치하지 않은 경우, 한 번에 Datadog Agent를 설치�
 
 To get a command pre-filled with your API key and site, go to the [Install the Datadog Agent on Linux][15] page and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}} under {{< ui >}}Core Observability{{< /ui >}}.
 
-{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux에 Datadog Agent 설치를 위한 인앱 지침의 'Agent 적용 범위 사용자 지정' 섹션" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux에 Datadog Agent 설치를 위한 인앱 지침의 'Customize your Agent coverage' 섹션" style="width:100%;" >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 드롭다운에서 SDK 버전을 선택하려면 {{< ui >}}Customize Library Versions{{< /ui >}}를 클릭하세요.
 
-{{< img src="tracing/trace_collection/customize_library_versions.png" alt="Linux에 Datadog Agent 설치를 위한 지침의 '라이브러리 버전 사용자 지정' 드롭다운" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/customize_library_versions.png" alt="Linux에 Datadog Agent 설치를 위한 지침의 'Customize library versions' 드롭다운" style="width:100%;" >}}
 {{< /site-region >}}
 
 그런 다음 생성된 명령을 복사하여 실행하세요.
 
 ### 기존 Agent 설치 {#existing-agent-installation}
 
-Datadog Agent를 이미 설치한 경우, 호스트에서 [새 Agent 설치](#new-agent-installation)의 Agent 설치 명령을 다시 실행합니다. 이 명령을 실행하면 기존 Agent 업데이트와 SSI 활성화 작업이 이루어집니다.
+Datadog Agent가 이미 설치되어 있다면 Datadog에서 원격으로 SSI를 활성화합니다. 각 호스트에서 명령을 실행할 필요는 없습니다.
 
-또는 Fleet Automation을 사용하여 Datadog에서 SSI를 활성화합니다.
+1. Datadog에서 [**APM > Instrument a Service**][21]로 이동합니다.
 
-1. Datadog에서 [**Fleet Automation > Configuration**][21]으로 이동합니다.
-1. {{< ui >}}Configure Agents{{< /ui >}}를 클릭합니다.
-1. 필터를 적용하여 구성하려는 에이전트를 선택한 다음 **Next**를 클릭합니다.
+1. {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}에서 {{< ui >}}Deploy on existing hosts{{< /ui >}}를 선택하여 Datadog Agent를 통해 원격으로 서비스를 계측합니다.
 
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="Fleet Automation의 에이전트 필터링 화면(환경, 운영 체제, 호스트 이름별로 범위를 지정하는 옵션 표시)" style="width:100%;" >}}
+1. {{< ui >}}Which hosts should we instrument?{{< /ui >}}에서 범위 필터({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}})를 사용하여 호스트 범위를 좁힙니다. 그런 다음 {{< ui >}}Eligible for deployment{{< /ui >}} 탭에서 계측할 Agent를 선택합니다. 계측할 수 없는 호스트는 {{< ui >}}Excluded from deployment{{< /ui >}} 탭에 표시됩니다.
 
-1. {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} 타일을 클릭한 다음 {{< ui >}}Next{{< /ui >}}를 클릭합니다.
+1. {{< ui >}}Configure SDKs installation{{< /ui >}}에서 {{< ui >}}Yes{{< /ui >}}를 클릭하여 Datadog이 트레이싱 SDK를 자동으로 설치하도록 합니다. 최신 버전 대신 특정 SDK 버전을 고정하려면 {{< ui >}}Customize library versions{{< /ui >}}를 확장합니다.
 
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="Fleet Automation의 제품 선택 화면(Application Performance Monitoring(APM) 타일 표시)" style="width:80%;" >}}
+1. {{< ui >}}Configure rollout strategy{{< /ui >}}에서 한 번에 배포할 Agent의 비율을 선택합니다. Datadog은 결과 단계와 예상 소요 시간을 보여줍니다. 3개의 Agent가 연속으로 실패하거나 실패율이 전체의 10%에 도달하면 배포가 자동으로 일시 중지됩니다. 나중에 배포를 다시 실행할 수 있습니다.
 
-1. {{< ui >}}Configure SDKs Installation{{< /ui >}} 화면에서 {{< ui >}}Yes{{< /ui >}}을 클릭하여 SDK를 자동으로 설치합니다. {{< ui >}}Use latest version{{< /ui >}}을 선택하거나 선택을 해제하여 개별 SDK 버전을 지정합니다.
+1. {{< ui >}}Review and apply APM instrumentation{{< /ui >}}에서 {{< ui >}}Configuration Summary{{< /ui >}}를 검사하고({{< ui >}}Summary{{< /ui >}}와 {{< ui >}}YAML{{< /ui >}} 사이에서 전환), {{< ui >}}Apply Instrumentation{{< /ui >}}을 클릭합니다.
 
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="Fleet Automation의 SDK 설치 구성 화면(자동 SDK 설치를 활성화하고 버전을 선택할 수 있는 옵션 표시)" style="width:60%;" >}}
-
-1. **Next**를 클릭합니다.
-1.  구성을 검토하고 {{< ui >}}Deploy Configuration{{< /ui >}}을 클릭합니다.
-
-##  설치 검증 {#verify-the-installation}
+##  설치 확인 {#verify-the-installation}
 
 1. Agent가 실행 중인지 확인합니다.
 
@@ -150,7 +143,7 @@ SDK 버전을 업데이트하려면 다음 단계를 따르세요.
 1. Datadog에서 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20]로 이동합니다.
 1. {{< ui >}}Add or Edit Rules{{< /ui >}}를 클릭합니다.
 1. 계측 규칙을 정의합니다.
-   1. {{< ui >}}Add New Rule{{< /ui >}}를 클릭한 다음 {{< ui >}}Allow Rule{{< /ui >}} 또는 {{< ui >}}Block Rule{{< /ui >}}을 선택하여 일치 프로세스를 계측할지 여부를 지정합니다.
+   1. {{< ui >}}Add New Rule{{< /ui >}}을 클릭한 다음 {{< ui >}}Allow Rule{{< /ui >}} 또는 {{< ui >}}Block Rule{{< /ui >}}을 선택하여 일치 프로세스를 계측할지 여부를 지정합니다.
    1. 규칙 이름을 지정합니다.
    1. 하나 이상의 조건을 추가합니다. 자세한 내용은 [규칙 조건 정의](#define-rule-conditions)를 참조하세요.
 
@@ -206,7 +199,7 @@ Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배�
 
 {{< /collapse-content >}}
 
-## Agent에서 Single Step APM 계측 제거 {#remove-single-step-apm-instrumentation-from-your-agent}
+## Agent에서 단일 단계 APM 계측 제거 {#remove-single-step-apm-instrumentation-from-your-agent}
 
 인프라의 모든 서비스에서 트레이스 생성을 중지하려면 다음 단계를 따르세요.
 
@@ -237,6 +230,6 @@ SSI를 사용한 APM 활성화와 관련한 문제가 발생하는 경우, [SSI 
 [18]: /ko/tracing/trace_collection/library_config/application_monitoring_yaml/
 [19]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[21]: https://app.datadoghq.com/fleet/agent-management
+[21]: https://app.datadoghq.com/apm/instrumentation
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
