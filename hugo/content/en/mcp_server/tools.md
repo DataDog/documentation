@@ -3358,6 +3358,96 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+## Teams
+
+Tools for reading and managing [Datadog Teams](/account_management/teams/). Enable them with `toolsets=teams`, or include them through `toolsets=all`.
+
+All Teams tools require `MCP Read`. Write tools also require your organization to enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
+
+### `list_teams`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists one page of teams in your organization. Use the results to find team IDs.
+
+- Find the Payments team.
+
+### `get_team`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Returns details for a team, including its name, handle, description, and member count.
+
+- Show the details of the Payments team.
+
+### `get_team_memberships`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists one page of team members and their roles.
+
+- Who belongs to the Payments team?
+
+### `get_user_teams`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists the teams a user belongs to and their role on each team.
+
+- Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
+
+### `get_team_hierarchy`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists one page of parent-child relationships between teams. Filter by parent team or sub-team ID.
+
+- Which teams are children of the Payments team?
+
+### `get_team_links`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists the links published by a team.
+
+- Show the links for the Payments team.
+
+### `get_team_notification_rules`
+Toolset: `teams`\
+Permissions required: `Teams Read`\
+Lists the notification rules configured for a team.
+
+- Show the Payments team notification rules.
+
+### `create_team`
+Toolset: `teams`\
+Permissions required: `Teams Read`, `Teams Manage`, and `MCP Write`\
+Creates a team with a handle, name, and optional description.
+
+- Create a team named Payments with the handle `payments`.
+
+### `update_team`
+Toolset: `teams`\
+Permissions required: `Teams Read` and `MCP Write`\
+Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change.
+
+- Change the Payments team description to "Owns payment processing."
+
+### `delete_team`
+Toolset: `teams`\
+Permissions required: `Teams Read`, `Teams Manage`, and `MCP Write`\
+Permanently deletes a team. Requires explicit confirmation before deletion.
+
+- Delete the Payments team after confirmation.
+
+### `add_team_membership`
+Toolset: `teams`\
+Permissions required: `Teams Read` and `MCP Write`\
+Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. Granting the admin role requires explicit confirmation.
+
+- Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
+
+### `delete_team_membership`
+Toolset: `teams`\
+Permissions required: `Teams Read` and `MCP Write`\
+Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. Requires explicit confirmation.
+
+- Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team after confirmation.
+
 ## Watchdog
 
 Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
