@@ -25,7 +25,7 @@ further_reading:
   text: ログ収集のトラブルシューティングガイド
 - link: /glossary/#tail
   tag: 用語集
-  text: 用語集の "tail" の項目
+  text: 用語集の "テール" の項目
 - link: https://github.com/DataDog/serilog-sinks-datadog-logs/
   tag: GitHub パッケージ
   text: Serilog.Sinks.Datadog.Logs パッケージ
@@ -41,7 +41,7 @@ C# のログを Datadog に送信するには、次のいずれかの方法を�
 
 C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]監視することです。これにより、Datadog Agent が追加のメタデータでログを強化することができます。
 
-Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
+Datadog は、[カスタムパース規則][1] の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
 ファイルテールロギングは、以下のフレームワークをサポートしています。
 - Serilog
@@ -273,7 +273,7 @@ JSON でログを記録する方がメリットが多いですが、未加工の
 
 ### Datadog Agent の構成{#configure-the-datadog-agent}
 
-[ログ収集が有効][2]になったら、ログファイルを追跡して Datadog に送信する[カスタムログ収集][3]を設定します。
+[ログ収集が有効][2]になったら、ログファイルをテール追跡して Datadog に送信する[カスタムログ収集][3]を設定します。
 
 1. `csharp.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][4]に作成します。
 2. `csharp.d/` に以下の内容で `conf.yaml` ファイルを作成します。
@@ -299,9 +299,9 @@ JSON でログを記録する方がメリットが多いですが、未加工の
     ```
 3. Agent ユーザーにログファイルの読み取り権限があることを確認します。
 4. [Agent を再起動][5]します。
-5. [Agent の status サブコマンド][6]を実行し、`Checks` セクションで `csharp` を探し、ログが Datadog に正常に送信されることを確認します。
+5. [Agent の status サブコマンド][6]を実行し、`csharp` が {{< ui >}}Checks{{< /ui >}} セクションに表示されているか確認して、ログが Datadog に正常に送信されていることを確かめてください。
 
-ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][7]し、ログ属性を抽出します。[ログエクスプローラー][8]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+ログが JSON 形式の場合、Datadog は自動的に[ログメッセージをパース][7]し、ログ属性を抽出します。[ログエクスプローラー][8]を使用して、ログを表示し、トラブルシューティングを行うことができます。
 
 ### ログとトレース全体のサービスを接続 {#connect-your-service-across-logs-and-traces}
 
@@ -312,7 +312,7 @@ JSON でログを記録する方がメリットが多いですが、未加工の
 
 ## APM によるエージェントレスロギング {#agentless-logging-with-apm}
 
-コードを変更することなく、.NET APM 自動インスツルメンテーションライブラリを使用して、アプリケーションから Datadog にログを直接ストリーミングできます。このアプローチではログを Datadog に直接送信するため、Datadog Agent が提供する[機能 (機密データのスクラビングなど)][10]の恩恵を受けることはありません。そのため、可能な限りファイルテールロギングを使用することを推奨しますが、[Azure App Service][11] を使用する場合など、ファイルテールロギングを使用できない環境では有用です。なお、[Sensitive Data Scanner][12] によるサーバー側のスクラビング機能は引き続き利用できる点は特筆すべきです。
+コードを変更することなく、.NET APM 自動インスツルメンテーションライブラリを使用して、アプリケーションから Datadog にログを直接ストリーミングできます。このアプローチではログを Datadog に直接送信するため、Datadog Agent が提供する[機能 (機密データのスクラビングなど)][10] の恩恵を受けることはありません。そのため、可能な限りファイルテールロギングを使用することを推奨しますが、[Azure App Service][11] を使用する場合など、ファイルテールロギングを使用できない環境では有用です。なお、[Sensitive Data Scanner][12] によるサーバー側のスクラビング機能は引き続き利用できる点は特筆すべきです。
 
 エージェントレスロギング (「ダイレクトログ送信」とも呼ばれる) は、以下のフレームワークに対応しています。
 - Serilog (v1.0+)
@@ -358,7 +358,7 @@ Tracer バージョン 3.24.0 以降、デフォルトで有効です。
 **例**: `Serilog;Log4Net;NLog`
 
 <div class="alert alert-danger">
-  <strong>注:</strong>  <code>Microsoft.Extensions.Logging</code>と併用してログフレームワークを使用している場合は、通常、そのフレームワーク名を使用する必要があります。例えば、<a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a> を使用している場合は、 <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>を設定する必要があります。
+  <strong>注:</strong> <code>Microsoft.Extensions.Logging</code>と併用してログフレームワークを使用している場合は、通常、そのフレームワーク名を使用する必要があります。たとえば、<a href="https://github.com/serilog/serilog-extensions-logging">Serilog.Extensions.Logging</a> を使用している場合は、 <code>DD_LOGS_DIRECT_SUBMISSION_INTEGRATIONS=Serilog</code>を設定する必要があります。
 </div>
 
 これらの環境変数を設定した後、アプリケーションを再起動します。
@@ -368,7 +368,7 @@ Tracer バージョン 3.24.0 以降、デフォルトで有効です。
 以下の環境変数を使用して、エージェントレスログ収集のいくつかの側面をさらにカスタマイズすることができます。
 
 `DD_LOGS_DIRECT_SUBMISSION_MINIMUM_LEVEL`
-: Datadogに送信される_前に_、レベルでログをフィルタリングできるようにします。次のいずれかの値に設定してください: `Verbose`、`Debug`、`Information`、`Warning`、`Error`、`Critical`。これらは、サポートされているログフレームワークにおける同等のレベルに対応します。<br>
+: Datadog に送信される_前に_、レベルでログをフィルタリングできるようにします。次のいずれかの値に設定してください: `Verbose`、`Debug`、`Information`、`Warning`、`Error`、`Critical`。これらは、サポートされているログフレームワークにおける同等のレベルに対応します。<br>
 **デフォルト**: `Information`
 
 `DD_LOGS_DIRECT_SUBMISSION_HOST`
@@ -402,7 +402,7 @@ Tracer バージョン 3.24.0 以降、デフォルトで有効です。
 : 新しいログを送信する前にチェックするまでの待機時間 (秒) を設定します。<br>
 **デフォルト**: `1`
 
-`Microsoft.Extensions.Logging` インテグレーションを使用している場合は、`ILogger` に組み込まれている標準機能を使用して、Datadog に送信されるログをフィルタリングできます。キー `"Datadog"` を使用して直接送信プロバイダーを識別し、各ネームスペースの最小ログレベルを設定します。例えば、`appSettings.json` に以下を追加すると、`Warning` 未満のレベルのログが Datadog に送信されないようにできます。..NET SDK v2.20.0 で導入されました。
+`Microsoft.Extensions.Logging` インテグレーションを使用している場合は、`ILogger` に組み込まれている標準機能を使用して、Datadog に送信されるログをフィルタリングできます。キー `"Datadog"` を使用して直接送信プロバイダーを識別し、各ネームスペースの最小ログレベルを設定します。たとえば、`appSettings.json` に以下を追加すると、`Warning` 未満のレベルのログが Datadog に送信されないようにできます。..NET SDK v2.20.0 で導入されました。
 
 ```json
 {
@@ -418,8 +418,8 @@ Tracer バージョン 3.24.0 以降、デフォルトで有効です。
 
 ## Serilog シンクによるエージェントレスロギング {#agentless-logging-with-serilog-sink}
 
-<div class="alert alert-info"> <code>0.2.0</code>以降では、 <code>appsettings.json</code> ファイルを使用して <a href="https://github.com/serilog/serilog-settings-configuration"> パッケージの Datadog シンクを構成できます。<code>Serilog.Setting.Configuration</code></a> パッケージ。
-詳細については、<a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> パッケージを参照してください。</div>
+<div class="alert alert-info"> <code>0.2.0</code>以降では、Datadog シンクを構成できます。その際、 <code>appsettings.json</code> ファイルを、<a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> パッケージと共に使用します。
+詳細については、<a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs"><code>Serilog.Sinks.Datadog.Logs</code></a> パッケージを参照してください。</div>
 
 もし、ファイルテールロギングや APM エージェントレスロギングを使用することができず、`Serilog` フレームワークを使用している場合は、Datadog [Serilog シンク][19]を使用して直接 Datadog にログを送信することが可能です。
 
@@ -430,7 +430,7 @@ Tracer バージョン 3.24.0 以降、デフォルトで有効です。
 PM> Install-Package Serilog.Sinks.Datadog.Logs
 ```
 
-次に、アプリケーションでロガーを直接初期化します。必ず[ご使用の `<API_KEY>`][15] を追加してください。
+次に、アプリケーションでロガーを直接初期化します。必ず [ご使用の `<API_KEY>`][15] を追加してください。
 
 ```csharp
 using (var log = new LoggerConfiguration()

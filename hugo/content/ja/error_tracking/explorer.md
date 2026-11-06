@@ -1,118 +1,117 @@
 ---
-description: Error Tracking Explorer の概要を確認します。
+description: Error Tracking エクスプローラーについて学びます。
 further_reading:
 - link: /monitors/types/error_tracking
   tag: ドキュメント
-  text: Error Tracking Monitor について
-title: Error Tracking Explorer
+  text: Error Tracking モニターについて
+title: Error Tracking エクスプローラー
 ---
+## 概要{#overview}
 
-## 概要
+{{< img src="error_tracking/error-tracking-overview-3.png" alt="Error Tracking エクスプローラーにおける課題の詳細" style="width:100%;" >}}
 
-{{< img src="error_tracking/error-tracking-overview-3.png" alt="Error Tracking Explorer における Issue の詳細" style="width:100%;" >}}
+Error Tracking エクスプローラーでは、問題の表示、フィルタリング、調査を行えます。問題とは、同じバグに関連する類似のエラーのグループです。Datadog は、エラータイプ、エラーメッセージ、スタックトレースなどの属性を使用して各エラーのフィンガープリントを計算し、問題を作成します。同じフィンガープリントを持つエラーは同じ問題にグループ化されます。
 
-Error Tracking Explorer では、Issue の表示、フィルタリング、調査が行えます。Issue とは、同じバグに紐づく類似エラーをまとめたグループです。Datadog は、エラー タイプ、エラー メッセージ、スタック トレースなどの属性をもとに各エラーのフィンガープリントを計算して Issue を作成します。フィンガープリントが同じエラーは、同一の Issue としてグループ化されます。
+## 問題を調べる {#explore-your-issues}
 
-## Issue を探索する
+Error Tracking エクスプローラーに表示される各項目が問題であり、以下のようなエラーに関する概要情報が含まれています。
 
-Error Tracking Explorer に表示される各項目は Issue です。Issue には、次のようなエラーの概要情報が含まれます:
+-   エラータイプやエラーメッセージ
+-   基になるエラーが発生したファイルのパス
+-   問題の存続期間に関する重要な情報:
+    -   確認された最初と最後の時期
+    -   経時的な発生グラフ
+    -   指定期間内の発生回数
 
--   エラー タイプとエラー メッセージ
--   根本となるエラーが発生したファイルへのパス
--   Issue のライフサイクルに関する重要情報:
-    -   最初に検出された日時と最後に検出された日時
-    -   発生回数の推移グラフ
-    -   選択した期間における発生回数
+問題には以下のタグも付けられます。
+- `New` 問題が初めて確認されたのが過去 2 日以内であり、状態が [{{< ui >}}FOR REVIEW{{< /ui >}}] (レビュー対象) である場合 (「[問題の状態][5]」を参照)。
+- `Regression` 問題が [{{< ui >}}RESOLVED{{< /ui >}}] (解決済み) で、新しいバージョンで再度発生した場合 (「[回帰検出][6]」を参照)。
+- `Crash` アプリケーションがクラッシュした場合
+- [疑わしい原因][3]がある場合
 
-また、Issue には次のタグが付きます:
-- `New`: Issue が 2 日未満前に初めて検出され、状態が **FOR REVIEW** の場合 (詳細: [Issue の状態][5])
-- `Regression`: Issue が **RESOLVED** だったものの、新しいバージョンで再発した場合 (詳細: [Regression Detection][6])
-- `Crash`: アプリケーション クラッシュが発生した場合
-- [Suspected Cause][3] が付与されている場合
-
-### 時間範囲
+### 時間範囲 {#time-range}
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking の時間範囲" style="width:80%;" >}}
 
-Explorer の右上には、タイム ラインとして時間範囲が表示されます。この機能により、選択した期間内にエラー発生がある Issue のみを表示できます。時間範囲は、ドロップダウンからプリセットの範囲を選択して変更します。
+時間範囲は、エクスプローラーの右上にタイムラインとして表示されます。この機能を使用すると、選択した期間内にエラーが発生した問題を表示できます。時間範囲を変更するには、ドロップダウンから事前設定された範囲を選択します。
 
-### 並び替え
+### 並べ替え {#sorting}
 
-リスト内の Issue は、次のいずれかの方法で並び替えできます:
--   **Relevance**: 複数の特性を組み合わせて、コードに関係するもの、最近のもの、急増しているものを優先表示します。Error Tracking は、Issue の経過時間、直近 1 日の発生回数、直近 1 時間の目立った増加、アプリケーション クラッシュを引き起こしたかどうかを分析します。
--   **Count**: 選択した時間範囲における総発生回数で並び替えます。
--   **Newest**: 初めて検出された日時が新しい順に並び替えます。
--   **Impacted Sessions**: 影響を受けた [RUM セッション][4] 数で並び替えます。
+以下のオプションのいずれかを使用して、リスト内の問題を並べ替えます。
+-   [{{< ui >}}Relevance{{< /ui >}}] (関連性) は、問題の複数の特徴を組み合わせて、コード関連の問題、最近発生した問題、急増している問題に優先順位を付けます。Error Tracking では、問題の経過時間、過去 1 日間の発生回数、過去 1 時間の顕著な増加、アプリケーションのクラッシュを引き起こしたかどうかを分析します。
+-   [{{< ui >}}Count{{< /ui >}}] (回数) は、選択した時間範囲における合計発生回数に基づいて問題を並べ替えます。
+-   [{{< ui >}}Newest{{< /ui >}}] (最初) は、最初に確認された日時で問題を並べ替えます。
+-   [{{< ui >}}Impacted Sessions{{< /ui >}}] (影響を受けるセッション) は、影響を受ける [RUM セッション][4]の数で問題を並べ替えます。
 
-### ファセット
+### ファセット {#facets}
 
 {{< img src="/error_tracking/facets-panel-2.png" alt="Error Tracking のファセット" style="width:100%;" >}}
 
-Error Tracking は、Issue からあらかじめ定義された属性を自動でインデックス化し、ファセットを作成します。ファセットでは、選択した期間における属性のユニークな値を一覧表示し、該当する Issue 数などの簡易的な分析情報も確認できます。Facet を使うと、指定した属性で Issue を絞り込んだり、切り口を変えて分析したりできます。
+Error Tracking は、問題の事前定義された属性のリストを自動的にインデックス化し、それを基にファセットを作成します。ファセットには、選択した期間における属性の個別のメンバーがすべて表示され、該当する問題の数などの基本的な分析情報が提供されます。ファセットを使用すると、特定の属性に基づいて問題を絞り込んだり、切り口を変えて分析することができます。
 
-よく使われるエラー属性の例:
+よく使用されるエラー属性には、以下のようなものがあります。
 | 属性 | 説明 |
 |-----------|-------------|
-| `error.message` | エラーに関連付けられたメッセージ。 |
-| `error.type` | エラーのタイプまたはクラス。 |
-| `error.stack` | エラーに関連付けられたスタック トレース。 |
-| `error.handling` | エラーが処理済みかどうかを示します。APM エラーは、親スパンが成功した処理 (`HTTP 200`, `gRPC OK`) もしくは成功したエラー処理 (`HTTP 400`, `gRPC NOT_FOUND`) を報告した場合に `handled` と見なされます。RUM エラーは、コード内で手動キャプチャされていない場合に `unhandled` となります。 |
+| `error.message`| エラーに関連付けられたメッセージ。|
+| `error.type` | エラーのタイプまたはクラス。|
+| `error.stack` | エラーに関連付けられたスタックトレース。|
+| `error.handling` | エラーが処理済みかどうかを示します。APM エラーは、親スパンが処理の成功 (`HTTP 200`、`gRPC OK`) またはエラー処理の成功 (`HTTP 400`、`gRPC NOT_FOUND`) を報告した場合に `handled` と見なされます。RUM エラーがコード内で手動でキャプチャされていない場合は `unhandled` となります。|
 
-Edit アイコンをクリックすると、表示 / 非表示を切り替えられるファセットの一覧を確認できます。
+編集アイコンをクリックすると、ビューでの表示と非表示を切り替えることができるファセットの一覧が表示されます。
 
-{{< img src="/error_tracking/error-tracking-facets.png" alt="鉛筆アイコンをクリックして、表示中の Error Tracking ファセットを表示 / 非表示に切り替えます。" style="width:100%;" >}}
+{{< img src="/error_tracking/error-tracking-facets.png" alt="鉛筆アイコンをクリックして、利用可能な Error Tracking のファセットのビューでの表示と非表示を切り替えます。" style="width:100%;" >}}
 
-### Issue レベル フィルター
+### 問題レベルのフィルター {#issue-level-filters}
 
-エラー イベントに加えて、Error Tracking には表示中の Issue 一覧をより細かく絞り込むための Issue レベル フィルターが用意されています。
+Error Tracking では、エラーイベントに加えて、問題レベルのフィルターを使用して表示される問題を絞り込むことができます。
 
-{{< img src="error_tracking/issue-level-filters-2.png" alt="Error Tracking の Issue レベル フィルター" style="width:100%;" >}}
+{{< img src="error_tracking/issue-level-filters-2.png" alt="Error Tracking における問題レベルのフィルター" style="width:100%;" >}}
 
-#### ソース
+#### ソース {#sources}
 
-Error Tracking は、複数の Datadog 製品 (RUM, Logs, APM) のエラーを 1 つのビューに統合し、スタック全体を横断してエラーの監視とトラブル シューティングができるようにします。Explorer では、**All**、**Browser**、**Mobile**、**Backend** の Issue を表示対象として選べます。
+Error Tracking では、複数の Datadog 製品 (RUM、Logs、APM) のエラーが 1 つのビューにまとめて表示されるため、スタック全体でエラーを監視し、トラブルシューティングすることができます。エクスプローラーに表示する問題を [{{< ui >}}All{{< /ui >}}] (すべて)、[{{< ui >}}Browser{{< /ui >}}] (ブラウザ)、[{{< ui >}}Mobile{{< /ui >}}] (モバイル)、または [{{< ui >}}Backend{{< /ui >}}] (バックエンド) の中から選択できます。
 
-さらに粒度を上げたい場合は、特定のログ ソースや SDK で絞り込んだり、プログラミング言語単位でスコープを限定したりできます。
+より細かく絞り込むには、特定のログソースまたは SDK で問題を絞り込むか、スコープをプログラミング言語に設定します。
 
-#### 修正案あり
+#### 修正案あり {#fix-available}
 
-AI 生成の修正案が用意されている Issue のみを表示し、問題を素早く解消できるようにします。
+AI が生成した修正案がある問題のみを表示して、問題をすばやく解決できるようにします。
 
-#### チーム フィルター
+#### チームフィルター {#teams-filters}
 
-[Issue Team Ownership][2] を使うと、Git `CODEOWNERS` とサービス オーナー情報に基づいて、チームに関連する Issue をすばやく特定できます。
+[Issue Team Ownership][2] を使用すると、Git `CODEOWNERS` とサービス所有者によって、自分のチームに関連する問題を迅速に特定できます。
 
-#### 担当者
+#### 担当者 {#assigned-to}
 
-Issue を自分、または最も詳しいメンバーに割り当てて追跡できます。担当者で絞り込めるため、Issue の一覧を簡単に整理できます。
+問題を追跡して自分自身や最も知識が豊富なチームメンバーに割り当て、問題のリストを担当者で簡単に絞り込むことができます。
 
-#### 推定原因
+#### 疑わしい原因 {#suspected-cause}
 
-[推定原因][3] により、エラーの絞り込みと優先順位付けを素早く行えます。想定される根本原因により焦点を当てやすくなり、チームがより効率的に対処できます。
+[疑わしい原因][3]を使用すると、エラーをすばやく絞り込んで優先順位を付けられるため、チームが想定される根本原因により効果的に対処できます。
 
-## Issue を確認する
+## 問題を調べる {#inspect-an-issue}
 
-任意の Issue をクリックすると Issue パネルが開き、より詳しい情報を確認できます。
+問題をクリックすると、問題パネルが開いて詳細が表示されます。
 
-{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="Issue の要約が表示される Error Tracking Issue パネル上部" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue_summary_2.png" alt="問題の概要が表示されている Error Tracking 問題パネルの上部" style="width:80%;" >}}
 
-トラブル シューティングに必要な概要情報は、パネル上部にまとまっています。ここから、ライフサイクル (初回 / 最終の発生日時、総発生回数、時間経過に伴う発生回数) を把握できます。
+問題のトラブルシューティングに必要な概要情報は、パネルの上部に示されます。ここで、特定の問題のライフサイクル (最初と最後の発生日、総発生回数、一定期間の発生数の変化) を確認できます。
 
-{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="エラー サンプルが表示される Error Tracking Issue パネル下部" style="width:80%;" >}}
+{{< img src="real_user_monitoring/error_tracking/error_sample_2.png" alt="エラーのサンプルが表示されている Error Tracking 問題パネルの下部" style="width:80%;" >}}
 
-Issue パネルに表示される内容は、エラーのソースによって異なります。たとえば APM エラーから作成された Issue では、リソース名やオペレーション名などのエラー スパン タグが表示され、関連 Trace や紐づく Logs へ直接アクセスできます。
+問題パネルに表示される情報は、エラーソースによって異なります。たとえば、APM エラーから作成された問題の場合は、リソースや操作名などのエラースパンタグが表示され、関連するトレースやそのトレースにリンクされているログに直接アクセスできます。
 
-パネル下部では、該当 Issue に紐づくエラー サンプルを切り替えて確認できます。各エラー サンプルでは、エラーのスタック トレースや影響を受けたユーザーの特性など、原因調査に役立つ情報を参照できます。
+問題パネルの下部では、関連する問題のエラーのサンプルを参照できます。各エラーサンプルでは、エラーのスタックトレースや影響を受けたユーザーの特性などのトラブルシューティング情報を確認できます。
 
-## 新規 / 影響の大きいエラーのアラートを受け取る
+## 新規または影響の大きいエラーに関するアラートを受け取る {#get-alerted-on-new-or-impactful-errors}
 
-新しい Issue を発生直後に把握できれば、重大化する前に先回りして特定と修正が行えます。Error Tracking monitor では、新規 Issue や、システムまたはユーザーへの影響が大きい Issue を追跡できます (詳細: [Error Tracking Monitors][7])。
+新しい問題を発生してすぐに把握できれば、重大化する前に先手を打って特定し、修正できます。Error Tracking モニターでは、新しい問題や、システムまたはユーザーへの影響が大きい問題を追跡できます ([「Error Tracking モニター][7]」を参照)。
 
-Explorer での検索クエリは、そのままエクスポートして、同じスコープで Error Tracking Monitor を作成できます:
+エクスプローラーから検索クエリを直接エクスポートして、関連するスコープで Error Tracking モニターを作成できます。
 
-{{< img src="/error_tracking/create-monitor.mp4" alt="検索クエリをエクスポートして Error Tracking Monitor を作成する" video=true >}}
+{{< img src="/error_tracking/create-monitor.mp4" alt="検索クエリを Error Tracking モニターにエクスポートする" video=true >}}
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
