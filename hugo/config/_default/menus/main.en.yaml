@@ -5858,6 +5858,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_prompt_tracking
       weight: 311
+    - name: Agent Tracking
+      url: llm_observability/instrument/agent_tracking
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_agent_tracking
+      weight: 312
     - name: Multimodal
       url: llm_observability/instrument/multimodal
       parent: llm_obs_instrumentation
@@ -5968,6 +5973,11 @@ menu:
       parent: llm_obs_improve
       identifier: llm_obs_online_experiments
       weight: 504
+    - name: Prompt Experimentation
+      url: llm_observability/improve/online_experiments/prompt_experimentation
+      parent: llm_obs_improve
+      identifier: llm_obs_prompt_experimentation
+      weight: 505
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs
@@ -5978,11 +5988,6 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
-    - name: Prompt Experimentation
-      url: llm_observability/configure/prompt_experimentation
-      parent: llm_obs_configure
-      identifier: llm_obs_prompt_experimentation
-      weight: 602
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
@@ -6492,11 +6497,6 @@ menu:
       url: deployment_gates/setup/preconfigured/
       parent: deployment_gates_setup
       identifier: deployment_gates_setup_preconfigured
-      weight: 2
-    - name: Explore
-      url: deployment_gates/explore/
-      parent: deployment_gates
-      identifier: deployment_gates_explore
       weight: 2
     - name: Code Coverage
       url: code_coverage/
@@ -7831,10 +7831,10 @@ menu:
       parent: log_management
       identifier: log_migration
       weight: 9
-    - name: Query Translation
-      url: logs/migration/query_translation/
+    - name: Migration Tools
+      url: logs/migration/migration_tools/
       parent: log_migration
-      identifier: log_migration_query_translation
+      identifier: log_migration_migration_tools
       weight: 901
     - name: Guides
       url: logs/guide/
@@ -8918,11 +8918,6 @@ menu:
       identifier: ai_guard
       parent: security_platform_heading
       weight: 60000
-    - name: Get Started with AI Guard
-      url: /security/ai_guard/onboarding/
-      identifier: ai_guard_onboarding
-      parent: ai_guard
-      weight: 1
     - name: Set Up AI Guard
       url: /security/ai_guard/setup/
       identifier: ai_guard_setup
@@ -8943,16 +8938,21 @@ menu:
       identifier: ai_guard_sdk
       parent: ai_guard_setup
       weight: 3
-    - name: HTTP API
-      url: /security/ai_guard/setup/http_api/
-      identifier: ai_guard_http_api
-      parent: ai_guard_setup
+    - name: Manage Policies
+      url: /security/ai_guard/policies/
+      identifier: ai_guard_policies
+      parent: ai_guard
+      weight: 3
+    - name: Redact Sensitive Data
+      url: /security/ai_guard/sensitive_data_redaction/
+      identifier: ai_guard_sensitive_data_redaction
+      parent: ai_guard
       weight: 4
-    - name: Security Signals
+    - name: Triage and Investigate Signals
       url: /security/ai_guard/signals/
       identifier: ai_guard_signals
       parent: ai_guard
-      weight: 3
+      weight: 5
     - name: Workload Protection
       url: security/workload_protection/
       pre: security-workload-security

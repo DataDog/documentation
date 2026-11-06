@@ -1,5 +1,7 @@
 ---
-title: Query Translation
+title: Migration Tools
+aliases:
+- /logs/migration/query_translation/
 description: "Translate Splunk SPL queries into Datadog syntax and convert Splunk alerts and dashboards into Datadog monitors and dashboards."
 further_reading:
 - link: "/logs/explorer/search_syntax/"
@@ -18,14 +20,14 @@ further_reading:
 
 ## Overview
 
-Query Translation, part of the Migration App, translates Splunk Processing Language (SPL) into Datadog [log search syntax][1] and converts Splunk assets into their Datadog equivalents. It provides two tools:
+Migration Tools translate Splunk Processing Language (SPL) into Datadog [log search syntax][1] and convert Splunk assets into their Datadog equivalents. Migration Tools include:
 
 | Tool | Use case |
 |------|-----------|
 | [Translate][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
 | [Import][3] | Import CSV exports of Splunk alerts and dashboards, and translate their queries to log search syntax. Review the results, then create the matching Datadog monitors and dashboards. |
 
-Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
+Migration Tools support only Splunk as a source platform. They parse and convert queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Permissions
 
@@ -161,7 +163,7 @@ There is not enough sample data
 : A query that runs against an index with little matching data returns an empty preview. An empty preview makes the translation hard to verify. Confirm that relevant logs are in Datadog before you assess a translation.
 
 The SPL command is not supported
-: Query Translation supports a wide range of SPL commands. When a command does not have a Datadog equivalent, the translator returns as much of the query as it can and flags the unsupported command.
+: Migration Tools support a wide range of SPL commands. When a command does not have a Datadog equivalent, the translator returns as much of the query as it can and flags the unsupported command.
 
 ## Further reading
 

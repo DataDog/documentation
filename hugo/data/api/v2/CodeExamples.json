@@ -507,6 +507,20 @@
       "description": "Create a case type returns \"CREATED\" response"
     }
   ],
+  "CreateOIDCCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC persona mapping returns \"Created\" response"
+    }
+  ],
+  "CreateOIDCCloudAuthProvider": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC provider returns \"Created\" response"
+    }
+  ],
   "CreateAWSCloudAuthIntakeMapping": [
     {
       "group": "cloud_authentication",
@@ -2056,6 +2070,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_2324504662",
+      "description": "Validate an observability pipeline with an empty processor group returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
     },
@@ -2063,6 +2082,11 @@
       "group": "observability_pipelines",
       "suffix": "_815080644",
       "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3415678462",
+      "description": "Validate an observability pipeline with grok library rules returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
