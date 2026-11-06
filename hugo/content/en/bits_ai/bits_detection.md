@@ -126,14 +126,14 @@ Bits Detection uses criticality to determine which resources should have managed
 
 Bits Detection uses existing Datadog RBAC permissions. There are no permissions specific to Bits Detection.
 
-| Action                                                                  | Required permissions                                                                                    | Default role           |
-|:------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------|:-----------------------|
-| View the Coverage page and scope details                                | Bits Investigations Read (`bits_investigations_read`)                                                   | Datadog Read Only Role |
-| View critical endpoints                                                 | APM Read (`apm_read`)                                                                                   | Datadog Read Only Role |
-| View Bits Detection monitors                                            | Monitors Read (`monitors_read`)                                                                         | Datadog Read Only Role |
-| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) | Datadog Standard Role  |
-| Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`)                                             | Datadog Standard Role  |
-| Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`)                                      | Datadog Admin Role     |
+| Action                                                                  | Required permissions |
+|:------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------- |
+| View the Coverage page and scope details                                | Bits Investigations Read (`bits_investigations_read`) |
+| View critical endpoints                                                 | APM Read (`apm_read`) |
+| View Bits Detection monitors                                            | Monitors Read (`monitors_read`) |
+| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) |
+| Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`) |
+| Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`) |
 
 To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Write and Monitors Write.
 
