@@ -30,7 +30,9 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
   Local validation with ddtest is in Preview.
 {{< /callout >}}
 
-Use [ddtest][15] to check Test Optimization locally. It compares test results without and with instrumentation. It then uses temporary tests to check supported features, including Early Flake Detection, Auto Test Retries, and Test Management. Validation uses a local intake and requires no Datadog account, API key, or Agent. It does not send validation results to Datadog or change Datadog settings.
+Use [ddtest][15] to check Test Optimization locally. It compares test results without and with instrumentation. It then uses temporary tests to check supported features, including Early Flake Detection, Auto Test Retries, and Test Management. Validation uses a local intake and requires no Datadog account, API key, or Datadog Agent. It does not send validation results to Datadog or change Datadog settings.
+
+Datadog recommends using a local coding agent for onboarding and local validation. The agent follows ddtest's instructions to set up instrumentation, run validation, resolve blockers, and explain the results. To run the commands yourself, use the [manual instructions](#run-ddtest-yourself).
 
 Local validation supports these languages and frameworks:
 
@@ -43,7 +45,7 @@ Local validation supports these languages and frameworks:
 
 See the [ddtest documentation][15] for runtime requirements, framework-specific setup, and feature limitations.
 
-### Step 1: Install ddtest
+### Install ddtest
 
 Install the release executable on macOS or Linux:
 
@@ -60,7 +62,19 @@ irm https://github.com/DataDog/ddtest/releases/latest/download/install.ps1 | iex
 
 The installers verify the download against the release's checksums. See [ddtest installation][17] for version selection and custom installation directories.
 
-### Step 2: Inspect the test setup
+### Use a local coding agent (recommended)
+
+Open a local Git checkout of the repository in a coding agent that can inspect files and run commands. After installing ddtest, provide this prompt:
+
+```text
+Use ddtest to onboard this repository to Test Optimization.
+```
+
+Review proposed changes and provide any environment details requested by the agent. The agent runs local validation and reports the results, including HTML report links and any failed or unvalidated checks.
+
+### Run ddtest yourself
+
+#### Step 1: Inspect the test setup
 
 Start from a local Git checkout of the repository. Install the project's test dependencies and prepare any browsers, databases, or other services that the tests require. Then run:
 
@@ -78,7 +92,7 @@ ddtest onboard --framework jest --ci-provider github
 
 Use the same selection for subsequent validation commands. Run validation separately for each framework and CI provider you want to check.
 
-### Step 3: Run local validation
+#### Step 2: Run local validation
 
 To inspect all discovered CI test configurations without installing a Datadog SDK or running tests, run:
 
@@ -102,21 +116,11 @@ ddtest testdrive --framework jest --command "npm test"
 
 A successful check of one command does not validate other CI configurations. Resolve any missing dependencies, unsupported setup, or other blockers reported by ddtest, then rerun validation.
 
-### Step 4: Review the results
+#### Step 3: Review the results
 
 Open the HTML report linked in the command output, typically `.testoptimization/report.html`. The corresponding `.testoptimization/testdrive.json` contains machine-readable results. Review the baseline comparison, feature checks, and any configurations that remain unvalidated. Feature support varies by framework and Datadog SDK; unsupported features are listed in the report.
 
 Keep the reports for review, and rerun full validation after changing source files, dependencies, or runtimes. Add `.testoptimization/` to `.gitignore` to keep local reports out of commits.
-
-### Run with a coding agent
-
-After installing ddtest, pass this prompt to a local coding agent that can inspect files and run commands in the repository:
-
-```text
-Use ddtest to onboard this repository to Test Optimization.
-```
-
-For an existing setup, the agent can run `ddtest testdrive --all --agent --yes`, adding `--framework` and `--ci-provider` if needed, and follow the returned next action. After an agent-coordinated run, use `ddtest testdrive --report` to inspect the saved result and follow any returned validation instructions.
 
 Local validation checks library behavior and CI configuration. To validate Datadog processing, PR Gates, and the full [Prevention](#step-2-prevention), [Mitigation](#step-3-mitigation), and [Remediation](#step-4-remediation) workflows, or to validate an unsupported language or framework, use [Option 2](#option-2-validate-the-full-workflow).
 
