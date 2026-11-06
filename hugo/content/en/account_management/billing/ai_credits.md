@@ -83,15 +83,15 @@ To manage permissions, go to [**Organization Settings > Roles**][7], select a ro
 
 ## Billing enrichment
 
-Billing enrichment allows custom attribution of a user's AI Credit usage with data from a [reference table][9], using the user's email address as the join key. For example, you may enrich AI Credit usage with tags such as `vp_name` or `director_name`, so you can break down AI Credit usage by your organizational structure.
+Billing enrichment adds tags to a user's AI Credit usage from a [reference table][9], using the user's email address as the join key. For example, add tags such as `vp_name` or `director_name` to break down AI Credit usage by your organizational structure.
 
 To set up billing enrichment:
 
-1. Create a [reference table][9] containing a column of user email addresses, along with any additional columns you want to expose as tags.
+1. Create a [reference table][9] that contains a column of user email addresses, plus any other columns you want to expose as tags.
 2. In [**Bits AI > AI Credits Management > Billing Enrichment**][10], turn on **Enable billing enrichment**.
 3. Select the **Reference table**, the **Email matching column** that Datadog joins on, and the **Enrichment columns** to expose as tags. Leave enrichment columns empty to include all columns.
 
-Tags from the reference table are added to newly processed usage. Usage recorded before you enable billing enrichment is not enriched.
+Datadog adds tags from the reference table to usage it processes after you enable billing enrichment. Usage recorded before then isn't enriched.
 
 ## Monitor usage
 

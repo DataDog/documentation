@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Organization admins can set monthly caps on AI Credit usage at the organization level, the role level, or the per-user level, including a default limit that applies to every user. Admins can also override that default for individual users, and set limits for individual service accounts. AI Credits are shared across [Bits Chat][1], [Bits Investigation][2], [Bits Code][3], [Bits Agent Builder][4], and [Bits Database Optimization][13].
+Organization admins can set monthly caps on AI Credit usage for the organization, for roles, and for individual users. A default per-user limit applies to every user, and admins can override it for individual users. Admins can also set limits for individual service accounts. AI Credits are shared across [Bits Chat][1], [Bits Investigation][2], [Bits Code][3], [Bits Agent Builder][4], and [Bits Database Optimization][13].
 
 ## Permissions
 
@@ -28,33 +28,33 @@ You can configure the following types of monthly limits:
 | Organization-wide limit | Caps total AI Credit usage across the organization for the month. No organization-wide limit is set by default. |
 | Default per-user limit | Caps monthly AI Credit usage for each user who isn't covered by a role-based limit or an override. |
 | Role-based limit | Caps monthly AI Credit usage for each user with a given [role][11]. |
-| Per-user override | Sets a custom monthly limit for an individual user, replacing the default per-user limit for that user. |
+| Per-user override | Sets a custom monthly limit for an individual user, replacing any role-based or default per-user limit for that user. |
 | Service account override | Sets a custom monthly limit for an individual [service account][12]. |
 
 ## How limits are applied
 
-When multiple limits can be applied, they are checked in the following order:
+When more than one limit applies, Datadog checks them in the following order:
 
-| | Users | Service accounts |
+| Check | Users | Service accounts |
 |---|---|---|
 | Always applied | Organization limit | Organization limit |
 | Priority order | 1. Per-user override<br>2. Highest role-based limit<br>3. Default per-user limit | 1. Service account override |
 
-Below the organization limit, the first limit that is set applies, and no further limits are checked.
+Within the organization limit, Datadog applies the first limit in the priority order that's set and skips the rest.
 
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
-- When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, Bits Agent Builder, or Bits Database Optimization, and a banner shows the reset date.
+- When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, Bits Agent Builder, or Bits Database Optimization. A banner shows the reset date.
 - When a limit is reached, requests to start an investigation through the [Bits AI API][7] return HTTP `429` with the error code `AI_CREDITS_EXHAUSTED`. A `429` with the error code `INVESTIGATION_RATE_LIMIT_EXCEEDED` means an [investigation rate limit][8] was reached instead.
 
 ### Service accounts
 
-[Service accounts][12] are reported separately from users, and have no default limit. Role-based limits and the default per-user limit are not applied to service accounts, even if a service account is assigned a role with a limit.
+Datadog reports [service account][12] usage separately from user usage. Service accounts have no default limit. Role-based limits and the default per-user limit don't apply to service accounts, even if a service account has a role with a limit.
 
 ### Examples
 
 #### How the organization limit caps total usage
 
-These examples show a 20-user organization, and what each combination of organization limit and per-user limit means for total billable usage. The second row is the case to note: the per-user limits add up to more than the organization allows, so the organization limit becomes the effective cap.
+These examples show how the organization limit and the per-user limit combine to cap total billable usage in a 20-user organization. In the second row, the per-user limits add up to more than the organization limit, so the organization limit becomes the effective cap.
 
 | Organization limit | Per-user limit | Users | Maximum hypothetical usage | Maximum billable AI Credits | Result |
 |---|---|---|---|---|---|
@@ -66,7 +66,7 @@ These examples show a 20-user organization, and what each combination of organiz
 
 #### Which limit applies to a user
 
-In this organization, the Standard role limit is 200 AI Credits and the Admin role limit is 400 AI Credits. Each row is a different user in that organization, showing how the order above resolves for them.
+In this organization, the Standard role limit is 200 AI Credits and the Admin role limit is 400 AI Credits. Each row shows a different user and the limit that applies to them, based on the priority order in the [How limits are applied](#how-limits-are-applied) section.
 
 | Per-user override | User's roles | Default per-user limit | Limit applied | Why |
 |---|---|---|---|---|
