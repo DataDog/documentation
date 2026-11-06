@@ -8,8 +8,7 @@ further_reading:
 
 ## Overview
 
-<!-- TODO: Add dashboard screenshot once available -->
-<!-- {{< img src="/opentelemetry/collector_exporter/redis_metrics.png" alt="OpenTelemetry Redis metrics in the Redis Overview dashboard" style="width:100%;" >}} -->
+{{< img src="/opentelemetry/collector_exporter/redis_metrics.png" alt="The Redis - Overview dashboard, showing tiles for hit rate, blocked clients, keyspace size, unsaved changes, and primary link down time." style="width:100%;" >}}
 
 The [Redis receiver][1] collects Redis metrics that populate the [Redis - Overview][3] dashboard and the Redis high memory monitor. Configure the receiver according to the specifications of the latest version of the `redisreceiver`.
 

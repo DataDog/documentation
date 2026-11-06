@@ -8,8 +8,7 @@ further_reading:
 
 ## Overview
 
-<!-- TODO: Add dashboard screenshot once available -->
-<!-- {{< img src="/opentelemetry/collector_exporter/mongodb_metrics.png" alt="OpenTelemetry MongoDB metrics in the MongoDB Overview dashboard" style="width:100%;" >}} -->
+{{< img src="/opentelemetry/collector_exporter/mongodb_metrics.png" alt="The MongoDB - Overview dashboard, showing tiles for averaged uptime, healthy replica set members, and shard, primary, secondary, and config server counts." style="width:100%;" >}}
 
 The [MongoDB receiver][1] collects MongoDB metrics that populate the [MongoDB - Overview][3] dashboard and MongoDB monitors. Configure the receiver according to the specifications of the latest version of the `mongodbreceiver`.
 
