@@ -56,7 +56,7 @@ To control which information is sent to Datadog, you can [mask action names with
 
 ### Mask all action names
 
-To mask all action names by default, set  `defaultPrivacyLevel` to `mask`:
+To mask all action names by default, set `defaultPrivacyLevel` to `mask`:
 
 ```javascript
 window.DD_RUM.init({
@@ -64,6 +64,7 @@ window.DD_RUM.init({
     trackUserInteractions: true,
     defaultPrivacyLevel: 'mask',
 });
+```
 
 With these settings, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
 

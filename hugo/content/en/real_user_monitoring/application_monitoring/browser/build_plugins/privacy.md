@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The privacy plugin generates an allowlist of safe, static strings at build time. When the `mask-unless-allowlisted` privacy level is enabled, the RUM Browser SDK uses this allowlist to unmask these static strings automatically. Dynamic text, such as user input or customer data fetched from an API, remains masked by default. The allowlist gives `mask-unless-allowlisted` similar privacy benefits to the `mask` privacy level, while retaining user interface text that makes action names and Session Replay more useful.
+The privacy plugin generates an allowlist of safe, static strings at build time. When the `mask-unless-allowlisted` privacy level is enabled, the RUM Browser SDK uses this allowlist to unmask these static strings automatically. Dynamic text, such as user input or customer data fetched from an API, remains masked by default. The allowlist gives `mask-unless-allowlisted` similar privacy benefits to the `mask` privacy level, while retaining UI text that makes action names and Session Replay more useful.
 
 ## How the privacy plugin works
 
@@ -55,6 +55,7 @@ datadogRum.init({
   site: '<DATADOG_SITE>',
   defaultPrivacyLevel: 'mask-unless-allowlisted',
 });
+```
 
 To apply `mask-unless-allowlisted` to part of the application, set `data-dd-privacy="mask-unless-allowlisted"` on the relevant HTML element. See [Session Replay privacy options][3] for more about element-level privacy overrides.
 
