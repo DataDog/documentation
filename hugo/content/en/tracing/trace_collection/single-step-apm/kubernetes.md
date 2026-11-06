@@ -409,7 +409,7 @@ To create an instrumentation rule:
 1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. A pod must match all of a rule's conditions for the rule to apply. See the [supported attributes](#supported-kubernetes-attributes).
 1. Under {{< ui >}}Set cluster targeting{{< /ui >}}, select {{< ui >}}All clusters{{< /ui >}} or {{< ui >}}Select cluster groups{{< /ui >}}. If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
 
-   <!-- TODO: Add screenshot of the Create instrumentation rule window for Kubernetes, with a condition filled in and Select cluster groups chosen. Requires at least one cluster group. -->
+   {{< img src="tracing/trace_collection/k8s-create-rule.png" alt="The Create instrumentation rule window for Kubernetes, with a condition of Namespace Name equals default, the Allow Instrumentation action, and Select cluster groups chosen with the Canary group selected" style="width:100%;" >}}
 1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
 1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How rules are evaluated](#how-rules-are-evaluated).
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
@@ -709,7 +709,7 @@ For pods eligible for admission, the Cluster Agent selects APM configuration in 
 
 1. Pod annotations such as `admission.datadoghq.com/java-lib.version`.
 1. The workload's `DatadogInstrumentation` APM configuration.
-1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled. <!-- TODO: Engineering to verify that instrumentation rules defined in Datadog are what was previously listed here as "Remote Configuration instrumentation policies." -->
+1. [Instrumentation rules defined in Datadog](?tab=instrumentationrulesindatadogv7842#target-specific-workloads), if enabled.
 1. Agent-configured `apm.instrumentation.targets` or `enabledNamespaces`.
 1. Cluster-wide instrumentation, when enabled without targeting rules.
 
