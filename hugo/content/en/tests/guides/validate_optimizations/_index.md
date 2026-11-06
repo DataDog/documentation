@@ -30,7 +30,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
   Local validation with ddtest is in Preview.
 {{< /callout >}}
 
-Use [ddtest][15] to check Test Optimization locally. It compares test results without and with instrumentation. It then uses temporary tests to check supported features, including Early Flake Detection, Auto Test Retries, and Test Management. Validation uses a local intake and requires no Datadog account, API key, or Datadog Agent. It does not send validation results to Datadog or change Datadog settings.
+Use [ddtest][15] to check Test Optimization locally. It compares test results with and without instrumentation. It then uses temporary tests to check supported features, including Early Flake Detection, Auto Test Retries, and Test Management. Validation uses a local intake and requires no Datadog account, API key, or Datadog Agent. It does not send validation results to Datadog or change Datadog settings.
 
 Datadog recommends using a local coding agent for onboarding and local validation. The agent follows ddtest's instructions to set up instrumentation, run validation, resolve blockers, and explain the results. To run the commands yourself, use the [manual instructions](#run-ddtest-yourself).
 
@@ -82,7 +82,7 @@ Start from a local Git checkout of the repository. Install the project's test de
 ddtest onboard
 ```
 
-The command detects the language, test framework, and CI provider, and returns the next setup or validation action. Review the proposed setup before applying changes. To print detailed manual setup instructions, run `ddtest onboard --instructions`.
+The command detects the language, test framework, and CI provider, then returns the next setup or validation action. Review the proposed setup before applying changes. To print detailed manual setup instructions, run `ddtest onboard --instructions`.
 
 If the repository contains multiple frameworks or CI providers, select one explicitly. For example:
 
@@ -100,13 +100,13 @@ To inspect all discovered CI test configurations without installing a Datadog SD
 ddtest testdrive --all --check-only
 ```
 
-Then run full local validation:
+Configuration checks alone do not validate feature behavior. Run full local validation:
 
 ```bash
 ddtest testdrive --all
 ```
 
-Review the preview of commands and changes, then confirm execution. In a non-interactive terminal, add `--yes` after reviewing the preview. Configuration checks alone do not validate feature behavior.
+Review the preview of commands and changes, then confirm execution. In a non-interactive terminal, add `--yes` after reviewing the preview.
 
 To validate a specific test command, use `--command` instead of `--all`. For example:
 
@@ -114,7 +114,7 @@ To validate a specific test command, use `--command` instead of `--all`. For exa
 ddtest testdrive --framework jest --command "npm test"
 ```
 
-A successful check of one command does not validate other CI configurations. Resolve any missing dependencies, unsupported setup, or other blockers reported by ddtest, then rerun validation.
+A successful check of one command does not validate other CI configurations. Resolve any missing dependencies, unsupported configuration, or other blockers reported by ddtest, then rerun validation.
 
 #### Step 3: Review the results
 
