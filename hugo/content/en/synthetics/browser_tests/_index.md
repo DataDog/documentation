@@ -105,14 +105,16 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
      Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
 
-   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
+   * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the `user-agent` header to [identify Datadog scripts][1].
+
+     **Note**: The browser controls some headers, such as `Host`, `Origin`, `Referer`, `Accept-Encoding`, `Connection`, `Content-Length`, and headers starting with `Sec-` or `Proxy-`. When the test runs, Synthetic Monitoring ignores the values you set for these headers, and the test result shows this warning: `Headers with wrong format were ignored.`
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
 
    Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
 
-[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=browsertests#user-agent
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
 [3]: /synthetics/browser_tests/test_results#resources
 [4]: /data_security/data_retention_periods/

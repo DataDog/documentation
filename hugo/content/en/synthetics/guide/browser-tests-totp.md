@@ -23,8 +23,7 @@ Multi-factor authentication methods such as TFA and MFA help protect your applic
 
 Datadog Synthetic MFA global variables allow you to test your application's TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
-**Note**: If your TOTP token works in Google Authenticator, it is likely compatible with Datadog.
-Some QR codes are limited to specific verification methods and may not work across platforms. To ensure compatibility, use a QR code or secret that follows standard TOTP protocols.
+**Note**: Datadog generates TOTPs with the SHA-1 algorithm and does not support tokens that use other algorithms. If your TOTP token works in Google Authenticator, it is likely compatible with Datadog.
 
 
 ## Store your secret key or QR code in a global variable
@@ -36,8 +35,12 @@ Create a global variable where you enter a secret key or upload a QR code from y
 4. Select {{< ui >}}Tags{{< /ui >}} to associate with your variable (optional).
 5. Follow your authenticator app's documentation for instructions on creating a secret key or adding a new QR code.
 6. Enter the {{< ui >}}Secret Key{{< /ui >}} to your variable or upload a QR code image.
-7. Click {{< ui >}}\+ Generate{{< /ui >}} to create a TOTP. You can copy the generated TOTP with the {{< ui >}}Copy{{< /ui >}} icon.
-8. In {{< ui >}}Permissions settings{{< /ui >}}, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
+
+    **Note**: Datadog reads only the secret key from the QR code and ignores other parameters such as algorithm, code length, and refresh period. Code length defaults to six digits and the refresh period to 30 seconds.
+
+7. (Optional) To use a different code length or refresh period, expand {{< ui >}}Advanced Options{{< /ui >}} under {{< ui >}}Generate the OTP{{< /ui >}} and adjust the values.
+8. Click {{< ui >}}\+ Generate{{< /ui >}} to create a TOTP. You can copy the generated TOTP with the {{< ui >}}Copy{{< /ui >}} icon.
+9. In {{< ui >}}Permissions settings{{< /ui >}}, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
