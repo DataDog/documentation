@@ -184,7 +184,7 @@ To change the order of host groups, drag a group by its handle in the group list
 To create an instrumentation rule:
 
 1. On the [Instrumentation Rules][20] page, click {{< ui >}}New Rule{{< /ui >}}. Alternatively, on the Host Groups page, select a group, open its {{< ui >}}Rules{{< /ui >}} tab, and click {{< ui >}}Create a new rule{{< /ui >}}.
-1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See [Define rule conditions](#define-rule-conditions) to learn more.
+1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See the [Define rule conditions](#define-rule-conditions) section to learn more.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="The Create instrumentation rule window, with a condition of Language equals Python, the Allow Instrumentation action, and the Rule Impact Preview panel" style="width:100%;" >}}
 
@@ -195,7 +195,7 @@ To create an instrumentation rule:
    {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
 
 1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
-1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
 
@@ -211,7 +211,8 @@ For each process, Datadog evaluates instrumentation rules in the following order
 
 1. Rules from the groups that the process's host belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
 1. Rules that target {{< ui >}}All eligible hosts{{< /ui >}}. These rules apply to every eligible host, including hosts in host groups.
-1. The [default behavior](#set-the-default-behavior), if no rule matches.
+
+If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Define rule conditions
 

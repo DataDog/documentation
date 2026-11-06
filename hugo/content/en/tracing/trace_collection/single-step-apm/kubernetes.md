@@ -406,7 +406,7 @@ To change the order of cluster groups, drag a group by its handle in the group l
 To create an instrumentation rule:
 
 1. On the [Instrumentation Rules][102] page, click {{< ui >}}New Rule{{< /ui >}}. Alternatively, on the Cluster Groups page, select a group, open its {{< ui >}}Rules{{< /ui >}} tab, and click {{< ui >}}Create a new rule{{< /ui >}}.
-1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See the [supported attributes](#supported-kubernetes-attributes).
+1. Define one or more conditions, then select {{< ui >}}Block Instrumentation{{< /ui >}} or {{< ui >}}Allow Instrumentation{{< /ui >}}. See the [Supported Kubernetes attributes](#supported-kubernetes-attributes) section.
 1. Under {{< ui >}}Set cluster targeting{{< /ui >}}, select {{< ui >}}All clusters{{< /ui >}} or {{< ui >}}Select cluster groups{{< /ui >}}.
 
    If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
@@ -414,7 +414,7 @@ To create an instrumentation rule:
    {{< img src="tracing/trace_collection/k8s-create-rule.png" alt="The Create instrumentation rule window for Kubernetes, with a condition of Namespace Name equals default, the Allow Instrumentation action, and Select cluster groups chosen with the Canary group selected" style="width:100%;" >}}
 
 1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
-1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See the [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated) section.
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
 After the rules are deployed, restart the affected workloads for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][102] page shows the rollout status of the current rules.
@@ -425,7 +425,8 @@ For each pod, Datadog evaluates instrumentation rules in the following order and
 
 1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
 1. Rules that target {{< ui >}}All clusters{{< /ui >}}. These rules apply to every eligible cluster, including clusters in cluster groups.
-1. The [default behavior](#set-the-default-behavior), if no rule matches.
+
+If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Supported Kubernetes attributes
 
