@@ -519,6 +519,8 @@ Select a span to show JSON data available for use in an evaluation. Then, click 
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluator, Datadog automatically runs your evaluator on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluator later.
 
+Each time you save, Datadog keeps a new version of the evaluator. To view, compare, or restore versions, see [Evaluator Versions][20].
+
 Results are available across Agent Observability in near-real-time for published evaluators. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
@@ -542,6 +544,7 @@ For example:
 You can:
 - Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
+- Filter by the evaluator version that produced the result (example, `@evaluation.helpfulness-check.eval_version:3`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
 - Create [monitors][4] to alert on performance changes or regression
@@ -618,3 +621,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 [19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
+[20]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/evaluator_versions
