@@ -1,6 +1,8 @@
 ---
 title: Code Snippets and Context Links
 description: "View inline code snippets and links to your source code from stack traces, profiles, test runs, and code findings across Datadog products."
+aliases:
+  - /source_code/features/
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"

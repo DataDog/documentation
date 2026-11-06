@@ -67,5 +67,5 @@ If your build process is executed in CI within a Docker container, use a [named 
 [1]: /tracing/trace_collection/dd_libraries/
 [2]: https://docs.docker.com/build/concepts/context/#named-contexts
 [3]: /glossary/#span
-[4]: /source_code/features/
+[4]: /source_code/snippets-and-links/
 [5]: /source_code/service-mapping/opentelemetry/
