@@ -128,6 +128,8 @@ To estimate PUT request volume and cost, see [Object Storage Request Estimation]
 
 ## Helm chart sizing tiers
 
+These presets apply to Helm deployments. For a `DatadogBYOCCluster`, configure [Operator resources](#operator-resource-configuration) instead.
+
 Set `indexer.podSize` and `searcher.podSize` to match the per-pod CPU and memory in the [starter configuration](#starter-configurations). The default is `xlarge`. Each preset also applies ingest queue and search cache sizes.
 
 | `podSize` | CPU | Memory |
@@ -159,6 +161,51 @@ Actual memory request/limit = (nominal pod memory - Kubernetes system memory res
 
 See the [Helm chart sizing map][1] for the complete configuration.
 
+## Operator resource configuration
+
+With the Datadog Operator, set CPU requests, memory requests and limits, replicas, and storage in the `DatadogBYOCCluster` resource. The Operator derives engine cache and queue settings from memory limits and disk capacity. This tuning does not choose the cluster's capacity or provision Kubernetes nodes for you.
+
+When component resources or replica counts are omitted, the Operator applies these defaults:
+
+| Component | CPU request per pod | Memory request and limit per pod | Replicas |
+|---|---:|---:|---:|
+| Indexer | `4` | `16Gi` | `2` |
+| Searcher | `4` | `16Gi` | `2` |
+| Metastore | `2` | `4Gi` | `2` |
+| Control plane | `2` | `4Gi` | `1` |
+| Janitor | `2` | `4Gi` | `1` |
+| Each pipeline's Workers | `2` | `4Gi` | `2` |
+
+The [minimal installation example][7] explicitly sets one replica for the metastore, indexer, searcher, and Worker. With the default resources, that example requests a total of 16 CPUs and 48 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the workload sizing recommendations above to choose production resources and replica counts.
+
+Merge resource settings into the existing component, for example:
+
+```yaml
+spec:
+  components:
+    indexer:
+      replicas: 2
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+        limits:
+          memory: 16Gi
+      storage:
+        volumeClaimTemplate:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            storageClassName: "<STORAGE_CLASS>"
+            resources:
+              requests:
+                storage: 250Gi
+```
+
+Preserve the other required fields in the manifest, then run `kubectl apply -f byoc-cluster.yaml`. Set storage requirements before creating the workload; updating a StatefulSet's volume claim template is not a general-purpose volume-resize procedure.
+
+Without explicit storage settings, indexers and Workers request 30 GiB persistent volumes using the cluster's default StorageClass. Searchers use `emptyDir` by default. Override these defaults to meet ingestion durability and cache requirements. See [persistent Worker buffers][8] and the [CRD reference][9].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -169,3 +216,6 @@ See the [Helm chart sizing map][1] for the complete configuration.
 [4]: /byoc-logs/operate/best_practices/#scale-searchers-based-on-your-query-patterns
 [5]: /byoc-logs/operate/best_practices/#enable-automated-backups-on-your-metastore-database
 [6]: /byoc-logs/operate/object_storage_requests/
+[7]: /byoc-logs/install/datadog_operator/
+[8]: /byoc-logs/operate/disk_buffer_durability/
+[9]: /containers/datadog_operator/crd_byoccluster/

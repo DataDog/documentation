@@ -15,6 +15,16 @@ BYOC (Bring Your Own Cloud) Logs requires **Kubernetes** for production deployme
 
 ## Prerequisites
 
+Choose a deployment method before preparing your environment:
+
+| Method | Platforms | Connection to Datadog | Scope |
+|---|---|---|---|
+| [Datadog Operator][3] | AWS EKS | Reverse connection | New deployments with Operator v1.33.0 or later. Manages the engine and Workers for existing Observability Pipelines. |
+| BYOC and Worker Helm charts | AWS EKS, Google GKE, Azure AKS | Reverse connection; Ingress where supported by the platform guide | Install and configure the engine and Workers separately. |
+| [Docker][2] | Local environment | Reverse connection | Evaluation only. |
+
+The Operator does not provision object storage, PostgreSQL, IAM roles, or Observability Pipeline definitions. The platform requirements below describe BYOC as a whole; they do not extend the Operator's AWS support to other providers.
+
 <div class="alert alert-info">
 If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog account team to activate BYOC Logs on your account.
 </div>
@@ -37,6 +47,7 @@ BYOC Logs supports the following object storage types:
 ## Cloud-managed Kubernetes
 
 {{< whatsnext desc="Select the installation guide that matches your environment:">}}
+  {{< nextlink href="/byoc-logs/install/datadog_operator/" >}}Install on AWS EKS with the Datadog Operator{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/aws_eks" >}}Install on AWS EKS{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/install/gcp_gke" >}}Install on GCP GKE{{< /nextlink >}}
@@ -44,3 +55,4 @@ BYOC Logs supports the following object storage types:
 {{< /whatsnext >}}
 
 [2]: /byoc-logs/install/docker/
+[3]: /byoc-logs/install/datadog_operator/

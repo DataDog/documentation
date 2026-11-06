@@ -3751,6 +3751,11 @@ menu:
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
       weight: 812
+    - name: DatadogBYOCCluster CRD
+      url: containers/datadog_operator/crd_byoccluster
+      identifier: containers_datadog_operator_crd_byoccluster
+      parent: containers_datadog_operator
+      weight: 813
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -7912,6 +7917,11 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 304
+    - name: Datadog Operator
+      url: /byoc-logs/install/datadog_operator
+      parent: cloudprem_install
+      identifier: cloudprem_datadog_operator
+      weight: 305
     - name: Ingest
       url: /byoc-logs/ingest/
       parent: cloudprem
