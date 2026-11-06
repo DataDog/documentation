@@ -78,14 +78,14 @@ In this organization, the Standard role limit is 200 AI Credits and the Admin ro
 
 ## Usage attribution
 
-Attribution determines whose limit applies to a given unit of AI usage, and who the AI Credit spend is attributed to.
+Attribution determines whose limit applies to a given unit of AI usage, and who the AI Credit spend is attributed to. Usage that doesn't come from a person is attributed to **Autonomous Agents**. Within that total, usage from each service account is also broken out individually.
 
 | Product | Attribution |
 |---|---|
 | [Bits Chat][1] | All Bits Chat usage, including chats inside an investigation, rolls up to the email address of the user interacting with Bits Chat. |
 | [Bits Investigation][2] | Manually started investigations roll up to the email address of the user who initiated the action.<br>Investigations started through the API roll up to the user or service account that owns the API key, and count toward that account's limits.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
 | [Bits Code][3] | All Bits Code usage rolls up to the email address of the user interacting with Bits Code. |
-| [Bits Agent Builder][4] | Agent runs for workflows roll up to the email address of the user who created the workflow.<br>Agent runs for workflows created by service accounts roll up to **Autonomous Agents**. Named service accounts are broken out from **Autonomous Agents**. |
+| [Bits Agent Builder][4] | Agent runs for workflows roll up to the email address of the user who created the workflow.<br>Agent runs for workflows created by service accounts roll up to **Autonomous Agents**, and are also broken out by the individual service account. |
 
 ## Get alerted before reaching a limit
 
