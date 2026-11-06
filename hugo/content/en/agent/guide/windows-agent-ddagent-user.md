@@ -4,165 +4,201 @@ description: Guide to the ddagentuser account used by the Windows Agent, coverin
 aliases:
   - /agent/faq/windows-agent-ddagent-user/
 algolia:
-  tags: ['windows agent user', 'windows user','ddagentuser', 'group policy']
+  tags: ['windows agent user', 'windows user', 'ddagentuser', 'group policy']
 ---
 
-By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
+## Overview
 
-* It becomes a member of the {{< ui >}}Performance Monitor Users{{< /ui >}} group
-  * Necessary to access WMI information
-  * Necessary to access Windows performance counter data
-* It becomes a member of the {{< ui >}}Event Log Readers{{< /ui >}} group
-* It becomes a member of the {{< ui >}}Performance Log Users{{< /ui >}} group (since 7.51)
+The core Datadog Agent and integrations—including Python checks, custom checks, and JMXFetch—run as the selected Windows account. By default, the Agent runs under a standard Windows account, not an administrator account. Additional configuration may be required to grant the Agent access to some resources.
 
-**Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
+Components that require elevated privileges run separately. For example, System Probe runs as `LocalSystem`, and some features use kernel drivers. These components do not change the permissions of the core Agent or integrations.
 
-Additionally, the following security policies are applied to the account during installation:
+## Choose an Agent account
+
+Select an account based on host security policies and access requirements.
+Use a dedicated service account, not an interactive user account. The installer changes the selected account's user rights and service configuration.
+For domain environments, use a gMSA when possible to avoid managing and rotating a password manually.
+
+{{< tabs >}}
+{{% tab "Local account" %}}
+
+By default, the installer creates the local account `ddagentuser` with a generated password.
+
+To use a different local account, enter its name as `.\<USERNAME>` during installation. You can also use `<HOSTNAME>\<USERNAME>`. The installer creates the account if it does not exist. If you omit the password, the installer generates one and sets it on the account.
+
+Domain controllers do not have local accounts. For more information, see [Domain environments](#domain-environments).
+
+{{% /tab %}}
+{{% tab "gMSA" %}}
+
+Choose a group Managed Service Account (gMSA) when the Agent needs a domain identity. A gMSA provides automatic password management through Active Directory, so you do not need to provide or rotate the password manually. Create the gMSA, authorize the host to retrieve its password, and enter the account as `<DOMAIN>\<USERNAME>$`.
+
+Do not provide a password for a gMSA. The installer verifies that Windows recognizes the account as a managed service account.
+
+For Active Directory configuration steps, see [Getting started with group Managed Service Accounts][11].
+
+[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+
+{{% /tab %}}
+{{% tab "Domain account" %}}
+
+Choose a dedicated domain account when the Agent needs a domain identity. Create the account before installing on a domain-joined member host.
+
+Enter the account as `<DOMAIN>\<USERNAME>` and provide its password for the initial installation.
+
+{{% /tab %}}
+{{% tab "LocalSystem" %}}
+
+Choose `LocalSystem` to avoid managing a separate local account or to comply with policies that prohibit local user accounts. Enter `LocalSystem` as the username and omit the password.
+
+With `LocalSystem`, the core Agent and integrations run with elevated local privileges. When accessing network resources, the Agent uses the computer account.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Pass account details to the installer
+
+{{< tabs >}}
+{{% tab "Executable" %}}
+
+Set these environment variables before running the executable installer:
+
+```powershell
+$env:DD_AGENT_USER_NAME = '<USERNAME>'
+$env:DD_AGENT_USER_PASSWORD = '<PASSWORD>'
+```
+
+{{% /tab %}}
+{{% tab "MSI" %}}
+
+Pass these public properties to `msiexec`:
+
+```text
+DDAGENTUSER_NAME="<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+The username portion must contain 20 characters or fewer to comply with the Microsoft [sAMAccountName attribute requirements][1].
+
+The Agent account password cannot contain a semicolon (`;`).
+
+### Agent account password handling
+
+Beginning with [Agent 7.66][14], the installer stores the provided Agent account password as an encrypted Local Security Authority (LSA) private data object. Only local administrators can access it. For more information, see Microsoft's documentation on [storing private data][15] and [private data objects][16]. The installer uses the stored password for later manual or Fleet Automation upgrades, so you do not need to provide the password again. Uninstalling the Agent removes the stored password.
+
+When upgrading a host that uses a custom domain account from Agent 7.65 or earlier, provide the account password during the upgrade to store it for subsequent Fleet Automation upgrades.
+
+## Permissions configured by the installer
+
+During installation, the installer adds the Agent account to these local groups:
+
+* {{< ui >}}Performance Monitor Users{{< /ui >}} to access WMI information and performance counter data
+* {{< ui >}}Event Log Readers{{< /ui >}} to read Windows event logs
+* {{< ui >}}Performance Log Users{{< /ui >}} to use Event Tracing for Windows
+
+The installer does not add the Agent account directly to the built-in {{< ui >}}Users{{< /ui >}} group. Windows normally provides this access through default group memberships. If your organization changes these memberships, grant the Agent account access to required resources directly or add it to the group.
+
+The installer also configures these user rights:
+
+* {{< ui >}}Log on as a service{{< /ui >}}
 * {{< ui >}}Deny access to this computer from the network{{< /ui >}}
 * {{< ui >}}Deny log on locally{{< /ui >}}
 * {{< ui >}}Deny log on through Remote Desktop Services{{< /ui >}}
-* {{< ui >}}Log on as a service{{< /ui >}}
 
-The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
+**Access between Agent hosts:** If Agents on multiple hosts use the same domain account, the **{{< ui >}}Deny access to this computer from the network{{< /ui >}} right** can prevent one Agent from accessing resources on another Agent host.
 
-**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Group Managed Service Account (gMSA)**. To specify a Group Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Group Managed Service Account must exist *prior* to installation, as the installer cannot create one. See [Getting Started with Group Managed Service Accounts][11] for more information.
+To allow this access with Agent 7.85 and later:
 
-## Installation
+1. Pass the `DDAGENTUSER_KEEP_RIGHTS=1` install-time option when installing or upgrading the Agent on the host providing the resource.
+2. Remove the **{{< ui >}}Deny access to this computer from the network{{< /ui >}} right** from that host.
 
-If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
+The installer stores this option and does not reapply the three deny-logon rights during future installations or upgrades. It continues to grant the {{< ui >}}Log on as a service{{< /ui >}} right.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
+Domain Group Policy can override local group membership and user-rights assignments. Configure the applicable policy to grant the log-on-as-a-service right and required resource access.
 
-To specify the optional USERNAME and PASSWORD on the command line, pass the following properties to the `msiexec` command (The bracket `<>` characters indicate a variable that should be replaced):
+## Domain environments
 
-{{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
-if ($p.ExitCode -ne 0) {
-  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
-}
-{{< /code-block >}}
+### Domain-joined member hosts
 
-Requirements:
-* The username must be 20 characters or fewer to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
-* Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+On a domain-joined member host, the installer can create a local account or use an existing local, domain, gMSA, or built-in service account. Create a domain account before installation because a member host cannot create one.
 
-**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitor Users and Event Log Readers groups.
+For the initial installation with a standard domain account, provide the password. A gMSA does not require a password.
 
-**Note**: For Agent version < `7.40.0`, the user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
+### Writable domain controllers
 
-### Installation with group policy
+Domain controllers do not have local accounts. Select an existing domain account or gMSA, or provide a username and password for the installer to create a standard account in the domain. To use a gMSA or an account from a parent domain, create the account before installation.
 
-The installer changes the local group policy to allow the newly created user account to {{< ui >}}run as a service{{< /ui >}}.
-If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user account to run as a service.
+### Read-only domain controllers
 
-### Installation in a domain environment
+On a read-only domain controller, use an existing domain account or gMSA. The installer cannot create the account or change its group memberships. Before installation, grant the account the required groups and user rights through Active Directory or Group Policy.
 
-#### Domain joined machines
+## Change the Agent account or password
 
-On domain joined machines, the Agent installer can use a user supplied account, whether it is a domain or local one, or create a local account.
+To change the Agent account or its password, rerun the executable or MSI installer and pass the Agent username and password install-time options.
 
-If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
+Do not change the Windows service configuration manually. Editing the account in the Windows Services app or with `sc.exe` updates only the logon identity, not the group memberships, user rights, file and service ACLs, or stored password, which can leave the Agent unable to start or collect data.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
+Use a gMSA to avoid manual password rotation. If you use a standard domain account and its password changes in Active Directory, the Agent's stored credentials become stale, which can leave the Agent unable to start or collect data. Restore access by rerunning the installer with the new password.
 
-To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
+## Upgrades
 
-{{< code-block lang="powershell" >}}
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<DATADOG_API_KEY>" DDAGENTUSER_NAME="<DOMAIN>\<USERNAME>" DDAGENTUSER_PASSWORD="<PASSWORD>"'
-if ($p.ExitCode -ne 0) {
-  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
-}
-{{< /code-block >}}
+Agent 7.25 and later retain the Agent username during upgrades when you do not provide one. The installer uses the stored password for an existing local or domain account when available. You can change the Agent username during an upgrade by providing the new username and required password.
 
-The `<DOMAIN>` can either be a fully-qualified domain name (in the form `mydomain.com`) or the NETBIOS name (the pre-Windows 2000 name).
-It must be separated from the `<USERNAME>` with a backslash `\`.
+The installer reapplies its default group memberships and user-rights assignments during installation and upgrades. With Agent 7.85 and later, set `DDAGENTUSER_KEEP_RIGHTS=1` to preserve customized deny-logon rights.
 
-**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+## Grant access to monitored resources
 
-**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+The installer configures the [group memberships and user rights](#permissions-configured-by-the-installer), but it does not grant access to every monitored resource. Python and custom checks run as the Agent account and can access only the files, registry keys, environment variables, network resources, and processes available to that account. Grant the account any additional permissions required by integrations.
 
-#### Domain controllers
+### Integration authentication
 
-##### Primary and backup domain controllers
+Integrations run as the Agent account, but some integrations support separate credentials for monitored resources. Without explicit credentials, the integration accesses the resource as the Agent account.
 
-When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it is a domain user rather than a local one.
+For example, the [SQL Server integration][12] can use the Agent account for Windows Authentication or use configured credentials. The [Disk integration][13] can access network shares as the Agent account or use configured credentials. See each integration's documentation for supported authentication options and configuration steps.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. A password must be specified for the installation to succeed.
+### Files, directories, and logs
 
-If the specified user account is from a parent domain, the installer uses that user account. Ensure there exists a user account in the parent domain before installation, as the installer never creates a user account in the parent domain.
+Grant the Agent account read access to files and directories monitored by integrations. Grant the same access to log files collected by the Agent.
 
-##### Read-only domain controllers
+### Windows services
 
-The installer can use only an existing domain account when installing on a read-only domain controller.
-
-### Installation with Chef
-
-If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent's configuration files have the correct permissions
-
-## Upgrade
-
-For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
-
-Starting with Agent version `7.25.0` the installer retains the username used to install the Agent and re-uses it during upgrades.
-It is still possible to override the saved value with `DDAGENTUSER_NAME`.
-
-## Agent integrations
-
-### General permissions
-
-Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
-
-For example, if the directory check is monitoring a directory that has specific access rights, such as allowing only members of the Administrators group read access, then the existing Agent can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
-
-**Note**: For Windows Server OS, the Windows Service integration cannot check against the DHCP Server service due to the special ACL for the `DHCPServer` service. The check returns `UNKNOWN` in such case.
-
-**Note**: The same considerations apply to the log files that may be monitored by the Logs Collection features of the Agent.
+The Windows Service integration cannot report the status of a service when its access control list prevents the Agent account from querying it. This can occur with services such as DHCP Server (`DHCPServer`) and Active Directory Domain Services (`NTDS`). Grant the Agent account `Read` access to each restricted service you want to monitor. For configuration and troubleshooting steps, see [Windows Service permissions][17].
 
 ### JMX-based integrations
 
-The change to `ddagentuser` affects your JMX-based integrations if the Agent's JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
+JMX-based integrations, such as [ActiveMQ][2], [ActiveMQ XML][3], [Cassandra][4], [JMX][5], [Presto][6], [Solr][7], [Tomcat][8], and [Kafka][9], use JMXFetch, which runs as the Agent account. When an integration uses `process_name_regex`, JMXFetch uses the Attach API and can attach only to JVMs running as the same account.
 
-1. You're using a JMX-based integration, such as:
-   * [ActiveMQ][2]
-   * [ActiveMQ_XML][3]
-   * [Cassandra][4]
-   * [JMX][5]
-   * [Presto][6]
-   * [Solr][7]
-   * [Tomcat][8]
-   * [Kafka][9]
-
-2. **AND** you've configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
-
-If you're using the Attach API, the change in user context means that the Agent's JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
+Use JMX Remote by configuring the integration with `host` and `port` instead. For configuration details, see [JMX integration management][5].
 
 ### Process check
 
-In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
+An unprivileged Agent account cannot read the full command line or owner of every process running as another user. As a result, the Process check cannot reliably use:
 
-* `exact_match` when set to `false`
-* `user`, which allows selecting processes that belong to a specific user
+* `exact_match` set to `false`
+* `user` filters for processes owned by other accounts
 
-To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to {{< ui >}}DataDog Agent{{< /ui >}} > {{< ui >}}Properties{{< /ui >}} and specify {{< ui >}}Log On{{< /ui >}} as `Local System`.
+To collect command line and process owner details for processes running as other users, use [Live Process Monitoring][18]. If you need these details in the Process check itself, select `LocalSystem` as the Agent account, provided the broader local privileges meet the host's security policy.
 
 ### Cassandra Nodetool integration
 
-For the Cassandra Nodetool integration to continue working, apply the following changes to your environment:
+For the [Cassandra Nodetool integration][4]:
 
-* Grant access to the Nodetool installation directory to the `ddagentuser`.
-* Set the environment variables of the Nodetool installation directory (`CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
+* Grant the Agent account access to the Nodetool installation directory.
+* Set the environment variables of the Nodetool installation directory (`CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables.
 
-## Security logs channel
+### Windows Security event log
 
-If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Readers Group to collect logs from the Security logs channel:
+The Agent account must belong to the {{< ui >}}Event Log Readers{{< /ui >}} group to collect the Security event log. The installer adds this membership except on a read-only domain controller, where you must configure it before installation.
 
-1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
-2. Navigate to {{< ui >}}System Tools{{< /ui >}} > {{< ui >}}Local Users and Groups{{< /ui >}} > {{< ui >}}Groups{{< /ui >}}.
-3. Right-click {{< ui >}}Event Log Readers{{< /ui >}} and select {{< ui >}}Properties{{< /ui >}}.
-4. Click {{< ui >}}Add{{< /ui >}} and enter `ddagentuser` > {{< ui >}}Check Names{{< /ui >}}.
-5. Click {{< ui >}}OK{{< /ui >}} and {{< ui >}}Apply{{< /ui >}}.
+If Group Policy removes the membership, update the policy or add the account to an allowed domain group that has access to the Security event log. For configuration details, see the [Win32 Event Log integration][10].
 
-[1]: https://docs.microsoft.com/en-us/windows/win32/adschema/a-samaccountname?redirectedfrom=MSDN
+## Configuration management
+
+If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, use cookbook version 2.18.0 or later so the Agent configuration files receive the correct permissions.
+
+[1]: https://learn.microsoft.com/en-us/windows/win32/adschema/a-samaccountname
 [2]: /integrations/activemq/
 [3]: /integrations/activemq/#activemq-xml-integration
 [4]: /integrations/cassandra/
@@ -172,4 +208,10 @@ If you are using the [Datadog- Win 32 event log Integration][10], the Datadog us
 [8]: /integrations/tomcat/
 [9]: /integrations/kafka/
 [10]: /integrations/win32_event_log/
-[11]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-managed-service-accounts/group-managed-service-accounts/getting-started-with-group-managed-service-accounts
+[12]: /integrations/sqlserver/
+[13]: /integrations/disk/
+[14]: https://github.com/DataDog/datadog-agent/releases/tag/7.66.0
+[15]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/storing-private-data
+[16]: https://learn.microsoft.com/en-us/windows/win32/secmgmt/private-data-object
+[17]: /integrations/windows-service/#service-permissions
+[18]: /infrastructure/process/
