@@ -52,7 +52,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Amazon SageMaker, Anthropic, Azure Foundry, ChatGPT Enterprise, Cursor, Databricks Mosaic AI, GitHub Copilot, Google Gemini, OpenAI, Snowflake AI, and Vertex AI. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Anthropic (Enterprise and Platform) | [SaaS integration][3] |
 | Azure Foundry (Models and Tools) | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
-| OpenAI (Platform only)     | [SaaS integration][5] |
+| OpenAI (ChatGPT Enterprise and Platform) | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
@@ -96,7 +96,7 @@ The following tags are available for all supported AI providers:
 | Tag&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Tag description |
 |---|---|
 | `providername` | The AI provider. |
-| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, or `anthropic_platform`). |
+| `ai_vendor` | The AI provider and plan that the cost belongs to (for example, `amazon_bedrock`, `anthropic_enterprise`, `chatgpt_enterprise`, or `openai`). |
 | `model` | The AI model identifier (for example, `claude-opus-4-6`, `gpt-4.1`). |
 | `model_name` | The human-readable model name (for example, `Claude Opus 4.6`). |
 | `token_direction` | Whether tokens are being consumed (input) or generated (output) within a service or application. |
@@ -239,6 +239,38 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
+OpenAI reports a different set of tags for each plan.
+
+**ChatGPT Enterprise**
+
+ChatGPT Enterprise is in Preview.
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `product` | Product | The ChatGPT product that generated the cost (for example, `ChatGPT`, `codex`, or `Work`). |
+| `surface` | Surface | The ChatGPT surface where the activity happened (for example, `chatgpt`, `codex`, or `Workspace Agents`). |
+| `agent_name` | Agent | The name of the Workspace Agent that generated the cost. Available only for Workspace Agents usage. |
+| `service_tier` | Service Tier | The service tier that processed the request (for example, `standard` or `codex_fast`). |
+| `reasoning` | Reasoning | The reasoning effort of the request (for example, `low`, `medium`, or `high`). |
+
+**Additional ChatGPT Enterprise tags**
+
+The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `agent_id` | The unique identifier of the Workspace Agent that generated the cost. |
+| `billing_mode` | Whether the usage was priced in credits or directly in US dollars (`credits` or `usd`). |
+| `client` | The client where the activity happened (for example, `web`, `desktop_app`, or `cli`). |
+| `model` | The OpenAI model identifier (for example, `gpt-5.6-sol`). |
+| `organization_id` | The unique identifier of the OpenAI organization. |
+| `sku` | The ChatGPT billing SKU of the charge. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+
+**OpenAI Platform**
+
 | Tag | Label | Description |
 |---|---|---|
 | `model_name` | Model | The model that generated the cost. |
@@ -246,9 +278,9 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 | `project` | Project | The OpenAI project that the cost belongs to. |
 | `api_key_name` | API Key Name | The name of the API key that made the request. |
 
-**Additional tags**
+**Additional OpenAI Platform tags**
 
-The following OpenAI tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+The following OpenAI Platform tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
 
 | Tag | Description |
 |---|---|
