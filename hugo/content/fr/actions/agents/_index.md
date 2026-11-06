@@ -19,8 +19,11 @@ further_reading:
   text: Qu'est-ce que les agents IA et comment fonctionnent-ils ?
 - link: https://www.datadoghq.com/blog/bits-agent-builder/
   tag: Blog
-  text: 'Présentation de Bits Agent Builder : créez des flux de travail agentiques
-    pour la réponse aux alertes et la remédiation'
+  text: 'Présentation de Bits Agent Builder : créez des workflows agentiques pour
+    la réponse aux alertes et la remédiation'
+- link: https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/
+  tag: Blog
+  text: Créez et exécutez des workflows Datadog depuis Bits Chat ou des agents d'IA
 title: Bits Agent Builder
 ---
 ## Présentation {#overview}
@@ -38,7 +41,7 @@ Utilisez des agents pour gérer le travail trop complexe pour une automatisation
 Depuis la [page Bits Agent Builder][1], cliquez sur **Nouvel agent**. À partir de là, vous pouvez créer un agent de trois manières :
 
 - **Créer avec l'IA** : décrivez ce que vous souhaitez que l'agent fasse en langage naturel. Bits Agent Builder génère les instructions, sélectionne les outils pertinents et configure l'agent pour vous.
-- **Start from a blueprint** : choisissez un template préétabli pour des cas d'utilisation courants tels que le tri des erreurs, la réponse aux incidents, l'analyse de sécurité ou l'assistance DevOps. Les blueprints sont préconfigurés avec des instructions, des outils et des automatisations, et sont personnalisables.
+- **Partir d'un blueprint** : choisissez un template préétabli pour des cas d'utilisation courants tels que le tri des erreurs, la réponse aux incidents, l'analyse de sécurité ou l'assistance DevOps. Les blueprints sont préconfigurés avec des instructions, des outils et des automatisations, et sont personnalisables.
 - **Partir de zéro** : Configurez l'agent manuellement — rédigez des instructions, choisissez un modèle et ajoutez des outils.
 
 {{< img src="/actions/agents/empty-state.png" alt="La nouvelle interface de création d'agent de Bits Agent Builder affichant un champ de texte et des options de blueprint." style="width:100%;" >}}
@@ -82,34 +85,34 @@ Sélectionnez le LLM qui alimente le raisonnement de l'agent. Les modèles varie
 
 Les outils définissent les actions que l'agent peut effectuer. Ajoutez des outils depuis le [Action Catalog][7] . L'agent ne peut utiliser que les outils qui ont été ajoutés à sa configuration.
 
-Cliquez sur n'importe quel outil ajouté pour coder en dur ses paramètres. Par exemple, verrouillez un outil Slack sur un canal spécifique ou une requête de journaux sur un service spécifique.
+Cliquez sur n'importe quel outil ajouté pour coder en dur ses paramètres. Par exemple, verrouillez un outil Slack sur un canal spécifique ou une requête de logs sur un service spécifique.
 
 Le [Datadog MCP Server][8] est activé par défaut. Vous pouvez vous connecter à n'importe quelle API en utilisant des [custom HTTP actions][12].
 
 ### Automations {#automations}
 
-Configurez votre agent pour qu'il s'exécute automatiquement avec un [schedule][13], ou déclenchez-le à partir d'un [monitor][14], d'un [incident][15] ou d'un [security signal][16] Datadog. Ces automatisations utilisent [Workflow Automation][9].
+Configurez votre agent pour qu'il s'exécute automatiquement avec un [planning][13], ou déclenchez-le à partir d'un [monitor][14], d'un [incident][15] ou d'un [signal de sécurité][16] Datadog. Ces automatisations utilisent [Workflow Automation][9].
 
 ## Testez votre agent {#test-your-agent}
 
 Utilisez l'interface de chat intégrée pour tester votre agent. Envoyez des messages, examinez le raisonnement de l'agent et vérifiez qu'il prend les bonnes mesures. L'historique du chat est conservé entre les sessions.
 
-## Orchestration d'agent {#agent-orchestration}
+## Orchestration d'Agent {#agent-orchestration}
 
 Utilisez des agents dans [Workflow Automation][9] et [App Builder][10] via l'action **Run Agent**. Cela vous permet d'intégrer le raisonnement IA dans n'importe quel workflow :
 
 {{< img src="/actions/agents/run-agent-step.png" alt="Configuration de l'étape Run Agent dans un workflow, montrant la sélection de l'agent, les instructions d'exécution, l'ID de conversation et les champs de schéma de sortie." style="width:100%;" >}}
 
 1. Ouvrez ou créez un workflow dans [Workflow Automation][9], ou ouvrez ou créez une application dans [App Builder][10].
-1. Ajoutez l'étape **Run Agent** depuis le [Action Catalog].
+1. Ajoutez l'étape **Run Agent** depuis l'[Action Catalog].
 1. Sélectionnez l'agent à exécuter.
 1. Rédigez les **Run Instructions**—l'invite que l'agent reçoit à chaque exécution. Utilisez des variables telles que `{{Source.form}}` pour transmettre les données de déclenchement.
 
 L'étape **Run Agent** prend également en charge les champs optionnels suivants :
 
-- **Output Schema** : définissez un schéma JSON pour la réponse de l'agent. Lorsqu'il est défini, l'agent structure sa sortie pour correspondre au schéma afin de l'utiliser dans les étapes suivantes. Par exemple, vous pouvez définir un schéma avec un champ `requestType`, puis effectuer une branche sur `Run Agent.finalResponse.requestType` dans une étape de condition Si.
+- **Output Schema** : définissez un schéma JSON pour la réponse de l'agent. Lorsqu'il est défini, l'agent structure sa sortie pour correspondre au schéma afin de l'utiliser dans les étapes suivantes. Par exemple, vous pouvez définir un schéma avec un champ `requestType`, puis effectuer une branche sur `Run Agent.finalResponse.requestType` dans une étape de condition If.
 
-  {{< img src="/actions/agents/output-schema-example.png" alt="Un workflow utilisant l’Output Schema pour effectuer une branche sur les champs de réponse de l'agent." style="width:100%;" >}}
+  {{< img src="/actions/agents/output-schema-example.png" alt="Un workflow utilisant un schéma de sortie pour effectuer une branche sur les champs de réponse de l'agent." style="width:100%;" >}}
 
 - **Conversation ID** : Par défaut, chaque invocation de Run Agent est une exécution autonome à tour unique. Transmettre un ID de conversation permet à l'agent de conserver le contexte sur plusieurs exécutions de workflow. Les sessions à plusieurs tours sont soumises aux mêmes limites de fenêtre de contexte que l'interface utilisateur de chat.
 
@@ -117,17 +120,17 @@ L'agent s'exécute avec ses outils et instructions configurés, puis renvoie sa 
 
 ### Automatically Assign Agents to Work Items {#automatically-assign-agents-to-work-items}
 
-[Work Management][17] est l'outil de billetterie intégré de Datadog pour le suivi du travail humain et agentique. Vous pouvez créer des agents personnalisés pour aider à trier et résoudre votre travail, et affecter automatiquement ces agents aux éléments de travail.
+[Work Management][17] est l'outil de gestion des tickets intégré de Datadog pour le suivi du travail humain et agentique. Vous pouvez créer des agents personnalisés pour aider à trier et résoudre votre travail, et affecter automatiquement ces agents aux éléments de travail.
 
 ## Dépannage {#troubleshooting}
 
-**L'agent n'utilise pas d'outil** : Vérifiez que l'outil a été ajouté à la configuration de l'agent. Les agents ne peuvent utiliser que les outils qui sont explicitement ajoutés.
+**L'Agent n'utilise pas d'outil** : Vérifiez que l'outil a été ajouté à la configuration de l'agent. Les agents ne peuvent utiliser que les outils qui sont explicitement ajoutés.
 
-**L'automatisation ne s'exécute pas** : Vérifiez que l'automatisation est publiée et que l'étape Exécuter l'agent est entièrement configurée.
+**L'automatisation ne s'exécute pas** : Vérifiez que l'automatisation est publiée et que l'étape Run Agent est entièrement configurée.
 
-**Conversation length limit** : Les conversations longues peuvent atteindre la limite de longueur de contexte. Si cela se produit, démarrez une nouvelle conversation. 
+**Limite de longueur des conversations** : Les conversations longues peuvent atteindre la limite de longueur de contexte. Si cela se produit, démarrez une nouvelle conversation. 
 
-**Unexpected configuration changes** : Utilisez [Audit Trail][11] filtré par l'ID de votre agent pour examiner l'historique des modifications.
+**Modifications de configuration inattendues** : Utilisez [Audit Trail][11] filtré par l'ID de votre agent pour examiner l'historique des modifications.
 
 ## Pour aller plus loin {#further-reading}
 

@@ -4,42 +4,42 @@ aliases:
 - /es/tracing/setup/docker/
 - /es/agent/apm/docker
 - /es/agent/docker/apm
-description: Configura la recolección de trazas de APM para aplicaciones que se ejecutan
-  en contenedores Docker utilizando el Agente de Datadog
+description: Configure la recopilación de trazas de APM para aplicaciones que se ejecutan
+  en contenedores Docker mediante el Datadog Agent
 further_reading:
 - link: https://github.com/DataDog/datadog-agent/tree/main/pkg/trace
   tag: Código fuente
   text: Código fuente
 - link: /integrations/amazon_ecs/#trace-collection
   tag: Documentación
-  text: Traza tus aplicaciones de ECS
+  text: Rastree sus aplicaciones de ECS.
 - link: /agent/docker/log/
   tag: Documentación
-  text: Recoge los registros de tu aplicación
+  text: Recopile los registros de su aplicación
 - link: /agent/docker/integrations/
   tag: Documentación
-  text: Recoge automáticamente las métricas y registros de tus aplicaciones
+  text: Recopile automáticamente las métricas y los registros de sus aplicaciones
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limita la recolección de datos a un subconjunto de contenedores solamente
+  text: Limitar la recopilación de datos solo a un subconjunto de contenedores
 - link: /agent/docker/tag/
   tag: Documentación
-  text: Asigna etiquetas a todos los datos emitidos por un contenedor
-title: Trazando aplicaciones Docker
+  text: Asignar etiquetas a todos los datos emitidos por un contenedor
+title: Rastreo de aplicaciones Docker.
 ---
-A partir de la versión 6.0.0 del Agente, el Agente de Trazas está habilitado por defecto. Si se ha desactivado, puedes volver a habilitarlo en el contenedor `registry.datadoghq.com/agent` pasando `DD_APM_ENABLED=true` como una variable de entorno.
+A partir del Agent 6.0.0, el Trace Agent está habilitado de forma predeterminada. Si se ha desactivado, puede volver a habilitarlo en el contenedor `registry.datadoghq.com/agent` pasando `DD_APM_ENABLED=true` como variable de entorno.
 
-Los comandos de CLI en esta página son para el tiempo de ejecución de Docker. Reemplaza `docker` con `nerdctl` para el tiempo de ejecución de containerd, o `podman` para el tiempo de ejecución de Podman.
+Los comandos de la CLI en esta página son para el tiempo de ejecución de Docker. Reemplace `docker` con `nerdctl` para el tiempo de ejecución de containerd, o `podman` para el tiempo de ejecución de Podman.
 
-<div class="alert alert-info">Si estás recolectando trazas de una aplicación en contenedores (tu Agente y aplicación ejecutándose en contenedores separados), como alternativa a las siguientes instrucciones, puedes inyectar automáticamente el SDK en tu aplicación. Lee <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Inyectando bibliotecas</a> para instrucciones.</div>
+<div class="alert alert-info">Si está recopilando trazas de una aplicación en contenedores (su Agent y su aplicación se ejecutan en contenedores separados), como alternativa a las siguientes instrucciones, puede inyectar automáticamente el SDK en su aplicación. Lea <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Inyección de bibliotecas</a> para obtener instrucciones.</div>
 
-## Trazando desde el host {#tracing-from-the-host}
+## Rastreo desde el servidor {#tracing-from-the-host}
 
-La trazabilidad está disponible en el puerto `8126/tcp` desde _tu host solamente_ añadiendo la opción `-p 127.0.0.1:8126:8126/tcp` al comando `docker run`.
+El rastreo está disponible en el puerto `8126/tcp` desde _solo su servidor_ al agregar la opción `-p 127.0.0.1:8126:8126/tcp` al comando `docker run`.
 
-Para hacerlo disponible desde _cualquier host_, usa `-p 8126:8126/tcp` en su lugar.
+Para que esté disponible desde _cualquier servidor_, utilice `-p 8126:8126/tcp` en su lugar.
 
-Por ejemplo, el siguiente comando permite que el Agente reciba trazas solo de tu host:
+Por ejemplo, el siguiente comando permite que el Agent reciba trazas solo desde su servidor:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -56,7 +56,7 @@ docker run -d --cgroupns host \
               -e DD_SITE=<DATADOG_SITE> \
               registry.datadoghq.com/agent:latest
 ```
-Donde se encuentra tu `<DATADOG_SITE>` {{< region-param key="dd_site" code="true" >}} (por defecto es `datadoghq.com`).
+Donde su `<DATADOG_SITE>` es {{< region-param key="dd_site" code="true" >}} (se establece de forma predeterminada en `datadoghq.com`).
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -68,76 +68,78 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_SITE=<DATADOG_SITE> \
               registry.datadoghq.com/agent:latest
 ```
-Donde se encuentra tu `<DATADOG_SITE>` {{< region-param key="dd_site" code="true" >}} (por defecto es `datadoghq.com`).
+Donde su `<DATADOG_SITE>` es {{< region-param key="dd_site" code="true" >}} (se establece de forma predeterminada en `datadoghq.com`).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Variables de entorno del agente APM de Docker {#docker-apm-agent-environment-variables}
+## Variables de entorno del Docker APM Agent {#docker-apm-agent-environment-variables}
 
-Utiliza las siguientes variables de entorno para configurar el trazado para el Datadog Agent en Docker. Consulta el [archivo de muestra `config_template.yaml`][8] para más detalles.
+Utilice las siguientes variables de entorno para configurar el rastreo para el Docker Agent.
+
+Para ver todas las opciones disponibles y sus valores predeterminados, consulte la sección `apm_config` del [archivo de configuración de ejemplo del Agent][8].
 
 `DD_API_KEY`                      
-: requerido - _cadena_
-<br/>Tu [clave API de Datadog][1].
+: obligatorio - _cadena_
+<br/>Su [clave de Datadog API][1].
 
 `DD_SITE`
 : opcional - _cadena_
-<br/>Tu [sitio de Datadog][7]. Establece esto en `{{< region-param key="dd_site" >}}`.
+<br/>Su [sitio de Datadog][7]. Establezca esto en `{{< region-param key="dd_site" >}}`.
 <br/>**Default**: `datadoghq.com`
 
 `DD_APM_ENABLED`                   
-: opcional - _Booleano_ - **por defecto**: `true`
-<br/>Cuando se establece en `true` (por defecto), el Datadog Agent acepta trazas y métricas de traza.
+: opcional - _booleano_ - **predeterminado**: `true`
+<br/>Cuando se establece en `true` (predeterminado), el Datadog Agent acepta trazas y métricas de traza.
 
 `DD_APM_RECEIVER_PORT`             
 : opcional - _entero_ - **predeterminado**: `8126` 
-<br/>Establece el puerto en el que escucha el receptor de trazas del Agente de Datadog. Establezca en `0` para deshabilitar el receptor HTTP.
+<br/>Establece el puerto en el que escucha el receptor de trazas del Datadog Agent. Establezca en `0` para deshabilitar el receptor HTTP.
 
 `DD_APM_RECEIVER_SOCKET`           
 : opcional - _cadena_
-<br/>Para recopilar sus trazas a través de Sockets de Dominio UNIX, proporcione la ruta al socket UNIX. Si se establece, esto tiene prioridad sobre la configuración de nombre de host y puerto, y debe apuntar a un archivo de socket válido. 
+<br/>Para recopilar sus trazas a través de sockets de dominio UNIX, proporcione la ruta al socket UNIX. Si se establece, esto tiene prioridad sobre la configuración de nombre de host y puerto, y debe apuntar a un archivo de socket válido. 
 
 `DD_APM_NON_LOCAL_TRAFFIC`         
-: opcional - _Booleano_ - **predeterminado**: `false`
-<br/>Cuando se establece en `true`, el Agente de Datadog escucha tráfico no local. Si está [trazando desde otros contenedores](#tracing-from-other-containers), establezca esta variable de entorno en `true`. 
+: opcional - _booleano_ - **predeterminado**: `false`
+<br/>Cuando se establece en `true`, el Datadog Agent escucha tráfico no local. Si está [realizando el rastreo desde otros contenedores](#tracing-from-other-containers), establezca esta variable de entorno en `true`. 
 
 `DD_APM_DD_URL`                    
 : opcional - _cadena_
-<br/>Para usar un proxy para APM, proporcione el punto final y el puerto como `<ENDPOINT>:<PORT>`. El proxy debe ser capaz de manejar conexiones TCP.
+<br/>Para usar un proxy para APM, proporcione el punto de conexión y el puerto como `<ENDPOINT>:<PORT>`. El proxy debe ser capaz de manejar conexiones TCP.
 
 `DD_APM_CONNECTION_LIMIT`          
-: requerido - _entero_ - **predeterminado**: `2000`
-<br/>Establece el número máximo de conexiones APM para un intervalo de 30 segundos. Consulte [Límites de Tasa del Agente][6] para más detalles.
+: obligatorio - _entero_ - **predeterminado**: `2000`
+<br/>Establece el máximo de conexiones APM para una ventana de tiempo de 30 segundos. Consulte [Agent Rate Limits][6] para obtener más detalles.
 
 `DD_APM_IGNORE_RESOURCES`          
 : opcional - _[cadena]_ 
-<br/>Proporciona una lista de exclusión de recursos que el Agente de Datadog debe ignorar. Si el nombre del recurso de una traza coincide con una o más de las expresiones regulares en esta lista, la traza no se envía a Datadog. 
+<br/>Proporciona una lista de exclusión de recursos para que el Datadog Agent los ignore. Si el nombre del recurso de una traza coincide con una o más de las expresiones regulares de esta lista, la traza no se envía a Datadog. 
 <br/>Ejemplo: `"GET /ignore-me","(GET\|POST) and-also-me"`.                                                                                                                                                                                                                                                                                   
 
 `DD_APM_FILTER_TAGS_REQUIRE`       
 : opcional - _objeto_
-<br/>Define reglas para el filtrado de trazas basado en etiquetas. Para ser enviados a Datadog, las trazas deben tener estas etiquetas. Ver [Ignorando Recursos No Deseados en APM][5]. 
+<br/>Define reglas para el filtrado de trazas basado en etiquetas. Para ser enviadas a Datadog, las trazas deben tener estas etiquetas. Consulte [Ignoring Unwanted Resources in APM][5]. 
 
 `DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
 : opcional - _objeto_
-<br/>Compatible en Agente 7.49+. Define reglas para el filtrado de trazas basado en etiquetas con expresiones regulares. Para ser enviados a Datadog, las trazas deben tener etiquetas que coincidan con estos patrones regex. 
+<br/>Compatible con el Agent 7.49+. Define reglas para el filtrado de trazas basado en etiquetas con expresiones regulares. Para ser enviadas a Datadog, las trazas deben tener etiquetas que coincidan con estos patrones de expresiones regulares. 
 
 `DD_APM_FILTER_TAGS_REJECT`        
 : opcional - _objeto_ 
-<br/>Define reglas para el filtrado de trazas basado en etiquetas. Si una traza tiene estas etiquetas, no se envía a Datadog. Ver [Ignorando Recursos No Deseados en APM][5] para más detalles. 
+<br/>Define reglas para el filtrado de trazas basado en etiquetas. Si una traza tiene estas etiquetas, no se envía a Datadog. Consulte [Ignoring Unwanted Resources in APM][5] para obtener más detalles. 
 
 `DD_APM_FILTER_TAGS_REGEX_REJECT`  
 : opcional - _objeto_ 
-<br/>Compatible con Agent 7.49+. Define reglas para el filtrado de trazas basado en etiquetas con expresiones regulares. Si una traza tiene etiquetas que coinciden con estos patrones de expresión regular, la traza no se envía a Datadog. 
+<br/>Compatible con el Agent 7.49+. Define reglas para el filtrado de trazas basado en etiquetas con expresiones regulares. Si una traza tiene etiquetas que coinciden con estos patrones de expresiones regulares, la traza no se envía a Datadog. 
 
 `DD_APM_REPLACE_TAGS`              
 : opcional - _[objeto]_ 
-<br/>Define un conjunto de reglas para [reemplazar o eliminar etiquetas que contienen información potencialmente sensible][2].
+<br/>Define un conjunto de reglas para [reemplazar o eliminar etiquetas que contienen información potencialmente confidencial][2].
 
 `DD_HOSTNAME`                      
 : opcional - _cadena_ - **predeterminado**: detectado automáticamente 
-<br/>Establece el servidor a utilizar para métricas si la detección automática de servidor falla, o al ejecutar el Agent de clúster de Datadog.
+<br/>Establece el nombre de host que se utilizará para las métricas si la detección automática del nombre de host falla, o al ejecutar el Datadog Cluster Agent.
 
 `DD_DOGSTATSD_PORT`                
 : opcional - _entero_ - **predeterminado**: `8125` 
@@ -149,30 +151,30 @@ Utiliza las siguientes variables de entorno para configurar el trazado para el D
 
 `DD_BIND_HOST`                     
 : opcional - _cadena_ - **predeterminado**: `localhost` 
-<br/>Establece el servidor para escuchar en DogStatsD y trazas.
+<br/>Establece el servidor en el que escuchar para DogStatsD y las trazas.
 
 `DD_LOG_LEVEL`                     
 : opcional - _cadena_ - **predeterminado**: `info` 
 <br/>Establece el nivel mínimo de registro. Opciones válidas: `trace`, `debug`, `info`, `warn`, `error`, `critical` y `off`.
 
-## Trazas desde otros contenedores {#tracing-from-other-containers}
+## Rastreo desde otros contenedores {#tracing-from-other-containers}
 
-Al igual que con DogStatsD, las trazas pueden ser enviadas al Agent desde otros contenedores utilizando [redes de Docker](#docker-network) o con la [IP del servidor de Docker](#docker-host-ip).
+Al igual que con DogStatsD, las trazas se pueden enviar al Agent desde otros contenedores utilizando [redes de Docker](#docker-network) o con la [IP del servidor de Docker](#docker-host-ip).
 
 ### Red de Docker {#docker-network}
 
-Como primer paso, crea una red de puente definida por el usuario:
+Como primer paso, cree una red bridge definida por el usuario:
 
 ```bash
 docker network create <NETWORK_NAME>
 ```
 
-Los comandos de CLI en esta página son para el tiempo de ejecución de Docker. Reemplaza `docker` con `nerdctl` para el tiempo de ejecución de containerd, o `podman` para el tiempo de ejecución de Podman.
+Los comandos de la CLI en esta página son para el tiempo de ejecución de Docker. Reemplace `docker` con `nerdctl` para el tiempo de ejecución de containerd, o `podman` para el tiempo de ejecución de Podman.
 
-Luego inicia el Agente y el contenedor de la aplicación, conectados a la red previamente creada:
+Luego, inicie el Agent y el contenedor de la aplicación, conectados a la red creada anteriormente:
 
 {{< tabs >}}
-{{% tab "Estándar" %}}
+{{% tab "Standard" %}}
 
 ```bash
 # Datadog Agent
@@ -195,7 +197,7 @@ docker run -d --name app \
               company/app:latest
 ```
 
-Donde se encuentra tu `<DATADOG_SITE>` {{< region-param key="dd_site" code="true" >}} (por defecto es `datadoghq.com`).
+Donde su `<DATADOG_SITE>` es {{< region-param key="dd_site" code="true" >}} (se establece de forma predeterminada en `datadoghq.com`).
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -217,23 +219,23 @@ docker run -d --name app \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
-Donde se encuentra tu `<DATADOG_SITE>` {{< region-param key="dd_site" code="true" >}} (por defecto es `datadoghq.com`).
+Donde su `<DATADOG_SITE>` es {{< region-param key="dd_site" code="true" >}} (se establece de forma predeterminada en `datadoghq.com`).
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Esto expone el servidor `datadog-agent` en tu contenedor `app`.
-Si estás usando `docker-compose`, los parámetros `<NETWORK_NAME>` son los definidos en la sección `networks` de tu `docker-compose.yml`.
+Esto expone el nombre de servidor `datadog-agent` en su contenedor `app`.
+Si está utilizando `docker-compose`, los parámetros `<NETWORK_NAME>` son los definidos en la sección `networks` de su `docker-compose.yml`.
 
-Tus SDKs de aplicación deben estar configurados para enviar trazas a esta dirección. Establece variables de entorno con `DD_AGENT_HOST` como el nombre del contenedor del Agent, y `DD_TRACE_AGENT_PORT` como el puerto de trazas del Agent en tus contenedores de aplicación. El ejemplo anterior utiliza el host `datadog-agent` y el puerto `8126` (el valor predeterminado, por lo que no tienes que configurarlo).
+Los SDK de su aplicación deben estar configurados para enviar trazas a esta dirección. Establezca las variables de entorno con `DD_AGENT_HOST` como el nombre del contenedor del Agent y `DD_TRACE_AGENT_PORT` como el puerto de trazas del Agent en los contenedores de su aplicación. El ejemplo anterior utiliza el servidor `datadog-agent` y el puerto `8126` (el valor predeterminado, por lo que no tiene que configurarlo).
 
-Alternativamente, consulta los ejemplos a continuación para establecer manualmente el host del Agente en cada lenguaje soportado:
+Alternativamente, consulte los ejemplos a continuación para configurar el servidor de Agent manualmente en cada lenguaje compatible:
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodeJS,.NET" >}}
 
 {{< programming-lang lang="java" >}}
 
-Actualice la configuración del Java Agent mediante variables de entorno:
+Actualice la configuración del Agent de Java con variables de entorno:
 
 ```bash
 DD_AGENT_HOST=datadog-agent \
@@ -325,15 +327,15 @@ export DD_TRACE_AGENT_PORT=8126
 dotnet example.dll
 ```
 
-El valor de la variable de entorno `CORECLR_PROFILER_PATH` varía según el sistema donde se está ejecutando la aplicación:
+El valor para la variable de entorno `CORECLR_PROFILER_PATH` varía según el sistema donde se esté ejecutando la aplicación:
 
-   Sistema Operativo y Arquitectura de Proceso | Valor de CORECLR_PROFILER_PATH
+   Arquitectura del sistema operativo y del proceso | Valor de CORECLR_PROFILER_PATH
    ------------------------------------------|----------------------------
    Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
-   Linux x64 | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
-   Linux ARM64 | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
-   Windows x64 | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
-   Windows x86 | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
+   Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
+   Linux ARM64      | `<APP_DIRECTORY>/datadog/linux-arm64/Datadog.Trace.ClrProfiler.Native.so`
+   Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
+   Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
 En la tabla anterior, `<APP_DIRECTORY>` se refiere al directorio que contiene los archivos `.dll` de la aplicación.
 
@@ -341,12 +343,12 @@ En la tabla anterior, `<APP_DIRECTORY>` se refiere al directorio que contiene lo
 
 {{< /programming-lang-wrapper >}}
 
-### IP del host de Docker {#docker-host-ip}
+### IP del servidor de Docker {#docker-host-ip}
 
-El puerto del contenedor del Agent `8126` debe estar vinculado directamente al host.
-Configure su application tracer para informar a la ruta predeterminada de este contenedor (determine esto usando el comando `ip route`).
+El puerto del contenedor de Agent `8126` debe estar vinculado directamente al servidor.
+Configure su rastreador de aplicaciones para informar a la ruta predeterminada de este contenedor (determine esto usando el comando `ip route`).
 
-Lo siguiente es un ejemplo para el Python Tracer, asumiendo que `172.17.0.1` es la ruta predeterminada:
+El siguiente es un ejemplo para el rastreador de Python, suponiendo que `172.17.0.1` es la ruta predeterminada:
 
 ```python
 from ddtrace import tracer
@@ -354,8 +356,8 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
-### Socket de dominio Unix (UDS) {#unix-domain-socket-uds}
-Para enviar trazas a través de socket, el socket debe estar montado en el contenedor del Agent y en el contenedor de su aplicación.
+### Socket de dominio UNIX (UDS) {#unix-domain-socket-uds}
+Para enviar trazas a través de un socket, el socket debe montarse en el contenedor del Agent y en el contenedor de su aplicación.
 
 ```bash
 # Datadog Agent
@@ -381,9 +383,9 @@ docker run -d --name app \
               company/app:latest
 ```
 
-Consulte la [documentación de instrumentación APM específica del lenguaje][3] para la configuración del tracer.
+Consulte la [documentación de instrumentación de APM específica del lenguaje][3] para conocer la configuración del rastreador.
 
-## Lectura Adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -395,4 +397,4 @@ Consulte la [documentación de instrumentación APM específica del lenguaje][3]
 [5]: /es/tracing/guide/ignoring_apm_resources/
 [6]: /es/tracing/troubleshooting/agent_rate_limits
 [7]: /es/getting_started/site/
-[8]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

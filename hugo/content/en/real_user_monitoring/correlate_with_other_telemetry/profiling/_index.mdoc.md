@@ -28,12 +28,12 @@ further_reading:
 ---
 ## Overview
 
-Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
+Datadog RUM supports profiling for browser, Electron, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png" 
-alt="Browser profiling tab in the Sessions Explorer." 
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png"
+alt="Browser profiling tab in the Sessions Explorer."
 style="width:100%;" /%}
 
 Browser profiling provides visibility into how your application behaves in your users' browsers, helping you understand root causes behind unresponsive applications at page load or during the page life cycle. Use profiling data alongside RUM insights to identify which code executes during a [Long Animation Frame (LoAF)][1] and how JavaScript execution and rendering tasks impact user-perceived performance.
@@ -72,7 +72,7 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 2. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
     ```javascript
         app.get("/", (request, response) => {
-            … 
+            …
             response.set("Document-Policy", "js-profiling");
             …
         });
@@ -85,15 +85,15 @@ To start collecting data, set up [RUM Browser Monitoring][2].
 4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
       This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
-    
+
     To enable CORS:
 
     - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
     - Make sure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
-    
+
        ```javascript
        app.get("/", (request, response) => {
-           … 
+           …
            response.header("Access-Control-Allow-Origin", "*");
            response.header("Access-Control-Allow-Headers",
            …
@@ -147,7 +147,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_view_panel.png" alt="Browser profiling tab in the View panel." style="width:100%;" /%}
 
 - **Long Task panel**: Profiling data in the performance tab.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling data in the Long Task panel." style="width:100%;" /%}
 
 - **Vitals panel**: Profiling data in a new tab.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_vitals_panel.png" alt="Browser profiling tab in the Vitals panel." style="width:100%;" /%}
@@ -158,7 +158,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 ### Within the Profiling page
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_1.png" alt="Step 1 of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
@@ -169,7 +169,7 @@ The Profiling page, found through the top bar navigation, lets you analyze and c
 3. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_3.png" alt="Step 3 of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
-4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or if you chose to compare see the differences between group A and B.
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
 
@@ -186,8 +186,73 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
+### Analyze profiling data with AI
+
+- **[Bits Chat][29]**: From the side panel of a view, action, vital, or long task, ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
+
 {% /if %}
 <!-- end Browser -->
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+Electron profiling collects code-level performance data from renderer pages with the [JS Self-Profiling API][electron-1], and correlates it with your RUM data.
+
+{% alert level="info" %}
+Profiling is available only in renderer processes. It is not supported in the main process.
+{% /alert %}
+
+## Setup
+
+### Step 1 - Set up RUM
+
+To start collecting data, set up [RUM for Electron][electron-2], including the Browser SDK in your renderer processes.
+
+### Step 2 - Configure the profiling sampling rate
+
+In the main process `init` call, set `profilingSampleRate`, which determines the percentage of sampled sessions that are profiled. It defaults to `0`, which disables profiling.
+
+```typescript
+await init({
+  // ...
+  profilingSampleRate: 100, // percentage of sampled sessions that are profiled
+});
+```
+
+The main process decides which sessions are profiled. `profilingSampleRate` set in the renderer `datadogRum.init` call has no effect.
+
+### Step 3 - Serve renderer pages with the Document-Policy header
+
+The JS Self-Profiling API is available only on pages served with the HTTP response header `Document-Policy: js-profiling`.
+
+Pages loaded from `file://` are not served with this header by default, so profiling is not available for them.
+
+1. Serve the renderer over a protocol where you control the response headers: a custom protocol registered with [`protocol.handle`][electron-3], or a local HTTP server.
+2. If you use a custom protocol, register it as privileged, with `standard` and `secure`, before the app is ready:
+
+    ```typescript
+    import { protocol } from 'electron';
+
+    protocol.registerSchemesAsPrivileged([
+      { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+    ]);
+    ```
+
+    If you skip this step, the JS Self-Profiling API stays unavailable even with the header, because Chromium does not treat the scheme as a secure context.
+
+3. Add the `Document-Policy: js-profiling` response header to the responses that serve your renderer pages.
+
+## Explore profiling
+
+Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][electron-4] for the Browser SDK.
+
+[electron-1]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
+[electron-2]: /real_user_monitoring/application_monitoring/electron/setup/
+[electron-3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
+[electron-4]: /real_user_monitoring/correlate_with_other_telemetry/profiling/?platform=browser#explore-profiling
+
+{% /if %}
+<!-- end Electron -->
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -197,18 +262,12 @@ The **Optimization page** surfaces profiling data in several contexts:
 Android profiling helps you identify and optimize slow methods during important moments in user sessions. Android profiling is built on top of the [ProfilingManager Android API][4] and samples the device's CPU to collect method call stacks from the application's process.
 
 {% alert level="warning" %}
-Only devices running Android 15 (API level 35) or higher generate profiling data.
+Only devices running Android 15 (API level 35) or higher generate profiling data. Android 16 (API level 36) or higher is required to generate ANR system traces.
 {% /alert %}
 
 ## Prerequisites
 
-- Application launch profiling requires Android SDK version 3.6.0+.
-- Continuous profiling requires Android SDK version 3.12.0+.
-- [RUM without Limits][5] must be enabled in your organization.
-
-## Preview quota system
-
-During the preview, the Datadog Android SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
+- Android profiling requires Android SDK version 3.16.0+.
 
 ## Setup
 
@@ -221,9 +280,9 @@ To start collecting data, set up [Mobile RUM for Android][6].
 Initialize the RUM SDK and configure the `setApplicationLaunchSampleRate` and `setContinuousSampleRate` parameters, which are independent of each other:
 
 - `setApplicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 15 means profiling runs on 15 out of 100 launches).
-- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][19] are profiled (for example, 15 means that 15 out of 100 sessions will have their time to full display, ANRs, and long tasks profiled).
+- `setContinuousSampleRate` determines whether the time to full display, application not responding (ANR) errors, long tasks, or [RUM Operations][27] are profiled (for example, 15 means that 15 out of 100 sessions have their time to full display, ANRs, long tasks, and operations profiled).
 
-Both sample rates are applied on top of the [RUM session sampling rate][17]. 
+Both sample rates are applied on top of the [RUM session sampling rate][17].
 
 {% alert level="danger" %}
 If no value is specified, the default for both `setApplicationLaunchSampleRate` and `setContinuousSampleRate` is 15%.
@@ -258,10 +317,34 @@ If no value is specified, the default for both `setApplicationLaunchSampleRate` 
 ```
 
 {% alert level="warning" %}
-The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate` or `continuousSampleRate`. This variation results from [rate limitations][20] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
+The total volume of profiles may not match the percentage configured in `setApplicationLaunchSampleRate` or `setContinuousSampleRate`. This variation results from [rate limitations][20] within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
 {% /alert %}
 
-The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
+The [ProfilingManager API][7] also supports disabling rate limiting during debug builds.
+
+### Step 3 - (Optional) Disable ANR profiling with system traces
+
+On devices running Android 16 (API level 36) or higher, the SDK registers an ANR trigger with the [ProfilingManager API][22]. When the system detects an ANR in your application, it captures a [system trace][23] of the period leading up to the ANR. The SDK reports the ANR as a RUM error and attaches the system trace to it.
+
+ANR profiling with system traces is enabled by default and works independently of `setContinuousSampleRate`. System traces are collected only for sessions tracked by the [RUM session sampling rate][17].
+
+System traces help diagnose ANRs, which are usually caused by thread contention, blocking I/O, or interprocess communication (IPC) delays rather than CPU-heavy computation. A system trace shows thread states and system-level events over time, which surfaces these causes.
+
+To disable ANR profiling with system traces, add `enableAnrTrigger(false)` to the `ProfilingConfiguration.Builder()` call from Step 2:
+
+```kotlin
+  Profiling.enable(
+      ProfilingConfiguration.Builder()
+          .setApplicationLaunchSampleRate(15f)
+          .setContinuousSampleRate(15f)
+          .enableAnrTrigger(false)
+          .build()
+  )
+```
+
+{% alert level="info" %}
+The system applies its own [rate limits][20] to trigger-based profiling, so not every ANR has a system trace attached.
+{% /alert %}
 
 ## Explore profiling data
 
@@ -281,7 +364,9 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 Android profiling data is attached to [application not responding (ANR)][16] errors in a RUM session. You can access profiles for ANR errors from the view side panel or from the error event side panel.
 
-{% img src="real_user_monitoring/android/android-profiling-anr.png" alt="Android profiling data for an application not responding error event." style="width:90%;" /%}
+{% img src="real_user_monitoring/android/android-profiling-anr-1.png" alt="Android profiling data for an application not responding error, showing the System Trace tab with main-thread lock contention." style="width:90%;" /%}
+
+On devices running Android 16 (API level 36) or higher, ANR errors can also include a system trace captured by the operating system when the ANR occurred. Use the system trace to investigate what blocked the main thread, such as lock contention, I/O, or work on other threads. For more information, see the [Step 3 - (Optional) Disable ANR profiling with system traces](#step-3---optional-disable-anr-profiling-with-system-traces) section.
 
 ### During long tasks
 
@@ -295,6 +380,26 @@ Android profiling data is attached to operations events in a RUM session. You ca
 
 {% img src="real_user_monitoring/android/android-profiling-operation.png" alt="Android profiling data for an operation." style="width:90%;" /%}
 
+### Within the Profiling page
+{% img src="real_user_monitoring/android/android_profiler_aggregate_experience.png" alt="Android profiling aggregate experience." style="width:100%;" /%}
+
+The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+
+1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][24] or [time to full display][25]), a long task, or a critical [RUM Operation][27]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
+{% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_2.png" alt="Step 2 of the Android profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
+
+2. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
+{% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_3.png" alt="Step 3 of the Android profiling aggregate experience showing how to compare." style="width:100%;" /%}
+
+3. **Investigate slowest methods**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
+{% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the Android profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
+{% img src="real_user_monitoring/android/android_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the Android profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
+
+### Analyze profiling data with AI
+
+- **[Bits Chat][29]**: Open the side panel of a slow event, such as a time to initial display, time to full display, ANR error, long task, or operation. Then ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
+
 {% /if %}
 <!-- end Android -->
 
@@ -303,17 +408,12 @@ Android profiling data is attached to operations events in a RUM session. You ca
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
-iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks. 
+iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks.
 
 ## Prerequisites
 
 - Application launch profiling requires iOS SDK version 3.6.0+.
 - Continuous profiling requires iOS SDK version 3.14.0+.
-- [RUM without Limits][10] must be enabled in your organization.
-
-## Preview quota system
-
-During the preview, the Datadog iOS SDK profiles up to 100,000 sessions per day across all applications in the organization. After reaching this quota, the SDK pauses profiling until the quota resets at 12:00 a.m. UTC.
 
 ## Setup
 
@@ -325,7 +425,7 @@ To start collecting data, set up [Mobile RUM for iOS][11].
 Initialize the RUM SDK and configure the `applicationLaunchSampleRate` and `continuousSampleRate` parameters, which are independent of each other:
 
 - `applicationLaunchSampleRate` determines how often the time to initial display is profiled (for example, 5 means profiling runs on 5 out of 100 launches).
-- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations] [21] are profiled (for example, 5 means that 5 out of 100 sessions will have their time to full display, application hangs, and long tasks profiled).
+- `continuousSampleRate` determines whether the time to full display, application hangs, long tasks, or [RUM Operations][26] are profiled (for example, 5 means that 5 out of 100 sessions have their time to full display, application hangs, long tasks, and operations profiled).
 
 Both sample rates are applied on top of the [RUM session sampling rate][21].
 
@@ -366,7 +466,7 @@ If no value is specified, the default for both `applicationLaunchSampleRate` and
 
 ## Explore profiling data
 
-You can use the `@profiling.has_profile`attribute in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, errors, long tasks, vitals, and operations.
+You can use the `@profiling.has_profile` attribute in the Sessions Explorer to filter to profiled events and investigate which code ran and how it affected the user's experience. This is available for sessions, views, errors, long tasks, vitals, and operations.
 
 ### During the time to initial display and time to full display
 
@@ -374,7 +474,7 @@ iOS application launch profiling data is attached to the [time to initial displa
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttfd.png" alt="iOS profiling data in a time to full display vital event." style="width:90%;" /%}
 
-Use the **flame graph** to identify which functions consume the most Wall time during launch, the **thread timeline** to see parallel execution patterns, and the **call graph** to trace function dependencies. You can also download the profiling data for external analysis or deeper investigation.
+Use the **flame graph** to identify which functions consume the most wall time during launch, the **thread timeline** to see parallel execution patterns, and the **call graph** to trace function dependencies. You can also download the profiling data for external analysis or deeper investigation.
 
 {% img src="real_user_monitoring/ios/ios-profiling-thread-timeline.png" alt="iOS profiling data for the time to initial display in a thread timeline." style="width:90%;" /%}
 
@@ -396,6 +496,25 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 
 {% img src="real_user_monitoring/ios/ios-profiling-operation.png" alt="iOS profiling data in an operation event." style="width:90%;" /%}
 
+### Within the Profiling page
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience.png" alt="iOS profiling aggregate experience." style="width:100%;" /%}
+
+The Profiling page, found under [**Real User Monitoring > Investigate > Profiles**][28], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming methods, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+
+1. **Select a measurement**: Pick an application launch measurement (either the [time to initial display][12] or [time to full display][12]), a long task, or a critical [RUM Operation][26]. Optionally, filter by RUM attributes such as version or OS, or narrow to a specific distribution such as p95.
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_2.png" alt="Step 2 of the iOS profiling aggregate experience showing which measurement to focus on." style="width:100%;" /%}
+
+2. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_3.png" alt="Step 3 of the iOS profiling aggregate experience showing how to compare." style="width:100%;" /%}
+
+3. **Investigate slowest methods**: Review which methods consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those methods relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the iOS profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
+{% img src="real_user_monitoring/ios/ios_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the iOS profiling aggregate experience showing a flame graph comparison between groups." style="width:100%;" /%}
+
+### Analyze profiling data with AI
+
+- **[Bits Chat][29]**: Open the side panel of a slow event, such as a time to initial display, time to full display, application hang, long task, or operation. Then ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][30]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][31].
 
 {% /if %}
 <!-- end iOS -->
@@ -404,12 +523,10 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
 [4]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[5]: /real_user_monitoring/rum_without_limits/ 
 [6]: /real_user_monitoring/application_monitoring/android
 [7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
 [8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
 [9]: https://developer.apple.com/documentation/kernel/mach
-[10]: /real_user_monitoring/rum_without_limits/ 
 [11]: /real_user_monitoring/application_monitoring/ios
 [12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 [13]: /real_user_monitoring/guide/proxy-rum-data
@@ -418,6 +535,15 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [16]: /real_user_monitoring/application_monitoring/android/data_collected#error-attributes
 [17]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
 [18]: /real_user_monitoring/application_monitoring/ios/data_collected#error-attributes
-[19]: /real_user_monitoring/operations_monitoring/?tab=browser
-[20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works 
+[20]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works
 [21]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
+[22]: https://developer.android.com/topic/performance/tracing/profiling-manager/trigger-based-capture
+[23]: https://developer.android.com/topic/performance/tracing
+[24]: https://developer.android.com/topic/performance/issues/launch-time#time-initial
+[25]: https://developer.android.com/topic/performance/issues/launch-time#time-full
+[26]: /real_user_monitoring/operations_monitoring/?tab=ios
+[27]: /real_user_monitoring/operations_monitoring/?tab=android
+[28]: https://app.datadoghq.com/rum/profiling
+[29]: /real_user_monitoring/bits_ai/bits_chat/
+[30]: /mcp_server/tools/#profiling
+[31]: /mcp_server/setup/#toolsets

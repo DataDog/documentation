@@ -7,160 +7,170 @@ aliases:
 - /es/agent/guide/how_rc_works
 - /es/agent/guide/how_remote_config_works
 - /es/agent/remote_config
-description: Configura y cambia de manera remota el comportamiento de los componentes
-  de Datadog, como Agentes, SDKs y Trabajadores de Pipelines de Observabilidad desplegados
-  en tu infraestructura.
+description: Configure y cambie de forma remota el comportamiento de los componentes
+  de Datadog, como Agents, SDKs y Observability Pipelines Workers implementados en
+  su infraestructura.
 further_reading:
 - link: /security/application_security/how-appsec-works/#built-in-protection
   tag: Documentación
-  text: Cómo funciona el Monitoreo de Seguridad de Aplicaciones
-- link: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+  text: Cómo funciona Application Security Monitoring
+- link: /dynamic_instrumentation/
   tag: Documentación
-  text: Instrumentación Dinámica
+  text: Dynamic Instrumentation
 - link: /security/workload_protection/
   tag: Documentación
   text: Configuración de Workload Protection
+- link: https://www.datadoghq.com/blog/single-step-instrumentation-rules/
+  tag: Blog
+  text: Administre el rastreo de servicios entre servidores con reglas de instrumentación
+    de Single Step
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
-  text: Uso de Audit Trail de Datadog
+  text: Uso de Datadog Audit Trail
 - link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
   tag: Blog
-  text: Aplica actualizaciones en tiempo real a los componentes de Datadog con Remote
+  text: Aplique actualizaciones en tiempo real a los componentes de Datadog con Remote
     Configuration
 title: Remote Configuration
 ---
-## Descripción General {#overview}
+## Descripción general {#overview}
 
-Remote Configuration es una capacidad de Datadog que te permite configurar y cambiar de manera remota el comportamiento de características seleccionadas del producto en componentes de Datadog, como Agentes, SDKs y Trabajadores de Observability Pipelines desplegados en tu infraestructura. Utiliza Remote Configuration para aplicar configuraciones a los componentes de Datadog en tu entorno bajo demanda, disminuyendo los costos de gestión, reduciendo la fricción entre equipos y acelerando los tiempos de resolución de problemas.
+Remote Configuration es una capacidad de Datadog que le permite configurar y cambiar de forma remota el comportamiento de funciones de producto seleccionadas en componentes de Datadog, como Agents, SDKs y Observability Pipelines Workers implementados en su infraestructura. Utilice Remote Configuration para aplicar configuraciones a los componentes de Datadog en su entorno bajo demanda, lo que disminuye los costos de gestión, reduce la fricción entre equipos y acelera los tiempos de resolución de problemas.
 
-Para los productos de seguridad de Datadog, App and API Protection y Workload Protection, los Agentes habilitados para Remote Configuration y los SDKs compatibles proporcionan actualizaciones y respuestas de seguridad en tiempo real, mejorando la postura de seguridad de tus aplicaciones e infraestructura en la nube.
+Para los productos de Security de Datadog, App and API Protection y Workload Protection, los Agents habilitados para Remote Configuration y los SDKs compatibles proporcionan actualizaciones y respuestas de Security en tiempo real, lo que mejora la postura de Security de sus aplicaciones e infraestructura en la nube.
 
 ## Cómo funciona {#how-it-works}
 
-Cuando Remote Configuration está habilitada, los componentes de Datadog, como el Datadog Agent, consultan de manera segura el [sitio de Datadog][1] configurado para cambios de configuración que están listos para aplicarse. Los cambios pendientes se aplican automáticamente a los componentes de Datadog. Por ejemplo, después de que envías cambios de configuración en la interfaz de usuario de Datadog para una característica del producto habilitada para Remote Configuration, los cambios se almacenan en Datadog.
+Cuando Remote Configuration está habilitado, los componentes de Datadog, como el Datadog Agent, consultan de forma segura el [Datadog site][1] configurado para obtener cambios de configuración que estén listos para aplicarse. Los cambios pendientes se aplican automáticamente a los componentes de Datadog. Por ejemplo, después de enviar cambios de configuración en la interfaz de usuario de Datadog para una función de producto habilitada para Remote Configuration, los cambios se almacenan en Datadog.
 
 El siguiente diagrama ilustra cómo funciona Remote Configuration:
 
-{{<img src="agent/remote_config/RC_Diagram_v5.png" alt="Los usuarios configuran características en la interfaz de usuario, la configuración se almacena en Datadog, el Agent solicita actualizaciones de configuración." width="90%" style="center">}}
+{{<img src="agent/remote_config/RC_Diagram_v5.png" alt="Los usuarios configuran las funciones en la interfaz de usuario, la configuración se almacena en Datadog y el Agent solicita actualizaciones de configuración." width="90%" style="center">}}
 
-1. Configuras características seleccionadas del producto en la interfaz de usuario de Datadog.
-2. Las configuraciones de características del producto se almacenan de manera segura dentro de Datadog.
-3. Los componentes de Datadog habilitados para Remote Configuration en tus entornos consultan, reciben y aplican automáticamente actualizaciones de configuración de Datadog de manera segura. Las bibliotecas de trazado que se implementan en tus entornos se comunican con los Agent para solicitar y recibir actualizaciones de configuración de Datadog en lugar de consultar directamente a Datadog.
+1. Usted configura funciones de producto seleccionadas en la interfaz de usuario de Datadog.
+2. Las configuraciones de las funciones del producto se almacenan de forma segura dentro de Datadog.
+3. Los componentes de Datadog habilitados para Remote Configuration en sus entornos consultan, reciben y aplican automáticamente actualizaciones de configuración desde Datadog de forma segura. Las bibliotecas de trazas que se implementan en sus entornos se comunican con los Agents para solicitar y recibir actualizaciones de configuración desde Datadog en lugar de consultar a Datadog directamente.
 
-## Entornos soportados {#supported-environments}
+## Entornos compatibles {#supported-environments}
 
-Remote Configuration funciona en entornos donde se han implementado componentes soportados de Datadog. Los componentes compatibles de Datadog incluyen:
-- Agentes
-- Trazadores (indirectamente)
-- Trabajadores de la Canalización de Observabilidad
-- Ejecutores de acción privados y servicios de contenedores sin servidor en la nube, como AWS Fargate.
+Remote Configuration funciona en entornos donde se implementan componentes de Datadog compatibles. Los componentes de Datadog compatibles incluyen:
+- Agents
+- Tracers (indirectamente)
+- Observability Pipeline Workers
+- Private Action Runners y servicios en la nube de contenedores sin servidor, como AWS Fargate.
 
-La Configuración Remota no soporta aplicaciones gestionadas de contenedores sin servidor, como AWS App Runner, Azure Container Apps, Google Cloud Run; o funciones implementadas con empaquetado de contenedores, como AWS Lambda, Azure Functions y Google Cloud Functions.
+Remote Configuration no es compatible con aplicaciones gestionadas en contenedores sin servidor, como AWS App Runner, Azure Container Apps, Google Cloud Run; ni con funciones implementadas con empaquetado de contenedores, como AWS Lambda, Azure Functions y Google Cloud Functions.
 
-## Productos y características compatibles {#supported-products-and-features}
+## Productos y funciones compatibles {#supported-products-and-features}
 
-Los siguientes productos y características son compatibles con la Configuración Remota.
+Los siguientes productos y funciones son compatibles con Remote Configuration.
 
-Automatización de Flotas
-: - [Enviar señales][27] directamente desde el sitio de Datadog. Solucione problemas del Agente de Datadog sin acceder directamente al host.
-: - [Actualice sus Agentes][29].
+Fleet Automation
+: - [Envíe flares][27] directamente desde el sitio de Datadog. Solucione problemas del Datadog Agent sin acceder directamente al servidor.
+: - [Actualice sus Agents][29].
 
-Protección de Aplicaciones y API (AAP)
-: - [Activación de AAP con un clic][33]: Habilite AAP con un clic desde la interfaz de usuario de Datadog.
-: - [Actualizaciones de patrones de ataque en la aplicación][34]: Reciba automáticamente los patrones de ataque más recientes del Firewall de Aplicaciones Web (WAF) a medida que Datadog los publique, siguiendo las vulnerabilidades o vectores de ataque recientemente divulgados.
-: - [Proteger][34]: Bloquear las IPs de los atacantes, usuarios autenticados y solicitudes sospechosas que se marquen en las Señales y Trazas de Seguridad de AAP temporal o permanentemente a través de la interfaz de usuario de Datadog.
+App and API Protection (AAP)
+: - [Activación de AAP con 1 clic][33]: Habilite AAP con 1 clic desde la interfaz de usuario de Datadog.
+: - [Actualizaciones de patrones de ataque en la aplicación][34]: Reciba automáticamente los patrones de ataque de Web Application Firewall (WAF) más recientes a medida que Datadog los publica, tras la divulgación de nuevas vulnerabilidades o vectores de ataque.
+: - [Proteger][34]: Bloquee temporal o permanentemente las IP de los atacantes, los usuarios autenticados y las solicitudes sospechosas marcadas en las señales de seguridad y trazas de AAP a través de la interfaz de usuario de Datadog.
 
-Monitoreo del Rendimiento de Aplicaciones (APM)
-: - Configuración en tiempo de ejecución: Cambiar la tasa de muestreo de trazas de un servicio, habilitación de inyección de registros y etiquetas de encabezados HTTP desde la interfaz de usuario del Catálogo, sin necesidad de reiniciar el servicio. Lea [Configuración en Tiempo de Ejecución][22] para más información.
-: - [Configurar remotamente la tasa de muestreo del Agente][35]: Configurar remotamente el Agente de Datadog para cambiar sus tasas de muestreo de trazas y establecer reglas para escalar la ingesta de trazas de su organización de acuerdo a sus necesidades, sin necesidad de reiniciar su Agente de Datadog.
+Application Performance Monitoring (APM)
+: - Configuración en tiempo de ejecución: Cambie la tasa de muestreo de trazas de un servicio, la habilitación de inyección de registros y las etiquetas de encabezado HTTP desde la interfaz de usuario del catálogo, sin tener que reiniciar el servicio. Lea [Configuración en tiempo de ejecución][22] para obtener más información.
+: - [Establezca de forma remota la tasa de muestreo del Datadog Agent][35]: Configure de forma remota el Datadog Agent para cambiar sus tasas de muestreo de trazas y establezca reglas para escalar la ingesta de trazas de su organización, sin necesidad de reiniciar su Datadog Agent.
 
-[Instrumentación Dinámica][36]
-: - Enviar métricas críticas, trazas y registros desde sus aplicaciones en vivo sin cambios en el código.
+[Dynamic Instrumentation][36]
+: - Envíe métricas, trazas y registros críticos desde sus aplicaciones en vivo sin realizar cambios en el código.
 
-Protección de Carga de Trabajo
-: - Actualizaciones automáticas de reglas predeterminadas del Agente: Recibir y actualizar automáticamente las reglas predeterminadas del Agente mantenidas por Datadog a medida que se lanzan nuevas detecciones y mejoras del Agente. Consulte [Configuración de Protección de Carga de Trabajo][3] para más información.
-: - Despliegue automático de reglas personalizadas del Agente: Desplegar automáticamente sus reglas personalizadas del Agente en hosts designados (todos los hosts o un subconjunto definido de hosts).
+Workload Protection
+: - Actualizaciones automáticas de reglas predeterminadas del Agent: Reciba y actualice automáticamente las reglas predeterminadas del Agent mantenidas por Datadog a medida que se lanzan nuevas detecciones y mejoras del Agent. Consulte [Setting Up Workload Protection][3] para obtener más información.
+: - Despliegue automático de reglas personalizadas del Agent: Despliegue automáticamente sus reglas personalizadas del Agent en los servidores designados (todos los servidores o un subconjunto definido de servidores).
 
 Observability Pipelines
-: - Desplegar y actualizar remotamente [Observability Pipelines Workers][4] (OPW): Construir y editar canalizaciones en la interfaz de usuario de Datadog, implementando sus cambios de configuración en instancias de OPW que se ejecutan en su entorno.
+: - Despliegue y actualice de forma remota [Observability Pipelines Workers][4] (OPW): Cree y edite pipelines en la interfaz de usuario de Datadog, implementando sus cambios de configuración en las instancias de OPW que se ejecutan en su entorno.
 
-[Escalado Automático][47]
-: - Gestionar remotamente configuraciones de escalado automático de clústeres y cargas de trabajo para sus entornos en contenedores. Consulte [Escalado Automático][47] para más información.
+[Escalamiento automático][47]
+: - Administre de forma remota las configuraciones de escalamiento de clústeres y cargas de trabajo de escalamiento automático para sus entornos en contenedores. Consulte [Escalamiento automático][47] para obtener más información.
 
-Ejecutor de acciones privado
-: - Ejecutar flujos de trabajo y aplicaciones de Datadog que interactúan con servicios alojados en su red privada sin exponer sus servicios a Internet público. Para más información, consulte [Acciones Privadas][30].
+Private Action Runner
+: - Ejecute flujos de trabajo y aplicaciones de Datadog que interactúen con servicios alojados en su red privada sin exponer sus servicios a la internet pública. Para obtener más información, consulte [Private Actions][30].
 
 Feature Flags
-: - Entregar configuraciones de flag (reglas de asignación y objetivo) a los kits de desarrollo de software del lado del servidor para la asignación sincrónica de variantes basada en el contexto de evaluación. Vea [Feature Flags][48] para más información.
+: - Entregue configuraciones de flags (reglas de segmentación y asignación) a los SDK del lado del servidor para la asignación síncrona de variantes basada en el contexto de evaluación. Consulte [Feature Flags][48] para obtener más información.
 
-## Consideraciones de seguridad {#security-considerations}
+## Security considerations {#security-considerations}
 
-Datadog implementa las siguientes salvaguardias para proteger la confidencialidad, integridad y disponibilidad de las configuraciones recibidas y aplicadas por sus componentes de Datadog:
+Datadog implementa las siguientes salvaguardas para proteger la confidencialidad, integridad y disponibilidad de las configuraciones recibidas y aplicadas por sus componentes de Datadog:
 
-- Los componentes de Datadog con Configuración Remota habilitada desplegados en su infraestructura solicitan configuraciones a Datadog.
-  <div class="alert alert-info">Algunos componentes como los ejecutores de acción privados siempre tienen habilitada la configuración remota. Otros, como los Agentes, pueden ser habilitados o deshabilitados utilizando opciones de configuración en disco.</div>
-- Datadog nunca envía cambios de configuración a menos que sean solicitados por los componentes de Datadog. Si envía cambios de configuración, Datadog solo envía cambios relevantes para el componente que lo solicita.
-- Las solicitudes de configuración se inician desde su infraestructura hacia Datadog a través de HTTPS (puerto 443). Este es el mismo puerto que el Agente utiliza por defecto para enviar datos de observabilidad.
-- La comunicación entre sus componentes de Datadog y Datadog está encriptada utilizando HTTPS y es autenticada y autorizada utilizando su clave API de Datadog, excepto en el caso de los ejecutores de acción privados donde se utiliza un token JWT en su lugar.
-- Solo los usuarios con el permiso de [`api_keys_write`][5] están autorizados para habilitar o deshabilitar la capacidad de Configuración Remota en las claves API y utilizar las características del producto soportadas.
-- Los cambios de configuración que envíe a través de la interfaz de usuario de Datadog son firmados y validados por el componente de Datadog que lo solicita, verificando la integridad de la configuración.
+- Los componentes de Datadog habilitados para Remote Configuration desplegados en su infraestructura solicitan configuraciones a Datadog.
+  <div class="alert alert-info">Algunos componentes, como los Private Action Runners, siempre tienen Remote Configuration habilitado. Otros, como los Agents, pueden habilitarse o deshabilitarse mediante opciones de configuración en disco.</div>
+- Datadog nunca envía cambios de configuración a menos que los componentes de Datadog lo soliciten. Si envía cambios de configuración, Datadog solo envía los cambios relevantes para el componente que realiza la solicitud.
+- Las solicitudes de configuración se inician desde su infraestructura hacia Datadog a través de HTTPS (puerto 443). Este es el mismo puerto que el Agent utiliza de forma predeterminada para enviar datos de observabilidad.
+- La comunicación entre sus componentes de Datadog y Datadog está cifrada mediante HTTPS y se autentica y autoriza utilizando su clave de Datadog API, excepto en el caso de los Private Action Runners, donde se utiliza un token JWT en su lugar.
+- Solo los usuarios con el permiso [`api_keys_write`][5] están autorizados para habilitar o deshabilitar la capacidad de Remote Configuration en las claves de API y utilizar las funciones de producto compatibles.
+- Sus cambios de configuración enviados a través de la interfaz de usuario de Datadog son firmados y validados por el componente de Datadog solicitante, lo que verifica la integridad de la configuración.
+- Cuando Remote Configuration está habilitada, los componentes realizan periódicamente una prueba de conectividad a Datadog a través de TLS en el puerto 8042/TCP. Esta es una conexión TLS sin procesar en lugar de HTTPS. Esta prueba se utiliza para el desarrollo de protocolos; no incluye datos del cliente ni información que identifique al cliente. Esta conexión se utiliza solo mientras Remote Configuration está habilitada y se puede bloquear de forma segura sin afectar la funcionalidad.
 
 ### Acceso basado en roles {#role-based-access}
 
-Habilitar la Configuración Remota impacta los siguientes productos. Cada producto define un conjunto de controles de acceso basado en roles que deben ser otorgados a sus usuarios. Para información general sobre la gestión de acceso, vea [Access Control][37].
+Habilitar Remote Configuration afecta a los siguientes productos. Cada producto define un conjunto de controles de acceso basados en roles que deben otorgarse a sus usuarios. Para obtener información general sobre la gestión de acceso, consulte [Access Control][37].
 
- | Producto Habilitado para Configuración Remota   | Controles de Acceso Basados en Roles                                                                                                                                                                                                                                                                     |
+ | Producto con Remote Configuration habilitado   | Controles de acceso basados en roles |
  |----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
- | Fleet Automation                       | `FLEET_POLICIES_WRITE`<br>`AGENT_UPGRADE_WRITE`<br>`FLEET_FLARE`<br><br>Para más información, consulte [Fleet Automation][38].                                                                                                                                                                      |
- | Protección de Aplicaciones y API                 | `APPSEC_ACTIVATION_READ`<br>`APPSEC_ACTIVATION_WRITE`<br>`APPSEC_PROTECT_READ`<br>`APPSEC_PROTECT_WRITE`<br><br>Para más información, consulte [Access Control][39].                                                                                                                                |
- | APM                                    | `APM_SERVICE_INGEST_READ`<br>`APM_SERVICE_INGEST_WRITE`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>Para más información, consulte [Adaptive Sampling][40].                                                                                                       |
- | Dynamic Instrumentation                | `DEBUGGER_READ`<br>`DEBUGGER_WRITE`<br>`DEBUGGER_WRITE_PRE_PROD`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>Para más información, consulte [APM][41].                                                                                                            |
- | Workload Protection                    | `SECURITY_MONITORING_CWS_AGENT_RULES_WRITE`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_READ`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_ACTIONS`<br><br>Para más información, consulte [Security][42].                                                                                                    |
- | CSM Side Scanning                      | `ORG_MANAGEMENT`<br>`MANAGE_INTEGRATIONS`<br><br> Para más información, consulte [Enable Agentless Scanning][43].                                                                                                                                                                                   |
- | Observability Pipelines                | `OBSERVABILITY_PIPELINES_READ`<br>`OBSERVABILITY_PIPELINES_WRITE`<br>`OBSERVABILITY_PIPELINES_DELETE`<br>`OBSERVABILITY_PIPELINES_DEPLOY`<br>`OBSERVABILITY_PIPELINES_CAPTURE_WRITE`<br>`OBSERVABILITY_PIPELINES_CAPTURE_READ`<br><br>Para más información, consulte [Observability Pipelines][44]. |
- | Private Action Runner                  | `ON_PREM_RUNNER_WRITE`<br>`ON_PREM_RUNNER_READ`<br>`ON_PREM_RUNNER_USE`<br><br>Para más información, consulte [App Builder & Workflow Automation][45].                                                                                                                                              |
+ | Fleet Automation                       | `FLEET_POLICIES_WRITE`<br>`AGENT_UPGRADE_WRITE`<br>`FLEET_FLARE`<br><br>Para obtener más información, consulte [Fleet Automation][38].                                                                                                                                                                      |
+ | Protección de aplicaciones y API                 | `APPSEC_ACTIVATION_READ`<br>`APPSEC_ACTIVATION_WRITE`<br>`APPSEC_PROTECT_READ`<br>`APPSEC_PROTECT_WRITE`<br><br>Para obtener más información, consulte [Access Control][39].                                                                                                                                |
+ | APM                                    | `APM_SERVICE_INGEST_READ`<br>`APM_SERVICE_INGEST_WRITE`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>Para obtener más información, consulte [Adaptive Sampling][40].                                                                                                       |
+ | Dynamic Instrumentation                | `DEBUGGER_READ`<br>`DEBUGGER_WRITE`<br>`DEBUGGER_WRITE_PRE_PROD`<br>`APM_REMOTE_CONFIGURATION_READ`<br>`APM_REMOTE_CONFIGURATION_WRITE`<br><br>Para obtener más información, consulte [APM][41].                                                                                                            |
+ | Workload Protection                    | `SECURITY_MONITORING_CWS_AGENT_RULES_WRITE`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_READ`<br>`SECURITY_MONITORING_CWS_AGENT_RULES_ACTIONS`<br><br>Para obtener más información, consulte [Security][42].                                                                                                    |
+ | Escaneo lateral de CSM                      | `ORG_MANAGEMENT`<br>`MANAGE_INTEGRATIONS`<br><br> Para obtener más información, consulte [Enable Agentless Scanning][43].                                                                                                                                                                                   |
+ | Observability Pipelines                | `OBSERVABILITY_PIPELINES_READ`<br>`OBSERVABILITY_PIPELINES_WRITE`<br>`OBSERVABILITY_PIPELINES_DELETE`<br>`OBSERVABILITY_PIPELINES_DEPLOY`<br>`OBSERVABILITY_PIPELINES_CAPTURE_WRITE`<br>`OBSERVABILITY_PIPELINES_CAPTURE_READ`<br><br>Para obtener más información, consulte [Observability Pipelines][44]. |
+ | Private Action Runner                  | `ON_PREM_RUNNER_WRITE`<br>`ON_PREM_RUNNER_READ`<br>`ON_PREM_RUNNER_USE`<br><br>Para obtener más información, consulte [App Builder & Workflow Automation][45].                                                                                                                                              |
  | Network Device Monitoring (NDM)        | `NDM_DEVICE_PROFILES_VIEW`<br>`NDM_DEVICE_PROFILES_EDIT`                                                                                                                                                                                                                                       |
  | Container Autoscaling                  | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ`                                                                                                                                                                          |
- | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>Para más información, consulte [Serverless][46].                                                                                                                                                             |
- | Feature Flags                          | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>Para más información, consulte [Feature Flags][48].                                                                                           |
+ | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>Para obtener más información, consulte [Serverless][46].                                                                                                                                                             |
+ | Feature Flags                          | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>Para obtener más información, consulte [Feature Flags][48].                                                                                           |
 
-## Habilitar Remote Configuration {#enable-remote-configuration}
+## Habilite Remote Configuration {#enable-remote-configuration}
 
-En la mayoría de los casos, Remote Configuration está habilitado por defecto para su organización. Puede verificar si Remote Configuration está habilitado en su organización desde la página de configuración de [Remote Configuration][8]. Si necesita habilitarla:
+En la mayoría de los casos, Remote Configuration está habilitada de forma predeterminada para su organización. Puede verificar si Remote Configuration está habilitada en su organización desde la página de configuración de [Remote Configuration][8].
+{{< site-region region="gov,gov2" >}}
+**Nota**: En US1-FED y US2-FED, Remote Configuration no está habilitada de forma predeterminada.
+{{< /site-region >}}
+Para habilitar Remote Configuration:
 1. Asegúrese de que sus permisos de RBAC incluyan [`org_management`][7], para que pueda habilitar Remote Configuration para su organización.
-1. Desde la página de Configuración de su Organización, habilite [Remote Configuration][8]. Esto habilita los componentes de Datadog en toda su organización para recibir configuraciones de Datadog.
-1. Siga la [guía de configuración específica del producto](#product-specific-configuration) a continuación para finalizar la configuración de Remote Configuration.
+1. Desde su página {{< ui >}}Organization Settings{{< /ui >}}, habilite [Remote Configuration][8]. Esto permite que los componentes de Datadog en toda su organización reciban configuraciones de Datadog.
+1. Siga la guía de [configuración específica del producto](#product-specific-configuration) a continuación para terminar de configurar Remote Configuration.
 
 ### Configuración específica del producto {#product-specific-configuration}
 
-Consulte la documentación a continuación para obtener instrucciones específicas sobre el producto que está configurando.
+Consulte la documentación a continuación para obtener instrucciones específicas para el producto que está configurando.
 
 | Producto                 | Instrucciones de configuración                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
+| App and API Protection (AAP) | [App and API Protection setup][33]                                                                         |
 | APM                     | [Configuración en tiempo de ejecución](/tracing/guide/remote_config/)                                                      |
-| Dynamic Instrumentation | [Comenzando con Dynamic Instrumentation](/dynamic_instrumentation/#getting-started)                      |
+| Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |
-| Observability Pipelines | Asegúrese de que ha [habilitado Remote Configuration en la API key][32] que está utilizando para Observability Pipelines. |
-| Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
-| Private Action Runner | [Private Actions Overview](/actions/private_actions/)                                                          |
-| Feature Flags | [Feature Flags del Lado del Servidor](/feature_flags/server/)                                                            |
+| Observability Pipelines | Asegúrese de haber [enabled Remote Configuration on the API key][32] que utiliza para Observability Pipelines. |
+| Sensitive Data Scanner  | [Almacenamiento en la nube](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
+| Private Action Runner   | [Descripción general de Private Actions](/actions/private_actions/)                                                          |
+| Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
 
-## Mejores Prácticas {#best-practices}
+## Mejores prácticas {#best-practices}
 
 ### Datadog Audit Trail {#datadog-audit-trail}
 
-Utilice [Datadog Audit Trail][13] para monitorear el acceso a la organización y los eventos habilitados de Remote Configuration. Audit Trail permite a sus administradores y equipos de seguridad rastrear la creación, eliminación y modificación de claves de API y de aplicación de Datadog. Después de configurar Audit Trail, puede ver eventos relacionados con las características habilitadas de Remote Configuration y quién ha solicitado estos cambios. Audit Trail le permite reconstruir secuencias de eventos y establecer un monitoreo robusto de Datadog para Remote Configuration.
+Utilice [Datadog Audit Trail][13] para hacer un seguimiento del acceso a la organización y de los eventos habilitados de Remote Configuration. Audit Trail permite a sus administradores y equipos de seguridad hacer un seguimiento de la creación, eliminación y modificación de las claves de Datadog API y de aplicación. Una vez configurado Audit Trail, puede visualizar los eventos relacionados con las funciones habilitadas de Remote Configuration y quién ha solicitado estos cambios. Audit Trail le permite reconstruir secuencias de eventos y establecer un seguimiento sólido de Datadog para Remote Configuration.
 
-### Monitors {#monitors}
+### Monitores {#monitors}
 
 Configure [monitors][14] para recibir notificaciones cuando se encuentre un evento de interés.
 
-## Opting out of Remote Configuration {#opting-out-of-remote-configuration}
+## Exclusión de Remote Configuration {#opting-out-of-remote-configuration}
 
-En lugar de deshabilitar Remote Configuration globalmente, Datadog recomienda optar por no participar en productos específicos de Datadog. Para más información, consulte [la documentación del producto relevante](#product-specific-configuration).
+En lugar de deshabilitar Remote Configuration de forma global, Datadog recomienda excluir productos específicos de Datadog. Para obtener más información, consulte [la documentación del producto correspondiente](#product-specific-configuration).
 
-## Lectura Adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -173,7 +183,7 @@ En lugar de deshabilitar Remote Configuration globalmente, Datadog recomienda op
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /es/security/default_rules/#cat-workload-security
 [10]: /es/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
-[11]: /es/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[11]: /es/tracing/trace_collection/dynamic_instrumentation
 [12]: /es/security/application_security/how-appsec-works/#built-in-protection
 [13]: /es/account_management/audit_trail
 [14]: /es/monitors/
@@ -182,7 +192,6 @@ En lugar de deshabilitar Remote Configuration globalmente, Datadog recomienda op
 [17]: /es/agent/configuration/network
 [18]: /es/agent/configuration/proxy/
 [19]: /es/internal_developer_portal/catalog/
-[20]: /es/dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /es/tracing/trace_collection/runtime_config/
 [23]: /es/remote_configuration#opting-out-of-remote-configuration
@@ -192,7 +201,7 @@ En lugar de deshabilitar Remote Configuration globalmente, Datadog recomienda op
 [27]: /es/agent/fleet_automation/fleet_view/#send-a-remote-flare
 [28]: /es/security/sensitive_data_scanner/?tab=usingtheagent
 [29]: /es/agent/fleet_automation/upgrade_agents/
-[30]: /es/actions/private_actions/use_private_actions/
+[30]: /es/actions/private_actions/
 [31]: /es/agent/guide/setup_remote_config
 [32]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=api-key-enablement-step&standalone=1
 [33]: /es/security/application_security/setup/

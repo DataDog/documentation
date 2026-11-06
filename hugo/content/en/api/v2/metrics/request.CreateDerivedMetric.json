@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "definition": {
+        "formula": "a",
+        "queries": [
+          {
+            "data_source": "metrics",
+            "name": "a",
+            "query": "avg:system.cpu.user{*}"
+          }
+        ]
+      }
+    },
+    "id": "test.derived.examplemetric",
+    "type": "derived_metrics"
+  }
+}

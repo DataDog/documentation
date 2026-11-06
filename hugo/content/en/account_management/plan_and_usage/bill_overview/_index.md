@@ -92,7 +92,7 @@ Toggle between {{< ui >}}Monthly{{< /ui >}} and {{< ui >}}Daily{{< /ui >}} views
 
 Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the {{< ui >}}Product List{{< /ui >}} table to open the product detail page for a single billing dimension.
 
-{{< img src="account_management/plan_and_usage/bill-overview-detail-light-2.png" alt="Product detail page showing Cost Overview and Usage Overview sections, including the Download Billable Hosts as CSV button" >}}
+{{< img src="account_management/plan_and_usage/bill-overview-detail-light-3.png" alt="Infra Hosts product detail page showing the Usage Overview section with a per-host-type breakdown and a Usage Types stacked bar chart, above the Resource Drilldown table and the Download Billable Resources as CSV button" >}}
 
 ### Cost Overview
 
@@ -110,20 +110,25 @@ Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the
 - {{< ui >}}Usage Types{{< /ui >}} bar chart: Day-by-day usage stacked by sub-dimension
 - {{< ui >}}Allotment Usage{{< /ui >}}: Progress bar showing consumed vs. contracted allotment; displays ">100%" when usage exceeds the allotment
 - {{< ui >}}Drilldown in Usage Attribution{{< /ui >}}: Click to open {{< ui >}}Usage Attribution{{< /ui >}}, pre-filtered to the selected billing dimension.
-- {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}: For Infra Hosts, download the individual hosts that make up your billable total as a CSV.
 
-### Download billable hosts as CSV
+### Resource Drilldown
+
+For Infra and APM Hosts, {{< ui >}}Resource Drilldown{{< /ui >}} lists the individual hosts that make up your billable total for the selected month.
+
+Search by name, type, or organization using the field above the table. The table is paginated, displaying 10 rows per page by default. To export the full list, click {{< ui >}}Download Billable Resources as CSV{{< /ui >}}.
+
+### Download billable resources as CSV
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">Downloading billable hosts as a CSV is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Downloading billable resources as a CSV is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Download a CSV of the individual hosts that make up your billable Infra Hosts total for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
+Download a CSV of your billable resources for a given month. Use it to reconcile the total shown on the Bill Overview page, find the resources driving the largest share of your usage, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
 To export the list:
 
 1. In the side panel, use the month selector at the top right to choose a month. You can only export data for complete calendar months.
-2. Under {{< ui >}}Usage Overview{{< /ui >}}, click {{< ui >}}Download Billable Hosts as CSV{{< /ui >}}.
+2. Under {{< ui >}}Resource Drilldown{{< /ui >}}, click {{< ui >}}Download Billable Resources as CSV{{< /ui >}}.
 
 The CSV contains one row per host with the following columns:
 
@@ -133,19 +138,13 @@ The CSV contains one row per host with the following columns:
 | `Public ID` | The organization's public identifier. |
 | `Timestamp` | For organizations billed at the 99th percentile, the hour in the month when usage was measured at the 99th percentile. For organizations billed on a sum basis, the first day of the month. |
 | `Resource Type` | The type of resource, for example `agent`, `aws`, or `vsphere`. |
-| `Resource Name` | The host name or identifier, for example a hostname or instance ID. |
+| `Resource Name` | The resource name or identifier, for example a hostname or instance ID. |
 | `Usage Value` | For organizations billed at the 99th percentile, `1` per host. For organizations billed on a sum basis, the host's host-hours over the month, for example `720` for a host present for a full 30-day month. |
 | `Tags` | A JSON object of the host's key-value tags. Empty (`{}`) when the host has no tags. |
 
-The sum of `Usage Value` across all rows matches the Infra Hosts total shown on the Bill Overview page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
+The sum of `Usage Value` across all rows matches the Infra Hosts or APM Hosts total shown on the Bill Overview page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
 
-## Revert to the previous layout
-
-If your organization is on the new {{< ui >}}Bill Overview{{< /ui >}} and you prefer the previous layout, click {{< ui >}}Disable Preview{{< /ui >}} in the page header. This toggle is available to all organizations and persists for your session.
-
-{{< img src="account_management/plan_and_usage/toggle-back-header.png" alt="Bill Overview page header showing the Disable Preview button" >}}
-
-To return to {{< ui >}}Bill Overview{{< /ui >}}, click {{< ui >}}Enable Preview{{< /ui >}} in the header.
+**Note**: The Resource Drilldown table in the UI shows only four columns: `Resource Name`, `Resource Type`, `Usage Value`, and `Organization` (equivalent to `Org Name` in the CSV).
 
 ## Permissions
 
@@ -155,10 +154,16 @@ The following permissions are required to access each section of Bill Overview:
 |---|---|
 | Bill Overview (cost data) | `BILLING_READ` |
 | Usage Tab | `USAGE_READ` |
-| Plan Details | `BILLING_READ` |
-| Billing History | `BILLING_READ` |
+| Plan Details | `BILLING_READ` + `CONTRACT_READ` |
+| Billing History | `BILLING_READ` + `CONTRACT_READ` |
 | Usage Attribution | `USAGE_READ` + Enterprise or Pro plan |
 | Sub-org cost trends | Parent org must have `suborg_cost_trends` enabled |
+
+### Contract information
+
+`CONTRACT_READ` was introduced in October 2026 and granted automatically to every role that held `BILLING_READ` at that time. Users with the Datadog Admin role have `CONTRACT_READ` by default. Contract information includes all information on the Plan and Billing History pages, along with drawdown totals on the Bill Overview page.
+
+To restrict who can see contract information, remove `CONTRACT_READ` from the roles that should not have it and leave `BILLING_READ` in place. Those users retain access to cost and usage data and lose access to {{< ui >}}Plan Details{{< /ui >}} and {{< ui >}}Billing History{{< /ui >}}.
 
 For information on managing permissions, see [Role Based Access Control][3].
 

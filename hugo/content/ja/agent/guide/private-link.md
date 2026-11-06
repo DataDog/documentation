@@ -32,7 +32,7 @@ title: AWS PrivateLink を介して Datadog に接続する
 
 ## 概要 {#overview}
 
-このガイドでは Datadog で使用するために [AWS PrivateLink][1] の構成方法についてご説明します。まずはローカルの Datadog Agent がデータを送信可能な VPC の内部エンドポイントを構成します。その後、VPC エンドポイントを Datadog の VPC 内にあるエンドポイントと紐付けます。
+このガイドでは Datadog で使用するために [AWS PrivateLink][11] の構成方法についてご説明します。まずはローカルの Datadog Agent がデータを送信可能な VPC の内部エンドポイントを構成します。その後、VPC エンドポイントを Datadog の VPC 内にあるエンドポイントと紐付けます。
 
 {{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="VPC ダイアグラムスキーマ" >}}
 
@@ -66,19 +66,19 @@ Datadog は、**{{< region-param key="aws_region" >}}** で AWS PrivateLink の�
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-US1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+US1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-AP2のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+AP2 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-UK1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+UK1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 4. {{< ui >}}Verify{{< /ui >}} をクリックします。_Service name found_ と表示されない場合は、[Datadog サポート][14]にお問い合わせください。
 5. Datadog の VPC サービスエンドポイントと紐付ける VPC およびサブネットを選択します。
-6. {{< ui >}}Enable DNS name{{< /ui >}} に、_Enable for this endpoint_ がチェックされていることを確認します。
+6. {{< ui >}}Enable DNS name{{< /ui >}} に、[_Enable for this endpoint_] がチェックされていることを確認します。
 
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="DNS プライベートを有効にする" style="width:80%;" >}}
 
@@ -90,7 +90,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントが作成されました" style="width:60%;" >}}
 
-9. VPC エンドポイントの ID をクリックして、ステータスを確認します。
+9. VPC エンドポイントの ID をクリックして、ステータスをチェックします。
 10. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。これには約 10 分要する場合があります。_Available_ と表示されれば、AWS PrivateLink を利用することができます。
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC ステータス" style="width:60%;" >}}
@@ -127,7 +127,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
    1. {{< ui >}}Type{{< /ui >}} で、{{< ui >}}PrivateLink Ready partner services{{< /ui >}} を選択します。
 1. クロスリージョンサポート付きのインターフェイスエンドポイントを検出し、構成します。
    1. {{< ui >}}Service name{{< /ui >}} で、以下の[テーブル](#privatelink-service-names)から有効な PrivateLink サービス名をサービス名欄に入力します。
-   1. {{< ui >}}Service region{{< /ui >}} で、{{< ui >}}Enable Cross Region endpoint{{< /ui >}} をクリックし、**{{< region-param key="aws_private_link_cross_region" >}}**。
+   1. {{< ui >}}Service region{{< /ui >}} で、{{< ui >}}Enable Cross Region endpoint{{< /ui >}} をクリックし、**{{< region-param key="aws_private_link_cross_region" >}}** を選択します。
    1. {{< ui >}}Verify service{{< /ui >}} をクリックし、_サービス名が確認されました_という通知が表示されるまで待ちます。
       **注**: 上記の手順を完了した後もサービスの確認ができない場合は、[Datadog サポート][1]にお問い合わせください。
 1. {{< ui >}}Network Settings{{< /ui >}}で、VPC インターフェイスエンドポイントをデプロイするための VPC を選択します。
@@ -158,14 +158,14 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-AP2のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+AP2 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
-US1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+US1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 {{% site-region region="uk1" %}}
-UK1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+UK1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 **注**: クロスリージョン PrivateLink は CloudWatch メトリクスを送信しません。詳細については、[AWS PrivateLink の CloudWatch メトリクス][2]を参照してください。
@@ -199,17 +199,17 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-US1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+US1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-AP2のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+AP2 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-UK1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+UK1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
-4. {{< ui >}}Verify{{< /ui >}} をクリックします。_Service name found_ と表示されない場合は、[Datadog サポート][14]にお問い合わせください。
+4. {{< ui >}}Verify{{< /ui >}} をクリックします。_Service name found_ と表示されない場合は、[Datadog サポート][1]にお問い合わせください。
 
 5. 次に、Datadog の VPC サービスエンドポイントと紐付ける VPC およびサブネットを選択します。VPC ピアリングでは DNS を手動で構成する必要があるため、{{< ui >}}Enable DNS name{{< /ui >}} は選択しないでください。
 
@@ -221,7 +221,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 
 {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントが作成されました" style="width:80%;" >}}
 
-8. VPC エンドポイントの ID をクリックして、ステータスを確認します。
+8. VPC エンドポイントの ID をクリックして、ステータスをチェックします。
 9. ステータスが _Pending_ から _Available_ に変わるまでお待ちください。これには約 10 分要する場合があります。
 10. エンドポイントが作成されたら、VPC ピアリングを使って、別のリージョンでも PrivateLink エンドポイントを利用して PrivateLink 経由で Datadog にテレメトリを送信できるようにします。詳しくは、AWS の [VPC ピアリング接続での作業][2]ページをご覧ください。
 
@@ -229,7 +229,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 
 ### Amazon Route53 {#amazon-route53}
 
-1. AWS PrivateLink のエンドポイントを作成した各サービスに対して、[Route53 プライベートホストゾーン][3]を作成します。プライベートホストゾーンを {{< region-param key="aws_region" code="true" >}}.
+1. AWS PrivateLink のエンドポイントを作成した各サービスに対して、[Route53 プライベートホストゾーン][3]を作成します。そのプライベートホストゾーンを次のリージョンの VPC に関連付けます ( {{< region-param key="aws_region" code="true" >}})。
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Route53 プライベートホストゾーンを作成する" style="width:80%;" >}}
 
@@ -250,14 +250,14 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
 {{% /site-region %}}
 {{% site-region region="us" %}}
-US1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+US1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 {{% site-region region="ap2" %}}
-AP2のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+AP2 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-UK1のDNSレコードおよびVPCサービスエンドポイントの完全なリストについては、[VPCエンドポイントサービスID](#vpc-endpoint-service-ids)を参照してください。
+UK1 の DNS レコードおよび VPC サービスエンドポイントの完全なリストについては、「[VPC エンドポイントサービス ID](#vpc-endpoint-service-ids)」を参照してください。
 {{% /site-region %}}
 
   また、AWS API の `DescribeVpcEndpointServices` を問い合わせるか、次の CLI コマンドを使用してもこの情報を見つけることができます。
@@ -266,7 +266,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
   aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
   ```
 
-  例えば、 {{< region-param key="aws_region" code="true" >}}:
+  たとえば、次のリージョンの Datadog メトリクスエンドポイントの場合 ( {{< region-param key="aws_region" code="true" >}})。
 
 <div class="site-region-container">
   <div class="highlight">
@@ -278,7 +278,7 @@ UK1のDNSレコードおよびVPCサービスエンドポイントの完全な�
 
 2. それぞれの新しい Route53 プライベートホストゾーン内に、同じ名前で A レコードを作成します。{{< ui >}}Alias{{< /ui >}} オプションをトグルし、{{< ui >}}Route traffic to{{< /ui >}} で、{{< ui >}}Alias to VPC endpoint{{< /ui >}}、**{{< region-param key="aws_region" >}}**を選び、DNS 名と関連付けられた VPC エンドポイントの DNS 名を入力します。**注**:
       - DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][4]を参照してください。
-      Agent はバージョン付きのエンドポイント (例:<code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> ) にテレメトリを送信します。エンドポイントでは CNAME エイリアスを通じた名前解決が行われ、 <code>metrics.agent.{{< region-param key="dd_site" >}}</code> にルーティングされます。したがって、 <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
+      Agent はバージョン付きのエンドポイント (例:<code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> ) にテレメトリを送信します。エンドポイントでは CNAME エイリアスを通じた名前解決が行われ、 <code>metrics.agent.{{< region-param key="dd_site" >}}</code> にルーティングされます。したがって、次のプライベートホストゾーンを設定するだけで済みます ( <code>metrics.agent.{{< region-param key="dd_site" >}}</code>)。
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="A レコードを作成する" style="width:90%;" >}}
 
@@ -302,7 +302,7 @@ DNS 名は、 {{< region-param key="aws_region" code="true" >}}の VPC の CIDR 
 
 DNS がパブリック IP アドレスに解決している場合、Route53 ゾーンが代替地域の VPC に関連付けされて**いない**か、A レコードが存在しないことが原因です。
 
-DNS は正しく解決しているのに、`port 443` への接続に失敗する場合、VPC のピアリングまたはルーティングが誤って構成されているか、ポート 443 が {{< region-param key="aws_region" code="true" >}}.
+DNS は正しく解決しているのに、`port 443` への接続に失敗する場合、VPC のピアリングまたはルーティングが誤って構成されているか、あるいは以下の VPC の CIDR ブロック宛てのポート 443 の送信が許可されていない可能性があります ( {{< region-param key="aws_region" code="true" >}})。
 
 プライベートホストゾーン (PHZ) が接続されている VPC は、いくつかの設定をオンにする必要があります。具体的には、PHZ が関連付けられている VPC で、`enableDnsHostnames` と `enableDnsSupport` がオンになっている必要があります。[Amazon VPC 設定][6]を参照してください。
 
@@ -349,14 +349,14 @@ DNS は正しく解決しているのに、`port 443` への接続に失敗す�
 [17]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 
 {{% site-region region="us" %}}
-## VPCエンドポイントサービスID {#vpc-endpoint-service-ids}
+## VPC エンドポイントサービス ID{#vpc-endpoint-service-ids}
 
-US1は、PrivateLinkに2階層のDNSアーキテクチャを用いています。すべての顧客向けDNSレコードは、専用の`color.intake.datadoghq.com`VPCエンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対してVPCエンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードがカバーされます。
+US1 では、PrivateLink に 2 階層の DNS アーキテクチャを採用しています。顧客向けの各 DNS レコードは、専用の `color.intake.datadoghq.com` VPC エンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対して VPC エンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードが対象となります。
 
-使用するDatadog機能に合わせて設定すべきVPCエンドポイントを特定するには、以下のテーブルを使用してください。Wildcardエントリは、他にリストされていないサブドメインすべてに一致します。
+使用する Datadog 機能に合わせて設定すべき VPC エンドポイントを特定するには、以下のテーブルを使用してください。ワイルドカードのエントリは、リストに記載されていない任意のサブドメインに一致します。
 
-**注**: 以下のテーブルにおいて、`---`は中間アンカーアドレスのない直接的なVPCサービスエンドポイントを示します。
-| 名前 | アンカー | VPCエンドポイントサービスID |
+**注**: 以下のテーブルにおいて、`---` は中間アンカーアドレスのない直接的な VPC サービスエンドポイントであることを示します。
+| 名前 | アンカー | VPC エンドポイントサービス ID |
 |---|---|---|
 | `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
 | `webhooks-http-intake.logs.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
@@ -415,13 +415,13 @@ US1は、PrivateLinkに2階層のDNSアーキテクチャを用いています�
 {{% /site-region %}}
 
 {{% site-region region="ap2" %}}
-## VPCエンドポイントサービスID {#vpc-endpoint-service-ids-1}
+## VPC エンドポイントサービス ID{#vpc-endpoint-service-ids-1}
 
-AP2は、PrivateLinkに対して2レベルのDNSアーキテクチャを使用します。すべての顧客向けDNSレコードは、専用の`color.intake.ap2.datadoghq.com` VPCエンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対してVPCエンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードがカバーされます。
+AP2 では、PrivateLink に 2 階層の DNS アーキテクチャを採用しています。顧客向けの各 DNS レコードは、専用の `color.intake.ap2.datadoghq.com` VPC エンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対して VPC エンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードが対象となります。
 
-使用するDatadog機能に合わせて設定すべきVPCエンドポイントを特定するには、以下のテーブルを使用してください。より具体的なDNSレコードがWildcardよりも優先されます。たとえば、`trace.agent.ap2.datadoghq.com`が`lime.intake.ap2.datadoghq.com`を指している場合でも、`*.agent.ap2.datadoghq.com`は`beige.intake.ap2.datadoghq.com`に解決されます。
+使用する Datadog 機能に合わせて設定すべき VPC エンドポイントを特定するには、以下のテーブルを使用してください。より具体的な DNS レコードがワイルドカードよりも優先されます。たとえば、`*.agent.ap2.datadoghq.com` が `beige.intake.ap2.datadoghq.com` を指している場合でも、`trace.agent.ap2.datadoghq.com` は `lime.intake.ap2.datadoghq.com` で解決されます。
 
-| 名前 | アンカー | VPCエンドポイントサービスID |
+| 名前 | アンカー | VPC エンドポイントサービス ID |
 |---|---|---|
 | `gcp-intake.logs.ap2.datadoghq.com` | `aqua.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273` |
 | `*.agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
@@ -485,13 +485,13 @@ AP2は、PrivateLinkに対して2レベルのDNSアーキテクチャを使用�
 {{% /site-region %}}
 
 {{% site-region region="uk1" %}}
-## VPCエンドポイントサービスID {#vpc-endpoint-service-ids-2}
+## VPC エンドポイントサービス ID{#vpc-endpoint-service-ids-2}
 
-UK1は、PrivateLinkに対して2レベルのDNSアーキテクチャを使用します。すべての顧客向けDNSレコードは、専用の`color.intake.uk1.datadoghq.com` VPCエンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対してVPCエンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードがカバーされます。
+UK1 では、PrivateLink に 2 階層の DNS アーキテクチャを採用しています。顧客向けの各 DNS レコードは、専用の `color.intake.uk1.datadoghq.com` VPC エンドポイントアドレスにマッピングされます。特定のアンカーアドレスに対して VPC エンドポイントを設定すると、そのアドレスにマッピングされるすべての顧客向けレコードが対象となります。
 
-使用するDatadog機能に合わせて設定すべきVPCエンドポイントを特定するには、以下のテーブルを使用してください。より具体的なDNSレコードがWildcardよりも優先されます。たとえば、`trace.agent.uk1.datadoghq.com`が`lime.intake.uk1.datadoghq.com`を指している場合でも、`*.agent.uk1.datadoghq.com`は`beige.intake.uk1.datadoghq.com`に解決されます。
+使用する Datadog 機能に合わせて設定すべき VPC エンドポイントを特定するには、以下のテーブルを使用してください。より具体的な DNS レコードがワイルドカードよりも優先されます。たとえば、`*.agent.uk1.datadoghq.com` が `beige.intake.uk1.datadoghq.com` を指している場合でも、`trace.agent.uk1.datadoghq.com` は `lime.intake.uk1.datadoghq.com` で解決されます。
 
-| 名前 | アンカー | VPCエンドポイントサービスID |
+| 名前 | アンカー | VPC エンドポイントサービス ID |
 |---|---|---|
 | `gcp-intake.logs.uk1.datadoghq.com` | `aqua.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-099b74a86151e7f91` |
 | `*.agent.uk1.datadoghq.com` | `beige.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9` |
@@ -553,9 +553,11 @@ UK1は、PrivateLinkに対して2レベルのDNSアーキテクチャを使用�
 | `dbquery-intake.uk1.datadoghq.com` | `white.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029` |
 {{% /site-region %}}
 
-## データが PrivateLink {#verify-that-data-is-being-sent-using-privatelink}を使用して送信されていることを確認する
+{{% site-region region="us,ap1,ap2,uk1" %}}
 
-PrivateLink を設定した後、PrivateLink を使用してデータが送信されていることを確認するため、その VPC 上のマシンで`dig` コマンドを実行します。例えば、エンドポイント `http-intake.logs.datadoghq.com` に PrivateLink を設定した場合は、このコマンドを実行します。
+## データが PrivateLink を使用して送信されていることを確認する{#verify-that-data-is-being-sent-using-privatelink}
+
+PrivateLink を設定した後、PrivateLink を使用してデータが送信されていることを確認するため、その VPC 上のマシンで`dig` コマンドを実行します。たとえば、エンドポイント `http-intake.logs.datadoghq.com` に PrivateLink を設定した場合は、このコマンドを実行します。
 
 ```
 dig http-intake.logs.datadoghq.com
@@ -581,6 +583,7 @@ l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.
 l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.49
 l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.50
 ```
+{{% /site-region %}}
 
 ## 参考資料 {#further-reading}
 

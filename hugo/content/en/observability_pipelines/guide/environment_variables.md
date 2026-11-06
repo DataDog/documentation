@@ -50,6 +50,9 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenTelemetry
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
+
 ### Socket
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -59,6 +62,15 @@ Some Observability Pipelines components require setting up environment variables
 
 ### Splunk TCP
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_tcp %}}
+- Connection limit (optional):
+    - The maximum number of connections to the source. If unset or set to `0`, there is no limit.
+    - The environment variable is `DD_OP_SPLUNK_TCP_CONNECTION_LIMIT`.
+- Maximum frame length (optional):
+    - The maximum frame length, in bytes, for an event. By default, there is no limit.
+    - The environment variable is `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH`.
+- TCP keepalive idle time (optional):
+    - The number of seconds a connection can be idle before the Worker sends a TCP keepalive probe. Defaults to `60`.
+    - The environment variable is `DD_OP_SPLUNK_TCP_KEEPALIVE_TIME_SECS`.
 
 ### Sumo Logic
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/sumo_logic %}}
@@ -75,6 +87,13 @@ Some Observability Pipelines components require setting up environment variables
 - Allowlist
   - The allowlist is a comma-separated list of environment variables you want to pull values from and use with this processor.
   - Stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
+
+### Reduce
+
+- Aggregation window (optional)
+  - How long a Reduce processor aggregates events before sending the reduced log. See [Set the aggregation window](/observability_pipelines/processors/reduce/#set-the-aggregation-window) for more information.
+  - Stored in the environment variable `DD_OP_REDUCE_WINDOW_SECS`.
+  - Requires Worker version 2.25.0 or later.
 
 {{% /tab %}}
 {{% tab "Destinations" %}}
@@ -128,6 +147,12 @@ Some Observability Pipelines components require setting up environment variables
 
 ### OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+### OpenTelemetry
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
+
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
 
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}

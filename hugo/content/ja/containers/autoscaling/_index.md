@@ -1,8 +1,6 @@
 ---
 aliases:
 - /ja/containers/monitoring/autoscaling
-cascade:
-  site_support_id: containers_autoscaling
 description: Datadog のメトリクスとインテリジェントなスケーリング推奨事項を使用して、Kubernetes ワークロードを自動的にスケールできます。
 further_reading:
 - link: /infrastructure/containers/kubernetes_resource_utilization

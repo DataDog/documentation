@@ -2,9 +2,6 @@
 title: Retain Data with Retention Filters
 description: Learn how retention filters work in RUM without Limits.
 further_reading:
-  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
-    tag: Guide
-    text: Retention Filter Best Practices
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
     text: RUM without Limits
@@ -14,12 +11,15 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
     tag: Documentation
     text: Control Costs with Retention Quotas
-  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-    tag: "Blog"
-    text: "Unify and correlate frontend and backend data with retention filters"
+  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
+    tag: Guide
+    text: Retention Filter Best Practices
   - link: 'https://learn.datadoghq.com/courses/rum-retention-filters'
     tag: 'Learning Center'
     text: 'Interactive Lab: RUM Retention Filters'
+  - link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+    tag: "Blog"
+    text: "Unify and correlate frontend and backend data with retention filters"
 ---
 
 {{< learning-center-callout header="Try RUM Retention Filters in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/rum-retention-filters" hide_image="false" >}}
@@ -86,11 +86,7 @@ There are three permanent retention filters:
 
 ## Exclusion filters
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-exclusion-filters/" btn_hidden="false" header="Join the Preview!">}}
-Exclusion filters are in Preview.
-{{< /callout >}}
-
-{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters.png" alt="The Exclusion Filters group expanded, showing the predefined Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/exclusion-filters-excluded-errors.png" alt="The Exclusion Filters group expanded, showing the predefined Excluded errors from Error Tracking filter and two custom exclusion filters with their event types and queries." style="width:100%" >}}
 
 Exclusion filters make targeted events skip the evaluation against custom retention filters. They are applied after the permanent retention filters.
 
@@ -103,9 +99,9 @@ An exclusion filter is made of an event type and a query, like retention filters
 - An exclusion filter can target **All events** instead of a single event type, which lets you exclude on attributes or tags shared by every event, such as `@device.type` or `@geo.country`.
 - An exclusion filter has no retention rate. It either matches an event or it does not, so the **order of exclusion filters does not matter**.
 
-### Excluding errors ignored in Error Tracking
+### Reusing Error Tracking exclusions
 
-A predefined exclusion filter at the top of the list targets the errors you [ignored or excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
+A predefined exclusion filter at the top of the list targets the errors you [excluded in Error Tracking][10], so that you do not have to maintain the same exclusions in two places.
 
 You can enable or disable this filter, but you cannot edit it or delete it.
 

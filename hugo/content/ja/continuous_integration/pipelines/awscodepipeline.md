@@ -8,82 +8,104 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
   text: CI Visibility のトラブルシューティング
+- link: /continuous_integration/search/
+  tag: ドキュメント
+  text: CI パイプラインの検索と管理
 - link: https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/
   tag: ブログ
-  text: Datadog CI Visibility で AWS CodePipeline 上の CI/CD を監視・改善する
-title: AWS CodePipeline パイプラインでトレースをセットアップする
+  text: Datadog CI Visibility を使用して AWS CodePipeline 上の CI/CD を監視および改善する
+title: CI Visibility 向けの AWS CodePipeline のセットアップ
 ---
+## 概要{#overview}
 
-## 概要
+[AWS CodePipeline][1] は、アプリケーションとインフラストラクチャーを迅速かつ確実に更新できるようにするために、リリースパイプラインを自動化することができる、フルマネージドの継続的デリバリーサービスです。
 
-[AWS CodePipeline][1] は、フルマネージド型の継続的デリバリーサービスで、アプリケーションとインフラストラクチャーを高速かつ確実にアップデートできるよう、リリースパイプラインの自動化を支援します。
+AWS CodePipeline 用の CI Visibility をセットアップして、パイプライン実行に関するデータを収集し、パフォーマンスのボトルネックや運用上の問題を分析し、デプロイワークフローを監視します。
 
-AWS CodePipeline でトレースをセットアップすると、パイプラインの実行に関するデータを収集し、パフォーマンスのボトルネックや運用上の問題を分析し、デプロイメントワークフローを監視できます。
-
-### 互換性
+### 互換性 {#compatibility}
 
 | Pipeline Visibility | プラットフォーム | 定義 |
 |---|---|---|
-| [部分的なリトライ][14] | 部分的なパイプライン | 部分的にリトライされたパイプラインの実行を表示します。 |
-| *[実行中のパイプライン][15] | 実行中のパイプライン | 実行中のパイプラインを表示します。キューに置かれているパイプラインや待機中のパイプラインは、Datadog で "Running" のステータスと共に表示されます。 |
-| **ログの相関付け | ログの相関付け | パイプラインとジョブスパンを相関付けして、[ジョブログの相関付け](#collect-job-logs)を可能にします。 |
-| [承認待ち時間][17] | 承認待ち時間  | ジョブとパイプラインの相互承認の待ち時間を表示します。 |
-| [カスタムスパン][18] | カスタムスパン | パイプラインのカスタムスパンを構成します。 |
+| [部分的なリトライ][14] | 部分パイプライン | 部分的にリトライされたパイプライン実行を表示します。|
+| *[実行中のパイプライン][15] | 実行中のパイプライン | 稼働中のパイプライン実行を表示します。キューに入っているパイプラインまたは待機中のパイプラインは、Datadog では「Running (稼働中)」ステータスで表示されます。|
+| **ログ相関 | ログ相関	| パイプラインとジョブのスパンをログに関連付けます。[ログストレージ](#logs-storage)が必要です。|
+| [承認待ち時間][17] | 承認待ち時間  | ジョブとパイプラインの手動承認の待ち時間を表示します。|
+| [カスタムスパン][18] | カスタムスパン | パイプラインのカスタムスパンを構成します。|
+| [クリティカルパスで CI ジョブをフィルタリングする][19] | クリティカルパスで CI ジョブをフィルタリングする | クリティカルパスのジョブでフィルタリングします。|
+| [実行時間][20] | 実行時間  | パイプラインによるジョブ実行時間を表示します。|
 
-*AWS CodePipeline の実行中のパイプラインは、終了するまで Git の情報を持ちません。\
-**AWS CodePipeline のログの相関付けは、AWS CodeBuild のアクションにのみ利用可能です。
+*AWS CodePipeline の稼働中のパイプラインには、完了するまで Git 情報は含まれません。\
+**AWS CodePipeline のログ相関は、AWS CodeBuild アクションでのみ利用可能です。
 
-## Datadog インテグレーションの構成
+### 用語 {#terminology}
 
-[AWS CodePipeline][1] と Datadog CI Visibility との間のインテグレーションを設定するには、2 つの AWS リソースを作成します。
+次の表に、Datadog CI Visibility と AWS CodePipeline の概念の対応を示します。
 
-1. [API 送信先][2]: Datadog のインテークを指す HTTP エンドポイント。
-2. [AWS EventBridge ルール][3]: CodePipeline イベントを API 送信先に転送するするルール。
+| Datadog  | AWS CodePipeline |
+|----------|------------------|
+| パイプライン | パイプライン         |
+| ステージ    | ステージ            |
+| ジョブ      | アクション           |
 
-これらのリソースは、EventBridge ルールの作成プロセス内で個別に作成することも、同時に作成することもできます。
-パイプラインイベントの監視の詳細については、[AWS 公式ガイド][4]を参照してください。
+## Datadog インテグレーションの構成 {#configure-the-datadog-integration}
 
-### API 送信先の作成
+[AWS CodePipeline][1] と Pipeline Visibility 間のインテグレーションをセットアップするには、2 つの AWS リソースを作成します。
 
-1. AWS Console で **EventBridge > API destinations** に移動し、**Create API destination** をクリックします。
-2. API 送信先の名前を選択し (例: **datadog-ci-visibility-api**)、オプションで説明を追加します。
-3. **API destination endpoint** に <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code> と入力します。
-4. **HTTP method** で **POST** を選択します。
-5. Connection type で **Create a new connection** を選択します。
-   1. 接続名を選択し (例: **datadog-ci-visibility-connection**)、オプションで説明を追加します。
-   2. **Destination type** で **Other** を選択します。
-   3. **Authorization type** で **API key** を選択します。
-   **API key name** に `DD-API-KEY` と入力し、**Value** フィールドに [Datadog API キー][5]を入力します。
-6. **Create** をクリックします。
+[API 宛先][2]
+: Datadog のインテークを指す HTTP エンドポイント。
 
-### EventBridge ルールの作成
+[AWS EventBridge ルール][3]
+: CodePipeline イベントを API 宛先に転送するルール。
 
-1. AWS Console で **EventBridge > Rules** に移動し、**Create Rule** をクリックします。
-2. ルール名を選択し (例: **datadog-ci-visibility-integration**)、オプションで説明を追加します。
-3. イベントバスは**デフォルト**のままとし、**Rule Type** で **Rule with an event pattern** を選択します。**Next** をクリックします。
-4. **Event Source** で **AWS events or EventBridge partner events** を選択します。
-5. **Creation Method** で **Custom pattern (JSON editor)** を選択し、**Event Pattern** で次の JSON を入力します。
-   ```
+これらのリソースは、個別に作成することも、EventBridge ルールの作成中に同時に作成することもできます。
+パイプラインイベントの監視の詳細については、[公式の AWS ガイド][4]を参照してください。
+
+## API 宛先を作成する {#create-the-api-destination}
+
+1. AWS コンソールで、[{{< ui >}}EventBridge{{< /ui >}}] > [{{< ui >}}API destinations{{< /ui >}}] (API 宛先) に移動し、[{{< ui >}}Create API destination{{< /ui >}}] (API 宛先の作成) をクリックします。
+2. API 宛先の名前 (例: `datadog-ci-visibility-api`) を選択し、必要に応じて説明を追加します。
+3. [{{< ui >}}API destination endpoint{{< /ui >}}] (API 宛先エンドポイント) で、 <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>を入力します。
+4. [{{< ui >}}HTTP method{{< /ui >}}] (HTTP メソッド) で、[{{< ui >}}POST{{< /ui >}}] を選択します。
+5. [Connection type] (接続タイプ) で、[{{< ui >}}Create a new connection{{< /ui >}}] (新規接続を作成) を選択します。
+   1. 接続の名前 (例: `datadog-ci-visibility-connection`) を選択し、必要に応じて説明を追加します。
+   2. [{{< ui >}}Destination type{{< /ui >}}] (宛先タイプ) で、[{{< ui >}}Other{{< /ui >}}] (その他) を選択します。
+   3. [{{< ui >}}Authorization type{{< /ui >}}] (承認タイプ) で、[{{< ui >}}API key{{< /ui >}}] (API キー) を選択します。[{{< ui >}}API key name{{< /ui >}}] (API キー名) に `DD-API-KEY` を入力し、[{{< ui >}}Value{{< /ui >}}] (値) フィールドに [Datadog API キー][5]を追加します。
+6. [{{< ui >}}Create{{< /ui >}}] (作成) をクリックします。
+
+## EventBridge ルールを作成する {#create-the-eventbridge-rule}
+
+1. AWS コンソールで、[{{< ui >}}EventBridge{{< /ui >}}] > [{{< ui >}}Rules{{< /ui >}}] (ルール) に移動し、[{{< ui >}}Create Rule{{< /ui >}}] (ルールを作成) をクリックします。
+2. ルールの名前を選択し (例: `datadog-ci-visibility-integration`)、必要に応じて説明を追加します。
+3. イベントバスは [{{< ui >}}default{{< /ui >}}] (デフォルト) のままにし、[{{< ui >}}Rule Type{{< /ui >}}] (ルールタイプ) で [{{< ui >}}Rule with an event pattern{{< /ui >}}] (イベントパターンのルール) を選択します。[{{< ui >}}Next{{< /ui >}}] (次へ) をクリックします。
+4. [{{< ui >}}Event Source{{< /ui >}}] (ソース) で、[{{< ui >}}AWS events or EventBridge partner events{{< /ui >}}] (AWS イベントまたは EventBridge パートナーイベント) を選択します。
+5. [{{< ui >}}Creation Method{{< /ui >}}] (メソッドを作成) で、[{{< ui >}}Custom pattern (JSON editor){{< /ui >}}] (カスタムパターン (JSON エディター)) を選択します。次に、[{{< ui >}}Event Pattern{{< /ui >}}] (イベントパターン) で、以下を入力します。
+
+   ```json
    {
      "source": ["aws.codepipeline"],
      "detail-type": ["CodePipeline Pipeline Execution State Change", "CodePipeline Action Execution State Change", "CodePipeline Stage Execution State Change"]
    }
    ```
-   上記の JSON ですべてのパイプラインのインテグレーションが設定されます。パイプラインのセットを制限するには、下の[特定のパイプラインのみ監視][7]セクションに従います。
-6. **Next** をクリックします。
-7. **Target Types** で **EventBridge API destination** を選択します。次に **Use an existing API Destination** を選択し、先ほど作成した API 宛先を選択します。または、[API 宛先の作成][6] セクションで説明した手順に従って API 宛先を作成することもできます。
-8. **Headers Parameters** で **Add header parameter** をクリックします。キーに `DD-CI-PROVIDER-AWSCODEPIPELINE` と入力し、値に `true` と入力します。
-9. **Create a new role for this specific resource** を選択します (または、既存のロールを使用)。
+
+   上記の JSON は、すべてのパイプラインのインテグレーションをセットアップします。パイプラインのセットを制限するには、
+   以下の「[モニター固有のパイプラインのみ](#only-monitor-specific-pipelines)」セクションに従ってください。
+
+6. [{{< ui >}}Next{{< /ui >}}] (次へ) をクリックします。
+7. [{{< ui >}}Target Types{{< /ui >}}] (タイプ) で、[{{< ui >}}EventBridge API destination{{< /ui >}}] (EventBridge API 宛先) を選択します。次に、[{{< ui >}}Use an existing API Destination{{< /ui >}}] (既存の API 宛先を使用) を選択し、前のステップで作成した API 宛先を選択します。または、「[API 宛先の作成](#create-the-api-destination)」セクションで説明されている手順に従って、API 宛先を作成することもできます。
+8. [{{< ui >}}Headers Parameters{{< /ui >}}] (ヘッダーパラメーター) で、[{{< ui >}}Add header parameter{{< /ui >}}] (ヘッダーパラメーターの追加) をクリックします。キーとして `DD-CI-PROVIDER-AWSCODEPIPELINE` を入力し、値として `true` を入力します。
+9. [{{< ui >}}Create a new role for this specific resource{{< /ui >}}] (この特定のリソースに新しいロールを作成する) を選択します (または既存のロールを使用します)。
 10. 情報が正しいことを確認し、ルールを作成します。
 
-ルールの作成が完了したら、インテグレーションは完了で、Datadog でパイプラインを監視できます。
+ルールを作成すると、Datadog でパイプラインを監視できるようになります。
 
-### 特定のパイプラインのみ監視
+## 高度な構成 {#advanced-configuration}
 
-オプションで、Pipeline Visibility で監視するパイプラインを制限することもできます。
-これを行うには、EventBridge ルールの作成時に定義したルールイベント パターンに `detail.pipeline` フィルターを追加します。例:
+### 特定のパイプラインのみを監視する {#only-monitor-specific-pipelines}
 
-```
+必要に応じて、Pipeline Visibility で監視するパイプラインを制限できます。
+これを行うには、EventBridge ルールを作成する際に定義されるルールイベントパターンに `detail.pipeline` フィルターを追加します。例:
+
+```json
  {
    "source": ["aws.codepipeline"],
    "detail-type": ["CodePipeline Pipeline Execution State Change", "CodePipeline Action Execution State Change", "CodePipeline Stage Execution State Change"],
@@ -93,41 +115,39 @@ AWS CodePipeline でトレースをセットアップすると、パイプライ
  }
  ```
 
-上記のイベントパターンでは、`first-pipeline` と `second-pipeline` のパイプラインに対してのみ、インテグレーションが設定されます。
+イベントパターンによって、`first-pipeline` パイプラインと `second-pipeline` パイプラインに対してのみインテグレーションを設定します。
 
-### パイプラインとテストの相関付け
+### パイプラインとテストを関連付ける {#correlate-pipelines-with-tests}
 
-[Test Visibility][8] を使用していて、パイプラインにテストを実行する [AWS CodeBuild][9] アクションが 1 つ以上含まれている場合、Datadog Pipeline Visibility 内でテストを関連するパイプラインと相関付けることができます。手順については、[パイプライン実行 ID の追加](#add-the-pipeline-execution-id-as-an-environment-variable) を参照してください。
+[Test Optimization][8] を使用しており、パイプラインにテストを実行するための [AWS CodeBuild][9] アクションが 1 つ以上含まれている場合は、Datadog Pipeline Visibility 内でテストを関連するパイプラインと関連付けることができます。手順については、「[パイプライン実行 ID を追加する](#add-the-pipeline-execution-id-as-an-environment-variable)」を参照してください。
 
-### ログの相関付けの有効化
+### ログストレージ {#logs-storage}
 
-AWS CodePipeline インテグレーション は、**CodeBuild** アクションとそれぞれのジョブおよびパイプラインスパンとの相関付けをサポートしています。CodeBuild アクションに対してログ収集を有効にするには、[AWS ログ転送ガイド][16]を参照してください。
+AWS CodePipeline インテグレーションは、**CodeBuild** アクションと、それに対応するジョブおよびパイプラインのスパンの関連付けをサポートしています。CodeBuild アクションでログストレージを有効にするには、[AWS ログ転送ガイド][16]を参照してください。
 
-<div class="alert alert-danger"><strong>注</strong>: CodeBuild アクションを対象としたログの相関付けを行うには、CodeBuild プロジェクトにデフォルトの CloudWatch ロググループおよびログストリーム名が必要です。</div>
+<div class="alert alert-warning">CodeBuild アクションにカスタム CloudWatch ロググループ名またはログストリーム名を使用している場合は、Datadog がカスタムロググループとストリーム構成を解決できるように、AWS インテグレーションで<a href="/integrations/amazon_web_services/#resource-collection">クラウドリソースコレクション</a>を有効にしてください。</div>
 
-<div class="alert alert-info"><strong>注</strong>: ログは CI Visibility とは別に課金されます。ログの保持、除外、インデックスの構成は、ログの設定で行います。AWS CodeBuild のログは <code>source:codebuild</code> と <code>sourcecategory:aws</code> のタグで識別できます。</div>
+ログストレージは、CI Visibility とは別に課金されます。ログの保持、除外、インデックスは [Log Management][21] で構成されます。AWS CodeBuild のログは、`source:codebuild` タグと `sourcecategory:aws` タグで識別できます。
 
-<div class="alert alert-info"><strong>注</strong>: ログの収集は、<a href="https://docs.datadoghq.com/data_security/pci_compliance/?tab=logmanagement">PCI 準拠の組織</a>では利用できません。</div>
+### パイプライン実行 ID を環境変数として追加する {#add-the-pipeline-execution-id-as-an-environment-variable}
 
-### パイプライン実行 ID を環境変数として追加する
+パイプライン実行 ID は、Datadog がパイプライン実行を一意に識別するために必要な識別子です。パイプラインをテストおよびカスタムコマンドに関連付けるために、以下の手順を実行してパイプライン実行 ID を割り当てます。
 
-パイプライン実行 ID は、Datadog がパイプライン実行を一意に識別するために必要とする識別子です。以下の手順を実行してパイプライン実行 ID を割り当て、パイプラインとテストおよびカスタムコマンドを相関付けます。
+1. AWS Console でパイプライン構成に移動し、[{{< ui >}}Edit{{< /ui >}}] (編集) をクリックします。
+2. AWS CodeBuild アクションを含むステージに移動し、[{{< ui >}}Edit Stage{{< /ui >}}] (ステージを編集) をクリックして、該当するアクションを編集します。
+3. [{{< ui >}}Environment variables{{< /ui >}}] (環境変数) で、環境変数を追加します。
+変数名として `DD_PIPELINE_EXECUTION_ID` を指定し、値を `#{codepipeline.PipelineExecutionId}` に設定します。タイプは _Plaintext_ のままにします。
+4. [{{< ui >}}Done{{< /ui >}}] (完了) をクリックして変更内容を保存します。
 
-1. AWS Console でパイプライン構成に移動し、**Edit** をクリックします。
-2. AWS CodeBuild アクションを含むステージに移動し、**Edit Stage** をクリックして、該当するアクションを編集します。
-3. **Environment variables** で環境変数を追加します。
-変数名は `DD_PIPELINE_EXECUTION_ID` とし、値は `#{codepipeline.PipelineExecutionId}` にします。タイプは _Plaintext_ のままにします。
-4. **Done** をクリックして変更内容を保存します。
+上記の手順により、パイプライン実行 ID を CodeBuild アクションの環境変数に追加できます。変数の操作に関する詳細については、[公式の AWS ガイド][10]を参照してください。
 
-上記の手順で、パイプライン実行 ID を CodeBuild アクション環境変数に追加できます。変数の扱い方については、[AWS 公式ガイド][10] を参照してください。
+## Datadog でパイプラインデータを視覚化する{#visualize-pipeline-data-in-datadog}
 
-## Datadog でパイプラインデータを視覚化する
+パイプラインが終了したら、[[**CI Pipeline List**] (CI パイプラインリスト)][11] ページおよび [[**Executions**] (実行)][12] ページでデータを確認します。
 
-パイプラインが終了した後に、[**CI Pipeline List**][11] と [**Executions**][12] のページでデータを確認します。
+[{{< ui >}}CI Pipeline List{{< /ui >}}] (CI パイプラインリスト) ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。詳しくは、「[CI パイプラインの検索と管理][13]」を参照してください。
 
-**CI Pipeline List** ページには、各リポジトリの[デフォルトブランチ][13]のデータのみが表示されます。
-
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -136,16 +156,17 @@ AWS CodePipeline インテグレーション は、**CodeBuild** アクション
 [3]: https://aws.amazon.com/eventbridge/
 [4]: https://docs.aws.amazon.com/codepipeline/latest/userguide/detect-state-changes-cloudwatch-events.html
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /ja/continuous_integration/pipelines/awscodepipeline/#create-the-api-destination
-[7]: /ja/continuous_integration/pipelines/awscodepipeline/#only-monitor-specific-pipelines
-[8]: https://docs.datadoghq.com/ja/continuous_integration/tests/
+[8]: /ja/tests/
 [9]: https://aws.amazon.com/codebuild/
 [10]: https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html
 [11]: https://app.datadoghq.com/ci/pipelines
 [12]: https://app.datadoghq.com/ci/pipeline-executions
-[13]: https://docs.datadoghq.com/ja/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[13]: /ja/continuous_integration/search/#search-for-pipelines
 [14]: /ja/glossary/#partial-retry
 [15]: /ja/glossary/#running-pipeline
 [16]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [17]: /ja/glossary/#approval-wait-time
 [18]: /ja/glossary/#custom-span
+[19]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[20]: /ja/glossary/#pipeline-execution-time
+[21]: /ja/logs/guide/best-practices-for-log-management/

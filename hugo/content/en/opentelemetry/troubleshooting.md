@@ -53,7 +53,7 @@ Alternatively, you can override the hostname using the `datadog.host.name` attri
              - set(attributes["datadog.host.name"], "${NODE_NAME}")
    ```
 
-For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2].
+For more information on host-identifying attributes, see [Mapping OpenTelemetry Semantic Conventions to Hostnames][2]. For the recommended hostname configuration for your setup, see [Hostname and Tagging][9].
 
 ### Unexpected hostnames with AWS Fargate deployment
 
@@ -293,6 +293,21 @@ To verify the configuration:
 1. Check the raw trace data to confirm that container IDs and tags are properly translated into Datadog format (for example, `container.id` should become `container_id`).
 2. Verify that container metadata appears on the Containers page.
 
+## Services or trace metrics are missing in APM
+
+**Symptom**: Traces arrive in Datadog, but services don't appear in the Catalog or on service pages, or trace metrics such as request rate, errors, and latency are missing.
+
+**Cause**: Datadog didn't receive trace metrics for the traces, or the traces don't identify their service and environment.
+
+**Resolution**: Check the item that matches your setup:
+
+- **Upstream Collector with the OTLP HTTP exporter**: Add the `span_metrics` connector. It generates the trace metrics that power the Catalog and service pages. It must be an exporter in your traces pipeline and a receiver in a metrics pipeline that exports to Datadog. It must also receive spans before any sampling, so that it counts all spans. See [Span metrics connector][10] and [Trace forward connector][15].
+- **Upstream Collector with the Datadog Exporter**: Add the Datadog Connector to calculate trace metrics. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Datadog Exporter and Connector][11].
+- **DDOT Collector or the Collector in the Agent**: Keep the Datadog Connector in your configuration. It must be an exporter in your traces pipeline and a receiver in your metrics pipeline. See [Install the DDOT Collector on Kubernetes][16] or [Set Up the Collector in the Datadog Agent][14].
+- **OTLP Ingest in the Agent**: The Agent computes trace metrics by default. Check that APM is enabled in the Agent. Also check that your SDK doesn't set the `_dd.stats_computed` resource attribute, which tells the Agent to skip the computation. See [OTLP Ingest in the Agent][17].
+- **SDKs sending straight to the OTLP intake, with no Collector**: Datadog doesn't compute trace metrics by default for traces sent to the OTLP traces intake endpoint. Add the `compute_stats=true` header to your exporter configuration. The intake computes trace metrics only from the spans it receives, so sampling before the intake lowers them. Don't combine this header with the `span_metrics` connector in a Collector. See [Traces endpoint][12].
+- **All setups**: Set the `service.name` and `deployment.environment.name` resource attributes. Without `service.name`, OpenTelemetry SDKs report a default name such as `unknown_service`. See [Unified service tagging][13].
+
 ## Missing metrics in Catalog and dashboards
 
 **Symptom**: Metrics are not appearing in the Catalog and dashboards despite being properly collected.
@@ -349,3 +364,12 @@ features:
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#readme
 [7]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/otlp/components/processor/infraattributesprocessor#readme
 [8]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainerID
+[9]: /opentelemetry/config/hostname_tagging/#hostname-recommendations
+[10]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[11]: /opentelemetry/setup/collector_exporter/datadog_exporter/
+[12]: /opentelemetry/setup/otlp_ingest/traces/
+[13]: /opentelemetry/correlate/#prerequisite-unified-service-tagging
+[14]: /opentelemetry/setup/ddot_collector/install/
+[15]: /opentelemetry/setup/collector_exporter/#trace-forward-connector
+[16]: /opentelemetry/setup/ddot_collector/install/kubernetes_standalone/
+[17]: /opentelemetry/setup/otlp_ingest_in_the_agent/

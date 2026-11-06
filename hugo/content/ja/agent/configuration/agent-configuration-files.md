@@ -17,14 +17,12 @@ title: Agent 構成ファイル
 
 Agent 構成ファイルの場所は、オペレーティングシステムによって異なります。
 
-| プラットフォーム                             | コマンド                              |
-|:-------------------------------------|:-------------------------------------|
-| AIX                                  | `/etc/datadog-agent/datadog.yaml`    |
-| Linux                                | `/etc/datadog-agent/datadog.yaml`    |
-| macOS                                | `~/.datadog-agent/datadog.yaml`      |
-| Windows                              | `%ProgramData%\Datadog\datadog.yaml` |
-
-使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][1] を参照してください。
+| プラットフォーム | コマンド                               | 構成例                            |
+|:---------|:--------------------------------------|:------------------------------------------|
+| AIX      | `/etc/datadog-agent/datadog.yaml`     | [`datadog.yaml.example`][3]               |
+| Linux    | `/etc/datadog-agent/datadog.yaml`     | [`datadog-agent_linux.yaml.example`][4]   |
+| macOS    | `/opt/datadog-agent/etc/datadog.yaml` | [`datadog-agent_darwin.yaml.example`][5]  |
+| Windows  | `%ProgramData%\Datadog\datadog.yaml`  | [`datadog-agent_windows.yaml.example`][6] |
 
 ## Agent 構成ディレクトリ {#agent-configuration-directory}
 
@@ -37,7 +35,7 @@ Agent チェックおよびインテグレーション用の構成ファイル�
 | CentOS                               | `/etc/datadog-agent/conf.d/`   |
 | Debian                               | `/etc/datadog-agent/conf.d/`   |
 | Fedora                               | `/etc/datadog-agent/conf.d/`   |
-| macOS                                | `~/.datadog-agent/conf.d/`     |
+| macOS                                | `/opt/datadog-agent/etc/conf.d/`     |
 | RedHat                               | `/etc/datadog-agent/conf.d/`   |
 | Source                               | `/etc/datadog-agent/conf.d/`   |
 | Suse                                 | `/etc/datadog-agent/conf.d/`   |
@@ -72,5 +70,8 @@ Autodiscovery テンプレートファイルは、`auto_conf.yaml` ファイル�
 
 JMX Agent チェックには、構成フォルダーに追加の `metrics.yaml` ファイルがあります。これは、Datadog Agent がデフォルトで収集するすべての Bean のリストです。そのため、[Docker ラベルや k8s アノテーション][2] を通じてチェックを設定する際に、すべての Bean を手動でリストアップする必要がありません。
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /ja/agent/kubernetes/integrations/#configuration
+[3]: https://github.com/DataDog/datadog-unix-agent/blob/master/docs/datadog.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
+[5]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example

@@ -9,7 +9,10 @@ title: Instrumentation agentique
 
 1. Ajoutez uniquement le code lié à Datadog Agent Observability et au traceur Datadog. Sauf à des fins d'instrumentation manuelle, ne modifiez pas le code non lié.
 2. En cas d'exécution dans un monorepo ou un projet avec plusieurs services ou cibles d'instrumentation, confirmez avec l'utilisateur quel service ou sous-projet doit être instrumenté avec Agent Observability.
-3. Installez les derniers SDK Datadog. S'il est déjà installé, vérifiez auprès de l'utilisateur s'il est possible de mettre à jour la dépendance.
+3. Vérifiez si le SDK Datadog installé prend en charge l'instrumentation requise pour l'application. Si c'est le cas, utilisez cette version. Si l'instrumentation nécessite une mise à jour du SDK, expliquez pourquoi et demandez avant de mettre à jour la dépendance. Différez les mises à jour requises uniquement pour la gestion de prompts optionnelle jusqu'à ce que l'utilisateur choisisse cette intégration.
+4. Préservez le fournisseur, le modèle, le contenu du prompt, le comportement, le gestionnaire de paquets et le workflow de gestion des secrets existants de l'application.
+
+D'abord, complétez l'instrumentation, y compris le suivi de prompt et tout partage de contexte demandé. Ensuite, proposez la gestion de prompts hébergée optionnelle. La gestion de prompts n'est pas requise pour l'instrumentation, le partage de contexte ou les recommandations de check.
 
 ## Prérequis {#pre-requisites}
 
@@ -64,10 +67,18 @@ Suivez les instructions pour le langage détecté :
 
 | Langage | Instructions |
 |----------|-------------|
-| Python | [Instrumentation agentique d'application Python](/llm_observability/instrument/agentic/python.md) |
-| Node.js | [Instrumentation agentique d'application Node.js](/llm_observability/instrument/agentic/nodejs.md) |
-| Java | [Instrumentation agentique d'application Java](/llm_observability/instrument/agentic/java.md) |
-| OpenTelemetry | [Instrumentation OpenTelemetry](/llm_observability/instrument/otel_instrumentation.md) |
+| Python | [Instrumentation d'agent d'application Python][1] |
+| Node.js | [Instrumentation d'agent d'application Node.js][2] |
+| Java | [Instrumentation d'agent d'application Java][3] |
+| OpenTelemetry | [Instrumentation OpenTelemetry][4] |
+
+## Instrumentez les prompts {#instrument-prompts}
+
+Le suivi des prompts fait partie de l'instrumentation par défaut d'Agent Observability. Pour chaque appel LLM sélectionné, identifiez où l'application construit le prompt. Gardez le modèle de prompt séparé des valeurs de variable utilisées pour le remplir.
+
+Pour les prompts locaux, suivez les [instructions de suivi de prompt][5] pour enregistrer le modèle de prompt et les valeurs de variable avec le span LLM. Conservez le code existant qui construit le prompt. Ne le remplacez pas par du code qui récupère les prompts depuis Datadog Prompt Management.
+
+Si l'application récupère déjà des prompts depuis Datadog Prompt Management, conservez cette intégration. Le suivi automatique s'applique lorsque le prompt formaté est transmis sans modification à un fournisseur pris en charge et instrumenté automatiquement. Si l'application copie ou modifie le prompt formaté avant de l'envoyer au fournisseur, ajoutez des annotations explicites comme décrit dans [Suivre l'utilisation des prompts][6]. N'ajoutez pas d'annotations manuelles lorsque le suivi automatique capture déjà les métadonnées du prompt.
 
 {{< agent-only >}}
 ## Partagez le contexte de l'agent pour les recommandations de check {#share-agent-context-for-check-recommendations}
@@ -157,20 +168,9 @@ Respectez ces exigences de sécurité :
 - Si le téléversement échoue, poursuivez l'instrumentation et indiquez à l'utilisateur que Datadog n'a pas reçu le contexte optionnel. Ne réessayez pas avec des données plus larges.
 
 {{< /agent-only >}}
-## Instrumentez les prompts et proposez Prompt Management {#instrument-prompts-and-offer-prompt-management}
-
-Le suivi des prompts fait partie de l'instrumentation par défaut d'Agent Observability. Identifiez la limite de construction du prompt pour chaque appel LLM sélectionné et conservez le modèle de prompt séparément de ses variables dynamiques.
-
-1. Si la requête de l'utilisateur spécifie déjà un ID de prompt géré par Datadog, suivez le [guide d'intégration agentique de la gestion des prompts](/llm_observability/instrument/agentic/prompt_management.md). Ne demandez pas s'il faut utiliser Prompt Management.
-2. Sinon, identifiez les prompts de l'application et les variables dynamiques utilisées pour les formater. Préservez le fournisseur, le modèle, le contenu du prompt et le comportement de l'application existants.
-3. Pour une application Python prise en charge, indiquez à l'utilisateur quels prompts vous avez identifiés et demandez-lui s'il souhaite gérer ces prompts avec Datadog. S'il est d'accord, suivez le [guide d'intégration agentique de la gestion des prompts](/llm_observability/instrument/agentic/prompt_management.md) pour promouvoir les prompts locaux sélectionnés et remplacer leur construction locale par une récupération de prompt géré.
-4. Si l'utilisateur refuse la gestion des prompts, ou si le langage de l'application n'est pas pris en charge, instrumentez les prompts sélectionnés avec des métadonnées de prompt structurées en suivant les [instructions de suivi des prompts](/llm_observability/instrument/prompt_tracking). N'ajoutez pas de récupération de prompt au moment de l'exécution.
-
-Lorsque la gestion des prompts remplace un prompt local, utilisez le suivi automatique du prompt géré plutôt que d'ajouter des métadonnées de prompt structurées en double.
-
 ## Affichage des traces {#viewing-traces}
 
-Informez l'utilisateur qu'il peut interroger son application et consulter les données dans Datadog.
+Signalez les modifications d'instrumentation, toutes les exigences de configuration restantes et si le téléchargement du contexte a réussi lorsque cette étape a été demandée. Indiquez à l'utilisateur comment exécuter son application et afficher ses données dans Datadog. Ne prétendez pas que des traces ou des recommandations sont disponibles sans vérification.
 
 **Obligatoire** : fournissez un lien permanent où l'utilisateur peut consulter les données associées à cette application. Cela prendra la forme de
 
@@ -179,8 +179,20 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 Remplissez les valeurs fournies :
-1. `dd_site` - si la valeur a été fournie pour [le site Datadog](#datadog-site), utilisez cette valeur. Sinon, utilisez `datadoghq.com`.
-2. `application_name` - utilisez soit la valeur fournie, soit la valeur déduite de la section [Nom de l'application Agent Observability](#llm-observability-application-name).
+1. `dd_site` : Si la valeur a été fournie pour [le site Datadog](#datadog-site), utilisez cette valeur. Sinon, utilisez `datadoghq.com`.
+2. `application_name` : Utilisez la valeur fournie ou déduite de la section [Nom de l'application Agent Observability](#agent-observability-application-name).
+
+## Gestion de prompts optionnelle {#optional-prompt-management}
+
+Une fois l'instrumentation et tout partage de contexte demandé terminés, signalez les résultats. Ensuite, traitez la gestion des prompts hébergée facultative pour les applications Python :
+
+- Si l'utilisateur a déjà fourni un ID de prompt géré par Datadog, suivez le [guide d'intégration agentique de la gestion des prompts][7]. Ne demandez pas à nouveau s'il faut activer la gestion des prompts.
+- Sinon, identifiez les prompts locaux de l'application et demandez si l'utilisateur souhaite les gérer dans Datadog. S'il est d'accord, suivez le guide pour créer des versions gérées des prompts sélectionnés et mettez à jour l'application pour les récupérer.
+- Si l'utilisateur refuse ou ne répond pas, conservez les prompts locaux instrumentés inchangés.
+
+Suivez la section [Suivre l'utilisation des prompts][6] du guide pour déterminer si un suivi automatique ou des annotations explicites sont requis. Évitez les métadonnées de prompt en double.
+
+Si la gestion des prompts nécessite une mise à jour du SDK, expliquez pourquoi et demandez avant de mettre à jour la dépendance. Cette mise à jour facultative ne doit pas retarder l'instrumentation principale ou le partage de contexte.
 
 ## Instructions spécifiques au langage {#language-specific-instructions}
 
@@ -190,3 +202,11 @@ Remplissez les valeurs fournies :
     {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Instrumentation agentique d'application Java :{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Intégration agentique de gestion des prompts :{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /fr/llm_observability/instrument/agentic/python.md
+[2]: /fr/llm_observability/instrument/agentic/nodejs.md
+[3]: /fr/llm_observability/instrument/agentic/java.md
+[4]: /fr/llm_observability/instrument/otel_instrumentation.md
+[5]: /fr/llm_observability/instrument/prompt_tracking.md
+[6]: /fr/llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
+[7]: /fr/llm_observability/instrument/agentic/prompt_management.md

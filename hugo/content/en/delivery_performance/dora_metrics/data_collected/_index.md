@@ -75,7 +75,7 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | Field  | Description                |
 |------------|----------------------------|
 | `PR Cycle Time`       | Total duration from the first commit to merge. |
-| `Time to PR Ready`       | Duration from the first commit to when the PR is marked as ready for review. |
+| `Time to PR Ready`       | Duration from the first commit or the pull request creation, whichever comes first, to when the PR is marked as ready for review. |
 | `Review Time`       | Duration from PR being marked ready for review to approval. |
 | `Merge Time`       | Duration from PR approval to merging. |
 | `Time to Deploy`       | Duration from merging to the start of deployment. |
@@ -123,7 +123,7 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /getting_started/tagging/
-[7]: /api/latest/dora-metrics/
+[7]: /api/latest/delivery-performance/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/metrics/
 [10]: /delivery_performance/dora_metrics/setup/

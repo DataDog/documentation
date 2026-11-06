@@ -55,6 +55,8 @@ Configure severity modifier rules to adjust finding severities to reflect your o
 
 **Note**: You cannot use `@severity` or `@severity_details.user_adjusted` in the rule query. Severity modifier rules are evaluated against the Datadog-adjusted severity (`@severity_details.adjusted.value`), not the `@severity` value stored in the finding.
 
+You can also create severity modifier rules with the [API][3] or the [`datadog_security_findings_severity_modifier_rule`][4] Terraform resource.
+
 ## Evaluation order
 
 Severity modifier rules are the first step in the automation pipeline and run before mute, due date, inbox, and ticket creation rules. Within severity modifier rules, Datadog uses a first-match policy: findings are evaluated against your rules in order, and the first matching rule is applied. No further severity modifier rules are evaluated for that finding.
@@ -127,3 +129,5 @@ Severity modifiers are not cleared or updated for findings that transition to au
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=modify_severity
+[3]: /api/latest/security-monitoring/create-a-severity-modifier-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_severity_modifier_rule

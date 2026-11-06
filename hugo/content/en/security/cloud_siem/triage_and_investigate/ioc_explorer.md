@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
   tag: "Blog"
   text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
+- link: /security/cloud_siem/ingest_and_enrich/muted_indicators/
+  tag: documentation
+  text: Muted Indicators
 ---
 
 ## Overview
@@ -45,6 +48,7 @@ You can write custom queries or apply filters to determine which indicators of c
 - [Threat intelligence category][4]
 - Autonomous system (AS) type
 - [Matched OCSF fields](#understand-ocsf-matching)
+- [Mute state](#mute-benign-indicators)
 
 Additionally, you can click a column heading in the Explorer to sort by that column's values.
 
@@ -76,6 +80,10 @@ In the IOC Explorer, click an indicator of compromise to view additional informa
   - Signal matches, which you can view in [Signals Explorer][6]
   - Related logs, which you can view in [Log Explorer][7]
 
+### Mute benign indicators
+
+If an indicator is benign for your organization, such as your corporate VPN egress IP address, click {{< ui >}}Mute This IoC{{< /ui >}} in its side panel, or select multiple indicators and mute them in bulk. Muted indicators stay in the Explorer, and their threat intelligence ratings change to benign for your organization. The {{< ui >}}Custom mute{{< /ui >}} column and the {{< ui >}}Muted{{< /ui >}} facet show which indicators your organization muted, and the {{< ui >}}Muted Indicators{{< /ui >}} button lists every active mute. For details, see [Muted Indicators][8].
+
 ## Understand severity scoring
 
 It's important to have proper context for the severity score for an indicator, so you can properly prioritize investigations. For example, [IP addresses][5] can be volatile and require frequent reassessments as a result.
@@ -98,3 +106,4 @@ In the IOC Explorer side panel, you can see the factors that contribute to the s
 [5]: /security/threat_intelligence/#ip-addresses-dynamic-and-transient
 [6]: /security/cloud_siem/triage_and_investigate/investigate_security_signals/#signals-explorer
 [7]: /logs/explorer/
+[8]: /security/cloud_siem/ingest_and_enrich/muted_indicators/

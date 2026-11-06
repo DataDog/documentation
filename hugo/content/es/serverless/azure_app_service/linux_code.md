@@ -729,7 +729,7 @@ El recurso `slotConfigNames` realiza un reemplazo completo de la lista de config
 
 {{% /collapse-content %}}
 
-### Ver trazas en Datadog {#view-traces-in-datadog}
+### Visualizar trazas en Datadog {#view-traces-in-datadog}
 
 Después de que su aplicación se reinicie, vaya a la [página de servicios de APM][2] de Datadog y busque el nombre del servicio que configuró para su aplicación (`DD_SERVICE`).
 
@@ -764,6 +764,8 @@ Asegúrese de habilitar {{< ui >}}App Service logs{{< /ui >}} para recibir regis
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Configuración de Azure App Service: App Service logs, en la sección Monitoring de Settings en la Azure UI. La opción 'Application logging' está establecida en 'File System'." style="width:100%;" >}}
 
 Comparta el contenido de {{< ui >}}Log stream{{< /ui >}} con [Datadog Support][9].
+
+Si el Escalado automático está habilitado en el Plan de App Service y observa trazas no relacionadas combinadas, los sondeos de estado de la plataforma de Azure (`User-Agent: HttpScaleManager`) podrían transportar un contexto de traza W3C obsoleto. Si todos los emisores de llamadas a la aplicación están instrumentados con Datadog, establezca `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` en la aplicación afectada para restringir la extracción del contexto de traza al formato de Datadog. Para aplicaciones con emisores de llamadas que no están instrumentados con Datadog, esta configuración hace que Datadog ignore su contexto de traza W3C, lo que divide esas solicitudes en trazas desconectadas en lugar de combinarlas en la traza principal.
 
 ## Lecturas adicionales {#further-reading}
 

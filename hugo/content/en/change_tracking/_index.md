@@ -2,6 +2,12 @@
 title: Change Tracking
 description: "Streamline troubleshooting with Change Tracking by monitoring deployments, feature flags, configuration changes, and other modifications to your services."
 further_reading:
+- link: "https://www.datadoghq.com/blog/change-tracking/"
+  tag: "Blog"
+  text: "Unify visibility into changes to your services and dependencies"
+- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+  tag: "Blog"
+  text: "Teaching a 9B model to investigate production alerts"
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Monitor Status Page"
@@ -11,35 +17,7 @@ further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Service Page"
-- link: "/api/latest/events/"
-  tag: "Documentation"
-  text: "Event Management API"
-- link: "/tracing/services/deployment_tracking/"
-  tag: "Documentation"
-  text: "Deployment Tracking"
-- link: "/feature_flags/"
-  tag: "Documentation"
-  text: "Datadog Feature Flags"
-- link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
-  tag: "Documentation"
-  text: "LaunchDarkly"
-- link: "/watchdog/"
-  tag: "Documentation"
-  text: "Watchdog"
-- link: "/database_monitoring/"
-  tag: "Documentation"
-  text: "Database Monitoring"
-- link: "/data_streams/"
-  tag: "Documentation"
-  text: "Data Streams Monitoring"
-- link: "https://www.datadoghq.com/blog/change-tracking/"
-  tag: "Blog"
-  text: "Unify visibility into changes to your services and dependencies"
 ---
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -49,7 +27,7 @@ Change Tracking streamlines troubleshooting and incident response by surfacing r
 
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
-- [Feature Flags][14]
+- Feature Flags
 - Traffic Spikes
 - Configuration Changes
 - Database Modifications
@@ -59,7 +37,7 @@ Change Tracking supports monitoring of a range of modifications to your service 
 - Kubernetes Pod Crashes
 - Watchdog Alerts
 
-For details on specific types of supported changes and setup requirements, see the [Tracked changes](#tracked-changes) section.
+For details on specific types of supported changes and setup requirements, see [Tracked Change Types][16].
 
 ## Using Change Tracking
 
@@ -146,25 +124,12 @@ For Timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Even
 
 To view information about a change or set of changes, click a datapoint in the widget and select {{< ui >}}View Changes{{< /ui >}}. This opens the Change Tracking side panel with additional details.
 
-## Tracked changes
-Change Tracking follows these types of changes across your infrastructure:
+## Change types you can track
 
-| Change Type                                                                      | Tracking Requirements                                                                                                                                                                   |
-|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Code Deployments (APM)                                                           | APM & [Deployment Tracking][4]. A version must be available on the service.                                                                                                             |
-| Kubernetes Deployment Manifest Updates                                           | Datadog Agent Set Up for Kubernetes (Add service label to Kubernetes yaml file if possible).                                                                                             |
-| Feature Flags                                                                    | Use the LaunchDarkly integration or send custom events using the Events API. See the [Feature Flag Tracking documentation][14] for setup and advanced options.                          |
-| Custom Configuration Change Events                                               | [Event Management API][6].                                                                                                                                                               |
-| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.                                                                                          |
-| Traffic Spikes (APM)                                                             | [Application Performance Monitoring (APM)][15]
-| CrashLoopBackOff Kubernetes Pod Crashes                                          | Kubernetes Integration (Add service label to Kubernetes yaml file if possible).                                                                                                          |
-| PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                 | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation. |
-| MongoDB Index & SearchIndex Changes                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10].                                                                                                          |
-| PostgreSQL Database Settings Change                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10].                                                                                                          |
-| SQL Server Database Settings Change                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10].                                                                                                          |
-| Kafka Schema Updates                                                             | [Data Streams Monitoring (DSM)][9].                                                                                                                                                      |
-| Manual Kubernetes Deployment Scale Events                                        | Kubernetes Audit Logging.                                                                                                                                                               |
-| Cloud Infrastructure Resource Changes ({{< tooltip text="in Preview" tooltip="This feature is in Preview and currently limited to a small sample of cloud resource changes. To request access, see the Resource Changes documentation linked in Tracking Requirements." >}}) | [Resource Changes][13] - Enable Resource Collection and optionally cloud provider event forwarding.       
+Change Tracking covers deployments, feature flags, database changes, streaming and application behavior, infrastructure changes, and any custom change you send yourself.
+
+For the full list of change types, the Datadog feature each one comes from, and what you need to enable it, see [Tracked Change Types][16].
+  
 
 ## Further reading
 
@@ -183,5 +148,5 @@ Change Tracking follows these types of changes across your infrastructure:
 [11]: /actions/connections/#work-with-connections
 [12]: /database_monitoring/schema_explorer
 [13]: /infrastructure/resource_catalog/resource_changes/
-[14]: /change_tracking/feature_flags
 [15]: /tracing
+[16]: /change_tracking/change_types/

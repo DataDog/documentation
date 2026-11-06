@@ -91,7 +91,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
     * Update an incident's state, severity, or other fields
     * Comment on the incident's timeline
     * Send incident notifications
-    * Add responders or assign responder types
+    * Add responders or assign responder roles
     * Create, modify, or assign incident follow-ups
     * Generate a postmortem
   * You do _not_ become an active user when you:

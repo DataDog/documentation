@@ -1,4 +1,4 @@
-If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
+To add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
 
 To delete a destination, click on the trash icon to the top right of the destination.
 - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.

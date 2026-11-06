@@ -38,6 +38,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - {{< ui >}}Configuration{{< /ui >}}: Metrics with tag configurations
 - {{< ui >}}Percentiles{{< /ui >}}: Distribution metrics enabled by percentiles/advanced query capabilities
 - {{< ui >}}Historical Metrics{{< /ui >}}: Metrics that have historical metrics ingestion enabled 
+- {{< ui >}}Metric Category{{< /ui >}}: Differentiate between Custom Metrics and Standard Integration Metrics.
 - {{< ui >}}Query Activity{{< /ui >}}: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
 - {{< ui >}}Related Assets{{< /ui >}}: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
 - {{< ui >}}Metric Type{{< /ui >}}: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
@@ -53,13 +54,9 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 ## Configuration of multiple metrics 
 
+To configure tags on multiple metrics at once, use [Tag Indexing Rules][41].
+
 Clicking {{< ui >}}Configure Metrics{{< /ui >}} gives you multiple options to configure more than one metric at a time: 
-
-{{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
-
-* {{< ui >}}Manage tags{{< /ui >}}: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
-
-{{< img src="metrics/summary/tags-bulk-config.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
 * {{< ui >}}Enable or disable percentiles{{< /ui >}}: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
@@ -223,7 +220,7 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note**: Metrics without Limits™ is only available for custom metrics.
 
-You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to {{< ui >}}Configure Metrics{{< /ui >}} > {{< ui >}}Manage tags{{< /ui >}} in the [Metrics page][34], or by clicking the {{< ui >}}Manage Tags{{< /ui >}} button in a metric's details side panel. 
+You can configure tags on a single metric by clicking the {{< ui >}}Manage Tags{{< /ui >}} button in a metric's details side panel. To configure tags on many metrics at once, use [Tag Indexing Rules][41].
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
@@ -273,7 +270,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [0]: /metrics/metrics-without-limits
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /metrics/explorer/
 [3]: /dashboards/
 [4]: /metrics/custom_metrics/
@@ -306,10 +303,10 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
-[34]: https://app.datadoghq.com/metric/overview
 [35]: https://app.datadoghq.com/integrations?category=Source%20Control
 [36]: https://app.datadoghq.com/integrations/github/configuration
 [37]: https://app.datadoghq.com/integrations/gitlab-source-code
 [38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
 [39]: https://app.datadoghq.com/source-code/repositories
 [40]: https://www.datadoghq.com/product-preview/metrics-source-code-attribution/
+[41]: /metrics/guide/tag-indexing-rules/

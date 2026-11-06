@@ -1,169 +1,139 @@
 ---
-title: Tests TCP
-description: Simuler des connexions TCP sur vos hosts
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API Tests
+  tags:
+  - tcp
+  - tcp test
+  - tcp tests
 aliases:
-  - /fr/synthetics/tcp_test
-  - /fr/synthetics/tcp_check
+- /fr/synthetics/tcp_test
+- /fr/synthetics/tcp_check
+description: Simuler des connexions TCP sur vos hosts
 further_reading:
-  - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
-    tag: Blog
-    text: Présentation de la surveillance Synthetic Datadog
-  - link: /getting_started/synthetics/api_test
-    tag: Documentation
-    text: Débuter avec les tests API
-  - link: /synthetics/private_locations
-    tag: Documentation
-    text: Exécuter des tests TCP sur des hosts internes
+- link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
+  tag: Blog
+  text: Présentation de Datadog Synthetic Monitoring
+- link: /getting_started/synthetics/api_test
+  tag: Documentation
+  text: Débuter avec les tests API
+- link: /synthetics/private_locations
+  tag: Documentation
+  text: Exécuter des tests TCP sur des hosts internes
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: Documentation
+  text: En savoir plus sur les monitors de test Synthetic
+title: Test TCP
 ---
-## Présentation
+## Présentation {#overview}
 
-Les tests TCP vous permettent de surveiller que des connexions TCP de bas niveau peuvent être établies avec les ports de hosts donnés. Vous pouvez ainsi vérifier la disponibilité de divers services essentiels tels que `SSH` (22), `SMTP` (25), `DNS` (53), VPN via `HTTPS` (443), ainsi que d'autres services personnalisés passant par d'autres ports. Grâce aux données intégrées relatives aux temps de réponse, vous pouvez surveiller les performances de vos applications réseau et être alerté en cas de lenteur inattendue.
+Les tests TCP vous permettent de surveiller si des connexions TCP de bas niveau peuvent être établies ou non sur les ports d'hôtes donnés, garantissant ainsi la disponibilité de plusieurs services clés tels que `SSH` (22), `SMTP` (25), `DNS` (53), VPN sur `HTTPS` (443), et tout service personnalisé résidant sur d'autres ports. Grâce aux données de temps de réponse intégrées, suivez les performances de vos applications réseau et recevez des alertes en cas de ralentissement inattendu.
 
-Les tests TCP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez exécuter le test à l'extérieur ou à l'intérieur de votre réseau. Les tests TCP peuvent être exécutés selon un programme, à la demande ou directement dans vos [pipelines de CI/CD][3].
+Les tests TCP peuvent être exécutés à partir d'emplacements [gérés](#select-locations) et [privés][1] selon que vous préférez exécuter le test depuis l'extérieur ou l'intérieur de votre réseau. Les tests TCP peuvent être exécutés selon un calendrier, à la demande ou directement au sein de vos [pipelines CI/CD][2].
 
-## Configuration
+## Configuration {#configuration}
 
-Après avoir choisi de créer un test `TCP`, définissez la requête de votre test.
+Vous pouvez créer un test en utilisant l'une des options suivantes :
 
-### Définir la requête
+- **Créer un test à partir d'un modèle** :
+   
+     1. Survolez l'un des modèles pré-remplis et cliquez sur {{< ui >}}View Template{{< /ui >}}. Cela ouvre un panneau latéral affichant des informations de configuration pré-remplies, notamment : {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Request Details{{< /ui >}}, {{< ui >}}Assertions{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}} et {{< ui >}}Monitor Settings{{< /ui >}}.
+     2. Cliquez sur {{< ui >}}\+ Create Test{{< /ui >}} pour ouvrir la page {{< ui >}}Define Request{{< /ui >}}, où vous pouvez examiner et modifier les options de configuration pré-remplies. Les champs présentés sont identiques à ceux disponibles lors de la création d'un test à partir de zéro.
+     3. Cliquez sur {{< ui >}}Save Details{{< /ui >}} pour soumettre votre test d'API.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vidéo de la page d'accueil des tests d'API Synthetics avec des modèles" video="true" >}}
 
-1. Indiquez le **Host** et le **Port** sur lesquels vous souhaitez exécuter votre test. Par défaut, le port est défini sur _`443`_.
-2. Indiquez si vous souhaitez activer l'option **Track number of network hops (TTL)**. Elle vous permet de créer une assertion en fonction du nombre de sauts effectués sur le réseau et d'accéder à une traceroute TCP dans les résultats de votre test.
-3. Spécifiez le délai (en secondes) avant l'expiration du test (facultatif).
-4. **Donnez un nom** à votre test TCP.
-5. Ajoutez des **tags** `env` et tout autre tag de votre choix à votre test TCP. Vous pourrez ensuite utiliser ces tags pour filtrer rapidement vos tests Synthetic depuis la [page d'accueil de la surveillance Synthetic][4].
+- **Créer un test à partir de zéro** :
 
-{{< img src="synthetics/api_tests/tcp_test_config.png" alt="Définir une connexion TCP" style="width:90%;" >}}
+    1. Pour créer un test à partir de zéro, cliquez sur le modèle {{< ui >}}\+ Start from scratch{{< /ui >}}, puis sélectionnez le type de requête `TCP`.
+    1. Indiquez le {{< ui >}}Host{{< /ui >}} et le {{< ui >}}Port{{< /ui >}} sur lesquels exécuter votre test.
+    1. Décidez si vous souhaitez {{< ui >}}Track number of network hops (TTL){{< /ui >}} ou non. Cette option vous permet de définir des assertions sur le nombre de sauts réseau et d'accéder à un TCP Traceroute dans les résultats de votre test.
+    1. Indiquez le délai d'attente en secondes avant que le test n'expire (facultatif).
+    1. {{< ui >}}Name{{< /ui >}} votre test TCP.
+    1. Ajoutez l'environnement {{< ui >}}Tags{{< /ui >}} ainsi que tout autre tag à votre test TCP. Vous pouvez ensuite utiliser ces tags pour filtrer vos tests Synthetic sur la [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} page][3]. 
+    1. Cliquez sur {{< ui >}}Test Host{{< /ui >}} pour tester la configuration de la requête. Un aperçu de la réponse s'affiche sur le côté droit de votre écran.<br /><br>
 
-Cliquez sur **Test URL** pour essayer la configuration de requête. Un aperçu de la réponse s'affiche sur le côté droit de votre écran.
+       {{< img src="synthetics/api_tests/tcp_test_config_2.png" alt="Définir la connexion TCP" style="width:90%;" >}}
 
-### Définir des assertions
+    8. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
-Les assertions définissent un résultat de test escompté. Lorsque vous cliquez sur **Test URL**, les assertions de base pour `response time` sont ajoutées. Vous devez définir au moins une assertion à surveiller pour votre test.
+
+### Extraits {#snippets}
+
+{{% synthetics-api-tests-snippets %}}
+
+### Définissez des assertions {#define-assertions}
+
+Les assertions définissent ce qu'est un résultat de test attendu. Lorsque vous cliquez sur {{< ui >}}Test URL{{< /ui >}}, des assertions de base sur `response time` sont ajoutées. Vous devez définir au moins une assertion pour que votre test puisse effectuer une surveillance.
 
 | Type          | Opérateur                                                                | Type de valeur     |
 |---------------|-------------------------------------------------------------------------|----------------|
-| response time | `is less than`                                                          | _Nombre entier (ms)_ |
+| temps de réponse | `is less than`                                                          | _Entier (ms)_ |
+| sauts réseau    | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | _entier_        |
+| connexion | `is`                                                          | `established`, `refused`, `timeout` |
 
-Vous pouvez créer jusqu'à 20 assertions par test API en cliquant sur **New Assertion** ou en sélectionnant directement l'aperçu de la réponse :
+Vous pouvez créer jusqu'à 20 assertions par test d'API en cliquant sur {{< ui >}}New Assertion{{< /ui >}} ou en cliquant directement sur l'aperçu de la réponse :
 
-{{< img src="synthetics/api_tests/assertions.png" alt="Définir les assertions pour votre test TCP" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_tcp.png" alt="Définissez des assertions pour que votre test TCP réussisse ou échoue." style="width:90%;" >}}
 
-### Sélectionner des emplacements
+Si un test ne contient pas d'assertion sur le corps de la réponse, la charge utile du corps est abandonnée et le temps de réponse associé à la requête est renvoyé, dans la limite du délai d'expiration défini par le Synthetics Worker.
 
-Sélectionnez les **emplacements** à partir desquels vous souhaitez exécuter votre test TCP. Les tests TCP peuvent être exécutés depuis des [emplacements gérés][1] et des [emplacements privés][2], selon que vous souhaitez lancer vos connexions à l'extérieur ou au sein de votre réseau.
+Si un test contient une assertion sur le corps de la réponse et que la limite de délai d'attente est atteinte, une erreur `Assertions on the body/response cannot be run beyond this limit` apparaît.
 
-### Indiquer la fréquence du test
+### Sélectionnez des emplacements {#select-locations}
 
-Les tests TCP peuvent être exécutés :
+Sélectionnez le {{< ui >}}Locations{{< /ui >}} à partir duquel exécuter votre test TCP. Les tests TCP peuvent être exécutés à partir d'emplacements gérés et [privés][1] selon que vous préférez lancer la connexion depuis l'extérieur ou l'intérieur de votre réseau.
 
-* **Selon un programme**, pour vous assurer que vos utilisateurs peuvent toujours accéder à vos principaux services. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test TCP.
-* [**Dans vos pipelines de CI/CD**][3].
-* **À la demande**, afin d'exécuter les tests au moment le plus opportun pour votre équipe.
+{{% managed-locations %}}
 
-### Définir des conditions d'alerte
+### Spécifiez la fréquence du test {#specify-test-frequency}
 
-Définissez des conditions d'alerte afin de spécifier les circonstances dans lesquelles vous souhaitez qu'un test échoue et déclenche une alerte.
+Les tests SSL peuvent être exécutés :
 
-#### Règle d'alerte
+* **Selon un calendrier** pour garantir que vos services les plus importants sont toujours accessibles à vos utilisateurs. Sélectionnez la fréquence à laquelle vous souhaitez que Datadog exécute votre test TCP.
+* [**Au sein de vos pipelines CI/CD**][2].
+* **À la demande** pour exécuter vos tests au moment le plus opportun pour votre équipe.
 
-Lorsque vous définissez les conditions d'alerte sur `An alert is triggered if any assertion fails for X minutes from any n of N locations`, une alerte se déclenche uniquement si les deux conditions suivantes se vérifient :
+{{% synthetics-alerting-monitoring %}}
 
-* Au moins un emplacement a donné lieu à un échec (au moins une assertion a échoué) au cours des *X* dernières minutes.
-* À un moment au cours des *X* dernières minutes, au moins *n* emplacements ont donné lieu à un échec
+{{% synthetics-downtimes %}}
 
-#### Nouvelle tentative rapide
+{{% synthetics-variables %}}
 
-Votre test peut déclencher `X` nouvelles tentatives après `Y` ms en cas d'échec. Cet intervalle peut être personnalisé en fonction de vos préférences en matière d'alertes.
+### Utilisez des variables {#use-variables}
 
-La disponibilité d'un emplacement est calculée pour chaque évaluation (quels que soient les résultats du dernier test avant l'évaluation). La disponibilité totale est calculée selon les conditions d'alerte configurées. Les notifications envoyées se basent sur la disponibilité totale.
+Vous pouvez utiliser les [variables globales définies sur la page {{< ui >}}Settings{{< /ui >}}][8] dans l'URL, les options avancées et les assertions de vos tests TCP.
 
-### Informer votre équipe
+Pour afficher votre liste de variables, tapez `{{` dans le champ souhaité.
 
-Votre test envoie une notification selon les [conditions d'alerte](#definir-des-conditions-d-alerte) définies au préalable. Référez-vous à cette section pour définir les conditions et le message à envoyer à vos équipes.
+## Échec du test {#test-failure}
 
-1. [Tout comme pour les monitors][5], sélectionnez **les utilisateurs et/ou services** qui doivent recevoir des notifications. Pour ce faire, ajoutez `@notification` au message, ou cherchez des membres d'équipe ou des intégrations connectées à l'aide de la liste déroulante.
+Un test est considéré comme `FAILED` s'il ne satisfait pas une ou plusieurs assertions ou si la requête a échoué prématurément. Dans certains cas, le test peut échouer sans tester les assertions par rapport à l'endpoint.
 
-2. Saisissez un **message** de notification pour le test. Ce champ accepte [le format de mise en forme Markdown][6] standard ainsi que les [variables conditionnelles][7] suivantes :
+Pour obtenir une liste complète des codes d'erreur, consultez [Erreurs de test d'API][11].
 
-    | Variable conditionnelle       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | S'affiche lorsque le test envoie une alerte.                                            |
-    | `{{^is_alert}}`            | S'affiche lorsque le test n'envoie pas d'alerte.                                          |
-    | `{{#is_recovery}}`         | S'affiche lorsque le test est rétabli depuis un état d'alerte.                             |
-    | `{{^is_recovery}}`         | S'affiche lorsque le test n'est pas rétabli depuis un état d'alerte.                           |
+## Autorisations {#permissions}
 
-3. Indiquez une fréquence de **renvoi du message de notification** en cas d'échec d'un test. Si vous ne souhaitez pas renvoyer de notification en cas d'échec, définissez l'option sur `Never renotify if the monitor has not been resolved`.
+Par défaut, seuls les utilisateurs disposant des [rôles Datadog Admin et Datadog Standard][9] peuvent créer, modifier et supprimer des tests TCP Synthetic. Pour obtenir un accès de création, de modification et de suppression aux tests TCP Synthetic, mettez à niveau votre utilisateur vers l'un de ces deux [rôles par défaut][9].
 
-Cliquez sur **Save** pour enregistrer votre test. Datadog se charge alors de son exécution.
+Si vous utilisez la [fonctionnalité de rôle personnalisé][10], ajoutez votre utilisateur à tout rôle personnalisé incluant les autorisations `synthetics_read` et `synthetics_write`.
 
-## Variables
+### Restreindre l'accès {#restrict-access}
 
-### Créer des variables locales
+{{% synthetics_grace_permissions %}}
 
-Vous pouvez créer des variables locales en cliquant sur **Create Local Variable** en haut à droite du formulaire de configuration de votre test. Vous pouvez définir leurs valeurs sur l'un des builtins disponibles ci-dessous :
-
-`{{ numeric(n) }}`
-: Génère une chaîne numérique de `n` chiffres.
-
-`{{ alphabetic(n) }}`
-: Génère une chaîne alphabétique de `n` lettres.
-
-`{{ alphanumeric(n) }}`
-: Génère une chaîne alphanumérique de `n` caractères.
-
-`{{ date(n, format) }}`
-: Génère une date dans l'un des formats acceptés. Sa valeur correspond à la date d'initiation du test + `n` jours.
-
-`{{ timestamp(n, unit) }}` 
-: Génère un timestamp dans l'une des unités acceptées. Sa valeur correspond au timestamp d'initiation du test +/-  `n` unités choisies.
-
-### Utiliser des variables
-
-Les [variables globales définies sur la page `Settings`][8] et les [variables définies localement](#creer-des-variables-locales) peuvent être utilisées dans l'URL, les options avancées et les assertions de vos tests TCP.
-
-Pour afficher votre liste de variables, tapez `{{` dans le champ souhaité :
-
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Utiliser des variables dans les tests API" video="true" width="90%" >}}
-
-## Échec de test
-
-Un test est considéré comme `FAILED` s'il ne répond pas à une ou plusieurs de ses assertions ou si la requête a échoué prématurément. Dans certains cas, le test peut en effet échouer sans que les assertions n'aient pu être comparées à l'endpoint.
-
-Voici la liste des erreurs concernées :
-
-`CONNRESET`
-: La connexion a été interrompue de façon soudaine par le serveur à distance. Causes possibles : erreur ou défaillance du serveur Web lors de la réponse ou perte de connectivité du serveur Web.
-
-`DNS`
-: L'entrée DNS est introuvable pour l'URL du test. Causes possibles : URL du test mal configurée, ou configuration des entrées DNS incorrecte.
-
-`INVALID_REQUEST` 
-: La configuration du test n'est pas valide (par exemple, en raison d'une faute de frappe dans l'URL).
-
-`TIMEOUT`
-: La requête n'a pas pu être effectuée dans un délai raisonnable. Deux types d'erreur `TIMEOUT` peuvent se produire :
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.` indique que la durée de la requête a dépassé le délai d'expiration défini (par défaut, 60 secondes).
-  Pour chaque requête, seules les étapes terminées sont affichées dans la cascade réseau. Par exemple, si rien d'autre que `Total response time` ne s'affiche, cela signifie que l'expiration est survenue durant la résolution DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indique que la durée du test (requête + assertions) a atteint la durée maximale (60,5 secondes).
-
-## Autorisations
-
-Par défaut, seuls les utilisateurs disposant des [rôles Admin Datadog et Standard Datadog][9] peuvent créer, modifier et supprimer des tests TCP Synthetic. Pour que votre utilisateur puisse effectuer ces opérations, vous devez donc lui accorder l'un de ces deux [rôles par défaut][9]. 
-
-Si vous avez accès aux [rôles personnalisés][10], ajoutez votre utilisateur à un rôle personnalisé disposant des autorisations `synthetics_read` et `synthetics_write`.
-
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/api/v1/synthetics/#get-all-locations-public-and-private
-[2]: /fr/synthetics/private_locations
-[3]: /fr/synthetics/cicd_integrations
-[4]: /fr/synthetics/search/#search
-[5]: /fr/monitors/notify/#notify-your-team
-[6]: https://www.markdownguide.org/basic-syntax/
-[7]: /fr/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[1]: /fr/synthetics/private_locations
+[2]: /fr/synthetics/cicd_integrations
+[3]: /fr/synthetics/search/#search
+[4]: /fr/monitors/notify/#configure-notifications-and-automations
+[5]: https://www.markdownguide.org/basic-syntax/
+[6]: /fr/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[7]: /fr/synthetics/guide/synthetic-test-monitors
 [8]: /fr/synthetics/settings/#global-variables
 [9]: /fr/account_management/rbac/
 [10]: /fr/account_management/rbac#custom-roles
+[11]: /fr/synthetics/api_tests/errors/#tcp-errors

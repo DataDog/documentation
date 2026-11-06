@@ -8,15 +8,11 @@ aliases:
 - /ko/security/application_security/setup/threat_detection
 disable_sidebar: true
 disable_toc: false
-title: 앱 및 API 보호 기능 활성화
+title: App and API Protection 활성화하기
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection은 Datadog Government 사이트 US1-FED에서 미리 보기로 제공되고 있습니다.
-</div>
-{{< /site-region >}}
+지원되는 다음 모든 플랫폼 및 환경에서 App and API Protection을 활성화하는 방법을 알아보세요.
 
-다음에 나열된 모든 지원 플랫폼 및 환경에서 앱 및 API 보호 기능을 활성화하는 방법을 알아보십시오.
+코딩 어시스턴트로 애플리케이션을 설정하려면 [Agentic Onboarding][1]을 참조하세요.
 
 <div class="alert alert-info">
   <p class="fs-bold m-0">환경이 보이지 않습니까?</p>
@@ -52,7 +48,7 @@ App and API Protection은 Datadog Government 사이트 US1-FED에서 미리 보�
   {{< appsec-integration name="Windows" avatar="windows" link="./windows" >}}
 {{< /appsec-integrations >}}
 
-## Kubernetes (K8s) {#kubernetes-k8s}
+## Kubernetes(K8s) {#kubernetes-k8s}
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Istio" avatar="istio" link="./kubernetes/istio" >}}
@@ -64,7 +60,7 @@ App and API Protection은 Datadog Government 사이트 US1-FED에서 미리 보�
 
 ## 클라우드 플랫폼 {#cloud-platforms}
 
-### Amazon Web Services (AWS) {#amazon-web-services-aws}
+### Amazon Web Services(AWS) {#amazon-web-services-aws}
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="./aws/lambda" >}}
@@ -72,7 +68,7 @@ App and API Protection은 Datadog Government 사이트 US1-FED에서 미리 보�
   {{< appsec-integration name="AWS WAF" avatar="amazon-waf" link="./aws/waf" >}}
 {{< /appsec-integrations >}}
 
-### Google Cloud Platform (GCP) {#google-cloud-platform-gcp}
+### Google Cloud Platform(GCP) {#google-cloud-platform-gcp}
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Google Application Load Balancer" avatar="google-cloud-loadbalancing" link="./gcp/alb" >}}
@@ -88,3 +84,5 @@ App and API Protection은 Datadog Government 사이트 US1-FED에서 미리 보�
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
+
+[1]: /ko/security/application_security/agentic_onboarding/

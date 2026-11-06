@@ -2,6 +2,9 @@
 aliases:
 - /es/service_management/on-call/triggering_pages/live_call_routing/
 - /es/incident_response/on-call/triggering_pages/live_call_routing/
+description: Conecte llamadas telefónicas a su On-Call Team mediante enrutamiento
+  de llamadas directas o de correo de voz, con menús de teclado configurables y manejo
+  de escalamiento.
 further_reading:
 - link: /incident_response/on-call/
   tag: Documentación
@@ -12,15 +15,14 @@ title: Enrutamiento de llamadas en vivo
 El enrutamiento de llamadas en vivo es proporcionado por Datadog. Para habilitarlo para su organización, comuníquese con <a href="mailto:support@datadoghq.com">Soporte de Datadog</a>. Incluya su caso de uso y el código de país deseado (por ejemplo, <code>+33</code> para Francia).
 </div>
 
-
 ## Descripción general {#overview}
 
 El enrutamiento de llamadas en vivo conecta las llamadas telefónicas con su On-Call Team. Cuando alguien llama a su número dedicado, el sistema gestiona la llamada de acuerdo con su configuración.
 
 Datadog On-Call admite dos tipos de enrutamiento:
 
-- **Enrutamiento de llamadas directas**: Conecta a la persona que llama con un respondedor activo, siguiendo la política de escalamiento para el On-Call Team. Permite la coordinación en tiempo real durante incidentes críticos.
-- **Enrutamiento de correo de voz**: Solicita a la persona que llama que deje un mensaje de voz, luego convierte el mensaje de voz en una alerta para el On-Call Team. Útil para personas que llaman sin conocimientos técnicos o proveedores externos que necesitan informar problemas sin una conversación en vivo.
+- [**Enrutamiento de llamadas directas**](#direct-call-routing): Conecta a la persona que llama con un respondedor activo, siguiendo la política de escalamiento para el On-Call Team. Permite la coordinación en tiempo real durante incidentes críticos.
+- [**Enrutamiento de correo de voz**](#voicemail-routing): Solicita a la persona que llama que deje un mensaje de voz, luego convierte el mensaje de voz en un Page para el On-Call Team. Útil para personas que llaman sin conocimientos técnicos o proveedores externos que necesitan informar problemas sin una conversación en vivo.
 
 ## Configuración {#configuration}
 
@@ -43,6 +45,12 @@ Puede configurar hasta nueve opciones por ruta. Cada opción asigna una tecla (1
 - Agrupe los equipos relacionados bajo teclas adyacentes.
 - Mantenga las instrucciones del menú concisas y claras.
 
+### Tipo de número y disponibilidad regional{#number-type-and-regional-availability}
+
+- **Línea gratuita vs. local**: La mayoría de las regiones aprovisionan un número local. India y los EAU son la excepción; allí solo están disponibles números de línea gratuita.
+- **Código de área o ubicación**: Para números de EE. UU., puede solicitar un código de área específico.
+- **Persistencia**: Después de que se aprovisiona un número, este se dedica a esa ruta y no cambia ni rota.
+
 ## Tipos de enrutamiento {#routing-types}
 
 Datadog On-Call admite dos tipos de enrutamiento: enrutamiento de llamadas directas y enrutamiento de correo de voz.
@@ -58,9 +66,19 @@ Los respondedores tienen entonces las siguientes opciones:
 - Presione `2` para escalarla.
 - Presione `3` para resolverlo.
 
+#### Mantener el Page abierto después de que finalice la llamada{#keep-the-page-open-after-the-call-ends}
+
+De forma predeterminada, el Page creado para una ruta de llamada directa se resuelve después de que la persona que llama cuelga. Seleccione **Mantener el Page abierto después de que finalice la llamada** para mantener el Page abierto y continuar siguiendo la política de escalamiento del On-Call Team, enviando una página a los respondedores.
+
+#### Grabar la conversación{#record-the-conversation}
+
+Seleccione **Grabar conversación** para grabar la llamada entre la persona que llama y el respondedor.
+
 #### Lógica de escalamiento {#escalation-logic}
 
-Para el enrutamiento directo de llamadas, el escalamiento procede de la siguiente manera:
+Para el enrutamiento de llamadas directas, On-Call llama a los respondedores en cada paso de la política de escalamiento. Si nadie responde, On-Call avanza inmediatamente al siguiente paso y llama a sus respondedores. No espera el retraso configurado entre pasos, lo que ayuda a conectar a la persona que llama con un respondedor disponible lo más rápido posible.
+
+El escalamiento procede de la siguiente manera:
 
 - **Varios respondedores en el mismo nivel**: Se llama a todos los respondedores simultáneamente. El primero en responder es conectado.
 - **El respondedor rechaza una llamada**: El sistema escala inmediatamente al siguiente respondedor.
@@ -120,5 +138,11 @@ Si se deja un correo de voz pero no se crea ningún Page:
 - Verifique que el On-Call Team asignado a la ruta tenga una política de escalamiento activa.
 - Confirme que los miembros del equipo tengan configuradas las preferencias de notificación para recibir Pages.
 - Verifique que la grabación del correo de voz se haya completado correctamente. Las personas que llaman y cuelgan antes del pitido pueden no dejar una grabación que el sistema pueda procesar.
+
+### Llamadas que no se conectan desde fuera del país del número{#calls-not-connecting-from-outside-the-numbers-country}
+
+Si las personas que llaman desde fuera de un país específico no pueden comunicarse con su número de enrutamiento:
+- **Números de India**: Solo accesibles para las personas que llaman desde India, utilizando el prefijo local `000 800…`. No se puede acceder a ellos marcando el formato internacional completo.
+- **Números de los EAU**: Solo accesibles para las personas que llaman desde los EAU. No funcionan a nivel internacional.
 
 [1]: /es/help/

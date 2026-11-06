@@ -60,6 +60,8 @@ Configure mute rules to streamline security alerts by automatically filtering ou
     - **Further description for muting reason**: Optional box for additional details.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
+You can also create mute rules with the [API][3] or the [`datadog_security_findings_mute_rule`][4] Terraform resource.
+
 ## Rule matching order
 
 When Datadog identifies a finding, it evaluates the finding against your sequence of mute rules. Starting with the first rule, if there's a match, Datadog mutes the finding for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
@@ -69,3 +71,5 @@ When Datadog identifies a finding, it evaluates the finding against your sequenc
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=mute
+[3]: /api/latest/security-monitoring/create-a-mute-rule/
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_findings_mute_rule

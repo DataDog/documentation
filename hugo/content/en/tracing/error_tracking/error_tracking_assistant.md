@@ -12,9 +12,9 @@ further_reading:
   text: 'Learn about Error Tracking for Backend Services'
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Error Tracking Assistant for APM Error Tracking is in Preview. To request access, contact Support at support@datadoghq.com.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 

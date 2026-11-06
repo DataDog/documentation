@@ -1,0 +1,79 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin-block: var(--space-lg);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+}
+
+.pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pagination__item {
+  display: flex;
+}
+
+/* Trimmed to the capitals and the baseline, so equal padding centers the text
+   optically, as in the changelog filter tabs. Untrimmed, the font's tall
+   ascender space made it sit low. */
+.pagination__previous,
+.pagination__next,
+.pagination__page,
+.pagination__ellipsis {
+  display: block;
+  text-box: trim-both cap alphabetic;
+  padding: calc(var(--space-sm) + var(--space-2xs)) var(--space-md);
+  border-radius: var(--border-radius);
+  color: var(--color-text);
+  font-weight: var(--font-weight-regular);
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Page numbers are one or two digits, so narrower padding keeps them close
+   to square. */
+.pagination__page {
+  padding-inline: calc(var(--space-sm) + var(--space-2xs));
+}
+
+.pagination__previous,
+.pagination__next,
+.pagination__page {
+  border: var(--border-width) solid var(--color-border);
+}
+
+a.pagination__previous:hover,
+a.pagination__next:hover,
+a.pagination__page:hover {
+  border-color: var(--color-brand-border);
+  background: var(--color-brand-hover-bg);
+}
+
+.pagination__page--current {
+  border-color: var(--color-brand);
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.pagination__previous--disabled,
+.pagination__next--disabled {
+  border-color: var(--color-disabled-border);
+  background: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+  cursor: not-allowed;
+}
+
+.pagination__ellipsis {
+  padding-inline: var(--space-2xs);
+  color: var(--color-text-muted);
+}

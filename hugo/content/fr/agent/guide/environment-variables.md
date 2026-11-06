@@ -1,39 +1,41 @@
 ---
+description: Configurez les paramètres du Datadog Agent à l'aide de variables d'environnement
+  comme alternative à datadog.yaml, y compris les conventions de nommage et l'utilisation
+  de systemd.
 further_reading:
-- link: /agent/docker/#variables-d-environnement
+- link: /agent/docker/#environment-variables
   tag: Documentation
   text: Variables d'environnement de l'Agent Docker
-- link: /agent/docker/apm/#variables-d-environnement-de-l-agent-apm-docker
+- link: /agent/docker/apm/#docker-apm-agent-environment-variables
   tag: Documentation
   text: Variables d'environnement de l'Agent APM
-- link: /logs/log_collection/#collecte-de-logs-de-conteneur
+- link: /logs/log_collection/#container-log-collection
   tag: Documentation
   text: Collecte de logs de conteneur
-- link: /agent/configuration/proxy/#variables-d-environnement
+- link: /agent/configuration/proxy/#environment-variables
   tag: Documentation
   text: Variables d'environnement de proxy
 title: Variables d'environnement de l'Agent
 ---
-
 <div class="alert alert-danger">
-Si vous utilisez l'Agent v5, référez-vous au <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">référentiel GitHub de l'Agent Docker</a>.
+Pour l'Agent v5, consultez le <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">dépôt GitHub de l'Agent Docker</a>.
 </div>
 
-## Présentation
+## Présentation {#overview}
 
-Si vous utilisez l'Agent v6, la plupart des options du [fichier de configuration principal de l'Agent][1] (`datadog.yaml`) peuvent être définies via des variables d'environnement.
+Pour l'Agent v6, la plupart des options de configuration du [fichier de configuration principal de l'Agent][1] (`datadog.yaml`) peuvent être définies via des variables d'environnement. Consultez les [exemples de fichiers de configuration][15] dans le dépôt GitHub du Datadog Agent pour une référence entièrement commentée de tous les paramètres `datadog.yaml` disponibles.
 
-## Recommandations
+## Recommandations {#recommendations}
 
-Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Cette fonctionnalité permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment configurer le tagging unifié pour votre environnement, consultez la [documentation dédiée][2].
+En guise de bonne pratique, Datadog recommande d'utiliser le unified service tagging lors de l'attribution de tags. Le unified service tagging relie la télémétrie Datadog grâce à l'utilisation de trois tags standard : `env`, `service` et `version`. Pour savoir comment configurer votre environnement avec le unified service tagging, consultez la [documentation sur le unified service tagging][2].
 
-## Cas d'utilisation généraux
+## Utilisation générale {#general-use}
 
 Dans la plupart des cas, les règles suivantes doivent être respectées :
 
-* Les noms d'option doivent être écrits en majuscules et précédés de `DD_` : `hostname` -> `DD_HOSTNAME`
+* Les noms d'options doivent être en majuscules avec le préfixe `DD_` : `hostname` -> `DD_HOSTNAME`
 
-* Les valeurs de la liste doivent être séparées par des espaces. Les règles d'inclusion prennent en charge les expressions régulières et sont définies sous forme de liste de chaînes séparées par des virgules :
+* Les valeurs de liste doivent être séparées par des espaces (les règles d'inclusion prennent en charge les expressions régulières et sont définies sous forme de liste de chaînes séparées par des virgules) :
    ```yaml
       container_include:
         - "image:cp-kafka"
@@ -41,83 +43,99 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
       # DD_CONTAINER_INCLUDE="image:cp-kafka image:k8szk"
    ```
 
-* Les options de configuration imbriquées dont les clés sont **prédéfinies** doivent être séparées par des tirets bas :
+* L'imbrication des options de configuration avec des clés **prédéfinies** doit être séparée par un trait de soulignement :
    ```yaml
       cluster_agent:
         cmd_port: 5005
       # DD_CLUSTER_AGENT_CMD_PORT=5005
    ```
 
-* Les options de configuration imbriquées dont les clés sont **définies par l'utilisateur** doivent être au format JSON :
+* L'imbrication des options de configuration avec des clés **définies par l'utilisateur** doit être au format JSON :
    ```yaml
       container_env_as_tags:
         ENVVAR_NAME: tag_name
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-### Priorité de définition des propriétés
+### Priorité de définition des propriétés {#property-definition-priority}
 
-- Si une propriété est définie à la fois dans le fichier de configuration global (`datadog.yaml`) et en tant que variable d'environnement, c'est la variable d'environnement qui prévaut.
-- Lorsque vous spécifiez une option imbriquée avec une variable d'environnement, _toutes_ les options imbriquées spécifiées sous l'option de configuration sont ignorées. L'option de configuration `proxy` fait toutefois exception à cette règle. Consultez la [documentation relative au proxy de l'Agent][3] pour en savoir plus.
+- Si une propriété est définie à la fois dans le fichier de configuration global (`datadog.yaml`) et en tant que variable d'environnement, la variable d'environnement est prioritaire.
+- La spécification d'une option imbriquée avec une variable d'environnement remplace _toutes_ les options imbriquées spécifiées sous l'option de configuration. L'exception à cette règle est l'option de configuration `proxy`. Consultez la [documentation sur le proxy de l'Agent][3] pour plus de détails.
 
-### Exceptions
+### Exceptions {#exceptions}
 
-- Les options du fichier `datadog.yaml` ne peuvent pas toutes être définies via des variables d'environnement. Référez-vous au fichier [config.go][4] dans le référentiel GitHub de l'Agent Datadog pour en savoir plus. Les options disponibles via les variables d'environnement commencent par `config.BindEnv*`.
+- Certaines options `datadog.yaml` ne sont pas disponibles avec les variables d'environnement. Consultez le schéma de configuration [core_schema.yaml][4] dans le dépôt GitHub du Datadog Agent. Les paramètres marqués `no-env` dans le schéma ne prennent pas en charge les variables d'environnement.
 
-- Les variables d'environnement spécifiques à un composant qui ne sont pas répertoriées dans le fichier [config.go][4] peuvent également être prises en charge.
+  Pour les versions antérieures de l'Agent, la source de configuration a changé d'emplacement :
 
-  - **Agent de trace APM**
+  | Version de l'Agent       | Source de configuration                                                          |
+  | -------------------- | ------------------------------------------------------------------------------ |
+  | 7.51 à 7.83    | `*_settings.go` fichiers sous [pkg/config/setup sur la branche 7.83.x][13]        |
+  | 7.50 et versions antérieures     | [config.go sur la branche 7.50.x][9]                                            |
 
-      - [Variables d'environnement de l'Agent APM Docker][5]
-      - [trace-agent config/apm.go][6]
-      - Exemple
+- Les variables d'environnement spécifiques aux composants non listées dans [core_schema.yaml][4] peuvent également être prises en charge :
 
-          ```yaml
-             apm_config:
-                 enabled: true
-                 env: dev
-             # DD_APM_ENABLED=true
-             # DD_APM_ENV=dev
-          ```
+  | Composant              | Source de configuration                        | Agent 7.51-7.83                                                | Agent 7.50 et versions antérieures                              |
+  | ----------------------- | -------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+  | Agent de trace APM          | [apm_config.yaml][6], [Variables d'environnement de l'Agent APM Docker][5] | `apm_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | `apm.go` dans [pkg/config sur la branche 7.50.x][14]    |
+  | Agent de processus en direct       | [process_config.yaml][7]                     | `process_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | `process.go` dans [pkg/config sur la branche 7.50.x][14] |
+  | Ingestion OTLP              | [core_schema.yaml (otlp_config)][4]          | `otlp_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | `otlp.go` dans [pkg/config sur la branche 7.50.x][14]   |
+  | System Probe             | [system-probe_schema.yaml][10]               | `system_probe_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | `system_probe.go` dans [pkg/config sur la branche 7.50.x][14] |
+  | Private Action Runner    | [private_action_runner.yaml][11]             | `privateactionrunner_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | Non disponible                                       |
+  | Multi-Region Failover    | [multi_region_failover.yaml][12]             | `multi_region_failover_settings.go` dans [pkg/config/setup sur la branche 7.83.x][13] | Non disponible                                       |
 
-  - **Agent Live Process**
+  Exemple d'APM Trace Agent :
 
-      - [process-agent config/process.go][7]
-      - Exemple
+  ```yaml
+     apm_config:
+         enabled: true
+         env: dev
+     # DD_APM_ENABLED=true
+     # DD_APM_ENV=dev
+  ```
 
-          ```yaml
-             process_config:
-                 process_collection:
-                     enabled: true
-                 process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
-             # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
-          ```
+  Exemple de Live Process Agent :
 
-## Utiliser des variables d'environnement dans des unités systemd
+  ```yaml
+     process_config:
+         process_collection:
+             enabled: true
+         process_dd_url: https://process.datadoghq.com
+     # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
+     # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+  ```
 
-Dans les systèmes d'exploitation qui utilisent systemd pour gérer des services, les variables dʼenvironnement (globales, comme `/etc/environment`, ou basées sur les sessions, comme `export VAR=value`) ne sont généralement pas mises à la disposition de services, sauf si elles sont configurées à cet effet. Consultez [la page du manuel systemd Exec][8] pour en savoir plus.
+## Utilisation des variables d'environnement dans les unités systemd {#using-environment-variables-in-systemd-units}
 
-À partir de la version 7.45 de lʼAgent Datadog, le service de lʼAgent Datadog (`datadog-agent.service`) permet de charger les affectations de variables dʼenvironnement à partir d'un fichier (`<ETC_DIR>/environment`).
+Dans les systèmes d'exploitation qui utilisent systemd pour gérer les services, les variables d'environnement — globales (par exemple, `/etc/environment`) ou basées sur la session (par exemple, `export VAR=value`) — ne sont généralement pas mises à la disposition des services, sauf si elles sont configurées pour l'être. Consultez la [page de manuel systemd Exec][8] pour plus de détails.
+
+À partir de Datadog Agent 7.45, le service Datadog Agent (`datadog-agent.service` unit) peut éventuellement charger des affectations de variables d'environnement à partir d'un fichier (`<ETC_DIR>/environment`).
 
 1. Créez `/etc/datadog-agent/environment` s'il n'existe pas.
-2. Définissez les affectations de variables dʼenvironnement séparées par des sauts de ligne. Exemple :
+2. Définissez les affectations de variables d'environnement séparées par des retours à la ligne. Exemple :
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
-  DD_TAGS=env:dev,service:foo
+  DD_TAGS=env:dev service:foo
   ```
-3. Redémarrez l'Agent pour que les modifications soient appliquées.
+3. Redémarrez le service pour que les modifications prennent effet
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/getting_started/tagging/unified_service_tagging
 [3]: /fr/agent/configuration/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/core_schema.yaml
 [5]: https://docs.datadoghq.com/fr/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/apm_config.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/process_config.yaml
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment
+[9]: https://github.com/DataDog/datadog-agent/blob/7.50.x/pkg/config/config.go
+[10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/system-probe_schema.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/private_action_runner.yaml
+[12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/multi_region_failover.yaml
+[13]: https://github.com/DataDog/datadog-agent/tree/7.83.x/pkg/config/setup
+[14]: https://github.com/DataDog/datadog-agent/tree/7.50.x/pkg/config
+[15]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example

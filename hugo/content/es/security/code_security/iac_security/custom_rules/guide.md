@@ -2,6 +2,10 @@
 description: Consulte el contrato de Rego, las entradas analizadas, las bibliotecas
   compartidas, los campos de hallazgos y las prácticas de prueba para reglas de IaC
   personalizadas.
+further_reading:
+- link: https://www.datadoghq.com/blog/custom-iac-security-rules/
+  tag: Blog
+  text: Aplique reglas personalizadas en el escaneo de Datadog IaC Security
 title: Referencia de reglas personalizadas de IaC
 ---
 Esta referencia para reglas personalizadas de IaC describe el contrato de la regla, las entradas analizadas y los patrones específicos de la plataforma.
@@ -291,6 +295,10 @@ El editor verifica más que la sintaxis de Rego. Antes de evaluar una muestra, D
 - No llama a built-ins restringidos como `http.send` o `opa.runtime`.
 
 Corrija todos los errores reportados antes de interpretar una evaluación sin hallazgos. Los errores de validación significan que la política no se ejecutó correctamente.
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /es/security/code_security/iac_security/custom_rules/

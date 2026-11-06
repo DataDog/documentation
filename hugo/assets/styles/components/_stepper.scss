@@ -134,6 +134,17 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
         }
     }
 
+    // Banner hidden on mobile via `hide_on_mobile`: no banner clearance below md
+    @include media-breakpoint-down(md) {
+        body:has(.announcement-banner--hide-mobile) & {
+            scroll-margin-top: 120px;
+        }
+
+        body:has(.announcement-banner--hide-mobile) #cdoc-content.customizable & {
+            scroll-margin-top: 205px;
+        }
+    }
+
     display: block;
     margin: 0;
     padding: $stepper-title-pad-top 0;

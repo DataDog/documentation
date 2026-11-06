@@ -1,0 +1,52 @@
+---
+import { CollapseContentController } from "./CollapseContentController";
+import styles from "./CollapseContent.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import type { HeadingLevel } from "@lib/componentUtils/headingLevels";
+
+interface Props {
+  title: string;
+  level?: HeadingLevel;
+  expanded?: boolean;
+  id?: string;
+}
+
+const { title, level = "h3", expanded = false, id } = Astro.props;
+
+const cl = classListFactory(styles);
+const Heading = level;
+
+// The controller scopes its DOM work to the root element's id. Use the
+// author-provided id when present (it also enables hash deep-linking);
+// otherwise generate one so the controller always has a stable handle.
+const rootId = id ?? generateElementId("collapse-content");
+---
+
+<details
+  id={rootId}
+  class={cl("collapse-content", expanded && "collapse-content--expanded")}
+  open={expanded}
+>
+  <summary
+    class={cl("collapse-content__header")}
+    tabindex="0"
+    aria-expanded={expanded}
+  >
+    <span class={cl("collapse-content__icon")} aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+      </svg>
+    </span>
+    <Heading class={cl("collapse-content__title")}>{title}</Heading>
+  </summary>
+  <div class={cl("collapse-content__body")}>
+    <slot />
+  </div>
+  <CollapseContentController
+    client:load
+    externalContext={{ scope: rootId, entries: { detailsEl: rootId } }}
+  />
+</details>

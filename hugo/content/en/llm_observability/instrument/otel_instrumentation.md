@@ -25,9 +25,9 @@ To send [external evaluations directly to the API](/llm_observability/investigat
 
 For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt Tracking - OpenTelemetry Instrumentation](/llm_observability/instrument/prompt_tracking#opentelemetry-instrumentation).
 
-### Experiments
+### Offline Experiments
 
-You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
+You can use OpenTelemetry spans inside [Agent Observability Offline Experiments][55]. By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
 ### Multimodal support
 
@@ -139,6 +139,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
 | [Langfuse][37] | Native | >= 4.0.0 |
+| [Claude Platform][38] | Native ([OpenTelemetry export][39]) | — |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -159,14 +160,19 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [35]: https://pypi.org/project/traceloop-sdk/
 [36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [37]: https://langfuse.com/integrations/native/opentelemetry
+[38]: https://platform.claude.com/docs
+[39]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
 | [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.19.0 |
+| [Cloudflare Agents][42] | Native ([Workers Observability][43]) | `agents` >= 0.2.0 |
 
 [40]: https://platform.openai.com/docs/api-reference/introduction
 [41]: https://www.npmjs.com/package/@opentelemetry/instrumentation-openai
+[42]: https://developers.cloudflare.com/agents/
+[43]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
 {{% /tab %}}
 {{% tab "Java" %}}
 | Framework | Instrumentation | Supported Versions |
@@ -183,9 +189,165 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 {{% /tab %}}
 {{< /tabs >}}
 
-## Examples
+## Send traces from your framework or platform {#examples}
 
-### Using Strands Agents
+{{% collapse-content title="Using Claude Platform" level="h3" expanded=false id="using-claude-managed-agents" %}}
+
+The [Claude Platform][18] natively emits spans that follow the GenAI semantic conventions through [OpenTelemetry export][19], so you don't need an instrumentation library. Native export covers the Messages API, Claude Managed Agents, and the Claude SDKs. Spans come from two independent sources:
+
+- **API spans** cover requests that Anthropic runs: Messages API requests and, for Managed Agents, each Sessions API request, agent turn, model request, and tool call. Anthropic delivers these spans to a destination that you configure in the Claude Console.
+- **SDK spans** for each Claude SDK call, and for each tool that the SDK tool runner executes inside your application. Your application exports these with its own OpenTelemetry exporter.
+
+If your application uses a Claude SDK, both sets of spans appear in the same trace, because the SDK propagates W3C trace context on its API requests.
+
+#### Export API spans
+
+Anthropic delivers API spans from its own infrastructure, so you add a Datadog destination in the Claude Console rather than setting `OTEL_EXPORTER_OTLP_*` environment variables.
+
+1. In the Claude Console, go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}OpenTelemetry{{< /ui >}} and click {{< ui >}}Add destination{{< /ui >}}. Complete the fields:
+   | Field | Value |
+   |-------|-------|
+   | Provider | {{< ui >}}Datadog{{< /ui >}} |
+   | Site | Your Datadog site, for example `US1` |
+   | API key | Your [Datadog API key][2]. Application keys do not work. |
+   | Content mode | {{< ui >}}Full content{{< /ui >}} so spans carry message and tool content, or {{< ui >}}Metadata only{{< /ui >}} for identifiers, timing, status, and token counts |
+
+   Selecting {{< ui >}}Datadog{{< /ui >}} as the provider sets the OTLP endpoint for the site you choose, shown under {{< ui >}}OTLP details{{< /ui >}}. You don't need to enter an endpoint or headers.
+
+   Choose {{< ui >}}Full content{{< /ui >}} only if your Datadog organization is permitted to store model prompts and responses. To restrict who can read them after they arrive, see [Data Access Controls][8].
+2. Set {{< ui >}}Workspaces{{< /ui >}} on the destination to choose which workspaces export to it: {{< ui >}}All{{< /ui >}}, {{< ui >}}Selected{{< /ui >}} for a specific list, or {{< ui >}}All except{{< /ui >}} to exclude a few.
+3. Send a request or run a session, then check that the destination's {{< ui >}}Delivery{{< /ui >}} column reads {{< ui >}}Healthy{{< /ui >}}. The spans arrive under the `claude-platform` service. A Managed Agents session forms this tree:
+   | Span | Agent Observability span kind |
+   |------|-------------------------------|
+   | `anthropic.sessions.events.send` | Workflow |
+   | `anthropic.session.turn` | Agent, carrying the conversation input and output |
+   | `anthropic.model_request` | LLM, carrying the model name and token usage |
+   | Hosted tool calls, for example `bash` or `read` | Tool |
+
+   A destination receives spans for every surface the workspace uses, so Messages API requests arrive at the same destination without further configuration.
+
+#### Export SDK spans
+
+To also capture spans from the Claude SDK in your own application, register an OpenTelemetry tracer provider before you construct the client, and export to Datadog:
+
+```python
+import os
+
+from anthropic import Anthropic
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# service.name becomes the ml_app that these spans are indexed under.
+provider = TracerProvider(resource=Resource.create({"service.name": "my-agent-app"}))
+provider.add_span_processor(
+    BatchSpanProcessor(
+        OTLPSpanExporter(
+            endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+            headers={
+                "dd-api-key": os.environ["DD_API_KEY"],
+                "dd-otlp-source": "llmobs",
+            },
+        )
+    )
+)
+trace.set_tracer_provider(provider)
+
+# content_mode="content" records prompts and responses. The default is metadata only.
+client = Anthropic(
+    open_telemetry={"tracer_provider": provider, "traces": {"content_mode": "content"}}
+)
+```
+
+The endpoint for this exporter includes the `/v1/traces` path. You can also set the content mode with `ANTHROPIC_OPEN_TELEMETRY_TRACES_CONTENT_MODE=content`, or turn off SDK spans with `ANTHROPIC_OPEN_TELEMETRY=false`.
+
+To group several calls into one conversation, set a conversation ID on the client. The SDK sends it as `gen_ai.conversation.id`, which Agent Observability indexes as the session:
+
+```python
+client = client.with_options(
+    open_telemetry={**client.open_telemetry, "conversation_id": "conv_42"}
+)
+
+message = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+```
+
+Traces appear on the [Agent Observability Traces page][3]. Search by `ml_app` to find them.
+
+#### Avoid double-counted tokens
+
+If you export both Claude SDK spans and Claude Platform API spans for the same workspace, Agent Observability counts tokens for the same model calls twice. The duplicate counts inflate token metrics and estimated cost. If the Claude SDK is your only source of spans, skip this step.
+
+To count each model call once, drop the usage attributes from the Claude SDK spans before they leave your application, so the API spans are the only source of token counts:
+
+```python
+from opentelemetry.sdk.trace import ReadableSpan
+from opentelemetry.sdk.trace.export import SpanExporter
+
+# Agent Observability reads token counts and costs from these two namespaces.
+DROPPED_PREFIXES = ("gen_ai.usage.", "gen_ai.cost.")
+
+
+def _without_token_usage(span):
+    attributes = {
+        key: value
+        for key, value in (span.attributes or {}).items()
+        if not key.startswith(DROPPED_PREFIXES)
+    }
+    return ReadableSpan(
+        name=span.name,
+        context=span.get_span_context(),
+        parent=span.parent,
+        resource=span.resource,
+        attributes=attributes,
+        events=span.events,
+        links=span.links,
+        kind=span.kind,
+        status=span.status,
+        start_time=span.start_time,
+        end_time=span.end_time,
+        instrumentation_scope=span.instrumentation_scope,
+    )
+
+
+class StripClaudeTokenUsage(SpanExporter):
+    """Leave token counting to the Claude Platform spans."""
+
+    def __init__(self, exporter):
+        self._exporter = exporter
+
+    def export(self, spans):
+        return self._exporter.export(
+            [
+                _without_token_usage(span)
+                if span.name.startswith("anthropic.")
+                else span
+                for span in spans
+            ]
+        )
+
+    def shutdown(self):
+        return self._exporter.shutdown()
+
+    def force_flush(self, timeout_millis=30000):
+        return self._exporter.force_flush(timeout_millis)
+```
+
+Then wrap the OTLP exporter with it where you register the span processor:
+
+```python
+provider.add_span_processor(
+    BatchSpanProcessor(StripClaudeTokenUsage(OTLPSpanExporter(endpoint=..., headers=...)))
+)
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using Strands Agents" level="h3" expanded=false id="using-strands-agents-1" %}}
 
 The following example demonstrates a complete application using [Strands Agents][7] with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37+ semantic conventions for generative AI.
 
@@ -219,8 +381,151 @@ if __name__ == "__main__":
     result = agent("I was born in 1993, what is my age?")
     print(f"Agent: {result}")
 ```
+{{% /collapse-content %}}
 
-### Custom OpenTelemetry instrumentation
+{{% collapse-content title="Using OpenLLMetry" level="h3" expanded=false id="using-openllmetry" %}}
+
+The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
+
+```python
+from opentelemetry import trace
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.openai import OpenAIInstrumentor
+import openai
+from opentelemetry.sdk.resources import Resource
+
+resource = Resource.create({
+    "service.name": "simple-openllmetry-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openllmetry-test",
+        "dd-otlp-source": "llmobs",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument()
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using OpenInference" level="h3" expanded=false id="using-openinference" %}}
+
+The following example uses the [OpenInference OpenAI instrumentation][11] to automatically instrument OpenAI calls with OpenTelemetry.
+
+Configure the OpenTelemetry exporter and instrument the OpenAI client:
+
+```python
+import openai
+from openinference.instrumentation.openai import OpenAIInstrumentor
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+resource = Resource.create({
+    "service.name": "simple-openinference-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openinference-test",
+        "dd-otlp-source": "llmobs",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument(tracer_provider=provider)
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Using Cloudflare Agents" level="h3" expanded=false id="using-cloudflare-agents" %}}
+
+[Cloudflare Agents][15] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][16]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
+
+1. Enable tracing in your Worker configuration (`wrangler.jsonc`), pointing at a named destination:
+   ```jsonc
+   {
+     "observability": {
+       "traces": {
+         "enabled": true,
+         "destinations": ["datadog-agent-observability"]
+       }
+     }
+   }
+   ```
+2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
+   | Field | Value |
+   |-------|-------|
+   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
+   | Header | `dd-api-key`: `<YOUR_API_KEY>` |
+   | Header | `dd-otlp-source`: `llmobs` |
+
+   The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
+3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
+   ```typescript
+   import { Agent } from "agents";
+   import * as ai from "ai";
+   import { wrapAISDK } from "agents/observability/ai";
+   import { createWorkersAI } from "workers-ai-provider";
+
+   // storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
+   // and tool call payloads. They are off by default.
+   const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
+
+   export class MyAgent extends Agent<Env> {
+     async onRequest(request: Request): Promise<Response> {
+       const workersai = createWorkersAI({ binding: this.env.AI });
+       const { text } = await generateText({
+         model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+         prompt: "What is distributed tracing?",
+       });
+       return Response.json({ text });
+     }
+   }
+   ```
+   After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+{{% /collapse-content %}}
+
+{{% collapse-content title="Custom OpenTelemetry instrumentation" level="h3" expanded=false id="custom-opentelemetry-instrumentation" %}}
 
 The following example demonstrates how to instrument your LLM application using custom OpenTelemetry code. This approach gives you full control over the traces and spans emitted by your application.
 
@@ -315,98 +620,7 @@ provider.force_flush()
 ```
 
 After running this example, search for `ml_app:simple-llm-example` in the Agent Observability UI to find the generated trace.
-
-### Using OpenLLMetry
-
-The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
-
-```python
-from opentelemetry import trace
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.instrumentation.openai import OpenAIInstrumentor
-import openai
-from opentelemetry.sdk.resources import Resource
-
-resource = Resource.create({
-    "service.name": "simple-openllmetry-test",
-})
-
-provider = TracerProvider(resource=resource)
-trace.set_tracer_provider(provider)
-
-exporter = OTLPSpanExporter(
-    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
-    headers={
-        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
-        "dd-ml-app": "simple-openllmetry-test",
-        "dd-otlp-source": "llmobs",
-    },
-)
-
-provider.add_span_processor(BatchSpanProcessor(exporter))
-
-OpenAIInstrumentor().instrument()
-
-# Make OpenAI call (automatically traced)
-client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
-)
-
-provider.force_flush(timeout_millis=5000)
-```
-
-After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
-
-### Using OpenInference
-
-The following example uses the [OpenInference OpenAI instrumentation][11] to automatically instrument OpenAI calls with OpenTelemetry.
-
-Configure the OpenTelemetry exporter and instrument the OpenAI client:
-
-```python
-import openai
-from openinference.instrumentation.openai import OpenAIInstrumentor
-from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.resources import Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
-
-resource = Resource.create({
-    "service.name": "simple-openinference-test",
-})
-
-provider = TracerProvider(resource=resource)
-trace.set_tracer_provider(provider)
-
-exporter = OTLPSpanExporter(
-    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
-    headers={
-        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
-        "dd-ml-app": "simple-openinference-test",
-        "dd-otlp-source": "llmobs",
-    },
-)
-
-provider.add_span_processor(BatchSpanProcessor(exporter))
-
-OpenAIInstrumentor().instrument(tracer_provider=provider)
-
-# Make OpenAI call (automatically traced)
-client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
-)
-
-provider.force_flush(timeout_millis=5000)
-```
-
-After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
+{{% /collapse-content %}}
 
 ## Attribute mapping reference
 
@@ -469,6 +683,49 @@ If a span is missing an expected attribute, or an attribute can't be parsed, Age
 | `gen_ai.usage.prompt_tokens` | `metrics.prompt_tokens` |
 | `gen_ai.usage.completion_tokens` | `metrics.completion_tokens` |
 | `gen_ai.usage.total_tokens` | `metrics.total_tokens` |
+
+#### Cost metrics
+
+For [supported models and providers][58], Datadog can estimate costs from token usage without cost attributes. Supply costs directly for unsupported models or custom pricing.
+
+Cost attributes use two paths: [supplied costs](#supplied-cost-attributes) that Datadog preserves, and [fallback estimates](#fallback-estimated-cost-attributes-nanodollars) that automatic pricing can replace. Both paths populate the same `metrics.estimated_*_cost` fields, but Datadog preserves supplied costs despite the `estimated_` prefix.
+
+##### Supplied cost attributes
+
+The following cost attributes are extensions supported by Datadog. Send non-negative amounts in **USD**: send `0.01` for a $0.01 cost. **Automatic pricing does not overwrite these supplied cost fields, including zero.** Datadog can still estimate cost fields you omit.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.usage.cost.amount` | `metrics.estimated_total_cost` |
+| `gen_ai.usage.cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.total_cost` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.input_cost` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.output_cost` | `metrics.estimated_output_cost` |
+| `llm.cost.total` | `metrics.estimated_total_cost` |
+| `llm.cost.prompt` | `metrics.estimated_input_cost` |
+| `llm.cost.completion` | `metrics.estimated_output_cost` |
+| `llm.cost.prompt_details.input` | `metrics.estimated_non_cached_input_cost` |
+| `llm.cost.prompt_details.cache_read` | `metrics.estimated_cache_read_input_cost` |
+| `llm.cost.prompt_details.cache_write` | `metrics.estimated_cache_write_input_cost` |
+| `llm.cost.completion_details.reasoning` | `metrics.estimated_reasoning_output_cost` |
+
+Set `gen_ai.usage.cost.currency` to `USD` when using `gen_ai.usage.cost.amount`. This amount/currency format is an [OpenTelemetry proposal][57]. The other attributes use their producers' USD conventions. Datadog ignores these USD cost attributes if they declare a currency other than `USD`.
+
+If several USD attributes from the table above supply the same cost field, Datadog uses the first valid value. The precedence order is: `gen_ai.usage.cost.amount`, `gen_ai.usage.cost`, `gen_ai.cost.*`, then `llm.cost.*`. Zero is a valid supplied cost.
+
+##### Fallback estimated cost attributes (nanodollars)
+
+These Datadog-supported extensions accept optional fallback estimates in nanodollars, without unit conversion. For example, send `10000000` for a $0.01 estimate. Datadog replaces a supplied estimate when it calculates a positive cost for that field, even from partial token counts. Otherwise, Datadog keeps the supplied estimate. USD costs from the preceding table take precedence over these nanodollar estimates.
+
+| OTel Attribute | Agent Observability Field |
+|----------------|--------------|
+| `gen_ai.cost.estimated_total` | `metrics.estimated_total_cost` |
+| `gen_ai.cost.estimated_input` | `metrics.estimated_input_cost` |
+| `gen_ai.cost.estimated_output` | `metrics.estimated_output_cost` |
+| `gen_ai.cost.estimated_cache_read_input` | `metrics.estimated_cache_read_input_cost` |
+| `gen_ai.cost.estimated_cache_write_input` | `metrics.estimated_cache_write_input_cost` |
+| `gen_ai.cost.estimated_non_cached_input` | `metrics.estimated_non_cached_input_cost` |
+| `gen_ai.cost.estimated_reasoning_output` | `metrics.estimated_reasoning_output_cost` |
 
 #### Request parameters
 
@@ -913,8 +1170,9 @@ A span can display warnings not listed in the following table if Datadog adds ch
 | Malformed embedding input | `otel_warning_embedding_input_malformed` | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
 | Unreadable token counts | `otel_warning_token_usage_unparseable` | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
 | Invalid token counts | `otel_warning_token_usage_invalid` | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
-| Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
-| Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Unreadable cost metrics | `otel_warning_cost_metrics_unparseable` | On cost attributes | Emit cost metrics as integers or floats, not strings or objects. |
+| Invalid cost metrics | `otel_warning_cost_metrics_invalid` | On cost attributes | Emit non-negative cost values. |
+| Invalid cost currency | `otel_warning_cost_currency_invalid` | On USD cost attributes | Set `gen_ai.usage.cost.currency` to `USD`. This attribute is required for `gen_ai.usage.cost.amount`. |
 | Malformed invocation parameters | `otel_warning_params_malformed` | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
 | Malformed tool definitions | `otel_warning_tool_definitions_malformed` | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
 | Malformed tool definition | `otel_warning_tool_definition_entry_malformed` | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
@@ -946,16 +1204,16 @@ Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic 
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
-## Disabling Agent Observability conversion
+## Enabling LLM Observability conversion
 
-If you'd only like your generative AI spans to remain in APM and not appear in Agent Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to Agent Observability.
+To enable LLM Observability conversion, set the `dd_llmobs_enabled` attribute to `true`. Setting this attribute on any span in a trace enables conversion of the trace's generative AI spans. An explicit `false` on any span prevents conversion of the entire trace.
 
 ### Using environment variables
 
-Add the `dd_llmobs_enabled=false` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+Add the `dd_llmobs_enabled=true` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
 
 ```
-OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=false
+OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
 ```
 
 ### Using code
@@ -968,8 +1226,8 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable Agent Observability conversion for this entire trace
-    span.set_attribute("dd_llmobs_enabled", False)
+    # Enable LLM Observability conversion for this entire trace
+    span.set_attribute("dd_llmobs_enabled", True)
 ```
 
 [1]: https://github.com/open-telemetry/semantic-conventions-genai
@@ -986,3 +1244,11 @@ with tracer.start_as_current_span("my-span") as span:
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
 [13]: https://langfuse.com/integrations/native/opentelemetry
 [14]: /llm_observability/instrument/agent_observability_and_apm/
+[15]: https://developers.cloudflare.com/agents/
+[16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
+[17]: https://sdk.vercel.ai/
+[18]: https://platform.claude.com/docs
+[19]: https://platform.claude.com/docs/en/manage-claude/opentelemetry
+[55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
+[57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
+[58]: /llm_observability/investigate/cost/#supported-providers

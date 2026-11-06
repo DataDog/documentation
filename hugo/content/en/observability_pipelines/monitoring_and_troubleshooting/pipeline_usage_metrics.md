@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "/metrics/summary/"
   tag: "Documentation"
-  text: "Learn more about the Metrics Summary"
+  text: "Learn more about the Metrics Catalog"
 - link: "/metrics/explorer/"
   tag: "Documentation"
   text: "Using the Metrics Explorer to explore and analyze your metrics"
@@ -27,7 +27,7 @@ further_reading:
 This document lists some of the metrics available from Observability Pipelines. You can:
 
 - Create your own [dashboards][1], [notebooks][2], and [monitors][3] with these metrics.
-- Use [Metrics Summary][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
+- Use the [Metrics Catalog][5] to see metadata and tags available for the metrics. You can also see which dashboards, notebooks, monitors, and SLOs are using those metrics.
 
 See [Getting Started with Tags][4] for more information on how to use tags to group metrics by specific pipelines, Workers, and components.
 
@@ -142,7 +142,7 @@ Worker reloads
 
 These metrics are available for sources, processors, and destinations.
 
-- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_id` tag to filter or group by individual components. See [Find the component ID][7] for instructions.
 - Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
 - Use the `component_kind` tag to filter or group by `source`, `transform` (processor) or `sink` (destination).
 
@@ -433,5 +433,6 @@ These metrics provide information about the adaptive concurrency controller, whi
 [2]: /notebooks/
 [3]: /getting_started/monitors/
 [4]: /getting_started/tagging/
-[5]: https://app.datadoghq.com/metric/summary
+[5]: https://app.datadoghq.com/metric/catalog
 [6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
+[7]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#find-the-component-id

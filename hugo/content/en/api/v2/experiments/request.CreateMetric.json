@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "metrics",
+    "attributes": {
+      "name": "ex-14bb9543f523edde",
+      "data_source_type": "DATADOG",
+      "desired_change": "METRIC_INCREASES",
+      "numerator_aggregation": {
+        "operation": "sum",
+        "datadog_metric_measure": {
+          "name": "ex-14bb9543f523edde view duration",
+          "source_type": "PRODUCT_ANALYTICS",
+          "source_subtype": "RUM_VIEWS",
+          "column_type": "double",
+          "column_name": "@view.time_spent"
+        }
+      }
+    }
+  }
+}

@@ -8,19 +8,15 @@ aliases:
 - /es/security/application_security/setup/threat_detection
 disable_sidebar: true
 disable_toc: false
-title: Habilitación de App and API Protection
+title: Habilitación de App y API Protection
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection se encuentra en versión preliminar en el sitio de Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
+Aprenda a habilitar App y API Protection en todas las siguientes plataformas y entornos compatibles.
 
-Aprenda a habilitar App and API Protection en todas las siguientes plataformas y entornos compatibles.
+Para configurar su aplicación con un asistente de codificación, consulte [Agentic Onboarding][1].
 
 <div class="alert alert-info">
-  <p class="fs-bold m-0">¿Le falta su entorno?</p>
-  <span>Envíenos una solicitud para el entorno que le falta <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">aquí</a>.</span>
+  <p class="fs-bold m-0">¿No encuentra su entorno?</p>
+  <span>Envíenos una solicitud para su entorno faltante <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">aquí</a>.</span>
 </div>
 
 ## Idiomas {#languages}
@@ -88,3 +84,5 @@ Aprenda a habilitar App and API Protection en todas las siguientes plataformas y
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
+
+[1]: /es/security/application_security/agentic_onboarding/

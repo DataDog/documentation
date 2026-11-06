@@ -2,22 +2,22 @@
 title: Datasets
 aliases:
 - /llm_observability/experiments/datasets/
-description: Using datasets in Agent Observability Experiments, including how to create, retrieve, and manage datasets, as well as information about versioning.
+description: Using datasets in Agent Observability Offline Experiments, including how to create, retrieve, and manage datasets, as well as information about versioning.
 further_reading:
   - link: /llm_observability/configure/automation_rules
     tag: Documentation
     text: Route traces into datasets automatically with Automation Rules
 ---
 
-In Agent Observability Experiments, a _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
+In Agent Observability Offline Experiments, a _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.
 
 Each record in a dataset contains:
 - **input** (required): Represents all the information that the agent can access in a task.
-- **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
+- **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss.
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
 - **id** (optional): A user-defined identifier for the record. Must be 128 characters or fewer and contain only letters, numbers, `_`, `-`, or `.`. If not provided, the SDK generates one automatically.
 
-Datasets enable systematic testing and regression detection by providing consistent evaluation scenarios across experiments.
+Datasets enable systematic testing and regression detection by providing consistent evaluation scenarios across offline experiments.
 
 ### Creating a dataset
 
@@ -175,9 +175,9 @@ The DataFrame has a MultiIndex structure with the following columns:
 
 ### Dataset versioning
 
-Datasets are automatically versioned to track changes over time. Versioning information enables reproducibility and allows experiments to reference specific dataset versions. 
+Datasets are automatically versioned to track changes over time. Versioning information enables reproducibility and allows offline experiments to reference specific dataset versions.
 
-The `Dataset` object has a field, `current_version`, which corresponds to the latest version; previous versions are subject to a 90-day retention window. 
+The `Dataset` object has a field, `current_version`, which corresponds to the latest version; previous versions are subject to a 90-day retention window.
 
 Dataset versions start at `0`, and each new version increments the version by 1.
 
@@ -193,7 +193,7 @@ Dataset versions are **NOT** created when updating the dataset name or descripti
 #### Version retention
 
 - The active version of a Dataset is retained for 3 years.
-- Previous versions (**NOT** the content of `current_version`) are retained for 90 days. 
+- Previous versions (**NOT** the content of `current_version`) are retained for 90 days.
 - The 90-day retention period resets when a previous version is used — for example, when an experiment reads a version.
 - After 90 consecutive days without use, a previous version is eligible for permanent deletion and may no longer be accessible.
 
@@ -216,7 +216,7 @@ records = dataset[1:3]
 for record in dataset:
     print(record["input_data"])
 ```
-  
+
 The Dataset class provides methods to manage records: `append()`, `update()`, `delete()`. You need to `push()` changes to save the changes in Datadog.
 
 ```python
@@ -255,4 +255,3 @@ Use the column picker to toggle columns on or off and drag to reorder them.
 Extract specific fields from your dataset records and display them as dedicated table columns. To add a custom column, type a field path in the {{< ui >}}Add Column{{< /ui >}} input at the top of the table. You can add multiple custom columns and reorder them with drag-and-drop. Column configuration is saved to your browser's local storage per project.
 
 [1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
-

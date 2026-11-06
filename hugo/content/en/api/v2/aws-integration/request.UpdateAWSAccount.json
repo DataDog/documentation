@@ -34,12 +34,13 @@
         "collect_cloudwatch_alarms": true,
         "collect_custom_metrics": true,
         "enabled": true,
-        "tag_filters": [
+        "resource_type_tag_filters": [
           {
-            "namespace": "AWS/EC2",
-            "tags": [
-              "key:value"
-            ]
+            "service": "ec2",
+            "resource_types": [
+              "instance"
+            ],
+            "expression": "env:staging"
           }
         ]
       },

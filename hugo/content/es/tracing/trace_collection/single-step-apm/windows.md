@@ -162,6 +162,8 @@ Para habilitar productos, [configure variables de entorno][3] en la configuraci�
 
 Las reglas de instrumentación le permiten controlar qué procesos son instrumentados automáticamente por SSI en los hosts Windows. Se requieren reglas para instrumentar aplicaciones .NET que se ejecutan fuera de IIS. También son útiles para un control granular sobre qué aplicaciones Java en el servidor o aplicaciones .NET en IIS son instrumentadas.
 
+**Nota**: Puede usar Bits AI para crear reglas de instrumentación con lenguaje natural. Describa qué procesos desea instrumentar y Bits AI generará la regla correspondiente.
+
 Para configurar las reglas de instrumentación:
 
 1. En Datadog, vaya a {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][5].

@@ -1,0 +1,29 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "external_secrets_manager": {
+        "type": "aws_secrets_manager",
+        "connection_id": "b0511f47-29f5-55de-bdcb-c209b05eadc3",
+        "region": "us-east-1"
+      },
+      "integration": {
+        "type": "GCP",
+        "credentials": {
+          "type": "GCPServiceAccount",
+          "private_key": {
+            "type": "aws_secrets_manager",
+            "secret_id": "example/gcp/service-account",
+            "key": "private_key",
+            "version_stage": "AWSCURRENT"
+          },
+          "service_account_email": {
+            "type": "aws_secrets_manager",
+            "secret_id": "example/gcp/service-account",
+            "key": "client_email"
+          }
+        }
+      }
+    }
+  }
+}

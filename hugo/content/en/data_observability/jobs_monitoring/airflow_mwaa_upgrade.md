@@ -176,10 +176,10 @@ Airflow 2.7.2 is not compatible with the upstream `apache-airflow-providers-open
 
    ```shell
    curl -o constraints.txt \
-     "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.12.txt"
+     "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.2/constraints-3.11.txt"
    ```
 
-   **Note**: Check the Python version for your MWAA environment. If your environment uses a different Python version, replace `3.12` in the URL.
+   **Note**: Check the Python version for your MWAA environment. If your environment uses a different Python version, replace `3.11` in the URL.
 
 2. Edit `constraints.txt` and update these package pins:
 

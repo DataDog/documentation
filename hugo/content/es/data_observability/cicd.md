@@ -44,7 +44,7 @@ La detección de desviaciones compara los datos producidos por sus modelos antes
 
 ### 1. Conecte su proveedor de control de código fuente y su proyecto de dbt {#1-connect-your-source-control-provider-and-dbt-project}
 
-1. Conecte su [proveedor de control de código fuente][2]. Las verificaciones de CI/CD son compatibles con GitHub y GitLab.
+1. Conecte su [proveedor de control de código fuente][2]. Las verificaciones de CI/CD admiten GitHub, GitLab, Bitbucket Cloud y Azure DevOps.
 2. Conecte la [cuenta de fuente de datos compatible][3] donde se ejecutan sus modelos de dbt.
 3. Conecte su proyecto de [dbt Cloud][4] o [dbt Core][5] a Datadog. También puede conectar su proyecto de dbt mientras configura las verificaciones de CI/CD.
 
@@ -103,6 +103,78 @@ Para **dbt Core**, la detección de desviaciones también requiere que el númer
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `CI Job URL` | El localizador para el trabajo de CI de dbt Cloud que se activa mediante solicitudes de extracción y materializa modelos de dbt para CI. Datadog recibe los eventos de ejecución de este trabajo a través de la integración de dbt Cloud. Estos suelen verse como `https://cloud.getdbt.com/...`. |
 
+**Bitbucket Cloud y Azure DevOps**
+
+Si su repositorio de Azure DevOps utiliza la integración nativa de Azure DevOps de dbt Cloud (planes Enterprise), los trabajos de CI se inician automáticamente. Omita esta sección.
+
+De lo contrario, inicie el trabajo de CI desde su Pipeline con la [API administrativa de dbt Cloud][9]. Primero, reemplace estos marcadores de posición en el ejemplo para su proveedor de CI:
+
+| Marcador de posición | Valor |
+| ----------- | ----- |
+| `<DBT_CLOUD_HOST>` | Su nombre de servidores de dbt Cloud, por ejemplo `cloud.getdbt.com`. |
+| `<ACCOUNT_ID>` | Su ID de cuenta de la URL del trabajo de CI de dbt Cloud. |
+| `<CI_JOB_ID>` | Su ID de trabajo de CI de la misma URL. |
+
+{{< tabs >}}
+{{% tab "Bitbucket Pipelines" %}}
+
+1. Cree un token de API de dbt Cloud que pueda ejecutar trabajos.
+2. En Bitbucket, guarde el token como una variable de repositorio segura llamada `DBT_API_KEY`.
+3. Agregue el siguiente paso a `bitbucket-pipelines.yml`. Si su archivo ya contiene `pipelines`, agregue este paso debajo de `pipelines > pull-requests > '**'`.
+
+```yaml
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: Trigger dbt Cloud CI job
+          script:
+            - |
+              curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+                -H "Authorization: Token $DBT_API_KEY" \
+                -H "Content-Type: application/json" \
+                -d "{\"cause\": \"Bitbucket PR #$BITBUCKET_PR_ID\",
+                     \"git_sha\": \"$BITBUCKET_COMMIT\",
+                     \"non_native_pull_request_id\": $BITBUCKET_PR_ID,
+                     \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$BITBUCKET_PR_ID\"}"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+Para un repositorio en Azure Repos:
+
+1. Cree un token de API de dbt Cloud que pueda ejecutar trabajos.
+2. Guarde el token como una variable secreta de Azure Pipelines llamada `DBT_API_KEY`.
+3. Agregue una [política de rama de validación de compilación][10] en la rama de destino para ejecutar su pipeline para las solicitudes de extracción.
+4. Agregue este paso de Bash a la sección `steps` de su pipeline. El bloque `env` pasa los valores del secreto y de la solicitud de extracción al script, y el `condition` omite el paso en las compilaciones que no son para una solicitud de extracción.
+
+```yaml
+steps:
+  - bash: |
+      curl --fail -X POST "https://<DBT_CLOUD_HOST>/api/v2/accounts/<ACCOUNT_ID>/jobs/<CI_JOB_ID>/run/" \
+        -H "Authorization: Token $DBT_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d "{\"cause\": \"Azure DevOps PR #$PR_NUMBER\",
+             \"git_sha\": \"$HEAD_SHA\",
+             \"non_native_pull_request_id\": $PR_NUMBER,
+             \"schema_override\": \"dbt_cloud_pr_<CI_JOB_ID>_$PR_NUMBER\"}"
+    displayName: Trigger dbt Cloud CI job
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    env:
+      DBT_API_KEY: $(DBT_API_KEY)
+      PR_NUMBER: $(System.PullRequest.PullRequestId)
+      HEAD_SHA: $(System.PullRequest.SourceCommitId)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**Notas**:
+- Incluya tanto `non_native_pull_request_id` como `git_sha`, y establezca `git_sha` en el commit principal de la solicitud de extracción. Datadog utiliza ambos para hacer coincidir la ejecución con la solicitud de extracción.
+- `schema_override` mantiene las tablas de CI fuera de sus esquemas de producción. Incluir el ID del trabajo evita que dos trabajos de CI escriban en el mismo esquema.
+- dbt Cloud no elimina estos esquemas para las ejecuciones activadas por API. Límpielos según un horario.
+
 ##### dbt Core {#dbt-core}
 
 | Configuración            | Descripción                                                                                                                                                                                                                                        |
@@ -110,11 +182,30 @@ Para **dbt Core**, la detección de desviaciones también requiere que el númer
 | `CI Job Name`      | El nombre del trabajo que se activa mediante solicitudes de extracción, materializa modelos de dbt para CI y envía eventos de OpenLineage a Datadog.                                                                                                                   |
 | `CI Job Namespace` | La variable OPENLINEAGE_NAMESPACE especificada al enviar eventos de OpenLineage desde el trabajo especificado anteriormente. Consulte [Establecer las variables de entorno][7]. Si no configura esta variable al enviar eventos de OpenLineage, no necesita especificarla aquí. |
 
+**Bitbucket Cloud y Azure DevOps**
+
+Primero, complete la configuración en [Set the environment variables][7]. Luego, en el paso que ejecuta `dbt-ol`, establezca estas dos variables con los valores para su proveedor de CI:
+
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER`
+- `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__VERSION`
+
+| Proveedor de CI | `PULL_REQUEST_NUMBER` | `VERSION` |
+| ----------- | --------------------- | --------- |
+| Bitbucket Pipelines | `$BITBUCKET_PR_ID` | `$BITBUCKET_COMMIT` |
+| Azure Pipelines con Azure Repos | `$(System.PullRequest.PullRequestId)` | `$(System.PullRequest.SourceCommitId)` |
+| Azure Pipelines con un repositorio de GitHub | `$(System.PullRequest.PullRequestNumber)` | `$(System.PullRequest.SourceCommitId)` |
+
+Establezca `VERSION` explícitamente. En estos proveedores, las compilaciones de solicitudes de extracción hacen checkout de un commit de fusión, por lo que el commit detectado desde git no es el commit principal de la solicitud de extracción, y la ejecución no coincide con la solicitud de extracción.
+
+Para Azure Repos, agregue una [política de rama de validación de compilación][10] en la rama de destino para que el pipeline se ejecute con el contexto de la solicitud de extracción.
+
 #### Ejecución de su trabajo de CI de dbt Core en un contenedor {#running-your-dbt-core-ci-job-in-a-container}
 
-Si su trabajo de CI de dbt Core se ejecuta dentro de un contenedor que inicia el ejecutor de CI (por ejemplo, un flujo de trabajo de GitHub Actions que ejecuta el trabajo con `docker run`), el contenedor no hereda el contexto de git del ejecutor de CI. Como resultado, la URL del repositorio, el SHA de confirmación y el número de solicitud de extracción no se detectan automáticamente, y la faceta `sourceCodeLocation` se envía sin ellos. Datadog utiliza estos valores para hacer coincidir la ejecución con la solicitud de extracción que abrió o actualizó, por lo que sin ellos no aparecen resultados de desviación en la solicitud de extracción.
+Si su ejecutor de CI inicia dbt Core con `docker run`, pase la URL del repositorio, el SHA de confirmación principal de la solicitud de extracción y el número de la solicitud de extracción al contenedor. El contenedor no hereda automáticamente el contexto de git del ejecutor.
 
-El siguiente ejemplo utiliza GitHub Actions; en otros proveedores de CI, los nombres de las variables de entorno difieren, pero el enfoque es el mismo. En el ejecutor de CI, lea los valores y páselos al contenedor explícitamente:
+Datadog necesita que los tres valores en la faceta `sourceCodeLocation` coincidan con la ejecución de la solicitud de extracción y muestren los resultados de la desviación.
+
+Para **GitHub Actions**, lea los valores en el ejecutor y páselos al contenedor:
 
 ```shell
 # On the CI runner, before launching the container:
@@ -138,6 +229,40 @@ on:
     types: [opened, synchronize, reopened]
 ```
 
+Para otros proveedores de CI, reemplace los valores asignados a `PR_NUMBER`, `HEAD_SHA` y `REPO_URL` en el ejemplo anterior. Ejecute el trabajo como un pipeline de solicitud de extracción (un pipeline de solicitud de fusión de GitLab, un pipeline de Bitbucket `pull-requests` o una compilación de Azure Pipelines iniciada por una política de validación de compilación). De lo contrario, estos valores están vacíos.
+
+{{< tabs >}}
+{{% tab "GitLab CI" %}}
+
+```shell
+PR_NUMBER="$CI_MERGE_REQUEST_IID"
+# In merged results pipelines, use $CI_MERGE_REQUEST_SOURCE_BRANCH_SHA instead.
+HEAD_SHA="$CI_COMMIT_SHA"
+REPO_URL="$CI_PROJECT_URL"
+```
+
+{{% /tab %}}
+{{% tab "Bitbucket Pipelines" %}}
+
+```shell
+PR_NUMBER="$BITBUCKET_PR_ID"
+HEAD_SHA="$BITBUCKET_COMMIT"
+REPO_URL="https://bitbucket.org/$BITBUCKET_REPO_FULL_NAME"
+```
+
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+
+```shell
+# For a GitHub repository, use $SYSTEM_PULLREQUEST_PULLREQUESTNUMBER instead.
+PR_NUMBER="$SYSTEM_PULLREQUEST_PULLREQUESTID"
+HEAD_SHA="$SYSTEM_PULLREQUEST_SOURCECOMMITID"
+REPO_URL="$SYSTEM_PULLREQUEST_SOURCEREPOSITORYURI"
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -150,3 +275,5 @@ on:
 [6]: /es/data_observability/jobs_monitoring/openlineage/
 [7]: /es/data_observability/jobs_monitoring/dbt/?tab=dbtcore#set-the-environment-variables
 [8]: /es/data_observability/quality_monitoring/data_warehouses/snowflake/
+[9]: https://docs.getdbt.com/docs/deploy/ci-jobs#trigger-a-ci-job-with-the-api-
+[10]: https://learn.microsoft.com/en-us/azure/devops/repos/git/branch-policies#build-validation

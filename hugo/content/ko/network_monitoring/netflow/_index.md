@@ -2,6 +2,9 @@
 aliases:
 - /ko/network_monitoring/devices/netflow/
 further_reading:
+- link: https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/
+  tag: 아키텍처 센터
+  text: 하이브리드 멀티클라우드 네트워크 관측 가능성 참조 아키텍처
 - link: /network_monitoring/devices/profiles
   tag: 설명서
   text: Network Device Monitoring을 통해 프로필 사용
@@ -10,41 +13,44 @@ further_reading:
   text: NetFlow용 동적 테스트 설정
 - link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: 블로그
-  text: Datadog로 NetFlow 트래픽 데이터 모니터링
+  text: Datadog로 NetFlow 트래픽 데이터 모니터링하기
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: 블로그
-  text: SNMP 트랩을 사용하여 네트워크 성능 문제 모니터링 및 진단
+  text: SNMP 트랩을 사용하여 네트워크 성능 문제 모니터링 및 진단하기
+- link: https://www.datadoghq.com/blog/understanding-netflow-duplication/
+  tag: 블로그
+  text: 'NetFlow 중복 이해: 중복이 발생하는 이유와 중복 제거 방법'
 title: NetFlow Monitoring
 ---
 ## 개요 {#overview}
 
-Network Device Monitoring의 NetFlow 뷰는 흐름 데이터를 내보내는 기기(예: 라우터, 방화벽 또는 스위치)에서 수집된 네트워크 트래픽 흐름에 대한 가시성을 제공합니다. 트래픽 양을 분석하고, 주요 통신자를 식별하며, 데이터가 네트워크를 통해 어떻게 이동하는지 이해할 수 있습니다.
+Network Device Monitoring의 NetFlow 뷰는 흐름 데이터를 내보내는 장치(예: 라우터, 방화벽 또는 스위치)에서 수집된 네트워크 트래픽 흐름에 대한 가시성을 제공합니다. 트래픽 양을 분석하고, 주요 통신자를 식별하며, 데이터가 네트워크를 통해 어떻게 이동하는지 이해할 수 있습니다.
 
-NetFlow 뷰는 기기 및 인터페이스별로 집계된 트래픽 메트릭을 표시합니다. 이를 사용하여 가장 많은 대역폭을 소비하거나, 가장 많은 패킷을 생성하거나, 트래픽 급증에 기여하는 기기 또는 인터페이스를 식별할 수 있습니다.
+NetFlow 뷰는 장치 및 인터페이스별로 집계된 트래픽 메트릭을 표시합니다. 이를 사용하여 가장 많은 대역폭을 소비하거나, 가장 많은 패킷을 생성하거나, 트래픽 급증에 기여하는 장치 또는 인터페이스를 식별할 수 있습니다.
 
-{{< img src="network_device_monitoring/netflow/netflow.png" alt="트래픽 양, 기기 상태, 흐름 등을 위한 접을 수 있는 범례가 포함된 NetFlow Monitoring 페이지입니다." style="width:100%;" >}}
+{{< img src="network_device_monitoring/netflow/netflow.png" alt="트래픽 양, 장치 상태, 흐름 등을 위한 접을 수 있는 범례가 포함된 NetFlow Monitoring 페이지입니다." style="width:100%;" >}}
 
 ## Side Navigation {#side-navigation}
 
 왼쪽 탐색을 사용하여 추가 NetFlow 뷰를 탐색하세요.
 
-- {{< ui >}}Traffic Volume{{< /ui >}}: 기기 및 인터페이스별 전체 흐름 메트릭입니다.
-- {{< ui >}}Device Health{{< /ui >}}: 모니터링된 기기의 상태 및 활용도입니다.
+- {{< ui >}}Traffic Volume{{< /ui >}}: 장치 및 인터페이스별 전체 흐름 메트릭입니다.
+- {{< ui >}}Device Health{{< /ui >}}: 모니터링된 장치의 상태 및 사용률입니다.
 - {{< ui >}}Flows{{< /ui >}}: 개별 흐름 레코드의 세부 정보입니다.
 - {{< ui >}}Conversations{{< /ui >}}: 집계된 소스–목적지 쌍입니다.
 - {{< ui >}}Autonomous Systems{{< /ui >}}: 자율 시스템 번호(ASN)별로 그룹화된 흐름 데이터입니다.
-- {{< ui >}}Geo IP{{< /ui >}}: 지리적 소스/목적지별로 그룹화된 흐름 데이터입니다.
-- {{< ui >}}Source Ports / Destination Ports / Protocols / Flags{{< /ui >}}: 패킷 메타데이터별 트래픽 분석입니다.
+- {{< ui >}}Geo IP{{< /ui >}}: 지리적 출처/목적지별로 그룹화된 흐름 데이터입니다.
+- {{< ui >}}Source Ports / Destination Ports / Protocols / Flags{{< /ui >}}: 패킷 메타데이터별 트래픽 내역입니다.
 
 ## 설치 {#installation}
 
 Network Device Monitoring과 NetFlow Monitoring을 사용하려면 [Agent][1] 버전 7.45 이상을 사용하고 있는지 확인하세요.
 
-**참고:** [Network Device Monitoring을 통한 메트릭 수집][2]을 구성하는 것은 NetFlow 데이터 전송을 위한 필수 요건은 아니지만 강력히 권장됩니다. 이 추가 데이터는 기기 이름, 모델, 벤더, 인바운드 및 아웃바운드 인터페이스 이름 등의 정보를 사용하여 흐름 레코드를 보강하는 데 활용될 수 있습니다.
+**참고:** [Network Device Monitoring을 통한 메트릭 수집][2]을 구성하는 것은 NetFlow 데이터 전송을 위한 필수 요건은 아니지만 강력히 권장됩니다. 이 추가 데이터는 장치 이름, 모델, 벤더, 인바운드 및 아웃바운드 인터페이스 이름 등의 정보를 사용하여 흐름 레코드를 보강하는 데 활용될 수 있습니다.
 
 ## 구성 {#configuration}
 
-NetFlow, jFlow, sFlow 또는 IPFIX 트래픽을 Agent NetFlow 서버로 전송하도록 기기를 구성하려면, 해당 기기가 Datadog Agent가 설치된 IP 주소로 트래픽을 전송하도록 설정되어 있어야 하며, 특히 `flow_type`와 `port`를 사용하세요.
+NetFlow, jFlow, sFlow 또는 IPFIX 트래픽을 Agent NetFlow 서버로 전송하도록 장치를 구성하려면, 해당 장치가 Datadog Agent가 설치된 IP 주소로 트래픽을 전송하도록 설정되어 있어야 하며, 특히 `flow_type`과 `port`를 사용하세요.
 
 1. NetFlow를 활성화하려면 [`datadog.yaml`][3] Agent 설정 파일을 편집합니다.
 
@@ -75,9 +81,9 @@ Datadog Agent는 NetFlow로 수신된 데이터를 자동으로 집계하여 대
 
 ## 보강 {#enrichment}
 
-귀하의 NetFlow 데이터는 Datadog 백엔드에 의해 처리되며, 귀하의 기기와 인터페이스에서 사용할 수 있는 메타데이터로 보강됩니다. 보강은 NetFlow 내보내기 IP와 인터페이스 인덱스를 기반으로 합니다. 재사용된 개인 IP 간의 충돌 가능성을 해소하기 위해, 각 Agent 구성 파일에 대해 다른 `namespace`을 구성할 수 있습니다(설정 `network_devices.namespace` 포함).
+귀하의 NetFlow 데이터는 Datadog 백엔드에 의해 처리되며, 귀하의 장치와 인터페이스에서 사용할 수 있는 메타데이터로 보강됩니다. 보강은 NetFlow 익스포터 IP와 인터페이스 인덱스를 기반으로 합니다. 재사용된 개인 IP 간의 충돌 가능성을 해소하기 위해, 각 Agent 구성 파일에 대해 다른 `namespace`을 구성할 수 있습니다(설정 `network_devices.namespace` 포함).
 
-NetFlow 엑스포터 IP가 기기 IP 중 하나이지만 SNMP 통합에 구성된 IP가 아닌 경우 Datadog은 엑스포터 IP가 속한 기기를 찾고 일치 항목이 고유한 한 이를 사용하여 NetFlow 데이터를 강화합니다.
+NetFlow 익스포터 IP가 장치 IP 중 하나이지만 SNMP 통합에 구성된 IP가 아닌 경우 Datadog은 익스포터 IP가 속한 장치를 찾고 일치 항목이 고유한 경우에 한해 이정보로 NetFlow 데이터를 보강합니다.
 
 ### 클라우드 공급자 IP 보강 {#cloud-provider-ip-enrichment}
 
@@ -93,7 +99,7 @@ Datadog은 IANA(인터넷 할당 번호 관리국) 데이터를 사용하여 Net
 
 또한, 특정 애플리케이션에 포트와 프로토콜을 매핑할 수 있도록, 맞춤 보강을 추가할 수 있습니다(예: 특정 포트에서 실행되는 맞춤 서비스의 경우). 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
 
-NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}+ Add Enrichment{{< /ui >}}을 클릭하여 사용자 지정 보강이 포함된 CSV 파일을 업로드합니다.
+NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}\+ Add Enrichment{{< /ui >}}를 클릭하여 사용자 지정 보강이 포함된 CSV 파일을 업로드합니다.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="NetFlow 구성 탭의 새 보강 매핑 모달" width="100%" >}}
 
@@ -101,7 +107,7 @@ NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}+ Add Enrichme
 
 또한, 특정 IP 주소에서 실행 중인 서비스를 분류하기 위해, IP와 CIDR을 맞춤 태그에 매핑하는 맞춤 보강을 추가할 수 있습니다. 이로 인해 네트워크 엔지니어와 그 팀이 인간이 읽을 수 있는 이름으로 NetFlow 데이터를 해석하고 쿼리하는 것이 더 쉬워집니다.
 
-[{{< ui >}}Enrichment{{< /ui >}} 설정 페이지][10]에서 {{< ui >}}+ Add Enrichment{{< /ui >}}을 클릭하여 매핑을 수동으로 추가하거나 CSV 파일을 업로드하여 매핑을 일괄 추가합니다.
+[{{< ui >}}Enrichment{{< /ui >}} 설정 페이지][10]에서 {{< ui >}}\+ Add Enrichment{{< /ui >}}를 클릭하여 매핑을 수동으로 추가하거나 CSV 파일을 업로드하여 매핑을 일괄 추가합니다.
 
 ### 역방향 DNS 개인 IP 보강 {#reverse-dns-private-ip-enrichment}
 
@@ -109,33 +115,33 @@ NetFlow의 {{< ui >}}Configuration{{< /ui >}} 탭에서 {{< ui >}}+ Add Enrichme
 
 기본적으로 [`datadog.yaml` 파일][7]의 Reverse DNS IP 보강은 비활성화되어 있습니다. 활성화하려면 이 페이지의 [구성](#configuration) 섹션을 참조하세요.
 
-Reverse DNS IP 보강과 관련된 흐름을 찾으려면 {{< ui >}}+ Filter{{< /ui >}} 메뉴에서 DNS를 검색하세요:
+Reverse DNS IP 보강과 관련된 흐름을 찾으려면 {{< ui >}}\+ Filter{{< /ui >}} 메뉴에서 DNS를 검색하세요.
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="역 DNS 목적지 및 소스 패싯을 표시하도록 향상된 필터 메뉴" width="100%" >}}
 
-**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [예제 Agent 구성 파일][7]의 `reverse_dns_enrichment` 섹션을 참조하십시오.
+**참고**: 역 DNS 항목은 캐시되며 DNS 쿼리를 최소화하고 DNS 서버의 부하를 줄이기 위해 속도 제한의 적용을 받습니다. 기본 캐싱 및 속도 제한 수정 등 더 많은 구성 옵션은 [예시 Agent 구성 파일][7]의 `reverse_dns_enrichment` 섹션을 참조하세요.
 
 ## IP 세부정보 {#ip-details}
 
-**대화** 보기에서 목적지 IP의 공용 IP 주소를 볼 수 있습니다. IP 위에 마우스를 올리면 IP에 대한 풍부한 메타데이터와 {{< ui >}}View Related Network Connections{{< /ui >}} 링크가 표시되어 더 자세한 연결성을 검사할 수 있습니다.
+**대화** 보기에서 목적지 IP의 공용 IP 주소를 볼 수 있습니다. IP 위에 마우스를 올리면 IP에 대한 풍부한 메타데이터와 {{< ui >}}View Related Network Connections{{< /ui >}}로 이동하는 링크가 표시되며, 여기에서 연결 상태를 더 자세히 확인할 수 있습니다.
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="IP 주소 위에 마우스를 올리면 IP 세부정보와 관련 네트워크 연결 보기를 표시합니다." width="100%" >}}
 
 ## 흐름 다이어그램 {#flow-diagram}
 
-{{< ui >}}Flows{{< /ui >}} 메뉴를 클릭하고 목록에서 흐름 위에 마우스를 올려 소스 IP, Ingress Interface Name, Device name 및 관련 네트워크 연결의 Destination IP에 대한 추가 정보를 확인하여 NetFlow Monitoring에서 흐름을 시각화할 수 있습니다.
+{{< ui >}}Flows{{< /ui >}} 메뉴를 클릭하고 목록에서 흐름 위에 마우스를 올리면 관련 네트워크 연결의 Source IP, Ingress Interface Name, Device name, Destination IP에 대한 추가 정보를 조회하여 NetFlow Monitoring의 흐름을 시각화할 수 있습니다.
 
-{{< img src="network_device_monitoring/netflow/flows.png" alt="NetFlow를 전송하는 기기에서 집계된 흐름 위에 마우스를 올려 관련 네트워크 연결에 접근하세요." width="100%" >}}
+{{< img src="network_device_monitoring/netflow/flows.png" alt="NetFlow를 전송하는 장치에서 집계된 흐름 위에 마우스를 올려 관련 네트워크 연결에 접근하세요." width="100%" >}}
 
 ## NetFlow용 Network Path {#network-path-for-netflow}
 
-NetFlow용 동적 테스트는 NetFlow 트래픽을 수집하는 Agent에서 NetFlow 레코드에 관찰된 목적지 IP로 Network Path 테스트를 자동으로 실행할 수 있습니다. NetFlow용 동적 테스트를 사용하여 NetFlow 목적지에 홉별 경로 및 지연 시간 컨텍스트를 추가하십시오.
+NetFlow용 동적 테스트는 NetFlow 트래픽을 수집하는 Agent에서 NetFlow 레코드에 확인된 목적지 IP까지 Network Path 테스트를 자동으로 실행할 수 있습니다. NetFlow용 동적 테스트를 사용하여 NetFlow 목적지에 홉별 경로 및 지연 시간 컨텍스트를 추가하세요.
 
-NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`이(가) 필요합니다. NetFlow용 동적 테스트를 설정하려면 [Network Path 설정][11]을 참조하십시오.
+NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`가 필요합니다. NetFlow용 동적 테스트를 설정하려면 [Network Path 설정][11]을 참조하세요.
 
 ## NetFlow 모니터링 {#netflow-monitor}
 
-모든 보기에서 {{< ui >}}Create Monitor{{< /ui >}} 아이콘을 클릭하여 [NetFlow monitor][6]을 생성합니다. 모니터링을 생성할 때 기기 관점에서 소스 IP 또는 대상 IP와 관련된 다음 패싯을 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
+어느 보기에서든 {{< ui >}}Create Monitor{{< /ui >}} 아이콘을 클릭하여 [NetFlow 모니터][6]를 생성합니다. 모니터링을 생성할 때 장치 관점에서 소스 IP 또는 대상 IP와 관련된 다음 패싯을 고려하세요. 이 필드는 네트워크 트래픽 패턴에 대한 통찰력을 제공하고 성능 및 보안을 최적화하는 데 도움이 됩니다.
 
 {{< img src="network_device_monitoring/netflow/create_monitor.png" alt="모니터링 생성 링크가 강조 표시된 NetFlow 모니터링의 흐름 뷰." width="100%" >}}
 
@@ -152,18 +158,18 @@ NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`이(가) 필
 | 수신 인터페이스 인덱스 | 수신 인터페이스의 인덱스입니다. |
 | 수신 인터페이스 이름 | 수신 인터페이스의 이름입니다. |
 
-### 기기 정보 {#device-information}
+### 장치 정보 {#device-information}
 
-다음 필드는 NetFlow 레코드를 생성하는 기기와 관련된 세부 정보를 나타냅니다.
+다음 필드는 NetFlow 레코드를 생성하는 장치와 관련된 세부 정보를 나타냅니다.
 
 | 필드 이름 | 필드 설명 |
 |---|---|
-| 기기 IP | 보강을 위해 NDM의 기기에 매핑되는 IP 주소입니다. |
-| 내보내기 IP | NetFlow 패킷이 시작되는 IP 주소입니다. |
-| 기기 모델 | 기기의 모델입니다. |
-| 기기 이름 | 기기의 이름입니다. |
-| 기기 네임스페이스 | 기기의 네임스페이스입니다. |
-| 기기 공급업체 | 기기의 공급업체입니다. |
+| 장치 IP | 보강을 위해 NDM의 장치에 매핑되는 IP 주소입니다. |
+| 익스포터 IP | NetFlow 패킷이 시작되는 IP 주소입니다. |
+| 장치 모델 | 장치의 모델입니다. |
+| 장치 이름 | 장치의 이름입니다. |
+| 장치 네임스페이스 | 장치의 네임스페이스입니다. |
+| 장치 공급업체 | 장치의 공급업체입니다. |
 
 ### 흐름 세부정보 {#flow-details}
 
@@ -252,16 +258,16 @@ NetFlow용 동적 테스트는 실험적 기능이며 Agent `v7.81+`이(가) 필
 - 소스 및 대상 위젯이 정확한 역할을 반영하도록 실제 시작자와 응답자를 식별합니다.
 - 서버가 잘못된 상위 소스로 나타나는 노이즈를 제거합니다.
 
-스티칭된(양방향) 보기와 스티칭되지 않은(단일 방향) 보기 사이를 전환하려면 엔드포인트 기반 NetFlow 보기로 이동하여 시간 선택기 아래에 표시된 {{< ui >}}Bidirectional{{< /ui >}} 전환 버튼을 사용하십시오.
+스티칭된(양방향) 보기와 스티칭되지 않은(단방향) 보기 사이를 전환하려면 엔드포인트 기반 NetFlow 보기로 이동하여 시간 선택기 아래의 {{< ui >}}Bidirectional{{< /ui >}} 토글을 사용하세요.
 
 {{< img src="network_device_monitoring/netflow/conversation_stitching.png" alt="NetFlow 보기에서 대화 스티칭 전환 버튼" width="100%" >}}
 
-## 샘플링 속도 {#sampling-rate}
+## 샘플링 비율 {#sampling-rate}
 
-NetFlow의 샘플링 속도는 기본적으로 바이트 및 패킷 계산에 반영됩니다. 표시된 바이트 및 패킷 값은 샘플링 속도가 적용되어 계산됩니다.
+NetFlow의 샘플링 비율은 기본적으로 바이트 및 패킷 계산에 반영됩니다. 표시된 바이트 및 패킷 값은 샘플링 비율이 적용되어 계산됩니다.
 또한, 대시보드 및 노트북에서 **바이트(조정)(@adjusted_bytes)** 및 **패킷(조정)(@adjusted_packets)**을 쿼리하여 시각화할 수 있습니다.
 
-기기에서 보낸 원시 바이트/패킷(샘플링)을 시각화하려면 대시보드 및 노트북에서 **바이트(샘플링)(@bytes)** 및 **패킷(샘플링)(@packets)**을 쿼리하여 시각화할 수 있습니다.
+장치에서 보낸 원시 바이트/패킷(샘플링)을 시각화하려면 대시보드 및 노트북에서 **바이트(샘플링)(@bytes)** 및 **패킷(샘플링)(@packets)**을 쿼리하여 시각화할 수 있습니다.
 
 ## 보존 {#retention}
 

@@ -2,6 +2,8 @@
 title: Integration Guides
 disable_toc: true
 private: true
+aliases:
+    - /integrations/guide/servicenow-service-graph-connector-setup/
 cascade:
     algolia:
         rank: 20
@@ -45,6 +47,8 @@ cascade:
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}Configure AWS metric name filters with the API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitor your AWS billing details{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-asg-spot-assessment" tag=" AWS" >}}Assess AWS Auto Scaling groups for Spot migration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-service-quotas" tag=" AWS" >}}Monitor AWS service quotas{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Amazon Data Firehose{{< /nextlink >}}
     {{< nextlink href="integrations/guide/amazon_cloudformation" tag=" AWS" >}}Using Amazon CloudFormation{{< /nextlink >}}
@@ -87,7 +91,6 @@ cascade:
 {{< header-list header="ServiceNow guides" >}}
    {{< nextlink href="integrations/guide/servicenow-itom-itsm-setup" >}}Set up ServiceNow ITOM and ITSM{{< /nextlink >}}
    {{< nextlink href="integrations/guide/servicenow-cmdb-enrichment-setup" >}}Set up ServiceNow CMDB Enrichment{{< /nextlink >}}
-   {{< nextlink href="integrations/guide/servicenow-service-graph-connector-setup" >}}Set up ServiceNow Service Graph Connector{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="Database guides" >}}

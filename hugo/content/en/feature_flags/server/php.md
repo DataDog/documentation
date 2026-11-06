@@ -400,6 +400,7 @@ If feature flags unexpectedly always return default values, check the following:
 - Ensure `DD_SERVICE` and `DD_ENV` are set and match the service and environment configured for your flag.
 - Confirm your Datadog PHP SDK version includes feature flags support.
 - Check that the PHP process can communicate with the Datadog Agent.
+- Check that the Datadog Agent was available when the application started. If problems continue after the Agent becomes available, restart the application. See [Agent availability][7].
 
 ### OpenFeature provider not found
 
@@ -442,3 +443,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [4]: /tracing/trace_collection/dd_libraries/php/
 [5]: /feature_flags/concepts/environments/
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/configuration_sources/#agent-availability

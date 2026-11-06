@@ -25,13 +25,13 @@ Configure CI Visibility para GitLab a fin de recopilar datos sobre las ejecucion
 |---|---|---|
 | [Pipelines en ejecución][24] | Pipelines en ejecución | Consulte las ejecuciones de pipelines que se están ejecutando. Los pipelines en cola o en espera se muestran con el estado "Running" en Datadog. |
 | [Trabajos en ejecución][32] | Trabajos en ejecución | Consulte las ejecuciones de trabajos que se están ejecutando actualmente. |
-| [Análisis de fallos de trabajos de CI][28] | Análisis de fallos de trabajos de CI | Utiliza modelos LLM en los registros relevantes para analizar la causa raíz de los trabajos de CI fallidos. |
+| [Análisis de registros][28] | Análisis de registros | Utiliza modelos LLM en los registros relevantes para analizar la causa raíz de los trabajos de CI fallidos. |
+| Correlación de registros | Correlación de registros | Correlacione los spans de pipeline con los registros. Requiere [Almacenamiento de registros][12]. |
 | [Filtrar trabajos de CI en la ruta crítica][29] | Filtrar trabajos de CI en la ruta crítica | Filtre por trabajos en la ruta crítica. |
 | [Reintentos parciales][19] | Pipelines parciales | Consulte las ejecuciones de pipelines reintentadas parcialmente. |
 | [Reintentos automáticos de trabajos][31] | Reintentos automáticos de trabajos | Datadog reintenta los trabajos fallidos clasificados como transitorios por su modelo de error de IA. |
 | [Pasos manuales][20] | Pasos manuales | Consulte los pipelines activados manualmente. |
 | [Tiempo de cola][21] | Tiempo de cola | Consulte la cantidad de tiempo que los trabajos de pipeline permanecen en la cola antes de procesarse. |
-| Correlación de registros | Correlación de registros | Correlacione los tramos de pipeline con los registros y habilite la [recopilación de registros de trabajos][12]. |
 | Correlación de métricas de infraestructura | Correlación de métricas de infraestructura | Correlacione los trabajos con las [métricas de servidor de infraestructura][14] para los ejecutores de GitLab autohospedados. |
 | Etiquetas personalizadas predefinidas | Etiquetas personalizadas predefinidas | Establezca [etiquetas personalizadas][10] para todos los tramos de pipeline, etapas y trabajos generados. |
 | [Etiquetas personalizadas][15] [y medidas en tiempo de ejecución][16] | Etiquetas y medidas personalizadas en tiempo de ejecución | Configure [etiquetas y medidas personalizadas][13] en tiempo de ejecución. |
@@ -341,14 +341,6 @@ Para las ejecuciones fallidas de canalizaciones de GitLab, cada error en la pest
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="Motivo de falla de GitLab" style="width:100%;">}}
 
-#### Análisis de fallas de trabajos de CI {#ci-jobs-failure-analysis}
-
-Si la recopilación de registros de trabajos está habilitada, CI Visibility utiliza modelos LLM para analizar los trabajos de CI fallidos basándose en los registros relevantes provenientes de GitLab.
-
-También puede agregar un análisis de falla de trabajo a un comentario de PR. Consulte la guía sobre [cómo usar comentarios de PR][30].
-
-Para obtener una explicación completa, consulte la guía sobre [cómo usar el análisis de fallas de trabajos de CI][28].
-
 #### Errores proporcionados por GitLab {#errors-provided-by-gitlab}
 
 Los mensajes de error son compatibles con las versiones 15.2.0 y superiores de GitLab.
@@ -377,8 +369,8 @@ La siguiente tabla describe el mensaje y el dominio correlacionado con cada tipo
 | `job_execution_timeout`          | desconocido      | Falló debido al tiempo de espera del trabajo.                                |
 | `archived_failure`               | proveedor     | Falla archivada.                                         |
 | `unmet_prerequisites`            | desconocido      | Falló debido a un prerrequisito no cumplido.                          |
-| `scheduler_failure`              | provider     | Falló debido a un fallo en el horario.                            |
-| `data_integrity_failure`         | provider     | Falló debido a problemas de integridad de los datos.                              |
+| `scheduler_failure`              | proveedor     | Falló debido a un fallo en el horario.                            |
+| `data_integrity_failure`         | proveedor     | Falló debido a problemas de integridad de los datos.                              |
 | `forward_deployment_failure`     | desconocido      | Falla de implementación.                                        |
 | `user_blocked`                   | usuario         | Bloqueado por el usuario.                                           |
 | `ci_quota_exceeded`              | proveedor     | Se excedió la cuota de CI.                                         |
@@ -390,17 +382,27 @@ La siguiente tabla describe el mensaje y el dominio correlacionado con cada tipo
 | `reached_max_descendant_pipelines_depth` | usuario   | Se alcanzó el máximo de canalizaciones descendientes.                        |
 | `ip_restriction_failure`          | proveedor     | Falla por restricción de IP.                                    |
 
-### Recopilar registros de trabajo {#collect-job-logs}
+### Administrar registros de trabajo {#manage-job-logs}
 
-Las siguientes versiones de GitLab admiten la recopilación de registros de trabajo:
+#### Análisis de registros {#logs-analysis}
+
+El Análisis de registros utiliza modelos LLM para clasificar los fallos de los trabajos por causa raíz basándose en los registros relevantes provenientes de GitLab.
+
+Para obtener una explicación completa, consulte la guía sobre [cómo usar el Análisis de registros][28].
+
+El Análisis de registros está habilitado de forma predeterminada en Datadog, pero requiere que se configure el reenvío de registros de trabajo, como se describe a continuación.
+
+También puede agregar el Análisis de registros a un comentario de PR. Consulte la guía sobre [cómo usar comentarios de PR][30].
+
+Tener habilitado el Análisis de registros también es un requisito previo para los [reintentos automáticos de trabajo][31].
+
+Las siguientes versiones de GitLab admiten el reenvío de registros de trabajo a Datadog:
 
 * GitLab.com (SaaS)
 * GitLab >= 15.3 (autohospedado) solo si utiliza [almacenamiento de objetos para guardar registros de trabajo][7]
 * GitLab >= 14.8 (autohospedado) al habilitar la bandera de función `datadog_integration_logs_collection`
 
-Los registros de trabajo se recopilan en [Log Management][9] y se correlacionan automáticamente con la canalización de GitLab en CI Visibility. Los archivos de registro mayores a un GiB se truncan.
-
-Para habilitar la recopilación de registros de trabajo:
+Para habilitar el reenvío de registros de trabajo desde GitLab:
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
@@ -431,7 +433,13 @@ El <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon
 {{% /tab %}}
 {{< /tabs >}}
 
-Los registros se facturan por separado de CI Visibility. La retención, exclusión e índices de registros se configuran en [Log Management][6]. Los registros de los trabajos de GitLab se pueden identificar mediante las etiquetas `datadog.product:cipipeline` y `source:gitlab`.
+#### Almacenamiento de registros {#logs-storage}
+
+Después de completar los pasos para su versión de GitLab, vaya a [configuración del repositorio de CI/CD][35] y habilite el Almacenamiento de registros a nivel de la organización de Datadog o para los repositorios deseados.
+
+El Almacenamiento de registros se factura por separado de CI Visibility. La retención, exclusión e índices de registros se configuran en [Log Management][6]. Los registros de los trabajos de GitLab se pueden identificar mediante las etiquetas `datadog.product:cipipeline` y `source:gitlab`.
+
+Los registros de trabajo se recopilan en [Log Management][9] y se correlacionan automáticamente con la canalización de GitLab en CI Visibility. Los archivos de registro mayores a un GiB se truncan.
 
 Para obtener más información sobre el procesamiento de registros de trabajos recopilados de la integración de GitLab, consulte la [documentación de procesadores][17].
 
@@ -472,7 +480,7 @@ La página {{< ui >}}CI Pipeline List{{< /ui >}} muestra datos solo para la rama
 [9]: /es/logs/
 [10]: /es/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /es/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /es/continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[12]: /es/continuous_integration/pipelines/gitlab/#logs-storage
 [13]: /es/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /es/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /es/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
@@ -495,3 +503,4 @@ La página {{< ui >}}CI Pipeline List{{< /ui >}} muestra datos solo para la rama
 [32]: /es/glossary/#running-job
 [33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
 [34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
+[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

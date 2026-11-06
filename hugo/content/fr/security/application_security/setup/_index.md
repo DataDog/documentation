@@ -10,17 +10,13 @@ disable_sidebar: true
 disable_toc: false
 title: Activation de la protection des applications et des API
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection est en préversion sur le site Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
+Découvrez comment activer la protection des applications et des API sur les plateformes et environnements suivants, pris en charge.
 
-Découvrez comment activer la protection des applications et des API sur l'ensemble des plateformes et environnements supportés.
+Pour configurer votre application avec un assistant de codage, consultez [Agentic Onboarding][1].
 
 <div class="alert alert-info">
-  <p class="fs-bold m-0">Votre environnement est-il absent ?</p>
-  <span>Envoyez-nous une demande pour l'environnement qui vous manque <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">ici</a>.</span>
+  <p class="fs-bold m-0">Votre environnement est-il manquant ?</p>
+  <span>Envoyez-nous une demande pour votre environnement manquant <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">ici</a>.</span>
 </div>
 
 ## Langues {#languages}
@@ -88,3 +84,5 @@ Découvrez comment activer la protection des applications et des API sur l'ensem
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
   {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
+
+[1]: /fr/security/application_security/agentic_onboarding/

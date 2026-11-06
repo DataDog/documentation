@@ -1,0 +1,6 @@
+{
+  "incidents": {
+    "name": "Incidents",
+    "description": "Gérez la réponse aux incidents, ainsi que les pièces jointes, les métadonnées et les tâches associées. Consultez la [page Incident Management](https://docs.datadoghq.com/service_management/incident_management/) pour plus d'informations."
+  }
+}

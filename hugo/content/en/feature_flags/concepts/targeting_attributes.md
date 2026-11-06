@@ -18,7 +18,7 @@ Each targeting attribute includes the following:
 
 - **Attribute key**: The identifier you reference in targeting rules, for example `country` or `user.plan`. Keys are unique within your organization and are case-sensitive.
 - **Data type**: `Boolean`, `String`, `Number`, or `Semver`. The data type determines which operators are available when you use the attribute in a targeting rule.
-- **Distribution channel**: Which SDKs report this attribute in their evaluation context: **Client and Server**, **Client Only**, or **Server Only**. Semver attributes are only available for client SDKs.
+- **Distribution channel**: Which SDKs report this attribute in their evaluation context: **Client and Server**, **Client Only**, or **Server Only**.
 - **Description** (optional): Notes for other users about what the attribute represents.
 
 Targeting attributes are organization-wide: after they're defined, an attribute is available to targeting rules across all flags and environments.

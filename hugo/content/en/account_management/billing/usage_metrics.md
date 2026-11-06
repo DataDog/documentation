@@ -21,6 +21,8 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
+Use `sum` as the space aggregator (`sum by`) when querying estimated usage metrics. Many of these metrics are split into several timeseries, such as by tag or by child organization, and only `sum` adds them up to your total usage.
+
 ## Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
@@ -39,8 +41,8 @@ Estimated usage metrics are generally available for the following usage types:
 | (Preview) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | Comparison of total ingested points to total indexed points. Applies to organizations on [Metric Name Pricing][7]. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
-| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
-| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs. |
+| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.pipelines.ingested_bytes` | Number of logs matched by pipelines in bytes. |
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.pipelines.ingested_events` | Number of events matched by pipelines, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
@@ -50,6 +52,8 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters. |
 | APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` | Volume of ingested spans in bytes. |
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
+| APM OTLP Partner Ingested Bytes | `datadog.estimated_usage.apm.otlp_partner_ingested_bytes` | Volume of managed partner ingested spans in bytes. |
+| APM Hostless Ingested Bytes   | `datadog.estimated_usage.apm.hostless_ingested_bytes` | Volume of hostless ingested spans in bytes. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Unique APM Fargate Tasks seen in last 5 minutes. |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
 | RUM Ingested Sessions         | `datadog.estimated_usage.rum.ingested_sessions` | Total number of ingested RUM sessions.<br /><br />**Note**: Applies to RUM without Limits. |
@@ -78,6 +82,7 @@ Estimated usage metrics are generally available for the following usage types:
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
 | Events Ingested               | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Sensitive Data Scanner Scanned Bytes | `datadog.estimated_usage.sds.scanned_bytes` | Volume of data scanned by Sensitive Data Scanner, in bytes. Applies to Logs, APM, RUM, and Events. See [Monitor Sensitive Data Scanner usage][8]. |
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 | Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
@@ -120,4 +125,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
 [6]: /account_management/billing/usage_attribution/
 [7]: /account_management/billing/metric_name_pricing/
+[8]: /security/sensitive_data_scanner/guide/monitor-sds-usage/
 
