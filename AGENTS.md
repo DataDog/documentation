@@ -141,7 +141,7 @@ Fix any warnings before committing. Common issues:
 - Keep messages concise and descriptive
 
 ### Jira Workflow
-- When a PR is created, transition the Jira ticket to **Reviewable** status (transition ID: 101)
+- When a PR is created, transition the Jira ticket to **Reviewable** status. Resolve the transition ID from the issue's available transitions; IDs vary by workflow.
 
 ### Content Guidelines
 Follow the CONTRIBUTING.md style guide:
