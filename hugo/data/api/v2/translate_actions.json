@@ -8312,8 +8312,12 @@
     "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Delete a usage quota"
   },
+  "GetQuota": {
+    "description": "Returns the effective configuration of one usage quota by its opaque identifier. Future pending changes are returned separately; a pending change that is already effective is returned as the current limit. The quota must belong to the caller's organization or an authorized descendant in the same datacenter. Set `include_descendants=false` to reject all other organizations. Stored quotas remain readable after the scoped user, role, or team is deleted. Requires `billing_read` or `billing_edit`.",
+    "summary": "Get a usage quota"
+  },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "description": "Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."

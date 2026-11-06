@@ -41,3 +41,17 @@ entries:
     operations:
       - GetMonthlyUsageAttribution
     title: Clarify monthly usage attribution month restriction
+  - change_type: added
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41506
+    operations:
+      - GetQuota
+    title: Publish usage quota lookup and include_descendants access control
+  - change_type: modified
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41506
+    operations:
+      - DeletePendingQuota
+      - DeleteQuota
+      - UpdateQuota
+    title: Publish usage quota lookup and include_descendants access control

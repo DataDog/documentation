@@ -150517,7 +150517,7 @@ components:
           nullable: true
           type: boolean
         pending_usage_limit:
-          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`, unless `enforced=false` is supplied, which clears the pending change; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
           example: 50000
           format: int64
           minimum: 0
@@ -268503,6 +268503,14 @@ paths:
         Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same datacenter. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -268550,11 +268558,102 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: |-
+        Returns the effective configuration of one usage quota by its opaque identifier. Future pending changes are returned separately; a pending change that is already effective is returned as the current limit. The quota must belong to the caller's organization or an authorized descendant in the same datacenter. Set `include_descendants=false` to reject all other organizations. Stored quotas remain readable after the scoped user, role, or team is deleted. Requires `billing_read` or `billing_edit`.
+      operationId: GetQuota
+      parameters:
+        - description: Allow access to authorized descendant organizations in the same datacenter. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        usage_limit: 120000
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_read
+        - AuthZ:
+            - billing_edit
+      summary: Get a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 27
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_read
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same datacenter. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -268644,6 +268743,14 @@ paths:
         Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeletePendingQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same datacenter. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
