@@ -1006,6 +1006,16 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create an environment returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_3184074211",
+      "description": "Create an environment with full evaluation data false returns \"Created\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_2722766232",
+      "description": "Create an environment with full evaluation data true returns \"Created\" response"
     }
   ],
   "UpdateSavedFilterAttributes": [
@@ -1060,6 +1070,28 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Update a feature flag returns \"OK\" response"
+    }
+  ],
+  "UpdateFeatureFlagsEnvironment": [
+    {
+      "group": "feature_flags",
+      "suffix": "_681909188",
+      "description": "Update an environment to disable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_169745239",
+      "description": "Update an environment to enable full evaluation data returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_628630684",
+      "description": "Update an environment to preserve disabled full evaluation data when omitted returns \"OK\" response"
+    },
+    {
+      "group": "feature_flags",
+      "suffix": "_4250936367",
+      "description": "Update an environment to preserve enabled full evaluation data when omitted returns \"OK\" response"
     }
   ],
   "UpdateAllocationsForFeatureFlagInEnvironment": [
