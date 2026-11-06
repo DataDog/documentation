@@ -134,6 +134,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 - **An annotation queue that does not belong to a project is visible to everyone** with Agent Observability read access, and no Restricted Dataset can hide it. Move the queue into a project, or recreate it in one, to bring it under a restriction.
 - **A project with no Restricted Dataset is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization sets Agent Observability data outside Restricted Datasets to [Restricted][6]. A Restricted Dataset whose value matches no project silently restricts nothing. Confirm every new restriction with a user outside the granted teams or roles.
 - **When Agent Observability is set to [Restricted][6], a project is visible only if a Restricted Dataset names its project ID.** An `ml_app` value that is an application name grants nothing in Offline Experiments, so the project stays hidden from everyone, including the teams and roles on your other Restricted Datasets. See [Find a project's ID](#find-a-projects-id).
+- **Agent Observability Restricted Datasets do not restrict `ml_obs.*` metrics.** The `ml_obs.*` metrics generated from spans, such as span cost, token, and evaluation metrics, are standard Datadog metrics, separate from the evaluation metrics shown for a project's experiment runs. Users who can query metrics can query them for a restricted `ml_app` through the metrics API, dashboards, and monitors. See [Data Access Control][1] and [Agent Observability metrics][12].
 
 ## Further reading
 
@@ -150,3 +151,4 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 [9]: /llm_observability/configure/prompt_management/
 [10]: /llm_observability/configure/prompt_management/#reuse-prompts-with-composition
 [11]: /llm_observability/instrument/prompt_tracking/
+[12]: /llm_observability/investigate/metrics/
