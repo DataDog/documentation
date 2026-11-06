@@ -196,9 +196,6 @@ These examples use Agentless mode. Set the `DD_API_KEY` repository secret and ch
 
 ```yaml
 env:
-  DD_API_KEY: ${{ secrets.DD_API_KEY }}
-  DD_SITE: datadoghq.com
-  DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
   DD_TEST_OPTIMIZATION_RUNNER_PLATFORM: "{% if equals($prog_lang, "ruby") inline=true %}ruby{% /if %}{% if equals($prog_lang, "python") inline=true %}python{% /if %}{% if equals($prog_lang, "javascript") inline=true %}javascript{% /if %}"
   DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK: "{% if equals($platform, "rspec") inline=true %}rspec{% /if %}{% if equals($platform, "minitest") inline=true %}minitest{% /if %}{% if equals($platform, "pytest") inline=true %}pytest{% /if %}{% if equals($platform, "jest") inline=true %}jest{% /if %}{% if equals($platform, "vitest") inline=true %}vitest{% /if %}{% if equals($platform, "mocha") inline=true %}mocha{% /if %}{% if equals($platform, "cucumber") inline=true %}cucumber{% /if %}{% if equals($platform, "cypress") inline=true %}cypress{% /if %}{% if equals($platform, "playwright") inline=true %}playwright{% /if %}{% if equals($platform, "webdriverio") inline=true %}webdriverio{% /if %}"
   DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM: "1"
@@ -214,6 +211,10 @@ jobs:
       # Insert your runtime, dependencies, and ddtest install.
       - id: plan
         name: Plan tests
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_SITE: datadoghq.com
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
         run: |
           rm -rf .testoptimization
           bin/ddtest plan
@@ -239,6 +240,10 @@ jobs:
           name: ddtest-plan
           path: .testoptimization/
       - name: Run assigned tests
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_SITE: datadoghq.com
+          DD_CIVISIBILITY_AGENTLESS_ENABLED: "true"
         run: |
           test -f .testoptimization/manifest.txt
           bin/ddtest run --ci-node ${{ matrix.ci_node_index }}
