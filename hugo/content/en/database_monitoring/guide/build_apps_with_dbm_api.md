@@ -193,6 +193,8 @@ Each record in `result.events` contains plan details at `event.custom.db`, inclu
 | `event.custom.db.plan.definition` | PostgreSQL JSON explain plan (string-encoded) |
 | `event.custom.db.plan.cost` | Estimated total cost from the planner |
 | `event.custom.db.plan.signature` | Hash of the plan structure, used to identify distinct plans for the same query |
+| `event.custom.db.plan.type` | Kind of plan: `real` for [SQL Server real execution plans][5], `explain_analyze` for PostgreSQL `auto_explain` plans. Estimated plans collected by the Agent have no type |
+| `event.custom.db.plan.source` | How the plan was obtained, if set. SQL Server real execution plans have `last_query_plan_stats` |
 
 ## Example: Identify top queries with sequential scans
 
@@ -502,3 +504,4 @@ python identify_sequential_scans.py
 [2]: /database_monitoring/setup_postgres/
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/databases/samples
+[5]: /database_monitoring/guide/sql_real_execution_plans/
