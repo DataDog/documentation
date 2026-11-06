@@ -24,7 +24,7 @@ Administrators or users with the Usage Read permission can access the Usage Attr
 
 This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, Parallel Testing Slots, and Audit Trail.
 
-**Note**: To break down CI Pipeline and Test Optimization billing by team or other organizational tags, see [Billing enrichment][5] in the CI Visibility Billing documentation.
+**Note**: To break down CI Pipeline and Test Optimization billing by team or other organizational tags, see [Billing enrichment][5] in the CI/CD Optimization Billing documentation.
 
 ## Getting started
 
