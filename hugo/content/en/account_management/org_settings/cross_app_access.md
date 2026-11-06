@@ -49,7 +49,7 @@ Each product names this feature differently: Okta calls it Cross App Access, Cla
 Cross-App Access changes how the agent gets a token, not what the user can do or how Datadog records it.
 
 - **Permissions**: the access token carries the user's own permissions. The agent cannot read or change anything the user cannot.
-- **Scopes**: the token is also limited to the scopes you allow for the agent. Effective access is the overlap of the two. See [Control scopes](#control-scopes).
+- **Scopes**: the token is also limited to the scopes you allow for the agent. Effective access is the overlap of the two. See the [Control scopes](#control-scopes) section.
 - **Audit events**: Datadog records Cross-App Access authorizations in the [Audit Trail][4]. Actions the agent takes afterward are attributed to the user.
 
 ### Choose your issuer
@@ -68,7 +68,7 @@ You can trust more than one issuer. If you do, complete the setup for each.
 
 Setting up XAA requires the `org_management` permission in Datadog, and each user of the agent must have a Datadog user account in your organization.
 
-Agent requirements depend on the agent you use. For Claude, your organization must be on a Team or Enterprise plan, and you need admin access to set up managed authorization.
+Requirements for the agent depend on which agent you use. For Claude, your organization must be on a Team or Enterprise plan, and you need admin access to set up managed authorization.
 
 The remaining prerequisites depend on your issuer.
 
@@ -92,7 +92,7 @@ The remaining prerequisites depend on your issuer.
 {{% tab "Custom issuer" %}}
 
 - Your organization uses SAML single sign-on to Datadog, and the issuer is your SAML identity provider. Datadog resolves users through the SAML identity in the token, so a custom issuer does not work without it. See [Configure SAML single sign-on][1].
-- Your issuer returns ID-JAGs that meet the token requirements in the **Custom issuer** tab of [Set up your issuer](#set-up-your-issuer).
+- Your issuer returns ID-JAGs that meet the token requirements in the **Custom issuer** tab of the [Set up your issuer](#set-up-your-issuer) section.
 
 [1]: /account_management/saml/
 
@@ -113,7 +113,7 @@ Click {{< ui >}}Enable{{< /ui >}}. This applies to your whole organization. Clic
 
 ### Add trusted issuers
 
-Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Issuer URLs{{< /ui >}} list. Add one entry for each issuer you use. [Set up your issuer](#set-up-your-issuer) shows which URL to enter.
+Datadog accepts ID-JAGs only from the issuers in the {{< ui >}}Issuer URLs{{< /ui >}} list. Add one entry for each issuer you use. The [Set up your issuer](#set-up-your-issuer) section shows which URL to enter.
 
 Every issuer URL must use `https` and a fully qualified, lowercase domain name, and must not contain an IP address, port, username, query, or fragment. Datadog accepts a token only when its `iss` claim matches the issuer URL exactly.
 
@@ -127,7 +127,7 @@ Copy the value in the {{< ui >}}Org UUID{{< /ui >}} field. The issuer sends this
 
 ### Copy the agent client ID
 
-The {{< ui >}}Supported agents{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. Some issuers need this client ID; the issuer's tab in [Set up your issuer](#set-up-your-issuer) says whether yours does. Datadog adds agents to this table as it supports them, so check the table rather than reusing a client ID from another source.
+The {{< ui >}}Supported agents{{< /ui >}} table lists every agent Datadog supports for Cross-App Access and the OAuth client ID each one uses. Some issuers need this client ID; the issuer's tab in the [Set up your issuer](#set-up-your-issuer) section says whether yours does. Datadog adds agents to this table as it supports them, so check the table rather than reusing a client ID from another source.
 
 ### Control scopes
 
@@ -144,7 +144,7 @@ To set the scopes the agent is allowed in Datadog:
 
 ## Set up your issuer
 
-Open the tab for the issuer you picked in [Choose your issuer](#choose-your-issuer).
+Open the tab for the issuer you picked in the [Choose your issuer](#choose-your-issuer) section.
 
 Saving the issuer URL in Datadog does not confirm that the connection works. After you finish the setup, sign in to the agent as a user who meets the prerequisites and run a request that calls Datadog. A successful call confirms the full path: the issuer mints the token, Datadog accepts it, and Datadog resolves the user.
 
@@ -158,15 +158,15 @@ Use Okta as the issuer when your organization already signs in to Datadog throug
 | Value                     | Direction       | Where you enter it                                                                                                    |
 | ------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Datadog organization UUID | Datadog to Okta | Okta application for Datadog, {{< ui >}}Machine Assignments{{< /ui >}} tab > {{< ui >}}Audience/tenant ID{{< /ui >}}  |
-| Agent client ID           | Datadog to Okta | AI agent, {{< ui >}}Resource connections{{< /ui >}} > {{< ui >}}client ID registered in Datadog{{< /ui >}}          |
-| Okta issuer URL           | Okta to Datadog | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
+| Agent client ID           | Datadog to Okta | AI agent, {{< ui >}}Resource connections{{< /ui >}} tab, in the client ID field for your Okta application for Datadog |
+| Okta issuer URL           | Okta to Datadog | See the [Add trusted issuers](#add-trusted-issuers) section                                                           |
 
 The Datadog organization UUID is not the same as the company ID that Okta asks for elsewhere.
 
 The Okta issuer URL is the issuer URL of your own Okta tenant, for example `https://<YOUR_OKTA_SUBDOMAIN>.okta.com`:
 
 - The URL must contain only a scheme and a host, with no path or trailing slash.
-- The host must be a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not work.
+- The host must be a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works but `okta.com` does not.
 - Okta custom authorization servers, whose issuer URLs contain a path such as `/oauth2/default`, are not supported.
 - If your Okta org issues tokens from a custom domain, follow the **Custom issuer** tab instead.
 
@@ -174,23 +174,23 @@ The Okta issuer URL is the issuer URL of your own Okta tenant, for example `http
 
 Complete the following steps in the Okta Admin Console as a Super Administrator. The Okta AI Agent administrator role does not have access to this configuration.
 
-1. **Configure the Okta application for Datadog as a resource server.** On that application, open the {{< ui >}}Machine Assignments{{< /ui >}} tab, select the {{< ui >}}Callers{{< /ui >}} tile, and click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Cross App Access (XAA){{< /ui >}}. Enable XAA, then set {{< ui >}}Audience/tenant ID{{< /ui >}} to your [Datadog organization UUID](#copy-your-organization-uuid).
+1. **Configure the Okta application for Datadog as a resource server.** On that application, open the {{< ui >}}Machine Assignments{{< /ui >}} tab, select the {{< ui >}}Callers{{< /ui >}} tile, and click {{< ui >}}Edit{{< /ui >}} next to {{< ui >}}Cross App Access (XAA){{< /ui >}}. Enable XAA. Set {{< ui >}}Audience/tenant ID{{< /ui >}} to the value from the [Copy your organization UUID](#copy-your-organization-uuid) section.
 
-1. **Register the agent as an AI agent.** Navigate to {{< ui >}}Directory{{< /ui >}} > {{< ui >}}AI agents{{< /ui >}} and click {{< ui >}}Register AI agent{{< /ui >}}. Under {{< ui >}}Profile{{< /ui >}}, enter a name and description. Under {{< ui >}}User access and authentication{{< /ui >}} > {{< ui >}}App assigned to users to access this AI Agent{{< /ui >}}, select the agent's existing SAML application. The agent then appears in the {{< ui >}}AI agents{{< /ui >}} list with a staged status.
+1. **Register the agent as an AI agent.** Navigate to {{< ui >}}Directory{{< /ui >}} > {{< ui >}}AI agents{{< /ui >}} and click {{< ui >}}Register AI agent{{< /ui >}}. Enter a name and description. Under {{< ui >}}User access and authentication{{< /ui >}} > {{< ui >}}App assigned to users to access this AI Agent{{< /ui >}}, select the agent's existing SAML application. The agent then appears in the {{< ui >}}AI agents{{< /ui >}} list with a staged status.
 
 1. **Add the agent's credentials.** On the AI agent's {{< ui >}}Client registration{{< /ui >}} tab, configure the registration method the agent uses. See [Okta's Cross-App Access documentation][1] for the available methods and the values each one needs.
 
 1. **Connect the agent to the Okta application for Datadog.** On the AI agent's {{< ui >}}Resource connections{{< /ui >}} tab, click {{< ui >}}Add resource connection{{< /ui >}} and select the Okta application for Datadog as the {{< ui >}}Application instance{{< /ui >}}.
 
-    1. Set the agent's {{< ui >}}client ID registered in Datadog{{< /ui >}} to the agent client ID from [{{< ui >}}Supported agents{{< /ui >}}](#copy-the-agent-client-id). Okta builds this field's label from the agent's name and the name of your Okta application for Datadog.
-    1. Set {{< ui >}}Scopes{{< /ui >}} to {{< ui >}}Allow any scope{{< /ui >}}. Okta does not filter scopes: Okta copies whatever the agent requests into the token, and Datadog decides what to grant. See [Control scopes](#control-scopes).
+    1. Set the agent's client ID registered in Datadog to the value from the [Copy the agent client ID](#copy-the-agent-client-id) section. Okta builds this field's label from the agent's name and the name of your Okta application for Datadog.
+    1. Set {{< ui >}}Scopes{{< /ui >}} to {{< ui >}}Allow any scope{{< /ui >}}. Okta does not filter scopes: Okta copies whatever the agent requests into the token, and Datadog decides what to grant. See the [Control scopes](#control-scopes) section.
     1. Click {{< ui >}}Add{{< /ui >}}.
 
     <div class="alert alert-warning">Do not use {{< ui >}}Allow specific scopes{{< /ui >}}. Okta rejects any token request that contains a scope outside the list, so the integration fails with an error instead of falling back to narrower access.</div>
 
 1. **Activate the agent.** On the AI agent page, select {{< ui >}}Activate{{< /ui >}} from the {{< ui >}}Actions{{< /ui >}} menu and wait for Okta to confirm.
 
-1. **Add the Okta issuer URL to Datadog.** See [Add trusted issuers](#add-trusted-issuers).
+1. **Add the Okta issuer URL to Datadog.** See the [Add trusted issuers](#add-trusted-issuers) section.
 
 1. **Add Datadog as a connector in the agent.** The steps depend on the agent. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}. Find **Datadog** in the directory, enable the connector, and complete the sign-in flow. Use the Datadog connector from the directory, not a custom connector.
 
@@ -198,7 +198,7 @@ Complete the following steps in the Okta Admin Console as a Super Administrator.
 
 - If token exchange fails while every value looks correct, confirm that the agent's credentials are active on the {{< ui >}}Client registration{{< /ui >}} tab. Okta issues no token until they are, and this is the most common cause of a failed first setup.
 - If Okta rejects the token request with a scope error, confirm that {{< ui >}}Scopes{{< /ui >}} is set to {{< ui >}}Allow any scope{{< /ui >}} rather than a list of scopes.
-- If Okta warns that the agent uses an outdated method for user sign-on, the agent was configured before Okta reorganized the {{< ui >}}Delegations{{< /ui >}} tab into {{< ui >}}User access{{< /ui >}} and {{< ui >}}Machine access{{< /ui >}}. See [Okta's guidance on configuring AI agent-to-app with XAA][2]. An agent with a single SAML link keeps working without changes.
+- If Okta warns that the agent uses an outdated method for user sign-on, the agent was configured before Okta reorganized the Delegations tab into {{< ui >}}User access{{< /ui >}} and {{< ui >}}Machine access{{< /ui >}}. See [Okta's guidance on configuring AI agent-to-app with XAA][2]. An agent with a single SAML link keeps working without changes.
 - Okta limits XAA within Single Sign-On to 250 ID-JAG tokens per user, per resource app, per month. Contact your Okta account team if your usage exceeds this limit.
 - If a user signed in before you enabled Cross-App Access, have them sign out of the agent and sign back in. Sessions established earlier lack the identity token the agent needs.
 
@@ -216,7 +216,7 @@ Use Claude as the issuer (Claude Auto-Connect) when you manage the Datadog conne
 | Value                     | Direction         | Where you enter it                                                                                                                  |
 | ------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Datadog organization UUID | Datadog to Claude | Datadog connector, {{< ui >}}Managed authorization{{< /ui >}} > {{< ui >}}Claude-issued{{< /ui >}} > {{< ui >}}Tenant ID{{< /ui >}} |
-| Claude issuer URL         | Claude to Datadog | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}}               |
+| Claude issuer URL         | Claude to Datadog | See the [Add trusted issuers](#add-trusted-issuers) section                                                                         |
 
 Claude does not need the agent client ID.
 
@@ -229,8 +229,8 @@ Complete the following steps in Claude as an admin.
 1. In Claude, navigate to [{{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Connectors{{< /ui >}}][2] and select **Datadog**.
 1. On the {{< ui >}}Configuration{{< /ui >}} tab, click {{< ui >}}Set up{{< /ui >}} next to {{< ui >}}Managed authorization{{< /ui >}}.
 1. In the {{< ui >}}Connect{{< /ui >}} step, under {{< ui >}}Identity source{{< /ui >}}, select {{< ui >}}Claude-issued{{< /ui >}}.
-1. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter your [Datadog organization UUID](#copy-your-organization-uuid).
-1. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Issuer URLs{{< /ui >}} list in Datadog. See [Add trusted issuers](#add-trusted-issuers).
+1. In the {{< ui >}}Tenant ID{{< /ui >}} field, enter the value from the [Copy your organization UUID](#copy-your-organization-uuid) section.
+1. Copy the {{< ui >}}Issuer URL{{< /ui >}} shown under {{< ui >}}Claude-issued{{< /ui >}}, then add it to the {{< ui >}}Issuer URLs{{< /ui >}} list in Datadog. See the [Add trusted issuers](#add-trusted-issuers) section.
 1. Click {{< ui >}}Run test{{< /ui >}} and confirm that every step passes.
 1. In the {{< ui >}}Roles{{< /ui >}} step, select who receives the Datadog connector. To pilot with one team, select only that team's custom role and leave the built-in roles cleared.
 1. In the {{< ui >}}Scopes{{< /ui >}} step, select the Datadog scopes Claude can request.
@@ -238,7 +238,7 @@ Complete the following steps in Claude as an admin.
 
 Users in the selected roles receive the Datadog connector the first time they sign in to Claude.
 
-The scopes you select in the {{< ui >}}Scopes{{< /ui >}} step limit what Claude requests. Datadog then grants only the requested scopes that are also allowed in Datadog, and drops any other requested scope without failing the request. See [Control scopes](#control-scopes).
+The scopes you select in the {{< ui >}}Scopes{{< /ui >}} step limit what Claude requests. Datadog then grants only the requested scopes that are also allowed in Datadog, and drops any other requested scope without failing the request. See the [Control scopes](#control-scopes) section.
 
 #### Troubleshooting
 
@@ -260,7 +260,7 @@ A custom issuer is an identity provider, other than Okta and Claude, that issues
 | ------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------- |
 | Datadog organization UUID | Datadog to issuer | The `aud_tenant` claim of the ID-JAG                                                                                  |
 | Agent client ID           | Datadog to issuer | The `client_id` claim of the ID-JAG                                                                                   |
-| Custom issuer URL         | Issuer to Datadog | {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Cross-App Access{{< /ui >}} > {{< ui >}}Issuer URLs{{< /ui >}} |
+| Custom issuer URL         | Issuer to Datadog | See the [Add trusted issuers](#add-trusted-issuers) section                                                            |
 
 The custom issuer URL is the `issuer` value from your issuer's `/.well-known/openid-configuration` document, entered character for character, including any path or trailing slash. Datadog rejects hostnames that belong to Datadog, internal-only names such as `.internal` or `.local`, and shared issuers that many unrelated tenants sign with, such as `https://accounts.google.com`.
 
@@ -272,8 +272,8 @@ Configure your issuer to issue ID-JAGs for Datadog that meet these requirements:
 
 - **Discovery**: The issuer publishes `/.well-known/openid-configuration` under the issuer URL. Its `issuer` value matches the issuer URL you added in Datadog, and its `jwks_uri` is on the same host as the issuer. Datadog must be able to reach both over the public internet. Publish a signing key at the `jwks_uri` before you sign any token with it.
 - **Signature**: The token's `typ` header is `oauth-id-jag+jwt`. The issuer signs the token with an asymmetric algorithm (RSA with a 2048-bit to 4096-bit key, ECDSA, or EdDSA) using a key it publishes at the `jwks_uri`. Include a `kid` header that matches the key.
-- **Audience**: The `aud` claim is the Datadog authorization server URL for your Datadog site, {{< region-param key="mcp_xaa_issuer_url" code="true" >}}, and `aud_tenant` is your [Datadog organization UUID](#copy-your-organization-uuid).
-- **Client**: The `client_id` claim is the agent client ID from the [{{< ui >}}Supported agents{{< /ui >}}](#copy-the-agent-client-id) table.
+- **Audience**: The `aud` claim is the Datadog authorization server URL for your Datadog site, {{< region-param key="mcp_xaa_issuer_url" code="true" >}}. The `aud_tenant` claim is the value from the [Copy your organization UUID](#copy-your-organization-uuid) section.
+- **Client**: The `client_id` claim is the agent client ID from the [Copy the agent client ID](#copy-the-agent-client-id) section.
 - **User**: The `sub_id` claim identifies the user by their SAML assertion, with `format` set to `saml-nameid`, `nameid` set to the user's Datadog handle, `nameid_format` set, and `issuer` set to the entity ID of the SAML identity provider configured for your Datadog organization.
 - **Lifetime**: The token carries `exp`, `iat`, and a unique `jti`. Datadog rejects a `jti` it has already seen.
 
