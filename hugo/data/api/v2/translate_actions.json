@@ -7468,17 +7468,17 @@
     "request_schema_description": "Request body for retrieving service repository information."
   },
   "AggregateSpans": {
-    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
+    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
     "summary": "Aggregate spans",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of aggregated spans from your organization."
   },
   "ListSpansGet": {
-    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
     "summary": "Get a list of spans"
   },
   "ListSpans": {
-    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
     "summary": "Search spans",
     "request_description": "",
     "request_schema_description": "The request for a spans list."
