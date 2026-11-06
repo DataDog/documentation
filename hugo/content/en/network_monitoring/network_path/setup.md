@@ -157,7 +157,7 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
 {{% /tab %}}
 {{< /tabs >}}
 
-After the Agent restarts, go to [Network Path][4] and create a test. The Agent should appear as eligible.
+After the Agent restarts, go to [Network Path][4] and create a test. The Agent appears as eligible. If it doesn't, confirm the Agent version, that Remote Configuration is enabled for the Agent's API key, and that `network_path.remote_config.enabled` is `true`.
 
 ### Configure tests in the Agent configuration
 
