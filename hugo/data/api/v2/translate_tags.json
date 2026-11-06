@@ -133,7 +133,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",

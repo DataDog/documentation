@@ -12428,6 +12428,110 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get a Custom OIDC provider
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-provider/
+      identifier: cloud-authentication-get-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 18
+    - name: Delete a Custom OIDC provider
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-provider/
+      identifier: cloud-authentication-delete-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 20
+    - name: Create a Custom OIDC provider
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-provider/
+      identifier: cloud-authentication-create-a-custom-oidc-provider
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthProvider
+        unstable:
+          - v2
+        order: 19
+    - name: List all Custom OIDC providers
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-providers/
+      identifier: cloud-authentication-list-all-custom-oidc-providers
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthProviders
+        unstable:
+          - v2
+        order: 17
+    - name: Get a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/get-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-get-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 22
+    - name: Delete a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/delete-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-delete-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 24
+    - name: Create a Custom OIDC persona mapping
+      url: /api/latest/cloud-authentication/create-a-custom-oidc-persona-mapping/
+      identifier: cloud-authentication-create-a-custom-oidc-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOIDCCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 23
+    - name: List all Custom OIDC persona mappings
+      url: /api/latest/cloud-authentication/list-all-custom-oidc-persona-mappings/
+      identifier: cloud-authentication-list-all-custom-oidc-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOIDCCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 21
     - name: Get a GitHub cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
