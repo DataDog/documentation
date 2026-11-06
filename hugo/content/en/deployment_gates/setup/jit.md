@@ -46,7 +46,7 @@ Top-level fields:
 
 Each rule has these fields:
 
-- `type` (required): The rule type, `monitor` or `faulty_deployment_detection`. See [Rule types](#rule-types) for what each evaluates.
+- `type` (required): The rule type, `monitor`, `faulty_deployment_detection`, or `automatic_detection`. See [Rule types](#rule-types) for what each evaluates.
 - `name` (required): A human-readable label that shows up on the [Deployment Gates Evaluations][6] page.
 - `options` (required): Rule-specific settings; see [Rule types](#rule-types).
 - `dry_run` (optional): Per-rule dry-run override. Overrides the gate-level `dry_run`.
@@ -143,6 +143,46 @@ Example inline rule:
 [1]: /watchdog/faulty_deployment_detection/
 [2]: /tracing/services/resource_page/
 [3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
+{{% /tab %}}
+{{% tab "Automatic Detection" %}}
+<div class="alert alert-info">The Automatic Detection rule is in Preview.</div>
+
+This rule type uses an AI investigation to decide whether the deployed version introduced a regression. It compares the deployed version with previous versions of the same service and looks for signals such as:
+
+- New errors and error rate increases detected by [Watchdog][1].
+- Containers of the service in `CrashLoopBackOff` state.
+
+When a signal is found, the rule analyzes the code changes between the previous version and the deployed version, together with the related telemetry, to determine whether the deployment caused the regression. When no signal is found, the rule passes. The rule result includes a summary of the investigation.
+
+**Requirements**:
+
+- The service is instrumented with [APM][2], and its traces contain [git metadata][3] for the deployed version and previous versions.
+- The [Source Code Integration][3] is configured for the service's repository.
+- The evaluation request includes the deployed `version`.
+
+**Options**:
+
+- `duration`: The period of time (in seconds) for which the deployed version is observed before the rule decides. Maximum is 7200 seconds (2 hours).
+
+Example inline rule:
+
+```json
+{
+  "type": "automatic_detection",
+  "name": "Automatic Detection",
+  "options": {
+    "duration": 900
+  }
+}
+```
+
+**Notes**:
+- If the deployed version has no git metadata in its traces, or the service has no previous version to compare against, the rule passes without running an analysis.
+- If the version is missing from the request, the deployed version cannot be found in recent APM deployments, or the Source Code Integration is not configured, the rule fails.
+
+[1]: /watchdog/
+[2]: /tracing/
+[3]: /integrations/guide/source-code-integration/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -329,7 +369,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Required for APM Faulty Deployment Detection rules
+              - name: version #Required for APM Faulty Deployment Detection and Automatic Detection rules
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -576,7 +616,7 @@ done
 
 The script:
 
-- Receives three inputs: `service`, `environment`, and `version`. `version` is required if one or more APM Faulty Deployment Detection rules are evaluated.
+- Receives three inputs: `service`, `environment`, and `version`. `version` is required if one or more APM Faulty Deployment Detection or Automatic Detection rules are evaluated.
 - Sends a request to start the evaluation and records the `evaluation_id`. Handles HTTP response codes:
   - 5xx: server error, retries with delay.
   - 4xx: client error, evaluation fails.

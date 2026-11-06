@@ -19,7 +19,7 @@ further_reading:
 Deployment Gates have two main components:
 
 - A **Gate** is defined for a service and environment (and optionally an identifier), and evaluates one or more rules to decide whether a deployment should proceed.
-- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors or running APM Faulty Deployment Detection analysis on the deployed version.
+- A **Rule** is a type of evaluation performed as part of a gate, such as checking the status of a set of monitors, running APM Faulty Deployment Detection analysis, or running an Automatic Detection investigation on the deployed version.
 
 Gate evaluations are asynchronous — the API returns immediately with an evaluation ID, and the result resolves to `pass` or `fail` over time as the rules run.
 
