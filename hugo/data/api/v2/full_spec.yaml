@@ -230863,6 +230863,10 @@ paths:
         - RUM Remote Config
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -233391,6 +233395,11 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+          - product_analytics_apps_write
   /api/v2/rum/applications/{app_id}/retention_filters:
     get:
       description: Get the list of RUM retention filters for a RUM application.
@@ -233489,6 +233498,11 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+          - product_analytics_apps_write
   /api/v2/rum/applications/{app_id}/retention_filters/exclusion:
     get:
       description: |-
@@ -233597,6 +233611,10 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
   /api/v2/rum/applications/{app_id}/retention_filters/exclusion/{ef_id}:
     delete:
       description: |-
@@ -233622,6 +233640,10 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
     get:
       description: Get a single exclusion filter for a RUM application.
       operationId: GetExclusionFilter
@@ -233729,6 +233751,10 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
   /api/v2/rum/applications/{app_id}/retention_filters/permanent:
     get:
       description: |-
@@ -233893,6 +233919,10 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
   /api/v2/rum/applications/{app_id}/retention_filters/{rf_id}:
     delete:
       description: Delete a RUM retention filter for a RUM application.
@@ -233913,6 +233943,11 @@ paths:
       tags:
         - Rum Retention Filters
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+          - product_analytics_apps_write
     get:
       description: Get a RUM retention filter for a RUM application.
       operationId: GetRetentionFilter
@@ -234020,6 +234055,11 @@ paths:
         - Rum Retention Filters
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_retention_filters_write
+          - product_analytics_apps_write
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -234266,6 +234306,10 @@ paths:
         - RUM Config
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -234322,6 +234366,10 @@ paths:
         - RUM Config
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -234461,6 +234509,10 @@ paths:
         - Rum Metrics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_generate_metrics
   /api/v2/rum/config/metrics/{metric_id}:
     delete:
       description: |-
@@ -234482,6 +234534,10 @@ paths:
       tags:
         - Rum Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_generate_metrics
     get:
       description: |-
         Get a specific RUM-based metric from your organization.
@@ -234611,6 +234667,10 @@ paths:
         - Rum Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_generate_metrics
   /api/v2/rum/config/retention-quota/{scope_type}/{scope_id}:
     delete:
       description: Delete the RUM retention quota configuration for a given scope.
@@ -234911,6 +234971,10 @@ paths:
         - Rum Teams Ownership
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -235007,6 +235071,10 @@ paths:
         - Rum Teams Ownership
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -235029,6 +235097,10 @@ paths:
       tags:
         - Rum Teams Ownership
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -235377,6 +235449,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/operations/by-name/{name}:
     get:
       description: Retrieve a specific RUM operation by its unique name.
@@ -235859,6 +235935,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
     get:
       description: Retrieve a specific RUM operation by its unique identifier.
       operationId: GetRUMOperation
@@ -236037,6 +236117,10 @@ paths:
       tags:
         - RUM Operations
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
   /api/v2/rum/query/insight/aggregated_long_tasks:
     post:
       description: |-
@@ -236336,6 +236420,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
   /api/v2/rum/replay/playlists/{playlist_id}:
     delete:
       description: Delete a playlist.
@@ -236362,6 +236450,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
     get:
       description: Get a playlist.
       operationId: GetRumReplayPlaylist
@@ -236457,6 +236549,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
   /api/v2/rum/replay/playlists/{playlist_id}/sessions:
     delete:
       description: Remove sessions from a playlist.
@@ -236495,6 +236591,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
     get:
       description: List sessions in a playlist.
       operationId: ListRumReplayPlaylistSessions
@@ -236583,6 +236683,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
     put:
       description: Add a session to a playlist.
       operationId: AddRumReplaySessionToPlaylist
@@ -236655,6 +236759,10 @@ paths:
       tags:
         - Rum Replay Playlists
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
   /api/v2/rum/replay/sessions/{session_id}/views/{view_id}/segments:
     get:
       description: Get segments for a view.
@@ -236813,6 +236921,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
     post:
       description: Record a session watch.
       operationId: CreateRumReplaySessionWatch
@@ -236866,6 +236978,10 @@ paths:
       tags:
         - Rum Replay Viewership
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_playlist_write
   /api/v2/rum/replay/viewership-history/sessions:
     get:
       description: List watched sessions.
