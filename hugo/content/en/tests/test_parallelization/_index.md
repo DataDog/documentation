@@ -25,11 +25,9 @@ Test Parallelization is supported for the following languages and frameworks:
 | -------- | ---------- | ----------------------- |
 | Ruby     | RSpec, Minitest | `datadog-ci` gem `1.42.0` or later |
 | Python   | pytest | `ddtrace` package `4.11.0` or later |
-| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest, WebdriverIO | `dd-trace` package `5.125.0` or later for `v5` and `6.14.0` or later for `v6` |
+| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest, WebdriverIO | `dd-trace` package `6.14.0` or later |
 
-For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13.
-
-[WebdriverIO](/tests/test_parallelization/setup/?prog_lang=javascript&platform=webdriverio#webdriverio) requires version 9 or later with the local runner and Mocha or Jasmine.
+[WebdriverIO](/tests/test_parallelization/setup/?prog_lang=javascript&platform=webdriverio#webdriverio) requires the local runner with Mocha or Jasmine.
 
 ## How it works
 
