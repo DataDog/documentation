@@ -16,3 +16,18 @@ entries:
       - GetMonitorNotificationRules
       - UpdateMonitorNotificationRule
     title: Add rule_options to Monitor Notification Rule
+  - change_type: modified
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41487
+    operations:
+      - CreateMonitor
+      - GetMonitor
+      - ListMonitors
+      - MuteAllMonitors
+      - MuteMonitor
+      - UnmuteMonitor
+      - UpdateMonitor
+      - ValidateExistingMonitor
+      - ValidateMonitor
+    title: Add aastra job status and job duration fields to data-jobs monitor 
+      queries
