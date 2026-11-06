@@ -137,7 +137,7 @@ To update the SDK versions:
 
 Instrumentation rules let you control which processes SSI automatically instruments on Linux hosts. Each rule matches process attributes, then allows or blocks instrumentation for matching processes. You can deploy a rule to all eligible hosts, or scope it to one or more [host groups](#create-host-groups) to limit where it applies.
 
-A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][24] enabled. Datadog delivers rules to eligible hosts through Remote Configuration.
+A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][24] enabled.
 
 To create and manage instrumentation rules and host groups, you need the **APM Workload Selection Write** [permission][25].
 
@@ -209,9 +209,9 @@ To apply rules manually instead, click {{< ui >}}Export{{< /ui >}} above the rul
 
 For each process, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
 
-1. Rules from the host's groups, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules from the groups that the process's host belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
 1. Rules that target {{< ui >}}All eligible hosts{{< /ui >}}. These rules apply to every eligible host, including hosts in host groups.
-1. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+1. The [default behavior](#set-the-default-behavior), if no rule matches.
 
 #### Define rule conditions
 

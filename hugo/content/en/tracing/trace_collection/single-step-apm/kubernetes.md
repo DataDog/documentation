@@ -354,7 +354,7 @@ By default, SSI instruments all services in all namespaces in your cluster. To r
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Each instrumentation rule matches namespace or pod attributes. You can deploy a rule to all eligible clusters, or scope it to one or more cluster groups to limit where it applies.
+Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more cluster groups to limit where it applies.
 
 A cluster is eligible for instrumentation rules when it runs Datadog Cluster Agent v7.84.2 or later with [Remote Configuration][101] enabled. Datadog delivers rules to eligible clusters through Remote Configuration.
 
@@ -423,9 +423,9 @@ After the rules are deployed, restart the affected workloads for the changes to 
 
 For each pod, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
 
-1. Rules from the cluster's groups, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
 1. Rules that target {{< ui >}}All clusters{{< /ui >}}. These rules apply to every eligible cluster, including clusters in cluster groups.
-1. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+1. The [default behavior](#set-the-default-behavior), if no rule matches.
 
 #### Supported Kubernetes attributes
 
