@@ -8,9 +8,6 @@ further_reading:
   - link: '/getting_started/containers/datadog_operator'
     tag: 'guide'
     text: 'Getting Started with the Datadog Operator'
-  - link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
-    tag: "Blog"
-    text: "Manage Kubernetes observability with DatadogInstrumentation"
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: "Source Code"
     text: 'Datadog Operator: Advanced Installation'

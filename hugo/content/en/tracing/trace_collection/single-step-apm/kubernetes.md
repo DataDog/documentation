@@ -18,9 +18,6 @@ further_reading:
   - link: "https://learn.datadoghq.com/courses/configuring-ssi-k8s"
     tag: "Learning Center"
     text: "Configuring Single Step Instrumentation on Kubernetes"
-  - link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
-    tag: "Blog"
-    text: "Manage Kubernetes observability with DatadogInstrumentation"
 
 ---
 

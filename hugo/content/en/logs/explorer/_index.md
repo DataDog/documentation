@@ -28,9 +28,6 @@ further_reading:
     - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
       tag: Blog
       text: Accelerate investigations with AI-powered log parsing
-    - link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
-      tag: "Blog"
-      text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 
 ---
 

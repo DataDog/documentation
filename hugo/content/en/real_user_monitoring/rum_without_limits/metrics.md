@@ -14,9 +14,6 @@ further_reading:
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices
-  - link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
-    tag: "Blog"
-    text: "Diagnose frontend performance issues with RUM Profiling"
 ---
 ## Overview
 

@@ -1,9 +1,5 @@
 ---
 title: Scheduled CSV Reports
-further_reading:
-- link: "https://www.datadoghq.com/blog/migrate-queries-alerts-dashboards-to-datadog/"
-  tag: "Blog"
-  text: "Migrate Splunk queries, alerts, and dashboards to Datadog"
 ---
 
 ## Overview
@@ -61,7 +57,3 @@ After a report is created, you can subscribe, unsubscribe, edit a schedule, and 
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /logs/explorer/saved_views/#saved-views
 [7]: /integrations/microsoft_teams/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

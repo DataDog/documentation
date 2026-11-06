@@ -9,9 +9,6 @@ further_reading:
     - link: '/agent/kubernetes/configuration'
       tag: 'Documentation'
       text: 'Further Configure the Datadog Agent on Kubernetes'
-    - link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
-      tag: "Blog"
-      text: "Manage Kubernetes observability with DatadogInstrumentation"
     - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options'
       tag: "Source Code"
       text: 'Datadog Helm chart - All configuration options'

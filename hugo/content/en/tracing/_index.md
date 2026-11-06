@@ -2,6 +2,9 @@
 title: APM
 description: Instrument your code to improve performance
 further_reading:
+  - link: "https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/"
+    tag: "Architecture Center"
+    text: "Observability in Event-Driven Architectures"
   - link: "https://learn.datadoghq.com/courses/getting-started-apm"
     tag: "Learning Center"
     text: "Getting Started with APM Metrics and Traces"
@@ -26,24 +29,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/dbm-supabase/"
     tag: "Blog"
     text: "Monitor and optimize Supabase query performance with Datadog Database Monitoring"
-  - link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
-    tag: "Blog"
-    text: "Monitor Oracle AI Database across clouds with Datadog"
-  - link: "https://www.datadoghq.com/blog/serverless-ai-agents/"
-    tag: "Blog"
-    text: "Default to serverless for AI agents, then let production data decide what moves"
-  - link: "https://www.datadoghq.com/blog/datadog-electron-sdk/"
-    tag: "Blog"
-    text: "Extend RUM to Electron’s main process with the Datadog Electron SDK"
-  - link: "https://www.datadoghq.com/blog/highlights-from-oracle-ai-world-2026/"
-    tag: "Blog"
-    text: "Highlights from Oracle AI World 2026"
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
-  - link: "https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/"
-    tag: "Architecture Center"
-    text: "Observability in Event-Driven Architectures"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology

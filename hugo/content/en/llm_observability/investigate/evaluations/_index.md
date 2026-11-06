@@ -11,9 +11,6 @@ further_reading:
   - link: https://www.datadoghq.com/blog/llm-prompt-tracking
     tag: Blog
     text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
-  - link: "https://www.datadoghq.com/blog/online-experiments-agent-observability/"
-    tag: "Blog"
-    text: "Compare AI agent changes with Online Experiments in Agent Observability"
 
 ---
 
