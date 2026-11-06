@@ -3121,11 +3121,16 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
+    - name: Build and Develop Apps
+      url: actions/datadog_apps/build/
+      parent: datadog_apps
+      identifier: datadog_apps_build
+      weight: 1
     - name: Embed Apps
       url: actions/datadog_apps/embed_apps/
       parent: datadog_apps
       identifier: datadog_apps_embed_apps
-      weight: 1
+      weight: 2
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
