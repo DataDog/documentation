@@ -627,6 +627,10 @@ Failed Connections allows collection and reporting of TCP failures including [re
 
 {{< img src="network_performance_monitoring/setup/cnm_tcp_failures_toggle.png" alt="Screenshot of the CNM customize menu, highlighting the Failures toggle" style="width:50%;">}}
 
+### Basic dynamic tests
+
+Starting with Agent `v7.86`, hosts with CNM enabled run [Network Path basic dynamic tests][16] by default. Every hour, each Agent tests up to five of its highest-traffic paths, at no additional cost. To disable these tests, see [Disable basic dynamic tests][17].
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -645,3 +649,5 @@ Failed Connections allows collection and reporting of TCP failures including [re
 [13]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
 [14]: /network_monitoring/cloud_network_monitoring/network_analytics/?tab=loadbalancers#tcp
 [15]: https://app.datadoghq.com/network
+[16]: /network_monitoring/network_path/setup/#basic-dynamic-tests
+[17]: /network_monitoring/network_path/setup/#disable-basic-dynamic-tests
