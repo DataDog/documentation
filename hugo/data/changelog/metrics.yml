@@ -143,3 +143,11 @@ entries:
       - ListVolumesByMetricName
     title: Point metrics API docs to the bulk list endpoint and fix parameter 
       docs
+  - change_type: modified
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41489
+    operations:
+      - CreateTagIndexingRule
+      - ReorderTagIndexingRules
+      - UpdateTagIndexingRule
+    title: Document tag indexing rule limits
