@@ -6738,6 +6738,19 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Get a usage quota
+      url: /api/latest/usage-metering/get-a-usage-quota/
+      identifier: usage-metering-get-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetQuota
+        unstable:
+          - v2
+        order: 27
     - name: Delete a usage quota
       url: /api/latest/usage-metering/delete-a-usage-quota/
       identifier: usage-metering-delete-a-usage-quota
