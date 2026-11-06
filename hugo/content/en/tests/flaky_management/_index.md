@@ -39,6 +39,12 @@ Use the state drop-down to change how a flaky test is handled in your CI pipelin
 
 <div class="alert alert-info">State actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
+## Control automation with code annotations
+
+Use code annotations to protect individual tests from Datadog quarantine and disabling, or exclude them from automatic retries. Explicit framework retries remain available.
+
+For supported languages, examples, and version requirements, see [Control Test Automation with Code Annotations][22].
+
 ## Configure policies to automate the flaky test lifecycle
 
 Configure automated Flaky Test Policies to govern how flaky tests are handled in each repository. For example, a test that flakes in the default branch can automatically be quarantined, and later disabled if it remains unfixed after 30 days.
@@ -306,3 +312,4 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [19]: /tests/explorer/
 [20]: https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [21]: /tests/setup/junit_xml/#adding-code-owners
+[22]: /tests/guides/test_automation_exclusions/

@@ -37,6 +37,10 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 You can choose to block the merge of the feature branch with a [PR Gate][4]. For more information, see the [PR Gates documentation][5].
 
+## Exclude individual tests from retries
+
+Use a code annotation to exclude individual tests from Early Flake Detection, Auto Test Retries, and Attempt to Fix retries. Explicit retries configured in the test framework remain available. See [Control Test Automation with Code Annotations][10] for examples and version requirements.
+
 ## Setup
 
 Before implementing Early Flake Detection, you must configure [Test Optimization][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
@@ -160,3 +164,4 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /tests/explorer/
 [9]: /help/
+[10]: /tests/guides/test_automation_exclusions/
