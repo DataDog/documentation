@@ -1,0 +1,15 @@
+entries:
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41046
+    operations:
+      - CreateRetentionFilter
+      - DeleteRetentionFilter
+      - GetPermanentRetentionFilter
+      - GetRetentionFilter
+      - ListPermanentRetentionFilters
+      - ListRetentionFilters
+      - UpdatePermanentRetentionFilter
+      - UpdateRetentionFilter
+    title: Align RUM operations, retention filters and SDK config spec with 
+      responses
