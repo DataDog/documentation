@@ -53,7 +53,7 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
 
 - Agent `v7.83.2+` is installed.
 - [Remote Configuration][17] is enabled for your organization and for the Agent's API key.
-- You (the person creating tests) need a Datadog role with the **Network Path Remote Configuration Write** (`network_path_config_write`) permission, which lets you create and update Network Path configurations.
+- Your Datadog role has the **Network Path Remote Configuration Write** (`network_path_config_settings_write`) permission.
 - For dynamic tests: [Cloud Network Monitoring][1] is enabled.
 
 #### Configure the Agent
@@ -68,7 +68,7 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
      enabled: true
    ```
 
-   On Agent `v7.84+`, the Agent enables the traceroute module automatically for dynamic tests, so this step is only required for scheduled tests.
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
 
 2. Enable Network Path Remote Configuration in `/etc/datadog-agent/datadog.yaml`:
 
@@ -100,7 +100,7 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
      enabled: true
    ```
 
-   On Agent `v7.84+`, the Agent enables the traceroute module automatically for dynamic tests, so this step is only required for scheduled tests.
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
 
 2. Enable Network Path Remote Configuration in `/opt/datadog-agent/etc/datadog.yaml`:
 
@@ -132,7 +132,7 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
      enabled: true
    ```
 
-   On Agent `v7.84+`, the Agent enables the traceroute module automatically for dynamic tests, so this step is only required for scheduled tests.
+   On Agent `v7.84+`, skip this step if you create only dynamic tests. The Agent enables the traceroute module automatically for them.
 
 2. Enable Network Path Remote Configuration in `%ProgramData%\Datadog\datadog.yaml`:
 

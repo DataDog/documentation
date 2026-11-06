@@ -35,7 +35,7 @@ The following diagram depicts the typical flow of a network path from a source (
 
 You can configure Network Path tests in two ways:
 
-- **[In the UI][12]** (Preview): After a one-time setup on each Agent you want to target, create and update scheduled tests and dynamic test filters from the [Network Path][1] UI. Datadog delivers them to your Agents through Remote Configuration.
+- **In the UI** (Preview): Create and update scheduled tests and dynamic test filters from the [Network Path][1] UI. Each Agent you target needs a [one-time setup][12] first. Datadog delivers the tests to your Agents through Remote Configuration.
 - **In the Agent configuration files**: Use one or more of the following collection methods:
   - **[Scheduled tests][6]**: Monitor specific network paths by defining source-destination pairs in the Agent configuration file. Use scheduled tests to continuously monitor a known set of endpoints, such as critical APIs or partner services.
   - **[Dynamic tests][7]**: Automatically discover and monitor network paths based on actual network traffic observed by [Cloud Network Monitoring][8]. Use dynamic tests for broad visibility without manually listing every destination.

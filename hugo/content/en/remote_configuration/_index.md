@@ -80,7 +80,7 @@ Workload Protection
 : - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 : - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
-[Network Path][49]
+Network Path
 : - (Preview) Create and update Network Path scheduled tests and dynamic test filters from the Datadog UI, without restarting the Agent. See [Create tests in the UI][49].
 
 Observability Pipelines
