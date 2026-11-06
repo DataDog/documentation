@@ -32,7 +32,7 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 4. (Recommended) [Enable group metrics in AWS][3], including `GroupInServiceInstances`, so that estimates can use running-instance history.
 5. (Optional) [Set up Cloud Cost Management for AWS][8] to base current cost estimates on your actual AWS costs. Without cost data for an ASG, the assessment uses public On-Demand prices.
 
-The assessment doesn't require `AWS/EC2` metrics.
+The assessment does not require `AWS/EC2` metrics.
 
 Estimates are most representative with a full 30 days of history. If instance history is missing, estimates use the ASG's configured desired capacity when possible.
 
@@ -44,7 +44,7 @@ Estimates are most representative with a full 30 days of history. If instance hi
 4. Review the estimated monthly savings and **Spot potential** for each group.
 5. Select an ASG to open its details.
 
-The assessment covers running groups configured to use only On-Demand Instances. The following groups don't appear in new assessments, so the table isn't a complete inventory of your ASGs:
+The assessment covers running groups configured to use only On-Demand Instances. The results aren't a complete inventory of your ASGs. The following groups don't appear in the assessment:
 
 - Groups already configured for Spot
 - Groups that use weighted capacity or attribute-based instance selection
