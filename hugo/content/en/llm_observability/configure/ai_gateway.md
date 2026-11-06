@@ -63,6 +63,9 @@ AI Gateway accepts the following Datadog credentials. The user or service accoun
 |---|---|
 | [Personal access token][4] | `Authorization: Bearer <PERSONAL_ACCESS_TOKEN>` |
 | [Service access token (SAT)][5] | `Authorization: Bearer <SERVICE_ACCESS_TOKEN>` |
+| [Personal access token][4], for coding agents signed in with a [subscription](#use-subscription-providers) | `dd-application-key: <PERSONAL_ACCESS_TOKEN>` |
+
+Coding agents signed in with a subscription send the sign-in in the `Authorization` header, so they send the personal access token in the `dd-application-key` header. Use a personal access token in this header, not an application key. You don't need an API key.
 
 For service workloads, use a service access token. Store credentials in your application's secret manager and keep them out of source control and logs.
 
@@ -203,7 +206,7 @@ Subscription providers support these coding agents:
 
 An Anthropic Console account bills API usage per token, so it is not a subscription.
 
-Just like regular API access, requests to a subscription provider need valid AI Gateway authentication. See [Authenticate requests](#authenticate-requests).
+Each person authenticates to AI Gateway with their own Datadog [personal access token][4] in the `dd-application-key` header, because the `Authorization` header carries their subscription sign-in. They don't need a Datadog API key or application key. See [Authenticate requests](#authenticate-requests).
 
 ### Create a subscription provider
 
@@ -232,18 +235,18 @@ A request for a model outside a person's access returns HTTP `403` with the `no_
 
 Each person points Claude Code to AI Gateway, then signs in with their Claude account.
 
-1. Add the following to your Claude Code user settings file, `~/.claude/settings.json`, rather than to a project settings file that you commit to source control. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and application key, and `<PROVIDER_SLUG>` with the slug of the Anthropic subscription provider.
+1. Add the following to your Claude Code user settings file, `~/.claude/settings.json`, rather than to a project settings file that you commit to source control. Replace `<PERSONAL_ACCESS_TOKEN>` with your Datadog [personal access token][4], and `<PROVIDER_SLUG>` with the slug of the Anthropic subscription provider.
 
    ```json
    {
      "env": {
        "ANTHROPIC_BASE_URL": "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai",
-       "ANTHROPIC_CUSTOM_HEADERS": "dd-api-key: <DATADOG_API_KEY>\ndd-application-key: <DATADOG_APP_KEY>\nx-ai-gateway-provider: <PROVIDER_SLUG>"
+       "ANTHROPIC_CUSTOM_HEADERS": "dd-application-key: <PERSONAL_ACCESS_TOKEN>\nx-ai-gateway-provider: <PROVIDER_SLUG>"
      }
    }
    ```
 
-   Claude Code sends your subscription sign-in in the `Authorization` header, so the Datadog keys travel in their own headers. AI Gateway removes them before it forwards the request to Anthropic. The `x-ai-gateway-provider` header sends every request to the subscription provider. You can also set `ANTHROPIC_BASE_URL` and `ANTHROPIC_CUSTOM_HEADERS` as environment variables, with one header per line.
+   Claude Code sends your subscription sign-in in the `Authorization` header, so your personal access token travels in the `dd-application-key` header. AI Gateway removes it before it forwards the request to Anthropic. The `x-ai-gateway-provider` header sends every request to the subscription provider. You can also set `ANTHROPIC_BASE_URL` and `ANTHROPIC_CUSTOM_HEADERS` as environment variables, with one header per line.
 
 2. Start Claude Code, run `/login`, and sign in with your Claude account, not an Anthropic Console account.
 
@@ -265,13 +268,13 @@ Each person adds AI Gateway as a model provider in Codex, then signs in with the
    base_url = "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1"
    wire_api = "responses"
    requires_openai_auth = true
-   env_http_headers = { "DD-API-KEY" = "DD_API_KEY", "DD-APPLICATION-KEY" = "DD_APP_KEY" }
+   env_http_headers = { "DD-APPLICATION-KEY" = "DD_PAT" }
    http_headers = { "x-ai-gateway-provider" = "<PROVIDER_SLUG>" }
    ```
 
-   With `requires_openai_auth = true`, Codex sends your ChatGPT sign-in. Codex reads the Datadog keys from environment variables and sends them in their own headers. AI Gateway removes them before it forwards the request.
+   With `requires_openai_auth = true`, Codex sends your ChatGPT sign-in in the `Authorization` header. Codex reads your personal access token from the `DD_PAT` environment variable and sends it in the `dd-application-key` header. AI Gateway removes it before it forwards the request.
 
-2. Set the `DD_API_KEY` and `DD_APP_KEY` environment variables to your Datadog API key and application key.
+2. Set the `DD_PAT` environment variable to your Datadog [personal access token][4].
 3. Run `codex login` and sign in with your ChatGPT account. To sign in from another device, such as your phone, run `codex login --device-auth`.
 
 ### Verify subscription traffic
@@ -289,19 +292,18 @@ Each person adds AI Gateway as a model provider in Codex, then signs in with the
 - **Rate limits**: A [rate limit](#set-rate-limits) that matches subscription traffic counts it together with other matching traffic. In Enforce mode, the rate limit rejects subscription requests over the limit.
 - **Routing rules**: A [routing rule](#route-requests-with-routing-rules) cannot include a subscription provider, and a destination for a model served by any provider skips subscription providers. People pin the provider with the `x-ai-gateway-provider` header instead.
 - **Request formats**: A subscription provider serves only its vendor's coding agent API. An Anthropic subscription provider serves Anthropic Messages, including token counting. An OpenAI subscription provider serves OpenAI Responses. A request in another format returns HTTP `400` with the `unsupported_operation` error code. AI Gateway never sends a subscription sign-in to another vendor. Requests to an OpenAI subscription provider go to ChatGPT, not to the OpenAI API.
-- **Credentials**: AI Gateway does not check which credential a client sends to a subscription provider. If a client sends an API key, such as `ANTHROPIC_API_KEY`, the vendor bills that key per token.
+- **Credentials**: AI Gateway does not check which vendor credential a client sends to a subscription provider. If a client sends an API key, such as `ANTHROPIC_API_KEY`, the vendor bills that key per token.
 - **Activity**: On the [{{< ui >}}Overview{{< /ui >}}][3] page, subscription traffic appears with all other traffic. Filter by the subscription provider to see it separately. A vendor `401` or `429` response, such as for an expired sign-in or a reached plan limit, counts as a provider error.
 
 ### Troubleshoot subscription providers
 
-To check your setup without using a subscription, send a request without a sign-in to an Anthropic subscription provider. The request checks the Datadog keys, the provider slug, and access. Replace `<MODEL_ID>` with a Claude model ID that your access allows.
+To check your setup without using a subscription, send a request without a sign-in to an Anthropic subscription provider. The request checks your personal access token, the provider slug, and access. Replace `<MODEL_ID>` with a Claude model ID that your access allows.
 
 ```shell
 curl -X POST "https://ai-gateway.{{< region-param key="dd_site" code="true" >}}/ai/v1/messages" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \
-  -H "DD-API-KEY: <DATADOG_API_KEY>" \
-  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+  -H "dd-application-key: <PERSONAL_ACCESS_TOKEN>" \
   -H "x-ai-gateway-provider: <PROVIDER_SLUG>" \
   -d '{"model": "<MODEL_ID>", "max_tokens": 16, "messages": [{"role": "user", "content": "Woof!"}]}'
 ```
@@ -461,6 +463,7 @@ Before you send sensitive prompts or responses, check the mode that applies to t
 - Confirm that the user or service account and the credential scope allow `ai_gateway_usage`.
 - Confirm that an access policy or the default policy allows that user or service account to use the requested model or routing rule.
 - Send a personal access token or a service access token in the `Authorization: Bearer` header.
+- For a coding agent signed in with a [subscription](#use-subscription-providers), send a personal access token, not an application key, in the `dd-application-key` header.
 
 ### 402 responses
 
