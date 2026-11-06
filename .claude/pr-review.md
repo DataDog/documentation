@@ -18,7 +18,7 @@ Developers and DevOps engineers implementing observability solutions. They're te
 - Are code examples complete and copy-pasteable?
 - Are prerequisites explicit and linked where needed?
 - Are there gaps that would block a user from succeeding?
-- Is technical information accurate?
+- Does the text agree with itself and with the code examples on the page? You can't run code, so don't guess whether a command or setting works. If something looks wrong, ask the author to confirm it.
 
 ### 3. Structure & Scannability
 - Does it follow a logical progression?
@@ -31,7 +31,26 @@ Developers and DevOps engineers implementing observability solutions. They're te
 - Are `further_reading` links relevant and non-duplicative?
 - Are reference links free of duplicates or unused entries?
 - Does the title match how it's linked from other pages?
-- If the file is new and public (no `private: true`), has the page been added to the menu file (`config/_default/menus/main.en.yaml`) so it shows up in the side-nav?
+- If the file is new and public (no `private: true`), has the page been added to the menu file (`hugo/config/_default/menus/main.en.yaml`) so it shows up in the side-nav?
+
+## What to flag
+
+Flag text that does one of these:
+
+- Breaks a style rule in this file. Name the rule.
+- Would confuse, mislead, or block a reader. Say how: for example, "a reader can't tell which file this step edits."
+
+Use your judgment as an experienced technical writer for the second kind. Structure, missing steps, unclear wording, and weak headings are all fair to flag. Tie every comment to its effect on the reader.
+
+Don't rewrite text that is correct and clear only because you would phrase it differently. If you can't name the reader problem, leave the text alone.
+
+## Earlier reviews
+
+If earlier automated review comments exist for this PR, read them before you write findings.
+
+- Don't flag text that came from applying an earlier suggestion unless it breaks a style rule or introduces an error.
+- Don't repeat a finding that an earlier comment already made on the same text. The author has seen it.
+- If you think an earlier comment was wrong, say so directly in your new comment and explain why. Don't silently suggest the opposite change.
 
 ## Areas to avoid
 
@@ -129,10 +148,15 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 
 ## Review Output Format
 
+If the prompt that runs this review gives its own output format, follow that format instead of the posting steps below. The rules for comment content still apply.
+
 **Use inline comments for all feedback:**
 - For each specific issue, suggestion, or style violation, create an inline comment on the exact line using the `mcp__github_inline_comment__create_inline_comment` tool
 - Always include the file path and line number in your comment (e.g., `path/to/file.md:42`) so the location is easy to spot
-- Include the issue type in your comment: "**Issue**:", "**Suggestion**:", or "**Style**:"
+- Start each comment with its type:
+  - "**Issue**:" for problems that would block or mislead a reader, or break the build.
+  - "**Suggestion**:" for judgment calls that would make the page clearer.
+  - "**Style**:" for style rule violations. Name the rule.
 - **When you have a specific fix to propose, use GitHub's suggestion format so the author can apply it with one click:**
   ```suggestion
   corrected text or code here
@@ -147,7 +171,7 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 ## Review Principles
 
 - Be direct and actionable, not pedantic
-- Distinguish between blockers and nice-to-haves
+- Distinguish between blockers and nice-to-haves with the comment types above
 - Consider the realistic user path, not just the standalone page experience
 - Focus on what helps users succeed
 - Don't nitpick formatting if the content is clear
