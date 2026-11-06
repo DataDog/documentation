@@ -141,9 +141,9 @@ The following script adds a custom attribute to a change event and adds a prefix
 
 ## Test the script
 
-Before you save the processor, you can preview what your script does to a sample event. The test first validates the script the same way as when you save the processor, then runs it on the sample event in your browser. The test shows the output only if the script passes validation.
+Before you save the processor, you can preview what your script does to a sample event. The test validates the script the same way as when you save the processor.
 
-<div class="alert alert-warning">A script that passes the test can still fail when it runs in the pipeline. Validation checks the script itself, not the values it produces for a specific event. For example, setting a value that doesn't match a field's accepted values, such as <code>.priority = 1</code>, causes a runtime error. So does a function called with <code>!</code> that fails on an event's data. When this happens, the processor doesn't apply any of the script's updates. Also, the <code>get_timezone_name</code> and <code>parse_etld</code> functions can't run in the browser. If your script uses one of these functions, the test shows a warning. The test output might also differ from what the processor produces in the pipeline.</div>
+<div class="alert alert-warning">A script that passes validation can still fail when it runs in the pipeline. For example, it can set a value that doesn't match a field's accepted values, such as <code>.priority = 1</code>. When this happens, the processor doesn't apply any of the script's updates.</div>
 
 To test the script:
 
@@ -152,9 +152,7 @@ To test the script:
     You can also use the JSON object from the {{< ui >}}Event Attributes{{< /ui >}} tab of the event side panel. For more information, see [Navigate the Explorer][5]. If your script uses `message` or `tags`, add those fields at the top level of the JSON. The side panel JSON doesn't include them.
 
 1. Click {{< ui >}}Run{{< /ui >}}.
-1. Review the results:
-    - If the script passes validation, the transformed event appears in the {{< ui >}}Output{{< /ui >}} pane. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab. Runtime errors from the sample event appear in the {{< ui >}}Errors{{< /ui >}} tab and are highlighted in the script editor.
-    - If the script fails validation, the validation errors appear in the {{< ui >}}Errors{{< /ui >}} tab, and compile errors are highlighted in the script editor. These are the same errors you get when you save the processor. No output is shown.
+1. Review the transformed event in the {{< ui >}}Output{{< /ui >}} pane. Messages from logging functions such as `log` appear in the {{< ui >}}Console{{< /ui >}} tab. Errors from validation or from running the script on the sample event appear in the {{< ui >}}Errors{{< /ui >}} tab and in the script editor.
 
 {{< img src="events/pipelines/vrl_processor_test_sample.png" alt="Testing a VRL script against a sample alert event, with the transformed event in the Output tab" style="width:80%;" >}}
 
