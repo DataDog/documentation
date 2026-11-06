@@ -67,7 +67,7 @@ window.DD_RUM.init({
 
 With these settings, all action names are replaced with `Masked Element`. Action names explicitly set with the `data-dd-action-name` attribute are still displayed, allowing you to selectively expose specific action names while keeping others masked.
 
-Setting `defaultPrivacyLevel` to `mask` is required in RUM Browser SDK v7, where the default privacy level is `mask-user-input`. In Browser SDK v5 and v6, `mask` is the default privacy level, so setting `enablePrivacyForActionName` to `true` is enough. See the [Browser SDK upgrade guide][9].
+In RUM Browser SDK v5 and v6, privacy was not enabled for action names by default. Set `enablePrivacyForActionName` to `true` to enable action name privacy on older SDKs. See the [Browser SDK upgrade guide][9].
 
 <div class="alert alert-info">If your application uses a JavaScript bundler, the <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy/">privacy plugin</a> generates an allowlist of safe strings at build time so the RUM Browser SDK can keep useful action names while masking sensitive data.</div>
 
