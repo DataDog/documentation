@@ -64,8 +64,9 @@ To use AI Costs, you must have at least one of the following supported providers
 | Amazon SageMaker | [AWS integration][2] |
 | Anthropic (Enterprise and Platform) | [SaaS integration][3] |
 | Azure Foundry (Models and Tools) | [Azure integration][18] |
+| ChatGPT Enterprise | [SaaS integration][22] |
 | Google Gemini  | [Google Cloud integration][4] |
-| OpenAI (ChatGPT Enterprise and Platform) | [SaaS integration][5] |
+| OpenAI (Platform only)     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
@@ -201,6 +202,35 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 | `metersubcategory` | Subcategory | The Azure meter subcategory of the charge. |
 
 {{% /tab %}}
+{{% tab "ChatGPT Enterprise" %}}
+
+ChatGPT Enterprise is in Preview.
+
+| Tag | Label | Description |
+|---|---|---|
+| `model_name` | Model | The model that generated the cost. |
+| `user_email` | User | The email address of the user who generated the cost. |
+| `product` | Product | The ChatGPT product that generated the cost (for example, `ChatGPT`, `codex`, or `Work`). |
+| `surface` | Surface | The ChatGPT surface where the activity happened (for example, `chatgpt`, `codex`, or `Workspace Agents`). |
+| `agent_name` | Agent | The name of the Workspace Agent that generated the cost. Available only for Workspace Agents usage. |
+| `service_tier` | Service Tier | The service tier that processed the request (for example, `standard` or `codex_fast`). |
+| `reasoning` | Reasoning | The reasoning effort of the request (for example, `low`, `medium`, or `high`). |
+
+**Additional tags**
+
+The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+
+| Tag | Description |
+|---|---|
+| `agent_id` | The unique identifier of the Workspace Agent that generated the cost. |
+| `billing_mode` | Whether the usage was priced in credits or directly in US dollars (`credits` or `usd`). |
+| `client` | The client where the activity happened (for example, `web`, `desktop_app`, or `cli`). |
+| `model` | The OpenAI model identifier (for example, `gpt-5.6-sol`). |
+| `organization_id` | The unique identifier of the OpenAI organization. |
+| `sku` | The ChatGPT billing SKU of the charge. |
+| `user_id` | The unique identifier of the user who generated the cost. |
+
+{{% /tab %}}
 {{% tab "Cursor" %}}
 
 | Tag | Label | Description |
@@ -239,38 +269,6 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-OpenAI reports a different set of tags for each plan.
-
-**ChatGPT Enterprise**
-
-ChatGPT Enterprise is in Preview.
-
-| Tag | Label | Description |
-|---|---|---|
-| `model_name` | Model | The model that generated the cost. |
-| `user_email` | User | The email address of the user who generated the cost. |
-| `product` | Product | The ChatGPT product that generated the cost (for example, `ChatGPT`, `codex`, or `Work`). |
-| `surface` | Surface | The ChatGPT surface where the activity happened (for example, `chatgpt`, `codex`, or `Workspace Agents`). |
-| `agent_name` | Agent | The name of the Workspace Agent that generated the cost. Available only for Workspace Agents usage. |
-| `service_tier` | Service Tier | The service tier that processed the request (for example, `standard` or `codex_fast`). |
-| `reasoning` | Reasoning | The reasoning effort of the request (for example, `low`, `medium`, or `high`). |
-
-**Additional ChatGPT Enterprise tags**
-
-The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
-
-| Tag | Description |
-|---|---|
-| `agent_id` | The unique identifier of the Workspace Agent that generated the cost. |
-| `billing_mode` | Whether the usage was priced in credits or directly in US dollars (`credits` or `usd`). |
-| `client` | The client where the activity happened (for example, `web`, `desktop_app`, or `cli`). |
-| `model` | The OpenAI model identifier (for example, `gpt-5.6-sol`). |
-| `organization_id` | The unique identifier of the OpenAI organization. |
-| `sku` | The ChatGPT billing SKU of the charge. |
-| `user_id` | The unique identifier of the user who generated the cost. |
-
-**OpenAI Platform**
-
 | Tag | Label | Description |
 |---|---|---|
 | `model_name` | Model | The model that generated the cost. |
@@ -278,9 +276,9 @@ The following ChatGPT Enterprise tags aren't shown on the AI cost summary page, 
 | `project` | Project | The OpenAI project that the cost belongs to. |
 | `api_key_name` | API Key Name | The name of the API key that made the request. |
 
-**Additional OpenAI Platform tags**
+**Additional tags**
 
-The following OpenAI Platform tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
+The following OpenAI tags aren't shown on the AI cost summary page, but are available for filtering and grouping across Cloud Cost Management:
 
 | Tag | Description |
 |---|---|
@@ -352,3 +350,4 @@ If your teams send LLM requests through a shared AI gateway, you can split that 
 [19]: /cloud_cost_management/setup/saas_costs/?tab=databricks#configure-your-saas-accounts
 [20]: /cloud_cost_management/ai_costs/ai_gateway_allocation
 [21]: /cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
+[22]: /cloud_cost_management/setup/saas_costs/?tab=chatgptenterprise#configure-your-saas-accounts
