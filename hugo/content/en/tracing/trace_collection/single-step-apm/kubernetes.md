@@ -358,7 +358,7 @@ Each instrumentation rule matches namespace or pod attributes. You can deploy a 
 
 A cluster is eligible for instrumentation rules when it runs Datadog Cluster Agent v7.84.2 or later with [Remote Configuration][101] enabled. Datadog delivers rules to eligible clusters through Remote Configuration.
 
-<!-- TODO: Add required permissions for creating rules and managing cluster groups (pending from engineering). -->
+To create and manage instrumentation rules and cluster groups, you need the **APM Workload Selection Write** [permission][103].
 
 To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title. Rules, cluster groups, and evaluation order for Kubernetes are managed separately from those for hosts.
 
@@ -433,6 +433,7 @@ Instrumentation rules for Kubernetes support the following attributes. For label
 
 [101]: /agent/remote_config/
 [102]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[103]: /account_management/rbac/permissions/
 
 {{% /tab %}}
 

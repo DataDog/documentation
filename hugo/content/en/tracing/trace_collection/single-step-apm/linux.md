@@ -139,7 +139,7 @@ Instrumentation rules let you control which processes SSI automatically instrume
 
 A host is eligible for instrumentation rules when it runs Agent v7.73 or later with SSI and [Remote Configuration][24] enabled. Datadog delivers rules to eligible hosts through Remote Configuration.
 
-<!-- TODO: Add required permissions for creating rules and managing host groups (pending from engineering). -->
+To create and manage instrumentation rules and host groups, you need the **APM Workload Selection Write** [permission][25].
 
 To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][20]. {{< ui >}}Hosts{{< /ui >}} is selected by default in the dropdown in the page title.
 
@@ -315,3 +315,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [22]: https://app.datadoghq.com/organization-settings/api-keys
 [23]: https://app.datadoghq.com/apm/services
 [24]: /agent/remote_config/
+[25]: /account_management/rbac/permissions/
