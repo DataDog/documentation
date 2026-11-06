@@ -5484,7 +5484,7 @@
     "summary": "List AI Gateway rate limits"
   },
   "CreateAiGatewayRateLimit": {
-    "description": "Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.",
+    "description": "Create a rate limit. All requests matching its scope share one allowance, unless a selector makes it a template, which gives each matched user, Team, or value its own allowance. Every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, tags, and selector, or when the organization already has the maximum number of rate limits.",
     "summary": "Create an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to create an AI Gateway rate limit."
@@ -5502,10 +5502,18 @@
     "summary": "Get an AI Gateway rate limit"
   },
   "UpdateAiGatewayRateLimit": {
-    "description": "Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
+    "description": "Update a rate limit. Only the attributes sent are changed, and changes never reset current usage. Scope stays editable, except on a template rate limit, whose user_id, team_id, and tags are rejected with 400. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
     "summary": "Update an AI Gateway rate limit",
     "request_description": "",
     "request_schema_description": "Request to update an AI Gateway rate limit."
+  },
+  "ListAiGatewayRateLimitInstances": {
+    "description": "List the counters of a template rate limit, one per matched user, Team, or value, with their live usage. Counters appear within a few minutes of their first request and are dropped after 30 days without one. Usage is read for counters seen in the last 20 minutes, at most 200 per request; past that, rows carry usage_known false. A rate limit with one shared allowance returns an empty list.",
+    "summary": "List AI Gateway rate limit counters"
+  },
+  "GetAiGatewayRateLimitInstancesSummary": {
+    "description": "Aggregate a template rate limit's counters, including how many there are, how many are near or at their limit, and the fullest counter's utilization. Use split_dim to aggregate only counters that match every given dimension value.",
+    "summary": "Get an AI Gateway rate limit counter summary"
   },
   "BatchRowsQuery": {
     "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
