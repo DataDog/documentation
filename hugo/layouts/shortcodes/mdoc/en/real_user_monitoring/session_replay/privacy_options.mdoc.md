@@ -133,7 +133,7 @@ Additional use cases to override the default action name include masking sensiti
 ### Mask action names
 By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes](#override-an-html-element).
 
-To keep useful action names and Session Replay text visible while masking sensitive data, use the [privacy build plugin][6]. The plugin generates an allowlist of safe, static strings at build time. With the `mask-unless-allowlisted` privacy level, the SDK displays only text that matches the allowlist.
+To keep useful action names and Session Replay text visible while masking sensitive data, use the [privacy plugin][6]. The plugin generates an allowlist of safe, static strings at build time. With the `mask-unless-allowlisted` privacy level, the SDK displays only text that matches the allowlist.
 
 {% alert level="info" %}
 Datadog is working to add more privacy features to RUM & Session Replay. Have something in mind that you would like to see? [Contact Datadog support][4].
