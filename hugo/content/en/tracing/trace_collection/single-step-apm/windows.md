@@ -167,7 +167,7 @@ The default behavior applies to processes on eligible hosts that don't match any
 
 1. On the [Instrumentation Rules][5] page, go to the {{< ui >}}Default Behavior{{< /ui >}} card and click {{< ui >}}Edit{{< /ui >}}.
 1. Select one of the following options:
-   - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them. .NET applications running outside of IIS remain blocked unless a rule allows them.
+   - {{< ui >}}Allow everything else{{< /ui >}}: Supported applications are instrumented unless a rule blocks them. The exception is .NET applications running outside of IIS, which remain blocked unless a rule allows them.
    - {{< ui >}}Block everything else{{< /ui >}}: Applications are not instrumented unless a rule allows them.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -189,7 +189,7 @@ To create a host group:
 
 Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
 
-To change the order of host groups, drag a group by its handle in the group list. Group order affects [how rules are evaluated](#how-rules-are-evaluated).
+To change the order of host groups, drag a group by its handle in the group list. Group order affects [how instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
 
 {{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}
 
@@ -204,27 +204,30 @@ To create an instrumentation rule:
 
    {{< img src="tracing/trace_collection/instrumentation-rules-create-rule.png" alt="The Create instrumentation rule window, with a condition of Language equals Python, the Allow Instrumentation action, and the Rule Impact Preview panel" style="width:100%;" >}}
 
-1. Under {{< ui >}}Set host targeting{{< /ui >}}, select {{< ui >}}All eligible hosts{{< /ui >}} or {{< ui >}}Select host groups{{< /ui >}}. If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
+1. Under {{< ui >}}Set host targeting{{< /ui >}}, select {{< ui >}}All eligible hosts{{< /ui >}} or {{< ui >}}Select host groups{{< /ui >}}.
+
+   If you select more than one group, the groups share a single rule, and editing it later updates every selected group.
 
    {{< img src="tracing/trace_collection/instrumentation-rules-host-targeting.png" alt="The Set host targeting step, with Select host groups chosen and a host group named Test selected" style="width:80%;" >}}
 
 1. Name the rule, then click {{< ui >}}Next{{< /ui >}}.
-1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How rules are evaluated](#how-rules-are-evaluated).
+1. Review the rule. Datadog adds new rules to the end of each targeted group's rule list. Optionally, under {{< ui >}}Set evaluation order{{< /ui >}}, drag rules to change their order in each group. See [How instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
 
    {{< img src="tracing/trace_collection/instrumentation-rules-review-order.png" alt="The rule review step, showing the rule summary and the evaluation order of rules in the Test host group" style="width:100%;" >}}
 
 1. Click {{< ui >}}Create Rule{{< /ui >}}.
 
-After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][5] page shows how many eligible hosts have received the current rules.
+Datadog deploys rules to eligible hosts through Remote Configuration within 50 seconds. After the rules are deployed, restart the affected services for the changes to take effect. The {{< ui >}}Deployment Status{{< /ui >}} card on the [Instrumentation Rules][5] page shows how many eligible hosts have received the current rules.
 
-Rules are applied on eligible hosts within 50 seconds of deployment. Alternatively, click {{< ui >}}Export{{< /ui >}} above the rules list to export the configuration file and apply it manually to your hosts.
+To apply rules manually instead, click {{< ui >}}Export{{< /ui >}} above the rules list to export the configuration file, then apply it to your hosts.
 
-#### How rules are evaluated
+#### How instrumentation rules are evaluated
 
-- Rules that target {{< ui >}}All eligible hosts{{< /ui >}} apply to every eligible host, including hosts in host groups.
-- For each host, Datadog combines the rules from all of the host's groups in group order, from top to bottom. Rules that target all eligible hosts are evaluated last.
-- Within a group, rules are evaluated from top to bottom, in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
-- The first rule that matches a process determines whether the process is instrumented. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
+For each process, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
+
+1. Rules from the host's groups, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
+1. Rules that target {{< ui >}}All eligible hosts{{< /ui >}}. These rules apply to every eligible host, including hosts in host groups.
+1. If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
 #### Define rule conditions
 
@@ -281,7 +284,7 @@ For example, to instrument only a checkout application and a customer portal:
 
 {{% collapse-content title="Example 3: Roll out instrumentation gradually with a host group" level="h5" %}}
 
-Block all instrumentation by default, then allow instrumentation on a small set of canary hosts first. After you validate the results, add more hosts to the group, or change the rule to target all eligible hosts.
+Block all instrumentation by default, and allow it only on a small set of canary hosts. After you validate the results, add more hosts to the group, or change the rule to target all eligible hosts.
 
 1. Set the default behavior to {{< ui >}}Block everything else{{< /ui >}}.
 1. Create a host group named <code>canary</code> and add the hosts to instrument first.
