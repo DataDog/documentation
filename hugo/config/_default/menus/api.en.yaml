@@ -7824,6 +7824,32 @@ menu:
         unstable:
           - v2
         order: 30
+    - name: Get an AI Gateway rate limit counter summary
+      url: /api/latest/ai-gateway/get-an-ai-gateway-rate-limit-counter-summary/
+      identifier: ai-gateway-get-an-ai-gateway-rate-limit-counter-summary
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAiGatewayRateLimitInstancesSummary
+        unstable:
+          - v2
+        order: 47
+    - name: List AI Gateway rate limit counters
+      url: /api/latest/ai-gateway/list-ai-gateway-rate-limit-counters/
+      identifier: ai-gateway-list-ai-gateway-rate-limit-counters
+      parent: ai-gateway
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAiGatewayRateLimitInstances
+        unstable:
+          - v2
+        order: 46
     - name: Update an AI Gateway rate limit
       url: /api/latest/ai-gateway/update-an-ai-gateway-rate-limit/
       identifier: ai-gateway-update-an-ai-gateway-rate-limit
@@ -8252,7 +8278,7 @@ menu:
           - UpdateAiGatewayDataCaptureOverride
         unstable:
           - v2
-        order: 52
+        order: 54
     - name: Delete an AI Gateway data capture override
       url: /api/latest/ai-gateway/delete-an-ai-gateway-data-capture-override/
       identifier: ai-gateway-delete-an-ai-gateway-data-capture-override
@@ -8265,7 +8291,7 @@ menu:
           - DeleteAiGatewayDataCaptureOverride
         unstable:
           - v2
-        order: 51
+        order: 53
     - name: Create an AI Gateway data capture override
       url: /api/latest/ai-gateway/create-an-ai-gateway-data-capture-override/
       identifier: ai-gateway-create-an-ai-gateway-data-capture-override
@@ -8278,7 +8304,7 @@ menu:
           - CreateAiGatewayDataCaptureOverride
         unstable:
           - v2
-        order: 50
+        order: 52
     - name: Get the AI Gateway data capture configuration
       url: /api/latest/ai-gateway/get-the-ai-gateway-data-capture-configuration/
       identifier: ai-gateway-get-the-ai-gateway-data-capture-configuration
@@ -8291,7 +8317,7 @@ menu:
           - GetAiGatewayDataCaptureConfiguration
         unstable:
           - v2
-        order: 49
+        order: 51
     - name: Get an AI Gateway budget instance summary
       url: /api/latest/ai-gateway/get-an-ai-gateway-budget-instance-summary/
       identifier: ai-gateway-get-an-ai-gateway-budget-instance-summary
@@ -8317,7 +8343,7 @@ menu:
           - ResetAiGatewayBudgetInstanceSpend
         unstable:
           - v2
-        order: 46
+        order: 48
     - name: List AI Gateway budget instance dimension values
       url: /api/latest/ai-gateway/list-ai-gateway-budget-instance-dimension-values/
       identifier: ai-gateway-list-ai-gateway-budget-instance-dimension-values
@@ -8330,7 +8356,7 @@ menu:
           - ListAiGatewayBudgetInstanceDimensions
         unstable:
           - v2
-        order: 47
+        order: 49
     - name: Override a budget instance's capacity
       url: /api/latest/ai-gateway/override-a-budget-instances-capacity/
       identifier: ai-gateway-override-a-budget-instances-capacity
@@ -8343,7 +8369,7 @@ menu:
           - OverrideAiGatewayBudgetInstanceCapacity
         unstable:
           - v2
-        order: 48
+        order: 50
     - name: List AI Gateway budget instances
       url: /api/latest/ai-gateway/list-ai-gateway-budget-instances/
       identifier: ai-gateway-list-ai-gateway-budget-instances
