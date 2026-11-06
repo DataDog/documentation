@@ -248,7 +248,7 @@ Do not include Playwright's `--shard` option. `ddtest` asks Playwright to list t
 
 ### Vitest
 
-Use Vitest 1.6 or later. For `dd-trace`, use version 5.125.0 or later on v5, or 6.14.0 or later on v6. Run from the project directory with Vitest and any coverage or environment packages installed.
+Follow the [Test Parallelization compatibility requirements](/tests/test_parallelization/#compatibility) and [JavaScript Test Optimization requirements](/tests/setup/javascript/#compatibility). Run from the project directory with Vitest and any coverage or environment packages installed.
 
 `ddtest` calls the Node.js API directly. Remove `--command` and `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`. Move options from the existing command to the selected Vitest configuration:
 
