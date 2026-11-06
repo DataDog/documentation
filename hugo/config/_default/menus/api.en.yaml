@@ -2116,9 +2116,9 @@ menu:
           - CreateDerivedMetric
         unstable: []
         order: 28
-    - name: Get a list of metrics
-      url: /api/latest/metrics/get-a-list-of-metrics/
-      identifier: metrics-get-a-list-of-metrics
+    - name: List all metrics with volumes and query activity
+      url: /api/latest/metrics/list-all-metrics-with-volumes-and-query-activity/
+      identifier: metrics-list-all-metrics-with-volumes-and-query-activity
       parent: metrics
       generated: true
       params:
