@@ -44,7 +44,7 @@ Action tracking does not take privacy levels into account when the `enablePrivac
 
 ### Configure the Browser SDK
 
-Set `defaultPrivacyLevel` to `mask-unless-allowlisted` to apply build-time allowlisting across the application. The `mask-unless-allowlisted` privacy level requires RUM Browser SDK v7 or later. Keep `enablePrivacyForActionName` enabled so action names follow the privacy setting:
+Set `defaultPrivacyLevel` to `mask-unless-allowlisted` to apply build-time allowlisting across the application. The `mask-unless-allowlisted` privacy level requires RUM Browser SDK v7 or later.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -53,11 +53,8 @@ datadogRum.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   site: '<DATADOG_SITE>',
-  trackUserInteractions: true,
-  enablePrivacyForActionName: true,
   defaultPrivacyLevel: 'mask-unless-allowlisted',
 });
-```
 
 To apply `mask-unless-allowlisted` to part of the application, set `data-dd-privacy="mask-unless-allowlisted"` on the relevant HTML element. See [Session Replay privacy options][3] for more about element-level privacy overrides.
 
