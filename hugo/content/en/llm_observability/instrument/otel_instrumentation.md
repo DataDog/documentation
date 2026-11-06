@@ -71,7 +71,7 @@ To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resour
 
 #### Using an export header
 
-If you export over OTLP HTTP directly to Datadog, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. The header sets opt-in for every span in the export. Under the standard conversion policy, setting `dd_llmobs_enabled=false` on a span or resource overrides the header. Add this header only to trace exports sent to Datadog, not to requests sent to your model provider.
+If you export traces directly to Datadog over OTLP HTTP, add `DD-LLMObs-Enabled=true` to `OTEL_EXPORTER_OTLP_TRACES_HEADERS`. This enables LLM Observability conversion for every span in the export unless `dd_llmobs_enabled=false` is explicitly set on a span or resource under the standard conversion policy. Use this header only for trace exports to Datadog, not for requests to your model provider.
 
 #### Using environment variables
 
