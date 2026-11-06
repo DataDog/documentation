@@ -25,12 +25,12 @@ further_reading:
 1. Choose tags to add, remove, or replace:
 
     - {{< ui >}}Add Tags{{< /ui >}}: Enter the tags to add, such as `managed_by:fleet`. Use spaces to separate multiple tags.
-    - {{< ui >}}Remove Tags{{< /ui >}}: Specify the tag to remove. As you type, suggested tags appear in the dropdown. Use spaces to separate multiple tags.
+    - {{< ui >}}Remove Tags{{< /ui >}}: Enter the tags to remove. As you type, suggested tags appear in the dropdown. Use spaces to separate multiple tags.
     - {{< ui >}}Replace Tags{{< /ui >}}: Specify an existing tag in the {{< ui >}}Old tag{{< /ui >}} field, then enter a {{< ui >}}New tag{{< /ui >}} to replace it with.
 
       By default, the old tag is matched as plain text. Click the {{< ui >}}.*{{< /ui >}} button to use regular expressions to match tags instead.
 
-       In a regular expression, use `(...)` or `(?<name>...)` to define capture groups, and `${index}` or `${name}` to reference them in the {{< ui >}}New tag{{< /ui >}} field. For example, to rename `team:` tags to `owner:` while keeping their values, enter `team:(.*)` as the old tag and `owner:${1}` as the new tag.
+      In a regular expression, use `(...)` or `(?<name>...)` to define capture groups, and `${index}` or `${name}` to reference them in the {{< ui >}}New tag{{< /ui >}} field. For example, to rename `team:` tags to `owner:` while keeping their values, enter `team:(.*)` as the old tag and `owner:${1}` as the new tag.
 
     {{< img src="agent/fleet_automation/fa_modify_tags.png" alt="The Choose tags to add or remove step in Fleet Automation's Modify Tags workflow, showing the managed_by:fleet tag in the Add Tags field, an empty Remove Tags field, and a Replace Tags rule that uses a regular expression to replace env:p.* with env:prod." style="width:100%;" >}}
 
