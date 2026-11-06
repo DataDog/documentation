@@ -27,6 +27,8 @@ instances:
     # dbname: '<DB_NAME>'
 ```
 
+For PostgreSQL, schema collection also runs on instances that enable [Data Observability][3] (`data_observability.enabled: true`) without `dbm: true`.
+
 ### Tuning schema collection
 
 The `collect_schemas` options available and their defaults differ by database engine.
@@ -169,3 +171,4 @@ Each dashboard includes the following metrics:
 
 [1]: /database_monitoring/recommendations
 [2]: https://app.datadoghq.com/databases/list
+[3]: /data_observability/quality_monitoring/transactional_databases/postgres/
