@@ -44,7 +44,7 @@ For example, a static `Order value` label can remain readable in an action name 
 
 ### Configure the Browser SDK
 
-Set `defaultPrivacyLevel` to `mask-unless-allowlisted` to apply build-time allowlisting across the application. Keep `enablePrivacyForActionName` enabled so action names follow the privacy setting:
+Set `defaultPrivacyLevel` to `mask-unless-allowlisted` to apply build-time allowlisting across the application. The `mask-unless-allowlisted` privacy level requires RUM Browser SDK v7 or later. Keep `enablePrivacyForActionName` enabled so action names follow the privacy setting:
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
