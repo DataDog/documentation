@@ -36,8 +36,8 @@ Before comparing groups, Datadog calculates each group's metric value and how pr
 
 - $C$ is control and $T$ is treatment.
 - Greek letters are population quantities (estimands).
-- A hat marks a plug-in estimate of an effect, calculated from the observed data.
-- Uppercase letters are random variables, and lowercase letters are observed values.
+- A hat marks a plug-in estimate calculated from the observed data.
+- Uppercase letters are random variables, and lowercase letters are observed values. In the Bayesian sections, $Θ$ is the random effect.
 - Lowercase $m$ is a mean, $s$ is a subject-level standard deviation, $v$ is a sampling variance, and $q$ is a sampling covariance. Subscripts identify the quantity.
 
 Let $n\_C$ and $n\_T$ be the numbers of subjects in control and treatment. For subject $i$ in control, $Y\_{Ci}$ is the random metric value and $y\_{Ci}$ its observed value. Define $Y\_{Tj}$ and $y\_{Tj}$ similarly for subject $j$ in treatment. The population means are $μ\_C=E[Y\_{Ci}]$ and $μ\_T=E[Y\_{Tj}]$.
@@ -110,7 +110,7 @@ A lower density at the percentile means greater uncertainty in its estimated val
 
 Datadog calculates both forms of lift from the group estimates and their sampling variances.
 
-Write the observed group means as $m\_C$ and $m\_T$, their estimated sampling variances as $v\_C$ and $v\_T$, and their estimated covariance as $q$. For independent groups without variance reduction, $q=0$. For ratio metrics, substitute the group ratio estimates $r\_C$ and $r\_T$ for $m\_C$ and $m\_T$ in the following formulas, with the corresponding ratio sampling variances and covariance. The population quantities $μ\_C$ and $μ\_T$ then represent the population ratios. For percentile metrics, make the corresponding substitution with the group percentile estimates and variances. Absolute lift is then a difference in percentiles.
+Let $q$ be the estimated covariance between the group estimates. For independent groups without variance reduction, $q=0$. For ratio metrics, substitute the group ratio estimates $r\_C$ and $r\_T$ for $m\_C$ and $m\_T$ in the following formulas, with the corresponding ratio sampling variances and covariance. The population quantities $μ\_C$ and $μ\_T$ then represent the population ratios. For percentile metrics, make the corresponding substitution with the group percentile estimates and variances. Absolute lift is then a difference in percentiles.
 
 ### Absolute lift: difference in means
 
@@ -142,8 +142,6 @@ $$\text\"SE\"(λ↖{\\^}) = √{v\_λ}$$
 
 For a control conversion rate of 10% and a treatment conversion rate of 12%, relative lift is $(0.12-0.10)/0.10=0.20$, or **20%**. Multiply a relative estimate and both interval endpoints by 100 to express them as percentages. In the example, $v\_λ≈0.00235$ and $\text\"SE\"(λ↖{\\^})≈0.0485$.
 
-Relative lift accounts for uncertainty in both group estimates.
-
 <div class="alert alert-warning">The relative-lift standard error is not generally the absolute-lift standard error divided by the observed control mean. Likewise, a relative-lift interval is not generally obtained by dividing an absolute-lift interval by the control mean.</div>
 
 In the example, dividing the absolute-lift standard error by the control mean gives $0.0044/0.10=0.044$. This is smaller than the relative-lift standard error of $0.0485$ because it ignores uncertainty in the control mean.
@@ -152,7 +150,7 @@ In the example, dividing the absolute-lift standard error by the control mean gi
 
 [CUPED][9] reduces noise in experiment results by adjusting for each subject's pre-experiment behavior, which produces narrower intervals.
 
-When CUPED is enabled, Datadog uses these adjusted group estimates and their sampling variances. For a group with average adjustment $m\_{a,g}$ and experiment-wide average adjustment $m\_{a,\text\"pool\"}$, the adjusted metric estimate is:
+When CUPED is enabled, Datadog uses adjusted group estimates and their sampling variances. For a group with average adjustment $m\_{a,g}$ and experiment-wide average adjustment $m\_{a,\text\"pool\"}$, the adjusted metric estimate is:
 
 $$m\_g^{\text\"adj\"} = m\_g-(m\_{a,g}-m\_{a,\text\"pool\"})$$
 
@@ -166,7 +164,7 @@ An interval describes the range of effects that are consistent with the data. Ea
 |---|---|---|---|
 | Fixed-sample | Observed effect | Confidence interval: observed effect ± 1.96 standard errors at 95% | No |
 | Sequential | Observed effect | Confidence sequence, wider than fixed-sample, with width that depends on sample size | Yes |
-| Sequential hybrid | Observed effect | Sequential interval during the experiment, fixed-sample interval at the planned end, each at α/2 | Yes |
+| Sequential hybrid | Observed effect | Sequential interval during the experiment, fixed-sample interval at the planned end, each at half the significance level | Yes |
 | Bayesian | Posterior mean, pulled toward zero by the prior | Credible interval | Not applicable |
 
 Let $θ↖{\\^}$ denote the observed plug-in effect estimate: either $δ↖{\\^}$ for absolute lift or $λ↖{\\^}$ for relative lift. Let $v\_θ$ denote its estimated sampling variance and $√{v\_θ}$ its standard error. Write the unknown population effect as $θ$: either $δ$ or $λ$. Let $X$ be the random estimator whose observed value is $θ↖{\\^}$.
@@ -177,7 +175,7 @@ $$X ∼ N(θ,σ^2)$$
 
 Here $σ^2$ is the sampling variance of $X$, estimated by $v\_θ$. The interval calculations substitute $v\_θ$ for $σ^2$.
 
-In this notation, the second parameter of $N$ is a variance. Let $c$ be the interval level and $α=1-c$. For a 95% interval, $α=0.05$.
+Let $c$ be the interval level and $α=1-c$. For a 95% interval, $α=0.05$.
 
 ### Fixed-sample frequentist analysis
 
@@ -201,8 +199,6 @@ $$\text\"p-value\"=2(1-Φ(|z\_{\text\"obs\"}|))$$
 
 In the example, the 95% interval for absolute lift is $0.02±1.96×0.0044$, or **[0.011, 0.029]**. For relative lift, it is $0.20±1.96×0.0485$, or **[10.5%, 29.5%]**.
 
-A fixed-sample interval supports inference at the planned analysis point.
-
 <div class="alert alert-warning">Repeatedly checking a fixed-sample result and stopping when the interval excludes zero increases the false-positive rate. To check results while the experiment is running, use sequential or sequential hybrid analysis.</div>
 
 ### Sequential frequentist analysis
@@ -225,7 +221,7 @@ $$u\_t=θ↖{\\^}\_t+√{v\_{θ,t}} b(t,α)$$
 
 Here $θ↖{\\^}\_t$ and $v\_{θ,t}$ are the effect estimate and its sampling variance after $t$ subjects.
 
-The value 10,000 is a tuning parameter for the boundary. It is not a required minimum sample size.
+The value 10,000 in the $ρ$ formula is a tuning parameter for the boundary. It is unrelated to the example's group size and is not a required minimum sample size.
 
 In the example, $t=20000$ and $b(t,0.05)≈3.06$, compared with 1.96 for fixed-sample analysis. The 95% interval for absolute lift is **[0.006, 0.034]**, and for relative lift it is **[5.2%, 34.8%]**.
 
@@ -235,7 +231,7 @@ $$P(L\_t≤θ≤U\_t \text\" for all analysis times \")≥1-α$$
 
 Datadog uses the normal-mixture boundary with estimated sampling variances and, for relative lift, a delta-method approximation. See [Waudby-Smith et al. (2024)][3] for the theory of asymptotic confidence sequences. The boundary's validity depends on these approximations. It does not guarantee exact finite-sample coverage for every metric distribution.
 
-Sequential intervals are wider than fixed-sample intervals at the same nominal level to account for repeated looks. The sequential p-value is obtained by inverting the sequential boundary: finding the significance level at which the interval reaches zero. It is not the fixed-sample normal-tail p-value calculated from $z\_{\text\"obs\"}$.
+The sequential p-value is obtained by inverting the sequential boundary: finding the significance level at which the interval reaches zero. It is not the fixed-sample normal-tail p-value calculated from $z\_{\text\"obs\"}$.
 
 ### Sequential hybrid analysis
 
@@ -265,11 +261,11 @@ The normal prior used by Datadog is centered at zero. In that case:
 
 $$m\_{\text\"post\"}={τ^2}/{τ^2+v\_θ}θ↖{\\^}$$
 
-This moves the observed effect toward zero. The adjustment is stronger when the observed estimate is uncertain relative to the prior. As the sampling variance decreases, the posterior mean approaches the observed effect.
+This shrinkage factor moves the observed effect toward zero. The adjustment is stronger when the observed estimate is uncertain relative to the prior. As the sampling variance decreases, the posterior mean approaches the observed effect.
 
 #### Prior scale for relative and absolute lift
 
-The default Bayesian prior is normal, centered at zero, with a configured standard deviation of 0.05. For relative lift, this standard deviation is on the relative-lift scale: five percentage points of relative lift. Organization or experiment settings can override the default.
+The default Bayesian prior is normal, centered at zero, with a configured standard deviation of 0.05. For relative lift, this standard deviation is on the relative-lift scale, which corresponds to a relative lift of 5%. Organization or experiment settings can override the default.
 
 For absolute lift, Datadog multiplies the configured prior standard deviation $k$ by a pooled scale:
 
@@ -293,7 +289,7 @@ $$n=2/k^2$$
 
 At the default $k=0.05$, this is **800 subjects per group**, or **1,600 subjects total**. At that point, the posterior mean is halfway between zero and the observed absolute lift. Larger samples give the likelihood more weight; smaller samples give the prior more weight. This is a measure of prior strength, not a minimum sample size or a power calculation. With 10,000 subjects per group, the example's absolute-lift posterior mean of 0.0185 stays close to the observed 0.02.
 
-This interpretation assumes a normal prior, equal group sizes, and equal variances. It does not directly describe the effect-dependent shrinkage of a Student-t prior.
+This interpretation assumes a normal prior, equal group sizes, and equal variances. It does not directly describe the effect-dependent shrinkage of a Student's t prior.
 
 #### Credible interval and probability of an effect
 
@@ -311,21 +307,21 @@ $$P(Θ>0∣\text\"data\")=Φ(m\_{\text\"post\"}/√{v\_{\text\"post\"}})$$
 
 A positive effect means the metric increased. Whether that is desirable depends on the metric: an increase in conversion and an increase in latency have different business interpretations.
 
-#### Student-t prior
+#### Student's t prior
 
-The Student-t prior is centered at zero and has heavier tails than a normal prior, allowing more probability for large treatment effects. Datadog combines this prior with the observed effect and its uncertainty to obtain a posterior distribution. The reported estimate is the posterior mean, and the credible interval contains the specified proportion of posterior probability, with equal probability in each tail.
+The Student's t prior is centered at zero and has heavier tails than a normal prior, allowing more probability for large treatment effects. Datadog combines this prior with the observed effect and its uncertainty to obtain a posterior distribution. The reported estimate is the posterior mean, and the credible interval contains the specified proportion of posterior probability, with equal probability in each tail.
 
-This prior is useful when you expect effects to be near zero but want to allow for occasional large effects. Compared with a normal prior, its heavier tails can reduce shrinkage of large effects when the data support them. The degrees of freedom control the tail weight: smaller values allow heavier tails, while larger values approach a normal prior. The prior standard deviation controls its overall spread and uses the relative-lift or absolute-lift scaling described in the previous section.
+This prior is useful when you expect effects to be near zero but want to allow for occasional large effects. Compared with a normal prior, its heavier tails can reduce shrinkage of large effects when the data support them. The degrees of freedom control the tail weight: smaller values allow heavier tails, while larger values approach a normal prior. The prior standard deviation controls its overall spread and uses the relative-lift or absolute-lift scaling described in [Prior scale for relative and absolute lift](#prior-scale-for-relative-and-absolute-lift).
 
-Unlike the normal prior, the Student-t prior does not yield elementary closed-form expressions for the posterior mean and credible interval under a normal likelihood. Datadog computes numerical approximations to these quantities.
+Unlike the normal prior, the Student's t prior does not yield elementary closed-form expressions for the posterior mean and credible interval under a normal likelihood. Datadog computes numerical approximations to these quantities.
 
-## Multiple comparisons
+## Multiple testing correction
 
 When an experiment tests several metrics or variants, Datadog adjusts each comparison's significance level to limit the overall false-positive rate. The frequentist interval formulas use this adjusted level, including both branches of hybrid analysis. For how the level is allocated, see [Multiple Testing Correction][5]. Bayesian analysis does not support this correction.
 
 ## When the approximations become unreliable
 
-Ratio calculations require a denominator sufficiently far from zero. Datadog flags a denominator as unreliable when its standard error divided by the magnitude of its estimated mean exceeds 0.1. This is a practical reliability criterion associated with [Kuethe et al. (2000)][6] and discussed by [Díaz-Francés and Rubio][7], rather than a universal guarantee of a normal approximation. For relative lift, this check also applies to the control metric estimate:
+Ratio calculations require a denominator sufficiently far from zero. Datadog flags a denominator as unreliable when its standard error divided by the magnitude of its estimated mean exceeds 0.1. This is a practical reliability criterion associated with [Kuethe et al. (2000)][6] and discussed by [Díaz-Francés and Rubio (2013)][7], rather than a universal guarantee of a normal approximation. For relative lift, this check also applies to the control metric estimate:
 
 $$\text\"SE\"(m\_C)/|m\_C|>0.1$$
 
@@ -335,7 +331,7 @@ In the example, $\text\"SE\"(m\_C)/|m\_C|=0.0030/0.10=0.03$, so the relative-lif
 
 For ratio metrics, checks also apply to the within-group denominators. A zero denominator prevents the corresponding ratio calculation. Zero numerator variance can also prevent estimation.
 
-A narrow interval is only informative when the experiment design, data, and statistical approximations are appropriate.
+A narrow interval is informative only when the experiment design, data, and statistical approximations are appropriate.
 
 ## Further reading
 
