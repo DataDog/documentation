@@ -525,12 +525,6 @@ bin/ddtest run --ci-node "${DDTEST_CI_NODE_INDEX:?Set the zero-based node index 
 
 Replace native test splitting with `ddtest` assignments. Keep plans separate from reusable dependency caches; each plan belongs to one suite and source revision.
 
-{% collapse-content title="If your provider requires a fixed job count" level="h4" id="fixed-job-count" %}
-
-Set both parallelism bounds to the configured job count. For ten jobs, set `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM` and `DD_TEST_OPTIMIZATION_RUNNER_MAX_PARALLELISM` to `10` in the CI environment and use indexes **0** through **9**. All ten runners are provisioned even when tests are skipped. Use dynamic job creation or **Other - single node** to reduce provisioning.
-
-{% /collapse-content %}
-
 {% /if %}
 <!-- End multi -->
 
