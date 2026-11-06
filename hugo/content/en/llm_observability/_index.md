@@ -112,6 +112,8 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 [Agent Observability Insights][12] automatically analyzes the traces Agent Observability receives from your applications to identify recurring cost and reliability problems. Each insight includes the root cause, impact, supporting evidence, and a recommended fix. Insights require no additional configuration.
 
+{{< img src="llm_observability/index/llm_insights_light.png" alt="An Agent Observability insight showing the root cause, impact, supporting evidence, and recommended next steps for a recurring tool call error" style="width:100%;" >}}
+
 ## Use integrations with Agent Observability
 
 The [Agent Observability SDK for Python][3] integrates with frameworks such as OpenAI, LangChain, AWS Bedrock, and Anthropic. It automatically traces and annotate LLM calls, capturing latency, errors, and token usage metrics—without code changes.
