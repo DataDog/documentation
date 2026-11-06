@@ -46,12 +46,18 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
    - {{< ui >}}Description{{< /ui >}} (optional): Explain the queue's purpose and any special instructions for annotators
 
 4. Then click {{< ui >}}Next{{< /ui >}}.
-5. On the {{< ui >}}Schema{{< /ui >}} tab, define your new queue's label schema. When you create a queue from a completed experiment, Datadog automatically adds the experiment's evaluator scorers as blank, editable labels. Existing evaluator result values are not copied into the queue. Review the imported labels and edit or remove them as needed before creating the queue. For other queue creation flows, use {{< ui >}}Add Evaluation as Label{{< /ui >}} to add available evaluation labels manually. Use the Preview pane to see how labels appear to annotators as you configure them. Each label can be marked as required and can optionally include:
+5. On the {{< ui >}}Schema{{< /ui >}} tab, define your new queue's label schema. Use the Preview pane to see how labels appear to annotators as you configure them. Each label can be marked as required and can optionally include:
    - {{< ui >}}Assessment criteria{{< /ui >}}: Allow annotators to indicate pass/fail for that label value
    - {{< ui >}}Reasoning{{< /ui >}}: Allow annotators to add a short explanation
 6. Review your queue configuration and click {{< ui >}}Create{{< /ui >}} to create the queue.
 
    {{< img src="llm_observability/evaluations/annotation_queues/schema_edit.png" alt="The Edit Queue modal showing the Schema tab with label configuration on the left and a preview pane on the right. The left panel displays fields for configuring a categorical label named failure_type with three categories: hallucination, formatting_error, and refusal. Checkboxes enable Assessment Criteria and Reasoning options. The right preview pane shows how the label appears to annotators with checkboxes for each category, Pass/Fail assessment buttons, and a reasoning text field." style="width:100%;" >}}
+
+#### Importing evaluation labels
+
+When you create a queue from a completed experiment, Datadog automatically adds the experiment's evaluator scorers as blank, editable labels. Existing evaluator result values are not copied into the queue. Review the imported labels and edit or remove them as needed before creating the queue.
+
+For other queue creation flows, use {{< ui >}}Add Evaluation as Label{{< /ui >}} on the {{< ui >}}Schema{{< /ui >}} tab to add available evaluation labels manually.
 
 ### Step 2: Select traces for annotation
 
