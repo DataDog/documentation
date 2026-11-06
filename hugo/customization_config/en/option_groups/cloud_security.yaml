@@ -1,0 +1,7 @@
+# Cloud Security option groups
+
+# Where does the Agentless scanner run?
+agentless_scanner_hosting_options:
+  - id: self_hosted
+    default: true
+  - id: datadog_hosted

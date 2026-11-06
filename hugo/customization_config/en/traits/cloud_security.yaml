@@ -1,0 +1,5 @@
+traits:
+- id: agentless_scanner_hosting
+  label: "Scanner hosting"
+  type: text
+  internal_notes: Where Cloud Security Agentless scanners run, such as in the customer's own cloud account (self-hosted) or in Datadog's infrastructure (Datadog-hosted). Differs from `host`, which is the customer's hosting platform or cloud provider (such as AWS or GCP); a reader can pick AWS for `host` and either value for this trait.

@@ -136,6 +136,9 @@ options:
 - label: Datadog application
   id: datadog_application
 
+- label: Datadog-hosted
+  id: datadog_hosted
+
 - label: Datadog Archives
   id: datadog_archives
 

@@ -19,10 +19,13 @@ After deploying Agentless Scanning, results do not appear immediately. First res
 
 If no results appear after two hours:
 
-- Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
-- Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
 - Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
+- For self-hosted scanners:
+  - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
+  - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
+- For Datadog-hosted scanning (Preview), verify that the Agentless Scanning IAM policy is attached to the Datadog integration role in your AWS account.
 
+<!-- TODO(DOCS-16346): Confirm with SME the Datadog-hosted troubleshooting steps (policy name, how Datadog detects the policy, common failures). -->
 ## Enable Remote Configuration on the API key
 
 To authenticate and authorize the Agent to receive configuration, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][9] RBAC permission can enable Remote Configuration on the API Key.
@@ -47,13 +50,13 @@ the identity running the script does not have permission to create or manage GCS
 
 ## Deployment fails due to VPC creation restrictions
 
-If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
+This issue applies to self-hosted scanners. If your organization is using Terraform and uses Service Control Policies (SCPs) that restrict Virtual Private Cloud (VPC) creation, scanner deployment fails because the scanner creates a new VPC by default.
 
 To fix this, use the [**custom VPC**][8] option during setup to deploy the scanner into an existing VPC instead of creating a new one.
 
 ## Scanner instances appear as vulnerable hosts
 
-Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed within your cloud account to perform scans. Because they run a standard operating system image (for example, the latest Ubuntu LTS), they may appear in vulnerability findings related to OS packages.
+Self-hosted Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed within your cloud account to perform scans. This issue does not apply to Datadog-hosted scanning, which runs no scanner instances in your account. Because they run a standard operating system image (for example, the latest Ubuntu LTS), they may appear in vulnerability findings related to OS packages.
 
 These findings reflect vulnerabilities identified in the underlying OS image and do not indicate a misconfiguration of your environment.
 
@@ -67,7 +70,7 @@ Hosts that have the Datadog Agent installed **without** Vulnerabilities features
 
 ## Unexpected cross-region scanning costs
 
-In some deployments, cross-region data transfer may contribute to cloud provider network costs, depending on how scanners and resources are distributed across regions.
+In some self-hosted deployments, cross-region data transfer may contribute to cloud provider network costs, depending on how scanners and resources are distributed across regions.
 
 To optimize traffic locality, consider deploying scanners in regions that contain a significant number of hosts. As a general guideline, Datadog recommends deploying a scanner in each region that contains more than 150 hosts.
 
@@ -75,7 +78,13 @@ See [Deploying Agentless Scanning][7] for detailed guidance on recommended deplo
 
 ## Unavailable for GovCloud and FIPS
 
-Agentless Scanning is not available in GovCloud and is not FIPS compliant.
+Agentless Scanning is not available in GovCloud and is not FIPS compliant. This applies to both self-hosted and Datadog-hosted scanning.
+
+<!-- TODO(DOCS-16346): Confirm with SME that the GovCloud/FIPS limitation applies to Datadog-hosted scanning. -->
+
+## Scans run in a different region than your resources
+
+With Datadog-hosted scanning (Preview), Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For the scanning region for each Datadog site, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
 
 ## Further reading
 
@@ -91,4 +100,5 @@ Agentless Scanning is not available in GovCloud and is not FIPS compliant.
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
 [9]: /account_management/rbac/permissions#api-and-application-keys
 [10]: https://app.datadoghq.com/organization-settings/remote-config
+[12]: /security/cloud_security_management/setup/agentless_scanning#datadog-hosted-data-residency
 [11]: https://app.datadoghq.com/organization-settings/api-keys
