@@ -23,20 +23,17 @@ There is a maximum of 31 unique comments per PR at any time to reduce noise and 
   * If all results are positive, the reaction is changed to 👍.
   * If there is at least one finding, the 👀 reaction is removed because the summary comment includes details on the findings instead.
 
-{{< tabs >}}
-{{% tab "CI Visibility" %}}
-PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
+## PR comments for CI Visibility
+
+PR comments are enabled by default when first onboarding to CI Visibility if a [source code management integration][10] is installed correctly. Datadog posts a comment summarizing the failed jobs detected in your pull request.
 
 {{< img src="source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
-To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][101].
+To disable PR comments for CI Visibility, go to the [CI Visibility Repository Settings][12].
 
-[101]: https://app.datadoghq.com/ci/settings/ci-visibility
+## PR comments for Code Security
 
-{{% /tab %}}
-{{% tab "Code Security" %}}
-
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
+PR comments are enabled by default when first onboarding to Code Security if a [source code management integration][10] is installed correctly. Datadog posts two types of comments on your pull requests:
 
 1. A single comment summarizing the new violations detected in your pull request.
 
@@ -46,23 +43,15 @@ PR comments are enabled by default when first onboarding to Code Security if the
 
 {{< img src="source_code_integration/code-security-inline-pr-comment.png" alt="Inline comment for a specific violation detected by Code Security" style="width:100%;">}}
 
-To disable PR comments for Code Security, go to the [Code Security Repository Settings][101].
+To disable PR comments for Code Security, go to the [Code Security Repository Settings][13].
 
-[101]: https://app.datadoghq.com/security/configuration/code-security/settings
+## PR comments for Test Optimization
 
-{{% /tab %}}
-{{% tab "Test Optimization" %}}
-
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
+PR comments are enabled by default when first onboarding to Test Optimization if a [source code management integration][10] is installed correctly. Datadog posts a comment summarizing the failed and flaky tests detected in your pull request.
 
 {{< img src="source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
-To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][101].
-
-[101]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
-
-{{% /tab %}}
-{{< /tabs >}}
+To disable PR comments for Test Optimization, go to the [Test Optimization Advanced Features Settings][14].
 
 ## Further reading
 
@@ -70,3 +59,6 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 
 [10]: /source_code/source-code-management/
 [11]: /pr_gates
+[12]: https://app.datadoghq.com/ci/settings/ci-visibility
+[13]: https://app.datadoghq.com/security/configuration/code-security/settings
+[14]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
