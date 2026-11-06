@@ -4,8 +4,9 @@ import path from 'path';
 import yaml from 'js-yaml';
 import { hideOverlays } from '../../helpers';
 
-// Expected values come from the shared region config, the file both Hugo and
-// Astro read. If the Hugo page ever drifts from it, these tests fail.
+// The expected values are read from `shared/regions.yaml`.
+// Hugo builds the page from the same file.
+// So these tests check that the page shows what the file says.
 interface Region {
     key: string;
     label: string;
