@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][18]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). To query these logs with [Archive Search][18], [enable Archive Search](#archive-search) on the destination. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
 ## Configure Log Archives
 
@@ -43,6 +43,8 @@ Create an [Azure storage account][13] if you don't already have one.
 **Note**: Do not set [immutability policies][15] because the most recent data might need to be rewritten in rare cases (typically when there is a timeout).
 
 #### Connect the Azure container to Datadog Log Archives
+
+If you [enable Archive Search](#archive-search) on the destination, skip this section.
 
 1. Navigate to Datadog [Log Forwarding][16].
 1. Click **New archive**.
@@ -92,13 +94,19 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
+#### Archive Search
+
+To search these logs with [Archive Search][18], turn on {{< ui >}}Enable for Archive Search{{< /ui >}} and select the Azure client Datadog uses to [read the container][19]. Datadog creates the Log Archive after you deploy the pipeline.
+
+**Note**: {{< ui >}}Enable for Archive Search{{< /ui >}} isn't available for prefixes that use [template syntax](#using-template-syntax-for-dynamic-partitioning).
+
 ## Using template syntax for dynamic partitioning
 
 When you set up Azure Storage destination, you can use [template syntax][6] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/azure_storage_prefix_template.png" alt="The Azure Storage destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
-However, you must manually create a Datadog [Log Archive][16] for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
+Because you can't [enable Archive Search](#archive-search) with a templated prefix, you must manually create a Datadog [Log Archive][16] for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/azure_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
 
@@ -156,3 +164,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [16]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [17]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [18]: /logs/explorer/archive_search/
+[19]: /logs/explorer/archive_search/?tab=azurestorage#cloud-specific-permissions
