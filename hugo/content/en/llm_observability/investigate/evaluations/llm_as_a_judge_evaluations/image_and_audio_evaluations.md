@@ -26,7 +26,7 @@ A custom LLM-as-a-judge evaluator can send the images and audio attached to your
   | Images | Anthropic | Claude 3, Claude Haiku, Claude Sonnet, and Claude Opus model families |
   | Audio | OpenAI | `gpt-audio`, `gpt-audio-mini`, and `gpt-audio-1.5` |
 
-  Datadog doesn't send attachments to models from other providers, including Azure OpenAI, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, and Together AI.
+  Datadog doesn't send attachments to models from other providers, including Azure OpenAI, Amazon Bedrock, and Vertex AI.
 - The media uses a supported format:
   - Images: JPEG, PNG, GIF, or WebP
   - Audio: WAV or MP3, for every clip on the evaluated spans, including output audio. A clip in another format, such as `audio/ogg` or `audio/webm`, can play in the trace view, but it causes the evaluation to fail.

@@ -36,8 +36,6 @@ Supported providers:
 - Together AI
 - Custom Provider
 
-For Baseten, Fireworks AI, and Together AI, the Playground lists only chat models. See [Connect your LLM provider account][5] for setup and limits.
-
 ## Test a prompt with arbitrary input
 
 {{< img src="llm_observability/playground/playground-arbitrary-input.png" alt="Agent Observability Playground showing a user message with {{category}} and {{approach}} variable placeholders and the model response in the output panel." style="width:100%;" >}}
@@ -148,4 +146,3 @@ The experiment runs across all records in the dataset—not only the 20-record p
 [2]: https://app.datadoghq.com/llm/testing/experiments
 [3]: https://app.datadoghq.com/llm/settings/integrations
 [4]: /llm_observability/improve/datasets
-[5]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/connect_to_account/

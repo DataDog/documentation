@@ -118,12 +118,6 @@ Connect your Baseten account to Agent Observability with your Baseten API key. T
 1. Follow the instructions on the tile.
    - Provide your Baseten API key.
 
-When you select a Baseten account in an evaluator or in the Playground, the model picker lists the chat models that your API key can call. Embedding and other non-chat models are not listed.
-
-**Notes**:
-- The maximum value for `max_tokens` is 8192. `max_completion_tokens` is not available.
-- Image and audio attachments are not sent to Baseten models.
-
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://app.datadoghq.com/integrations/baseten
 {{% /tab %}}
@@ -136,12 +130,6 @@ Connect your Fireworks AI account to Agent Observability with your Fireworks AI 
 1. Follow the instructions on the tile.
    - Provide your Fireworks AI API key.
 
-When you select a Fireworks AI account in an evaluator or in the Playground, the model picker lists the chat models that your API key can call. Embedding and other non-chat models are not listed.
-
-**Notes**:
-- The maximum value for `max_tokens` is 8192. `max_completion_tokens` is not available.
-- Image and audio attachments are not sent to Fireworks AI models.
-
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://app.datadoghq.com/integrations/fireworks
 {{% /tab %}}
@@ -153,12 +141,6 @@ Connect your Together AI account to Agent Observability with your Together AI AP
 1. In Datadog, open the [Together AI integration tile][2], or navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1] and select {{< ui >}}Connect{{< /ui >}} on the Together AI tile.
 1. Follow the instructions on the tile.
    - Provide your Together AI API key.
-
-When you select a Together AI account in an evaluator or in the Playground, the model picker lists the chat models that your API key can call. Embedding and other non-chat models are not listed.
-
-**Notes**:
-- The maximum value for `max_tokens` is 8192. `max_completion_tokens` is not available.
-- Image and audio attachments are not sent to Together AI models.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://app.datadoghq.com/integrations/togetherai
