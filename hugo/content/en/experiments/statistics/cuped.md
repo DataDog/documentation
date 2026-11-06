@@ -20,9 +20,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
   tag: "Blog"
   text: "How we built Datadog Experiments"
-- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
-  tag: "Blog"
-  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview
