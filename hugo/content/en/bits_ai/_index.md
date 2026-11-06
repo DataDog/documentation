@@ -96,7 +96,7 @@ Use Settings to control what Bits knows about your organization and who can use 
 [1]: /account_management/billing/ai_credits/
 [2]: /bits_ai/bits_chat/
 [3]: /bits_ai/bits_code/automations/
-[4]: /bits_ai/settings/
+[4]: /bits_ai/bits_settings/
 [5]: /bits_ai/bits_detection/
 [6]: /bits_ai/bits_investigation/
 [7]: /bits_ai/bits_remediation/
