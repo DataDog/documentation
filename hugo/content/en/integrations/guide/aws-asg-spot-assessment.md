@@ -42,7 +42,7 @@ Estimates are most representative with a full 30 days of history. If instance hi
 4. Review the estimated monthly savings and **Spot potential** for each group.
 5. Select an ASG to open its details.
 
-The assessment covers running groups configured to use only On-Demand Instances. The results aren't a complete inventory of your ASGs. The following groups don't appear in the assessment:
+The assessment covers running groups configured to use only On-Demand Instances. The results are not a complete inventory of your ASGs. The following groups don't appear in the assessment:
 
 - Groups already configured for Spot
 - Groups that use weighted capacity or attribute-based instance selection
