@@ -8,8 +8,7 @@ further_reading:
 
 ## Overview
 
-<!-- TODO: Add dashboard screenshot once available -->
-<!-- {{< img src="/opentelemetry/collector_exporter/rabbitmq_metrics.png" alt="OpenTelemetry RabbitMQ metrics in a RabbitMQ Overview dashboard" style="width:100%;" >}} -->
+{{< img src="/opentelemetry/collector_exporter/rabbitmq_metrics.png" alt="The RabbitMQ Overview (Management Version) dashboard, showing integration and RabbitMQ status tiles, and tables of disk and memory alarms by service." style="width:100%;" >}}
 
 The [RabbitMQ receiver][1] collects RabbitMQ metrics that populate the [RabbitMQ Overview (Management Version)][3] and [RabbitMQ Overview (OpenMetrics Version)][4] dashboards and RabbitMQ monitors. Configure the receiver according to the specifications of the latest version of the `rabbitmqreceiver`.
 
