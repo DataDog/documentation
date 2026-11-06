@@ -52,13 +52,11 @@ If an evaluation fails or times out, the coding agent continues with the action 
 
 ¹ Guardrails evaluate prompts and tool calls.
 
-² Supply chain protection analyzes package installations with [Supply Chain Firewall][16].
+² Supply chain protection analyzes package installations with [Supply Chain Firewall][16]. Skill scanning, which checks extensions such as skills, is in development.
 
 ³ Sensitive data redaction detects and blocks secrets.
 
 ⁴ Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
-
-<div class="alert alert-info">Supply chain protection checks the packages that a coding agent installs. Skill scanning, which checks extensions such as skills, is in development.</div>
 
 Coding agent protection supports the platforms that Trajectory supports. For agent versions and platform requirements, see [Supported Clients][2] in the Trajectory documentation.
 
