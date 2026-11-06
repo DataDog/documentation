@@ -801,17 +801,29 @@ Network Path resolves the source host's public IP address to provide accurate pa
 
 This feature is **not required** for Network Path to function. If these services are unreachable, Network Path continues to operate normally, but the source public IP is not resolved and path visualizations do not display source IP metadata.
 
-If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist:
+If your network restricts outbound traffic and you want source public IP resolution, add the following URLs to your firewall allowlist (Agent `v7.86+`):
 
 | URL | Provider |
 |-----|----------|
-| `https://icanhazip.com` | Cloudflare |
-| `https://ipinfo.io/ip` | IPinfo |
 | `https://checkip.amazonaws.com` | Amazon |
-| `https://api.ipify.org` | ipify |
 | `https://whatismyip.akamai.com` | Akamai |
+| `https://icanhazip.com` | Cloudflare |
 
 The Agent tries each service in order and uses the first successful response. All requests are made over HTTPS (port 443).
+
+Agent versions `v7.75` to `v7.85` use a different list, in this order: `https://icanhazip.com`, `https://ipinfo.io/ip`, `https://checkip.amazonaws.com`, `https://api.ipify.org`, `https://whatismyip.akamai.com`.
+
+In Agent `v7.82+`, you can turn off source public IP resolution. Tests still run and paths are still collected, without the source public IP and the source's location and network provider details.
+
+- For [dynamic tests](#dynamic-tests) (standard and basic) and [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental), set the following in `datadog.yaml`, or set the environment variable `DD_NETWORK_PATH_COLLECTOR_DISABLE_SOURCE_PUBLIC_IP_COLLECTION` to `"true"`:
+
+  ```yaml
+  network_path:
+    collector:
+      disable_source_public_ip_collection: true
+  ```
+
+- For [scheduled tests](#scheduled-tests), set `disable_source_public_ip_collection: true` in the `init_config` section of `conf.d/network_path.d/conf.yaml` to apply it to all instances, or in an individual instance.
 
 ## Troubleshooting
 
