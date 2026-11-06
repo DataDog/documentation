@@ -26,7 +26,7 @@ To use most source code-related features, you must connect your Git repositories
 <div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
-Datadog supports the following features for the SCM providers listed below. See [Features][1] for more details about each feature:
+Datadog supports the following features for the SCM providers listed below. For details, see [Code Snippets and Context Links][1] and [PR Comments][2]:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
@@ -134,4 +134,5 @@ Successfully synced git DB in 3.579 seconds.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /source_code/features/
+[1]: /source_code/snippets-and-links/
+[2]: /source_code/pr-comments/
