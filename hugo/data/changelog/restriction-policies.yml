@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-11-04'
+    link: https://github.com/DataDog/documentation/pull/41328
+    operations:
+      - DeleteRestrictionPolicy
+      - GetRestrictionPolicy
+      - UpdateRestrictionPolicy
+    title: Document Gateway provider permissions and saved restricted selections

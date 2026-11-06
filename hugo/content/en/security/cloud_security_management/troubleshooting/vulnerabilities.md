@@ -92,5 +92,5 @@ datadog:
 [1]: /help/
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

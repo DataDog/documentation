@@ -25,7 +25,9 @@
 {{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
 {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
 
-{{ $endpoint_slug := $canonical_summary | anchorize }}
+{{/* Display-name overrides rewrite summary; page generation preserves the original URL. */}}
+{{ $routing_summary := index $endpoint_data "x-docs-original-summary" | default $canonical_summary }}
+{{ $endpoint_slug := $routing_summary | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
 

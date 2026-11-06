@@ -127,7 +127,7 @@ const provider = new DatadogProvider({
 await OpenFeature.setProviderAndWait(provider);
 {{< /code-block >}}
 
-<div class="alert alert-info">The browser SDK emits three independent telemetry streams, all enabled by default. <code>enableExposureLogging</code> sends per-evaluation exposure events to the exposures intake. <code>enableFlagEvaluationTracking</code> sends aggregated evaluation telemetry to the flag-evaluation intake. <code>enableRumFeatureFlagTracking</code> attaches flag evaluations to RUM events and is the setting that can affect RUM usage. Disable only the stream you do not need.</div>
+<div class="alert alert-info">The browser SDK emits three independent telemetry streams, all enabled by default. <code>trackExposures</code> (<code>enableExposureLogging</code> before version 2.3.0) sends per-evaluation exposure events to the exposures intake. <code>enableFlagEvaluationTracking</code> sends aggregated evaluation telemetry to the flag-evaluation intake. <code>enableRumFeatureFlagTracking</code> attaches flag evaluations to RUM events and is the setting that can affect RUM usage. Disable only the stream you do not need.</div>
 
 [1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
 [2]: /feature_flags/concepts/monthly_flag_configuration_requests/

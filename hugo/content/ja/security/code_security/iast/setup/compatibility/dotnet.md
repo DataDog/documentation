@@ -4,88 +4,104 @@ code_lang_weight: 10
 title: .NET 互換性要件
 type: multi-code-lang
 ---
-
-## Application Security capabilities support
+## アプリケーションセキュリティ機能のサポート {#application-security-capabilities-support}
 
 指定されたトレーサーバージョンに対して、.NET ライブラリでサポートされるアプリケーションセキュリティ機能は以下のとおりです:
 
-| アプリケーションセキュリティ機能  | .NET トレーサーの最小バージョン |
+| アプリケーションセキュリティ機能  | 最小 .NET トレーサーバージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
 | ブロックされたリクエストへの対応をカスタマイズする | 2.27.0 |
-| ソフトウェア構成分析 (SCA) |  2.16.0  |
-| コードセキュリティ  | 2.42.0  |
+| Software Composition Analysis (SCA) |  2.16.0  |
+| Code Security  | 2.42.0  |
 | ユーザーアクティビティイベントの自動追跡 | 2.32.0 |
-| API セキュリティ | 2.42.0 |
+| API Security | 2.42.0 |
 
 .NET でサポートされるすべてのアプリケーションセキュリティ機能を利用するための最小トレーサーバージョンは 2.42.0 です。
 
 **注**: Threat Protection を利用するには [Remote Configuration][3] を有効にする必要があります。Remote Configuration は上記の最小トレーサーバージョンに含まれています。
 
-### サポートされるデプロイメントタイプ
-| タイプ              | Threat Detection のサポート | ソフトウェア構成分析            |
-|-------------------|--------------------------|------------------------------------------|
-| Docker            | {{< X >}}                | {{< X >}}                                |
-| Kubernetes        | {{< X >}}                | {{< X >}}                                |
-| Amazon ECS        | {{< X >}}                | {{< X >}}                                |
-| AWS Fargate       | {{< X >}}                | {{< X >}}                                |
-| AWS Lambda        | {{< X >}}                |                                          |
-| Azure App Service | {{< X >}}                | {{< X >}}                                |
+### サポートされているデプロイメントタイプ {#supported-deployment-types}
+| タイプ              | Threat Detection のサポート | Software Composition Analysis | Code Security |
+|-------------------|--------------------------|-------------------------------|---------------|
+| Docker            | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     | Preview (2.42.0) |
+| AWS Lambda        | {{< X >}}                |                               |               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     | {{< X >}}     |
 
-**注**: Azure App Service は **Web アプリケーションのみ**サポートされます。Azure Functions は Application Security 機能のサポート対象外です。
+**注**: Azure App Service は、**Web アプリケーションのみ**サポートされています。Azure Functions では、アプリケーションセキュリティ機能はサポートされていません。
 
-## 言語とフレームワークの互換性
+## 言語とフレームワークの互換性 {#language-and-framework-compatibility}
 
-### サポートされている .NET バージョン
+### サポートされている .NET バージョン {#supported-net-versions}
 
-| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             |
-| ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
-| 4.8                     |                       | GA   | 最新                      |
-| 4.7.2                   |                       | GA | 最新                      |
-| 4.7                     |                       | GA | 最新                      |
-| 4.6.2                   |                       | GA | 最新                      |
-| 4.6.1                   | 04/26/2022            | GA   | 最新 |
+このセクションに記載されているすべてのバージョンは、一般提供 (GA) されています。
 
+Code Security は、以下の .NET および .NET Core ランタイムをサポートしています。
+
+| .NET バージョン  | Microsoft のサポート終了日 | パッケージバージョン    |
+| ------------- | --------------------- | ------------------ |
+| .NET 10       | _2028 年 11 月 14 日 _   | 最新版 (>= 3.31.0) |
+| .NET 9        | _2026 年 11 月 10 日 _   | 最新版 (>= 3.6.0)  |
+| .NET 8        | _2026 年 11 月 10 日 _   | 最新版 (>= 2.42.0) |
+| .NET 7        | 2024 年 5 月 14 日          | 最新版 (>= 2.42.0) |
+| .NET 6        | 2024 年 11 月 12 日     | 最新版 (>= 2.42.0) |
+| .NET 5        | 2022 年 5 月 10 日          | 最新版 (>= 2.42.0) |
+| .NET Core 3.1 | 2022 年 12 月 13 日     | 最新版 (>= 2.42.0) |
+
+Code Security は、以下の .NET Framework バージョンをサポートしています。
+
+| .NET Framework バージョン | Microsoft のサポート終了日 | パッケージバージョン |
+| ---------------------- | --------------------- | --------------- |
+| 4.8                    |                       | 最新版          |
+| 4.7.2                  |                       | 最新版          |
+| 4.7                    |                       | 最新版          |
+| 4.6.2                  |                       | 最新版          |
+| 4.6.1                  | 2022 年 4 月 26 日        | 最新版          |
 
 これらは、以下のアーキテクチャでサポートされています。
 - Linux (GNU) x86-64、ARM64
 - Alpine Linux (musl) x86-64、ARM64
-- macOS (Darwin) x86-64、ARM64
 - Windows (msvc) x86、x86-64
 
+.NET トレーサーがサポートするランタイムおよびオペレーティングシステムについては、[.NET および .NET Core の互換性要件][1]および [.NET Framework の互換性要件][2]を参照してください。
 
+### Web フレームワークの互換性 {#web-framework-compatibility}
 
-### Web フレームワークの互換性
+**Web フレームワークの統合によって提供されるもの:**
 
 - 攻撃元の HTTP リクエストの詳細
 - HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
-- アプリケーション内の攻撃フローを確認するための分散型トレーシング
+- アプリケーション内の攻撃フローを確認するための分散トレーシング
 
-##### アプリケーションセキュリティ機能に関する注意事項
+##### アプリケーションセキュリティ機能に関する注意事項 {#application-security-capability-notes}
 - **Software Composition Analysis** はすべてのフレームワークでサポートされます。
-- リストにないフレームワークの場合、**Code Security** では Insecure Cookie (不適切な Cookie 設定) の検出が継続されます。
+- お使いのフレームワークが以下に記載されていない場合でも、**Code Security** は Insecure Cookie の脆弱性を検出します。
 
 
-| フレームワーク                  | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 | Code Security ですか？ |
+| フレームワーク                  | Threat Detection のサポート| Threat Protection のサポート| Code Security のサポート|
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ASP.NET Core (minimal API を含む) | {{< X >}} | {{< X >}} | {{< X >}} |
 | ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
 | ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
 
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+<div class="alert alert-info">お使いのフレームワークがリストにない場合は、お知らせください。<a href="https://forms.gle/gHrxGQMEnAobukfn7">こちらの短いフォームに記入し、詳細を送信してください</a>。</div>
 
-### データストアの互換性
+### データストアの互換性 {#data-store-compatibility}
 
-**データストアのトレーシングでは以下の確認が可能です**
+**データストアのトレーシングでは以下の確認が可能です。**
 
 - SQL 攻撃の検知
 - クエリ情報 (サニタイジングされたクエリ文字列など)
 - エラーとスタックトレースの取得
 
-##### アプリケーションセキュリティ機能に関する注意事項
+##### アプリケーションセキュリティ機能に関する注意事項 {#application-security-capability-notes-1}
 - **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
 
-| フレームワーク         | Threat Detection のサポートの有無    | Threat Protection のサポートの有無 | Code Security ですか？ |
+| フレームワーク         | Threat Detection のサポート   | Threat Protection のサポート| Code Security のサポート|
 |-------------------|-----------------|---------------------|---|
 | OracleDB         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | ADO.NET         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
@@ -93,7 +109,7 @@ type: multi-code-lang
 | MySQL       | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | SQLite         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 
-### User Authentication Frameworks の互換性
+### ユーザー認証フレームワークの互換性 {#user-authentication-frameworks-compatibility}
 
 **User Authentication Frameworks へのインテグレーションは以下を提供します。**
 

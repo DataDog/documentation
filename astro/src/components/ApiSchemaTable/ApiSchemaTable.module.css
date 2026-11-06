@@ -1,0 +1,215 @@
+.schema-table__table {
+  border: var(--border-width) solid var(--color-surface-border);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-sm);
+  overflow: hidden;
+  background-color: var(--color-surface-bg);
+  box-sizing: border-box;
+}
+
+.schema-table__table *,
+.schema-table__table *::before,
+.schema-table__table *::after {
+  box-sizing: border-box;
+}
+
+.schema-table__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: var(--space-xs);
+}
+
+.schema-table__expand-all {
+  background: none;
+  border: none;
+  color: var(--color-brand);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  padding: 0;
+}
+
+.schema-table__expand-all:hover {
+  color: var(--color-brand-hover);
+  text-decoration: underline;
+}
+
+.schema-table__expand-all-label {
+  /* Both labels are rendered server-side; the island toggles `hidden`. */
+}
+
+.schema-table__columns {
+  display: flex;
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+  background: var(--color-surface-header);
+  font-weight: 600;
+  font-size: var(--font-size-xs);
+  color: var(--color-surface-header-text);
+  text-transform: uppercase;
+}
+
+.schema-table__columns-name {
+  flex: 0 0 33.33%;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__columns-type {
+  flex: 0 0 16.67%;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__columns-description {
+  flex: 1;
+  padding: 4px var(--space-md);
+}
+
+.schema-table__row {
+  display: flex;
+  border-top: var(--border-width) solid var(--color-surface-border);
+  line-height: 1.5;
+}
+
+/* Rows draw their divider on top, not bottom, so the last row of a nested
+   group still separates from the next outer row. Only the first row needs
+   none, since the column header already draws one. */
+.schema-table__columns + .schema-table__row {
+  border-top: none;
+}
+
+.schema-table__row:hover {
+  background: var(--color-bg-hover);
+}
+
+/* The toggle hangs in the gutter left of the name instead of
+   pushing it, so every name at a depth starts at the same x whether or not
+   its row has a toggle. `--schema-table-indent` is set per row. */
+.schema-table__cell-name {
+  --schema-table-name-left: calc(
+    var(--space-xl) + var(--schema-table-indent, 0px)
+  );
+  position: relative;
+  flex: 0 0 33.33%;
+  display: flex;
+  align-items: baseline;
+  padding: 4px var(--space-md) 4px var(--schema-table-name-left);
+  border-right: var(--border-width) solid var(--color-surface-border);
+  min-width: 0;
+}
+
+.schema-table__cell-type {
+  flex: 0 0 16.67%;
+  padding: 4px var(--space-md);
+  border-right: var(--border-width) solid var(--color-surface-border);
+  color: var(--color-text-muted);
+}
+
+.schema-table__cell-description {
+  flex: 1;
+  padding: 4px var(--space-md);
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.schema-table__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  /* Vertically centered on the lowercase letters of the name's first line:
+     the cell's 4px top padding, then half of the leftover line height, then
+     down to the middle of the x-height, which sits below the line's middle. */
+  top: calc(
+    4px + (1.5 * var(--font-size-sm) - 16px) / 2 + 0.08 * var(--font-size-sm)
+  );
+  left: calc(var(--schema-table-name-left) - 16px - var(--space-xs));
+  transition: transform 0.15s ease;
+}
+
+.schema-table__toggle--expanded {
+  transform: rotate(90deg);
+}
+
+.schema-table__toggle:hover {
+  color: var(--color-brand);
+}
+
+.schema-table__name-group {
+  word-break: break-all;
+  min-width: 0;
+}
+
+.schema-table__name {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  background: none;
+  padding: 0;
+}
+
+.schema-table__required,
+.schema-table__deprecated {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  color: var(--color-text);
+  /* The name group breaks anywhere, so keep the label on one line. */
+  white-space: nowrap;
+}
+
+.schema-table__deprecated {
+  color: var(--color-red);
+}
+
+.schema-table__type {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.schema-table__description > p {
+  margin: 0;
+}
+
+.schema-table__description > p + p {
+  margin-top: var(--space-xs);
+}
+
+.schema-table__deprecated-label {
+  color: var(--color-red);
+}
+
+/* Default and enum labels share one style, at the description's size. */
+.schema-table__default,
+.schema-table__enum {
+  display: block;
+  margin-top: var(--space-xs);
+  color: var(--color-text-muted);
+}
+
+.schema-table__default code,
+.schema-table__enum code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+  word-break: break-all;
+}
+
+.schema-table__enum-details {
+  margin-top: var(--space-xs);
+}
+
+.schema-table__enum-details summary {
+  cursor: pointer;
+  color: var(--color-brand);
+}
+
+.schema-table__children {
+  /* Container for nested rows — display toggled by component */
+}

@@ -420,12 +420,6 @@ multifiltersearch:
       recommendation_type: Delete Unused App Service Plan
       recommendation_description: App Service Plans with no deployed apps that Azure Advisor recommends deleting.
       recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: Azure
-      resource_type: Azure Firewall
-      recommendation_type: Delete Idle Azure Firewall
-      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
-      recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: Azure
       resource_type: Managed Disk Snapshot
@@ -498,11 +492,23 @@ multifiltersearch:
       recommendation_type: Downsize Managed Disk Throughput
       recommendation_description: Managed disk using less than the configured threshold of provisioned throughput.
       recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: Managed Disk
+      recommendation_type: Migrate Managed Disk from Premium SSD to Premium SSD v2
+      recommendation_description: Identifies attached Premium SSD data disks that would cost less as Premium SSD v2 provisioned for their measured peak IOPS and throughput, and recommends converting them.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: MySQL Database
       recommendation_type: Delete Database for MySQL
       recommendation_description: Database server with no connections, which can be terminated.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Azure Firewall
+      recommendation_type: Delete Idle Azure Firewall
+      recommendation_description: Identifies Azure Firewalls that processed no data and had no allowed network or application rule hits over the lookback, and recommends deleting them.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -538,7 +544,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: SQL Managed Instance
       recommendation_type: Downsize SQL Managed Instance
-      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay below the configured threshold on a smaller vCore size. Recommends downsizing them by up to two sizes at a time to reduce compute and SQL license costs.
+      recommendation_description: Identifies SQL Managed Instances whose peak CPU would stay low on a smaller vCore size, and recommends downsizing them, at most two sizes at a time, to cut on-demand compute and SQL license charges.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -743,6 +749,24 @@ multifiltersearch:
       resource_type: Kubernetes Deployment
       recommendation_type: Downsize Deployment
       recommendation_description: Containers are using only a fraction of their requested CPU or memory.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Configure
       cloud_provider: OpenAI

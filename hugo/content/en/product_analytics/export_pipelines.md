@@ -14,10 +14,6 @@ further_reading:
   text: "Learn about Real User Monitoring"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/export-pipelines/" btn_hidden="false" header="Join the Preview!">}}
-Export Pipelines is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Export Pipelines stream your ingested Real User Monitoring (RUM) and Product Analytics events to a cloud storage bucket you own — Amazon S3, Azure Blob Storage, or Google Cloud Storage — in JSON or Parquet format.

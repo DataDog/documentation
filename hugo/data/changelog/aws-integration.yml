@@ -16,3 +16,18 @@ entries:
       - ListAWSAccounts
       - UpdateAWSAccount
     title: Add collect_service_quotas to AWS metrics config
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41193
+    operations:
+      - CreateAWSAccount
+      - GetAWSAccount
+      - ListAWSAccounts
+      - UpdateAWSAccount
+    title: Add resource_type_tag_filters to AWS metrics config
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41196
+    operations:
+      - ListAWSAccounts
+    title: Add AWS cloud authentication intake mapping endpoints
