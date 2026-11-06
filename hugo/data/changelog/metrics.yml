@@ -131,3 +131,15 @@ entries:
       - GetDerivedMetric
       - UpdateDerivedMetric
     title: Add Terraform support for Derived Metrics
+  - change_type: modified
+    date: '2026-11-06'
+    link: https://github.com/DataDog/documentation/pull/41484
+    operations:
+      - EstimateMetricsOutputSeries
+      - ListActiveMetricConfigurations
+      - ListTagConfigurationByName
+      - ListTagConfigurations
+      - ListTagsByMetricName
+      - ListVolumesByMetricName
+    title: Point metrics API docs to the bulk list endpoint and fix parameter 
+      docs
