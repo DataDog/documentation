@@ -1,5 +1,7 @@
 ---
-title: Set Up Just-In-Time (JIT) Deployment Gates
+title: Set Up Inline Deployment Gates
+aliases:
+  - /deployment_gates/setup/jit
 description: "Evaluate Deployment Gates by sending rules inline in the evaluation request — no gate needs to exist in Datadog ahead of time."
 further_reading:
 - link: "/deployment_gates/setup/preconfigured"
@@ -10,7 +12,7 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-With **Just-In-Time (JIT)** Deployment Gates, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
+With **inline** Deployment Gates, rules are defined in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes inline gates a good fit for rules-as-code and per-deployment flexibility.
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
 
@@ -427,7 +429,7 @@ For complete configuration options and usage examples, see the [`DataDog/deploym
 {{% /tab %}}
 {{% tab "Generic script" %}}
 
-Use this script as a starting point. It evaluates a gate using inline JIT rules.
+Use this script as a starting point. It evaluates a gate using inline rules.
 
 Replace the following:
 

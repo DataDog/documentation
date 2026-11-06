@@ -6488,10 +6488,10 @@ menu:
       parent: deployment_gates
       identifier: deployment_gates_setup
       weight: 1
-    - name: Just-In-Time (JIT) Gates
-      url: deployment_gates/setup/jit/
+    - name: Inline Gates
+      url: deployment_gates/setup/inline/
       parent: deployment_gates_setup
-      identifier: deployment_gates_setup_jit
+      identifier: deployment_gates_setup_inline
       weight: 1
     - name: Preconfigured Gates
       url: deployment_gates/setup/preconfigured/
