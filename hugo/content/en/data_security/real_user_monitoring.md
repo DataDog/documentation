@@ -111,7 +111,7 @@ You have some options available for removing Personally Identifiable Information
 #### Mask action names
 By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes][16].
 
-To keep useful action names visible while masking sensitive data, use the [privacy build plugin][22]. The plugin generates an allowlist of safe, static strings at build time. With the `mask-unless-allowlisted` privacy level, the SDK displays only text that matches the allowlist.
+To keep useful action names visible while masking sensitive data, use the [privacy plugin][22]. The plugin generates an allowlist of safe, static strings at build time. With the `mask-unless-allowlisted` privacy level, the SDK displays only text that matches the allowlist.
 
 #### Unstructured data
 PII inadvertently included in unstructured data, such as an individual's name in a text box, can only be removed through a data deletion requisition for a specified time frame.
