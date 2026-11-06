@@ -2287,7 +2287,7 @@
     "request_schema_description": "Request to create a new feature flag."
   },
   "ListFeatureFlagsEnvironments": {
-    "description": "Returns a list of environments for the organization.\nSupports filtering by name, key, and DD_ENV.",
+    "description": "Returns a list of environments for the organization.\nUse `dd_env` to filter by an exact DD_ENV value in an environment's `queries` list.",
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
@@ -2305,7 +2305,7 @@
     "summary": "Get an environment"
   },
   "UpdateFeatureFlagsEnvironment": {
-    "description": "Updates an existing environment's metadata such as\n name and description.",
+    "description": "Updates an environment's name, DD_ENV values, and settings.\n\nEvery request must include `name` and `queries`, even when changing only `observe_full_evaluation_data`.\nTo preserve the current name and DD_ENV values, get the environment first and include those values in the request.\n\nOmitting `is_production` or `require_feature_flag_approval` resets that setting to `false`.\nInclude their current values to preserve them. Omitting `observe_full_evaluation_data` preserves its current value.",
     "summary": "Update an environment",
     "request_description": "",
     "request_schema_description": "Request to update an environment."
