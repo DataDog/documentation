@@ -5414,26 +5414,36 @@ menu:
       parent: dbm_setup_clickhouse
       identifier: dbm_setup_clickhouse_cloud
       weight: 10902
+    - name: IBM Db2
+      url: database_monitoring/setup_db2/
+      parent: dbm_setup
+      identifier: dbm_setup_db2
+      weight: 110
+    - name: Self-hosted
+      url: database_monitoring/setup_db2/selfhosted
+      parent: dbm_setup_db2
+      identifier: dbm_setup_db2_selfhosted
+      weight: 11001
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm_setup
       identifier: dbm_setup_documentdb
-      weight: 110
+      weight: 111
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/amazon_documentdb
       parent: dbm_setup_documentdb
       identifier: dbm_setup_documentdb_amazon_documentdb
-      weight: 11001
+      weight: 11101
     - name: Troubleshooting
       url: database_monitoring/setup_documentdb/troubleshooting
       parent: dbm_setup_documentdb
       identifier: dbm_troubleshooting_documentdb
-      weight: 11002
+      weight: 11102
     - name: Provision the Agent with Terraform
       url: database_monitoring/setup_agent_terraform/
       parent: dbm_setup
       identifier: dbm_setup_agent_terraform
-      weight: 111
+      weight: 112
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
