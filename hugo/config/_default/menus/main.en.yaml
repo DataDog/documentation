@@ -1660,7 +1660,7 @@ menu:
       parent: bits_ai
       weight: 10
     - name: Bits Guardrails
-      url: bits_ai/bits_remediation/guardrails
+      url: bits_ai/bits_remediation/bits_guardrails
       identifier: bits_remediation_guardrails
       parent: bits_remediation
       weight: 1001
@@ -1675,7 +1675,7 @@ menu:
       parent: bits_ai
       weight: 12
     - name: Bits AI Settings
-      url: bits_ai/settings
+      url: bits_ai/bits_settings
       identifier: bits_ai_settings
       parent: bits_ai
       weight: 13
