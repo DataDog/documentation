@@ -5979,6 +5979,24 @@
     "request_description": "The definition of the RUM configuration to create.",
     "request_schema_description": "Request body for creating the RUM configuration."
   },
+  "ListRUMArchiveConfigs": {
+    "description": "Get the list of archive configurations for your organization.",
+    "summary": "List archive configurations"
+  },
+  "DeleteRUMArchiveConfig": {
+    "description": "Delete the archive configuration for a RUM application. Archived and recovered session data is not deleted.",
+    "summary": "Delete an archive configuration"
+  },
+  "GetRUMArchiveConfig": {
+    "description": "Get the archive configuration for a RUM application.",
+    "summary": "Get an archive configuration"
+  },
+  "UpdateRUMArchiveConfig": {
+    "description": "Create or update the archive configuration for a RUM application. The application ID in the path must match `data.id`. Disabling archiving does not delete archived sessions.",
+    "summary": "Create or update an archive configuration",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
   "ListRumMetrics": {
     "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
     "summary": "Get all RUM-based metrics"
@@ -6114,6 +6132,38 @@
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
+  },
+  "GetRUMRecoverySessionCount": {
+    "description": "Return the full estimated number of recoverable sessions and the configured maximum per batch. The estimate is not capped at that maximum. This endpoint does not create a recovery request. Narrow the query or time range if the estimate exceeds max_recoverable_sessions. Creation checks a fresh estimate and returns 400 if it exceeds the configured maximum.",
+    "summary": "Estimate recoverable sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "ListRUMRecoveryBatchRequests": {
+    "description": "List batch recovery requests for your organization. Set `type=batch`. Optional `from` and `to` bounds filter request creation time; `query` filters the queries stored on recovery requests.\nA filtered page can be empty or contain fewer than `limit` results and still include `meta.next_cursor`. Continue until the cursor is absent, keeping the filters unchanged between pages.",
+    "summary": "List batch recovery requests"
+  },
+  "CreateRUMRecoveryRequest": {
+    "description": "Start targeted or query-based batch recovery. Use the returned `data.id` to poll the recovery request for progress. Batch creation checks a fresh recoverable-session estimate against the configured maximum (100,000 by default), accepting estimates equal to the maximum. Use the count operation to check the current maximum; creation can still reject a changed estimate. Narrow the query or time range if the maximum is exceeded.\n\nCreation is not idempotent. After an uncertain response, check session search or batch listing before retrying.",
+    "summary": "Create a recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "GetRUMRecoveryRequest": {
+    "description": "Get progress for a targeted or batch recovery request. A `COMPLETED` request can include failed sessions; check individual session statuses for targeted recovery.",
+    "summary": "Get recovery request progress"
+  },
+  "UpdateRUMRecoveryBatchRequest": {
+    "description": "Cancel pending work for a batch recovery request. Work already in progress can finish, and recovered data is not removed. Requests in a terminal state return `409`.",
+    "summary": "Cancel a batch recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "SearchRUMArchiveSessions": {
+    "description": "Search archived RUM sessions. Use `meta.page.next_cursor` to retrieve the next page.",
+    "summary": "Search archived sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",

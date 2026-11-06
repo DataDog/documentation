@@ -2305,6 +2305,20 @@
       "description": "Update a RUM application with Product Scales returns \"OK\" response"
     }
   ],
+  "GetRUMRecoverySessionCount": [
+    {
+      "group": "rum_recovery",
+      "suffix": "_4221178610",
+      "description": "Count recoverable sessions accepts exactly 180 days"
+    }
+  ],
+  "SearchRUMArchiveSessions": [
+    {
+      "group": "rum_recovery",
+      "suffix": "_3394116303",
+      "description": "Search archived sessions returns canonical data and first-page metadata"
+    }
+  ],
   "UpdateRestrictionPolicy": [
     {
       "group": "restriction_policies",

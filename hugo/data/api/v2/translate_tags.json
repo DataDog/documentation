@@ -427,9 +427,17 @@
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-managed-archives": {
+    "name": "RUM Managed Archives",
+    "description": "Configure Managed Archives for RUM applications. Your organization must have Managed Archives enabled.\n\nRequires `rum_rehydration_filter_read` to list or get configurations, or `rum_rehydration_filter_write` to create, update, or delete them."
+  },
   "rum-operations": {
     "name": "RUM Operations",
     "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+  },
+  "rum-recovery": {
+    "name": "RUM Recovery",
+    "description": "Search archived RUM sessions and recover individual sessions or query-based batches. Your organization must have Managed Archives enabled. Creating, counting, listing, and canceling batches also require batch recovery enablement.\n\nRequires `rum_rehydration_filter_read` for search and request details, or `rum_rehydration_index` to create, estimate recoverable sessions, list batches, or cancel recovery requests."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",

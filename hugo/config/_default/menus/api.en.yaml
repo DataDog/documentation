@@ -21037,6 +21037,58 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Managed Archives
+      url: /api/latest/rum-managed-archives/
+      identifier: rum-managed-archives
+      generated: true
+    - name: Create or update an archive configuration
+      url: /api/latest/rum-managed-archives/create-or-update-an-archive-configuration/
+      identifier: rum-managed-archives-create-or-update-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMArchiveConfig
+        unstable: []
+        order: 3
+    - name: Get an archive configuration
+      url: /api/latest/rum-managed-archives/get-an-archive-configuration/
+      identifier: rum-managed-archives-get-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMArchiveConfig
+        unstable: []
+        order: 2
+    - name: Delete an archive configuration
+      url: /api/latest/rum-managed-archives/delete-an-archive-configuration/
+      identifier: rum-managed-archives-delete-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMArchiveConfig
+        unstable: []
+        order: 4
+    - name: List archive configurations
+      url: /api/latest/rum-managed-archives/list-archive-configurations/
+      identifier: rum-managed-archives-list-archive-configurations
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMArchiveConfigs
+        unstable: []
+        order: 1
     - name: RUM Operations
       url: /api/latest/rum-operations/
       identifier: rum-operations
@@ -21161,6 +21213,82 @@ menu:
           - CreateRUMOperation
         unstable: []
         order: 2
+    - name: RUM Recovery
+      url: /api/latest/rum-recovery/
+      identifier: rum-recovery
+      generated: true
+    - name: Search archived sessions
+      url: /api/latest/rum-recovery/search-archived-sessions/
+      identifier: rum-recovery-search-archived-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRUMArchiveSessions
+        unstable: []
+        order: 1
+    - name: Cancel a batch recovery request
+      url: /api/latest/rum-recovery/cancel-a-batch-recovery-request/
+      identifier: rum-recovery-cancel-a-batch-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMRecoveryBatchRequest
+        unstable: []
+        order: 6
+    - name: Get recovery request progress
+      url: /api/latest/rum-recovery/get-recovery-request-progress/
+      identifier: rum-recovery-get-recovery-request-progress
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoveryRequest
+        unstable: []
+        order: 3
+    - name: Create a recovery request
+      url: /api/latest/rum-recovery/create-a-recovery-request/
+      identifier: rum-recovery-create-a-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMRecoveryRequest
+        unstable: []
+        order: 2
+    - name: List batch recovery requests
+      url: /api/latest/rum-recovery/list-batch-recovery-requests/
+      identifier: rum-recovery-list-batch-recovery-requests
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMRecoveryBatchRequests
+        unstable: []
+        order: 4
+    - name: Estimate recoverable sessions
+      url: /api/latest/rum-recovery/estimate-recoverable-sessions/
+      identifier: rum-recovery-estimate-recoverable-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoverySessionCount
+        unstable: []
+        order: 5
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
       identifier: rum-remote-config
