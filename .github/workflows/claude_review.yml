@@ -403,9 +403,15 @@ jobs:
 
           Paths in your output JSON's `comments[].path` must be
           repo-relative (i.e. omit the `__untrusted/` prefix), so
-          `__untrusted/content/foo.md` is reported as `content/foo.md`.
+          `__untrusted/hugo/content/en/foo.md` is reported as
+          `hugo/content/en/foo.md`. Copy paths exactly as they appear
+          after `+++ b/` in the diff.
           `line` must be the line number in the file as it exists on
-          the PR head (the new version).
+          the PR head (the new version), and it must fall inside a
+          diff hunk. Don't point a comment at a line past the end of
+          the file. For a finding about a file that isn't in the diff,
+          such as a missing menu entry, put the comment on the most
+          relevant changed line instead.
 
           ## Output channel (overrides .claude/pr-review.md output format)
 
