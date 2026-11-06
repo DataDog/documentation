@@ -65,20 +65,13 @@ To run one-click Kubernetes actions, your organization needs:
 - A [Private Action Runner][5] with network access to your Kubernetes cluster.
 - A user role with permission to run actions and resolve the Kubernetes connection.
 
-## Govern how Bits takes remediation action
+## Govern how Bits takes remediation action with guardrails
 
-{{< callout >}} Bits Guardrails are in Preview.{{< /callout >}}
-
-[Bits Guardrails][8] let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them.
+Bits Guardrails let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them.
 
 Guardrails require the `Guardrails Read` and `Guardrails Write` permissions, which can be enabled in [Organizational Settings > Roles][7]. 
 
-To create a guardrail:
-1. **Choose the actions to target**: Select one or more available actions for an integration (for example, Kubernetes) for the guardrail to target.
-1. **Define guardrail scope**: Specify the environment, service, and resource tags the guardrail applies to.
-1. **Set the enforcement level**: For the selected actions and scope, decide when Bits can take action.
-    - **Ask**: Requires user approval before Bits executes actions. Choose which teams, roles, or individuals can approve.
-    - **Deny**: Bits can recommend an action but cannot take it.
+For more information about guardrails, including how to create guardrails, see **LINK TO GUARDRAILS PAGE**
 
 ## Validate that issues are resolved
 
