@@ -18,10 +18,24 @@ For more information, see the OpenTelemetry project documentation for the [Rabbi
 
 To collect RabbitMQ metrics with OpenTelemetry for use with Datadog:
 
-1. Enable the [management plugin][6] on your RabbitMQ brokers, and create a user with at least `monitoring` permissions. The receiver reads the management HTTP API.
+1. Enable the [management plugin][6] on your RabbitMQ brokers, and create a user for the receiver. The receiver reads the management HTTP API.
 2. Configure the [RabbitMQ receiver][1] in your OpenTelemetry Collector configuration.
-3. Configure service pipelines.
-4. Verify that the OpenTelemetry Collector is [configured to export to Datadog][5], and add the exporter setting shown below.
+3. Configure the processors that convert the receiver's connection, queue, and message counters to per-interval counts.
+4. Add the service pipelines to your Collector configuration.
+5. Set up the OpenTelemetry Collector with the [recommended configuration][5], which exports to Datadog with the OTLP HTTP exporter (`otlp_http`).
+
+### RabbitMQ user
+
+Enable the management plugin on each RabbitMQ node, then create a user with the `monitoring` tag:
+
+```shell
+rabbitmq-plugins enable rabbitmq_management
+rabbitmqctl add_user <USERNAME> <PASSWORD>
+rabbitmqctl set_user_tags <USERNAME> monitoring
+rabbitmqctl set_permissions -p / <USERNAME> "" "" ""
+```
+
+The `set_permissions` command gives the user access to the `/` virtual host without configure, write, or read permissions. Without access to a virtual host, the management API doesn't return that virtual host's queues to the user. Repeat the command for each virtual host you want to monitor.
 
 ### RabbitMQ receiver
 
@@ -78,19 +92,24 @@ processors:
           - set(metric.is_monotonic, true) where metric.name == "rabbitmq.node.queue_created"
           - set(metric.is_monotonic, true) where metric.name == "rabbitmq.node.queue_declared"
           - set(metric.is_monotonic, true) where metric.name == "rabbitmq.node.queue_deleted"
-
-exporters:
-  datadog/exporter:
-    metrics:
-      sums:
-        initial_cumulative_monotonic_value: drop
+  cumulativetodelta/rabbitmq-cluster-1:
+    initial_value: drop
+    include:
+      match_type: strict
+      metrics:
+        - rabbitmq.node.connection_closed
+        - rabbitmq.node.connection_created
+        - rabbitmq.node.queue_created
+        - rabbitmq.node.queue_declared
+        - rabbitmq.node.queue_deleted
+        - rabbitmq.message.acknowledged
 ```
 
 This configuration does the following:
 
 - Enables the `rabbitmq.node.*` metrics, which are all off by default in the receiver.
-- Uses the `transform` processor to mark the node connection and queue counters as monotonic. The receiver declares them as non-monotonic sums, so without it the Datadog exporter sends the running total instead of per-interval counts.
-- Sets `initial_cumulative_monotonic_value: drop` on the Datadog exporter. This setting stops the exporter from reporting the full count since broker startup as a single value after each Collector restart.
+- Uses the `transform` processor to mark the node connection and queue counters as monotonic. The receiver declares them as non-monotonic sums, which the `cumulativetodelta` processor doesn't convert.
+- Uses the `cumulativetodelta` processor to turn the connection, queue, and acknowledged message counters into per-interval counts. `initial_value: drop` discards the first point, which would otherwise report the full count since broker startup.
 
 Configure one receiver for each cluster, not for each node. The management API returns every node and queue in the cluster, so a receiver on each node reports each series once for every receiver.
 
@@ -98,13 +117,15 @@ See the [RabbitMQ receiver documentation][1] for detailed configuration options 
 
 ### Service pipelines
 
+Add this pipeline under `service.pipelines` in your Collector configuration. The `otlp_http` exporter comes from the [recommended configuration][5].
+
 ```yaml
 service:
   pipelines:
     metrics/rabbitmq-cluster-1:
       receivers: [rabbitmq/rabbitmq-cluster-1]
-      processors: [transform/rabbitmq-cluster-1]
-      exporters: [datadog/exporter]
+      processors: [transform/rabbitmq-cluster-1, cumulativetodelta/rabbitmq-cluster-1]
+      exporters: [otlp_http]
 ```
 
 ## Data collected
@@ -117,7 +138,7 @@ For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTe
 
 ### Known limitations
 
-- Starting with RabbitMQ 4.0, the broker reports `sockets_used` and `sockets_total` as `0` and no longer exposes `process_open_tcp_sockets` or `process_max_tcp_sockets`. On 4.x brokers, the socket metrics read `0`.
+- Starting with RabbitMQ 4.0, the broker reports `sockets_used` and `sockets_total` as `0` and no longer exposes `process_open_tcp_sockets` or `process_max_tcp_sockets`.
 - Channel-level metrics, queue totals, and management API `.rate` metrics are not mapped, because their OpenTelemetry counterparts are scoped or typed differently. These include:
   - `rabbitmq.channels`
   - `rabbitmq.channel.messages.*`

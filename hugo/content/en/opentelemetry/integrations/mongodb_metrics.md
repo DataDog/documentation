@@ -20,8 +20,21 @@ To collect MongoDB metrics with OpenTelemetry for use with Datadog:
 
 1. Create a MongoDB user with the [`clusterMonitor` role][5], which includes the `serverStatus` and `listDatabases` actions.
 2. Configure one [MongoDB receiver][1] for each `mongod` and `mongos` instance in your OpenTelemetry Collector configuration.
-3. Configure service pipelines.
-4. Verify that the OpenTelemetry Collector is [configured to export to Datadog][4].
+3. Configure the processors that convert the receiver's network and page fault counters to per-second rates.
+4. Add the service pipelines to your Collector configuration.
+5. Set up the OpenTelemetry Collector with the [recommended configuration][4], which exports to Datadog with the OTLP HTTP exporter (`otlp_http`).
+
+### MongoDB user
+
+Connect to MongoDB with `mongosh` as a user that can create users, and run:
+
+```javascript
+db.getSiblingDB("admin").createUser({
+  user: "<USERNAME>",
+  pwd: "<PASSWORD>",
+  roles: [{ role: "clusterMonitor", db: "admin" }]
+})
+```
 
 ### MongoDB receiver
 
@@ -33,6 +46,8 @@ receivers:
     username: "<USERNAME>"
     password: "<PASSWORD>"
     direct_connection: true
+    tls:
+      insecure: true
     collection_interval: 10s
     metrics:
       mongodb.operation.latency.time:
@@ -76,7 +91,8 @@ processors:
 
 This configuration does the following:
 
-- Sets `direct_connection: true` to keep each receiver on its own node. Without it, the driver discovers the replica set and reads the primary's `serverStatus` from every member. The Agent reports each member separately.
+- Sets `direct_connection: true` to keep each receiver on its own node. Without it, the driver discovers the replica set and reads the primary's `serverStatus` from every member, while the Agent reports each member separately.
+- Sets `tls.insecure: true`, because the receiver connects with TLS by default and fails against a MongoDB server without TLS. If your MongoDB deployment uses TLS, remove this setting and configure the receiver's TLS options instead.
 - Enables the latency metrics, the per-second operation metrics, and `mongodb.page_faults`, which are off by default in the receiver.
 - Uses the `transform`, `cumulativetodelta`, and `deltatorate` processors to turn the network and page fault counters into per-second rates, which match the Agent's rate metrics. `initial_value: drop` discards the first point, which would otherwise report the whole total since startup.
 
@@ -89,13 +105,15 @@ See the [MongoDB receiver documentation][1] for detailed configuration options a
 
 ### Service pipelines
 
+Add this pipeline under `service.pipelines` in your Collector configuration. The `otlp_http` exporter comes from the [recommended configuration][4].
+
 ```yaml
 service:
   pipelines:
     metrics/mongodb-node-1:
       receivers: [mongodb/mongodb-node-1]
       processors: [transform/mongodb-node-1, cumulativetodelta/mongodb-node-1, deltatorate/mongodb-node-1]
-      exporters: [datadog/exporter]
+      exporters: [otlp_http]
 ```
 
 ## Data collected
@@ -117,10 +135,10 @@ For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTe
   - `mongodb.globallock.currentqueue.readers`
   - `mongodb.globallock.currentqueue.writers`
   - `mongodb.oplog.logsizemb`
-  - `mongodb.oplog.usedsizemb`
   - `mongodb.oplog.timediff`
-  - `mongodb.replset.optime_lag`
+  - `mongodb.oplog.usedsizemb`
   - `mongodb.replset.health`
+  - `mongodb.replset.optime_lag`
   - `mongodb.sessions.count`
   - `mongodb.stats.fstotalsize`
   - `mongodb.stats.fsusedsize`

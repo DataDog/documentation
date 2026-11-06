@@ -20,8 +20,8 @@ To collect Redis metrics with OpenTelemetry for use with Datadog:
 
 1. Configure the [Redis receiver][1] in your OpenTelemetry Collector configuration.
 2. Configure the processors that convert the receiver's cumulative sums to the metric types Datadog expects.
-3. Configure service pipelines.
-4. Verify that the OpenTelemetry Collector is [configured to export to Datadog][4].
+3. Add the service pipelines to your Collector configuration.
+4. Set up the OpenTelemetry Collector with the [recommended configuration][4], which exports to Datadog with the OTLP HTTP exporter (`otlp_http`).
 
 ### Redis receiver
 
@@ -40,7 +40,7 @@ processors:
     attributes:
       - action: insert
         key: datadog.host.name
-        value: <HOST>
+        value: <HOSTNAME>
   transform/redis-host-1:
     metric_statements:
       - context: metric
@@ -64,15 +64,19 @@ processors:
       - redis.keyspace.misses
 ```
 
+Replace `<HOST>` and `<PORT>` with the address of your Redis server, and `<HOSTNAME>` with the host name to show in Datadog. If your Redis server doesn't require a password, remove the `password` line.
+
 This configuration does the following:
 
 - Enables `redis.maxmemory`, which is off by default in the receiver. The configured max memory metric and the high memory monitor need it. The metric reports a value only when `maxmemory` is set on the Redis server.
-- Uses the `transform` processor to report `redis.keys.evicted`, `redis.keys.expired`, and `redis.connections.rejected` as gauges of the running total, as the Datadog Agent does. Without it, the Datadog exporter sends per-interval deltas.
+- Uses the `transform` processor to report `redis.keys.evicted`, `redis.keys.expired`, and `redis.connections.rejected` as gauges of the running total, as the Datadog Agent does.
 - Uses the `cumulativetodelta` and `deltatorate` processors to turn the CPU, command, and keyspace counters into per-second rates, which match the Agent's rate metrics.
 
 See the [Redis receiver documentation][1] for detailed configuration options and requirements.
 
 ### Service pipelines
+
+Add this pipeline under `service.pipelines` in your Collector configuration. The `otlp_http` exporter comes from the [recommended configuration][4].
 
 ```yaml
 service:
@@ -80,7 +84,7 @@ service:
     metrics/redis-host-1:
       receivers: [redis/redis-host-1]
       processors: [resource/redis-host-1, transform/redis-host-1, cumulativetodelta/redis-host-1, deltatorate/redis-host-1]
-      exporters: [datadog/exporter]
+      exporters: [otlp_http]
 ```
 
 ## Data collected
