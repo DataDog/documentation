@@ -605,8 +605,6 @@ Activate your virtual environment before calling `ddtest`, which runs `python -m
 
 Keep existing `PYTEST_ADDOPTS`; `ddtest` adds `--ddtrace` to load the pytest plugin.
 
-To avoid pytest collection during planning, set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE` to `suite` in your CI environment. This skips whole suites instead of individual tests; see [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode) for filter and skipping behavior.
-
 {% collapse-content title="Custom launchers, configuration, or suite roots" level="h3" id="pytest-custom-command" %}
 
 For an existing command such as `uv run pytest -c config/pytest.ini -q tests/unit tests/integration`, add these settings to your CI environment, preserving any existing `PYTEST_ADDOPTS`:

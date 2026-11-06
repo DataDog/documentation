@@ -28,6 +28,14 @@ On GitHub Actions, use `include-hidden-files: true` when uploading. Artifact pat
 
 On CircleCI, use the same pipeline-specific save/restore key without prefix fallback keys. A revision-only key can restore a different run's plan. Do not generate a replacement plan independently in each worker.
 
+## Planning is slow for Ruby or Python
+
+If test discovery makes planning slow, consider suite-level skipping. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE` to `suite` in the CI environment for both planning and test jobs.
+
+This reduces discovery work by finding test files instead of individual tests. For pytest, it avoids collection and imports of test modules and `conftest.py`. The tradeoff is less precise skipping: Test Impact Analysis skips or runs entire suites, so more tests may run.
+
+See [suite-level skipping for Ruby and Python](/tests/test_parallelization/best_practices/#use-suite-level-skipping-for-ruby) and [pytest suite mode](/tests/test_parallelization/configuration/#pytest-suite-mode) for details.
+
 ## Unexpected CI node or worker count
 
 Check these settings in the **planning job**:
