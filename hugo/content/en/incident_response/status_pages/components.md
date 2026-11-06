@@ -15,6 +15,8 @@ Components are the building blocks of your status page. Each one represents a se
 - Database Cluster
 - US Region Services
 
+There is no limit to the number of components on a status page.
+
 You can add components to your status page either on initial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
