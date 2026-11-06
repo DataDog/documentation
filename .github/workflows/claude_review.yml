@@ -408,7 +408,10 @@ jobs:
           after `+++ b/` in the diff.
           `line` must be the line number in the file as it exists on
           the PR head (the new version), and it must fall inside a
-          diff hunk. Don't point a comment at a line past the end of
+          diff hunk. Take line numbers from reading the file under
+          `./__untrusted/`, not from counting lines in `diff.patch`.
+          Patch line numbers include diff headers and removed lines,
+          so they point at the wrong text. Don't point a comment at a line past the end of
           the file. For a finding about a file that isn't in the diff,
           such as a missing menu entry, put the comment on the most
           relevant changed line instead.
