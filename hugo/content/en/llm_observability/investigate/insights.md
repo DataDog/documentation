@@ -43,6 +43,7 @@ Datadog groups findings with the same root cause into one insight. Later analyse
 | Reliability | Tool call errors | Recurring tool failures with a shared cause that block tasks, degrade results, or add recovery work. |
 | Reliability | Tool call retry loops | Repeated calls to the same tool that use nearly identical arguments and do not make progress. |
 | Reliability | Prompt rule violations | Agent behavior that breaks an explicit rule in a prompt, skill, or tool description. |
+| Reliability | Model deprecations | Models the application still calls whose provider has announced a shutdown date. |
 
 ### Frontier model sizing
 
@@ -67,6 +68,22 @@ The insight shows the failing tool and operation, the shared trigger, failed-cal
 An isolated transient error followed by successful recovery does not qualify. Recurring failures can qualify when recovery adds work or delays results.
 
 Apply the recommended fix for the cause, such as correcting argument validation, configuring the required permissions, or changing how the tool handles rate limits. Replay the affected requests and verify that the errors stop and the task succeeds.
+
+### Model deprecations
+
+Model deprecation insights identify models that the application still calls after their provider announced a shutdown date. The insight is raised regardless of spend on those models.
+
+The **Announced deprecations** table lists each model with these columns, sorted by shutdown date, earliest first:
+
+- **Provider**: The model provider
+- **Model**: The deprecated model
+- **Shutdown date**: The date the provider announced for the shutdown
+- **Calls**: Calls to the model in the analysis window
+- **Status**: The number of days left before the shutdown, shown as `<N> days left`, or `Shut down on <date>` if the model has already shut down
+
+A coverage note follows the table. Severity is based on the earliest shutdown date relative to the end of the analysis window, and rises as that date approaches. This insight type does not include an impact estimate or a recommended fix.
+
+Migrate each call site to a supported model before its shutdown date, and validate quality, latency, and cost on the replacement.
 
 ## Understand impact and evidence
 
