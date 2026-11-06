@@ -95,6 +95,20 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 - [Configure log forwarding][2]
 - [Configuring syslog settings][3]
 
+#### FortiAnalyzer timestamps in RFC 5424 format
+
+When FortiAnalyzer forwards logs in RFC 5424 format (`fwd-syslog-format rfc-5424`), some versions add a UTC `Z` suffix to timestamps that are in the device's local time. If the device is in a time zone ahead of UTC, its logs arrive with timestamps in the future. Datadog drops logs with timestamps more than two hours in the future. As a result, these logs don't appear in Log Explorer, and the Worker doesn't report an error.
+
+To fix this, use the log's `eventtime` field as the official timestamp instead:
+
+1. In Datadog, navigate to [Log Pipelines][15].
+1. Create or open the pipeline that processes your FortiAnalyzer logs.
+1. Add a [Grok Parser][16] processor that extracts `eventtime` into an attribute. For example:
+    ```
+    <GROK RULE - pending sample log>
+    ```
+1. Add a [Date Remapper][17] processor and set `eventtime` as the date attribute.
+
 ### Palo Alto Networks
 - [Configure log forwarding][4]
 - [Forward traffic logs to a syslog server][5]
@@ -112,3 +126,6 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 [12]: https://datatracker.ietf.org/doc/html/rfc3164
 [13]: /observability_pipelines/sources/socket/
 [14]: /observability_pipelines/processors/custom_processor/
+[15]: https://app.datadoghq.com/logs/pipelines
+[16]: /logs/log_configuration/processors/grok_parser/
+[17]: /logs/log_configuration/processors/log_date_remapper/
