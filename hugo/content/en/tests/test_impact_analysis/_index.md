@@ -30,7 +30,7 @@ Test Impact Analysis works by analyzing your test suite to identify the code eac
 
 By minimizing the number of tests run per commit, Test Impact Analysis reduces the frequency of [flaky tests][2] disrupting your pipelines. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Test Impact Analysis for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
 
-Tests skipped by Test Impact Analysis are not billed as test spans. For details, see [Test Optimization Billing][13].
+Tests skipped by Test Impact Analysis are not billed as test spans. For details, see [CI/CD Optimization Billing][13].
 
 ### Out-of-the-box configuration limitations
 
@@ -179,4 +179,4 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [10]: /code_coverage/
 [11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
 [12]: /tests/test_impact_analysis/troubleshooting/
-[13]: /account_management/billing/test_optimization/#test-spans-generated-by-test-optimization-features
+[13]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features
