@@ -164,13 +164,15 @@ Use `--command` to override the base command for RSpec, Minitest, pytest, Cucumb
 bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec --tag smoke"
 {{< /code-block >}}
 
-Remove test file and directory paths from your custom command. Use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include test files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`. Keep options such as tags, seeds, and formatters.
+Keep options such as tags, seeds, and formatters. To customize test file selection, use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`.
 
 `ddtest` supplies assigned files and discovery flags. A command must support the selected framework's arguments; arbitrary shell command chains and scripts that run several frameworks are not supported.
 
 A wrapper separator before the framework executable is preserved, for example `npx -- jest --runInBand`. A framework's own `--` ends its options: discovery flags go before it, and execution replaces positional selection after it with assigned files.
 
-For RSpec, also remove test file and directory paths from `.rspec` so they do not run on multiple workers. Keep its other options.
+For RSpec, remove test file and directory paths from your custom command and `.rspec` so they do not run on multiple workers. Use the include/exclude settings above and keep other options.
+
+For Mocha, keep suite paths and shared `--file` and `--require` setup in your custom command. `ddtest` uses the suite paths during discovery and replaces them with each worker's assigned files during execution.
 
 For pytest, the default is `python -m pytest <files>`. `--command` replaces that base command without adding `-m pytest`. Keep extra pytest options in `PYTEST_ADDOPTS`; `ddtest` preserves its value and appends `--ddtrace`.
 

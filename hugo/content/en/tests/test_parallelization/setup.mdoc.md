@@ -547,7 +547,7 @@ If the existing job is already sharded, preserve its suite boundary or consolida
 
 {% collapse-content title="Custom test commands" level="h4" id="configure-your-framework" %}
 
-Remove test file and directory paths from your custom command. Use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include test files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`. Keep options such as tags, seeds, and formatters.
+Keep options such as tags, seeds, and formatters. To customize test file selection, use `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION` to include files and `DD_TEST_OPTIMIZATION_RUNNER_TESTS_EXCLUDE_PATTERN` to exclude them. Both accept file patterns, such as `spec/requests/**/*_spec.rb`.
 
 Keep your existing instrumentation and apply the same environment settings to planning and execution. See [Custom test commands](/tests/test_parallelization/configuration/#custom-test-commands).
 
@@ -561,7 +561,7 @@ Keep your existing instrumentation and apply the same environment settings to pl
 
 `ddtest` uses executable `bin/rspec` when present, otherwise `bundle exec rspec`.
 
-Also remove test file and directory paths from `.rspec` so they do not run on multiple workers. Keep its other options.
+Remove test file and directory paths from your custom command and `.rspec` so they do not run on multiple workers. Use the include/exclude settings above and keep other options.
 
 For example, replace `bundle exec rspec spec/requests --tag smoke` with these CI environment settings:
 
@@ -663,7 +663,7 @@ Run from the package directory and run any package-script preparation before `dd
 
 ### Mocha {% #mocha %}
 
-Keep `.mocharc.*`, all suite paths, and shared setup. Shared `--file` setup runs in every worker. For command-line options, see [Mocha command overrides](/tests/test_parallelization/best_practices/#mocha).
+Keep `.mocharc.*`, all suite paths, and shared `--file` and `--require` setup. `ddtest` uses the suite paths during discovery and runs only each worker's assigned test files. Shared setup runs in every worker. For command-line options, see [Mocha command overrides](/tests/test_parallelization/best_practices/#mocha).
 
 {% /if %}
 <!-- End mocha -->
