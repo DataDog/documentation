@@ -3,6 +3,10 @@ title: OpenTelemetry Instrumentation
 aliases:
 - /llm_observability/instrumentation/otel_instrumentation/
 description: Instrument LLM applications with OpenTelemetry using GenAI or OpenInference semantic conventions and send traces to Agent Observability without the Datadog SDK.
+further_reading:
+- link: "https://www.datadoghq.com/blog/agent-observability-voice-agent/"
+  tag: "Blog"
+  text: "Trace voice agents with Datadog Agent Observability"
 ---
 
 ## Overview
@@ -1252,3 +1256,7 @@ with tracer.start_as_current_span("my-span") as span:
 [55]: /llm_observability/guide/offline_experiments#using-opentelemetry-spans-inside-offline-experiments
 [57]: https://github.com/open-telemetry/semantic-conventions-genai/pull/443
 [58]: /llm_observability/investigate/cost/#supported-providers
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

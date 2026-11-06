@@ -20,6 +20,9 @@ further_reading:
   - link: "/llm_observability/data_governance/access_control/"
     tag: "Documentation"
     text: "Data Access Control in Agent Observability"
+  - link: "https://www.datadoghq.com/blog/agent-observability-prompt-management/"
+    tag: "Blog"
+    text: "Manage and deploy LLM prompts with Datadog"
 
 ---
 

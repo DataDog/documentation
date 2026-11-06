@@ -3,6 +3,13 @@ title: Set Up AI Guard
 description: Set up AI Guard to evaluate and block unsafe prompts, responses, and tool calls in your AI agents.
 aliases:
   - /security/ai_guard/onboarding/
+further_reading:
+- link: "https://www.datadoghq.com/blog/detect-when-your-ai-agent-copies-a-self-replicating-prompt-injection/"
+  tag: "Blog"
+  text: "Detect when your AI agent copies a self-replicating prompt injection"
+- link: "https://www.datadoghq.com/blog/runtime-security-for-ai-agents/"
+  tag: "Blog"
+  text: "Agents make decisions at runtime—your security controls should too"
 ---
 
 {{< site-region region="gov,gov2" >}}
@@ -167,3 +174,7 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 [7]: /security/ai_guard/setup/sdk/
 [8]: /security/ai_guard/setup/http_api/
 [9]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
