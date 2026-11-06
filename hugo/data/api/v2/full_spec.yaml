@@ -129861,6 +129861,8 @@ components:
           description: "The channel ID."
           example: CHANNEL
           type: string
+        customizable_content:
+          $ref: "#/components/schemas/SendSlackMessageActionCustomizableContent"
         type:
           $ref: "#/components/schemas/SendSlackMessageActionType"
         workspace:
@@ -129871,6 +129873,26 @@ components:
         - type
         - channel
         - workspace
+      type: object
+    SendSlackMessageActionCustomizableContent:
+      description: "Options that customize the content of the Slack message sent for a Page."
+      properties:
+        include_description:
+          description: "Whether to include the Page description in the Slack message."
+          example: true
+          type: boolean
+        include_source:
+          description: "Whether to include the source that triggered the Page in the Slack message."
+          example: true
+          type: boolean
+        mirror_replies:
+          description: "Whether to mirror replies posted in the Slack message thread to the Page timeline."
+          example: false
+          type: boolean
+        thread_timeline:
+          description: "Whether to post Page timeline updates as replies in the Slack message thread."
+          example: false
+          type: boolean
       type: object
     SendSlackMessageActionType:
       default: send_slack_message
