@@ -159,6 +159,8 @@ Create and manage scheduled tests from the [Network Path][4] UI, and set the fil
 
 After the Agent restarts, go to [Network Path][4] and create a test. The Agent appears as eligible. If it doesn't, confirm the Agent version, that Remote Configuration is enabled for the Agent's API key, and that `network_path.remote_config.enabled` is `true`.
 
+Each Agent can match only one dynamic test configuration. See [Dynamic test filters from the UI are not applied](#dynamic-test-filters-from-the-ui-are-not-applied).
+
 ### Configure tests in the Agent configuration
 
 To configure tests in the Agent configuration files instead, set up one or more test types: [scheduled tests](#scheduled-tests), [dynamic tests](#dynamic-tests), or [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental). You can use one type on its own or combine them.
@@ -963,6 +965,16 @@ If no data appears in the [Network Path][4] UI, the feature may not be fully ena
    - [Scheduled tests](#scheduled-tests) configured through the `conf.d/network_path.d` file.
    - [Dynamic tests](#dynamic-tests) configured by enabling both `network_path.connections_monitoring.enabled` and [Cloud Network Monitoring][1].
    - [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental) configured by enabling `network_path.netflow_monitoring.enabled` and [NetFlow Monitoring][6].
+
+### Dynamic test filters from the UI are not applied
+
+If an Agent runs dynamic tests but doesn't apply the filters you set in the UI, check whether the Agent matches more than one dynamic test configuration.
+
+Each dynamic test configuration targets a set of Agents, such as Agents with a specific tag. An Agent can apply only one dynamic test configuration. When an Agent matches two or more, it ignores the filters from all of them and **TODO: what the Agent does instead**.
+
+For example, if one configuration targets `env:prod` and another targets `team:network`, an Agent tagged with both matches both configurations.
+
+To resolve the overlap, edit the targets so that each Agent matches only one dynamic test configuration. **TODO: how to find the conflicting configurations.** The Agent applies the remaining configuration's filters **TODO: how soon, and whether a restart is needed**.
 
 ### No Dynamic Tests for NetFlow data in the UI
 
