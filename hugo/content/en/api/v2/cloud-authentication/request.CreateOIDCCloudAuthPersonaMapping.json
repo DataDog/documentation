@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "custom_oidc_identity_mapping",
+    "attributes": {
+      "provider_id": "00000000-0000-0000-0000-000000000004",
+      "account_uuid": "string",
+      "claim_matchers": [
+        {
+          "claim": "sub",
+          "mode": "exact",
+          "values": [
+            "system:serviceaccount:controllers:example-controller"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -507,6 +507,20 @@
       "description": "Create a case type returns \"CREATED\" response"
     }
   ],
+  "CreateOIDCCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC persona mapping returns \"Created\" response"
+    }
+  ],
+  "CreateOIDCCloudAuthProvider": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC provider returns \"Created\" response"
+    }
+  ],
   "CreateAWSCloudAuthIntakeMapping": [
     {
       "group": "cloud_authentication",

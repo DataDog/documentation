@@ -8528,6 +8528,42 @@
     "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
     "summary": "Get a GitHub cloud authentication persona mapping"
   },
+  "ListOIDCCloudAuthPersonaMappings": {
+    "description": "List all Custom OIDC persona mappings in the organization.",
+    "summary": "List all Custom OIDC persona mappings"
+  },
+  "CreateOIDCCloudAuthPersonaMapping": {
+    "description": "Map token claims from a registered Custom OIDC provider to a Datadog user or service account. The caller must be authorized to map to the target account.",
+    "summary": "Create a Custom OIDC persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request to create a Custom OIDC persona mapping."
+  },
+  "DeleteOIDCCloudAuthPersonaMapping": {
+    "description": "Delete a Custom OIDC persona mapping.",
+    "summary": "Delete a Custom OIDC persona mapping"
+  },
+  "GetOIDCCloudAuthPersonaMapping": {
+    "description": "Get a Custom OIDC persona mapping by UUID.",
+    "summary": "Get a Custom OIDC persona mapping"
+  },
+  "ListOIDCCloudAuthProviders": {
+    "description": "List all Custom OIDC providers in the organization.",
+    "summary": "List all Custom OIDC providers"
+  },
+  "CreateOIDCCloudAuthProvider": {
+    "description": "Register an OIDC issuer, signing-key discovery configuration, and accepted audiences. Provider names and issuer URLs must be unique within the organization.",
+    "summary": "Create a Custom OIDC provider",
+    "request_description": "",
+    "request_schema_description": "Request to create a Custom OIDC provider."
+  },
+  "DeleteOIDCCloudAuthProvider": {
+    "description": "Delete a Custom OIDC provider. Delete all persona and intake mappings referencing it first; otherwise the request returns a conflict.",
+    "summary": "Delete a Custom OIDC provider"
+  },
+  "GetOIDCCloudAuthProvider": {
+    "description": "Get a Custom OIDC provider by UUID.",
+    "summary": "Get a Custom OIDC provider"
+  },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "List workflows"
