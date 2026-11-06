@@ -18,18 +18,20 @@ further_reading:
 
 By default, Database Monitoring collects the estimated execution plan of each SQL Server query. An estimated plan shows the operators SQL Server chose when it compiled the query, with estimated row counts and costs. It doesn't show what happened when the query ran.
 
-With real execution plan collection, the Agent also collects the last actual execution plan of each cached plan, from [`sys.dm_exec_query_plan_stats`][1]. A real plan describes the last execution of that cached plan, with runtime statistics such as:
+With real execution plan collection, the Agent also collects the last actual execution plan of each cached plan, from [`sys.dm_exec_query_plan_stats`][1]. A real plan describes the last execution of that cached plan, with runtime statistics:
 
 - actual rows and executions for each operator
-- CPU time and elapsed time of the query
 - memory grant and memory used
-- wait statistics, when SQL Server records them
+- actual degree of parallelism
+- spill warnings, without the spill size
+
+SQL Server also writes CPU and elapsed times (`QueryTimeStats`) in these plans, but these values are unreliable on SQL Server 2019, 2022, and 2025. For query timings, use [query metrics][10].
 
 A real plan describes one execution: the last one before the Agent read it. It isn't an aggregate of all the executions counted in query metrics.
 
 ## Before you begin
 
-You must configure Database Monitoring for your [SQL Server][2] instance before following the steps in this guide. The Agent reads real plans with the permissions granted during that setup.
+You must configure Database Monitoring for your [SQL Server][2] instance before following the steps in this guide.
 
 Supported databases
 : SQL Server 2019 and later, Azure SQL Database, and Azure SQL Managed Instance
@@ -40,17 +42,27 @@ Supported deployments
 Supported Agent versions
 : TODO: add the first Agent version that includes real execution plan collection.
 
+Permissions
+: The grants from the Database Monitoring setup are enough. On SQL Server 2022 and later, `VIEW SERVER PERFORMANCE STATE` and `CONNECT ANY DATABASE` are enough. Reading the trace flag status with `DBCC TRACESTATUS` doesn't need an extra grant.
+
 ## Setup
 
-### Turn on `LAST_QUERY_PLAN_STATS`
+### Turn on `LAST_QUERY_PLAN_STATS` for full coverage
 
-SQL Server keeps the last actual plan of a query only when `LAST_QUERY_PLAN_STATS` is on. The Agent never changes this setting. Turn it on with one of the following options.
+SQL Server keeps the last actual plan of every query only when `LAST_QUERY_PLAN_STATS` is on. With the setting off:
+
+- SQL Server 2022 and 2025 still keep actual plans for some queries.
+- SQL Server 2019 doesn't keep any.
+
+The Agent collects every real plan that has runtime statistics, whatever the setting. The Agent never changes this setting. For full coverage, turn it on with one of the following options.
 
 **For each database to monitor**, run the following [database scoped configuration][3] in that database:
 
 ```sql
 ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;
 ```
+
+Changing this setting clears the cached plans of the database, so its queries are compiled again on their next execution.
 
 **For the whole server**, turn on [trace flag 2451][4] globally. For example, add the `-T2451` startup parameter, or run the following command, which lasts until the next restart:
 
@@ -91,7 +103,7 @@ The following options are available under `collect_real_plans`:
 
 [Restart the Agent][5] to apply the changes.
 
-The Agent skips a real plan when SQL Server returns it without runtime statistics. For example, this happens when the plan hasn't run since `LAST_QUERY_PLAN_STATS` was turned on.
+The Agent skips a real plan when SQL Server returns it without runtime statistics. For example, SQL Server didn't keep the actual plan of that query, or the plan hasn't run since its last compilation.
 
 ## Data privacy
 
@@ -108,7 +120,7 @@ Real plans are plan events (`dbm_type:plan`) with the following attributes:
 | `@db.plan.type` | `real` |
 | `@db.plan.source` | `last_query_plan_stats` |
 | `@db.plan.signature` | The same plan signature as the estimated plan of the same cached plan |
-| `@sqlserver.last_execution_time` | The last time the cached plan was executed, according to `sys.dm_exec_query_stats` |
+| `@sqlserver.last_execution_time` | When the statement of the plan last ran, from `sys.dm_exec_query_stats` for the plan's own cache entry and statement. An ISO 8601 timestamp with the UTC offset of the server |
 
 Estimated plans collected by the Agent have no `@db.plan.type`. PostgreSQL plans collected from `auto_explain` logs have `@db.plan.type:explain_analyze`.
 
@@ -116,23 +128,33 @@ For example, to retrieve the real plans of a query, search for `dbm_type:plan @d
 
 ## Troubleshooting
 
-### `LAST_QUERY_PLAN_STATS` is off in a database
+### Real plans are missing for some queries
 
-When `collect_real_plans` is on and `LAST_QUERY_PLAN_STATS` is off in a user database whose queries the Agent monitors, the Agent:
+If `LAST_QUERY_PLAN_STATS` is off in a database, the Agent only collects real plans for the queries SQL Server keeps actual plans of on its own. On SQL Server 2019, that means none.
 
-- skips real plans for that database. It keeps collecting estimated plans.
-- logs one warning for that database, for example: `LAST_QUERY_PLAN_STATS is off in database 'orders', so its real execution plans can't be collected.`
-- reports a `last_query_plan_stats_disabled` health event with a warning status. The status goes back to OK after the setting is on in every database.
+When `collect_real_plans` is on and `LAST_QUERY_PLAN_STATS` is off in a user database whose queries the Agent monitors, the Agent reports it. These reports are advisory: the Agent keeps collecting estimated plans, and real plans that have runtime statistics. The Agent:
 
-When `collect_real_plans` is on, the Agent's [`diagnose` command][9] also reports a `last-query-plan-stats-disabled` warning for each user database where the setting is off. It doesn't report a warning when trace flag 2451 is on globally.
+- logs one warning for that database:
+  ```text
+  LAST_QUERY_PLAN_STATS is off in database '<DATABASE>': real execution plans are only collected for the few queries SQL Server keeps actual plans of on its own. Turn it on in that database for full coverage with `ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;`: https://docs.datadoghq.com/database_monitoring/setup_sql_server/
+  ```
+- reports a `last_query_plan_stats_disabled` health event with a warning status. The event lists the first database found with the setting off in `data.databases`. The status goes back to OK after the setting is on in every database the Agent reported.
 
-To fix it, run the following command in each listed database, or turn on trace flag 2451:
+When `collect_real_plans` is on, the Agent's [`diagnose` command][9] also reports a `last-query-plan-stats-disabled` warning for each user database where the setting is off:
+
+```text
+LAST_QUERY_PLAN_STATS is off in database '<DATABASE>': real execution plans are only collected for the few queries SQL Server keeps actual plans of on its own.
+```
+
+It doesn't report a warning when trace flag 2451 is on globally.
+
+For full coverage, run the following command in each listed database, or turn on trace flag 2451. The Agent never changes this setting.
 
 ```sql
 ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;
 ```
 
-The Agent reads the setting of each database again every 10 minutes. After you change it, real plans can take up to 10 minutes to appear.
+The Agent reads the setting of each database again every 10 minutes. After you change it, the warning can take up to 10 minutes to clear.
 
 ### The SQL Server version doesn't support real plans
 
@@ -151,3 +173,4 @@ On SQL Server 2017 and earlier, `sys.dm_exec_query_plan_stats` doesn't exist. If
 [7]: /account_management/rbac/permissions/#database-monitoring
 [8]: /database_monitoring/guide/build_apps_with_dbm_api/
 [9]: /agent/configuration/agent-commands/#other-commands
+[10]: /database_monitoring/query_metrics/
