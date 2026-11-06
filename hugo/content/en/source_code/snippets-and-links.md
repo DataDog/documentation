@@ -58,7 +58,7 @@ You can see links from errors in your security signals' associated stack traces 
 
 1. Navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App and API Protection{{< /ui >}}][101] and select a security signal.
 2. Scroll down to the {{< ui >}}Traces{{< /ui >}} section on the {{< ui >}}Related Signals{{< /ui >}} tab and click an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+3. If you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from App and API Protection Monitoring" style="width:100%;">}}
 
@@ -71,7 +71,7 @@ You can see links from errors in your security signals' associated stack traces 
 You can see links from failed Static Analysis and Software Composition Analysis scans to their source repository in [Code Security][102].
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][101] and select a repository.
-2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using the GitHub, GitLab, or Azure DevOps integrations, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+2. In the {{< ui >}}Code Vulnerabilities{{< /ui >}} or {{< ui >}}Code Quality{{< /ui >}} view, click a code vulnerability or violation. In the {{< ui >}}Details{{< /ui >}} section, if you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}}. You can see inline code snippets highlighting the exact lines of code that triggered the vulnerability or violation. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/code-analysis-scan.png" alt="Link to GitHub from the Code Security Code Vulnerabilities view" style="width:100%;">}}
 
@@ -89,7 +89,7 @@ You can see source code previews directly in [Continuous Profiler][1] flame grap
 2. Select the service you want to investigate.
 3. Hover your cursor over a method in the flame graph.
 4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
-5. If prompted, click {{< ui >}}Connect to preview{{< /ui >}}. The first time you do this for a repository, you are redirected to GitHub to {{< ui >}}Authorize{{< /ui >}} the Datadog application.
+5. If prompted, click {{< ui >}}Connect to preview{{< /ui >}}. The first time you do this for a repository, you may be redirected to your source code management provider to {{< ui >}}Authorize{{< /ui >}} the Datadog application.
 6. After authorizing, the source code preview appears in the tooltip.
 7. Click the file link in the tooltip to open the full source code file in your repository.
 
@@ -127,7 +127,7 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][2].
 2. Click an issue. The {{< ui >}}Issue Details{{< /ui >}} panel appears on the right.
-3. Under {{< ui >}}Latest Event{{< /ui >}}, if you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+3. Under {{< ui >}}Latest Event{{< /ui >}}, if you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
@@ -150,7 +150,7 @@ Source code integration is supported for the following RUM platforms when source
 
 1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Error Tracking{{< /ui >}}][2].
 2. Click an issue. The {{< ui >}}Issue Details{{< /ui >}} panel appears on the right.
-3. Under {{< ui >}}Latest Available Errors{{< /ui >}} or error samples, if you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+3. Under {{< ui >}}Latest Available Errors{{< /ui >}} or error samples, if you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
 
@@ -169,7 +169,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 
 1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Serverless{{< /ui >}}][101] and click the {{< ui >}}AWS{{< /ui >}} tab.
 2. Click a Lambda function and click the {{< ui >}}Open Trace{{< /ui >}} button for an invocation with an associated stack trace.
-3. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+3. If you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
@@ -182,7 +182,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 You can see links from failed test runs to their source repository in [Test Optimization][103].
 
 1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][101] and select a failed test run.
-2. If you're using the GitHub or GitLab integrations, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
+2. If you're using a source code management integration, click {{< ui >}}Connect to preview{{< /ui >}} on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the {{< ui >}}View{{< /ui >}} button on the right of a frame or select {{< ui >}}View file{{< /ui >}}, {{< ui >}}View Git blame{{< /ui >}}, or {{< ui >}}View commit{{< /ui >}} to be redirected to your source code management tool.
 
 {{< img src="source_code_integration/test_run_blurred.png" alt="Link to GitHub from the CI Visibility Explorer" style="width:100%;">}}
 
