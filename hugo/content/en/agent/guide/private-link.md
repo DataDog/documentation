@@ -350,6 +350,8 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 | `sentry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
 | `snmp-traps-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
 | `softinv-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `lambda-http-intake.logs.datadoghq.com` | `gold.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0771479c6e0a3e78c` |
+| `obpipeline-intake.datadoghq.com` | `gold.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0771479c6e0a3e78c` |
 | `iam-rum-intake.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
 | `rum-http-intake.logs.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
 | `rum.browser-intake-datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
@@ -361,8 +363,10 @@ Use the following table to identify which VPC endpoints to set up for the Datado
 | `*.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `intake.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `quota.browser-intake-datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
 | `sourcemap-intake.datadoghq.com` | `plum.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-064ac68ae9d8cd604` |
+| `dbquery-intake.datadoghq.com` | `white.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0453781fcd06eb283` |
 | `agent-http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
 | `http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
 | `metrics.agent.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
