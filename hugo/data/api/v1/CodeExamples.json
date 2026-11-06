@@ -98,6 +98,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_209524718",
+      "description": "Create a heatgrid widget with bin labels and formatted row labels"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1322784076",
       "description": "Create a heatgrid widget with custom discrete thresholds"
     },
