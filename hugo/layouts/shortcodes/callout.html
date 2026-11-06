@@ -5,9 +5,9 @@
 {{- $wrap := and (eq $respect_site_support "true") (gt (len $unsupported) 0) -}}
 {{- if $wrap -}}
 {{- $supported := slice -}}
-{{- range .Site.Params.allowedRegions -}}
-    {{- if not (in $unsupported .value) -}}
-        {{- $supported = $supported | append .value -}}
+{{- range site.Data.regions.regions -}}
+    {{- if not (in $unsupported .key) -}}
+        {{- $supported = $supported | append .key -}}
     {{- end -}}
 {{- end -}}
 {{- $supported_csv := delimit $supported "," -}}
