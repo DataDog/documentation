@@ -41,16 +41,22 @@ If an evaluation fails or times out, the coding agent continues with the action 
 
 ## Supported coding agents
 
-| Agent              | Guardrails<br>Evaluates prompts and tool calls | Supply chain protection<br>Analyzes package installations with [Supply Chain Firewall][16] | Sensitive data redaction<br>Detects and blocks secrets |
-|--------------------|-----------------|-------------------------|--------------------------|
-| Claude Code        | Full            | Full                    | Monitoring only          |
-| Codex              | Full            | Full                    | Monitoring only          |
-| Cursor             | Full            | Full                    | Monitoring only          |
-| GitHub Copilot CLI | Full            | Full                    | Monitoring only          |
-| Kiro CLI           | Full¹           | Full                    | Monitoring only          |
-| Antigravity CLI    | Monitoring only | Monitoring only         | Monitoring only          |
+| Agent              | Guardrails¹     | Supply chain protection² | Sensitive data redaction³ |
+|--------------------|-----------------|--------------------------|---------------------------|
+| Claude Code        | Full            | Full                     | Monitoring only           |
+| Codex              | Full            | Full                     | Monitoring only           |
+| Cursor             | Full            | Full                     | Monitoring only           |
+| GitHub Copilot CLI | Full            | Full                     | Monitoring only           |
+| Kiro CLI           | Full⁴           | Full                     | Monitoring only           |
+| Antigravity CLI    | Monitoring only | Monitoring only          | Monitoring only           |
 
-¹ Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
+¹ Guardrails evaluate prompts and tool calls.
+
+² Supply chain protection analyzes package installations with [Supply Chain Firewall][16].
+
+³ Sensitive data redaction detects and blocks secrets.
+
+⁴ Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
 
 <div class="alert alert-info">Supply chain protection checks the packages that a coding agent installs. Skill scanning, which checks extensions such as skills, is in development.</div>
 
