@@ -440,7 +440,7 @@ Create a variable from content such as a `span` or `div` by extracting the eleme
 
 #### Email body
 
-Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12].
+Create a variable from the email body using one of the following methods: [`regex`][13] or [`Xpath`][12]. This works with both temporary and persistent email variables. For example, extract a one-time password (OTP) into a variable and inject it into a later login step.
 
 * [`Regex`][13] searches and returns the first matching pattern (for example, `/*./`) from the email's plain text body. If the pattern is not found, it then searches the HTML body.
 
@@ -484,15 +484,22 @@ Select any global variables defined in [Synthetic Monitoring Settings][5].
 
 #### Global variable - MFA
 
-Select any MFA global variables defined in [Synthetic Monitoring Settings][5].
+Select any multi-factor authentication (MFA) global variables defined in [Synthetic Monitoring Settings][5].
 
-This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][6].
+This type of global variable stores time-based one-time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][6].
 
 #### Email
 
-Create a Datadog Synthetics email address that you can use in test steps to [assert if an email was sent correctly][7] or [navigate to a link in the email][8], for example, to click on a confirmation link.
+Use a Datadog-managed email address in test steps. You can [assert if an email was sent correctly][7], [extract a value from its body](#email-body), or [navigate to a link in the email][8].
 
-A unique mailbox is generated at each test execution to avoid conflicts between test runs.
+Under {{< ui >}}Email Address{{< /ui >}}, choose:
+
+- {{< ui >}}Temporary{{< /ui >}}: Generate a unique address and mailbox for each execution to avoid email conflicts between test runs. Use this for sign-up flows that register a different account each run.
+- {{< ui >}}Persistent{{< /ui >}}: Select a persistent email variable created in Synthetic Monitoring settings. Its address stays the same across runs, so you can create an application account once and reuse it for email workflows, such as OTP login. Select the variable and click {{< ui >}}Done{{< /ui >}}.
+
+A test can use one temporary or persistent email variable. You need access to the selected persistent email variable. For setup, permissions, and concurrent-run considerations, see [Use persistent email variables in browser tests][17].
+
+<div class="alert alert-warning">Tests using the same persistent email variable share an inbox. Broad matching criteria can cause a test to use another parallel test's email. For example, extracting another test's OTP can cause a login failure. Use temporary email variables or different persistent email variables to isolate tests. See <a href="/synthetics/guide/persistent-email-otp/#limitations">Persistent email variable limitations</a>.</div>
 
 ### Subtests
 
@@ -587,3 +594,4 @@ To edit a browser recording after it's saved:
 [14]: https://app.datadoghq.com/synthetics/tests
 [15]: /synthetics/guide/export-tests-to-terraform
 [16]: https://json-schema.org/
+[17]: /synthetics/guide/persistent-email-otp/
