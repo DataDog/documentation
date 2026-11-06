@@ -48,7 +48,7 @@ title: Service Level Objectives
 
 Service Level Objectives(SLO)는 사이트 신뢰성 엔지니어링 도구 키트의 핵심 요소입니다. SLO는 애플리케이션 성능에 관한 명확한 목표를 정하는 프레임워크입니다. 이를 통해 궁극적으로 팀이 일관된 고객 경험을 제공하고, 기능 개발과 플랫폼 안정성의 균형을 잡고, 사내외 사용자와 커뮤니케이션을 개선하는 데 도움이 됩니다.
 
-**팁**: Datadog의 글로벌 검색에서 Service Level Objectives를 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 누르고 `slo`를 검색하세요.
+**팁**: Datadog의 글로벌 검색에서 Service Level Objectives를 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd>+<kbd>K</kbd>를 누르고 `slo`를 검색하세요.
 
 ## 주요 용어 {#key-terminology}
 
@@ -110,7 +110,7 @@ $$\text"error budget remaining" = 100 * {\text"current status" - \text" target"}
 
 모든 사용자는 관련된 [역할][10]에 관계없이 SLO 및 [SLO 상태 수정](#slo-status-corrections)을 볼 수 있습니다. 오직 `slos_write`권한이 있는 역할에 연결된 사용자만 SLO를 생성, 수정 및 삭제할 수 있습니다.
 
-상태 수정을 생성, 수정 및 삭제하려면 사용자에게 `slos_corrections` 권한이 필요합니다. 이 권한이 있는 사용자는 해당 SLO를 수정할 수 있는 권한이 없더라도 상태 수정을 할 수 있습니다. 전체 권한 목록은 [RBAC 문서][11]를 참조하세요.
+상태 수정을 생성, 수정 및 삭제하려면 사용자에게 `slos_corrections` 권한이 필요합니다. 이 권한이 있는 사용자는 `slos_write` 권한이 없더라도 상태 수정을 할 수 있습니다. [세분화된 액세스 제어](#granular-access-controls)가 적용된 개별 SLO에 대한 수정을 생성하려면 사용자에게 해당 SLO에 대한 편집 권한도 있어야 합니다. [태그 기준 수정](#tag-based-corrections)은 세분화된 액세스 제어를 확인하지 않으므로 액세스가 제한된 SLO를 포함하여 쿼리와 일치하는 모든 SLO에 적용됩니다. 전체 권한 목록은 [RBAC 문서][11]를 참조하세요.
 
 ### 세분화된 액세스 제어 {#granular-access-controls}
 
@@ -242,7 +242,7 @@ SLO 감사 이벤트를 통해 [Event Explorer][27] 또는 SLO 세부정보의 {
 
 ### SLO 감사 이벤트 {#slo-audit-events}
 
-각 이벤트에는 다음과 같은 SLO 설정 정보가 포함됩니다.
+각 이벤트에는 다음과 같은 SLO 구성 정보가 포함됩니다.
 
 - 이름
 - 설명
@@ -251,13 +251,13 @@ SLO 감사 이벤트를 통해 [Event Explorer][27] 또는 SLO 세부정보의 {
 
 Event Explorer에는 세 가지 유형의 SLO 감사 이벤트가 표시됩니다.
 
-- `SLO Created` 이벤트 생성 시 SLO 설정 정보 표시
-- `SLO Modified` 이벤트 수정 중에 변경된 설정 정보 표시
-- `SLO Deleted` 이벤트 SLO가 삭제되기 전의 설정 정보를 표시합니다.
+- `SLO Created` 이벤트는 생성 시의 SLO 구성 정보를 표시합니다.
+- `SLO Modified` 이벤트는 수정 중 변경된 구성 정보를 표시합니다.
+- `SLO Deleted` 이벤트는 SLO가 삭제되기 전의 구성 정보를 표시합니다.
 
 ###  상태 수정 감사 이벤트 {#status-correction-audit-events}
 
-각 이벤트에는 다음과 같은 SLO 상태 수정 설정 정보가 포함되어 있습니다.
+각 이벤트에는 다음과 같은 SLO 상태 수정 구성 정보가 포함되어 있습니다.
 
 - SLO 이름
 - 표준 시간대를 사용한 상태 수정 시작 및 종료 시간
@@ -265,9 +265,9 @@ Event Explorer에는 세 가지 유형의 SLO 감사 이벤트가 표시됩니�
 
 Event Explorer에 세 가지 유형의 SLO 상태 수정 감사 이벤트가 표시됩니다.
 
-- `SLO Correction Created`이벤트 생성 시 상태 수정 설정 정보 표시
-- `SLO Correction Modified`이벤트 수정 중에 변경된 설정 정보 표시
-- `SLO Correction Deleted`이벤트 상태 수정이 삭제되기 전의 설정 정보 표시
+- `SLO Correction Created` 이벤트는 생성 시의 상태 수정 구성 정보를 표시합니다.
+- `SLO Correction Modified` 이벤트는 수정 중 변경된 구성 정보를 표시합니다.
+- `SLO Correction Deleted` 이벤트는 상태 수정이 삭제되기 전의 구성 정보를 표시합니다.
 
 모든 SLO 감사 이벤트의 전체 목록을 얻으려면 Event Explorer에 검색 쿼리 `tags:(audit AND slo)`를 입력하세요. 특정 SLO의 감사 이벤트 목록을 보려면 원하는 SLO의 ID와 함께 `tags:audit,slo_id:<SLO ID>`를 입력하세요. [Datadog Events API][19]를 사용하여 Event Explorer를 프로그래밍 방식으로 조회할 수도 있습니다.
 
@@ -279,7 +279,7 @@ Event Explorer에 세 가지 유형의 SLO 상태 수정 감사 이벤트가 표
 
 {{< img src="service_level_objectives/slo_audit_history_tab.png" alt="SLO 세부 정보 감사 기록 탭" >}}
 
-[이벤트 모니터링][28]을 사용하면 SLO 감사 이벤트를 추적하기 위한 알림을 설정할 수 있습니다. 예를 들어 특정 SLO의 설정이 수정될 때 알림을 받으려면 태그 `audit,slo_id:<SLO ID>`를 통해 텍스트 `[SLO Modified]`를 추적하도록 이벤트 모니터링을 설정하세요.
+[이벤트 모니터링][28]을 사용하면 SLO 감사 이벤트를 추적하기 위한 알림을 설정할 수 있습니다. 예를 들어, 특정 SLO의 구성이 수정될 때 알림을 받으려면 태그 `audit,slo_id:<SLO ID>`를 통해 텍스트 `[SLO Modified]`를 추적하도록 이벤트 모니터링을 설정하세요.
 
 ## SLO 위젯 {#slo-widgets}
 
@@ -298,16 +298,20 @@ SLO 위젯에 대한 자세한 정보는 [SLO 위젯][21] 및 [SLO 목록 위젯
 - 배포로 인한 일시적 문제가 SLO에 부정적인 영향을 미치지 않도록 보장합니다.
 
 수정을 적용하면 지정한 기간이 SLO의 계산에서 제외됩니다.
-- 모니터링 기반 SLO의 경우 수정 시간 창은 계산되지 않습니다.
 - 메트릭 기반 SLO의 경우 수정 창의 모든 양호한 이벤트와 불량 이벤트는 계산되지 않습니다.
 - 타임 슬라이스 SLO의 경우 수정 기간은 가동 시간으로 처리됩니다.
+- 모니터링 기반 SLO의 경우 수정 시간 창은 계산되지 않습니다.
 
-임시 조정을 위한 일회성 수정 또는 정기적으로 발생하는 예측 가능한 조정을 위한 반복 수정을 생성할 수 있습니다. 일회성 수정은 시작 및 종료 시간이 필요하며, 반복 수정은 시작 시간, 기간 및 간격이 필요합니다. 반복 수정은 [iCalendar RFC 5545의 RRULE 사양][24]을 기반으로 합니다. 지원되는 규칙은 `FREQ`, `INTERVAL`, `COUNT`, 및 `UNTIL`입니다. 반복 수정을 위한 종료 날짜를 지정하는 것은 선택 사항이며, 수정이 무한히 반복되도록 할 수 있습니다.
+각 수정은 단일 SLO 또는 태그 쿼리와 일치하는 모든 SLO에 적용됩니다.
+- **SLO 이름 기준**: 수정이 하나의 SLO에 적용됩니다.
+- **태그 기준**: 수정은 `env:prod service:checkout`과 같이 쿼리와 일치하는 태그를 가진 모든 SLO에 적용됩니다. 여기에는 수정을 생성한 후 새로 생성하거나 태그를 지정한 SLO도 포함됩니다. 자세한 내용은 [태그 기준 수정](#tag-based-corrections)을 참조하세요.
+
+임시 조정을 위한 일회성 수정 또는 정기적으로 발생하는 예측 가능한 조정을 위한 반복 수정을 생성할 수 있습니다. 일회성 수정은 시작 및 종료 시간이 필요하며, 반복 수정은 시작 시간, 기간 및 간격이 필요합니다. 반복 수정은 [iCalendar RFC 5545의 RRULE 사양][24]을 기반으로 합니다. 지원되는 규칙은 `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` 및 `BYDAY`입니다. 반복 수정을 위한 종료 날짜를 지정하는 것은 선택 사항이며, 수정이 무한히 반복되도록 할 수 있습니다.
 
 어떤 유형의 수정이든 수정이 이루어지는 이유를 명시하는 수정 범주를 선택해야 합니다. 사용 가능한 카테고리는 {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}} 및 {{< ui >}}Other{{< /ui >}}입니다. 필요시, 추가적인 컨텍스트를 제공하기 위해 설명을 선택적으로 포함할 수 있습니다.
 
 각 SLO는 쿼리 성능을 보장하기 위해 구성할 수 있는 최대 수정 한도가 있습니다. 이 한도는 각 SLO에 대해 지난 90일에만 적용되므로, 지난 90일 이전의 기간에 대한 수정은 한도에 포함되지 않습니다. 즉, 다음과 같습니다.
-- 일회성 수정에 대한 종료 시간이 지난 90일 이전인 경우 제한에 포함됩니다.
+- 일회성 수정에 대한 종료 시간이 지난 90일 이전인 경우 제한에 포함되지 않습니다.
 - 반복 수정의 최종 반복 종료 시간이 지난 90일 이전인 경우 제한에 포함되지 않습니다.
 
 SLO당 90일 제한은 다음과 같습니다.
@@ -318,24 +322,71 @@ SLO당 90일 제한은 다음과 같습니다.
 | 매일 반복   | 2             |
 | 매주 반복  | 3             |
 | 매달 반복 | 5             |
+| 연간 반복  | 20            |
 
-UI에서 상태 수정을 설정하려면 SLO의 사이드 패널에서 {{< ui >}}Correct status{{< /ui >}}를 선택하거나, [SLO 상태 수정 API][25] 또는 [Terraform 리소스][26]를 사용할 수 있습니다.
+이 제한은 SLO 이름을 기준으로 생성된 수정에만 적용됩니다. [태그 기준 수정](#tag-based-corrections)에는 적용되지 않습니다.
+
+UI, [SLO status corrections API][25] 또는 [Terraform 리소스][26]를 사용하여 상태 수정을 구성할 수 있습니다.
+
+API 또는 Terraform으로 태그 기준 수정을 생성하려면 `slo_id` 대신 `slo_query` 속성을 설정합니다.
+
+#### 태그 기준 수정 {#tag-based-corrections}
+
+태그 기준 수정은 쿼리를 사용하여 태그별로 SLO를 선택하므로 하나의 수정을 여러 SLO에 적용할 수 있습니다. 예를 들어, 태그 기준 수정을 사용하여 특정 팀이 소유한 모든 SLO 또는 특정 환경의 모든 SLO에 영업시간 외 기간을 반영할 수 있습니다.
+
+태그 기준 수정은 SLO 상태를 계산할 때 평가되므로 해당 시점에 쿼리와 일치하는 모든 SLO에 수정이 적용됩니다. 새 SLO를 생성하거나 쿼리와 일치하는 태그를 기존 SLO에 추가하면 해당 SLO에도 수정이 적용됩니다.
+
+쿼리는 [Events search syntax][29]를 사용하며, 각 용어는 SLO 태그와 비교됩니다. `AND`, `OR` 및 `NOT`(또는 `-`)을 사용하여 용어를 결합하고, 괄호로 용어를 그룹화하며, `*`을 와일드카드로 사용할 수 있습니다. 공백으로 구분된 용어는 `AND`로 결합됩니다.
+
+| 쿼리                          | 일치하는 SLO                                            |
+| ------------------------------ | ------------------------------------------------------- |
+| `env:prod`                     | `env:prod`                                       | 태그가 지정됨
+| `team:payments -env:staging`   | `team:payments` 태그가 지정되어 있고 `env:staging`     | 태그는 지정되지 않음
+| `team:(payments OR checkout)`  | `team:payments` 또는 `team:checkout`               | 태그가 지정됨
+| `service:web-*`                | 값이 `web-`     |으로 시작하는 `service` 태그 포함
+
+쿼리는 비어 있거나 `*`만으로 구성될 수 없습니다.
+
+#### 조직 전체의 수정 관리 {#manage-corrections-across-your-organization}
+
+[SLO 관리 페이지][2]의 [{{< ui >}}Corrections{{< /ui >}} 탭][31]에는 개별 SLO에 대한 수정과 태그 기준 수정을 포함하여 조직의 모든 상태 수정이 나열됩니다. 이 페이지에서 수정을 생성, 편집 및 삭제할 수 있습니다. 검색창과 왼쪽의 패싯을 사용하여 {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}} 및 {{< ui >}}SLO Tags{{< /ui >}}를 기준으로 수정을 필터링합니다. 
+
+{{< img src="service_level_objectives/slo-corrections-tab.png" alt="SLO 관리 페이지의 Corrections 탭으로, 수정의 범위, 기간, 일정, 생성자가 나열되며 왼쪽에는 필터링을 위한 패싯이 표시됩니다." style="width:80%;">}}
+
+#### 모니터 가동 중지에서 수정 생성 {#create-corrections-from-monitor-downtimes}
+
+가동 중지에서 수정을 생성하려면 `slos_corrections` 권한이 필요합니다.
+
+모니터 태그를 기준으로 새로운 [모니터 가동 중지][30]를 예약하면 Datadog은 동일한 태그를 가진 SLO가 있는지 확인합니다. 일치하는 SLO가 있으면 가동 중지 편집기에 일치하는 SLO의 수가 표시된 카드가 나타납니다. 동일한 시간 범위에 대한 수정을 생성하려면 다음 단계를 따르세요.
+
+1. 카드에서 {{< ui >}}Preview SLO Correction{{< /ui >}}을 클릭합니다. {{< ui >}}By Tags{{< /ui >}}이 선택되고 가동 중지의 모니터 태그가 쿼리로 설정되며 가동 중지의 일정과 메시지가 입력된 상태로 수정 양식이 열립니다.
+2. 쿼리와 쿼리에 일치하는 SLO를 검토하고 {{< ui >}}Category{{< /ui >}}를 선택한 다음 {{< ui >}}Apply{{< /ui >}}를 클릭합니다.
+3. 가동 중지를 저장합니다. Datadog이 SLO 수정을 생성합니다.
+
+**참고**: 기존 가동 중지를 편집할 때는 이 카드가 나타나지 않습니다.
+
+{{< img src="service_level_objectives/slo-corrections-on-monitor-downtimes.png" alt="모니터 태그를 기준으로 범위가 지정된 Schedule Downtime 페이지 오른쪽 하단에 강조 표시된 카드에 'We found 5 SLOs with this scope'라는 문구가 표시되며 Preview SLO Correction 링크가 포함되어 있습니다." style="width:80%;">}}
 
 #### UI에서 액세스 {#access-in-the-ui}
 
-UI에서 SLO 상태 수정에 액세스하려면:
+UI에서 상태 수정을 생성하려면 다음 단계를 따르세요.
 
-1. 새 SLO를 만들거나 기존 SLO를 클릭합니다.
-2. SLO의 세부 정보 사이드 패널 보기로 이동합니다.
-3. 톱니바퀴 아이콘 아래에서 {{< ui >}}Correct status{{< /ui >}}를 선택하여 수정 생성 모달을 엽니다.
-4. {{< ui >}}Correction Category{{< /ui >}}를 선택합니다.
-5. {{< ui >}}Select the Time Correction Window{{< /ui >}}에서 {{< ui >}}One-Time{{< /ui >}}과 {{< ui >}}Recurring{{< /ui >}} 중 하나를 선택하고 수정하려는 기간을 지정합니다.
-6. 필요시 {{< ui >}}Notes{{< /ui >}}를 추가합니다.
-7. {{< ui >}}Apply Correction{{< /ui >}}을 클릭합니다.
+1. 다음 방법 중 하나로 수정 양식을 엽니다.
+   - [SLO 관리 페이지][2]의 [{{< ui >}}Corrections{{< /ui >}} 탭][31]에서 {{< ui >}}New Correction{{< /ui >}}을 클릭합니다.
+   - SLO 세부 정보 사이드 패널에서 톱니바퀴 아이콘 아래의 {{< ui >}}Correct status{{< /ui >}}를 선택합니다. 해당 SLO가 선택된 상태로 양식이 열립니다.
+2. {{< ui >}}Select SLOs and category{{< /ui >}} 아래에서 수정 범위를 선택합니다.
+   - {{< ui >}}By Tags{{< /ui >}}: 태그 쿼리를 입력합니다. 양식에 쿼리와 일치하는 SLO가 표시됩니다.
+   - {{< ui >}}By SLO Name{{< /ui >}}: 단일 SLO를 검색하고 선택합니다.
+3. {{< ui >}}Category{{< /ui >}}를 선택합니다.
+4. {{< ui >}}Select time window{{< /ui >}} 아래에서 {{< ui >}}One-Time{{< /ui >}} 또는 {{< ui >}}Recurring{{< /ui >}}을 선택하고 수정할 기간을 지정합니다. 반복 수정의 경우 {{< ui >}}Basic{{< /ui >}} 탭에서 일정을 설정하거나 {{< ui >}}Advanced{{< /ui >}} 탭에서 RRULE을 입력합니다.
+5. 필요시 {{< ui >}}Add any notes{{< /ui >}} 아래에 참고 사항을 추가합니다.
+6. {{< ui >}}Apply{{< /ui >}}를 클릭합니다.
 
-{{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO 수정 UI" style="width:80%;">}}
+{{< img src="service_level_objectives/slo-corrections-ui-1.png" alt="By Tags와 One-Time이 선택된 New SLO Correction 양식으로, 태그 쿼리, 범주, 시간 범위 및 참고 사항을 입력하는 필드가 표시됩니다." style="width:80%;">}}
 
-기존 상태 수정을 조회, 편집 및 삭제하려면 SLO 세부 사이드 패널 보기 상단에 있는 {{< ui >}}Corrections{{< /ui >}} 탭을 클릭합니다.
+**참고**: 수정을 생성한 후에는 범위를 변경하거나 일회성과 반복성 간에 전환할 수 없습니다.
+
+기존 상태 수정을 조회, 편집 또는 삭제하려면 [SLO 관리 페이지][2]의 {{< ui >}}Corrections{{< /ui >}} 탭 또는 SLO 세부 정보 사이드 패널의 {{< ui >}}Corrections{{< /ui >}} 탭을 사용합니다. 사이드 패널의 탭에는 SLO에 적용되는 태그 기준 수정도 포함됩니다.
 
 #### 상태 수정 시각화 {#visualizing-status-corrections}
 
@@ -381,3 +432,6 @@ SLO 캘린더 보기는 [SLO 관리 페이지][2]에서 사용할 수 있습니�
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /ko/events/explorer/
 [28]: /ko/monitors/types/event/
+[29]: /ko/events/explorer/searching/
+[30]: /ko/monitors/downtimes/
+[31]: https://app.datadoghq.com/slo/corrections

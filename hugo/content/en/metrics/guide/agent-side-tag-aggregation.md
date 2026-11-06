@@ -50,7 +50,7 @@ Comprehensive instructions are available in the [Remote Configuration documentat
 
 ### Enable the Agent Data Plane
 
-Upgrade your Agents to version 7.80.0 or later (7.81.0 or later recommended, 7.85.0 or later on Windows and macOS) and enable the Agent Data Plane. Agent-side tag aggregation requires the Agent Data Plane, a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
+Upgrade your Agents to version 7.80.0 or later (7.81.0 or later recommended, 7.85.0 or later on Windows and macOS) and enable the Agent Data Plane. Agent-side tag aggregation requires the [Agent Data Plane][11], a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
 
 When the Agent Data Plane is enabled:
 
@@ -144,7 +144,7 @@ After Remote Configuration and the Agent Data Plane are enabled, you can configu
 
 To create a rule:
 
-1. Navigate to the [Metric Summary][8] page or the [Custom Metrics Volume][9] page.
+1. Navigate to the [Metrics Catalog][8].
 2. Select one or more custom metrics for Agent-side tag aggregation.
 
 Your tag aggregation rules are visible from the [Metric Settings][10] page, where you can also create and edit them directly.
@@ -196,6 +196,6 @@ The `sum` aggregation performed by the Agent preserves results for queries that 
 [5]: /remote_configuration/#enable-remote-configuration
 [6]: /account_management/rbac/permissions/#access-management
 [7]: /account_management/rbac/permissions/#api-and-application-keys
-[8]: https://app.datadoghq.com/metric/summary
-[9]: https://app.datadoghq.com/metric/volume
+[8]: https://app.datadoghq.com/metric/catalog
 [10]: https://app.datadoghq.com/metric/settings
+[11]: /agent/configuration/agent-data-plane/

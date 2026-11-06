@@ -13,10 +13,6 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
-Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Inference workloads serve live traffic, so slow responses and errors directly affect your users. Underused GPUs also drive up serving costs. The Inference page in GPU Monitoring shows the performance of each model deployment alongside the health of the GPUs it runs on. Your MLOps, platform, and ML engineering teams can find and fix serving issues in one place.

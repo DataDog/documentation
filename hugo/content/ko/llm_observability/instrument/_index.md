@@ -17,6 +17,14 @@ title: Agent Observability 계측
 ---
 Agent Observability를 시작하려면 프로그래밍 언어와 설정에 따라 여러 접근 방식 중 하나를 선택하여 LLM 애플리케이션 또는 에이전트를 계측하세요. Datadog은 최소한의 코드 변경으로 LLM 애플리케이션 및 에이전트에서 상세한 트레이스, 메트릭 및 평가를 캡처하도록 설계된 포괄적인 계측 옵션을 제공합니다.
 
+{{< skill-callout
+    title="코딩 에이전트를 사용하여 Agent Observability 설정"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md에 있는 스킬을 사용하여 내 프로젝트에 Datadog Agent Observability를 계측하세요.
+{{< /skill-callout >}}
+
 ## 계측 옵션 {#instrumentation-options}
 Python, Node.js 또는 Java SDK를 사용하거나 Agent Observability API를 사용하여 애플리케이션을 계측할 수 있습니다.
 

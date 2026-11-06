@@ -61,12 +61,28 @@ To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased
 
 #### Considerations
 
-Head-based sampling affects the computation of APM metrics. Only sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, which perform metrics computation.
-
-To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
+Head-based sampling reduces the spans available for APM metric computation. For DDOT SDKs, see [trace metric extrapolation][27].
 
 Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
+#### Trace metric extrapolation for Datadog SDKs
+
+DDOT SDKs (Datadog SDKs in OpenTelemetry mode) record sampling probability in exported spans' `tracestate`. Compatible receivers use it to estimate total traffic from sampled traces. For how extrapolation (upsampling) works, see the [OpenTelemetry specification][21] and the [detailed sampling threshold proposal (OTEP 235)][22].
+
+Use these minimum versions for automatic extrapolation:
+
+| Component computing trace metrics | Minimum version |
+| --- | --- |
+| Span Metrics Connector (SMC) in OpenTelemetry Collector Contrib | [0.148.0][24] |
+| Datadog connector in OpenTelemetry Collector Contrib | [0.159.0][25] |
+| Datadog connector in DDOT, or the Datadog Agent OTLP receiver | [7.82.0][26] |
+
+To configure trace metrics from sampled spans:
+
+1. Use a [supported DDOT SDK version][23].
+2. Preserve `tracestate` and place the metrics connector before any Collector sampling processors.
+
+Extrapolation is automatic when a valid `ot.th` threshold is present. For accurate counts, the recorded probability must match the spans actually exported.
 
 ### Tail-based sampling
 
@@ -82,7 +98,7 @@ A limitation of tail-based sampling is that all spans for a given trace must be 
 
 The recommended Collector configuration uses the agent deployment pattern and does not provide trace-aware routing across multiple Collectors. For distributed tail-based sampling, use a [gateway deployment][19] and configure routing so that all spans for a trace reach the same gateway Collector.
 
-To calculate APM metrics from 100% of application traffic while using Collector-level tail-based sampling, configure the [`span_metrics` connector][20] before the sampling processor.
+Configure the [`span_metrics` connector][20] before the sampling processor. For DDOT SDKs that sample traces before export, follow the [trace metric extrapolation requirements][27].
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -149,7 +165,6 @@ For more information, see [Unified Service Tagging][18].
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [6]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
-[7]: /dashboards/functions/#add-a-function
 [8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
@@ -161,3 +176,10 @@ For more information, see [Unified Service Tagging][18].
 [18]: /getting_started/tagging/unified_service_tagging/#opentelemetry
 [19]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [20]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+[21]: https://opentelemetry.io/docs/specs/otel/trace/tracestate-handling/#sampling-threshold-value-th
+[22]: https://github.com/open-telemetry/oteps/blob/main/text/trace/0235-sampling-threshold-in-trace-state.md
+[23]: /opentelemetry/instrument/dd_sdks/otlp_trace_export/#sampling-and-trace-metrics
+[24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.148.0
+[25]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
+[26]: https://github.com/DataDog/datadog-agent/releases/tag/7.82.0
+[27]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks

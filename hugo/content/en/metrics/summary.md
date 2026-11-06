@@ -270,7 +270,7 @@ This table shows the mapping between the metric origin as seen in the facet and 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [0]: /metrics/metrics-without-limits
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /metrics/explorer/
 [3]: /dashboards/
 [4]: /metrics/custom_metrics/

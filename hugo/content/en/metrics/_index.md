@@ -28,7 +28,7 @@ This is an introduction to Metrics in Datadog and why they're useful. This secti
 
 {{< whatsnext desc="Visualize and query your metrics" >}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
-    {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
+    {{< nextlink href="/metrics/summary" >}}<u>Metrics Catalog</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
     {{< nextlink href="/metrics/nested_queries" >}}<u>Nested Queries</u> - Apply additional layers of aggregation to unlock advanced querying capabilities.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -105,7 +105,7 @@ See the [metrics types][16] documentation for more detailed examples of each met
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
-**Tip**: To open the Metrics Summary page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `metrics`.
+**Tip**: To open the Metrics Catalog page from Datadog's global search, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> and search for `metrics`.
 
 Here's an example of a timeseries visualization:
 
@@ -138,7 +138,7 @@ You can break this query into a few steps:
 
 #### Metric name
 
-First, choose the specific metric that you'd like to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you're not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Summary page.
+First, choose the specific metric that you'd like to graph by searching or selecting it from the dropdown next to {{< ui >}}Metric{{< /ui >}}. If you're not sure which metric to use, start with the Metrics Explorer or a notebook. You can also see a list of actively reporting metrics on the Metrics Catalog page.
 
 #### Filter your metric
 
@@ -184,13 +184,13 @@ Add additional layers of aggregation on the results of existing queries in time 
 
 ### View real-time information about metrics
 
-The [Metrics Summary page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
+The [Metrics Catalog page][20] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. Metrics can be filtered by metric name or tag.
 
 Click on any metric name to display a details sidepanel with more detailed information. The details sidepanel displays key information for a given metric, including its metadata (type, unit, interval), number of distinct metrics, number of reporting hosts, number of tags submitted, and a table containing all tags submitted on a metric. Seeing which tags are being submitted on a metric helps you understand the number of distinct metrics reporting from it, since this number depends on your tag value combinations.
 
-**Note:** The number of distinct metrics reported in the details sidepanel on Metrics Summary does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
+**Note:** The number of distinct metrics reported in the details side panel in the Metrics Catalog does not define your bill. See your [usage details][21] for a precise accounting of your usage over the past month.
 
-Read the [metrics summary documentation][22] for more details.
+Read the [Metrics Catalog documentation][22] for more details.
 
 ## Further reading
 
@@ -221,7 +221,7 @@ Read the [metrics summary documentation][22] for more details.
 [17]: /getting_started/tagging/using_tags/
 [18]: /dashboards/functions/
 [19]: /metrics/distributions/
-[20]: https://app.datadoghq.com/metric/summary
+[20]: https://app.datadoghq.com/metric/catalog
 [21]: /account_management/plan_and_usage/usage_details/
 [22]: /metrics/summary/
 [23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
