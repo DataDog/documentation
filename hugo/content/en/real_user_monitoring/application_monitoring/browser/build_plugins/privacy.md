@@ -1,6 +1,6 @@
 ---
 title: Privacy Plugin
-description: "Generate an allowlist of safe strings at build time to keep useful RUM action names while masking sensitive data."
+description: "Generate an allowlist of safe strings at build time to keep useful RUM action names and Session Replay text visible while masking sensitive data."
 aliases:
   - /real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation/
 algolia:
