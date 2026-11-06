@@ -239855,37 +239855,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/security/cloud_workload/policy/download:
-    get:
-      description: |-
-        The download endpoint generates a Workload Protection policy file from your currently active
-        Workload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to
-        your agents to update the policy running in your environment.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: DownloadCloudWorkloadPolicyFile
-      responses:
-        "200":
-          content:
-            application/yaml:
-              examples:
-                default:
-                  value: ""
-              schema:
-                format: binary
-                type: string
-          description: OK
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: "Download the Workload Protection policy (US1-FED)"
-      tags: ["CSM Threats"]
-      x-menu-order: 17
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings:
     get:
       description: |-
