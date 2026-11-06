@@ -18,7 +18,7 @@ Developers and DevOps engineers implementing observability solutions. They're te
 - Are code examples complete and copy-pasteable?
 - Are prerequisites explicit and linked where needed?
 - Are there gaps that would block a user from succeeding?
-- Does the text agree with itself and with the code examples on the page? You can't run code, so don't guess whether a command or setting works. If something looks wrong, ask the author to confirm it.
+- Is technical information accurate?
 
 ### 3. Structure & Scannability
 - Does it follow a logical progression?
