@@ -59,7 +59,7 @@ datadogRum.init({
 });
 ```
 
-To apply this privacy level to part of the application, set `data-dd-privacy="mask-unless-allowlisted"` on the relevant HTML element. See [Session Replay privacy options][3] for more about element-level privacy overrides.
+To apply `mask-unless-allowlisted` to part of the application, set `data-dd-privacy="mask-unless-allowlisted"` on the relevant HTML element. See [Session Replay privacy options][3] for more about element-level privacy overrides.
 
 ### Configure the build plugin
 
