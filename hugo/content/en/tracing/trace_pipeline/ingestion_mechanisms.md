@@ -154,7 +154,9 @@ Read more about sampling controls in the [Python SDK documentation][2].
 
 Starting from version <a href="https://github.com/DataDog/dd-trace-rb/releases/tag/v2.0.0">2.0.0</a>, for Ruby applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI.
 
-Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+Standalone Sidekiq and Solid Queue tracing integrations do not automatically start Remote Configuration. See [Ruby application requirements][3] for the Rack startup requirement, or use the local configuration below.
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][2].
 
 **Note**: Remotely set configuration takes precedence over local configuration.
 
@@ -173,6 +175,8 @@ Configure a rate limit by setting the `DD_TRACE_RATE_LIMIT` environment variable
 Read more about sampling controls in the [Ruby SDK documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/ruby#sampling
+[2]: /tracing/guide/resource_based_sampling/
+[3]: /tracing/guide/remote_config/#ruby-application-requirements
 {{% /tab %}}
 {{% tab "Go" %}}
 **Remote configuration**
