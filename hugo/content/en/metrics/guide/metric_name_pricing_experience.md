@@ -1,6 +1,6 @@
 ---
 title: Metrics Experience Changes for Metric Name Pricing
-description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Metrics Catalog page, Plan & Usage page, and estimated usage metrics."
+description: "Learn how the custom metrics experience in Datadog has been updated to reflect Metric Name Pricing, including changes to the Manage Tags modal, Metric side panel, Metrics Catalog usage graphs, Plan & Usage page, and estimated usage metrics."
 further_reading:
 - link: "/account_management/billing/metric_name_pricing/"
   tag: "Documentation"
@@ -11,7 +11,7 @@ further_reading:
 - link: "/account_management/billing/usage_metrics/"
   tag: "Documentation"
   text: "Estimated Usage Metrics"
-- link: "/metrics/volume/"
+- link: "/metrics/catalog/"
   tag: "Documentation"
   text: "Metrics Catalog"
 algolia:
@@ -30,7 +30,7 @@ With the [Metric Name Pricing billing model][1] for custom metrics, Datadog upda
 |---------|-------------|
 | [Manage Tags modal](#manage-tags-modal) | Estimates the impact of tag changes on point volume instead of cardinality volume. |
 | [Metric side panel](#metric-side-panel) | Displays ingested and indexed point volume instead of timeseries volume. |
-| [Metrics Catalog page](#metrics-catalog-page) | Volume Overview graphs display new billing dimensions for Metric Name Pricing. |
+| [Metrics Catalog usage graphs](#metrics-catalog-usage-graphs) | Usage graphs display new billing dimensions for Metric Name Pricing. |
 | [Plan & Usage page](#plan--usage-page) | Reflects the Metric Name Pricing billing breakdown. |
 | [Estimated usage metrics](#estimated-usage-metrics) | New points-volume metrics replace cardinality-based estimated usage metrics. |
 
@@ -50,15 +50,16 @@ To open the metric side panel, click any metric name on the [Metrics Catalog pag
 
 {{< img src="metrics/guide/metric_name_pricing_experience/metric-side-panel.png" alt="The metric details side panel showing INGESTED POINTS and INDEXED POINTS at the top, alongside Hosts and Tag Values." style="width:100%;" >}}
 
-## Metrics Catalog page
+## Metrics Catalog usage graphs
 
-The Volume Overview graphs on the [Metrics Catalog page][3] display the following Metric Name Pricing billing dimensions:
+The usage graphs on the [Metrics Catalog page][3] display the following Metric Name Pricing billing dimensions:
 
 - Estimated unique metric names
 - Billable indexed point volume
 - Ingested-to-indexed points ratio
 
-{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Volume Overview graphs for Metric Name Pricing: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
+<!-- TODO(screenshot): The current image shows the retired "Volume Overview" heading and "Hide Graphs" link. Recapture the graphs in Catalog from an org on Metric Name Pricing, or crop off the heading row as a stopgap. -->
+{{< img src="metrics/guide/metric_name_pricing_experience/volume-overview-graphs.png" alt="Three Metric Name Pricing usage graphs: Estimated Unique Metric Names (count of metrics with more than 100 indexed points month-to-date), Estimated Total Points (total indexed points exceeding the 10M per-metric allotment month-to-date), and Estimated Ingested to Indexed Points Ratio." style="width:100%;" >}}
 
 ## Plan & Usage page
 
