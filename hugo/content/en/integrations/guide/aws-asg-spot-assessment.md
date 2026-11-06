@@ -28,11 +28,9 @@ Spot potential helps prioritize groups for investigation. Before migrating, vali
 
 1. [Connect the AWS accounts][1] that contain the ASGs.
 2. Enable resource collection for those accounts and regions with the [AWS integration's resource collection permissions][2]. The assessment needs ASG information and the EC2 launch settings those groups use.
-3. In the AWS integration's **Metric Collection** tab, enable the `AWS/AutoScaling` namespace. Check that metric filters include `aws.autoscaling.group_in_service_instances`.
+3. In the AWS integration's **Metric Collection** tab, enable the `AWS/AutoScaling` namespace. Check that metric filters include `aws.autoscaling.group_in_service_instances`. You do not need to enable the `AWS/EC2` namespace.
 4. (Recommended) [Enable group metrics in AWS][3], including `GroupInServiceInstances`, so that estimates can use running-instance history.
 5. (Optional) [Set up Cloud Cost Management for AWS][8] to base current cost estimates on your actual AWS costs. Without cost data for an ASG, the assessment uses public On-Demand prices.
-
-The assessment does not require `AWS/EC2` metrics.
 
 Estimates are most representative with a full 30 days of history. If instance history is missing, estimates use the ASG's configured desired capacity when possible.
 
