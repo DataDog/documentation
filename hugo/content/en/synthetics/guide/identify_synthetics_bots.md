@@ -81,9 +81,7 @@ If you use the browser variable to identify Synthetic bots on Firefox, Datadog c
 
 Cookies that are applied in your browser include `datadog-synthetics-public-id` and `datadog-synthetics-result-id`.
 
-For Microsoft Edge and Google Chrome, these cookies are set only for the start URL. They are not set when the test uses a client certificate, a proxy auto-configuration (PAC) file, or a SOCKS proxy.
-
-In Firefox, these cookies are available to scripts on the page for all steps, but they are not sent to your server.
+For Microsoft Edge and Google Chrome, these cookies are set only for the start URL. Some network setups, such as a SOCKS proxy, prevent them from being set. In Firefox, these cookies are not sent to your server.
 
 If your server cannot read these cookies, use default headers to identify Synthetic tests. For more information, see the [Default headers][2] section.
 

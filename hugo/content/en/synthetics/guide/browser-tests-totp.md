@@ -36,7 +36,7 @@ Create a global variable where you enter a secret key or upload a QR code from y
 5. Follow your authenticator app's documentation for instructions on creating a secret key or adding a new QR code.
 6. Enter the {{< ui >}}Secret Key{{< /ui >}} to your variable or upload a QR code image.
 
-    **Note**: Datadog reads only the secret key from the QR code and ignores other parameters such as algorithm, code length, and refresh period. Code length defaults to six digits and the refresh period to 30 seconds.
+    **Note**: When you upload a QR code, Datadog reads only the secret key. If your provider uses a different code length or refresh period, set it in step 7.
 
 7. (Optional) To use a different code length or refresh period, expand {{< ui >}}Advanced Options{{< /ui >}} under {{< ui >}}Generate the OTP{{< /ui >}} and adjust the values.
 8. Click {{< ui >}}\+ Generate{{< /ui >}} to create a TOTP. You can copy the generated TOTP with the {{< ui >}}Copy{{< /ui >}} icon.
