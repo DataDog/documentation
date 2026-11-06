@@ -10557,10 +10557,10 @@ menu:
       parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
       weight: 5
-    - name: Statistical Nitty-Gritty
-      url: experiments/statistics/statistical_nitty_gritty
+    - name: Lift and Interval Calculations
+      url: experiments/statistics/lift_and_interval_calculations
       parent: pa_experiments_statistics
-      identifier: pa_experiments_statistical_nitty_gritty
+      identifier: pa_experiments_lift_and_interval_calculations
       weight: 6
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
