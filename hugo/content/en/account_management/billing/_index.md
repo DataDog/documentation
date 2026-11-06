@@ -37,7 +37,7 @@ For more information about IoT billing, see the [Datadog Pricing page][7].
 
 To manage your {{< ui >}}Payment Method{{< /ui >}} and view {{< ui >}}Subscription Details{{< /ui >}}, you must be a Datadog Admin user.
 
-Roles with the and Contract Read (`contract_read`) [permission][8] can view this data. Managing your payment method also requires Billing Edit (`billing_edit`).
+Roles with the Contract Read (`contract_read`) [permission][8] can view this data. Managing your payment method also requires Billing Edit (`billing_edit`).
 
 ### Managing your payment method
 
