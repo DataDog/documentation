@@ -86,7 +86,7 @@ module.exports = {
 };
 ```
 
-To customize which files the plugin processes, set include and exclude patterns:
+To customize which files the plugin processes, set `include` and `exclude` patterns:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
