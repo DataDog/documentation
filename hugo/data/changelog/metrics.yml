@@ -131,3 +131,10 @@ entries:
       - GetDerivedMetric
       - UpdateDerivedMetric
     title: Add Terraform support for Derived Metrics
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41363
+    operations:
+      - QueryScalarData
+      - QueryTimeseriesData
+    title: Fix OpenAPI response schema for POST /api/v2/query/scalar
