@@ -52,6 +52,10 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
 1. Select and set up a [log source][3]. To add more sources, see [Add another source](#add-another-log-source).
 1. Select and set up [destinations][5] for your processed logs.
+1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for multiple sources:
+    1. Click a source and select the {{< ui >}}Pre-processor{{< /ui >}} tab in the panel.
+    1. Add [processors][4].
+    - See [Per-source and shared processors][7] for more information.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
@@ -87,6 +91,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/?tab=logs#destinations
 [6]: /observability_pipelines/configuration/pipeline_simulation/
+[7]: /observability_pipelines/processors#per-source-and-shared-processors
 [11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
@@ -96,6 +101,10 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Select the [Metric Tag Governance][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Metrics Pipeline{{< /ui >}}.
 1. Select and set up a [metrics source][3]. To add more sources, see [Add another source](#add-another-metrics-source).
 1. Select and set up [destinations][5] for your processed metrics.
+1. To add per-source or shared processors ({{< tooltip glossary="preview" case="title" >}}) for multiple sources:
+    1. Click a source and select the {{< ui >}}Pre-processor{{< /ui >}} tab in the panel.
+    1. Add [processors][4].
+    - See [Per-source and shared processors][7] for more information.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
@@ -131,6 +140,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 [4]: /observability_pipelines/processors/?tab=metrics#processors
 [5]: /observability_pipelines/destinations/?tab=metrics#destinations
 [6]: /observability_pipelines/configuration/pipeline_simulation/
+[7]: /observability_pipelines/processors#per-source-and-shared-processors
 [11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
