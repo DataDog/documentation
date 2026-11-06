@@ -362,7 +362,7 @@ To create and manage instrumentation rules and cluster groups, you need the **AP
 
 To view and manage instrumentation rules, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Instrument a Service{{< /ui >}} > [{{< ui >}}Instrumentation Rules{{< /ui >}}][102], then select {{< ui >}}Kubernetes{{< /ui >}} from the dropdown in the page title. Rules, cluster groups, and evaluation order for Kubernetes are managed separately from those for hosts.
 
-<!-- TODO: Add screenshot of the APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards. Requires eligible clusters and at least one rule. -->
+{{< img src="tracing/trace_collection/apm-instrumentation-rules-for-kubernetes.png" alt="The APM Instrumentation Rules page with Kubernetes selected, showing the Default Behavior, Clusters in Scope, and Deployment Status cards above an empty list of instrumentation rules" style="width:100%;" >}}
 
 #### Set the default behavior
 
@@ -389,13 +389,15 @@ To create a cluster group:
 
    <div class="alert alert-info">Cluster groups are dynamic, so new clusters that match your search are added to the group automatically. A cluster can belong to more than one group.</div>
 
+   {{< img src="tracing/trace_collection/k8s-add-clusters.png" alt="The new cluster group form, with two of four clusters selected in the Add Clusters list" style="width:80%;" >}}
+
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
 Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
 
 To change the order of cluster groups, drag a group by its handle in the group list. Group order affects [how rules are evaluated](#how-rules-are-evaluated).
 
-<!-- TODO: Add screenshot of the Cluster Groups page with at least one cluster group above the All clusters group. Requires eligible clusters. -->
+{{< img src="tracing/trace_collection/k8s-cluster-groups.png" alt="The Cluster Groups page for Kubernetes, showing a Canary group ordered above the All clusters group, with the clusters in the All clusters group listed" style="width:100%;" >}}
 
 #### Create instrumentation rules
 
