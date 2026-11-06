@@ -4,7 +4,7 @@ aliases:
 - /ja/observability_pipelines/destinations/opentelemetry/traces/
 - /ja/observability_pipelines/destinations/opentelemetry/metrics/
 - /ja/observability_pipelines/destinations/prometheus/
-description: Observability Pipelines Worker で利用可能な送信先について学びます。
+description: Observability Pipelines Worker で利用可能な送信先について説明します。
 disable_toc: false
 further_reading:
 - link: logs/processing/pipelines
@@ -12,13 +12,13 @@ further_reading:
   text: ログ処理パイプライン
 title: 送信先
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
-Observability Pipelines Worker を使用して、処理済みのログおよびメトリクスをさまざまな宛先に送信します。ほとんどの Observability Pipelines の送信先は、イベントをバッチとして下流のインテグレーションに送信します。詳細については、[イベントのバッチ処理](#event-batching)を参照してください。一部の Observability Pipelines の送信先では、テンプレート構文をサポートするフィールドがあり、特定のフィールドの値に基づいてそれらを設定することができます。詳細については、[テンプレート構文](#template-syntax)を参照してください。
+Observability Pipelines Worker を使用すると、処理済みのログおよびメトリクスをさまざまな送信先に送信できます。ほとんどの Observability Pipelines の送信先は、イベントをバッチとして下流のインテグレーションに送信します。詳細については、[イベントのバッチ処理](#event-batching)を参照してください。一部の Observability Pipelines の送信先では、テンプレート構文をサポートするフィールドがあり、特定のフィールドの値に基づいてそれらを設定することができます。詳細については、[テンプレート構文](#template-syntax)を参照してください。
 
 **注**:
 - パイプラインには合計 20 個の送信先を追加できます。
-- パイプラインに同じタイプの送信先を複数追加する場合は、[Secrets Management][4] を使用する必要があります。たとえば、2 つの異なる HTTP クライアントに対して 2 つの HTTP クライアント送信先を追加する場合、HTTP クライアント URI にシークレット識別子を使用する必要があります。2 つの異なる HTTP クライアント URI を保存するために、デフォルトの `DESTINATION_HTTP_CLIENT_URI` を使用することはできません。
+- パイプラインに同じタイプの送信先を複数追加する場合は、[シークレット管理][4]を使用する必要があります。たとえば、2 つの異なる HTTP クライアントに対して 2 つの HTTP クライアント送信先を追加する場合、HTTP クライアント URI にシークレット識別子を使用する必要があります。異なる 2 つの HTTP クライアント URI を保存する目的でデフォルトの `DESTINATION_HTTP_CLIENT_URI` を使用することはできません。
 
 ## 送信先 {#destinations}
 
@@ -104,17 +104,17 @@ Observability Pipelines Worker がテンプレート構文でフィールドを�
 
 | 送信先       | テンプレート構文をサポートするフィールド                        | フィールドが解決できない場合の動作                                                                                 |
 |-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
+| Amazon Opensearch | インデックス (バルクモード)<br><br>タイプ、データセット、ネームスペース (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
 | Datadog Archives  | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
 | Azure Blob        | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
-| Elasticsearch     | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
-| Google Chronicle  | ログタイプ                            | デフォルトは `DATADOG` ログタイプです。                                                                                           |
+| Elasticsearch     | インデックス (バルクモード)<br><br>タイプ、データセット、ネームスペース (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかを解決できない場合、Worker はログを破棄します。|
+| Google SecOps     | ログタイプ                            | デフォルトは `DATADOG` ログタイプです。                                                                                           |
 | Google Cloud      | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
-| Opensearch        | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
+| Opensearch        | インデックス (バルクモード)<br><br>タイプ、データセット、ネームスペース (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
 | Prometheus*        | テナント ID                           | Worker はメトリクスを破棄します。 |
 | Splunk HEC        | インデックス<br>ソースタイプ                | Worker は Splunk で構成されたデフォルトのインデックスにログを送信します。<br>Worker のデフォルトは `httpevent` ソースタイプです。|
 
-*テンプレートには、`prefix-` のようなリテラルプレフィックスが必要です。{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}` は拒否されます。Worker はエラーをログに記録し、パイプラインは開始されません。
+*テンプレートには、たとえば `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `などのリテラルプレフィックスが必要です。`{{ tenant_id }}` などのリテラルプレフィックスがないテンプレートは拒否されます。Worker はエラーをログに記録し、パイプラインは開始されません。
 
 #### 例 {#example}
 
@@ -126,7 +126,7 @@ Observability Pipelines Worker がテンプレート構文でフィールドを�
 
 #### イベントフィールド {#event-fields}
 
-Use `{{ <field_name> }}` を使用して個々のログイベントフィールドにアクセスします。たとえば、次のようにします。
+`{{ <field_name> }}` を使用して個々のログイベントフィールドにアクセスします。例:
 
 ```
 {{ application_id }}
@@ -134,7 +134,7 @@ Use `{{ <field_name> }}` を使用して個々のログイベントフィール�
 
 #### Strftime 指定子 {#strftime-specifiers}
 
-日付と時刻に [strftime 指定子][3]を使用します。たとえば、次のようにします。
+日付と時刻に [strftime 指定子][3]を使用します。例:
 
 ```
 year=%Y/month=%m/day=%d
@@ -162,7 +162,7 @@ Observability Pipelines の送信先は、イベントをバッチとして下�
 - バイトの最大数
 - タイムアウト (秒)
 
-例えば、送信先のパラメーターが次のようになっている場合:
+たとえば、送信先のパラメーターが次のようになっている場合:
 
 - イベントの最大数 = 2
 - バイトの最大数 = 100,000

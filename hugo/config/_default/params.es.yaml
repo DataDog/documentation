@@ -1,7 +1,7 @@
 site_name: "Monitoreo de infraestructura y aplicaciones de Datadog"
 meta_title: Introducción a Datadog
 meta_description: "Datadog, el servicio líder de monitoreo a escala de la nube."
-disclaimer: "Esta página aún no está disponible en inglés. Estamos trabajando en su traducción. <br> Si tiene alguna pregunta o comentario sobre nuestro proyecto de traducción actual, <a href=\"https://docs.datadoghq.com/help/\">¡no dude en contactarnos!</a>"
+disclaimer: "Esta página aún no está disponible en español. Estamos trabajando en su traducción. <br> Si tiene alguna pregunta o comentario sobre nuestro proyecto de traducción actual, <a href=\"https://docs.datadoghq.com/help/\">¡no dude en contactarnos!</a>"
 # announcement_banner:
 #   desktop_message: "<span>Join Datadog at DASH in NYC, June 9-10. | The future of AI + Observability starts here.</span>"
 #   mobile_message: "<span>DASH NYC, June 9-10 | AI + Observability</span>"
