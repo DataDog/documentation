@@ -32,50 +32,9 @@ further_reading:
       text: "Bits AI Agents"
 ---
 
-## Overview
-
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
 
 Learn about Bits AI pricing on [AI Credits][1].
-
-The Bits AI home page is the central place in Datadog to work with Bits AI. From Bits AI Home, you can:
-
-- Chat with Bits
-- Review the work Bits does autonomously across your environment
-- Create custom automations
-- Manage Bits AI settings for your organization
-
-<!-- TODO: Add how to get to Bits AI Home in the Datadog UI and a screenshot of the landing page. -->
-
-<!-- TODO: Screenshot how Bits Detection, Bits Investigation, and Bits Remediation fit under Autonomous Ops. Waiting on UI organization. -->
-
-## Bits Chat
-
-Use Chat to ask questions about your observability data and take action in natural language.
-
-For more information, see [Bits Chat][2].
-
-## Autonomous Ops
-
-Bits Autonomous Operations (Autonomous Ops) allows you to assign ongoing operational work to Bits. 
-
-It combines [Bits Detection][5], [Bits Investigation][6], and [Bits Remediation][7] in a single operational loop.
-
-With Autonomous Operations, Bits watches the system resources, monitor alerts, or Slack channels that you specify, and automatically detects and triages any issues.
-
-Bits then investigates critical alerts, and proposes a fix for the issue within the guardrails you set. After you approve the fix, Bits verifies that the issue is resolved.
-
-For more information, see [Bits Autonomous Operations][8].
-
-## Custom Automations
-
-Use Custom Automations to define workflows that Bits runs for your team. For more information, see [Automations][3] in the Bits Code section.
-
-<!-- TODO: Confirm scope and how this relates to existing automation docs (for example, Bits Code automations). -->
-
-## Settings
-
-Use Settings to control what Bits knows about your organization and who can use it. For more information, see [Bits AI Settings][4].
 
 ## Features
 
@@ -94,10 +53,3 @@ Use Settings to control what Bits knows about your organization and who can use 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/billing/ai_credits/
-[2]: /bits_ai/bits_chat/
-[3]: /bits_ai/bits_code/automations/
-[4]: /bits_ai/bits_settings/
-[5]: /bits_ai/bits_detection/
-[6]: /bits_ai/bits_investigation/
-[7]: /bits_ai/bits_remediation/
-[8]: /bits_ai/bits_autonomous_operations/
