@@ -97,7 +97,7 @@ Syslog is a widely used logging protocol for sending network logs to a central s
 
 #### FortiAnalyzer timestamps in RFC 5424 format
 
-When FortiAnalyzer forwards logs in RFC 5424 format (`fwd-syslog-format rfc-5424`), some versions add a UTC `Z` suffix to timestamps that are in the device's local time. If the device is in a time zone ahead of UTC, its logs arrive with timestamps in the future. Datadog drops logs with timestamps more than two hours in the future. As a result, these logs don't appear in Log Explorer, and the Worker doesn't report an error.
+When FortiAnalyzer forwards logs in RFC 5424 format, such as `fwd-syslog-format rfc-5424`, some versions add a UTC `Z` suffix to timestamps that are in the device's local time. If the device is in a time zone ahead of UTC, its logs arrive with timestamps in the future. Datadog drops logs with timestamps more than two hours in the future. As a result, these logs don't appear in Log Explorer, and the Worker doesn't report an error.
 
 To fix this, use the log's `eventtime` field as the official timestamp instead:
 
