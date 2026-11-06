@@ -33,7 +33,7 @@ You can enable Bits Detection for additional services from several entry points:
 1. Set up a notification destination so the team knows when Bits finds a critical degradation.
 1. Review the managed coverage after initialization completes. You receive an email when your new health posture is ready.
 
-<div class="alert alert-info">Enabling coverage requires the Bits Investigations Read and Monitors Write permissions. Setting up a notification destination also requires the Monitor Configuration Policy Write permission. For details, see <a href="#permissions">Permissions</a>.</div>
+<div class="alert alert-info">Enabling coverage requires the Bits Investigations Write and Monitors Write permissions. Setting up a notification destination also requires the Monitor Configuration Policy Write permission. For details, see <a href="#permissions">Permissions</a>.</div>
 
 ### Option 2: Service Page {#enable-from-service-page}
 
@@ -131,12 +131,11 @@ Bits Detection uses existing Datadog RBAC permissions. There are no permissions 
 | View the Coverage page and scope details                                | Bits Investigations Read (`bits_investigations_read`)                                                   | Datadog Read Only Role |
 | View critical endpoints                                                 | APM Read (`apm_read`)                                                                                   | Datadog Read Only Role |
 | View Bits Detection monitors                                            | Monitors Read (`monitors_read`)                                                                         | Datadog Read Only Role |
-| Enable, edit, rename, or remove detection coverage for a scope          | Bits Investigations Read (`bits_investigations_read`) and Monitors Write (`monitors_write`)             | Datadog Standard Role  |
-| Turn on auto-investigate for a scope                                    | Bits Investigations Read, Bits Investigations Write (`bits_investigations_write`), and Monitors Write   | Datadog Standard Role  |
+| Enable, edit, rename, or remove detection coverage for a scope, including auto-investigate | Bits Investigations Write (`bits_investigations_write`) and Monitors Write (`monitors_write`) | Datadog Standard Role  |
 | Mark an endpoint as critical or not critical                            | APM Read (`apm_read`) and Monitors Write (`monitors_write`)                                             | Datadog Standard Role  |
 | Set up or change alert notifications for a scope                        | Monitor Configuration Policy Write (`monitor_config_policy_write`)                                      | Datadog Admin Role     |
 
-To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Read and Monitors Write.
+To set up notifications while enabling or editing a scope, you need Monitor Configuration Policy Write in addition to Bits Investigations Write and Monitors Write.
 
 For details on assigning permissions to roles, see [Access Control][6].
 
