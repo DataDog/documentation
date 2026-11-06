@@ -11,7 +11,8 @@
       </div>
       <div class="header-text">
         {{- $title := .Get "title" | .Page.RenderString -}}
-        {{ printf "<%s class='header-text-inner'>%s</%s>" $headingLevel $title $headingLevel | safeHTML }}
+        {{- $headingId := $title | plainify | anchorize -}}
+        {{ printf "<%s id='%s' class='header-text-inner'>%s</%s>" $headingLevel $headingId $title $headingLevel | safeHTML }}
       </div>
     </div>
   </summary>
