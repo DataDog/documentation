@@ -37,8 +37,10 @@ For example, a static `Order value` label can remain readable in an action name 
 
 ## Prerequisites
 
-- RUM Browser SDK v7 or later, initialized with `trackUserInteractions: true` and `enablePrivacyForActionName: true`. See [Tracking User Actions][1].
+- RUM Browser SDK v7 or later.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][2] for installation instructions.
+
+Action tracking does not take privacy levels into account when the `enablePrivacyForActionName: false` SDK configuration option is set. Remove this option to allow the privacy plugin to affect action names. See [Tracking User Actions][1].
 
 ## Configuration
 
