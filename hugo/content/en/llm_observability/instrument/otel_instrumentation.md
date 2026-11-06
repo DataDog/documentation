@@ -665,7 +665,7 @@ This section provides the mappings from OpenTelemetry GenAI semantic conventions
 
 ### Trace eligibility
 
-A trace is eligible for conversion when at least one span has one of the following attributes. You must also [enable conversion](#enabling-llm-observability-conversion).
+You must [enable conversion](#enabling-llm-observability-conversion) for a trace to be eligible. The trace must also contain at least one span with any of the following attributes:
 
 | Attribute | Requirement |
 |-----------|-------------|
