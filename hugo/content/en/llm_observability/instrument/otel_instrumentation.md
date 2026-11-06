@@ -67,7 +67,7 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 ### 1. Enable LLM Observability conversion {#enabling-llm-observability-conversion}
 
-To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute so that every exported span includes it. If you set the attribute on a single span instead, large traces might be only partially converted. Under the standard conversion policy, an explicit `dd_llmobs_enabled=false` overrides organization enablement.
+To enable LLM Observability conversion, set `dd_llmobs_enabled=true` as a resource attribute to include it in every exported span. Setting it on a single span might result in partially converted large traces. Under the standard conversion policy, an explicit `dd_llmobs_enabled=false` overrides organization-level enablement.
 
 #### Using an export header
 
