@@ -80,8 +80,8 @@ Don't rewrite text that is correct and clear only because you would phrase it di
 Scope:
 - Comment only on lines the PR adds or changes. Read the rest of the file and related pages for context, but don't flag text the PR didn't touch.
 - Before you flag a pattern, structure, or wording choice, check comparable pages in the same docs section. If the existing docs already do it that way, matching them is usually correct.
-- If the same style rule is broken several times in a file, comment on the first instance and say how many others there are, instead of commenting on each one.
-- A Vale check also runs on docs PRs. Focus on what Vale can't catch: clarity, structure, accuracy, and the checks in this file.
+- Check changed lines against the word tables in the Style Guide section. A Vale check also runs on docs PRs, but authors often miss its warnings. Comment on each instance with a suggestion block so the author can apply the fix in one click.
+- For other style rules broken several times in a file, comment on the first instance and say how many others there are, instead of commenting on each one.
 
 ## Earlier reviews
 
