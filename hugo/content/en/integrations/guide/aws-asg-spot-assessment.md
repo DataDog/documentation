@@ -101,7 +101,7 @@ Public-price estimates use Linux pricing and exclude software licensing charges.
 | --- | --- |
 | **Assessment is being prepared** | A completed assessment is not yet available. Check resource collection and permissions, then return after an assessment completes. |
 | An ASG is missing | Clear table filters and select **Show ASGs outside migration scope**. Verify account and region collection, running instances, and supported group configuration. Missing launch settings, pricing, or interruption data can prevent an assessment. |
-| No running-instance history | Verify AWS group metric publication and Datadog collection of `aws.autoscaling.group_in_service_instances`. Newly enabled collection does not provide a full 30-day history immediately. |
+| No running-instance history | Verify AWS group metric publication and Datadog collection of `aws.autoscaling.group_in_service_instances`. Newly enabled collection does not immediately provide a full 30-day history. |
 | Public-price estimates instead of Cloud Cost Management costs | Verify [AWS Cloud Cost Management setup][8] and cost data attributed to the ASG for the assessment period. Public pricing is the fallback when usable cost data is unavailable. |
 | A history chart is absent | Charts are hidden when data is unavailable. Available cost history can still appear without running-instance history. |
 | **Stale** results | The displayed assessment is more than 48 hours old. Check collection settings and contact [Datadog Support][5] if results remain stale. Refreshing the page loads the latest completed assessment. |
