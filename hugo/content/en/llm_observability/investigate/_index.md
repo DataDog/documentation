@@ -58,7 +58,7 @@ Learn how to use Agent Observability query interface to search, filter, and anal
 
 This enables you to quickly identify issues, monitor performance, and gain insights into your LLM application's behavior in production.
 
-To watch spans as they arrive, use [live mode][9]. It shows every span received in the last 15 minutes, before sampling and indexing. Live mode requires the Python SDK (`ddtrace` 4.12.0 or later) with APM tracing turned on.
+To watch spans as they arrive, use [live mode][9]. It shows spans received in the last 15 minutes, before sampling and indexing. Live mode requires the Python SDK (`ddtrace` 4.12.0 or later) with APM tracing turned on.
 
 
 ### Correlate APM and Agent Observability

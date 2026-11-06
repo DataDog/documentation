@@ -143,13 +143,17 @@ To turn on live mode, open the time selector in the [Trace Explorer][1] and choo
 
 ### All spans, before sampling
 
-Live mode shows **every** span that Datadog receives in the rolling 15-minute window. It does not apply [trace sampling][10]. Live mode includes spans that your `DD_LLMOBS_SAMPLE_RATE` or [tag-based sampling rules][11] later drop. After 15 minutes, you can only search the spans that sampling kept.
+Live mode shows every span that Datadog receives through the APM trace intake in the rolling 15-minute window (see [Requirements](#requirements)). It does not apply [trace sampling][10]. Live mode includes spans that your `DD_LLMOBS_SAMPLE_RATE` or [tag-based sampling rules][11] later drop. After 15 minutes, you can only search the spans that sampling kept.
 
 ### Requirements
 
 Live mode only shows spans that the SDK sends through Datadog's APM trace intake. The Python SDK (`ddtrace` 4.12.0 or later) uses this path by default. Other SDKs, and earlier `ddtrace` versions, send spans to a separate Agent Observability intake. Spans sent that way still show up in the Trace Explorer after they are indexed, but not in live mode.
 
-With `ddtrace` 4.12.0 or later, spans use the APM trace intake whether you run the Datadog Agent or send data agentlessly (`DD_LLMOBS_AGENTLESS_ENABLED=1`). The SDK switches to the separate Agent Observability intake when either of these environment variables is set:
+With `ddtrace` 4.12.0 or later, spans use the APM trace intake whether you run the Datadog Agent or send data agentlessly (`DD_LLMOBS_AGENTLESS_ENABLED=1`).
+
+**Note**: If you run the Datadog Agent, the Agent drops APM traces that [APM ingestion sampling][12] doesn't keep. The SDK sends the Agent Observability spans from those traces through the separate Agent Observability intake, so they don't appear in live mode. In agentless setups, the SDK sends every trace to the APM trace intake, so all spans appear in live mode.
+
+The SDK switches to the separate Agent Observability intake when either of these environment variables is set:
 
 | Environment variable | Effect |
 | ----- | ----- |
@@ -182,3 +186,4 @@ The Trace Explorer hides these facets and columns while live mode is on. To quer
 [9]: /tracing/trace_explorer/#live-search-for-15-minutes
 [10]: /llm_observability/instrument/sdk/#trace-sampling
 [11]: /llm_observability/instrument/sdk/#tag-based-sampling-rules
+[12]: /tracing/trace_pipeline/ingestion_mechanisms/
