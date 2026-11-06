@@ -328,6 +328,16 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT SELECT to datadog;
 ```
 
+### Real execution plans are missing with the warning "LAST_QUERY_PLAN_STATS is off in database"
+
+Real execution plan collection (`query_metrics.collect_real_plans`) requires `LAST_QUERY_PLAN_STATS` in each monitored database, or trace flag 2451 on the server. The Agent never changes this setting. Run the following command in each database listed in the warning or in the `last-query-plan-stats-disabled` result of the Agent's `diagnose` command:
+
+```SQL
+ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;
+```
+
+For more information, see [Collecting Real Execution Plans on SQL Server][15].
+
 ## Known limitations
 
 ### SQL Server 2012
@@ -378,3 +388,4 @@ Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: /database_monitoring/guide/sql_real_execution_plans/#troubleshooting

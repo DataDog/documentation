@@ -17,6 +17,9 @@ further_reading:
 - link: "/database_monitoring/guide/parameterized_queries/"
   tag: "Documentation"
   text: "Capturing SQL Query Parameter Values"
+- link: "/database_monitoring/guide/sql_real_execution_plans/"
+  tag: "Documentation"
+  text: "Collecting Real Execution Plans"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
