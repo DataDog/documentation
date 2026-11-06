@@ -22,9 +22,7 @@ further_reading:
 
 ## Overview
 
-The privacy plugin generates an allowlist of safe, static strings at build time. The RUM Browser SDK uses this allowlist to keep useful action names while masking potentially sensitive text built at runtime. The same allowlist controls which text remains visible in Session Replay.
-
-With the `mask-unless-allowlisted` privacy level, the SDK displays text only when it matches the build-time allowlist. Static application labels can remain readable. Unknown text, such as user input or a customer's name loaded from an API, remains masked.
+The privacy plugin generates an allowlist of safe, static strings at build time. When the `mask-unless-allowlisted` privacy level is enabled, the RUM Browser SDK uses this allowlist to unmask these static strings automatically. Dynamic text, such as user input or customer data fetched from an API, remains masked by default. The allowlist gives `mask-unless-allowlisted` similar privacy benefits to the `mask` privacy level, while retaining user interface text that makes action names and Session Replay more useful.
 
 ## How the privacy plugin works
 
