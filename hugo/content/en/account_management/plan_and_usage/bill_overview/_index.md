@@ -161,7 +161,7 @@ The following permissions are required to access each section of Bill Overview:
 
 ### Contract information
 
-`CONTRACT_READ` was introduced in October 2026 and granted automatically to every role that held `BILLING_READ` at that time.  Users with the Datadog Admin role have `CONTRACT_READ` by default. Contract information includes all information on the Plan and Billing History pages, along with drawdown totals on the Bill Overview page.
+`CONTRACT_READ` was introduced in October 2026 and granted automatically to every role that held `BILLING_READ` at that time. Users with the Datadog Admin role have `CONTRACT_READ` by default. Contract information includes all information on the Plan and Billing History pages, along with drawdown totals on the Bill Overview page.
 
 To restrict who can see contract information, remove `CONTRACT_READ` from the roles that should not have it and leave `BILLING_READ` in place. Those users retain access to cost and usage data and lose access to {{< ui >}}Plan Details{{< /ui >}} and {{< ui >}}Billing History{{< /ui >}}.
 
