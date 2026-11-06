@@ -4311,11 +4311,21 @@ menu:
       parent: cloud_cost_setup
       identifier: cloud_cost_oracle
       weight: 205
+    - name: Nebius
+      url: cloud_cost_management/setup/nebius/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_nebius
+      weight: 206
+    - name: Alibaba Cloud
+      url: cloud_cost_management/setup/alibaba/
+      parent: cloud_cost_setup
+      identifier: cloud_cost_alibaba
+      weight: 207
     - name: SaaS and AI Costs
       url: cloud_cost_management/setup/saas_costs/
       parent: cloud_cost_setup
       identifier: cloud_cost_saas_cost_integrations
-      weight: 206
+      weight: 208
     - name: Snowflake
       url: cloud_cost_management/setup/saas_costs/?tab=snowflake#configure-your-saas-accounts
       parent: cloud_cost_saas_cost_integrations

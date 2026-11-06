@@ -53,7 +53,7 @@ cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
       rank: 70
-      tags: ['cloud cost', 'cloud integrations', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp', 'data collected aws', 'data collected azure', 'data collected google cloud']
+      tags: ['cloud cost', 'cloud integrations', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp', 'cloud cost nebius', 'cloud cost alibaba', 'data collected aws', 'data collected azure', 'data collected google cloud', 'data collected nebius', 'data collected alibaba']
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
@@ -75,6 +75,8 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
   {{< nextlink href="/cloud_cost_management/setup/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/oracle">}}<u>Oracle</u>: Configure Cloud Cost Management for your Oracle bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/nebius">}}<u>Nebius</u>: Configure Cloud Cost Management for your Nebius Cloud bill. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/alibaba">}}<u>Alibaba Cloud</u>: Configure Cloud Cost Management for your Alibaba Cloud bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/saas_costs">}}<u>SaaS and AI Costs</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog Costs</u>: Visualize daily Datadog spending and utilization metrics. {{< /nextlink >}}
