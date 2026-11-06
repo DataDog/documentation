@@ -91364,6 +91364,370 @@ components:
       required:
         - data
       type: object
+    OIDCCloudAuthClaimMatchMode:
+      default: exact
+      description: "Case-sensitive matching mode. Exact compares strings. Glob matches the entire value: * matches any number of characters, including /, and ? matches one character. Other characters are literal; escaping is not supported."
+      enum:
+        - exact
+        - glob
+      example: exact
+      type: string
+      x-enum-varnames:
+        - EXACT
+        - GLOB
+    OIDCCloudAuthClaimMatcher:
+      description: A token claim must match at least one of the configured values.
+      properties:
+        claim:
+          description: Name of the token claim.
+          example: sub
+          type: string
+        mode:
+          $ref: "#/components/schemas/OIDCCloudAuthClaimMatchMode"
+        values:
+          description: Accepted values for this claim.
+          example:
+            - system:serviceaccount:controllers:example-controller
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - claim
+        - values
+      type: object
+    OIDCCloudAuthClaimMatcherCreate:
+      description: Claim condition for creating a provider or persona mapping. A token claim must match at least one configured value.
+      properties:
+        claim:
+          description: Name of the token claim.
+          example: sub
+          type: string
+        mode:
+          $ref: "#/components/schemas/OIDCCloudAuthClaimMatchMode"
+        values:
+          description: Accepted values for this claim. Each value is limited to 500 UTF-8 bytes when creating the resource.
+          example:
+            - system:serviceaccount:controllers:example-controller
+          items:
+            maxLength: 500
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - claim
+        - values
+      type: object
+    OIDCCloudAuthDiscoveryType:
+      description: How the signing keys are discovered.
+      enum:
+        - oidc_discovery
+        - direct_jwks
+      example: oidc_discovery
+      type: string
+      x-enum-varnames:
+        - OIDC_DISCOVERY
+        - DIRECT_JWKS
+    OIDCCloudAuthOrgUUIDSource:
+      default: dd_org_uuid
+      description: Source of the organization UUID in the signed token. The `aud` source accepts a datadog/{org_uuid} audience.
+      enum:
+        - dd_org_uuid
+        - aud
+      example: dd_org_uuid
+      type: string
+      x-enum-varnames:
+        - DD_ORG_UUID
+        - AUD
+    OIDCCloudAuthPersonaMappingAttributesResponse:
+      description: Stored Custom OIDC persona mapping attributes.
+      properties:
+        account_identifier:
+          description: Handle resolved when the mapping was created; not updated if the account handle changes.
+          readOnly: true
+          type: string
+        account_uuid:
+          description: UUID of the Datadog user or service account to authenticate as.
+          example: 00000000-0000-0000-0000-000000000003
+          type: string
+        claim_matchers:
+          description: Every claim condition must match. Supply claim_matchers or identity_pattern, but not both.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthClaimMatcher"
+          type: array
+        created_at:
+          description: Time the configuration was created.
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: UUID of the user who created the configuration.
+          format: uuid
+          readOnly: true
+          type: string
+        identity_pattern:
+          description: Legacy glob pattern matched against the provider identity claim. Supply this or claim_matchers, but not both. Prefer claim_matchers with exact mode for a single Kubernetes service account.
+          example: system:serviceaccount:controllers:example-controller
+          type: string
+        provider_id:
+          description: UUID of the registered Custom OIDC provider.
+          example: 00000000-0000-0000-0000-000000000002
+          format: uuid
+          type: string
+      type: object
+    OIDCCloudAuthPersonaMappingCreateAttributes:
+      description: Attributes for creating a Custom OIDC persona mapping.
+      properties:
+        account_uuid:
+          description: UUID of the Datadog user or service account to authenticate as.
+          example: 00000000-0000-0000-0000-000000000003
+          type: string
+        claim_matchers:
+          description: Every claim condition must match. Supply claim_matchers or identity_pattern, but not both.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthClaimMatcherCreate"
+          type: array
+        identity_pattern:
+          description: Legacy glob pattern, limited to 500 UTF-8 bytes when creating a mapping, matched against the provider identity claim. Supply this or claim_matchers, but not both. Prefer claim_matchers with exact mode for a single Kubernetes service account.
+          example: system:serviceaccount:controllers:example-controller
+          maxLength: 500
+          type: string
+        provider_id:
+          description: UUID of the registered Custom OIDC provider.
+          example: 00000000-0000-0000-0000-000000000002
+          format: uuid
+          type: string
+      required:
+        - provider_id
+        - account_uuid
+      type: object
+    OIDCCloudAuthPersonaMappingCreateData:
+      description: Custom OIDC persona mapping creation data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingCreateAttributes"
+        type:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingType"
+      required:
+        - type
+        - attributes
+      type: object
+    OIDCCloudAuthPersonaMappingCreateRequest:
+      description: Request to create a Custom OIDC persona mapping.
+      properties:
+        data:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingCreateData"
+      required:
+        - data
+      type: object
+    OIDCCloudAuthPersonaMappingDataResponse:
+      description: Custom OIDC persona mapping resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingAttributesResponse"
+        id:
+          description: Unique resource identifier.
+          example: 00000000-0000-0000-0000-000000000004
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OIDCCloudAuthPersonaMappingResponse:
+      description: Custom OIDC persona mapping response.
+      properties:
+        data:
+          $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingDataResponse"
+      required:
+        - data
+      type: object
+    OIDCCloudAuthPersonaMappingType:
+      default: custom_oidc_identity_mapping
+      description: Resource type returned by the existing Custom OIDC persona mapping API.
+      enum:
+        - custom_oidc_identity_mapping
+      example: custom_oidc_identity_mapping
+      type: string
+      x-enum-varnames:
+        - CUSTOM_OIDC_IDENTITY_MAPPING
+    OIDCCloudAuthPersonaMappingsResponse:
+      description: List of Custom OIDC persona mapping resources.
+      properties:
+        data:
+          description: Configured resources.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingDataResponse"
+          type: array
+      required:
+        - data
+      type: object
+    OIDCCloudAuthProviderAttributesResponse:
+      description: Stored Custom OIDC provider attributes.
+      properties:
+        audiences:
+          description: Expected token audiences. At least one audience is required. When `org_uuid_source` is `aud`, include datadog/{org_uuid} for the organization creating the provider.
+          example:
+            - datadog/00000000-0000-0000-0000-000000000001
+          items:
+            type: string
+          minItems: 1
+          type: array
+        created_at:
+          description: Time the configuration was created.
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          description: UUID of the user who created the configuration.
+          format: uuid
+          readOnly: true
+          type: string
+        discovery_type:
+          $ref: "#/components/schemas/OIDCCloudAuthDiscoveryType"
+        identity_claim_name:
+          default: sub
+          description: Claim used by legacy identity_pattern mappings and in identity logs.
+          example: sub
+          type: string
+        issuer_url:
+          description: HTTPS issuer URL that must match the token issuer. For oidc_discovery, signing keys are located through the issuer discovery document.
+          example: https://issuer.example.com
+          type: string
+        jwks_url:
+          description: HTTPS JSON Web Key Set URL. Required when `discovery_type` is `direct_jwks`.
+          example: https://issuer.example.com/keys
+          type: string
+        org_uuid_claim_name:
+          description: Optional name of the token claim containing the Datadog organization UUID.
+          example: dd_org_uuid
+          type: string
+        org_uuid_source:
+          $ref: "#/components/schemas/OIDCCloudAuthOrgUUIDSource"
+        provider_name:
+          description: Name identifying the provider within the organization.
+          example: example-cluster
+          type: string
+        required_claims:
+          description: Claim matchers required for every token from this provider, in addition to the persona mapping matchers. Shared issuers can require an exact tenant claim.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthClaimMatcher"
+          type: array
+      type: object
+    OIDCCloudAuthProviderCreateAttributes:
+      description: Attributes for creating a Custom OIDC provider.
+      properties:
+        audiences:
+          description: Expected token audiences. At least one audience is required. When `org_uuid_source` is `aud`, include datadog/{org_uuid} for the organization creating the provider.
+          example:
+            - datadog/00000000-0000-0000-0000-000000000001
+          items:
+            type: string
+          minItems: 1
+          type: array
+        discovery_type:
+          $ref: "#/components/schemas/OIDCCloudAuthDiscoveryType"
+        identity_claim_name:
+          default: sub
+          description: Claim used by legacy identity_pattern mappings and in identity logs.
+          example: sub
+          type: string
+        issuer_url:
+          description: HTTPS issuer URL that must match the token issuer. For oidc_discovery, signing keys are located through the issuer discovery document.
+          example: https://issuer.example.com
+          type: string
+        jwks_url:
+          description: HTTPS JSON Web Key Set URL. Required when `discovery_type` is `direct_jwks`.
+          example: https://issuer.example.com/keys
+          type: string
+        org_uuid_claim_name:
+          description: Optional name of the token claim containing the Datadog organization UUID.
+          example: dd_org_uuid
+          type: string
+        org_uuid_source:
+          $ref: "#/components/schemas/OIDCCloudAuthOrgUUIDSource"
+        provider_name:
+          description: Name identifying the provider within the organization.
+          example: example-cluster
+          type: string
+        required_claims:
+          description: Claim matchers required for every token from this provider, in addition to the persona mapping matchers. Shared issuers can require an exact tenant claim.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthClaimMatcherCreate"
+          type: array
+      required:
+        - provider_name
+        - discovery_type
+        - issuer_url
+        - audiences
+      type: object
+    OIDCCloudAuthProviderCreateData:
+      description: Custom OIDC provider creation data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderCreateAttributes"
+        type:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderType"
+      required:
+        - type
+        - attributes
+      type: object
+    OIDCCloudAuthProviderCreateRequest:
+      description: Request to create a Custom OIDC provider.
+      properties:
+        data:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderCreateData"
+      required:
+        - data
+      type: object
+    OIDCCloudAuthProviderDataResponse:
+      description: Custom OIDC provider resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderAttributesResponse"
+        id:
+          description: Unique resource identifier.
+          example: 00000000-0000-0000-0000-000000000004
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OIDCCloudAuthProviderResponse:
+      description: Custom OIDC provider response.
+      properties:
+        data:
+          $ref: "#/components/schemas/OIDCCloudAuthProviderDataResponse"
+      required:
+        - data
+      type: object
+    OIDCCloudAuthProviderType:
+      default: custom_oidc_provider_config
+      description: Resource type.
+      enum:
+        - custom_oidc_provider_config
+      example: custom_oidc_provider_config
+      type: string
+      x-enum-varnames:
+        - CUSTOM_OIDC_PROVIDER_CONFIG
+    OIDCCloudAuthProvidersResponse:
+      description: List of Custom OIDC provider resources.
+      properties:
+        data:
+          description: Configured resources.
+          items:
+            $ref: "#/components/schemas/OIDCCloudAuthProviderDataResponse"
+          type: array
+      required:
+        - data
+      type: object
     OIDCDiscoveryDocument:
       description: OpenID Connect provider metadata.
       properties:
@@ -153398,6 +153762,8 @@ components:
             workflows_read: View workflows.
             workflows_run: Run workflows.
             workflows_write: Create, edit, and delete workflows.
+            workload_identity_federation_read: View workload identity federation providers and mappings.
+            workload_identity_federation_write: Create, update, and delete workload identity federation providers and mappings.
           tokenUrl: /oauth2/v1/token
       type: oauth2
       x-env-name: DD_BEARER_TOKEN
@@ -255683,7 +256049,7 @@ paths:
     post:
       description: |-
         The API endpoint to aggregate spans into buckets and compute metrics and timeseries.
-        This endpoint is rate limited to `300` requests per hour.
+        This endpoint is rate limited to `50` requests per minute per organization.
 
         A request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups
         including time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry
@@ -255768,7 +256134,7 @@ paths:
         [Results are paginated][1].
 
         Use this endpoint to see your latest spans.
-        This endpoint is rate limited to `300` requests per hour.
+        This endpoint is rate limited to `50` requests per minute per organization.
 
         [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api
       operationId: ListSpansGet
@@ -255861,7 +256227,7 @@ paths:
         [Results are paginated][1].
 
         Use this endpoint to build complex spans filtering and search.
-        This endpoint is rate limited to `300` requests per hour.
+        This endpoint is rate limited to `50` requests per minute per organization.
 
         [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api
       operationId: ListSpans
@@ -270882,6 +271248,516 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/oidc/persona_mapping:
+    get:
+      description: List all Custom OIDC persona mappings in the organization.
+      operationId: ListOIDCCloudAuthPersonaMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_uuid: 00000000-0000-0000-0000-000000000003
+                          claim_matchers:
+                            - claim: sub
+                              mode: exact
+                              values:
+                                - system:serviceaccount:controllers:example-controller
+                          provider_id: 00000000-0000-0000-0000-000000000002
+                        id: 00000000-0000-0000-0000-000000000004
+                        type: custom_oidc_identity_mapping
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: List all Custom OIDC persona mappings
+      tags:
+        - Cloud Authentication
+      x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Map token claims from a registered Custom OIDC provider to a Datadog user or service account. The caller must be authorized to map to the target account.
+      operationId: CreateOIDCCloudAuthPersonaMapping
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_uuid: 00000000-0000-0000-0000-000000000003
+                      claim_matchers:
+                        - claim: sub
+                          mode: exact
+                          values:
+                            - system:serviceaccount:controllers:example-controller
+                      provider_id: 00000000-0000-0000-0000-000000000002
+                    type: custom_oidc_identity_mapping
+            schema:
+              $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_uuid: 00000000-0000-0000-0000-000000000003
+                        claim_matchers:
+                          - claim: sub
+                            mode: exact
+                            values:
+                              - system:serviceaccount:controllers:example-controller
+                        provider_id: 00000000-0000-0000-0000-000000000002
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: custom_oidc_identity_mapping
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Create a Custom OIDC persona mapping
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/oidc/persona_mapping/{persona_mapping_id}:
+    delete:
+      description: Delete a Custom OIDC persona mapping.
+      operationId: DeleteOIDCCloudAuthPersonaMapping
+      parameters:
+        - description: UUID of the Custom OIDC persona mapping.
+          in: path
+          name: persona_mapping_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Delete a Custom OIDC persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Custom OIDC persona mapping by UUID.
+      operationId: GetOIDCCloudAuthPersonaMapping
+      parameters:
+        - description: UUID of the Custom OIDC persona mapping.
+          in: path
+          name: persona_mapping_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_uuid: 00000000-0000-0000-0000-000000000003
+                        claim_matchers:
+                          - claim: sub
+                            mode: exact
+                            values:
+                              - system:serviceaccount:controllers:example-controller
+                        provider_id: 00000000-0000-0000-0000-000000000002
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: custom_oidc_identity_mapping
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthPersonaMappingResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: Get a Custom OIDC persona mapping
+      tags:
+        - Cloud Authentication
+      x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/oidc/provider:
+    get:
+      description: List all Custom OIDC providers in the organization.
+      operationId: ListOIDCCloudAuthProviders
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          audiences:
+                            - datadog/00000000-0000-0000-0000-000000000001
+                          discovery_type: oidc_discovery
+                          issuer_url: https://issuer.example.com
+                          org_uuid_source: aud
+                          provider_name: example-cluster
+                        id: 00000000-0000-0000-0000-000000000004
+                        type: custom_oidc_provider_config
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthProvidersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: List all Custom OIDC providers
+      tags:
+        - Cloud Authentication
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Register an OIDC issuer, signing-key discovery configuration, and accepted audiences. Provider names and issuer URLs must be unique within the organization.
+      operationId: CreateOIDCCloudAuthProvider
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      audiences:
+                        - datadog/00000000-0000-0000-0000-000000000001
+                      discovery_type: oidc_discovery
+                      issuer_url: https://issuer.example.com
+                      org_uuid_source: aud
+                      provider_name: example-cluster
+                    type: custom_oidc_provider_config
+            schema:
+              $ref: "#/components/schemas/OIDCCloudAuthProviderCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        audiences:
+                          - datadog/00000000-0000-0000-0000-000000000001
+                        discovery_type: oidc_discovery
+                        issuer_url: https://issuer.example.com
+                        org_uuid_source: aud
+                        provider_name: example-cluster
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: custom_oidc_provider_config
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthProviderResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Create a Custom OIDC provider
+      tags:
+        - Cloud Authentication
+      x-codegen-request-body-name: body
+      x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/wif/oidc/provider/{provider_id}:
+    delete:
+      description: Delete a Custom OIDC provider. Delete all persona and intake mappings referencing it first; otherwise the request returns a conflict.
+      operationId: DeleteOIDCCloudAuthProvider
+      parameters:
+        - description: UUID of the Custom OIDC provider.
+          in: path
+          name: provider_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_write
+      summary: Delete a Custom OIDC provider
+      tags:
+        - Cloud Authentication
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Custom OIDC provider by UUID.
+      operationId: GetOIDCCloudAuthProvider
+      parameters:
+        - description: UUID of the Custom OIDC provider.
+          in: path
+          name: provider_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        audiences:
+                          - datadog/00000000-0000-0000-0000-000000000001
+                        discovery_type: oidc_discovery
+                        issuer_url: https://issuer.example.com
+                        org_uuid_source: aud
+                        provider_name: example-cluster
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: custom_oidc_provider_config
+              schema:
+                $ref: "#/components/schemas/OIDCCloudAuthProviderResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - workload_identity_federation_read
+      summary: Get a Custom OIDC provider
+      tags:
+        - Cloud Authentication
+      x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+          - workload_identity_federation_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change. Custom OIDC authentication must be enabled for your organization.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/workflows:
     get:
       description: List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).
@@ -271697,7 +272573,7 @@ tags:
       View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
     name: Change Management
   - description: |-
-      Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API.
+      Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API.
     name: Cloud Authentication
   - description: |-
       The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/).
