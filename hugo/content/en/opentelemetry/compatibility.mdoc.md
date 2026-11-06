@@ -38,6 +38,10 @@ Select your SDK and destination in the menus at the top of this page. The table 
 - Blank: Not supported
 - ?: Not documented yet
 
+{% if equals($otel_destination, "ddot_collector") %}
+The DDOT Collector doesn't need the Datadog Agent. Features marked **With Agent** work after you [add the Datadog Agent][47] alongside the Collector.
+{% /if %}
+
 <!--
 How to edit this table
 
@@ -51,6 +55,10 @@ the cell shows a blank cell, which means not supported.
   Delete it when every setup for the row is documented.
 - Short labels, such as Sampled or Preview: their own `if`, for setups with
   partial support.
+- With Agent: for features that need the Datadog Agent alongside the DDOT
+  Collector. Match the `ddot_collector` destination and wrap the label in a
+  tooltip with the text "Add the Datadog Agent alongside the DDOT Collector."
+  Remove `ddot_collector` from the row's `?` condition.
 
 To add an SDK or destination, add the option to
 customization_config/en/options/general.yaml. Then create `_v2` versions of
