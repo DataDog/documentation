@@ -35,7 +35,7 @@ rabbitmqctl set_user_tags <USERNAME> monitoring
 rabbitmqctl set_permissions -p / <USERNAME> "" "" ""
 ```
 
-The `set_permissions` command gives the user access to the `/` virtual host without configure, write, or read permissions. Without access to a virtual host, the management API doesn't return that virtual host's queues to the user. Repeat the command for each virtual host you want to monitor.
+Run `set_permissions` for each virtual host you want to monitor, replacing `/` with its name.
 
 ### RabbitMQ receiver
 
@@ -105,13 +105,7 @@ processors:
         - rabbitmq.message.acknowledged
 ```
 
-This configuration does the following:
-
-- Enables the `rabbitmq.node.*` metrics, which are all off by default in the receiver.
-- Uses the `transform` processor to mark the node connection and queue counters as monotonic. The receiver declares them as non-monotonic sums, which the `cumulativetodelta` processor doesn't convert.
-- Uses the `cumulativetodelta` processor to turn the connection, queue, and acknowledged message counters into per-interval counts. `initial_value: drop` discards the first point, which would otherwise report the full count since broker startup.
-
-Configure one receiver for each cluster, not for each node. The management API returns every node and queue in the cluster, so a receiver on each node reports each series once for every receiver.
+Configure one receiver for each cluster, not for each node. The management API returns data for the whole cluster, so a receiver on each node duplicates every series.
 
 See the [RabbitMQ receiver documentation][1] for detailed configuration options and requirements.
 

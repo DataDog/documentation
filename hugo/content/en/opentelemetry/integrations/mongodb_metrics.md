@@ -18,7 +18,7 @@ For more information, see the OpenTelemetry project documentation for the [Mongo
 
 To collect MongoDB metrics with OpenTelemetry for use with Datadog:
 
-1. Create a MongoDB user with the [`clusterMonitor` role][5], which includes the `serverStatus` and `listDatabases` actions.
+1. Create a MongoDB user with the [`clusterMonitor` role][5].
 2. Configure one [MongoDB receiver][1] for each `mongod` and `mongos` instance in your OpenTelemetry Collector configuration.
 3. Configure the processors that convert the receiver's network and page fault counters to per-second rates.
 4. Add the service pipelines to your Collector configuration.
@@ -26,7 +26,7 @@ To collect MongoDB metrics with OpenTelemetry for use with Datadog:
 
 ### MongoDB user
 
-Connect to MongoDB with `mongosh` as a user that can create users, and run:
+Run this command in `mongosh`:
 
 ```javascript
 db.getSiblingDB("admin").createUser({
@@ -89,17 +89,7 @@ processors:
       - mongodb.page_faults
 ```
 
-This configuration does the following:
-
-- Sets `direct_connection: true` to keep each receiver on its own node. Without it, the driver discovers the replica set and reads the primary's `serverStatus` from every member, while the Agent reports each member separately.
-- Sets `tls.insecure: true`, because the receiver connects with TLS by default and fails against a MongoDB server without TLS. If your MongoDB deployment uses TLS, remove this setting and configure the receiver's TLS options instead.
-- Enables the latency metrics, the per-second operation metrics, and `mongodb.page_faults`, which are off by default in the receiver.
-- Uses the `transform`, `cumulativetodelta`, and `deltatorate` processors to turn the network and page fault counters into per-second rates, which match the Agent's rate metrics. `initial_value: drop` discards the first point, which would otherwise report the whole total since startup.
-
-Keep these requirements in mind:
-
-- The user needs the `listDatabases` action. The connection and memory metrics are filtered to the `admin` database, and the receiver emits them only when it can list databases.
-- Keep `mongodb.network.request.count` enabled, which is the default. The receiver records the `mongodb.network.io.*` metrics only while it is enabled.
+If your MongoDB server uses TLS, remove `tls.insecure` and configure the receiver's TLS settings.
 
 See the [MongoDB receiver documentation][1] for detailed configuration options and requirements.
 

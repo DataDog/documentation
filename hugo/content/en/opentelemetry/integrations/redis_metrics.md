@@ -66,11 +66,7 @@ processors:
 
 Replace `<HOST>` and `<PORT>` with the address of your Redis server, and `<HOSTNAME>` with the host name to show in Datadog. If your Redis server doesn't require a password, remove the `password` line.
 
-This configuration does the following:
-
-- Enables `redis.maxmemory`, which is off by default in the receiver. The configured max memory metric and the high memory monitor need it. The metric reports a value only when `maxmemory` is set on the Redis server.
-- Uses the `transform` processor to report `redis.keys.evicted`, `redis.keys.expired`, and `redis.connections.rejected` as gauges of the running total, as the Datadog Agent does.
-- Uses the `cumulativetodelta` and `deltatorate` processors to turn the CPU, command, and keyspace counters into per-second rates, which match the Agent's rate metrics.
+`redis.mem.maxmemory` reports a value only when `maxmemory` is set on your Redis server.
 
 See the [Redis receiver documentation][1] for detailed configuration options and requirements.
 
