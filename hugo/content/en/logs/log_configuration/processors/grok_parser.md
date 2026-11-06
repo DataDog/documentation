@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/"
   tag: "Blog"
   text: "How to detect HTTP/2 abuse in Apache web server logs"
+- link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+  tag: "Blog"
+  text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 ---
 
 ## Overview

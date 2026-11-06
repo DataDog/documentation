@@ -1,3 +1,3 @@
 ---
-title: Case Management Attribute
+title: Work Management Attribute
 ---

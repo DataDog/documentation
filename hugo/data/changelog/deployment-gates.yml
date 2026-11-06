@@ -12,3 +12,9 @@ entries:
     operations:
       - ListDeploymentGates
     title: Document public Deployment Gate and rule evaluation endpoints
+  - change_type: modified
+    date: '2026-10-16'
+    link: https://github.com/DataDog/documentation/pull/40752
+    operations:
+      - TriggerDeploymentGatesEvaluation
+    title: Remove discriminator and anyOf usage

@@ -1,76 +1,80 @@
 ---
 algolia:
   tags:
-  - flujo de trabajo
-  - rastreo
-  - automatización del flujo de trabajo
+  - workflow
+  - workflows
+  - workflow automation
 aliases:
 - /es/service_management/workflows/track
-description: Monitoriza la actividad, métricas y costes del proceso mediante dashboards,
-  registros de auditoría, gestión de eventos y atribución de uso.
+description: Haga un seguimiento de la actividad de flujo de trabajo, las métricas
+  y los costos utilizando Dashboard, Audit Trail, gestión de eventos y atribución
+  de uso.
 disable_toc: false
 further_reading:
-- link: /service_management/workflows/build
+- link: /actions/workflows/build
   tag: Documentación
   text: Crear flujos de trabajo
 - link: /account_management/audit_trail/
   tag: Documentación
-  text: Audit Trail de Datadog
+  text: Datadog Audit Trail
 - link: /account_management/billing/usage_attribution/
   tag: Documentación
   text: Atribución de uso
-title: Seguimiento de los procesos
+title: Hacer un seguimiento de los flujos de trabajo
 ---
+{{< site-region region="gov2" >}}
+<div class="alert alert-info">Workflow Automation está en versión preliminar en su sitio de Datadog seleccionado ({{< region-param key=dd_site_name >}}).</div>
+{{< /site-region >}}
 
-En esta página se explica cómo hacer un seguimiento de los distintos tipos de actividad del proceso y de los costes del proceso.
+Esta página explica cómo hacer un seguimiento de diferentes tipos de actividad y costos de flujos de trabajo.
 
-## Dashboard predefinido
+## Dashboard preconfigurado {#out-of-the-box-dashboard}
 
-El dashboard de Información general de procesos proporciona una descripción superficial de tus procesos y ejecuciones en Datadog. Para encontrar el dashboard, ve a tu [Lista de dashboards][2] y busca **Workflows Overview** (Información general de procesos).
+El Dashboard de Descripción general de flujos de trabajo proporciona una visión general de alto nivel de sus flujos de trabajo y ejecuciones de Datadog. Para encontrar el Dashboard, vaya a su [lista de Dashboards][2] y busque {{< ui >}}Workflows Overview{{< /ui >}}.
 
-{{< img src="actions/workflows/workflows-dashboard.png" alt="El dashboard de Información general de procesos" style="width:80%;" >}}
-
-
-## Ver ediciones y ejecuciones de procesos en Audit Trail
-
-Puedes ver las ediciones y ejecuciones de procesos utilizando Audit Trail.
-
-Por ejemplo, para ver quién ha editado un proceso:
-
-1. En tu proceso, haz clic en el <i class="icon-cog-2"></i> **(engranaje)** en la esquina superior derecha y haz clic en **View audit events** (Ver eventos de auditoría).<br>Se abre una búsqueda de Audit Trail filtrada por tu proceso.
-1. A la izquierda, en los filtros **Core** (Central), expande **Action** (Acción).
-1. Pasa el ratón por encima de **Modified** (Modificado) y haz clic en **Only** (Solo) para filtrar los resultados y mostrar solo las ediciones de proceso.<br>La columna **User ID** (ID de usuario) muestra el nombre de usuario de la persona que realizó cada edición.
+{{< img src="actions/workflows/workflows-dashboard.png" alt="El Dashboard de Descripción general de flujos de trabajo" style="width:80%;" >}}
 
 
-## Notificación de ejecuciones
+## Vea las ediciones y ejecuciones de flujos de trabajo en el Audit Trail {#view-workflow-edits-and-runs-in-audit-trail}
 
-Consulta [notificaciones de proceso][3] para obtener instrucciones sobre el uso de las notificaciones de proceso integradas.
+Puede visualizar las ediciones y ejecuciones de flujos de trabajo mediante el Audit Trail.
+
+Por ejemplo, para visualizar quién editó un flujo de trabajo:
+
+1. Desde su flujo de trabajo, haga clic en el <i class="icon-cog-2"></i> **(engranaje)** en la esquina superior derecha y haga clic en {{< ui >}}View audit events{{< /ui >}}.<br>Se abrirá una búsqueda en el Audit Trail filtrada por su flujo de trabajo.
+1. A la izquierda, bajo los filtros {{< ui >}}Core{{< /ui >}}, expanda {{< ui >}}Action{{< /ui >}}.
+1. Pase el cursor sobre {{< ui >}}Modified{{< /ui >}} y haga clic en {{< ui >}}Only{{< /ui >}} para filtrar los resultados y mostrar solo las ediciones de flujos de trabajo.<br>La columna {{< ui >}}User ID{{< /ui >}} muestra el nombre de usuario de la persona que realizó cada edición.
 
 
-## Sigue las métricas de proceso con un monitor de Datadog
+## Notificar sobre ejecuciones.{#notify-about-runs}
 
-Puedes utilizar los monitores de Datadog para realizar un seguimiento de diversas métricas de proceso.
+Consulte [Notificaciones de flujos de trabajo][3] para obtener instrucciones sobre el uso de las notificaciones de flujo de trabajo integradas.
+
+
+## Haga un seguimiento de las métricas de flujos de trabajo con un monitor de Datadog {#track-workflow-metrics-with-a-datadog-monitor}
+
+Puede usar monitores de Datadog para hacer un seguimiento de varias métricas de flujos de trabajo.
 
 La lista de métricas disponibles es:
 
 | Métrica | Descripción |
 | ------ | ----------- |
-| `datadog.workflows.count`                      | Número de procesos no eliminados.                       |
-| `datadog.workflows.executions.started`         | Número de instancias de proceso que se han iniciado.   |
-| `datadog.workflows.executions.completed`       | Número de instancias de proceso que han finalizado.      |
-| `datadog.workflows.steps.executions.started`   | Número de pasos de instancia de proceso que se han iniciado.   |
-| `datadog.workflows.steps.executions.completed` | Número de pasos de la instancia de proceso que se han completado. |
+| `datadog.workflows.count`                      | Número de flujos de trabajo no eliminados.                       |
+| `datadog.workflows.executions.started`         | Número de instancias de flujo de trabajo que se han iniciado.   |
+| `datadog.workflows.executions.completed`       | Número de instancias de flujo de trabajo que se han completado.      |
+| `datadog.workflows.steps.executions.started`   | Número de pasos de instancia de flujo de trabajo que se han iniciado.   |
+| `datadog.workflows.steps.executions.completed` | Número de pasos de instancia de flujo de trabajo que se han completado. |
 
-Para crear un monitor que controle si las ejecuciones diarias de un proceso superan un determinado umbral, realiza los siguientes pasos:
+Para crear un monitor que rastree si las ejecuciones diarias de flujo de trabajo exceden un cierto umbral, realice los siguientes pasos:
 
-1. Ve a [New Monitor][4] (Nuevo monitor) y selecciona el tipo de monitor de **Metric** (Métrica).
-1. En **Define the metric** (Definir la métrica), para **a**, rellena `datadog.workflows.executions.started`.
-1. _Opcionalmente_, para restringir el monitor a un proceso específico, para **de**, rellena `workflow_id:[WORKFLOW-ID]`, sustituyendo `[WORKFLOW-ID]` por el ID de tu proceso.
-1. Para **Evaluation Details** (Detalles de evaluación), utiliza los siguientes valores:
-    - **Evaluar la**: `sum`
-    - **De la consulta sobre el**: `last 1 day`.
-1. Para **Set alert conditions** (Establecer condiciones de alerta), selecciona **above** (arriba) y, a continuación, introduce un umbral de alerta y advertencia. Por ejemplo, puedes introducir un **Alert threshold** (Umbral de alerta) de `200` y un **Warning threshold** (Umbral de advertencia) de `150`.
-1. En **Configure notifications & automations** (Configurar notificaciones y automatizaciones), asigna un nombre a un proceso y, a continuación, introduce el texto del mensaje. Por ejemplo, puedes utilizar un texto de mensaje como el siguiente:
+1. Vaya a [New Monitor][4] y seleccione el tipo de monitor {{< ui >}}Metric{{< /ui >}}
+1. En {{< ui >}}Define the metric{{< /ui >}}, para {{< ui >}}a{{< /ui >}}, complete `datadog.workflows.executions.started`.
+1. _Opcionalmente_, para restringir el monitor a un flujo de trabajo específico, para {{< ui >}}from{{< /ui >}}, complete `workflow_id:[WORKFLOW-ID]`, reemplazando `[WORKFLOW-ID]` con el ID de su flujo de trabajo.
+1. Para {{< ui >}}Evaluation Details{{< /ui >}}, utilice los siguientes valores:
+    - {{< ui >}}Evaluate the{{< /ui >}}: `sum`
+    - {{< ui >}}Of the query over the{{< /ui >}}: `last 1 day`.
+1. Para {{< ui >}}Set alert conditions{{< /ui >}}, elija {{< ui >}}above{{< /ui >}}, luego complete un umbral de alerta y de advertencia. Por ejemplo, podría completar un {{< ui >}}Alert threshold{{< /ui >}} de `200` y un {{< ui >}}Warning threshold{{< /ui >}} de `150`.
+1. En {{< ui >}}Configure notifications & automations{{< /ui >}}, nombre su flujo de trabajo, luego complete el texto del mensaje. Por ejemplo, podría usar un texto de mensaje como el siguiente:
 
     {{< code-block lang="none" >}}@slack-alert-channel
 
@@ -81,41 +85,41 @@ Workflow has executed {{warn_threshold}} times in the last day; manual action mi
 Workflow has executed {{threshold}} times in the last day, which is our budget threshold for workflows. We should unpublish the workflow to avoid any more automatic executions for the day.
 {{/is_alert}}
 {{< /code-block >}}
-1. Haz clic en **Create** (Crear).
+1. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
 
-## Ver los eventos de proceso en el gestor de eventos
+## Visualice eventos de flujo de trabajo en el Administrador de eventos {#view-workflow-events-in-event-manager}
 
-Puedes utilizar el [Gestor de eventos][5] para ver los eventos de inicio y finalización de procesos filtrando en `source:workflow_automation`.
+Puede usar [Event Manager][5] para visualizar los eventos de inicio y finalización de flujos de trabajo filtrando por `source:workflow_automation`.
 
-Para ver los eventos de un proceso específico, en el cuadro **Search facets** (Buscar facetas), busca `workflow.workflow_id`. Puedes seleccionar un conjunto específico de IDs para ver solo los eventos de esos procesos.
+Para visualizar eventos de un flujo de trabajo específico, en el cuadro {{< ui >}}Search facets{{< /ui >}}, busque `workflow.workflow_id`. Puede seleccionar un conjunto específico de ID para visualizar solo los eventos de esos flujos de trabajo.
 
-También puedes filtrar la salida por **Status** (Estado) para ver solo los mensajes `info`, `warn`, o `error`.
+También puede filtrar la salida por {{< ui >}}Status{{< /ui >}} para visualizar solo mensajes de `info`, `warn` o `error`.
 
 
-## Hacer un seguimiento de la facturación de proceso en la Atribución de uso
+## Realice un seguimiento de la facturación de flujos de trabajo en Atribución de uso {#track-workflow-billing-in-usage-attribution}
 
 <div class="alert alert-danger">
-Usage Attribution es una función avanzada incluida en el plan Enterprise. Para el resto de planes, ponte en contacto con tu representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
+Atribución de uso es una función avanzada incluida en el plan Enterprise. Para todos los demás planes, comuníquese con su representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
 </div>
 
-Para realizar un seguimiento de la facturación de tus ejecuciones de proceso, sigue estos pasos:
+Para realizar un seguimiento de la facturación de sus ejecuciones de flujo de trabajo, realice los siguientes pasos:
 
-1. Navega hasta la página de [Atribución de uso][6].
-1. En **Products** (Productos), a la izquierda, busca **Workflow Executions** (Ejecuciones de proceso).
-1. Pasa el ratón por encima de **Workflow Executions** (Ejecuciones de proceso) y haz clic en **Only** (Solo) para ver la atribución de uso solo para los procesos.
+1. Navegue a la página [Atribución de uso][6].
+1. Debajo de {{< ui >}}Products{{< /ui >}} a la izquierda, busque {{< ui >}}Workflow Executions{{< /ui >}}.
+1. Pase el cursor sobre {{< ui >}}Workflow Executions{{< /ui >}} y haga clic en {{< ui >}}Only{{< /ui >}} para visualizar la atribución de uso solo para flujos de trabajo.
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>¿Tienes preguntas o comentarios? Únete al canal **#workflows** en [Datadog Community Slack][1].
+<br>¿Tiene preguntas o comentarios? Únase al canal **#workflows** en el [Datadog Community Slack][1].
 
 
 [1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /es/service_management/workflows/build/#workflow-notifications
+[3]: /es/actions/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Aworkflow_automation
 [6]: https://app.datadoghq.com/billing/usage-attribution

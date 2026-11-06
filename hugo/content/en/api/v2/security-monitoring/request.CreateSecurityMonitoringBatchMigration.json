@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "batchMigration",
+    "attributes": {
+      "name": "Example-Security-Monitoring",
+      "description": "Rules imported from Splunk",
+      "tags": [
+        "source:splunk"
+      ],
+      "resources": [
+        {
+          "name": "Repeated Windows login failures",
+          "description": "Detects repeated failed Windows authentication attempts.",
+          "inputType": "spl",
+          "input": "index=wineventlog EventCode=4625"
+        }
+      ]
+    }
+  }
+}

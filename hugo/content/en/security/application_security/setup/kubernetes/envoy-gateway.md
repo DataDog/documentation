@@ -40,23 +40,25 @@ You can enable Datadog [App and API Protection][12] for traffic managed by [Envo
    {{< tabs >}}
    {{% tab "Datadog Operator" %}}
 
-   Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your security processor service:
+   This option requires Datadog Operator version 1.31.0 or later.
+
+   Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource. The processor service name is required and must match your security processor service:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
    kind: DatadogAgent
    metadata:
      name: datadog
-     annotations:
-       agent.datadoghq.com/appsec.injector.enabled: "true"
-       agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required
-       agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
    spec:
-     override:
-       clusterAgent:
-         env:
-           - name: DD_CLUSTER_AGENT_APPSEC_INJECTOR_MODE
-             value: "external"
+     features:
+       appsec:
+         injector:
+           enabled: true
+           mode: external
+           processor:
+             service:
+               name: datadog-aap-extproc-service  # Required
+               namespace: datadog
    ```
 
    Apply the configuration:

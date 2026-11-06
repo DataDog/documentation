@@ -18,7 +18,7 @@ Les signaux de sécurité AI Guard offrent une visibilité sur les menaces et le
 
 ## Comprendre les signaux AI Guard {#understand-ai-guard-signals}
 
-Datadog crée des signaux de sécurité AI Guard lorsqu'il détecte une menace basée sur une règle de détection configurée. Les signaux indiquant des menaces telles que l'injection de prompt, le jailbreak ou l'utilisation abusive d'outils apparaissent dans Datadog Security Signals Explorer. Ces signaux peuvent fournir :
+Datadog crée des signaux de sécurité AI Guard lorsqu'il détecte une menace basée sur une règle de détection configurée. Les signaux indiquant des menaces telles que l'injection de prompt, le jailbreaking ou l'utilisation abusive d'outils apparaissent dans Datadog Security Signals Explorer. Ces signaux peuvent fournir :
 
 - **Détection des menaces** : Contexte de l'attaque basé sur vos règles de détection configurées
 - **Informations sur les actions** : Informations sur les actions bloquées ou autorisées selon les paramètres de vos règles
@@ -75,17 +75,17 @@ Pour créer des règles de détection AI Guard :
          <td><code>true</code> ou <code>false</code></td>
        </tr>
        <tr>
-         <td><code>@ai_guard.tools</code></td>
+         <td><code>@ai_guard.tool_name</code></td>
          <td>Filtrer par noms d'outils spécifiques impliqués dans l'évaluation</td>
          <td><code>get_user_profile</code>, <code>user_recent_transactions</code>, etc.</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.categories</code></td>
+         <td><code>@ai_guard.sds.category</code></td>
          <td>Filtrer par catégories de données sensibles détectées par le Sensitive Data Scanner</td>
          <td><code>credentials</code>, <code>email_address</code>, etc.</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.rule_tags</code></td>
+         <td><code>@ai_guard.sds.rule_tag</code></td>
          <td>Filtrer par tags de règle de données sensibles spécifiques</td>
          <td><code>aws_access_key_id</code>, <code>aws_secret_access_key</code>, <code>claude_api_key</code>, <code>email_address</code>, etc.</td>
        </tr>
@@ -133,7 +133,7 @@ Lorsque vous cliquez sur un span dans l'Explorer, vous pouvez voir :
 
 De plus, vous pouvez cliquer sur {{< ui >}}Explore in graph view{{< /ui >}} pour voir les requêtes de la conversation sous forme de graphique, ou afficher le span dans [APM][8] ou [Agent Observability][9].
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

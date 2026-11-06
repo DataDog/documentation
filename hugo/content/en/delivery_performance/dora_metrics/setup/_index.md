@@ -151,7 +151,7 @@ If the deployment CI job is running on the exact same Git revision that is being
 
 The `--skip-git` option can be provided to disable sending the repository URL and commit SHA. When this option is added, the Change Lead Time metric becomes unavailable.
 
-[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[1]: /api/latest/delivery-performance/#send-a-deployment-event
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
 [3]: https://app.datadoghq.com/ci/settings/dora
 [4]: /internal_developer_portal/catalog/

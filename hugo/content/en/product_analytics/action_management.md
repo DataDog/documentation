@@ -14,6 +14,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/product-data-best-practices"
     tag: "Blog"
     text: "What your product data is actually saying"
+  - link: "https://www.datadoghq.com/blog/product-analytics-visual-labeling/"
+    tag: "Blog"
+    text: "Define user actions on your web app with visual labeling in Product Analytics"
 aliases:
   - /product_analytics/guide/action_management/
 ---

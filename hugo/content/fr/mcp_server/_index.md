@@ -103,7 +103,7 @@ Les opérations d'écriture nécessitent l'autorisation correspondante, telle qu
 
 Le serveur MCP est fourni avec les limites d'utilisation équitable suivantes :
 - Limites de rafale d'appels d'outils de 50 requêtes/10 secondes
-- 50 000 appels d'outils mensuels. 
+- 100 000 appels d'outils mensuels. 
 
 Ces limites sont **sujettes à modification** et peuvent être ajustées si votre cas d'utilisation en nécessite davantage. Veuillez contacter le [support Datadog][37] pour toute demande ou question. 
 

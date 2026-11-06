@@ -2,90 +2,89 @@
 further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-with-notebooks
   tag: Centro de aprendizaje
-  text: Crear notebooks de Datadog para investigar incidencias
+  text: Cree Datadog Notebooks para investigar incidentes
 - link: https://docs.datadoghq.com/notebooks/advanced_analysis/getting_started/
   tag: Guía
-  text: Empezando con las funciones de análisis de notebooks
-title: Empezando con los notebooks de Datadog
+  text: Introducción a las funciones de análisis de Notebooks
+title: Introducción a Datadog Notebooks
 ---
+## Descripción general {#overview}
 
-## Información general
+Los Datadog Notebooks combinan gráficos en vivo, métricas, registros, monitores y [Funciones de análisis][1] para crear un entorno colaborativo en tiempo real utilizando sus datos. Los equipos pueden usar Notebooks para aislar e investigar problemas, documentar detalles de incidentes, crear guías interactivas y generar informes especiales para mejorar sus flujos de trabajo proactivos.
 
-Los notebooks de Datadog combinan gráficos, métricas, logs, monitores y [funciones de análisis][1] en directo para crear un entorno de colaboración en tiempo real con tus datos. Los equipos pueden utilizar notebooks para aislar e investigar problemas, documentar detalles de incidencias, crear guías interactivas y elaborar informes especiales para mejorar sus flujos de trabajo proactivos.
+Esta guía presenta Datadog Notebooks y demuestra cómo los tipos de Notebooks mejoran la colaboración del equipo y los flujos de trabajo de investigación.
 
-Esta guía presenta los notebooks de Datadog y demuestra cómo los tipos de notebooks mejoran la colaboración en equipo y los flujos de trabajo de investigación.
+### Beneficios clave {#key-benefits}
 
-### Beneficios clave
+- **Acceso directo a datos**: consulte y visualice sus métricas, registros y trazas de Datadog sin salir del documento
+- **Colaboración en tiempo real**: varios miembros del equipo pueden editar simultáneamente, dejar comentarios y hacer un seguimiento de los cambios
+- **Integración de flujo de trabajo**: cree Notebooks a partir de alertas, tableros, registros o Datadog Work Management para iniciar investigaciones donde aparecen los problemas
 
-- **Acceso directo a los datos**: Consulta y visualiza tus métricas, logs y trazas (traces) de Datadog sin salir del documento.
-- **Colaboración en tiempo real**: Varios miembros del equipo pueden editar simultáneamente, dejar comentarios y realizar un seguimiento de los cambios.
-- **Integración de flujos de trabajo**: Crea notebooks a partir de alertas, dashboards, logs o Datadog Case Management para iniciar investigaciones allí donde aparecen los problemas.
+## Elección del tipo de Notebook adecuado {#choosing-the-right-notebook-type}
 
-## Elegir el tipo de notebook adecuado
+Seleccionar el tipo de Notebook adecuado ayuda a su equipo a comprender el propósito y el resultado esperado del documento. Cada tipo satisface una necesidad específica del flujo de trabajo:
 
-Seleccionar el tipo de notebook adecuado ayuda a tu equipo a entender el propósito del documento y el resultado esperado. Cada tipo responde a una necesidad de flujo de trabajo específica:
+{{< ui >}}Investigation{{< /ui >}}Notebooks capturan los esfuerzos de resolución de problemas en tiempo real. Utilice este tipo al explorar problemas desconocidos, comportamientos inesperados o anomalías del sistema. Documente su proceso de descubrimiento, la colaboración del equipo y las resoluciones exitosas.
 
-Los notebooks de **investigación** capturan los esfuerzos de resolución de problemas en tiempo real. Utiliza este tipo cuando explores problemas desconocidos, comportamientos inesperados o anomalías del sistema. Documenta tu proceso de detección, la colaboración del equipo y las resoluciones satisfactorias.
+{{< ui >}}Runbook{{< /ui >}} Los Notebooks proporcionan procedimientos paso a paso para tareas comunes. Use este tipo para procesos de implementación, flujos de trabajo de respuesta a incidentes o cualquier operación repetible que su equipo realice regularmente.
 
-Los notebooks **runbook** muestran los procedimientos paso a paso de tareas frecuentes. Utiliza este tipo para procesos de despliegue, flujos de trabajo de respuesta ante incidencias o cualquier operación repetible que tu equipo realice con regularidad.
+{{< ui >}}Documentation{{< /ui >}} Los Notebooks sirven como materiales de referencia vivos. Use este tipo para descripciones generales de arquitectura de sistemas, guías de incorporación de equipos o estándares de configuración que evolucionan con el tiempo.
 
-Los notebooks de **documentación** sirven como materiales de referencia vivos. Utilízalos para información general de la arquitectura del sistema, guías de incorporación para equipos o normas de configuración que evolucionan con el tiempo.
+{{< ui >}}Report{{< /ui >}} Los Notebooks sintetizan los hallazgos para las partes interesadas. Úselos para resumir incidentes trimestrales, presentar datos de planificación importantes o comunicar decisiones técnicas al liderazgo.
 
-Los notebooks de **informe** sintetizan las conclusiones para las partes interesadas. Utilízalos para resumir incidencias trimestrales, presentar datos importantes de planificación o comunicar decisiones técnicas a los directivos.
+{{< ui >}}Postmortem{{< /ui >}} Los Notebooks analizan incidentes completados. Cree estos después de interrupciones del servicio para documentar cronologías, identificar causas raíz y realizar un seguimiento de las acciones de mejora.
 
-Los notebooks **retrospectivos** analizan incidencias finalizadas. Créalos después de las interrupciones del servicio para documentar plazos, identificar causas raíz y realizar un seguimiento de acciones de mejora.
+Cada tipo de Notebook ofrece colaboración con otros y se conecta a sus datos de Datadog.
 
-Cada tipo de notebook ofrece colaboración con otros y se conecta a tus datos de Datadog.
+## Ejemplo de caso de estudio: Investigación de errores de registro con Notebooks {#example-case-study-investigating-log-errors-with-notebooks}
 
-## Ejemplo de estudio de caso: Investigación de logs de error con notebooks
+Cuando aparecen registros de error en su sistema, crear un Notebook está a un clic de distancia. Aquí tiene un ejemplo de cómo su equipo puede usar un Notebook colaborativo para investigar y descubrir la causa raíz de fallas de verificación recientes. Este proceso permite al equipo realizar los ajustes necesarios para prevenir problemas similares en el futuro.
 
-Cuando aparezcan logs de error en tu sistema, podrás crear un notebook con un solo clic. He aquí un ejemplo de cómo tu equipo puede utilizar un notebook colaborativo para investigar y descubrir la causa raíz de fallos de checks recientes. Este proceso permite al equipo realizar los ajustes necesarios para evitar problemas similares en el futuro.
+1. **Usted nota picos de error en los registros de su aplicación**
+   {{< img src="/getting_started/notebooks/log-explorer-errors.png" alt="Descripción de su imagen" style="width:100%;" >}}
 
-1. **Notas picos de error en tus logs de aplicación**
-   {{< img src="/getting_started/notebooks/log-explorer-errors.png" alt="Descripción de tu imagen" style="width:100%;" >}}
+1. **Cree un Notebook desde el Explorador de registros**<br>
+   Haga clic en {{< ui >}}Open in Notebooks{{< /ui >}} y seleccione {{< ui >}}New notebook{{< /ui >}} en la siguiente pantalla.
 
-1. **Crear un notebook desde el Explorador de logs**<br>
-   Haz clic en "Open in Notebooks" (Abrir en notebooks) y selecciona "New notebook" (Nuevo notebook) en la siguiente pantalla.
+   {{< img src="/getting_started/notebooks/notebooks-button.png" alt="Descripción de su imagen" style="width:80%;" >}}
 
-   {{< img src="/getting_started/notebooks/notebooks-button.png" alt="Descripción de tu imagen" style="width:80%;" >}}
+1. **Seleccione el {{< ui >}}Investigation{{< /ui >}} tipo de Notebook en la esquina superior izquierda del Notebook**
 
-1. **Seleccionar el tipo de notebook de investigación en la esquina superior izquierda del notebook**
+   {{< img src="/getting_started/notebooks/notebook-type.png" alt="Descripción de su imagen" style="width:80%;" >}}
 
-   {{< img src="/getting_started/notebooks/notebook-type.png" alt="Descripción de tu imagen" style="width:80%;" >}}
+   El Notebook preserva automáticamente sus datos de registro, consulta y rango de tiempo relevantes del Explorador de registros:
 
-   El notebook conserva automáticamente datos de logs, consultas e intervalos de tiempo relevantes desde el Explorador de logs:
+   {{< img src="/getting_started/notebooks/log-errors-preserved-in-notebooks.png" alt="Descripción de su imagen" style="width:100%;" >}}
 
-   {{< img src="/getting_started/notebooks/log-errors-preserved-in-notebooks.png" alt="Descripción de tu imagen" style="width:100%;" >}}
+1. **Etiquete a sus compañeros de equipo e investigue en conjunto**
 
-1. **Etiquetar compañeros de equipo e investigar juntos**
+   Etiquete a su compañero de equipo usando @menciones para incluirlo en la investigación. Ellos pueden ver los mismos patrones de error y agregar su análisis directamente en el Notebook. Al usar las funciones de colaboración de Notebooks, los compañeros de equipo pueden comunicarse y trabajar juntos en tiempo real.
 
-   Etiqueta a tus compañeros de equipo con @menciones para que participen en la investigación. Podrán ver los mismos patrones de error y añadir sus análisis directamente en el notebook. Gracias a las funciones de colaboración de los notebooks, los compañeros de equipo pueden comunicarse y trabajar juntos en tiempo real.
+   En este ejemplo, usando la función de Notebook de análisis _transform_, su compañero de equipo puede filtrar los mensajes de error de registro y ver que una verificación específica está fallando:
 
-   En este ejemplo, utilizando la función _transformar_ del notebook de análisis, tu compañero de equipo puede filtrar mensajes de error de logs y ver que un check específico está fallando:
+   {{< img src="/getting_started/notebooks/transform-analysis-feature.png" alt="Descripción de su imagen" style="width:100%;" >}}
 
-   {{< img src="/getting_started/notebooks/transform-analysis-feature.png" alt="Descripción de tu imagen" style="width:100%;" >}}
+1. **Agregue un Monitor a su Notebook**
 
-1. **Añadir un monitor a tu notebook**
+   Agregue un Monitor Summary al Notebook usando `/monitor` para visualizar el estado de su monitor de servidor:
 
-   Añade un resumen de monitor al notebook utilizando `/monitor` para visualizar el estado de tu monitor host:
+   {{< img src="/getting_started/notebooks/monitor.png" alt="Descripción de su imagen" style="width:100%;" >}}
 
-   {{< img src="/getting_started/notebooks/monitor.png" alt="Descripción de tu imagen" style="width:100%;" >}}
+   Su compañero de equipo deja un mensaje en el Notebook diciendo que, dado que la verificación del Minikube Monitor muestra un estado OK, necesitará continuar con su investigación.
 
-   Tu compañero de equipo deja un mensaje en el notebook diciendo que como el check de monitor Minikube muestra un estado OK, tendrán que continuar la investigación.
+A lo largo de esta investigación, el Notebook se convierte en un registro vivo de su proceso de resolución de problemas, preservando consultas, descubrimientos y conocimientos analíticos para referencia futura. Este ejemplo demuestra el valor fundamental de los Notebooks: transforman el proceso de depuración en conocimiento de equipo documentado. Su equipo ahora tiene todo capturado en un formato compartible y buscable que evita la pérdida de conocimiento y acelera futuras investigaciones.
 
-A lo largo de esta investigación, el notebook se convierte en un registro vivo de tu recorrido de resolución de problemas, conservando consultas, detecciones y conocimientos analíticos para futuras consultas. Este ejemplo demuestra el valor fundamental de los notebooks: transforman el proceso de depuración en conocimiento documentado del equipo. Tu equipo tiene ahora todo guardado en un formato que se puede compartir y en el que se pueden realizar búsquedas, lo que evita la pérdida de conocimientos y acelera las investigaciones futuras.
+## Próximos pasos con los Notebooks {#next-steps-with-notebooks}
 
-## Siguientes pasos con notebooks
+La investigación es solo el comienzo. Los Notebooks continúan ganando valor con el tiempo al transformarse de documentos reactivos en recursos proactivos. Un Notebook de investigación creado durante un incidente puede convertirse en la base para múltiples activos:
 
-La investigación es solo el principio. Los notebooks siguen ganando valor con el tiempo al transformarse de documentos reactivos en recursos proactivos. Un notebook de investigación creado durante una incidencia puede convertirse en la base de múltiples recursos:
+- Convierta su investigación en un {{< ui >}}Runbook{{< /ui >}} extrayendo los pasos de resolución de problemas exitosos. Los futuros responsables pueden seguir su camino comprobado en lugar de empezar desde cero.
+- Transforme investigaciones complejas en {{< ui >}}Documentation{{< /ui >}} que expliquen el comportamiento del sistema y los problemas conocidos.
+- Cree informes trimestrales {{< ui >}}Reports{{< /ui >}} agregando múltiples investigaciones para identificar patrones y mejoras sistémicas.
 
-- Convierte tu investigación en un **runbook** extrayendo los pasos de resolución de problemas satisfactorios. Los futuros intervinientes podrán seguir tu camino probado, en lugar de empezar desde cero.
-- Transforma investigaciones complejas en **documentación** que explique el comportamiento del sistema y los problemas conocidos.
-- Crea **informes** trimestrales agregando múltiples investigaciones para identificar patrones y mejoras sistémicas.
+Esta evolución crea un repositorio de conocimiento centralizado que beneficia a toda la organización. Los nuevos miembros del equipo pueden consultar estos Notebooks durante la incorporación, los ingenieros de guardia pueden consultarlos como manuales operativos durante incidentes y el liderazgo puede revisar informes para la planificación de capacidad.
 
-Esta evolución crea un repositorio centralizado de conocimientos que beneficia a toda la organización. Los nuevos miembros del equipo pueden consultar estos notebooks durante la incorporación, los ingenieros de guardia pueden consultarlos como runbooks durante las incidencias y los directivos pueden revisar los informes para planificar las capacidades.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

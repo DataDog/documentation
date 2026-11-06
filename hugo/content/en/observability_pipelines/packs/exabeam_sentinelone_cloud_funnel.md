@@ -1,6 +1,10 @@
 ---
 title: Exabeam - SentinelOne Cloud Funnel
 description: Learn more about the Exabeam - SentinelOne Cloud Funnel pack.
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview
@@ -14,3 +18,7 @@ What this pack does:
 - Drops Not Reported events
 - Samples DNS and module load
 - Keeps threat and process detail
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

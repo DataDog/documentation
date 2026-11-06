@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-threat-hunting/"
     tag: "Blog"
     text: "Automate threat hunting with Datadog Cloud SIEM"
+  - link: "/security/cloud_siem/ingest_and_enrich/muted_indicators/"
+    tag: "Documentation"
+    text: "Mute benign indicators in Cloud SIEM"
 
 products:
 - name: Cloud SIEM
@@ -96,7 +99,6 @@ Sources, categories, and intents are available as facets and filters on relevant
 | [Datadog AAP](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple AAP customers | AAP |
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | AAP and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM and Workload Protection |
-| [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | cryptomining | Coinminer activity with known mining pools| Workload Protection and Cloud SIEM |
 | Tor | tor | Policy violations for user activity | App and API Protection, Cloud SIEM, and Workload Protection |
 | [Threatfox](https://threatfox.abuse.ch/) | malware | Identify hosts communicating with known malware infrastructure | Cloud SIEM and Workload Protection |
@@ -124,6 +126,8 @@ Sources, categories, and intents are available as facets and filters on relevant
 | suspicious | Low reputation                               |
 | malicious  | Malicious reputation                         |
 
+In Cloud SIEM, you can change an indicator's intention to `benign` for your organization by muting it. Datadog also mutes a list of known-benign indicators for every organization. For more information, see [Muted Indicators][4].
+
 
 ## Entity types
 | Entity Type | Example | Use Cases |
@@ -142,3 +146,4 @@ Sources, categories, and intents are available as facets and filters on relevant
 [1]: /security/detection_rules/
 [2]: /integrations/guide/reference-tables
 [3]: /security/guide/byoti_guide
+[4]: /security/cloud_siem/ingest_and_enrich/muted_indicators/

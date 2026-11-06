@@ -1,17 +1,16 @@
 ---
 further_reading:
-- link: /security/threats/workload_security_rules
+- link: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
   tag: Documentation
-  text: Gérer des règles de CSM Threats
-- link: /security/threats/agent_expressions
+  text: Gestion des règles Workload Protection
+- link: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide
   tag: Documentation
-  text: Syntaxe des expressions de lʼAgent
-title: Instructions pour la rédaction de règles personnalisées pour CSM Threats
+  text: Guide SecL
+title: Directives pour la rédaction de règles Workload Protection personnalisées
 ---
+À un moment donné, vous souhaiterez peut-être rédiger vos propres [règles personnalisées Workload Protection de Datadog Agent][1]. Lors de la rédaction de vos propres règles, il existe quelques stratégies que vous pouvez utiliser pour optimiser l'efficacité.
 
-À un moment donné, vous voudrez certainement rédiger vos propres [règles personnalisées de lʼAgent pour Cloud Security Management Threats (CSM Threats)][1]. Certaines stratégies vous permettront dʼoptimiser l'efficacité des règles que vous créerez.
-
-## Attributs
+## Attributs {#attributes}
 
 Pour garantir que votre stratégie est évaluée dans le noyau afin dʼêtre la plus efficace possible, utilisez toujours l'un des attributs suivants pour les règles relatives à l'activité du processus ou des fichiers :
 
@@ -21,29 +20,29 @@ Pour garantir que votre stratégie est évaluée dans le noyau afin dʼêtre la 
 - `[event_type].file.name`
 - `[event_type].file.path`
 
-**Remarque** : les valeurs possibles pour `[event_type]` sont `open` ou `exec`.
+**Remarque** : Les valeurs possibles pour `[event_type]` incluent `open` ou `exec`.
 
-## Wildcards
+## Wildcards {#wildcards}
 
-Utilisez les wildcards (`*`) avec précaution. Par exemple, n'utilisez jamais `open.file.path =~ "*/myfile"`. Si vous devez utiliser des wildcards pour préfixer des répertoires, deux niveaux au moins sont nécessaires : `open.file.path =~ "*/mydir/myfile")`. 
+Utilisez les caractères génériques (`*`) avec précaution. Par exemple, n'utilisez jamais `open.file.path =~ "*/myfile"`. Si vous devez utiliser des caractères génériques en préfixe de répertoires, au moins deux niveaux sont requis : `open.file.path =~ "*/mydir/myfile")`. 
 
-**Remarque** : vous devez ajouter un tilde (`~`) à lʼ[opérateur][2] lorsque vous utilisez des wildcards.
+**Remarque** : Vous devez ajouter un tilde (`~`) à l'[opérateur][2] lors de l'utilisation de caractères génériques.
 
-## Approbateurs et rejeteurs
+## Approbateurs et suppresseurs {#approvers-and-discarders}
 
-CSM Threats utilise le concept dʼ« approvers » et de « discarders » (approbateurs et rejeteurs) pour filtrer les événements qui ne sont pas censés déclencher de règles dans une stratégie. Les approvers et les discarders autorisent ou refusent des événements au niveau de la stratégie uniquement. Ils n'agissent pas sur les règles individuelles.
+Workload Protection utilise le concept d'approbateurs et de suppresseurs pour filtrer les événements qui ne devraient déclencher aucune règle dans une politique. Les approbateurs et les suppresseurs autorisent ou refusent les événements uniquement au niveau de la politique. Ils n'agissent pas sur les règles individuelles.
 
-Les approbateurs font office de liste dʼautorisations au niveau du noyau dans lʼAgent Datadog. Par exemple, l'ouverture d'un fichier spécifique pourrait être un approbateur sur lʼévénement `open`, tandis que les événements `open` sur des fichiers sans approbateurs seraient filtrés. De même, les rejets agissent comme une liste de restrictions dans lʼAgent. Les rejeteurs filtrent intentionnellement les événements qui ne peuvent jamais correspondre à une règle. LʼAgent apprend quels événements filtrer avec les rejeteurs pendant l'exécution.
+Les approbateurs agissent comme une liste d'autorisation au niveau du noyau dans le Datadog Agent. Par exemple, l'ouverture d'un fichier spécifique pourrait être un approbateur pour l'événement `open`, tandis que les événements `open` sur des fichiers sans approbateurs seraient filtrés. De même, les suppresseurs agissent comme une liste de refus dans Datadog Agent. Les suppresseurs filtrent intentionnellement les événements qui ne peuvent jamais correspondre à une règle. Datadog Agent apprend quels événements filtrer avec les suppresseurs pendant l'exécution.
 
-Les approbateurs et les rejeteurs sont générés sur la base de l'ensemble de votre stratégie. De ce fait, si une règle unique n'utilise pas les approbateurs pour un événement donné (par exemple, `open` ou `exec`), les approbateurs ne peuvent pas être utilisés pour cet événement pour l'ensemble de la stratégie, ce qui rend toutes les règles qui utilisent cet événement moins efficaces.
+Les approbateurs et les suppresseurs sont générés en fonction de l'ensemble de votre politique. Par conséquent, si une seule règle n'utilise pas d'approbateurs pour un événement donné (par exemple, `open` ou `exec`), les approbateurs ne peuvent pas être utilisés pour cet événement pour l'ensemble de la politique, ce qui rend chaque règle utilisant cet événement moins efficace.
 
-Par exemple, si vous utilisez des noms de fichiers explicites pour évaluer les événements `open` pour chaque règle sauf une (`open.file.path == "/etc/shadow"`, `open.file.path == "/etc/secret"` et ainsi de suite), et si vous utilisez un wildcard dans cet événement (`open.file.path == "/etc/*"`), lʼévénement `open` ne générera pas d'approbateur, mais pourra générer des rejeteurs pendant l'exécution.
+Par exemple, si vous utilisiez des noms de fichiers explicites pour évaluer les événements `open` pour chaque règle sauf une (`open.file.path == "/etc/shadow"`, `open.file.path == "/etc/secret"` et ainsi de suite), et utilisiez un caractère générique dans cet événement (`open.file.path == "/etc/*"`), l'événement `open` ne générerait pas d'approbateur, mais pourrait générer des suppresseurs pendant l'exécution.
 
-Les approbateurs sont généralement plus puissants et privilégiés. En utilisant les approbateurs, lʼAgent peut traiter uniquement ce qu'il a besoin de voir au lieu d'apprendre ce qu'il faut filtrer de façon dynamique.
+Les approbateurs sont généralement plus puissants et préférés. En utilisant des approbateurs, Datadog Agent peut traiter uniquement ce qu'il doit voir, plutôt que d'apprendre dynamiquement ce qu'il doit filtrer.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/security/threats/workload_security_rules
-[2]: /fr/security/threats/agent_expressions/#operators
+[1]: /fr/security/workload_protection/detect_and_monitor/agent_rules/policy_management/#create-a-custom-agent-rule
+[2]: /fr/security/workload_protection/detect_and_monitor/agent_rules/secl_guide/#operators

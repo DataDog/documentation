@@ -55,6 +55,20 @@ Automation Pipelines funciona a través de un sistema basado en reglas que le pe
 - **Configuración de reglas**: Cada regla consta de múltiples criterios, diseñados para filtrar hallazgos basados en atributos específicos. Dentro de una regla, la combinación de estos criterios opera como un AND lógico; sin embargo, si algún criterio incluye múltiples valores, esos valores operan como un OR lógico. Esta estructura le brinda la flexibilidad para crear reglas que se ajusten precisamente a sus necesidades.
 - **Coincidencia de reglas**: Automation Pipelines evalúa los hallazgos frente a sus reglas en el orden en que los ha enumerado. A medida que se procesa cada hallazgo, Automation Pipelines recorre la lista hasta encontrar una regla coincidente, momento en el cual se activa la acción especificada, como silenciar problemas no urgentes o resaltar amenazas críticas. Las reglas de Automation Pipelines se aplican inmediatamente a los nuevos hallazgos. Para los hallazgos existentes, las actualizaciones pueden tardar hasta dos horas.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+## Sugerencias de reglas {#rule-suggestions}
+
+Datadog sugiere reglas de automatización adaptadas a su organización. Un agente de IA investiga sus hallazgos, sus reglas existentes y la clasificación que sus equipos realizan manualmente, para identificar los patrones que vale la pena automatizar. Cada sugerencia muestra el contexto que abarca, la acción que realiza, con cuántos hallazgos coincide y la observación que la justifica.
+
+{{< img src="security/automation_pipelines/suggestions.png" alt="El panel Suggested for your environment en la página Findings Automation, que muestra tres tarjetas de sugerencia: cada una indica la acción, los tipos de hallazgo y la consulta que abarca, con cuántos hallazgos coincide y la razón por la que Datadog la sugirió, con botones Review y Approve" style="width:100%;" >}}
+
+Sus sugerencias aparecen en la página [Findings Automation][1]. También le llegan mientras trabaja: dependiendo de los hallazgos que esté viendo en un explorador o la acción que esté a punto de realizar sobre ellos, Datadog puede mostrar las sugerencias relevantes para ese contexto.
+
+Al hacer clic en **Review** se abre el formulario de creación de reglas precargado con el contexto y la acción sugeridos para que pueda ajustar cualquier cosa antes de guardar. Datadog aprende de las sugerencias que usted aprueba y descarta y se adapta a los cambios en su entorno para seguir ofreciendo sugerencias relevantes.
+
+[1]: https://app.datadoghq.com/security/configuration/findings-automation
+{{< /site-region >}}
+
 ## Casos de uso {#use-cases}
 
 ### Ajuste la gravedad de los hallazgos para reflejar el contexto de su negocio {#adjust-finding-severities-to-reflect-your-business-context}

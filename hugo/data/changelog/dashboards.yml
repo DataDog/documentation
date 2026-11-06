@@ -14,3 +14,27 @@ entries:
       - GetDashboard
       - UpdateDashboard
     title: Add Heatgrid dashboard widget support
+  - change_type: modified
+    date: '2026-10-13'
+    link: https://github.com/DataDog/documentation/pull/40652
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Allow network device flows in dashboard formula queries
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41084
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Custom Topology Map Widget
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/41054
+    operations:
+      - CreateDashboard
+      - GetDashboard
+      - UpdateDashboard
+    title: Add Journey Paths widget definition

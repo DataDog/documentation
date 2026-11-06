@@ -25,7 +25,7 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the {{< ui >}}Edit{{< /ui >}} tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:100%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="The graph editor with two metric queries, postgresql.rows_returned and postgresql.rows_fetched, displayed as a timeseries graph." style="width:100%;" >}}
 
 ## Configuring a graph
 
@@ -49,15 +49,15 @@ Choose the metric to graph by searching or selecting it from the dropdown next t
 
 You may also see Datadog or OpenTelemetry source indicators. If your environment uses both, you can use Datadog's [Telemetry source][19] query modifier to [Query Across Datadog and OpenTelemetry Metrics][18] in a single graph.
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="The metric selector dropdown, showing a list of metrics and the unit, type, interval, description, and tags for the highlighted metric." responsive="true" style="width:100%;">}}
 
-Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Summary][6] page.
+Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Catalog][6] page.
 
 ### Filter
 
 Your chosen metric can be filtered by host or tag using the {{< ui >}}from{{< /ui >}} dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="A metric query whose 'from' field filters on the $app template variable or the env:prod tag." style="width:100%;" >}}
 
 - Use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries.
 - Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][8].
@@ -80,7 +80,7 @@ To manually rollup the data, use the [rollup function][12]. Click the sigma icon
 
 This query creates a single line that represents the total available disk space, on average, across all machines rolled up in one minute buckets:
 
-{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="rollup example of the system.disk.free metric across all machines" style="width:100%;">}}
+{{< img src="dashboards/querying/references-graphing-rollup-example-minutes.png" alt="A query for the system.disk.free metric across all hosts, with a rollup that averages values every 1 minute." style="width:100%;">}}
 
 When switching to the JSON view, the query looks like this:
 
@@ -156,7 +156,7 @@ To graph metrics separately, use the comma (`,`). For example, `a, b, c`.
 
 Modify the displayed value of a metric on a graph by performing an arithmetic operation. For example, to visualize the double of a specific metric, click the {{< ui >}}Advanced...{{< /ui >}} link in the graph editor. Then enter your arithmetic in the `Formula` box; in this case: `a * 2`:
 
-{{< img src="dashboards/querying/arithmetic_4.png" alt="Formula example - multiply" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_4.png" alt="A timeseries graph of the formula a*2, which doubles the system.disk.free metric query." style="width:75%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Arithmetic between two metrics" level="h4" %}}
@@ -171,7 +171,7 @@ Use the {{< ui >}}Advanced...{{< /ui >}} option in the graph editor and select {
 
 Then in the `Formula` box, enter the arithmetic (`a / b` for this example). To show only the formula result, see [Hide a query from the visualization](#hide-a-query-from-the-visualization).
 
-{{< img src="dashboards/querying/arithmetic_5.png" alt="Formula example - ratio" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_5.png" alt="A timeseries graph of the formula a/b, which divides jvm.heap_memory by jvm.heap_memory_max." style="width:75%;" >}}
 
 Here is another example showing how you can graph the ratio between `error` logs and `info` logs.
 
@@ -179,7 +179,7 @@ Here is another example showing how you can graph the ratio between `error` logs
 status:error / status:info
 ```
 
-{{< img src="dashboards/querying/arithmetic_6.png" alt="Formula example - logs ratio" style="width:75%;" >}}
+{{< img src="dashboards/querying/arithmetic_6.png" alt="A timeseries graph of the formula a/b, which divides the count of error logs by the count of info logs." style="width:75%;" >}}
 
 **Note**: Formulas are not lettered. Arithmetic cannot be done between formulas.
 {{% /collapse-content %}}
@@ -197,10 +197,10 @@ Use `minimum()` and `maximum()` to compare two queries point by point and return
 Here is an example using `maximum()` to find the maximum CPU usage between two availability zones.
 
 ```text
-maximum(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2})
+maximum(system.cpu.user{availability-zone:us-east-1a}, system.cpu.user{availability-zone:us-east-2a})
 ```
 
-{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'maximum' showing the higher value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example-2.png" alt="A timeseries graph of the formula maximum(a, b), which shows the higher system.cpu.user value between two availability zones." style="width:75%;" >}}
 
 Additionally, you can also calculate the minimum between two queries on different products. Here is another example using `minimum()` to find the minimum between logs with error statuses and warning statuses.
 
@@ -208,18 +208,37 @@ Additionally, you can also calculate the minimum between two queries on differen
 minimum(status:error, status:warn)
 ```
 
-{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'minimum' showing the lower value between two log queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="A timeseries graph of the formula min(a, b), which shows the lower count between error logs and warning logs." style="width:75%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="time() function" level="h5" %}}
 
-The `time()` function returns the current Unix time in seconds as a timeseries. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
+The `time()` function returns the Unix time in seconds as a timeseries, based on the queried time range. Use it in formulas to compare a metric's timestamp against the present, which helps monitor data freshness or calculate time until an expiration.
 
 For example, to calculate the time elapsed in seconds since the last reported backup, you can use `time()` to find the difference between the present and the timestamp of the backup metric.
 
 ```text
 time() - max:backup.last_completed_timestamp{*}
 ```
+**Note**: Because `time()` is in seconds, match it to the units of the field you compare against. Metric timestamps are typically in seconds, but log and event timestamps (such as `@timestamp`) are in Unix milliseconds. Subtracting across units, as in `time() - max:@timestamp`, produces a large negative result. Convert one side so both use the same unit.
+
+To return the elapsed time in seconds, divide the millisecond field by 1000:
+
+```text
+time() - (max:@timestamp / 1000)
+```
+
+To return the result in milliseconds, multiply `time()` by 1000:
+
+```text
+1000 * time() - max:@timestamp
+```
+
+`time()` is available only within a formula, so include it in the formula expression rather than adding it as a separate query.
+
+`time()` uses the queried time range rather than the current time. In timeseries widgets, it returns the timestamp of each point. In scalar widgets, such as query value and table widgets, it returns the end of the selected time range. For an accurate "time since" calculation in a scalar widget, use a live time range rather than a paused or fixed one.
+
+{{< img src="dashboards/querying/time-function-example.png" alt="A table widget listing branches, when each was last seen, and the minutes elapsed since then, calculated with the time() function." style="width:100%;" >}}
 
 {{% /collapse-content %}}
 
@@ -227,7 +246,7 @@ time() - max:backup.last_completed_timestamp{*}
 
 You can create a custom alias for your data sources to make it easier for your users to interpret the graph results.
 
-{{< img src="dashboards/querying/custom_alias.png" alt="Custom alias" style="width:75%;" >}}
+{{< img src="dashboards/querying/custom_alias.png" alt="A formula a/b with custom aliases: 'Error Logs' and 'Info Logs' for the queries, and 'Error/Info' for the formula, which also labels the graph." style="width:75%;" >}}
 
 ### Create a title
 
@@ -241,7 +260,7 @@ Click {{< ui >}}Done{{< /ui >}} to save your work and exit the editor. You can a
 
 ### Event overlays
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Two timeseries widgets with event overlays: error counts by version with merge events shown as vertical lines, and CI job duration by branch with merge events shown as a colored band." style="width:100%;" >}}
 
 View event correlations by using the {{< ui >}}Event Overlays{{< /ui >}} section in the graphing editor for the [Timeseries][16] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][17].
 
@@ -258,7 +277,7 @@ With the event overlay, you can quickly see how actions within the organization 
 
 With split graphs, you can see your metric visualizations broken out by tags.
 
-{{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the fullscreen widget" style="width:100%;" >}}
+{{< img src="dashboards/querying/split_graph_beta.png" alt="The Split Graph tab, showing container.cpu.usage as a separate graph for each of the top 6 services." style="width:100%;" >}}
 
 1. Access this feature through the {{< ui >}}Split Graph{{< /ui >}} tab when viewing graphs.
 1. You can change the {{< ui >}}sort by{{< /ui >}} metric to see the relationship between the data you are graphing and other metrics.
@@ -273,7 +292,7 @@ With split graphs, you can see your metric visualizations broken out by tags.
 [3]: /dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
-[6]: https://app.datadoghq.com/metric/summary
+[6]: https://app.datadoghq.com/metric/catalog
 [7]: /metrics/advanced-filtering/
 [8]: /dashboards/template_variables/
 [9]: /getting_started/tagging/

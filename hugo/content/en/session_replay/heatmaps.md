@@ -19,6 +19,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
   tag: 'Blog'
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'
+- link: "https://www.datadoghq.com/blog/product-analytics-visual-labeling/"
+  tag: "Blog"
+  text: "Define user actions on your web app with visual labeling in Product Analytics"
 ---
 
 {{< img src="real_user_monitoring/session_replay/heatmaps/heatmaps-landing.png" alt="An overview of the heatmap functionality." style="width:100%;">}}

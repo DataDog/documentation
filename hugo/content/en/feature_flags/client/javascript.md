@@ -236,7 +236,7 @@ The web provider also supports these optional settings:
 
 | Option | Default | Use |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `trackExposures` | `true` | Send exposure events to the exposures intake. Available in version 2.3.0 and later. Replaces the deprecated `enableExposureLogging` option. To record exposures in your own data store, see [Record Feature Flag Exposures in Your Own Data Store][7]. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
@@ -285,7 +285,7 @@ This option does **not** skip the initialization request. To initialize entirely
 
 The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to limit each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
 
-<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+<div class="alert alert-info">The <code>flagConfigurationFetch</code> option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
@@ -303,6 +303,10 @@ const provider = new DatadogProvider({
 : Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
+
+## Record exposures in your own data store
+
+Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `trackExposures: false`. This requires `@datadog/openfeature-browser` 2.3.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][7].
 
 ## Advanced: application-managed configuration
 
@@ -368,3 +372,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/

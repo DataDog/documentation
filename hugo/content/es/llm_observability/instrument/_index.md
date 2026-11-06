@@ -18,6 +18,14 @@ title: Instrumentación de Agent Observability
 ---
 Para comenzar con Agent Observability, instrumente su aplicación o agente(s) de LLM eligiendo entre varios enfoques según su lenguaje de programación y configuración. Datadog ofrece opciones de instrumentación integrales diseñadas para capturar trazas, métricas y evaluaciones detalladas de sus aplicaciones LLM y agentes con cambios mínimos en el código.
 
+{{< skill-callout
+    title="Configure Agent Observability con un agente de codificación"
+    text="Copy this prompt into your AI coding agent to use the `dd-orchestrator` skill for guided setup of Python and Node.js applications."
+    action_name="copy_dd_orchestrator_agent_observability_setup_prompt"
+    lang="text" >}}
+Use el skill de https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md para instrumentar Datadog Agent Observability en mi proyecto.
+{{< /skill-callout >}}
+
 ## Opciones de instrumentación {#instrumentation-options}
 Puede instrumentar su aplicación con los SDK de Python, Node.js o Java, o mediante el uso de la API de Agent Observability.
 
@@ -44,11 +52,11 @@ La auto-instrumentación captura automáticamente:
 - Parámetros del modelo (temperatura, max_tokens, etc.)
 - Metadatos específicos del framework
 
-<div class="alert alert-info">Al utilizar frameworks compatibles, no se requiere la creación manual de tramos para las llamadas a LLM. El SDK crea automáticamente los tramos adecuados con metadatos enriquecidos.</div>
+<div class="alert alert-info">Al utilizar frameworks compatibles, no se requiere la creación manual de spans para las llamadas a LLM. El SDK crea automáticamente los spans adecuados con metadatos enriquecidos.</div>
 
 #### Instrumentación personalizada {#custom-instrumentation}
 Todos los SDK compatibles ofrecen capacidades avanzadas para la instrumentación personalizada de sus aplicaciones LLM además de la auto-instrumentación, incluyendo:
-- Creación manual de tramos mediante decoradores de funciones o administradores de contexto
+- Creación manual de spans mediante decoradores de funciones o administradores de contexto
 - Rastreo de flujos de trabajo complejos para aplicaciones LLM de varios pasos
 - Monitoreo de Agent para LLM Agents autónomos
 - Evaluaciones personalizadas y mediciones de calidad
@@ -60,13 +68,13 @@ Para obtener más información, consulte la [Documentación de referencia del SD
 Si su lenguaje no es compatible con los SDK o está utilizando integraciones personalizadas, puede instrumentar su aplicación utilizando la API HTTP de Datadog.
 
 La API le permite:
-- Enviar tramos directamente a través de endpoints HTTP
-- Enviar evaluaciones personalizadas asociadas con tramos
+- Enviar spans directamente a través de endpoints HTTP
+- Enviar evaluaciones personalizadas asociadas con spans
 - Incluir jerarquías de trazas completas para aplicaciones complejas
-- Anotar tramos con entradas, salidas, metadatos y métricas
+- Anotar spans con entradas, salidas, metadatos y métricas
 
 Endpoints de la API:
-- [API de tramos][4]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
+- [API de spans][4]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v1/trace/spans`
 - [API de evaluaciones][5]: `POST` `https://api.{{< region-param key="dd_site" code="true" >}}/api/intake/llm-obs/v2/eval-metric`
 
 Para obtener más información, consulte la [Documentación de la API HTTP][3].

@@ -258,7 +258,7 @@ If you already connected an app registration using a client secret, you can migr
 
 In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method, then complete the steps for that method:
 
-{{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
+{{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModalDatadogIssuer.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
 
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
@@ -309,9 +309,9 @@ resource "azuread_application_federated_identity_credential" "datadog_federated_
 
 Datadog's Azure integration is built to collect all metrics from [Azure Monitor][8]. The [Integrations page][9] shows a curated list of predefined sub-integrations that provide additional out-of-the-box dashboards and monitors for specific Azure services. Many of these integrations are installed by default when Datadog recognizes data coming in from your Azure account. However, Datadog can ingest metrics from **any Azure Monitor-supported resource**, even if it doesn't have a dedicated sub-integration tile.
 
-You can find your Azure metrics in the metrics summary page in the Datadog platform by navigating to `Metrics > Summary` and searching for `Azure`.
+You can find your Azure metrics on the [Metrics Catalog][55] page by searching for `Azure`.
 
-{{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Metric summary image" style="width:100%;" >}}
+{{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="The Metrics Catalog page filtered to Azure metrics" style="width:100%;" >}}
 
 ### Resource tag filtering for metrics
 
@@ -513,3 +513,4 @@ Still need help? Contact [Datadog support][17].
 [52]: https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FmanualForwarderUiDefinition.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
 [54]: https://learn.microsoft.com/entra/workload-id/workload-identity-federation
+[55]: https://app.datadoghq.com/metric/catalog

@@ -13,14 +13,17 @@ further_reading:
 
 ## Start a Bits investigation
 
-You can launch a Bits investigation from several entry points:
+You can launch a Bits investigation from several entry points in the Datadog UI:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
 - [Real User Monitoring](#real-user-monitoring)
+- [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
+
+You can also use Bits Investigation from AI assistants, applications, and the command line. For more information, see the [MCP, API, CLI](/bits_ai/bits_investigation/mcp_api_cli/) page.
 
 ### Monitor alerts {#manual-monitor-alerts}
 
@@ -40,6 +43,10 @@ In the monitor event side panel of a [Bits Investigation-supported monitor](#sup
 To use the Slack integration, [connect your Slack workspace to Bits Investigation][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
+
+#### Option 5: Microsoft Teams
+
+To receive investigation findings in Microsoft Teams, [send monitor notifications to a Microsoft Teams channel][22].
 
 ### Synthetic tests
 
@@ -64,6 +71,14 @@ You can launch a Bits investigation from several places in Real User Monitoring 
 - Recommendation cards on the RUM **Optimization** page and in Operations Monitoring. For details, see [Optimize Performance with Bits AI][19].
 - The **Anomaly · Investigate** button on a RUM vital chart. For details, see [Investigate Regressions and Alerts with Bits AI][20].
 - RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations). For details, see [Investigate Regressions and Alerts with Bits][20].
+
+### Error Tracking
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Bits Investigation in Error Tracking is in Preview.
+{{< /callout >}}
+
+You can launch a Bits investigation from an Error Tracking issue. To start an investigation, click {{< ui >}}Investigate this issue{{< /ui >}} on the {{< ui >}}Review{{< /ui >}} tab of the issue panel. Bits analyzes the error, its stack trace, and related telemetry. If you set up [Source Code Integration][17], Bits also analyzes your source code. It then summarizes the root cause and impact in the issue panel. For details, see [Investigate Errors with Bits AI][21].
 
 ### General prompt
 
@@ -96,7 +111,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
 1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
-<div class="alert alert-info"><ul><li>Enabling automatic investigations using the Datadog API or Terraform is not supported.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
+<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
 
 ### Supported monitors
@@ -121,6 +136,8 @@ At the end of an investigation, Bits either presents a clear, evidence-backed co
 
 {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits built and tested" style="width:100%;" >}}
 
+When Bits reaches a conclusion, it suggests next steps, such as a code fix, a triage action, or an infrastructure action. For details, see [Bits Remediation][23].
+
 ### Supported data sources
 Bits uses the following data sources during investigations:
 
@@ -134,6 +151,7 @@ Bits uses the following data sources during investigations:
 - [Source code][17] (GitHub only)
 - Watchdog
 - Real User Monitoring
+- Error Tracking
 - Network Path
 - Database Monitoring
 - Continuous Profiler
@@ -179,6 +197,9 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /real_user_monitoring/bits_ai/optimize_performance/
 [20]: /real_user_monitoring/bits_ai/investigate_regressions/
+[21]: /error_tracking/bits_investigation/
+[22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
+[23]: /bits_ai/bits_remediation/
 
 ## Further reading
 

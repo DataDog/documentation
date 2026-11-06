@@ -47,7 +47,7 @@ El ejecutor en el Datadog Agent tiene tres opciones de implementación, según d
 | Opción de implementación | Cómo se ejecuta | Implementar con | Ideal para |
 |---|---|---|---|
 | **Servidor** | Un proceso independiente junto al Datadog Agent en un servidor Linux o Windows. | Instalación en servidor | Acciones dirigidas a un servidor específico. |
-| **Un contenedor en el Agent de nodo, que utiliza el mismo binario de ejecución que el proceso del servidor.** |  | Helm, Operator | Acciones locales al nodo en un clúster de Kubernetes. |
+| **Agent de nodo de Kubernetes** | Un contenedor en el Agent de nodo, que utiliza el mismo binario de ejecución que el proceso del servidor. | Helm, Operator | Acciones locales al nodo en un clúster de Kubernetes. |
 | **Kubernetes Cluster Agent** | En proceso dentro del Cluster Agent, sin un binario independiente. Un ejecutor sirve a todo el clúster. | Helm, Operator | Acciones de Kubernetes en todo el clúster. |
 
 Tiene la opción de instalar con **Fleet Automation**, un flujo basado en la interfaz de usuario que inscribe al ejecutor como propiedad, o **Instalación manual**, donde usted elige el tipo de inscripción.

@@ -1,0 +1,20 @@
+.api-changelog-empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  border: var(--border-width) dashed var(--color-border);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.api-changelog-empty-state__message {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-regular);
+}
+
+.api-changelog-empty-state__link {
+  color: var(--color-brand);
+  font-weight: var(--font-weight-medium);
+}

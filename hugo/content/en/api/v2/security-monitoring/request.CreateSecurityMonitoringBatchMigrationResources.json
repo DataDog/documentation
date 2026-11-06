@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "batchMigrationResources",
+    "attributes": {
+      "resources": [
+        {
+          "name": "Linux sudo abuse",
+          "inputType": "spl",
+          "input": "index=linux process=sudo \"authentication failure\" | stats count by user, host"
+        }
+      ]
+    }
+  }
+}

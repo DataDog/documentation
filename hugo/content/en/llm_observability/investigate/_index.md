@@ -94,4 +94,4 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [5]: /llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /llm_observability/configure/prompt_management
-[8]: /llm_observability/configure/prompt_experimentation
+[8]: /llm_observability/improve/online_experiments/prompt_experimentation/
