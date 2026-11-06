@@ -111,10 +111,6 @@ The following gauges report the configured request limit for each rate limit nam
 * Display name of the child organization represented by a copied metric.
 * All metrics with `org_scope:child_org`
 ---
-* `child_org`
-* Compatibility alias for `child_org_name`, with the same display-name value. Prefer `child_org_name` for new queries.
-* All metrics with `org_scope:child_org`
----
 * `limit_count`
 * Configured number of requests allowed during the rate limit window.
 * Count, blocked count, and utilization metrics when the configured value is known
@@ -131,19 +127,15 @@ The following gauges report the configured request limit for each rate limit nam
 * Relationship between the metric and the organization viewing it: `current_org` for that organization's own traffic or `child_org` for a child-organization copy visible from its root organization.
 * All metrics
 ---
-* `rate_limit_status`
-* `passed` on allowed-request metrics and `blocked` on blocked-request metrics. Utilization combines both statuses and does not have this tag.
-* Count and blocked count metrics only
----
 * `user_uuid`
 * UUID of the user associated with the request.
 * Count, blocked count, and utilization metrics
 ---
 {% /table %}
 
-When you view metrics from a child organization, its own metrics use `org_scope:current_org`. The `org_scope:child_org` value, `child_org_name` tag, and `child_org` alias appear only on the additional copies sent to the root organization. The alias is an additional tag on the same series, not another copy of the metric.
+When you view metrics from a child organization, its own metrics use `org_scope:current_org`. The `org_scope:child_org` value and `child_org_name` tag appear only on the additional copies sent to the root organization.
 
-Configured-limit gauges have `limit_name`, `org_scope`, and `limit_period`, plus the child-organization tags on root-organization copies. They do not have `user_uuid`, `app_key_id`, `limit_count`, or `rate_limit_status`. Use the gauge value for the configured request limit, and use `max` rather than `sum` to aggregate it.
+Configured-limit gauges have `limit_name`, `org_scope`, and `limit_period`, plus `child_org_name` on root-organization copies. They do not have `user_uuid`, `app_key_id`, or `limit_count`. Use the gauge value for the configured request limit, and use `max` rather than `sum` to aggregate it.
 
 Period and count tags describe the configuration associated with each metric point. A configuration change can produce different tag values within a selected time range. A chart's rollup interval is not the rate limit period. Restored tags are not backfilled onto older points; filtering on them excludes points emitted without those tags.
 
@@ -204,8 +196,8 @@ The `datadog.apis.rate_limit.usage.*` metrics replace the `datadog.apis.usage.*`
 
 The replacement metrics differ from the legacy metrics in the following ways:
 
-* Allowed and blocked requests use separate metrics, with `rate_limit_status:passed` and `rate_limit_status:blocked` respectively. Select the appropriate metric family as well as updating legacy status filters. A `blocked` filter on an allowed-request metric does not select blocked requests. Utilization metrics combine both statuses and do not support status filtering.
-* The legacy `child_org` tag is available as an alias of `child_org_name`. From the root organization, filter on `org_scope:child_org` and use either name tag to filter or group by the child's display name. Use `org_scope:current_org` for the viewing organization's own traffic.
+* Allowed and blocked requests use separate metrics instead of the `rate_limit_status` tag. Replace legacy status filters with the corresponding allowed-request or blocked-request metric. Utilization metrics combine allowed and blocked requests.
+* The `org_scope` and `child_org_name` tags replace the legacy `child_org` tag. From the root organization, filter on `org_scope:child_org` and use `child_org_name` to filter or group by the child's display name. Use `org_scope:current_org` for the viewing organization's own traffic.
 * The `limit_count` and `limit_period` tags describe the configured limit on usage metrics. The corresponding `*_limit_count` gauge also exposes `limit_period`, so dashboards can display the configured request limit and window together. Queries covering older points without the restored tags need an unfiltered view to include that history.
 
 ### Increase your rate limit
