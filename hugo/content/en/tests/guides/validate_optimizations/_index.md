@@ -113,12 +113,7 @@ Keep the reports for review, and rerun full validation after changing source fil
 After installing ddtest, pass this prompt to a local coding agent that can inspect files and run commands in the repository:
 
 ```text
-Use ddtest to validate Test Optimization in this repository. Start with
-`ddtest onboard --agent` and follow its returned next action. Review any
-proposed source or CI edits with me before applying them. Run local
-validation for every discovered supported configuration, then share the
-HTML report links and any failed, unsupported, or unvalidated checks.
-Do not change Datadog settings.
+Use ddtest to onboard this repository to Test Optimization.
 ```
 
 For an existing setup, the agent can run `ddtest testdrive --all --agent --yes`, adding `--framework` and `--ci-provider` if needed, and follow the returned next action. After an agent-coordinated run, use `ddtest testdrive --report` to inspect the saved result and follow any returned validation instructions.
