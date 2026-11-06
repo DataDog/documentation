@@ -1659,11 +1659,6 @@ menu:
       identifier: bits_remediation
       parent: bits_ai
       weight: 10
-    - name: Bits Guardrails
-      url: bits_ai/bits_remediation/bits_guardrails
-      identifier: bits_remediation_guardrails
-      parent: bits_remediation
-      weight: 1001
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -1674,11 +1669,6 @@ menu:
       identifier: bits_ai_skills_library
       parent: bits_ai
       weight: 12
-    - name: Bits AI Settings
-      url: bits_ai/bits_settings
-      identifier: bits_ai_settings
-      parent: bits_ai
-      weight: 13
     - name: Dashboards
       url: dashboards/
       pre: dashboard
