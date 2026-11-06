@@ -120,9 +120,7 @@ See [dependency caching](/tests/test_parallelization/best_practices/#cache-proje
 <!-- actions -->
 {% if equals($ci_provider, "github_actions") %}
 
-### GitHub Actions {% #actions %}
-
-Merge the workflow-level `env` settings and jobs into your workflow, keeping existing environment variables, job dependencies, and credentials. Keep credentials in GitHub secrets. Replace the setup comments with your runtime, dependency, instrumentation, and `ddtest` installation steps.
+Merge the workflow-level `env` settings and jobs into your workflow, keeping existing environment variables, job dependencies, and credentials. Keep credentials in GitHub secrets. Replace the setup comments with your runtime, dependency, instrumentation, and `ddtest` installation steps. {% #actions %}
 
 {% if includes($prog_lang, ["ruby", "python"]) %}
 
@@ -274,9 +272,7 @@ For workflows with several suites, put each suite's `DD_TEST_OPTIMIZATION_RUNNER
 <!-- circleci -->
 {% if equals($ci_provider, "circleci") %}
 
-### CircleCI
-
-Enable [dynamic configuration](https://circleci.com/docs/guides/orchestrate/dynamic-config/) to pass the planned node count to a continuation workflow. Keep one setup workflow and continue immediately after planning. Extend an existing continuation if you have one; preserve its parameters, contexts, filters, and unrelated jobs. CircleCI allows one continuation per pipeline, within six hours of creation.
+Enable [dynamic configuration](https://circleci.com/docs/guides/orchestrate/dynamic-config/) to pass the planned node count to a continuation workflow. Keep one setup workflow and continue immediately after planning. Extend an existing continuation if you have one; preserve its parameters, contexts, filters, and unrelated jobs. CircleCI allows one continuation per pipeline, within six hours of creation. {% #circleci %}
 
 In `.circleci/config.yml`, retain your executor and setup steps. Use the same `environment` settings in both jobs and retain their existing variables. Keep credentials in CircleCI contexts or project settings. The `cimg/base` image below is a placeholder for the **existing test image** with the selected language runtime:
 
@@ -510,9 +506,7 @@ Set these variables in your CI provider's environment settings for the planning 
 <!-- multi -->
 {% if equals($ci_provider, "other_ci_multi_node") %}
 
-### Other - multiple nodes {% #distribute-tests-across-ci-nodes %}
-
-Generate one plan in a planning job:
+Generate one plan in a planning job: {% #distribute-tests-across-ci-nodes %}
 
 ```bash
 rm -rf .testoptimization
@@ -543,9 +537,7 @@ Set both parallelism bounds to the configured job count. For ten jobs, set `DD_T
 <!-- single -->
 {% if equals($ci_provider, "other_ci_single_node") %}
 
-### Run workers on one CI node {% #run-workers-on-one-ci-node %}
-
-Replace the test command in your existing job with:
+Replace the test command in your existing job with: {% #run-workers-on-one-ci-node %}
 
 ```bash
 rm -rf .testoptimization
