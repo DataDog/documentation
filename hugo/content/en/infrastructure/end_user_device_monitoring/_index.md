@@ -36,6 +36,7 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | **Battery health** | Plan hardware life cycles with battery metrics such as maximum capacity, cycle count, and charge status.                                                                              |
 | **Process visibility**            | Use [Live Processes][1] to monitor resource usage by individual processes and identify applications affecting device performance.                                                                         |
 | **Logs collection**               | Use [Logs][7] to collect and explore logs from end-user devices and applications for troubleshooting crashes, errors, and performance issues.                                                             |
+| **Events** | Review hand-curated events from the device, such as application hangs and crashes, failed installations, and unexpected reboots, to reconstruct what happened. |
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
 | **Network connections for access points** | See the network connection between a device and the access point it is associated with. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
