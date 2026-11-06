@@ -165,7 +165,7 @@ datadogWebpackPlugin({
 
 {{< whatsnext desc="Configure individual build plugins:" >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps" >}}<u>Source Maps</u>: Automatically upload source maps to Datadog during your build, enabling deobfuscated stack traces.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u>: Generate an allowlist of safe strings at build time to keep useful action names while masking sensitive data.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/privacy" >}}<u>Privacy Plugin</u>: Generate an allowlist of safe strings at build time to keep action names and session replay text useful while masking sensitive data.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context" >}}<u>Source Code Context</u>: Display source code inline in Error Tracking stack traces.{{< /nextlink >}}
 {{< /whatsnext >}}
 
