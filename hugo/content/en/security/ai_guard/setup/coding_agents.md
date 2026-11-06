@@ -35,9 +35,7 @@ Coding agent protection runs inside [Trajectory][1], an open source tool from Da
 
 A block on a tool result can't undo the tool call that produced it. The block stops the coding agent from using the result.
 
-Trajectory runs in one of two modes:
-- **Observe**: AI Guard evaluates each action and records the result, but doesn't block anything.
-- **Enforce**: AI Guard can block actions. Blocking also requires a blocking policy. See [Enable blocking](#enable-blocking).
+Trajectory runs in observe mode, which records results without blocking, or in enforce mode, which can block actions. See [Configuration options](#configuration-options).
 
 If an evaluation fails or times out, the coding agent continues with the action (fail-open).
 
@@ -87,7 +85,7 @@ Coding agent protection supports the platforms that Trajectory supports. For age
 
 If you already use Trajectory, run the same command. The installer keeps your Trajectory configuration and adds coding agent protection.
 
-<div class="alert alert-warning">If you don't set <code>--security-mode observe</code>, the installer enables protection in enforce mode, which can block actions immediately.</div>
+To set other options at installation time, see [Configuration options](#configuration-options).
 
 {{% /tab %}}
 {{% tab "Managed fleets (MDM)" %}}
@@ -119,13 +117,33 @@ Replace the `--clients` value with the coding agents you want to protect:
 | Kiro CLI           | `kiro`    |
 | Antigravity CLI    | `agy`     |
 
-### Store full message content
+## Configuration options {#configuration-options}
 
-By default, Trajectory removes message content from the evaluation results that it stores in Datadog, and keeps only metadata such as the action, the reason, and the threat categories. To store the full prompts and tool content, add `--security-privacy unredacted` to the installer command, or run:
+You can set the following options when you run the installer, or change them later with the Trajectory CLI. For managed fleets, set them in your managed configuration. See the [Managed Endpoint Administrator Guide][15].
 
-```bash
-trajectory plugins modules evaluator configure agent-security ai_guard --privacy-mode unredacted
-```
+### Mode {#mode}
+
+The mode controls whether coding agent protection can block actions:
+- `observe`: AI Guard evaluates each action and records the result, but doesn't block anything. Use this mode to review results and adjust your policies before you enable blocking.
+- `enforce`: AI Guard can block actions. Blocking also requires a [blocking policy][7]. See [Enable blocking](#enable-blocking).
+
+| When                   | How to set the mode                                                                             | Default   |
+|------------------------|-------------------------------------------------------------------------------------------------|-----------|
+| At installation        | Add `--security-mode <MODE>` to the installer command.                                          | `enforce` |
+| After installation     | Run `trajectory plugins security setup --mode <MODE> --clients <CLIENT_IDS>`. Add `--yes` to confirm `enforce`. | `observe` |
+
+Replace `<CLIENT_IDS>` with the [client IDs](#enable-protection-without-the-installer) of the coding agents you protect.
+
+### Privacy mode {#privacy-mode}
+
+The privacy mode controls which content Trajectory stores in Datadog with each evaluation result:
+- `coding_agent`: Trajectory removes message content, and keeps only metadata such as the action, the reason, and the threat categories.
+- `unredacted`: Trajectory stores the full prompts and tool content.
+
+| When                   | How to set the privacy mode                                                                     | Default        |
+|------------------------|-------------------------------------------------------------------------------------------------|----------------|
+| At installation        | Add `--security-privacy <PRIVACY_MODE>` to the installer command.                               | `coding_agent` |
+| After installation     | Run `trajectory plugins modules evaluator configure agent-security ai_guard --privacy-mode <PRIVACY_MODE>`. | `coding_agent` |
 
 ## Verify the installation {#verify}
 
@@ -154,13 +172,7 @@ For tool blocking, use the tool name that the coding agent uses, for example `Ba
 After you review the results in observe mode and adjust your policies:
 
 1. Set the [blocking policy][7] for your coding agents to block unsafe requests.
-1. On each developer computer, switch Trajectory to enforce mode. Replace the `--clients` value with the [client IDs](#enable-protection-without-the-installer) of the coding agents you protect:
-
-   ```bash
-   trajectory plugins security setup --mode enforce --clients cc,codex,cursor --yes
-   ```
-
-   For managed fleets, set the mode in your managed configuration.
+1. On each developer computer, set the [mode](#mode) to `enforce`.
 
 ## View results {#view-results}
 
@@ -192,3 +204,4 @@ trajectory plugins security disable --clients cc,codex,cursor --remove-hooks
 [12]: /security/ai_guard/setup/#evaluation-sensitivity
 [13]: /security/ai_guard/setup/#retention-filter
 [14]: /security/ai_guard/setup/#limit-access
+[15]: https://github.com/datadog-labs/trajectory/blob/main/docs/MANAGED-ENDPOINTS.md
