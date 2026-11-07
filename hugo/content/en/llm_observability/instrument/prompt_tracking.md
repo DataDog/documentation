@@ -78,6 +78,16 @@ span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
 ))
 ```
 {{% /tab %}}
+{{% tab "Java" %}}
+```java
+import io.opentelemetry.api.trace.Span;
+
+String json = "{\"name\":\"greeting-prompt\",\"version\":\"v1\","
+    + "\"template\":\"Hello {{name}}, tell me about {{topic}}\","
+    + "\"variables\":{\"name\":\"Alice\",\"topic\":\"weather\"}}";
+span.setAttribute("_dd.ml_obs.prompt_tracking", json);
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 The following fields are supported in the prompt tracking JSON:
