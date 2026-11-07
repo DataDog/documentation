@@ -69201,10 +69201,12 @@ components:
       enum:
         - users
         - attachments
+        - responders
       type: string
       x-enum-varnames:
         - USERS
         - ATTACHMENTS
+        - RESPONDERS
     IncidentRelationshipData:
       description: Incident relationship data
       properties:
@@ -69710,6 +69712,7 @@ components:
       oneOf:
         - $ref: "#/components/schemas/IncidentUserData"
         - $ref: "#/components/schemas/AttachmentData"
+        - $ref: "#/components/schemas/IncidentResponderDataResponse"
     IncidentResponseMeta:
       description: The metadata object containing pagination metadata.
       properties:

@@ -11,3 +11,13 @@ entries:
       - SearchIncidents
       - UpdateIncident
     title: Add users and role assignments includes to ListIncidentResponders
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41370
+    operations:
+      - CreateIncident
+      - GetIncident
+      - ListIncidents
+      - SearchIncidents
+      - UpdateIncident
+    title: Add the responders include option for search incidents
