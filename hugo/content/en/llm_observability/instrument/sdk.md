@@ -3974,6 +3974,65 @@ function internalWorkflow() {
 {{< /code-block >}}
 
 {{% /tab %}}
+
+{{% tab "Java" %}}
+
+Span processors require dd-trace-java v1.66.0 or later. Implement `LLMObsSpanProcessor` and register it with `LLMObs.registerProcessor()`. Only one processor can be registered at a time: registering a second one throws an `IllegalStateException`. To replace a processor, call `LLMObs.deregisterProcessor()` first.
+
+### Example
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import datadog.trace.api.llmobs.LLMObsSpanProcessor;
+import java.util.List;
+import java.util.stream.Collectors;
+
+LLMObsSpanProcessor redactProcessor = span -> {
+  if ("true".equals(span.getTag("no_output"))) {
+    List<LLMObs.LLMMessage> redacted = span.getOutput().stream()
+        .map(message -> LLMObs.LLMMessage.from(message.getRole(), ""))
+        .collect(Collectors.toList());
+    span.setOutput(redacted);
+  }
+  return span;
+};
+
+LLMObs.registerProcessor(redactProcessor);
+
+LLMObsSpan llmSpan = LLMObs.startLLMSpan("invoke_llm_with_no_output", "my-llm-model", "my-company", null, null);
+llmSpan.setTag("no_output", "true");
+// ... LLM call
+llmSpan.finish();
+{{< /code-block >}}
+
+### Example: preventing spans from being emitted
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+import datadog.trace.api.llmobs.LLMObsSpan;
+import datadog.trace.api.llmobs.LLMObsSpanProcessor;
+
+LLMObsSpanProcessor filterProcessor = span -> {
+  // Skip spans that are marked as internal or contain sensitive data
+  if ("true".equals(span.getTag("internal")) || "true".equals(span.getTag("sensitive"))) {
+    return null; // This span will not be emitted
+  }
+
+  // Process and return the span normally
+  return span;
+};
+
+LLMObs.registerProcessor(filterProcessor);
+
+// This span will be filtered out and not sent to Datadog
+LLMObsSpan workflowSpan = LLMObs.startWorkflowSpan("internal_workflow", null, null);
+workflowSpan.setTag("internal", "true");
+// ... workflow logic
+workflowSpan.finish();
+{{< /code-block >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 
