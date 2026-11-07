@@ -16,6 +16,7 @@ Developers and DevOps engineers implementing observability solutions. They're te
 
 ### 2. Accuracy & Completeness
 - Are code examples complete and copy-pasteable?
+- Does each code block say which file it goes in, such as `/etc/datadog-agent/datadog.yaml`? Skip this when the surrounding text, an earlier step, or the tab already makes the file clear.
 - Are prerequisites explicit and linked where needed?
 - Are there gaps that would block a user from succeeding?
 - Is technical information accurate?
@@ -26,20 +27,20 @@ Developers and DevOps engineers implementing observability solutions. They're te
 ### 3. Structure & Scannability
 - Does it follow a logical progression?
 - Can users skim to find what they need?
-- Are headings descriptive and actionable? Flag vague headings like "Overview" or "Configuration" when a specific one would help, for example "Configure the Agent for Kubernetes."
+- Are headings descriptive? A generic heading such as "Overview" or "Setup" is fine when the first sentence under it names the product or feature. Flag a generic heading only when that sentence doesn't name the subject.
 - Is the page in the right section of the docs (information architecture)?
 - Does each numbered step contain one action? Move explanation of how a feature works out of the step and into prose before the list.
 - Do sequential steps use a numbered list, and non-sequential items an unordered list? Limit nesting to three levels.
 
-### Writing for AI retrieval
-AI tools retrieve docs one section at a time, so each section must stand on its own:
+### 4. Writing for AI retrieval
+AI tools and search often show readers one section without the rest of the page. These checks help each section work on its own:
 - Does each section make sense if read alone? Flag sections or paragraphs that start with "It," "This," or "That" without naming the subject.
 - Are unsupported cases stated directly ("is not supported," "does not work with") instead of softly ("works best with")?
 - Do critical requirements (versions, OS, plan, permissions) appear right after the heading, not at the end of a section?
 - Does the text avoid "as shown below" or "in the following image" for information that only the image carries?
-- Are error messages quoted exactly in code blocks, not paraphrased?
+- If a troubleshooting step paraphrases an error message, ask the author for the exact text. Readers and AI tools search for the literal message.
 
-### 4. Frontmatter & Metadata
+### 5. Frontmatter & Metadata
 - Is there a `description` for SEO/AI ingestion?
 - Are `further_reading` links relevant and non-duplicative?
 - Are reference links free of duplicates or unused entries?
@@ -47,19 +48,19 @@ AI tools retrieve docs one section at a time, so each section must stand on its 
 - If the file is new and public (no `private: true`), has the page been added to the menu file (`hugo/config/_default/menus/main.en.yaml`) so it shows up in the side-nav? The entry needs the correct `parent`, a `weight` that fits its siblings, and a unique `identifier`. Pages in a `guide` folder don't need an entry. If the menu file isn't in the diff, flag it as an **Issue**.
 - Does the `title` use title case? H2 and lower headings use sentence case.
 
-### 5. Hugo checks
+### 6. Hugo checks
 These break the rendered page without failing the build:
 - **Link references inside tabs**: If a `{{% tab %}}` block uses a reference link like `[1]`, its definition (`[1]: /path/`) must be inside the same tab, just before `{{% /tab %}}`. Definitions at the bottom of the page render as literal `[1]` inside a tab. Check the full file, not only the diff hunk. Flag as an **Issue**.
 - **Relative docs links**: For a changed link to a docs path such as `/agent/configuration/`, check that a matching page exists under `__untrusted/hugo/content/en/`. Flag links with no matching page. You can't check external URLs or heading anchors, so don't guess about those.
 - **Unused or missing reference definitions**: Flag `[n]: /url` definitions that nothing uses, and `[n]` references with no definition.
 
-### 6. Links, images, and accessibility
+### 7. Links, images, and accessibility
 - Link text describes the destination. Flag "here," "this link," "click here," and bare URLs as link text.
 - A link to a section on the same page says so: "the [Modes](#modes) section," not a bare "[Modes](#modes)."
 - Every image has alt text that describes what the image shows in a complete sentence ending with a period. Don't start alt text with "Image of" or "Screenshot of."
 - Use inclusive terms: allowlist and denylist, primary and secondary or leader and follower.
 
-### 7. Sensitive information and legal wording
+### 8. Sensitive information and legal wording
 This is a public repository. Flag these as an **Issue**:
 - API keys, tokens, real email addresses, IP addresses, customer names, internal URLs, or Datadog employee names in docs content or examples.
 - Promises of compliance or security: use "helps achieve compliance," not "ensures compliance," and "improves security," not "secures."
@@ -79,7 +80,7 @@ Don't rewrite text that is correct and clear only because you would phrase it di
 
 Scope:
 - Comment only on lines the PR adds or changes. Read the rest of the file and related pages for context, but don't flag text the PR didn't touch.
-- Before you flag a pattern, structure, or wording choice, check comparable pages in the same docs section. If the existing docs already do it that way, matching them is usually correct.
+- Before you flag a pattern, structure, or wording choice, check comparable pages in the same docs section. If the existing docs already do it that way, matching them is usually correct. Style rules in this file still apply, even if older pages don't follow them.
 - Check changed lines against the word tables in the Style Guide section. A Vale check also runs on docs PRs, but authors often miss its warnings. Comment on each instance with a suggestion block so the author can apply the fix in one click.
 - For other style rules broken several times in a file, comment on the first instance and say how many others there are, instead of commenting on each one.
 
