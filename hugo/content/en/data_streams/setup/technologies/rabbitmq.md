@@ -46,12 +46,18 @@ title: Data Streams Monitoring for RabbitMQ
       <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="dotnet" lib="rabbitmq-client" type="recommended" >}}</td>
     </tr>
+    <tr>
+      <td><a href="/data_streams/php">PHP</a></td>
+      <td><a href="https://github.com/php-amqplib/php-amqplib">php-amqplib</a></td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-amqplib" type="minimal" >}}</td>
+      <td>{{< dsm-tracer-version lang="php" lib="php-amqplib" type="recommended" >}}</td>
+    </tr>
   </tbody>
 </table>
 
 ### Setting up Data Streams Monitoring
 
-See setup instructions for [Java][2], [Node.js][3], [Python][4], or [.NET][5].
+See setup instructions for [Java][2], [Node.js][3], [Python][4], [.NET][5], or [PHP][6].
 
 {{% data_streams/monitoring-rabbitmq-pipelines %}}
 
@@ -60,3 +66,4 @@ See setup instructions for [Java][2], [Node.js][3], [Python][4], or [.NET][5].
 [3]: /data_streams/setup/language/nodejs
 [4]: /data_streams/setup/language/python
 [5]: /data_streams/setup/language/dotnet
+[6]: /data_streams/setup/language/php
