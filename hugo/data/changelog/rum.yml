@@ -56,3 +56,16 @@ entries:
       - ListSourcemaps
       - RestoreSourcemaps
     title: Document sourcemaps symbol_type and debug_id lookup
+  - change_type: modified
+    date: '2026-10-27'
+    link: https://github.com/DataDog/documentation/pull/41086
+    operations:
+      - AggregateRUMEvents
+      - CreateRUMApplication
+      - DeleteRUMApplication
+      - GetRUMApplication
+      - GetRUMApplications
+      - ListRUMEvents
+      - SearchRUMEvents
+      - UpdateRUMApplication
+    title: Document RUM applications, events and aggregate endpoints
