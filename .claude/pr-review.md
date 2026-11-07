@@ -101,6 +101,14 @@ Many authors are engineers, product managers, or outside contributors, not write
 - Keep the summary factual: what you found and whether anything blocks merging. Skip generic praise, "LGTM," and "nits."
 - Don't comment on whitespace or trailing newlines.
 
+## Final check
+
+Before you write the output, reread each comment and delete it if any of these are true:
+
+- A senior technical writer would leave the text as is.
+- The fix is a matter of preference, not a rule or a reader problem.
+- The comment doesn't change what a reader understands or does.
+
 ## Areas to avoid
 
 Avoid feedback on product decisions that are outside the scope of a documentation change — for example, whether a feature, field, or UI element is named appropriately, whether a feature should work differently, or whether a capability should exist at all. Focus on whether the documentation accurately and clearly describes what the product does.
