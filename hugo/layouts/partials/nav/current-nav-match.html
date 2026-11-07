@@ -1,0 +1,56 @@
+{{- /*
+  Returns dict "topSection" <pipe-delimited string> "openPath" <pipe-delimited string>, for
+  every menu entry whose URL equals or is a path-ancestor of the current page. One pass over
+  nav/flattened-menu.html's flat list computes both:
+
+  - "topSection": which top-level section(s) (L1) the current page falls under. Used to key
+    nav/left-nav.html's and header/header.html's partialCached calls, so Levels 2-4 (desktop)
+    and the equivalent header/mobile nav only render/cache per matching section, not per
+    .Section -- keying by .Section, or by only the first match, is unsound because menu
+    entries can nest (e.g. "security/" and "security/cloud_siem/" are sibling top-level
+    entries), which would let two pages with different actual matches share the same key.
+
+  - "openPath": every matching entry's OWN identifier, at any level (L1-L4) -- the full "open"
+    chain down to (and including) whichever entry exactly matches the current page, if any.
+    Used as an ADDITIONAL nav/left-nav.html partialCached key segment on top of "topSection",
+    because Levels 2-4's active/open state depends on the specific page, not just its top-level
+    section. Without it, every page sharing a section would reuse one cached render of
+    left-nav.html, and Levels 2-4's active/open state would be baked in from whichever page
+    rendered that cache entry first. (This was already true of the `active` class -- dead for
+    config-defined menus like this one, per nav/left-nav.html -- so it was invisible; baking
+    `open` in server-side made the staleness visible, which is what "openPath" fixes.) Callers
+    that only need section-level scoping can ignore "openPath" -- computing it is a cheap,
+    non-recursive pass over the same flat list already being walked for "topSection", not an
+    extra menu walk.
+
+  This menu is config-defined (plain url: strings, no page front matter), so entries have no
+  .Page and Hugo's .IsMenuCurrent/.HasMenuCurrent never match -- comparing URLs directly works.
+
+  This runs uncached on every page, so it uses nav/flattened-menu.html's precomputed, build-
+  wide-cached flat list (one non-recursive loop) rather than walking the menu tree per page --
+  see that file for why.
+*/ -}}
+{{- $currentPage := . -}}
+{{- $curURL := trim $currentPage.RelPermalink "/" -}}
+{{- $flatMenu := partial "nav/flattened-menu.html" $currentPage -}}
+{{- $topSectionIDs := slice -}}
+{{- $openPathIDs := slice -}}
+{{- range $flatMenu -}}
+    {{- if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) -}}
+        {{- if not (in $topSectionIDs .topLevelIdentifier) -}}
+            {{- $topSectionIDs = $topSectionIDs | append .topLevelIdentifier -}}
+        {{- end -}}
+        {{- if not (in $openPathIDs .identifier) -}}
+            {{- $openPathIDs = $openPathIDs | append .identifier -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $topSection := "" -}}
+{{- range $topSectionIDs -}}
+    {{- $topSection = print $topSection "|" . -}}
+{{- end -}}
+{{- $openPath := "" -}}
+{{- range $openPathIDs -}}
+    {{- $openPath = print $openPath "|" . -}}
+{{- end -}}
+{{- return (dict "topSection" $topSection "openPath" $openPath) -}}
