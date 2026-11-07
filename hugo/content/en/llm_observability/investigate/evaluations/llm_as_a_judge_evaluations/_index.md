@@ -36,6 +36,8 @@ Custom LLM-as-a-judge evaluators use an LLM to judge the performance of another 
 
 Evaluators can also send the images and audio attached to your spans to the LLM judge. See [Image and Audio Evaluators][19].
 
+For checks that don't need an LLM, such as detecting empty tool results, use [code evaluators][20] instead.
+
 ## Create a custom LLM-as-a-judge evaluator
 
 You can create and manage custom evaluators from the [Evaluators page][1] in Agent Observability. You can provide an evaluator description to generate an evaluator, use and build on existing [LLM-as-a-judge evaluator templates][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
@@ -618,3 +620,4 @@ You can use basic CRUD operations to manipulate custom LLM-as-a-judge evaluator 
 [17]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 [19]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations
+[20]: /llm_observability/investigate/evaluations/code_evaluations
