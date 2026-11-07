@@ -91,6 +91,16 @@ If earlier automated review comments exist for this PR, read them before you wri
 - Don't repeat a finding that an earlier comment already made on the same text. The author has seen it.
 - If you think an earlier comment was wrong, say so directly in your new comment and explain why. Don't silently suggest the opposite change.
 
+## Tone
+
+Many authors are engineers, product managers, or outside contributors, not writers. Write comments that a busy colleague would welcome.
+
+- Describe the effect on the reader, not your opinion of the writing. Write "A reader may not know which two settings 'change them' refers to," not "'change them' is vague." Don't use labels such as "awkward," "filler," "clunky," or "informal."
+- State the fix plainly. Don't soften it with "a bit," "slightly," or "a little."
+- If you aren't sure what the author means, ask: "Does this mean X or Y?" Don't guess.
+- Keep the summary factual: what you found and whether anything blocks merging. Skip generic praise, "LGTM," and "nits."
+- Don't comment on whitespace or trailing newlines.
+
 ## Areas to avoid
 
 Avoid feedback on product decisions that are outside the scope of a documentation change — for example, whether a feature, field, or UI element is named appropriately, whether a feature should work differently, or whether a capability should exist at all. Focus on whether the documentation accurately and clearly describes what the product does.
