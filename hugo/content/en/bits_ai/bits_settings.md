@@ -10,65 +10,86 @@ further_reading:
   text: "AI Credits"
 ---
 
-<!-- DRAFT: Working outline for DOCS-16325. -->
+<!-- DRAFT: Working draft for DOCS-16349. -->
 
-Use Settings to control what Bits knows about your organization and who can use it.
+## Overview
+
+Use Bits AI Settings to control what Bits knows about your organization, how Bits connects to your tools, and how your team uses Bits.
+
+To open Bits AI Settings, go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}.
+
+<!-- TODO: Confirm the permissions required to view and change Bits AI Settings. Add the app link and screenshot once the URL is final. -->
+
+Bits AI Settings are organized into two areas:
+
+- [Knowledge](#knowledge): Give Bits context about your organization.
+- [Administration](#administration): Control how Bits connects to your tools and what Bits can do.
 
 ## Knowledge
 
-Knowledge settings control...
+Knowledge settings give Bits context about your organization, so that Bits can use your terminology, follow your conventions, and learn from past work.
 
 ### Bits.md
 
-Bits.md applies only to Chats and Investigations.
+`bits.md` is a Markdown file that gives Bits structured context about your environment. Use it to add team-specific knowledge such as tagging conventions, architectural patterns, glossary terms, and investigation best practices. This context helps Bits construct more accurate queries and use the same terms that your team uses.
 
-For more information, see [Bits.md][1].
+Bits.md applies to [Bits Chat][9] and [Bits Investigation][10] only. In the Bits.md settings, use the {{< ui >}}Investigations{{< /ui >}} and {{< ui >}}Chat{{< /ui >}} options to choose which of these use the file.
+
+For more information and a sample file, see [Bits.md][1].
 
 ### Skills
 
+Skills are reusable domain knowledge and instructions for Bits and other AI agents. Skills give agents task-specific context, so you don't need to repeat the same information in each prompt. For example, create a skill that describes your incident response process or your service ownership conventions.
+
 For more information, see [Skills Library][2].
 
-### Memories (Investigations only)
+### Memories
 
-Bits Investigation learns from your investigation feedback to improve future responses.
+Bits Investigation learns from your feedback to improve future investigations. Positive feedback, and negative feedback that includes details about the correct root cause, creates a memory. In later investigations, Bits selects relevant memories to apply past corrections, reuse effective queries, and prioritize investigative steps.
+
+You can view and delete memories.
+
+<!-- TODO: Confirm where memories are managed. Current docs point to the Memories column on the Monitor Management page. If memories move to Bits AI Settings, update /bits_ai/bits_investigation/knowledge_sources/ as well. -->
 
 For more information, see [Feedback and memories][3].
 
-<!-- TODO: Document memories under Investigations -->
-
 ## Administration
 
-Administration settings control...
+Administration settings control how Bits connects to your tools and what Bits can do.
 
-### Integrations (Investigations only)
+### Integrations
 
-Integrations apply only to Bits Investigations.
+Integrations connect Bits Investigation to your observability data and source code. Bits Investigation integrates with GitHub, Grafana, Dynatrace, Splunk, Sentry, and ServiceNow. Source code access also lets [Bits Code][11] generate a code fix when Bits Investigation identifies an issue that can be resolved in code.
 
-Connect Bits to your codebase. Link repositories, map services to code, and enable Bits to suggest fixes.
+Bits also has out-of-the-box MCP integrations, such as Dynatrace MCP, Elastic Agent Builder MCP, and Grafana MCP. For the full list, see the {{< ui >}}Available{{< /ui >}} tab under {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}. You can also connect custom MCP servers that your team runs.
 
-Bits has out-of-the-box integrations for services such as Dynatrace MCP, Elastic Agent Builder MCP, Grafana MCP, and more. See the **Bits AI** > **Settings** > **Integrations** > **Available** tab for the full list.
+For more information, see [Integrations and Settings][4].
 
-Bits also supports connecting any custom MCP servers that your team already runs.
+### Guardrails
 
-For more information about how to configure a custom MCP server integration for Bits Investigations, see [Integrations and Settings][4]. <!-- TODO: Document how to configure custom MCP on that page -->
+Guardrails are rules that control what remediation actions Bits can take. A guardrail defines whether Bits must ask for approval or can't act at all. Each guardrail applies to specific actions and to resources that match its scope, such as an environment or service.
 
-### Guardrails (Remediations only)
+Guardrails are required to enable one-click infrastructure actions with Bits. For more information, see [Govern how Bits takes remediation action][5].
 
-Guardrails apply only to Bits Remediations.
-
-Set rules for when Bits can act on its own, must ask for approval, or can't act at all. For more information, see [Govern how Bits takes remediation action][5].
+<!-- Update this xref ^ to point to the new page after https://github.com/DataDog/documentation/pull/41517 is merged -->
 
 ### Action history
 
+Action history is an auditable record of every action that Bits has taken, including triage actions and infrastructure actions. Filter the list by action, integration, or investigation. Click an action to see:
+
+- **Execution details**: The status, start and end time, duration, and connection used.
+- **Scope and policy**: The guardrail that covered the action and who initiated it.
+- **Original investigation**: The root cause and impact that led to the action, with a link to the investigation.
+
 ### Credit usage
 
-Get a credit usage breakdown per user and autonomous agent.
+View a breakdown of [AI Credits][6] usage for each user and autonomous agent.
 
-Go to **Billing enrichment** to enrich billing data for AI Credits with tags from a reference table. For more information about reference tables, see [Reference Tables][6].
+To add tags from a reference table to your AI Credits billing data, use {{< ui >}}Billing enrichment{{< /ui >}}. For more information about reference tables, see [Reference Tables][7].
 
 ### Advanced
 
-From the Advanced settings, you can set rate limits for your Bits Investigations. For more information, see [Configure rate limits][7].
+Use the Advanced settings to set rate limits for Bits Investigation. For more information, see [Configure rate limits][8].
 
 ## Further reading
 
@@ -79,5 +100,9 @@ From the Advanced settings, you can set rate limits for your Bits Investigations
 [3]: /bits_ai/bits_investigation/knowledge_sources/#feedback-and-memories
 [4]: /bits_ai/bits_investigation/configure/
 [5]: /bits_ai/bits_remediation/#govern-how-bits-takes-remediation-action
-[6]: /reference_tables/?tab=manualupload
-[7]: /bits_ai/bits_investigation/configure/#configure-rate-limits
+[6]: /account_management/billing/ai_credits/
+[7]: /reference_tables/
+[8]: /bits_ai/bits_investigation/configure/#configure-rate-limits
+[9]: /bits_ai/bits_chat/
+[10]: /bits_ai/bits_investigation/
+[11]: /bits_ai/bits_code/
