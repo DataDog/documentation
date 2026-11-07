@@ -33,3 +33,17 @@ An emerging threat is a new or evolving attack campaign or supply-chain attack t
 - **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks, or targeted campaigns.
 - **Imminent threat**: The threat has already caused impact or is expected to escalate, with near-term attacks likely to affect many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
+
+## Assess exposure to an emerging vulnerability
+
+Emerging vulnerability cards in the Security Research Feed combine analysis, matches in your environment, and remediation guidance, so you can assess exposure from one place.
+
+1. In Datadog, go to **Security** > **Research Feed**.
+2. In the **Article type** filter, select **Emerging Vulns & Threats**. The feed shows both emerging vulnerabilities and emerging threats.
+3. Open the card for the vulnerability. The card includes:
+   - An **Impact Assessment** panel with matching vulnerabilities, threats, and Agent events in your environment.
+   - Affected and fixed versions.
+   - Steps to find affected resources with Datadog products.
+   - Guidance for investigating possible exploitation and remediating affected resources.
+
+<!-- TODO: Card contents verified against one card (PHP2Shell) in the demo org on 2026-10-27. Confirm with Security Research that all emerging vulnerability cards follow this structure. -->

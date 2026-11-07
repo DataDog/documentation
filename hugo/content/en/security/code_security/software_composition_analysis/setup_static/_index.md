@@ -41,6 +41,10 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Rust       | Cargo             | `cargo.lock`                             |
 | Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
+Static SCA detects vulnerabilities in the libraries listed in these files. Static SCA doesn't detect vulnerabilities in language runtimes, such as the PHP interpreter or the JVM. For coverage of language runtimes, see [Detection coverage by component type][28].
+
+<!-- TODO (Pierre-Louis): Confirm static SCA doesn't detect runtime vulnerabilities for any language, including Go and .NET. -->
+
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Lockfile-less scanning
@@ -275,3 +279,4 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
 [27]: /security/code_security/troubleshooting/#scan-java-jar-directories
+[28]: /security/code_security/software_composition_analysis/#detection-coverage-by-component-type
