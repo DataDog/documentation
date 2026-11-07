@@ -32,7 +32,7 @@ Learn more about [creating RUM Monitors][4].
 
 Choose what to monitor based on your use case:
 
-- **Full traffic metrics** - Best for monitoring availability, loading times, error rates, and user experience trends. For RUM without Limits™ customers, metric-based monitors provide full unsampled traffic visibility (before retention filters apply), 15-month retention, and advanced capabilities like anomaly detection and forecasts.
+- **Full traffic metrics** - Best for monitoring availability, loading times, error rates, and user experience trends. For RUM without Limits customers, metric-based monitors provide full unsampled traffic visibility (before retention filters apply), 15-month retention, and advanced capabilities like anomaly detection and forecasts.
 - **Retained events** - Best for detecting critical, low-frequency issues that require full event context. Use event-based monitors when you need to alert on indexed data or specific attributes not available as metrics. Configure retention filters to ensure the relevant data is captured.
 
 
@@ -40,7 +40,7 @@ Choose what to monitor based on your use case:
 
 ## Export queries from the RUM homepage
 
-You can export existing queries from the [RUM homepage][12] to create a monitor with all queries and context preserved. For customers on [RUM without Limits™][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
+You can export existing queries from the [RUM homepage][12] to create a monitor with all queries and context preserved. For customers on [RUM without Limits][1], the queries powering those widgets are based on the [out-of-the-box metrics][13]. For customers on the legacy model, they are based on [events][14].
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/create-monitor-homepage.png" alt="Export button to the right hand corner of the RUM Explorer" style="width:100%;" >}}
 
