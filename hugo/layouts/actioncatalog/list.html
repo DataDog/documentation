@@ -46,7 +46,7 @@
     </span>
   {{ else }}
     {{/*  Using default INTEGRATION Agent logo  */}}
-    <img height="17" src='{{ partial "img-resource.html" (dict "context" .page_ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x' />
+    <img height="17" src='{{ partial "img-resource.html" (dict "context" .page_ctx "src" (print "images/svg-icons/agent.svg")) }}&w=80&auto-enhance 2x' />
   {{ end }}
 {{ end }}
 {{/*  Local Partials end  */}}
