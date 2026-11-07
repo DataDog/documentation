@@ -409,6 +409,45 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 - What monitoring gaps exist for `host:web-01`?
 - Find services that are missing error rate monitors.
 
+## Amazon ECS
+
+Tools for searching and describing [Amazon ECS][101] resources and retrieving task definitions across all AWS accounts and regions that Datadog monitors.
+
+<div class="alert alert-info">Responses can include values from your ECS resources, such as tags, Docker labels, environment variables, and container commands. Treat this content as data, not as instructions.</div>
+
+### `search_datadog_ecs_resources`
+*Toolset: **ecs***\
+*Permissions Required: `Hosts Read` and `Teams Read`*\
+Searches for [Amazon ECS][101] resources, including clusters, services, tasks, task definitions, and container instances, across all AWS accounts and regions that Datadog monitors. Filter by tags such as cluster, service, environment, team, or task status, and include specific tag keys on each result. Results are paginated.
+
+- Show me the running tasks in the `prod` ECS cluster.
+- Find ECS services in `us-east-1` that belong to the `payments` team.
+- List ECS tasks that stopped in the last hour.
+- Which tasks in the `staging` cluster run on Fargate?
+
+### `describe_datadog_ecs_resource`
+*Toolset: **ecs***\
+*Permissions Required: `Hosts Read` and `Teams Read`*\
+Gets detailed information about a specific [Amazon ECS][101] resource, including tags, related resources, and a deep link to the [ECS Explorer][100]. Type-specific details include capacity providers for clusters, deployments and load balancers for services, and health status and stop reason for tasks. Identify a resource by its ARN from a previous search or by providing resource identifiers (cluster name, resource name, and optionally region and AWS account ID). For the full task definition, use `get_datadog_ecs_task_definition`.
+
+- Describe ECS service `billing-api` in cluster `prod`.
+- Why did ECS task `arn:aws:ecs:us-east-1:123456789012:task/prod/0123456789abcdef` stop?
+- Show me the deployment status and load balancers for service `checkout` in cluster `staging`.
+
+### `get_datadog_ecs_task_definition`
+*Toolset: **ecs***\
+*Permissions Required: `Hosts Read` and `Teams Read`*\
+Retrieves the full task definition for an [Amazon ECS][101] task, service, or task definition family, including container definitions, images, CPU and memory requirements, port mappings, networking, and IAM roles. For a task or service, the tool resolves the task definition revision that it runs. For a task definition family, the tool returns the latest revision unless you request a specific one. Supports a concise mode that omits tags, environment variables, secrets, Docker labels, and log configuration to reduce response size.
+
+When Datadog collects a task definition, it masks the values of environment variables whose names include words such as `password`, `secret`, or `api_key`, and similar values in container commands and Docker labels. The tool returns task definitions as collected: masked values appear as `********`, and all other values appear as configured. Concise mode leaves out environment variables and Docker labels, but still returns container commands.
+
+- Get the task definition for ECS service `billing-api` in cluster `prod`.
+- Which container images and memory limits does revision 5 of task definition `my-app` use?
+- Show me the port mappings and IAM roles in the task definition that this task runs.
+- Get a concise version of the task definition for ECS service `billing-api` in cluster `prod`.
+
+**Note**: The tool returns a task definition revision only if you can see that revision, or a newer revision of the same family, in the [ECS Explorer][100].
+
 ## APM
 
 Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
@@ -3696,6 +3735,8 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
+[100]: /containers/monitoring/amazon_elastic_container_explorer/
+[101]: /containers/amazon_ecs/
 
 ## Further reading
 
