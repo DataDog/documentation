@@ -41,13 +41,16 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 ## Setup
 
 ### Connect GitHub teams to Datadog Teams
-1. Navigate to [Teams][4].
-1. In the upper right, click {{< ui >}}GitHub Connections{{< /ui >}}.
-1. Configure your connection by selecting options for import type, sync members, and cadence.
-1. Click {{< ui >}}Save{{< /ui >}}.
+1. Go to [Teams > Data Sources][4].
+1. Select {{< ui >}}GitHub{{< /ui >}}.
+1. If prompted, associate your GitHub organization with Datadog.
+1. Choose the import type, select which GitHub teams to include, and choose whether to sync members and how often to sync. To sync team membership, select {{< ui >}}Sync and Maintain Members{{< /ui >}}.
+1. Click {{< ui >}}Create Datadog Teams{{< /ui >}} or {{< ui >}}Link Teams{{< /ui >}}, depending on the import type, and confirm.
+
+To change an existing connection, click {{< ui >}}Configure Connection{{< /ui >}} on the GitHub data source page.
 
 ### View Datadog Teams
-1. Navigate to [GitHub Connections][5].
+1. Navigate to [Teams > Data Sources > GitHub][5].
 1. If the list of created and linked teams is empty, click {{< ui >}}Refresh{{< /ui >}}.
 1. Optionally, manually update Datadog Teams to reach your desired state. 
 
@@ -89,5 +92,5 @@ The Datadog Team itself remains and can continue to be managed independently.
 [1]: /account_management/teams/#team-handle
 [2]: /account_management/teams/manage/#team-modification-permissions
 [3]: /integrations/github/#connect-github-teams-to-datadog-teams
-[4]: https://app.datadoghq.com/organization-settings/teams
-[5]: https://app.datadoghq.com/organization-settings/teams/github-connections?github-connections__view=synced
+[4]: https://app.datadoghq.com/organization-settings/teams/data-sources
+[5]: https://app.datadoghq.com/organization-settings/teams/data-sources/github
