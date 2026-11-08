@@ -1793,7 +1793,7 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 ### `kubernetes-ops-center-api-server-client-load`
 *Toolset: **kubernetes-ops-center***\
 *Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
-Inspects Kubernetes API server load for a cluster. Use this tool to determine whether the API server is overloaded and to identify the clients that send the most requests. The tool compares API server request pressure with candidate clients ranked from Kubernetes API audit logs, such as authenticated principals (for example, service accounts), user agents, or source IPs. When audit logs are not available, the tool ranks candidates from a client-side request count metric that has a client identity tag. Metric-based candidates show which clients send the most requests, but do not prove which client caused rate-limited (`429`) responses.
+Inspects Kubernetes API server load for a cluster. Use this tool to determine whether the API server is overloaded and which clients send the most requests. The tool compares API server request volume with clients ranked from Kubernetes API audit logs, such as service accounts, user agents, or source IPs. When audit logs aren't available, the tool ranks clients by `<METRIC_NAME>`, using the `<TAG>` tag to identify each client. Metric-based results show which clients send the most requests, but they don't show which client caused rate-limited (`429`) responses.
 
 - Is the API server in cluster `prod` overloaded, and which clients are sending the most requests?
 - Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
