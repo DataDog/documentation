@@ -66,7 +66,7 @@ With Autonomous Ops, Bits watches the system resources, monitor alerts, or Slack
 
 1. Detects the issue from your existing telemetry and alerts, and adds monitoring where coverage is missing.
 2. Triages the issue and investigates the root cause.
-3. Fixes the issue within the guardrails that you set. If a guardrail requires approval, Bits asks an approver before it takes action.
+3. Recommends next steps to fix the issue. If you set up remediation actions, Bits can take those actions after you approve them.
 
 Autonomous Ops handles service degradations, such as rising error rates or latency on an endpoint, as well as infrastructure issues across Kubernetes, Amazon ECS, AWS Lambda, and hosts.
 
@@ -90,25 +90,10 @@ Custom Automations run on a schedule. For automations that run in response to an
 
 ## Settings
 
-Use Settings to control what Bits knows about your organization, how Bits connects to your tools, and how your team uses Bits.
+Use Settings to control what Bits knows about your organization, how Bits connects to your tools, and how your team uses Bits:
 
-### Knowledge settings
-
-Knowledge settings give Bits context about your organization:
-
-- {{< ui >}}Bits.md{{< /ui >}}: Instructions and context that Bits uses in Chat and in investigations.
-- {{< ui >}}Skills{{< /ui >}}: Reusable domain knowledge and instructions from the [Skills Library][9].
-- {{< ui >}}Memories{{< /ui >}}: What Bits learns from your feedback to improve future investigations.
-
-### Administration settings
-
-Administration settings control how Bits connects to your tools and what Bits can do:
-
-- {{< ui >}}Integrations{{< /ui >}}: Connect Bits Investigation to your code repositories and to MCP servers. Use out-of-the-box integrations or connect custom MCP servers that your team runs.
-- {{< ui >}}Guardrails{{< /ui >}}: Set rules for when Bits can act on its own, must ask for approval, or can't act at all.
-- {{< ui >}}Action history{{< /ui >}}: Review the actions that Bits has taken.
-- {{< ui >}}Credit usage{{< /ui >}}: View [AI Credits][1] usage for each user and autonomous agent, and add tags from a reference table to your billing data.
-- {{< ui >}}Advanced{{< /ui >}}: Set rate limits for Bits Investigation.
+- **Knowledge** settings, such as Bits.md, skills, and memories, give Bits context about your organization.
+- **Administration** settings control integrations, guardrails, action history, credit usage, and rate limits.
 
 For more information, see [Bits AI Settings][4].
 
@@ -136,6 +121,5 @@ For more information, see [Bits AI Settings][4].
 [6]: /bits_ai/bits_investigation/
 [7]: /bits_ai/bits_remediation/
 [8]: /bits_ai/bits_autonomous_operations/
-[9]: /bits_ai/skills_library/
 [10]: /actions/agents/
 [11]: /actions/workflows/
