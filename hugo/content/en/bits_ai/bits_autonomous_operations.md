@@ -32,7 +32,7 @@ You can work with Autonomous Ops in Datadog, in Slack, or through the [Datadog M
 
 Bits detects issues from your existing telemetry and alerts, and adds monitoring where coverage is missing.
 
-When alerts fire in a scope that Bits watches, Bits triages them first. For example, if several related alerts fire in a Slack channel, Bits groups the duplicates and starts one investigation instead of several.
+When alerts fire in a scope that Bits watches, Bits triages them before it starts an investigation.
 
 ### Investigate
 
