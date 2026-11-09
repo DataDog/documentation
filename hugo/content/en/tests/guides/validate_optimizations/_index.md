@@ -84,7 +84,23 @@ Start from a local Git checkout of the repository. Install the project's test de
 ddtest onboard
 ```
 
-The command detects the language, test framework, and CI provider, then returns the next setup or validation action. Review the proposed setup before applying changes. To print detailed manual setup instructions, run `ddtest onboard --instructions`.
+The command detects the language, test framework, and CI provider, then returns the next setup or validation action.
+
+For supported JavaScript setups, preview the exact setup edits with `--apply`. For example:
+
+```bash
+ddtest onboard --framework jest --apply
+```
+
+After reviewing the edits, add `--yes` to apply them and run local validation:
+
+```bash
+ddtest onboard --framework jest --apply --yes
+```
+
+If validation succeeds, continue to [Review the results](#step-3-review-the-results).
+
+For setups without automatic editing, follow the setup instructions returned by `ddtest onboard`. To print detailed manual setup instructions, run `ddtest onboard --instructions`.
 
 If the repository contains multiple frameworks or CI providers, select one explicitly. For example:
 
