@@ -173,13 +173,14 @@ Real-time anomaly monitors support two cost types:
 To set up real-time anomaly notifications for your whole organization from a single form, see [Real-time anomaly notifications][106]. Create a monitor instead when you need a custom notification message or more than one configuration per provider.
 
 ### Prerequisites
-
 Real-time anomaly monitors require:
 
 - Estimated cost data for the cost type you want to monitor:
   - **AI cost**: LLM cost data from [Agent Observability][102]. Datadog estimates cost from token counts and provider pricing. See [Agent Observability costs][103].
   - **Cloud compute cost**: [Real-Time Costs][105] set up for the provider, including the Datadog Agent on your instances. See the [Real-Time Costs requirements][107].
 - At least 3 days of cost data. Datadog recommends 21 days for better detection quality.
+
+The {{< ui >}}real time{{< /ui >}} option appears after any real-time metric reports. Each cloud provider appears in the {{< ui >}}Scope to{{< /ui >}} list after its own metric reports.
 
 The {{< ui >}}real time{{< /ui >}} option appears after any real-time metric reports. Each cloud provider appears in the {{< ui >}}Scope to{{< /ui >}} list after its own metric reports.
 
