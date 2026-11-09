@@ -738,7 +738,7 @@ Talos Linux is an immutable OS with no shell, no host user or group database, an
 - Kubelet TLS verification must be disabled, because Talos uses self-signed Kubelet certificates
 - The namespace where the Agent is deployed must use the `privileged` Pod Security Standard
 
-Datadog Operator version 1.31.0 or later and the `datadog` Helm chart handle the host paths, the tracefs mount, and runtime compilation for you. Set Kubelet TLS verification and the Pod Security Standard yourself, as shown in the following sections. With Helm, enable Talos support with the `providers.talos` option shown in the Helm tab.
+Datadog Operator version 1.31.0 or later and the `datadog` Helm chart handle the host paths, the tracefs mount, and runtime compilation. You must manually configure Kubelet TLS verification and the Pod Security Standard, as shown in the following sections. With Helm, enable Talos support with the `providers.talos` option shown in the Helm tab.
 
 Talos exempts only `kube-system` from `baseline` enforcement, so label the target namespace before you deploy the Agent:
 
