@@ -256,6 +256,62 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
+### `get_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Retrieves a notebook's settings and its content as Markdown.
+
+- Show me the contents of notebook 12345678.
+- What did we write in the checkout latency investigation notebook?
+
+### `get_datadog_notebook_sections`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. Section IDs stay the same when the text changes, so you can use them to target a later edit.
+
+- List the sections in notebook 12345678.
+- Show me the root cause section of the incident notebook.
+
+### `create_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a notebook from Markdown content, with settings such as the time frame, tags, and owning teams. Graphs and other widgets are written as `dd-widget` code blocks in the Markdown.
+
+- Create a notebook to document the investigation into the checkout service latency spike.
+- Make a notebook for our weekly performance review with a graph of p95 latency for the web-store service.
+
+### `edit_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Edits a notebook by replacing exact text in its Markdown, changing its settings, or both.
+
+- Change the status line in notebook 12345678 from "Investigating" to "Resolved".
+- Set the time frame of the incident notebook to the last 4 hours.
+
+### `append_datadog_notebook`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Adds Markdown content to the end of a notebook, or to the end of one section.
+
+- Add today's findings to the end of notebook 12345678.
+- Add a follow-up item to the next steps section of the incident notebook.
+
+### `replace_datadog_notebook_section`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Replaces one section of a notebook with new Markdown and leaves the other sections unchanged.
+
+- Rewrite the summary section of notebook 12345678 based on the latest findings.
+- Replace the timeline section of the incident notebook with this updated timeline.
+
+### `update_datadog_notebook_widget`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Replaces the definition of one widget in a notebook and leaves the rest of the notebook unchanged.
+
+- Change the error rate graph in notebook 12345678 to group by service.
+- Switch the latency widget in the incident notebook to show the last 24 hours.
+
 ## Agent Builder
 
 Tools for [Bits Agent Builder][91], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, running agents, and inspecting their conversations.
@@ -2125,6 +2181,18 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
+
+## Notebooks
+
+Tools for working with [notebooks][57] beyond the notebook tools in the `core` toolset.
+
+### `clone_datadog_notebook`
+*Toolset: **notebooks***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Creates a copy of a notebook, including its content, time frame, template variables, and tags. The copy has the same access as the original unless you make it private. Copying a template creates a regular notebook from that template.
+
+- Make a copy of notebook 12345678 for this week's review.
+- Create a private copy of the incident response template notebook.
 
 ## Observability Pipelines
 
