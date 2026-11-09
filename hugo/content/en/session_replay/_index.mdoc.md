@@ -58,9 +58,11 @@ Browser Session Replay expands your user experience monitoring by allowing you t
 
 The RUM Browser SDK is [open source][3] and uses the open source [rrweb][4] project.
 
+<!-- Browser or Electron > Electron -->
 {% if equals($platform, "electron") %}
-In Electron applications, the Browser SDK running in renderer processes records Session Replay. Session Replay sampling and privacy options are set in the main process `init` call, and values set in the renderer are ignored. For details, see [Electron Advanced Configuration][14].
+In Electron applications, the RUM Browser SDK in each renderer process records in Session Replay. Session Replay sampling and privacy options are set in the main process `init` call, and values set in the renderer are ignored. For details, see [Electron initialization parameters][14].
 {% /if %}
+<!-- end Browser or Electron > Electron -->
 
 ### How the Session Replay recorder works
 
@@ -256,4 +258,4 @@ Learn more about [Dev Tools][11].
 [11]: /session_replay/dev_tools
 [12]: /session_replay/heatmaps
 [13]: /account_management/guide/secure-configuration/#synthetic-monitoring-and-rum
-[14]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/
+[14]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#initialization-parameters
