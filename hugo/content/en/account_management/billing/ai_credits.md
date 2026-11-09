@@ -19,6 +19,9 @@ further_reading:
 - link: "/actions/agents/"
   tag: "Documentation"
   text: "Bits Agent Builder"
+- link: "/synthetics/bits_testing/"
+  tag: "Documentation"
+  text: "Bits Testing"
 ---
 
 ## Overview
@@ -37,6 +40,7 @@ The following products consume AI Credits:
 | [Bits Investigation][3] | Automatically investigate alerts, correlate telemetry, identify root causes, summarize impact, and apply remediations. |
 | [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
 | [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
+| [Bits Testing][9] | Explore your application to map critical user journeys and generate Synthetic tests that close coverage gaps. |
 
 ## Pricing
 
@@ -108,3 +112,4 @@ AI Credits are available to all Datadog customers except:
 [6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles
 [8]: /account_management/billing/ai_credit_limits/
+[9]: /synthetics/bits_testing/
