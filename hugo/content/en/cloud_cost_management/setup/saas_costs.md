@@ -205,11 +205,13 @@ Create this key in the ChatGPT Admin Console, not the OpenAI API Platform admin-
 
 The organization ID must be the `org-...` ID used by the Costs API for the workspace's Enterprise usage. Do not enter a ChatGPT workspace UUID or a Datadog organization ID. If you do not know the organization ID, contact your workspace owner or OpenAI support.
 
-After cost data is collected, open [Cloud Cost Management Providers][103] to check the account, then select {{< ui >}}ChatGPT Enterprise{{< /ui >}} on the [AI cost summary page][104]. OpenAI API Platform costs use the separate OpenAI integration.
+When you enable Cloud Cost Management, Datadog collects up to 30 days of available historical costs. Subsequent collection runs hourly. Recent usage can appear later because of OpenAI reporting delays and Datadog processing.
+
+After cost data is collected, open [Cloud Cost Management Providers][103] to check the account. Then select {{< ui >}}ChatGPT Enterprise{{< /ui >}} on the [AI cost summary page][104]. OpenAI API Platform costs use the separate OpenAI integration.
 
 ### Cost reporting
 
-ChatGPT Enterprise reports usage across ChatGPT Chat, ChatGPT Work, and Codex. For credit-priced usage, Datadog uses the USD estimate supplied by OpenAI. For direct USD usage, Datadog uses the reported USD amount. Reported usage costs are not final invoice amounts. Do not add credits to USD costs.
+ChatGPT Enterprise reports usage across ChatGPT Chat, ChatGPT Work, and Codex. For credit-priced usage, Cloud Cost Management includes OpenAI's estimated USD amount in cost totals, rather than the number of credits consumed. For usage billed directly in USD, it includes the reported USD amount. These usage costs may differ from final invoice amounts.
 
 Model and user breakdowns depend on the fields OpenAI provides. For the available dimensions, see [Data collected][105].
 
