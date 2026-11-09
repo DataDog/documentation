@@ -122,6 +122,22 @@ Retrieves detailed information about a specific notebook by ID, including name, 
 - Get details for notebook abc-123-def.
 - Show me the contents of the debugging notebook from yesterday.
 
+### `get_datadog_notebook_v2`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Retrieves a notebook's settings and its content as Markdown.
+
+- Show me the contents of notebook 12345678.
+- What did we write in the checkout latency investigation notebook?
+
+### `get_datadog_notebook_sections`
+*Toolsets: **core**, **notebooks***\
+*Permissions Required: `Notebooks Read`*\
+Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. Section IDs stay the same when the text changes, so you can use them to target a later edit.
+
+- List the sections in notebook 12345678.
+- Show me the root cause section of the incident notebook.
+
 ### `search_datadog_notebooks`
 *Toolset: **core***\
 *Permissions Required: `Notebooks Read`*\
@@ -248,30 +264,6 @@ Creates a new Datadog notebook.
 - Create a notebook to document the investigation into the checkout service latency spike.
 - Make a new notebook for our weekly performance review.
 
-### `edit_datadog_notebook`
-*Toolset: **core***\
-*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
-Edits an existing Datadog notebook.
-
-- Add a section to notebook abc-123-def with the latest log analysis results.
-- Update the incident response notebook with today's findings.
-
-### `get_datadog_notebook_v2`
-*Toolsets: **core**, **notebooks***\
-*Permissions Required: `Notebooks Read`*\
-Retrieves a notebook's settings and its content as Markdown.
-
-- Show me the contents of notebook 12345678.
-- What did we write in the checkout latency investigation notebook?
-
-### `get_datadog_notebook_sections`
-*Toolsets: **core**, **notebooks***\
-*Permissions Required: `Notebooks Read`*\
-Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. Section IDs stay the same when the text changes, so you can use them to target a later edit.
-
-- List the sections in notebook 12345678.
-- Show me the root cause section of the incident notebook.
-
 ### `create_datadog_notebook_v2`
 *Toolsets: **core**, **notebooks***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
@@ -279,6 +271,14 @@ Creates a notebook from Markdown content, with settings such as the time frame, 
 
 - Create a notebook to document the investigation into the checkout service latency spike.
 - Make a notebook for our weekly performance review with a graph of p95 latency for the web-store service.
+
+### `edit_datadog_notebook`
+*Toolset: **core***\
+*Permissions Required: `Notebooks Read` and `Notebooks Write`*\
+Edits an existing Datadog notebook.
+
+- Add a section to notebook abc-123-def with the latest log analysis results.
+- Update the incident response notebook with today's findings.
 
 ### `edit_datadog_notebook_v2`
 *Toolsets: **core**, **notebooks***\
