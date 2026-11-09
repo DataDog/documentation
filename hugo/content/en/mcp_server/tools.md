@@ -269,7 +269,7 @@ Creates a new Datadog notebook.
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
 Creates a notebook from Markdown content, with settings such as the time frame, tags, and owning teams. The Markdown represents graphs and other widgets as `dd-widget` code blocks.
 
-- Create a notebook to document the investigation into the checkout service latency spike.
+- Create a notebook from these investigation notes, with a graph of error rates for the checkout service.
 - Make a notebook for our weekly performance review with a graph of p95 latency for the web-store service.
 
 ### `edit_datadog_notebook`
