@@ -1,5 +1,5 @@
 ---
-title: Install BYOC with the Datadog Operator
+title: Install BYOC Logs with the Datadog Operator
 description: Deploy a new BYOC cluster and Observability Pipelines Workers on AWS EKS with the Datadog Operator.
 further_reading:
 - link: "/containers/datadog_operator/crd_byoccluster/"
@@ -23,14 +23,14 @@ The Operator uses default images for the BYOC engine and Workers. Upgrading the 
 
 ## Prerequisites
 
-- Access to BYOC and Observability Pipelines in your Datadog organization.
+- Access to BYOC Logs and Observability Pipelines in your Datadog organization.
 - An EKS cluster that meets the [BYOC Kubernetes requirements][2], with `kubectl` access and Helm installed.
 - An S3 bucket and a PostgreSQL database reachable from the BYOC pods. The Operator does not provision these services. See the [AWS prerequisites][4].
 - An IAM role with the [required S3 permissions][5] and an IRSA trust policy for the BYOC service account.
 - A persistent-volume provisioner and a StorageClass, either set as the default or specified in the volume claim templates.
 - Outbound access to Datadog and image registries, plus connectivity to S3 and PostgreSQL. Log sources must be able to reach the Worker's Service.
 
-The example uses one replica per required component. Size [resources, replicas, and storage][7] for your workload; omitted settings use the [Operator defaults][8].
+The example uses one replica per required component. Size [resources, replicas, and storage][7] for your workload. Omitted settings use the [Operator defaults][7].
 
 ### Configure the IAM role
 
@@ -101,7 +101,7 @@ kubectl get pods -n datadog
 
 ## Create the pipeline
 
-Create the Observability Pipeline before applying the BYOC resource. **The Operator deploys Workers for an existing pipeline; it does not create the pipeline.**
+Create the Observability Pipeline before applying the BYOC resource. The Operator deploys Workers for an existing pipeline. It doesn't create the pipeline.
 
 1. Open [Observability Pipelines][10] and create a pipeline.
 2. Choose a [source][11].
@@ -189,7 +189,7 @@ Apply the resource:
 kubectl apply -f byoc-cluster.yaml
 ```
 
-The Operator configures the Worker destination as the cluster's indexer endpoint and inherits the shared Datadog site and API key. Do not install a separate Worker Helm release for the same entry in `spec.components.pipelines`.
+The Operator sets the Worker destination to the cluster's indexer endpoint. The Worker inherits the shared Datadog site and API key. Do not install a separate Worker Helm release for the same entry in `spec.components.pipelines`.
 
 ## Verify the deployment
 
@@ -205,13 +205,13 @@ kubectl wait --for=condition=Available \
 
 Check that `Reconciled` and `Available` are `True` for the resource's current generation. `Available` aggregates workload health; it does not verify that a log has reached BYOC. If the wait times out, inspect the conditions, pod events, and PVC status using the [troubleshooting guide][14].
 
-In Datadog, open the BYOC console and confirm that the cluster is connected.
+In Datadog, open the [**BYOC Logs** page][20] and confirm that the cluster is connected.
 
 ### Send a test log
 
 Send a test log through the source configured in your pipeline. For sources that send logs to the Worker, use the Service address `byoc-demo-pipeline-default.byoc.svc.cluster.local` with the configured source port and protocol. This Service is accessible from inside the Kubernetes cluster. Follow the [source documentation][11] for sender configuration.
 
-In [Log Explorer][15], select the cluster's BYOC index and confirm that the test log appears.
+In [Log Explorer][15], select the cluster's BYOC Logs index and confirm that the test log appears.
 
 ## Configure a production deployment
 
@@ -231,7 +231,7 @@ kubectl delete datadogbyoccluster byoc-demo -n byoc
 
 The Operator waits for managed Workers to be deleted before deleting the indexer. Keep the Operator running until cleanup finishes. Shutdown ordering does not guarantee that buffers drain within their configured termination grace period.
 
-The S3 bucket and PostgreSQL database are external resources and are not deleted by this operation. Inspect remaining PVCs before any separate storage cleanup; they can contain buffered data. Delete the Operator only after its managed resources have finished cleanup and no other resources depend on it.
+Deleting the cluster doesn't delete the corresponding S3 bucket or PostgreSQL database. Inspect remaining PVCs before any separate storage cleanup; they can contain buffered data. Delete the Operator only after its managed resources have finished cleanup and no other resources depend on it.
 
 ## Further reading
 
@@ -256,3 +256,4 @@ The S3 bucket and PostgreSQL database are external resources and are not deleted
 [17]: /byoc-logs/operate/autoscaling/#configure-autoscaling-with-the-operator
 [18]: /byoc-logs/operate/monitoring/
 [19]: /containers/datadog_operator/crd_byoccluster/#pipelines-and-ports
+[20]: https://app.datadoghq.com/byoc-logs

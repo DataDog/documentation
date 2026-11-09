@@ -180,7 +180,7 @@ echo ""
 
 ## Installation steps
 
-The following installation, verification, and uninstall commands apply to the BYOC Helm chart. For an Operator deployment, follow [Install BYOC with the Datadog Operator][8].
+The following installation, verification, and uninstall commands apply to the BYOC Logs Helm chart. For an Operator deployment, follow [Install BYOC Logs with the Datadog Operator][8].
 
 1. [Install the BYOC Logs Helm chart](#install-the-byoc-logs-helm-chart)
 2. [Verify installation](#verification)
