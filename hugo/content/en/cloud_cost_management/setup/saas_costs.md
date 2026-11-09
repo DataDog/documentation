@@ -190,8 +190,8 @@ After you save your configuration, Datadog begins polling Anthropic usage and co
 Use a ChatGPT Enterprise workspace with access to OpenAI's Costs API. A workspace owner or admin must create the key.
 
 1. Open the ChatGPT Admin Console and select the ChatGPT Enterprise workspace.
-2. Navigate to **Credentials > Admin keys > Create new admin key**.
-3. If you are a workspace owner, select **Custom permissions**. Set **Costs** to **Read** and leave the other permission categories set to **None**.
+2. Navigate to {{< ui >}}Credentials{{< /ui >}} > {{< ui >}}Admin keys{{< /ui >}} > {{< ui >}}Create new admin key{{< /ui >}}.
+3. If you are a workspace owner, select {{< ui >}}Custom permissions{{< /ui >}}. Set {{< ui >}}Costs{{< /ui >}} to {{< ui >}}Read{{< /ui >}} and leave the other permission categories set to {{< ui >}}None{{< /ui >}}.
 4. Create the key and copy its secret to a secure location.
 
 Create this key in the ChatGPT Admin Console, not the OpenAI API Platform admin-key console. For details, see the [ChatGPT Enterprise integration setup][101].
@@ -205,18 +205,19 @@ Create this key in the ChatGPT Admin Console, not the OpenAI API Platform admin-
 
 The organization ID must be the `org-...` ID used by the Costs API for the workspace's Enterprise usage. Do not enter a ChatGPT workspace UUID or a Datadog organization ID. If you do not know the organization ID, contact your workspace owner or OpenAI support.
 
-After cost data is collected, open [Cloud Cost Management Providers][103] to check the account, then select **ChatGPT Enterprise** on the [AI cost summary page][104]. OpenAI API Platform costs use the separate OpenAI integration.
+After cost data is collected, open [Cloud Cost Management Providers][103] to check the account, then select {{< ui >}}ChatGPT Enterprise{{< /ui >}} on the [AI cost summary page][104]. OpenAI API Platform costs use the separate OpenAI integration.
 
 ### Cost reporting
 
 ChatGPT Enterprise reports usage across ChatGPT Chat, ChatGPT Work, and Codex. For credit-priced usage, Datadog uses the USD estimate supplied by OpenAI. For direct USD usage, Datadog uses the reported USD amount. Reported usage costs are not final invoice amounts. Do not add credits to USD costs.
 
-Model and user breakdowns depend on the fields OpenAI provides. For the available dimensions, see [Data collected](#data-collected).
+Model and user breakdowns depend on the fields OpenAI provides. For the available dimensions, see [Data collected][105].
 
 [101]: /integrations/chatgpt-enterprise/#setup
 [102]: https://app.datadoghq.com/integrations/chatgpt-enterprise
 [103]: https://app.datadoghq.com/cost/settings/providers
 [104]: /cloud_cost_management/ai_costs/
+[105]: #data-collected
 
 {{% /tab %}}
 
