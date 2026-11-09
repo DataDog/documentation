@@ -5588,6 +5588,16 @@ components:
         xray_services:
           $ref: "#/components/schemas/XRayServicesList"
       type: object
+    AccessPolicyEffect:
+      description: The effect applied when an email address matches the policy. Deny policies take precedence over allow policies.
+      enum:
+        - allow
+        - deny
+      example: allow
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
     AccessTokenListItem:
       description: An access token entry returned by the personal access tokens list endpoint. May represent either a personal or a service access token.
       properties:
@@ -32482,6 +32492,38 @@ components:
       type: string
       x-enum-varnames:
         - CREATE_SNAPSHOT
+    CreateStatusPageEmailAccessPolicyRequest:
+      description: Request object for creating a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestData"
+      required:
+        - data
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestData:
+      description: The data object for creating a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - type
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestDataAttributes:
+      description: Attributes for creating a status page email access policy.
+      properties:
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy. Supports an exact address (`user@example.com`), all addresses in a domain (`@example.com`), or all addresses in subdomains (`@*.example.com`).
+          example: "@example.com"
+          type: string
+      required:
+        - effect
+        - pattern
+      type: object
     CreateStatusPageRequest:
       description: Request object for creating a status page.
       example:
@@ -32559,7 +32601,7 @@ components:
             $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems"
           type: array
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
@@ -32655,15 +32697,17 @@ components:
           $ref: "#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType"
       type: object
     CreateStatusPageRequestDataAttributesType:
-      description: The type of the status page controlling how the status page is accessed.
+      description: The type of the status page controlling how the status page is accessed. Public pages are accessible to anyone, internal pages are accessible to authenticated users in the Datadog organization, and private pages are accessible only to users matching an allow email access policy and no deny email access policy.
       enum:
         - public
         - internal
+        - private
       example: public
       type: string
       x-enum-varnames:
         - PUBLIC
         - INTERNAL
+        - PRIVATE
     CreateStatusPageRequestDataAttributesVisualizationLayout:
       description: The layout of components on the status page. Defaults to `list`. `grid` requires `visualization_type` to be `component_name_only`; changing `visualization_type` to any other value resets the layout to `list`.
       enum:
@@ -104854,7 +104898,7 @@ components:
           example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
           type: string
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
@@ -136665,7 +136709,7 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
@@ -136848,7 +136892,7 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
@@ -137001,6 +137045,143 @@ components:
       type: string
       x-enum-varnames:
         - STATUS_PAGES
+    StatusPageEmailAccessPolicyArrayResponse:
+      description: Response object for a list of status page email access policies.
+      properties:
+        data:
+          description: A list of status page email access policy data objects.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+          type: array
+        included:
+          description: Resources related to the email access policies, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyData:
+      description: The data object for a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataAttributes"
+        id:
+          description: The ID of the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationships"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - id
+        - relationships
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataAttributes:
+      description: Attributes of a status page email access policy.
+      properties:
+        created_at:
+          description: Timestamp of when the email access policy was created.
+          example: "2026-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy.
+          example: "@example.com"
+          type: string
+      required:
+        - created_at
+        - effect
+        - pattern
+      type: object
+    StatusPageEmailAccessPolicyDataRelationships:
+      description: Relationships of a status page email access policy.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser"
+        status_page:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPage"
+      required:
+        - created_by_user
+        - status_page
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser:
+      description: The Datadog user who created the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData:
+      description: The data object identifying the Datadog user who created the email access policy.
+      properties:
+        id:
+          description: The ID of the Datadog user who created the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPage:
+      description: The status page associated with the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPageData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPageData:
+      description: The data object identifying the status page associated with the email access policy.
+      properties:
+        id:
+          description: The ID of the status page associated with the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPageDataType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyIncluded:
+      description: An included resource related to a status page email access policy.
+      oneOf:
+        - $ref: "#/components/schemas/StatusPagesUser"
+        - $ref: "#/components/schemas/StatusPageAsIncluded"
+    StatusPageEmailAccessPolicyResponse:
+      description: Response object for a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+        included:
+          description: Resources related to the email access policy, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyType:
+      default: email_access_policies
+      description: Status page email access policy resource type.
+      enum:
+        - email_access_policies
+      example: email_access_policies
+      type: string
+      x-enum-varnames:
+        - EMAIL_ACCESS_POLICIES
     StatusPagesComponent:
       description: Response object for a single component.
       properties:
@@ -262111,6 +262292,236 @@ paths:
         operator: AND
         permissions:
           - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email:
+    get:
+      description: Lists the email access policies for a private status page.
+      operationId: ListEmailAccessPolicies
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00.000Z"
+                          effect: allow
+                          pattern: "@example.com"
+                        id: 00000000-0000-0000-0000-000000000001
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000003
+                              type: users
+                          status_page:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: status_pages
+                        type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyArrayResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: List email access policies
+      tags:
+        - Status Pages
+      x-menu-order: 38
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_read
+    post:
+      description: Creates an email access policy for a private status page.
+      operationId: CreateEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      effect: allow
+                      pattern: "@example.com"
+                    type: email_access_policies
+            schema:
+              $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00.000Z"
+                        effect: allow
+                        pattern: "@example.com"
+                      id: 00000000-0000-0000-0000-000000000001
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000003
+                            type: users
+                        status_page:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000002
+                            type: status_pages
+                      type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Create an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 37
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email/{policy_id}:
+    delete:
+      description: Deletes an email access policy from a private status page.
+      operationId: DeleteEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: The ID of the email access policy.
+          in: path
+          name: policy_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Delete an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 39
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
   /api/v2/statuspages/{page_id}/components:
     get:
       description: Lists all components for a status page.
@@ -263802,7 +264213,7 @@ paths:
           - status_pages_incident_write
   /api/v2/statuspages/{page_id}/publish:
     post:
-      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.
       operationId: PublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -263822,6 +264233,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Publish status page
       tags:
@@ -263832,9 +264244,10 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/statuspages/{page_id}/unpublish:
     post:
-      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.
       operationId: UnpublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -263854,6 +264267,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Unpublish status page
       tags:
@@ -263864,6 +264278,7 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/stegadography/get-widgets:
     post:
       description: |-

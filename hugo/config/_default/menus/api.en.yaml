@@ -24390,6 +24390,42 @@ menu:
           - ListComponents
         unstable: []
         order: 10
+    - name: Delete an email access policy
+      url: /api/latest/status-pages/delete-an-email-access-policy/
+      identifier: status-pages-delete-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEmailAccessPolicy
+        unstable: []
+        order: 39
+    - name: Create an email access policy
+      url: /api/latest/status-pages/create-an-email-access-policy/
+      identifier: status-pages-create-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEmailAccessPolicy
+        unstable: []
+        order: 37
+    - name: List email access policies
+      url: /api/latest/status-pages/list-email-access-policies/
+      identifier: status-pages-list-email-access-policies
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEmailAccessPolicies
+        unstable: []
+        order: 38
     - name: Update status page
       url: /api/latest/status-pages/update-status-page/
       identifier: status-pages-update-status-page

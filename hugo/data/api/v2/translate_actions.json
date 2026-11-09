@@ -7758,6 +7758,20 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
   },
+  "ListEmailAccessPolicies": {
+    "description": "Lists the email access policies for a private status page.",
+    "summary": "List email access policies"
+  },
+  "CreateEmailAccessPolicy": {
+    "description": "Creates an email access policy for a private status page.",
+    "summary": "Create an email access policy",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a status page email access policy."
+  },
+  "DeleteEmailAccessPolicy": {
+    "description": "Deletes an email access policy from a private status page.",
+    "summary": "Delete an email access policy"
+  },
   "ListComponents": {
     "description": "Lists all components for a status page.",
     "summary": "List components"
@@ -7895,11 +7909,11 @@
     "request_schema_description": "Request object for editing a maintenance update."
   },
   "PublishStatusPage": {
-    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.",
     "summary": "Publish status page"
   },
   "UnpublishStatusPage": {
-    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.",
     "summary": "Unpublish status page"
   },
   "GetStegadographyWidgets": {
