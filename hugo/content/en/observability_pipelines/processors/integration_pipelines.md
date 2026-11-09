@@ -27,7 +27,7 @@ For every log that matches the processor's filter:
 1. The Worker normalizes and preprocesses the log, regardless of whether it matches an integration pipeline. You can configure preprocessing for your specific log attributes. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 1. The Worker uses the normalized log's `source` to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
 1. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
-1. Enabled [custom pipelines](#custom-pipelines) process the log, in order, if it matches their filter.
+1. Each enabled [custom pipeline](#custom-pipelines) processes the log, in order, if the log matches its filter.
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel with the Normalization & Preprocessing, Integration Pipelines, and Custom Pipelines tabs, listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
@@ -38,7 +38,7 @@ For every log that matches the processor's filter:
 - Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log attribute, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those attributes.
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
-- The integration pipelines catalog includes only out-of-the-box integration pipelines included with the Worker. To run your own Log Management pipelines, import them as [custom pipelines](#custom-pipelines).
+- The integration pipelines catalog includes only the out-of-the-box pipelines bundled with the Worker. To run your own Log Management pipelines, import them as [custom pipelines](#custom-pipelines).
 
 ## Setup
 
@@ -48,7 +48,7 @@ To set up an Integration Pipelines processor:
     - Only matching logs are normalized and processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. (Optional) Click {{< ui >}}Normalization & Preprocessing{{< /ui >}} to configure the reserved attribute mappings the Worker uses for preprocessing. See [Preprocessing options](#preprocessing-options) for more information.
-1. Click {{< ui >}}Edit Pipelines{{< /ui >}} to view a list of integration pipelines that have been enabled or disabled.
+1. Click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Integration Pipelines{{< /ui >}} row to view a list of integration pipelines that have been enabled or disabled.
 1. In the {{< ui >}}Manage Integration Pipelines{{< /ui >}} panel, enable or disable integration pipelines. When the {{< ui >}}Enabled{{< /ui >}} button is selected, the list shows all enabled integration pipelines.
     {{< img src="observability_pipelines/processors/integration_pipelines_enabled_disabled.png" alt="Manage Integration Pipelines panel with the Enabled and Disabled toggle highlighted." style="width:100%;" >}}
     - To enable integration pipelines:
@@ -83,7 +83,7 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 
 ## Custom pipelines
 
-Custom pipelines are pipelines you import from Log Management to process logs that no integration pipeline covers. Custom pipelines run in order, after integration pipelines, on every log that matches their filter.
+Custom pipelines are Log Management pipelines you import to process logs that no integration pipeline covers. They run in order, after integration pipelines, on every log that matches their filter.
 
 **Note**: Custom pipelines require Worker version 2.25.0 or later. Upgrade all Workers in the pipeline before deploying custom pipelines.
 
