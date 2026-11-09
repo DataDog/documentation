@@ -1790,10 +1790,16 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Kubernetes Ops Center
+
+Tools for inspecting the health and load of [Kubernetes][55] control plane components.
+
 ### `kubernetes-ops-center-api-server-client-load`
 *Toolset: **kubernetes-ops-center***\
 *Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
-Inspects Kubernetes API server load for a cluster. Use this tool to determine whether the API server is overloaded and which clients send the most requests. The tool compares API server request volume with clients ranked from Kubernetes API audit logs, such as service accounts, user agents, or source IPs. When audit logs aren't available, the tool ranks clients by `<METRIC_NAME>`, using the `<TAG>` tag to identify each client. Metric-based results show which clients send the most requests, but they don't show which client caused rate-limited (`429`) responses.
+Inspects Kubernetes API server load for a cluster. Use this tool to determine whether the API server is overloaded and which clients send the most requests. The tool compares API server request volume with clients ranked from Kubernetes API audit logs, such as service accounts, user agents, or source IPs. Audit logs give the most reliable results. To use them, [collect Kubernetes audit logs in Datadog][100].
+
+When audit logs aren't available, the tool ranks clients by a client-side request count metric that you specify, such as a metric ending in `.rest_client_requests_total`, `.rest_client_requests_total.count`, or `.client.http.requests`. You also specify a tag on that metric that identifies each client, such as the workload or component that emits it. Metric-based results show which clients send the most requests, but they don't show which client caused rate-limited (`429`) responses.
 
 - Is the API server in cluster `prod` overloaded, and which clients are sending the most requests?
 - Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
@@ -3705,6 +3711,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
+[100]: /integrations/kubernetes_audit_logs/
 
 ## Further reading
 
