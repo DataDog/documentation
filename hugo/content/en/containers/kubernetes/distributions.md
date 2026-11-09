@@ -756,7 +756,7 @@ For control plane metrics, see [Kubernetes on Talos Linux][14].
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Operator detects Talos from the OS image of the node where the Operator pod runs, and applies the Talos configuration to the whole cluster. On a cluster with both Talos and non-Talos nodes, the result depends on where the Operator pod is scheduled. To avoid this, target the Talos nodes with a [DatadogAgentProfile][15], or opt out of detection by setting the `agent.datadoghq.com/cluster-provider` annotation to default on the `DatadogAgent`.
+The Operator detects Talos from the OS image of the node where the Operator pod runs, and applies the Talos configuration to the whole cluster. This suits the usual Talos deployment, in which every node runs Talos. In the uncommon case of a cluster that mixes Talos and non-Talos nodes, the result depends on where the Operator pod is scheduled. Target the Talos nodes with a [DatadogAgentProfile][15] instead, or opt out of detection by setting the `agent.datadoghq.com/cluster-provider` annotation to `default` on the `DatadogAgent`.
 
 DatadogAgent Kubernetes Resource:
 
