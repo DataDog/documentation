@@ -60,7 +60,7 @@ Add and configure the Jira step:
    ```
    The CPU usage is above the 95% threshold for {{ Trigger.hostname }}
 
-   Please investigate - see this Datadog Dashboard to view all workflow executions:
+   Investigate - see this Datadog Dashboard to view all workflow runs:
    https://app.datadoghq.com/dash/integration/workflow_automation?refresh_mode=sliding&from_ts=1698164453793&to_ts=1698168053793&live=true.
 
    The workflow that created this Jira issue is
@@ -127,7 +127,7 @@ After you trigger the workflow, you can watch its progress and debug failed step
 
 To make edits to your workflow, click {{< ui >}}Configuration{{< /ui >}}. To get back to the run history view, click {{< ui >}}Run History{{< /ui >}}.
 
-To view a list of previous workflow executions and whether each execution succeeded or failed, use the initial run history view. Return to the initial execution history at any time by clicking on the workflow canvas.
+To view a list of previous workflow runs and whether each run succeeded or failed, use the initial run history view. Return to the initial run history at any time by clicking on the workflow canvas.
 
 ## Conclusion
 

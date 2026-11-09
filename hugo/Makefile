@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server server-proxied start start-no-pre-build start-proxied start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
+.PHONY: help clean-all clean start-preserve-build dependencies server server-proxied start start-no-pre-build start-proxied start-docker stop-docker all-examples clean-examples placeholders config derefs vector_data websites_sources_data build-api-derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -29,7 +29,6 @@ EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-clie
 # Set defaults when no makefile.config or missing entries
 GITHUB_TOKEN ?= ""
 FULL_BUILD ?= false
-CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 # Set default S3 path for websites sources data
 FF_S3_PATH ?= "staging"
@@ -144,7 +143,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
+	make hugpython all-examples node_modules build-cdocs websites_sources_data build-api-derefs
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -166,7 +165,7 @@ vector_data: integrations_data/extracted/vector
 	node ./assets/scripts/reference-process.js
 
 # only build placeholders in ci
-placeholders: hugpython update_pre_build
+placeholders: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/"
 
@@ -176,9 +175,6 @@ hugpython: local/etc/requirements3.txt
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
 		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.109858308-py3-none-any.whl; \
 	fi
-
-update_pre_build: hugpython
-	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py
 
 # Only to be run during deployment
 # Updates hugo preview config file for feature branch naming scheme
@@ -273,11 +269,9 @@ backup-config:
 	@tmp_backup=$$(mktemp -d) && \
 	mkdir -p $$tmp_backup/build_backup && \
 	if [ -d "$(BUILD_SCRIPTS_PATH)/configurations" ]; then \
-		for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
-			if [ -f "$(BUILD_SCRIPTS_PATH)/configurations/$$config" ]; then \
-				cp "$(BUILD_SCRIPTS_PATH)/configurations/$$config" "$$tmp_backup/build_backup/$$config"; \
-			fi \
-		done; \
+		if [ -f "$(BUILD_SCRIPTS_PATH)/configurations/integration_merge.yaml" ]; then \
+			cp "$(BUILD_SCRIPTS_PATH)/configurations/integration_merge.yaml" "$$tmp_backup/build_backup/integration_merge.yaml"; \
+		fi \
 	fi && \
 	if [ -d "$(PY_PATH)" ]; then \
 	    mkdir -p $$tmp_backup/py_backup && \
@@ -301,11 +295,9 @@ restore-config:
 		fi && \
 		if [ -d "$$backup_dir/build_backup" ]; then \
 			mkdir -p $(BUILD_SCRIPTS_PATH)/configurations && \
-			for config in pull_config_preview.yaml pull_config.yaml integration_merge.yaml; do \
-				if [ -f "$$backup_dir/build_backup/$$config" ]; then \
-					cp "$$backup_dir/build_backup/$$config" "$(BUILD_SCRIPTS_PATH)/configurations/$$config"; \
-				fi \
-			done; \
+			if [ -f "$$backup_dir/build_backup/integration_merge.yaml" ]; then \
+				cp "$$backup_dir/build_backup/integration_merge.yaml" "$(BUILD_SCRIPTS_PATH)/configurations/integration_merge.yaml"; \
+			fi \
 		fi && \
 		rm -rf $$backup_dir && \
 		rm .backup_path; \

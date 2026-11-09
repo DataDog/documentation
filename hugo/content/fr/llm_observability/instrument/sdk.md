@@ -14,7 +14,7 @@ aliases:
 - /fr/llm_observability/setup
 - /fr/llm_observability/instrumentation/sdk/
 description: Documentation de référence pour les SDK Agent Observability pour Python,
-  Node.js et Java, couvrant l'instrumentation automatique et manuelle.
+  Node.js, Java et Go (expérimental), couvrant l'instrumentation automatique et manuelle.
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
@@ -24,6 +24,10 @@ title: Référence du SDK Agent Observability.
 ## Présentation {#overview}
 
 Les SDK Agent Observability fournissent une instrumentation automatique ainsi que des API d'instrumentation manuelle pour offrir de l'observabilité et des insights sur vos applications LLM.
+
+Des SDK sont disponibles pour Python, Node.js, Java et Go (expérimental). La couverture des fonctionnalités varie selon le langage : les sections qui n'affichent pas d'onglet pour votre langage ne sont pas prises en charge par ce SDK.
+
+Le SDK Go est **expérimental**. Il fournit uniquement une instrumentation manuelle, car `dd-trace-go` ne dispose d'aucune intégration de fournisseur LLM.
 
 ## Configuration {#setup}
 
@@ -53,6 +57,15 @@ Les SDK Agent Observability fournissent une instrumentation automatique ainsi qu
 - Vous avez téléchargé le dernier [`dd-trace-java` JAR][1]. Le SDK Agent Observability est pris en charge dans `dd-trace-java` v1.51.0+ (Java 8+ requis).
 
 [1]: https://github.com/DataDog/dd-trace-java
+{{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+<div class="alert alert-warning">Le SDK Go est expérimental. Son API pourrait changer dans une future version.</div>
+
+- Le module `dd-trace-go/v2` le plus récent est installé. Le SDK Agent Observability est pris en charge dans `dd-trace-go` v2.3.0+ (v2.10.0+ recommandé pour l'ensemble des fonctionnalités) :
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2
+   ```
+   **Remarque** : `dd-trace-go` v2.8.0 et versions ultérieures nécessitent Go 1.25+. Les versions v2.3.0 à v2.7.0 nécessitent Go 1.24+.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -184,6 +197,44 @@ Vous pouvez fournir les paramètres suivants sous forme de variables d'environne
 
 [1]: /fr/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Le SDK Go ne dispose pas d'un wrapper en ligne de commande équivalent à `ddtrace-run`, car le traceur est démarré à partir du code de votre application. Fournissez les paramètres suivants sous forme de variables d'environnement, puis appelez `tracer.Start()`. Voir [Configuration dans le code](#in-code-setup).
+
+{{< code-block lang="shell">}}
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+#### Variables d'environnement pour la configuration en ligne de commande {#environment-variables-for-command-line-setup-2}
+
+`DD_SITE`
+:  requis - _chaîne_
+<br />Site Datadog de destination pour la soumission de données LLM. Votre site est {{< region-param key="dd_site" code="true" >}}.
+
+`DD_LLMOBS_ENABLED`
+: requis - _entier ou chaîne_
+<br />Basculez pour activer la soumission de données à Agent Observability. Doit être défini sur `1` ou `true`. Équivalent à `tracer.WithLLMObsEnabled(true)`.
+
+`DD_LLMOBS_ML_APP`
+:  optionnel - _chaîne_
+<br />Le nom de votre application, service ou projet LLM, sous lequel toutes les traces et tous les spans sont regroupés. Cela permet de distinguer les différentes applications ou expériences. Consultez [les directives de nommage des applications](#application-naming-guidelines) pour connaître les caractères autorisés et les autres contraintes. Pour remplacer cette valeur pour un span racine donné, consultez [Tracer plusieurs applications](#tracing-multiple-applications). S'il n'est pas fourni, la valeur par défaut est celle de [`DD_SERVICE`][1]. Équivalent à `tracer.WithLLMObsMLApp()`.
+
+`DD_LLMOBS_AGENTLESS_ENABLED`
+: facultatif - _entier ou chaîne_ - **par défaut**: `false`
+<br />Requis uniquement si vous n'utilisez pas le Datadog Agent, auquel cas cela doit être défini sur `1` ou `true`. Équivalent à `tracer.WithLLMObsAgentlessEnabled()`.
+
+`DD_LLMOBS_PROJECT_NAME`
+:  optionnel - _chaîne_
+<br />Le nom du projet sous lequel [les jeux de données et les expériences](/llm_observability/improve/experiments/) sont regroupés. Équivalent à `tracer.WithLLMObsProjectName()`.
+
+`DD_API_KEY`
+: optionnel - _ chaîne_
+<br />Votre clé d'API Datadog. Requis uniquement si vous n'utilisez pas le Datadog Agent.
+
+**Remarque** : Le SDK Go ne prend pas en charge `DD_LLMOBS_SAMPLE_RATE`. Voir [Échantillonnage de traces](#trace-sampling).
+
+[1]: /fr/getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
@@ -215,7 +266,7 @@ LLMObs.enable(
 
 `ml_app`
 :  optionnel - _chaîne_
-<br />Le nom de votre application, service ou projet LLM, sous lequel toutes les traces et tous les spans sont regroupés. Cela permet de distinguer les différentes applications ou expériences. Consultez [les directives de nommage des applications](#application-naming-guidelines) pour connaître les caractères autorisés et les autres contraintes. Pour remplacer cette valeur pour une trace donnée, consultez [Tracer plusieurs applications](#tracing-multiple-applications). Si aucune valeur n'est fournie, la valeur par défaut est `DD_LLMOBS_ML_APP`.
+<br />Le nom de votre application, service ou projet LLM, sous lequel toutes les traces et tous les spans sont regroupés. Cela permet de distinguer les différentes applications ou expériences. Consultez [les directives de nommage des applications](#application-naming-guidelines) pour connaître les caractères autorisés et les autres contraintes. Pour remplacer cette valeur pour une trace donnée, consultez [le traçage de plusieurs applications](#tracing-multiple-applications). S'il n'est pas fourni, la valeur par défaut est `DD_LLMOBS_ML_APP`.
 
 `integrations_enabled` - **par défaut**: `true`
 : optionnel - _booléen_
@@ -223,7 +274,7 @@ LLMObs.enable(
 
 `agentless_enabled`
 : optionnel - _booléen_ - **par défaut** : `false`
-<br />Requis uniquement si vous n'utilisez pas le Datadog Agent, auquel cas cela doit être défini sur `True`. Ceci configure la bibliothèque `ddtrace` pour ne pas envoyer de données nécessitant le Datadog Agent. S'il n'est pas fourni, la valeur par défaut est celle de `DD_LLMOBS_AGENTLESS_ENABLED`.
+<br />Requis uniquement si vous n'utilisez pas le Datadog Agent, auquel cas cela doit être défini sur `True`. Ceci configure la bibliothèque `ddtrace` pour ne pas envoyer de données nécessitant le Datadog Agent. S'il n'est pas fourni, la valeur par défaut est `DD_LLMOBS_AGENTLESS_ENABLED`.
 
 `site`
 : optionnel - _ chaîne_
@@ -295,7 +346,7 @@ const llmobs = tracer.llmobs;
 
 `env`
 :  optionnel - _chaîne_
-<br />Le nom de l'environnement de votre application (exemples: `prod`, `pre-prod`, `staging`). S'il n'est pas fourni, la valeur par défaut est `DD_ENV`.
+<br />Le nom de l'environnement de votre application (exemples: `prod`, `pre-prod`, `staging`). S'il n'est pas fourni, la valeur par défaut est celle de `DD_ENV`.
 
 `service`
 :  optionnel - _chaîne_
@@ -310,6 +361,54 @@ Définissez les valeurs suivantes en tant que variables d'environnement. Elles n
 <br />Votre clé d'API Datadog. Requis uniquement si vous n'utilisez pas le Datadog Agent.
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Activez Agent Observability en transmettant les options d'observabilité de l'agent à `tracer.Start()`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"log"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+		tracer.WithLLMObsAgentlessEnabled(true),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
+
+##### Options {#options}
+
+`tracer.WithLLMObsEnabled`
+: facultatif - _bool_
+<br />Basculez pour activer la soumission de données à Agent Observability. Si aucune valeur n'est fournie, la valeur par défaut est celle de `DD_LLMOBS_ENABLED`.
+
+`tracer.WithLLMObsMLApp`
+:  optionnel - _chaîne_
+<br />Le nom de votre application, service ou projet LLM, sous lequel toutes les traces et tous les spans sont regroupés. Cela permet de distinguer les différentes applications ou expériences. Consultez [les directives de nommage des applications](#application-naming-guidelines) pour connaître les caractères autorisés et les autres contraintes. Pour remplacer cette valeur pour une trace donnée, consultez [le traçage de plusieurs applications](#tracing-multiple-applications). S'il n'est pas fourni, la valeur par défaut est `DD_LLMOBS_ML_APP`.
+
+`tracer.WithLLMObsAgentlessEnabled`
+: facultatif - _bool_ - **par défaut**: `false`
+<br />Uniquement requis si vous n'utilisez pas le Datadog Agent, auquel cas il doit être défini sur `true`. S'il n'est pas fourni, la valeur par défaut est `DD_LLMOBS_AGENTLESS_ENABLED`.
+
+`tracer.WithLLMObsProjectName`
+: optionnel - _ chaîne_
+<br />Le nom du projet sous lequel [les jeux de données et les expériences](/llm_observability/improve/experiments/) sont regroupés. S'il n'est pas fourni, la valeur par défaut est celle de `DD_LLMOBS_PROJECT_NAME`.
+
+Définissez `DD_SITE`, `DD_API_KEY`, `DD_ENV` et `DD_SERVICE` comme variables d'environnement. `DD_API_KEY` n'est requis que si vous n'utilisez pas le Datadog Agent.
+
+**Remarque** : Le mode Agent nécessite Datadog Agent v7.72.0 ou une version ultérieure lors de l'utilisation de [jeux de données et expériences](/llm_observability/improve/experiments/). Les versions antérieures de l'Agent ne transmettent pas correctement les endpoints des jeux de données et des expériences.
+{{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
@@ -321,7 +420,7 @@ Après avoir installé le SDK et exécuté votre application, vous devriez voir 
 
 ## Échantillonnage des traces {#trace-sampling}
 
-<div class="alert alert-info">L'échantillonnage des traces est disponible dans le SDK Python (<code>ddtrace</code> 4.12.0 ou une version ultérieure), le SDK Node.js (<code>dd-trace</code> 5.110.0 ou une version ultérieure), et le SDK Java (<code>dd-trace-java</code> 1.66.0 ou une version ultérieure).</div>
+<div class="alert alert-info">L'échantillonnage des traces est disponible dans le SDK Python (<code>ddtrace</code> 4.12.0 ou une version ultérieure), le SDK Node.js (<code>dd-trace</code> 5.110.0 ou une version ultérieure), et le SDK Java (<code>dd-trace-java</code> 1.66.0 ou ultérieure). Il n'est pas pris en charge dans le SDK Go.</div>
 
 L'échantillonnage des traces définit la fraction de traces qu'Agent Observability conserve. Comme la facturation d'Agent Observability est basée sur le volume de spans que vous envoyez, définir un taux d'échantillonnage est un moyen de contrôler vos coûts liés à Agent Observability. Le SDK prend la décision d'échantillonnage sur le span racine et l'applique à tous les spans enfants de ce span racine, y compris les spans créés dans les services en aval via le [ tracing distribué](#distributed-tracing).
 
@@ -330,7 +429,7 @@ L'échantillonnage n'affecte pas vos [métriques Agent Observability](/llm_obser
 Configurez le taux d'échantillonnage via l'un des deux mécanismes suivants :
 
 - **Variable d'environnement** (`DD_LLMOBS_SAMPLE_RATE`) : s'applique à la fois à la [configuration en ligne de commande](#command-line-setup) et à la [configuration dans le code](#in-code-setup). En Java, la propriété système `dd.llmobs.sample.rate` définit la même valeur.
-- **Paramètre dans le code** (`sample_rate` en Python, `sampleRate` en Node.js) : transmis à `LLMObs.enable()` en Python, ou sous `llmobs` en Node.js, lorsque vous activez le SDK avec la [configuration dans le code](#in-code-setup). Lorsqu'il est défini, il prévaut sur `DD_LLMOBS_SAMPLE_RATE`. Le SDK Java n'a pas d'équivalent dans le code.
+- **Paramètre dans le code** (`sample_rate` en Python, `sampleRate` en Node.js) : transmis à `LLMObs.enable()` en Python, ou sous `llmobs` en Node.js, lorsque vous activez le SDK avec la [configuration dans le code](#in-code-setup). Lorsqu'il est défini, il prévaut sur `DD_LLMOBS_SAMPLE_RATE`. Les SDK Java et Go n'ont pas d'équivalent dans le code.
 
 Le taux d'échantillonnage est un nombre à virgule flottante compris entre `0.0` (aucune trace conservée) et `1.0` (toutes les traces conservées). La valeur par défaut est `1.0`. Les valeurs hors plage sont ignorées.
 
@@ -528,6 +627,94 @@ Pour terminer un span, appelez `finish()` sur une instance d'objet de span. Si p
 
 [1]: /fr/llm_observability/quickstart/terms/#span-kinds
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+### Démarrage d'un span {#starting-a-span-1}
+
+Chaque type de span possède son propre constructeur dans le package `llmobs`. Consultez la [documentation sur les types de span][1] pour obtenir une liste des types de span pris en charge.
+
+Chaque constructeur prend un `context.Context` et renvoie le span démarré ainsi qu'un nouveau `context.Context` qui porte le span. Transmettez ce contexte renvoyé dans l'appel suivant pour imbriquer automatiquement les spans. Voir [Imbrication de spans](#nesting-spans).
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+| Type de span | Constructeur | Méthode d'annotation |
+|---|---|---|
+| `llm` | `llmobs.StartLLMSpan` | `AnnotateLLMIO` |
+| `workflow` | `llmobs.StartWorkflowSpan` | `AnnotateTextIO` |
+| `agent` | `llmobs.StartAgentSpan` | `AnnotateTextIO` |
+| `tool` | `llmobs.StartToolSpan` | `AnnotateTextIO` |
+| `task` | `llmobs.StartTaskSpan` | `AnnotateTextIO` |
+| `embedding` | `llmobs.StartEmbeddingSpan` | `AnnotateEmbeddingIO` |
+| `retrieval` | `llmobs.StartRetrievalSpan` | `AnnotateRetrievalIO` |
+
+Chaque constructeur accepte les valeurs `llmobs.StartSpanOption` suivantes :
+
+{{% collapse-content title="Options de début de span" level="h4" expanded=false id="go-start-span-options" %}}
+
+`llmobs.WithMLApp`
+:  optionnel - _chaîne_
+<br />Le nom de l'application ML à laquelle l'opération appartient. Remplace l'application ML fournie au démarrage du traceur. Voir [Tracer plusieurs applications](#tracing-multiple-applications).
+
+`llmobs.WithSessionID`
+:  optionnel - _chaîne_
+<br />L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions).
+
+`llmobs.WithModelName`
+: optionnel - _String_ - **par défaut**: `"custom"`
+<br />Le nom du modèle invoqué. Ignoré pour les types de span autres que `llm` et `embedding`.
+
+`llmobs.WithModelProvider`
+: optionnel - _String_ - **par défaut**: `"custom"`
+<br />Le nom du fournisseur de modèle. Ignoré pour les types de span autres que `llm` et `embedding`.
+<br />**Remarque** : Pour afficher le coût estimé en dollars américains, définissez le fournisseur de modèle sur un [fournisseur pris en charge](#use-case-using-a-common-model-provider).
+
+`llmobs.WithStartTime`
+: facultatif - `time.Time`
+<br />Une heure de début explicite pour le span. La valeur par défaut est l'heure actuelle.
+
+`llmobs.WithIntegration`
+: optionnel - _ chaîne_
+<br />Le nom de l'intégration qui a produit le span.
+
+{{% /collapse-content %}}
+
+### Terminer un span {#finishing-a-span-1}
+
+Les spans doivent être terminés pour que la trace soit soumise et visible dans Datadog. Utilisez `defer` pour garantir que le span est terminé même si la fonction renvoie prématurément ou panique.
+
+{{< code-block lang="go" >}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+defer span.Finish()
+{{< /code-block >}}
+
+`Finish` accepte les valeurs `llmobs.FinishSpanOption` suivantes :
+
+`llmobs.WithError`
+: optionnel - _erreur_
+<br />Marque le span comme erroné et enregistre le message d'erreur, le type et la trace de pile. Voir [Annotation des erreurs](#annotating-errors).
+
+`llmobs.WithFinishTime`
+: optionnel - `time.Time`
+<br />Une heure de fin explicite pour le span. La valeur par défaut est l'heure actuelle.
+
+### Récupération du span actif {#retrieving-the-active-span}
+
+`llmobs.SpanFromContext` renvoie le span Agent Observability actif en tant que `*llmobs.AnySpan`. Convertissez-le en un span concret avec les méthodes `As*` pour accéder à la méthode d'annotation de ce span.
+
+{{< code-block lang="go" >}}
+if span, ok := llmobs.SpanFromContext(ctx); ok {
+	if llmSpan, ok := span.AsLLM(); ok {
+		llmSpan.AnnotateLLMIO(nil, []llmobs.LLMMessage{{Role: "assistant", Content: "..."}})
+	}
+}
+{{< /code-block >}}
+
+**Note** : Le SDK Go ne dispose d'aucune API de décorateur ou de wrapper de fonction, il ne capture donc pas automatiquement les arguments de fonction, les valeurs de retour ou les noms. Annotez explicitement les entrées et les sorties. Voir [Enriching spans](#enriching-spans).
+
+[1]: /fr/llm_observability/quickstart/terms/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Appels LLM {#llm-calls}
@@ -682,6 +869,63 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartLLMSpan` pour tracer un appel LLM, puis enregistrez l'invite et l'achèvement avec `AnnotateLLMIO`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func invokeModel(ctx context.Context, userInput string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	completion := callProvider(userInput) // user application logic to invoke LLM
+
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{
+			{Role: "system", Content: "You are a helpful assistant"},
+			{Role: "user", Content: userInput},
+		},
+		[]llmobs.LLMMessage{
+			{Role: "assistant", Content: completion},
+		},
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+	)
+	return completion
+}
+{{< /code-block >}}
+
+#### Appels d'outils et résultats d'outils {#tool-calls-and-tool-results}
+
+Un `llmobs.LLMMessage` peut également transporter les appels d'outils demandés par un modèle et les résultats qui lui sont renvoyés.
+
+{{< code-block lang="go" >}}
+args, _ := json.Marshal(map[string]any{"city": "Paris"})
+
+span.AnnotateLLMIO(
+	[]llmobs.LLMMessage{{Role: "user", Content: "What is the weather in Paris?"}},
+	[]llmobs.LLMMessage{{
+		Role: "assistant",
+		ToolCalls: []llmobs.ToolCall{
+			{Name: "get_weather", Arguments: args, ToolID: "call_1", Type: "function"},
+		},
+	}},
+)
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -791,6 +1035,29 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartWorkflowSpan` pour tracer un workflow span, puis enregistrez son entrée et sa sortie avec `AnnotateTextIO`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func executeWorkflow(ctx context.Context, question string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "handle-user-request")
+	defer span.Finish()
+
+	answer := workflowFn(ctx, question) // user application logic
+
+	span.AnnotateTextIO(question, answer)
+	return answer
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -883,6 +1150,29 @@ LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartAgentSpan` pour tracer un agent span, puis enregistrez son entrée et sa sortie avec `AnnotateTextIO`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func runAgent(ctx context.Context, task string) string {
+	span, ctx := llmobs.StartAgentSpan(ctx, "research-agent")
+	defer span.Finish()
+
+	result := agentLoop(ctx, task) // user application logic
+
+	span.AnnotateTextIO(task, result)
+	return result
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Appels d'outils {#tool-calls}
@@ -974,6 +1264,29 @@ LLMObs.startToolSpan(spanName, mlApp, sessionID);
 
 {{% /collapse-content %}}
 
+{{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartToolSpan` pour tracer un span d'outil, puis enregistrez son entrée et sa sortie avec `AnnotateTextIO`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func getWeather(ctx context.Context, city string) string {
+	span, ctx := llmobs.StartToolSpan(ctx, "get_weather")
+	defer span.Finish()
+
+	result := weatherAPI(ctx, city) // user application logic
+
+	span.AnnotateTextIO(city, result)
+	return result
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1068,6 +1381,29 @@ LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartTaskSpan` pour tracer un span de tâche, puis enregistrez son entrée et sa sortie avec `AnnotateTextIO`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func parseInput(ctx context.Context, raw string) string {
+	span, ctx := llmobs.StartTaskSpan(ctx, "parse-input")
+	defer span.Finish()
+
+	parsed := parse(ctx, raw) // user application logic
+
+	span.AnnotateTextIO(raw, parsed)
+	return parsed
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Embeddings {#embeddings}
@@ -1154,6 +1490,56 @@ performEmbedding = llmobs.wrap({ kind: 'embedding', modelName: 'text-embedding-3
 {{< /code-block >}}
 
 
+{{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartEmbeddingSpan` pour tracer un embedding span. `AnnotateEmbeddingIO` prend une tranche de `llmobs.EmbeddedDocument` comme entrée et une chaîne comme sortie.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func embedQuery(ctx context.Context, query string) []float64 {
+	span, _ := llmobs.StartEmbeddingSpan(ctx, "embed-query",
+		llmobs.WithModelName("text-embedding-3-small"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	vector := embed(query) // user application logic
+
+	span.AnnotateEmbeddingIO(
+		[]llmobs.EmbeddedDocument{{Text: query}},
+		"[0.023, -0.918, ...]",
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens: 8,
+		}),
+	)
+	return vector
+}
+{{< /code-block >}}
+
+`llmobs.EmbeddedDocument` possède les champs suivants :
+
+`Text`
+:  requis - _chaîne_
+<br />Le contenu textuel du document.
+
+`Name`
+:  optionnel - _chaîne_
+<br />Le nom ou le titre du document.
+
+`ID`
+:  optionnel - _chaîne_
+<br />L'identifiant unique du document.
+
+`Score`
+: optionnel - _float64_
+<br />Le score de pertinence du document, généralement compris entre `0.0` et `1.0`.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1244,6 +1630,52 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.StartRetrievalSpan` pour tracer un span de récupération. `AnnotateRetrievalIO` prend une chaîne en entrée et une tranche de `llmobs.RetrievedDocument` en sortie.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func searchDocs(ctx context.Context, query string) []Doc {
+	span, _ := llmobs.StartRetrievalSpan(ctx, "search-docs")
+	defer span.Finish()
+
+	docs := vectorSearch(query) // user application logic
+
+	span.AnnotateRetrievalIO(
+		query,
+		[]llmobs.RetrievedDocument{
+			{Text: "Paris is the capital of France.", Name: "geography.md", ID: "doc-1", Score: 0.91},
+		},
+	)
+	return docs
+}
+{{< /code-block >}}
+
+`llmobs.RetrievedDocument` possède les champs suivants :
+
+`Text`
+:  requis - _chaîne_
+<br />Le contenu textuel du document.
+
+`Name`
+:  optionnel - _chaîne_
+<br />Le nom ou le titre du document.
+
+`ID`
+:  optionnel - _chaîne_
+<br />L'identifiant unique du document.
+
+`Score`
+: optionnel - _float64_
+<br />Le score de pertinence du document, généralement compris entre `0.0` et `1.0`.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Imbrication des spans {#nesting-spans}
@@ -1307,13 +1739,42 @@ public class MyJavaClass {
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Les constructeurs de span renvoient un nouveau `context.Context` portant le span démarré. Transmettez ce contexte au constructeur suivant pour faire du nouveau span un enfant du span actuel.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func handleRequest(ctx context.Context) {
+	workflowSpan, ctx := llmobs.StartWorkflowSpan(ctx, "workflow-1")
+	defer workflowSpan.Finish()
+
+	// child of workflow-1, because it receives the workflow's context
+	llmSpan, ctx := llmobs.StartLLMSpan(ctx, "llm-1", llmobs.WithModelName("gpt-5.1"))
+	defer llmSpan.Finish()
+
+	// APM spans can be mixed into the same trace
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "post-process")
+	defer apmSpan.Finish()
+}
+{{< /code-block >}}
+
+**Note** : La relation parent-enfant est portée par le contexte. Un span démarré avec un contexte qui ne contient aucun span parent devient la racine d'une nouvelle trace. Lorsque vous lancez une goroutine, transmettez-lui le contexte renvoyé par le constructeur du parent, afin que ses spans se rattachent au bon parent.
+{{% /tab %}}
 {{< /tabs >}}
 
 
 ## Enrichissement des spans {#enriching-spans}
 
 <div class="alert alert-info">
-Le <code>metrics</code> Ici, le paramètre fait référence aux valeurs numériques jointes en tant qu'attributs sur des spans individuels — et non aux <a href="/llm_observability/investigate/metrics/">métriques de la plateforme Datadog</a>. Pour certaines clés reconnues telles que <code>input_tokens</code>, <code>output_tokens</code>, et <code>total_tokens</code>, Datadog utilise ces attributs de span pour générer les métriques de plateforme correspondantes (telles que <code>ml_obs.span.llm.input.tokens</code>) pour une utilisation dans les dashboards et les monitors.
+Le format <code>metrics</code> Ici, le paramètre fait référence aux valeurs numériques jointes en tant qu'attributs sur des spans individuels — et non aux <a href="/llm_observability/investigate/metrics/">métriques de la plateforme Datadog</a>. Pour certaines clés reconnues telles que <code>input_tokens</code>, <code>output_tokens</code>, et <code>total_tokens</code>, Datadog utilise ces attributs de span pour générer les métriques de plateforme correspondantes (telles que <code>ml_obs.span.llm.input.tokens</code>) pour une utilisation dans les dashboards et les monitors.
 </div>
 
 {{< tabs >}}
@@ -1330,11 +1791,11 @@ La méthode `LLMObs.annotate()` accepte les arguments suivants :
 
 `input_data`
 : optionnel - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`, où `"tool_calls"` est une liste optionnelle de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et `"tool_id"` , `"type"` et `"tool_results"` est une liste optionnelle de dictionnaires de résultats d'outils avec la clé requise : `"result"`, et les clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les étendues multimodales, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{"content": « ... », « role »: « ... », « tool_calls »: ..., « tool_results »: ..., « audio_parts » : ..., « image_parts » : ...}`, où `"tool_calls"` sont une liste optionnelle de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et les clés optionnelles : `"tool_id"`, `"type"`, et `"tool_results"` sont une liste optionnelle de dictionnaires de résultats d'outils avec la clé requise : `"result"`, et les clés optionnelles : `"name"`, `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les spans multimodaux, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "..."}`.
 
 `output_data`
 a: facultatif - _type sérialisable en JSON ou liste de dictionnaires_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, où `"tool_calls"` est une liste facultative de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et les clés facultatives : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les étendues multimodales, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format : `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, où `"tool_calls"` est une liste facultative de dictionnaires d'appels d'outils avec les clés requises : `"name"`, `"arguments"`, et les clés facultatives : `"tool_id"`, `"type"` pour les scénarios d'appel de fonction. `"audio_parts"` et `"image_parts"` sont des listes facultatives de dictionnaires multimédias pour les spans multimodaux, chacune avec un `"mime_type"` et un `"content"` requis (média encodé en base64, intégré en ligne). **Note** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un dictionnaire (ou une liste de dictionnaires) avec ce format : `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 a: facultatif - _liste de dictionnaires_
@@ -1480,11 +1941,11 @@ L'objet `annotationOptions` peut contenir les éléments suivants :
 
 `inputData`
 : facultatif - _type sérialisable en JSON ou liste d'objets_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les étendues multimodales, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste de dictionnaires avec ce format: `{role: « ... », « content »: « ... », « audioParts »: [...], « imageParts » : [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les spans multimodaux, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans d'embedding sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "..."}`.
 
 `outputData`
 : facultatif - _type sérialisable en JSON ou liste d'objets_
-<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste d'objets avec ce format : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les étendues multimodales, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Soit un type sérialisable en JSON (pour les spans non-LLM), soit une liste d'objets avec ce format : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (pour les spans LLM). `audioParts` et `imageParts` sont des listes facultatives d'objets multimédias pour les spans multimodaux, chacune avec un `mimeType` et un `content` requis (média encodé en base64, intégré en ligne). **Remarque** : Les spans de récupération sont un cas particulier et nécessitent une chaîne ou un objet (ou une liste d'objets) avec ce format : `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : facultatif - _objet_
@@ -1838,6 +2299,145 @@ public class MyJavaClass {
 
 [1]: /fr/getting_started/tagging/
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Chaque type de span expose une méthode typée pour annoter ses entrées et sorties, et chaque span expose une méthode `Annotate` générique qui accepte les valeurs `llmobs.AnnotateOption` suivantes.
+
+### Annotation des entrées et des sorties {#annotating-inputs-and-outputs-1}
+
+Utilisez la méthode d'annotation correspondant au type de span :
+
+- `AnnotateLLMIO(input, output []llmobs.LLMMessage, opts ...)` sur les spans `llm`
+- `AnnotateEmbeddingIO(input []llmobs.EmbeddedDocument, output string, opts ...)` sur les spans `embedding`
+- `AnnotateRetrievalIO(input string, output []llmobs.RetrievedDocument, opts ...)` sur les spans `retrieval`
+- `AnnotateTextIO(input, output string, opts ...)` sur les spans `workflow`, `agent`, `tool` et `task`
+
+`llmobs.LLMMessage` possède les champs suivants :
+
+`Role`
+:  requis - _chaîne_
+<br />Le rôle de l'auteur du message, par exemple `system`, `user` ou `assistant`.
+
+`Content`
+:  requis - _chaîne_
+<br />Le contenu textuel du message.
+
+`ToolCalls`
+: optionnel - _[]llmobs.ToolCall_
+<br />Les appels d'outils effectués dans ce message.
+
+`ToolResults`
+: optionnel - _[]llmobs.ToolResult_
+<br />Les résultats des appels d'outils dans ce message.
+
+### Ajout de métriques {#adding-metrics-1}
+
+Utilisez `llmobs.WithAnnotatedMetrics` avec un `map[string]float64`. Le paquet `llmobs` exporte des constantes pour les clés reconnues.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+	llmobs.MetricKeyInputTokens:            50,
+	llmobs.MetricKeyOutputTokens:           120,
+	llmobs.MetricKeyTotalTokens:            170,
+	llmobs.MetricKeyCacheReadInputTokens:   22,
+	llmobs.MetricKeyCacheWriteInputTokens:  15,
+	llmobs.MetricKeyReasoningOutputTokens:  30,
+	llmobs.MetricKeyTimeToFirstToken:       0.25,
+	llmobs.MetricKeyBillableCharacterCount: 900,
+}))
+{{< /code-block >}}
+
+| Constante | Clé |
+|---|---|
+| `llmobs.MetricKeyInputTokens` | `input_tokens` |
+| `llmobs.MetricKeyOutputTokens` | `output_tokens` |
+| `llmobs.MetricKeyTotalTokens` | `total_tokens` |
+| `llmobs.MetricKeyCacheReadInputTokens` | `cache_read_input_tokens` |
+| `llmobs.MetricKeyCacheWriteInputTokens` | `cache_write_input_tokens` |
+| `llmobs.MetricKeyReasoningOutputTokens` | `reasoning_output_tokens` |
+| `llmobs.MetricKeyBillableCharacterCount` | `billable_character_count` |
+| `llmobs.MetricKeyTimeToFirstToken` | `time_to_first_token` |
+
+Les clés qui ne figurent pas dans cette liste sont acceptées en tant que métriques personnalisées, y compris les clés `input_cost` et `output_cost` utilisées pour le [suivi manuel des coûts](#use-case-using-a-custom-model).
+
+### Ajout de tags {#adding-tags-1}
+
+Utilisez `llmobs.WithAnnotatedTags` avec un `map[string]string`.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+	"team":        "nlp",
+	"host":        "host_name",
+	"feature":     "chatbot",
+	"user_handle": "poodle@dog.com",
+}))
+{{< /code-block >}}
+
+### Annotation des erreurs {#annotating-errors-1}
+
+Passez `llmobs.WithError` à `Finish` pour marquer le span comme erroné. Le SDK enregistre le message d'erreur, le type et la trace de pile.
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (string, error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+
+	completion, err := invokeProvider(ctx)
+	if err != nil {
+		span.Finish(llmobs.WithError(err))
+		return "", err
+	}
+
+	span.Finish()
+	return completion, nil
+}
+{{< /code-block >}}
+
+Pour conserver une seule `defer`, capturez l'erreur dans une valeur de retour nommée :
+
+{{< code-block lang="go" >}}
+func invokeModel(ctx context.Context) (completion string, err error) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm")
+	defer func() { span.Finish(llmobs.WithError(err)) }()
+
+	completion, err = invokeProvider(ctx)
+	return completion, err
+}
+{{< /code-block >}}
+
+**Note**: `llmobs.WithError(nil)` est une opération nulle, donc l'appel différé ci-dessus ne marque pas les spans réussis comme erronés.
+
+### Annotation de métadonnées {#annotating-metadata-1}
+
+Utilisez `llmobs.WithAnnotatedMetadata` avec un `map[string]any` pour enregistrer les paramètres et autres données contextuelles.
+
+{{< code-block lang="go" >}}
+span.Annotate(llmobs.WithAnnotatedMetadata(map[string]any{
+	"temperature": 0.7,
+	"max_tokens":  200,
+}))
+{{< /code-block >}}
+
+### Autres options d'annotation {#other-annotation-options}
+
+`llmobs.WithAnnotatedSessionID`
+:  optionnel - _chaîne_
+<br />L'ID de la session utilisateur sous-jacente. Voir [Suivi des sessions utilisateur](#tracking-user-sessions).
+
+`llmobs.WithAnnotatedPrompt`
+: optionnel - _llmobs.Prompt_
+<br />Métadonnées de prompt structurées. Nécessite `dd-trace-go` v2.8.0+. Voir [Suivi d'invite](#prompt-tracking).
+
+`llmobs.WithAnnotatedToolDefinitions`
+: optionnel - _[]llmobs.ToolDefinition_
+<br />Les définitions d'outils mises à disposition du modèle pour cet appel. Nécessite `dd-trace-go` v2.8.0+.
+
+`llmobs.WithAnnotatedCostTagKeys`
+: optionnel - _[]string_
+<br />Clés de tag de span à propager sur les métriques de coût et de jeton. Nécessite `dd-trace-go` v2.10.0+. Voir [Ajout de tags personnalisés aux métriques de coût et de jetons](#adding-custom-tags-to-cost-and-tokens-metrics).
+
+`llmobs.WithAnnotatedIntent`
+: optionnel - _ chaîne_
+<br />Une description de la raison pour laquelle un outil a été appelé, enregistrée sur les spans `tool`. Nécessite `dd-trace-go` v2.8.0+.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Annotation des spans auto-instrumentés {#annotating-auto-instrumented-spans}
@@ -1960,7 +2560,7 @@ Utilisez `LLMObs.annotation_context(prompt=...)` pour joindre des métadonnées 
 {{% collapse-content title="Arguments" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
-: requis - dictionary
+: requis - dictionnaire
 <br />Un dictionnaire typé qui suit le schéma de Prompt ci-dessous.
 
 {{% /collapse-content %}}
@@ -2069,6 +2669,62 @@ function answerQuestion(text) {
 
 {{% /tab %}}
 
+{{% tab "Go (expérimental)" %}}
+Utilisez `llmobs.WithAnnotatedPrompt` pour joindre des métadonnées d'invite à un span LLM. Nécessite `dd-trace-go` v2.8.0+. Pour plus de détails sur l'annotation des spans, voir [Enrichissement des spans](#enriching-spans).
+
+{{% collapse-content title="Structure du prompt" level="h5" expanded=false id="go-prompt-structure" %}}
+
+`llmobs.Prompt` possède les champs suivants :
+
+- `ID` (_string_) : Identifiant logique pour cette invite. Doit être unique par application ML.
+- `Version` (_string_) : Tag de version pour l'invite, par exemple `"1.0.0"`. Voir [suivi de version](#version-tracking).
+- `Label` (_string_) : Étiquette de déploiement pour l'invite, par exemple `"production"` ou `"staging"`.
+- `Template` (_string_) : Chaîne de modèle avec des espaces réservés, par exemple « Traduire {{text}} to {{lang}}« `. Mutually exclusive with `ChatTemplate`; if both are set, `Template » est abandonné.
+- `ChatTemplate` (_[]llmobs.LLMMessage_) : Formulaire de modèle multi-messages. Mutuellement exclusif avec `Template`.
+- `Variables` (_map[string]string_) : Variables utilisées pour remplir les espaces réservés du modèle.
+- `Tags` (_map[string]string_): Tags à joindre à l'exécution de l'invite.
+- `RAGContextVariables` (_[]string_) : Clés de variable qui contiennent le contenu de vérité terrain ou de contexte. Utilisé pour la [détection d'hallucinations](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+- `RAGQueryVariables` (_[]string_) : Clés de variable qui contiennent la requête de l'utilisateur. Utilisé pour la [détection d'hallucinations](/llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination).
+
+{{% /collapse-content %}}
+
+#### Exemple : invite chat-template {#example-chat-template-prompt}
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func answerQuestion(ctx context.Context, text string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "answer-question",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedPrompt(llmobs.Prompt{
+		ID:      "translation-template",
+		Version: "1.0.0",
+		ChatTemplate: []llmobs.LLMMessage{
+			{Role: "user", Content: "Translate to {{lang}}: {{text}}"},
+		},
+		Variables: map[string]string{"lang": "fr", "text": text},
+		Tags:      map[string]string{"team": "nlp"},
+	}))
+
+	completion := callProvider(text) // user application logic
+	span.AnnotateLLMIO(
+		[]llmobs.LLMMessage{{Role: "user", Content: "Translate to fr: " + text}},
+		[]llmobs.LLMMessage{{Role: "assistant", Content: completion}},
+	)
+	return completion
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Notes {#notes}
@@ -2200,6 +2856,38 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		llmobs.MetricKeyInputTokens:           50,
+		llmobs.MetricKeyOutputTokens:          120,
+		llmobs.MetricKeyTotalTokens:           170,
+		llmobs.MetricKeyCacheReadInputTokens:  22, // optional
+		llmobs.MetricKeyCacheWriteInputTokens: 15, // optional
+	}))
+	return resp
+}
+{{< /code-block >}}
+
+**Remarque** : `dd-trace-go` ne dispose d'aucune intégration de fournisseur LLM, les nombres de jetons ne sont donc jamais capturés automatiquement. Enregistrez-les sur chaque span `llm` et `embedding` ; sinon, Datadog ne peut pas estimer le coût.
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Cas d'utilisation : Utilisation d'un modèle personnalisé {#use-case-using-a-custom-model}
@@ -2277,6 +2965,33 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("my-custom-model"),
+		llmobs.WithModelProvider("my-company"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(llmobs.WithAnnotatedMetrics(map[string]float64{
+		"input_cost":  0.0021,
+		"output_cost": 0.0048,
+	}))
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Ajout de tags personnalisés aux métriques de coût et de jetons {#adding-custom-tags-to-cost-and-tokens-metrics}
@@ -2319,6 +3034,44 @@ llmCall = llmobs.wrap({ kind: 'llm', modelName: 'gpt-5.1', modelProvider: 'opena
 {{< /code-block >}}
 
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Nécessite `dd-trace-go` v2.10.0+.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func llmCall(ctx context.Context, prompt string) string {
+	span, _ := llmobs.StartLLMSpan(ctx, "llm-call",
+		llmobs.WithModelName("gpt-5.1"),
+		llmobs.WithModelProvider("openai"),
+	)
+	defer span.Finish()
+
+	resp := callProvider(prompt) // llm call here
+
+	span.Annotate(
+		llmobs.WithAnnotatedMetrics(map[string]float64{
+			llmobs.MetricKeyInputTokens:  50,
+			llmobs.MetricKeyOutputTokens: 120,
+			llmobs.MetricKeyTotalTokens:  170,
+		}),
+		llmobs.WithAnnotatedTags(map[string]string{
+			"team":          "nlp",
+			"customer_tier": "enterprise",
+			"host":          "host_name",
+		}),
+		llmobs.WithAnnotatedCostTagKeys([]string{"team", "customer_tier"}),
+	)
+	return resp
+}
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 Vous pouvez également propager des tags de cette manière via un contexte d'annotation pour les appliquer à tous les spans auto-instrumentés démarrés à l'intérieur du contexte.
@@ -2357,10 +3110,13 @@ Le Agent Observability SDK fournit des méthodes pour exporter et soumettre vos 
 <div class="alert alert-info">Pour créer des évaluateurs réutilisables basés sur des classes (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) avec des métadonnées de résultat enrichies, consultez le <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
 
 Les évaluations doivent être jointes à un seul span. Vous pouvez identifier le span cible en utilisant l'une de ces deux méthodes :
-- _Jointure basée sur des tags_ - Joignez une évaluation en utilisant une paire clé-valeur de tag unique définie sur un seul span. L'évaluation ne pourra pas être jointe si la paire clé-valeur du tag correspond à plusieurs spans ou à aucun span.
+- _Jointure basée sur des tags_ - Joignez une évaluation en utilisant une paire clé-valeur de tag unique définie sur un seul span. L'évaluation ne pourra pas être jointe si la paire clé-valeur de tag correspond à plusieurs spans ou à aucun span.
 - _Référence directe au span_ - Joignez une évaluation en utilisant la combinaison de l'ID de trace et de l'ID de span uniques du span.
 
 ### Exportation d'un span {#exporting-a-span}
+
+<div class="alert alert-info">Le SDK Go ne dispose d'aucune méthode d'exportation de span. Transmettez le span directement à <code>llmobs.SubmitEvaluationFromSpan</code> à la place. Voir <a href="#submitting-evaluations">Soumission d'évaluations</a>.</div>
+
 {{< tabs >}}
 {{% tab "Python" %}}
 `LLMObs.export_span()` peut être utilisé pour extraire le contexte de span à partir d'un span. Cette méthode est utile pour associer votre évaluation au span correspondant.
@@ -2640,6 +3396,76 @@ public class MyJavaClass {
 {{< /code-block >}}
 
 [1]: /fr/getting_started/tagging/
+{{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Le SDK Go fournit deux fonctions pour soumettre des évaluations. Les deux déduisent le type d'évaluation à partir du type Go de la valeur que vous transmettez : : `bool` devient une évaluation `boolean`, `string` devient `categorical`, et tout type numérique devient `score`.
+
+**Remarque**: Le SDK Go ne prend pas en charge les évaluations `json`.
+
+### Référence directe de span {#direct-span-reference}
+
+`llmobs.SubmitEvaluationFromSpan` prend le span lui-même, donc aucune étape d'exportation distincte n'est nécessaire.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func evaluate(ctx context.Context) {
+	span, _ := llmobs.StartLLMSpan(ctx, "invoke-llm",
+		llmobs.WithModelName("claude-opus-4-6"),
+		llmobs.WithModelProvider("anthropic"),
+	)
+	defer span.Finish()
+
+	// ... user application logic
+
+	llmobs.SubmitEvaluationFromSpan("correctness", "correct", span) // categorical
+	llmobs.SubmitEvaluationFromSpan("relevance_score", 0.95, span)  // score
+	llmobs.SubmitEvaluationFromSpan("is_safe", true, span)          // boolean
+}
+{{< /code-block >}}
+
+### Jointure basée sur des tags {#tag-based-joining}
+
+`llmobs.SubmitEvaluationFromTag` joint l'évaluation au span portant une paire clé-valeur de tag correspondante. L'évaluation ne parvient pas à se joindre si la paire correspond à plusieurs spans ou à aucun span.
+
+{{< code-block lang="go" >}}
+joinTag := llmobs.JoinTag{Key: "session_id", Value: sessionID}
+
+llmobs.SubmitEvaluationFromTag("user_feedback", "positive", joinTag)
+llmobs.SubmitEvaluationFromTag("user_rating", 4.2, joinTag)
+llmobs.SubmitEvaluationFromTag("thumbs_up", true, joinTag)
+{{< /code-block >}}
+
+### Options {#options-1}
+
+Les deux fonctions acceptent les valeurs `llmobs.EvaluationOption` suivantes :
+
+`llmobs.WithEvaluationTags`
+: optionnel - _[]string_
+<br />Une liste de tags, formatés sous forme de chaînes `key:value`, à joindre à l'évaluation.
+
+`llmobs.WithEvaluationMLApp`
+: optionnel - _ chaîne_
+<br />Le nom de l'application ML. Utilise par défaut l'application ML configurée pour le SDK.
+
+`llmobs.WithEvaluationTimestamp`
+: facultatif - `time.Time`
+<br />L'heure à laquelle l'évaluation a été générée. La valeur par défaut est l'heure actuelle.
+
+{{< code-block lang="go" >}}
+llmobs.SubmitEvaluationFromSpan("is_safe", true, span,
+	llmobs.WithEvaluationTags([]string{"evaluator:custom", "env:prod"}),
+	llmobs.WithEvaluationMLApp("<YOUR_ML_APP_NAME>"),
+)
+{{< /code-block >}}
+
+**Remarque** : ces fonctions ne renvoient pas d'erreur. Les échecs sont signalés dans le log de débogage du traceur. Définissez `DD_TRACE_DEBUG=1` pour les afficher.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -3170,6 +3996,47 @@ public class MyJavaClass {
 }
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Lors du démarrage d'un span racine pour une nouvelle trace ou d'un span dans un nouveau processus, transmettez `llmobs.WithSessionID` avec l'identifiant sous forme de chaîne de la session utilisateur sous-jacente. Ajoutez éventuellement les tags `user_handle`, `user_name` et `user_id`.
+
+{{< code-block lang="go" >}}
+package main
+
+import (
+	"context"
+
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func processChat(ctx context.Context, sessionID, message string) string {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "incoming-chat",
+		llmobs.WithSessionID(sessionID),
+	)
+	defer span.Finish()
+
+	span.Annotate(llmobs.WithAnnotatedTags(map[string]string{
+		"user_handle": "poodle@dog.com",
+		"user_id":     "1234",
+		"user_name":   "poodle",
+	}))
+
+	response := answerChat(ctx, message) // user application logic
+	span.AnnotateTextIO(message, response)
+	return response
+}
+{{< /code-block >}}
+
+Vous pouvez également définir l'ID de session sur un span existant avec `llmobs.WithAnnotatedSessionID`.
+
+### Tags de suivi de session {#session-tracking-tags-1}
+
+| Tag | Description |
+|---|---|
+| `session_id` | L'ID représentant une session utilisateur unique, par exemple, une session de chat. |
+| `user_handle` | Le handle de l'utilisateur de la session de chat. |
+| `user_name` | Le nom de l'utilisateur de la session de chat. |
+| `user_id` | L'ID de l'utilisateur de la session de chat. |
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Traçage distribué {#distributed-tracing}
@@ -3250,6 +4117,64 @@ tracer.use('http', false) // disable the http integration
 
 [1]: /fr/tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+Le contexte de span d'Agent Observability circule sur les en-têtes de traçage distribué APM standard, il n'y a donc pas d'API d'injection ou d'extraction distincte. Propagez le contexte APM avec `tracer.Inject` et `tracer.Extract`, ou utilisez une [intégration HTTP][1] instrumentée. Les spans d'Agent Observability dans le service en aval se rattachent alors automatiquement au span parent en amont.
+
+### Exemple {#example-35}
+
+{{< code-block lang="go" filename="client.go" >}}
+package main
+
+import (
+	"context"
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func clientSendRequest(ctx context.Context, req *http.Request) error {
+	span, ctx := llmobs.StartWorkflowSpan(ctx, "client-send-request")
+	defer span.Finish()
+
+	apmSpan, _ := tracer.StartSpanFromContext(ctx, "http.request")
+	defer apmSpan.Finish()
+
+	// inject the trace context into the outgoing request headers
+	return tracer.Inject(apmSpan.Context(), tracer.HTTPHeadersCarrier(req.Header))
+}
+{{< /code-block >}}
+
+{{< code-block lang="go" filename="server.go" >}}
+package main
+
+import (
+	"net/http"
+
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+	"github.com/DataDog/dd-trace-go/v2/llmobs"
+)
+
+func serverHandler(w http.ResponseWriter, r *http.Request) {
+	var opts []tracer.StartSpanOption
+	if sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header)); err == nil {
+		opts = append(opts, tracer.ChildOf(sctx))
+	}
+	// if extraction fails, the span starts a new trace
+
+	apmSpan, ctx := tracer.StartSpanFromContext(r.Context(), "http.handler", opts...)
+	defer apmSpan.Finish()
+
+	// this span joins the distributed trace and the upstream parent span
+	span, _ := llmobs.StartTaskSpan(ctx, "process-request")
+	defer span.Finish()
+}
+{{< /code-block >}}
+
+**Remarque** : Extrayez le contexte en amont avant de démarrer tout span Agent Observability dans le service en aval. Les spans démarrés au préalable ne sont pas capturés dans la trace distribuée.
+
+[1]: /fr/tracing/trace_collection/compatibility/go/
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -3261,7 +4186,7 @@ tracer.use('http', false) // disable the http integration
 
 Pour chaque type de span, la classe `ddtrace.llmobs.LLMObs` fournit une méthode en ligne correspondante pour tracer automatiquement l'opération qu'implique un bloc de code donné. Ces méthodes ont la même signature d'argument que leurs homologues décorateurs de fonction, avec l'ajout que `name` prend par défaut le type de span (`llm`, `workflow`, etc.) s'il n'est pas fourni. Ces méthodes peuvent être utilisées comme gestionnaires de contexte pour terminer automatiquement le span une fois le bloc de code inclus terminé.
 
-#### Exemple {#example-35}
+#### Exemple {#example-36}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3280,7 +4205,7 @@ Pour démarrer et arrêter manuellement un span entre différents contextes ou p
 2. Passez l'objet span en tant qu'argument à d'autres fonctions.
 3. Arrêtez le span manuellement avec la méthode `span.finish()`. **Remarque** : le span doit être terminé manuellement, sinon il n'est pas soumis.
 
-#### Exemple {#example-36}
+#### Exemple {#example-37}
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
@@ -3371,7 +4296,7 @@ function processMessage () {
 
 Le SDK Agent Observability Node.js propose une fonction `llmobs.decorate` qui sert de décorateur de fonction pour les applications TypeScript. Le comportement de traçage de cette fonction est identique à `llmobs.wrap`.
 
-#### Exemple {#example-37}
+#### Exemple {#example-38}
 
 {{< code-block lang="javascript" >}}
 // index.ts
@@ -3414,6 +4339,40 @@ function processMessage () {
 processMessage = llmobs.wrap({ kind: 'workflow', name: 'processMessage', mlApp: '<NON_DEFAULT_ML_APP_NAME>' }, processMessage)
 {{< /code-block >}}
 
+{{% /tab %}}
+{{% tab "Go (expérimental)" %}}
+### Traçage de plusieurs applications {#tracing-multiple-applications-2}
+
+Le SDK prend en charge le traçage de plusieurs applications LLM à partir du même service.
+
+Vous pouvez configurer une variable d'environnement `DD_LLMOBS_ML_APP` sur le nom de votre application LLM, dans laquelle tous les spans générés sont regroupés par défaut.
+
+Pour remplacer cette configuration et utiliser un nom d'application LLM différent pour un span racine donné, transmettez `llmobs.WithMLApp` lors du démarrage d'une nouvelle trace ou d'un span dans un nouveau processus.
+
+{{< code-block lang="go">}}
+span, ctx := llmobs.StartWorkflowSpan(ctx, "process-message",
+	llmobs.WithMLApp("<NON_DEFAULT_ML_APP_NAME>"),
+)
+defer span.Finish()
+{{< /code-block >}}
+
+### Forcer le vidage dans les environnements sans serveur {#force-flushing-in-serverless-environments-2}
+
+Le traceur vide les spans en arrière-plan. Appelez `tracer.Stop()` avant que votre processus ne se termine afin que les spans mis en mémoire tampon soient soumis. Dans les processus à courte durée de vie et les gestionnaires serverless, utilisez `defer tracer.Stop()` dans `main` pour garantir cela.
+
+{{< code-block lang="go">}}
+func main() {
+	if err := tracer.Start(
+		tracer.WithLLMObsEnabled(true),
+		tracer.WithLLMObsMLApp("<YOUR_ML_APP_NAME>"),
+	); err != nil {
+		log.Fatalf("failed to start tracer: %v", err)
+	}
+	defer tracer.Stop()
+
+	// your application logic
+}
+{{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 

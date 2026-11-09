@@ -198,14 +198,10 @@ products:
       - subheaders:
           - title: CI/CD
             links:
-              - title: CI Visibility
-                link: continuous_integration/
-                description: Monitor the health and performance of your CI pipelines
-                short_description: CI pipeline health
-              - title: Test Optimization
-                link: tests/
-                description: Detect flaky tests and identify commits introducing flaky tests
-                short_description: Flaky test detection
+              - title: CI/CD Optimization
+                link: cicd/
+                description: Monitor, troubleshoot, and optimize your CI pipelines and test suites
+                short_description: CI pipeline and test health
               - title: Continuous Testing
                 link: continuous_testing/
                 description: Perform codeless integration and end-to-end testing with CI/CD providers
