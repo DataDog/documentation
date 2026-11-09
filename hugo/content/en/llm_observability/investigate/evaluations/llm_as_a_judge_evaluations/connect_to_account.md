@@ -114,36 +114,36 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 
 Connect your Baseten account to Agent Observability with your Baseten API key. The key must be able to call Baseten Model APIs (`https://inference.baseten.co/v1`). Dedicated deployments are not supported.
 
-1. In Datadog, open the [Baseten integration tile][2], or navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1] and select the Baseten tile to open the Baseten integration tile.
+1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
+1. Select {{< ui >}}Connect{{< /ui >}} on the Baseten tile.
 1. Follow the instructions on the tile.
    - Provide your Baseten API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
-[2]: https://app.datadoghq.com/integrations/baseten
 {{% /tab %}}
 
 {{% tab "Fireworks AI" %}}
 
 Connect your Fireworks AI account to Agent Observability with your Fireworks AI API key.
 
-1. In Datadog, open the [Fireworks AI integration tile][2], or navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1] and select {{< ui >}}Connect{{< /ui >}} on the Fireworks AI tile.
+1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
+1. Select {{< ui >}}Connect{{< /ui >}} on the Fireworks AI tile.
 1. Follow the instructions on the tile.
    - Provide your Fireworks AI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
-[2]: https://app.datadoghq.com/integrations/fireworks
 {{% /tab %}}
 
 {{% tab "Together AI" %}}
 
 Connect your Together AI account to Agent Observability with your Together AI API key.
 
-1. In Datadog, open the [Together AI integration tile][2], or navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1] and select {{< ui >}}Connect{{< /ui >}} on the Together AI tile.
+1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
+1. Select {{< ui >}}Connect{{< /ui >}} on the Together AI tile.
 1. Follow the instructions on the tile.
    - Provide your Together AI API key.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
-[2]: https://app.datadoghq.com/integrations/togetherai
 {{% /tab %}}
 
 {{% tab "Custom Provider" %}}
