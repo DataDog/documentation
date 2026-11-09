@@ -38,24 +38,21 @@ A block on a tool result can't undo the tool call that produced it. The block st
 
 Trajectory runs in observe mode, which records results without blocking, or in enforce mode, which can block actions. See the [Configuration options](#configuration-options) section.
 
-If an evaluation fails or times out, the coding agent continues with the action (fail-open).
-
 ## Supported coding agents
 
 | Agent              | Guardrails¹     | Supply chain protection² | Sensitive data redaction³ |
 |--------------------|-----------------|--------------------------|---------------------------|
-| Claude Code        | Full            | Full                     | Monitoring only           |
-| Codex              | Full            | Full                     | Monitoring only           |
-| Cursor             | Full            | Full                     | Monitoring only           |
-| GitHub Copilot CLI | Full            | Full                     | Monitoring only           |
-| Kiro CLI           | Full⁴           | Full                     | Monitoring only           |
-| Antigravity CLI    | Monitoring only | Monitoring only          | Monitoring only           |
+| Claude Code        | Full            | Packages                 | Monitoring only           |
+| Codex              | Full            | Packages                 | Monitoring only           |
+| Cursor             | Full            | Packages                 | Monitoring only           |
+| GitHub Copilot CLI | Full            | Packages                 | Monitoring only           |
+| Kiro CLI           | Full⁴           | Packages                 | Monitoring only           |
 
 ¹ Guardrails evaluate prompts and tool calls.
 
 ² Supply chain protection analyzes package installations with [Supply Chain Firewall][2]. Skill scanning, which checks extensions such as skills, is in development.
 
-³ Sensitive data redaction detects and blocks secrets.
+³ Sensitive data redaction detects secrets. Blocking secrets is in development.
 
 ⁴ Kiro CLI can't stop a prompt. When AI Guard blocks a prompt, Kiro CLI instructs the model to refuse it.
 
@@ -73,21 +70,21 @@ AI Guard for coding agents doesn't use the Datadog Agent or the Datadog SDK. Tra
 {{< tabs >}}
 {{% tab "Individual developers" %}}
 
-1. Set your application key in an environment variable:
+1. Set your API key and application key in environment variables:
 
    ```bash
+   export DD_API_KEY=<YOUR_API_KEY>
    export DD_APP_KEY=<YOUR_APPLICATION_KEY>
    ```
 
-1. Run the Trajectory installer in observe mode:
+1. Run the Trajectory installer in observe mode, with the unredacted privacy mode:
 
    ```bash
-   bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security-mode observe
+   bash <(curl -fsSL https://raw.githubusercontent.com/datadog-labs/trajectory/main/install.sh) --security-mode observe --security-privacy unredacted
    ```
 
-   When prompted, enter your Datadog site and your API key. The installer stores both keys in the operating system keychain, and turns on AI Guard for each supported coding agent it finds: Claude Code, Codex, Cursor, GitHub Copilot CLI, and Kiro CLI.
+   When prompted, select your Datadog site. The installer stores both keys in the operating system keychain, and turns on AI Guard for each supported coding agent it finds: Claude Code, Codex, Cursor, GitHub Copilot CLI, and Kiro CLI.
 
-1. To protect Antigravity CLI, run `trajectory plugins security setup --clients agy`.
 1. Restart your coding agents.
 
 If you already use Trajectory, run the same command. The installer keeps your Trajectory configuration and adds AI Guard for coding agents.
@@ -122,7 +119,6 @@ Replace the `--clients` value with the client IDs of the coding agents you want 
 | Cursor             | `cursor`  |
 | GitHub Copilot CLI | `copilot` |
 | Kiro CLI           | `kiro`    |
-| Antigravity CLI    | `agy`     |
 
 ## Configuration options {#configuration-options}
 
@@ -134,12 +130,16 @@ The mode controls whether AI Guard can block coding agent actions:
 - `observe`: AI Guard evaluates each action and records the result, but doesn't block anything. Use this mode to review results and adjust your policies before you turn on blocking.
 - `enforce`: AI Guard can block actions. Blocking also requires the policy enforcement mode to be {{< ui >}}Block unsafe{{< /ui >}}. See the [Turn on blocking](#turn-on-blocking) section.
 
-| When                   | How to set the mode                                                                             | Default   |
-|------------------------|-------------------------------------------------------------------------------------------------|-----------|
-| At installation        | Add `--security-mode <MODE>` to the installer command.                                          | `enforce` |
-| After installation     | Run `trajectory plugins security setup --mode <MODE> --clients <CLIENT_IDS>`. Add `--yes` to confirm `enforce`. | `observe` |
+| When               | Flag or command                     | Default   |
+|--------------------|-------------------------------------|-----------|
+| At installation    | `--security-mode <MODE>`            | `enforce` |
+| After installation | `trajectory plugins security setup` | `observe` |
 
-Replace `<CLIENT_IDS>` with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect.
+To change the mode after installation, run the following command. Replace `<CLIENT_IDS>` with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect, and add `--yes` to confirm `enforce`:
+
+```bash
+trajectory plugins security setup --mode <MODE> --clients <CLIENT_IDS>
+```
 
 ### Privacy mode {#privacy-mode}
 
@@ -147,10 +147,16 @@ The privacy mode controls which content Trajectory stores in Datadog with each e
 - `coding_agent`: Trajectory removes message content, and keeps only metadata such as the action, the reason, and the attack categories.
 - `unredacted`: Trajectory stores the full prompts and tool content.
 
-| When                   | How to set the privacy mode                                                                     | Default        |
-|------------------------|-------------------------------------------------------------------------------------------------|----------------|
-| At installation        | Add `--security-privacy <PRIVACY_MODE>` to the installer command.                               | `coding_agent` |
-| After installation     | Run `trajectory plugins modules evaluator configure agent-security ai_guard --privacy-mode <PRIVACY_MODE>`. | `coding_agent` |
+| When               | Flag or command                                  | Default        |
+|--------------------|--------------------------------------------------|----------------|
+| At installation    | `--security-privacy <PRIVACY_MODE>`              | `coding_agent` |
+| After installation | `trajectory plugins modules evaluator configure` | `coding_agent` |
+
+To change the privacy mode after installation, run:
+
+```bash
+trajectory plugins modules evaluator configure agent-security ai_guard --privacy-mode <PRIVACY_MODE>
+```
 
 ## Verify the installation {#verify}
 
