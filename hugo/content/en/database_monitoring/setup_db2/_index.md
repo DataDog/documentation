@@ -1,5 +1,5 @@
 ---
-title: Setting up IBM Db2
+title: Setting Up IBM Db2
 description: Set up Database Monitoring for an IBM Db2 database.
 disable_sidebar: true
 further_reading:
