@@ -46,7 +46,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 
 ## Secret defaults
 
-For a Worker managed by a `DatadogBYOCCluster`, the Operator supplies the BYOC indexer endpoint, Datadog site, and shared API key. Configure the pipeline destination before deployment, then provide the pipeline ID in `spec.components.pipelines[].pipelineID`. The manual endpoint settings below apply to separately managed Workers. See [Install BYOC with the Datadog Operator][10].
+For a Worker managed by a `DatadogBYOCCluster`, the Operator supplies the BYOC Logs indexer endpoint, Datadog site, and shared API key. Configure the pipeline destination before deployment, then provide the pipeline ID in `spec.components.pipelines[].pipelineID`. The following manual endpoint settings apply to standalone Workers. See [Install BYOC Logs with the Datadog Operator][10].
 
 {{% observability_pipelines/set_secrets_intro %}}
 

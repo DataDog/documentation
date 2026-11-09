@@ -128,7 +128,7 @@ To estimate PUT request volume and cost, see [Object Storage Request Estimation]
 
 ## Helm chart sizing tiers
 
-These presets apply to Helm deployments. For a `DatadogBYOCCluster`, configure [Operator resources](#operator-resource-configuration) instead.
+These presets apply to Helm deployments. For a `DatadogBYOCCluster`, see the [Operator resource configuration](#operator-resource-configuration) section instead.
 
 Set `indexer.podSize` and `searcher.podSize` to match the per-pod CPU and memory in the [starter configuration](#starter-configurations). The default is `xlarge`. Each preset also applies ingest queue and search cache sizes.
 
@@ -163,7 +163,7 @@ See the [Helm chart sizing map][1] for the complete configuration.
 
 ## Operator resource configuration
 
-With the Datadog Operator, set CPU requests, memory requests and limits, replicas, and storage in the `DatadogBYOCCluster` resource. The Operator derives engine cache and queue settings from memory limits and disk capacity. This tuning does not choose the cluster's capacity or provision Kubernetes nodes for you.
+With the Datadog Operator, set CPU requests, memory requests and limits, replicas, and storage in the `DatadogBYOCCluster` resource. The Operator derives engine cache and queue settings from memory limits and disk capacity. You choose the cluster's capacity and provision its Kubernetes nodes.
 
 When component resources or replica counts are omitted, the Operator applies these defaults:
 
@@ -176,7 +176,7 @@ When component resources or replica counts are omitted, the Operator applies the
 | Janitor | `2` | `4Gi` | `1` |
 | Each pipeline's Workers | `2` | `4Gi` | `2` |
 
-The [installation example][7] explicitly sets one replica for the metastore, indexer, searcher, compactor, and Worker. It uses the default resources for the required components and explicitly requests 4 CPUs and 16 GiB of memory for the compactor. The total is 20 CPUs and 64 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the workload sizing recommendations above to choose production resources and replica counts.
+The [installation example][7] explicitly sets one replica for the metastore, indexer, searcher, compactor, and Worker. It uses the default resources for the required components and explicitly requests 4 CPUs and 16 GiB of memory for the compactor. The total is 20 CPUs and 64 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the recommendations in [Starter configurations](#starter-configurations) to choose production resources and replica counts.
 
 Merge resource settings into the existing component, for example:
 
@@ -202,7 +202,7 @@ spec:
                 storage: 250Gi
 ```
 
-Preserve the other required fields in the manifest, then run `kubectl apply -f byoc-cluster.yaml`. Set storage requirements before creating the workload; updating a StatefulSet's volume claim template is not a general-purpose volume-resize procedure.
+Preserve the other required fields in the manifest, then run `kubectl apply -f byoc-cluster.yaml`. Set storage requirements before you create the workload. After you create it, changing the volume claim template doesn't resize its volumes.
 
 Without explicit storage settings, indexers and Workers request 30 GiB persistent volumes using the cluster's default StorageClass. Searchers use `emptyDir` by default. Override these defaults to meet ingestion durability and cache requirements. See [persistent Worker buffers][8] and the [CRD reference][9].
 

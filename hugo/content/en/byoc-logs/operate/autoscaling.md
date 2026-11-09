@@ -21,7 +21,7 @@ The `datadog/cloudprem` Helm chart creates Horizontal Pod Autoscalers (HPAs) for
 
 ## Before you begin
 
-The following Helm instructions cover indexers and standalone compactors. For a `DatadogBYOCCluster`, use [Configure autoscaling with the Operator](#configure-autoscaling-with-the-operator).
+The following Helm instructions cover indexers and standalone compactors. For a `DatadogBYOCCluster`, see the [Configure autoscaling with the Operator](#configure-autoscaling-with-the-operator) section.
 
 Before you enable autoscaling, you need:
 
@@ -118,7 +118,11 @@ If `kubectl get hpa` shows `<unknown>` in the `TARGETS` column, the HPA cannot r
 
 ## Configure autoscaling with the Operator
 
-The Operator supports `autoscaling` on indexers, searchers, compactors, and individual pipeline Worker entries. Install Kubernetes Metrics Server or the metrics API used by your HPA, set resource requests, and provision enough node capacity for the maximum replica count.
+The Operator supports `autoscaling` on indexers, searchers, compactors, and individual pipeline Worker entries. Before you configure autoscaling:
+
+- Install Kubernetes Metrics Server or the metrics API used by your HPA.
+- Set resource requests.
+- Provision enough node capacity for the maximum replica count.
 
 Merge an `autoscaling` object into the corresponding component of `byoc-cluster.yaml`. For example:
 
