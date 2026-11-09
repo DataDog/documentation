@@ -29,17 +29,19 @@ Learn how to set up and configure the Datadog MCP Server, which lets you retriev
 {{< tabs >}}
 {{% tab "Antigravity" %}}
 
-Install the Datadog plugin for Antigravity from its GitHub repository. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1].
+Install the Datadog plugin from the Antigravity marketplace. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1].
 
 **Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it to avoid conflicts.
 
 [1]: https://github.com/datadog-labs/antigravity-plugin
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-1. Install the Datadog plugin:
-    <pre><code>agy plugin install https://github.com/datadog-labs/antigravity-plugin</code></pre>
+1. Install the Datadog plugin from the Antigravity marketplace, using either the CLI or the app:
+   - **CLI**: Run the following command:
+     <pre><code>agy plugin install datadog</code></pre>
 
-   Plugins installed with the CLI are also available in the Antigravity app and IDE.
+     If you're prompted to choose a marketplace, specify it directly with `agy plugin install datadog@antigravity-plugins-partners`. Run `agy plugin list` to confirm that the plugin is installed and enabled. Plugins installed with the CLI are also available in the Antigravity app and IDE.
+   - **App or IDE**: In the left sidebar, select {{< ui >}}Skills & Customizations{{< /ui >}} (or go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Customizations{{< /ui >}}). Open the {{< ui >}}Marketplace{{< /ui >}} tab, search for `Datadog`, and click {{< ui >}}Install{{< /ui >}}. If prompted, restart Antigravity to load the plugin's MCP server and skills. You can also open the plugin controls by typing `/plugin` in the chat input.
 
 1. Run `/ddsetup` in Antigravity to connect the plugin to your Datadog account. During setup, select your [Datadog site][2].
 
