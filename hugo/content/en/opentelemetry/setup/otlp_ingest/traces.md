@@ -164,6 +164,8 @@ For example:
 ```
 ## OpenTelemetry Collector
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Integration with the OpenTelemetry Collector is not supported on the selected site.</div>{{< /site-region >}}
+
 Configure the [recommended OpenTelemetry Collector setup][10] to export traces to this endpoint and generate APM trace metrics before sampling.
 
 ## Troubleshooting
