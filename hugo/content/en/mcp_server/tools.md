@@ -2189,7 +2189,7 @@ Tools for working with [notebooks][57] beyond the notebook tools in the `core` t
 ### `clone_datadog_notebook`
 *Toolset: **notebooks***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
-Creates a copy of a notebook, including its content, time frame, template variables, and tags. The copy has the same access as the original unless you make it private. Copying a template creates a regular notebook from that template.
+Creates a copy of a notebook, including its content, time frame, template variables, and tags. The copy has the same access settings as the original unless you make it private. Copying a template creates a regular notebook from that template.
 
 - Make a copy of notebook 12345678 for this week's review.
 - Create a private copy of the incident response template notebook.
