@@ -34,6 +34,7 @@ An emerging threat is a new or evolving attack campaign or supply-chain attack t
 - **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks, or targeted campaigns.
 - **Imminent threat**: The threat has already caused impact or is expected to escalate, with near-term attacks likely to affect many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
+
 ## Investigate emerging vulnerabilities and threats with Bits Chat
 
 **Requirements:** The **Bits Chat Access** permission
