@@ -129,13 +129,13 @@ You can set the following options when you run the installer, or change them lat
 ### Mode {#mode}
 
 The mode controls whether AI Guard can block coding agent actions:
-- `observe`: AI Guard evaluates each action and records the result, but doesn't block anything. Use this mode to review results and adjust your policies before you turn on blocking.
+- `observe` (default): AI Guard evaluates each action and records the result, but doesn't block anything. Use this mode to review results and adjust your policies before you turn on blocking.
 - `enforce`: AI Guard can block actions. Blocking also requires the policy enforcement mode to be {{< ui >}}Block unsafe{{< /ui >}}. See the [Turn on blocking](#turn-on-blocking) section.
 
-| When               | Flag or command                     | Default   |
-|--------------------|-------------------------------------|-----------|
-| At installation    | `--security-mode <MODE>`            | `enforce` |
-| After installation | `trajectory plugins security setup` | `observe` |
+| When               | Flag or command                     |
+|--------------------|-------------------------------------|
+| At installation    | `--security-mode <MODE>`            |
+| After installation | `trajectory plugins security setup` |
 
 To change the mode after installation, run the following command. Replace `<CLIENT_IDS>` with the [client IDs](#enable-ai-guard-without-the-installer) of the coding agents you protect, and add `--yes` to confirm `enforce`:
 
@@ -146,13 +146,13 @@ trajectory plugins security setup --mode <MODE> --clients <CLIENT_IDS>
 ### Privacy mode {#privacy-mode}
 
 The privacy mode controls which content Trajectory stores in Datadog with each evaluation result:
-- `coding_agent`: Trajectory removes message content, and keeps only metadata such as the action, the reason, and the attack categories.
+- `coding_agent` (default): Trajectory removes message content, and keeps only metadata such as the action, the reason, and the attack categories.
 - `unredacted`: Trajectory stores the full prompts and tool content.
 
-| When               | Flag or command                                  | Default        |
-|--------------------|--------------------------------------------------|----------------|
-| At installation    | `--security-privacy <PRIVACY_MODE>`              | `coding_agent` |
-| After installation | `trajectory plugins modules evaluator configure` | `coding_agent` |
+| When               | Flag or command                                  |
+|--------------------|--------------------------------------------------|
+| At installation    | `--security-privacy <PRIVACY_MODE>`              |
+| After installation | `trajectory plugins modules evaluator configure` |
 
 To change the privacy mode after installation, run:
 
