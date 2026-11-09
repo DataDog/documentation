@@ -114,9 +114,9 @@ By default, [log usage metrics][10] are available to track the number of ingeste
 
 See [Anomaly detection monitors][11] for steps on how to create anomaly monitors with the usage metrics.
 
-**Note**: Datadog recommends setting the unit to `byte` for the `datadog.estimated_usage.logs.ingested_bytes` in the [metric summary page][12]:
+**Note**: Datadog recommends setting the unit to `byte` for the `datadog.estimated_usage.logs.ingested_bytes` in the [Metrics Catalog page][12]:
 
-{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="The metric summary page showing the datadog.estimated_usage.logs.ingested_bytes side panel with the unit set to byte" style="width:70%;">}}
+{{< img src="logs/guide/logs_estimated_bytes_unit.png" alt="The Metrics Catalog page showing the datadog.estimated_usage.logs.ingested_bytes side panel with the unit set to byte" style="width:70%;">}}
 
 #### Anomaly detection monitors
 
@@ -239,7 +239,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/logs_to_metrics/#logs-usage-metrics
 [11]: /monitors/types/anomaly/
-[12]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
+[12]: https://app.datadoghq.com/metric/catalog?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [13]: https://app.datadoghq.com/monitors/create
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/

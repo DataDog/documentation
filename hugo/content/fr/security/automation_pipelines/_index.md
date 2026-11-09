@@ -55,6 +55,20 @@ Automation Pipelines fonctionne via un système basé sur des règles qui vous p
 - **Configuration des règles** : Chaque règle se compose de plusieurs critères, conçus pour filtrer les constatations en fonction d'attributs spécifiques. Au sein d'une règle, la combinaison de ces critères fonctionne comme un ET logique ; cependant, si des critères incluent plusieurs valeurs, ces valeurs fonctionnent comme un OU logique. Cette structure vous donne la flexibilité de créer des règles qui ciblent précisément vos besoins.
 - **Correspondance des règles** : Automation Pipelines évalue les constatations par rapport à vos règles dans l'ordre où vous les avez listées. À mesure que chaque constatation est traitée, Automation Pipelines parcourt la liste jusqu'à ce qu'il trouve une règle correspondante, moment auquel l'action spécifiée — telle que la mise en sourdine des problèmes non urgents ou la mise en évidence des menaces critiques — est déclenchée. Les règles des pipelines d'automatisation s'appliquent immédiatement aux nouvelles constatations. Pour les constatations existantes, les mises à jour peuvent prendre jusqu'à deux heures.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+## Suggestions de règles {#rule-suggestions}
+
+Datadog suggère des règles d'automatisation adaptées à votre organisation. Un agent IA examine vos résultats, vos règles existantes et le triage que vos équipes effectuent manuellement afin d'identifier les schémas qui méritent d'être automatisés. Chaque suggestion indique le périmètre qu'elle couvre, l'action qu'elle entreprend, le nombre de résultats auxquels elle s'applique et l'observation qui la justifie.
+
+{{< img src="security/automation_pipelines/suggestions.png" alt="Le panneau Suggested for your environment sur la page Findings Automation, montrant trois cartes de suggestion : chacune indique l'action, les types de résultats et la requête qu'elle couvre, le nombre de résultats auxquels elle s'applique et la raison pour laquelle Datadog l'a suggérée, avec les boutons Review et Approve" style="width:100%;" >}}
+
+Vos suggestions sont répertoriées sur la page [Findings Automation][1]. Elles vous sont également proposées au fur et à mesure de votre travail : selon les résultats que vous consultez dans un explorer ou l'action que vous êtes sur le point d'effectuer sur ceux-ci, Datadog peut afficher les suggestions pertinentes dans ce contexte.
+
+Un clic sur **Review** ouvre le formulaire de création de règle prérempli avec le périmètre et l'action suggérés, afin que vous puissiez apporter les modifications souhaitées avant d'enregistrer. Datadog apprend des suggestions que vous approuvez et rejetez, et s'adapte aux changements dans votre environnement, pour continuer à proposer des suggestions pertinentes.
+
+[1]: https://app.datadoghq.com/security/configuration/findings-automation
+{{< /site-region >}}
+
 ## Cas d'utilisation {#use-cases}
 
 ### Ajustez la gravité des constatations pour refléter votre contexte métier {#adjust-finding-severities-to-reflect-your-business-context}
@@ -85,7 +99,7 @@ Attribuez des délais de remédiation aux constatations pour améliorer la respo
 
 Datadog fournit un ensemble de règles de boîte de réception par défaut qui alimentent la boîte de réception Security. Vous pouvez examiner ces règles, désactiver celles qui ne correspondent pas à votre organisation et ajouter vos propres règles qui définissent les constatations mises en évidence. Cela vous permet de :
 
-- **Faites remonter les constatations non capturées par défaut** : Utilisez des règles personnalisées pour mettre en évidence les constatations que les règles par défaut ne détectent pas, afin de garantir que les constatations critiques ne soient pas négligées.
+- **Faire remonter les constatations non capturées par défaut** : Utilisez des règles personnalisées pour mettre en évidence les constatations que les règles par défaut ne détectent pas, afin de garantir que les constatations critiques ne soient pas négligées.
 - **Renforcer la conformité et traiter les préoccupations clés du système** : Traitez les préoccupations affectant la conformité réglementaire ou les systèmes commerciaux importants, quelle que soit leur gravité.
 - **Priorisez les risques actuels** : Concentrez-vous sur les menaces immédiates, telles que les risques d'identité après un incident ou les constatations à l'échelle de l'industrie.
 

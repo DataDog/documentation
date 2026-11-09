@@ -7,29 +7,29 @@ cascade:
     tags:
     - downtimes
     - mute monitors
-description: Programe tiempos de inactividad para sus Datadog monitors para evitar
-  alertas durante períodos específicos.
+description: Programe tiempos de inactividad para sus seguimientos de Datadog para
+  evitar alertas durante periodos específicos
 further_reading:
 - link: /monitors/guide/suppress-alert-with-downtimes
   tag: Guía
-  text: Suprimir alertas con tiempos de inactividad
+  text: Suprima alertas con tiempos de inactividad
 - link: /monitors/guide/scoping_downtimes
   tag: Guía
-  text: Definiendo horarios de tiempos de inactividad
+  text: Definición del contexto de los horarios de tiempo de inactividad
 - link: /monitors/quality/
   tag: Documentación
-  text: Ver monitors que están silenciados por un período prolongado.
+  text: Visualice los seguimientos que están silenciados durante un periodo prolongado
 - link: /monitors/
   tag: Documentación
-  text: Crear monitors
+  text: Cree seguimientos.
 - link: /monitors/notify/
   tag: Documentación
-  text: Notificaciones de monitors.
+  text: Notificaciones de seguimiento
 title: Tiempos de inactividad
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Programe tiempos de inactividad para apagones del sistema, mantenimiento fuera de línea o actualizaciones sin activar sus monitors. Los tiempos de inactividad silencian todas las alertas y notificaciones de los monitors, pero no evitan las transiciones de estado de los monitors.
+Programe tiempos de inactividad para apagados del sistema, mantenimiento fuera de línea o actualizaciones sin activar sus seguimientos. Los tiempos de inactividad silencian todas las alertas y notificaciones de los seguimientos, pero no impiden las transiciones de estado de los seguimientos.
 
 {{< img src="/monitors/downtimes/downtime_overview.png" alt="Ejemplo de un tiempo de inactividad" style="width:100%;" >}}
 
@@ -37,152 +37,164 @@ Programe tiempos de inactividad para apagones del sistema, mantenimiento fuera d
 
 ### Crear un horario de tiempo de inactividad {#create-a-downtime-schedule}
 
-Para programar un tiempo de inactividad de un monitor en Datadog, navegue a la página [**Manage Downtime**][1]. Luego, haga clic en el botón **Schedule Downtime** en la parte superior derecha.
+Para programar un tiempo de inactividad de un seguimiento en Datadog, navegue a la página [{{< ui >}}Manage Downtime{{< /ui >}}][1]. Luego, haga clic en el botón {{< ui >}}Schedule Downtime{{< /ui >}} en la parte superior derecha.
 
-Para silenciar un monitor individual, haga clic en el botón **Mute** en la parte superior de la página de estado del monitor. Esto crea un horario de tiempo de inactividad para ese monitor en particular.
+Para silenciar un seguimiento individual, haga clic en el icono de silencio (<i class="icon-volume-wui"></i>) en la parte superior de la página de estado del seguimiento. Esto crea un horario de tiempo de inactividad para ese seguimiento en particular. Si no tiene permiso para silenciar el seguimiento, el icono de silencio estará deshabilitado. Consulte [Permisos](#permissions).
 
 ### Elija qué silenciar {#choose-what-to-silence}
 
-Aplica horarios de inactividad a monitors específicos por nombre o a un amplio rango de monitors mediante etiquetas de monitor. Aplica filtros adicionales a través del [*contexto del grupo*](#downtime-scope). Haga clic en **Preview affected monitors** para ver los monitors incluidos. Para más ejemplos y casos de uso, consulte [Scoping downtimes schedules][2].
+Aplique horarios de tiempo de inactividad a seguimientos específicos por nombre o a una amplia gama de seguimientos mediante etiquetas de seguimiento. Aplique filtros adicionales a través de [{{< ui >}}Group scope{{< /ui >}}](#downtime-scope). Haga clic en {{< ui >}}Preview affected monitors{{< /ui >}} para ver los seguimientos incluidos. Si su organización utiliza [controles de acceso a tiempos de inactividad](#permissions-and-access-controls), la vista previa solo enumera los seguimientos que tiene permiso para silenciar. Para obtener más ejemplos y casos de uso, consulte [Definición del contexto de los horarios de tiempo de inactividad][2].
 
-**Nota**: Cualquier monitor creado o editado después de que se programe el tiempo de inactividad se incluye automáticamente en el mismo si coincide con el contexto.
+**Nota**: Cualquier seguimiento creado o editado después de programar el tiempo de inactividad se incluye automáticamente en el tiempo de inactividad si coincide con el contexto.
 
 {{< tabs >}}
-{{% tab "Por nombre de monitor" %}}
+{{% tab "Por nombre de seguimiento" %}}
 
-Busque o utilice el menú desplegable para elegir qué monitors silenciar. Si el campo se deja vacío, todos los monitors se silencian por defecto. También puede seleccionar un contexto para restringir su tiempo de inactividad a un servidor, dispositivo o etiqueta arbitraria específicos. Solo los monitors que tienen **TODOS los contextos seleccionados** son silenciados.
+Busque o utilice el menú desplegable para elegir qué seguimientos silenciar. Si el campo se deja vacío, todos los seguimientos se silencian de forma predeterminada. También puede seleccionar un contexto para limitar el tiempo de inactividad a un servidor, dispositivo o etiqueta arbitraria específicos. Solo se silencian los seguimientos que tienen **TODOS los contextos seleccionados**.
 {{% /tab %}}
-{{% tab "Por etiquetas de monitor." %}}
+{{% tab "Por etiquetas de seguimiento" %}}
 
-Programe un tiempo de inactividad basado en una o más [etiquetas de monitor][3]. El número máximo de etiquetas de monitor que se pueden seleccionar para un solo tiempo de inactividad es 32. Cada etiqueta puede tener un máximo de 256 caracteres. Solo los monitors que tienen **TODAS las etiquetas seleccionadas** son silenciados. También puede seleccionar contextos para restricciones adicionales.
+Programe un tiempo de inactividad basado en una o más [etiquetas de seguimiento][3]. El número máximo de etiquetas que se pueden seleccionar para un solo tiempo de inactividad es 32. Cada etiqueta puede tener un máximo de 256 caracteres de longitud. Solo se silencian los seguimientos que tienen **TODAS las etiquetas seleccionadas**. También puede seleccionar contextos para establecer restricciones adicionales.
 
 [3]: /es/monitors/manage/#monitor-tags
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Contexto de inactividad {#downtime-scope}
-Utilice el contexto del grupo para aplicar filtros adicionales a su tiempo de inactividad y tener más control sobre qué monitors silenciar. El contexto de grupo de un tiempo de inactividad se evalúa después del objetivo específico del monitor. Si apunta a múltiples monitors utilizando etiquetas de monitor, se encuentran monitors que están etiquetados antes de que coincida con el contexto del grupo.
+#### Contexto del tiempo de inactividad {#downtime-scope}
+Utilice el contexto de grupo para aplicar filtros adicionales a su tiempo de inactividad y tener más control sobre qué seguimientos silenciar. El contexto de grupo de un tiempo de inactividad se compara después del objetivo específico del seguimiento. Si selecciona varios seguimientos mediante etiquetas de seguimiento, primero se encuentran los seguimientos etiquetados y luego se compara el contexto de grupo.
 
-Por ejemplo, un monitor que observa la latencia promedio de todos sus servicios puede encontrar solicitudes lentas y posibles errores al realizar una actualización en el servicio `web-store`.
+Por ejemplo, un seguimiento que analiza la latencia promedio de todos sus servicios puede detectar solicitudes lentas y posibles errores mientras se ejecuta una actualización en el servicio `web-store`.
 
-Le gustaría asegurarse de que las Notifications relacionadas con `service:web-store` estén silenciadas y que otras alertas críticas para los servicios restantes se entreguen como de costumbre. Ingrese `service:web-store` en el contexto del grupo del tiempo de inactividad después de seleccionar los monitors objetivo.
+Usted desea asegurarse de que las notificaciones relacionadas con `service:web-store` se silencien y que otras alertas críticas para los servicios restantes se entreguen como de costumbre. Ingrese `service:web-store` en el contexto de grupo del tiempo de inactividad después de seleccionar los objetivos de seguimiento.
 
 **Nota**: esto también funciona con grupos que tienen múltiples dimensiones, por ejemplo `service` y `host`. Crear un tiempo de inactividad en `service:web-store` silenciaría todos los grupos que incluyen dicho servicio, por ejemplo `service:web-store,host:a` o `service:web-store,host:b`.
 
-#### Sintaxis del contexto de tiempo de inactividad {#downtime-scope-syntax}
-La consulta del contexto de tiempo de inactividad sigue la misma [Sintaxis de Búsqueda][3] común que muchos otros productos en la plataforma admiten. Para incluir todos los grupos en el contexto de un tiempo de inactividad, escriba `*` para el `Group scope`. Ejemplos adicionales de contextos de grupo incluyen:
+#### Sintaxis del contexto del tiempo de inactividad {#downtime-scope-syntax}
+La consulta del contexto del tiempo de inactividad sigue la misma [sintaxis de búsqueda][3] habitual que admiten muchos otros productos de la plataforma. Para incluir todos los grupos en el contexto de un tiempo de inactividad, escriba `*` para `Group scope`. Otros ejemplos de contextos de grupo incluyen:
 
-| Contexto de grupo de tiempo de inactividad | Explicación |
+| Contexto de grupo del tiempo de inactividad | Explicación |
 | ------------------- | ---------------------- |
-| `service:web-store`       | Silencia todas las Notifications sobre el servicio `web-store`. |
-| `service:web-store AND env:dev`       | Silencia todas las Notifications sobre el servicio `web-store` que se ejecuta en el entorno `dev`. |
-| `env:(dev OR staging)`       | Silencia cualquier Notification relacionada con el entorno `dev` o `staging`. |
-| `service:web-store AND env:(dev OR staging)`       | Silencia cualquier Notification relacionada con el servicio `web-store` que se ejecuta en el entorno `dev` o `staging`. |
-| `host:authentication-*`       | Silencia cualquier Notification que se relacione con un host cuyo nombre esté precedido por `authentication-`. |
-| `host:*-prod-cluster`       | Silencia cualquier Notification que esté relacionada con un host cuyo nombre termina en `-prod-cluster`. |
-| `host:*-prod-cluster`       | Silencia cualquier Notification que esté relacionada con un host cuyo nombre termina en `-prod-cluster`. |
-| `service:webstore AND -env:prod`       | Silencia cualquier Notification sobre el servicio `web-store` que **no** se esté ejecutando en el entorno `prod`. |
+| `service:web-store`       | Silencia todas las notificaciones sobre el servicio `web-store`. |
+| `service:web-store AND env:dev`       | Silencia todas las notificaciones sobre el servicio `web-store` que se ejecuta en el entorno `dev`. |
+| `env:(dev OR staging)`       | Silencia cualquier notificación relacionada con el entorno `dev` o `staging`. |
+| `service:web-store AND env:(dev OR staging)`       | Silencia cualquier notificación relacionada con el servicio `web-store` que se ejecuta en el entorno `dev` o `staging`. |
+| `host:authentication-*`       | Silencia cualquier notificación relacionada con un servidor cuyo nombre tenga el prefijo `authentication-`. |
+| `host:*-prod-cluster`       | Silencia cualquier notificación relacionada con un servidor cuyo nombre tenga el sufijo `-prod-cluster`. |
+| `host:*-prod-cluster`       | Silencia cualquier notificación relacionada con un servidor cuyo nombre tenga el sufijo `-prod-cluster`. |
+| `service:webstore AND -env:prod`       | Silencia cualquier notificación sobre el servicio `web-store` que **no** se esté ejecutando en el entorno `prod`. |
 
-#### Limitaciones del contexto de tiempo de inactividad {#downtime-scope-limitations}
-Existen algunas limitaciones que **no son soportadas**, las cuales incluyen:
+#### Limitaciones del contexto del tiempo de inactividad {#downtime-scope-limitations}
+Hay algunas restricciones; **no se admiten** las siguientes opciones:
 
-* Más de dos niveles de anidamiento, como `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, no son soportados. Como máximo, los tiempos de inactividad aceptan dos niveles de anidamiento. En su lugar, utilice tiempos de inactividad separados para desglosar la lógica.
-* La negación solo es soportada para pares clave/valor y etiquetas con `OR`. Por ejemplo, `-key:value` y `-key(A OR B)`. Contextos como `-service:(A AND B)`, `service:(-A OR -B)` o `-service(A B)` no son soportados.
-* Los ORs de nivel superior no son soportados. Por ejemplo, `service:A OR service:B` es válido, pero `service:A OR host:X` no funciona. Un `OR` entre dos etiquetas de nivel superior diferentes requiere dos tiempos de inactividad separados.
-* Las etiquetas sin clave, como `prod AND service:(A or B)` o solo `prod`, no son soportadas. Las etiquetas necesitan tener una clave, en este caso, por ejemplo, `env:prod`.
-* Los comodines de signo de interrogación: `service:auth?` no son compatibles. Utilice `*` en su lugar si necesita usar comodines.
-* Caracteres inválidos dentro de la clave: `en&v:prod` no es un contexto de tiempo de inactividad válido y será rechazado.
+* No se admiten más de dos niveles de anidamiento, como `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`. Como máximo, los tiempos de inactividad aceptan dos niveles de anidamiento. En su lugar, utilice tiempos de inactividad separados para desglosar la lógica.
+* La negación solo se admite para pares clave/valor y etiquetas con `OR`. Por ejemplo, `-key:value` y `-key(A OR B)`. Contextos como `-service:(A AND B)`, `service:(-A OR -B)` o `-service(A B)` no son compatibles.
+* Los OR de nivel superior no son compatibles. Por ejemplo, `service:A OR service:B` es válido, pero `service:A OR host:X` no funciona. Un `OR` entre dos etiquetas de nivel superior diferentes requiere dos tiempos de inactividad separados.
+* Las etiquetas sin clave, como `prod AND service:(A or B)` o simplemente `prod`, no son compatibles. Las etiquetas deben tener una clave, en este caso, por ejemplo, `env:prod`.
+* Comodines de signo de interrogación: `service:auth?` no son compatibles. Use `*` en su lugar si necesita usar comodines.
+* Caracteres no válidos dentro de la clave: `en&v:prod` no es un contexto de tiempo de inactividad válido y se rechazará.
 
-### Establezca un horario de tiempo de inactividad {#set-a-downtime-schedule}
+### Establecer un horario de tiempo de inactividad {#set-a-downtime-schedule}
 
 #### Una vez {#one-time}
 
 Establezca un tiempo de inactividad único ingresando la fecha de inicio, la hora y la zona horaria. Opcionalmente, establezca una fecha y hora de finalización.
 
-{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="campos para programar tiempo de inactividad único" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_onetime.jpg" alt="campos para programar un tiempo de inactividad único" style="width:90%;">}}
 
 #### Recurrente {#recurring}
 
-Los tiempos de inactividad recurrentes son útiles para ventanas de mantenimiento recurrentes. Establezca un tiempo de inactividad recurrente ingresando la fecha de inicio, la hora, la zona horaria, la repetición y la duración. Opcionalmente, especifique una fecha de finalización o el número de ocurrencias.
+Los tiempos de inactividad recurrentes son útiles para ventanas de mantenimiento recurrentes. Establezca un tiempo de inactividad recurrente ingresando la fecha de inicio, la hora, la zona horaria, la repetición y la duración. Opcionalmente, especifique una fecha de finalización o un número de ocurrencias.
 
-Cuando un tiempo de inactividad único de un tiempo de inactividad recurrente termina, el tiempo de inactividad único se cancela y se crea un nuevo tiempo de inactividad con las mismas restricciones y tiempos de inicio y finalización actualizados. <br>
-**Nota**: El creador original está asociado con todos los nuevos tiempos de inactividad creados.
+Cuando finaliza un tiempo de inactividad único de un tiempo de inactividad recurrente, el tiempo de inactividad único se cancela y se crea uno nuevo con las mismas restricciones y con las horas de inicio y finalización actualizadas. <br>
+**Nota**: El creador original está asociado con todos los tiempos de inactividad recién creados.
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad utilizando un horario recurrente para silenciar alertas fuera del horario laboral y durante el fin de semana." style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Configuración de tiempos de inactividad mediante un horario recurrente para silenciar alertas fuera del horario laboral y durante el fin de semana" style="width:100%;" >}}
 
-Utilice [reglas de recurrencia][4] (RRULEs) para definir horarios de tiempo de inactividad. Utilice el [generador de RRULE oficial][5] como herramienta para generar reglas recurrentes. Un caso de uso común es utilizar RRULES para definir tiempos de inactividad en días específicos del mes, por ejemplo, el tercer lunes de cada mes. Para más casos de uso sobre recurrencia, consulte la guía para [Suppress alerts with Downtimes][6].
+Utilice [reglas de recurrencia][4] (RRULEs) para definir los horarios de tiempos de inactividad. Utilice el [generador de RRULE][5] oficial como herramienta para generar reglas recurrentes. Un caso de uso común es utilizar RRULES para definir tiempos de inactividad en días específicos del mes, por ejemplo, el tercer lunes de cada mes. Para obtener más casos de uso sobre recurrencia, consulte la guía para [Suprimir alertas con tiempos de inactividad][6].
 
 **Nota**: Los atributos que especifican la duración en RRULE no son compatibles (por ejemplo, `DTSTART`, `DTEND`, `DURATION`).
 
 ## Notifications {#notifications}
-### Agregue un mensaje {#add-a-message}
+### Agregar un mensaje {#add-a-message}
 
-Ingrese un mensaje para alertar a su equipo sobre este tiempo de inactividad. El campo de mensaje permite el formato markdown estándar y la sintaxis de Datadog `@-notification`. Consulte la [Notifications page][7] para obtener más información sobre las opciones de formato.
+Ingrese un mensaje para alertar a su equipo sobre este tiempo de inactividad. El campo de mensaje permite formato markdown estándar y la sintaxis `@-notification` de Datadog. Consulte la [página de Notifications][7] para obtener más información sobre las opciones de formato.
 
-### Configurar Notifications y automatizaciones {#configure-notifications-and-automations}
+### Configure las notificaciones y automatizaciones {#configure-notifications-and-automations}
 
-Configure Notifications y automatizaciones especificando miembros del equipo o enviando el mensaje a una [integration][8]. Datadog envía Notifications a los destinos especificados cada vez que se programa, inicia, cancela o expira el tiempo de inactividad. Estas notificaciones de auditoría permiten que su equipo esté al tanto de los tiempos de inactividad en su sistema.
+Configure notificaciones y automatizaciones especificando miembros del equipo o enviando el mensaje a una [integración][8] de servicio. Datadog envía notificaciones a los destinos especificados cada vez que el tiempo de inactividad se programa, inicia, cancela o vence. Estas notificaciones de auditoría permiten que su equipo esté al tanto de los tiempos de inactividad en su sistema.
 
-### Deshabilitar la primera notificación de recuperación {#disable-first-recovery-notification}
+### Desactivar primera notificación de recuperación {#disable-first-recovery-notification}
 
-Por defecto, Datadog envía una notificación de recuperación para los monitores que se activan **antes** de un tiempo de inactividad y terminan recuperándose **durante** un tiempo de inactividad. Esto es útil al usar integraciones de terceros para cerrar automáticamente incidentes abiertos. Seleccionar la casilla de verificación silencia estas notificaciones.
+De forma predeterminada, Datadog envía una notificación de recuperación para los seguimientos que se activan **antes** de un tiempo de inactividad y terminan recuperándose **durante** un tiempo de inactividad. Esto es útil cuando se utilizan integraciones de terceros para cerrar automáticamente los incidentes abiertos. Al seleccionar la casilla de verificación se silencian estas notificaciones.
 
 {{< img src="monitors/downtimes/downtime_first_recovery.png" alt="silenciar la primera notificación de recuperación" style="width:80%;">}}
 
-La opción para deshabilitar la primera notificación de recuperación es aditiva entre múltiples tiempos de inactividad. Por ejemplo, si múltiples tiempos de inactividad se superponen y silencian el mismo monitor, la primera notificación de recuperación se silencia si **al menos uno** de los tiempos de inactividad marcó la opción para deshabilitarla.
+La opción para deshabilitar la primera notificación de recuperación es aditiva entre múltiples tiempos de inactividad. Por ejemplo, si varios tiempos de inactividad se superponen y silencian el mismo seguimiento, la primera notificación de recuperación se silencia si **al menos un** tiempo de inactividad marcó la opción para deshabilitarla.
 
-**Nota**: Esta opción silencia la **primera** notificación de recuperación. Si un monitor vuelve a activarse y recuperarse durante un tiempo de inactividad, entonces las notificaciones correspondientes siempre se silencian, independientemente de la configuración de esta opción.
+**Nota**: Esta opción silencia la **primera** notificación de recuperación. Si un seguimiento vuelve a activarse y recuperarse durante un tiempo de inactividad, las notificaciones correspondientes siempre se silencian, independientemente de la configuración de esta opción.
 
-## Administrar {#manage}
+## Permisos y controles de acceso {#permissions-and-access-controls}
 
-La [Manage Downtime page][1] muestra la lista de tiempos de inactividad activos y programados. Seleccione un tiempo de inactividad para ver detalles, editar o eliminarlo. Los detalles incluyen su creador, su contexto y una lista de los monitores a los que se aplica.
-Utilice el panel de facetas y la barra de búsqueda para filtrar la lista en los parámetros `Creator`, `Scope`, `Monitor Tags`, `Active`, `Automuted`, `Recurring`.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+El nivel de acceso Muter y los controles de acceso a tiempos de inactividad están en Preview.
+{{< /callout >}}
 
-{{< img src="monitors/downtimes/downtime_manage.png" alt="Manage Downtime page" style="width:100%;">}}
+Para programar, editar o cancelar tiempos de inactividad, necesita el [permiso Manage Downtimes][16].
 
-### History {#history}
+Con los controles de acceso a tiempos de inactividad, un tiempo de inactividad solo silencia los seguimientos que usted tiene permiso para silenciar (nivel de [acceso][17] **Muter** o **Editor**). Los equipos de Teams pueden delegar el silenciamiento a ingenieros de guardia o cuentas de servicio sin el riesgo de que un tiempo de inactividad silencie seguimientos que no les pertenecen.
 
-El historial de tiempos de inactividad se puede ver en la [Monitor Status][9] page, superpuesto en el historial de transición del grupo, y en el [Events explorer][10] buscando `tags:audit downtime`, o un tiempo de inactividad específico por ID con `tags:audit downtime_id:<DOWNTIME_ID>`.
+**Nota**: Un tiempo de inactividad se ejecuta con el acceso de su creador y no puede cambiarlo después de que se haya creado. Si un equipo central programa tiempos de inactividad para seguimientos restringidos a otros equipos, otorgue a ese equipo acceso de Muter a esos seguimientos.
 
-### Silenciando {#muting}
+## Manage {#manage}
 
-Los monitores generan eventos cuando cambian entre posibles estados: `ALERT`, `WARNING`, `RESOLVED` y `NO DATA`. Cuando un monitor está silenciado o tiene un tiempo de inactividad programado, las transiciones de `RESOLVED` a otro estado **no** generan eventos ni notificaciones.
+La página [{{< ui >}}Manage Downtime{{< /ui >}}][1] muestra la lista de tiempos de inactividad activos y programados. Seleccione un tiempo de inactividad para visualizar sus detalles, editarlo o eliminarlo. Los detalles incluyen su creador, su contexto y una lista de los seguimientos a los que se aplica.
+Utilice el panel de facetas y la barra de búsqueda para filtrar la lista según los parámetros {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Scope{{< /ui >}}, {{< ui >}}Monitor Tags{{< /ui >}} o {{< ui >}}Active{{< /ui >}}, {{< ui >}}Automuted{{< /ui >}}, {{< ui >}}Recurring{{< /ui >}}.
 
-{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Gráfico de estado del monitor que muestra la transición de estado a alerta durante el tiempo de inactividad, no creará un evento de alerta." style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_manage.png" alt="página de administración de tiempos de inactividad" style="width:100%;">}}
 
-**Nota**: Silenciar o desilenciar un monitor desde la Monitor Status page no elimina los tiempos de inactividad programados asociados con el monitor. Para editar o eliminar un tiempo de inactividad, utilice la [Manage Downtime][1] page o la [API][11].
+### Historial {#history}
 
-### Expiración {#expiration}
+El historial de tiempos de inactividad se puede visualizar en la página [Monitor Status][9], superpuesto al historial de transiciones de grupo, y en [Events explorer][10] buscando `tags:audit downtime` o un tiempo de inactividad específico por ID con `tags:audit downtime_id:<DOWNTIME_ID>`.
 
-Por defecto, si un monitor está en un estado digno de alerta (`ALERT`, `WARNING` o `NO DATA`) cuando un tiempo de inactividad expira, el monitor genera una nueva notificación. Esto se aplica a los monitores que cambian de estado durante el tiempo de inactividad (como de `OK` a `ALERT`, `WARNING` o `NO DATA`), y a los monitores que ya tienen un estado de alerta cuando comienza el tiempo de inactividad. Si un tiempo de inactividad se cancela manualmente, no se envían notificaciones, incluso si el monitor ha entrado en un estado de alerta.
+### Silenciamiento {#muting}
 
-Para anular el comportamiento predeterminado, especifique qué notificaciones deben enviarse al final del tiempo de inactividad con las opciones en la sección **Configure notifications and automations**. Para los tiempos de inactividad creados con la API, el comportamiento predeterminado es excluir la opción `Is cancelled`.
+Los seguimientos activan eventos cuando cambian entre los estados posibles: `ALERT`, `WARNING`, `RESOLVED` y `NO DATA`. Cuando un seguimiento está silenciado o tiene un tiempo de inactividad programado, las transiciones de `RESOLVED` a otro estado **no** activan eventos ni notificaciones.
 
-{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="La sección <i>Configure notifications and automations</i> de un monitor con condiciones específicas de inactividad." style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_on_alert.png" alt="Gráfico del estado del seguimiento que muestra la transición al estado de alerta durante el tiempo de inactividad; no se creará un evento de alerta" style="width:80%;">}}
 
-**Ejemplo 1:** Si un monitor está en un estado de alerta *antes* de que comience el tiempo de inactividad y *continúa* durante la duración del tiempo de inactividad:
-1. Durante el tiempo de inactividad, las notificaciones para esta alerta están suprimidas.
-2. El monitor permanece en un estado de alerta (porque las condiciones aún se cumplen).
+**Nota**: Silenciar o reactivar un seguimiento desde la página de estado del seguimiento no elimina los tiempos de inactividad programados asociados con ese seguimiento. Para editar o eliminar un tiempo de inactividad, utilice la página [{{< ui >}}Manage Downtime{{< /ui >}}][1] o la [API][11].
+
+### Vencimiento {#expiration}
+
+De forma predeterminada, si un seguimiento se encuentra en un estado que merece una alerta (`ALERT`, `WARNING` o `NO DATA`) cuando vence un tiempo de inactividad, el seguimiento activa una nueva notificación. Esto se aplica a los seguimientos que cambian de estado durante el tiempo de inactividad (como de `OK` a `ALERT`, `WARNING` o `NO DATA`), y a los seguimientos que ya tienen un estado que merece una alerta cuando comienza el tiempo de inactividad. Si un tiempo de inactividad se cancela manualmente, no se envían notificaciones, incluso si el seguimiento ha entrado en un estado que merece una alerta.
+
+Para anular el comportamiento predeterminado, especifique qué notificaciones deben enviarse al finalizar los tiempos de inactividad con las opciones en la sección {{< ui >}}Configure notifications and automations{{< /ui >}}. Para los tiempos de inactividad creados con la API, el comportamiento predeterminado es excluir la opción `Is cancelled`.
+
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="La sección Configure notifications and automations de un seguimiento con condiciones de tiempo de inactividad específicas" style="width:100%;">}}
+
+**Ejemplo 1:** Si un seguimiento está en estado de alerta *antes* de que comience el tiempo de inactividad y *continúa* así durante todo ese período:
+1. Durante el tiempo de inactividad, las notificaciones para esta alerta se suprimen.
+2. El seguimiento permanece en estado de alerta (porque las condiciones aún se cumplen).
 3. El tiempo de inactividad termina.
 4. Las condiciones de alerta aún se cumplen, por lo que se envía una notificación.
 
-**Ejemplo 2:** Si un monitor está en un estado de alerta *antes* de que comience un tiempo de inactividad y se recupera *durante* ese tiempo de inactividad:
+**Ejemplo 2:** Si un seguimiento está en estado de alerta *antes* de que comience un tiempo de inactividad y se recupera *durante* ese tiempo de inactividad:
 1. El estado cambia de `ALERT` a `OK`.
 2. La notificación de recuperación se envía durante el tiempo de inactividad, pero solo para la primera recuperación durante ese tiempo de inactividad.
 
-### Monitor report {#monitor-report}
+### Informe de seguimiento {#monitor-report}
 
-Todos los estados alertados están incluidos en el [weekly monitor report][12] incluso si el monitor está en un tiempo de inactividad.
+Todos los estados de alerta se incluyen en el [informe semanal de seguimiento][12] incluso si el seguimiento está en tiempo de inactividad.
 
-## Auto-muting {#auto-muting}
+## Silenciamiento automático {#auto-muting}
 
-Datadog puede silenciar proactivamente monitores relacionados con el apagado manual de ciertas cargas de trabajo en la nube. Los siguientes escenarios de auto-silenciamiento para apagado son compatibles:
+Datadog puede silenciar de forma proactiva los seguimientos relacionados con el apagado manual de ciertas cargas de trabajo en la nube. Se admiten los siguientes escenarios de silenciamiento automático por apagado:
 
-- **[Amazon EC2 instances][13]** y terminación de instancias por escalado automático de AWS basado en los estados del servidor desde la API de CloudWatch.
-- **[Google Compute Engine (GCE)][14]** y terminación de instancias desencadenada por escalado automático de GCE basado en los estados del servidor desde la API de GCE.
-- **[Azure VMs][15]**, ya sea que el apagado haya sido desencadenado manualmente o por el escalado automático de Azure, basado en los estados de salud disponibles a través de la Azure Resource Health API.
+- **[Instancias de Amazon EC2][13]** y terminación de instancias mediante el escalado automático de AWS según los estados de los servidores obtenidos de la API de CloudWatch.
+- **Instancias de [Google Compute Engine (GCE)][14]** y terminación de instancias activada por el escalado automático de GCE según los estados de los servidores obtenidos de la API de GCE.
+- **[Azure VMs][15]**, ya sea que el apagado se haya activado manualmente o por escalado automático de Azure, según los estados de salud disponibles a través de la API de Azure Resource Health.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -201,3 +213,5 @@ Datadog puede silenciar proactivamente monitores relacionados con el apagado man
 [13]: /es/integrations/amazon_ec2/#ec2-automuting
 [14]: /es/integrations/google_compute_engine/#gce-automuting
 [15]: /es/integrations/azure_vm/#automuting-monitors
+[16]: /es/account_management/rbac/permissions/#monitors
+[17]: /es/monitors/configuration/#access-levels

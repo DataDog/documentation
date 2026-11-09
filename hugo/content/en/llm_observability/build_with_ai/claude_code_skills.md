@@ -303,6 +303,6 @@ If you are new to evaluating an LLM application, the recommended flow is:
 [2]: /llm_observability/setup/
 [3]: /llm_observability/improve/offline_experiments/
 [4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
-[5]: https://datadoghq.atlassian.net/wiki/spaces/BITSAI/pages/5226692942/pup+CLI
+[5]: /cli/
 [6]: https://github.com/datadog-labs/agent-skills
 [7]: https://github.com/DataDog/llm-observability/tree/main/experiments/notebooks

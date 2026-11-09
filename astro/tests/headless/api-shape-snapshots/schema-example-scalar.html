@@ -1,0 +1,191 @@
+<!-- schema-example-scalar: /api/latest/rendering-shapes/submit-a-service-check/ -->
+<div class="api-endpoint__section _api-endpoint__section_071384" data-api-section="request">
+  <h3>Request</h3>
+  <h4 class="api-endpoint__body-label _api-endpoint__body-label_071384">Body Data (required)</h4>
+  <p>Service Check request body.</p>
+  <div id="request-body-tabs-X4" class="tabs _tabs_d3f7cd tabs--pills _tabs--pills_d3f7cd">
+    <astro-island
+      uid="X1"
+      ssr=""
+      client="load"
+      before-hydration-url="astro:scripts/before-hydration.js"
+      opts='{"name":"TabsNav","value":true}'
+      await-children=""
+      ><div role="tablist" class="tabs__nav _tabs__nav_d3f7cd">
+        <button
+          role="tab"
+          aria-selected="true"
+          aria-controls="request-body-tabs-X4-panel-0"
+          data-tab-index="0"
+          class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
+        >
+          Model</button
+        ><button
+          role="tab"
+          aria-selected="false"
+          aria-controls="request-body-tabs-X4-panel-1"
+          data-tab-index="1"
+          class="tabs__button _tabs__button_d3f7cd"
+        >
+          Example
+        </button>
+      </div>
+      <!--astro:end--></astro-island
+    >
+    <div
+      id="request-body-tabs-X4-panel-0"
+      role="tabpanel"
+      class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
+    >
+      <div id="schema-table-X5" class="schema-table">
+        <div class="schema-table__table _schema-table__table_d7636a">
+          <div class="schema-table__columns _schema-table__columns_d7636a">
+            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
+            <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+            <div class="schema-table__columns-description _schema-table__columns-description_d7636a">Description</div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="check" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">check</code
+                ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">string</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a"><p>The check.</p></div>
+            </div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="host_name" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">host_name</code
+                ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">string</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a">
+                <p>The host name correlated with the check.</p>
+              </div>
+            </div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="message" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">message</code></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">string</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a">
+                <p>Message containing check status.</p>
+              </div>
+            </div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="status" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">status</code
+                ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">enum</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a">
+                <p>
+                  The status of a service check. Set to <code>0</code> for OK, <code>1</code> for warning,
+                  <code>2</code> for critical, and <code>3</code> for unknown.
+                </p>
+              </div>
+              <div class="schema-table__enum _schema-table__enum_d7636a">
+                Allowed enum values: <code>0, 1, 2, 3</code>
+              </div>
+            </div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="tags" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">tags</code
+                ><span class="schema-table__required _schema-table__required_d7636a"> [required]</span></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a">
+                <p>Tags related to a check.</p>
+              </div>
+            </div>
+          </div>
+          <div class="schema-table__row _schema-table__row_d7636a" data-field-name="timestamp" data-depth="0">
+            <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+              <span class="schema-table__name-group _schema-table__name-group_d7636a"
+                ><code class="schema-table__name _schema-table__name_d7636a">timestamp</code></span
+              >
+            </div>
+            <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+              <span class="schema-table__type _schema-table__type_d7636a">int64</span>
+            </div>
+            <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+              <div class="schema-table__description _schema-table__description_d7636a"><p>Time of check.</p></div>
+            </div>
+          </div>
+        </div>
+        <astro-island
+          uid="X2"
+          ssr=""
+          client="idle"
+          before-hydration-url="astro:scripts/before-hydration.js"
+          opts='{"name":"ApiSchemaTableNav","value":true}'
+          await-children=""
+          ><span hidden="" aria-hidden="true"></span><!--astro:end--></astro-island
+        >
+      </div>
+    </div>
+    <div id="request-body-tabs-X4-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden="">
+      <div class="request-body-tabs__examples _request-body-tabs__examples_215cc4">
+        <div id="code-block-X6" class="code-block _code-block_961fb8" data-language="json">
+          <div id="code-block-X6-content" class="code-block__content _code-block__content_961fb8">
+            <astro-island
+              uid="X3"
+              ssr=""
+              client="idle"
+              before-hydration-url="astro:scripts/before-hydration.js"
+              opts='{"name":"CopyButton","value":true}'
+              await-children=""
+              ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                <span>Copy</span></button
+              ><!--astro:end--></astro-island
+            >
+            <div class="code-block__highlighted _code-block__highlighted_961fb8">
+              <pre
+                class="shiki datadog-chroma"
+                style="background-color: var(--color-panel-bg); color: var(--color-panel-text)"
+                tabindex="0"
+              ><code><span class="line"><span style="color:var(--color-panel-text)">{</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">check</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"app.ok"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">host_name</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"app.host1"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">message</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"app is running"</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">status</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-number)">0</span><span style="color:var(--color-panel-text)">,</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">tags</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: [</span></span>
+<span class="line"><span style="color:var(--color-syntax-string)">    "environment:test"</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  ],</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">  "</span><span style="color:var(--color-syntax-attribute)">timestamp</span><span style="color:var(--color-panel-text)">"</span><span style="color:var(--color-panel-text)">: </span><span style="color:var(--color-syntax-string)">"integer"</span></span>
+<span class="line"><span style="color:var(--color-panel-text)">}</span></span></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

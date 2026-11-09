@@ -10,23 +10,26 @@ cascade:
     rank: 70
 further_reading:
 - link: /profiler/enabling
-  tag: 설명서
-  text: 애플리케이션에 대해 연속 프로파일러 사용
+  tag: 문서
+  text: 애플리케이션에 대해 Continuous Profiler 활성화
 - link: getting_started/profiler
-  tag: 설명서
-  text: 지속적 프로파일러 시작하기
+  tag: 문서
+  text: Continuous Profiler 시작하기
 - link: profiler/profile_visualizations
-  tag: 설명서
+  tag: 문서
   text: 사용 가능한 프로파일 유형에 대해 자세히 알아보기
 - link: /extend/guide/data-collection-resolution/
-  tag: 설명서
+  tag: 문서
   text: 데이터 수집 및 해결
+- link: https://learn.datadoghq.com/courses/profiling-timeline
+  tag: 학습 센터
+  text: Profiling Timeline으로 요청 지연 시간 최적화
 - link: https://www.datadoghq.com/blog/source-code-preview/
   tag: 블로그
   text: Continuous Profiler의 소스 코드 미리 보기로 중요한 코드에 집중
 - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
   tag: 블로그
-  text: DataDog에서 상시 운영 환경 프로파일링 도입
+  text: Datadog에서 상시 프로덕션 프로파일링 도입
 - link: https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/
   tag: 블로그
   text: 지속적 취약성 분석을 위한 Datadog GitHub 작업
@@ -50,7 +53,7 @@ further_reading:
   text: 지속적 프로파일링이 observability의 네 번째 축인 이유
 - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
   tag: 블로그
-  text: Kubernetes 오퍼레이터 모니터링하여 애플리케이션을 원활하게 운영하기
+  text: Kubernetes 오퍼레이터를 모니터링하여 애플리케이션을 원활하게 운영하기
 - link: https://www.datadoghq.com/blog/gitlab-source-code-integration
   tag: 블로그
   text: Datadog의 GitLab 소스 코드 통합으로 더 빠르게 문제 해결하기
@@ -60,7 +63,7 @@ title: Continuous Profiler
 
 <br>
 
-CPU, 메모리 및 IO 병목 현상을 찾고 메서드 이름, 클래스 이름 및 라인 개수별로 상세 내역을 확인하여 최종 사용자 지연과 인프라 비용을 크게 줄일 수 있습니다.
+CPU, 메모리 및 IO 병목 현상을 찾고 메서드 이름, 클래스 이름 및 줄 번호별로 상세 내역을 확인하여 최종 사용자 지연과 인프라 비용을 크게 줄일 수 있습니다.
 
 ### 프로덕션에서 미치는 적은 영향 {#low-impact-in-production}
 
@@ -88,16 +91,16 @@ Continuous Profiler는 JDK Flight Recorder와 같은 기술을 활용하여 모�
 
 ## 프로파일러 사용 가이드 {#guide-to-using-the-profiler}
 
-[프로파일러 시작하기][1] 가이드는 성능 문제를 포함하는 샘플 서비스를 제공하여 Continuous Profiler를 사용하여 문제를 이해하고 해결하는 방법을 보여줍니다.
+[프로파일러 시작하기][1] 가이드는 성능 문제가 있는 샘플 서비스를 예로 들어 Continuous Profiler를 사용하여 문제를 파악하고 해결하는 방법을 보여줍니다.
 
 ## Datadog 프로파일러 탐색 {#explore-datadog-profiler}
 
-애플리케이션을 구성하여 프로파일을 Datadog로 전송한 후 코드 성능에 대한 인사이트를 받을 수 있습니다.
+애플리케이션을 구성하여 프로파일을 Datadog으로 전송한 후 코드 성능에 대한 인사이트를 받을 수 있습니다.
 
-기본적으로 프로파일은 8일 동안 보존되며 프로파일 데이터에서 생성된 메트릭은 한 달 동안 보관됩니다.
+기본적으로 플레임 그래프, 호출 그래프, 스레드 타임라인은 8일 동안 보존되며, 프로필 메트릭은 1개월 동안 보존됩니다. 플레임 그래프를 노트북에 내보내 1년 동안 보존할 수 있습니다.
 
 {{< learning-center-callout header="학습 센터에서 코드 성능 문제 진단 시도하기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
-  Datadog 학습 센터에는 이 주제에 관해 배워 보는 데 도움이 되는 실습 과정이 많습니다. Datadog Continuous Profiler를 사용해 프로덕션 환경의 애플리케이션 코드 성능을 조사하고 개선하는 방법을 무료로 학습하세요.
+  Datadog 학습 센터에는 이 주제에 관해 배워 보는 데 도움이 되는 실습 과정이 많습니다. 무료로 등록하여 Datadog Continuous Profiler로 프로덕션 환경의 애플리케이션 코드 성능을 조사하고 개선하세요.
 {{< /learning-center-callout >}}
 
 ### 프로파일 유형 {#profile-types}
@@ -106,11 +109,11 @@ Continuous Profiler는 JDK Flight Recorder와 같은 기술을 활용하여 모�
 
 {{< img src="profiler/profile-types2.png" alt="Java 애플리케이션을 위해 수집된 프로파일 유형 목록" style="width:100%;" >}}
 
-### 태그별 프로파일 검색 {#search-profiles-by-tags}
+### 태그별로 프로파일 검색 {#search-profiles-by-tags}
 
 특정 호스트, 서비스, 버전 또는 조합을 포함하는 모든 차원에서 [태그를 사용하여 프로파일을 검색합니다][2].
 
-{{< img src="profiler/search_profiles4.mp4" alt="태그별 프로파일 검색" video=true >}}
+{{< img src="profiler/search_profiles4.mp4" alt="태그별로 프로파일 검색" video=true >}}
 
 ### 배포 환경에서 함수 성능 추적 {#track-function-performance-over-deployments}
 
@@ -120,7 +123,7 @@ Continuous Profiler는 JDK Flight Recorder와 같은 기술을 활용하여 모�
 
 ### 프로파일링 데이터에 트레이스 연결 {#connect-traces-to-profiling-data}
 
-[APM 분산 트레이싱][3]과 활성화된 지속적 프로파일러를 모두 포함하는 애플리케이션 프로세스는 자동으로 연결되므로, [프로파일 탭][4]의 스팬 정보에서 프로파일링 데이터로 직접 이동하여 성능 문제와 관련된 구체적인 코드 라인을 찾을 수 있습니다.
+[APM 분산 트레이싱][3]과 활성화된 Continuous Profiler를 모두 포함하는 애플리케이션 프로세스는 자동으로 연결되므로, [{{< ui >}}Profiles{{< /ui >}} 탭][4]의 스팬 정보에서 프로파일링 데이터로 직접 이동하여 성능 문제와 관련된 특정 코드 라인을 찾을 수 있습니다.
 
 {{< img src="profiler/profiles_tab.png" alt="프로파일 탭은 APM 트레이스 스팬에 대한 프로파일링 정보를 보여줍니다." >}}
 

@@ -11,6 +11,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-pipeline-monitoring/
   tag: 블로그
   text: '데이터 파이프라인 모니터링 101: 데이터 스택 전반에서 상태 및 성능 추적하기'
+- link: https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/
+  tag: 블로그
+  text: 파이프라인 상태를 넘어 웨어하우스 데이터 품질 모니터링하기
+- link: https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/
+  tag: 아키텍처 센터
+  text: Datadog으로 AWS의 금융 데이터 메시 모니터링하기
+- link: https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/
+  tag: 아키텍처 센터
+  text: Datadog을 사용한 AWS 기반 보험 데이터 레이크 모니터링
 title: Data Observability 개요
 ---
 ## 개요 {#overview}

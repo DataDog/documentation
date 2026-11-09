@@ -1,0 +1,84 @@
+<!-- param-type: /api/latest/rendering-shapes/get-all-access-tokens/ -->
+<div class="api-endpoint__section _api-endpoint__section_071384" data-api-section="arguments">
+  <h3>Arguments</h3>
+  <div id="schema-table-X2" class="schema-table">
+    <h4>Query Strings</h4>
+    <div class="schema-table__table _schema-table__table_d7636a">
+      <div class="schema-table__columns _schema-table__columns_d7636a">
+        <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+        <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
+        <div class="schema-table__columns-description _schema-table__columns-description_d7636a">Description</div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="page[size]" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">page[size]</code></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">integer</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>Number of items to return per page. The maximum allowed value is 100.</p>
+          </div>
+          <span class="schema-table__default _schema-table__default_d7636a"> Default: <code>10</code></span>
+        </div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="filter" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">filter</code></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">string</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>Filter access tokens by the specified string.</p>
+          </div>
+        </div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="filter[owned_by]" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">filter[owned_by]</code></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">array</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>Filter access tokens by the owner's ID. Supports multiple values.</p>
+          </div>
+        </div>
+      </div>
+      <div class="schema-table__row _schema-table__row_d7636a" data-field-name="filter[leaked]" data-depth="0">
+        <div class="schema-table__cell-name _schema-table__cell-name_d7636a">
+          <span class="schema-table__name-group _schema-table__name-group_d7636a"
+            ><code class="schema-table__name _schema-table__name_d7636a">filter[leaked]</code></span
+          >
+        </div>
+        <div class="schema-table__cell-type _schema-table__cell-type_d7636a">
+          <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
+        </div>
+        <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
+          <div class="schema-table__description _schema-table__description_d7636a">
+            <p>When true, only return access tokens that have been detected as leaked. Has no effect when false.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <astro-island
+      uid="X1"
+      ssr=""
+      client="idle"
+      before-hydration-url="astro:scripts/before-hydration.js"
+      opts='{"name":"ApiSchemaTableNav","value":true}'
+      await-children=""
+      ><span hidden="" aria-hidden="true"></span><!--astro:end--></astro-island
+    >
+  </div>
+</div>

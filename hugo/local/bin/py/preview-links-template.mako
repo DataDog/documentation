@@ -36,3 +36,8 @@ ${h3} Modified Files
 * https://docs-staging.datadoghq.com/${branch}/${filename}
 % endfor
 % endif
+
+% if fallback:
+No changed files under `hugo/content/en/`, e.g. this PR only touches the Astro API docs app:
+* https://docs-staging.datadoghq.com/${branch}/api/latest/
+% endif

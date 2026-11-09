@@ -1,8 +1,11 @@
 ---
 aliases:
 - /ja/logs/processing/pipelines/
-description: Datadog のパイプラインとプロセッサーを使用して、ログを解析し、エンリッチし、管理します。
+description: Datadog のパイプラインとプロセッサーを使用して、ログを解析し、エンリッチし、管理する
 further_reading:
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: ラーニングセンター
+  text: ログパイプラインの構築と管理
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: 使用可能なプロセッサーのリスト
@@ -15,28 +18,28 @@ further_reading:
 - link: /logs/troubleshooting/
   tag: ドキュメント
   text: ログのトラブルシューティング
+- link: https://learn.datadoghq.com/courses/debugging-log-pipelines
+  tag: ラーニングセンター
+  text: ログパイプラインのデバッグ
 - link: https://learn.datadoghq.com/courses/integration-pipelines
   tag: ラーニングセンター
   text: インテグレーションパイプラインですぐに使えるログの処理
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: ラーニングセンター
-  text: ログパイプラインの構築と管理
 - link: https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/
   tag: ブログ
-  text: Datadog Cloud SIEM で Cloudflare Zero Trust を監視
+  text: Datadog Cloud SIEM で Cloudflare Zero Trust を監視する
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
   tag: ブログ
-  text: Datadog Cloud SIEM で 1Password をモニターする
+  text: Datadog Cloud SIEM で 1Password を監視する
 - link: https://www.datadoghq.com/blog/ocsf-common-data-model/
   tag: ブログ
   text: Datadog Cloud SIEM で OCSF 共通データモデルを使用してデータを正規化する
 - link: https://www.datadoghq.com/blog/cloud-siem-ocsf-processor
   tag: ブログ
-  text: Datadog の OCSF プロセッサーを使用して、Cloud SIEM 向けのログを正規化する
+  text: Datadog の OCSF プロセッサーを使用して Cloud SIEM 向けのログを正規化する
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: ブログ
   text: Datadog を使用してメール配信システムに包括的かつ詳細な可視性を得る方法
-title: パイプライン
+title: Pipelines
 ---
 ## 概要 {#overview}
 
@@ -48,7 +51,7 @@ Datadog は自動的に JSON 形式のログを[パース][1]します。その�
 
 パイプラインとプロセッサーは、あらゆる種類のログに適用できます。ログ構成を変更したり、サーバー側の処理ルールの変更をデプロイしたりする必要はありません。すべては[パイプライン構成ページ][5]で構成できます。
 
-**注**: ログ管理ソリューションを最適にご利用いただくため、Datadog では [Grok プロセッサ][6]内で**パイプラインごとに最大 20 件のプロセッサー**および **10 個のパース規則**を使用することをお勧めします。Datadog はサービスのパフォーマンスに悪影響を与える可能性のあるパース規則、プロセッサー、パイプラインを無効化する権利を有しています。
+**注**: ログ管理ソリューションを最適にご利用いただくため、Datadog では [Grok プロセッサー][6]内で**パイプラインごとに最大 20 件のプロセッサー**および **10 個のパース規則**を使用することをお勧めします。Datadog はサービスのパフォーマンスに悪影響を与える可能性のあるパース規則、プロセッサー、パイプラインを無効化する権利を有しています。
 
 ## パイプラインの権限 {#pipeline-permissions}
 
@@ -67,20 +70,20 @@ Datadog は自動的に JSON 形式のログを[パース][1]します。その�
 
 ## 前処理 {#preprocessing}
 
-JSON ログの前処理は、ログがパイプライン処理に入る前に実行されます。前処理は、`timestamp`、`status`、`host`、`service`、および`message`などの予約済み属性に基づいて一連の操作を実行します。JSON ログに異なる属性名がある場合は、前処理を使用してログ属性名を予約済み属性リストの属性名にマッピングします。
+JSON ログの前処理は、ログがパイプライン処理に入る前に実行されます。前処理は、`timestamp`、`status`、`host`、`service`、および `message` などの予約済み属性に基づいて一連の操作を実行します。JSON ログに異なる属性名がある場合は、前処理を使用してログ属性名を予約済み属性リストの属性名にマッピングします。
 
-JSON ログの前処理には、標準的なログフォワーダーで動作するデフォルト構成が用意されています。この構成を編集して、カスタムまたは特定のログ転送アプローチに適応させるには:
+JSON ログの前処理には、標準的なログフォワーダーで動作するデフォルト構成が用意されています。この構成を編集して、カスタムまたは特定のログ転送アプローチに適応させるには、以下の手順を実行します。
 
-1. Datadog の [Pipelines][8] に移動し、[Preprocessing for JSON logs][9] を選択します。
+1. Datadog の [Pipelines][8] に移動し、[{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9] を選択します。
 
     **注:** JSON ログの前処理は、ログ属性の 1 つをログの `host` として定義する唯一の方法です。
 
 2. 予約済み属性に基づき、デフォルトのマッピングを変更します。
 
 {{< tabs >}}
-{{% tab "Source" %}}
+{{% tab "ソース" %}}
 
-#### Source 属性 {#source-attribute}
+#### ソース属性 {#source-attribute}
 
 JSON 形式のログファイルに `ddsource` 属性が含まれている場合、Datadog はその値をログのソースとして解釈します。Datadog が使用するのと同じソース名を使用するには、[インテグレーションパイプラインライブラリ][1]を参照してください。
 
@@ -90,9 +93,9 @@ JSON 形式のログファイルに `ddsource` 属性が含まれている場合
 [1]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [2]: /ja/agent/docker/log/?tab=containerinstallation#examples
 {{% /tab %}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host 属性 {#host-attribute}
+#### ホスト属性 {#host-attribute}
 
 Datadog Agent または RFC5424 形式を使用すると、ログのホスト値が自動的に設定されます。ただし、JSON 形式のログファイルに次の属性が含まれている場合、Datadog はその値をログのホストとして解釈します。
 
@@ -103,9 +106,9 @@ Datadog Agent または RFC5424 形式を使用すると、ログのホスト値
 **注**: Kubernetes では、Datadog Agent によって取り込まれた JSON ログに `host`、`hostname`、または `syslog.hostname` キー属性が含まれている場合、その値はログのデフォルトの Agent ホスト名をオーバーライドします。その結果、ログは正しいホストに設定されている期待されるホストレベルタグを継承しません。この場合、Datadog はこれらの属性をクリアして、ログが正しいホストに関連付けられるようにすることを推奨します。
 
 {{% /tab %}}
-{{% tab "Date" %}}
+{{% tab "日付" %}}
 
-#### Date 属性 {#date-attribute}
+#### 日付属性 {#date-attribute}
 
 デフォルトでは、Datadog はタイムスタンプを生成し、ログ受信時に日付属性に追加します。ただし、JSON 形式のログファイルに次のいずれかの属性が含まれている場合、Datadog はその値をログの公式の日付として解釈します。
 
@@ -123,15 +126,15 @@ Datadog Agent または RFC5424 形式を使用すると、ログのホスト値
 **注**: ログエントリの正式な日付が 18 時間以上前だった場合、Datadog はそのエントリを拒否します。
 
 <div class="alert alert-danger">
-認識された日付形式は: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒 EPOCH 形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
+認識された日付形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒 EPOCH 形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
 </div>
 
 
 [1]: /ja/logs/log_configuration/processors/log_date_remapper/
 {{% /tab %}}
-{{% tab "Message" %}}
+{{% tab "メッセージ" %}}
 
-#### Message 属性 {#message-attribute}
+#### メッセージ属性 {#message-attribute}
 
 デフォルトでは、Datadog はメッセージ値をログエントリの本文として取り込みます。その値はハイライトされ、[ログエクスプローラー][1]に表示され、[全文検索][2]用にインデックス化されます。ただし、JSON 形式のログファイルに次のいずれかの属性が含まれている場合、Datadog はその値をログの公式のメッセージとして解釈します。
 
@@ -146,9 +149,9 @@ Datadog Agent または RFC5424 形式を使用すると、ログのホスト値
 [2]: /ja/logs/explorer/#filters-logs
 [3]: /ja/logs/log_configuration/processors/log_message_remapper/
 {{% /tab %}}
-{{% tab "Status" %}}
+{{% tab "ステータス" %}}
 
-#### Status 属性 {#status-attribute}
+#### ステータス属性 {#status-attribute}
 
 各ログエントリは、Datadog 内でファセット検索に利用可能なステータスレベルを指定できます。ただし、JSON 形式のログファイルに次のいずれかの属性が含まれている場合、Datadog はその値をログの公式のステータスとして解釈します。
 
@@ -161,9 +164,9 @@ Datadog Agent または RFC5424 形式を使用すると、ログのホスト値
 
 [1]: /ja/logs/log_configuration/processors/log_status_remapper/
 {{% /tab %}}
-{{% tab "Service" %}}
+{{% tab "サービス" %}}
 
-#### Service 属性 {#service-attribute}
+#### サービス属性 {#service-attribute}
 
 Datadog Agent または RFC5424 形式を使用すると、ログのサービス値が自動的に設定されます。ただし、JSON 形式のログファイルに次の属性が含まれている場合、Datadog はその値をログのサービスとして解釈します。
 
@@ -176,11 +179,11 @@ Datadog Agent または RFC5424 形式を使用すると、ログのサービス
 
 [1]: /ja/logs/log_configuration/processors/service_remapper/
 {{% /tab %}}
-{{% tab "Trace ID" %}}
+{{% tab "トレース ID" %}}
 
-#### Trace ID 属性 {#trace-id-attribute}
+#### トレース ID 属性 {#trace-id-attribute}
 
-デフォルトでは、[Datadog SDK はトレース ID とスパン ID をログに自動的に挿入できます][1]。ただし、JSON 形式のログに以下の属性が含まれている場合、Datadog はその値をログの `trace_id` として解釈します：
+デフォルトでは、[Datadog SDK はトレース ID とスパン ID をログに自動的に挿入できます][1]。ただし、JSON 形式のログに以下の属性が含まれている場合、Datadog はその値をログの `trace_id` として解釈します。
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -194,11 +197,11 @@ Datadog Agent または RFC5424 形式を使用すると、ログのサービス
 [2]: /ja/logs/log_configuration/processors/trace_remapper/
 {{% /tab %}}
 
-{{% tab "Span ID" %}}
+{{% tab "スパン ID" %}}
 
-#### Span ID 属性 {#span-id-attribute}
+#### スパン ID 属性 {#span-id-attribute}
 
-デフォルトでは、Datadog SDK は[スパン ID をログに自動的に挿入できます][1]。ただし、JSON 形式のログに以下の属性が含まれている場合、Datadog はその値をログの `span_id` として解釈します：
+デフォルトでは、Datadog SDK は [スパン ID をログに自動的に挿入できます][1]。ただし、JSON 形式のログに以下の属性が含まれている場合、Datadog はその値をログの `span_id` として解釈します。
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
@@ -212,15 +215,15 @@ Datadog Agent または RFC5424 形式を使用すると、ログのサービス
 
 ## パイプラインを作成する {#create-a-pipeline}
 
-1. Datadog の [Pipelines][8] に移動します。
-2. New Pipeline** を選択します。
-3. ライブテールプレビューからログを選択してフィルターを適用するか、独自のフィルターを適用します。ドロップダウンメニューからフィルターを選択するか、**</>** アイコンを選択して独自のフィルタークエリを作成します。フィルターを使用すると、パイプラインを適用するログの種類を制限できます。
+1. Datadog の[パイプライン][8]に移動します。
+2. {{< ui >}}New Pipeline{{< /ui >}} を選択します。
+3. ライブテールプレビューからログを選択してフィルターを適用するか、独自のフィルターを適用します。ドロップダウンメニューからフィルターを選択するか、{{< ui >}}</>{{< /ui >}} アイコンを選択して独自のフィルタークエリを作成します。フィルターを使用すると、パイプラインを適用するログの種類を制限できます。
 
     **注**: パイプラインのフィルタリングは、パイプライン内のプロセッサーより前に適用されます。このため、パイプライン自体で抽出された属性ではフィルタリングできません。
 
 4. パイプラインに名前を付けます。
 5. (オプション) パイプラインに説明とタグを追加して、目的と所有者を示します。パイプラインタグはログに影響を与えませんが、[パイプラインページ][8]内でフィルタリングや検索に使用できます。
-6. **Create** を押します。
+6. {{< ui >}}Create{{< /ui >}} を押します。
 
 パイプラインによって変換されたログの例:
 
@@ -252,15 +255,15 @@ Datadog が提供するインテグレーションパイプラインの完全な
 
 インテグレーションパイプラインを使用するには、Datadog は対応するログ `source` を構成してインテグレーションをインストールすることを推奨します。Datadog がこのソースの最初のログを受信すると、インストールが自動的にトリガーされ、インテグレーションパイプラインが処理パイプラインのリストに追加されます。ログソースを構成するには、対応する[インテグレーションドキュメント][11]を参照してください。
 
-Clone ボタンをクリックしてインテグレーションパイプラインをコピーすることもできます。
+クローンボタンをクリックしてインテグレーションパイプラインをコピーすることもできます。
 
 {{< img src="logs/processing/pipelines/clone-pipeline-from-library.mp4" alt="ライブラリからのパイプラインのクローン作成" video=true style="width:80%;">}}
 
-## プロセッサーまたはネストされたパイプラインを追加 {#add-a-processor-or-nested-pipeline}
+## プロセッサーまたはネストされたパイプラインを追加する {#add-a-processor-or-nested-pipeline}
 
-1. Datadog の [Pipelines][8] に移動します。
+1. Datadog の[パイプライン][8]に移動します。
 2. パイプラインにカーソルを合わせ、表示される矢印をクリックしてプロセッサーおよびネストされたパイプラインを展開します。
-3. **Add Processor** または **Add Nested Pipeline** を選択します。
+3. {{< ui >}}Add Processor{{< /ui >}} または {{< ui >}}Add Nested Pipeline{{< /ui >}} を選択します。
 
 ### プロセッサー {#processors}
 
@@ -268,9 +271,21 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 カスタムの日付および時刻の形式と、非 UTC タイムスタンプに必要な `timezone` パラメーターについては、[日付のパース][12]を参照してください。
 
+### 複数のプロセッサーが一致する場合の属性の優先順位 {#attribute-precedence}
+
+一致するパイプライン内の複数のプロセッサーが同じ属性を設定する場合、結果はプロセッサーのタイプによって異なります。動作は 3 種類あります。
+
+| 動作 | 説明 | プロセッサー |
+| --- | --- | --- |
+| 後勝ち | 後のプロセッサー (順序の後方) によって設定された値が、前の値を上書きします。| Grok パーサー、カテゴリプロセッサー、算術プロセッサー、文字列ビルダープロセッサー、ルックアッププロセッサー、URL パーサー、ユーザー Agent パーサー、GeoIP パーサー、デコーダープロセッサー |
+| 依存: `override_on_conflict` | `override_on_conflict` パラメーターに従います。デフォルトでは (`false`)、ターゲット要素がすでに設定されている場合、上書きされません。| リマッパー、配列マッププロセッサー |
+| 先勝ち | 最初のプロセッサーのみが適用されます (ログ日付リマッパーを除き、最後のものが使用されます)。単一のパイプライン内では最初のプロセッサーの値が使用され、複数の一致するパイプライン間では最初に検出されたものが適用されます。| ログステータスリマッパー、サービスリマッパー、ログメッセージリマッパー、トレースリマッパー、スパンリマッパー |
+
+各プロセッサーの詳細については、[プロセッサー][3]を参照してください。
+
 ### ネストされたパイプライン {#nested-pipelines}
 
-ネストされたパイプラインは、パイプライン内のパイプラインです。ネストされたパイプラインを使用して、処理を 2 つのステップに分割します。例えば、最初にチームなどの高レベルフィルターを使用し、次に統合、サービス、またはその他のタグや属性に基づいて二次フィルタリングを行います。
+ネストされたパイプラインは、パイプライン内のパイプラインです。ネストされたパイプラインを使用して、処理を 2 つのステップに分割します。たとえば、最初にチームなどの高レベルフィルターを使用し、次にインテグレーション、サービス、またはその他のタグや属性に基づいて二次フィルタリングを行います。
 
 パイプラインは、ネストされたパイプラインとプロセッサーを持つことができます。一方、ネストされたパイプラインは、プロセッサーしか持つことができません。
 
@@ -278,9 +293,26 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 パイプラインを別のパイプラインに移動して、ネストされたパイプラインにします。
 
-1. 移動したいパイプラインにカーソルを合わせ、**Move to** アイコンをクリックします。
+1. 移動したいパイプラインにカーソルを合わせ、{{< ui >}}Move to{{< /ui >}} アイコンをクリックします。
 1. 元のパイプラインの移動先となるパイプラインを選択します。**注**: ネストされたパイプラインを含むパイプラインは、トップレベルの別の位置にのみ移動できます。別のパイプラインに移動することはできません。
-1. **Move** をクリックします。
+1. {{< ui >}}Move{{< /ui >}} をクリックします。
+
+## パイプラインの変更内容をプレビュー {#preview-pipeline-changes}
+
+パイプラインやそのプロセッサーを作成または編集する際、変更を適用する前に、その変更がログにどのような影響を与えるかをプレビューできます。プレビューでは、提案された変更を適用して処理されたログのライブテールが使用されます。
+
+{{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="左側にパイプラインのプロセッサー、右側に選択したログの差分が表示されるパイプラインシミュレーションビュー" >}}
+
+各ログについて、変更前と変更後の状態を比較します。比較対象の変更を選択します。
+
+- **自分の変更**: パイプラインの現在デプロイされているバージョンと、変更を加えたバージョンを比較します。
+- **パイプライン全体**: パイプラインに入るログと、パイプライン全体の実行後のログを比較します。
+
+ログリストを絞り込むには、クエリフィルターを使用するか、影響度でフィルタリングします。
+
+- **すべてのログ**: ライブテール内のすべてのログ。
+- **影響を受けたログ**: このセッションでの編集によって変更されたログのみ。
+- **影響を受けていないログ**: 編集によって変更されなかったログのみ。
 
 ## パイプラインの管理 {#manage-your-pipelines}
 
@@ -288,7 +320,7 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 
 {{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="ファセット検索、パイプライン変更情報、および再配置モーダルを使用してパイプラインを管理する方法" style="width:50%;">}}
 
-スライディングオプションパネルの `Move to` オプションを使用して、パイプラインを正確に再配置します。`Move to` モーダルを使用して、選択したパイプラインの移動先となる正確な位置までスクロールし、クリックします。パイプラインは他の読み取り専用パイプラインには移動できません。ネストされたパイプラインを含むパイプラインは、トップレベルの別の位置にのみ移動できます。別のパイプラインに移動することはできません。
+スライディングオプションパネルの {{< ui >}}Move to{{< /ui >}} オプションを使用して、パイプラインを正確に再配置します。{{< ui >}}Move to{{< /ui >}} モーダルを使用して、選択したパイプラインの移動先となる正確な位置までスクロールし、クリックします。パイプラインは他の読み取り専用パイプラインには移動できません。ネストされたパイプラインを含むパイプラインは、トップレベルの別の位置にのみ移動できます。別のパイプラインに移動することはできません。
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="Move to モーダルを使用してパイプラインを正確に再配置する方法" style="width:50%;">}}
 
@@ -299,6 +331,63 @@ Clone ボタンをクリックしてインテグレーションパイプライ�
 各パイプラインの推定使用量メトリクスが表示されます。これにより、各パイプラインで取り込まれ、変換されるログのボリュームと件数が表示されます。すべてのパイプラインには、標準の[ログ推定使用量ダッシュボード][13]へのリンクが含まれています。このダッシュボードは、パイプラインの使用量メトリクスの詳細なチャートを提供します。
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="パイプラインの使用量メトリクスを素早く確認する方法" style="width:50%;">}}
+
+<!-- vale Datadog.headings = NO -->
+## 自動処理 {#auto-processing}
+<!-- vale Datadog.headings = YES -->
+
+{{< callout url="https://www.datadoghq.com/product-preview/auto-processing/" header="自動処理はプレビュー版です" >}}
+アクセスをリクエストするにはフォームに入力します。
+{{< /callout >}}
+
+自動処理は、カスタムアプリケーションログをパースし、タイムスタンプ、ステータス、サービス、トレース ID、スパン ID などの主要な属性を抽出します。これにより、パースを手動で設定することなく、ログの検索、フィルタリング、相関付けが可能になります。
+
+自動処理は、既存のインテグレーションやカスタムパイプラインのフィルターに一致しないログのみを処理します。ログが既存のパイプラインのフィルターに一致する場合、そのパイプラインがログを変更しない場合でも自動処理はそのログを処理しません。既存のパイプライン構成は変更されません。
+
+### 仕組み {#how-it-works}
+
+Datadog は、サポートされているログをソースおよびサービスごとにグループ化し、それらの自動処理エントリを作成します。Datadog は、以前からサポートされているパターンのパース方法を変更することなく、新しいログパターンをサポートするようにエントリを自動的に更新します。
+
+[変換を確認](#review-transformations)し、[ログを処理するエントリを制御](#enable-or-disable-an-entry)します。[エントリを手動のパイプラインに切り替えて](#switch-to-a-manual-pipeline)、その構成をカスタマイズします。
+
+<!-- vale Datadog.headings = NO -->
+### 自動処理を構成する {#configure-auto-processing}
+<!-- vale Datadog.headings = YES -->
+
+[{{< ui >}}Processing{{< /ui >}} ページ][8]に移動し、{{< ui >}}Auto-Processing{{< /ui >}} タブを選択します。
+
+#### 自動処理のオン/オフを切り替える {#turn-auto-processing-on-or-off}
+
+機能トグルを使用して、組織の自動処理をオンまたはオフにします。
+
+#### 新しいエントリを有効にする方法を選択する {#choose-how-new-entries-are-enabled}
+
+自動処理がオンの場合、新しいエントリを自動的に有効にするかどうかを選択します。
+
+- **新しいエントリを自動的に有効にする**: 新しいエントリは作成時に有効になり、一致する受信ログの処理を開始します。
+- **有効にする前に新しいエントリを確認する**: 新しいエントリは作成時に無効になります。変換を確認し、使用するエントリを有効にします。
+
+### 変換を確認する {#review-transformations}
+
+1. {{< ui >}}Auto-Processing{{< /ui >}} タブで、確認するソースとサービスを見つけます。
+2. {{< ui >}}View Transformations{{< /ui >}} を選択します。
+3. ログパターンを選択し、ログの例を調べて、元の属性と処理後の属性を比較します。
+
+### エントリを有効または無効にする {#enable-or-disable-an-entry}
+
+{{< ui >}}Auto-Processing{{< /ui >}} タブで、エントリのトグルを使用して、そのソースとサービスの処理を有効または無効にします。エントリを無効にすると、今後のログにのみ影響します。すでに処理済みのログは変更されません。
+
+### 手動のパイプラインに切り替える {#switch-to-a-manual-pipeline}
+
+パースや属性名をカスタマイズするには、{{< ui >}}View Transformations{{< /ui >}} ページで {{< ui >}}Switch to manual pipeline{{< /ui >}} をクリックします。
+
+切り替え後は、パイプラインの構成と今後の更新を自分で管理します。
+
+### 制限事項 {#limitations}
+
+- 各組織は最大 100 個の自動処理エントリを作成できます。
+- 自動処理ですでに対象となっているソースやサービスであっても、新しいログパターンの一部がパースされない場合があります。
+- 自動処理エントリ内では、パースのカスタマイズや属性名の変更はできません。これらの変更を行うには、手動のパイプラインに切り替えてください。
 
 ## 参考資料 {#further-reading}
 

@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
   text: Real User Monitoring
-site_support_id: rum_remote_configuration
 title: RUM Remote Configuration
 ---
 ## Présentation {#overview}
@@ -106,6 +105,10 @@ La configuration à distance ne remplace aucun paramètre du SDK par défaut. Po
 
 2. Configurez le paramètre en sélectionnant un état, en modifiant son taux d'échantillonnage ou en ajoutant des données.
 3. Enregistrez vos modifications.
+
+## Voir les modifications dans Audit Trail {#view-changes-in-audit-trail}
+
+Les modifications apportées aux configurations distantes RUM apparaissent dans [Datadog Audit Trail][3], où vous pouvez examiner qui a effectué chaque modification et quand.
 
 ## Paramètres configurables {#configurable-settings}
 
@@ -243,3 +246,4 @@ La configuration à distance ne remplace aucun paramètre du SDK par défaut. Po
 
 [1]: /fr/account_management/rbac/permissions/#real-user-monitoring
 [2]: /fr/remote_configuration/
+[3]: /fr/account_management/audit_trail/

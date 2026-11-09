@@ -3,10 +3,9 @@ description: Configuración de Database Monitoring en una base de datos Postgres
 disable_sidebar: true
 title: Configuración de Postgres
 ---
+### Versiones de Postgres compatibles {#postgres-versions-supported}
 
-### Versiones de Postgres compatibles
-
-| Versión      | Autoalojadas | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  |
+| Versión      | Autohospedado | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  |
 | ------------ | ----------- | ---------- | ------------- | ---------------- | -------------- | --------- | --------- |
 | Postgres 9.6 | {{< X >}}   | {{< X >}}  | {{< X >}}     |                  |                | {{< X >}} |           |
 | Postgres 10  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
@@ -17,20 +16,20 @@ title: Configuración de Postgres
 | Postgres 15  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
 | Postgres 16  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
 | Postgres 17  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      |           | {{< X >}} |
+| Postgres 18  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} |           |
 
-### Instrucciones de instalación por tipo de alojamiento
+### Instrucciones de configuración por tipo de alojamiento {#setup-instructions-by-hosting-type}
 
-Para saber cómo configurar la Monitorización de base de datos en una base de datos de Postgres, selecciona tu tipo de alojamiento:
+Para aprender cómo configurar Database Monitoring en una base de datos Postgres, seleccione su tipo de alojamiento:
 
 {{< card-grid card_width="200px" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Autohospedado" title="Autohospedado" >}}
   {{< image-card href="/database_monitoring/setup_postgres/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
   {{< image-card href="/database_monitoring/setup_postgres/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_postgres/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
   {{< image-card href="/database_monitoring/setup_postgres/alloydb" src="integrations_logos/google_cloud_alloydb.png" alt="Google Cloud SQL" image_width="100">}}
   {{< image-card href="/database_monitoring/setup_postgres/azure" src="integrations_logos/azure_db_for_postgresql.png" alt="PostgreSQL" >}}
   {{< image-card href="/database_monitoring/setup_postgres/heroku" src="integrations_logos/heroku.png" alt="PostgreSQL" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/supabase" src="integrations_logos/supabase.png" alt="Supabase" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/supabase/cloud" src="integrations_logos/supabase.png" alt="Supabase Cloud" title="Supabase Cloud" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/supabase/agent" src="integrations_logos/supabase.png" alt="Supabase autohospedado" title="Supabase autohospedado" >}}
 {{< /card-grid >}}
-
-<br>

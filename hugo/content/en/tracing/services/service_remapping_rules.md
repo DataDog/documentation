@@ -15,6 +15,8 @@ Update how your services appear across Datadog without changing tracer configura
 
 <div class="alert alert-info">Each organization can contain up to 100 remapping rules.</div>
 
+**Note**: To rewrite APM resource names, such as collapsing resources that differ only by an ID, see [Resource renaming rules][17].
+
 ## Prerequisites
 
 You must have the **APM Service Remapping Write** permission (`apm_service_renaming_write`) to create, edit, and delete remapping rules. See [Permissions][1] for details on Datadog role-based access control.
@@ -102,6 +104,7 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
 [16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
+[17]: /tracing/services/resource_renaming_rules/
 
 ## Further reading
 

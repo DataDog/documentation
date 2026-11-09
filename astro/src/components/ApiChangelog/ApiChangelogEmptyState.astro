@@ -1,0 +1,39 @@
+---
+import styles from "./ApiChangelogEmptyState.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import {
+  CHANGELOG_BUCKET_LABELS,
+  CHANGELOG_EMPTY_MESSAGE,
+  changelogHref,
+  type ChangelogFilter,
+} from "@lib/api/changelog";
+import type { Locale } from "@lib/i18n/locale";
+
+interface Props {
+  lang: Locale;
+  filter: ChangelogFilter;
+}
+
+const { lang, filter } = Astro.props;
+const cl = classListFactory(styles);
+// MISSING_TRANSLATION_LABEL: no Hugo i18n keys exist for these strings yet.
+const message =
+  filter === "all"
+    ? CHANGELOG_EMPTY_MESSAGE
+    : `No ${CHANGELOG_BUCKET_LABELS[filter].toLowerCase()} changes yet.`;
+const viewAllLabel = "View all changes";
+---
+
+<div class={cl("api-changelog-empty-state")}>
+  <p class={cl("api-changelog-empty-state__message")}>{message}</p>
+  {
+    filter !== "all" && (
+      <a
+        class={cl("api-changelog-empty-state__link")}
+        href={changelogHref(lang, "all", 1)}
+      >
+        {viewAllLabel}
+      </a>
+    )
+  }
+</div>

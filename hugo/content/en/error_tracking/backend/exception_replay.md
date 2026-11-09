@@ -18,6 +18,7 @@ further_reading:
 aliases:
   - /tracing/error_tracking/executional_context
   - /tracing/error_tracking/execution_replay/
+  - /ide_plugins/vscode/exception_replay/
 ---
 
 <div class="alert alert-info">

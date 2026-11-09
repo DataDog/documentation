@@ -1,8 +1,8 @@
 ---
 aliases:
 - /es/llm_observability/monitoring/prompt_management/
-description: Cree, versione y recupere prompts gestionados en aplicaciones de Python
-  con Prompt Management.
+description: Cree, versione y recupere prompts gestionados en aplicaciones de Python,
+  Go y JavaScript con Prompt Management.
 further_reading:
 - link: /llm_observability/instrument/prompt_tracking
   tag: Documentación
@@ -124,7 +124,7 @@ response = client.chat.completions.create(
 
 Si la recuperación falla y no se proporciona una alternativa, `get_prompt()` genera un `ValueError`. Una alternativa no reemplaza la autenticación: `DD_API_KEY` siempre es necesario, y `DD_APP_KEY` también es necesario cuando `DD_ENV` está configurado.
 
-Los prompts gestionados no pueden hacer referencia a otros prompts gestionados en sus plantillas. Para componer prompts, combínelos en el código de la aplicación o gestione el prompt final dirigido al proveedor como un solo prompt.
+Sin composición de prompts, combine prompts en el código de la aplicación o gestione el prompt final dirigido al proveedor como un solo prompt. Para incluir un prompt gestionado en otro, consulte [Reutilizar prompts con composición](#reuse-prompts-with-composition). La composición de prompts está en Vista previa.
 
 ### Seleccione una versión {#select-a-version}
 
@@ -221,8 +221,9 @@ En el Editor de prompts:
 
 1. Agregue uno o más mensajes y asigne a cada uno un rol: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}} o {{< ui >}}Assistant{{< /ui >}}.
 2. Utilice `{{variable_name}}` en cualquier mensaje para agregar contenido dinámico.
-3. Opcional: Haga clic en {{< ui >}}Run{{< /ui >}} para probar el prompt con valores de muestra.
-4. Haga clic en {{< ui >}}Save Prompt{{< /ui >}} para abrir el cuadro de diálogo de guardado.
+3. Opcional: Si tiene acceso a la Vista previa de marcadores de posición de mensaje, haga clic en {{< ui >}}Add Message Placeholder{{< /ui >}}. Consulte la sección [Insertar mensajes en tiempo de ejecución](#insert-messages-at-runtime).
+4. Opcional: Haga clic en {{< ui >}}Run{{< /ui >}} para probar el prompt con valores de muestra.
+5. Haga clic en {{< ui >}}Save Prompt{{< /ui >}} para abrir el cuadro de diálogo de guardado.
 
 Estructure el prompt de modo que la consulta del usuario y el contexto se inyecten como variables:
 
@@ -287,9 +288,148 @@ Utilice `LLMObs.list_prompts()` y `LLMObs.list_prompt_versions()` para inspeccio
 
 Utilice la API de gestión de prompts para crear, recuperar, actualizar y eliminar prompts y versiones de prompts. Consulte la [referencia de la API de Agent Observability][8] para ver esquemas de puntos de conexión, tipos de medios de solicitud y ejemplos.
 
-## Configuración de versión de prompt {#version-prompt-configuration}
+## Insertar mensajes en tiempo de ejecución {#insert-messages-at-runtime}
 
-<div class="alert alert-info"><strong>Vista previa:</strong> La configuración de versión de prompt está disponible en Vista previa. Para solicitar acceso, comuníquese con <a href="https://www.datadoghq.com/support/">Datadog Support</a> o con su Gerente de éxito del cliente.</div>
+<div class="alert alert-info"><strong>Vista previa:</strong> Los marcadores de posición de mensaje están disponibles en Vista previa. Para solicitar acceso, comuníquese con <a href="https://www.datadoghq.com/support/">Datadog Support</a> o con su Gerente de éxito del cliente.</div>
+
+Los marcadores de posición de mensaje insertan el historial de conversaciones o las interacciones de herramientas en un prompt guardado en tiempo de ejecución. Una variable de texto, como `{{question}}`, reemplaza texto dentro de un mensaje. Un marcador de posición de mensaje inserta una lista de mensajes completos.
+
+La versión del prompt almacena el nombre y la posición del marcador de posición, no los mensajes que usted pasa en tiempo de ejecución. Para mover el historial dentro del prompt, publique una nueva versión del prompt. No necesita cambiar el código de la aplicación.
+
+**Acceso al SDK de vista previa:** Comuníquese con [Datadog Support](https://www.datadoghq.com/support/) o con su Customer Success Manager para obtener la versión del SDK que debe usar para su lenguaje.
+
+### Defina el marcador de posición {#define-the-placeholder}
+
+En el Editor de prompts, haga clic en {{< ui >}}Add Message Placeholder{{< /ui >}} e ingrese un nombre, como `history`. Use los botones de flecha hacia arriba y hacia abajo para mover el marcador de posición entre los mensajes. Use un nombre diferente al de cualquier variable de texto en el prompt. El editor muestra el requisito de SDK compatible antes de que guarde.
+
+{{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="Editor de prompts con un marcador de posición de mensaje de historial entre las instrucciones del sistema y un mensaje de usuario que contiene la variable de pregunta." >}}
+
+Para crear el mismo prompt con el SDK de Python, agregue un elemento con `"type": "placeholder"` donde pertenece el historial:
+
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.create_prompt(
+    "support-assistant",
+    [
+        {"role": "system", "content": "You are a concise assistant for {{plan}} customers."},
+        {"type": "placeholder", "name": "history"},
+        {"role": "user", "content": "{{question}}"},
+    ],
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+El nombre del marcador de posición, `history`, es la clave que su aplicación utiliza para pasar mensajes en tiempo de ejecución. No es un rol de mensaje. Para conocer los requisitos de configuración y los ID de entorno, consulte la sección [Use el SDK de Python](#use-the-python-sdk).
+
+### Proporcione valores en tiempo de ejecución {#supply-runtime-values}
+
+Recupere el prompt y luego pase la lista con las variables de texto. El SDK inserta los mensajes del historial en orden en la posición del marcador de posición.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+prompt = LLMObs.get_prompt("support-assistant")
+
+variables = {
+    "plan": "enterprise",
+    "question": "Can I export the report?",
+    "history": [
+        {"role": "user", "content": "Where are reports located?"},
+        {"role": "assistant", "content": "Under Analytics."},
+    ],
+}
+messages = prompt.format(**variables)
+```
+{{% /tab %}}
+
+{{% tab "Go" %}}
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "support-assistant")
+if err != nil {
+	return err
+}
+
+variables := map[string]any{
+	"plan":     "enterprise",
+	"question": "Can I export the report?",
+	"history": []map[string]any{
+		{"role": "user", "content": "Where are reports located?"},
+		{"role": "assistant", "content": "Under Analytics."},
+	},
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+	return err
+}
+messages := rendered.Messages
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+```javascript
+const prompt = await tracer.llmobs.getPrompt('support-assistant')
+
+const variables = {
+  plan: 'enterprise',
+  question: 'Can I export the report?',
+  history: [
+    { role: 'user', content: 'Where are reports located?' },
+    { role: 'assistant', content: 'Under Analytics.' }
+  ]
+}
+const messages = prompt.format(variables)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+El resultado contiene cuatro mensajes, sin ningún elemento de marcador de posición:
+
+```json
+[
+  {"role": "system", "content": "You are a concise assistant for enterprise customers."},
+  {"role": "user", "content": "Where are reports located?"},
+  {"role": "assistant", "content": "Under Analytics."},
+  {"role": "user", "content": "Can I export the report?"}
+]
+```
+
+Pase los mensajes formateados a su proveedor de modelos. Si un mensaje insertado contiene la sintaxis `{{variable}}`, el SDK la deja como texto literal.
+
+Utilice el mismo [flujo de trabajo de seguimiento](#track-prompt-usage) de prompts que para otros prompts administrados. Los metadatos del prompt conservan la definición del marcador de posición en lugar de sus valores en tiempo de ejecución; los mensajes expandidos siguen la configuración existente de captura de entrada y privacidad.
+
+### Incluya interacciones de herramientas {#include-tool-interactions}
+
+Un marcador de posición también puede insertar llamadas a herramientas y respuestas de herramientas. Utilice el formato de mensaje de su proveedor de modelos. Por ejemplo, en el formato de Chat Completions de OpenAI, establezca el `tool_call_id` de cada respuesta de herramienta en el `id` de su llamada de herramienta:
+
+```python
+variables["history"] = [
+    {
+        "role": "assistant",
+        "tool_calls": [{
+            "id": "call_1",
+            "type": "function",
+            "function": {"name": "get_plan", "arguments": "{}"},
+        }],
+    },
+    {"role": "tool", "tool_call_id": "call_1", "content": "enterprise"},
+]
+messages = prompt.format(**variables)
+```
+
+El SDK inserta estos mensajes sin cambios. Su aplicación ejecuta la herramienta y proporciona su respuesta.
+
+### Requisitos y límites de los marcadores de posición de mensajes {#message-placeholder-requirements-and-limits}
+
+- Pase una lista para cada marcador de posición. Una lista vacía (`[]`) no inserta mensajes.
+- Los mensajes insertados pueden contener texto, llamadas de herramientas del asistente o respuestas de herramientas. El SDK no ejecuta herramientas ni valida campos específicos del proveedor.
+- Si un prompt usa el mismo nombre de marcador de posición más de una vez, cada aparición inserta la misma lista. Diferentes nombres de marcador de posición pueden recibir diferentes listas.
+- Los marcadores de posición anidados y el contenido multimodal, como imágenes o audio, no son compatibles.
+
+## Configuración de versión de prompt {#version-prompt-configuration}
 
 Almacene la configuración junto con su prompt para que pueda actualizar y revertir ambos como una sola versión. Utilice la configuración para:
 
@@ -395,6 +535,90 @@ Pase estos valores a su cliente de modelo junto con los mensajes devueltos por `
 
 **Creación de API:** También puede crear prompts y versiones con el [Prompt Management API][8]. Omitir `config` crea una configuración vacía para un nuevo prompt o hereda la configuración más reciente para una nueva versión. Envíe `{}` para borrarlo.
 
+## Reutilice prompts con composición {#reuse-prompts-with-composition}
+
+<div class="alert alert-info"><strong>Vista previa:</strong> La composición de prompts está disponible en Vista previa. Para solicitar acceso, comuníquese con <a href="https://www.datadoghq.com/support/">Datadog Support</a> o con su Gerente de éxito del cliente.</div>
+
+La composición de prompts permite que un prompt incluya a otro, por lo que puede reutilizar instrucciones compartidas sin copiarlas. Por ejemplo, un asistente de soporte y un asistente de facturación pueden incluir la misma política de respuesta. Puede incluir otro prompt de dos maneras:
+
+- **Mensajes de chat**: Incluya algunos o todos los mensajes de un prompt de chat.
+- **Texto**: Inserte el contenido de un prompt de texto dentro de un mensaje.
+
+Cada inclusión apunta a una versión exacta. Publicar una nueva versión del prompt incluido no cambia los prompts que ya lo incluyen.
+
+### Incluir mensajes de chat {#include-chat-messages}
+
+#### En la UI {#in-the-ui-1}
+
+El siguiente ejemplo agrega una política de respuesta compartida a un prompt de asistente de soporte.
+
+1. Guarde un prompt con el ID `response-policy` y un {{< ui >}}System{{< /ui >}} mensaje: `Answer concisely. If you do not know the answer, say so.`
+2. En la página {{< ui >}}Prompts{{< /ui >}}, haga clic en {{< ui >}}New Prompt{{< /ui >}}. En el Editor de prompts, haga clic en {{< ui >}}Include Prompt{{< /ui >}}, seleccione `response-policy` la versión 1 y haga clic en {{< ui >}}Add prompt{{< /ui >}}.
+3. Después del prompt incluido, agregue un {{< ui >}}User{{< /ui >}} mensaje que contenga `{{question}}`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}, ingrese `support-assistant-composed` como el ID del prompt y haga clic en {{< ui >}}Create prompt{{< /ui >}}.
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="El Playground muestra la versión 1 de response-policy incluida como un mensaje de sistema, seguido de un mensaje de usuario que contiene la variable de pregunta." style="width:100%;" >}}
+
+Su prompt ahora contiene:
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+Su aplicación [recupera y formatea el prompt](#retrieve-format-and-use-a-prompt) como de costumbre. El prompt recuperado ya contiene los mensajes incluidos, por lo que no necesita obtener `response-policy` por separado.
+
+De forma predeterminada, una inclusión agrega todos los mensajes del prompt incluido, en orden. Para incluir solo algunos mensajes, reordenarlos o repetir uno, haga clic en {{< ui >}}Included Prompt{{< /ui >}} en el Editor de prompts y seleccione {{< ui >}}Customize messages{{< /ui >}}. La personalización no cambia el prompt incluido.
+
+#### Con la API {#with-the-api}
+
+Utilice un objeto `include` en `template.messages` para hacer referencia a una versión específica de un prompt de chat. Este ejemplo asume un prompt de chat `response-policy` con una versión 1. Para crear un prompt que lo incluya, envíe este cuerpo JSON a `POST /api/v2/llm-obs/v1/prompts`:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+Para opciones de autenticación y selección de mensajes, consulte [Crear un Agent Observability prompt][11].
+
+### Incluir texto en un mensaje {#include-text-in-a-message}
+
+Para reutilizar una frase en lugar de mensajes completos, haga clic en {{< ui >}}Include Prompt{{< /ui >}}, seleccione un prompt de texto y una versión, y haga clic en {{< ui >}}Insert text{{< /ui >}}. La referencia se agrega al final del último mensaje editable. Muévalo a donde lo necesite.
+
+Por ejemplo, si la versión 1 de `response-style` contiene `Answer concisely.`, escriba:
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+La plantilla resuelta es:
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+La referencia se resuelve exactamente en el texto incluido, sin espacios ni saltos de línea adicionales. Especifique siempre una versión. Sin una, `{{>response-style}}` permanece como texto literal, no como una inclusión. Al crear un prompt sin acceso a Vista previa, las referencias en línea permanecen como texto literal. Las versiones compuestas guardadas anteriormente siguen siendo utilizables.
+
+En las solicitudes de API, utilice la misma sintaxis en un `template` de texto o en el `content` de un mensaje de chat.
+
+### Revisar y actualizar inclusiones {#review-and-update-includes}
+
+En una versión guardada, {{< ui >}}Prompt Template{{< /ui >}} muestra las referencias que usted creó. {{< ui >}}Resolved Prompt{{< /ui >}} muestra los mensajes expandidos, antes de que se completen las variables de tiempo de ejecución.
+
+Cuando una política compartida cambia, utilice su pestaña {{< ui >}}Used By{{< /ui >}} para encontrar los prompts que la referencian. Abra un prompt consumidor, reemplace la inclusión con la nueva versión de fuente, luego pruebe, guarde y despliegue el prompt actualizado. Las versiones existentes mantienen su contenido original, incluso si el origen se elimina posteriormente.
+
 ## Uso avanzado {#advanced-usage}
 
 ### Servir varias versiones desde un mismo entorno {#serve-multiple-versions-from-one-environment}
@@ -443,3 +667,4 @@ Para recuperar una versión exacta independientemente de cualquier regla de segm
 [8]: /es/api/latest/agent-observability/
 [9]: /es/api/latest/feature-flags/list-environments/
 [10]: /es/llm_observability/configure/prompt_experimentation/
+[11]: /es/api/latest/agent-observability/create-an-agent-observability-prompt/

@@ -11,13 +11,15 @@ aliases:
 - /ko/security/application_security/getting_started
 - /ko/security/application_security/threats
 - /ko/security/application_security/setup/standalone
+cascade:
+  site_support_id: application_security_override
 description: 분산된 트레이스가 제공하는 실행 컨텍스트를 활용하여 프로덕션 시스템을 노리는 위협을 모니터링합니다.
 further_reading:
 - link: https://www.datadoghq.com/blog/secure-api-with-datadog
   tag: 블로그
   text: '검색부터 방어까지: Datadog App and API Protection으로 API 보안 확보'
 - link: /security/application_security/how-it-works/
-  tag: 설명서
+  tag: 문서
   text: App and API Protection의 작동 방식
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: 제품 페이지
@@ -27,7 +29,7 @@ further_reading:
   text: APM Security View를 사용하여 위험, 취약성 및 공격에 대한 가시성 확보
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: 블로그
-  text: Datadog로 AWS WAF 활동 모니터링
+  text: Datadog으로 AWS WAF 활동 모니터링
 - link: https://www.datadoghq.com/blog/security-inbox-prioritization/
   tag: 블로그
   text: Datadog Security Inbox의 보안 위험 우선순위 지정 방법
@@ -39,20 +41,21 @@ further_reading:
   text: Datadog App and API Protection으로 계정 탈취 위험 완화
 - link: https://learn.datadoghq.com/courses/app-protection-block-attacks
   tag: 학습 센터
-  text: Application & API Protection으로 애플리케이션 공격 차단
+  text: App and API Protection(AAP)으로 애플리케이션 공격을 차단
+site_support_id: application_security_override
 title: App and API Protection
 ---
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 <div class="alert alert-info">
-AI Guard는 미리 보기 상태입니다. AI 앱 및 에이전트를 위한 실시간 보안 안전 장치를 활용하세요. AI Guard는 프롬프트 인젝션, 제일브레이킹, 도구 오남용 및 민감한 데이터 추출 공격으로부터 실시간으로 AI 앱 및 에이전트를 보호하는 데 도움이 됩니다. 액세스를 요청하려면 이 <a href="https://www.datadoghq.com/product-preview/ai-security/">양식</a>을 작성하세요.
+AI Guard는 미리 보기 상태입니다. AI 앱 및 에이전트를 위한 실시간 보안 안전장치를 활용하세요. AI Guard는 프롬프트 주입, 탈옥, 도구 오용 및 민감한 데이터 추출 공격으로부터 실시간으로 AI 앱 및 에이전트를 보호하는 데 도움이 됩니다. 액세스를 요청하려면 이 <a href="https://www.datadoghq.com/product-preview/ai-security/">양식</a>을 작성하세요.
 </div>
 
 {{% /site-region %}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="Datadog의 보안 신호 패널로, 여기에 공격 흐름 및 플레임 그래프가 표시됨" width="75%">}}
 
-**App & API Protection(AAP)**은 애플리케이션 및 API에 대한 통합된 가시성 및 보안을 제공하여 최신 워크로드 전체의 위협을 탐지, 조사 및 예방하는 데 도움이 됩니다.
+**App and API Protection(AAP)**은 애플리케이션 및 API에 대한 통합된 가시성 및 보안을 제공하여 최신 워크로드 전체의 위협을 탐지, 조사 및 예방하는 데 도움이 됩니다.
 
 공개 API, 내부 서비스 또는 사용자에게 제공되는 애플리케이션 중 어느 것을 방어하든 AAP는 팀원들에게 실시간 OOTB 위협 탐지, 태세 평가 및 인앱 보호를 제공합니다.
 
@@ -83,11 +86,11 @@ AI Guard는 미리 보기 상태입니다. AI 앱 및 에이전트를 위한 실
 
 ## Datadog의 AAP 구현 {#aap-implementation-in-datadog}
 
-App and API Protection이 어떻게 구조화되는지, 추적 데이터를 사용하여 보안 문제를 어떻게 식별하는지 자세한 정보는 [App and API Protection 작동 방식][3]을 참조하세요.
+App and API Protection이 어떻게 구조화되는지, 트레이싱 데이터를 사용하여 보안 문제를 어떻게 식별하는지 자세한 정보는 [App and API Protection 작동 방식][3]을 참조하세요.
 
 ## 환경 구성 {#configure-your-environment}
 
-AAP는 제공된 [기본 제공 규칙][4]을 사용하여 수동 구성 없이 위협을 탐지합니다. 이미 물리적 호스트 또는 가상 호스트에 Datadog [APM][1]이 구성된 경우, [설정][16] 시 환경 변수 하나만 있으면 시작할 수 있습니다.
+AAP는 제공된 [기본 제공 규칙][4]을 사용하여 수동 구성없이 위협을 탐지합니다. 이미 물리적 호스트 또는 가상 호스트에 Datadog [APM][1]이 구성된 경우, [설정][16] 시 환경 변수 하나만 있으면 시작할 수 있습니다.
 
 AAP로 환경을 구성하여 위협을 탐지 및 보호하려면 각 제품의 활성화 설명서대로 따르세요. AAP가 구성되고 나면 [보안 신호 탐색기][6]에서 보안 신호를 조사 및 해결할 수 있습니다.
 
@@ -97,7 +100,7 @@ AAP로 환경을 구성하여 위협을 탐지 및 보호하려면 각 제품의
 
 ## 익스플로잇 방지 vs. 인앱 WAF {#exploit-prevention-vs-in-app-waf}
 
-이 섹션에서는 익스플로잇 방지의 요약과 익스플로잇 방지가 인앱 웹 애플리케이션 방화벽(WAF) 규칙과 어떤 점에서 다른지 알아봅니다.
+이 섹션에서는 익스플로잇 방지의 요약과 익스플로잇 방지가 인앱 Web Application Firewall(WAF) 규칙과 어떤 점에서 다른지 알아봅니다.
 
 Datadog AAP에는 애플리케이션을 익스플로잇으로부터 보호하기 위한 [익스플로잇 방지][14] 및 [인앱 WAF][15] 기능이 포함되어 있습니다. 익스플로잇 방지는 인앱 WAF의 확장판입니다. 익스플로잇 방지는 인앱 WAF를 일차 방어선으로 활용하고 WAF가 놓친 공격을 차단합니다.
 
