@@ -3147,6 +3147,13 @@
       "description": "Update a span-based metric returns \"OK\" response"
     }
   ],
+  "CreateEmailAccessPolicy": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create an email access policy returns \"Created\" response"
+    }
+  ],
   "CreateBackfilledDegradation": [
     {
       "group": "status_pages",
