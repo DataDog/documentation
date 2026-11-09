@@ -154,8 +154,8 @@ class KongCheck(OpenMetricsBaseCheckV2):
             'kong_stream_status': 'stream.status',
         }
 
-      def get_default_config(self):
-            return {'metrics': self.metrics_map}
+    def get_default_config(self):
+        return {'metrics': self.metrics_map}
 ```
 
 
@@ -235,15 +235,15 @@ class KongCheck(OpenMetricsBaseCheckV2):
             'kong_stream_status': 'stream.status',
         }
 
-      def get_default_config(self):
-            return {'metrics': self.metrics_map}
+    def get_default_config(self):
+        return {'metrics': self.metrics_map}
 
-      def check(self, instance):
-          endpoint = instance.get('openmetrics_endpoint')
-          if endpoint is None:
-              raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
+    def check(self, instance):
+        endpoint = instance.get('openmetrics_endpoint')
+        if endpoint is None:
+            raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
 
-          super().check(instance)
+        super().check(instance)
 
 ```
 

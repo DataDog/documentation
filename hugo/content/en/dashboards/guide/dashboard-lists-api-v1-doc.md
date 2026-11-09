@@ -149,7 +149,7 @@ curl -X GET \
             'is_favorite': False,
             'is_read_only': False,
             'type': 'custom_screenboard',
-            'id': 63572
+            'id': 63572,
             'icon': None
         },
         {
