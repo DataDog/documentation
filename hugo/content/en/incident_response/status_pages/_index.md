@@ -128,6 +128,8 @@ To restrict access:
 
 Private status pages let you share status updates with external visitors without requiring a Datadog account. Visitors enter an email address, and if it matches the page's email rules, they receive a secure link to view the page.
 
+The secure link expires after 15 minutes and can be used multiple times. Anyone who clicks the link before it expires is granted a browser session that lasts for one hour.
+
 You can configure email rules while creating a private status page. For an existing page, click **Settings**, select **General**, and go to **Email Rules**.
 
 You can separate multiple entries with commas.
