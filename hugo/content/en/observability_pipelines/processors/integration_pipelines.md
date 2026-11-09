@@ -30,7 +30,7 @@ For every log that matches the processor's filter:
 1. Enabled [custom pipelines](#custom-pipelines) process the log, in order, if it matches their filter.
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
-{{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel with the Normalization & Preprocessing, Integration Pipelines, and Custom Pipelines tabs, listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
 
 **Notes**:
 
@@ -87,6 +87,8 @@ Custom pipelines are pipelines you import from Log Management to process logs th
 
 **Note**: Custom pipelines require Worker version 2.25.0 or later. Upgrade all Workers in the pipeline before deploying custom pipelines.
 
+<div class="alert alert-warning">The Worker does not support GeoIP parsers, Reference Table lookups, or threat intel processors. Importing a pipeline removes these processors from it. The import modal shows how many unsupported processors each pipeline has.</div>
+
 ### Import pipelines from Log Management
 
 1. In the Integration Pipelines processor, click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
@@ -101,7 +103,6 @@ Custom pipelines are pipelines you import from Log Management to process logs th
 - Importing a pipeline creates a copy in the processor. Later changes to the pipeline in Log Management are not synced. Deleting a custom pipeline from the processor does not affect the original pipeline in Log Management.
 - Importing a pipeline that was already imported replaces the existing custom pipeline, including its name, filter, enabled state, and processors.
 - An imported pipeline keeps its enabled state from Log Management. A pipeline without a filter in Log Management gets the `*` filter, which matches all logs.
-- The Worker does not support GeoIP parsers, Reference Table lookups, or threat intel processors. Importing a pipeline removes these processors. The import modal shows how many unsupported processors each pipeline has.
 
 ### Manage custom pipelines
 
