@@ -242593,9 +242593,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/automation/default_inbox_rules:
     get:
       description: |-
@@ -246010,9 +246007,6 @@ paths:
           - security_monitoring_findings_write
           - appsec_vm_write
           - data_scanner_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
