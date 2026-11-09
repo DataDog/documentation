@@ -322,10 +322,13 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 | ---- | ----------- |
 | `.testoptimization/manifest.txt` | Plan layout version. |
 | `.testoptimization/runner/test-files.txt` | Newline-delimited list of test files to run. Each file contains at least one non-skipped test. |
-| `.testoptimization/runner/parallel-runners.txt` | Selected CI node count or worker count. |
+| `.testoptimization/runner/parallel-runners.txt` | Selected CI node count or worker count. Remains positive for empty plans; use `has_tests` to gate workers. |
 | `.testoptimization/runner/skippable-percentage.txt` | Percentage of test time skipped by Test Impact Analysis. |
 | `.testoptimization/runner/tests-split/runner-N` | Newline-delimited list of files assigned to index `N`. |
 | `.testoptimization/github/config` | GitHub Actions matrix output, written when `ddtest` detects GitHub Actions. |
+| `.testoptimization/circleci/parameters.json` | CircleCI continuation parameters: `parallelism` and a Boolean `has_tests`, written when CircleCI is detected. |
+
+In GitHub Actions, `ddtest plan` appends `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The `github/config` artifact retains its single `matrix=` assignment. A successful plan sets `has_tests=false` when no files remain runnable. See [Skip workers for empty plans][9] for job and workflow conditions that prevent worker allocation.
 
 The HTTP cache under `.testoptimization/cache/http/` supplies Test Optimization data to the Datadog SDKs. Keep it with the plan. Files under `runner/cache/` and `tests-discovery/` are internal to `ddtest`; use the supported file lists for custom integrations.
 
@@ -353,3 +356,5 @@ fi
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[9]: /tests/test_parallelization/setup/#skip-workers-for-empty-plans

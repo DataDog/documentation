@@ -56,6 +56,23 @@ Install the latest `ddtest` into `bin` in the planning and test environments. Us
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash -s -- --dir bin
 ```
 
+## Skip workers for empty plans
+
+A successful plan can contain no runnable files, for example when Test Impact Analysis skips every discovered file. Gate worker allocation on `has_tests` to avoid checkout, dependency installation, and browser setup for an empty plan. The planning job still runs.
+
+{% if equals($ci_provider, "github_actions") %}
+
+Expose `steps.plan.outputs.has_tests` as a planning-job output and add `if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}` to the test job. GitHub evaluates this condition before expanding the matrix. Compare against the string `'true'` because step outputs are strings.
+
+{% /if %}
+{% if equals($ci_provider, "circleci") %}
+
+Pass `.testoptimization/circleci/parameters.json` to `continuation/continue`. The file contains `parallelism` and a Boolean `has_tests`. Declare both pipeline parameters in the continuation configuration and add `when: << pipeline.parameters.has_tests >>` to the test workflow. Merge other continuation parameters into the same JSON object if needed, and keep unrelated workflows outside this condition.
+
+{% /if %}
+
+A condition on an individual step does not prevent worker allocation. Runner counts and GitHub matrix artifacts remain positive for compatibility, including empty plans. Adopt the conditions in the following GitHub Actions or CircleCI examples; upgrading `ddtest` alone does not change scheduling. Treat planning failures and missing CI outputs as errors, not as successful empty plans.
+
 ## Configure your CI jobs
 
 `ddtest` reuses your existing framework configuration. Replace your existing test invocation with the configuration below. Keep services, fixtures, report uploads, and Test Optimization instrumentation. The examples assume that tests run from the repository root in a Bash shell. {% #3-replace-the-existing-test-command %}
@@ -144,6 +161,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
+      has_tests: ${{ steps.plan.outputs.has_tests }}
     steps:
       - uses: actions/checkout@v4
       # Insert your runtime, dependencies, and ddtest install.
@@ -167,6 +185,7 @@ jobs:
 
   dd_test:
     needs: dd_plan
+    if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -208,6 +227,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
+      has_tests: ${{ steps.plan.outputs.has_tests }}
     steps:
       - uses: actions/checkout@v4
       # Insert your runtime, dependencies, and ddtest install.
@@ -229,6 +249,7 @@ jobs:
 
   dd_test:
     needs: dd_plan
+    if: ${{ needs.dd_plan.outputs.has_tests == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -254,7 +275,7 @@ jobs:
 
 {% /if %}
 
-`ddtest plan` writes the matrix to `$GITHUB_OUTPUT`, so GitHub creates only the planned number of test jobs. Each job downloads the same plan and runs its zero-based node index.
+`ddtest plan` writes `matrix` and `has_tests` to `$GITHUB_OUTPUT`. The job condition skips empty plans before GitHub expands the matrix. Each job downloads the same plan and runs its zero-based node index.
 
 {% collapse-content title="Subdirectories and multiple suites" level="h4" id="suite-paths" %}
 
@@ -324,14 +345,9 @@ jobs:
           paths:
             - .testoptimization
             - bin/ddtest
-      - run:
-          name: Pass the planned node count
-          command: |
-            count=$(cat .testoptimization/runner/parallel-runners.txt)
-            printf '{"ddtest_parallelism": %s}\n' "$count" > ddtest-parameters.json
       - continuation/continue:
           configuration_path: .circleci/test-parallelization.yml
-          parameters: ddtest-parameters.json
+          parameters: .testoptimization/circleci/parameters.json
 
 workflows:
   setup:
@@ -375,14 +391,9 @@ jobs:
           paths:
             - .testoptimization
             - bin/ddtest
-      - run:
-          name: Pass the planned node count
-          command: |
-            count=$(cat .testoptimization/runner/parallel-runners.txt)
-            printf '{"ddtest_parallelism": %s}\n' "$count" > ddtest-parameters.json
       - continuation/continue:
           configuration_path: .circleci/test-parallelization.yml
-          parameters: ddtest-parameters.json
+          parameters: .testoptimization/circleci/parameters.json
 
 workflows:
   setup:
@@ -400,16 +411,19 @@ In the continuation configuration:
 version: 2.1
 
 parameters:
-  ddtest_parallelism:
+  parallelism:
     type: integer
     default: 1
+  has_tests:
+    type: boolean
+    default: false
 
 orbs:
   test-optimization-circleci-orb: datadog/test-optimization-circleci-orb@1
 
 jobs:
   dd_test:
-    parallelism: << pipeline.parameters.ddtest_parallelism >>
+    parallelism: << pipeline.parameters.parallelism >>
     docker:
       - image: cimg/base:stable # Use the same test image as the planning job.
     environment:
@@ -438,6 +452,7 @@ jobs:
 
 workflows:
   tests:
+    when: << pipeline.parameters.has_tests >>
     jobs:
       - dd_test # Keep the required contexts, filters, and dependencies.
 ```
@@ -449,13 +464,16 @@ workflows:
 version: 2.1
 
 parameters:
-  ddtest_parallelism:
+  parallelism:
     type: integer
     default: 1
+  has_tests:
+    type: boolean
+    default: false
 
 jobs:
   dd_test:
-    parallelism: << pipeline.parameters.ddtest_parallelism >>
+    parallelism: << pipeline.parameters.parallelism >>
     docker:
       - image: cimg/base:stable # Use the same test image as the planning job.
     environment:
@@ -484,6 +502,7 @@ jobs:
 
 workflows:
   tests:
+    when: << pipeline.parameters.has_tests >>
     jobs:
       - dd_test # Keep the required contexts, filters, and dependencies.
 ```
