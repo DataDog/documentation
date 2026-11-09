@@ -339,7 +339,7 @@ On Datadog Operator `v1.29.0` and later, the Operator detects EKS from the node 
 
 {{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
 
-On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart][1]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -356,6 +356,7 @@ Then deploy a minimal `DatadogAgent` spec.
 
 {{% /collapse-content %}}
 
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -478,7 +479,7 @@ On Datadog Operator `v1.29.0` and later, the Operator detects OpenShift from the
 
 {{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
 
-On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart][1]:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -491,7 +492,7 @@ Using the command line:
 helm install datadog-operator datadog/datadog-operator --set introspection.enabled=true
 ```
 
-If you installed the Operator through OperatorHub or Marketplace, which is the [recommended method](https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md), patch the Operator cluster service version instead:
+If you installed the Operator through OperatorHub or Marketplace, which is the [recommended method][2], patch the Operator cluster service version instead:
 
 ```shell
 oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
@@ -514,6 +515,8 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
 ```
 
 
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 {{% /tab %}}
 {{% tab "Helm" %}}
 
