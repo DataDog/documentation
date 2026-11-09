@@ -1,0 +1,6 @@
+traits:
+- id: color
+  label: Color
+  type: text
+  # Mistake: This key is not in the YAML validation schema.
+  unexpected_key: unexpected_value

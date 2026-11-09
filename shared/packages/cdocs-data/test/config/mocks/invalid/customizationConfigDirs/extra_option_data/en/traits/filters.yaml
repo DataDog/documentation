@@ -1,0 +1,4 @@
+traits:
+- id: color
+  label: Color
+  type: text

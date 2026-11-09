@@ -1,0 +1,5 @@
+os_options:
+  - id: linux
+    default: true
+  - id: windows
+  - id: mac_os

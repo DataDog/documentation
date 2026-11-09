@@ -1,0 +1,15 @@
+# Just a test to make sure a versioned option group is valid
+versioning_test_options:
+  - id: foo
+    default: true
+  - id: bar
+
+versioning_test_options_v2:
+  - id: foo
+    default: true
+  - id: bar
+
+versioning_test_options_v9817261:
+  - id: foo
+    default: true
+  - id: bar

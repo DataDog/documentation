@@ -1,0 +1,10 @@
+traits:
+- id: os
+  label: Operating System
+  type: text
+- id: prog_lang
+  label: Programming Language
+  type: text
+- id: runtime
+  label: Runtime
+  type: text

@@ -1,0 +1,7 @@
+traits:
+- id: BAD_TRAIT_ID
+  label: Bad Trait ID
+  type: text
+- id: color
+  label: Color
+  type: text

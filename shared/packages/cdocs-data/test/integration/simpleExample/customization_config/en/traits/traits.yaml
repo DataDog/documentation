@@ -1,0 +1,4 @@
+traits:
+- id: favorite_color
+  label: Favorite color
+  type: text

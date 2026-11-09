@@ -1,0 +1,6 @@
+# Used in tests where the option content doesn't matter
+options:
+- id: foo
+  label: Foo
+- id: bar
+  label: Bar

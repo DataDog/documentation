@@ -1,0 +1,44 @@
+{
+  "habitat": {
+    "id": "habitat",
+    "label": "Habitat",
+    "isShown": true,
+    "defaultValue": "ocean",
+    "currentValue": "forest",
+    "options": [
+      {
+        "id": "ocean",
+        "label": "Ocean"
+      },
+      {
+        "id": "desert",
+        "label": "Desert"
+      },
+      {
+        "id": "forest",
+        "label": "Forest"
+      }
+    ]
+  },
+  "animal": {
+    "id": "animal",
+    "label": "Animal",
+    "isShown": true,
+    "defaultValue": "owl",
+    "currentValue": "owl",
+    "options": [
+      {
+        "id": "deer",
+        "label": "Deer"
+      },
+      {
+        "id": "squirrel",
+        "label": "Squirrel"
+      },
+      {
+        "id": "owl",
+        "label": "Owl"
+      }
+    ]
+  }
+}

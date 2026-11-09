@@ -1,0 +1,53 @@
+java_runtime_options:
+  - id: jvm
+    default: true
+  - id: graal_vm
+
+python_runtime_options:
+  - id: cpython
+    default: true
+  - id: pypy
+
+ruby_runtime_options:
+  - id: jvm
+    default: true
+
+linux_java_runtime_options:
+  - id: jvm
+    default: true
+  - id: graal_vm
+
+linux_python_runtime_options:
+  - id: cpython
+    default: true
+  - id: pypy
+
+linux_ruby_runtime_options:
+  - id: jvm
+    default: true
+
+mac_os_java_runtime_options:
+  - id: jvm
+    default: true
+  - id: graal_vm
+
+mac_os_python_runtime_options:
+  - id: cpython
+    default: true
+  - id: pypy
+
+mac_os_ruby_runtime_options:
+  - id: jvm
+    default: true
+
+windows_java_runtime_options:
+  - id: jvm
+    default: true
+
+windows_python_runtime_options:
+  - id: cpython
+    default: true
+
+windows_ruby_runtime_options:
+  - id: jvm
+    default: true
