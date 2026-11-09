@@ -93,7 +93,7 @@ Path: `synthetics.attributes.device`
 `{{synthetics.attributes.device.type}}`
 : Device type classification
 
-`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
+`{{synthetics.attributes.device.resolution.width}}`, `{{synthetics.attributes.device.resolution.height}}`
 : Screen resolution dimensions
 
 **Browser-specific:**
@@ -126,37 +126,40 @@ Use these variables to access information about the step that caused a test fail
 `{{synthetics.failed_step.description}}`
 : Shortcut for `{{synthetics.attributes.result.steps.<step-index>.description}}`
 
+`{{synthetics.failed_step.url}}`
+: Shortcut for `{{synthetics.attributes.result.steps.<step-index>.url}}`, the URL of the page where the step ran (for example, `https://www.datadoghq.com/blog/`)
+
 {% alert level="tip" %}
 Review the [conditional alerting][1] page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a browser test notification.
 {% /alert %}
 
 ### Step execution details
 
-Path: `synthetics.attributes.variables.extracted`
+Path: `synthetics.attributes.result.steps.<step-index>`
 
-These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
+These variables contain metadata and results for each step that ran. For information on how to access the `<step-index>`, see [Step summary][2].
 
 {% tabs %}
 {% tab label="General steps" %}
-`synthetics.attributes.variables.extracted.steps.allowFailure`
+`synthetics.attributes.result.steps.<step-index>.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
-`synthetics.attributes.variables.extracted.steps.duration`
+`synthetics.attributes.result.steps.<step-index>.duration`
 : Step execution duration in milliseconds
 
-`synthetics.attributes.variables.extracted.steps.failure`
+`synthetics.attributes.result.steps.<step-index>.failure`
 : Failure information object containing `.code` and `.message`
 
-`synthetics.attributes.variables.extracted.steps.id`
+`synthetics.attributes.result.steps.<step-index>.id`
 : Unique step identifier
 
-`synthetics.attributes.variables.extracted.steps.isCritical`
+`synthetics.attributes.result.steps.<step-index>.isCritical`
 : Whether the step is critical to the test
 
-`synthetics.attributes.variables.extracted.steps.status`
+`synthetics.attributes.result.steps.<step-index>.status`
 : Step execution status
 
-`synthetics.attributes.variables.extracted.steps.type`
+`synthetics.attributes.result.steps.<step-index>.type`
 : Type of step being executed
 
 **Browser-specific:**
@@ -164,34 +167,31 @@ These are step execution metadata and results containing detailed information ab
 `{{synthetics.attributes.result.startUrl}}`
 : URL from test configuration
 
-`synthetics.attributes.variables.extracted.apiTest.request`
+`synthetics.attributes.result.steps.<step-index>.apiTest.request`
 : API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
 
-`synthetics.attributes.variables.extracted.apiTest.result`
+`synthetics.attributes.result.steps.<step-index>.apiTest.result`
 : API test result data (similar to `attributes.result` for API tests)
 
-`synthetics.attributes.variables.extracted.assertionResult.expected`
+`synthetics.attributes.result.steps.<step-index>.assertionResult.expected`
 : Expected value for assertions
 
-`synthetics.attributes.variables.extracted.assertionResults.checkType`
+`synthetics.attributes.result.steps.<step-index>.assertionResult.checkType`
 : Type of assertion check
 
-`synthetics.attributes.variables.extracted.assertionResults.actual`
+`synthetics.attributes.result.steps.<step-index>.assertionResult.actual`
 : Actual value found during assertion
 
-`synthetics.attributes.variables.extracted.browserErrors`
+`synthetics.attributes.result.steps.<step-index>.browserErrors`
 : List of browser errors encountered
 
-`synthetics.attributes.variables.extracted.timings.firstByte`
-: Time to first byte
-
-`synthetics.attributes.variables.extracted.timings.tcp`
-: TCP connection timing
-
-`synthetics.attributes.variables.extracted.description`
+`synthetics.attributes.result.steps.<step-index>.description`
 : Step description
 
-`synthetics.attributes.variables.extracted.warnings`
+`synthetics.attributes.result.steps.<step-index>.url`
+: URL of the page where the step ran
+
+`synthetics.attributes.result.steps.<step-index>.warnings`
 : List of warnings, each containing `.message` (the warning message) and `.type` (the warning type: `invalid_config`, `user_locator`, or `unable_to_compute_tti`)
 {% /tab %}
 
@@ -200,7 +200,7 @@ Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
 These are the actual variable values that a step captured during test execution. For example, if you have a browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
 
-For information on how to access the `<step-index>`, see the step summary section.
+For information on how to access the `<step-index>`, see the [Step summary][2] section.
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name
@@ -213,16 +213,19 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% /tab %}
 
 {% tab label="Sub-tests" %}
-`synthetics.attributes.variables.extracted.steps.subTest.id`
+`synthetics.attributes.result.steps.<step-index>.subTest.id`
 : Subtest identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
+`synthetics.attributes.result.steps.<step-index>.subTest.version`
+: Subtest version
+
+`synthetics.attributes.result.steps.<step-index>.subStep.parentStep.id`
 : Parent step identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
+`synthetics.attributes.result.steps.<step-index>.subStep.parentTest.id`
 : Parent test identifier
 
-`synthetics.attributes.variables.extracted.steps.subStep.level`
+`synthetics.attributes.result.steps.<step-index>.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
 {% /tab %}
 {% /tabs %}
@@ -241,3 +244,4 @@ For information on how to access the `<step-index>`, see the step summary sectio
 {% partial file="synthetics/notifications/step_summary.mdoc.md" /%}
 
 [1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut
+[2]: #step-summary

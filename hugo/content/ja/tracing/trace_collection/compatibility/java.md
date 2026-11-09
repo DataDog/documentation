@@ -13,7 +13,7 @@ further_reading:
 title: Java 互換性要件
 type: multi-code-lang
 ---
-## 互換性 {#compatibility}
+## 互換性{#compatibility}
 
 Java Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
@@ -30,12 +30,12 @@ Java トレーサーは、Oracle JDK、OpenJDK JVM、および [GraalVM](#graalv
     <th>サポートレベル</th>
   </thead>
   <tr>
-    <td>27 以上</td>
+    <td>28 以上</td>
     <td>Windows (x86、x86-64)<br>Linux (x86、x86-64、arm64)<br>Mac (x86、x86-64、arm64)</td>
     <td><a href="#levels-of-support">プレビュー</a></td>
   </tr>
   <tr>
-    <td>18 ～ 26</td>
+    <td>18 ～ 27</td>
     <td>Windows (x86、x86-64)<br>Linux (x86、x86-64、arm64)<br>Mac (x86、x86-64、arm64)</td>
     <td><a href="#levels-of-support">GA</a></td>
   </tr>
@@ -104,7 +104,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Ratpack                 | 1.5+         | 完全対応                                        | `ratpack`                                                  |
 | Restlet HTTP サーバー     | 2.2～2.4    | 完全対応                                        | `restlet-http`.                                           |
 | Spark Java              | 2.3+         | [プレビュー](#framework-integrations-disabled-by-default) | `sparkjava` (要 `jetty`)                             |
-| Spring Boot             | 1.5+         | 完全対応                                        | `spring-web` または `spring-webflux`                           |
+| Spring Boot             | 1.5 - 3.X    | 完全対応                                        | `spring-web` または `spring-webflux`                           |
 | Spring Web (MVC)        | 4.0+         | 完全対応                                        | `spring-web`                                               |
 | Spring WebFlux          | 5.0+         | 完全対応                                        | `spring-webflux`                                           |
 | Tomcat                  | 5.5+         | 完全対応                                        | `tomcat`                                                   |
@@ -225,7 +225,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
   - **Datadog Trace Agent**: 必要最小限の推奨バージョンは `7.76.1` です。これは、トレースメタデータ内の認証パラメーターが自動的に難読化されるようにするためです。
   - **Datadog Lambda Extension** (Serverless 環境): 必要最小限のバージョンは `v28.0.0` です。
 
-`dd-java-agent` は、次を含む一般的な JDBC ドライバーとも互換性があります。
+`dd-java-agent`は、次を含む一般的な JDBC ドライバーとも互換性があります。
 
 - Apache Derby
 - Firebird SQL
@@ -259,6 +259,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Datanucleus JDO     | 4.0+             | 完全対応                                        | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+             | 完全対応                                        | `dropwizard`、`dropwizard-view`                |
 | GraphQL             | 14.0+            | 完全対応                                        | `graphql-java`                                 |
+| Guidewire (PolicyCenter, BillingCenter) | 10.0+ | 完全対応                                        | `guidewire`、`guidewire-wsi`   |
 | Hazelcast (クライアント)  | 3.6+             | [プレビュー](#framework-integrations-disabled-by-default) | `hazelcast`、`hazelcast_legacy`                |
 | Hibernate           | 3.5+             | 完全対応                                        | `hibernate`、`hibernate-core`                  |
 | Hystrix             | 1.4+             | 完全対応                                        | `hystrix`                                      |
@@ -330,7 +331,7 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
 
 [Trace Explorer][9] を使用してトレースを表示できます。
 
-{{% collapse-content title="トラブルシューティング" level="h4" %}}
+{{% collapse-content title="トラブルシューティング" level="h5" %}}
 ##### トレーニング実行時に Datadog Java SDK がアタッチされていない {#not-attaching-the-datadog-java-sdk-during-the-training-run}
 
 本番環境で以下の警告が表示される場合、トレーニング時に Datadog Java SDK がアタッチされていなかったことを表します。
@@ -364,7 +365,7 @@ GraalVM Native Image を使用して Datadog Java SDK をセットアップす�
    ```shell
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
-3. (オプション) 次の引数を追加してプロファイラーインテグレーションを有効にします: 
+3. (オプション) 次の引数を追加してプロファイラーインテグレーションを有効にします:
 `-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`。
    - トレーサーのバージョンが `1.39.1` より前の場合は、生成されたネイティブ実行可能ファイルを実行する際に、`DD_PROFILING_START_FORCE_FIRST=true` を環境変数として設定してください。
 
@@ -379,7 +380,7 @@ Quarkus Native を使用して Datadog Java SDK をセットアップするに�
    ```shell
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
-3. (オプション) 次の引数を追加してプロファイラーインテグレーションを有効にします: 
+3. (オプション) 次の引数を追加してプロファイラーインテグレーションを有効にします:
 `-J-Ddd.profiling.enabled=true --enable-monitoring=jfr`。
    - トレーサーのバージョンが `1.39.1` より前の場合は、生成されたネイティブ実行可能ファイルを実行する際に、`DD_PROFILING_START_FORCE_FIRST=true` を環境変数として設定してください。
 
@@ -422,7 +423,7 @@ Spring Native を使用して Datadog Java SDK をセットアップするには
 
 {{< /tabs >}}
 
-<div class="alert alert-info">GraalVM 25 では、 <code>Use of Unsafe</code> に関連するエラーが発生することがあります。これに対処するには、ネイティブ実行可能ファイルをビルドする際に  <code>-Dnet.bytebuddy.safe=false</code>  を追加します。</div>
+<div class="alert alert-info">GraalVM 25 では、 <code>Use of Unsafe</code>に関連するエラーが発生することがあります。これに対処するには、ネイティブ実行可能ファイルをビルドする際に <code>-Dnet.bytebuddy.safe=false</code> を追加します。</div>
 
 #### 使用方法 {#usage-1}
 
@@ -430,7 +431,7 @@ Spring Native を使用して Datadog Java SDK をセットアップするには
 
 [Trace Explorer][9] を使用してトレースを表示できます。
 
-{{% collapse-content title="トラブルシューティング" level="h4" %}}
+{{% collapse-content title="トラブルシューティング" level="h5" %}}
 ##### ネイティブイメージで機能が有効化されない、または正しく構成されない {#features-are-not-enabled-or-configured-correctly-for-native-images}
 
 Graal Native Image を使用してビルドされたバイナリから実行時にシステムプロパティにアクセスする際に既知の問題があります。

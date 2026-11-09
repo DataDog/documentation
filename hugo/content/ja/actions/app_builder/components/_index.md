@@ -15,16 +15,10 @@ further_reading:
   text: JavaScript 式
 - link: https://learn.datadoghq.com/courses/app-builder-integration
   tag: ラーニングセンター
-  text: App Builder を使用してサードパーティとのインテグレーション用のセルフサービスアプリを構築
+  text: App Builder を使用したサードパーティインテグレーション向けのセルフサービスアプリの構築
 title: コンポーネント
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App Builder は、Datadog Government サイト US1-FED でプレビュー版として提供されています。
-</div>
-{{< /site-region >}}
-
-## 概要 {#overview}
+## 概要{#overview}
 このページには、App Builder でアプリを作成する際に使用できる UI コンポーネントのリストが掲載されています。
 
 多くのコンポーネントプロパティでは、提供される値から選択できます。プロパティの値に式を使用する場合は、プロパティの横にある {{< ui >}}&lt;/&gt;{{< /ui >}} をクリックしてコードエディターを使用します。
@@ -384,7 +378,7 @@ Reaction (リアクション)
 
 #### 一般 (General) {#general-7}
 
-Source (ソース)
+ソース
 : 表示する画像。サポートされている形式は、JPG、PNG、および GIF です。最大アップロードサイズは 4 MB です。<br>
 **値**: URL またはファイル
 
@@ -642,7 +636,7 @@ Placeholder text (プレースホルダーテキスト)
 : 値が入力されていないときに表示されるテキスト。<br>
 **値**: 文字列または式
 
-#### Validation (検証) {#validation}
+#### 検証 {#validation}
 
 Min (最小値)
 : 数値入力が受け入れる最小値。<br>
@@ -761,7 +755,7 @@ Component Input Props (コンポーネント入力 Props)
 : React コンポーネントに渡され、コンポーネントの props オブジェクトでアクセスできる props です。
 
 Initial Component State (コンポーネントの初期状態)
-: コンポーネントの初期状態の値を設定します。この状態は、コンポーネントが最初にレンダリングされるとき、または状態がまだ設定されていないときに使用されます。コンポーネントは、 <code>props.state</code>からこのデータにアクセスできます。<br>
+: コンポーネントの初期状態の値を設定します。この状態は、コンポーネントが最初にレンダリングされるとき、または状態がまだ設定されていないときに使用されます。コンポーネントは、 <code>props.state</code>.<br>
 
 #### Appearance (外観) {#appearance-16}
 
@@ -1075,7 +1069,7 @@ Total count (合計数)
 : テーブルに表示する行の合計数。<br>
 **値**: 数値、または数値として評価される式
 
-Type (タイプ)
+タイプ
 : ページ区切りのタイプを決定します。<br>
 **提供される値**: client side、server side
 
@@ -1322,7 +1316,7 @@ State Function (状態関数)
 {{% /collapse-content %}}
 
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

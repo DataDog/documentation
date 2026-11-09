@@ -16,6 +16,9 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 {% if equals($platform, "browser") %}
 By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
+{% if equals($platform, "electron") %}
+By enabling Session Replay for Electron, you can automatically mask sensitive elements from being recorded in renderer processes. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
+{% /if %}
 {% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
@@ -135,6 +138,26 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 {% /alert %}
 {% /if %}
 <!-- end Browser -->
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+## Configuration
+
+To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in the main process `init` call. If the privacy setting is not specified, `mask` is enabled by default.
+
+```typescript
+await init({
+  // ...
+  sessionReplaySampleRate: 100,
+  defaultPrivacyLevel: 'mask', // 'mask' | 'allow' | 'mask-user-input'
+});
+```
+
+The SDK applies the `defaultPrivacyLevel` from the main process to the recorder in each renderer, so masking is enforced end to end. A `defaultPrivacyLevel` set in the renderer `datadogRum.init` call is ignored.
+
+Renderers are recorded by the Browser SDK. For what each privacy level masks, HTML element overrides, and the elements that are always masked, see the [Browser privacy options][1].
+{% /if %}
+<!-- end Electron -->
 
 <!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
 {% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}

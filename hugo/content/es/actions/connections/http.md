@@ -20,7 +20,7 @@ Para agregar una solicitud HTTP:
 {{< tabs >}}
 {{% tab "Workflow Automation" %}}
 - En un nuevo flujo de trabajo, haga clic en {{< ui >}}Add step{{< /ui >}} y busque `Make request`. Seleccione la acción {{< ui >}}Make request{{< /ui >}} para agregarla a su flujo de trabajo.
-- En un flujo de trabajo existente, haga clic en {{< ui >}}+{{< /ui >}} y busque `Make request`. Seleccione la acción {{< ui >}}Make request{{< /ui >}} para agregarla a su flujo de trabajo.
+- En un flujo de trabajo existente, haga clic en {{< ui >}}\+{{< /ui >}} y busque `Make request`. Seleccione la acción {{< ui >}}Make request{{< /ui >}} para agregarla a su flujo de trabajo.
 
 Especifique el método de solicitud y cualquier [autenticación][1] necesaria. Lea las secciones a continuación para obtener más información sobre las opciones de configuración disponibles. Opcionalmente, la solicitud puede esperar a que se cumplan las condiciones que especifique en la sección {{< ui >}}Conditional wait{{< /ui >}} y reintentar en un intervalo determinado si la condición no se cumple.
 
@@ -28,7 +28,7 @@ Especifique el método de solicitud y cualquier [autenticación][1] necesaria. L
 {{% /tab %}}
 
 {{% tab "App Builder" %}}
-1. En su aplicación, en {{< ui >}}Data{{< /ui >}}, haga clic en {{< ui >}}+ New{{< /ui >}} y seleccione {{< ui >}}Query{{< /ui >}}
+1. En su aplicación, en {{< ui >}}Data{{< /ui >}}, haga clic en {{< ui >}}\+ New{{< /ui >}} y seleccione {{< ui >}}Query{{< /ui >}}
 1. Busque `HTTP`, luego seleccione la acción {{< ui >}}Make request{{< /ui >}} para agregarla a su aplicación.
 
 Especifique el método de solicitud y cualquier [autenticación][1] necesaria. Lea las secciones a continuación para obtener más información sobre las opciones de configuración disponibles.
@@ -43,14 +43,14 @@ Si necesita autenticar su solicitud, utilice el {{< ui >}}Connection{{< /ui >}} 
 
 ### Crear una conexión de AWS {#create-an-aws-connection}
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}AWS{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Account ID{{< /ui >}} y {{< ui >}}AWS Role Name{{< /ui >}}.
 1. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
 ### Crear una conexión de Azure {#create-an-azure-connection}
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}Azure{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Tenant ID{{< /ui >}}, {{< ui >}}Client ID{{< /ui >}} y {{< ui >}}Client Secret{{< /ui >}}.
 1. Opcionalmente, ingrese el {{< ui >}}Custom Scope{{< /ui >}} que se solicitará a Microsoft al adquirir un token de acceso OAuth 2.0. El contexto de un recurso se construye utilizando el URI del identificador para el recurso y `.default`, separados por una barra diagonal (`/`). Por ejemplo, `{identifierURI}/.default`. Para obtener más información, consulte [la documentación de Microsoft sobre el contexto .default][3].
@@ -60,20 +60,21 @@ Si necesita autenticar su solicitud, utilice el {{< ui >}}Connection{{< /ui >}} 
 
 La conexión de autenticación de token utiliza un token de portador para autenticar la solicitud HTTP.
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}HTTP{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}.
 1. Ingrese el {{< ui >}}Base URL{{< /ui >}} para la autenticación.
 1. En el menú desplegable {{< ui >}}Authentication Type{{< /ui >}}, seleccione {{< ui >}}Token Auth{{< /ui >}}.
-1. Ingrese un {{< ui >}}Token Name{{< /ui >}} y {{< ui >}}Token Value{{< /ui >}}. Puede ingresar múltiples tokens. Para hacer referencia a su token en un encabezado, parámetro o en el cuerpo de la solicitud, use la sintaxis `{{ secretTokenName }}`.
-1. Opcionalmente, agregue {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} y un {{< ui >}}Body{{< /ui >}} adicionales a su solicitud.
+1. Ingrese un {{< ui >}}Token Name{{< /ui >}} y {{< ui >}}Token Value{{< /ui >}}. Puede ingresar múltiples tokens.
+1. Configure cómo las solicitudes HTTP que utilizan la conexión incluyen el token. La conexión no agrega el token a las solicitudes automáticamente. En {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} o {{< ui >}}Body{{< /ui >}}, haga referencia al token con la sintaxis `{{ secretTokenName }}`, replacing `secretTokenName` with the {{< ui >}}Token Name{{< /ui >}} del paso anterior. Por ejemplo, si el nombre del token es `apiToken`, add an `Authorization` header with the value `Bearer {{ apiToken }}`.
+1. Opcionalmente, agregue otros {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} o un {{< ui >}}Body{{< /ui >}} a su solicitud.
 1. Haga clic en {{< ui >}}Create{{< /ui >}}.
 
 ### Cree una conexión de autenticación básica HTTP {#create-an-http-basic-authentication-connection}
 
 La conexión de autenticación básica utiliza un encabezado de autorización con un nombre de usuario y una contraseña para autenticar la solicitud HTTP.
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}HTTP{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}.
 1. Ingrese el {{< ui >}}Base URL{{< /ui >}} para la autenticación.
@@ -85,7 +86,7 @@ La conexión de autenticación básica utiliza un encabezado de autorización co
 
 La conexión HTTP de 2 pasos le permite realizar una solicitud preliminar para recuperar un token de acceso con el cual autenticar la solicitud HTTP. Esto es útil para autenticar aplicaciones de JSON Web Token (JWT) y OAuth.
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}HTTP{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}.
 1. Ingrese el {{< ui >}}Base URL{{< /ui >}} para la autenticación.
@@ -133,7 +134,7 @@ La conexión TLS mutua (mTLS) le permite usar una clave privada y un certificado
 
 <div class="alert alert-info">El certificado de cliente (<code>.crt</code>, <code>.pem</code>) y la clave privada (<code>.key</code>, <code>.pem</code>) deben usar el formato PEM.</div>
 
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}HTTP{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}.
 1. Ingrese el {{< ui >}}Base URL{{< /ui >}} para la autenticación.
@@ -167,7 +168,7 @@ Puede utilizar una acción HTTP privada para interactuar con servicios alojados 
 
 Para configurar una solicitud HTTP privada:
 1. Agregue una acción HTTP a su aplicación.
-1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}+{{< /ui >}}).
+1. En la sección {{< ui >}}Connection{{< /ui >}}, haga clic en el icono de más ({{< ui >}}\+{{< /ui >}}).
 1. Seleccione {{< ui >}}HTTP{{< /ui >}}.
 1. Ingrese un {{< ui >}}Connection Name{{< /ui >}}.
 1. Ingrese el {{< ui >}}Base URL{{< /ui >}} para el servidor en su red privada.

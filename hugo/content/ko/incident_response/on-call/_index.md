@@ -17,15 +17,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/
   tag: 블로그
   text: Datadog Incident Response로 복구 및 커뮤니케이션 통합
+- link: https://www.datadoghq.com/blog/fedramp-high-incident-response/
+  tag: 블로그
+  text: FedRAMP High 환경에서 인시던트 대응 실행하기
 title: On-Call
 ---
 Datadog On-Call은 모니터링, 페이징, 인시던트 대응을 하나의 플랫폼에 통합합니다.
 
-{{< img src="incident_response/on-call/oncall_overview.png" alt="페이지 라우팅 개요 모니터링, 인시던트, 보안 시그널 또는 API 호출로부터 페이지 팀(예: 'payments-team')에 전송된 후, 라우팅 규칙(예: 우선 순위에 따라)을 거쳐 에스컬레이션 정책으로 전달됩니다. 이후 일정으로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="페이지 라우팅 개요 모니터링, 인시던트, 보안 시그널 또는 API 호출로부터 페이지가 팀(예: 'payments-team')에 전송된 후, 라우팅 규칙(예: 우선 순위에 따라)을 거쳐 에스컬레이션 정책으로 전달됩니다. 이후 일정으로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}
 
 ## 개념 {#concepts}
 
-- **Pages**는 모니터링, 인시던트 또는 보안 시그널과 같이 경보를 받아야 할 이벤트를 나타냅니다. 페이지 상태는 `Triggered`, `Acknowledged`, `Resolved` 중 하나일 수 있습니다.
+- **페이지**는 모니터, 인시던트 또는 보안 시그널과 같이 경보를 받을 이벤트를 나타냅니다. 페이지 상태는 `Triggered`, `Acknowledged`, `Resolved` 중 하나일 수 있습니다.
 - **팀**은 전문성과 운영 역할에 따라 특정 유형의 페이지를 처리하도록 Datadog 내에서 구성된 그룹입니다.
 - **라우팅 규칙**을 통해 팀은 특정 유형의 수신 이벤트에 대한 반응을 세밀하게 조정할 수 있습니다. 이 규칙은 페이지의 긴급 수준을 설정하고, 이벤트의 메타데이터에 따라 페이지를 다른 에스컬레이션 정책으로 라우팅하며, 정의된 시간대에만 에스컬레이션 알림을 전송하기 위해 [지원 시간][7]을 구성할 수 있습니다.
 - **에스컬레이션 정책**은 페이지가 팀 내 또는 여러 팀 간에 어떻게 에스컬레이션되는지를 결정합니다.
@@ -84,14 +87,14 @@ On-Call 리소스에 대한 액세스를 제한하려면 다음을 수행합니�
 
 <div class="alert alert-danger">인시던트 기록을 보존하기 위해 Datadog On-Call은 페이지, 에스컬레이션 정책 또는 일정과 같은 리소스 삭제를 지원하지 않습니다. 운영 환경에 영향을 주지 않고 On-Call을 테스트하려면 샌드박스용 평가 조직을 생성하세요.</div>
 
-On-Call을 시작하려면, [On-Call 팀을 등록][1]하고 모든 팀 구성원이 [On-Call 알림 기본 설정][2]을 구성하여 알림을 받을 수 있도록 하십시오.
+On-Call을 시작하려면 [On-Call 팀을 온보딩][1]하고 모든 팀원이 알림을 받을 수 있도록 [On-Call 알림 환경설정][2]을 구성했는지 확인하세요.
 
 {{< whatsnext desc="이 섹션에는 다음 주제가 포함되어 있습니다.">}}
   {{< nextlink href="/incident_response/on-call/teams">}}<u>팀 온보딩</u>: 새로운 On-Call 팀을 생성하거나 기존 Datadog 팀을 On-Call에 추가하거나 PagerDuty에서 팀을 가져옵니다.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/pages">}}<u>페이지</u>: 모니터, 인시던트, 보안 시그널 및 기타 소스에서 페이지를 생성합니다. 페이지를 응답 확인, 재할당 또는 해결하거나 인시던트로 승격할 수 있습니다.{{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/escalation_policies">}}<u>에스컬레이션 정책</u>: 페이지가 여러 일정으로 전달되는 단계를 정의합니다. {{< /nextlink >}}
   {{< nextlink href="/incident_response/on-call/schedules">}}<u>일정</u>: 팀 구성원의 온콜 순환 일정을 정의합니다.{{< /nextlink >}}
-  {{< nextlink href="/incident_response/on-call/notification_preferences">}}<u>알림 기본 설정</u>: 적시에 효과적인 페이지를 받으실 수 있도록 연락 방법과 알림 기본 설정을 구성하십시오.{{< /nextlink >}}
+  {{< nextlink href="/incident_response/on-call/notification_preferences">}}<u>알림 환경설정</u>: 페이지 알림을 적시에 효과적으로 받을 수 있도록 연락 방법과 알림 환경설정을 구성합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 과금 {#billing}

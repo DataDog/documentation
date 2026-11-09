@@ -31,11 +31,11 @@ Observability Pipelines의 Datadog Agent 소스를 사용하여 Datadog Agent에
 
 ## 설정 {#setup}
 
-<div class="alert alert-danger">시크릿 관리: Datadog Agent 주소에 대한 식별자와 해당하는 경우 TLS 키 암호만 입력하세요. 실제 값은 입력하지 <b>마세요</b>.</div>
+<div class="alert alert-danger">시크릿 관리: Datadog Agent 주소에 대한 식별자만 입력하고, 해당하는 경우 TLS 키 암호를 입력하세요. 실제 값은 <b>입력하지 마세요</b>. 설정 방법은 <a href="/observability_pipelines/configuration/secrets_management/">시크릿 관리</a>를 참조하세요.</div>
 
 [파이프라인을 설정할 때][1] 이 소스를 설정하세요. 파이프라인은 [UI][6], [API][7] 또는 [Terraform][8]을 사용하여 설정할 수 있습니다. 이 섹션의 지침은 UI에서 소스를 설정하기 위한 것입니다.
 
-파이프라인 UI에서 Datadog Agent 소스를 선택한 후 Datadog Agent 주소에 대한 식별자를 입력하세요. 비워두면 [기본값](#secret-defaults)이 사용됩니다.
+파이프라인 UI에서 Datadog Agent 소스를 선택한 후 Datadog Agent 주소에 대한 식별자를 입력하세요. 이 식별자는 `<OPW_HOST>:8282`와 같이 수신 Agent 연결을 위해 Worker가 수신 대기하는 바인드 주소를 참조합니다. 식별자 필드를 비워 두면 [기본값](#secret-defaults)이 사용됩니다.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 

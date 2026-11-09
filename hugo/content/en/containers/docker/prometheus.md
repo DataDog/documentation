@@ -248,7 +248,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     docker run -d -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests":"handler.requests"},{"promhttp_metric_handler_requests_in_flight":"handler.requests.in_flight"},"go_memory.*"]}]' prom/prometheus
     ```
 
-3. Go into your [Metric summary][8] page to see the collected metrics:
+3. Go into your [Metrics Catalog][8] page to see the collected metrics:
 
     {{< img src="integrations/guide/prometheus_docker/openmetrics_v2_collected_metric_docker.png" alt="Prometheus metric collected docker">}}
 
@@ -269,5 +269,5 @@ Official integrations have their own dedicated directories. There's a default in
 [5]: /extend/custom_checks/prometheus/
 [6]: https://docs.datadoghq.com/agent/guide/template_variables/
 [7]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
-[8]: https://app.datadoghq.com/metric/summary
+[8]: https://app.datadoghq.com/metric/catalog
 [9]: https://github.com/DataDog/integrations-core/tree/master/kube_proxy
