@@ -2866,7 +2866,7 @@ Deletes one or more custom detection rules by ID. Only custom (non-default) rule
 - Remove these three test detection rules I created earlier.
 
 ### `propose_datadog_security_detection_rule`
-*Toolset: **security***\
+*Toolset: **security** (Preview)*\
 *Permissions Required: `Security Monitoring Rules Write`*\
 Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate more than a few rules, use [detection rule migration][101].
 
@@ -2874,7 +2874,7 @@ Proposes a Cloud SIEM detection rule from a natural-language description, or tra
 - Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
 
 ### `get_datadog_security_detection_rule_proposal`
-*Toolset: **security***\
+*Toolset: **security** (Preview)*\
 *Permissions Required: `Security Monitoring Rules Read`*\
 Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`. When it fails, returns the error.
 
