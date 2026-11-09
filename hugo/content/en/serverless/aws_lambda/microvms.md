@@ -40,7 +40,7 @@ Datadog provides full visibility into the metrics, logs, and traces emitted by y
 - See the last seconds of telemetry before a MicroVM suspends or shuts down.
 - Get unique trace IDs for each instance, even when many instances start from the same image.
 
-<div class="alert alert-info">Every MicroVM reports CPU utilization as <a href="#metrics">enhanced metrics</a>, with nothing to install or turn on. You can chart and alert on <code>aws.lambda.microvm.enhanced.cpu.usage</code> and <code>aws.lambda.microvm.enhanced.cpu.limit</code> as soon as a MicroVM starts.</div>
+<div class="alert alert-tip">Every MicroVM reports CPU utilization as <a href="#metrics">enhanced metrics</a>, with nothing to install or turn on. You can chart and alert on <code>aws.lambda.microvm.enhanced.cpu.usage</code> and <code>aws.lambda.microvm.enhanced.cpu.limit</code> as soon as a MicroVM starts.</div>
 
 ## Prerequisites
 
@@ -48,6 +48,7 @@ Datadog provides full visibility into the metrics, logs, and traces emitted by y
 - `serverless-init` runs as the container entrypoint. Sidecar mode isn't supported.
 - A [Datadog API key][3].
 - Network egress from the MicroVM to Datadog.
+- Your application already sends traces, logs, or custom metrics to Datadog.
 
 ### Supported versions
 
@@ -123,10 +124,24 @@ ENV DD_AWS_MICROVM_ENABLE_RUN=true
 
 If your application needs the hook callbacks, forward them with these environment variables:
 
-| Variable | Description |
-|---|---|
-| `DD_AWS_MICROVM_USER_APP_PORT` | The port your application listens on for forwarded hooks. |
-| `DD_AWS_MICROVM_ENABLE_<HOOK>` | Set to `true` to forward a hook to your application. For example, `DD_AWS_MICROVM_ENABLE_RUN=true`. |
+<table>
+  <thead>
+    <tr>
+      <th style="white-space: nowrap; width: 300px; min-width: 300px;">Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_USER_APP_PORT</code></td>
+      <td>The port your application listens on for forwarded hooks.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_&lt;HOOK&gt;</code></td>
+      <td>Set to <code>true</code> to forward a hook to your application. For example, <code>DD_AWS_MICROVM_ENABLE_RUN=true</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- TODO: Confirm the timeout variable names and defaults for forwarded hooks. -->
 
@@ -151,22 +166,81 @@ On Python, this works for WSGI and ASGI applications, including Flask, Django, F
 
 Datadog sends these enhanced metrics for every MicroVM:
 
-| Metric | Description |
-|---|---|
-| `aws.lambda.microvm.enhanced.cpu.usage` | CPU usage of the MicroVM. |
-| `aws.lambda.microvm.enhanced.cpu.limit` | CPU limit of the MicroVM. On guests without cgroups, this is the number of CPUs the guest can see. |
-| `aws.lambda.microvm.enhanced.validate` | Emitted on each `/validate` hook. |
-| `aws.lambda.microvm.enhanced.run` | Emitted on each `/run` hook. |
-| `aws.lambda.microvm.enhanced.resume` | Emitted on each `/resume` hook. |
-| `aws.lambda.microvm.enhanced.suspend` | Emitted on each `/suspend` hook. |
-| `aws.lambda.microvm.enhanced.terminate` | Emitted on each `/terminate` hook. |
-| `aws.lambda.microvm.enhanced.active_instances` | Heartbeat emitted while an instance runs. This is a periodic sample, not an exact instance count. |
-
-CPU metrics work whether or not the guest has cgroups. Without cgroups, the Agent reads `/proc/stat` instead.
+<table>
+  <thead>
+    <tr>
+      <th style="white-space: nowrap; width: 400px; min-width: 400px;">Metric</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.cpu.usage</code></td>
+      <td>CPU usage of the MicroVM.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.cpu.limit</code></td>
+      <td>CPU limit of the MicroVM. On guests without cgroups, this is the number of CPUs the guest can see.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.validate</code></td>
+      <td>Emitted on each <code>/validate</code> hook.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.run</code></td>
+      <td>Emitted on each <code>/run</code> hook.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.resume</code></td>
+      <td>Emitted on each <code>/resume</code> hook.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.suspend</code></td>
+      <td>Emitted on each <code>/suspend</code> hook.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.terminate</code></td>
+      <td>Emitted on each <code>/terminate</code> hook.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>aws.lambda.microvm.enhanced.active_instances</code></td>
+      <td>Heartbeat emitted while an instance runs. This is a periodic sample, not an exact instance count.</td>
+    </tr>
+  </tbody>
+</table>
 
 ### Tags
 
-All telemetry includes the MicroVM image ARN and image version. After AWS sends `/run`, logs, traces, and the `active_instances` metric also include the instance ID tag, `lambda_microvm_id`. Usage metrics include the `env`, `service`, and `version` tags.
+Datadog tags MicroVM telemetry so you can trace a problem to a specific image or instance:
+
+<table>
+  <thead>
+    <tr>
+      <th style="white-space: nowrap; width: 250px; min-width: 250px;">Tag</th>
+      <th>Applied to</th>
+      <th>Use it to</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;">Image ARN and image version</td>
+      <td>All telemetry</td>
+      <td>Filter and group by image or image version.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>lambda_microvm_id</code></td>
+      <td>Logs, traces, and the <code>active_instances</code> metric</td>
+      <td>Filter by a single instance, and go from a slow trace to that instance's logs.</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>env</code>, <code>service</code>, and <code>version</code></td>
+      <td>Usage metrics</td>
+      <td>Route alerts by service and environment. See <a href="/getting_started/tagging/unified_service_tagging/">Unified Service Tagging</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-info">Datadog adds the <code>lambda_microvm_id</code> tag after AWS sends the <code>/run</code> hook. CPU metrics are tagged by image, not by instance.</div>
 
 ## Limitations
 
