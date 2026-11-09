@@ -54,7 +54,7 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
-1. When prompted to choose the region where your account is hosted, select your [Datadog site][4] ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
+1. When prompted to choose the region where your account is hosted, select your [Datadog site](/getting_started/site/) ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -83,7 +83,6 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 {{< /site-region >}}
 
 [1]: https://claude.ai/directory/connectors/datadog
-[4]: /getting_started/site/
 
 {{% /tab %}}
 
