@@ -13,7 +13,7 @@ Env remapping is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Env remapping rules let you rename, merge, or split environments from Datadog. The rules update the `env` values of APM, Metrics, and Logs without changing tracer configuration or redeploying code.
+Env remapping rules let you rename, merge, or split environments from Datadog. The rules update the `env` values of APM data, metrics, and logs without changing tracer configuration or redeploying code.
 
 ## Prerequisites
 
