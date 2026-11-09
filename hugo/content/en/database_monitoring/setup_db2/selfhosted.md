@@ -189,7 +189,7 @@ datadog-agent status
 
 Look for `ibm_db2` under **Checks** and confirm that the check has no errors. In Datadog, open **Database Monitoring > Databases** to find the instance. Open **Database Monitoring > Queries** and select **IBM Db2** to view query metrics.
 
-## Customizing the database identifier
+## Customize the database identifier
 
 The `database_identifier.template` option controls how the instance appears in DBM. Set it explicitly to `$resolved_hostname:$port` to distinguish servers and multiple Db2 instances on one host. Template variables include `$resolved_hostname`, `$host`, `$port`, and configured tag keys such as `$env`.
 
