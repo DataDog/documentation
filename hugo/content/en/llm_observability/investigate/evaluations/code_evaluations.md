@@ -29,22 +29,22 @@ Code evaluators run on the same scopes as [custom LLM-as-a-judge evaluators][2]:
 ## Create a code evaluator
 
 1. In Datadog, navigate to the Agent Observability [Evaluators page][3]. Select {{< ui >}}Create Evaluator{{< /ui >}}.
-1. Start the evaluator in one of these ways:
-   - Under {{< ui >}}Templates{{< /ui >}}, select a template from the {{< ui >}}Code Evaluations{{< /ui >}} group. The editor opens in Code mode with the template's function.
-   - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). In the editor, set {{< ui >}}Type{{< /ui >}} to {{< ui >}}Code (deterministic){{< /ui >}}, then select {{< ui >}}Create from scratch{{< /ui >}} in the {{< ui >}}Template{{< /ui >}} picker.
-1. Provide a clear, descriptive {{< ui >}}evaluator name{{< /ui >}} (for example, `empty-tool-result`). The name must be unique within your application.
-1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria, for example `@meta.span.kind:tool` to evaluate only tool spans. See [Define the evaluation scope][4] for details.
+1. Start creating the evaluator in one of these ways:
+   - Under {{< ui >}}Templates{{< /ui >}}, select a template from the {{< ui >}}Code Evaluations{{< /ui >}} group. The editor opens with {{< ui >}}Type{{< /ui >}} set to {{< ui >}}Code (deterministic){{< /ui >}}.
+   - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). Then, in the editor, set {{< Type >}} to {{< ui >}}Code (deterministic){{< /ui >}}.
+1. Provide a clear, descriptive {{< ui >}}Name{{< /ui >}} (for example, `empty-tool-result`). The name must be unique within your application.
+1. In {{< ui >}}Runs on{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria, for example, `@meta.span.kind:tool`, to evaluate only tool spans. See [Define the evaluation scope][4] for details.
 1. (Optional) To change your starting point, use the {{< ui >}}Template{{< /ui >}} picker:
+   - {{< ui >}}Create from scratch{{< /ui >}}: Starts from a minimal function. 
    - {{< ui >}}Empty tool result{{< /ui >}}: Flags tool calls that return an empty result.
    - {{< ui >}}User input contains text{{< /ui >}}: Checks whether the user input contains a given string.
-   - {{< ui >}}Create from scratch{{< /ui >}}: Starts from a minimal function.
 
    Templates have a version for each scope. If you change the scope before editing the template's code, the editor switches to the template's version for the new scope. Code you have edited is not replaced.
 1. Write or edit your function in {{< ui >}}Evaluation code{{< /ui >}}. See [Write the evaluation function](#write-the-evaluation-function).
-1. Test the evaluator. See [Test and preview](#test-and-preview).
-1. Select {{< ui >}}Save and Publish{{< /ui >}} to start running the evaluator, or {{< ui >}}Save as Draft{{< /ui >}} to finish it later.
+1. Test the evaluator using the pane on the left. See [Test and preview](#test-and-preview).
+1. Select {{< ui >}}Publish{{< /ui >}} to start running the evaluator, or {{< ui >}}Save as Draft{{< /ui >}} to finish it later.
 
-In Code mode, the model, prompt, and output sections of the editor are hidden, because the function defines the whole evaluation.
+When {{< ui >}}Type{{< /ui >}} is set to {{< ui >}}Code (deterministic){{< /ui >}}, the model, prompt, and output sections of the editor are hidden, because the function defines the whole evaluation.
 
 You can switch an existing evaluator between {{< ui >}}LLM judge{{< /ui >}} and {{< ui >}}Code (deterministic){{< /ui >}} with the {{< ui >}}Type{{< /ui >}} selector.
 
@@ -65,7 +65,7 @@ function __evalDeterministic(data) {
 
 ### Input data
 
-`data` is the same object that fills `{{ }}` variables in LLM-as-a-judge [prompt templates][5]. Its shape depends on the evaluation scope:
+`data` object shapes depend on the evaluation scope:
 
 | Scope | `data` | Example fields |
 |---|---|---|
@@ -73,13 +73,13 @@ function __evalDeterministic(data) {
 | Trace | `{ spans: [...] }`, every span in the trace | `data.spans[0].name`, `data.spans.filter((s) => s.meta?.span?.kind === "tool")` |
 | Session | `{ session_id, traces: [{ trace_id, spans: [...] }] }`, every trace in the session | `data.session_id`, `data.traces[0].spans` |
 
-To see the exact fields available, select a span, trace, or session in the right pane of the editor to view its JSON.
+To see the exact fields available, select a span, trace, or session in the left pane of the editor to view its JSON.
 
 Fields can be missing on some spans. Use optional chaining (`?.`) and defaults (`??`) to avoid errors, for example `data.meta?.output?.value ?? ""`.
 
 ### Return value
 
-The type of the value your function returns determines the evaluation's metric type:
+Your function's return value type determines the evaluation's metric type:
 
 | Return value | Metric type |
 |---|---|
@@ -100,7 +100,7 @@ To add an assessment, reasoning, or metadata, return an object with a `value` ke
 
 If the object has an `assessment` but no `value`, the result is a Boolean: `true` when the assessment is `"pass"`, and `false` when it is `"fail"`.
 
-Return `null` to skip spans, traces, or sessions that the evaluation doesn't apply to, for example a span that is not a tool call.
+Return `null` to skip spans, traces, or sessions that the evaluation doesn't apply to, for example, a span that is not a tool call.
 
 ### Example: Empty tool result (span scope)
 
@@ -167,10 +167,10 @@ function __evalDeterministic(data) {
 
 ## Test and preview
 
-The pane on the right shows the spans, traces, or sessions that match the evaluation scope. Select {{< ui >}}Test Evaluator{{< /ui >}}, then:
+The pane on the left shows the spans, traces, or sessions that match the evaluation scope. Select {{< ui >}}Test Evaluator{{< /ui >}}, then:
 
 - Select {{< ui >}}Auto Test{{< /ui >}} to run your function on a sample of the matching spans, traces, or sessions.
-- Select {{< ui >}}Test Manually{{< /ui >}} to run your function on one you choose.
+- Select {{< ui >}}Test Manually{{< /ui >}} to run your function on a span, trace, or session that you choose.
 
 For each run, the result panel shows the returned value, any `console.log` output, and any error the function raised.
 
