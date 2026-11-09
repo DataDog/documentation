@@ -37,7 +37,7 @@ An emerging threat is a new or evolving attack campaign or supply-chain attack t
 
 ## Investigate emerging vulnerabilities and threats with Bits Chat
 
-**Requirements:** The **Bits Chat Access** permission
+**Requirements**: The **Bits Chat Access** permission.
 
 The Security Research Feed can use [Bits Chat][1] to investigate how an emerging vulnerability or emerging threat affects your environment. Bits Chat reads the article and checks the data sources it lists, such as vulnerability findings, security signals, APM services, and container images, for affected resources. Bits Chat then summarizes which resources are affected and suggests remediation steps for them.
 
