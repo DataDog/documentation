@@ -23,6 +23,11 @@ cascade:
     path: /api/latest/dashboards
   aliases:
   - /api/screenboards/
+- _target:
+    lang: en
+    path: /api/latest/scorecards
+  aliases:
+  - /api/latest/service-scorecards
 external_redirect: /api/latest/
 title: API 참조
 type: api

@@ -63,6 +63,7 @@ Source code integration is supported for the following RUM platforms when source
 - **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
 - **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
 - **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+- **Electron**: Requires [source maps][7] to be uploaded with Git information
 
 **Note**: Source code integration is not supported for iOS RUM errors.
 
@@ -78,6 +79,7 @@ Source code integration is supported for the following RUM platforms when source
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
 [6]: /real_user_monitoring/application_monitoring/android/error_tracking/
+[7]: /real_user_monitoring/application_monitoring/electron/error_tracking/#upload-source-maps
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}

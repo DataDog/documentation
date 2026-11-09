@@ -11,9 +11,15 @@ further_reading:
   - link: "/llm_observability/improve/playground"
     tag: "Documentation"
     text: "Playground"
+  - link: "/llm_observability/improve/online_experiments/prompt_experimentation/"
+    tag: "Documentation"
+    text: "Prompt Experimentation"
   - link: "/llm_observability/instrument/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
+  - link: "/llm_observability/data_governance/access_control/"
+    tag: "Documentation"
+    text: "Data Access Control in Agent Observability"
 
 ---
 
@@ -285,7 +291,7 @@ Combine prompts in application code or manage the final prompt sent to your mode
 
 By default, the SDK selects the prompt version as follows:
 
-- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or A/B test assignment
+- **With `DD_ENV`**: The version deployed to that environment, including any matching targeting rules or [A/B test][10] assignment
 - **Without `DD_ENV`**: The latest prompt version
 
 To select an exact numeric version, set the `version` option. This option takes precedence over `DD_ENV` and targeting rules. Retrieving either an exact version or the latest version requires `DD_API_KEY`, even when the application uses an Agent. For environment-specific credential requirements, see the [Prerequisites](#prerequisites) section.
@@ -390,6 +396,8 @@ Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, 
 
 To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the {{< ui >}}Prompts{{< /ui >}} page, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
+A promoted prompt retains its association with the application that produced the tracked span. You can use [Data Access Control][20] to restrict access to managed prompts associated with an application.
+
 #### In the UI from scratch
 
 Navigate to the {{< ui >}}Prompts{{< /ui >}} page and click {{< ui >}}\+ New Prompt{{< /ui >}}.
@@ -415,6 +423,8 @@ In the save dialog:
 | {{< ui >}}Deployment{{< /ui >}} | The environment to which this version is deployed. |
 
 Click {{< ui >}}Create Prompt{{< /ui >}} to save the prompt to the registry.
+
+Prompts created directly in the UI, API, or SDK are not associated with an application and cannot be restricted with Data Access Control. To create an application-associated prompt, first track the prompt in an instrumented application, then promote it to the managed prompt registry.
 
 ### Update, list, and delete prompts
 
@@ -906,6 +916,8 @@ Pass the attributes used by your targeting rule, as shown in the previous code e
 
 To retrieve an exact version regardless of any targeting rule, pass `version` as described in [Select a version](#select-a-version).
 
+To measure which version performs better, or to roll out a version gradually with automatic regression checks, see [Prompt Experimentation][10].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -919,6 +931,7 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-[10]: /llm_observability/configure/prompt_experimentation/
+[10]: /llm_observability/improve/online_experiments/prompt_experimentation/
 [11]: /remote_configuration/
+[20]: /llm_observability/data_governance/access_control/#managed-prompts
 [21]: /api/latest/agent-observability/create-an-agent-observability-prompt/

@@ -47,36 +47,92 @@ further_reading:
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
+{% skill-callout
+  title="Set up Continuous Profiler for Java with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided Java profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_java"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/java.mdoc.md" /%}
 {% /if %}
 
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
+{% skill-callout
+  title="Set up Continuous Profiler for Python with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided Python profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_python"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/python.mdoc.md" /%}
 {% /if %}
 
 <!-- Go -->
 {% if equals($prog_lang, "go") %}
+{% skill-callout
+  title="Set up Continuous Profiler for Go with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided Go profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_go"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/go.mdoc.md" /%}
 {% /if %}
 
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
+{% skill-callout
+  title="Set up Continuous Profiler for Ruby with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided Ruby profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_ruby"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/ruby.mdoc.md" /%}
 {% /if %}
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
+{% skill-callout
+  title="Set up Continuous Profiler for Node.js with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided Node.js profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_node_js"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/nodejs.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
+{% skill-callout
+  title="Set up Continuous Profiler for .NET with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided .NET profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_dot_net"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/dotnet.mdoc.md" /%}
 {% /if %}
 
 <!-- PHP -->
 {% if equals($prog_lang, "php") %}
+{% skill-callout
+  title="Set up Continuous Profiler for PHP with an agent"
+  text="Install the `dd-profiler-setup` skill in your AI coding agent for guided PHP profiler setup."
+  action_name="copy_dd_profiler_setup_skill_install_cmd_php"
+%}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-profiler-setup --full-depth -y
+{% /skill-callout %}
+
 {% partial file="profiler/enabling/php.mdoc.md" /%}
 {% /if %}
 

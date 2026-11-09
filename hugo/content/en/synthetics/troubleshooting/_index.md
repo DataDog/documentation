@@ -148,9 +148,7 @@ A 401 error in Synthetic Monitoring tests typically indicates authentication fai
 
 ### Forbidden errors
 
-If you observe `403 Forbidden` errors returned by Synthetic Monitoring tests, it may be the result of your web server blocking or filtering requests that include the `Sec-Datadog` header. This header is added to each Synthetic request Datadog initiates to identify the source of the traffic and assist Datadog support in identifying the specific test execution.  
-
-Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ranges][11] are allowed as traffic sources by your firewalls.
+A `403 Forbidden` error from a Synthetic Monitoring test usually means your web server or firewall is blocking Synthetic traffic. Allow the [Synthetic Monitoring IP ranges][11], and identify Synthetic requests by their `user-agent` header: `Datadog/Synthetics` for API tests, or a value ending in `DatadogSynthetics` for browser tests. Synthetic tests no longer send the `Sec-Datadog` header, so update any allowlist that relies on it. For other identifiers, see [Identify Synthetic bots][18].
 
 ### Missing notifications
 
@@ -395,3 +393,4 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [14]: /synthetics/guide/step-duration
 [16]: /synthetics/network_path_tests/#agent-configuration
 [17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers
+[18]: /synthetics/guide/identify_synthetics_bots/

@@ -5,7 +5,7 @@ import { addStyleFactory } from "@lib/cssUtils/addStyleFactory";
 import { removeStyleFactory } from "@lib/cssUtils/removeStyleFactory";
 import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import {
-  loadExternalContext,
+  withExternalContext,
   type ExternalContext,
 } from "@lib/componentUtils/loadExternalContext";
 import {
@@ -63,63 +63,62 @@ export function TabsNav({
     const thisElement = ref.current;
     if (!thisElement) return;
 
-    const loaded = loadExternalContext(externalContext);
-    if (!loaded) return;
+    return withExternalContext(externalContext, (loaded) => {
+      const { tabsEl, tabPanelEls } = loaded;
 
-    const { tabsEl, tabPanelEls } = loaded;
+      tabPanelsRef.current = tabPanelEls;
+      panelIdsRef.current = externalContext.entries.tabPanelEls;
 
-    tabPanelsRef.current = tabPanelEls;
-    panelIdsRef.current = externalContext.entries.tabPanelEls;
+      const activateFromHash = (): boolean => {
+        const hash = window.location.hash.slice(1);
+        if (!hash) return false;
+        const idx = panelIdsRef.current.indexOf(hash);
+        if (idx >= 0) {
+          setActiveTab(idx);
+          return true;
+        }
+        return activatePanelHoldingAnchor(hash);
+      };
+      const activatedFromHash = activateFromHash();
+      window.addEventListener("hashchange", activateFromHash);
 
-    const activateFromHash = (): boolean => {
-      const hash = window.location.hash.slice(1);
-      if (!hash) return false;
-      const idx = panelIdsRef.current.indexOf(hash);
-      if (idx >= 0) {
-        setActiveTab(idx);
-        return true;
-      }
-      return activatePanelHoldingAnchor(hash);
-    };
-    const activatedFromHash = activateFromHash();
-    window.addEventListener("hashchange", activateFromHash);
+      if (sync && !activatedFromHash) activateFromSyncState(sync);
 
-    if (sync && !activatedFromHash) activateFromSyncState(sync);
+      const followSyncedClick = (event: MouseEvent) => {
+        if (sync) followClickInGroup(event, sync);
+      };
+      if (sync) document.addEventListener("click", followSyncedClick);
 
-    const followSyncedClick = (event: MouseEvent) => {
-      if (sync) followClickInGroup(event, sync);
-    };
-    if (sync) document.addEventListener("click", followSyncedClick);
-
-    // Use pills if tabs won't fit (skipped if variant is explicitly set)
-    const checkOverflow = () => {
-      // Measure in the tabs layout, not the current one: pill buttons are
-      // narrower, so measuring with pills applied reports a fit, switches to
-      // tabs, and the next resize switches back. This all runs before the
-      // browser paints, so the reader never sees the layout used to measure.
-      removeStyle(tabsEl.classList, "tabs--pills");
-      addStyle(thisElement.classList, "tabs__nav--measuring");
-      const overflows = thisElement.scrollWidth > thisElement.clientWidth;
-      removeStyle(thisElement.classList, "tabs__nav--measuring");
-      if (overflows) {
-        addStyle(tabsEl.classList, "tabs--pills");
-      } else {
+      // Use pills if tabs won't fit (skipped if variant is explicitly set)
+      const checkOverflow = () => {
+        // Measure in the tabs layout, not the current one: pill buttons are
+        // narrower, so measuring with pills applied reports a fit, switches to
+        // tabs, and the next resize switches back. This all runs before the
+        // browser paints, so the reader never sees the layout used to measure.
         removeStyle(tabsEl.classList, "tabs--pills");
+        addStyle(thisElement.classList, "tabs__nav--measuring");
+        const overflows = thisElement.scrollWidth > thisElement.clientWidth;
+        removeStyle(thisElement.classList, "tabs__nav--measuring");
+        if (overflows) {
+          addStyle(tabsEl.classList, "tabs--pills");
+        } else {
+          removeStyle(tabsEl.classList, "tabs--pills");
+        }
+      };
+
+      if (!variant) {
+        checkOverflow();
+        window.addEventListener("resize", checkOverflow);
       }
-    };
 
-    if (!variant) {
-      checkOverflow();
-      window.addEventListener("resize", checkOverflow);
-    }
+      markSelfAsHydrated(ref);
 
-    markSelfAsHydrated(ref);
-
-    return () => {
-      window.removeEventListener("hashchange", activateFromHash);
-      window.removeEventListener("resize", checkOverflow);
-      document.removeEventListener("click", followSyncedClick);
-    };
+      return () => {
+        window.removeEventListener("hashchange", activateFromHash);
+        window.removeEventListener("resize", checkOverflow);
+        document.removeEventListener("click", followSyncedClick);
+      };
+    });
   }, []);
 
   const setActiveTab = (index: number) => {

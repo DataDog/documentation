@@ -18,8 +18,8 @@ Datadog has released a new pipeline for calculating globally accurate percentile
   - Accurate percentiles in time for any historical timeframe (such as the past day, week, or month).
   - Boolean filtered queries are now available with distribution metrics with percentiles, so that you can write queries like: `p99:request_latency_distribution{app:A OR app:B} by {app}`.
 - **Easier tag configuration and percentile aggregation workflows**:
-  - All tag configuration-percentile aggregations are managed in one centralized location on the [Metrics Summary][1] page.
-  - Use the {{< ui >}}Manage Tags{{< /ui >}} button on the Metrics Summary details side panel to manage the queryable tags configuration for a distribution metric.
+  - All tag configuration-percentile aggregations are managed in one centralized location on the [Metrics Catalog][1] page.
+  - Use the {{< ui >}}Manage Tags{{< /ui >}} button on the Metrics Catalog details side panel to manage the queryable tags configuration for a distribution metric.
   - To add percentile aggregations to your distribution, navigate to the new percentiles section on the side panel, click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Include{{< /ui >}} for percentile aggregations on the same queryable tags defined on your baseline distribution. You'll no longer need to specify an additional configuration rule.
 - **More intuitive number of custom metrics from distributions with percentiles**:
   The number of custom metrics emitted from additional percentile aggregations is no longer 5 percentile timeseries for every potentially queryable tag value combination. The new number of custom metrics emitted from distributions with percentiles is now counted more similarly to our other metric types:
@@ -46,9 +46,9 @@ Click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Include{{< /ui >}} to inclu
 
 ## How can I add percentiles to multiple Distribution metrics?
 
-Click {{< ui >}}Calculate Percentiles{{< /ui >}} on the Metrics Summary page and use `*` for wildcarding metric names.
+Click {{< ui >}}Calculate Percentiles{{< /ui >}} on the Metrics Catalog page and use `*` for wildcarding metric names.
 
 {{< img src="metrics/faq/sketch-db-migration-faq/bulk-percentiles.mp4" alt="Add percentiles to multiple distribution metrics" video=true >}}
 
 
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog

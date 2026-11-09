@@ -15,13 +15,13 @@ further_reading:
   tag: 블로그
   text: 'LLM 평가 프레임워크 구축: 모범 사례'
 - link: /llm_observability/quickstart/terms/
-  tag: 설명서
+  tag: 문서
   text: Agent Observability 용어 및 개념에 대해 알아보기
 - link: /llm_observability/setup
-  tag: 설명서
+  tag: 문서
   text: Agent Observability 설정 방법 알아보기
 - link: /llm_observability/investigate/evaluations/managed_evaluations
-  tag: 설명서
+  tag: 문서
   text: 관리형 평가에 대해 알아보기
 - link: https://huggingface.co/learn/cookbook/llm_judge
   tag: Hugging Face
@@ -38,23 +38,23 @@ title: 사용자 지정 LLM-as-a-Judge 평가
 
 Agent Observability의 [평가 페이지][1]에서 사용자 지정 평가를 생성하고 관리할 수 있습니다. 평가 설명을 제공하여 평가를 생성하거나, 당사에서 제공하는 기존 [LLM-as-a-judge 평가 템플릿][7]을 사용 및 확장하거나, 처음부터 직접 만들 수도 있습니다. 트레이싱을 활성화하여 평가에서 트레이스를 확인할 수 있습니다.
 
-<div class="alert alert-info">SDK에 이미 <code>LLMJudge</code> 가 정의되어 있다면 UI에서 구성을 다시 만들지 않고 Datadog에 직접 게시할 수 있습니다. <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">LLMJudge를 Datadog 관리형 평가로 게시하기를 참조하세요.</a></div>
+<div class="alert alert-info">SDK에 이미 <code>LLMJudge</code> 가 정의되어 있다면 UI에서 구성을 다시 만들지 않고 Datadog에 직접 게시할 수 있습니다. <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">LLMJudge를 Datadog 관리형 평가로 게시</a>를 참조하세요.</div>
 
 [호환성 요구 사항][6]에 대해 자세히 알아보세요.
 
 ### 프롬프트 구성 {#configure-the-prompt}
 
 1. Datadog에서 Agent Observability [평가 페이지][1]로 이동합니다. {{< ui >}}Create Evaluation{{< /ui >}}을 선택한 다음 {{< ui >}}Create your own{{< /ui >}}을 선택합니다.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="평가 생성을 선택한 후의 Agent Observability 평가 페이지입니다." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="평가 생성을 선택한 후의 Agent Observability 평가 페이지" style="width:100%;" >}}
 1. 평가에 대한 트레이스를 활성화하려면 {{< ui >}}Tracing Disabled{{< /ui >}} 버튼을 클릭한 다음 {{< ui >}}Trace Evaluations{{< /ui >}} 토글을 선택하여 트레이스를 활성화합니다. 이 평가가 실행되면 해당 트레이스가 `datadog-evaluations` 아래에 나타나 평가에 대한 가시성이 향상됩니다. **참고**: 트레이싱을 활성화하면 Datadog으로 전송되는 청구 대상 스팬 수가 증가합니다.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="평가 트레이싱 활성화 토글을 선택한 후 트레이스 평가가 활성화됩니다." >}}
 1. 명확하고 이름을 알기 쉽게 나타내는 {{< ui >}}evaluation name{{< /ui >}}을 사용하세요(예: `factuality-check` 또는 `tone-eval`). 평가 결과를 쿼리할 때 이 이름을 사용할 수 있습니다. 이 이름은 애플리케이션 내에서 고유해야 합니다.
-1. 모델 구성:
+1. 모델을 구성합니다.
     1. 드롭다운 메뉴를 선택하여 {{< ui >}}Account{{< /ui >}} LLM 평가자에 사용할 LLM 공급자와 해당 계정을 선택합니다. 새 계정을 연결하려면 [LLM 공급자 연결][2]을 참조하세요.
-        - 계정을 선택하는 경우 {{< ui >}}Amazon Bedrock{{< /ui >}} 계정이 구성된 리전을 선택합니다. 그런 다음 모델 이름을 선택하거나 추론 프로필 ARN을 제공할 수 있습니다.
+        - {{< ui >}}Amazon Bedrock{{< /ui >}}계정을 선택하는 경우 해당 계정이 구성된 리전을 선택합니다. 그런 다음 모델 이름을 선택하거나 추론 프로필 ARN을 제공할 수 있습니다.
         - 계정을 선택하는 경우 {{< ui >}}Vertex{{< /ui >}} 프로젝트와 위치를 선택합니다. {{< ui >}}Location{{< /ui >}} 드롭다운에는 단일 리전, 다중 리전 및 글로벌 옵션이 포함되어 있습니다. 각 옵션에 대한 자세한 내용은 [Google Vertex AI 위치 문서][18]를 참조하세요.
     1. 드롭다운 메뉴를 사용하여 {{< ui >}}Model{{< /ui >}} 모델을 선택합니다.
-1. 평가할 애플리케이션, 평가 대상(스팬, 트레이스 또는 세션) 및 샘플링 속도를 {{< ui >}}Runs On{{< /ui >}}에서 선택합니다. 샘플링 속도 오른쪽에 있는 버튼을 선택하여 필터링 기준을 더 추가할 수 있습니다.
+1. 평가할 애플리케이션, 평가 대상(스팬, 트레이스 또는 세션) 및 샘플링 비율을 {{< ui >}}Runs On{{< /ui >}}에서 선택합니다. 샘플링 비율 오른쪽에 있는 버튼을 선택하여 필터링 기준을 더 추가할 수 있습니다.
 1. {{< ui >}}Template{{< /ui >}} 섹션에서 드롭다운 메뉴를 사용합니다.
    - {{< ui >}}Create from scratch{{< /ui >}}: 사용자 설정 프롬프트(다음 단계에서 정의됨)를 사용합니다.
    - {{< ui >}}Failure to Answer{{< /ui >}}, {{< ui >}}Prompt Injection{{< /ui >}}, {{< ui >}}Sentiment{{< /ui >}} 등: 기존 프롬프트 템플릿을 채웁니다. 이러한 템플릿을 그대로 사용하거나 특정 평가 로직에 맞게 수정할 수 있습니다.
@@ -97,12 +97,12 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. {{< ui >}}User Prompt{{< /ui >}} 필드에서 변수를 추가하여 평가할 스팬, 트레이스 또는 세션의 부분을 지정하세요. Span Input(`{{span_input}}`), Output(`{{span_output}}`), 또는 기타 스팬 필드와 같은 모든 스팬 속성을 추가할 수 있습니다. 트레이스 범위 평가에서 여러 스팬에 걸쳐 값을 읽으려면 `{{spans...}}` 경로를 사용하고, 세션 범위 평가에서 여러 트레이스에 걸쳐 값을 읽으려면 `{{traces...}}` 경로를 사용하세요. 전체 참조 문서는 [프롬프트 템플릿][15]을 확인하세요. 사용자 프롬프트를 직접 수정하려면 해당 프롬프트를 선택하고 텍스트를 수정하세요.
+8. {{< ui >}}User Prompt{{< /ui >}} 필드에서 변수를 추가하여 평가할 스팬, 트레이스 또는 세션의 부분을 지정하세요. Span Input(`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` 경로를 사용하세요. 전체 참조 문서는 [프롬프트 템플릿][15]을 확인하세요. 사용자 프롬프트를 직접 수정하려면 해당 프롬프트를 선택하고 텍스트를 수정하세요.
 
    오른쪽 패널({{< ui >}}Filtered Spans{{< /ui >}}은 스팬 범위, {{< ui >}}Filtered Traces{{< /ui >}}는 트레이스 범위, {{< ui >}}Filtered Sessions{{< /ui >}}은 세션 범위)을 사용하여 스팬 데이터를 변수로 추가할 수도 있습니다.
-   1. 스팬, 트레이스 또는 세션이 오른쪽에 표시되도록 계정과 애플리케이션을 선택하세요.
-   2. 오른쪽에 있는 스팬 중 하나를 선택하여 해당 JSON을 확인하세요.
-   3. 사용자 프롬프트에 JSON을 추가하려면 {{< ui >}}\+{{< /ui >}}를 선택하세요.
+   1. 스팬, 트레이스 또는 세션이 오른쪽에 표시되도록 계정과 애플리케이션을 선택합니다.
+   2. 오른쪽에 있는 스팬 중 하나를 선택하여 해당 JSON을 조회합니다.
+   3. {{< ui >}}\+{{< /ui >}}를 선택하여 JSON을 사용자 프롬프트에 추가합니다.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="사용자 지정 평가 구성 오른쪽 창에 있는 JSON 뷰의 메뉴 콘텐츠로, '메시지에 변수 추가' 옵션이 표시되어 있습니다." style="width:40%;" >}}
 
@@ -112,19 +112,19 @@ OpenAI, Azure OpenAI, Vertex AI, Anthropic 또는 Amazon Bedrock 모델의 경�
 
 Anthropic 또는 Amazon Bedrock 모델의 경우, 대신 [키워드 검색 출력](#keyword-search-output)을 구성할 수 있습니다.
 
-AI Gateway의 경우 [구조화된 출력](#structured-output)과 [키워드 검색 출력](#keyword-search-output)이 모두 지원됩니다. Datadog은 모델이 지원하는 경우 구조화된 출력을 사용하고, 그렇지 않은 경우 키워드 검색 출력으로 대체하는 것을 권장합니다.
+사용자 지정 공급자의 경우 [구조화된 출력](#structured-output)과 [키워드 검색 출력](#keyword-search-output)이 둘 다 지원됩니다. Datadog은 모델이 지원하는 경우 구조화된 출력을 사용하고, 그렇지 않은 경우 키워드 검색 출력으로 대체하는 것을 권장합니다.
 
-{{% collapse-content title="구조화된 출력(OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
-1. 평가 출력 유형을 선택하세요.
+{{% collapse-content title="구조화된 출력(OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, 사용자 지정 공급자, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+1. 평가 출력 유형을 선택합니다.
 
-   - {{< ui >}}Boolean{{< /ui >}}: True/False 결과(예: '모델이 지침을 따랐습니까?')
+   - {{< ui >}}Boolean{{< /ui >}}: True/False 결과(예: "모델이 지침을 따랐습니까?")
    - {{< ui >}}Score{{< /ui >}}: 수치로 나타낸 등급(예: 1~5점 척도로 유용성 평가)
    - {{< ui >}}Categorical{{< /ui >}}: 개별 레이블(예: '좋음', '나쁨', '중립')
    - {{< ui >}}JSON{{< /ui >}}: JSON은 자유 형식 스키마를 허용합니다.
 
-2. {{< ui >}}Enable Reasoning{{< /ui >}}을 선택합니다(선택 사항). 이는 LLM 평가자가 결정에 대한 짧은 근거를 제공하도록 구성합니다(예: 8점이 부여된 이유). 추론은 평가가 어떻게, 그리고 왜 이루어지는지 이해하는 데 도움을 주며, 어조, 공감, 유용성과 같은 주관적인 메트릭을 감사하는 데 특히 유용합니다. 추론을 추가하면 [LLM 평가자의 정확도를 높일 수](https://arxiv.org/abs/2504.00050)도 있습니다.
+2. {{< ui >}}Enable Reasoning{{< /ui >}}을 선택합니다(필요시). 이는 LLM 평가자가 결정에 대한 짧은 근거를 제공하도록 구성합니다(예: 8점이 부여된 이유). 추론은 평가가 어떻게, 그리고 왜 이루어지는지 이해하는 데 도움을 주며, 어조, 공감, 유용성과 같은 주관적인 메트릭을 감사하는 데 특히 유용합니다. 추론을 추가하면 [LLM 평가자의 정확도를 높일 수](https://arxiv.org/abs/2504.00050)도 있습니다.
 
-3. 평가 출력 유형을 정의하는 JSON 스키마를 편집하세요.
+3. 평가 출력 유형을 정의하는 JSON 스키마를 편집합니다.
 
 {{< tabs >}}
 {{% tab "Boolean" %}}
@@ -132,18 +132,18 @@ AI Gateway의 경우 [구조화된 출력](#structured-output)과 [키워드 검
 {{% /tab %}}
 
 {{% tab "Score" %}}
-**Score** 출력 유형의 경우:
+**Score** 출력 유형의 경우 다음 단계를 따르세요.
 - 평가를 위한 `min` 및 `max` 점수를 설정하세요.
 - 평가 척도를 자세히 설명하려면 `description` 필드를 편집하세요.
 {{% /tab %}}
 {{% tab "Categorical" %}}
-**Categorical** 출력 유형의 경우:
+**Categorical** 출력 유형의 경우 다음 단계를 따르세요.
 - JSON 스키마를 편집하여 카테고리를 추가하거나 제거하세요.
 - 카테고리 이름을 편집하세요.
 - 카테고리의 `description` 필드를 편집하여 평가 컨텍스트에서 각 카테고리가 무엇을 의미하는지 자세히 설명하세요.
 
 
-카테고리형 평가를 위한 스키마 예시:
+카테고리형 평가를 위한 스키마 예시는 다음과 같습니다.
 
 ```
 {
@@ -194,7 +194,7 @@ AI Gateway의 경우 [구조화된 출력](#structured-output)과 [키워드 검
 {{% tab "JSON" %}}
 **JSON** 출력 유형의 경우, 복잡하고 구조화된 평가 결과를 캡처할 수 있도록 자유 형식의 JSON 스키마를 정의합니다.
 
-JSON 평가를 위한 스키마 예시:
+JSON 평가를 위한 스키마 예시는 다음과 같습니다.
 
 ```
 {
@@ -360,12 +360,12 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="후처리(OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="후처리(OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, 사용자 지정 공급자, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
 1. {{< ui >}}JSON{{< /ui >}} 출력 유형을 선택하세요.
 
 2. 평가자의 평가, 값 및 추론을 식별하는 JavaScript 함수를 제공하세요. 후처리를 사용하면 Boolean, Score 또는 Categorical과 같은 구조화된 출력만 사용하는 것보다 더 복잡한 평가를 수행할 수 있습니다.
 
-    후처리 함수는 값이 'pass' 또는 'fail'인 **평가**와, 선택적으로 값 또는 추론 문자열을 포함하는 객체를 반환해야 합니다. 함수는 다음 형식의 json 객체를 반환해야 합니다.
+    후처리 함수는 값이 'pass' 또는 'fail'인 **평가**와, 필요시 값 또는 추론 문자열을 포함하는 객체를 반환해야 합니다. 함수는 다음 형식의 json 객체를 반환해야 합니다.
     ```
     {
         assessment: "pass", // "pass" | "fail" [REQUIRED],
@@ -465,7 +465,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="키워드 검색 출력(Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="키워드 검색 출력(Anthropic, Amazon Bedrock, 사용자 지정 공급자)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. {{< ui >}}Boolean{{< /ui >}} 출력 유형을 선택하세요.
    <div class="alert alert-info">키워드 검색 출력의 경우 <strong>Boolean</strong> 출력 유형만 사용할 수 있습니다.</div>
 
@@ -473,14 +473,14 @@ function __evalPostProcessing(input) {
 
    Datadog은 LLM-as-a-judge의 응답 텍스트에서 정의한 키워드를 검색하여 평가에 적합한 결과를 제공합니다. 이러한 이유로 LLM에 사용자가 선택한 키워드로 응답하도록 지시해야 합니다.
 
-   예를 들어 다음과 같이 설정하는 경우:
+   예를 들어, 다음과 같이 설정할 수 있습니다.
 
    - {{< ui >}}True keywords{{< /ui >}}: Yes, yes
    - {{< ui >}}False keywords{{< /ui >}}: No, no
 
    그러면 시스템 프롬프트에 `Respond with "yes" or "no"`과 같은 내용이 포함되어야 합니다.
 
-3. {{< ui >}}Assessment Criteria{{< /ui >}}의 경우:
+3. {{< ui >}}Assessment Criteria{{< /ui >}}의 경우 다음과 같이 설정할 수 있습니다.
    - {{< ui >}}True{{< /ui >}}를 선택하여 결과를 'Pass'로 표시하세요.
    - {{< ui >}}False{{< /ui >}}를 선택하여 결과를 'Fail'로 표시하세요.
 
@@ -493,18 +493,18 @@ function __evalPostProcessing(input) {
 
 <div class="alert alert-info">평가에 사용되는 스팬 필드는 각각 250KB로 제한됩니다. 이 크기를 초과하는 필드는 LLM 평가자에게 전송되기 전에 잘립니다.</div>
 
-{{< ui >}}Evaluation Scope{{< /ui >}}에서 평가가 어디서 어떻게 실행될지 정의하세요. 이를 통해 범위(어떤 스팬이나 트레이스가 포함되는지)와 비용(얼마나 샘플링되는지)을 제어할 수 있습니다.
+{{< ui >}}Evaluation Scope{{< /ui >}}에서 평가가 어디서 어떻게 실행될지 정의하세요. 이를 통해 적용 범위(어떤 스팬이나 트레이스가 포함되는지)와 비용(얼마나 샘플링되는지)을 제어할 수 있습니다.
    - {{< ui >}}Application{{< /ui >}}: 평가하려는 애플리케이션을 선택하세요.
    - {{< ui >}}Evaluate On{{< /ui >}}: 다음 옵션 중 하나를 선택하세요.
       - {{< ui >}}Trace{{< /ui >}}: 모든 스팬을 포함한 전체 트레이스를 단일 단위로 평가하세요. 답변을 평가할 때 여러 스팬의 컨텍스트를 종합적으로 고려해야 하는 경우(에이전트 목표 완료, 도구 사용 과정, RAG 충실도)에 사용하세요. 트레이스 완료 여부를 판단하는 방법에 대한 예시와 자세한 내용은 [트레이스 수준 평가][16]를 참조하세요.
       - {{< ui >}}Span{{< /ui >}}: 일치하는 스팬을 개별적으로 평가하세요. {{< ui >}}Query{{< /ui >}} 필드를 사용하여 특정 스팬으로 범위를 지정하세요(예: 루트 스팬만, `llm` 스팬만, 또는 특정 태그가 있는 스팬만).
       - {{< ui >}}Session{{< /ui >}}: 모든 트레이스와 해당 스팬을 포함한 전체 사용자 세션을 단일 단위로 평가하세요. 답변을 평가할 때 동일 세션 내 여러 트레이스의 컨텍스트를 종합적으로 고려해야 하는 경우(사용자 만족도, 멀티턴 일관성, 또는 시간 경과에 따른 사용자 행동)에 사용하세요. `session_id`로 태그된 스팬이 필요합니다. 세션 완료 여부를 판단하는 방법에 대한 예시와 자세한 내용은 [세션 수준 평가][17]를 참조하세요.
-   - {{< ui >}}Query{{< /ui >}}: (선택 사항) 평가할 스팬이나 트레이스를 필터링하려면 Datadog 쿼리 구문을 사용하여 쿼리를 입력하세요. 예를 들면 다음과 같습니다.
+   - {{< ui >}}Query{{< /ui >}}: (필요시) 평가할 스팬이나 트레이스를 필터링하려면 Datadog 쿼리 구문을 사용하여 쿼리를 입력하세요. 예시는 다음과 같습니다.
       - `@name:agent.workflow`: 스팬 이름으로 필터링할 때
       - `env:prod`: 태그로 필터링할 때
       - `@parent_id:undefined` 루트 스팬만 평가할 때({{< ui >}}Evaluate On{{< /ui >}}이 {{< ui >}}Span{{< /ui >}}으로 설정된 경우)
       - `@name:agent.workflow AND env:prod`: 스팬 이름 및 태그로 필터링할 때
-   - {{< ui >}}Sampling Rate{{< /ui >}}: (선택 사항) 평가 비용을 제어하려면 샘플링(예: 10%)을 적용하세요.
+   - {{< ui >}}Sampling Rate{{< /ui >}}: (필요시) 평가 비용을 제어하려면 샘플링(예: 10%)을 적용하세요.
 
 {{< img src="llm_observability/evaluations/evaluation_scope_1.png" alt="평가 범위를 구성하는 화면." style="width:100%;" >}}
 
@@ -530,7 +530,7 @@ function __evalPostProcessing(input) {
 
 `@evaluation.<evaluation_name>.value` 구문을 사용하여 결과를 쿼리하거나 시각화하세요.
 
-예를 들면 다음과 같습니다.
+예시는 다음과 같습니다.
 
 ```
 @evaluation.helpfulness-check.value
@@ -544,7 +544,7 @@ function __evalPostProcessing(input) {
 - Pass/Fail 평가 상태별로 필터링(예: `@evaluation.helpfulness-check.assessment:fail`)
 - 평가 결과를 [패싯][3]으로 사용하세요.
 - Agent Observability 개요 페이지의 평가 섹션에서 집계 결과를 조회하세요.
-- [모니터][4]를 생성하여 성능 변화나 회귀에 대해 경고하세요.
+- [모니터][4]을 생성하여 성능 변화나 회귀에 대해 경고하세요.
 
 ## 실험에서 사용하기 {#using-in-experiments}
 

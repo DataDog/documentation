@@ -138,7 +138,7 @@ describe("ApiSchemaTable — modifiers and content", () => {
       ],
     });
     expect(html).toContain("schema-table__row--deprecated");
-    expect(html).toMatch(/DEPRECATED<\/strong> APM query\./);
+    expect(html).toMatch(/DEPRECATED<\/strong><\/p><p>APM query\./);
   });
 });
 
@@ -152,12 +152,12 @@ describe("ApiSchemaTable multi-paragraph descriptions", () => {
     description: "First paragraph.\n\nSecond paragraph.",
   };
 
-  it("puts the DEPRECATED label inside the first paragraph", async () => {
+  it("puts the DEPRECATED label on its own line before the description", async () => {
     const html = await renderTable({
       fields: [{ ...multiParagraphField, deprecated: true }],
     });
     expect(html).toMatch(
-      /<p><strong class="[^"]*schema-table__deprecated-label[^"]*">DEPRECATED<\/strong> First paragraph\.<\/p>/,
+      /<p><strong class="[^"]*schema-table__deprecated-label[^"]*">DEPRECATED<\/strong><\/p><p>First paragraph\.<\/p>/,
     );
   });
 });

@@ -59,7 +59,7 @@ To trigger a workflow from a dashboard, add the {{< ui >}}Run Workflow{{< /ui >}
 
 To run the workflow:
 1. Click {{< ui >}}Run Workflow{{< /ui >}} on your dashboard widget.
-1. Under {{< ui >}}Execution parameters{{< /ui >}}, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
+1. Under {{< ui >}}Run parameters{{< /ui >}}, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped run parameters, or edit the existing values if needed.
 1. Click {{< ui >}}Run{{< /ui >}} to run the workflow.
 
 ## Monitor triggers
@@ -73,7 +73,7 @@ To run the workflow:
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Monitor triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 ### Add the workflow to your monitor
 
@@ -107,7 +107,23 @@ To add an incident trigger to your workflow:
 1. Select the incident event type that should trigger your workflow, such as when an incident is declared or updated, or on a recurring schedule.
    For a manual trigger, Workflows creates a handle that you can use in monitors or [incident notification rules][16].
 1. Click {{< ui >}}Create{{< /ui >}}.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run until you've published them. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
+
+## Feature flags triggers
+
+A Datadog Feature Flags trigger starts a workflow automatically when flag events occur. Events include flag creation, configuration changes, rollout progress, and approval requests or reviews. For example, notify a Slack channel when a rollout pauses or a flag is disabled.
+
+For setup from Feature Flags settings, supported events, conditions, and examples, see [Feature Flags and Workflow Automation][18].
+
+To add a Feature Flags trigger to your workflow:
+
+1. From the [Workflow creation page][6], select the Feature Flag event that should trigger your workflow. For example, choose {{< ui >}}Feature Flag Enabled{{< /ui >}} or {{< ui >}}Feature Flag Rollout Paused{{< /ui >}}.
+1. Click {{< ui >}}Create{{< /ui >}}.
+1. Click the trigger to configure its conditions. Select the {{< ui >}}Feature flags{{< /ui >}} and, for events associated with an environment, {{< ui >}}Environments{{< /ui >}} to match. Leave a field empty to match all values. The {{< ui >}}Feature Flag Created{{< /ui >}} trigger applies to all newly created flags and has no flag or environment filters.
+1. Add the actions to run and connect the trigger to the first step.
+1. Save your workflow and click {{< ui >}}Publish{{< /ui >}}. Workflows do not run automatically until published. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+To add a Feature Flags trigger to an existing workflow, click {{< ui >}}Add Trigger{{< /ui >}} and select the event type.
 
 ## Security triggers
 
@@ -127,7 +143,7 @@ To trigger a workflow from a notification rule, you must first add a security tr
 1. Click the trigger and take note of the {{< ui >}}Mention handle{{< /ui >}}.
 1. Security triggers are set to trigger automatically by default. If you don't want the workflow to trigger automatically, toggle the {{< ui >}}Automatic triggering{{< /ui >}} option.
 1. Save your workflow.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 Add the workflow to your notification rule:
 1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
@@ -161,7 +177,7 @@ To run a workflow from a software catalog entity, you must first add a software 
    - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Catalog{{< /ui >}}.
 2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 3. Save your workflow.
-4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+4. Click {{< ui >}}Publish{{< /ui >}} to publish your workflow. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 Run the workflow from your Catalog entity:
 
@@ -188,7 +204,7 @@ You can trigger a workflow from GitHub using the following steps.
 1. In GitHub, choose which events you would like to trigger your webhook, then click {{< ui >}}Add webhook{{< /ui >}}.
 1. _Optionally_, in your workflow, click the {{< ui >}}\+{{< /ui >}} to add a {{< ui >}}Rate Limit{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 ## Slack triggers
 
@@ -205,7 +221,7 @@ You can trigger a workflow from Slack manually with the `/datadog workflow` comm
    - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the {{< ui >}}Add Trigger{{< /ui >}} (lightning bolt) icon and select {{< ui >}}Slack{{< /ui >}}.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon ({{< ui >}}\+{{< /ui >}}) under the trigger.
 1. Click {{< ui >}}Save{{< /ui >}} on your workflow.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
 
 ### Emoji reaction Slack trigger
@@ -292,7 +308,7 @@ curl -X POST \
   https://api.datadoghq.com/api/v2/workflows/32866005-d275-4553-be86-9f1b13066d84/instances
    {{< /code-block >}}
 1. Click {{< ui >}}Save{{< /ui >}}.
-1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it with a POST request. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it with a POST request. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 ### Access the API request body
 
@@ -306,13 +322,13 @@ To schedule a workflow run:
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the {{< ui >}}Memo{{< /ui >}} field.
 1. Click {{< ui >}}Save{{< /ui >}}.
-1. Click {{< ui >}}Publish{{< /ui >}}. Scheduled workflows don't run until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. Click {{< ui >}}Publish{{< /ui >}}. Scheduled workflows don't run until you've published them. Published workflows accrue costs based on workflow runs. For more information, see the [Datadog Pricing page][11].
 
 ## Trigger a workflow from a workflow
 
 You can trigger a child workflow from another workflow using the {{< ui >}}Trigger Workflow{{< /ui >}} action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
 
-<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow run.</div>
 
 If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the `service_name` input parameter is required because `service_name` is set as an input parameter in the child workflow.
 
@@ -349,3 +365,4 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [15]: /incident_response/incident_management/setup_and_configuration/automations
 [16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [17]: /actions/workflows/access_and_auth/#run-as-a-service-account
+[18]: /feature_flags/concepts/workflow_automation/

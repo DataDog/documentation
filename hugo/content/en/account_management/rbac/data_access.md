@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Your data in Datadog may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, Data Access Control enables administrators and access managers within a Datadog organization to regulate access to this data. Use Data Access Control to identify sensitive data with a query and restrict access to only specific [Teams][1] or [Roles][2].
+Your data in Datadog may contain sensitive data, and should be handled carefully. If you are ingesting sensitive data into Datadog, Data Access Control enables administrators and access managers within a Datadog organization to regulate access to this data. Use Data Access Control to identify sensitive data with a query and restrict access to only specific [Teams][1], [Roles][2], or supported [Bits AI agents](#agents).
 
 When you define a _Restricted Dataset_, any data within the boundary of that dataset is restricted. Data outside of any Restricted Dataset remains unrestricted and accessible to users with appropriate permissions. Data Access Control provides an intuitive interface that allows access managers to grant only permitted users access to sensitive data enclosed within the datasets.
 
@@ -26,7 +26,7 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 ## Configure data access
 
-Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
+Data Access Control allows you to create a Restricted Dataset, specifying data that only designated teams, roles, or agents can access.
 
 To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Control][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
 
@@ -49,9 +49,9 @@ Select data to be included in this Dataset
 : The boundary definition that describes which data to restrict to a specific set of users. Boundaries are query statements with limitations that allow an access manager to define the scope of sensitive data to be protected. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
 
 Grant access
-: Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
+: Select one or more teams, roles, or agents that can access the content bound in the Restricted Dataset. Agents are listed under {{< ui >}}Agents and Automated Processes{{< /ui >}}. Users who are not members of the selected teams or roles, and agents that are not selected, are blocked from accessing this data.
 
-**Note:** A maximum of 50 principals (roles or teams) can be tied to a given Restricted Dataset.
+**Note:** A maximum of 50 principals (roles, teams, or agents) can be tied to a given Restricted Dataset.
 
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
@@ -61,7 +61,7 @@ You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces, Experiments, Datasets, Annotation Queues, and Evaluator Configs
+- Agent Observability traces, Experiments, Datasets, Annotation Queues, Evaluator Configs, and managed prompts
 - APM traces
 - Cloud costs
 - Custom metrics
@@ -98,7 +98,7 @@ The {{< ui >}}Restricted{{< /ui >}} setting helps protect sensitive data when:
 - New tag values are added frequently, and you cannot guarantee that an existing Restricted Dataset matches every new value.
 - Compliance posture requires a default-deny stance for a telemetry type.
 
-A telemetry type must have at least one Restricted Dataset before you can set it to {{< ui >}}Restricted{{< /ui >}}. This prevents unintentional loss of access. If you delete all Restricted Datasets for a telemetry type set to {{< ui >}}Restricted{{< /ui >}}, only teams and roles with [unrestricted access](#unrestricted-user-groups) retain access. To restore access for other users, grant them access through a new Restricted Dataset or set the telemetry type back to {{< ui >}}Unrestricted{{< /ui >}}.
+A telemetry type must have at least one Restricted Dataset before you can set it to {{< ui >}}Restricted{{< /ui >}}. This prevents unintentional loss of access. If you delete all Restricted Datasets for a telemetry type set to {{< ui >}}Restricted{{< /ui >}}, only teams, roles, and agents with [unrestricted access](#unrestricted-user-groups) retain access. To restore access for other users, grant them access through a new Restricted Dataset or set the telemetry type back to {{< ui >}}Unrestricted{{< /ui >}}.
 
 Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >}} and {{< ui >}}Restricted{{< /ui >}} settings. Each dataset belongs to one setting.
 
@@ -113,15 +113,17 @@ To change the setting for a telemetry type, you must have the [`user_access_mana
 
 ### Unrestricted access {#unrestricted-user-groups}
 
-Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type.
+Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type. You can also grant unrestricted access to a supported Bits AI agent.
 
-A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or the setting for data not in a Restricted Dataset. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
+A team, role, or agent with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or the setting for data not in a Restricted Dataset. Unrestricted access is granted to teams, roles, or agents (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM. To give an agent unrestricted access to more than one telemetry type, add it to each telemetry type separately.
 
-To grant unrestricted access, open the edit dialog for the telemetry type as described in [Data not in a Restricted Dataset](#strict-mode). Add the teams or roles to the unrestricted access field (for example, {{< ui >}}Roles and Teams with unrestricted access to all Logs data{{< /ui >}}), and click {{< ui >}}Save{{< /ui >}}. The {{< ui >}}Unrestricted Access{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table lists these teams and roles.
+To grant unrestricted access, open the edit dialog for the telemetry type as described in [Data not in a Restricted Dataset](#strict-mode). Add the teams, roles, or agents to the unrestricted access field (for example, {{< ui >}}Roles and Teams with unrestricted access to all Logs data{{< /ui >}}), and click {{< ui >}}Save{{< /ui >}}. The {{< ui >}}Unrestricted Access{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table lists these teams, roles, and agents.
+
+**Note:** Unrestricted access lets an agent read all data of that telemetry type, including data in Restricted Datasets created later. When an agent needs only some restricted data, add it to the specific Restricted Datasets instead. Reserve unrestricted access for agents whose work requires every record of a telemetry type, and review the {{< ui >}}Unrestricted Access{{< /ui >}} column regularly.
 
 Unrestricted access pairs especially well with the {{< ui >}}Restricted{{< /ui >}} setting because it lets designated admins keep working without being added to every dataset.
 
-**Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to teams and roles with unrestricted access.
+**Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to teams, roles, and agents with unrestricted access.
 
 ## Usage constraints
 
@@ -160,7 +162,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
   * Traces, using any tag.
   * Experiments, Datasets, and Annotation Queues, restricted by project. An `ml_app` filter set to a project ID hides that project and its experiments, datasets, dataset records, spans, evaluation metrics, and annotation queues from list views, search, and direct links. An annotation queue that does not belong to a project cannot be restricted. See [Data Access Control in Agent Observability][14].
   * Evaluator Configs, restricted by application. An `ml_app` filter set to an application name prevents users outside the granted teams or roles from viewing, editing, or creating evaluator configs that target that application. Filters on other tag keys do not restrict evaluator configs. See [Data Access Control in Agent Observability][14].
-* **Not supported**: Managed prompts.
+  * Managed prompts, restricted by application. An `ml_app` filter set to an application name prevents users outside the granted teams or roles from accessing or modifying managed prompts associated with that application. Prompts created directly in Prompt Management have no application association and cannot be restricted. See [Data Access Control in Agent Observability][14].
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 
@@ -249,9 +251,17 @@ This configuration example protects all supported data from `NewService`.
 
 ### Teams and roles
 
-Data Access Control supports granting access to users through Datadog roles or teams. When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
+Data Access Control supports granting access to users through Datadog roles or teams, and to [agents](#agents). When granting access, consider your existing access control configuration and access strategy. If you are pursuing a service-based approach and are already [customizing the Catalog][9], take advantage of the service ownership model by using Teams as part of your Data Access Control configuration.
 
 **Note:** Teams used for Data Access Control must be configured such that adding or removing users can only be done by team members or an administrator, not `Anyone in the organization`.
+
+### Agents
+
+Autonomous Bits AI agents, such as Bits AI Security Analyst, have their own identity in Datadog. They cannot see data in a Restricted Dataset unless you grant them access. To let an agent work with restricted data, grant access the same way you do for a team or role: add the agent to the Restricted Datasets it needs. For example, add Bits AI Security Analyst to a Restricted Dataset for security logs so its investigations can query those logs.
+
+Only agents that support access configuration appear in the access selector, under {{< ui >}}Agents and Automated Processes{{< /ui >}}. Grant an agent [unrestricted access](#unrestricted-user-groups) only when it needs every record of a telemetry type.
+
+**Note:** Any user who can use or interact with an agent may be able to see data in a Restricted Dataset if the agent surfaces that data. Before you grant an agent access to a Restricted Dataset, review who can use that agent.
 
 ## Access enforcement
 

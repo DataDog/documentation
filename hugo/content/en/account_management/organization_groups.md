@@ -11,11 +11,10 @@ further_reading:
 - link: "/account_management/rbac/"
   tag: "Documentation"
   text: "Role Based Access Control (RBAC)"
+- link: "/account_management/organization_groups/shared_roles/"
+  tag: "Documentation"
+  text: "Shared Roles"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/organization-groups/" header="Organization Groups is in Preview">}}
-  Organization Groups is in Preview. Request access to try it out.
-{{< /callout >}}
 
 ## Overview
 
@@ -27,6 +26,7 @@ Organization Groups lets administrators manage multiple Datadog organizations as
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
 - **Push policies from group to member organizations.** Define policies in the owner organization and apply them to member organizations.
+- **Share custom roles across member organizations.** Define a custom role once in the owner organization and provision it into every member organization. See [Shared Roles][1].
 
 {{< img src="account_management/org-groups-policies.png" alt="Organization Settings in Datadog showing the Organization Groups policies section." style="width:100%;" >}}
 
@@ -38,10 +38,10 @@ Every organization in an organization group falls into at least one of the follo
 
 | Type | Description |
 | ---------- | ----------------- |
-| **Owner** | Creates and manages the organization group. Sets policies and enforcement tiers for all member organizations. |
+| **Owner** | Creates and manages the organization group. Sets policies, enforcement tiers, and shared roles for all member organizations. |
 | **Member** | Governed by the group. An organization belongs to exactly one organization group at a time. An owner organization can also be a member of its own organization group. |
 
-Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members and policies.
+Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles. To view and manage organization groups, users in the owner organization need both the **Org Group Read** and **Org Group Write** permissions. No additional permissions are needed in member organizations. See [Datadog Role Permissions][2].
 
 ### Organization group policies
 
@@ -58,6 +58,10 @@ Each organization group policy has an enforcement tier that controls how much la
 
 {{< img src="account_management/org-groups-create-policy.png" alt="Organization Settings in Datadog showing the Organization Groups policy creation." style="width:100%;" >}}
 
+### Shared roles
+
+Shared roles bring the same group-level control to custom roles. Member organizations assign a shared role to users and teams but cannot edit or delete it. Shared roles are always **Group managed**: unlike organization group policies, they have no **Override allowed** tier. For details, including how to stop member organizations from creating their own custom roles, see [Shared Roles][1].
+
 ## Apply Organization Groups
 
 ### For new multi-organization deployments
@@ -68,12 +72,15 @@ If your use case requires multi-organization, Organization Groups gives you cent
 
 Organization Groups provides a middle path. If full consolidation is impractical, Organization Groups brings many of the benefits of a single organization without requiring migration. These benefits include centralized policy management, reduced configuration drift, and simpler user management.
 
-Contact your account team to discuss early access to Organization Groups.
-
 ## Limitations
 
 Organization Groups supports only single-region groups. Organizations in different regions must be managed in separate organization groups within their region.
 
+Organization groups are owned by the parent organization at the root of your organization hierarchy. A group is visible and managed only from its owner organization.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/organization_groups/shared_roles/
+[2]: /account_management/rbac/permissions/

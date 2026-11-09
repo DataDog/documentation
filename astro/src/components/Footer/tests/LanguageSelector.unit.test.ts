@@ -175,3 +175,25 @@ describe("LanguageSelector — single-language case", () => {
     expect(popup.classList.contains("footer__lang-popup--open")).toBe(true);
   });
 });
+
+describe("LanguageSelector — lang_pref cookie", () => {
+  // Keep happy-dom from following the link, so the cookie can be inspected.
+  const preventNavigation = (event: Event) => event.preventDefault();
+
+  afterEach(() => {
+    document.removeEventListener("click", preventNavigation);
+    document.cookie = "lang_pref=; path=/; max-age=0";
+  });
+
+  it("clicking an alternate writes its code to the lang_pref cookie", async () => {
+    document.cookie = "lang_pref=en; path=/";
+    document.addEventListener("click", preventNavigation);
+    const user = userEvent.setup();
+    renderSelector();
+
+    await user.click(screen.getByRole("button"));
+    await user.click(screen.getByText("Français"));
+
+    expect(document.cookie).toContain("lang_pref=fr");
+  });
+});
