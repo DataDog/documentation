@@ -460,7 +460,7 @@ jobs:
               {
                 "path":  string,    // repo-relative file path
                 "line":  integer,   // 1-based line in the new file
-                "side":  "RIGHT",   // "RIGHT" for new, "LEFT" for old
+                "side":  "RIGHT",   // always "RIGHT"
                 "body":  string     // markdown; may include a
                                     //   ```suggestion``` block
               }
@@ -472,10 +472,11 @@ jobs:
           - Each finding goes in `comments`, not in `body`.
             `body` is for the overall verdict only (e.g.,
             "2 blockers, 9 style nits").
-          - Only comment on lines that appear in the diff
-            (`./__untrusted_diff/diff.patch`). GitHub rejects
-            inline comments on lines outside the diff and the
-            whole review will fail.
+          - Only comment on numbered lines in
+            `./__untrusted_diff/diff_numbered.txt`, and use
+            `"side": "RIGHT"`. Removed lines have no number, so
+            don't comment on them. The workflow moves comments on
+            other lines into `body` and drops their suggestions.
           - Use `"event": "COMMENT"` exactly.
           - Output nothing outside the JSON object.
 
@@ -576,33 +577,49 @@ jobs:
               `JSON (${e.message}). Re-run \`/review\` to retry.`));
           }
 
-          // Shape check, then secret scan.
-          const err = validate(parsed);
+          // Shape check on the model output.
+          const shapeErr = validate(parsed);
+          if (shapeErr) {
+            core.warning(`schema violation: ${shapeErr}`);
+            return write(failure(
+              "Review failed: the model output did not match the " +
+              `required shape (${shapeErr}). Re-run \`/review\` to retry.`));
+          }
+
+          // GitHub rejects the whole review if any comment's line isn't
+          // in the diff. Move those comments into the body instead. If
+          // this step itself fails, post the review unchanged.
+          let placed = parsed;
+          try {
+            const { parseDiff, moveUnresolvable } = require(
+              `${process.env.GITHUB_WORKSPACE}/.github/scripts/diff_lines.js`,
+            );
+            const files = parseDiff(
+              fs.readFileSync("__untrusted_diff/diff.patch", "utf8"));
+            const result = moveUnresolvable(parsed, files);
+            placed = result.review;
+            if (result.moved > 0) {
+              core.warning(`moved ${result.moved} comment(s) on lines outside the diff into the review body`);
+            }
+          } catch (e) {
+            core.warning(`could not check comment lines: ${e.message}`);
+          }
+
+          // Validate and scan the payload that will be posted.
+          const err = validate(placed);
           if (err) {
-            core.warning(`schema violation: ${err}`);
+            core.warning(`schema violation after moving comments: ${err}`);
             return write(failure(
               "Review failed: the model output did not match the " +
               `required shape (${err}). Re-run \`/review\` to retry.`));
           }
 
-          if (hasToken(parsed)) {
+          if (hasToken(placed)) {
             core.warning("token pattern detected; aborting");
             return write(failure(
               "Review aborted: a secret-shaped pattern was detected " +
               "in the model's output. The review was not posted to " +
               "avoid leaking credentials. Re-run `/review` to retry."));
-          }
-
-          // GitHub rejects the whole review if any comment's line isn't
-          // in the diff. Move those comments into the body instead.
-          const { parseDiff, moveUnresolvable } = require(
-            `${process.env.GITHUB_WORKSPACE}/.github/scripts/diff_lines.js`,
-          );
-          const files = parseDiff(
-            fs.readFileSync("__untrusted_diff/diff.patch", "utf8"));
-          const { review: placed, moved } = moveUnresolvable(parsed, files);
-          if (moved > 0) {
-            core.warning(`moved ${moved} comment(s) on lines outside the diff into the review body`);
           }
 
           write(placed);
