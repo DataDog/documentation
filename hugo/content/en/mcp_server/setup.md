@@ -54,11 +54,16 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
+1. When prompted to choose the region where your account is hosted, select your [Datadog site][4] ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
+If the login page opens on a different Datadog site than the one hosting your organization, the connector is likely set to a different region. Remove the Datadog connector in Claude, then add it again and select the correct region.
+
+The directory connector does not support [custom subdomains](#custom-subdomains). If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`, use a custom connector with the `subdomain` query parameter instead.
+
 {{% collapse-content title="Manual setup with a custom connector" level="h4" expanded=false id="claude-custom-connector" %}}
-If the directory connector is not available to you, you can add Datadog as a [custom connector][2] using the remote MCP URL for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
+If the directory connector is not available to you, or your organization signs in through a [custom subdomain](#custom-subdomains), you can add Datadog as a [custom connector][2] using the remote MCP URL for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
 1. Follow the Claude help center guide on [custom connectors][2] to add a new custom connector.
 
@@ -82,6 +87,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 {{< /site-region >}}
 
 [1]: https://claude.ai/directory/connectors/datadog
+[4]: /getting_started/site/
 
 {{% /tab %}}
 
