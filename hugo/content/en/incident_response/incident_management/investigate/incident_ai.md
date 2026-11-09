@@ -96,9 +96,51 @@ Re-inviting requires permission to edit the incident and, for organizations with
 
 ## Live meeting transcripts
 
-To follow the conversation alongside AI summaries, enable **Generate meeting transcripts** in the meeting integration settings. Datadog saves the conversation in a notebook that updates during the meeting and remains available afterward. Open it from the incident timeline or the linked meeting's **View Transcript** action.
+Live meeting transcripts save the conversation from an incident's Zoom, Google Meet, or Microsoft Teams meeting in a Datadog notebook. Transcripts capture the conversation with speaker names and timestamps in your time zone. AI summaries condense the discussion into key points. The notebook updates during the meeting and remains available afterward.
 
-See [Live Meeting Transcripts][9] for setup, recording sessions, notebook access, and retention.
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Live meeting transcripts are not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+### Enable transcripts
+
+Your organization must have access to live meeting transcripts and AI features. Using an account with permission to edit incident settings:
+
+1. Go to [**Incident Settings > Integrations**][9] and select the incident type and meeting platform. For Microsoft Teams, select the connected tenant.
+2. Enable meeting creation and **Generate AI meeting summaries**.
+3. Review the conditions that prevent summarization. These also determine whether the transcriber can record the meeting. By default, private incidents are excluded.
+4. Enable **Generate meeting transcripts** and save your settings.
+
+If the transcript setting is unavailable, contact [Datadog Support][10]. For provider-specific prerequisites, see the [Zoom][4], [Google Meet][5], or [Microsoft Teams][6] setup guide.
+
+Setting changes apply to new recordings, without changing recordings in progress or creating notebooks for past recordings. Turning off transcript generation leaves meeting summaries enabled.
+
+### View transcripts
+
+Start a linked incident meeting and admit the Datadog Transcriber if required. For Zoom, enable meeting captions. After recording starts, open the notebook from any of these locations:
+
+- The **Meeting Transcript** timeline entry.
+- The linked meeting's **View Transcript** action.
+- The transcript link in the incident Slack channel's meeting-card thread.
+
+The notebook includes an incident card, a link to join the meeting, and a section for each recording session. Updates appear periodically, so recent speech can take time to appear. When recording ends, Datadog finalizes the transcript and the timeline entry changes from **LIVE** to **ENDED**. Only speech captured while the transcriber is recording is included.
+
+[Re-inviting the transcriber](#re-inviting-the-transcriber) adds a session to the same notebook and reuses the meeting's timeline entry, preserving earlier sessions.
+
+### Access and retention
+
+Datadog manages notebook access using the incident's visibility and responder list:
+
+| Incident visibility | While any recording is active | After all recordings end |
+| --- | --- | --- |
+| Organization-visible | Organization members receive Viewer access. | Organization members receive Editor access. |
+| Private | Incident responders receive Viewer access. | Incident responders receive Editor access. |
+
+Your Datadog role must also allow the relevant [notebook actions][11]. Responder and visibility changes update notebook access, and re-inviting the transcriber returns the notebook to Viewer access until recording ends. These updates can take time to appear.
+
+**Note**: Private incidents with more than 49 responders are not fully supported. For an existing notebook, access removals still apply, but additional responders are not granted access while the limit is exceeded.
+
+The subprocessor's seven-day retention period does not delete transcripts saved in Datadog notebooks. Deleting the incident deletes its associated transcript notebooks. Deleting a notebook during recording stops updates to that notebook without removing the transcriber; Datadog does not recreate the notebook for that recording.
 
 ## Related incident detection
 
@@ -162,4 +204,6 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][8
 [6]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
 [7]: /account_management/billing/incident_response/#allocate-seats
 [8]: /bits_ai/bits_investigation
-[9]: /incident_response/incident_management/investigate/meeting_transcripts/
+[9]: https://app.datadoghq.com/incidents/settings?section=integrations
+[10]: /help/
+[11]: /notebooks/#permissions

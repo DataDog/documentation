@@ -163,4 +163,4 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
 [7]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
-[8]: /incident_response/incident_management/investigate/meeting_transcripts/
+[8]: /incident_response/incident_management/investigate/incident_ai/#live-meeting-transcripts

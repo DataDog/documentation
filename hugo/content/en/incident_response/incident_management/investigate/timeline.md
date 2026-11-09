@@ -69,4 +69,4 @@ You can also add an image to an existing cell:
 [2]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
 [3]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [4]: https://app.datadoghq.com/organization-settings/public-sharing/settings
-[5]: /incident_response/incident_management/investigate/meeting_transcripts/
+[5]: /incident_response/incident_management/investigate/incident_ai/#live-meeting-transcripts

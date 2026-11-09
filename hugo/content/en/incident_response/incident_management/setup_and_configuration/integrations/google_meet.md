@@ -91,4 +91,4 @@ For prerequisites, viewing transcripts, and notebook access rules, see [Live Mee
 [2]: https://app.datadoghq.com/incidents/settings?section=integrations
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [4]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
-[5]: /incident_response/incident_management/investigate/meeting_transcripts/
+[5]: /incident_response/incident_management/investigate/incident_ai/#live-meeting-transcripts

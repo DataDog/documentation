@@ -119,4 +119,4 @@ For prerequisites, viewing transcripts, and notebook access rules, see [Live Mee
 [3]: /incident_response/incident_management/guides/test_incidents
 [4]: /incident_response/incident_management/setup_and_configuration/integrations/slack
 [5]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
-[6]: /incident_response/incident_management/investigate/meeting_transcripts/
+[6]: /incident_response/incident_management/investigate/incident_ai/#live-meeting-transcripts
