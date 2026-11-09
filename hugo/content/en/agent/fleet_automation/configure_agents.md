@@ -1,29 +1,34 @@
 ---
 title: Configure Agents
-description: "Roll out and manage Datadog Agent configuration at scale with Fleet Automation."
+description: "Roll out and manage the configuration of Datadog Agents and their Collectors at scale with Fleet Automation."
 further_reading:
 - link: "/agent/fleet_automation/"
   tag: "Documentation"
   text: "Fleet Automation"
+- link: "/agent/fleet_automation/otel_collectors/"
+  tag: "Documentation"
+  text: "Manage OpenTelemetry Collectors"
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
 ---
 
-Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api). For the Agent settings you can manage with Fleet Automation, see [Supported datadog.yaml Configuration Fields][11].
+Use [Fleet Automation][3] to roll out and manage the configuration of Datadog Agents and their Collectors at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. You can also apply configuration updates [through the Fleet Automation API](#configure-agents-with-the-api). For the Agent settings you can manage with Fleet Automation, see [Supported datadog.yaml Configuration Fields][11].
 
 ## Prerequisites
 
 - [Remote Configuration][9] enabled for your organization and the Agent's API key
 - [Remote updates][12] enabled on each target VM Agent (`remote_updates: true`)
-- Agent version 7.73+ for Agent and OTel Collector configuration (version 7.76+ for configuring integrations and secrets). To upgrade your Agents, see [Upgrade Agents][10].
+- Agent version 7.73+ (version 7.76+ for configuring integrations and secrets, version 7.82+ for configuring the Agent's Collector). To upgrade your Agents and their Collectors, see [Upgrade Agents][10].
 - Linux VMs installed with the install script or Ansible Datadog Role, or Windows VMs
 
 {{< callout url="https://www.datadoghq.com/product-preview/modify-tags-fleet-automation/" header="Join the Preview!" >}}
 Managing Datadog Agent tags with Fleet Automation is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-## Configure multiple Agents
+## Configure multiple Agents and their Collectors
+
+To configure the Agent's Collector with YAML, see [Configure the Agent's Collector][14].
 
 1. In Fleet Automation, open the [Configuration][1] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
@@ -37,7 +42,9 @@ Managing Datadog Agent tags with Fleet Automation is in Preview. If you're inter
 1. Review the deployment plan to confirm scoped Agents and deployment settings, such as rollout concurrency.
 1. Click {{< ui >}}Deploy Configuration{{< /ui >}} to start the deployment and track its progress from the [Deployments page][2].
 
-## Edit the configuration of a single Agent
+## Edit the configuration of a single Agent or its Collector
+
+**Note**: Editing the Agent's Collector configuration is in Preview and requires Agent 7.82 or later. To request access, see [Configure the Agent's Collector][14].
 
 1. Navigate to [Fleet View][3]. 
 
@@ -92,7 +99,7 @@ For instructions on using mirrored or air-gapped repositories, see:
 [2]: https://app.datadoghq.com/fleet/deployments
 [3]: https://app.datadoghq.com/fleet
 [4]: /api/latest/fleet-automation/
-[5]: /agent/fleet_automation/fleet_view/#view-agent-audit-trail-events
+[5]: /agent/fleet_automation/fleet_view/#view-audit-trail-events
 [6]: /agent/configuration/proxy/
 [7]: /containers/guide/sync_container_images/
 [8]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
@@ -100,3 +107,4 @@ For instructions on using mirrored or air-gapped repositories, see:
 [10]: /agent/fleet_automation/upgrade_agents/
 [11]: /agent/fleet_automation/supported_datadog_yaml_fields/
 [12]: /agent/guide/setup_remote_config/#enable-remote-agent-management
+[14]: /agent/fleet_automation/otel_collectors/#configure-the-agents-collector
