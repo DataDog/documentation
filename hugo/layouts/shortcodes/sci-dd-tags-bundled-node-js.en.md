@@ -17,7 +17,7 @@ esbuild.build({
   format: 'cjs',
   outfile: 'dist/bundle.js',
   packages: 'external',
-  external: ['dd-trace', 'express']
+  external: ['dd-trace', 'express'],
 +  plugins: [ddPlugin],
 }).catch((e) => {
   console.error(e);
@@ -47,7 +47,7 @@ module.exports = {
   ],
   plugins: [
     nodeResolve(),
-    commonjs()
+    commonjs(),
 +    injectProcessEnv({
 +       DD_GIT_REPOSITORY_URL,
 +       DD_GIT_COMMIT_SHA

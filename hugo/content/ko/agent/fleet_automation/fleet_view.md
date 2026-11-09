@@ -2,13 +2,13 @@
 description: 전체 플릿의 Datadog Agent 및 OpenTelemetry Collector를 조회하고 검사하세요.
 further_reading:
 - link: /agent/fleet_automation/
-  tag: 설명서
+  tag: 문서
   text: Fleet Automation
 - link: /agent/troubleshooting/send_a_flare/
-  tag: 설명서
+  tag: 문서
   text: flare 전송하기
 - link: /containers/kubernetes/installation/
-  tag: 설명서
+  tag: 문서
   text: Kubernetes에 Datadog Agent 설치하기
 title: Fleet 보기
 ---
@@ -47,6 +47,8 @@ Agent 구성, Agent 업그레이드 및 SDK 업그레이드와 같은 추가적�
 Datadog Agent 또는 OTel Collector를 선택하여 구성, 연결된 통합, 감사 이벤트 및 원격 flare 전송을 위한 지원 탭을 확인하세요.
 
 {{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="구성, 연결된 통합 및 감사 이벤트를 보여주는 Agent 세부 정보 패널입니다." style="width:100%;" >}}
+
+Agent의 **Remote Configuration** 상태는 Datadog으로부터 구성을 수신할 수 있는지 여부를 나타냅니다. Agent의 **Remote Agent Management** 상태는 원격 관리가 활성화되어 있는지 여부를 나타냅니다. Agent는 Fleet View에 표시되고 Remote Configuration에 연결되어 있어도 원격 관리가 **NOT ENABLED** 상태일 수 있습니다. VM에서 업그레이드 및 구성 변경을 활성화하려면 [원격 Agent 관리 활성화][8]를 참조하세요.
 
 ## 검색 및 필터링 {#search-and-filter}
 
@@ -120,7 +122,7 @@ Kubernetes 보기에서는 Kubernetes 환경에서 실행 중인 Datadog Agent�
 |---|---|
 | `DatadogAgent` 구성 보기 | Datadog Operator v1.24 이상 |
 | Helm 차트 값 보기 | Datadog Helm 차트 v3.157.0 이상 |
-| 구성 편집 | [Remote Configuration][6] 활성화 및 Datadog Operator v1.27 이상 |
+| Edit configuration(Preview) | [Remote Configuration][6] 활성화 및 Datadog Operator v1.27 이상 사용 |
 | 클러스터 이름을 설정하지 않고 구성 편집 | Datadog Operator v1.30.0 이상 |
 | Cluster Agent에서 통합 보기 | Agent v7.72.0 이상 |
 | Cluster Agent에서 통합 상태 보기 | Agent v7.79.0 이상 |
@@ -158,7 +160,7 @@ helm upgrade --install datadog-operator datadog/datadog-operator \
 
 {{< ui >}}Configuration{{< /ui >}} 탭에서 다음 구성을 확인할 수 있습니다.
 
-- **Datadog Operator v1.24 이상**: `DatadogAgent` 사용자 지정 리소스 구성 조회. Datadog Operator v1.27 이상에서는 이 탭에서 구성을 편집할 수도 있습니다.
+- **Datadog Operator v1.24 이상**: `DatadogAgent` 사용자 지정 리소스 구성 조회. Datadog Operator v1.27 이상에서는 이 탭에서 구성을 편집할 수도 있습니다. 편집 기능은 미리 보기로 제공되고 있습니다. 자세한 지침은 [Kubernetes에서 Agent 구성][9]을 참조하세요.
 - **Datadog Helm Chart v3.157.0 이상**: Helm Chart 값을 확인하세요(`values.yaml`).
 
 ### 제한 사항 {#limitations}
@@ -180,3 +182,5 @@ helm upgrade --install datadog-operator datadog/datadog-operator \
 [5]: /ko/containers/datadog_operator
 [6]: /ko/agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /ko/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /ko/agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes
