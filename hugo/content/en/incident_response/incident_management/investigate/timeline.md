@@ -29,6 +29,13 @@ Each cell has its own content type that indicates the kind of information the ce
 | Notification sent  | An update when a manual notification is sent by an incident responder.
 | Meeting Chat       | Any messages sent in a video conferencing meeting's chat.
 | Meeting Summary    | AI-generated summaries of an incident meeting, posted during and after the meeting. See [Meeting summaries][2].
+| Meeting Transcript | A link to the meeting's live transcript notebook, with its **LIVE** or **ENDED** recording status. See [Live Meeting Transcripts][5].
+
+### Meeting transcripts
+
+When transcript generation is enabled, recording creates a **Meeting Transcript** entry. Open the entry's notebook link to read the conversation as it progresses. After recording ends, the entry changes to **ENDED**.
+
+Re-inviting the transcriber to the same meeting reuses the timeline entry and notebook. The entry returns to **LIVE**, and the notebook adds a section for the new recording session.
 
 ### Responder notes
 
@@ -62,3 +69,4 @@ You can also add an image to an existing cell:
 [2]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries
 [3]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [4]: https://app.datadoghq.com/organization-settings/public-sharing/settings
+[5]: /incident_response/incident_management/investigate/meeting_transcripts/
