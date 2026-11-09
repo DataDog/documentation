@@ -28,20 +28,20 @@ Detection rule migration supports Splunk as a source platform.
 
 ### Translate a single rule
 
-| Method                                                        | Use case                                                                                                                             |
-|---------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits AI in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs. |
-| [`propose_datadog_security_detection_rule`][1]                | Translate a single rule from an AI agent with the Datadog MCP Server. Returns a proposed rule without creating it.                   |
-| [Rule proposal API][2]                                        | Translate a single rule with an API call. Returns a proposed rule without creating it.                                               |
+| Method                                                        | Use case                                                                                                                                       |
+|---------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Rule editor UI](#translate-a-single-rule-in-the-rule-editor) | Chat with Bits AI in the Cloud SIEM rule editor. Paste or describe a source rule, then refine the draft until it matches your needs.           |
+| [MCP Server tool][1]                                          | Translate a single rule from an AI agent with the `propose_datadog_security_detection_rule` tool. Returns a proposed rule without creating it. |
+| [Rule proposal API][2]                                        | Translate a single rule with an API call. Returns a proposed rule without creating it.                                                         |
 
 ### Migrate rules in bulk
 
 | Method                                                | Use case                                                                                             |
 |-------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | [Bulk migration UI](#migrate-detection-rules-in-bulk) | Upload a CSV export of your Splunk saved searches, then review and publish a proposal for each rule. |
-| [Batch migration API][3]                              | Automate bulk migrations.                                                                            |
+| [Batch migration API][3]                              | Run the same bulk migration with API calls instead of the UI.                                        |
 
-Detection rule migration translates detection rules only. To translate SPL log search queries or to convert Splunk alerts and dashboards into Datadog monitors and dashboards, use [Migration Tools][4].
+To migrate Splunk log search queries, alerts, or dashboards, use [Migration Tools][4].
 
 ## Prerequisites
 
