@@ -513,7 +513,7 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluator
 
 ### Test and preview
 
-The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
+The pane on the left shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluator{{< /ui >}} to pre-fill inputs to your evaluator with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 

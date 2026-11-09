@@ -31,11 +31,14 @@ Code evaluators run on the same scopes as [custom LLM-as-a-judge evaluators][2]:
 1. In Datadog, navigate to the Agent Observability [Evaluators page][3]. Select {{< ui >}}Create Evaluator{{< /ui >}}.
 1. Start creating the evaluator in one of these ways:
    - Under {{< ui >}}Templates{{< /ui >}}, select a template from the {{< ui >}}Code Evaluations{{< /ui >}} group. The editor opens with {{< ui >}}Type{{< /ui >}} set to {{< ui >}}Code (deterministic){{< /ui >}}.
-   - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). Then, in the editor, set {{< Type >}} to {{< ui >}}Code (deterministic){{< /ui >}}.
+   - Under {{< ui >}}Scratch{{< /ui >}}, select {{< ui >}}Multi-turn{{< /ui >}} (session), {{< ui >}}Single-turn{{< /ui >}} (trace), or {{< ui >}}Single call{{< /ui >}} (span). Then, in the editor, set {{< ui >}}Type{{< /ui >}} to {{< ui >}}Code (deterministic){{< /ui >}}.
+
+   <div class="alert alert-info">If you start from <strong>Scratch</strong>, set <strong>Type</strong> to <strong>Code (deterministic)</strong> before you publish. Otherwise, the evaluator is an LLM judge, which calls your LLM provider and uses your account.</div>
+
 1. Provide a clear, descriptive {{< ui >}}Name{{< /ui >}} (for example, `empty-tool-result`). The name must be unique within your application.
 1. In {{< ui >}}Runs on{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria, for example, `@meta.span.kind:tool`, to evaluate only tool spans. See [Define the evaluation scope][4] for details.
 1. (Optional) To change your starting point, use the {{< ui >}}Template{{< /ui >}} picker:
-   - {{< ui >}}Create from scratch{{< /ui >}}: Starts from a minimal function. 
+   - {{< ui >}}Create from scratch{{< /ui >}}: Starts from a minimal function.
    - {{< ui >}}Empty tool result{{< /ui >}}: Flags tool calls that return an empty result.
    - {{< ui >}}User input contains text{{< /ui >}}: Checks whether the user input contains a given string.
 
@@ -73,7 +76,7 @@ function __evalDeterministic(data) {
 | Trace | `{ spans: [...] }`, every span in the trace | `data.spans[0].name`, `data.spans.filter((s) => s.meta?.span?.kind === "tool")` |
 | Session | `{ session_id, traces: [{ trace_id, spans: [...] }] }`, every trace in the session | `data.session_id`, `data.traces[0].spans` |
 
-To see the exact fields available, select a span, trace, or session in the left pane of the editor to view its JSON.
+To see the exact fields available, select {{< ui >}}Test Evaluator{{< /ui >}} > {{< ui >}}Test Manually{{< /ui >}}. Then, select a span, trace, or session in the left pane of the editor to view its JSON.
 
 Fields can be missing on some spans. Use optional chaining (`?.`) and defaults (`??`) to avoid errors, for example `data.meta?.output?.value ?? ""`.
 
@@ -176,7 +179,7 @@ For each run, the result panel shows the returned value, any `console.log` outpu
 
 ## Viewing and using results
 
-Code evaluator results appear in the same places as other evaluation results, and you can query them with the same syntax. For example:
+Code evaluator results appear on the evaluator's {{< ui >}}Results{{< /ui >}} tab, alongside other evaluation results. You can also search for them on the Agent Observability [Traces page][9], using the same syntax as other evaluations. For example:
 
 - `@evaluation.empty-tool-result.value:true`
 - `@evaluation.empty-tool-result.assessment:fail`
@@ -236,3 +239,4 @@ EOF
 [6]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/#viewing-and-using-results
 [7]: /api/latest/agent-observability/#create-or-update-a-custom-evaluator-configuration
 [8]: /getting_started/site/
+[9]: https://app.datadoghq.com/llm/traces
