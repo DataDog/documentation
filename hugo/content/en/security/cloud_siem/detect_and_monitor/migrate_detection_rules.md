@@ -117,7 +117,7 @@ Unsupported logic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mcp_server/tools/#security
+[1]: /mcp_server/tools/#propose_datadog_security_detection_rule
 [2]: /api/latest/security-monitoring/start-a-rule-proposal/
 [3]: /api/latest/security-monitoring/start-a-batch-migration/
 [4]: /logs/migration/migration_tools/

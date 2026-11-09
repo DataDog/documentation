@@ -45,7 +45,7 @@ You can use the `security` toolset to:
 - **Investigate specific findings**: Retrieve full details for a set of findings to understand scope, affected resources, and remediation context.
 - **Triage security findings**: Create Jira issues, ServiceNow tickets, or Case Management cases for findings. Assign findings to team members, or mute false positives and accepted risks.
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
-- **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
+- **Inspect and manage detection rules**: List, retrieve, create, update, delete, and propose detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
 - **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and create, update, or delete custom WAF rules to protect a specific service or endpoint.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
@@ -187,6 +187,14 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 `delete_datadog_security_detection_rules`
 : Deletes one or more custom detection rules by ID. Only custom (non-default) rules can be deleted. Each rule is authorized individually; rules that cannot be deleted appear in `failed_rules` without aborting the batch. Returns `deleted_rules` and `failed_rules`.
 : *Permissions required: `Security Monitoring Rules Write`*
+
+`propose_datadog_security_detection_rule`
+: Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`.
+: *Permissions required: `Security Monitoring Rules Write`*
+
+`get_datadog_security_detection_rule_proposal`
+: Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`.
+: *Permissions required: `Security Monitoring Rules Read`*
 
 ### Suppressions
 

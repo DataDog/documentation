@@ -2865,6 +2865,22 @@ Deletes one or more custom detection rules by ID. Only custom (non-default) rule
 - Delete detection rule `abc-123-def`.
 - Remove these three test detection rules I created earlier.
 
+### `propose_datadog_security_detection_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Write`*\
+Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`. The proposal is usually ready in a few minutes. To migrate more than a few rules, use [detection rule migration][101].
+
+- Translate this Splunk rule into a Cloud SIEM detection rule: `<SPL query>`.
+- Propose a detection rule that alerts when a user logs in to the AWS console from 3 or more IPs in 10 minutes.
+
+### `get_datadog_security_detection_rule_proposal`
+*Toolset: **security***\
+*Permissions Required: `Security Monitoring Rules Read`*\
+Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`. When it fails, returns the error.
+
+- Check the status of detection rule proposal `abc-123`.
+- Show me the proposed rule, then save it as disabled.
+
 ### `get_datadog_security_suppressions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Suppressions Read`*\
@@ -3879,6 +3895,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
 [100]: /integrations/kubernetes_audit_logs/
+[101]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/
 
 ## Further reading
 
