@@ -63,3 +63,35 @@ entries:
       - UpdateMaintenanceTemplate
       - UpdateStatusPage
     title: Add rss_enabled to status page attributes
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41533
+    operations:
+      - CreateBackfilledDegradation
+      - CreateBackfilledMaintenance
+      - CreateComponent
+      - CreateDegradation
+      - CreateDegradationTemplate
+      - CreateMaintenance
+      - CreateMaintenanceTemplate
+      - CreateStatusPage
+      - EditDegradationUpdate
+      - GetComponent
+      - GetDegradation
+      - GetDegradationTemplate
+      - GetMaintenance
+      - GetMaintenanceTemplate
+      - GetStatusPage
+      - ListComponents
+      - ListDegradationTemplates
+      - ListDegradations
+      - ListMaintenanceTemplates
+      - ListMaintenances
+      - ListStatusPages
+      - UpdateComponent
+      - UpdateDegradation
+      - UpdateDegradationTemplate
+      - UpdateMaintenance
+      - UpdateMaintenanceTemplate
+      - UpdateStatusPage
+    title: Align status page attributes with API responses

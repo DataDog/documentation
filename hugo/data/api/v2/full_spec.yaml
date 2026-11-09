@@ -32509,6 +32509,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -32565,10 +32566,16 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -32577,7 +32584,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -104811,6 +104819,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -104852,10 +104861,16 @@ components:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -104864,7 +104879,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -136654,6 +136670,9 @@ components:
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136664,6 +136683,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136832,6 +136854,9 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           nullable: true
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136843,6 +136868,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136854,6 +136882,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
+          nullable: true
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -261712,6 +261741,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -262031,6 +262061,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
