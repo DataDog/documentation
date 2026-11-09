@@ -91,7 +91,7 @@ When a legacy comma-separated filter moves to the new expression format, some te
 
 ## Migrate off the v1 filtering API
 
-The v1 AWS integration tag filtering API has been deprecated and is scheduled to be sunset in February 2027:
+The v1 AWS integration tag filtering API has been deprecated and is scheduled to be sunset on March 17, 2027 (a four-month migration window):
 
 - Endpoint: `https://api.datadoghq.com/api/v1/integration/aws/filtering`
 - Reference: [AWS Integration API documentation][1]
@@ -102,9 +102,9 @@ Alongside the v1 API, the `tag_filters` field in the v2 AWS metrics configuratio
 
 ### If you use Terraform
 
-If you manage AWS tag filters with the Datadog Terraform provider, no action is required for the API migration. Support for the new resource-type filters in the Datadog Terraform provider is tracked separately; until it ships, your existing `tag_filters` configuration is left untouched and continues to apply without errors or drift.
+If you manage AWS tag filters with the Datadog Terraform provider, no action is required for the API migration. Resource-type tag filters are supported in the Datadog Terraform provider in version 4.30.0 and later, through the `resource_type_tag_filters` block on the `datadog_integration_aws_account` resource. The `tag_filters` block is deprecated in favor of `resource_type_tag_filters`, and the two are mutually exclusive on an account. On earlier provider versions, your existing `tag_filters` configuration is left untouched and continues to apply without errors or drift.
 
-After your organization is migrated, your Terraform `tag_filters` continue to control filtering until you make a manual change to the resource-type tag filters through the Datadog UI or v2 API. After that point, your Terraform `tag_filters` no longer control which metrics are filtered.
+After your organization is migrated, your Terraform `tag_filters` continue to control filtering until you make a manual change to the resource-type tag filters through the Datadog UI or v2 API. After that point, your Terraform `tag_filters` no longer control which metrics are filtered. To keep managing filters in Terraform, move your configuration to `resource_type_tag_filters`.
 
 ## Next steps
 
