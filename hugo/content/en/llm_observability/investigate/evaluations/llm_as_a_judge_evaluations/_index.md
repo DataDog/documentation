@@ -117,7 +117,7 @@ Evaluators that include audio use OpenAI audio models and require [Keyword Searc
 
 For custom providers, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI, Baseten, Fireworks AI, Together AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - {{< ui >}}Boolean{{< /ui >}}: True/false results (for example, "Did the model follow instructions?")
@@ -361,7 +361,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Custom Provider, Vertex AI, Baseten, Fireworks AI, Together AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Post-Processing (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="post-processing" %}}
 1. Select the {{< ui >}}JSON{{< /ui >}} output type.
 
 2. Provide a JavaScript function to identify the evaluator's assessment, value, and reasoning. Post-processing enables you conduct a more complex assessment than just using Boolean, Score, or Categorical structured output.
@@ -466,7 +466,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Custom Provider, Baseten, Fireworks AI, Together AI)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Baseten, Fireworks AI, Together AI, Custom Provider)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the {{< ui >}}Boolean{{< /ui >}} output type.
    <div class="alert alert-info">For Keyword Search Output, only the <strong>Boolean</strong> output type is available.</div>
 
