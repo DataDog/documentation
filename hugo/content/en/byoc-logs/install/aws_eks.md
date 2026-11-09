@@ -21,8 +21,8 @@ This document walks you through the process of configuring your AWS environment 
 
 For a new deployment, choose one of these methods:
 
-- [Datadog Operator][8]: use Operator v1.33.0 or later to manage the engine and Observability Pipelines Workers with a `DatadogBYOCCluster` resource. This method uses the reverse connection to Datadog.
-- **Helm charts**: follow this page to deploy the engine, then configure ingestion separately.
+- **[Datadog Operator][8]**: Use Operator v1.33.0 or later to manage the engine and Observability Pipelines Workers with a `DatadogBYOCCluster` resource. This method uses the reverse connection to Datadog.
+- **Helm charts**: Follow this page to deploy the engine, then configure ingestion separately.
 
 If you need Ingress for an Operator deployment, contact your Datadog representative.
 

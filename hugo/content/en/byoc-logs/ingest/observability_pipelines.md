@@ -142,7 +142,7 @@ kubectl get datadogobservabilitypipelinesworker <CLUSTER_NAME>-pipeline-agent \
 kubectl logs statefulset/<CLUSTER_NAME>-pipeline-agent -n <NAMESPACE_NAME> --tail=100
 ```
 
-For a separately installed Worker, use its deployment's labels and namespace. For example:
+For a standalone Worker, use its deployment's labels and namespace. For example:
 
 ```shell
 # Check Observability Pipelines worker status

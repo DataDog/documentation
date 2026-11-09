@@ -24,7 +24,7 @@ The Operator uses default images for the BYOC engine and Workers. Upgrading the 
 ## Prerequisites
 
 - Access to BYOC Logs and Observability Pipelines in your Datadog organization.
-- An EKS cluster that meets the [BYOC Kubernetes requirements][2], with `kubectl` access and Helm installed.
+- An EKS cluster that meets the [BYOC Kubernetes cluster requirements](/byoc-logs/install/#kubernetes-cluster-requirements), with `kubectl` access and Helm installed.
 - An S3 bucket and a PostgreSQL database reachable from the BYOC pods. The Operator does not provision these services. See the [AWS prerequisites][4].
 - An IAM role with the [required S3 permissions][5] and an IRSA trust policy for the BYOC service account.
 - A persistent-volume provisioner and a StorageClass, either set as the default or specified in the volume claim templates.

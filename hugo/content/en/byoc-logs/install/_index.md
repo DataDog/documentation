@@ -20,7 +20,7 @@ Choose a deployment method before preparing your environment:
 | Method | Platforms | Connection to Datadog | Scope |
 |---|---|---|---|
 | [Datadog Operator][3] | AWS EKS | Reverse connection | New deployments with Operator v1.33.0 or later. Manages the engine and Workers for existing Observability Pipelines. |
-| BYOC and Worker Helm charts | AWS EKS, Google GKE, Azure AKS | Reverse connection; Ingress where supported by the platform guide | Install and configure the engine and Workers separately. |
+| [BYOC and Worker Helm charts][4] | Amazon EKS, Google GKE, Azure AKS | Reverse connection; Ingress where supported by the platform guide | Install and configure the engine and Workers separately. |
 | [Docker][2] | Local environment | Reverse connection | Evaluation only. |
 
 The Operator does not provision object storage, PostgreSQL, IAM roles, or Observability Pipeline definitions. The Operator supports only Amazon EKS. The following platform requirements apply to all deployment methods.
@@ -56,3 +56,4 @@ BYOC Logs supports the following object storage types:
 
 [2]: /byoc-logs/install/docker/
 [3]: /byoc-logs/install/datadog_operator/
+[4]: /byoc-logs/install/aws_eks/

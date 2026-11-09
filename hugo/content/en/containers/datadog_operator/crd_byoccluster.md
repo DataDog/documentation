@@ -1,6 +1,6 @@
 ---
 title: DatadogBYOCCluster CRD
-description: Deploy and manage BYOC clusters and Observability Pipelines Workers using the DatadogBYOCCluster custom resource definition with the Datadog Operator
+description: Deploy and manage BYOC clusters and Observability Pipelines Workers using the DatadogBYOCCluster custom resource definition with the Datadog Operator.
 further_reading:
   - link: "/byoc-logs/install/datadog_operator/"
     tag: "Documentation"
