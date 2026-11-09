@@ -316,6 +316,21 @@ jobs:
           > __untrusted_diff/diff.patch
         wc -l __untrusted_diff/diff.patch
 
+    - name: Write numbered diff into __untrusted_diff/
+      # Prefix each diff line with its line number in the new file, so
+      # Claude copies line numbers instead of counting patch lines.
+      # Uses the trusted default-branch script; the diff is parsed as
+      # text only.
+      run: |
+        node -e '
+          const fs = require("node:fs");
+          const { numberDiff } = require(
+            `${process.env.GITHUB_WORKSPACE}/.github/scripts/diff_lines.js`);
+          const diff = fs.readFileSync("__untrusted_diff/diff.patch", "utf8");
+          fs.writeFileSync("__untrusted_diff/diff_numbered.txt", numberDiff(diff));
+        '
+        wc -l __untrusted_diff/diff_numbered.txt
+
     - name: Write earlier bot review comments into __untrusted_prior/
       # Earlier `/review` runs on this PR left inline comments. Without
       # them, each run starts fresh and can reverse its own earlier
@@ -383,9 +398,13 @@ jobs:
 
           - `./__untrusted/` — the PR head, fully checked out.
             All files you should review are here.
-          - `./__untrusted_diff/diff.patch` — the unified diff of
-            this PR against its base branch. Read this first to
-            see what changed.
+          - `./__untrusted_diff/diff_numbered.txt` — the diff of
+            this PR against its base branch, with each added or
+            unchanged line prefixed by its line number in the new
+            file. Read this first to see what changed, and take
+            every `line` value from its left column.
+          - `./__untrusted_diff/diff.patch` — the same diff in
+            standard unified format, without line numbers.
           - `./__untrusted_prior/review_comments.json` — inline
             comments from earlier automated reviews of this PR
             (an empty array if this is the first review). Read it
@@ -410,13 +429,15 @@ jobs:
           after `+++ b/` in the diff.
           `line` must be the line number in the file as it exists on
           the PR head (the new version), and it must fall inside a
-          diff hunk. Take line numbers from reading the file under
-          `./__untrusted/`, not from counting lines in `diff.patch`.
-          Patch line numbers include diff headers and removed lines,
-          so they point at the wrong text. Don't point a comment at a line past the end of
-          the file. For a finding about a file that isn't in the diff,
-          such as a missing menu entry, put the comment on the most
-          relevant changed line instead.
+          diff hunk. Copy it from the left column of
+          `diff_numbered.txt`. Never count lines in `diff.patch`:
+          patch positions include diff headers and other files, so
+          they point at the wrong text. For `start_line`, use the
+          number of the first line the comment covers. For a finding
+          about a file that isn't in the diff, such as a missing menu
+          entry, put the comment on the most relevant changed line
+          instead. The workflow moves any comment on a line outside
+          the diff into the review body without its suggestion.
 
           ## Output channel (overrides .claude/pr-review.md output format)
 
@@ -572,7 +593,19 @@ jobs:
               "avoid leaking credentials. Re-run `/review` to retry."));
           }
 
-          write(parsed);
+          // GitHub rejects the whole review if any comment's line isn't
+          // in the diff. Move those comments into the body instead.
+          const { parseDiff, moveUnresolvable } = require(
+            `${process.env.GITHUB_WORKSPACE}/.github/scripts/diff_lines.js`,
+          );
+          const files = parseDiff(
+            fs.readFileSync("__untrusted_diff/diff.patch", "utf8"));
+          const { review: placed, moved } = moveUnresolvable(parsed, files);
+          if (moved > 0) {
+            core.warning(`moved ${moved} comment(s) on lines outside the diff into the review body`);
+          }
+
+          write(placed);
 
     - name: Upload review artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
