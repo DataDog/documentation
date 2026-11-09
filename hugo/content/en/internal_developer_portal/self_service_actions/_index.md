@@ -77,7 +77,7 @@ If you prefer to build an app from the ground up:
 1. Test your app and workflow:
    
    1. Click **View App** to preview the app on a standalone page.
-   1. Monitor workflow execution in [Workflow Automation][3].
+   1. Monitor workflow runs in [Workflow Automation][3].
 
 ### Publish your app 
 

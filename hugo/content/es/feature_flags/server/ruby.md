@@ -286,20 +286,67 @@ end
 
 Para modificar el estado de las Feature Flags durante una prueba, llame a `add_flag(flag_key:, value:)` en la instancia del proveedor. El mismo patrón se aplica a Minitest: reemplace el hook `around` con los métodos `setup`/`teardown`.
 
+## Utilice el SDK de Java en JRuby {#use-the-java-sdk-on-jruby}
+
+El SDK de Ruby no admite Feature Flags en JRuby. En JRuby, el SDK de Ruby escribe una advertencia en el registro y no habilita las Feature Flags. Utilice el [SDK de Java][6] en su lugar. JRuby llama al SDK de Java a través de su integración con Java.
+
+Utilice las versiones en los [requisitos de compatibilidad del SDK de Java][7].
+
+1. Obtenga el archivo `dd-openfeature` JAR, el archivo JAR del SDK de Java de OpenFeature y sus dependencias. Por ejemplo, utilice Maven para copiarlos a un directorio.
+2. Cargue los archivos JAR en su aplicación con `require`.
+3. Establezca las variables de entorno para su fuente de configuración. Consulte [Fuentes de configuración del SDK de servidor][8].
+4. Inicie JRuby con `dd-java-agent`. Utilice la opción `-J` para enviar la opción `-javaagent` a la JVM.
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+Los archivos JAR por sí solos no habilitan la entrega de flags. El proveedor de Datadog utiliza clases de `dd-java-agent`. Si la JVM no carga `dd-java-agent`, el proveedor no se inicializa. Las evaluaciones de flags devuelven entonces los valores predeterminados.
+
+Para eventos del proveedor, manejo de errores y los métodos de evaluación, consulte la página del [SDK de Java][6]. JRuby utiliza las mismas clases y métodos.
+
 ## Solución de problemas {#troubleshooting}
 
 ### Las Feature Flags siempre devuelven valores predeterminados {#feature-flags-always-return-default-values}
 
 Si las Feature Flags devuelven inesperadamente siempre valores predeterminados, verifique lo siguiente:
 
-- Verifique que la Configuración remota esté habilitada en la configuración de su Datadog Agent
+- Si la aplicación se ejecuta en JRuby, utilice el SDK de Java. Consulte [Use el SDK de Java en JRuby][9].
+- Verifique que Remote Configuration esté habilitada en la configuración de su Datadog Agent
+- Verifique que el Datadog Agent estuviera disponible cuando se inició la aplicación. Si los problemas continúan después de que el Agent esté disponible, reinicie la aplicación. Consulte [Disponibilidad del Agent][10].
 - Asegúrese de que el servicio y el entorno estén configurados (ya sea a través de las variables de entorno `DD_SERVICE` y `DD_ENV` o `config.service` y `config.env` en Ruby)
 - Verifique que `config.remote.enabled = true` y `config.open_feature.enabled = true` estén configurados en la configuración de Datadog de su aplicación Ruby
 - Verifique que la versión de la gema `datadog` incluya soporte para OpenFeature (2.24.0 o posterior)
 
-### Problemas de conexión de Configuración remota {#remote-configuration-connection-issues}
+### Problemas de conexión de Remote Configuration {#remote-configuration-connection-issues}
 
-Revise los registros del tracer de Datadog Ruby para conocer el estado de la Configuración remota:
+Revise los registros del tracer de Datadog Ruby para conocer el estado de Remote Configuration:
 
 ```ruby
 # Enable startup and debug logging
@@ -312,7 +359,7 @@ end
 ```
 
 Busque mensajes sobre:
-- Iniciando el trabajador de configuración remota
+- Iniciando el trabajador de Remote Configuration
 - Recibiendo la configuración de las Feature Flags
 - Inicialización del componente OpenFeature
 
@@ -325,3 +372,8 @@ Busque mensajes sobre:
 [3]: https://openfeature.dev/
 [4]: /es/account_management/api-app-keys/#api-keys
 [5]: /es/feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /es/feature_flags/server/java/
+[7]: /es/feature_flags/server/java/#compatibility-requirements
+[8]: /es/feature_flags/concepts/configuration_sources/
+[9]: #use-the-java-sdk-on-jruby
+[10]: /es/feature_flags/concepts/configuration_sources/#agent-availability

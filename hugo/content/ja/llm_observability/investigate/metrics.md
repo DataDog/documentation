@@ -20,12 +20,12 @@ title: Agent Observability メトリクス
 Agent Observability でアプリケーションをインスツルメントした後、ダッシュボードやモニターで使用する Agent Observability メトリクスにアクセスできます。これらのメトリクスは、LLM アプリケーションのスパン数、エラー数、トークン使用量、およびレイテンシーの測定値をキャプチャします。これらのメトリクスは、アプリケーションのトラフィックの 100% に基づいて計算されます。
 
 <div class="alert alert-info">
-このページの <code>ml_obs.*</code> エントリは <a href="/metrics/">Datadog メトリクス</a>です。これらは、LLM アプリケーションの各側面の推移を表す数値で、LLM スパン (カウント、コストの分布、トークン、レイテンシー、エラー) から導出されます。サンプリング率は 100% で、標準の <a href="/developers/guide/data-collection-resolution-retention/">Datadog メトリクス保持期間</a> (詳細な粒度で 15 か月) に従っており、他の Datadog メトリクスと同様にダッシュボード、モニター、ノートブックからクエリ可能です。
+このページの <code>ml_obs.*</code> エントリは <a href="/metrics/">Datadog メトリクス</a>です。これらは、LLM アプリケーションの各側面の推移を表す数値で、LLM スパン (カウント、コストの分布、トークン、レイテンシー、エラー) から導出されます。サンプリング率は 100% で、標準の <a href="/data_security/data_retention_periods/">Datadog メトリクス保持期間</a> (詳細な粒度で 15 か月) に従っており、他の Datadog メトリクスと同様にダッシュボード、モニター、ノートブックからクエリ可能です。
 <br><br>
 これらは、Agent Observability の以下の 2 つとは異なります。
 <ul>
-<li><strong>スパンごとの運用データ</strong> (個々のトレースまたはスパンのコスト、トークン、レイテンシー、エラー): これらのメトリクスが集計される元の生の値です。スパンと共に保存され、<a href="/llm_observability/setup/#data-retention">Agent Observability のトレース保持期間</a>に従い、メトリクスとしてではなく Traces エクスプローラーからクエリされます。</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">評価スコア</a></strong> (“evals”とも呼ばれます): 個々のスパンや実験行に付加された品質および安全性の判断 (例: ハルシネーション、忠実性、カスタム LLM-as-a-judge など)。これらは、運用テレメトリから導出されたものではありません。Datadog メトリクスの保持期間ではなく、Agent Observability のトレースおよび実験の保持期間に従います。</li>
+<li><strong>スパンごとの運用データ</strong> (個々のトレースまたはスパンのコスト、トークン、レイテンシー、エラー): これらのメトリクスが集計される元の生の値です。スパンと共に保存され、<a href="/llm_observability/data_governance/#traces-and-spans">Agent Observability のトレース保持期間</a>に従い、メトリクスとしてではなくトレース エクスプローラーからクエリされます。</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">評価スコア</a></strong> (“evals”とも呼ばれます): 個々のスパンや実験行に付加された品質および安全性の判断 (例: ハルシネーション、忠実性、カスタム LLM-as-a-judge など)。これらは運用テレメトリに由来するものではなく、Datadog メトリクスの保持期間ではなく、<a href="/llm_observability/data_governance/">Agent Observability のトレースおよび実験の保持期間</a>に従います。</li>
 </ul>
 </div>
 

@@ -247,6 +247,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "EvaluateAIGuardRequest": {
+    "description": "Analyzes a conversation for security threats such as prompt injection,\njailbreak attempts, and other AI-specific attacks. Returns an action\nrecommendation (`ALLOW`, `DENY`, or `ABORT`) along with the detected threat\ntags and their confidence scores.\nAI Guard must be activated for the organization, and the calling user or\napplication key requires the `ai_guard_evaluate` permission. The action is a\nrecommendation for the caller to enforce: ALLOW permits the interaction,\nDENY blocks the interaction, and ABORT terminates the workflow.\nThis endpoint is rate limited to `700` requests per minute per organization.\nOrganization token limits can also result in a 429 response.\nMalformed messages return a 400 response. Requests exceeding the raw-input\nlimit of 1,000,000 tokens return a 413 response; this limit applies to the\ninput context, not only the size of the HTTP request body.",
+    "summary": "Evaluate an AI Guard request",
+    "request_description": "The conversation to evaluate for security threats.",
+    "request_schema_description": "The request to evaluate a conversation for security threats."
+  },
   "CreateAIImpactUserActivity": {
     "description": "Send daily AI coding tool activity for one or more users. Each entry records whether a\nuser was active on a given day, along with the AI tools and models they used. An entry\nis stored once per tool, and sending the same user, day, and tool again overwrites the\nprevious value.",
     "summary": "Send AI tool user activity",
@@ -556,6 +562,58 @@
     "description": "Get a specific Bits AI investigation by ID.",
     "summary": "Get a Bits AI investigation"
   },
+  "ListAiGatewayBudgets": {
+    "description": "List spend budgets for the organization, including active-window spend and effective capacity.",
+    "summary": "List AI Gateway budgets"
+  },
+  "CreateAiGatewayBudget": {
+    "description": "Create a spend budget. Scope tags may include provider, model, and custom dimensions.\nReserved metadata keys are rejected.",
+    "summary": "Create an AI Gateway budget",
+    "request_description": "",
+    "request_schema_description": "Request to create an AI Gateway budget."
+  },
+  "DeleteAiGatewayBudget": {
+    "description": "Archive a spend budget by ID while retaining its accounting history.",
+    "summary": "Archive an AI Gateway budget"
+  },
+  "GetAiGatewayBudget": {
+    "description": "Get a spend budget by ID, including its capacity, scope, reset window, warning threshold, and enforcement mode.",
+    "summary": "Get an AI Gateway budget"
+  },
+  "UpdateAiGatewayBudget": {
+    "description": "Update a budget's mutable definition. Capacity changes apply to future accounting periods\nunless `apply_to_current_period` is true.",
+    "summary": "Update an AI Gateway budget",
+    "request_description": "",
+    "request_schema_description": "Request to update an AI Gateway budget."
+  },
+  "GetAiGatewayBudgetCurrentPeriod": {
+    "description": "Get the active accounting window, enforced capacity, and current spend.",
+    "summary": "Get an AI Gateway budget's current period"
+  },
+  "ListAiGatewayBudgetInstances": {
+    "description": "List instance counters for an accounting window. Legacy fixed-scope budgets return one pooled row with an empty instance_key. Omit window to use the current window. Use split_dim to keep only counters that match every given dimension value.",
+    "summary": "List AI Gateway budget instances"
+  },
+  "OverrideAiGatewayBudgetInstanceCapacity": {
+    "description": "Override active-period capacity for one instance of a template budget, identified by its instance_key. Other instances and the budget's default capacity are unchanged. The override is retained in the budget adjustment audit history. Returns 404 when the instance has no counter in the active period. Not supported for legacy fixed-scope budgets.",
+    "summary": "Override a budget instance's capacity",
+    "request_description": "",
+    "request_schema_description": "Request to override one budget instance's active-period capacity."
+  },
+  "ListAiGatewayBudgetInstanceDimensions": {
+    "description": "Search the values that a template budget's split dimensions take across its instance counters in an accounting window. Each dimension returns its top values by spend, with counter counts. Use query or value to narrow results and limit to cap them. The truncated field reports whether more values matched. Each dimension's values are counted under the other dimensions' split_dim filters, so a dimension's own filter does not hide its alternatives. Legacy fixed-scope budgets return an empty list.",
+    "summary": "List AI Gateway budget instance dimension values"
+  },
+  "ResetAiGatewayBudgetInstanceSpend": {
+    "description": "Reset active-period spend for one instance of a template budget, identified by its instance_key. The reset is retained in the budget adjustment audit history. Returns 404 when the instance has no counter in the active period. Not supported for legacy fixed-scope budgets.",
+    "summary": "Reset a budget instance's spend",
+    "request_description": "",
+    "request_schema_description": "Request to reset one budget instance's active-period spend."
+  },
+  "GetAiGatewayBudgetInstancesSummary": {
+    "description": "Aggregate counters for an accounting window, including total spend and the numbers of instances at or above the warning threshold and capacity. Use split_dim to aggregate only counters that match every given dimension value.",
+    "summary": "Get an AI Gateway budget instance summary"
+  },
   "SearchCases": {
     "description": "Search work items.",
     "summary": "Search work items"
@@ -855,8 +913,8 @@
   "CreateCaseNotebook": {
     "description": "Create a new investigation notebook and link it to a work item",
     "summary": "Create investigation notebook for work item",
-    "request_description": "Notebook creation request",
-    "request_schema_description": "Notebook creation request"
+    "request_description": "Case investigation notebook creation request.",
+    "request_schema_description": "Case investigation notebook creation request."
   },
   "MoveCaseToProject": {
     "description": "Update the project associated with a work item",
@@ -1067,60 +1125,6 @@
     "request_description": "CI job log line or batch in JSON format.",
     "request_schema_description": "A batch of up to 1,000 CI job log lines. Use a one-item array to send one log line."
   },
-  "ListAWSCloudAuthPersonaMappings": {
-    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
-    "summary": "List AWS cloud authentication persona mappings"
-  },
-  "CreateAWSCloudAuthPersonaMapping": {
-    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
-    "summary": "Create an AWS cloud authentication persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
-  },
-  "DeleteAWSCloudAuthPersonaMapping": {
-    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
-    "summary": "Delete an AWS cloud authentication persona mapping"
-  },
-  "GetAWSCloudAuthPersonaMapping": {
-    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
-    "summary": "Get an AWS cloud authentication persona mapping"
-  },
-  "ListGitHubCloudAuthIntakeMappings": {
-    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
-    "summary": "List GitHub cloud authentication intake mappings"
-  },
-  "CreateGitHubCloudAuthIntakeMapping": {
-    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Create a GitHub cloud auth intake mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
-  },
-  "DeleteGitHubCloudAuthIntakeMapping": {
-    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
-    "summary": "Delete a GitHub cloud auth intake mapping"
-  },
-  "GetGitHubCloudAuthIntakeMapping": {
-    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
-    "summary": "Get a GitHub cloud authentication intake mapping"
-  },
-  "ListGitHubCloudAuthPersonaMappings": {
-    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
-    "summary": "List GitHub cloud authentication persona mappings"
-  },
-  "CreateGitHubCloudAuthPersonaMapping": {
-    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Create a GitHub cloud auth persona mapping",
-    "request_description": "",
-    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
-  },
-  "DeleteGitHubCloudAuthPersonaMapping": {
-    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
-    "summary": "Delete a GitHub cloud auth persona mapping"
-  },
-  "GetGitHubCloudAuthPersonaMapping": {
-    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
-    "summary": "Get a GitHub cloud authentication persona mapping"
-  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
@@ -1190,11 +1194,11 @@
     "summary": "Get the rule-based view of compliance findings"
   },
   "ListContainerImages": {
-    "description": "Get all Container Images for your organization.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
+    "description": "Get all container images for your organization. This endpoint queries current\ninventory and does not support time-range parameters.\n\nUse `group_by` to return image groups with counts. Grouped results are limited\nby `page[size]`, may be incomplete, and do not support pagination.\n\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all Container Images"
   },
   "ListContainers": {
-    "description": "Get all containers for your organization.",
+    "description": "Get all containers for your organization. Use `group_by` to return container groups with counts.\nGrouped results are limited by `page[size]` and do not support pagination.\n\nTo get CPU or memory metrics, use a `container` data source query with `/api/v2/query/scalar`\nor `/api/v2/query/timeseries`.",
     "summary": "Get All Containers"
   },
   "GetCostAccountFilters": {
@@ -1550,32 +1554,6 @@
     "description": "Count findings with no team tag, grouped by ownership confidence level.",
     "summary": "Count untagged findings by ownership confidence"
   },
-  "ListOwnershipInferences": {
-    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
-    "summary": "List ownership inferences for a resource"
-  },
-  "ListOwnershipHistory": {
-    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership inference history for a resource"
-  },
-  "GetOwnershipInference": {
-    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
-    "summary": "Get an ownership inference by owner type"
-  },
-  "GetOwnershipEvidence": {
-    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
-    "summary": "Get the evidence for an ownership inference"
-  },
-  "CreateOwnershipFeedback": {
-    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
-    "summary": "Submit feedback on an ownership inference",
-    "request_description": "",
-    "request_schema_description": "The request body for submitting ownership feedback."
-  },
-  "ListOwnershipHistoryByOwnerType": {
-    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
-    "summary": "List ownership history by owner type"
-  },
   "ListCSMAgentlessHosts": {
     "description": "Get the list of agentless hosts for CSM, with optional pagination and filtering.",
     "summary": "List agentless hosts"
@@ -1687,6 +1665,28 @@
   "GetDashboardUsage": {
     "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM. **View counts are refreshed once per day** and **only reflect views recorded starting January 2025**; views prior to that date are not included.",
     "summary": "Get usage stats for a dashboard"
+  },
+  "GetAiGatewayDataCaptureConfiguration": {
+    "description": "Get the organization default mode, scoped capture overrides, and configuration revision.",
+    "summary": "Get the AI Gateway data capture configuration"
+  },
+  "CreateAiGatewayDataCaptureOverride": {
+    "description": "Create a scoped override with a client-generated UUID and the current `configuration_revision`. If the override can enable full capture for more traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` is stale, the UUID already exists, or the organization has 100 overrides. Missing `configuration_revision` or required full-capture confirmation returns HTTP 400. Retrying an accepted create with the same UUID returns HTTP 409. To undo a create, read the current configuration revision and delete the override using its returned override revision.",
+    "summary": "Create an AI Gateway data capture override",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a scoped data capture override."
+  },
+  "DeleteAiGatewayDataCaptureOverride": {
+    "description": "Delete an override using its `revision` and the current `configuration_revision`. If deleting the override can enable full capture for affected traffic, set `confirm_full_capture` to `true`. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during deletion. Missing revisions or required full-capture confirmation returns HTTP 400.",
+    "summary": "Delete an AI Gateway data capture override",
+    "request_description": "",
+    "request_schema_description": "Request body for deleting a scoped data capture override."
+  },
+  "UpdateAiGatewayDataCaptureOverride": {
+    "description": "Replace an override using its `revision` and the current `configuration_revision`. Changes to capture overrides don't affect routing rules. Returns HTTP 409 when `configuration_revision` or the override `revision` is stale, including a concurrent change during replacement. Missing revisions or required full-capture confirmation returns HTTP 400.",
+    "summary": "Replace an AI Gateway data capture override",
+    "request_description": "",
+    "request_schema_description": "Request body for replacing a scoped data capture override."
   },
   "GetDataObservabilityMonitorRunStatus": {
     "description": "Retrieves the current status of a data observability monitor run. Poll this endpoint after triggering a run to determine when evaluation is complete.",
@@ -2128,9 +2128,39 @@
     "description": "List draft, published, and archived experiment protocols. Omit filter[status] to return all statuses. Only published protocols can be used to create experiments.",
     "summary": "List experiment protocols"
   },
+  "CreateExperimentProtocol": {
+    "description": "Create a draft protocol with a name and optional description and migration metadata. The organization's default subject type is selected. Use PATCH to configure the draft, then publish it before creating experiments from it.",
+    "summary": "Create experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Create a draft protocol with the organization default subject type."
+  },
+  "DeleteExperimentProtocol": {
+    "description": "Delete a protocol with no linked experiments. Draft, published, and archived protocols can be deleted. Returns 204 with no response body.",
+    "summary": "Delete experiment protocol"
+  },
   "GetExperimentProtocol": {
     "description": "Get a draft, published, or archived experiment protocol by ID.",
     "summary": "Get experiment protocol"
+  },
+  "PatchExperimentProtocol": {
+    "description": "Update the supplied fields of a draft protocol. Published protocols accept only name, description, and migration_metadata changes through PATCH. Use PUT to replace their settings. Archived protocols cannot be edited.\n\nOmitted fields keep their current values, including fields inside analysis_plan, exposure_schedule, and enforcement. Arrays replace the stored arrays. Supported null values clear fields; see the request schema. Use primary_metric_id to select the primary metric and default_duration_days to set the experiment analysis duration. Nested metric is_primary and analysis_plan.target_duration_days fields are rejected.",
+    "summary": "Update experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Partial protocol update. Omitted attributes remain unchanged. Published protocols accept only name, description, and migration_metadata; archived protocols reject updates."
+  },
+  "ReplaceExperimentProtocol": {
+    "description": "Replace the template of a published protocol. Draft and archived protocols return 409. Send subject_type_id, all four required boolean settings, and metric_groups. Omitted optional template fields are cleared. Omitted enforcement keeps the existing locks.\n\nUse primary_metric_id to select the primary metric. Use default_duration_days to set target_duration_days on experiments created from the protocol. The nested metric is_primary and analysis_plan.target_duration_days fields are rejected. An unchanged GET response can be sent as the request body. Response-only fields are ignored.\n\nIndependent configuration errors are returned together in the JSON:API errors array. Each error identifies the field in source.pointer. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged. Changes apply to future experiments; existing experiments keep their settings.",
+    "summary": "Replace experiment protocol",
+    "request_description": "",
+    "request_schema_description": "Replace a published protocol template. Omitted optional template fields are cleared. Omitted enforcement and migration_metadata are preserved. Enabled limits require their values; allocation settings require environment_id."
+  },
+  "ArchiveExperimentProtocol": {
+    "description": "Archive a draft or published protocol. Archived protocols cannot be edited or used to create new experiments. Existing experiments keep their settings. Archiving an already archived protocol returns 409.",
+    "summary": "Archive experiment protocol"
+  },
+  "PublishExperimentProtocol": {
+    "description": "Publish a valid draft protocol. The protocol must have a name and subject type. Supplied references and settings must be valid. An exposure schedule or targeting rules require an environment. Enabled limits require their values. Configurable template fields must have a value before they can be locked.\n\nIndependent configuration errors are returned together in the JSON:API errors array with source.pointer values that identify the fields. Earlier request and reference checks can stop on the first error. A failed request leaves the protocol unchanged.",
+    "summary": "Publish experiment protocol"
   },
   "RefreshExperimentResultsForOrg": {
     "description": "Trigger a results refresh across the organization's active experiments. Returns the count of experiments whose refresh was triggered (meta.experiments_updated) plus a per-experiment breakdown of what happened to each (meta.results).",
@@ -2311,7 +2341,7 @@
     "summary": "Get a feature flag"
   },
   "UpdateFeatureFlag": {
-    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.",
+    "description": "Updates an existing feature flag's metadata such as\n name and description. Does not modify targeting rules or allocations.\n\nTo change the owning team, update `tags` and include a tag of the form\n`team:<team-handle>` in the array. `tags` is a full replacement of the\nexisting tag set (including any `team:` tag), so include every tag you\nwant to keep, not just the ones you're adding.",
     "summary": "Update a feature flag",
     "request_description": "",
     "request_schema_description": "Request to update a feature flag."
@@ -2348,7 +2378,7 @@
     "description": "Adds a single new variant to an existing feature flag. This endpoint is\nadditive-only: it never modifies existing variants. A request whose `key`\nalready exists on the flag is rejected with `409 Conflict`; a `value`\nwhose type does not match the flag's `value_type` is rejected with `400`.\nThe server generates the variant UUID and returns it in the response body;\ncallers (for example, the flag-migration tool) need this UUID to reference\nthe new variant in subsequent allocation syncs.",
     "summary": "Add a variant to a feature flag",
     "request_description": "",
-    "request_schema_description": "Request to create a variant."
+    "request_schema_description": "Request to add a variant to a feature flag."
   },
   "DeleteVariantFromFeatureFlag": {
     "description": "Deletes a variant from a feature flag.\n\nWhen backend approvals are enabled and the flag requires approval, this endpoint creates and returns a `FlagSuggestion` with `201 Created` instead of deleting the variant immediately. If a pending suggestion already exists for this flag's variant property, the endpoint returns `409 Conflict`.",
@@ -2461,6 +2491,16 @@
   "ListGlobalOrgs": {
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
+  },
+  "GetAiGatewayGovernance": {
+    "description": "Get the organization-wide AI Gateway governance settings, which are the default data capture mode and whether requests must reach providers covered by a zero data retention agreement.",
+    "summary": "Get AI Gateway governance controls"
+  },
+  "UpdateAiGatewayGovernance": {
+    "description": "Replace the organization-wide AI Gateway governance settings, which are the default data capture mode and whether requests must reach providers covered by a zero data retention agreement.",
+    "summary": "Replace AI Gateway governance controls",
+    "request_description": "",
+    "request_schema_description": "Request to replace the organization's AI Gateway governance controls."
   },
   "GetGovernanceConfig": {
     "description": "Retrieve the Governance Console configuration for the organization, including whether the\nConsole is enabled, whether assignment notifications are enabled, and whether usage\nattribution is configured.",
@@ -3116,6 +3156,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update a Snowflake integration account."
   },
+  "ListTemporalCloudOpenMetricsIntegrationAccounts": {
+    "description": "List Temporal Cloud OpenMetrics integration accounts.",
+    "summary": "List Temporal Cloud OpenMetrics accounts"
+  },
+  "CreateTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Create a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Create a Temporal Cloud OpenMetrics account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Temporal Cloud OpenMetrics integration account."
+  },
+  "DeleteTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Delete a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Delete a Temporal Cloud OpenMetrics account"
+  },
+  "GetTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Get a Temporal Cloud OpenMetrics integration account.",
+    "summary": "Get a Temporal Cloud OpenMetrics account"
+  },
+  "UpdateTemporalCloudOpenMetricsIntegrationAccount": {
+    "description": "Update a Temporal Cloud OpenMetrics integration account. Only the fields provided are changed.",
+    "summary": "Update a Temporal Cloud OpenMetrics account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Temporal Cloud OpenMetrics integration account."
+  },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
     "summary": "List Twilio integration accounts"
@@ -3501,34 +3565,6 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
-  },
-  "GetIncidentTemplates": {
-    "description": "Get all Salesforce incident templates configured for your organization.",
-    "summary": "Get all Salesforce incident templates"
-  },
-  "CreateIncidentTemplate": {
-    "description": "Create a new Salesforce incident template for your organization. Template\nnames must be unique within an organization.",
-    "summary": "Create a Salesforce incident template",
-    "request_description": "Salesforce incident template payload.",
-    "request_schema_description": "Create request for a Salesforce incident template."
-  },
-  "DeleteIncidentTemplate": {
-    "description": "Delete a single Salesforce incident template from your organization.",
-    "summary": "Delete a Salesforce incident template"
-  },
-  "UpdateIncidentTemplate": {
-    "description": "Update a single Salesforce incident template in your organization.",
-    "summary": "Update a Salesforce incident template",
-    "request_description": "Salesforce incident template payload.",
-    "request_schema_description": "Update request for a Salesforce incident template."
-  },
-  "GetSalesforceOrganizations": {
-    "description": "Get all Salesforce organizations connected to your Datadog organization\nthrough the Salesforce integration. Salesforce organizations are connected\nthrough the OAuth setup flow in the Datadog Salesforce integration page.",
-    "summary": "Get all connected Salesforce organizations"
-  },
-  "DeleteSalesforceOrganization": {
-    "description": "Disconnect a Salesforce organization from your Datadog organization.\nThis also deletes any incident templates referencing the organization.",
-    "summary": "Delete a connected Salesforce organization"
   },
   "ListServiceNowAssignmentGroups": {
     "description": "Get all assignment groups for a ServiceNow instance.",
@@ -4163,6 +4199,10 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "ListArchiveSearches": {
+    "description": "List the organization's Archive Searches that haven't expired, up to 5,000. When more\nexist, `meta.truncated` is `true`.",
+    "summary": "List Archive Searches"
+  },
   "CreateArchiveSearch": {
     "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
     "summary": "Create an Archive Search",
@@ -4172,6 +4212,16 @@
   "GetArchiveSearch": {
     "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
     "summary": "Get an Archive Search"
+  },
+  "RehydrateArchiveSearch": {
+    "description": "Turn a plain Archive Search into a Search & Rehydration by indexing the matched logs into a\nretained historical view. Rehydration is the only thing this endpoint can change, and it only\napplies to a search that has already finished scanning.",
+    "summary": "Rehydrate an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to rehydrate an Archive Search."
+  },
+  "CancelArchiveSearch": {
+    "description": "Cancel a running Archive Search. Cancelling an Archive Search that has already finished is a\nno-op: it returns the resource unchanged instead of returning an error.",
+    "summary": "Cancel an Archive Search"
   },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
@@ -4356,20 +4406,8 @@
     "request_schema_description": "Request payload for updating a maintenance window."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
-    "summary": "Get a list of metrics"
-  },
-  "DeleteBulkTagsMetricsConfiguration": {
-    "description": "**Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.\n\nDelete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Delete tags for multiple metrics",
-    "request_description": "",
-    "request_schema_description": "Wrapper object for a single bulk tag deletion request."
-  },
-  "CreateBulkTagsMetricsConfiguration": {
-    "description": "**Note**: This endpoint is deprecated. Use [Tag Indexing Rules](/api/latest/metrics/#create-a-tag-indexing-rule) (`POST /api/v2/metrics/tag-indexing-rules`) instead.\n\nCreate and define a list of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix. Use the Delete method of this API path to remove tag configurations.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nIf multiple calls include the same metric, the last configuration applied (not by submit order) is used, do not\nexpect deterministic ordering of concurrent calls. The `exclude_tags_mode` value will set all metrics that match the prefix to\nthe same exclusion state, metric tag configurations do not support mixed inclusion and exclusion for tags on the same metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Configure tags for multiple metrics",
-    "request_description": "",
-    "request_schema_description": "Wrapper object for a single bulk tag configuration request."
+    "description": "Get a list of actively reporting metrics for your organization, with optional volumes, query activity,\nand tag configuration filters. When you need volumes, query activity, or tag configuration status for\nmany metrics, use this endpoint instead of calling per-metric endpoints (such as\n`GET /api/v2/metrics/{metric_name}/volumes` or `GET /api/v2/metrics/{metric_name}/tags`) in a loop,\nwhich is slower and quickly reaches rate limits. This endpoint does not return the tag keys or values\nthat a metric was submitted with.\n\nAlways paginate: send `page[size]` (up to 10000; a few hundred to a few thousand is typical) and follow\n`meta.pagination.next_cursor` (or `links.next`) until it is null or missing. Without `page[size]` or `page[cursor]`,\nthe response is not paginated: it returns matching metrics in one response, with no pagination metadata,\nup to a limit of 250,000 metrics by default (some organizations have a different limit). Metrics beyond\nthe limit are left out without any indication. Unpaginated requests in large organizations can also be\nslow or time out, and clients with response-size limits may fail or truncate the response.\nIf a request with `page[cursor]` returns `410 Gone`, the cursor has expired: restart from the first page\n(send `page[size]` without `page[cursor]`).\n\n- **Volumes**: `include=metric_volumes` adds the indexed and ingested volume of each metric. The volume is a\n  fixed one-hour value and is not affected by `window[seconds]`. Volumes are not returned inside `data`:\n  each metric with volume data has a `relationships.metric_volumes.data` reference, and the volumes\n  themselves are returned as `metric_volumes` resources in the top-level `included` array. To join them,\n  match `included[].id` to the `id` of `data[]` items with type `metrics`; both are the metric name.\n  `manage_tags` items in `data` repeat the same `id`, so skip them when joining. Metrics without volume\n  data, such as standard (non-custom) metrics, have no `metric_volumes` reference or entry.\n- **Top metrics by volume**: `sort=-metric_volumes.indexed_volume` together with `include=metric_volumes`\n  and `page[size]` (for example, `page[size]=20`) returns the metrics with the highest indexed volume\n  first. Sorting requires a paginated request.\n- **Volume for a family of metrics**: `filter[metrics.id]=http.request*` with `include=metric_volumes`\n  and `page[size]` returns volumes for every metric whose name starts with `http.request` (a value whose\n  only `*` is at the end is case-sensitive). A value without `*` matches names that contain it, ignoring\n  case.\n- **Unqueried metrics**: `filter[queried]=false` with `filter[queried][window][seconds]` (for example,\n  `2592000` for 30 days) and `page[size]` returns metrics that were not queried in that window.\n- **Metrics without a tag configuration**: `filter[configured]=false` with `page[size]` returns custom\n  metrics that have no Metrics without Limits&trade; tag configuration.\n- **Metric types**: if `filter[metric_type]` is omitted, metrics of all types are returned.\n\nExamples:\n- Top 20 metrics by indexed volume:\n  `GET /api/v2/metrics?include=metric_volumes&sort=-metric_volumes.indexed_volume&page[size]=20`\n- Metrics not queried in the last 30 days, with their volumes:\n  `GET /api/v2/metrics?filter[queried]=false&filter[queried][window][seconds]=2592000&include=metric_volumes&page[size]=1000`\n- Metrics without a tag configuration:\n  `GET /api/v2/metrics?filter[configured]=false&page[size]=1000`\n- Volumes for metrics whose name starts with `http.request`:\n  `GET /api/v2/metrics?filter[metrics.id]=http.request*&include=metric_volumes&page[size]=1000`\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`).\nPass them as standard URL query strings, URL-encoding the brackets if your client does not handle them.\nFor example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
+    "summary": "List all metrics with volumes and query activity"
   },
   "CreateDerivedMetric": {
     "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
@@ -4405,6 +4443,10 @@
     "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
     "summary": "Get a historical metrics configuration"
   },
+  "ListTagIndexingRuleExemptions": {
+    "description": "Returns explicit exemptions and legacy tag configurations that exclude metrics from tag indexing rules.\nYou can filter results by metric name prefix, whether an exemption is safe to remove, or the UUID of a matching\ntag indexing rule. You can sort results by metric name or by estimated change in indexed volume.",
+    "summary": "List tag indexing rule exemptions"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -4436,11 +4478,11 @@
     "request_schema_description": "Request body for updating a tag indexing rule."
   },
   "ListActiveMetricConfigurations": {
-    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.",
+    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.\n\nTo find which of many metrics are queried or not queried, use `GET /api/v2/metrics` with `filter[queried]`\ninstead of calling this endpoint for each metric.",
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).",
+    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).\nThis window only limits which tags are returned; it does not affect whether the metric is found.\n\nA `404 Not Found` response means that no metric with this exact name exists in your organization.\nMetric names must match exactly. Distribution metrics do not have suffixes such as `.avg` or `.count`,\nso use the base metric name.\n\nFor high-cardinality metrics, keep responses small with `filter[include_tag_values]=false`,\n`page[limit]`, and `filter[match]`.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -4448,7 +4490,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "GetMetricTagCardinalityDetails": {
@@ -4469,6 +4511,12 @@
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule exemption."
   },
+  "UpdateTagIndexingRuleExemption": {
+    "description": "Update the reason for an explicit tag indexing rule exemption. The exemption's `created_at` and\n`created_by_handle` values remain unchanged. Returns 404 when the metric has no explicit exemption or has\nonly a legacy tag configuration. Requires the `Manage Tags for Metrics` permission.",
+    "summary": "Update a tag indexing rule exemption",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a tag indexing rule exemption."
+  },
   "ListTagIndexingRulesForMetric": {
     "description": "List the tag indexing rules that apply to a given metric, sorted by `rule_order`.\nMatching is performed server-side using each rule's `metric_name_matches` glob patterns.",
     "summary": "List tag indexing rules for a metric"
@@ -4478,7 +4526,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually\nmeans that the metric has no tag configuration, but it is also returned when no metric with this name exists\nin your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
@@ -4494,8 +4542,32 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.",
+    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.\n\nTo get the last hour's indexed and ingested volumes for many metrics, use `GET /api/v2/metrics` with\n`include=metric_volumes` instead of calling this endpoint for each metric. Use this endpoint when you need\na longer look-back for a single metric.",
     "summary": "List distinct metric volumes by metric name"
+  },
+  "ListAiGatewayModelGroups": {
+    "description": "List model groups the user can view. The organization-wide policy has id \"default\" and explicit model, provider, and route selections. Missing or empty selections grant no organization-wide access. Its audience is fixed to the organization; it cannot be renamed or deleted. Named policies retain their access bindings. Requires configuration read permission; named policies also require view access.",
+    "summary": "List AI Gateway model groups"
+  },
+  "CreateAiGatewayModelGroup": {
+    "description": "Create an AI Gateway model group from a name and any combination of model catalog entries and routing rules, with optional fast-mode and reasoning limits and initial access bindings.",
+    "summary": "Create an AI Gateway model group",
+    "request_description": "",
+    "request_schema_description": "Request to create an AI Gateway model group."
+  },
+  "DeleteAiGatewayModelGroup": {
+    "description": "Delete a named model group. The organization-wide policy cannot be deleted. Requires configuration write permission and edit access to the group.",
+    "summary": "Delete an AI Gateway model group"
+  },
+  "GetAiGatewayModelGroup": {
+    "description": "Get a named policy or the explicit organization-wide policy by id \"default\". Requires configuration read permission; named policies also require view access. Provider selections cover current and future models and are returned separately from individual model selections.",
+    "summary": "Get an AI Gateway model group"
+  },
+  "UpdateAiGatewayModelGroup": {
+    "description": "Update a model group. For id \"default\", save membership and request options atomically with expected_revision. Empty selections grant no organization-wide access. Applicable authorized named policies override organization-wide request options; a rejected named-policy request cannot fall back to organization-wide options. The organization-wide audience is fixed and grants resource use only. Requires configuration write permission; named policies also require edit access.",
+    "summary": "Update an AI Gateway model group",
+    "request_description": "",
+    "request_schema_description": "Request to update an AI Gateway model group."
   },
   "GetModelLabArtifactContent": {
     "description": "Download the raw content of a Model Lab artifact file.",
@@ -4560,6 +4632,10 @@
   "PinModelLabRun": {
     "description": "Pin a Model Lab run for the current user.",
     "summary": "Pin a Model Lab run"
+  },
+  "ListAiGatewayModelsByCanonical": {
+    "description": "List all model catalog entries grouped by canonical model ID. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "summary": "List AI Gateway models by canonical ID"
   },
   "GetMonitorNotificationRules": {
     "description": "Returns a list of all monitor notification rules.",
@@ -4771,11 +4847,19 @@
     "request_description": "",
     "request_schema_description": "Represents a request to update an existing escalation policy, including the updated policy data."
   },
+  "ListOnCallPages": {
+    "description": "Retrieve a paginated list of On-Call Pages, optionally filtered by a search query and sorted by a field.",
+    "summary": "List On-Call Pages"
+  },
   "CreateOnCallPage": {
     "description": "Trigger a new On-Call Page.",
     "summary": "Create On-Call Page",
     "request_description": "",
     "request_schema_description": "Full request to trigger an On-Call Page."
+  },
+  "GetOnCallPage": {
+    "description": "Get the details of an On-Call Page.",
+    "summary": "Get On-Call Page"
   },
   "AcknowledgeOnCallPage": {
     "description": "Acknowledges an On-Call Page.",
@@ -4784,6 +4868,12 @@
   "EscalateOnCallPage": {
     "description": "Escalates an On-Call Page.",
     "summary": "Escalate On-Call Page"
+  },
+  "RerouteOnCallPage": {
+    "description": "Reroutes an On-Call Page.",
+    "summary": "Reroute On-Call Page",
+    "request_description": "",
+    "request_schema_description": "Full request to reroute an On-Call Page to a different team or user."
   },
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
@@ -5115,6 +5205,24 @@
     "request_description": "",
     "request_schema_description": "Request used to update an access token."
   },
+  "ListAiGatewayPolicies": {
+    "description": "List all routing policy documents for the organization. Pass user_id to filter by user scope.",
+    "summary": "List AI Gateway routing policies"
+  },
+  "UpsertAiGatewayPolicy": {
+    "description": "Create or replace the routing policy document for an inbound pattern. Pass user_id to scope the policy to a user.",
+    "summary": "Create or replace an AI Gateway routing policy",
+    "request_description": "",
+    "request_schema_description": "Request to create or replace a routing policy document."
+  },
+  "DeleteAiGatewayPolicy": {
+    "description": "Delete the routing policy document for a specific inbound pattern.",
+    "summary": "Delete an AI Gateway routing policy"
+  },
+  "GetAiGatewayPolicy": {
+    "description": "Get the routing policy document for a specific inbound pattern.",
+    "summary": "Get an AI Gateway routing policy"
+  },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
     "summary": "List findings"
@@ -5148,7 +5256,7 @@
     "request_schema_description": "Powerpacks are templated groups of dashboard widgets you can save from an existing dashboard and turn into reusable packs in the widget tray."
   },
   "ListProcesses": {
-    "description": "Get all processes for your organization.",
+    "description": "Get processes collected by Live Processes for your organization. One request covers a window of\nat most 1 hour that starts within the past 36 hours. To cover a longer period, make one request\nper hour. Older data is not available from this endpoint.\n\nWhen a process includes `identifying_tags`, pass them as `tag_filters` in a `process` data source\nquery to `/api/v2/query/scalar` or `/api/v2/query/timeseries` to get CPU or memory metrics for that\none process. If absent, don't substitute an empty filter, which would query all processes.",
     "summary": "Get all processes"
   },
   "SubmitProductAnalyticsEvent": {
@@ -5287,8 +5395,76 @@
     "description": "Get every generally available Datadog SKU, with the pricing and allotment metadata that\napplies to it, for the Datadog site serving the request. A SKU is generally available\nwhen it is billed through a metered commitment or through automatic billing; SKUs in any\nother phase are not returned.\n\nPrices, allotments, and pricing tiers are returned as they were in effect on\n`as_of_date`, which defaults to the date of the request. Prices are public list prices:\nthey do not reflect discounts, commitments, or negotiated rates on an account.\n\nEach SKU is a separate resource in `data`, identified by its SKU code, and sorted by\nthat code in ascending order. The whole catalog is returned in a single response, so\nthis endpoint is not paginated.",
     "summary": "List SKUs"
   },
+  "ListAiGatewayProviderModels": {
+    "description": "List live models available to a provider integration account that supports model discovery.",
+    "summary": "List models available from a provider integration"
+  },
+  "ListAiGatewayProviders": {
+    "description": "List the model providers connected to the organization. Credentials stay in each provider's integration account and are never returned. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "summary": "List AI Gateway providers"
+  },
+  "CreateAiGatewayProvider": {
+    "description": "Creating a provider requires `ai_gateway_config_write`. No provider View check applies before creation.\nCreate a provider and its initial model catalog. All discovered models are enabled; optional models are\nadded as manually managed entries. The slug is the immutable routing identifier.\nProvider and initial catalog rows are saved in one transaction. Initial sharing is unavailable:\nsupplying initial_bindings returns 503 with stage initial_permissions and outcome not_saved.\nA failed database commit can return 503 with stage database_commit and outcome unknown; check the\nprovider list before retrying. Creation without initial_bindings keeps normal unrestricted defaults.",
+    "summary": "Create an AI Gateway provider",
+    "request_description": "",
+    "request_schema_description": "Request to create an AI Gateway provider."
+  },
+  "DeleteAiGatewayProvider": {
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access. This also applies when force=true. Existing cascades remain and can affect policies the caller cannot edit. Delete a provider by ID. Providers used by routing rules return provider_in_use with HTTP 409 and the affected rules in error metadata. Retry with force=true to remove provider targets and delete rules left without targets. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.",
+    "summary": "Delete an AI Gateway provider"
+  },
+  "GetAiGatewayProvider": {
+    "description": "Get a provider by ID, including its routing slug, integration account, and cost multiplier. Credentials stay in the integration account and are never returned. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "summary": "Get an AI Gateway provider"
+  },
+  "UpdateAiGatewayProvider": {
+    "description": "Update a provider's display name or cost multiplier. Provider type, integration settings, and slug are immutable. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update an AI Gateway provider",
+    "request_description": "",
+    "request_schema_description": "Request to update an AI Gateway provider."
+  },
+  "ListAiGatewayModels": {
+    "description": "List all model catalog entries for a provider. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "summary": "List models for an AI Gateway provider"
+  },
+  "CreateAiGatewayModel": {
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nAdd a manually managed model catalog entry to a provider. Manually managed entries are not modified by\nautomatic catalog synchronization.",
+    "summary": "Add a model to an AI Gateway provider",
+    "request_description": "",
+    "request_schema_description": "Request to create a model catalog entry."
+  },
+  "BulkCreateAiGatewayModels": {
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nAdd multiple manually managed model catalog entries to a provider in a single request. Manually managed\nentries are not modified by automatic catalog synchronization.",
+    "summary": "Add multiple models to an AI Gateway provider",
+    "request_description": "",
+    "request_schema_description": "Request to create several model catalog entries."
+  },
+  "DeleteAiGatewayModel": {
+    "description": "Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.\nDelete a manually managed model catalog entry by its canonical model ID. Discovered entries are read-only.",
+    "summary": "Delete a model from an AI Gateway provider"
+  },
+  "UpdateAiGatewayModel": {
+    "description": "Update a manually managed model catalog entry. Discovered entries are read-only. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Update a model for an AI Gateway provider",
+    "request_description": "",
+    "request_schema_description": "Request to update a model catalog entry."
+  },
+  "DeleteAiGatewayModelPricing": {
+    "description": "Clear a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Delete a model pricing override"
+  },
+  "GetAiGatewayModelPricing": {
+    "description": "Get a custom provider model's pricing override and effective pricing source. Requires `ai_gateway_config_read` and provider View. Catalog and pricing metadata inherit provider access. Lists omit hidden entries; direct reads of hidden resources return 404.",
+    "summary": "Get a model pricing override"
+  },
+  "UpdateAiGatewayModelPricing": {
+    "description": "Set a custom provider model's pricing override. Requires `ai_gateway_config_write` and provider Edit. Models and pricing inherit provider access.",
+    "summary": "Set a model pricing override",
+    "request_description": "",
+    "request_schema_description": "Request body for setting model pricing."
+  },
   "GetPrunedTraceByID": {
-    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a pruned trace by ID"
   },
   "QueryScalarData": {
@@ -5302,6 +5478,34 @@
     "summary": "Query timeseries data across multiple products",
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
+  },
+  "ListAiGatewayRateLimits": {
+    "description": "List the organization's AI Gateway rate limits.",
+    "summary": "List AI Gateway rate limits"
+  },
+  "CreateAiGatewayRateLimit": {
+    "description": "Create a rate limit. All requests matching its scope share one allowance, and every matching rate limit applies. Returns 409 when another active rate limit has the same user, Team, and tags, or when the organization already has the maximum number of rate limits.",
+    "summary": "Create an AI Gateway rate limit",
+    "request_description": "",
+    "request_schema_description": "Request to create an AI Gateway rate limit."
+  },
+  "GetAiGatewayRateLimitUsage": {
+    "description": "Get live usage for the organization's rate limits. Returns requests and tokens counted in the rolling one-minute window and requests limited in the last 15 minutes for each enabled rate limit, plus `untracked` (traffic no enforced rate limit covers) and `total` (all gateway traffic).",
+    "summary": "Get AI Gateway rate limit usage"
+  },
+  "DeleteAiGatewayRateLimit": {
+    "description": "Archive a rate limit by ID. An archived rate limit no longer appears in lists or lookups, and its alert monitor is deleted.",
+    "summary": "Archive an AI Gateway rate limit"
+  },
+  "GetAiGatewayRateLimit": {
+    "description": "Get a rate limit by ID, including its scope, per-minute request and token limits, and whether it is enabled.",
+    "summary": "Get an AI Gateway rate limit"
+  },
+  "UpdateAiGatewayRateLimit": {
+    "description": "Update a rate limit. Only the attributes sent are changed. Scope stays editable, and changes never reset current usage. Returns 409 when the rule was changed concurrently or the new scope duplicates another rule.",
+    "summary": "Update an AI Gateway rate limit",
+    "request_description": "",
+    "request_schema_description": "Request to update an AI Gateway rate limit."
   },
   "BatchRowsQuery": {
     "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
@@ -5558,15 +5762,15 @@
     "request_schema_description": "Request body for toggling a report schedule."
   },
   "DeleteRestrictionPolicy": {
-    "description": "Deletes the restriction policy associated with a specified resource.",
+    "description": "Deletes the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_write` and standard restriction-policy authorization.\nDeleting a provider policy restores normal unrestricted defaults.",
     "summary": "Delete a restriction policy"
   },
   "GetRestrictionPolicy": {
-    "description": "Retrieves the restriction policy associated with a specified resource.",
+    "description": "Retrieves the restriction policy associated with a specified resource.\nFor AI Gateway provider policies, requires `ai_gateway_config_read`.",
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- AI Gateway Providers: `ai-gateway-provider`\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n- Network Path Configs: `network-path-config`\n\nAI Gateway provider policies control configuration and inherited model/catalog/pricing visibility.\nThe editor relation includes View. Providers have no Run relation; restriction policies don't affect inference.\nReading provider policies requires `ai_gateway_config_read`. Updating or deleting them requires\n`ai_gateway_config_write` and follows standard restriction-policy authorization, including\nadministrator recovery and self-lockout checks.\nProviders without a restriction policy retain the normal unrestricted defaults.\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nAI Gateway Providers        | `viewer`, `editor`\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`\nNetwork Path Configs        | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -5594,7 +5798,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.\n\nOmitting the `permissions` relationship from the request leaves the role's existing permissions\nunchanged. Sending `\"permissions\": {\"data\": []}` removes all permissions except restricted default\npermissions, which remain unless `default_permissions_opt_out` is `true`. Some restricted permissions\ncan only be excluded after Minimal Access Roles is enabled for the organization.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -5636,6 +5840,30 @@
     "summary": "Add a user to a role",
     "request_description": "",
     "request_schema_description": "Relationship to user."
+  },
+  "DeleteAiGatewayRoutingRule": {
+    "description": "Delete a routing rule. Referenced rules require force=true. Surviving tiers keep their ordering and weights. A deletion that would rewrite a surviving tier with an unknown ordering_issue fails with HTTP 409 and code routing_rule_unknown_ordering until that rule is replaced or deleted.",
+    "summary": "Delete an AI Gateway routing rule"
+  },
+  "ListAiGatewayRoutingRules": {
+    "description": "List all routing rules for the organization.",
+    "summary": "List AI Gateway routing rules"
+  },
+  "CreateAiGatewayRoutingRule": {
+    "description": "Create an organization-owned routing rule. Data capture overrides are managed independently. Each tier has an ordering, which defaults to configured. A weighted_affinity tier distributes first-choice assignments by relative target weights (1 to 10000, default 1) and accepts only distinct model targets with an explicit provider. Weights need not total 100. Configured tiers must omit weights or set them to null.",
+    "summary": "Create an AI Gateway routing rule",
+    "request_description": "",
+    "request_schema_description": "Request to create an AI Gateway routing rule."
+  },
+  "UpdateAiGatewayRoutingRule": {
+    "description": "Replace a routing rule's tiers. The slug is immutable; data capture is managed independently. This is a full replacement: omitted or null ordering resets the tier to configured, and omitted or null weights in a weighted_affinity tier reset to 1. Omitted or null reasoning_level clears a model destination's reasoning override. Replacing a rule repairs tiers reported with an ordering_issue.",
+    "summary": "Replace an AI Gateway routing rule",
+    "request_description": "",
+    "request_schema_description": "Request to replace an AI Gateway routing rule."
+  },
+  "GetAiGatewayRoutingRule": {
+    "description": "Get a routing rule by its organization-unique slug.",
+    "summary": "Get an AI Gateway routing rule"
   },
   "AggregateRUMEvents": {
     "description": "The API endpoint to aggregate RUM events into buckets of computed metrics and timeseries.",
@@ -5751,29 +5979,47 @@
     "request_description": "The definition of the RUM configuration to create.",
     "request_schema_description": "Request body for creating the RUM configuration."
   },
+  "ListRUMArchiveConfigs": {
+    "description": "Get the list of archive configurations for your organization.",
+    "summary": "List archive configurations"
+  },
+  "DeleteRUMArchiveConfig": {
+    "description": "Delete the archive configuration for a RUM application. Archived and recovered session data is not deleted.",
+    "summary": "Delete an archive configuration"
+  },
+  "GetRUMArchiveConfig": {
+    "description": "Get the archive configuration for a RUM application.",
+    "summary": "Get an archive configuration"
+  },
+  "UpdateRUMArchiveConfig": {
+    "description": "Create or update the archive configuration for a RUM application. The application ID in the path must match `data.id`. Disabling archiving does not delete archived sessions.",
+    "summary": "Create or update an archive configuration",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
   "ListRumMetrics": {
-    "description": "Get the list of configured RUM-based metrics with their definitions.",
+    "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
     "summary": "Get all RUM-based metrics"
   },
   "CreateRumMetric": {
-    "description": "Create a metric based on your organization's RUM data.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Create a metric based on your organization's RUM data.\nThe metric name is set in `data.id`, is unique within your organization, and cannot be changed after creation.\nThe `event_type`, `compute`, and `uniqueness` settings cannot be changed after creation either. Only `filter`, `group_by`, and `compute.include_percentiles` can be changed with `UpdateRumMetric`.\n`uniqueness` is required when `event_type` is `session` or `view`, and must be omitted for any other event type.\nWhen `aggregation_type` is `distribution`, `include_percentiles` is required. When it is `count`, `include_percentiles` and `path` must be omitted.\nReturns the created RUM-based metric when the request is successful.\nThe request returns a `409 Conflict` error if a metric with the same name already exists.",
     "summary": "Create a RUM-based metric",
     "request_description": "The definition of the new RUM-based metric.",
     "request_schema_description": "The new RUM-based metric body."
   },
   "DeleteRumMetric": {
-    "description": "Delete a specific RUM-based metric from your organization.",
+    "description": "Delete a specific RUM-based metric from your organization.\nMetric data that was already generated is not deleted. Deleting a metric cannot be undone.",
     "summary": "Delete a RUM-based metric"
   },
   "GetRumMetric": {
-    "description": "Get a specific RUM-based metric from your organization.",
+    "description": "Get a specific RUM-based metric from your organization.\nThe `metric_id` is the metric name returned in `data.id` by `ListRumMetrics` and `CreateRumMetric`.",
     "summary": "Get a RUM-based metric"
   },
   "UpdateRumMetric": {
-    "description": "Update a specific RUM-based metric from your organization.\nReturns the RUM-based metric object from the request body when the request is successful.",
+    "description": "Update a specific RUM-based metric from your organization.\nOnly `filter`, `group_by`, and `compute.include_percentiles` can be updated. `event_type`, `uniqueness`, `compute.aggregation_type`, `compute.path`, and the metric name are immutable. To change them, delete the metric and create a new one.\nOmitted attributes keep their current value. When provided, `filter.query` replaces the whole filter query (an empty query is ignored) and `group_by` replaces the whole list of group by rules.\n`data.id` is required and must match the `metric_id` path parameter, otherwise the request returns a `409 Conflict` error.\nThe request also returns a `409 Conflict` error when `compute.include_percentiles` is set on a metric whose `aggregation_type` is not `distribution`.\nReturns the updated RUM-based metric when the request is successful.",
     "summary": "Update a RUM-based metric",
     "request_description": "New definition of the RUM-based metric.",
-    "request_schema_description": "The new RUM-based metric body."
+    "request_schema_description": "The RUM-based metric update body."
   },
   "DeleteRumQuotaConfig": {
     "description": "Delete the RUM retention quota configuration for a given scope.",
@@ -5886,6 +6132,38 @@
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
+  },
+  "GetRUMRecoverySessionCount": {
+    "description": "Return the full estimated number of recoverable sessions and the configured maximum per batch. The estimate is not capped at that maximum. This endpoint does not create a recovery request. Narrow the query or time range if the estimate exceeds max_recoverable_sessions. Creation checks a fresh estimate and returns 400 if it exceeds the configured maximum.",
+    "summary": "Estimate recoverable sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "ListRUMRecoveryBatchRequests": {
+    "description": "List batch recovery requests for your organization. Set `type=batch`. Optional `from` and `to` bounds filter request creation time; `query` filters the queries stored on recovery requests.\nA filtered page can be empty or contain fewer than `limit` results and still include `meta.next_cursor`. Continue until the cursor is absent, keeping the filters unchanged between pages.",
+    "summary": "List batch recovery requests"
+  },
+  "CreateRUMRecoveryRequest": {
+    "description": "Start targeted or query-based batch recovery. Use the returned `data.id` to poll the recovery request for progress. Batch creation checks a fresh recoverable-session estimate against the configured maximum (100,000 by default), accepting estimates equal to the maximum. Use the count operation to check the current maximum; creation can still reject a changed estimate. Narrow the query or time range if the maximum is exceeded.\n\nCreation is not idempotent. After an uncertain response, check session search or batch listing before retrying.",
+    "summary": "Create a recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "GetRUMRecoveryRequest": {
+    "description": "Get progress for a targeted or batch recovery request. A `COMPLETED` request can include failed sessions; check individual session statuses for targeted recovery.",
+    "summary": "Get recovery request progress"
+  },
+  "UpdateRUMRecoveryBatchRequest": {
+    "description": "Cancel pending work for a batch recovery request. Work already in progress can finish, and recovered data is not removed. Requests in a terminal state return `409`.",
+    "summary": "Cancel a batch recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "SearchRUMArchiveSessions": {
+    "description": "Search archived RUM sessions. Use `meta.page.next_cursor` to retrieve the next page.",
+    "summary": "Search archived sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
@@ -6395,6 +6673,32 @@
     "request_description": "",
     "request_schema_description": "Request to set or clear the manual severity override of security findings."
   },
+  "ListOwnershipInferences": {
+    "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
+    "summary": "List ownership inferences for a resource"
+  },
+  "ListOwnershipHistory": {
+    "description": "List inference history entries for a resource across all owner types, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership inference history for a resource"
+  },
+  "GetOwnershipInference": {
+    "description": "Get the current ownership inference for a resource for a specific owner type.\n\nThis endpoint supports ETag-based caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the inference has not changed.",
+    "summary": "Get an ownership inference by owner type"
+  },
+  "GetOwnershipEvidence": {
+    "description": "Get the evidence versions backing the current ownership inference for a resource and owner type.\n\nThis endpoint supports weak ETag caching. Pass the previously returned `ETag` value in the `If-None-Match` request header to receive a `304 Not Modified` response when the evidence has not changed.",
+    "summary": "Get the evidence for an ownership inference"
+  },
+  "CreateOwnershipFeedback": {
+    "description": "Submit feedback on the current ownership inference for a resource and owner type. Valid actions are `confirm`, `reject`, `correct`, and `persist`.\n\nThe request must include the current inference `checksum` in `inference_checksum`. If the checksum does not match the current inference state, the endpoint returns `409 Conflict`.\n\nWhen `action` is `correct`, `corrected_owner_handle` and `corrected_owner_type` are required.",
+    "summary": "Submit feedback on an ownership inference",
+    "request_description": "",
+    "request_schema_description": "The request body for submitting ownership feedback."
+  },
+  "ListOwnershipHistoryByOwnerType": {
+    "description": "List inference history entries for a resource filtered by owner type, ordered from most recent to oldest. Uses cursor-based pagination.",
+    "summary": "List ownership history by owner type"
+  },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\nThe `filter[asset_type]` parameter is required for initial requests (when no `page[token]` is provided).\nSubsequent pages encode the asset type in the pagination token, so `filter[asset_type]` is not required\nfor paginated requests. Mixing infrastructure asset types (`Host`, `HostImage`, `Image`, `ServerlessFunction`)\nwith code asset types (`Repository`, `Service`) in the same request is not supported and returns a 400 error.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
     "summary": "List assets SBOMs"
@@ -6494,7 +6798,7 @@
     "summary": "List batch migrations"
   },
   "CreateSecurityMonitoringBatchMigration": {
-    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.",
+    "description": "Create a batch migration in the `draft` status, together with 1 to 100 initial\nresources. Each resource holds one source rule to translate into a Cloud SIEM detection\nrule. To load more rules, add them with the add resources endpoint before starting the\nbatch migration. A batch migration can hold up to 1000 resources. The response does not\ninclude the created resources: list the resources of the batch migration to retrieve them.\nAlternatively, use the start-a-rule-proposal endpoint to get a single proposed rule.",
     "summary": "Create a batch migration",
     "request_description": "",
     "request_schema_description": "Request to create a batch migration."
@@ -6823,6 +7127,16 @@
     "request_description": "",
     "request_schema_description": "Payload for bulk converting security monitoring rules to Terraform."
   },
+  "StartSecurityMonitoringRuleProposal": {
+    "description": "Start generating a proposed Cloud SIEM detection rule from a natural-language\ndescription, or from an SPL or KQL rule. The proposal is based on your organization's\nlog sources, log fields, and existing detection rules. When logs from the matching\nsource are available, the proposed query is tested against your recent logs.\n\nThe proposed rule is generated asynchronously. This endpoint returns a proposal `id`\nwith the status `pending`. To get the proposed rule, pass this `id` to the get-a-rule-proposal\nendpoint and poll the endpoint until the status is `completed` or `failed`. A proposal\nusually takes a few minutes, and up to 10 minutes.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To translate\nmany rules at once, use batch migrations instead.",
+    "summary": "Start a rule proposal",
+    "request_description": "",
+    "request_schema_description": "Request to start a rule proposal."
+  },
+  "GetSecurityMonitoringRuleProposal": {
+    "description": "Get the status of a rule proposal started with the start-a-rule-proposal endpoint.\nWhile the status is `pending` or `in_progress`, the proposed rule is still being\ngenerated. Poll this endpoint again later. If the status is `completed`, the response's `rule` field contains\nthe proposed Cloud SIEM detection rule. If the status is `failed`, the response's `error` field contains\nthe reason a rule could not be generated.\n\nThis endpoint does not create or modify any detection rules in Cloud SIEM. To create the\nproposed rule, use the create-a-detection-rule endpoint.",
+    "summary": "Get a rule proposal"
+  },
   "TestSecurityMonitoringRule": {
     "description": "Test a rule.",
     "summary": "Test a rule",
@@ -6886,6 +7200,18 @@
   "DeleteSampleLogGenerationSubscription": {
     "description": "Unsubscribe from sample log generation for a Cloud SIEM content pack.\nAfter unsubscribing, no more sample logs are generated for the requested content pack.\n\n**Availability**: this endpoint is restricted to Cloud SIEM trial organizations on an\neligible pricing model. Non-trial orgs receive `403 Forbidden`, the feature flag may also reject\nrequests with `400 Bad Request`, and legacy pricing tiers receive a response with `status: not_available`.",
     "summary": "Unsubscribe from sample log generation"
+  },
+  "ListSecurityAgentInvestigations": {
+    "description": "List Bits Security Analyst investigations.\n\nWithout `filter[signal_id]`, returns the latest investigation of each signal, filtered, sorted, and paginated.\nWith `filter[signal_id]`, returns every investigation of that signal, newest first. When the signal has no\ninvestigation, the first page carries `meta.reason`, which says why.",
+    "summary": "List Bits Security Analyst investigations"
+  },
+  "CountSecurityAgentInvestigations": {
+    "description": "Count completed Bits Security Analyst investigations by the values of one field. Buckets are sorted by\nascending count. With `field=entity` or `field=signal_source`, an investigation counts in the bucket of\neach of its entities or sources.",
+    "summary": "Count Bits Security Analyst investigations"
+  },
+  "GetSecurityAgentInvestigation": {
+    "description": "Get a Bits Security Analyst investigation by its ID, with its verdict, conclusion, evidence, steps, and\nresponse suggestions. While the investigation is running, the response has a `Retry-After` header.",
+    "summary": "Get a Bits Security Analyst investigation"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
@@ -7186,37 +7512,23 @@
     "summary": "Restore source maps"
   },
   "GetServiceRepositoryInfo": {
-    "description": "Returns the repository URL and commit SHA associated with a given service and version.",
+    "description": "Returns the repository URL and commit SHA associated with a debug ID or a given service and version.\nProvide either `debug_id`, or both `service` and `version`. When `debug_id` is set, it takes precedence.",
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
   },
-  "GetSPARecommendationsV2": {
-    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA recommendations v2",
-    "request_description": "",
-    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a pre-computed shard."
-  },
-  "GetSPARecommendations": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
-    "summary": "Get SPA Recommendations"
-  },
-  "GetSPARecommendationsWithShard": {
-    "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and shard identifier, and SPA returns structured recommendations for driver and executor resources.",
-    "summary": "Get SPA Recommendations with a shard parameter"
-  },
   "AggregateSpans": {
-    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `300` requests per hour.",
+    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\nA request can generate at most 10,000 groups across all `group_by` entries, or 400,000 groups\nincluding time buckets when a `timeseries` compute is used. Set `limit` on each `group_by` entry\nto stay within these bounds. Requests over long time ranges or with many groups are more resource-intensive\nand can fail. To reduce load, narrow the time range or lower the `limit` on each `group_by` entry.",
     "summary": "Aggregate spans",
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of aggregated spans from your organization."
   },
   "ListSpansGet": {
-    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
     "summary": "Get a list of spans"
   },
   "ListSpans": {
-    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.\nThis endpoint is rate limited to `300` requests per hour.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.\nThis endpoint is rate limited to `50` requests per minute per organization.\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api",
     "summary": "Search spans",
     "request_description": "",
     "request_schema_description": "The request for a spans list."
@@ -7907,6 +8219,10 @@
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
+  "ListTeamHierarchyMembers": {
+    "description": "List the direct and inherited members of a team, deduplicated by user.\nMembers of descendant teams are included unless `filter[is_direct_only]` is true.\nDatadog support users are always excluded.\n\nUse `page[number]` and `page[size]` to paginate through the results.\nInvalid query parameters return a JSON:API error with status 400.\nInvalid or unknown team UUIDs return status 404.",
+    "summary": "Get team hierarchy members"
+  },
   "GetTeamMemberships": {
     "description": "Get a paginated list of members for a team",
     "summary": "Get team memberships"
@@ -7975,8 +8291,26 @@
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
   },
   "GetTraceByID": {
-    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a trace by ID"
+  },
+  "ListTemporaryGrantRequests": {
+    "description": "List all request statuses within the authenticated organization. Filter by pending status for the review queue. Requires Billing Edit, including for reads. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "List organization temporary grant requests"
+  },
+  "GetTemporaryGrantRequest": {
+    "description": "Read an organization request, justification, decision, and linked grant state. Requires Billing Edit. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get an organization temporary grant request"
+  },
+  "UpdateTemporaryGrantRequest": {
+    "description": "Approve or deny the submitted terms, which are immutable. Approval atomically writes the grant, audit record, and request decision. An expired request can't be approved. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Decide a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Approve or deny a pending request."
+  },
+  "DeleteRequestedTemporaryGrant": {
+    "description": "Revoke only the grant that's still associated with this approved request. The request and audit history remain. A stale request can't revoke a replacement grant. Requires the Billing Edit permission. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "Revoke a requested temporary grant"
   },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
@@ -8019,7 +8353,7 @@
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
-    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.",
+    "description": "Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.\nOtherwise, a quota is created only when `usage_limit` and `enforced` are provided.\nFor the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can\naccompany an immediate limit or update an existing quota by itself.\nScheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.\n\n### Quota namespaces and scope keys\n\nThe `quota_namespace` path parameter selects the product whose usage quotas are managed. Each namespace\nsupports its own scope keys, described below. Omit `scope` for the organization-wide quota.\n\n#### `ai_credits` scope keys\n\nEach item's `scope` contains exactly one of the following keys.\n\n**`user_handle`**\n\n- **Value:** The handle of a user, for example `jane@example.com`, or `\"*\"` for the default quota applied to\n  users without a specific quota. User handles are returned in the `data[].attributes.handle` field by the\n  [Users API](https://docs.datadoghq.com/api/latest/users/#list-all-users).\n- **Validation:** A specific handle must identify an existing user in the caller's organization when\n  `include_descendants` is false. When `include_descendants` is true, the handle must exist in the caller's\n  organization or in at least one targeted descendant organization. The quota is then applied only to the\n  organizations where the handle exists, and the item fails only if the handle exists in none of them.\n\n**`role_uuid`**\n\n- **Value:** The UUID of a role, for example `12345678-1234-1234-1234-123456789012`. `\"*\"` is not accepted\n  because there is no default role quota. Role UUIDs are returned in the `data[].id` field by the\n  [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles).\n- **Validation:** The role must exist in the caller's organization. Role UUIDs are unique, so\n  `include_descendants` has no effect on a `role_uuid` scope: the role is validated against the caller's\n  organization only.",
     "summary": "Create or update usage quotas",
     "request_description": "The usage quotas to create or update.",
     "request_schema_description": "A JSON:API bulk request containing an array of usage quota resources rather than a single resource."
@@ -8041,6 +8375,24 @@
   "GetUsageSummaryAvailableFields": {
     "description": "List the field names returned by `GET /api/v1/usage/summary` at each of its\nthree response levels. Each list contains every key the data endpoint\nemits—both typed fields declared in the OpenAPI spec and untyped keys\nexposed through `additionalProperties` (the latter used for billing\ndimensions and usage types added after the v1 schema freeze).\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\nGo example:\n\n```go\nfields, _, err := api.GetUsageSummaryAvailableFields(ctx)\nattr := fields.Data.GetAttributes()\n\n// resp is the *UsageSummaryResponse returned by api.GetUsageSummary(ctx, ...)\n// Layer 1: UsageSummaryResponse\nfor _, key := range attr.GetResponseFields() {\n    if val, ok := resp.AdditionalProperties[key]; ok {\n        fmt.Println(key, val.(json.Number))\n    }\n}\n// Layer 2: UsageSummaryDate (per month)\nfor _, date := range resp.GetUsage() {\n    for _, key := range attr.GetDateFields() {\n        if val, ok := date.AdditionalProperties[key]; ok {\n            fmt.Println(key, val.(json.Number))\n        }\n    }\n    // Layer 3: UsageSummaryDateOrg (per org per month)\n    for _, org := range date.GetOrgs() {\n        for _, key := range attr.GetDateOrgFields() {\n            if val, ok := org.AdditionalProperties[key]; ok {\n                fmt.Println(key, val.(json.Number))\n            }\n        }\n    }\n}\n```",
     "summary": "Get available fields for usage summary"
+  },
+  "ListMyTemporaryGrantRequests": {
+    "description": "List the authenticated user's own requests, including decided requests. Other users' requests are never included. Requires an authenticated human user. Service-account credentials aren't supported. Request status remains approved after the grant's expiry, revocation, or replacement.",
+    "summary": "List your temporary grant requests"
+  },
+  "CreateTemporaryGrantRequest": {
+    "description": "Request a temporary increase to your monthly AI credit limit. Set `total` to the new monthly limit you need, in whole credits, not the number of credits to add. Include a justification and, optionally, an expiry. If you omit the expiry, the grant ends at the next UTC month boundary. A user with the Billing Edit permission approves or denies the request. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Create a temporary grant request",
+    "request_description": "",
+    "request_schema_description": "Create a request for the authenticated human user."
+  },
+  "DeleteTemporaryGrantRequest": {
+    "description": "Cancel a pending request that you own. The request history is kept, and no grant is created or revoked. Requires an authenticated human user. Service-account credentials are unsupported.",
+    "summary": "Cancel your temporary grant request"
+  },
+  "GetMyTemporaryGrantRequest": {
+    "description": "Read an owned request, its decision, and its linked grant state. Requires an authenticated human user. Service-account credentials are unsupported. Request status remains approved after expiry, revocation, or replacement.",
+    "summary": "Get your temporary grant request"
   },
   "GetUsageAttributionTypes": {
     "description": "Get usage attribution types.",
@@ -8153,6 +8505,114 @@
     "summary": "Update a widget",
     "request_description": "Widget request body. The `definition` object's required fields vary\nby `widget.definition.type`; see `CreateWidget` above for a complete\nworked payload. Update is a full replacement of the widget definition.",
     "request_schema_description": "Request body for creating or updating a widget."
+  },
+  "ListAWSCloudAuthIntakeMappings": {
+    "description": "List AWS cloud authentication intake mappings configured for the organization.",
+    "summary": "List AWS cloud authentication intake mappings"
+  },
+  "CreateAWSCloudAuthIntakeMapping": {
+    "description": "Create an AWS cloud authentication intake mapping to authorize an AWS ARN pattern for Agent authentication. The AWS account must already be integrated with Datadog, and managed API key rotation must be enabled for the organization. Patterns that conflict with existing intake or persona mappings are rejected.",
+    "summary": "Create an AWS cloud authentication intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication intake mapping."
+  },
+  "DeleteAWSCloudAuthIntakeMapping": {
+    "description": "Delete an AWS cloud authentication intake mapping by ID.",
+    "summary": "Delete an AWS cloud authentication intake mapping"
+  },
+  "GetAWSCloudAuthIntakeMapping": {
+    "description": "Get an AWS cloud authentication intake mapping by ID.",
+    "summary": "Get an AWS cloud authentication intake mapping"
+  },
+  "ListAWSCloudAuthPersonaMappings": {
+    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
+    "summary": "List AWS cloud authentication persona mappings"
+  },
+  "CreateAWSCloudAuthPersonaMapping": {
+    "description": "Create an AWS cloud authentication persona mapping. This endpoint associates an AWS IAM principal with a Datadog user.",
+    "summary": "Create an AWS cloud authentication persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create an AWS cloud authentication persona mapping"
+  },
+  "DeleteAWSCloudAuthPersonaMapping": {
+    "description": "Delete an AWS cloud authentication persona mapping by ID. This removes the association between an AWS IAM principal and a Datadog user.",
+    "summary": "Delete an AWS cloud authentication persona mapping"
+  },
+  "GetAWSCloudAuthPersonaMapping": {
+    "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
+    "summary": "Get an AWS cloud authentication persona mapping"
+  },
+  "ListGitHubCloudAuthIntakeMappings": {
+    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
+    "summary": "List GitHub cloud authentication intake mappings"
+  },
+  "CreateGitHubCloudAuthIntakeMapping": {
+    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Create a GitHub cloud auth intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
+  },
+  "DeleteGitHubCloudAuthIntakeMapping": {
+    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
+    "summary": "Delete a GitHub cloud auth intake mapping"
+  },
+  "GetGitHubCloudAuthIntakeMapping": {
+    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Get a GitHub cloud authentication intake mapping"
+  },
+  "ListGitHubCloudAuthPersonaMappings": {
+    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
+    "summary": "List GitHub cloud authentication persona mappings"
+  },
+  "CreateGitHubCloudAuthPersonaMapping": {
+    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Create a GitHub cloud auth persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
+  },
+  "DeleteGitHubCloudAuthPersonaMapping": {
+    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
+    "summary": "Delete a GitHub cloud auth persona mapping"
+  },
+  "GetGitHubCloudAuthPersonaMapping": {
+    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Get a GitHub cloud authentication persona mapping"
+  },
+  "ListOIDCCloudAuthPersonaMappings": {
+    "description": "List all Custom OIDC persona mappings in the organization.",
+    "summary": "List all Custom OIDC persona mappings"
+  },
+  "CreateOIDCCloudAuthPersonaMapping": {
+    "description": "Map token claims from a registered Custom OIDC provider to a Datadog user or service account. The caller must be authorized to map to the target account.",
+    "summary": "Create a Custom OIDC persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request to create a Custom OIDC persona mapping."
+  },
+  "DeleteOIDCCloudAuthPersonaMapping": {
+    "description": "Delete a Custom OIDC persona mapping.",
+    "summary": "Delete a Custom OIDC persona mapping"
+  },
+  "GetOIDCCloudAuthPersonaMapping": {
+    "description": "Get a Custom OIDC persona mapping by UUID.",
+    "summary": "Get a Custom OIDC persona mapping"
+  },
+  "ListOIDCCloudAuthProviders": {
+    "description": "List all Custom OIDC providers in the organization.",
+    "summary": "List all Custom OIDC providers"
+  },
+  "CreateOIDCCloudAuthProvider": {
+    "description": "Register an OIDC issuer, signing-key discovery configuration, and accepted audiences. Provider names and issuer URLs must be unique within the organization.",
+    "summary": "Create a Custom OIDC provider",
+    "request_description": "",
+    "request_schema_description": "Request to create a Custom OIDC provider."
+  },
+  "DeleteOIDCCloudAuthProvider": {
+    "description": "Delete a Custom OIDC provider. Delete all persona and intake mappings referencing it first; otherwise the request returns a conflict.",
+    "summary": "Delete a Custom OIDC provider"
+  },
+  "GetOIDCCloudAuthProvider": {
+    "description": "Get a Custom OIDC provider by UUID.",
+    "summary": "Get a Custom OIDC provider"
   },
   "ListWorkflows": {
     "description": "List all workflows in your organization. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

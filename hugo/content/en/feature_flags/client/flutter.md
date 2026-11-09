@@ -63,7 +63,7 @@ Configure the provider once during application startup. Set the evaluation conte
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart and Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags/datadog_flags.dart';
 import 'package:openfeature_dart_client_sdk/openfeature_dart_client_sdk.dart';
 
@@ -103,7 +103,7 @@ try {
 }
 
 final enabled = client.getBooleanValue('checkout.enabled', false);
-{{< /code-block >}}
+```
 
 `clientToken`, `env`, and `site` are required for live assignments. Use the site that matches the Datadog organization. `applicationId`, `service`, and `version` are optional telemetry fields.
 
@@ -113,7 +113,7 @@ final enabled = client.getBooleanValue('checkout.enabled', false);
 
 Initialize `datadog_flutter_plugin` for RUM, then configure the OpenFeature provider. Add `DatadogRumHook` once to each OpenFeature client that sends evaluations to RUM.
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 import 'package:openfeature_dart_client_sdk/openfeature_dart_client_sdk.dart';
@@ -163,7 +163,7 @@ try {
 }
 
 final enabled = client.getBooleanValue('checkout.enabled', false);
-{{< /code-block >}}
+```
 
 Configure the provider explicitly. It does not derive its configuration or evaluation context from the Flutter SDK. Keep the token, environment, site, and optional telemetry fields consistent across both configurations.
 

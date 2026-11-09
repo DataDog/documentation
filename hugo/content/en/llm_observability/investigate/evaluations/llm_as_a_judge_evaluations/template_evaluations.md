@@ -26,6 +26,8 @@ aliases:
 
 Datadog provides LLM-as-a-judge templates for the following evaluators: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluator. 
 
+For audio and image evaluators, Datadog also provides the Transcription Accuracy, Audio Quality, User Interruptions, Vocal Affect, Explicit Content, and Sensitive Imagery templates. See [Image and Audio Evaluators][27].
+
 For best practices and details on how to create LLM-as-a-judge evaluators, read [Create a custom LLM-as-a-judge evaluator][17].
 
 To select a template:
@@ -414,3 +416,4 @@ result = triage_agent.run_sync(
 [24]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#tool-selection
 [25]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/template_evaluations#hallucination
 [26]: /llm_observability/instrument/sdk?tab=python#prompt-tracking
+[27]: /llm_observability/investigate/evaluations/llm_as_a_judge_evaluations/image_and_audio_evaluations#templates

@@ -18,6 +18,7 @@ further_reading:
 aliases:
   - /tracing/error_tracking/executional_context
   - /tracing/error_tracking/execution_replay/
+  - /ide_plugins/vscode/exception_replay/
 ---
 
 <div class="alert alert-info">
@@ -55,8 +56,12 @@ below for details.
 |---|---|---|---|
 | **How to Enable** | Enabled by default | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
+| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.57.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
+
+**Note**: For .NET, default enablement of Exception Replay depends on your SDK version:
+- **3.57.0 and later**: Exception Replay is enabled by default, including for services that have other Remote Configuration settings applied, such as Fleet Automation SDK settings or enabling Live Debugger. You can also enable or disable Exception Replay by environment.
+- **3.43.0** to **3.56.x** : Exception Replay is enabled by default only for service that have no other Remote Configuration settings applied.
 
 To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
 desired environment or service, and toggle it to {{< ui >}}Enabled{{< /ui >}}.

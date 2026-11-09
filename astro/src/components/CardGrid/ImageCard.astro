@@ -1,0 +1,67 @@
+---
+import styles from "./ImageCard.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { buildImageUrl } from "@lib/images/buildImageUrl";
+import { DEFAULT_IMAGE_WIDTH, type ImageCardProps } from "./cardGridTypes";
+
+type Props = ImageCardProps;
+
+const cl = classListFactory(styles);
+
+const {
+  id,
+  href,
+  src,
+  alt = "",
+  title,
+  subtitle,
+  tooltip,
+  image_width,
+} = Astro.props;
+
+const imageWidth = image_width ?? DEFAULT_IMAGE_WIDTH;
+const image = src ? buildImageUrl(src) : null;
+
+// Hugo renders a titled image card's title as a paragraph and a title-only
+// card's as an h5 (image-card.html:15). Preserved so the visual weight of a
+// text-only grid matches the Hugo site.
+const TitleElement = src ? "p" : "h5";
+
+// The tooltip is the anchor's accessible name only when the card has no
+// visible title. An aria-label OVERRIDES visible text, so labelling a titled
+// card with its tooltip would leave the visible title unreachable to screen
+// reader and voice control users (WCAG 2.5.3, Label in Name). Hugo's `title`
+// attribute was advisory and never replaced the accessible name.
+// An empty tooltip is dropped too: a bare `aria-label` would strip the
+// anchor's accessible name entirely, which is worse than omitting it.
+const ariaLabel = !title && tooltip ? tooltip : undefined;
+---
+
+<a
+  id={id}
+  class={cl("image-card", title && "image-card--has-title")}
+  href={href}
+  aria-label={ariaLabel}
+>
+  <div class={cl("image-card__body")}>
+    {
+      image && (
+        <picture>
+          <img
+            class={cl("image-card__image")}
+            srcset={image.srcset}
+            width={imageWidth}
+            loading="lazy"
+            alt={alt}
+          />
+        </picture>
+      )
+    }
+    {
+      title && (
+        <TitleElement class={cl("image-card__title")}>{title}</TitleElement>
+      )
+    }
+    {subtitle && <small class={cl("image-card__subtitle")}>{subtitle}</small>}
+  </div>
+</a>

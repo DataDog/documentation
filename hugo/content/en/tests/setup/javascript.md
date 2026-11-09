@@ -682,27 +682,31 @@ Test Optimization can upload test failure screenshots and videos from Cypress, P
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. Use them to inspect browser state at the time of failure.
+Test Optimization uploads screenshots that Cypress captures when a test fails. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
 Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-When `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` is unset, Test Optimization automatically uploads failure screenshots if [`screenshotOnRunFailure`][3] is `true` in your Cypress configuration (the default). Set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of this setting.
+[`screenshotOnRunFailure`][3] defaults to `true`, so Cypress captures failure screenshots by default. Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
 
-To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. This does not change Cypress's screenshot capture setting.
+- Unset (default): Upload the failure screenshots that Cypress captures.
+- `1`: Capture and upload failure screenshots, even if `screenshotOnRunFailure` is `false`.
+- `0`: Don't upload screenshots. Cypress may still capture them according to your configuration.
 
-### Upload failed test videos
+### Upload test failure videos
 
-When enabled, Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
+Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-video-videos-tab.png" alt="A Cypress failed test video displayed in the Videos tab of the Test Optimization test suite details page." style="width:100%;" >}}
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-video-player.png" alt="The video player displaying a Cypress failed test video." style="width:100%;" >}}
 
-When `DD_TEST_FAILURE_VIDEOS_ENABLED` is unset, Test Optimization automatically uploads videos from failed test suites if [`video`][4] or `e2e.video` is `true` in your Cypress configuration. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1` to enable recording and uploads regardless of this setting.
+To record videos, set [`video`][4] to `true` in your Cypress configuration. Use `DD_TEST_FAILURE_VIDEOS_ENABLED` to control uploads:
 
-To disable video uploads, set `DD_TEST_FAILURE_VIDEOS_ENABLED=0`. This does not change Cypress's video recording setting.
+- Unset (default): Upload the videos that Cypress records for failed test suites.
+- `1`: Record and upload videos from failed test suites, even if `video` in Cypress is `false`.
+- `0`: Don't upload videos. Cypress may still record them according to your configuration.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
@@ -714,35 +718,37 @@ To disable video uploads, set `DD_TEST_FAILURE_VIDEOS_ENABLED=0`. This does not 
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
+Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
 Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.21.0 or later][2] on the v6 release line.
 
-When `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` is unset, Test Optimization automatically uploads failure screenshots if [`screenshot`][3] under `use` in your Playwright configuration is set to one of the following values:
+Playwright doesn't capture screenshots by default. To capture them, set [`screenshot`][3] under `use` in your Playwright configuration to one of the following values:
 
-- `'on'`: Capture screenshot after each test.
-- `'only-on-failure'`: Capture screenshot after each test failure.
-- `'on-first-failure'`: Capture screenshot after each test's first failure.
+- `'on'`: Capture a screenshot after each test. Test Optimization uploads only screenshots from failed tests.
+- `'only-on-failure'`: Capture a screenshot after each test failure.
+- `'on-first-failure'`: Capture a screenshot after each test's first failure.
 
-With Playwright 1.38 or later, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=1` to enable failure capture and uploads regardless of the screenshot setting.
+Use `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` to control uploads:
 
-To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`. This does not change Playwright's screenshot capture setting.
+- Unset (default): Upload the failure screenshots that Playwright captures.
+- `1`: Capture and upload failure screenshots, regardless of the `screenshot` setting in Playwright. Requires Playwright 1.38 or later.
+- `0`: Don't upload screenshots. Playwright may still capture them according to your configuration.
 
-**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
+### Upload test failure videos
 
-### Upload failed test videos
-
-When enabled, Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
+Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-video-videos-tab.png" alt="A Playwright failed test video displayed in the Videos tab of the Test Optimization test details page." style="width:100%;" >}}
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-video-player.png" alt="The video player displaying a Playwright failed test video." style="width:100%;" >}}
 
-When `DD_TEST_FAILURE_VIDEOS_ENABLED` is unset, Test Optimization automatically uploads videos from failed tests if [`video`][4] under `use` in your Playwright configuration is set to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`. With Playwright 1.38 or later, set `DD_TEST_FAILURE_VIDEOS_ENABLED=1` to enable recording and uploads regardless of this setting.
+Playwright doesn't record videos by default. To record them, set [`video`][4] under `use` in your Playwright configuration to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`. Use `DD_TEST_FAILURE_VIDEOS_ENABLED` to control uploads:
 
-To disable video uploads, set `DD_TEST_FAILURE_VIDEOS_ENABLED=0`. This does not change Playwright's video recording setting.
+- Unset (default): Upload the videos that Playwright records for failed tests.
+- `1`: Record and upload videos from failed tests, regardless of the `video` setting. Requires Playwright 1.38 or later.
+- `0`: Don't upload videos. Playwright may still record them according to your configuration.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0
@@ -762,7 +768,7 @@ Use [`dd-trace` v5.132.0 or later][1] on the v5 release line, or [`dd-trace` v6.
 
 No additional WebdriverIO configuration is required. To disable screenshot uploads, set `DD_TEST_FAILURE_SCREENSHOTS_ENABLED=0`.
 
-### Upload failed test videos
+### Upload test failure videos
 
 WebdriverIO video recording and uploads are disabled by default. To enable them for WebdriverIO 9 or later with Mocha or Jasmine:
 
@@ -770,8 +776,6 @@ WebdriverIO video recording and uploads are disabled by default. To enable them 
 2. Set `DD_TEST_FAILURE_VIDEOS_ENABLED=1`.
 
 To disable video recording and uploads, unset `DD_TEST_FAILURE_VIDEOS_ENABLED` or set it to `0`.
-
-No additional WebdriverIO configuration is required beyond the steps above.
 
 [1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.132.0
 [2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.21.0

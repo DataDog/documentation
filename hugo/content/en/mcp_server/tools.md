@@ -541,36 +541,52 @@ Permanently deletes a service remapping rule by ID. New spans that matched the r
 
 - Delete the `web-store` service remapping rule.
 
-## Assistant
+## Chat
 
 Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
 
-**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+The `chat` toolset is not enabled by default and is not included in `toolsets=all`. To use Chat tools, explicitly add `chat` to the `toolsets` parameter (for example, `?toolsets=all,chat`). See [Set Up the Datadog MCP Server](/mcp_server/setup/#toolsets) for instructions on enabling toolsets.
 
-### `send_message_to_assistant`
-*Toolset: **assistant***\
+**Note**: The `chat` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_chat`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+Sends a message to Bits Chat. Optionally continues an existing conversation by providing a `conversation_id`. Some responses include a `task_id`. To retrieve the result, use `get_chat_message_result`.
 
-- Ask the assistant what's causing the latency spike on the checkout service.
-- Continue conversation `abc-123-def` and ask the assistant for next steps.
-- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+Using this tool consumes [AI Credits][99] and follows the same usage limits and governance controls as Bits Chat in the Datadog UI.
 
-### `get_assistant_conversation_history`
-*Toolset: **assistant***\
+- Ask Bits Chat what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask Bits Chat for next steps.
+- Ask Bits Chat to summarize open P1 incidents, with debug mode enabled.
+
+### `get_chat_message_result`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Retrieves the full conversation history for a specific assistant conversation by its ID.
+Polls an asynchronous Bits Chat response using the `task_id` and `conversation_id` returned by `send_message_to_chat`. Available when asynchronous responses are enabled.
+
+- Get the result of a pending Bits Chat response.
+- Check whether a Bits Chat request needs an action before it can continue.
+
+### `get_chat_conversation_history`
+
+*Toolset: **chat***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full history of a Bits Chat conversation by its ID.
 
 - Get the full conversation history for conversation `abc-123-def`.
-- Show me everything the assistant said in my last conversation about the payment outage.
+- Show the history of the Bits Chat conversation about the payment outage.
 
-### `list_assistant_conversations`
-*Toolset: **assistant***\
+### `list_chat_conversations`
+
+*Toolset: **chat***\
 *Permissions Required: `Bits Chat Access`*\
-Lists all Datadog Assistant conversations for the current user.
+Lists all Bits Chat conversations for the current user.
 
-- List all my past conversations with the Datadog Assistant.
-- Show me my most recent assistant conversations.
+- List past Bits Chat conversations.
+- Show recent Bits Chat conversations.
 
 ## Audit Trail
 
@@ -1272,11 +1288,12 @@ Analyzes Datadog Error Tracking errors using SQL queries for counting, aggregati
 ### `update_datadog_error_tracking_issue`
 *Toolset: **error-tracking***\
 *Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
-Updates the state or assignee of an Error Tracking Issue in Datadog.
+Updates the state or assignee of an Error Tracking Issue in Datadog, or snoozes an issue until a condition is met. You can combine multiple snooze conditions, such as occurrences, elapsed time, or distinct values of any error attribute, like `@usr.id`.
 
 - Mark Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` as resolved.
 - Assign Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to me.
 - Set the state of Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f` to ignored.
+- Snooze Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` until it affects 10 users or a week passes.
 
 ### `manage_datadog_error_tracking_issue_comments`
 *Toolset: **error-tracking***\
@@ -1554,8 +1571,6 @@ Copies an existing form, including its latest definition, into a new form with a
 
 Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
-<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
-
 The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
 
 ### `list_governance_insights`
@@ -1675,8 +1690,6 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
-
-<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
 ### `trigger_bits_ai_investigation`
 *Toolset: **investigator***\
@@ -2116,8 +2129,6 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 ## Observability Pipelines
 
 Tools for [Observability Pipelines][87], including inspecting existing pipelines and building, validating, and creating new pipelines. The toolset cannot update or delete existing pipelines.
-
-<div class="alert alert-info">The <code>observability-pipelines</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact your account manager to request access.</div>
 
 ### `list_observability_pipelines`
 *Toolset: **observability-pipelines***\
@@ -3135,6 +3146,15 @@ Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog s
 - Get the data for tab "Pivot 1" in spreadsheet "ABC".
 - Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
 
+### `move_datadog_spreadsheet_tab`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Moves a tab to a new position in a Datadog spreadsheet. The tab is placed after a specified tab, or becomes the first tab if no tab is specified. To reorder multiple tabs, the tool moves one tab at a time, from the first position to the last. Use `get_datadog_spreadsheet` first to find tab IDs and types.
+
+- Move tab "Pivot 1" to the front of spreadsheet "ABC".
+- Move table "Table 2" after sheet "Sheet 1" in spreadsheet "ABC".
+- Reorder the tabs in spreadsheet "ABC" alphabetically.
+
 ### `delete_datadog_spreadsheet`
 *Toolset: **sheets***\
 *Permissions Required: `Sheets Write`*\
@@ -3469,7 +3489,7 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 ## Workflows
 
-Tools for [Workflow Automation][39], including creating and managing workflows, triggering and inspecting executions, debugging individual steps, and finding actions.
+Tools for [Workflow Automation][39], including creating and managing workflows, triggering and inspecting runs, debugging individual steps, and finding actions.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
@@ -3552,7 +3572,7 @@ Publishes a workflow by ID. If a saved draft exists, it replaces the base specif
 ### `unpublish_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Write`*\
-Unpublishes a workflow by ID to stop new automatic executions while preserving its base specification and any saved draft. This does not cancel executions already in progress; use `cancel_datadog_workflow_instance` for those.
+Unpublishes a workflow by ID to stop new automatic runs while preserving its base specification and any saved draft. This does not cancel runs already in progress; use `cancel_datadog_workflow_instance` for those.
 
 - Unpublish the deployment workflow while changes are reviewed.
 - Stop new scheduled runs of the incident escalation workflow without canceling its running instance.
@@ -3568,7 +3588,7 @@ Permanently deletes a workflow by ID. This tool requires explicit user confirmat
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Starts a new execution of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
+Starts a new run of a workflow that has an agent trigger. Runs the saved draft when one exists, otherwise the base specification.
 
 - Run the incident escalation workflow with `service` set to `checkout-api` and `severity` set to `high`.
 - Execute the deployment rollback workflow for the payments service.
@@ -3577,27 +3597,27 @@ Starts a new execution of a workflow that has an agent trigger. Runs the saved d
 ### `list_datadog_workflow_instances`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Lists a workflow's execution history, with filters for execution status. Use `get_datadog_workflow_instance` for details.
+Lists a workflow's run history, with filters for run status. Use `get_datadog_workflow_instance` for details.
 
-- List the most recent executions of this workflow.
+- List the most recent runs of this workflow.
 - List all failed instances of the deployment workflow.
-- Find the latest successful execution and its instance ID.
+- Find the latest successful run and its instance ID.
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves a lightweight summary of a workflow execution instance, with an option to include the detailed execution record. Use `get_datadog_workflow_step_data` to inspect one step.
+Retrieves a lightweight summary of a workflow run, with an option to include the detailed run record. Use `get_datadog_workflow_step_data` to inspect one step.
 
-- What's the status of the workflow execution I triggered?
+- What's the status of the triggered workflow run?
 - Did the incident escalation workflow complete successfully?
 - Show the detailed record for workflow instance `00000000-0000-0000-0000-000000000000`.
 
 ### `get_datadog_workflow_step_data`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves execution data for one workflow step, with optional execution context.
+Retrieves run data for one workflow step, with optional execution context.
 
-- Debug the Slack channel used by the `send-slack-message` step in this workflow execution.
+- Debug the Slack channel used by the `send-slack-message` step in this workflow run.
 - Inspect zero-based iteration `3` (the fourth iteration) of the `retry-until-complete` while-loop step.
 - Inspect the `notify-on-call` step inside zero-based iteration `3` of its enclosing loop.
 - Include the execution context for the failed deployment step.
@@ -3605,7 +3625,7 @@ Retrieves execution data for one workflow step, with optional execution context.
 ### `cancel_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
-Cancels a running workflow execution instance. Invoke this tool only when the user intends to stop the run. A canceled execution cannot be resumed, but `execute_datadog_workflow` can start a new run.
+Cancels a workflow run in progress. Invoke this tool only when the user intends to stop the run. A canceled run cannot be resumed, but `execute_datadog_workflow` can start a new run.
 
 - Cancel the latest workflow run because its input is incorrect.
 - Stop workflow instance `00000000-0000-0000-0000-000000000000`.
@@ -3675,6 +3695,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [96]: /metrics/derived-metrics/
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
+[99]: /account_management/billing/ai_credits/
 
 ## Further reading
 

@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.23.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.25.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -14,6 +14,134 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
 
+## Worker version 2.25.1
+
+To upgrade to Worker version 2.25.1:
+
+- Docker: Run the `docker pull` command for the [2.25.1 image][66].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.1`.
+
+Worker version 2.25.1 gives you access to the following:
+
+#### Security
+
+- The Microsoft Sentinel destination now verifies server certificates and hostnames for Azure OAuth token requests and log ingestion requests.
+
+#### Fixes
+
+- The Microsoft Sentinel destination now:
+    - Splits batches into multiple requests as needed, so each request stays under the Azure 1 MB request size limit.
+    - Refreshes its Azure OAuth token 60 seconds before the token expires. If a refresh fails, it logs an error and retries every 2 seconds until a refresh succeeds, then returns to that schedule.
+    - Times out Azure OAuth token requests after 30 seconds and retries them like any other failed refresh.
+- The `rc_version` tag on pipeline component metrics and the `op_component.rc_version` field in component logs now report the latest configuration version that each component runs, including components that a pipeline update didn't change.
+
+## Worker version 2.25.0
+
+To upgrade to Worker version 2.25.0:
+
+- Docker: Run the `docker pull` command for the [2.25.0 image][62].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.25.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.25.0`.
+
+Worker version 2.25.0 gives you access to the following:
+
+#### Security
+
+- Updated the Worker's bundled Mozilla root certificate store. The store no longer includes `emSign ECC Root CA - G3`, which was removed after the [eMudhra intermediate certificate compromise][61], or other roots that Mozilla has distrusted. As a result:
+    - Components that use the built-in root store no longer trust certificate chains through the distrusted emSign intermediates.
+    - TLS connections to servers whose certificate chains end at a removed root fail validation.
+- Error messages that the Worker reports to Datadog when a component crashes now go through the same sensitive data redaction rules as the Worker's logs.
+
+#### Enhancements
+
+- The Grok Parser processor's logs now include:
+    - A `rule` field that identifies the rule's source.
+    - A `rule_kind` field that indicates the rule's type as `custom` or `library`.
+
+  Rule compilation error logs no longer include a separate `source` field. If you filter on `source`, filter on `rule` instead.
+- The Datadog BYOC Logs destination now presents a rotated mTLS client certificate on the next request after it detects the rotation. Previously, the destination kept using the old certificate until existing connections reached their maximum age, which could take up to an hour. Connections are still re-established at least once an hour.
+- The `DD_OP_REDUCE_WINDOW_SECS` environment variable is now available for setting how long Reduce processors aggregate events before they emit a group.
+- The Sample processor now limits memory for tracking sampling groups to 128 MiB. When it reaches the limit, it evicts the least-recently used groups.
+- The Worker has improved log ingestion performance.
+
+#### Fixes
+
+- When a source or destination fails, the Worker now logs the underlying error, such as `Address already in use`, instead of only `the task completed with an error`. If a component panics, the logs also include the panic message.
+- The Google Pub/Sub source now reconnects immediately, without logging an error, when the server resets a streaming pull.
+- The Google Pub/Sub source now trusts every certificate in the configured CA file, not only the last one.
+- The OpenTelemetry source now responds to gRPC requests for unsupported services with the gRPC status `UNIMPLEMENTED` instead of HTTP 404. These requests no longer log an error or increment the `component_errors_total` metric.
+- The Worker now tracks internal logs dropped under high load in `component_discarded_events_total` with `intentional:false`. This affects only internal components (`component_id:_*`), not pipeline data.
+
+## Worker version 2.24.1
+
+To upgrade to Worker version 2.24.1:
+
+- Docker: Run the `docker pull` command for the [2.24.1 image][60].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.1`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.1`.
+
+Worker version 2.24.1 gives you access to the following:
+
+#### Security
+
+- Updated `rustls-webpki` to version 0.103.16. The Worker now rejects certificate chains that include any of the [eMudhra intermediate certificate authorities (CAs) whose private keys were reported as compromised][61]. The Worker rejects these chains even when the issuing root CA is trusted.
+
+  This protection applies only to components that use rustls. The following components use the system CA trust store instead:
+    - Components that use OpenSSL
+    - The Amazon Security Lake destination's AWS account lookup
+    - The Google Cloud Pub/Sub source
+
+  To protect components that use the system CA trust store:
+    - **Container image**: No action is needed unless you mount your own CA bundle or set `SSL_CERT_FILE`. The Worker container image distrusts `emSign ECC Root CA - G3`.
+    - **APT and RPM packages**: Distrust `emSign ECC Root CA - G3` until your distribution provides an updated `ca-certificates` package. On older distributions, also distrust `AAA Certificate Services`, which Debian and Ubuntu ship as `Comodo_AAA_Services_root`.
+
+#### Fixes
+
+- Fixed an issue where search queries silently dropped operands in `OR` groups that combined exact values with other operands, such as wildcards, ranges, or other attributes. Previously, queries such as `@url:(nope OR aa* OR dummy/api/v1/check_run)` could miss matching events because of the wildcard.
+- The Worker now treats regex metacharacters (`.`, `+`, `^`, `$`, `(`, `[`, `|`) in search query wildcard patterns as literal characters. For example, `@url:dummy\/api.v1*` no longer matches `dummy/api/v1/check_run`.
+
+## Worker version 2.24.0
+
+To upgrade to Worker version 2.24.0:
+
+- Docker: Run the `docker pull` command for the [2.24.0 image][59].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.24.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.24.0`.
+
+Worker version 2.24.0 gives you access to the following:
+
+#### Security
+
+- The Datadog BYOC Logs destination no longer forwards the Worker's Datadog API key to BYOC Logs.
+
+#### Enhancements
+
+- The Enrichment Table processor:
+    - Reports the `enrichment_distinct_lookup_keys_total` metric, which is an estimate of distinct lookup keys summed across 1-second windows.
+    - Has improved performance during large cache fills.
+    - Reloads table values every 30 seconds. If a reload fails, the processor keeps using the last valid table until a reload succeeds.
+    - Caches up to 1 million Reference Table rows locally for 1 hour, which improves handling of large tables.
+    - Adds an `outcome` tag to its fetched-keys metric to identify failed lookup attempts.
+    - Has a default buffer size of 20,000 events or 100 MiB, and a maximum of 100,000 events.
+- The Generate Metrics processor's metric aggregation option is now enabled by default, so generated metrics are aggregated unless you disable the option.
+- The Worker now uses `aws-lc-rs` as the cryptography provider for rustls-based TLS connections. The negotiated TLS cipher suites for some connections, such as Databricks Zerobus, might differ from previous versions. OpenSSL-based TLS connections are not affected.
+- The Custom Processor has improved performance, including more efficient field lookups and more efficient string functions.
+- The Worker has improved configuration startup performance.
+- The `pipelines.quota_fill` metric now has a `quota_name` tag. The Worker keeps the legacy `name` tag for backward compatibility.
+
+#### Fixes
+
+- The Sensitive Data Scanner processor's library rules now use pattern capture groups to preserve non-sensitive context around the captured value. Previously, the Worker ignored capture groups. For example, the IPv4 address rule now redacts `172.16.0.1:80` as `<REDACTION TEXT>:80` instead of `<REDACTION TEXT>80`.
+- The Grok Parser, Parse JSON, and Parse XML processors now log a warning instead of an error when a field fails to parse. The Parse JSON processor's error message also names the field that failed to parse, rather than the generic word `source`.
+- Fixed an issue where reloading specific components after configuration updates could cause them to restart unnecessarily during subsequent configuration updates, resetting their state.
+- The OpenTelemetry source now preserves native OTLP log event names.
+- The Prometheus source now identifies metrics ending with `_total` as counters.
+- Fixed an issue with the `keyvalue` filter in the Custom Processor's `parse_grok` and `parse_groks` functions. The filter no longer panics when processing unquoted `NaN` values, such as `ratio=NaN`.
 ## Worker version 2.23.2
 
 To upgrade to Worker version 2.23.2:
@@ -27,7 +155,7 @@ Worker version 2.23.2 gives you access to the following:
 
 #### Enhancements
 
-- The Datadog Logs destination now has an option to truncate logs that exceed Datadog's per-log size limit. You can set the encoded log size limit, mark truncated messages, and tag truncated logs. If a log has no string message, or its non-message fields leave no room for a truncated message, the Worker forwards the log unchanged as long as it fits within the payload limit. The Datadog intake then truncates the log.
+- The Datadog Logs destination now truncates log events larger than 900 KB. Previously, log events larger than the batch size limit were dropped instead of truncated.
 
 #### Fixes
 
@@ -145,6 +273,10 @@ Worker version 2.21.0 gives you access to the following:
 
 #### New features
 
+- For metrics pipelines:
+    - The [Prometheus source][63] is now available.
+    - The [Prometheus destination][64] is now available.
+    - The [OpenTelemetry destination][65] is now available.
 - The Datadog Archives destinations (Amazon S3, Google Cloud Storage, and Azure Blob Storage) now support a configurable `compression` option (`gzip` or `zstd`).
 - The Remap to OCSF processor now includes:
     - The AWS Config Rules OCSF mapping.
@@ -220,9 +352,6 @@ Worker version 2.20.2 gives you access to the following:
 #### Fixes
 
 - Fixed an issue where non-finite (NaN or Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
-
-
-
 
 ## Worker version 2.20.0
 
@@ -901,3 +1030,11 @@ Worker version 2.7.0 gives you access to the following:
 [56]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.0
 [57]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.1
 [58]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.23.2
+[59]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.0
+[60]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.24.1
+[61]: https://trust.datadoghq.com/?tcuUid=301abdf4-0ad2-4db0-9843-c447a0714bfe
+[62]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.0
+[63]: /observability_pipelines/sources/prometheus/
+[64]: /observability_pipelines/destinations/prometheus/
+[65]: /observability_pipelines/destinations/opentelemetry/metrics/
+[66]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.25.1

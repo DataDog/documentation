@@ -16,11 +16,11 @@ Datadog On-Call prend en charge plusieurs canaux de notification pour vos métho
 La prise en charge des notifications par SMS et par appel téléphonique varie selon le pays en raison des réglementations et restrictions locales. Utilisez le tableau suivant pour vérifier si votre pays est pris en charge avant d'ajouter une méthode de contact téléphonique à votre profil On-Call.
 
 <div class="alert alert-info">
-Si votre pays ne figure pas dans le tableau suivant, contactez le <a href="https://docs.datadoghq.com/help/">Support Datadog</a> pour demander la prise en charge des numéros de téléphone pour ce pays.
+Si votre pays ne figure pas dans le tableau suivant, contactez <a href="https://docs.datadoghq.com/help/">Datadog Support</a> pour demander la prise en charge des numéros de téléphone pour ce pays.
 </div>
 
 <div class="alert alert-info">
-Pour une expérience optimale, téléchargez l'application mobile Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> et utilisez les notifications push comme méthode principale pour recevoir des alertes. Les notifications par SMS et par appel téléphonique sont également disponibles, mais les restrictions des opérateurs locaux et les réglementations régionales peuvent affecter leur fiabilité.
+Pour une expérience optimale, téléchargez Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> et utilisez les notifications push comme principal moyen d'être alerté. Les notifications par SMS et par appel téléphonique sont également disponibles, mais les restrictions des opérateurs locaux et les réglementations régionales peuvent affecter leur fiabilité.
 </div>
 
 | Pays | Indicatif téléphonique |
@@ -124,13 +124,14 @@ Pour une expérience optimale, téléchargez l'application mobile Datadog <a hre
 | Royaume-Uni | +44 |
 | États-Unis | +1 |
 | Uruguay* | +598 |
+| Vietnam | +84 |
 
-* Prise en charge partielle : votre capacité à recevoir ou à répondre aux notifications dans ces pays peut être limitée. Datadog envoie des demandes de notification à ses partenaires fournisseurs dans ces pays, mais les restrictions des opérateurs locaux ou les réglementations gouvernementales peuvent limiter la livraison.
+\* Prise en charge partielle : votre capacité à recevoir ou à répondre aux notifications dans ces pays peut être limitée. Datadog envoie des demandes de notification à ses fournisseurs partenaires dans ces pays, mais les restrictions des opérateurs locaux ou les réglementations gouvernementales peuvent limiter leur acheminement.
 
-** Disponible sur demande : les notifications par SMS et par appel téléphonique pour ces pays sont prises en charge mais ne sont pas activées par défaut. Contactez le <a href="https://docs.datadoghq.com/help/">Support Datadog</a> pour demander l'accès.
+\*\* Disponible sur demande : les notifications par SMS et par appel téléphonique pour ces pays sont prises en charge mais ne sont pas activées par défaut. Contactez <a href="https://docs.datadoghq.com/help/">Datadog Support</a> pour demander l'accès.
 
 <div class="alert alert-info">
-Tous les pays listés dans le tableau ne sont pas disponibles pendant une période d'essai. Si vous devez tester les notifications par SMS ou par appel téléphonique pour un pays qui n'est pas disponible pendant votre période d'essai, contactez le <a href="https://docs.datadoghq.com/help/">Support Datadog</a>.
+Les pays listés dans le tableau ne sont pas tous disponibles pendant une période d'essai. Si vous devez tester des notifications par SMS ou par appel téléphonique pour un pays qui n'est pas disponible pendant votre essai, contactez <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
 </div>
 
 [1]: /fr/incident_response/on-call/notification_preferences/#supported-contact-methods

@@ -70,14 +70,42 @@ The **channel name template** you define determines how Datadog names the incide
 
 ### Message syncing (Slack mirroring)
 
-After enabling automatic channel creation, you can configure Incident Management to sync messages between an incident Slack channel and the incident's timeline in Datadog.
+After enabling automatic channel creation, you can sync every message posted in an incident Slack channel to the incident's timeline.
 
-To enable syncing, enable **Push Slack channel messages to the incident timeline** in Incident Management settings, and then select one of the following options:
+To enable syncing, enable **Mirror all Slack channel messages to the incident timeline** in Incident Management settings. A message's author does not need to be connected to the Datadog organization for Datadog to sync the message.
 
-* **Mirror all messages in real-time**: Datadog syncs all messages posted by Slack users to the incident channel.
-* **Push message when 📌 is added as a reaction**: Datadog syncs messages only when Slack users react to them with pushpins (📌).
+To sync only selected messages instead, use the [**Pin To Timeline** emoji action](#emoji-quick-actions). When mirroring is on, Pin To Timeline is unavailable because every message is already on the timeline.
 
-For both options, a message's author does not need to be connected to the Datadog organization for Datadog to sync the message. For message pinning, the pinner **does** need to be connected to the Datadog organization for the message pinned to sync.
+<!-- vale Datadog.words_case_insensitive = NO -->
+### Emoji quick actions
+<!-- vale Datadog.words_case_insensitive = YES -->
+
+React to a message in an incident Slack channel with an emoji to act on it without leaving Slack. Datadog reacts with 👀 while it works and ✅ when the action is done.
+
+| Default emoji | Action               | Description                                                     |
+|---------------|----------------------|-----------------------------------------------------------------|
+| 🆘            | **Page**             | Opens a form to page an on-call responder about the message.    |
+| 🔔            | **Notify**           | Opens a form to notify stakeholders about the message.          |
+| 🔜            | **Follow-up**        | Drafts a follow-up from the message for you to accept or edit.  |
+| ‼️            | **Mark Important**   | Marks the message as important.                                 |
+| 📌            | **Pin To Timeline**  | Adds the message to the incident timeline.                      |
+
+<!-- vale Datadog.words_case_insensitive = NO -->
+To configure emoji actions for each incident type, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and open **Emoji quick actions**. You can:
+<!-- vale Datadog.words_case_insensitive = YES -->
+
+* Enable or disable each action. All actions are enabled by default except **Pin To Timeline**.
+* Replace an action's default emoji with a standard emoji or a custom emoji from your Slack workspace. Each emoji can trigger only one action, and 👀 and ✅ are reserved.
+
+#### Use custom workspace emoji
+
+To choose custom emoji from your Slack workspace, the Datadog Slack app needs permission to read your workspace's emoji. If it doesn't have it yet, the settings page shows only built-in emoji and a **Reinstall the Slack app** link. Reinstall the app to grant the permission, then select any custom emoji in the picker.
+
+If a custom emoji used by an action is removed from your workspace, the settings page flags it. Choose a different emoji before saving.
+
+If you react with an action's emoji while the action is disabled, Datadog replies with a message that only you can see. The message explains how to enable the action.
+
+The user who reacts **does** need to be connected to the Datadog organization for the action to run. The author of the message does not.
 
 In organizations with usage-based Incident Management billing:
 
@@ -87,7 +115,7 @@ In organizations with usage-based Incident Management billing:
 In organizations with seat-based Incident Management billing:
 
 * You do **not** need a seat for Datadog to sync your messages to Incident Management.
-* When you pin a message, you **must** have a seat for Datadog to sync the message you pinned.
+* You **must** have a seat to trigger an emoji action, including pinning a message. If you don't have one, Datadog prompts you to claim one.
 
 ### Slack commands in the incident channel
 
@@ -97,13 +125,7 @@ For a full list of Slack commands, see [Slack commands](#slack-commands).
 
 ### Re-inviting a meeting transcriber
 
-If the Datadog Transcriber leaves a linked Zoom, Google Meet, or Microsoft Teams meeting, a re-invite prompt can appear in the meeting-card thread. This can happen after a waiting-room timeout, when nobody joins, after everyone leaves, or when someone removes the transcriber.
-
-Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. If required, admit the transcriber from the meeting lobby or waiting room.
-
-This action requires a connected Datadog account and permission to edit the incident. For organizations with seat-based billing, it also requires an [Incident Management or Incident Response seat][8]. Meeting summarization settings and exclusion conditions still apply.
-
-You can also re-invite the transcriber from the incident header in Datadog. For instructions, see the meeting summaries documentation for [Zoom][9], [Google Meet][10], or [Microsoft Teams][11].
+If the Datadog Transcriber leaves a linked meeting, a prompt to re-invite it can appear in the meeting-card thread. Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. For requirements and other ways to re-invite the transcriber, see [Meeting summaries in Incident AI][8].
 
 ### Other incident channel configuration options
 
@@ -213,7 +235,4 @@ The following buttons are available in the action tray. Incident types are initi
 [5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
 [7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
-[8]: /account_management/billing/incident_response/#allocate-seats
-[9]: /integrations/zoom-incident-management/#meeting-summaries
-[10]: /integrations/google-meet-incident-management/#meeting-summaries
-[11]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries
+[8]: /incident_response/incident_management/investigate/incident_ai/#meeting-summaries

@@ -30,7 +30,7 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
 1. Complete the installation instructions in the [Databricks integration documentation][2] using Datadog's integration tile. Take note of the service principal's application ID and save it somewhere safe, because it will be referenced later.
 
-   **Note**: Workspace Admin permissions are not required for Quality Monitoring.
+   **Note**: Workspace Admin permissions are not required for Quality Monitoring. Each Databricks workspace supports one service principal for Data Observability, so you can't assign separate service principals to different monitor types in the same workspace.
 
 2. When configuring the integration, turn on the {{< ui >}}Data Observability{{< /ui >}} toggle.
 3. Click {{< ui >}}Save Databricks Workspace{{< /ui >}}.
@@ -80,7 +80,7 @@ These permissions are needed for the following reasons:
 
 - `GRANT USE CATALOG` is required to navigate into the catalog and discover schemas.
 - `GRANT USE SCHEMA` is required to enumerate tables and monitor schema-level health.
-- `GRANT SELECT` is required for data quality monitoring, such as custom SQL or distribution checks.
+- `GRANT SELECT` is required for data quality monitoring, such as Custom SQL or distribution checks.
 
 ### Step 3 - Grant access to query text
 
@@ -105,11 +105,34 @@ To create the group and add the service principal:
 
 For more details, see the Databricks documentation on [managing account-level groups][8].
 
+## Control data access
+
+Quality Monitoring sends aggregate metric values to Datadog, not row-level data. Custom SQL monitors are the exception and need careful configuration. For details, see [Data sent to Datadog][9].
+
+### Limit what the service principal can read
+
+- **Scope the grants**: Use the {{< ui >}}Specific tables{{< /ui >}} option in [Step 2](#step-2---grant-access), or grant access to a dedicated schema only.
+- **Mask sensitive columns**: Apply Unity Catalog [column masks or row filters][10] to sensitive columns for the Datadog service principal. Freshness and row count checks don't read column values, so masking doesn't affect them. Column-level metrics on masked columns reflect the masked values, not the originals.
+- **Configure only the monitors you need**: Datadog runs column-level queries and Custom SQL queries only for the monitors you configure.
+
+### Audit queries run by Datadog
+
+Databricks records every query that the service principal runs in the [query history system table][4] (`system.query.history`). To review them, filter on `executed_by` equal to the service principal's application ID:
+
+```sql
+SELECT start_time, statement_text
+FROM system.query.history
+WHERE executed_by = '<application_id>'
+ORDER BY start_time DESC
+```
+
+To see query text in `statement_text`, you must be an account admin or a member of the `databricks_pii_access` group. Otherwise, the column returns `<Redacted>`. For details, see [Step 3](#step-3---grant-access-to-query-text).
+
 ## Next steps
 
 After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
-After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and custom SQL metrics.
+After the initial sync completes, create a [Data Observability monitor][3] to start alerting on freshness, row count, column-level metrics, and Custom SQL metrics.
 
 ## Further reading
 
@@ -123,3 +146,5 @@ After the initial sync completes, create a [Data Observability monitor][3] to st
 [6]: https://docs.databricks.com/api/workspace/queries/list
 [7]: https://docs.databricks.com/aws/en/compute/serverless/
 [8]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[9]: /data_observability/quality_monitoring/#data-sent-to-datadog
+[10]: https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks

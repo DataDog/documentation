@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-11-05'
+    link: https://github.com/DataDog/documentation/pull/41418
+    operations:
+      - CreateActionConnection
+      - GetActionConnection
+      - UpdateActionConnection
+    title: Add AWS Secrets Manager support to Action Platform connections

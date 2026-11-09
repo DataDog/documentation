@@ -1,0 +1,29 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "GCP Secrets Manager Connection exampleactionconnection",
+      "external_secrets_manager": {
+        "type": "aws_secrets_manager",
+        "connection_id": "string",
+        "region": "us-east-1"
+      },
+      "integration": {
+        "type": "GCP",
+        "credentials": {
+          "type": "GCPServiceAccount",
+          "private_key": {
+            "type": "aws_secrets_manager",
+            "secret_id": "example/gcp/service-account",
+            "key": "private_key"
+          },
+          "service_account_email": {
+            "type": "aws_secrets_manager",
+            "secret_id": "example/gcp/service-account",
+            "key": "client_email"
+          }
+        }
+      }
+    }
+  }
+}

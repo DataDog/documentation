@@ -5,16 +5,16 @@ description: DORA Metrics 이벤트, 필드, 태그 및 배포 빈도, 변경 �
   대해 알아보세요.
 further_reading:
 - link: /delivery_performance/dora_metrics/
-  tag: 설명서
+  tag: 문서
   text: DORA Metrics에 대해 알아보기
 - link: /delivery_performance/dora_metrics/setup/
-  tag: 설명서
+  tag: 문서
   text: DORA Metrics용 데이터 소스 설정
 - link: /metrics/
-  tag: 설명서
+  tag: 문서
   text: 메트릭에 대해 알아보기
 - link: /getting_started/tagging/
-  tag: 설명서
+  tag: 문서
   text: 태그 시작하기
 title: 수집된 DORA Metrics 데이터
 ---
@@ -60,10 +60,10 @@ DORA Metrics에서 사용자 지정 태그를 사용하는 방법에 대한 자�
 |----------------------------|----------------------------|
 | `Duration` | 배포 소요 시간입니다. |
 | `Avg Change Lead Time`      | 모든 커밋의 [변경 리드 타임](#commit-fields) 평균 소요 시간입니다.  |
-| `Avg Time to PR Ready`          | 모든 커밋의 [PR 준비 완료까지](#commit-fields) 평균 소요 시간입니다. |
-| `Avg Review Time`       | 모든 커밋의 평균 [검토](#commit-fields) 소요 시간입니다. |
-| `Avg Merge Time`       | 모든 커밋의 평균 [병합 ](#commit-fields)소요 시간입니다. |
-| `Avg Time to Deploy`       | 모든 커밋의 [배포까지 ](#commit-fields)평균 소요 시간입니다. |
+| `Avg Time to PR Ready`          | 모든 커밋의 [PR 준비 완료까지의 시간](#commit-fields)의 평균 소요 시간입니다. |
+| `Avg Review Time`       | 모든 커밋의 [검토 시간](#commit-fields)의 평균 소요 시간입니다. |
+| `Avg Merge Time`       | 모든 커밋의 [병합 시간](#commit-fields)의 평균 소요 시간입니다. |
+| `Avg Time to Deploy`       | 모든 커밋의 [배포까지의 시간](#commit-fields)의 평균 소요 시간입니다. |
 | `Number of Commits`        | 배포에 포함된 모든 커밋의 개수입니다. |
 | `Deployment Type` | 배포 유형 (`standard`, `rollback` 또는 `rollforward`). |
 | `Change Failure` | 배포가 변경 실패로 표시되었는지 여부를 나타내는 부울 값입니다. |
@@ -96,7 +96,7 @@ DORA Metrics에서 사용자 지정 태그를 사용하는 방법에 대한 자�
 | `Test Session Duration` | 풀 요청의 헤드 커밋 또는 병합 커밋에 대한 테스트 세션의 총 소요 시간입니다. Test Optimization이 필요합니다. |
 | `Test Session Duration After Approval` | 풀 요청이 승인된 후 풀 요청의 헤드 커밋 또는 병합 커밋에 대한 테스트 세션의 총 소요 시간입니다. Test Optimization이 필요합니다. |
 | `Time to Pass` | 첫 번째 CI 시도부터 풀 요청의 헤드 커밋 또는 병합 커밋에 대한 첫 번째 성공적인 파이프라인 실행까지의 소요 시간입니다. CI Visibility가 필요합니다. |
-| `Time to Pass After Approval` | 풀 요청 승인 후 첫 번째 CI 시도부터 풀 요청의 헤드 커밋 또는 병합 커밋에 대한 첫번째 성공적인 파이프라인 실행까지의 소요 시간입니다. CI Visibility가 필요합니다. |
+| `Time to Pass After Approval` | 풀 요청 승인 후 첫 번째 CI 시도부터 풀 요청의 헤드 커밋 또는 병합 커밋에 대한 첫 번째 성공적인 파이프라인 실행까지의 소요 시간입니다. CI Visibility가 필요합니다. |
 | `Patch Coverage` | 풀 요청의 헤드 커밋 또는 병합 커밋에서 신규 또는 수정된 줄 중 테스트로 커버되는 줄의 비율입니다. Code Coverage가 필요합니다. |
 
 
@@ -123,7 +123,7 @@ DORA Metrics에서 사용자 지정 태그를 사용하는 방법에 대한 자�
 [3]: /ko/api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
 [6]: /ko/getting_started/tagging/
-[7]: /ko/api/latest/dora-metrics/
+[7]: /ko/api/latest/delivery-performance/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/ko/metrics/
 [10]: /ko/delivery_performance/dora_metrics/setup/

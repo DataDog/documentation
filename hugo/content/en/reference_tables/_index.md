@@ -70,7 +70,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then upload a CSV file, name t
 
 {{< img src="reference_tables/schema_setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
-**Note**: The manual CSV upload method supports files up to 4MB.
+**Note**: The manual CSV upload method supports files up to 200MB.
 
 After creating a table, [edit its rows in the UI](#edit-rows-in-the-ui) without uploading another CSV file.
 

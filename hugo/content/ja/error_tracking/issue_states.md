@@ -3,55 +3,68 @@ further_reading:
 - link: /error_tracking/regression_detection/
   tag: ドキュメント
   text: 回帰検出
-title: エラートラッキングにおける Issue ステータス
+title: Error Tracking における問題の状態
 ---
+## 概要{#overview}
 
-## 概要
+Error Tracking のすべての問題には、問題のトリアージや優先順位付け、ノイズの排除に役立つステータスが割り当てられています。ステータスは 5 つあります。
 
-エラートラッキングのすべての Issue には、問題を選別・優先順位付けしたり、ノイズとして除外したりする際に役立つステータスがあります。ステータスは 4 種類あります。
+- {{< ui >}}FOR REVIEW{{< /ui >}}: 注意が必要な新規または回帰した問題。
+- {{< ui >}}REVIEWED{{< /ui >}}: 今後修正が必要な、トリアージ済みの問題。
+- {{< ui >}}RESOLVED{{< /ui >}}: 修正済みで発生しなくなった問題。
+- {{< ui >}}IGNORED{{< /ui >}}: これ以上の調査や対応が不要な問題。
+- {{< ui >}}EXCLUDED{{< /ui >}}: これ以上の調査が不要で、新しいエラーの収集を停止し、使用量や請求の対象から除外された問題。
 
-- **FOR REVIEW** (レビュー対象): 新規または回帰が発生しており、対応が必要な状態
-- **REVIEWED** (レビュー済み): 優先度を判断済みで、今すぐまたは後で修正すべき状態
-- **IGNORED** (無視): 追加の調査や対応が不要な状態
-- **RESOLVED** (解決済み): 修正され、エラーが発生しなくなった状態
+すべての問題は FOR REVIEW ステータスから始まります。Error Tracking は、以下に説明するケースでステータスを自動更新します。また、[手動でステータスを更新](#updating-an-error-status)することもできます。また、特定のエラーのステータス変更の[履歴を表示](#issue-history)することもできます。
 
-すべての Issue は、まず FOR REVIEW のステータスから始まります。エラートラッキングでは、以下のケースでステータスを自動的に更新しますが、[手動でステータスを更新する](#updating-an-error-status)こともできます。また、[特定のエラーの状態変更の履歴を表示](#issue-history)することも可能です。
+以下の図は、Error Tracking のステータスが自動および手動でどのように更新されるかを示しています。
+{{< img src="error_tracking/issue-states-diagram.png" alt="Error Tracking の問題ステータス" style="width:75%;" >}}
 
-以下の図は、エラートラッキングにおける Issue ステータスが自動および手動でどのように更新されるかを示しています。
-{{< img src="error_tracking/issue-states-diagram.png" alt="エラートラッキングの Issue ステータス" style="width:75%;" >}}
+## 自動レビュー {#automatic-review}
 
-## 自動レビュー
+Error Tracking は、次のいずれかの操作が行われた場合、問題を自動的に {{< ui >}}REVIEWED{{< /ui >}} マークします。
 
-次のいずれかの操作が行われた場合、エラートラッキングは Issue を自動的に **REVIEWED** に設定します。
+- 問題が割り当てられた
+- 問題からワークアイテムが作成された
 
-- Issue がアサインされた
-- Issue からケースが作成された
+{{< img src="error_tracking/auto-review-actions-2.png" alt="エラートラッキングの自動レビューアクション" style="width:75%;" >}}
 
-{{< img src="error_tracking/auto-review-actions.png" alt="エラートラッキングの自動レビューアクション" style="width:75%;" >}}
+## 自動解決 {#automatic-resolution}
 
-## 自動解決
+直近のエラーが発生していないなどの理由で、非アクティブまたは解決済みと思われる問題は、Error Tracking により自動的に {{< ui >}}RESOLVED{{< /ui >}} マークされます。
 
-直近のエラーが発生していないなど、非アクティブまたは解決済みと思われる Issue は、エラートラッキングにより自動的に **RESOLVED** に設定されます。
+- 問題が最後に報告されたバージョンが 14 日以上前のものであり、同じエラーを報告しない新しいバージョンがリリースされている場合、Error Tracking は自動的にその問題を解決します。自動解決でサービスのバージョンが考慮されるように、バージョンタグを使用してサービスを構成します ([APM][1]、[RUM][2]、および [Logs][3] の手順を参照)。
+- `version` タグが設定されていない場合、過去 14 日以内にその問題に対する新しいエラーが報告されていなければ、Error Tracking はその問題を自動的に解決します。
 
-- Issue が最後に報告されたバージョンから 14 日以上経過しており、新しいバージョンがリリースされても同じエラーが報告されていない場合、エラートラッキングは自動的にその Issue を解決済みとしてマークします。サービスをバージョンタグ ([APM][1]、[RUM][2]、[Logs][3]) で設定すると、自動解決がサービスのバージョンを考慮するようになります。
-- `version` タグが設定されていない場合、過去 14 日以内にその Issue に対する新しいエラーが報告されていない場合、エラートラッキングはその Issue を自動的に RESOLVED とマークします。
+**注**: 自動解決ロジックは `version` を考慮しません。
 
-## 回帰検出による自動再オープン
+## 回帰検出による自動再オープン {#automatic-re-opening-through-regression-detection}
 
 詳細は[回帰検出][4]を参照してください。
 
-## Issue ステータスの更新
+## 問題のステータスの更新 {#updating-the-issue-status}
 
-Issue ステータスは、Issue が表示されるリストや詳細パネルなど、あらゆる場所で確認できます。Issue のステータスを手動で更新するには、ステータスをクリックしてドロップダウンメニューから別のステータスを選択します。
+問題のステータスは、問題一覧や特定の問題の詳細パネルなど、問題が表示されるあらゆる場所に表示されます。問題のステータスを手動で更新するには、ステータスをクリックし、ドロップダウンメニューから別のステータスを選択します。
 
-{{< img src="error_tracking/updating-issue-status.png" alt="エラートラッキング Issue のアクティビティタイムライン" style="width:100%;" >}}
+{{< img src="error_tracking/updating-issue-status.png" alt="Error Tracking の問題のアクティビティタイムライン" style="width:100%;" >}}
 
-## Issue の履歴
-**Activity Timeline** では、Issue のアクティビティ履歴を確認できます。エラートラッキングの任意の Issue の詳細パネルで、**Activity** タブをクリックするとアクティビティタイムラインが表示されます。
+## 問題の除外 {#excluding-an-issue}
 
-{{< img src="error_tracking/issue-status-history-3.png" alt="エラートラッキング Issue のアクティビティタイムライン" style="width:80%;" >}}
+`EXCLUDED` ステータスを使用すると、特定のエラーが追跡されないように設定でき、収集や課金対象としてのカウントを防ぐことができます。これにより、複雑な除外ルールを設定することなく、対応不要なエラーや予期された障害によって発生した問題を除外できます。
 
-## その他の参考資料
+問題を除外するには、そのステータスをクリックし、ドロップダウンメニューから {{< ui >}}EXCLUDED{{< /ui >}} を選択します。除外された問題には、引き続き {{< ui >}}IGNORED{{< /ui >}} タブからアクセスできます。履歴はいつでも確認できます。
+
+{{< img src="error_tracking/issue-states-excluded.png" alt="問題のステータスドロップダウンで除外" style="width:100%;" >}}
+
+除外された問題のエラー収集を再開するには、{{< ui >}}EXCLUDED{{< /ui >}} 以外のステータスを選択します。
+
+
+## 問題の履歴 {#issue-history}
+{{< ui >}}Activity Timeline{{< /ui >}} を使用して、問題のアクティビティの履歴を表示します。Error Tracking の問題の詳細パネルで、{{< ui >}}Activity{{< /ui >}} タブをクリックしてアクティビティタイムラインを表示します。
+
+{{< img src="error_tracking/issue-status-history-3.png" alt="Error Tracking の問題のアクティビティタイムライン" style="width:80%;" >}}
+
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

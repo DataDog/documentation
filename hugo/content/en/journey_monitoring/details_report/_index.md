@@ -16,6 +16,9 @@ further_reading:
 - link: '/journey_monitoring/variants/'
   tag: 'Documentation'
   text: 'Learn about journey variants'
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 ## Overview

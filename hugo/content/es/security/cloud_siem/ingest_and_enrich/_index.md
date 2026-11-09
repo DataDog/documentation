@@ -3,53 +3,57 @@ disable_toc: false
 further_reading:
 - link: https://docs.datadoghq.com/getting_started/security/cloud_siem/
   tag: Documentación
-  text: Empezando con Cloud SIEM
+  text: Primeros pasos con Cloud SIEM
 - link: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
   tag: Blog
-  text: Prácticas recomendadas para monitorizar los logs de CloudTrail de AWS
+  text: Prácticas recomendadas para el seguimiento de los registros de AWS CloudTrail
 - link: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
   tag: Blog
-  text: Prácticas recomendadas para monitorizar los logs de autenticación
+  text: Prácticas recomendadas para el seguimiento de los registros de autenticación
 - link: https://www.datadoghq.com/blog/ocsf-common-data-model//
   tag: Blog
-  text: Normaliza tus datos con el OCSF Common Data Model en Cloud SIEM de Datadog
-title: Ingerir y enriquecer
+  text: Normalice sus datos con el Modelo de Datos Común OCSF en Datadog Cloud SIEM
+title: Ingesta y enriquecimiento
 ---
+## Descripción general {#overview}
 
-## Información general
+Las reglas de detección de Cloud SIEM analizan los registros y los datos de seguridad para generar señales de seguridad cuando se detectan amenazas. Después de haber habilitado Cloud SIEM, configure Datadog para ingerir y enriquecer los registros de las fuentes de las que desea hacer un seguimiento.
 
-Con las reglas de detección de Cloud SIEM, se analizan los logs y los datos de seguridad para generar señales de seguridad cuando se detectan amenazas. Una vez activado Cloud SIEM, configura Datadog para que ingiera y enriquezca los logs de las fuentes que desees monitorizar.
-
-## Ingesta de datos de seguridad
-La forma más sencilla de enviar datos a Datadog es utilizando [Paquetes de contenido][1], que son integraciones diseñadas específicamente para Cloud SIEM. Cada paquete de contenido contiene instrucciones sobre cómo configurar la integración para que ingiera esos logs y proporciona información sobre lo que incluye, como por ejemplo:
+## Ingerir datos de seguridad {#ingest-security-data}
+La forma más sencilla de enviar datos a Datadog es mediante el uso de [Content Packs][1], que son integraciones diseñadas específicamente para Cloud SIEM. Cada Content Pack contiene instrucciones sobre cómo configurar la integración para ingerir esos registros y proporciona información sobre lo que se incluye, como:
 
 - Reglas de detección
-- Dashboards interactivos predefinidos
+- Paneles interactivos listos para usar
 - Analizadores
-- Workflows (UI) / Procesos (generic) de SOAR
+- Flujos de trabajo de SOAR
 
-Existen [Paquetes de contenido][1] para muchas tecnologías de seguridad populares.
+Los [Content Packs][1] están disponibles para muchas tecnologías de seguridad populares.
 
-Si tienes logs personalizados o dispones de datos source (fuente) que no figuran en la page (págiona) del [Paquete de contenido][2] de Cloud SIEM, check si la integración está disponible en la amplia [biblioteca de integraciones][3] de Datadog. Si no está disponible, puedes enviar esos logs como [logs personalizados][4] a Cloud SIEM para su análisis.
+Si tiene registros personalizados o una fuente de datos que no aparece en la página de [Content Pack][2] de Cloud SIEM, verifique si la integración está disponible en la extensa [biblioteca de integraciones][3] de Datadog. Si no está disponible, puede enviar esos registros como [registros personalizados][4] a Cloud SIEM para su análisis.
 
-## Enriquecer logs
+## Enriquecer registros {#enrich-logs}
 
-### Información sobre amenazas
+### Inteligencia de amenazas {#threat-intelligence}
 
-Datadog proporciona [Inteligencia de amenazas][5] integrada para los logs de Cloud SIEM y también admite el enriquecimiento y la búsqueda mediante indicadores de compromiso (IoC) de inteligencia de amenazas almacenados en las tablas de referencia de Datadog. Consulta [Trae tu propia inteligencia de amenazas][6] para obtener más información.
+Datadog proporciona [Threat Intelligence][5] integrada para los registros de Cloud SIEM y también admite el enriquecimiento y la búsqueda mediante indicadores de compromiso (IoCs) de inteligencia de amenazas almacenados en tablas de referencia de Datadog. Consulte [Bring Your Own Threat Intelligence][6] para obtener más información.
 
-### Open Cybersecurity Framework (OCSF)
+### Indicadores silenciados {#muted-indicators}
 
-[Open Cybersecurity Framework (OCSF)][7] se integra directamente en Cloud SIEM, de modo que los logs de seguridad entrantes se enriquezcan automáticamente con atributos conformes al OCSF mediante pipelines predefinidos.
+Si un indicador de inteligencia de amenazas es benigno para su organización, puede silenciarlo para que Cloud SIEM lo califique como `benign` en el enriquecimiento de registros y en IOC Explorer (explorador de IOC). Datadog también mantiene una lista de solo lectura de indicadores conocidos como benignos que están silenciados para todas las organizaciones. Consulte [Muted Indicators][7] para obtener más información.
 
-## Referencias adicionales
+### Open Cybersecurity Framework (OCSF) {#open-cybersecurity-framework-ocsf}
+
+[Open Cybersecurity Framework (OCSF)][8] está integrado directamente en Cloud SIEM, por lo que los registros de seguridad entrantes se enriquecen automáticamente con atributos compatibles con OCSF mediante pipelines listos para usar.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/security/cloud_siem/content_packs/
-[2]: https://app.datadoghq.com/security/content-packs
+[2]: https://app.datadoghq.com/security/siem/content-packs
 [3]: /es/integrations/
 [4]: /es/logs/log_collection/
 [5]: /es/security/threat_intelligence/#threat-intelligence-sources
 [6]: /es/security/cloud_siem/threat_intelligence#bring-your-own-threat-intelligence
-[7]: /es/security/cloud_siem/open_cybersecurity_schema_framework
+[7]: /es/security/cloud_siem/ingest_and_enrich/muted_indicators/
+[8]: /es/security/cloud_siem/open_cybersecurity_schema_framework
