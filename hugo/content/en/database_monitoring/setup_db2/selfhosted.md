@@ -82,7 +82,7 @@ GRANT EXECUTE ON FUNCTION SYSPROC.MON_GET_PKG_CACHE_STMT TO USER datadog;
 
 These grants do not include read access to tables. For details, see [Database permissions][5].
 
-### Securely store your password
+#### Securely store your password
 
 {{% dbm-secret %}}
 
