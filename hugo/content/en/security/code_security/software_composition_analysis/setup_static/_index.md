@@ -43,8 +43,6 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 
 Static SCA detects vulnerabilities in the libraries listed in these files. Static SCA doesn't detect vulnerabilities in language runtimes, such as the PHP interpreter or the JVM. For coverage of language runtimes, see [Detection coverage by component type][28].
 
-<!-- TODO (Pierre-Louis): Confirm static SCA doesn't detect runtime vulnerabilities for any language, including Go and .NET. -->
-
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
 ## Lockfile-less scanning
