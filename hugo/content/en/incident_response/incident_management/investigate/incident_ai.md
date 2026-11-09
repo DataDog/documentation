@@ -117,13 +117,13 @@ Setting changes apply to new recordings, without changing recordings in progress
 
 ### View transcripts
 
-Start a linked incident meeting and admit the Datadog Transcriber if required. For Zoom, enable meeting captions. After recording starts, open the notebook from any of these locations:
+Start a linked incident meeting and admit the Datadog Transcriber if required. After recording starts, open the notebook from any of these locations:
 
 - The **Meeting Transcript** timeline entry.
 - The linked meeting's **View Transcript** action.
 - The transcript link in the incident Slack channel's meeting-card thread.
 
-The notebook includes an incident card, a link to join the meeting, and a section for each recording session. Updates appear periodically, so recent speech can take time to appear. When recording ends, Datadog finalizes the transcript and the timeline entry changes from **LIVE** to **ENDED**. Only speech captured while the transcriber is recording is included.
+The notebook includes an incident card, a link to join the meeting, and a section for each recording session. When recording ends, Datadog finalizes the transcript and the timeline entry changes from **LIVE** to **ENDED**. Only speech captured while the transcriber is recording is included.
 
 [Re-inviting the transcriber](#re-inviting-the-transcriber) adds a session to the same notebook and reuses the meeting's timeline entry, preserving earlier sessions.
 
@@ -136,9 +136,7 @@ Datadog manages notebook access using the incident's visibility and responder li
 | Organization-visible | Organization members receive Viewer access. | Organization members receive Editor access. |
 | Private | Incident responders receive Viewer access. | Incident responders receive Editor access. |
 
-Your Datadog role must also allow the relevant [notebook actions][11]. Responder and visibility changes update notebook access, and re-inviting the transcriber returns the notebook to Viewer access until recording ends. These updates can take time to appear.
-
-**Note**: Private incidents with more than 49 responders are not fully supported. For an existing notebook, access removals still apply, but additional responders are not granted access while the limit is exceeded.
+Responder and visibility changes update notebook access, and re-inviting the transcriber returns the notebook to Viewer access until recording ends. These updates can take time to appear.
 
 The subprocessor's seven-day retention period does not delete transcripts saved in Datadog notebooks. Deleting the incident deletes its associated transcript notebooks. Deleting a notebook during recording stops updates to that notebook without removing the transcriber; Datadog does not recreate the notebook for that recording.
 
@@ -206,4 +204,3 @@ For a full walkthrough of the investigation workflow, see [Bits Investigation][8
 [8]: /bits_ai/bits_investigation
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
 [10]: /help/
-[11]: /notebooks/#permissions
