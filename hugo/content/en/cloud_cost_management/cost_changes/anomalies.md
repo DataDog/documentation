@@ -127,11 +127,16 @@ To set up real-time anomaly notifications:
    - An amount in your organization's currency: a whole number greater than 0 (default: 500)
    - A percentage of the baseline cost: 0-100% (default: 5%)
 1. Under {{< ui >}}Choose who to notify{{< /ui >}}, add email addresses or Slack channels.
-1. Click {{< ui >}}Save configuration{{< /ui >}}. Changes apply going forward.
+1. Click {{< ui >}}Save configuration{{< /ui >}}. Changes apply to anomalies detected after you save.
 
-Real-time anomalies are sent only as notifications. They don't appear on the {{< ui >}}Anomalies{{< /ui >}} tab, and daily cost anomaly detection isn't affected.
+Real-time anomalies are sent only as notifications. They don't appear on the {{< ui >}}Anomalies{{< /ui >}} tab and don't affect anomalies detected from finalized billing data.
 
-Saving the form creates real-time anomaly monitors tagged `ccm_realtime_anomaly_notifications:true`: one monitor for each group-by tag you select, or a single monitor if you don't group. For example, grouping by two tags creates two monitors, each grouped by one of the tags, not one monitor grouped by both. Turning notifications off and saving deletes these monitors. For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
+Saving the form creates real-time anomaly monitors tagged `ccm_realtime_anomaly_notifications:true`:
+
+- If you don't group alerts, Datadog creates one monitor.
+- If you group alerts by tags, Datadog creates one monitor for each tag. For example, grouping by two tags creates two monitors, each grouped by one of the tags, not one monitor grouped by both.
+
+Turning off notifications and saving deletes these monitors. For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
 
 ## Troubleshooting
 
