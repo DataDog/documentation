@@ -4406,8 +4406,8 @@
     "request_schema_description": "Request payload for updating a maintenance window."
   },
   "ListTagConfigurations": {
-    "description": "Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
-    "summary": "Get a list of metrics"
+    "description": "Get a list of actively reporting metrics for your organization, with optional volumes, query activity,\nand tag configuration filters. When you need volumes, query activity, or tag configuration status for\nmany metrics, use this endpoint instead of calling per-metric endpoints (such as\n`GET /api/v2/metrics/{metric_name}/volumes` or `GET /api/v2/metrics/{metric_name}/tags`) in a loop,\nwhich is slower and quickly reaches rate limits. This endpoint does not return the tag keys or values\nthat a metric was submitted with.\n\nAlways paginate: send `page[size]` (up to 10000; a few hundred to a few thousand is typical) and follow\n`meta.pagination.next_cursor` (or `links.next`) until it is null or missing. Without `page[size]` or `page[cursor]`,\nthe response is not paginated: it returns matching metrics in one response, with no pagination metadata,\nup to a limit of 250,000 metrics by default (some organizations have a different limit). Metrics beyond\nthe limit are left out without any indication. Unpaginated requests in large organizations can also be\nslow or time out, and clients with response-size limits may fail or truncate the response.\nIf a request with `page[cursor]` returns `410 Gone`, the cursor has expired: restart from the first page\n(send `page[size]` without `page[cursor]`).\n\n- **Volumes**: `include=metric_volumes` adds the indexed and ingested volume of each metric. The volume is a\n  fixed one-hour value and is not affected by `window[seconds]`. Volumes are not returned inside `data`:\n  each metric with volume data has a `relationships.metric_volumes.data` reference, and the volumes\n  themselves are returned as `metric_volumes` resources in the top-level `included` array. To join them,\n  match `included[].id` to the `id` of `data[]` items with type `metrics`; both are the metric name.\n  `manage_tags` items in `data` repeat the same `id`, so skip them when joining. Metrics without volume\n  data, such as standard (non-custom) metrics, have no `metric_volumes` reference or entry.\n- **Top metrics by volume**: `sort=-metric_volumes.indexed_volume` together with `include=metric_volumes`\n  and `page[size]` (for example, `page[size]=20`) returns the metrics with the highest indexed volume\n  first. Sorting requires a paginated request.\n- **Volume for a family of metrics**: `filter[metrics.id]=http.request*` with `include=metric_volumes`\n  and `page[size]` returns volumes for every metric whose name starts with `http.request` (a value whose\n  only `*` is at the end is case-sensitive). A value without `*` matches names that contain it, ignoring\n  case.\n- **Unqueried metrics**: `filter[queried]=false` with `filter[queried][window][seconds]` (for example,\n  `2592000` for 30 days) and `page[size]` returns metrics that were not queried in that window.\n- **Metrics without a tag configuration**: `filter[configured]=false` with `page[size]` returns custom\n  metrics that have no Metrics without Limits&trade; tag configuration.\n- **Metric types**: if `filter[metric_type]` is omitted, metrics of all types are returned.\n\nExamples:\n- Top 20 metrics by indexed volume:\n  `GET /api/v2/metrics?include=metric_volumes&sort=-metric_volumes.indexed_volume&page[size]=20`\n- Metrics not queried in the last 30 days, with their volumes:\n  `GET /api/v2/metrics?filter[queried]=false&filter[queried][window][seconds]=2592000&include=metric_volumes&page[size]=1000`\n- Metrics without a tag configuration:\n  `GET /api/v2/metrics?filter[configured]=false&page[size]=1000`\n- Volumes for metrics whose name starts with `http.request`:\n  `GET /api/v2/metrics?filter[metrics.id]=http.request*&include=metric_volumes&page[size]=1000`\n\nQuery parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`).\nPass them as standard URL query strings, URL-encoding the brackets if your client does not handle them.\nFor example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.",
+    "summary": "List all metrics with volumes and query activity"
   },
   "CreateDerivedMetric": {
     "description": "Create a derived metric for the org. The metric name is supplied as the resource `id`,\nand the `definition` sets the formula and the queries the formula is computed from.\nRequires the `Manage Tags for Metrics` permission.",
@@ -4478,11 +4478,11 @@
     "request_schema_description": "Request body for updating a tag indexing rule."
   },
   "ListActiveMetricConfigurations": {
-    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.",
+    "description": "List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.\n\nTo find which of many metrics are queried or not queried, use `GET /api/v2/metrics` with `filter[queried]`\ninstead of calling this endpoint for each metric.",
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).",
+    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).\nThis window only limits which tags are returned; it does not affect whether the metric is found.\n\nA `404 Not Found` response means that no metric with this exact name exists in your organization.\nMetric names must match exactly. Distribution metrics do not have suffixes such as `.avg` or `.count`,\nso use the base metric name.\n\nFor high-cardinality metrics, keep responses small with `filter[include_tag_values]=false`,\n`page[limit]`, and `filter[match]`.",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
@@ -4490,7 +4490,7 @@
     "summary": "Related Assets to a Metric"
   },
   "EstimateMetricsOutputSeries": {
-    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
+    "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations\nconfiguration using Metrics without Limits&trade;.\n\nTo compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`\ninstead of calling this endpoint for each metric.",
     "summary": "Tag Configuration Cardinality Estimator"
   },
   "GetMetricTagCardinalityDetails": {
@@ -4526,7 +4526,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually\nmeans that the metric has no tag configuration, but it is also returned when no metric with this name exists\nin your organization.\n\nTo list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`\ninstead of calling this endpoint for each metric.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
@@ -4542,7 +4542,7 @@
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
   "ListVolumesByMetricName": {
-    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.",
+    "description": "View hourly average cardinality for the given metric name over the look back period.\nFor Metric Name Pricing customers, view total point volume for the given metric name\nover the look back period.\n\nTo get the last hour's indexed and ingested volumes for many metrics, use `GET /api/v2/metrics` with\n`include=metric_volumes` instead of calling this endpoint for each metric. Use this endpoint when you need\na longer look-back for a single metric.",
     "summary": "List distinct metric volumes by metric name"
   },
   "ListAiGatewayModelGroups": {
@@ -5979,6 +5979,24 @@
     "request_description": "The definition of the RUM configuration to create.",
     "request_schema_description": "Request body for creating the RUM configuration."
   },
+  "ListRUMArchiveConfigs": {
+    "description": "Get the list of archive configurations for your organization.",
+    "summary": "List archive configurations"
+  },
+  "DeleteRUMArchiveConfig": {
+    "description": "Delete the archive configuration for a RUM application. Archived and recovered session data is not deleted.",
+    "summary": "Delete an archive configuration"
+  },
+  "GetRUMArchiveConfig": {
+    "description": "Get the archive configuration for a RUM application.",
+    "summary": "Get an archive configuration"
+  },
+  "UpdateRUMArchiveConfig": {
+    "description": "Create or update the archive configuration for a RUM application. The application ID in the path must match `data.id`. Disabling archiving does not delete archived sessions.",
+    "summary": "Create or update an archive configuration",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
   "ListRumMetrics": {
     "description": "Get the list of all RUM-based metrics configured for your organization, with their definitions.\nThe list is not paginated.\nMetrics whose stored definition cannot be converted to the RUM format are omitted from the list.\nTo retrieve a single metric, use `GetRumMetric`.",
     "summary": "Get all RUM-based metrics"
@@ -6114,6 +6132,38 @@
     "summary": "Query aggregated waterfall",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated waterfall endpoint."
+  },
+  "GetRUMRecoverySessionCount": {
+    "description": "Return the full estimated number of recoverable sessions and the configured maximum per batch. The estimate is not capped at that maximum. This endpoint does not create a recovery request. Narrow the query or time range if the estimate exceeds max_recoverable_sessions. Creation checks a fresh estimate and returns 400 if it exceeds the configured maximum.",
+    "summary": "Estimate recoverable sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "ListRUMRecoveryBatchRequests": {
+    "description": "List batch recovery requests for your organization. Set `type=batch`. Optional `from` and `to` bounds filter request creation time; `query` filters the queries stored on recovery requests.\nA filtered page can be empty or contain fewer than `limit` results and still include `meta.next_cursor`. Continue until the cursor is absent, keeping the filters unchanged between pages.",
+    "summary": "List batch recovery requests"
+  },
+  "CreateRUMRecoveryRequest": {
+    "description": "Start targeted or query-based batch recovery. Use the returned `data.id` to poll the recovery request for progress. Batch creation checks a fresh recoverable-session estimate against the configured maximum (100,000 by default), accepting estimates equal to the maximum. Use the count operation to check the current maximum; creation can still reject a changed estimate. Narrow the query or time range if the maximum is exceeded.\n\nCreation is not idempotent. After an uncertain response, check session search or batch listing before retrying.",
+    "summary": "Create a recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "GetRUMRecoveryRequest": {
+    "description": "Get progress for a targeted or batch recovery request. A `COMPLETED` request can include failed sessions; check individual session statuses for targeted recovery.",
+    "summary": "Get recovery request progress"
+  },
+  "UpdateRUMRecoveryBatchRequest": {
+    "description": "Cancel pending work for a batch recovery request. Work already in progress can finish, and recovered data is not removed. Requests in a terminal state return `409`.",
+    "summary": "Cancel a batch recovery request",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
+  },
+  "SearchRUMArchiveSessions": {
+    "description": "Search archived RUM sessions. Use `meta.page.next_cursor` to retrieve the next page.",
+    "summary": "Search archived sessions",
+    "request_description": "JSON:API request body.",
+    "request_schema_description": "JSON:API document."
   },
   "ListRumReplayPlaylists": {
     "description": "List playlists.",
@@ -6370,10 +6420,6 @@
   "GetAsmServiceByName": {
     "description": "Retrieve Application Security details for services matching the given name.\nReturns Application Security activation, compatibility, and product enablement\ninformation for each matching `(service, environment)` pair, along with a count\nof services that have Application Security Management (Threats) enabled.",
     "summary": "Get Application Security details for a service"
-  },
-  "DownloadCloudWorkloadPolicyFile": {
-    "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
-    "summary": "Download the Workload Protection policy (US1-FED)"
   },
   "ListSecurityFindings": {
     "description": "Get a list of security findings that match a search query. [See the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the attributes.attributes. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
