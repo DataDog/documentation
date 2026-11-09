@@ -68,6 +68,8 @@ spec:
             port: 8282
 ```
 
+Use the exact port name `datadog-agent`. It tells the Operator to set `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS` to `0.0.0.0:8282`. A different name does not configure this source address automatically. For other sources, use a [recognized port name][7] or set the source's `DD_OP_SOURCE_*_ADDRESS` environment variable in `spec.components.pipelines[].env`.
+
 Apply the complete manifest and wait for the workloads:
 
 ```shell
@@ -76,7 +78,7 @@ kubectl wait --for=condition=Available \
   datadogbyoccluster/<CLUSTER_NAME> -n <NAMESPACE_NAME> --timeout=10m
 ```
 
-The Operator creates a Worker and Service named `<CLUSTER_NAME>-pipeline-agent`. It supplies the indexer destination endpoint, Datadog site, and shared API key. Configure the Agent to use `http://<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local:8282`. Do not also install a standalone Worker Helm release for this pipeline entry.
+The Operator creates a Worker and Service named `<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>`, where `<PIPELINE_NAME>` is the pipeline entry's `name` (`agent` in this example). It supplies the indexer destination endpoint, Datadog site, and shared API key. Configure the Agent to use `http://<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>.<NAMESPACE_NAME>.svc.cluster.local:8282`. Do not also install a standalone Worker Helm release for this pipeline entry.
 
 ### Standalone Worker Helm chart
 
@@ -165,3 +167,4 @@ Send a log from the configured Agent, select the cluster's BYOC index in Log Exp
 [4]: /observability_pipelines/destinations/datadog_byoc_logs/
 [5]: /observability_pipelines/sources/datadog_agent/?tab=agenthelmvaluesfile#connect-the-datadog-agent-to-the-observability-pipelines-worker
 [6]: /byoc-logs/install/datadog_operator/
+[7]: /containers/datadog_operator/crd_byoccluster/#pipelines-and-ports

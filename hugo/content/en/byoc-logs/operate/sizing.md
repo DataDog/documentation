@@ -176,7 +176,7 @@ When component resources or replica counts are omitted, the Operator applies the
 | Janitor | `2` | `4Gi` | `1` |
 | Each pipeline's Workers | `2` | `4Gi` | `2` |
 
-The [minimal installation example][7] explicitly sets one replica for the metastore, indexer, searcher, and Worker. With the default resources, that example requests a total of 16 CPUs and 48 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the workload sizing recommendations above to choose production resources and replica counts.
+The [installation example][7] explicitly sets one replica for the metastore, indexer, searcher, compactor, and Worker. It uses the default resources for the required components and explicitly requests 4 CPUs and 16 GiB of memory for the compactor. The total is 20 CPUs and 64 GiB of memory, excluding the Operator, Agent, and Kubernetes overhead. Use the workload sizing recommendations above to choose production resources and replica counts.
 
 Merge resource settings into the existing component, for example:
 

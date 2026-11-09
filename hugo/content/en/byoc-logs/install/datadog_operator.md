@@ -17,7 +17,7 @@ further_reading:
 
 Use Datadog Operator v1.33.0 or later to deploy a new BYOC cluster on AWS EKS. A `DatadogBYOCCluster` custom resource declares the BYOC engine components and the Observability Pipelines Workers that send logs to them. The Operator creates and reconciles their Kubernetes resources, configures the Worker-to-indexer connection, and reports their availability.
 
-This guide covers new deployments on AWS using the [reverse connection to Datadog][1]. The Operator does not support BYOC Ingress configuration. For GCP, Azure, or AWS deployments that require Ingress, use the [Helm installation guides][2].
+This guide covers new deployments on AWS using the [reverse connection to Datadog][1]. The Operator does not support BYOC Ingress configuration. If your deployment requires Ingress, contact your Datadog representative. For GCP or Azure, use the [Helm installation guides][2].
 
 The Operator uses default images for the BYOC engine and Workers. Upgrading the Operator also updates these default images. Explicit image tags or digests in `spec.imageOverrides` pin the corresponding image. See [Image overrides][3].
 
@@ -47,20 +47,38 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 
-Create `operator-values.yaml`:
+For a new Operator installation dedicated to BYOC, create `operator-values.yaml`. These settings enable the BYOC controllers and CRDs and disable the unrelated controllers and CRDs enabled by default:
 
 ```yaml
-image:
-  tag: "1.33.0"
 datadogBYOCCluster:
   enabled: true
+datadogAgent:
+  enabled: false
+datadogAgentInternal:
+  enabled: false
+datadogCSIDriver:
+  enabled: false
+
 datadogCRDs:
   crds:
+    datadogAgents: false
+    datadogMetrics: false
+    datadogPodAutoscalers: false
+    datadogPodAutoscalerClusterProfiles: false
+    datadogMonitors: false
+    datadogCSIDrivers: false
+    datadogAgentInternals: false
+    datadogInstrumentations: false
     datadogBYOCClusters: true
     datadogObservabilityPipelinesWorkers: true
+
+watchNamespaces:
+  - ""
 ```
 
-Use a Datadog Operator chart that supports these settings and Operator v1.33.0. The chart version and Operator image version are separate version numbers.
+Use a Datadog Operator chart whose default image is Operator v1.33.0 or later. Keep the chart's default image instead of setting `image.tag`. The chart version and Operator image version are separate version numbers.
+
+`watchNamespaces: [""]` watches all namespaces, including the `byoc` namespace used in this guide. To restrict the watch scope, list the namespaces to manage, including `byoc`. If you omit this setting, the Operator watches only its installation namespace.
 
 For a new Operator installation, run:
 
@@ -71,7 +89,7 @@ helm install datadog-operator datadog/datadog-operator \
   --values operator-values.yaml
 ```
 
-If an Operator is already installed, add these settings to its existing values file and upgrade that release in its existing namespace. Preserve other enabled controllers and configuration. If its watch scope is restricted, include the `byoc` namespace. See [Operator installation][9].
+If an Operator is already installed, enable `datadogBYOCCluster` and the two BYOC-related CRDs in its existing values file. Upgrade that release in its existing namespace. Preserve other enabled controllers and CRDs instead of applying the disabling settings above. Include `byoc` in its watch scope. See [Operator installation][9].
 
 Verify that both CRDs are installed and the Operator pod is running:
 
@@ -144,6 +162,14 @@ spec:
       replicas: 1
     searcher:
       replicas: 1
+    compactor:
+      replicas: 1
+      resources:
+        requests:
+          cpu: "4"
+          memory: 16Gi
+        limits:
+          memory: 16Gi
     controlPlane: {}
     janitor: {}
     pipelines:

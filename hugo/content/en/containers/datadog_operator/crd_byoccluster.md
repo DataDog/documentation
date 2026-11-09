@@ -55,6 +55,14 @@ The Operator deploys Workers for existing pipelines. It does not create pipeline
          replicas: 1
        searcher:
          replicas: 1
+       compactor:
+         replicas: 1
+         resources:
+           requests:
+             cpu: "4"
+             memory: 16Gi
+           limits:
+             memory: 16Gi
        controlPlane: {}
        janitor: {}
        pipelines:
@@ -143,6 +151,8 @@ kubectl explain datadogbyoccluster.spec --recursive
 
 The required engine component entries are `metastore`, `indexer`, `searcher`, `controlPlane`, and `janitor`. The optional `compactor` and `readOnlyMetastore` entries enable those workloads when configured. Each component supports replica and resource configuration, with additional settings for storage and scheduling.
 
+Datadog strongly recommends enabling `compactor`, as shown in the example. Set its resource requests and limits using the [sizing guide][4].
+
 The primary and read-only metastores require a database connection Secret reference under `database.uriSecretRef`. The Operator deploys the metastore workloads; you provision and operate their PostgreSQL databases. See [Metastore read replicas][5].
 
 ### Pipelines and ports
@@ -151,7 +161,28 @@ Set each existing pipeline's ID in `spec.components.pipelines[].pipelineID`. Eac
 
 The Operator supplies the Worker's BYOC destination endpoint, Datadog site, and shared API key. If engine REST TLS is configured, the destination URL uses HTTPS. Configure certificates and trust settings for that connection separately.
 
-Port names select the Worker's source listen-address setting. The Operator generates the corresponding container port, Service port, and listen-address environment variable:
+**Port names control automatic source-address configuration.** Use an exact port name from the following table in `spec.components.pipelines[].ports[].name`. The Operator sets the corresponding environment variable to `0.0.0.0:<PORT>`, using that entry's `port` value, and creates the container and Service ports.
+
+| Port name | Source-address environment variable |
+|---|---|
+| `otlp-grpc` | `DD_OP_SOURCE_OTEL_GRPC_ADDRESS` |
+| `otlp-http` | `DD_OP_SOURCE_OTEL_HTTP_ADDRESS` |
+| `datadog-agent` | `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS` |
+| `splunk-tcp` | `DD_OP_SOURCE_SPLUNK_TCP_ADDRESS` |
+| `splunk-hec` | `DD_OP_SOURCE_SPLUNK_HEC_ADDRESS` |
+| `http-server` | `DD_OP_SOURCE_HTTP_SERVER_ADDRESS` |
+| `fluent` | `DD_OP_SOURCE_FLUENT_ADDRESS` |
+| `logstash` | `DD_OP_SOURCE_LOGSTASH_ADDRESS` |
+| `syslog` | `DD_OP_SOURCE_SYSLOG_ADDRESS` |
+| `socket` | `DD_OP_SOURCE_SOCKET_ADDRESS` |
+| `aws-firehose` | `DD_OP_SOURCE_AWS_DATA_FIREHOSE_ADDRESS` |
+| `sumo-logic` | `DD_OP_SOURCE_SUMO_LOGIC_ADDRESS` |
+| `prom-pushgw` | `DD_OP_SOURCE_PROMETHEUS_PUSHGATEWAY_ADDRESS` |
+| `prom-rem-write` | `DD_OP_SOURCE_PROMETHEUS_REMOTE_WRITE_ADDRESS` |
+
+If you use a port name outside this table, set the source's `DD_OP_SOURCE_*_ADDRESS` environment variable explicitly in `spec.components.pipelines[].env`. Declaring the port alone does not configure the Worker's source listener.
+
+For example:
 
 | Source | Port name | Example port |
 |---|---|---:|
