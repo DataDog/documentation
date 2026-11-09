@@ -319,3 +319,4 @@ DD_DATA_PLANE_ENABLED=false
 [5]: /integrations/go_expvar/
 [6]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 [7]: https://github.com/DataDog/helm-charts/releases/tag/datadog-operator-2.32.0
+[8]: #default-enablement
