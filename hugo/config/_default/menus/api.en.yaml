@@ -21961,7 +21961,7 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Rum Metrics
+    - name: RUM Metrics
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
       generated: true
@@ -22025,7 +22025,7 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
-    - name: Rum Replay Heatmaps
+    - name: RUM Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
       generated: true
@@ -22077,7 +22077,7 @@ menu:
           - ListReplayHeatmapSnapshots
         unstable: []
         order: 2
-    - name: Rum Replay Playlists
+    - name: RUM Replay Playlists
       url: /api/latest/rum-replay-playlists/
       identifier: rum-replay-playlists
       generated: true
@@ -22189,7 +22189,7 @@ menu:
           - ListRumReplayPlaylists
         unstable: []
         order: 2
-    - name: Rum Replay Sessions
+    - name: RUM Replay Sessions
       url: /api/latest/rum-replay-sessions/
       identifier: rum-replay-sessions
       generated: true
@@ -22205,7 +22205,7 @@ menu:
           - GetSegments
         unstable: []
         order: 1
-    - name: Rum Replay Viewership
+    - name: RUM Replay Viewership
       url: /api/latest/rum-replay-viewership/
       identifier: rum-replay-viewership
       generated: true
@@ -22257,7 +22257,7 @@ menu:
           - ListRumReplaySessionWatchers
         unstable: []
         order: 4
-    - name: Rum Retention Filters
+    - name: RUM Retention Filters
       url: /api/latest/rum-retention-filters/
       identifier: rum-retention-filters
       generated: true

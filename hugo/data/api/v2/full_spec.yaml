@@ -1888,6 +1888,7 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
+      example: logs
       in: path
       name: product
       required: true
@@ -275569,19 +275570,25 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
+    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
+    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
+    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
+    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
+    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
