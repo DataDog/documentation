@@ -71,9 +71,7 @@ Static and runtime detection analyze different parts of an application. Knowing 
 
 <!-- TODO (Pierre-Louis): Runtime SCA language runtime coverage (Go and .NET only) is from your Slack answer on 2026-10-27. Confirm the static SCA column: does static SCA detect Go or .NET runtime vulnerabilities, for example from the Go version in `go.mod`? -->
 
-To detect vulnerabilities in operating system packages, container images, and language runtimes installed through an operating system package manager, use [Cloud Security Vulnerabilities][35].
-
-<!-- TODO (Cloud Security VM team): Per the PHP2Shell Security Labs post, Cloud Security Vulnerabilities covers official OS packages only, not self-compiled runtimes such as those in official PHP Docker images. Confirm the wording above is accurate, and whether the self-compiled limitation belongs here or only on the Cloud Security Vulnerabilities page. -->
+To detect vulnerabilities in operating system packages, container images, and language runtimes installed through an operating system package manager, use [Cloud Security Vulnerabilities][35]. Cloud Security Vulnerabilities supports [official operating system vendor packages only][38], so it doesn't detect language runtimes compiled from source.
 
 ## Vulnerability intelligence
 
@@ -99,13 +97,11 @@ Emerging vulnerabilities are high-severity, widely discussed vulnerabilities tha
 
 Datadog Security Research classifies a vulnerability as emerging based on the [emerging vulnerability criteria][36]. For each emerging vulnerability, Datadog:
 
-- Publishes a card in the [Security Research Feed][37] with analysis, affected versions, steps to find affected resources, and remediation guidance.
-- Marks matching SCA findings as emerging vulnerabilities.
-- Counts emerging vulnerability advisories on the Code Security **Summary** page, including advisories that don't affect your scanned resources.
+- Publishes an article in the [Security Research Feed][37] with analysis, matches in your environment, and remediation guidance.
+- Flags matching SCA findings as emerging. In the Vulnerabilities Explorer, the {{< ui >}}Emerging Vulnerability{{< /ui >}} facet filters for these findings.
+- Shows a banner on the {{< ui >}}Vulnerabilities{{< /ui >}} tab when emerging vulnerabilities affect your repositories or services.
 
-<!-- TODO (Pierre-Louis): Confirm the last two bullets. (1) How does the emerging flag appear in the Vulnerabilities Explorer, and is there a filter or facet name to document? (2) What is the exact Summary page label? Card contents in the first bullet were verified against the PHP2Shell card in the demo org on 2026-10-27. -->
-
-To check exposure to an emerging vulnerability, open the vulnerability card in the Security Research Feed, or search the [CVE Explorer][27] for the CVE.
+To check exposure to an emerging vulnerability, open the vulnerability article in the Security Research Feed, or search the [CVE Explorer][27] for the CVE.
 
 ## Key capabilities
 
@@ -377,3 +373,4 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [35]: /security/cloud_security_management/vulnerabilities/
 [36]: /security/research_feed/#criteria-for-emerging-vulnerabilities
 [37]: /security/research_feed/
+[38]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility/

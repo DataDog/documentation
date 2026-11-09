@@ -1,6 +1,6 @@
 ---
 title: Security Research Feed
-description: "Understand the Datadog Security Research Feed, including the criteria for emerging vulnerabilities and threats, and use Bits Chat to investigate how they affect your environment."
+description: "Understand the Datadog Security Research Feed and the criteria for emerging vulnerabilities and threats, and assess exposure to them in your environment, including with Bits Chat."
 ---
 
 The Datadog Security Research Feed provides continuously updated security-related content to help organizations stay ahead of emerging threats and vulnerabilities. Managed by Datadog's Security Research and Detection Engineering teams, the feed delivers timely insights into critical security developments, including:
@@ -10,6 +10,8 @@ The Datadog Security Research Feed provides continuously updated security-relate
 - **Product updates**: Enhancements to Datadog's security capabilities that improve your ability to monitor and protect your environment.
 
 {{< img src="security/security_research_feed.png" alt="The Security Research Feed displaying security updates, including blog posts, product updates, emerging vulnerabilities, and new detections" width="100%">}}
+
+<div class="alert alert-tip">While a Security Research Feed article is open in the side panel, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> to ask Bits Chat about the article. Bits Chat attaches the article as context automatically, for every article type. Bits Chat conversations consume <a href="/account_management/billing/ai_credits/">AI Credits</a> and require the <strong>Bits Chat Access</strong> permission.</div>
 
 ## How it works
 
@@ -35,48 +37,35 @@ An emerging threat is a new or evolving attack campaign or supply-chain attack t
 - **Imminent threat**: The threat has already caused impact or is expected to escalate, with near-term attacks likely to affect many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
 
-## Assess exposure to an emerging vulnerability
+## Assess exposure to an emerging vulnerability or threat
 
-Emerging vulnerability cards in the Security Research Feed combine analysis, matches in your environment, and remediation guidance, so you can assess exposure from one place.
+Emerging articles in the Security Research Feed combine analysis, matches in your environment, and remediation guidance, so you can assess exposure from one place.
 
-1. In Datadog, go to **Security** > **Research Feed**.
-2. In the **Article type** filter, select **Emerging Vulns & Threats**. The feed shows both emerging vulnerabilities and emerging threats.
-3. Open the card for the vulnerability. The card includes:
-   - An **Impact Assessment** panel with matching vulnerabilities, threats, and Agent events in your environment.
-   - Affected and fixed versions.
-   - Steps to find affected resources with Datadog products.
-   - Guidance for investigating possible exploitation and remediating affected resources.
+1. In {{< ui >}}Security{{< /ui >}} > {{< ui >}}Research Feed{{< /ui >}}, in the {{< ui >}}Article type{{< /ui >}} filter, select {{< ui >}}Emerging Vulns & Threats{{< /ui >}}. The feed shows both emerging vulnerabilities and emerging threats.
+1. Open the article for the vulnerability or threat. Each article includes:
+   - A description of the vulnerability or threat.
+   - An {{< ui >}}Impact Assessment{{< /ui >}} section with matches in your environment.
+   - Remediation guidance.
 
-<!-- TODO: Card contents verified against one card (PHP2Shell) in the demo org on 2026-10-27. Confirm with Security Research that all emerging vulnerability cards follow this structure. -->
+   Most articles also include steps to find affected resources with Datadog.
 
-## Investigate emerging vulnerabilities and threats with Bits Chat
+### Investigate emerging vulnerabilities and threats with Bits Chat
 
-**Requirements**: The **Bits Chat Access** permission.
+Bits Chat checks every data source an emerging vulnerability or emerging threat article lists, so you can find affected resources without querying each source yourself.
 
-The Security Research Feed can use [Bits Chat][1] to investigate how an emerging vulnerability or emerging threat affects your environment. Bits Chat reads the article and checks the data sources it lists, such as vulnerability findings, security signals, APM services, and container images, for affected resources. Bits Chat then summarizes which resources are affected and suggests remediation steps for them.
+The data sources Bits checks include vulnerability findings, security signals, APM services, and container images. Bits Chat results include only data in Datadog. Resources that Datadog doesn't monitor, such as hosts without the Datadog Agent or services without APM, don't appear in the results. 
 
-The {{< ui >}}Investigate with Bits{{< /ui >}} button is available only for Emerging Vulnerability and Emerging Threat articles.
+After the investigation, Bits Chat summarizes the affected resources and suggests remediation steps. Review the results before you act on them.
 
-To investigate an article with Bits Chat:
+Investigations run in [Bits Chat][1] and consume [AI Credits][2].
 
-1. In the Security Research Feed, open an Emerging Vulnerability or Emerging Threat article.
-2. In the {{< ui >}}Impact Assessment{{< /ui >}} section of the side panel, click {{< ui >}}Investigate with Bits{{< /ui >}}. Bits Chat opens a new conversation with the article attached as context. During the investigation, the button displays {{< ui >}}Bits is investigating…{{< /ui >}}.
-3. Review the Bits Chat response. The response includes a coverage table that lists each data source Bits Chat checked, what it queried, and the result.
+You must have the **Bits Chat Access** permission to complete this task.
+
+1. Open an emerging vulnerability or emerging threat article. Other article types don't support investigations.
+1. In the {{< ui >}}Impact Assessment{{< /ui >}} section, click {{< ui >}}Investigate with Bits{{< /ui >}}. Bits Chat opens a new conversation with the article attached as context.
+1. Review the Bits Chat response. The response includes a coverage table that lists each data source Bits Chat checked, the Bits Chat query for each data source, and the result.
 
 {{< img src="security/research_feed_investigate_with_bits.png" alt="A Security Research Feed article about an emerging PHP vulnerability open in the side panel, with the Investigate with Bits button in the Impact Assessment section" width="100%">}}
-
-<div class="alert alert-info">Bits Chat bases its results only on data in Datadog. Resources that Datadog does not monitor, such as hosts without the Datadog Agent or services without APM, do not appear in the results. Review the results before you act on them.</div>
-
-After you investigate an article, the side panel displays two buttons:
-
-- {{< ui >}}View existing investigation{{< /ui >}}: Reopens the previous Bits Chat conversation for the article.
-- {{< ui >}}Start a new investigation{{< /ui >}}: Starts a new Bits Chat conversation for the article.
-
-Investigations run in Bits Chat and consume [AI Credits][2].
-
-### Ask Bits Chat about a Security Research Feed article
-
-When a Security Research Feed article is open, Bits Chat attaches the article as context automatically. To ask Bits Chat about the article, press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd> while the article is open in the side panel. This works for all article types.
 
 [1]: /bits_ai/bits_chat/
 [2]: /account_management/billing/ai_credits/
