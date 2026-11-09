@@ -116,21 +116,22 @@ This is an example of how to mark a cost anomaly as significant and explain why 
 
 ## Real-time anomaly notifications
 
-Anomalies on the {{< ui >}}Anomalies{{< /ui >}} tab use finalized billing data, which is typically available 2-3 days after usage. To be notified minutes after a cost spike instead, set up real-time anomaly notifications. Datadog detects real-time anomalies on estimated AI costs and [real-time cloud costs][6], and alerts within 15 minutes.
+Real-time anomaly notifications alert you within 15 minutes of an unexpected increase in estimated AI costs or [real-time cloud compute costs][6]. The {{< ui >}}Anomalies{{< /ui >}} tab uses finalized billing data instead, which is typically available 2-3 days after usage.
 
 To set up real-time anomaly notifications:
 
 1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}} > {{< ui >}}Real-time notifications{{< /ui >}}.
-1. Select {{< ui >}}AI providers{{< /ui >}} or {{< ui >}}Cloud/SaaS providers{{< /ui >}}, and turn on {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}} or {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. The {{< ui >}}Cloud/SaaS providers{{< /ui >}} option covers AWS, Azure, and Google Cloud.
-1. Under {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, optionally group alerts by up to two tags and filter the cost. Then set the minimum cost impact. Notifications are sent only when the anomaly cost over the next 24 hours is likely to exceed the higher of:
-   - an amount in your organization's currency (a whole number greater than 0)
-   - a percentage of the baseline cost
+1. Select {{< ui >}}AI providers{{< /ui >}} and turn on {{< ui >}}Alert on real-time AI cost anomalies{{< /ui >}}, or select {{< ui >}}Cloud/SaaS providers{{< /ui >}} and turn on {{< ui >}}Alert on real-time cloud cost anomalies{{< /ui >}}. The {{< ui >}}Cloud/SaaS providers{{< /ui >}} option covers AWS, Azure, and Google Cloud.
+1. Under {{< ui >}}Specify cost scope & alert conditions{{< /ui >}}, optionally group alerts by up to two tags and filter the cost.
+1. Set the minimum cost impact. Datadog sends a notification only when the anomaly cost over the next 24 hours is likely to exceed the higher of:
+   - An amount in your organization's currency (a whole number greater than 0)
+   - A percentage of the baseline cost
 1. Under {{< ui >}}Choose who to notify{{< /ui >}}, add email addresses or Slack channels.
 1. Click {{< ui >}}Save configuration{{< /ui >}}. Changes apply going forward.
 
 Real-time anomalies are sent only as notifications. They don't appear on the {{< ui >}}Anomalies{{< /ui >}} tab, and daily cost anomaly detection isn't affected.
 
-Saving the form creates real-time anomaly monitors tagged `ccm_realtime_anomaly_notifications:true`: one monitor for each group-by tag you select, or a single monitor if you don't group. Turning notifications off and saving deletes these monitors. For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
+Saving the form creates real-time anomaly monitors tagged `ccm_realtime_anomaly_notifications:true`: one monitor for each group-by tag you select, or a single monitor if you don't group. For example, grouping by two tags creates two monitors, each grouped by one of the tags, not one monitor grouped by both. Turning notifications off and saving deletes these monitors. For a custom notification message or more than one configuration per provider, [create a real-time anomaly monitor][7] instead.
 
 ## Troubleshooting
 
