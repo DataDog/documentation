@@ -1,4 +1,4 @@
-import { CDOCS_NOOP } from '../../schemas/constants';
+import { CDOCS_NOOP } from '../../schemas/constants.js';
 
 /**
  * Convert a trait value that represents a semver,

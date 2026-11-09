@@ -1,4 +1,4 @@
-import { FilterConfig } from '../../schemas/frontmatter';
+import { FilterConfig } from '../../schemas/frontmatter.js';
 
 type Condition = Record<string, string[]>;
 

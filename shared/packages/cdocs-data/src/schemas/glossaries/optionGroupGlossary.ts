@@ -3,7 +3,7 @@
  * names and options between docs pages.
  */
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from '../regexes.js';
 
 /**
  * A single option in an option group.

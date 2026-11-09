@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { OPTION_GROUP_ID_REGEX, SNAKE_CASE_REGEX } from './regexes';
-import { FilterConfigSchema } from './frontmatter';
-import { CdocsErrorSchema } from './errors';
-import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
-import { CDOCS_NOOP } from './constants';
+import { OPTION_GROUP_ID_REGEX, SNAKE_CASE_REGEX } from './regexes.js';
+import { FilterConfigSchema } from './frontmatter.js';
+import { CdocsErrorSchema } from './errors.js';
+import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary.js';
+import { CDOCS_NOOP } from './constants.js';
 
 /**
  * An option available in a resolved page filter

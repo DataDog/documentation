@@ -2,8 +2,8 @@ import {
   loadTraitGlossaries,
   loadOptionGlossaries,
   loadOptionGroupGlossaries,
-} from '../../utils/yamlConfigParsing';
-import { CustomizationConfigByLang } from '../../schemas/customizationConfig';
+} from '../../utils/yamlConfigParsing.js';
+import { CustomizationConfigByLang } from '../../schemas/customizationConfig.js';
 
 /**
  * Loads the customization configuration for all languages into memory,

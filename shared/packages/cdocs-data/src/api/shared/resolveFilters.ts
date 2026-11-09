@@ -9,16 +9,16 @@
  * (for example, file system access).
  */
 
-import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes';
+import { GLOBAL_PLACEHOLDER_REGEX } from '../../schemas/regexes.js';
 import {
   ResolvedFilters,
   ResolvedFilter,
   FiltersManifest,
   ClientSideFiltersManifest,
-} from '../../schemas/pageFilters';
-import { FilterConfig } from '../../schemas/frontmatter';
-import { shouldDisplayFilter } from './shouldDisplayFilter';
-import { CDOCS_NOOP } from '../../schemas/constants';
+} from '../../schemas/pageFilters.js';
+import { FilterConfig } from '../../schemas/frontmatter.js';
+import { shouldDisplayFilter } from './shouldDisplayFilter.js';
+import { CDOCS_NOOP } from '../../schemas/constants.js';
 
 /**
  * Resolve the page filters object that is used

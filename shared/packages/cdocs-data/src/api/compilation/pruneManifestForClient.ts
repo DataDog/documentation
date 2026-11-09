@@ -2,7 +2,7 @@ import {
   FiltersManifest,
   ClientSideFiltersManifest,
   ClientSideFiltersManifestSchema,
-} from '../../schemas/pageFilters';
+} from '../../schemas/pageFilters.js';
 
 /**
  * Convert a standard compile-time page filters manifest

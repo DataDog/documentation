@@ -1,7 +1,7 @@
-import gte from 'semver/functions/gte';
-import minVersion from 'semver/ranges/min-version';
-import { convertTraitValueToSemver } from './convertTraitValueToSemver';
-import { CDOCS_NOOP } from '../../schemas/constants';
+import gte from 'semver/functions/gte.js';
+import minVersion from 'semver/ranges/min-version.js';
+import { convertTraitValueToSemver } from './convertTraitValueToSemver.js';
+import { CDOCS_NOOP } from '../../schemas/constants.js';
 
 /**
  * Given a trait value that represents a semver,

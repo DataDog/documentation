@@ -1,7 +1,7 @@
 import {
   OPTION_GROUP_ID_REGEX,
   RESOLVED_OPTION_GROUP_ID_REGEX,
-} from '../../schemas/regexes';
+} from '../../schemas/regexes.js';
 
 /**
  * Validate a string representing an option group ID, or a resolved version of it.

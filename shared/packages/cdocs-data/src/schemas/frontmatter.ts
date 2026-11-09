@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from './regexes';
+import { SNAKE_CASE_REGEX, OPTION_GROUP_ID_REGEX } from './regexes.js';
 
 /**
  * The configuration of an individual page filter,

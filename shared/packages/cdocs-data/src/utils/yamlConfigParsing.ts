@@ -4,17 +4,17 @@ import {
   TraitGlossary,
   TraitGlossarySchema,
   RawTraitGlossarySchema,
-} from '../schemas/glossaries/traitGlossary';
+} from '../schemas/glossaries/traitGlossary.js';
 import {
   OptionGlossary,
   OptionGlossarySchema,
   RawOptionGlossarySchema,
-} from '../schemas/glossaries/optionGlossary';
+} from '../schemas/glossaries/optionGlossary.js';
 import {
   OptionGroupGlossary,
   OptionGroupGlossarySchema,
   RawOptionGroupGlossarySchema,
-} from '../schemas/glossaries/optionGroupGlossary';
+} from '../schemas/glossaries/optionGroupGlossary.js';
 import path from 'path';
 
 /**

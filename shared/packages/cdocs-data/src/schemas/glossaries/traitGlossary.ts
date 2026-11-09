@@ -3,7 +3,7 @@
  * attributes and options between docs pages.
  */
 import { z } from 'zod';
-import { SNAKE_CASE_REGEX } from '../regexes';
+import { SNAKE_CASE_REGEX } from '../regexes.js';
 
 export const TraitTypeSchema = z.enum(['text', 'semver']);
 

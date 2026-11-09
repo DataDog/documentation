@@ -1,11 +1,11 @@
-import { GLOBAL_PLACEHOLDER_REGEX, PLACEHOLDER_REGEX } from '../../schemas/regexes';
-import { Frontmatter, FilterConfig } from '../../schemas/frontmatter';
-import { FiltersManifest, FiltersManifestSchema } from '../../schemas/pageFilters';
-import { CdocsError } from '../../schemas/errors';
-import { CustomizationConfig } from '../../schemas/customizationConfig';
+import { GLOBAL_PLACEHOLDER_REGEX, PLACEHOLDER_REGEX } from '../../schemas/regexes.js';
+import { Frontmatter, FilterConfig } from '../../schemas/frontmatter.js';
+import { FiltersManifest, FiltersManifestSchema } from '../../schemas/pageFilters.js';
+import { CdocsError } from '../../schemas/errors.js';
+import { CustomizationConfig } from '../../schemas/customizationConfig.js';
 import { v4 as uuidv4 } from 'uuid';
-import { convertTraitValueToSemver } from '../shared/convertTraitValueToSemver';
-import { getExcludedTraitValues } from '../shared/shouldDisplayFilter';
+import { convertTraitValueToSemver } from '../shared/convertTraitValueToSemver.js';
+import { getExcludedTraitValues } from '../shared/shouldDisplayFilter.js';
 
 /**
  * Combine a page's frontmatter, the global glossary,

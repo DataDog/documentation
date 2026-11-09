@@ -3,6 +3,7 @@
   "version": "2.0.1",
   "description": "Utilities for working with customizable docs data",
   "packageManager": "yarn@4.10.3",
+  "type": "module",
   "files": [
     "dist",
     "README.md",
@@ -11,47 +12,38 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
     "./ClientSideFiltersManifest": {
       "import": "./dist/schemas/pageFilters.js",
-      "require": "./dist/schemas/pageFilters.js",
       "types": "./dist/schemas/pageFilters.d.ts"
     },
     "./getTraitValsFromUrl": {
       "import": "./dist/api/browser/getTraitValsFromUrl.js",
-      "require": "./dist/api/browser/getTraitValsFromUrl.js",
       "types": "./dist/api/browser/getTraitValsFromUrl.d.ts"
     },
     "./writeTraitValsToUrl": {
       "import": "./dist/api/browser/writeTraitValsToUrl.js",
-      "require": "./dist/api/browser/writeTraitValsToUrl.js",
       "types": "./dist/api/browser/writeTraitValsToUrl.d.ts"
     },
     "./CdocsClientStorage": {
       "import": "./dist/api/browser/CdocsClientStorage.js",
-      "require": "./dist/api/browser/CdocsClientStorage.js",
       "types": "./dist/api/browser/CdocsClientStorage.d.ts"
     },
     "./resolveFilters": {
       "import": "./dist/api/shared/resolveFilters.js",
-      "require": "./dist/api/shared/resolveFilters.js",
       "types": "./dist/api/shared/resolveFilters.d.ts"
     },
     "./semverIsAtLeast": {
       "import": "./dist/api/shared/semverIsAtLeast.js",
-      "require": "./dist/api/shared/semverIsAtLeast.js",
       "types": "./dist/api/shared/semverIsAtLeast.d.ts"
     },
     "./convertTraitValueToSemver": {
       "import": "./dist/api/shared/convertTraitValueToSemver.js",
-      "require": "./dist/api/shared/convertTraitValueToSemver.js",
       "types": "./dist/api/shared/convertTraitValueToSemver.d.ts"
     },
     "./validateOptionGroupId": {
       "import": "./dist/api/shared/validateOptionGroupId.js",
-      "require": "./dist/api/shared/validateOptionGroupId.js",
       "types": "./dist/api/shared/validateOptionGroupId.d.ts"
     }
   },

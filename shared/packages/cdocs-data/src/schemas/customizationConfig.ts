@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { TraitGlossarySchema } from './glossaries/traitGlossary';
-import { OptionGlossarySchema } from './glossaries/optionGlossary';
-import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary';
+import { TraitGlossarySchema } from './glossaries/traitGlossary.js';
+import { OptionGlossarySchema } from './glossaries/optionGlossary.js';
+import { OptionGroupGlossarySchema } from './glossaries/optionGroupGlossary.js';
 
 export const CustomizationConfigSchema = z.object({
   traitsById: TraitGlossarySchema,

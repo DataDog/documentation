@@ -202,12 +202,6 @@ export default defineConfig({
       // staticApiGuard and verifyDist.mjs already allow.
       sourcemap: "hidden",
     },
-    ssr: {
-      // cdocs-data is linked from shared/packages/ and ships CommonJS. Vite
-      // inlines linked packages by default and evaluates them as ESM, which
-      // fails with "exports is not defined". Externalizing hands it to Node.
-      external: ["cdocs-data"],
-    },
     server: {
       fs: {
         allow: [astroSite, hugoSite, sharedDir, websitesModules],
