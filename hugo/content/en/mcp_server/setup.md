@@ -58,8 +58,6 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
-If the login page opens on a different Datadog site than the one hosting your organization, the connector is likely set to a different region. Remove the Datadog connector in Claude, then add it again and select the correct region.
-
 {{% collapse-content title="Manual setup with a custom connector" level="h4" expanded=false id="claude-custom-connector" %}}
 If the directory connector is not available to you, you can add Datadog as a [custom connector][2] using the remote MCP URL for your [Datadog site][3] ({{< region-param key="dd_site_name" >}}). For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
