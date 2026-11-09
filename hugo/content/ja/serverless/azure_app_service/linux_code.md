@@ -764,6 +764,8 @@ Continuous Profiler を有効にするには、環境変数 `DD_PROFILING_ENABLE
 
 [{{< ui >}}Log stream{{< /ui >}}] (ログストリーム) の内容を [Datadog サポート][9] と共有してください。
 
+App Service Planで自動スケーリングが有効になっており、関連のないトレースがマージされている場合、Azureプラットフォームのヘルスプローブ (`User-Agent: HttpScaleManager`) が古いW3Cトレースコンテキストを保持している可能性があります。アプリへのすべての呼び出し元がDatadogでインストルメント化されている場合は、影響を受けるアプリで `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` を設定し、トレースコンテキストの抽出をDatadog形式に制限してください。Datadogでインストルメント化されていない呼び出し元を持つアプリの場合、この設定を行うと、DatadogはそれらのW3Cトレースコンテキストを無視し、それらのリクエストを親トレースにマージするのではなく、切断されたトレースに分割します。
+
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

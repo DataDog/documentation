@@ -24,16 +24,16 @@ DDOT SDKs are in Preview.
 
 A Datadog OpenTelemetry (DDOT) SDK is the Datadog SDK for your language, configured to send OpenTelemetry data over [OTLP][1] to an OTLP receiver, such as the [DDOT Collector][2] or the [upstream OpenTelemetry Collector][3]. You don't need the Datadog Agent.
 
-Already use a Datadog SDK that sends data to the Datadog Agent? To keep that setup and add the OpenTelemetry API, see [OpenTelemetry API Support][4].
+Already use a Datadog SDK that sends data to the Datadog Agent? To switch it to a DDOT SDK, keep the same package and [turn on the DDOT SDK](#turn-on-the-ddot-sdk). To keep sending to the Agent and add the OpenTelemetry API, see [OpenTelemetry API Support][4].
 
 ## Prerequisites
 
-- **The Datadog SDK installed and attached to your service.** Pick your language in [Add the Datadog SDK][5], and skip the Agent steps: the DDOT SDK sends to your receiver instead. On Kubernetes, the OpenTelemetry Operator can inject the DDOT SDK instead. See the [Kubernetes quickstart][6].
+- **The Datadog SDK installed and attached to your service.** Pick your language in [Add the Datadog SDK][5], and skip the Agent steps: the DDOT SDK sends to your receiver instead. On Kubernetes, the OpenTelemetry Operator can inject the DDOT SDK for Java, Python, Node.js, and .NET instead. See the [Kubernetes quickstart][6].
 - **An OTLP receiver that forwards data to Datadog**, such as the [DDOT Collector][2] or the [upstream OpenTelemetry Collector][3]. The DDOT SDK sends to the receiver rather than directly to Datadog, so the receiver must be reachable from your service.
 
 ## Language support
 
-Select your language to see the minimum SDK version and supported OTLP protocols. **[Placeholder: Is a DDOT SDK any Datadog SDK at these versions, or only the `dd-otel-autoinstrumentation-*` builds? Which languages send metrics and logs?]**
+Every DDOT SDK can send traces, metrics, and logs. Select your language to see the minimum SDK version and supported OTLP protocols. **[Placeholder: minimum versions for metrics and logs, and whether logs need the OpenTelemetry Logs API or a logging library bridge]**
 
 {{< programming-lang-wrapper langs="java,python,nodejs,go,.net" >}}
 
@@ -64,7 +64,7 @@ Select your language to see the minimum SDK version and supported OTLP protocols
 
 {{< /programming-lang-wrapper >}}
 
-**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but DDOT SDK defaults vary by language. Node.js and .NET default to `http/json`, and Python defaults to `http/json` before v4.14.0. Java, Go, and Python v4.14.0+ default to `http/protobuf`. Where a language supports multiple protocols, set `OTEL_EXPORTER_OTLP_PROTOCOL` to override the default. Make sure your receiver accepts the protocol you use. By convention, OTLP over HTTP uses port `4318`, and OTLP over gRPC uses port `4317`.
+**Note**: The OpenTelemetry specification defaults OTLP to `http/protobuf`, but DDOT SDK defaults vary by language. Node.js and .NET default to `http/json`, and Python defaults to `http/json` before v4.14.0. Java, Go, and Python v4.14.0+ default to `http/protobuf`. .NET sends logs over `grpc` by default. By convention, OTLP over HTTP uses port `4318`, and OTLP over gRPC uses port `4317`.
 
 ## Turn on the DDOT SDK
 
@@ -75,9 +75,23 @@ OTEL_TRACES_EXPORTER=otlp
 DD_TRACE_OTEL_ENABLED=true
 ```
 
-To also send OpenTelemetry metrics and logs, set `DD_METRICS_OTEL_ENABLED=true` and `DD_LOGS_OTEL_ENABLED=true`. **[Placeholder: Which other settings should every DDOT SDK use, such as `DD_TRACE_OTEL_SEMANTICS_ENABLED`?]**
+To also send OpenTelemetry metrics and logs, set `DD_METRICS_OTEL_ENABLED=true` and `DD_LOGS_OTEL_ENABLED=true`.
+
+Also set `OTEL_EXPORTER_OTLP_PROTOCOL` to a protocol that your SDK and your receiver both support. Don't rely on the default: when it doesn't match your receiver, export fails with errors that don't name the cause. See [Language support](#language-support) for each SDK's protocols.
 
 By default, the SDK sends to `http://localhost:4318`. To send to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT`. See the [OTLP Exporter Configuration][7] documentation for details.
+
+## Sampling and trace metrics
+
+DDOT SDKs apply sampling before OTLP export and record the sampling probability in each span's `tracestate`. To extrapolate trace metrics from that probability, use the following SDK versions and a [compatible receiver][11].
+
+| Language | Minimum version |
+| --- | --- |
+| Java | [1.67.0][12] |
+| Python | [4.15.0][13] |
+| Node.js | [6.20.0][14] or [5.131.0][15] |
+| Go | [2.11.0][16] |
+| .NET | [3.55.0][17] |
 
 ## Verify
 
@@ -86,7 +100,7 @@ After you turn on the DDOT SDK and your service receives traffic, confirm that t
 ## Limitations
 
 - DDOT SDKs are in Preview and support core APM functionality for automatic and manually created traces. Other Datadog features may not be supported, or may require the Datadog Agent. See [Feature Compatibility][9].
-- Traces are exported with Datadog semantics. For example, an HTTP status code is represented as `http.status_code` in Datadog semantics and `http.response.status_code` in OpenTelemetry semantics.
+- Traces use Datadog semantics by default. For example, an HTTP status code is `http.status_code` in Datadog semantics and `http.response.status_code` in OpenTelemetry semantics. For HTTP spans in Python, Java, and Node.js, set `DD_TRACE_OTEL_SEMANTICS_ENABLED=true` to use OpenTelemetry semantics instead. Messaging, database, and RPC spans use Datadog semantics. **[Placeholder: SDK versions that support `DD_TRACE_OTEL_SEMANTICS_ENABLED` for Python, Java, and Node.js]**
 - The DDOT SDK supports the OpenTelemetry API, not OpenTelemetry SDK components such as span processors and exporters. If your code sets up the OpenTelemetry SDK, review it before you switch. In Node.js, register Datadog's tracer provider so spans you create with the OpenTelemetry API aren't dropped. See [OpenTelemetry API Support for Node.js][10].
 
 ## Configure and extend
@@ -120,3 +134,10 @@ After you turn on the DDOT SDK and your service receives traffic, confirm that t
 [8]: /tracing/trace_explorer/
 [9]: /opentelemetry/compatibility/#feature-compatibility
 [10]: /opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js&platform=traces
+[11]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
+[12]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.67.0
+[13]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.15.0
+[14]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.20.0
+[15]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.131.0
+[16]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.11.0
+[17]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.55.0

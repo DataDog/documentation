@@ -1,7 +1,5 @@
 ---
 title: Continuous Tracing with GPU Monitoring
-is_beta: true
-private: true
 description: Enable GPU activity tracing for selected Kubernetes workloads and Slurm batch jobs.
 further_reading:
 - link: "/gpu_monitoring/setup"
@@ -12,17 +10,21 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-inference/" >}}
-Continuous tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing for selected Kubernetes workloads and Slurm batch jobs. Troubleshooting large, distributed workloads can be cumbersome and time-consuming. With this tracing capability in GPU Monitoring, you can identify and investigate bottlenecks using detailed execution traces that tie CUDA and NCCL operations back to your model and PyTorch operations.
 
 {{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
+With continuous tracing, you can increase the throughput of your AI workloads and get more out of every GPU:
+
+- **Speed up training runs**: Find the communication, data loading, and kernel bottlenecks that slow down each training step. Use traces with the [Training page][2] to see how each training run used its GPUs.
+- **Serve more requests per GPU**: See where inference requests spend time on the GPU. Use traces with the [Inference page][3] to compare latency and throughput across your model deployments.
+- **Improve GPU efficiency**: Spot idle and underused GPU time so you can right-size workloads and reduce wasted GPU hours.
+
 ## Setup
+
+<div class="alert alert-info">Continuous tracing requires GPU Monitoring. Before you configure tracing, <a href="/gpu_monitoring/setup">enable GPU Monitoring on your Datadog Agent</a>.</div>
 
 Select the tab that matches your environment:
 
@@ -31,10 +33,13 @@ Select the tab that matches your environment:
 
 ### Prerequisites
 
-To begin continuously tracing your workloads, you must first meet the following criteria:
-- You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
+To begin continuously tracing your workloads, you must be running the Datadog Cluster Agent version 7.80 or later.
 
-### 1. Configure GPU tracing
+### 1. Enable GPU Monitoring
+
+If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. GPU tracing does not work unless GPU Monitoring is enabled on the Datadog Agent that runs on the same hosts as your GPU workloads.
+
+### 2. Configure GPU tracing
 
 In both configurations, the `ddTraceVersions.c` setting installs the Datadog C SDK, the native SDK that GPU tracing uses to capture CUDA and NCCL activity.
 
@@ -90,7 +95,7 @@ Upgrade your Helm release and wait for the rollout to complete:
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
-### 2. Label the GPU workload
+### 3. Label the GPU workload
 
 Add the label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod template:
 
@@ -104,7 +109,7 @@ spec:
 
 Apply the resource and wait for the rollout to complete.
 
-### 3. Verify setup
+### 4. Verify setup
 
 ```shell
 # Confirm setup containers completed
@@ -118,7 +123,7 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 **No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
 
-### 4. Explore traces
+### 5. Explore traces
 
 Run the workload, then query [APM Trace Explorer][2] with:
 
@@ -132,11 +137,11 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 {{% /tab %}}
 {{% tab "Slurm" %}}
 
-### Prerequisites
+### 1. Enable GPU Monitoring
 
-To begin continuously tracing your Slurm jobs, you must have [GPU Monitoring enabled][1].
+If you haven't already, [set up GPU Monitoring][1] on your Slurm compute nodes. GPU tracing does not work unless GPU Monitoring is enabled on the Datadog Agent that runs on the same nodes as your Slurm jobs.
 
-### 1. Install the Agent with Single Step Instrumentation
+### 2. Install the Agent with Single Step Instrumentation
 
 On each Slurm compute node, install the Datadog Agent with [Single Step Instrumentation][2] enabled. The following command enables Single Step Instrumentation for the host and installs the Datadog C SDK (`c:0`), the native SDK that GPU tracing uses to capture CUDA and NCCL activity from your jobs:
 
@@ -150,11 +155,11 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][3] and `<DATADOG_SITE>` with your [Datadog site][4].
 
-### 2. Enable the Slurm integration
+### 3. Enable the Slurm integration
 
 Set up the [Slurm integration][5] to collect metrics about your Slurm cluster, partitions, nodes, and jobs.
 
-### 3. Configure your batch script
+### 4. Configure your batch script
 
 Add the following environment variables to your `sbatch` script:
 
@@ -183,7 +188,7 @@ export DD_TRACE_HOOK_MODULES=gpu
 srun python train.py
 ```
 
-### 4. Explore traces
+### 5. Explore traces
 
 Submit the job with `sbatch`, then query [APM Trace Explorer][6] with the service and environment you configured:
 
@@ -239,7 +244,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block in [Step 1: Configure GPU tracing](#1-configure-gpu-tracing). Set each variable from the same annotations:
+For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block in [Step 2: Configure GPU tracing](?tab=kubernetes#2-configure-gpu-tracing). Set each variable from the same annotations:
 
 ```yaml
 ddTraceConfigs:
@@ -266,3 +271,5 @@ After you apply the configuration, GPU metrics are tagged with `training_run_id`
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/kubernetes/tag/#tag-extraction
+[2]: /gpu_monitoring/training
+[3]: /gpu_monitoring/inference

@@ -394,31 +394,31 @@ regions:
       - browser-intake-ap1-datadoghq.com
     values:
       agent_http_endpoint: agent-http-intake.logs.ap1.datadoghq.com
-      agent_http_endpoint_private_link: agent-http-intake.logs.ap1.datadoghq.com
+      agent_http_endpoint_private_link: gold.intake.ap1.datadoghq.com
       agent_http_port: "443"
       api_endpoint: api.ap1.datadoghq.com
-      api_endpoint_private_link: api.ap1.datadoghq.com
+      api_endpoint_private_link: orchid.intake.ap1.datadoghq.com
       aws_customer_access_govcloud_id: N/A
       aws_customer_access_id: "417141415827"
-      aws_private_link_api_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-008cd79a7a09e0a1e
-      aws_private_link_containers_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-03ffd8d552f0d957d
+      aws_private_link_api_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e847a2951a0d615d
+      aws_private_link_containers_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0ef5fc837fc1ca22b
       aws_private_link_cross_region: "Asia Pacific (Tokyo) (ap-northeast-1)"
-      aws_private_link_dbm_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0cc53180ae06bb977
-      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-03e139d1f2766685b
-      aws_private_link_logs_user_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-08799aabff1cfd8a3
-      aws_private_link_metrics_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-002d904d5e69340ad
-      aws_private_link_process_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0e86b29a0dc2c8a26
-      aws_private_link_profiling_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0d598057ecde10596
-      aws_private_link_remote_config_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c
-      aws_private_link_traces_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0a5d94b2e8f6e70fc
+      aws_private_link_dbm_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-00f42cb7530f78bdf
+      aws_private_link_logs_agent_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0b5c8477c05c8bbdb
+      aws_private_link_logs_user_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0b5c8477c05c8bbdb
+      aws_private_link_metrics_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-05e201c57e0c97bcc
+      aws_private_link_process_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-03d339b15a9b93f40
+      aws_private_link_profiling_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0bd6602ff16778f3d
+      aws_private_link_remote_config_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-00b64297ce9465d1e
+      aws_private_link_traces_service_name: com.amazonaws.vpce.ap-northeast-1.vpce-svc-0126c3bb53b5655bb
       aws_region: ap-northeast-1
       browser_sdk_endpoint_domain: browser-intake-ap1-datadoghq.com
       containers_endpoint: orchestrator.ap1.datadoghq.com
-      containers_endpoint_private_link: orchestrator.ap1.datadoghq.com
+      containers_endpoint_private_link: linen.intake.ap1.datadoghq.com
       cursor_mcp_install_deeplink: "cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9"
       custom_costs_endpoint: api.ap1.datadoghq.com/api/v2/cost/custom_costs
       dbm_endpoint: dbm-metrics-intake.ap1.datadoghq.com
-      dbm_endpoint_private_link: dbm-metrics-intake.ap1.datadoghq.com
+      dbm_endpoint_private_link: white.intake.ap1.datadoghq.com
       dd_api: "https://api.ap1.datadoghq.com"
       dd_datacenter: AP1
       dd_datacenter_lowercase: ap1
@@ -434,7 +434,7 @@ regions:
       hipaa_logs_legacy: N/A
       http_endpoint: http-intake.logs.ap1.datadoghq.com
       http_endpoint_full: "https://http-intake.logs.ap1.datadoghq.com"
-      http_endpoint_private_link: http-intake.logs.ap1.datadoghq.com
+      http_endpoint_private_link: gold.intake.ap1.datadoghq.com
       http_port: "443"
       ip_ranges_url: "https://ip-ranges.ap1.datadoghq.com"
       ip_ranges_url_api: "https://ip-ranges.ap1.datadoghq.com/api.json"
@@ -450,19 +450,19 @@ regions:
       mcp_xaa_issuer_url: "https://mcp.ap1.datadoghq.com/v1/mcp"
       mcp_xaa_resource_url: "https://mcp.ap1.datadoghq.com/v1/mcp"
       metrics_endpoint: metrics.agent.ap1.datadoghq.com
-      metrics_endpoint_private_link: metrics.agent.ap1.datadoghq.com
+      metrics_endpoint_private_link: beige.intake.ap1.datadoghq.com
       microsoft_teams_app_name: Datadog
       org_management_max_session_duration: "720 hours (30 days)"
       otlp_logs_endpoint: "https://otlp.ap1.datadoghq.com/v1/logs"
       otlp_metrics_endpoint: "https://otlp.ap1.datadoghq.com/v1/metrics"
       otlp_trace_endpoint: "https://otlp.ap1.datadoghq.com/v1/traces"
       process_endpoint: process.ap1.datadoghq.com
-      process_endpoint_private_link: process.ap1.datadoghq.com
+      process_endpoint_private_link: bisque.intake.ap1.datadoghq.com
       profiling_endpoint: intake.profile.ap1.datadoghq.com
-      profiling_endpoint_private_link: intake.profile.ap1.datadoghq.com
+      profiling_endpoint_private_link: cyan.intake.ap1.datadoghq.com
       reactnative_sdk_init: ""
       remote_config_endpoint: config.ap1.datadoghq.com
-      remote_config_endpoint_private_link: config.ap1.datadoghq.com
+      remote_config_endpoint_private_link: violet.intake.ap1.datadoghq.com
       roku_site: ap1
       synthetics_intake_endpoint: intake.synthetics.ap1.datadoghq.com
       synthetics_tunnel_endpoint: tunnel-ap1.synthetics.datadoghq.com
@@ -470,7 +470,7 @@ regions:
       tcp_endpoint_port: The AP1 endpoint is not supported.
       tcp_endpoint_port_ssl: The AP1 endpoint is not supported.
       traces_endpoint: trace.agent.ap1.datadoghq.com
-      traces_endpoint_private_link: trace.agent.ap1.datadoghq.com
+      traces_endpoint_private_link: lime.intake.ap1.datadoghq.com
       vercel_setup: "https://ap1.datadoghq.com/setup/vercel"
       web_integrations_endpoint: intake.logs.ap1.datadoghq.com
       web_integrations_port: "443"

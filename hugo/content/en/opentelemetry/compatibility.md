@@ -38,10 +38,11 @@ The following table shows which Datadog features each setup supports.
 | [Runtime Metrics][23] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Span Links][25] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) | **[Placeholder]** | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| [Cloud Network Monitoring][21] (CNM) | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
 | [Kubernetes Monitoring][20] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Source Code Integration][24] | **[Placeholder]** | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Database Monitoring][14] (DBM) | **[Placeholder]** | {{< X >}} | {{< X >}} |  |  |
+| [Cloud Network Monitoring][21] (CNM) | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring][46] | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | **[Placeholder]** | {{< X >}} | {{< X >}} | | |
@@ -50,7 +51,6 @@ The following table shows which Datadog features each setup supports.
 | [Data Observability: Jobs Monitoring][13] (DJM) | **[Placeholder]** | {{< X >}} | | | |
 | [Data Streams Monitoring][15] (DSM) | **[Placeholder]** | {{< X >}} | | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}} |
 | [Real User Monitoring][22] (RUM) | **[Placeholder]** | {{< X >}} | | | |
-| [Source code integration][24] | **[Placeholder]** | {{< X >}} | | | |
 
 
 ## API support

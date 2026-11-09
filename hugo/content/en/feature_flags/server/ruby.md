@@ -59,12 +59,12 @@ gem 'openfeature-sdk', '>= 0.5.1'
 
 Set these environment variables in the application process before startup:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 No Feature Flags enablement or source setting is required for a new setup. Register the Datadog provider with OpenFeature to start polling. Installing the tracer or constructing `Datadog::OpenFeature::Provider.new` alone does not start agentless configuration requests.
 

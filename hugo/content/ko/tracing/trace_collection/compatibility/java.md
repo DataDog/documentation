@@ -8,7 +8,7 @@ code_lang_weight: 0
 description: Java Tracer의 호환성 요구 사항
 further_reading:
 - link: tracing/trace_collection/dd_libraries/java
-  tag: 설명서
+  tag: 문서
   text: 애플리케이션 계측
 title: Java 호환성 요구 사항
 type: multi-code-lang
@@ -30,12 +30,12 @@ Java Tracer는 다음 Oracle JDK, OpenJDK JVM 및 [GraalVM](#graalvm-native-imag
     <th>지원 수준</th>
   </thead>
   <tr>
-    <td>27 이상</td>
+    <td>28 이상</td>
     <td>Windows(x86, x86-64)<br>Linux(x86, x86-64, arm64)<br>Mac(x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">미리보기</a></td>
   </tr>
   <tr>
-    <td>18~26</td>
+    <td>18~27</td>
     <td>Windows(x86, x86-64)<br>Linux(x86, x86-64, arm64)<br>Mac(x86, x86-64, arm64)</td>
     <td><a href="#levels-of-support">정식 출시</a></td>
   </tr>
@@ -104,7 +104,7 @@ Datadog은 얼리 액세스 버전 Java를 공식 지원하지 않습니다.
 | Ratpack                 | 1.5+         | 완전 지원                                        | `ratpack`                                                  |
 | Restlet HTTP 서버     | 2.2~2.4    | 완전 지원                                        | `restlet-http`.                                            |
 | Spark Java              | 2.3+         | [미리 보기](#framework-integrations-disabled-by-default) | `sparkjava`(`jetty` 필수)                             |
-| Spring Boot             | 1.5+         | 완전 지원                                        | `spring-web` 또는 `spring-webflux`                           |
+| Spring Boot             | 1.5 - 3.X    | 완전 지원                                        | `spring-web` 또는 `spring-webflux`                           |
 | Spring Web(MVC)        | 4.0+         | 완전 지원                                        | `spring-web`                                               |
 | Spring WebFlux          | 5.0+         | 완전 지원                                        | `spring-webflux`                                           |
 | Tomcat                  | 5.5+         | 완전 지원                                        | `tomcat`                                                   |
@@ -196,7 +196,7 @@ Datadog은 얼리 액세스 버전 Java를 공식 지원하지 않습니다.
 **Datastore 추적은 다음을 제공합니다.**
 
 - 요청에서 응답까지의 시간 측정
-- 쿼리 정보(예: 민감한 정보가 제거된 쿼리 문자열)
+- 쿼리 정보(예: 새니타이즈된 쿼리 문자열)
 - 오류 및 스택 트레이스 캡처
 
 | 데이터베이스                | 버전 | 지원 유형    | 구성에 사용되는 계측 이름                                             |
@@ -259,6 +259,7 @@ Datadog은 얼리 액세스 버전 Java를 공식 지원하지 않습니다.
 | Datanucleus JDO     | 4.0+             | 완전 지원                                        | `datanucleus`                                  |
 | Dropwizard Views    | 0.7+             | 완전 지원                                        | `dropwizard`, `dropwizard-view`                |
 | GraphQL             | 14.0+            | 완전 지원                                        | `graphql-java`                                 |
+| Guidewire(PolicyCenter, BillingCenter) | 10.0+ | 완전 지원                                        | `guidewire`, `guidewire-wsi`   |
 | Hazelcast(클라이언트)  | 3.6+             | [미리 보기](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
 | Hibernate           | 3.5+             | 완전 지원                                        | `hibernate`, `hibernate-core`                  |
 | Hystrix             | 1.4+             | 완전 지원                                        | `hystrix`                                      |
@@ -330,7 +331,7 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
 
 [Trace Explorer][9]를 사용하여 트레이스를 조회할 수 있습니다.
 
-{{% collapse-content title="문제 해결" level="h4" %}}
+{{% collapse-content title="문제 해결" level="h5" %}}
 ##### 훈련 실행 중에 Datadog Java SDK가 연결되지 않음 {#not-attaching-the-datadog-java-sdk-during-the-training-run}
 
 운영 중에 이 경고가 표시되면 훈련 중에 Datadog Java SDK가 연결되지 않았음을 의미합니다.
@@ -360,7 +361,7 @@ GraalVM Native Image는 Java 애플리케이션을 네이티브 실행 파일로
 GraalVM Native Image를 사용해 Datadog Java SDK를 설정하려면 다음 단계를 따르세요.
 
 1. 애플리케이션을 계측하려면 [Java 애플리케이션 추적][6]에 나와 있는 단계를 따르세요.
-2.  `native-image` 명령으로 네이티브 실행 파일을 빌드할 때 `-J-javaagent:/path/to/dd-java-agent.jar` 인수를 추가하세요. 예:
+2.  `native-image` 명령으로 네이티브 실행 파일을 빌드할 때 `-J-javaagent:/path/to/dd-java-agent.jar` 인수를 추가하세요. 예시는 다음과 같습니다.
    ```shell
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
@@ -375,7 +376,7 @@ GraalVM Native Image를 사용해 Datadog Java SDK를 설정하려면 다음 단
 Quarkus Native를 사용하여 Datadog Java SDK를 설정하려면 다음 단계를 따르세요.
 
 1. 애플리케이션을 계측하려면 [Java 애플리케이션 추적][6]에 나와 있는 단계를 따르세요.
-2. 네이티브 실행 파일을 빌드할 때 `quarkus.native.additional-build-args` 속성을 사용하세요. 예:
+2. 네이티브 실행 파일을 빌드할 때 `quarkus.native.additional-build-args` 속성을 사용하세요. 예시는 다음과 같습니다.
    ```shell
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
@@ -430,7 +431,7 @@ Spring Native를 사용하여 Datadog Java SDK를 설정하려면 다음 단계�
 
 [Trace Explorer][9]를 사용하여 트레이스를 조회할 수 있습니다.
 
-{{% collapse-content title="문제 해결" level="h4" %}}
+{{% collapse-content title="문제 해결" level="h5" %}}
 ##### 네이티브 이미지에 대해 기능이 활성화되지 않았거나 올바르게 구성되지 않음 {#features-are-not-enabled-or-configured-correctly-for-native-images}
 
 Graal Native Image로 빌드된 바이너리에서 런타임에 시스템 속성에 접근하는 데 알려진 문제가 있습니다.
