@@ -32509,6 +32509,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -32565,10 +32566,16 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -32577,7 +32584,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -104811,6 +104819,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -104852,10 +104861,16 @@ components:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -104864,7 +104879,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -136654,6 +136670,9 @@ components:
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136664,6 +136683,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136832,6 +136854,9 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           nullable: true
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -136843,6 +136868,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -136854,6 +136882,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
+          nullable: true
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -151810,7 +151839,12 @@ components:
           nullable: true
           type: boolean
         pending_usage_limit:
-          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          description: |-
+            The limit to apply to the organization-wide quota at 00:00 UTC on the first day of the next calendar month. Must be a non-negative integer in the usage units defined by the quota namespace. This value is not checked against current usage.
+
+            Setting this field replaces any previously scheduled limit. The server sets `pending_effective_from`.
+
+            Omitting this field preserves the scheduled change, even when increasing `usage_limit`. Setting `enforced=false` clears the scheduled change. To cancel it explicitly, use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending`.
           example: 50000
           format: int64
           minimum: 0
@@ -261712,6 +261746,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -262031,6 +262066,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
@@ -270548,7 +270584,7 @@ paths:
     get:
       description: |-
         Lists usage quotas for the caller's organization in a quota namespace. You can optionally include
-        descendant organizations in the same datacenter as the caller. Requires the `billing_read` or
+        descendant organizations in the same data center as the caller. Requires the `billing_read` or
         `billing_edit` permission.
       operationId: ListQuotas
       parameters:
@@ -270559,7 +270595,7 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same datacenter are supported.
+        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same data center are supported.
           in: query
           name: include_descendants
           required: false
@@ -270694,7 +270730,7 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same datacenter are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
+        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
           required: false
@@ -270799,6 +270835,14 @@ paths:
         Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -270846,11 +270890,106 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: |-
+        Returns a usage quota's current configuration by its opaque identifier. Scheduled limits are returned separately until they take effect, after which they are returned as the current limit.
+
+        By default, you can retrieve quotas from your organization and authorized descendant organizations in the same data center. Set `include_descendants=false` to restrict access to your organization.
+
+        A quota remains readable after its associated user, role, or team is deleted. Requires `billing_read` or `billing_edit`.
+      operationId: GetQuota
+      parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        usage_limit: 120000
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_read
+        - AuthZ:
+            - billing_edit
+      summary: Get a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 27
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_read
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -270940,6 +271079,14 @@ paths:
         Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeletePendingQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
