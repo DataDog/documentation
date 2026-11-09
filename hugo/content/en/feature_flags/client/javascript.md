@@ -87,7 +87,9 @@ const provider = new DatadogProvider({
 
 ### Load a subset of flags
 
-In `@datadog/openfeature-browser` 2.2.0 and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Selecting a subset reduces the size of the flag configuration the SDK downloads and caches, which helps when an environment contains flags for many applications. Pass `flagSelection` to the provider when you create it; the selection is fixed for the provider's lifetime, so to load a different set of flags, create a new provider.
+In `@datadog/openfeature-browser` 2.2.0 and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Loading a subset reduces the size of the flag configuration that the SDK downloads and caches, which helps when an environment contains flags for many applications.
+
+Pass `flagSelection` to the provider when you create it. The selection is fixed for the provider's lifetime. To load a different set of flags, create a new provider.
 
 `flagSelection` accepts two optional lists:
 
@@ -114,7 +116,7 @@ const provider = new DatadogProvider({
 });
 ```
 
-<div class="alert alert-warning">Team tags can change when ownership changes, which could change the flags your application loads. Add tags to your flags specifically for selection, such as <code>app:checkout-web</code>, rather than selecting by team tags.</div>
+<div class="alert alert-warning">Team tags can change when flag ownership changes, which changes the flags your application loads. Instead of selecting by team tags, add tags to your flags specifically for selection, such as <code>app:checkout-web</code>.</div>
 
 #### Limits and validation
 
@@ -144,7 +146,7 @@ The SDK logs these errors to the browser console:
 | Message | Cause |
 | --- | --- |
 | `Datadog Browser SDK: flagSelection was not sent (<REASON>: <LIMIT>). Loading the full flag configuration.` | The selection is malformed or exceeds a limit. |
-| `Datadog Browser SDK: flagSelection was ignored by the server (<REASON>). Loaded the full flag configuration.` | Datadog ignored the selection. See the reasons above. |
+| `Datadog Browser SDK: flagSelection was ignored by the server (<REASON>). Loaded the full flag configuration.` | Datadog ignored the selection. See the reasons in the previous table. |
 
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][8] for the header your proxy must pass through.
 
@@ -163,7 +165,7 @@ console.log(details.errorCode); // 'FLAG_NOT_FOUND'
 
 #### Initial configuration is not filtered
 
-`flagSelection` does not filter configuration you supply with [`initialFlagsConfiguration`](#supply-initial-precomputed-fallback-data); the SDK uses it as provided.
+`flagSelection` does not filter configuration that you supply with `initialFlagsConfiguration`. The SDK uses that configuration as provided. For details, see the [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data) section.
 
 #### Rules-based configuration
 
