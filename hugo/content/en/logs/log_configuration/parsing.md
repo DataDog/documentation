@@ -504,7 +504,7 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 ```json
 {
   "user": {
-    "firstname": "john",
+    "firstname": "john"
   },
   "connect_date": 1510099200000
 }

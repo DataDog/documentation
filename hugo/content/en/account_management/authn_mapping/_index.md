@@ -237,7 +237,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
     "meta": {
       "page": {
         "total_count": 1,
-        "total_filtered_count": 1,
+        "total_filtered_count": 1
       }
     }
 }
@@ -533,8 +533,8 @@ curl -X GET \
         "preference_type": true
     },
     "type": "org_preferences",
-    "id": 1,
-  },
+    "id": 1
+  }
 }
 ```
 
@@ -596,8 +596,8 @@ curl -X POST \
         "preference_data": true
     },
     "type": "org_preferences",
-    "id": 1,
-  },
+    "id": 1
+  }
 }
 ```
 

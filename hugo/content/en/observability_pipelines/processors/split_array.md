@@ -73,7 +73,7 @@ This is an example event:
         "myfield" : {
             "timestamp":14500000,
             "firstarray":["one", 2]
-        },
+        }
     },
     "secondarray": [
     {
@@ -92,7 +92,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
     "env": "prod",
     "message": {
         "isMessage": true,
-        "myfield" : {"timestamp":14500000, "firstarray":"one"},
+        "myfield" : {"timestamp":14500000, "firstarray":"one"}
     },
     "secondarray": {
         "some":"json",
@@ -108,7 +108,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
     "env": "prod",
     "message": {
         "isMessage": true,
-        "myfield" : {"timestamp":14500000, "firstarray":"one"},
+        "myfield" : {"timestamp":14500000, "firstarray":"one"}
         },
     "secondarray": 44
 }
@@ -121,7 +121,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
     "env": "prod",
     "message": {
         "isMessage": true,
-        "myfield" : {"timestamp":14500000, "firstarray":2},
+        "myfield" : {"timestamp":14500000, "firstarray":2}
         },
     "secondarray": {
             "some":"json",
@@ -137,7 +137,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
     "env": "prod",
     "message": {
         "isMessage": true,
-        "myfield" : {"timestamp":14500000, "firstarray":2},
+        "myfield" : {"timestamp":14500000, "firstarray":2}
         },
     "secondarray": 44
 }

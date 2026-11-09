@@ -27,7 +27,7 @@ This processor parses the specified JSON field into objects. For example, if you
 {
     "foo": "bar",
     "team": "my-team",
-    "message": "{\"level\":\"info\",\"timestamp\":\"2024-01-15T10:30:00Z\",\"service\":\"user-service\",\"user_id\":\"12345\",\"action\":\"login\",\"success\":true,\"ip_address\":\"192.168.1.100\"}"
+    "message": "{\"level\":\"info\",\"timestamp\":\"2024-01-15T10:30:00Z\",\"service\":\"user-service\",\"user_id\":\"12345\",\"action\":\"login\",\"success\":true,\"ip_address\":\"192.168.1.100\"}",
     "app_id":"streaming-services",
     "ddtags": [
     "kube_service:my-service",
@@ -54,7 +54,7 @@ This output contains the `message` field with the parsed JSON:
         "success": true,
         "timestamp": "2024-01-15T10:30:00Z",
         "user_id": "12345"
-    }
+    },
     "app_id":"streaming-services",
     "ddtags": [
     "kube_service:my-service",
