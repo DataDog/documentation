@@ -4361,7 +4361,7 @@ class MyAgent {
 
 ### Force flushing in serverless environments
 
-`llmobs.flush()` is a blocking function that submits all buffered Agent Observability data to the Datadog backend. This can be useful in serverless environments to prevent an application from exiting until all Agent Observability traces are submitted.
+`llmobs.flush()` submits all buffered Agent Observability data to the Datadog backend. It returns before the requests to Datadog complete, so keep the process running until they finish. For example, don't call `process.exit()` right after `flush()`.
 
 ### Tracing multiple applications
 
