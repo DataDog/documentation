@@ -174,18 +174,20 @@ Your proxy must forward exposure requests to the corresponding Datadog intake en
 
 {{% tab "Browser" %}}
 
-Pass configuration options to `DatadogBrowserFlagging.init()`.
+Pass these options to `DatadogProvider` from `@datadog/openfeature-browser`.
 
 ### Flag configuration proxy
 
 To route the flag configuration download through your proxy, set `flaggingProxy` to the URL of your proxy endpoint. The SDK sends a POST request with the evaluation context in the body directly to this URL, replacing the default Datadog CDN endpoint.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-import { DatadogBrowserFlagging } from '@datadog/browser-flagging';
+import { DatadogProvider } from '@datadog/openfeature-browser';
 
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
 });
 {{< /code-block >}}
@@ -195,9 +197,11 @@ Your proxy must forward this request to the Datadog CDN: `https://preview.ff-cdn
 To add custom headers to the flag configuration request (for example, for authentication at your proxy), use `customHeaders`:
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     customHeaders: { 'X-Proxy-Token': '<YOUR_PROXY_TOKEN>' },
 });
@@ -210,9 +214,11 @@ If you use [`flagSelection`][3] to load a subset of flags, your proxy must retur
 Browser flag event data (exposures and evaluations) is sent through the standard Browser SDK intake pipeline. To route this traffic through a proxy, set the `proxy` option to a URL on your domain.
 
 {{< code-block lang="javascript" filename="index.js" >}}
-DatadogBrowserFlagging.init({
+const provider = new DatadogProvider({
+    applicationId: '<APPLICATION_ID>',
     clientToken: '<CLIENT_TOKEN>',
     site: 'datadoghq.com',
+    env: '<ENV_NAME>',
     flaggingProxy: 'https://proxy.example.com/precompute-assignments',
     proxy: 'https://proxy.example.com/intake',
 });
