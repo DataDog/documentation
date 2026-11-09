@@ -133,7 +133,7 @@ Retrieves a notebook's settings and its content as Markdown.
 ### `get_datadog_notebook_sections`
 *Toolsets: **core**, **notebooks***\
 *Permissions Required: `Notebooks Read`*\
-Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. Section IDs stay the same when the text changes, so you can use them to target a later edit.
+Lists a notebook's sections with their headings and IDs, or retrieves one section's Markdown. A section's ID stays the same when its text changes, so you can use the ID to target a later edit.
 
 - List the sections in notebook 12345678.
 - Show me the root cause section of the incident notebook.
