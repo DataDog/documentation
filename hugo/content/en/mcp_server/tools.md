@@ -2184,7 +2184,7 @@ Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a de
 
 ## Notebooks
 
-Tools for working with [notebooks][57] beyond the notebook tools in the `core` toolset.
+Tools for working with [notebooks][57]. The `notebooks` toolset includes `clone_datadog_notebook` and every notebook tool in the Core tools section that lists **notebooks** as a toolset.
 
 ### `clone_datadog_notebook`
 *Toolset: **notebooks***\
