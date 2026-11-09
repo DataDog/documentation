@@ -16,7 +16,7 @@ Cloud Cost Management can help you proactively detect and respond to unexpected 
 {{< whatsnext desc="This section includes the following topics:" >}}
     {{< nextlink href="/cloud_cost_management/cost_changes/anomalies" >}}<u>Anomalies</u>: Automatically detect unusual cost patterns using machine learning. Get insights into what's driving changes with Watchdog Explains and share context with teams for faster resolution.{{< /nextlink >}}
     {{< nextlink href="/cloud_cost_management/cost_changes/monitors" >}}<u>Monitors</u>: Create custom alerts when costs exceed thresholds or change unexpectedly, including real-time anomaly monitors for AI and cloud compute costs that alert within 15 minutes. Define specific conditions, filter by provider or tag, and integrate with notification channels such as email, Slack, and PagerDuty.{{< /nextlink >}}
-    {{< nextlink href="/cloud_cost_management/cost_changes/real_time_costs" >}}<u>Real-Time Costs</u>: Get near real-time estimates of Amazon EC2, Azure Virtual Machines, and Google Cloud Compute Engine costs, updated every 5 minutes. React to cost changes within hours instead of days and track Kubernetes cluster costs in real time.{{< /nextlink >}}
+    {{< nextlink href="/cloud_cost_management/cost_changes/real_time_costs" >}}<u>Real-Time Costs</u>: Get near real-time estimates of Amazon EC2, Azure Virtual Machines, and Google Cloud Compute Engine costs, updated every 5 minutes. React to cost changes within hours instead of days, and track Kubernetes cluster costs in real time.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
