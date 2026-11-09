@@ -89,10 +89,10 @@ Your function's return value type determines the evaluation's metric type:
 | `true` or `false` | Boolean |
 | A number | Score |
 | A non-empty string | Categorical |
-| A plain object | JSON |
+| An object without a `value` or `assessment` key | JSON |
 | `null`, `undefined`, or `""` | No result. The evaluation is skipped. |
 
-To add an assessment, reasoning, or metadata, return an object with a `value` key:
+To add an assessment, reasoning, or metadata, return an object with a `value` key, an `assessment` key, or both. If `value` is an object, the result is JSON.
 
 | Key | Description |
 |---|---|
@@ -104,6 +104,15 @@ To add an assessment, reasoning, or metadata, return an object with a `value` ke
 If the object has an `assessment` but no `value`, the result is a Boolean: `true` when the assessment is `"pass"`, and `false` when it is `"fail"`.
 
 Return `null` to skip spans, traces, or sessions that the evaluation doesn't apply to, for example, a span that is not a tool call.
+
+### Errors
+
+The evaluation fails with an error if your function returns:
+
+- An array, or any other type not listed in the tables above
+- An `assessment` other than `"pass"` or `"fail"`
+- A `reasoning` that is not a string
+- A `metadata` that is not an object
 
 ### Example: Empty tool result (span scope)
 
