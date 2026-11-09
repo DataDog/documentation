@@ -40,13 +40,14 @@ Trajectory runs in observe mode, which records results without blocking, or in e
 
 ## Supported coding agents
 
-| Agent              | Guardrails¹     | Supply chain protection² | Sensitive data redaction³ |
-|--------------------|-----------------|--------------------------|---------------------------|
-| Claude Code        | Full            | Packages                 | Monitoring only           |
-| Codex              | Full            | Packages                 | Monitoring only           |
-| Cursor             | Full            | Packages                 | Monitoring only           |
-| GitHub Copilot CLI | Full            | Packages                 | Monitoring only           |
-| Kiro CLI           | Full⁴           | Packages                 | Monitoring only           |
+| Agent              | Guardrails¹     | Supply chain protection²   | Sensitive data redaction³ |
+|--------------------|-----------------|----------------------------|---------------------------|
+| Claude Code        | Full            | Packages                   | Monitoring only           |
+| Codex              | Full            | Packages                   | Monitoring only           |
+| Cursor             | Full            | Packages                   | Monitoring only           |
+| GitHub Copilot CLI | Full            | Packages                   | Monitoring only           |
+| Kiro CLI           | Full⁴           | Packages                   | Monitoring only           |
+| Antigravity CLI    | Monitoring only | Packages (monitoring only) | Monitoring only           |
 
 ¹ Guardrails evaluate prompts and tool calls.
 
@@ -119,6 +120,7 @@ Replace the `--clients` value with the client IDs of the coding agents you want 
 | Cursor             | `cursor`  |
 | GitHub Copilot CLI | `copilot` |
 | Kiro CLI           | `kiro`    |
+| Antigravity CLI    | `agy`     |
 
 ## Configuration options {#configuration-options}
 
