@@ -47,7 +47,9 @@ See the [ddtest documentation][15] for runtime requirements, framework-specific 
 
 ### Install ddtest
 
-Install the release executable on macOS or Linux:
+Local validation requires [ddtest v1.16.0][18] or later. If ddtest is already installed, check its version with `ddtest --version` and rerun the installer to upgrade.
+
+Install the latest release on macOS or Linux:
 
 ```bash
 curl -fsSL https://github.com/DataDog/ddtest/releases/latest/download/install.sh | bash
@@ -655,3 +657,4 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and [Bits A
 [15]: https://github.com/DataDog/ddtest#try-test-optimization-locally
 [16]: /tests/flaky_management/#bits-ai-powered-flaky-test-fixes
 [17]: https://github.com/DataDog/ddtest#installation
+[18]: https://github.com/DataDog/ddtest/releases/tag/v1.16.0
