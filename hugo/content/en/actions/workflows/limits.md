@@ -29,7 +29,7 @@ Each organization:
 * Can execute up to 50 workflows per minute for a source (such as a specific monitor).
 * Can buffer up to 500 requests.
 
-When an organization exceeds a threshold, pending execution requests queue up to a maximum of 500 per organization then process according to the previously described limits. For example, if a monitor triggers 500 workflow runs, only 50 are triggered in the first minute. The remaining 450 workflow runs are queued and 50 workflows are triggered every minute until all workflows have been triggered.
+When an organization exceeds a threshold, pending workflow run requests queue up to a maximum of 500 per organization then process according to the previously described limits. For example, if a monitor triggers 500 workflow runs, only 50 are triggered in the first minute. The remaining 450 workflow runs are queued and 50 workflows are triggered every minute until all workflows have been triggered.
 
 ### Trial accounts
 
@@ -40,7 +40,7 @@ Each organization:
 * Can execute up to 20 workflows per minute for a source (such as a specific monitor).
 * Can buffer up to 100 requests.
 
-When an organization exceeds a threshold, pending execution requests queue up to a maximum of 100 per organization then process according to the previously described limits. For example, if a monitor triggers 100 workflow runs, only 50 are triggered in the first 20 minutes. The remaining 50 workflow runs are queued and trigger after 20 minutes pass.
+When an organization exceeds a threshold, pending workflow run requests queue up to a maximum of 100 per organization then process according to the previously described limits. For example, if a monitor triggers 100 workflow runs, only 50 are triggered in the first 20 minutes. The remaining 50 workflow runs are queued and trigger after 20 minutes pass.
 
 ## Workflow-level limits
 

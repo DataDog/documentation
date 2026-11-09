@@ -51,5 +51,5 @@ If your provider isn't listed, [submit a request][3] to have it added.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/smtp-configuration/smtp-servers
-[2]: /incident_response/status_pages/#configure-a-custom-email-sender-domain
+[2]: /incident_response/status_pages/subscriptions/#configure-a-custom-email-sender-domain
 [3]: https://app.datadoghq.com/forms/share/0e60439939478dc5063c2bc665a8cfdaf1b9ec19f6df55821c82096cbd3f9672

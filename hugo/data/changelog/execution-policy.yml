@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-10-28'
+    link: https://github.com/DataDog/documentation/pull/41125
+    operations:
+      - CreateExecutionPolicy
+      - GetExecutionPolicy
+      - ListExecutionPolicies
+      - UpdateExecutionPolicy
+    title: Add Slack support to Execution Policy API

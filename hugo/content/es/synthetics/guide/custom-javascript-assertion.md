@@ -1,37 +1,39 @@
 ---
-description: Te contamos cómo usar aserciones JavaScript personalizadas en tests de
-  navegador de Synthetics.
+description: Aprenda a usar aserciones de JavaScript personalizadas en sus pruebas
+  de navegador Synthetic.
 further_reading:
-- link: /synthetics/browser_tests/actions/
+- link: /synthetics/browser_tests/test_steps/
   tag: Documentación
-  text: Pasos de los tests de navegador
+  text: Aprenda sobre los pasos de prueba de navegador.
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentación
-  text: Configurar opciones avanzadas en los pasos de los tests
+  text: Aprenda a configurar opciones avanzadas para los pasos de prueba.
 - link: /synthetics/guide/popup/#moving-popups
   tag: Documentación
-  text: Gestionar las ventanas emergentes que aparecen de manera inesperada
-title: Utiliza aserciones personalizadas de JavaScript en los tests de navegador
+  text: Aprenda a manejar ventanas emergentes activadas en momentos desconocidos
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Cómo ayudé a mi cliente a escalar sus pruebas de navegador con Datadog.
+title: Utilice aserciones de JavaScript personalizadas en pruebas de navegador.
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta guía describe cómo puede probar una interfaz de usuario (UI) usando JavaScript personalizado en una [prueba de navegador][1]. Las aserciones de JavaScript admiten código síncrono y asíncrono.
 
-En este artículo te explicamos cómo probar una interfaz de usuario (IU) usando código JavaScript personalizado en los [tests de navegador][1]. En las aserciones JavaScript se puede usar código tanto síncrono como asíncrono.
+Para crear una aserción usando JavaScript personalizado:
 
-Para crear una aserción con JavaScript personalizado, sigue estos pasos:
+1. Haga clic en {{< ui >}}Assertion{{< /ui >}} y seleccione {{< ui >}}Test custom JavaScript assertion{{< /ui >}}.
+2. Escriba el cuerpo de su aserción.
+3. Opcionalmente, seleccione un elemento de destino en la interfaz de usuario. 
+4. Haga clic en {{< ui >}}Apply{{< /ui >}}.
 
-1. Haz clic en **Assertion** (Aserción) y selecciona **Test de aserción personalizada de JavaScript**.
-2. Escribe el cuerpo de la aserción.
-3. Si quieres, puedes seleccionar un elemento objetivo de la IU.
-4. Haz clic en **Apply** (Aplicar).
+Para obtener más información sobre las aserciones, consulte [Pasos de prueba de navegador][2].
 
-Para obtener más información sobre las aserciones, consulta [Pasos del test de navegador][2].
+## Aserte que un elemento no está en la página {#assert-that-an-element-is-not-on-the-page}
 
-## Declarar que un elemento no está en la página
+Para verificar que un elemento con un ID específico *no* está en la página, utilice `return !document.getElementById("<ELEMENT_ID>");`.
 
-Para verificar que un elemento con un ID específico *no* está en la página, usa `return !document.getElementById("<ELEMENT_ID>");`.
-
-Para verificar que los elementos *no* están en la página y devolver el número de elementos en el error de la consola, añade lo siguiente en la aserción del cuerpo:
+Para verificar que los elementos *no* están en la página y devolver el número de elementos en el error de consola, agregue lo siguiente en el cuerpo de la aserción:
 
 {{< code-block lang="javascript" >}}
 var element = document.querySelectorAll("<SELECTORS>");
@@ -41,35 +43,42 @@ if ( element.length > 0 ){
 return element.length === 0;
 {{< /code-block >}}
 
-Los resultados de los tests de navegador contienen logs `console.error`. 
+Los resultados de su prueba de navegador incluyen `console.error` registros, con un máximo de 4 registros permitidos por función de JavaScript. Considere combinar los registros para mejorar la claridad y la eficiencia.
 
-{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="Logs de error de la consola en la pestaña Errors & Warnings (Errores y avisos) junto a los pasos del test" style="width:80%;" >}}
+{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="Registros de error de consola que aparecen en la pestaña Errores y advertencias en el panel lateral del paso de prueba de navegador." style="width:80%;" >}}
 
-## Declarar que un botón de opción está marcado
+## Aserte que un botón de opción está marcado {#assert-that-a-radio-button-is-checked}
 
-Para comprobar que un botón de opción esté marcado, utiliza `return document.querySelector("<SELECTORS>").checked === true;` en la aserción del cuerpo.
+Para verificar que un botón de opción está marcado, utilice `return document.querySelector("<SELECTORS>").checked === true;` en el cuerpo de la aserción.
 
-## Establecer el valor de un elemento del almacenamiento local concreto
+## Establezca el valor de un elemento de almacenamiento local especificado {#set-the-value-of-a-specified-local-storage-item}
 
-Para establecer el valor de un elemento del almacenamiento local concreto, añade lo siguiente a la aserción del cuerpo:
+Para establecer el valor de un elemento de almacenamiento local especificado, agregue lo siguiente en el cuerpo de la aserción:
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem(keyName, keyValue);
 return true
 {{< /code-block >}}
 
-Por ejemplo, para darle el valor "mytime" al número de milisegundos que han transcurrido desde las 00:00:00 UTC del 1 de enero de 1970, utiliza lo siguiente:
+Por ejemplo, para establecer el número de milisegundos transcurridos desde el 1 de enero de 1970, 00:00:00 UTC en \"mytime\":
 
 {{< code-block lang="javascript" >}}
 localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
-## Hacer declaraciones sobre el texto que contiene un PDF
+`localStorage` se puede acceder en otras aserciones de JavaScript si necesita comparar valores específicos:
 
-Puedes usar bibliotecas externas para probar el contenido de un PDF que se muestra.
+{{< code-block lang="javascript" >}}
+localStorage.getItem("mytime");
+return true
+{{< /code-block >}}
 
-Para cargar las bibliotecas externas, utiliza una promesa en la aserción del cuerpo:
+## Aserte que el texto contenido en un PDF renderizado {#assert-on-text-contained-in-a-rendered-pdf}
+
+Puede utilizar una biblioteca externa para probar el contenido de un PDF renderizado. 
+
+Para cargar bibliotecas externas, utilice una promesa en el cuerpo de la aserción:
 
 {{< code-block lang="javascript" filename="Custom JavaScript" collapsible="true" >}}
 const script = document.createElement('script');
@@ -91,9 +100,9 @@ return await loadingTask.promise.then(function(pdf) {
 });
 {{< /code-block >}}
 
-## Leer más
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/synthetics/browser_tests/
-[2]: /es/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[2]: /es/synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion

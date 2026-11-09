@@ -1,0 +1,20 @@
+# Option groups for OpenTelemetry cdocs (mirrors Hugo's
+# customization_config/en/option_groups/opentelemetry.yaml). Each group lists
+# option ids, one marked `default: true`. Referenced by a doc's content_filters
+# via option_group_id.
+otel_api_support_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: node_js
+  - id: go
+  - id: ruby
+  - id: dot_net
+  - id: php
+  - id: rust
+
+otel_api_support_signal_options:
+  - id: traces
+    default: true
+  - id: metrics
+  - id: logs

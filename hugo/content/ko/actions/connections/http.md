@@ -19,7 +19,7 @@ HTTP 요청을 추가하려면:
 {{< tabs >}}
 {{% tab "Workflow Automation" %}}
 - 새 워크플로에서 {{< ui >}}Add step{{< /ui >}}을 클릭하고 `Make request`를 검색합니다. {{< ui >}}Make request{{< /ui >}} 작업을 선택하여 워크플로에 추가합니다.
-- 기존 워크플로에서 {{< ui >}}+{{< /ui >}}를 클릭하고 `Make request`를 검색합니다. {{< ui >}}Make request{{< /ui >}} 작업을 선택하여 워크플로에 추가합니다.
+- 기존 워크플로에서 {{< ui >}}\+{{< /ui >}}를 클릭하고 `Make request`를 검색합니다. {{< ui >}}Make request{{< /ui >}} 작업을 선택하여 워크플로에 추가합니다.
 
 요청 메서드와 필요한 [인증][1]을 지정합니다. 사용 가능한 구성 옵션에 대한 자세한 내용은 아래 섹션을 읽어봅니다. 선택적으로 요청은 {{< ui >}}Conditional wait{{< /ui >}} 섹션에 지정한 조건을 기다릴 수 있으며, 조건이 충족되지 않으면 지정된 간격으로 재시도할 수 있습니다.
 
@@ -27,7 +27,7 @@ HTTP 요청을 추가하려면:
 {{% /tab %}}
 
 {{% tab "App Builder" %}}
-1. 앱에서 {{< ui >}}Data{{< /ui >}} 아래의 {{< ui >}}+ New{{< /ui >}}를 클릭하고 {{< ui >}}Query{{< /ui >}}를 선택합니다.
+1. 앱에서 {{< ui >}}Data{{< /ui >}} 아래의 {{< ui >}}\+ New{{< /ui >}}를 클릭하고 {{< ui >}}Query{{< /ui >}}를 선택합니다.
 1. `HTTP`를 검색한 다음 {{< ui >}}Make request{{< /ui >}} 작업을 선택하여 앱에 추가합니다.
 
 요청 메서드와 필요한 [인증][1]을 지정합니다. 사용 가능한 구성 옵션에 대한 자세한 내용은 아래 섹션을 읽어봅니다.
@@ -42,14 +42,14 @@ HTTP 요청을 추가하려면:
 
 ### AWS 연결 생성 {#create-an-aws-connection}
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}AWS{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Account ID{{< /ui >}} 및 {{< ui >}}AWS Role Name{{< /ui >}}를 입력합니다.
 1. {{< ui >}}Create{{< /ui >}}를 클릭합니다.
 
 ### Azure 연결 생성 {#create-an-azure-connection}
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}Azure{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}, {{< ui >}}Tenant ID{{< /ui >}}, {{< ui >}}Client ID{{< /ui >}} 및 {{< ui >}}Client Secret{{< /ui >}}을 입력합니다.
 1. 선택적으로 OAuth 2.0 액세스 토큰을 가져올 때 Microsoft에 요청할 {{< ui >}}Custom Scope{{< /ui >}}를 입력합니다. 리소스의 범위는 리소스의 식별자 URI와 `.default`를 슬래시(`/`)로 구분하여 구성됩니다. 예를 들어, `{identifierURI}/.default`입니다. 자세한 내용은 [.default 범위에 대한 Microsoft 설명서][3]를 참조하세요.
@@ -59,20 +59,21 @@ HTTP 요청을 추가하려면:
 
 Token Auth 연결은 bearer 토큰을 사용하여 HTTP 요청을 인증합니다.
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}HTTP{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}을 입력합니다.
 1. 인증을 위한 {{< ui >}}Base URL{{< /ui >}}을 입력합니다.
 1. {{< ui >}}Authentication Type{{< /ui >}} 드롭다운에서 {{< ui >}}Token Auth{{< /ui >}}를 선택합니다.
-1. {{< ui >}}Token Name{{< /ui >}} 및 {{< ui >}}Token Value{{< /ui >}}를 입력합니다. 여러 토큰을 입력할 수 있습니다. 헤더, 매개변수 또는 요청 본문에서 토큰을 참조하려면 다음 구문을 사용하세요. `{{ secretTokenName }}`.
-1. 선택적으로 요청에 {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} 및 {{< ui >}}Body{{< /ui >}}를 추가합니다.
+1. {{< ui >}}Token Name{{< /ui >}} 및 {{< ui >}}Token Value{{< /ui >}}를 입력합니다. 여러 토큰을 입력할 수 있습니다.
+1. 연결을 사용하는 HTTP 요청에 토큰을 포함하는 방법을 구성합니다. 연결은 요청에 토큰을 자동으로 추가하지 않습니다. {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} 또는 {{< ui >}}Body{{< /ui >}}에서 다음 구문을 사용하여 토큰을 참조하십시오. `{{ secretTokenName }}`, replacing `secretTokenName` with the {{< ui >}}Token Name{{< /ui >}} 이전 단계에서. 예를 들어, 토큰 이름이 `apiToken`, add an `Authorization` header with the value `Bearer`인 경우 {{ apiToken }}`입니다.
+1. 선택적으로 요청에 다른 {{< ui >}}Request Headers{{< /ui >}}, {{< ui >}}URL parameters{{< /ui >}} 또는 {{< ui >}}Body{{< /ui >}}를 추가합니다.
 1. {{< ui >}}Create{{< /ui >}}를 클릭합니다.
 
 ### HTTP 기본 인증 연결 생성 {#create-an-http-basic-authentication-connection}
 
 기본 인증 연결은 사용자 이름과 비밀번호가 포함된 권한 부여 헤더를 사용하여 HTTP 요청을 인증합니다.
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}HTTP{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}을 입력합니다.
 1. 인증을 위한 {{< ui >}}Base URL{{< /ui >}}을 입력합니다.
@@ -84,7 +85,7 @@ Token Auth 연결은 bearer 토큰을 사용하여 HTTP 요청을 인증합니�
 
 HTTP 2단계 연결을 사용하면 예비 요청을 수행하여 HTTP 요청을 인증하는 데 사용할 액세스 토큰을 가져올 수 있습니다. 이는 JSON 웹 토큰(JWT) 및 OAuth 애플리케이션을 인증하는 데 유용합니다.
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}HTTP{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}을 입력합니다.
 1. 인증을 위한 {{< ui >}}Base URL{{< /ui >}}을 입력합니다.
@@ -132,7 +133,7 @@ HTTP 2단계 연결을 사용하면 예비 요청을 수행하여 HTTP 요청을
 
 <div class="alert alert-info">클라이언트 인증서(<code>.crt</code>, <code>.pem</code>) 및 개인 키(<code>.key</code>, <code>.pem</code>)는 PEM 형식을 사용해야 합니다.</div>
 
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}HTTP{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}을 입력합니다.
 1. 인증을 위한 {{< ui >}}Base URL{{< /ui >}}을 입력합니다.
@@ -166,7 +167,7 @@ Private Actions는 미리 보기 상태입니다. 액세스를 요청하려면 �
 
 프라이빗 HTTP 요청을 구성하려면:
 1. 앱에 HTTP 작업을 추가합니다.
-1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}+{{< /ui >}})을 클릭합니다.
+1. {{< ui >}}Connection{{< /ui >}} 섹션에서 더하기 아이콘({{< ui >}}\+{{< /ui >}})을 클릭합니다.
 1. {{< ui >}}HTTP{{< /ui >}}를 선택합니다.
 1. {{< ui >}}Connection Name{{< /ui >}}을 입력합니다.
 1. 프라이빗 네트워크에 있는 호스트의 {{< ui >}}Base URL{{< /ui >}}을 입력합니다.

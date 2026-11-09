@@ -20,6 +20,30 @@ Set up the Datadog Agent on employee desktops and laptops to collect [End User D
 - Windows 10 and later
 - macOS 11 and later
 
+## Permissions
+
+The following permissions control access to End User Device Monitoring:
+
+| Name | Description | Default role |
+| --- | --- | --- |
+| End User Devices Read (`end_user_devices_read`) | View End User Device Monitoring, including the command center, summary, and devices explorer. | Datadog Standard Role |
+| End User Devices Config Read (`end_user_devices_config_read`) | View End User Device Monitoring organization settings. | Datadog Admin Role |
+| End User Devices Config Write (`end_user_devices_config_write`) | Change End User Device Monitoring organization settings. | Datadog Admin Role |
+
+The Datadog Standard Role includes End User Devices Read. The Datadog Admin Role includes all three permissions. If your organization uses [custom roles][23], an admin with the User Access Manage permission needs to add these permissions to the roles that should use End User Device Monitoring. For details, see [Datadog Role Permissions][24].
+
+End User Device Monitoring also uses permissions from other Datadog products for the full product to work.
+
+Command Center requires **Work Items Read** (`cases_read`) and **Work Items Write** (`cases_write`).
+
+Identity mapping requires **Reference Tables Read** (`reference_tables_read`) or **Reference Tables Write** (`reference_tables_write`), depending on the action. Access restrictions on the configured reference table also apply.
+
+The following permissions apply to the corresponding feature, not to basic End User Device Monitoring access:
+
+- Network Path data requires **Network Path Data Read** (`network_path_config_read`).
+- Network-device and access-point information requires **NDM Read** (`ndm_devices_read`).
+- Network connection data requires **Network Connections Read** (`network_connections_read`) when network-connection permission enforcement is enabled for the organization.
+
 ## Set up the Datadog Agent
 
 1. Confirm that you have received access to the Preview before continuing. If you have not received confirmation, [request access][12] and wait for approval.
@@ -67,3 +91,5 @@ Once devices start populating, start exploring End User Devices by:
 [18]: /mcp_server/setup/
 [19]: /infrastructure/end_user_device_monitoring/#trace-network-paths-from-user-devices-to-saas-applications
 [20]: /integrations/battery/#data-collected
+[23]: /account_management/rbac/permissions/#custom-roles
+[24]: /account_management/rbac/permissions/#end-user-device-monitoring

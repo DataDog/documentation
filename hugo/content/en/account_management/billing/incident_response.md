@@ -18,7 +18,9 @@ Datadog's [Incident Management][1], [On-Call][2], and Incident Response SKUs use
 
 Organizations have two options for incident response billing:
 - Incident Management or On-Call as separate SKUs, each billed individually
-- The Incident Response bundle, which unifies billing for both Incident Management and On-Call under a single SKU
+- The Incident Response bundle, which unifies billing for both Incident Management and On-Call under a single SKU and includes full access to [Status Pages](#status-pages-usage)
+
+The Incident Response bundle can't be combined with the standalone On-Call or Incident Management SKUs. If your organization commits to the bundle, all of its seats are Incident Response seats.
 
 Each product bills by seat, so each user who performs qualifying actions requires a seat license. For detailed pricing information, see the [Incident Response pricing page][3].
 
@@ -44,7 +46,9 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Assign a task to a user within an incident (the assignee does not need a seat)
 - Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Posting in a connected Slack, Microsoft Teams, or Google Chat channel doesn't require a seat, and neither does commenting on a linked Jira issue. This applies even when the messages sync to the incident timeline. Only actions taken through the Datadog app for Slack or Microsoft Teams, such as using action buttons or mentioning @Datadog, require a seat.
+
+A synced message is different from a timeline comment: a regular message that syncs to the timeline automatically doesn't require a seat, but adding a comment, graph, or link to the timeline in Datadog, or through an action in the Datadog app for Slack or Microsoft Teams, does.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 

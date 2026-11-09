@@ -56,7 +56,7 @@ Use this option if you want to use a {{< ui >}}Stakeholder/Read-Only{{< /ui >}} 
 2. Copy the Datadog webhook URL.
 3. In dbt Cloud, go to {{< ui >}}Account Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} > {{< ui >}}Create New Webhook{{< /ui >}}.
 4. Paste the Datadog webhook URL into the webhook URL field.
-5. Enable the {{< ui >}}Job Run Started{{< /ui >}} and {{< ui >}}Job Run Completed{{< /ui >}} events. To scope ingestion to specific jobs, select those jobs in the dbt Cloud webhook configuration.
+5. Enable the {{< ui >}}Run started{{< /ui >}}, {{< ui >}}Run completed{{< /ui >}}, and {{< ui >}}Run errored{{< /ui >}} events. To scope ingestion to specific jobs, select those jobs in the dbt Cloud webhook configuration.
 6. Save the webhook in dbt Cloud.
 7. Copy the HMAC secret from dbt Cloud, paste it into the {{< ui >}}HMAC secret from dbt Cloud{{< /ui >}} field in Datadog, and click {{< ui >}}Save{{< /ui >}}.
 

@@ -1,102 +1,112 @@
 ---
-description: Examiner le Network Path – Path View
+description: Examiner la vue Network Path – Path
 further_reading:
 - link: /network_monitoring/network_path/setup
   tag: Documentation
-  text: Configurer le Network Path
+  text: Configurer Network Path
 - link: https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/
   tag: Blog
-  text: Surveiller une architecture cloud et des dépendances d'application avec la
-    solution NPM Datadog
-title: Vue sous forme de chemin
+  text: Surveiller une architecture cloud et des dépendances d'application avec Datadog
+    NPM
+title: Vue Path
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La section Path View dans Network Path permet un examen détaillé d'un itinéraire particulier, aidant à résoudre les problèmes potentiels qui pourraient survenir de la source à la destination. Elle offre des données complètes sur la latence de bout en bout et la perte de paquets tout au long de l'itinéraire.
+La section de la vue Path dans Network Path permet un examen détaillé d'un itinéraire particulier, aidant à résoudre d'éventuels problèmes susceptibles de survenir entre la source et la destination. Elle offre des données complètes sur la latence de bout en bout et la perte de paquets tout au long de l'itinéraire.
 
-Pour accéder à la page de Path View, cliquez sur un chemin dans la [List view][2] ou [AS view][3]. Sur cette page, vous avez la possibilité de changer les couleurs des seuils de latence et de voir l'état de chaque saut.
+Pour accéder à la page de la vue Path, cliquez sur un chemin depuis la [vue List][2] ou la [vue AS][3]. Sur cette page, vous avez la possibilité de modifier les couleurs du seuil de latence et de voir le statut de chaque saut.
 
-{{< img src="network_performance_monitoring/network_path/network_path_view_5.png" alt="Network Path view montrant une destination accessible avec 0 % de perte de paquets, 103 ms de latence et l'historique de latence et d'accessibilité." >}}
+{{< img src="network_performance_monitoring/network_path/network_path_view_5.png" alt="Vue Network Path montrant une destination accessible avec 0 % de perte de paquets, 103 ms de latence, ainsi que l'historique de latence et d'accessibilité." >}}
 
-Cliquez sur n'importe quel chemin entre la source et la destination pour observer des détails supplémentaires tels que `Hop TTL`, `Hop Latency` et `Traversed count`. Ensuite, cliquez sur **View Device Details** pour naviguer vers les Device details dans [NDM][4] pour l'appareil sélectionné.
+Cliquez sur n'importe quel chemin du saut entre la source et la destination pour observer des détails supplémentaires tels que `Hop TTL`, `Hop Latency` et `Traversed count`. Ensuite, cliquez sur {{< ui >}}View Device Details{{< /ui >}} pour accéder aux détails de l'équipement dans [NDM][4] pour l'équipement sélectionné.
 
-{{< img src="network_performance_monitoring/network_path/path_details.png" alt="Network Path view mettant en évidence les détails du chemin." style="width:30%;" >}}
+{{< img src="network_performance_monitoring/network_path/path_details.png" alt="Vue Path dans Network Path mettant en évidence les détails du chemin." style="width:30%;" >}}
 
 ## Légende {#legend}
 
-La légende fournit des détails supplémentaires sur l'état de chaque saut.
+La légende fournit des détails supplémentaires sur le statut de chaque saut.
 
-{{< img src="network_performance_monitoring/network_path/legend.png" alt="Network Path view montrant la légende." style="width:30%;" >}}
+{{< img src="network_performance_monitoring/network_path/legend.png" alt="Vue Path dans Network Path affichant la légende." style="width:30%;" >}}
 
 Nombre de traversées 
-: Nombre de `traceroutes` qui ont traversé le saut.
+: Nombre de `traceroutes` ayant transité par le saut.
 
 Achèvement de la traversée 
-: Représente si le `traceroute` a pu atteindre avec succès la destination ou non.
+: Indique si le `traceroute` a réussi à atteindre la destination ou non.
 
 Accessibilité
-: Le niveau de perte de paquets que la destination subit.
+: Le niveau de perte de paquets subi par la destination.
 
 Latence 
-: Combien de temps le `traceroute` a mis pour aller d'une source à sa destination.
+: Le temps mis par le `traceroute` pour aller d'une source à sa destination.
 
-**Remarque** : La latence de saut à saut peut montrer `N/A` pour les sauts qui étaient incomplets.
+**Remarque** : La latence saut par saut peut afficher `N/A` pour les sauts incomplets.
 
-## Barre de santé {#health-bar}
+## Barre d'état {#health-bar}
 
-Faites glisser la barre de santé de latence et d'accessibilité pour observer un instantané de la latence de bout en bout et de la perte de paquets de bout en bout pour un intervalle de temps spécifique le long du chemin.
+Faites glisser la barre d'état de latence et d'accessibilité pour observer un instantané de la latence de bout en bout et de la perte de paquets de bout en bout sur une période spécifique le long du chemin.
 
-**Remarque** : Changer la barre de santé n'affecte pas la plage de temps globale en haut de la page.
+**Remarque** : La modification de la barre d'état n'affecte pas la plage temporelle globale en haut de la page.
 
-{{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="Vidéo du Network Path, sélectionnant la barre de santé de latence et glissant vers une période de temps." video="true" >}}
+{{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="Vidéo de Network Path, montrant la sélection de la barre d'état de latence et son déplacement vers une période définie." video="true" >}}
 
-## Comparaison visuelle {#visual-comparison}
+## Analyser avec Bits AI{#analyze-with-bits-ai}
 
-Utilisez la vue de comparaison visuelle pour comparer deux visualisations de chemin côte à côte et identifier ce qui a changé avant et après un incident.
+Cliquez sur {{< ui >}}Analyze with Bits AI{{< /ui >}} dans la vue Path pour ouvrir [Bits AI][5] avec le chemin actuel chargé. Bits AI analyse la latence, la perte de paquets et la gigue le long du chemin, afin de pouvoir renvoyer une analyse générée par IA des endroits où les problèmes surviennent.
 
-La vue de comparaison fournit :
+Vous pouvez également interroger les exécutions de test Network Path, y compris les données saut par saut, à partir d'un agent IA avec l'outil [`get_network_path_test_runs`][6] dans le Datadog MCP Server.
 
-- Instantanés côte à côte du même Network Path à travers différentes périodes de temps.
-- Instantanés côte à côte de deux Network Paths différents (paires de source et de destination différentes).
-- Une mise en page verticale qui met en évidence le delta entre les deux requêtes.
-- Identification automatique des sauts communs et uniques.
-- Un graphique de séries temporelles superposé comparant la latence RTT, la perte de paquets, le jitter et le nombre de sauts.
+## Visual Comparison {#visual-comparison}
 
-{{< img src="network_performance_monitoring/network_path/visual_comparison_paths_2.png" alt="Vue de comparaison visuelle montrant le chemin A avec une destination accessible au-dessus du chemin B avec une destination inaccessible, et une chronologie de latence RTT en haut." style="width:100%;" >}}
+Utilisez la vue Visual Comparison pour comparer deux visualisations de chemin côte à côte et identifier les changements intervenus avant et après un incident.
 
-### Ouvrir la vue de comparaison {#open-the-comparison-view}
+La vue Visual Comparison fournit :
 
-Pour ouvrir la vue de comparaison, cliquez sur **Compare** près des contrôles de plage horaire dans la Network Path view. Par défaut, la vue se remplit avec votre plage horaire précédemment sélectionnée et la compare au bloc de temps équivalent précédent. Par exemple, une plage de 3 heures est comparée à la plage de 3 heures précédente. Utilisez les contrôles en haut pour ajuster les plages de temps comparées.
+- Des instantanés côte à côte du même Network Path sur différentes périodes.
+- Des instantanés côte à côte de deux Network Paths différents (paires source et destination différentes).
+- Une disposition verticale qui met en évidence l'écart entre les deux requêtes.
+- Une identification automatique des sauts communs et uniques.
+- Un graphique de série temporelle superposé comparant la latence RTT, la perte de paquets, la gigue et le nombre de sauts.
 
-### Naviguer dans la comparaison {#navigate-the-comparison}
+{{< img src="network_performance_monitoring/network_path/visual_comparison_paths_2.png" alt="Vue Visual Comparison montrant le chemin A avec une destination accessible au-dessus du chemin B avec une destination inaccessible, ainsi qu'une chronologie de latence RTT en haut." style="width:100%;" >}}
 
-Naviguez les chemins séparés de manière indépendante en utilisant les contrôles de zoom, la mini-carte, ou en maintenant ⌘/Ctrl et en faisant défiler avec votre souris.
+### Ouvrir la vue Comparison {#open-the-comparison-view}
 
-Cliquez sur **Inspect** sur un saut partagé pour ouvrir une barre latérale détaillant les métadonnées et confirmant que le saut est présent dans les deux vues. Les sauts uniques sont enveloppés dans une couleur distincte pour indiquer qu'ils n'existent que dans une seule vue.
+Pour ouvrir la vue Visual Comparison, cliquez sur {{< ui >}}Compare{{< /ui >}} près des commandes de plage temporelle dans la vue Network Path. Par défaut, la vue Visual Comparison s'affiche avec la plage de temps que vous aviez précédemment sélectionnée et la compare au bloc temporel équivalent précédent. Par exemple, une plage de 3 heures est comparée à la plage de 3 heures précédente. Utilisez les commandes supérieures pour ajuster les plages horaires comparées.
 
-L'onglet **Analysis** fournit une répartition côte à côte, saut par saut, des paquets et de la latence RTT pour chaque plage horaire.
+### Parcourir la vue Comparison {#navigate-the-comparison}
 
-{{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="Onglet Analysis de la vue de comparaison visuelle montrant un tableau de latence RTT des sauts côte à côte pour les chemins A et B." style="width:100%;" >}}
+Naviguez dans les chemins divisés indépendamment en utilisant les commandes de zoom, la mini-carte, ou en maintenant ⌘/Ctrl et en faisant défiler avec votre souris.
+
+Cliquez sur {{< ui >}}Inspect{{< /ui >}} sur un saut partagé pour ouvrir une barre latérale détaillant les métadonnées et confirmant que le saut est présent dans les deux vues. Les sauts uniques sont entourés d'une couleur distincte pour indiquer qu'ils n'existent que dans une seule vue.
+
+L'onglet {{< ui >}}Analysis{{< /ui >}} fournit une ventilation côte à côte, saut par saut, des paquets et de la latence RTT pour chaque plage horaire :
+
+{{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="Onglet Analysis de la vue Visual Comparison montrant un tableau de latence RTT par saut côte à côte pour les chemins A et B." style="width:100%;" >}}
+
+### Comparer les chemins avec Bits AI {#compare-paths-with-bits-ai}
+
+Depuis la vue Visual Comparison, cliquez sur le bouton Bits AI pour ouvrir [Bits AI][5] avec les deux chemins chargés. Bits AI renvoie une comparaison générée par IA des deux chemins.
 
 ## Graphiques {#graphs}
 
-La section inférieure de la Network Path view fournit des informations supplémentaires sur chaque chemin à travers une série de graphiques.  
+La section inférieure de la page de la vue Path fournit des informations supplémentaires sur chaque chemin via une série de graphiques.  
 
-### Graphique des métriques de bout en bout {#end-to-end-metrics-graph}
+### Graphique End-to-end metrics {#end-to-end-metrics-graph}
 
-Le graphique des métriques de bout en bout présente une représentation visuelle à la fois de la latence de bout en bout et de la perte de paquets de bout en bout pour chaque chemin, vous permettant de les comparer et de les analyser efficacement.
-
-
-{{< img src="network_performance_monitoring/network_path/end-to-end-metrics-graph.png" alt="Network Path view montrant le graphique des métriques de bout en bout." >}}
-
-### Graphique de latence de saut à saut {#hop-to-hop-latency-graph}
-
-Le graphique de latence de saut à saut fournit une vue détaillée de la latence pour chaque saut le long du chemin, facilitant l'identification des goulets d'étranglement ou des zones problématiques potentielles.
+Le graphique End-to-end metrics présente une représentation visuelle à la fois de la latence de bout en bout et de la perte de paquets de bout en bout pour chaque chemin, vous permettant de les comparer et de les analyser efficacement.
 
 
-{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_3.png" alt="Network Path view montrant le graphique de latence de saut à saut." >}}
+{{< img src="network_performance_monitoring/network_path/end-to-end-metrics-graph.png" alt="Page de la vue Path montrant le graphique End-to-end metrics." >}}
 
-## Lectures complémentaires {#further-reading}
+### Graphique Hop-to-hop latency {#hop-to-hop-latency-graph}
+
+Le graphique Hop-to-hop latency fournit une vue détaillée de la latence pour chaque saut le long du chemin, facilitant l'identification des goulots d'étranglement potentiels ou des zones problématiques.
+
+
+{{< img src="network_performance_monitoring/network_path/hop-to-hop-latency-graph_3.png" alt="Page de la vue Path montrant le graphique Hop-to-hop latency." >}}
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -104,3 +114,5 @@ Le graphique de latence de saut à saut fournit une vue détaillée de la latenc
 [2]: /fr/network_monitoring/network_path/list_view
 [3]: /fr/network_monitoring/network_path/as_view/
 [4]: /fr/network_monitoring/devices
+[5]: /fr/bits_ai/
+[6]: /fr/mcp_server/tools/#get_network_path_test_runs

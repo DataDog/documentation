@@ -48,7 +48,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
-However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
+However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Catalog page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
 
 {{< img src="metrics/distributions/metric_detail_enable_percentiles.mp4" alt="A user enabling advanced percentiles and threshold query functionality by clicking on configure under the advanced section of a metric detail panel" video=true width=80% >}}
 
@@ -72,7 +72,7 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][4] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
+1. Navigate to the [Metrics Catalog page][4] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
 1. Select {{< ui >}}Enable percentiles{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable percentiles for all metrics in the namespace, click the {{< ui >}}Percentile aggregations{{< /ui >}} toggle.
@@ -87,14 +87,14 @@ With threshold queries for distributions with percentiles, you do not need to pr
 
 To use threshold queries: 
 
-1. Enable percentiles on your distribution metric on the Metrics Summary page.
+1. Enable percentiles on your distribution metric on the Metrics Catalog page.
 2. Graph your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 
 {{< img src="metrics/distributions/threshold_queries.mp4" video=true alt="A timeseries graph being visualized using the count values aggregator, with a threshold of greater than 8 seconds" style="width:80%;" >}}
 
 You can similarly create a metric-based SLO using threshold queries: 
-1. Enable percentiles on your distribution metric on the Metrics Summary page.
+1. Enable percentiles on your distribution metric on the Metrics Catalog page.
 2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 {{< img src="metrics/distributions/threshold_SLO.png" alt="Threshold Queries for SLOs" style="width:80%;">}}
@@ -105,7 +105,7 @@ Distributions provide functionality that allows you to control the tagging for c
 
 To customize tagging:
 
-1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
+1. Click on your custom distribution metric name in the Metrics Catalog table to open the metrics details sidepanel.
 2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
 3. Click the {{< ui >}}Custom...{{< /ui >}} tab to customize the tags you'd like to keep available for query. 
 
@@ -131,7 +131,7 @@ Overshadowing typically presents in one of the following ways:
     ```
 * A metric reports as a different type than expected (for example, you expect `count` but see `distribution`).
 
-To confirm a metric's current type, see the [Metrics Summary page][4].
+To confirm a metric's current type, see the [Metrics Catalog page][4].
 
 ### Avoid overshadowing
 
@@ -172,6 +172,6 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [1]: /metrics/types/
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
 [5]: /metrics/open_telemetry/otlp_metric_types/
 [6]: https://www.datadoghq.com/support/

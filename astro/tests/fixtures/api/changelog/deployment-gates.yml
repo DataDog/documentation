@@ -1,0 +1,13 @@
+# NOTE: Frozen test fixture, adapted from hugo/data/changelog/deployment-gates.yml (the removed entry is invented). Not live data.
+entries:
+  - change_type: added
+    date: '2026-10-02'
+    link: https://github.com/DataDog/documentation/pull/40587
+    operations:
+      - ListDeploymentGateEvaluations
+    title: Document public Deployment Gate evaluation endpoint
+  - change_type: removed
+    date: '2026-10-08'
+    operations:
+      - ListDeploymentGateEvaluations
+    title: Remove legacy Deployment Gate evaluation endpoint
