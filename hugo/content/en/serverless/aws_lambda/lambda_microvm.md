@@ -55,7 +55,7 @@ Install the Datadog tracer in your application. Minimum supported versions:
 | Component | Minimum version |
 |---|---|
 | Node.js tracer (`dd-trace`) | 6.15.0 |
-| Python tracer (`ddtrace`) | 4.16.2 |
+| Python tracer (`ddtrace`) | 4.17.0 |
 
 See the setup instructions for [Node.js][2] or [Python][3].
 
