@@ -27,6 +27,7 @@ For every log that matches the processor's filter:
 1. The Worker normalizes and preprocesses the log, regardless of whether it matches an integration pipeline. You can configure preprocessing for your specific log attributes. See [Common normalization](#common-normalization) and [Preprocessing options](#preprocessing-options) for more information.
 1. The Worker uses the normalized log's `source` to match it to an integration pipeline, such as `source:nginx` for the NGINX pipeline.
 1. The integration pipeline parses, remaps, and enriches the log. Logs that don't match a pipeline skip this step.
+1. Enabled [custom pipelines](#custom-pipelines) process the log, in order, if it matches their filter.
 1. The Worker groups attributes that aren't [reserved attributes](/logs/log_configuration/attributes_naming_convention/#reserved-attributes) under `attributes`.
 
 {{< img src="observability_pipelines/processors/integration_pipelines.png" alt="The Manage Integration Pipelines panel listing enabled integration pipelines with their source filters and processor counts." style="width:100%;" >}}
@@ -37,7 +38,7 @@ For every log that matches the processor's filter:
 - Enabling an integration pipeline does not mean the Worker sends all logs through it. The `source` or `ddsource` log attribute, such as `source:nginx`, determines whether a log matches an integration pipeline. Ensure your logs have one of those attributes.
     - Datadog Agent logs sent to the Worker already have `ddsource` added.
 - Integration pipelines do not support the GeoIP processor.
-- The processor supports only out-of-the-box integration pipelines included with the Worker. It does not run custom pipelines or modified versions of integration pipelines created in Log Management.
+- The integration pipelines catalog includes only out-of-the-box integration pipelines included with the Worker. To run your own Log Management pipelines, import them as [custom pipelines](#custom-pipelines).
 
 ## Setup
 
@@ -58,8 +59,9 @@ To set up an Integration Pipelines processor:
       1. Click {{< ui >}}Enabled{{< /ui >}} to see the list of enabled pipelines.
       1. Select the checkboxes for the pipelines you want to disable.
       1. Click {{< ui >}}Disable Selected{{< /ui >}}.
+1. (Optional) Click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row to import and manage your own pipelines. See [Custom pipelines](#custom-pipelines) for more information.
 1. Click {{< ui >}}Save{{< /ui >}}.
-1. If you enabled or disabled integration pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
+1. If you enabled or disabled integration or custom pipelines, redeploy your Observability Pipelines pipeline for the changes to take effect.
 
 ### Preprocessing options
 
@@ -78,6 +80,39 @@ For example, if you add `custom_host` before `hostname` in the list for the rese
 | `status`           | `status`, `severity`, `level`, `syslog.severity`                                                                |
 | `trace_id`         | `dd.trace_id`, `contextMap.dd.trace_id`, `named_tags.dd.trace_id`, `trace_id`                                   |
 | `span_id`          | `dd.span_id`, `contextMap.dd.span_id`, `named_tags.dd.span_id`, `span_id`                                       |
+
+## Custom pipelines
+
+Custom pipelines are pipelines you import from Log Management to process logs that no integration pipeline covers. Custom pipelines run in order, after integration pipelines, on every log that matches their filter.
+
+**Note**: Custom pipelines require Worker version 2.25.0 or later. Upgrade all Workers in the pipeline before deploying custom pipelines.
+
+### Import pipelines from Log Management
+
+1. In the Integration Pipelines processor, click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
+1. Click {{< ui >}}Import Pipelines{{< /ui >}}.
+1. In the {{< ui >}}Import Custom Pipelines{{< /ui >}} modal, select the Log Management pipelines you want to import. You can search pipelines by name, ID, or filter.
+    <!-- TODO: screenshot of the Import Custom Pipelines modal -->
+1. Click {{< ui >}}Import{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}, then redeploy your pipeline.
+
+**Notes**:
+
+- Importing a pipeline creates a copy in the processor. Later changes to the pipeline in Log Management are not synced. Deleting a custom pipeline from the processor does not affect the original pipeline in Log Management.
+- Importing a pipeline that was already imported replaces the existing custom pipeline, including its name, filter, enabled state, and processors.
+- An imported pipeline keeps its enabled state from Log Management. A pipeline without a filter in Log Management gets the `*` filter, which matches all logs.
+- The Worker does not support GeoIP parsers, Reference Table lookups, or threat intel processors. Importing a pipeline removes these processors. The import modal shows how many unsupported processors each pipeline has.
+
+### Manage custom pipelines
+
+In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
+
+- Enable or disable custom pipelines. Use the {{< ui >}}Enabled{{< /ui >}} and {{< ui >}}Disabled{{< /ui >}} toggle to switch between the lists.
+- Drag pipelines to change the order in which they run.
+- Edit a pipeline's name and filter query. Processors can't be edited in Observability Pipelines. To change them, edit the pipeline in Log Management and import it again.
+- Clone or delete a pipeline.
+
+<!-- TODO: screenshot of the Custom Pipelines tab -->
 
 ## CPU sizing
 
