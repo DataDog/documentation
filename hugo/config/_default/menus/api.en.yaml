@@ -11237,18 +11237,6 @@ menu:
           - ListCloudWorkloadSecurityAgentRules
         unstable: []
         order: 12
-    - name: Download the Workload Protection policy (US1-FED)
-      url: /api/latest/csm-threats/download-the-workload-protection-policy-us1-fed/
-      identifier: csm-threats-download-the-workload-protection-policy-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DownloadCloudWorkloadPolicyFile
-        unstable: []
-        order: 17
     - name: Update a Workload Protection policy
       url: /api/latest/csm-threats/update-a-workload-protection-policy/
       identifier: csm-threats-update-a-workload-protection-policy
