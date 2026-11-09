@@ -1,0 +1,17 @@
+# This options set is missing the ID for red
+primary_color_options:
+  - label: Red
+  - label: Yellow
+    id: yellow
+  - label: Blue
+    id: blue
+    default: true
+
+traffic_light_color_options:
+  - label: Red
+    id: red
+  - label: Yellow
+    id: yellow
+  - label: Green
+    id: green
+    default: true

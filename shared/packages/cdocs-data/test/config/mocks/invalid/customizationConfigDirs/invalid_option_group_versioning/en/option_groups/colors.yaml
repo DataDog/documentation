@@ -1,0 +1,19 @@
+# Mistake: Only whole-number versions are allowed
+color_options_v1.2.1:
+  - id: red
+    label: Red
+  - id: green
+    label: Green
+
+# Mistake: Only whole-number versions are allowed
+color_options_v1preview:
+  - id: red
+    label: Red
+  - id: green
+    label: Green
+
+color_options:
+  - id: red
+    label: Red
+  - id: green
+    label: Green

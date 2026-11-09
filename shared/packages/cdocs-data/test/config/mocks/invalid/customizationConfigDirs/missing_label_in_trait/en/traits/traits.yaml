@@ -1,0 +1,4 @@
+traits:
+# Mistake: The label for the trait is missing.
+- id: color
+  type: text

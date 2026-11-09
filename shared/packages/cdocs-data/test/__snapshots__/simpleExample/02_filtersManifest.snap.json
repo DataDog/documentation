@@ -1,0 +1,39 @@
+{
+  "filtersByTraitId": {
+    "favorite_color": {
+      "config": {
+        "label": "Favorite color",
+        "trait_id": "favorite_color",
+        "option_group_id": "favorite_color_options"
+      },
+      "defaultValsByOptionGroupId": {
+        "favorite_color_options": "purple"
+      },
+      "possibleVals": [
+        "purple",
+        "pink"
+      ],
+      "optionLabelsByOptionId": {
+        "purple": "purple",
+        "pink": "pink"
+      }
+    }
+  },
+  "optionGroupsById": {
+    "favorite_color_options": [
+      {
+        "default": true,
+        "id": "purple",
+        "label": "purple"
+      },
+      {
+        "id": "pink",
+        "label": "pink"
+      }
+    ]
+  },
+  "errors": [],
+  "defaultValsByTraitId": {
+    "favorite_color": "purple"
+  }
+}

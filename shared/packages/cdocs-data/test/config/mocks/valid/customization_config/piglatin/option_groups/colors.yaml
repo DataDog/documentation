@@ -1,0 +1,4 @@
+color_options:
+  - id: blue
+    default: true
+  - id: red

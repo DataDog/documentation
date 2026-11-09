@@ -1,0 +1,18 @@
+# This option group has a multi-word ID for the red option
+primary_color_options:
+  - label: Red
+    id: the color red
+  - label: Yellow
+    id: yellow
+  - label: Blue
+    id: blue
+    default: true
+
+traffic_light_color_options:
+  - label: Red
+    id: red
+  - label: Yellow
+    id: yellow
+  - label: Green
+    id: green
+    default: true

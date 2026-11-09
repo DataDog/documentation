@@ -1,0 +1,57 @@
+{
+  "duplicate_id_in_options_glossary": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"options\"\n    ],\n    \"message\": \"Duplicate IDs found in option glossary; each option ID must be unique\"\n  }\n]"
+  },
+  "duplicate_label_in_options_glossary": {
+    "message": "Duplicate option labels found: Red. Each option label must be unique."
+  },
+  "extra_option_data": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"default\"\n    ],\n    \"path\": [\n      \"options\",\n      0\n    ],\n    \"message\": \"Unrecognized key: \\\"default\\\"\"\n  }\n]"
+  },
+  "extra_trait_data": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"unrecognized_keys\",\n    \"keys\": [\n      \"unexpected_key\"\n    ],\n    \"path\": [\n      \"traits\",\n      0\n    ],\n    \"message\": \"Unrecognized key: \\\"unexpected_key\\\"\"\n  }\n]"
+  },
+  "invalid_id_in_trait": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"regex\",\n    \"pattern\": \"/^[a-z0-9]+(_[a-z0-9]+)*$/\",\n    \"path\": [\n      \"traits\",\n      0,\n      \"id\"\n    ],\n    \"message\": \"Invalid string: must match pattern /^[a-z0-9]+(_[a-z0-9]+)*$/\"\n  }\n]"
+  },
+  "invalid_option_group_versioning": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"invalid_key\",\n    \"origin\": \"record\",\n    \"issues\": [\n      {\n        \"origin\": \"string\",\n        \"code\": \"invalid_format\",\n        \"format\": \"regex\",\n        \"pattern\": \"/^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options(_v[0-9]+)?$/\",\n        \"path\": [],\n        \"message\": \"Invalid string: must match pattern /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options(_v[0-9]+)?$/\"\n      }\n    ],\n    \"path\": [\n      \"color_options_v1.2.1\"\n    ],\n    \"message\": \"Invalid key in record\"\n  },\n  {\n    \"code\": \"invalid_key\",\n    \"origin\": \"record\",\n    \"issues\": [\n      {\n        \"origin\": \"string\",\n        \"code\": \"invalid_format\",\n        \"format\": \"regex\",\n        \"pattern\": \"/^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options(_v[0-9]+)?$/\",\n        \"path\": [],\n        \"message\": \"Invalid string: must match pattern /^([a-z0-9]+|<([A-Z0-9_]+)>)(_([a-z0-9]+)|_<([A-Z0-9_]+)>)*_options(_v[0-9]+)?$/\"\n      }\n    ],\n    \"path\": [\n      \"color_options_v1preview\"\n    ],\n    \"message\": \"Invalid key in record\"\n  },\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"color_options\"\n    ],\n    \"message\": \"One option, and only one option, must be marked as default\"\n  }\n]"
+  },
+  "missing_default_value_in_option_group": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"primary_color_options\"\n    ],\n    \"message\": \"One option, and only one option, must be marked as default\"\n  }\n]"
+  },
+  "missing_label_in_trait": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"traits\",\n      0,\n      \"label\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  }\n]"
+  },
+  "missing_option_id_in_option_group": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"expected\": \"string\",\n    \"code\": \"invalid_type\",\n    \"path\": [\n      \"primary_color_options\",\n      0,\n      \"id\"\n    ],\n    \"message\": \"Invalid input: expected string, received undefined\"\n  }\n]"
+  },
+  "missing_options_glossary": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"color_options\"\n    ],\n    \"message\": \"One option, and only one option, must be marked as default\"\n  }\n]"
+  },
+  "multiple_defaults_in_option_group": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"code\": \"custom\",\n    \"path\": [\n      \"primary_color_options\"\n    ],\n    \"message\": \"One option, and only one option, must be marked as default\"\n  }\n]"
+  },
+  "multiword_id_in_option_group": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"regex\",\n    \"pattern\": \"/^[a-z0-9]+(_[a-z0-9]+)*$/\",\n    \"path\": [\n      \"primary_color_options\",\n      0,\n      \"id\"\n    ],\n    \"message\": \"Invalid string: must match pattern /^[a-z0-9]+(_[a-z0-9]+)*$/\"\n  }\n]"
+  },
+  "options__spinal_case_id": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"regex\",\n    \"pattern\": \"/^[a-z0-9]+(_[a-z0-9]+)*$/\",\n    \"path\": [\n      \"primary_color_options\",\n      0,\n      \"id\"\n    ],\n    \"message\": \"Invalid string: must match pattern /^[a-z0-9]+(_[a-z0-9]+)*$/\"\n  }\n]"
+  },
+  "punctuated_id_in_option_group": {
+    "name": "ZodError",
+    "message": "[\n  {\n    \"origin\": \"string\",\n    \"code\": \"invalid_format\",\n    \"format\": \"regex\",\n    \"pattern\": \"/^[a-z0-9]+(_[a-z0-9]+)*$/\",\n    \"path\": [\n      \"primary_color_options\",\n      0,\n      \"id\"\n    ],\n    \"message\": \"Invalid string: must match pattern /^[a-z0-9]+(_[a-z0-9]+)*$/\"\n  }\n]"
+  }
+}

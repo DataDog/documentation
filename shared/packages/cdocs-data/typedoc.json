@@ -1,0 +1,3 @@
+{
+  "plugin": ["typedoc-plugin-zod", "typedoc-plugin-markdown"]
+}

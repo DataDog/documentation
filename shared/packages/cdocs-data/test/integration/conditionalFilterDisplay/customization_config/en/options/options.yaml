@@ -1,0 +1,21 @@
+options:
+  - id: linux
+    label: Linux
+  - id: windows
+    label: Windows
+  - id: mac_os
+    label: macOS
+  - id: java
+    label: Java
+  - id: python
+    label: Python
+  - id: ruby
+    label: Ruby
+  - id: jvm
+    label: JVM
+  - id: graal_vm
+    label: GraalVM
+  - id: cpython
+    label: CPython
+  - id: pypy
+    label: PyPy

@@ -1,0 +1,4 @@
+favorite_color_options:
+  - id: purple
+    default: true
+  - id: pink
