@@ -51,7 +51,7 @@ AI tools and search often show readers one section without the rest of the page.
 ### 6. Hugo checks
 These break the rendered page without failing the build:
 - **Link references inside tabs**: If a `{{% tab %}}` block uses a reference link like `[1]`, its definition (`[1]: /path/`) must be inside the same tab, just before `{{% /tab %}}`. Definitions at the bottom of the page render as literal `[1]` inside a tab. Check the full file, not only the diff hunk. Flag as an **Issue**.
-- **Relative docs links**: For a changed link to a docs path such as `/agent/configuration/`, check that a matching page exists under `__untrusted/hugo/content/en/`. Flag links with no matching page. You can't check external URLs or heading anchors, so don't guess about those.
+- **Relative docs links**: For a changed link to a docs path such as `/agent/configuration/`, check that a matching page exists under `__untrusted/hugo/content/en/`, as `<path>.md`, `<path>/_index.md`, or `<path>.mdoc.md`. Flag links with no matching page. Don't flag links under `/integrations/` or `/api/`, or paths that match an `aliases` entry, because those pages can exist without a file at that path. You can't check external URLs or heading anchors, so don't guess about those.
 - **Unused or missing reference definitions**: Flag `[n]: /url` definitions that nothing uses, and `[n]` references with no definition.
 
 ### 7. Links, images, and accessibility
