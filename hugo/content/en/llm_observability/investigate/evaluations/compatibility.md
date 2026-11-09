@@ -8,7 +8,7 @@ description: Learn about the compatibility requirements for evaluators.
 
 ## Evaluator compatibility
 
-The supported third party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, and Custom Provider.
+The supported third-party LLM providers are OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Vertex AI, Baseten, Fireworks AI, Together AI, and Custom Provider.
 
 ### Managed evaluators
 
