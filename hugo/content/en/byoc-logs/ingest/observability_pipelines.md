@@ -54,7 +54,7 @@ Choose the deployment method for your environment. The Operator manages Workers 
 
 For a new AWS deployment, follow [Install BYOC with the Datadog Operator][6]. The Operator does not create the pipeline in Datadog. Create it first and provide its ID in `spec.components.pipelines[].pipelineID`.
 
-For the Datadog Agent source used on this page, add an entry like this to the `DatadogBYOCCluster` manifest, preserving the rest of the cluster configuration and any other pipeline entries:
+Add the following entry to `spec.components.pipelines` in your `DatadogBYOCCluster` manifest. Keep the rest of the cluster configuration and any other pipeline entries:
 
 ```yaml
 spec:
@@ -103,9 +103,9 @@ After a minute, verify that logs are flowing through the pipeline and reaching t
 
 After the Observability Pipelines Worker is deployed and running, configure your Datadog Agent to send logs to it. The Agent connects to the Worker using the Worker's service address. For more information, see [Connect the Datadog Agent to the Observability Pipelines Worker][5].
 
-Update your Datadog Agent configuration to send logs to the Observability Pipelines worker:
+Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example in the previous section, use `<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Worker, use its Service address.
 
-Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example above, use `<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Helm deployment, use its Worker Service address.
+Update your Datadog Agent configuration to send logs to the Observability Pipelines Worker:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -155,7 +155,7 @@ kubectl logs -l app=observability-pipelines-worker
 kubectl exec -it <RELEASE_NAME>-searcher-0 -n <NAMESPACE_NAME> -- curl 'http://localhost:7280/api/v1/datadog/search?query='
 ```
 
-Send a log from the configured Agent, select the cluster's BYOC index in Log Explorer, and confirm that the log appears. A ready Worker alone does not verify end-to-end ingestion.
+Send a log from the configured Agent, select the cluster's BYOC Logs index in Log Explorer, and confirm that the log appears. A ready Worker alone does not verify end-to-end ingestion.
 
 ## Further reading
 

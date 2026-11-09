@@ -23,7 +23,7 @@ Choose a deployment method before preparing your environment:
 | BYOC and Worker Helm charts | AWS EKS, Google GKE, Azure AKS | Reverse connection; Ingress where supported by the platform guide | Install and configure the engine and Workers separately. |
 | [Docker][2] | Local environment | Reverse connection | Evaluation only. |
 
-The Operator does not provision object storage, PostgreSQL, IAM roles, or Observability Pipeline definitions. The platform requirements below describe BYOC as a whole; they do not extend the Operator's AWS support to other providers.
+The Operator does not provision object storage, PostgreSQL, IAM roles, or Observability Pipeline definitions. The Operator supports only Amazon EKS. The following platform requirements apply to all deployment methods.
 
 <div class="alert alert-info">
 If you don't see the BYOC Logs entry in the Logs menu, contact your Datadog account team to activate BYOC Logs on your account.
