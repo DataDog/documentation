@@ -2656,7 +2656,7 @@ components:
       description: |-
         The trace ID. Accepts either a hexadecimal string of up to 32 characters (128-bit trace ID)
         or a decimal string of up to 39 digits. Hexadecimal IDs are case-insensitive, and shorter
-        values are left-padded with zeros.
+        values are left-padded with zeros. Values made only of digits are treated as decimal.
         Use the `trace_id` attribute of a span returned by the Search spans or Get a list of spans endpoints.
         Values in any other format, such as UUIDs, return `400 Bad Request`. A well-formed ID with
         no matching trace returns `404 Not Found`.
@@ -3899,11 +3899,13 @@ components:
           type: integer
         traceID:
           description: The lower 64 bits of the trace ID, as an unsigned 64-bit integer.
-          example: 12345678901234567890
+          example: 12376211733897805824
           format: int64
           type: integer
         traceIDFull:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -109978,7 +109980,9 @@ components:
         attributes:
           $ref: "#/components/schemas/PrunedTraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -135614,12 +135618,14 @@ components:
           example: {"@state": "success", "@version": "abc"}
           type: object
         compute:
-          description: The compute data.
+          description: |-
+            Map of compute ID (`c0`, `c1`, ... in request order) to the computed value, or to a list of
+            `{time, value}` points for a `timeseries` compute.
           type: object
         computes:
           additionalProperties:
             $ref: "#/components/schemas/SpansAggregateBucketValue"
-          description: A map of the metric name -> value for regular compute or list of values for a timeseries.
+          description: Not returned by this endpoint. Read the values from `compute` instead.
           type: object
       type: object
     SpansAggregateBucketType:
@@ -135845,7 +135851,9 @@ components:
             type: string
           type: array
         trace_id:
-          description: Id of the trace to which the span belongs.
+          description: |-
+            ID of the trace to which the span belongs: a 32-character hexadecimal string for 128-bit trace IDs,
+            or a decimal string for 64-bit trace IDs. Pass it unchanged to Get a trace by ID.
           example: "1234567890987654321"
           type: string
         type:
@@ -135856,7 +135864,8 @@ components:
     SpansCompute:
       description: |-
         A compute rule to compute metrics or timeseries.
-        All computes in a request must have the same `type`, and `timeseries` computes must use the same `interval`.
+        All computes in a request must have the same `type` (defaults to `total` when omitted),
+        and `timeseries` computes must use the same `interval`.
         To get both totals and timeseries, send separate requests.
       properties:
         aggregation:
@@ -136300,7 +136309,16 @@ components:
           type: string
         query:
           default: "*"
-          description: The search query - following the span search syntax.
+          description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
         to:
@@ -138172,7 +138190,9 @@ components:
         root:
           $ref: "#/components/schemas/SummarizedSpan"
         traceId:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
       required:
@@ -148725,8 +148745,10 @@ components:
         attributes:
           $ref: "#/components/schemas/TraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
-          example: "0000000000000000abc1230000000000"
+          description: |-
+            The lower 64 bits of the trace ID, as a decimal string.
+            The full trace ID is in each span's `traceIDFull`.
+          example: "12376211733897805824"
           type: string
         type:
           $ref: "#/components/schemas/TraceType"
@@ -258838,7 +258860,7 @@ paths:
                       - attributes:
                           by:
                             host: my-hostname
-                          computes:
+                          compute:
                             c0: 19
                         id: abc-123
                         type: bucket
@@ -258852,6 +258874,12 @@ paths:
           $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Request Timeout
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -258879,7 +258907,16 @@ paths:
         [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api
       operationId: ListSpansGet
       parameters:
-        - description: Search query following spans syntax.
+        - description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "@datacenter:us @role:db"
           in: query
           name: filter[query]
@@ -269835,15 +269872,21 @@ paths:
         A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
         no trace with this ID is available, such as when the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
+        For very large traces, use Get a pruned trace by ID, or set `include_fields` to keep only the tags you need.
       operationId: GetTraceByID
       parameters:
         - $ref: "#/components/parameters/TraceIDPathParameter"
         - description: |-
-            List of span fields to include in the response. When omitted, every available field is returned.
+            Tag keys to keep in each span's `meta` and `metrics`, for example `http.status_code` or `error.message`.
+            Each value is matched against tag keys by exact name, with or without a leading `@`.
+            Passing `meta` or `metrics` doesn't return the whole map.
+            Core span fields such as `service`, `resource`, `name`, `duration`, IDs, and timestamps, and the `env` tag
+            in `meta`, are always returned.
+            When omitted, all tags are returned.
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
-            - service
-            - resource
+            - http.status_code
+            - error.message
           in: query
           name: include_fields
           required: false
@@ -269876,10 +269919,10 @@ paths:
                             service: web-store
                             spanID: 9876543210987654321
                             startTime: 1716800000000000000
-                            traceID: 12345678901234567890
+                            traceID: 12376211733897805824
                             traceIDFull: 0000000000000000abc1230000000000
                             type: web
-                      id: "0000000000000000abc1230000000000"
+                      id: "12376211733897805824"
                       type: trace
               schema:
                 $ref: "#/components/schemas/TraceResponse"
