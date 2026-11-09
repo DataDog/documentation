@@ -661,7 +661,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `billing_mode` | The billing denomination: `credits` for credit-priced usage or `usd` for direct USD usage. |
 | `service_tier` | The service tier reported for the usage. |
 
-Available tags depend on the source record. Credit-priced usage contributes an estimated USD cost rather than a credit quantity to CCM cost totals.
+Available tags depend on the source record. Credit-priced usage contributes an estimated USD cost rather than a credit quantity to Cloud Cost Management cost totals.
 
 {{% /tab %}}
 
