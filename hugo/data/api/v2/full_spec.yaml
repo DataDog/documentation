@@ -5901,6 +5901,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegration"
         - $ref: "#/components/schemas/GCPIntegration"
         - $ref: "#/components/schemas/GeminiIntegration"
+        - $ref: "#/components/schemas/GithubIntegration"
         - $ref: "#/components/schemas/GitlabIntegration"
         - $ref: "#/components/schemas/GreyNoiseIntegration"
         - $ref: "#/components/schemas/HTTPIntegration"
@@ -5928,6 +5929,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegrationUpdate"
         - $ref: "#/components/schemas/GCPIntegrationUpdate"
         - $ref: "#/components/schemas/GeminiIntegrationUpdate"
+        - $ref: "#/components/schemas/GithubIntegrationUpdate"
         - $ref: "#/components/schemas/GitlabIntegrationUpdate"
         - $ref: "#/components/schemas/GreyNoiseIntegrationUpdate"
         - $ref: "#/components/schemas/HTTPIntegrationUpdate"
@@ -63091,6 +63093,187 @@ components:
       description: "Git Repository URL"
       example: "https://github.com/organization/example-repository"
       type: string
+    GithubApp:
+      description: GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppPrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+        - github_app_id
+        - github_installation_id
+        - private_key
+      type: object
+    GithubAppGithubAppId:
+      description: The numeric ID of the GitHub App.
+      example: "123456"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      example: "789012"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppPrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppType:
+      description: The credential type for `GithubApp`.
+      enum:
+        - GithubApp
+      example: GithubApp
+      type: string
+      x-enum-varnames:
+        - GITHUBAPP
+    GithubAppUpdate:
+      description: Update to GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppUpdateHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppUpdatePrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+      type: object
+    GithubAppUpdateGithubAppId:
+      description: The numeric ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdatePrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubCredentials:
+      description: Supported GitHub connection credentials.
+      oneOf:
+        - $ref: "#/components/schemas/GithubApp"
+        - $ref: "#/components/schemas/GithubPersonalAccessToken"
+    GithubCredentialsUpdate:
+      description: Supported GitHub connection credentials for an update.
+      oneOf:
+        - $ref: "#/components/schemas/GithubAppUpdate"
+        - $ref: "#/components/schemas/GithubPersonalAccessTokenUpdate"
+    GithubIntegration:
+      description: GitHub connection integration.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentials"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+        - credentials
+      type: object
+    GithubIntegrationType:
+      description: The GitHub integration type.
+      enum:
+        - Github
+      example: Github
+      type: string
+      x-enum-varnames:
+        - GITHUB
+    GithubIntegrationUpdate:
+      description: GitHub connection integration update.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentialsUpdate"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessToken:
+      description: GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+        - access_token
+      type: object
+    GithubPersonalAccessTokenAccessToken:
+      description: GitHub personal access token.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenType:
+      description: The credential type for `GithubPersonalAccessToken`.
+      enum:
+        - GithubPersonalAccessToken
+      example: GithubPersonalAccessToken
+      type: string
+      x-enum-varnames:
+        - GITHUBPERSONALACCESSTOKEN
+    GithubPersonalAccessTokenUpdate:
+      description: Update to GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessTokenUpdateAccessToken:
+      description: GitHub personal access token.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GithubWebhookTrigger:
       description: 'Trigger a workflow from a GitHub webhook. To trigger a workflow from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id", select application/json for the content type, and be highly recommend enabling SSL verification for security. The workflow must be published.'
       properties:
@@ -274802,6 +274985,8 @@ tags:
       Datadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,
       JIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within
       Workflow Automation and App Builder.
+
+      To authenticate with your own GitHub App or personal access token, create a GitHub connection.
 
       We offer granular access control for editing and resolving connections.
     externalDocs:
