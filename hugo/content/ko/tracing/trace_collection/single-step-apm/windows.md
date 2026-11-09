@@ -15,7 +15,7 @@ type: multi-code-lang
 SSI(단일 단계 계측)를 사용하면 단일 Datadog Agent 설치 명령을 사용하여 Windows VM에서 Java 및 .NET 애플리케이션에 대한 APM을 활성화할 수 있습니다.
 
 {{< skill-callout
-    title="에이전트를 사용해 APM 설정하기"
+    title="에이전트로 APM 설정"
     text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
     action_name="copy_dd_apm_skill_install_cmd" >}}
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
@@ -23,7 +23,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ## Windows에서 APM 활성화 {#enable-apm-on-windows}
 
-<div class="alert alert-info">계속 진행하기 전에 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 호환성 가이드를 검토하여 환경이 호환되는지 확인하세요.</a></div>
+<div class="alert alert-info">계속 진행하기 전에 <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI 호환성 가이드</a>를 검토하여 환경이 호환되는지 확인하세요.</div>
 
 ### 새 Agent 설치 {#new-agent-installation}
 
@@ -72,7 +72,7 @@ The Agent then automatically loads the Datadog .NET SDK into supported applicati
 
 <div class="alert alert-info">
 <strong>미리 보기에 참여하세요!</strong><br>
-Windows용 호스트 전체 계측은 미리 보기 상태이며 미리 보기 참가자로 제한됩니다. 이 탭에 설명된 설치 및 구성 옵션은 등록 후에만 Datadog에 나타납니다. 미리 보기에 참여하려면 <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">액세스 권한을 요청</a>하세요.
+Windows용 호스트 전체 계측은 미리 보기로 제공되고 있으며 미리 보기 참가자로 제한됩니다. 이 탭에 설명된 설치 및 구성 옵션은 등록 후에만 Datadog에 나타납니다. 미리 보기에 참여하려면 <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">액세스 권한을 요청</a>하세요.
 </div>
 
 전체 Windows 호스트에서 Java 및 .NET 애플리케이션을 계측하려면 다음 작업을 수행합니다.
@@ -86,7 +86,7 @@ Windows용 호스트 전체 계측은 미리 보기 상태이며 미리 보기 �
    1. {{< ui >}}Instrumentation Configuration{{< /ui >}} 아래에서 {{< ui >}}Customize Library Versions{{< /ui >}}을 선택합니다.
    1. .NET 아래에서 사용할 버전을 선택합니다.
 
-1. 제공된 설치 명령을 복사하여 Windows 호스트에서 실행합니다. 사용자가 미리 보기에 등록된 후 Datadog는 앱 내에서 이 명령을 생성합니다.
+1. 제공된 설치 명령을 복사하여 Windows 호스트에서 실행합니다. 사용자가 미리 보기에 등록된 후 Datadog은 앱 내에서 이 명령을 생성합니다.
 1. 계측 규칙을 구성합니다.
 
    호스트 전체 SSI는 호스트의 모든 Java 애플리케이션과 IIS에서 실행 중인 모든 .NET 애플리케이션을 자동으로 계측합니다. IIS 외부에서 실행되는 .NET 애플리케이션을 계측하려면 이러한 애플리케이션을 허용하는 [계측 규칙을 정의](#define-instrumentation-rules)해야 합니다. 계측 규칙을 사용하여 호스트의 어떤 Java 애플리케이션이나 IIS의 .NET 애플리케이션을 계측할지 세밀하게 제어할 수도 있습니다.
@@ -102,24 +102,14 @@ Windows용 호스트 전체 계측은 미리 보기 상태이며 미리 보기 �
 
 ### 기존 Agent 설치 {#existing-agent-installation}
 
-Datadog Agent가 이미 설치되어 있는 경우 Fleet Automation을 사용하여 SSI를 활성화합니다.
+Datadog Agent가 이미 설치되어 있다면 Datadog에서 원격으로 SSI를 활성화합니다. 각 호스트에서 명령을 실행할 필요는 없습니다.
 
-1. Datadog에서 [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}}][6]으로 이동합니다.
-1. {{< ui >}}Configure Agents{{< /ui >}}를 클릭합니다.
-1. 필터를 적용하여 구성하려는 에이전트를 선택한 다음 **Next**를 클릭합니다.
-
-   {{< img src="tracing/trace_collection/filter-agents.png" alt="Fleet Automation의 에이전트 필터링 화면(환경, 운영 체제, 호스트 이름별로 범위를 지정하는 옵션 표시)" style="width:100%;" >}}
-
-1. {{< ui >}}Application Performance Monitoring (APM){{< /ui >}} 타일을 클릭한 다음 {{< ui >}}Next{{< /ui >}}를 클릭합니다.
-
-   {{< img src="tracing/trace_collection/select-products-core-obs.png" alt="Fleet Automation의 제품 선택 화면(Application Performance Monitoring(APM) 타일 표시)" style="width:80%;" >}}
-
-1. {{< ui >}}Configure SDKs Installation{{< /ui >}} 화면에서 {{< ui >}}Yes{{< /ui >}}을 클릭하여 SDK를 자동으로 설치합니다. {{< ui >}}Use latest version{{< /ui >}}을 선택하거나 선택을 해제하여 개별 SDK 버전을 지정합니다.
-
-   {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="Fleet Automation의 SDK 설치 구성 화면(자동 SDK 설치를 활성화하고 버전을 선택할 수 있는 옵션 표시)" style="width:60%;" >}}
-
-1. {{< ui >}}Next{{< /ui >}}를 클릭합니다.
-1.  구성을 검토하고 {{< ui >}}Deploy Configuration{{< /ui >}}을 클릭합니다.
+1. Datadog에서 [**APM > Instrument a Service**][6]로 이동합니다.
+1. {{< ui >}}How do you want to instrument these hosts?{{< /ui >}}에서 {{< ui >}}Deploy on existing hosts{{< /ui >}}를 선택하여 Datadog Agent를 통해 원격으로 서비스를 계측합니다.
+1. {{< ui >}}Which hosts should we instrument?{{< /ui >}}에서 범위 필터({{< ui >}}Environments{{< /ui >}}, {{< ui >}}Hostname{{< /ui >}}, {{< ui >}}APM enabled{{< /ui >}})를 사용하여 호스트 범위를 좁힙니다. 그런 다음 {{< ui >}}Eligible for deployment{{< /ui >}} 탭에서 계측할 Agent를 선택합니다. 계측할 수 없는 호스트는 {{< ui >}}Excluded from deployment{{< /ui >}} 탭에 표시됩니다.
+1. {{< ui >}}Configure SDKs installation{{< /ui >}}에서 {{< ui >}}Yes{{< /ui >}}를 클릭하여 Datadog이 트레이싱 SDK를 자동으로 설치하도록 합니다. 최신 버전 대신 특정 SDK 버전을 고정하려면 {{< ui >}}Customize library versions{{< /ui >}}를 확장합니다.
+1. {{< ui >}}Configure rollout strategy{{< /ui >}}에서 한 번에 배포할 Agent의 비율을 선택합니다. Datadog은 결과 단계와 예상 소요 시간을 보여줍니다. 3개의 Agent가 연속으로 실패하거나 실패율이 전체의 10%에 도달하면 배포가 자동으로 일시 중지됩니다. 나중에 배포를 다시 실행할 수 있습니다.
+1. {{< ui >}}Review and apply APM instrumentation{{< /ui >}}에서 {{< ui >}}Configuration Summary{{< /ui >}}를 검사하고({{< ui >}}Summary{{< /ui >}}와 {{< ui >}}YAML{{< /ui >}} 사이에서 전환), {{< ui >}}Apply Instrumentation{{< /ui >}}을 클릭합니다.
 1. 계측 규칙을 구성합니다.
 
    호스트 전체 SSI는 호스트의 모든 Java 애플리케이션과 IIS에서 실행 중인 모든 .NET 애플리케이션을 자동으로 계측합니다. IIS 외부에서 실행되는 .NET 애플리케이션을 계측하려면 이러한 애플리케이션을 허용하는 [계측 규칙을 정의](#define-instrumentation-rules)해야 합니다. 계측 규칙을 사용하여 호스트의 어떤 Java 애플리케이션이나 IIS의 .NET 애플리케이션을 계측할지 세밀하게 제어할 수도 있습니다.
@@ -150,7 +140,7 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 ## 고급 옵션{#advanced-options}
 
-### 계측 규칙 정의하기 {#define-instrumentation-rules}
+### 계측 규칙 정의 {#define-instrumentation-rules}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>에서는 계측 규칙이 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
@@ -164,26 +154,26 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 **참고**: Bits AI를 사용하여 자연어로 계측 규칙을 생성할 수 있습니다. 계측할 프로세스를 설명하면 Bits AI가 해당 규칙을 생성합니다.
 
-계측 규칙 구성하기:
+계측 규칙을 구성하려면 다음 단계를 따르세요.
 
 1. Datadog에서 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][5]로 이동합니다.
 1. {{< ui >}}Add or Edit Rules{{< /ui >}}를 클릭합니다.
-1. 계측 규칙 정의:
-   1. {{< ui >}}Add New Rule{{< /ui >}}를 클릭한 다음 {{< ui >}}Allow Rule{{< /ui >}} 또는 {{< ui >}}Block Rule{{< /ui >}}을 선택하여 일치 프로세스를 계측할지 여부를 지정합니다.
+1. 계측 규칙을 정의합니다.
+   1. {{< ui >}}Add New Rule{{< /ui >}}을 클릭한 다음 {{< ui >}}Allow Rule{{< /ui >}} 또는 {{< ui >}}Block Rule{{< /ui >}}을 선택하여 일치 프로세스를 계측할지 여부를 지정합니다.
    1. 규칙 이름을 지정합니다.
    1. 하나 이상의 조건을 추가합니다. 자세한 내용은 [규칙 조건 정의](#define-rule-conditions)를 참조하세요.
 
      {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="규칙 정의를 위한 구성 옵션을 제시하는 계측 규칙 UI" style="width:100%;" >}}
 
-1. (선택 사항) 규칙을 드래그 앤 드롭하여 순서를 변경합니다.
+1. (필요시) 규칙을 드래그 앤 드롭하여 순서를 변경합니다.
 
    **참고**: 규칙은 순서대로 평가됩니다. 프로세스와 규칙이 일치하면 후속 규칙은 무시됩니다.
 
 1. 어떤 규칙과도 일치하지 않는 프로세스에 대해 기본 동작(허용 또는 차단)을 설정합니다.
-1. {{< ui >}}Next{{< /ui >}}를 클릭하면 규칙을 미리 볼 수 있습니다.
+1. {{< ui >}}Next{{< /ui >}}를 클릭하여 규칙을 미리 봅니다.
 1. {{< ui >}}Deploy Rules{{< /ui >}}를 클릭합니다.
 
-원격 구성이 활성화된 경우, 규칙이 모든 호스트에 배포되고 50초 이내에 SSI가 활성화된 호스트에 적용됩니다. 또는 {{< ui >}}Export{{< /ui >}}를 클릭하여 구성 파일을 내보내고 호스트에 수동으로 적용합니다.
+Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배포되고 50초 이내에 SSI가 활성화된 호스트에 적용됩니다. 또는 {{< ui >}}Export{{< /ui >}}를 클릭하여 구성 파일을 내보내고 호스트에 수동으로 적용합니다.
 
 #### 규칙 조건 정의 {#define-rule-conditions}
 
@@ -245,5 +235,5 @@ SSI를 사용한 APM 활성화와 관련한 문제가 발생하는 경우, [SSI 
 [3]: /ko/tracing/trace_collection/library_config/
 [4]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
-[6]: https://app.datadoghq.com/fleet/agent-management
+[6]: https://app.datadoghq.com/apm/instrumentation
 [7]: https://app.datadoghq.com/apm/services

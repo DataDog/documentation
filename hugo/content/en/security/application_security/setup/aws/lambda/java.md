@@ -192,7 +192,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    ```yaml
    environment:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
-     DD_SERVERLESS_APPSEC_ENABLED: true
+     DD_APPSEC_ENABLED: true
    ```
 
 4. Redeploy the function and invoke it. After a few minutes, it appears in [App and API Protection views][1].

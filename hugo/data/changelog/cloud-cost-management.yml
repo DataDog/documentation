@@ -32,3 +32,15 @@ entries:
       - ListCustomCostsFiles
       - UploadCustomCostsFile
     title: Add ai_provider to Custom Costs files
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41284
+    operations:
+      - GetCommitmentsCommitmentList
+    title: Fix GetCommitments CommitmentList response schema
+  - change_type: modified
+    date: '2026-11-03'
+    link: https://github.com/DataDog/documentation/pull/41334
+    operations:
+      - GetBudget
+    title: Fix GetBudget error response schema to JSONAPI errors

@@ -650,8 +650,10 @@ Runtime Code Analysis (IAST) supports the following .NET Framework versions:
 
 | .NET Framework Version  | Microsoft End of Life | Package version     |
 | ----------------------- | --------------------- | ------------------- |
+| 4.8.1                   |                       | latest              |
 | 4.8                     |                       | latest              |
 | 4.7.2                   |                       | latest              |
+| 4.7.1                   |                       | latest              |
 | 4.7                     |                       | latest              |
 | 4.6.2                   |                       | latest              |
 | 4.6.1                   | April 26, 2022        | latest              |

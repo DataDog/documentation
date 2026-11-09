@@ -21,7 +21,7 @@ further_reading:
   text: サーバー SDK 構成ソース
 title: Java Feature Flags
 ---
-## 概要{#overview}
+## 概要 {#overview}
 
 このページでは、Java アプリケーションに Datadog Feature Flags を追加する方法を説明します。バージョン 1.66.0 以降では、`dd-openfeature` はデフォルトで Datadog が管理する CDN から直接フラグ構成を読み込みます。この Agentless ソースは、Datadog Agent に接続できない長時間実行サーバーやサーバーレスランタイムをサポートしています。
 
@@ -342,6 +342,7 @@ if (details.getErrorCode() != null) {
 - [カスタム Agentless エンドポイントを使用する][10]: 高度なテスト、ローカル開発、またはオペレーター管理のプロキシの場合
 - [Agent Remote Configuration を使用する][13]:Agent 管理配信を維持する
 - [既存の Remote Configuration セットアップを移行する][11]: および非推奨の `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` 設定を削除する
+- Agent Remote Configuration を使用する場合は、[アプリケーションより先に Agent を起動する][18]
 
 Agentless モードでは、Java は実験エクスポージャーイベントおよび集約されたフラグ評価イベントに対して、互換性のあるローカルテレメトリリレーを優先します。互換性のあるリレーが利用できない場合は、両方のイベントタイプを直接送信します。直接パスでは、アプリケーションの `DD_API_KEY` 設定と `DD_SITE` 設定が使用されます。Agent なしのいサーバーレス環境では、ローカルテレメトリリレーとして [`serverless-init`][17] を使用できます。
 
@@ -376,7 +377,7 @@ client.on(ProviderEvent.PROVIDER_CONFIGURATION_CHANGED, (event) -> {
 });
 {{< /code-block >}}
 
-`PROVIDER_CONFIGURATION_CHANGED` はオプションの OpenFeature イベントです。Datadog プロバイダーのドキュメントで、ご使用のバージョンでこのイベントがサポートされているかどうかを確認してください。
+プロバイダーの準備が完了すると、新しいフラグ構成を受信するたびに `PROVIDER_CONFIGURATION_CHANGED` を発行します。
 
 ### 複数のクライアント{#multiple-clients}
 
@@ -642,6 +643,7 @@ logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode
 
 1. Datadog UI で、フラグが実験に関連付けられていることを確認します。
 2. Agent API キーと接続を確認します。
+3. Agent Remote Configuration を使用する場合は、アプリケーションの起動時に Agent が利用可能であったことを確認します。利用可能でなかった場合は、アプリケーションを再起動します。[Agent の可用性][18]を参照してください。
 
 ## 参考資料 {#further-reading}
 
@@ -663,3 +665,4 @@ logger.info("Flag evaluation details: value={}, variant={}, reason={}, errorCode
 [15]: /ja/serverless/google_cloud_run/functions/java/?tab=maven
 [16]: /ja/serverless/google_cloud_run/containers/in_container/java/
 [17]: /ja/feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[18]: /ja/feature_flags/concepts/configuration_sources/#agent-availability
