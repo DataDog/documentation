@@ -49,7 +49,7 @@ Before January 31, 2027:
 
 1. Remove calls to the following endpoints from your scripts and CI/CD pipelines. After this date, they are disabled and return a 4xx error.
    - `POST /api/v2/dora/failure` and `POST /api/v2/dora/incident`
-   - `DELETE /api/v2/dora/failure/{failure_id}` and `DELETE /api/v2/dora/incident/{incident_id}`
+   - `DELETE /api/v2/dora/failure/{failure_id}`
 1. Move your ongoing reporting to one of the [alternatives](#alternatives-for-incident-reporting) to avoid a gap in your incident data.
 
 You do not need to export your incident history. Incidents ingested before this date remain available in custom dashboards and through the DORA API [list][5] and [get][9] endpoints.
