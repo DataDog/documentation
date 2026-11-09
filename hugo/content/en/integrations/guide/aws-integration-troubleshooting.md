@@ -153,7 +153,7 @@ IMDSv2, in its default configuration, refuses connections with an IP hop count g
 
  * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well.
  * Use the hostname discovered by cloud-init:
-     * With Helm, [set `providers.eks.ec2.useHostnameFromFile` to true][9].
+     * With Helm, [set `providers.eks.ec2.useHostnameFromFile` to `true`[9].
      * With Datadog Operator version 1.29.0 or later, set the `agent.datadoghq.com/cluster-provider` annotation to `eks-ec2-use-hostname-from-file` on the `DatadogAgent`, or on a [DatadogAgentProfile][31] targeting the affected nodes. See the [providers documentation][32].
  * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
 

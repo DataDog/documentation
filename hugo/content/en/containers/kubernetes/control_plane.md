@@ -339,7 +339,7 @@ On Datadog Operator `v1.29.0` and later, the Operator detects EKS from the node 
 
 {{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
 
-On these versions, control plane monitoring is enabled by default but requires introspection. Enable it with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -478,7 +478,7 @@ On Datadog Operator `v1.29.0` and later, the Operator detects OpenShift from the
 
 {{% collapse-content title="Datadog Operator v1.18.0 to v1.28.x" level="h5" %}}
 
-On these versions, control plane monitoring is enabled by default but requires introspection. Enable it with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
+On these versions, control plane monitoring is enabled by default but requires introspection. Enable introspection with the [datadog-operator Helm chart](https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator):
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 introspection:
@@ -923,7 +923,7 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 
 Both the Datadog Operator and Helm support Talos Linux.
 
-Control plane monitoring on Talos requires Datadog Operator version 1.32.0 or later, which detects Talos from the node's OS image and configures the checks for you. With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
+With Datadog Operator, control plane monitoring on Talos requires version 1.32.0 or later, which detects Talos from the node's OS image and configures the checks for you. With Helm, set `providers.talos.enabled` to `true` and declare each check yourself.
 
 Before you deploy the Agent, label the target namespace for the `privileged` Pod Security Standard, as described in the [Talos Linux section of Kubernetes distributions][13].
 
@@ -935,12 +935,12 @@ The API server integration is automatically configured. The Datadog Agent discov
 
 By providing read access to the etcd certificates located on the host, the Datadog Agent check can communicate with etcd and start collecting etcd metrics.
 
-On Talos, those certificates exist only on control-plane nodes, so the Agent must tolerate the control-plane taint for the etcd check to run anywhere.
+On Talos, those certificates exist only on control-plane nodes, so the Agent must tolerate the control-plane taint to run the etcd check.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-With Datadog Operator version 1.32.0 or later, control plane monitoring is enabled by default, and the Operator creates the etcd check configuration and mounts the host certificates for you. Adding the following toleration is the only change needed.
+With Datadog Operator version 1.32.0 or later, control plane monitoring is enabled by default, and the Operator creates the etcd check configuration and mounts the host certificates for you. The only addition to a standard DatadogAgent is the control-plane toleration:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 kind: DatadogAgent
@@ -1021,9 +1021,9 @@ providers:
 
 Secure ports allow authentication and authorization to protect your Control Plane components. The Datadog Agent can collect Controller Manager and Scheduler metrics by targeting their secure ports.
 
-With Datadog Operator version 1.32.0 or later, the Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they need no toleration and no Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only. The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`, as described in the following notes.
+With Datadog Operator version 1.32.0 or later, the Operator runs the API server, Controller Manager, and Scheduler checks as cluster checks, so they don't require toleration or Agent configuration. The toleration in the [Etcd](#TalosEtcd) section applies to the etcd check only. The Controller Manager and Scheduler still need `bind-address` set to `0.0.0.0`.
 
-With Helm, declare the checks:
+With Helm, declare the checks as follows:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 datadog:
