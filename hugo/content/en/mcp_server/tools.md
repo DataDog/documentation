@@ -3402,6 +3402,14 @@ Retrieves external provider outages, including their status and impacted regions
 - Check for external provider outages affecting the checkout service.
 - Show AWS outages from the last 24 hours, including resolved outages.
 
+### `get_faulty_change_status`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Assess whether a service deployment introduced errors or degradations. Provide the service name, environment, and version. Returns impacted endpoints or operations and analysis completion times.
+
+- Check whether the deployment of checkout-service version v2.3.1 introduced errors in production.
+- The service user-management seems broken on staging since version 0.4.2 was deployed. Should it be reverted?
+
 ### `find_new_jumps`
 *Toolset: **watchdog***\
 *Permissions Required: `APM Read`*\
