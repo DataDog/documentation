@@ -14,8 +14,8 @@ further_reading:
 <div class="alert alert-danger">Detection rule migration is not available for the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Detection rule migration is in Preview.
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+Detection rule migration is in Preview. Features, behavior, and supported sources might change.
 {{< /callout >}}
 
 ## Overview
