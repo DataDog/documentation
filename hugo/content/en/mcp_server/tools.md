@@ -267,7 +267,7 @@ Creates a new Datadog notebook.
 ### `create_datadog_notebook_v2`
 *Toolsets: **core**, **notebooks***\
 *Permissions Required: `Notebooks Read` and `Notebooks Write`*\
-Creates a notebook from Markdown content, with settings such as the time frame, tags, and owning teams. Graphs and other widgets are written as `dd-widget` code blocks in the Markdown.
+Creates a notebook from Markdown content, with settings such as the time frame, tags, and owning teams. The Markdown represents graphs and other widgets as `dd-widget` code blocks.
 
 - Create a notebook to document the investigation into the checkout service latency spike.
 - Make a notebook for our weekly performance review with a graph of p95 latency for the web-store service.
