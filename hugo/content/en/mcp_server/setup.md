@@ -27,6 +27,41 @@ further_reading:
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
 
 {{< tabs >}}
+{{% tab "Antigravity" %}}
+
+Install the Datadog plugin for Antigravity from its GitHub repository. The plugin packages the Datadog MCP Server with bundled skills. For more details, see the [plugin repository][1].
+
+**Note**: If you previously installed the Datadog MCP Server manually (for example, a `datadog` entry in your `mcp_config.json` file), remove or disable it to avoid conflicts.
+
+[1]: https://github.com/datadog-labs/antigravity-plugin
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. Install the Datadog plugin:
+    <pre><code>agy plugin install https://github.com/datadog-labs/antigravity-plugin</code></pre>
+
+   Plugins installed with the CLI are also available in the Antigravity app and IDE.
+
+1. Run `/ddsetup` in Antigravity to connect the plugin to your Datadog account. During setup, select your [Datadog site][2].
+
+1. Follow the agent's instructions to refresh the MCP servers, then complete the OAuth login flow in your browser.
+
+1. Run `/ddtoolsets` to enable or disable groups of [product-specific MCP tools](#toolsets).
+
+1. After making any configuration change, refresh the MCP servers for the new setting to take effect. If the plugin stops working after a plugin update, run `/ddsetup` again to reconnect.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+<div class="alert alert-info">See the <a href="https://github.com/datadog-labs/antigravity-plugin">plugin repository</a> for all available slash commands and configuration options.</div>
+
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+{{% /tab %}}
+
 {{% tab "ChatGPT" %}}
 
 Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app directory. The app authenticates with your Datadog organization through an OAuth flow.
@@ -752,6 +787,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 
 | Client | Developer | Notes |
 |--------|------|------|
+| [Antigravity][87] | Google | Datadog [Antigravity plugin][88] recommended. |
 | [ChatGPT][59] | OpenAI | In Preview, and available for US1 customers only. |
 | [Cursor][3] | Cursor | Datadog [Cursor plugin][15] recommended. |
 | [Claude Code][4] | Anthropic | Datadog [Claude Code plugin][55] recommended. |
@@ -1016,3 +1052,5 @@ After you change any of these settings, refresh the tool list in your AI client.
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
 [86]: /getting_started/site/
+[87]: https://antigravity.google/
+[88]: https://github.com/datadog-labs/antigravity-plugin
