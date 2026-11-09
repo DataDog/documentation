@@ -8299,31 +8299,36 @@ menu:
       parent: cloud_siem_custom_detection_rules
       identifier: cloud_siem_sequence_rule
       weight: 2029
+    - name: Migrate Detection Rules
+      url: security/cloud_siem/detect_and_monitor/migrate_detection_rules
+      parent: cloud_siem_detect_and_monitor
+      identifier: cloud_siem_migrate_detection_rules
+      weight: 203
     - name: Version History
       url: security/cloud_siem/detect_and_monitor/version_history
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_version_history
-      weight: 203
+      weight: 204
     - name: Suppressions
       url: security/cloud_siem/detect_and_monitor/suppressions
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
-      weight: 204
+      weight: 205
     - name: Dynamic Severity
       url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_dynamic_severity
-      weight: 205
+      weight: 206
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_log_historical_jobs
-      weight: 206
+      weight: 207
     - name: MITRE ATT&CK Map
       url: security/cloud_siem/detect_and_monitor/mitre_attack_map
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_mitre_attack_map
-      weight: 207
+      weight: 208
     - name: Triage and Investigate
       url: security/cloud_siem/triage_and_investigate
       parent: cloud_siem

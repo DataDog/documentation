@@ -92,6 +92,12 @@ For logs that match the query, you can set conditions to determine whether it's 
 
 See [Custom Detection Rules][2] for more information.
 
+### Migrate detection rules
+
+Translate detection rules from a third-party SIEM, such as Splunk, into Cloud SIEM detection rules. Translate a single rule in the rule editor, or migrate rules in bulk and review a proposal for each one before you publish it.
+
+See [Migrate Detection Rules][9] for more information.
+
 ### Rule deprecation
 
 Regular audits of all out-of-the-box detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
@@ -138,3 +144,4 @@ After setting up your detection rules, use the Cloud SIEM [MITRE ATT&CK Map][5] 
 [6]: /security/cloud_siem/guide/determine-cloud-siem-product/
 [7]: /security/cloud_siem/detect_and_monitor/dynamic_severity
 [8]: https://app.datadoghq.com/security/siem/rules
+[9]: /security/cloud_siem/detect_and_monitor/migrate_detection_rules/
