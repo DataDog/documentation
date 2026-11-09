@@ -24,6 +24,7 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 
 | Platform                              | Command                       |
 |---------------------------------------|-------------------------------|
+| AIX                                   | `/var/log/datadog/`           |
 | Linux                                 | `/var/log/datadog/`           |
 | macOS, Agent v7.28+ and v6.28+        | `/opt/datadog-agent/logs`      |
 | macOS, Agent older than 6.28.0/7.28.0 | `/var/log/datadog`            |
@@ -37,6 +38,8 @@ The Datadog Agent does a logs rollover every 10MB by default. When a rollover oc
 * `system-probe.log`
 * `jmxfetch.log` for Agent >= 7.24.0/6.24.0
 * `dogstatsd.log` for Agent >= 7.46.0
+
+On AIX, each Agent service also redirects its stderr to a dedicated file in `/var/log/datadog/` (`agent-stderr.log`, `trace-agent-stderr.log`, and `agent-data-plane-stderr.log`), which captures output such as startup errors that bypass the Agent's internal logging.
 
 ## Agent installation log files
 

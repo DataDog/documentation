@@ -115,9 +115,9 @@ Pour les modèles OpenAI, Azure OpenAI, Vertex AI, Anthropic ou Amazon Bedrock, 
 
 Pour les modèles Anthropic ou Amazon Bedrock, vous pouvez également configurer [Keyword Search Output](#keyword-search-output).
 
-Pour AI Gateway, [Structured Output](#structured-output) et [Keyword Search Output](#keyword-search-output) sont toutes deux prises en charge. Datadog recommande d'utiliser Structured Output lorsque votre modèle la prend en charge, et de recourir à Keyword Search Output dans le cas contraire.
+Pour les fournisseurs personnalisés, [Structured Output](#structured-output) et [Keyword Search Output](#keyword-search-output) sont tous deux pris en charge. Datadog recommande d'utiliser Structured Output lorsque votre modèle la prend en charge, et de recourir à Keyword Search Output dans le cas contraire.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Sortie structurée (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Fournisseur personnalisé, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Sélectionnez un type de sortie d'évaluation :
 
    - {{< ui >}}Boolean{{< /ui >}} : Résultats vrai/faux (par exemple, « Le modèle a-t-il suivi les instructions ? »)
@@ -363,7 +363,7 @@ function __evalPostProcessing(input) {
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Post-traitement (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, AI Gateway, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
+{{% collapse-content title="Post-traitement (OpenAI, Azure OpenAI, Anthropic, Amazon Bedrock, Fournisseur personnalisé, Vertex AI)" level="h4" expanded="true" id="post-processing" %}}
 1. Sélectionnez le type de sortie {{< ui >}}JSON{{< /ui >}}.
 
 2. Fournissez une fonction JavaScript pour identifier l'évaluation, la valeur et le raisonnement de l'évaluateur. Le post-traitement vous permet de mener une évaluation plus complexe que la simple utilisation d'une sortie structurée Boolean, Score ou Categorical.
@@ -468,7 +468,7 @@ function __evalPostProcessing(input) {
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, Fournisseur personnalisé)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Sélectionnez le type de sortie {{< ui >}}Boolean{{< /ui >}}.
    <div class="alert alert-info">Pour Keyword Search Output, seul le type de sortie <strong>Boolean</strong> est disponible.</div>
 
@@ -502,7 +502,7 @@ Sous {{< ui >}}Evaluation Scope{{< /ui >}}, définissez où et comment votre év
       - {{< ui >}}Trace{{< /ui >}} : Évaluez la trace complète, y compris tous ses spans, comme une unité unique. Utilisez ceci lorsque la réponse dépend du contexte à travers plusieurs spans (achèvement de l'objectif de l'agent, chaînes d'utilisation d'outils, fidélité RAG). Consultez [Trace-Level Evaluations][16] pour des exemples et des détails sur la façon dont l'achèvement de la trace est déterminé.
       - {{< ui >}}Span{{< /ui >}} : Évaluez les spans correspondants individuellement. Utilisez le champ {{< ui >}}Query{{< /ui >}} pour limiter le périmètre à des spans spécifiques (par exemple, uniquement les root spans, uniquement les spans `llm`, ou les spans avec un tag spécifique).
       - {{< ui >}}Session{{< /ui >}} : Évaluez une session utilisateur entière, y compris chaque trace et ses spans, comme une unité unique. Utilisez ceci lorsque la réponse dépend du contexte à travers plusieurs traces dans la même session (satisfaction utilisateur, cohérence multi-tours, ou comportement utilisateur au fil du temps). Nécessite des spans marqués avec un `session_id`. Consultez [Session-Level Evaluations][17] pour des exemples et des détails sur la façon dont la complétion de la session est déterminée.
-   - {{< ui >}}Query{{< /ui >}} : (Facultatif) Saisissez une requête en utilisant la syntaxe de requête Datadog pour filtrer les spans ou les traces évalués. Exemple :
+   - {{< ui >}}Query{{< /ui >}} : (Facultatif) Saisissez une requête en utilisant la syntaxe de requête Datadog pour filtrer les spans ou les traces évalués. Par exemple :
       - `@name:agent.workflow` pour filtrer par nom de span
       - `env:prod` pour filtrer par tag
       - `@parent_id:undefined` pour évaluer uniquement les root spans (lorsque {{< ui >}}Evaluate On{{< /ui >}} est défini sur {{< ui >}}Span{{< /ui >}})
@@ -533,7 +533,7 @@ Chaque résultat d'évaluation comprend :
 
 Utilisez la syntaxe `@evaluation.<evaluation_name>.value` pour interroger ou visualiser les résultats.
 
-Exemple :
+Par exemple :
 
 ```
 @evaluation.helpfulness-check.value

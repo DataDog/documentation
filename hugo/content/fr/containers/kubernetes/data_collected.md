@@ -2,8 +2,8 @@
 aliases:
 - /fr/agent/kubernetes/metrics
 - /fr/agent/kubernetes/data_collected
-description: Guide de référence pour les métriques et événements collectés par l'Agent
-  Datadog à partir des clusters Kubernetes
+description: Guide de référence pour les métriques et les événements collectés par
+  le Datadog Agent à partir des clusters Kubernetes
 further_reading:
 - link: /agent/kubernetes/log/
   tag: Documentation
@@ -25,9 +25,9 @@ further_reading:
   text: Attribuez des tags à toutes les données envoyées par un conteneur
 title: Données Kubernetes recueillies
 ---
-Cette page répertorie les données recueillies par l'Agent Datadog lorsqu'il est déployé sur un cluster Kubernetes. Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
+Cette page répertorie les données recueillies par le Datadog Agent lorsqu'il est déployé sur un cluster Kubernetes. Les métriques recueillies peuvent varier en fonction de la version de Kubernetes utilisée.
 
-**Remarque** : Pour les conteneurs Windows, voir [Métriques limitées pour les déploiements Windows][7].
+**Remarque** : pour les conteneurs Windows, consultez [Métriques limitées pour les déploiements Windows][7].
 
 ## Métriques {#metrics}
 
@@ -35,23 +35,25 @@ Cette page répertorie les données recueillies par l'Agent Datadog lorsqu'il es
 
 {{< get-metrics-from-git "kubernetes" >}}
 
-**Remarque** : Pour plus d'informations sur les métriques `kubernetes.cpu.*`, voir [les divergences entre les métriques `kubernetes.cpu.*` et `container.cpu.*`][8].
+**Remarque** : pour plus d'informations sur les métriques `kubernetes.cpu.*`, consultez [Discrepancies in `kubernetes.cpu.*` and `container.cpu.*` metrics][8].
 
 ### Kubelet {#kubelet}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubelet][1].
 
+**Remarque** : sur Kubernetes v1.37 et versions ultérieures, l'Agent ne collecte pas la métrique `kubernetes.cpu.load.10s.avg`. Le cAdvisor intégré au kubelet sur ces versions n'exporte pas la métrique `container_cpu_load_average_10s` sous-jacente.
+
 {{< get-metrics-from-git "kubelet" >}}
 
-### Métriques d'état de Kubernetes core {#kubernetes-state-metrics-core}
+### Kubernetes state metrics core {#kubernetes-state-metrics-core}
 
-Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6]. Cette vérification nécessite Datadog Cluster Agent v1.12 ou une version ultérieure.
+Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6]. Ce check nécessite Datadog Cluster Agent v1.12 ou version ultérieure.
 
 {{< get-metrics-from-git "kubernetes_state_core" >}}
 
-### État de Kubernetes {#kubernetes-state}
+### Kubernetes state {#kubernetes-state}
 
-**Remarque** : Les métriques `kubernetes_state.*` sont collectées à partir de l'API `kube-state-metrics`. La vérification `kubernetes_state` est une vérification héritée. Pour une alternative, voir [Métriques d'état de Kubernetes core][6]. Datadog recommande de ne pas activer les deux vérifications simultanément.
+**Remarque** : les métriques `kubernetes_state.*` sont collectées à partir de l'API `kube-state-metrics`. Le check `kubernetes_state` est un check hérité. Pour une alternative, consultez [Kubernetes state metrics core][6]. Datadog recommande de ne pas activer les deux checks simultanément.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
@@ -88,36 +90,36 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 {{< get-metrics-from-git "kube-scheduler" >}}
 
 
-## Événements {#events}
+## Événements{#events}
 
-- Backoff
+- Temporisation
 - Conflit
 - Supprimer
-- DeletingAllPods
+- Suppression de tous les pods en cours
 - Ressources insuffisantes
 - Erreur
-- Échoué
-- ÉchecDeLaCréation
-- ÉchecDeLaSuppression
-- ÉchecDuMontage
-- ÉchecDeLaSynchronisation
-- ÉchecDeLaValidation
-- ÉchecDeL'EspaceDisqueLibre
-- ConflitDePortHôte
-- CPULibreInsuffisant
-- MémoireLibreInsuffisante
-- CapacitéDeDisqueInvalide
-- Tuer
-- ÉchecDeConfigurationDuKubelet
-- NœudPasPrêt
-- Nœud hors de disque
-- Hors de disque
+- Échec
+- Échec de création
+- Échec de suppression
+- Échec de montage
+- Échec de synchronisation
+- Échec de validation
+- Échec de libération d'espace disque
+- Conflit de port de host
+- CPU libre insuffisante
+- Mémoire libre insuffisante
+- Capacité de disque invalide
+- Suppression en cours
+- Échec de configuration du Kubelet
+- Nœud non prêt
+- Nœud hors disque
+- Hors disque
 - Redémarré
-- TousLesPodsTerminés
-- Impossible
+- Tous les pods terminés
+- Incapable
 - Non sain
 
-## Vérifications de service {#service-checks}
+## Checks de service {#service-checks}
 
 ### Kubelet {#kubelet-1}
 
@@ -125,53 +127,53 @@ Pour en savoir plus, consultez la documentation relative à l'intégration [Kube
 
 {{< get-service-checks-from-git "kubelet" >}}
 
-### Gestionnaire de contrôleur Kubernetes {#kubernetes-controller-manager-1}
+### Kubernetes controller manager {#kubernetes-controller-manager-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Controller Manager][2].
 
 {{< get-service-checks-from-git "kube-controller-manager" >}}
 
-### Serveur de métriques Kubernetes {#kubernetes-metrics-server-1}
+### Kubernetes metrics server {#kubernetes-metrics-server-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Metrics Server][4].
 
 {{< get-service-checks-from-git "kube-metrics-server" >}}
 
-### Planificateur Kubernetes {#kubernetes-scheduler-1}
+### Kubernetes scheduler {#kubernetes-scheduler-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes Scheduler][5].
 
 {{< get-service-checks-from-git "kube-scheduler" >}}
 
-### Métriques d'état de Kubernetes core {#kubernetes-state-metrics-core-1}
+### Kubernetes state metrics core {#kubernetes-state-metrics-core-1}
 
 Pour en savoir plus, consultez la documentation relative à l'intégration [Kubernetes State Metrics Core][6].
 
 `kubernetes_state.cronjob.complete`
-: Indique si le dernier travail du cronjob a échoué ou non. Étiquettes : `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
+: Indique si le dernier job du cronjob a échoué ou non. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` issus des labels standards).
 
 `kubernetes_state.cronjob.on_schedule_check`
-: Alerte si le prochain horaire du cronjob est dans le passé. Étiquettes : `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
+: Alerte si le prochain planning du cronjob est dans le passé. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` issus des labels standards).
 
 `kubernetes_state.job.complete`
-: Indique si le travail a échoué ou non. Étiquettes : `kube_job` ou `kube_cronjob` `kube_namespace` (`env` `service` `version` des étiquettes standard).
+: Indique si le job a échoué ou non. Tags:`kube_job` ou `kube_cronjob` `kube_namespace` (`env` `service` `version` issus des labels standards).
 
 `kubernetes_state.node.ready`
-: Indique si le nœud est prêt. Étiquettes : `node` `condition` `status`.
+: Indique si le nœud est prêt. Tags:`node` `condition` `status`.
 
 `kubernetes_state.node.out_of_disk`
-: Indique si le nœud n’a plus d’espace disque. Étiquettes : `node` `condition` `status`.
+: Si le nœud est à court d'espace disque. Tags:`node` `condition` `status`.
 
 `kubernetes_state.node.disk_pressure`
-: Indique si le nœud subit une pression sur le disque. Étiquettes : `node` `condition` `status`.
+: Indique si le nœud est soumis à une pression sur le disque. Tags:`node` `condition` `status`.
 
 `kubernetes_state.node.network_unavailable`
-: Indique si le réseau du nœud est indisponible. Étiquettes : `node` `condition` `status`.
+: Indique si le réseau du nœud est indisponible. Tags:`node` `condition` `status`.
 
 `kubernetes_state.node.memory_pressure`
-: Indique si le réseau du nœud subit une pression sur la mémoire. Étiquettes : `node` `condition` `status`.
+: Indique si le réseau du nœud est soumis à une pression sur la mémoire. Tags:`node` `condition` `status`.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

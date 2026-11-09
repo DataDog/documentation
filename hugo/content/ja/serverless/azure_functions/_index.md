@@ -14,7 +14,7 @@ further_reading:
   text: Datadog を使用して、すべてのホスティングプランで Azure Functions を監視する
 title: Azure Functions 用の Serverless Monitoring をインストールする
 ---
-## 概要{#overview}
+## 概要 {#overview}
 このページでは、Azure Functions からトレース、トレースメトリクス、ランタイムメトリクス、拡張メトリクス、カスタムメトリクスを収集する方法を説明します。[拡張メトリクス][11]は `azure.functions.enhanced.*` 名前空間によって区別されます。追加のメトリクスを収集するには、[Datadog Azure インテグレーション][5] をインストールしてください。
 
 以下は、Azure Functions モニタリングでサポートされているランタイム、オペレーティングシステム (OS)、およびホスティングプランのリストです。
@@ -41,7 +41,7 @@ title: Azure Functions 用の Serverless Monitoring をインストールする
    Datadog では、機能強化やバグ修正を確実に利用できるように、パッケージのバージョンを固定し、`@datadog/serverless-compat` と `dd-trace` の両方を定期的に最新バージョンにアップグレードすることを推奨しています。
 
 2. **Datadog Serverless Compatibility Layer を起動し、Datadog Node.js SDK を初期化します**。
-   
+
    `--require` オプションを使用して、Serverless Compatibility Layer と Datadog Node.js SDK を 1 つのステップで読み込み、初期化します。Azure Functions の Node オプションは、環境変数 `languageWorkers__node__arguments` で構成できます。
 
    ```
@@ -204,6 +204,76 @@ title: Azure Functions 用の Serverless Monitoring をインストールする
    | `DD_ENV` | [Unified Service Tagging][7] 用に環境をどのようにタグ付けするか。たとえば、`prod` です。|
    | `DD_SERVICE` | [Unified Service Tagging][7] 用にサービスをどのようにタグ付けするか。 |
    | `DD_VERSION` | [Unified Service Tagging][7] 用にバージョンをどのようにタグ付けするか。|
+
+## Durable Functions {#durable-functions}
+
+Durable Functions のインスツルメンテーションを有効にするには、`host.json` ファイルに次の設定を追加します。
+
+<!-- vale off -->
+{{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
+{{< programming-lang lang="nodejs" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+```json
+{
+  "telemetryMode": "OpenTelemetry",
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+<!-- vale on -->
 
 ## 次のステップ{#whats-next}
 

@@ -74,7 +74,7 @@ spec:
               matchLabels:
                 admission.datadoghq.com/gpu.enabled: "true"
             ddTraceVersions:
-              c: "0.20.0"
+              c: "0"
             ddTraceConfigs:
               - name: DD_INJECT_NATIVE
                 value: "always"

@@ -47,7 +47,9 @@ Para cada OTel Collector, puede ver:
 
 Seleccione un Datadog Agent o un OTel Collector para visualizar su configuración, integraciones conectadas, eventos de auditoría y una pestaña de soporte para enviar un flare remoto.
 
-{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="El panel de detalles del Agente que muestra la configuración, las integraciones conectadas y los eventos de auditoría." style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation-view-config.png" alt="El panel de detalles del Agent que muestra la configuración, las integraciones conectadas y los eventos de auditoría." style="width:100%;" >}}
+
+El estado de **Remote Configuration** del Agent indica si puede recibir configuración de Datadog. Su estado de **Remote Agent Management** indica si la administración remota está habilitada. Un Agent puede aparecer en Fleet View y estar conectado a Remote Configuration mientras la administración remota figura como **NOT ENABLED**. Para habilitar actualizaciones y cambios de configuración en máquinas virtuales, consulte [Habilitar la administración remota del Agent][8].
 
 ## Buscar y filtrar {#search-and-filter}
 
@@ -88,7 +90,7 @@ La vista {{< ui >}}Topology{{< /ui >}} muestra la cadena de reenvío a través d
 
 {{< img src="/agent/fleet_automation/fleet-automation-gateway-topology.png" alt="Vista de topología que muestra los Collectors de DaemonSet reenviando a través de los Collectors de gateway hacia Datadog." style="width:100%;" >}}
 
-## Visualizar eventos de Audit Trail del Agente {#view-agent-audit-trail-events}
+## Visualizar eventos de Audit Trail del Agent {#view-agent-audit-trail-events}
 
 La pestaña {{< ui >}}Audit Events{{< /ui >}} muestra los eventos de Audit Trail asociados con el Agent seleccionado.
 Utilice esta pestaña para:
@@ -121,7 +123,7 @@ La mayoría de las funciones de la vista de Kubernetes están disponibles sin re
 |---|---|
 | View `DatadogAgent` configuración | Datadog Operator v1.24 o posterior |
 | View Helm Chart values | Datadog Helm Chart v3.157.0 o posterior |
-| Editar configuración | [Remote Configuration][6] habilitado y Datadog Operator v1.27 o posterior |
+| Edit configuration (Preview) | [Remote Configuration][6] habilitada y Datadog Operator v1.27 o posterior |
 | Editar configuración sin establecer un nombre de clúster | Datadog Operator v1.30.0 o posterior |
 | Visualizar integraciones en un Cluster Agent | Agent v7.72.0 o posterior |
 | Visualizar estado de integración en un Cluster Agent | Agent v7.79.0 o posterior |
@@ -159,7 +161,7 @@ Haga clic en un clúster para ver:
 
 En la pestaña {{< ui >}}Configuration{{< /ui >}}, puede visualizar la configuración:
 
-- **Datadog Operator v1.24 o posterior**: vea la configuración del recurso personalizado `DatadogAgent`. Con Datadog Operator v1.27 o posterior, también puede editar la configuración desde esta pestaña.
+- **Datadog Operator v1.24 o posterior**: vea la configuración del recurso personalizado `DatadogAgent`. Con Datadog Operator v1.27 o posterior, también puede editar la configuración desde esta pestaña. La edición está en Preview. Para obtener instrucciones, consulte [Configurar el Agent en Kubernetes][9].
 - **Datadog Helm Chart v3.157.0 o posterior**: vea los valores del Helm Chart (`values.yaml`).
 
 ### Limitaciones {#limitations}
@@ -181,3 +183,5 @@ En comparación con la vista predeterminada, la vista de Kubernetes tiene las si
 [5]: /es/containers/datadog_operator
 [6]: /es/agent/guide/setup_remote_config
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[8]: /es/agent/guide/setup_remote_config/#enable-remote-agent-management
+[9]: /es/agent/fleet_automation/configure_agents/#configure-the-agent-on-kubernetes
