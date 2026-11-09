@@ -49,7 +49,7 @@ Database Monitoring collects the following data from IBM Db2:
 
 As the Db2 instance administrator, enable the monitor switches described in the IBM Db2 integration's [Enable monitoring instructions][1].
 
-In each monitored database on each server, including HADR standbys, check the activity and request metrics settings. Replace `<DB_NAME>` with the name of the database you want to monitor:
+In each monitored database on each server, including high availability disaster recovery (HADR) standbys, check the activity and request metrics settings. Replace `<DB_NAME>` with the name of the database you want to monitor:
 
 ```shell
 db2 get db cfg for <DB_NAME> | grep -i MON_
