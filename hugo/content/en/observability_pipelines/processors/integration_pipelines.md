@@ -94,15 +94,16 @@ Custom pipelines are pipelines you import from Log Management to process logs th
 1. In the Integration Pipelines processor, click {{< ui >}}Edit Pipelines{{< /ui >}} in the {{< ui >}}Custom Pipelines{{< /ui >}} row.
 1. Click {{< ui >}}Import Pipelines{{< /ui >}}.
 1. In the {{< ui >}}Import Custom Pipelines{{< /ui >}} modal, select the Log Management pipelines you want to import. You can search pipelines by name, ID, or filter.
-    <!-- TODO: screenshot of the Import Custom Pipelines modal -->
+    {{< img src="observability_pipelines/processors/integration_pipelines_import_custom_pipelines.png" alt="The Import Custom Pipelines modal listing Log Management pipelines with their filters, processor counts, unsupported processor counts, and enabled states, with three pipelines selected." style="width:100%;" >}}
 1. Click {{< ui >}}Import{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}, then redeploy your pipeline.
 
 **Notes**:
 
 - Importing a pipeline creates a copy in the processor. Later changes to the pipeline in Log Management are not synced. Deleting a custom pipeline from the processor does not affect the original pipeline in Log Management.
-- Importing a pipeline that was already imported replaces the existing custom pipeline, including its name, filter, enabled state, and processors.
-- An imported pipeline keeps its enabled state from Log Management. A pipeline without a filter in Log Management gets the `*` filter, which matches all logs.
+- An imported pipeline keeps its enabled state from Log Management: pipelines disabled in Log Management are imported as disabled.
+- An imported pipeline keeps the ID it has in Log Management. Importing the same pipeline again overwrites the existing custom pipeline, including its name, filter, enabled state, and processors. A cloned pipeline gets a new ID, so importing the original pipeline again does not overwrite the clone.
+- A pipeline without a filter in Log Management gets the `*` filter, which matches all logs.
 
 ### Manage custom pipelines
 
@@ -113,7 +114,7 @@ In the {{< ui >}}Custom Pipelines{{< /ui >}} tab, you can:
 - Edit a pipeline's name and filter query. Processors can't be edited in Observability Pipelines. To change them, edit the pipeline in Log Management and import it again.
 - Clone or delete a pipeline.
 
-<!-- TODO: screenshot of the Custom Pipelines tab -->
+{{< img src="observability_pipelines/processors/integration_pipelines_custom_pipelines_tab.png" alt="The Custom Pipelines tab of the Manage Integration Pipelines panel, listing two enabled custom pipelines with the edit, disable, clone, delete, and reorder actions." style="width:100%;" >}}
 
 ## CPU sizing
 
