@@ -347,11 +347,13 @@ Before sending the selection, the SDK trims leading and trailing whitespace from
 - Each tag is at most 200 bytes (UTF-8).
 - Each key pattern is at most 200 bytes (UTF-8).
 
+A selection cannot include a tag longer than 200 bytes, so keep the tags you add to flags for selection at 200 bytes or less.
+
 If both lists are empty after this processing, the SDK sends no selection and loads the full flag configuration without logging an error.
 
 If the flag selection is malformed or exceeds a limit, the SDK does not send it in the flag configuration request, logs an error to the browser console, and loads the full flag configuration.
 
-Datadog can also ignore a selection and return the full flag configuration. In that case, the response includes a `DD-Flag-Selection-Ignored` header with one of the following reasons, and the SDK logs an error to the browser console:
+Because the SDK checks these limits first, selections that fail them never reach Datadog. Datadog can still ignore a selection that passes these checks, for example when the selection is too long to send in one request. In that case, Datadog returns the full flag configuration with a `DD-Flag-Selection-Ignored` header that gives one of the following reasons, and the SDK logs an error to the browser console:
 
 | Reason | Meaning |
 | --- | --- |
@@ -365,7 +367,7 @@ The SDK logs these errors to the browser console:
 
 | Message | Cause |
 | --- | --- |
-| `Datadog Browser SDK: flagSelection was not sent (<REASON>: <LIMIT>). Loading the full flag configuration.` | The selection is malformed or exceeds a limit. |
+| `Datadog Browser SDK: flagSelection was not sent (<REASON>: <DETAIL>). Loading the full flag configuration.` | The selection is malformed or exceeds a limit. |
 | `Datadog Browser SDK: flagSelection was ignored by the server (<REASON>). Loaded the full flag configuration.` | Datadog ignored the selection. See the reasons in the previous table. |
 
 If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][8] for the header your proxy must pass through.
@@ -390,6 +392,8 @@ console.log(details.errorCode); // 'FLAG_NOT_FOUND'
 #### Rules-based configuration
 
 `fetchRulesConfiguration()` from `@datadog/openfeature-browser/rules-based` accepts the same `flagSelection` option, with the same matching rules and limits. The request URL, including the encoded selection, must be at most 8,192 bytes. If it would be longer, the SDK does not send the selection, logs a `too_many_values` error to the browser console, and loads the full configuration. See [Browser Rules-Based Evaluation][4].
+
+The SDK sends the selection as `selected_flag_tags` and `selected_flag_key_patterns` query parameters, with one parameter for each value. If you route this request through a proxy or a custom `fetch` implementation, forward all of these parameters unchanged. If you cache the response, include these parameters in the cache key so that requests with different selections do not share a cached response.
 
 ## Record exposures in your own data store
 
