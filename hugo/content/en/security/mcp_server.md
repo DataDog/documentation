@@ -190,11 +190,11 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 `propose_datadog_security_detection_rule`
 : Proposes a Cloud SIEM detection rule from a natural-language description, or translates one from a Splunk SPL query. Doesn't create the rule. Returns a `proposal_id` to pass to `get_datadog_security_detection_rule_proposal`.
-: *Permissions required: `Security Monitoring Rules Write`*
+: *Preview. Permissions required: `Security Monitoring Rules Write`*
 
 `get_datadog_security_detection_rule_proposal`
 : Retrieves a detection rule proposal by `proposal_id`. When the proposal is complete, returns the proposed rule, which you can save with `create_datadog_security_detection_rule`.
-: *Permissions required: `Security Monitoring Rules Read`*
+: *Preview. Permissions required: `Security Monitoring Rules Read`*
 
 ### Suppressions
 
