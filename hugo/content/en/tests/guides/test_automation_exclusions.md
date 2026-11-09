@@ -105,6 +105,60 @@ In Playwright serial groups, `noAutoRetry` excludes the entire group from Datado
 [10]: /tests/setup/javascript/
 
 {{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+Use the `datadog-ci` gem version [1.43.0][11] or later. Configure [Test Optimization for Ruby][12] and load Datadog's instrumentation before defining tests.
+
+Use `datadog_prevent_failure_suppression` to protect tests from Datadog quarantine and disabling. Use `datadog_no_auto_retry` to exclude Datadog Auto Test Retries, Early Flake Detection, and Attempt to Fix retries. Apply either annotation independently, or combine them.
+
+### RSpec
+
+Add metadata to the test example:
+
+```ruby
+RSpec.describe "Critical behavior" do
+  it "checks a critical behavior", datadog_prevent_failure_suppression: true, datadog_no_auto_retry: true do
+    expect(2 + 2).to eq(4)
+  end
+end
+```
+
+### Minitest
+
+Apply the declarations after defining the test method:
+
+```ruby
+class CriticalTest < Minitest::Test
+  def test_critical_behavior
+    assert_equal 4, 2 + 2
+  end
+
+  datadog_prevent_failure_suppression :test_critical_behavior
+  datadog_no_auto_retry :test_critical_behavior
+end
+```
+
+Undefined method names are ignored with a warning.
+
+### Cucumber
+
+Use native tags on a scenario or Scenario Outline:
+
+```gherkin
+@datadog_prevent_failure_suppression @datadog_no_auto_retry
+Scenario: Critical behavior
+  Given a customer has items in their cart
+  When the customer completes checkout
+  Then the order is confirmed
+```
+
+Tags on a `Scenario Outline` apply to every example.
+
+[11]: https://github.com/DataDog/datadog-ci-rb/releases/tag/v1.43.0
+[12]: /tests/setup/ruby/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Find annotated test executions
