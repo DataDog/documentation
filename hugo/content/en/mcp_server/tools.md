@@ -3393,8 +3393,8 @@ Lists the teams a user belongs to and their role on each team.
 - Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
 
 ### `get_team_hierarchy`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists one page of parent-child relationships between teams. Filter by parent team or sub-team ID.
 
 - Which teams are children of the Payments team?
