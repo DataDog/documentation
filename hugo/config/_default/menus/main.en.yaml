@@ -5944,6 +5944,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_inference
       weight: 6
+    - name: MCP Tools
+      url: gpu_monitoring/mcp_tools/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_mcp_tools
+      weight: 7
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
