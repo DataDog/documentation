@@ -64,7 +64,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Amazon SageMaker | [AWS integration][2] |
 | Anthropic (Enterprise and Platform) | [SaaS integration][3] |
 | Azure Foundry (Models and Tools) | [Azure integration][18] |
-| ChatGPT Enterprise | [SaaS integration][22] |
+| ChatGPT Enterprise (Preview) | [SaaS integration][22] |
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI (Platform only)     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
