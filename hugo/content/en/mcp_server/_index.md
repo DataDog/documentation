@@ -61,6 +61,7 @@ The separate [Code Security MCP Server](/security/code_security/dev_tool_int/mcp
   {{< image-card href="/mcp_server/setup/?tab=copilotcli" src="integrations_logos/github-copilot_avatar.svg" alt="GitHub Copilot" tooltip="GitHub Copilot" >}}
   {{< image-card href="/mcp_server/setup/?tab=kiro" src="integrations_logos/kiro.svg" alt="Kiro" tooltip="Kiro" >}}
   {{< image-card href="/mcp_server/setup/?tab=grokbuild" src="integrations_logos/grok.png" alt="Grok Build" tooltip="Grok Build" >}}
+  {{< image-card href="/mcp_server/setup/?tab=antigravity" src="integrations_logos/antigravity.svg" alt="Antigravity" tooltip="Antigravity" >}}
   {{< image-card href="/mcp_server/setup/?tab=other" src="icons/developers.png" alt="Custom Agent" tooltip="Custom Agent" >}}
 {{< /card-grid >}}
 

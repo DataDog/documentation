@@ -122,7 +122,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Compatibility
 
-`orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.1`
+`ddtest >= 1.14.0`
 
 ### Configuration
 
