@@ -36,7 +36,7 @@ title: OpenTelemetry Collector をセットアップする
 OpenTelemetry Collector を使用して、Datadog にトレース、メトリクス、ログを送信します。このページの構成は、OpenTelemetry Collector Contrib ディストリビューション v0.154.0 でテストされており、以下の主要コンポーネントを備えた OTLP ベースのテレメトリパイプラインを使用しています。
 
 - **OTLP HTTP エクスポーター**: テレメトリを Datadog の OTLP インテークエンドポイントに送信します。
-- **スパンメトリクスコネクタ**: トレースデータから RED (Rate、Error、Duration) メトリクスを生成し、Service Catalog やサービスページなどの APM 機能を強化します。
+- **スパンメトリクスコネクタ**: トレースデータから RED (Rate、Error、Duration) メトリクスを生成し、カタログやサービスページなどの APM 機能を強化します。
 - **リソース検出プロセッサー**: ホストとクラウドのリソース属性を検出します。これらの属性は、Datadog がホスト名の解決とタグ付けに使用します。
 - **Datadog 拡張機能**: Fleet Automation のために、コレクターの構成を Datadog に報告します。テレメトリデータはエクスポートされません。
 
@@ -44,17 +44,17 @@ OpenTelemetry Collector を使用して、Datadog にトレース、メトリク
 
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="OpenTelemetry SDK は OTLP データを OpenTelemetry Collector に送信し、それが OTLP HTTP 経由で Datadog にエクスポートされます。" style="width:100%;" >}}
 
-このページの構成では [Agent デプロイパターン][10]を使用しています。1 つのコレクターが各ホストまたは Kubernetes ノード上で実行され、そのホストまたはノード上のワークロードからテレメトリを受信します。ゲートウェイのデプロイについては、OpenTelemetry の [ゲートウェイデプロイパターン][11]を参照してください。複数コレクター環境でのテールベースサンプリングなどのステートフルな処理には、トレースのすべてのスパンを同じコレクターにルーティングするゲートウェイアーキテクチャが必要です。
+このページの構成では [Agent デプロイパターン][10] を使用しています。1 つのコレクターが各ホストまたは Kubernetes ノード上で実行され、そのホストまたはノード上のワークロードからテレメトリを受信します。ゲートウェイのデプロイについては、OpenTelemetry の [ゲートウェイデプロイパターン][11] を参照してください。複数コレクター環境でのテールベースサンプリングなどのステートフルな処理には、トレースのすべてのスパンを同じコレクターにルーティングするゲートウェイアーキテクチャが必要です。
 
-クラスター全体の Kubernetes メトリクスおよび Kubernetes エクスプローラーについては、「[Kubernetes メトリクス][13]」を参照してください。
+クラスター全体の Kubernetes メトリクスおよび Kubernetes エクスプローラーについては、[Kubernetes メトリクス][13] を参照してください。
 
-<div class="alert alert-info">Datadog Exporter と Datadog Connector をすでに使用している場合は、「<a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Datadog Exporter と Connector を設定する</a>」を参照してください。</div>
+<div class="alert alert-info">Datadog Exporter と Datadog Connector をすでに使用している場合は、「<a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Datadog Exporter と Connector を構成する</a>」を参照してください。</div>
 
 ## 前提条件 {#prerequisites}
 
 このセットアップでは、ベアメタル、VM、Docker、および Kubernetes がサポートされています。サポートされているマネージド Kubernetes ディストリビューションには、Amazon EKS (Auto Mode を含む)、Google GKE (Standard および Autopilot)、Azure AKS (Automatic を含む) があります。
 
-このセットアップでは、ECS Fargate、EKS Fargate、AWS Lambda などのサーバーレスまたはタスクベースのコンテナランタイムはサポートされていません。サポートされている Datadog 機能については、[機能の互換性の表][7]で、「**OTel SDK + アップストリームの OpenTelemetry Collector**」を参照してください。
+このセットアップでは、ECS Fargate、EKS Fargate、AWS Lambda などのサーバーレスまたはタスクベースのコンテナランタイムはサポートされていません。サポートされている Datadog 機能については、[機能の互換性の表][7] で、**OTel SDK + アップストリームの OpenTelemetry Collector** を参照してください。
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 以降
 - [Datadog API キー][2]
@@ -64,7 +64,7 @@ OpenTelemetry Collector を使用して、Datadog にトレース、メトリク
 
 ### 1. OpenTelemetry Collector をダウンロードする {#1-download-the-opentelemetry-collector}
 
-[リリースページ][100]から OpenTelemetry Collector Contrib ディストリビューションの最新リリースをダウンロードします。
+[リリースページ][100] から OpenTelemetry Collector Contrib ディストリビューションの最新リリースをダウンロードします。
 
 ### 2. コレクターを構成してデプロイする {#2-configure-and-deploy-the-collector}
 
@@ -251,7 +251,7 @@ service:
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
-システムに関する追加メタデータを収集するためのオプションの構成については、[完全な構成ファイル][500]を参照してください。
+システムに関する追加メタデータを収集するためのオプションの構成については、[完全な構成ファイル][500] を参照してください。
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 
@@ -471,9 +471,9 @@ docker run \
 
 {{% tab "Kubernetes" %}}
 
-[公式 OpenTelemetry Collector Helm チャート][102]を使用して、Kubernetes にコレクターを DaemonSet としてデプロイします。サンプル値ファイルはチャート v0.147.1 でテストされて、コレクターを v0.154.0 に固定し、必要なマウント、環境変数、RBAC リソース、およびポート公開を設定します。
+[公式 OpenTelemetry Collector Helm チャート][102] を使用して、Kubernetes にコレクターを DaemonSet としてデプロイします。サンプル値ファイルはチャート v0.147.1 でテストされて、コレクターを v0.154.0 に固定し、必要なマウント、環境変数、RBAC リソース、およびポート公開を設定します。
 
-クラスター全体のメトリクスを収集する場合や、Kubernetes リソースデータを Kubernetes エクスプローラーに送信する場合は、DaemonSet と併せてクラスターコレクターをデプロイします。「[Kubernetes メトリクス][13]」を参照してください。
+クラスター全体のメトリクスを収集する場合や、Kubernetes リソースデータを Kubernetes エクスプローラーに送信する場合は、DaemonSet と併せてクラスターコレクターをデプロイします。[Kubernetes メトリクス][13] を参照してください。
 
 1. Datadog API キーを使用して Kubernetes Secret を作成します。
 
@@ -487,7 +487,7 @@ docker run \
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    ```
 
-1. 環境のサンプル values ファイルをダウンロードし、`values.yaml` として保存します。Datadog サイトが `datadoghq.com` でない場合は、インストール前に `DD_SITE` の値を `values.yaml` 更新してください。
+1. 環境のサンプル values ファイルをダウンロードし、`values.yaml` として保存します。Datadog サイトが `datadoghq.com` でない場合は、`values.yaml` 内の `DD_SITE` の値をインストール前に更新してください。
 
    | 環境 | values ファイル |
    |---|---|
@@ -523,16 +523,16 @@ docker run \
 
 {{% tab "Kubernetes マニフェストリファレンス" %}}
 
-このタブは、独自の Kubernetes マニフェストを管理するユーザー向けに構成の参考情報を示すものです。必要な Pod 仕様、マウント、環境変数、RBAC リソース、およびポート公開が含まれた実行可能なインストールについては、「**Kubernetes**」タブを参照してください。
+このタブは、独自の Kubernetes マニフェストを管理するユーザー向けに構成の参考情報を示すものです。必要な Pod 仕様、マウント、環境変数、RBAC リソース、およびポート公開が含まれた実行可能なインストールについては、**Kubernetes** タブを参照してください。
 
 この構成では、非クラウド環境でコレクターを DaemonSet として実行します。これには、Kubernetesメタデータでテレメトリをエンリッチするための `k8s_attributes` プロセッサーと、ノード、Pod、コンテナ、およびボリュームのメトリクスを取得するための `kubelet_stats` レシーバーが含まれています。マネージド Kubernetes ディストリビューションでは、構成後に [マネージド Kubernetesディストリビューション](#managed-kubernetes-distributions)で説明されている変更を適用してください。
 
-コレクター Pod spec で以下の環境変数を設定します。その際、指定されている場合には Kubernetes downward APIを使用してください。
+コレクター Pod spec で以下の環境変数を設定します。その際、指定されている場合には Kubernetes downward API を使用してください。
 
 - `DD_API_KEY` と `DD_SITE`
 - `K8S_NODE_NAME`: `kubelet_stats` レシーバーによって使用される Kubernetes ノードの名前。`spec.nodeName` フィールドから設定してください。
-- `MY_POD_IP`: `health_check` エクステンションによって使用されるPod IP。`status.podIP` フィールドから設定してください。
-- `OTEL_RESOURCE_ATTRIBUTES`: コントローラーはコンテナ内からホスト名を特定できないため、ここにホスト情報を指定します (例: `k8s.node.name=$(K8S_NODE_NAME)`)。`$(VAR)` 構文はKubernetes によって展開されるため、シェルではなく Pod spec でこれを設定してください。
+- `MY_POD_IP`: `health_check` エクステンションによって使用される Pod IP。`status.podIP` フィールドから設定してください。
+- `OTEL_RESOURCE_ATTRIBUTES`: コントローラーはコンテナ内からホスト名を特定できないため、ここにホスト情報を指定します (例: `k8s.node.name=$(K8S_NODE_NAME)`)。`$(VAR)` 構文は Kubernetes によって展開されるため、シェルではなく Pod spec でこれを設定してください。
 
 ホストファイルシステムを `/hostfs` にマウントして、`host_metrics` レシーバーがホストメトリクスを収集できるようにします。
 
@@ -769,7 +769,7 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-この構成には、`pods`、`namespaces`、`nodes`、`nodes/stats`、および `replicasets` に対して `get`、`list`、および `watch` を許可する ClusterRole にバインドされた ServiceAccount が必要です。`k8s_attributes` プロセッサーは Pod メタデータを読み取り、`kubelet_stats` レシーバーは `nodes/stats` を読み取ります。[Kubernetes Attributes Processor のドキュメント][101]で RBAC セットアップの手順を参照し、リストされているルールに `nodes/stats` を追加してください。
+この構成には、`pods`、`namespaces`、`nodes`、`nodes/stats`、および `replicasets` に対して `get`、`list`、および `watch` を許可する ClusterRole にバインドされた ServiceAccount が必要です。`k8s_attributes` プロセッサーは Pod メタデータを読み取り、`kubelet_stats` レシーバーは `nodes/stats` を読み取ります。[Kubernetes Attributes Processor のドキュメント][101] で RBAC セットアップの手順を参照し、リストされているルールに `nodes/stats` を追加してください。
 
 #### マネージド Kubernetes ディストリビューション {#managed-kubernetes-distributions}
 
@@ -860,9 +860,9 @@ processors:
 これらのモードでは、`/hostfs` のマウントやホストポートの使用は許可されません。GKE または AKS の `resource_detection` プロセッサーを使用し、以下の追加変更を行ってください。
 
 - `receivers` ブロックと `metrics` パイプラインから `host_metrics` レシーバーを 削除します。ノード、Pod、コンテナ、およびボリュームのメトリクスは、引き続き `kubelet_stats` レシーバーから取得されます。
-- コレクターのホストポートを無効にし、代わりにノードローカルのサービスを介して公開します。GKE Autopilot および AKS Automatic Helm 値ファイルは、これらの変更を適用します。「[アプリケーションを構成する](#3-configure-your-application)」に示されているホスト IP ではなく、そのサービスでアプリケーションをポイントします。
+- コレクターのホストポートを無効にし、代わりにノードローカルのサービスを介して公開します。GKE Autopilot および AKS Automatic Helm 値ファイルは、これらの変更を適用します。[アプリケーションを構成する](#3-configure-your-application) に示されているホスト IP ではなく、そのサービスでアプリケーションをポイントします。
 
-各環境の完全な構成ファイルについては、[`opentelemetry-examples` リポジトリ][501]を参照してください。
+各環境の完全な構成ファイルについては、[`opentelemetry-examples` リポジトリ][501] を参照してください。
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
 [501]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
@@ -928,11 +928,11 @@ GKE Autopilot および AKS Automatic では、ホストポートは許可され
 
 ### スパンメトリクスコネクタ{#span-metrics-connector}
 
-`span_metrics` コネクタは、トレースデータから RED メトリクスを生成します。これらのメトリクスは、Service Catalog、Service Page、Resource Page などの APM 機能を強化します。このコネクタは、Datadog がトレースからホストタグ、ピアサービス、オペレーション名を計算できるようにするディメンションで構成されています。
+`span_metrics` コネクタは、トレースデータから RED メトリクスを生成します。これらのメトリクスは、Catalog、Service Page、Resource Page などの APM 機能を強化します。このコネクタは、Datadog がトレースからホストタグ、ピアサービス、オペレーション名を計算できるようにするディメンションで構成されています。
 
-「[コレクターを構成してデプロイする](#2-configure-and-deploy-the-collector)」に示されている環境固有の各構成には、完全な `span_metrics` コネクターブロックが含まれています。構成を調整する際は、Datadog が必要なホストタグ、ピアサービス、オペレーション名、リソース名を導出できるよう、すべてのディメンションを保持してください。
+[コレクターを構成してデプロイする](#2-configure-and-deploy-the-collector) に示されている環境固有の各構成には、完全な `span_metrics` コネクターブロックが含まれています。構成を調整する際は、Datadog が必要なホストタグ、ピアサービス、オペレーション名、リソース名を導出できるよう、すべてのディメンションを保持してください。
 
-[完全な構成ファイル][5]には、`- glob: container.**` などの glob パターンを使用してコンテナタグディメンションのグループを置き換える方法も示されています。
+[完全な構成ファイル][5] には、`- glob: container.**` などの glob パターンを使用してコンテナタグディメンションのグループを置き換える方法も示されています。
 
 ### OTLP HTTP エクスポーター {#otlp-http-exporter}
 
@@ -980,7 +980,7 @@ GKE Autopilot および AKS Automatic では、ホストポートは許可され
 
 ### 累積 - デルタプロセッサー {#cumulative-to-delta-processor}
 
-`cumulativetodelta` プロセッサーは、累積メトリクスをデルタ一時性に変換します。これは、OpenTelemetry メトリクスの場合の[Datadog 推奨の構成][6]です。
+`cumulativetodelta` プロセッサーは、累積メトリクスをデルタ一時性に変換します。これは、OpenTelemetry メトリクスの場合の [Datadog 推奨の構成][6] です。
 
 ### Kubelet 統計レシーバー {#kubelet-stats-receiver}
 
@@ -995,7 +995,7 @@ Kubernetes デプロイメントでは、`kubelet_stats` レシーバーが各�
 Datadog は、OTLP データを取り込む際に以下の制限を適用します。制限を超えたデータは、説明されているとおり拒否または削除されます。
 
 **ペイロードサイズ**
-: 各インテークエンドポイントには、リクエストごとの最大ペイロードサイズが設定されています。この制限を超えるリクエストは、`HTTP 413 Request Entity Too Large` 応答で拒否されます。413 エラーを受け取った場合は、バッチサイズを減らすか、より頻繁にフラッシュして、各リクエストが制限内に収まるようにしてください。各エンドポイントのペイロードサイズ制限については、[インテーク制限][8]を参照してください。
+: 各インテークエンドポイントには、リクエストごとの最大ペイロードサイズが設定されています。この制限を超えるリクエストは、`HTTP 413 Request Entity Too Large` 応答で拒否されます。413 エラーを受け取った場合は、バッチサイズを減らすか、より頻繁にフラッシュして、各リクエストが制限内に収まるようにしてください。各エンドポイントのペイロードサイズ制限については、[インテーク制限][8] を参照してください。
 
 **ヒストグラムバケット数**
 : 各ヒストグラムデータポイントは取り込み時に検証されます。バケットあたりの最大数 (単一バケット内の観測結果数) は 2,147,483,647 (2<sup>31</sup> − 1) です。いずれかのバケットがこの制限を超えると、データポイント全体が削除されます。

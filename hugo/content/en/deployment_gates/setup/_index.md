@@ -1,6 +1,6 @@
 ---
 title: Set Up Deployment Gates
-description: "Compare Just-In-Time (JIT) and preconfigured Deployment Gates and follow the setup walkthrough for your chosen configuration source."
+description: "Compare inline and preconfigured Deployment Gates and follow the setup walkthrough for your chosen configuration source."
 further_reading:
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
@@ -10,7 +10,7 @@ further_reading:
 Choose where your Deployment Gates are defined, then follow the setup instructions. For a comparison of the two configuration sources, see [Configuration sources][1].
 
 {{< whatsnext desc="Set up Deployment Gates:" >}}
-    {{< nextlink href="/deployment_gates/setup/jit" >}}<u>Just-In-Time (JIT)</u>: Define gates and rules in your deployment configuration, with no setup in Datadog.{{< /nextlink >}}
+    {{< nextlink href="/deployment_gates/setup/inline" >}}<u>Inline</u>: Define gates and rules in your deployment configuration, with no setup in Datadog.{{< /nextlink >}}
     {{< nextlink href="/deployment_gates/setup/preconfigured" >}}<u>Preconfigured</u>: Create gates and rules in Datadog with the UI, API, or Terraform.{{< /nextlink >}}
 {{< /whatsnext >}}
 

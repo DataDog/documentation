@@ -1,0 +1,11 @@
+{
+  "data": {
+    "type": "rum_archive_sessions_request",
+    "attributes": {
+      "query": "service:rum18600-fixture",
+      "from": 1636024271000,
+      "to": 1636629071000,
+      "limit": 1
+    }
+  }
+}
