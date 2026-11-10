@@ -42,16 +42,15 @@ Restrictions apply in the Datadog UI and in the API. Application keys are subjec
 
 ## Restrict a project in the UI
 
-<!-- TBD (DOCS-15824): Confirm these steps with the Agent Observability team. -->
 
 1. Navigate to [Organization Settings > Access Control][3].
-2. In the **Restricted Datasets** section, click **New Policy**. On the **New Policy** page, select the **Restricted Datasets** tab.
-3. Under **Choose Data Scope**, select **Agent Observability** as the product, then select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
+2. In the {{< ui >}}Restricted Datasets{{< /ui >}} section, click {{< ui >}}New Policy{{< /ui >}}. On the {{< ui >}}New Policy{{< /ui >}}  page, select the {{< ui >}}Restricted Datasets{{< /ui >}} tab.
+3. Under {{< ui >}}Choose Data Scope{{< /ui >}}, select {{< ui >}}Agent Observability{{< /ui >}} as the product, then select the project from the list of values. The list has two groups: your projects, and the applications that send traces to Agent Observability. Select from the projects group.
 
     <div class="alert alert-warning"><ul><li>Typing the project name, even in part or with a typo, matches no Offline Experiments data. The project stays visible to everyone, and the restriction looks like it is working.</li><li>Projects already covered by another Restricted Dataset do not appear in the list. A project can belong to only one Restricted Dataset at a time.</li></ul></div>
 
-4. Under **Designate Users with Access**, add the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
-5. Under **Name Policy**, enter a name that identifies the project it protects, for example `Offline Experiments - Fraud Detection`.
+4. Under {{< ui >}}Designate Users with Access{{< /ui >}}, add the teams or roles that should keep access to the project. A maximum of 50 teams or roles can be attached to one Restricted Dataset.
+5. Under {{< ui >}}Name Policy{{< /ui >}}, enter a name that identifies the project it protects, for example `Offline Experiments - Fraud Detection`.
 6. Save the Restricted Dataset.
 
 **Note**: The filter key may be locked. Agent Observability uses one tag key, `ml_app`, for both applications and projects, and Data Access Control allows one tag key per telemetry type. If your organization already has an Agent Observability Restricted Dataset, new ones reuse the same key.

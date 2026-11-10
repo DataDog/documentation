@@ -57,8 +57,6 @@ Name Policy
 
 **Note:** A maximum of 50 principals (roles, teams, or agents) can be tied to a given Restricted Dataset.
 
-<!-- TBD (DOCS-15824): Confirm that managed agents support is available before merging. Confirm whether agents and automated processes count toward the 50-principal limit (note above). -->
-
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
 After completing all the fields to define the dataset, save the policy to apply it to your organization.
@@ -306,7 +304,6 @@ When querying data through Datadog APIs with restrictions enabled, users without
 [7]: https://app.datadoghq.com/organization-settings/access-controls
 [8]: /data_security/
 [9]: /internal_developer_portal/catalog/set_up/
-[10]: /account_management/rbac/data_access/#supported-telemetry
 [11]: /logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs
 [12]: /dashboards/sharing/shared_dashboards/
 [13]: /llm_observability/instrument/otel_instrumentation/
