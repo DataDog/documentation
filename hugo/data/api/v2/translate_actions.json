@@ -1998,6 +1998,12 @@
     "request_description": "Update issue state request payload.",
     "request_schema_description": "Update issue state request payload."
   },
+  "GetEUDMDevices": {
+    "summary": "Get all devices"
+  },
+  "GetEUDMDevice": {
+    "summary": "Get a device"
+  },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"
