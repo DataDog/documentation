@@ -3423,7 +3423,7 @@ Creates a team with a handle, name, and optional description.
 ### `update_team`
 *Toolset: **teams***\
 *Permissions Required: `Teams Read` and `MCP Write`*\
-Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change.
+Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions).
 
 - Change the Payments team description to "Owns payment processing."
 
@@ -3437,14 +3437,14 @@ Permanently deletes a team. The tool asks you to confirm before it deletes the t
 ### `add_team_membership`
 *Toolset: **teams***\
 *Permissions Required: `Teams Read` and `MCP Write`*\
-Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. If you grant the admin role, the tool asks you to confirm first.
+Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). If you grant the admin role, the tool asks you to confirm first.
 
 - Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
 
 ### `delete_team_membership`
 *Toolset: **teams***\
 *Permissions Required: `Teams Read` and `MCP Write`*\
-Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. The tool asks you to confirm before it removes the user.
+Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). The tool asks you to confirm before it removes the user.
 
 - Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team.
 
