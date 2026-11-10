@@ -42,13 +42,38 @@ You can [add custom tags to your root span][3], or use the instrumentation funct
 
 {{< programming-lang lang="java" >}}
 
-Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
+Starting with dd-trace-java v1.48.0, the Java tracer provides the `User.setUser()` method, which allows you to monitor and block authenticated requests. This is the recommended API.
 
-User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
+`User.setUser()` adds the user ID and metadata to the local root span and automatically performs user blocking. If the user is blocked, the call commits the blocking response and throws a `BlockingException`. Do not catch this exception in your application code.
 
-**Note**: Check that you have added [necessary dependencies to your application][1].
+**Notes**:
+- Both the Datadog Java tracer and the `dd-trace-api` dependency must be v1.48.0 or later. Check that you have added [necessary dependencies to your application][1].
+- Metadata keys are reported as `usr.<key>`. Pass keys without the `usr.` prefix (for example, `email`, not `usr.email`).
+- Call `User.setUser()` while the request is being processed, before the response is written.
+- User blocking requires AAP to be enabled.
 
-The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
+The example below shows how to add the user ID and metadata, and enable user blocking capability:
+
+```java
+import datadog.appsec.api.user.User;
+import java.util.HashMap;
+import java.util.Map;
+
+Map<String, String> metadata = new HashMap<>();
+// Optional user monitoring tags
+metadata.put("name", "Jean Example");
+metadata.put("email", "jean.example@example.com");
+metadata.put("session_id", "987654321");
+metadata.put("role", "admin");
+metadata.put("scope", "read:message, write:files");
+
+// Blocking is performed internally through the setUser call
+User.setUser("d131dd02c56eec4", metadata);
+```
+
+{{% collapse-content title="Earlier versions (before v1.48.0)" level="h3" expanded="false" id="java-user-info-legacy" %}}
+
+With dd-trace-java versions earlier than v1.48.0, add the user monitoring tags to the local root span and call the blocking API explicitly. User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field.
 
 ```java
 import io.opentracing.Span;
@@ -74,6 +99,8 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
+
+{{% /collapse-content %}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}

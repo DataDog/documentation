@@ -8,12 +8,17 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
-site_support_id: fleet-automation-standard-features
 ---
 
 Fleet Automation allows you to remotely upgrade Datadog Agents across your fleet without direct access to individual hosts. You can trigger upgrades immediately, schedule them during maintenance windows, or automate them through Terraform or the API.
 
 ## Prerequisites
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">
+On US1-FED and US2-FED, remote upgrades require Agent 7.85.0 or later on both Linux and Windows. If you run an older version, use the <a href="https://app.datadoghq.com/fleet/install-agent/latest?platform=overview">Agent installation instructions</a> to update it before upgrading through Fleet Automation.
+</div>
+{{< /site-region >}}
 
 - [Remote Configuration][7] enabled for your organization and the Agent's API key
 - [Remote updates][8] enabled on each target VM Agent (`remote_updates: true`)

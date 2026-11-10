@@ -21,15 +21,16 @@ title: Software Delivery MCP 도구 시작하기
 ---
 ## 개요 {#overview}
 
-[Datadog MCP Server][1]를 사용하면 AI 에이전트가 [Model Context Protocol(MCP)][2]을 통해 Software Delivery 데이터에 액세스할 수 있습니다. `software-delivery` 도구 세트는 Cursor, Claude Code 또는 OpenAI Codex와 같은 AI 기반 클라이언트에서 [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA Metrics][9] 및 [Deployment Gates][10]와 직접 상호 작용하기 위한 도구를 제공합니다.
+[Datadog MCP Server][1]를 사용하면 AI 에이전트가 [Model Context Protocol(MCP)][2]을 통해 Software Delivery 데이터에 액세스할 수 있습니다. `software-delivery` 도구 세트는 [CI Visibility][3], [Test Optimization][4], [Code Coverage][8], [DORA metrics][9] 및 [Deployment Gates][10]와 상호 작용하기 위한 도구를 제공합니다. Cursor, Claude Code 또는 OpenAI Codex와 같은 AI 기반 클라이언트에서 도구를 직접 사용하세요.
 
 ## 사용 사례 {#use-cases}
 
-Software Delivery MCP 도구는 다음 작업을 위한 AI 지원 워크플로우를 제공합니다.
+Software Delivery MCP 도구는 다음 작업을 위한 AI 지원 워크플로를 제공합니다.
 
 - **파이프라인 실패 디버깅**: AI 에이전트에게 최근 파이프라인 실패를 찾고 오류 로그를 분석하며 수정 사항을 제안하도록 요청합니다.
 - **불안정한 테스트 식별**: 리포지토리에서 불안정한 테스트를 쿼리하고 가장 먼저 수정할 항목에 대한 권장 사항을 우선순위별로 받을 수 있습니다.
 - **CI 성능 분석**: 파이프라인 기간, 실패율 및 시간 경과에 따른 추세에 대한 집계 통계를 제공합니다.
+- **CI/CD 최적화**: 리포지토리 검사와 CI 및 테스트 데이터를 결합하여 개선 사항의 우선순위를 정하고, 변경 사항을 검증하며, 그 영향을 측정합니다.
 - **테스트 실패 분류**: 실패하는 테스트, 해당 테스트의 담당자, 과거 패턴을 파악할 수 있습니다.
 - **코드 커버리지 검토**: 브랜치 또는 커밋에 대한 커버리지 요약을 제공합니다(패치 커버리지 및 서비스 또는 코드 소유자별 분석 포함).
 - **DORA 메트릭 측정**: 서비스 또는 팀별로 배포 빈도, 변경 리드 타임, 변경 실패율 및 복구 시간을 쿼리합니다.
@@ -68,7 +69,10 @@ Software Delivery MCP 도구는 다음 작업을 위한 AI 지원 워크플로�
 : 리포지토리 커밋의 집계된 코드 커버리지 요약 메트릭을 가져옵니다. 여기에는 총 커버리지, 패치 커버리지 및 서비스/코드 소유자 분석이 포함됩니다.
 
 `get_datadog_test_optimization_settings`
-: 서비스에 대해 활성화된 Test Optimization 기능을 검색합니다. 여기에는 Test Impact Analysis(ITR), Early Flake Detection(EFD), Auto Test Retries(ATR), Failed Test Replay, Code Coverage 수집 및 PR 코멘트가 포함됩니다.
+: 서비스에 대해 어떤 Test Optimization 기능이 활성화되어 있는지 검색합니다. 기능에는 Test Impact Analysis(ITR), Early Flake Detection(EFD), Auto Test Retries(ATR), Failed Test Replay, Code Coverage 수집 및 PR Comments가 포함됩니다.
+
+`update_datadog_test_optimization_settings`
+: 기존 리포지토리, 서비스 및 환경에 대한 Test Optimization 설정을 업데이트합니다. Test Impact Analysis, Early Flake Detection, Auto Test Retries, Failed Test Replay 및 Code Coverage를 활성화하거나 비활성화하거나, 상속된 설정을 복원합니다. 이 쓰기 작업에는 `TestOptimizationRead` 및 `TestOptimizationSettingsWrite` 권한과 명시적인 사용자 승인이 모두 필요합니다. 업데이트하기 전에 현재 설정을 읽으세요. Test Impact Analysis 또는 Early Flake Detection을 활성화하면 두 기능 모두에 대해 리포지토리 전체의 기본 브랜치 제외 항목이 초기화될 수도 있습니다.
 
 `get_datadog_flaky_tests_management_policies`
 : 리포지토리에 대해 구성된 Flaky Tests Management 정책을 검색합니다. 여기에는 자동 격리 기간, 브랜치 규칙, 실패율 임계값, 비활성화 정책 및 재시도 설정이 포함됩니다.
@@ -95,7 +99,7 @@ Software Delivery MCP 도구는 다음 작업을 위한 AI 지원 워크플로�
 : 각 규칙의 결과와 함께 Deployment Gate 평가를 가져옵니다. 게이트가 실패한 이유를 설명하는 데 사용하세요.
 
 `search_datadog_deployment_gate_rule_evaluations`
-: Deployment Gate 평가 전반에서 개별 규칙 결과를 검색합니다. 결과에는 모니터링 트리거 또는 Watchdog 인사이트와 같은 실패 증거가 포함됩니다. 서비스에 대해 가장 자주 실패하는 규칙을 찾을 때 사용하세요.
+: Deployment Gate 평가 전반에서 개별 규칙 결과를 검색합니다. 결과에는 트리거된 모니터 또는 Watchdog 인사이트와 같은 실패 증거가 포함됩니다. 서비스에 대해 가장 자주 실패하는 규칙을 찾을 때 사용하세요.
 
 Deployment Gates 도구는 읽기 전용이며 `DeploymentGatesRead` 권한이 필요합니다. 드라이 런 상태의 게이트와 규칙은 평가되더라도 배포를 차단하지 않으므로, `dry_run: true`인 `fail` 상태는 배포가 진행되었음을 의미합니다.
 
@@ -103,15 +107,17 @@ Deployment Gates 도구는 읽기 전용이며 `DeploymentGatesRead` 권한이 �
 
 연결 후 다음과 같은 프롬프트를 시도해 보세요.
 
-- 내 커밋 `58b1488`에 대한 모든 파이프라인을 보여 줘.
-- 내 브랜치에서 `integration-test` 작업이 실패한 원인이 뭐야?
+- 커밋 `58b1488`에 대한 모든 파이프라인을 보여줘.
+- 이 브랜치에서 `integration-test` 작업이 실패한 원인이 뭐야?
 - 체크아웃 서비스의 활성 불안정한 테스트를 실패율 순으로 정렬하여 보여 줘.
 - 지난 2주 동안 실패한 파이프라인은 몇 개였지?
-- 파이프라인 이름별로 그룹화한 파이프라인 실행 시간의 95백분위수를 보여 줘.
+- 파이프라인 이름별로 그룹화한 파이프라인 실행 시간의 95 백분위수를 보여줘.
 - `github.com/my-org/my-repo`의 `main` 브랜치 코드 커버리지는 뭐야?
-- 커밋 `abc123abc123abc123abc123abc123abc123abcd`에 대한 커버리지 메트릭을 보여 줘.
+- 커밋 `abc123abc123abc123abc123abc123abc123abcd`에 대한 커버리지 메트릭을 보여줘.
 - 지난 30일 동안 `checkout` 서비스의 배포 빈도와 변경 실패율은 뭐야?
 - `auth-service`에 어떤 Test Optimization 기능이 활성화되어 있지?
+- Datadog 데이터를 사용하여 이 리포지토리의 CI/CD를 평가하고 개선 사항을 권장해줘.
+- `checkout` 서비스에 대해 Auto Test Retries를 활성화하기 위해 제안된 설정 변경 사항을 보여줘.
 - `checkout-service` 리포지토리에서 활성인 모든 불안정한 테스트를 격리해 줘.
 - 마지막 배포에서 `prod`의 `checkout`에 대한 Deployment Gate가 실패한 이유가 뭐야?
 - `prod`의 `checkout` 서비스에 대한 Deployment Gate 규칙 중 드라이 런 상태인 것은 뭐야?
@@ -127,13 +133,13 @@ https://mcp.{{< region-param key="dd_site" >}}/v1/mcp?toolsets=core,software-del
 
 Cursor, Claude Code, VS Code 및 기타 AI 클라이언트에 대한 클라이언트 구성을 포함한 전체 설정 지침은 [Datadog MCP Server 설정][1]을 참조하세요.
 
-## Agent 스킬 {#agent-skills}
+## 에이전트 스킬 {#agent-skills}
 
-Agent 스킬은 일반적인 Software Delivery 워크플로를 자동화하는 AI 코딩 에이전트용으로 사전 구축된 지침 세트입니다. `dd-software-delivery` 스킬 세트는 [Datadog agent-skills][6] 리포지토리에서 사용할 수 있습니다. 실시간 CI 및 Test Optimization 데이터를 사용하여 불안정한 테스트를 분류하고 실패한 PR 파이프라인의 차단을 해제하는 2가지 스킬을 제공합니다.
+에이전트 스킬은 실시간 CI 및 Test Optimization 데이터를 사용하여 일반적인 Software Delivery 워크플로우를 안내하는 AI 코딩 에이전트용 사전 구축된 지침 모음입니다. 이 스킬은 CI/CD 평가, 불안정한 테스트 조사, 실패하는 PR 파이프라인의 문제 해결을 돕습니다.
 
-`software-delivery` MCP 도구 세트를 연결하면 사용자의 프롬프트가 도구 세트의 용도에 부합할 때 AI 어시스턴트가 스킬을 자동으로 로드합니다. 예를 들어, "TestCheckoutServiceIntegration이 CI에서 계속 실패하는데, 조사해줘"라고 입력하면 별도의 설치 없이 `/triage-flaky-test`가 로드됩니다.
+`software-delivery` MCP 도구 세트를 연결하면 사용자의 프롬프트가 스킬의 용도에 부합할 때 AI 어시스턴트가 스킬을 자동으로 로드합니다. 예를 들어, "TestCheckoutServiceIntegration이 CI에서 계속 실패하는데, 조사해줘"라고 입력하면 별도의 로컬 설치 없이 flaky-test triage 스킬이 로드됩니다.
 
-슬래시 명령을 사용하여 스킬을 명시적으로 호출하려면 로컬에 설치하세요.
+슬래시 명령으로 `/triage-flaky-test` 및 `/unblock-pr`을 명시적으로 호출하려면 [agent-skills 리포지토리[6]에서 `dd-software-delivery` 스킬 세트를 설치하세요.
 
 ### 설치 {#install}
 
@@ -146,7 +152,7 @@ npx skills add datadog-labs/agent-skills \
 
 설치 후 Claude Code를 다시 시작하면 슬래시 명령이 나타납니다.
 
-Datadog MCP 서버에 연결되면 각 스킬은 해당 서버를 자동으로 사용하고 그렇지 않은 경우 [pup][7] CLI로 폴백합니다. pup 폴백을 사용하려면 pup을 설치하고 인증하세요.
+이 로컬에 설치된 스킬은 연결된 경우 Datadog MCP 서버를 사용하고, 그렇지 않으면 [pup][7] CLI로 폴백합니다. CLI 폴백을 사용하려면 pup을 설치하고 인증하세요.
 
 ```shell
 brew install datadog-labs/pack/pup
@@ -155,10 +161,23 @@ pup auth login
 
 ### 사용 가능한 스킬 {#available-skills}
 
-| 스킬 | 호출 방법 | 기능 |
+| 스킬 | 시작 문구 | 기능 |
 |-------|-------------|-------------|
+| CI/CD 최적화 | "이 리포지토리의 CI/CD를 평가해줘" | 리포지토리 검사와 CI 및 테스트 데이터를 결합하여 변경 사항의 우선순위를 지정하고, 검증하며, 영향을 측정합니다. |
 | 불안정한 테스트 분류 | `/triage-flaky-test` | 특정 불안정한 테스트에 대한 이력, 실패 패턴 및 AI 카테고리를 가져온 다음 수정, 격리 또는 에스컬레이션을 권장합니다. |
 | PR 차단 해제 | `/unblock-pr` | PR에 대한 각 CI 실패를 불안정, 인프라 또는 성능 저하로 분류하고, 코드 커버리지와 품질 또는 보안 위반 사항을 표면화하며, 목표 조치를 제안합니다 |
+
+### CI/CD 최적화 {#optimize-cicd}
+
+`optimize-cicd` 스킬은 `software-delivery` MCP 도구 세트를 통해 사용할 수 있습니다. 이 스킬은 리포지토리 검사와 Datadog 데이터를 결합하여 CI/CD를 평가하고, 개선 사항의 우선순위를 지정하며, 선택한 변경 사항의 검증 및 측정을 안내합니다. 구성이 불완전한 리포지토리를 포함하여 이미 Software Delivery를 사용하는 리포지토리에 이 스킬을 사용하세요.
+
+이 스킬은 변경 사항을 제안하고 검증 단계를 제시한 다음, 사용자가 승인한 변경 사항을 적용합니다. 또한 통합 확인이나 기존 변경 사항 측정과 같은 하나의 스테이지만 처리할 수도 있습니다.
+
+```text
+Assess this repository's CI/CD and prioritize improvements using Datadog data.
+Check whether Test Impact Analysis is configured and working for this repository.
+Compare CI duration and reliability before and after the changes on this branch.
+```
 
 ### 불안정한 테스트 분류 {#triage-flaky-test}
 
@@ -171,11 +190,11 @@ pup auth login
 /triage-flaky-test TestCheckoutServiceIntegration github.com/my-org/my-service
 ```
 
-### PR 차단 해제 {#unblock-pr}
+### 풀 리퀘스트 차단 해제 {#unblock-pr}
 
-`/unblock-pr`은 실패하는 PR CI 파이프라인을 조사합니다. 각 실패 작업에 대해 해당 실패가 기본 브랜치나 다른 브랜치에 이미 존재했는지 확인합니다. 이 스킬은 실패를 **불안정**, **인프라** 또는 **성능 저하**로 분류합니다. 동시에 브랜치의 코드 커버리지 및 코드 품질을 가져오거나 PR 인사이트에서 보안 위반 사항을 가져옵니다. 작업별 분류, 증거, 권장 조치와 커버리지 및 위반 사항을 요약하는 PR 상태 섹션이 포함된 분류 요약 보고서를 생성합니다.
+`/unblock-pr`은 실패하는 PR CI 파이프라인을 조사합니다. 각 실패 작업에 대해 해당 실패가 기본 브랜치나 다른 브랜치에 이미 존재했는지 확인합니다. 이 스킬은 실패를 **불안정**, **인프라** 또는 **성능 저하**로 분류합니다. 동시에 브랜치의 코드 커버리지와 PR 인사이트의 코드 품질 또는 보안 위반 사항을 가져옵니다. 작업별 분류, 증거, 권장 조치와 커버리지 및 위반 사항을 요약하는 PR 상태 섹션이 포함된 분류 요약 보고서를 생성합니다.
 
-불안정한 실패의 경우 더 심층적인 조사를 위해 `triage-flaky-test`로 스킬이 연계됩니다. GitHub Actions 또는 GitLab에서의 일시적인 인프라 실패에 대해서는 `retry_datadog_ci_job`(MCP) 또는 `gh run rerun`(pup 폴백, GitHub Actions만 해당)을 사용하여 실패한 작업을 재시도하며, 다른 CI 공급자의 경우에는 해당 공급자의 UI로 연결되는 링크를 제공합니다. 성능 저하의 경우 코드 변경 사항을 조사하라는 메시지가 표시됩니다.
+불안정한 실패의 경우 더 심층적인 조사를 위해 `triage-flaky-test`로 스킬이 연계됩니다. GitHub Actions 또는 GitLab에서 일시적인 인프라 오류가 발생하면 MCP를 통해 `retry_datadog_ci_job`을 사용하여 실패한 작업을 재시도합니다. pup 폴백은 GitHub Actions에 `gh run rerun`을 사용합니다. 다른 CI 공급자의 경우, 해당 스킬은 공급자의 UI로 연결됩니다. 성능 저하의 경우 코드 변경 사항을 조사하라는 메시지가 표시됩니다.
 
 **참고**: PR 상태 섹션의 코드 품질 및 보안 위반 데이터는 MCP 도구 세트가 필요하며 이러한 데이터는 pup 모드에서는 사용할 수 없습니다.
 
