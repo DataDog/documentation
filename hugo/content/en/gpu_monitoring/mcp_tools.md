@@ -25,7 +25,7 @@ GPU Monitoring MCP tools are in Early Access Preview. Contact your Customer Succ
 
 ## Overview
 
-The [Datadog MCP Server][1] lets AI agents access your [GPU Monitoring][2] data through the Model Context Protocol (MCP). The `gpu-monitoring` toolset gives agents access to fleet and hardware topology, workload context, GPU hardware and host health, training progress, idle GPU jobs, self-hosted LLM inference performance, and GPU kernel profiling. Use these tools in MCP-compatible clients such as Claude Code, Codex CLI, Cursor, or Claude Desktop.
+The [Datadog MCP Server][1] lets AI agents access your [GPU Monitoring][2] data through the Model Context Protocol (MCP). The `gpu-monitoring` toolset lets agents list self-hosted LLM inference deployments, measure their serving performance, inspect their configuration, and rank GPU kernels. Use these tools in MCP-compatible clients such as Claude Code, Codex CLI, Cursor, or Claude Desktop.
 
 ## Setup
 
@@ -108,48 +108,7 @@ Restart the client, and log in to Datadog when prompted.
 
 ## Available tools
 
-The `gpu-monitoring` toolset includes the following tools, grouped by use case. For the full reference, including required permissions and example prompts, see the [GPU Monitoring section of Datadog MCP Server Tools][6].
-
-### Fleet and topology
-
-`gpu_monitoring_get_fleet_summary`
-: Counts your organization's GPUs by state, using the same counts as the GPU Monitoring fleet funnel: available (for example, allocated or idle), unavailable with reasons, and unknown.
-
-`gpu_monitoring_list_topology_groups`
-: The starting point for hardware topology. Lists the clusters, then the clusters, racks, or NVLink domains with hardware issues, worst first.
-
-`gpu_monitoring_list_topology_nodes`
-: Lists the hosts, GPUs, racks, or NVLink domains in one cluster, with presence status and health evidence.
-
-`gpu_monitoring_list_topology_events`
-: Lists topology and fault events for one GPU cluster over up to 7 days: GPUs added or lost, hosts departed, faults raised and cleared, and XIDs.
-
-### Workload context
-
-`gpu_monitoring_orient_workload_tagging`
-: Determines which tags identify a GPU workload, the filters to use against metrics, logs, and traces, and which attempt of the run the time window covers.
-
-`gpu_monitoring_orient_hardware_inventory`
-: Identifies which GPU devices, hosts, racks, and NVLink fabric domains a workload occupies, and how many of each.
-
-`gpu_monitoring_identify_workload_framework`
-: Identifies a GPU workload's orchestrator, training framework, and inference server from metric tags, APM spans, and logs, with a confidence level.
-
-### Health and job status
-
-`gpu_monitoring_analyze_gpu_hardware_health`
-: Checks a workload's GPUs for hardware problems and reports which hardware categories show a signal, what each one points to, and which NVIDIA XID codes corroborate it. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`.
-
-`gpu_monitoring_analyze_host_health`
-: Checks a workload's hosts against thresholds on host-level resources over a time window and reports which hosts are in trouble. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`.
-
-`gpu_monitoring_analyze_training_stepping`
-: Reports whether a training job's step counter is still advancing, against a tolerance sized from the job's own step cadence. Missing data is reported as unknown, never as a stall. Uses the entity filter from `gpu_monitoring_orient_workload_tagging`.
-
-`gpu_monitoring_analyze_zombie_job`
-: Decides whether a GPU job is alive or should be reclaimed (`zombie`, `idle_held`, or `idle_empty`). Analyzes one job, or every job in a scope.
-
-### Inference
+This page covers the following tools in the `gpu-monitoring` toolset. For the full list of tools in the toolset, including required permissions and example prompts, see the [GPU Monitoring section of Datadog MCP Server Tools][6].
 
 `gpu_monitoring_list_inference_deployments`
 : Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with throughput, latency, error rate, KV cache usage, and a health verdict, worst first. Hosted model providers are not covered.
@@ -160,30 +119,9 @@ The `gpu-monitoring` toolset includes the following tools, grouped by use case. 
 `gpu_monitoring_get_inference_configuration`
 : Reports how an inference deployment's engines (vLLM, SGLang) are configured: model, parallelism, KV cache, batching, and scheduling, with the source of every value.
 
-`gpu_monitoring_get_inference_forward_pass_profile`
-: Shows how an inference engine spends its forward passes: the split between decode and prefill, how pass time grows with batch size and scheduled tokens, and whether speculative decoding runs.
-
-`gpu_monitoring_find_inference_forward_pass_traces`
-: Finds individual forward passes of an inference engine (vLLM, SGLang), filtered by phase, batch size, and scheduled tokens, newest or slowest first.
-
-### Kernels and traces
-
 `gpu_monitoring_rank_gpu_kernels`
 : Ranks the GPU kernels a training or inference workload ran by total time, from the kernel spans profiled at kernel level.
 
-`gpu_monitoring_get_gpu_kernel_trend`
-: Follows one GPU kernel of a training or inference workload over time, through the traces profiled at kernel level. Uses a kernel from `gpu_monitoring_rank_gpu_kernels`.
-
-`gpu_monitoring_export_parsed_trace`
-: Fetches a complete APM trace, decodes its spans, and extracts the GPU kernel data into a temporary private file.
-
-`gpu_monitoring_export_raw_trace`
-: Fetches a complete APM trace and saves its original JSON as a temporary private file.
-
-### Insights
-
-`gpu_monitoring_query_insights`
-: Runs bounded SQL queries over your organization's stored GPU Monitoring insights, such as training step metrics and straggler scores.
 ## Troubleshooting
 
 | Issue | Likely cause |
