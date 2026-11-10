@@ -343,7 +343,7 @@ Supported values: `auto`, `init_container`, `csi`.
 
 ### Target specific workloads
 
-By default, SSI instruments all services in all namespaces in your cluster. To refine which workloads are instrumented, define instrumentation rules in Datadog, or configure targeting in your Agent configuration or with a `DatadogInstrumentation` resource. Instrumentation rules in Datadog allow or block instrumentation for matching pods without changes to your Agent configuration. The methods available to you depend on your Agent version.
+By default, SSI instruments all services in all namespaces in your cluster. To refine which workloads are instrumented, define instrumentation rules in Datadog, or configure targeting in your Agent configuration or with a `DatadogInstrumentation` resource. Instrumentation rules in Datadog allow or block instrumentation for matching pods without changes to your Agent configuration. The methods available to you depend on your Agent or Cluster Agent version.
 
 {{< tabs >}}
 {{% tab "Instrumentation rules in Datadog (v7.84.2+)" %}}
@@ -356,7 +356,7 @@ Instrumentation rules for Kubernetes are in Preview. Use this form to request ac
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more cluster groups to limit where it applies.
+Each instrumentation rule matches namespace or pod attributes, then allows or blocks instrumentation for matching pods. You can deploy a rule to all eligible clusters, or scope it to one or more [cluster groups](#create-cluster-groups) to limit where it applies.
 
 A cluster is eligible for instrumentation rules when it runs Datadog Cluster Agent v7.84.2 or later with [Remote Configuration][101] enabled. Datadog delivers rules to eligible clusters through Remote Configuration.
 
@@ -381,7 +381,7 @@ The default behavior controls whether the workload targeting in your Agent confi
 
 #### Create cluster groups
 
-Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules. Use cluster groups to apply rules to some of your clusters, such as staging clusters for a gradual rollout.
+Cluster groups are reusable collections of Kubernetes clusters that you can target with instrumentation rules. Use cluster groups to apply rules to some of your clusters, such as canary clusters for a gradual rollout.
 
 To create a cluster group:
 
@@ -395,7 +395,7 @@ To create a cluster group:
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
-Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
+Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list. This group is different from the {{< ui >}}All clusters{{< /ui >}} targeting option, which applies a rule to every eligible cluster.
 
 If you delete a cluster group, Datadog removes the group's rules, and the Cluster Agent stops applying them the next time it polls Remote Configuration.
 
@@ -405,7 +405,7 @@ To change the order of cluster groups, drag a group by its handle in the group l
 
 #### Create instrumentation rules
 
-**Note**: You can use Bits AI to create instrumentation rules with natural language. Click {{< ui >}}Generate with Bits{{< /ui >}} and describe which workloads you want to instrument, and Bits AI generates the corresponding rule.
+**Note**: You can use Bits AI to create instrumentation rules with natural language. In the Create instrumentation rule window, click {{< ui >}}Generate with Bits{{< /ui >}} and describe which pods to instrument. Bits AI generates the corresponding rule.
 
 To create an instrumentation rule:
 
@@ -428,7 +428,7 @@ After the rules are deployed, restart the affected workloads for the changes to 
 For each pod, Datadog evaluates instrumentation rules in the following order and applies the first rule that matches:
 
 1. Rules from the groups that the pod's cluster belongs to, in group order from top to bottom. Within each group, rules are evaluated in the order set under {{< ui >}}Set evaluation order{{< /ui >}}.
-1. Rules that target {{< ui >}}All clusters{{< /ui >}}. These rules apply to every eligible cluster, including clusters in cluster groups.
+1. Rules that use the {{< ui >}}All clusters{{< /ui >}} targeting option. These rules apply to every eligible cluster, including clusters in cluster groups.
 
 If no rule matches, the [default behavior](#set-the-default-behavior) applies.
 
@@ -438,11 +438,11 @@ Instrumentation rules for Kubernetes support the following attributes. A pod mus
 
 | Attribute | Description | Operators | Example |
 | --------- | ----------- | --------- | ------- |
-| Namespace Name | Name of the Kubernetes namespace the workload belongs to. | `equals`, `not equals`, `prefix`, `contains` | `default`, `production` |
-| Namespace Label | A label on the workload's namespace. | `equals`, `not equals`, `prefix` | Label key `team`, value `checkout` |
+| Namespace Name | The name of the pod's namespace. | `equals`, `not equals`, `prefix`, `contains` | `default`, `production` |
+| Namespace Label | A label on the pod's namespace. | `equals`, `not equals`, `prefix` | Label key `team`, value `checkout` |
 | Pod Label | A label on the pod. | `equals`, `not equals`, `prefix` | Label key `app`, value `web` |
 
-[101]: /agent/remote_config/
+[101]: /remote_configuration/
 [102]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [103]: /account_management/rbac/permissions/
 
@@ -1016,9 +1016,9 @@ spec:
 
 Apply the resource, confirm its status reflects the change, and restart the workload. Existing pods remain instrumented until replaced.
 
-#### Use instrumentation rules to target specific workloads
+#### Use targeting rules to target specific workloads
 
-With instrumentation rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With targeting rules (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
 #### Use the Datadog Admission Controller
 
