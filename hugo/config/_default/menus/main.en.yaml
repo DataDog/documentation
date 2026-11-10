@@ -5097,6 +5097,12 @@ menu:
       identifier: tracing_troubleshooting_go_instrumentation
       parent: tracing_troubleshooting
       weight: 1411
+    - name: BYOC APM
+      url: byoc-apm/
+      pre: upload-wui
+      parent: apm_heading
+      identifier: byoc_apm
+      weight: 15000
     - name: Continuous Profiler
       url: profiler/
       pre: profiling-1
