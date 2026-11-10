@@ -164,7 +164,7 @@ For example:
 ```
 ## OpenTelemetry Collector
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Integration with the OpenTelemetry Collector is not supported on the selected site.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Sending traces from a self-managed OpenTelemetry Collector with the OTLP HTTP exporter is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 Configure the [recommended OpenTelemetry Collector setup][10] to export traces to this endpoint and generate APM trace metrics before sampling.
 
