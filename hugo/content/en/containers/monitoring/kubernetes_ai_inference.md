@@ -42,7 +42,7 @@ Anomalous values in these columns are highlighted to show potential areas for in
 - Requests that are waiting, indicating engine saturation
 - Error rates above CONFIRM WITH PM over the selected time frame
 
-Select a workload from the list to view its detail panel. The detail panel shows more information about the workload, including related resources in a list or map view, workload components, and related metrics, logs, and traces. If you have GPU Monitoring enabled, click [{{< ui >}}View in GPU Monitoring{{< /ui >}}][3] to view more performance and health metrics about the workload.
+Select a workload from the list to view its detail panel. The detail panel shows more information about the workload, including related resources in a list or map view and workload components. It also shows related metrics, logs, and traces. If you have GPU Monitoring enabled, click {{< ui >}}View in GPU Monitoring{{< /ui >}} to view more performance and health metrics about the workload. To set up GPU Monitoring for inference workloads, see [Monitor inference workloads][3].
 
 [1]: https://app.datadoghq.com/orchestration/explorer/inferenceWorkload
 [2]: /containers/monitoring/kubernetes_explorer_configuration/?tab=datadogoperator
