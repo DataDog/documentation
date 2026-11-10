@@ -110,3 +110,14 @@ entries:
       - UpdatePipeline
       - ValidatePipeline
     title: Correct Observability Pipelines schema drift
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41525
+    operations:
+      - CreatePipeline
+      - GetPipeline
+      - ListPipelines
+      - UpdatePipeline
+      - ValidatePipeline
+    title: Document anomaly_detection and end_to_end_acknowledgements in 
+      Observability Pipelines config

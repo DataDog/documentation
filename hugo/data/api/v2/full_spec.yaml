@@ -93181,6 +93181,18 @@ components:
       type: string
       x-enum-varnames:
         - AMAZON_SECURITY_LAKE
+    ObservabilityPipelineAnomalyDetection:
+      description: |-
+        Anomaly detection settings for the pipeline.
+        Only applies to `logs` pipelines. Requires Observability Pipelines Worker 2.25 or later.
+      properties:
+        enabled:
+          description: Whether anomaly detection is enabled for the pipeline.
+          example: true
+          type: boolean
+      required:
+        - enabled
+      type: object
     ObservabilityPipelineAwsAuth:
       description: |-
         AWS authentication credentials used for accessing AWS services such as S3.
@@ -93861,12 +93873,20 @@ components:
     ObservabilityPipelineConfig:
       description: Specifies the pipeline's configuration, including its sources, processors, and destinations.
       properties:
+        anomaly_detection:
+          $ref: "#/components/schemas/ObservabilityPipelineAnomalyDetection"
         destinations:
           description: A list of destination components where processed logs are sent.
           example: [{"id": "datadog-logs-destination", "inputs": ["my-processor-group"], "type": "datadog_logs"}]
           items:
             $ref: "#/components/schemas/ObservabilityPipelineConfigDestinationItem"
           type: array
+        end_to_end_acknowledgements:
+          description: |-
+            Set to `true` to enable end-to-end acknowledgments for the pipeline.
+            Requires Observability Pipelines Worker 2.14 or later.
+          example: false
+          type: boolean
         pipeline_type:
           $ref: "#/components/schemas/ObservabilityPipelineConfigPipelineType"
         processor_groups:
