@@ -656,7 +656,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | Tag Name | Tag Description |
 |---|---|
 | `model` | The model identifier reported by OpenAI. |
-| `product` | The product that generated the usage, such as ChatGPT Chat, ChatGPT Work, or Codex. |
+| `product` | The product that generated the usage, such as `ChatGPT`, `codex`, or `Work`. |
 | `user_email` | The email address of the user who generated the usage, when provided by OpenAI. |
 | `billing_mode` | The billing denomination: `credits` for credit-priced usage or `usd` for direct USD usage. |
 | `service_tier` | The service tier reported for the usage. |
