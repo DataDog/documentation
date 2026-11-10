@@ -161,70 +161,6 @@ header_scripts:
 
 footer_scripts:
 
-# Docs allowed regions for redirecting
-allowedRegions:
-  - name: US1
-    value: us
-    weight: 10
-    domain: datadoghq.com
-    exact_domains:
-      - "navy.oncall.datadoghq.com"
-      - "browser-intake-datadoghq.com"
-  - name: US3
-    value: us3
-    weight: 13
-    domain: us3.datadoghq.com
-    exact_domains:
-      - "teal.oncall.datadoghq.com"
-      - "browser-intake-us3-datadoghq.com"
-  - name: US5
-    value: us5
-    weight: 15
-    domain: us5.datadoghq.com
-    exact_domains:
-      - "coral.oncall.datadoghq.com"
-      - "browser-intake-us5-datadoghq.com"
-  - name: EU
-    value: eu
-    weight: 20
-    domain: datadoghq.eu
-    exact_domains:
-      - "beige.oncall.datadoghq.eu"
-      - "browser-intake-datadoghq.eu"
-  - name: AP1
-    value: ap1
-    weight: 25
-    domain: ap1.datadoghq.com
-    exact_domains:
-      - "saffron.oncall.datadoghq.com"
-      - "browser-intake-ap1-datadoghq.com"
-  - name: AP2
-    value: ap2
-    weight: 30
-    domain: ap2.datadoghq.com
-    exact_domains:
-      - "lava.oncall.datadoghq.com"
-      - "browser-intake-ap2-datadoghq.com"
-  - name: UK1
-    value: uk1
-    weight: 33
-    domain: uk1.datadoghq.com
-    exact_domains:
-      - "scarlet.oncall.datadoghq.com"
-      - "browser-intake-uk1-datadoghq.com"
-  - name: US1-FED
-    value: gov
-    weight: 35
-    domain: ddog-gov.com
-    exact_domains:
-      - "navy.oncall.datadoghq.com"
-  - name: US2-FED
-    value: gov2
-    weight: 40
-    domain: us2.ddog-gov.com
-    exact_domains:
-      - "navy.oncall.datadoghq.com"
-
 core_product:
   value_required: false
   possible_values:
@@ -317,12 +253,14 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   bits_investigation: [gov,gov2]
+  bits_release: [gov, gov2]
   bits_remediation: [gov,gov2]
   byoc-logs: [gov,gov2]
   byoti: [gov,gov2]
   case_management: [gov2]
   change_tracking: [gov,gov2]
   ci_visibility: [gov,gov2]
+  cicd_optimization: [gov,gov2]
   cloudcraft_apm_overlay: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]
@@ -332,7 +270,7 @@ unsupported_sites:
   configuration_at_runtime: [gov,gov2]
   confluence: [gov,gov2]
   confluent_cloud_integration: [gov,gov2]
-  containers_autoscaling: [gov,gov2]
+  containers_autoscaling_cluster: [gov,gov2] # docs (content/en/containers/autoscaling/cluster.md) — workload autoscaling is GA on gov/gov2, cluster autoscaling is still LA and not available there
   containers_kubernetes_appsec: [gov,gov2]
   continuous_delivery: [gov,gov2]
   continuous_integration: [gov,gov2]
@@ -419,7 +357,6 @@ unsupported_sites:
   safety_center: [gov,gov2]
   scaleway: [gov,gov2]
   service_override_removal: [gov,gov2]
-  setup_remote_config: [gov,gov2]
   snmp_profile_manager: [gov,gov2]
   software_delivery_mcp_tools: [gov,gov2]
   status_pages: [gov,gov2]
@@ -431,6 +368,7 @@ unsupported_sites:
   tag_enrichment: [gov,gov2]
   test_optimization: [gov,gov2]
   tracing_remote_configuration: [gov,gov2]
+  tracking_plans: [gov,gov2]
   universal_service_monitoring: [gov,gov2]
   watchdog_faulty_service_deployment: [us3,us5,eu,ap1,ap2,gov,gov2,uk1]
   wiz: [gov,gov2]

@@ -1,0 +1,80 @@
+---
+// The authorization scopes tables on `/api/latest/scopes/`, one per group of
+// overlapping tags. The grouping is built in `scopesBuilder.ts`.
+//
+// Endpoint pages link to `/api/latest/scopes/#<tag anchor>`. Each anchor is an
+// empty span placed before its heading, so a jump lands with the heading in
+// view.
+import styles from "./ApiScopesTable.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
+import { useTranslations } from "@lib/i18n/i18n";
+import { getScopeGroupsView, type ScopeGroup } from "@lib/api/scopesBuilder";
+
+interface Props {
+  /** Defaults to the groups built from the spec. Passed only by tests. */
+  groups?: ScopeGroup[];
+  /** The level of each group's heading. Defaults to 3. */
+  headingLevel?: 2 | 3 | 4 | 5 | 6;
+}
+
+const { groups = getScopeGroupsView(), headingLevel = 3 } = Astro.props;
+const HeadingTag = `h${headingLevel}` as const;
+const lang = resolveLocale(Astro.currentLocale);
+const translate = useTranslations(lang);
+const cl = classListFactory(styles);
+---
+
+<div class={cl("api-scopes-table")}>
+  {
+    groups.map((group) => (
+      <section class={cl("api-scopes-table__group")}>
+        {group.anchors.map((anchor) => (
+          <span id={anchor} class={cl("api-scopes-table__anchor")} />
+        ))}
+        <HeadingTag class={cl("api-scopes-table__heading")}>
+          {group.heading}
+        </HeadingTag>
+        <table class={cl("api-scopes-table__table")}>
+          <thead>
+            <tr>
+              {/* MISSING_TRANSLATION_LABEL: localize the other column headers once Hugo has i18n keys for them. */}
+              <th class={cl("api-scopes-table__column--name")}>Scope name</th>
+              <th class={cl("api-scopes-table__column--description")}>
+                {translate("description")}
+              </th>
+              <th class={cl("api-scopes-table__column--endpoints")}>
+                Endpoints that require this scope
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {group.scopes.map((scope) => (
+              <tr class={cl("api-scopes-table__row")}>
+                <td>
+                  <code class={cl("api-scopes-table__scope-name")}>
+                    {scope.name}
+                  </code>
+                </td>
+                <td class={cl("api-scopes-table__description")}>
+                  {scope.description}
+                </td>
+                <td>
+                  <ul class={cl("api-scopes-table__endpoints")} role="list">
+                    {scope.endpoints.map((endpoint) => (
+                      <li class={cl("api-scopes-table__endpoint")}>
+                        <a href={localizedHref(lang, endpoint.href)}>
+                          {endpoint.summary}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))
+  }
+</div>

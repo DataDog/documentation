@@ -8,3 +8,12 @@ entries:
       - UpdateIssueAssignee
       - UpdateIssueState
     title: Rename Case Management API documentation to Work Management
+  - change_type: modified
+    date: '2026-10-26'
+    link: https://github.com/DataDog/documentation/pull/40930
+    operations:
+      - GetIssue
+      - SearchIssues
+      - UpdateIssueAssignee
+      - UpdateIssueState
+    title: Add samples to the Get error tracking issue endpoint

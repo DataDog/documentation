@@ -4,47 +4,46 @@ aliases:
 - /es/monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor
 - /es/developers/faq/what-do-notifications-do-in-datadog
 - /es/monitors/notifications/
-description: Envía notificaciones a tus equipos cuando los seguimientos disparen alertas.
+description: Envíe notificaciones a sus equipos cuando los seguimientos activen alertas.
 further_reading:
 - link: /monitors/
   tag: Documentación
-  text: Crea seguimientos
+  text: Cree seguimientos.
 - link: /monitors/manage/
   tag: Documentación
-  text: Gestiona seguimientos
+  text: Administre seguimientos.
 - link: https://learn.datadoghq.com/courses/alert-monitor-notifications
-  tag: Centro de Aprendizaje
-  text: Toma un curso para personalizar las notificaciones de los seguimientos de
-    alerta
+  tag: Centro de aprendizaje
+  text: Tome un curso para personalizar las notificaciones de seguimiento de alerta.
 - link: https://www.datadoghq.com/blog/monitor-notification-rules/
   tag: Blog
-  text: Dirige tus alertas de seguimiento con las reglas de notificación de seguimientos
-    de Datadog
-title: Notificaciones
+  text: Dirija sus alertas de seguimiento con las reglas de notificación de seguimiento
+    de Datadog.
+title: Notifications
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Las notificaciones son un componente clave de los seguimientos que mantienen a tu equipo informado sobre los problemas y facilitan su resolución. Al [crear tu seguimiento][1], configura tu respuesta a:
-- Elabora un mensaje accionable.
-- Activa un flujo de trabajo o crea un flujo de trabajo a partir de un seguimiento.
-- [Crea una incidencia automáticamente][2].
-- Crea un incidente automáticamente.
+Las notificaciones son un componente clave de los seguimientos que mantienen a su equipo informado sobre problemas y ayudan en la resolución de errores. Al [crear su seguimiento][1], configure su respuesta para:
+- Elabore un mensaje procesable.
+- Active un flujo de trabajo o cree un flujo de trabajo desde un seguimiento.
+- [Cree automáticamente un elemento de trabajo][2].
+- Cree automáticamente un incidente.
 
-## Construyendo títulos y mensajes efectivos {#constructing-effective-titles-and-messages}
+## Cómo redactar títulos y mensajes efectivos {#constructing-effective-titles-and-messages}
 
-Este enfoque ayuda a garantizar que los títulos y mensajes de tu seguimiento sean claros, accionables y adaptados a las necesidades de tu audiencia.
-- **Títulos únicos**: Agrega un título único a tu seguimiento (esto es obligatorio). Para seguimientos de múltiples alertas, algunas etiquetas que identifican tu contexto de activación se insertan automáticamente. Puedes usar [variables de etiqueta][3] para mejorar la especificidad.
-- **Campo de mensaje**: El campo de mensaje admite [formato estándar de Markdown][4] y [variables][5]. Usa [variables condicionales][6] para modular el texto de notificación enviado a diferentes contactos con [@notifications](#notifications). Usa [variables de plantilla sintéticas][23] para enriquecer el mensaje de alerta con el contexto de fallos sintéticos.
+Este enfoque ayuda a asegurar que los títulos y mensajes de sus seguimientos sean claros, procesables y adaptados a las necesidades de su audiencia.
+- **Títulos únicos**: Agregue un título único a su seguimiento (esto es obligatorio). Para seguimientos de alertas múltiples, algunas etiquetas que identifican su contexto de activación se insertan automáticamente. Puede usar [variables de etiqueta][3] para mejorar la especificidad.
+- **Campo de mensaje**: El campo de mensaje admite [formato Markdown][4] estándar y [variables][5]. Utilice [variables condicionales][6] para modular el texto de notificación enviado a diferentes contactos con [@notifications](#notifications). Utilice [variables de plantilla de Synthetics][23] para enriquecer el mensaje de alerta con el contexto de fallos de Synthetics.
 
-<div class="alert alert-info"> El soporte para formato Markdown varía según el método de notificación. Algunos canales solo admiten un subconjunto de la sintaxis de Markdown.
+<div class="alert alert-info"> El soporte de formato Markdown difiere según el método de notificación. Algunos canales solo admiten un subconjunto de la sintaxis de Markdown.
 <ul> 
-  <li/>Notificaciones de Slack: Admiten formato básico (negrita, cursiva, código en línea, enlaces). Los encabezados de Markdown (por ejemplo, <code>#</code>, <code>##</code>) y las tablas no se renderizan; aparecen como texto plano.
-  <li/>Notificaciones por correo electrónico: Admiten formato básico (negrita, cursiva, código en línea, enlaces). Las tablas no se renderizan como tablas de Markdown y aparecen como texto plano en el cuerpo del mensaje.
+  <li/>Notificaciones de Slack: Admiten formato básico (negrita, cursiva, código en línea, enlaces). Encabezados de Markdown (por ejemplo, <code>#</code>, <code>##</code>) y las tablas no se renderizan; aparecen como texto sin formato.
+  <li/>Notificaciones por correo electrónico: Admiten formato básico (negrita, cursiva, código en línea, enlaces). Las tablas no se renderizan como tablas de Markdown y aparecen como texto sin formato en el cuerpo del mensaje.
 </ul>
 </div>
 
-{{% collapse-content title="Ejemplo de mensaje de seguimiento" level="h4" expanded=false %}}
-Un caso de uso común para el mensaje de seguimiento es incluir un paso a paso para resolver el problema, por ejemplo:
+{{% collapse-content title="Ejemplo de mensaje de seguimiento" level="h3" expanded=false %}}
+Un caso de uso común para el mensaje de seguimiento es incluir una forma paso a paso de resolver el problema, por ejemplo:
 
 ```text
 {{#is_alert}} <-- conditional variable
@@ -65,113 +64,113 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 {{% /collapse-content %}}
 
 
-## Destinatarios de notificación {#notification-recipients}
-Datadog recomienda usar [reglas de notificación de seguimiento][22] para gestionar las notificaciones de seguimiento. Con las reglas de notificación puedes automatizar qué destinatarios de notificación se añaden a un seguimiento según conjuntos de condiciones predefinidos. Crea diferentes reglas para dirigir las alertas de seguimiento según las etiquetas de la notificación de seguimiento para que no tengas que configurar manualmente los destinatarios ni la lógica de enrutamiento de notificaciones para cada seguimiento individual.
+## Destinatarios de la notificación {#notification-recipients}
+Datadog recomienda utilizar [reglas de notificación de seguimiento][22] para administrar las notificaciones de seguimiento. Con las reglas de notificación, puede automatizar qué destinatarios de notificación se agregan a un seguimiento según conjuntos de condiciones predefinidos. Cree diferentes reglas para enrutar las alertas de seguimiento según las etiquetas de la notificación de seguimiento para que no tenga que configurar manualmente los destinatarios ni la lógica de enrutamiento de notificaciones para cada seguimiento individual.
 
-En las reglas de notificación y en los monitores individuales, puedes usar un `@notification` para agregar a un miembro del equipo, una integración, un flujo de trabajo o una incidencia a tu notificación. A medida que escribes, Datadog recomienda automáticamente opciones existentes en un menú desplegable. Haz clic en una opción para agregarla a tu notificación. Alternativamente, haz clic en **@ Agregar Mención**, **Agregar Flujo de Trabajo**, o **Agregar Incidencia**.
+Tanto en las reglas de notificación como en los monitores individuales, puede usar un `@notification` para agregar un miembro del equipo, una integración, un flujo de trabajo o un elemento de trabajo a su notificación. A medida que escribe, Datadog recomienda automáticamente las opciones existentes en un menú desplegable. Haga clic en una opción para agregarla a su notificación. Alternativamente, haga clic en {{< ui >}}@ Add Mention{{< /ui >}}, {{< ui >}}Add Workflow{{< /ui >}} o {{< ui >}}Add Case{{< /ui >}}.
 
-Una @notification debe tener un espacio entre ella y el último carácter de línea:
+Una @notificación debe tener un espacio entre ella y el último carácter de la línea:
 
-| Formato Correcto | Formato Incorrecto |
+| Formato correcto | Formato incorrecto |
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
-{{% collapse-content title="Integrations" level="h4" expanded=false %}}
+{{% collapse-content title="Integraciones" level="h3" expanded=false %}}
 {{% notifications-integrations %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Teams" level="h4" expanded=false %}}
+{{% collapse-content title="Teams" level="h3" expanded=false %}}
 {{% notifications-teams %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Incidencias" level="h4" expanded=false %}}
+{{% collapse-content title="Incidencias" level="h3" expanded=false %}}
 {{% notifications-cases %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Correo Electrónico" level="h4" expanded=false %}}
+{{% collapse-content title="Correo electrónico" level="h3" expanded=false %}}
 {{% notifications-email %}}
 {{% /collapse-content %}}
 
-### Edición masiva de @-handles de seguimiento {#bulk-editing-monitor-handles}
-Datadog admite la edición de los destinatarios de mensajes de alerta en múltiples seguimientos a la vez. Utiliza esta función para agregar, eliminar o reemplazar eficientemente `@-handles` en el cuerpo del mensaje del seguimiento. Los casos de uso incluyen:
+### Edición masiva de @-handles de seguimientos {#bulk-editing-monitor-handles}
+Datadog permite editar los destinatarios de los mensajes de alerta en varios seguimientos a la vez. Utilice esta función para agregar, eliminar o reemplazar `@-handles` de manera eficiente en el cuerpo del mensaje del seguimiento. Los casos de uso incluyen:
 
-- **Intercambiar un handle**: Reemplaza un handle por otro en múltiples seguimientos. Por ejemplo, cambia `@pagerduty-sre` por `@oncall-sre`. También puedes intercambiar un solo handle por múltiples handles, como reemplazar `@pagerduty-sre` con `@pagerduty-sre` y `@oncall-sre`, para soportar paginación dual o cobertura de alertas ampliada.
-- **Agregar un handle**: Agregar un nuevo destinatario sin eliminar los existentes. Por ejemplo, agrega `@slack-infra-leads` a todos los seguimientos seleccionados.
-- **Remove a handle**: Eliminar un handle específico de los mensajes del seguimiento. Por ejemplo, elimina `@webhook-my-legacy-event-intake`.
+- **Intercambiar un handle**: Reemplace un handle por otro en varios seguimientos. Por ejemplo, cambie `@pagerduty-sre` por `@oncall-sre`. También puede intercambiar un solo handle por varios handles, como reemplazar `@pagerduty-sre` por `@pagerduty-sre` y `@oncall-sre`, para admitir la paginación dual o una cobertura de alertas ampliada.
+- **Agregar un handle**: Agregue un nuevo destinatario sin eliminar los existentes. Por ejemplo, agregue `@slack-infra-leads` a todos los seguimientos seleccionados.
+- **Eliminar un handle**: Elimine un handle específico de los mensajes del seguimiento. Por ejemplo, elimine `@webhook-my-legacy-event-intake`.
 
 ## Flujos de trabajo {#workflows}
-Puedes activar una [automatización de flujo de trabajo][8] o crear un nuevo flujo de trabajo desde un seguimiento.
+Puede activar una [automatización de flujo de trabajo][8] o crear un nuevo flujo de trabajo desde un seguimiento.
 
-Antes de agregar un flujo de trabajo a un seguimiento, [agrega un disparador de seguimiento al flujo de trabajo][9].
+Antes de agregar un flujo de trabajo a un seguimiento, [agregue un activador de seguimiento al flujo de trabajo][9].
 
-Después de agregar el disparador de seguimiento, [agrega un flujo de trabajo existente a tu seguimiento][10] o crea un nuevo flujo de trabajo. Para crear un nuevo flujo de trabajo desde la página de seguimientos:
+Después de agregar el activador del seguimiento, [agregue un flujo de trabajo existente a su seguimiento][10] o cree un nuevo flujo de trabajo. Para crear un nuevo flujo de trabajo desde la página de seguimientos:
 
-1. Haz clic en **Agregar flujo de trabajo**.
-1. Haz clic en el icono **+** y selecciona un Plano, o selecciona **Comenzar desde cero**.
-   {{< img src="/monitors/notifications/create-workflow.png" alt="Haz clic en el botón + para agregar un nuevo flujo de trabajo" style="width:90%;">}}
+1. Haga clic en {{< ui >}}Add Workflow{{< /ui >}}.
+1. Haga clic en el icono {{< ui >}}+{{< /ui >}} y seleccione un Blueprint, o seleccione {{< ui >}}Start From Scratch{{< /ui >}}.
+   {{< img src="/monitors/notifications/create-workflow.png" alt="Haga clic en el botón + para agregar un nuevo flujo de trabajo" style="width:90%;">}}
 
-Para más información sobre cómo construir un flujo de trabajo, consulta [Construir flujos de trabajo][11].
+Para obtener más información sobre cómo crear un flujo de trabajo, consulte [Build workflows][11].
 
 ## Incidentes {#incidents}
-Los incidentes pueden crearse automáticamente a partir de un seguimiento cuando este cambia a un estado `alert`, `warn` o `no data`. Haz clic en **Agregar incidente** y selecciona una opción de `@incident-`. Los administradores pueden crear `@incident-` opciones en [Configuraciones de incidentes][12].
+Los incidentes pueden crearse automáticamente desde un seguimiento cuando este cambia a un estado `alert`, `warn` o `no data`. Haga clic en {{< ui >}}Add Incident{{< /ui >}} y seleccione una opción de `@incident-`. Los administradores pueden crear opciones de `@incident-` en [Incident Settings][12].
 
-Cuando se crea un incidente a partir de un seguimiento, los [valores de campo][13] del incidente se rellenan automáticamente según las etiquetas del seguimiento. Por ejemplo, si tu seguimiento tiene una etiqueta `service:payments`, el campo de servicio del incidente se establecerá en "pagos". Para recibir notificaciones sobre estos incidentes, asegúrate de que las etiquetas del seguimiento se alineen con tus reglas de notificación de incidentes. **Nota**: Las reglas de notificación de incidentes se configuran por separado de las reglas de notificación de seguimientos y deben configurarse de manera independiente. Para más información, consulte [Notificación de Incidente][14].
+Cuando se crea un incidente desde un seguimiento, los [valores de campo][13] del incidente se completan automáticamente según las etiquetas del seguimiento. Por ejemplo, si su seguimiento tiene una etiqueta `service:payments`, el campo de servicio del incidente se establecerá en "payments". Para recibir notificaciones de estos incidentes, asegúrese de que las etiquetas del seguimiento coincidan con sus reglas de notificación de incidentes. **Nota**: Las reglas de notificación de incidentes se configuran por separado de las reglas de notificación del seguimiento y deben configurarse de forma independiente. Para obtener más información, consulte [Incident Notification][14].
 
 ## Alternar contenido adicional {#toggle-additional-content}
 
-Las notificaciones de monitor incluyen contenido como la consulta del monitor, las menciones @ utilizadas, instantáneas de métricas (para monitores métricos), y enlaces de regreso a páginas relevantes en Datadog. Tiene la opción de elegir qué contenido le gustaría incluir o excluir de las notificaciones para monitor individuales.
+Las notificaciones de seguimiento incluyen contenido como la consulta del seguimiento, las @-menciones utilizadas, instantáneas de métricas (para seguimientos de métricas) y enlaces a páginas relevantes en Datadog. Usted tiene la opción de elegir qué contenido desea incluir o excluir de las notificaciones para seguimientos individuales.
 
 <div class="alert alert-danger">Las métricas de distribución con agregadores de percentiles (como `p50`, `p75`, `p95` o `p99`) no generan un gráfico de instantánea en las notificaciones. </div>
 
-{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Establecer un preajuste de seguimiento" style="width:70%;" >}}
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Establezca un ajuste preestablecido de seguimiento." style="width:70%;" >}}
 
 Las opciones son:
 
-- **Predeterminado**: No se oculta contenido.
-- **Hide Query**: Eliminar la consulta del seguimiento del mensaje de notificación.
-- **Ocultar Menciones**: Eliminar las menciones @ que se utilizan en el mensaje de notificación.
-- **Hide All**: El mensaje de notificación no incluye consulta, menciones, ninguna instantánea (para seguimientos métricos) o enlaces adicionales en los pies de página.
+- {{< ui >}}Default{{< /ui >}}: No se oculta ningún contenido.
+- {{< ui >}}Hide Query{{< /ui >}}: Elimine la consulta del seguimiento del mensaje de notificación.
+- {{< ui >}}Hide Handles{{< /ui >}}: Elimine las @-menciones que se utilizan en el mensaje de notificación.
+- {{< ui >}}Hide All{{< /ui >}}: El mensaje de notificación no incluye la consulta, los handles, ninguna instantánea (para seguimientos de métricas) ni enlaces adicionales en los pies de página.
 
-**Nota**: Dependiendo de la integración, es posible que algunos contenidos no se muestren de forma predeterminada.
+**Nota**: Dependiendo de la integración, es posible que cierto contenido no se muestre de forma predeterminada.
 
-## Re-notificar {#renotify}
+## Renotificar {#renotify}
 
-Habilitar la re-notificación del seguimiento (opcional) para recordar a tu equipo que un problema no está resuelto.
+Habilite la renotificación del seguimiento (opcional) para recordarle a su equipo que un problema no se ha resuelto.
 
-  {{< img src="monitors/notifications/renotify_options.png" alt="Habilitar re-notificación" style="width:90%;" >}}
+  {{< img src="monitors/notifications/renotify_options.png" alt="Habilitar renotificación" style="width:90%;" >}}
 
-Configura el intervalo de re-notificación, los estados del seguimiento desde los cuales se envía la re-notificación (dentro de `alert`, `no data` y `warn`) y opcionalmente establece un límite al número de mensajes de re-notificación enviados.
+Configure el intervalo de renotificación, los estados del seguimiento desde los cuales el seguimiento vuelve a notificar (dentro de `alert`, `no data` y `warn`) y, opcionalmente, establezca un límite en la cantidad de mensajes de renotificación enviados.
 
-Por ejemplo, configura el seguimiento para `stop renotifying after 1 occurrence` para recibir un solo mensaje de escalación después de la alerta principal.
-**Nota:** [Variables de atributo y etiqueta][3] en la re-notificación se completan con los datos disponibles para el seguimiento durante el período de tiempo de la re-notificación.
+Por ejemplo, configure el seguimiento en `stop renotifying after 1 occurrence` para recibir un único mensaje de escalada después de la alerta principal.
+**Nota:** Las [variables de atributos y etiquetas][3] en la renotificación se completan con los datos disponibles para el seguimiento durante el período de tiempo de la renotificación.
 
-Si la re-notificación está habilitada, se te ofrece la opción de incluir un mensaje de escalación que se envía si el seguimiento permanece en uno de los estados elegidos durante el período de tiempo especificado.
+Si la renotificación está habilitada, se le da la opción de incluir un mensaje de escalada que se envía si el seguimiento permanece en uno de los estados elegidos durante el período de tiempo especificado.
 
-El mensaje de escalación se puede agregar de las siguientes maneras:
+El mensaje de escalada se puede agregar de las siguientes maneras:
 
 * En el `{{#is_renotify}}` bloque en el mensaje de notificación original (recomendado).
-* En el campo *Mensaje de Renotificación* en la `Configure notifications and automations` sección.
+* En el campo {{< ui >}}Renotification message{{< /ui >}} en la sección {{< ui >}}Configure notifications and automations{{< /ui >}}.
 * Con el atributo `escalation_message` en la API.
 
-Si utilizas el `{{#is_renotify}}` bloque, el mensaje de notificación original también se incluye en la renotificación, así que:
+Si utiliza el bloque `{{#is_renotify}}`, el mensaje de notificación original también se incluye en la renotificación, por lo que:
 
-1. Incluye solo detalles adicionales en el `{{#is_renotify}}` bloque y no repitas los detalles del mensaje original.
-2. Envía el mensaje de escalación a un subconjunto de grupos.
+1. Incluya solo detalles adicionales en el bloque `{{#is_renotify}}` block y no repita los detalles del mensaje original.
+2. Envíe el mensaje de escalada a un subconjunto de grupos.
 
-Aprende a configurar tus seguimientos para esos casos de uso en la [sección de ejemplos][15].
+Aprenda a configurar sus monitores para esos casos de uso en la [sección de ejemplos][15].
 
 ## Metadatos {#metadata}
 
-Agrega metadatos (Prioridad, Etiquetas, Equipo de Datadog) a tu monitor. La Prioridad del Monitor te permite establecer la importancia de tu monitor a través del nivel P (P1 a P5). Las etiquetas del monitor--que son diferentes de las etiquetas de métrica--se utilizan en la interfaz de usuario para agrupar y buscar monitores. Si se configuran políticas de etiquetas, se deben agregar las etiquetas y valores de etiqueta requeridos. Para aprender más, consulta [Políticas de Etiquetas][16]. Los Equipos de Datadog te permiten establecer un nivel de propiedad para este monitor y ver todos los monitores vinculados a tu equipo. Para aprender más, consulta [Equipos de Datadog][17].
+Agregue metadatos (Prioridad, Etiquetas, Datadog Team) a su monitor. La Prioridad del monitor le permite establecer la importancia de su monitor mediante un nivel P (de P1 a P5). Las etiquetas de monitor (que son diferentes de las etiquetas de métricas) se utilizan en la interfaz de usuario para agrupar y buscar monitores. Si las políticas de etiquetas están configuradas, es necesario agregar las etiquetas y los valores de etiqueta requeridos. Para obtener más información, consulte [Políticas de etiquetas][16]. Datadog Teams le permite establecer una capa de propiedad para este monitor y ver todos los monitores vinculados a su equipo. Para obtener más información, consulte [Datadog Teams][17].
 
 {{< img src="monitors/notifications/notifications_metadata.png" alt="Vista de la configuración de etiquetas de política. Debajo de 'Etiquetas de política' hay tres etiquetas de ejemplo, cost_center, product_id y env, junto a un menú desplegable 'Seleccionar valor'." style="width:100%;" >}}
 
-{{% collapse-content title="Prioridad" level="h4" expanded=false %}}
+{{% collapse-content title="Prioridad" level="h3" expanded=false %}}
 
-Agrega una prioridad (opcional) asociada con tus monitores. Los valores van de P1 a P5, siendo P1 la prioridad más alta y P5 la más baja.
-Para anular la prioridad del monitor en el mensaje de notificación, usa `{{override_priority 'Pi'}}` where `Pi` está entre P1 y P5.
+Agregue una prioridad (opcional) asociada a sus monitores. Los valores van de P1 a P5, siendo P1 la prioridad más alta y P5 la más baja.
+Para anular la prioridad del monitor en el mensaje de notificación, use `{{override_priority 'Pi'}}` where `Pi` está entre P1 y P5.
 
-Por ejemplo, puedes establecer diferentes prioridades para `alert` y `warning` notificaciones:
+Por ejemplo, puede establecer diferentes prioridades para las notificaciones de `alert` y `warning`:
 
 ```
 {{#is_alert}}
@@ -188,33 +187,33 @@ Por ejemplo, puedes establecer diferentes prioridades para `alert` y `warning` n
 
 ## Agregación {#aggregation}
 
-Si la consulta del monitor está agrupada, puedes eliminar una o más de las dimensiones de la agrupación de notificación, o eliminarlas todas y notificar como una alerta simple.
+Si la consulta del monitor está agrupada, puede eliminar una o más dimensiones de la agrupación de notificaciones, o eliminarlas todas y notificar como una Alerta simple.
 
-{{< img src="monitors/notifications/notifications_aggregation.png" alt="Vista de la configuración de agregación establecida en multi-alerta." style="width:100%;" >}}
+{{< img src="monitors/notifications/notifications_aggregation.png" alt="Vista de la configuración de agregación establecida en multi-alert." style="width:100%;" >}}
 
-Encuentra más información sobre esta función en [Configurar Monitores][18]
+Encuentre más información sobre esta función en [Configure Monitors][18]
 
 ## Notificaciones de prueba {#test-notifications}
 
-Después de definir tu monitor, prueba las notificaciones con el botón **Notificaciones de Prueba** en la parte inferior derecha de la página del monitor.
+Después de definir su monitor, pruebe las notificaciones con el botón {{< ui >}}Test Notifications{{< /ui >}} en la parte inferior derecha de la página del monitor.
 
-Las notificaciones de prueba son compatibles con los [tipos de monitores][19]: host, métrica, anomalía, valor anómalo, pronóstico, registro, rum, apm, integración (solo verificación), proceso (solo verificación), red (solo verificación), verificación personalizada, evento y composite.
+Las notificaciones de prueba son compatibles con los [tipos de monitor][19]: servidor, métrica, anomalía, valor anómalo, pronóstico, logs, RUM, APM, integración (solo verificación), proceso (solo verificación), red (solo verificación), verificación personalizada, evento y composite.
 
-1. Desde el pop-up de notificaciones de prueba, elige la transición del monitor para probar y el grupo (disponible solo si la consulta tiene [agrupación][20]). Solo puedes probar estados que están disponibles en la configuración del monitor para los umbrales especificados en las condiciones de alerta. [Umbrales de recuperación][21] son una excepción, ya que Datadog envía una notificación de recuperación una vez que el monitor ya no está en alerta, o no tiene condiciones de advertencia.
+1. Desde la ventana emergente de notificaciones de prueba, elija la transición del monitor que desea probar y el grupo (disponible solo si la consulta tiene [grouping][20]). Solo puede probar los estados que están disponibles en la configuración del monitor para los umbrales especificados en las condiciones de alerta. Los [umbrales de recuperación][21] son una excepción, ya que Datadog envía una notificación de recuperación una vez que el monitor ya no está en alerta o no tiene condiciones de alerta.
 
-    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Prueba las notificaciones para este monitor" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="Pruebe las notificaciones para este monitor" style="width:70%;" >}}
 
-1. Haz clic en **Ejecutar Prueba** para enviar notificaciones a las personas y servicios listados en el monitor.
+1. Haga clic en {{< ui >}}Run Test{{< /ui >}} para enviar notificaciones a las personas y servicios listados en el monitor.
 
-### Eventos {#events}
+### Events {#events}
 
-Las notificaciones de prueba producen eventos que pueden ser buscados dentro del explorador de eventos. Estas notificaciones indican quién inició la prueba en el cuerpo del mensaje con `[TEST]` en el título de la notificación.
+Las notificaciones de prueba generan eventos que se pueden buscar dentro del Event Explorer. Estas notificaciones indican quién inició la prueba en el cuerpo del mensaje con `[TEST]` en el título de la notificación.
 
 Las variables de etiqueta solo se completan en el texto de los eventos secundarios de Datadog. El evento principal solo muestra un resumen de agregación.
 
 ### Variables {#variables-test-notification}
 
-Las variables de mensaje se completan automáticamente con un grupo seleccionado aleatoriamente según el contexto de la definición de tu monitor, por ejemplo:
+Las variables de mensaje se completan automáticamente con un grupo seleccionado al azar según el contexto de la definición de su monitor, por ejemplo:
 
 ```text
 {{#is_alert}}
@@ -222,20 +221,20 @@ Las variables de mensaje se completan automáticamente con un grupo seleccionado
 {{/is_alert}}
 ```
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/configuration
-[2]: /es/incident_response/case_management/create_case/#automatic-case-creation
+[2]: /es/incident_response/work_management/create_work_item/#automatic-work-item-creation
 [3]: /es/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /es/monitors/notify/variables/
 [6]: /es/monitors/notify/variables/#conditional-variables
-[8]: /es/service_management/workflows/
-[9]: /es/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
-[10]: /es/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
-[11]: /es/service_management/workflows/build/
+[8]: /es/actions/workflows/
+[9]: /es/actions/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[10]: /es/actions/workflows/trigger/#add-the-workflow-to-your-monitor
+[11]: /es/actions/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [13]: /es/incident_response/incident_management/setup_and_configuration/property_fields
 [14]: /es/incident_response/incident_management/notification

@@ -1,3 +1,3 @@
 ---
-title: Experimentación de Agent Observability agregada
+title: Experimentación agregada de Agent Observability
 ---

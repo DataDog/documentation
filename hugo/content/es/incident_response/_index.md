@@ -3,6 +3,9 @@ cascade:
   algolia:
     rank: 70
 further_reading:
+- link: https://www.datadoghq.com/blog/fedramp-high-incident-response/
+  tag: Blog
+  text: Ejecute la respuesta a incidentes en su entorno FedRAMP High
 - link: https://app.datadoghq.com/release-notes?category=Incident%20Response
   tag: Notas de la versión
   text: ¡Consulte las últimas versiones de Datadog Incident Response! (Se requiere

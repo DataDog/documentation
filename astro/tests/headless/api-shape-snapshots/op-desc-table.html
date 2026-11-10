@@ -1,0 +1,96 @@
+<!-- op-desc-table: /api/latest/rendering-shapes/list-scanned-assets-metadata/ -->
+<h3 class="api-endpoint__overview-heading _api-endpoint__overview-heading_071384">Overview</h3>
+<p>Get a list of security scanned assets metadata for an organization.</p>
+<h3>Pagination</h3>
+<p>For the "List Vulnerabilities" endpoint, see the <a href="#pagination">Pagination section</a>.</p>
+<h3>Filtering</h3>
+<p>For the "List Vulnerabilities" endpoint, see the <a href="#filtering">Filtering section</a>.</p>
+<h3>Metadata</h3>
+<p>For the "List Vulnerabilities" endpoint, see the <a href="#metadata">Metadata section</a>.</p>
+<h3>Related endpoints</h3>
+<p>
+  This endpoint returns additional metadata for cloud resources that is not available from the standard resource
+  endpoints. To access a richer dataset, call this endpoint together with the relevant resource endpoint(s) and merge
+  (join) their results using the resource identifier.
+</p>
+<p><strong>Hosts</strong></p>
+<p>
+  To enrich host data, join the response from the
+  <a href="https://docs.datadoghq.com/api/latest/hosts/">Hosts</a> endpoint with the response from the
+  scanned-assets-metadata endpoint on the following key fields:
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>ENDPOINT</th>
+      <th>JOIN KEY</th>
+      <th>TYPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://docs.datadoghq.com/api/latest/hosts/">/api/v1/hosts</a></td>
+      <td>host_list.host_name</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>/api/v2/security/scanned-assets-metadata</td>
+      <td>data.attributes.asset.name</td>
+      <td>string</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Host Images</strong></p>
+<p>
+  To enrich host image data, join the response from the
+  <a href="https://docs.datadoghq.com/api/latest/hosts/">Hosts</a> endpoint with the response from the
+  scanned-assets-metadata endpoint on the following key fields:
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>ENDPOINT</th>
+      <th>JOIN KEY</th>
+      <th>TYPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://docs.datadoghq.com/api/latest/hosts/">/api/v1/hosts</a></td>
+      <td>host_list.tags_by_source["Amazon Web Services"]["image"]</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>/api/v2/security/scanned-assets-metadata</td>
+      <td>data.attributes.asset.name</td>
+      <td>string</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Container Images</strong></p>
+<p>
+  To enrich container image data, join the response from the
+  <a href="https://docs.datadoghq.com/api/latest/container-images/">Container Images</a> endpoint with the response from
+  the scanned-assets-metadata endpoint on the following key fields:
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>ENDPOINT</th>
+      <th>JOIN KEY</th>
+      <th>TYPE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://docs.datadoghq.com/api/latest/container-images/">/api/v2/container_images</a></td>
+      <td><code>data.attributes.name</code>@<code>data.attributes.repo_digest</code></td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>/api/v2/security/scanned-assets-metadata</td>
+      <td>data.attributes.asset.name</td>
+      <td>string</td>
+    </tr>
+  </tbody>
+</table>

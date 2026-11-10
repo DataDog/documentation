@@ -236,7 +236,7 @@ The web provider also supports these optional settings:
 
 | Option | Default | Use |
 | --- | --- | --- |
-| `enableExposureLogging` | `true` | Send exposure events to the exposures intake. |
+| `trackExposures` | `true` | Send exposure events to the exposures intake. Available in version 2.3.0 and later. Replaces the deprecated `enableExposureLogging` option. To record exposures in your own data store, see [Record Feature Flag Exposures in Your Own Data Store][7]. |
 | `enableFlagEvaluationTracking` | `true` | Send aggregated evaluation telemetry. |
 | `enableRumFeatureFlagTracking` | `true` | Add flag evaluations to RUM events when Browser RUM is available. Enabling this option can increase RUM-billed event counts. |
 | `flagEvaluationTrackingInterval` | `10000` ms | Flush interval for evaluation telemetry. |
@@ -245,6 +245,7 @@ The web provider also supports these optional settings:
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
 | `flagConfigurationFetch` | `globalThis.fetch` | Provide a Fetch-compatible implementation for flag configuration requests. |
+| `flagSelection` | unset | Load only the flags that match a set of tags or key patterns. See [Load a subset of flags](#load-a-subset-of-flags). |
 
 ### Supply initial precomputed fallback data
 
@@ -285,7 +286,7 @@ This option does **not** skip the initialization request. To initialize entirely
 
 The browser provider does not add a timeout or retries by default. In npm installations of `@datadog/openfeature-browser` 1.4.0 and later, use `withTimeout` and `withRetry` to limit each request attempt and retry transient failures. These helpers are not available in the CDN bundle.
 
-<div class="alert alert-info">The `flagConfigurationFetch` option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
+<div class="alert alert-info">The <code>flagConfigurationFetch</code> option applies only to flag configuration requests. It does not affect exposure, aggregated flag evaluation, or RUM telemetry requests.</div>
 
 {{< code-block lang="javascript" >}}
 import { DatadogProvider, withRetry, withTimeout } from '@datadog/openfeature-browser';
@@ -303,6 +304,100 @@ const provider = new DatadogProvider({
 : Sets the number of retries after the initial request. Set the retry count to `0` to disable retries. Accepted values are integers from `0` to `10`. Retries cover Fetch `TypeError` failures, timeout errors, HTTP 408, and HTTP 5xx responses. Caller cancellation and HTTP 429 responses are not retried. Retries use randomized exponential backoff capped at 30 seconds. For HTTP 503, a valid `Retry-After` value up to 30 seconds is a minimum delay before the backoff. A response that requests a longer delay is not retried. Browsers report network, CORS, and CSP failures as `TypeError`, so the wrapper cannot separate these causes.
 
 In the example, `withTimeout` is inside `withRetry`. Therefore, each attempt has its own five-second timeout, and `1` allows one retry after the initial request.
+
+### Load a subset of flags
+
+In `@datadog/openfeature-browser` 2.2.0 and later, use `flagSelection` to load only the flags your application needs instead of every flag in the environment. Loading a subset reduces the size of the flag configuration that the SDK downloads and caches, which helps when an environment contains flags for many applications.
+
+Pass `flagSelection` to the provider when you create it. The selection is fixed for the provider's lifetime. To load a different set of flags, create a new provider.
+
+`flagSelection` accepts two optional lists:
+
+`tags`
+: Flag tags to match, such as `app:checkout-web`. A flag matches if it has any of the listed tags. Tags match exactly and are case-sensitive.
+
+`keyPatterns`
+: Patterns to match against the whole flag key. `*` matches any sequence of characters, including none, anywhere in the pattern. Every other character, including `?`, `[`, `]`, `{`, and `}`, matches only itself. For example, `checkout-*` matches `checkout-banner` but not `new-checkout-banner`, and `*-checkout-*` matches `new-checkout-banner`.
+
+A flag loads if it matches any listed tag **or** any key pattern. In the following example, the SDK loads every flag tagged `app:checkout-web` and every flag whose key starts with `checkout-`:
+
+```javascript
+import { DatadogProvider } from '@datadog/openfeature-browser';
+
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+  flagSelection: {
+    tags: ['app:checkout-web'],
+    keyPatterns: ['checkout-*'],
+  },
+});
+```
+
+<div class="alert alert-warning">Team tags can change when flag ownership changes, which changes the flags your application loads. Instead of selecting by team tags, add tags to your flags specifically for selection, such as <code>app:checkout-web</code>.</div>
+
+#### Limits and validation
+
+Before sending the selection, the SDK trims leading and trailing whitespace from each value, removes empty values and duplicates, and sorts each list. After this processing, the selection must meet these limits:
+
+- `tags` contains at most 31 values.
+- `keyPatterns` contains at most 31 values.
+- Each tag is at most 200 bytes (UTF-8).
+- Each key pattern is at most 200 bytes (UTF-8).
+
+A selection cannot include a tag longer than 200 bytes, so keep the tags you add to flags for selection at 200 bytes or less.
+
+If both lists are empty after this processing, the SDK sends no selection and loads the full flag configuration without logging an error.
+
+If the flag selection is malformed or exceeds a limit, the SDK does not send it in the flag configuration request, logs an error to the browser console, and loads the full flag configuration.
+
+Because the SDK checks these limits first, selections that fail them never reach Datadog. Datadog can still ignore a selection that passes these checks, for example when the selection is too long to send in one request. In that case, Datadog returns the full flag configuration with a `DD-Flag-Selection-Ignored` header that gives one of the following reasons, and the SDK logs an error to the browser console:
+
+| Reason | Meaning |
+| --- | --- |
+| `too_many_values` | A list contains more than 31 values, or the selection is too long to send in one request. |
+| `invalid_tag` | A tag is longer than 200 bytes. |
+| `invalid_key_pattern` | A key pattern is longer than 200 bytes. |
+| `malformed_selection` | The selection could not be parsed. |
+| `tag_load_failed` | Flag tags could not be loaded for this request. The full configuration is returned so that evaluation can continue. |
+
+The SDK logs these errors to the browser console:
+
+| Message | Cause |
+| --- | --- |
+| `Datadog Browser SDK: flagSelection was not sent (<REASON>: <DETAIL>). Loading the full flag configuration.` | The selection is malformed or exceeds a limit. |
+| `Datadog Browser SDK: flagSelection was ignored by the server (<REASON>). Loaded the full flag configuration.` | Datadog ignored the selection. See the reasons in the previous table. |
+
+If you route flag configuration requests through a proxy, see [Proxy Feature Flag SDK Traffic][8] for the header your proxy must pass through.
+
+#### Evaluate flags outside the selection
+
+Flags outside the selection are not loaded. Evaluating one of these flags returns the default value you supply, with the error code `FLAG_NOT_FOUND`:
+
+{{< code-block lang="javascript" >}}
+const client = OpenFeature.getClient();
+// 'search-ranking' has no app:checkout-web tag and does not match checkout-*
+const details = client.getBooleanDetails('search-ranking', false);
+
+console.log(details.value);     // false (the supplied default)
+console.log(details.errorCode); // 'FLAG_NOT_FOUND'
+{{< /code-block >}}
+
+#### Initial configuration is not filtered
+
+`flagSelection` does not filter configuration that you supply with `initialFlagsConfiguration`. The SDK uses that configuration as provided. For details, see the [Supply initial precomputed fallback data](#supply-initial-precomputed-fallback-data) section.
+
+#### Rules-based configuration
+
+`fetchRulesConfiguration()` from `@datadog/openfeature-browser/rules-based` accepts the same `flagSelection` option, with the same matching rules and limits. The request URL, including the encoded selection, must be at most 8,192 bytes. If it would be longer, the SDK does not send the selection, logs a `too_many_values` error to the browser console, and loads the full configuration. See [Browser Rules-Based Evaluation][4].
+
+The SDK sends the selection as `selected_flag_tags` and `selected_flag_key_patterns` query parameters, with one parameter for each value. If you route this request through a proxy or a custom `fetch` implementation, forward all of these parameters unchanged. If you cache the response, include these parameters in the cache key so that requests with different selections do not share a cached response.
+
+## Record exposures in your own data store
+
+Use `ExposureHook` to record exposures in your own logs, data warehouse, or analytics pipeline. It calls your code after each flag evaluation with the same exposure decision that the provider uses for Datadog. To stop sending exposures to Datadog, set `trackExposures: false`. This requires `@datadog/openfeature-browser` 2.3.0 or later. See [Record Feature Flag Exposures in Your Own Data Store][7].
 
 ## Advanced: application-managed configuration
 
@@ -368,3 +463,5 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
 [6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[7]: /feature_flags/guide/record_exposures_in_your_own_data_store/
+[8]: /feature_flags/guide/proxy_sdk_traffic/

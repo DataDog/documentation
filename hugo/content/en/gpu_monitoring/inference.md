@@ -13,10 +13,6 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-tracing/" >}}
-Optimizing inference workloads with Continuous Tracing with GPU Monitoring is in Early Access Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Inference workloads serve live traffic, so slow responses and errors directly affect your users. Underused GPUs also drive up serving costs. The Inference page in GPU Monitoring shows the performance of each model deployment alongside the health of the GPUs it runs on. Your MLOps, platform, and ML engineering teams can find and fix serving issues in one place.
@@ -47,7 +43,7 @@ Setup uses the vLLM integration, which collects engine metrics.
 
 To begin monitoring your inference workloads, you must meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running the inference Agent image (`7.85.0-rc.5`).
+- You are running Datadog Agent version 7.85.0 or later.
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM.
 
@@ -55,11 +51,11 @@ To begin monitoring your inference workloads, you must meet the following criter
 
 If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
 
-### 1. Use the inference Agent image
+### 1. Update the Datadog Agent
 
-The inference Agent image includes the vLLM check, so you don't need to install the vLLM integration separately.
+Datadog Agent 7.85.0 and later includes the vLLM check, so you don't need to install the vLLM integration separately.
 
-Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
+If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
 ```yaml
 spec:
@@ -69,10 +65,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-jmx` or `7.85.0-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
@@ -149,14 +145,12 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
-| `vllm.time_per_output_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -172,7 +166,7 @@ Setup uses two integrations. The Dynamo integration collects frontend and worker
 
 To begin monitoring your inference workloads, you must meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running the inference Agent image (`7.85.0-rc.5`).
+- You are running Datadog Agent version 7.85.0 or later.
 - Your inference workloads run on Kubernetes.
 - You are serving models with vLLM workers in an NVIDIA Dynamo deployment.
 
@@ -180,11 +174,11 @@ To begin monitoring your inference workloads, you must meet the following criter
 
 If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The following steps require GPU Monitoring to be enabled.
 
-### 1. Use the inference Agent image
+### 1. Update the Datadog Agent
 
-The inference Agent image includes both the Dynamo and vLLM checks, so you don't need to install either integration separately.
+Datadog Agent 7.85.0 and later includes both the Dynamo and vLLM checks, so you don't need to install either integration separately.
 
-Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
+If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
 ```yaml
 spec:
@@ -194,10 +188,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-jmx` or `7.85.0-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
@@ -331,7 +325,7 @@ To graph percentiles on certain vLLM and Dynamo metrics, you must opt in to [adv
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your vLLM worker workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -346,15 +340,16 @@ Setup uses two integrations. The [Ray integration][5] collects Ray cluster metri
 ### Prerequisites
 
 To begin monitoring your inference workloads, you must meet the following criteria:
-- You have [GPU Monitoring enabled][1] with the inference Agent image (`7.85.0-rc.5`).
+- You have [GPU Monitoring enabled][1].
+- You are running Datadog Agent version 7.85.0 or later.
 - Your inference workloads run on Kubernetes, with Ray clusters managed by KubeRay.
 - You are serving models with vLLM inside Ray, for example with Ray Serve.
 
-### 1. Use the inference Agent image
+### 1. Update the Datadog Agent
 
-The inference Agent image includes both the Ray and vLLM checks, so you don't need to install either integration separately.
+Datadog Agent 7.85.0 and later includes both the Ray and vLLM checks, so you don't need to install either integration separately.
 
-Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
+If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
 ```yaml
 spec:
@@ -364,10 +359,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-jmx` or `7.85.0-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
@@ -475,13 +470,12 @@ To graph percentiles on certain vLLM metrics, you must opt in to [advanced query
 
 | Metric |
 |--------|
-| `vllm.time_to_first_token.seconds` |
 | `vllm.request.prompt_tokens` |
 | `vllm.request.generation_tokens` |
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your Ray worker workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
@@ -499,7 +493,7 @@ Setup uses the [SGLang integration][5], which collects engine metrics.
 
 To begin monitoring your inference workloads, you must meet the following criteria:
 - You have [GPU Monitoring enabled][1].
-- You are running the inference Agent image (`7.85.0-rc.5`).
+- You are running Datadog Agent version 7.85.0 or later.
 - Your inference workloads run on Kubernetes.
 - You are serving models with standalone SGLang.
 
@@ -507,11 +501,11 @@ To begin monitoring your inference workloads, you must meet the following criter
 
 If you haven't already, [set up GPU Monitoring][1] on your GPU hosts. The SGLang check runs only when GPU Monitoring is enabled.
 
-### 1. Use the inference Agent image
+### 1. Update the Datadog Agent
 
-The inference Agent image includes the SGLang check, so you don't need to install the SGLang integration separately.
+Datadog Agent 7.85.0 and later includes the SGLang check, so you don't need to install the SGLang integration separately.
 
-Merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
+If you are running an earlier version, merge the following configuration into the existing `DatadogAgent` resource. Keep your existing credentials, site, and other features unchanged:
 
 ```yaml
 spec:
@@ -521,10 +515,10 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: 7.85.0-rc.5
+        tag: 7.85.0
 ```
 
-To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-rc.5-jmx` or `7.85.0-rc.5-full`.
+To use a JMX-enabled or full Agent image, set `tag` to `7.85.0-jmx` or `7.85.0-full`.
 
 Apply the resource and wait for the Agent DaemonSet to roll out:
 
@@ -613,10 +607,13 @@ To graph percentiles on certain SGLang metrics, you must opt in to [advanced que
 | `sglang.inter_token_latency.seconds` |
 | `sglang.request.prompt_tokens` |
 | `sglang.request.generation_tokens` |
+| `sglang.e2e_request_latency.seconds` |
+| `sglang.request.stage_latency.seconds` |
+| `sglang.queue_time.seconds` |
 
 ### 6. Enable GPU tracing (optional)
 
-To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4] and label your SGLang workloads. Continuous Tracing requires CUDA and CUDA Profiling Tools Interface (CUPTI) version 13 or later.
+To correlate inference requests with GPU activity, set up [Continuous Tracing with GPU Monitoring][4].
 
 [1]: /gpu_monitoring/setup
 [2]: /containers/kubernetes/integrations/?tab=annotations
