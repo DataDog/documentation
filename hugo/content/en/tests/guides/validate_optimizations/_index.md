@@ -45,7 +45,19 @@ Local validation supports these languages and frameworks:
 
 See the [ddtest documentation][15] for runtime requirements, framework-specific setup, and feature limitations.
 
-### Install ddtest
+### Use a local coding agent (recommended)
+
+Open a local Git checkout of the repository in a coding agent that can inspect files and run commands. Provide this prompt:
+
+```text
+Install the latest ddtest release from https://github.com/DataDog/ddtest/releases/latest, then use it to onboard this repository to Test Optimization.
+```
+
+Review proposed changes and provide any environment details requested by the agent. The agent runs local validation and reports the results, including HTML report links and any failed or unvalidated checks.
+
+### Run ddtest yourself
+
+#### Install ddtest
 
 Local validation requires [ddtest v1.16.0][18] or later. If ddtest is already installed, check its version with `ddtest --version` and rerun the installer to upgrade.
 
@@ -63,18 +75,6 @@ irm https://github.com/DataDog/ddtest/releases/latest/download/install.ps1 | iex
 ```
 
 The installers verify the download against the release's checksums. See [ddtest installation][17] for version selection and custom installation directories.
-
-### Use a local coding agent (recommended)
-
-Open a local Git checkout of the repository in a coding agent that can inspect files and run commands. After installing ddtest, provide this prompt:
-
-```text
-Use ddtest to onboard this repository to Test Optimization.
-```
-
-Review proposed changes and provide any environment details requested by the agent. The agent runs local validation and reports the results, including HTML report links and any failed or unvalidated checks.
-
-### Run ddtest yourself
 
 #### Step 1: Inspect the test setup
 
