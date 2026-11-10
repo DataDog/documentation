@@ -2,12 +2,9 @@
 title: Set Up Preconfigured Deployment Gates
 description: "Create gates and rules in Datadog in advance, then reference them by service and environment at deployment time."
 further_reading:
-- link: "/deployment_gates/setup/jit"
+- link: "/deployment_gates/setup/inline"
   tag: "Documentation"
-  text: "Set up Just-In-Time (JIT) Deployment Gates"
-- link: "/deployment_gates/explore"
-  tag: "Documentation"
-  text: "Learn about the Deployment Gates explorer"
+  text: "Set up inline Deployment Gates"
 - link: "/api/latest/deployment-gates"
   tag: "API Reference"
   text: "Deployment Gates API reference"
@@ -15,7 +12,7 @@ further_reading:
 
 With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
-Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].
+Looking to define rules in your deployment configuration? See [Inline Deployment Gates][5].
 
 ## Create a gate
 
@@ -37,7 +34,7 @@ Looking to define rules inline in your deployment config? See [Just-In-Time (JIT
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
 1. {{< ui >}}Name{{< /ui >}}: A descriptive label that appears on the [Deployment Gates Evaluations][7] page (for example, `Check all P0 monitors`).
-2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}}, {{< ui >}}Faulty Deployment Detection{{< /ui >}}, or {{< ui >}}Automatic Detection{{< /ui >}}.
+2. {{< ui >}}Type{{< /ui >}}: Select {{< ui >}}Monitor{{< /ui >}}, {{< ui >}}Faulty Deployment Detection{{< /ui >}}, or {{< ui >}}Bits Deployment Analysis{{< /ui >}}.
 3. Additional settings based on the selected rule type. See [Rule types](#rule-types) for the available options.
 4. {{< ui >}}Evaluation Mode{{< /ui >}}: When a rule is set as a {{< ui >}}Dry Run{{< /ui >}}, its result is not taken into account when computing the overall gate result.
 
@@ -117,8 +114,8 @@ The analysis is automatically performed for all APM-instrumented services, and n
 [3]: /tracing/guide/configuring-primary-operation/#primary-operations
 [4]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
 {{% /tab %}}
-{{% tab "Automatic Detection" %}}
-<div class="alert alert-info">The Automatic Detection rule is in Preview.</div>
+{{% tab "Bits Deployment Analysis" %}}
+<div class="alert alert-info">The Bits Deployment Analysis rule is in Preview.</div>
 
 This rule type uses an AI investigation to decide whether the deployed version introduced a regression. It compares the deployed version with previous versions of the same service and looks for the following signals:
 
@@ -163,7 +160,7 @@ The [datadog-ci][1] `deployment gate` command runs the evaluation in a single co
 datadog-ci deployment gate --service transaction-backend --env staging --identifier default
 ```
 
-If the Deployment Gate contains APM Faulty Deployment Detection or Automatic Detection rules, also specify the version (for example, `--version 1.0.1`).
+If the Deployment Gate contains APM Faulty Deployment Detection or Bits Deployment Analysis rules, also specify the version (for example, `--version 1.0.1`).
 
 The command:
 
@@ -271,7 +268,7 @@ spec:
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/service']
-              - name: version #Required for APM Faulty Deployment Detection and Automatic Detection rules
+              - name: version #Required for APM Faulty Deployment Detection and Bits Deployment Analysis rules
                 valueFrom:
                   fieldRef:
                     fieldPath: metadata.labels['tags.datadoghq.com/version']
@@ -322,7 +319,7 @@ jobs:
           # Your deployment commands here
 ```
 
-If the Deployment Gate contains APM Faulty Deployment Detection or Automatic Detection rules, also specify the version (for example, `version: 1.0.1`).
+If the Deployment Gate contains APM Faulty Deployment Detection or Bits Deployment Analysis rules, also specify the version (for example, `version: 1.0.1`).
 
 The action:
 
@@ -471,7 +468,7 @@ done
 
 The script:
 
-- Receives three inputs: `service`, `environment`, and `version`. `version` is required if the gate has APM Faulty Deployment Detection or Automatic Detection rules. You can also add `identifier` and `primary_tag` if needed.
+- Receives three inputs: `service`, `environment`, and `version`. `version` is required if the gate has APM Faulty Deployment Detection or Bits Deployment Analysis rules. You can also add `identifier` and `primary_tag` if needed.
 - Sends a request to start the evaluation and records the `evaluation_id`. Handles HTTP response codes:
   - 5xx: server error, retries with delay.
   - 4xx: client error, evaluation fails.
@@ -530,7 +527,7 @@ EOF
 Optional attributes:
 
 - `identifier`: Optional, defaults to `default`.
-- `version`: Required for APM Faulty Deployment Detection and Automatic Detection rules.
+- `version`: Required for APM Faulty Deployment Detection and Bits Deployment Analysis rules.
 - `primary_tag`: Optional, scopes down APM Faulty Deployment Detection analysis to the selected primary tag.
 
 **Note**: A 404 HTTP response can mean the gate was not found, or the gate was found but has no rules.
@@ -619,6 +616,6 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /api/latest/deployment-gates
-[5]: /deployment_gates/setup/jit
+[5]: /deployment_gates/setup/inline
 [6]: https://app.datadoghq.com/ci/deployment-gates/gates
 [7]: https://app.datadoghq.com/ci/deployment-gates/evaluations
