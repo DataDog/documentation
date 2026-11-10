@@ -411,34 +411,9 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
+Tools for [APM][50], including checking service health, investigating errors and latency, finding optimization opportunities, and managing sampling and service remapping rules.
 
-<div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
-
-### `apm_query_trace`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
-
-- Which service accounted for the most self-time in trace `abc123`?
-- Get the attributes for span `xyz789` along with the root span's attributes.
-- How many database calls happened in this trace, and which one took the longest?
-- Which of the child spans under span `xyz789` was slowest?
-
-### `apm_discover_span_tags`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Discovers available tag keys on spans within a time range.
-
-- What tags are available on spans for `service:checkout`?
-- Show me the tag keys I can filter by in APM.
-
-### `apm_get_primary_tag_keys`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves the primary tag keys configured for the organization.
-
-- What are my organization's primary tag keys?
+<div class="alert alert-info">The <code>apm</code> toolset is not enabled by default. Add <code>apm</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,apm</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> require Preview access and are not included in <code>toolsets=all</code>. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -447,6 +422,15 @@ Retrieves the current health status (ok/warning/critical) for one or more APM se
 
 - Check the health of the checkout and payment services in staging.
 - We rolled out a fix to the checkout service in prod. Show me the current status.
+
+### `apm_investigate_errors`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Analyzes the trace dependencies of a service resource to find downstream services that correlate with its errors. Returns anomalous paths ranked by correlation score, where a higher score means a stronger correlation.
+
+- Why is `POST /api/checkout` on the checkout service throwing errors in prod since 2 PM?
+- Which downstream dependency is driving the error spike on the payments service's `GET /charge` endpoint between 10 AM and 10:30 AM?
+- Find the root cause of elevated errors on the `GET /orders` resource of the orders service in staging over the last hour.
 
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
@@ -472,8 +456,33 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
-### `search_apm_sampling_rules`
+### `apm_discover_span_tags`
 *Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Discovers available tag keys on spans within a time range.
+
+- What tags are available on spans for `service:checkout`?
+- Show me the tag keys I can filter by in APM.
+
+### `apm_query_trace`
+*Toolset: **apm** (Preview)*\
+*Permissions Required: `APM Read`*\
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
+
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
+
+### `apm_get_primary_tag_keys`
+*Toolset: **apm** (Preview)*\
+*Permissions Required: `APM Read`*\
+Retrieves the primary tag keys configured for the organization.
+
+- What are my organization's primary tag keys?
+
+### `search_apm_sampling_rules`
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Remote Configuration Read`*\
 Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
 
@@ -481,7 +490,7 @@ Lists remote sampling rules that set a fixed sample rate for spans matching a se
 - List all remote sampling rules in my organization.
 
 ### `create_apm_sampling_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
 Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
 
@@ -489,7 +498,7 @@ Creates a remote [sampling rule][82] that sets a sample rate for a service, envi
 - Keep all traces for the `POST /payments` resource on the payments service in staging.
 
 ### `update_apm_sampling_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
 Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
 
@@ -497,14 +506,14 @@ Changes the sample rate of an existing remote sampling rule, identified by its s
 - Lower the sample rate for the checkout service's health check endpoint to 1%.
 
 ### `delete_apm_sampling_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
 Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
 - Remove the sampling rule for `GET /health` on the checkout service in prod.
 
 ### `search_apm_service_remapping_rules`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read`*\
 Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
 
@@ -512,7 +521,7 @@ Lists the organization's service remapping rules in evaluation order, or retriev
 - Which remapping rule renames the `postgres` inferred service?
 
 ### `create_apm_service_remapping_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
 Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
 
@@ -520,7 +529,7 @@ Creates a [service remapping rule][81] that renames services or inferred entitie
 - Create a remapping rule that renames `web-store-v2` to `web-store`.
 
 ### `update_apm_service_remapping_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
 Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
 
@@ -528,14 +537,14 @@ Updates an existing service remapping rule's name, filter, the name it assigns t
 - Update the `web-store` remapping rule to rename matching services to `storefront`.
 
 ### `reorder_apm_service_remapping_rules`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
 Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
 
 - Move the `orders-db` remapping rule ahead of the generic database rule.
 
 ### `delete_apm_service_remapping_rule`
-*Toolset: **apm***\
+*Toolset: **apm** (Preview)*\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
 Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
