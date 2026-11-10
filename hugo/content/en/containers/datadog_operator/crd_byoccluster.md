@@ -161,7 +161,7 @@ Set each existing pipeline's ID in `spec.components.pipelines[].pipelineID`. Eac
 
 The Operator supplies the Worker's BYOC destination endpoint, Datadog site, and shared API key. If engine REST TLS is configured, the destination URL uses HTTPS. Configure certificates and trust settings for that connection separately.
 
-**Port names control automatic source-address configuration.** Use an exact port name from the following table in `spec.components.pipelines[].ports[].name`. The Operator sets the corresponding environment variable to `0.0.0.0:<PORT>`, using that entry's `port` value, and creates the container and Service ports.
+Port names control automatic source-address configuration. Use an exact port name from the following table in `spec.components.pipelines[].ports[].name`. The Operator sets the corresponding environment variable to `0.0.0.0:<PORT>`, using that entry's `port` value, and creates the container and Service ports.
 
 | Port name | Source-address environment variable |
 |---|---|

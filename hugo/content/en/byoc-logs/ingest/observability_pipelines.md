@@ -103,7 +103,7 @@ After a minute, verify that logs are flowing through the pipeline and reaching t
 
 After the Observability Pipelines Worker is deployed and running, configure your Datadog Agent to send logs to it. The Agent connects to the Worker using the Worker's service address. For more information, see [Connect the Datadog Agent to the Observability Pipelines Worker][5].
 
-Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example in the previous section, use `<CLUSTER_NAME>-pipeline-agent.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Worker, use its Service address.
+Replace `<WORKER_SERVICE_HOST>` with the Service address for your deployment. For the Operator example in the previous section, use `<CLUSTER_NAME>-pipeline-<PIPELINE_NAME>.<NAMESPACE_NAME>.svc.cluster.local`. For a standalone Worker, use its Service address.
 
 Update your Datadog Agent configuration to send logs to the Observability Pipelines Worker:
 
@@ -137,9 +137,9 @@ spec:
 For an Operator-managed Worker, inspect its resource and logs:
 
 ```shell
-kubectl get datadogobservabilitypipelinesworker <CLUSTER_NAME>-pipeline-agent \
+kubectl get datadogobservabilitypipelinesworker <CLUSTER_NAME>-pipeline-<PIPELINE_NAME> \
   -n <NAMESPACE_NAME> -o yaml
-kubectl logs statefulset/<CLUSTER_NAME>-pipeline-agent -n <NAMESPACE_NAME> --tail=100
+kubectl logs statefulset/<CLUSTER_NAME>-pipeline-<PIPELINE_NAME> -n <NAMESPACE_NAME> --tail=100
 ```
 
 For a standalone Worker, use its deployment's labels and namespace. For example:

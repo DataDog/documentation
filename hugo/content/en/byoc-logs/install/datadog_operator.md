@@ -24,7 +24,7 @@ The Operator uses default images for the BYOC engine and Workers. Upgrading the 
 ## Prerequisites
 
 - Access to BYOC Logs and Observability Pipelines in your Datadog organization.
-- An EKS cluster that meets the [BYOC Kubernetes cluster requirements](/byoc-logs/install/#kubernetes-cluster-requirements), with `kubectl` access and Helm installed.
+- An EKS cluster that meets the [BYOC Kubernetes cluster requirements][21], with `kubectl` access and Helm installed.
 - An S3 bucket and a PostgreSQL database reachable from the BYOC pods. The Operator does not provision these services. See the [AWS prerequisites][4].
 - An IAM role with the [required S3 permissions][5] and an IRSA trust policy for the BYOC service account.
 - A persistent-volume provisioner and a StorageClass, either set as the default or specified in the volume claim templates.
@@ -90,7 +90,7 @@ helm install datadog-operator datadog/datadog-operator \
   --values operator-values.yaml
 ```
 
-If an Operator is already installed, enable `datadogBYOCCluster` and the two BYOC-related CRDs in its existing values file. Upgrade that release in its existing namespace. Preserve other enabled controllers and CRDs instead of applying the disabling settings above. Include `byoc` in its watch scope. See [Operator installation][9].
+If an Operator is already installed, enable `datadogBYOCCluster` and the two BYOC-related CRDs in its existing values file. Upgrade that release in its existing namespace. Preserve other enabled controllers and CRDs. Don't apply the `false` settings from the previous example. Include `byoc` in its watch scope. See [Operator installation][9].
 
 Verify that both CRDs are installed and the Operator pod is running:
 
@@ -258,3 +258,4 @@ Deleting the cluster doesn't delete the corresponding S3 bucket or PostgreSQL da
 [18]: /byoc-logs/operate/monitoring/
 [19]: /containers/datadog_operator/crd_byoccluster/#pipelines-and-ports
 [20]: https://app.datadoghq.com/byoc-logs
+[21]: /byoc-logs/install/#kubernetes-cluster-requirements
