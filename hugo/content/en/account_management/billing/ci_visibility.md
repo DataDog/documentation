@@ -9,6 +9,9 @@ further_reading:
   - link: "/continuous_integration/guides/ingestion_control"
     tag: "Documentation"
     text: "Learn about Ingestion Controls for CI Visibility"
+  - link: "/tests/"
+    tag: "Documentation"
+    text: "Learn about Test Optimization"
 ---
 
 ## Overview
