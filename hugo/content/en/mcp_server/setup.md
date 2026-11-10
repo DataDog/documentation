@@ -1056,7 +1056,7 @@ After you change any of these settings, refresh the tool list in your AI client.
 [83]: /logs/log_configuration/indexes/
 [84]: /logs/log_configuration/archives/
 [85]: /metrics/derived-metrics/
-[89]: /containers/amazon_ecs/
 [86]: /getting_started/site/
 [87]: https://antigravity.google/
 [88]: https://github.com/datadog-labs/antigravity-plugin
+[89]: /containers/amazon_ecs/
