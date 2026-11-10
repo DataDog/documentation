@@ -24,7 +24,16 @@ Detection rule migration translates the detection logic of third-party SIEM rule
 Datadog uses AI to generate each detection rule from the source rule and the logs your organization sends.
 Each generated rule is a proposal. Datadog doesn't create a rule in Cloud SIEM until you publish or save it.
 
-Detection rule migration supports Splunk as a source platform.
+Detection rule migration supports Splunk, with more third-party SIEMs planned.
+
+Every method below uses the same AI agent, designed by Datadog detection engineers.
+A rule gets the same translation quality whether you translate it alone or migrate it in bulk.
+
+Use detection rule migration for rules that detect security threats, such as brute-force logins or privilege escalation.
+These become Cloud SIEM detection rules that generate security signals.
+
+To migrate operational content, such as Splunk alerts on error rates, log searches, or dashboards, use [Migration Tools][4] instead.
+They turn alerts into Datadog monitors and translate queries deterministically.
 
 ### Translate a single rule
 
@@ -36,16 +45,14 @@ Detection rule migration supports Splunk as a source platform.
 
 ### Migrate rules in bulk
 
-| Method                                                | Use case                                                                                             |
-|-------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| [Bulk migration UI](#migrate-detection-rules-in-bulk) | Upload a CSV export of your Splunk saved searches, then review and publish a proposal for each rule. |
-| [Batch migration API][3]                              | Run the same bulk migration with API calls instead of the UI.                                        |
-
-To migrate Splunk log search queries, alerts, or dashboards, use [Migration Tools][4].
+| Method                                                       | Use case                                                                                              |
+|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [Bulk migration UI](#bulk-migrate-detection-rules-in-the-ui) | Upload a CSV export of your third-party SIEM rules, then review and publish a proposal for each rule. |
+| [Batch migration API][3]                                     | Run the same bulk migration with API calls instead of the UI.                                         |
 
 ## Prerequisites
 
-<div class="alert alert-warning">Before you migrate, send the logs your source rules query to Datadog. See <a href="/security/cloud_siem/ingest_and_enrich/">Ingest and Enrich</a>. Datadog uses these logs to map each source rule's fields and queries to Cloud SIEM. Without them, translations are less accurate.</div>
+<div class="alert alert-warning">Before you migrate, send the logs your source rules query to Datadog. See <a href="/security/cloud_siem/ingest_and_enrich/">Ingest and Enrich</a>. Datadog uses these logs to map each source rule's fields and queries to Cloud SIEM. <strong>Without them, translations are less accurate.</strong></div>
 
 - [Cloud SIEM][5] is enabled for your organization.
 - You have the following [permissions][6]:
@@ -59,13 +66,13 @@ To migrate Splunk log search queries, alerts, or dashboards, use [Migration Tool
 
 1. Open the [rule editor][7].
 2. In the chat, paste the source rule and describe what you want.
-3. Send follow-up messages to refine the draft.
-4. Review and save the rule.
+3. Refine the draft by chatting or by editing the rule directly. The chat and the rule editor stay in sync, so you can switch between them as you adjust settings such as the query, conditions, or description, and preview the matching logs. See [Create a Custom Rule][10].
+4. Save the rule.
 
 For example:
 
 ```text
-Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes:
+Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minutes instead of 2+ IPs in 5 minutes:
 
 `cloudtrail` eventName=ConsoleLogin
 | bin span=5m _time
@@ -73,7 +80,7 @@ Convert this Splunk rule, but alert when a user logs in from 3+ IPs in 10 minute
 | where distinct_ip_count>1
 ```
 
-## Migrate detection rules in bulk
+## Bulk migrate detection rules in the UI
 
 ### How it works
 
@@ -126,3 +133,4 @@ Unsupported logic
 [7]: https://app.datadoghq.com/security/siem/rules/new
 [8]: https://app.datadoghq.com/security/siem/rules
 [9]: https://app.datadoghq.com/security/siem/detections/migrations
+[10]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/
