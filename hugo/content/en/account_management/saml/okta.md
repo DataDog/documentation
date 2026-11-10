@@ -43,6 +43,8 @@ For definitions of the terms above, see the Okta [glossary][2].
 
 Set up Okta as the SAML identity provider (IdP) for Datadog with the following instructions. The setup process requires you to alternate between your Okta and Datadog accounts.
 
+<div class="alert alert-info">The email address that Okta sends to Datadog must exactly match the user's handle in Datadog.</div>
+
 ### Add the Datadog integration in Okta
 
 1. Log in to your Okta admin dashboard.
