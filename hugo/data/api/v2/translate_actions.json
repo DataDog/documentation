@@ -5367,6 +5367,10 @@
     "request_description": "",
     "request_schema_description": "Request body for querying users with optional filtering, column selection, and sorting."
   },
+  "DeleteUserProfile": {
+    "description": "Delete a Product Analytics user profile.\nDeletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.\nThis only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.",
+    "summary": "Delete a user profile"
+  },
   "GetMapping": {
     "description": "Get entity mapping configuration including all available attributes and their properties",
     "summary": "Get mapping"

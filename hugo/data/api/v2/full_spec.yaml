@@ -229054,6 +229054,53 @@ paths:
         - Rum Audience Management
       x-menu-order: 8
       x-unstable: "**Note**: This endpoint may be subject to changes."
+  /api/v2/product-analytics/users/{user_id}:
+    delete:
+      description: |-
+        Delete a Product Analytics user profile.
+        Deletion is asynchronous: the request is accepted and the profile is removed shortly after, usually within a few minutes.
+        This only deletes the user profile. To delete the RUM events of the user, use the RUM data deletion API.
+      operationId: DeleteUserProfile
+      parameters:
+        - description: The ID of the user to delete, as sent in the `usr.id` attribute.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: user-1234
+            type: string
+      responses:
+        "202":
+          description: Deletion accepted; the profile will be removed asynchronously
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Delete a user profile
+      tags:
+        - Rum Audience Management
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_apps_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/product-analytics/{entity}/mapping:
     get:
       description: Get entity mapping configuration including all available attributes and their properties
