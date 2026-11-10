@@ -237,89 +237,170 @@ Cloud SQL doesn't copy the session to existing read replicas. To collect plans o
 
 On Azure SQL Database, the session is scoped to a database. Create it in each database that the Agent monitors: the Agent reads the session of the database its check instance connects to.
 
-The session keeps the plans in memory (`ring_buffer` target). The Agent doesn't support the `event_file` target on Azure Blob Storage yet.
+The session can write the plans to Azure Blob Storage (`event_file` target), or keep them in memory (`ring_buffer` target). Blob Storage holds more plans. If you can't set up Blob Storage, use the `ring_buffer` target.
+
+#### Write the plans to Azure Blob Storage
+
+1. Create a storage account and a container, as described in Microsoft's [Create an event session with event_file target in Azure Storage][1]. Use a container dedicated to this session: the Agent reads every blob in the container whose name starts with `datadog_query_plans`.
+
+2. In the database, create a database-scoped credential that gives access to the container. The name of the credential must be the URL of the container, without a trailing slash.
+
+   With a shared access signature (SAS) token for the container: the token needs the `Read`, `Write`, `Delete`, and `List` permissions, and no IP address restrictions. Its expiry time must be after the end of the session.
+
+   ```sql
+   CREATE DATABASE SCOPED CREDENTIAL [https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>]
+   WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+       SECRET = '<SAS_TOKEN>';
+   ```
+
+   With the managed identity of the logical server, after you give it the **Storage Blob Data Contributor** role on the container:
+
+   ```sql
+   CREATE DATABASE SCOPED CREDENTIAL [https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>]
+   WITH IDENTITY = 'MANAGED IDENTITY';
+   ```
+
+3. Create and start the session:
+
+   ```sql
+   CREATE EVENT SESSION datadog_query_plans ON DATABASE -- Datadog requires this exact session name
+   ADD EVENT sqlserver.query_post_execution_plan_profile (
+       ACTION (
+           sqlserver.database_name,
+           sqlserver.session_id,
+           sqlserver.request_id,
+           sqlserver.username,
+           sqlserver.client_app_name,
+           sqlserver.client_hostname,
+           sqlserver.query_hash,
+           sqlserver.query_plan_hash,
+           sqlserver.plan_handle,
+           sqlserver.tsql_frame
+       )
+       WHERE (
+           duration > 1000000 -- in microseconds: statements that run longer than 1 second
+           AND sqlserver.username <> N'datadog' -- the Agent's user
+       )
+   )
+   ADD TARGET package0.event_file (
+       SET filename = N'https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>/datadog_query_plans.xel',
+           max_file_size = 64
+   )
+   WITH (
+       MAX_MEMORY = 8192 KB,
+       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
+       MAX_DISPATCH_LATENCY = 30 SECONDS,
+       TRACK_CAUSALITY = ON,
+       STARTUP_STATE = ON
+   );
+   GO
+
+   ALTER EVENT SESSION datadog_query_plans ON DATABASE STATE = START;
+   GO
+   ```
+
+SQL Server doesn't delete the session's old blobs by default. To limit the storage they use, delete old blobs with an [Azure Storage management policy][2].
+
+#### Keep the plans in memory
+
+If you can't set up Blob Storage, create the session with the script above, but replace its `ADD TARGET` clause with a `ring_buffer` target:
 
 ```sql
-CREATE EVENT SESSION datadog_query_plans ON DATABASE -- Datadog requires this exact session name
-ADD EVENT sqlserver.query_post_execution_plan_profile (
-    ACTION (
-        sqlserver.database_name,
-        sqlserver.session_id,
-        sqlserver.request_id,
-        sqlserver.username,
-        sqlserver.client_app_name,
-        sqlserver.client_hostname,
-        sqlserver.query_hash,
-        sqlserver.query_plan_hash,
-        sqlserver.plan_handle,
-        sqlserver.tsql_frame
-    )
-    WHERE (
-        duration > 1000000 -- in microseconds: statements that run longer than 1 second
-        AND sqlserver.username <> N'datadog' -- the Agent's user
-    )
-)
 ADD TARGET package0.ring_buffer (
     SET MAX_MEMORY = 4096
 )
-WITH (
-    MAX_MEMORY = 8192 KB,
-    EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
-    MAX_DISPATCH_LATENCY = 30 SECONDS,
-    TRACK_CAUSALITY = ON,
-    STARTUP_STATE = ON
-);
-GO
-
-ALTER EVENT SESSION datadog_query_plans ON DATABASE STATE = START;
-GO
 ```
 
 SQL Server returns at most about 4 MB of a ring buffer's content, which is about 120 small plans. When the ring buffer is full, new plans replace the oldest ones. If the session captures more plans than that between two reads of the Agent, the oldest plans are lost. To avoid it, increase the duration in the `WHERE` clause, or lower `collection_interval` in the Agent configuration.
 
+[1]: https://learn.microsoft.com/en-us/sql/relational-databases/extended-events/targets-for-extended-events-in-sql-server#create-an-event-session-with-event_file-target-in-azure-storage
+[2]: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
 {{% /tab %}}
 {{% tab "Azure SQL Managed Instance" %}}
 
-The session keeps the plans in memory (`ring_buffer` target). The Agent doesn't support the `event_file` target on Azure Blob Storage yet.
+The session can write the plans to Azure Blob Storage (`event_file` target), or keep them in memory (`ring_buffer` target). Blob Storage holds more plans. If you can't set up Blob Storage, use the `ring_buffer` target.
+
+#### Write the plans to Azure Blob Storage
+
+1. Create a storage account and a container, as described in Microsoft's [Create an event session with event_file target in Azure Storage][1]. Use a container dedicated to this session: the Agent reads every blob in the container whose name starts with `datadog_query_plans`.
+
+2. In the `master` database, create a credential that gives access to the container. The name of the credential must be the URL of the container, without a trailing slash.
+
+   With a shared access signature (SAS) token for the container: the token needs the `Read`, `Write`, `Delete`, and `List` permissions, and no IP address restrictions. Its expiry time must be after the end of the session.
+
+   ```sql
+   USE master;
+   IF NOT EXISTS (SELECT 1 FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')
+       CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<PASSWORD>';
+
+   CREATE CREDENTIAL [https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>]
+   WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+       SECRET = '<SAS_TOKEN>';
+   ```
+
+   With the managed identity of the managed instance, after you give it the **Storage Blob Data Contributor** role on the container:
+
+   ```sql
+   USE master;
+   CREATE CREDENTIAL [https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>]
+   WITH IDENTITY = 'MANAGED IDENTITY';
+   ```
+
+3. Create and start the session:
+
+   ```sql
+   CREATE EVENT SESSION datadog_query_plans ON SERVER -- Datadog requires this exact session name
+   ADD EVENT sqlserver.query_post_execution_plan_profile (
+       ACTION (
+           sqlserver.database_name,
+           sqlserver.session_id,
+           sqlserver.request_id,
+           sqlserver.username,
+           sqlserver.client_app_name,
+           sqlserver.client_hostname,
+           sqlserver.query_hash,
+           sqlserver.query_plan_hash,
+           sqlserver.plan_handle,
+           sqlserver.tsql_frame
+       )
+       WHERE (
+           duration > 1000000 -- in microseconds: statements that run longer than 1 second
+           AND sqlserver.username <> N'datadog' -- the Agent's login
+       )
+   )
+   ADD TARGET package0.event_file (
+       SET filename = N'https://<STORAGE_ACCOUNT>.blob.core.windows.net/<CONTAINER>/datadog_query_plans.xel',
+           max_file_size = 64
+   )
+   WITH (
+       MAX_MEMORY = 8192 KB,
+       EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
+       MAX_DISPATCH_LATENCY = 30 SECONDS,
+       TRACK_CAUSALITY = ON,
+       STARTUP_STATE = ON
+   );
+   GO
+
+   ALTER EVENT SESSION datadog_query_plans ON SERVER STATE = START;
+   GO
+   ```
+
+SQL Server doesn't delete the session's old blobs by default. To limit the storage they use, delete old blobs with an [Azure Storage management policy][2].
+
+#### Keep the plans in memory
+
+If you can't set up Blob Storage, create the session with the script above, but replace its `ADD TARGET` clause with a `ring_buffer` target:
 
 ```sql
-CREATE EVENT SESSION datadog_query_plans ON SERVER -- Datadog requires this exact session name
-ADD EVENT sqlserver.query_post_execution_plan_profile (
-    ACTION (
-        sqlserver.database_name,
-        sqlserver.session_id,
-        sqlserver.request_id,
-        sqlserver.username,
-        sqlserver.client_app_name,
-        sqlserver.client_hostname,
-        sqlserver.query_hash,
-        sqlserver.query_plan_hash,
-        sqlserver.plan_handle,
-        sqlserver.tsql_frame
-    )
-    WHERE (
-        duration > 1000000 -- in microseconds: statements that run longer than 1 second
-        AND sqlserver.username <> N'datadog' -- the Agent's login
-    )
-)
 ADD TARGET package0.ring_buffer (
     SET MAX_MEMORY = 4096
 )
-WITH (
-    MAX_MEMORY = 8192 KB,
-    EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
-    MAX_DISPATCH_LATENCY = 30 SECONDS,
-    TRACK_CAUSALITY = ON,
-    STARTUP_STATE = ON
-);
-GO
-
-ALTER EVENT SESSION datadog_query_plans ON SERVER STATE = START;
-GO
 ```
 
 SQL Server returns at most about 4 MB of a ring buffer's content, which is about 120 small plans. When the ring buffer is full, new plans replace the oldest ones. If the session captures more plans than that between two reads of the Agent, the oldest plans are lost. To avoid it, increase the duration in the `WHERE` clause, or lower `collection_interval` in the Agent configuration.
 
+[1]: https://learn.microsoft.com/en-us/sql/relational-databases/extended-events/targets-for-extended-events-in-sql-server#create-an-event-session-with-event_file-target-in-azure-storage
+[2]: https://learn.microsoft.com/en-us/azure/storage/blobs/lifecycle-management-overview
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -374,7 +455,7 @@ To start it again:
 ALTER EVENT SESSION datadog_query_plans ON SERVER STATE = START;
 ```
 
-On Azure SQL Database, replace `ON SERVER` with `ON DATABASE`. Stopping a session discards the plans in its ring buffer.
+On Azure SQL Database, replace `ON SERVER` with `ON DATABASE`. Stopping a session with a `ring_buffer` target discards its plans.
 
 If you run the session in time windows, create it with `STARTUP_STATE = OFF`, so that it doesn't start when SQL Server restarts. While the session is stopped, the Agent reports that the session is missing. See [Troubleshooting](#troubleshooting).
 
@@ -392,7 +473,7 @@ Before it sends a plan, the Agent obfuscates the values in the plan, including t
 
 If you turn on [`collect_raw_query_statement`][9], the Agent also sends a raw copy of each plan and its statement, with the parameter values. Only users with the **Database Monitoring Parameterized Queries Read** [permission][10] can see raw plans.
 
-On self-hosted servers, RDS, and Cloud SQL, the session's files hold the plans with their raw values. Limit the access to these files on the server.
+The session's files, and its blobs in Azure Storage, hold the plans with their raw values. Limit the access to these files and blobs.
 
 ## Query real plans with the API
 
@@ -503,7 +584,7 @@ The Agent doesn't send every plan in the session:
 - It skips plans larger than `max_plan_size_bytes`.
 - It skips plans that have no runtime statistics.
 
-The session only captures the executions that match its `WHERE` clause. On Azure SQL Database and Azure SQL Managed Instance, the ring buffer can also lose plans between two reads of the Agent.
+The session only captures the executions that match its `WHERE` clause. With a `ring_buffer` target, the session can also lose plans between two reads of the Agent.
 
 ## Further reading
 
