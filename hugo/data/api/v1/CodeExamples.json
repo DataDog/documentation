@@ -971,6 +971,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2419923374",
+      "description": "Create a monitor with a metrics formula variable returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_2608995690",
       "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
     },

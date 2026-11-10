@@ -33,7 +33,7 @@
   },
   "action-connection": {
     "name": "Action Connection",
-    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
+    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nTo authenticate with your own GitHub App or personal access token, create a GitHub connection.\n\nWe offer granular access control for editing and resolving connections."
   },
   "actions-datastores": {
     "name": "Actions Datastores",
@@ -230,6 +230,10 @@
   "elastic-cloud-integration": {
     "name": "Elastic Cloud Integration",
     "description": "Manage your Datadog Elastic Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for\nmore information."
+  },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
   },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",

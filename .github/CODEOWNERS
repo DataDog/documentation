@@ -59,8 +59,6 @@ hugo/local/bin/py/vale                                                          
 hugo/local/bin/py/integration-finder.py                                                      @DataDog/documentation @DataDog/docs-dev
 hugo/local/bin/py/preview_links.py                                                           @DataDog/documentation
 hugo/local/bin/py/preview-links-template.mako                                                @DataDog/documentation
-hugo/local/bin/py/build/configurations/pull_config_preview.yaml                              @DataDog/WebOps-Platform @DataDog/documentation
-hugo/local/bin/py/build/configurations/pull_config.yaml                                      @DataDog/WebOps-Platform @DataDog/documentation
 
 # Formerly CorpWeb
 hugo/assets/                                                                                 @DataDog/WebOps-Platform
