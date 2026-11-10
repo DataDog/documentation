@@ -57,3 +57,9 @@ entries:
       - ListQuotas
       - UpdateQuota
     title: Publish usage quota lookup and include_descendants access control
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41559
+    operations:
+      - CreateQuotas
+    title: Document create-only usage quotas

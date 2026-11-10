@@ -1888,6 +1888,7 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
+      example: logs
       in: path
       name: product
       required: true
@@ -142972,15 +142973,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -143284,12 +143289,13 @@ components:
       properties:
         rule_ids:
           description: >-
-            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list. Must contain the UUID of every active rule in the org (at most 1,000); omitting any active rule returns a 400 error.
           example:
             - "00000000-0000-0000-0000-000000000001"
             - "00000000-0000-0000-0000-000000000002"
           items:
             type: string
+          maxItems: 1000
           type: array
       type: object
     TagIndexingRuleOrderData:
@@ -143340,15 +143346,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -215714,7 +215724,20 @@ paths:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
         among existing rules; use the reorder endpoint to change the evaluation order.
+        Every rule that matches a metric applies, in `rule_order`; a rule with
+        `override_previous_rules` set to `false` (merge) adds to the tags configured by earlier
+        rules, and a rule with `override_previous_rules` set to `true` replaces them.
         Requires the `Manage Tags for Metrics` permission.
+
+        Limits:
+        - An org can have at most 1,000 active tag indexing rules. Creating a rule when the org
+          already has 1,000 active rules returns a 403 error with the title
+          `Tag indexing rule limit reached`.
+        - Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;
+          requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.
+        - `name` can be at most 200 characters, and `metric_name_matches` can contain at most
+          50 patterns of at most 200 characters each. Requests that exceed these limits return a
+          400 error.
       operationId: CreateTagIndexingRule
       requestBody:
         content:
@@ -215766,6 +215789,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                rule_limit_reached:
+                  summary: The org already has 1,000 active tag indexing rules.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rule limit reached
+                tag_indexing_rules_unavailable:
+                  summary: The org has more than 700,000 custom metrics.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rules unavailable
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
@@ -215794,7 +215830,8 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
-        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
+        The UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID
+        returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -215965,7 +216002,10 @@ paths:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
         Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        reorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and
+        `metric_name_matches` can contain at most 50 patterns of at most 200 characters each;
+        requests that exceed these limits return a 400 error.
+        Requires the `Manage Tags for Metrics` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
@@ -271480,6 +271520,10 @@ paths:
       description: |-
         Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
         Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        Set `create_only=true` to atomically create exactly one quota in the caller's organization and reject an
+        existing quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.
+        Repeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`
+        even if the first request succeeded; reconcile the outcome before retrying or importing the quota.
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
@@ -271523,6 +271567,13 @@ paths:
         - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Create one quota without updating an existing quota. Requires exactly one item that specifies `usage_limit` and `enforced`, omits `pending_usage_limit`, and sets `include_descendants=false`. The quota belongs to the caller's organization. An existing quota returns `409` without being modified.
+          in: query
+          name: create_only
           required: false
           schema:
             default: false
@@ -271588,13 +271639,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
+          description: Bad Request. Returned when `create_only=true` is combined with multiple items, `pending_usage_limit`, or `include_descendants=true`, or when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a nonexistent quota reports an error in the item's `error` field. If only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              examples:
+                already_exists:
+                  value:
+                    errors:
+                      - detail: A quota already exists for this namespace and scope. Import it before managing it with Terraform.
+                        meta:
+                          error_code: already_exists
+                          quota_id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        status: "409"
+                        title: Conflict
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. With `create_only=true`, a quota already exists for this namespace and scope in the caller's organization. The existing quota is unchanged. The error's `meta` contains `error_code` set to `already_exists` and `quota_id` set to the existing quota's opaque ID. Import the existing quota before managing it with Terraform.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -276506,19 +276573,25 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
+    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
+    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
+    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
+    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
+    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
+    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
