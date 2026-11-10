@@ -3400,8 +3400,8 @@ Lists one page of parent-child relationships between teams. Filter by parent tea
 - Which teams are children of the Payments team?
 
 ### `get_team_links`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists the links published by a team.
 
 - Show the links for the Payments team.
