@@ -9,7 +9,7 @@ further_reading:
 
 Use the [Inference Workloads view][1] in the Kubernetes Explorer to monitor AI inference workloads running on Kubernetes. The AI inference view provides insight from endpoint to compute, simplifying troubleshooting, investigation, and debugging. Use it to monitor relevant pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment and correlate node activity with related metrics, logs, and traces.
 
-AI inference is available for workloads deployed with the Dynamo, KubeRay, or KServe operator and is included with Infrastructure Monitoring.
+The Inference Workloads view is available for workloads deployed with the Dynamo, KubeRay, or KServe operator and is included with Infrastructure Monitoring. Workloads deployed with other operators are not supported.
 
 ## Prerequisites
 
