@@ -206,6 +206,8 @@ Azure Foundry spend is split into Foundry Models, which covers the `Foundry Mode
 
 ChatGPT Enterprise is in Preview and costs are estimated.
 
+OpenAI's Costs API reports usage costs, including an estimated USD amount for credit-priced usage, rather than final invoice amounts. Because these costs are estimates, they don't count toward the spend that Datadog bills for Cloud Cost Management.
+
 | Tag | Label | Description |
 |---|---|---|
 | `model_name` | Model | The model that generated the cost. |
