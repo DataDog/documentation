@@ -118,7 +118,7 @@ To determine why a particular metric name is emitting a large number of custom m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/volume
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /monitors/types/change-alert/
 [3]: /metrics/metrics-without-limits
 [5]: #reduce-metric-volume-and-cost

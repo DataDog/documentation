@@ -16,7 +16,7 @@ further_reading:
   text: "Metrics without Limits™"
 - link: "/metrics/volume/"
   tag: "Documentation"
-  text: "Metrics Volume Management"
+  text: "Metrics Catalog"
 - link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
@@ -45,7 +45,7 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Create a metric filtering policy
 
-You can create a metric filtering policy from the [Metrics Settings page][7] or the [Metrics Summary page][6].
+You can create a metric filtering policy from the [Metrics Settings page][7] or the [Metrics Catalog page][6].
 
 Metric filtering policies are applied to all Agents v7.67.0+ (v7.74.0+ for Agent Integration metrics) with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 
@@ -60,9 +60,9 @@ Policy updates are deployed to Agents in 1-2 minutes.
    - If you choose to upload a CSV, select the file and click {{< ui >}}Open{{< /ui >}}. You can use multiple CSVs to create the policy.
 5. When you're satisfied with the list of metrics to filter, click {{< ui >}}Save and Filter{{< /ui >}}.
 
-### From the Metrics Summary page
+### From the Metrics Catalog page
 
-Create a metric filtering policy from the Metrics Summary page using any of the following methods:
+Create a metric filtering policy from the Metrics Catalog page using any of the following methods:
 
 {{< tabs >}}
 {{% tab "From a metric query" %}}
@@ -105,7 +105,7 @@ Create a metric filtering policy from the Metrics Summary page using any of the 
 
 ## Edit a metric filtering policy
 
-You can edit a metric filtering policy from the [Metrics Settings page][1] or the [Metrics Summary page][2].
+You can edit a metric filtering policy from the [Metrics Settings page][1] or the [Metrics Catalog page][2].
 
 ### From the Metrics Settings page
 
@@ -117,9 +117,9 @@ You can edit a metric filtering policy from the [Metrics Settings page][1] or th
 
 {{< img src="metrics/guide/agent_filtering_for_custom_metrics/edit_policy_from_metrics_settings.mp4" alt="Editing a metric filtering policy from the Metrics Settings page" video="true" >}}
 
-### From the Metrics Summary page
+### From the Metrics Catalog page
 
-Edit a metric filtering policy from the Metrics Summary page using any of the following methods:
+Edit a metric filtering policy from the Metrics Catalog page using any of the following methods:
 
 {{< tabs >}}
 {{% tab "From a metric query" %}}
@@ -162,7 +162,7 @@ You can view all your policies and filtered metrics from the [Metrics Settings p
 
 Click on the [settings button][1]: 
 
-{{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_summary.png" alt="The settings button on the metric summary page" style="width:100%;" >}}
+{{< img src="metrics/guide/agent_filtering_for_custom_metrics/settings_from_summary.png" alt="The settings button on the Metrics Catalog page" style="width:100%;" >}}
 
 Click on {{< ui >}}Metrics{{< /ui >}} in the navigation bar and go straight to settings:
 
@@ -220,22 +220,26 @@ Substitute `<BASE_URL>` in the example below with the base URL.
 }
 {{< /code-block >}}
 
-### Update a filtered metric policy (partial update)
+### Update a filtered metric rule (partial update)
 
 The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
 
 Substitute `<BASE_URL>` in the example below with the base URL.
 
-**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/rules/{rule-id}`
+
+Use `metrics_to_add` and `metrics_to_remove` to change a rule's metric list without replacing it. Send both attributes, and use an empty array for the one you don't need. Metric names must match exactly, so list each variant of a metric individually, such as `.count`, `.avg`, and `.95percentile`.
+
+`{rule-id}` is the `id` returned by the request in the [List filtered metric policies](#list-filtered-metric-policies) section.
 
 #### Example body
 
 {{< code-block lang="json" disable_copy="false" collapsible="true" >}}
 {
   "data": {
-    "type": "filtered_metrics",
+    "type": "rule",
     "attributes": {
-      "policy_name": "my policy",
+      "rule_name": "my rule",
       "metrics_to_add": [
         "metric.name.three",
         "metric.name.four"
@@ -245,6 +249,17 @@ Substitute `<BASE_URL>` in the example below with the base URL.
         "metric.name.six"
       ]
     }
+  }
+}
+{{< /code-block >}}
+
+#### Example response body
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+  "data": {
+    "id": "abc-123-def",
+    "type": "rule"
   }
 }
 {{< /code-block >}}
@@ -396,7 +411,7 @@ This initial preview release includes the following limitations:
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /account_management/rbac/permissions#api-and-application-keys
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/metric/summary
+[6]: https://app.datadoghq.com/metric/catalog
 [7]: https://app.datadoghq.com/metric/settings/policies                                            
 [8]: /api/latest/#getting-started
 [9]: /getting_started/site/

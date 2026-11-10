@@ -127,6 +127,7 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/electron/setup/" src="integrations_logos/rum-electron_large.svg" alt="Electron" >}}
 {{< /card-grid >}}
 
 ### Capabilities and platform support

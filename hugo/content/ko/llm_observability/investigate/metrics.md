@@ -20,12 +20,12 @@ title: Agent Observability 메트릭
 Agent Observability로 애플리케이션을 계측한 후, 대시보드와 모니터에서 사용할 Agent Observability 메트릭에 액세스할 수 있습니다. 이러한 메트릭은 LLM 애플리케이션의 스팬 수, 오류 수, 토큰 사용량 및 지연 시간 측정값을 캡처합니다. 이 메트릭은 애플리케이션 트래픽의 100%를 기준으로 계산됩니다.
 
 <div class="alert alert-info">
-여기에서 <code>ml_obs.*</code> 이 페이지의 항목은 <a href="/metrics/">Datadog 메트릭</a>입니다. 이는 LLM 스팬(비용, 토큰, 지연 시간, 오류의 카운트 및 분포)에서 파생되어 시간 경과에 따른 LLM 애플리케이션의 측면을 설명하는 수치 값입니다. 이 메트릭은 100% 샘플링되며, 표준 <a href="/developers/guide/data-collection-resolution-retention/">Datadog 메트릭 보존</a> 정책(전체 세분성에서 15개월)을 따르고, 다른 Datadog 메트릭과 마찬가지로 대시보드, 모니터 및 노트북에서 쿼리할 수 있습니다.
+여기에서 <code>ml_obs.*</code> 이 페이지의 항목은 <a href="/metrics/">Datadog 메트릭</a>입니다. 이는 LLM 스팬(비용, 토큰, 지연 시간, 오류의 카운트 및 분포)에서 파생되어 시간 경과에 따른 LLM 애플리케이션의 측면을 설명하는 수치 값입니다. 이 메트릭은 100% 샘플링되며, 표준 <a href="/data_security/data_retention_periods/">Datadog 메트릭 보존</a> 정책(전체 세분성에서 15개월)을 따르고, 다른 Datadog 메트릭과 마찬가지로 대시보드, 모니터 및 노트북에서 쿼리할 수 있습니다.
 <br><br>
 이는 Agent Observability의 다른 두 가지 항목과는 구별됩니다.
 <ul>
-<li><strong>스팬별 운영 데이터</strong>(각 개별 트레이스나 스팬의 비용, 토큰, 지연 시간, 오류): 이러한 메트릭이 집계되는 원시 값입니다. 스팬과 함께 저장되며 <a href="/llm_observability/setup/#data-retention">Agent Observability 트레이스 보존</a> 정책을 따르고, 메트릭이 아닌 트레이스 탐색기에서 쿼리됩니다.</li>
-<li><strong><a href="/llm_observability/investigate/evaluations/">평가 점수</a></strong>(\"evals\"라고도 함): 개별 스팬이나 실험 행에 첨부된 품질 및 안전성 판단(예: 환각, 충실도, 사용자 지정 LLM-as-a-judge)입니다. 이는 운영 텔레메트리에서 파생되지 않으며, Datadog 메트릭 보존 정책이 아닌 Agent Observability 트레이스 및 실험 보존 정책을 따릅니다.</li>
+<li><strong>스팬별 운영 데이터</strong>(각 개별 트레이스나 스팬의 비용, 토큰, 지연 시간, 오류): 이러한 메트릭이 집계되는 원시 값입니다. 스팬과 함께 저장되며 <a href="/llm_observability/data_governance/#traces-and-spans">Agent Observability 트레이스 보존</a> 정책을 따르고, 메트릭이 아닌 Traces 탐색기에서 쿼리됩니다.</li>
+<li><strong><a href="/llm_observability/investigate/evaluations/">평가 점수</a></strong>(\"evals\"라고도 함): 개별 스팬이나 실험 행에 첨부된 품질 및 안전성 판단(예: 환각, 충실도, 사용자 지정 LLM-as-a-judge)입니다. 이는 운영 텔레메트리에서 파생되지 않으며, Datadog 메트릭 보존 정책이 아닌 <a href="/llm_observability/data_governance/">Agent Observability 트레이스 및 실험 보존</a>를 따릅니다.</li>
 </ul>
 </div>
 

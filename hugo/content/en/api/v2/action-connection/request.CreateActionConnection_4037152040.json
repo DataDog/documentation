@@ -1,0 +1,18 @@
+{
+  "data": {
+    "type": "action_connection",
+    "attributes": {
+      "name": "GitHub App Connection exampleactionconnection",
+      "integration": {
+        "type": "Github",
+        "credentials": {
+          "type": "GithubApp",
+          "github_app_id": "123456",
+          "github_installation_id": "789012",
+          "private_key": "example-private-key",
+          "hostname": "github.example.com"
+        }
+      }
+    }
+  }
+}

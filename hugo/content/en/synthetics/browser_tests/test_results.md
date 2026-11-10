@@ -139,6 +139,8 @@ Size
 
 For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when {{< ui >}}Capture HTTP payloads{{< /ui >}} is enabled in the test's [advanced options][28].
 
+To review payloads in bulk, export the test run as a HAR file. Open the run and click {{< ui >}}Actions{{< /ui >}} > {{< ui >}}Export as HAR{{< /ui >}}. When {{< ui >}}Capture HTTP payloads{{< /ui >}} is enabled, the file includes the request and response payloads for Fetch and XHR resources. You can then search them offline or in your own tools.
+
 ### Backend traces
 
 Click the {{< ui >}}Traces{{< /ui >}} pill to access the {{< ui >}}Traces{{< /ui >}} tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 

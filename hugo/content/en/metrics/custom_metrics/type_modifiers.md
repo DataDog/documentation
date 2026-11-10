@@ -97,11 +97,11 @@ The `.weighted()` modifier is automatically appended to queries on gauges only i
 - The gauge metric is submitted regularly, such that there is no interpolation over gaps.
 - The submission interval is correctly defined and set. 
 
-Either the Datadog Agent or an integration sets the submission interval for a metric at time of intake. Modify submission intervals on the [Metrics Summary page][4].
+Either the Datadog Agent or an integration sets the submission interval for a metric at time of intake. Modify submission intervals on the [Metrics Catalog page][4].
 
 ## Modify a metric's type within Datadog
 
-While it is not normally required, it is possible to change a metric's type in the [Metrics Summary page][4]:
+While it is not normally required, it is possible to change a metric's type in the [Metrics Catalog page][4]:
 
 {{< img src="metrics/custom_metrics/type_modifiers/metric_type.png" alt="Metric Type" style="width:70%;">}}
 
@@ -113,7 +113,7 @@ Example use case:
 
 3. You like the name `app.requests.served`, so rather than submitting a new metric name with a more appropriate `COUNT` type, you could change the type of `app.requests.served` by updating:
   * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served, and
-  * The Datadog in-app type from the metric summary page to `RATE`.
+  * The Datadog in-app type from the Metrics Catalog page to `RATE`.
 
 This causes data submitted before the type change for `app.requests.served` to behave incorrectly. This is because it was stored in a format to be interpreted as an in-app `GAUGE` (not a `RATE`). Data submitted after step 3 is interpreted properly.
 
@@ -124,4 +124,4 @@ If you are not willing to lose the historical data submitted as a `GAUGE`, creat
 [1]: /metrics/types/
 [2]: /metrics/introduction/#time-aggregation
 [3]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
-[4]: https://app.datadoghq.com/metric/summary
+[4]: https://app.datadoghq.com/metric/catalog
