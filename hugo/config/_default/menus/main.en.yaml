@@ -5199,16 +5199,21 @@ menu:
       parent: dbm_setup_postgres
       identifier: dbm_postgres_heroku
       weight: 10309
+    - name: Databricks Lakebase
+      url: database_monitoring/setup_postgres/lakebase
+      parent: dbm_setup_postgres
+      identifier: dbm_postgres_lakebase
+      weight: 10310
     - name: Advanced Configuration
       url: database_monitoring/setup_postgres/advanced_configuration
       parent: dbm_setup_postgres
       identifier: dbm_postgres_advanced_configuration
-      weight: 10310
+      weight: 10311
     - name: Troubleshooting
       url: database_monitoring/setup_postgres/troubleshooting/
       parent: dbm_setup_postgres
       identifier: dbm_troubleshooting_postgres
-      weight: 10311
+      weight: 10312
     - name: MySQL
       url: database_monitoring/setup_mysql/
       parent: dbm_setup

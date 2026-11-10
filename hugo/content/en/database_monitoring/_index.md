@@ -71,6 +71,7 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
   {{< image-card href="/database_monitoring/setup_postgres/heroku" src="integrations_logos/heroku.png" alt="PostgreSQL" >}}
   {{< image-card href="/database_monitoring/setup_postgres/supabase/cloud" src="integrations_logos/supabase.png" alt="Supabase Cloud" title="Supabase Cloud" >}}
   {{< image-card href="/database_monitoring/setup_postgres/supabase/agent" src="integrations_logos/supabase.png" alt="Supabase Self-Hosted" title="Supabase Self-Hosted" >}}
+  {{< image-card href="/database_monitoring/setup_postgres/lakebase" src="integrations_logos/databricks.png" alt="Databricks Lakebase" title="Databricks Lakebase" >}}
 {{< /card-grid >}}
 <p></p>
 
