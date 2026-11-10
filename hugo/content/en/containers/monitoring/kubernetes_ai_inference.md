@@ -7,16 +7,28 @@ further_reading:
   text: "Getting Started with Kubernetes Observability"
 ---
 
+{{< callout url="https://www.datadoghq.com/product-preview/kubernetes-inference/"
+ btn_hidden="false" header="Join the Preview!">}}
+The Inference Workloads view is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
 Use the [Inference Workloads view][1] in the Kubernetes Explorer to monitor AI inference workloads running on Kubernetes. The AI inference view provides insight from endpoint to compute, simplifying troubleshooting, investigation, and debugging. Use it to monitor relevant pods, deployments, and other Kubernetes resources. You can also view resource specifications for failed pods within a deployment and correlate node activity with related metrics, logs, and traces.
 
-The Inference Workloads view is available for workloads deployed with the Dynamo, KubeRay, or KServe operator and is included with Infrastructure Monitoring. Workloads deployed with other operators are not supported.
+The Inference Workloads view is available for workloads deployed with:
+- Dynamo
+- KubeAI
+- KServe
+- Ray
+
+Inference Workloads is included with Infrastructure Monitoring.
 
 ## Prerequisites
 
-- Datadog Agent v7.84.0 or later with the [`orchestratorExplorer` feature][2] enabled
+- Datadog Agent v7.86.0 or later with the [orchestratorExplorer feature][2] enabled
+- Cluster Agent v7.86.0 or later
 - Both the Datadog Agent and the Cluster Agent must be running to collect Kubernetes resources
 
-## View Inference Workloads
+## View inference workloads
 
 In the Kubernetes Explorer, select {{< ui >}}AI{{< /ui >}} > {{< ui >}}Inference Workloads{{< /ui >}}.
 
@@ -40,8 +52,9 @@ Anomalous values in these columns are highlighted to show potential areas for in
 
 - Pods that are not ready to serve traffic
 - Requests that are waiting, indicating engine saturation
+- Error rates above 1% (yellow) and above 5% (red)
 
-### Workload Details
+### Workload details
 
 Select a workload from the list to view its detail panel. The detail panel shows more information about the workload, including related resources in a list or map view and workload components. It also shows related metrics, logs, and traces. If you have GPU Monitoring enabled, click {{< ui >}}View in GPU Monitoring{{< /ui >}} to view more performance and health metrics about the workload. To set up GPU Monitoring for inference workloads, see [Monitor inference workloads][3].
 
