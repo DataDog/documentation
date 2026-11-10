@@ -549,6 +549,7 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
+  # The chart defines OTEL_K8S_NODE_NAME before extraEnvs
   - name: DD_HOSTNAME
     value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
 {{< /code-block >}}
@@ -727,6 +728,7 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
+  # The chart defines OTEL_K8S_NODE_NAME before extraEnvs
   - name: DD_HOSTNAME
     value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
 ports:
