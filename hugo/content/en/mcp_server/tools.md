@@ -3379,8 +3379,8 @@ Returns details for a team, including its name, handle, description, and member 
 - Show the details of the Payments team.
 
 ### `get_team_memberships`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists one page of team members and their roles.
 
 - Who belongs to the Payments team?
