@@ -354,9 +354,10 @@ helm install datadog-operator datadog/datadog-operator --set introspection.enabl
 
 Then deploy a minimal `DatadogAgent` spec.
 
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+
 {{% /collapse-content %}}
 
-[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -502,6 +503,9 @@ oc patch csv <datadog-operator.VERSION> -n <datadog-operator-namespace> \
 
 Then deploy a minimal `DatadogAgent` spec.
 
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
+
 {{% /collapse-content %}}
 
 Enable `features.clusterChecks.useClusterChecksRunners` to schedule checks there; otherwise, control plane checks run on the Node Agent.
@@ -514,9 +518,6 @@ oc get secret etcd-metric-client -n openshift-etcd-operator -o yaml | \
   oc apply -f -
 ```
 
-
-[1]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
-[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/install-openshift.md
 {{% /tab %}}
 {{% tab "Helm" %}}
 
