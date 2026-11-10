@@ -27,13 +27,13 @@ Your team's existing monitors stay in place. Bits Detection works alongside them
 
 You can enable Bits Detection for additional services from several entry points:
 
+<div class="alert alert-info">Enabling coverage requires the Bits Investigations Write and Monitors Write permissions. Setting up a notification destination also requires the Monitor Configuration Policy Write permission. For details, see the <a href="#permissions">Permissions</a> section.</div>
+
 ### Option 1: Bits Detection Coverage Page {#enable-from-bits-ai}
 1. In Datadog, go to [{{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Detection{{< /ui >}}][5] and click {{< ui >}}Enable New Detection Coverage{{< /ui >}}.
 1. Filter the service list to find services you'd like to enable, and select one or more services from the list.
 1. Set up a notification destination so the team knows when Bits finds a critical degradation.
 1. Review the managed coverage after initialization completes. You receive an email when your new health posture is ready.
-
-<div class="alert alert-info">Enabling coverage requires the Bits Investigations Write and Monitors Write permissions. Setting up a notification destination also requires the Monitor Configuration Policy Write permission. For details, see <a href="#permissions">Permissions</a>.</div>
 
 ### Option 2: Service Page {#enable-from-service-page}
 
@@ -96,7 +96,7 @@ The Monitor List groups Bits Detection monitors by service. For each service, yo
 
 ### Manage Bits Detection notifications
 
-Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams. Creating or editing a notification rule requires the Monitor Configuration Policy Write permission (see [Permissions](#permissions)). To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
+Bits Detection monitors are tuned to production behavior, not static thresholds. Use alert notification rules to route alerts to the right teams. Creating or editing a notification rule requires the Monitor Configuration Policy Write permission. For details, see the [Permissions](#permissions) section. To set up a rule, go to the [service monitoring overview][2] and click {{< ui >}}Set Up Alert Notification Rules{{< /ui >}}.
 
 1. In {{< ui >}}Match notifications with specific tags{{< /ui >}}, review the query. Datadog pre-fills the rule with tags for the selected service and Bits Detection-managed monitors. You can filter further.
 1. In {{< ui >}}Choose routing conditions and recipients{{< /ui >}}, select {{< ui >}}Manual Routing{{< /ui >}} or {{< ui >}}Dynamic Routing{{< /ui >}}.
@@ -124,7 +124,7 @@ Bits Detection uses criticality to determine which resources should have managed
 
 ## Permissions
 
-Bits Detection uses existing Datadog RBAC permissions. There are no permissions specific to Bits Detection.
+Bits Detection uses existing Datadog role-based access control (RBAC) permissions. There are no permissions specific to Bits Detection.
 
 | Action                                                                  | Required permissions |
 |:------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------- |
