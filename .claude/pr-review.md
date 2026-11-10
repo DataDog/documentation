@@ -45,7 +45,7 @@ AI tools and search often show readers one section without the rest of the page.
 - Are `further_reading` links relevant and non-duplicative?
 - Are reference links free of duplicates or unused entries?
 - Does the title match how it's linked from other pages?
-- If the file is new and public (no `private: true`), has the page been added to the menu file (`hugo/config/_default/menus/main.en.yaml`) so it shows up in the side-nav? The entry needs the correct `parent`, a `weight` that fits its siblings, and a unique `identifier`. Pages in a `guide` folder don't need an entry. If the menu file isn't in the diff, flag it as an **Issue**.
+- If the file is new and public (no `private: true`), has the page been added to the menu file (`shared/left_nav/config/_default/menus/main.en.yaml`) so it shows up in the side-nav? The entry needs the correct `parent`, a `weight` that fits its siblings, and a unique `identifier`. Pages in a `guide` folder don't need an entry. If the menu file isn't in the diff, flag it as an **Issue**.
 - Does the `title` use title case? H2 and lower headings use sentence case.
 
 ### 6. Hugo checks

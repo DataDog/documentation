@@ -103,6 +103,10 @@ module:
        target: data
      - source: i18n
        target: i18n
+   # Left nav menus (`.Site.Menus.main`), shared with Astro. Config can't be
+   # mounted, so this is a local module whose config/ Hugo merges into the
+   # site's. A relative path resolves against themesDir (hugo/themes).
+   - path: ../../shared/left_nav
 
   #  - path: github.com/DataDog/websites-sources
   #    disabled: true
