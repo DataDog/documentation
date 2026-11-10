@@ -271520,6 +271520,10 @@ paths:
       description: |-
         Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
         Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        Set `create_only=true` to atomically create exactly one quota in the caller's organization and reject an
+        existing quota with `409` instead of updating it. This mode does not support pending limits or descendant writes.
+        Repeated create-only requests do not replay the original response. If a response is lost, a retry can return `409`
+        even if the first request succeeded; reconcile the outcome before retrying or importing the quota.
         For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
         accompany an immediate limit or update an existing quota by itself.
         Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
@@ -271563,6 +271567,13 @@ paths:
         - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
+          required: false
+          schema:
+            default: false
+            type: boolean
+        - description: Create one quota without updating an existing quota. Requires exactly one item that specifies `usage_limit` and `enforced`, omits `pending_usage_limit`, and sets `include_descendants=false`. The quota belongs to the caller's organization. An existing quota returns `409` without being modified.
+          in: query
+          name: create_only
           required: false
           schema:
             default: false
@@ -271628,13 +271639,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
+          description: Bad Request. Returned when `create_only=true` is combined with multiple items, `pending_usage_limit`, or `include_descendants=true`, or when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a nonexistent quota reports an error in the item's `error` field. If only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              examples:
+                already_exists:
+                  value:
+                    errors:
+                      - detail: A quota already exists for this namespace and scope. Import it before managing it with Terraform.
+                        meta:
+                          error_code: already_exists
+                          quota_id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        status: "409"
+                        title: Conflict
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict. With `create_only=true`, a quota already exists for this namespace and scope in the caller's organization. The existing quota is unchanged. The error's `meta` contains `error_code` set to `already_exists` and `quota_id` set to the existing quota's opaque ID. Import the existing quota before managing it with Terraform.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
