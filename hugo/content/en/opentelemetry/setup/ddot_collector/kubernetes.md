@@ -119,18 +119,18 @@ helm repo update
 
 ### Configure the Collector
 
-Set `DD_HOSTNAME` so that each node reports a consistent hostname. The example configurations on this page set it from a `NODE_NAME` variable:
+Set `DD_HOSTNAME` so that each node reports a consistent hostname. The Operator example on this page sets it from a `K8S_NODE_NAME` variable:
 
 ```yaml
-- name: NODE_NAME
+- name: K8S_NODE_NAME
   valueFrom:
     fieldRef:
       fieldPath: spec.nodeName
 - name: DD_HOSTNAME
-  value: $(NODE_NAME)-<CLUSTER_NAME>
+  value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
 ```
 
-Keep `NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands `$(NODE_NAME)` only from variables defined earlier in the list. Replace `<CLUSTER_NAME>` with the cluster name you use for `K8S_CLUSTER_NAME` in the same file. Datadog uses the same `<NODE_NAME>-<CLUSTER_NAME>` name for the node's Kubernetes metrics, so each node appears as one host.
+Keep `K8S_NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands `$(K8S_NODE_NAME)` only from variables defined earlier in the list. The Collector Helm chart already defines `OTEL_K8S_NODE_NAME` before your `extraEnvs`, so the Helm example sets `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>` without defining a variable. Replace `<CLUSTER_NAME>` with the cluster name you use for `K8S_CLUSTER_NAME` in the same file. Datadog uses the same `<NODE_NAME>-<CLUSTER_NAME>` name for the node's Kubernetes metrics, so each node appears as one host.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -174,12 +174,12 @@ spec:
       value: datadog,pprof,zpages,prometheus,infraattributes
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
-    - name: NODE_NAME
+    - name: K8S_NODE_NAME
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
     - name: DD_HOSTNAME
-      value: $(NODE_NAME)-<CLUSTER_NAME>
+      value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
 {{< /code-block >}}
 
 Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
@@ -285,7 +285,7 @@ spec:
         fieldRef:
           apiVersion: v1
           fieldPath: status.podIP
-    # K8S_NODE_NAME is added automatically by the operator
+    # K8S_NODE_NAME is defined in step 1
 {{< /code-block >}}
 
 4. (Optional) Collect container logs from the node's file system:
@@ -454,18 +454,17 @@ spec:
       value: datadog,pprof,zpages,prometheus,infraattributes
     - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
-    - name: NODE_NAME
+    - name: K8S_NODE_NAME
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
     - name: DD_HOSTNAME
-      value: $(NODE_NAME)-<CLUSTER_NAME>
+      value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
     - name: K8S_POD_IP
       valueFrom:
         fieldRef:
           apiVersion: v1
           fieldPath: status.podIP
-    # K8S_NODE_NAME is added automatically by the operator
   # Mount the node's log directories for the filelog receiver (read-only)
   volumes:
     - name: varlogpods
@@ -550,12 +549,8 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
-  - name: NODE_NAME
-    valueFrom:
-      fieldRef:
-        fieldPath: spec.nodeName
   - name: DD_HOSTNAME
-    value: $(NODE_NAME)-<CLUSTER_NAME>
+    value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
 {{< /code-block >}}
 
 Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
@@ -732,12 +727,8 @@ extraEnvs:
     value: datadog,pprof,zpages,prometheus,infraattributes
   - name: K8S_CLUSTER_NAME
     value: <CLUSTER_NAME>
-  - name: NODE_NAME
-    valueFrom:
-      fieldRef:
-        fieldPath: spec.nodeName
   - name: DD_HOSTNAME
-    value: $(NODE_NAME)-<CLUSTER_NAME>
+    value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
 ports:
   jaeger-compact:
     enabled: false
