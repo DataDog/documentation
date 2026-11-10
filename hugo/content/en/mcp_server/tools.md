@@ -3432,7 +3432,7 @@ Toolset: `teams`\
 Permissions required: `Teams Read`, `Teams Manage`, and `MCP Write`\
 Permanently deletes a team. The tool asks you to confirm before it deletes the team.
 
-- Delete the Payments team after confirmation.
+- Delete the Payments team.
 
 ### `add_team_membership`
 Toolset: `teams`\
