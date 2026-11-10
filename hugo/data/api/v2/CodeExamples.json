@@ -69,11 +69,51 @@
   "CreateActionConnection": [
     {
       "group": "action_connection",
+      "suffix": "_4171110267",
+      "description": "Create a GCP Action Connection with AWS Secrets Manager references"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_4037152040",
+      "description": "Create a GitHub App Action Connection"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_700388414",
+      "description": "Create a GitHub personal access token Action Connection"
+    },
+    {
+      "group": "action_connection",
       "suffix": "",
       "description": "Create a new Action Connection returns \"Successfully created Action Connection\" response"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_4258732703",
+      "description": "Create an Anthropic Action Connection with an AWS Secrets Manager API token"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_4217378621",
+      "description": "Create an HTTP Action Connection with an AWS Secrets Manager token"
     }
   ],
   "UpdateActionConnection": [
+    {
+      "group": "action_connection",
+      "suffix": "_426384263",
+      "description": "Update a GCP Action Connection with a versioned AWS Secrets Manager reference"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_397154390",
+      "description": "Update a GitHub App Action Connection without replacing its secret"
+    },
+    {
+      "group": "action_connection",
+      "suffix": "_525672300",
+      "description": "Update a GitHub personal access token Action Connection without replacing its secret"
+    },
     {
       "group": "action_connection",
       "suffix": "",
@@ -487,6 +527,20 @@
       "description": "Create a case type returns \"CREATED\" response"
     }
   ],
+  "CreateOIDCCloudAuthPersonaMapping": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC persona mapping returns \"Created\" response"
+    }
+  ],
+  "CreateOIDCCloudAuthProvider": [
+    {
+      "group": "cloud_authentication",
+      "suffix": "",
+      "description": "Create a Custom OIDC provider returns \"Created\" response"
+    }
+  ],
   "CreateAWSCloudAuthIntakeMapping": [
     {
       "group": "cloud_authentication",
@@ -579,6 +633,11 @@
       "group": "cloud_cost_management",
       "suffix": "_4125168396",
       "description": "Upload Custom Costs File returns \"Accepted\" response"
+    },
+    {
+      "group": "cloud_cost_management",
+      "suffix": "_3323862424",
+      "description": "Upload Custom Costs file marked as an AI provider file returns \"Accepted\" response"
     }
   ],
   "ValidateQuery": [
@@ -1834,6 +1893,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_292428701",
+      "description": "Create a monitor notification rule with rule options returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1379932371",
       "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
@@ -1867,6 +1931,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_365435820",
+      "description": "Update a monitor notification rule with rule options returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -2021,6 +2090,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_2324504662",
+      "description": "Validate an observability pipeline with an empty processor group returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1330454428",
       "description": "Validate an observability pipeline with destination secret key returns \"OK\" response"
     },
@@ -2028,6 +2102,11 @@
       "group": "observability_pipelines",
       "suffix": "_815080644",
       "description": "Validate an observability pipeline with enrichment table secret field lookup returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3415678462",
+      "description": "Validate an observability pipeline with grok library rules returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2244,6 +2323,20 @@
       "group": "rum",
       "suffix": "_394074053",
       "description": "Update a RUM application with Product Scales returns \"OK\" response"
+    }
+  ],
+  "GetRUMRecoverySessionCount": [
+    {
+      "group": "rum_recovery",
+      "suffix": "_4221178610",
+      "description": "Count recoverable sessions accepts exactly 180 days"
+    }
+  ],
+  "SearchRUMArchiveSessions": [
+    {
+      "group": "rum_recovery",
+      "suffix": "_3394116303",
+      "description": "Search archived sessions returns canonical data and first-page metadata"
     }
   ],
   "UpdateRestrictionPolicy": [
@@ -3052,6 +3145,13 @@
       "group": "spans_metrics",
       "suffix": "",
       "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateEmailAccessPolicy": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create an email access policy returns \"Created\" response"
     }
   ],
   "CreateBackfilledDegradation": [

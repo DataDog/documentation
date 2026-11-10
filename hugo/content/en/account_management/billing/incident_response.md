@@ -18,7 +18,9 @@ Datadog's [Incident Management][1], [On-Call][2], and Incident Response SKUs use
 
 Organizations have two options for incident response billing:
 - Incident Management or On-Call as separate SKUs, each billed individually
-- The Incident Response bundle, which unifies billing for both Incident Management and On-Call under a single SKU
+- The Incident Response bundle, which unifies billing for both Incident Management and On-Call under a single SKU and includes full access to [Status Pages](#status-pages-usage)
+
+The Incident Response bundle can't be combined with the standalone On-Call or Incident Management SKUs. If your organization commits to the bundle, all of its seats are Incident Response seats.
 
 Each product bills by seat, so each user who performs qualifying actions requires a seat license. For detailed pricing information, see the [Incident Response pricing page][3].
 
@@ -28,14 +30,14 @@ View and manage seat usage for each product in the [Seat Management][4] section 
 
 A **seat** is a license for a user to actively participate in the on-call or incident management process in Datadog. 
 
-Any user can claim a seat for On-Call, Incident Management, or Incident Response as they perform actions that require a seat. Billing admins can also assign seats ahead of time to simplify the process for their teams.
+Any user can claim a seat for On-Call, Incident Management, or Incident Response as they perform actions that require a seat. Billing admins can also [assign seats](#assign-seats) ahead of time to simplify the process for their teams.
 
 A user needs an **On-Call seat** if they perform any of the following:
 - Participate in an [on-call schedule][5]
 - Are included in an [escalation policy][6]
 - Have set up [notification preferences][7] to receive pages
 
-In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules.
+In the On-Call product, a user does not need a seat to view existing pages, escalation policies, teams, or schedules. However, if a user without a seat performs an action that requires an On-Call seat, Datadog automatically assigns them a billable seat. Actions taken through the [On-Call API][10] also assign a seat, without a confirmation prompt. If no one in your organization has an On-Call seat yet, the first automatic assignment enables On-Call seats and Datadog sends your organization a notification email. For more information, see [Billing and overages](#billing-and-overages).
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
@@ -44,7 +46,9 @@ A user needs an **Incident Management seat** if they perform any of the followin
 - Assign a task to a user within an incident (the assignee does not need a seat)
 - Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Posting in a connected Slack, Microsoft Teams, or Google Chat channel doesn't require a seat, and neither does commenting on a linked Jira issue. This applies even when the messages sync to the incident timeline. Only actions taken through the Datadog app for Slack or Microsoft Teams, such as using action buttons or mentioning @Datadog, require a seat.
+
+A synced message is different from a timeline comment: a regular message that syncs to the timeline automatically doesn't require a seat, but adding a comment, graph, or link to the timeline in Datadog, or through an action in the Datadog app for Slack or Microsoft Teams, does.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
 
@@ -152,3 +156,4 @@ Your monthly bill contains the following:
 [7]: /incident_response/on-call/notification_preferences/#notification-preferences
 [8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin
+[10]: /api/latest/on-call

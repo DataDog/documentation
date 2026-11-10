@@ -13,8 +13,6 @@ further_reading:
     text: 'Data Observability: Lineage'
 ---
 
-<div class="alert alert-info">Jobs Monitoring for Azure Data Factory is in Preview.</div>
-
 ## Overview
 
 [Data Observability: Jobs Monitoring][1] gives visibility into the performance and reliability of your Azure Data Factory pipelines. Datadog reads pipeline and activity run history from the Data Factory management API. Each pipeline run appears as a job run with its activities broken out, along with the error message for failed runs.
@@ -28,6 +26,13 @@ Before you begin, make sure you have:
 - An Azure subscription containing the data factories you want to monitor.
 - The [Datadog Azure integration][2] installed, with an App Registration that has access to that subscription.
 - Permission to create role assignments on the subscription or on individual data factories.
+
+{{% site-region region="us3" %}}
+**Note**: If you use the US3 site and set up the [Azure native integration][1] through a Datadog resource in the Azure portal, you must also [set up the Azure integration with an App Registration][2] to use Jobs Monitoring for Azure Data Factory.
+
+[1]: /integrations/guide/azure-native-integration/
+[2]: /integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
 
 ## Add required Azure permissions
 

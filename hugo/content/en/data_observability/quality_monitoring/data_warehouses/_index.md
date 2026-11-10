@@ -22,6 +22,7 @@ Use these integrations to:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/redshift" >}}Redshift{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/clickhouse" >}}ClickHouse Cloud{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/fabric" >}}Microsoft Fabric Warehouse{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

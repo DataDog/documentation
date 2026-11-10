@@ -21,7 +21,7 @@ further_reading:
   text: Feature Flag グラフ
 title: Ruby Feature Flags
 ---
-## 概要 {#overview}
+## 概要{#overview}
 
 このページでは、Datadog Feature Flags SDK を使用して Ruby アプリケーションをインスツルメントする方法について説明します。Ruby SDK は、機能フラグ管理のオープン標準である [OpenFeature][3] と連携して、Datadog Ruby トレーサー (`datadog` gem) で Remote Configuration を通じてフラグ更新を受信します。
 
@@ -286,13 +286,60 @@ end
 
 テスト中にフラグの状態を変更するには、プロバイダーインスタンスで `add_flag(flag_key:, value:)` を呼び出します。同じパターンが Minitest にも適用されます。`around` フックを `setup`/`teardown` メソッドに置き換えてください。
 
+## JRuby で Java SDK を使用する {#use-the-java-sdk-on-jruby}
+
+JRuby 上では、Ruby SDK は Feature Flags をサポートしていません。JRuby 上では、Ruby SDK はログに警告を出力し、Feature Flags を有効にしません。代わりに [Java SDK][6] を使用してください。JRuby は Java インテグレーションを通じて Java SDK を呼び出します。
+
+[Java SDK 互換性要件][7]に記載されているバージョンを使用してください。
+
+1. `dd-openfeature` JAR ファイル、OpenFeature Java SDK JAR ファイル、およびそれらの依存関係を取得します。たとえば、Maven を使用してそれらをディレクトリにコピーします。
+2. `require` を使用してアプリケーションに JAR ファイルを読み込みます。
+3. 構成ソースの環境変数を設定します。[サーバー SDK 構成ソース][8]を参照してください。
+4. `dd-java-agent` で JRuby を起動します。`-J` オプションを使用して、`-javaagent` オプションを JVM に渡します。
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE_NAME>
+export DD_ENV=<YOUR_ENVIRONMENT>
+# Use Agent Remote Configuration. Agentless delivery is the default.
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+
+jruby -J-javaagent:/path/to/dd-java-agent.jar app.rb
+```
+
+```ruby
+require 'java'
+
+# Load the Datadog provider, the OpenFeature SDK, and their dependencies
+Dir['/path/to/jars/*.jar'].each { |jar| require jar }
+
+java_import 'dev.openfeature.sdk.OpenFeatureAPI'
+java_import 'dev.openfeature.sdk.MutableContext'
+java_import 'datadog.trace.api.openfeature.Provider'
+
+# Set the provider. Wait for the first flag configuration.
+api = OpenFeatureAPI.getInstance
+api.setProviderAndWait(Provider.new)
+client = api.getClient('my-app')
+
+context = MutableContext.new('user-123')
+context.add('tier', 'premium')
+
+enabled = client.getBooleanValue('checkout.new', false, context)
+```
+
+JAR ファイルのみではフラグ配信は有効になりません。Datadog プロバイダーは `dd-java-agent` のクラスを使用します。JVM が `dd-java-agent` をロードしない場合、プロバイダーは初期化されません。その場合、フラグ評価はデフォルト値を返します。
+
+プロバイダーイベント、エラー処理、および評価メソッドについては、[Java SDK][6] ページを参照してください。JRuby は同じクラスとメソッドを使用します。
+
 ## トラブルシューティング {#troubleshooting}
 
 ### 機能フラグが常にデフォルト値を返す{#feature-flags-always-return-default-values}
 
-機能フラグが常にデフォルト値を返すことが予期していない状況である場合は、以下を確認してください。
+機能フラグが予期せず常にデフォルト値を返す場合は、以下をチェックしてください。
 
+- アプリケーションが JRuby 上で実行される場合は、Java SDK を使用します。[JRuby で Java SDK を使用する][9]を参照してください。
 - Datadog Agent 構成で Remote Configuration が有効になっていることを確認する
+- アプリケーションの起動時に Datadog Agent が利用可能であったことを確認します。Agent が利用可能になった後も問題が解消しない場合は、アプリケーションを再起動してください。[Agent の可用性][10]を参照してください。
 - サービスと環境が構成されていることを確認する (`DD_SERVICE` および `DD_ENV` 環境変数、または Ruby で `config.service` および `config.env` を使用)
 - Ruby アプリケーションの Datadog 構成で `config.remote.enabled = true` と`config.open_feature.enabled = true` が設定されていることを確認する。
 - `datadog` gem のバージョンに OpenFeature のサポートが含まれていること (2.24.0 以降) を確認する。
@@ -325,3 +372,8 @@ end
 [3]: https://openfeature.dev/
 [4]: /ja/account_management/api-app-keys/#api-keys
 [5]: /ja/feature_flags/guide/server_flag_evaluation_metrics/
+[6]: /ja/feature_flags/server/java/
+[7]: /ja/feature_flags/server/java/#compatibility-requirements
+[8]: /ja/feature_flags/concepts/configuration_sources/
+[9]: #use-the-java-sdk-on-jruby
+[10]: /ja/feature_flags/concepts/configuration_sources/#agent-availability

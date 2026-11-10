@@ -2,6 +2,9 @@
 aliases:
 - /fr/service_management/on-call/triggering_pages/live_call_routing/
 - /fr/incident_response/on-call/triggering_pages/live_call_routing/
+description: Connectez les appels téléphoniques à votre équipe On-Call en utilisant
+  le routage par appel direct ou par messagerie vocale, avec des menus de clavier
+  configurables et une gestion des escalades.
 further_reading:
 - link: /incident_response/on-call/
   tag: Documentation
@@ -12,15 +15,14 @@ title: Routage d'appel en direct
 Le routage d'appel en direct est provisionné par Datadog. Pour l'activer pour votre organisation, contactez <a href="mailto:support@datadoghq.com">Datadog Support</a>. Incluez votre cas d'utilisation et le code pays souhaité (par exemple, <code>+33</code> pour la France).
 </div>
 
-
 ## Présentation {#overview}
 
 Le routage d'appel en direct connecte les appels téléphoniques à votre équipe On-Call. Lorsqu'une personne appelle votre numéro dédié, le système traite l'appel selon votre configuration.
 
 Datadog On-Call prend en charge deux types de routage :
 
-- **Routage d'appel direct** : connecte l'appelant à un intervenant actif, en suivant la politique d'escalade de l'équipe On-Call. Permet une coordination en temps réel lors d'incidents critiques.
-- **Routage de messagerie vocale** : invite l'appelant à laisser un message vocal, puis convertit le message vocal en une Page pour l'équipe On-Call. Utile pour les appelants non techniques ou les fournisseurs tiers qui doivent signaler des problèmes sans conversation en direct.
+- [**Routage par appel direct**](#direct-call-routing) : Connecte l'appelant à un intervenant actif, en suivant la politique d'escalade de l'équipe On-Call. Permet une coordination en temps réel lors d'incidents critiques.
+- [**Routage par messagerie vocale**](#voicemail-routing) : Invite l'appelant à laisser un message vocal, puis convertit le message vocal en une page pour l'équipe On-Call. Utile pour les appelants non techniques ou les fournisseurs tiers qui doivent signaler des problèmes sans conversation en direct.
 
 ## Configuration {#configuration}
 
@@ -43,6 +45,12 @@ Vous pouvez configurer jusqu'à neuf options par itinéraire. Chaque option asso
 - Regroupez les équipes associées sous des touches adjacentes.
 - Soyez concis et clair dans les invites du menu.
 
+### Type de numéro et disponibilité régionale{#number-type-and-regional-availability}
+
+- **Numéro gratuit vs local** : La plupart des régions fournissent un numéro local. L'Inde et les Émirats arabes unis font exception ; seuls des numéros gratuits y sont disponibles.
+- **Indicatif régional ou emplacement** : Pour les numéros américains, vous pouvez demander un indicatif régional spécifique.
+- **Persistance** : Une fois qu'un numéro est provisionné, il est dédié à ce routage et ne change pas ou ne tourne pas.
+
 ## Types de routage {#routing-types}
 
 Datadog On-Call prend en charge deux types de routage : le routage d'appel direct et le routage de messagerie vocale.
@@ -58,9 +66,19 @@ Les intervenants disposent alors des options suivantes :
 - Appuyez sur `2` pour l'escalader.
 - Appuyez sur `3` pour le résoudre.
 
+#### Maintenir la page ouverte après la fin de l'appel{#keep-the-page-open-after-the-call-ends}
+
+Par défaut, la page créée pour un itinéraire d'appel direct se clôture après que l'appelant a raccroché. Sélectionnez **Maintenir la page ouverte après la fin de l'appel** pour conserver la page ouverte et continuer à appliquer la politique d'escalade de l'équipe On-Call tout en alertant les intervenants.
+
+#### Enregistrer la conversation{#record-the-conversation}
+
+Sélectionnez **Enregistrer la conversation** pour enregistrer l'appel entre l'appelant et l'intervenant.
+
 #### Logique d'escalade {#escalation-logic}
 
-Pour le routage direct des appels, l'escalade se déroule comme suit :
+Pour le routage par appel direct, On-Call appelle les répondeurs à chaque étape de la politique d'escalade. Si personne ne répond, On-Call passe immédiatement à l'étape suivante et appelle ses répondeurs. Il n'attend pas le délai configuré entre les étapes, ce qui aide à connecter l'appelant à un répondeur disponible aussi rapidement que possible.
+
+L'escalade se déroule comme suit :
 
 - **Plusieurs intervenants au même niveau** : Tous les intervenants sont appelés simultanément. Le premier à répondre est mis en relation.
 - **L'intervenant rejette un appel** : Le système escalade immédiatement vers l'intervenant suivant.
@@ -120,5 +138,11 @@ Si un message vocal est laissé mais qu'aucune Page n'est créée :
 - Vérifiez que l'équipe On-Call affectée à l'itinéraire dispose d'une politique d'escalade active.
 - Confirmez que les membres de l'équipe ont configuré leurs préférences de notification pour recevoir des Pages.
 - Vérifiez que l'enregistrement du message vocal s'est terminé avec succès. Les appelants qui raccrochent avant le bip peuvent ne pas laisser d'enregistrement que le système est en mesure de traiter.
+
+### Appels ne se connectant pas depuis l'extérieur du pays du numéro{#calls-not-connecting-from-outside-the-numbers-country}
+
+Si les appelants situés en dehors d'un pays spécifique ne peuvent pas joindre votre numéro de routage :
+- **Numéros en Inde** : Joignables uniquement par les appelants situés en Inde, en utilisant le préfixe local `000 800…`. Ils ne sont pas joignables en composant le format international complet.
+- **Numéros des EAU** : Joignables uniquement par les appelants situés aux EAU. Ils ne fonctionnent pas à l'international.
 
 [1]: /fr/help/
