@@ -1502,7 +1502,7 @@ Syncs feature flag allocations for a specific environment. This replaces all exi
 
 Tools for monitoring and managing Datadog Agent deployments, upgrade schedules, and Agent and package versions across an organization's fleet of hosts with [Fleet Automation][100].
 
-<div class="alert alert-info">The <code>fleet-automation</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+<div class="alert alert-info">The <code>fleet-automation</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/fleet-automation-mcp-toolset/">Sign up for access.</a></div>
 
 ### `search_fleet_agents`
 *Toolset: **fleet-automation***\
