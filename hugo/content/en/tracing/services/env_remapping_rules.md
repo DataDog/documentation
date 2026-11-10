@@ -1,6 +1,6 @@
 ---
 title: Env Remapping Rules
-description: Rename, merge, or split environments for APM spans with env remapping rules, without changing tracer configuration or redeploying code.
+description: Rename, merge, or split environments for telemetry with env remapping rules, without changing tracer configuration or redeploying code.
 further_reading:
 - link: "/tracing/services/service_remapping_rules/"
   tag: "Documentation"
