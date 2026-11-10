@@ -536,7 +536,7 @@ For example:
 @evaluation.helpfulness-check.value
 ```
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view for the cashri-langgraph application. In the search box, the user has entered `@evaluation.prompt_injection.value:found` and matching traces are populated below." style="width:100%;" >}}
 
 
 You can:
