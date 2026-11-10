@@ -91,6 +91,7 @@ Install the [Datadog Connector][1] from the Claude Connectors Directory. The off
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
+1. When prompted to choose the region where your account is hosted, select your [Datadog site][3] ({{< region-param key="dd_site_name" >}}), then click {{< ui >}}Connect{{< /ui >}}.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
 
@@ -761,6 +762,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
+- `kubernetes-ops-center`: Tools for inspecting [Kubernetes][51] API server load and affecting principal.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
 - `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][82], [indexes][83], and [archives][84].
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].

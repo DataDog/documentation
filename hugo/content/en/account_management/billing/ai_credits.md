@@ -40,7 +40,8 @@ The following products consume AI Credits:
 | [Bits Investigation][3] | Automatically investigate alerts, correlate telemetry, identify root causes, summarize impact, and apply remediations. |
 | [Bits Code][2] | Turn Datadog context into faster fixes with AI-assisted code generation, review, and debugging. |
 | [Bits Agent Builder][4] | Build custom AI agents that automate high-value workflows like incident response and custom reporting. |
-| [Bits Testing][9] | Explore your application to map critical user journeys and generate Synthetic tests that close coverage gaps. |
+| [Bits Database Optimization][11] | Review and implement database query optimizations identified by Bits AI. |
+| [Bits Testing][12] | Explore your application to map critical user journeys and generate Synthetic tests that close coverage gaps. |
 
 ## Pricing
 
@@ -69,7 +70,7 @@ Usage tracking and product access are managed in [**Plan & Usage > AI Credits**]
 
 {{< img src="account_management/billing/view-ai-credit-usage.png" alt="The AI Credits page showing the AI Products toggle enabled, a Cost Overview section, and a Usage Overview section with a bar chart broken down by Bits Agent Builder, Bits Chat, Bits Code, and Bits Investigations AI Credits." >}}
 
-To cap AI Credit consumption at the organization or per-user level, see [AI Credit Limits][8].
+To cap AI Credit consumption at the organization, role, per-user, or service account level, see [AI Credit Limits][8].
 
 ### Disable specific products
 
@@ -83,6 +84,18 @@ All AI Credits products are enabled by default with the Datadog Standard Role. T
 | [Bits Agent Builder][4] | Bits Agent Builder Write, Bits Agent Builder Run |
 
 To manage permissions, go to [**Organization Settings > Roles**][7], select a role, and toggle the relevant permission.
+
+## Billing enrichment
+
+Billing enrichment adds tags to a user's AI Credit usage from a [reference table][9], using the user's email address as the join key. For example, add tags such as `vp_name` or `director_name` to break down AI Credit usage by your organizational structure.
+
+To set up billing enrichment:
+
+1. Create a [reference table][9] that contains a column of user email addresses, plus any other columns you want to expose as tags.
+2. In [**Bits AI > AI Credits Management > Billing Enrichment**][10], turn on **Enable billing enrichment**.
+3. Select the **Reference table**, the **Email matching column** that Datadog joins on, and the **Enrichment columns** to expose as tags. Leave enrichment columns empty to include all columns.
+
+Datadog adds tags from the reference table to usage it processes after you enable billing enrichment. Usage recorded before then isn't enriched.
 
 ## Monitor usage
 
@@ -112,4 +125,7 @@ AI Credits are available to all Datadog customers except:
 [6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles
 [8]: /account_management/billing/ai_credit_limits/
-[9]: /synthetics/bits_testing/
+[9]: /reference_tables/
+[10]: https://app.datadoghq.com/bits-ai/ai-credits-management
+[11]: /database_monitoring/bits_database_optimization/
+[12]: /synthetics/bits_testing/

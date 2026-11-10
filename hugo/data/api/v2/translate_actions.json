@@ -1979,7 +1979,7 @@
     "request_schema_description": "Search issues request payload."
   },
   "GetIssue": {
-    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.",
     "summary": "Get the details of an error tracking issue"
   },
   "DeleteIssueAssignee": {
@@ -4452,13 +4452,13 @@
     "summary": "List tag indexing rules"
   },
   "CreateTagIndexingRule": {
-    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1\namong existing rules; use the reorder endpoint to change the evaluation order.\nEvery rule that matches a metric applies, in `rule_order`; a rule with\n`override_previous_rules` set to `false` (merge) adds to the tags configured by earlier\nrules, and a rule with `override_previous_rules` set to `true` replaces them.\nRequires the `Manage Tags for Metrics` permission.\n\nLimits:\n- An org can have at most 1,000 active tag indexing rules. Creating a rule when the org\n  already has 1,000 active rules returns a 403 error with the title\n  `Tag indexing rule limit reached`.\n- Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;\n  requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.\n- `name` can be at most 200 characters, and `metric_name_matches` can contain at most\n  50 patterns of at most 200 characters each. Requests that exceed these limits return a\n  400 error.",
     "summary": "Create a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for creating a tag indexing rule."
   },
   "ReorderTagIndexingRules": {
-    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID\nreturns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Reorder tag indexing rules",
     "request_description": "",
     "request_schema_description": "Request body for reordering tag indexing rules."
@@ -4472,7 +4472,7 @@
     "summary": "Get a tag indexing rule"
   },
   "UpdateTagIndexingRule": {
-    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.",
+    "description": "Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.\nSetting `rule_order` to a value already used by another rule returns 409; use the\nreorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and\n`metric_name_matches` can contain at most 50 patterns of at most 200 characters each;\nrequests that exceed these limits return a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Update a tag indexing rule",
     "request_description": "",
     "request_schema_description": "Request body for updating a tag indexing rule."
@@ -7758,6 +7758,20 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
   },
+  "ListEmailAccessPolicies": {
+    "description": "Lists the email access policies for a private status page.",
+    "summary": "List email access policies"
+  },
+  "CreateEmailAccessPolicy": {
+    "description": "Creates an email access policy for a private status page.",
+    "summary": "Create an email access policy",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a status page email access policy."
+  },
+  "DeleteEmailAccessPolicy": {
+    "description": "Deletes an email access policy from a private status page.",
+    "summary": "Delete an email access policy"
+  },
   "ListComponents": {
     "description": "Lists all components for a status page.",
     "summary": "List components"
@@ -7895,11 +7909,11 @@
     "request_schema_description": "Request object for editing a maintenance update."
   },
   "PublishStatusPage": {
-    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.",
     "summary": "Publish status page"
   },
   "UnpublishStatusPage": {
-    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.",
+    "description": "Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.",
     "summary": "Unpublish status page"
   },
   "GetStegadographyWidgets": {
@@ -8287,7 +8301,7 @@
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
   },
   "GetTraceByID": {
-    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.",
+    "description": "Retrieve a full APM trace by its trace ID, including every span in the trace.\nTraces are returned from live storage when available and fall back to longer-term storage.\nA `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means\nno trace with this ID is available, such as when the trace is outside the retention period.\nThis endpoint is rate limited to `60` requests per minute per organization.\nFor very large traces, use Get a pruned trace by ID, or set `include_fields` to keep only the tags you need.",
     "summary": "Get a trace by ID"
   },
   "ListTemporaryGrantRequests": {
@@ -8345,7 +8359,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same data center as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
@@ -8358,8 +8372,12 @@
     "description": "Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Delete a usage quota"
   },
+  "GetQuota": {
+    "description": "Returns a usage quota's current configuration by its opaque identifier. Scheduled limits are returned separately until they take effect, after which they are returned as the current limit.\n\nBy default, you can retrieve quotas from your organization and authorized descendant organizations in the same data center. Set `include_descendants=false` to restrict access to your organization.\n\nA quota remains readable after its associated user, role, or team is deleted. Requires `billing_read` or `billing_edit`.",
+    "summary": "Get a usage quota"
+  },
   "UpdateQuota": {
-    "description": "Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
+    "description": "Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.",
     "summary": "Update a usage quota",
     "request_description": "The usage quota fields to update. Omitting an attribute leaves its current value unchanged.",
     "request_schema_description": "Request containing the usage quota resource to update."
