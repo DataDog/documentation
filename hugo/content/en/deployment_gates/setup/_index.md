@@ -18,4 +18,4 @@ Choose where your Deployment Gates are defined, then follow the setup instructio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /deployment_gates/#configuration-sources
+[1]: /deployment_gates/#where-gate-configurations-are-stored
