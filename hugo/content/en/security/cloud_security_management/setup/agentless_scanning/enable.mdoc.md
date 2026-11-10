@@ -28,7 +28,7 @@ content_filters:
 
 <!-- Self-hosted -->
 {% if equals($agentless_scanner_hosting, "self_hosted") %}
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Self-hosted Agentless Scanning runs entirely within your infrastructure, sending minimal data to Datadog, and leaving your sensitive data in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
+Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Agentless Scanning runs entirely within your infrastructure, sending minimal data to Datadog, and leaving your sensitive data in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
 
 Setup takes approximately 30 minutes per cloud account:
 
@@ -45,9 +45,9 @@ Setup takes approximately 30 minutes per cloud account:
 Datadog-hosted scanning is in Preview and supports AWS accounts only. To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
 {% /alert %}
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. With Datadog-hosted scanning, Datadog runs the scanners in its own infrastructure. You attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan, and Datadog does the rest. You don't deploy, update, or pay for any scanner infrastructure in your account. To compare hosting modes, see [Choose where scanners run][8].
+Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Datadog runs the scanners in its own infrastructure. You attach the Agentless Scanning permissions to the Datadog integration role in each AWS account you want to scan, and Datadog does the rest. You don't deploy, update, or pay for any scanner infrastructure in your account. To compare hosting modes, see [Choose where scanners run][8].
 
-Datadog reads your disk contents in its scanning environment, in the region of your Datadog site, and doesn't retain them. Before you enable Datadog-hosted scanning, review [Datadog-hosted data residency][9].
+Datadog reads your disk contents in its scanning environment, in the region of your Datadog site, and doesn't retain them. Before you begin, review [Datadog-hosted data residency][9].
 {% /if %}
 <!-- end Datadog-hosted -->
 
@@ -128,9 +128,9 @@ Only when Sensitive Data Scanning (DSPM) is enabled:
 
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
-Before setting up Datadog-hosted scanning, verify that the following prerequisites are met:
+Before setting up Agentless Scanning, verify that the following prerequisites are met:
 
-- **AWS integration**: The AWS account you want to scan is integrated with Datadog through the [Datadog AWS integration][11]. Datadog-hosted scanning uses the integration's IAM role.
+- **AWS integration**: The AWS account you want to scan is integrated with Datadog through the [Datadog AWS integration][11]. Datadog uses the integration's IAM role to scan your account.
 - **[API and Application Keys][1]**: An {% ui %}API key{% /ui %} and an {% ui %}Application key{% /ui %} for your Datadog organization.
 - **Cloud permissions**: Setup attaches a managed IAM policy with the following permissions, and the AWS managed `SecurityAudit` policy, to the Datadog integration role. Setup doesn't create any compute or networking resources in your account.
 
@@ -415,7 +415,7 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
-To enable Datadog-hosted scanning for an AWS account, attach the Agentless Scanning permissions to the Datadog integration role in that account. You can attach the permissions with a CloudFormation stack or with Terraform. Repeat the setup for each AWS account you want to scan.
+To enable scanning for an AWS account, attach the Agentless Scanning permissions to the Datadog integration role in that account. You can attach the permissions with a CloudFormation stack or with Terraform. Repeat the setup for each AWS account you want to scan.
 
 {% collapse-content title="CloudFormation" level="h4" id="aws-datadog-hosted-cloudformation-setup" %}
 The [Datadog-hosted CloudFormation template][10] attaches a managed IAM policy with the scanning permissions, and the AWS managed `SecurityAudit` policy, to your Datadog integration role.
@@ -434,7 +434,7 @@ When you create the stack, provide the following parameters:
 
 {% collapse-content title="Terraform" level="h4" id="aws-datadog-hosted-terraform-setup" %}
 <!-- TODO(DOCS-16346): Add Terraform instructions for Datadog-hosted scanning (module or resource, required inputs). -->
-You can attach the Datadog-hosted scanning permissions to the Datadog integration role with Terraform.
+You can attach the scanning permissions to the Datadog integration role with Terraform.
 {% /collapse-content %}
 
 After you attach the permissions, Datadog detects them automatically and begins scanning the account on the next scan cycle. Next, [verify your setup](#verify-your-setup).
@@ -489,7 +489,7 @@ To exclude specific hosts, containers, or functions from scans, see [Resource Ev
 
 <!-- Datadog-hosted -->
 {% if equals($agentless_scanner_hosting, "datadog_hosted") %}
-To stop Datadog-hosted scanning for an AWS account, delete the CloudFormation stack that attached the Agentless Scanning permissions, or remove the permissions from your Terraform configuration.
+To stop scanning an AWS account, delete the CloudFormation stack that attached the Agentless Scanning permissions, or remove the permissions from your Terraform configuration.
 
 <!-- TODO(DOCS-16346): Confirm with SME the disable steps for Datadog-hosted scanning (in-app toggles, stack deletion, and whether deleting the stack also detaches the SecurityAudit policy). -->
 {% /if %}

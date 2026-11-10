@@ -30,7 +30,7 @@ Datadog recommends the following guidelines:
 - If you use [Cloud Storage Scanning][1], deploy a scanner in each region that contains a data store (for example, S3 buckets).
 
 {% alert %}
-Self-hosted scanners only send the collected list of packages and host metadata (hostnames, EC2/VM/Compute Engine instance identifiers) to Datadog. All scanned data remains in your infrastructure.
+Scanners only send the collected list of packages and host metadata (hostnames, EC2/VM/Compute Engine instance identifiers) to Datadog. All scanned data remains in your infrastructure.
 {% /alert %}
 {% /if %}
 
@@ -40,7 +40,7 @@ Self-hosted scanners only send the collected list of packages and host metadata 
 Datadog-hosted scanning is in Preview and supports AWS accounts only. To scan Azure subscriptions or GCP projects, select **Self-hosted** in the {% ui %}Scanner hosting{% /ui %} filter at the top of this page.
 {% /alert %}
 
-With Datadog-hosted scanning, Datadog runs and scales the scanners in its own infrastructure. You don't choose a scanner account, decide how many scanners to deploy, or plan which regions to deploy them in. Instead, you enable Datadog-hosted scanning in each AWS account you want to scan by attaching the Agentless Scanning IAM policy to the Datadog integration role in that account.
+Datadog runs and scales the scanners in its own infrastructure. You don't choose a scanner account, decide how many scanners to deploy, or plan which regions to deploy them in. Instead, you enable Datadog-hosted scanning in each AWS account you want to scan by attaching the Agentless Scanning IAM policy to the Datadog integration role in that account.
 
 Datadog reads your disk contents in its scanning environment, in the region of your Datadog site, and doesn't retain them. For details, see [Datadog-hosted data residency][6].
 {% /if %}
@@ -144,7 +144,7 @@ By default, the scanner creates a new VPC during deployment. If your organizatio
 
 You enable Datadog-hosted scanning for each AWS account individually, not for your whole Datadog organization. You can use Datadog-hosted scanning for some AWS accounts and self-hosted scanners for others, for as long as you need.
 
-To scan an AWS account with Datadog-hosted scanning, [enable Datadog-hosted scanning][7] in that account. Repeat the setup for each account you want to scan.
+To scan an AWS account, [enable Datadog-hosted scanning][7] in that account. Repeat the setup for each account you want to scan.
 
 <!-- TODO(DOCS-16346): Confirm with SME whether AWS Organizations / multi-account onboarding (for example, a StackSet) is available for Datadog-hosted scanning. -->
 
