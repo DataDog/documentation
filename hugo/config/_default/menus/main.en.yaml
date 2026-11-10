@@ -3416,6 +3416,11 @@ menu:
       parent: datadog_cloudcraft_overlays
       identifier: datadog_cloudcraft_overlays_apm
       weight: 106
+    - name: Logs
+      url: datadog_cloudcraft/overlays/logs/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_logs
+      weight: 107
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
