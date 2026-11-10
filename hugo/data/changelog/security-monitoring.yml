@@ -105,3 +105,20 @@ entries:
       - AttachJiraIssue
       - CreateJiraIssues
     title: Add on-call GET pages endpoints
+  - change_type: modified
+    date: '2026-11-09'
+    link: https://github.com/DataDog/documentation/pull/41521
+    operations:
+      - AttachCase
+      - AttachJiraIssue
+      - AttachLinearIssue
+      - AttachServiceNowTicket
+      - CreateCases
+      - CreateJiraIssues
+      - CreateLinearIssues
+      - CreateServiceNowTickets
+      - DetachCase
+      - MuteSecurityFindings
+      - UpdateFindingsAssignee
+      - UpdateFindingsSeverity
+    title: Generate pup commands for security findings triage endpoints

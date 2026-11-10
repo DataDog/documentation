@@ -4558,8 +4558,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsSeverity
-        unstable:
-          - v2
+        unstable: []
         order: 176
     - name: Create ServiceNow tickets for security findings
       url: /api/latest/security-monitoring/create-servicenow-tickets-for-security-findings/
@@ -5145,8 +5144,7 @@ menu:
           - v2
         operationids:
           - UpdateFindingsAssignee
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: List security findings
       url: /api/latest/security-monitoring/list-security-findings/
