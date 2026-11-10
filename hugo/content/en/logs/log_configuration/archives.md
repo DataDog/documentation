@@ -455,7 +455,7 @@ Hover over the archive to view the error details and the actions to take to reso
 
 ## Observability Pipelines archives
 
-When you enable Archive Search on an Observability Pipelines archive destination, Datadog creates the Log Archive for you. See [Amazon S3][20], [Google Cloud Storage][21], or [Azure Storage][22]. These archives are listed on a separate tab of the [Log Archiving & Forwarding page][3].
+When you enable Archive Search on an Observability Pipelines archive destination, Datadog creates the Log Archive after you deploy the pipeline. For setup instructions, see the [Datadog Archives (Amazon S3)][20], [Google Cloud Storage][21], or [Azure Storage][22] destination documentation. These archives are listed in the {{< ui >}Observability Pipelines Archives{{< /ui >}} tab on the [Log Archiving & Forwarding page][3].
 
 Their bucket configuration is managed in Observability Pipelines. In Datadog, you can edit their permissions, tags, and [maximum scan size](#define-maximum-scan-size).
 
