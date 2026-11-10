@@ -24,6 +24,7 @@ cascade:
     {{< nextlink href="database_monitoring/guide/sql_deadlock" >}}Configuring Deadlock Monitoring on SQL Server{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/sql_extended_events" >}}Configuring Query Completion and Query Error Collection on SQL Server{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/parameterized_queries" >}}Capturing SQL Query Parameter Values With Database Monitoring{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/sql_real_execution_plans" >}}Collecting Real Execution Plans on SQL Server{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}
