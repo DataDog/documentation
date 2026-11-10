@@ -16547,6 +16547,75 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: GitHub Costs Integration
+      url: /api/latest/github-costs-integration/
+      identifier: github-costs-integration
+      generated: true
+    - name: Update a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/update-a-github-costs-integration-account/
+      identifier: github-costs-integration-update-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/get-a-github-costs-integration-account/
+      identifier: github-costs-integration-get-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/delete-a-github-costs-integration-account/
+      identifier: github-costs-integration-delete-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a GitHub Costs integration account
+      url: /api/latest/github-costs-integration/create-a-github-costs-integration-account/
+      identifier: github-costs-integration-create-a-github-costs-integration-account
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCostsIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List GitHub Costs integration accounts
+      url: /api/latest/github-costs-integration/list-github-costs-integration-accounts/
+      identifier: github-costs-integration-list-github-costs-integration-accounts
+      parent: github-costs-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCostsIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Google Chat Integration
       url: /api/latest/google-chat-integration/
       identifier: google-chat-integration

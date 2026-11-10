@@ -1888,7 +1888,6 @@ components:
         type: string
     ProductName:
       description: Name of the product to be deleted. Only `logs` is supported.
-      example: logs
       in: path
       name: product
       required: true
@@ -63061,6 +63060,254 @@ components:
               type: github_oidc_auth_config
       required:
         - data
+      type: object
+    GitHubCostsCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        GitHub costs for Actions, Packages, Copilot, storage, and other billed products, estimated from list prices and usage, including discounts when available. Used by [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Requires an enterprise or organization on GitHub's enhanced billing platform; without it this dataflow collects no data. This dataflow is always on and cannot be turned off, which is why it appears in responses only.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
+          example: true
+          readOnly: true
+          type: boolean
+        status:
+          $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
+      type: object
+    GitHubCostsIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthRequest"
+    GitHubCostsIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the GitHub Costs integration account.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthResponse"
+    GitHubCostsIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the GitHub Costs integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthUpdate"
+    GitHubCostsIntegrationAccountBearerTokenAuthRequest:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. For an enterprise, use a personal access token (classic) from an Enterprise Admin with the `manage_billing:enterprise` and `read:org` scopes. For an organization, use a fine-grained personal access token created by an organization owner, with the organization as resource owner and read-only `Administration` permission.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with GitHub.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - token
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    GitHubCostsIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. For an enterprise, use a personal access token (classic) from an Enterprise Admin with the `manage_billing:enterprise` and `read:org` scopes. For an organization, use a fine-grained personal access token created by an organization owner, with the organization as resource owner and read-only `Administration` permission. Only the fields provided are changed; omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with GitHub.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    GitHubCostsIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a GitHub Costs integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationRequest"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountCreateData:
+      description: Data envelope for creating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountCreateRequest:
+      description: Request payload to create a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponse:
+      description: Response payload for a single GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountResponseAttributes:
+      description: Attributes of a GitHub Costs integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/GitHubCostsIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    GitHubCostsIntegrationAccountResponseData:
+      description: Data envelope of a GitHub Costs integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the GitHub Costs integration account.
+          example: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    GitHubCostsIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Your GitHub enterprise slug, found on the enterprise settings page (e.g. enterprise-name), or an organization login (e.g. organization-name). An enterprise already covers every organization it owns.
+          example: acme
+          type: string
+        tags:
+          description: Comma-separated tags added to the collected costs, for example `env:prod,team:example`.
+          example: "env:prod,team:finops"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsResponse:
+      description: Settings configured on the GitHub Costs integration account.
+      properties:
+        enterprise_name:
+          description: >-
+            Your GitHub enterprise slug, found on the enterprise settings page (e.g. enterprise-name), or an organization login (e.g. organization-name). An enterprise already covers every organization it owns.
+          example: acme
+          type: string
+        tags:
+          description: Comma-separated tags added to the collected costs, for example `env:prod,team:example`.
+          example: "env:prod,team:finops"
+          type: string
+      required:
+        - enterprise_name
+      type: object
+    GitHubCostsIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the GitHub Costs integration account. Only the fields provided are changed.
+      properties:
+        enterprise_name:
+          description: >-
+            Your GitHub enterprise slug, found on the enterprise settings page (e.g. enterprise-name), or an organization login (e.g. organization-name). An enterprise already covers every organization it owns.
+          example: acme
+          type: string
+        tags:
+          description: Comma-separated tags added to the collected costs, for example `env:prod,team:example`.
+          example: "env:prod,team:finops"
+          type: string
+      type: object
+    GitHubCostsIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a GitHub Costs integration account. Every field is optional; only the fields provided are changed.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountAuthenticationUpdate"
+        name:
+          description: Human-readable name of the GitHub Costs integration account.
+          example: github-costs-acme
+          type: string
+        settings:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountSettingsUpdate"
+      type: object
+    GitHubCostsIntegrationAccountUpdateData:
+      description: Data envelope for updating a GitHub Costs integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the GitHub Costs integration account to update.
+          example: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GitHubCostsIntegrationAccountUpdateRequest:
+      description: Request payload to update a GitHub Costs integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationAccountsResponse:
+      description: Response payload for a list of GitHub Costs integration accounts.
+      properties:
+        data:
+          description: List of GitHub Costs integration accounts.
+          items:
+            $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    GitHubCostsIntegrationDataflowsResponse:
+      description: Data Datadog collects from GitHub Costs, keyed by dataflow id.
+      properties:
+        github-cloud-cost-metrics:
+          $ref: "#/components/schemas/GitHubCostsCloudCostMetricsIntegrationDataflowResponse"
       type: object
     GitHubOIDCClaimPatterns:
       additionalProperties: false
@@ -199449,6 +199696,249 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts:
+    get:
+      description: List GitHub Costs integration accounts.
+      operationId: ListGitHubCostsIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: bearer_token
+                          dataflows:
+                            github-cloud-cost-metrics:
+                              enabled: true
+                              status:
+                                health: DATAFLOW_HEALTH_OK
+                                updated_at: "2026-06-25T08:30:50Z"
+                          name: github-costs-acme
+                          settings:
+                            enterprise_name: acme
+                            tags: "env:prod,team:finops"
+                        id: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List GitHub Costs integration accounts
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a GitHub Costs integration account.
+      operationId: CreateGitHubCostsIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: acme
+                          tags: "env:prod,team:finops"
+                      id: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/github-costs/accounts/{account_id}:
+    delete:
+      description: Delete a GitHub Costs integration account.
+      operationId: DeleteGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a GitHub Costs integration account.
+      operationId: GetGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: acme
+                          tags: "env:prod,team:finops"
+                      id: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a GitHub Costs integration account. Only the fields provided are changed.
+      operationId: UpdateGitHubCostsIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubCostsIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: bearer_token
+                        dataflows:
+                          github-cloud-cost-metrics:
+                            enabled: true
+                            status:
+                              health: DATAFLOW_HEALTH_OK
+                              updated_at: "2026-06-25T08:30:50Z"
+                        name: github-costs-acme
+                        settings:
+                          enterprise_name: acme
+                          tags: "env:prod,team:finops"
+                      id: 4b7c2e1a-6f3d-4e8b-9a52-1d0c8f7e3b64
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/GitHubCostsIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a GitHub Costs integration account
+      tags:
+        - GitHub Costs Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/snowflake/accounts:
     get:
       description: List Snowflake integration accounts.
@@ -276239,6 +276729,15 @@ tags:
       url: https://docs.datadoghq.com/integrations/google_cloud_platform
     name: GCP Integration
   - description: |-
+      Manage your Datadog GitHub Costs integration accounts and account resources
+      directly through the Datadog API. See the
+      [GitHub Costs integration page](https://docs.datadoghq.com/integrations/github-costs/) for
+      more information.
+    externalDocs:
+      description: GitHub Costs integration.
+      url: https://docs.datadoghq.com/integrations/github-costs/
+    name: GitHub Costs Integration
+  - description: |-
       Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
       directly through the Datadog API.
     externalDocs:
@@ -276546,25 +277045,19 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
-    x-displayName: RUM Metrics
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
-    x-displayName: RUM Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
     name: Rum Replay Playlists
-    x-displayName: RUM Replay Playlists
   - description: |-
       Retrieve segments for RUM replay sessions.
       Access session replay data stored in event platform or blob storage.
     name: Rum Replay Sessions
-    x-displayName: RUM Replay Sessions
   - description: Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes.
     name: Rum Replay Viewership
-    x-displayName: RUM Replay Viewership
   - description: |-
       Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization.
     name: Rum Retention Filters
-    x-displayName: RUM Retention Filters
   - description: |-
       Manage teams ownership mappings between RUM views and the teams that own them.
       See <https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>.
