@@ -191,6 +191,8 @@ To create a host group:
 
 Datadog maintains an {{< ui >}}All hosts{{< /ui >}} group automatically. It lists the eligible hosts that don't belong to any other group, so you can see which hosts are left to group. You can't edit its host list.
 
+If you delete a host group, Datadog removes the group's rules, and the Agent stops applying them the next time it polls Remote Configuration.
+
 To change the order of host groups, drag a group by its handle in the group list. Group order affects [how instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
 
 {{< img src="tracing/trace_collection/instrumentation-rules-host-groups.png" alt="The Host Groups page, showing a Canary group ordered above the All hosts group, with the Canary group's hosts listed" style="width:100%;" >}}

@@ -348,7 +348,9 @@ By default, SSI instruments all services in all namespaces in your cluster. To r
 {{< tabs >}}
 {{% tab "Instrumentation rules in Datadog (v7.84.2+)" %}}
 
-<div class="alert alert-info">Instrumentation rules for Kubernetes are in Preview.</div>
+{{< callout url="https://www.datadoghq.com/product-preview/instrumentation-rules-kubernetes/" btn_hidden="false" header="Join the Preview!" >}}
+Instrumentation rules for Kubernetes are in Preview. Use this form to request access.
+{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Instrumentation rules are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -387,13 +389,15 @@ To create a cluster group:
 1. Click {{< ui >}}New Cluster Group{{< /ui >}} and enter a name for the group.
 1. Click {{< ui >}}Add Clusters{{< /ui >}}, then search for and select the clusters to add.
 
-   <div class="alert alert-info">Cluster groups are dynamic, so new clusters that match your search are added to the group automatically. A cluster can belong to more than one group.</div>
+   <div class="alert alert-info">Cluster groups are static. New clusters are not added to existing groups automatically. Instead, they appear in the <strong>All clusters</strong> group until you add them to a group. A cluster can belong to more than one group.</div>
 
    {{< img src="tracing/trace_collection/k8s-add-clusters.png" alt="The new cluster group form, with two of four clusters selected in the Add Clusters list" style="width:80%;" >}}
 
 1. Click {{< ui >}}Save Group{{< /ui >}}.
 
 Datadog maintains an {{< ui >}}All clusters{{< /ui >}} group automatically. It lists the eligible clusters that don't belong to any other group, so you can see which clusters are left to group. You can't edit its cluster list.
+
+If you delete a cluster group, Datadog removes the group's rules, and the Cluster Agent stops applying them the next time it polls Remote Configuration.
 
 To change the order of cluster groups, drag a group by its handle in the group list. Group order affects [how instrumentation rules are evaluated](#how-instrumentation-rules-are-evaluated).
 
