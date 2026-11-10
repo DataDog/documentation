@@ -10858,6 +10858,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_request_access
       weight: 404
+    - name: MCP Access
+      url: account_management/rbac/mcp_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_mcp_access
+      weight: 405
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
