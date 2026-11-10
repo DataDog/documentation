@@ -47,7 +47,7 @@ A Deployment Gate configuration can be:
 
 There are two types of rules: [monitor rules](#monitor-rules) and [Watchdog Faulty Deployment Detection rules](#watchdog-faulty-deployment-detection-rules). A single gate can combine multiple rules of different types.
 
-Rules can watch health indicators over a configurable period of up to 2 hours.
+Rules can watch health indicators over a configurable period ranging from 1 minute to 2 hours.
 
 ### Monitor rules
 
@@ -65,13 +65,13 @@ Evaluations for both inline and preconfigured gates appear on the [{{< ui >}}Dep
 
 ### Evaluation modes
 
-There are two evaluation modes: [dry run](#dry-run-mode) and [active](#active-mode). Set the evaluation mode separately on each gate and each rule. The mode determines whether a gate's or rule's verdict affects your deployment.
+There are two evaluation modes: [dry run](#dry-run-mode) and [active](#active-mode). You can set the evaluation mode separately on each gate and each rule. The mode determines whether their verdicts affect your deployment.
 
 #### Dry run mode
 
 Use dry run to see which deployments would pause and why, while deployments continue as usual.
 
-The verdict of a gate in dry run is recorded on [{{< ui >}}Evaluations{{< /ui >}}][5] but doesn't affect your deployment. That is, a dry run gate always returns `pass` to your pipeline. A dry run rule's verdict doesn't count toward its associated gate's verdict.
+The verdict of a gate in dry run mode is recorded on [{{< ui >}}Evaluations{{< /ui >}}][5] but doesn't affect your deployment. That is, a dry run gate always returns `pass` to your pipeline. A dry-run rule's verdict doesn't count toward its associated gate's verdict.
 
 #### Active mode
 

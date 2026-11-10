@@ -7,7 +7,7 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-Choose where your Deployment Gates are defined, then follow the setup instructions. For a comparison of the two configuration sources, see [Configuration sources][1].
+Choose where your Deployment Gates are defined, then follow the setup instructions. For the difference between inline and preconfigured gates, see [Where gate configurations are stored][1].
 
 {{< whatsnext desc="Set up Deployment Gates:" >}}
     {{< nextlink href="/deployment_gates/setup/inline" >}}<u>Inline</u>: Define gates and rules in your deployment configuration, with no setup in Datadog.{{< /nextlink >}}
