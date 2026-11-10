@@ -25,7 +25,7 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 You can run Agentless scanners in one of two ways:
 
 - **Self-hosted**: Scanners run in your own cloud account.
-- **Datadog-hosted** (AWS only): Datadog runs the scanners, and you grant Datadog permissions to scan your account.
+- **Datadog Hosted (SaaS)**: Datadog runs the scanners, and you grant Datadog permissions to scan your account. AWS only.
 
 Both modes use the same scanning engine and produce the same findings. The difference is where the scanner runs. Self-hosted scanning remains fully supported. To compare the two, see [Choose where scanners run](#choose-where-scanners-run).
 
@@ -33,13 +33,13 @@ Both modes use the same scanning engine and produce the same findings. The diffe
 
 ## Choose where scanners run
 
-{{< callout url="" btn_hidden="true" header="Datadog-hosted scanning is in Preview" respect-site-support="false" >}}
-Datadog-hosted Agentless Scanning is in Preview and supports AWS accounts only.
+{{< callout url="" btn_hidden="true" header="Datadog Hosted (SaaS) Agentless Scanning is in Preview" respect-site-support="false" >}}
+Datadog-hosted scanning supports AWS accounts only.
 {{< /callout >}}
 
 <!-- TODO(DOCS-16346): Confirm how customers request preview access and update the callout (url, btn_hidden). -->
 
-| | Self-hosted | Datadog-hosted |
+| | Self-hosted | Datadog Hosted (SaaS) |
 |---|---|---|
 | Where the scanner runs | In your cloud account | In Datadog's infrastructure |
 | What you deploy | Scanner instances and their networking; for AWS, this includes EC2 instances in an autoscaling group, a VPC, and a NAT gateway | An IAM policy attached to your existing Datadog integration role |
@@ -52,14 +52,14 @@ Datadog-hosted Agentless Scanning is in Preview and supports AWS accounts only.
 
 <!-- TODO(DOCS-16346): Confirm with SME whether scan frequency (12 hours), resource coverage, and Sensitive Data Scanner support are identical for Datadog-hosted; if so, add rows. -->
 
-### When to use self-hosted scanning
+### When to use Self-hosted Agentless Scanning
 
 - You need to scan Azure or GCP resources.
 - Your policies require that disk contents are only read inside your own cloud account.
 - Your policies restrict which region or cloud provider can process your data. Datadog-hosted scanning processes data in the region of your Datadog site, which can differ from the region and cloud provider of your resources.
 - You want direct control over scanner versions or scan scheduling.
 
-### When to use Datadog-hosted scanning
+### When to use Datadog Hosted (SaaS) Agentless Scanning
 
 - You want to start scanning without deploying compute or networking resources in your account.
 - You don't want to maintain, update, or monitor scanner instances.
@@ -70,9 +70,9 @@ Datadog-hosted Agentless Scanning is in Preview and supports AWS accounts only.
 
 You don't have to choose one mode for your whole organization. Instead, you can choose a mode for each AWS account. For example, you can use Datadog-hosted scanning in most accounts and self-hosted scanners where disk contents must stay in your cloud account.
 
-To switch an account that already uses a self-hosted scanner, see [Move an account from self-hosted to Datadog-hosted scanning][17].
+To switch an account that already uses a self-hosted scanner, see [Move an account from self-hosted to Datadog Hosted (SaaS) Agentless Scanning][17].
 
-## Self-hosted scanning
+## Self-hosted Agentless Scanning {#self-hosted-scanning}
 
 Scanners run in your own cloud account. For setup instructions, see [Enabling Agentless Scanning][18].
 
@@ -149,7 +149,7 @@ You can enable [Sensitive Data Scanner][8] for your Agentless Scanning resources
 
 By default, Agentless Scanning automatically scans your resources every 12 hours. For AWS, you can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API. For more information, see the [On-Demand Scanning API][14] documentation.
 
-## Datadog-hosted scanning
+## Datadog Hosted (SaaS) Agentless Scanning {#datadog-hosted-scanning}
 
 Datadog runs the scanners in its own infrastructure. This mode is in Preview and supports AWS only. For setup instructions, see [Enabling Agentless Scanning][19].
 

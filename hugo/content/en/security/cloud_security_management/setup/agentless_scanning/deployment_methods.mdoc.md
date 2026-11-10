@@ -148,7 +148,7 @@ To scan an AWS account, [enable Datadog-hosted scanning][7] in that account. Rep
 
 <!-- TODO(DOCS-16346): Confirm with SME whether AWS Organizations / multi-account onboarding (for example, a StackSet) is available for Datadog-hosted scanning. -->
 
-## Move an account from self-hosted to Datadog-hosted scanning
+## Move an account from self-hosted to Datadog Hosted (SaaS) Agentless Scanning {% #move-an-account-from-self-hosted-to-datadog-hosted-scanning %}
 
 Because you set the hosting mode for each account, you can move accounts one at a time:
 

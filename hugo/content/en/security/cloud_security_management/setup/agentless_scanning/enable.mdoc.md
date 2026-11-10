@@ -148,7 +148,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
 
 <!-- TODO(DOCS-16346): Confirm with SME whether Remote Configuration or an RC-enabled API key is required for Datadog-hosted scanning, and which application key permissions are required. -->
 
-{% collapse-content title="Datadog-hosted scanning permissions" level="h3" %}
+{% collapse-content title="Datadog Hosted (SaaS) Agentless Scanning permissions" level="h3" %}
 - `ebs:GetSnapshotBlock`
 - `ebs:ListChangedBlocks`
 - `ebs:ListSnapshotBlocks`
