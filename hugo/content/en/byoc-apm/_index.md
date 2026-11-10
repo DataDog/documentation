@@ -15,7 +15,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="BYOC APM is in Preview" >}}
-Installation goes through the Datadog design-partner program.
+Installation goes through the Datadog design-partner program. Self-service installation isn't available for the Preview.
 {{< /callout >}}
 
 ## Overview
@@ -61,6 +61,18 @@ BYOC APM moves data along these paths:
 - **Trace metrics**: [Trace metrics][3], including RED metrics (request rate, errors, and latency), go to Datadog without processing. As a result, they stay aligned with the spans in your cloud account. Trace metrics supply the data for [service pages][4], [resource pages][5], [Catalog][6] entries, and [monitors on trace metrics][7].
 - **Queries**: The APM UI in Datadog queries the traces database cluster in your cloud account. Query results display in Datadog.
 
+## Requirements
+
+To use BYOC APM, you need:
+
+- An AWS account and an Amazon EKS cluster
+- A platform team that can operate the data plane, including the installation and operation of the [Datadog Operator][2]
+- A budget for the compute and object storage that the data plane uses
+- A Datadog organization for the APM UI and metrics
+- Applications instrumented with [OpenTelemetry][8] that send traces over OTLP through the OpenTelemetry Collector
+
+The Preview supports Amazon EKS only. Other cloud providers and on-premises deployment aren't supported.
+
 ## Preview capabilities
 
 BYOC APM supports these capabilities in the Preview:
@@ -76,7 +88,7 @@ BYOC APM doesn't support these capabilities in the Preview:
 
 - Trace queries and Live Search
 - Some aggregations and the scatter plot
-- Cluster selection in [Trace Explorer][8]
+- Cluster selection in [Trace Explorer][9]
 - The service dependency graph
 - Span links and span events
 - Pipeline customization
@@ -84,7 +96,7 @@ BYOC APM doesn't support these capabilities in the Preview:
 - Percentiles
 - Retention filters
 - Sensitive Data Scanner
-- [Custom metrics generated from spans][9]
+- [Custom metrics generated from spans][10]
 - Service remapping configuration
 - Enrichments
 - The distribution widget
@@ -93,18 +105,6 @@ BYOC APM doesn't support these capabilities in the Preview:
 
 Datadog hides some unsupported features in the UI.
 
-## Requirements
-
-To use BYOC APM, you need:
-
-- An AWS account and an Amazon EKS cluster
-- A platform team that can operate the data plane, including the installation and operation of the [Datadog Operator][2]
-- A budget for the compute and object storage that the data plane uses
-- A Datadog organization for the APM UI and metrics
-- Applications instrumented with [OpenTelemetry][10] that send traces over OTLP through the OpenTelemetry Collector
-
-The Preview supports Amazon EKS only. Other cloud providers and on-premises deployment aren't supported.
-
 ## Responsibilities
 
 | Owner | Responsibilities |
@@ -112,10 +112,6 @@ The Preview supports Amazon EKS only. Other cloud providers and on-premises depl
 | You | Operate the data plane: Kubernetes, cloud infrastructure, deployment, upgrades, and versioning. You are the first to respond when an issue occurs in the data plane. |
 | Datadog Operator | Automates data plane deployment and upgrades. |
 | Datadog | Runs the APM UI and supplies the ingestion pipeline. |
-
-## Get access
-
-BYOC APM installation goes through the Datadog design-partner program. Self-service installation isn't available for the Preview.
 
 ## Further reading
 
@@ -128,6 +124,6 @@ BYOC APM installation goes through the Datadog design-partner program. Self-serv
 [5]: /tracing/services/resource_page/
 [6]: /internal_developer_portal/catalog/
 [7]: /monitors/types/apm/
-[8]: /tracing/trace_explorer/
-[9]: /tracing/trace_pipeline/generate_metrics/
-[10]: /opentelemetry/
+[8]: /opentelemetry/
+[9]: /tracing/trace_explorer/
+[10]: /tracing/trace_pipeline/generate_metrics/
