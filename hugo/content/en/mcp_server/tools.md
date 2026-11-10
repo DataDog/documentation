@@ -3421,8 +3421,8 @@ Creates a team with a handle, name, and optional description.
 - Create a team named Payments with the handle `payments`.
 
 ### `update_team`
-Toolset: `teams`\
-Permissions required: `Teams Read` and `MCP Write`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read` and `MCP Write`*\
 Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change.
 
 - Change the Payments team description to "Owns payment processing."
