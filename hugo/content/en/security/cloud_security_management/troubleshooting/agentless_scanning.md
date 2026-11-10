@@ -23,7 +23,7 @@ If no results appear after two hours:
 - For self-hosted scanners:
   - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
   - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
-- For Datadog-hosted scanning (Preview), verify that the Agentless Scanning IAM policy is attached to the Datadog integration role in your AWS account.
+- For Datadog-hosted scanning, verify that the Agentless Scanning IAM policy is attached to the Datadog integration role in your AWS account.
 
 <!-- TODO(DOCS-16346): Confirm with SME the Datadog-hosted troubleshooting steps (policy name, how Datadog detects the policy, common failures). -->
 ## Enable Remote Configuration on the API key
@@ -84,7 +84,7 @@ Agentless Scanning is not available in GovCloud and is not FIPS compliant. This 
 
 ## Scans run in a different region than your resources
 
-With Datadog-hosted scanning (Preview), Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For the scanning region for each Datadog site, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
+With Datadog-hosted scanning, Datadog scans your resources in the region of your Datadog site, not the region where your resources are located. This is expected behavior. For the scanning region for each Datadog site, see [Datadog-hosted data residency][12]. If your data must be processed in your own cloud account or region, use self-hosted scanning for that account.
 
 ## Further reading
 

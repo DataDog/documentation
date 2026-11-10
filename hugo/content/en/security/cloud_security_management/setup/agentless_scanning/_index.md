@@ -25,7 +25,7 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 You can run Agentless scanners in one of two ways:
 
 - **Self-hosted**: Scanners run in your own cloud account.
-- **Datadog-hosted** (Preview, AWS only): Datadog runs the scanners, and you grant Datadog permissions to scan your account.
+- **Datadog-hosted** (AWS only): Datadog runs the scanners, and you grant Datadog permissions to scan your account.
 
 Both modes use the same scanning engine and produce the same findings. The difference is where the scanner runs. Self-hosted scanning remains fully supported. To compare the two, see [Choose where scanners run](#choose-where-scanners-run).
 
@@ -39,7 +39,7 @@ Datadog-hosted Agentless Scanning is in Preview and supports AWS accounts only.
 
 <!-- TODO(DOCS-16346): Confirm how customers request preview access and update the callout (url, btn_hidden). -->
 
-| | Self-hosted | Datadog-hosted (Preview) |
+| | Self-hosted | Datadog-hosted |
 |---|---|---|
 | Where the scanner runs | In your cloud account | In Datadog's infrastructure |
 | What you deploy | Scanner instances and their networking; for AWS, this includes EC2 instances in an autoscaling group, a VPC, and a NAT gateway | An IAM policy attached to your existing Datadog integration role |

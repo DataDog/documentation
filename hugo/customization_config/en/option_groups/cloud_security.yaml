@@ -5,3 +5,15 @@ agentless_scanner_hosting_options:
   - id: self_hosted
     default: true
   - id: datadog_hosted
+
+# Which cloud provider do you want to scan with self-hosted Agentless scanners?
+agentless_self_hosted_cloud_provider_options:
+  - id: aws
+    default: true
+  - id: azure
+  - id: google_cloud
+
+# Which cloud provider do you want to scan with Datadog-hosted Agentless scanning?
+agentless_datadog_hosted_cloud_provider_options:
+  - id: aws
+    default: true

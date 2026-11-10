@@ -64,7 +64,7 @@ If you only need to scan a single account, deploy one or more scanners directly 
 
 {% img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagram of Agentless Scanning showing the Agentless scanner applied in one account that covers multiple regions" style="width:40%;" /%}
 
-### Decide how many scanners to deploy
+### Decide how many scanners to deploy {% #decide-how-many-scanners-to-deploy-single-account %}
 
 A single scanner can scan hosts in any region, including regions other than its own. Cross-region scanning incurs data transfer costs, so the decision of where to deploy additional scanners depends on how many hosts you have in each region.
 
@@ -74,7 +74,7 @@ A single scanner can scan hosts in any region, including regions other than its 
 
 Datadog automatically routes scans to the appropriate regional scanner to minimize cross-region costs.
 
-#### Scanner capacity limits
+#### Scanner capacity limits {% #scanner-capacity-limits-single-account %}
 
 Each scanner has throughput limits governed by cloud provider API quotas:
 
@@ -105,7 +105,7 @@ The following diagram illustrates cross-account scanning from a central account 
 
 {% img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram of Agentless Scanning showing the Agentless scanner deployed in each cloud account" style="width:90%;" /%}
 
-### Decide how many scanners to deploy {% #decide-how-many-scanners-to-deploy-1 %}
+### Decide how many scanners to deploy {% #decide-how-many-scanners-to-deploy-multiple-accounts %}
 
 A single scanner can scan hosts in any region, including regions other than its own. Cross-region scanning incurs data transfer costs, so the decision of where to deploy additional scanners depends on how many hosts you have in each region.
 
@@ -115,7 +115,7 @@ A single scanner can scan hosts in any region, including regions other than its 
 
 Datadog automatically routes scans to the appropriate regional scanner to minimize cross-region costs.
 
-#### Scanner capacity limits {% #scanner-capacity-limits-1 %}
+#### Scanner capacity limits {% #scanner-capacity-limits-multiple-accounts %}
 
 Each scanner has throughput limits governed by cloud provider API quotas:
 
@@ -163,7 +163,7 @@ Because you set the hosting mode for each account, you can move accounts one at 
 [1]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning
 [2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
 [3]: /security/cloud_security_management/setup/agentless_scanning/enable
-[4]: /security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup?agentless_scanner_hosting=self_hosted
+[4]: /security/cloud_security_management/setup/agentless_scanning/enable#setup?agentless_scanner_hosting=self_hosted&host=aws
 [5]: /security/cloud_security_management/setup/agentless_scanning#choose-where-scanners-run
 [6]: /security/cloud_security_management/setup/agentless_scanning#datadog-hosted-data-residency
 [7]: /security/cloud_security_management/setup/agentless_scanning/enable#setup?agentless_scanner_hosting=datadog_hosted

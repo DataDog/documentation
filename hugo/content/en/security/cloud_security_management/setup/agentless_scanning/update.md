@@ -9,7 +9,7 @@ further_reading:
     text: "Cloud Security Agentless Scanning"
 ---
 
-The steps on this page apply to self-hosted scanners. If you use Datadog-hosted scanning (Preview), Datadog updates the scanner automatically, and you don't need to take any action. For more information, see [Choose where scanners run][4].
+The steps on this page apply to self-hosted scanners. If you use Datadog-hosted scanning, Datadog updates the scanner automatically, and you don't need to take any action. For more information, see [Choose where scanners run][4].
 
 ## Update the CloudFormation stack
 
