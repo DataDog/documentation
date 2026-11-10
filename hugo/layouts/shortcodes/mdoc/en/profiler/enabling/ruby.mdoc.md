@@ -14,6 +14,8 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
+The `datadog` gem includes native extensions that are compiled when the gem is installed, so a C compiler (such as `gcc`) and `make` must be available on the system that runs `bundle install`.
+
 Versions of the `datadog` gem older than 2.30 also need either the [`pkg-config`][4] or the [`pkgconf`][5] system utility installed.
 This is no longer needed on modern versions.
 
