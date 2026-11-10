@@ -1,4 +1,8 @@
 {
+  "ai-gateway": {
+    "name": "AI Gateway",
+    "description": "AI Gateway routes your applications' LLM requests to the model providers you connect, and\napplies your organization's routing, access, spending, rate limit, and data capture rules.\n\nThese endpoints allow you to configure:\n\n- Providers: the model providers your organization connects, and the models and pricing each offers.\n- Routing rules: the named routes your applications call, and the models that serve each one.\n- Access: inbound routing policies and model groups that decide who can use which models.\n- Budgets and rate limits: spending caps and request limits, and their current usage.\n- Data capture and governance: what request data is recorded, and organization-wide controls."
+  },
   "ai-guard": {
     "name": "AI Guard",
     "description": "Evaluate LLM interactions for security threats such as prompt injection and jailbreak attempts."
@@ -29,7 +33,7 @@
   },
   "action-connection": {
     "name": "Action Connection",
-    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nWe offer granular access control for editing and resolving connections."
+    "description": "Action connections extend your installed integrations and allow you to take action in your third-party systems\n(e.g. AWS, GitLab, and Statuspage) with Datadog’s Workflow Automation and App Builder products.\n\nDatadog’s Integrations automatically provide authentication for Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within\nWorkflow Automation and App Builder.\n\nTo authenticate with your own GitHub App or personal access token, create a GitHub connection.\n\nWe offer granular access control for editing and resolving connections."
   },
   "actions-datastores": {
     "name": "Actions Datastores",
@@ -70,6 +74,10 @@
   "bits-ai": {
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
+  },
+  "bits-security-analyst": {
+    "name": "Bits Security Analyst",
+    "description": "Use the Bits Security Analyst endpoints to find the investigations of your Cloud SIEM signals, read an\ninvestigation's verdict and findings, and count investigations."
   },
   "ci-visibility-github-accounts": {
     "name": "CI Visibility GitHub Accounts",
@@ -125,7 +133,7 @@
   },
   "cloud-authentication": {
     "name": "Cloud Authentication",
-    "description": "Configure AWS and GitHub cloud authentication mappings for persona and intake authentication through the Datadog API."
+    "description": "Configure AWS, GitHub, and Custom OIDC cloud authentication for persona and intake authentication through the Datadog API."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
@@ -222,6 +230,10 @@
   "elastic-cloud-integration": {
     "name": "Elastic Cloud Integration",
     "description": "Manage your Datadog Elastic Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for\nmore information."
+  },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
   },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
@@ -419,9 +431,17 @@
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-managed-archives": {
+    "name": "RUM Managed Archives",
+    "description": "Configure Managed Archives for RUM applications. Your organization must have Managed Archives enabled.\n\nRequires `rum_rehydration_filter_read` to list or get configurations, or `rum_rehydration_filter_write` to create, update, or delete them."
+  },
   "rum-operations": {
     "name": "RUM Operations",
     "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+  },
+  "rum-recovery": {
+    "name": "RUM Recovery",
+    "description": "Search archived RUM sessions and recover individual sessions or query-based batches. Your organization must have Managed Archives enabled. Creating, counting, listing, and canceling batches also require batch recovery enablement.\n\nRequires `rum_rehydration_filter_read` for search and request details, or `rum_rehydration_index` to create, estimate recoverable sessions, list batches, or cancel recovery requests."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",
@@ -570,6 +590,10 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
+  },
+  "temporal-cloud-openmetrics-integration": {
+    "name": "Temporal Cloud OpenMetrics Integration",
+    "description": "Manage your Datadog Temporal Cloud OpenMetrics integration accounts and account resources\ndirectly through the Datadog API. See the\n[Temporal Cloud OpenMetrics integration page](https://docs.datadoghq.com/integrations/temporal-cloud-openmetrics/) for\nmore information."
   },
   "test-optimization": {
     "name": "Test Optimization",

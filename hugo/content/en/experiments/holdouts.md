@@ -153,7 +153,7 @@ Configure the [warehouse exposure model](#warehouse-exposure-model), then create
 1. Select {{< ui >}}Subject type{{< /ui >}}, then {{< ui >}}Exposure SQL model{{< /ui >}} and the metrics to analyze. Review {{< ui >}}Analysis settings{{< /ui >}}.
 1. Click {{< ui >}}Create Holdout{{< /ui >}}, review the settings, and click {{< ui >}}Confirm and Create Holdout{{< /ui >}}.
 
-With external randomization, your system assigns subjects to groups and serves their experiences. With Datadog Feature Flags, preserve the holdout fields from the exposure events and follow the selective attachment steps in [Set up a holdout](#set-up-a-holdout).
+With external randomization, your system assigns subjects to groups and serves their experiences. With Datadog Feature Flags, record the holdout fields with each exposure. See [Record Feature Flag Exposures in Your Own Data Store][9]. Then follow the selective attachment steps in [Set up a holdout](#set-up-a-holdout).
 
 ### Warehouse exposure model
 
@@ -193,3 +193,4 @@ For external randomization, map the inclusion field when the model contains expo
 [6]: /experiments/diagnostics/
 [7]: /experiments/statistics/cuped/
 [8]: /experiments/concepts/cumulative_impact/#why-naive-aggregation-overstates-impact
+[9]: /feature_flags/guide/record_exposures_in_your_own_data_store/

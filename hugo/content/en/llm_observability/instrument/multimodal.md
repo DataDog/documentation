@@ -11,6 +11,9 @@ further_reading:
     - link: '/llm_observability/instrument/api/'
       tag: 'Documentation'
       text: 'Agent Observability HTTP API Reference'
+    - link: "https://www.datadoghq.com/blog/agent-observability-voice-agent/"
+      tag: "Blog"
+      text: "Trace voice agents with Datadog Agent Observability"
 ---
 
 ## Overview
