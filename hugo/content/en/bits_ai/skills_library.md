@@ -72,14 +72,14 @@ Bits Chat can update private skills that you created. To edit a shared skill, us
 
 ## Permissions
 
-The Skills Library uses the Datadog MCP Server [role permissions][5]:
+To use the Skills Library, your role needs the following permissions:
 
 | Action | Required permissions |
 |--------|----------------------|
 | View skills | **MCP Read** |
 | Create, edit, clone, or delete skills | **MCP Read** and **MCP Write** |
 
-Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both permissions by default. For custom roles, [update the role][6] to add the permissions.
+Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both permissions by default. For custom roles, [update the role][5] to add the permissions.
 
 A skill's visibility also controls who can access it:
 
@@ -157,5 +157,4 @@ The Skills Library is available in Bits Chat, Bits Agent Builder, Slack, and ext
 [2]: /actions/agents/
 [3]: /mcp_server/
 [4]: https://app.datadoghq.com/actions/skills
-[5]: /mcp_server/setup/#user-role-permissions
-[6]: /account_management/rbac/?tab=datadogapplication#update-a-role
+[5]: /account_management/rbac/?tab=datadogapplication#update-a-role
