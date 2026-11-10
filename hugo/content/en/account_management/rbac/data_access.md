@@ -34,34 +34,26 @@ To view all of your Restricted Datasets, navigate to [Organization Settings][6].
 - {{< ui >}}Unrestricted Access{{< /ui >}}: The teams and roles with [unrestricted access](#unrestricted-user-groups) to a telemetry type.
 - {{< ui >}}Data Hidden by Default{{< /ui >}}: The telemetry types where [data outside a Restricted Dataset](#strict-mode) is hidden by default.
 
-### Datadog site
-
-Log in as a user assigned the Datadog Admin role, or any user with a role in your organization with the [`user_access_manage` permission][5].
-
-1. Navigate to [Organization Settings][6].
-1. On the left side of the page, select [Access Control][7].
-1. In the {{< ui >}}Restricted Datasets{{< /ui >}} section, click {{< ui >}}New Policy{{< /ui >}}.
-
-To create a Restricted Dataset, identify the data to be restricted with a query.
-
-{{< img src="/account_management/rbac/restricted_dataset-4.png" alt="Create a Restricted Dataset dialog.">}}
-
-Choose Data Scope
-: The boundary definition that describes which data to restrict to a specific set of users. Select a product next to {{< ui >}}In Product{{< /ui >}}, then select a tag key and one or more values next to {{< ui >}}Tagged{{< /ui >}}. To add another product to the same dataset, click {{< ui >}}New Product{{< /ui >}}. The [supported telemetry types][10] are custom metrics, RUM sessions, APM traces, logs, cloud costs, error tracking issues, Software Delivery repository info (CI Visibility pipelines), Workload Protection Agent Events, and security signals (Cloud SIEM signals only).
-
-Designate Users with Access
-: Select one or more teams, roles, or agents and automated processes that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
-
-Name Policy
-: A descriptive name to help users understand what data is contained in the dataset.
-
-**Note:** A maximum of 50 principals (roles, teams, or agents) can be tied to a given Restricted Dataset.
-
-You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
-
-After completing all the fields to define the dataset, save the policy to apply it to your organization.
+### Create a Restricted Dataset
 
 You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10 on other plans. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) can create up to 1,000 Restricted Datasets.
+
+To create a Restricted Dataset:
+
+1. Log in as a user with the Datadog Admin role, or with a role that has the [`user_access_manage` permission][5].
+1. Navigate to [Organization Settings][6].
+1. In the left pane, under {{< ui >}}Access{{< /ui >}}, select [Access Control][7].
+1. In the {{< ui >}}Restricted Datasets{{< /ui >}} section, click {{< ui >}}New Policy{{< /ui >}}.
+
+    {{< img src="/account_management/rbac/restricted_dataset-4.png" alt="The New Policy page with the Restricted Datasets tab selected, showing the Choose Data Scope, Designate Users with Access, and Name Policy fields.">}}
+
+1. Under {{< ui >}}Choose Data Scope{{< /ui >}}, define the data to restrict:
+    1. Next to {{< ui >}}In Product{{< /ui >}}, select a product. See [Supported telemetry types](#supported-telemetry).
+    1. Next to {{< ui >}}Tagged{{< /ui >}}, select a tag key and one or more values. A Restricted Dataset can include up to 10 key:value pairs. If you need more, create an additional Restricted Dataset.
+    1. (Optional) To add another product to the same dataset, click {{< ui >}}New Product{{< /ui >}}.
+1. Under {{< ui >}}Designate Users with Access{{< /ui >}}, select the teams, roles, or agents that can access the data. Agents are listed under Agents and Automated Processes. Users who are not members of these groups can't access the data. You can add up to 50 teams, roles, or agents to a Restricted Dataset.
+1. Under {{< ui >}}Name Policy{{< /ui >}}, enter a descriptive name that helps users understand what data the dataset contains.
+1. Save the policy.
 
 ### Supported telemetry types {#supported-telemetry}
 
