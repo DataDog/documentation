@@ -67,6 +67,8 @@ The explain plan also shows measures for each node (step) in the plan: startup c
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
 
+For SQL Server, explain plans are estimated plans by default. To also collect the actual execution plans of slow statement executions, with their runtime parameter values, see [Collecting Real Execution Plans on SQL Server][3].
+
 ## Explore other visualizations
 
 Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the {{< ui >}}Visualize as{{< /ui >}} buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a data center, select {{< ui >}}Timeseries{{< /ui >}}, group by `Statement` and graph the average duration:
@@ -91,3 +93,4 @@ For quick access to dashboards that showcase database-related infrastructure and
 
 [1]: https://app.datadoghq.com/databases/samples
 [2]: /database_monitoring/data_collected/#which-queries-are-tracked
+[3]: /database_monitoring/guide/sql_real_execution_plans/
