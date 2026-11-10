@@ -32,7 +32,7 @@ Create a skill directly in the Skills Library, or ask Bits Chat to create one fo
 3. Add the domain knowledge and instructions that the agent should follow.
 4. Select the skill's visibility:
     - **Private**: Keep the skill private.
-    - **Shared**: Share the skill with the Datadog organization.
+    - **Shared**: Share the skill with everyone in your Datadog organization.
 5. Save the skill.
 
 Use focused instructions and give the skill a descriptive name. A clear name makes the skill easier to discover and invoke with a slash command.
