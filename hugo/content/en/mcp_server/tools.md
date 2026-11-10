@@ -3365,8 +3365,8 @@ Tools for reading and managing [Datadog Teams](/account_management/teams/). Enab
 Read tools require `MCP Read`. Write tools require `MCP Write` and your organization to enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
 
 ### `list_teams`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists one page of teams in your organization. Use the results to find team IDs.
 
 - Find the Payments team.
