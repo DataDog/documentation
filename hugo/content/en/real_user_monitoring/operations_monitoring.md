@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
   tag: "Blog"
   text: "Build better SLOs with RUM and synthetic SLIs"
+- link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
+  tag: "Blog"
+  text: "Diagnose frontend performance issues with RUM Profiling"
 ---
 
 ## Overview

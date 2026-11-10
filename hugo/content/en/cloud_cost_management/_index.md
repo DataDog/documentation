@@ -49,6 +49,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/flexible-sheets-cloud-cost-management/"
     tag: "Blog"
     text: "Analyze cloud costs with flexible spreadsheets in Datadog Sheets"
+  - link: "https://www.datadoghq.com/blog/prompt-cache-investigation-ccm-agent-observability/"
+    tag: "Blog"
+    text: "How we investigated prompt cache misses with Datadog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

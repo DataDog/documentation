@@ -21,6 +21,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
   tag: "Learning Center"
   text: "Getting Started with DDSQL Editor"
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 {{< product-availability >}}

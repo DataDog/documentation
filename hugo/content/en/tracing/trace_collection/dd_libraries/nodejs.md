@@ -26,6 +26,9 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
       tag: "Learning Center"
       text: "Configure and manage the APM SDK for your applications"
+    - link: "https://www.datadoghq.com/blog/datadog-electron-sdk/"
+      tag: "Blog"
+      text: "Extend RUM to Electron’s main process with the Datadog Electron SDK"
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: "Source Code"
       text: 'Source code'

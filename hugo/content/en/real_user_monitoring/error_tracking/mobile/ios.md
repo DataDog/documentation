@@ -8,15 +8,18 @@ code_lang: ios
 code_lang_weight: 20
 description: Set up Error Tracking for your iOS projects.
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-ios
-  tag: "Source Code"
-  text: Source code for dd-sdk-ios
-- link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
-  tag: Blog
-  text: Introducing iOS Crash Reporting and Error Tracking
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
+- link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
+  tag: Blog
+  text: Introducing iOS Crash Reporting and Error Tracking
+- link: "https://www.datadoghq.com/blog/rum-profiling-mobile/"
+  tag: "Blog"
+  text: "Diagnose frontend performance issues with RUM Profiling"
+- link: https://github.com/DataDog/dd-sdk-ios
+  tag: "Source Code"
+  text: Source code for dd-sdk-ios
 
 ---
 ## Overview

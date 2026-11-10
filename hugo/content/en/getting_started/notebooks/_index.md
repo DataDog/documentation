@@ -1,12 +1,15 @@
 ---
 title: Getting Started With Datadog Notebooks
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/getting-started-with-notebooks'
-  tag: 'Learning Center'
-  text: 'Create Datadog Notebooks to investigate incidents'
 - link: 'https://docs.datadoghq.com/notebooks/advanced_analysis/getting_started/'
   tag: 'Guide'
   text: 'Getting Started with Notebooks Analysis Features'
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-notebooks'
+  tag: 'Learning Center'
+  text: 'Create Datadog Notebooks to investigate incidents'
+- link: "https://www.datadoghq.com/blog/kubernetes-processes-datadog-mcp-server/"
+  tag: "Blog"
+  text: "Investigate Kubernetes health and processes with the Datadog MCP Server"
 ---
 
 ## Overview

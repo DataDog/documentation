@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-oracle-ai-database-across-clouds/"
   tag: "Blog"
   text: "Monitor Oracle AI Database across clouds with Datadog"
+- link: "https://www.datadoghq.com/blog/highlights-from-oracle-ai-world-2026/"
+  tag: "Blog"
+  text: "Highlights from Oracle AI World 2026"
 ---
 
 
