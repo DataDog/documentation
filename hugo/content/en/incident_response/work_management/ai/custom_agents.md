@@ -16,8 +16,6 @@ further_reading:
 <div class="alert alert-danger">AI features for Work Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">The Work Management integration with custom agents is in Preview.</div>
-
 ## Overview
 
 Work Management integrates with [Bits Agent Builder][1], allowing you to move from manual to automated work item creation, triage, and resolution. Assign work items to custom agents to support your different workflows.
