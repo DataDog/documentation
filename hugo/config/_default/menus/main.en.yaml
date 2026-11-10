@@ -1654,6 +1654,16 @@ menu:
       identifier: bits_remediation
       parent: bits_ai
       weight: 10
+    - name: Infrastructure Actions
+      url: bits_ai/bits_remediation/infrastructure_actions
+      identifier: bits_remediation_infrastructure_actions
+      parent: bits_remediation
+      weight: 1001
+    - name: Bits Guardrails
+      url: bits_ai/bits_remediation/guardrails
+      identifier: bits_remediation_guardrails
+      parent: bits_remediation
+      weight: 1002
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
