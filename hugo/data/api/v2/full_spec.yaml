@@ -215747,14 +215747,12 @@ paths:
             start with `app.` and end with `.count`. The exception is a value whose only `*` is at the end (for
             example, `http.request*`): it matches names that start with that text and is case-sensitive.
             Spaces are treated as `*`. Only one value is accepted; repeating the parameter returns
-            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. Surrounding spaces
-            are ignored, and an empty or spaces-only value is ignored. The value can be at most 200 characters (the
-            longest metric name); a longer value returns `400 Bad Request`.
+            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. An empty value
+            is ignored.
           in: query
           name: filter[metrics.id]
           required: false
           schema:
-            maxLength: 200
             pattern: "^[a-zA-Z0-9_.* ]*$"
             type: string
         - description: |-
@@ -217190,6 +217188,11 @@ paths:
 
         To compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`
         instead of calling this endpoint for each metric.
+
+        A `404 Not Found` response means that no metric with this name exists in your organization. A
+        `400 Bad Request` response means that a query parameter is invalid, or that the metric has no data in the
+        queried window. For no data, the error message says so and names the window that was queried, which can
+        differ from the requested one.
       operationId: EstimateMetricsOutputSeries
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -217211,7 +217214,7 @@ paths:
             type: boolean
         - description: |-
             The number of hours of look back (from now) to estimate cardinality with.
-            If unspecified, it defaults to 0 hours (the most recent data).
+            If unspecified, it defaults to 0 hours (the most recent data). Values below 0 return `400 Bad Request`.
           example: 0
           in: query
           name: filter[hours_ago]
@@ -217237,7 +217240,9 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+        - description: |-
+            A window, in hours, from the look back to estimate cardinality with. The minimum and default is 1 hour.
+            Smaller values return `400 Bad Request`.
           example: 6
           in: query
           name: filter[timespan_h]
@@ -217245,6 +217250,7 @@ paths:
           schema:
             format: int32
             maximum: 2147483647
+            minimum: 1
             type: integer
       responses:
         "200":
@@ -217723,9 +217729,9 @@ paths:
       description: |-
         Returns the tag configuration for the given metric name.
 
-        A metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually
-        means that the metric has no tag configuration, but it is also returned when no metric with this name exists
-        in your organization.
+        A metric may exist and submit data without having a tag configuration. Both cases return `404 Not Found`,
+        with different messages: `No tag configuration for <metric_name>` when the metric exists without a tag
+        configuration, and `<metric_name> not found` when no metric with this name exists in your organization.
 
         To list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`
         instead of calling this endpoint for each metric.
@@ -243989,6 +243995,9 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/automation/default_inbox_rules:
     get:
       description: |-
@@ -247403,6 +247412,9 @@ paths:
           - security_monitoring_findings_write
           - appsec_vm_write
           - data_scanner_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
