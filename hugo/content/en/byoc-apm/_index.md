@@ -47,18 +47,18 @@ BYOC APM has two parts:
 | Component | Location | Function |
 | --- | --- | --- |
 | [Datadog Operator][2] | Your Kubernetes cluster | Deploys and upgrades the data plane. |
-| OpenTelemetry Collector | Your environment | Sends traces and trace metrics over OTLP. |
+| OpenTelemetry Collector | Your environment | Sends traces and trace metrics over the OpenTelemetry Protocol (OTLP). |
 | Processing worker | Your cloud account | Runs a prebuilt ingestion pipeline from Datadog. You can't customize this pipeline. |
-| Traces database cluster | Your cloud account | Stores spans. Object storage backs this cluster. The cluster is dedicated to traces and is separate from BYOC Logs clusters. |
+| Traces database cluster | Your cloud account | Stores spans in object storage. The cluster is dedicated to traces and is separate from BYOC Logs clusters. |
 | Metrics, trace metrics, and profiles | Datadog | Receives trace metrics without processing, and stores metrics and profiles. |
-| APM UI and control plane | Datadog | Supplies the APM experience and queries the span data in your cloud account. |
+| APM UI and control plane | Datadog | Shows the APM UI and queries the span data in your cloud account. |
 
 ### Data flows
 
 BYOC APM moves data along these paths:
 
 - **Spans**: Your application, instrumented with an OpenTelemetry SDK, sends spans to the OpenTelemetry Collector over OTLP. The Collector sends the spans to the processing worker, which writes them to the traces database cluster in your cloud account.
-- **Trace metrics**: [Trace metrics][3], including RED metrics (request rate, errors, and latency), go to Datadog without processing. As a result, they stay aligned with the spans in your cloud account. Trace metrics power [service pages][4], [resource pages][5], [Catalog][6] entries, and [monitors on trace metrics][7].
+- **Trace metrics**: [Trace metrics][3], including RED metrics (request rate, errors, and latency), go to Datadog without processing. As a result, they stay aligned with the spans in your cloud account. Trace metrics supply the data for [service pages][4], [resource pages][5], [Catalog][6] entries, and [monitors on trace metrics][7].
 - **Queries**: The APM UI in Datadog queries the traces database cluster in your cloud account. Query results display in Datadog.
 
 ## Preview capabilities
@@ -75,7 +75,7 @@ BYOC APM supports these capabilities in the Preview:
 BYOC APM doesn't support these capabilities in the Preview:
 
 - Trace queries and Live Search
-- Some aggregations, and the scatter plot
+- Some aggregations and the scatter plot
 - Cluster selection in [Trace Explorer][8]
 - The service dependency graph
 - Span links and span events
@@ -84,7 +84,7 @@ BYOC APM doesn't support these capabilities in the Preview:
 - Percentiles
 - Retention filters
 - Sensitive Data Scanner
-- [Generating metrics from spans][9]
+- [Custom metrics generated from spans][9]
 - Service remapping configuration
 - Enrichments
 - The distribution widget
