@@ -25,6 +25,10 @@ further_reading:
 
 ---
 
+{{< callout header="false" btn_hidden="true" >}}
+The DDOT Collector is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 The Datadog OpenTelemetry (DDOT) Collector is an open source distribution of the OpenTelemetry Collector, built and maintained by Datadog. Use it to collect, process, and route telemetry with standard OpenTelemetry configuration. It doesn't require the Datadog Agent.

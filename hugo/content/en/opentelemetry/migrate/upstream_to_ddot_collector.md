@@ -10,6 +10,10 @@ further_reading:
   text: "Install the DDOT Collector on Kubernetes"
 ---
 
+{{< callout header="false" btn_hidden="true" >}}
+The DDOT Collector is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Switch an upstream OpenTelemetry Collector on Kubernetes to the [DDOT Collector][1] by changing its container image. You keep your pipeline configuration. To switch back, restore the original image.

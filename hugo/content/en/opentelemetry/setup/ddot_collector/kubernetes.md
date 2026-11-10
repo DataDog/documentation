@@ -9,6 +9,10 @@ further_reading:
   text: "OpenTelemetry Collector components included in DDOT"
 ---
 
+{{< callout header="false" btn_hidden="true" >}}
+The DDOT Collector is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Deploy the Datadog OpenTelemetry (DDOT) Collector on Kubernetes with the OpenTelemetry Operator or the OpenTelemetry Collector Helm chart. When you finish, a Collector runs on each node, receives OTLP from your applications, and sends your telemetry to Datadog. You don't need the Datadog Agent.
