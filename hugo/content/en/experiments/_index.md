@@ -48,6 +48,7 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | [Create a metric from Agent Observability data][23] | Measure LLM application cost, token usage, or custom evaluation scores |
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
+| [Require experiment approvals][24] | Review experiment launches and traffic changes before applying them |
 | [Standardize experiments with protocols][21] | Define reusable defaults for metrics, randomization, duration, and statistical analysis |
 | [Analyze an experiment that's already been randomized][17] | Define exposure data in your warehouse when randomization runs outside Datadog Feature Flags |
 | [Understand experiment diagnostics][20] | Interpret automated checks for exposures, metrics, randomization, and analysis health |
@@ -124,4 +125,4 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [21]: /experiments/protocols/
 [22]: /llm_observability/improve/online_experiments/
 [23]: /experiments/defining_metrics/?tab=agentobservability
-
+[24]: /experiments/approvals/

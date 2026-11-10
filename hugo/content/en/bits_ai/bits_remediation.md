@@ -13,9 +13,13 @@ site_support_id: bits_remediation
   Bits Remediation includes capabilities in Preview. Click <strong>Request Access</strong> to join the Preview program.
 {{< /callout >}}
 
-## Automate code fixes
+## Overview of Bits Remediation
 
-After Bits helps you identify a root cause from an investigation, it can also help you take action as quickly as possible.
+Bits Remediation helps on-call engineers, SREs, and platform teams act on the root cause that [Bits Investigation][9] finds. From an investigation, you can generate code fixes, run triage and infrastructure actions, and verify that the issue is resolved.  Admins use [Bits Guardrails](#govern-how-bits-takes-remediation-action) to control which actions Bits can take and who must approve them.
+
+For example, Bits Investigation might trace rising error rates to a faulty Kubernetes deployment. From the investigation, you can open an incident, roll back the deployment, and generate a pull request that fixes the underlying error. Afterward, Bits can verify that error rates returned to normal.
+
+## Automate code fixes
 
 Bits Investigation integrates with [Bits Code][2] to generate code fixes. Bits connects to your source code provider to create, update, and iterate on production-ready pull requests, based on existing issues detected by Datadog.
 
@@ -86,4 +90,5 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 [4]: /actions/actions_catalog/
 [5]: /actions/private_actions/
 [7]: https://app.datadoghq.com/organization-settings/roles
-[8]: https://app.datadoghq.com/bits-ai/guardrails 
+[8]: https://app.datadoghq.com/bits-ai/guardrails
+[9]: /bits_ai/bits_investigation/

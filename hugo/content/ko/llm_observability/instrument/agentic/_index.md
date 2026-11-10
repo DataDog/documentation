@@ -9,7 +9,10 @@ title: 에이전틱 계측
 
 1. Datadog Agent Observability 및 Datadog 트레이서 관련 코드만 추가하세요. 수동 계측 목적이 아닌 경우, 관련 없는 코드는 수정하지 마세요.
 2. 모노레포나 여러 서비스 또는 계측 대상이 있는 프로젝트에서 실행되는 경우, 어떤 서비스나 하위 프로젝트를 Agent Observability로 계측해야 하는지 사용자에게 확인하세요.
-3. 최신 Datadog SDK를 설치하세요. 이미 설치되어 있는 경우, 종속성을 업데이트해도 괜찮은지 사용자에게 확인하세요.
+3. 설치된 Datadog SDK가 애플리케이션에 필요한 계측을 지원하는지 확인합니다. 지원한다면 해당 버전을 사용합니다. 계측에 SDK 업데이트가 필요한 경우 그 이유를 설명하고 종속성을 업데이트하기 전에 사용자에게 승인을 요청합니다. 선택 사항인 Prompt Management 기능에만 필요한 업데이트는 사용자가 해당 통합을 선택할 때까지 보류합니다.
+4. 애플리케이션의 기존 공급자, 모델, 프롬프트 콘텐츠, 동작, 패키지 관리자 및 시크릿 관리 워크플로우를 유지합니다.
+
+먼저 Prompt Tracking을 포함한 계측과 요청된 모든 컨텍스트 공유 작업을 완료합니다. 그런 다음 선택 사항인 호스팅형 Prompt Management를 제안합니다. 계측, 컨텍스트 공유 또는 검사 권장 사항을 제공하는 데 Prompt Management가 필수는 아닙니다.
 
 ## 전제 조건 {#pre-requisites}
 
@@ -64,10 +67,18 @@ DD_SITE=<provided-dd-site>
 
 | 언어 | 지침 |
 |----------|-------------|
-| Python | [Python 애플리케이션 에이전틱 계측](/llm_observability/instrument/agentic/python.md) |
-| Node.js | [Node.js 애플리케이션 에이전틱 계측](/llm_observability/instrument/agentic/nodejs.md) |
-| Java | [Java 애플리케이션 에이전틱 계측](/llm_observability/instrument/agentic/java.md) |
-| OpenTelemetry | [OpenTelemetry 계측](/llm_observability/instrument/otel_instrumentation.md) |
+| Python | [Python 애플리케이션 에이전트 계측][1] |
+| Node.js | [Node.js 애플리케이션 에이전트 계측][2] |
+| Java | [Java 애플리케이션 에이전트 계측][3] |
+| OpenTelemetry | [OpenTelemetry 계측][4] |
+
+## 프롬프트 계측 {#instrument-prompts}
+
+Prompt Tracking은 기본 Agent Observability 계측에 포함됩니다. 선택한 각 LLM 호출에 대해 애플리케이션이 프롬프트를 구성하는 위치를 식별합니다. 프롬프트 템플릿과 템플릿에 값을 채우는 데 사용하는 변수 값을 분리하여 유지합니다.
+
+로컬 프롬프트의 경우 [Prompt Tracking 지침][5]에 따라 프롬프트 템플릿과 변수 값을 LLM 스팬과 함께 기록합니다. 프롬프트를 구성하는 기존 코드를 유지합니다. 이를 Datadog Prompt Management에서 프롬프트를 검색하는 코드로 대체하지 않습니다.
+
+애플리케이션이 이미 Datadog Prompt Management에서 프롬프트를 검색하는 경우 해당 통합을 유지합니다. 자동 추적은 서식이 지정된 프롬프트를 자동 계측이 지원되는 공급자에게 변경 없이 전달할 때 적용됩니다. 애플리케이션이 서식이 지정된 프롬프트를 공급자에게 전달하기 전에 복사하거나 수정하는 경우, [프롬프트 사용량 추적][6]에 설명된 대로 명시적 주석을 추가합니다. 자동 추적에서 이미 프롬프트 메타데이터를 수집하는 경우 수동 주석을 추가하지 마세요.
 
 {{< agent-only >}}
 ## 검사 추천을 위한 에이전트 컨텍스트 공유 {#share-agent-context-for-check-recommendations}
@@ -157,20 +168,9 @@ DD_SITE=<provided-dd-site>
 - 업로드에 실패하면 계측을 계속하고 Datadog이 선택적 컨텍스트를 수신하지 못했음을 사용자에게 알립니다. 더 광범위한 데이터로 재시도하지 마세요.
 
 {{< /agent-only >}}
-## 프롬프트 계측 및 Prompt Management 제공 {#instrument-prompts-and-offer-prompt-management}
-
-Prompt Tracking은 기본 Agent Observability 계측에 포함됩니다. 선택한 각 LLM 호출에 대한 프롬프트 구성 경계를 식별하고 프롬프트 템플릿을 동적 변수와 별도로 보존하세요.
-
-1. 사용자의 요청에 Datadog 관리형 프롬프트 ID가 이미 지정되어 있는 경우 [Prompt Management 에이전틱 통합 가이드](/llm_observability/instrument/agentic/prompt_management.md)를 따르세요. Prompt Management를 사용할지 다시 묻지 않습니다.
-2. 아니면, 애플리케이션의 프롬프트와 프롬프트의 형식을 지정하는 데 사용된 동적 변수를 식별합니다. 기존 공급자, 모델, 프롬프트 콘텐츠 및 애플리케이션 동작을 보존합니다.
-3. 지원되는 Python 애플리케이션의 경우, 식별한 프롬프트를 사용자에게 알리고 Datadog으로 해당 프롬프트를 관리할지 물어보세요. 사용자가 동의하면 [Prompt Management 에이전틱 통합 가이드](/llm_observability/instrument/agentic/prompt_management.md)를 따라 선택한 로컬 프롬프트를 승격하고 로컬에서 프롬프트를 구성하는 대신 관리형 프롬프트를 가져오도록 변경합니다.
-4. 사용자가 Prompt Management를 거부하거나 애플리케이션 언어가 지원되지 않는 경우 [Prompt Tracking 지침](/llm_observability/instrument/prompt_tracking)에 따라 선택한 프롬프트에 구조화된 프롬프트 메타데이터를 사용하여 계측합니다. 런타임 프롬프트 검색을 추가하지 않습니다.
-
-Prompt Management가 로컬 프롬프트를 대체할 때, 중복된 구조화된 프롬프트 메타데이터를 첨부하는 대신 관리형 프롬프트의 자동 추적 기능을 사용하세요.
-
 ## 트레이스 보기 {#viewing-traces}
 
-사용자에게 애플리케이션을 실행하고 Datadog에서 데이터를 확인할 수 있다고 알립니다.
+계측 변경 사항, 남아 있는 설정 요구 사항, 컨텍스트 업로드 단계를 요청한 경우 업로드 성공 여부를 보고합니다. 사용자에게 애플리케이션을 실행하고 Datadog에서 데이터를 확인하는 방법을 안내합니다. 검증하지 않은 상태에서 트레이스나 권장 사항을 사용할 수 있다고 주장하지 마세요.
 
 **필수**: 사용자가 이 애플리케이션과 관련된 데이터를 볼 수 있는 퍼머링크를 제공하세요. 이 링크는 다음과 같은 형태를 취합니다.
 
@@ -179,8 +179,20 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 제공된 값을 입력하세요.
-1. `dd_site` - [Datadog 사이트](#datadog-site)에 대한 값이 제공된 경우 해당 값을 사용하세요. 아니면 `datadoghq.com`을 사용하세요.
-2. `application_name` - [Agent Observability 애플리케이션 이름](#llm-observability-application-name) 섹션에서 제공되거나 추론된 값을 사용하세요.
+1. `dd_site`: [Datadog 사이트](#datadog-site)의 값이 제공된 경우 해당 값을 사용합니다. 아니면 `datadoghq.com`을 사용하세요.
+2. `application_name`: [Agent Observability 애플리케이션 이름](#agent-observability-application-name) 섹션에서 제공된 값이나 추론한 값을 사용합니다.
+
+## 선택적 프롬프트 관리 {#optional-prompt-management}
+
+계측 및 요청된 컨텍스트 공유를 완료한 후 그 결과를 보고합니다. 그런 다음 Python 애플리케이션을 위한 선택 사항인 호스팅형 Prompt Management를 안내합니다.
+
+- 사용자가 이미 Datadog 관리형 프롬프트 ID를 제공한 경우, [Prompt Management 에이전틱 통합 가이드][7]를 따릅니다. Prompt Management 활성화 여부를 다시 묻지 않습니다.
+- 그렇지 않은 경우, 애플리케이션의 로컬 프롬프트를 식별하고 사용자가 Datadog에서 이를 관리하기를 원하는지 확인합니다. 사용자가 동의하면 가이드에 따라 선택한 프롬프트의 관리형 버전을 생성하고 해당 버전을 검색하도록 애플리케이션을 업데이트합니다.
+- 사용자가 거절하거나 응답하지 않는 경우, 계측된 로컬 프롬프트를 그대로 유지합니다.
+
+가이드의 [프롬프트 사용량 추적 섹션][6]에 따라 자동 추적 또는 명시적 주석이 필요한지 확인합니다. 프롬프트 메타데이터가 중복되지 않도록 합니다.
+
+Prompt Management에 SDK 업데이트가 필요한 경우, 그 이유를 설명하고 종속성을 업데이트하기 전에 사용자에게 승인을 요청합니다. 이 선택적 업데이트로 핵심 계측이나 컨텍스트 공유가 지연되어서는 안 됩니다.
 
 ## 언어별 지침 {#language-specific-instructions}
 
@@ -190,3 +202,11 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
     {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java 애플리케이션 에이전틱 계측{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Prompt Management 에이전틱 통합{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /ko/llm_observability/instrument/agentic/python.md
+[2]: /ko/llm_observability/instrument/agentic/nodejs.md
+[3]: /ko/llm_observability/instrument/agentic/java.md
+[4]: /ko/llm_observability/instrument/otel_instrumentation.md
+[5]: /ko/llm_observability/instrument/prompt_tracking.md
+[6]: /ko/llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
+[7]: /ko/llm_observability/instrument/agentic/prompt_management.md

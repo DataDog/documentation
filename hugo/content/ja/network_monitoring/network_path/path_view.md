@@ -17,7 +17,7 @@ Network Path の Path View セクションでは、特定のルートを詳細�
 
 {{< img src="network_performance_monitoring/network_path/network_path_view_5.png" alt="0% のパケットロス、103ms のレイテンシー、レイテンシーと到達可能性の履歴を示す Network Path ビュー" >}}
 
-ソースから宛先までのホップ間の任意のパスをクリックすると、`Hop TTL`、`Hop Latency`、`Traversed count` などの追加の詳細を確認できます。その後、**デバイスの詳細を表示**をクリックして、選択したデバイスの [NDM][4] のデバイス詳細ページに移動します。
+ソースから宛先までのホップ間の任意のパスをクリックすると、`Hop TTL`、`Hop Latency`、`Traversed count` などの追加の詳細を確認できます。その後、[{{< ui >}}View Device Details{{< /ui >}}] (デバイスの詳細を表示) をクリックして、選択したデバイスの [NDM][4] のデバイス詳細に移動します。
 
 {{< img src="network_performance_monitoring/network_path/path_details.png" alt="パスの詳細をハイライトしている Network Path のパスビュー。" style="width:30%;" >}}
 
@@ -49,6 +49,12 @@ Network Path の Path View セクションでは、特定のルートを詳細�
 
 {{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="レイテンシーヘルスバーを選択し、時間範囲をドラッグしているネットワークパスのビデオ。" video="true" >}}
 
+## Bits AI で分析する {#analyze-with-bits-ai}
+
+パスビューで [{{< ui >}}Analyze with Bits AI{{< /ui >}}] (Bits AI で分析) をクリックして、現在のパスが読み込まれた状態で [Bits AI][5] を開きます。Bits AI はパスに沿ってレイテンシー、パケットロス、ジッターを分析して、問題が発生している場所の AI 生成による内訳を返します。
+
+Datadog MCP Server の [`get_network_path_test_runs`][6] ツールを使用して、AI エージェントからホップごとのデータを含む Network Path テスト実行をクエリすることもできます。
+
 ## 視覚的比較 {#visual-comparison}
 
 視覚的比較ビューを使用して、2 つのパスを視覚化したものを並べて比較し、インシデントの前後で何が変わったかを特定します。
@@ -65,17 +71,21 @@ Network Path の Path View セクションでは、特定のルートを詳細�
 
 ### 比較ビューを開く {#open-the-comparison-view}
 
-比較ビューを開くには、Network Path ビューの時間範囲コントロールの近くにある**比較**をクリックします。デフォルトでは、以前に選択した時間範囲がビューに表示され、前の同等の時間範囲と比較されます。例えば、3 時間の範囲は前の 3 時間の範囲と比較されます。上部のコントロールを使用して、比較する時間範囲を調整します。
+比較ビューを開くには、Network Path ビューの時間範囲コントロールの付くにある [{{< ui >}}Compare{{< /ui >}}] (比較) をクリックします。デフォルトでは、以前に選択した時間範囲がビューに表示され、前の同等の時間範囲と比較されます。たとえば、3 時間の範囲は前の 3 時間の範囲と比較されます。上部のコントロールを使用して、比較する時間範囲を調整します。
 
 ### 比較をナビゲートする {#navigate-the-comparison}
 
 ズームコントロールまたはミニマップを使用するか、⌘/Ctrl を押しながらマウスでスクロールして、分割されたパスを独立してナビゲートします。
 
-共有ホップの**検査**をクリックして、メタデータの詳細を示すサイドバーを開き、そのホップが両方のビューに存在することを確認します。一意のホップは 1 つのビューにのみ存在することを示すために異なる色で囲まれています。
+共有ホップの [{{< ui >}}Inspect{{< /ui >}}] (検査) をクリックして、メタデータの詳細を示すサイドバーを開き、そのホップが両方のビューに存在することを確認します。一意のホップは 1 つのビューにのみ存在することを示すために異なる色で囲まれています。
 
-**分析**タブは、各時間範囲のパケットと RTT レイテンシーについてホップごとに並列で表示されたテーブルを提供します。
+[{{< ui >}}Analysis{{< /ui >}}] (分析) タブは、各時間範囲のパケットと RTT レイテンシーについてホップごとに並列で表示されたテーブルを提供します。
 
 {{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="パス A とパス B のホップごとの RTT レイテンシーテーブルを並列表示した視覚的比較ビューの分析タブ" style="width:100%;" >}}
+
+### Bits AI でパスを比較する {#compare-paths-with-bits-ai}
+
+比較ビューから [Bits AI] ボタンをクリックして、両方のパスが読み込まれた状態で [Bits AI][5] を開きます。Bits AI は、2 つのパスの AI 生成による比較結果を返します。
 
 ## グラフ {#graphs}
 
@@ -103,3 +113,5 @@ Network Path の Path View セクションでは、特定のルートを詳細�
 [2]: /ja/network_monitoring/network_path/list_view
 [3]: /ja/network_monitoring/network_path/as_view/
 [4]: /ja/network_monitoring/devices
+[5]: /ja/bits_ai/
+[6]: /ja/mcp_server/tools/#get_network_path_test_runs

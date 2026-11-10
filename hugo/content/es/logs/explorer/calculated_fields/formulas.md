@@ -269,7 +269,7 @@ Combina múltiples valores en una sola cadena con un delimitador entre ellos.
 
 | Ejemplo  | Fórmula | Resultado |
 |----------|-------------|---------|
-| Un registro de evento tiene los siguientes atributos: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = textjoin(", ", "false", @city, @country)` | `#region` = "Paris, France" |
+| Un evento de registro tiene los siguientes atributos: <br> - `@city` = "Paris" <br> - `@country` = "France" | `#region = textjoin(", ", "false", @city, @country)` | `#region` = "Paris, France" |
 
 {{% /collapse-content %}}
 
@@ -319,7 +319,9 @@ Comprueba si un atributo o expresión es nulo.
 
 ### Regex {#regex}
 
-Las funciones de Regex coinciden o transforman un valor usando una expresión regular (regex). Los patrones admiten las mismas construcciones de regex que la [extracción de regex][1], como literales, clases de caracteres y cuantificadores. El escape es diferente: un patrón de extracción es un campo simple, mientras que un patrón aquí es un argumento de cadena entre comillas dobles. A diferencia de la extracción, los grupos de captura aquí no necesitan un nombre: `regexp_replace` puede hacer referencia a un grupo sin nombre posicionalmente con `$1` a `$9`. Se aplica la misma guía de [rendimiento de patrones][2].
+Las funciones de Regex coinciden o transforman un valor usando una expresión regular (regex). Los patrones admiten las mismas construcciones de regex que la [extracción de regex][1], como literales, clases de caracteres y cuantificadores. Se aplica la misma guía de [rendimiento de patrones][2]. A diferencia de la extracción, los grupos de captura en los patrones de fórmula no necesitan un nombre.
+
+<div class="alert alert-tip">Los argumentos de la fórmula son literales de cadena entre comillas dobles, por lo que una barra invertida literal debe escribirse como dos barras invertidas. Por ejemplo, para hacer coincidir la clase abreviada de dígitos, escriba <code>"\\d"</code> en el patrón. La misma regla se aplica a la cadena de reemplazo: para insertar un signo de dólar literal en lugar de una referencia de grupo, escriba <code>"\\$"</code>.</div>
 
 <h4>regexp_like(<i>str</i> valor, <i>str</i> patrón)</h4>
 
@@ -336,7 +338,7 @@ Devuelve `true` cuando el patrón coincide en cualquier parte del valor, y `fals
 
 <h4>regexp_replace(<i>str</i> entrada, <i>str</i> patrón, <i>str</i> reemplazo, [<i>int</i> inicio, <i>int</i> N])</h4>
 
-Devuelve `input` con el texto coincidente reemplazado. Use `$1` a `$9` en `replacement` para insertar la coincidencia de un grupo de captura, o `${name}` para un grupo con nombre. Los argumentos de la fórmula son literales de cadena entre comillas dobles, por lo que debe escapar las barras invertidas. Por ejemplo, escriba `"\\d"` en lugar de `"\d"` para clases abreviadas en `pattern`. Para insertar un `$` literal en `replacement`, escape su significado especial con `\$`, luego escape esa barra invertida para el literal de cadena: `"\\$"`.
+Devuelve `input` con el texto coincidente reemplazado. Use `$1` a `$9` en `replacement` para insertar la coincidencia de un grupo de captura, o `${name}` para un grupo con nombre.
 
 | Argumento | Significado |
 |---|---|

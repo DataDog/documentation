@@ -36,7 +36,7 @@ Before you create Agent-side tag aggregation rules, complete the steps described
 1. [Enable Remote Configuration](#enable-remote-configuration) on the API keys used by your Agents.
 2. [Enable the Agent Data Plane](#enable-the-agent-data-plane).
 
-Agent-side tag aggregation is supported on Agent version 7.80.0 and later. Datadog recommends version 7.81.0 or later, which includes broad backward compatibility of the Agent Data Plane with pre-existing Agent configuration options.
+Agent-side tag aggregation is supported on Agent version 7.80.0 and later. Datadog recommends version 7.81.0 or later, which includes broad backward compatibility of the Agent Data Plane with pre-existing Agent configuration options. On Windows and macOS, use Agent version 7.85.0 or later.
 
 ### Enable Remote Configuration
 
@@ -50,7 +50,7 @@ Comprehensive instructions are available in the [Remote Configuration documentat
 
 ### Enable the Agent Data Plane
 
-Upgrade your Agents to version 7.80.0 or later (7.81.0 or later recommended) and enable the Agent Data Plane. Agent-side tag aggregation requires the Agent Data Plane, a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
+Upgrade your Agents to version 7.80.0 or later (7.81.0 or later recommended, 7.85.0 or later on Windows and macOS) and enable the Agent Data Plane. Agent-side tag aggregation requires the [Agent Data Plane][11], a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
 
 When the Agent Data Plane is enabled:
 
@@ -94,9 +94,9 @@ agents:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Linux VM" %}}
+{{% tab "Host (Linux, Windows, macOS)" %}}
 
-With Agent version 7.80.0 or later (7.81.0 or later recommended), add the following to your `datadog.yaml`:
+With Agent version 7.80.0 or later on Linux (7.81.0 or later recommended), or 7.85.0 or later on Windows and macOS, add the following to your `datadog.yaml`:
 
 {{< code-block lang="yaml" >}}
 data_plane:
@@ -116,11 +116,11 @@ For each custom metric configured for Agent-side tag aggregation, the tags that 
 
 Agent-side tag aggregation rules are applied only by Agents that meet all of the following requirements:
 
-- Agent version 7.80.0 or later
+- Agent version 7.80.0 or later (7.85.0 or later on Windows and macOS)
 - Remote Configuration enabled
 - Agent Data Plane enabled
 
-Agents earlier than 7.80.0, Agents without Remote Configuration enabled, and Agents without the Agent Data Plane enabled do not apply Agent-side tag aggregation rules.
+Agents earlier than 7.80.0, Windows and macOS Agents earlier than 7.85.0, Agents without Remote Configuration enabled, and Agents without the Agent Data Plane enabled do not apply Agent-side tag aggregation rules.
 
 Rule updates are usually deployed to eligible Agents in approximately 1 minute and may take up to 2 minutes.
 
@@ -144,7 +144,7 @@ After Remote Configuration and the Agent Data Plane are enabled, you can configu
 
 To create a rule:
 
-1. Navigate to the [Metric Summary][8] page or the [Custom Metrics Volume][9] page.
+1. Navigate to the [Metrics Catalog][8].
 2. Select one or more custom metrics for Agent-side tag aggregation.
 
 Your tag aggregation rules are visible from the [Metric Settings][10] page, where you can also create and edit them directly.
@@ -155,7 +155,6 @@ The initial Preview release has the following limitations:
 
 - Up to 500 metric names can be configured for Agent-side tag aggregation.
 - Only DogStatsD distribution metrics and DogStatsD count and rate metrics are supported.
-- Windows and macOS are not supported.
 - Managing Agent-side tag aggregation rules through the API is not supported.
 
 When Agent-side tag aggregation rules are configured, Agent Data Plane resource usage may increase by up to 10% CPU and up to 25% resident set size (RSS). These limits are intended to minimize the resource usage impact on the Agent during the Preview.
@@ -197,6 +196,6 @@ The `sum` aggregation performed by the Agent preserves results for queries that 
 [5]: /remote_configuration/#enable-remote-configuration
 [6]: /account_management/rbac/permissions/#access-management
 [7]: /account_management/rbac/permissions/#api-and-application-keys
-[8]: https://app.datadoghq.com/metric/summary
-[9]: https://app.datadoghq.com/metric/volume
+[8]: https://app.datadoghq.com/metric/catalog
 [10]: https://app.datadoghq.com/metric/settings
+[11]: /agent/configuration/agent-data-plane/

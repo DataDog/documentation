@@ -10,10 +10,6 @@ further_reading:
   text: "Catalog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/tag-enrichment/" >}}
-Tag enrichment is in Preview. To request access, fill out this form.
-{{< /callout >}}
-
 ## Overview
 
 Use tag enrichment rules to add tags to your telemetry without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
