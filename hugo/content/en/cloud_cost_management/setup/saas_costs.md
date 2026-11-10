@@ -185,7 +185,7 @@ After you save your configuration, Datadog begins polling Anthropic usage and co
 
 {{% tab "ChatGPT Enterprise" %}}
 
-<div class="alert alert-info">ChatGPT Enterprise cost monitoring is in Preview. Datadog does not charge for this integration during Preview. Credit-priced usage is shown as estimated USD costs, which may differ from final OpenAI bills.</div>
+<div class="alert alert-info">ChatGPT Enterprise cost monitoring is in Preview. Datadog does not charge for this integration during Preview. Credit-priced usage is shown as estimated USD costs, which can differ from final OpenAI bills.</div>
 
 ### 1. Create a Costs-only admin API key
 
