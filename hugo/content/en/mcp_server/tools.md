@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
+- link: "https://www.datadoghq.com/blog/rum-operations-monitoring/"
+  tag: "Blog"
+  text: "Monitor the performance of critical steps in user journeys with RUM operations"
 ---
 
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.

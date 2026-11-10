@@ -10,6 +10,9 @@ further_reading:
 - link: "/synthetics/notifications/"
   tag: "Documentation"
   text: "Learn more about Synthetic Monitoring Notifications"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 ---
 
 ## Overview

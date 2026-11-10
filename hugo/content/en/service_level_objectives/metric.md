@@ -12,12 +12,15 @@ further_reading:
 - link: "/service_level_objectives/"
   tag: "Documentation"
   text: "SLO overview, configuration, and calculation"
-- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
-  tag: "Blog"
-  text: "Best practices for managing your SLOs with Datadog"
 - link: "https://learn.datadoghq.com/courses/getting-started-slos"
   tag: "Learning Center"
   text: "Getting Started with Service Level Objectives (SLOs)"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-synthetic-slos-slis/"
+  tag: "Blog"
+  text: "Build better SLOs with RUM and synthetic SLIs"
 
 ---
 
