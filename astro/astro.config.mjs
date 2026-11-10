@@ -233,8 +233,9 @@ export default defineConfig({
         // rather than read from the committed `hugo/data/api`. Gitignored and
         // required: unlike `@api-examples`, the loaders import exact files
         // here, so an unstaged tree fails the build instead of rendering
-        // empty pages. `vitest.unit.config.ts` redirects the spec and
-        // CodeExamples.json under this root to the frozen fixture.
+        // empty pages. `vitest.unit.config.ts` redirects the spec,
+        // CodeExamples.json and the translation overlays under this root to
+        // the frozen fixture.
         "@api-spec": apiSpec,
         "@shared": sharedDir,
         "@websites-modules": websitesModules,

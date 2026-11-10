@@ -65,8 +65,13 @@ Evaluation context attributes are the flat string, number, and Boolean values th
 
 Feature Flags telemetry includes exposure events, flag evaluation metrics, and optional RUM correlation depending on the SDK and configuration.
 
+## Automate feature flag events
+
+Use [Feature Flags automations][2] to run workflows when flags are created, enabled, disabled, or archived, and when rollouts, approvals, or targeting rules change. For example, send a notification when a rollout pauses or a flag is disabled.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/configuration_sources/
+[2]: /feature_flags/concepts/workflow_automation/

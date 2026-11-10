@@ -34,25 +34,25 @@ For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM 
 
 With Historical Metrics Ingestion enabled, if you submit multiple values with the same timestamp and same tag-value combination to Datadog, Datadog preserves the most recently submitted value. That is, If within the same timestamp, you submit a metric with a value of X, and also send that metric with a value of Y, whichever value is the most recently submitted will be preserved.
 
-You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
+You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Catalog page][1] for *counts, rates, and gauges* metric types.  
 
 **Note**: Historical Metrics Ingestion is not available for distribution metrics, or custom metrics generated from other Datadog data types (such as logs).
 
 ## Configuration
 
 To enable the ingestion of historical metrics for a specific metric:
-1. Navigate to the [Metrics Summary Page][1].
+1. Navigate to the [Metrics Catalog page][1].
 1. Click on the metric name you want to enable Historical Metrics Ingestion for to open the metric's details side panel.
 1. Within the *Advanced* section of the side panel, click {{< ui >}}Configure{{< /ui >}}.
 1. Select the {{< ui >}}Enable historical metrics{{< /ui >}} toggle and press {{< ui >}}Save{{< /ui >}}.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Catalog page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
 
 ### Bulk configuration for multiple metrics
 
 You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][1] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
+1. Navigate to the [Metrics Catalog page][1] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
 1. Select {{< ui >}}Enable historical metrics{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
 1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the {{< ui >}}Historical metrics{{< /ui >}} toggle.
@@ -475,7 +475,7 @@ For details on the Metric Name pricing model, see [Metric Name Pricing for Custo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/catalog
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage

@@ -361,29 +361,57 @@ This example uses webpack. The configuration object is identical across all supp
 
 To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source code context](#source-code-context) plugin.
 
-### Action name deobfuscation
+### Privacy plugin
 
-When you enable the [`enablePrivacyForActionName`][5] initialization parameter, action names are masked for privacy. In minified builds, action names can also become unreadable because bundlers obfuscate the DOM element text and attributes that RUM uses to generate action names.
+The privacy plugin generates an allowlist of safe, static strings at build time. When the `mask-unless-allowlisted` privacy level is enabled, the RUM Browser SDK uses this allowlist to unmask these static strings automatically. Dynamic text, such as user input or customer data fetched from an API, remains masked by default. The allowlist gives `mask-unless-allowlisted` similar privacy benefits to the `mask` privacy level, while retaining UI text that makes action names and Session Replay more useful.
 
-The Action name deobfuscation build plugin addresses both issues by instrumenting your source code at build time to generate a privacy dictionary that maps obfuscated values back to their original text. The RUM SDK uses this dictionary to resolve readable action names.
+#### How the privacy plugin works
+
+1. During the build, the plugin extracts static strings from compiled application artifacts, including bundles and source maps, to generate an allowlist. Only string literals appear in the allowlist; runtime values are never included.
+2. At runtime, the RUM Browser SDK checks candidate text against the allowlist before using it in action names or Session Replay. It keeps matching text readable and replaces unknown text with a fixed masking placeholder.
+
+For example, a static `Order value` label can remain readable in an action name such as `Click on Order value`. A customer-specific value calculated at runtime, such as `$142.75`, stays masked unless it's in the allowlist.
+
+{% alert %}
+Element-level privacy overrides (for example, `data-dd-privacy="mask"`) still take precedence over the build-time allowlist.
+{% /alert %}
 
 #### Prerequisites
 
-- The RUM SDK initialized with `trackUserInteractions: true` and `enablePrivacyForActionName: true`. See [Mask all action names][5].
+- RUM Browser SDK v7 or later.
 - The Datadog build plugin installed and registered with your bundler. See [Installation](#installation).
 
-#### Configuration
+Action tracking does not take privacy levels into account when the `enablePrivacyForActionName: false` SDK configuration option is set. Remove this option to allow the privacy plugin to affect action names. See [Tracking User Actions][5].
 
-Configure the `rum.privacy` object in your build plugin options:
+#### Configure the Browser SDK
+
+Set `defaultPrivacyLevel` to `mask-unless-allowlisted` to apply build-time allowlisting across the application. The `mask-unless-allowlisted` privacy level requires RUM Browser SDK v7 or later.
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  defaultPrivacyLevel: 'mask-unless-allowlisted',
+});
+```
+
+To apply `mask-unless-allowlisted` to part of the application, set `data-dd-privacy="mask-unless-allowlisted"` on the relevant HTML element. See [Session Replay privacy options][9] for more about element-level privacy overrides.
+
+#### Configure the build plugin
+
+Enable the privacy plugin by adding a `rum.privacy` object to your build plugin options. Use `include` and `exclude` to control which source files the plugin processes when generating the allowlist:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
-| `rum.privacy.include` | Array of RegExp or String | No | JS/TS files (.js, .ts, .jsx, .tsx, .mjs, .cjs, and variants) | File patterns to process for action name deobfuscation. |
+| `rum.privacy.include` | Array of RegExp or String | No | JS/TS files (.js, .ts, .jsx, .tsx, .mjs, .cjs, and variants) | File patterns to process when generating the allowlist. |
 | `rum.privacy.exclude` | Array of RegExp or String | No | `node_modules`, `.preval.` files | File patterns to skip. |
 
-#### Example
+#### Examples
 
-With default settings (processes all JS/TS files, excludes `node_modules`):
+Enable the privacy plugin with default settings (processes JS/TS files and excludes `node_modules` and `.preval.` files):
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -399,7 +427,7 @@ module.exports = {
 };
 ```
 
-With custom include and exclude patterns:
+To customize which files the plugin processes, set `include` and `exclude` patterns:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -494,7 +522,8 @@ Datadog also provides integrations for frontend frameworks and platforms. Each i
 [2]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [3]: /real_user_monitoring/
 [4]: /real_user_monitoring/guide/upload-javascript-source-maps
-[5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions#mask-all-action-names
+[5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
 [6]: https://github.com/DataDog/build-plugins/releases/tag/v3.3.0
 [7]: https://github.com/DataDog/browser-sdk/releases/tag/v7.6.0
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v7.10.0
+[9]: /session_replay/privacy_options/#override-an-html-element

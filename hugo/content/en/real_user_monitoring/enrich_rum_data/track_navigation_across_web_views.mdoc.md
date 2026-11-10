@@ -3,7 +3,7 @@ title: Track Navigation Across Web Views
 description: "Track user activity across web and native components in hybrid mobile applications with RUM Web View Tracking."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
 aliases:
 - /real_user_monitoring/application_monitoring/web_view_tracking/
 - /real_user_monitoring/application_monitoring/android/web_view_tracking/

@@ -20,6 +20,44 @@ To enable Datadog [distributed tracing][4], set the `DatadogConfiguration.firstP
 
 If your app runs network calls from a background isolate, call `attachToBackgroundIsolate` from that isolate to continue tracking those resources automatically. Packages other than the Tracking HTTP Client, such as `http` or Dio, need to be re-initialized on the background isolate. For details, see [Tracking from background isolates][5].
 
+### Add custom attributes to automatically tracked resources
+
+For resources tracked by `datadog_tracking_http_client`, implement `DatadogTrackingHttpClientListener` to attach custom attributes to individual RUM resource events. Pass the listener to `enableHttpTracking(clientListener: ...)` before initializing the SDK.
+
+The `requestStarted` and `responseFinished` callbacks receive the same mutable `userAttributes` map for each resource. Add or update attributes in either callback. Only the attributes remaining after `responseFinished` are sent to Datadog for that resource.
+
+```dart
+import 'dart:io';
+
+import 'package:datadog_tracking_http_client/datadog_tracking_http_client.dart';
+
+class ResourceAttributesListener implements DatadogTrackingHttpClientListener {
+  @override
+  void requestStarted({
+    required Object resourceKey,
+    required HttpClientRequest request,
+    required Map<String, Object?> userAttributes,
+  }) {
+    userAttributes['request_host'] = request.uri.host;
+  }
+
+  @override
+  void responseFinished({
+    required Object resourceKey,
+    required HttpClientResponse response,
+    required Map<String, Object?> userAttributes,
+    Object? error,
+  }) {
+    userAttributes['response_status'] = response.statusCode;
+  }
+}
+
+// Add the listener to your configuration before initializing the SDK.
+configuration.enableHttpTracking(
+  clientListener: ResourceAttributesListener(),
+);
+```
+
 ### Capture resource headers
 
 When tracking resources automatically, you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
@@ -79,6 +117,8 @@ In addition to tracking resources automatically, you can track specific custom r
 - `DdRum.stopResourceWithError`
 - `DdRum.stopResourceWithErrorInfo`
 
+To attach custom attributes to an individual resource, pass an attributes map to `startResource` or `stopResource`. The attributes are optional positional arguments. For `stopResource`, pass the resource size, or `null` if it is unknown, before the attributes map.
+
 For example:
 
 ```dart
@@ -88,6 +128,7 @@ DatadogSdk.instance.rum?.startResource(
     "resource-key",
     RumHttpMethod.get,
     url,
+    {'image_source': 'catalog'},
 );
 
 // Later
@@ -95,7 +136,9 @@ DatadogSdk.instance.rum?.startResource(
 DatadogSdk.instance.rum?.stopResource(
     "resource-key",
     200,
-    RumResourceType.image
+    RumResourceType.image,
+    null,
+    {'cache_hit': false},
 );
 ```
 

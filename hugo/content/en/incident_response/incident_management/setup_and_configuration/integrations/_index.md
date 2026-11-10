@@ -30,7 +30,8 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
     {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
-    {{< nextlink href="/integrations/google-meet-incident-management" >}}Google Meet{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations/google_meet" >}}Google Meet{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations/zoom_integration" >}}Zoom{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/google_chat" >}}Google Chat{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
@@ -42,14 +43,18 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 
 Incident Management also integrates with:
 
-- [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
-- [Webhooks][6] to send incident notifications using webhooks (for example, [sending SMS to Twilio][7]).
-- [Zoom][8] to create Zoom meetings for an incident.
+- [Datadog On-Call][3] to page On-Call teams from an incident. You can configure Incident Management to automatically resolve attached On-Call pages when the related incident is resolved.
+- [PagerDuty][4] and [Opsgenie][5] to send incident notifications to your on-call engineers. With PagerDuty, you can also automatically resolve attached PagerDuty incidents when the related Datadog incident is resolved.
+- [Confluence][6] and [Google Drive][7] to save incident postmortems. To set this up, create a [postmortem template][8] with Confluence or Google Drive as the save location.
+- [Webhooks][9] to send incident notifications using webhooks (for example, [sending SMS to Twilio][10]).
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
-[3]: /integrations/pagerduty/
-[4]: /integrations/opsgenie/
-[6]: /integrations/webhooks/
-[7]: /integrations/webhooks/#sending-sms-through-twilio
-[8]: /integrations/zoom_incident_management/
+[3]: /incident_response/on-call/
+[4]: /integrations/pagerduty/
+[5]: /integrations/opsgenie/
+[6]: /integrations/confluence/
+[7]: /integrations/google-drive/
+[8]: /incident_response/incident_management/setup_and_configuration/templates/#save-location
+[9]: /integrations/webhooks/
+[10]: /integrations/webhooks/#sending-sms-through-twilio

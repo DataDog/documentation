@@ -1,82 +1,87 @@
 ---
-description: Visualiza y compara los cambios de configuración de los dispositivos
+description: Visualice y compare los cambios de configuración de los dispositivos
   en NDM.
 further_reading:
+- link: /network_monitoring/devices/config_management_rollback
+  tag: Documentación
+  text: Reversiones de Network Configuration Management
 - link: /network_monitoring/devices/troubleshooting
   tag: Documentación
-  text: Solucionar problemas de NDM
+  text: Solución de problemas de NDM
+- link: https://www.datadoghq.com/blog/end-to-end-network-operations-with-bits/
+  tag: Blog
+  text: Resuelva problemas de red de L7 a L1 con Datadog
+site_support_id: network_config_management
 title: Network Configuration Management
 ---
+## Descripción general {#overview}
 
-<div class="alert alert-info">Network Configuration Management se encuentra en fase de vista previa. Para solicitar acceso y recibir la compilación personalizada del Datadog Agent, ponte en contacto con tu representante de Datadog.</div>
+Network Configuration Management (NCM) extiende [Network Device Monitoring (NDM)][1] para incluir el conocimiento de la configuración y el seguimiento de cambios. NCM le permite:
 
-## Información general
+- Hacer un seguimiento de cómo cambian las configuraciones de los dispositivos a lo largo del tiempo
+- Comparar dos versiones de configuración lado a lado
+- Utilizar resúmenes generados por IA para comprender los cambios y su impacto potencial durante los incidentes
+- [Revertir un dispositivo a una configuración anterior][8]
 
-Network Configuration Management (NCM) amplía [Network Device Monitoring (NDM)][1] para incluir conocimientos sobre la configuración y el seguimiento de los cambios. NCM te permite:
+{{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Pestaña de configuración de Network Device Management, que muestra la configuración más reciente y un resumen de IA de lo que cambió." style="width:100%;" >}}
 
-- Monitorizar cómo cambian las configuraciones de los dispositivos con el tiempo
-- Comparar dos versiones de configuración
-- Utilizar resúmenes generados por IA para comprender los cambios y su posible impacto durante los incidentes
+## Requisitos previos {#prerequisites}
 
-{{< img src="/network_device_monitoring/config_mgmt/network_device_config_redacted.png" alt="Pestaña de configuración de Network Device Management, donde se muestra la configuración más reciente y un resumen de IA de los cambios." style="width:100%;" >}}
+- [Network Device Monitoring][3] (NDM) debe estar configurado en sus dispositivos.
 
-**Nota**: NCM es de solo lectura en vista previa. 
+## Configuración {#setup}
 
-## Requisitos previos
-
-- [Network Device Monitoring][3] (NDM) debe estar configurado en tus dispositivos.
-- Instala la versión personalizada del Datadog Agent proporcionada por tu representante de Datadog.
-
-## Instalación
-
-1. En el directorio raíz de configuración del Agent en `conf.d/network_config_management.d/`, crea el archivo `conf.yaml` y configúralo como sigue:
-
-   ```yaml
-     init_config:
-       ## @param namespace - string - optional - default: default
-       ## The namespace should match namespaces of devices being monitored
-       namespace: default
-       ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
-       min_collection_interval: 900
-       ## @param ssh - object - optional
-       ## Global SSH configuration that applies to all device instances unless 
-       ## overridden at the device level. 
-       ssh:
-         ## @param timeout - duration - optional - default: 30 (seconds)
-         ## Maximum time for the SSH client to establish a TCP connection.
-         timeout: 30
-         ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
-         ## Path to the known_hosts file containing public keys of servers to 
-         ## verify the identity of remote hosts. Required for secure connections.
-         known_hosts_path: /path/to/known_hosts
-         ## @param insecure_skip_verify - boolean - optional - default: false
-         ## Skip host key verification. This is INSECURE and should only be used
-         ## for development/testing purposes.
-         insecure_skip_verify: false 
-      instances:
-        ip_address - string - required
-        ## The IP address of the network device to collect configurations from.
-        ip_address: <IP_ADDRESS>
-        ## @param auth - object - required
-        ## Authentication credentials to connect to the network device.
-        auth:
-          ## @param username - string - required
-          ## Username to authenticate to the network device.
-          username: <USERNAME>
-          ## @param password - string - required (if private_key_file is not provided)
-          ## Password to authenticate to the network device.
-          ## Used as a fallback after private key authentication if both are provided.
-          password: <PASSWORD>
-          ## @param private_key_file - string - optional
-          ## Path to the SSH private key file for authentication.
-          ## At least one of password or private_key_file must be provided.
-          private_key_file: /path/to/private_key
-   ```
-
-2. Opcionalmente, si tus dispositivos requieren algoritmos SSH específicos, utiliza la siguiente configuración:
+1. En el directorio de configuración raíz del Agent en `conf.d/network_config_management.d/`, cree el archivo `conf.yaml` y configúrelo de la siguiente manera:
 
    ```yaml
    init_config:
+     ## @param namespace - string - optional - default: default
+     ## The namespace should match namespaces of devices being monitored
+     namespace: default
+     ## @param min_collection_interval - integer - optional - default: 900 (15 minutes)
+     min_collection_interval: 900
+     ## @param ssh - object - optional
+     ## Global SSH configuration that applies to all device instances unless 
+     ## overridden at the device level. 
+     ssh:
+       ## @param timeout - duration - optional - default: 30 (seconds)
+       ## Maximum time for the SSH client to establish a TCP connection.
+       timeout: 30
+       ## @param known_hosts_path - string - required (unless insecure_skip_verify is true)
+       ## Path to the known_hosts file containing public keys of servers to 
+       ## verify the identity of remote hosts. Required for secure connections.
+       known_hosts_path: /path/to/known_hosts
+       ## @param insecure_skip_verify - boolean - optional - default: false
+       ## Skip host key verification. This is INSECURE and should only be used
+       ## for development/testing purposes.
+       insecure_skip_verify: false 
+   instances:
+     ## ip_address - string - required
+     ## The IP address of the network device to collect configurations from.
+   - ip_address: <IP_ADDRESS>
+     ## @param auth - object - required
+     ## Authentication credentials to connect to the network device.
+     auth:
+       ## @param username - string - required
+       ## Username to authenticate to the network device.
+       username: <USERNAME>
+       ## @param password - string - required (if private_key_file is not provided)
+       ## Password to authenticate to the network device.
+       ## Used as a fallback after private key authentication if both are provided.
+       password: <PASSWORD>
+       ## @param private_key_file - string - optional
+       ## Path to the SSH private key file for authentication.
+       ## At least one of password or private_key_file must be provided.
+       private_key_file: /path/to/private_key
+   ```
+
+2. Opcionalmente, si sus dispositivos requieren algoritmos SSH específicos, utilice la siguiente configuración:
+
+   ```yaml
+   init_config:
+     ## To confirm a possible value of algorithms, see the constants described in the golang document.
+     ## https://pkg.go.dev/golang.org/x/crypto/ssh#pkg-constants
+     ##
      ## @param ciphers - list of strings - optional
      ## List of SSH encryption ciphers to use for the connection.
      ## If not specified, the SSH library will use its default ciphers.
@@ -85,66 +90,106 @@ Network Configuration Management (NCM) amplía [Network Device Monitoring (NDM)]
        key_exchanges: [diffie-hellman-group14-sha256, ecdh-sha2-nistp256]
        host_key_algorithms: [ssh-ed25519]
    ```
+   
+3. Reinicie el Agent para aplicar los cambios de configuración.
 
-3. Reinicia el Agent para aplicar los cambios de configuración.
+## Visualización de configuraciones {#viewing-configurations}
 
-## Visualización de configuraciones
+Network Configuration Management es accesible desde la vista de dispositivo de NDM en Network Device Monitoring:
 
-Se puede acceder a Network Configuration Management desde el panel lateral del dispositivo en Network Device Monitoring:
+1. Navegue a [Network Device Monitoring][3].
+2. Seleccione un dispositivo de la lista de dispositivos o de cualquier visualización de NDM, como [Device Geomap][4] o el mapa [Device Topology][5].
+3. Abra la pestaña {{< ui >}}Configuration{{< /ui >}} en la vista de dispositivo de NDM.
 
-1. Ve a [Network Device Monitoring][3].
-2. Selecciona un dispositivo de la lista de dispositivos o de cualquier visualización de NDM, como el [Geomapa de dispositivos][4] o el [Mapa de topología de dispositivos][5].
-3. Abre la pestaña **Configuration** (Configuración) en el panel lateral del dispositivo.
+   {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="La vista de dispositivo de NDM, resaltando la pestaña Configuration." style="width:100%;" >}}
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_tab_redacted.png" alt="Panel lateral de Network Device Management, donde se resalta la pestaña Configuration (Configuración)." style="width:100%;" >}}
+   En la pestaña Configuration, puede filtrar lo que muestra la lista:
+   - {{< ui >}}All{{< /ui >}}: Muestra tanto las configuraciones en ejecución como las de inicio
+   - {{< ui >}}Running{{< /ui >}}: La configuración activa y en tiempo real que se ejecuta en el dispositivo
+   - {{< ui >}}Startup{{< /ui >}}: La configuración guardada que se carga cuando el dispositivo se inicia
 
-   En la pestaña Configuration (Configuración), puedes filtrar lo que muestra la lista de configuración:
-   - **All** (Todo): Muestra tanto las configuraciones en ejecución como las de inicio.
-   - **Running** (En ejecución): La configuración activa y en directo que se ejecuta en el dispositivo.
-   - **Arranque**: La configuración guardada que se carga al arrancar el dispositivo
+### Selector de tiempo y retención {#time-picker-and-retention}
 
-### Selector de tiempo y retención
+Los controles de tiempo en la parte superior de la página le permiten seleccionar qué historial de configuración visualizar. Puede ampliar este rango para visualizar versiones más antiguas, hasta el límite de retención (1 año).
 
-Los controles de tiempo de la parte superior de la página te permiten seleccionar el historial de configuración que quieres ver. Por defecto, la vista muestra los cambios de configuración de los últimos 2 días. Puedes ampliar este intervalo para ver versiones anteriores, hasta el límite de retención (1 año).
+La línea de tiempo y la lista de versiones se actualizan automáticamente según el rango de tiempo seleccionado.
 
-La línea de tiempo y la lista de versiones de configuración se actualizan automáticamente en función del intervalo de tiempo seleccionado.
+**Nota**: El historial de configuración comienza cuando NCM está habilitado para su cuenta. Los datos históricos anteriores a la habilitación no están disponibles.
 
-**Nota**: El historial de configuración comienza cuando se activa NCM para tu cuenta. Los datos históricos anteriores a la activación no están disponibles.
+### Visualizar una configuración en un punto en el tiempo {#view-a-configuration-at-a-point-in-time}
 
-### Visualizar una configuración en un momento dado
+Seleccionar un evento de configuración de la línea de tiempo o de la lista abre una visualización de configuración única que muestra el estado del dispositivo en ese momento.
 
-Al seleccionar un evento de configuración de la línea de tiempo o de la lista, se abre una única vista de configuración que muestra el estado del dispositivo en ese momento.
+La visualización de configuración única muestra:
 
-La vista de configuración única muestra:
+- La configuración completa para la marca de tiempo seleccionada
+- Metadatos del dispositivo, incluidos la hora y la identidad del dispositivo
 
-- La configuración completa de la marca de tiempo seleccionada
-- Metadatos del dispositivo, incluida la hora y la identidad del dispositivo
+Puede desplazarse por la configuración para investigar el estado del dispositivo durante un incidente, o ajustar el rango de tiempo para visualizar configuraciones de diferentes períodos.
 
-Puedes desplazarte por la configuración para investigar el estado del dispositivo durante un incidente o ajustar el intervalo de tiempo para ver configuraciones de diferentes periodos de tiempo.
+### Comparar versiones de configuración {#compare-configuration-versions}
 
-### Comparar versiones de configuración
+Para visualizar qué cambió entre las versiones de configuración:
 
-Para ver qué ha cambiado entre las versiones de configuración:
+1. Seleccione dos configuraciones de la lista de historial o de la línea de tiempo usando las casillas de verificación. 
+2. Haga clic en {{< ui >}}Compare Two Configs{{< /ui >}} para abrir la visualización de comparación.
 
-1. Selecciona dos configuraciones de la lista del historial o de la línea de tiempo utilizando las casillas de verificación. 
-2. Haz clic en **Compare Two Configs** (Comparar dos configuraciones) para abrir la vista de comparación.
+   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Pestaña de configuración de Administración de dispositivos de red, resaltando la opción Comparar dos configuraciones." style="width:100%;" >}}
 
-   {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_2.png" alt="Panel lateral de Network Device Management, donde se resalta la opción Compare Two Configs (Comparar dos configuraciones)." style="width:100%;" >}}
+La visualización de comparación muestra ambas configuraciones lado a lado con diferencias en línea que resaltan las líneas cambiadas. Puede cambiar entre diferentes pares de configuración sin cerrar la visualización de comparación.
 
-La vista de comparación muestra ambas configuraciones una al lado de la otra con diferencias en línea que resaltan las líneas modificadas. Puedes alternar entre diferentes pares de configuraciones sin cerrar la vista de comparación.
+   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_3.png" alt="Pestaña de configuración de Network Device Management, comparando dos versiones en vista dividida" style="width:90%;" >}}
 
-   {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_2.png" alt="Pestaña de configuración de Network Device Management, donde se comparan dos versiones en una vista dividida." style="width:90%;" >}}
+### Revertir a una configuración anterior {#roll-back-to-a-previous-configuration}
 
-## Resúmenes de IA
+Si un cambio de configuración causa un problema, puede restaurar un dispositivo a una configuración anterior directamente desde Datadog. Las reversiones utilizan un Private Action Runner para restaurar la configuración seleccionada en el dispositivo.
 
-Network Configuration Management incluye un panel de resumen basado en IA que traduce los cambios de configuración a explicaciones en lenguaje natural.
+Consulte [Network Configuration Management Rollbacks][8] para obtener instrucciones de configuración y uso.
 
-Al comparar dos versiones de configuración, el resumen de IA automáticamente:
+## Resúmenes de IA {#ai-summaries}
 
-- Describe los cambios en términos legibles para el ser humano
+Network Configuration Management incluye un panel de resumen con tecnología de IA que traduce los cambios de configuración en explicaciones en lenguaje natural.
+
+Cuando compara dos versiones de configuración, el resumen de IA automáticamente:
+
+- Describe los cambios en términos legibles para los humanos
 - Resalta los cambios que pueden ser relevantes para la investigación de incidentes o el análisis de riesgos
 
-## Referencias adicionales
+## Perfiles de dispositivo compatibles {#supported-device-profiles}
+
+NCM utiliza perfiles de dispositivo para recopilar configuraciones de dispositivos de red a través de SSH. Los perfiles se incluyen con el Datadog Agent, se asignan automáticamente según el sistema operativo de su dispositivo y se actualizan a través de las versiones del Agent.
+
+| Proveedor | SO | Perfil | Mín. Versión del Agent | En ejecución | Inicio |
+|---|---|---|---|---|---|
+| Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-W | `aosw` | 7.75.0 | {{< X >}} | |
+| Cisco | IOS | `cisco-ios` | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | NX-OS | `nxos` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | DellOS10 | `dellos10` | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | TMOS | `tmos` | 7.76.0 | {{< X >}} | |
+| FortiGate | FortiOS | `fortios` | 7.77.0 | {{< X >}} | |
+| Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
+| Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
+
+### Comandos de recuperación de configuración {#configuration-retrieval-commands}
+
+Cada perfil utiliza los siguientes comandos para recopilar configuraciones de dispositivos a través de SSH. Para las definiciones completas de los comandos, consulte [default_profiles.go][9].
+
+| Proveedor | SO | Comando de configuración en ejecución | Comando de configuración de inicio |
+|---|---|---|---|
+| Arista | EOS | `show running-config \| no-more \| exclude ! Time:` | `show startup-config \| no-more \| exclude ! Time:` |
+| Aruba | AOS-CX | `show running-config` | `show startup-config` |
+| Aruba | AOS-W | `show running-config` | |
+| Cisco | IOS | `show running-config` | `show startup-config` |
+| Cisco | NX-OS | `show running-config` | `show startup-config` |
+| Dell | DellOS10 | `show running-configuration` | `show startup-configuration` |
+| F5 | TMOS | `cat /config/partitions/*/bigip*.conf` | |
+| FortiGate | FortiOS | `show full-configuration` | |
+| Juniper | JunOS | `show configuration \| display omit` | |
+| Palo Alto | PAN-OS | `show config running` | |
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -155,3 +200,5 @@ Al comparar dos versiones de configuración, el resumen de IA automáticamente:
 [5]: /es/network_monitoring/devices/topology
 [6]: /es/network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
+[8]: /es/network_monitoring/devices/config_management_rollback
+[9]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkconfigmanagement/profile/default_profiles.go

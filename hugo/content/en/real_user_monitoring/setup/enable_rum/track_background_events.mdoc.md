@@ -3,7 +3,7 @@ title: Track Background Events
 description: "Track events that occur while your application runs in the background, such as crashes and network requests."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 further_reading:
 - link: '/real_user_monitoring/setup/enable_rum/manage_sessions/'

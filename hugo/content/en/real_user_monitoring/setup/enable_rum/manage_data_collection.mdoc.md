@@ -2,7 +2,7 @@
 title: Manage Data Collection
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 further_reading:
 - link: "/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/"

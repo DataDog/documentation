@@ -30,12 +30,16 @@ further_reading:
 ---
 ## Overview
 
-Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
+Datadog RUM supports profiling for browser, Electron, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 Select your SDK for platform-specific instructions on collecting frontend profiles with RUM.
 
 {% if equals($platform, "browser") %}
 {% partial file="sdk/collect_frontend_profiles/browser.mdoc.md" /%}
+{% /if %}
+
+{% if equals($platform, "electron") %}
+{% partial file="sdk/collect_frontend_profiles/electron.mdoc.md" /%}
 {% /if %}
 
 {% if equals($platform, "android") %}

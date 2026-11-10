@@ -22,6 +22,7 @@ rum_sdk_profiling_options:
     label: Android Ecosystem
   - id: ios
     label: Apple Ecosystem
+  - id: electron
 
 rum_session_replay_sdk_options:
   - id: browser
@@ -34,6 +35,7 @@ rum_session_replay_sdk_options:
   - id: react_native
   - id: flutter
   - id: maui
+  - id: electron
 
 rum_mobile_proxy_protocol_options:
   - id: http_https
@@ -67,3 +69,19 @@ rum_react_native_framework_options:
 - id: react_native
   default: true
 - id: expo
+# Platforms covered by the restructured RUM setup and Enrich RUM Data pages.
+# Matches client_sdk_platform_options, minus platforms that have not been migrated yet (Electron).
+rum_client_sdk_platform_options:
+  - id: browser
+    default: true
+  - id: android
+    label: Android Ecosystem
+  - id: ios
+    label: Apple Ecosystem
+  - id: flutter
+  - id: react_native
+  - id: kotlin_multiplatform
+  - id: cpp
+  - id: roku
+  - id: unity
+  - id: maui

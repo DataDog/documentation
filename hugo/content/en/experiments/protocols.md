@@ -11,6 +11,9 @@ further_reading:
 - link: "/experiments/statistics/analysis_methods"
   tag: "Documentation"
   text: "Analysis Methods"
+- link: "https://www.datadoghq.com/blog/best-practices-for-scaling-ab-testing-with-experiment-protocols/"
+  tag: "Blog"
+  text: "Best practices for scaling A/B testing with experiment protocols"
 ---
 
 ## Overview

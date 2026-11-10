@@ -2,7 +2,7 @@
 title: Advanced Configuration
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options

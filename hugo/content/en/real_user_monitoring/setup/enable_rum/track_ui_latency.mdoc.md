@@ -3,7 +3,7 @@ title: Track UI Latency
 description: "Measure how fast your UI responds, including Core Web Vitals, view loading time, mobile vitals, and performance timeseries."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 aliases:
   - /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/

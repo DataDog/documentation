@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/correlate_with_other_telemetry/apm/
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"

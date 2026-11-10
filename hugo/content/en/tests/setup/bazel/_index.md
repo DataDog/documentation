@@ -37,9 +37,9 @@ This section includes setup pages for the following language test targets:
 |---|---|---|
 | Java | `dd_topt_java_test` | Requires a `dd-java-agent` JAR label. See [Java compatibility][2]. |
 | Python | `dd_topt_py_test` | Supports the managed `pytest` runner and repository-owned pytest wrappers. See [Python compatibility][3]. |
-| Go | `dd_topt_go_test` | Use `test_optimization` mode for the faster standard-library `testing` path, or `general` mode for broader Orchestrion support. See [Go compatibility][4]. |
+| Go | `dd_topt_go_test` | Builds each test with a Go SDK that `ddtest instrument` prepares. See [Go compatibility][4]. |
 
-Use `datadog-rules-test-optimization` version `1.2.0` and the commit pin shown on each language setup page.
+Use the `datadog-rules-test-optimization` version and pin shown on each language setup page.
 
 ## How the Bazel setup flow works
 

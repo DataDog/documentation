@@ -13,7 +13,7 @@ further_reading:
 
 ## Start a Bits investigation
 
-You can launch a Bits investigation from several entry points:
+You can launch a Bits investigation from several entry points in the Datadog UI:
 
 - Monitor alerts, which you can trigger in two ways:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
@@ -22,6 +22,8 @@ You can launch a Bits investigation from several entry points:
 - [Real User Monitoring](#real-user-monitoring)
 - [Error Tracking](#error-tracking)
 - [General prompt](#general-prompt)
+
+You can also use Bits Investigation from AI assistants, applications, and the command line. For more information, see the [MCP, API, CLI](/bits_ai/bits_investigation/mcp_api_cli/) page.
 
 ### Monitor alerts {#manual-monitor-alerts}
 
@@ -41,6 +43,10 @@ In the monitor event side panel of a [Bits Investigation-supported monitor](#sup
 To use the Slack integration, [connect your Slack workspace to Bits Investigation][8].
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
+
+#### Option 5: Microsoft Teams
+
+To receive investigation findings in Microsoft Teams, [send monitor notifications to a Microsoft Teams channel][22].
 
 ### Synthetic tests
 
@@ -105,7 +111,7 @@ In addition to manual investigations, you can configure Bits to run automaticall
 1. Open the monitor's status page and click {{< ui >}}Edit{{< /ui >}}.
 1. Scroll to {{< ui >}}Configure notifications & automations{{< /ui >}} and toggle {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
 
-<div class="alert alert-info"><ul><li>Enabling automatic investigations using the Datadog API or Terraform is not supported.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
+<div class="alert alert-info"><ul><li>You can't enable automatic investigations on a monitor through the Datadog API or Terraform. To trigger an individual investigation programmatically, see <a href="/bits_ai/bits_investigation/mcp_api_cli/">MCP, API, CLI</a>.</li><li>An investigation initiates when a monitor transitions to the alert state.</li><li>Transitions to the warn or no data state, <a href="/monitors/notify/#renotify">renotifications</a>, and test notifications do not trigger automatic investigations.
 </li></ul></div>
 
 ### Supported monitors
@@ -129,6 +135,8 @@ When Bits investigates an issue, it operates in a continuous loop of observation
 At the end of an investigation, Bits either presents a clear, evidence-backed conclusion or marks the investigation as inconclusive when the available data is insufficient to support a defensible conclusion.
 
 {{< img src="bits_ai/bits_ai_sre_investigation_hypotheses.png" alt="Flowchart showing the hypotheses Bits built and tested" style="width:100%;" >}}
+
+When Bits reaches a conclusion, it suggests next steps, such as a code fix, a triage action, or an infrastructure action. For details, see [Bits Remediation][23].
 
 ### Supported data sources
 Bits uses the following data sources during investigations:
@@ -190,6 +198,8 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [19]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/optimize_performance/
 [20]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/investigate_regressions/
 [21]: /error_tracking/bits_investigation/
+[22]: /bits_ai/bits_investigation/configure/#microsoft-teams-preview
+[23]: /bits_ai/bits_remediation/
 
 ## Further reading
 

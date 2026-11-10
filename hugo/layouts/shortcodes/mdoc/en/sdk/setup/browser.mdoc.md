@@ -418,7 +418,7 @@ After you initialize the SDK, RUM starts collecting data. To choose what RUM tra
 
 Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
 
-Use the [Agentic Onboarding][9] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+Use the [Agentic Onboarding][9] page to instrument your browser application using the Pup CLI or the Datadog MCP Server.
 
 {% /collapse-content %}
 

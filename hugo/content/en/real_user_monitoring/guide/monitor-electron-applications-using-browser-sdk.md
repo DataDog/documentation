@@ -8,6 +8,8 @@ further_reading:
     text: 'Learn about Real User Monitoring'
 ---
 
+<div class="alert alert-info">To monitor both the main process and renderer processes, use the Electron SDK instead. See <a href="/real_user_monitoring/application_monitoring/electron/">Electron Monitoring</a>.</div>
+
 ## Overview
 
 [Electron][1] is an open source framework that can be used to build cross-platform macOS and Windows desktop applications.

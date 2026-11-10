@@ -3,7 +3,7 @@ title: Add Custom Context
 description: "Add custom attributes and context to your RUM events across the Datadog RUM SDKs."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
     show_if:

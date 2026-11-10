@@ -75,6 +75,8 @@ A scanning group determines what data to scan. It consists of a query filter, a 
 
 For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
+**Note**: By default, Sensitive Data Scanner supports up to 20 scanning groups per organization for telemetry data (Logs, APM, RUM, and Events). If you reach this limit, consider consolidating scanning groups that use similar query filters and rules. To request a higher limit, contact [Datadog Support][18].
+
 To set up a scanning group, perform the following steps:
 
 1. Navigate to the [Sensitive Data Scanner][5] settings page.
@@ -292,6 +294,9 @@ The excluded namespaces are:
 - `meta.issue`
 - `x-datadog-trace-id`
 - `x-datadog-parent-id`
+- `span_links.span_id`
+- `span_links.trace_id`
+- `span_links.trace_id_high`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
@@ -324,15 +329,40 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 - Suppressed matches are not redacted, masked, or hashed.
 - Suppressed matches are excluded from the Findings page, dashboards, alerts, and other reporting workflows.
 - Suppressions are defined per rule within a scanning group.
+- Suppressions apply to the matched value in every attribute the rule scans. To ignore a value in one attribute only, see [How excluded attributes affect matches in other attributes](#how-excluded-attributes-affect-matches-in-other-attributes).
 
 #### Scan or exclude specific attributes
 
 To make matches more precise, you can also do one of the following:
 
-- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
+- Scan the entire event but exclude certain attributes so that match actions are not applied to them. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
 - Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
 **Note**: Do not use the `@` prefix in the attribute path when specifying attribute names. For example, use `function.request.body.password` instead of `@function.request.body.password`. The `@` prefix used in search queries and other parts of Datadog is not supported in this field.
+
+##### How excluded attributes affect matches in other attributes
+
+Sensitive Data Scanner still checks excluded attributes for matches, but it doesn't apply match actions to them. If a value matched in an excluded attribute also appears in a scanned attribute of the same event, Sensitive Data Scanner treats that match as a false positive and drops it. No match action is applied, and the match doesn't appear on the Findings page or in other reporting.
+
+For example, suppose you exclude the `support_contact` attribute because it always contains your company's shared support address. With the Standard Email Address Scanner library rule, Sensitive Data Scanner processes the following event like this:
+
+```json
+{
+  "service": "billing-api",
+  "support_contact": "support@example.org",
+  "reply_to": "support@example.org",
+  "customer_email": "jane.doe@example.net"
+}
+```
+
+- No match action is applied to `support_contact`, because it's excluded.
+- Sensitive Data Scanner drops the match in `reply_to`, because its value matches the value in the excluded `support_contact` attribute.
+- Sensitive Data Scanner keeps the match in `customer_email` and applies the rule's match action.
+
+To control this behavior, choose the option that fits your goal:
+
+- **To ignore specific known-safe values**: Use [suppressions](#suppress-specific-matches-to-ignore-risk-accepted-data) instead of excluding the attribute. For example, add an {{< ui >}}End with{{< /ui >}} suppression for `@example.org` to ignore addresses from that domain. Sensitive Data Scanner still scans the attribute for other sensitive values and ignores the suppressed values in every attribute.
+- **To leave an attribute untouched but still match its values in other attributes**: Select {{< ui >}}Specific Attributes{{< /ui >}} and list only the attributes you want to scan. Values in unlisted attributes don't affect matches in the listed attributes.
 
 ### Edit scanning rules
 
@@ -421,3 +451,4 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [15]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [16]: /logs/log_configuration/archives/?tab=awss3#datadog-tags
 [17]: /security/sensitive_data_scanner/scanning_rules/library_rules/#reference-library-rules-by-id
+[18]: /help/

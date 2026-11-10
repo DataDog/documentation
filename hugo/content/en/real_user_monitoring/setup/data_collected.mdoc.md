@@ -3,7 +3,7 @@ title: Data Collected
 description: "Understand the event types, attributes, and telemetry data collected by the RUM SDKs, including sessions, views, actions, resources, and errors."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 aliases:
   - /real_user_monitoring/data_collected/

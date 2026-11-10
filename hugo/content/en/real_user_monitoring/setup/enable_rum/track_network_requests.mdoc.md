@@ -2,7 +2,7 @@
 title: Track Network Requests
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.

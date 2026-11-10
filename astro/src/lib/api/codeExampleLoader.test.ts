@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   assertStagedExamplesPresent,
   getCodeExamplesForOperation,
+  getLanguageRunInfo,
 } from "./codeExampleLoader";
 
 /**
@@ -123,5 +124,15 @@ describe("assertStagedExamplesPresent", () => {
 
   it("allows a production build that has examples", () => {
     expect(() => assertStagedExamplesPresent(13752, true)).not.toThrow();
+  });
+});
+
+describe("getLanguageRunInfo", () => {
+  it.each([
+    ["ruby", 'ruby "example.rb"'],
+    ["ruby-legacy", 'ruby "example.rb"'],
+    ["typescript", 'npx tsx "example.ts"'],
+  ])("gives %s a command that runs the example", (languageId, runCommand) => {
+    expect(getLanguageRunInfo(languageId)?.runCommand).toBe(runCommand);
   });
 });

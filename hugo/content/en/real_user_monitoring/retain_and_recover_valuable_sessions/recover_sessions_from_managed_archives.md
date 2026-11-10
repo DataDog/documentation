@@ -13,6 +13,9 @@ further_reading:
 - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
   tag: Documentation
   text: Configure retention filters
+- link: "https://www.datadoghq.com/blog/rum-managed-archive/"
+  tag: "Blog"
+  text: "Store and recover user sessions with RUM Managed Archive"
 ---
 
 ## Overview

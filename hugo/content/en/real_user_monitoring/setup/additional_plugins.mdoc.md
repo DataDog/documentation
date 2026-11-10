@@ -3,11 +3,12 @@ title: Additional Plugins and Integrations
 description: "Extend the Datadog SDK with build plugins for JavaScript bundlers and integrations with third-party libraries."
 content_filters:
   - trait_id: platform
-    option_group_id: client_sdk_platform_options
+    option_group_id: rum_client_sdk_platform_options
     label: "SDK"
 aliases:
 - /real_user_monitoring/application_monitoring/browser/build_plugins/
 - /real_user_monitoring/application_monitoring/browser/build_plugins/action_name_deobfuscation/
+- /real_user_monitoring/application_monitoring/browser/build_plugins/privacy/
 - /real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context/
 - /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
 - /real_user_monitoring/reference/integrated_libraries/

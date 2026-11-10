@@ -98,3 +98,10 @@ entries:
       - GetRuleVersionHistory
       - RestoreSecurityMonitoringRule
     title: Make rule version history endpoints GA
+  - change_type: modified
+    date: '2026-10-29'
+    link: https://github.com/DataDog/documentation/pull/40976
+    operations:
+      - AttachJiraIssue
+      - CreateJiraIssues
+    title: Add on-call GET pages endpoints

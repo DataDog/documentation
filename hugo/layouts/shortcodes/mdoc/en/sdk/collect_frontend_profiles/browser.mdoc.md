@@ -113,7 +113,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_view_panel.png" alt="Browser profiling tab in the View panel." style="width:100%;" /%}
 
 - **Long Task panel**: Profiling data in the performance tab.
-{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
+{% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling data in the Long Task panel." style="width:100%;" /%}
 
 - **Vitals panel**: Profiling data in a new tab.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer_vitals_panel.png" alt="Browser profiling tab in the Vitals panel." style="width:100%;" /%}
@@ -124,7 +124,7 @@ Profiling data is captured on long tasks and rolls up to actions, views, vitals,
 #### Within the Profiling page
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience.png" alt="Browser profiling aggregate experience." style="width:100%;" /%}
 
-The Profiling page, found through the top bar navigation, lets you analyze and compare profiling data across sessions in one place. Use it to spot system level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
+The Profiling page, in [**Real User Monitoring > Investigate > Profiles**][10], lets you analyze and compare profiling data across sessions in one place. Use it to spot system-level patterns, compare top-consuming functions, and prioritize optimizations instead of inspecting profiled sessions one by one. The guided experience walks you through:
 
 1. **Focus on views**: Choose the views you'd like to analyze.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_1.png" alt="Step 1 of the browser profiling aggregate experience showing which views to select." style="width:100%;" /%}
@@ -135,7 +135,7 @@ The Profiling page, found through the top bar navigation, lets you analyze and c
 3. **Compare (Optional)**: Define two groups to compare side by side—for example, different versions, OS types, or percentile ranges—to isolate performance differences between them.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_3.png" alt="Step 3 of the browser profiling aggregate experience showing how to compare." style="width:100%;" /%}
 
-4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or if you chose to compare see the differences between group A and B.
+4. **Investigate slowest functions**: Review which functions consume the most time in the aggregated profile so you can prioritize what to optimize first. Explore the call hierarchy to see how those functions relate and where time is spent across the stack, or, if you chose to compare, see the differences between group A and group B.
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4a.png" alt="Step 4 of the browser profiling aggregate experience showing results to compare between groups." style="width:100%;" /%}
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_aggregate_experience_step_4b.png" alt="Step 4 of the browser profiling aggregate experience showing a flamegraph and top methods list." style="width:100%;" /%}
 
@@ -152,9 +152,18 @@ The **Optimization page** surfaces profiling data in several contexts:
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
+#### Analyze profiling data with AI
+
+- **[Bits Chat][7]**: From the side panel of a view, action, vital, or long task, ask Bits Chat what made the event slow. On the Profiling page, ask Bits Chat to identify system-level bottlenecks across sessions.
+- **[Datadog MCP Server][8]**: From your AI agents and IDEs, look up RUM events and analyze their profiling data. Requires the [`profiling` toolset][9].
+
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [2]: /real_user_monitoring/setup/install/?platform=browser
 [3]: /real_user_monitoring/guide/proxy-rum-data
 [4]: /integrations/content_security_policy_logs
 [5]: /real_user_monitoring/setup/#supported-endpoints-for-sdk-domains
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
+[7]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/bits_chat/
+[8]: /mcp_server/tools/#profiling
+[9]: /mcp_server/setup/#toolsets
+[10]: https://app.datadoghq.com/rum/profiling

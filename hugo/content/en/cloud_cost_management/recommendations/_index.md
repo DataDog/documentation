@@ -750,6 +750,24 @@ multifiltersearch:
       recommendation_type: Downsize Deployment
       recommendation_description: Containers are using only a fraction of their requested CPU or memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Terminate
+      cloud_provider: GCP
+      resource_type: Kubernetes Pod
+      recommendation_type: Fix Stuck Kubernetes Pod
+      recommendation_description: Kubernetes pods that are stuck Pending, unhealthy, or Terminating on a node and still reserve paid node capacity.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Configure
       cloud_provider: OpenAI
       resource_type: API Key

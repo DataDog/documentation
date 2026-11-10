@@ -16,22 +16,99 @@ Developers and DevOps engineers implementing observability solutions. They're te
 
 ### 2. Accuracy & Completeness
 - Are code examples complete and copy-pasteable?
+- Does each code block say which file it goes in, such as `/etc/datadog-agent/datadog.yaml`? Skip this when the surrounding text, an earlier step, or the tab already makes the file clear.
 - Are prerequisites explicit and linked where needed?
 - Are there gaps that would block a user from succeeding?
 - Is technical information accurate?
+- When the text states a maximum, minimum, default, or allowed range, are the related values a reader would expect also there? Flag the gap; the author supplies the value.
+- Does the diff introduce a new term for something the page already names? Use one term per concept, and define new terms on first use.
+- Are capitalized RFC 2119 words (MUST, SHOULD, MAY) used as intended? Don't change them casually; ask the author if one looks wrong.
 
 ### 3. Structure & Scannability
 - Does it follow a logical progression?
 - Can users skim to find what they need?
-- Are headings descriptive and actionable?
+- Are headings descriptive? A generic heading such as "Overview" or "Setup" is fine when the first sentence under it names the product or feature. Flag a generic heading only when that sentence doesn't name the subject.
 - Is the page in the right section of the docs (information architecture)?
+- Does each numbered step contain one action? Move explanation of how a feature works out of the step and into prose before the list.
+- Do sequential steps use a numbered list, and non-sequential items an unordered list? Limit nesting to three levels.
 
-### 4. Frontmatter & Metadata
+### 4. Writing for AI retrieval
+AI tools and search often show readers one section without the rest of the page. These checks help each section work on its own:
+- Does each section make sense if read alone? Flag sections or paragraphs that start with "It," "This," or "That" without naming the subject.
+- Are unsupported cases stated directly ("is not supported," "does not work with") instead of softly ("works best with")?
+- Do critical requirements (versions, OS, plan, permissions) appear right after the heading, not at the end of a section?
+- Does the text avoid "as shown below" or "in the following image" for information that only the image carries?
+- If a troubleshooting step paraphrases an error message, ask the author for the exact text. Readers and AI tools search for the literal message.
+
+### 5. Frontmatter & Metadata
 - Is there a `description` for SEO/AI ingestion?
 - Are `further_reading` links relevant and non-duplicative?
 - Are reference links free of duplicates or unused entries?
 - Does the title match how it's linked from other pages?
-- If the file is new and public (no `private: true`), has the page been added to the menu file (`config/_default/menus/main.en.yaml`) so it shows up in the side-nav?
+- If the file is new and public (no `private: true`), has the page been added to the menu file (`hugo/config/_default/menus/main.en.yaml`) so it shows up in the side-nav? The entry needs the correct `parent`, a `weight` that fits its siblings, and a unique `identifier`. Pages in a `guide` folder don't need an entry. If the menu file isn't in the diff, flag it as an **Issue**.
+- Does the `title` use title case? H2 and lower headings use sentence case.
+
+### 6. Hugo checks
+These break the rendered page without failing the build:
+- **Link references inside tabs**: If a `{{% tab %}}` block uses a reference link like `[1]`, its definition (`[1]: /path/`) must be inside the same tab, just before `{{% /tab %}}`. Definitions at the bottom of the page render as literal `[1]` inside a tab. Check the full file, not only the diff hunk. Flag as an **Issue**.
+- **Relative docs links**: For a changed link to a docs path such as `/agent/configuration/`, check that a matching page exists under `__untrusted/hugo/content/en/`, as `<path>.md`, `<path>/_index.md`, or `<path>.mdoc.md`. Flag links with no matching page. Don't flag links under `/integrations/` or `/api/`, or paths that match an `aliases` entry, because those pages can exist without a file at that path. You can't check external URLs or heading anchors, so don't guess about those.
+- **Unused or missing reference definitions**: Flag `[n]: /url` definitions that nothing uses, and `[n]` references with no definition.
+
+### 7. Links, images, and accessibility
+- Link text describes the destination. Flag "here," "this link," "click here," and bare URLs as link text.
+- A link to a section on the same page says so: "the [Modes](#modes) section," not a bare "[Modes](#modes)."
+- Every image has alt text that describes what the image shows in a complete sentence ending with a period. Don't start alt text with "Image of" or "Screenshot of."
+- Use inclusive terms: allowlist and denylist, primary and secondary or leader and follower.
+
+### 8. Sensitive information and legal wording
+This is a public repository. Flag these as an **Issue**:
+- API keys, tokens, real email addresses, IP addresses, customer names, internal URLs, or Datadog employee names in docs content or examples.
+- Promises of compliance or security: use "helps achieve compliance," not "ensures compliance," and "improves security," not "secures."
+- Claims that Datadog alone guarantees an outcome: use "helps," "reduces," or "improves" instead of "eliminates" or "guarantees."
+- Specific prices or dollar amounts. Docs can explain how costs are calculated, but not list prices.
+
+## What to flag
+
+Flag text that does one of these:
+
+- Breaks a style rule in this file. Name the rule.
+- Would confuse, mislead, or block a reader. Say how: for example, "a reader can't tell which file this step edits."
+
+Use your judgment as an experienced technical writer for the second kind. Structure, missing steps, unclear wording, and weak headings are all fair to flag. Tie every comment to its effect on the reader.
+
+Don't rewrite text that is correct and clear only because you would phrase it differently. If you can't name the reader problem, leave the text alone.
+
+Scope:
+- Comment only on lines the PR adds or changes. Read the rest of the file and related pages for context, but don't flag text the PR didn't touch.
+- Before you flag a pattern, structure, or wording choice, check comparable pages in the same docs section. If the existing docs already do it that way, matching them is usually correct. Style rules in this file still apply, even if older pages don't follow them.
+- Check changed lines against the word tables in the Style Guide section. A Vale check also runs on docs PRs, but authors often miss its warnings. Comment on each instance with a suggestion block so the author can apply the fix in one click.
+- For other style rules broken several times in a file, comment on the first instance and say how many others there are, instead of commenting on each one.
+
+## Earlier reviews
+
+If earlier automated review comments exist for this PR, read them before you write findings.
+
+- Don't flag text that came from applying an earlier suggestion unless it breaks a style rule or introduces an error.
+- Don't repeat a finding that an earlier comment already made on the same text. The author has seen it.
+- If you think an earlier comment was wrong, say so directly in your new comment and explain why. Don't silently suggest the opposite change.
+
+## Tone
+
+Many authors are engineers, product managers, or outside contributors, not writers. Write comments that a busy colleague would welcome.
+
+- Describe the effect on the reader, not your opinion of the writing. Write "A reader may not know which two settings 'change them' refers to," not "'change them' is vague." Don't use labels such as "awkward," "filler," "clunky," or "informal."
+- State the fix plainly. Don't soften it with "a bit," "slightly," or "a little."
+- If you aren't sure what the author means, ask: "Does this mean X or Y?" Don't guess.
+- Keep the summary factual: what you found and whether anything blocks merging. Skip generic praise, "LGTM," and "nits."
+- Don't comment on whitespace or trailing newlines.
+
+## Final check
+
+Before you write the output, reread each comment and delete it if any of these are true:
+
+- A senior technical writer would leave the text as is.
+- The fix is a matter of preference, not a rule or a reader problem.
+- The comment doesn't change what a reader understands or does.
 
 ## Areas to avoid
 
@@ -122,6 +199,13 @@ Other style rules:
 - Avoid temporal words that age poorly: currently, now, will, won't
 - Use imperative voice for instructions ("Run the command" not "You should run the command")
 - Be direct and concise—developers want facts, not fluff
+- Use second person ("you") and present tense. Minimize "we" and "our."
+- Use the serial comma: "metrics, logs, and traces"
+- Use `<PLACEHOLDER>` format for values the reader replaces, not `$PLACEHOLDER` or `{PLACEHOLDER}`
+- Introduce code blocks with a colon, not a period
+- Use code formatting for commands, file paths, filenames, parameters, and configuration values
+- Spell out abbreviations on first use, except common ones such as API, AI, UI, URL, HTTP, JSON, SDK, and SQL
+- No exclamation points, marketing language ("unlock," "best in class," "the power of"), or horizontal rules (`---`) in page content
 - Use numbered reference-style markdown links and place the link definition at the bottom of the page. For encapsulating Hugo shortcodes like `site-region` or `tab`, the link definition goes just before the closing tag.
 
 For complete style guidance, see [CONTRIBUTING.md](../CONTRIBUTING.md) in the repository.
@@ -129,10 +213,15 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 
 ## Review Output Format
 
+If the prompt that runs this review gives its own output format, follow that format instead of the posting steps below. The rules for comment content still apply.
+
 **Use inline comments for all feedback:**
 - For each specific issue, suggestion, or style violation, create an inline comment on the exact line using the `mcp__github_inline_comment__create_inline_comment` tool
 - Always include the file path and line number in your comment (e.g., `path/to/file.md:42`) so the location is easy to spot
-- Include the issue type in your comment: "**Issue**:", "**Suggestion**:", or "**Style**:"
+- Start each comment with its type:
+  - "**Issue**:" for problems that would block or mislead a reader, or break the build.
+  - "**Suggestion**:" for judgment calls that would make the page clearer.
+  - "**Style**:" for style rule violations. Name the rule.
 - **When you have a specific fix to propose, use GitHub's suggestion format so the author can apply it with one click:**
   ```suggestion
   corrected text or code here
@@ -147,7 +236,7 @@ All vale rules can be found in the [datadog-vale](https://github.com/DataDog/dat
 ## Review Principles
 
 - Be direct and actionable, not pedantic
-- Distinguish between blockers and nice-to-haves
+- Distinguish between blockers and nice-to-haves with the comment types above
 - Consider the realistic user path, not just the standalone page experience
 - Focus on what helps users succeed
 - Don't nitpick formatting if the content is clear
