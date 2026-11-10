@@ -119,18 +119,20 @@ helm repo update
 
 ### Configure the Collector
 
-Set `DD_HOSTNAME` so that each node reports a consistent hostname. The Operator example on this page sets it from a `K8S_NODE_NAME` variable:
+Set `DD_HOSTNAME` so that each node reports a consistent hostname. The Operator example on this page builds it from the `K8S_NODE_NAME` and `K8S_CLUSTER_NAME` variables:
 
 ```yaml
+- name: K8S_CLUSTER_NAME
+  value: <CLUSTER_NAME>
 - name: K8S_NODE_NAME
   valueFrom:
     fieldRef:
       fieldPath: spec.nodeName
 - name: DD_HOSTNAME
-  value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
+  value: $(K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
 ```
 
-Keep `K8S_NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands `$(K8S_NODE_NAME)` only from variables defined earlier in the list. The Collector Helm chart already defines `OTEL_K8S_NODE_NAME` before your `extraEnvs`, so the Helm example sets `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>` without defining a variable. Replace `<CLUSTER_NAME>` with the cluster name you use for `K8S_CLUSTER_NAME` in the same file. Datadog uses the same `<NODE_NAME>-<CLUSTER_NAME>` name for the node's Kubernetes metrics, so each node appears as one host.
+Keep `K8S_CLUSTER_NAME` and `K8S_NODE_NAME` above `DD_HOSTNAME`, because Kubernetes expands variable references only from variables defined earlier in the list. The Collector Helm chart already defines `OTEL_K8S_NODE_NAME` before your `extraEnvs`, so the Helm example sets `DD_HOSTNAME` to `$(OTEL_K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)` without defining a node name variable. Replace `<CLUSTER_NAME>` with your cluster's name. Datadog uses the same `<NODE_NAME>-<CLUSTER_NAME>` name for the node's Kubernetes metrics, so each node appears as one host.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -179,10 +181,10 @@ spec:
         fieldRef:
           fieldPath: spec.nodeName
     - name: DD_HOSTNAME
-      value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
+      value: $(K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
 {{< /code-block >}}
 
-Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
+Replace `<CLUSTER_NAME>` with your cluster's name.
 
 2. Add an OTLP receiver, the Datadog Connector, and the cluster-name processor, and define a pipeline for each signal. Publish the OTLP ports on the node with `hostPort` so that application pods can reach the Collector instance running on the same node.
 
@@ -459,7 +461,7 @@ spec:
         fieldRef:
           fieldPath: spec.nodeName
     - name: DD_HOSTNAME
-      value: $(K8S_NODE_NAME)-<CLUSTER_NAME>
+      value: $(K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
     - name: K8S_POD_IP
       valueFrom:
         fieldRef:
@@ -482,7 +484,7 @@ spec:
       readOnly: true
 {{< /code-block >}}
 
-Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
+Replace `<CLUSTER_NAME>` with your cluster's name.
 
 {{% /collapse-content %}}
 
@@ -551,10 +553,10 @@ extraEnvs:
     value: <CLUSTER_NAME>
   # The chart defines OTEL_K8S_NODE_NAME before extraEnvs
   - name: DD_HOSTNAME
-    value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
+    value: $(OTEL_K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
 {{< /code-block >}}
 
-Replace both `<CLUSTER_NAME>` placeholders with the same name for your cluster.
+Replace `<CLUSTER_NAME>` with your cluster's name.
 
 4. (Optional) Collect host metrics, kubelet metrics, and container logs with the chart's presets:
 
@@ -730,7 +732,7 @@ extraEnvs:
     value: <CLUSTER_NAME>
   # The chart defines OTEL_K8S_NODE_NAME before extraEnvs
   - name: DD_HOSTNAME
-    value: $(OTEL_K8S_NODE_NAME)-<CLUSTER_NAME>
+    value: $(OTEL_K8S_NODE_NAME)-$(K8S_CLUSTER_NAME)
 ports:
   jaeger-compact:
     enabled: false
