@@ -43191,6 +43191,455 @@ components:
           format: int64
           type: integer
       type: object
+    DeviceBaseArray:
+      description: Response body for the list devices endpoint.
+      properties:
+        data:
+          description: List of devices matching the request.
+          items:
+            $ref: "#/components/schemas/DeviceBaseData"
+          type: array
+        links:
+          $ref: "#/components/schemas/DeviceBaseArrayLinks"
+        meta:
+          $ref: "#/components/schemas/DeviceBaseArrayMeta"
+      required:
+        - data
+      type: object
+    DeviceBaseArrayLinks:
+      description: Links related to the current page of devices.
+      properties:
+        next:
+          description: URL of the next page of devices. Present only when more devices remain.
+          example: /api/v2/eudm/devices?page%5Bcursor%5D=TEFQVE9QLURFTU8tMDAx&page%5Blimit%5D=1
+          type: string
+        self:
+          description: URL of the current request.
+          example: /api/v2/eudm/devices?page%5Blimit%5D=1
+          type: string
+      type: object
+    DeviceBaseArrayMeta:
+      description: Metadata about the list devices response.
+      properties:
+        page:
+          $ref: "#/components/schemas/DeviceBaseArrayMetaPage"
+      type: object
+    DeviceBaseArrayMetaPage:
+      description: Pagination information for the list devices response.
+      properties:
+        after:
+          description: |-
+            Cursor to pass as `page[cursor]` to get the next page.
+            Present only when more devices remain.
+          example: TEFQVE9QLURFTU8tMDAx
+          type: string
+      type: object
+    DeviceBaseData:
+      description: A single device entry as returned by the list devices endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeviceBaseDataAttributes"
+        id:
+          description: Unique identifier of the device. Matches the Datadog host identifier.
+          example: LAPTOP-DEMO-001
+          type: string
+        type:
+          $ref: "#/components/schemas/DeviceDetailsDataType"
+      required:
+        - type
+        - id
+      type: object
+    DeviceBaseDataAttributes:
+      description: Common health and identity attributes shared by every End User Device Monitoring device record.
+      properties:
+        agent_key:
+          description: Public key of the Datadog Agent installed on the device.
+          type: string
+        agent_version:
+          description: Version of the Datadog Agent installed on the device.
+          type: string
+        battery_critical:
+          description: Whether the device's battery health has degraded to a critical level.
+          type: boolean
+        battery_max_capacity_pct:
+          description: Maximum battery capacity expressed as a percentage of the device's design capacity.
+          format: int64
+          type: integer
+        cpu_cores:
+          description: Number of physical CPU cores on the device.
+          format: int64
+          type: integer
+        cpu_logical_processors:
+          description: Number of logical CPU processors (hardware threads) on the device.
+          format: int64
+          type: integer
+        cpu_model:
+          description: Human-readable name of the device's CPU model.
+          type: string
+        cpu_usage:
+          description: Average CPU usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        disk_usage:
+          description: Average disk usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        employee:
+          $ref: "#/components/schemas/DeviceEmployee"
+        geo_ip:
+          $ref: "#/components/schemas/DeviceGeoIP"
+        ip_address:
+          description: Last observed IPv4 or IPv6 address of the device.
+          type: string
+        issues:
+          description: |-
+            List of issue identifiers currently affecting the device.
+          items:
+            description: Identifier of a single issue currently affecting the device.
+            type: string
+          type: array
+        kernel_name:
+          description: Name of the operating system kernel running on the device.
+          type: string
+        last_reboot:
+          description: Timestamp of the most recent device reboot, in RFC 3339 format.
+          type: string
+        last_seen:
+          description: Timestamp of the most recent telemetry received from the device, in RFC 3339 format.
+          type: string
+        manufacturer:
+          description: Manufacturer of the device.
+          type: string
+        mem_usage:
+          description: Average memory usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        memory_total_kb:
+          description: Total amount of physical memory available on the device, in kilobytes.
+          format: int64
+          type: integer
+        model_name:
+          description: Marketing or product name of the device model.
+          type: string
+        model_number:
+          description: Manufacturer-assigned model number of the device.
+          type: string
+        os:
+          description: |-
+            Operating system family running on the device, as reported by the Datadog Agent
+            (for example, `macOS`, `Windows`, or `linux`). Empty when unknown.
+          type: string
+        os_version:
+          description: Operating system version running on the device.
+          type: string
+        resource_id:
+          description: Datadog resource identifier for the device.
+          type: string
+        serial_number:
+          description: Serial number assigned to the device by its manufacturer.
+          type: string
+        status:
+          $ref: "#/components/schemas/DeviceStatus"
+        type:
+          description: Hardware type of the device (for example, `laptop` or `desktop`). `unknown` when the type cannot be determined.
+          type: string
+        uptime:
+          description: Time elapsed since the device last booted, in seconds.
+          format: double
+          type: number
+        wlan_bssid:
+          description: |-
+            BSSID (MAC address of the access point) of the wireless network the device is
+            currently connected to.
+          type: string
+        wlan_rssi:
+          description: Received signal strength indicator of the device's current wireless connection, in dBm.
+          format: double
+          type: number
+        wlan_ssid:
+          description: SSID of the wireless network the device is currently connected to.
+          type: string
+      type: object
+    DeviceDetails:
+      description: Response body for the get device endpoint, returning a single device with full attribute detail.
+      properties:
+        data:
+          $ref: "#/components/schemas/DeviceDetailsData"
+      type: object
+    DeviceDetailsData:
+      description: A single device entry with full attribute detail.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DeviceDetailsDataAttributes"
+        id:
+          description: Unique identifier of the device. Matches the Datadog host identifier.
+          example: LAPTOP-DEMO-001
+          type: string
+        type:
+          $ref: "#/components/schemas/DeviceDetailsDataType"
+      required:
+        - type
+        - id
+      type: object
+    DeviceDetailsDataAttributes:
+      description: |-
+        Extended set of attributes for a single End User Device Monitoring device,
+        including Cloud Network Monitoring and battery metrics.
+      properties:
+        agent_key:
+          description: Public key of the Datadog Agent installed on the device.
+          type: string
+        agent_version:
+          description: Version of the Datadog Agent installed on the device.
+          type: string
+        battery_charge_pct:
+          description: Current battery charge level as a percentage between 0 and 100.
+          format: int64
+          type: integer
+        battery_charge_rate:
+          description: |-
+            Rate at which the battery is charging or discharging, in milliamperes.
+            Negative values indicate discharge.
+          format: int64
+          type: integer
+        battery_critical:
+          description: Whether the device's battery health has degraded to a critical level.
+          type: boolean
+        battery_cycle_count:
+          description: Number of full charge cycles the battery has gone through.
+          format: int64
+          type: integer
+        battery_max_capacity_pct:
+          description: Maximum battery capacity expressed as a percentage of the device's design capacity.
+          format: int64
+          type: integer
+        cnm_enabled:
+          description: Whether Cloud Network Monitoring is enabled on the device.
+          type: boolean
+        cpu_cores:
+          description: Number of physical CPU cores on the device.
+          format: int64
+          type: integer
+        cpu_logical_processors:
+          description: Number of logical CPU processors (hardware threads) on the device.
+          format: int64
+          type: integer
+        cpu_model:
+          description: Human-readable name of the device's CPU model.
+          type: string
+        cpu_usage:
+          description: Average CPU usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        disk_usage:
+          description: Average disk usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        employee:
+          $ref: "#/components/schemas/DeviceEmployee"
+        geo_ip:
+          $ref: "#/components/schemas/DeviceGeoIP"
+        ip_address:
+          description: Last observed IPv4 or IPv6 address of the device.
+          type: string
+        issues:
+          description: |-
+            List of issue identifiers currently affecting the device.
+          items:
+            description: Identifier of a single issue currently affecting the device.
+            type: string
+          type: array
+        kernel_name:
+          description: Name of the operating system kernel running on the device.
+          type: string
+        last_reboot:
+          description: Timestamp of the most recent device reboot, in RFC 3339 format.
+          type: string
+        last_seen:
+          description: Timestamp of the most recent telemetry received from the device, in RFC 3339 format.
+          type: string
+        manufacturer:
+          description: Manufacturer of the device.
+          type: string
+        mem_usage:
+          description: Average memory usage on the device, as a percentage between 0 and 100.
+          format: double
+          type: number
+        memory_total_kb:
+          description: Total amount of physical memory available on the device, in kilobytes.
+          format: int64
+          type: integer
+        model_name:
+          description: Marketing or product name of the device model.
+          type: string
+        model_number:
+          description: Manufacturer-assigned model number of the device.
+          type: string
+        os:
+          description: |-
+            Operating system family running on the device, as reported by the Datadog Agent
+            (for example, `macOS`, `Windows`, or `linux`). Empty when unknown.
+          type: string
+        os_version:
+          description: Operating system version running on the device.
+          type: string
+        packet_sent:
+          description: |-
+            Number of TCP packets sent by the device over the query window,
+            as reported by Cloud Network Monitoring.
+          format: double
+          type: number
+        resource_id:
+          description: Datadog resource identifier for the device.
+          type: string
+        retransmit:
+          description: Number of TCP packets retransmitted by the device over the query window.
+          format: double
+          type: number
+        retransmit_pct:
+          description: Percentage of sent TCP packets that were retransmitted, between 0 and 100.
+          format: double
+          type: number
+        serial_number:
+          description: Serial number assigned to the device by its manufacturer.
+          type: string
+        status:
+          $ref: "#/components/schemas/DeviceStatus"
+        tcp_canceled:
+          description: Number of TCP connection attempts canceled by the device over the query window.
+          format: double
+          type: number
+        tcp_established:
+          description: Number of TCP connections established by the device over the query window.
+          format: double
+          type: number
+        tcp_establishment_failure_pct:
+          description: Percentage of TCP connection attempts that failed, between 0 and 100.
+          format: double
+          type: number
+        tcp_establishment_failures:
+          description: Number of TCP connection attempts that failed over the query window.
+          format: double
+          type: number
+        tcp_host_unreachable:
+          description: Number of TCP connection attempts that failed because the host was unreachable.
+          format: double
+          type: number
+        tcp_network_unreachable:
+          description: Number of TCP connection attempts that failed because the network was unreachable.
+          format: double
+          type: number
+        tcp_refusals:
+          description: Number of TCP connection attempts refused by the remote host over the query window.
+          format: double
+          type: number
+        tcp_timeouts:
+          description: Number of TCP connection attempts that timed out over the query window.
+          format: double
+          type: number
+        type:
+          description: Hardware type of the device (for example, `laptop` or `desktop`). `unknown` when the type cannot be determined.
+          type: string
+        uptime:
+          description: Time elapsed since the device last booted, in seconds.
+          format: double
+          type: number
+        wlan_bssid:
+          description: |-
+            BSSID (MAC address of the access point) of the wireless network the device is
+            currently connected to.
+          type: string
+        wlan_rssi:
+          description: Received signal strength indicator of the device's current wireless connection, in dBm.
+          format: double
+          type: number
+        wlan_ssid:
+          description: SSID of the wireless network the device is currently connected to.
+          type: string
+      type: object
+    DeviceDetailsDataType:
+      default: devices
+      description: Devices resource type.
+      enum:
+        - devices
+      example: devices
+      type: string
+      x-enum-varnames:
+        - DEVICES
+    DeviceEmployee:
+      description: |-
+        Directory information about the employee associated with the device,
+        sourced from a customer reference table.
+        Absent when no reference table is configured or the device has no match.
+      properties:
+        city:
+          description: City where the employee is based.
+          type: string
+        country:
+          description: Country where the employee is based.
+          type: string
+        department:
+          description: Department the employee belongs to.
+          type: string
+        email:
+          description: Email address of the employee.
+          type: string
+        name:
+          description: Full name of the employee.
+          type: string
+        office:
+          description: Office the employee is assigned to.
+          type: string
+        team:
+          description: Team the employee belongs to.
+          type: string
+      type: object
+    DeviceGeoIP:
+      description: |-
+        Location derived from the device's public IP address.
+        Absent when no location data is available.
+      properties:
+        geo_city:
+          description: City resolved from the device's public IP address.
+          type: string
+        geo_country_iso_code:
+          description: ISO 3166-1 alpha-2 country code resolved from the device's public IP address.
+          type: string
+        geo_latitude:
+          description: Latitude resolved from the device's public IP address.
+          format: double
+          type: number
+        geo_longitude:
+          description: Longitude resolved from the device's public IP address.
+          format: double
+          type: number
+        geo_subdivision_iso_code:
+          description: |-
+            ISO 3166-2 subdivision code (for example, a state or province)
+            resolved from the device's public IP address.
+          type: string
+        public_ip_address:
+          description: Public IPv4 or IPv6 address of the device.
+          type: string
+      type: object
+    DeviceStatus:
+      description: |-
+        Health status of the device, computed from its issues and recent telemetry.
+        `inactive` means the device stopped reporting. `unknown` means no telemetry is available yet.
+      enum:
+        - healthy
+        - degraded
+        - critical
+        - inactive
+        - unknown
+      example: healthy
+      type: string
+      x-enum-varnames:
+        - HEALTHY
+        - DEGRADED
+        - CRITICAL
+        - INACTIVE
+        - UNKNOWN
     DeviceTagsBySource:
       description: Tags associated with a device from a specific source.
       properties:
@@ -181508,6 +181957,185 @@ paths:
       tags:
         - Error Tracking
       x-menu-order: 3
+  /api/v2/eudm/devices:
+    get:
+      operationId: GetEUDMDevices
+      parameters:
+        - description: |-
+            Filter devices to those currently associated with any of the given BSSID values.
+            Each value must be a MAC-48 address; repeat the parameter to pass several values.
+          explode: true
+          in: query
+          name: bssid
+          required: false
+          schema:
+            items:
+              example: 00:00:5e:00:53:01
+              pattern: "^([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}$"
+              type: string
+            type: array
+          style: form
+        - description: |-
+            Maximum number of devices to return in one page. Must be a positive integer.
+            If not set, the response contains all matching devices.
+          in: query
+          name: page[limit]
+          required: false
+          schema:
+            example: 100
+            format: int64
+            minimum: 1
+            type: integer
+        - description: |-
+            Opaque cursor that selects the next page. Use the `meta.page.after` value
+            of the previous response. Devices are ordered by ID.
+          in: query
+          name: page[cursor]
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          cpu_usage: 12.4
+                          disk_usage: 38.2
+                          issues: []
+                          last_seen: "2026-05-20T10:15:30Z"
+                          manufacturer: Apple
+                          mem_usage: 47.1
+                          model_name: MacBook Pro
+                          os: macOS
+                          os_version: macOS 15.6.1 arm64
+                          status: healthy
+                        id: LAPTOP-DEMO-001
+                        type: devices
+                    links:
+                      next: /api/v2/eudm/devices?page%5Bcursor%5D=TEFQVE9QLURFTU8tMDAx&page%5Blimit%5D=1
+                      self: /api/v2/eudm/devices?page%5Blimit%5D=1
+                    meta:
+                      page:
+                        after: TEFQVE9QLURFTU8tMDAx
+              schema:
+                $ref: "#/components/schemas/DeviceBaseArray"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get all devices
+      tags:
+        - End User Device Monitoring
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - end_user_devices_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/eudm/devices/{device_id}:
+    get:
+      operationId: GetEUDMDevice
+      parameters:
+        - description: Unique identifier of the device to fetch. Matches the Datadog host identifier.
+          in: path
+          name: device_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        battery_charge_pct: 82
+                        battery_charge_rate: 1200
+                        battery_cycle_count: 134
+                        battery_max_capacity_pct: 96
+                        cnm_enabled: true
+                        cpu_cores: 10
+                        cpu_logical_processors: 10
+                        cpu_model: Apple M1 Pro
+                        cpu_usage: 12.4
+                        disk_usage: 38.2
+                        ip_address: 192.0.2.10
+                        issues: []
+                        kernel_name: Darwin
+                        last_seen: "2026-05-20T10:15:30Z"
+                        manufacturer: Apple
+                        mem_usage: 47.1
+                        memory_total_kb: 16777216
+                        model_name: MacBook Pro
+                        model_number: MacBookPro18,3
+                        os: macOS
+                        os_version: macOS 15.6.1 arm64
+                        packet_sent: 98213.0
+                        retransmit: 112.0
+                        retransmit_pct: 0.11
+                        serial_number: TESTDEVICE001
+                        status: healthy
+                        tcp_canceled: 1.0
+                        tcp_established: 1482.0
+                        tcp_establishment_failure_pct: 0.6
+                        tcp_establishment_failures: 9.0
+                        tcp_host_unreachable: 1.0
+                        tcp_network_unreachable: 0.0
+                        tcp_refusals: 3.0
+                        tcp_timeouts: 4.0
+                        uptime: 432000
+                        wlan_bssid: 00:00:5e:00:53:01
+                        wlan_rssi: -55.0
+                        wlan_ssid: corp-wifi
+                      id: LAPTOP-DEMO-001
+                      type: devices
+              schema:
+                $ref: "#/components/schemas/DeviceDetails"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a device
+      tags:
+        - End User Device Monitoring
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - end_user_devices_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/events:
     get:
       description: |-
@@ -276218,6 +276846,10 @@ tags:
       description: Elastic Cloud integration.
       url: https://docs.datadoghq.com/integrations/elastic-cloud/
     name: Elastic Cloud Integration
+  - description: |-
+      Inspect devices reported by the Datadog Agent on end-user laptops, desktops,
+      and mobile devices, including their health, hardware, and connectivity attributes.
+    name: End User Device Monitoring
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
