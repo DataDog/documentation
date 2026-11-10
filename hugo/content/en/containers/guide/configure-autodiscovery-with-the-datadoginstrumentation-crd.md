@@ -14,6 +14,9 @@ further_reading:
 - link: "/containers/cluster_agent/"
   tag: "Documentation"
   text: "Datadog Cluster Agent"
+- link: "https://www.datadoghq.com/blog/manage-kubernetes-observability-with-datadoginstrumentation/"
+  tag: "Blog"
+  text: "Manage Kubernetes observability with DatadogInstrumentation"
 ---
 
 ## Overview

@@ -73,7 +73,7 @@ Use this setup when your Flutter app already initializes `datadog_flutter_plugin
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags_flutter/datadog_flags_flutter.dart';
 import 'package:datadog_flutter_plugin/datadog_flutter_plugin.dart';
 
@@ -95,7 +95,7 @@ final configuration = DatadogConfiguration(
   );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
-{{< /code-block >}}
+```
 
 After initialization, retrieve a flags client from the plugin and initialize it with the evaluation context for the current subject:
 
@@ -131,7 +131,7 @@ Enable Datadog Feature Flags early in your app startup. For live Feature Flags c
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Dart and Flutter Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-{{< code-block lang="dart" >}}
+```dart
 final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
@@ -147,7 +147,7 @@ await datadogFlags.enable(
     ),
   ),
 );
-{{< /code-block >}}
+```
 
 `applicationId`, `service`, and `version` are optional. When present, the SDK includes them in Feature Flags telemetry context.
 
@@ -338,7 +338,7 @@ DatadogFlagsConfiguration(
 
   For Flutter-integrated setup, pass these options through `DatadogFlagsPluginConfiguration`:
 
-  {{< code-block lang="dart" >}}
+  ```dart
   final configuration = DatadogConfiguration(
     clientToken: '<CLIENT_TOKEN>',
     env: '<ENV_NAME>',
@@ -356,7 +356,7 @@ DatadogFlagsConfiguration(
         rumIntegrationEnabled: true,
       ),
     );
-  {{< /code-block >}}
+  ```
 
 `rumIntegrationEnabled`
 : When `true` (default), successful evaluations that return a variant are added to the active RUM view as feature flag evaluations. If your app does not use RUM, this option has no effect.
@@ -407,7 +407,7 @@ await DatadogFlags.instance.disable();
 
 The following example enables the SDK, initializes a client with an evaluation context, and evaluates a Boolean flag:
 
-{{< code-block lang="dart" >}}
+```dart
 import 'package:datadog_flags/datadog_flags.dart';
 
 Future<void> initializeFlags() async {
@@ -451,7 +451,7 @@ Future<void> initializeFlags() async {
     showNewCheckoutFlow();
   }
 }
-{{< /code-block >}}
+```
 
 ## Testing
 

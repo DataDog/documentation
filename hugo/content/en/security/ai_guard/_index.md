@@ -11,6 +11,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-ai-agents-guardrail-placement/"
     tag: "Blog"
     text: "Securing AI agents: Why guardrail placement is a key design decision"
+  - link: "https://www.datadoghq.com/blog/runtime-security-for-ai-agents/"
+    tag: "Blog"
+    text: "Agents make decisions at runtime—your security controls should too"
 ---
 
 {{< site-region region="gov,gov2" >}}

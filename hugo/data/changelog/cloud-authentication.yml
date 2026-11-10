@@ -55,3 +55,16 @@ entries:
       - GetAWSCloudAuthIntakeMapping
       - ListAWSCloudAuthIntakeMappings
     title: Add AWS cloud authentication intake mapping endpoints
+  - change_type: added
+    date: '2026-11-05'
+    link: https://github.com/DataDog/documentation/pull/41442
+    operations:
+      - CreateOIDCCloudAuthPersonaMapping
+      - CreateOIDCCloudAuthProvider
+      - DeleteOIDCCloudAuthPersonaMapping
+      - DeleteOIDCCloudAuthProvider
+      - GetOIDCCloudAuthPersonaMapping
+      - GetOIDCCloudAuthProvider
+      - ListOIDCCloudAuthPersonaMappings
+      - ListOIDCCloudAuthProviders
+    title: Add preview Custom OIDC provider and persona mapping APIs

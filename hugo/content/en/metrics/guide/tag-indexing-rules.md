@@ -190,9 +190,25 @@ You can review and remove these exemptions from the Tag Indexing Rules page. Dat
 
 Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
 
+## Limits
+
+Tag Indexing Rules have the following limits:
+
+- **Rules per organization**: An organization can have up to 1,000 active Tag Indexing Rules. Deleted rules do not count toward this limit. When your organization reaches the limit, you cannot create new rules until you delete rules that are no longer needed. The API returns a `403` error for create requests that exceed the limit.
+- **Rule name**: Up to 200 characters.
+- **Metric name patterns per rule**: Up to 50 entries in `metric_name_matches`.
+- **Metric name pattern**: Up to 200 characters. Patterns can contain letters, numbers, dots (`.`), and underscores (`_`), with an optional single trailing `*` (for example, `http.*`).
+- **Reordering**: Reordering applies to the full list of rules. When you reorder rules through the API, provide the complete ordered list of every active rule. Requests that omit any rule are rejected with a `400` error.
+
+Create or update requests that exceed the rule name or metric name pattern limits are rejected with a `400` error that describes the invalid field.
+
+The 1,000-rule limit is a safeguard, not a target. Most accounts need approximately 10-20 rules. See [Best practices](#best-practices).
+
 ## Best practices
 
 Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Most accounts need approximately 10-20 rules to govern their metrics. Create rules for groups of metrics with shared tag requirements, rather than a separate rule for each metric or exemption.
+
+Because Datadog evaluates rules in order and each rule builds on or replaces the results of earlier rules, large rule sets interact in ways that are difficult to predict and maintain. To keep your rule set small, use prefix patterns such as `http.*`, or add several entries to a single rule's metric name patterns, instead of creating one rule per metric.
 
 For metrics that your Tag Indexing Rules cannot govern appropriately, use [Metrics without Limits™][2] to configure them individually, or keep their existing exemptions.
 

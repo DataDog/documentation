@@ -55,11 +55,11 @@ Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not req
 
 Configure the API key, Datadog site, and environment in the application process:
 
-{{< code-block lang="bash" >}}
+```bash
 DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
-{{< /code-block >}}
+```
 
 Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], [.NET][7], or [Ruby][8] setup instructions.
 
