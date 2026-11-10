@@ -3414,8 +3414,8 @@ Lists the notification rules configured for a team.
 - Show the Payments team notification rules.
 
 ### `create_team`
-Toolset: `teams`\
-Permissions required: `Teams Read`, `Teams Manage`, and `MCP Write`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
 Creates a team with a handle, name, and optional description.
 
 - Create a team named Payments with the handle `payments`.
