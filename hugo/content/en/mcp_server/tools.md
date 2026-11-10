@@ -3407,8 +3407,8 @@ Lists the links published by a team.
 - Show the links for the Payments team.
 
 ### `get_team_notification_rules`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists the notification rules configured for a team.
 
 - Show the Payments team notification rules.
