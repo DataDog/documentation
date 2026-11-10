@@ -3386,8 +3386,8 @@ Lists one page of team members and their roles.
 - Who belongs to the Payments team?
 
 ### `get_user_teams`
-Toolset: `teams`\
-Permissions required: `Teams Read`\
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
 Lists the teams a user belongs to and their role on each team.
 
 - Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
