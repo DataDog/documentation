@@ -27,7 +27,7 @@ Worker version 2.25.2 gives you access to the following:
 
 #### Fixes
 
-- The Worker now loads pipeline configurations correctly at startup across commercial Datadog sites, including sites outside US1.
+- Fixed a regression introduced in Worker 2.25.1 that could prevent Workers on commercial Datadog sites outside US1 from loading their pipelines after startup, causing repeated `RC client wasn't initialized, will retry` errors.
 
 ## Worker version 2.25.1
 
