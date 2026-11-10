@@ -59,6 +59,8 @@ You can also create a skill from an existing Slack thread. In the thread, enter:
 
 ## Edit a skill
 
+You can edit shared skills and private skills that you created. Editing requires the MCP Write permission. For details, see the [Permissions](#permissions) section.
+
 1. Open the [{{< ui >}}Skills Library{{< /ui >}}][4] in Datadog.
 2. Select the skill, then open its details page.
 3. Update the skill's name, description, tags, or instructions.
