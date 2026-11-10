@@ -564,10 +564,11 @@ To enable [product-specific tools](#toolsets), include the `toolsets` query para
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-To enable all generally available toolsets, use `toolsets=all`. This works best for clients that support tool filtering.
+To enable all generally available toolsets (except for the [chat toolset][2]), use `toolsets=all`. This works best for clients that support tool filtering.
 {{% /collapse-content %}}
 
 [1]: /getting_started/site/
+[2]: /mcp_server/tools/#chat
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -623,13 +624,15 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets (except for the [chat toolset][1]), best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Click {{< ui >}}Start{{< /ui >}} on the Datadog server. Warp opens your browser to complete the OAuth login flow. Credentials are stored securely on your device and reused for future sessions.
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /mcp_server/tools/#chat
 
 {{< /site-region >}}
 
@@ -661,11 +664,13 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
       }
     }</code></pre>
 
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets (except for the [chat toolset][1]), best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[1]: /mcp_server/tools/#chat
 
 {{< /site-region >}}
 
@@ -699,7 +704,9 @@ Each [Datadog site][86] has its own MCP Server endpoint. To build the endpoint f
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. `toolsets=all` works best with clients that support tool search. Tools in Preview are not included in `toolsets=all`. To use them, explicitly add the toolset to the `toolsets` parameter (for example, `?toolsets=all,apm`).
+Use `toolsets=all` to enable all generally available toolsets (except for the [chat toolset][18]) at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. `toolsets=all` works best with clients that support tool search.
+
+Tools in Preview and the [chat toolset][18] are not included in `toolsets=all`. To use them, explicitly add the toolset to the `toolsets` parameter (for example, `?toolsets=all,apm,chat`).
 
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
@@ -712,10 +719,11 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve core, Synthetic Testing, and Software Delivery tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,synthetics,software-delivery</code></pre>
 
-- Retrieve all generally available tools:
+- Retrieve all generally available tools (except for the [chat toolset][18]):
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+[18]: /mcp_server/tools/#chat
 {{< /site-region >}}
 
 <div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
