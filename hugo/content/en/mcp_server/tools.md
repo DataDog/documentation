@@ -1674,43 +1674,163 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 ## GPU Monitoring
 
-Tools for [GPU Monitoring][97], including listing self-hosted LLM inference deployments, summarizing their performance, inspecting their configuration, and ranking GPU kernels.
+Tools for [GPU Monitoring][97], including fleet and hardware topology, workload context, GPU hardware and host health, training progress, idle GPU jobs, self-hosted LLM inference performance, and GPU kernel profiling.
 
 <div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
 
-All tools in this toolset are read-only. For setup steps, see [GPU Monitoring MCP tools][98].
+All tools in this toolset are read-only, except the trace export tools, which write temporary private files. Many tools are designed to be chained: start with `gpu_monitoring_orient_workload_tagging` and `gpu_monitoring_orient_hardware_inventory` for workloads, `gpu_monitoring_list_topology_groups` for hardware topology, or `gpu_monitoring_list_inference_deployments` for inference, then pass the filters they return to the analysis tools. For setup steps, see [GPU Monitoring MCP tools][98].
+
+### `gpu_monitoring_get_fleet_summary`
+*Toolset: **gpu-monitoring***\
+Counts your organization's GPUs by state, using the same counts as the GPU Monitoring fleet funnel: available (for example, allocated or idle), unavailable with reasons, and unknown. Returns GPU counts and percentages by state and reason, hosts by health, and busy GPU equivalents.
+
+- How many of my GPUs are idle?
+- Why are GPUs in my fleet unavailable?
+
+### `gpu_monitoring_list_topology_groups`
+*Toolset: **gpu-monitoring***\
+The starting point for hardware topology. Lists the clusters, then the clusters, racks, or NVLink domains with hardware issues, worst first. Returns exact host and GPU counts per group (faulty, degraded, missing), and missing and departed totals.
+
+- Which of my GPU clusters have hardware issues?
+- Which racks in cluster `train-a` have faulty GPUs?
+
+### `gpu_monitoring_list_topology_nodes`
+*Toolset: **gpu-monitoring***\
+Lists the hosts, GPUs, racks, or NVLink domains in one cluster, with presence status and health evidence. Returns one page of nodes with their evidence, and a cursor for the next page.
+
+- List the hosts with issues in cluster `train-a`.
+- Which GPUs in rack `r12` are degraded?
+
+### `gpu_monitoring_list_topology_events`
+*Toolset: **gpu-monitoring***\
+Lists topology and fault events for one GPU cluster over up to 7 days: GPUs added or lost, hosts departed, faults raised and cleared, and XIDs. Returns events, oldest first, one page at a time with a cursor.
+
+- What hardware faults occurred in cluster `train-a` this week?
+- Which hosts left cluster `train-a` in the last 24 hours?
+
+### `gpu_monitoring_orient_workload_tagging`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Logs Read Data` and `APM Read`*\
+Determines which tags identify a GPU workload, the filters to use against metrics, logs, and traces, and which attempt of the run the time window covers. Returns identifying tags with their source keys, a filter for each data source, and attempt boundaries.
+
+- Which tags identify my training run `llama-pretrain-42`?
+- Did this job restart during the last 24 hours?
+
+### `gpu_monitoring_orient_hardware_inventory`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Identifies which GPU devices, hosts, racks, and NVLink fabric domains a workload occupies, and how many of each. Returns the device and host roster with counts, and the host filter that the health tools take.
+
+- How many GPUs and hosts is this job running on?
+- Which racks and NVLink domains does this workload span?
+
+### `gpu_monitoring_identify_workload_framework`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Metrics Read` and `Logs Read Data` and `APM Read`*\
+Identifies a GPU workload's orchestrator, training framework, and inference server from metric tags, APM spans, and logs, with a confidence level. Returns a candidate or confirmed framework for each layer with its evidence, plus the services seen in logs.
+
+- What training framework and orchestrator does this GPU job use?
+- Which inference server is running on these GPUs?
+
+### `gpu_monitoring_analyze_gpu_hardware_health`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Metrics Read` and `Logs Read Data`*\
+Checks a workload's GPUs for hardware problems and reports which hardware categories show a signal, what each one points to, and which NVIDIA XID codes corroborate it. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`. Returns a verdict for each hardware category with the affected devices, corroborating XID codes, and evidence.
+
+- Are there any GPU hardware errors on this job's devices?
+- Is a bad NVLink domain slowing down my training run?
+
+### `gpu_monitoring_analyze_host_health`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries`*\
+Checks a workload's hosts against thresholds on host-level resources over a time window and reports which hosts are in trouble. Uses the host filter from `gpu_monitoring_orient_hardware_inventory`. Returns a verdict for each check, naming the hosts outside their thresholds, with the readings.
+
+- Are any hosts in this training job running out of disk or memory?
+- Did any of this job's hosts have OOM kills overnight?
+
+### `gpu_monitoring_analyze_training_stepping`
+*Toolset: **gpu-monitoring***\
+*Permissions Required: `Timeseries` and `Logs Read Data` and `APM Read`*\
+Reports whether a training job's step counter is still advancing, against a tolerance sized from the job's own step cadence. Missing data is reported as unknown, never as a stall. Uses the entity filter from `gpu_monitoring_orient_workload_tagging`. Returns a stepping verdict with the step cadence and the evidence behind it.
+
+- Is my training job still making progress?
+- Has this run stalled in the last hour?
+
+### `gpu_monitoring_analyze_zombie_job`
+*Toolset: **gpu-monitoring***\
+Decides whether a GPU job is alive or should be reclaimed (`zombie`, `idle_held`, or `idle_empty`). Analyzes one job, or every job in a scope. Returns the verdict, the deciding rule, when the state started, evidence, confidence, and a flag when the job needs investigation.
+
+- Is job `llama-pretrain-42` still doing work, or can I reclaim its GPUs?
+- Which GPU jobs in `team:research` are holding idle GPUs?
 
 ### `gpu_monitoring_list_inference_deployments`
 *Toolset: **gpu-monitoring***\
 *Permissions Required: `Timeseries`*\
-Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with their throughput, latency, and a health verdict for each over the time window. Hosted model providers are not covered. An empty list means no self-hosted inference deployments reported data in the time window.
+Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with throughput, latency, error rate, KV cache usage, and a health verdict, worst first. Hosted model providers are not covered. Returns deployments with KPIs and health checks against GPU Monitoring's thresholds, and each deployment's scope for `gpu_monitoring_get_inference_perf_summary`.
 
 - Which of my inference deployments are unhealthy?
 - List my inference deployments from the last hour.
 
 ### `gpu_monitoring_get_inference_perf_summary`
 *Toolset: **gpu-monitoring***\
-*Permissions Required: `Timeseries`*\
-Summarizes the performance of a self-hosted LLM inference deployment over the time window, including latency and throughput.
+Measures an inference workload's serving performance over a time window: requests, time to first token and inter-token latency, throughput, prefix cache hits, queueing, and KV cache usage. Uses the scope from `gpu_monitoring_list_inference_deployments`. Returns exact statistics for each deployment and layer, GPU busy time, and further metrics available in the scope.
 
 - Why is my `llama-70b` deployment slow?
-- Summarize the performance of this deployment over the past 3 hours.
+- Show me time to first token and KV cache usage for this deployment over the past 3 hours.
 
 ### `gpu_monitoring_get_inference_configuration`
 *Toolset: **gpu-monitoring***\
-*Permissions Required: `Timeseries`*\
-Retrieves the configuration of a self-hosted LLM inference deployment.
+Reports how an inference deployment's engines (vLLM, SGLang) are configured: model, parallelism, KV cache, batching, and scheduling, with the source of every value. Returns the distinct configurations for each component (prefill, decode), with settings that disagree flagged as drift.
 
 - How is my `llama-70b` deployment configured?
-- Compare the configuration of these two inference deployments.
+- Do the decode workers in this deployment have configuration drift?
+
+### `gpu_monitoring_get_inference_forward_pass_profile`
+*Toolset: **gpu-monitoring***\
+Shows how an inference engine spends its forward passes: the split between decode and prefill, how pass time grows with batch size and scheduled tokens, and whether speculative decoding runs. Returns time splits and cost curves, with span coverage. Missing measurements are listed as unavailable.
+
+- How does forward pass time scale with batch size for this deployment?
+- Is speculative decoding running on my vLLM deployment?
+
+### `gpu_monitoring_find_inference_forward_pass_traces`
+*Toolset: **gpu-monitoring***\
+Finds individual forward passes of an inference engine (vLLM, SGLang), filtered by phase, batch size, and scheduled tokens, newest or slowest first. Returns matching passes with trace ID, worker, and duration, kernel counts and time when profiled, and the number of matches.
+
+- Find the slowest prefill passes for this deployment in the last hour.
+- Show me decode passes with a batch size of 64.
 
 ### `gpu_monitoring_rank_gpu_kernels`
 *Toolset: **gpu-monitoring***\
-*Permissions Required: `Timeseries` and `APM Read`*\
-Ranks the GPU kernels that run for a workload, to help identify which kernels consume the most GPU time.
+Ranks the GPU kernels a training or inference workload ran by total time, from the kernel spans profiled at kernel level. Returns each kernel's total time, share, calls, and mean duration; spans of 10 seconds or more, listed separately by kernel; and, for an inference engine, how much of pass time was kernel time.
 
 - Which GPU kernels take the most time in this deployment?
-- Rank the top GPU kernels for my inference service over the last hour.
+- Rank the top GPU kernels for my training job over the last hour.
+
+### `gpu_monitoring_get_gpu_kernel_trend`
+*Toolset: **gpu-monitoring***\
+Follows one GPU kernel of a training or inference workload over time, through the traces profiled at kernel level. Uses a kernel from `gpu_monitoring_rank_gpu_kernels`. Returns, for each time bucket, the launches, duration percentiles (p50, p95, p99, max), and summed time, with launches of 10 seconds or more counted separately.
+
+- Has this attention kernel gotten slower over the past day?
+- Show me the p99 duration of this kernel over time.
+
+### `gpu_monitoring_export_parsed_trace`
+*Toolset: **gpu-monitoring***\
+Fetches a complete APM trace, decodes its spans, and extracts the GPU kernel data into a temporary private file. Returns the file's metadata and a Datadog API download path.
+
+- Export the GPU kernel data from trace `abc123`.
+
+### `gpu_monitoring_export_raw_trace`
+*Toolset: **gpu-monitoring***\
+Fetches a complete APM trace and saves its original JSON as a temporary private file. Returns the file's metadata and a Datadog API download path, not the trace itself.
+
+- Export the raw JSON for trace `abc123`.
+
+### `gpu_monitoring_query_insights`
+*Toolset: **gpu-monitoring***\
+Runs bounded SQL queries over your organization's stored GPU Monitoring insights, such as training step metrics and straggler scores. Returns result rows.
+
+- Which hosts had the highest straggler scores in my training run yesterday?
+- Query the step time metrics for run `llama-pretrain-42`.
 
 ## Investigations
 
