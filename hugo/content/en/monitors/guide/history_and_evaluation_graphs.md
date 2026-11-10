@@ -16,20 +16,25 @@ further_reading:
 
 ## Overview
 
-The [monitor status page][1] includes two graphs, {{< ui >}}Evaluated Data{{< /ui >}} and {{< ui >}}Source Data{{< /ui >}}, that provide insight into monitor evaluations. Use the {{< ui >}}Visualize as{{< /ui >}} selector on the status page to switch between them. This guide covers:
-- [What the evaluated data and source data graphs show](#evaluated-data-and-source-data-graphs)
-- [Why the two graphs display different values](#why-are-the-graphs-different)
+The [monitor status page][1] includes three graphs that provide insight into monitor evaluations: {{< ui >}}Source Data{{< /ui >}}, {{< ui >}}Evaluated Data{{< /ui >}}, and {{< ui >}}Transitions{{< /ui >}}. Use the graph selector on the status page to switch between them. This guide covers:
+- [What each graph shows](#what-the-status-page-graphs-show)
+- [Why the source data and evaluated data graphs display different values](#why-are-the-graphs-different)
 - [Replicating an evaluated datapoint outside of a monitor](#troubleshooting-evaluated-data-values)
 
 **Note**: On the [legacy status page][4], the source data graph is labeled {{< ui >}}History{{< /ui >}} and the evaluated data graph is labeled {{< ui >}}Evaluation Graph{{< /ui >}}.
 
-## Evaluated data and source data graphs
+## What the status page graphs show
 
 Source data
 : Shows the datapoints of the monitor query over time, as they appear in a dashboard or notebook graph. The monitor's evaluation aggregation is not applied.
 
 Evaluated data
 : Shows the result of each monitor evaluation. Each datapoint is the query's value aggregated over the evaluation window, using the aggregation method set in the monitor's evaluation settings. These values are recorded at evaluation time, so they are not recomputed from current data.
+
+Transitions
+: Shows each group's monitor status, such as `OK`, `WARN`, `ALERT`, or `NO DATA`, over time. The monitor sets each status by comparing the evaluated data against your alert conditions, including thresholds, [recovery thresholds][6], and [no data][7] settings. Use this graph to see which groups triggered an alert and when. For more information, see [Transitions][8].
+
+The source data and evaluated data graphs explain *why* a monitor changed status, and the Transitions graph shows *when* it changed.
 
 When you submit your raw datapoints to Datadog for monitoring, this information is visualized in the source data graph. For example, you have the following datapoints over the past 5 minutes: [10, 15, 12, 8, 11]. The source data graph shows each value.
 
@@ -154,3 +159,6 @@ The monitor evaluation `Min` takes the minimum value of the queries over the pas
 [3]: /dashboards/widgets/query_value/
 [4]: /monitors/status/status_legacy/
 [5]: /monitors/configuration/#evaluation-delay
+[6]: /monitors/guide/recovery-thresholds/
+[7]: /monitors/configuration/#no-data
+[8]: /monitors/status/graphs/#transitions
