@@ -1,6 +1,7 @@
 ---
 title: Coding Agents
 description: Protect coding agents such as Claude Code, Codex, and Cursor with AI Guard through Trajectory hooks.
+private: true
 further_reading:
 - link: /security/ai_guard/setup/
   tag: Documentation

@@ -15,8 +15,6 @@ AI Guard connects to AI agents through several integration methods: automatic in
 
 AI Guard protects each agent as a separate service. Complete these steps for every service you want to protect.
 
-To protect coding agents, such as Claude Code, Codex, and Cursor, follow the [Coding Agents][10] setup instead.
-
 ## 1. Check prerequisites {#prerequisites}
 
 Confirm you have the Datadog permissions, the Datadog Agent, and the Datadog SDK version that AI Guard needs.
@@ -169,4 +167,3 @@ To confirm the Datadog SDK reaches AI Guard, check the `datadog.ai_guard.evaluat
 [7]: /security/ai_guard/setup/sdk/
 [8]: /security/ai_guard/setup/http_api/
 [9]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
-[10]: /security/ai_guard/setup/coding_agents/

@@ -21,7 +21,7 @@ AI Guard evaluates the prompts, model responses, and tool calls in your AI appli
 
 AI Guard protects against prompt injection and jailbreaking, tool misuse, and sensitive data exfiltration. Together, these protections address the [agentic lethal trifecta][1]: privileged system access, exposure to untrusted data, and outbound communication.
 
-AI Guard protects two kinds of agents: custom agents that your team builds and runs, and coding agents, such as Claude Code, that your developers use. Unless indicated otherwise, this AI Guard documentation covers custom agents. To protect coding agents, see [Coding Agents][16].
+AI Guard protects two kinds of agents: custom agents that your team builds and runs, and coding agents, such as Claude Code, that your developers use. Unless indicated otherwise, this AI Guard documentation covers custom agents.
 
 {{< callout url="https://www.datadoghq.com/product-preview/coding-agent-security-guardrails/" header="false" >}}
 AI Guard for coding agents is in Preview.
@@ -207,4 +207,3 @@ External model providers that AI Guard uses for evaluation operate under zero da
 [13]: /help/
 [14]: /tracing/trace_pipeline/trace_retention/
 [15]: /security/ai_guard/setup/http_api/
-[16]: /security/ai_guard/setup/coding_agents/
