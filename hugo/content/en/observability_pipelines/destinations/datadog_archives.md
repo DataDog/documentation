@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. To query these logs with [Archive Search][16], [enable Archive Search](#archive-search) on the destination. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
+Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. To query these logs with [Archive Search][16], enable it on the destination. See the [Archive Search](#archive-search) section. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
 **Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
 
