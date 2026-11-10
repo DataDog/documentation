@@ -13,6 +13,9 @@ further_reading:
   - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
     tag: "Documentation"
     text: "LaunchDarkly"
+  - link: "/dashboards/change_overlays/"
+    tag: "Documentation"
+    text: "Change Overlays"
 ---
 
 ## Overview
@@ -127,6 +130,40 @@ Example request:
 }
 ```
 
+## Query feature flag change events
+
+Feature flag changes are indexed as Change Tracking events. To find them, enter one of the following queries in the [Events Explorer][9]:
+
+| Changes to find | Query |
+|-----------------|-------|
+| All feature flag changes | `source:change_tracking @changed_resource.type:feature_flag` |
+| Changes to one flag | `source:change_tracking feature_flag_key:<FLAG_KEY>` |
+| Changes in one environment, such as `production` | `source:change_tracking @changed_resource.type:feature_flag environment:<ENV>` |
+| Changes by one author | `source:change_tracking @changed_resource.type:feature_flag @change_metadata.author.name:<EMAIL>` |
+| Changes linked to one service | `source:change_tracking @changed_resource.type:feature_flag @impacted_resources.name:<SERVICE>` |
+
+**Notes**:
+
+- Filter with `@changed_resource.type:feature_flag` rather than `@evt.type:feature_flag`.
+- `@changed_resource.type:feature_flag` also matches flag changes from other providers, such as LaunchDarkly.
+- Datadog Feature Flags change events use the `environment` tag, not `env`, so an `env` template variable does not filter them.
+- The same queries work with the [Search events][10] endpoint of the Events API.
+
+## Overlay feature flag changes on a graph
+
+To show flag changes on a specific timeseries graph, add an [event overlay][11]:
+
+1. Edit the timeseries widget.
+1. Under {{< ui >}}Event Overlays{{< /ui >}}, click {{< ui >}}Add Event Overlay{{< /ui >}}.
+1. Enter an event query, for example:
+   - `source:change_tracking feature_flag_key:<FLAG_KEY>` for changes to one flag
+   - `source:change_tracking @changed_resource.type:feature_flag environment:production` for all flag changes in production
+1. Save the widget. Flag changes appear as markers on the graph.
+
+To see all changes for a service across a dashboard, click {{< ui >}}Show Overlays{{< /ui >}} and select the service, as described in [Change Overlays][12]. Feature flag changes appear when they're linked to that service. They also appear automatically on [monitor status pages][13] and [service pages][14] for linked services.
+
+To link flag changes to a service, see [Track feature flags](#track-feature-flags). For the monitor status page, the monitor's query, group, or `service` tag must also match that service.
+
 ## Automatically detect affected services
 
 In addition to tracking feature flag configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
@@ -216,3 +253,9 @@ To toggle feature flags on or off from inside Datadog:
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
 [8]: /feature_flags/
+[9]: /events/explorer/
+[10]: /api/latest/events/#search-events
+[11]: /dashboards/widgets/timeseries/#event-overlay
+[12]: /dashboards/change_overlays/
+[13]: /monitors/status/
+[14]: /tracing/services/service_page/
