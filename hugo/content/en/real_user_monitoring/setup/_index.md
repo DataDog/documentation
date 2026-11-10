@@ -53,7 +53,7 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/setup/install/?platform=react_native" src="integrations_logos/react-native_large.svg" alt="React Native" title="React Native" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" title="Kotlin Multiplatform" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=cpp" src="integrations_logos/cpp_large.svg" alt="C++" title="C++" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/electron/setup/" src="integrations_logos/rum-electron_large.svg" alt="Electron" title="Electron" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=electron" src="integrations_logos/rum-electron_large.svg" alt="Electron" title="Electron" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=roku" src="integrations_logos/roku_large.svg" alt="Roku" title="Roku" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=unity" src="integrations_logos/rum-unity_large.svg" alt="Unity" title="Unity" >}}
   {{< image-card href="/real_user_monitoring/setup/install/?platform=maui" src="integrations_logos/maui_large.svg" alt=".NET MAUI" title=".NET MAUI" >}}

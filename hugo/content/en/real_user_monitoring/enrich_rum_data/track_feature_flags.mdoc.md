@@ -2,7 +2,7 @@
 title: Track Feature Flags
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 description: "Track feature flag usage and performance impact in RUM to maintain release safety and optimize user experience with controlled rollouts."
 beta: true
@@ -75,6 +75,11 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, Re
 
 <!-- C++ -->
 {% if equals($platform, "cpp") %}
+{% partial file="sdk/track_feature_flags/unavailable.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
 {% partial file="sdk/track_feature_flags/unavailable.mdoc.md" /%}
 {% /if %}
 

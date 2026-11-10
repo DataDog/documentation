@@ -3,7 +3,7 @@ title: Add Custom Context
 description: "Add custom attributes and context to your RUM events across the Datadog RUM SDKs."
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
     show_if:
@@ -71,6 +71,11 @@ To add user and account information, see [Track Users and Accounts](/real_user_m
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/add_custom_context/cpp.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/add_custom_context/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

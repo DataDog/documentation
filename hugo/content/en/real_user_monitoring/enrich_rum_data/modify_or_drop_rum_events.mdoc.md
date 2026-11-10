@@ -3,7 +3,7 @@ title: Modify or Drop RUM Events Client-Side
 description: "Modify attributes on RUM events or drop them entirely before they're sent to Datadog, using event mappers or the beforeSend API."
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
     show_if:
@@ -64,6 +64,11 @@ To control which sessions Datadog retains server-side, use [retention filters](/
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/modify_or_drop_rum_events/unavailable.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/modify_or_drop_rum_events/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

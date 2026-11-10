@@ -3,7 +3,7 @@ title: Track Navigation Across Web Views
 description: "Track user activity across web and native components in hybrid mobile applications with RUM Web View Tracking."
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
 aliases:
 - /real_user_monitoring/application_monitoring/web_view_tracking/
 - /real_user_monitoring/application_monitoring/android/web_view_tracking/
@@ -107,6 +107,11 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 <!-- C / C++ -->
 
 {% if equals($platform, "cpp") %}
+{% partial file="sdk/track_navigation_across_web_views/unavailable.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
 {% partial file="sdk/track_navigation_across_web_views/unavailable.mdoc.md" /%}
 {% /if %}
 

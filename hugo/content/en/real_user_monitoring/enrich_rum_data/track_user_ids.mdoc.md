@@ -2,7 +2,7 @@
 title: Track Users and Accounts
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
@@ -48,6 +48,11 @@ Add user and account information to your RUM sessions to:
 <!-- C / C++ -->
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/track_user_ids/cpp.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/track_user_ids/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

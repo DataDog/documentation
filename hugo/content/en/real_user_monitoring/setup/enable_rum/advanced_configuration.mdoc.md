@@ -2,7 +2,7 @@
 title: Advanced Configuration
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
@@ -52,6 +52,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/unity
   - /real_user_monitoring/mobile_and_tv_monitoring/unity/advanced_configuration
   - /real_user_monitoring/unity/otel_support
+  - /real_user_monitoring/application_monitoring/electron/advanced_configuration/
 
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
@@ -100,6 +101,11 @@ The following configuration options go beyond initial setup.
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/advanced_config/cpp.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/advanced_config/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/correlate_with_other_telemetry/apm/
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
@@ -93,6 +93,11 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/track_frontend_to_backend_traces/unavailable.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/track_frontend_to_backend_traces/electron.mdoc.md" /%}
 {% /if %}
 
 ## View traces from the RUM Explorer

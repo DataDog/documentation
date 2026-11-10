@@ -269,4 +269,4 @@ Learn more about [Dev Tools][11].
 [14]: /real_user_monitoring/setup/
 [15]: /session_replay/setup_and_configuration/
 [16]: /session_replay/privacy_options/
-[17]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#initialization-parameters
+[17]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#initialization-parameters

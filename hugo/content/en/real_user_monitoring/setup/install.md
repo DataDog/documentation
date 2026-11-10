@@ -56,6 +56,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios
   - /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/
   - /real_user_monitoring/mobile_and_tv_monitoring/ios/supported_versions
+  - /real_user_monitoring/application_monitoring/electron/setup/
 further_reading:
 - link: '/real_user_monitoring/setup/create_application/'
   tag: 'Documentation'

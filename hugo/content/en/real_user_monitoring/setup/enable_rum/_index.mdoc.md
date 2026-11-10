@@ -2,7 +2,7 @@
 title: Enable the Datadog RUM Module
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
@@ -148,6 +148,11 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 {% partial file="sdk/enable_rum/cpp.mdoc.md" /%}
 {% /if %}
 
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/enable_rum/electron.mdoc.md" /%}
+{% /if %}
+
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
 {% partial file="sdk/enable_rum/maui.mdoc.md" /%}
@@ -238,6 +243,13 @@ Your application appears as pending on the Applications page until Datadog start
 After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "cpp") %}
+Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 
 After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.

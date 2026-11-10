@@ -2,7 +2,7 @@
 title: Track Navigation
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 ---
 This page has instructions for each SDK. Choose your SDK in the SDK menu above.
@@ -51,6 +51,11 @@ RUM organizes each session into views, which represent distinct screens or state
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/track_navigation/cpp.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/track_navigation/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

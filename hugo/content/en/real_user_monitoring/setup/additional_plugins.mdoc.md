@@ -3,7 +3,7 @@ title: Additional Plugins and Integrations
 description: "Extend the Datadog SDK with build plugins for JavaScript bundlers and integrations with third-party libraries."
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 aliases:
 - /real_user_monitoring/application_monitoring/browser/build_plugins/
@@ -108,6 +108,11 @@ Extend the Datadog SDK with additional plugins and integrations:
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/additional_plugins/unavailable.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/additional_plugins/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

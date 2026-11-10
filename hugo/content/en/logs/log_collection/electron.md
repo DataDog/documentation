@@ -77,6 +77,6 @@ await init({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/electron-sdk
-[2]: /real_user_monitoring/application_monitoring/electron/setup/
-[3]: /real_user_monitoring/application_monitoring/electron/advanced_configuration/#allowed-renderer-hosts
+[2]: /real_user_monitoring/setup/install/?platform=electron
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=electron#allowed-renderer-hosts
 [4]: /logs/log_collection/javascript/

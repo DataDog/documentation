@@ -17,7 +17,7 @@ Create a RUM application in Datadog to generate the application ID and client to
 ## Create the application
 
 1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}](https://app.datadoghq.com/rum/application/create).
-2. Select the application type that matches your platform, for example JavaScript (JS), Android, iOS, Flutter, React Native, Kotlin Multiplatform, C++, .NET MAUI, Roku, or Unity.
+2. Select the application type that matches your platform, for example JavaScript (JS), Android, iOS, Flutter, React Native, Kotlin Multiplatform, C++, Electron, .NET MAUI, Roku, or Unity.
 3. Enter an application name, then click {% ui %}Create Application{% /ui %}. Datadog generates an application ID and a client token for your application.
 4. Copy the application ID and client token. You need them to initialize the SDK.
 

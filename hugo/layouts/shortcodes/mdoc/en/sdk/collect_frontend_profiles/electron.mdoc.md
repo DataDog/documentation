@@ -49,6 +49,6 @@ Pages loaded from `file://` are not served with this header by default, so profi
 Renderer profiling data appears in the same places as browser profiling data. See [Explore profiling][4] for the Browser SDK.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
-[2]: /real_user_monitoring/application_monitoring/electron/setup/
+[2]: /real_user_monitoring/setup/install/?platform=electron
 [3]: https://www.electronjs.org/docs/latest/api/protocol#protocolhandlescheme-handler
 [4]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/?platform=browser#explore-profiling

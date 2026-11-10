@@ -25,6 +25,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/reactnative
   - /real_user_monitoring/mobile_and_tv_monitoring/react_native/troubleshooting
   - /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/unity
+  - /real_user_monitoring/application_monitoring/electron/troubleshooting/
   - /real_user_monitoring/mobile_and_tv_monitoring/unity/troubleshooting
 ---
 

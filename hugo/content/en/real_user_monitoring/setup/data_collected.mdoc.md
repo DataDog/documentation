@@ -3,7 +3,7 @@ title: Data Collected
 description: "Understand the event types, attributes, and telemetry data collected by the RUM SDKs, including sessions, views, actions, resources, and errors."
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 aliases:
   - /real_user_monitoring/data_collected/
@@ -46,6 +46,7 @@ aliases:
   - /real_user_monitoring/application_monitoring/unity/data_collected/
   - /real_user_monitoring/application_monitoring/cpp/data_collected/
   - /real_user_monitoring/application_monitoring/maui/data_collected/
+  - /real_user_monitoring/application_monitoring/electron/data_collected/
 further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
@@ -132,6 +133,11 @@ This page has instructions for each SDK. Choose your SDK in the SDK menu above.
 
 {% if equals($platform, "cpp") %}
 {% partial file="sdk/data_collected/cpp.mdoc.md" /%}
+{% /if %}
+
+<!-- Electron -->
+{% if equals($platform, "electron") %}
+{% partial file="sdk/data_collected/electron.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->

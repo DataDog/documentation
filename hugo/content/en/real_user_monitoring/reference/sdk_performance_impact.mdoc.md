@@ -3,7 +3,7 @@ title: SDK Performance Impact
 description: Learn about how the SDK impacts performance of your application.
 content_filters:
   - trait_id: platform
-    option_group_id: rum_client_sdk_platform_options
+    option_group_id: client_sdk_platform_options
     label: "SDK"
 aliases:
   - /real_user_monitoring/application_monitoring/android/sdk_performance_impact/
@@ -33,7 +33,7 @@ Understand how the Datadog SDK affects your application's performance, and use t
 {% /if %}
 
 <!-- Flutter, React Native, Kotlin Multiplatform, C / C++, Roku, Unity, .NET MAUI: no dedicated performance impact content -->
-{% if includes($platform, ["flutter", "react_native", "kotlin_multiplatform", "cpp", "roku", "unity", "maui"]) %}
+{% if includes($platform, ["flutter", "react_native", "kotlin_multiplatform", "cpp", "electron", "roku", "unity", "maui"]) %}
 {% alert %}
 SDK performance impact benchmarks are not available for the selected SDK.
 {% /alert %}

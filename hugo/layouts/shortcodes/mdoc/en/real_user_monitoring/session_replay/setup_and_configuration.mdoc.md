@@ -943,5 +943,5 @@ See [Connect Session Replay to your third-party tools][30].
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /real_user_monitoring/setup/install/?platform=maui
 [35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
-[36]: /real_user_monitoring/application_monitoring/electron/setup/
-[37]: /real_user_monitoring/application_monitoring/electron/setup/#set-up-renderer-processes
+[36]: /real_user_monitoring/setup/install/?platform=electron
+[37]: /real_user_monitoring/setup/install/?platform=electron#set-up-renderer-processes

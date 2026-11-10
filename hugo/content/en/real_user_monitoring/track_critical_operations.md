@@ -66,6 +66,7 @@ The table lists additional example journeys and their associated operations by i
   - [Kotlin Multiplatform (1.4.0)][4]
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
+  - [Electron][25]
 
 ## Monitor RUM operations with included metrics
 
@@ -128,6 +129,27 @@ options?: {
  description?: string,
 }) => void
 ```
+
+{{% /tab %}}
+
+{{% tab "Electron" %}}
+
+In the main process:
+
+```typescript
+import { startOperation } from '@datadog/electron-sdk';
+
+startOperation(
+  name: string,
+  options?: {
+    operationKey?: string,
+    context?: Context,
+    description?: string,
+  }
+)
+```
+
+In a renderer, use `@datadog/browser-rum` with the operation monitoring flag enabled in its `init` call, as shown in the **Browser** tab. The signatures are the same, so you can start an operation in one process and complete it in the other.
 
 {{% /tab %}}
 
@@ -206,6 +228,23 @@ options?: {
  context?: Context,
  description?: string,
 }) => void
+```
+
+{{% /tab %}}
+
+{{% tab "Electron" %}}
+
+```typescript
+import { succeedOperation } from '@datadog/electron-sdk';
+
+succeedOperation(
+  name: string,
+  options?: {
+    operationKey?: string,
+    context?: Context,
+    description?: string,
+  }
+)
 ```
 
 {{% /tab %}}
@@ -294,6 +333,24 @@ options?: {
  context?: Context,
  description?: string,
 }) => void
+```
+
+{{% /tab %}}
+
+{{% tab "Electron" %}}
+
+```typescript
+import { failOperation } from '@datadog/electron-sdk';
+
+failOperation(
+  name: string,
+  failureReason: FailureReason, // 'error' | 'abandoned' | 'other'
+  options?: {
+    operationKey?: string,
+    context?: Context,
+    description?: string,
+  }
+)
 ```
 
 {{% /tab %}}
@@ -475,4 +532,5 @@ When you open an operation, RUM displays recommendation cards ranked by severity
 [22]: /monitors/types/metric/
 [23]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/
 [24]: /journey_monitoring/details_report/
+[25]: https://github.com/DataDog/electron-sdk
 

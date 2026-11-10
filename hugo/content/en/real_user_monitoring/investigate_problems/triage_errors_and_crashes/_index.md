@@ -40,7 +40,7 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=browser" >}}Browser{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/application_monitoring/electron/error_tracking" >}}Electron{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=electron" >}}Electron{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=flutter" >}}Flutter{{< /nextlink >}}
