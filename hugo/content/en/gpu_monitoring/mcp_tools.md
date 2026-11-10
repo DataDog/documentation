@@ -108,7 +108,7 @@ Restart the client, and log in to Datadog when prompted.
 
 ## Available tools
 
-This page covers the following tools in the `gpu-monitoring` toolset. For the full list of tools in the toolset, including required permissions and example prompts, see the [GPU Monitoring section of Datadog MCP Server Tools][6].
+The `gpu-monitoring` toolset includes the following tools. For required permissions and example prompts, see the [GPU Monitoring section of Datadog MCP Server Tools][6].
 
 `gpu_monitoring_list_inference_deployments`
 : Lists self-hosted LLM inference deployments (vLLM, SGLang, and NVIDIA Dynamo) with throughput, latency, error rate, KV cache usage, and a health verdict, worst first. Hosted model providers are not covered.
