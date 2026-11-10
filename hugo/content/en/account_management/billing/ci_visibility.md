@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-This guide provides a non-exhaustive list of billing considerations for [CI Visibility][1] and [Test Optimization][7].
+This guide provides a non-exhaustive list of billing considerations for CI/CD Optimization, which includes [CI Visibility][1] and [Test Optimization][7].
 
 ## Counting committers
 
@@ -65,7 +65,7 @@ Some Test Optimization features run or report tests on your behalf. The test spa
 
 These test spans are still ingested and indexed. You can search and analyze them in the [Test Optimization Explorer][12] like any other test span.
 
-The following test spans are still billed:
+The following test spans are billed:
 
 - Retries configured in your test framework.
 - Tests that you skip in your code or test framework configuration.
