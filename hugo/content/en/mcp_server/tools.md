@@ -1676,7 +1676,7 @@ Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. T
 
 Tools for [GPU Monitoring][97], including identifying the frameworks a GPU workload runs, mapping its hardware footprint, checking training progress, diagnosing host and GPU hardware health, and analyzing self-hosted LLM inference deployments.
 
-<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
+<div class="alert alert-info">The <code>gpu-monitoring</code> toolset is in Early Access Preview and is not included in <code>toolsets=all</code>. Contact your Customer Success Manager to request access, then add <code>gpu-monitoring</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,gpu-monitoring</code>. Your organization must have <a href="/gpu_monitoring/setup/">GPU Monitoring set up</a>.</div>
 
 All tools in this toolset are read-only. The workload tools are designed to be chained: start with `gpu_monitoring_orient_workload_tagging` and `gpu_monitoring_orient_hardware_inventory`, then pass the filters they return to the analysis tools.
 

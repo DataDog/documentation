@@ -8,6 +8,9 @@ further_reading:
 - link: "/mcp_server/setup"
   tag: "Documentation"
   text: "Set up the Datadog MCP Server"
+- link: "/mcp_server/tools/#gpu-monitoring"
+  tag: "Documentation"
+  text: "GPU Monitoring tools reference"
 - link: "/gpu_monitoring/inference"
   tag: "Documentation"
   text: "Monitor Inference Workloads with GPU Monitoring"
@@ -105,7 +108,7 @@ Restart the client, and log in to Datadog when prompted.
 
 ## Available tools
 
-The `gpu-monitoring` toolset includes the following tools:
+The `gpu-monitoring` toolset includes the following tools. For the full reference, including required permissions and example prompts, see the [GPU Monitoring section of Datadog MCP Server Tools][6].
 
 `gpu_monitoring_list_inference_deployments`
 : List your self-hosted inference deployments with their throughput, latency, and health verdict.
@@ -137,3 +140,4 @@ The `gpu-monitoring` toolset includes the following tools:
 [3]: /gpu_monitoring/setup/
 [4]: /account_management/rbac/permissions/
 [5]: /getting_started/site/
+[6]: /mcp_server/tools/#gpu-monitoring
