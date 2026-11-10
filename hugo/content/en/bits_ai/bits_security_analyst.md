@@ -240,6 +240,10 @@ To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Se
 
 You can create security notification rules to get a notification when Bits Security Analyst completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
 
+## Access investigations through the API
+
+Use the [Bits Security Analyst API][9], in Preview, to list investigations, look up the investigations of a signal, and get an investigation's verdict, conclusion, evidence, and suggested next steps. AI agents connected to the [Datadog MCP Server][10] can use the same API through [code execution][11], with no extra setup.
+
 ## Disable Bits Security Analyst
 
 1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
@@ -258,3 +262,6 @@ You can create security notification rules to get a notification when Bits Secur
 [6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
 [7]: /security/notifications/rules/#create-notification-rules
 [8]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst/knowledge-sources
+[9]: /api/latest/bits-security-analyst/
+[10]: /mcp_server/
+[11]: /mcp_server/code_execution/
