@@ -101,7 +101,7 @@ Because your AI client controls what it sends to its model provider, limiting wh
 
 Write operations require the corresponding permission, such as `monitors_write`, and the MCP Server checks it on each tool call. A read-only user's call to a write-enabled tool is rejected.
 
-Administrators can also turn off the MCP Server or its write tools for the entire organization, and restrict which actions each AI client can perform, even when a user has permission to perform those actions elsewhere in Datadog. See [Access Control for MCP][41].
+Administrators can also turn off the MCP Server or its write tools for the entire organization. They can restrict which actions each AI client can perform, even when a user can perform those actions elsewhere in Datadog. See [Access Control for MCP][41].
 
 ## Fair-use rate limits
 
