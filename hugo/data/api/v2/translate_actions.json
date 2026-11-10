@@ -1979,7 +1979,7 @@
     "request_schema_description": "Search issues request payload."
   },
   "GetIssue": {
-    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.",
+    "description": "Retrieve the full details for a specific error tracking issue, including attributes and relationships.\nReturns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.",
     "summary": "Get the details of an error tracking issue"
   },
   "DeleteIssueAssignee": {
