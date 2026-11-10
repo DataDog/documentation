@@ -231,6 +231,10 @@
     "name": "Elastic Cloud Integration",
     "description": "Manage your Datadog Elastic Cloud integration accounts and account resources\ndirectly through the Datadog API. See the\n[Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for\nmore information."
   },
+  "end-user-device-monitoring": {
+    "name": "End User Device Monitoring",
+    "description": "Inspect devices reported by the Datadog Agent on end-user laptops, desktops,\nand mobile devices, including their health, hardware, and connectivity attributes."
+  },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
     "description": "Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog."
