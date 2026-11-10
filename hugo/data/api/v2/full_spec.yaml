@@ -891,8 +891,8 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: |-
-        Comma-separated list of relationship objects that should be included in the response.
-        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
+        Values must not contain spaces. `case` and `assignee` return nothing, without an error, if the caller lacks the `cases_read` permission.
       explode: false
       in: query
       name: include
@@ -2194,7 +2194,8 @@ components:
       schema:
         $ref: "#/components/schemas/ServiceDefinitionSchemaVersions"
     SearchIssuesIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.case`, and `issue.team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.bits_investigation`, `issue.case`, `issue.impacted_sessions`, `issue.impacted_users`, `issue.pull_requests`, `issue.team_owners`, and `issue.watches`.
       explode: false
       in: query
       name: include
@@ -62357,16 +62358,22 @@ components:
       description: Relationship object that should be included in the response.
       enum:
         - assignee
+        - bits_investigation
         - case
-        - team_owners
+        - pull_requests
         - samples
+        - team_owners
+        - watches
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
+        - BITS_INVESTIGATION
         - CASE
-        - TEAM_OWNERS
+        - PULL_REQUESTS
         - SAMPLES
+        - TEAM_OWNERS
+        - WATCHES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -73268,6 +73275,36 @@ components:
         state:
           $ref: "#/components/schemas/IssueState"
       type: object
+    IssueBitsInvestigationReference:
+      description: The Bits AI investigation linked to the issue.
+      properties:
+        id:
+          description: Bits AI investigation identifier.
+          example: "6c2b3c2e-6b8f-4c3a-9a7e-1d2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueBitsInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    IssueBitsInvestigationRelationship:
+      description: |-
+        Bits AI investigation linked to the issue, returned when `bits_investigation` is requested
+        in the `include` query parameter.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueBitsInvestigationReference"
+      required:
+        - data
+      type: object
+    IssueBitsInvestigationType:
+      description: Type of the object.
+      enum: ["bits_investigation"]
+      example: "bits_investigation"
+      type: string
+      x-enum-varnames:
+        - BITS_INVESTIGATION
     IssueCase:
       description: The case attached to the issue.
       properties:
@@ -73337,6 +73374,10 @@ components:
           $ref: "#/components/schemas/CasePriority"
         status:
           $ref: "#/components/schemas/CaseStatus"
+        status_group:
+          $ref: "#/components/schemas/CaseStatusGroup"
+        status_name:
+          $ref: "#/components/schemas/CaseStatusName"
         title:
           description: Title of the case.
           example: "Error: HTTP error"
@@ -73488,6 +73529,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
         - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
@@ -73517,6 +73560,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
       example: "PYTHON"
@@ -73547,6 +73591,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
     IssuePlatform:
@@ -73555,6 +73600,7 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
@@ -73566,11 +73612,96 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
         - ROKU
         - UNKNOWN
+    IssuePullRequest:
+      description: A pull request linked to an issue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssuePullRequestAttributes"
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssuePullRequestAttributes:
+      description: Object containing the information of a pull request linked to an issue.
+      properties:
+        closed_at:
+          description: Timestamp of when the pull request was closed. Omitted if the pull request is not closed.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        linked_at:
+          description: Timestamp of when the pull request was linked to the issue.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        merged_at:
+          description: Timestamp of when the pull request was merged. Omitted if the pull request is not merged.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        reason:
+          $ref: "#/components/schemas/IssuePullRequestReason"
+        url:
+          description: URL of the pull request.
+          example: "https://github.com/DataDog/example/pull/123"
+          type: string
+      type: object
+    IssuePullRequestReason:
+      description: Why the pull request is linked to the issue. `fix` means the pull request fixes the issue, and `trigger` means the pull request introduced the issue.
+      enum:
+        - unknown
+        - fix
+        - trigger
+      example: "fix"
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - FIX
+        - TRIGGER
+    IssuePullRequestReference:
+      description: A pull request linked to the issue.
+      properties:
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+      type: object
+    IssuePullRequestType:
+      description: Type of the object.
+      enum: ["error_tracking_pull_request"]
+      example: "error_tracking_pull_request"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_PULL_REQUEST
+    IssuePullRequestsRelationship:
+      description: Relationship between the issue and its linked pull requests. Returned when `pull_requests` is included and the issue has linked pull requests.
+      properties:
+        data:
+          description: Array of pull requests linked to the issue.
+          items:
+            $ref: "#/components/schemas/IssuePullRequestReference"
+          type: array
+      required:
+        - data
+      type: object
     IssueReference:
       description: The issue the search result corresponds to.
       properties:
@@ -73606,16 +73737,22 @@ components:
         - regressed_at
       type: object
     IssueRelationships:
-      description: Relationship between the issue and an assignee, case and/or teams.
+      description: Relationship between the issue and other resources, such as an assignee, case, teams, pull requests, watches, samples, or a Bits AI investigation.
       properties:
         assignee:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
+        bits_investigation:
+          $ref: "#/components/schemas/IssueBitsInvestigationRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        pull_requests:
+          $ref: "#/components/schemas/IssuePullRequestsRelationship"
         samples:
           $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
+        watches:
+          $ref: "#/components/schemas/IssueWatchesRelationship"
       type: object
     IssueResponse:
       description: Response containing error tracking issue data.
@@ -74122,6 +74259,146 @@ components:
       type: string
       x-enum-varnames:
         - USER
+    IssueWatch:
+      description: |-
+        An active watch on an issue. A watch moves an ignored issue back to open when its condition is met.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueWatchAttributes"
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueWatchAction:
+      description: Action applied to the issue when the watch condition is met.
+      properties:
+        from:
+          $ref: "#/components/schemas/IssueState"
+        kind:
+          $ref: "#/components/schemas/IssueWatchActionKind"
+        to:
+          $ref: "#/components/schemas/IssueState"
+      required:
+        - kind
+      type: object
+    IssueWatchActionKind:
+      description: Kind of watch action.
+      enum:
+        - CHANGE_ISSUE_STATE
+      example: "CHANGE_ISSUE_STATE"
+      type: string
+      x-enum-varnames:
+        - CHANGE_ISSUE_STATE
+    IssueWatchAttributes:
+      description: Object containing the information of a watch.
+      properties:
+        action:
+          $ref: "#/components/schemas/IssueWatchAction"
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+        started_at:
+          description: Timestamp of when the watch started.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/IssueWatchStatus"
+      type: object
+    IssueWatchCondition:
+      description: |-
+        Condition that triggers the watch action. The fields that are set depend on `kind`:
+        `OCCURRENCES` uses `threshold`, `CARDINALITY` uses `threshold` and `projection`,
+        `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
+      properties:
+        duration:
+          description: Time that must elapse before the condition is met, as a Go duration string.
+          example: "168h0m0s"
+          type: string
+        kind:
+          $ref: "#/components/schemas/IssueWatchConditionKind"
+        operands:
+          description: Nested conditions combined by `ANY` or `ALL`.
+          items:
+            $ref: "#/components/schemas/IssueWatchCondition"
+          type: array
+        projection:
+          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          example: ["@usr.id"]
+          items:
+            description: Attribute path.
+            example: "@usr.id"
+            type: string
+          type: array
+        threshold:
+          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          example: 100
+          format: int64
+          type: integer
+      required:
+        - kind
+      type: object
+    IssueWatchConditionKind:
+      description: Kind of watch condition.
+      enum:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+      example: "OCCURRENCES"
+      type: string
+      x-enum-varnames:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+    IssueWatchReference:
+      description: An active watch on the issue.
+      properties:
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+      type: object
+    IssueWatchStatus:
+      description: Status of the watch.
+      enum:
+        - ACTIVE
+      example: "ACTIVE"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+    IssueWatchType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_watch"]
+      example: "error_tracking_issue_watch"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_WATCH
+    IssueWatchesRelationship:
+      description: Relationship between the issue and its active watches. Returned when `watches` is included and the issue has an active watch.
+      properties:
+        data:
+          description: Array of active watches on the issue.
+          items:
+            $ref: "#/components/schemas/IssueWatchReference"
+          type: array
+      required:
+        - data
+      type: object
     IssuesSearchRequest:
       description: Search issues request payload.
       properties:
@@ -74272,12 +74549,20 @@ components:
       description: Object containing the information of a search result.
       properties:
         impacted_sessions:
-          description: Count of sessions impacted by the issue over the queried time window.
+          description: |-
+            Count of sessions impacted by the issue over the queried time window.
+            Returned for RUM, LLM Observability, browser, and mobile searches,
+            or when `issue.impacted_sessions` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 12
           format: int64
           type: integer
         impacted_users:
-          description: Count of users impacted by the issue over the queried time window.
+          description: |-
+            Count of users impacted by the issue over the queried time window.
+            Returned for RUM, browser, and mobile searches,
+            or when `issue.impacted_users` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 4
           format: int64
           type: integer
@@ -74294,6 +74579,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
     IssuesSearchResultIssueRelationship:
       description: Relationship between the search result and the corresponding issue.
       properties:
@@ -122257,15 +122544,25 @@ components:
       enum:
         - issue
         - issue.assignee
+        - issue.bits_investigation
         - issue.case
+        - issue.impacted_sessions
+        - issue.impacted_users
+        - issue.pull_requests
         - issue.team_owners
+        - issue.watches
       example: "issue.case"
       type: string
       x-enum-varnames:
         - ISSUE
         - ISSUE_ASSIGNEE
+        - ISSUE_BITS_INVESTIGATION
         - ISSUE_CASE
+        - ISSUE_IMPACTED_SESSIONS
+        - ISSUE_IMPACTED_USERS
+        - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
+        - ISSUE_WATCHES
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -181008,7 +181305,9 @@ paths:
       x-menu-order: 1
   /api/v2/error-tracking/issues/{issue_id}:
     get:
-      description: Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+      description: |-
+        Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.
       operationId: GetIssue
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
