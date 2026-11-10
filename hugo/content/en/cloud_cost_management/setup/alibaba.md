@@ -1,7 +1,5 @@
 ---
 title: Alibaba Cloud
-aliases:
-- /cloud_cost_management/alibaba/
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -21,11 +19,12 @@ further_reading:
 ---
 
 
-## Overview
+## Prerequisites
 
-To set up Cloud Cost Management for Alibaba Cloud in Datadog, you should:
-1. Have an Alibaba Cloud account on the international site
-2. Have the [Alibaba Cloud integration][1] installed in Datadog
+Before you set up Cloud Cost Management for Alibaba Cloud, make sure you have:
+
+- An Alibaba Cloud account on the international site
+- The [Alibaba Cloud integration][1] installed in Datadog
 
 ## Setup
 
@@ -39,32 +38,32 @@ In the **Expenses and Costs** console, go to **Bills > Bill Subscription** and c
 Alibaba Cloud regenerates the current month's cost report daily and finalizes it a few days after the end of the month. Costs are billed in USD on the international site.
 
 ### Configure the Alibaba Cloud integration
-Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account and follow the steps to configure the Alibaba Cloud integration.
+Navigate to [Provider Settings on the cloud cost page][2], add an Alibaba Cloud account, and follow the steps to configure the Alibaba Cloud integration.
 
 ### Enable Cloud Cost Management
 In the Alibaba Cloud integration tile, enable the toggle for Cloud Cost Management and provide:
 - The OSS bucket name, region, and prefix path where the FOCUS cost reports are delivered
-- The AccessKey pair of a RAM user with the `ReadOnlyAccess` policy attached
+- The AccessKey pair of a Resource Access Management (RAM) user with the `ReadOnlyAccess` policy attached
 
-### Getting historical data
+### Historical data
 
 Datadog automatically ingests up to 12 months of available historical cost data from your subscribed FOCUS bill exports.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
-| Cost Type                                       | Description |
+| Cost type                                       | Description |
 |-------------------------------------------------| ----------------------------------|
 | `alibaba_cloud.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include all applicable discounts. |
-| `alibaba_cloud.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
+| `alibaba_cloud.cost.ondemand`                             | Total public, on-demand cost of resources over an interval, before public and private discounts are applied. |
 | `alibaba_cloud.usage`                                    | Usage quantity of resources over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data and helps you further break down and allocate your costs. These tags are derived from your FOCUS cost export and make it easier to discover and understand cost data.
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your FOCUS cost export and help you discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
 
-| Tag Name                         | Tag Description       |
+| Tag name                         | Tag description       |
 | ---------------------------- | ----------------- |
 | `billingaccountid`           | The identifier assigned to a billing account by the provider.|
 | `billingaccountname`          | The display name assigned to a billing account.|
@@ -79,7 +78,7 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `commitmentdiscounttype`| A provider-assigned name to identify the type of commitment discount applied.|
 | `invoiceissuer` | The entity responsible for invoicing for the resources or services consumed.|
 | `pricingcategory` | Describes the pricing model used for a charge at the time of use or purchase.|
-| `pricingunit` | Provider-specified measurement unit for determining unit prices, indicating how the provider rates measured usage and purchase quantities after applying pricing rules like block pricing.|
+| `pricingunit` | Provider-specified measurement unit for determining unit prices, indicating how the provider rates measured usage and purchase quantities after applying pricing rules such as block pricing.|
 | `providername` | The name of the entity that made the resources or services available for purchase.|
 | `publishername` | The name of the entity that produces the resources or services that were purchased.|
 | `region` | A provider-assigned display name for an isolated geographic area where a resource is provisioned or a service is provided.|
@@ -87,10 +86,10 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `resourcename` | A display name assigned to a resource.|
 | `resourcetype` | Describes the kind of resource the charge applies to.|
 | `servicecategory` | The highest-level classification of a service based on the core function of the service.|
-| `servicename` | An offering that can be purchased from a provider (e.g. cloud virtual machine, SaaS database, professional services from a systems integrator).|
+| `servicename` | An offering that can be purchased from a provider (for example, cloud virtual machine, SaaS database, or professional services from a systems integrator).|
 | `skuid` | A provider-specified unique identifier that represents a specific SKU.|
-| `subaccountid` | An ID assigned to a grouping of resources or services, often used to manage access and/or cost.|
-| `subaccountname` | A name assigned to a grouping of resources or services to manage access and/or cost.|
+| `subaccountid` | An ID assigned to a grouping of resources or services, often used to manage access, cost, or both.|
+| `subaccountname` | A name assigned to a grouping of resources or services to manage access, cost, or both.|
 | `usageunit` | A provider-specified measurement unit, indicating how the provider rates measured usage and purchase quantities.|
 | `x_instanceid` | The instance identifier for the resource associated with the charge.|
 
