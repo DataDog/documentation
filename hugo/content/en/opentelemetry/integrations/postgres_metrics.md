@@ -8,8 +8,7 @@ further_reading:
 
 ## Overview
 
-<!-- TODO: Add dashboard screenshot once available -->
-<!-- {{< img src="/opentelemetry/collector_exporter/postgres_metrics.png" alt="OpenTelemetry PostgreSQL metrics in a PostgreSQL dashboard" style="width:100%;" >}} -->
+{{< img src="/opentelemetry/collector_exporter/postgres_metrics.png" alt="The Postgres - Overview dashboard, showing tiles for max connections in use and rows fetched and returned, and a graph of dead rows." style="width:100%;" >}}
 
 The [PostgreSQL receiver][1] allows for collection of PostgreSQL metrics and access to the [PostgreSQL Overview][2] and [PostgreSQL Metrics][3] dashboards. Configure the receiver according to the specifications of the latest version of the `postgresqlreceiver`.
 
