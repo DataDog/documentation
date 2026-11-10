@@ -40,7 +40,7 @@ After you save the rule, it may take about a minute to take effect.
 
 Env remapping rules override the `env` tag at intake. Creating a rule does not change any preexisting configuration that specifies an environment name. Env remapping rules take precedence over all other environment name configurations.
 
-- **Impacted data**: Env remapping applies to APM, Metrics, and Logs only.
+- **Impacted data**: Env remapping applies to APM, metrics, and logs only.
 - **Historical data**: Env remapping rules apply only to data ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new data, but does not update previously ingested data.
 - **Rule processing order**: Env remapping rules apply in the order in which they were created. Rules at the top of the env remapping list take precedence over rules below them. You can change the order of the rules.
 - **Regular expressions**: Use regular expressions to define new environment names. Greedy quantifiers are not allowed inside the capture group.
