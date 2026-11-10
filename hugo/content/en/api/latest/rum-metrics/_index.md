@@ -1,3 +1,3 @@
 ---
-title: RUM Metrics
+title: Rum Metrics
 ---
