@@ -10,8 +10,6 @@ further_reading:
   text: "Prompt Templating"
 ---
 
-## Overview
-
 Datadog keeps a numbered version of every change you save to a custom evaluator. Each evaluation result records the version that produced it, so you can:
 
 - See what changed between two versions of an evaluator
@@ -28,7 +26,7 @@ Saving an evaluator creates a version. Only one version, the published version, 
 - {{< ui >}}Save and Publish{{< /ui >}}: Saves your changes as a new version and publishes it. The new version starts running, and the previously published version stops.
 - {{< ui >}}Save as Draft{{< /ui >}}: Saves your changes as a new version without publishing it. The published version keeps running, and the draft produces no results. An evaluator has at most one draft. Saving the draft again updates it instead of creating another version.
 - {{< ui >}}Publish{{< /ui >}}: When you view a draft, the {{< ui >}}Save and Publish{{< /ui >}} button reads {{< ui >}}Publish{{< /ui >}}. Selecting it makes the draft the published version.
-- {{< ui >}}Enable{{< /ui >}} and {{< ui >}}Disable{{< /ui >}}: In the evaluator's options menu, these start or stop the evaluator without creating a version.
+- {{< ui >}}Enable{{< /ui >}} and {{< ui >}}Disable{{< /ui >}}: In the evaluator's options menu, {{< ui >}}Enable{{< /ui >}} and {{< ui >}}Disable{{< /ui >}} start or stop the evaluator without creating a version.
 
 The editor shows whether the version you are viewing is {{< ui >}}Published{{< /ui >}} or {{< ui >}}Draft{{< /ui >}}.
 
@@ -70,7 +68,7 @@ For example:
 @evaluation.helpfulness-check.eval_version:3
 ```
 
-Results that were produced before an evaluator had versions do not include a version.
+Results produced before an evaluator had versions do not include a version.
 
 ## Further Reading
 
