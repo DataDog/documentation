@@ -891,8 +891,8 @@ components:
         type: string
     GetIssueIncludeQueryParameter:
       description: |-
-        Comma-separated list of relationship objects that should be included in the response.
-        Possible values are `assignee`, `case`, `team_owners`, and `samples`.
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `assignee`, `bits_investigation`, `case`, `pull_requests`, `samples`, `team_owners`, and `watches`.
+        Values must not contain spaces. `case` and `assignee` return nothing, without an error, if the caller lacks the `cases_read` permission.
       explode: false
       in: query
       name: include
@@ -2194,7 +2194,8 @@ components:
       schema:
         $ref: "#/components/schemas/ServiceDefinitionSchemaVersions"
     SearchIssuesIncludeQueryParameter:
-      description: Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.case`, and `issue.team_owners`.
+      description: |-
+        Comma-separated list of relationship objects that should be included in the response. Possible values are `issue`, `issue.assignee`, `issue.bits_investigation`, `issue.case`, `issue.impacted_sessions`, `issue.impacted_users`, `issue.pull_requests`, `issue.team_owners`, and `issue.watches`.
       explode: false
       in: query
       name: include
@@ -2656,7 +2657,7 @@ components:
       description: |-
         The trace ID. Accepts either a hexadecimal string of up to 32 characters (128-bit trace ID)
         or a decimal string of up to 39 digits. Hexadecimal IDs are case-insensitive, and shorter
-        values are left-padded with zeros.
+        values are left-padded with zeros. Values made only of digits are treated as decimal.
         Use the `trace_id` attribute of a span returned by the Search spans or Get a list of spans endpoints.
         Values in any other format, such as UUIDs, return `400 Bad Request`. A well-formed ID with
         no matching trace returns `404 Not Found`.
@@ -3899,11 +3900,13 @@ components:
           type: integer
         traceID:
           description: The lower 64 bits of the trace ID, as an unsigned 64-bit integer.
-          example: 12345678901234567890
+          example: 12376211733897805824
           format: int64
           type: integer
         traceIDFull:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -5588,6 +5591,16 @@ components:
         xray_services:
           $ref: "#/components/schemas/XRayServicesList"
       type: object
+    AccessPolicyEffect:
+      description: The effect applied when an email address matches the policy. Deny policies take precedence over allow policies.
+      enum:
+        - allow
+        - deny
+      example: allow
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
     AccessTokenListItem:
       description: An access token entry returned by the personal access tokens list endpoint. May represent either a personal or a service access token.
       properties:
@@ -5901,6 +5914,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegration"
         - $ref: "#/components/schemas/GCPIntegration"
         - $ref: "#/components/schemas/GeminiIntegration"
+        - $ref: "#/components/schemas/GithubIntegration"
         - $ref: "#/components/schemas/GitlabIntegration"
         - $ref: "#/components/schemas/GreyNoiseIntegration"
         - $ref: "#/components/schemas/HTTPIntegration"
@@ -5928,6 +5942,7 @@ components:
         - $ref: "#/components/schemas/FreshserviceIntegrationUpdate"
         - $ref: "#/components/schemas/GCPIntegrationUpdate"
         - $ref: "#/components/schemas/GeminiIntegrationUpdate"
+        - $ref: "#/components/schemas/GithubIntegrationUpdate"
         - $ref: "#/components/schemas/GitlabIntegrationUpdate"
         - $ref: "#/components/schemas/GreyNoiseIntegrationUpdate"
         - $ref: "#/components/schemas/HTTPIntegrationUpdate"
@@ -32480,6 +32495,38 @@ components:
       type: string
       x-enum-varnames:
         - CREATE_SNAPSHOT
+    CreateStatusPageEmailAccessPolicyRequest:
+      description: Request object for creating a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestData"
+      required:
+        - data
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestData:
+      description: The data object for creating a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - type
+      type: object
+    CreateStatusPageEmailAccessPolicyRequestDataAttributes:
+      description: Attributes for creating a status page email access policy.
+      properties:
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy. Supports an exact address (`user@example.com`), all addresses in a domain (`@example.com`), or all addresses in subdomains (`@*.example.com`).
+          example: "@example.com"
+          type: string
+      required:
+        - effect
+        - pattern
+      type: object
     CreateStatusPageRequest:
       description: Request object for creating a status page.
       example:
@@ -32507,6 +32554,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: true
             type: public
             visualization_type: bars_and_uptime_percentage
@@ -32556,17 +32604,23 @@ components:
             $ref: "#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems"
           type: array
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -32575,7 +32629,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -32645,15 +32700,17 @@ components:
           $ref: "#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType"
       type: object
     CreateStatusPageRequestDataAttributesType:
-      description: The type of the status page controlling how the status page is accessed.
+      description: The type of the status page controlling how the status page is accessed. Public pages are accessible to anyone, internal pages are accessible to authenticated users in the Datadog organization, and private pages are accessible only to users matching an allow email access policy and no deny email access policy.
       enum:
         - public
         - internal
+        - private
       example: public
       type: string
       x-enum-varnames:
         - PUBLIC
         - INTERNAL
+        - PRIVATE
     CreateStatusPageRequestDataAttributesVisualizationLayout:
       description: The layout of components on the status page. Defaults to `list`. `grid` requires `visualization_type` to be `component_name_only`; changing `visualization_type` to any other value resets the layout to `list`.
       enum:
@@ -62301,16 +62358,22 @@ components:
       description: Relationship object that should be included in the response.
       enum:
         - assignee
+        - bits_investigation
         - case
-        - team_owners
+        - pull_requests
         - samples
+        - team_owners
+        - watches
       example: "case"
       type: string
       x-enum-varnames:
         - ASSIGNEE
+        - BITS_INVESTIGATION
         - CASE
-        - TEAM_OWNERS
+        - PULL_REQUESTS
         - SAMPLES
+        - TEAM_OWNERS
+        - WATCHES
     GetMappingResponse:
       description: Response containing the entity attribute mapping configuration including all available attributes and their properties.
       example:
@@ -63091,6 +63154,187 @@ components:
       description: "Git Repository URL"
       example: "https://github.com/organization/example-repository"
       type: string
+    GithubApp:
+      description: GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppPrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+        - github_app_id
+        - github_installation_id
+        - private_key
+      type: object
+    GithubAppGithubAppId:
+      description: The numeric ID of the GitHub App.
+      example: "123456"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      example: "789012"
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppPrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppType:
+      description: The credential type for `GithubApp`.
+      enum:
+        - GithubApp
+      example: GithubApp
+      type: string
+      x-enum-varnames:
+        - GITHUBAPP
+    GithubAppUpdate:
+      description: Update to GitHub App credentials.
+      properties:
+        github_app_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubAppId"
+        github_installation_id:
+          $ref: "#/components/schemas/GithubAppUpdateGithubInstallationId"
+        hostname:
+          $ref: "#/components/schemas/GithubAppUpdateHostname"
+        private_key:
+          $ref: "#/components/schemas/GithubAppUpdatePrivateKey"
+        type:
+          $ref: "#/components/schemas/GithubAppType"
+      required:
+        - type
+      type: object
+    GithubAppUpdateGithubAppId:
+      description: The numeric ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateGithubInstallationId:
+      description: The installation ID of the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubAppUpdatePrivateKey:
+      description: PEM-encoded RSA private key for the GitHub App.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubCredentials:
+      description: Supported GitHub connection credentials.
+      oneOf:
+        - $ref: "#/components/schemas/GithubApp"
+        - $ref: "#/components/schemas/GithubPersonalAccessToken"
+    GithubCredentialsUpdate:
+      description: Supported GitHub connection credentials for an update.
+      oneOf:
+        - $ref: "#/components/schemas/GithubAppUpdate"
+        - $ref: "#/components/schemas/GithubPersonalAccessTokenUpdate"
+    GithubIntegration:
+      description: GitHub connection integration.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentials"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+        - credentials
+      type: object
+    GithubIntegrationType:
+      description: The GitHub integration type.
+      enum:
+        - Github
+      example: Github
+      type: string
+      x-enum-varnames:
+        - GITHUB
+    GithubIntegrationUpdate:
+      description: GitHub connection integration update.
+      properties:
+        credentials:
+          $ref: "#/components/schemas/GithubCredentialsUpdate"
+        type:
+          $ref: "#/components/schemas/GithubIntegrationType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessToken:
+      description: GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+        - access_token
+      type: object
+    GithubPersonalAccessTokenAccessToken:
+      description: GitHub personal access token.
+      example: ""
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      example: github.example.com
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenType:
+      description: The credential type for `GithubPersonalAccessToken`.
+      enum:
+        - GithubPersonalAccessToken
+      example: GithubPersonalAccessToken
+      type: string
+      x-enum-varnames:
+        - GITHUBPERSONALACCESSTOKEN
+    GithubPersonalAccessTokenUpdate:
+      description: Update to GitHub personal access token credentials.
+      properties:
+        access_token:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateAccessToken"
+        hostname:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenUpdateHostname"
+        type:
+          $ref: "#/components/schemas/GithubPersonalAccessTokenType"
+      required:
+        - type
+      type: object
+    GithubPersonalAccessTokenUpdateAccessToken:
+      description: GitHub personal access token.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
+    GithubPersonalAccessTokenUpdateHostname:
+      description: Hostname of the GitHub Enterprise Server. Omit this field for github.com.
+      oneOf:
+        - $ref: "#/components/schemas/ActionConnectionLiteralValue"
+        - $ref: "#/components/schemas/ActionConnectionAWSSecretsManagerReference"
     GithubWebhookTrigger:
       description: 'Trigger a workflow from a GitHub webhook. To trigger a workflow from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id", select application/json for the content type, and be highly recommend enabling SSL verification for security. The workflow must be published.'
       properties:
@@ -73031,6 +73275,36 @@ components:
         state:
           $ref: "#/components/schemas/IssueState"
       type: object
+    IssueBitsInvestigationReference:
+      description: The Bits AI investigation linked to the issue.
+      properties:
+        id:
+          description: Bits AI investigation identifier.
+          example: "6c2b3c2e-6b8f-4c3a-9a7e-1d2f3a4b5c6d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueBitsInvestigationType"
+      required:
+        - id
+        - type
+      type: object
+    IssueBitsInvestigationRelationship:
+      description: |-
+        Bits AI investigation linked to the issue, returned when `bits_investigation` is requested
+        in the `include` query parameter.
+      properties:
+        data:
+          $ref: "#/components/schemas/IssueBitsInvestigationReference"
+      required:
+        - data
+      type: object
+    IssueBitsInvestigationType:
+      description: Type of the object.
+      enum: ["bits_investigation"]
+      example: "bits_investigation"
+      type: string
+      x-enum-varnames:
+        - BITS_INVESTIGATION
     IssueCase:
       description: The case attached to the issue.
       properties:
@@ -73100,6 +73374,10 @@ components:
           $ref: "#/components/schemas/CasePriority"
         status:
           $ref: "#/components/schemas/CaseStatus"
+        status_group:
+          $ref: "#/components/schemas/CaseStatusGroup"
+        status_name:
+          $ref: "#/components/schemas/CaseStatusName"
         title:
           description: Title of the case.
           example: "Error: HTTP error"
@@ -73251,6 +73529,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
         - $ref: "#/components/schemas/IssueSample"
     IssueLanguage:
       description: Programming language associated with the issue.
@@ -73280,6 +73560,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
       example: "PYTHON"
@@ -73310,6 +73591,7 @@ components:
         - SCALA
         - SWIFT
         - TERRAFORM
+        - TF
         - TYPESCRIPT
         - UNKNOWN
     IssuePlatform:
@@ -73318,6 +73600,7 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
@@ -73329,11 +73612,96 @@ components:
         - ANDROID
         - BACKEND
         - BROWSER
+        - ELECTRON
         - FLUTTER
         - IOS
         - REACT_NATIVE
         - ROKU
         - UNKNOWN
+    IssuePullRequest:
+      description: A pull request linked to an issue.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssuePullRequestAttributes"
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssuePullRequestAttributes:
+      description: Object containing the information of a pull request linked to an issue.
+      properties:
+        closed_at:
+          description: Timestamp of when the pull request was closed. Omitted if the pull request is not closed.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        linked_at:
+          description: Timestamp of when the pull request was linked to the issue.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        merged_at:
+          description: Timestamp of when the pull request was merged. Omitted if the pull request is not merged.
+          example: "2025-01-02T00:00:00Z"
+          format: date-time
+          type: string
+        reason:
+          $ref: "#/components/schemas/IssuePullRequestReason"
+        url:
+          description: URL of the pull request.
+          example: "https://github.com/DataDog/example/pull/123"
+          type: string
+      type: object
+    IssuePullRequestReason:
+      description: Why the pull request is linked to the issue. `fix` means the pull request fixes the issue, and `trigger` means the pull request introduced the issue.
+      enum:
+        - unknown
+        - fix
+        - trigger
+      example: "fix"
+      type: string
+      x-enum-varnames:
+        - UNKNOWN
+        - FIX
+        - TRIGGER
+    IssuePullRequestReference:
+      description: A pull request linked to the issue.
+      properties:
+        id:
+          description: Pull request link identifier.
+          example: "b3c1d2e4-5f6a-4b7c-8d9e-0f1a2b3c4d5e"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssuePullRequestType"
+      required:
+        - id
+        - type
+      type: object
+    IssuePullRequestType:
+      description: Type of the object.
+      enum: ["error_tracking_pull_request"]
+      example: "error_tracking_pull_request"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_PULL_REQUEST
+    IssuePullRequestsRelationship:
+      description: Relationship between the issue and its linked pull requests. Returned when `pull_requests` is included and the issue has linked pull requests.
+      properties:
+        data:
+          description: Array of pull requests linked to the issue.
+          items:
+            $ref: "#/components/schemas/IssuePullRequestReference"
+          type: array
+      required:
+        - data
+      type: object
     IssueReference:
       description: The issue the search result corresponds to.
       properties:
@@ -73369,16 +73737,22 @@ components:
         - regressed_at
       type: object
     IssueRelationships:
-      description: Relationship between the issue and an assignee, case and/or teams.
+      description: Relationship between the issue and other resources, such as an assignee, case, teams, pull requests, watches, samples, or a Bits AI investigation.
       properties:
         assignee:
           $ref: "#/components/schemas/IssueAssigneeRelationship"
+        bits_investigation:
+          $ref: "#/components/schemas/IssueBitsInvestigationRelationship"
         case:
           $ref: "#/components/schemas/IssueCaseRelationship"
+        pull_requests:
+          $ref: "#/components/schemas/IssuePullRequestsRelationship"
         samples:
           $ref: "#/components/schemas/IssueSamplesRelationship"
         team_owners:
           $ref: "#/components/schemas/IssueTeamOwnersRelationship"
+        watches:
+          $ref: "#/components/schemas/IssueWatchesRelationship"
       type: object
     IssueResponse:
       description: Response containing error tracking issue data.
@@ -73885,6 +74259,146 @@ components:
       type: string
       x-enum-varnames:
         - USER
+    IssueWatch:
+      description: |-
+        An active watch on an issue. A watch moves an ignored issue back to open when its condition is met.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IssueWatchAttributes"
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IssueWatchAction:
+      description: Action applied to the issue when the watch condition is met.
+      properties:
+        from:
+          $ref: "#/components/schemas/IssueState"
+        kind:
+          $ref: "#/components/schemas/IssueWatchActionKind"
+        to:
+          $ref: "#/components/schemas/IssueState"
+      required:
+        - kind
+      type: object
+    IssueWatchActionKind:
+      description: Kind of watch action.
+      enum:
+        - CHANGE_ISSUE_STATE
+      example: "CHANGE_ISSUE_STATE"
+      type: string
+      x-enum-varnames:
+        - CHANGE_ISSUE_STATE
+    IssueWatchAttributes:
+      description: Object containing the information of a watch.
+      properties:
+        action:
+          $ref: "#/components/schemas/IssueWatchAction"
+        condition:
+          $ref: "#/components/schemas/IssueWatchCondition"
+        started_at:
+          description: Timestamp of when the watch started.
+          example: "2025-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/IssueWatchStatus"
+      type: object
+    IssueWatchCondition:
+      description: |-
+        Condition that triggers the watch action. The fields that are set depend on `kind`:
+        `OCCURRENCES` uses `threshold`, `CARDINALITY` uses `threshold` and `projection`,
+        `ELAPSED_TIME` uses `duration`, and `ANY` and `ALL` use `operands`.
+      properties:
+        duration:
+          description: Time that must elapse before the condition is met, as a Go duration string.
+          example: "168h0m0s"
+          type: string
+        kind:
+          $ref: "#/components/schemas/IssueWatchConditionKind"
+        operands:
+          description: Nested conditions combined by `ANY` or `ALL`.
+          items:
+            $ref: "#/components/schemas/IssueWatchCondition"
+          type: array
+        projection:
+          description: Attributes whose distinct values are counted for `CARDINALITY`.
+          example: ["@usr.id"]
+          items:
+            description: Attribute path.
+            example: "@usr.id"
+            type: string
+          type: array
+        threshold:
+          description: Number of occurrences, or of distinct values for `CARDINALITY`, that triggers the condition.
+          example: 100
+          format: int64
+          type: integer
+      required:
+        - kind
+      type: object
+    IssueWatchConditionKind:
+      description: Kind of watch condition.
+      enum:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+      example: "OCCURRENCES"
+      type: string
+      x-enum-varnames:
+        - OCCURRENCES
+        - CARDINALITY
+        - ELAPSED_TIME
+        - ANY
+        - ALL
+    IssueWatchReference:
+      description: An active watch on the issue.
+      properties:
+        id:
+          description: Watch identifier.
+          example: "e7a1c3b5-2d4f-4a6b-8c9d-0e1f2a3b4c5d"
+          type: string
+        type:
+          $ref: "#/components/schemas/IssueWatchType"
+      required:
+        - id
+        - type
+      type: object
+    IssueWatchStatus:
+      description: Status of the watch.
+      enum:
+        - ACTIVE
+      example: "ACTIVE"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+    IssueWatchType:
+      description: Type of the object.
+      enum: ["error_tracking_issue_watch"]
+      example: "error_tracking_issue_watch"
+      type: string
+      x-enum-varnames:
+        - ERROR_TRACKING_ISSUE_WATCH
+    IssueWatchesRelationship:
+      description: Relationship between the issue and its active watches. Returned when `watches` is included and the issue has an active watch.
+      properties:
+        data:
+          description: Array of active watches on the issue.
+          items:
+            $ref: "#/components/schemas/IssueWatchReference"
+          type: array
+      required:
+        - data
+      type: object
     IssuesSearchRequest:
       description: Search issues request payload.
       properties:
@@ -74035,12 +74549,20 @@ components:
       description: Object containing the information of a search result.
       properties:
         impacted_sessions:
-          description: Count of sessions impacted by the issue over the queried time window.
+          description: |-
+            Count of sessions impacted by the issue over the queried time window.
+            Returned for RUM, LLM Observability, browser, and mobile searches,
+            or when `issue.impacted_sessions` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 12
           format: int64
           type: integer
         impacted_users:
-          description: Count of users impacted by the issue over the queried time window.
+          description: |-
+            Count of users impacted by the issue over the queried time window.
+            Returned for RUM, browser, and mobile searches,
+            or when `issue.impacted_users` is requested in the `include` query parameter.
+            Omitted when zero unless requested in the `include` query parameter.
           example: 4
           format: int64
           type: integer
@@ -74057,6 +74579,8 @@ components:
         - $ref: "#/components/schemas/IssueCase"
         - $ref: "#/components/schemas/IssueUser"
         - $ref: "#/components/schemas/IssueTeam"
+        - $ref: "#/components/schemas/IssuePullRequest"
+        - $ref: "#/components/schemas/IssueWatch"
     IssuesSearchResultIssueRelationship:
       description: Relationship between the search result and the corresponding issue.
       properties:
@@ -87107,9 +87631,23 @@ components:
           example: 10
           format: int64
           type: integer
+        indexed_volume_delta:
+          description: |-
+            Change in `indexed_volume` compared with the previous hour: the last hour's value minus the value for
+            the hour before. Negative when volume decreased.
+          example: 2
+          format: int64
+          type: integer
         ingested_volume:
           description: Estimated average hourly number of ingested time series for the given metric over the last hour. This value is `0` for metrics not configured with Metrics Without Limits. For organizations on Metric Name Pricing, this represents the estimated sum of ingested data points over the last hour.
           example: 20
+          format: int64
+          type: integer
+        ingested_volume_delta:
+          description: |-
+            Change in `ingested_volume` compared with the previous hour: the last hour's value minus the value for
+            the hour before. Negative when volume decreased.
+          example: 4
           format: int64
           type: integer
       type: object
@@ -87587,14 +88125,12 @@ components:
         - data
       type: object
     MetricTagConfigurationMetricTypeCategory:
-      default: distribution
       description: The metric's type category.
       enum:
         - non_distribution
         - distribution
         - exponential_histogram
         - explicit_histogram
-      example: distribution
       type: string
       x-enum-varnames:
         - NON_DISTRIBUTION
@@ -104616,6 +105152,7 @@ components:
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
+            slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
             subscriptions_enabled: false
             type: internal
             visualization_type: bars_only
@@ -104650,17 +105187,23 @@ components:
           example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
           type: string
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           example: status-page-us1
           type: string
         email_header_image:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           example: Status Page US1
@@ -104669,7 +105212,8 @@ components:
           description: Whether the RSS feed is enabled for the status page.
           type: boolean
         slack_app_icon:
-          description: The Slack app icon URL for the status page.
+          description: The base64-encoded image data used as the Slack app icon.
+          example: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -109723,7 +110267,9 @@ components:
         attributes:
           $ref: "#/components/schemas/PrunedTraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
         type:
@@ -111012,9 +111558,12 @@ components:
       description: The definition of a RUM operation's journey, used to detect it from RUM events.
       properties:
         rum_steps:
-          description: The ordered list of steps composing the RUM journey.
+          description: |-
+            The ordered list of steps composing the RUM journey.
+            `null` when the operation has no steps. On create and update, `null` and an empty list are equivalent.
           items:
             $ref: "#/components/schemas/RUMOperationJourneyStep"
+          nullable: true
           type: array
       required:
         - rum_steps
@@ -111134,6 +111683,7 @@ components:
           description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
+          nullable: true
           type: array
         journey_rum:
           $ref: "#/components/schemas/RUMOperationJourneyRum"
@@ -111152,6 +111702,7 @@ components:
             - "team:checkout"
           items:
             type: string
+          nullable: true
           type: array
         updated_at:
           description: The timestamp when the RUM operation was last updated.
@@ -111421,7 +111972,8 @@ components:
         - attributes
       type: object
     RUMOperationUser:
-      description: A Datadog user referenced by a RUM operation.
+      description: A Datadog user referenced by a RUM operation. `null` when the user could not be resolved.
+      nullable: true
       properties:
         email:
           description: The email of the user.
@@ -111437,6 +111989,7 @@ components:
           type: string
         uuid:
           description: The UUID of the user.
+          example: "abc12345-1234-5678-abcd-ef1234567890"
           readOnly: true
           type: string
       type: object
@@ -111447,10 +112000,36 @@ components:
           items:
             $ref: "#/components/schemas/RUMOperationResponseData"
           type: array
+        links:
+          $ref: "#/components/schemas/RUMOperationsListResponseLinks"
         meta:
           $ref: "#/components/schemas/RUMOperationsListResponseMeta"
       required:
         - data
+      type: object
+    RUMOperationsListResponseLinks:
+      description: Pagination links for a list of RUM operations.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        last:
+          description: Link to the last page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=150"
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=100"
+          type: string
+        prev:
+          description: Link to the previous page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=50"
+          type: string
       type: object
     RUMOperationsListResponseMeta:
       description: Metadata for a list of RUM operations.
@@ -116034,6 +116613,356 @@ components:
       type: string
       x-enum-varnames:
         - RULESET_STATUS
+    RumArchiveConfig:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumArchiveConfigAttributes"
+        id:
+          description: Resource identifier.
+          example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+          type: string
+        type:
+          $ref: "#/components/schemas/RumArchiveConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumArchiveConfigAttributes:
+      description: Archive configuration.
+      properties:
+        enabled:
+          description: Whether archiving is enabled.
+          example: true
+          type: boolean
+        org_id:
+          description: Organization ID.
+          example: 123
+          format: int64
+          type: integer
+        retention_days:
+          description: >-
+            Configured retention in days; omitted when unset. When archiving is enabled, this is 30, 90, or 180.
+          example: 90
+          format: int32
+          maximum: 180
+          type: integer
+        updated_at:
+          description: Last update time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        updated_by:
+          description: Handle of the user who last updated the configuration.
+          example: user@example.com
+          type: string
+      required:
+        - org_id
+        - enabled
+      type: object
+    RumArchiveConfigListResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          description: Configurations in page order.
+          items:
+            $ref: "#/components/schemas/RumArchiveConfig"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RumArchiveConfigMeta"
+      required:
+        - data
+        - meta
+      type: object
+    RumArchiveConfigMeta:
+      description: Pagination metadata.
+      properties:
+        page:
+          $ref: "#/components/schemas/RumArchiveConfigPage"
+      required:
+        - page
+      type: object
+    RumArchiveConfigPage:
+      description: Page information.
+      properties:
+        total_filtered_count:
+          description: Total configurations for the organization.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - total_filtered_count
+      type: object
+    RumArchiveConfigResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumArchiveConfig"
+      required:
+        - data
+      type: object
+    RumArchiveConfigType:
+      description: JSON:API resource type.
+      enum:
+        - rum_archive_config
+      example: rum_archive_config
+      type: string
+      x-enum-varnames:
+        - RUM_ARCHIVE_CONFIG
+    RumArchiveConfigUpsertAttributes:
+      description: >-
+        Archive configuration to save. When enabled is true, retention_days is required and must be 30, 90, or 180. When disabled, retention_days can be omitted.
+      properties:
+        enabled:
+          description: Whether archiving is enabled.
+          example: true
+          type: boolean
+        retention_days:
+          description: >-
+            Retention in days. When enabled is true, required and restricted to 30, 90, or 180. When enabled is false, this field can be omitted.
+          example: 90
+          format: int32
+          maximum: 180
+          type: integer
+      required:
+        - enabled
+      type: object
+    RumArchiveConfigUpsertData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumArchiveConfigUpsertAttributes"
+        id:
+          description: Resource identifier.
+          example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+          type: string
+        type:
+          $ref: "#/components/schemas/RumArchiveConfigType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumArchiveConfigUpsertRequest:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumArchiveConfigUpsertData"
+      required:
+        - data
+      type: object
+    RumArchiveSession:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumArchiveSessionAttributes"
+        id:
+          description: Resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          $ref: "#/components/schemas/RumArchiveSessionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumArchiveSessionAttributes:
+      description: Archived session metadata.
+      properties:
+        account_id:
+          description: Session account id, or null when unavailable.
+          example: account-123
+          nullable: true
+          type: string
+        anonymous_id:
+          description: Session anonymous id, or null when unavailable.
+          example: anonymous-123
+          nullable: true
+          type: string
+        application_id:
+          description: Application UUID.
+          example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+          format: uuid
+          type: string
+        country:
+          description: Session country, or null when unavailable.
+          example: US
+          nullable: true
+          type: string
+        recovery_status:
+          $ref: "#/components/schemas/RumArchiveSessionRecoveryStatus"
+        service:
+          description: Service name.
+          example: web
+          type: string
+        session_id:
+          description: Session identifier.
+          example: 00000000-0000-4000-8000-000000000001
+          type: string
+        timestamp:
+          description: Session timestamp in Unix milliseconds.
+          example: 1789905600000
+          format: int64
+          type: integer
+        user_id:
+          description: Session user id, or null when unavailable.
+          example: user-123
+          nullable: true
+          type: string
+        version:
+          description: Session version, or null when unavailable.
+          example: 1.0.0
+          nullable: true
+          type: string
+      required:
+        - session_id
+        - application_id
+        - timestamp
+        - service
+        - user_id
+        - anonymous_id
+        - account_id
+        - country
+        - version
+        - recovery_status
+      type: object
+    RumArchiveSessionRecoveryStatus:
+      description: >-
+        Session recovery state. A missing recovery record can be represented as null. Optional request_id and recovered_at are omitted when unavailable.
+      nullable: true
+      properties:
+        recovered_at:
+          description: Recovery timestamp, when available.
+          example: example
+          format: date-time
+          type: string
+        request_id:
+          description: Associated recovery request ID.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        status:
+          $ref: "#/components/schemas/RumRecoverySessionStatus"
+      required:
+        - status
+      type: object
+    RumArchiveSessionType:
+      description: JSON:API resource type.
+      enum:
+        - rum_archive_session
+      example: rum_archive_session
+      type: string
+      x-enum-varnames:
+        - RUM_ARCHIVE_SESSION
+    RumArchiveSessionsMeta:
+      description: Search metadata.
+      properties:
+        page:
+          $ref: "#/components/schemas/RumArchiveSessionsPage"
+      required:
+        - page
+      type: object
+    RumArchiveSessionsPage:
+      description: Search pagination.
+      properties:
+        next_cursor:
+          description: Opaque continuation cursor. Omitted when no further page is available.
+          example: example
+          type: string
+        total_count:
+          description: >-
+            Search result count. Can be zero on continuation pages even when sessions are returned. Use `next_cursor` to determine whether more pages are available.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - total_count
+      type: object
+    RumArchiveSessionsResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          description: Archived sessions.
+          items:
+            $ref: "#/components/schemas/RumArchiveSession"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RumArchiveSessionsMeta"
+      required:
+        - data
+        - meta
+      type: object
+    RumArchiveSessionsSearchAttributes:
+      description: >-
+        Archived-session query. A window wider than configured archive retention is narrowed before searching.
+      properties:
+        cursor:
+          description: Opaque next-page cursor. Keep the query, time range, and hide_retained value unchanged.
+          example: example
+          type: string
+        from:
+          description: Start of the range in Unix milliseconds. Must be positive and earlier than to.
+          example: 1789905600000
+          format: int64
+          minimum: 1
+          type: integer
+        hide_retained:
+          default: false
+          description: >-
+            When true, exclude sessions already present in hot RUM storage. When false, those sessions can appear in the results. Keep this value unchanged when continuing with a cursor.
+          example: false
+          type: boolean
+        limit:
+          default: 50
+          description: Page size, at most 1000 (default 50). Values at or below zero use 50.
+          example: 0
+          format: int32
+          maximum: 1000
+          type: integer
+        query:
+          description: RUM search query. Must not be empty.
+          example: service:web
+          type: string
+        to:
+          description: End of the range in Unix milliseconds.
+          example: 1789992000000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - query
+        - from
+        - to
+      type: object
+    RumArchiveSessionsSearchData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumArchiveSessionsSearchAttributes"
+        id:
+          description: >-
+            Optional resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          description: >-
+            JSON:API resource type.
+          example: rum_archive_sessions_request
+          type: string
+      required:
+        - attributes
+      type: object
+    RumArchiveSessionsSearchRequest:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumArchiveSessionsSearchData"
+      required:
+        - data
+      type: object
     RumConfigAttributes:
       description: Attributes of the RUM configuration.
       properties:
@@ -116398,6 +117327,19 @@ components:
             $ref: "#/components/schemas/RumExclusionFilterData"
           type: array
       type: object
+    RumManagedArchiveErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: Errors as plain-text messages or JSON:API error objects containing status, title, and detail.
+          example:
+            - Forbidden
+          items:
+            description: A plain-text message or a JSON:API error object.
+          type: array
+      required:
+        - errors
+      type: object
     RumMetricCompute:
       description: The compute rule to compute the RUM-based metric. It is set at creation and only `include_percentiles` can be updated afterward.
       properties:
@@ -116756,6 +117698,753 @@ components:
             $ref: "#/components/schemas/RumPermanentRetentionFilterData"
           type: array
       type: object
+    RumRecoveredSession:
+      description: Progress for one targeted session.
+      properties:
+        application_id:
+          description: Application UUID.
+          example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+          format: uuid
+          type: string
+        error_message:
+          description: Failure details, if present.
+          example: example
+          type: string
+        events_recovered:
+          description: Recovered event count.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        session_id:
+          description: Session identifier.
+          example: 00000000-0000-4000-8000-000000000001
+          format: uuid
+          type: string
+        status:
+          $ref: "#/components/schemas/RumRecoverySessionStatus"
+      required:
+        - session_id
+        - application_id
+        - status
+        - events_recovered
+      type: object
+    RumRecoveryBatchCreateAttributes:
+      description: >-
+        Recover sessions selected by a query. The range cannot exceed 180 days; from cannot be more than 4 years ago and to cannot be more than 1 hour in the future. Session availability depends on the configured archive retention.
+      properties:
+        estimated_count:
+          description: >-
+            Optional client estimate. Creation validates and stores a fresh server estimate instead of this value.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        from:
+          description: Start of the range in Unix milliseconds. Must be positive and earlier than to.
+          example: 1789905600000
+          format: int64
+          minimum: 1
+          type: integer
+        query:
+          description: RUM search query. Not blank, at most 4096 bytes for batch creation and count.
+          example: service:web
+          type: string
+        request_type:
+          $ref: "#/components/schemas/RumRecoveryBatchRequestType"
+        to:
+          description: End of the range in Unix milliseconds.
+          example: 1789992000000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - request_type
+        - query
+        - from
+        - to
+      type: object
+    RumRecoveryBatchListAttributes:
+      description: >-
+        Batch recovery progress. Status updates can appear here before they appear in request details.
+      properties:
+        created_at:
+          description: Creation time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        discovery_status:
+          $ref: "#/components/schemas/RumRecoveryDiscoveryStatus"
+        estimated_count:
+          description: >-
+            Batch estimate stored at creation, when present. New batches use a fresh server estimate; older batches may contain a client-supplied estimate.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        from:
+          description: Start of the range in Unix milliseconds. Must be positive and earlier than to.
+          example: 1789905600000
+          format: int64
+          minimum: 1
+          type: integer
+        query:
+          description: RUM search query. Not blank, at most 4096 bytes for batch creation and count.
+          example: service:web
+          type: string
+        sessions_discovered:
+          description: Discovered sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        sessions_failed:
+          description: Failed sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        sessions_processed:
+          description: Processed sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        slices_completed:
+          description: Completed slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        slices_failed:
+          description: Failed slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        status:
+          $ref: "#/components/schemas/RumRecoveryRequestStatus"
+        to:
+          description: End of the range in Unix milliseconds.
+          example: 1789992000000
+          format: int64
+          minimum: 1
+          type: integer
+        total_slices:
+          description: Total discovery slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        updated_at:
+          description: Last update time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - status
+        - discovery_status
+        - created_at
+        - updated_at
+        - query
+        - from
+        - to
+        - total_slices
+        - slices_completed
+        - slices_failed
+        - sessions_discovered
+        - sessions_processed
+        - sessions_failed
+      type: object
+    RumRecoveryBatchListData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryBatchListAttributes"
+        id:
+          description: Resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRecoveryBatchListDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRecoveryBatchListDataType:
+      description: JSON:API resource type.
+      enum:
+        - rum_batch_recovery_request
+      example: rum_batch_recovery_request
+      type: string
+      x-enum-varnames:
+        - RUM_BATCH_RECOVERY_REQUEST
+    RumRecoveryBatchListMeta:
+      description: Batch-list pagination metadata.
+      properties:
+        next_cursor:
+          description: Opaque next-page cursor. Omitted on the final page.
+          example: example
+          type: string
+      type: object
+    RumRecoveryBatchListResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          description: >-
+            Batch requests ordered newest first. A filtered page can be empty while meta.next_cursor is present.
+          items:
+            $ref: "#/components/schemas/RumRecoveryBatchListData"
+          type: array
+        meta:
+          $ref: "#/components/schemas/RumRecoveryBatchListMeta"
+      required:
+        - data
+        - meta
+      type: object
+    RumRecoveryBatchRequestType:
+      description: Query-based batch recovery.
+      enum:
+        - batch
+      example: batch
+      type: string
+      x-enum-varnames:
+        - BATCH
+    RumRecoveryCancelAttributes:
+      description: Batch cancellation.
+      properties:
+        status:
+          $ref: "#/components/schemas/RumRecoveryCancelStatus"
+      required:
+        - status
+      type: object
+    RumRecoveryCancelData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCancelAttributes"
+        id:
+          description: >-
+            Optional resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          description: >-
+            JSON:API resource type.
+          example: rum_recovery_request
+          type: string
+      required:
+        - attributes
+      type: object
+    RumRecoveryCancelRequest:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCancelData"
+      required:
+        - data
+      type: object
+    RumRecoveryCancelResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCancelResponseData"
+      required:
+        - data
+      type: object
+    RumRecoveryCancelResponseAttributes:
+      description: >-
+        Batch cancellation acknowledgment.
+      properties:
+        cancelled_at:
+          description: Cancellation time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        cancelled_by:
+          description: Handle of the user who canceled the batch.
+          example: user@example.com
+          type: string
+        discovery_status:
+          $ref: "#/components/schemas/RumRecoveryDiscoveryStatus"
+      required:
+        - discovery_status
+        - cancelled_at
+        - cancelled_by
+      type: object
+    RumRecoveryCancelResponseData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCancelResponseAttributes"
+        id:
+          description: Resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRecoveryRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRecoveryCancelStatus:
+      description: Requested cancellation state.
+      enum:
+        - cancelled
+      example: cancelled
+      type: string
+      x-enum-varnames:
+        - CANCELLED
+    RumRecoveryCountAttributes:
+      description: >-
+        Query for a recovery estimate. The range cannot exceed 180 days; from cannot be more than 4 years ago and to cannot be more than 1 hour in the future. Session availability depends on the configured archive retention.
+      properties:
+        from:
+          description: Start of the range in Unix milliseconds. Must be positive and earlier than to.
+          example: 1789905600000
+          format: int64
+          minimum: 1
+          type: integer
+        query:
+          description: RUM search query. Not blank, at most 4096 bytes for batch creation and count.
+          example: service:web
+          type: string
+        to:
+          description: End of the range in Unix milliseconds.
+          example: 1789992000000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - query
+        - from
+        - to
+      type: object
+    RumRecoveryCountRequest:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCountRequestData"
+      required:
+        - data
+      type: object
+    RumRecoveryCountRequestData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCountAttributes"
+        id:
+          description: >-
+            Optional resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          description: >-
+            JSON:API resource type.
+          example: rum_recovery_count
+          type: string
+      required:
+        - attributes
+      type: object
+    RumRecoveryCountResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCountResponseData"
+      required:
+        - data
+      type: object
+    RumRecoveryCountResponseAttributes:
+      description: Approximate recoverable count.
+      properties:
+        estimated_count:
+          description: >-
+            Estimated distinct recoverable sessions not already retained in hot storage. The full estimate is returned without capping it at max_recoverable_sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        max_recoverable_sessions:
+          description: >-
+            Configured maximum estimated recoverable sessions per batch (100,000 by default). Estimates equal to this value are accepted at creation.
+          example: 100000
+          format: int64
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - estimated_count
+        - max_recoverable_sessions
+      type: object
+    RumRecoveryCountResponseData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCountResponseAttributes"
+        id:
+          description: Resource identifier.
+          example: count
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRecoveryCountResponseDataType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRecoveryCountResponseDataType:
+      description: JSON:API resource type.
+      enum:
+        - rum_recovery_count
+      example: rum_recovery_count
+      type: string
+      x-enum-varnames:
+        - RUM_RECOVERY_COUNT
+    RumRecoveryCreateAttributes:
+      description: Targeted recovery (the default) or query-based batch recovery.
+      oneOf:
+        - $ref: "#/components/schemas/RumRecoverySessionsCreateAttributes"
+        - $ref: "#/components/schemas/RumRecoveryBatchCreateAttributes"
+    RumRecoveryCreateData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCreateAttributes"
+        type:
+          description: >-
+            JSON:API resource type.
+          example: rum_recovery_request
+          type: string
+      required:
+        - attributes
+      type: object
+    RumRecoveryCreateRequest:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCreateData"
+      required:
+        - data
+      type: object
+    RumRecoveryCreateResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryCreateResponseData"
+      required:
+        - data
+      type: object
+    RumRecoveryCreateResponseAttributes:
+      description: Accepted recovery request.
+      properties:
+        created_at:
+          description: Creation time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        discovery_status:
+          $ref: "#/components/schemas/RumRecoveryDiscoveryStatus"
+        estimated_count:
+          description: >-
+            Batch estimate stored at creation, when present. New batches use a fresh server estimate; older batches may contain a client-supplied estimate.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        failed_sessions:
+          description: Failed session count.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        processed_sessions:
+          description: Processed session count.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        status:
+          $ref: "#/components/schemas/RumRecoveryRequestStatus"
+        total_sessions:
+          description: Total targeted sessions. Omitted while a batch total is unknown.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - status
+        - processed_sessions
+        - failed_sessions
+        - created_at
+      type: object
+    RumRecoveryCreateResponseData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryCreateResponseAttributes"
+        id:
+          description: Resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRecoveryRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRecoveryDiscoveryStatus:
+      description: Batch discovery state. QUEUED indicates that the request is waiting for processing capacity.
+      enum:
+        - QUEUED
+        - PENDING
+        - SLICING
+        - DISCOVERED
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+      example: QUEUED
+      type: string
+      x-enum-varnames:
+        - QUEUED
+        - PENDING
+        - SLICING
+        - DISCOVERED
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+    RumRecoveryRequestAttributes:
+      description: >-
+        Recovery progress. Batch-only attributes are omitted for targeted requests; request_type is also omitted for targeted requests.
+      properties:
+        created_at:
+          description: Creation time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+        discovery_status:
+          $ref: "#/components/schemas/RumRecoveryDiscoveryStatus"
+        error_message:
+          description: Failure details, if present.
+          example: example
+          type: string
+        estimated_count:
+          description: >-
+            Batch estimate stored at creation, when present. New batches use a fresh server estimate; older batches may contain a client-supplied estimate.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        failed_sessions:
+          description: Failed session count.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        from:
+          description: Start of the range in Unix milliseconds. Must be positive and earlier than to.
+          example: 1789905600000
+          format: int64
+          minimum: 1
+          type: integer
+        processed_sessions:
+          description: Processed session count.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        query:
+          description: RUM search query. Not blank, at most 4096 bytes for batch creation and count.
+          example: service:web
+          type: string
+        request_type:
+          $ref: "#/components/schemas/RumRecoveryBatchRequestType"
+        sessions:
+          description: Targeted session progress. Omitted when empty or not applicable.
+          items:
+            $ref: "#/components/schemas/RumRecoveredSession"
+          type: array
+        sessions_discovered:
+          description: Discovered sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        sessions_failed:
+          description: Failed sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        sessions_processed:
+          description: Processed sessions.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        slices_completed:
+          description: Completed slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        slices_failed:
+          description: Failed slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        status:
+          $ref: "#/components/schemas/RumRecoveryRequestStatus"
+        to:
+          description: End of the range in Unix milliseconds.
+          example: 1789992000000
+          format: int64
+          minimum: 1
+          type: integer
+        total_sessions:
+          description: Total targeted sessions. Omitted while a batch total is unknown.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        total_slices:
+          description: Total discovery slices.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        updated_at:
+          description: Last update time.
+          example: "2026-09-21T12:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - status
+        - processed_sessions
+        - failed_sessions
+        - created_at
+        - updated_at
+      type: object
+    RumRecoveryRequestData:
+      description: JSON:API resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RumRecoveryRequestAttributes"
+        id:
+          description: Resource identifier.
+          example: 11111111-1111-4111-8111-111111111111
+          type: string
+        type:
+          $ref: "#/components/schemas/RumRecoveryRequestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    RumRecoveryRequestResponse:
+      description: JSON:API document.
+      properties:
+        data:
+          $ref: "#/components/schemas/RumRecoveryRequestData"
+      required:
+        - data
+      type: object
+    RumRecoveryRequestStatus:
+      description: >-
+        Recovery request state.
+      enum:
+        - PENDING
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - EXPIRED
+      example: PENDING
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - PROCESSING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - EXPIRED
+    RumRecoveryRequestType:
+      description: JSON:API resource type.
+      enum:
+        - rum_recovery_request
+      example: rum_recovery_request
+      type: string
+      x-enum-varnames:
+        - RUM_RECOVERY_REQUEST
+    RumRecoverySessionInput:
+      description: Archived session to recover.
+      properties:
+        application_id:
+          description: Application UUID.
+          example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+          format: uuid
+          type: string
+        session_id:
+          description: Session UUID.
+          example: 00000000-0000-4000-8000-000000000001
+          format: uuid
+          type: string
+      required:
+        - application_id
+        - session_id
+      type: object
+    RumRecoverySessionStatus:
+      description: >-
+        Session availability or recovery state. `RECOVERED` indicates that the session is ready to query.
+      enum:
+        - AVAILABLE
+        - PENDING
+        - PROCESSING
+        - RECOVERED
+        - FAILED
+        - RETAINED
+        - EXPIRED
+        - CANCELLED
+      example: AVAILABLE
+      type: string
+      x-enum-varnames:
+        - AVAILABLE
+        - PENDING
+        - PROCESSING
+        - RECOVERED
+        - FAILED
+        - RETAINED
+        - EXPIRED
+        - CANCELLED
+    RumRecoverySessionsCreateAttributes:
+      description: Recover 1 to 100 explicit archived sessions. Session IDs must be unique within the request.
+      properties:
+        request_type:
+          $ref: "#/components/schemas/RumRecoverySessionsRequestType"
+        sessions:
+          description: Sessions to recover.
+          items:
+            $ref: "#/components/schemas/RumRecoverySessionInput"
+          maxItems: 100
+          minItems: 1
+          type: array
+      required:
+        - sessions
+      type: object
+    RumRecoverySessionsRequestType:
+      default: sessions
+      description: Targeted recovery. Omitted request_type defaults to sessions.
+      enum:
+        - sessions
+      example: sessions
+      type: string
+      x-enum-varnames:
+        - SESSIONS
     RumRetentionFilterAttributes:
       description: The object describing attributes of a RUM retention filter.
       properties:
@@ -120855,15 +122544,25 @@ components:
       enum:
         - issue
         - issue.assignee
+        - issue.bits_investigation
         - issue.case
+        - issue.impacted_sessions
+        - issue.impacted_users
+        - issue.pull_requests
         - issue.team_owners
+        - issue.watches
       example: "issue.case"
       type: string
       x-enum-varnames:
         - ISSUE
         - ISSUE_ASSIGNEE
+        - ISSUE_BITS_INVESTIGATION
         - ISSUE_CASE
+        - ISSUE_IMPACTED_SESSIONS
+        - ISSUE_IMPACTED_USERS
+        - ISSUE_PULL_REQUESTS
         - ISSUE_TEAM_OWNERS
+        - ISSUE_WATCHES
     SeatAssignmentsDataType:
       default: seat-assignments
       description: Seat assignments resource type.
@@ -134249,12 +135948,14 @@ components:
           example: {"@state": "success", "@version": "abc"}
           type: object
         compute:
-          description: The compute data.
+          description: |-
+            Map of compute ID (`c0`, `c1`, ... in request order) to the computed value, or to a list of
+            `{time, value}` points for a `timeseries` compute.
           type: object
         computes:
           additionalProperties:
             $ref: "#/components/schemas/SpansAggregateBucketValue"
-          description: A map of the metric name -> value for regular compute or list of values for a timeseries.
+          description: Not returned by this endpoint. Read the values from `compute` instead.
           type: object
       type: object
     SpansAggregateBucketType:
@@ -134480,7 +136181,9 @@ components:
             type: string
           type: array
         trace_id:
-          description: Id of the trace to which the span belongs.
+          description: |-
+            ID of the trace to which the span belongs: a 32-character hexadecimal string for 128-bit trace IDs,
+            or a decimal string for 64-bit trace IDs. Pass it unchanged to Get a trace by ID.
           example: "1234567890987654321"
           type: string
         type:
@@ -134491,7 +136194,8 @@ components:
     SpansCompute:
       description: |-
         A compute rule to compute metrics or timeseries.
-        All computes in a request must have the same `type`, and `timeseries` computes must use the same `interval`.
+        All computes in a request must have the same `type` (defaults to `total` when omitted),
+        and `timeseries` computes must use the same `interval`.
         To get both totals and timeseries, send separate requests.
       properties:
         aggregation:
@@ -134935,7 +136639,16 @@ components:
           type: string
         query:
           default: "*"
-          description: The search query - following the span search syntax.
+          description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "service:web* AND @http.status_code:[200 TO 299]"
           type: string
         to:
@@ -135344,11 +137057,14 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -135359,6 +137075,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -135521,12 +137240,15 @@ components:
           description: Whether the custom domain is configured.
           type: boolean
         domain_prefix:
-          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
+          description: The subdomain of the status page URL. Public pages use `https://{domain_prefix}.statuspage.datadoghq.com`, while private pages use `https://{domain_prefix}.private.statuspage.datadoghq.com`. Globally unique across Datadog Status Pages.
           type: string
         email_header_image:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           nullable: true
           type: string
+        email_notifications_enabled:
+          description: Whether email notifications are enabled for the status page. Must be enabled when `subscriptions_enabled` is `true`.
+          type: boolean
         enabled:
           description: Whether the status page is enabled.
           type: boolean
@@ -135538,6 +137260,9 @@ components:
           description: Timestamp of when the status page was last modified.
           format: date-time
           type: string
+        ms_teams_subscriptions_enabled:
+          description: Whether Microsoft Teams subscriptions are enabled for the status page.
+          type: boolean
         name:
           description: The name of the status page.
           type: string
@@ -135549,6 +137274,7 @@ components:
           type: boolean
         slack_app_icon:
           description: The Slack app icon URL for the status page.
+          nullable: true
           type: string
         slack_subscriptions_enabled:
           description: Whether Slack subscriptions are enabled for the status page.
@@ -135667,6 +137393,143 @@ components:
       type: string
       x-enum-varnames:
         - STATUS_PAGES
+    StatusPageEmailAccessPolicyArrayResponse:
+      description: Response object for a list of status page email access policies.
+      properties:
+        data:
+          description: A list of status page email access policy data objects.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+          type: array
+        included:
+          description: Resources related to the email access policies, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyData:
+      description: The data object for a status page email access policy.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataAttributes"
+        id:
+          description: The ID of the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationships"
+        type:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyType"
+      required:
+        - attributes
+        - id
+        - relationships
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataAttributes:
+      description: Attributes of a status page email access policy.
+      properties:
+        created_at:
+          description: Timestamp of when the email access policy was created.
+          example: "2026-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        effect:
+          $ref: "#/components/schemas/AccessPolicyEffect"
+        pattern:
+          description: The email address pattern matched by the policy.
+          example: "@example.com"
+          type: string
+      required:
+        - created_at
+        - effect
+        - pattern
+      type: object
+    StatusPageEmailAccessPolicyDataRelationships:
+      description: Relationships of a status page email access policy.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser"
+        status_page:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPage"
+      required:
+        - created_by_user
+        - status_page
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUser:
+      description: The Datadog user who created the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsCreatedByUserData:
+      description: The data object identifying the Datadog user who created the email access policy.
+      properties:
+        id:
+          description: The ID of the Datadog user who created the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPage:
+      description: The status page associated with the email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyDataRelationshipsStatusPageData"
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyDataRelationshipsStatusPageData:
+      description: The data object identifying the status page associated with the email access policy.
+      properties:
+        id:
+          description: The ID of the status page associated with the email access policy.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPageDataType"
+      required:
+        - id
+        - type
+      type: object
+    StatusPageEmailAccessPolicyIncluded:
+      description: An included resource related to a status page email access policy.
+      oneOf:
+        - $ref: "#/components/schemas/StatusPagesUser"
+        - $ref: "#/components/schemas/StatusPageAsIncluded"
+    StatusPageEmailAccessPolicyResponse:
+      description: Response object for a status page email access policy.
+      properties:
+        data:
+          $ref: "#/components/schemas/StatusPageEmailAccessPolicyData"
+        included:
+          description: Resources related to the email access policy, when requested using the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/StatusPageEmailAccessPolicyIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    StatusPageEmailAccessPolicyType:
+      default: email_access_policies
+      description: Status page email access policy resource type.
+      enum:
+        - email_access_policies
+      example: email_access_policies
+      type: string
+      x-enum-varnames:
+        - EMAIL_ACCESS_POLICIES
     StatusPagesComponent:
       description: Response object for a single component.
       properties:
@@ -136657,7 +138520,9 @@ components:
         root:
           $ref: "#/components/schemas/SummarizedSpan"
         traceId:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
+          description: |-
+            The trace ID as requested: a decimal ID is returned unchanged, and a hexadecimal ID is lowercased and
+            left-padded with zeros to 32 characters.
           example: "0000000000000000abc1230000000000"
           type: string
       required:
@@ -141107,15 +142972,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -141419,12 +143288,13 @@ components:
       properties:
         rule_ids:
           description: >-
-            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list.
+            Ordered list of tag indexing rule UUIDs. The server assigns rule_order 1, 2, … matching position in this list. Must contain the UUID of every active rule in the org (at most 1,000); omitting any active rule returns a 400 error.
           example:
             - "00000000-0000-0000-0000-000000000001"
             - "00000000-0000-0000-0000-000000000002"
           items:
             type: string
+          maxItems: 1000
           type: array
       type: object
     TagIndexingRuleOrderData:
@@ -141475,15 +143345,19 @@ components:
             type: string
           type: array
         metric_name_matches:
-          description: Metric name prefixes (glob patterns) this rule applies to.
+          description: >-
+            Metric name prefixes (glob patterns) this rule applies to. At most 50 patterns, each at most 200 characters.
           example:
             - "dd.test.*"
           items:
+            maxLength: 200
             type: string
+          maxItems: 50
           type: array
         name:
-          description: Human-readable name for the rule.
+          description: Human-readable name for the rule. At most 200 characters.
           example: my-indexing-rule
+          maxLength: 200
           type: string
         options:
           $ref: "#/components/schemas/TagIndexingRuleOptions"
@@ -147210,8 +149084,10 @@ components:
         attributes:
           $ref: "#/components/schemas/TraceAttributes"
         id:
-          description: The full 128-bit trace ID, encoded as a 32-character hexadecimal string.
-          example: "0000000000000000abc1230000000000"
+          description: |-
+            The lower 64 bits of the trace ID, as a decimal string.
+            The full trace ID is in each span's `traceIDFull`.
+          example: "12376211733897805824"
           type: string
         type:
           $ref: "#/components/schemas/TraceType"
@@ -150505,7 +152381,12 @@ components:
           nullable: true
           type: boolean
         pending_usage_limit:
-          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          description: |-
+            The limit to apply to the organization-wide quota at 00:00 UTC on the first day of the next calendar month. Must be a non-negative integer in the usage units defined by the quota namespace. This value is not checked against current usage.
+
+            Setting this field replaces any previously scheduled limit. The server sets `pending_effective_from`.
+
+            Omitting this field preserves the scheduled change, even when increasing `usage_limit`. Setting `enforced=false` clears the scheduled change. To cancel it explicitly, use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending`.
           example: 50000
           format: int64
           minimum: 0
@@ -179433,7 +181314,9 @@ paths:
       x-menu-order: 1
   /api/v2/error-tracking/issues/{issue_id}:
     get:
-      description: Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+      description: |-
+        Retrieve the full details for a specific error tracking issue, including attributes and relationships.
+        Returns 403 if the caller lacks the `error_tracking_read` permission or does not have access to the issue's data.
       operationId: GetIssue
       parameters:
         - $ref: "#/components/parameters/IssueIDPathParameter"
@@ -212923,41 +214806,86 @@ paths:
   /api/v2/metrics:
     get:
       description: |-
-        Get a list of actively reporting metrics for your organization. Pagination is optional using the `page[cursor]` and `page[size]` query parameters.
+        Get a list of actively reporting metrics for your organization, with optional volumes, query activity,
+        and tag configuration filters. When you need volumes, query activity, or tag configuration status for
+        many metrics, use this endpoint instead of calling per-metric endpoints (such as
+        `GET /api/v2/metrics/{metric_name}/volumes` or `GET /api/v2/metrics/{metric_name}/tags`) in a loop,
+        which is slower and quickly reaches rate limits. This endpoint does not return the tag keys or values
+        that a metric was submitted with.
 
-        Query parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`). Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them. For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.
+        Always paginate: send `page[size]` (up to 10000; a few hundred to a few thousand is typical) and follow
+        `meta.pagination.next_cursor` (or `links.next`) until it is null or missing. Without `page[size]` or `page[cursor]`,
+        the response is not paginated: it returns matching metrics in one response, with no pagination metadata,
+        up to a limit of 250,000 metrics by default (some organizations have a different limit). Metrics beyond
+        the limit are left out without any indication. Unpaginated requests in large organizations can also be
+        slow or time out, and clients with response-size limits may fail or truncate the response.
+        If a request with `page[cursor]` returns `410 Gone`, the cursor has expired: restart from the first page
+        (send `page[size]` without `page[cursor]`).
+
+        - **Volumes**: `include=metric_volumes` adds the indexed and ingested volume of each metric. The volume is a
+          fixed one-hour value and is not affected by `window[seconds]`. Volumes are not returned inside `data`:
+          each metric with volume data has a `relationships.metric_volumes.data` reference, and the volumes
+          themselves are returned as `metric_volumes` resources in the top-level `included` array. To join them,
+          match `included[].id` to the `id` of `data[]` items with type `metrics`; both are the metric name.
+          `manage_tags` items in `data` repeat the same `id`, so skip them when joining. Metrics without volume
+          data, such as standard (non-custom) metrics, have no `metric_volumes` reference or entry.
+        - **Top metrics by volume**: `sort=-metric_volumes.indexed_volume` together with `include=metric_volumes`
+          and `page[size]` (for example, `page[size]=20`) returns the metrics with the highest indexed volume
+          first. Sorting requires a paginated request.
+        - **Volume for a family of metrics**: `filter[metrics.id]=http.request*` with `include=metric_volumes`
+          and `page[size]` returns volumes for every metric whose name starts with `http.request` (a value whose
+          only `*` is at the end is case-sensitive). A value without `*` matches names that contain it, ignoring
+          case.
+        - **Unqueried metrics**: `filter[queried]=false` with `filter[queried][window][seconds]` (for example,
+          `2592000` for 30 days) and `page[size]` returns metrics that were not queried in that window.
+        - **Metrics without a tag configuration**: `filter[configured]=false` with `page[size]` returns custom
+          metrics that have no Metrics without Limits&trade; tag configuration.
+        - **Metric types**: if `filter[metric_type]` is omitted, metrics of all types are returned.
+
+        Examples:
+        - Top 20 metrics by indexed volume:
+          `GET /api/v2/metrics?include=metric_volumes&sort=-metric_volumes.indexed_volume&page[size]=20`
+        - Metrics not queried in the last 30 days, with their volumes:
+          `GET /api/v2/metrics?filter[queried]=false&filter[queried][window][seconds]=2592000&include=metric_volumes&page[size]=1000`
+        - Metrics without a tag configuration:
+          `GET /api/v2/metrics?filter[configured]=false&page[size]=1000`
+        - Volumes for metrics whose name starts with `http.request`:
+          `GET /api/v2/metrics?filter[metrics.id]=http.request*&include=metric_volumes&page[size]=1000`
+
+        Query parameters use bracket notation (for example, `filter[tags]`, `filter[queried][window][seconds]`).
+        Pass them as standard URL query strings, URL-encoding the brackets if your client does not handle them.
+        For example: `GET /api/v2/metrics?filter[tags]=env:prod&window[seconds]=86400&page[size]=500`.
       operationId: ListTagConfigurations
       parameters:
         - description: Only return custom metrics that have been configured (`true`) or not configured (`false`) with Metrics Without Limits.
-          example: true
           in: query
           name: filter[configured]
           required: false
           schema:
             type: boolean
         - description: Only return metrics that are eligible (`true`) or ineligible (`false`) for configuration with Metrics Without Limits.
-          example: true
           in: query
           name: filter[is_configurable]
           required: false
           schema:
             type: boolean
         - description: Only return metrics that have the given tag key(s) in their Metrics Without Limits configuration (included or excluded).
-          example: "app,env"
           in: query
           name: filter[tags_configured]
           required: false
           schema:
             description: Tag keys to filter by.
             type: string
-        - description: Only return metrics of the given metric type.
+        - description: |-
+            Only return metrics of the given metric type. If omitted, metrics of all types are returned.
+            `distribution` also matches OpenTelemetry histograms; use `exponential_histogram` or `explicit_histogram`
+            to return only one kind of OpenTelemetry histogram.
           in: query
           name: filter[metric_type]
           required: false
           schema:
             $ref: "#/components/schemas/MetricTagConfigurationMetricTypeCategory"
         - description: Only return distribution metrics that have percentile aggregations enabled (true) or disabled (false).
-          example: true
           in: query
           name: filter[include_percentiles]
           required: false
@@ -212965,7 +214893,6 @@ paths:
             type: boolean
         - description: |-
             Only return metrics that have been queried (true) or not queried (false) in the look back window. Set the window with `filter[queried][window][seconds]`; if omitted, a default window is used.
-          example: true
           in: query
           name: filter[queried]
           required: false
@@ -212973,7 +214900,6 @@ paths:
             type: boolean
         - description: |-
             The look-back window for `filter[queried]`, in seconds. You must also set `filter[queried]`, or the request returns a 400 error. The default value is 2,592,000 seconds (30 days), the maximum value is 15,552,000 seconds (180 days), and the minimum value is 0. With `0`, the window ends now, so `filter[queried]=true` returns almost no metrics and `filter[queried]=false` returns all metrics. For example: `filter[queried]=true&filter[queried][window][seconds]=604800`.
-          example: 15552000
           in: query
           name: filter[queried][window][seconds]
           required: false
@@ -212985,7 +214911,6 @@ paths:
             type: integer
         - description: |-
             Only return metrics that were submitted with tags matching this expression. You can use AND, OR, IN, and wildcards. For example: `filter[tags]=env IN (staging,test) AND service:web*`.
-          example: "env IN (staging,test) AND service:web*"
           in: query
           name: filter[tags]
           required: false
@@ -212993,9 +214918,32 @@ paths:
             type: string
         - description: |-
             Only return metrics that are used in at least one dashboard, monitor, notebook, or SLO.
-          example: true
           in: query
           name: filter[related_assets]
+          required: false
+          schema:
+            type: boolean
+        - description: |-
+            Only return metrics whose name matches this value.
+            A value without `*` matches metric names that contain it, ignoring case (for example, `http.request`
+            matches `app.HTTP.request.count`). A full metric name also matches longer names that contain it.
+            `*` is a wildcard that can appear anywhere and more than once, and these patterns also ignore case:
+            `*.request.count` matches names that end with `.request.count`, and `app.*.count` matches names that
+            start with `app.` and end with `.count`. The exception is a value whose only `*` is at the end (for
+            example, `http.request*`): it matches names that start with that text and is case-sensitive.
+            Spaces are treated as `*`. Only one value is accepted; repeating the parameter returns
+            `400 Bad Request`. Allowed characters are letters, digits, `_`, `.`, `*`, and spaces. An empty value
+            is ignored.
+          in: query
+          name: filter[metrics.id]
+          required: false
+          schema:
+            pattern: "^[a-zA-Z0-9_.* ]*$"
+            type: string
+        - description: |-
+            Only return metrics that have historical metrics ingestion enabled (`true`) or not enabled (`false`).
+          in: query
+          name: filter[historical_metrics]
           required: false
           schema:
             type: boolean
@@ -213015,7 +214963,6 @@ paths:
             type: string
         - description: |-
             Only return metrics that have been actively reporting in this window. The default value is 3,600 seconds (1 hour), the maximum value is 5,184,000 seconds (60 days), and the minimum value is 0. With `0`, the API returns only metrics that reported in the last few minutes.
-          example: 3600
           in: query
           name: window[seconds]
           required: false
@@ -213026,7 +214973,13 @@ paths:
             minimum: 0
             type: integer
         - description: |-
-            Maximum number of results per page. Send `page[size]` on the first request to opt in to pagination. On subsequent requests, send `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. To retain a custom page size, include `page[size]` on every request. The default value is 10000, the maximum value is 10000, and the minimum value is 1.
+            Maximum number of results per page. Always send it: without `page[size]` or `page[cursor]`, the response
+            is not paginated and is capped at 250,000 metrics by default, with no indication when results are left
+            out. Send `page[size]` on the first request to opt in to pagination. On subsequent requests, send
+            `page[cursor]` set to the value of `meta.pagination.next_cursor` from the previous response. To retain a
+            custom page size, include `page[size]` on every request. The default value is 10000, the maximum value is
+            10000, and the minimum value is 1.
+          example: 20
           in: query
           name: page[size]
           required: false
@@ -213038,6 +214991,7 @@ paths:
             type: integer
         - description: |-
             Cursor for pagination. Use `page[size]` to opt-in to pagination and get the first page; for subsequent pages, use the value from `meta.pagination.next_cursor` in the response. Pagination is complete when `next_cursor` is null.
+            An expired cursor returns `410 Gone`; restart from the first page without `page[cursor]`.
           in: query
           name: page[cursor]
           required: false
@@ -213108,6 +215062,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
+        "410":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Gone
         "429":
           content:
             application/json:
@@ -213119,7 +215079,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - metrics_read
-      summary: Get a list of metrics
+      summary: List all metrics with volumes and query activity
       tags:
         - Metrics
       x-menu-order: 5
@@ -213763,7 +215723,20 @@ paths:
       description: |-
         Create a tag indexing rule for the org. `rule_order` is assigned server-side as max+1
         among existing rules; use the reorder endpoint to change the evaluation order.
+        Every rule that matches a metric applies, in `rule_order`; a rule with
+        `override_previous_rules` set to `false` (merge) adds to the tags configured by earlier
+        rules, and a rule with `override_previous_rules` set to `true` replaces them.
         Requires the `Manage Tags for Metrics` permission.
+
+        Limits:
+        - An org can have at most 1,000 active tag indexing rules. Creating a rule when the org
+          already has 1,000 active rules returns a 403 error with the title
+          `Tag indexing rule limit reached`.
+        - Tag indexing rules are unavailable for orgs with more than 700,000 custom metrics;
+          requests from those orgs return a 403 error with the title `Tag indexing rules unavailable`.
+        - `name` can be at most 200 characters, and `metric_name_matches` can contain at most
+          50 patterns of at most 200 characters each. Requests that exceed these limits return a
+          400 error.
       operationId: CreateTagIndexingRule
       requestBody:
         content:
@@ -213815,6 +215788,19 @@ paths:
         "403":
           content:
             application/json:
+              examples:
+                rule_limit_reached:
+                  summary: The org already has 1,000 active tag indexing rules.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rule limit reached
+                tag_indexing_rules_unavailable:
+                  summary: The org has more than 700,000 custom metrics.
+                  value:
+                    errors:
+                      - status: "403"
+                        title: Tag indexing rules unavailable
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
@@ -213843,7 +215829,8 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
-        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
+        The UUIDs of all active rules (at most 1,000) must be provided; omitting any active rule UUID
+        returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -214014,7 +216001,10 @@ paths:
       description: |-
         Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
         Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        reorder endpoint for atomic re-sequencing. `name` can be at most 200 characters, and
+        `metric_name_matches` can contain at most 50 patterns of at most 200 characters each;
+        requests that exceed these limits return a 400 error.
+        Requires the `Manage Tags for Metrics` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
@@ -214106,13 +216096,17 @@ paths:
     get:
       description: |-
         List tags and aggregations that are actively queried on dashboards, notebooks, monitors, the Metrics Explorer, and using the API for a given metric name.
+
+        To find which of many metrics are queried or not queried, use `GET /api/v2/metrics` with `filter[queried]`
+        instead of calling this endpoint for each metric.
       operationId: ListActiveMetricConfigurations
       parameters:
         - $ref: "#/components/parameters/MetricName"
         - description: |-
             The number of seconds of look back (from now).
-            Default value is 604,800 (1 week), minimum value is 7200 (2 hours), maximum value is 2,630,000 (1 month).
-          example: 7200
+            Default value is 604,800 (1 week), and the minimum value is 14,400 (4 hours).
+            Values below the minimum return `400 Bad Request`.
+          example: 14400
           in: query
           name: window[seconds]
           required: false
@@ -214175,13 +216169,22 @@ paths:
       description: |-
         View indexed and ingested tags for a given metric name.
         Results are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).
+        This window only limits which tags are returned; it does not affect whether the metric is found.
+
+        A `404 Not Found` response means that no metric with this exact name exists in your organization.
+        Metric names must match exactly. Distribution metrics do not have suffixes such as `.avg` or `.count`,
+        so use the base metric name.
+
+        For high-cardinality metrics, keep responses small with `filter[include_tag_values]=false`,
+        `page[limit]`, and `filter[match]`.
       operationId: ListTagsByMetricName
       parameters:
         - $ref: "#/components/parameters/MetricName"
         - description: |-
             The number of seconds of look back (from now) to query for tag data.
             Default value is 14400 (4 hours), minimum value is 14400 (4 hours).
-          example: 14400
+            If you send a value below 14400, the request still succeeds, but the API uses 14400 (4 hours) instead
+            of your value.
           in: query
           name: window[seconds]
           required: false
@@ -214191,7 +216194,6 @@ paths:
         - description: |-
             Filter results to tags from data points that have the specified tags.
             For example, `filter[tags]=env:staging,host:123` returns tags only from data points with both `env:staging` and `host:123`.
-          example: "env:staging,host:123"
           in: query
           name: filter[tags]
           required: false
@@ -214200,7 +216202,6 @@ paths:
         - description: |-
             Filter returned tags to those matching a substring.
             For example, `filter[match]=env` returns tags like `env:prod`, `environment:staging`, etc.
-          example: "env"
           in: query
           name: filter[match]
           required: false
@@ -214209,7 +216210,7 @@ paths:
         - description: |-
             Whether to include tag values in the response.
             Defaults to true.
-          example: true
+          example: false
           in: query
           name: filter[include_tag_values]
           required: false
@@ -214218,7 +216219,6 @@ paths:
         - description: |-
             Whether to allow partial results.
             Defaults to false.
-          example: false
           in: query
           name: filter[allow_partial]
           required: false
@@ -214367,7 +216367,12 @@ paths:
       x-menu-order: 10
   /api/v2/metrics/{metric_name}/estimate:
     get:
-      description: Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.
+      description: |-
+        Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations
+        configuration using Metrics without Limits&trade;.
+
+        To compare current volumes across many metrics, use `GET /api/v2/metrics` with `include=metric_volumes`
+        instead of calling this endpoint for each metric.
       operationId: EstimateMetricsOutputSeries
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -214387,15 +216392,17 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: The number of hours of look back (from now) to estimate cardinality with. If unspecified, it defaults to 0 hours.
-          example: 49
+        - description: |-
+            The number of hours of look back (from now) to estimate cardinality with.
+            If unspecified, it defaults to 0 hours (the most recent data).
+          example: 0
           in: query
           name: filter[hours_ago]
           required: false
           schema:
             format: int32
             maximum: 2147483647
-            minimum: 49
+            minimum: 0
             type: integer
         - description: Deprecated. Number of aggregations has no impact on volume.
           example: 1
@@ -214899,9 +216906,12 @@ paths:
       description: |-
         Returns the tag configuration for the given metric name.
 
-        A metric may exist and submit data without having a tag configuration. If no tag configuration exists
-        for the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric
-        itself is missing.
+        A metric may exist and submit data without having a tag configuration. A `404 Not Found` response usually
+        means that the metric has no tag configuration, but it is also returned when no metric with this name exists
+        in your organization.
+
+        To list tag configurations for many metrics, use `GET /api/v2/metrics` with `filter[configured]=true`
+        instead of calling this endpoint for each metric.
       operationId: ListTagConfigurationByName
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -215117,6 +217127,10 @@ paths:
         View hourly average cardinality for the given metric name over the look back period.
         For Metric Name Pricing customers, view total point volume for the given metric name
         over the look back period.
+
+        To get the last hour's indexed and ingested volumes for many metrics, use `GET /api/v2/metrics` with
+        `include=metric_volumes` instead of calling this endpoint for each metric. Use this endpoint when you need
+        a longer look-back for a single metric.
       operationId: ListVolumesByMetricName
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -234373,6 +236387,326 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/config/archive:
+    get:
+      description: >-
+        Get the list of archive configurations for your organization.
+      operationId: ListRUMArchiveConfigs
+      parameters:
+        - description: Page number.
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int32
+            maximum: 10000
+            minimum: 0
+            type: integer
+        - description: Configurations per page.
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 20
+            format: int32
+            maximum: 100
+            minimum: 1
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          enabled: true
+                          org_id: 123
+                          retention_days: 90
+                          updated_at: "2026-09-21T12:00:00Z"
+                          updated_by: user@example.com
+                        id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                        type: rum_archive_config
+                    meta:
+                      page:
+                        total_filtered_count: 1
+                empty:
+                  value:
+                    data: []
+                    meta:
+                      page:
+                        total_filtered_count: 0
+              schema:
+                $ref: "#/components/schemas/RumArchiveConfigListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List archive configurations
+      tags:
+        - RUM Managed Archives
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_read
+  /api/v2/rum/config/archive/{app_id}:
+    delete:
+      description: >-
+        Delete the archive configuration for a RUM application. Archived and recovered session data is not deleted.
+      operationId: DeleteRUMArchiveConfig
+      parameters:
+        - description: RUM application ID.
+          in: path
+          name: app_id
+          required: true
+          schema:
+            description: Application UUID.
+            example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an archive configuration
+      tags:
+        - RUM Managed Archives
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_write
+    get:
+      description: >-
+        Get the archive configuration for a RUM application.
+      operationId: GetRUMArchiveConfig
+      parameters:
+        - description: RUM application ID.
+          in: path
+          name: app_id
+          required: true
+          schema:
+            description: Application UUID.
+            example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        org_id: 123
+                        retention_days: 90
+                        updated_at: "2026-09-21T12:00:00Z"
+                        updated_by: user@example.com
+                      id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                      type: rum_archive_config
+              schema:
+                $ref: "#/components/schemas/RumArchiveConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get an archive configuration
+      tags:
+        - RUM Managed Archives
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_read
+    put:
+      description: >-
+        Create or update the archive configuration for a RUM application. The application ID in the path must match `data.id`. Disabling archiving does not delete archived sessions.
+      operationId: UpdateRUMArchiveConfig
+      parameters:
+        - description: RUM application ID. Must match data.id for PUT.
+          in: path
+          name: app_id
+          required: true
+          schema:
+            description: Application UUID.
+            example: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      enabled: true
+                      retention_days: 90
+                    id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                    type: rum_archive_config
+              disabled:
+                value:
+                  data:
+                    attributes:
+                      enabled: false
+                    id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                    type: rum_archive_config
+            schema:
+              $ref: "#/components/schemas/RumArchiveConfigUpsertRequest"
+        description: JSON:API request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enabled: true
+                        org_id: 123
+                        retention_days: 90
+                        updated_at: "2026-09-21T12:00:00Z"
+                        updated_by: user@example.com
+                      id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                      type: rum_archive_config
+              schema:
+                $ref: "#/components/schemas/RumArchiveConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create or update an archive configuration
+      tags:
+        - RUM Managed Archives
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_write
   /api/v2/rum/config/metrics:
     get:
       description: |-
@@ -236315,6 +238649,720 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/rum/recover/count:
+    post:
+      description: >-
+        Return the full estimated number of recoverable sessions and the configured maximum per batch. The estimate is not capped at that maximum. This endpoint does not create a recovery request. Narrow the query or time range if the estimate exceeds max_recoverable_sessions. Creation checks a fresh estimate and returns 400 if it exceeds the configured maximum.
+      operationId: GetRUMRecoverySessionCount
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1789905600000
+                      query: service:web
+                      to: 1789992000000
+                    type: rum_recovery_count
+            schema:
+              $ref: "#/components/schemas/RumRecoveryCountRequest"
+        description: JSON:API request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                above_maximum:
+                  summary: An estimate of 150,000 exceeds the batch maximum
+                  value:
+                    data:
+                      attributes:
+                        estimated_count: 150000
+                        max_recoverable_sessions: 100000
+                      id: count
+                      type: rum_recovery_count
+                default:
+                  value:
+                    data:
+                      attributes:
+                        estimated_count: 100
+                        max_recoverable_sessions: 100000
+                      id: count
+                      type: rum_recovery_count
+              schema:
+                $ref: "#/components/schemas/RumRecoveryCountResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Estimate recoverable sessions
+      tags:
+        - RUM Recovery
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_index
+  /api/v2/rum/recover/requests:
+    get:
+      description: >-
+        List batch recovery requests for your organization. Set `type=batch`. Optional `from` and `to` bounds filter request creation time; `query` filters the queries stored on recovery requests.
+
+        A filtered page can be empty or contain fewer than `limit` results and still include `meta.next_cursor`. Continue until the cursor is absent, keeping the filters unchanged between pages.
+      operationId: ListRUMRecoveryBatchRequests
+      parameters:
+        - description: Must equal batch.
+          in: query
+          name: type
+          required: true
+          schema:
+            $ref: "#/components/schemas/RumRecoveryBatchRequestType"
+        - description: >-
+            Number of results returned per page, at most 100 (default 50). Omitted, zero, or negative values use 50. Invalid integers return 400.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int32
+            maximum: 100
+            type: integer
+        - description: Opaque next-page cursor. Keep type, from, to, and query unchanged between pages.
+          in: query
+          name: cursor
+          required: false
+          schema:
+            type: string
+        - description: >-
+            Start of the request creation-time range in Unix milliseconds, inclusive. This filters created_at, not the time range of the sessions being recovered. Must be earlier than to when both are provided.
+          example: 1789905600000
+          in: query
+          name: from
+          required: false
+          schema:
+            format: int64
+            maximum: 253402300799999
+            minimum: 1
+            type: integer
+        - description: >-
+            End of the request creation-time range in Unix milliseconds, exclusive. This filters created_at, not the time range of the sessions being recovered. Must be later than from when both are provided.
+          example: 1789992000000
+          in: query
+          name: to
+          required: false
+          schema:
+            format: int64
+            maximum: 253402300799999
+            minimum: 1
+            type: integer
+        - description: >-
+            Filter recovery requests whose stored query selects matching facet values. Supports facet:value and facet:(A OR B) terms combined with AND, including * and ? wildcards in filter values. Attribute facets keep their leading @. At most 4096 bytes. Exclusions, repeated facets, free text, ranges, and OR between terms return 400. Stored queries that cannot be matched unambiguously are excluded. Blank values apply no query filter.
+          example: "service:checkout AND @usr.id:(123 OR 456)"
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-09-21T12:00:00Z"
+                          discovery_status: PROCESSING
+                          from: 1789905600000
+                          query: service:checkout
+                          sessions_discovered: 84200
+                          sessions_failed: 0
+                          sessions_processed: 56000
+                          slices_completed: 8
+                          slices_failed: 0
+                          status: PROCESSING
+                          to: 1789992000000
+                          total_slices: 12
+                          updated_at: "2026-09-21T12:05:00Z"
+                        id: 11111111-1111-4111-8111-111111111111
+                        type: rum_batch_recovery_request
+                    meta: {}
+                empty:
+                  value:
+                    data: []
+                    meta: {}
+                filtered_page:
+                  summary: An empty filtered page with more history to scan
+                  value:
+                    data: []
+                    meta:
+                      next_cursor: example
+              schema:
+                $ref: "#/components/schemas/RumRecoveryBatchListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List batch recovery requests
+      tags:
+        - RUM Recovery
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_index
+    post:
+      description: >-
+        Start targeted or query-based batch recovery. Use the returned `data.id` to poll the recovery request for progress. Batch creation checks a fresh recoverable-session estimate against the configured maximum (100,000 by default), accepting estimates equal to the maximum. Use the count operation to check the current maximum; creation can still reject a changed estimate. Narrow the query or time range if the maximum is exceeded.
+
+
+        Creation is not idempotent. After an uncertain response, check session search or batch listing before retrying.
+      operationId: CreateRUMRecoveryRequest
+      requestBody:
+        content:
+          application/json:
+            examples:
+              batch:
+                value:
+                  data:
+                    attributes:
+                      estimated_count: 100
+                      from: 1789905600000
+                      query: service:web
+                      request_type: batch
+                      to: 1789992000000
+                    type: rum_recovery_request
+              default:
+                value:
+                  data:
+                    attributes:
+                      sessions:
+                        - application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                          session_id: 00000000-0000-4000-8000-000000000001
+                    type: rum_recovery_request
+              targeted:
+                value:
+                  data:
+                    attributes:
+                      sessions:
+                        - application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                          session_id: 00000000-0000-4000-8000-000000000001
+                    type: rum_recovery_request
+            schema:
+              $ref: "#/components/schemas/RumRecoveryCreateRequest"
+        description: JSON:API request body.
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        failed_sessions: 0
+                        processed_sessions: 0
+                        status: PENDING
+                        total_sessions: 1
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+                pending_batch:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        discovery_status: PENDING
+                        estimated_count: 100
+                        failed_sessions: 0
+                        processed_sessions: 0
+                        status: PENDING
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+                queued_batch:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        discovery_status: QUEUED
+                        estimated_count: 100
+                        failed_sessions: 0
+                        processed_sessions: 0
+                        status: PENDING
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+                targeted:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        failed_sessions: 0
+                        processed_sessions: 0
+                        status: PENDING
+                        total_sessions: 1
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+              schema:
+                $ref: "#/components/schemas/RumRecoveryCreateResponse"
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              examples:
+                limit_exceeded:
+                  summary: The server estimate exceeds the configured batch maximum
+                  value:
+                    errors:
+                      - code: batch_recovery_limit_exceeded
+                        detail: >-
+                          Estimated recoverable sessions exceed the batch maximum. Narrow the query or time range.
+                        meta:
+                          estimated_count: 150000
+                          max_recoverable_sessions: 100000
+                        status: "400"
+                        title: Bad Request
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: >-
+            Conflict. Targeted sessions are already retained, in flight, or previously failed, or a concurrent batch was created.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: >-
+            Too many requests, or the batch recovery queue is full.
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a recovery request
+      tags:
+        - RUM Recovery
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_index
+  /api/v2/rum/recover/requests/{request_id}:
+    get:
+      description: >-
+        Get progress for a targeted or batch recovery request. A `COMPLETED` request can include failed sessions; check individual session statuses for targeted recovery.
+      operationId: GetRUMRecoveryRequest
+      parameters:
+        - description: Recovery request UUID.
+          in: path
+          name: request_id
+          required: true
+          schema:
+            description: Request identifier.
+            example: 11111111-1111-4111-8111-111111111111
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        failed_sessions: 0
+                        processed_sessions: 1
+                        sessions:
+                          - application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                            events_recovered: 17
+                            session_id: 00000000-0000-4000-8000-000000000001
+                            status: RECOVERED
+                        status: COMPLETED
+                        total_sessions: 1
+                        updated_at: "2026-09-21T12:00:00Z"
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+                targeted:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-09-21T12:00:00Z"
+                        failed_sessions: 0
+                        processed_sessions: 1
+                        sessions:
+                          - application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                            events_recovered: 17
+                            session_id: 00000000-0000-4000-8000-000000000001
+                            status: RECOVERED
+                        status: COMPLETED
+                        total_sessions: 1
+                        updated_at: "2026-09-21T12:00:00Z"
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+              schema:
+                $ref: "#/components/schemas/RumRecoveryRequestResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get recovery request progress
+      tags:
+        - RUM Recovery
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_read
+    patch:
+      description: >-
+        Cancel pending work for a batch recovery request. Work already in progress can finish, and recovered data is not removed. Requests in a terminal state return `409`.
+      operationId: UpdateRUMRecoveryBatchRequest
+      parameters:
+        - description: Recovery request UUID.
+          in: path
+          name: request_id
+          required: true
+          schema:
+            description: Request identifier.
+            example: 11111111-1111-4111-8111-111111111111
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      status: cancelled
+                    type: rum_recovery_request
+              minimal:
+                value:
+                  data:
+                    attributes:
+                      status: cancelled
+            schema:
+              $ref: "#/components/schemas/RumRecoveryCancelRequest"
+        description: JSON:API request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        cancelled_at: "2026-09-21T12:00:00Z"
+                        cancelled_by: user@example.com
+                        discovery_status: CANCELLED
+                      id: 11111111-1111-4111-8111-111111111111
+                      type: rum_recovery_request
+              schema:
+                $ref: "#/components/schemas/RumRecoveryCancelResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Cancel a batch recovery request
+      tags:
+        - RUM Recovery
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_index
+  /api/v2/rum/recover/sessions:
+    post:
+      description: >-
+        Search archived RUM sessions. Use `meta.page.next_cursor` to retrieve the next page.
+      operationId: SearchRUMArchiveSessions
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      from: 1789905600000
+                      limit: 50
+                      query: service:web
+                      to: 1789992000000
+                    type: rum_archive_sessions_request
+            schema:
+              $ref: "#/components/schemas/RumArchiveSessionsSearchRequest"
+        description: JSON:API request body.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_id:
+                          anonymous_id:
+                          application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                          country:
+                          recovery_status:
+                            status: AVAILABLE
+                          service: web
+                          session_id: 00000000-0000-4000-8000-000000000001
+                          timestamp: 1789905600000
+                          user_id:
+                          version:
+                        id: 00000000-0000-4000-8000-000000000001
+                        type: rum_archive_session
+                    meta:
+                      page:
+                        total_count: 1
+                empty:
+                  value:
+                    data: []
+                    meta:
+                      page:
+                        total_count: 0
+                recovered:
+                  value:
+                    data:
+                      - attributes:
+                          account_id:
+                          anonymous_id:
+                          application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                          country:
+                          recovery_status:
+                            recovered_at: "2026-09-21T12:00:00Z"
+                            request_id: 11111111-1111-4111-8111-111111111111
+                            status: RECOVERED
+                          service: web
+                          session_id: 00000000-0000-4000-8000-000000000001
+                          timestamp: 1789905600000
+                          user_id:
+                          version:
+                        id: 00000000-0000-4000-8000-000000000001
+                        type: rum_archive_session
+                    meta:
+                      page:
+                        total_count: 1
+                unavailable_status:
+                  value:
+                    data:
+                      - attributes:
+                          account_id:
+                          anonymous_id:
+                          application_id: a33671aa-24fd-4dcd-ba4b-5bbdbafe7690
+                          country:
+                          recovery_status:
+                          service: web
+                          session_id: 00000000-0000-4000-8000-000000000001
+                          timestamp: 1789905600000
+                          user_id:
+                          version:
+                        id: 00000000-0000-4000-8000-000000000001
+                        type: rum_archive_session
+                    meta:
+                      page:
+                        total_count: 1
+              schema:
+                $ref: "#/components/schemas/RumArchiveSessionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Forbidden
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RumManagedArchiveErrorResponse"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Search archived sessions
+      tags:
+        - RUM Recovery
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - rum_rehydration_filter_read
   /api/v2/rum/replay/playlists:
     get:
       description: List playlists.
@@ -239971,37 +243019,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/security/cloud_workload/policy/download:
-    get:
-      description: |-
-        The download endpoint generates a Workload Protection policy file from your currently active
-        Workload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to
-        your agents to update the policy running in your environment.
-
-        **Note**: This endpoint should only be used for the Government (US1-FED) site.
-      operationId: DownloadCloudWorkloadPolicyFile
-      responses:
-        "200":
-          content:
-            application/yaml:
-              examples:
-                default:
-                  value: ""
-              schema:
-                format: binary
-                type: string
-          description: OK
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: "Download the Workload Protection policy (US1-FED)"
-      tags: ["CSM Threats"]
-      x-menu-order: 17
-      "x-permission":
-        operator: OR
-        permissions:
-          - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings:
     get:
       description: |-
@@ -256214,7 +259231,7 @@ paths:
                       - attributes:
                           by:
                             host: my-hostname
-                          computes:
+                          compute:
                             c0: 19
                         id: abc-123
                         type: bucket
@@ -256228,6 +259245,12 @@ paths:
           $ref: "#/components/responses/BadRequestResponse"
         "403":
           $ref: "#/components/responses/ForbiddenResponse"
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Request Timeout
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
       security:
@@ -256255,7 +259278,16 @@ paths:
         [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api
       operationId: ListSpansGet
       parameters:
-        - description: Search query following spans syntax.
+        - description: |-
+            The search query, following the
+            [span search syntax](https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/).
+            Reserved fields (`service`, `env`, `version`, `resource_name`, `operation_name`, `status`, `span_id`,
+            `trace_id`, `type`) take no `@` prefix, and neither do tags such as `host` or primary tags such as
+            `datacenter`. Span attributes need one, for example `@span.kind:server` or `@http.status_code:500`.
+            Wrap values that contain special characters such as `:`, `{`, `}`, `(`, `)`, or spaces in double quotes,
+            for example `@http.route:"/api/v1/users/{id}"` or `resource_name:"GET /api/v1/users"`.
+            Wildcards do not work inside quotes, so to combine a wildcard with special characters, escape each one
+            with `\` instead, for example `resource_name:Clients\:\:*`.
           example: "@datacenter:us @role:db"
           in: query
           name: filter[query]
@@ -259303,6 +262335,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: true
                       type: public
                       visualization_type: bars_and_uptime_percentage
@@ -259622,6 +262655,7 @@ paths:
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
+                      slack_app_icon: data:image/png;base64,mXRTqw0KGgoAAAANSUhEUgAAAEAAAABACA
                       subscriptions_enabled: false
                       type: internal
                       visualization_type: bars_only
@@ -259662,6 +262696,236 @@ paths:
       tags:
         - Status Pages
       x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email:
+    get:
+      description: Lists the email access policies for a private status page.
+      operationId: ListEmailAccessPolicies
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created_at: "2026-01-01T00:00:00.000Z"
+                          effect: allow
+                          pattern: "@example.com"
+                        id: 00000000-0000-0000-0000-000000000001
+                        relationships:
+                          created_by_user:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000003
+                              type: users
+                          status_page:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000002
+                              type: status_pages
+                        type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyArrayResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: List email access policies
+      tags:
+        - Status Pages
+      x-menu-order: 38
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_read
+    post:
+      description: Creates an email access policy for a private status page.
+      operationId: CreateEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      effect: allow
+                      pattern: "@example.com"
+                    type: email_access_policies
+            schema:
+              $ref: "#/components/schemas/CreateStatusPageEmailAccessPolicyRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-01-01T00:00:00.000Z"
+                        effect: allow
+                        pattern: "@example.com"
+                      id: 00000000-0000-0000-0000-000000000001
+                      relationships:
+                        created_by_user:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000003
+                            type: users
+                        status_page:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000002
+                            type: status_pages
+                      type: email_access_policies
+              schema:
+                $ref: "#/components/schemas/StatusPageEmailAccessPolicyResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Create an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 37
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/access_policies/email/{policy_id}:
+    delete:
+      description: Deletes an email access policy from a private status page.
+      operationId: DeleteEmailAccessPolicy
+      parameters:
+        - description: The ID of the private status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+        - description: The ID of the email access policy.
+          in: path
+          name: policy_id
+          required: true
+          schema:
+            example: 1234abcd-12ab-34cd-56ef-123456abcdef
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Delete an email access policy
+      tags:
+        - Status Pages
+      x-menu-order: 39
       x-permission:
         operator: AND
         permissions:
@@ -261357,7 +264621,7 @@ paths:
           - status_pages_incident_write
   /api/v2/statuspages/{page_id}/publish:
     post:
-      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Publishes a status page. For pages of type `public`, makes the status page available on the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, makes the status page available under the `status-pages/$domain_prefix/view` route within the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, makes the status page available to users authorized by its email access policies and requires the `status_pages_private_page_publish` permission. A private status page must have at least one email access policy before it can be published.
       operationId: PublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -261377,6 +264641,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Publish status page
       tags:
@@ -261387,9 +264652,10 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/statuspages/{page_id}/unpublish:
     post:
-      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission.
+      description: Unpublishes a status page. For pages of type `public`, removes the status page from the public internet and requires the `status_pages_public_page_publish` permission. For pages of type `internal`, removes the `status-pages/$domain_prefix/view` route from the Datadog organization and requires the `status_pages_internal_page_publish` permission. For pages of type `private`, removes access to the private status page and requires the `status_pages_private_page_publish` permission.
       operationId: UnpublishStatusPage
       parameters:
         - description: The ID of the status page.
@@ -261409,6 +264675,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - status_pages_internal_page_publish
+            - status_pages_private_page_publish
             - status_pages_public_page_publish
       summary: Unpublish status page
       tags:
@@ -261419,6 +264686,7 @@ paths:
         permissions:
           - status_pages_public_page_publish
           - status_pages_internal_page_publish
+          - status_pages_private_page_publish
   /api/v2/stegadography/get-widgets:
     post:
       description: |-
@@ -266975,15 +270243,21 @@ paths:
         A `400 Bad Request` response means the trace ID is malformed. A `404 Not Found` response means
         no trace with this ID is available, such as when the trace is outside the retention period.
         This endpoint is rate limited to `60` requests per minute per organization.
+        For very large traces, use Get a pruned trace by ID, or set `include_fields` to keep only the tags you need.
       operationId: GetTraceByID
       parameters:
         - $ref: "#/components/parameters/TraceIDPathParameter"
         - description: |-
-            List of span fields to include in the response. When omitted, every available field is returned.
+            Tag keys to keep in each span's `meta` and `metrics`, for example `http.status_code` or `error.message`.
+            Each value is matched against tag keys by exact name, with or without a leading `@`.
+            Passing `meta` or `metrics` doesn't return the whole map.
+            Core span fields such as `service`, `resource`, `name`, `duration`, IDs, and timestamps, and the `env` tag
+            in `meta`, are always returned.
+            When omitted, all tags are returned.
             Values may be passed as repeated query parameters or as a single comma-separated value.
           example:
-            - service
-            - resource
+            - http.status_code
+            - error.message
           in: query
           name: include_fields
           required: false
@@ -267016,10 +270290,10 @@ paths:
                             service: web-store
                             spanID: 9876543210987654321
                             startTime: 1716800000000000000
-                            traceID: 12345678901234567890
+                            traceID: 12376211733897805824
                             traceIDFull: 0000000000000000abc1230000000000
                             type: web
-                      id: "0000000000000000abc1230000000000"
+                      id: "12376211733897805824"
                       type: trace
               schema:
                 $ref: "#/components/schemas/TraceResponse"
@@ -268139,7 +271413,7 @@ paths:
     get:
       description: |-
         Lists usage quotas for the caller's organization in a quota namespace. You can optionally include
-        descendant organizations in the same datacenter as the caller. Requires the `billing_read` or
+        descendant organizations in the same data center as the caller. Requires the `billing_read` or
         `billing_edit` permission.
       operationId: ListQuotas
       parameters:
@@ -268150,7 +271424,7 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same datacenter are supported.
+        - description: Whether to include quotas configured on descendant organizations in the caller's organization hierarchy. Only descendants in the same data center are supported.
           in: query
           name: include_descendants
           required: false
@@ -268285,7 +271559,7 @@ paths:
           schema:
             example: ai_credits
             type: string
-        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same datacenter are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
+        - description: Whether to write every item in the request to the caller's organization and all of its descendant organizations, instead of only the caller's organization. Only descendants in the same data center are supported. For a user-handle scope, the quota is applied only to the caller's organization and to descendant organizations where that user handle exists; the item fails only if the handle exists in none of them.
           in: query
           name: include_descendants
           required: false
@@ -268390,6 +271664,14 @@ paths:
         Deletes a usage quota by its opaque identifier. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeleteQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -268437,11 +271719,106 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: |-
+        Returns a usage quota's current configuration by its opaque identifier. Scheduled limits are returned separately until they take effect, after which they are returned as the current limit.
+
+        By default, you can retrieve quotas from your organization and authorized descendant organizations in the same data center. Set `include_descendants=false` to restrict access to your organization.
+
+        A quota remains readable after its associated user, role, or team is deleted. Requires `billing_read` or `billing_edit`.
+      operationId: GetQuota
+      parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        enforced: false
+                        org_public_id: abcdef12345
+                        usage_limit: 120000
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+                      type: quotas
+              schema:
+                $ref: "#/components/schemas/UsageQuotaResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_read
+        - AuthZ:
+            - billing_edit
+      summary: Get a usage quota
+      tags:
+        - Usage Metering
+      x-menu-order: 27
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_read
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota. Setting `enforced=false` clears any pending change atomically, including when enforcement is already disabled. Other immediate updates preserve future pending changes when `pending_usage_limit` is omitted. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -268531,6 +271908,14 @@ paths:
         Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: DeletePendingQuota
       parameters:
+        - description: Allow access to authorized descendant organizations in the same data center. When false, an identifier belonging to any other organization returns 403. Defaults to true for ID-based operations to preserve existing descendant access.
+          in: query
+          name: include_descendants
+          required: false
+          schema:
+            default: true
+            example: false
+            type: boolean
         - description: The product-specific namespace whose usage quotas are being managed.
           in: path
           name: quota_namespace
@@ -272577,6 +275962,8 @@ tags:
       JIRA, GitHub, and Statuspage. You do not need additional connections in order to access these tools within
       Workflow Automation and App Builder.
 
+      To authenticate with your own GitHub App or personal access token, create a GitHub connection.
+
       We offer granular access control for editing and resolving connections.
     externalDocs:
       description: Find out more at
@@ -273095,12 +276482,24 @@ tags:
   - description: |-
       Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information
     name: RUM Insights
+  - description: >-
+      Configure Managed Archives for RUM applications. Your organization must have Managed Archives enabled.
+
+
+      Requires `rum_rehydration_filter_read` to list or get configurations, or `rum_rehydration_filter_write` to create, update, or delete them.
+    name: RUM Managed Archives
   - description: |-
       Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business
       transactions detected from RUM events through a configurable journey, and their links
       to journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
       for more information.
     name: RUM Operations
+  - description: >-
+      Search archived RUM sessions and recover individual sessions or query-based batches. Your organization must have Managed Archives enabled. Creating, counting, listing, and canceling batches also require batch recovery enablement.
+
+
+      Requires `rum_rehydration_filter_read` for search and request details, or `rum_rehydration_index` to create, estimate recoverable sessions, list batches, or cancel recovery requests.
+    name: RUM Recovery
   - description: |-
       Manage [RUM SDK configurations](https://docs.datadoghq.com/real_user_monitoring/) delivered to RUM applications via Remote Configuration.
     externalDocs:
