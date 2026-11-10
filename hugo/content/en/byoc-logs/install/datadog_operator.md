@@ -76,7 +76,7 @@ watchNamespaces:
   - ""
 ```
 
-Use a Datadog Operator chart whose default image is Operator v1.33.0 or later. Keep the chart's default image instead of setting `image.tag`. The chart version and Operator image version are separate version numbers.
+Use Datadog Operator Helm chart version 2.33.0 or later with the chart's default Operator image. The chart version and Operator image version are separate version numbers.
 
 `watchNamespaces: [""]` watches all namespaces, including the `byoc` namespace used in this guide. To restrict the watch scope, list the namespaces to manage, including `byoc`. If you omit this setting, the Operator watches only its installation namespace.
 
@@ -84,6 +84,7 @@ For a new Operator installation, run:
 
 ```shell
 helm install datadog-operator datadog/datadog-operator \
+  --version 2.33.0 \
   --namespace datadog \
   --create-namespace \
   --values operator-values.yaml

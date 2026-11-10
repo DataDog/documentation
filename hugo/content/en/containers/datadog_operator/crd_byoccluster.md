@@ -115,7 +115,7 @@ kubectl explain datadogbyoccluster.spec --recursive
 
 `datadog.site`
 : _string_
-<br/>Datadog site shared by the engine and Workers.
+<br/>Datadog site shared by the engine and Workers. Defaults to `datadoghq.com` (US1) if omitted.
 
 `datadog.apiKeySecretRef`
 : **required** - _object_
