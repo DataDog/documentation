@@ -55,6 +55,7 @@ The following are not supported in Preview:
 
 - The Client Credentials grant (machine-to-machine access without a user).
 - Public clients without a client secret.
+- Secret rotation. Each client has one secret. To replace it, create another client and disable the old one.
 - Custom-scheme or loopback (`http://localhost`) redirect URIs.
 - Managing clients through the public API or Terraform. Use Organization Settings.
 
@@ -99,14 +100,32 @@ Your app uses the client ID and secret to run the standard Authorization Code fl
 
 2. The user signs in to Datadog and reviews the consent page. It shows the client name and every scope the client requests.
 3. After the user approves, Datadog redirects to your redirect URI with an authorization `code`.
-4. Exchange the code for an access token and a refresh token. Authenticate with your client ID and secret, using HTTP Basic (`client_secret_basic`) or the request body (`client_secret_post`), and send the PKCE `code_verifier`:
+4. Exchange the code for an access token and a refresh token at the token endpoint. Authenticate with your client ID and secret, and send the PKCE `code_verifier`:
 
-   ```text
-   https://api.{{< region-param key="dd_site" >}}/api/v2/oauth2/token
+   ```shell
+   curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/oauth2/token" \
+     -u "<CLIENT_ID>:<CLIENT_SECRET>" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=authorization_code" \
+     -d "code=<AUTHORIZATION_CODE>" \
+     -d "redirect_uri=<REDIRECT_URI>" \
+     -d "code_verifier=<CODE_VERIFIER>"
    ```
 
+   The example uses HTTP Basic authentication (`client_secret_basic`). You can instead send `client_id` and `client_secret` in the request body (`client_secret_post`). If a request includes both, Datadog uses the HTTP Basic credentials.
+
 5. Call the Datadog API or the MCP server with the access token in the `Authorization: Bearer <ACCESS_TOKEN>` header.
-6. When the access token expires, use the refresh token at the same token endpoint with `grant_type=refresh_token`.
+6. When the access token expires, exchange the refresh token for a new access token:
+
+   ```shell
+   curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/oauth2/token" \
+     -u "<CLIENT_ID>:<CLIENT_SECRET>" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=refresh_token" \
+     -d "refresh_token=<REFRESH_TOKEN>"
+   ```
+
+   Refresh tokens last 90 days. After a refresh token expires, the user must authorize the client again.
 
 For the full list of request parameters and responses, see [OAuth2 authorization endpoints][4].
 
