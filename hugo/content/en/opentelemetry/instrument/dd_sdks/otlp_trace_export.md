@@ -74,6 +74,18 @@ By default, traces are sent to `http://localhost:4318/v1/traces`.
 
 To send traces to a receiver at a different address, set `OTEL_EXPORTER_OTLP_ENDPOINT` or the trace-specific `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`. See the [OTLP Exporter Configuration][4] documentation for details.
 
+## Sampling and trace metrics
+
+DDOT SDKs (Datadog SDKs in OpenTelemetry mode) apply sampling before OTLP export and record the sampling probability in spans' `tracestate`. Use the versions below and a [compatible receiver][8] to extrapolate trace metrics from that probability.
+
+| Datadog SDK | Minimum version for sampling probability in OTLP spans |
+| --- | --- |
+| Java | [1.67.0][9] |
+| Python | [4.15.0][10] |
+| Node.js | [6.20.0][11] or [5.131.0][12] |
+| Go | [2.11.0][13] |
+| .NET | [3.55.0][14] |
+
 ## Verify
 
 After you enable OTLP export and your service receives traffic, confirm that traces appear in the [Trace Explorer][5]. If traces don't arrive, verify that your [receiver][6] is running, reachable at the configured endpoint, and forwarding data to Datadog.
@@ -96,3 +108,10 @@ For details on which Datadog features each setup supports, see the [feature comp
 [5]: /tracing/trace_explorer/
 [6]: /opentelemetry/setup/
 [7]: /opentelemetry/compatibility/#feature-compatibility
+[8]: /opentelemetry/ingestion_sampling/#trace-metric-extrapolation-for-datadog-sdks
+[9]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.67.0
+[10]: https://github.com/DataDog/dd-trace-py/releases/tag/v4.15.0
+[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.20.0
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.131.0
+[13]: https://github.com/DataDog/dd-trace-go/releases/tag/v2.11.0
+[14]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.55.0

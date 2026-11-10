@@ -30,6 +30,8 @@ Test Impact Analysis works by analyzing your test suite to identify the code eac
 
 By minimizing the number of tests run per commit, Test Impact Analysis reduces the frequency of [flaky tests][2] disrupting your pipelines. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Test Impact Analysis for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
 
+Tests skipped by Test Impact Analysis are not billed as test spans. For details, see [CI/CD Optimization Billing][13].
+
 ### Out-of-the-box configuration limitations
 
 With the default configuration, there are known situations that can cause Test Impact Analysis to skip tests that should have been run. Specifically, Test Impact Analysis is not able to automatically detect changes in:
@@ -135,7 +137,7 @@ Backfilling is best effort. For large test suites, the coverage of some tests sk
 
 ### Java, .NET, and Go
 
-With `dd-trace-java`, `dd-trace-dotnet`, and `dd-trace-go`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
+With `dd-trace-java`, `dd-trace-dotnet`, and `ddtest instrument`, no extra configuration is required for backfilling. These libraries automatically detect when tests run with a code coverage engine and backfill code coverage data from tests skipped by Test Impact Analysis.
 
 ### JavaScript
 
@@ -177,3 +179,4 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [10]: /code_coverage/
 [11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
 [12]: /tests/test_impact_analysis/troubleshooting/
+[13]: /account_management/billing/ci_visibility/#test-spans-generated-by-test-optimization-features

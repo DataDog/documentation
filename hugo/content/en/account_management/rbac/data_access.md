@@ -261,6 +261,8 @@ Autonomous Bits AI agents, such as Bits AI Security Analyst, have their own iden
 
 Only agents that support access configuration appear in the access selector, under {{< ui >}}Agents and Automated Processes{{< /ui >}}. Grant an agent [unrestricted access](#unrestricted-user-groups) only when it needs every record of a telemetry type.
 
+**Note:** Any user who can use or interact with an agent may be able to see data in a Restricted Dataset if the agent surfaces that data. Before you grant an agent access to a Restricted Dataset, review who can use that agent.
+
 ## Access enforcement
 
 Users in a Datadog organization with Data Access Control enabled can only see query results for data to which they have access, such as in a Dashboard, in an Explorer, or through the API. A Restricted Dataset removes access to the data defined in the Restricted Dataset for users who are not permitted, across all Datadog experiences and entry points.
