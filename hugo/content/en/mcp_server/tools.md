@@ -3430,7 +3430,7 @@ Updates a team's handle, name, or description. Your permissions and the team's s
 ### `delete_team`
 Toolset: `teams`\
 Permissions required: `Teams Read`, `Teams Manage`, and `MCP Write`\
-Permanently deletes a team. Requires explicit confirmation before deletion.
+Permanently deletes a team. The tool asks you to confirm before it deletes the team.
 
 - Delete the Payments team after confirmation.
 
