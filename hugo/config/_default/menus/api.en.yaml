@@ -14937,6 +14937,36 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: End User Device Monitoring
+      url: /api/latest/end-user-device-monitoring/
+      identifier: end-user-device-monitoring
+      generated: true
+    - name: Get a device
+      url: /api/latest/end-user-device-monitoring/get-a-device/
+      identifier: end-user-device-monitoring-get-a-device
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevice
+        unstable:
+          - v2
+        order: 2
+    - name: Get all devices
+      url: /api/latest/end-user-device-monitoring/get-all-devices/
+      identifier: end-user-device-monitoring-get-all-devices
+      parent: end-user-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEUDMDevices
+        unstable:
+          - v2
+        order: 1
     - name: Entity Integration Configs
       url: /api/latest/entity-integration-configs/
       identifier: entity-integration-configs
