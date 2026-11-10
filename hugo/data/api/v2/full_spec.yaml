@@ -111271,9 +111271,12 @@ components:
       description: The definition of a RUM operation's journey, used to detect it from RUM events.
       properties:
         rum_steps:
-          description: The ordered list of steps composing the RUM journey.
+          description: |-
+            The ordered list of steps composing the RUM journey.
+            `null` when the operation has no steps. On create and update, `null` and an empty list are equivalent.
           items:
             $ref: "#/components/schemas/RUMOperationJourneyStep"
+          nullable: true
           type: array
       required:
         - rum_steps
@@ -111393,6 +111396,7 @@ components:
           description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
+          nullable: true
           type: array
         journey_rum:
           $ref: "#/components/schemas/RUMOperationJourneyRum"
@@ -111411,6 +111415,7 @@ components:
             - "team:checkout"
           items:
             type: string
+          nullable: true
           type: array
         updated_at:
           description: The timestamp when the RUM operation was last updated.
@@ -111680,7 +111685,8 @@ components:
         - attributes
       type: object
     RUMOperationUser:
-      description: A Datadog user referenced by a RUM operation.
+      description: A Datadog user referenced by a RUM operation. `null` when the user could not be resolved.
+      nullable: true
       properties:
         email:
           description: The email of the user.
@@ -111696,6 +111702,7 @@ components:
           type: string
         uuid:
           description: The UUID of the user.
+          example: "abc12345-1234-5678-abcd-ef1234567890"
           readOnly: true
           type: string
       type: object
@@ -111706,10 +111713,36 @@ components:
           items:
             $ref: "#/components/schemas/RUMOperationResponseData"
           type: array
+        links:
+          $ref: "#/components/schemas/RUMOperationsListResponseLinks"
         meta:
           $ref: "#/components/schemas/RUMOperationsListResponseMeta"
       required:
         - data
+      type: object
+    RUMOperationsListResponseLinks:
+      description: Pagination links for a list of RUM operations.
+      properties:
+        first:
+          description: Link to the first page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        last:
+          description: Link to the last page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=150"
+          type: string
+        next:
+          description: Link to the next page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=100"
+          type: string
+        prev:
+          description: Link to the previous page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=0"
+          type: string
+        self:
+          description: Link to the current page.
+          example: "https://api.datadoghq.com/api/v2/rum/operations/search?page[limit]=50&page[offset]=50"
+          type: string
       type: object
     RUMOperationsListResponseMeta:
       description: Metadata for a list of RUM operations.
