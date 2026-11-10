@@ -29,8 +29,7 @@ further_reading:
 ---
 
 {{< callout url=false btn_hidden="true" header="Join the Preview!" >}}
-**Datadog Serverless Monitoring for AWS Lambda MicroVMs is in Preview.**
-To sign up, contact your Datadog representative.
+Datadog Serverless Monitoring for AWS Lambda MicroVMs is in Preview. To sign up, contact your Datadog representative.
 {{< /callout >}}
 
 Datadog collects logs, traces, and metrics, including CPU utilization, from your [AWS Lambda MicroVMs][11] throughout their life cycle. MicroVMs run applications in isolated [Firecracker][12] virtual machines. Each instance starts from an image snapshot and can suspend when idle, then resume with its memory and disk state intact.
@@ -41,9 +40,7 @@ Datadog collects logs, traces, and metrics, including CPU utilization, from your
 - An application that follows the AWS MicroVM service model.
 - `serverless-init` v1.11.4 or later, configured as the container entrypoint. Sidecar mode is not supported.
 
-The Datadog tracer is optional. You can collect logs and metrics with `serverless-init` without installing a tracer.
-
-**Supported runtimes for tracing**: Node.js and Python. To enable tracing, install a tracer version that meets the following minimums:
+Optionally, to collect traces, install a Datadog tracer that meets the following minimum version. Without a tracer, `serverless-init` still collects logs and metrics.
 
 | Component | Minimum version |
 |---|---|
@@ -60,7 +57,9 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
    The following examples include optional tracing and use an application on port `8080` and life cycle hooks on port `9000`. Replace the application filenames and startup commands as needed.
 
-   **Node.js**
+   {{< tabs >}}
+
+   {{% tab "Node.js" %}}
 
    Add `dd-trace` v6.15.0 or later to `package.json` and update `package-lock.json`, for example, with `npm install dd-trace@6.15.0`. Install Node.js from the Amazon Linux packages to use snapshot-compatible OpenSSL.
 
@@ -81,7 +80,11 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
    The `--require dd-trace/init` option initializes the tracer before loading application code. If `app.js` already calls `require('dd-trace').init()` before importing other libraries, use `CMD ["node", "app.js"]` instead.
 
-   **Python**
+   For more information, see [Tracing Node.js Applications](/tracing/trace_collection/dd_libraries/nodejs/).
+
+   {{% /tab %}}
+
+   {{% tab "Python" %}}
 
    Add `ddtrace` v4.17.0 or later to `requirements.txt`. Install the dependencies, then start the application with `ddtrace-run`:
 
@@ -101,9 +104,17 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
    CMD ["ddtrace-run", "python3.12", "app.py"]
    ```
 
-   `ddtrace-run` initializes tracing before the application starts. Both examples forward the `/run` hook to the application so the tracer can reset its identity for each new MicroVM instance.
+   `ddtrace-run` initializes tracing before the application starts. Python tracing supports WSGI and ASGI applications, including Flask, Django, FastAPI, and Starlette.
 
-   To collect logs and metrics without tracing, omit the tracer dependency and initialization. Use `CMD ["node", "app.js"]` for Node.js or `CMD ["python3.12", "app.py"]` for Python. You can also omit `DD_AWS_MICROVM_USER_APP_PORT` and `DD_AWS_MICROVM_ENABLE_RUN` unless your application needs forwarded life cycle hooks.
+   For more information, see [Tracing Python Applications](/tracing/trace_collection/dd_libraries/python/).
+
+   {{% /tab %}}
+
+   {{< /tabs >}}
+
+   Each example forwards the `/run` hook to your application. MicroVM instances start from the same image snapshot, so without this, instances can share trace and span IDs. When the tracer receives `/run`, it generates new IDs for the instance.
+
+   <div class="alert alert-info">To collect logs and metrics without tracing, omit the tracer dependency and initialization. Use <code>CMD ["node", "app.js"]</code> for Node.js or <code>CMD ["python3.12", "app.py"]</code> for Python. You can also omit <code>DD_AWS_MICROVM_USER_APP_PORT</code> and <code>DD_AWS_MICROVM_ENABLE_RUN</code> unless your application needs forwarded life cycle hooks.</div>
 
 2. Set the following environment variables:
 
@@ -121,39 +132,86 @@ If your application uses OpenSSL, use a snapshot-compatible version. AWS provide
 
    `serverless-init` starts and supervises your application. It handles the `/ready` and `/validate` hooks during image setup, and the `/run`, `/resume`, `/suspend`, and `/terminate` hooks at runtime.
 
-### Forward life cycle hooks to your application
-
-By default, `serverless-init` handles life cycle hooks on port `9000` and does not forward them to your application. To forward a hook, set `DD_AWS_MICROVM_USER_APP_PORT` to the port your application listens on at `127.0.0.1`, then set the matching `DD_AWS_MICROVM_ENABLE_<HOOK>` variable to `true`. The app and life cycle ports must differ. You need both settings; either one alone leaves forwarding disabled.
-
-| Environment variable | Description | Default |
-|---|---|---|
-| `DD_AWS_MICROVM_LIFECYCLE_PORT` | Port `serverless-init` listens on for life cycle hooks. | `9000` |
-| `DD_AWS_MICROVM_USER_APP_PORT` | Port your application listens on at `127.0.0.1`. Required to forward hooks. | Not set (no forwarding) |
-| `DD_AWS_MICROVM_ENABLE_READY` | Forward `/ready` to your application. | `false` |
-| `DD_AWS_MICROVM_ENABLE_VALIDATE` | Forward `/validate` to your application. | `false` |
-| `DD_AWS_MICROVM_ENABLE_RUN` | Forward `/run` to your application. | `false` |
-| `DD_AWS_MICROVM_ENABLE_RESUME` | Forward `/resume` to your application. | `false` |
-| `DD_AWS_MICROVM_ENABLE_SUSPEND` | Forward `/suspend` to your application. | `false` |
-| `DD_AWS_MICROVM_ENABLE_TERMINATE` | Forward `/terminate` to your application. | `false` |
-| `DD_AWS_MICROVM_READY_TIMEOUT_MS` | Timeout for a forwarded `/ready` hook, in milliseconds. | `30000` (30 s) |
-| `DD_AWS_MICROVM_VALIDATE_TIMEOUT_MS` | Timeout for a forwarded `/validate` hook, in milliseconds. | `30000` (30 s) |
-| `DD_AWS_MICROVM_FORWARD_TIMEOUT_MS` | Timeout for forwarded `/run`, `/resume`, `/suspend`, and `/terminate` hooks, in milliseconds. | `1000` (1 s) |
-
-Timeouts apply only to forwarded hooks. Hook forwarding is optional for telemetry collection, except that tracing requires forwarding the `/run` hook as described below.
-
-### Enable tracing
-
-This step is optional for logs and metrics collection. Install and initialize the Datadog tracer in your application to collect traces. See the setup instructions for [Node.js][2] or [Python][3].
-
-MicroVM instances start from the same image snapshot, which can copy trace and span IDs between instances. To give each new instance unique IDs, forward the `/run` hook to your application. Set `DD_AWS_MICROVM_USER_APP_PORT` and `DD_AWS_MICROVM_ENABLE_RUN=true`. When the tracer receives `/run`, it refreshes its trace and span IDs and runtime identity.
-
-Python tracing supports WSGI and ASGI applications, including Flask, Django, FastAPI, and Starlette.
-
 ### Enable logs
 
 Set `DD_LOGS_ENABLED=true` to collect logs. To correlate logs with traces, enable log injection in your tracer and configure the logs pipeline to parse trace and span IDs. With log injection enabled, JSON logs include active trace and span IDs. Supported Node.js loggers include Bunyan, Pino, and Winston. For Python, use `structlog`.
 
 See [correlating logs and traces][4] for [Node.js][5] and [Python][6].
+
+### Forward life cycle hooks to your application
+
+This section is optional. The Dockerfile examples in the [Instrument the image](#instrument-the-image) section already forward the `/run` hook for tracing.
+
+By default, `serverless-init` handles life cycle hooks on port `9000` and does not forward them to your application. To forward a hook, set `DD_AWS_MICROVM_USER_APP_PORT` to the port your application listens on at `127.0.0.1`, then set the matching `DD_AWS_MICROVM_ENABLE_<HOOK>` variable to `true`. The app and life cycle ports must differ. You need both settings; either one alone leaves forwarding disabled.
+
+<table>
+  <thead>
+    <tr>
+      <th style="white-space: nowrap; width: 320px; min-width: 320px;">Environment variable</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_LIFECYCLE_PORT</code></td>
+      <td>Port <code>serverless-init</code> listens on for life cycle hooks.</td>
+      <td><code>9000</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_USER_APP_PORT</code></td>
+      <td>Port your application listens on at <code>127.0.0.1</code>. Required to forward hooks.</td>
+      <td>Not set (no forwarding)</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_READY</code></td>
+      <td>Forward <code>/ready</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_VALIDATE</code></td>
+      <td>Forward <code>/validate</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_RUN</code></td>
+      <td>Forward <code>/run</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_RESUME</code></td>
+      <td>Forward <code>/resume</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_SUSPEND</code></td>
+      <td>Forward <code>/suspend</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_ENABLE_TERMINATE</code></td>
+      <td>Forward <code>/terminate</code> to your application.</td>
+      <td><code>false</code></td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_READY_TIMEOUT_MS</code></td>
+      <td>Timeout for a forwarded <code>/ready</code> hook, in milliseconds.</td>
+      <td><code>30000</code> (30 s)</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_VALIDATE_TIMEOUT_MS</code></td>
+      <td>Timeout for a forwarded <code>/validate</code> hook, in milliseconds.</td>
+      <td><code>30000</code> (30 s)</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><code>DD_AWS_MICROVM_FORWARD_TIMEOUT_MS</code></td>
+      <td>Timeout for forwarded <code>/run</code>, <code>/resume</code>, <code>/suspend</code>, and <code>/terminate</code> hooks, in milliseconds.</td>
+      <td><code>1000</code> (1 s)</td>
+    </tr>
+  </tbody>
+</table>
+
+Timeouts apply only to forwarded hooks. You don't need to forward hooks to collect logs and metrics.
 
 ## Data collected
 
@@ -172,9 +230,11 @@ Datadog collects these CPU utilization and life cycle metrics for each MicroVM w
 | `aws.lambda.microvm.enhanced.terminate` | Number of termination hook events. |
 | `aws.lambda.microvm.enhanced.active_instances` | Periodic heartbeat while a MicroVM is running or resumed. This is a periodic sample, not an exact instance count. |
 
+#### CPU metrics
+
 `serverless-init` samples CPU metrics every 3 seconds, starting when the MicroVM starts. CPU metrics are enabled by default. To disable them, set `DD_ENHANCED_METRICS_ENABLED=false`. Life cycle and heartbeat metrics are still reported.
 
-Both CPU metrics report raw values in nanocores: 1 CPU core equals 1,000,000,000 nanocores. The provided dashboard displays them in cores by dividing the values by `1e9`. This is more intuitive because AWS expresses CPU capacity in cores and does not use nanocores. The metrics use the same units as [`container.cpu.usage` and `container.cpu.limit`][9].
+Both CPU metrics report raw values in nanocores: 1 CPU core equals 1,000,000,000 nanocores. The provided dashboard converts them to cores, the unit AWS uses for CPU capacity, by dividing the values by `1e9`. The metrics use the same units as [`container.cpu.usage` and `container.cpu.limit`][9].
 
 CPU metrics are available with or without cgroups. When cgroups are unavailable, `cpu.limit` reflects the CPU count visible to the MicroVM, which may differ from its AWS CPU capacity.
 
@@ -193,8 +253,6 @@ When a MicroVM suspends or terminates, `serverless-init` sends pending metrics, 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: /tracing/trace_collection/dd_libraries/nodejs/
-[3]: /tracing/trace_collection/dd_libraries/python/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/nodejs/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
