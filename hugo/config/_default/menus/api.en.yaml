@@ -2116,9 +2116,9 @@ menu:
           - CreateDerivedMetric
         unstable: []
         order: 28
-    - name: Get a list of metrics
-      url: /api/latest/metrics/get-a-list-of-metrics/
-      identifier: metrics-get-a-list-of-metrics
+    - name: List all metrics with volumes and query activity
+      url: /api/latest/metrics/list-all-metrics-with-volumes-and-query-activity/
+      identifier: metrics-list-all-metrics-with-volumes-and-query-activity
       parent: metrics
       generated: true
       params:
@@ -6738,6 +6738,19 @@ menu:
         unstable:
           - v2
         order: 16
+    - name: Get a usage quota
+      url: /api/latest/usage-metering/get-a-usage-quota/
+      identifier: usage-metering-get-a-usage-quota
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetQuota
+        unstable:
+          - v2
+        order: 27
     - name: Delete a usage quota
       url: /api/latest/usage-metering/delete-a-usage-quota/
       identifier: usage-metering-delete-a-usage-quota
@@ -11237,18 +11250,6 @@ menu:
           - ListCloudWorkloadSecurityAgentRules
         unstable: []
         order: 12
-    - name: Download the Workload Protection policy (US1-FED)
-      url: /api/latest/csm-threats/download-the-workload-protection-policy-us1-fed/
-      identifier: csm-threats-download-the-workload-protection-policy-us1-fed
-      parent: csm-threats
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DownloadCloudWorkloadPolicyFile
-        unstable: []
-        order: 17
     - name: Update a Workload Protection policy
       url: /api/latest/csm-threats/update-a-workload-protection-policy/
       identifier: csm-threats-update-a-workload-protection-policy
@@ -21037,6 +21038,58 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Managed Archives
+      url: /api/latest/rum-managed-archives/
+      identifier: rum-managed-archives
+      generated: true
+    - name: Create or update an archive configuration
+      url: /api/latest/rum-managed-archives/create-or-update-an-archive-configuration/
+      identifier: rum-managed-archives-create-or-update-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMArchiveConfig
+        unstable: []
+        order: 3
+    - name: Get an archive configuration
+      url: /api/latest/rum-managed-archives/get-an-archive-configuration/
+      identifier: rum-managed-archives-get-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMArchiveConfig
+        unstable: []
+        order: 2
+    - name: Delete an archive configuration
+      url: /api/latest/rum-managed-archives/delete-an-archive-configuration/
+      identifier: rum-managed-archives-delete-an-archive-configuration
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMArchiveConfig
+        unstable: []
+        order: 4
+    - name: List archive configurations
+      url: /api/latest/rum-managed-archives/list-archive-configurations/
+      identifier: rum-managed-archives-list-archive-configurations
+      parent: rum-managed-archives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMArchiveConfigs
+        unstable: []
+        order: 1
     - name: RUM Operations
       url: /api/latest/rum-operations/
       identifier: rum-operations
@@ -21161,6 +21214,82 @@ menu:
           - CreateRUMOperation
         unstable: []
         order: 2
+    - name: RUM Recovery
+      url: /api/latest/rum-recovery/
+      identifier: rum-recovery
+      generated: true
+    - name: Search archived sessions
+      url: /api/latest/rum-recovery/search-archived-sessions/
+      identifier: rum-recovery-search-archived-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchRUMArchiveSessions
+        unstable: []
+        order: 1
+    - name: Cancel a batch recovery request
+      url: /api/latest/rum-recovery/cancel-a-batch-recovery-request/
+      identifier: rum-recovery-cancel-a-batch-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMRecoveryBatchRequest
+        unstable: []
+        order: 6
+    - name: Get recovery request progress
+      url: /api/latest/rum-recovery/get-recovery-request-progress/
+      identifier: rum-recovery-get-recovery-request-progress
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoveryRequest
+        unstable: []
+        order: 3
+    - name: Create a recovery request
+      url: /api/latest/rum-recovery/create-a-recovery-request/
+      identifier: rum-recovery-create-a-recovery-request
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMRecoveryRequest
+        unstable: []
+        order: 2
+    - name: List batch recovery requests
+      url: /api/latest/rum-recovery/list-batch-recovery-requests/
+      identifier: rum-recovery-list-batch-recovery-requests
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMRecoveryBatchRequests
+        unstable: []
+        order: 4
+    - name: Estimate recoverable sessions
+      url: /api/latest/rum-recovery/estimate-recoverable-sessions/
+      identifier: rum-recovery-estimate-recoverable-sessions
+      parent: rum-recovery
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMRecoverySessionCount
+        unstable: []
+        order: 5
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
       identifier: rum-remote-config
@@ -21845,7 +21974,7 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Rum Metrics
+    - name: RUM Metrics
       url: /api/latest/rum-metrics/
       identifier: rum-metrics
       generated: true
@@ -21909,7 +22038,7 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
-    - name: Rum Replay Heatmaps
+    - name: RUM Replay Heatmaps
       url: /api/latest/rum-replay-heatmaps/
       identifier: rum-replay-heatmaps
       generated: true
@@ -21961,7 +22090,7 @@ menu:
           - ListReplayHeatmapSnapshots
         unstable: []
         order: 2
-    - name: Rum Replay Playlists
+    - name: RUM Replay Playlists
       url: /api/latest/rum-replay-playlists/
       identifier: rum-replay-playlists
       generated: true
@@ -22073,7 +22202,7 @@ menu:
           - ListRumReplayPlaylists
         unstable: []
         order: 2
-    - name: Rum Replay Sessions
+    - name: RUM Replay Sessions
       url: /api/latest/rum-replay-sessions/
       identifier: rum-replay-sessions
       generated: true
@@ -22089,7 +22218,7 @@ menu:
           - GetSegments
         unstable: []
         order: 1
-    - name: Rum Replay Viewership
+    - name: RUM Replay Viewership
       url: /api/latest/rum-replay-viewership/
       identifier: rum-replay-viewership
       generated: true
@@ -22141,7 +22270,7 @@ menu:
           - ListRumReplaySessionWatchers
         unstable: []
         order: 4
-    - name: Rum Retention Filters
+    - name: RUM Retention Filters
       url: /api/latest/rum-retention-filters/
       identifier: rum-retention-filters
       generated: true
@@ -24261,6 +24390,42 @@ menu:
           - ListComponents
         unstable: []
         order: 10
+    - name: Delete an email access policy
+      url: /api/latest/status-pages/delete-an-email-access-policy/
+      identifier: status-pages-delete-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteEmailAccessPolicy
+        unstable: []
+        order: 39
+    - name: Create an email access policy
+      url: /api/latest/status-pages/create-an-email-access-policy/
+      identifier: status-pages-create-an-email-access-policy
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateEmailAccessPolicy
+        unstable: []
+        order: 37
+    - name: List email access policies
+      url: /api/latest/status-pages/list-email-access-policies/
+      identifier: status-pages-list-email-access-policies
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEmailAccessPolicies
+        unstable: []
+        order: 38
     - name: Update status page
       url: /api/latest/status-pages/update-status-page/
       identifier: status-pages-update-status-page

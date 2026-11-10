@@ -1790,6 +1790,21 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Kubernetes Ops Center
+
+Tools for inspecting the health and load of [Kubernetes][55] control plane components.
+
+### `kubernetes-ops-center-api-server-client-load`
+*Toolset: **kubernetes-ops-center***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Metrics Read`*\
+Inspects Kubernetes API server load for a cluster. Use this tool to determine whether the API server is overloaded and which clients send the most requests. The tool compares API server request volume with clients ranked from Kubernetes API audit logs, such as service accounts, user agents, or source IPs. Audit logs give the most reliable results. To use them, [collect Kubernetes audit logs in Datadog][100].
+
+When audit logs aren't available, the tool ranks clients by a client-side request count metric that you specify, such as a metric ending in `.rest_client_requests_total`, `.rest_client_requests_total.count`, or `.client.http.requests`. You also specify a tag on that metric that identifies each client, such as the workload or component that emits it. Metric-based results show which clients send the most requests, but they don't show which client caused rate-limited (`429`) responses.
+
+- Is the API server in cluster `prod` overloaded, and which clients are sending the most requests?
+- Which service accounts sent the most requests to the API server in cluster `staging` over the last hour?
+- Rank the top 5 clients by API server request volume in cluster `prod` during the incident window.
+
 ## Metrics Governance
 
 Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
@@ -3358,6 +3373,96 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+## Teams
+
+Tools for reading and managing [Datadog Teams](/account_management/teams/). Enable them with `toolsets=teams`.
+
+Read tools require `MCP Read`. Write tools require `MCP Write`, and your organization must enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
+
+### `list_teams`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists teams in your organization, one page at a time. Use the results to find team IDs.
+
+- Find the Payments team.
+
+### `get_team`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Returns details for a team, including its name, handle, description, and member count.
+
+- Show the details of the Payments team.
+
+### `get_team_memberships`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists team members and their roles, one page at a time.
+
+- Who belongs to the Payments team?
+
+### `get_user_teams`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists the teams a user belongs to and their role on each team.
+
+- Which teams does the user with UUID `00000000-0000-0000-0000-000000000001` belong to?
+
+### `get_team_hierarchy`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists parent-child relationships between teams, one page at a time. Filter by parent team or sub-team ID.
+
+- Which teams are children of the Payments team?
+
+### `get_team_links`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists the links published by a team.
+
+- Show the links for the Payments team.
+
+### `get_team_notification_rules`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`*\
+Lists the notification rules configured for a team.
+
+- Show the Payments team notification rules.
+
+### `create_team`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
+Creates a team with a handle, name, and optional description.
+
+- Create a team named Payments with the handle `payments`.
+
+### `update_team`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read` and `MCP Write`*\
+Updates a team's handle, name, or description. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions).
+
+- Change the Payments team description to "Owns payment processing."
+
+### `delete_team`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read`, `Teams Manage`, and `MCP Write`*\
+Permanently deletes a team. The tool asks you to confirm before it deletes the team.
+
+- Delete the Payments team.
+
+### `add_team_membership`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read` and `MCP Write`*\
+Adds a user to a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). If you grant the admin role, the tool asks you to confirm first.
+
+- Add the user with UUID `00000000-0000-0000-0000-000000000001` to the Payments team as a regular member.
+
+### `delete_team_membership`
+*Toolset: **teams***\
+*Permissions Required: `Teams Read` and `MCP Write`*\
+Removes a user from a team using their UUID. Your permissions and the team's settings must allow the change. See [Team modification permissions](/account_management/teams/manage/#team-modification-permissions). The tool asks you to confirm before it removes the user.
+
+- Remove the user with UUID `00000000-0000-0000-0000-000000000001` from the Payments team.
+
 ## Watchdog
 
 Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
@@ -3696,6 +3801,7 @@ Cancels a workflow run in progress. Invoke this tool only when the user intends 
 [97]: /infrastructure/process/
 [98]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
 [99]: /account_management/billing/ai_credits/
+[100]: /integrations/kubernetes_audit_logs/
 
 ## Further reading
 
