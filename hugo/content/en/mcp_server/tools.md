@@ -3367,7 +3367,7 @@ Read tools require `MCP Read`. Write tools require `MCP Write`, and your organiz
 ### `list_teams`
 *Toolset: **teams***\
 *Permissions Required: `Teams Read`*\
-Lists one page of teams in your organization. Use the results to find team IDs.
+Lists teams in your organization, one page at a time. Use the results to find team IDs.
 
 - Find the Payments team.
 
