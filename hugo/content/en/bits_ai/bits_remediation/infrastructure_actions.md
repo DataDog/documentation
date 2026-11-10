@@ -1,18 +1,20 @@
 ---
-title: One-click Infrastructure Actions
-description: "Set up and run one-click Kubernetes and AWS actions from Bits Investigation."
+title: Infrastructure Actions
+description: "Set up and run infrastructure actions from Bits Investigation."
 site_support_id: bits_remediation
 ---
 
-When Bits determines that the root cause of an investigation is infrastructure-related, it can recommend a remediation action on your infrastructure. When one-click actions are enabled, you can click {{< ui >}}Approve{{< /ui >}}, either in the investigation context or in a Slack notification, to let Bits execute the suggested remediation action. This allows you to resolve issues with infrastructure-related root causes directly from an investigation.
+During an investigation, Bits can recommend and take action on your infrastructure, such as rolling back a Kubernetes deployment or rebooting an EC2 instance. An infrastructure action can resolve an infrastructure-related root cause, or reduce the impact of an issue while you work on a longer-term fix. To let Bits run a recommended action, click {{< ui >}}Approve{{< /ui >}} in the investigation or in a Slack notification.
+
+Bits can run an infrastructure action only when a [guardrail][9] covers the action and the resource it targets. Guardrails define which actions Bits can take, where those actions apply, and who needs to approve them.
 
 ## Supported infrastructure
 
-One-click actions are available for the following infrastructure:
+Actions are available for the following infrastructure:
 - **Kubernetes**: Actions on deployments, StatefulSets, DaemonSets, Jobs, CronJobs, pods, ConfigMaps, and PersistentVolumeClaims. Actions run through a [Private Action Runner][1] in your cluster.
 - **AWS**: Actions on AWS Lambda functions, Amazon EC2 instances, and Amazon ECS services. Actions run through your [Datadog AWS integration][2].
 
-Complete these steps to enable one-click actions before running an investigation so that Bits can run the remediation actions it proposes.
+Complete these steps to enable infrastructure actions before running an investigation so that Bits can run the remediation actions it proposes.
 
 ## Kubernetes actions
 
@@ -25,9 +27,9 @@ For Kubernetes infrastructure, Bits runs actions through an ownerless [Private A
 - The API key that the Agent uses has the {{< ui >}}Remote Configuration{{< /ui >}} and {{< ui >}}Private Action Runner{{< /ui >}} capabilities enabled. Enable them in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}][4].
 - To set up a Private Action Runner, you need the Datadog Admin role.
 
-### Enable one-click Kubernetes actions
+### Enable Kubernetes actions
 
-To set up one-click actions for Kubernetes:
+To set up actions for Kubernetes:
 
 1. Update the settings in your Datadog Cluster Agent configuration to enable both a [Private Action Runner][3] and Kubernetes actions:
 
@@ -185,11 +187,11 @@ To set up one-click actions for Kubernetes:
    kubectl apply -f bits-remediation-rbac.yaml
    ```
 
-1. [Create a guardrail](#guardrails) for the actions you want Bits to run, scoped to the resources you want Bits to run them on.
+1. [Create a guardrail][8] for the actions you want Bits to run, scoped to the resources you want Bits to run them on.
 
 ### Supported Kubernetes actions
 
-The following table lists the supported actions for Private Action Runners in Kubernetes clusters. You allow actions by adding them to the allowlist in the Datadog Agent configuration. For information about adding actions to the allowlist, see the [Enable one-click Kubernetes actions](#enable-one-click-kubernetes-actions) section.
+The following table lists the supported actions for Private Action Runners in Kubernetes clusters. You allow actions by adding them to the allowlist in the Datadog Agent configuration. For information about adding actions to the allowlist, see the [Enable Kubernetes actions](#enable-kubernetes-actions) section.
 
 | Action ID                                                  | Description                                                  |
 | ---------------------------------------------------------- | ------------------------------------------------------------ |
@@ -214,7 +216,7 @@ Bits runs AWS actions through your Datadog AWS integration. This means you don't
 
 ### Enable AWS actions
 
-To set up one-click actions for AWS:
+To set up actions for AWS:
 
 1. Set up the [Datadog AWS integration][2] for each account where Bits can take action. In Datadog, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Amazon Web Services{{< /ui >}} and confirm that the account shows as connected.
 
@@ -236,35 +238,7 @@ To set up one-click actions for AWS:
 
 1. Add an inline policy to the Datadog integration role that allows the actions you want Bits to run. If you set up the integration with CloudFormation, the role is named `DatadogIntegrationRole` by default. For instructions, see [Adding and removing IAM identity permissions][7] in the AWS documentation.
 
-1. [Create a guardrail](#guardrails) for the actions you want Bits to run, scoped to the resources you want Bits to run them on.
-
-## Guardrails
-
-{{< callout >}} Bits Guardrails are in Preview.{{< /callout >}}
-
-[Bits Guardrails][8] let admins define which remediation actions Bits can take, where those actions apply, and who needs to approve them. For example, an {{< ui >}}Ask{{< /ui >}} guardrail for `rollbackDeployment` scoped to `service:checkout` notifies predefined approvers before Bits rolls back a deployment for the checkout service. Bits performs the action only after approval is granted.
-
-Guardrails are required to enable one-click infrastructure actions. An action shows {{< ui >}}Approve{{< /ui >}} only when a guardrail covers it.
-
-Guardrails authorize actions through [Execution Policies][5]. When you create a guardrail, Datadog automatically creates a matching `[Bits Guardrail]` execution policy.
-
-### Requirements
-
-- Creating guardrails requires the `Guardrails Read`, `Guardrails Write`, `Execution Policy Read`, and `Execution Policy Write` permissions. Enable them in [{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Roles{{< /ui >}}][9].
-- To approve actions covered by guardrails, approvers need the `bits_investigations_write` and `guardrails_read` permissions in their role.
-
-### Create a guardrail
-
-To create a guardrail:
-
-1. Go to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Guardrails{{< /ui >}} and click {{< ui >}}Create Guardrail{{< /ui >}}.
-1. Select the type of infrastructure to target.
-1. Select one or more available actions for the guardrail to target. For example, for a Kubernetes integration, you can select actions such as rolling back deployments and patching or deleting Kubernetes objects.
-1. Add tags that identify the resources the guardrail applies to, such as `service:checkout` or `kube_deployment:checkout`. The tags must match the target resource's tags in Datadog.
-1. For the selected actions and scope, decide when Bits can take action:
-   - {{< ui >}}Ask{{< /ui >}}: Requires user approval before Bits executes actions. Choose which teams, roles, or individuals can approve.
-   - {{< ui >}}Deny{{< /ui >}}: Bits can recommend an action but cannot take it.
-1. (Optional) For an {{< ui >}}Ask{{< /ui >}} guardrail, turn on {{< ui >}}Notify when approval is needed{{< /ui >}}, and select the Slack workspace and channel where Bits posts approval requests. This requires the [Slack integration][10].
+1. [Create a guardrail][8] for the actions you want Bits to run, scoped to the resources you want Bits to run them on.
 
 [1]: /actions/private_actions/
 [2]: /integrations/amazon_web_services/
@@ -273,6 +247,5 @@ To create a guardrail:
 [5]: /actions/private_actions/execution_policies/
 [6]: https://app.datadoghq.com/actions/private-action-runners
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
-[8]: https://app.datadoghq.com/bits-ai/guardrails
-[9]: https://app.datadoghq.com/organization-settings/roles
-[10]: /integrations/slack/
+[8]: /bits_ai/bits_remediation/guardrails/#create-a-guardrail
+[9]: /bits_ai/bits_remediation/guardrails/
