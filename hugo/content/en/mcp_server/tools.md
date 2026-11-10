@@ -3362,7 +3362,7 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 Tools for reading and managing [Datadog Teams](/account_management/teams/). Enable them with `toolsets=teams`.
 
-Read tools require `MCP Read`. Write tools require `MCP Write` and your organization to enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
+Read tools require `MCP Read`. Write tools require `MCP Write`, and your organization must enable MCP write access. Teams tools are not available to organizations that require HIPAA-compliant tools.
 
 ### `list_teams`
 *Toolset: **teams***\
