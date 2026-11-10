@@ -24,7 +24,7 @@ A Deployment Gate is an automated checkpoint between your deployment stages. Whe
 
 When a gate fails, Datadog centralizes the deployed version, failed [rules](#rules), and failure reasons. You can follow the associated traces to start investigating the problem.
 
-{{< img src="/deployment_gates/evaluations_rule_failure.png" alt="The Deployment Gates Evaluations page has a slide-out panel open, which show a failed monitor rule evaluation." style="width:100%" >}}
+{{< img src="/deployment_gates/evaluations_rule_failure.png" alt="The Deployment Gates Evaluations page with a side panel showing a failed monitor rule evaluation." style="width:100%" >}}
 
 For setup instructions, see [Set up Deployment Gates][3].
 
@@ -38,7 +38,7 @@ After receiving a gate [evaluation](#evaluations) verdict, your deployment pipel
 
 A Deployment Gate configuration can be:
 
-- **Inline**: The gate is defined in code, alongside your deployment configuration. The gate configuration is sent with each evaluation request. There is no setup in Datadog.
+- **Inline**: The gate is defined in code alongside your deployment configuration. The gate configuration is sent with each evaluation request. There is no setup in Datadog.
   - To create an inline gate, see [Set Up Inline Deployment Gates][8].
 - **Preconfigured**: The gate is created and stored in Datadog.
   - To create a preconfigured gate, see [Set Up Preconfigured Deployment Gates][9].
@@ -61,11 +61,11 @@ A [Watchdog Faulty Deployment Detection][2] rule compares the deployed version a
 
 An evaluation is a single run of a gate's rules against a specific deployment. Your pipeline requests a gate evaluation, and Datadog immediately returns an evaluation ID. The evaluation eventually resolves to `pass` or `fail`.
 
-Each evaluation (for both preconfigured and inline gates) is shown on the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][5] page in Datadog.
+Evaluations for both inline and preconfigured gates appear on the [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][5] page.
 
 ### Evaluation modes
 
-There are two evaluation modes: [dry run](#dry-run-mode) and [active](#active-mode). You set an evaluation mode individually for each gate and associated rule. This determines whether their verdicts affect your deployment.
+There are two evaluation modes: [dry run](#dry-run-mode) and [active](#active-mode). Set the evaluation mode separately on each gate and each rule. The mode determines whether a gate's or rule's verdict affects your deployment.
 
 #### Dry run mode
 
